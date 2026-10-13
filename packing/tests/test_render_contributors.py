@@ -10,6 +10,7 @@ import pytest
 import yaml
 
 from devtools import (
+    check_published_site,
     render_contributors,
     render_overview,
     site_documents,
@@ -25,20 +26,31 @@ from sqpack.yamlio import load_yaml
 def test_profiles_share_one_complete_article_and_directory() -> None:
     registry = load_contributors()
     pages = {page.name: page.html for page in render_contributors.contributor_pages()}
-    index = pages["contributors/index.html"]
-    assert 'aria-label="Contributors"' in index
-    assert 'rel="canonical" href="https://jlevy.github.io/squares/contributors/"' in index
+    assert set(pages) == set(render_contributors.page_paths())
+    index = pages["profiles/index.html"]
+    assert "<h1>Profiles</h1>" in index
+    assert 'aria-label="Profiles"' in index
+    assert "<title>Profiles" in index
+    assert 'rel="canonical" href="https://jlevy.github.io/squares/profiles/"' in index
+    # The directory names cited authors as well as contributors, and calls none of them
+    # contributors in its own voice; the colophon links it by the same name.
+    assert "Contributors<" not in index
+    assert '<a href="index.html">Profiles</a></span>' in index
     for contributor in registry.by_id.values():
+        assert contributor.profile_path == f"profiles/{contributor.id}.html"
         assert f'href="{contributor.id}.html"' in index
         profile = pages[contributor.profile_path]
         assert '<article class="site-contributor"' in profile
+        assert '<a href="index.html">Profiles</a></nav>' in profile
         assert contributor.display_name in profile
         assert "data-contributor-popover" in profile
+        assert 'aria-label="Profile"' in profile
         assert "data-case-popover" in profile
         assert re.search(r'src="../assets/js/article-loader\.[a-f0-9]+\.js"', profile)
         assert re.search(r'src="../assets/js/contributor-popover\.[a-f0-9]+\.js"', profile)
-    assert "Real name" not in pages["contributors/mira.html"]
-    assert "site-contributor-bio" not in pages["contributors/mira.html"]
+        assert "contributors/" not in profile
+    assert "Real name" not in pages["profiles/mira.html"]
+    assert "site-contributor-bio" not in pages["profiles/mira.html"]
 
 
 def test_biography_preserves_inline_markdown_but_refuses_unsafe_links() -> None:
@@ -67,29 +79,70 @@ def test_contributor_routes_aliases_and_stale_output_removal(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     paths = render_contributors.page_paths()
+    assert paths[0] == "profiles/index.html"
+    assert all(path.startswith("profiles/") for path in paths)
     rows = site_urls.derive_registry(site_urls.load_registry())
     registered = {row.path: row for row in rows}
     assert set(paths) <= set(registered)
     sitemap = site_urls.render_sitemap(rows)
     for path in paths:
+        assert registered[path].status == "live"
         assert render_overview.canonical_url(path) in sitemap
     tree = RepositoryTree(
         files=frozenset({"packing/contributors/mira.md"}), directories=frozenset()
     )
     assert site_documents.record_aliases(tree)["packing/contributors/mira.md"] == (
-        "contributors/mira.html"
+        "profiles/mira.html"
     )
-    directory = tmp_path / "contributors"
-    directory.mkdir()
-    (directory / "retired.html").write_text("old")
     monkeypatch.setattr(render_overview, "asset_files", lambda _files: {})
     monkeypatch.setattr(render_overview, "support_files", dict)
     monkeypatch.setattr(site_urls, "write_crawl_files", lambda _output: None)
+    for name in ("profiles", "contributors"):
+        directory = tmp_path / name
+        directory.mkdir()
+        (directory / "retired.html").write_text("old")
     render_overview.write_site(
-        tmp_path, [render_overview.Page("contributors/index.html", "new")]
+        tmp_path,
+        [
+            render_overview.Page("profiles/index.html", "new"),
+            render_overview.Page("contributors/index.html", "forwarder"),
+        ],
     )
-    assert not (directory / "retired.html").exists()
-    assert (directory / "index.html").read_text() == "new"
+    for name in ("profiles", "contributors"):
+        assert not (tmp_path / name / "retired.html").exists()
+    assert (tmp_path / "profiles/index.html").read_text() == "new"
+    assert (tmp_path / "contributors/index.html").read_text() == "forwarder"
+
+
+def test_each_earlier_contributor_address_forwards_to_its_profile() -> None:
+    """The profiles moved from `contributors/` to `profiles/` (think-0v2c). The directory
+    and every profile keep a registered forwarder at the earlier address, which previews
+    the profile, and no sitemap entry; the profile pages are where links lead now."""
+    moved = dict(render_overview.MOVED_PAGES)
+    profiles = render_contributors.page_paths()
+    earlier = {"contributors/" + path.removeprefix("profiles/"): path for path in profiles}
+    assert {old: moved[old] for old in earlier} == earlier
+    assert {old for old in moved if old.startswith("contributors/")} == set(earlier)
+    rows = {row.path: row for row in site_urls.load_registry()}
+    sitemap = site_urls.render_sitemap(list(rows.values()))
+    for old, new in earlier.items():
+        row = rows[old]
+        assert (row.kind, row.status, row.target) == ("forwarder", "forwarded", new), old
+        assert row.canonical == site_urls.canonical_path(new)
+        assert f"<loc>{render_overview.canonical_url(old)}</loc>" not in sitemap
+        assert f"<loc>{render_overview.canonical_url(new)}</loc>" in sitemap
+    forwarders = {page.name: page.html for page in render_overview.forwarder_pages()}
+    metas = render_contributors.page_metas()
+    for old, new in earlier.items():
+        page = forwarders[old]
+        # A script goes to the profile's address, the directory's as `profiles/`; the
+        # no-script refresh and link name the file, as the deployed check requires.
+        assert check_published_site.forwarder_says(page) == (
+            check_published_site.forwarder_expected(old, new)
+        )
+        assert f'This page has moved: <a href="../{new}">' in page
+        assert f"<title>{metas[new].name}" in page
+    assert 'data-moved-to="../profiles/"' in forwarders["contributors/index.html"]
 
 
 def test_credits_link_cases_and_results_preserving_roles_without_duplicates() -> None:

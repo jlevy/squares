@@ -67,11 +67,11 @@ def test_inventory_classifies_published_contributor_article_programs(tmp_path: P
         render_overview.BROWSER / "article-loader.js",
         render_overview.BROWSER / "contributor-popover.js",
     )
-    directory = tmp_path / "contributors"
+    directory = tmp_path / "profiles"
     directory.mkdir()
     directory.joinpath("index.html").write_text(
         "".join(
-            site_assets.script_tag(assets.script_file(program), "contributors/index.html")
+            site_assets.script_tag(assets.script_file(program), "profiles/index.html")
             for program in programs
         )
     )

@@ -306,14 +306,16 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
         _new_row(path, "page", "overview", "devtools.render_overview:render_all", lastmod=day)
         for path in render_overview.PAGES
     ]
+    # Profiles were registered under `contributors/` on 2026-10-10 and moved to
+    # `profiles/` on 2026-10-13 (think-0v2c); the old addresses are `MOVED_PAGES` forwarders.
     rows += [
         _new_row(
             path,
             "page",
             "overview",
             "devtools.render_contributors:contributor_pages",
-            first="2026-10-10",
-            lastmod=max(day, "2026-10-10"),
+            first="2026-10-13",
+            lastmod=max(day, "2026-10-13"),
         )
         for path in render_contributors.page_paths()
     ]

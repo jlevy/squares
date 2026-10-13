@@ -47,7 +47,7 @@ def test_seed_records_keep_identity_and_optional_information_separate() -> None:
     assert mira.real_name is None
     assert mira.bio is None
     assert mira.bio_sources == ()
-    assert mira.profile_path == "contributors/mira.html"
+    assert mira.profile_path == "profiles/mira.html"
     walter = registry.by_id["walter-stromquist"]
     assert walter.links == ()
     assert walter.bio is not None

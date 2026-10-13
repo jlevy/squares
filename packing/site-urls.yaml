@@ -5869,173 +5869,362 @@ urls:
       canonical: cases/
       target: ''
 - path: contributors/erich-friedman.html
-  canonical: contributors/erich-friedman.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/erich-friedman.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/erich-friedman.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/erich-friedman.html
+      target: ''
 - path: contributors/evan-daniel.html
-  canonical: contributors/evan-daniel.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/evan-daniel.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/evan-daniel.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/evan-daniel.html
+      target: ''
 - path: contributors/f-gobel.html
-  canonical: contributors/f-gobel.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/f-gobel.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/f-gobel.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/f-gobel.html
+      target: ''
 - path: contributors/francisco-couzo.html
-  canonical: contributors/francisco-couzo.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/francisco-couzo.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/francisco-couzo.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/francisco-couzo.html
+      target: ''
 - path: contributors/gustavo-massaccesi.html
-  canonical: contributors/gustavo-massaccesi.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/gustavo-massaccesi.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/gustavo-massaccesi.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/gustavo-massaccesi.html
+      target: ''
 - path: contributors/guzhou0806.html
-  canonical: contributors/guzhou0806.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/guzhou0806.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/guzhou0806.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/guzhou0806.html
+      target: ''
 - path: contributors/hiroshi-nagamochi.html
-  canonical: contributors/hiroshi-nagamochi.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/hiroshi-nagamochi.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/hiroshi-nagamochi.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/hiroshi-nagamochi.html
+      target: ''
 - path: contributors/index.html
-  canonical: contributors/
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/index.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/
+      target: ''
 - path: contributors/joshua-levy.html
-  canonical: contributors/joshua-levy.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/joshua-levy.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/joshua-levy.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/joshua-levy.html
+      target: ''
 - path: contributors/marc-leonard-overbeck.html
-  canonical: contributors/marc-leonard-overbeck.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/marc-leonard-overbeck.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/marc-leonard-overbeck.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/marc-leonard-overbeck.html
+      target: ''
 - path: contributors/michael-j-kearney.html
-  canonical: contributors/michael-j-kearney.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/michael-j-kearney.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/michael-j-kearney.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/michael-j-kearney.html
+      target: ''
 - path: contributors/mira.html
-  canonical: contributors/mira.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/mira.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/mira.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/mira.html
+      target: ''
 - path: contributors/peter-shiu.html
-  canonical: contributors/peter-shiu.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/peter-shiu.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/peter-shiu.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/peter-shiu.html
+      target: ''
 - path: contributors/queuingtheorydotcom.html
-  canonical: contributors/queuingtheorydotcom.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/queuingtheorydotcom.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/queuingtheorydotcom.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/queuingtheorydotcom.html
+      target: ''
 - path: contributors/ryu-sungjoon.html
-  canonical: contributors/ryu-sungjoon.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/ryu-sungjoon.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/ryu-sungjoon.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/ryu-sungjoon.html
+      target: ''
 - path: contributors/sam-burns.html
-  canonical: contributors/sam-burns.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/sam-burns.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/sam-burns.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/sam-burns.html
+      target: ''
 - path: contributors/tokoharu.html
-  canonical: contributors/tokoharu.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/tokoharu.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/tokoharu.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/tokoharu.html
+      target: ''
 - path: contributors/walter-stromquist.html
-  canonical: contributors/walter-stromquist.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/walter-stromquist.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/walter-stromquist.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/walter-stromquist.html
+      target: ''
 - path: contributors/walter-trump.html
-  canonical: contributors/walter-trump.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/walter-trump.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/walter-trump.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/walter-trump.html
+      target: ''
 - path: contributors/wand125.html
-  canonical: contributors/wand125.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/wand125.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/wand125.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/wand125.html
+      target: ''
 - path: contributors/wolfram-bentz.html
-  canonical: contributors/wolfram-bentz.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
+  canonical: profiles/wolfram-bentz.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
-  status: live
+  lastmod: '2026-10-13'
+  status: forwarded
+  target: profiles/wolfram-bentz.html
+  amendments:
+  - date: '2026-10-13'
+    reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
+      them contributors (think-0v2c); this address forwards there.
+    previous:
+      kind: page
+      canonical: contributors/wolfram-bentz.html
+      target: ''
 - path: conventions.html
   canonical: conventions.html
   kind: page
@@ -6308,6 +6497,174 @@ urls:
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
   lastmod: '2026-10-12'
+  status: live
+- path: profiles/erich-friedman.html
+  canonical: profiles/erich-friedman.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/evan-daniel.html
+  canonical: profiles/evan-daniel.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/f-gobel.html
+  canonical: profiles/f-gobel.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/francisco-couzo.html
+  canonical: profiles/francisco-couzo.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/gustavo-massaccesi.html
+  canonical: profiles/gustavo-massaccesi.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/guzhou0806.html
+  canonical: profiles/guzhou0806.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/hiroshi-nagamochi.html
+  canonical: profiles/hiroshi-nagamochi.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/index.html
+  canonical: profiles/
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/joshua-levy.html
+  canonical: profiles/joshua-levy.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/marc-leonard-overbeck.html
+  canonical: profiles/marc-leonard-overbeck.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/michael-j-kearney.html
+  canonical: profiles/michael-j-kearney.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/mira.html
+  canonical: profiles/mira.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/peter-shiu.html
+  canonical: profiles/peter-shiu.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/queuingtheorydotcom.html
+  canonical: profiles/queuingtheorydotcom.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/ryu-sungjoon.html
+  canonical: profiles/ryu-sungjoon.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/sam-burns.html
+  canonical: profiles/sam-burns.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/tokoharu.html
+  canonical: profiles/tokoharu.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/walter-stromquist.html
+  canonical: profiles/walter-stromquist.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/walter-trump.html
+  canonical: profiles/walter-trump.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/wand125.html
+  canonical: profiles/wand125.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/wolfram-bentz.html
+  canonical: profiles/wolfram-bentz.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
   status: live
 - path: readme.html
   canonical: readme.html

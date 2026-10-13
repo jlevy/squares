@@ -739,27 +739,27 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/98.html | cases/98.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/99.html | cases/99.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/index.html | atlas.html | forwarder | overview | 2026-09-29 | 2026-10-09 | forwarded → atlas.html |
-| contributors/erich-friedman.html | contributors/erich-friedman.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/evan-daniel.html | contributors/evan-daniel.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/f-gobel.html | contributors/f-gobel.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/francisco-couzo.html | contributors/francisco-couzo.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/gustavo-massaccesi.html | contributors/gustavo-massaccesi.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/guzhou0806.html | contributors/guzhou0806.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/hiroshi-nagamochi.html | contributors/hiroshi-nagamochi.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/index.html | contributors/ | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/joshua-levy.html | contributors/joshua-levy.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/marc-leonard-overbeck.html | contributors/marc-leonard-overbeck.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/michael-j-kearney.html | contributors/michael-j-kearney.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/mira.html | contributors/mira.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/peter-shiu.html | contributors/peter-shiu.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/queuingtheorydotcom.html | contributors/queuingtheorydotcom.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/ryu-sungjoon.html | contributors/ryu-sungjoon.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/sam-burns.html | contributors/sam-burns.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/tokoharu.html | contributors/tokoharu.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/walter-stromquist.html | contributors/walter-stromquist.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/walter-trump.html | contributors/walter-trump.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/wand125.html | contributors/wand125.html | page | overview | 2026-10-10 | 2026-10-10 | live |
-| contributors/wolfram-bentz.html | contributors/wolfram-bentz.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/erich-friedman.html | profiles/erich-friedman.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/erich-friedman.html |
+| contributors/evan-daniel.html | profiles/evan-daniel.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/evan-daniel.html |
+| contributors/f-gobel.html | profiles/f-gobel.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/f-gobel.html |
+| contributors/francisco-couzo.html | profiles/francisco-couzo.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/francisco-couzo.html |
+| contributors/gustavo-massaccesi.html | profiles/gustavo-massaccesi.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/gustavo-massaccesi.html |
+| contributors/guzhou0806.html | profiles/guzhou0806.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/guzhou0806.html |
+| contributors/hiroshi-nagamochi.html | profiles/hiroshi-nagamochi.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/hiroshi-nagamochi.html |
+| contributors/index.html | profiles/ | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/index.html |
+| contributors/joshua-levy.html | profiles/joshua-levy.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/joshua-levy.html |
+| contributors/marc-leonard-overbeck.html | profiles/marc-leonard-overbeck.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/marc-leonard-overbeck.html |
+| contributors/michael-j-kearney.html | profiles/michael-j-kearney.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/michael-j-kearney.html |
+| contributors/mira.html | profiles/mira.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/mira.html |
+| contributors/peter-shiu.html | profiles/peter-shiu.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/peter-shiu.html |
+| contributors/queuingtheorydotcom.html | profiles/queuingtheorydotcom.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/queuingtheorydotcom.html |
+| contributors/ryu-sungjoon.html | profiles/ryu-sungjoon.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/ryu-sungjoon.html |
+| contributors/sam-burns.html | profiles/sam-burns.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/sam-burns.html |
+| contributors/tokoharu.html | profiles/tokoharu.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/tokoharu.html |
+| contributors/walter-stromquist.html | profiles/walter-stromquist.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/walter-stromquist.html |
+| contributors/walter-trump.html | profiles/walter-trump.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/walter-trump.html |
+| contributors/wand125.html | profiles/wand125.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/wand125.html |
+| contributors/wolfram-bentz.html | profiles/wolfram-bentz.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/wolfram-bentz.html |
 | conventions.html | conventions.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | defects.html | https://github.com/jlevy/squares/blob/main/defects.md | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → https://github.com/jlevy/squares/blob/main/defects.md |
 | development.html | development.html | page | overview | 2026-09-29 | 2026-10-02 | live |
@@ -793,6 +793,27 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | papers/square-packing-methods-survey.html | papers/square-packing-methods-survey.html | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-12 | live |
 | papers/square-packing-methods-survey.md | papers/square-packing-methods-survey.md | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-12 | live |
 | papers/square-packing-methods-survey.pdf | papers/square-packing-methods-survey.pdf | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-12 | live |
+| profiles/erich-friedman.html | profiles/erich-friedman.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/evan-daniel.html | profiles/evan-daniel.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/f-gobel.html | profiles/f-gobel.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/francisco-couzo.html | profiles/francisco-couzo.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/gustavo-massaccesi.html | profiles/gustavo-massaccesi.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/guzhou0806.html | profiles/guzhou0806.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/hiroshi-nagamochi.html | profiles/hiroshi-nagamochi.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/index.html | profiles/ | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/joshua-levy.html | profiles/joshua-levy.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/marc-leonard-overbeck.html | profiles/marc-leonard-overbeck.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/michael-j-kearney.html | profiles/michael-j-kearney.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/mira.html | profiles/mira.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/peter-shiu.html | profiles/peter-shiu.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/queuingtheorydotcom.html | profiles/queuingtheorydotcom.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/ryu-sungjoon.html | profiles/ryu-sungjoon.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/sam-burns.html | profiles/sam-burns.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/tokoharu.html | profiles/tokoharu.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/walter-stromquist.html | profiles/walter-stromquist.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/walter-trump.html | profiles/walter-trump.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/wand125.html | profiles/wand125.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/wolfram-bentz.html | profiles/wolfram-bentz.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | readme.html | readme.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | result/t-001.html | result/t-001.html | result | overview | 2026-08-31 | 2026-08-31 | live |
 | result/t-002.html | result/t-002.html | result | overview | 2026-08-31 | 2026-08-31 | live |

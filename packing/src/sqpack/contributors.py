@@ -26,6 +26,12 @@ from sqpack.yamlio import load_yaml
 
 CONTRACT = "packing.squares:Contributor/v1"
 SCHEMA_NAME = "contributor.schema.yaml"
+#: Where the site serves the profile directory and each person's profile, by path under
+#: the site root. The directory lists cited paper authors beside the project's own
+#: contributors, so its address and wording say profile rather than contributor
+#: (think-0v2c); the records themselves stay under `packing/contributors/`.
+PROFILES_DIR = "profiles"
+_ID = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 FOOTER = (
     "<!-- This document follows common-doc-guidelines.md.\n"
     "See github.com/jlevy/practical-prose and review guidelines before editing.\n-->"
@@ -83,8 +89,8 @@ class Contributor:
 
     @property
     def profile_path(self) -> str:
-        """Planned canonical path; this module publishes no page."""
-        return f"contributors/{self.id}.html"
+        """Canonical site path under `PROFILES_DIR`; this module publishes no page."""
+        return f"{PROFILES_DIR}/{self.id}.html"
 
 
 @dataclass(frozen=True, slots=True)
@@ -286,6 +292,16 @@ def load_contributor(path: Path, *, repo: Path | None = None) -> Contributor:
         bio=bio,
         bio_sources=tuple(payload.get("bio_sources", [])),
     )
+
+
+def record_ids(directory: Path | None = None) -> tuple[str, ...]:
+    """Each record's id, from its filename alone, so routes can be declared without
+    reading records or the archive evidence they cite."""
+    directory = directory if directory is not None else require_project_root() / "contributors"
+    ids = tuple(path.stem for path in sorted(directory.glob("*.md")))
+    if any(_ID.fullmatch(identifier) is None for identifier in ids):
+        raise ContributorError("contributor filenames must be stable lowercase ids")
+    return ids
 
 
 def load_contributors(

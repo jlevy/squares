@@ -26,6 +26,7 @@ from devtools import (
     overview_data,
     overview_sections,
     render_case_pages,
+    render_contributors,
     render_overview,
     site_urls,
 )
@@ -2116,12 +2117,17 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     """A page that moved or was withdrawn is still served at its old address, as a
     forwarder naming where a visit goes now (`render_overview.MOVED_PAGES`): the three
     repository documents that left the site, the papers, which moved under `papers/`,
-    and the one page of every case record, whose records moved under `cases/`. A deploy
-    without one 404s every link written before the change. It fails when an old address
-    is gone, when the page there still is the old page, and when a forwarder leads
-    anywhere but where a visit should go, in any one of the four places it says where
-    that is."""
+    the one page of every case record, whose records moved under `cases/`, and the
+    profile directory and every profile, which moved from `contributors/` to
+    `profiles/`. A deploy without one 404s every link written before the change. It
+    fails when an old address is gone, when the page there still is the old page, and
+    when a forwarder leads anywhere but where a visit should go, in any one of the four
+    places it says where that is."""
     moved = dict(render_overview.MOVED_PAGES)
+    profiles = {
+        f"{render_overview.LEGACY_PROFILES_DIR}/{path.removeprefix('profiles/')}": path
+        for path in render_contributors.page_paths()
+    }
     assert set(moved) == {
         "all-results.html",
         "status.html",
@@ -2132,14 +2138,22 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         "n11-optimality/index.html",
         "cases.html",
         "cases/index.html",
+        *profiles,
     }
+    assert {old: moved[old] for old in profiles} == profiles
     assert not set(moved) & set(render_overview.SITE_PAGES)
     requested: list[str] = []
     assert failures(monkeypatch, fake_site(site_pages(), requested=requested)) == []
     for old in moved:
         assert f"https://example.org/{old}" in requested, old
 
+    # Every profile forwarder is written by one rule, so the directory's and one
+    # profile's stand for the rest in the failure cases below.
+    directory = f"{render_overview.LEGACY_PROFILES_DIR}/index.html"
+    sampled = {directory, min(set(profiles) - {directory})}
     for old, new in moved.items():
+        if old in profiles and old not in sampled:
+            continue
         # Match the whole old path without hiding another page with a shared suffix.
         (failure,) = failures(monkeypatch, fake_site(site_pages(), lost=(f"/{old}",)))
         assert failure.startswith(f"forwarder {old}: HTTP 404, says "), failure
@@ -2185,6 +2199,13 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     assert says["script"] == "../papers/n11-optimality-review.html"
     says = check_published_site.forwarder_says(site_pages()["defects.html"].decode())
     assert says["script"] == says["canonical"] == f"{REPO_URL}/blob/{DEFAULT_BRANCH}/defects.md"
+    # A directory's index is sent to the directory's own address by script, and to its
+    # index file by file navigation, the refresh and the link.
+    says = check_published_site.forwarder_says(
+        site_pages()[f"{render_overview.LEGACY_PROFILES_DIR}/index.html"].decode()
+    )
+    assert says["script"] == "../profiles/"
+    assert says["file"] == says["refresh"] == says["link"] == "../profiles/index.html"
 
 
 def test_check_requires_each_moved_file_at_its_old_address_with_the_same_bytes(

@@ -57,6 +57,7 @@ from urllib.parse import quote, unquote
 from devtools import render_overview, repo_links
 from devtools.render_overview import REPO, Page
 from devtools.repo_links import RepositoryTree, repo_url, repository_tree
+from sqpack.contributors import PROFILES_DIR
 
 TUTORIAL = REPO / repo_links.TUTORIAL
 README = REPO / repo_links.README
@@ -314,19 +315,19 @@ def rewrite_link(url: str, *, tag: str, context: LinkContext, report: LinkReport
 
 def record_aliases(tree: RepositoryTree) -> dict[str, str]:
     """Where a link to a record the site has a page for leads, by the record's path: the
-    results register and the status table (`RECORD_PAGES`), and each case file in `tree`
-    to that case's record."""
+    results register and the status table (`RECORD_PAGES`), each case file in `tree`
+    to that case's record, and each profile record to its profile."""
     cases = {
         path: f"{CASES_DIR}/{int(match.group(1))}.html"
         for path in tree.files
         if (match := _CASE_FILE.fullmatch(path))
     }
-    contributors = {
-        path: f"contributors/{match.group(1)}.html"
+    profiles = {
+        path: f"{PROFILES_DIR}/{match.group(1)}.html"
         for path in tree.files
         if (match := _CONTRIBUTOR_FILE.fullmatch(path))
     }
-    return {**RECORD_PAGES, **cases, **contributors}
+    return {**RECORD_PAGES, **cases, **profiles}
 
 
 def served_pages() -> frozenset[str]:

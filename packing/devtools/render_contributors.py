@@ -1,4 +1,10 @@
-"""Publish evidenced contributor articles, their directory and reviewed credit links."""
+"""Publish evidenced person profiles, their directory and reviewed credit links.
+
+The site serves them under `profiles/` (`sqpack.contributors.PROFILES_DIR`), since the
+directory includes cited paper authors as well as the project's contributors; each
+earlier `contributors/` address forwards there (`render_overview.MOVED_PAGES`). Module,
+record and attribute names keep the contributor vocabulary of the records.
+"""
 
 from __future__ import annotations
 
@@ -16,9 +22,11 @@ from markdown_it import MarkdownIt
 from devtools.render_overview import PACKING, REPO, Page, PageMeta, static_content_page
 from devtools.repo_links import repo_url
 from sqpack.contributors import (
+    PROFILES_DIR,
     Contributor,
     ContributorError,
     load_contributors,
+    record_ids,
     validate_public_url,
 )
 from sqpack.yamlio import load_yaml
@@ -26,10 +34,10 @@ from sqpack.yamlio import load_yaml
 if TYPE_CHECKING:
     from sqpack.contributor_occurrences import CreditOccurrence
 
+#: The profile records' directory under `packing/`, not a published address.
 CONTRIBUTORS_DIR = "contributors"
 CONTRIBUTORS = PACKING / CONTRIBUTORS_DIR
-DIRECTORY_PATH = f"{CONTRIBUTORS_DIR}/index.html"
-_ID = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
+DIRECTORY_PATH = f"{PROFILES_DIR}/index.html"
 _LINK_LABELS = {
     "github": "GitHub",
     "twitter": "Twitter / X",
@@ -41,10 +49,10 @@ _LINK_LABELS = {
 
 def page_paths() -> tuple[str, ...]:
     """Declare routes without reading archive bytes omitted by a sparse checkout."""
-    paths = sorted(CONTRIBUTORS.glob("*.md"))
-    if any(_ID.fullmatch(path.stem) is None for path in paths):
-        raise ContributorError("contributor filenames must be stable lowercase ids")
-    return (DIRECTORY_PATH, *(f"contributors/{path.stem}.html" for path in paths))
+    return (
+        DIRECTORY_PATH,
+        *(f"{PROFILES_DIR}/{identifier}.html" for identifier in record_ids(CONTRIBUTORS)),
+    )
 
 
 def evidence_paths() -> tuple[Path, ...]:
@@ -137,7 +145,7 @@ def contributor_article(
         f'<article class="site-contributor" data-contributor-id="{contributor.id}">',
         (
             '<nav class="site-contributor-breadcrumb" aria-label="Breadcrumb">'
-            '<a href="contributors/index.html">Contributors</a></nav>'
+            f'<a href="{DIRECTORY_PATH}">Profiles</a></nav>'
         ),
         f"<h1>{name}</h1>",
     ]
@@ -227,20 +235,60 @@ def contributor_article(
     return "\n".join(pieces)
 
 
+#: The directory's head record. Profiles include cited paper authors, so the directory
+#: says whose work the record names rather than calling everyone a contributor.
+DIRECTORY_META = PageMeta(
+    "Profiles",
+    "People whose work the square-packing record cites or credits, with sourced public "
+    "profiles and links to their work.",
+    DIRECTORY_PATH,
+)
+
+
+def _contributors() -> list[Contributor]:
+    """Every validated person, in public-name order."""
+    return sorted(
+        load_contributors(CONTRIBUTORS, repo=REPO).by_id.values(),
+        key=lambda contributor: (contributor.display_name.casefold(), contributor.id),
+    )
+
+
+def profile_meta(contributor: Contributor) -> PageMeta:
+    """A profile's head record: the evidenced public name and its own description."""
+    description = (
+        "Public profile, identity sources and credited square-packing work for "
+        f"{contributor.display_name}."
+    )
+    if len(description) > 160:
+        description = description[:159].rsplit(" ", 1)[0] + "."
+    return PageMeta(contributor.display_name, description, contributor.profile_path)
+
+
+def page_metas() -> dict[str, PageMeta]:
+    """The directory's and each profile's head record, by path. A forwarder at an
+    earlier `contributors/` address previews the page it leads to from these
+    (`render_overview.forwarded_metas`)."""
+    return {
+        DIRECTORY_PATH: DIRECTORY_META,
+        **{
+            contributor.profile_path: profile_meta(contributor)
+            for contributor in _contributors()
+        },
+    }
+
+
 def contributor_pages() -> list[Page]:
     """Directory plus one canonical profile per validated person."""
     from sqpack.contributor_occurrences import load_occurrences  # noqa: PLC0415
 
-    contributors = sorted(
-        load_contributors(CONTRIBUTORS, repo=REPO).by_id.values(),
-        key=lambda contributor: (contributor.display_name.casefold(), contributor.id),
-    )
+    contributors = _contributors()
     occurrences = load_occurrences().occurrences
     directory = (
-        '<article class="site-contributor-directory"><h1>Contributors</h1>'
-        "<p>People credited in the square-packing record. Each profile records public "
-        "identity evidence and links to reviewed credits.</p>"
-        '<nav aria-label="Contributors"><ul>'
+        '<article class="site-contributor-directory"><h1>Profiles</h1>'
+        "<p>People whose work the square-packing record cites or credits, paper authors "
+        "and project contributors alike. Each profile records public identity evidence "
+        "and links to reviewed credits.</p>"
+        '<nav aria-label="Profiles"><ul>'
         + "".join(
             f'<li><a href="{contributor.profile_path}" data-contributor="{contributor.id}">'
             f"{html.escape(contributor.display_name)}</a></li>"
@@ -248,32 +296,15 @@ def contributor_pages() -> list[Page]:
         )
         + "</ul></nav></article>"
     )
-    pages = [
+    pages = [static_content_page(directory, meta=DIRECTORY_META, current="")]
+    pages.extend(
         static_content_page(
-            directory,
-            meta=PageMeta(
-                "Contributors",
-                "People credited in the square-packing record, with sourced public profiles "
-                "and links to their work.",
-                DIRECTORY_PATH,
-            ),
+            contributor_article(contributor, occurrences),
+            meta=profile_meta(contributor),
             current="",
         )
-    ]
-    for contributor in contributors:
-        description = (
-            "Public profile, identity sources and credited square-packing work for "
-            f"{contributor.display_name}."
-        )
-        if len(description) > 160:
-            description = description[:159].rsplit(" ", 1)[0] + "."
-        pages.append(
-            static_content_page(
-                contributor_article(contributor, occurrences),
-                meta=PageMeta(contributor.display_name, description, contributor.profile_path),
-                current="",
-            )
-        )
+        for contributor in contributors
+    )
     return pages
 
 

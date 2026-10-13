@@ -60,7 +60,7 @@ def test_live_manifest_and_literal_result_credits() -> None:
         CreditOrigin("packing/resources/bibliography.yaml", "[Stromquist 2003]", "/authors/0"),
         "Stromquist",
     )
-    assert 'href="contributors/walter-stromquist.html" data-contributor' in stromquist
+    assert 'href="profiles/walter-stromquist.html" data-contributor' in stromquist
     assert ">Stromquist</a>" in stromquist
 
 
@@ -225,7 +225,7 @@ def test_conflicting_reviewed_ids_cannot_choose_a_deduplicated_person(
         == "Stromquist"
     )
     assert render_credit(origin, "Stromquist", prefix="../").startswith(
-        '<a href="../contributors/walter-stromquist.html"'
+        '<a href="../profiles/walter-stromquist.html"'
     )
     unknown = replace(origin, record_key="unknown")
     assert render_credit(unknown, '<b title="&">credit</b>') == (

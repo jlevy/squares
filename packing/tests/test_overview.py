@@ -5942,8 +5942,8 @@ def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
     monkeypatch.setattr(render_overview, "result_fragments", lambda: files[1:])
     monkeypatch.setattr(render_overview, "case_records", list)
     contributors = [
-        render_overview.Page("contributors/index.html", "<p>contributors</p>"),
-        render_overview.Page("contributors/levy.html", "<p>Levy</p>"),
+        render_overview.Page("profiles/index.html", "<p>profiles</p>"),
+        render_overview.Page("profiles/levy.html", "<p>Levy</p>"),
     ]
     monkeypatch.setattr(render_contributors, "contributor_pages", lambda: contributors)
     forwarder = render_overview.Page("old.html", "<p>moved</p>")
@@ -5959,15 +5959,24 @@ def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
     complete = [*files, *contributors, forwarder]
     render_overview.write_site(tmp_path, complete)
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
-    profile = tmp_path / "contributors/levy.html"
+    profile = tmp_path / "profiles/levy.html"
     profile.write_text("changed profile", encoding="utf-8")
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
     render_overview.write_site(tmp_path, complete)
     profile.unlink()
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
     render_overview.write_site(tmp_path, complete)
-    retired = tmp_path / "contributors/retired.html"
+    retired = tmp_path / "profiles/retired.html"
     retired.write_text("retired contributor", encoding="utf-8")
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
+    render_overview.write_site(tmp_path, complete)
+    assert not retired.exists()
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
+    # The earlier profile directory holds only forwarders, so a file the build no longer
+    # writes there is stale too.
+    (tmp_path / render_overview.LEGACY_PROFILES_DIR).mkdir()
+    retired = tmp_path / render_overview.LEGACY_PROFILES_DIR / "retired.html"
+    retired.write_text("retired forwarder", encoding="utf-8")
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
     render_overview.write_site(tmp_path, complete)
     assert not retired.exists()
@@ -5992,8 +6001,8 @@ def test_check_finds_a_record_file_or_overview_left_from_another_build(
     monkeypatch.setattr(render_overview, "case_records", lambda: records)
     monkeypatch.setattr(render_overview, "forwarder_pages", list)
     contributors = [
-        render_overview.Page("contributors/index.html", "<p>contributors</p>"),
-        render_overview.Page("contributors/levy.html", "<p>Levy</p>"),
+        render_overview.Page("profiles/index.html", "<p>profiles</p>"),
+        render_overview.Page("profiles/levy.html", "<p>Levy</p>"),
     ]
     monkeypatch.setattr(render_contributors, "contributor_pages", lambda: contributors)
     assert render_overview.main(["--output", str(tmp_path)]) == 0
@@ -6813,8 +6822,8 @@ def test_the_site_writes_its_forwarders_and_checks_them(
     monkeypatch.setattr(render_overview, "result_fragments", list)
     monkeypatch.setattr(render_overview, "case_records", list)
     contributors = [
-        render_overview.Page("contributors/index.html", "<p>contributors</p>"),
-        render_overview.Page("contributors/levy.html", "<p>Levy</p>"),
+        render_overview.Page("profiles/index.html", "<p>profiles</p>"),
+        render_overview.Page("profiles/levy.html", "<p>Levy</p>"),
     ]
     monkeypatch.setattr(render_contributors, "contributor_pages", lambda: contributors)
     moved = [old for old, _ in render_overview.MOVED_PAGES]

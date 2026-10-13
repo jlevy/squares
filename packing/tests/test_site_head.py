@@ -443,9 +443,16 @@ def test_a_forwarder_previews_the_page_it_leads_to_and_one_off_the_site_carries_
     the defect log's, names that address and carries no card. Every forwarder is the
     renderer's, the papers' old addresses among them: the optimality paper's page, the
     directory it was served from, and the explainer's."""
+    from devtools import render_contributors  # noqa: PLC0415
     from devtools import render_n11_lower_bounds_explainer as explainer  # noqa: PLC0415
     from devtools import render_n11_optimality_review as paper  # noqa: PLC0415
 
+    # The profiles' earlier `contributors/` addresses lead to profile pages, which their
+    # own renderer writes beside `render_overview`'s pages.
+    pages = {
+        **pages,
+        **{profile.name: profile.html for profile in render_contributors.contributor_pages()},
+    }
     named = check_published_site.forwarder_canonicals()
     forwarders = {page.name: page.html for page in render_overview.forwarder_pages()}
     assert set(named) == set(forwarders)
