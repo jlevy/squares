@@ -304,6 +304,22 @@ def record_ids(directory: Path | None = None) -> tuple[str, ...]:
     return ids
 
 
+def record_names(directory: Path | None = None) -> dict[str, str]:
+    """Each record's display name, by id, read from its frontmatter alone, so a page's
+    head can be declared where the archive evidence the record cites is not checked out
+    (a paper's partial build); `load_contributors` is what validates that evidence."""
+    directory = directory if directory is not None else require_project_root() / "contributors"
+    names = {}
+    for identifier in record_ids(directory):
+        match = _FRONTMATTER.fullmatch((directory / f"{identifier}.md").read_text("utf-8"))
+        document = load_yaml(match[1]) if match is not None else None
+        payload = document.get("contributor") if isinstance(document, dict) else None
+        if not isinstance(payload, dict) or not isinstance(payload.get("display_name"), str):
+            raise ContributorError(f"record has no display name: {identifier}")
+        names[identifier] = cast(str, payload["display_name"])
+    return names
+
+
 def load_contributors(
     directory: Path | None = None, *, repo: Path | None = None
 ) -> ContributorRegistry:

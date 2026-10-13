@@ -27,6 +27,7 @@ from sqpack.contributors import (
     ContributorError,
     load_contributors,
     record_ids,
+    record_names,
     validate_public_url,
 )
 from sqpack.yamlio import load_yaml
@@ -253,26 +254,31 @@ def _contributors() -> list[Contributor]:
     )
 
 
-def profile_meta(contributor: Contributor) -> PageMeta:
-    """A profile's head record: the evidenced public name and its own description."""
+def _profile_meta(identifier: str, display_name: str) -> PageMeta:
     description = (
-        "Public profile, identity sources and credited square-packing work for "
-        f"{contributor.display_name}."
+        f"Public profile, identity sources and credited square-packing work for {display_name}."
     )
     if len(description) > 160:
         description = description[:159].rsplit(" ", 1)[0] + "."
-    return PageMeta(contributor.display_name, description, contributor.profile_path)
+    return PageMeta(display_name, description, f"{PROFILES_DIR}/{identifier}.html")
+
+
+def profile_meta(contributor: Contributor) -> PageMeta:
+    """A profile's head record: the evidenced public name and its own description."""
+    return _profile_meta(contributor.id, contributor.display_name)
 
 
 def page_metas() -> dict[str, PageMeta]:
     """The directory's and each profile's head record, by path. A forwarder at an
     earlier `contributors/` address previews the page it leads to from these
-    (`render_overview.forwarded_metas`)."""
+    (`render_overview.forwarded_metas`), in every build that checks forwarders, a
+    paper's partial one included, so they are read from the records' names alone
+    (`record_names`) and need none of the archive evidence a profile page cites."""
     return {
         DIRECTORY_PATH: DIRECTORY_META,
         **{
-            contributor.profile_path: profile_meta(contributor)
-            for contributor in _contributors()
+            f"{PROFILES_DIR}/{identifier}.html": _profile_meta(identifier, name)
+            for identifier, name in record_names(CONTRIBUTORS).items()
         },
     }
 

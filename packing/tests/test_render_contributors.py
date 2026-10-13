@@ -19,7 +19,12 @@ from devtools import (
 )
 from devtools.repo_links import RepositoryTree
 from sqpack.contributor_occurrences import CreditOccurrence, CreditOrigin
-from sqpack.contributors import ContributorError, FieldProvenance, load_contributors
+from sqpack.contributors import (
+    ContributorError,
+    FieldProvenance,
+    load_contributors,
+    record_names,
+)
 from sqpack.yamlio import load_yaml
 
 
@@ -283,3 +288,21 @@ def test_legacy_profile_forwarders_are_the_fixed_preview_set() -> None:
     later = records - set(legacy.values())
     assert "john-bidwell" in later
     assert not any(f"contributors/{identifier}.html" in moved for identifier in later)
+
+
+def test_profile_heads_need_no_archive_evidence(tmp_path: Path) -> None:
+    """A paper's partial build checks the profile forwarders without the archive the
+    records cite, so the heads come from the records' names alone and match the pages."""
+    records = render_contributors.CONTRIBUTORS
+    for path in (*records.glob("*.md"), records / "contributor.schema.yaml"):
+        shutil.copyfile(path, tmp_path / path.name)
+    names = record_names(tmp_path)
+    with pytest.raises(ContributorError, match="archive_path"):
+        load_contributors(tmp_path, repo=tmp_path)
+    profiles = load_contributors().by_id
+    assert names == {
+        identifier: profile.display_name for identifier, profile in profiles.items()
+    }
+    metas = render_contributors.page_metas()
+    for profile in profiles.values():
+        assert metas[profile.profile_path] == render_contributors.profile_meta(profile)
