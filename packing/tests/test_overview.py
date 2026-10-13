@@ -3779,9 +3779,9 @@ def test_the_html_measures_an_age_from_the_register_and_never_from_the_clock(
 def test_a_credit_splits_at_what_it_builds_on_and_a_standing_into_its_chips() -> None:
     # A credit is set whole, whatever the register's credit line says: the finder, then
     # what the result builds on, quiet.
-    credit = overview_sections.credit_cell("wand125 after Daniel, Tokoharu, Levy, Stromquist")
+    credit = overview_sections.credit_cell("Hosono after Daniel, Tokoharu, Levy, Stromquist")
     assert credit == (
-        'wand125 <span class="site-cell-quiet">after Daniel, Tokoharu, Levy, Stromquist</span>'
+        'Hosono <span class="site-cell-quiet">after Daniel, Tokoharu, Levy, Stromquist</span>'
     )
     assert overview_sections.credit_cell("Levy") == "Levy"
     assert overview_sections.credit_cell("Levy after Burns, Massaccesi") == (
@@ -3905,7 +3905,7 @@ def _template_paragraphs(section: str) -> list[str]:
 #: record reports them (the owner, 2026-10-03: "make the examples current"), each
 #: written as the record writes it, with $\le$ and $\ge$. The lower is called reported,
 #: the field `test_the_intros_examples_are_the_records` compares it with: when this was
-#: written wand125's certificate was not yet replayed here and stood at V0/C0, so "proved"
+#: written Hosono's certificate was not yet replayed here and stood at V0/C0, so "proved"
 #: alone would have put a reported bound in a verified one's place. Its 6 October
 #: certificate (T-108) is replayed here at V3/C3, so both lanes now hold 5.81, and the
 #: word stays the owner's.
@@ -3928,7 +3928,7 @@ PROBLEM_STATEMENT = (
 
 def test_the_intros_examples_are_the_records() -> None:
     """The introduction's two examples are case 29's current bounds: its lower example
-    is the reported lower bound, wand125's 5.79 of 2026-09-28 when this was written,
+    is the reported lower bound, Hosono's 5.79 of 2026-09-28 when this was written,
     its 2319/400 = 5.7975 of 1 October (T-074) after it, and its 581/100 = 5.81 of 6
     October (T-108) since, and its upper example is the reported upper bound rounded
     up, which also stands at or above the verified ceiling, so it is itself a proved
@@ -4826,7 +4826,7 @@ def test_grouping_agrees_with_readmes_relation(
     overview: overview_data.Overview, records: render_recent_results.Records
 ) -> None:
     """The register's groups, which `RESULTS.md` prints and no page of the site does, are
-    `source_lineage`'s, the lineage `render_recent_results.relation` names, so wand125's
+    `source_lineage`'s, the lineage `render_recent_results.relation` names, so Hosono's
     T-048, T-054 and T-055 read as crediting this project second-hand in both."""
     titles = dict(OTHERS)
     for title, members in overview.groups[1:]:
@@ -5863,7 +5863,7 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: bytes with the new-result stars, and the ceiling is 2,500,000 again, without the
 #: fetch think-yozo planned for the second drawings. The results' short rows took both
 #: past it on 6 October: 2,548,891 and 1,200,769 bytes with the six results of that
-#: morning, and 2,680,770 and 1,332,411 with wand125's ten check2 results after them,
+#: morning, and 2,680,770 and 1,332,411 with Hosono's ten check2 results after them,
 #: about 13 KB a result on each page. Each ceiling keeps about a hundred kilobytes above
 #: the second measurement. Merged with main's T-101 the same day, as T-102 to T-111, they
 #: measured 2,727,614 and 1,379,239 bytes, above both earlier ceilings and about 70 KB

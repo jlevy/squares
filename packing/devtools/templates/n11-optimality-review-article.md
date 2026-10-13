@@ -171,7 +171,7 @@ For the pattern that survives, it proves where every square must be, then applie
 quantitative local theorem at the exact endpoint.
 The earlier bounds are antecedents of the method, not premises of the proof: the proof
 does not infer equality from a sequence of improving lower bounds, and the separate
-tools that check related certificates, wand125’s row-minimum check of T-037
+tools that check related certificates, Hiroaki Hosono’s row-minimum check of T-037
 ([T-059, in Part II]({{PAPER:n11-threshold-bound-review#what-was-verified-and-what-the-verification-means}}))
 and Tokoharu’s rectangle-density verifier, do not verify this argument.[^tools]
 
@@ -602,7 +602,7 @@ that justification assumes the 1,931 exclusions of the publisher’s original ba
 the cuts are checked only against the 253 cases the baseline leaves.
 Cases 2175 and 2176 are two of the publisher’s 76 prior-family cases, and the only two
 whose accepted certificates carry this premise; it is a premise of those
-certificates.[^premises] wand125 reports a Lean proof of all 76 prior-family cases that
+certificates.[^premises] Hosono reports a Lean proof of all 76 prior-family cases that
 does not use it.[^lean] The four-survivor reduction below assumes these two exclusions
 in turn, so their cuts may not use it; the dependency runs one way.
 Case 1383 requires both sides of a closed center split at $y_{13}=4/3$. Here
@@ -1010,7 +1010,7 @@ arithmetic libraries, runtime and executing system.
 Two Lean 4 formalization projects are
 [wand125/n11-optimality-lean](https://github.com/wand125/n11-optimality-lean) and
 [Queuingtheorydotcom/11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized).
-wand125 reports that the 76 prior-family cases and the 173 returned cases are already
+Hosono reports that the 76 prior-family cases and the 173 returned cases are already
 kernel-checked using only Lean’s standard axioms; an independent replay of the 173
 against the 11SquaresFormalized assembly is recorded in
 [an open pull request to that repository](https://github.com/Queuingtheorydotcom/11SquaresFormalized/pull/7),

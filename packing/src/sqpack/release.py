@@ -405,12 +405,12 @@ OPTIMALITY_REVIEW_HISTORY = (
         version="v0.1.4",
         first_published="October 4, 2026",
         result_scope=(
-            "wand125's comment of October 4 is answered: the in-progress Lean 4 "
-            "formalizations are named, with their status as wand125 reports it; the root "
+            "Hiroaki Hosono's comment of October 4 is answered: the in-progress Lean 4 "
+            "formalizations are named, with their status as Hosono reports it; the root "
             "node completes thirteen further updates, not fourteen; Figure 8 and the text "
             "agree that the symmetry lemma rests on the exhaustive search; and the "
             "1,931-case premise of cases 2175 and 2176 is stated as a premise of their "
-            "accepted certificates, beside wand125's report of a Lean proof of all 76 "
+            "accepted certificates, beside Hosono's report of a Lean proof of all 76 "
             "prior-family cases that does not use it."
         ),
     ),
@@ -472,7 +472,7 @@ OPTIMALITY_REVIEW_EDITION = " ".join(
 #: prints, by the rule `EXPLAINER_REVISED` follows -- the author date of the last commit
 #: that changed its article, `n11-optimality-review-article.md`, held to git by
 #: `devtools.artifact_dates`. Change it in the commit that changes the article.
-OPTIMALITY_REVIEW_REVISED = "October 12, 2026"
+OPTIMALITY_REVIEW_REVISED = "October 13, 2026"
 
 #: The day the proof the review explains was published by its source, which the review's
 #: "Original proof" date prints. A fact about someone else's work, so it is typed, and
@@ -503,7 +503,7 @@ THRESHOLD_REVIEW_EDITION = " ".join(
 #: When Part II's text last changed, by the rule `OPTIMALITY_REVIEW_REVISED` follows: the
 #: author date of the last commit that changed `n11-threshold-bound-review-article.md`,
 #: held to git by `devtools.artifact_dates`.
-THRESHOLD_REVIEW_REVISED = "October 9, 2026"
+THRESHOLD_REVIEW_REVISED = "October 13, 2026"
 
 #: The day Kleddamag published the proof Part II reviews (v1.0.2 of
 #: 11-squares-certified-bound), which its "Original proof" date prints.

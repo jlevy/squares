@@ -547,7 +547,7 @@ def test_the_chain_on_eleven_squares_says_how_each_result_stands_there(
     overview: overview_data.Overview, bodies: dict[str, str]
 ) -> None:
     """T-060 holds the case, and T-037 and T-047 are superseded. T-047 was the current best
-    at other cases until 2026-10-02, when wand125's replayed rectangle certificates
+    at other cases until 2026-10-02, when Hosono's replayed rectangle certificates
     (T-045, T-070) took the last two it held, n = 26 and 29; superseded everywhere, its
     step draws the chip and has nothing to add about this case."""
     steps = dict(STEP.findall(bodies[SETTLED]))

@@ -669,8 +669,8 @@ project’s native verifier, an interval branch and bound over boxes of centers 
 counts captured sites with directed rounding, never forms the signed expansion, and
 refuses any box it cannot resolve; it certified all 12,028 rows with 136,081,500 boxes,
 none stalled, and a least certified lower bound of exactly
-$\Gamma={{MINIMA_NATIVE_MIN}}$.[^native] T-059 is a computation of another kind:
-wand125’s checker reproduces all 12,028 exact row minima with replayed witnesses, which
+$\Gamma={{MINIMA_NATIVE_MIN}}$.[^native] T-059 is a computation of another kind: Hiroaki
+Hosono’s checker reproduces all 12,028 exact row minima with replayed witnesses, which
 audits the source’s row-scan claim and is not a new proof of the bound.[^t059]
 
 The JavaScript source is not in the archive: no code license was identified for the

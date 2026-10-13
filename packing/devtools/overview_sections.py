@@ -1816,7 +1816,7 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     ),
     (
         "https://github.com/wand125/square-packing",
-        "wand125",
+        "Hiroaki Hosono",
         "Canonical certificate and checker repository; historical source pins remain valid.",
     ),
     (
@@ -1853,12 +1853,12 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     ),
     (
         "https://github.com/wand125/square-packing-bounds",
-        "wand125",
+        "Hiroaki Hosono",
         "Weighted point and rectangle-density lower-bound certificates across many n.",
     ),
     (
         "https://github.com/wand125/valid7-independent-check",
-        "wand125",
+        "Hiroaki Hosono",
         "A second, independent exact checker of Valid7, the finite step of s(k² \u2212 3) = k.",
     ),
     (
@@ -1964,7 +1964,7 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/Guzhou0806/n40-square-packing",
         "Guzhou0806",
-        "A strict lower bound for forty squares, on wand125's density.",
+        "A strict lower bound for forty squares, on Hosono's density.",
     ),
     (
         "https://github.com/DRMacIver/square-packing-research",
