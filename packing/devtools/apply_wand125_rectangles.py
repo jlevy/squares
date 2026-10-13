@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # ruff: noqa: RUF001 -- this module writes register prose, whose typography uses curly
 # apostrophes and the corpus's other non-ASCII marks.
-"""Carry wand125's rectangle-density bounds into the Frontier records.
+"""Carry Hiroaki Hosono's (wand125's) rectangle-density bounds into the Frontier records.
 
 Each retained packet of the source (`devtools.audit_wand125_rectangles.PACKETS`) is one
 `Registration`: its source key and its three evidence entries. The newest registration
@@ -21,10 +21,10 @@ receipts now cover. It is idempotent, and it never lowers a bound.
 
 What it writes: each affected case's ``reported_lower_bound``, ``verified_lower_bound``,
 top-level ``evidence`` and ``resources`` entries, ``source_reviewed`` (never moved
-earlier), and one intake paragraph under the title, ending in wand125's AI-assistance
+earlier), and one intake paragraph under the title, ending in Hosono's AI-assistance
 statement as ``devtools.state_ai_assistance`` words it, and it retires the claims an
 earlier registration's paragraph makes once they stop being current. In ``evidence.yaml``
-it inserts the registration's report entries when they are missing, keeps every wand125
+it inserts the registration's report entries when they are missing, keeps every Hosono
 rectangle entry's scope equal to the cases that cite it, and keeps each replay entry's
 command. Other prose in a promoted
 case can still describe the superseded bound, which ``check_case_prose`` reports, and is
@@ -119,11 +119,15 @@ class Registration:
         The date alone is not enough: other sources' intakes of the same day open with the
         same bold label, and a paragraph this tool did not write is never touched.
         """
-        return f"{self.intake} wand125’s [rectangle-density source]({self.link})"
+        return f"{self.intake} Hosono’s [rectangle-density source]({self.link})"
 
     def wrote(self, paragraph: str) -> bool:
-        """Whether ``paragraph`` is this registration's, however Flowmark wrapped it."""
-        return " ".join(paragraph.split()).startswith(self.head)
+        """Whether ``paragraph`` is this registration's, however Flowmark wrapped it.
+
+        A record names Hosono in full at its first mention, which may be this paragraph.
+        """
+        words = " ".join(paragraph.split()).replace("Hiroaki Hosono’s", "Hosono’s", 1)
+        return words.startswith(self.head)
 
     @property
     def ids(self) -> frozenset[str]:
@@ -559,7 +563,7 @@ def _held_by_us(field: Mapping[str, Any] | None) -> bool:
 def _superseded_by_record(field: Mapping[str, Any] | None, candidate: Fraction) -> bool:
     """Whether the field already holds a bound this one must not replace.
 
-    Another source's bound at least as high stays; so does any higher wand125 bound, so
+    Another source's bound at least as high stays; so does any higher Hosono bound, so
     a registration never lowers what a later one wrote.
     """
     if field is None:
@@ -647,7 +651,7 @@ def reported_field(n: int, bound: Bound) -> dict[str, Any]:
         "and accepted there by Tokoharu's unchanged interval checker. The verified lane "
         "records the local replay separately."
         if direct
-        else f"wand125's n={bound.source} rectangle-density certificate has mass below {n}, "
+        else f"Hosono's n={bound.source} rectangle-density certificate has mass below {n}, "
         f"so monotonicity carries its bound to n={n}. The verified lane records the local "
         "replay separately."
     )
@@ -655,7 +659,7 @@ def reported_field(n: int, bound: Bound) -> dict[str, Any]:
         "value": _decimal(bound.side),
         "exact_form": str(bound.side),
         "kind": "counting" if direct else "monotonicity",
-        "proved_by": ["wand125"],
+        "proved_by": ["Hosono"],
         "proved_year": 2026,
         "source_key": registration.source_key,
         "note": note,
@@ -755,8 +759,8 @@ def intake(plan: Plan, registration: Registration, payload: Mapping[str, Any]) -
     verified = _verified_sentence(plan, registration)
     if verified is not None:
         sentences.append(verified)
-    # The first paragraph describing wand125 is where `devtools.state_ai_assistance` says
-    # what wand125's README says of AI assistance; this paragraph is that one.
+    # The first paragraph describing Hosono is where `devtools.state_ai_assistance` says
+    # what Hosono's README says of AI assistance; this paragraph is that one.
     sentences.append(WAND125.sentence)
     return " ".join(sentences)
 
@@ -778,11 +782,11 @@ def _retire_selected_report(rest: str, plan: Plan) -> str:
     def reported_only(match: re.Match[str]) -> str:
         if plan.verified is not None:
             return (
-                "wand125’s rectangle-density certificate above has since replaced it in both "
+                "Hosono’s rectangle-density certificate above has since replaced it in both "
                 "the reported and the verified field."
             )
         return (
-            "wand125’s rectangle-density certificate above has since replaced it in the "
+            "Hosono’s rectangle-density certificate above has since replaced it in the "
             "reported field; the independently verified lower bound remains "
             f"{match['verified']}."
         )
@@ -795,9 +799,9 @@ def _retire_nagamochi_prose(rest: str, plan: Plan, upper: str) -> str:
     assert plan.verified is not None
     side, source = plan.verified.side, plan.verified.source
     origin = (
-        "wand125’s rectangle-density certificate"
+        "Hosono’s rectangle-density certificate"
         if source == plan.n
-        else f"wand125’s n{source} rectangle-density certificate by monotonicity"
+        else f"Hosono’s n{source} rectangle-density certificate by monotonicity"
     )
 
     def summary(match: re.Match[str]) -> str:

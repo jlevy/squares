@@ -1361,8 +1361,8 @@ def evidence_entry(
         *folded(
             "theorem",
             "The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; "
-            "Formats M and L, lemma D for format M's per-bin domain), applied to wand125's "
-            f"{case.certificate}: no {case.n} unit squares pack in a square of side {side}, "
+            "Formats M and L, lemma D for format M's per-bin domain), applied to Hiroaki "
+            f"Hosono's {case.certificate}: no {case.n} unit squares pack in a square of side {side}, "
             f"so s({case.n}) >= {side}.",
             indent=6,
         ),
@@ -1584,7 +1584,7 @@ def rectangle_evidence_entry(
         *folded(
             "theorem",
             "The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; "
-            "format T, with Tokoharu's centre domain), applied to wand125's "
+            "format T, with Tokoharu's centre domain), applied to Hiroaki Hosono's "
             f"{case.certificate}: no {case.n} unit squares pack in a square of side {side}, "
             f"so s({case.n}) >= {side}.",
             indent=6,
