@@ -5,12 +5,14 @@ title: Retain sq17-lean at its pinned head with the v1.0.0 release digests, bibl
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 parent_id: is-01m4v5ne8b1dq1gyybx5mj689d
+child_order_hints:
+  - is-01m4v820w6s3x2177qqrfsxcc3
 created_at: 2026-10-13T17:41:24.566Z
-updated_at: 2026-10-13T18:09:07.701Z
+updated_at: 2026-10-13T18:23:07.142Z
 ---
 Stage 2 retention lane for think-hcqr: packet under packing/resources/web/, bibliography key, resources README, Oscar Fitzharding's person record, announcement receipt.
 
