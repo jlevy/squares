@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-12'
+last_reviewed: '2026-10-13'
 results:
   - id: T-001
     kind: lower-bound
@@ -3262,7 +3262,7 @@ results:
     registered: '2026-09-29'
     headline: "`s(11) > 31/8 = 3.875`"
     claim: >-
-      s(11) > 31/8 = 3.875, by Kleddamag's 11-squares-certified-bound v1.0.2 release of 22
+      s(11) > 31/8 = 3.875, by Marc Leonard Overbeck's 11-squares-certified-bound v1.0.2 release of 22
       September 2026. It raised the case's verified lower bound by 0.048002 over T-033 and
       leaves 0.0020836 to Trump's 3.8770835900.
 
@@ -3278,7 +3278,7 @@ results:
       branch and bound (devtools.verify_kleddamag_n11_native), which accepted all 12,028 rows
       with no stalled box.
 
-      Kleddamag,
+      Overbeck,
       [11-squares-certified-bound](https://github.com/Kleddamag/11-squares-certified-bound/tree/6a733f339395c3514f2ab63d8c4aa64cf63c0b5a),
       building on Squares Project (Joshua Levy): the release's ATTRIBUTION.md says the work
       builds on this project and that global-certificate.json was developed from T-026's
@@ -3293,7 +3293,7 @@ results:
         central open case of this project, and T-019 gave not being one as its first reason
         for staying below S5. The bound closes about 96 per cent of the gap the register
         held, from 0.0501 to 0.0021 below Trump's packing, and it is this project's T-026
-        certificate adopted and carried further outside it. The mathematics is Kleddamag's;
+        certificate adopted and carried further outside it. The mathematics is Overbeck's;
         this repository's part is the replay and the method-distinct second decision.
       scored: '2026-09-29'
       by: session-161 (repository; draft)
@@ -3354,7 +3354,7 @@ results:
     registered: '2026-09-29'
     headline: "`s(17) > 461300/99853 = 4.6197910929…`"
     claim: >-
-      s(17) > 461300/99853 = 4.6197910929..., by Kleddamag's 17-squares-certified-bound v1.0.0
+      s(17) > 461300/99853 = 4.6197910929..., by Marc Leonard Overbeck's 17-squares-certified-bound v1.0.0
       release of 21 September 2026. It raised the verified bound by 0.0067450 over
       Guzhou0806's R012 (T-032).
 
@@ -3369,11 +3369,12 @@ results:
       a Python and a JavaScript event-cell sweep, which agreed on all 509 histogram bins; they
       are one method.
 
-      Kleddamag,
+      Overbeck,
       [17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound/tree/a499e2c739ce7853fa04c8bcdc85caf1c2b01b37),
       in the lineage the release names itself: Mira, Guzhou0806 / N17 project, and this
-      repository's threshold-atom work. Its AUTHORS.md says the project was directed by
-      Kleddamag with the research, implementation and verification done by OpenAI Codex.
+      repository's threshold-atom work. Its AUTHORS.md names Overbeck as Kleddamag and
+      says he directed the project, with the research, implementation and verification
+      done by OpenAI Codex.
     scope: {n_values: [17]}
     verification: V3
     confirmation: C3
@@ -3444,8 +3445,8 @@ results:
 
       Guzhou0806 / N17 project,
       [n17-square-packing](https://github.com/Guzhou0806/n17-square-packing/tree/3bf1095c68a28fb9b2750fb0bc99edd5c22b7a61/certificates/R052),
-      on Kleddamag's v1.0.0 mixed point/threshold parent-core architecture (T-038). The
-      release names itself as produced "with AI assistance" and credits Kleddamag, Mira-acc
+      on Marc Leonard Overbeck's v1.0.0 mixed point/threshold parent-core architecture (T-038). The
+      release names itself as produced "with AI assistance" and credits Overbeck, Mira-acc
       and this repository's threshold lineage.
     scope: {n_values: [17]}
     verification: V3
@@ -3490,7 +3491,7 @@ results:
       certificate's 8,937 atoms, 9,261 sites and 44,685 member slots, so that its complete
       coverage decision can run; its four-row sizing run is not a decision. Rung 5 needs a
       proof-assistant formalization reviewed by human experts.
-      Superseded as the verified lower bound on 2026-09-27 by Kleddamag's v1.1.0 (T-040);
+      Superseded as the verified lower bound on 2026-09-27 by Overbeck's v1.1.0 (T-040);
       stays true as stated.
 
   - id: T-040
@@ -3498,7 +3499,7 @@ results:
     registered: '2026-09-29'
     headline: "`s(17) > 232001/50000 = 4.64002`"
     claim: >-
-      s(17) > 232001/50000 = 4.64002, by Kleddamag's 17-squares-certified-bound v1.1.0 release
+      s(17) > 232001/50000 = 4.64002, by Marc Leonard Overbeck's 17-squares-certified-bound v1.1.0 release
       of 26 September 2026. It raised the verified bound by exactly 1/50 over R052 (T-039).
 
       It widens v1.0.0's charge with weighted-threshold features (coefficients 2, 1, 1, 1 at
@@ -3512,11 +3513,11 @@ results:
       Python and JavaScript BigInt checkers over every interval; they agree with each other
       and with all three published ledger pairs, and they are one event-cell method.
 
-      Kleddamag,
+      Overbeck,
       [17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound/tree/13821ddfa24133a8d796648383464574404d5fa0/bounds/4.640020),
       building on Squares Project (Joshua Levy), Mira and Guzhou0806, as its ATTRIBUTION.md
-      states. Its AUTHORS.md says the work was produced with AI agents (OpenAI Codex) under
-      Kleddamag's direction.
+      states. Its AUTHORS.md names Overbeck as Kleddamag and says the work was produced
+      with AI agents (OpenAI Codex) under his direction.
     scope: {n_values: [17]}
     verification: V3
     confirmation: C3
@@ -3562,7 +3563,7 @@ results:
       the adversarial control is the source's controls.py, replayed here (eight corrupted
       certificates rejected by both checkers). Rung 5 needs a proof-assistant formalization
       reviewed by human experts.
-      Superseded as the verified lower bound on 2026-09-27 by Kleddamag's 466001/100000
+      Superseded as the verified lower bound on 2026-09-27 by Overbeck's 466001/100000
       (T-041); stays true as stated.
 
   - id: T-041
@@ -3570,7 +3571,7 @@ results:
     registered: '2026-09-29'
     headline: "`s(17) > 466001/100000 = 4.66001`"
     claim: >-
-      s(17) > 466001/100000 = 4.66001, by the bounds/4.66001/ package of Kleddamag's
+      s(17) > 466001/100000 = 4.66001, by the bounds/4.66001/ package of Marc Leonard Overbeck's
       17-squares-certified-bound, published untagged on 27 September 2026. It raised the
       verified bound by exactly 1999/100000 over T-040.
 
@@ -3585,10 +3586,11 @@ results:
       BigInt checkers, which agree on every interval and with both published ledger pairs;
       they are one event-cell method.
 
-      Kleddamag,
+      Overbeck,
       [17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound/tree/57519bb74085157cb7047ae94c599bce4a006430/bounds/4.66001),
       building on Squares Project (Joshua Levy), Mira and Guzhou0806, as its ATTRIBUTION.md
-      states, produced with AI agents (OpenAI Codex) under Kleddamag's direction.
+      states. Its AUTHORS.md names Overbeck as Kleddamag and says the work was produced
+      with AI agents (OpenAI Codex) under his direction.
     scope: {n_values: [17]}
     verification: V3
     confirmation: C3
@@ -3646,19 +3648,19 @@ results:
       September 2026. R068 (T-043) superseded it the same day, so it never held the case's
       verified field.
 
-      The certificate is Kleddamag's 4.66001 charge (T-041) unchanged, budget 17000402008
+      The certificate is Marc Leonard Overbeck's 4.66001 charge (T-041) unchanged, budget 17000402008
       units of 10^-9, at the larger parent side 32950/33287, with strict cores rebuilt over
       2,808 parent-angle intervals whose endpoints contain every 4.66001 endpoint. Seventeen
       cores at the minimum core charge 1000026844 exceed the budget by 54340.
 
       It was replayed here in full on 29 September 2026 by the source's paired launcher,
-      Guzhou0806's C++ checker with Kleddamag's Node BigInt checker, and
+      Guzhou0806's C++ checker with Overbeck's Node BigInt checker, and
       devtools.audit_guzhou_r068 found the fresh and published ledgers identical on all 2,808
       rows; the two checkers are one event-cell method.
 
       Guzhou0806 / N17 project,
       [n17-square-packing](https://github.com/Guzhou0806/n17-square-packing/tree/d4e2c287408b416683f7d1b7f19e69fb7c592d73/certificates/R067-4.66018),
-      on Kleddamag's charge. The release names itself as made "with AI assistance".
+      on Overbeck's charge. The release names itself as made "with AI assistance".
     scope: {n_values: [17]}
     verification: V3
     confirmation: C3
@@ -3705,7 +3707,7 @@ results:
     headline: "`s(17) > 116511/25000 = 4.66044`"
     claim: >-
       s(17) > 116511/25000 = 4.66044, by Guzhou0806 / N17 project's R068 release of 28
-      September 2026, continuing Kleddamag's public 4.66001 charge (T-041). It raised the
+      September 2026, continuing Marc Leonard Overbeck's public 4.66001 charge (T-041). It raised the
       verified bound by exactly 43/100000 over T-041 and leaves 0.0150901 to Bidwell's
       4.67553009.
 
@@ -3717,14 +3719,14 @@ results:
 
       It was replayed here in full on 28 and 29 September 2026, the first local validation on
       record: the package says its publisher ran no local validation and did not observe its
-      CI. Guzhou0806's own C++ checker and Kleddamag's Node BigInt checker ran over every
+      CI. Guzhou0806's own C++ checker and Overbeck's Node BigInt checker ran over every
       interval, and devtools.audit_guzhou_r068 found the fresh and published ledgers identical
       row for row; the two checkers are one event-cell method.
 
       Guzhou0806 / N17 project,
       [n17-square-packing](https://github.com/Guzhou0806/n17-square-packing/tree/815b16261f852e389968513eec94b4b9e5b3206d/certificates/R068-C010).
-      The package credits Kleddamag for the charge, the proof and the Node BigInt checker
-      (Kleddamag building on Squares Project (Joshua Levy), Mira and Guzhou0806), and
+      The package credits Overbeck for the charge, the proof and the Node BigInt checker
+      (Overbeck building on Squares Project (Joshua Levy), Mira and Guzhou0806), and
       discloses AI assistance.
     scope: {n_values: [17]}
     verification: V3
@@ -4162,7 +4164,7 @@ results:
       Superseded as the verified lower bound by Hosono's replayed rectangle certificates
       at n = 27, 28 and 31 on 2026-09-27 (T-045), and at n = 26 and 30 (T-045) and n = 29
       (T-070) on 2026-10-02; at n = 11 it never held the field, being below T-033 and
-      Kleddamag's 31/8 (T-037). Stays true as stated.
+      Marc Leonard Overbeck's 31/8 (T-037). Stays true as stated.
 
   - id: T-048
     kind: lower-bound
@@ -5142,7 +5144,7 @@ results:
     headline: "Reported equality of 12028 n11 row minima reproduced by a complete bound replay"
     claim: >-
       wand125/square-packing-tools reports that its exact general_pose_tree checker reproduces
-      all 12028 per-row core minima of Kleddamag's n11 certificate, release v1.0.2, with
+      all 12028 per-row core minima of Marc Leonard Overbeck's n11 certificate, release v1.0.2, with
       global row minimum 999962528 units and all witnesses replayed. This is the source's
       row-scan equality claim only, not a new proof of the global counting theorem or
       independent rectangle-density coverage.
@@ -5214,7 +5216,7 @@ results:
 
       Ahmed,
       [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c),
-      Astra-assisted work building on Squares Project and Kleddamag. The matching construction
+      Astra-assisted work building on Squares Project and Marc Leonard Overbeck. The matching construction
       is Trump's.
     scope: {n_values: [11]}
     verification: V3
@@ -5320,7 +5322,7 @@ results:
       [11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) is
       imported (bead think-8spq). Its author, Ahmed, who posts on X as
       @ManassehA06, announced that day that the optimality "has been formalized in lean
-      thanks to Astra and Claude", thanking Joshua Levy, Kleddamag, Hosono (@wand_125), Guzhou0806 and
+      thanks to Astra and Claude", thanking Joshua Levy, Overbeck, Hosono (@wand_125), Guzhou0806 and
       ctjlewis; the retained first post of the thread does not name the repository. Its
       acknowledgements credit Ahmed, EvolvingPrograms and ctjlewis, Hosono (as @wand125),
       Benjamin Gurevitch, Julian-JJ and Guzhou0806.
@@ -5350,7 +5352,7 @@ results:
       Zenodo record of 29 September 2026, reported on jlevy/squares#247. The step over 31/8 is
       exactly 31/7999999992, about 3.9e-9.
 
-      The certificate is Kleddamag's v1.0.2 global-certificate.json (T-037) with thirteen
+      The certificate is Marc Leonard Overbeck's v1.0.2 global-certificate.json (T-037) with thirteen
       threshold-charge orbits raised, which puts the minimum core charge at 1000047559 on
       every one of the 12,028 parent-angle intervals, and with the parent and every core side
       scaled by 999999999/1000000000, so that the container over the parent is (31/8) times
@@ -5358,16 +5360,16 @@ results:
       integer units.
 
       One more step of the scale factor, 1 - 2*10^-9, already fails at row 615, so these data
-      admit at most about twice the step. Scaling Kleddamag's certificate alone already passes
+      admit at most about twice the step. Scaling Overbeck's certificate alone already passes
       a full sweep, so the reweighting enlarges the surplus but is not needed for the bound.
 
-      It was replayed here in full by the authors' two verifiers and by Kleddamag's own Python
+      It was replayed here in full by the authors' two verifiers and by Overbeck's own Python
       and JavaScript event-cell sweeps, and decided a second time by this repository's native
       parent-core interval branch and bound, which accepted all 12,028 rows with no stalled
       box.
 
       Ke Wang and Can Li, [Zenodo record 23038546](https://doi.org/10.5281/zenodo.23038546),
-      building on Kleddamag and this project. The record makes no statement about AI
+      building on Overbeck and this project. The record makes no statement about AI
       assistance.
     scope: {n_values: [11]}
     verification: V3
@@ -5393,7 +5395,7 @@ results:
       evidence entries whose methods differ both passed on the retained certificate, which is
       C3 with the two methods shown beside the rung: the event-cell sweeps (exact-algebraic:
       the authors' primary,
-      Kleddamag's Python and JavaScript, and the authors' re-implementation are one
+      Overbeck's Python and JavaScript, and the authors' re-implementation are one
       method) and this repository's directed-rounding interval coverage of every row
       (interval-certified). Both rest on the certificate and on T-037's counting and
       transfer theorem, whose hypotheses were re-checked at the scaled sides.
@@ -5421,8 +5423,8 @@ results:
       and a human oversight record; the 2026-09-30 review is a same-project read and is not
       recorded in this entry's reviews. Rung 5 needs a proof-assistant formalization of the
       transfer theorem and the counting argument, reviewed by human experts. The
-      reweighting is not needed for the bound: Kleddamag's own weights at the scaled sides
-      pass Kleddamag's full event-cell sweep with the same minimum 999962528 and surplus
+      reweighting is not needed for the bound: Overbeck's own weights at the scaled sides
+      pass Overbeck's full event-cell sweep with the same minimum 999962528 and surplus
       107864 (the packet's scale-only receipt), so the scaling alone carries the step and
       the thirteen raised orbits only enlarge the surplus to 428125.
     notes: >-
@@ -5829,7 +5831,7 @@ results:
       of at most that side. The figure is a rational outward ceiling, not the exact side of
       the packing.
 
-      Kleddamag's release of 21 September 2026 carries John Bidwell's 1998 construction
+      Marc Leonard Overbeck's release of 21 September 2026 carries John Bidwell's 1998 construction
       forward as an exact rational witness, s(17) <= 4675530093604551/10^15, which two exact
       implementations here and the source's own checker accept: 17 unit squares, 68 vertices
       contained, 136 pairs separated.
@@ -5838,16 +5840,16 @@ results:
       chart: the root exists and is unique in a frozen rational box, and all 68 wall and 136
       pair obligations hold there, 36 as exact identities and 168 by rational interval
       bounds, and an independent audit reconstructs every interval record. This lowers
-      Kleddamag's rational ceiling in the seventeenth decimal.
+      Overbeck's rational ceiling in the seventeenth decimal.
 
       The ceiling agrees with Bidwell's record in the Kingbird catalogue at the catalogue's
       printed precision. No identity with the catalogue's degree-18 polynomial is proved, no
       new packing is claimed, and optimality is not claimed.
 
-      Kleddamag,
+      Overbeck,
       [Kleddamag/17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound),
-      for the rational witness of Bidwell's packing; its AUTHORS.md says the work was
-      produced with AI agents under Kleddamag's direction.
+      for the rational witness of Bidwell's packing; its AUTHORS.md names Overbeck as
+      Kleddamag and says the work was produced with AI agents under his direction.
     scope: {n_values: [17]}
     verification: V3
     confirmation: C3
@@ -5865,7 +5867,7 @@ results:
       source_keys: ['[Kleddamag n17 certified bound]']
       published: '2026-09-21'
     composition: >-
-      Two parts, both V3/C3. Kleddamag's rational witness is E-n017-kleddamag-rational-upper,
+      Two parts, both V3/C3. Overbeck's rational witness is E-n017-kleddamag-rational-upper,
       replayed here exactly. The registered ceiling is E-n017-certified-endpoint, derived
       here from that witness and audited here; its accepted root proof and its reviewed
       symbolic identities are stated premises of the audit. The second part sets the bound.
@@ -9212,15 +9214,15 @@ results:
       It was replayed here in full on 5 October 2026, the first replay of it outside its
       source: the source retains a completion summary of its own run and says the row
       records are missing, and its GitHub Actions replay passed unobserved by its publisher.
-      The source's run_public.js ran Guzhou0806's C++ checker and Kleddamag's Node BigInt
+      The source's run_public.js ran Guzhou0806's C++ checker and Marc Leonard Overbeck's Node BigInt
       checker over every interval, and devtools.audit_guzhou_r071 found the two fresh
       ledgers identical row for row, every row at 1000026844; the two checkers are T-043's
       byte for byte and one event-cell method. Both refuse two mutated certificates.
 
       Guzhou0806 / N17 project,
       [n17-square-packing](https://github.com/Guzhou0806/n17-square-packing/tree/8c11f6962506940c5de67a9fa73b3d1e2e151196/certificates/R071-C029),
-      on R068's continuation of Kleddamag's 4.66001 charge. The package credits Kleddamag
-      for the 4.66001 framework, proof and BigInt checker (Kleddamag building on Squares
+      on R068's continuation of Overbeck's 4.66001 charge. The package credits Overbeck
+      for the 4.66001 framework, proof and BigInt checker (Overbeck building on Squares
       Project (Joshua Levy), Mira and Guzhou0806), and discloses AI assistance.
     scope: {n_values: [17]}
     verification: V3
@@ -17192,3 +17194,260 @@ results:
           lineage measured where the record retains the parent.
         verdict: accepted
         covers: [T-152]
+
+  - id: T-153
+    kind: optimality
+    registered: '2026-10-12'
+    headline: "Candidate proof that Bidwell's 1998 packing is optimal, `s(17) = 4.67553009360455…`"
+    claim: >-
+      Marc Leonard Overbeck (Kleddamag) claims, as a candidate proof, that `s(17) = L =
+      4.67553009360455095163…`, the side of John Bidwell's 1998 packing of seventeen unit
+      squares, with the squares closed, independently rotated and allowed to touch.
+
+      His STATEMENT.md defines `F(t,b)=t-3t^2-t^3-t^4+(1-t-t^4+t^5)b+(-3t+t^2-t^3-t^4)b^2` and
+      `G(t,b)=-2t^3-2t^4+(-1+3t-4t^2+t^4+t^5)b+(4-2t-2t^2+2t^3-2t^4)b^2+(-1-5t+4t^2+t^4+t^5)b^3+(2t+2t^2)b^4`,
+      takes `t_0` and `b_0` to 60 places.
+
+      It states, its TeX written out: "There exists exactly one simultaneous real zero
+      `(t*, b*)` in the isolating rectangle `[t0 - 10^-12, t0 + 10^-12] x [b0 - 10^-12, b0 +
+      10^-12]`. Set `L = (6+4t*)/(1+2t*-t*^2)`; its denominator is positive and
+      `4.67553009360455095163 < L < 4.67553009360455095164`. There exists a packing of
+      seventeen unit squares at side `L`, and for every `S >= 0`, existence of such a packing
+      at side `S` implies `L <= S`. Uniqueness of an optimal packing is not claimed."
+
+      The claim is conditional. STATEMENT_STATUS.md says to read it as holding "if the 210
+      obligations of `OBLIGATIONS.json` hold", 15 of them mathematical premises, and calls it
+      "the claim of a candidate proof, not an established theorem". Its five steps are the
+      upper bound; capture at side at most 4675531/10^6 by 98 weighted counting certificates,
+      leaving 11 cases; admission of each case into one of 11 regions; 13 tree certificates,
+      by which ten regions hold no packing below L and the eleventh only packings in a tube
+      around the known one; and a rigidity step, 17 exact rounds and a contraction of ratio
+      159201934153319/200000000000000.
+
+      Its audit was by AI sessions; Guzhou0806 read the
+      premises in an earlier state and ran a checker of his own on two of the 13 trees, and
+      nobody outside has verified the whole.
+
+      Here the argument has been read, with no mathematical defect found in what was read,
+      and parts of the computation have been run, all agreeing with the source: the author's
+      check.py; 34 capture rows and three trees, reproduced with the producer's code; 34
+      capture rows decided again by an independent implementation written from the proof
+      text; and the root, isolated independently. The complete capture recomputation and ten
+      trees have not been run. F, G, the rectangle and the side map are this repository's
+      H-255 chart, so L is the side of the certified endpoint that holds the case's verified
+      upper bound.
+
+      Overbeck,
+      [the-seventeenth-square-candidate](https://github.com/Kleddamag/the-seventeenth-square-candidate/tree/653b9589d0f8a152f01adc56b1d48ba53d49abc3),
+      12 October 2026, building on Squares Project (Joshua Levy), Ahmed's 11SquaresOptimal,
+      Mira, Guzhou0806's N17 project and Muhammad Maaz, as its CREDITS.md states. Its README
+      says: "The mathematics, the engines, the certificates, the checkers, the reviews and the
+      text were produced by AI systems under his direction and to his instructions: Codex
+      (OpenAI) and Claude (Anthropic). They are named and are not authors", and "Within the
+      project no human has read the mathematics."
+    scope: {n_values: [17]}
+    verification: V0
+    confirmation: C1
+    significance:
+      score: 5
+      rationale: >-
+        Scored as a claim, as T-060 was on 29 September while unverified, by the rubric's
+        anchor, movement on a central open case. n = 17 is, with n = 12, one of the two open
+        cases below n = 18; it is the case this project's own lane has worked longest, and
+        the one the owner gave priority on 12 October. The claim settles it exactly at Bidwell's 1998 side,
+        closing the whole 0.01508734360455 gap between the verified floor 4.66044275 and the
+        certified ceiling, where T-093's step was 2.75e-6. The method composes this project's
+        charge and local-isolation recipes with Ahmed's proof shape; that lineage is the
+        credit line's business, not the score's. Significance is separate from whether this
+        candidate proof is correct.
+      scored: '2026-10-12'
+      by: >-
+        Owner priority of 12 October and
+        docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md, section 7
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Overbeck n17 candidate 2026]']
+      published: '2026-10-12'
+    evidence: [E-n017-overbeck-optimality-candidate-report]
+    composition: >-
+      One cited entry, the source's report, which claims the exact value and carries the
+      review of 12 October as its external_review; the lower half sets both rungs. The upper
+      half, a packing at side L, is the certified endpoint T-065 holds
+      (E-n017-certified-endpoint), V3/C3 here and independent of the source; the statement's
+      F, G, rectangle and side map are that chart, which
+      E-n017-overbeck-statement-root-independent decides again. Neither is cited, since
+      citing the first would make this result hold the case's verified upper bound in
+      T-065's place.
+
+      The lower half rests on five steps, and the capture step sets the minimum. Its 98
+      statements, 1,728,000 rows per checker, are the source's reported executions: 34 rows
+      of 21 statements were reproduced with the producer's code
+      (E-n017-overbeck-capture-sample-replay), 34 rows of six statements were decided again
+      by an independent implementation (E-n017-overbeck-capture-independent-sample), and a
+      sample decides no statement whole. Of the 13 trees, three were reproduced with the
+      producer's code (E-n017-overbeck-tree-sample-replay) and ten were not run.
+
+      The rigidity stage's finite rounds and contraction ran in the author's check.py
+      (E-n017-overbeck-candidate-check-py-replay), which recomputes no capture row and no
+      tree. These runs are evidence on the case record and are not cited here: each is a
+      machine-shaped replay that passed on the part it ran, so citing them would make the
+      checker derive a higher rung from parts, which this note would then have to set
+      aside, as T-081's does; the case record cites them instead.
+
+      By epistemics.md's predicates: V3 needs, for every load-bearing part, a published or
+      audited proof or a machine certificate whose replay passed, and the capture step and
+      ten trees have neither, since a partial replay of the producer's computation is not a
+      full replay and the source calls its proof a candidate. No numerical method (V1) or
+      unavailable proof (V2) fits, so the result stands at V0. C3 would need
+      confirming-origin machine evidence with a passing replay for every load-bearing part,
+      and the same parts lack it; C2 needs a method that yields no certificate, which this
+      is not. C1's predicate holds: a qualifying, dated read with its reviewer and note.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, claude-fable-5-1, tbd-strong tier, reasoning xhigh), the
+          mathematical-review lane K2 of the #557 intake, prompted separately from the
+          retention lane K1 and the replay lane K3, sharing no context with either
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-12'
+        scope: >-
+          The statement and its root isolation; each of the five steps with its premises,
+          obligations, computations and trust boundary; the three places the author asks to
+          be read hardest (the class-row lemma, the root-admission geometry with distinctness
+          and the seams, and the hand-overs into the rigidity theorem); the fifteen premises;
+          what each replay would establish; and the record's rungs and significance, at
+          653b9589d. It ran no checker, and did not read the normalized 52-row gate of
+          G20S_PHYSICAL, the tree and capture checkers' code, or any certificate.
+        verdict: accepted
+        covers: [T-153]
+      - path: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md
+        kind: adversarial
+        reviewer: >-
+          an AI agent, the second adversarial review lane of the #557 intake (bead
+          think-4j3n), model claude-opus-5-5, tbd-strong-max tier, reasoning setting max,
+          prompted separately from the first review lane and blind to its document until its
+          own findings were written
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-13'
+        scope: >-
+          The normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110) for every core
+          radius up to 1/5000, re-derived with this review's own code: the root by a
+          Krawczyk test, the 52 base-gap identities by a Groebner basis, the audit of all
+          152 options, and an independent row builder that implies every stored row and
+          carries the B6 prefix, the stop cuts and the five stopped rounds to a ratio of
+          0.79202. Also the tree checkers' specification in full and the Python tree
+          checker at every step that decides acceptance; the capture engine's core, with
+          all 98 budgets recomputed and the 9,000 rows of FRAME_0917 re-decided; the JQ
+          certificate as data; the root admission, target separation and capacity, coarse
+          quartics and stop cuts recomputed exactly; and the upper construction in
+          interval arithmetic, at 653b9589d. It ran no checker of the edition, replayed no
+          tree or capture sweep, did not re-derive the seventeen finite rounds, and did
+          not read the 84 selected clauses, the written frame, KEY_W, C7/C8 and
+          wall-partition premises, the coarse regions' dimensions, verify_classes_wb.js
+          or exact_restricted.py.
+        verdict: accepted
+        covers: [T-153]
+    artifacts:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/README.md
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/facts/statement.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts/statement-comparison.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts/check-py/stdout.txt
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts/recomputation-price.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/upper-bound.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/capture-sample.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/capture-independent.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/trees.json
+      - docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md
+    next_rung: >-
+      V3 and C3 need every load-bearing part replayed in full, here or by a third party
+      whose replay is retained here, the first review's section 5:
+      the author's check.py to PASS, done on 12 October; all 98 capture statements, every
+      row, with at least one of the producer's two capture checkers, compared row for row
+      with the stored receipts; all 13 trees with at least one frozen checker and
+      h_report30.py, three of them done; and one mutated-input control per kind, refused.
+      That would be reproduction with the producer's code. An independent implementation of
+      the capture sweep, begun on 34 rows, and of the tree checker would be an attribute
+      beside the rung.
+
+      V4 and C4 need, on top of V3 and C3, the owner's oversight record naming
+      trust-boundary, certificate-meaning and ai-findings. The second adversarial AI review
+      they also need, by a distinct reviewer whose verdict accepts and who reads the
+      normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110), is on file: the review of 13
+      October read the gate, re-derived it with its own code and accepted, with nine
+      defects, none blocking, for the oversight record to disposition. Rung 5 needs the Lean
+      formalization the source plans and has not started.
+
+      On 13 October the owner held the ten-tree replay and the capture recomputation. Each
+      remaining option, with its price and where it could run, is a bead under think-lqtu.
+    unfinished_confirmations:
+      - what: >-
+          all 98 capture statements recomputed in full with the producer's capture checkers,
+          1,728,000 rows each, compared row for row with the stored receipts, with a
+          mutated-certificate control refused: one of the two unfinished parts of C3, which
+          T-153 reaches only when the ten-tree replay below has passed too, so this item
+          stays listed until both have
+        rung: C3
+        link: think-0at1
+        estimated_cost:
+          cpu_hours: 1273
+          cpu_hours_high: 2347
+          basis: >-
+            The sum over the 1,152 selected slices of each stored output's per-row CPU
+            seconds: 1,273 CPU-hours for the Python checker, the one C3 needs, and 2,347 with
+            the Node checker as well, on the author's Linux x86_64 runners with four workers
+            per checker. Lane K3 measured the Python checker here at 1.08 times the stored
+            CPU per row
+            (packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/capture-sample.json).
+          priced: '2026-10-12'
+      - what: >-
+          the ten trees not yet replayed (JG, JPA_v5, G20S, HW, JPG15m_v5, JPG17p_v5,
+          JPG3m_v5, JPG3p_v5, JPW13 and JPWS_v4) with the producer's two v3.0 checkers and
+          h_report30.py, each report compared with the stored second execution, with a
+          mutated-certificate control refused: the other unfinished part of C3, which T-153
+          reaches only when the capture recomputation above has passed too, so this item
+          stays listed until both have
+        rung: C3
+        link: think-fgmr
+        estimated_cost:
+          cpu_hours: 7.1
+          cpu_hours_high: 21
+          basis: >-
+            The stored second execution of these ten trees took 7.1 CPU-hours on the author's
+            macOS arm64 machine; the three trees replayed here ran up to six times slower in
+            the Node checker on this shared host, about 21 CPU-hours for the ten. JPA_v5's
+            Node run peaked at 7.0 GB resident
+            (packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/trees.json).
+          priced: '2026-10-12'
+    notes: >-
+      Registered on 12 October 2026 by the fast path the owner asked for, as T-060 was on 29
+      September: at S5 before the complete replays, with the verified lanes unchanged. The
+      first review was written before lane K3's receipts and proposed V0/C1; those
+      receipts move no rung, as the composition says, since each replays a part of the
+      producer's computation and not all of it, and the case record and not this entry cites
+      them. V0 is declared, with this note as the ladder
+      asks: the only entry for the whole lower half is the source's report, and the source's
+      own executions and internal audit are retained in the source and not here.
+
+      On 13 October the owner confirmed that n = 17 is recorded as reported proved on this
+      claim, at the rungs its evidence earns, and that its verified status stays open until
+      the complete replay passes.
+
+      The first review lists ten non-blocking defects, among them the ROOT_ADMISSION
+      geometry, written only in the proof text and a script comment (KNOWN_ISSUES.md item
+      1), two routes with different constants for the same step of G20S_PHYSICAL, and file
+      bindings outside the proof packet; its eleven questions for the author are in its
+      section 8. The second lists nine, none blocking, the largest that nothing in the
+      edition rebuilt the normalized model's rows independently of the producer's code,
+      and six questions, the fifth withdrawn by its status addendum of 13 October; its
+      programs and their output are in the packet's review-2/.
+
+      T-093 (R071) keeps the case's verified lower bound, 18641771/4000000; this entry holds
+      the reported one. The edition carries this repository's exp-237 and exp-238
+      certificates and its endpoint checker (THIRD_PARTY.md). Overbeck publishes on GitHub as
+      Kleddamag, the handle under which he published T-037, T-038, T-040, T-041 and T-065,
+      now credited to him by name, and on X as @kleddamag. CREDITS.md lists
+      Hiroaki Hosono's certificates, kernel and verifier as context, not as a premise. Issue #557's
+      title says n=18; the source is n = 17.

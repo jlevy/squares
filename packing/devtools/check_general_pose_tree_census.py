@@ -1,10 +1,10 @@
 """Run and admit the pinned T-059 per-row minimum comparison.
 
 This tool checks one narrow claim: equality between minima computed by the pinned
-source search and the retained Kleddamag row minima.  Its separate direct evaluator
-proves that each reported witness attains that value; it does not independently prove
-global minimality.  A complete row inventory does not verify the angle-folding,
-enclosure, counting-budget, or packing theorem arguments.
+source search and the retained row minima of Overbeck's certificate.  Its separate
+direct evaluator proves that each reported witness attains that value; it does not
+independently prove global minimality.  A complete row inventory does not verify the
+angle-folding, enclosure, counting-budget, or packing theorem arguments.
 
 The ``run`` command snapshots the pinned checker and both inputs before execution,
 uses a wall timeout, checks that those bytes did not change, and tags every emitted

@@ -7,8 +7,9 @@
 The $n = 11$ series:
 
 - [Part I]({{LOWER_BOUNDS_PAPER}}) proves the project’s lower bounds.
-- [Part II]({{THRESHOLD_BOUND_PAPER}}) reviews [Kleddamag](https://x.com/kleddamag)’s
-  certified bound $s(11) > 31/8$ ([T-037](results.html#t-037)).
+- [Part II]({{THRESHOLD_BOUND_PAPER}}) reviews
+  [Marc Leonard Overbeck](https://x.com/kleddamag)’s certified bound $s(11) > 31/8$
+  ([T-037](results.html#t-037)).
 - [Part III]({{OPTIMALITY_PAPER}}) reviews [Mannaseh Ahmed](https://x.com/ManassehA06)’s
   machine-checked proof that Trump’s 1979 packing of eleven squares is optimal
   ([T-060](results.html#t-060), `V3/C3`); the review record is pending.

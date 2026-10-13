@@ -71,7 +71,7 @@ PUT_OPTIMALITY_REVIEW = (
 PUT_METHODS_PAPER = (
     "Put the methods survey beside the other papers, refusing any name already there"
 )
-#: The archived copy of Kleddamag's proof, which both reviews cite.
+#: The archived copy of Overbeck's proof, which both reviews cite.
 KLEDDAMAG = "packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11"
 KLEDDAMAG_README_PATTERN = f"/{KLEDDAMAG}/README.md"
 #: Every methods render input inside the two omitted source trees, including geometry.

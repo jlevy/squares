@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **515** evidence records. **314** are formal; **307** of those were established here.
-- **193** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **521** evidence records. **319** are formal; **312** of those were established here.
+- **194** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **41** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -245,7 +245,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n017-guzhou-r068-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | `V-guzhou-n17-verify-cpp`, `V-kleddamag-n17-verify` |
 | `E-n017-guzhou-r068-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | producer’s code | `V-guzhou-n17-verify-cpp`, `V-kleddamag-n17-verify`, `V-audit-guzhou-r068` |
 | `E-n017-guzhou-r067-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | producer’s code | `V-guzhou-n17-verify-cpp`, `V-kleddamag-n17-verify`, `V-audit-guzhou-r068` |
-| `E-n017-guzhou-r071-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-guzhou-n17-verify-cpp`, `V-kleddamag-n17-verify` |
+| `E-n017-guzhou-r071-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-guzhou-n17-verify-cpp`, `V-kleddamag-n17-verify` |
 | `E-n017-guzhou-r071-source-replay` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | producer’s code | `V-guzhou-n17-verify-cpp`, `V-kleddamag-n17-verify`, `V-audit-guzhou-r071`, `V-replay-guzhou-r071` |
 | `E-n017-kleddamag-4640020-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | `V-kleddamag-n17-verify` |
 | `E-n017-kleddamag-4640020-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | producer’s code | `V-kleddamag-n17-verify` |
@@ -538,13 +538,19 @@ results, it is a statement about what this repository has itself examined.
 | `E-squish-500-exact-feasibility` | 7 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
 | `E-couzo-506-certificate-report` | 2 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
 | `E-couzo-506-exact-feasibility` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
+| `E-n017-overbeck-optimality-candidate-report` | 1 | exact-value | reported | - | elsewhere | informally-verified | previously-published | no code | `V-overbeck-n17-check-py`, `V-overbeck-n17-capture-checkers`, `V-overbeck-n17-tree-checkers` |
+| `E-n017-overbeck-candidate-check-py-replay` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | `V-overbeck-n17-check-py` |
+| `E-n017-overbeck-capture-sample-replay` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | `V-overbeck-n17-capture-checkers` |
+| `E-n017-overbeck-capture-independent-sample` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-k3-n17-capture-row-checker` |
+| `E-n017-overbeck-tree-sample-replay` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | `V-overbeck-n17-tree-checkers` |
+| `E-n017-overbeck-statement-root-independent` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-k3-n17-root-isolation` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 197, verified 314
-- **method**: exact-algebraic 133, interval-certified 165, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 197
-- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 456
-- **relationship to the producer's code**: generator 5, independent-implementation 185, not-applicable 22, same-implementation 280, shared-components 17, unknown-historical 6
+- **assurance**: numerically-checked 4, reported 198, verified 319
+- **method**: exact-algebraic 138, interval-certified 165, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 198
+- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 462
+- **relationship to the producer's code**: generator 5, independent-implementation 187, not-applicable 23, same-implementation 283, shared-components 17, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

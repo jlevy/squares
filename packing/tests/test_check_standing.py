@@ -330,7 +330,7 @@ def test_the_command_fails_on_a_mismatch(
     assert check_standing.main(["--cases"]) == 1
     printed = capsys.readouterr()
     assert "FAIL  T-093 is superseded, yet at n = 17" in printed.err
-    assert "n = 17 lower 18641771/4000000: verified equal, reported equal" in printed.out
+    assert "n = 17 lower 18641771/4000000: verified equal, reported beaten" in printed.out
     assert "n = 17 lower 116511/25000: verified beaten, reported beaten" in printed.out
 
 

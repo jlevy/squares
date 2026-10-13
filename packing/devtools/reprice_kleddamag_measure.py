@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Re-price the external ``n = 17`` Kleddamag measure on its own final catalogue.
+"""Re-price Overbeck's external ``n = 17`` measure on its own final catalogue.
 
 The retained artifact under ``packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/``
 carries a measure whose slack distribution is strongly bimodal: 5,222 of its 7,853

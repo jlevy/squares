@@ -9,7 +9,7 @@ and other low values.
 
 Now several others have obtained results building on this work, including:
 
-- [Kleddamag](https://x.com/kleddamag)’s
+- [Marc Leonard Overbeck](https://x.com/kleddamag)’s
   [certified lower bound of 31/8](papers/n11-threshold-bound-review.html) for eleven
   squares.
 - [Mannaseh Ahmed](https://x.com/ManassehA06)’s
@@ -41,7 +41,8 @@ formalizations of current proofs.
      of n = 11 is T-060, Queuingtheorydotcom's. On 2026-10-05 (think-92ar) the owner
      asked for the three n = 11 papers to be linked here: Kleddamag's T-037, also
      building on this project, joins the sentence with Part II, and "landmark new proof"
-     links Part III. The sentence after it names the
+     links Part III; on 2026-10-12 (think-ugbi) the owner asked for him to be credited
+     by his name, Marc Leonard Overbeck, linked to the same X profile. The sentence after it names the
      top-line results by others (the owner, 2026-10-03, think-nlyc), each checked the
      same way: s(k^2 - 3) = k for every k >= 6 is T-064, and s(21) = 5, s(32) = 6 and
      s(45) = 7 are T-052, T-051 and T-053, all four credited to Daniel after Burns,

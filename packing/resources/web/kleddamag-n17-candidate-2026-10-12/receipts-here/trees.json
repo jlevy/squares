@@ -1,0 +1,368 @@
+{
+ "schema": "k3-receipt/v1",
+ "receipt": "tree-certificates",
+ "issue": "https://github.com/jlevy/squares/issues/557",
+ "source": "https://github.com/Kleddamag/the-seventeenth-square-candidate",
+ "source_pin": "653b9589d",
+ "lane": "K3 (independent checks of #557's computations)",
+ "machine": "Linux x86_64, 4 cores shared with other lanes; CPython 3.14.7 (project), CPython 3.12.3 + numpy 2.0.2 + numba 0.60.0 + SymPy 1.14.0 (isolated scratch venv for the author's code), Node.js v22.22.0",
+ "retention": "no upstream bytes; digests, verdict lines, derived numbers and walls only",
+ "inputs": {
+  "SPEC_v3.0.md": "0a6dfc2ae10ed6f30a21ebe357a6e73dd7355223c521cc67a3f2bdab9549aba0",
+  "wxcheck_v30.py": "cf8db52bfa1cc565d8610bf13b279d1b5da2f84c91ce2854d15a3b0a88cd096c",
+  "wxcheck2_v30.js": "97210adf74a3ebed7cde021a3cb1ff6ea6380d8d2d55540a2a2a1cb17dc27542",
+  "h_report30.py": "0314aa1f8f742cd7156cc490764c8a308663ba87f359e0d8b97fb3d7189950db",
+  "FROZEN_30.json": "6d65a0705c039bbf2f48acabb7f12275871af6b7b8fa308c0671ea6518b30803"
+ },
+ "runs": {
+  "JQ": {
+   "certificate": "local-research/claude-20261002/cloud/analysis/part3_exact/certs/JQ_v1/jQTw.n0.JQ.cert.jsonl.gz",
+   "certificate_sha256": "0b2a8ff8a3f9e12d96291643785fdf29ce1e07889b6f3b5ece8190f961c5482e",
+   "C1": {
+    "exit": 0,
+    "wall_seconds": 61.773,
+    "cpu_user_seconds": 60.18,
+    "max_rss_kib": 340496,
+    "stdout_tail": [
+     "PASS",
+     "nodes=1 accepted=1 infeasible=1 terminal=0 split=0 rounds_evaluated=1 steps=1 terms=48209 zero_steps=1",
+     "root='jQTw.n0.JQ.leaf' packing_sha256=24e296f5995abc9424e2d8d39ea0a8e44953b919430a04f006fa84c56fef45f7 certificate_sha256=0b2a8ff8a3f9e12d96291643785fdf29ce1e07889b6f3b5ece8190f961c5482e",
+     "labels=17 S_floor=4675530093604551/1000000000000000",
+     "gzip input: certificate_sha256 is the hash of the compressed file; uncompressed_sha256=3d4606d12b2305b838adf3f3a91719dc85e4ff91e2e2bc0e38a80ae800069c7b",
+     "checker: wxcheck 3.0 / SPEC 3.0 / wx-cert-2, wx-cert-3; 61.6 s"
+    ]
+   },
+   "C2": {
+    "exit": 0,
+    "wall_seconds": 37.158,
+    "cpu_user_seconds": 36.446,
+    "max_rss_kib": 597376,
+    "stdout_tail": [
+     "labels=17 S_floor=4675530093604551/1000000000000000",
+     "schema=wx-cert-3",
+     "  certificate: <edition>/local-research/claude-20261002/cloud/analysis/part3_exact/certs/JQ_v1/jQTw.n0.JQ.cert.jsonl.gz  (SHA-256 of the checked bytes 3d4606d12b2305b838adf3f3a91719dc85e4ff91e2e2bc0e38a80ae800069c7b)",
+     "  packing file: <edition>/upper-packing-certificate.json  (SHA-256 24e296f5995abc9424e2d8d39ea0a8e44953b919430a04f006fa84c56fef45f7; Sref = 4675530093604551/1000000000000000)",
+     "  nodes 1 (infeasible 1, terminal 0, split 0), rounds evaluated 1 (not evaluated 0), declarations 36, steps 1, terms 48209, tree depth 0",
+     "  time: 36.97 s"
+    ]
+   },
+   "report": {
+    "exit": 0,
+    "wall_seconds": 1.689,
+    "cpu_user_seconds": 1.364,
+    "max_rss_kib": 391780,
+    "stdout_tail": [
+     "ok    root node and region file have exactly the labels of the statement",
+     "ok    root node: side interval ['4675530093604551/1000000000000000', '4675530093604551/1000000000000000'] = the region's ['4675530093604551/1000000000000000', '4675530093604551/1000000000000000']",
+     "ok    root node: box = the region's box, all 68 interval ends (labels that differ: [])",
+     "ok    root node: every arc (centre and both end rotations) = the region's root arc (labels that differ: [])",
+     "      the statement of this record is made for the ROOT REGION of 'bigbox/join/JQ_exact_v1.json' (its entries S, window.box and root_arc)",
+     "RESULT: ACCEPTED"
+    ]
+   }
+  },
+  "JPG17m_v5": {
+   "tree": "JPG17m_v5",
+   "certificate": "local-research/claude-20261002/results/assembly/JPG17m_v5/JPG17m_v5.cert.jsonl.gz",
+   "certificate_sha256": "68613d8407cb5a9f8fdb7142641b3d4237f36f002ba856f6498bff7a66aa1751",
+   "expect": "bigbox/join/EXPECT_JPG17m_v5.json",
+   "expect_sha256": "9c202c8eb04502072e327f0333054f56ca814f005d8812a2daccaf9aa20147be",
+   "C1": {
+    "command": [
+     "<k3-scratch>/venv312/bin/python",
+     "-I",
+     "-B",
+     "<edition>/research/window-extension-20261008/checker/wxcheck_v30.py",
+     "<edition>/_large/local-research/claude-20261002/results/assembly/JPG17m_v5/JPG17m_v5.cert.jsonl.gz",
+     "--json",
+     "<k3-scratch>/work/trees/JPG17m_v5/T_C1.json"
+    ],
+    "cwd": "<k3-scratch>/work/trees/JPG17m_v5",
+    "exit": 0,
+    "started_utc": "2026-10-12T17:13:33Z",
+    "wall_seconds": 1198.2,
+    "cpu_seconds": 1032.6,
+    "max_rss_kib": 452780,
+    "first_line": "PASS",
+    "last_line": "checker: wxcheck 3.0 / SPEC 3.0 / wx-cert-2, wx-cert-3; 1198.0 s"
+   },
+   "C2": {
+    "command": [
+     "/opt/node22/bin/node",
+     "--max-old-space-size=12000",
+     "<edition>/research/window-extension-20261008/checker2/wxcheck2_v30.js",
+     "<edition>/_large/local-research/claude-20261002/results/assembly/JPG17m_v5/JPG17m_v5.cert.jsonl.gz",
+     "--json",
+     "<k3-scratch>/work/trees/JPG17m_v5/T_C2.json"
+    ],
+    "cwd": "<k3-scratch>/work/trees/JPG17m_v5",
+    "exit": 0,
+    "started_utc": "2026-10-12T17:33:31Z",
+    "wall_seconds": 628.1,
+    "cpu_seconds": 605.5,
+    "max_rss_kib": 1831592,
+    "first_line": "PASS",
+    "last_line": "  time: 627.64 s"
+   },
+   "report": {
+    "command": [
+     "<k3-scratch>/venv312/bin/python",
+     "-I",
+     "-B",
+     "<edition>/research/window-extension-20261008/acceptance/h_report30.py",
+     "<edition>/_large/local-research/claude-20261002/results/assembly/JPG17m_v5/JPG17m_v5.cert.jsonl.gz",
+     "<k3-scratch>/work/trees/JPG17m_v5/T_C1.json",
+     "<k3-scratch>/work/trees/JPG17m_v5/T_C2.json",
+     "0",
+     "0",
+     "<edition>/research/window-extension-20261008/bigbox/join/EXPECT_JPG17m_v5.json",
+     "<edition>/research/window-extension-20261008/acceptance/FROZEN_30.json"
+    ],
+    "cwd": "<edition>",
+    "exit": 0,
+    "started_utc": "2026-10-12T17:43:59Z",
+    "wall_seconds": 15.6,
+    "cpu_seconds": 15.2,
+    "max_rss_kib": 1831592,
+    "first_line": "ok    FROZEN.json has the entries C1, C2, SPEC, frozen_on (and at most a note)",
+    "last_line": "RESULT: ACCEPTED"
+   }
+  },
+  "JPG15p_v5": {
+   "tree": "JPG15p_v5",
+   "certificate": "local-research/claude-20261002/results/assembly/JPG15p_v5/JPG15p_v5.cert.jsonl.gz",
+   "certificate_sha256": "1adb38643a3a28a15f877199bf5eb2af97bd5a315298c155a89a33575419b788",
+   "expect": "bigbox/join/EXPECT_JPG15p_v5.json",
+   "expect_sha256": "cbf1d4e9d5dd06f5eb96dfb977d995ee07c4f238d2ea89a97a92b29f2f30f823",
+   "C1": {
+    "command": [
+     "<k3-scratch>/venv312/bin/python",
+     "-I",
+     "-B",
+     "<edition>/research/window-extension-20261008/checker/wxcheck_v30.py",
+     "<edition>/local-research/claude-20261002/results/assembly/JPG15p_v5/JPG15p_v5.cert.jsonl.gz",
+     "--json",
+     "<k3-scratch>/work/trees/JPG15p_v5/T_C1.json"
+    ],
+    "cwd": "<k3-scratch>/work/trees/JPG15p_v5",
+    "exit": 0,
+    "started_utc": "2026-10-12T17:44:15Z",
+    "wall_seconds": 700.0,
+    "cpu_seconds": 685.5,
+    "max_rss_kib": 1831592,
+    "first_line": "PASS",
+    "last_line": "checker: wxcheck 3.0 / SPEC 3.0 / wx-cert-2, wx-cert-3; 699.9 s"
+   },
+   "C2": {
+    "command": [
+     "/opt/node22/bin/node",
+     "--max-old-space-size=12000",
+     "<edition>/research/window-extension-20261008/checker2/wxcheck2_v30.js",
+     "<edition>/local-research/claude-20261002/results/assembly/JPG15p_v5/JPG15p_v5.cert.jsonl.gz",
+     "--json",
+     "<k3-scratch>/work/trees/JPG15p_v5/T_C2.json"
+    ],
+    "cwd": "<k3-scratch>/work/trees/JPG15p_v5",
+    "exit": 0,
+    "started_utc": "2026-10-12T17:55:55Z",
+    "wall_seconds": 455.1,
+    "cpu_seconds": 419.3,
+    "max_rss_kib": 1831592,
+    "first_line": "PASS",
+    "last_line": "  time: 454.72 s"
+   },
+   "report": {
+    "command": [
+     "<k3-scratch>/venv312/bin/python",
+     "-I",
+     "-B",
+     "<edition>/research/window-extension-20261008/acceptance/h_report30.py",
+     "<edition>/local-research/claude-20261002/results/assembly/JPG15p_v5/JPG15p_v5.cert.jsonl.gz",
+     "<k3-scratch>/work/trees/JPG15p_v5/T_C1.json",
+     "<k3-scratch>/work/trees/JPG15p_v5/T_C2.json",
+     "0",
+     "0",
+     "<edition>/research/window-extension-20261008/bigbox/join/EXPECT_JPG15p_v5.json",
+     "<edition>/research/window-extension-20261008/acceptance/FROZEN_30.json"
+    ],
+    "cwd": "<edition>",
+    "exit": 0,
+    "started_utc": "2026-10-12T18:03:30Z",
+    "wall_seconds": 10.9,
+    "cpu_seconds": 10.7,
+    "max_rss_kib": 1831592,
+    "first_line": "ok    FROZEN.json has the entries C1, C2, SPEC, frozen_on (and at most a note)",
+    "last_line": "RESULT: ACCEPTED"
+   }
+  }
+ },
+ "stored_second_execution_seconds": {
+  "JQ": {
+   "C2": 10,
+   "C1": 30
+  },
+  "JPG15p_v5": {
+   "C2": 75,
+   "C1": 371
+  },
+  "JPG17m_v5": {
+   "C2": 110,
+   "C1": 531
+  },
+  "JPG3m_v5": {
+   "C2": 140,
+   "C1": 711
+  },
+  "JPG3p_v5": {
+   "C2": 140,
+   "C1": 752
+  },
+  "JPG17p_v5": {
+   "C2": 180,
+   "C1": 888
+  },
+  "JPG15m_v5": {
+   "C2": 195,
+   "C1": 1007
+  },
+  "G20S": {
+   "C1": 626,
+   "C2": 301
+  },
+  "HW": {
+   "C1": 461,
+   "C2": 210
+  },
+  "JG": {
+   "C2": 336,
+   "C1": 1594
+  },
+  "JPWS_v4": {
+   "C2": 401,
+   "C1": 1975
+  },
+  "JPW13": {
+   "C2": 957,
+   "C1": 4655
+  },
+  "JPA_v5": {
+   "C2": 1674,
+   "C1": 8449
+  }
+ },
+ "equal_to_stored_reports_after_dropping_paths_and_times": {
+  "JQ C1": true,
+  "JQ C2": true,
+  "JPG17m_v5 C1": true,
+  "JPG17m_v5 C2": true,
+  "JPG15p_v5 C1": true,
+  "JPG15p_v5 C2": true
+ },
+ "slowdown_here_vs_build_machine_wall": {
+  "JQ": {
+   "C1": 2.06,
+   "C2": 3.72
+  },
+  "JPG17m_v5": {
+   "C1": 2.26,
+   "C2": 5.71
+  },
+  "JPG15p_v5": {
+   "C1": 1.89,
+   "C2": 6.07
+  }
+ },
+ "full_13_tree_replay_price": {
+  "build_machine_seconds": {
+   "C1_python": 22050,
+   "C2_node": 4729,
+   "total": 26779
+  },
+  "build_machine_cpu_hours": 7.44,
+  "here_estimate_cpu_hours": 21.8,
+  "estimate_basis": "stored second-execution times scaled by the largest wall slowdown measured here on a tree other than JQ (machine shared with other lanes, load 5-6 on 4 cores)",
+  "peak_memory": "JPA_v5 Node checker 6,997 MB on the build machine (CHECK.md: up to 7 GB)"
+ },
+ "rigidity_stage": {
+  "ran_by": "lane K1, inside the author's check.py level 2 (the producers' scripts through their runner); K3 did not re-run them, because check.py writes into the shared source tree",
+  "checks": {
+   "bc_composition": {
+    "status": "PASS",
+    "seconds": "0.5 s",
+    "status_word": null
+   },
+   "finite_1": {
+    "status": "PASS",
+    "seconds": "5.7 s",
+    "status_word": "PASS_EXACT_FINITE_PARTIAL_CONTRACTION_TARGET_NOT_REACHED"
+   },
+   "finite_2": {
+    "status": "PASS",
+    "seconds": "14.1 s",
+    "status_word": "PASS_EXACT_FINITE_PARTIAL_CONTRACTION_TARGET_NOT_REACHED"
+   },
+   "finite_3": {
+    "status": "PASS",
+    "seconds": "13.5 s",
+    "status_word": "PASS_EXACT_FINITE_COMPLETED_PREFIX_PARTIAL_ROUND_EXCLUDED_TARGET_NOT_REACHED"
+   },
+   "finite_4": {
+    "status": "PASS",
+    "seconds": "4.5 s",
+    "status_word": "PASS_EXACT_FINITE_ENTRY_TO_ACCEPTED_RATIONAL_THEOREM"
+   },
+   "finite_join": {
+    "status": "PASS",
+    "seconds": "0.1 s",
+    "status_word": null
+   },
+   "normalized_prefix": {
+    "status": "PASS",
+    "seconds": "5.6 s",
+    "status_word": "ACCEPTED_STOPPED_PROPAGATION_INCONCLUSIVE"
+   },
+   "normalized_finish": {
+    "status": "PASS",
+    "seconds": "4.1 s",
+    "status_word": "ACCEPTED_STRICT_NORMALIZED_STOPPED_CONTRACTION"
+   },
+   "root_stops": {
+    "status": "PASS",
+    "seconds": "0.2 s",
+    "status_word": null
+   },
+   "root_stop_binding": {
+    "status": "PASS",
+    "seconds": "0.3 s",
+    "status_word": "ACCEPTED_G20S_BROAD_ROOT_STOP_THEOREM"
+   },
+   "entry_transfer": {
+    "status": "PASS",
+    "seconds": "0.2 s",
+    "status_word": null
+   },
+   "entry_binding": {
+    "status": "PASS",
+    "seconds": "0.2 s",
+    "status_word": "ACCEPTED_GUARDED_RAW_ENTRY_STOP_PRUNING"
+   },
+   "small_entry": {
+    "status": "PASS",
+    "seconds": "0.1 s",
+    "status_word": "ACCEPTED_RATIONAL_SMALL_ENTRY_COROLLARY"
+   },
+   "normalized_five_rounds": {
+    "status": "PASS",
+    "seconds": "8.4 s",
+    "status_word": "ACCEPTED_FIVE_ROUND_OLD_WEIGHT_REUSE_INCONCLUSIVE"
+   },
+   "normalized_sixth_round": {
+    "status": "PASS",
+    "seconds": "2.1 s",
+    "status_word": "ACCEPTED_SIX_NORM_FACES_ELIMINATED_ONE_REMAINS"
+   }
+  },
+  "total_seconds": 59.6,
+  "independent_check": "none attempted here; an independent replay of the seventeen finite rounds and the normalized contraction needs a reimplementation of the row builder and the rational dual replay"
+ }
+}

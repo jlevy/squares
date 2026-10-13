@@ -98,7 +98,7 @@ be reconciled before selecting its unfinished tasks.
 | [X-048 periodic deficit-four family](explorations/X-048-n17-optimality-after-n11.md#new-leads-from-the-october-evand-review) | registered as [H-269](hypotheses/H-269-periodic-certificates-k2-minus-4-and-5.md) | Require exact deficit D > 1 before selecting the costly width-three coverage campaign |
 
 The historical starting bracket for the program below was
-`3.875 < s(11) <= 3.877083590022814177...`. The strict lower end is Kleddamag’s verified
+`3.875 < s(11) <= 3.877083590022814177...`. The strict lower end is Overbeck’s verified
 $31/8$ certificate. The upper end is Walter Trump’s 1979 packing — six axis-aligned
 squares plus a tightly constrained block of five tilted at $\approx40.1819^\circ$ — and
 the case record carries its verified exact algebraic expression.

@@ -3,7 +3,7 @@
 Stage 4 of the result import process replays the source's own verification on the
 retained bytes, in full (``campaign/result-import.md``). For R071 that is the package's
 ``run_public.js bound``: it checks the package against its ``MANIFEST.json``, compiles
-Guzhou0806's C++ checker, and runs it beside Kleddamag's Node BigInt checker over all
+Guzhou0806's C++ checker, and runs it beside Overbeck's Node BigInt checker over all
 5,114 parent-angle intervals of the C027 certificate through the paired launcher
 ``replay.js`` at two partitions, then holds ``THEOREM.json`` to the claimed target,
 minimum, budget, surplus and certificate digest.

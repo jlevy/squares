@@ -93,8 +93,8 @@ its search strategy.
 |  | value | status |
 | --- | --- | --- |
 | best-known packing (upper bound) | $3.8770835\ldots$ | Trump 1979, a construction |
-| verified lower bound | $3.8770835\ldots$, Trump’s side exactly | Ahmed 2026, Astra-assisted and building on this project and Kleddamag; machine-checked here and reviewed, review record pending ([T-060](packing/frontier/RESULTS.md), `V3/C3`) |
-| earlier verified lower bound | $31/8 = 3.875$, strict | Kleddamag 2026, [developed from T-026’s certificate](packing/frontier/RESULTS.md) and confirmed here by two complete coverage methods (T-037); superseded by T-060 |
+| verified lower bound | $3.8770835\ldots$, Trump’s side exactly | Ahmed 2026, Astra-assisted and building on this project and Overbeck; machine-checked here and reviewed, review record pending ([T-060](packing/frontier/RESULTS.md), `V3/C3`) |
+| earlier verified lower bound | $31/8 = 3.875$, strict | Overbeck 2026, [developed from T-026’s certificate](packing/frontier/RESULTS.md) and confirmed here by two complete coverage methods (T-037); superseded by T-060 |
 | strongest first-party lower bound | $3.8269975\ldots$ | T-033, T-026’s atoms on a finer net; the point-only T-018 proof is explained [below](#how-a-weighted-atomic-lower-bound-proof-works) |
 | gap between the verified bounds | $0$ | settled: $s(11)$ is Trump’s side |
 
@@ -108,9 +108,9 @@ introduces threshold atoms and directly proves $s(11) \ge 191/50 = 3.82$.
 proves
 $s(11) \ge 955000 \cdot \sqrt{518400042893309449}/179696714646249 = 3.8264474\ldots$,
 those same atoms re-certified on a finer direction net and dilated; T-033 repeats it on
-a net twice as fine for $3.8269975\ldots$. Kleddamag’s $s(11) > 31/8$ starts from
-T-026’s certificate and restricts coverage to what a real parent square needs; it lies
-$0.048$ above T-033 and about $0.0021$ below Trump’s packing.
+a net twice as fine for $3.8269975\ldots$. Marc Leonard Overbeck’s $s(11) > 31/8$ starts
+from T-026’s certificate and restricts coverage to what a real parent square needs; it
+lies $0.048$ above T-033 and about $0.0021$ below Trump’s packing.
 T-026 checks a finite certificate on the finer net, proves that common scaling preserves
 its coverage and budget whenever the strict containment inequality holds, and uses
 rational density to establish the displayed `≥` bound.
@@ -145,7 +145,7 @@ checker exposes the shared geometry and counting mechanism end to end.
 That point-certificate checker does not verify the threshold certificates.
 The explainer is Part I of a series on $n = 11$, read in order:
 [Part II](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html)
-reviews Kleddamag’s certified bound $s(11) > 31/8$ (T-037), and
+reviews Overbeck’s certified bound $s(11) > 31/8$ (T-037), and
 [Part III](https://jlevy.github.io/squares/papers/n11-optimality-review.html) reviews
 the proof that Trump’s packing is optimal (T-060). The linked T-025 and T-026 claim
 documents each embed the new standard-library threshold verifier and the exact
@@ -1323,7 +1323,7 @@ the same distinctions.
 | Trump’s 1979 packing is valid, over $\mathbb{Q}(u)$ of degree 8, with 14 pairs at exactly zero separation | verified (`exact-algebraic`); a published construction, confirmed here | Nothing about optimality; it is an upper bound |
 | [`s(11) ≥ 2 + 4/√5`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | verified (`exact-algebraic`) | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
 | [T-025](packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md) proves $s(11) \ge 191/50 = 3.82$; [T-026](packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md) proves $s(11) \ge 3.8264474\ldots$ | Both are `V3/C3`: machine-checked exact and interval-certified evidence with passing replay, distinct exact event-cell and interval coverage decisions, and mapped non-superseded reviews; the human oversight record rung 4 needs is pending | Neither result determines $s(11)$ or closes the gap to the best-known packing; `V5` or external review would be a separate assurance step |
-| [T-060](packing/frontier/RESULTS.md): Trump’s packing is optimal, so $s(11) = 3.8770835\ldots$, his side exactly | `V3/C3`: machine-checked here and reviewed, review record pending. Ahmed’s proof, Astra-assisted and building on this project and Kleddamag; a published result confirmed here | It does not assert that the optimal packing is unique, and it is not formal. The checks here share arithmetic and construction primitives with the source, so they are not a fully independent implementation |
+| [T-060](packing/frontier/RESULTS.md): Trump’s packing is optimal, so $s(11) = 3.8770835\ldots$, his side exactly | `V3/C3`: machine-checked here and reviewed, review record pending. Ahmed’s proof, Astra-assisted and building on this project and Overbeck; a published result confirmed here | It does not assert that the optimal packing is unique, and it is not formal. The checks here share arithmetic and construction primitives with the source, so they are not a fully independent implementation |
 | [Stromquist’s *printed* 2003 argument fails](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side $10001/10000$ fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies. Both this falsification and the adjacent repair are this project’s findings |
 | [Trump’s pose is locally isolated at fixed side](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Consequently, it is a strict local minimum of side in the anchored pose–side chart, modulo finite symmetries. This is not global optimality or an explicit isolation radius. Apparently novel here, not externally peer-reviewed |
 | The one-dimensional class-angle optimum is a corner, with signed one-sided derivatives of about $-0.1747$ and $+0.384$ per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails. This project’s measurement |
@@ -1835,7 +1835,7 @@ rather than a clearance function $g_j$, and $d$ and $w$ are a wall cell’s dept
 width rather than an angular error and an atom’s weight.
 
 [Part II](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html) of the
-$n = 11$ series, the review of Kleddamag’s $s(11) > 31/8$, defines a few symbols of its
+$n = 11$ series, the review of Overbeck’s $s(11) > 31/8$, defines a few symbols of its
 own, which are local to it: the parent side $A$, the least charge $\Gamma$ of an
 assigned core, the total budget $M$, and a row $(a, b, t, B)$, an interval $[a, b]$ of
 parent half-angle tangents with its core’s direction $t$ and side $B$. Its $B$ is the

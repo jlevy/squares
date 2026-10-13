@@ -60,7 +60,7 @@ reason, so a gap is reported rather than filled.
 2026-09-27): "we ultimately want these graphics and charts to be a full representation of
 the current state of understanding ... and they should show recent changes to be new."
 The star says when, not whose. A line credits case by case: another's work under its
-authors, joint work that builds on this project as `credit` in the bibliography (`Kleddamag
+authors, joint work that builds on this project as `credit` in the bibliography (`Overbeck
 after Levy, Mira, Guzhou0806`), and this project's sole work as `Squares Project (Levy)`.
 Recent is a typed date, never a year or a source key read as text: this project's own new
 bounds are recent by construction, and an external bound is recent where its source's
@@ -183,7 +183,7 @@ class Source:
     #: The venue a line falls back to when its confirmation would not otherwise fit.
     short_venue: str | None = None
     #: What a line prints in place of the joined authors, where the credit is joint with
-    #: the lineage the source builds on: Kleddamag's n = 17 releases continue this
+    #: the lineage the source builds on: Overbeck's n = 17 releases continue this
     #: project's, Mira's and Guzhou0806's methods, which the authors field has no place for
     #: (the owner, 2026-09-27). Last names, or handles where no name is published; human
     #: authors and projects only, since an AI agent is never a credited author.

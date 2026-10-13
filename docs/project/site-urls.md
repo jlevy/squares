@@ -492,7 +492,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/167.html | cases/167.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/168.html | cases/168.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/169.html | cases/169.html | record | overview | 2026-10-03 | 2026-10-07 | live |
-| cases/17.html | cases/17.html | record | overview | 2026-10-03 | 2026-10-05 | live |
+| cases/17.html | cases/17.html | record | overview | 2026-10-03 | 2026-10-12 | live |
 | cases/170.html | cases/170.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/171.html | cases/171.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/172.html | cases/172.html | record | overview | 2026-10-03 | 2026-10-05 | live |
@@ -781,9 +781,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | n11-optimality/t-060-explainer.md | papers/n11-optimality-review.md | copy | assembly | 2026-09-29 | 2026-10-02 | live → papers/n11-optimality-review.md |
 | n11-optimality/t-060-explainer.pdf | papers/n11-optimality-review.pdf | copy | assembly | 2026-09-29 | 2026-10-02 | live → papers/n11-optimality-review.pdf |
 | papers.html | papers.html | page | overview | 2026-09-29 | 2026-10-02 | live |
-| papers/n11-lower-bounds-explainer.html | papers/n11-lower-bounds-explainer.html | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-10 | live |
-| papers/n11-lower-bounds-explainer.md | papers/n11-lower-bounds-explainer.md | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-10 | live |
-| papers/n11-lower-bounds-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-10 | live |
+| papers/n11-lower-bounds-explainer.html | papers/n11-lower-bounds-explainer.html | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-13 | live |
+| papers/n11-lower-bounds-explainer.md | papers/n11-lower-bounds-explainer.md | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-13 | live |
+| papers/n11-lower-bounds-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-13 | live |
 | papers/n11-optimality-review.html | papers/n11-optimality-review.html | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-13 | live |
 | papers/n11-optimality-review.md | papers/n11-optimality-review.md | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-13 | live |
 | papers/n11-optimality-review.pdf | papers/n11-optimality-review.pdf | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-13 | live |
@@ -971,6 +971,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-150.html | result/t-150.html | result | overview | 2026-10-11 | 2026-10-11 | live |
 | result/t-151.html | result/t-151.html | result | overview | 2026-10-12 | 2026-10-12 | live |
 | result/t-152.html | result/t-152.html | result | overview | 2026-10-12 | 2026-10-12 | live |
+| result/t-153.html | result/t-153.html | result | overview | 2026-10-12 | 2026-10-12 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-07 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-02 | live |

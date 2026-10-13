@@ -86,42 +86,46 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed n11 optimality 2026]'
     field: /credit
-  expected_text: Ahmed after Levy, Kleddamag
+  expected_text: Ahmed after Levy, Overbeck
   start: 0
   end: 5
   label: Ahmed
   role: credited-contributor
   disposition: resolved
-  evidence:
+  evidence: &id020
   - primary-byline
   - bibliography
   contributor_id: queuingtheorydotcom
+  note: Joined by the reviewed identity of 5 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed n11 optimality 2026]'
     field: /credit
-  expected_text: Ahmed after Levy, Kleddamag
+  expected_text: Ahmed after Levy, Overbeck
   start: 12
   end: 16
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
+  evidence: &id003
   - primary-byline
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed n11 optimality 2026]'
     field: /credit
-  expected_text: Ahmed after Levy, Kleddamag
+  expected_text: Ahmed after Levy, Overbeck
   start: 18
-  end: 27
-  label: Kleddamag
+  end: 26
+  label: Overbeck
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: &id002
+  - citation-cff
+  - owner-confirmation
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed 11SquaresFormalized 2026]'
@@ -289,7 +293,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: &id002
+  evidence: &id006
   - primary-byline
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
@@ -303,7 +307,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: &id008
+  evidence: &id012
   - repository-license
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 44 spans so labelled.
@@ -634,197 +638,199 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 certified bound]'
     field: /authors/0
-  expected_text: Kleddamag
+  expected_text: Overbeck
   start: 0
-  end: 9
-  label: Kleddamag
+  end: 8
+  label: Overbeck
   role: source-author
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 certified bound]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
   start: 0
-  end: 9
-  label: Kleddamag
+  end: 8
+  label: Overbeck
   role: credited-contributor
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 certified bound]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
-  start: 16
-  end: 20
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
+  start: 15
+  end: 19
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id003
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 certified bound]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
-  start: 22
-  end: 26
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
+  start: 21
+  end: 25
   label: Mira
   role: prerequisite
   disposition: resolved
-  evidence:
+  evidence: &id004
   - repository-citation
   contributor_id: mira
+  note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 certified bound]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
-  start: 28
-  end: 38
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
+  start: 27
+  end: 37
   label: Guzhou0806
   role: prerequisite
   disposition: resolved
-  evidence:
+  evidence: &id005
   - primary-byline
   contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 15 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.66001]'
     field: /authors/0
-  expected_text: Kleddamag
+  expected_text: Overbeck
   start: 0
-  end: 9
-  label: Kleddamag
+  end: 8
+  label: Overbeck
   role: source-author
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.66001]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
   start: 0
-  end: 9
-  label: Kleddamag
+  end: 8
+  label: Overbeck
   role: credited-contributor
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.66001]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
-  start: 16
-  end: 20
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
+  start: 15
+  end: 19
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id003
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.66001]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
-  start: 22
-  end: 26
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
+  start: 21
+  end: 25
   label: Mira
   role: prerequisite
   disposition: resolved
-  evidence:
-  - repository-citation
+  evidence: *id004
   contributor_id: mira
+  note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.66001]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
-  start: 28
-  end: 38
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
+  start: 27
+  end: 37
   label: Guzhou0806
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id005
   contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 15 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.640020]'
     field: /authors/0
-  expected_text: Kleddamag
+  expected_text: Overbeck
   start: 0
-  end: 9
-  label: Kleddamag
+  end: 8
+  label: Overbeck
   role: source-author
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.640020]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
   start: 0
-  end: 9
-  label: Kleddamag
+  end: 8
+  label: Overbeck
   role: credited-contributor
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.640020]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
-  start: 16
-  end: 20
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
+  start: 15
+  end: 19
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id003
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.640020]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
-  start: 22
-  end: 26
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
+  start: 21
+  end: 25
   label: Mira
   role: prerequisite
   disposition: resolved
-  evidence:
-  - repository-citation
+  evidence: *id004
   contributor_id: mira
+  note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.640020]'
     field: /credit
-  expected_text: Kleddamag after Levy, Mira, Guzhou0806
-  start: 28
-  end: 38
+  expected_text: Overbeck after Levy, Mira, Guzhou0806
+  start: 27
+  end: 37
   label: Guzhou0806
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id005
   contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 15 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R052]'
@@ -842,54 +848,54 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R052]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
   start: 0
   end: 10
   label: Guzhou0806
   role: credited-contributor
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id005
   contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 15 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R052]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
   start: 17
-  end: 26
-  label: Kleddamag
+  end: 25
+  label: Overbeck
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R052]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
-  start: 28
-  end: 32
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
+  start: 27
+  end: 31
   label: Mira
   role: prerequisite
   disposition: resolved
-  evidence:
-  - repository-citation
+  evidence: *id004
   contributor_id: mira
+  note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R052]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
-  start: 34
-  end: 38
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
+  start: 33
+  end: 37
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id003
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R068]'
@@ -907,54 +913,54 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R068]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
   start: 0
   end: 10
   label: Guzhou0806
   role: credited-contributor
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id005
   contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 15 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R068]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
   start: 17
-  end: 26
-  label: Kleddamag
+  end: 25
+  label: Overbeck
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R068]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
-  start: 28
-  end: 32
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
+  start: 27
+  end: 31
   label: Mira
   role: prerequisite
   disposition: resolved
-  evidence:
-  - repository-citation
+  evidence: *id004
   contributor_id: mira
+  note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R068]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
-  start: 34
-  end: 38
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
+  start: 33
+  end: 37
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id003
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R067]'
@@ -972,54 +978,54 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R067]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
   start: 0
   end: 10
   label: Guzhou0806
   role: credited-contributor
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id005
   contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 15 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R067]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
   start: 17
-  end: 26
-  label: Kleddamag
+  end: 25
+  label: Overbeck
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R067]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
-  start: 28
-  end: 32
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
+  start: 27
+  end: 31
   label: Mira
   role: prerequisite
   disposition: resolved
-  evidence:
-  - repository-citation
+  evidence: *id004
   contributor_id: mira
+  note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R067]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
-  start: 34
-  end: 38
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
+  start: 33
+  end: 37
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id003
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R071]'
@@ -1037,54 +1043,54 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R071]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
   start: 0
   end: 10
   label: Guzhou0806
   role: credited-contributor
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id005
   contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 15 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R071]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
   start: 17
-  end: 26
-  label: Kleddamag
+  end: 25
+  label: Overbeck
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R071]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
-  start: 28
-  end: 32
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
+  start: 27
+  end: 31
   label: Mira
   role: prerequisite
   disposition: resolved
-  evidence:
-  - repository-citation
+  evidence: *id004
   contributor_id: mira
+  note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R071]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
-  start: 34
-  end: 38
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
+  start: 33
+  end: 37
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id003
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R070]'
@@ -1102,54 +1108,54 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R070]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
   start: 0
   end: 10
   label: Guzhou0806
   role: credited-contributor
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id005
   contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 15 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R070]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
   start: 17
-  end: 26
-  label: Kleddamag
+  end: 25
+  label: Overbeck
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R070]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
-  start: 28
-  end: 32
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
+  start: 27
+  end: 31
   label: Mira
   role: prerequisite
   disposition: resolved
-  evidence:
-  - repository-citation
+  evidence: *id004
   contributor_id: mira
+  note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R070]'
     field: /credit
-  expected_text: Guzhou0806 after Kleddamag, Mira, Levy
-  start: 34
-  end: 38
+  expected_text: Guzhou0806 after Overbeck, Mira, Levy
+  start: 33
+  end: 37
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id003
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[evand square-packing 2026]'
@@ -1748,67 +1754,67 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n11 2026]'
     field: /authors/0
-  expected_text: Kleddamag
+  expected_text: Overbeck
   start: 0
-  end: 9
-  label: Kleddamag
+  end: 8
+  label: Overbeck
   role: source-author
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n11 2026]'
     field: /credit
-  expected_text: Kleddamag after Levy, Guzhou0806, Mira
+  expected_text: Overbeck after Levy, Guzhou0806, Mira
   start: 0
-  end: 9
-  label: Kleddamag
+  end: 8
+  label: Overbeck
   role: credited-contributor
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n11 2026]'
     field: /credit
-  expected_text: Kleddamag after Levy, Guzhou0806, Mira
-  start: 16
-  end: 20
+  expected_text: Overbeck after Levy, Guzhou0806, Mira
+  start: 15
+  end: 19
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id003
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n11 2026]'
     field: /credit
-  expected_text: Kleddamag after Levy, Guzhou0806, Mira
-  start: 22
-  end: 32
+  expected_text: Overbeck after Levy, Guzhou0806, Mira
+  start: 21
+  end: 31
   label: Guzhou0806
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id005
   contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 15 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n11 2026]'
     field: /credit
-  expected_text: Kleddamag after Levy, Guzhou0806, Mira
-  start: 34
-  end: 38
+  expected_text: Overbeck after Levy, Guzhou0806, Mira
+  start: 33
+  end: 37
   label: Mira
   role: prerequisite
   disposition: resolved
-  evidence:
-  - repository-citation
+  evidence: *id004
   contributor_id: mira
+  note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
@@ -1837,7 +1843,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
     field: /credit
-  expected_text: Wang, Li after Kleddamag, Levy
+  expected_text: Wang, Li after Overbeck, Levy
   start: 0
   end: 4
   label: Wang
@@ -1849,7 +1855,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
     field: /credit
-  expected_text: Wang, Li after Kleddamag, Levy
+  expected_text: Wang, Li after Overbeck, Levy
   start: 6
   end: 8
   label: Li
@@ -1861,28 +1867,28 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
     field: /credit
-  expected_text: Wang, Li after Kleddamag, Levy
+  expected_text: Wang, Li after Overbeck, Levy
   start: 15
-  end: 24
-  label: Kleddamag
+  end: 23
+  label: Overbeck
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id002
   contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
     field: /credit
-  expected_text: Wang, Li after Kleddamag, Levy
-  start: 26
-  end: 30
+  expected_text: Wang, Li after Overbeck, Levy
+  start: 25
+  end: 29
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id003
   contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Tokoharu density 2026]'
@@ -1906,7 +1912,7 @@ occurrences:
   label: Tokoharu
   role: credited-contributor
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -1919,7 +1925,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: &id003
+  evidence: &id007
   - primary-byline
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
@@ -1946,7 +1952,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: &id004
+  evidence: &id008
   - paper-byline
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
@@ -1960,7 +1966,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: &id005
+  evidence: &id009
   - primary-byline
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
@@ -1974,7 +1980,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: &id006
+  evidence: &id010
   - primary-byline
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
@@ -1988,7 +1994,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: &id007
+  evidence: &id011
   - primary-byline
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
@@ -2028,7 +2034,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -2041,7 +2047,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -2054,7 +2060,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2067,7 +2073,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2080,7 +2086,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2119,7 +2125,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2132,7 +2138,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -2145,7 +2151,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -2158,7 +2164,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2171,7 +2177,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2184,7 +2190,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2223,7 +2229,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2236,7 +2242,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -2249,7 +2255,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -2262,7 +2268,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2275,7 +2281,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2288,7 +2294,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2329,7 +2335,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id008
+  evidence: *id012
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 44 spans so labelled.
 - origin:
@@ -2343,7 +2349,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2357,7 +2363,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -2371,7 +2377,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -2385,7 +2391,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2399,7 +2405,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2413,7 +2419,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2452,7 +2458,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2465,7 +2471,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -2478,7 +2484,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -2491,7 +2497,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2504,7 +2510,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2517,7 +2523,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2556,7 +2562,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id008
+  evidence: *id012
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 44 spans so labelled.
 - origin:
@@ -2569,7 +2575,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -2582,7 +2588,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -2595,7 +2601,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2608,7 +2614,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2621,7 +2627,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2660,7 +2666,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2673,7 +2679,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -2686,7 +2692,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -2699,7 +2705,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2712,7 +2718,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2725,7 +2731,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2764,7 +2770,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2777,7 +2783,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -2790,7 +2796,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -2803,7 +2809,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2816,7 +2822,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2829,7 +2835,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2868,7 +2874,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2881,7 +2887,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -2894,7 +2900,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -2907,7 +2913,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -2920,7 +2926,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2933,7 +2939,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -2972,7 +2978,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id008
+  evidence: *id012
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 44 spans so labelled.
 - origin:
@@ -2985,7 +2991,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -2998,7 +3004,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -3011,7 +3017,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3024,7 +3030,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3037,7 +3043,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3076,7 +3082,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3089,7 +3095,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -3102,7 +3108,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -3115,7 +3121,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3128,7 +3134,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3141,7 +3147,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3180,7 +3186,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id008
+  evidence: *id012
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 44 spans so labelled.
 - origin:
@@ -3219,7 +3225,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id008
+  evidence: *id012
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 44 spans so labelled.
 - origin:
@@ -3258,7 +3264,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id008
+  evidence: *id012
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 44 spans so labelled.
 - origin:
@@ -3349,7 +3355,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3362,7 +3368,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -3375,7 +3381,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -3388,7 +3394,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3401,7 +3407,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3414,7 +3420,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3453,7 +3459,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3466,7 +3472,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -3479,7 +3485,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -3492,7 +3498,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3505,7 +3511,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3518,7 +3524,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3557,7 +3563,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3570,7 +3576,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -3583,7 +3589,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -3596,7 +3602,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3609,7 +3615,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3622,7 +3628,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3661,7 +3667,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3674,7 +3680,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -3687,7 +3693,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -3700,7 +3706,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3713,7 +3719,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3726,7 +3732,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3765,7 +3771,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3778,7 +3784,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -3791,7 +3797,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -3804,7 +3810,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3817,7 +3823,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3830,7 +3836,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3869,7 +3875,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3882,7 +3888,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -3895,7 +3901,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -3908,7 +3914,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -3921,7 +3927,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3934,7 +3940,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -3975,7 +3981,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id008
+  evidence: *id012
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 44 spans so labelled.
 - origin:
@@ -3989,7 +3995,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -4003,7 +4009,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -4017,7 +4023,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -4031,7 +4037,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -4045,7 +4051,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -4059,7 +4065,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -4098,7 +4104,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -4111,7 +4117,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -4124,7 +4130,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -4137,7 +4143,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -4150,7 +4156,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -4163,7 +4169,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -4202,7 +4208,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -4215,7 +4221,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -4228,7 +4234,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -4241,7 +4247,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -4254,7 +4260,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -4267,7 +4273,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -4306,7 +4312,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -4319,7 +4325,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -4332,7 +4338,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -4345,7 +4351,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -4358,7 +4364,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -4371,7 +4377,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -4410,7 +4416,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -4423,7 +4429,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -4436,7 +4442,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -4449,7 +4455,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -4462,7 +4468,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -4475,7 +4481,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -5411,7 +5417,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -5854,7 +5860,7 @@ occurrences:
   label: Ryu
   role: source-author
   disposition: resolved
-  evidence: &id009
+  evidence: &id013
   - primary-byline
   contributor_id: ryu-sungjoon
   note: Joined by the reviewed identity of 6 spans so labelled.
@@ -5868,7 +5874,7 @@ occurrences:
   label: Ryu
   role: credited-contributor
   disposition: resolved
-  evidence: *id009
+  evidence: *id013
   contributor_id: ryu-sungjoon
   note: Joined by the reviewed identity of 6 spans so labelled.
 - origin:
@@ -5893,7 +5899,7 @@ occurrences:
   label: Ryu
   role: source-author
   disposition: resolved
-  evidence: *id009
+  evidence: *id013
   contributor_id: ryu-sungjoon
   note: Joined by the reviewed identity of 6 spans so labelled.
 - origin:
@@ -5906,7 +5912,7 @@ occurrences:
   label: Ryu
   role: credited-contributor
   disposition: resolved
-  evidence: *id009
+  evidence: *id013
   contributor_id: ryu-sungjoon
   note: Joined by the reviewed identity of 6 spans so labelled.
 - origin:
@@ -5957,7 +5963,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -5970,7 +5976,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -5983,7 +5989,7 @@ occurrences:
   label: Guzhou0806
   role: source-author
   disposition: resolved
-  evidence: &id013
+  evidence: &id017
   - primary-byline
   contributor_id: guzhou0806
   note: Joined by the reviewed identity of 19 spans so labelled.
@@ -5997,7 +6003,7 @@ occurrences:
   label: Guzhou0806
   role: credited-contributor
   disposition: resolved
-  evidence: &id014
+  evidence: &id018
   - primary-byline
   contributor_id: guzhou0806
   note: Joined by the reviewed identity of 22 spans so labelled.
@@ -6024,7 +6030,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -6037,7 +6043,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -6050,7 +6056,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -6063,7 +6069,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -6076,7 +6082,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -6089,7 +6095,7 @@ occurrences:
   label: Couzo
   role: source-author
   disposition: resolved
-  evidence: &id010
+  evidence: &id014
   - primary-byline
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 23 spans so labelled.
@@ -6104,7 +6110,7 @@ occurrences:
   label: Couzo
   role: credited-contributor
   disposition: resolved
-  evidence: *id010
+  evidence: *id014
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 23 spans so labelled.
 - origin:
@@ -6170,7 +6176,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: &id012
+  evidence: &id016
   - repository-license
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
@@ -6202,7 +6208,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: &id011
+  evidence: &id015
   - primary-byline
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
@@ -6330,7 +6336,7 @@ occurrences:
   label: Couzo
   role: prerequisite
   disposition: resolved
-  evidence: *id010
+  evidence: *id014
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 23 spans so labelled.
 - origin:
@@ -6411,7 +6417,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -6460,7 +6466,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -6512,7 +6518,7 @@ occurrences:
   label: Friedman
   role: prerequisite
   disposition: resolved
-  evidence: &id015
+  evidence: &id019
   - primary-byline
   contributor_id: erich-friedman
   note: Joined by the reviewed identity of 3 spans so labelled.
@@ -6557,7 +6563,7 @@ occurrences:
   label: Couzo
   role: prerequisite
   disposition: resolved
-  evidence: *id010
+  evidence: *id014
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 23 spans so labelled.
 - origin:
@@ -6584,7 +6590,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -6597,7 +6603,7 @@ occurrences:
   label: Daniel
   role: source-author
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -6610,7 +6616,7 @@ occurrences:
   label: Daniel
   role: credited-contributor
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -6647,7 +6653,7 @@ occurrences:
   label: Couzo
   role: source-author
   disposition: resolved
-  evidence: *id010
+  evidence: *id014
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 23 spans so labelled.
 - origin:
@@ -6660,7 +6666,7 @@ occurrences:
   label: Couzo
   role: credited-contributor
   disposition: resolved
-  evidence: *id010
+  evidence: *id014
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 23 spans so labelled.
 - origin:
@@ -6709,7 +6715,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -6738,7 +6744,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -6751,7 +6757,7 @@ occurrences:
   label: Daniel
   role: source-author
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -6764,7 +6770,7 @@ occurrences:
   label: Daniel
   role: credited-contributor
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -6825,7 +6831,7 @@ occurrences:
   label: Couzo
   role: prerequisite
   disposition: resolved
-  evidence: *id010
+  evidence: *id014
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 23 spans so labelled.
 - origin:
@@ -6838,7 +6844,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -6877,7 +6883,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -6890,7 +6896,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -6929,7 +6935,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -6942,7 +6948,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -6955,7 +6961,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -6968,7 +6974,7 @@ occurrences:
   label: Nagamochi
   role: prerequisite
   disposition: resolved
-  evidence: *id005
+  evidence: *id009
   contributor_id: hiroshi-nagamochi
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -6981,7 +6987,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -6994,7 +7000,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -7007,7 +7013,7 @@ occurrences:
   label: Guzhou0806
   role: source-author
   disposition: resolved
-  evidence: *id013
+  evidence: *id017
   contributor_id: guzhou0806
   note: Joined by the reviewed identity of 19 spans so labelled.
 - origin:
@@ -7020,7 +7026,7 @@ occurrences:
   label: Guzhou0806
   role: credited-contributor
   disposition: resolved
-  evidence: *id014
+  evidence: *id018
   contributor_id: guzhou0806
   note: Joined by the reviewed identity of 22 spans so labelled.
 - origin:
@@ -7046,7 +7052,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -7059,7 +7065,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -7072,7 +7078,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -7085,7 +7091,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -7098,7 +7104,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -7111,7 +7117,7 @@ occurrences:
   label: Guzhou0806
   role: source-author
   disposition: resolved
-  evidence: *id013
+  evidence: *id017
   contributor_id: guzhou0806
   note: Joined by the reviewed identity of 19 spans so labelled.
 - origin:
@@ -7124,7 +7130,7 @@ occurrences:
   label: Guzhou0806
   role: credited-contributor
   disposition: resolved
-  evidence: *id014
+  evidence: *id018
   contributor_id: guzhou0806
   note: Joined by the reviewed identity of 22 spans so labelled.
 - origin:
@@ -7150,7 +7156,7 @@ occurrences:
   label: Tokoharu
   role: prerequisite
   disposition: resolved
-  evidence: *id002
+  evidence: *id006
   contributor_id: tokoharu
   note: Joined by the reviewed identity of 1 spans so labelled.
 - origin:
@@ -7163,7 +7169,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id007
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 37 spans so labelled.
 - origin:
@@ -7176,7 +7182,7 @@ occurrences:
   label: Stromquist
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id008
   contributor_id: walter-stromquist
   note: Joined by the reviewed identity of 2 spans so labelled.
 - origin:
@@ -7189,7 +7195,7 @@ occurrences:
   label: Burns
   role: prerequisite
   disposition: resolved
-  evidence: *id006
+  evidence: *id010
   contributor_id: sam-burns
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -7202,7 +7208,7 @@ occurrences:
   label: Massaccesi
   role: prerequisite
   disposition: resolved
-  evidence: *id007
+  evidence: *id011
   contributor_id: gustavo-massaccesi
   note: Joined by the reviewed identity of 21 spans so labelled.
 - origin:
@@ -7215,7 +7221,7 @@ occurrences:
   label: Daniel
   role: source-author
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -7228,7 +7234,7 @@ occurrences:
   label: Daniel
   role: credited-contributor
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -7277,7 +7283,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -7326,7 +7332,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -7339,7 +7345,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -7388,7 +7394,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -7401,7 +7407,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -7450,7 +7456,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -7511,7 +7517,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -7524,7 +7530,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -7561,7 +7567,7 @@ occurrences:
   label: Couzo
   role: prerequisite
   disposition: resolved
-  evidence: *id010
+  evidence: *id014
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 23 spans so labelled.
 - origin:
@@ -7602,7 +7608,7 @@ occurrences:
   label: Friedman
   role: prerequisite
   disposition: resolved
-  evidence: *id015
+  evidence: *id019
   contributor_id: erich-friedman
   note: Joined by the reviewed identity of 3 spans so labelled.
 - origin:
@@ -7615,7 +7621,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
 - origin:
@@ -7628,7 +7634,7 @@ occurrences:
   label: Couzo
   role: source-author
   disposition: resolved
-  evidence: *id010
+  evidence: *id014
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 23 spans so labelled.
 - origin:
@@ -7641,7 +7647,7 @@ occurrences:
   label: Couzo
   role: credited-contributor
   disposition: resolved
-  evidence: *id010
+  evidence: *id014
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 23 spans so labelled.
 - origin:
@@ -7678,7 +7684,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id012
+  evidence: *id016
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -7707,9 +7713,99 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id011
+  evidence: *id015
   contributor_id: joshua-levy
   note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Overbeck n17 candidate 2026]'
+    field: /authors/0
+  expected_text: Overbeck
+  start: 0
+  end: 8
+  label: Overbeck
+  role: source-author
+  disposition: resolved
+  evidence: *id002
+  contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Overbeck n17 candidate 2026]'
+    field: /credit
+  expected_text: Overbeck after Levy, Ahmed, Mira, Guzhou0806, Maaz
+  start: 0
+  end: 8
+  label: Overbeck
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id002
+  contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Overbeck n17 candidate 2026]'
+    field: /credit
+  expected_text: Overbeck after Levy, Ahmed, Mira, Guzhou0806, Maaz
+  start: 15
+  end: 19
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id003
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 56 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Overbeck n17 candidate 2026]'
+    field: /credit
+  expected_text: Overbeck after Levy, Ahmed, Mira, Guzhou0806, Maaz
+  start: 21
+  end: 26
+  label: Ahmed
+  role: prerequisite
+  disposition: resolved
+  evidence: *id020
+  contributor_id: queuingtheorydotcom
+  note: Joined by the reviewed identity of 5 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Overbeck n17 candidate 2026]'
+    field: /credit
+  expected_text: Overbeck after Levy, Ahmed, Mira, Guzhou0806, Maaz
+  start: 28
+  end: 32
+  label: Mira
+  role: prerequisite
+  disposition: resolved
+  evidence: *id004
+  contributor_id: mira
+  note: Joined by the reviewed identity of 2 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Overbeck n17 candidate 2026]'
+    field: /credit
+  expected_text: Overbeck after Levy, Ahmed, Mira, Guzhou0806, Maaz
+  start: 34
+  end: 44
+  label: Guzhou0806
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 15 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Overbeck n17 candidate 2026]'
+    field: /credit
+  expected_text: Overbeck after Levy, Ahmed, Mira, Guzhou0806, Maaz
+  start: 46
+  end: 50
+  label: Maaz
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/results.yaml
     record_key: T-001
@@ -8348,15 +8444,15 @@ occurrences:
     path: packing/frontier/n-017.md
     record_key: '17'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Guzhou0806
+  expected_text: Overbeck
   start: 0
-  end: 10
-  label: Guzhou0806
+  end: 8
+  label: Overbeck
   role: lower-bound-prover
   disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: guzhou0806
+  evidence: *id002
+  contributor_id: marc-leonard-overbeck
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-018.md
     record_key: '18'
@@ -9491,7 +9587,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: &id017
+  evidence: &id022
   - repository-license
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
@@ -9760,7 +9856,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: &id016
+  evidence: &id021
   - primary-byline
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
@@ -9825,7 +9921,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10133,7 +10229,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10183,7 +10279,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10234,7 +10330,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10336,7 +10432,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10567,7 +10663,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10629,7 +10725,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10667,7 +10763,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10758,7 +10854,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10833,7 +10929,7 @@ occurrences:
   label: Evan Daniel
   role: construction-finder
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -11586,7 +11682,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -11750,7 +11846,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -12288,7 +12384,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -12792,7 +12888,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -12830,7 +12926,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -13228,7 +13324,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13365,7 +13461,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13455,7 +13551,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -13890,7 +13986,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13990,7 +14086,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14186,7 +14282,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14224,7 +14320,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14249,7 +14345,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -14287,7 +14383,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id016
+  evidence: *id021
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -14389,7 +14485,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id017
+  evidence: *id022
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:

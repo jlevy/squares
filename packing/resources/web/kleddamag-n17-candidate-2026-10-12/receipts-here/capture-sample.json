@@ -1,0 +1,1417 @@
+{
+ "schema": "k3-receipt/v1",
+ "receipt": "capture-sampled-recompute",
+ "issue": "https://github.com/jlevy/squares/issues/557",
+ "source": "https://github.com/Kleddamag/the-seventeenth-square-candidate",
+ "source_pin": "653b9589d",
+ "lane": "K3 (independent checks of #557's computations)",
+ "machine": "Linux x86_64, 4 cores shared with other lanes; CPython 3.14.7 (project), CPython 3.12.3 + numpy 2.0.2 + numba 0.60.0 + SymPy 1.14.0 (isolated scratch venv for the author's code), Node.js v22.22.0",
+ "retention": "no upstream bytes; digests, verdict lines, derived numbers and walls only",
+ "inputs": {
+  "recompute_slice.py": "d6d887911d480ea24639facbd6cf304b54ab38af8d2c96c9e7c15363cd81e47d",
+  "checker_sources": {
+   "boolean_rule.py": "c49d38ac96027b34103c075a9996b6229fd2cf829055897dce2d8cf9a6db8275",
+   "exact_classes.py": "802dc62aa4f2a9e15ae406d39d5161540403972abbf21819660191d67dd6150b",
+   "exact_general.py": "89954c6c44e1368b8553eb4d71d860f1a51b010be698088b6fbe3d4fad8eac46",
+   "exact_restricted.py": "caae39b30cfcde513740337792865f43ed18738a539a34d9c8fec1e74d7686f9",
+   "integer_sweep.py": "3a2bfd8892a9693b4dfca72e4d8e547a7be8775b22306740f4e6b63d0928b34b"
+  },
+  "verify_classes_wb.js": "7f6b234768f812b7acf515c28cc4ced0e5b7fb5bcd4c0ba03114733975087d40"
+ },
+ "sampled_statements": {
+  "CLASS_PSSW37_L11_T15": {
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "52e532e9507d5e66cd3397a7f1d6fb6ef5674295cbaa0b1d18f5e68907431d41",
+   "classes_sha256": "dbb66ab1b94e553edd86968f0580430318bfb44805252c90fe469792fb90a4f1",
+   "surplus": "23"
+  },
+  "CLASS_PSS_L06_T03": {
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "95871355135ee90808d307828cc78c17464b544d46b2071e3f14f14581c0953c",
+   "classes_sha256": "24017292d83783d46f864ed4b62e387679d94a9b118d403dd5bc1559a4331c52",
+   "surplus": "10"
+  },
+  "CLASS_PSS_L12_T15": {
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "66338f274adeeea0968cc4e77943503f2c2c7f85fcb7489184138205a993b654",
+   "classes_sha256": "f97677de9779e9e150a1aded11b776dea42879d58108c615419440406fe8d260",
+   "surplus": "10"
+  },
+  "CLASS_PSW37_L11_T09": {
+   "branches": [
+    "JPA"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "a929e2de28ee2b6bfb2c57731e3a314db30ca1c959fd6e3eeaae1125d5adbfe5",
+   "classes_sha256": "412cd87edd916b8adffa65e311c6c0d3a22151afbffadaaba6118c78f91d1bca",
+   "surplus": "2"
+  },
+  "CLASS_PS_L06_T17_ENDm_H4T4": {
+   "branches": [
+    "JPG17m"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "5e51e7bdbb88accab552268191441a94c2ca37bcf4c1afe98a8064025fd3dbe2",
+   "classes_sha256": "b9b44bd070c7a08faf890face91d3203c6e6bbf23c21e5c75f36a59d22d04cb2",
+   "surplus": "1"
+  },
+  "CLASS_PS_L06_T17_ENDp_H4T4": {
+   "branches": [
+    "JPG17p"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "beead0d9fe62337565901aee35f3135f117f74da70cc9ce1baee24a7d003aede",
+   "classes_sha256": "c4664fbfdf7caee23936b18f9f6d7844bd426abb9f188aa8128368ce35a57288",
+   "surplus": "6"
+  },
+  "CLASS_PS_L16_T09": {
+   "branches": [
+    "JPA"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "ace456602d3aff92786f510930b1614ab2035e764f8a820f4e203b07baabeffe",
+   "classes_sha256": "9569dba71efd7fac6cb5b7c66ec0646b1030d3f7de000b33192e0c59594b7378",
+   "surplus": "23"
+  },
+  "C_10": {
+   "branches": [
+    "JG"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "4c2fd898d9a88ef531da51ae7fd6e97a28445ec21febf364a8c9dd6b22ec4898",
+   "classes_sha256": "0bf38130aeeb319b5f03b781e3df934cb3d5634d963310c9ccc1eacf142e689e",
+   "surplus": "1"
+  },
+  "C_12": {
+   "branches": [
+    "JG"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "d57f708907fa88f161dafd94466e1c9851f23e858c76ffd15357ded4cf1c70cc",
+   "classes_sha256": "f3a0525a5d515c8b0e511b8afaf31afb9346a2e2fbbdae71e834a9f064508ecc",
+   "surplus": "10"
+  },
+  "E07A": {
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "bd544a7fb5781eb507cc36a0fb04ac959f8a0bb7677f489378cbc76cfa3378af",
+   "classes_sha256": "fe4e7bdb8df862240a0c521eedbfc1958375a907ce30895300544d578999f164",
+   "surplus": "6"
+  },
+  "FRAME_0917": {
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ],
+   "symmetry": "mirror_x",
+   "certificate_sha256": "5153d438092b7fe1523a9184fe43082638c23b05d9a4f1ecfc9e869ee3c17734",
+   "classes_sha256": "20fe5ad1403ae2b9bac9dc64b8421da81e0cd5f46a16b6e1a9659782ebbc2c71",
+   "surplus": "61/4"
+  },
+  "FRAME_1114": {
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ],
+   "symmetry": "mirror_x",
+   "certificate_sha256": "31b813eac2063502d12ca9c7e88d57aba93bb4fea21f876c46d0455b8c9062b8",
+   "classes_sha256": "b1d6815c9f28bc0df7bdabad8c774e8e76de94fca8cddb6d4ede2a5ddcf6d9cd",
+   "surplus": "1/2"
+  },
+  "FRAME_MARKER": {
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ],
+   "symmetry": "orbit",
+   "certificate_sha256": "a0de9a67de3543ce0703a01293878d257fc3addef09a8d237ad9c48b534101e7",
+   "classes_sha256": "6691f91f9d5038e413c5b8f9bd7e7b48ce793d9374d6adce1ef94fe9f89ab50c",
+   "surplus": "13"
+  },
+  "KEY_W": {
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "2f5a9a445788be1913678b6de8ac9ba8d468626758777a89be4cdef405b46130",
+   "classes_sha256": "64a965273a216b9a75ae424d4a94a4fbafeb04c3c1577b4e818a8d6e8355d4ed",
+   "surplus": "12"
+  },
+  "L_4": {
+   "branches": [
+    "JPW13 (loose L)",
+    "JG/tilted (L premise)"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "1220cfa6dafc59f30506db9923c06845f99ada966ead876b3044b33aeec29470",
+   "classes_sha256": "1d82397ce1399d4c82099901b8c548b6c73847e0e3615a5cd1922abe81523aae",
+   "surplus": "12"
+  },
+  "PW_11": {
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "403e797efedaa32b173022579f5f9f93007e22adf60c14b1766c7928ce555f8a",
+   "classes_sha256": "0fc8882907e5f43317019cf58da37b20a1bb3f09b6345e699abbb6db99cf105e",
+   "surplus": "8"
+  },
+  "PW_2": {
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "1c847349e37da1c54ff81ee6bc67d56110da2e77563c8a01d27713cc424ded18",
+   "classes_sha256": "770eba40a4928d01a6722e72819330a8df1febba994c69b383637d0e188c44b1",
+   "surplus": "9"
+  },
+  "Q_13": {
+   "branches": [
+    "JQ (wall low)"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "8876411af26898b67cbd939ff5926fc9496e0086eb64e6614fe737b7847f5864",
+   "classes_sha256": "61ad2287267695b82a10b4f011b446a68f62ae0824721c323eafa42d324f7878",
+   "surplus": "23"
+  },
+  "Q_4": {
+   "branches": [
+    "JQ (wall low)",
+    "JPWS (loose Q)"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "b4d583be780ad72316550955e6e7df14f24810ff7155818944397380e2db1df0",
+   "classes_sha256": "c0520b39b27d618e81ade2657be0d203f610a0a2e316a070edc8292147bc709f",
+   "surplus": "18"
+  },
+  "Q_6": {
+   "branches": [
+    "JQ (wall low)"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "3a5f3fe7c0a65a871cf8a536f073112f8718b716e6edb8c3455cf17be17c41a6",
+   "classes_sha256": "337b5da1acc32aba2db8f4ec5fd57e73538f63b428ab48cc6f645993add74493",
+   "surplus": "1"
+  },
+  "SL11_T020": {
+   "branches": [
+    "JPWS (label-11 slab)"
+   ],
+   "symmetry": "fixed",
+   "certificate_sha256": "2a4f2e1672dc1dce6f156d4fb16f92466259e85ea09e58844c0a590482f63d56",
+   "classes_sha256": "0571ecd0f5d4bef2b2c76476d282cdb8f974865da0794e4b28aed2152def8659",
+   "surplus": "12"
+  }
+ },
+ "calls": [
+  {
+   "statement": "Q_4",
+   "rows": [
+    0,
+    3
+   ],
+   "why": "first test (CHECK.md example)",
+   "exit": 0,
+   "wall_seconds": 38.074,
+   "cpu_seconds": 38.445,
+   "last_line": "SLICE RESULT: EQUAL (rows 0..2 of Q_4: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/Q_4_0_3)"
+  },
+  {
+   "statement": "Q_13",
+   "rows": [
+    9064,
+    9065
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 21.6,
+   "cpu_seconds": 22.1,
+   "last_line": "SLICE RESULT: EQUAL (rows 9064..9064 of Q_13: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/Q_13_9064_9065)"
+  },
+  {
+   "statement": "Q_6",
+   "rows": [
+    12515,
+    12516
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 20.9,
+   "cpu_seconds": 21.1,
+   "last_line": "SLICE RESULT: EQUAL (rows 12515..12515 of Q_6: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/Q_6_12515_12516)"
+  },
+  {
+   "statement": "SL11_T020",
+   "rows": [
+    5297,
+    5298
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 22.3,
+   "cpu_seconds": 23.1,
+   "last_line": "SLICE RESULT: EQUAL (rows 5297..5297 of SL11_T020: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/SL11_T020_5297_5298)"
+  },
+  {
+   "statement": "PW_2",
+   "rows": [
+    17997,
+    17998
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 26.8,
+   "cpu_seconds": 27.7,
+   "last_line": "SLICE RESULT: EQUAL (rows 17997..17997 of PW_2: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/PW_2_17997_17998)"
+  },
+  {
+   "statement": "PW_11",
+   "rows": [
+    15482,
+    15483
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 16.3,
+   "cpu_seconds": 16.8,
+   "last_line": "SLICE RESULT: EQUAL (rows 15482..15482 of PW_11: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/PW_11_15482_15483)"
+  },
+  {
+   "statement": "L_4",
+   "rows": [
+    17031,
+    17032
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 21.5,
+   "cpu_seconds": 22.4,
+   "last_line": "SLICE RESULT: EQUAL (rows 17031..17031 of L_4: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/L_4_17031_17032)"
+  },
+  {
+   "statement": "CLASS_PS_L16_T09",
+   "rows": [
+    4847,
+    4848
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 27.4,
+   "cpu_seconds": 27.9,
+   "last_line": "SLICE RESULT: EQUAL (rows 4847..4847 of CLASS_PS_L16_T09: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/CLASS_PS_L16_T09_4847_4848)"
+  },
+  {
+   "statement": "CLASS_PSW37_L11_T09",
+   "rows": [
+    17335,
+    17336
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 23.2,
+   "cpu_seconds": 23.3,
+   "last_line": "SLICE RESULT: EQUAL (rows 17335..17335 of CLASS_PSW37_L11_T09: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/CLASS_PSW37_L11_T09_17335_17336)"
+  },
+  {
+   "statement": "CLASS_PSS_L06_T03",
+   "rows": [
+    9889,
+    9890
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 28.4,
+   "cpu_seconds": 29.4,
+   "last_line": "SLICE RESULT: EQUAL (rows 9889..9889 of CLASS_PSS_L06_T03: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/CLASS_PSS_L06_T03_9889_9890)"
+  },
+  {
+   "statement": "CLASS_PS_L06_T17_ENDm_H4T4",
+   "rows": [
+    0,
+    1
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 26.7,
+   "cpu_seconds": 26.8,
+   "last_line": "SLICE RESULT: EQUAL (rows 0..0 of CLASS_PS_L06_T17_ENDm_H4T4: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/CLASS_PS_L06_T17_ENDm_H4T4_0_1)"
+  },
+  {
+   "statement": "CLASS_PS_L06_T17_ENDp_H4T4",
+   "rows": [
+    9312,
+    9313
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 24.0,
+   "cpu_seconds": 24.8,
+   "last_line": "SLICE RESULT: EQUAL (rows 9312..9312 of CLASS_PS_L06_T17_ENDp_H4T4: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/CLASS_PS_L06_T17_ENDp_H4T4_9312_9313)"
+  },
+  {
+   "statement": "CLASS_PSS_L12_T15",
+   "rows": [
+    17419,
+    17420
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 21.2,
+   "cpu_seconds": 21.9,
+   "last_line": "SLICE RESULT: EQUAL (rows 17419..17419 of CLASS_PSS_L12_T15: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/CLASS_PSS_L12_T15_17419_17420)"
+  },
+  {
+   "statement": "CLASS_PSSW37_L11_T15",
+   "rows": [
+    7891,
+    7892
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 28.9,
+   "cpu_seconds": 30.1,
+   "last_line": "SLICE RESULT: EQUAL (rows 7891..7891 of CLASS_PSSW37_L11_T15: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/CLASS_PSSW37_L11_T15_7891_7892)"
+  },
+  {
+   "statement": "C_10",
+   "rows": [
+    2321,
+    2322
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 20.3,
+   "cpu_seconds": 20.6,
+   "last_line": "SLICE RESULT: EQUAL (rows 2321..2321 of C_10: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/C_10_2321_2322)"
+  },
+  {
+   "statement": "C_12",
+   "rows": [
+    15814,
+    15815
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 17.1,
+   "cpu_seconds": 17.5,
+   "last_line": "SLICE RESULT: EQUAL (rows 15814..15814 of C_12: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/C_12_15814_15815)"
+  },
+  {
+   "statement": "FRAME_MARKER",
+   "rows": [
+    8965,
+    8966
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 20.0,
+   "cpu_seconds": 20.8,
+   "last_line": "SLICE RESULT: EQUAL (rows 8965..8965 of FRAME_MARKER: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/FRAME_MARKER_8965_8966)"
+  },
+  {
+   "statement": "FRAME_1114",
+   "rows": [
+    8678,
+    8679
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 17.0,
+   "cpu_seconds": 17.1,
+   "last_line": "SLICE RESULT: EQUAL (rows 8678..8678 of FRAME_1114: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/FRAME_1114_8678_8679)"
+  },
+  {
+   "statement": "FRAME_0917",
+   "rows": [
+    5856,
+    5857
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 20.5,
+   "cpu_seconds": 21.2,
+   "last_line": "SLICE RESULT: EQUAL (rows 5856..5856 of FRAME_0917: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/FRAME_0917_5856_5857)"
+  },
+  {
+   "statement": "KEY_W",
+   "rows": [
+    15261,
+    15262
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 24.7,
+   "cpu_seconds": 25.5,
+   "last_line": "SLICE RESULT: EQUAL (rows 15261..15261 of KEY_W: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/KEY_W_15261_15262)"
+  },
+  {
+   "statement": "E07A",
+   "rows": [
+    15376,
+    15377
+   ],
+   "why": "tightest row",
+   "exit": 0,
+   "wall_seconds": 19.0,
+   "cpu_seconds": 19.8,
+   "last_line": "SLICE RESULT: EQUAL (rows 15376..15376 of E07A: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/E07A_15376_15377)"
+  },
+  {
+   "statement": "Q_13",
+   "rows": [
+    1499,
+    1501
+   ],
+   "why": "slice boundary",
+   "exit": 0,
+   "wall_seconds": 29.9,
+   "cpu_seconds": 31.0,
+   "last_line": "SLICE RESULT: EQUAL (rows 1499..1500 of Q_13: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/Q_13_1499_1501)"
+  },
+  {
+   "statement": "PW_2",
+   "rows": [
+    1499,
+    1501
+   ],
+   "why": "slice boundary",
+   "exit": 0,
+   "wall_seconds": 41.1,
+   "cpu_seconds": 42.9,
+   "last_line": "SLICE RESULT: EQUAL (rows 1499..1500 of PW_2: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/PW_2_1499_1501)"
+  },
+  {
+   "statement": "CLASS_PSS_L06_T03",
+   "rows": [
+    1499,
+    1501
+   ],
+   "why": "slice boundary",
+   "exit": 0,
+   "wall_seconds": 41.0,
+   "cpu_seconds": 42.8,
+   "last_line": "SLICE RESULT: EQUAL (rows 1499..1500 of CLASS_PSS_L06_T03: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/CLASS_PSS_L06_T03_1499_1501)"
+  },
+  {
+   "statement": "FRAME_0917",
+   "rows": [
+    1499,
+    1501
+   ],
+   "why": "slice boundary, mirror_x",
+   "exit": 0,
+   "wall_seconds": 40.8,
+   "cpu_seconds": 29.1,
+   "last_line": "SLICE RESULT: EQUAL (rows 1499..1500 of FRAME_0917: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/FRAME_0917_1499_1501)"
+  },
+  {
+   "statement": "PW_2",
+   "rows": [
+    3674,
+    3675
+   ],
+   "why": "heaviest row",
+   "exit": 0,
+   "wall_seconds": 50.6,
+   "cpu_seconds": 30.3,
+   "last_line": "SLICE RESULT: EQUAL (rows 3674..3674 of PW_2: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/PW_2_3674_3675)"
+  },
+  {
+   "statement": "C_12",
+   "rows": [
+    8149,
+    8150
+   ],
+   "why": "heaviest row",
+   "exit": 0,
+   "wall_seconds": 25.6,
+   "cpu_seconds": 18.6,
+   "last_line": "SLICE RESULT: EQUAL (rows 8149..8149 of C_12: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/C_12_8149_8150)"
+  },
+  {
+   "statement": "CLASS_PSS_L06_T03",
+   "rows": [
+    7643,
+    7644
+   ],
+   "why": "heaviest row",
+   "exit": 0,
+   "wall_seconds": 47.8,
+   "cpu_seconds": 29.8,
+   "last_line": "SLICE RESULT: EQUAL (rows 7643..7643 of CLASS_PSS_L06_T03: both checkers pass every row, agree with each other and with the stored rows; outputs in <k3-scratch>/work/slices/CLASS_PSS_L06_T03_7643_7644)"
+  }
+ ],
+ "calls_equal": 28,
+ "calls_total": 28,
+ "rows_recomputed": 34,
+ "python_row_cpu_ratio_here_vs_stored_excluding_first_row_of_each_process": {
+  "rows": 6,
+  "median": 1.0791189553225315
+ },
+ "full_recompute_price_from_slice_records": {
+  "statements": 98,
+  "rows": 1728000,
+  "slices": 1152,
+  "python_cpu_hours": 1273.2,
+  "node_cpu_hours": 1073.9,
+  "both_checkers_cpu_hours": 2347.1,
+  "recorded_slice_wall_hours_4_workers": 600.8,
+  "on_this_4_core_machine_days_if_exclusive": 24.4,
+  "python_only_days_if_exclusive": 13.3,
+  "method": "sum of per-row cpu_seconds over the 1,152 stored python and node slice files; slice wall from provenance.json started/finished"
+ },
+ "per_statement_cost": {
+  "CLASS_PSSW37_L11_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 70292.4,
+   "node_cpu_seconds": 61710.3,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSSW37_L11_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 52607.0,
+   "node_cpu_seconds": 44960.9,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L01_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 64052.3,
+   "node_cpu_seconds": 52815.1,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L01_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 53789.3,
+   "node_cpu_seconds": 47675.2,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L02_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 56456.0,
+   "node_cpu_seconds": 47268.6,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L02_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 63832.3,
+   "node_cpu_seconds": 52415.0,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L05_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 76431.6,
+   "node_cpu_seconds": 65201.0,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L05_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 54863.1,
+   "node_cpu_seconds": 45068.8,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L06_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 86700.4,
+   "node_cpu_seconds": 73186.0,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L06_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 51261.7,
+   "node_cpu_seconds": 48474.7,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L07_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 50304.9,
+   "node_cpu_seconds": 42962.3,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L07_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 63106.2,
+   "node_cpu_seconds": 52433.1,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L08_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 49694.7,
+   "node_cpu_seconds": 41211.6,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L08_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 61531.3,
+   "node_cpu_seconds": 50834.8,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L10_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 84386.6,
+   "node_cpu_seconds": 72411.1,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L10_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 45447.3,
+   "node_cpu_seconds": 39285.7,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L12_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 51004.4,
+   "node_cpu_seconds": 39513.8,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L12_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 29883.8,
+   "node_cpu_seconds": 23264.2,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L13_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 52043.9,
+   "node_cpu_seconds": 44093.8,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L13_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 48366.3,
+   "node_cpu_seconds": 41909.8,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L14_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 54726.2,
+   "node_cpu_seconds": 46881.4,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L14_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 57680.3,
+   "node_cpu_seconds": 50338.2,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSS_L16_T03": {
+   "rows": 18000,
+   "python_cpu_seconds": 41278.9,
+   "node_cpu_seconds": 36998.5,
+   "branches": [
+    "JPG3m",
+    "JPG3p"
+   ]
+  },
+  "CLASS_PSS_L16_T15": {
+   "rows": 18000,
+   "python_cpu_seconds": 52892.9,
+   "node_cpu_seconds": 43712.7,
+   "branches": [
+    "JPG15m",
+    "JPG15p"
+   ]
+  },
+  "CLASS_PSW37_L11_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 47578.1,
+   "node_cpu_seconds": 40041.5,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PSW37_L11_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 58768.3,
+   "node_cpu_seconds": 46926.8,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L01_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 51436.0,
+   "node_cpu_seconds": 41832.4,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L01_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 79106.2,
+   "node_cpu_seconds": 66736.7,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L02_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 50482.9,
+   "node_cpu_seconds": 42442.4,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L02_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 69384.7,
+   "node_cpu_seconds": 55621.8,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L05_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 66520.8,
+   "node_cpu_seconds": 55588.2,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L05_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 52769.8,
+   "node_cpu_seconds": 43092.6,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L06_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 67435.6,
+   "node_cpu_seconds": 56794.6,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L06_T17_ENDm_H4T4": {
+   "rows": 18000,
+   "python_cpu_seconds": 54471.7,
+   "node_cpu_seconds": 43978.8,
+   "branches": [
+    "JPG17m"
+   ]
+  },
+  "CLASS_PS_L06_T17_ENDp_H4T4": {
+   "rows": 18000,
+   "python_cpu_seconds": 49675.4,
+   "node_cpu_seconds": 45039.6,
+   "branches": [
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L07_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 69308.0,
+   "node_cpu_seconds": 58092.5,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L07_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 59896.2,
+   "node_cpu_seconds": 50071.5,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L08_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 75629.3,
+   "node_cpu_seconds": 61386.6,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L08_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 76605.8,
+   "node_cpu_seconds": 64790.3,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L10_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 67237.3,
+   "node_cpu_seconds": 55681.4,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L10_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 57088.4,
+   "node_cpu_seconds": 48579.5,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L12_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 37591.5,
+   "node_cpu_seconds": 29590.9,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L12_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 46308.3,
+   "node_cpu_seconds": 38529.4,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L13_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 67201.0,
+   "node_cpu_seconds": 54215.7,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L13_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 61918.3,
+   "node_cpu_seconds": 52340.4,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L14_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 71926.7,
+   "node_cpu_seconds": 58825.6,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L14_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 62425.4,
+   "node_cpu_seconds": 50428.4,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "CLASS_PS_L16_T09": {
+   "rows": 18000,
+   "python_cpu_seconds": 66917.7,
+   "node_cpu_seconds": 55789.2,
+   "branches": [
+    "JPA"
+   ]
+  },
+  "CLASS_PS_L16_T17": {
+   "rows": 18000,
+   "python_cpu_seconds": 64226.9,
+   "node_cpu_seconds": 57886.7,
+   "branches": [
+    "JPG17m",
+    "JPG17p"
+   ]
+  },
+  "C_1": {
+   "rows": 18000,
+   "python_cpu_seconds": 20527.4,
+   "node_cpu_seconds": 17521.6,
+   "branches": [
+    "JG"
+   ]
+  },
+  "C_10": {
+   "rows": 18000,
+   "python_cpu_seconds": 14557.8,
+   "node_cpu_seconds": 13936.0,
+   "branches": [
+    "JG"
+   ]
+  },
+  "C_11": {
+   "rows": 18000,
+   "python_cpu_seconds": 14278.8,
+   "node_cpu_seconds": 13295.8,
+   "branches": [
+    "JG"
+   ]
+  },
+  "C_12": {
+   "rows": 18000,
+   "python_cpu_seconds": 13008.5,
+   "node_cpu_seconds": 11755.6,
+   "branches": [
+    "JG"
+   ]
+  },
+  "C_13": {
+   "rows": 18000,
+   "python_cpu_seconds": 18596.3,
+   "node_cpu_seconds": 16675.6,
+   "branches": [
+    "JG"
+   ]
+  },
+  "C_14": {
+   "rows": 18000,
+   "python_cpu_seconds": 18640.6,
+   "node_cpu_seconds": 17525.5,
+   "branches": [
+    "JG"
+   ]
+  },
+  "C_16": {
+   "rows": 18000,
+   "python_cpu_seconds": 42002.4,
+   "node_cpu_seconds": 38643.5,
+   "branches": [
+    "JG"
+   ]
+  },
+  "C_2": {
+   "rows": 18000,
+   "python_cpu_seconds": 39086.9,
+   "node_cpu_seconds": 36210.1,
+   "branches": [
+    "JG"
+   ]
+  },
+  "C_5": {
+   "rows": 18000,
+   "python_cpu_seconds": 18051.0,
+   "node_cpu_seconds": 16495.9,
+   "branches": [
+    "JG"
+   ]
+  },
+  "C_6": {
+   "rows": 18000,
+   "python_cpu_seconds": 14576.7,
+   "node_cpu_seconds": 13328.3,
+   "branches": [
+    "JG"
+   ]
+  },
+  "E07A": {
+   "rows": 18000,
+   "python_cpu_seconds": 19530.9,
+   "node_cpu_seconds": 18238.7,
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ]
+  },
+  "FRAME_0506": {
+   "rows": 9000,
+   "python_cpu_seconds": 20934.6,
+   "node_cpu_seconds": 16583.0,
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ]
+  },
+  "FRAME_0917": {
+   "rows": 9000,
+   "python_cpu_seconds": 28758.7,
+   "node_cpu_seconds": 17071.4,
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ]
+  },
+  "FRAME_1114": {
+   "rows": 9000,
+   "python_cpu_seconds": 12719.6,
+   "node_cpu_seconds": 10451.1,
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ]
+  },
+  "FRAME_MARKER": {
+   "rows": 9000,
+   "python_cpu_seconds": 14839.6,
+   "node_cpu_seconds": 18061.7,
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ]
+  },
+  "KEY_W": {
+   "rows": 18000,
+   "python_cpu_seconds": 42844.8,
+   "node_cpu_seconds": 38498.7,
+   "branches": [
+    "all (frame/KEY_W/C7-C8)"
+   ]
+  },
+  "L_15": {
+   "rows": 18000,
+   "python_cpu_seconds": 27689.1,
+   "node_cpu_seconds": 25354.5,
+   "branches": [
+    "JPW13 (loose L)",
+    "JG/tilted (L premise)"
+   ]
+  },
+  "L_17": {
+   "rows": 18000,
+   "python_cpu_seconds": 57344.3,
+   "node_cpu_seconds": 54256.8,
+   "branches": [
+    "JPW13 (loose L)",
+    "JG/tilted (L premise)"
+   ]
+  },
+  "L_3": {
+   "rows": 18000,
+   "python_cpu_seconds": 36528.2,
+   "node_cpu_seconds": 32714.1,
+   "branches": [
+    "JPW13 (loose L)",
+    "JG/tilted (L premise)"
+   ]
+  },
+  "L_4": {
+   "rows": 18000,
+   "python_cpu_seconds": 35412.1,
+   "node_cpu_seconds": 29575.9,
+   "branches": [
+    "JPW13 (loose L)",
+    "JG/tilted (L premise)"
+   ]
+  },
+  "PW_1": {
+   "rows": 18000,
+   "python_cpu_seconds": 63119.1,
+   "node_cpu_seconds": 51076.8,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_10": {
+   "rows": 18000,
+   "python_cpu_seconds": 35778.2,
+   "node_cpu_seconds": 30328.2,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_11": {
+   "rows": 18000,
+   "python_cpu_seconds": 10617.8,
+   "node_cpu_seconds": 8694.0,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_12": {
+   "rows": 18000,
+   "python_cpu_seconds": 28892.8,
+   "node_cpu_seconds": 22074.3,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_13": {
+   "rows": 18000,
+   "python_cpu_seconds": 28553.3,
+   "node_cpu_seconds": 22746.4,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_14": {
+   "rows": 18000,
+   "python_cpu_seconds": 35325.6,
+   "node_cpu_seconds": 28484.1,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_16": {
+   "rows": 18000,
+   "python_cpu_seconds": 41022.9,
+   "node_cpu_seconds": 33234.1,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_2": {
+   "rows": 18000,
+   "python_cpu_seconds": 80483.9,
+   "node_cpu_seconds": 66788.0,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_5": {
+   "rows": 18000,
+   "python_cpu_seconds": 66926.7,
+   "node_cpu_seconds": 53315.6,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_6": {
+   "rows": 18000,
+   "python_cpu_seconds": 48433.4,
+   "node_cpu_seconds": 40012.9,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_7": {
+   "rows": 18000,
+   "python_cpu_seconds": 57497.1,
+   "node_cpu_seconds": 49872.0,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "PW_8": {
+   "rows": 18000,
+   "python_cpu_seconds": 48652.5,
+   "node_cpu_seconds": 41819.0,
+   "branches": [
+    "JPWS",
+    "JPW13"
+   ]
+  },
+  "Q_1": {
+   "rows": 18000,
+   "python_cpu_seconds": 39280.7,
+   "node_cpu_seconds": 34539.8,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_10": {
+   "rows": 18000,
+   "python_cpu_seconds": 38900.9,
+   "node_cpu_seconds": 32568.8,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_11": {
+   "rows": 18000,
+   "python_cpu_seconds": 10358.9,
+   "node_cpu_seconds": 9213.4,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_12": {
+   "rows": 18000,
+   "python_cpu_seconds": 37047.9,
+   "node_cpu_seconds": 28443.5,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_13": {
+   "rows": 18000,
+   "python_cpu_seconds": 39550.3,
+   "node_cpu_seconds": 32426.9,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_14": {
+   "rows": 18000,
+   "python_cpu_seconds": 42825.4,
+   "node_cpu_seconds": 35149.1,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_15": {
+   "rows": 18000,
+   "python_cpu_seconds": 44232.5,
+   "node_cpu_seconds": 36063.0,
+   "branches": [
+    "JQ (wall low)",
+    "JPWS (loose Q)"
+   ]
+  },
+  "Q_16": {
+   "rows": 18000,
+   "python_cpu_seconds": 34250.5,
+   "node_cpu_seconds": 28942.6,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_17": {
+   "rows": 18000,
+   "python_cpu_seconds": 34168.9,
+   "node_cpu_seconds": 27684.2,
+   "branches": [
+    "JQ (wall low)",
+    "JPWS (loose Q)"
+   ]
+  },
+  "Q_2": {
+   "rows": 18000,
+   "python_cpu_seconds": 33821.0,
+   "node_cpu_seconds": 28215.1,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_3": {
+   "rows": 18000,
+   "python_cpu_seconds": 50639.9,
+   "node_cpu_seconds": 43848.7,
+   "branches": [
+    "JQ (wall low)",
+    "JPWS (loose Q)"
+   ]
+  },
+  "Q_4": {
+   "rows": 18000,
+   "python_cpu_seconds": 45494.9,
+   "node_cpu_seconds": 39280.3,
+   "branches": [
+    "JQ (wall low)",
+    "JPWS (loose Q)"
+   ]
+  },
+  "Q_5": {
+   "rows": 18000,
+   "python_cpu_seconds": 31872.7,
+   "node_cpu_seconds": 27357.7,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_6": {
+   "rows": 18000,
+   "python_cpu_seconds": 40265.1,
+   "node_cpu_seconds": 32545.7,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_7": {
+   "rows": 18000,
+   "python_cpu_seconds": 46495.6,
+   "node_cpu_seconds": 39149.6,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "Q_8": {
+   "rows": 18000,
+   "python_cpu_seconds": 25513.4,
+   "node_cpu_seconds": 22587.0,
+   "branches": [
+    "JQ (wall low)"
+   ]
+  },
+  "SL11_T020": {
+   "rows": 18000,
+   "python_cpu_seconds": 28989.3,
+   "node_cpu_seconds": 24391.5,
+   "branches": [
+    "JPWS (label-11 slab)"
+   ]
+  }
+ }
+}

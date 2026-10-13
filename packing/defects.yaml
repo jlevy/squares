@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 519
+count: 520
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -17478,3 +17478,49 @@ defects:
     reading, a bead whose stated blocker merged, a queued result with no bead of its own,
     and, on a real repository, a commit a pin contains that no packet retains.
   recorded_in: docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md
+- id: D-520
+  title: The open-gap ranking filtered on the reported status, so a case reported closed but open in the verified lane left the table
+  date: '2026-10-12'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: inspection
+  latent_for: >-
+    Thirteen days, 2026-09-29 to 2026-10-12. The filter dates from the tool's first commit
+    (94d37d7fb, 2026-08-31) and first dropped a verified-open case on 2026-09-29, when
+    T-060's report made n = 11 reported proved a day before its audit proved it; from
+    2026-10-03 it kept n = 96 and T-081's other k^2 - 4 counts out of the ranking until
+    the #560 calibration found it.
+  severity: medium
+  status: fixed
+  bead: think-k1aa
+  what: >-
+    devtools.gap_ranking says it ranks "every open case by its verified gap", the best
+    known packing minus the verified lower bound, but open_cases() skipped every case
+    whose reported_status was not open. A report can close a case while its verified lane
+    stays open: T-081 made n = 96, 117, 140, 165, 192, 221, 252, 285 and 320 so on
+    2026-10-03, and T-153 made n = 17 so on 2026-10-12. With T-153 registered, the tool
+    ranked 237 cases where the verified lane holds 247, and frontier/README.md's
+    hand-written Smallest Open Gaps table, which says it is what the tool computes, had no
+    row for n = 96.
+  consequence: >-
+    The table that sequences proof-lane work (D-405, X-010) read an unreplayed report as
+    a closure. n = 96, fourth narrowest at n <= 100 (0.0300), was missing from it for
+    nine days, and T-153 would have removed n = 17, the narrowest gap (0.0151), from its
+    head while n = 17 stays open in the verified lane. Conservative, as D-405 was: no
+    record lane carried a false value, and the cost was sequencing.
+  fix: >-
+    e5759d96f filters on status, the verified lane's, so the tool ranks the 247
+    verified-open cases with n = 17 first and n = 96 fourth, and the README table gained
+    n = 96. The module docstring now states D-405's measurement as dated history rather
+    than naming a table head the record has since closed.
+  regression: >-
+    packing/tests/test_gap_ranking.py: test_a_case_reported_proved_but_open_in_the_verified_lane_is_ranked
+    holds the filter on synthetic records of the three shapes;
+    test_the_ranked_cases_are_exactly_the_verified_open_cases_of_the_record ties the
+    ranking to the cases with status open and to FRONTIER_COUNTS' formal-open count, and
+    requires a reported-closed, verified-open case to exist and be ranked; and
+    test_the_readme_table_is_the_tools_head_of_the_ranking compares the README's six rows
+    with the tool's first six at n <= 100, the check D-405's regression named as unbuilt.
+    All three fail with the old filter.
+  recorded_in: packing/tests/test_gap_ranking.py

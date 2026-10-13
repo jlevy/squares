@@ -47,7 +47,10 @@ SERIES = tuple(record for record in PAPERS if record.part is not None)
 REVIEWS = tuple(record.slug for record in PAPERS[1:])
 #: Each review's source, as the first two lines of its credits name it.
 SOURCES = {
-    THRESHOLD: ("Kleddamag", "https://github.com/Kleddamag/11-squares-certified-bound"),
+    THRESHOLD: (
+        "Marc Leonard Overbeck",
+        "https://github.com/Kleddamag/11-squares-certified-bound",
+    ),
     REVIEW: ("Mannaseh Ahmed", "https://github.com/Queuingtheorydotcom/11SquaresOptimal"),
 }
 #: Each paper's own version line and dates line, from `sqpack.release`.

@@ -1,4 +1,4 @@
-"""Paper II's figures stay bound to Kleddamag's certificate and the retained replays.
+"""Paper II's figures stay bound to Overbeck's certificate and the retained replays.
 
 Each figure is checked three ways: it is a self-contained static SVG that fits a phone's
 column in glyphs the shipped face carries; what it labels is what the pinned data says,

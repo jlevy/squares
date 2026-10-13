@@ -97,7 +97,7 @@ def optimality_revised() -> date:
 
 def threshold_dates() -> tuple[str, str]:
     """The threshold-bound review's two dates as its front states them, as the
-    optimality paper's are: the day Kleddamag published the proof it reviews, then the
+    optimality paper's are: the day Overbeck published the proof it reviews, then the
     day the review was last revised, both from `sqpack.release`."""
     return release.THRESHOLD_PROOF_PUBLISHED, release.THRESHOLD_REVIEW_REVISED
 

@@ -1,6 +1,6 @@
 """The R067 and R068 packet holds the pinned bytes, and its claims re-derive from them.
 
-The certificates are Guzhou0806's continuations of Kleddamag's 4.66001 charge. These
+The certificates are Guzhou0806's continuations of Overbeck's 4.66001 charge. These
 tests read the retained files only: the pinned packages against their own manifests and
 publication records, what each certificate changes relative to 4.66001, and the
 published and fresh interval ledgers row by row. No sweep runs here; the full paired

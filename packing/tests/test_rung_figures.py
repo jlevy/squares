@@ -754,7 +754,7 @@ def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
                 continue
             # An evidence certificate need not be a JSON object at all: R012's measure
             # ships as a bare list of orbit rows (E-n017-guzhou-r012-source-replay),
-            # R052's as gzip bytes (E-n017-guzhou-r052-source-replay), and Kleddamag's
+            # R052's as gzip bytes (E-n017-guzhou-r052-source-replay), and Overbeck's
             # v1.1.0 and 4.66001 as schemaless objects (E-n017-kleddamag-4640020- and
             # E-n017-kleddamag-466001-source-replay).
             if not isinstance(record, dict):
