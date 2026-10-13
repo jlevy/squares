@@ -240,10 +240,10 @@ allowlist:
     boundary: A cold saved-check receipt identifies the generated seed and node consumed by the diagnostic; these runtime objects are not named by a Git revision.
   - path: packing/src/sqpack/fractional/parent_core.py
     kind: download
-    boundary: Kleddamag's n11 release, read against the digest the review pinned (H1).
+    boundary: Overbeck's n11 release, read against the digest the review pinned (H1).
   - path: packing/devtools/audit_kleddamag_n11.py
     kind: download
-    boundary: Kleddamag's certificate and source manifest against their pinned values (H1).
+    boundary: Overbeck's certificate and source manifest against their pinned values (H1).
   - path: packing/src/sqpack/research/unitsquare_precision.py
     kind: download
     boundary: A Kingbird SVG fetched by URL and held against its pinned digest (H2).

@@ -96,11 +96,11 @@ def test_indexed_external17_report_never_exceeds_the_verified_lane(
 
     It was anabologyco-maker's 9141/2000, below the verified lane at both sizes.
     Since 2026-09-20 Guzhou0806's historical R012 has supplied the n = 18 report. At
-    n = 17 later strict bounds supersede R012 -- Kleddamag's 461300/99853 from
-    2026-09-22, Guzhou0806's R052 231001/50000 from 2026-09-25, Kleddamag's v1.1.0
-    232001/50000 and then Kleddamag's 466001/100000 (building on this project, Mira and
+    n = 17 later strict bounds supersede R012 -- Overbeck's 461300/99853 from
+    2026-09-22, Guzhou0806's R052 231001/50000 from 2026-09-25, Overbeck's v1.1.0
+    232001/50000 and then Overbeck's 466001/100000 (building on this project, Mira and
     Guzhou0806), both from 2026-09-27, Guzhou0806's R068 116511/25000, continuing
-    Kleddamag's charge, from 2026-09-29, and then R071 18641771/4000000 on R068's charge
+    Overbeck's charge, from 2026-09-29, and then R071 18641771/4000000 on R068's charge
     unchanged (T-093), reported from 2026-10-05 above the verified lane until its paired
     replay passed here the same day, when the two fields came to hold the same value.
     Since 2026-10-12 the reported field holds Overbeck's candidate equality s(17) = L
