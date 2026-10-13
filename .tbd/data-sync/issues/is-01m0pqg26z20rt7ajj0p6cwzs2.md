@@ -5,13 +5,13 @@ title: Generate the session report the unattended protocol requires
 kind: feature
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T07:13:56.447Z
-updated_at: 2026-10-10T22:47:42.299Z
+updated_at: 2026-10-12T23:51:01.234Z
 closed_at: 2026-08-23T08:10:05.605Z
 close_reason: "Built on claude/thinking-scratchpad-research-p1wkfg (PR #13) as campaign/runner.py: status/preflight/claim/execute/record/release/run, state on disk between steps, the accepting verdict structurally unreachable, and a generated session report. Driven end to end for exp-011 (H-020 at n=17)."
 resolution: null

@@ -3,9 +3,9 @@ type: is
 id: is-01m4qfk7nzmgrwxdj50b3h3k5w
 title: Label every issue; intake label in the runbook and sweep
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T07:17:53.470Z
-updated_at: 2026-10-12T09:42:21.856Z
+updated_at: 2026-10-12T23:39:01.383Z
 started_at: 2026-10-12T07:18:01.788Z
+closed_at: 2026-10-12T23:39:01.382Z
+close_reason: "Delivered in PR #546 (merged 2026-10-12): 68 labels on 65 issues, and check_requests --github plus the intake sweep list an intake entry lacking the label (266093429, cf24e494f, 28f412bf4)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

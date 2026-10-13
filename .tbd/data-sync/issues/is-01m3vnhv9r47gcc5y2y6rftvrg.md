@@ -5,13 +5,13 @@ title: Build exact n17 endpoint feasibility instrument with deterministic interi
 kind: task
 status: closed
 priority: 0
-version: 3
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 4
+spec_path: docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md
 labels: []
 dependencies: []
 parent_id: is-01m3vkftza0gk08jwefckcgfmr
 created_at: 2026-10-01T12:03:15.383Z
-updated_at: 2026-10-01T12:24:21.632Z
+updated_at: 2026-10-12T23:50:14.435Z
 closed_at: 2026-10-01T12:24:21.631Z
 close_reason: Endpoint instrument frozen ataddc5331e/f77b3e0a7; nine synthetic controls, clean code floor and independent Astra review. One H256 target now running under180s cap; output acceptance remains think-r8ns/think-bj81.
 resolution: null

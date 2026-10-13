@@ -5,14 +5,14 @@ title: Assemble, reduce, and close the contact equations from an accepted contac
 kind: feature
 status: open
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md
+version: 7
+spec_path: docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md
 labels:
   - packing
 dependencies: []
 parent_id: is-01m0tyy5k7e4ags20c1fxqth7f
 created_at: 2026-08-28T02:05:40.302Z
-updated_at: 2026-10-10T23:01:56.923Z
+updated_at: 2026-10-12T23:51:12.972Z
 ---
 Steps 3 and 4 of the symbolic promotion route, both unbuilt.
 

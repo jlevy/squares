@@ -3,9 +3,9 @@ type: is
 id: is-01m1b2bdf7c684np889mvqhh3e
 title: "Lane B1: the H-044 verdict -- upgrade the chunk census to the registered partition solver"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 spec_path: packing/campaign/explorations/X-010-two-lanes-two-ladders.md
 delegate: claude-code@vm
 labels:
@@ -17,8 +17,12 @@ dependencies:
 hold: null
 hold_until: null
 created_at: 2026-08-31T04:48:27.111Z
-updated_at: 2026-08-31T08:19:26.036Z
+updated_at: 2026-10-12T23:39:28.145Z
 started_at: 2026-08-31T08:19:26.036Z
+closed_at: 2026-10-12T23:39:28.145Z
+close_reason: "Completed: H-044 verdict exp-046 (session-055, agenda-010 BC-100 complete) with devtools/score_h044.py; instrument_ready true. The relaxed-universe census re-run named in exp-046 is an untracked follow-on, not this bead's scope."
+resolution: null
+duplicate_of: null
 ---
 H-044 (are standing records chunk-expressible at K<=6 with at most two free squares?) is refutation-first and search-free -- measurable from archived geometry -- and X-003 registered it first for exactly that reason, but its instrument_ready is false. The delta from sqpack/chunks.py's conservative component census to the registered instrument: exact-cover/set-packing minimization over admissible bar/L/rectangle subsets within the declared adjacency bands, deterministic tie-breaking, typed no-partition/outside-budget/search-limit refusals, replayable decomposition certificates. A refutation kills the chunk ansatz before an enumerator exists; a confirmation makes stage-1's grammar evidence-based. X-010 Lane B rung 1.
 

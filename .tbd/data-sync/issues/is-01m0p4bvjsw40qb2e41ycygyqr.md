@@ -5,8 +5,8 @@ title: "Phase 3: the census, the premise, and the atlas"
 kind: epic
 status: open
 priority: 1
-version: 19
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 20
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies:
   - type: blocks
@@ -18,6 +18,6 @@ child_order_hints:
   - is-01m0p4bwrbqc4gvd227t3mgnxh
   - is-01m0p4bx2apnf4zh5mz1r9n85m
 created_at: 2026-08-23T01:39:35.641Z
-updated_at: 2026-10-10T22:47:31.320Z
+updated_at: 2026-10-12T23:50:48.481Z
 ---
 Epic. Mostly running the earlier phases. Produces the deliverable: the atlas for n<=10 with discovery curves, and a verdict on whether record basins are actually rare.

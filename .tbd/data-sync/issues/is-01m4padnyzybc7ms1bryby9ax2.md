@@ -3,9 +3,9 @@ type: is
 id: is-01m4padnyzybc7ms1bryby9ax2
 title: "Import Robert Barnett: s(146) and s(261), refinements of Ryan Xu's packings (#505)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:14.174Z
-updated_at: 2026-10-11T22:08:38.713Z
+updated_at: 2026-10-12T23:39:14.436Z
 started_at: 2026-10-11T20:28:26.363Z
+closed_at: 2026-10-12T23:39:14.436Z
+close_reason: "Completed: Barnett #505 imported, replayed, reviewed (review-2026-10-11-upper-bound-imports-505-501.md), registered as T-150 V3/C3 and adopted by PR #518 (merged 2026-10-12); final reply posted and issue closed."
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/505 (2026-10-11T14:24Z). RobertBarnettProjects/square-packing-research 2573ff51c4b160c952bbb2d1c399e7430d9f9ae2 certificates/n146.cert, n261.cert (Evan Daniel's format), and the issue's attachment square-packing-results.zip. 146 below T-146's regularized n146 by 7.35e-8; 261 below ry-xu #432 by 5.68e-11. Stages 1-4 replay through devtools.upper_bound_reports.
 

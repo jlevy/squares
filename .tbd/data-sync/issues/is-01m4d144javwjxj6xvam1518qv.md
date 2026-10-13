@@ -3,9 +3,9 @@ type: is
 id: is-01m4d144javwjxj6xvam1518qv
 title: Verify and import Gupta issue 438 exact rational refinements
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m4cxvcjvqn3knceewfmcwtqb
 hold: null
 hold_until: null
 created_at: 2026-10-08T05:52:34.377Z
-updated_at: 2026-10-08T19:39:43.875Z
+updated_at: 2026-10-12T23:39:32.084Z
 started_at: 2026-10-08T05:52:54.419Z
+closed_at: 2026-10-12T23:39:32.083Z
+close_reason: "Completed: Gupta #438 refinements registered as T-127 V3/C3 (fourteen bounds; three withdrawals recorded), adopted with #518, final reply posted and issue closed 2026-10-12."
+resolution: null
+duplicate_of: null
 ---
 Own the maintained exact-certificate producer, all17 source candidates and complete comparators, full native positive/duplicate/outside/parser refusal controls, selected14 finite upper-bound registration T127, consumer and private-worker bindings, scoped independent review, and formally stacked PR after final FN1 lossless complete-receipt retention. Preserve lower bounds and optimum labels. No bulk local clone at low disk space; exact hosted required/full gates before ready. Writer refinement_import; coordinator retains tbd sync.
 

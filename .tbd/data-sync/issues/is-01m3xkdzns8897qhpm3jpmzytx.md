@@ -5,13 +5,13 @@ title: Hosted certification for Session 167 (claude/busy-goldberg-rouoli)
 kind: task
 status: closed
 priority: 2
-version: 2
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 3
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
 parent_id: is-01m3v9vq36ykk2jdzce75req44
 created_at: 2026-10-02T06:04:40.504Z
-updated_at: 2026-10-02T07:50:48.535Z
+updated_at: 2026-10-12T23:40:14.524Z
 closed_at: 2026-10-02T07:50:48.534Z
 close_reason: Certified on PR 307 head e51fce98 (Packing validation 36979940992)
 resolution: null

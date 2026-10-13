@@ -5,7 +5,7 @@ title: "PR #496 (merge): fix: bound publication audits and scope local push chec
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T02:46:33.702Z
-updated_at: 2026-10-11T06:29:12.466Z
+updated_at: 2026-10-12T23:40:48.006Z
 started_at: 2026-10-11T02:46:34.643Z
 ---
 
@@ -28,3 +28,5 @@ Owner authorization, recorded 2026-10-10 ~22:00 PT from the owner's own messages
 Reviews at aca9a0784: A, B (senior, partial), C (performance), D (security) by the Codex coordinator, gpt-6-astra, 0 findings; E senior (Fable, full 12/12): 4 Low + 2 suggestions; F performance (Opus): 2 Medium + 2 Low + 3 suggestions; G correctness (Fable) in progress.
 
 Update 2026-10-10 23:40 PT: PR #496 was merged at 2026-10-11T06:07:36Z (merge 8aba95081, head aca9a0784) by the jlevy account, apparently by the concurrent Codex coordinator, before any fix commits or disposition replies. The addressing agent had stopped on a session rate limit with nothing pushed. Findings E1-E6, F1-F7 and G1-G5 remain open on main. A follow-up PR from branch claude/pr496-review-fixes (cut from 8aba95081) carries the fixes and dispositions; see the child bead. The owner chose a Fable follow-up review round for the fix commits.
+
+2026-10-12 reconciliation: PR #496 merged 2026-10-11T06:07:36Z; the review-fix PR #507 merged 2026-10-12T23:07:24Z. This bead closes once think-zn2q and think-jjs7 close.

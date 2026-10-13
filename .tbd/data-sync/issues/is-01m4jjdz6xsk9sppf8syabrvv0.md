@@ -5,8 +5,8 @@ title: Coordinate X-052 eight-hour proof block and conditional replanning
 kind: task
 status: open
 priority: 1
-version: 15
-spec_path: docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md
+version: 16
+spec_path: docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md
 delegate: null
 labels: []
 dependencies: []
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:31:14.516Z
-updated_at: 2026-10-10T18:29:10.504Z
+updated_at: 2026-10-12T23:52:00.297Z
 started_at: 2026-10-10T09:36:17.032Z
 ---
 Launch only on execution instruction. Own agenda046, actual eight-hour session clocks, resource guards, disjoint worker claims, checkpoint dispositions, integration and block handoff. The prospective three-block session plan considers two further eight-hour blocks, each requiring evidence-based W10 replanning and a fresh complete session record. Preserve BC418 think-tmz6 ownership; this PR launches no block.

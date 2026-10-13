@@ -3,9 +3,9 @@ type: is
 id: is-01m4qdvm05t297yghevg6nm7gz
 title: "Follow-ups after #512 merged (2026-10-12)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T06:47:31.077Z
-updated_at: 2026-10-12T08:10:21.217Z
+updated_at: 2026-10-12T23:39:13.434Z
 started_at: 2026-10-12T06:47:36.968Z
+closed_at: 2026-10-12T23:39:13.433Z
+close_reason: "Delivered: the post-#512 replies on #485, #419, #413, #494, #495 were posted and recorded by PR #531 (merged 2026-10-12; ce18785a3, 4141d3bc5)."
+resolution: null
+duplicate_of: null
 ---
 Replies owed on #485, #419, #413, #494 and #495 after PR #512 merged into main (ad00d7f84), under the owner's 2026-10-11 rule: post after merge, link only to main, check main and the deployed site first; record each reply in packing/campaign/result-requests.yaml on claude/wizardly-meitner-wqn4x3-replies-2.
 

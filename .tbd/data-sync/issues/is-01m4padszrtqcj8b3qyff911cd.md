@@ -3,9 +3,9 @@ type: is
 id: is-01m4padszrtqcj8b3qyff911cd
 title: "Stage 4 review of the 2026-10-11 upper-bound imports: third exact route and a mapped W2 review (#500, #501, #503, #504, #505, #506)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:18.295Z
-updated_at: 2026-10-12T01:46:56.042Z
+updated_at: 2026-10-12T23:39:04.611Z
 started_at: 2026-10-11T21:32:13.301Z
+closed_at: 2026-10-12T23:39:04.611Z
+close_reason: "Stage 4 reviews of #500, #501, #503, #504, #505, #506 are on main (four mapped reviews; PRs #516 and #553 merged 2026-10-12)."
+resolution: null
+duplicate_of: null
 ---
 For each certificate the 2026-10-11 import lanes retain and replay on both maintained exact routes: devtools.check_half_angle_area decide-imports extended to the new packets (own readers, --upstream digests), controls, and a mapped review under docs/project/reviews/ in the form of review-2026-10-10-upper-bound-imports-476-481-483-484.md; verdict and per-count house table.
 

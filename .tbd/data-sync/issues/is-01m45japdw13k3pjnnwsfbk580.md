@@ -5,8 +5,8 @@ title: "Session 182 lane K: flag certification under H-267 (BC-420)"
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+version: 6
+spec_path: docs/project/specs/done/plan-2026-10-05-n17-overnight.md
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-05T08:19:19.612Z
-updated_at: 2026-10-06T08:04:00.324Z
+updated_at: 2026-10-12T23:51:46.460Z
 started_at: 2026-10-05T08:20:00.931Z
 closed_at: 2026-10-06T08:04:00.324Z
 close_reason: H-267 accepted (exp-251; W2 confirmed, corrections applied in 2153ba9ac, merged with stack 357). BC-427's cap-stall nodes are kept for BC-423's recipe, which waits on the owner's ruling on BC-423's control (k2/BC-426 release).

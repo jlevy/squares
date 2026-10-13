@@ -5,15 +5,15 @@ title: "H-012: locate the record basin in the quench ranking"
 kind: task
 status: closed
 priority: 0
-version: 7
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 8
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bvjsw40qb2e41ycygyqr
 hold: null
 hold_until: null
 created_at: 2026-08-23T01:39:36.243Z
-updated_at: 2026-10-10T22:46:40.620Z
+updated_at: 2026-10-12T23:49:50.866Z
 closed_at: 2026-10-06T08:46:04.224Z
 close_reason: Superseded, per its own notes, by agenda-001 BC-014 and its dedicated bead think-81mn (open); its 'paused' legacy hold was cleared to close it.
 resolution: canceled

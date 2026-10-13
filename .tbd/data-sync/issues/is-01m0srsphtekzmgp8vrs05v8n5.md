@@ -5,8 +5,8 @@ title: Certify the escape from Stromquist's printed Figure 14 point set
 kind: bug
 status: closed
 priority: 0
-version: 7
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 8
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies:
   - type: blocks
@@ -16,7 +16,7 @@ child_order_hints:
   - is-01m0sy843b4a9shhdsynyct6nb
   - is-01m0t0t4pshb047zr7j052t1we
 created_at: 2026-08-24T11:34:24.057Z
-updated_at: 2026-10-10T22:47:03.144Z
+updated_at: 2026-10-12T23:49:58.601Z
 closed_at: 2026-08-24T14:10:25.787Z
 close_reason: Exp-016 exact-replays the source-bound strict side-10001/10000 escape from all twelve printed Figure 14 points, localizes the failing Lemma 4 cell, retains eleven mutation controls and source hashes, terminally refutes H-010 without rejecting the numerical lower bound, and now replays in the focused gate.
 resolution: null

@@ -5,13 +5,13 @@ title: Correct Stromquist's extraneous Lemma 4 root at a = sqrt(4/5)
 kind: bug
 status: closed
 priority: 1
-version: 7
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 9
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bxnqxb8dsv2rnqgyp0w8
 created_at: 2026-08-24T11:26:36.247Z
-updated_at: 2026-10-10T22:47:44.304Z
+updated_at: 2026-10-12T23:51:03.138Z
 closed_at: 2026-08-24T13:17:59.643Z
 close_reason: Corrected the extraneous Lemma 4 root in the archive and downstream docs; the exact H-010/H-041 instruments now enforce the unsquared root condition and directly certify the surviving b=.9 inequality. Focused generate/replay and lint/type checks pass.
 resolution: null
