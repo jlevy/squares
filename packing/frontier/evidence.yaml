@@ -12658,7 +12658,7 @@ evidence:
       the weighted and winning-subset features and gives no method-distinct
       decision. This repository's replay is the first local validation of
       R068: its publisher ran none and the upstream CI outcome was not
-      observed. Advance over the previous verified 466001/100000 (Kleddamag):
+      observed. Advance over the previous verified 466001/100000 (Overbeck):
       exactly 43/100000. No new theorem identifier is created.
     source_reviewed: '2026-09-28'
 
