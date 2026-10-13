@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m4v5ne8b1dq1gyybx5mj689d
-title: "Import Fitzharding: s(17) = L by a complete Lean 4 proof (no issue)"
+title: "Import Fitzharding: s(17) = L by a complete Lean 4 proof (#565)"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 9
 delegate: claude-code@vm
 labels:
   - result-import
@@ -13,10 +13,14 @@ dependencies: []
 child_order_hints:
   - is-01m4v5nmc9ghvpxvyvt2pc038a
   - is-01m4v5nmyq792rsjg1xyvcps9f
+  - is-01m4v81zbyqd7j8x7376sx2zvq
+  - is-01m4v81zv6xvy30p0a0hwsy161
+  - is-01m4v820ay9e87f39mvf33zz3a
+  - is-01m4v840keg820cvmfpy7s3t5j
 hold: null
 hold_until: null
 created_at: 2026-10-13T17:41:17.705Z
-updated_at: 2026-10-13T17:41:24.566Z
+updated_at: 2026-10-13T18:24:12.396Z
 started_at: 2026-10-13T17:41:23.780Z
 ---
 Owner report of 13 October 2026 (no GitHub issue): Oscar Fitzharding's sq17-lean, https://github.com/ofitzharding/sq17-lean, and his post https://x.com/ofitzharding/status/2109798000008597616. The owner asked for a full intake crediting everything, a review of which report came first between this and Overbeck's T-153, and allowed that a formalization may be registered as its own result. Definitive name: Oscar Fitzharding (owner, 13 October).
