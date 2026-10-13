@@ -12,8 +12,10 @@ Do not generate or publish a PDF.
 
 ## Upstream and Storage Checkpoint, October 13
 
-The native stack rebase now integrates main `ea227e62df86d3eadf650211e39c5586adc7aa3e`
+The native stack rebase now integrates main `34c826f08fc75dc51eb8d6f72c04b0f74b0c4ffb`
 through both review layers.
+The later PR579 tracker and plan moves are also integrated, preserving completed-plan
+paths and the current polynomial plan title.
 This adds PR507’s audit and reachable-test selector fixes, PR558’s current AI-assistance
 disclosure for the T147/T148 sources, and PR576’s documentation layout.
 The disclosure preserves dated acquisition text and flags; no numeric bound or evidence
@@ -50,14 +52,12 @@ repair and maintained lint retry pass.
 These are scoped receipts; latest-head pre-push and hosted qualification remain separate
 gates recorded in the PR Validation sections.
 
-The latest disk audit identifies 4.10 GB of expanded old fixture trees.
-Complete PAX archives, member manifests and byte/metadata verification receipts live
-under the protected evidence root’s `archive/`; remove an expanded tree only after its
-VERIFIED receipt and fresh activity/worktree checks.
-The root’s reclamation receipts record actual free-space changes with APFS sharing and
-concurrent writers disclosed.
-The inactive 2.66 GiB Lean build also needs a complete archive first: 3,520 compiled
-module source paths have uncertain recovery, so do not claim it is regenerable.
+The expanded old fixture and Lean states have been removed after complete verified PAX
+archival and fresh activity/worktree checks.
+Seven archives and compressed manifests retain every byte and required metadata; the
+final storage paragraph below records the measured allocation and actual deletion
+receipts. The Lean archive retains all compiled bytes because 3,520 source paths had
+uncertain recovery; no regeneration claim is made.
 Four 5.38 GiB atlas test copies and 12.45 GiB of review checkouts contain changed
 source, local commits, untracked probes or research data and remain protected.
 No blanket worktree removal or Git history pruning is authorized by the cleanup
@@ -95,6 +95,19 @@ Current/rollback runtimes, the pending app update, active caches and all unique
 source/research remain intact.
 Exact deletion, activity, archive and free-space receipts are in the evidence root’s
 `admin/` directory.
+
+The replacement parent’s ordinary hosted checks finish green at `3ee60c3e`; its full
+checkpoint is separate.
+The child web job at `3d347b32c` found omitted sparse-checkout source packets and a
+dated heading literal.
+The literal is repaired with the unchanged quote/association guard passing (one case).
+Required packet and cross-packet inputs plus Pages push triggers are now declared; all
+43 workflow controls pass.
+Three missing child validator imports are declared, and all 28 unchanged selection
+controls pass. The named source inputs add 8.39 MiB to the hosted checkout from existing
+tracked files; scientific bytes, assertions and caps are unchanged.
+The original hosted and focused negative logs remain.
+Consult the PRs for final replacement heads and terminal qualification.
 
 ## Native Adoption Checkpoint, October 11–12
 

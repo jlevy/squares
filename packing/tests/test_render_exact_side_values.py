@@ -1005,7 +1005,7 @@ def test_shared_source_quotes_preserve_every_literal_and_record_association():
     markdown = paper.historical_polynomials_markdown(register)
     texts = [str(text) for row in history for text in row["attribution"]["source_text"]]
     unique = list(dict.fromkeys(texts))
-    appendix = web.split("## Source attribution notes", 1)[1]
+    appendix = web.split("## Source Attribution Notes", 1)[1]
     for number, text in enumerate(unique, 1):
         literal = escape(text, quote=False)
         quote = f'<blockquote class="source-quote"><p><code>{literal}</code></p></blockquote>'
@@ -1020,7 +1020,7 @@ def test_shared_source_quotes_preserve_every_literal_and_record_association():
         section = (
             web.split(anchor, 1)[1]
             .split('<span id="historical-', 1)[0]
-            .split("## Source attribution notes", 1)[0]
+            .split("## Source Attribution Notes", 1)[0]
         )
         for text in row["attribution"]["source_text"]:
             number = unique.index(str(text)) + 1
@@ -1031,7 +1031,7 @@ def test_shared_source_quotes_preserve_every_literal_and_record_association():
             assert escape(certificate["facts"], quote=False) in section
             assert escape(certificate["original_certificate"], quote=False) in section
     assert web.count("](#source-attribution-note-") == len(texts)
-    assert "## Source attribution notes" not in markdown
+    assert "## Source Attribution Notes" not in markdown
 
 
 def test_native_linear_mathml_survives_trusted_kpress_without_a_js_renderer():

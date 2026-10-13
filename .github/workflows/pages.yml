@@ -72,6 +72,8 @@ name: Certificate page
       - packing/resources/web/kingbird-run-statistics-2026/README.md
       - packing/resources/web/kingbird-squares-in-squares-analytic-minimization.md
       - packing/resources/web/kingbird-squares-in-squares-compared-2026-08-22.md
+      - packing/resources/web/pingyou-n153-certificate-2026-10-11/README.md
+      - packing/resources/web/pingyou-n207-certificate-2026-10-11/README.md
       - packing/resources/web/ry-xu-new-packings-2026-10-08/README.md
       - packing/resources/web/schadt-s29-2025/README.md
       - packing/resources/web/squish-401-2026-10-07/README.md
@@ -491,6 +493,8 @@ jobs:
 
   # The register paper is independent of the n = 11 series. Its JSON is already
   # checked by the packing gate; this job checks publication, including every coefficient.
+  # Native current/prior-house controls also read the named custody packets in full:
+  # acquisition manifests and compressed-file tables refuse partial packets.
   exact-side-values:
     needs: scope
     if: needs.scope.outputs.exact_side_values == 'true'
@@ -515,8 +519,40 @@ jobs:
             /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz
             /packing/resources/web/couzo-extended-reports-2026-10-08/README.md
             /packing/resources/web/evand-record-hunt-2026-10-09/README.md
+            /packing/resources/web/pingyou-n153-certificate-2026-10-11/README.md
+            /packing/resources/web/pingyou-n207-certificate-2026-10-11/README.md
             /packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/README.md
             /packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+            /packing/resources/web/barnett-refinements-2026-10-11/
+            /packing/resources/web/couzo-certificates-2026-10-10/
+            /packing/resources/web/couzo-certificates-2026-10-11/
+            /packing/resources/web/couzo-exact-certificates-2026-10-09/
+            /packing/resources/web/couzo-followup-refinements-2026-10-08/
+            /packing/resources/web/dostashev-records-2026-10-11/
+            /packing/resources/web/evand-record-hunt3-2026-10-10/
+            /packing/resources/web/evand-regularized-2026-10-10/
+            /packing/resources/web/evand-trio126-2026-10-09/
+            /packing/resources/web/pingyou-n153-certificate-2026-10-11/
+            /packing/resources/web/pingyou-n207-certificate-2026-10-11/
+            /packing/resources/web/squish-481-third-request-2026-10-09/
+            /packing/resources/web/squish-500-fourth-request-2026-10-11/
+            /packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/case-inputs.json
+            /packing/resources/web/couzo-exact-refinements-2026-10-08/facts/complete-certificates-and-decimal-poses.json.xz
+            /packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/exact-certification.json.xz
+            /packing/resources/web/evand-new-arrangements-2026-10-07/README.md
+            /packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz
+            /packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert.py
+            /packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert2.py
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-132.cert
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-156.cert
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-211.cert
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-228.cert
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-259.cert
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-269.cert
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-305.cert
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-306.cert
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-307.cert
+            /packing/resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0

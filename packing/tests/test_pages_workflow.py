@@ -20,6 +20,7 @@ from devtools import render_exact_side_values as exact_paper
 from devtools import render_n11_optimality_review as optimality_paper
 from devtools import render_overview
 from devtools import render_packing_methods as methods_paper
+from devtools import upper_bound_houses as houses
 from devtools.pages_scope import BUILDER_INPUTS, declared_inputs, pull_request_jobs
 from devtools.render_n11_lower_bounds_explainer import SITE_PATH as EXPLAINER_PATH
 from sqpack.yamlio import safe_load
@@ -101,6 +102,46 @@ EXACT_CITATION_PATTERNS = tuple(
     for path in exact_paper.CITATION_SOURCES
     if path.is_relative_to(REPO / "packing/resources")
     or path.is_relative_to(REPO / "packing/campaign")
+)
+
+
+#: Native house admission checks every retained acquisition file, not just one side.
+#: Keep the maintained source packets complete, except T-128's self-contained facts.
+EXACT_NATIVE_PACKET_PATTERNS = (
+    "/packing/resources/web/barnett-refinements-2026-10-11/",
+    "/packing/resources/web/couzo-certificates-2026-10-10/",
+    "/packing/resources/web/couzo-certificates-2026-10-11/",
+    "/packing/resources/web/couzo-exact-certificates-2026-10-09/",
+    "/packing/resources/web/couzo-followup-refinements-2026-10-08/",
+    "/packing/resources/web/dostashev-records-2026-10-11/",
+    "/packing/resources/web/evand-record-hunt3-2026-10-10/",
+    "/packing/resources/web/evand-regularized-2026-10-10/",
+    "/packing/resources/web/evand-trio126-2026-10-09/",
+    "/packing/resources/web/pingyou-n153-certificate-2026-10-11/",
+    "/packing/resources/web/pingyou-n207-certificate-2026-10-11/",
+    "/packing/resources/web/squish-481-third-request-2026-10-09/",
+    "/packing/resources/web/squish-500-fourth-request-2026-10-11/",
+)
+
+#: Older source facts and cross-packet byte-identity references used by those packets.
+EXACT_NATIVE_FILE_PATTERNS = (
+    "/packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/case-inputs.json",
+    "/packing/resources/web/couzo-exact-refinements-2026-10-08/facts/complete-certificates-and-decimal-poses.json.xz",
+    "/packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/exact-certification.json.xz",
+    "/packing/resources/web/evand-new-arrangements-2026-10-07/README.md",
+    "/packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz",
+    "/packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert.py",
+    "/packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert2.py",
+    "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-132.cert",
+    "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-156.cert",
+    "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-211.cert",
+    "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-228.cert",
+    "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-259.cert",
+    "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-269.cert",
+    "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-305.cert",
+    "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-306.cert",
+    "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-307.cert",
+    "/packing/resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
 )
 
 #: The step right before every download by artifact id, reading the same id expression.
@@ -1887,6 +1928,8 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
             "/packing/resources/web/kingbird-squares-in-squares.md",
             "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
             *EXACT_CITATION_PATTERNS,
+            *EXACT_NATIVE_PACKET_PATTERNS,
+            *EXACT_NATIVE_FILE_PATTERNS,
         ),
         "n11-optimality-review": (
             "/packing/resources/web/n11-optimality-2026-09-29/",
@@ -1955,6 +1998,23 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
                     if relative.parts and (root / relative.parts[0]).is_dir():
                         omitted.append(declared.relative_to(REPO).as_posix())
         assert omitted == [], f"{half}: render inputs omitted by sparse checkout: {omitted}"
+    # The native controls must reach every maintained house input. The packet readers
+    # also compare their complete retained file roster and cross-packet byte twins.
+    assert all(keeps("exact-side-values", path) for path in houses.private_input_paths())
+    for source in houses.sources().values():
+        # T-128 uses three self-contained leaves; T-130 keeps its complete packet.
+        # Their legacy readers have their own custody schemas, unlike the generic
+        # acquisition records and cross-packet references checked below.
+        if source.result in {"T-128", "T-130"}:
+            continue
+        assert "/" + source.packet.relative_to(REPO).as_posix() + "/" in (
+            EXACT_NATIVE_PACKET_PATTERNS
+        )
+        acquisition = json.loads((source.packet / "acquisition/sources.json").read_text())
+        for record in acquisition["sources"]:
+            for item in record["pinned_only"]:
+                if "identical_to" in item:
+                    assert keeps("exact-side-values", REPO / item["identical_to"]), item
     assert (REPO / "packing/resources/README.md").is_file()
     assert (REPO / "packing/campaign/README.md").is_file()
 
@@ -2004,6 +2064,13 @@ REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
             "packing/resources/web/kingbird-squares-in-squares.md",
             "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
             *(pattern.removeprefix("/") for pattern in EXACT_CITATION_PATTERNS),
+            *(pattern.removeprefix("/") for pattern in EXACT_NATIVE_FILE_PATTERNS),
+            *(
+                path.relative_to(REPO).as_posix()
+                for pattern in EXACT_NATIVE_PACKET_PATTERNS
+                for path in sorted((REPO / pattern.strip("/")).rglob("*"))
+                if path.is_file()
+            ),
         ),
         (
             "packing/resources/web/unrelated/README.md",

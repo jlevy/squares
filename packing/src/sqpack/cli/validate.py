@@ -4382,7 +4382,14 @@ STEPS: tuple[Step, ...] = (
         broad=True,
         frontend=True,
         start_early=True,
-        touches=(*_CORE, *_SITE_INPUTS, *_RENDERER_HUB, *_PYTEST_CONFTESTS),
+        touches=(
+            *_CORE,
+            *_SITE_INPUTS,
+            *_RENDERER_HUB,
+            *_PYTEST_CONFTESTS,
+            "packing/tests/exact_side_values_fixture.py",
+            "packing/tests/test_render_exact_side_values.py",
+        ),
     ),
     # 9.63s.
     Step(
@@ -4841,6 +4848,7 @@ STEPS: tuple[Step, ...] = (
         touches=(
             "*.[pP][dD][fF]",
             "packing/devtools/check_tracked_pdfs.py",
+            "packing/devtools/__init__.py",
             "packing/tests/test_check_tracked_pdfs.py",
             "packing/src/sqpack/cli/validate.py",
         ),
