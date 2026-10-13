@@ -5,7 +5,7 @@ title: Credit Kleddamag as Marc Leonard Overbeck in credits, site and PDFs; reco
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,11 +14,11 @@ parent_id: is-01m4s74nyjg5a9eqhf80q4xcv8
 hold: null
 hold_until: null
 created_at: 2026-10-12T23:28:38.719Z
-updated_at: 2026-10-13T01:06:36.564Z
+updated_at: 2026-10-13T05:45:12.035Z
 started_at: 2026-10-12T23:33:31.135Z
 ---
 Layer 2 of the stack, above #560. Owner request: rename all credits for Kleddamag to Marc Leonard Overbeck, recording the X handle (@kleddamag, https://x.com/kleddamag) and GitHub id (Kleddamag) appropriately; use repren (pinned 3.1.1) where the handle is a pure credit; include the text of the PDFs (n = 11 threshold-bound review, papers and about articles) and every other credit line (bibliography authors, credit, short_credit, credited_names, register and case-record credits, atlas credit attributions, generated views). Leave identifiers (bibliography keys, evidence and packet ids, paths, URLs), archived and retained source bytes, and dated records unchanged.
 
 ## Notes
 
-Layer 2 = https://github.com/jlevy/squares/pull/571 (stack 572), head 184432f9f after rebasing onto #560 at 187d8ed1f; records tier exit 0. Close when #571 merges.
+Layer 2 = #571, head ccf235163, rebased onto #560 at 55aa503d6; #576's moved guides got the credit edits re-applied. Close when #571 merges.

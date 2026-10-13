@@ -3,9 +3,9 @@ type: is
 id: is-01m4p7jpxj2c36k5zz1nja8y7a
 title: "PR #493 A8: OR-19 placement and evidence do not match operating-rules conventions"
 kind: bug
-status: in_progress
+status: closed
 priority: 3
-version: 4
+version: 6
 delegate: claude-reconcile-coordinator-0vpobe
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m4p7jhpbzwqvtq6set506v4b
 hold: null
 hold_until: null
 created_at: 2026-10-11T19:38:33.264Z
-updated_at: 2026-10-13T05:37:03.120Z
+updated_at: 2026-10-13T05:45:10.521Z
 started_at: 2026-10-11T19:44:59.850Z
+closed_at: 2026-10-13T05:45:10.521Z
+close_reason: "Fixed in c60db5740: OR-19 names an acting-name scheme, the acknowledgement channel, the delegated checkpoint, its recorded cost (think-05y8) and its evaluation trigger; the General Principles intro counts OR-19. render_operating_rules --check passes."
+resolution: null
+duplicate_of: null
 ---
 operating-rules.md:526-528 intro, :845, :888-893 evidence; cite think-05y8. Severity: Low. Review: https://github.com/jlevy/squares/pull/493#pullrequestreview-5484428701
 
