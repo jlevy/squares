@@ -3,9 +3,9 @@ type: is
 id: is-01m4szb7jdpvg698ewge8e6amt
 title: "PR #579 (merge): reconcile beads and plan specs, replacing #493"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-merge-pr579-0vpobe
 labels: []
 dependencies: []
@@ -15,6 +15,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-13T06:31:37.293Z
-updated_at: 2026-10-13T08:04:57.909Z
+updated_at: 2026-10-13T08:32:01.466Z
 started_at: 2026-10-13T06:31:37.821Z
+closed_at: 2026-10-13T08:32:01.465Z
+close_reason: "PR #579 merged as 34c826f08 after senior (B), correctness (C) and follow-up (D) reviews, all addressed; #493 closed as superseded"
+resolution: null
+duplicate_of: null
 ---
