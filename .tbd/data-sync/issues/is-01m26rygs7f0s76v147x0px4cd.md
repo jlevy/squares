@@ -5,8 +5,8 @@ title: Reconcile PR149 onto the current v0.4.0 explainer stack and restore CI
 kind: task
 status: closed
 priority: 1
-version: 19
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 20
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root integration lane
 labels: []
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
   - is-01m2ae6naj55e8wkrxbc1402x8
   - is-01m2ae6nqy69685v8r37nvd7ya
 created_at: 2026-09-10T23:02:51.417Z
-updated_at: 2026-09-12T15:52:10.943Z
+updated_at: 2026-10-13T00:56:29.438Z
 closed_at: 2026-09-12T15:51:57.610Z
 close_reason: "PR #149 exact head 4d00ab68 passed focused, unrestricted pre-push, unrestricted full checkpoint, and all hosted checks; its body records all valid and invalid costs and the PR is mergeable over PR #148."
 resolution: null

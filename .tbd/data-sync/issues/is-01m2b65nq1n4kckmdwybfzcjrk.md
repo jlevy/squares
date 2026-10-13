@@ -5,8 +5,8 @@ title: Reconcile the live n11 plan, PR stack, and bead graph
 kind: task
 status: closed
 priority: 2
-version: 4
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 5
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol read-only plan audit; root disposition
 labels:
   - n11
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 created_at: 2026-09-12T16:10:55.072Z
-updated_at: 2026-09-12T16:14:00.198Z
+updated_at: 2026-10-13T00:55:37.863Z
 closed_at: 2026-09-12T16:12:22.288Z
 close_reason: Completed the exact 56-bead reconciliation. Closed ten completed runner beads; confirmed three documentation beads were already closed; reparented think-ms9l; added the think-qw9w to think-cur4 dependency; retitled and rescoped four stale overnight beads; named think-vy5i as the remaining think-cf2z measurement; and retained every other route with an explicit disposition. No scientific target ran.
 resolution: null

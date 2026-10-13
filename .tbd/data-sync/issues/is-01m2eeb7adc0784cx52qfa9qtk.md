@@ -5,8 +5,8 @@ title: Publish the independently admitted BC303 T2 charge reader as a separate s
 kind: task
 status: closed
 priority: 1
-version: 7
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - bc303
@@ -18,7 +18,7 @@ dependencies:
     target: is-01m2e9ggafpy2xvk0r0rgy1p8w
 parent_id: is-01m2b4ywxym84rgf3b254v4jw6
 created_at: 2026-09-13T22:31:28.845Z
-updated_at: 2026-09-14T00:26:38.766Z
+updated_at: 2026-10-13T00:58:25.366Z
 closed_at: 2026-09-14T00:26:38.765Z
 close_reason: "PR #164 ready at be477f20 on #163 f70144fc. Target-free C/S reader retains independent REFUSE and source-distinct ACCEPT; 377 atoms, 182 charts, 15 focused tests. Exact --push 46/74, 1,347 tests; hosted CI green. H160 instrument_ready=false, exp158 results empty; execution-head readiness and target remain separate beads."
 resolution: null

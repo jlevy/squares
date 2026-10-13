@@ -5,8 +5,8 @@ title: "Coordinator: require raw tasks to precede normalized exact tasks"
 kind: bug
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 6
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - calibration
@@ -16,7 +16,7 @@ parent_id: is-01m2b883ztxn7qazs98bndea6b
 hold: null
 hold_until: null
 created_at: 2026-09-13T18:09:02.932Z
-updated_at: 2026-09-13T19:30:09.094Z
+updated_at: 2026-10-13T00:57:33.987Z
 closed_at: 2026-09-13T19:30:09.093Z
 close_reason: Independent exact-head review at dbbf8495 accepted the targeted digest-consistent cross-route chronology and result.json replacement controls. Later arithmetic admission findings are separate beads think-dgfk and think-0osz; no profile or target ran.
 resolution: null

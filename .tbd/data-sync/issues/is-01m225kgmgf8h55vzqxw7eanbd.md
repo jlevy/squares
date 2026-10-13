@@ -3,9 +3,9 @@ type: is
 id: is-01m225kgmgf8h55vzqxw7eanbd
 title: Benchmark solver steps per second under Node, with no browser
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md
 labels:
   - packing
@@ -14,7 +14,11 @@ dependencies:
     target: is-01m225ps2ejkzyjc45g0xj6kyh
 parent_id: is-01m225hw89vjsga1wnegrwnq5a
 created_at: 2026-09-09T04:07:50.159Z
-updated_at: 2026-09-09T04:09:45.044Z
+updated_at: 2026-10-13T00:54:45.861Z
+closed_at: 2026-10-13T00:54:45.861Z
+close_reason: Duplicate of think-tcns, the package-era headless throughput benchmark; the v2-transitions prototype page is retired. Consolidated per the owner's decision of 2026-10-13.
+resolution: duplicate
+duplicate_of: is-01m229an1fw0az9jgk0wcbg8c4
 ---
 In flight in the v2-transitions prototype as of 2026-09-08.
 

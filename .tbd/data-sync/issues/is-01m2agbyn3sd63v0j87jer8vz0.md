@@ -5,8 +5,8 @@ title: Reduce the seven-mark selection theorem to one explicit routing obligatio
 kind: task
 status: closed
 priority: 2
-version: 18
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 19
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max first-principles selection-theorem analysis; root integration
 labels:
   - n11
@@ -25,7 +25,7 @@ child_order_hints:
   - is-01m2eraymw72npp61s5sbdb32d
   - is-01m2erbhvg9kcfptzwrnsbmkd9
 created_at: 2026-09-12T09:49:52.162Z
-updated_at: 2026-10-06T08:38:32.285Z
+updated_at: 2026-10-13T00:55:37.863Z
 closed_at: 2026-10-06T08:38:32.285Z
 close_reason: "Done: the reduction, report, review and checker milestone is on main (docs/project/research/research-2026-09-12-n11-selection-routing-first-principles.md; commit 39714308 is an ancestor of origin/main eb43ffe9a). Its experiment children are closed: ms9l decided, the rest superseded because s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical."
 resolution: null

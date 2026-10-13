@@ -5,8 +5,8 @@ title: "Run sheet: stop source-distinct reads at first refusal"
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 4
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - calibration
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m2b884n0ms50xp93q6aaps1g
 created_at: 2026-09-13T18:19:32.110Z
-updated_at: 2026-09-14T02:25:10.445Z
+updated_at: 2026-10-13T00:57:41.996Z
 closed_at: 2026-09-14T02:25:10.440Z
 close_reason: "Run sheet blob 29517a3f at PR #156 head 2f8925b2 checks each reader's exit before starting the next (lines 242–244); docs/project/reviews/review-2026-09-13-n11-bc329-run-sheet-flowmark-final.md accepted that blob. Launch-time admission stays with think-pp3j (now on hold with BC329)."
 resolution: null

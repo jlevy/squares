@@ -5,8 +5,8 @@ title: Publish calibration success only after bounded terminal readback
 kind: bug
 status: closed
 priority: 1
-version: 15
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 17
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh implementation or source-distinct review; root integration
 labels:
   - n11
@@ -18,7 +18,7 @@ dependencies:
     target: is-01m2b4yfx3th5wcdaw9apr0vn5
 parent_id: is-01m2app5e71qnp9z5vfp9vppbp
 created_at: 2026-09-12T14:49:52.138Z
-updated_at: 2026-09-13T07:21:28.679Z
+updated_at: 2026-10-13T00:56:53.510Z
 closed_at: 2026-09-13T07:21:28.678Z
 close_reason: CAL-5 is independently accepted at exact implementation head fcb538c29b846fb5e7c33bd962772ada9c21aedd. Source-distinct Astra Max review replayed 54 signal/staging/adoption/deadline controls, 10 fixture/source/readback controls, four real launch controls, and all prior CAL-1 through CAL-7 evidence; 192 tests passed with zero Ruff or BasedPyright findings. Acceptance is retained at calibration commit cd02a0cd. No positive profile or BC329 target ran.
 resolution: null

@@ -5,8 +5,8 @@ title: Replace the private selection-review script with a maintained exact check
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 7
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol implementation; root review
 labels:
   - n11
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m2b4yg9c8wm02dr21yhzn6vt
 parent_id: is-01m2b4yg9c8wm02dr21yhzn6vt
 created_at: 2026-09-12T16:15:30.873Z
-updated_at: 2026-09-12T16:41:50.596Z
+updated_at: 2026-10-13T00:57:08.217Z
 closed_at: 2026-09-12T16:41:50.593Z
 close_reason: "Maintained exact checker and regression committed and pushed at 39714308; focused replay and test passed, the 45-step edit tier passed, and all hosted PR #156 checks passed."
 resolution: null
