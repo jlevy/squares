@@ -57,8 +57,12 @@ from tests import site_renders
 
 PAGES = ("index.html", "results.html", "atlas.html", "visualize.html", "tutorial.html")
 WIDTHS = (*CLIP_WIDTHS, 390)
-#: The rule the wide track had: its room measured from the window, a rem a side.
-FROM_THE_WINDOW = ".site-page .site-wide { --site-wide-room: calc(100vw - 2rem) !important; }"
+#: The historical bad pair: a window-sized track inside the narrower article clip.
+#: The current container-sized track may bleed beyond prose into the page container.
+FROM_THE_WINDOW = (
+    ".site-page .site-wide { --site-wide-room: calc(100vw - 2rem) !important; }"
+    " article.kpress { overflow-x: clip !important; }"
+)
 #: The rule the header had: its own lower border, under the tabs it holds.
 RULE_UNDER_THE_TABS = (
     ".kpress-site-header:has(> .site-tabs) { border-block-end: 1px solid !important; }"
@@ -113,9 +117,12 @@ def test_no_wide_block_runs_past_an_ancestor_that_clips_it(
 
 
 def test_a_block_sized_from_the_window_is_caught(browser: Any, pages: dict[str, Path]) -> None:
-    """The control: with the wide track sized from the window again, the results table,
-    its filter bar and its count run past the document's clip on a tablet, further still
-    once a scrollbar takes its width from the layout, and the check names each."""
+    """The control restores the window-sized track and the historical article clip.
+
+    The results table, filter bar and count run past that narrower clip on a tablet,
+    further still once a scrollbar takes its width from the layout. The check must
+    name each block and the injected clipping ancestor with the exact lost widths.
+    """
     page = browser.new_page(viewport={"width": 768, "height": 900})
     try:
         page.goto(pages["results.html"].as_uri(), wait_until="load")

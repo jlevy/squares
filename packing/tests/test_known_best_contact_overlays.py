@@ -16,6 +16,7 @@ from devtools.render_known_best_contact_overlays import (
     contact_census_features,
     expected_outputs,
 )
+from devtools.retained_data import read_retained_text
 from sqpack.render.model import EvidenceTier, validate_frame
 from sqpack.witness import load_witness
 
@@ -27,7 +28,7 @@ def _n11_frame_and_entry():
         ROOT / "witnesses/known-best/n-011.yaml", fallback_schema=WITNESS_SCHEMA
     )
     frame = frame_from_witness(witness)
-    census = json.loads(CENSUS.read_text(encoding="utf-8"))
+    census = json.loads(read_retained_text(CENSUS))
     sweep = next(
         sweep
         for sweep in census["contact_sweeps"]

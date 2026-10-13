@@ -40,6 +40,8 @@ import zlib
 from dataclasses import dataclass
 from pathlib import Path
 
+from strif import atomic_output_file
+
 GZIP_SUFFIX = ".gz"
 MAX_COMPRESSED = 16 * 1024 * 1024
 MAX_DECOMPRESSED = 64 * 1024 * 1024
@@ -100,6 +102,26 @@ def read_retained_bytes(path: Path, *, limit: int = MAX_DECOMPRESSED) -> bytes:
 def read_retained_text(path: Path, *, encoding: str = "utf-8") -> str:
     """`read_retained_bytes` decoded, strictly."""
     return read_retained_bytes(path).decode(encoding)
+
+
+def write_retained_text(path: Path, text: str) -> None:
+    """Write generated UTF-8 data atomically, using deterministic gzip for gzip paths."""
+    data = text.encode("utf-8")
+    if len(data) > MAX_DECOMPRESSED:
+        raise ValueError(f"{path} exceeds {MAX_DECOMPRESSED} decompressed bytes")
+    logical = path.with_suffix("") if path.name.endswith(GZIP_SUFFIX) else path
+    if logical.is_file() and compressed_path(logical).is_file():
+        previous = read_retained_text(logical)
+        if previous != text:
+            raise ValueError(
+                f"{logical}: both storage copies present; remove one before updating"
+            )
+    if path.name.endswith(GZIP_SUFFIX):
+        data = gzip.compress(data, compresslevel=9, mtime=0)
+        if len(data) > MAX_COMPRESSED:
+            raise ValueError(f"{path} exceeds {MAX_COMPRESSED} compressed bytes")
+    with atomic_output_file(path, make_parents=True) as temporary:
+        temporary.write_bytes(data)
 
 
 def retained_exists(path: Path) -> bool:

@@ -1,0 +1,69 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {
+    "PACKING_VALIDATED_SHA": "98367a7484d426287c370c826744c8b22c5149f5"
+  },
+  "exit_status": 0,
+  "tests": 32,
+  "seconds": 2.372,
+  "files": [
+    {
+      "file": "packing/tests/test_evand_arrangement_houses.py",
+      "tests": 4,
+      "seconds": 1.508
+    },
+    {
+      "file": "packing/tests/test_exact_stage_progress.py",
+      "tests": 26,
+      "seconds": 0.191
+    },
+    {
+      "file": "packing/tests/test_snapshot_link_consumers.py",
+      "tests": 2,
+      "seconds": 0.673
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_snapshot_link_consumers.py",
+      "packing/tests/test_exact_stage_progress.py",
+      "packing/tests/test_evand_arrangement_houses.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_evand_arrangement_houses.py": 4,
+      "packing/tests/test_exact_stage_progress.py": 26,
+      "packing/tests/test_snapshot_link_consumers.py": 2
+    },
+    "deselected_tests": 0
+  }
+}

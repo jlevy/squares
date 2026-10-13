@@ -146,6 +146,34 @@ DECLARED_CONSUMERS = {
         "publishes accepted complete replay as a finite feasible upper ceiling; "
         "retains historical verification and establishes no optimality or value of s(n)"
     ),
+    "packing/devtools/exact_house_sources.py": (
+        "binds an adopted finite native side to its independently confirmed upper "
+        "ceiling and retained pre-adoption source records; exact rational identity "
+        "does not establish s(n), ideal contacts or global optimality"
+    ),
+    "packing/tests/test_exact_house_sources.py": (
+        "checks current and historical finite ceiling/native-certificate agreement, "
+        "scope refusals and complete custody; no ceiling is treated as s(n)"
+    ),
+    "packing/devtools/build_exact_values.py": (
+        "permits an upward decimal display window only when a non-proved rational report "
+        "matches the independently certified replay ceiling, source and exact fraction; "
+        "the root identifies a feasible construction, never a proved optimum"
+    ),
+    "packing/tests/test_build_exact_values.py": (
+        "checks that upward display ceilings require matching replay evidence and exact "
+        "fractions, and refuse altered ceiling data or proved status; no display window "
+        "establishes s(n)"
+    ),
+    "packing/tests/test_build_exact_values_upstream.py": (
+        "checks finite native-side imports refuse altered ceiling forms, evidence and "
+        "display values while preserving upper-bound status; neither replay ceilings "
+        "nor imported side identities establish optimality"
+    ),
+    "packing/tests/test_reported_exact_roots.py": (
+        "names the field only to assert that source-only root rows carry no certified "
+        "ceiling; it reads no bound value and infers no geometry or optimality"
+    ),
     "packing/devtools/squish_second_update_confirmation.py": (
         "publishes the admitted complete exact replay as a feasible upper ceiling, "
         "retaining earlier ceilings and refusing optimality claims"

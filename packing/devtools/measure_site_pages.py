@@ -1229,9 +1229,13 @@ def _role_rules(entry: dict[str, Any]) -> dict[str, tuple[float | None, float | 
         "caption lead": (note, bold),
         "footnote": (note, regular),
         "colophon": (sans * tokens["--paper-colophon-scale"], regular),
-        "nav name": (sans, bold),
-        "nav link": (note, medium),
-        "section tab": (note * tokens["--paper-button-label-scale"], medium),
+        "nav name": (tokens.get("--site-nav-name-size") or sans, bold),
+        "nav link": (tokens.get("--site-nav-font-size") or note, medium),
+        "section tab": (
+            (tokens.get("--site-nav-font-size") or note) * tokens["--paper-button-label-scale"],
+            medium,
+        ),
+        "section chooser": (tokens.get("--site-chooser-small-size"), medium),
     }
 
 

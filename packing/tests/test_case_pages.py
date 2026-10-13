@@ -226,7 +226,7 @@ def test_rebasing_leaves_scripts_and_styles_alone() -> None:
 
 
 def test_the_atlas_grid_and_the_frontier_table_open_the_same_record(
-    numbers: list[int], frontier: str
+    numbers: list[int], frontier: str, overview: str
 ) -> None:
     """Both entry points name each case's record file and open it in the one case
     popover: the atlas grid's cells and the frontier table's `n` are links marked
@@ -234,7 +234,7 @@ def test_the_atlas_grid_and_the_frontier_table_open_the_same_record(
     drawn from its regularized view, the atlas's one tile for it since the House and
     Regularized tabs went (think-k8x9), links the same record, whose drawing is the
     house one."""
-    grid = overview_sections.atlas_grid()
+    grid = overview
     assert "<template data-atlas-regularized>" not in grid
     link = r'href="cases/(\d+)\.html" data-case="(\d+)" data-atlas-n="(\d+)"'
     cells = re.findall(link, grid)

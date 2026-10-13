@@ -294,6 +294,28 @@ def test_a_page_set_as_the_layers_define_has_no_problems() -> None:
     assert measure.glyph_problems(linux) == []
 
 
+def test_navigation_and_compact_chooser_use_their_resolved_tokens() -> None:
+    found = entry()
+    found["tokens"].update(
+        {
+            "--site-nav-name-size": 19,
+            "--site-nav-font-size": 17.48,
+            "--site-chooser-small-size": 15.2,
+        }
+    )
+    found["text"] = [
+        text_row(role, family="Source Sans 3 Variable", weight="550", size=size)
+        for role, size in (
+            ("nav link", 17.48),
+            ("section tab", 15.732),
+            ("section chooser", 15.2),
+        )
+    ]
+    assert measure.glyph_problems(found) == []
+    found["text"][-1]["size"] = 15.732
+    assert any("section chooser" in problem for problem in measure.glyph_problems(found))
+
+
 def test_checked_prepared_math_is_measured_without_a_browser_renderer() -> None:
     found = entry(prepared_katex="0.16.45", math=[math_row(prepared="yes")])
     assert measure.glyph_problems(found, katex="0.16.45") == []

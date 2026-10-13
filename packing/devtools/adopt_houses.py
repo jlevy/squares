@@ -87,6 +87,7 @@ from strif import atomic_output_file
 
 from devtools import select_houses
 from devtools import upper_bound_houses as houses
+from sqpack.exact_values import algebraic_fields
 from sqpack.yamlio import safe_load
 
 ROOT = select_houses.ROOT
@@ -651,12 +652,12 @@ def reported_bound(move: Move) -> dict[str, Any]:
     house, credit = move.house, CREDITS[move.n]
     bibliography = _bibliography()[house.source_key]
     origin = houses.source_for(move.n).origin(move.n)
+    exact_form = houses.legacy.literal(house.side)
     return {
         "value": _value(house),
-        "exact_form": houses.legacy.literal(house.side),
+        "exact_form": exact_form,
         "evidence": list(house.report_evidence),
-        "algebraic_degree": 1,
-        "minimal_polynomial": None,
+        **algebraic_fields(exact_form, 1, None),
         "analytically_optimized": None,
         "catalogue_rigid": "not-stated",
         "construction_method": "unknown",
@@ -1378,6 +1379,12 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
     for lane in ("reported_upper_bound", "verified_upper_bound"):
         if Fraction(str(packing[lane].get("exact_form"))) != side:
             raise AdoptionError(f"n={n}: the {lane} is not {source.result}'s exact side")
+    reported = {
+        **packing["reported_upper_bound"],
+        **algebraic_fields(houses.legacy.literal(side), 1, None),
+    }
+    if reported != packing["reported_upper_bound"]:
+        front = _replace(front, "reported_upper_bound", reported)
     _, draft_front, draft_rest = _split(generated)
     draft = _packing(draft_front)
     for key in LOWER_LANES:

@@ -74,8 +74,11 @@ would need a separately declared approximation contract.
 ## What the First Census Says
 
 Three deliberately different views are retained in
-[`chunk-components.json`](../../../packing/atlas/known-best/chunk-components.json) and
-[`chunk-partitions.json`](../../../packing/atlas/known-best/chunk-partitions.json).
+[`chunk-components.json`](../../../packing/atlas/known-best/chunk-components.json.gz)
+and [`chunk-partitions.json`](../../../packing/atlas/known-best/chunk-partitions.json).
+
+Storage maintenance, 2026-10-08: the component census now uses deterministic gzip; its
+complete decompressed content is unchanged.
 
 | View | Tolerances | Result | Interpretation |
 | --- | --- | ---: | --- |

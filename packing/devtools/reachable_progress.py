@@ -2,6 +2,7 @@
 
 The controller does not write xdist events. Each worker owns one exclusive-create JSONL
 file, so a terminated test leaves its last start row readable without waiting for JUnit.
+Failed phase reports also flush their full diagnostic to a lazy, separate worker file.
 """
 
 from __future__ import annotations
@@ -21,6 +22,7 @@ RUN_ID = "PACKING_REACHABLE_TEST_RUN_ID"
 SOURCE_COMMIT = "PACKING_REACHABLE_TEST_SOURCE_COMMIT"
 WORKERS = "PACKING_REACHABLE_TEST_WORKERS"
 SCHEMA = "reachable-progress-v1"
+FAILURE_SCHEMA = "reachable-failure-v1"
 
 
 class ProgressWriter:
@@ -46,6 +48,8 @@ class ProgressWriter:
         target = Path(f"{stem}.progress-{worker_id}.jsonl")
         target.parent.mkdir(parents=True, exist_ok=True)
         self.stream: TextIO = target.open("x", encoding="utf-8")
+        self.failure_path = Path(f"{stem}.failures-{worker_id}.jsonl")
+        self.failure_stream: TextIO | None = None
         self.outcomes: dict[str, str] = {}
         self._emit("session_start", "")
 
@@ -77,6 +81,29 @@ class ProgressWriter:
         self.stream.write(json.dumps(row, sort_keys=True) + "\n")
         self.stream.flush()
 
+    def _record_failure(self, report: pytest.TestReport) -> None:
+        if self.failure_stream is None:
+            self.failure_stream = self.failure_path.open("x", encoding="utf-8")
+        row = {
+            "schema": FAILURE_SCHEMA,
+            "event": "failure",
+            "run_id": self.run_id,
+            "command_id": self.command_id,
+            "source_commit": self.source_commit,
+            "worker_id": self.worker_id,
+            "nodeid": report.nodeid,
+            "phase": report.when,
+            "outcome": report.outcome,
+            "timestamp_utc": datetime.now(UTC).isoformat(),
+            "monotonic_ns": time.monotonic_ns(),
+            "pack_jobs": self.pack_jobs,
+            "xdist_workers": self.workers,
+            "longreprtext": report.longreprtext,
+            "sections": report.sections,
+        }
+        self.failure_stream.write(json.dumps(row, sort_keys=True) + "\n")
+        self.failure_stream.flush()
+
     def pytest_runtest_logstart(self, nodeid: str, location: tuple[str, int, str]) -> None:
         del location
         self.outcomes[nodeid] = "passed"
@@ -86,14 +113,21 @@ class ProgressWriter:
         nodeid = report.nodeid
         if report.failed:
             self.outcomes[nodeid] = "failed"
+            self._record_failure(report)
         elif report.skipped and self.outcomes.get(nodeid) != "failed":
             self.outcomes[nodeid] = "skipped"
         if report.when == "teardown":
             self._emit("finish", nodeid, outcome=self.outcomes.pop(nodeid, report.outcome))
 
     def pytest_sessionfinish(self, exitstatus: int | pytest.ExitCode) -> None:
-        self._emit("session_finish", "", exit_status=int(exitstatus))
-        self.stream.close()
+        try:
+            self._emit("session_finish", "", exit_status=int(exitstatus))
+        finally:
+            try:
+                self.stream.close()
+            finally:
+                if self.failure_stream is not None:
+                    self.failure_stream.close()
 
 
 def pytest_configure(config: pytest.Config) -> None:

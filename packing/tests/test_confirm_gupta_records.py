@@ -17,6 +17,7 @@ import pytest
 from jsonschema_rs import Draft202012Validator
 
 from devtools import adopt_houses
+from devtools import backfill_algebraic_facts as algebraic_backfill
 from devtools import confirm_gupta_records as confirmation
 from devtools import gupta_house_links as houses
 from devtools import register_gupta_reports as register
@@ -68,7 +69,11 @@ def private_proposal(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     positives = houses.reports.check_certification()
     for n in houses.NUMBERS:
         if n in prior:
-            (register.FRONTIER / f"n-{n:03d}.md").write_text(prior[n])
+            # Retained source metadata predates the three-field algebraic backfill.
+            # Derive only those fields from this old source's own exact form.
+            (register.FRONTIER / f"n-{n:03d}.md").write_text(
+                algebraic_backfill.backfilled(prior[n], n)
+            )
             witness = houses.expected_house(facts[n], positives[n])
             houses.house_path(n).write_text(
                 witness_document(witness, schema="../witness.schema.yaml")

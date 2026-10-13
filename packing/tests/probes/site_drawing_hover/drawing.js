@@ -5,8 +5,10 @@ async (/** @type {{holder: string}} */ { holder }) => {
   if (!held) {
     return null;
   }
-  let graphic = held.querySelector("svg");
   const image = held.querySelector("img");
+  // A smaller-than-grid cell also contains its reference marker SVG. Inspect the
+  // decoded artwork image first, preserving the safe-document and geometry checks.
+  let graphic = image instanceof HTMLImageElement ? null : held.querySelector("svg");
   /** @type {HTMLDivElement | null} */
   let reference = null;
   /** @type {{x: number, y: number, width: number, height: number} | null} */

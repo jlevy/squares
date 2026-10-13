@@ -722,7 +722,8 @@
     "packing/tests/test_witness_contract.py": 0.478,
     "packing/tests/test_witness_in_the_centre_domain.py": 0.004,
     "packing/tests/test_witness_interval.py": 0.761,
-    "packing/tests/test_work_accounting.py": 0.011
+    "packing/tests/test_work_accounting.py": 0.011,
+    "packing/tests/test_evand_arrangement_houses.py": 1.508
   },
   "target_ceiling_seconds": [
     131.0,
@@ -774,6 +775,24 @@
           "report": "packing/benchmarks/validation-efficiency/local-admissions/packing-methods-figures-20261009.json",
           "provenance": {},
           "tests": 5
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_evand_arrangement_houses.py",
+        "packing/tests/test_exact_stage_progress.py",
+        "packing/tests/test_snapshot_link_consumers.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/polynomial-parent-2026-10-09.json",
+          "provenance": {
+            "PACKING_VALIDATED_SHA": "98367a7484d426287c370c826744c8b22c5149f5"
+          },
+          "tests": 32
         }
       ]
     }
