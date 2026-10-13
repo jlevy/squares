@@ -794,6 +794,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | papers/square-packing-methods-survey.md | papers/square-packing-methods-survey.md | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-12 | live |
 | papers/square-packing-methods-survey.pdf | papers/square-packing-methods-survey.pdf | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-12 | live |
 | profiles/david-ellsworth.html | profiles/david-ellsworth.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/david-r-maciver.html | profiles/david-r-maciver.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/erich-friedman.html | profiles/erich-friedman.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/evan-daniel.html | profiles/evan-daniel.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/f-gobel.html | profiles/f-gobel.html | page | overview | 2026-10-13 | 2026-10-13 | live |
@@ -809,6 +810,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/marc-leonard-overbeck.html | profiles/marc-leonard-overbeck.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/michael-j-kearney.html | profiles/michael-j-kearney.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/mira.html | profiles/mira.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/oscar-fitzharding.html | profiles/oscar-fitzharding.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/peter-shiu.html | profiles/peter-shiu.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/philippe-ryckelynck.html | profiles/philippe-ryckelynck.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/ryu-sungjoon.html | profiles/ryu-sungjoon.html | page | overview | 2026-10-13 | 2026-10-13 | live |

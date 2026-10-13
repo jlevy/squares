@@ -3316,9 +3316,11 @@ occurrences:
   end: 30
   label: MacIver
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - packet
+  contributor_id: david-r-maciver
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds afternoon 2026-10-02]'
@@ -7815,9 +7817,11 @@ occurrences:
   end: 11
   label: Fitzharding
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - citation-cff
+  contributor_id: oscar-fitzharding
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fitzharding n17 Lean 2026]'
@@ -7827,9 +7831,11 @@ occurrences:
   end: 11
   label: Fitzharding
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - citation-cff
+  contributor_id: oscar-fitzharding
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fitzharding n17 Lean 2026]'
@@ -7868,9 +7874,11 @@ occurrences:
   end: 38
   label: MacIver
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - packet
+  contributor_id: david-r-maciver
 - origin:
     path: packing/frontier/results.yaml
     record_key: T-001

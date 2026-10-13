@@ -550,12 +550,14 @@ Later the same day, each owner request became a bead under `think-39mp`:
 | `think-5bao` | Merge `main`, including the n = 17 stack (#560, #571, #577), keeping both renames and joining the stack’s `Overbeck` labels | in progress while `main` moves |
 | `think-2wtr` | The `people/`, `schemas/` and README layout above | done with this branch |
 | `think-vqk8` | Record `manasseh-ahmed`, the former `queuingtheorydotcom`, with the owner-confirmed spelling Manasseh corrected in first-party text | done with this branch |
+| `think-kf4u` | Records `oscar-fitzharding` and `david-r-maciver`, whom #588’s import of the n = 17 Lean proof credits, with their four spans joined | done with this branch |
 
 The renamed records keep forwarders at their previewed addresses
 (`contributors/kleddamag.html`, `contributors/queuingtheorydotcom.html` and
-`contributors/wand125.html`). Population continues under `think-m7il`: 252 structured
-spans are unresolved, among them Chaoweeraprasit, Xu, Ostashev, Wang, Li and Maaz, for
-whom no archived source gives a full name.
+`contributors/wand125.html`). With Oscar Fitzharding and David R. MacIver there are 26
+records. Population continues under `think-m7il`: 252 structured spans are unresolved,
+among them Chaoweeraprasit, Xu, Ostashev, Wang, Li and Maaz, for whom no archived source
+gives a full name.
 
 ## WIP Handoff: 2026-10-10
 

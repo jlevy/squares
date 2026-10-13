@@ -6509,6 +6509,14 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-13'
   status: live
+- path: profiles/david-r-maciver.html
+  canonical: profiles/david-r-maciver.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
 - path: profiles/erich-friedman.html
   canonical: profiles/erich-friedman.html
   kind: page
@@ -6623,6 +6631,14 @@ urls:
   status: live
 - path: profiles/mira.html
   canonical: profiles/mira.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+- path: profiles/oscar-fitzharding.html
+  canonical: profiles/oscar-fitzharding.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
