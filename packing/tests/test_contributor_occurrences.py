@@ -13,7 +13,12 @@ from typing import Any
 import pytest
 import yaml
 
-from devtools.contributor_census import census, structured_occurrences
+from devtools.contributor_census import (
+    census,
+    reconcile,
+    stale_occurrences,
+    structured_occurrences,
+)
 from devtools.contributor_credit import render_credit
 from devtools.result_credit import credit_line, result_credit_html
 from sqpack.contributor_occurrences import (
@@ -98,6 +103,51 @@ def test_stale_spans_sources_ids_and_evidence_are_rejected(
         path.write_text(yaml.safe_dump(document, sort_keys=False, allow_unicode=True))
         with pytest.raises(OccurrenceError):
             load_occurrences(path, repo=REPO)
+
+
+def test_reconcile_replaces_stale_spans_and_joins_only_reviewed_labels(
+    manifest: tuple[Path, dict[str, Any]],
+) -> None:
+    path, _ = manifest
+    document = load_yaml((PACKING / "contributors/occurrences.yaml").read_text())
+    rows = document["occurrences"]
+    stale = next(
+        row
+        for row in rows
+        if row["disposition"] == "resolved"
+        and row["origin"]["path"].startswith("packing/frontier/n-")
+    )
+    stale.update(expected_text="Somebody Else", label="Somebody Else", start=0, end=13)
+    levy = next(row for row in rows if row["label"] == "Levy")["origin"]
+    xu = next(
+        row for row in rows if row["label"] == "Xu" and row["disposition"] == "unresolved"
+    )
+    removed = (levy, xu["origin"])
+    document["occurrences"] = [row for row in rows if row["origin"] not in removed]
+    path.write_text(yaml.safe_dump(document, sort_keys=False, allow_unicode=True))
+
+    assert [item["origin"] for item in stale_occurrences(REPO, path)] == [stale["origin"]]
+    with pytest.raises(OccurrenceError, match="reviewed source text changed"):
+        load_occurrences(path, repo=REPO)
+    report = reconcile(REPO, path)
+    assert len(report["dropped"]) == 1
+    assert stale_occurrences(REPO, path) == []
+    registry = load_occurrences(path, repo=REPO)
+    by_origin = {
+        (origin.path, origin.record_key, origin.field): items
+        for origin, items in registry.by_origin.items()
+    }
+    restored = by_origin[
+        (stale["origin"]["path"], stale["origin"]["record_key"], stale["origin"]["field"])
+    ]
+    assert all(item.label != "Somebody Else" for item in restored)
+    levy_items = by_origin[(levy["path"], levy["record_key"], levy["field"])]
+    joined = next(item for item in levy_items if item.label == "Levy")
+    assert (joined.disposition, joined.contributor_id) == ("resolved", "joshua-levy")
+    assert joined.note.startswith("Joined by the reviewed identity")
+    xu_origin = xu["origin"]
+    reopened = by_origin[(xu_origin["path"], xu_origin["record_key"], xu_origin["field"])]
+    assert [item.disposition for item in reopened if item.label == "Xu"] == ["unresolved"]
 
 
 def test_unknown_and_conflicting_duplicate_credit_remain_plain() -> None:

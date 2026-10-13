@@ -2,6 +2,11 @@
 
 Run from packing with `python -m devtools.contributor_census`. `--draft PATH` writes
 unresolved source spans for review; it never promotes an alias candidate to a person.
+`--stale` lists every reviewed span whose live source text no longer matches, which the
+manifest loader reports one at a time; run it after merging new credit records.
+`--reconcile` rewrites the manifest after such a merge: it drops stale spans, adds every
+new structured span, and joins one only where its exact label is already reviewed as one
+person and never left unresolved; every other new span stays unresolved for review.
 PDF coverage requires explicit inspection receipts. Missing extraction is pending work.
 """
 
@@ -24,8 +29,10 @@ from sqpack.contributor_occurrences import (
     SCHEMA_NAME,
     CreditOccurrence,
     CreditOrigin,
+    OccurrenceError,
     OccurrenceRegistry,
     load_occurrences,
+    source_text,
 )
 from sqpack.contributors import load_contributors
 from sqpack.project import require_project_root
@@ -232,14 +239,162 @@ def census(repo: Path, registry: OccurrenceRegistry | None = None) -> dict[str, 
     }
 
 
+def stale_occurrences(repo: Path, path: Path | None = None) -> list[dict[str, Any]]:
+    """Every reviewed span whose addressed source text changed or no longer exists.
+
+    The manifest loader refuses the first such span; this reads the manifest without
+    validating it, so one run shows the whole review a source change needs."""
+    path = path if path is not None else repo / "packing/contributors/occurrences.yaml"
+    documents: dict[str, Any] = {}
+    stale = []
+    for row in load_yaml(path.read_text(encoding="utf-8"))["occurrences"]:
+        origin = CreditOrigin(**row["origin"])
+        try:
+            live: str | None = source_text(origin, repo=repo, documents=documents)
+        except OccurrenceError:
+            live = None
+        if live != row["expected_text"]:
+            stale.append(
+                {
+                    "origin": asdict(origin),
+                    "label": row["label"],
+                    "disposition": row["disposition"],
+                    "contributor_id": row.get("contributor_id"),
+                    "expected_text": row["expected_text"],
+                    "live_text": live,
+                }
+            )
+    return stale
+
+
+def _label_identities(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    """The reviewed join of each label that names one person wherever it was reviewed.
+
+    A label also reviewed as unresolved or non-person, or as two people, has no join: the
+    reviewer declined it once, and a new span with the same spelling is no less open."""
+    seen: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        seen.setdefault(row["label"], []).append(row)
+    joins = {}
+    for label, reviewed in seen.items():
+        ids = {row.get("contributor_id") for row in reviewed}
+        if len(ids) != 1 or any(row["disposition"] != "resolved" for row in reviewed):
+            continue
+        evidence = Counter(tuple(row["evidence"]) for row in reviewed).most_common(1)[0][0]
+        joins[label] = {
+            "contributor_id": next(iter(ids)),
+            "evidence": list(evidence),
+            "count": len(reviewed),
+        }
+    return joins
+
+
+def reconcile(repo: Path, path: Path | None = None) -> dict[str, Any]:
+    """Rewrite the manifest against the live structured credit fields.
+
+    Reviewed spans whose source text is unchanged are kept as they are. A stale span is
+    dropped, with the rest of its field's spans, and the field's live spans take their
+    place; spans of fields the manifest never held are added after the last span from
+    the same file. A new span is joined only by `_label_identities`."""
+    path = path if path is not None else repo / "packing/contributors/occurrences.yaml"
+    document = load_yaml(path.read_text(encoding="utf-8"))
+    rows: list[dict[str, Any]] = document["occurrences"]
+    stale_origins = {CreditOrigin(**item["origin"]) for item in stale_occurrences(repo, path)}
+    kept = [row for row in rows if CreditOrigin(**row["origin"]) not in stale_origins]
+    joins = _label_identities(kept)
+    reviewed = {(CreditOrigin(**row["origin"]), row["start"], row["end"]) for row in kept}
+    fresh: dict[CreditOrigin, list[dict[str, Any]]] = {}
+    report: dict[str, Any] = {"dropped": [], "joined": [], "unresolved": []}
+    for item in structured_occurrences(repo):
+        if (item.origin, item.start, item.end) in reviewed:
+            continue
+        row = asdict(item)
+        row["origin"] = asdict(item.origin)
+        join = joins.get(item.label) if item.disposition == "unresolved" else None
+        if join:
+            row.update(
+                disposition="resolved",
+                evidence=join["evidence"],
+                contributor_id=join["contributor_id"],
+                note=f"Joined by the reviewed identity of {join['count']} spans so labelled.",
+            )
+        else:
+            row.pop("contributor_id")
+            row["evidence"] = []
+        key = "joined" if join else "unresolved"
+        report[key].append(f"{item.origin.path} {item.origin.field} {item.label}")
+        fresh.setdefault(item.origin, []).append(_ordered(row))
+    report["dropped"] = [
+        f"{row['origin']['path']} {row['origin']['field']} {row['label']}"
+        for row in rows
+        if CreditOrigin(**row["origin"]) in stale_origins
+    ]
+    result: list[dict[str, Any]] = []
+    placed: set[CreditOrigin] = set()
+    for row in rows:
+        origin = CreditOrigin(**row["origin"])
+        if origin in stale_origins:
+            if origin not in placed:
+                result.extend(fresh.get(origin, []))
+                placed.add(origin)
+            continue
+        result.append(row)
+    for origin, new_rows in fresh.items():
+        if origin in placed:
+            continue
+        last = max(
+            (index for index, row in enumerate(result) if row["origin"]["path"] == origin.path),
+            default=len(result) - 1,
+        )
+        result[last + 1 : last + 1] = new_rows
+        placed.add(origin)
+    document["occurrences"] = result
+    atomic_write_text(path, yaml.safe_dump(document, sort_keys=False, allow_unicode=True))
+    return report
+
+
+def _ordered(row: dict[str, Any]) -> dict[str, Any]:
+    """A manifest row in the manifest's own key order, without empty optional fields."""
+    order = (
+        "origin",
+        "expected_text",
+        "start",
+        "end",
+        "label",
+        "role",
+        "disposition",
+        "evidence",
+        "contributor_id",
+        "note",
+    )
+    return {key: row[key] for key in order if key in row and row[key] not in (None, "")}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help="Print the full actionable census.")
     parser.add_argument(
         "--draft", type=Path, help="Write unresolved proposals for manual identity review."
     )
+    parser.add_argument(
+        "--stale",
+        action="store_true",
+        help="List every reviewed span whose source text changed; exit 1 if any did.",
+    )
+    parser.add_argument(
+        "--reconcile",
+        action="store_true",
+        help="Rewrite the manifest against the live credit fields and list what changed.",
+    )
     args = parser.parse_args(argv)
     repo = require_project_root().parent
+    if args.reconcile:
+        print(json.dumps(reconcile(repo), ensure_ascii=False, indent=2))
+        return 0
+    if args.stale:
+        stale = stale_occurrences(repo)
+        print(json.dumps(stale, ensure_ascii=False, indent=2))
+        return 1 if stale else 0
     if args.draft:
         rows = []
         for item in structured_occurrences(repo):

@@ -5797,6 +5797,1851 @@ occurrences:
   - primary-byline
   contributor_id: joshua-levy
 - origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squarepacker k2-minus-c-upper 2026]'
+    field: /authors/0
+  expected_text: Ryu
+  start: 0
+  end: 3
+  label: Ryu
+  role: source-author
+  disposition: resolved
+  evidence: &id001
+  - primary-byline
+  contributor_id: ryu-sungjoon
+  note: Joined by the reviewed identity of 6 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squarepacker k2-minus-c-upper 2026]'
+    field: /credit
+  expected_text: Ryu after Bui
+  start: 0
+  end: 3
+  label: Ryu
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id001
+  contributor_id: ryu-sungjoon
+  note: Joined by the reviewed identity of 6 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squarepacker k2-minus-c-upper 2026]'
+    field: /credit
+  expected_text: Ryu after Bui
+  start: 10
+  end: 13
+  label: Bui
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squarepacker k2-minus-c-upper v1.1 2026]'
+    field: /authors/0
+  expected_text: Ryu
+  start: 0
+  end: 3
+  label: Ryu
+  role: source-author
+  disposition: resolved
+  evidence: *id001
+  contributor_id: ryu-sungjoon
+  note: Joined by the reviewed identity of 6 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squarepacker k2-minus-c-upper v1.1 2026]'
+    field: /credit
+  expected_text: Ryu after Bui
+  start: 0
+  end: 3
+  label: Ryu
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id001
+  contributor_id: ryu-sungjoon
+  note: Joined by the reviewed identity of 6 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squarepacker k2-minus-c-upper v1.1 2026]'
+    field: /credit
+  expected_text: Ryu after Bui
+  start: 10
+  end: 13
+  label: Bui
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n29 2026-10-10]'
+    field: /authors/0
+  expected_text: wand125
+  start: 0
+  end: 7
+  label: wand125
+  role: source-author
+  disposition: resolved
+  evidence: &id002
+  - primary-byline
+  contributor_id: wand125
+  note: Joined by the reviewed identity of 116 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n29 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu and Levy
+  start: 0
+  end: 7
+  label: wand125
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id002
+  contributor_id: wand125
+  note: Joined by the reviewed identity of 116 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n29 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu and Levy
+  start: 14
+  end: 22
+  label: Tokoharu
+  role: prerequisite
+  disposition: resolved
+  evidence: &id004
+  - primary-byline
+  contributor_id: tokoharu
+  note: Joined by the reviewed identity of 22 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n29 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu and Levy
+  start: 27
+  end: 31
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: &id005
+  - primary-byline
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    field: /authors/0
+  expected_text: Guzhou0806
+  start: 0
+  end: 10
+  label: Guzhou0806
+  role: source-author
+  disposition: resolved
+  evidence: &id003
+  - primary-byline
+  contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 19 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 0
+  end: 10
+  label: Guzhou0806
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id003
+  contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 19 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 17
+  end: 24
+  label: wand125
+  role: prerequisite
+  disposition: resolved
+  evidence: *id002
+  contributor_id: wand125
+  note: Joined by the reviewed identity of 116 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 26
+  end: 34
+  label: Tokoharu
+  role: prerequisite
+  disposition: resolved
+  evidence: *id004
+  contributor_id: tokoharu
+  note: Joined by the reviewed identity of 22 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 36
+  end: 40
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 42
+  end: 52
+  label: Stromquist
+  role: prerequisite
+  disposition: resolved
+  evidence: &id008
+  - paper-byline
+  contributor_id: walter-stromquist
+  note: Joined by the reviewed identity of 25 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 54
+  end: 59
+  label: Burns
+  role: prerequisite
+  disposition: resolved
+  evidence: &id009
+  - primary-byline
+  contributor_id: sam-burns
+  note: Joined by the reviewed identity of 44 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 61
+  end: 71
+  label: Massaccesi
+  role: prerequisite
+  disposition: resolved
+  evidence: &id010
+  - primary-byline
+  contributor_id: gustavo-massaccesi
+  note: Joined by the reviewed identity of 44 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo exact certificates 2026-10-09]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence: &id006
+  - primary-byline
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 23 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo exact certificates 2026-10-09]'
+    field: /credit
+  expected_text: Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth,
+    Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id006
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 23 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo exact certificates 2026-10-09]'
+    field: /credit
+  expected_text: Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth,
+    Levy
+  start: 12
+  end: 21
+  label: Mishapolk
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo exact certificates 2026-10-09]'
+    field: /credit
+  expected_text: Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth,
+    Levy
+  start: 23
+  end: 38
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo exact certificates 2026-10-09]'
+    field: /credit
+  expected_text: Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth,
+    Levy
+  start: 40
+  end: 45
+  label: Gupta
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo exact certificates 2026-10-09]'
+    field: /credit
+  expected_text: Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth,
+    Levy
+  start: 47
+  end: 49
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo exact certificates 2026-10-09]'
+    field: /credit
+  expected_text: Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth,
+    Levy
+  start: 51
+  end: 57
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence: &id007
+  - repository-license
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo exact certificates 2026-10-09]'
+    field: /credit
+  expected_text: Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth,
+    Levy
+  start: 59
+  end: 68
+  label: Ellsworth
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo exact certificates 2026-10-09]'
+    field: /credit
+  expected_text: Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth,
+    Levy
+  start: 70
+  end: 74
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang two-wedge certificates 2026-10-10]'
+    field: /authors/0
+  expected_text: Fang
+  start: 0
+  end: 4
+  label: Fang
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang two-wedge certificates 2026-10-10]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead
+  start: 0
+  end: 4
+  label: Fang
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang two-wedge certificates 2026-10-10]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead
+  start: 11
+  end: 19
+  label: Arslanov
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang two-wedge certificates 2026-10-10]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead
+  start: 21
+  end: 29
+  label: Mustafin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang two-wedge certificates 2026-10-10]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead
+  start: 31
+  end: 43
+  label: Shangitbayev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang two-wedge certificates 2026-10-10]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead
+  start: 45
+  end: 54
+  label: Ellsworth
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang two-wedge certificates 2026-10-10]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead
+  start: 56
+  end: 61
+  label: Stead
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH third request 2026-10-09]'
+    field: /authors/0
+  expected_text: Chaoweeraprasit
+  start: 0
+  end: 15
+  label: Chaoweeraprasit
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH third request 2026-10-09]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba,
+    Levy
+  start: 0
+  end: 15
+  label: Chaoweeraprasit
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH third request 2026-10-09]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba,
+    Levy
+  start: 22
+  end: 27
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence: *id006
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 23 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH third request 2026-10-09]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba,
+    Levy
+  start: 29
+  end: 31
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH third request 2026-10-09]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba,
+    Levy
+  start: 33
+  end: 39
+  label: Goebel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH third request 2026-10-09]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba,
+    Levy
+  start: 41
+  end: 47
+  label: Schadt
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH third request 2026-10-09]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba,
+    Levy
+  start: 49
+  end: 58
+  label: Ellsworth
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH third request 2026-10-09]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba,
+    Levy
+  start: 60
+  end: 65
+  label: Hajba
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH third request 2026-10-09]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba,
+    Levy
+  start: 67
+  end: 71
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Deleeuw n70 refinement 2026-10-10]'
+    field: /authors/0
+  expected_text: Deleeuw
+  start: 0
+  end: 7
+  label: Deleeuw
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Deleeuw n70 refinement 2026-10-10]'
+    field: /credit
+  expected_text: Deleeuw after Xu, Levy
+  start: 0
+  end: 7
+  label: Deleeuw
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Deleeuw n70 refinement 2026-10-10]'
+    field: /credit
+  expected_text: Deleeuw after Xu, Levy
+  start: 14
+  end: 16
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Deleeuw n70 refinement 2026-10-10]'
+    field: /credit
+  expected_text: Deleeuw after Xu, Levy
+  start: 18
+  end: 22
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /authors/0
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Levy
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Levy
+  start: 16
+  end: 24
+  label: Stenlund
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Levy
+  start: 26
+  end: 34
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence: &id011
+  - primary-byline
+  contributor_id: erich-friedman
+  note: Joined by the reviewed identity of 3 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Levy
+  start: 36
+  end: 45
+  label: Ellsworth
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Levy
+  start: 47
+  end: 62
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Levy
+  start: 64
+  end: 69
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence: *id006
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 23 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Levy
+  start: 71
+  end: 73
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Levy
+  start: 75
+  end: 79
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel trio126 2026-10-09]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel trio126 2026-10-09]'
+    field: /credit
+  expected_text: Daniel after Xu, Chaoweeraprasit
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel trio126 2026-10-09]'
+    field: /credit
+  expected_text: Daniel after Xu, Chaoweeraprasit
+  start: 13
+  end: 15
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel trio126 2026-10-09]'
+    field: /credit
+  expected_text: Daniel after Xu, Chaoweeraprasit
+  start: 17
+  end: 32
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-10]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence: *id006
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 23 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-10]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Mishapolk, Xu, Daniel, Ellsworth, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id006
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 23 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-10]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Mishapolk, Xu, Daniel, Ellsworth, Levy
+  start: 12
+  end: 27
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-10]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Mishapolk, Xu, Daniel, Ellsworth, Levy
+  start: 29
+  end: 38
+  label: Mishapolk
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-10]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Mishapolk, Xu, Daniel, Ellsworth, Levy
+  start: 40
+  end: 42
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-10]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Mishapolk, Xu, Daniel, Ellsworth, Levy
+  start: 44
+  end: 50
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-10]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Mishapolk, Xu, Daniel, Ellsworth, Levy
+  start: 52
+  end: 61
+  label: Ellsworth
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-10]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Mishapolk, Xu, Daniel, Ellsworth, Levy
+  start: 63
+  end: 67
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel record hunt 3 2026-10-10]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel record hunt 3 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Couzo, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel record hunt 3 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Couzo, Levy
+  start: 13
+  end: 17
+  label: Fang
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel record hunt 3 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Couzo, Levy
+  start: 19
+  end: 27
+  label: Arslanov
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel record hunt 3 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Couzo, Levy
+  start: 29
+  end: 37
+  label: Mustafin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel record hunt 3 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Couzo, Levy
+  start: 39
+  end: 51
+  label: Shangitbayev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel record hunt 3 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Couzo, Levy
+  start: 53
+  end: 58
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence: *id006
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 23 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel record hunt 3 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Couzo, Levy
+  start: 60
+  end: 64
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n28 n30 2026-10-10]'
+    field: /authors/0
+  expected_text: wand125
+  start: 0
+  end: 7
+  label: wand125
+  role: source-author
+  disposition: resolved
+  evidence: *id002
+  contributor_id: wand125
+  note: Joined by the reviewed identity of 116 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n28 n30 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu and Levy
+  start: 0
+  end: 7
+  label: wand125
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id002
+  contributor_id: wand125
+  note: Joined by the reviewed identity of 116 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n28 n30 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu and Levy
+  start: 14
+  end: 22
+  label: Tokoharu
+  role: prerequisite
+  disposition: resolved
+  evidence: *id004
+  contributor_id: tokoharu
+  note: Joined by the reviewed identity of 22 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n28 n30 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu and Levy
+  start: 27
+  end: 31
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 linear n122 2026-10-10]'
+    field: /authors/0
+  expected_text: wand125
+  start: 0
+  end: 7
+  label: wand125
+  role: source-author
+  disposition: resolved
+  evidence: *id002
+  contributor_id: wand125
+  note: Joined by the reviewed identity of 116 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 linear n122 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 0
+  end: 7
+  label: wand125
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id002
+  contributor_id: wand125
+  note: Joined by the reviewed identity of 116 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 linear n122 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 14
+  end: 22
+  label: Tokoharu
+  role: prerequisite
+  disposition: resolved
+  evidence: *id004
+  contributor_id: tokoharu
+  note: Joined by the reviewed identity of 22 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 linear n122 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 24
+  end: 28
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 linear n122 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 30
+  end: 40
+  label: Stromquist
+  role: prerequisite
+  disposition: resolved
+  evidence: *id008
+  contributor_id: walter-stromquist
+  note: Joined by the reviewed identity of 25 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 linear n122 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 42
+  end: 51
+  label: Nagamochi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  contributor_id: hiroshi-nagamochi
+  note: Joined by the reviewed identity of 24 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 linear n122 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 53
+  end: 58
+  label: Burns
+  role: prerequisite
+  disposition: resolved
+  evidence: *id009
+  contributor_id: sam-burns
+  note: Joined by the reviewed identity of 44 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 linear n122 2026-10-10]'
+    field: /credit
+  expected_text: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 60
+  end: 70
+  label: Massaccesi
+  role: prerequisite
+  disposition: resolved
+  evidence: *id010
+  contributor_id: gustavo-massaccesi
+  note: Joined by the reviewed identity of 44 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    field: /authors/0
+  expected_text: Guzhou0806
+  start: 0
+  end: 10
+  label: Guzhou0806
+  role: source-author
+  disposition: resolved
+  evidence: *id003
+  contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 19 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 0
+  end: 10
+  label: Guzhou0806
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id003
+  contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 19 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 17
+  end: 24
+  label: wand125
+  role: prerequisite
+  disposition: resolved
+  evidence: *id002
+  contributor_id: wand125
+  note: Joined by the reviewed identity of 116 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 26
+  end: 34
+  label: Tokoharu
+  role: prerequisite
+  disposition: resolved
+  evidence: *id004
+  contributor_id: tokoharu
+  note: Joined by the reviewed identity of 22 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 36
+  end: 40
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 42
+  end: 52
+  label: Stromquist
+  role: prerequisite
+  disposition: resolved
+  evidence: *id008
+  contributor_id: walter-stromquist
+  note: Joined by the reviewed identity of 25 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 54
+  end: 59
+  label: Burns
+  role: prerequisite
+  disposition: resolved
+  evidence: *id009
+  contributor_id: sam-burns
+  note: Joined by the reviewed identity of 44 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 61
+  end: 71
+  label: Massaccesi
+  role: prerequisite
+  disposition: resolved
+  evidence: *id010
+  contributor_id: gustavo-massaccesi
+  note: Joined by the reviewed identity of 44 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    field: /authors/0
+  expected_text: Guzhou0806
+  start: 0
+  end: 10
+  label: Guzhou0806
+  role: source-author
+  disposition: resolved
+  evidence: *id003
+  contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 19 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 0
+  end: 10
+  label: Guzhou0806
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id003
+  contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 19 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 17
+  end: 24
+  label: wand125
+  role: prerequisite
+  disposition: resolved
+  evidence: *id002
+  contributor_id: wand125
+  note: Joined by the reviewed identity of 116 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 26
+  end: 34
+  label: Tokoharu
+  role: prerequisite
+  disposition: resolved
+  evidence: *id004
+  contributor_id: tokoharu
+  note: Joined by the reviewed identity of 22 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 36
+  end: 40
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 42
+  end: 52
+  label: Stromquist
+  role: prerequisite
+  disposition: resolved
+  evidence: *id008
+  contributor_id: walter-stromquist
+  note: Joined by the reviewed identity of 25 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 54
+  end: 59
+  label: Burns
+  role: prerequisite
+  disposition: resolved
+  evidence: *id009
+  contributor_id: sam-burns
+  note: Joined by the reviewed identity of 44 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    field: /credit
+  expected_text: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+  start: 61
+  end: 71
+  label: Massaccesi
+  role: prerequisite
+  disposition: resolved
+  evidence: *id010
+  contributor_id: gustavo-massaccesi
+  note: Joined by the reviewed identity of 44 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-10]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Xu, Chaoweeraprasit, Mishapolk, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Xu, Chaoweeraprasit, Mishapolk, Levy
+  start: 13
+  end: 15
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Xu, Chaoweeraprasit, Mishapolk, Levy
+  start: 17
+  end: 32
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Xu, Chaoweeraprasit, Mishapolk, Levy
+  start: 34
+  end: 43
+  label: Mishapolk
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Xu, Chaoweeraprasit, Mishapolk, Levy
+  start: 45
+  end: 49
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[PingYou n207 certificate 2026-10-11]'
+    field: /authors/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[PingYou n207 certificate 2026-10-11]'
+    field: /credit
+  expected_text: PingYou Ltd after Xu, Daniel, Levy
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[PingYou n207 certificate 2026-10-11]'
+    field: /credit
+  expected_text: PingYou Ltd after Xu, Daniel, Levy
+  start: 18
+  end: 20
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[PingYou n207 certificate 2026-10-11]'
+    field: /credit
+  expected_text: PingYou Ltd after Xu, Daniel, Levy
+  start: 22
+  end: 28
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[PingYou n207 certificate 2026-10-11]'
+    field: /credit
+  expected_text: PingYou Ltd after Xu, Daniel, Levy
+  start: 30
+  end: 34
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[PingYou n153 certificate 2026-10-11]'
+    field: /authors/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[PingYou n153 certificate 2026-10-11]'
+    field: /credit
+  expected_text: PingYou Ltd after Xu, Daniel, Levy
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[PingYou n153 certificate 2026-10-11]'
+    field: /credit
+  expected_text: PingYou Ltd after Xu, Daniel, Levy
+  start: 18
+  end: 20
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[PingYou n153 certificate 2026-10-11]'
+    field: /credit
+  expected_text: PingYou Ltd after Xu, Daniel, Levy
+  start: 22
+  end: 28
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[PingYou n153 certificate 2026-10-11]'
+    field: /credit
+  expected_text: PingYou Ltd after Xu, Daniel, Levy
+  start: 30
+  end: 34
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ostashev records 2026-10-11]'
+    field: /authors/0
+  expected_text: Ostashev
+  start: 0
+  end: 8
+  label: Ostashev
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ostashev records 2026-10-11]'
+    field: /credit
+  expected_text: Ostashev after Nakajima, Levy, Xu
+  start: 0
+  end: 8
+  label: Ostashev
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ostashev records 2026-10-11]'
+    field: /credit
+  expected_text: Ostashev after Nakajima, Levy, Xu
+  start: 15
+  end: 23
+  label: Nakajima
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ostashev records 2026-10-11]'
+    field: /credit
+  expected_text: Ostashev after Nakajima, Levy, Xu
+  start: 25
+  end: 29
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ostashev records 2026-10-11]'
+    field: /credit
+  expected_text: Ostashev after Nakajima, Levy, Xu
+  start: 31
+  end: 33
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Barnett refinements 2026-10-11]'
+    field: /authors/0
+  expected_text: Barnett
+  start: 0
+  end: 7
+  label: Barnett
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Barnett refinements 2026-10-11]'
+    field: /credit
+  expected_text: Barnett after Xu, Daniel, Levy
+  start: 0
+  end: 7
+  label: Barnett
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Barnett refinements 2026-10-11]'
+    field: /credit
+  expected_text: Barnett after Xu, Daniel, Levy
+  start: 14
+  end: 16
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Barnett refinements 2026-10-11]'
+    field: /credit
+  expected_text: Barnett after Xu, Daniel, Levy
+  start: 18
+  end: 24
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Barnett refinements 2026-10-11]'
+    field: /credit
+  expected_text: Barnett after Xu, Daniel, Levy
+  start: 26
+  end: 30
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH fourth request 2026-10-11]'
+    field: /authors/0
+  expected_text: Chaoweeraprasit
+  start: 0
+  end: 15
+  label: Chaoweeraprasit
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH fourth request 2026-10-11]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Gupta, Ellsworth, Friedman, Levy
+  start: 0
+  end: 15
+  label: Chaoweeraprasit
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH fourth request 2026-10-11]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Gupta, Ellsworth, Friedman, Levy
+  start: 22
+  end: 27
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence: *id006
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 23 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH fourth request 2026-10-11]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Gupta, Ellsworth, Friedman, Levy
+  start: 29
+  end: 34
+  label: Gupta
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH fourth request 2026-10-11]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Gupta, Ellsworth, Friedman, Levy
+  start: 36
+  end: 45
+  label: Ellsworth
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH fourth request 2026-10-11]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Gupta, Ellsworth, Friedman, Levy
+  start: 47
+  end: 55
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence: *id011
+  contributor_id: erich-friedman
+  note: Joined by the reviewed identity of 3 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[SQUISH fourth request 2026-10-11]'
+    field: /credit
+  expected_text: Chaoweeraprasit after Couzo, Gupta, Ellsworth, Friedman, Levy
+  start: 57
+  end: 61
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-11]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence: *id006
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 23 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-11]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Fang, Daniel, Ellsworth, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id006
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 23 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-11]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Fang, Daniel, Ellsworth, Levy
+  start: 12
+  end: 27
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-11]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Fang, Daniel, Ellsworth, Levy
+  start: 29
+  end: 33
+  label: Fang
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-11]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Fang, Daniel, Ellsworth, Levy
+  start: 35
+  end: 41
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence: *id007
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-11]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Fang, Daniel, Ellsworth, Levy
+  start: 43
+  end: 52
+  label: Ellsworth
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-11]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Fang, Daniel, Ellsworth, Levy
+  start: 54
+  end: 58
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id005
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 48 spans so labelled.
+- origin:
     path: packing/frontier/results.yaml
     record_key: T-001
     field: /builds_on/credit/0
@@ -6916,15 +8761,15 @@ occurrences:
     path: packing/frontier/n-040.md
     record_key: '40'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Guzhou0806
   start: 0
-  end: 7
-  label: wand125
+  end: 10
+  label: Guzhou0806
   role: lower-bound-prover
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: guzhou0806
 - origin:
     path: packing/frontier/n-041.md
     record_key: '41'
@@ -7556,6 +9401,20 @@ occurrences:
   - primary-byline
   contributor_id: wand125
 - origin:
+    path: packing/frontier/n-070.md
+    record_key: '70'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence: &id013
+  - repository-license
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
     path: packing/frontier/n-071.md
     record_key: '71'
     field: /reported_upper_bound/found_by/0
@@ -7809,6 +9668,20 @@ occurrences:
   - primary-byline
   contributor_id: wand125
 - origin:
+    path: packing/frontier/n-084.md
+    record_key: '84'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Francisco Couzo
+  start: 0
+  end: 15
+  label: Francisco Couzo
+  role: construction-improver
+  disposition: resolved
+  evidence: &id012
+  - primary-byline
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
+- origin:
     path: packing/frontier/n-085.md
     record_key: '85'
     field: /reported_upper_bound/found_by/0
@@ -7859,6 +9732,19 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: wand125
+- origin:
+    path: packing/frontier/n-086.md
+    record_key: '86'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Francisco Couzo
+  start: 0
+  end: 15
+  label: Francisco Couzo
+  role: construction-improver
+  disposition: resolved
+  evidence: *id012
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
     path: packing/frontier/n-087.md
     record_key: '87'
@@ -8151,6 +10037,19 @@ occurrences:
   - primary-byline
   contributor_id: wand125
 - origin:
+    path: packing/frontier/n-102.md
+    record_key: '102'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
     path: packing/frontier/n-103.md
     record_key: '103'
     field: /reported_upper_bound/found_by/0
@@ -8175,6 +10074,31 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: wand125
+- origin:
+    path: packing/frontier/n-103.md
+    record_key: '103'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-103.md
+    record_key: '103'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
     path: packing/frontier/n-104.md
     record_key: '104'
@@ -8213,6 +10137,19 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: wand125
+- origin:
+    path: packing/frontier/n-105.md
+    record_key: '105'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Francisco Couzo
+  start: 0
+  end: 15
+  label: Francisco Couzo
+  role: construction-improver
+  disposition: resolved
+  evidence: *id012
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
     path: packing/frontier/n-106.md
     record_key: '106'
@@ -8302,6 +10239,19 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: hiroshi-nagamochi
+- origin:
+    path: packing/frontier/n-108.md
+    record_key: '108'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Francisco Couzo
+  start: 0
+  end: 15
+  label: Francisco Couzo
+  role: construction-improver
+  disposition: resolved
+  evidence: *id012
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
     path: packing/frontier/n-109.md
     record_key: '109'
@@ -8521,6 +10471,19 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-123.md
+    record_key: '123'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
     path: packing/frontier/n-124.md
     record_key: '124'
     field: /reported_lower_bound/proved_by/0
@@ -8570,6 +10533,19 @@ occurrences:
   - primary-byline
   contributor_id: hiroshi-nagamochi
 - origin:
+    path: packing/frontier/n-126.md
+    record_key: '126'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
     path: packing/frontier/n-127.md
     record_key: '127'
     field: /reported_upper_bound/found_by/0
@@ -8594,6 +10570,19 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: hiroshi-nagamochi
+- origin:
+    path: packing/frontier/n-127.md
+    record_key: '127'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Francisco Couzo
+  start: 0
+  end: 15
+  label: Francisco Couzo
+  role: construction-improver
+  disposition: resolved
+  evidence: *id012
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
     path: packing/frontier/n-128.md
     record_key: '128'
@@ -8669,6 +10658,19 @@ occurrences:
   - primary-byline
   contributor_id: hiroshi-nagamochi
 - origin:
+    path: packing/frontier/n-129.md
+    record_key: '129'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
     path: packing/frontier/n-130.md
     record_key: '130'
     field: /reported_upper_bound/found_by/0
@@ -8709,10 +10711,10 @@ occurrences:
     path: packing/frontier/n-131.md
     record_key: '131'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 5
-  label: ry-xu
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
   disposition: unresolved
   evidence: []
@@ -8734,28 +10736,15 @@ occurrences:
     path: packing/frontier/n-132.md
     record_key: '132'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
-  start: 0
-  end: 15
-  label: Francisco Couzo
-  role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-132.md
-    record_key: '132'
-    field: /reported_upper_bound/improved_by/0
   expected_text: Evan Daniel
   start: 0
   end: 11
   label: Evan Daniel
-  role: construction-improver
+  role: construction-finder
   disposition: resolved
-  evidence:
-  - repository-license
+  evidence: *id013
   contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
     path: packing/frontier/n-132.md
     record_key: '132'
@@ -8949,6 +10938,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-146.md
+    record_key: '146'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Robert Barnett
+  start: 0
+  end: 14
+  label: Robert Barnett
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-147.md
     record_key: '147'
     field: /reported_lower_bound/proved_by/0
@@ -9090,127 +11091,89 @@ occurrences:
     path: packing/frontier/n-153.md
     record_key: '153'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
-  start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
-  role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-153.md
-    record_key: '153'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Siddharth Gupta
-  start: 0
-  end: 15
-  label: Siddharth Gupta
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-153.md
-    record_key: '153'
-    field: /reported_lower_bound/proved_by/0
-  expected_text: Hiroshi Nagamochi
-  start: 0
-  end: 17
-  label: Hiroshi Nagamochi
-  role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: hiroshi-nagamochi
-- origin:
-    path: packing/frontier/n-154.md
-    record_key: '154'
-    field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
-  start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
-  role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-154.md
-    record_key: '154'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Siddharth Gupta
-  start: 0
-  end: 15
-  label: Siddharth Gupta
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-154.md
-    record_key: '154'
-    field: /reported_lower_bound/proved_by/0
-  expected_text: Hiroshi Nagamochi
-  start: 0
-  end: 17
-  label: Hiroshi Nagamochi
-  role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: hiroshi-nagamochi
-- origin:
-    path: packing/frontier/n-155.md
-    record_key: '155'
-    field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit
-  start: 0
-  end: 20
-  label: Nate Chaoweeraprasit
-  role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-155.md
-    record_key: '155'
-    field: /reported_lower_bound/proved_by/0
-  expected_text: Hiroshi Nagamochi
-  start: 0
-  end: 17
-  label: Hiroshi Nagamochi
-  role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: hiroshi-nagamochi
-- origin:
-    path: packing/frontier/n-156.md
-    record_key: '156'
-    field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
-  start: 0
-  end: 15
-  label: Francisco Couzo
-  role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-156.md
-    record_key: '156'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
+  expected_text: PingYou Ltd
   start: 0
   end: 11
-  label: Evan Daniel
-  role: construction-improver
+  label: PingYou Ltd
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-153.md
+    record_key: '153'
+    field: /reported_lower_bound/proved_by/0
+  expected_text: Hiroshi Nagamochi
+  start: 0
+  end: 17
+  label: Hiroshi Nagamochi
+  role: lower-bound-prover
   disposition: resolved
   evidence:
-  - repository-license
-  contributor_id: evan-daniel
+  - primary-byline
+  contributor_id: hiroshi-nagamochi
+- origin:
+    path: packing/frontier/n-154.md
+    record_key: '154'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Nate Chaoweeraprasit (itsnaka)
+  start: 0
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-154.md
+    record_key: '154'
+    field: /reported_lower_bound/proved_by/0
+  expected_text: Hiroshi Nagamochi
+  start: 0
+  end: 17
+  label: Hiroshi Nagamochi
+  role: lower-bound-prover
+  disposition: resolved
+  evidence:
+  - primary-byline
+  contributor_id: hiroshi-nagamochi
+- origin:
+    path: packing/frontier/n-155.md
+    record_key: '155'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Daniil Ostashev
+  start: 0
+  end: 15
+  label: Daniil Ostashev
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-155.md
+    record_key: '155'
+    field: /reported_lower_bound/proved_by/0
+  expected_text: Hiroshi Nagamochi
+  start: 0
+  end: 17
+  label: Hiroshi Nagamochi
+  role: lower-bound-prover
+  disposition: resolved
+  evidence:
+  - primary-byline
+  contributor_id: hiroshi-nagamochi
+- origin:
+    path: packing/frontier/n-156.md
+    record_key: '156'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Daniil Ostashev
+  start: 0
+  end: 15
+  label: Daniil Ostashev
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-156.md
     record_key: '156'
@@ -9517,6 +11480,19 @@ occurrences:
   - primary-byline
   contributor_id: hiroshi-nagamochi
 - origin:
+    path: packing/frontier/n-175.md
+    record_key: '175'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Francisco Couzo
+  start: 0
+  end: 15
+  label: Francisco Couzo
+  role: construction-improver
+  disposition: resolved
+  evidence: *id012
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
+- origin:
     path: packing/frontier/n-176.md
     record_key: '176'
     field: /reported_lower_bound/proved_by/0
@@ -9529,6 +11505,18 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: hiroshi-nagamochi
+- origin:
+    path: packing/frontier/n-176.md
+    record_key: '176'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Nate Chaoweeraprasit (itsnaka)
+  start: 0
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-177.md
     record_key: '177'
@@ -9656,31 +11644,30 @@ occurrences:
   - primary-byline
   contributor_id: hiroshi-nagamochi
 - origin:
-    path: packing/frontier/n-181.md
-    record_key: '181'
-    field: /reported_upper_bound/found_by/0
+    path: packing/frontier/n-180.md
+    record_key: '180'
+    field: /reported_upper_bound/improved_by/1
   expected_text: Francisco Couzo
   start: 0
   end: 15
   label: Francisco Couzo
-  role: construction-finder
+  role: construction-improver
   disposition: resolved
-  evidence:
-  - primary-byline
+  evidence: *id012
   contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
     path: packing/frontier/n-181.md
     record_key: '181'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
+    field: /reported_upper_bound/found_by/0
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-181.md
     record_key: '181'
@@ -10118,23 +12105,11 @@ occurrences:
     path: packing/frontier/n-207.md
     record_key: '207'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: PingYou Ltd
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 11
+  label: PingYou Ltd
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-207.md
-    record_key: '207'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Siddharth Gupta
-  start: 0
-  end: 15
-  label: Siddharth Gupta
-  role: construction-improver
   disposition: unresolved
   evidence: []
   note: Identity review pending.
@@ -10204,14 +12179,15 @@ occurrences:
     path: packing/frontier/n-209.md
     record_key: '209'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Siddharth Gupta
+  expected_text: Francisco Couzo
   start: 0
   end: 15
-  label: Siddharth Gupta
+  label: Francisco Couzo
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence: *id012
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
     path: packing/frontier/n-209.md
     record_key: '209'
@@ -10268,27 +12244,14 @@ occurrences:
     path: packing/frontier/n-211.md
     record_key: '211'
     field: /reported_upper_bound/found_by/0
-  expected_text: Joost de Winter
+  expected_text: Daniil Ostashev
   start: 0
   end: 15
-  label: Joost de Winter
+  label: Daniil Ostashev
   role: construction-finder
   disposition: unresolved
   evidence: []
   note: Identity review pending.
-- origin:
-    path: packing/frontier/n-211.md
-    record_key: '211'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-211.md
     record_key: '211'
@@ -10523,19 +12486,6 @@ occurrences:
 - origin:
     path: packing/frontier/n-228.md
     record_key: '228'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
-- origin:
-    path: packing/frontier/n-228.md
-    record_key: '228'
     field: /reported_lower_bound/proved_by/0
   expected_text: Trevor Green
   start: 0
@@ -10608,6 +12558,18 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: hiroshi-nagamochi
+- origin:
+    path: packing/frontier/n-232.md
+    record_key: '232'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Nate Chaoweeraprasit (itsnaka)
+  start: 0
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-233.md
     record_key: '233'
@@ -10711,14 +12673,15 @@ occurrences:
     path: packing/frontier/n-236.md
     record_key: '236'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Siddharth Gupta
+  expected_text: Evan Daniel
   start: 0
-  end: 15
-  label: Siddharth Gupta
+  end: 11
+  label: Evan Daniel
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
     path: packing/frontier/n-236.md
     record_key: '236'
@@ -10748,14 +12711,15 @@ occurrences:
     path: packing/frontier/n-237.md
     record_key: '237'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Siddharth Gupta
+  expected_text: Francisco Couzo
   start: 0
   end: 15
-  label: Siddharth Gupta
+  label: Francisco Couzo
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence: *id012
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
     path: packing/frontier/n-237.md
     record_key: '237'
@@ -10784,18 +12748,6 @@ occurrences:
 - origin:
     path: packing/frontier/n-238.md
     record_key: '238'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Siddharth Gupta
-  start: 0
-  end: 15
-  label: Siddharth Gupta
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-238.md
-    record_key: '238'
     field: /reported_lower_bound/proved_by/0
   expected_text: Hiroshi Nagamochi
   start: 0
@@ -10815,18 +12767,6 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-239.md
-    record_key: '239'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Siddharth Gupta
-  start: 0
-  end: 15
-  label: Siddharth Gupta
-  role: construction-improver
   disposition: unresolved
   evidence: []
   note: Identity review pending.
@@ -11131,10 +13071,10 @@ occurrences:
     path: packing/frontier/n-258.md
     record_key: '258'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 20
-  label: Nate Chaoweeraprasit
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
   disposition: unresolved
   evidence: []
@@ -11152,31 +13092,42 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
-    path: packing/frontier/n-259.md
-    record_key: '259'
-    field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
-  start: 0
-  end: 15
-  label: Francisco Couzo
-  role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-259.md
-    record_key: '259'
+    path: packing/frontier/n-258.md
+    record_key: '258'
     field: /reported_upper_bound/improved_by/0
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-258.md
+    record_key: '258'
+    field: /reported_upper_bound/improved_by/1
   expected_text: Evan Daniel
   start: 0
   end: 11
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence:
-  - repository-license
+  evidence: *id013
   contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/frontier/n-259.md
+    record_key: '259'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Nate Chaoweeraprasit (itsnaka)
+  start: 0
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-259.md
     record_key: '259'
@@ -11238,6 +13189,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-261.md
+    record_key: '261'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Robert Barnett
+  start: 0
+  end: 14
+  label: Robert Barnett
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-262.md
     record_key: '262'
     field: /reported_lower_bound/proved_by/0
@@ -11254,10 +13217,10 @@ occurrences:
     path: packing/frontier/n-263.md
     record_key: '263'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 20
-  label: Nate Chaoweeraprasit
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
   disposition: unresolved
   evidence: []
@@ -11275,6 +13238,19 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: hiroshi-nagamochi
+- origin:
+    path: packing/frontier/n-263.md
+    record_key: '263'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
     path: packing/frontier/n-264.md
     record_key: '264'
@@ -11353,6 +13329,19 @@ occurrences:
   - primary-byline
   contributor_id: hiroshi-nagamochi
 - origin:
+    path: packing/frontier/n-267.md
+    record_key: '267'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Francisco Couzo
+  start: 0
+  end: 15
+  label: Francisco Couzo
+  role: construction-improver
+  disposition: resolved
+  evidence: *id012
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
+- origin:
     path: packing/frontier/n-268.md
     record_key: '268'
     field: /reported_upper_bound/found_by/0
@@ -11395,15 +13384,14 @@ occurrences:
     path: packing/frontier/n-269.md
     record_key: '269'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-269.md
     record_key: '269'
@@ -11434,15 +13422,14 @@ occurrences:
     path: packing/frontier/n-270.md
     record_key: '270'
     field: /reported_upper_bound/found_by/0
-  expected_text: Evan Daniel
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-270.md
     record_key: '270'
@@ -11460,28 +13447,14 @@ occurrences:
     path: packing/frontier/n-271.md
     record_key: '271'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-271.md
-    record_key: '271'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'
@@ -11499,15 +13472,14 @@ occurrences:
     path: packing/frontier/n-272.md
     record_key: '272'
     field: /reported_upper_bound/found_by/0
-  expected_text: Evan Daniel
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-272.md
     record_key: '272'
@@ -11783,27 +13755,27 @@ occurrences:
     path: packing/frontier/n-292.md
     record_key: '292'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-292.md
     record_key: '292'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Seth Rehwaldt
+  expected_text: Evan Daniel
   start: 0
-  end: 13
-  label: Seth Rehwaldt
+  end: 11
+  label: Evan Daniel
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
     path: packing/frontier/n-292.md
     record_key: '292'
@@ -11889,6 +13861,19 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: hiroshi-nagamochi
+- origin:
+    path: packing/frontier/n-295.md
+    record_key: '295'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
     path: packing/frontier/n-296.md
     record_key: '296'
@@ -12047,10 +14032,10 @@ occurrences:
     path: packing/frontier/n-302.md
     record_key: '302'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 20
-  label: Nate Chaoweeraprasit
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
   disposition: unresolved
   evidence: []
@@ -12069,13 +14054,26 @@ occurrences:
   - primary-byline
   contributor_id: hiroshi-nagamochi
 - origin:
+    path: packing/frontier/n-302.md
+    record_key: '302'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
     path: packing/frontier/n-303.md
     record_key: '303'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 20
-  label: Nate Chaoweeraprasit
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
   disposition: unresolved
   evidence: []
@@ -12094,21 +14092,8 @@ occurrences:
   - primary-byline
   contributor_id: hiroshi-nagamochi
 - origin:
-    path: packing/frontier/n-304.md
-    record_key: '304'
-    field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
-  start: 0
-  end: 15
-  label: Francisco Couzo
-  role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-304.md
-    record_key: '304'
+    path: packing/frontier/n-303.md
+    record_key: '303'
     field: /reported_upper_bound/improved_by/0
   expected_text: Evan Daniel
   start: 0
@@ -12116,9 +14101,34 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence:
-  - repository-license
+  evidence: *id013
   contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
+- origin:
+    path: packing/frontier/n-304.md
+    record_key: '304'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Nate Chaoweeraprasit (itsnaka)
+  start: 0
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-304.md
+    record_key: '304'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Francisco Couzo
+  start: 0
+  end: 15
+  label: Francisco Couzo
+  role: construction-improver
+  disposition: resolved
+  evidence: *id012
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
     path: packing/frontier/n-304.md
     record_key: '304'
@@ -12136,28 +14146,27 @@ occurrences:
     path: packing/frontier/n-305.md
     record_key: '305'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-305.md
     record_key: '305'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
+  expected_text: Francisco Couzo
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 15
+  label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
+  evidence: *id012
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
     path: packing/frontier/n-305.md
     record_key: '305'
@@ -12184,19 +14193,6 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-306.md
-    record_key: '306'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-306.md
     record_key: '306'
@@ -12214,28 +14210,14 @@ occurrences:
     path: packing/frontier/n-307.md
     record_key: '307'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Nate Chaoweeraprasit (itsnaka)
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 30
+  label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-307.md
-    record_key: '307'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-307.md
     record_key: '307'
@@ -12262,6 +14244,31 @@ occurrences:
   evidence:
   - primary-byline
   contributor_id: hiroshi-nagamochi
+- origin:
+    path: packing/frontier/n-308.md
+    record_key: '308'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Kevin Fang
+  start: 0
+  end: 10
+  label: Kevin Fang
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-308.md
+    record_key: '308'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence: *id013
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
     path: packing/frontier/n-309.md
     record_key: '309'
