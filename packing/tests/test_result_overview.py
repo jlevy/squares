@@ -564,11 +564,12 @@ def test_a_result_that_is_no_bound_is_not_set_back_in_its_chain(
 
 def test_a_chain_names_only_the_successors_on_its_own_cases(bodies: dict[str, str]) -> None:
     """T-019 is about n = 17 to 19 and superseded on each; on n = 17's chain its step
-    names only the result on that case that supersedes it now, T-093, which replaced
-    T-043 on 2026-10-05 (think-6zg1), not those that supersede it at n = 18 or 19."""
+    names only the results on that case that supersede it now, T-093, which replaced
+    T-043 on 2026-10-05 (think-6zg1), and since 2026-10-12 T-153, which holds the
+    reported lower bound there, not those that supersede it at n = 18 or 19."""
     step = bodies["T-043"].split('data-step="t-019"', 1)[1].split("</li>", 1)[0]
     chips = step.split('<p class="site-result-step-chips">', 1)[1].split("</p>", 1)[0]
-    assert re.findall(r'href="results\.html#(t-\d+)"', chips) == ["t-093"]
+    assert re.findall(r'href="results\.html#(t-\d+)"', chips) == ["t-093", "t-153"]
 
 
 @pytest.mark.parametrize("result_id", [SETTLED, EARLIER, BROAD])

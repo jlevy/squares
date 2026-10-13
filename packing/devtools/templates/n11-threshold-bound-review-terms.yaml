@@ -24,7 +24,7 @@ terms:
     defined_by: "A unit square is a square of side one"
     anchor: the-result
     forward:
-      - text: "This paper explains the computer-assisted proof of a lower bound of 31/8 for eleven unit squares, published by Kleddamag in 11-squares-certified-bound: the proof, certificate and reproduction at t"
+      - text: "This paper explains the computer-assisted proof of a lower bound of 31/8 for eleven unit squares, published by Marc Leonard Overbeck (Kleddamag) in 11-squares-certified-bound: the proof, certificate and reproduction at t"
         reason: roadmap
   - term: "packing"
     uses: "\\bpackings?\\b"
@@ -236,7 +236,7 @@ terms:
         reason: roadmap
       - text: "in a container of side $L_0=191/50$; each parent is assigned a core by one of 12,028 angle rows; every legal center of every row collects charge at least $\\Gamma$ from"
         reason: roadmap
-      - text: "2-of-3 charges beside point charges over contiguous intervals of parent angles are inherited from Kleddamag’s own proof for seventeen squares (T-038); point charges over such intervals are older (next item), and T-037 is the first certificate of that form at eleven squares."
+      - text: "2-of-3 charges beside point charges over contiguous intervals of parent angles are inherited from Overbeck’s own proof for seventeen squares (T-038); point charges over such intervals are older (next item), and T-037 is the first certificate of that form at eleven squares."
         reason: link-to-definition
       - text: "The shrunken parent of side $A<1$, the bound $L_0/A$, one closed core per angle interval, and coverage requi"
         reason: roadmap

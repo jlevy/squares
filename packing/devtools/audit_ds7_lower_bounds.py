@@ -425,18 +425,44 @@ def field_expression(case: Mapping[str, Any], lane: str) -> tuple[sp.Expr, str]:
     raise ValueError(f"n={case['n']}: {lane} lacks a usable exact identity: {bound}")
 
 
-def n11_report_without_parser_identity(case: Mapping[str, Any], lane: str) -> bool:
-    """Recognize the one reported algebraic claim outside this audit's exact grammar."""
-    if lane != "reported_lower_bound" or case["n"] != 11:
+#: The reported optimality claims whose exact value is outside this audit's exact grammar,
+#: each pinned by its displayed value, source key and evidence: a root of a polynomial
+#: system the case note states, which DS7 can neither parse nor rank. n = 11 is Ahmed's
+#: claim of 29 September 2026 (T-060); n = 17 is Overbeck's candidate equality of 12
+#: October 2026 (T-153), whose side is the root of the H-255 chart.
+REPORTS_WITHOUT_PARSER_IDENTITY: Mapping[int, tuple[str, str, str]] = {
+    11: (
+        "3.87708359002281",
+        "[Ahmed n11 optimality 2026]",
+        "E-n011-global-optimality-report",
+    ),
+    17: (
+        "4.67553009360455095163",
+        "[Overbeck n17 candidate 2026]",
+        "E-n017-overbeck-optimality-candidate-report",
+    ),
+}
+
+
+def report_without_parser_identity(case: Mapping[str, Any], lane: str) -> bool:
+    """Recognize a reported algebraic claim outside this audit's exact grammar."""
+    pinned = REPORTS_WITHOUT_PARSER_IDENTITY.get(int(case["n"]))
+    if lane != "reported_lower_bound" or pinned is None:
         return False
+    value, source_key, evidence = pinned
     bound = case[lane]
     return (
         case.get("reported_status") == "proved"
-        and bound.get("value") == "3.87708359002281"
+        and bound.get("value") == value
         and bound.get("exact_form") is None
-        and bound.get("source_key") == "[Ahmed n11 optimality 2026]"
-        and "E-n011-global-optimality-report" in bound.get("evidence", [])
+        and bound.get("source_key") == source_key
+        and evidence in bound.get("evidence", [])
     )
+
+
+def n11_report_without_parser_identity(case: Mapping[str, Any], lane: str) -> bool:
+    """The n = 11 claim of `report_without_parser_identity`, the first of them."""
+    return case["n"] == 11 and report_without_parser_identity(case, lane)
 
 
 def n11_verified_root_comparison(
@@ -503,7 +529,7 @@ def opaque_needs_update(case: Mapping[str, Any], value: str) -> bool:
 def select_update(case: Mapping[str, Any]) -> dict[str, Any] | None:
     """Raise only the reported lane within this explicitly named candidate set."""
     n = int(case["n"])
-    if n11_report_without_parser_identity(case, "reported_lower_bound"):
+    if report_without_parser_identity(case, "reported_lower_bound"):
         # Its displayed decimal is not an exact algebraic identity. DS7 cannot
         # replace or rank this source report without a separate proof comparison.
         return None
@@ -732,7 +758,7 @@ def audit(
         best = best_source.expression
         comparisons = {}
         for lane in ("reported_lower_bound", "verified_lower_bound"):
-            if n11_report_without_parser_identity(case, lane):
+            if report_without_parser_identity(case, lane):
                 comparisons[lane] = {
                     "current_record_value": str(case[lane]["value"]),
                     "current_exact": None,

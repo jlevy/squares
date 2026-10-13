@@ -398,9 +398,11 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     assert view.superseding(records.results["T-037"], records) == ("T-060",)
     # T-019's counts are held now by R071's replay at n = 17 (T-093) and by wand125's
     # check2 certificates of 6 October at n = 18 and 19 (T-102, T-103), which took both
-    # lanes there from T-099 and T-100 the same day.
+    # lanes there from T-099 and T-100 the same day. Since 12 October Overbeck's candidate
+    # equality (T-153), a report at C1, holds n = 17's reported lower bound, and the mark
+    # names it as one.
     assert view.position_marks(records.results["T-019"], view.SUPERSEDED, records) == [
-        "superseded by T-093, T-102 and T-103"
+        "superseded by T-093, T-102, T-103 and T-153 (reported)"
     ]
     # Only a bound supersedes: at n = 13 and 46 a correction and an audit carry the
     # lower bound's evidence beside the optimality results that hold it, at n = 46 since
@@ -435,8 +437,9 @@ def test_a_superseding_report_is_named_as_one() -> None:
     """A result no replay has confirmed holds a case's reported bound and never its
     verified one, so where it supersedes an entry the mark says so after its id. Until
     T-082's replays raised it to C3 on 6 October, T-044's mark named it, a report at C1,
-    beside the confirmed results; no live mark names a report since, so the rule is held
-    on the register with T-082 put back at C1."""
+    beside the confirmed results, and the rule is held on the register with T-082 put
+    back at C1. Since 12 October T-019's mark names one live report, T-153, Overbeck's
+    candidate equality at n = 17, beside the confirmed T-093, T-102 and T-103."""
     view = render_recent_results
     records = view.load_records()
     record = records.results["T-044"]
@@ -453,11 +456,15 @@ def test_a_superseding_report_is_named_as_one() -> None:
     assert mark.reported == {"T-082"}
     assert "T-082 (reported)" in mark.words()
     assert "T-070 (reported)" not in mark.words()
-    for entry in ("T-019", "T-037"):
-        other = records.results[entry]
-        marks = view.position_marks(other, view.standing(other, records), records)
-        assert marks
-        assert all("(reported)" not in words for words in marks), entry
+    other = records.results["T-037"]
+    marks = view.position_marks(other, view.standing(other, records), records)
+    assert marks
+    assert all("(reported)" not in words for words in marks)
+    other = records.results["T-019"]
+    (mark,) = view.supersessions(other, view.standing(other, records), records)
+    assert mark.reported == {"T-153"}
+    assert "T-153 (reported)" in mark.words()
+    assert "T-093 (reported)" not in mark.words()
 
 
 def stating(records: Any, sides: dict[int, str], **changes: Any) -> Record:

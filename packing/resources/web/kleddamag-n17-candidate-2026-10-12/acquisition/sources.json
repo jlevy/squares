@@ -1,0 +1,366 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-12T16:47Z",
+  "git_scope": "Full clone of the one-commit repository (7,119 tracked files), checked out at the pin for jlevy/squares#557, with the 12 release assets of large-files-v1 (4,785,719,080 bytes) fetched beside it into the git-ignored _large/. The manifest covers the 28 top-level files and the load-bearing checker, specification and obligation files named in the scope; MANIFEST.sha256, which is in the scope, gives the SHA-256 of every other tracked file, and acquisition/large-files.json binds the 12 release assets, which are not in the tree. Under derived-only custody no upstream byte is copied. Only the author's check.py ran here, from a scratch directory outside this repository.",
+  "sources": [
+    {
+      "id": "kleddamag-the-seventeenth-square-candidate",
+      "source_url": "https://github.com/Kleddamag/the-seventeenth-square-candidate",
+      "source_ref": "main",
+      "source_commit": "653b9589d0f8a152f01adc56b1d48ba53d49abc3",
+      "committed_utc": "2026-10-12T14:40:59Z",
+      "git_tree": "502e27fba825790bf99bf42ae297b38adfe1646b",
+      "archived_path": "packing/resources/web/kleddamag-n17-candidate-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/kleddamag-n17-candidate-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".gitattributes",
+        ".gitignore",
+        "AGENTS.md",
+        "AUDIT.md",
+        "CHANGELOG.md",
+        "CHECK.md",
+        "CITATION.cff",
+        "CREDITS.md",
+        "EDITION_BINDINGS.json",
+        "KNOWN_ISSUES.md",
+        "KNOWN_LIMITS.md",
+        "LARGE_FILES.tsv",
+        "MANIFEST.sha256",
+        "OVERVIEW.md",
+        "PATH_NEUTRAL.tsv",
+        "PREMISES.md",
+        "PROOF.md",
+        "READING_ORDER.md",
+        "README.md",
+        "STATEMENT.md",
+        "STATEMENT_STATUS.md",
+        "THIRD_PARTY.md",
+        "check.py",
+        "check_comparison_records.py",
+        "fetch_large.py",
+        "packing.png",
+        "recompute_slice.py",
+        "upper-packing-certificate.json",
+        "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/OBLIGATIONS.json",
+        "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/revision-v7/CLASS_ROW_LEMMA.md",
+        "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/runbook_public.json",
+        "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/replay_round2.py",
+        "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources",
+        "research/window-extension-20261008/SPEC_v3.0.md",
+        "research/window-extension-20261008/checker",
+        "research/window-extension-20261008/checker2",
+        "research/window-extension-20261008/acceptance/h_report30.py",
+        "research/window-extension-20261008/acceptance/FROZEN_30.json"
+      ],
+      "subtree_file_count": 49,
+      "subtree_total_bytes": 3264024,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": ".gitattributes",
+          "bytes": 8,
+          "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": ".gitignore",
+          "bytes": 30,
+          "sha256": "6e787cf404c7f8d584c3d7e96fdc348a420769ee5259219750e92c0db4bf0895",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "AGENTS.md",
+          "bytes": 171,
+          "sha256": "204ee3607a119d7e81c7274382f1e52454fae62f55f8b4b6b6c19eef9d9f68e4",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "AUDIT.md",
+          "bytes": 4839,
+          "sha256": "2775fd1f068eae0224047fda85c08b8dac49ebb3aac771478c9cca6ef4a5a52e",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "CHANGELOG.md",
+          "bytes": 292,
+          "sha256": "4910f79a4e8e6c3a861af613fc0fa4c60ec7f6d2e0f868caeab93fe1bc782a6c",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "CHECK.md",
+          "bytes": 40475,
+          "sha256": "603303a19866f73f4e85767fd15315827ab66d95cae3cef020e311a7d6cf75b5",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "CITATION.cff",
+          "bytes": 592,
+          "sha256": "899e0457883915f6c52144deba9862063cc810cc1e4b5e0f5bc9cd4ad69a9971",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "CREDITS.md",
+          "bytes": 9318,
+          "sha256": "fab3b10b36da9842d0f6168ff7b080da50449028d1d116d62995326a5eeda9c8",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "EDITION_BINDINGS.json",
+          "bytes": 8820,
+          "sha256": "a327c2aeadc66e869fa31c7e749997ff5955166fe2d4f5c39b20b360ebd419f4",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "KNOWN_ISSUES.md",
+          "bytes": 10965,
+          "sha256": "a0efb95b96208579601093043602ce306a6c53cd460a12205d8d9ce9df02acb6",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "KNOWN_LIMITS.md",
+          "bytes": 62896,
+          "sha256": "a16dd278828ecdca1745225c17f27338986f8422c6508950f1742fbe618ba8cb",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "LARGE_FILES.tsv",
+          "bytes": 2915,
+          "sha256": "9a01cac28d3377a2ce900b92a99688890d6831d62e767c08d07da0daa12f28cb",
+          "reason": "The list of the 12 release assets with path, size and SHA-256, each confirmed here against the file fetched and the release's asset digest (acquisition/large-files.json). No licence: pinned by digest only."
+        },
+        {
+          "path": "MANIFEST.sha256",
+          "bytes": 1451177,
+          "sha256": "9ecfa0db00fc9afaf98c6df8eeee920df8cb1e4737c88521ac3c64366ec7689e",
+          "reason": "The edition's list of the SHA-256 of all 7,118 other tracked files; its own SHA-256 equals the one the release notes of large-files-v1 publish, and it is the pin of every tracked file outside this scope. No licence: pinned by digest only."
+        },
+        {
+          "path": "OVERVIEW.md",
+          "bytes": 9139,
+          "sha256": "9cde99e86458484ac288ae5d80450d556182125e2400f9b5345ba966edce2edd",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "PATH_NEUTRAL.tsv",
+          "bytes": 27422,
+          "sha256": "0fa1cbee4c050ece010e5c13fcbd3bd8ba5a3118394607501c7ca4aeff2f8411",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "PREMISES.md",
+          "bytes": 7149,
+          "sha256": "b7a1acd23e90f829a6a4bc956e7a9b06402da0cb4a0bc510ef7656dd83a6da22",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "PROOF.md",
+          "bytes": 59659,
+          "sha256": "0d4c408d1e38a8d858281443b27ac4e0cf3591ba9045be8e8ec176a318916ee6",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "READING_ORDER.md",
+          "bytes": 33782,
+          "sha256": "c395d6ce6a66f9075acdd8e5381f783ff15ddb3e39299c87a4998a8f62ea6151",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "README.md",
+          "bytes": 14456,
+          "sha256": "98601bedc0b895fe7c515c28ac11bd52b5c2fc044d305da321fa7e9e56254aec",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "STATEMENT.md",
+          "bytes": 1012,
+          "sha256": "dd73365b0681f0efb00e351f89a1dcb1f80a8e758d44563b1e5e81f851521870",
+          "reason": "The exact statement: the packing, t0 and b0, F and G, the isolating rectangle, the side map, the 20-place enclosure of L and the claim. Its numbers and polynomials are transcribed as derived facts in facts/statement.json and decided against this repository's record in receipts/statement-comparison.json. No licence: pinned by digest only."
+        },
+        {
+          "path": "STATEMENT_STATUS.md",
+          "bytes": 3594,
+          "sha256": "411616c8dd76bca5b29d66790cc805deb4b3c44f9cbbe35edfbfb39f59cae578",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "THIRD_PARTY.md",
+          "bytes": 8935,
+          "sha256": "5d85a00ff275d972301a4daf246c21f98b6d340272ee01d43c18457d0d9933c0",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "check.py",
+          "bytes": 83729,
+          "sha256": "c17240b5189821c9244b1e5568e7d6b73c3c4de0fae741ec4206f9852d86a7cb",
+          "reason": "The author's one checking command (levels 0-2, 41 checks). Read in full before it ran here once, under CPython 3.12.3 with SymPy 1.14.0 outside this repository; its SHA-256 equals the release notes' value and its manifest line. The run is receipts/check-py/. No licence: pinned by digest only."
+        },
+        {
+          "path": "check_comparison_records.py",
+          "bytes": 12456,
+          "sha256": "7661dc730087b9b72724e2096c0d0eefff6a5f3c7652cd6f7f9841a56f538208",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "fetch_large.py",
+          "bytes": 6317,
+          "sha256": "8fa66c65de94e3bf0041a4ec72844ca55d26402c1ea6f71e3ce71f57ee57fb22",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "packing.png",
+          "bytes": 48927,
+          "sha256": "2851e9d8fb0edcf5532277aec5ee91ebeeb90b09b4003d5213a3a4c4c8e8380c",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "recompute_slice.py",
+          "bytes": 10391,
+          "sha256": "d6d887911d480ea24639facbd6cf304b54ab38af8d2c96c9e7c15363cd81e47d",
+          "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/MERGE_MANIFEST.json",
+          "bytes": 1368,
+          "sha256": "7d26c9e73ab876ef07b62413bcec03c8555b7cccb49f4ce0fbf9ae06fada5075",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/PLAN_MANIFEST.json",
+          "bytes": 145660,
+          "sha256": "bc8324cfa721889725f63bd1e2a31cd522e35bee257187154758639e642bd7d6",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/SOURCE_MANIFEST.json",
+          "bytes": 1510,
+          "sha256": "bdaaf36bf5b67f4ff3e81050cd1b95340be8dc2e992eb52e6160896339f57608",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/merge_run.sh",
+          "bytes": 35107,
+          "sha256": "04ff6bb6c0929ece2d1c5711e0125a461d5b123ca135fddbf81ab0b75f186e48",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/slice_compare.py",
+          "bytes": 10750,
+          "sha256": "77e43806b62fa7dd20a989e391770c1e6187e5ac236214ea0d2bbd138b38f18a",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/slice_run.sh",
+          "bytes": 23145,
+          "sha256": "ab404779e1affc7a3db65ef92bfcde97d583c57fc277d82e41b56c4a3159ff3c",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/src/boolean_rule.py",
+          "bytes": 1118,
+          "sha256": "c49d38ac96027b34103c075a9996b6229fd2cf829055897dce2d8cf9a6db8275",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/src/exact_classes.py",
+          "bytes": 38811,
+          "sha256": "802dc62aa4f2a9e15ae406d39d5161540403972abbf21819660191d67dd6150b",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/src/exact_general.py",
+          "bytes": 7356,
+          "sha256": "89954c6c44e1368b8553eb4d71d860f1a51b010be698088b6fbe3d4fad8eac46",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/src/exact_restricted.py",
+          "bytes": 48181,
+          "sha256": "caae39b30cfcde513740337792865f43ed18738a539a34d9c8fec1e74d7686f9",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/src/integer_sweep.py",
+          "bytes": 1362,
+          "sha256": "3a2bfd8892a9693b4dfca72e4d8e547a7be8775b22306740f4e6b63d0928b34b",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/src/node/verify_classes_wb.js",
+          "bytes": 60162,
+          "sha256": "7f6b234768f812b7acf515c28cc4ced0e5b7fb5bcd4c0ba03114733975087d40",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/OBLIGATIONS.json",
+          "bytes": 451880,
+          "sha256": "1f05982ff81edd331c601fc4cd8db3fc2c499501ef10a21b53b61b748f2d9453",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/replay_round2.py",
+          "bytes": 6733,
+          "sha256": "9ed6b55cf58a30fb6b1e772e51a6fdd5baf82962efb8a8aa1f7010d3ca5c2188",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/revision-v7/CLASS_ROW_LEMMA.md",
+          "bytes": 6151,
+          "sha256": "43bce2307f2f1c9b8f075c06b9f7d4daef6dd0ea6e11e4b6c0df81f256b8ee26",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/runbook_public.json",
+          "bytes": 23580,
+          "sha256": "ef3be16448f277f0b25aa4229f8429bf4c471161b92bb327725541c985a084f0",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/window-extension-20261008/SPEC_v3.0.md",
+          "bytes": 85238,
+          "sha256": "0a6dfc2ae10ed6f30a21ebe357a6e73dd7355223c521cc67a3f2bdab9549aba0",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/window-extension-20261008/acceptance/FROZEN_30.json",
+          "bytes": 953,
+          "sha256": "6d65a0705c039bbf2f48acabb7f12275871af6b7b8fa308c0671ea6518b30803",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/window-extension-20261008/acceptance/h_report30.py",
+          "bytes": 26102,
+          "sha256": "0314aa1f8f742cd7156cc490764c8a308663ba87f359e0d8b97fb3d7189950db",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/window-extension-20261008/checker/wxcheck_v30.py",
+          "bytes": 159180,
+          "sha256": "cf8db52bfa1cc565d8610bf13b279d1b5da2f84c91ce2854d15a3b0a88cd096c",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "research/window-extension-20261008/checker2/wxcheck2_v30.js",
+          "bytes": 203888,
+          "sha256": "97210adf74a3ebed7cde021a3cb1ff6ea6380d8d2d55540a2a2a1cb17dc27542",
+          "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+        },
+        {
+          "path": "upper-packing-certificate.json",
+          "bytes": 6323,
+          "sha256": "24e296f5995abc9424e2d8d39ea0a8e44953b919430a04f006fa84c56fef45f7",
+          "reason": "The rational seed packing of side 4675530093604551/10^15. Byte-identical to the file this repository retained on 2026-09-21 and built its certified endpoint from, so it is already retained there under that packet's custody. No licence for this copy: pinned by digest only.",
+          "identical_to": "packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/kleddamag-17-squares-certified-bound/upper-packing-certificate.json"
+        }
+      ],
+      "license": "README.md, section Licence: \"No licence for reuse is granted yet. You may download the files and run the checks to verify the result. A licence will be chosen after the first round of review.\" Derived-only custody: no upstream byte is retained; every scoped file is bound here by SHA-256 and at the pin by its Git blob, the release assets by SHA-256, and no redistribution permission or licence determination is asserted. README.md and CREDITS.md say Marc Leonard Overbeck (GitHub Kleddamag, ORCID 0009-0008-8607-8197) conceived and led the project and that the mathematics, engines, certificates, checkers, reviews and text were produced by AI systems under his direction, Codex (OpenAI) and Claude (Anthropic), which are named and are not authors; within the project no human has read the mathematics. CREDITS.md credits John Bidwell for the packing, Gensane and Ryckelynck, David Ellsworth, this project (Joshua Levy), Manasseh Ahmed's 11SquaresOptimal, Mira-acc and Guzhou0806. THIRD_PARTY.md lists copies of this project's exp-237 root certificate, exp-238 endpoint certificate, H-256 sheet and endpoint checker inside the edition.",
+      "claims": [
+        "STATEMENT.md, line 9: with (t*, b*) the unique simultaneous zero of F and G in the stated isolating rectangle and L = (6 + 4t*)/(1 + 2t* - t*^2), 4.67553009360455095163 < L < 4.67553009360455095164, a packing of seventeen unit squares exists at side L, and for every S >= 0 a packing at side S implies L <= S; that is, s(17) = L, the side of John Bidwell's 1998 packing. Uniqueness of an optimal packing is not claimed.",
+        "STATEMENT_STATUS.md: the status is a candidate proof, not an established theorem. The claim holds if the 210 obligations of OBLIGATIONS.json hold (15 mathematical premises, 50 base capture rows, 1 slab statement, 49 strict budgets, 84 branch implications, 11 local roots). No independent outside verification; Guzhou0806 read the premises in an earlier state and ran a checker of his own on two of the thirteen trees.",
+        "README.md: five steps. Upper bound (68 wall and 136 pair conditions, exact); capture at side at most C = 4675531/10^6 by 98 weighted counting certificates, leaving 11 cases; admission of each case into one of 11 explicit regions; local trees (13 tree certificates: ten regions empty below L, the eleventh inside a tube around the known packing); rigidity in the tube (a finite exact stage of 17 rounds and a contraction with ratio 159201934153319/200000000000000 < 1).",
+        "CHECK.md: python3 check.py (levels 0-2, 41 checks) checks structure and cheap exact checks, including a re-decision of every stored capture row from its recorded numbers; it does not recompute the 1,728,000 capture rows per checker or the 13 tree certificates, which CHECK.md describes as manual full recomputations."
+      ]
+    }
+  ]
+}

@@ -3890,7 +3890,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/170.html
   canonical: cases/170.html
@@ -6051,7 +6051,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/n11-lower-bounds-explainer.md
   canonical: papers/n11-lower-bounds-explainer.md
@@ -6059,7 +6059,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/n11-lower-bounds-explainer.pdf
   canonical: papers/n11-lower-bounds-explainer.pdf
@@ -6067,7 +6067,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/n11-optimality-review.html
   canonical: papers/n11-optimality-review.html
@@ -6075,7 +6075,7 @@ urls:
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
   first_published: '2026-09-30'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/n11-optimality-review.md
   canonical: papers/n11-optimality-review.md
@@ -6083,7 +6083,7 @@ urls:
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
   first_published: '2026-09-30'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/n11-optimality-review.pdf
   canonical: papers/n11-optimality-review.pdf
@@ -6091,7 +6091,7 @@ urls:
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
   first_published: '2026-09-30'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/n11-threshold-bound-review.html
   canonical: papers/n11-threshold-bound-review.html
@@ -6099,7 +6099,7 @@ urls:
   generator: devtools.render_n11_threshold_bound_review:main
   producer: paper:n11-threshold-bound-review
   first_published: '2026-10-05'
-  lastmod: '2026-10-09'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/n11-threshold-bound-review.md
   canonical: papers/n11-threshold-bound-review.md
@@ -6107,7 +6107,7 @@ urls:
   generator: devtools.render_n11_threshold_bound_review:main
   producer: paper:n11-threshold-bound-review
   first_published: '2026-10-05'
-  lastmod: '2026-10-09'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/n11-threshold-bound-review.pdf
   canonical: papers/n11-threshold-bound-review.pdf
@@ -6115,7 +6115,7 @@ urls:
   generator: devtools.render_n11_threshold_bound_review:main
   producer: paper:n11-threshold-bound-review
   first_published: '2026-10-05'
-  lastmod: '2026-10-09'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/square-packing-methods-survey.html
   canonical: papers/square-packing-methods-survey.html
@@ -12911,6 +12911,38 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/check_half_angle_area.py
     - docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md
+- path: result/t-153.html
+  canonical: result/t-153.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-12'
+  lastmod: '2026-10-12'
+  status: live
+  identity:
+    kind: optimality
+    scope:
+      n_values:
+      - 17
+    established: null
+    attribution:
+      source_keys:
+      - '[Overbeck n17 candidate 2026]'
+      published: '2026-10-12'
+    builds_on: null
+    evidence:
+    - E-n017-overbeck-optimality-candidate-report
+    artifacts:
+    - packing/resources/web/kleddamag-n17-candidate-2026-10-12/README.md
+    - packing/resources/web/kleddamag-n17-candidate-2026-10-12/facts/statement.json
+    - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts/statement-comparison.json
+    - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts/check-py/stdout.txt
+    - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts/recomputation-price.json
+    - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/upper-bound.json
+    - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/capture-sample.json
+    - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/capture-independent.json
+    - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/trees.json
+    - docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md
 - path: results.html
   canonical: results.html
   kind: page

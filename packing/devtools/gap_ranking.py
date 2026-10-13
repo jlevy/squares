@@ -58,7 +58,7 @@ def open_cases() -> list[OpenCase]:
     found: list[OpenCase] = []
     for path in sorted(FRONTIER.glob("n-*.md")):
         payload = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])["packing"]
-        if payload.get("reported_status") != "open":
+        if payload.get("status") != "open":
             continue
         upper = (payload.get("reported_upper_bound") or {}).get("value")
         lower = (payload.get("verified_lower_bound") or {}).get("value")

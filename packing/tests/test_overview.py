@@ -1439,7 +1439,7 @@ def test_a_cases_visual_summary_carries_what_the_film_shows() -> None:
     assert eleven["open"] == []
     assert eleven["record"] == "n-011"
     assert eleven["cite"]["lower"] == {
-        "text": "Ahmed after Levy, Kleddamag 2026, GitHub",
+        "text": "Ahmed after Levy, Overbeck 2026, GitHub",
         "corrects": None,
         "note": "(confirmed T-060)",
     }
@@ -3997,7 +3997,8 @@ SITE_STATEMENT = (
     ),
     (
         "Now several others have obtained results building on this work, including "
-        "Kleddamag\N{RIGHT SINGLE QUOTATION MARK}s certified lower bound of 31/8 and a "
+        "Marc Leonard Overbeck\N{RIGHT SINGLE QUOTATION MARK}s certified lower bound of 31/8 "
+        "and a "
         "landmark new proof by Queuingtheorydotcom of the optimality of the famous case "
         "of 11 squares."
     ),
@@ -4061,7 +4062,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     assert _rendered_text(narrative_paragraphs[0]) == _markdown_text(SITE_STATEMENT[0])
     assert _rendered_text(narrative_paragraphs[-1]) == _markdown_text(SITE_STATEMENT[3])
     assert [_rendered_text(item) for item in items] == [
-        "Kleddamag\u2019s certified lower bound of 31/8 for eleven squares.",
+        "Marc Leonard Overbeck\u2019s certified lower bound of 31/8 for eleven squares.",
         "Mannaseh Ahmed\u2019s proof of optimality for eleven squares.",
         _markdown_text(
             "Independently, Evan Daniel has proved the optimality of an infinite family, "
@@ -4074,7 +4075,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     for claim in (
         "Work on the square packing problem has exploded",
         "Joshua Levy",
-        "Kleddamag",
+        "Marc Leonard Overbeck",
         "Mannaseh Ahmed",
         "Evan Daniel",
         "Independently",
@@ -4084,7 +4085,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     founder = '<a href="https://x.com/ojoshe" target="_blank" rel="noopener noreferrer">'
     for address, label in (
         ("https://x.com/ojoshe", "Joshua Levy"),
-        ("https://x.com/kleddamag", "Kleddamag"),
+        ("https://x.com/kleddamag", "Marc Leonard Overbeck"),
         ("https://x.com/ManassehA06", "Mannaseh Ahmed"),
         ("https://x.com/evanbd", "Evan Daniel"),
         ("papers/n11-lower-bounds-explainer.html", "new lower bounds"),
@@ -4109,7 +4110,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     groups = dict(OTHERS)
     assert by_id["T-060"].credit.startswith("Ahmed after Levy")
     assert by_id["T-060"].group == groups["builds-on-project"]
-    assert by_id["T-037"].credit.startswith("Kleddamag")
+    assert by_id["T-037"].credit.startswith("Overbeck")
     assert by_id["T-037"].group == groups["builds-on-project"]
     exact = {"T-064": None, "T-052": [21], "T-051": [32], "T-053": [45], "T-062": [60]}
     for result, n_values in exact.items():
@@ -4363,7 +4364,7 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
     assert re.findall(r'<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)</a>', introduction) == [
         (overview_sections.LOWER_BOUNDS_PAPER, "Part I"),
         (overview_sections.THRESHOLD_BOUND_PAPER, "Part II"),
-        ("https://x.com/kleddamag", "Kleddamag"),
+        ("https://x.com/kleddamag", "Marc Leonard Overbeck"),
         ("results.html#t-037", "T-037"),
         (overview_sections.OPTIMALITY_PAPER, "Part III"),
         ("https://x.com/ManassehA06", "Mannaseh Ahmed"),

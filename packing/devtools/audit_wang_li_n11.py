@@ -1,7 +1,7 @@
-"""Compare the Wang and Li n11 certificate with Kleddamag's, and refuse mutated copies of it.
+"""Compare the Wang and Li n11 certificate with Overbeck's, and refuse mutated copies of it.
 
 Wang Ke and Li Can's certificate (Zenodo 23038546, retained in
-``resources/web/wang-li-n11-2026-09-29/``) is Kleddamag's ``global-certificate.json``
+``resources/web/wang-li-n11-2026-09-29/``) is Overbeck's ``global-certificate.json``
 with thirteen threshold-charge orbit weights raised and the parent side ``A`` and every
 row's core side ``B`` multiplied by one exact factor. ``diff`` derives that description
 from the two files alone and checks the bound's arithmetic with exact fractions, and that
@@ -10,10 +10,10 @@ strict core containment, the parent-centre envelope and the angle cover.
 
 ``controls`` builds mutated certificates and runs each through source checkers in the
 upstream interpreter, which has NumPy and Numba and none of this project's dependencies:
-Kleddamag's Python sweep (``exact_mixed.py``), the authors' separately written verifier
+Overbeck's Python sweep (``exact_mixed.py``), the authors' separately written verifier
 (``independent_scaled_fast.py``, which rebuilds the certificate from the source file, the
 reweighting receipt and the factor, so its mutation is made there), and the BigInt
-JavaScript sweep that Kleddamag's ``prepare_secondary.py`` reconstructs. Every mutation
+JavaScript sweep that Overbeck's ``prepare_secondary.py`` reconstructs. Every mutation
 must be refused. `devtools.verify_n11_parent_core_native` runs the same mutations through
 the native interval checker.
 
@@ -125,7 +125,7 @@ def budget_units(certificate: Certificate) -> int:
 
 
 def row_premises(parent: Fraction, row: list[str]) -> tuple[Fraction, Fraction, bool]:
-    """Kleddamag's per-row premise quantities: strict core margin, centre margin, envelope.
+    """Overbeck's per-row premise quantities: strict core margin, centre margin, envelope.
 
     The margin is ``A - B max(cos d + |sin d|)`` over the interval ends, the centre margin
     ``r = A min(cos u + sin u)/2``, and the envelope ``B (cos t + sin t)/2 <= r < L/2`` is
@@ -265,7 +265,7 @@ def _scale(certificate: Certificate, factor: Fraction) -> Certificate:
 
 
 def scale_only(source: Certificate, improved: Certificate) -> Certificate:
-    """Kleddamag's weights, budget and Gamma at the improved parent and core sides.
+    """Overbeck's weights, budget and Gamma at the improved parent and core sides.
 
     A complete sweep of this certificate decides whether the reweighting is needed for
     the improved bound or only raises the counting surplus.
@@ -344,7 +344,7 @@ MUTATIONS: dict[
 def _probe_source_sweep(
     tree: Path, mutated: Certificate, rows: tuple[int, ...]
 ) -> dict[str, Any]:
-    """Kleddamag's ``exact_mixed.py``: premises, then each row's exact minimum."""
+    """Overbeck's ``exact_mixed.py``: premises, then each row's exact minimum."""
     if str(tree) not in sys.path:
         sys.path.insert(0, str(tree))
     source = importlib.import_module("exact_mixed")
@@ -502,7 +502,7 @@ CLIFF_ROWS = (*range(543, 575), *range(615, 627))
 def cliff(tree: Path, steps: tuple[int, ...], rows: tuple[int, ...]) -> dict[str, Any]:
     """The improved weights at ``lambda = 1 - k * 1e-9`` for each ``k``: rows below Gamma.
 
-    Runs Kleddamag's ``exact_mixed.py`` in the upstream interpreter. ``k = 1`` is the
+    Runs Overbeck's ``exact_mixed.py`` in the upstream interpreter. ``k = 1`` is the
     certificate itself.
     """
     sys.dont_write_bytecode = True

@@ -793,9 +793,9 @@ in Memo III (private communication, September 2026). His suggestion prompted a
 ## Further Reading
 
 - **The $n = 11$ series**, in reading order: Part I, this paper;
-  [Part II]({{PAPER:n11-threshold-bound-review}}), a review of Kleddamag’s proof of
-  $s(11) \gt 31/8$ (T-037); and [Part III]({{PAPER:n11-optimality-review}}), a review of
-  the proof that Trump’s packing is optimal (T-060).
+  [Part II]({{PAPER:n11-threshold-bound-review}}), a review of Marc Leonard Overbeck’s
+  proof of $s(11) \gt 31/8$ (T-037); and [Part III]({{PAPER:n11-optimality-review}}), a
+  review of the proof that Trump’s packing is optimal (T-060).
 - **Papers and sources**
   - Friedman’s survey: an introduction to the problem and its literature.[^survey]
   - Stromquist’s geometric proofs for ten and eleven
@@ -881,7 +881,7 @@ in Memo III (private communication, September 2026). His suggestion prompted a
     (`T-017`), $s(17) \ge 4.59$ (`T-019`), and $s(19) \ge 4.80$ (`T-020`), each
     supported by a retained weighted-point certificate and classified as apparently
     novel. Evan Daniel’s independent $s(12) \ge 15680/3951$ and the line of $n = 17$
-    certificates that Kleddamag and Guzhou0806 built on this project’s have since
+    certificates that Overbeck and Guzhou0806 built on this project’s have since
     superseded the first two.
 
 [^burns]: Sam Burns,

@@ -258,7 +258,7 @@ class PaperRecord(NamedTuple):
 #: the n = 11 series, read I, II, III, followed by standalone papers. Only records
 #: with a part number belong to that series (the plan of 2026-10-05,
 #: `docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md`): the project's
-#: own lower bounds, the review of Kleddamag's s(11) > 31/8, and the review of the
+#: own lower bounds, the review of Overbeck's s(11) > 31/8, and the review of the
 #: optimality proof. The standalone methods tutorial follows the series and explains
 #: how record configurations are found and verified. `SITE_PAGES`, the cards
 #: (`overview_sections.PAPERS`), each paper's

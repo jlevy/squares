@@ -47,11 +47,12 @@ FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
 # Source-reported closures from T-062 to T-064, and T-066 and T-067 at n = 59 and 77,
 # change this lane alone; the verified/formal lane above remains open until
 # certificate replay. 2026-10-03: Daniel's reported s(k^2 - 4) = k (T-081) closes
-# n = 96, 117, 140, 165, 192, 221, 252, 285 and 320 in this lane only.
+# n = 96, 117, 140, 165, 192, 221, 252, 285 and 320 in this lane only. 2026-10-12:
+# Overbeck's candidate equality s(17) = L (T-153) closes n = 17 in this lane only.
 REPORTED_LANE_SPLIT: dict[str, tuple[int, int]] = {
-    "n=1..100": (46, 54),
-    "n=1..200": (66, 134),
-    "n=1..324": (86, 238),
+    "n=1..100": (47, 53),
+    "n=1..200": (67, 133),
+    "n=1..324": (87, 237),
 }
 
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"

@@ -112,9 +112,12 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # merged on 2026-10-03: the formal-open and reported-open counts are the replays' and
     # reports' above, and the Nagamochi-bounded count is the correction's, zero; T-076
     # raised n = 82 from Karakus's floor instead, which moves none of the three counts.
-    "n=1..100": (55, 54, 0),
-    "n=1..200": (139, 134, 0),
-    "n=1..324": (247, 238, 0),
+    # 2026-10-12: Overbeck's candidate equality s(17) = L (T-153) made n = 17
+    # reported-proved, as T-060's report did n = 11 on 2026-09-29, and left its verified
+    # lane open, so only the reported-open count falls, by one in every corpus.
+    "n=1..100": (55, 53, 0),
+    "n=1..200": (139, 133, 0),
+    "n=1..324": (247, 237, 0),
 }
 #: n = 68, 103, 105, 110 and 131 left the exclusions on 2026-09-29, when their records
 #: moved from UnitSquare renderings to Francisco Couzo's packings (T-056), and n = 69, the

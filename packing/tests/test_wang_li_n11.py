@@ -1,4 +1,4 @@
-"""The Wang and Li n11 certificate: its change from Kleddamag's, and the native wrapper.
+"""The Wang and Li n11 certificate: its change from Overbeck's, and the native wrapper.
 
 The coverage decisions themselves are retained receipts under
 ``resources/web/wang-li-n11-2026-09-29/receipts/``; these tests check the exact

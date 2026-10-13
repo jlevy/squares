@@ -1,7 +1,7 @@
 """Read Guzhou0806's R052 certificate for s(17) into the native parent-core route.
 
 R052 (``s(17) > 231001/50000``) is an adaptive parent-core certificate in
-Kleddamag's mixed-certificate schema: rows ``[a, b, t, B]``, D4 point orbits and
+Overbeck's mixed-certificate schema: rows ``[a, b, t, B]``, D4 point orbits and
 two families of threshold groups, ``threshold_orbits`` (two of three) and
 ``generic_trigger_orbits`` (``k`` of ``m``). Every piece maps onto
 `ParentCoreCertificate` without source code: a point orbit becomes point atoms,

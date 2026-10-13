@@ -916,7 +916,6 @@ Use the structured form to query or plot; use these tables to read.
 | `n` | best reported `s(n)` | how | deg | reported lower bound | from | gap |
 | --- | --- | --- | --- | --- | --- | --- |
 | 12 | 4 | grid | — | 3.9715 | counting | 0.0285 |
-| 17 | 4.67553009 | hand | 18 | 4.660443 | counting | 0.0151 |
 | 18 | `(7/2) + (1/2)√7` = 4.82287566 | hand | — | 4.705 | counting | 0.1179 |
 | 19 | `3 + (4/3)√2` = 4.88561808 | hand | — | 4.825 | counting | 0.0606 |
 | 20 | 5 | grid | — | 4.905 | counting | 0.095 |
@@ -1177,6 +1176,7 @@ Use the structured form to query or plot; use these tables to read.
 | 14 | `4` | unavoidable points | Erich Friedman (2009) | proved |
 | 15 | `4` | counting | Said El Moumni (1999) | proved |
 | 16 | `4` | perfect square | classical | proved |
+| 17 | `4.67553009` | counting | Overbeck (2026) | proof audit pending |
 | 21 | `5` | counting | Evan Daniel (2026) | proved |
 | 22 | `5` | unavoidable points | Wolfram Bentz (2016) | proved |
 | 23 | `5` | Nagamochi | Hiroshi Nagamochi (2005) | proved |

@@ -1,10 +1,10 @@
-"""Run the native n11 parent-core checker on an n11 certificate other than Kleddamag's.
+"""Run the native n11 parent-core checker on an n11 certificate other than Overbeck's.
 
 `devtools.verify_kleddamag_n11_native` already reads the parent side ``A``, every row's
 core side ``B``, the charges, the budget and the minimum charge from the certificate; the
 container side ``191/50`` and ``n = 11`` are fixed by the loader, and every n11
 certificate retained here keeps them. Its one Kleddamag-specific constant is the SHA-256
-pin ``REVIEWED_SHA256``, which binds that tool to Kleddamag's release. This tool clears
+pin ``REVIEWED_SHA256``, which binds that tool to Overbeck's release. This tool clears
 the pin for one run and calls the same ``run`` unchanged; the certificate is identified by
 its repository path and the Git revision in the receipt's provenance. The receipt adds
 ``certificate``, that path, and ``proof_inputs``, which names ``PROOF_COMMIT`` -- the
