@@ -1798,9 +1798,7 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
     ]
     register = ROOT / "frontier/results.yaml"
     contributor_documents = sorted(
-        path
-        for path in inventory
-        if path.parent == ROOT / PEOPLE_DIR and path.suffix == ".md"
+        path for path in inventory if path.parent == ROOT / PEOPLE_DIR and path.suffix == ".md"
     )
     occurrence_manifest = ROOT / OCCURRENCES_MANIFEST
     readers = [*documents, register, *contributor_documents]
