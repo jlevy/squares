@@ -275,6 +275,11 @@ DECLARED_CONSUMERS = {
         "the check of that review's fixes, quoting its proposed bracket of a conjecture "
         "between the verified floor and ceiling; a ceiling, not s(n)"
     ),
+    "docs/project/reviews/review-2026-10-13-verification-gaps.md": (
+        "the verification-gaps review measures each drawn side and each reported side "
+        "against the field as U, the best side the record verifies exactly; it reads it "
+        "as a ceiling, never as s(n)"
+    ),
     "packing/devtools/register_evand_arrangements.py": (
         "adopts an exact rational feasible ceiling for the complete new #399 pose; "
         "preserves older ceilings and poses as historical evidence, never as s(n)"

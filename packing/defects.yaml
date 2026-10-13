@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 520
+count: 521
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -17524,3 +17524,36 @@ defects:
     with the tool's first six at n <= 100, the check D-405's regression named as unbuilt.
     All three fail with the old filter.
   recorded_in: packing/tests/test_gap_ranking.py
+- id: D-521
+  title: Numerical witness receipts record tolerance-blurred values as the minimum clearance and pair gap
+  date: '2026-10-13'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    At least since 2026-08-28, the earliest history of sqpack/witness.py under its
+    present path; every numerical feasibility receipt carries it, the 92 known-best
+    receipts included.
+  severity: medium
+  status: outstanding
+  bead: think-jtot
+  what: >-
+    sqpack.witness.numerical_check records minimum_containment_clearance and
+    minimum_best_pair_gap from _margin_summary, which compares candidates with the
+    check's tolerance-aware sign, so a value replaces the running minimum only when it
+    is lower by more than the tolerance. The recorded figures are some value within the
+    tolerance (1e-8 or 1e-12) of the minimum, not the minimum.
+  consequence: >-
+    The receipts understate the violations they exist to report. At n = 10 the receipt
+    records 0 for both figures, while an exact reading of the printed pose finds four
+    overlaps of 6.858e-30; at n = 106 it records a containment clearance of -3.10e-16
+    where the exact reading gives -8.28e-16. A reader of a receipt sees a witness closer
+    to feasible than it is. check_passed is unaffected: it is decided under the same
+    tolerance, and says so.
+  fix: >-
+    None yet. think-jtot: take both minima with the plain sign at the working precision,
+    regenerate the 92 known-best receipts, and record beside each the outcome of the
+    full-precision exact reading that think-8ucp runs.
+  regression: none
+  recorded_in: docs/project/reviews/review-2026-10-13-verification-gaps.md
