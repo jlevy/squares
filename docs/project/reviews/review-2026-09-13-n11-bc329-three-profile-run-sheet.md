@@ -12,7 +12,7 @@ head.
   No calibration profile, BC329 target, repository edit, bead action, or PR mutation was
   performed.
 - Sheet:
-  `docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md` in
+  `docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md` in
   `/private/tmp/squares-n11-bc329-stack`, SHA-256
   `0cd2eb288dac4701de7d5eb5700d2890597d3c78750150e706156ac870da3b6e`. All sheet line
   numbers below refer to those exact bytes.

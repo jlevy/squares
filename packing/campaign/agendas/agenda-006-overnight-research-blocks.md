@@ -1351,7 +1351,7 @@ agenda:
       Both argued from a rollup of this session's own timing logs rather than from
       impressions of them.
     artifacts:
-    - docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
+    - docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md
     - packing/campaign/agendas/agenda-007-twelve-hour-steered-run.md
     - packing/benchmarks/bench_schema_validation.py
     - conventions.md
@@ -1394,7 +1394,7 @@ agenda:
       which one step is 87%. `packing-validate --records` exists as the increment that
       stops the recurrence.
 
-      **This block now has a spec**, `docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md`,
+      **This block now has a spec**, `docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md`,
       and four beads on it: `think-64bw` swaps the validator, `think-p9of` moves the exact
       geometry out of the schema step, `think-2bk2` builds the benchmark and the
       differential test, and `think-av72` is this block's own tier contract. The first

@@ -41,7 +41,7 @@ session:
       registered before target evaluation. Profile input-guard repairs and reusable phase runner continue
       in the next slice. Phase switched at 2026-10-07T18:48:27.361776Z.
     evidence:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
     stop_reason: Reviewed contract and prospectively registered first target; actual target remains unrun.
     next_action: Freeze and independently review completed source before the first registered target.
@@ -72,7 +72,7 @@ session:
       Author/independent50 SAT+auditcontrols passed; source-onlyfull-squarefallbackready; root broadpush
       checkpoint55pass/6fail561.37s preserved and scopedfindingsrepaired. Phase switch observed 2026-10-07T19:23:30.435695Z.
     evidence:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
     stop_reason: Actual input characterization selects a separate resource-amended replication and matchedreplaydiagnostic;
       no targetsign reached.
@@ -106,7 +106,7 @@ session:
       allpartials preserved, unchanged-regimeattempt2 active. Guardedauthor40controls/Astra sourceCLEAR;
       independent40PASS with scopeclarification pending. Actual phase switch 2026-10-07T19:47:44.150600+00:00
     evidence:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
     stop_reason: Complete common-core fixedpoint miss selects stronger full-square/joint discriminators;
@@ -140,7 +140,7 @@ session:
       separatelypreregisteredH301/exp293,H302/exp294 targetunrun. Threehostedcoherencedebts identified;
       nextcombinedfreeze tracksguard,indexesideas andrenderclose-report. Actualphaseswitch 2026-10-07T20:22:38.403436+00:00
     evidence:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
     stop_reason: Full-squareuniversalpartner methodmiss selects genuinejointconditioning; measuredstageattribution
@@ -177,7 +177,7 @@ session:
       and contaminated in-process synthetic fixture, both narrowly fixed; current-base five conflicts
       resolved with upstream research preserved. Native partial cost checkpoint captured.
     evidence:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
     stop_reason: Measured bottleneck and complete joint-method negative select a two-closed-child proof
@@ -212,7 +212,7 @@ session:
       justified;413request and405progress posted. Main6dd integratedd68a, newerbe817 READMEconflict under
       additive repair. Actual phase switch 2026-10-07T21:27:07.727040+00:00'
     evidence:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
     stop_reason: Complete split miss selects one simultaneous collective-angle-row discriminator; protected
@@ -247,7 +247,7 @@ session:
       hand derivations. Oldfull0adfe completed95PASS5FAIL1SKIP3402.14s; no currentfullPASS. Actual phase
       switch 2026-10-07T21:49:15.789989+00:00'
     evidence:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
     stop_reason: Protected final30minutes now; last mathematical target completed well before21:47:58
@@ -278,7 +278,7 @@ session:
       tierINCOMPLETE at240s,65db requiredCIgreen/latestHEAD pending; certification7hy3 remainsopen. Final
       scientific/record freeze observed 2026-10-07T22:07:05.523271+00:00
     evidence:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
     stop_reason: Reviewed terminal batch and prospective next mathematical obligations captured; certification
@@ -1254,7 +1254,7 @@ session:
     - unregistered scientific target
     - native release upload
   outputs:
-  - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+  - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
   - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
   - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling
@@ -1348,7 +1348,7 @@ session:
 # n17 Complete Coupling and Exact Replay
 
 The actual four-hour continuation of
-[the session plan](../../../docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md),
+[the session plan](../../../docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md),
 following [Session184](session-184-n17-proof-contracts-and-instruments.md).
 The coordinator owns shared records and integration; workers own the declared disjoint
 source.

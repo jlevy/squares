@@ -3,7 +3,7 @@
 # Read by `devtools.paper_terms` (rule 6). A paper that uses a concept it does not own
 # names it with `series:` in its own registry, and its first use of it must sit in a
 # block that links the owner's page. Ownership follows the series plan's content table
-# (docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md, §2); each anchor
+# (docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md, §2); each anchor
 # is the heading id of the owner's section that derives the concept, and the anchor test
 # holds it to the owner's rendered page once that page is built.
 #

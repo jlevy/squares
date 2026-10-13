@@ -162,7 +162,7 @@ proposals.
 
 ## Next Boundary and Tracking
 
-The [ten-hour launch plan](../specs/active/plan-2026-10-06-n17-ten-hour-session.md) and
+The [ten-hour launch plan](../specs/done/plan-2026-10-06-n17-ten-hour-session.md) and
 [agenda 043](../../../packing/campaign/agendas/agenda-043-n17-ten-hour-continuation.md)
 make this selection executable.
 BC-430 / `think-ipel` owns the planned overnight continuation under BC-418. One Astra

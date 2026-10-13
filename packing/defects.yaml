@@ -423,7 +423,7 @@ defects:
     affects speed rather than the answer. Measured over nine cells at n = 5, 10 and 11:
     the free pass never improved on the class-converged point.
   regression: 'the free pass runs by default and its verdict is carried in the result reason'
-  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+  recorded_in: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
   bead: think-0zs9
 - id: D-021
   title: Floating LP refinement has a noise floor, and eight rounds sit on it
@@ -572,7 +572,7 @@ defects:
     tools/check_beads.py, run from test.sh: no open bead may sit under a closed parent,
     and no two open beads under one parent may share a title. Skipped, loudly, where
     tbd is unavailable.
-  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+  recorded_in: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 - id: D-026
   title: The plan spec's checklist contradicted the state the spec was cited as authority for
   date: '2026-08-23'
@@ -600,7 +600,7 @@ defects:
     No check is left behind: reconciling a checkbox against bead state needs the bead
     database, which lives on `tbd-sync` and not in the tree.
   regression: none
-  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+  recorded_in: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 - id: D-027
   title: A generated view was left reflowable by the Markdown auto-formatter
   date: '2026-08-23'

@@ -36,7 +36,7 @@ agenda:
     workflows: [review-planning-oversight]
     program: n11-daytime-strategy
     artifacts:
-    - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+    - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
     - docs/project/reviews/review-2026-09-10-n11-strategy-frontier.md
     - docs/project/reviews/review-2026-09-10-n11-parent-domain-translation.md
     - docs/project/reviews/review-2026-09-10-n11-parent-realizability-independent.md
@@ -52,7 +52,7 @@ agenda:
         geometry is selected first, followed by one prospective 2880-step core/net packet.
       evidence:
       - docs/project/reviews/review-2026-09-10-n11-strategy-frontier.md
-      - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+      - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
       - docs/project/reviews/review-2026-09-10-n11-parent-domain-translation.md
       - docs/project/reviews/review-2026-09-10-n11-parent-realizability-independent.md
       disposition: retire-success
@@ -194,7 +194,7 @@ agenda:
     workflows: [research-loop]
     program: n11-daytime-strategy
     artifacts:
-    - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+    - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-151-selected-six-dot-cover.json
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-035/exp-156-unit-parent-saved-residual.json
     parallel_group: parent-half-plane-followup
@@ -248,7 +248,7 @@ agenda:
     workflows: [insight-iteration]
     program: n11-daytime-strategy
     artifacts:
-    - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+    - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
     - docs/project/reviews/review-2026-09-10-n11-structural-normal-forms.md
     - docs/project/reviews/review-2026-09-10-n11-structural-normal-forms-independent.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md
@@ -343,7 +343,7 @@ agenda:
     - docs/project/reviews/review-2026-09-13-n11-bc329-runset-verifier.md
     - docs/project/reviews/review-2026-09-13-n11-bc329-runset-verifier-rereview.md
     - docs/project/reviews/review-2026-09-13-n11-bc329-runset-verifier-r3-final.md
-    - docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
+    - docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
   - id: BC-330
     purpose: research
     owner_focus: insight
@@ -405,7 +405,7 @@ agenda:
     workflows: [documentation-pass]
     program: n11-daytime-strategy
     artifacts:
-    - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+    - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
     parallel_group: explainer
     outcomes:
     - scope: Which architecture best teaches the current result without mislabelling the existing point-only
@@ -415,7 +415,7 @@ agenda:
         T026 become a separate advanced rung because their threshold atoms and dilation proof need different
         concepts and verification.
       evidence:
-      - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+      - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
       disposition: retire-success
       follow_up: null
   - id: BC-334
@@ -532,7 +532,7 @@ agenda:
         and defined core, trace and charge before use. PR154 and X-027 were integrated; the local and hosted
         checks passed at 989fd544. The September 12 review is a subsequent audit of that completed milestone.
       evidence:
-      - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+      - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
       - docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md
       disposition: retire-success
       follow_up: null

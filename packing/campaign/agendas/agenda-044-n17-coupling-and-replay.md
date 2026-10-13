@@ -27,12 +27,12 @@ agenda:
     exit: Current source/receipts, costs, dispositions and next handoff published
     bead: think-tvxs
     depends_on: []
-    next_evidence: docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    next_evidence: docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     workflows:
     - review-planning-oversight
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - packing/campaign/agent-sessions/session-185-n17-coupling-and-replay.md
     parallel_group: n17-four-hour
     outcomes:
@@ -71,7 +71,7 @@ agenda:
     - insight-iteration
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - packing/campaign/agent-sessions/session-185-n17-coupling-and-replay.md
     parallel_group: n17-four-hour
     outcomes:
@@ -120,12 +120,12 @@ agenda:
     exit: Retained phase/cache diagnosis; any optimization needs exact equivalence
     bead: think-svkl
     depends_on: []
-    next_evidence: docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    next_evidence: docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     workflows:
     - efficiency-loop
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
     - packing/campaign/agent-sessions/session-185-n17-coupling-and-replay.md
     parallel_group: n17-four-hour
     outcomes:
@@ -231,7 +231,7 @@ agenda:
 
 [Session185](../agent-sessions/session-185-n17-coupling-and-replay.md) owns actual
 phases.
-[The plan](../../../docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md)
+[The plan](../../../docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md)
 owns bounded scheduling; hypotheses and experiments own measurements.
 
 <!-- This document follows common-doc-guidelines.md.

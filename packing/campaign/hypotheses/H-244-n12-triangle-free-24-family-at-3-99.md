@@ -46,7 +46,7 @@ hypothesis:
   registered: '2026-09-25'
   notes: >-
     The n12 sibling of H-243, from the Session 159 n17 assessment
-    (docs/project/specs/active/plan-2026-09-25-after-r052-planning.md). It prices the
+    (docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md). It prices the
     n12 parent-core transfer, which waits on this price and on BC-380's parent clip.
     Chains alone give only 18 squares at n12, so the search needs genuinely
     two-dimensional families.

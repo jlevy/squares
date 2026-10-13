@@ -450,7 +450,7 @@ DECLARED_CONSUMERS = {
     "packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md": (
         "plans promotion work that reads the ceiling, never as the value"
     ),
-    "docs/project/specs/active/plan-2026-08-28-interval-certification.md": (
+    "docs/project/specs/done/plan-2026-08-28-interval-certification.md": (
         "specs certification that would tighten the ceiling toward the report"
     ),
     "packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md": (

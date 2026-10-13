@@ -105,7 +105,7 @@ agenda:
     depends_on: [BC-230, BC-233, BC-240, BC-242, BC-245]
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/gate-hour-04-decision.md
-    - docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
+    - docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md
     parallel_group: agenda024-control
     program: n11-post-381-portfolio
     next_evidence: >-
@@ -299,7 +299,7 @@ agenda:
     workflows: [review-planning-oversight, process-review]
     depends_on: [BC-220]
     artifacts:
-    - docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
+    - docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md
     - packing/campaign/review-planning-oversight.md
     - packing/campaign/ideas.md
     parallel_group: agenda024-control
@@ -317,7 +317,7 @@ agenda:
         covers checkpoint planning using existing fields. Independent reviews accept
         the mapping; no target measurement or prior scientific verdict changed.
       evidence:
-      - docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
+      - docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md
       - packing/campaign/ideas.md
       - packing/campaign/review-planning-oversight.md
       disposition: retire-success
@@ -327,7 +327,7 @@ agenda:
 
 BC-250 records the current planning decision.
 Its
-[tbd plan](../../../docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md)
+[tbd plan](../../../docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md)
 retains the mathematical assessment and source coverage.
 The current allocation below and the child agendas own execution priorities; H-items own
 scientific claims. Frozen experimental criteria and completed evidence are unchanged.

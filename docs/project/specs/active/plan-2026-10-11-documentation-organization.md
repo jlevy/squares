@@ -76,9 +76,11 @@ Re-measured against `main` at `074ac28d4`, 161 commits after the survey below.
   generated claim documents it renders (`t-018-proof-card.md` and four more), so a
   rename rewrites published claim documents for no reader-facing gain, and the map
   excludes templates, so the naming check does not see them.
-- **The mover tool**, the last of slice 0. Slices 2 to 5 rewrite ten to thirty times as
-  many links as this branch did; they should start with slice 0’s
-  `devtools.move_documents`.
+- **The rest of the mover.** `devtools.move_documents` landed with
+  [jlevy/squares#579](https://github.com/jlevy/squares/pull/579); slice 0 below says
+  what it does. Slices 2 to 5 rewrite ten to thirty times as many links as this branch
+  did, and should start with it.
+  Case-only renames and three reports remain (think-qgq1).
 
 Open pull request [jlevy/squares#435](https://github.com/jlevy/squares/pull/435) adds
 `docs/project/handoff-2026-10-10-polynomial-pr-stack.md`; once it merges `main`, the
@@ -549,15 +551,27 @@ for slice 2, 64 for slice 3 and 58 for slice 5.
 
 ### Slice 0: Tools Before Moves
 
-- [ ] `devtools.move_documents`: take old-to-new pairs, `git mv` them (two steps for a
-  case-only rename), rewrite every relative Markdown link that resolves to an old path
-  and every outbound link of a moved file, rewrite exact repository-relative strings in
-  code, tests, configuration, workflows and registers, keep `math-markup.yaml` sorted,
-  update the map, `.flowmarkignore`, `.gitattributes` and `prose-ceremony.yaml`, and
-  leave fenced code and retained artifacts alone.
-  Report what it cannot decide: bare basename mentions, absolute `blob/main` links, and
-  references in `AGENTS.md`, `CLAUDE.md` and dot-directories.
-  A dry run prints the counts in the table above.
+- [x] `devtools.move_documents`, with
+  [jlevy/squares#579](https://github.com/jlevy/squares/pull/579): it takes old-to-new
+  pairs and validates the whole list before writing anything (every path inside the
+  repository, distinct new targets, no target that is another move’s source or sits
+  under a file). `--apply` runs every `git mv`, then writes each rewrite at its new
+  place, and undoes all of it if any step fails.
+  It rewrites every relative Markdown link that resolves to an old path and every
+  outbound link of a moved file, and every exact repository-relative string in any
+  tracked text file, so code, tests, configuration, workflows, registers, the map,
+  `.flowmarkignore`, `.gitattributes` and `prose-ceremony.yaml` all follow.
+  A file is text when it decodes as UTF-8 with no NUL byte, whatever its name.
+  It keeps `math-markup.yaml` sorted and line endings byte for byte, and leaves fenced
+  code, footnotes, symbolic links, files whose blob a tool pins, and retained artifacts
+  (the archive, the reconciliation records, `*.jsonl` receipts, patches) alone.
+  It reports a moved path left in fenced code and a file that names one but is not text.
+  A dry run prints each file’s count; 34 moves take about five seconds.
+- [ ] The rest of the mover (think-qgq1): two steps for a case-only rename, which the
+  target-exists check refuses on a case-insensitive filesystem today; and a report of
+  what it should not decide alone: the bare basename mentions and absolute `blob/main`
+  links it leaves, and the references it rewrites in `AGENTS.md`, `CLAUDE.md` and
+  dot-directories.
 - [ ] `devtools.check_document_names` in the records tier: capitals only under naming
   rule 5; no Markdown directly in `docs/project/` except `README.md`; dated directories
   require their `<type>-YYYY-MM-DD-` prefix and maintained ones refuse it; each mapped

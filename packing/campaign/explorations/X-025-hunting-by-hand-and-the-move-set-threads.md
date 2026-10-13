@@ -58,7 +58,7 @@ exploration:
   - packing/frontier/square-packing-case.schema.yaml
   - packing/devtools/gap_ranking.py
   - packing/devtools/measure_objective_sparsity.py
-  - docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md
+  - docs/project/specs/paused/plan-2026-08-25-generalized-motion-lab.md
   - docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
 ---
 # X-025 — Hunting by Hand, and the Threads the Move-Set Round Opened
@@ -341,7 +341,7 @@ It has a typed `PoseFrame` whose `frame_kind` distinguishes an editor preview fr
 exact path, a numerical state, a probe and an illustrative tween, and a `QuenchTrace/v1`
 that types the solver’s phases.
 Its Phase 2, which would preserve a contact or a rigid group *during* optimisation, is
-[paused pending explicit constraint semantics](../../../docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md).
+[paused pending explicit constraint semantics](../../../docs/project/specs/paused/plan-2026-08-25-generalized-motion-lab.md).
 Separately, the video spike’s `workbench.html` has a gap bar that reads the record and
 the proved lower bound off the frontier, computes the side the current arrangement would
 need every frame, and turns green only when every square is on its target.

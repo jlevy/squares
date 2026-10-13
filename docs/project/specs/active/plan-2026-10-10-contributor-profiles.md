@@ -632,8 +632,8 @@ server runs. Neither local server is a production deployment.
 ## References
 
 - [Validation loops](../../../../development.md#validation-loops)
-- [Site URL design](plan-2026-10-06-site-urls-seo-performance.md)
-- [Result-kind model](plan-2026-10-01-result-kinds.md)
+- [Site URL design](../done/plan-2026-10-06-site-urls-seo-performance.md)
+- [Result-kind model](../done/plan-2026-10-01-result-kinds.md)
 - [Resource archive](../../../../packing/resources/README.md)
 - [Bibliography](../../../../packing/resources/bibliography.yaml)
 - [Existing credit audit](../../../../packing/atlas/known-best/credit-attributions.json)

@@ -407,8 +407,8 @@ the evidence, CI and adoption gaps.
 
 ## Allocation and Stop Decisions
 
-The [six-hour plan](../specs/active/plan-2026-10-07-n17-six-hour-continuation.md) has
-the correct mathematical boundaries: initial W3 and source review before targets,
+The [six-hour plan](../specs/done/plan-2026-10-07-n17-six-hour-continuation.md) has the
+correct mathematical boundaries: initial W3 and source review before targets,
 independent mechanical checks, fixed scientific criteria, and a protected final thirty
 minutes. The first regional packet above is ready for source implementation after the
 kickoff review. Its positive-width row restriction and stronger contradiction branches

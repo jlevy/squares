@@ -274,7 +274,7 @@ session:
 
 Block 2 of [agenda-006](../agendas/agenda-006-overnight-research-blocks.md), advancing
 `BC-045` through phases 3 and 4 of
-[plan-2026-08-28-interval-certification](../../../docs/project/specs/active/plan-2026-08-28-interval-certification.md).
+[plan-2026-08-28-interval-certification](../../../docs/project/specs/done/plan-2026-08-28-interval-certification.md).
 
 ## What block 1 left standing, and how it is answered
 

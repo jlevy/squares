@@ -127,7 +127,7 @@ mechanism and patch-equality premise corrected.
 The
 [current evidence account’s §13](../../../docs/project/research/research-2026-09-09-n11-evidence-and-inference.md#13-the-later-a6-and-h157-results-what-has-been-checked)
 and
-[overnight plan](../../../docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md)
+[overnight plan](../../../docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md)
 carry these later findings, their review receipts and the next comparisons.
 
 ## Original September 9 Account — Historical Interpretation

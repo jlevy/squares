@@ -12,7 +12,7 @@ feature branches. Its sampled values concern a specified relaxation; they do not
 establish a widened terminal theorem.
 
 This is the mathematical contract for BC-431 and BC-433 under the
-[ten-hour plan](../specs/active/plan-2026-10-06-n17-ten-hour-session.md), derived from
+[ten-hour plan](../specs/done/plan-2026-10-06-n17-ten-hour-session.md), derived from
 the initial source at `f3a13e3a2` and extended by the derivations and linked receipts
 below. The coordinator owns hypothesis and experiment registration.
 Outcome summaries refer to those registered experiments and preserve their stated scope.

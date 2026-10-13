@@ -200,7 +200,7 @@ alone is not full pre-merge evidence.
 | `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 107 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
 | `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 107 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 107 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
-| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 107 | 90 s | pending its first hosted cohort under `think-th8p`; the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks`; the verifier’s step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
+| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 107 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
 | *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 107 of 107 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
 
 Step counts describe the current 107-step registry, read from the validator’s canonical
@@ -1670,7 +1670,7 @@ release may carry assets drawn from different revisions.
 Actions artifacts, Git LFS or a committed file; the tag; the upload’s content type; the
 receipt that travels with each video; and the `<video>` embed with its codec string --
 is
-[Publication](docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#publication)
+[Publication](docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#publication)
 in the delivery-profiles plan.
 To re-cut and publish them, follow
 [Regenerating and publishing the ascent videos](packages/workbench/README.md#regenerating-and-publishing-the-ascent-videos),
@@ -1718,7 +1718,7 @@ uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atl
 `--update-composites` refuses a stale pin and uncommitted data, since the stamp it draws
 has to name the data in the tree.
 `--update` rewrites the data layer alone: witnesses, renderings, manifest and frontier
-links. [The plan](docs/project/specs/active/plan-2026-10-01-release-assets-on-demand.md)
+links. [The plan](docs/project/specs/done/plan-2026-10-01-release-assets-on-demand.md)
 has the measurements behind this and the options that were weighed, and
 `python -m devtools.measure_release_assets` repeats them.
 
@@ -2454,7 +2454,7 @@ Do not replace those records with a timing comment or treat an incomplete CPU lo
 bound as total test CPU. The prior
 [efficiency infrastructure plan](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md)
 and
-[gate validation plan](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md)
+[gate validation plan](docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md)
 retain the earlier experiments and their outcomes.
 
 ### What a deep run repeats, and what that licenses

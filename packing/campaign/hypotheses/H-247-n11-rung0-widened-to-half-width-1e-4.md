@@ -51,7 +51,7 @@ hypothesis:
   registered: '2026-09-25'
   notes: >-
     H-236 (T-035, exp-232) at a box one hundred times wider, from the Session 159 n11
-    assessment (docs/project/specs/active/plan-2026-09-25-after-r052-planning.md). Its
+    assessment (docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md). Its
     cost was set by the margins near Trump's pose, not by the box width, and exp-234
     found no width dependence, so the node count should be close to rung 0's. The
     measured enclosure reach was about fifteen times the half-width, which puts the rho

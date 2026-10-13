@@ -14,7 +14,7 @@ The
 [Agenda 024 allocation](../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 owns prospective priorities.
 BC-250 (`think-j1f5`) links the
-[tbd assessment](../specs/active/plan-2026-09-06-post-381-research-sequence.md), which
+[tbd assessment](../specs/done/plan-2026-09-06-post-381-research-sequence.md), which
 covers both prior reviews, the core-shrink obstruction, and the retained Lean spike.
 After the planning block closes, coordinator `think-jgnv` dispatches BC-251, BC-231,
 BC-254, and BC-255 under their H-items and readiness conditions.

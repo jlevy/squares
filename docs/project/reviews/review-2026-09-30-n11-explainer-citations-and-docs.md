@@ -110,7 +110,7 @@ applied:
   the positive denominator and derivation later in the same section.
   This is a navigation improvement, not a proposed change to the inequality.
 
-The [illustration plan](../specs/active/plan-2026-09-30-n11-optimality-illustrations.md)
+The [illustration plan](../specs/done/plan-2026-09-30-n11-optimality-illustrations.md)
 separately lists the proof mechanisms the current four SVGs do not yet show.
 The upstream original
 [PROOF.md](../../../packing/resources/web/n11-optimality-2026-09-29/source/PROOF.md),

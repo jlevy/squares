@@ -10,7 +10,7 @@ No positive profile or BC329 target was run.
 ## Exact Boundary
 
 - Scope: read-only review of the uncommitted diff to
-  `docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md` in
+  `docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md` in
   `/private/tmp/squares-n11-bc329-stack`, plus the maintained verifier and relevant CLI
   contracts. The report itself is outside the repository.
   No repository file, index, commit, bead, or remote was changed by this review.

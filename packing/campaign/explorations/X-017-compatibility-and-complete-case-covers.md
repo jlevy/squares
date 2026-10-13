@@ -35,7 +35,7 @@ exploration:
   - packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md
   - packing/campaign/agent-sessions/session-090-four-hour-research.md
   - docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md
-  - docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
+  - docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md
   proposes: [H-111, H-112, H-113, H-114, H-115, H-116, H-117, H-125]
 ---
 # X-017 — Compatibility, Restricted Families, and Complete Case Covers

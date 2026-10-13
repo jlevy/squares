@@ -9,22 +9,10 @@ author: Codex, for the repository owner
 
 **Author:** Codex, for the repository owner
 
-**Status:** Implemented and focused-verified in draft PR #462, including canonical
-Results URL (`think-3ci0`), shared homepage Atlas controls and centering, and shared
-main-heading/control-label refinements.
-Shared Atlas legend swatch alignment is tracked by `think-w51o` and focused-verified on
-both pages at desktop and mobile widths.
-Final Astra review approved the frozen changes; the next pushed-head CI is pending.
-The full checkpoint (`think-xio5`) remains separate and open.
-The earlier upstream geometry reconciliation (`think-p7c4`) is complete.
-The complete Triangle PNG preview (`think-t2yf`) and print legend (`think-rxkc`) are
-verified and published locally.
-The full 7497 × 5361 preview uses a content-versioned asset; both poster families passed
-export checks and visual legend review.
-PDF drawing scale remains unchanged while the separate Row comparison is reviewed.
-The latest Atlas heading changes (`think-077n`) and red-only web/print recency
-(`think-7j48`, `think-kg7a`) are in progress; their focused verification and final-head
-CI remain pending.
+**Status:** Active. Implemented and merged in PR #462 on 2026-10-11, with the full
+checkpoint (think-xio5) closed; open follow-ups are think-2u4x with think-ht59,
+think-dpu9 (neutral PDF case numbers) and think-zua6 (container stroke width), and
+think-9dhb (re-enable shared-CI timing enforcement).
 
 **Tracking:** `think-2u4x` (epic), `think-s54c` (planning)
 
@@ -102,7 +90,7 @@ Check those paths first and retain $n = 291$ in the browser fixtures.
 
 This wave builds on the [overview plan](plan-2026-09-29-github-pages-overview.md) and
 preserves the static pages, canonical addresses, and published-link guarantees of the
-[URL and rendering plan](plan-2026-10-06-site-urls-seo-performance.md).
+[URL and rendering plan](../done/plan-2026-10-06-site-urls-seo-performance.md).
 
 ## Design
 
@@ -469,7 +457,7 @@ Planning completion leaves the implementation issues open.
 ## References
 
 - [Original overview plan](plan-2026-09-29-github-pages-overview.md)
-- [Static pages and published URLs](plan-2026-10-06-site-urls-seo-performance.md)
+- [Static pages and published URLs](../done/plan-2026-10-06-site-urls-seo-performance.md)
 - [Site URL registry](../../../../packing/site-urls.yaml)
 - [Case 291 source record](../../../../packing/frontier/n-291.md)
 - [Homepage template](../../../../packing/devtools/templates/overview-article.md)

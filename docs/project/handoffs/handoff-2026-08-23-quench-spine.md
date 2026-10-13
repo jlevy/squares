@@ -74,7 +74,7 @@ clone. Restore the database from the [`tbd-sync`](../../../.tbd/config.yml) bran
 (`tbd sync`), after which `tbd show think-eq6l` and `tbd list --spec <the plan>`
 resolve. Until then, the durable handle for each row is the **block name in the first
 column**: every one is a checklist item under *Phase 1: The quench spine* in
-[the plan spec](../specs/active/plan-2026-08-22-minimal-packing-toolkit.md), which needs
+[the plan spec](../specs/paused/plan-2026-08-22-minimal-packing-toolkit.md), which needs
 no tooling to read.
 
 Three hypotheses are `blocked` in the registry — `H-001` (angle-class reduction),
@@ -88,7 +88,7 @@ whole cartography programme rests on, deliberately made cheap to kill.
 ## Everything is tracked, and where
 
 - **The plan**:
-  [`plan-2026-08-22-minimal-packing-toolkit.md`](../specs/active/plan-2026-08-22-minimal-packing-toolkit.md),
+  [`plan-2026-08-22-minimal-packing-toolkit.md`](../specs/paused/plan-2026-08-22-minimal-packing-toolkit.md),
   Phases 1–7, each with a bead epic.
   `tbd list --spec <that path>` is the work list; `tbd ready` is the unblocked subset.
   The tree is now checked by the gate — `tools/check_beads.py` refuses an open bead

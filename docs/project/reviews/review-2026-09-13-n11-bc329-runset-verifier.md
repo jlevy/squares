@@ -15,7 +15,7 @@ This review does not authorize a positive calibration profile or BC329 target ru
   `ca4f08ee0c3fe19e28f848bfc8f487e85823b7ee`. Both files are newly added by that commit.
 - Reviewed context: `AGENTS.md`, `development.md`, the independent
   [run-sheet refusal](review-2026-09-13-n11-bc329-three-profile-run-sheet.md), and the
-  [proposed verifier plan](../specs/active/plan-2026-09-13-n11-bc329-runset-verifier.md).
+  [proposed verifier plan](../specs/done/plan-2026-09-13-n11-bc329-runset-verifier.md).
   The two review documents were untracked working-tree files, not blobs at the source
   head. Their observed SHA-256 values were
   `02513c41f01165e6fd591a60d46a95dc2fc94cc81339c668930263b1dc3fdbab` and

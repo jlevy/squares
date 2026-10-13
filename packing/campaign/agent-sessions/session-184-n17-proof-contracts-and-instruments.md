@@ -41,7 +41,7 @@ session:
       lanes. Source was clean at f3a13e3a2. The pre-session noncritical broad gate was interrupted
       and its owned workers released.'
     evidence:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - packing/campaign/agendas/agenda-043-n17-ten-hour-continuation.md
     stop_reason: Launch ownership and observed clocks established.
     next_action: Begin W3 mathematical contracts with parallel W7 instrument engineering.
@@ -71,7 +71,7 @@ session:
       publication failure. Native macOS RSS guard has independent controls. PR402 fine-proposal candidate
       is consolidated at917163641; no n11 capture target yet. Observed checkpoint: 2026-10-07T07:36:51Z.'
     evidence:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - packing/campaign/agendas/agenda-043-n17-ten-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-259-h276-current-admitted-residue.md
@@ -2197,7 +2197,7 @@ session:
     - unregisteredscientifictarget
     - sharedadmissionledgermutation
   outputs:
-  - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+  - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
   - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
   - packing/devtools/stratify_n17_certified_residue.py
   - packing/devtools/probe_n17_widened_lp.py

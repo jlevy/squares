@@ -3,7 +3,7 @@
 # Read by `devtools.paper_terms` against the rendered page, and held to it by
 # `tests/test_paper_terms.py`; the module's docstring states the six rules. Seeded from
 # the define-before-use audit of the series plan
-# (docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md, §7.2) and from
+# (docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md, §7.2) and from
 # every bold definition in the article.
 #
 # Fields: `term`; `uses`, a regular expression over prose, or over a formula's TeX when
