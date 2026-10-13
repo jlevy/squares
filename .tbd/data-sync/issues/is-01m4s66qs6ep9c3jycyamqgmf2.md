@@ -5,7 +5,7 @@ title: "Documentation layout, deferred part: root documents, runbooks, generated
 kind: task
 status: open
 priority: 3
-version: 4
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-11-documentation-organization.md
 labels: []
 dependencies: []
@@ -14,14 +14,14 @@ child_order_hints:
 hold: blocked
 hold_until: null
 created_at: 2026-10-12T23:12:15.654Z
-updated_at: 2026-10-13T07:16:50.238Z
+updated_at: 2026-10-13T08:06:51.573Z
 ---
 The deferred part of the documentation-layout plan. The spec is docs/project/specs/active/plan-2026-10-11-documentation-organization.md on main; its "Status on 2026-10-12" section has the measured reasons. The conflict-free part landed in #576 (think-mv16, merged 2026-10-13 at ea227e62d).
 
 Blocked on the owner's answers to plan decisions 2 (one docs/project prefix), 4 (synopsis and tutorial leave the root, breaking outside blob/main links) and 8 (runbooks to docs/project/runbooks/). It also needs a quiet PR queue: on 2026-10-12, 15 of 16 open PRs edited SYNOPSIS.md, 10 edited development.md and 9 edited packing/frontier/RESULTS.md.
 
 Remaining work, in order:
-1. Slice 0's mover, devtools.move_documents. It rewrites relative links by depth, repository-relative paths in code and registers, the map, math-markup.yaml, .flowmarkignore and .gitattributes. Slices 2-5 rewrite 10 to 30 times as many links as #576 did, which used a one-off script.
+1. Slice 0's mover exists: devtools.move_documents is built in PR #579 (open as of 2026-10-13); until it merges, take it from that branch. It validates the whole move list, applies it all or not at all, rewrites relative links by depth and exact repository-relative paths in every tracked text file (code, registers, the map, .flowmarkignore, .gitattributes), keeps math-markup.yaml sorted, and leaves fenced code and frozen records alone, reporting what it leaves. Slices 2-5 rewrite 10 to 30 times as many links as #576 did, which used a one-off script, and should start with it. What remains of it (case-only renames, and reports of bare basenames, blob/main links and AGENTS.md, CLAUDE.md and dot-directory references) is think-qgq1, under this bead.
 2. Slice 2: conventions.md, epistemics.md and operating-rules.md to docs/project/policies/.
 3. Slice 4: the four campaign runbooks to docs/project/runbooks/.
 4. Slice 3: TUTORIAL.md, SYNOPSIS.md (lowercased) and development.md to docs/project/guides/. Renderers must write links relative to the output file. Optionally (decision 9) move the document-map table to docs/project/README.md.
