@@ -116,6 +116,7 @@ DOCUMENTS: tuple[Document, ...] = (
     ),
     Document("conventions.md"),
     Document("epistemics.md"),
+    Document("docs/project/policies/regularization-policy.md"),
     Document("packing/frontier/README.md"),
     Document("packing/frontier/STATUS.md"),
     Document("packing/devtools/templates/*-article.md"),

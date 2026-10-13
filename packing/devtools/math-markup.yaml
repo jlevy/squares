@@ -44,6 +44,7 @@ migrated:
 - docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md
 - docs/project/handoffs/handoff-2026-09-21-n17-external-intake.md
 - docs/project/handoffs/handoff-2026-09-22-low-n-review-and-the-2880-rung.md
+- docs/project/policies/regularization-policy.md
 - docs/project/postmortems/postmortem-2026-08-23-soundness-class.md
 - docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md
 - docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md
@@ -61,6 +62,7 @@ migrated:
 - docs/project/research/research-2026-09-13-bc303-literal-parent-union-result.md
 - docs/project/research/research-2026-09-13-bc303-t2-charge-bridge.md
 - docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md
+- docs/project/research/research-2026-10-11-evand-regularization-assessment.md
 - docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
 - docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md
 - docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md

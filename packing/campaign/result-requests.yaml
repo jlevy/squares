@@ -3492,7 +3492,7 @@ issues:
       bead: think-r333
       note: Priced at about 4.3 CPU-hours from an eight-direction diagnostic sample (receipts in
         wand125-fine-net-n29-2026-10-10). The owner set its budget on 11 October 2026, and the replay is
-        queued in think-r333 after the regularization work (jlevy/squares#497). The 1163/200 report and its evidence
+        queued in think-r333 after the regularization of every packing (think-ux1v, planned in jlevy/squares#497). The 1163/200 report and its evidence
         entry stand, and the unreported 2327/400 certificate of dd6a7cc stays with think-ndvg's
         2026-10-09 watch read.
     - what: Run a reviewed maintained-only complete seven-case native capture and whole-net v2 control

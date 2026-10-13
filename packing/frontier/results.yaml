@@ -13628,8 +13628,8 @@ results:
       FC-1) and a review that reads this certificate, by the checklist of the 6 October
       declared-net soundness review. The eight-direction sample prices the run and its
       controls at about 4.3 CPU-hours. The owner set its budget on 11 October 2026, and
-      the run is queued in think-r333 after the regularization work
-      (jlevy/squares#497).
+      the run is queued in think-r333 after the regularization of every packing
+      (think-ux1v, planned in jlevy/squares#497).
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
@@ -15256,8 +15256,8 @@ results:
       FC-1) and a review that reads this certificate, by the checklist of the 6 October
       declared-net soundness review. The eight-direction sample prices the run and its
       controls at about 3.3 CPU-hours. The owner set its budget on 11 October 2026, and
-      the run is queued in think-i85v after the regularization work
-      (jlevy/squares#497).
+      the run is queued in think-i85v after the regularization of every packing
+      (think-ux1v, planned in jlevy/squares#497).
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
@@ -15361,7 +15361,7 @@ results:
       mutant at every direction, FC-1) and a review that reads this certificate, by the checklist of the 6 October declared-net
       soundness review. The eight-direction sample prices the run and its controls at about
       4.5 CPU-hours. The owner set its budget on 11 October 2026, and the run is queued
-      in think-i85v after the regularization work (jlevy/squares#497).
+      in think-i85v after the regularization of every packing (think-ux1v, planned in jlevy/squares#497).
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
@@ -15466,7 +15466,7 @@ results:
       as the 2 October review read T-080's. The two-angle sample prices the replay and
       control at about 11.2 CPU-hours (the author's own replay suggests up to about 23).
       The owner set its budget on 11 October 2026, and the replay is queued in
-      think-nd7g after the regularization work (jlevy/squares#497).
+      think-nd7g after the regularization of every packing (think-ux1v, planned in jlevy/squares#497).
     unfinished_confirmations:
       - what: >-
           a complete replay of all 201 angles by the T-080 route, with the certificate

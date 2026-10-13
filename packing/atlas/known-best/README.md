@@ -156,13 +156,18 @@ one bought.
 
 ## The regularized views
 
-[`regularized/`](regularized/index.json) holds exact derived views of 55 records,
-written by `python -m devtools.regularize_axis_components --update-atlas`, checked by
-digest with `--check-atlas` and re-derived with `--verify-atlas`. A view straightens
-near-axis squares and slides axis-aligned ones into exact contact at the certified side,
-verified twice over the rationals; it never replaces a witness, changes a side or
-promotes a tier. The selected website drawings use these verified views directly; the
-index and source records retain their provenance.
+The [regularization policy](../../../docs/project/policies/regularization-policy.md)
+governs every view here: what admits a view, what goes to manual review, and what is a
+register result instead.
+
+[`regularized/`](regularized/index.json) holds exact derived views of 71 records (its
+index’s totals: 71 regularized, 181 unchanged, 72 refused), written by
+`python -m devtools.regularize_axis_components --update-atlas`, checked by digest with
+`--check-atlas` and re-derived with `--verify-atlas`. A view straightens near-axis
+squares and slides axis-aligned ones into exact contact at the certified side, verified
+twice over the rationals; it never replaces a witness, changes a side or promotes a
+tier. The selected website drawings use these verified views directly; the index and
+source records retain their provenance.
 Exploration
 [X-049](../../campaign/explorations/X-049-families-shading-and-the-large-n-limit.md#exact-regularization)
 explains why and what it changes.
@@ -173,8 +178,10 @@ explains why and what it changes.
 checkpoint
 ([development.md](../../../development.md#the-deep-gate-the-deferred-surface-before-the-merge)).
 
-**The 87 refused Kingbird-derived records stay refused.** Their 36-digit poses overlap
+**The 71 refused Kingbird-derived records stay refused.** Their 36-digit poses overlap
 by a rounding sliver at centre dilation 1, the only factor the layer uses.
+The index refuses one more record, $n = 51$, whose witness is exact over
+$\mathbb{Q}(\sqrt{2})$, because the layer has no field arithmetic.
 `promote_rational` would try wider ones: it scales every centre about the container’s
 centre by $1 + 10^{-p}$, $p = 31, 29, \ldots, 3$, and keeps the first exact packing
 within $10^{-9}$ of the printed side.
@@ -194,12 +201,18 @@ rational packings; the historical census below describes the earlier poses:
 Every view passed both exact verifiers, and none made a square lighter or needed a hold.
 The views still fail the claim boundary, for two reasons:
 
-- **Most would promote a tier.** For 73 of the 89 the register’s verified upper bound is
-  the grid ceiling, because the Kingbird catalogue is reported evidence that has never
-  been replayed. An exactly verified view there is a rational packing 0.05 to 0.46 below
-  that bound. A drawing would then carry a certificate the register does not.
-  At $n = 17$ and $n = 29$ the view lies $10^{-22}$ and $5 \times 10^{-20}$ below the
-  certified endpoint the register holds, which is the same promotion at smaller scale.
+- **Most would promote a tier.** On 2026-10-02, for 73 of the 89 the register’s verified
+  upper bound was the grid ceiling, because the Kingbird catalogue was reported evidence
+  that had never been replayed.
+  An exactly verified view there was a rational packing 0.05 to 0.46 below that bound,
+  and a drawing would have carried a certificate the register did not.
+  At $n = 17$ and $n = 29$ the view lay $10^{-22}$ and $5 \times 10^{-20}$ below the
+  certified endpoint the register held, which is the same promotion at smaller scale.
+  The grid-ceiling count no longer holds: T-101 (registered 2026-10-06) made Evan
+  Daniel’s exact certificates the verified upper bound at 74 Kingbird counts, and on 11
+  October none of the 74 records the layer then refused had the grid ceiling as its
+  verified bound. The 72 it refuses now are among those 74
+  ([the assessment, section 3.2](../../../docs/project/research/research-2026-10-11-evand-regularization-assessment.md#32-the-side-relation-same-or-solved)).
 - **The rest would change the side.** For the other 14 the register already verifies the
   reported bound, but a dilated view’s container is $2.9 \times 10^{-31}$ to
   $8.8 \times 10^{-29}$ larger than the printed side and lies above the verified bound,
