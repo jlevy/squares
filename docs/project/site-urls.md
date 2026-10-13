@@ -752,7 +752,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | contributors/michael-j-kearney.html | profiles/michael-j-kearney.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/michael-j-kearney.html |
 | contributors/mira.html | profiles/mira.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/mira.html |
 | contributors/peter-shiu.html | profiles/peter-shiu.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/peter-shiu.html |
-| contributors/queuingtheorydotcom.html | profiles/queuingtheorydotcom.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/queuingtheorydotcom.html |
+| contributors/queuingtheorydotcom.html | profiles/manasseh-ahmed.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/manasseh-ahmed.html |
 | contributors/ryu-sungjoon.html | profiles/ryu-sungjoon.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/ryu-sungjoon.html |
 | contributors/sam-burns.html | profiles/sam-burns.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/sam-burns.html |
 | contributors/tokoharu.html | profiles/tokoharu.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/tokoharu.html |
@@ -805,12 +805,12 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/index.html | profiles/ | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/john-bidwell.html | profiles/john-bidwell.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/joshua-levy.html | profiles/joshua-levy.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/manasseh-ahmed.html | profiles/manasseh-ahmed.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/marc-leonard-overbeck.html | profiles/marc-leonard-overbeck.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/michael-j-kearney.html | profiles/michael-j-kearney.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/mira.html | profiles/mira.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/peter-shiu.html | profiles/peter-shiu.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/philippe-ryckelynck.html | profiles/philippe-ryckelynck.html | page | overview | 2026-10-13 | 2026-10-13 | live |
-| profiles/queuingtheorydotcom.html | profiles/queuingtheorydotcom.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/ryu-sungjoon.html | profiles/ryu-sungjoon.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/sam-burns.html | profiles/sam-burns.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/thierry-gensane.html | profiles/thierry-gensane.html | page | overview | 2026-10-13 | 2026-10-13 | live |

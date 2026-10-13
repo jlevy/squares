@@ -6091,18 +6091,19 @@ urls:
       canonical: contributors/peter-shiu.html
       target: ''
 - path: contributors/queuingtheorydotcom.html
-  canonical: profiles/queuingtheorydotcom.html
+  canonical: profiles/manasseh-ahmed.html
   kind: forwarder
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
   lastmod: '2026-10-13'
   status: forwarded
-  target: profiles/queuingtheorydotcom.html
+  target: profiles/manasseh-ahmed.html
   amendments:
   - date: '2026-10-13'
     reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
-      them contributors (think-0v2c); this address forwards there.
+      them contributors (think-0v2c), and this profile's record became manasseh-ahmed when it took
+      his name; this address forwards there.
     previous:
       kind: page
       canonical: contributors/queuingtheorydotcom.html
@@ -6596,6 +6597,14 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-13'
   status: live
+- path: profiles/manasseh-ahmed.html
+  canonical: profiles/manasseh-ahmed.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
 - path: profiles/marc-leonard-overbeck.html
   canonical: profiles/marc-leonard-overbeck.html
   kind: page
@@ -6630,14 +6639,6 @@ urls:
   status: live
 - path: profiles/philippe-ryckelynck.html
   canonical: profiles/philippe-ryckelynck.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
-  producer: overview
-  first_published: '2026-10-13'
-  lastmod: '2026-10-13'
-  status: live
-- path: profiles/queuingtheorydotcom.html
-  canonical: profiles/queuingtheorydotcom.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview

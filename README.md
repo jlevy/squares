@@ -55,7 +55,7 @@ others’, each with its credit and
 The most significant since August 2026:
 
 - **Eleven squares settled:** $s(11) = 3.877083590022814\ldots$, the side of Walter
-  Trump’s 1979 packing ([T-011](packing/frontier/RESULTS.md)), by Mannaseh Ahmed’s
+  Trump’s 1979 packing ([T-011](packing/frontier/RESULTS.md)), by Manasseh Ahmed’s
   Astra-assisted proof
   [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal), building
   on this project and Marc Leonard Overbeck (Kleddamag)

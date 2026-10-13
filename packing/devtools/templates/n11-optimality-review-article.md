@@ -1,7 +1,7 @@
 {{FRONT_MATTER}}
 
 This paper explains the computer-assisted optimality proof published by
-[Mannaseh Ahmed](https://x.com/ManassehA06) in
+[Manasseh Ahmed](https://x.com/ManassehA06) in
 [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal). The
 original
 [mathematical argument](https://github.com/Queuingtheorydotcom/11SquaresOptimal/blob/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c/PROOF.md),

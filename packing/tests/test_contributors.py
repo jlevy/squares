@@ -65,10 +65,11 @@ def test_seed_records_keep_identity_and_optional_information_separate() -> None:
 def test_reviewed_account_aliases_keep_one_person_and_primary_receipts() -> None:
     """One stable person retains all reviewed names and linked account identities."""
     registry = load_contributors(RECORDS, repo=REPO)
-    ahmed = registry.by_id["queuingtheorydotcom"]
-    assert ahmed.real_name is None
+    ahmed = registry.by_id["manasseh-ahmed"]
+    assert ahmed.real_name == ahmed.display_name == "Manasseh Ahmed"
     for spelling in (
         "Ahmed",
+        "Manasseh Ahmed",
         "Mannaseh Ahmed",
         "Queuingtheorydotcom",
         "ManassehA06",

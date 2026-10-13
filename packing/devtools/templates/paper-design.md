@@ -2878,7 +2878,7 @@ The front is, in order:
   links, the version plain.
 
   ```
-  From the original proof by **Mannaseh Ahmed**
+  From the original proof by **Manasseh Ahmed**
   github.com/Queuingtheorydotcom/11SquaresOptimal
 
   Human oversight: **Joshua Levy**

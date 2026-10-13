@@ -144,6 +144,11 @@ personal alias; its person/infrastructure roles remain separate.
 
 Store `packing/contributors/people/<id>.md` with `schemas/contributor.schema.yaml`,
 contract `packing.squares:Contributor/v1`, envelope `contributor`, status `enforced`.
+The directory follows the layout of `packing/campaign/`. Person records are alone in
+`people/`, so no other file’s name reads as a person’s. Both schemas are in `schemas/`,
+each named for the kind it validates.
+The occurrence manifest `occurrences.yaml` and a `README.md` sit at the top.
+Each record declares its schema by relative path.
 Use the existing hermetic JSON Schema validator; the installed softschema CLI provides
 an independent compatibility and repair check.
 New consumer fields require reviewed contract changes rather than an unvalidated
@@ -151,8 +156,8 @@ extension hidden from CI.
 
 | Field | Meaning |
 | --- | --- |
-| `id` | Immutable lowercase slug matching the filename |
-| `display_name` | Preferred public name or handle |
+| `id` | Lowercase slug matching the filename, fixed once published: the person’s evidenced real name (`manasseh-ahmed`, `hiroaki-hosono`), otherwise the handle they publish under (`guzhou0806`) |
+| `display_name` | Preferred public name: the evidenced real name where there is one, otherwise the handle; compact credits use the surname (`Ahmed`, `Hosono`) |
 | `real_name` | Optional publicly evidenced name |
 | `aliases` | Evidenced spellings, initials and handles; not globally unique IDs |
 | `links` | Typed public URLs and optional handles; publication/personal sites are distinct |
@@ -533,6 +538,24 @@ Philippe Ryckelynck, so there are 24 records.
 No archived source names Muhammad Maaz.
 The `/profiles/` slice below is merged, and the WIP handoff that follows is kept as
 history.
+
+Later the same day, each owner request became a bead under `think-39mp`:
+
+| Bead | Slice | State |
+| --- | --- | --- |
+| `think-nyk1` | `contributor_census --stale` and `--reconcile` | done |
+| `think-k9mc` | Overbeck’s record, `marc-leonard-overbeck` | done |
+| `think-1y3x` | Records for Bidwell, Ellsworth, Gensane and Ryckelynck | done |
+| `think-8we0` | wand125 credited as Hiroaki Hosono record-wide; record `hiroaki-hosono`, keeping GitHub `wand125` and X `@wand_125` | done |
+| `think-5bao` | Merge `main`, including the n = 17 stack (#560, #571, #577), keeping both renames and joining the stack’s `Overbeck` labels | in progress while `main` moves |
+| `think-2wtr` | The `people/`, `schemas/` and README layout above | done with this branch |
+| `think-vqk8` | Record `manasseh-ahmed`, the former `queuingtheorydotcom`, with the owner-confirmed spelling Manasseh corrected in first-party text | done with this branch |
+
+The renamed records keep forwarders at their previewed addresses
+(`contributors/kleddamag.html`, `contributors/queuingtheorydotcom.html` and
+`contributors/wand125.html`). Population continues under `think-m7il`: 252 structured
+spans are unresolved, among them Chaoweeraprasit, Xu, Ostashev, Wang, Li and Maaz, for
+whom no archived source gives a full name.
 
 ## WIP Handoff: 2026-10-10
 

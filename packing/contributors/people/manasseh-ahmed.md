@@ -5,11 +5,13 @@ softschema:
   envelope: contributor
   status: enforced
 contributor:
-  id: queuingtheorydotcom
-  display_name: 'Queuingtheorydotcom'
+  id: manasseh-ahmed
+  display_name: Manasseh Ahmed
+  real_name: Manasseh Ahmed
   aliases:
     - Ahmed
     - Mannaseh Ahmed
+    - Queuingtheorydotcom
     - ManassehA06
     - MathCompSciFTW
     - Square Packing Fan
@@ -24,6 +26,12 @@ contributor:
       url: https://x.com/ManassehA06
       handle: ManassehA06
   sources:
+    - id: owner-confirmation
+      archive_path: attribution.md
+      locator: 'Decisions and Exceptions, the Manasseh Ahmed row: the owner’s confirmation that @ManassehA06, Queuingtheorydotcom and Manasseh Ahmed are one person, credited by his real name.'
+    - id: n17-credits
+      archive_path: packing/resources/web/kleddamag-n17-candidate-2026-10-12/README.md
+      locator: 'Source and Credit, the Human credit row: the n = 17 edition’s CREDITS.md credits “Manasseh Ahmed’s 11SquaresOptimal” for the proof shape.'
     - id: primary-byline
       archive_path: packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ACKNOWLEDGEMENTS.md
       locator: 'Acknowledgements names @Queuingtheorydotcom for the underlying proof and integration; bibliography explicitly identifies its Ahmed attribution.'
@@ -43,22 +51,26 @@ contributor:
       locator: 'Opening identity account and Source and Pin table record the owner-confirmed GitHub/X join, former MathCompSciFTW handle, and curated Mannaseh Ahmed spelling; primary receipts expose only the account display name.'
   provenance:
     - field: /display_name
-      sources: [primary-byline]
+      sources: [owner-confirmation, n17-credits]
+    - field: /real_name
+      sources: [owner-confirmation, n17-credits]
     - field: /aliases/0
       sources: [bibliography]
     - field: /aliases/1
-      sources: [intake-identity, bibliography]
+      sources: [intake-identity]
     - field: /aliases/2
-      sources: [announcement-account]
-    - field: /aliases/3
-      sources: [intake-identity, earlier-announcement-account]
-    - field: /aliases/4
-      sources: [announcement-account]
-    - field: /aliases/5
       sources: [primary-byline]
-    - field: /aliases/6
+    - field: /aliases/3
       sources: [announcement-account]
+    - field: /aliases/4
+      sources: [intake-identity, earlier-announcement-account]
+    - field: /aliases/5
+      sources: [announcement-account]
+    - field: /aliases/6
+      sources: [primary-byline]
     - field: /aliases/7
+      sources: [announcement-account]
+    - field: /aliases/8
       sources: [intake-identity, earlier-announcement-account]
     - field: /links/0
       sources: [primary-byline, intake-identity]

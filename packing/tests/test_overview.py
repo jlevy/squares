@@ -591,7 +591,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
     ]
     assert overview_sections.OPTIMALITY is entries[2]
     note = entries[2].description
-    assert note.startswith("Explains Mannaseh Ahmed\u2019s proof that Trump\u2019s packing")
+    assert note.startswith("Explains Manasseh Ahmed\u2019s proof that Trump\u2019s packing")
     assert "(T-060)" in note
     assert "formal" not in note.lower()
     assert Counter(href for href, _, _ in cards) == Counter(paper.href for paper in entries)
@@ -4084,7 +4084,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     assert _rendered_text(narrative_paragraphs[-1]) == _markdown_text(SITE_STATEMENT[3])
     assert [_rendered_text(item) for item in items] == [
         "Marc Leonard Overbeck\u2019s certified lower bound of 31/8 for eleven squares.",
-        "Mannaseh Ahmed\u2019s proof of optimality for eleven squares.",
+        "Manasseh Ahmed\u2019s proof of optimality for eleven squares.",
         _markdown_text(
             "Independently, Evan Daniel has proved the optimality of an infinite family, "
             r"$s(k^2 - 3) = k$ for every $k \ge 6$, along with exact values at "
@@ -4097,7 +4097,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         "Work on the square packing problem has exploded",
         "Joshua Levy",
         "Marc Leonard Overbeck",
-        "Mannaseh Ahmed",
+        "Manasseh Ahmed",
         "Evan Daniel",
         "Independently",
         "AI-assisted verification",
@@ -4107,7 +4107,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     for address, label in (
         ("https://x.com/ojoshe", "Joshua Levy"),
         ("https://x.com/kleddamag", "Marc Leonard Overbeck"),
-        ("https://x.com/ManassehA06", "Mannaseh Ahmed"),
+        ("https://x.com/ManassehA06", "Manasseh Ahmed"),
         ("https://x.com/evanbd", "Evan Daniel"),
         ("papers/n11-lower-bounds-explainer.html", "new lower bounds"),
         ("papers/n11-threshold-bound-review.html", "certified lower bound of 31/8"),
@@ -4408,7 +4408,7 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
         ("https://x.com/kleddamag", "Marc Leonard Overbeck"),
         ("results.html#t-037", "T-037"),
         (overview_sections.OPTIMALITY_PAPER, "Part III"),
-        ("https://x.com/ManassehA06", "Mannaseh Ahmed"),
+        ("https://x.com/ManassehA06", "Manasseh Ahmed"),
         ("results.html#t-060", "T-060"),
         ("tutorial.html", "square-packing tutorial"),
         ("papers/square-packing-methods-survey.html", "How Record Square Packings Are Found"),
@@ -4461,7 +4461,7 @@ def test_the_optimality_papers_card_says_what_t060s_rungs_allow(
     value, note = _page_card_parts(papers, paper.href)
     assert card_text(value) == paper.title
     text = card_text(note)
-    assert text.startswith("Explains Mannaseh Ahmed\u2019s proof that Trump\u2019s packing")
+    assert text.startswith("Explains Manasseh Ahmed\u2019s proof that Trump\u2019s packing")
     assert "(T-060)" in text
     assert "is optimal" in text
     assert "s(11) = 3.8770835" in text
@@ -4489,7 +4489,7 @@ def test_the_papers_page_introduces_the_papers_within_t060s_rungs(
     assert "machine-checked proof" in text
     assert "packing of eleven squares is optimal" in " ".join(text.split())
     assert "review record is pending" in text
-    assert "Mannaseh Ahmed" in text
+    assert "Manasseh Ahmed" in text
     assert f'<a href="{overview_sections.THRESHOLD_BOUND_PAPER}">Part II</a>' in article
     assert "figures drawn from published record packings" in " ".join(text.split())
     assert "formal" not in text.lower()

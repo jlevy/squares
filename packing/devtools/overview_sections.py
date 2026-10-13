@@ -1633,7 +1633,7 @@ PAPER_DESCRIPTIONS: dict[str, str] = {
         "reoptimized certificate over 12,028 angle rows."
     ),
     N11_OPTIMALITY_REVIEW: (
-        "Explains Mannaseh Ahmed\u2019s proof that Trump\u2019s packing is optimal, "
+        "Explains Manasseh Ahmed\u2019s proof that Trump\u2019s packing is optimal, "
         "s(11) = 3.8770835\u2026 (T-060): construction, case exclusions, capture and "
         "local isolation."
     ),
@@ -1938,12 +1938,12 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     ),
     (
         "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
-        "Mannaseh Ahmed",
+        "Manasseh Ahmed",
         "A computer-assisted proof that Trump's packing of eleven squares is optimal.",
     ),
     (
         "https://github.com/Queuingtheorydotcom/11SquaresFormalized",
-        "Mannaseh Ahmed et al.",
+        "Manasseh Ahmed et al.",
         "A Lean 4 formalization of that proof, trusting Lean's compiler for its certificates.",
     ),
     (

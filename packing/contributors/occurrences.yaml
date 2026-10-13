@@ -81,7 +81,7 @@ occurrences:
   evidence:
   - primary-byline
   - bibliography
-  contributor_id: queuingtheorydotcom
+  contributor_id: manasseh-ahmed
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed n11 optimality 2026]'
@@ -95,7 +95,7 @@ occurrences:
   evidence: &id020
   - primary-byline
   - bibliography
-  contributor_id: queuingtheorydotcom
+  contributor_id: manasseh-ahmed
   note: Joined by the reviewed identity of 5 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -139,7 +139,7 @@ occurrences:
   evidence:
   - primary-byline
   - bibliography
-  contributor_id: queuingtheorydotcom
+  contributor_id: manasseh-ahmed
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed 11SquaresFormalized 2026]'
@@ -217,7 +217,7 @@ occurrences:
   evidence:
   - primary-byline
   - bibliography
-  contributor_id: queuingtheorydotcom
+  contributor_id: manasseh-ahmed
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed 11SquaresFormalized 2026]'
@@ -7766,7 +7766,7 @@ occurrences:
   role: prerequisite
   disposition: resolved
   evidence: *id020
-  contributor_id: queuingtheorydotcom
+  contributor_id: manasseh-ahmed
   note: Joined by the reviewed identity of 5 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -8209,7 +8209,7 @@ occurrences:
   evidence:
   - primary-byline
   - bibliography
-  contributor_id: queuingtheorydotcom
+  contributor_id: manasseh-ahmed
 - origin:
     path: packing/frontier/n-005.md
     record_key: '5'
@@ -8361,7 +8361,7 @@ occurrences:
   evidence:
   - primary-byline
   - bibliography
-  contributor_id: queuingtheorydotcom
+  contributor_id: manasseh-ahmed
 - origin:
     path: packing/frontier/n-012.md
     record_key: '12'
