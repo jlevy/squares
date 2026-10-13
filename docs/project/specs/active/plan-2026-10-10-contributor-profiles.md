@@ -4,8 +4,10 @@
 
 **Author:** Codex, for Joshua Levy
 
-**Status:** Data-model spike complete; initial population and website implementation in
-progress in [PR #490](https://github.com/jlevy/squares/pull/490).
+**Status:** Data-model spike, initial population, website and `/profiles/` URLs
+implemented; continued from [PR #490](https://github.com/jlevy/squares/pull/490) in
+[PR #578](https://github.com/jlevy/squares/pull/578), a draft awaiting the owner’s
+review.
 
 **Workflow:** W7 pipeline improvement, entered through `tbd shortcut new-plan-spec`.
 
@@ -516,6 +518,22 @@ popovers retain the shared compact heading hierarchy.
 Generated computed-style checks compare the contributor pages with the standard page
 role at desktop/mobile widths in both themes.
 
+## Takeover: 2026-10-13
+
+At the owner’s request, Claude Code continued this work on
+`claude/admiring-goodall-q8xeuh` in
+[PR #578](https://github.com/jlevy/squares/pull/578), which carries every commit of #490
+and supersedes it. That branch merges `main` (327 commits) and resolves its eight
+conflicts. `contributor_census --stale` and `--reconcile` now repair the occurrence
+manifest after a merge: there, 41 reviewed spans had gone stale and 194 were new.
+The branch adds Marc Leonard Overbeck’s record, `marc-leonard-overbeck`, the former
+`kleddamag`, which has his real name and links to GitHub `Kleddamag` and X `@kleddamag`.
+It also adds sourced records for John Bidwell, David Ellsworth, Thierry Gensane and
+Philippe Ryckelynck, so there are 24 records.
+No archived source names Muhammad Maaz.
+The `/profiles/` slice below is merged, and the WIP handoff that follows is kept as
+history.
+
 ## WIP Handoff: 2026-10-10
 
 The owner requested a work-in-progress PR and handoff before further implementation.
@@ -529,7 +547,7 @@ The PR is being retained as draft, with integration acceptance open.
 
 The URL migration is implemented.
 `/profiles/index.html` (canonical `profiles/`) and `/profiles/ID.html` are the directory
-and person-page URLs for all 20 records.
+and person-page URLs for every record.
 Visible text says “Profiles”: the directory’s title, heading, intro and list label, the
 colophon link, each profile’s breadcrumb and the popover’s accessible name.
 Cited paper authors are therefore included without implying that every person directly
