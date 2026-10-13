@@ -50,8 +50,8 @@ high-precision sides and polynomial root forms to the record pages Erich Friedma
 compiled. On 4 June 2023 he found the exact polynomial root form of the side of John
 Bidwell’s packing of 17 squares, the degree-18 polynomial the catalogue prints.
 The catalogue credits him with finding, improving or optimizing best known packings at
-many counts, among them 28 and 87. Griffin Casson and other contributors have used his
-parsing and checking tools, published on GitHub.
+many counts, among them 28 and 87. His parsing and checking tools are published on
+GitHub, and Griffin Casson’s repository checks its packings with them.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

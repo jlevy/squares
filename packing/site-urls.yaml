@@ -5868,6 +5868,14 @@ urls:
       kind: page
       canonical: cases/
       target: ''
+- path: contributors/david-ellsworth.html
+  canonical: contributors/david-ellsworth.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-10'
+  lastmod: '2026-10-10'
+  status: live
 - path: contributors/erich-friedman.html
   canonical: contributors/erich-friedman.html
   kind: page
@@ -5932,6 +5940,14 @@ urls:
   first_published: '2026-10-10'
   lastmod: '2026-10-10'
   status: live
+- path: contributors/john-bidwell.html
+  canonical: contributors/john-bidwell.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-10'
+  lastmod: '2026-10-10'
+  status: live
 - path: contributors/joshua-levy.html
   canonical: contributors/joshua-levy.html
   kind: page
@@ -5972,6 +5988,14 @@ urls:
   first_published: '2026-10-10'
   lastmod: '2026-10-10'
   status: live
+- path: contributors/philippe-ryckelynck.html
+  canonical: contributors/philippe-ryckelynck.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-10'
+  lastmod: '2026-10-10'
+  status: live
 - path: contributors/queuingtheorydotcom.html
   canonical: contributors/queuingtheorydotcom.html
   kind: page
@@ -5990,6 +6014,14 @@ urls:
   status: live
 - path: contributors/sam-burns.html
   canonical: contributors/sam-burns.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-10'
+  lastmod: '2026-10-10'
+  status: live
+- path: contributors/thierry-gensane.html
+  canonical: contributors/thierry-gensane.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview

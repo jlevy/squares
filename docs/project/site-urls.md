@@ -739,6 +739,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/98.html | cases/98.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/99.html | cases/99.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/index.html | atlas.html | forwarder | overview | 2026-09-29 | 2026-10-09 | forwarded → atlas.html |
+| contributors/david-ellsworth.html | contributors/david-ellsworth.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/erich-friedman.html | contributors/erich-friedman.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/evan-daniel.html | contributors/evan-daniel.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/f-gobel.html | contributors/f-gobel.html | page | overview | 2026-10-10 | 2026-10-10 | live |
@@ -747,14 +748,17 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | contributors/guzhou0806.html | contributors/guzhou0806.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/hiroshi-nagamochi.html | contributors/hiroshi-nagamochi.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/index.html | contributors/ | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/john-bidwell.html | contributors/john-bidwell.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/joshua-levy.html | contributors/joshua-levy.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/marc-leonard-overbeck.html | contributors/marc-leonard-overbeck.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/michael-j-kearney.html | contributors/michael-j-kearney.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/mira.html | contributors/mira.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/peter-shiu.html | contributors/peter-shiu.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/philippe-ryckelynck.html | contributors/philippe-ryckelynck.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/queuingtheorydotcom.html | contributors/queuingtheorydotcom.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/ryu-sungjoon.html | contributors/ryu-sungjoon.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/sam-burns.html | contributors/sam-burns.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/thierry-gensane.html | contributors/thierry-gensane.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/tokoharu.html | contributors/tokoharu.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/walter-stromquist.html | contributors/walter-stromquist.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | contributors/walter-trump.html | contributors/walter-trump.html | page | overview | 2026-10-10 | 2026-10-10 | live |
