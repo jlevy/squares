@@ -615,6 +615,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Owner Decisions of 13 October: s(11) Retired, s(17) Suspended, Duplicates Closed](docs/project/reviews/review-2026-10-13-owner-decisions.md) | dated review record | record | retained | — |
 | [Bead and Plan Reconciliation, Round 2, 12 October 2026](docs/project/reviews/review-2026-10-12-bead-reconciliation-round-2.md) | dated review record | record | retained | — |
 | [Bead and Plan Reconciliation, 10 October 2026](docs/project/reviews/review-2026-10-10-tbd-coordination.md) | dated review record | record | retained | — |
 | [Bead Reconciliation, Lane A — 2026-10-10](docs/project/reviews/review-2026-10-10-bead-reconciliation-a.md) | dated review record | record | retained | — |
@@ -865,7 +866,7 @@ case or experiment separately.
 | [stats-summary.md](packing/atlas/known-best/video/spikes/v2-transitions/stats-summary.md) | generated status view | record | retained | — |
 | [A6 Fixed-Support Dual Admission](packing/cases/n11_fractional_certificate/a6_dual_upper/README.md) | research synthesis | record | retained | — |
 | [A6 Scope and Overnight Plan Review](docs/project/reviews/review-2026-09-10-n11-a6-scope-and-plan.md) | dated review record | record | retained | — |
-| [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) | implementation plan | current | transient | — |
+| [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) | implementation plan | record | superseded | [`s(11)` — solved](packing/frontier/n-011.md) |
 | [Feature: The Workbench, From Spike to Product](docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md) | implementation plan | current | transient | — |
 | [BC329 Target-Free Three-Profile Run Sheet](docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md) | implementation plan | record | retained | — |
 | [PR157 Integrated Calibration Launch Supplement](docs/project/specs/done/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md) | implementation plan | record | retained | — |
@@ -901,7 +902,7 @@ case or experiment separately.
 | [PR 156 Run-Sheet Flowmark Final Rereview](docs/project/reviews/review-2026-09-13-n11-bc329-run-sheet-flowmark-final.md) | dated review record | record | retained | — |
 | [PR156 Native Usage Delta Audit](docs/project/reviews/review-2026-09-13-pr156-usage-delta.md) | dated review record | record | retained | — |
 | [Exact Review of the Repaired BC303 T1 Reader](docs/project/reviews/review-2026-09-13-n11-bc303-t1-reader-final-math.md) | dated review record | record | retained | — |
-| [N11: Three Overnight Research Blocks After PR139](docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md) | implementation plan | record | superseded | [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) |
+| [N11: Three Overnight Research Blocks After PR139](docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md) | implementation plan | record | superseded | [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) |
 | [Independent Review of the Unit-Parent Centre Bound](docs/project/reviews/review-2026-09-10-n11-parent-centre-independent-review.md) | dated review record | record | retained | — |
 | [Independent Review of the Adopted Parent Adapter](docs/project/reviews/review-2026-09-10-n11-parent-adapter-admission.md) | dated review record | record | retained | — |
 | [The Retained Point Obstruction in the Individual-Parent Domain](docs/project/reviews/review-2026-09-10-n11-parent-domain-translation.md) | dated review record | record | retained | — |
@@ -1428,7 +1429,7 @@ case or experiment separately.
 | [Postmortem: Three Catalogue Intakes Nobody Owned](docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md) | failure analysis and lessons | record | retained | — |
 | [Proof Verification Consolidation and Independent n11 Completion](docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md) | implementation plan | current | transient | — |
 | [n17 Eight-Hour Proof Block](docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md) | implementation plan | current | transient | — |
-| [n17 Three-Block Session Plan](docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md) | implementation plan | current | transient | — |
+| [n17 Three-Block Session Plan](docs/project/specs/future/plan-2026-10-10-n17-three-block-session.md) | implementation plan | current | transient | — |
 | [Feature: Minimal Packing Toolkit](docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md) | implementation plan | current | transient | — |
 | [Feature: Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | implementation plan | current | transient | — |
 | [Feature: Frontier Assurance and Verification](docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md) | implementation plan | current | transient | — |
@@ -1716,7 +1717,7 @@ nonterminal exclusions and capture/terminal mathematics, with independent Astra 
 GPT-6.1 Sol implements the selected proof tools; repeated confirmation receives a
 bounded support allocation.
 The
-[three-block session plan](docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md)
+[three-block session plan](docs/project/specs/future/plan-2026-10-10-n17-three-block-session.md)
 maps two conditional further eight-hour blocks, each replanned from the preceding
 block’s evidence and recorded with fresh session clocks.
 The next entry is W10 launch selection with real session clocks and resource checks.

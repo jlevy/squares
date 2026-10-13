@@ -1,5 +1,11 @@
 # N11: Daytime Strategy Blocks and Parallel Explainer Update
 
+**Status:** Archived 2026-10-13. Superseded by T-060, which settles s(11) = T (Trump’s
+side); under the owner’s decision of 2026-10-13 the n = 11 daytime research blocks will
+not resume. think-gvlg and think-qqzs stay open only as certification_pending owners of
+Sessions 151 and 138; think-gtax’s live children are think-mmd5 (n = 12) and think-bxu1
+(tool bug).
+
 **Active plan, September 10, 2026; updated September 15.** This plan replaces the
 uninterrupted overnight schedule with shorter blocks that can start and stop during the
 day. Each research block gets its own session clock, falsifiable output, stop rule, and
@@ -468,9 +474,9 @@ An
 [integrated-head review](../../reviews/review-2026-09-13-n11-bc329-integrated-run-sheet.md)
 at `fbd915fc` found that the component source blobs still match those accepted reviews.
 It refused the run sheet because its commands bypassed the maintained verifier.
-The revised [run sheet](../archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md)
-now calls `snapshot`, `read`, `join`, `retain`, and `source-closure` on both the staged
-evidence tree and the later evidence commit.
+The revised [run sheet](plan-2026-09-13-n11-bc329-three-profile-run-sheet.md) now calls
+`snapshot`, `read`, `join`, `retain`, and `source-closure` on both the staged evidence
+tree and the later evidence commit.
 An
 [exact-diff rereview](../../reviews/review-2026-09-13-n11-bc329-run-sheet-identity-refusal.md)
 accepted that command wiring but found no proof that the evidence commit directly

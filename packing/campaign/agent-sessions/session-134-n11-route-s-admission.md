@@ -296,7 +296,7 @@ session:
     - packing/campaign/agendas/agenda-036-n11-strategy-reset-roadmap.md
     files:
     - SYNOPSIS.md
-    - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+    - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
     - packing/campaign/agendas/agenda-036-n11-strategy-reset-roadmap.md
     - packing/campaign/explorations/X-032-route-s-threshold-compression.md
     - packing/campaign/hypotheses/H-163-route-s-threshold-compression.md
@@ -369,7 +369,7 @@ session:
   - packing/campaign/ledger.md
   - packing/campaign/session-close-report.yaml
   - packing/campaign/ideas.md
-  - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+  - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
   - SYNOPSIS.md
   - packing/devtools/controls.yaml
   - packing/src/sqpack/cli/validate.py

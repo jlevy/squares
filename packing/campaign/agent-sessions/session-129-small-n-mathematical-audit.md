@@ -188,7 +188,7 @@ session:
   - packing/campaign/agent-sessions/session-129-small-n-mathematical-audit.md
   - packing/campaign/agendas/agenda-036-n11-strategy-reset-roadmap.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
-  - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+  - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
   - SYNOPSIS.md
   - README.md
   checks:

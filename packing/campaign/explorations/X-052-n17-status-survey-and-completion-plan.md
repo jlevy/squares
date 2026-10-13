@@ -1182,7 +1182,7 @@ standards.
 ### 7.7 Three eight-hour blocks, with replanning at each boundary
 
 The
-[three-block session plan](../../../docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md)
+[three-block session plan](../../../docs/project/specs/future/plan-2026-10-10-n17-three-block-session.md)
 considers a further sixteen hours after the first block.
 This is a conditional planning horizon, not a launch or a forecast of a complete proof.
 Each eight-hour block closes its own AgentSession record and hands its admitted evidence

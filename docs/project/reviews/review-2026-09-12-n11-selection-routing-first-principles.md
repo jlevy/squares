@@ -304,7 +304,7 @@ rational controls. The geometric path proofs and continuous-domain surplus impli
 were reviewed analytically.
 
 The review began while
-`docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md` had a
+`docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md` had a
 concurrent change.
 That plan-only change was later committed as `f1e397cd`; it is outside
 the cited source set and was not used as a premise.

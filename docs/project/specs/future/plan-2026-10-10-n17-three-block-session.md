@@ -1,7 +1,7 @@
 ---
 title: n17 Three-Block Session Plan
 date: '2026-10-10'
-status: prepared
+status: future
 ---
 # n17 Three-Block Session Plan
 
@@ -13,14 +13,20 @@ remain co-primary; confirmation and integration support those obligations.
 This document creates no active session, actual clock, experiment, automation or
 scientific claim, and does not itself authorize execution.
 
+**Status:** Suspended.
+Owner decision of 2026-10-13: new s(17) work is suspended pending Overbeck’s proof that
+s(17) = L (#557, registered as T-153 by #560, credited by #571), which likely subsumes
+it. Prepared, never launched; agenda-046 stays paused and think-wnbr holds.
+Resumes only if the owner lifts the suspension, for example if T-153’s replays and
+reviews find a gap.
+
 [Agenda 046](../../../../packing/campaign/agendas/agenda-046-n17-eight-hour-proof-block.md)
 owns commitments and beads;
 [X-052](../../../../packing/campaign/explorations/X-052-n17-status-survey-and-completion-plan.md)
 owns the exploration and remaining proof map.
-The [eight-hour block plan](../future/plan-2026-10-10-n17-eight-hour-proof-block.md)
-supplies Block 1’s complete 16-slice schedule, scientific controls, resource guards and
-portable commands. The
-[session README](../../../../packing/campaign/agent-sessions/README.md),
+The [eight-hour block plan](plan-2026-10-10-n17-eight-hour-proof-block.md) supplies
+Block 1’s complete 16-slice schedule, scientific controls, resource guards and portable
+commands. The [session README](../../../../packing/campaign/agent-sessions/README.md),
 [AgentSession/v2 schema](../../../../packing/campaign/schemas/agent-session.schema.yaml)
 and
 [Session 186](../../../../packing/campaign/agent-sessions/session-186-n17-mathematics-and-efficiency.md)

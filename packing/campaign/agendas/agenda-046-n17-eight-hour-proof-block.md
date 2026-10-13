@@ -274,7 +274,7 @@ It never substitutes a count of completed tasks for proof progress.
 ## Conditional continuation through two further blocks
 
 The
-[three-block session plan](../../../docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md)
+[three-block session plan](../../../docs/project/specs/future/plan-2026-10-10-n17-three-block-session.md)
 maps two possible further eight-hour blocks.
 This agenda owns the first block’s commitments; it reserves no later agenda, session or
 scientific identifiers.
