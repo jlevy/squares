@@ -106,6 +106,8 @@ def _relink(target: str, source_old: str, source_new: str, moves: dict[str, str]
     if source_old == source_new and destination == resolved:
         return target
     rewritten = posixpath.relpath(destination, posixpath.dirname(source_new) or ".")
+    if path.endswith("/") and not rewritten.endswith("/"):
+        rewritten += "/"
     if path.startswith("./") and not rewritten.startswith("../"):
         rewritten = f"./{rewritten}"
     return f"{rewritten}{hash_mark}{fragment}"

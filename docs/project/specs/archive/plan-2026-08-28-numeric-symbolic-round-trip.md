@@ -4,7 +4,13 @@
 
 **Author:** Claude (agent), from a design discussion with the repository owner
 
-**Status:** Draft
+**Status:** Archived 2026-10-13, superseded by the
+[promotion pipeline plan](../paused/plan-2026-08-28-promotion-pipeline-implementation.md),
+under which agenda-005 built this route: BC-043 (contact assembly), BC-047 (refinement),
+BC-044 (exact solve) and BC-048 (exact LP) are complete, and `176e8ad14` closed the
+round trip at n = 11 on 2026-08-29. The remaining exact-route scope stays with
+`think-va53` under that plan.
+The checklist below is the plan as written, not a record of what ran.
 
 ## Overview
 

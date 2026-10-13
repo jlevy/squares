@@ -523,9 +523,10 @@ rotted; the split has to be something the gate computes and can refuse.
 
 ## General Principles
 
-`OR-1` through `OR-13` say how a particular thing is done here.
-The principles below govern those procedures; when a procedure and a principle disagree,
-it is the procedure that is wrong.
+`OR-1` through `OR-13`, and `OR-19` after the principles, say how a particular thing is
+done here.
+The principles below govern those procedures; when a procedure and a principle
+disagree, it is the procedure that is wrong.
 They are stated separately so that a future agent inheriting a rule it finds pointless
 has somewhere to check what the rule was for.
 
@@ -855,22 +856,26 @@ A read-only question or lookup needs no new bead.
   Search for existing work before creating a bead, and track each independently
   delegated deliverable separately.
 - **Confirm ownership before execution.** Use a unique acting name per agent instance
-  with `tbd start <id> --as <name> --json`. Inspect `claimed` and `skipped`: an exit
-  code of zero can mean the claim was refused.
+  with `tbd start <id> --as <name> --json`: the harness, the role and an instance id,
+  such as `claude-reconcile-lane-1-0vpobe`, or the id `tbd whoami --ensure-id` keeps.
+  Inspect `claimed` and `skipped`: an exit code of zero can mean the claim was refused.
   Proceed only after a successful claim, or a verified continuation of that same agent’s
   claim. Sync the accepted claim and re-read the bead before editing.
   An accountable `assignee` does not replace the acting `delegate`.
 - **Dispatch disjoint work.** Every brief names the bead, acting agent, write scope,
   completion evidence, and tracker owner.
   The coordinator publishes assignments and owns shared bead updates and sync for its
-  sub-agents; workers acknowledge their assignment and report results against that bead.
+  sub-agents; a worker acknowledges its assignment in the first line of its report and
+  reports results against that bead.
   Independent sessions sync their own work.
   Across separate clones, allocate overlapping work through one coordinator: tbd’s local
   claim check and Git sync are not a distributed lock.
 - **Checkpoint after each commit.** The tracker owner (the coordinator for delegated
   work, or the independent session owner) updates the affected beads with progress and
-  validation still pending, then runs `tbd sync`. Do not wait for CI to finish before
-  publishing progress, and do not close work whose acceptance checks remain pending.
+  validation still pending, then runs `tbd sync`. For delegated work the coordinator
+  cannot see each worker commit as it lands, so its checkpoint is each worker report.
+  Do not wait for CI to finish before publishing progress, and do not close work whose
+  acceptance checks remain pending.
 - **Transfer ownership explicitly.** Before handoff, record remaining work, blockers,
   branch and evidence, and the intended recipient.
   The outgoing owner stops work; the coordinator or outgoing owner updates the delegate
@@ -891,6 +896,11 @@ concurrent agents. The installed tbd v0.10.0 claim command also returns success 
 skips another agent’s claim.
 These are ownership and visibility gaps; the snapshot does not establish which tasks, if
 any, were executed twice.
+The cost the rule answers is on record in `think-05y8`: on 2026-09-16 two Codex threads
+worked in one PR worktree at once, each read the other’s uncommitted edits as
+corruption, and the surviving pre-push gate certified a reverted cap.
+Whether claim and checkpoint discipline is enough is measured, not assumed: the
+ten-slice sample under `think-kc9d` runs at the next `OR-12` efficiency block.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

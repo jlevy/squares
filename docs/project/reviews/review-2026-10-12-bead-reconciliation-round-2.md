@@ -159,6 +159,15 @@ leaves frozen records alone.
 Run `check_bead_tree` before `tbd sync`, since CI reads the synced store and a close
 that breaks an invariant turns every pull request red.
 
+A `spec_path` repair that follows a file move reaches the shared tracker at once, while
+the move reaches `main` only when its pull request merges.
+Apply such repairs after the move merges.
+When they are applied earlier, as rounds 1 to 3 were, run
+`reconcile_work --branch-only-paths` before merging and keep its listing, so that a
+declined move can be undone bead by bead.
+`--needs-evidence` lists what every round so far left waiting on a named fact;
+`think-bx03` owns that list.
+
 ## Validation and Limits
 
 Hosted CI runs on the pushed head.

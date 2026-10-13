@@ -9,8 +9,8 @@ author: Claude (agent), for the repository owner
 
 **Author:** Claude (agent), for the repository owner
 
-**Status:** Implemented; corrective validation and rollout are tracked in
-[PR #456](https://github.com/jlevy/squares/pull/456)
+**Status:** Implemented; corrective validation and rollout landed in
+[PR #456](https://github.com/jlevy/squares/pull/456), merged on 2026-10-08.
 
 **Workflow:** W7 pipeline improvement (the published site is the surface)
 

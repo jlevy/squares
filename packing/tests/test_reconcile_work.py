@@ -9,10 +9,12 @@ import pytest
 
 from devtools.reconcile_work import (
     annotate_prior,
+    branch_only_paths,
     cited_commits,
     duplicate_candidates,
     inventory,
     main,
+    open_needs_evidence,
     review_coverage,
     split_lanes,
     status_line,
@@ -519,6 +521,55 @@ def test_duplicate_candidates_pair_open_beads_with_open_or_finished_twins() -> N
     assert duplicate_candidates(beads, threshold=0.9)[-1]["ids"] == ["think-b111", "think-c111"]
 
 
+def test_needs_evidence_lists_only_what_is_still_open_and_undecided(tmp_path: Path) -> None:
+    (tmp_path / "plan.md").write_text("A plan.\n", encoding="utf-8")
+    older = {
+        "beads": [
+            {"id": "think-a111", "action": "needs_evidence", "reason": "Owner decides"},
+            {"id": "think-b111", "action": "needs_evidence", "reason": "Missing receipt"},
+            {"id": "think-c111", "action": "needs_evidence", "reason": "Gone"},
+        ],
+        "specs": [
+            {"path": "plan.md", "action": "needs_evidence", "reason": "Status?"},
+            {"path": "moved.md", "action": "needs_evidence", "reason": "Moved"},
+        ],
+    }
+    newer = {"beads": [{"id": "think-b111", "action": "retain", "reason": "Decided"}]}
+    snapshot = [
+        {"id": "think-a111", "status": "open"},
+        {"id": "think-b111", "status": "open"},
+        {"id": "think-c111", "status": "closed"},
+    ]
+    result = open_needs_evidence(snapshot, [older, newer], tmp_path)
+    assert result["open"] == 2
+    assert [item["id"] for item in result["items"]] == ["think-a111", "plan.md"]
+
+
+def test_branch_only_paths_finds_beads_that_dangle_on_the_base(tmp_path: Path) -> None:
+    def git(*arguments: str) -> None:
+        subprocess.run(
+            ["git", "-C", str(tmp_path), *arguments], check=True, capture_output=True
+        )
+
+    git("init", "-q", "-b", "main")
+    git("config", "user.email", "t@example.org")
+    git("config", "user.name", "t")
+    (tmp_path / "on-main.md").write_text("A plan.\n", encoding="utf-8")
+    git("add", "on-main.md")
+    git("commit", "-q", "-m", "base")
+    git("checkout", "-q", "-b", "side")
+    (tmp_path / "moved.md").write_text("A plan.\n", encoding="utf-8")
+    beads = [
+        {"id": "think-a111", "status": "closed", "spec_path": "moved.md"},
+        {"id": "think-b111", "status": "open", "spec_path": "moved.md"},
+        {"id": "think-c111", "status": "open", "spec_path": "on-main.md"},
+        {"id": "think-d111", "status": "open", "spec_path": "gone.md"},
+    ]
+    result = branch_only_paths(beads, tmp_path, "main")
+    assert (result["beads"], result["nonclosed"]) == (2, 1)
+    assert result["by_path"] == {"moved.md": 2}
+
+
 @pytest.mark.parametrize(
     "option",
     [
@@ -528,6 +579,8 @@ def test_duplicate_candidates_pair_open_beads_with_open_or_finished_twins() -> N
         ("--split", "2"),
         ("--verify", "review.json"),
         ("--duplicates",),
+        ("--needs-evidence", "review.json"),
+        ("--branch-only-paths",),
     ],
 )
 def test_cli_rejects_inventory_only_modes_for_retained_baseline(

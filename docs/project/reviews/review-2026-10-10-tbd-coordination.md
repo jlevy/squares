@@ -163,6 +163,25 @@ The earlier audit `think-qpm4` found that installed tbd v0.10.0 can update
 `last_sync_at` during search without performing a Git sync, so that timestamp is not a
 compliance receipt.
 
+## Status Addendum, 13 October: What Merging Decides
+
+Senior review A on PR #493 (A1) found that the tracker changes are already applied:
+`tbd-sync` carries them whether or not the PR merges.
+Merging adopts the file moves, OR-19 and its `AGENTS.md` summary, the tools and the
+records. It does not decide the bead closures, holds, notes and `spec_path` repairs of
+this round, [round 2](review-2026-10-12-bead-reconciliation-round-2.md) or the
+[owner decisions of 13 October](review-2026-10-13-owner-decisions.md); those were
+applied when each round ran.
+The owner accepted this round’s applied set on 11 October.
+
+Some repairs depend on a move: on 13 October, 453 beads (62 not closed) named a plan
+path that exists on this branch and not on `main`, across 22 plans.
+`reconcile_work SNAPSHOT.json --branch-only-paths` lists them.
+Every one of those 22 files came from `docs/project/specs/active/` under the same name,
+so a declined move is undone with
+`tbd update <id> --spec docs/project/specs/active/<file>` for each bead the listing
+names. The applied records also keep each repair’s `from` and `to`.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

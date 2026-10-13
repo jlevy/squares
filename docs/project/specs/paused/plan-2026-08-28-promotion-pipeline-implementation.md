@@ -405,7 +405,7 @@ human. That rule is unchanged and applied to exp-045 already.
 ## References
 
 - [X-004 — an exact algebraic characterization of the `n = 29` record](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md)
-- [plan-2026-08-28 — the numeric–symbolic round trip](../draft/plan-2026-08-28-numeric-symbolic-round-trip.md)
+- [plan-2026-08-28 — the numeric–symbolic round trip](../archive/plan-2026-08-28-numeric-symbolic-round-trip.md)
 - [plan-2026-08-28 — the symbolic promotion gap](../done/plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
 - [agenda-005](../../../../packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md)
 - [TUTORIAL §5 — from a numeric solution to an exact one](../../../../TUTORIAL.md#from-a-numeric-solution-to-an-exact-one)

@@ -105,3 +105,9 @@ def test_a_file_whose_blob_a_tool_pins_keeps_its_bytes(tree: Path) -> None:
     assert result.kept == ["docs/project/reviews/bound.md"]
     assert "docs/project/reviews/bound.md" not in result.rewrites
     assert "README.md" in result.rewrites
+
+
+def test_a_directory_link_keeps_its_trailing_slash() -> None:
+    moves = {"docs/project/x.md": "docs/project/guides/x.md"}
+    text, _ = rewrite("[tool](../../packing/tool/)\n", "docs/project/x.md", moves)
+    assert text == "[tool](../../../packing/tool/)\n"

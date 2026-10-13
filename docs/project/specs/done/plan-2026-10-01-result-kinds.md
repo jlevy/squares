@@ -5,7 +5,8 @@
 **Author:** Claude (agent), for the repository owner
 
 **Status:** Implemented and merged in PR #270 at `7f1ad844e`. The ten medium-confidence
-classifications and standing derivation remain owner decisions.
+classifications and standing derivation remain owner decisions, listed under
+`think-cv22`.
 
 **Workflow:** W7 pipeline improvement
 

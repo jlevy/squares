@@ -5,6 +5,10 @@ undecomposed epic cannot be mistaken for a completed one. Emit disjoint review q
 with explicit coverage; a flag is a question to investigate, not a verdict.
 ``--split N`` regroups the queues so each spec travels with the beads it governs, and
 ``--prior`` carries an earlier round's dispositions onto the items it reviewed.
+Children are direct children only, and the default spec lanes alternate by sorted path,
+so a lane assignment is stable only against the frozen baseline it was cut from.
+``--needs-evidence`` lists what earlier rounds left waiting on a named fact and is still
+open, so that list has one place to be worked down from.
 """
 
 from __future__ import annotations
@@ -107,9 +111,9 @@ def inventory(beads: list[dict[str, Any]], repo: Path) -> dict[str, Any]:
         item = dict(bead)
         bead_id = str(bead["id"])
         linked = str(bead.get("spec_path") or "")
-        descendants = children.get(bead_id, [])
-        item["children_total"] = len(descendants)
-        item["children_nonclosed"] = sum(b.get("status") != "closed" for b in descendants)
+        direct_children = children.get(bead_id, [])
+        item["children_total"] = len(direct_children)
+        item["children_nonclosed"] = sum(b.get("status") != "closed" for b in direct_children)
         item["spec_exists"] = bool(linked and (repo / linked).is_file())
         item["spec_same_filename"] = specs_by_name.get(Path(linked).name, []) if linked else []
         flags: list[str] = []
@@ -120,7 +124,7 @@ def inventory(beads: list[dict[str, Any]], repo: Path) -> dict[str, Any]:
                 flags.append("ownership_not_in_snapshot_read_details")
             elif not bead["delegate"]:
                 flags.append("missing_delegate")
-        if descendants and not item["children_nonclosed"]:
+        if direct_children and not item["children_nonclosed"]:
             flags.append("all_children_closed_read_scope")
         item["review_flags"] = flags
         queues["a" if bead_id.rsplit("-", 1)[-1][0] in FIRST_LANE else "b"].append(item)
@@ -311,6 +315,84 @@ def review_coverage(report: dict[str, Any], reviews: list[dict[str, Any]]) -> di
     return {"reviewed": totals, "problems": problems}
 
 
+def branch_only_paths(
+    beads: list[dict[str, Any]], repo: Path, ref: str = "origin/main"
+) -> dict[str, Any]:
+    """Beads whose ``spec_path`` exists in this tree but not at ``ref``.
+
+    A repair applied ahead of the move it follows lands on the shared tracker at once,
+    while the file reaches ``ref`` only when the change merges; until then these beads
+    dangle there, and a declined move leaves them dangling for good.
+    """
+    present: dict[str, bool] = {}
+
+    def on_ref(path: str) -> bool:
+        if path not in present:
+            present[path] = (
+                subprocess.run(
+                    ["git", "-C", str(repo), "cat-file", "-e", f"{ref}:{path}"],
+                    capture_output=True,
+                    check=False,
+                ).returncode
+                == 0
+            )
+        return present[path]
+
+    listed = subprocess.run(
+        ["git", "-C", str(repo), "config", "-f", ".gitmodules", "--get-regexp", "path"],
+        capture_output=True,
+        text=True,
+        check=False,
+    ).stdout
+    submodules = tuple(f"{line.split()[1]}/" for line in listed.splitlines() if line.strip())
+    found = sorted(
+        (str(bead["id"]), str(bead.get("status")), str(bead["spec_path"]))
+        for bead in beads
+        if bead.get("spec_path")
+        and not str(bead["spec_path"]).startswith(submodules)
+        and (repo / str(bead["spec_path"])).is_file()
+        and not on_ref(str(bead["spec_path"]))
+    )
+    by_path: dict[str, int] = {}
+    for _, _, path in found:
+        by_path[path] = by_path.get(path, 0) + 1
+    return {
+        "ref": ref,
+        "beads": len(found),
+        "nonclosed": sum(status != "closed" for _, status, _ in found),
+        "by_path": dict(sorted(by_path.items(), key=lambda item: (-item[1], item[0]))),
+        "items": [{"id": i, "status": st, "spec_path": sp} for i, st, sp in found],
+    }
+
+
+def open_needs_evidence(
+    beads: list[dict[str, Any]], reviews: list[dict[str, Any]], repo: Path
+) -> dict[str, Any]:
+    """Every item a review left at ``needs_evidence`` that is still open, with its question.
+
+    A later review of the same item supersedes an earlier one, so pass the rounds oldest
+    first; an item a later round decided drops out. Beads are open while not closed, and
+    specs while the reviewed file is still in place.
+    """
+    status = {str(bead["id"]): bead.get("status") for bead in beads}
+    latest: dict[tuple[str, str], dict[str, Any]] = {}
+    for review in reviews:
+        for kind, key in (("beads", "id"), ("specs", "path")):
+            for item in review.get(kind, []):
+                latest[(kind, str(item[key]))] = item
+    waiting = [
+        {"kind": kind[:-1], "id": ident, "reason": item.get("reason", "")}
+        for (kind, ident), item in sorted(latest.items())
+        if item.get("action") == "needs_evidence"
+        and (
+            status.get(ident) not in (None, "closed")
+            if kind == "beads"
+            else (repo / ident).is_file()
+        )
+    ]
+    return {"open": len(waiting), "items": waiting}
+
+
 def verify_applied(
     beads: list[dict[str, Any]], reviews: list[dict[str, Any]], repo: Path
 ) -> dict[str, Any]:
@@ -471,6 +553,20 @@ def main() -> None:
         "--baseline", action="store_true", help="emit only the frozen review scope"
     )
     output.add_argument(
+        "--branch-only-paths",
+        nargs="?",
+        const="origin/main",
+        metavar="REF",
+        help="list beads whose spec_path exists here but not at REF (origin/main)",
+    )
+    output.add_argument(
+        "--needs-evidence",
+        type=Path,
+        nargs="+",
+        metavar="REVIEW",
+        help="list items reviews left at needs_evidence that are still open (oldest first)",
+    )
+    output.add_argument(
         "--duplicates",
         type=float,
         nargs="?",
@@ -509,12 +605,27 @@ def main() -> None:
         or args.prior
         or args.verify
         or args.duplicates is not None
+        or args.needs_evidence
+        or args.branch_only_paths
     ):
         parser.error(
-            "--lane, --path-repairs, --baseline, --split, --prior, --verify, and "
-            "--duplicates "
+            "--lane, --path-repairs, --baseline, --split, --prior, --verify, "
+            "--duplicates, --needs-evidence, and --branch-only-paths "
             "require a full tbd list snapshot"
         )
+    if args.branch_only_paths:
+        print(
+            json.dumps(branch_only_paths(snapshot, args.repo, args.branch_only_paths), indent=2)
+        )
+        return
+    if args.needs_evidence:
+        pending = open_needs_evidence(
+            snapshot,
+            [json.loads(path.read_text(encoding="utf-8")) for path in args.needs_evidence],
+            args.repo,
+        )
+        print(json.dumps(pending, indent=2))
+        return
     if args.duplicates is not None:
         found = duplicate_candidates(snapshot, args.duplicates)
         print(json.dumps({"threshold": args.duplicates, "pairs": found}, indent=2))

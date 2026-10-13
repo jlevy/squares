@@ -1438,7 +1438,7 @@ case or experiment separately.
 | [Feature: Research-Loop Efficiency Infrastructure](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md) | implementation plan | current | transient | — |
 | [Overnight Run: Constructive Enumeration Groundwork](docs/project/specs/done/plan-2026-08-26-overnight-constructive-enumeration.md) | implementation plan | record | retained | — |
 | [Plan: The Symbolic Promotion Gap, and What a Complete Atlas Would Need](docs/project/specs/done/plan-2026-08-28-symbolic-promotion-and-the-atlas.md) | implementation plan | record | retained | — |
-| [Feature: The Numeric–Symbolic Round Trip](docs/project/specs/draft/plan-2026-08-28-numeric-symbolic-round-trip.md) | implementation plan | current | transient | — |
+| [Feature: The Numeric–Symbolic Round Trip](docs/project/specs/archive/plan-2026-08-28-numeric-symbolic-round-trip.md) | implementation plan | record | superseded | [Feature: Promotion Pipeline Implementation](docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md) |
 | [Feature: Promotion Pipeline Implementation](docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
 | [Feature: The Interval Certification Bridge](docs/project/specs/done/plan-2026-08-28-interval-certification.md) | implementation plan | record | retained | — |
 | [Feature: Gate Validation Speed](docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md) | implementation plan | record | retained | — |
