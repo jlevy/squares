@@ -5,8 +5,8 @@ title: "W3 insight-iteration: deeper mathematical review of lower-bound routes a
 kind: task
 status: closed
 priority: 1
-version: 9
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 10
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - research
@@ -19,7 +19,7 @@ child_order_hints:
   - is-01m2ystev2e61gwpb593btaf3m
   - is-01m2ystfz73y13b33aepykfhxd
 created_at: 2026-09-20T06:13:22.065Z
-updated_at: 2026-09-20T07:33:02.239Z
+updated_at: 2026-10-13T00:55:35.738Z
 closed_at: 2026-09-20T07:33:02.238Z
 close_reason: "Session 143 complete: X-040 retained, H-222 to H-231 and agenda-040 registered, D-505 and D-506 corrected, hosted fast gate declared on 3dc129e0, PR 204 closeout at 827a566c. The overnight loop continues under think-pogj (Session 144, PR 205), think-89i1, and think-ni3v."
 resolution: null

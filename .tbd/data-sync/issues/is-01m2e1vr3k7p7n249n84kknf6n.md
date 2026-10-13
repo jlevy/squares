@@ -5,13 +5,13 @@ title: "R2/R3: bind retained reader proof copies to checked admission bytes"
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 3
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 parent_id: is-01m2b884n0ms50xp93q6aaps1g
 created_at: 2026-09-13T18:53:18.834Z
-updated_at: 2026-09-13T19:32:21.447Z
+updated_at: 2026-10-13T00:58:00.303Z
 closed_at: 2026-09-13T19:32:21.447Z
 close_reason: Verifier repairs at 0874e912 and 2ea77405 were independently rereviewed on exact source/test blobs. The original six adversarial mutations now refuse, including shared-invalid identity, extra run record, nonzero retained status, stale staged tree, oversized JSON integer, and changed proof copy. The later R3 valid-root/status-race findings have separate accepted repairs. Operational postcommit OID and positive-run evidence remain open under parent gates.
 resolution: null

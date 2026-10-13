@@ -5,15 +5,15 @@ title: Retain or regenerate the sites-1 rows-complete checkpoint at 153/40
 kind: task
 status: closed
 priority: 2
-version: 4
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 5
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - research
 dependencies: []
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
 created_at: 2026-09-17T11:50:13.907Z
-updated_at: 2026-10-06T08:42:37.121Z
+updated_at: 2026-10-13T00:55:35.738Z
 closed_at: 2026-10-06T08:42:37.121Z
 close_reason: "Superseded: the sites-1 checkpoint at 153/40 existed only to feed H-217 (think-gyzw, closed); the retain-or-refuse tool packing/devtools/regenerate_sites1_checkpoint.py is on main. The domain is posed at a side below Kleddamag's verified s(11) > 31/8 = 3.875 (T-037), where T-060 already excludes every packing. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical."
 resolution: canceled

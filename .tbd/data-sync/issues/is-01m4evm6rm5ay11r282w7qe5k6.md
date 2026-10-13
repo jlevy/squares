@@ -5,14 +5,15 @@ title: "n17 BB intake: require complete convex cell enclosure in standalone veri
 kind: bug
 status: open
 priority: 1
-version: 1
+version: 3
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels:
   - n-17
 dependencies: []
 parent_id: is-01m4e47f19w8w1d7tyka9raahk
+hold: paused
 created_at: 2026-10-08T22:54:58.323Z
-updated_at: 2026-10-08T22:54:58.323Z
+updated_at: 2026-10-13T00:55:47.850Z
 ---
 The standalone BB verifier's check_header currently checks equality of the declared
 polygon vertex set with the source-cell hull and positive local turns. A pentagram
@@ -30,3 +31,7 @@ receipts. H318 documents the distinction; Astra's full pinned1d review confirmed
 Source: packing/devtools/verify_n17_bb_certificate.py check_header; new guard and
 regression: packing/devtools/check_n17_bb_header.py and
 packing/tests/test_check_n17_bb_header.py. No new global exclusion or admission.
+
+## Notes
+
+2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. Convex-cell enclosure repair in the standalone n17 BB verifier: an n17 instrument whose only consumer is the suspended census route.

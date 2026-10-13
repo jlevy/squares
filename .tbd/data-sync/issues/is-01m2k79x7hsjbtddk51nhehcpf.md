@@ -5,15 +5,15 @@ title: Discharge Route S admission guards and certify PR 182
 kind: task
 status: closed
 priority: 0
-version: 3
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 4
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 parent_id: is-01m2gt509a6wa4kqwbxjrq6exd
 child_order_hints:
   - is-01m2k9tx5ydxdk8ty7vj0mk728
 created_at: 2026-09-15T19:04:37.872Z
-updated_at: 2026-09-15T19:56:59.288Z
+updated_at: 2026-10-13T00:56:06.154Z
 closed_at: 2026-09-15T19:56:59.286Z
 close_reason: Session 135 discharged all four Route S admission guards, repaired the source-distinct symlink finding, and received a zero-finding ADMIT verdict; 63 focused tests, retained receipt replay, records checks, Ruff, and BasedPyright pass. Exact-head certification and merge continue under think-so4g; no scientific target ran.
 resolution: null

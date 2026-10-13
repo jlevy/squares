@@ -3,9 +3,9 @@ type: is
 id: is-01m4mdnpf7raye5cx00cmdfb55
 title: "PR #496 (merge): fix: bound publication audits and scope local push checks"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -15,8 +15,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T02:46:33.702Z
-updated_at: 2026-10-12T23:40:48.006Z
+updated_at: 2026-10-13T00:54:44.586Z
 started_at: 2026-10-11T02:46:34.643Z
+closed_at: 2026-10-13T00:54:44.585Z
+close_reason: "Completed: PR #496 merged (8aba95081, 2026-10-11) and its review fixes merged in PR #507 (e96e9ea95); both children closed."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

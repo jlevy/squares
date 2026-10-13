@@ -5,8 +5,8 @@ title: Independently review and retain the seven-mark routing reduction
 kind: task
 status: closed
 priority: 1
-version: 10
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 11
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max source-distinct mathematical review; root integration
 labels:
   - n11
@@ -23,7 +23,7 @@ parent_id: is-01m2agbyn3sd63v0j87jer8vz0
 child_order_hints:
   - is-01m2b6e31t8fythx5adg7487g1
 created_at: 2026-09-12T15:49:31.564Z
-updated_at: 2026-09-12T16:41:50.996Z
+updated_at: 2026-10-13T00:57:04.604Z
 closed_at: 2026-09-12T16:41:50.995Z
 close_reason: Source-distinct Astra Max review accepted the corrected first-principles analysis; durable report, review, plan/X-028/idea-board integration, and maintained checker are published at 39714308 with green hosted CI. No scientific target ran and the proposed surplus tests remain separate.
 resolution: null

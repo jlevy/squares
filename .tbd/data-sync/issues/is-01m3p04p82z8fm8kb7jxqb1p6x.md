@@ -3,9 +3,9 @@ type: is
 id: is-01m3p04p82z8fm8kb7jxqb1p6x
 title: Replay wand125 general pose tree n11 row claim independently
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 9
+version: 10
 labels: []
 dependencies: []
 parent_id: is-01m3nzy6gqfv60whzzvww0ffa0
@@ -14,7 +14,11 @@ child_order_hints:
   - is-01m3q3346jb4mfsg5c35w99eyw
   - is-01m3q334jhatak7q9xkaey3pdd
 created_at: 2026-09-29T07:12:51.969Z
-updated_at: 2026-09-29T23:13:04.671Z
+updated_at: 2026-10-13T00:54:36.421Z
+closed_at: 2026-10-13T00:54:36.421Z
+close_reason: "Canceled: obsolete under the owner decision of 2026-10-13. The replay served n = 11 lower-bound evidence (T-059 inside T-037), which T-060 subsumes. T-059 keeps its registered rung."
+resolution: canceled
+duplicate_of: null
 ---
 T-059 remains the source-reported equality of all 12,028 n11 minima. Three fresh production-bound rows match, with independent exact witness attainment; 12,025 remain. Remaining work: audit the full branch/enclosure/measure contract, complete the unique census replay and compare every exact output. The identical certificate already has T-037 V4/C4 native threshold coverage and global counting, D4, enclosure and budget evidence; think-4t1e closed after reconciling all 19 frozen proof inputs. That prior proof need not reproduce exact per-row minima and does not settle T-059.
 

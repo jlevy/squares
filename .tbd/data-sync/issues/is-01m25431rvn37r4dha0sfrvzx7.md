@@ -5,13 +5,13 @@ title: Refresh inherited research orientation and H151 result wording
 kind: task
 status: open
 priority: 2
-version: 7
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 8
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 parent_id: is-01m0n6nyzx5pnark7xve1dy52x
 created_at: 2026-09-10T07:39:05.370Z
-updated_at: 2026-10-06T08:34:44.762Z
+updated_at: 2026-10-13T00:55:22.623Z
 ---
 On the new post-PR139 branch, correct two scoped prose drifts without changing historical measurements: packing/campaign/ideas.md orientation still states the old bracket [3.81,3.877084] and stale Trump algebraic status; use current T026 and T011 source evidence. H151 frontmatter records exp153 but its body still says no target has run; reconcile current status while retaining the exact fixed-D, selected-tuple, finite-prefix and domain scope. Apply Practical Prose and generated registry checks. Do not edit the frozen PR139 source during its final checkpoint.
 

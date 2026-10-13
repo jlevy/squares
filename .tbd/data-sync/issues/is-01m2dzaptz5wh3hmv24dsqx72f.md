@@ -5,8 +5,8 @@ title: "Coordinator: bound disjoint phase durations by worker lifetime"
 kind: bug
 status: closed
 priority: 1
-version: 6
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 7
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - calibration
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-13T18:09:03.326Z
-updated_at: 2026-09-13T19:34:28.787Z
+updated_at: 2026-10-13T00:57:35.822Z
 closed_at: 2026-09-13T19:34:28.776Z
 close_reason: Disjoint worker phase sums and finite overflow now refuse against worker elapsed at integrated repair 775c71d5; independently accepted exact-head with finite near-limit controls. Later operational admission remains parent gate.
 resolution: null

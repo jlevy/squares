@@ -5,8 +5,8 @@ title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: open
 priority: 1
-version: 56
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 59
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 child_order_hints:
@@ -43,8 +43,9 @@ child_order_hints:
   - is-01m2exznj4k1zyz1rczby8ch2k
   - is-01m2mm43z5rhrhwg1ac775r1sc
   - is-01m2mmq0d31xcfva6p0nspxv9n
+hold: paused
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-10-06T10:12:08.115Z
+updated_at: 2026-10-13T00:55:38.221Z
 closed_at: null
 close_reason: null
 resolution: null
@@ -87,3 +88,5 @@ think-i1fr and the native-usage publication restriction.
 ## Notes
 
 2026-10-06: reopened after the relevance review closed it. Session records name this bead in certification_pending (think-ta8s: sessions 123 and 124; think-gvlg: session 151), and the terminal-session gate requires that bead to be open. It stays open until those sessions are certified or their records name another owner.
+
+2026-10-13 owner decision: s(11) is settled by T-060. The n = 11 research these daytime blocks pursued is obsolete and no block resumes. The bead stays open only because Session 151's certification_pending names it. Close it once that session is certified or its record names another owner. Plan archived to docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md.

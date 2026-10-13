@@ -5,8 +5,8 @@ title: Bind all 362 BC303 source-chart identities in the fixed-Q0 residual reade
 kind: task
 status: closed
 priority: 1
-version: 8
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 10
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - instrument
@@ -19,7 +19,7 @@ dependencies:
     target: is-01m2evtj8b39d0g113mrx7zf8c
 parent_id: is-01m2eray9ae7g38emjwcedm49j
 created_at: 2026-09-14T02:04:33.461Z
-updated_at: 2026-09-14T02:27:03.048Z
+updated_at: 2026-10-13T00:58:38.513Z
 closed_at: 2026-09-14T02:24:06.223Z
 close_reason: Committed full 362-chart Q0 manifest at ae4477ae and narrowed source trust boundary to consumed BC293/adaptive/model inputs at 112cee30; focused tests, Ruff, and BasedPyright pass.
 resolution: null

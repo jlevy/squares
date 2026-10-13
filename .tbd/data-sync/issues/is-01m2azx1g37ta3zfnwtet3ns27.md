@@ -5,8 +5,8 @@ title: Correct stale n=11 evidence and inference wording after BC329 review
 kind: bug
 status: closed
 priority: 1
-version: 9
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 10
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol high documentation implementation; Astra mathematical source audit
 labels:
   - n11
@@ -21,7 +21,7 @@ child_order_hints:
   - is-01m2b2q8mp4tfb868n573e18s4
   - is-01m2b57qwj2tw7a39f70tfb35w
 created_at: 2026-09-12T14:21:20.764Z
-updated_at: 2026-09-12T16:05:46.378Z
+updated_at: 2026-10-13T00:55:37.863Z
 closed_at: 2026-09-12T16:05:46.377Z
 close_reason: "Reviewed n11 evidence corrections and stack-status reconciliation are published on PR #156 at f1e397cd; edit validation and every hosted check pass, with no BC329 target run."
 resolution: null

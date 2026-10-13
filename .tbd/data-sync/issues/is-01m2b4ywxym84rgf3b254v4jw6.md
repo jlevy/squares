@@ -5,8 +5,8 @@ title: Test adjacent and opposite forced-type BC303 pair surplus inequalities
 kind: task
 status: closed
 priority: 1
-version: 17
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 18
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max mathematics; Sol implementation only after mathematical preregistration
 labels:
   - n11
@@ -25,7 +25,7 @@ child_order_hints:
   - is-01m2em2x6rf1he27b64856ny7z
   - is-01m2en6gnjfkpbgtrp2mn1xz9e
 created_at: 2026-09-12T15:49:44.509Z
-updated_at: 2026-10-06T08:38:27.842Z
+updated_at: 2026-10-13T00:57:06.374Z
 closed_at: 2026-10-06T08:38:27.842Z
 close_reason: "Superseded: the adjacent/opposite forced-type BC303 pair surplus test at 96/25; children closed. The domain is posed at a side below Kleddamag's verified s(11) > 31/8 = 3.875 (T-037), where T-060 already excludes every packing. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical."
 resolution: canceled

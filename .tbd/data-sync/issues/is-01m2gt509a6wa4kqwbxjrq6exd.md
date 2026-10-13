@@ -5,8 +5,8 @@ title: "Route S: admit sparse T-025 orbit compression"
 kind: task
 status: closed
 priority: 0
-version: 9
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 10
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - research
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-14T20:36:16.810Z
-updated_at: 2026-09-16T07:25:59.204Z
+updated_at: 2026-10-13T00:55:35.738Z
 closed_at: 2026-09-16T07:25:17.875Z
 close_reason: "PR #182 merged at 1d9c49c4 after independent exact-head review, 59 focused Route S tests, complete records validation, and green hosted fast/Pages checks. The target-blind instrument is admitted; H-163 remains open and untested, exp-161 remains unallocated, and no scientific target ran."
 resolution: null
