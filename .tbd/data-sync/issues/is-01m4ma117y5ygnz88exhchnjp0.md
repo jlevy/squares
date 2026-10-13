@@ -5,7 +5,7 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-13T09:22:38.248Z
+updated_at: 2026-10-13T10:25:35.501Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -38,81 +38,67 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 
 ## Current published checkpoint, October 13
 
-Formal stack 447 remains main → PR403 → PR435. Both are open DRAFT checkpoints,
-published and read back at parent `3ee60c3e5157a82c0e9b5a48e54fc6c1f57539f5` and child
-`3d347b32c0d35bdb871f24aeb5494914960529ba`, integrating fetched main
-`34c826f08fc75dc51eb8d6f72c04b0f74b0c4ffb`. Native stack rebasing resolved the old
-merge-check refusal and navigation conflicts, retaining upstream completed-plan paths,
-current titles, measured gate costs and the 110-step counts.
-Both data pins and four focused release controls pass; synopsis and document-map checks
-pass. Science and source-custody bytes are unchanged; only two upstream atlas/cases
-README navigation links differ.
+Formal stack 447: main → PR403 → PR435, open DRAFT and unmerged.
+Exact remote heads are parent `3ee60c3e5157a82c0e9b5a48e54fc6c1f57539f5` and child
+`9382f9154d0a954a4677598b52746ece2974b065`, integrating fetched main
+`34c826f08fc75dc51eb8d6f72c04b0f74b0c4ffb`. All completed source work is committed,
+pushed and captured on both PRs.
+Scientific data and custody are unchanged; parent 437 records / 320 exact, child 621 /
+321 exact, public 337. All 49 current native bindings are V3/C3. The polynomial report
+remains HTML/Markdown only, with no PDF. Existing numeric, ordinal, geometry/Lean,
+contact and owner scopes below remain open.
 
-Parent: 437 records = 324 current + 113 historical; 320 exact identities.
-Child: 621 = 324 current + 297 historical; 321 exact identities, public 337 vectors and
-2,096 strings. Current native custody: 49 V3/C3. Historical: 89 occurrences, 86 replayed
-V3/C3 and three source-reported V0/C0. All n=83 coefficients survive; ordinal 27 is
-independently uncounted.
-Numeric n=29/55/71 and reported n=106/152/177 geometry/Lean remain open.
-The report is HTML/Markdown only: no polynomial PDF.
+Disk cleanup complete: six expanded fixtures and Lean build removed after complete
+verified PAX archival and fresh activity checks.
+Allocated footprint: 6,244,765,696 B expanded → 2,255,253,504 B archives plus 17,903,616
+B manifests. Additional inactive Cargo/web/signature leaves total 1,161,801,728 B
+removed; observed external gain during those deletion steps was about 1.06 GB, subject
+to APFS sharing and concurrent writers.
+Current failures, all unique source/research, active environments/caches, dirty reviews,
+current/rollback runtimes and pending app update are preserved.
+Lean bytes are retained because 3,520 source paths had uncertain recovery.
+Darwin temp audit is partial.
 
-All seven maintained web commands pass at the published child, reusing the current small
-site.
-Startup is 248,861/3,212,387 bytes (7.7469184%, below 10%); all vectors and strings
-compare exactly, and eight responsive views, scripts and partial consumers pass.
-Prior scoped repairs include 210 builder cases, 35 structure/focus controls, 14
-facts/forwarder controls, 27 selector controls and 2,026 document checks.
-The initial 51/52 records run and repaired formatter step are separate receipts.
-The latest local parent push passed 66 prerequisites then hit the unchanged 1,800 s
-reachable deadline (1,801.05 s total); its concrete attribution refusal is repaired.
-No replacement-head terminal local push/full pass is claimed.
+Final Git audit: 58 union commits / 575 paths; thin 5,978,268 B, non-thin 8,216,941 B;
+maximum novel historical blob 2,629,925 B. The five-file fix adds only 3,736 thin-pack
+bytes.
+All other objects, science, prior archives and data pin equal preceding 3d. No new
+PDF/full HTML, no history rewrite needed.
+Pack cost is not disk allocation.
 
-Ordinary hosted checks are running; the child exact-side-values job has a new failure
-under investigation.
-Full hosted checkpoints were dispatched once on verified heads: parent
-https://github.com/jlevy/squares/actions/runs/38375099262 and child
-https://github.com/jlevy/squares/actions/runs/38375108249. Record terminal results and
-repair concrete findings before merge-ready review.
-Leave this synchronization bead in progress; no landing is authorized.
+Final correction passes 43 workflow, 28 selection, five native renderer and one
+quote-association controls, with zero static findings.
+All 68 local pre-push prerequisites pass, but the 591-test-file reachable command times
+out at its unchanged 900 s limit (1,023.51 s total).
+No completed normal/pool pass is inferred.
+Parent ordinary checks are green; full 38375099262 FAILED: eleven separate jobs pass,
+core 95 steps / 2,827.84 s and aggregate fail fifteen full 12 s call guards across four
+shards, with no assertion traceback in that classification.
+No host cause or full pass is inferred.
+Slow lane: 227 pass / 1,091.04 s, physical custody-copy call 21.41 s. Child 9382
+ordinary: Pages and merge pass; frontend fails one drawing-width assertion (fetched 320
+px versus direct 288 ±1, light 1280). Frontend 471 pass / one failure / six skips,
+340.21 s. Bounded restore/layout-readiness review is active, preserving assertions.
+Full child 38381750627 runs on exact 9382; terminal outcome pending.
+No landing verdict.
 
-Disk cleanup is complete for verified inactive candidates.
-Six expanded fixture roots and the Lean build were removed after complete byte-verified
-PAX archival and fresh activity/worktree checks.
-The 6,244,765,696 B expanded allocation survives as 2,255,253,504 B archives plus
-17,903,616 B compressed manifests.
-The already-absent scratch pytest-14 is not credited.
-Two inactive Cargo leaves (1,111,617,536 B), five old web builds (44,392,448 B) and 13
-obsolete signatures (5,791,744 B) were removed under the user’s explicit rm
-authorization. Latest external deletions coincided with about 1.06 GB more available
-space; APFS sharing and other writers prevent exclusive attribution.
-A later df showed 18,115,316 KiB external and 13,320,684 KiB internal available,
-including independent changes.
-Preserve active caches/environments, current failures, unique source/research, dirty
-review checkouts, current/rollback runtimes and the pending app update.
-Full Lean bytes remain because 3,520 source paths had uncertain recovery.
-The Darwin-temp audit is partial: 46 permission-denied paths.
-
-Current-head Git audit: union 57 commits / 575 paths, streamed thin 5,974,532 B and
-non-thin 8,213,530 B; largest novel historical blob 2,629,925 B. Full main history is
-excluded. No new PDF or full generated HTML; layer packs are non-additive and do not
-measure disk allocation.
-No history cleanup is indicated.
-The current 44-bead snapshot has 17 open, 23 in progress, four closed and no holds.
-kkj2/lhtz were consolidated by owners into fvz4; iyij/88r0 closed their import scopes.
-Old pending counts are dated, not a remaining database-update count.
-Selected research entry remains W7’s exporter and an independent contact-derived n=11
+Next engineering entry: close the exact frontend readiness finding and record hosted
+outcomes; investigate parent call guards/local timeout under w0if/ht59 without raised
+caps. Selected research entry remains W7 exporter and independent contact-derived n=11
 control before the bounded adopted-current n=102 slice.
-Preserve scientific owners.
+Leave this bead in progress.
 
-Evidence:
+Evidence root:
 /Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635.
-Key receipts: admin/main34-checkpoint-size-audit/final-release-summary.json;
-validation/main34-document-qualification/;
-data/child-main34-checkpoint-web-receipt.json; admin/archive-slice-final-receipt.json;
-admin/archive-manifest-compaction-summary.json; admin/disk-followup-reclamation.json;
-admin/old-web-build-reclamation.json; admin/remaining-beads-current-source.json and its
-reconciliation report.
-Handoff: docs/project/handoffs/handoff-2026-10-10-polynomial-pr-stack.md.
+Current receipts: admin/main34-final-correction-size-audit/;
+validation/main34-parent-hosted-checkpoint/;
+validation/main34-child9382-hosted-checkpoint/;
+validation/child-main34-final-incremental-push.log;
+admin/archive-slice-final-receipt.json; admin/archive-manifest-compaction-summary.json;
+admin/disk-followup-reclamation.json; admin/old-web-build-reclamation.json;
+admin/remaining-beads-current-source.json.
+Prior checkpoint: admin/bead-before-final9382-status.json.
+Source handoff: docs/project/handoffs/handoff-2026-10-10-polynomial-pr-stack.md.
 
 --- Earlier dated checkpoints and unique evidence ---
 
