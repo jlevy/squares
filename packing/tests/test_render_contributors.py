@@ -281,6 +281,7 @@ def test_legacy_profile_forwarders_are_the_fixed_preview_set() -> None:
     assert len(legacy) == 20
     assert set(legacy.values()) <= records
     assert legacy["kleddamag"] == "marc-leonard-overbeck"
+    assert legacy["wand125"] == "hiroaki-hosono"
     moved = dict(render_overview.MOVED_PAGES)
     assert moved["contributors/index.html"] == "profiles/index.html"
     for old, new in legacy.items():

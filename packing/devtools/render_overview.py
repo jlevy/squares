@@ -415,8 +415,8 @@ LEGACY_PROFILES_DIR = "contributors"
 
 #: The profiles the reviewed preview served under `LEGACY_PROFILES_DIR` before the move,
 #: by their id there, each with the id of the record it forwards to. The set is fixed: a
-#: profile added since has only its `profiles/` address, and `kleddamag` forwards to the
-#: record that credits Marc Leonard Overbeck by name.
+#: profile added since has only its `profiles/` address, and `kleddamag` and `wand125`
+#: forward to the records that credit Marc Leonard Overbeck and Hiroaki Hosono by name.
 LEGACY_PROFILES: dict[str, str] = {
     **{
         identifier: identifier
@@ -438,11 +438,11 @@ LEGACY_PROFILES: dict[str, str] = {
             "tokoharu",
             "walter-stromquist",
             "walter-trump",
-            "wand125",
             "wolfram-bentz",
         )
     },
     "kleddamag": "marc-leonard-overbeck",
+    "wand125": "hiroaki-hosono",
 }
 
 #: Every page the published site serves, by path under the site root, whichever build

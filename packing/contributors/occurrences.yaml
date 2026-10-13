@@ -160,7 +160,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed 11SquaresFormalized 2026]'
@@ -263,7 +263,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 tools 2026]'
@@ -276,7 +276,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 tools 2026]'
@@ -1930,7 +1930,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Tokoharu density 2026]'
@@ -1995,7 +1995,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 point bounds 2026]'
@@ -2008,7 +2008,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 point bounds 2026]'
@@ -2086,7 +2086,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 rectangle bounds 2026]'
@@ -2099,7 +2099,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 rectangle bounds 2026]'
@@ -2190,7 +2190,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 rectangle bounds 2026-09-28]'
@@ -2203,7 +2203,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 rectangle bounds 2026-09-28]'
@@ -2294,7 +2294,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 point and mixed bounds 2026-09-28]'
@@ -2308,7 +2308,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 point and mixed bounds 2026-09-28]'
@@ -2419,7 +2419,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 rectangle bounds 2026-10-01]'
@@ -2432,7 +2432,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 rectangle bounds 2026-10-01]'
@@ -2523,7 +2523,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 exact covers 2026-10-01]'
@@ -2536,7 +2536,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 exact covers 2026-10-01]'
@@ -2627,7 +2627,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds 2026-10-01]'
@@ -2640,7 +2640,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds 2026-10-01]'
@@ -2731,7 +2731,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds 2026-10-02]'
@@ -2744,7 +2744,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds 2026-10-02]'
@@ -2835,7 +2835,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds n76 2026-10-02]'
@@ -2848,7 +2848,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds n76 2026-10-02]'
@@ -2939,7 +2939,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 point n61 2026-09-30]'
@@ -2952,7 +2952,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 point n61 2026-09-30]'
@@ -3043,7 +3043,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 linear certificates 2026-10-02]'
@@ -3056,7 +3056,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 linear certificates 2026-10-02]'
@@ -3147,7 +3147,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 valid7 independent check 2026-10-02]'
@@ -3160,7 +3160,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 valid7 independent check 2026-10-02]'
@@ -3186,7 +3186,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 valid7 independent check 2026-10-03]'
@@ -3199,7 +3199,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 valid7 independent check 2026-10-03]'
@@ -3225,7 +3225,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 valid7 independent check 2026-10-06]'
@@ -3238,7 +3238,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 valid7 independent check 2026-10-06]'
@@ -3264,7 +3264,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 Green DS7 Theorem 9 2026-10-02]'
@@ -3277,7 +3277,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 Green DS7 Theorem 9 2026-10-02]'
@@ -3315,7 +3315,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds afternoon 2026-10-02]'
@@ -3328,7 +3328,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds afternoon 2026-10-02]'
@@ -3419,7 +3419,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 linear n82 2026-10-02]'
@@ -3432,7 +3432,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 linear n82 2026-10-02]'
@@ -3523,7 +3523,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 rectangle bounds 2026-10-02]'
@@ -3536,7 +3536,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 rectangle bounds 2026-10-02]'
@@ -3627,7 +3627,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds 2026-10-03]'
@@ -3640,7 +3640,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds 2026-10-03]'
@@ -3731,7 +3731,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds 2026-10-04]'
@@ -3744,7 +3744,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds 2026-10-04]'
@@ -3835,7 +3835,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds evening 2026-10-04]'
@@ -3848,7 +3848,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds evening 2026-10-04]'
@@ -3939,7 +3939,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 record updates 2026-10-04]'
@@ -3953,7 +3953,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 record updates 2026-10-04]'
@@ -4064,7 +4064,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds 2026-10-05]'
@@ -4077,7 +4077,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds 2026-10-05]'
@@ -4168,7 +4168,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds finer net 2026-10-05]'
@@ -4181,7 +4181,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds finer net 2026-10-05]'
@@ -4272,7 +4272,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds finer net 2026-10-06]'
@@ -4285,7 +4285,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds finer net 2026-10-06]'
@@ -4376,7 +4376,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds check2 2026-10-06]'
@@ -4389,7 +4389,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 mixed bounds check2 2026-10-06]'
@@ -5377,7 +5377,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 fine-net lower bounds 2026-10-08]'
@@ -5390,7 +5390,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 fine-net lower bounds 2026-10-08]'
@@ -5923,7 +5923,7 @@ occurrences:
   disposition: resolved
   evidence: &id002
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 116 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -5936,7 +5936,7 @@ occurrences:
   role: credited-contributor
   disposition: resolved
   evidence: *id002
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 116 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6004,7 +6004,7 @@ occurrences:
   role: prerequisite
   disposition: resolved
   evidence: *id002
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 116 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6846,7 +6846,7 @@ occurrences:
   role: source-author
   disposition: resolved
   evidence: *id002
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 116 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6859,7 +6859,7 @@ occurrences:
   role: credited-contributor
   disposition: resolved
   evidence: *id002
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 116 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6898,7 +6898,7 @@ occurrences:
   role: source-author
   disposition: resolved
   evidence: *id002
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 116 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6911,7 +6911,7 @@ occurrences:
   role: credited-contributor
   disposition: resolved
   evidence: *id002
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 116 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -7029,7 +7029,7 @@ occurrences:
   role: prerequisite
   disposition: resolved
   evidence: *id002
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 116 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -7133,7 +7133,7 @@ occurrences:
   role: prerequisite
   disposition: resolved
   evidence: *id002
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 116 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
@@ -8376,7 +8376,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-019.md
     record_key: '19'
@@ -8401,7 +8401,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-020.md
     record_key: '20'
@@ -8414,7 +8414,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-021.md
     record_key: '21'
@@ -8531,7 +8531,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-027.md
     record_key: '27'
@@ -8556,7 +8556,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-028.md
     record_key: '28'
@@ -8583,7 +8583,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-029.md
     record_key: '29'
@@ -8622,7 +8622,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-030.md
     record_key: '30'
@@ -8635,7 +8635,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-031.md
     record_key: '31'
@@ -8648,7 +8648,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-032.md
     record_key: '32'
@@ -8764,7 +8764,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-038.md
     record_key: '38'
@@ -8789,7 +8789,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-039.md
     record_key: '39'
@@ -8814,7 +8814,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-040.md
     record_key: '40'
@@ -8864,7 +8864,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-042.md
     record_key: '42'
@@ -8877,7 +8877,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-043.md
     record_key: '43'
@@ -8890,7 +8890,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-044.md
     record_key: '44'
@@ -8903,7 +8903,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-045.md
     record_key: '45'
@@ -8993,7 +8993,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-051.md
     record_key: '51'
@@ -9018,7 +9018,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-052.md
     record_key: '52'
@@ -9043,7 +9043,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-053.md
     record_key: '53'
@@ -9094,7 +9094,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-054.md
     record_key: '54'
@@ -9131,7 +9131,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-055.md
     record_key: '55'
@@ -9170,7 +9170,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-056.md
     record_key: '56'
@@ -9183,7 +9183,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-057.md
     record_key: '57'
@@ -9196,7 +9196,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-058.md
     record_key: '58'
@@ -9209,7 +9209,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-059.md
     record_key: '59'
@@ -9222,7 +9222,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-060.md
     record_key: '60'
@@ -9299,7 +9299,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-066.md
     record_key: '66'
@@ -9324,7 +9324,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-067.md
     record_key: '67'
@@ -9349,7 +9349,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-068.md
     record_key: '68'
@@ -9387,7 +9387,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-069.md
     record_key: '69'
@@ -9450,7 +9450,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-070.md
     record_key: '70'
@@ -9475,7 +9475,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-070.md
     record_key: '70'
@@ -9514,7 +9514,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-072.md
     record_key: '72'
@@ -9527,7 +9527,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-073.md
     record_key: '73'
@@ -9540,7 +9540,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-074.md
     record_key: '74'
@@ -9553,7 +9553,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-075.md
     record_key: '75'
@@ -9566,7 +9566,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-076.md
     record_key: '76'
@@ -9579,7 +9579,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-077.md
     record_key: '77'
@@ -9592,7 +9592,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-078.md
     record_key: '78'
@@ -9656,7 +9656,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-083.md
     record_key: '83'
@@ -9719,7 +9719,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-084.md
     record_key: '84'
@@ -9744,7 +9744,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-084.md
     record_key: '84'
@@ -9784,7 +9784,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-086.md
     record_key: '86'
@@ -9809,7 +9809,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-086.md
     record_key: '86'
@@ -9887,7 +9887,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-088.md
     record_key: '88'
@@ -9924,7 +9924,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-089.md
     record_key: '89'
@@ -9949,7 +9949,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-090.md
     record_key: '90'
@@ -9962,7 +9962,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-091.md
     record_key: '91'
@@ -9975,7 +9975,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-092.md
     record_key: '92'
@@ -9988,7 +9988,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-093.md
     record_key: '93'
@@ -10001,7 +10001,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-094.md
     record_key: '94'
@@ -10014,7 +10014,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-095.md
     record_key: '95'
@@ -10027,7 +10027,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-096.md
     record_key: '96'
@@ -10092,7 +10092,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-102.md
     record_key: '102'
@@ -10117,7 +10117,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-102.md
     record_key: '102'
@@ -10155,7 +10155,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-103.md
     record_key: '103'
@@ -10193,7 +10193,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-105.md
     record_key: '105'
@@ -10218,7 +10218,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: wand125
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-105.md
     record_key: '105'

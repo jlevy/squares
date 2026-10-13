@@ -6193,18 +6193,19 @@ urls:
       canonical: contributors/walter-trump.html
       target: ''
 - path: contributors/wand125.html
-  canonical: profiles/wand125.html
+  canonical: profiles/hiroaki-hosono.html
   kind: forwarder
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
   lastmod: '2026-10-13'
   status: forwarded
-  target: profiles/wand125.html
+  target: profiles/hiroaki-hosono.html
   amendments:
   - date: '2026-10-13'
     reason: Profiles moved to profiles/ so the directory can list cited paper authors without calling
-      them contributors (think-0v2c); this address forwards there.
+      them contributors (think-0v2c), and this profile's record became hiroaki-hosono when it took
+      his name; this address forwards there.
     previous:
       kind: page
       canonical: contributors/wand125.html
@@ -6555,6 +6556,14 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-13'
   status: live
+- path: profiles/hiroaki-hosono.html
+  canonical: profiles/hiroaki-hosono.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
 - path: profiles/hiroshi-nagamochi.html
   canonical: profiles/hiroshi-nagamochi.html
   kind: page
@@ -6677,14 +6686,6 @@ urls:
   status: live
 - path: profiles/walter-trump.html
   canonical: profiles/walter-trump.html
-  kind: page
-  generator: devtools.render_contributors:contributor_pages
-  producer: overview
-  first_published: '2026-10-13'
-  lastmod: '2026-10-13'
-  status: live
-- path: profiles/wand125.html
-  canonical: profiles/wand125.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview

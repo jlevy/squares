@@ -758,7 +758,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | contributors/tokoharu.html | profiles/tokoharu.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/tokoharu.html |
 | contributors/walter-stromquist.html | profiles/walter-stromquist.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/walter-stromquist.html |
 | contributors/walter-trump.html | profiles/walter-trump.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/walter-trump.html |
-| contributors/wand125.html | profiles/wand125.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/wand125.html |
+| contributors/wand125.html | profiles/hiroaki-hosono.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/hiroaki-hosono.html |
 | contributors/wolfram-bentz.html | profiles/wolfram-bentz.html | forwarder | overview | 2026-10-10 | 2026-10-13 | forwarded → profiles/wolfram-bentz.html |
 | conventions.html | conventions.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | defects.html | https://github.com/jlevy/squares/blob/main/defects.md | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → https://github.com/jlevy/squares/blob/main/defects.md |
@@ -800,6 +800,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/francisco-couzo.html | profiles/francisco-couzo.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/gustavo-massaccesi.html | profiles/gustavo-massaccesi.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/guzhou0806.html | profiles/guzhou0806.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/hiroaki-hosono.html | profiles/hiroaki-hosono.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/hiroshi-nagamochi.html | profiles/hiroshi-nagamochi.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/index.html | profiles/ | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/john-bidwell.html | profiles/john-bidwell.html | page | overview | 2026-10-13 | 2026-10-13 | live |
@@ -816,7 +817,6 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/tokoharu.html | profiles/tokoharu.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/walter-stromquist.html | profiles/walter-stromquist.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/walter-trump.html | profiles/walter-trump.html | page | overview | 2026-10-13 | 2026-10-13 | live |
-| profiles/wand125.html | profiles/wand125.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/wolfram-bentz.html | profiles/wolfram-bentz.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | readme.html | readme.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | result/t-001.html | result/t-001.html | result | overview | 2026-08-31 | 2026-08-31 | live |
