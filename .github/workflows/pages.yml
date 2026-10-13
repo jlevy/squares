@@ -160,6 +160,7 @@ name: Certificate page
       - README.md
       - SYNOPSIS.md
       - conventions.md
+      - attribution.md
       - development.md
       - LICENSE
       - packing/devtools/templates/fonts/**

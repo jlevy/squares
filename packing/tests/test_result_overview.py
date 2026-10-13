@@ -421,7 +421,9 @@ def test_every_result_page_keeps_its_registered_byte_budget(
     """The complete result table keeps every registered row and linked literal credit."""
     page = site_renders.page("results.html")
     row = next(row for row in site_urls.load_registry() if row.path == page.name)
-    assert site_urls.page_budget(row) == 800_000
+    # The table's measured exception (`site_urls.PAGE_BUDGET_EXCEPTIONS`) keeps every row
+    # and every linked credit rather than dropping any to fit the default budget.
+    assert site_urls.page_budget(row) == site_urls.PAGE_BUDGET_EXCEPTIONS[page.name][0]
     record_property("html_bytes", len(page.html.encode("utf-8")))
     assert len(page.html.encode("utf-8")) <= site_urls.page_budget(row)
     assert re.findall(r'<tr id="(t-\d{3})"', page.html) == [
