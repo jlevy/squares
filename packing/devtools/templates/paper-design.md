@@ -2,7 +2,7 @@
 
 This is the one description of how every page of the site looks: the explainer, the
 overview, Atlas, About, case and result records, Frontier, papers, tutorial, Visualize,
-and the contributor directory and profiles.
+and the profile directory and person profiles.
 Each stylesheet implements what is written here and points back to it; when a page needs
 something new, it is added here first and then to the stylesheet that owns it.
 
@@ -15,7 +15,7 @@ text tokens shared by all:
 | Text | [paper-type.css](paper-type.css) | The type base, reading measure, heading scale, role scales and pinned faces every page shares |
 | Paper | [paper-publication.css](paper-publication.css) | The publication layer every paper shares: figures, panels, components and print rules |
 | Site | [site.css](site.css), [site-nav.css](site-nav.css) | Site pages and the navigation bar every page carries, the explainer and the workbench included |
-| Site components | [site-result.css](site-result.css), [site-contributor.css](site-contributor.css) | Result articles and contributor profiles, using the shared text and overlay roles |
+| Site components | [site-result.css](site-result.css), [site-contributor.css](site-contributor.css) | Result articles and person profiles, using the shared text and overlay roles |
 
 The paper and site layers read the same values from `paper-type.css`, under their own
 prefixes, `--cert-` and `--site-`, so a site page and the explainer set a role at the
@@ -267,7 +267,7 @@ the tutorial, the readme and the homepage, identical on all four where the role 
 
 h3 and h4 keep KPress’s own step up at a 64rem pane.
 Every published page H1 uses the shared upright sans-serif, all-caps title treatment,
-including Markdown reports, contributor directories and profiles.
+including Markdown reports, the profile directory and profiles.
 The explainer retains its publication title size (28.5px); mathematical notation
 preserves its case and face.
 The homepage sets its summary lists and tables a step smaller, in `site.css`.
@@ -695,7 +695,7 @@ the rule that reads it.
 
 ## Article Pages and Overlays
 
-Case records, result records and contributor profiles are complete HTML pages.
+Case records, result records and person profiles are complete HTML pages.
 Their addresses carry the site’s navigation, colophon, shared styles, prepared
 mathematics where needed, and metadata.
 An ordinary link reaches the complete record with scripts disabled, from a local file,
@@ -707,8 +707,8 @@ come from its complete page.
 | --- | --- | --- | --- |
 | Case record | `cases/N.html` | Case link, index entry or neighboring-record link | `a[data-case]`, atlas tiles and frontier rows load `article.site-case` in the shared case panel |
 | Result record | `result/t-nnn.html` | Result ID link or **Open Result Record** | Pressing the rest of a result row loads `article.site-result[data-result-overview]` in that row’s panel |
-| Contributor profile | `contributors/ID.html` | Public-name link or **Open profile** | An unmodified `a[data-contributor]` press loads `article.site-contributor` in the shared contributor panel |
-| Contributor directory | `contributors/index.html` | Colophon link and alphabetical list | Profile links use the contributor panel |
+| Person profile | `profiles/ID.html` | Public-name link or **Open profile** | An unmodified `a[data-contributor]` press loads `article.site-contributor` in the shared contributor panel |
+| Profile directory | `profiles/index.html` | Colophon **Profiles** link and alphabetical list | Profile links use the contributor panel |
 | Card preview | The card’s ordinary target | Native `popovertarget` button and action link | The card’s preview remains authored in the page; it is not an article fetch |
 | Framed card preview | Target page with `?view=embed` | Native card button and **Expand** | The frame loads on first opening and uses its own document |
 
@@ -1104,9 +1104,9 @@ contributor articles use their component sheets and the same text tokens.
   `link_card` refuses `new_tab=False` for anything but a page the site serves, which one
   rule decides (`overview_sections.is_site_page`): an entry of
   `render_overview.SITE_PAGES`, the optimality paper among them, or a directory served
-  by its `index.html`, as `workbench/` and `contributors/` are.
-  A case record and contributor profile are complete pages too; their marked links use
-  the article controllers described above.
+  by its `index.html`, as `workbench/` and `profiles/` are.
+  A case record and a person profile are complete pages too; their marked links use the
+  article controllers described above.
   - When a popover card leads to a repository document the site renders, the popover
     renders that page itself, narrow, in a frame: the page at the same address with
     `?view=embed` added before any fragment, so a filtered view such as
@@ -2525,6 +2525,8 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `defects.html` to the defect log on GitHub, and `cases.html`, every case record on one
   page until 2026-10-03, to `atlas.html`, preserving case selections such as `#n-11`
   (**Case records**, above).
+  The profile directory and every profile, served under `contributors/` until
+  2026-10-13, forward to the same name under `profiles/` (**Person Profiles**, below).
   No page of the site links a forwarder; `tests/test_site_documents.py` and
   `preview_site.moved_links` hold the pages to that, and `check_published_site` asks the
   deployed site for each one.
@@ -2663,21 +2665,30 @@ A section heading in the overview is a caps label, so it holds no formula: capit
 would change the formula’s letters.
 `tests/test_result_overview.py` holds every part and every link.
 
-## Contributor Profiles
+## Person Profiles
 
 [Attribution Policy](../../../attribution.md) owns preferred names, verified aliases,
 person/project distinctions and exceptions.
 This guide owns their presentation.
 
-The contributor directory at `contributors/` lists every published profile in
-public-name order. Its links and the colophon’s **Contributors** link are ordinary
-anchors. Each profile has one complete article at `contributors/ID.html`; the directory,
-credited names in tables and records, and the standalone profile use that address.
+The profile directory at `profiles/` lists every published profile in public-name order.
+It includes cited paper authors as well as the project’s contributors, so its visible
+text says **Profiles**: the directory’s title and heading, its list’s label, the
+colophon link and each profile’s breadcrumb.
+Its links and the colophon’s **Profiles** link are ordinary anchors.
+Each profile has one complete article at `profiles/ID.html`; the directory, credited
+names in tables and records, and the standalone profile use that address.
 A marked public-name link can open the same article in `#pop-contributor`, whose **Open
 profile** action reaches the complete page.
 The panel has the standard 36rem ceiling, shared padding, close target, viewport height
 limit, scrim and scrolling of a compact article popover.
 It retains the page opener across case/result/profile replacements.
+
+The profiles were served under `contributors/` until 2026-10-13 (think-0v2c); each
+earlier address is a registered forwarder to its profile
+(`render_overview.MOVED_PAGES`), and no page links one.
+Module, record, schema, CSS class and `data-contributor*` names keep the contributor
+vocabulary of the records under `packing/contributors/`.
 
 `render_contributors.contributor_article` writes the article once for either context:
 breadcrumb, public name, optional real name when different, aliases, optional bio,
@@ -2779,12 +2790,12 @@ The one forwarder that leads off the site, `defects.html` to the defect log on G
 carries its title and a canonical link to that address, in full, and no card: the site
 does not write the page it leads to, so its preview could not say what that page shows.
 
-Case and result records and contributor profiles are complete pages and carry the whole
-set and the icon. A case’s name identifies its square count and bounds; a result’s name
-combines its ID and summary; a contributor’s name is the evidenced public name.
+Case and result records and person profiles are complete pages and carry the whole set
+and the icon. A case’s name identifies its square count and bounds; a result’s name
+combines its ID and summary; a profile’s name is the evidenced public name.
 Each has its own record-derived description and canonical address.
-The directory has its own identity at `contributors/`. Article overlays extract the body
-of these pages, so the host page keeps its own head while the full record remains
+The directory has its own identity at `profiles/`. Article overlays extract the body of
+these pages, so the host page keeps its own head while the full record remains
 independently shareable.
 
 `check_published_site` holds the deployed pages to these rules after each deploy: one of

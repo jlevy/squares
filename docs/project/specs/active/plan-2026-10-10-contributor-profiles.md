@@ -525,19 +525,25 @@ merges upstream `6038af33c`; the handoff commit adds documentation only.
 Do not treat the earlier green CI on `ed89bfdda` as validation of this merge.
 The PR is being retained as draft, with integration acceptance open.
 
-### Selected Next Slice: Generic Profile URLs
+### Generic Profile URLs (think-0v2c)
 
-`think-0v2c` is open and unstarted: make `/profiles/index.html` and `/profiles/ID.html`
-the canonical directory and person-page URLs.
-Use “Profiles” wording so cited paper authors are included without implying that every
-person directly contributed to the project.
-All 20 current records already have navigable pages under `/contributors/`; the
-requested URL migration has **not** been implemented.
-Update generated links, route registration, sitemap, publication inventory, popover
-loading, tests and design documentation together.
-Keep registered forwarders for existing `/contributors/` links.
-Preserve reviewed identity joins, displayed credit wording, source roles and shared
-article-loader accessibility and fallback behavior.
+The URL migration is implemented.
+`/profiles/index.html` (canonical `profiles/`) and `/profiles/ID.html` are the directory
+and person-page URLs for all 20 records.
+Visible text says “Profiles”: the directory’s title, heading, intro and list label, the
+colophon link, each profile’s breadcrumb and the popover’s accessible name.
+Cited paper authors are therefore included without implying that every person directly
+contributed to the project.
+Generated credit links, the popover’s **Open profile** default, record links from reader
+documents, `SITE_PAGES`, the URL register and its sitemap use `profiles/`. The directory
+and every profile keep a registered forwarder at the earlier `/contributors/` address
+(`render_overview.MOVED_PAGES`, declared from the record filenames).
+Each of those 21 rows in `packing/site-urls.yaml` carries a 2026-10-13 amendment
+recording the move. Internal names are unchanged: the `packing/contributors/` records,
+the `Contributor/v1` contract, module names, `data-contributor*` attributes, CSS classes
+and the occurrence manifest.
+Reviewed identity joins, credit wording, source roles and the article loader’s
+accessibility and no-script fallback are unchanged.
 
 ### Acceptance and Remaining Work
 
