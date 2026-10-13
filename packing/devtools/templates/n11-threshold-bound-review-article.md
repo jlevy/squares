@@ -1028,7 +1028,7 @@ supply.
     scan record.
 
 [^t059]: [T-059 record](../../frontier/results.yaml);
-    [wand125’s tools](../../resources/web/wand125-tools-2026-09-29/README.md) and the
+    [Hosono’s tools](../../resources/web/wand125-tools-2026-09-29/README.md) and the
     [row-minimum summary](../../resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full-summary.json),
     whose verdict is `COMPLETE_ROW_EQUALITY` with 12,028 exact witness replays and whose
     scope is per-row minimum equality only; the

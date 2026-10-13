@@ -45,7 +45,7 @@ $defs:
     description: >-
       What a queued result or ask waits on: a pull request or issue as owner/name#N, or
       a bead. `devtools.intake_sweep` reports the item once every one of them has merged,
-      closed or been closed, since nothing else resumes it: wand125's 4 October
+      closed or been closed, since nothing else resumes it: Hosono's 4 October
       certificates waited on jlevy/squares#305, which merged, and the import stayed queued.
     items:
       type: string

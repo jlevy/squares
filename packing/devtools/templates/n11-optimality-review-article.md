@@ -1295,7 +1295,7 @@ checks from retained-receipt composition and a full proof replay.
     [integration record](../../../docs/project/reviews/review-2026-10-03-n11-gpt6-pro-review-integration.md)
     dispositions every finding.
 
-[^lean]: [wand125’s comment of 4 October 2026 on jlevy/squares#317](https://github.com/jlevy/squares/issues/317#issuecomment-5975093980),
+[^lean]: [Hosono’s comment of 4 October 2026 on jlevy/squares#317](https://github.com/jlevy/squares/issues/317#issuecomment-5975093980),
     the source for the formalization status this paper reports, and the
     [prior-family theorem](https://github.com/wand125/n11-optimality-lean/blob/112f91a0a0a30539472718b88e06e71f64d61694/lean/Sqpack/S11Opt/Split/U2Prior.lean)
     on the `split` branch of wand125/n11-optimality-lean, as committed on October 1,

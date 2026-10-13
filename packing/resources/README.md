@@ -532,7 +532,7 @@ retained in its own packet.
 The third announces `wand125/square-packing-tools`, the tools behind those certificates.
 
 Four packets of 28 September retain those results:
-[wand125’s 50 standing rectangle certificates at `39d8ecc`](web/wand125-rectangle-certificates-2026-09-28/README.md),
+[Hosono’s 50 standing rectangle certificates at `39d8ecc`](web/wand125-rectangle-certificates-2026-09-28/README.md),
 [its point-only and mixed certificates](web/wand125-point-and-mixed-2026-09-28/README.md)
 for `s(21)`, `s(45)` and `s(50)`,
 [Evan Daniel’s mixed covers](web/evand-square-packing-2026-09-28/README.md) for
