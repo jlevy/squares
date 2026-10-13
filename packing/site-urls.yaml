@@ -5940,8 +5940,8 @@ urls:
   first_published: '2026-10-10'
   lastmod: '2026-10-10'
   status: live
-- path: contributors/kleddamag.html
-  canonical: contributors/kleddamag.html
+- path: contributors/marc-leonard-overbeck.html
+  canonical: contributors/marc-leonard-overbeck.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview

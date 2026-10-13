@@ -14,6 +14,8 @@ import pytest
 import yaml
 
 from devtools.contributor_census import (
+    _join,  # pyright: ignore[reportPrivateUsage]
+    _spelling_identities,  # pyright: ignore[reportPrivateUsage]
     census,
     reconcile,
     stale_occurrences,
@@ -22,6 +24,7 @@ from devtools.contributor_census import (
 from devtools.contributor_credit import render_credit
 from devtools.result_credit import credit_line, result_credit_html
 from sqpack.contributor_occurrences import (
+    CreditOccurrence,
     CreditOrigin,
     OccurrenceError,
     load_occurrences,
@@ -148,6 +151,27 @@ def test_reconcile_replaces_stale_spans_and_joins_only_reviewed_labels(
     xu_origin = xu["origin"]
     reopened = by_origin[(xu_origin["path"], xu_origin["record_key"], xu_origin["field"])]
     assert [item.disposition for item in reopened if item.label == "Xu"] == ["unresolved"]
+
+
+def test_a_renamed_credit_joins_by_the_spelling_its_record_sources() -> None:
+    spellings = _spelling_identities(load_contributors())
+    overbeck = {
+        "contributor_id": "marc-leonard-overbeck",
+        "evidence": ["citation-cff", "owner-confirmation"],
+    }
+    assert spellings["Overbeck"] == overbeck
+    assert spellings["Kleddamag"]["contributor_id"] == "marc-leonard-overbeck"
+    origin = CreditOrigin(
+        "packing/frontier/n-017.md", "17", "/reported_lower_bound/proved_by/0"
+    )
+    span = CreditOccurrence(
+        origin, "Overbeck", 0, 8, "Overbeck", "lower-bound-prover", "unresolved", note="pending"
+    )
+    join, key, _ = _join(span, {}, spellings, set())
+    assert (join, key) == (overbeck, "joined_by_spelling")
+    assert _join(span, {}, spellings, {"Overbeck"})[:2] == (None, "unresolved")
+    reviewed = {"contributor_id": "joshua-levy", "evidence": ["primary-byline"], "count": 2}
+    assert _join(span, {"Overbeck": reviewed}, spellings, set())[:2] == (reviewed, "joined")
 
 
 def test_unknown_and_conflicting_duplicate_credit_remain_plain() -> None:

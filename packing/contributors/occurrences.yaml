@@ -121,7 +121,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed 11SquaresFormalized 2026]'
@@ -636,7 +636,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 certified bound]'
@@ -649,7 +649,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 certified bound]'
@@ -701,7 +701,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.66001]'
@@ -714,7 +714,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.66001]'
@@ -766,7 +766,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.640020]'
@@ -779,7 +779,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n17 4.640020]'
@@ -857,7 +857,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R052]'
@@ -922,7 +922,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R068]'
@@ -987,7 +987,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R067]'
@@ -1052,7 +1052,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R071]'
@@ -1117,7 +1117,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Guzhou0806 n17 R070]'
@@ -1748,7 +1748,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n11 2026]'
@@ -1761,7 +1761,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n11 2026]'
@@ -1861,7 +1861,7 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  contributor_id: kleddamag
+  contributor_id: marc-leonard-overbeck
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'

@@ -6,7 +6,9 @@ unresolved source spans for review; it never promotes an alias candidate to a pe
 manifest loader reports one at a time; run it after merging new credit records.
 `--reconcile` rewrites the manifest after such a merge: it drops stale spans, adds every
 new structured span, and joins one only where its exact label is already reviewed as one
-person and never left unresolved; every other new span stays unresolved for review.
+person and never left unresolved, or, failing that, is a spelling exactly one contributor
+record claims with sourced provenance and no review has declined; every other new span
+stays unresolved for review.
 PDF coverage requires explicit inspection receipts. Missing extraction is pending work.
 """
 
@@ -34,7 +36,7 @@ from sqpack.contributor_occurrences import (
     load_occurrences,
     source_text,
 )
-from sqpack.contributors import load_contributors
+from sqpack.contributors import ContributorRegistry, load_contributors
 from sqpack.project import require_project_root
 from sqpack.yamlio import load_yaml
 
@@ -289,39 +291,110 @@ def _label_identities(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     return joins
 
 
+def _declined_labels(rows: list[dict[str, Any]]) -> set[str]:
+    """Labels a review left open, called no person, or joined to two people."""
+    ids: dict[str, set[str | None]] = {}
+    for row in rows:
+        ids.setdefault(row["label"], set()).add(
+            row.get("contributor_id") if row["disposition"] == "resolved" else None
+        )
+    return {label for label, joined in ids.items() if None in joined or len(joined) > 1}
+
+
+def _spelling_identities(profiles: ContributorRegistry) -> dict[str, dict[str, Any]]:
+    """Exact spellings that one contributor record claims, with that claim's sources.
+
+    A record's display name, real name and aliases each carry provenance, so a span
+    printed in one of them can be joined on the record's own evidence. A spelling two
+    records claim joins neither."""
+    claims: dict[str, dict[str, set[str]]] = {}
+    for profile in profiles.by_id.values():
+        spellings = [("/display_name", profile.display_name)]
+        if profile.real_name:
+            spellings.append(("/real_name", profile.real_name))
+        spellings.extend(
+            (f"/aliases/{index}", alias) for index, alias in enumerate(profile.aliases)
+        )
+        for field, spelling in spellings:
+            sources = {
+                source
+                for item in profile.provenance
+                if field == item.field or field.startswith(item.field + "/")
+                for source in item.sources
+            }
+            claims.setdefault(spelling, {}).setdefault(profile.id, set()).update(sources)
+    return {
+        spelling: {"contributor_id": profile_id, "evidence": sorted(sources)}
+        for spelling, by_profile in claims.items()
+        if len(by_profile) == 1
+        for profile_id, sources in by_profile.items()
+    }
+
+
+def _join(
+    item: CreditOccurrence,
+    joins: dict[str, dict[str, Any]],
+    spellings: dict[str, dict[str, Any]],
+    declined: set[str],
+) -> tuple[dict[str, Any] | None, str, str]:
+    """The join for a new span, the report key it is listed under, and its note."""
+    if item.disposition != "unresolved":
+        return None, "unresolved", item.note
+    if item.label in joins:
+        join = joins[item.label]
+        return (
+            join,
+            "joined",
+            f"Joined by the reviewed identity of {join['count']} spans so labelled.",
+        )
+    if item.label not in declined and item.label in spellings:
+        note = "Joined by the spelling the contributor record claims, with its sources."
+        return spellings[item.label], "joined_by_spelling", note
+    return None, "unresolved", item.note
+
+
 def reconcile(repo: Path, path: Path | None = None) -> dict[str, Any]:
     """Rewrite the manifest against the live structured credit fields.
 
     Reviewed spans whose source text is unchanged are kept as they are. A stale span is
     dropped, with the rest of its field's spans, and the field's live spans take their
     place; spans of fields the manifest never held are added after the last span from
-    the same file. A new span is joined only by `_label_identities`."""
+    the same file. A new span is joined by `_label_identities`, or else by
+    `_spelling_identities` where no review declined its label."""
     path = path if path is not None else repo / "packing/contributors/occurrences.yaml"
     document = load_yaml(path.read_text(encoding="utf-8"))
     rows: list[dict[str, Any]] = document["occurrences"]
     stale_origins = {CreditOrigin(**item["origin"]) for item in stale_occurrences(repo, path)}
     kept = [row for row in rows if CreditOrigin(**row["origin"]) not in stale_origins]
     joins = _label_identities(kept)
+    declined = _declined_labels(kept)
+    spellings = _spelling_identities(
+        load_contributors(repo / "packing/contributors", repo=repo)
+    )
     reviewed = {(CreditOrigin(**row["origin"]), row["start"], row["end"]) for row in kept}
     fresh: dict[CreditOrigin, list[dict[str, Any]]] = {}
-    report: dict[str, Any] = {"dropped": [], "joined": [], "unresolved": []}
+    report: dict[str, Any] = {
+        "dropped": [],
+        "joined": [],
+        "joined_by_spelling": [],
+        "unresolved": [],
+    }
     for item in structured_occurrences(repo):
         if (item.origin, item.start, item.end) in reviewed:
             continue
         row = asdict(item)
         row["origin"] = asdict(item.origin)
-        join = joins.get(item.label) if item.disposition == "unresolved" else None
-        if join:
+        join, key, note = _join(item, joins, spellings, declined)
+        if join is None:
+            row.pop("contributor_id")
+            row["evidence"] = []
+        else:
             row.update(
                 disposition="resolved",
                 evidence=join["evidence"],
                 contributor_id=join["contributor_id"],
-                note=f"Joined by the reviewed identity of {join['count']} spans so labelled.",
+                note=note,
             )
-        else:
-            row.pop("contributor_id")
-            row["evidence"] = []
-        key = "joined" if join else "unresolved"
         report[key].append(f"{item.origin.path} {item.origin.field} {item.label}")
         fresh.setdefault(item.origin, []).append(_ordered(row))
     report["dropped"] = [

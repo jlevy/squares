@@ -127,14 +127,16 @@ exception to this policy.
 
 ## Decisions and Exceptions
 
-These decisions were recorded on 2026-10-10. Each row states its scope and remaining
-work; identity evidence remains in the linked profile or source packet.
+These decisions were recorded on 2026-10-10 unless a row gives its own date.
+Each row states its scope and remaining work; identity evidence remains in the linked
+profile or source packet.
 
 | Subject | Decision | Evidence and scope | Tracking |
 | --- | --- | --- | --- |
 | Joshua Levy | Preferred compact person credit `Levy`; full name `Joshua Levy`; GitHub `jlevy`, X `ojoshe`. The Squares Project remains the project name. | Owner instruction; [profile](packing/contributors/joshua-levy.md), project license and retained owner announcement. Preserve collaborators and project/tool attribution. | `think-t3a9`, `think-vix3` |
 | Ahmed / Queuingtheorydotcom | One person; compact bibliography credit `Ahmed`, stable profile ID `queuingtheorydotcom`. Current and historical handles are aliases, not extra authors. | Owner confirmation and [retained announcement receipts](packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/README.md#source-and-pin) link `ManassehA06` and the former `MathCompSciFTW` account. Retain the evidence distinction for full-name spelling. | `think-t3a9` |
 | EvolvingPrograms / Lewis | Personal credit is `Lewis` (`ctjlewis`); EvolvingPrograms is an affiliated organization, not an additional human author or a proved personal alias. Keep organization/repository credit only where its infrastructure role is supported. | [Lewis’s GitHub profile](https://github.com/ctjlewis) lists the affiliation; [EvolvingPrograms](https://github.com/EvolvingPrograms) is an organization. The retained [acknowledgments](packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ACKNOWLEDGEMENTS.md) credit both for infrastructure. Affiliation does not prove entity identity. Profile population and per-occurrence role review remain tracked. | `think-8yk4` |
+| Marc Leonard Overbeck / Kleddamag | Recorded 2026-10-13. One person, credited by name: `Overbeck` in compact credits, `Marc Leonard Overbeck` on his profile and at first prose mentions. `Kleddamag` on GitHub and `@kleddamag` on X are his handles, linked from the profile; they are aliases, not a second author. Identifiers, URLs, quotations and archived text keep the handle. | The owner’s instruction of 12 and 13 October 2026, and the `CITATION.cff` and README of his [12 October edition](https://github.com/Kleddamag/the-seventeenth-square-candidate/tree/653b9589d0f8a152f01adc56b1d48ba53d49abc3); [profile](packing/contributors/marc-leonard-overbeck.md). The profile joins both the `Kleddamag` labels still in the record and the `Overbeck` labels that replace them. | `think-ugbi` |
 | Historical first-party atlas/PDF lines | Migrate project-as-person credit to the preferred person name from the generating records. Do not edit archived third-party sources. | The existing `Squares Project (Levy)` display is a migration target, not the naming rule for new work. Rebuild and review affected figures and PDF credits together. | `think-vix3`, `think-jn87` |
 
 An exception needs a named scope, reason, supporting evidence, owner and review
