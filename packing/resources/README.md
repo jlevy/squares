@@ -580,6 +580,7 @@ key remain bound to the bytes they originally named.
 | [Kleddamag/11-squares-certified-bound](https://github.com/Kleddamag/11-squares-certified-bound) | The `s(11) > 31/8` certificate and its two source checkers | **[Kleddamag n11 2026]**; [retained source](web/external-square-certificates-2026-09-22/kleddamag-11/README.md) |
 | [Kleddamag/17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound) | The `n = 17` mixed-charge certificate line through `466001/100000` | **[Kleddamag n17 4.66001]**; [27 September packet](web/n17-kleddamag-466001-2026-09-27/README.md) |
 | [Kleddamag/the-seventeenth-square-candidate](https://github.com/Kleddamag/the-seventeenth-square-candidate) | Marc Leonard Overbeck’s verification edition of a candidate proof that `s(17) = L`, Bidwell’s side | **[Overbeck n17 candidate 2026]**; [12 October packet](web/kleddamag-n17-candidate-2026-10-12/README.md) |
+| [ofitzharding/sq17-lean](https://github.com/ofitzharding/sq17-lean) | Oscar Fitzharding’s Lean 4 proof that `s(17) = L`, `Sq17.square17_optimality`, announced on 13 October 2026: the source reports a clean rebuild of the theorem’s 4,951-module import closure, trusting Lean’s compiler for 13,343 `native_decide` facts | **[Fitzharding n17 Lean 2026]**; [13 October packet](web/fitzharding-n17-lean-2026-10-13/README.md), pinned `e6ee548090dc1dbf938ecf8590481de837a6a454` |
 | [Guzhou0806/n17-square-packing](https://github.com/Guzhou0806/n17-square-packing) | Parent-angle and mixed-charge certificates for `n = 17`, including R068 and R071 | **[Guzhou0806 n17 R068]**; [28 September packet](web/n17-guzhou-r068-2026-09-28/README.md); **[Guzhou0806 n17 R071]**; [30 September packet](web/n17-guzhou-r071-2026-09-30/README.md), pinned `8c11f6962506940c5de67a9fa73b3d1e2e151196` |
 | [Guzhou0806/n40-square-packing](https://github.com/Guzhou0806/n40-square-packing) | The clipped-corner transfer `s(40) > 335427/50000` on Hosono’s `rect_n40_L67` density, with its 401-direction nodal run and exact finite checks, and then the continuous-pose kernel `s(40) > 1340000/199529` on the same density, with its 43-slab interval cover, exact axis certificate and finite checks, and the same kernels’ `s(40) > 3359/500` on a new density of 685 rectangle orbits | **[Guzhou0806 n40 clipped corner 2026-10-10]**; [10 October packet](web/guzhou-n40-clipped-corner-2026-10-10/README.md), pinned `e5abeb4d078a5c5b35df6204dd9b93378e5a7880`; **[Guzhou0806 n40 continuous pose 2026-10-10]**; [10 October continuous-pose packet](web/guzhou-n40-continuous-pose-2026-10-10/README.md), pinned `71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3`; **[Guzhou0806 n40 new supports 2026-10-11]**; [11 October new-supports packet](web/guzhou-n40-new-supports-2026-10-11/README.md), pinned `6a65957e6c5c51cdf267917d882dab7f5b4928dd` |
 | [Mira-acc/17squares](https://github.com/Mira-acc/17squares) | Exact point and weighted certificates used in the `n = 17` lineage | **[n17 weighted certificates 2026-09-20]**; [20 September packet](web/n17-weighted-certificates-2026-09-20/README.md) |
@@ -1237,6 +1238,30 @@ on file; the case’s verified bounds are unchanged.
 The source says Codex (OpenAI) and Claude (Anthropic) produced the mathematics, engines,
 certificates, checkers, reviews and text under his direction, and that within the
 project no human has read the mathematics.
+
+## Fitzharding’s Lean proof that s(17) = L, 13 October 2026
+
+**[Fitzharding n17 Lean 2026]**: Oscar Fitzharding’s (GitHub and X ofitzharding) Lean 4
+proof `Sq17.square17_optimality (L : ℝ) : PlainPacking L ↔ EndpointGeometry.side ≤ L`:
+seventeen closed unit squares, freely translated and rotated with disjoint interiors,
+fit in an axis-aligned square of side $L$ exactly when $L$ is at least the side of John
+Bidwell’s 1998 packing, $4.675530093604551\ldots$. It is pinned in
+[ofitzharding/sq17-lean](https://github.com/ofitzharding/sq17-lean) at
+`e6ee548090dc1dbf938ecf8590481de837a6a454`, with the three certificate-source archives
+of its release `v1.0.0` (1,962,867,415 bytes) pinned by size and SHA-256 and not
+retained; [packet](web/fitzharding-n17-lean-2026-10-13/README.md).
+MIT licence. The packet keeps the statement’s files, the build pins, the source’s
+`manifest.json` of every module’s digest, and its clean-rebuild receipt and axiom
+report: 13,343 `native_decide` facts and the three standard axioms, no `sorryAx`. The
+source trusts Lean’s compiler, native evaluator and C toolchain for those facts, and
+nothing here has built the proof.
+Its README credits Bidwell, Hämäläinen, Friedman’s survey, this project, Manasseh Ahmed
+and collaborators’ eleven-square formalization and David MacIver’s earlier Lean work,
+and names Overbeck’s candidate proof of 12 October 2026 as independent; it says the
+project “was developed with substantial assistance from Claude and Codex”.
+The author’s announcement of 13 October says it was “Built with @OpenAI Astra +
+@AnthropicAI Opus 5.5”. The author asked for its registration in issue #565 on 12
+October 2026, and the owner reported it on 13 October 2026.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

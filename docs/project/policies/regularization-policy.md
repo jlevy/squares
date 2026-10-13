@@ -385,8 +385,9 @@ recorded where it is implemented, and reversing one is a change to that layer.
    so no register result is made for one.
 7. **Registering exact views below the bound** (question 3’s answer, to be carried out
    in #549): the row 3 views outside the counts #518 and #553 re-housed are to be
-   registered as one batch result, `T-154`, with the case records’ exact forms moved to
-   the registered sides and their printed values kept, so no citation weakens.
+   registered as one batch result, under the next free result id, with the case records’
+   exact forms moved to the registered sides and their printed values kept, so no
+   citation weakens.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

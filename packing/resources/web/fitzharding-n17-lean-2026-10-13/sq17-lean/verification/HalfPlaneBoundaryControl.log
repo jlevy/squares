@@ -1,0 +1,4 @@
+'Sq17.Propagation.HalfPlaneState.PositiveControl.touching_cores_not_collision' depends on axioms: [propext]
+'Sq17.Propagation.HalfPlaneState.PositiveControl.touching_square_interiors_disjoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

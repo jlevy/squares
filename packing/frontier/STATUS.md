@@ -26,7 +26,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`14`](n-014.md) | `4` | `4` | `4.0` | `4` | proved | upper: replayed here; lower: replayed here | — | 2026-09-07 |
 | [`15`](n-015.md) | `4` | `4` | `4.0` | `4` | proved | upper: replayed here; lower: external proof (read here), audited here | — | 2026-09-07 |
 | [`16`](n-016.md) | `4` | `4` | `4.0` | `4` | proved | upper: replayed here; lower: replayed here | — | 2026-08-24 |
-| [`17`](n-017.md) | `4.67553009360455` | `23377650468022754758171074269267527/5000000000000000000000000000000000` | `4.67553009360455095163` | `18641771/4000000` | open | upper: audited here; lower: replayed here | formal lower differs from report; proof audit pending | 2026-10-12 |
+| [`17`](n-017.md) | `4.67553009360455` | `23377650468022754758171074269267527/5000000000000000000000000000000000` | `4.67553009360455095163` | `18641771/4000000` | open | upper: audited here; lower: replayed here | formal lower differs from report; proof audit pending | 2026-10-13 |
 | [`18`](n-018.md) | `(7/2) + (1/2)√7` | `(7/2) + (1/2)√7` | `941/200` | `941/200` | open | upper: replayed here; lower: replayed here | — | 2026-10-01 |
 | [`19`](n-019.md) | `3 + (4/3)√2` | `3 + (4/3)√2` | `193/40` | `193/40` | open | upper: replayed here; lower: replayed here | — | 2026-10-01 |
 | [`20`](n-020.md) | `5` | `5` | `981/200` | `981/200` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |

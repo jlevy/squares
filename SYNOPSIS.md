@@ -177,6 +177,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-037](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `previously-published` | s(11) > 31/8 = 3.875, by Marc Leonard Overbeck’s 11-squares-certified-bound v1.0.2 release of 22 September 2026. |
 | [T-060](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `previously-published` | `s(11) = T = (6u+4)/(1+2u−u²) = 3.8770835900228141773078970601…`, where `u` is the unique root in `(9/25, 37/100)` of `5u⁸−10u⁷−2u⁶+14u⁵+12u⁴−6u³+2u²+2u−1 = 0`. |
 | [T-153](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | Marc Leonard Overbeck (Kleddamag) claims, as a candidate proof, that `s(17) = L = 4.67553009360455095163…`, the side of John Bidwell’s 1998 packing of seventeen unit squares, with the squares closed, independently rotated and allowed to touch. |
+| [T-154](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | `s(17) = 4.67553009360455095163…`, T-153’s value L, the side of John Bidwell’s 1998 packing of seventeen unit squares, proved by a second route: Oscar Fitzharding’s Lean 4 proof, which does not formalize T-153’s argument. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V3` | `C3` | `S4` | `apparently-novel` | s(12) >= 99/25, by this project’s weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V3` | `C3` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from this project’s weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
@@ -356,7 +357,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 153 | 153 registered, 123 by others |
+| Frontier results | 154 | 154 registered, 124 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -619,6 +620,7 @@ case or experiment separately.
 | [Attribution Policy](attribution.md) | artifact and naming conventions | definitive | maintained | — |
 | [Person Profiles](packing/contributors/README.md) | component scope and use | current | maintained | — |
 | [Feature: Contributor Profiles and Linked Result Credits](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md) | implementation plan | current | transient | — |
+| [Adversarial Review: Fitzharding’s Lean Proof That `s(17) = L`](docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md) | dated review record | record | retained | — |
 | [Review: Verification Gaps in the Drawn Packings and the Upper-Bound Register](docs/project/reviews/review-2026-10-13-verification-gaps.md) | dated review record | record | retained | — |
 | [Overbeck’s Candidate Proof of s(17) = L: Second Adversarial Review](docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md) | dated review record | record | retained | — |
 | [Mathematical Review: Kleddamag’s Candidate Proof That `s(17) = L`](docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md) | dated review record | record | retained | — |
@@ -6236,8 +6238,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 297 | 76,355 | 42,099 | 885 | 6,096 | 646.8 h |
-| claimed by none | 142 | 41,616 | 24,072 | 830 | 2,366 | 190.78 h |
-| **measured** | **439** | **117,971** | **66,171** | **1,715** | **8,462** | **837.58 h** |
+| claimed by none | 152 | 45,223 | 25,993 | 857 | 2,503 | 213.84 h |
+| **measured** | **449** | **121,578** | **68,092** | **1,742** | **8,599** | **860.64 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |

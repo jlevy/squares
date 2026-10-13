@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-12'
+last_reviewed: '2026-10-13'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -31911,3 +31911,126 @@ evidence:
       endpoint programs; SymPy parses the polynomials and computes the resultant. It decides
       the statement's definition of L and its identity with the record, not the lower half.
     source_reviewed: '2026-10-12'
+
+  - id: E-n017-fitzharding-lean-report
+    claim: exact-value
+    scope: {n_values: [17]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Fitzharding n17 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+    replay_status: not-attempted
+    verifiers:
+      - V-fitzharding-n17-lean
+      - V-fitzharding-n17-source-manifest
+      - V-fitzharding-n17-premise-comparisons
+    axioms_receipt: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/Square17Optimality.log.gz
+    proof:
+      source: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+      theorem: >-
+        Sq17.square17_optimality (L : ℝ) : Sq17.HalfPlaneAssembly.PlainPacking L ↔
+        Sq17.EndpointGeometry.side ≤ L. PlainPacking L says there are seventeen sets of
+        points of ℝ × ℝ, each a closed unit square sq cx cy ux uy with ux^2 + uy^2 = 1 (the
+        points whose coordinates in the frame (u, u⊥) about the centre are at most 1/2 in
+        absolute value), each inside containerBox L = [0, L]^2, with pairwise disjoint
+        interiors. side = (6+4t)/(1+2t-t^2), where (t, beta) = EndpointRoot.coordinates is
+        the unique common zero of polynomial0 and polynomial1 in the closed box of radius
+        1/10^12 about the stated 60-place midpoint.
+      scope: >-
+        s(17) = side for seventeen closed unit squares with independent translations and
+        arbitrary rotations, boundary contact allowed and only interiors required disjoint.
+        The feasible sides are the closed ray from side, so the minimum is attained; the
+        existence half is endpoint_plainPacking. No uniqueness of the optimal packing is
+        stated.
+      pinpoints: >-
+        Sq17Lean/Square17Optimality.lean lines 16-19 (square17_optimality);
+        PackingStatement.lean lines 7-11 (PlainPacking), 13-30 (feasible_iff_plainPacking)
+        and 34-35 (endpoint_plainPacking); SquareBase.lean (sq, IsUnitSquare);
+        PropagationWall.lean (containerBox); EndpointGeometry.lean lines 11-17 (t, beta,
+        side); EndpointRoot.lean lines 10-17 (unique_root, coordinates);
+        EndpointRootData.lean (midpoint, radius, polynomial0, polynomial1 and the Newton
+        preconditioner); PolynomialNewtonRoot.lean and PolynomialBoxContraction.lean (the
+        contraction argument); verification/Square17Optimality.log (the axiom report) and
+        verification/clean-build-receipt.json; the packet's receipts/source-consistency.json.
+      assumptions:
+        - Lean 4.34.1's kernel and Mathlib v4.34.1 at d13f23b7 are sound, and so are Lean's compiler, the bundled C compiler and the compiled runtime routines of Lean core (String, Array, Int and Rat arithmetic over GMP) that evaluate the 13,343 native_decide facts the theorem depends on, through five checker modules (HalfPlaneFast, CaptureRunFast, CaptureTableFast, HalfPlaneCoverFast, CaptureSummaryFast) compiled with leanc -O3 and loaded by --load-dynlib. This is the source's stated trust boundary, "not a kernel-only computation claim", in the review's more specific form (F-5).
+        - The clean rebuild passed as the source reports. Its receipt is the author's, from two of his own Linux machines, with digests and the final axiom log but no per-module log, timing, machine description or signature (F-6); no module was built here.
+        - The definitions the review read are the ones that elaborate. Nothing here elaborated them; the review's cheaper check 2, a build of the statement and endpoint closures with their axioms printed, would decide it (think-s7s4).
+      audit_record: docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-13'
+      reviewed_by: >-
+        an AI agent (claude-opus-5-5, tbd-strong tier, reasoning setting xhigh on all 282 of
+        its turns by its rollup,
+        packing/campaign/resource-usage/agent-a45ab9e0e00fe9076.yaml, though its brief did
+        not state one), the adversarial review lane of the sq17-lean intake (bead
+        think-xjb2), prompted separately from the packet lane and sharing no context with it
+      note: >-
+        docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md read the source at
+        e6ee548, whose proof files are release v1.0.0's. The statement and the definitions it
+        uses are the record's s(17) = L, with no wrong quantifier, frame, symmetry
+        restriction, open-closed slip or vacuous hypothesis. The endpoint's two polynomials,
+        midpoint, radius and side map are exp-237's chart and H-255's formulas term for term,
+        so EndpointGeometry.side is the record's L by identity of definition, recomputed
+        exactly to 60 places (the packet's receipts/endpoint-comparison.json); the endpoint
+        is proved without native evaluation. The axiom
+        report lists 13,346 axioms: the three standard ones and 13,343 native_decide facts,
+        all in Sq17.Propagation.HalfPlaneState, and no sorryAx. The chain from the
+        conditional skeleton to the final theorem leaves no premise. A keyword scan of the
+        1,215 tree files and the 526 members of generated-sources.tar.gz found no axiom,
+        sorry, opaque, implemented_by, extern or unsafe declaration. Verdict accepted, with no
+        mathematical defect found and findings F-1 to F-8, none blocking. Not read: the
+        soundness proofs of the half-plane, propagation, capture, local-slider and
+        wall-capacity checkers, and the generated certificates except as named. Not scanned:
+        ordinary-generated-sources.tar.xz and tree1563-sources.tar.gz. Nothing was built or
+        run from the source.
+    limitations: >-
+      The source reports this build, and nothing here observed or repeated it, so the entry
+      is reported and counts toward no rung above C1, which its external_review sets. The
+      source's command, in README.md at
+      e6ee548 with elan: download the three v1.0.0 archives into certificates/
+      (1,962,867,415 bytes, 6,986,311,712 bytes of Lean source unpacked), lake exe cache get
+      for Mathlib v4.34.1, python3 scripts/unpack.py, which checks every archive and member
+      against manifest.json, then python3 scripts/reproduce.py build (the README suggests
+      --jobs 40 --proof-jobs 8), which compiles the five checker modules to native
+      libraries, builds the theorem's 4,951-module import closure and passes only on
+      REPRODUCTION_ACCEPTED Sq17Lean.Square17Optimality with the axiom report. The source's
+      receipt, verification/clean-build-receipt.json, records CLEAN_SOURCE_BUILD_ACCEPTED:
+      4,951 modules rebuilt with Lean 4.34.1, no prebuilt project .olean, the pinned Mathlib
+      cache reused, the three standard axioms and 13,343 native_decide facts, no unexpected
+      axiom, the axiom set equal to the author's local build, and both controls at exit 0.
+      The README says the build "requires substantial CPU time and tens of gigabytes of disk
+      and memory"; no CPU or wall time is published.
+
+      What was checked here: by the packet's check_source_manifest.py
+      (receipts/source-consistency.json), that the 1,215 tree modules and 12 root files have
+      the size and SHA-256 manifest.json gives, that the member count manifest.json records
+      for each archive equals the modules it assigns to that archive (no archive is opened
+      there), and that the axiom report lists for Sq17.square17_optimality propext,
+      Classical.choice, Quot.sound and 13,343 distinct native_decide facts and nothing else,
+      with the log's SHA-256 equal to the receipt's; by the packet's comparison programs
+      (V-fitzharding-n17-premise-comparisons), which retain the review's checks, that the
+      endpoint's polynomials, midpoint, radius and side map are exp-237's chart and H-255's
+      formulas (receipts/endpoint-comparison.json), that the 24 cells are UNIQUE_24 vertex
+      for vertex and 32 of the 35 patterns equal admitted entries of the certified
+      sub-pattern ledger up to the cover's symmetry, the other three lying strictly inside
+      admitted entries (receipts/cover-comparison.json), and that every module of the
+      241-module closure of PackingStatement and the 18-module closure of EndpointPacking
+      has the size and SHA-256 manifest.json gives and uses no native_decide, the one
+      textual match a comment, with generated-sources.tar.gz at the size and SHA-256
+      manifest.json gives (receipts/closures.json); by the review, the statement, the
+      trust boundary and that GitHub's asset digest for generated-sources.tar.gz is
+      manifest.json's. The full
+      build was not attempted: this host has 4 cores, 15 GB of memory and 18 GB of free disk,
+      which do not hold the archives, the expanded sources, the Mathlib cache and the build
+      outputs together (think-r109). No module was elaborated here (think-s7s4), and two of
+      the three archives were not scanned (think-c1kz). Several module docstrings still
+      describe the earlier conditional state (F-3); the axiom report is what shows no premise
+      left. The generators and inputs named in the generated files are not published (F-4);
+      the proof's validity does not need them.
+    source_reviewed: '2026-10-13'

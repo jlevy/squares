@@ -794,7 +794,8 @@
           {"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},
           {"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},
           {"confirmation":"C3","id":"T-093","kind":"lower-bound","verification":"V3"},
-          {"confirmation":"C1","id":"T-153","kind":"optimality","verification":"V0"}
+          {"confirmation":"C1","id":"T-153","kind":"optimality","verification":"V0"},
+          {"confirmation":"C1","id":"T-154","kind":"simplification","verification":"V0"}
         ],
         "registered_reported": {"basis":"display-decimal-as-printed","decimal":"4.675530093604","exact":"467553009360455095163/100000000000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.513252433437","sources":[{"evidence":["E-n017-overbeck-optimality-candidate-report"],"n":17,"proved_by":["Overbeck"],"results":["T-153"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"4.660442750000","exact":"18641771/4000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.498165089832","sources":[{"evidence":["E-n017-guzhou-r071-source-replay"],"n":17,"results":["T-093"],"via":"direct"}]}

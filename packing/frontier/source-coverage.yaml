@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:SourceCoverage/v1
   schema: source-coverage.schema.yaml
   status: enforced
-last_reviewed: '2026-10-12'
+last_reviewed: '2026-10-13'
 coverage_scope: 'Current public upper-bound catalogues and first-party result releases known to this
   project, the Schadt n=29 witness-contract regression source, and the September 2026 external executable
   lower-bound certificate releases. Their proof obligations and assurance are tracked by evidence.yaml;
@@ -3827,6 +3827,41 @@ sources:
     run. T-153 records the claim, read by the review of 12 October
     (docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md); it carries the case's
     reported lower bound, and the verified lanes and the case status are unchanged.
+- id: fitzharding-n17-lean-2026
+  title: sq17-lean, a Lean 4 proof that s(17) = L
+  role: source-repository
+  url: https://github.com/ofitzharding/sq17-lean/tree/e6ee548090dc1dbf938ecf8590481de837a6a454
+  local: resources/web/fitzharding-n17-lean-2026-10-13/
+  source_key: '[Fitzharding n17 Lean 2026]'
+  scope:
+    n_values: [17]
+  reviewed: '2026-10-13'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-017.md
+  - frontier/results.yaml
+  evidence:
+  - E-n017-fitzharding-lean-report
+  notes: >-
+    Oscar Fitzharding's (GitHub and X ofitzharding) sq17-lean at
+    e6ee548090dc1dbf938ecf8590481de837a6a454, whose proof files are those of release v1.0.0
+    at 0a7167efa8dcae7fa73855890630fb7e2de550ed, published on 12 October 2026: a Lean 4
+    proof, Sq17.square17_optimality, that seventeen unit squares fit in a square of side L
+    exactly when L is at least EndpointGeometry.side, which is this repository's L by
+    identity of definition (exp-237's chart). MIT licence. The packet keeps the statement's
+    files, the build pins, manifest.json, the two scripts, verification/ and the two data
+    files its comparisons read (the cell cover and the excluded patterns); the other 1,201
+    tree modules are pinned by the commit and manifest.json, and the three release archives
+    (1,962,867,415 bytes) by size and SHA-256. The source reports a clean rebuild of the
+    theorem's 4,951-module import closure on two of the author's machines, with the three
+    standard axioms and 13,343 native_decide facts; nothing here built it (think-r109). The
+    review of 13 October (docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md)
+    read the statement, the endpoint and the trust boundary and accepted, with findings F-1
+    to F-8, none blocking. T-154 records the claim as a simplification of T-153, which
+    keeps the case's reported lower bound; the verified lanes and the case status are
+    unchanged. Issue #565 asked for the registration.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

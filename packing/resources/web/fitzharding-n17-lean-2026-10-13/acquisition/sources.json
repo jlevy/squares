@@ -1,0 +1,66 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-13T17:37Z",
+  "git_scope": "A full clone of the public repository (four commits, 1,229 tracked files, about 26 MB), fetched at 2026-10-13T17:37Z when main was this commit. Its tree differs from that of 0a7167efa8dcae7fa73855890630fb7e2de550ed, the commit CITATION.cff names for release v1.0.0, only by CITATION.cff. The declared paths are digested: the root files and build pins, manifest.json, the source's two scripts and its verification receipts, the theorem file, the nine files whose definitions the theorem file's two statements use (the plain-packing predicate and Feasible, unit squares, the container, the endpoint side and the algebraic root that defines it), the two optional control modules, and the two data files that the review's comparisons read beside this project's own: the 24-cell cover (ExactCellCoverData.lean) and the 35 excluded patterns (RepresentativeCaseData.lean). The other 1,201 tracked Lean modules (about 22 MB) are pinned by the commit and by manifest.json, which gives the SHA-256 of every source module and of the three release archives; the 3,738 modules those archives carry (about 6.99 GB of Lean source) are pinned by manifest.json alone.",
+  "sources": [
+    {
+      "id": "ofitzharding-sq17-lean",
+      "source_url": "https://github.com/ofitzharding/sq17-lean",
+      "source_ref": "main",
+      "source_commit": "e6ee548090dc1dbf938ecf8590481de837a6a454",
+      "committed_utc": "2026-10-13T01:59:58Z",
+      "git_tree": "5bee8a457c938d22ff2d2625ca2978a222536f1c",
+      "archived_path": "packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean",
+      "subtree_manifest": "packing/resources/web/fitzharding-n17-lean-2026-10-13/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".gitignore",
+        "CITATION.cff",
+        "LICENSE",
+        "README.md",
+        "lake-manifest.json",
+        "lakefile.toml",
+        "lean-toolchain",
+        "manifest.json",
+        "scripts",
+        "verification",
+        "Sq17Lean/Square17Optimality.lean",
+        "Sq17Lean/PackingStatement.lean",
+        "Sq17Lean/HalfPlaneAssemblySkeleton.lean",
+        "Sq17Lean/SquareBase.lean",
+        "Sq17Lean/PropagationWall.lean",
+        "Sq17Lean/EndpointGeometry.lean",
+        "Sq17Lean/EndpointRoot.lean",
+        "Sq17Lean/EndpointRootData.lean",
+        "Sq17Lean/PolynomialNewtonRoot.lean",
+        "Sq17Lean/PolynomialBoxContraction.lean",
+        "Sq17Lean/HalfPlanePositiveControl.lean",
+        "Sq17Lean/HalfPlaneBoundaryControl.lean",
+        "Sq17Lean/ExactCellCoverData.lean",
+        "Sq17Lean/RepresentativeCaseData.lean"
+      ],
+      "subtree_file_count": 28,
+      "subtree_total_bytes": 3694177,
+      "retained_file_count": 27,
+      "retained_total_bytes": 3531560,
+      "compressed": [
+        "sq17-lean/manifest.json.gz",
+        "sq17-lean/verification/Square17Optimality.log.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": ".gitignore",
+          "bytes": 162617,
+          "sha256": "c2c83fe75fb5ecebaa7e9ee6f630e2e7a7645893225934adbe9fce9f22c35680",
+          "reason": "162,617 bytes, 3,746 lines, almost all of them the paths of the generated Lean modules that the release archives carry, each of which manifest.json lists with its SHA-256 and archive; pinned by digest only."
+        }
+      ],
+      "license": "MIT. LICENSE: \"Copyright (c) 2026 Oscar Fitzharding\"; README.md: \"Project sources are licensed under the MIT License. Dependencies, including Mathlib, retain their own licenses.\"; CITATION.cff: license MIT. CITATION.cff names the author Oscar Fitzharding; README.md says the project \"was developed with substantial assistance from Claude and Codex\".",
+      "claims": [
+        "Sq17.square17_optimality (L : \u211d) : Sq17.HalfPlaneAssembly.PlainPacking L \u2194 Sq17.EndpointGeometry.side \u2264 L, where PlainPacking L says that there are 17 sets, each a closed unit square with some centre and some unit direction (Sq17.IsUnitSquare), each inside the container [0, L]^2 (Propagation.containerBox L), with pairwise disjoint interiors; side = (6+4t)/(1+2t-t^2), where (t, beta) is the unique common zero of polynomial0 and polynomial1 in the box of radius 1/10^12 about the stated midpoint, approximately 4.675530093604551; existence at the endpoint is included (Sq17Lean/Square17Optimality.lean, PackingStatement.lean, SquareBase.lean, PropagationWall.lean, EndpointGeometry.lean, EndpointRoot.lean, EndpointRootData.lean, README.md)",
+        "Trust boundary: the geometric soundness arguments are checked by Lean's kernel and the concrete certificate checks use native_decide, so the Lean compiler, native evaluator and C toolchain are trusted alongside propext, Classical.choice and Quot.sound; the theorem's axiom report contains 13,343 Lean-generated native-check facts and no sorryAx; \"This is not a kernel-only computation claim\" (README.md, verification/Square17Optimality.log, verification/clean-build-receipt.json)",
+        "Clean source rebuild: all 4,951 modules in the theorem's import closure were rebuilt from the published sources on Linux with Lean 4.34.1, using no precompiled project proof objects and reusing the pinned third-party dependency cache; status CLEAN_SOURCE_BUILD_ACCEPTED, the axiom set matches the local build, and both optional controls exit 0 (README.md, verification/clean-build-receipt.json)",
+        "The 3,738 generated modules of the proof are in the three certificate-source archives of release v1.0.0, generated-sources.tar.gz, ordinary-generated-sources.tar.xz and tree1563-sources.tar.gz, 1,962,867,415 bytes together; manifest.json gives each archive's size and SHA-256 and each of the 4,953 source modules' SHA-256 (README.md, manifest.json)"
+      ]
+    }
+  ]
+}

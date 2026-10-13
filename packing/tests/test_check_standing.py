@@ -269,6 +269,107 @@ def test_a_standing_entry_whose_every_bound_is_beaten_is_refused(records: view.R
         records.results["T-001"], view.SECOND_CERTIFICATE, records
     )
     assert "does not state the verified value" in second
+    assert "or a reported one" not in second
+    (reported,) = check_standing.problems(
+        records.results["T-001"], view.SECOND_CERTIFICATE_REPORTED, records
+    )
+    assert reported.endswith(
+        "does not state the verified value, or a reported one the verified bound does not beat"
+    )
+
+
+def test_a_simplification_of_a_reported_value_is_a_reported_second_certificate(
+    records: view.Records,
+) -> None:
+    """T-154, Fitzharding's Lean proof of s(17) = L, is a simplification at C1 of the value
+    T-153 holds in n = 17's reported lane, and holds no bound itself. It restates the
+    reported value, which the verified lane does not beat, so it is a reported second
+    certificate, held to the reported lane, and not superseded. Given a bound's kind, the
+    same words tie the reported lane under T-153's citation and derive superseded, which
+    the check refuses: a tie is cited by the case record or recorded as a
+    simplification."""
+    record = records.results["T-154"]
+    assert record["kind"] == "simplification"
+    assert record["confirmation"] in check_standing.UNREPLAYED
+    assert check_standing.restates(record, records)
+    reported = view.SECOND_CERTIFICATE_REPORTED
+    assert view.standing(record, records) == reported
+    assert check_standing.problems(record, reported, records) == []
+    line = check_standing.summary(record, reported, records)
+    assert "equals the reported bound at n = 17" in line
+    (verified,) = check_standing.problems(record, view.SECOND_CERTIFICATE, records)
+    assert "does not state the verified value" in verified
+    bound = {**record, "kind": "optimality"}
+    assert view.standing(bound, records) == view.SUPERSEDED
+    (refused,) = check_standing.problems(bound, view.SUPERSEDED, records)
+    assert "T-154 is superseded, yet at n = 17" in refused
+    assert "no worse than the reported one" in refused
+
+
+def test_a_simplification_keeps_a_standing_through_its_later_rungs(
+    records: view.Records,
+) -> None:
+    """A simplification's claim states the relations of the result it proves again, so
+    those relations stand in for a bound kind's directions. Replayed (C2 or C3) before the
+    case records adopt it, T-154's `s(17) = …` states a lower bound strictly above n = 17's
+    verified one: it is pending adoption, not superseded, and the check agrees. Adopted,
+    with n = 17's verified lower bound citing its evidence, it is the current best. A
+    simplification that states only what its case records hold still has nothing to
+    improve on (`test_an_entry_improves_only_in_the_directions_its_kind_bounds`)."""
+    record = records.results["T-154"]
+    for rung in ("C2", "C3"):
+        replayed = {**record, "confirmation": rung}
+        assert not check_standing.restates(replayed, records)
+        better = check_standing.improvements(replayed, records)
+        assert [(finding.n, finding.direction) for finding in better] == [(17, LOWER)]
+        assert view.standing(replayed, records) == view.PENDING_ADOPTION
+        assert check_standing.problems(replayed, view.PENDING_ADOPTION, records) == []
+        line = check_standing.summary(replayed, view.PENDING_ADOPTION, records)
+        assert "better than the case record at n = 17" in line
+    case = records.cases[17]
+    lane = {**case["reported_lower_bound"], "evidence": ["E-n017-fitzharding-lean-report"]}
+    adopted = dataclasses.replace(
+        records,
+        cases={**records.cases, 17: {**case, "status": "proved", "verified_lower_bound": lane}},
+    )
+    replayed = {**record, "confirmation": "C3"}
+    assert view.standing(replayed, adopted) == view.HOLDS
+    assert check_standing.problems(replayed, view.HOLDS, adopted) == []
+
+
+def test_a_reported_second_certificate_is_not_beaten_in_the_verified_lane(
+    records: view.Records,
+) -> None:
+    """n = 11's reported lower bound is the source's display, 3.87708359002281, below the
+    exact verified T. A simplification at C1 that restates the display ties the reported
+    lane and is beaten in the verified one, so it restates nothing: it is superseded, and
+    the check refuses it the word second certificate, reported."""
+    probe = _entry(
+        records, "T-154", headline="`s(11) ≥ 3.87708359002281`", scope={"n_values": [11]}
+    )
+    (finding,) = check_standing.findings(probe, records)
+    assert (finding.verified, finding.reported) == (BEATEN, EQUAL)
+    assert not check_standing.restates(probe, records)
+    assert view.standing(probe, records) == view.SUPERSEDED
+    (problem,) = check_standing.problems(probe, view.SECOND_CERTIFICATE_REPORTED, records)
+    assert "T-154 is a second certificate, yet at n = 11" in problem
+    assert "or a reported one the verified bound does not beat" in problem
+
+
+def test_one_rung_partition_decides_the_lane_and_the_word(records: view.Records) -> None:
+    """A replay has passed from C2 up (the status `confirmed`), so a second certificate at
+    C2 is held to the verified lane and takes the word a replayed one does, and the summary
+    reads the lane the label names. T-054 and T-055, replayed second proofs at C3, read the
+    same at C2."""
+    assert check_standing.UNREPLAYED == view.UNREPLAYED == frozenset({"C0", "C1"})
+    for entry in ("T-054", "T-055"):
+        record = {**records.results[entry], "confirmation": "C2"}
+        assert check_standing.restates(record, records)
+        assert view.standing(record, records) == view.SECOND_CERTIFICATE
+        line = check_standing.summary(record, view.SECOND_CERTIFICATE, records)
+        assert "equals the verified bound" in line
+        reported = {**record, "confirmation": "C1"}
+        assert view.standing(reported, records) == view.SECOND_CERTIFICATE_REPORTED
 
 
 def test_an_entry_that_holds_one_case_of_several_stands(records: view.Records) -> None:

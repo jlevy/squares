@@ -577,10 +577,12 @@ weighted-certificate proof over 5,114 orientation intervals.
 A candidate proof that closes the gap at Bidwell’s side, `T-153` of 12 October 2026, has
 been read here and partly replayed; until its complete replay passes, the verified gap
 stays as the table gives it.
-$n = 17$ and $n = 12$ moved in September 2026 on third-party weighted certificates, and
-the $k^2 - 4$ family now has three solved members above $k = 3$: $s(21) = 5$,
-$s(32) = 6$ and $s(45) = 7$, proved by Evan Daniel on the same method’s zero-margin
-form, the first and third with mass on the grid lines as well as on points.
+A second proof of the same equality by another route, Oscar Fitzharding’s Lean 4 proof
+`T-154` of the same day, has been read here and not built, so it does not move the gap
+either. $n = 17$ and $n = 12$ moved in September 2026 on third-party weighted
+certificates, and the $k^2 - 4$ family now has three solved members above $k = 3$:
+$s(21) = 5$, $s(32) = 6$ and $s(45) = 7$, proved by Evan Daniel on the same method’s
+zero-margin form, the first and third with mass on the grid lines as well as on points.
 $n = 21$, in this table at $0.0050$ from 2026-09-27, left it with that proof.
 $n = 11$, which headed it at $0.0021$ once Overbeck carried it to $31/8$, left it on
 2026-09-30, when T-060 proved $s(11)$ equal to Trump’s side, and $n = 61$ on 2026-10-02,

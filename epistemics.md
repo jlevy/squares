@@ -449,6 +449,15 @@ it; a later result that implies it is declared instead ([Status](#status)). Of a
 standing, the register’s views show one thing, the *superseded* mark, which a standing
 gives only a bound; another kind carries the mark only where its entry declares it.
 
+A simplification’s standing reads the relation its claim restates as a bound’s. While
+every bound it states equals its case record’s in the lane it can hold, it is a second
+certificate. Its own build can land before that of the result it proves again, as when a
+reported proof of a value the record holds only as reported is replayed first.
+It then states a bound better than the case’s verified one, and its standing is pending
+adoption. A simplification moves no bound, so when the case record adopts that bound the
+kind is revisited, and the result page’s registered identity is amended with a dated
+reason (`packing/site-urls.yaml`).
+
 ## Results by Others
 
 The register holds others’ results beside this project’s, under the same `T-NNN`

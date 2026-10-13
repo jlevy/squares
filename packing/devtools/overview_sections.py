@@ -1962,6 +1962,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "A candidate proof that Bidwell's packing of seventeen squares is optimal.",
     ),
     (
+        "https://github.com/ofitzharding/sq17-lean",
+        "Oscar Fitzharding",
+        (
+            "A Lean 4 proof that Bidwell's packing of seventeen squares is optimal, "
+            "trusting Lean's compiler for its certificates."
+        ),
+    ),
+    (
         "https://github.com/Guzhou0806/n17-square-packing",
         "Guzhou0806",
         "Strict lower bounds for seventeen squares.",

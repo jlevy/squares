@@ -5815,3 +5815,78 @@ issues:
       whose programs and output are in the packet's review-2/. The statement's F, G,
       rectangle and side map are this repository's H-255 chart exactly, and L is below
       n-017's verified ceiling by 1.04e-22.
+  - number: 565
+    title: 'Complete Lean proof of s(17) optimality: registration request'
+    author: ofitzharding
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Oscar Fitzharding's request to register his Lean 4 proof that Bidwell's 1998 packing of
+      seventeen unit squares is optimal, Sq17.square17_optimality (L : ℝ) : PlainPacking L ↔
+      EndpointGeometry.side ≤ L, in ofitzharding/sq17-lean with release v1.0.0 (the issue
+      pins 0a7167efa8dcae7fa73855890630fb7e2de550ed), with no certificate-acceptance or
+      case-exclusion premise left and a trust boundary of the three standard axioms and
+      13,343 native_decide facts. Retained on 13 October 2026 at e6ee548, whose proof files
+      are v1.0.0's, and read by an adversarial review that found no mathematical defect,
+      found EndpointGeometry.side to be this record's L by identity of definition, and found
+      that the proof runs on this project's n = 17 plan and data without crediting its
+      components specifically (F-1). Registered as T-154, a simplification of T-153
+      (Overbeck's candidate, whose release was public about six hours before this proof's
+      repository by GitHub's times), at V0/C1 with S5 proposed; the source's clean build was
+      not repeated here, and the verified bounds are unchanged.
+    read_through: '2026-10-12T22:23:37Z'
+    results:
+    - key: n17-optimality-lean
+      claim: >-
+        s(17) = EndpointGeometry.side, about 4.675530093604551, Bidwell's side: for every real
+        L, seventeen closed unit squares with arbitrary rotations, boundary contact allowed
+        and disjoint interiors fit in [0, L]^2 exactly when side ≤ L, existence at the
+        endpoint included. Proved in Lean 4.34.1 with Mathlib, trusting Lean's compiler,
+        native evaluator and C toolchain for 13,343 native_decide facts, with a fresh Linux
+        rebuild of all 4,951 modules that the author reports.
+      source: body
+      register:
+      - T-154
+      evidence:
+      - E-n017-fitzharding-lean-report
+    asks:
+    - what: Link the proof from the n = 17 case page.
+      state: done
+      note: >-
+        packing/frontier/n-017.md links sq17-lean and its retained packet under T-154, in its
+        reported lower bound's note, its priority notes and its prose; the published case page
+        carries it once the change merges.
+    - what: Link the proof from #405, the owner's n = 17 tracker.
+      state: queued
+      bead: think-mxhc
+      note: >-
+        A comment on #405 is the owner's to post, after the merge, with the reply to this
+        issue; the draft is in think-mxhc.
+    beads:
+    - think-hcqr
+    - think-acbk
+    - think-xjb2
+    - think-r109
+    - think-s7s4
+    - think-c1kz
+    - think-mxhc
+    answer_bead: think-mxhc
+    replies: []
+    close_when: >-
+      T-154 is on main, the author has been told what was registered and asked the review's
+      questions, #405 links the proof, and the full build has either passed, here or by a
+      third party retained here, or been dispositioned by the owner, with the resulting state
+      posted on the issue.
+    notes: >-
+      The owner reported the repository and the author's post of 13 October 2026 separately,
+      asked for a full intake crediting everything and a decision on which report came first,
+      and set Oscar Fitzharding as the definitive name (think-hcqr). Lane think-acbk retained
+      the packet fitzharding-n17-lean-2026-10-13, lane think-xjb2 wrote
+      docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md. Overbeck's candidate
+      (#557, T-153) was public first and keeps the case's reported lower bound; the issue and
+      the README name it as related work developed independently. The issue offers help with
+      reproduction and statement review. The review's attribution findings F-1 and F-2 and
+      its six questions (section 9) are for the reply. The full build (think-r109) waits on an
+      owner budget: the source publishes no CPU time, and the intake's host is too small.

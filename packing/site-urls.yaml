@@ -3890,7 +3890,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-13'
   status: live
 - path: cases/170.html
   canonical: cases/170.html
@@ -13503,6 +13503,40 @@ urls:
     - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/capture-independent.json
     - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/trees.json
     - docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md
+- path: result/t-154.html
+  canonical: result/t-154.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+  identity:
+    kind: simplification
+    scope:
+      n_values:
+      - 17
+    established: null
+    attribution:
+      source_keys:
+      - '[Fitzharding n17 Lean 2026]'
+      published: '2026-10-12'
+    builds_on: null
+    evidence:
+    - E-n017-fitzharding-lean-report
+    artifacts:
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/README.md
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/PackingStatement.lean
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/EndpointGeometry.lean
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/EndpointRootData.lean
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/clean-build-receipt.json
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/Square17Optimality.log.gz
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/source-consistency.json
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/endpoint-comparison.json
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/cover-comparison.json
+    - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/closures.json
+    - docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
 - path: results.html
   canonical: results.html
   kind: page

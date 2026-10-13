@@ -7807,6 +7807,71 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fitzharding n17 Lean 2026]'
+    field: /authors/0
+  expected_text: Fitzharding
+  start: 0
+  end: 11
+  label: Fitzharding
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fitzharding n17 Lean 2026]'
+    field: /credit
+  expected_text: Fitzharding after Levy, Ahmed, MacIver
+  start: 0
+  end: 11
+  label: Fitzharding
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fitzharding n17 Lean 2026]'
+    field: /credit
+  expected_text: Fitzharding after Levy, Ahmed, MacIver
+  start: 18
+  end: 22
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 68 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fitzharding n17 Lean 2026]'
+    field: /credit
+  expected_text: Fitzharding after Levy, Ahmed, MacIver
+  start: 24
+  end: 29
+  label: Ahmed
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: manasseh-ahmed
+  note: Joined by the reviewed identity of 7 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fitzharding n17 Lean 2026]'
+    field: /credit
+  expected_text: Fitzharding after Levy, Ahmed, MacIver
+  start: 31
+  end: 38
+  label: MacIver
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/results.yaml
     record_key: T-001
     field: /builds_on/credit/0

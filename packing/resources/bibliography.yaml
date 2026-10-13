@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:Bibliography/v1
   schema: bibliography.schema.yaml
   status: enforced
-last_reviewed: '2026-10-12'
+last_reviewed: '2026-10-13'
 # The citation fields a generator needs, keyed by the source keys the frontier records
 # use. The Markdown tables in README.md stay the human index; this file holds only what
 # a line of citation text is built from, for the keys something cites.
@@ -2041,8 +2041,66 @@ sources:
       mathematics, the engines, the certificates, the checkers, the reviews and the text
       were produced by AI systems under his direction and to his instructions: Codex
       (OpenAI) and Claude (Anthropic). They are named and are not authors", and "Within the
-      project no human has read the mathematics." No licence for reuse.
+      project no human has read the mathematics." No licence for reuse. He announced it on
+      X on 12 October 2026 at 14:52:55Z
+      (https://x.com/kleddamag/status/2109658579678761429): "A proof candidate for 17
+      squares: the 1998 packing cannot be beaten. s(17) = 4.67553009…", "Built with @OpenAI
+      Codex and @AnthropicAI Claude. Thanks to @ojoshe, @_Mira___Mira_, @guzhou0806 and
+      @ManassehA06, whose work this builds on."; the post is retained in the packet's
+      receipts/announcement/.
+  - key: '[Fitzharding n17 Lean 2026]'
+    authors: [Fitzharding]
+    year: 2026
+    venue: GitHub
+    short_venue: Web
+    dated: '2026-10-13'
+    credit: Fitzharding after Levy, Ahmed, MacIver
+    short_credit: Fitzharding after Levy et al.
+    lineage: credits-project
+    note: >-
+      A Lean 4 proof, Sq17.square17_optimality, that seventeen unit squares pack in a square
+      of side L exactly when L is at least the side of Bidwell's 1998 packing:
+      ofitzharding/sq17-lean at e6ee548090dc1dbf938ecf8590481de837a6a454 (committed
+      2026-10-13T01:59:58Z), with the three certificate-source archives of its release
+      v1.0.0 (0a7167efa8dcae7fa73855890630fb7e2de550ed, 1,962,867,415 bytes) pinned by size
+      and SHA-256, in web/fitzharding-n17-lean-2026-10-13/. CITATION.cff and LICENSE name
+      the author Oscar Fitzharding, who publishes on GitHub and X as ofitzharding. README.md
+      credits: "John Bidwell discovered the packing in 1998, improving Pertti Hämäläinen's
+      1980 arrangement; see Friedman's survey. The Squares Project collects the wider
+      research record. Mannaseh Ahmed and collaborators' eleven-square formalization
+      provided a useful reference for computer-assisted formalization and its trust
+      boundary. David MacIver's earlier Lean work concerns a lower bound for seventeen
+      squares." It reports that a search on 12 October 2026 "found no earlier complete Lean
+      proof of this optimality result", and states: "Marc Overbeck published an independent
+      candidate proof of seventeen-square optimality on 12 October 2026, using mathematical
+      arguments and Python and JavaScript certificate checkers. This repository presents a
+      separate Lean formalization." AI assistance, README.md: "This project was developed
+      with substantial assistance from Claude and Codex." Fitzharding announced it on X on
+      13 October 2026 at 00:06:56Z (https://x.com/ofitzharding/status/2109798000008597616):
+      "I've released the first complete Lean proof of optimality for Bidwell's 1998 packing
+      of 17 squares. Built with @OpenAI Astra + @AnthropicAI Opus 5.5. Thanks to
+      @ManassehA06 & @ojoshe for prior work."; the post is retained in the packet's
+      receipts/announcement/. The source trusts Lean's compiler, native evaluator and C
+      toolchain for 13,343 native_decide facts. MIT licence. Issue #565 on this repository,
+      opened by the author on 12 October 2026 at 22:23:37Z to ask for the registration,
+      credits Bidwell, says Ahmed's s(11) proof and its Lean formalization "were useful
+      methodological references for finite exclusion, capture and the local endpoint
+      argument", thanks "the Squares Project's contributors and the Lean/Mathlib
+      communities", and says "Development used Claude and Codex assistance." The review of
+      13 October (docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md) records
+      two attribution findings to put to the author. F-1: the proof runs on this project's
+      24-cell cover, cap, census, endpoint chart and layout and 52-row local recipe, and on
+      32 patterns of its certified sub-pattern ledger, eleven of them Hosono's, none of
+      which the README or CITATION.cff credits beyond collecting "the wider research
+      record"; and Overbeck's 60-place seed of 21 September 2026 fixes the centre of the
+      endpoint box. The packet's first-party comparison programs retain the cover, pattern
+      and endpoint identities this rests on, with their outputs
+      (receipts/cover-comparison.json, receipts/endpoint-comparison.json). F-2: the README
+      credits Ahmed's formalization only as a reference for its trust boundary, where the
+      issue names his s(11) proof for the proof's shape. The lineage stays
+      credits-project, as the source's own files state it.
 credited_names:
+  Oscar Fitzharding: Fitzharding
   Marc Leonard Overbeck: Overbeck
   Daniil Ostashev: Ostashev
   Robert Barnett: Barnett
