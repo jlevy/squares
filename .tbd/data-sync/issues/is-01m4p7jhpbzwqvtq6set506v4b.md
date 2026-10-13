@@ -5,7 +5,7 @@ title: "Address PR #493 review A: bead and spec reconciliation"
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: claude-reconcile-coordinator-0vpobe
 labels: []
 dependencies: []
@@ -26,7 +26,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T19:38:27.913Z
-updated_at: 2026-10-13T05:37:00.858Z
+updated_at: 2026-10-13T05:45:05.467Z
 started_at: 2026-10-11T19:44:59.749Z
 ---
 Address senior review A on https://github.com/jlevy/squares/pull/493 (review https://github.com/jlevy/squares/pull/493#pullrequestreview-5484428701). Findings A1-A13. Owner accepted the applied tracker changes 2026-10-11 ('Accept, fix 5o8i's evidence (Recommended)').
