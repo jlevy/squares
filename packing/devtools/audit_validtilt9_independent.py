@@ -1,10 +1,10 @@
-"""Audit, sample and price wand125's independent run of ValidTilt9.
+"""Audit, sample and price Hosono's independent run of ValidTilt9.
 
 T-081's lower half at every ``k >= 8`` rests on ValidTilt9: every closed unit square in
 ``[0, 9]^2`` with centre in ``[0, 9/2]^2`` and angle ``theta = 2 arctan u``, ``u > 0``,
 ``u^2 + 2u <= 1``, has mass at least 1 under Evan Daniel's box cover ``K4_k008_box9.txt``.
 Daniel's ``qx2_zm.py`` decides it in the source's run; wand125/valid7-independent-check
-at ``c561dbb3`` reports a second decision by wand125's separately written checker, the
+at ``c561dbb3`` reports a second decision by Hosono's separately written checker, the
 one whose Valid7 run this repository replayed for T-064. Its run is published as three
 JSON-lines records in the release ``records-tilt9-v1``, pinned by SHA-256 in the
 2026-10-06 packet and not retained, so every subcommand that reads them takes the
@@ -382,7 +382,7 @@ def retained_problems(tree: Path) -> list[str]:
 
 
 def shared_code(tree: Path = TREE, checker: Path = QX2_CHECKER) -> dict[str, object]:
-    """The lines of wand125's checking code that also occur in Daniel's checker.
+    """The lines of Hosono's checking code that also occur in Daniel's checker.
 
     Lines are compared with their indentation stripped. Blank lines, comments and lines
     shorter than 20 characters are left out, since every Python file shares them.

@@ -1,4 +1,4 @@
-"""The audit of wand125's Valid7 records, and the receipts of its stage-4 replay.
+"""The audit of Hosono's Valid7 records, and the receipts of its stage-4 replay.
 
 The record files themselves are pinned by SHA-256 and not retained, so the tests over
 the replay read the retained receipts only: the audit's JSON and the log of the

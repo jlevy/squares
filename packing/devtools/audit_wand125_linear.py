@@ -1,4 +1,4 @@
-"""Audit and replay wand125's linear certificates: points, segments and rectangles.
+"""Audit and replay Hosono's linear certificates: points, segments and rectangles.
 
 wand125/square-packing-bounds adds two certificates of a kind its superseded
 ``s(50) >= 147/20`` rung, ``mixed_n50_L735``, first used: a nonnegative measure of point

@@ -237,7 +237,7 @@ def test_a_superseded_entry_whose_bound_still_stands_is_refused(records: view.Re
 
 
 def test_a_superseded_report_is_held_to_the_reported_lane_alone(records: view.Records) -> None:
-    """T-046 reports wand125's rectangle certificates at C0. Its replays (T-045, T-070)
+    """T-046 reports Hosono's rectangle certificates at C0. Its replays (T-045, T-070)
     held verified bounds equal to some of its values, the last at n = 52 until T-082's
     certificate was decided there on 6 October, and every one is beaten in the reported
     lane, so it is superseded without a problem. The rule is held on the same entry

@@ -1,6 +1,6 @@
 """The finite steps of Guzhou0806's s(40) > 3359/500 (#485) hold, and refuse controls.
 
-`devtools.audit_n40_new_supports` reads the retained new density and wand125's original
+`devtools.audit_n40_new_supports` reads the retained new density and Hosono's original
 pool, decides the density's orbit facts and the claim's finite steps in exact rationals,
 regenerates both kernel inputs, compares every value with both release receipts and
 prices the continuous-pose replay. These tests read retained files only and run no

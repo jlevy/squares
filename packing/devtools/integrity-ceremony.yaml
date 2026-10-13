@@ -271,10 +271,10 @@ allowlist:
       new bounds, assurance promotion or internal code/verdict hashes.
   - path: packing/devtools/audit_wand125_declared_net.py
     kind: download
-    boundary: wand125's finer-net bundle, its candidate, axis tables and checker files against the digests its manifest and the n50 packet's upstream copy pin (#366).
+    boundary: Hosono's finer-net bundle, its candidate, axis tables and checker files against the digests its manifest and the n50 packet's upstream copy pin (#366).
   - path: packing/devtools/fine_net_followup.py
     kind: download
-    boundary: wand125's fine-net release assets kept outside Git against the size and digest the packet pins, and their sealed inner bundles against the source's own files-sha256.json (#446).
+    boundary: Hosono's fine-net release assets kept outside Git against the size and digest the packet pins, and their sealed inner bundles against the source's own files-sha256.json (#446).
   - path: packing/devtools/audit_n11_lean.py
     kind: download
     boundary: 11SquaresFormalized's final audit, downloaded from the source, against the digest the packet's manifest pinned at retention and the uncompressed digest the source's summary.json states.
@@ -283,16 +283,16 @@ allowlist:
     boundary: Zenodo deposits and deployed web pages against the MD5 and digests the record or a retained manifest states.
   - path: packing/devtools/audit_wand125_point_and_mixed.py
     kind: download
-    boundary: wand125's acquired packets, their upstream listings and checker files (H3).
+    boundary: Hosono's acquired packets, their upstream listings and checker files (H3).
   - path: packing/devtools/audit_wand125_rectangles.py
     kind: download
-    boundary: wand125's rectangle certificates and the reviewed upstream checker (H3).
+    boundary: Hosono's rectangle certificates and the reviewed upstream checker (H3).
   - path: packing/devtools/audit_validtilt9_independent.py
     kind: download
-    boundary: wand125's records-tilt9-v1 release records against the digests the 2026-10-06 packet's retained records.sha256 pins, the checker files and cover their headers name against the retained bytes, and the staged copies against both (think-dsz4).
+    boundary: Hosono's records-tilt9-v1 release records against the digests the 2026-10-06 packet's retained records.sha256 pins, the checker files and cover their headers name against the retained bytes, and the staged copies against both (think-dsz4).
   - path: packing/devtools/audit_wand125_tools.py
     kind: download
-    boundary: wand125's published input digests against the regenerated input (H3).
+    boundary: Hosono's published input digests against the regenerated input (H3).
   - path: packing/devtools/audit_tokoharu_density.py
     kind: download
     boundary: Tokoharu's density packet against its file manifest (H4).

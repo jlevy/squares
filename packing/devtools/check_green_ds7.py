@@ -12,7 +12,7 @@ its boundary; shrinking ``P`` by ``1 - eps/L`` then puts a point in the interior
 unit square in a square of side ``L - eps``, so ``k^2`` points unavoidable at side ``G_k``
 prove ``s(k^2 + 1) >= G_k``.
 
-wand125's write-up of 2026-10-02 (jlevy/squares#308, retained under
+Hosono's write-up of 2026-10-02 (jlevy/squares#308, retained under
 ``resources/web/wand125-green-ds7-theorem9-2026-10-02``) reconstructs the pattern for
 every ``k``, and MacIver's manuscript of August 2026 gives the same one for ``k = 4``:
 ``k`` rows at heights ``m_y + j t``, even rows at offsets ``0, u, u + 1, ..., u + k - 2``
@@ -105,7 +105,7 @@ ROUND = 10**18
 #: How far below `G_k` the certified side sits, as a fraction of `G_k`.
 CERTIFY_MARGIN = Fraction(1, 1000)
 
-#: The square wand125's write-up publishes for `k = 4`: centre and `tan(theta/2)`. The
+#: The square Hosono's write-up publishes for `k = 4`: centre and `tan(theta/2)`. The
 #: centre is in container coordinates, as the dashed square of its Figure 1 places it, a
 #: translate of `Q_4` along the long edge's normal.
 PUBLISHED_K4 = (Fraction(29638179, 10**7), Fraction(302261, 250000), Fraction(179111, 312500))

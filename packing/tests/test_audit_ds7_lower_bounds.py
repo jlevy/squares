@@ -104,7 +104,7 @@ def test_indexed_external17_report_never_exceeds_the_verified_lane(
     unchanged (T-093), reported from 2026-10-05 above the verified lane until its paired
     replay passed here the same day -- and the reported and verified fields hold the
     same value. At n = 18 R012 held the report below a stronger first-party rung until
-    wand125's rectangle report replaced it; see the next test. Either way the
+    Hosono's rectangle report replaced it; see the next test. Either way the
     audit's own selector must be at a fixed point: the reported lane is raised only by
     a report that exceeds it, and never past what the verified lane already carries.
     """
@@ -119,7 +119,7 @@ def test_indexed_external17_report_never_exceeds_the_verified_lane(
 
 
 def test_a_stronger_non_ds7_report_at_n18_is_left_in_place() -> None:
-    """wand125's check2 report on its finest declared net (T-102) outranks its certificates
+    """Hosono's check2 report on its finest declared net (T-102) outranks its certificates
     of 5 and 6 October (T-096, T-099), R012, its rectangle certificate and the DS7
     candidates at n = 18.
 

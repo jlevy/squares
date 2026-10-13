@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # ruff: noqa: RUF001 -- this module writes register prose, whose typography uses curly
 # apostrophes and the corpus's other non-ASCII marks.
-"""Carry Hiroaki Hosono's (wand125's) rectangle-density bounds into the Frontier records.
+"""Carry Hiroaki Hosono's (Hosono's) rectangle-density bounds into the Frontier records.
 
 Each retained packet of the source (`devtools.audit_wand125_rectangles.PACKETS`) is one
 `Registration`: its source key and its three evidence entries. The newest registration
@@ -384,8 +384,8 @@ OCTOBER_1_REGISTRATION = Registration(
     # The three counts where another source's bound holds both lanes, so no replay of the
     # rectangle certificate could move either; all three certificates are unchanged since
     # 39d8ecc. The counts whose stronger bound is only reported are deliberately absent:
-    # wand125's exact covers s(59) = 8 and s(77) = 9, evand's s(60) = s(61) = 8 and
-    # s(78) = 9, and wand125's mixed certificates at n37, n66 and n90 (n65 and n92 have no
+    # Hosono's exact covers s(59) = 8 and s(77) = 9, evand's s(60) = s(61) = 8 and
+    # s(78) = 9, and Hosono's mixed certificates at n37, n66 and n90 (n65 and n92 have no
     # rectangle certificate). `plans` leaves their reported fields alone because the
     # record holds more, and a replayed rectangle certificate still raises their
     # verified lane, which sat at Nagamochi's bound until one of those claims was replayed

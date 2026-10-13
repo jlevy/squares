@@ -132,7 +132,7 @@ def _acquisition(packets: Path, name: str, commit: str, scope: list[str] | None)
 def test_a_register_pin_on_a_commit_a_packet_pins_takes_the_packets_scope(
     tmp_path: Path,
 ) -> None:
-    """The register cited wand125's 797bdf6 as a whole tree, which retained every path.
+    """The register cited Hosono's 797bdf6 as a whole tree, which retained every path.
 
     Its two packets at that commit retain twenty paths between them, so the register's
     pin there is dropped for theirs; a register address with a path is a pin of that path.
@@ -314,7 +314,7 @@ def _upstream(tmp_path: Path) -> tuple[Path, tuple[str, str, str, str]]:
 def test_a_register_pin_beside_a_scoped_packet_does_not_hide_what_the_packet_left_out(
     tmp_path: Path,
 ) -> None:
-    """The review's reproduction, in small: wand125's register pinned the head as a whole
+    """The review's reproduction, in small: Hosono's register pinned the head as a whole
     tree, so 1ebd484 and c56b9b7 were reported only with the register's pins removed."""
     repo, (first, second, pinned, head) = _upstream(tmp_path)
     packets = tmp_path / "web"

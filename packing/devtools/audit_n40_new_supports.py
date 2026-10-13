@@ -1,7 +1,7 @@
 """Audit Guzhou0806's new-support bound, s(40) > 3359/500, and price its replay.
 
 The comment of 2026-10-11 on jlevy/squares#485 claims ``s(40) > 3359/500 = 6.718`` from a
-new rational density: 685 positive D4 rectangle orbits, 522 drawn from wand125's
+new rational density: 685 positive D4 rectangle orbits, 522 drawn from Hosono's
 ``rect_n40_L67`` pool and 163 outside it, all with new weights, of mass ``3999/100``. The
 continuous-pose and axis kernels of T-145's release decide it unchanged, byte for byte, at
 new parameters: side ``B = 3350/3359``, threshold ``4999/5000``, the same 43 slabs of the

@@ -225,8 +225,8 @@ def test_case_rows_carry_each_kind_of_support_separately() -> None:
     assert n62["support"]["karakus_explicit_bound"]["reaches_nagamochi"] is False
     assert n62["support"]["chelokot_lean"]["verified"] is True
     assert by_n[63]["support"]["karakus_k2_minus_1"]["value"] == 8
-    # T-044's 861/100 until the merge of 2026-10-03; wand125's replayed n = 71 rectangle
-    # certificate (T-070), carried by monotonicity, until 5 October; since, wand125's own
+    # T-044's 861/100 until the merge of 2026-10-03; Hosono's replayed n = 71 rectangle
+    # certificate (T-070), carried by monotonicity, until 5 October; since, Hosono's own
     # n = 73 mixed certificate (T-091), decided here by sqverify-fast.
     assert by_n[73]["operative_lower_bound"]["exact_form"] == "8813/1000"
     assert by_n[73]["operative_lower_bound"]["results"] == ["T-091"]
