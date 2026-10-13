@@ -5,7 +5,7 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 18
+version: 19
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-13T11:14:39.154Z
+updated_at: 2026-10-13T11:23:36.106Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -89,8 +89,14 @@ Hosted ordinary: parent 3ee green; final child 273abfa terminal green at 11:04:5
 SUCCESS / 26 SKIPPED, gh-watch 0 / tee 0. Packing 38386467512, Pages 38386467610 and
 merge 38386461403 pass; duplicate skipped contexts retained.
 New full 38387914891 dispatched once on exact final child, attempt 1; terminal outcome
-pending. Old child full 38381750627 remained active on 9382 at that boundary: eleven
-separate jobs successful, core pending.
+pending.
+Old child full 38381750627 on 9382 now FAILED: all eleven separate prerequisites
+pass; core 3,557.73 s. Four failed steps: longest-task assertion 311 ms > 300 ms at
+native-frontier[390-light], eleven call-wall nodes across shards A/C, and shard B’s 900
+s command cap. No terminal shard B pass or navigation-cause inference.
+Receipt: validation/child273abfa-hosted-checkpoint/
+old-full-9382-terminal-failure-classification.json; complete failure log retained.
+Current full on 273 remains separately pending.
 Parent full 38375099262 FAILED on fifteen 12 s call guards across four shards: core 95
 steps / 2,827.84 s; all eleven separate prerequisites pass.
 Slow lane: 227 passes / 1,091.04 s; physical custody copy 21.41 s. No terminal full pass
