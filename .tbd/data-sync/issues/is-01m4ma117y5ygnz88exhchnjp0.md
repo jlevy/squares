@@ -5,7 +5,7 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 19
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T19:55:32.798Z
+updated_at: 2026-10-13T11:23:36.106Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -35,6 +35,92 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
 
 ## Notes
+
+## Current published checkpoint, October 13
+
+Formal stack 447: main → PR403 → PR435, OPEN/DRAFT and unmerged.
+Parent `3ee60c3e5157a82c0e9b5a48e54fc6c1f57539f5`; final child
+`273abfa593d64a01256f8da0059aeae2e4d64186`; integrated fetched main
+`34c826f08fc75dc51eb8d6f72c04b0f74b0c4ffb`. Completed source work is committed, pushed
+and captured on both PRs; both source trees are clean.
+Science, custody and pins are unchanged by the latest six-line fix.
+Parent: 437 records / 320 exact; child: 621 / 321 exact; public: 337. All 49 current
+native bindings remain V3/C3. Polynomial report remains HTML/Markdown only, with no PDF.
+Numeric, ordinal, reported geometry/Lean, contact and other owner scopes below remain
+open.
+
+Cleanup complete: six expanded fixture roots and Lean build removed after verified
+complete PAX archival and fresh activity checks.
+Allocated footprint: 6,244,765,696 B → 2,255,253,504 B archives + 17,903,616 B
+compressed manifests.
+Additional inactive Cargo/web/signature leaves total 1,161,801,728 B removed; observed
+external gain during those deletion steps about 1.06 GB, subject to APFS sharing and
+concurrent writers. Source/research, current failures, active caches, dirty reviews,
+current/rollback runtimes and pending update preserved.
+Lean bytes retained because 3,520 source paths had uncertain recovery.
+Darwin temp audit is partial.
+Free-space observation: admin/disk-cleanup-final-checkpoint.json.
+
+Prior exact child 9382 Git audit: 58 union commits / 575 paths; thin 5,978,268 B,
+non-thin 8,216,941 B; largest novel historical blob 2,629,925 B. Final child adds one
+six-line test commit: parent 22 / child 37 / union 59 commits, same 575 union paths, 680
+additional thin-pack bytes relative to 9382. All other objects/modes,
+science/custody/pins preserved.
+Pack bytes are not disk allocation or additive whole-stack cost.
+No new PDF/full HTML, retained pack or history rewrite.
+
+Latest repair requires the restored figure’s prescribed 20rem computed width before
+freezing direct/fetched snapshots.
+Production CSS/JS and all 167 original assertion ASTs/decorators unchanged.
+Eight siblings pass in 56.54 s; static checks zero.
+Declared 200 ms transition control passes in 31.49 s; permanently wrong 18rem width
+correctly refused. Exact native-duration Linux timing did not reproduce locally.
+
+Maintained --push --since 9382 selects nine prerequisites and 122 test modules.
+All nine prerequisites pass; normal lane completes 5,068 passes / 35 skips / four
+warnings in 514.35 s. Pool phase starts, then combined command hits unchanged 900 s
+deadline (901.03 s step, 915.07 s total).
+No terminal pool or whole pre-push pass.
+Prior 591-file child gate passes 68 prerequisites then times out at 900 s; older parent
+1,800 s timeout remains separate.
+No guard, assertion or cap relaxed.
+
+Hosted ordinary: parent 3ee green; final child 273abfa terminal green at 11:04:57Z, 32
+SUCCESS / 26 SKIPPED, gh-watch 0 / tee 0. Packing 38386467512, Pages 38386467610 and
+merge 38386461403 pass; duplicate skipped contexts retained.
+New full 38387914891 dispatched once on exact final child, attempt 1; terminal outcome
+pending.
+Old child full 38381750627 on 9382 now FAILED: all eleven separate prerequisites
+pass; core 3,557.73 s. Four failed steps: longest-task assertion 311 ms > 300 ms at
+native-frontier[390-light], eleven call-wall nodes across shards A/C, and shard B’s 900
+s command cap. No terminal shard B pass or navigation-cause inference.
+Receipt: validation/child273abfa-hosted-checkpoint/
+old-full-9382-terminal-failure-classification.json; complete failure log retained.
+Current full on 273 remains separately pending.
+Parent full 38375099262 FAILED on fifteen 12 s call guards across four shards: core 95
+steps / 2,827.84 s; all eleven separate prerequisites pass.
+Slow lane: 227 passes / 1,091.04 s; physical custody copy 21.41 s. No terminal full pass
+or landing verdict.
+
+Next engineering entry: inspect current full receipt, then resolve parent timing and
+local pool/timeout routing under w0if/ht59 without relaxed guards.
+Selected research entry remains W7 exporter and independent contact-derived n=11 control
+before bounded adopted-current n=102. Engineering passes close no scientific owners.
+Leave this bead in progress.
+
+Evidence root:
+/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635.
+Receipts: validation/child 273abfa-hosted-checkpoint/;
+validation/child9382-case-drawing-repair/ready.json and final-pre-push.log;
+validation/main34-parent-hosted-checkpoint/; admin/child 273abfa-small-fix-size.json;
+admin/drawing-pr-publication-verification.json;
+admin/disk-cleanup-final-checkpoint.json; admin/archive-slice-final-receipt.json;
+admin/archive-manifest-compaction-summary.json; admin/disk-followup-reclamation.json;
+admin/old-web-build-reclamation.json; admin/remaining-beads-current-source.json.
+Prior complete notes snapshot: admin/bead-before-drawing-publication.json.
+Source handoff: docs/project/handoffs/handoff-2026-10-10-polynomial-pr-stack.md.
+
+--- Earlier dated checkpoints and unique evidence ---
 
 ## Current Upstream and Table Checkpoint
 
