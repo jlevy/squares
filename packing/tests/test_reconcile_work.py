@@ -465,10 +465,10 @@ def test_cited_commits_must_be_on_the_base(tmp_path: Path) -> None:
     git("config", "user.email", "t@example.org")
     git("config", "user.name", "t")
     git("commit", "-q", "--allow-empty", "-m", "on main")
-    on_main = git("rev-parse", "--short=9", "HEAD")
+    on_main = git("rev-parse", "HEAD")
     git("checkout", "-q", "-b", "side")
     git("commit", "-q", "--allow-empty", "-m", "off main")
-    off_main = git("rev-parse", "--short=9", "HEAD")
+    off_main = git("rev-parse", "HEAD")
     review = {
         "beads": [
             {"id": "think-a111", "action": "close", "evidence": [f"landed in {on_main}"]},

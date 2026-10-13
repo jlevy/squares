@@ -73,7 +73,8 @@ TITLE_STOPWORDS = frozenset(
     ]
 )
 DUPLICATE_THRESHOLD = 0.6
-# A commit-shaped token with at least one hex letter; all-digit runs are comment and run ids.
+# A commit-shaped token with at least one hex letter; all-digit runs are comment and run ids,
+# so a short hash that happens to be all digits is not read as a commit (cite full hashes).
 COMMIT_TOKEN = re.compile(r"\b(?=[0-9a-f]*[a-f])[0-9a-f]{7,40}\b")
 STATUS_LINE = re.compile(r"\bstatus\b\W{0,4}:\W{0,4}\s*(.+)", re.IGNORECASE)
 
