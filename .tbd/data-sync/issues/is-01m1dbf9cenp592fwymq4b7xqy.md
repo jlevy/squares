@@ -3,9 +3,9 @@ type: is
 id: is-01m1dbf9cenp592fwymq4b7xqy
 title: "BC-112: determine adoption of the fixed 4.5058 certificate"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 15
+version: 17
 spec_path: packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
 labels:
   - packing
@@ -14,10 +14,14 @@ dependencies:
   - type: blocks
     target: is-01m1dqc43wtym6hsxmbnqca2k8
 parent_id: is-01m1dbej7kqs8r1hwfmx5w3v3n
-hold: paused
+hold: null
 hold_until: null
 created_at: 2026-09-01T02:06:20.043Z
-updated_at: 2026-09-03T05:44:38.639Z
+updated_at: 2026-10-13T00:54:37.061Z
+closed_at: 2026-10-13T00:54:37.060Z
+close_reason: Duplicate of think-6q88 (BC-150 completed adoption of the fixed 4.5058 certificate, registered as T-015); BC-112 has been stopped since 2026-09-01. Consolidated per the owner's decision of 2026-10-13.
+resolution: duplicate
+duplicate_of: is-01m1jwp8148ey4cjc0nxt93csy
 ---
 Blocked on BC-108 agreement and BC-111 routing. Make three separate provisional determinations: checker agreement or discrepancy, adoption-recommended, not-adopted, or unresolved assurance status, and exact monotone consequences at n=17,18,19. Freeze an immutable proposed frontier patch but do not edit frontier records or clear BC-115. Agreement between implementations is not two independent proof methods; non-adoption is not mathematical refutation.
 

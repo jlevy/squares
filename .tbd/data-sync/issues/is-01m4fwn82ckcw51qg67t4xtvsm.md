@@ -5,7 +5,7 @@ title: W3 insight-iteration review of the n17 program after consolidation
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 9
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels:
@@ -14,10 +14,10 @@ dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 child_order_hints:
   - is-01m4g7ns8nzs2jxvbhzspratsa
-hold: null
+hold: paused
 hold_until: null
 created_at: 2026-10-09T08:32:15.435Z
-updated_at: 2026-10-09T11:51:05.541Z
+updated_at: 2026-10-13T00:55:47.193Z
 started_at: 2026-10-09T09:29:40.803Z
 ---
 Delegate to a Fable sub-agent at max effort once the merge set is stabilized: comprehensive review of everything done so far on n=17 and the most productive directions toward a foolproof proof or the greatest mathematical progress. Output: X-NNN report and candidate H-NNN items with mechanism, falsifier, expected information and limits, landed via PR from claude/modest-pascal-z3nisd.
@@ -37,3 +37,5 @@ Delegate to a Fable sub-agent at max effort once the merge set is stabilized: co
 
 
 2026-10-09T11:51Z LANDED: PR #473 merged at main 6a0499ba4 (X-051 + H-325..H-340 with W2 corrections; Review B blocker fixed). Follow-up tool: think-a1fv.
+
+2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. Its own deliverable is finished (X-051 W3 review landed as PR #473, merged at 6a0499ba4) but it cannot close while its child think-a1fv is open; held with that child. Close it when think-a1fv is resolved.

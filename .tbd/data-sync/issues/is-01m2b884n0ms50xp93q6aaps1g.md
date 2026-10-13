@@ -5,8 +5,8 @@ title: Revise and admit the BC329 three-profile run sheet
 kind: task
 status: closed
 priority: 1
-version: 21
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 23
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol high documentation and operational review
 labels:
   - n11
@@ -27,7 +27,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-12T16:47:13.055Z
-updated_at: 2026-10-06T08:39:57.549Z
+updated_at: 2026-10-13T00:57:09.514Z
 closed_at: 2026-10-06T08:39:57.549Z
 close_reason: "Superseded: the run sheet's reviews are committed in 9c56e901 (ancestor of main) and the BC329 launch was put on hold by the owner (think-zwlf, closed). BC329's prospective endpoint 3.8267215 is below T-033's proved 3.8269975, so the packet could not move any bound even before T-060; its runner and calibration machinery is retained unexecuted on main via PR #156. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical. Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
 resolution: canceled

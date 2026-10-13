@@ -5,8 +5,8 @@ title: Build a source-bound BC303 C charge sweep and S first-owner filter
 kind: task
 status: closed
 priority: 1
-version: 15
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 17
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol implementation after Astra Max acceptance
 labels:
   - n11
@@ -22,7 +22,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-13T20:13:15.712Z
-updated_at: 2026-10-06T08:40:32.888Z
+updated_at: 2026-10-13T00:58:11.134Z
 closed_at: 2026-10-06T08:40:32.888Z
 close_reason: "Superseded: the source-bound BC303 C/S reader was admitted target-free (PR #164 merged) and exp-158 was paused before invocation; running it cannot move an n11 bound. The domain is posed at a side below Kleddamag's verified s(11) > 31/8 = 3.875 (T-037), where T-060 already excludes every packing. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical. Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
 resolution: canceled

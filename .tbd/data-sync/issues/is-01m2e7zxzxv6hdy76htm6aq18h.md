@@ -5,15 +5,15 @@ title: Compare post-T1 n11 proof bridges with exact next discriminators
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 5
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max mathematical analysis
 labels:
   - n11
   - strategy
 dependencies: []
 created_at: 2026-09-13T20:40:27.387Z
-updated_at: 2026-09-13T20:55:56.524Z
+updated_at: 2026-10-13T00:58:11.454Z
 closed_at: 2026-09-13T20:55:56.516Z
 close_reason: Completed source-cited post-T1 implication/discriminator note; no source changes or target runs. New parent-union deduction is explicitly pending independent review.
 resolution: null

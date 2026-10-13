@@ -5,7 +5,7 @@ title: Test that the force law holds a known optimum still
 kind: feature
 status: open
 priority: 2
-version: 2
+version: 3
 spec_path: packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md
 labels:
   - packing
@@ -14,7 +14,7 @@ dependencies:
     target: is-01m225ps2ejkzyjc45g0xj6kyh
 parent_id: is-01m225hw89vjsga1wnegrwnq5a
 created_at: 2026-09-09T04:09:37.601Z
-updated_at: 2026-09-09T04:09:45.030Z
+updated_at: 2026-10-13T00:55:32.846Z
 ---
 Not built. Candidate C0d of X-025, and the first test of the force law that should run.
 
@@ -31,3 +31,7 @@ Criterion, declared per record before the run. No movable square: maximum per-sq
 Two confounds to handle first. The screen's one-sidedness: a miss proves only that one square cannot be translated at that tolerance; rotation and coordinated multi-square motion are outside it, so a square that turns in place is not a screen hit and needs its own tolerance. And 23 records are recorded as not stable across the screen's tolerances (n = 132, 154-156, 179-182, 206-210, 238-241, 270, 273, 297, 301, 305, 307); report those separately rather than scoring them, because on them the answer key is itself tolerance-dependent.
 
 Research framing: X-025, candidate C0d.
+
+## Notes
+
+2026-10-13 owner decision (consolidate duplicates): think-dpmt, the same test filed under think-hsdj on 2026-09-09 (framed there as the owner's idea from X-025), closed as a duplicate of this bead. Committed pointers still naming think-dpmt: packages/workbench/src/application.js (the comment beside INITIALS; the 'record' start is the by-hand form of this test) and the atlas video plan's queue. think-j30w, which blocked this bead for the best-known start, closed as a duplicate of think-rdee; the package workbench already offers the 'record' start, so this bead no longer waits on it.

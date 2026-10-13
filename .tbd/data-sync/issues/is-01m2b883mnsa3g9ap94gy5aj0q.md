@@ -5,8 +5,8 @@ title: Retain observed worker topology in BC329 calibration profiles
 kind: task
 status: closed
 priority: 1
-version: 13
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 15
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh implementation; source-distinct review
 labels:
   - n11
@@ -23,7 +23,7 @@ parent_id: is-01m2app5e71qnp9z5vfp9vppbp
 hold: null
 hold_until: null
 created_at: 2026-09-12T16:47:12.009Z
-updated_at: 2026-10-06T08:39:51.682Z
+updated_at: 2026-10-13T00:57:08.539Z
 closed_at: 2026-10-06T08:39:51.682Z
 close_reason: "Superseded: the topology producer and its lifetime guard landed with PR #156 (fc3e314d is an ancestor of origin/main eb43ffe9a; merged 2026-09-14); the positive profiles it was gating are moot. BC329's prospective endpoint 3.8267215 is below T-033's proved 3.8269975, so the packet could not move any bound even before T-060; its runner and calibration machinery is retained unexecuted on main via PR #156. Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
 resolution: canceled

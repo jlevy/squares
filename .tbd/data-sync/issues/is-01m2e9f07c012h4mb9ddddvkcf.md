@@ -5,8 +5,8 @@ title: Independently admit the BC303 parent-union reader before its literal targ
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 6
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol source-distinct replay
 labels:
   - n11
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m2e8yv7h5qgzqkat7crt5s54
 parent_id: is-01m2e8yv7h5qgzqkat7crt5s54
 created_at: 2026-09-13T21:06:09.771Z
-updated_at: 2026-09-13T21:51:28.972Z
+updated_at: 2026-10-13T00:58:18.784Z
 closed_at: 2026-09-13T21:51:28.971Z
 close_reason: ACCEPT exact-head bound parent-union reader 641beab7; authenticated frozen 377-atom source, closed union and D4 synthetic arithmetic, four negative controls; no Q0 target run.
 resolution: null

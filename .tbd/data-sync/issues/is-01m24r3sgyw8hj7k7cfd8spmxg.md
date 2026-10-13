@@ -5,8 +5,8 @@ title: Iterate LP support and atom set together, separating from the depth-one c
 kind: task
 status: closed
 priority: 1
-version: 12
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 13
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 child_order_hints:
@@ -15,7 +15,7 @@ child_order_hints:
   - is-01m2agbxyzknj4s538jxexx8dz
   - is-01m24tw131mnym4p7mpngnhsbt
 created_at: 2026-09-10T04:09:46.782Z
-updated_at: 2026-10-06T08:38:31.278Z
+updated_at: 2026-10-13T00:56:11.604Z
 closed_at: 2026-10-06T08:38:31.278Z
 close_reason: "Superseded by T-060: s(11) equals Trump's side, registered 2026-09-29 at V3/C3 and on main since PR #246 (merged 2026-09-30). This n = 11 lower-bound certificate work has no target left; the owner's 2026-09-14 strategy reset had already paused it, and the post-optimality plan (plan-2026-10-01) uses n = 11 only as a control. All four children are closed."
 resolution: canceled

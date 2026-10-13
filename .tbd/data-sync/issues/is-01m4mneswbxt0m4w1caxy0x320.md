@@ -3,9 +3,9 @@ type: is
 id: is-01m4mneswbxt0m4w1caxy0x320
 title: "Address PR #496 reviews E, F, G: audit deadline, fetch timeouts, push attribution, banners, docs"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 18
+version: 19
 delegate: claude-code@spud10
 labels: []
 dependencies: []
@@ -28,8 +28,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T05:02:36.426Z
-updated_at: 2026-10-12T23:41:09.699Z
+updated_at: 2026-10-13T00:54:46.486Z
 started_at: 2026-10-11T05:03:43.544Z
+closed_at: 2026-10-13T00:54:46.486Z
+close_reason: "Completed: every PR #496 review E/F/G finding was fixed or deferred in PR #507 (merged e96e9ea95, think-jjs7); all 14 children closed; F3/F5/F6/F7 live on under think-ri5z, think-tqwo, think-h7c0 and think-7qbv."
+resolution: null
+duplicate_of: null
 ---
 Addressing pass for PR #496 (https://github.com/jlevy/squares/pull/496), branch codex/website-cleanups, reviewed head aca9a0784386de4289f8a5293cd28541ab72d785.
 Review E (senior, Fable): https://github.com/jlevy/squares/pull/496#pullrequestreview-5481683586 (E1-E4 Low, E5-E6 suggestions).

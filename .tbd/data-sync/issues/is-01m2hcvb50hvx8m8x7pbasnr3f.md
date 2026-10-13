@@ -5,15 +5,15 @@ title: Admit the Route A same-corner availability-root experiment at q=96/25
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 5
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - admission
 dependencies: []
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
 created_at: 2026-09-15T02:03:03.199Z
-updated_at: 2026-09-15T16:21:32.034Z
+updated_at: 2026-10-13T00:55:35.738Z
 closed_at: 2026-09-15T16:21:32.032Z
 close_reason: "BC-354 completed its bounded admission decision and fired the predeclared representation guard: the current tools do not freeze the universal 80-stratum negative root with shared parents, a rows-complete matched exact baseline, a conditional-domain gate, and a method-distinct replay. Route A is parked at this representation boundary; no target ran, no physical root closed, and no mathematical route was refuted. Route S / think-a1e8 is the sole next admission entry."
 resolution: null
