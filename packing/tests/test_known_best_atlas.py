@@ -52,8 +52,10 @@ from devtools import refinement_packets as refinement_sources
 from devtools import ryxu_arrangement_reports as ryxu_reports
 from devtools import ryxu_house_links as ryxu_houses
 from devtools import ryxu_radical_n51 as ryxu_radical
+from devtools import upper_bound_houses as adopted_houses
 from devtools.atlas_legend import AtlasLegendCounts, atlas_legend
 from devtools.result_status import RecentContributions, recent_contributions_by_case
+from devtools.retained_data import read_retained_bytes
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
     COMPOSITE_PDF_EDITION_DATE,
@@ -84,8 +86,9 @@ from sqpack.yamlio import safe_load
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
 #: The first SQUISH update moved n = 179 and 258 onto packet-derived facts;
 #: the second also moved n = 88. Complete evand and ry-xu packets now supersede
-#: earlier catalogue sources. These inventory counts follow the current corpus.
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 23, "n=1..324": 50}
+#: earlier catalogue sources. These inventory counts follow the current corpus; the house
+#: adoption of 12 October 2026 moved n = 176 onto SQUISH's issue 500 packet (think-fvz4).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 48}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -101,15 +104,18 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
         "kingbird-derived-facts": 30,
         "packet-derived-facts": 6,
     },
+    # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4).
     "n=1..200": {
         "exact-grid": 114,
-        "kingbird-derived-facts": 53,
-        "packet-derived-facts": 33,
+        "kingbird-derived-facts": 52,
+        "packet-derived-facts": 34,
     },
+    # 232 (from Kingbird) and 308 (from the grid) moved to packet houses in the house
+    # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4).
     "n=1..324": {
-        "exact-grid": 176,
-        "kingbird-derived-facts": 80,
-        "packet-derived-facts": 68,
+        "exact-grid": 175,
+        "kingbird-derived-facts": 78,
+        "packet-derived-facts": 71,
     },
 }
 
@@ -336,6 +342,22 @@ def _assert_container_retains(
     assert retained == digests[entry["source_path"]], row["url"]
 
 
+def _assert_file_retains(row: dict[str, Any], path: Path) -> None:
+    """A house adopted on 11 October 2026 (think-fvz4) keeps its certificate as the
+    upstream file itself under its packet's archive: its bytes, or the bytes it holds
+    compressed, carry the SHA-256 the packet's acquisition record pinned upstream."""
+    packet = adopted_houses.source_for(row["n"]).packet
+    revision, digests = _packet_acquisition(packet)
+    _, marker, upstream = row["url"].partition(f"/blob/{revision}/")
+    assert marker, row["url"]
+    data = (
+        path.read_bytes()
+        if path.name == Path(upstream).name
+        else read_retained_bytes(path, limit=adopted_houses.reports.MAX_SOURCE_BYTES)
+    )
+    assert hashlib.sha256(data).hexdigest() == digests[upstream], row["url"]
+
+
 def test_every_retained_packet_source_holds_its_upstream_bytes() -> None:
     """A packet row marked `raw_asset_retained` keeps the file its `url` names, byte for
     byte: the builder marks a row so when its `path` is a complete-certificate container
@@ -351,6 +373,9 @@ def test_every_retained_packet_source_holds_its_upstream_bytes() -> None:
     containers: dict[str, dict[str, Any]] = {}
     for row in rows:
         path = ROOT / row["path"]
+        if not row["path"].endswith(".json.xz"):
+            _assert_file_retains(row, path)
+            continue
         if row["path"] not in containers:
             containers[row["path"]] = _retained_container(path)
         _assert_container_retains(
@@ -582,6 +607,11 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
     n = entry["n"]
     if n in ryxu_houses.NUMBERS and entry["source"]["url"] == ryxu_houses.source_url(n):
         assert ROOT / entry["witness"]["path"] == ryxu_houses.house_path(n)
+    if (
+        n in adopted_houses.ADOPTED
+        and entry["source"]["url"] == adopted_houses.source_for(n).origin(n).url
+    ):
+        assert ROOT / entry["witness"]["path"] == adopted_houses.house_path(n)
     witness = load_witness(ROOT / entry["witness"]["path"], fallback_schema=SCHEMA)
     assert witness["n"] == n
     assert witness["id"] == entry["witness"]["id"]
@@ -600,6 +630,17 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         )
         source = refinement_houses.source(n) if n in refinement_houses.NUMBERS else None
         if (
+            n in adopted_houses.ADOPTED
+            and witness["source"]["key"] == adopted_houses.source_for(n).key
+        ):
+            # A house adopted on 11 October 2026 (think-fvz4) is drawn from its
+            # certificate's retained file; admit the whole house it rebuilds, with the
+            # count's native jobs, not a matching path alone.
+            origin = adopted_houses.source_for(n).origin(n)
+            assert entry["source"]["path"] == origin.path.relative_to(ROOT).as_posix()
+            assert witness["source"]["path"] == entry["source"]["path"]
+            adopted_houses.check_houses([n])
+        elif (
             n in gupta_houses.NUMBERS
             and witness["source"]["key"] == gupta_houses.reports.SOURCE_KEY
         ):
@@ -650,8 +691,10 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         )
 
 
-@pytest.mark.parametrize("n", [51, 70])
-def test_ryxu_manifest_refuses_a_noncanonical_house_path(n: int) -> None:
+@pytest.mark.parametrize("n", [51, 70, 261, 308])
+def test_a_linked_house_manifest_refuses_a_noncanonical_house_path(n: int) -> None:
+    """An ry-xu house (51) or one adopted on 11 October 2026 (70, 261, 308) is read only
+    from its canonical leaf."""
     document = json.loads((ATLAS / "manifest.json").read_text(encoding="utf-8"))
     entry = next(row for row in document["atlas"]["entries"] if row["n"] == n)
     changed = {**entry, "witness": {**entry["witness"], "path": "witnesses/other-house.yaml"}}
@@ -1216,7 +1259,8 @@ def test_poster_complete_rows_share_a_right_edge_and_leave_room_for_left_informa
         assert position.top + 242 <= canvas.height - 120
     for row, top, prefix_left, first_grid_left in (
         (17, 4712, 586, 4116),
-        (18, 4999, 180, 3913),
+        # 308 left the grid on 11 October 2026 (think-fvz4), so row 18's grid starts at 309.
+        (18, 4999, 180, 4116),
     ):
         transition = transitions[row]
         non_grid, grid = canvas.segment_lines(transition)
@@ -1580,7 +1624,7 @@ def test_triangle_fast_label_check_requires_the_compact_caption() -> None:
     assert check(canvas, root) == [
         (
             "atlas/known-best/known-best-1-324.svg n=211 side-bound is "
-            "('s(211) ≤ 14.997961',); expected ('s(211) ≤ 14.99797',)"
+            "('s(211) ≤ 14.997961',); expected ('s(211) ≤ 14.99634',)"
         )
     ]
 
@@ -1942,8 +1986,11 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     assert information is not None
     credit_block = information.find("svg:g[@data-feature='packing-credits']", SVG)
     assert credit_block is not None
-    assert len(expected_names) == 22
-    assert len(expected_sources) == 10
+    # The house adoption of 11 October 2026 credits Fang, Mishapolk, PingYou Ltd, Ostashev
+    # and Barnett and draws no de Winter packing, from eight more sources; that of 12
+    # October draws from SQUISH's and Couzo's 11 October releases (think-fvz4).
+    assert len(expected_names) == 26
+    assert len(expected_sources) == 20
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -1971,13 +2018,17 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Chaoweeraprasit",
         "Couzo",
         "Daniel",
-        "de Winter",
+        "Fang",
+        "Ostashev",
+        "PingYou Ltd",
         "Rehwaldt",
         "Gupta",
+        "Barnett",
         "ry-xu",
         "Chang",
         "DeVincentis",
         "hmbelvedere",
+        "Mishapolk",
     ]
     assert all(body.count(name) == 1 for name in expected_names)
     assert "et al." not in body
@@ -2113,7 +2164,7 @@ def test_poster_accents_recent_contributions_independently_in_svg_and_pdf() -> N
         line = cards[211].find(f"svg:text[@data-feature='{feature}']", SVG)
         assert line is not None
         assert "".join(line.itertext()) == (
-            "s(211) ≤ 14.99797" if feature == "side-bound" else "s(211) ≥ 14.54457"
+            "s(211) ≤ 14.99634" if feature == "side-bound" else "s(211) ≥ 14.54457"
         )
         colored = [span for span in line if span.attrib.get("fill") == FIRST_PARTY_ACCENT_COLOR]
         assert len(colored) == 1
@@ -2904,10 +2955,13 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
         "".join(node.itertext())
         for node in legend.findall(".//svg:text[@data-feature='legend-label']", SVG)
     ]
+    # The house adoption of 11 October 2026 gave nine cases known only numerically an
+    # exact certificate, and its pass of 12 October three more, 181, 271 and 304, whose
+    # reported lanes stated no exact form (think-fvz4).
     assert labels == [
         "proved optimal (77 of 324)",
-        "exact value known (295 of 324)",
-        "only known numerically (29 of 324)",
+        "exact value known (307 of 324)",
+        "only known numerically (17 of 324)",
         "rigid (22 of 324)",
         "colors indicate distinct tilt angles",
         "shade indicates number of full-side contacts",
@@ -3398,7 +3452,7 @@ def test_the_version_leaves_out_the_stamped_composites_the_video_code_and_docs()
     docs = {
         "packing/frontier/README.md",
         "packing/atlas/known-best/README.md",
-        "packing/atlas/known-best/FIGURE-PLAYBOOK.md",
+        "packing/atlas/known-best/figure-playbook.md",
     }
     assert {path for path in left_out if not path.startswith(video) and path not in docs} == (
         stamped
@@ -4058,7 +4112,7 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
     assert credit_text[0] == credit_text[1]
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 22
+        == 26
     )
 
 

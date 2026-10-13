@@ -15,7 +15,8 @@ This tbd plan is the assessment artifact for Agenda 024’s BC-250, under the
 It preserves reasoning, alternatives, and source coverage.
 The H registry owns claims; agendas 024–026 own bounded commitments and allocation;
 beads own work; sessions own execution and recovery.
-The [continuation addendum](../../handoff-2026-09-06-post-381-t2-t10-continuation.md)
+The
+[continuation addendum](../../handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md)
 retains literal commands and process custody.
 Completed experiments keep their criteria and verdicts.
 This document is not an independent queue or authority to launch work.

@@ -269,6 +269,14 @@ def test_a_page_that_is_not_built_is_refused(tmp_path: Path) -> None:
     assert atlas.page_address(built, render=False) == built.resolve().as_uri()
 
 
+def test_a_published_page_is_taken_at_its_address_and_not_rendered() -> None:
+    site = "https://jlevy.github.io/squares/"
+    assert atlas.page_address(site, render=False) == f"{site}atlas.html"
+    assert atlas.page_address(f"{site}atlas.html", render=False) == f"{site}atlas.html"
+    with pytest.raises(SystemExit, match="published site"):
+        atlas.page_address(site, render=True)
+
+
 #: The cases that carry a star, and the ones that carry the badge, in the planted layouts.
 STARRED, BADGED = [5, 6, 7], [5, 8]
 

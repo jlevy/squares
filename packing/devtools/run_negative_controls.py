@@ -96,6 +96,7 @@ from devtools import refinement_house_links as refinements
 from devtools import ryxu_house_links as ryxu
 from devtools import squish_second_update_confirmation as second
 from devtools import squish_second_update_house_links as house
+from devtools import upper_bound_houses as adopted_houses
 from devtools import wand125_fn1_bindings as fn1
 from devtools.check_checkout_imports import environment_for
 from devtools.repo_scope import tracked_files
@@ -173,6 +174,7 @@ HOUSE_LINK_LEAVES = frozenset(
         *ryxu.snapshot_house_links(),
         *gupta.snapshot_house_links(),
         *evand_houses.snapshot_house_links(),
+        *adopted_houses.snapshot_house_links(),
     )
 )
 # C8 / think-rara: exact historical outputs, not their scientific input packets or
@@ -430,7 +432,7 @@ PRUNE = frozenset(
         # gone. `e4ad5cedd` (2026-09-30) trimmed the root `README.md` to point at the
         # published site, and it now links neither vector nor any of the four exports.
         # The links that remain are in `atlas/README.md`, `atlas/known-best/README.md` and
-        # `FIGURE-PLAYBOOK.md`, which `linked_pruned_targets` does not scan and no control
+        # `figure-playbook.md`, which `linked_pruned_targets` does not scan and no control
         # link-checks: `check_links` runs on the root README and SYNOPSIS only, and the
         # ledger's `dead_links` on `campaign/` only. A pruned vector now leaves the worker,
         # and the four exports above stopped being inert on the same commit.
@@ -477,7 +479,7 @@ PRUNE = frozenset(
         # beside them are small and stay.
         ROOT / "atlas/known-best/regularized/rendering",
         # The pre-migration transition statistics are frozen historical output;
-        # v2-transitions/NOTES.md records that the live builder now generates its
+        # v2-transitions/notes.md records that the live builder now generates its
         # own statistics elsewhere. No registered control reads this old JSON,
         # and no checked document links it inline. Its 1,371,919 bytes are omitted
         # when Session153's complete proof artifacts take the snapshot to
@@ -996,6 +998,12 @@ COPY_SEPARATELY = (
     *ryxu.private_input_paths(),
     *gupta.private_input_paths(),
     *evand_houses.private_input_paths(),
+    # The houses adopted on 2026-10-11 (`upper_bound_houses`): each count's declaration,
+    # acquisition record, digest manifest, certificate or derived fact and receipt, so the
+    # house check runs in a worker on ordinary private files: 82 inputs of 1,733,559 bytes,
+    # measured on 2026-10-12, some of them register artifacts the copier already rescues.
+    # The 42 house leaves themselves are linked back rather than copied.
+    *adopted_houses.private_input_paths(),
     *fn1.private_input_paths(),
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
@@ -1008,6 +1016,27 @@ COPY_SEPARATELY = (
     ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-catalogue.json",
     ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/source-manifest.json",
     ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-n27-followup.json",
+    ROOT / "resources/web/wand125-fine-net-n29-2026-10-10/README.md",
+    ROOT / "resources/web/wand125-fine-net-n29-2026-10-10/reported-n29-followup.json",
+    ROOT / "resources/web/wand125-fine-net-n29-2026-10-10/source-manifest.json",
+    ROOT / "resources/web/wand125-fine-net-n29-2026-10-10/receipts/premises.json",
+    ROOT / "resources/web/wand125-fine-net-n29-2026-10-10/receipts/sample-diagnostic.json",
+    ROOT / "resources/web/wand125-fine-net-n28-n30-2026-10-10/README.md",
+    ROOT / "resources/web/wand125-fine-net-n28-n30-2026-10-10/reported-n28-followup.json",
+    ROOT / "resources/web/wand125-fine-net-n28-n30-2026-10-10/reported-n30-followup.json",
+    ROOT / "resources/web/wand125-fine-net-n28-n30-2026-10-10/source-manifest.json",
+    ROOT / "resources/web/wand125-fine-net-n28-n30-2026-10-10/receipts/premises-n28.json",
+    ROOT / "resources/web/wand125-fine-net-n28-n30-2026-10-10/receipts/premises-n30.json",
+    ROOT
+    / "resources/web/wand125-fine-net-n28-n30-2026-10-10/receipts/sample-diagnostic-n28.json",
+    ROOT
+    / "resources/web/wand125-fine-net-n28-n30-2026-10-10/receipts/sample-diagnostic-n30.json",
+    ROOT / "resources/web/wand125-linear-n122-2026-10-10/README.md",
+    ROOT / "resources/web/wand125-linear-n122-2026-10-10/reported-n122.json",
+    ROOT / "resources/web/wand125-linear-n122-2026-10-10/source-manifest.json",
+    ROOT / "resources/web/wand125-linear-n122-2026-10-10/receipts/linear-premises.json",
+    ROOT
+    / "resources/web/wand125-linear-n122-2026-10-10/receipts/linear-sample-diagnostic.json",
     REPO / ".flowmarkignore",
     REPO / ".gitignore",
     REPO / ".github/PULL_REQUEST_TEMPLATE.md",
@@ -1257,7 +1286,25 @@ def root_files() -> tuple[Path, ...]:
 #
 # The upstream measurements used its 192 MiB cap; retain the independently
 # calibrated 200 MiB atlas-metadata capacity on this branch.
-SNAPSHOT_MAX_BYTES = 200 * 1024 * 1024
+#
+# 2026-10-12, intake 2026-10-11 layer 2 (#516 at 1e41643e8, the #503, #504, #501 and
+# #505 imports): 210,099,865 bytes, 384,665 over 200 MiB, failing hosted suite-a and
+# suite-c. The tree below it, layer 1 (#512) at 604699ee1 on main's 3a5a91a90, measures
+# 209,353,914 and had 361,286 bytes of headroom left; this layer adds 745,951: 466,439 in
+# the four packets, the rest their two reviews, the register rows and the route's code
+# and tests. A lane found no safe prune: the new packets are results-register artifacts
+# that workers read, and the larger files of the walk are linked, registered or read by
+# controls. The only real saving is narrowing the copy-back for archive files linked only
+# from documents no control link-checks, about 14.4 MB, which needs the two hidden
+# readers above fixed first; think-b6ir owns it.
+#
+# The owner chose on 2026-10-12, in the intake session, to raise the cap to 216 MiB
+# rather than hunt another prune: 16,392,551 bytes (15.6 MiB) of headroom over this
+# layer, roughly ten intakes of this one's size (layers 1 to 3 add 1,525,785 bytes over
+# 3a5a91a90). Nothing copied changes; three portable workers are bounded at 648 MiB.
+# With this change's comments and tests counted, the snapshot measures 210,101,768
+# bytes, 16,390,648 under the raised cap.
+SNAPSHOT_MAX_BYTES = 216 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

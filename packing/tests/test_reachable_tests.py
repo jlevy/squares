@@ -9,6 +9,7 @@ change nobody can attribute must select everything.
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import subprocess
@@ -642,3 +643,86 @@ def test_whole_atlas_pool_heavy_collection_is_one_canonical_node(
     assert collected == {
         "tests/test_known_best_atlas.py::test_known_best_composite_contains_every_case_and_square"
     }
+
+
+@pytest.mark.parametrize(
+    "paths", [[], ["old/name.py", "new/name.py", "deleted.py", "space and é\nname.py"]]
+)
+def test_explicit_changed_paths_are_used_without_reading_git(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    paths: list[str],
+) -> None:
+    snapshot = tmp_path / "paths.json"
+    snapshot.write_text(json.dumps(paths))
+    monkeypatch.setattr(
+        reachable_tests,
+        "changed_paths",
+        lambda _base: pytest.fail("snapshot must not read Git"),
+    )
+    seen: list[list[str]] = []
+
+    def select(changed: list[str]) -> reachable_tests.TestSelection:
+        seen.append(changed)
+        return reachable_tests.TestSelection(everything=True, reason="control", tests=())
+
+    monkeypatch.setattr(reachable_tests, "select_tests", select)
+    assert reachable_tests.main(["--summary", "--changed-paths-file", str(snapshot)]) == 0
+    assert capsys.readouterr().out == "everything\n"
+    assert seen == [paths]
+
+
+@pytest.mark.parametrize(
+    "content",
+    [
+        None,
+        "{",
+        "{}",
+        '["valid.py", 7]',
+        '[""]',
+        # A NUL cannot be in a path; a snapshot carrying one was not written by the gate.
+        '["a\\u0000b.py"]',
+        '"paths.py"',
+        "null",
+        "[null]",
+        '[["nested.py"]]',
+        "[1.5]",
+    ],
+)
+def test_changed_path_snapshot_errors_never_become_an_empty_selection(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, content: str | None
+) -> None:
+    snapshot = tmp_path / "paths.json"
+    if content is not None:
+        snapshot.write_text(content)
+    monkeypatch.setattr(
+        reachable_tests,
+        "select_tests",
+        lambda _paths: pytest.fail("invalid snapshot must fail before selection"),
+    )
+    with pytest.raises(SystemExit) as error:
+        reachable_tests.main(["--summary", "--changed-paths-file", str(snapshot)])
+    assert error.value.code == 2
+
+
+def test_since_and_a_snapshot_are_refused_together(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Two sources for one change set is a contradiction argparse refuses before any read
+    (PR 496 review E6); the default `--since` alone is not "seen" and so still allows the
+    snapshot form."""
+    snapshot = tmp_path / "paths.json"
+    snapshot.write_text("[]")
+    monkeypatch.setattr(
+        reachable_tests, "changed_paths", lambda _base: pytest.fail("refused before Git")
+    )
+    monkeypatch.setattr(
+        reachable_tests, "select_tests", lambda _paths: pytest.fail("refused before selection")
+    )
+    with pytest.raises(SystemExit) as error:
+        reachable_tests.main(
+            ["--summary", "--since", "HEAD", "--changed-paths-file", str(snapshot)]
+        )
+    assert error.value.code == 2
+    assert "not allowed with argument" in capsys.readouterr().err

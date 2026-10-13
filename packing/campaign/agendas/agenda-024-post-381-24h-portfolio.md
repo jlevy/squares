@@ -339,7 +339,7 @@ Its job is to keep theorem statements, evidence, IDs, shared files, and routing
 decisions single-owned while the two research programs work concurrently.
 
 The
-[continuation addendum](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
+[continuation addendum](../../../docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md)
 retains command and recovery details.
 The allocation below is the prospective queue; the launch schedules later in this
 document are retained design history.

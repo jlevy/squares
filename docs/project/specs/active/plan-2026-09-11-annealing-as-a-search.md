@@ -315,7 +315,7 @@ a strategy anyone can re-run by name.
   4 to 8 cold starts, and no registered experiment records them.
 - **The workbench’s contact-graph attraction did not realise the graph.** Its pull
   reaches a quarter of a side, while target pairs start one to four units apart, and no
-  torque turns a pair into face-to-face contact (`NOTES.md` in the v2 spike).
+  torque turns a pair into face-to-face contact (`notes.md` in the v2 spike).
 - **The owner’s merge-then-release is built only in part.** The projection ratchet’s
   `phased` mode holds face-contact groups tight and then releases them
   (`run_projection_ratchet.py`). No engine merges near-flush groups at a declared

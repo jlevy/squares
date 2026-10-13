@@ -61,6 +61,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
 COVERAGE = FRONTIER / "source-coverage.yaml"
 EVIDENCE = FRONTIER / "evidence.yaml"
+RESULTS = FRONTIER / "results.yaml"
 #: The acquisition record `devtools.upper_bound_packets` writes into a packet.
 ACQUISITION_FORMAT = "external-source-acquisition-v1"
 #: The disposition of the source whose values every case reports unless overridden.
@@ -772,6 +773,67 @@ def _succession_errors(
     return errors
 
 
+#: A superseded row's reason naming the register entry whose side beats it.
+_SMALLER = re.compile(r"\b(T-\d+)'s exact side is smaller\b")
+#: A superseded row's reason naming the house adopted at its count on a day, and the
+#: entry whose certificate that house is, where the reason says.
+_ADOPTED_HOUSE = re.compile(
+    r"\bthe house adopted (?:here )?on (\d{4}-\d{2}-\d{2})"
+    r"(?:,? which (T-\d+)'s registered certificate holds| \((T-\d+)\))?"
+)
+#: The day a selected override's reason says its house was adopted (`adopt_houses`).
+_ADOPTED_ON = re.compile(r"\badopted on (\d{4}-\d{2}-\d{2}) \(T-\d+\)")
+
+
+def house_reason_errors(coverage: Mapping, results: Sequence[Mapping]) -> list[str]:
+    """Hold each superseded row's reason, where it names the house, to its `superseded_by`.
+
+    A row says what beats it in prose: "T-NNN's exact side is smaller", or "the house
+    adopted here on <day>", with the entry in parentheses or "which T-NNN's registered
+    certificate holds". `selection_errors` already holds `superseded_by` to the count's
+    selected source; when an adoption moves the count again the writer re-points the row,
+    and a reason left naming the earlier house is stale, which is what #518's review (A1)
+    and #553's (B3) found by reading. Here the entry a reason names must be one whose
+    attribution names the source key of the source the row is superseded by, and the
+    day must be the one the count's selected override says its house was adopted.
+    """
+    sources = {str(source["id"]): source for source in coverage["sources"]}
+    keys = {
+        str(entry["id"]): set((entry.get("attribution") or {}).get("source_keys") or ())
+        for entry in results
+    }
+    overrides = {int(entry["n"]): entry for entry in coverage["selected_overrides"]}
+    errors: list[str] = []
+    for row in coverage["superseded_reports"]:
+        n, by = int(row["n"]), str(row["superseded_by"])
+        reason = " ".join(str(row.get("reason") or "").split())
+        where = f"superseded report n={n} from {row['source_id']}"
+        named = [match.group(1) for match in _SMALLER.finditer(reason)]
+        for match in _ADOPTED_HOUSE.finditer(reason):
+            day = match.group(1)
+            named.extend(result for result in match.group(2, 3) if result)
+            selected = overrides.get(n)
+            adopted = (
+                _ADOPTED_ON.search(str(selected.get("reason") or "")) if selected else None
+            )
+            if adopted is None or adopted.group(1) != day:
+                held = (
+                    "adopted on no day" if adopted is None else f"adopted on {adopted.group(1)}"
+                )
+                errors.append(
+                    f"{where} names the house adopted on {day}, but {by}, which supersedes "
+                    f"it, was {held}"
+                )
+        source_key = str((sources.get(by) or {}).get("source_key") or "")
+        errors.extend(
+            f"{where} names {result} as the house that beats it, but is superseded by "
+            f"{by}, which is not {result}'s source"
+            for result in named
+            if source_key not in keys.get(result, set())
+        )
+    return errors
+
+
 def current_beyond_horizon(coverage: Mapping) -> dict[int, Mapping]:
     """Each count's current beyond-horizon row: the one no later report supersedes.
 
@@ -854,6 +916,8 @@ def main() -> int:
         if source.get("claims_record")
     }
     errors.extend(selection_errors(coverage, baseline, claims))
+    results = safe_load(RESULTS.read_text(encoding="utf-8"))["results"]
+    errors.extend(house_reason_errors(coverage, results))
 
     cases = {
         case["n"]: case

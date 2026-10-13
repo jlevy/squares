@@ -14,13 +14,13 @@ checks in the same order, and writes a receipt of the same shape.
   implementation’s own words.
   The Python verifier reports the underlying exception instead.
 
-TESTING.md lists what is compared, and how.
+[`testing.md`](testing.md) lists what is compared, and how.
 
 It is written from the Python verifier as the specification.
 It shares no code with any certificate generator: the generator (`check_n17_subpattern`,
 `sqpack.hull_kernel`) was not read, and the integer library (GMP through `rug`, with an
 `i128` fast path) is not the one used by the Rust generator work it is meant to check
-(`malachite`). See PROVENANCE.md.
+(`malachite`). See [`provenance.md`](provenance.md).
 
 ## What it checks
 
@@ -76,7 +76,7 @@ On Unix the published receipt has mode `0600`; a destination symlink is replaced
 than followed. Windows can refuse replacement when another process holds the destination
 open; this is a publication failure.
 Current CI does not compile, lint or run the Windows-only control, so Windows behavior
-remains unqualified; [TESTING.md](TESTING.md) records the native Windows checks required
+remains unqualified; [testing.md](testing.md) records the native Windows checks required
 for qualification.
 
 Building needs a C toolchain and `m4` for GMP (`build-essential` and `m4` on Ubuntu).
@@ -114,7 +114,7 @@ On all seven, the receipts agree with the Python verifier’s on every field abo
 - The contributor’s pre-integration revision `763ecd3ba` was checked at 1 and 8 threads.
 - The earlier revision that gave the timings below was checked at 1 and 16 threads.
 
-TESTING.md lists the certificate and build identities.
+[`testing.md`](testing.md) lists the certificate and build identities.
 The floor-adjusted integration source has passed the retained native controls; its
 seven-case same-object replay remains an operational-adoption prerequisite.
 
@@ -141,7 +141,7 @@ Upstream’s 2026-10-03 verifier review has 34 named cases.
 - The zero-gap control `hidden-lens-0-control` passes its coverage check in both.
   That node is refused later, at its final state, in both.
 
-TESTING.md has the per-case table.
+[`testing.md`](testing.md) has the per-case table.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1,0 +1,514 @@
+{
+ "candidate": "packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json",
+ "checks": [
+  {
+   "detail": "the 2026-10-01 packet's copy",
+   "held": true,
+   "name": "density: the pool is rect_n40_L67, as the release pins it"
+  },
+  {
+   "detail": "",
+   "held": true,
+   "name": "density: the release's candidate"
+  },
+  {
+   "detail": "n40-expanded-rectangles/v1, built on 71011d03...",
+   "held": true,
+   "name": "density: its header is the claim's"
+  },
+  {
+   "detail": "685 of 685 positive; {'inherited': 522, 'generated': 163}",
+   "held": true,
+   "name": "density: 685 positive orbits, 522 inherited and 163 generated"
+  },
+  {
+   "detail": "685 of 685",
+   "held": true,
+   "name": "density: every box is a proper rectangle in K"
+  },
+  {
+   "detail": "522 of 522; 427 of them positive in rect_n40_L67",
+   "held": true,
+   "name": "density: each inherited box is its pool row exactly, no row twice"
+  },
+  {
+   "detail": "163 of 163",
+   "held": true,
+   "name": "density: no generated box is D4-equivalent to any of the 2526 pool rectangles"
+  },
+  {
+   "detail": "685 canonical forms",
+   "held": true,
+   "name": "density: the 685 orbits are distinct"
+  },
+  {
+   "detail": "3999/100",
+   "held": true,
+   "name": "density: the weights sum to M"
+  },
+  {
+   "detail": "5480 terms, 5424 distinct rectangles",
+   "held": true,
+   "name": "density: D4 expansion"
+  },
+  {
+   "detail": "under each of the eight maps",
+   "held": true,
+   "name": "density: D4-invariant"
+  },
+  {
+   "detail": "3999/100",
+   "held": true,
+   "name": "density: integral of g is M"
+  },
+  {
+   "detail": "6c64a2d21207e7b65ea011dc7ca7a655418840defbf017340ce44ab7fc7b94fb",
+   "held": true,
+   "name": "pose input: the receipts' input"
+  },
+  {
+   "detail": "the same multiset as the eight maps give",
+   "held": true,
+   "name": "pose input: its terms are the D4 expansion"
+  },
+  {
+   "detail": "27402 of 27402",
+   "held": true,
+   "name": "pose input: every number brackets its rational"
+  },
+  {
+   "detail": "10dd46b06f14144619bf9de03151c43215e43e34f7e60df440f4e27d6a594396",
+   "held": true,
+   "name": "axis input: the receipts' input"
+  },
+  {
+   "detail": "quarter-turn order, the same multiset as the eight maps give",
+   "held": true,
+   "name": "axis input: its terms are the D4 expansion"
+  },
+  {
+   "detail": "5480 rows, 0 dropped",
+   "held": true,
+   "name": "axis input: 5480 rows, none dropped"
+  },
+  {
+   "detail": "supports rounded inward to 1e-9, densities down to 1e-9",
+   "held": true,
+   "name": "axis input: dominated by g"
+  },
+  {
+   "detail": "the integer rows map onto themselves under (x, y) -> (L - y, x)",
+   "held": true,
+   "name": "axis input: quarter-turn invariant"
+  },
+  {
+   "detail": "M - mass = 2.56796e-06",
+   "held": true,
+   "name": "axis input: the dominated mass is below M"
+  },
+  {
+   "detail": "16 sum w (l + l + A/2)^2 = 627444222088298915573283512797161984",
+   "held": true,
+   "name": "axis input: the int128 guards"
+  },
+  {
+   "detail": "3293 x 3293 = 10843849 vertices",
+   "held": true,
+   "name": "axis input: the grid of breakpoints"
+  },
+  {
+   "detail": "(3490012394, 6201340682) / 1e9",
+   "held": true,
+   "name": "axis: the minimiser is a vertex of the quadrant"
+  },
+  {
+   "detail": "1001486431423867090847280653 / 1e27",
+   "held": true,
+   "name": "axis: the capture at the minimiser, evaluated here"
+  },
+  {
+   "detail": "1.001486499628",
+   "held": true,
+   "name": "axis: g captures at least as much there"
+  },
+  {
+   "detail": "3359/500",
+   "held": true,
+   "name": "claim: X = L / B"
+  },
+  {
+   "detail": "217911/99764500",
+   "held": true,
+   "name": "claim: X raises the earlier bound"
+  },
+  {
+   "detail": "1/500",
+   "held": true,
+   "name": "counting: n tau - M > 0"
+  },
+  {
+   "detail": "L - B sqrt2_up = 44419211415125321/8397500000000000",
+   "held": true,
+   "name": "domain: E > 0 at every angle"
+  },
+  {
+   "detail": "T^2 + 2T - 1 = 89/40000",
+   "held": true,
+   "name": "slabs: T passes pi/4"
+  },
+  {
+   "detail": "43 slabs from 1 to 415000 over 1000000",
+   "held": true,
+   "name": "slabs: the endpoints partition [eps, T]"
+  },
+  {
+   "detail": "up(fl(tau)) - tau = 1.33e-16",
+   "held": true,
+   "name": "slabs: the kernel's threshold is at least tau"
+  },
+  {
+   "detail": "9005397816695287/9007199254740992, above tau by 2e-10",
+   "held": true,
+   "name": "slabs: the receipts' least leaf bound is at least the threshold"
+  },
+  {
+   "detail": "eps^2 + 2 eps - 1 = -0.999998",
+   "held": true,
+   "name": "near-axis: W increases on [0, eps] and A <= B"
+  },
+  {
+   "detail": "B - A W(eps) = 424025836324581/839750000000839750000000",
+   "held": true,
+   "name": "near-axis: A W(eps) <= B"
+  },
+  {
+   "detail": "1001486431423867090847280653 against ceil(1e27 tau) = 999800000000000000000000000",
+   "held": true,
+   "name": "axis: the receipts' minimum is at least tau"
+  },
+  {
+   "detail": "section 6",
+   "held": true,
+   "name": "near-axis: B - A W(eps) is PROOF.md's margin"
+  },
+  {
+   "detail": "all keys",
+   "held": true,
+   "name": "retained parameters.json is the claim"
+  },
+  {
+   "detail": "",
+   "held": true,
+   "name": "local receipt: parameters"
+  },
+  {
+   "detail": "1/500",
+   "held": true,
+   "name": "local receipt: scalar block"
+  },
+  {
+   "detail": "the derived inputs' digests and counts",
+   "held": true,
+   "name": "local receipt: admission block"
+  },
+  {
+   "detail": "{\"angle_bisections\": 13812428, \"leaves\": 30250466, \"minimum_capture_lower\": \"9005397816695287/9007199254740992\", \"nodes\": 60500889, \"slabs\": 43}",
+   "held": true,
+   "name": "local receipt: coverage block is the slabs' totals"
+  },
+  {
+   "detail": "{\"margin\": \"1686431423867090847280653/1000000000000000000000000000\", \"minimum_capture_lower\": \"1001486431423867090847280653/1000000000000000000000000000\", \"vertices\": 10843849}",
+   "held": true,
+   "name": "local receipt: axis block is the axis output's"
+  },
+  {
+   "detail": "7f66379f4c4be56092cdad20289b98268c9ec7329c0a4afba0bdfc27c344dcb8, 0db283c86a302e2efa23dbb024bda1f244f12d0205a294630fc298bc59df0136",
+   "held": true,
+   "name": "local receipt: slab and axis records by digest"
+  },
+  {
+   "detail": "30 of 30 files",
+   "held": true,
+   "name": "local receipt: the source it ran is the retained tree"
+  },
+  {
+   "detail": "REPLAYED_SAME_KERNEL",
+   "held": true,
+   "name": "local receipt: status and flags"
+  },
+  {
+   "detail": "AXIS_COVERAGE_PROVED",
+   "held": true,
+   "name": "local receipt: the axis run"
+  },
+  {
+   "detail": "43 of 43",
+   "held": true,
+   "name": "local receipt: every slab verified as the contract runs it"
+  },
+  {
+   "detail": "build-pose 0, build-axis 0, unit-tests 0, exact-oracle 0, build-rounding 0, ieee-neighbors 0, wrong-rounding -6, ftz -6, reject-ndebug 1, reject-fastmath 1, synthetic-positive 0, synthetic-negative 3, limited-budget 3, axis 0",
+   "held": true,
+   "name": "local receipt: the fourteen stages exited as expected"
+  },
+  {
+   "detail": "",
+   "held": true,
+   "name": "ci receipt: parameters"
+  },
+  {
+   "detail": "1/500",
+   "held": true,
+   "name": "ci receipt: scalar block"
+  },
+  {
+   "detail": "the derived inputs' digests and counts",
+   "held": true,
+   "name": "ci receipt: admission block"
+  },
+  {
+   "detail": "{\"angle_bisections\": 13812428, \"leaves\": 30250466, \"minimum_capture_lower\": \"9005397816695287/9007199254740992\", \"nodes\": 60500889, \"slabs\": 43}",
+   "held": true,
+   "name": "ci receipt: coverage block is the slabs' totals"
+  },
+  {
+   "detail": "{\"margin\": \"1686431423867090847280653/1000000000000000000000000000\", \"minimum_capture_lower\": \"1001486431423867090847280653/1000000000000000000000000000\", \"vertices\": 10843849}",
+   "held": true,
+   "name": "ci receipt: axis block is the axis output's"
+  },
+  {
+   "detail": "2c60b9342fb702d27ec39fea26209dee77c3420e6cdf0ff8659e4ee4772ea7c0, 33f918e940be8b004f67d7269adb5a8329451b1fa8b0aef78224ca9766b8a2b1",
+   "held": true,
+   "name": "ci receipt: slab and axis records by digest"
+  },
+  {
+   "detail": "30 of 30 files",
+   "held": true,
+   "name": "ci receipt: the source it ran is the retained tree"
+  },
+  {
+   "detail": "REPLAYED_SAME_KERNEL",
+   "held": true,
+   "name": "ci receipt: status and flags"
+  },
+  {
+   "detail": "AXIS_COVERAGE_PROVED",
+   "held": true,
+   "name": "ci receipt: the axis run"
+  },
+  {
+   "detail": "43 of 43",
+   "held": true,
+   "name": "ci receipt: every slab verified as the contract runs it"
+  },
+  {
+   "detail": "build-pose 0, build-axis 0, unit-tests 0, exact-oracle 0, build-rounding 0, ieee-neighbors 0, wrong-rounding -6, ftz -6, reject-ndebug 1, reject-fastmath 1, synthetic-positive 0, synthetic-negative 3, limited-budget 3, axis 0",
+   "held": true,
+   "name": "ci receipt: the fourteen stages exited as expected"
+  },
+  {
+   "detail": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0, Python 3.14.4, 726.753125245 s",
+   "held": true,
+   "name": "local receipt: the producer's run, not CI"
+  },
+  {
+   "detail": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, Python 3.12.3, 1386.242149262 s",
+   "held": true,
+   "name": "ci receipt: run 38120568498 on the pin, the binaries g++ 13.3.0 rebuilds"
+  },
+  {
+   "detail": "43 of 43",
+   "held": true,
+   "name": "receipts: every slab identical apart from timing and the binary"
+  },
+  {
+   "detail": "every field",
+   "held": true,
+   "name": "receipts: the axis outputs identical"
+  },
+  {
+   "detail": "the CI receipts' digests",
+   "held": true,
+   "name": "release-ci SHA256SUMS: the tree's but for the four results lines"
+  },
+  {
+   "detail": "5 of 5: verifier/continuous_pose.cpp, verifier/axis_integer_grid.cpp, tests/kernel_harness.cpp, tests/rounding_harness.cpp, tests/oracle.py",
+   "held": true,
+   "name": "kernels: byte for byte T-145's, which its review read"
+  },
+  {
+   "detail": "69bc9e648510..., in both CI receipts and T-145's build with the CI compiler",
+   "held": true,
+   "name": "kernels: the CI run's pose binary is T-145's, which its replay rebuilt"
+  }
+ ],
+ "claim": "s(40) > 3359/500",
+ "controls": [
+  {
+   "change": "A one step of 1/250000000 larger, 249329660/250000000",
+   "control": "G",
+   "expect_failed": [
+    "near-axis: A W(eps) <= B"
+   ],
+   "failed": [
+    "near-axis: A W(eps) <= B"
+   ],
+   "near_axis_margin": "-146749044083603/41987500000041987500000",
+   "near_axis_margin_decimal": "-3.49507e-09",
+   "refused": true
+  },
+  {
+   "change": "tau replaced by 3999/4000, where 40 tau = M",
+   "control": "G2",
+   "expect_failed": [
+    "counting: n tau - M > 0"
+   ],
+   "failed": [
+    "counting: n tau - M > 0"
+   ],
+   "near_axis_margin": "424025836324581/839750000000839750000000",
+   "near_axis_margin_decimal": "5.04943e-10",
+   "refused": true
+  },
+  {
+   "change": "T replaced by 41/100, short of pi/4",
+   "control": "G3",
+   "expect_failed": [
+    "slabs: T passes pi/4",
+    "slabs: the endpoints partition [eps, T]"
+   ],
+   "failed": [
+    "slabs: T passes pi/4",
+    "slabs: the endpoints partition [eps, T]"
+   ],
+   "near_axis_margin": "424025836324581/839750000000839750000000",
+   "near_axis_margin_decimal": "5.04943e-10",
+   "refused": true
+  },
+  {
+   "change": "eps replaced by 1/10^5",
+   "control": "G4",
+   "expect_failed": [
+    "near-axis: A W(eps) <= B",
+    "slabs: the endpoints partition [eps, T]"
+   ],
+   "failed": [
+    "slabs: the endpoints partition [eps, T]",
+    "near-axis: A W(eps) <= B"
+   ],
+   "near_axis_margin": "-150743799917875419/8397500000839750000000",
+   "near_axis_margin_decimal": "-1.7951e-05",
+   "refused": true
+  },
+  {
+   "change": "generated site 522 moved onto pool rectangle 0 reflected in x",
+   "control": "D1",
+   "expect_failed": [
+    "density: no generated box is D4-equivalent to any of the 2526 pool rectangles"
+   ],
+   "failed": [
+    "density: the release's candidate",
+    "density: no generated box is D4-equivalent to any of the 2526 pool rectangles",
+    "density: the 685 orbits are distinct"
+   ],
+   "refused": true
+  },
+  {
+   "change": "site 0's weight scaled by 99/100",
+   "control": "D2",
+   "expect_failed": [
+    "density: the weights sum to M"
+   ],
+   "failed": [
+    "density: the release's candidate",
+    "density: the weights sum to M"
+   ],
+   "refused": true
+  },
+  {
+   "change": "a hundredth of site 0's weight moved to site 1",
+   "control": "D3",
+   "expect_failed": [
+    "pose input: the receipts' input",
+    "axis input: the receipts' input"
+   ],
+   "failed": [
+    "density: the release's candidate",
+    "pose input: the receipts' input",
+    "axis input: the receipts' input",
+    "axis: the capture at the minimiser, evaluated here"
+   ],
+   "refused": true
+  }
+ ],
+ "kind": "n40-new-supports-finite-audit/v1",
+ "price": {
+  "basis": "each slab's time in both release receipts, scaled by T-145's replay here over the same receipt's time; the larger of the two predictions per slab",
+  "predicted_longest_slab_seconds_here": 164.4,
+  "predicted_slab_cpu_hours_here": 0.74,
+  "predicted_slab_cpu_seconds_here": {
+   "ci": 2626.3,
+   "local": 2603.6
+  },
+  "predicted_wall_seconds_here": {
+   "1": 2670.4,
+   "2": 1341.9,
+   "4": 670.2
+  },
+  "receipt_dual_seconds": {
+   "ci": 200.9,
+   "local": 131.8
+  },
+  "receipt_full_entry": {
+   "ci": {
+    "seconds": 1587.3,
+    "worker_seconds": 6349.2,
+    "workers": 4
+   },
+   "local": {
+    "seconds": 859.0,
+    "worker_seconds": 3435.8,
+    "workers": 4
+   }
+  },
+  "receipt_longest_slab_seconds": {
+   "ci": 327.4,
+   "local": 158.7
+  },
+  "receipt_slab_seconds": {
+   "ci": 5229.5,
+   "local": 2655.3
+  },
+  "t145_calibration": {
+   "ci_receipt_slab_seconds": 3693.3,
+   "here_over_ci": 0.5022,
+   "here_over_local": 0.9805,
+   "local_receipt_slab_seconds": 1891.8,
+   "replay_cpu_seconds_here": 1854.9
+  }
+ },
+ "status": "FINITE_STEPS_HOLD",
+ "values": {
+  "axis_input_sha256": "10dd46b06f14144619bf9de03151c43215e43e34f7e60df440f4e27d6a594396",
+  "axis_margin_decimal": "0.00168643",
+  "axis_minimiser": [
+   3490012394,
+   6201340682
+  ],
+  "axis_minimum": "1001486431423867090847280653/1000000000000000000000000000",
+  "counting_margin": "1/500",
+  "distinct_rectangles": 5424,
+  "dominated_mass_deficit": "2.56796e-06",
+  "evaluation_bound": "627444222088298915573283512797161984",
+  "g_capture_at_axis_minimiser": "1.00148649962759",
+  "inherited_positive_in_rect_n40_L67": 427,
+  "kernel_threshold": "0x1.ffe5c91d14e3dp-1",
+  "least_leaf_bound": "9005397816695287/9007199254740992",
+  "least_leaf_bound_minus_tau": "2.00422e-10",
+  "least_leaf_bound_slab": 40,
+  "near_axis_margin": "424025836324581/839750000000839750000000",
+  "near_axis_margin_decimal": "5.04943e-10",
+  "pose_input_sha256": "6c64a2d21207e7b65ea011dc7ca7a655418840defbf017340ce44ab7fc7b94fb",
+  "raise_over_T145": "217911/99764500"
+ }
+}

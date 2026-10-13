@@ -1,0 +1,184 @@
+{
+ "kind": "clipped-corner-replay-runs/v1",
+ "binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+ "crate_source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+ "reviewed_source": {
+  "commit": "910b6b12c",
+  "review": "docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md"
+ },
+ "threads": 2,
+ "runs": {
+  "replay-401": {
+   "argv": [
+    "sqverify-fast",
+    "--candidate",
+    "derived-401.json",
+    "--n",
+    "40",
+    "--side",
+    "67/10",
+    "--directions",
+    "all",
+    "--threshold",
+    "10001/10000",
+    "--threads",
+    "2",
+    "--confirm",
+    "--receipts",
+    "receipts"
+   ],
+   "exit_code": 0,
+   "started_utc": "2026-10-10T10:46:26+00:00",
+   "wall_seconds": 299.53,
+   "cpu_seconds": 241.037,
+   "loadavg_before": [
+    6.79,
+    7.52,
+    7.13
+   ],
+   "loadavg_after": [
+    8.04,
+    10.58,
+    8.8
+   ],
+   "receipts_dir_matches_stdout": true,
+   "stderr": ""
+  },
+  "control-A-scaled-99-100": {
+   "argv": [
+    "sqverify-fast",
+    "--candidate",
+    "control-A-scaled-99-100.json",
+    "--n",
+    "40",
+    "--side",
+    "67/10",
+    "--directions",
+    "73,220",
+    "--threshold",
+    "10001/10000",
+    "--threads",
+    "2",
+    "--confirm"
+   ],
+   "exit_code": 1,
+   "started_utc": "2026-10-10T10:51:36+00:00",
+   "wall_seconds": 0.368,
+   "cpu_seconds": 0.307,
+   "loadavg_before": [
+    7.44,
+    10.36,
+    8.75
+   ],
+   "loadavg_after": [
+    7.44,
+    10.36,
+    8.75
+   ],
+   "stderr": "",
+   "input_sha256": "c4b9dd8ce5cda13c40bb61ffb3c7bdb425b7790636cf3d9dc4bd6a3243e73c4e"
+  },
+  "control-B-near-threshold": {
+   "argv": [
+    "sqverify-fast",
+    "--candidate",
+    "control-B-near-threshold.json",
+    "--n",
+    "40",
+    "--side",
+    "67/10",
+    "--directions",
+    "220",
+    "--threshold",
+    "10001/10000",
+    "--threads",
+    "2",
+    "--confirm"
+   ],
+   "exit_code": 1,
+   "started_utc": "2026-10-10T10:51:36+00:00",
+   "wall_seconds": 1.124,
+   "cpu_seconds": 0.652,
+   "loadavg_before": [
+    7.44,
+    10.36,
+    8.75
+   ],
+   "loadavg_after": [
+    7.44,
+    10.36,
+    8.75
+   ],
+   "stderr": "",
+   "input_sha256": "3e4233eed077fd8ed1870d659460d1fc202309509023cf6cdda1272aa1bd2c1d"
+  },
+  "control-C-no-metadata": {
+   "argv": [
+    "sqverify-fast",
+    "--candidate",
+    "control-C-no-metadata.json",
+    "--n",
+    "40",
+    "--side",
+    "67/10",
+    "--directions",
+    "0",
+    "--threshold",
+    "10001/10000",
+    "--threads",
+    "2",
+    "--confirm"
+   ],
+   "exit_code": 0,
+   "started_utc": "2026-10-10T10:51:38+00:00",
+   "wall_seconds": 0.592,
+   "cpu_seconds": 0.394,
+   "loadavg_before": [
+    7.44,
+    10.36,
+    8.75
+   ],
+   "loadavg_after": [
+    7.44,
+    10.36,
+    8.75
+   ],
+   "stderr": "",
+   "input_sha256": "ecd15984781c6cf31f2baf14478cab57e5c69ae19defe2580635d8fc3f50d0ea"
+  },
+  "control-D-short-net": {
+   "argv": [
+    "sqverify-fast",
+    "--candidate",
+    "control-D-short-net.json",
+    "--n",
+    "40",
+    "--side",
+    "67/10",
+    "--directions",
+    "0",
+    "--threshold",
+    "10001/10000",
+    "--threads",
+    "2",
+    "--confirm"
+   ],
+   "exit_code": 2,
+   "started_utc": "2026-10-10T10:51:38+00:00",
+   "wall_seconds": 0.002,
+   "cpu_seconds": 0.002,
+   "loadavg_before": [
+    7.44,
+    10.36,
+    8.75
+   ],
+   "loadavg_after": [
+    7.44,
+    10.36,
+    8.75
+   ],
+   "stderr": "sqverify-fast: the net does not reach past pi/4\n",
+   "input_sha256": "1d7637f19308e3b81d307af34ed4fb3ea98dfd73ae5cfb6ba3cc6a2edf65d093"
+  }
+ }
+}

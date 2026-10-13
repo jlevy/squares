@@ -1,0 +1,87 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-11T20:33Z",
+  "git_scope": "Full clone of the three-commit repository, checked out at the branch head issue #504 names. The scope is the paths the pinned commit changed: six n153 files it adds, and README.md and SHA256SUMS, which gain an n153 section and six lines; eight files bound to their Git blobs. Under derived-only custody none is copied. The five n207 files are unchanged at this pin and belong to the n207 packet, which pins them at 9dc93b6. No source program was executed.",
+  "sources": [
+    {
+      "id": "buddenping-square-packing-certificates",
+      "source_url": "https://github.com/BuddenPing/square-packing-certificates",
+      "source_ref": "main",
+      "source_commit": "bc328a7d727aedd0eabebd6ea80285f572b65d2d",
+      "committed_utc": "2026-10-11T10:39:06Z",
+      "git_tree": "ff4acf16f612e26c5c64576bfa399c6a2b9b2061",
+      "archived_path": "packing/resources/web/pingyou-n153-certificate-2026-10-11/source",
+      "subtree_manifest": "packing/resources/web/pingyou-n153-certificate-2026-10-11/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "SHA256SUMS",
+        "n153-SHA256SUMS",
+        "n153-squares-project.zip",
+        "n153-verified-comparison.pdf",
+        "n153.cert.json",
+        "n153.svg",
+        "pingyou-n153-rational.yaml"
+      ],
+      "subtree_file_count": 8,
+      "subtree_total_bytes": 304936,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 6798,
+          "sha256": "1bacc3e76c7a9e5c5692bdd6320028fd99a1b3b09a7f7eba801f39760e2f010a",
+          "reason": "Author prose stating both claims, the constructions and the credit, quoted in this packet's README. No licence: pinned by digest only."
+        },
+        {
+          "path": "SHA256SUMS",
+          "bytes": 1026,
+          "sha256": "919ab6fbaad50b77a5f9d72d7a79f775a973ef18f9afa620c914c989de495997",
+          "reason": "The source's digest list for the other twelve files of the tree, each equal to the digest this manifest or the n207 packet's records. Pinned by digest only."
+        },
+        {
+          "path": "n153-SHA256SUMS",
+          "bytes": 435,
+          "sha256": "4d73c078bc411060661d34ce757d27abee1db9ca7b62d36876e97ca43006a9f3",
+          "reason": "The source's digest list for the five n153 files, each equal to the digest this manifest records. Pinned by digest only."
+        },
+        {
+          "path": "n153-squares-project.zip",
+          "bytes": 114499,
+          "sha256": "dcc512828a8b6629d2d414f4ac20d417c2a4d5dc2968b9abe586676abe868d97",
+          "reason": "The source's complete package of 40 files: the certificate and native witness again, the explicit rational construction table, the n70 parent and an intermediate n153 control, SQUISH's #481 and Evan Daniel's regularized n153 certificates, reconstruction, checker, conversion and SymPy derivation scripts, receipts, the comparison PDF and drawing, notes on the mechanism and provenance, and copies of Evan Daniel's MIT licence and of this repository's witness schema and LICENSE. No licence for the source's own files: pinned by digest only; no program in it was executed."
+        },
+        {
+          "path": "n153-verified-comparison.pdf",
+          "bytes": 19150,
+          "sha256": "ded1ee63d71f13f613edaa7473171a337918ec7a7d7f68733a1b41a7df27aaef",
+          "reason": "The author's two-page comparison and construction explanation. No licence: pinned by digest only."
+        },
+        {
+          "path": "n153.cert.json",
+          "bytes": 21910,
+          "sha256": "31b3fb3cba73528fab21d085a34f3209684a868e7116059ea5c21e664bca1ff2",
+          "reason": "The exact rational certificate: n, s_exact and 153 [x, y, t] rows of rational strings, centres in [0, S]^2 and t = tan(theta/2), with the source's note, guard dilation, undilated side and construction record. No licence, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "n153.svg",
+          "bytes": 26524,
+          "sha256": "4458251287d4a1d7982db1c9a9d79eaa9020872380dd66e6f8f9894c07dedf31",
+          "reason": "The author's drawing of the packing. No licence: pinned by digest only."
+        },
+        {
+          "path": "pingyou-n153-rational.yaml",
+          "bytes": 114594,
+          "sha256": "963d6ca7cce053e7ff22baf6438bdf5776b7b06d01e1509e654c73966b9e4d41",
+          "reason": "The source's rational corners Witness/v2 of the same packing, in JSON syntax. No licence: pinned by digest only; derive reads it from the same checkout and holds it to the certificate's poses and side."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and GitHub detects none. The README says included upstream material keeps its own attribution and licence terms and that the repository adds no new licence grant for third-party material; it grants none for the source's own files. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source asks that PingYou Ltd be credited with the n153 construction, Ryan Xu with the n70 construction it starts from and Evan Daniel with that construction's exact retention.",
+      "claims": [
+        "Issue #504 reports the exact rational certificate s(153) <= 6435006925203522001385040447/500000000000000000000000000 = 12.870013850407044002770080894: Ryan Xu's n70 construction and its reflection composed into 121 upright squares and tilted populations of 17 and 15, the surviving contacts reclosed at an angle the source takes from u^7-9u^6+3u^5-u^4-u^3+u^2-3u+1 = 0 with u = tan(theta/2), then centres and container dilated by 5000000000001/5000000000000. The author compares it with Evan Daniel's regularization of SQUISH's n153 (T-146), 402250932783786874180075932249/31250000000000000000000000000, 2.016e-3 larger.",
+        "The source reports that its own three exact checkers accept all 11,628 pairs and every wall, that its script rebuilds the certificate exactly from an explicit rational construction table and recomputes the guard, that a SymPy script checks the symbolic return identity, and that this repository's sqpack exact_verify and check_rational_witness_independent at 5b0eb012 accept its native Witness/v2. These are author reports; no local or global optimality, and no feasibility of the undilated algebraic contact solution, is claimed."
+      ]
+    }
+  ]
+}

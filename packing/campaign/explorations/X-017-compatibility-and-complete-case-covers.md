@@ -34,7 +34,7 @@ exploration:
   - packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md
   - packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md
   - packing/campaign/agent-sessions/session-090-four-hour-research.md
-  - docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md
+  - docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md
   - docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
   proposes: [H-111, H-112, H-113, H-114, H-115, H-116, H-117, H-125]
 ---
@@ -155,7 +155,7 @@ obstruction above eleven.
 These schedules retain historical launch language.
 Use dated outcomes and Session 090 for the completed slices, then the current allocation
 and
-[continuation handoff](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
+[continuation handoff](../../../docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md)
 for the inherited dependencies and custody.
 A source timeout remains unfinished work at its declared scope.
 

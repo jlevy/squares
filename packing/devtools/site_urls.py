@@ -88,6 +88,10 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         400_000,
         "Complete broad scope history and prepared exact bounds measure 355,078 bytes.",
     ),
+    "result/t-124.html": (
+        400_000,
+        "Complete broad scope history and prepared exact bounds measure 304,237 bytes.",
+    ),
     "atlas.html": (
         1_000_000,
         (
@@ -96,8 +100,11 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        800_000,
-        "The complete registered-result table with prepared math measures 717,328 bytes.",
+        950_000,
+        (
+            "The complete registered-result table with prepared math measures 843,037 bytes "
+            "at 146 results."
+        ),
     ),
     "tutorial.html": (
         800_000,

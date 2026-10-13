@@ -9,16 +9,20 @@ of them could see a certificate the record was never told about.
 
 from __future__ import annotations
 
+from datetime import date, timedelta
 from pathlib import Path
 
 import pytest
 
 from devtools.check_certificate_citations import (
     CASES,
+    DEFERRAL_DAYS,
     FRONTIER,
     UndeclaredError,
     cited_certificates,
     declared_sizes,
+    deferred,
+    load_deferrals,
     main,
     method_limit_evidence,
     orphaned_evidence,
@@ -30,6 +34,15 @@ from sqpack.yamlio import safe_load
 def evidence_by_id() -> dict[str, dict]:
     document = safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))
     return {record["id"]: record for record in document["evidence"]}
+
+
+def last_reviewed() -> str:
+    document = safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))
+    return str(document["last_reviewed"])
+
+
+def results() -> list[dict]:
+    return safe_load((FRONTIER / "results.yaml").read_text(encoding="utf-8"))["results"]
 
 
 def test_the_sweep_passes_on_the_retained_tree() -> None:
@@ -123,8 +136,14 @@ def test_no_verified_evidence_is_cited_by_nothing() -> None:
     is verified, replays, and proves a bound tighter than the one n = 29 carries -- and was
     cited by nothing while that record's blocker said no formal certificate existed. Its
     certificate is a witness file, so nothing keyed on `cases/` could have found it.
+
+    An orphan stands only while a recorded deferral names it, and every deferral names
+    one: nothing else is cited by nothing.
     """
-    assert orphaned_evidence(evidence_by_id()) == []
+    evidence = evidence_by_id()
+    excused, problems = deferred(evidence, load_deferrals(), results(), last_reviewed())
+    assert problems == []
+    assert set(orphaned_evidence(evidence)) == excused
 
 
 def test_the_orphan_check_bites() -> None:
@@ -179,3 +198,95 @@ def test_evidence_refs_are_found_wherever_the_schema_puts_them() -> None:
         }
     )
     assert found == {"A", "B", "C", "D", "E"}
+
+
+# --------------------------------------------------------------------------- deferrals
+
+
+def _orphan(evidence: dict[str, dict]) -> tuple[dict[str, dict], str]:
+    """The evidence with one verified, replayed certificate that no case record cites."""
+    identifier = "E-test-orphaned-certificate"
+    evidence = {
+        **evidence,
+        identifier: {
+            "id": identifier,
+            "claim": "upper-bound",
+            "assurance": "verified",
+            "replay_status": "passed",
+            "certificate": "packing/resources/web/example/certificate.cert",
+        },
+    }
+    return evidence, identifier
+
+
+def _deferral(identifier: str, **changes: object) -> dict[str, object]:
+    return {
+        "evidence": identifier,
+        "results": ["T-001"],
+        "bead": "think-abcd",
+        "blocked_on": "jlevy/squares#403",
+        "recorded": "2026-10-10",
+        "reason": "Case adoption waits for a pull request that rewrites the case records.",
+        **changes,
+    }
+
+
+def _citing(identifier: str) -> list[dict]:
+    return [{"id": "T-001", "evidence": [identifier]}]
+
+
+def test_an_undeclared_orphan_still_fails() -> None:
+    evidence, identifier = _orphan(evidence_by_id())
+    assert identifier in orphaned_evidence(evidence)
+    excused, problems = deferred(evidence, [], _citing(identifier), "2026-10-10")
+    assert identifier not in excused
+    assert problems == []
+
+
+def test_a_recorded_deferral_excuses_the_orphan_it_names() -> None:
+    evidence, identifier = _orphan(evidence_by_id())
+    excused, problems = deferred(
+        evidence, [_deferral(identifier)], _citing(identifier), "2026-10-10"
+    )
+    assert (excused, problems) == ({identifier}, [])
+
+
+def test_a_deferral_goes_stale_once_a_case_record_cites_its_evidence() -> None:
+    """n = 29 cites its interval certificate, so a deferral of it excuses nothing."""
+    identifier = "E-n029-interval-certified-upper"
+    excused, problems = deferred(
+        evidence_by_id(), [_deferral(identifier)], _citing(identifier), "2026-10-10"
+    )
+    assert excused == set()
+    assert len(problems) == 1
+    assert "stale" in problems[0]
+
+
+def test_a_deferral_names_register_entries_that_cite_its_evidence() -> None:
+    evidence, identifier = _orphan(evidence_by_id())
+    excused, problems = deferred(
+        evidence, [_deferral(identifier)], [{"id": "T-001", "evidence": []}], "2026-10-10"
+    )
+    assert excused == {identifier}
+    assert problems == [f"deferral of {identifier}: T-001 does not cite it"]
+
+
+def test_a_deferral_expires() -> None:
+    evidence, identifier = _orphan(evidence_by_id())
+    late = (date(2026, 10, 10) + timedelta(days=DEFERRAL_DAYS + 1)).isoformat()
+    excused, problems = deferred(evidence, [_deferral(identifier)], _citing(identifier), late)
+    assert excused == set()
+    assert len(problems) == 1
+    assert "re-date" in problems[0]
+
+
+def test_a_deferral_must_say_what_it_waits_on_and_who_owns_it() -> None:
+    evidence, identifier = _orphan(evidence_by_id())
+    excused, problems = deferred(
+        evidence,
+        [_deferral(identifier, bead="", blocked_on="")],
+        _citing(identifier),
+        "2026-10-10",
+    )
+    assert excused == set()
+    assert problems == [f"deferral of {identifier}: names no bead, blocked_on"]

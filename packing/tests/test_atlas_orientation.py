@@ -9,8 +9,10 @@ from pathlib import Path
 
 import pytest
 
+from devtools import adopt_houses
 from devtools import build_known_best_atlas as builder
 from devtools.atlas_orientation import (
+    PARENT_FACTS,
     Reflection,
     orient_atlas_witness,
     reflect_escape_case,
@@ -18,10 +20,16 @@ from devtools.atlas_orientation import (
     reflect_y_axis,
     source_orientation,
 )
-from sqpack.witness import exact_verify, load_witness
+from sqpack.witness import exact_verify, load_witness, witness_document
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parents[1]
-SELECTED = ROOT / "witnesses/known-best/n-211.yaml"
+SCHEMA = ROOT / "witnesses/witness.schema.yaml"
+#: The n = 211 atlas witness as it stood while de Winter's parent was the house, before the
+#: adoption of 11 October 2026 drew Daniil Ostashev's certificate there unreflected. The
+#: builder draws it again from the parent's retained facts
+#: (`test_the_de_winter_fixture_is_what_its_parent_facts_draw`).
+SELECTED = ROOT / "tests/fixtures/n211-de-winter-atlas-witness.yaml"
 
 
 def _decimal_pair() -> dict:
@@ -117,8 +125,35 @@ def test_only_the_registered_atlas_case_is_oriented() -> None:
     assert orient_atlas_witness(source) is source
 
 
+@pytest.mark.slow
+def test_the_de_winter_fixture_is_what_its_parent_facts_draw() -> None:
+    """The fixture is no copy kept by hand. The atlas builder draws it again, byte for
+    byte, from de Winter's retained parent facts and n = 211's case record as the
+    adoption of 11 October 2026 retained it (`adopt_houses.read_history`), then orients
+    it as the registration says."""
+    prior = adopt_houses.read_history()[211]
+    reported = safe_load(prior.split("---\n", 2)[1])["packing"]["reported_upper_bound"]
+    case = builder.FrontierCase(
+        211,
+        str(reported["value"]),
+        builder.FRONTIER / "n-211.md",
+        prior,
+        str(reported["source_key"]),
+    )
+    catalogue = builder.catalogue_source_map(
+        builder.CATALOGUE, first_n=builder.CORPUS.first_n, last_n=builder.CORPUS.last_n
+    )
+    plan = builder._source_plan(case, catalogue, {})  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert plan.path == ROOT.parent / PARENT_FACTS
+    drawn = builder._build_witness(case, plan)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    oriented = orient_atlas_witness(drawn)
+    assert witness_document(oriented, schema="../witness.schema.yaml") == SELECTED.read_text(
+        encoding="utf-8"
+    )
+
+
 def test_n211_orientation_keeps_source_dates_bounds_and_feasibility() -> None:
-    source = source_orientation(load_witness(SELECTED))
+    source = source_orientation(load_witness(SELECTED, fallback_schema=SCHEMA))
     image = orient_atlas_witness(source)
     assert image["n"] == 211
     for key in ("id", "side", "square_size", "scalar", "coordinates", "source", "claim"):
@@ -147,7 +182,7 @@ def test_n211_orientation_keeps_source_dates_bounds_and_feasibility() -> None:
 
 
 def test_correcting_a_legacy_vertical_flip_rebases_on_the_original_parent() -> None:
-    source = source_orientation(load_witness(SELECTED))
+    source = source_orientation(load_witness(SELECTED, fallback_schema=SCHEMA))
     corrected = orient_atlas_witness(source)
     legacy = reflect_x_axis(source)
     legacy["certificate"]["geometry_transform"] = deepcopy(
@@ -225,7 +260,7 @@ def test_selected_atlas_cli_dispatches_the_existing_scoped_producer(
 
 @pytest.mark.parametrize("field", ["key", "path"])
 def test_n211_source_switch_cannot_inherit_the_registered_packet_lineage(field: str) -> None:
-    source = source_orientation(load_witness(SELECTED))
+    source = source_orientation(load_witness(SELECTED, fallback_schema=SCHEMA))
     source["source"][field] = "another-published-parent"
     before = deepcopy(source)
     with pytest.raises(ValueError, match=r"registered atlas orientation.*parent"):

@@ -575,9 +575,11 @@ key remain bound to the bytes they originally named.
 | [squarepacker/k2-minus-c v1.2](https://github.com/squarepacker/k2-minus-c/tree/e16a5cfa7eed489ea8d84b500e590bf6855a5f2f) | Ryu’s revised closed-packing deficiency constants; issue #368, DOI 10.5281/zenodo.23194031 | **[squarepacker k2-minus-c v1.2 2026]**; [version 1.2 packet](web/squarepacker-k2-minus-c-v12-2026-10-06/README.md), all 78 source files bound; arithmetic reviewed, independent labelling remains open |
 | [squarepacker/k2-minus-c-quarter](https://github.com/squarepacker/k2-minus-c-quarter) | Ryu’s reported quarter-power deficiency theorem, with its separate analytic variant; issue #414, DOI 10.5281/zenodo.23211207 | **[squarepacker quarter-power 2026]**; [7 October packet](web/squarepacker-k2-minus-c-quarter-2026-10-07/README.md), pinned `abbedcf4bba2e4053f0278e669d84966a89c8b73`; scoped proof review and conditional interval arithmetic retained; independent box labelling remains open |
 | [squarepacker/k2-minus-c-cube-root](https://github.com/squarepacker/k2-minus-c-cube-root) | Ryu’s reported cube-root deficiency theorem and intermediate square-root regimes; issue #414, DOI 10.5281/zenodo.23212059 | **[squarepacker cube-root 2026]**; [7 October packet](web/squarepacker-k2-minus-c-cube-root-2026-10-07/README.md), pinned `15045f9c6b74bd52f60394b9be593ebe4fb3debc`; scoped proof review and conditional interval arithmetic retained; independent box labelling remains open |
+| [squarepacker/k2-minus-c-upper](https://github.com/squarepacker/k2-minus-c-upper) | Ryu’s reported upper bounds on the deficiency c*(k) just below integer sides: 8⌈√(k−4)⌉ − 1 (k ≥ 6), 20.668 k^{2/5} + 0.623 (k ≥ 1.6·10⁷), O(k^{3/8}) (v1.0 from 4·10²⁶; v1.1 twelve tiers from 2.48·10¹²) and five certified values c*(10⁵) ≤ 1583 to c*(10⁸) ≤ 24790; issues #471 and #486, DOIs 10.5281/zenodo.23256655 and 10.5281/zenodo.23278927 | **[squarepacker k2-minus-c-upper 2026]**; [9 October packet](web/squarepacker-k2-minus-c-upper-2026-10-09/README.md), pinned `700668795e6b95f0bf2a2c6de104adaf3a3ebce0`, two certificates pinned by digest, to be hosted once the owner publishes their release; **[squarepacker k2-minus-c-upper v1.1 2026]**; [10 October packet](web/squarepacker-k2-minus-c-upper-v11-2026-10-10/README.md), pinned `5742311db220b4bd8e825167aeae689a1bd65ce9`; source replays and independent checks in both; [review](../../docs/project/reviews/review-2026-10-10-squarepacker-k2-minus-c-upper.md) |
 | [Kleddamag/11-squares-certified-bound](https://github.com/Kleddamag/11-squares-certified-bound) | The `s(11) > 31/8` certificate and its two source checkers | **[Kleddamag n11 2026]**; [retained source](web/external-square-certificates-2026-09-22/kleddamag-11/README.md) |
 | [Kleddamag/17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound) | The `n = 17` mixed-charge certificate line through `466001/100000` | **[Kleddamag n17 4.66001]**; [27 September packet](web/n17-kleddamag-466001-2026-09-27/README.md) |
 | [Guzhou0806/n17-square-packing](https://github.com/Guzhou0806/n17-square-packing) | Parent-angle and mixed-charge certificates for `n = 17`, including R068 and R071 | **[Guzhou0806 n17 R068]**; [28 September packet](web/n17-guzhou-r068-2026-09-28/README.md); **[Guzhou0806 n17 R071]**; [30 September packet](web/n17-guzhou-r071-2026-09-30/README.md), pinned `8c11f6962506940c5de67a9fa73b3d1e2e151196` |
+| [Guzhou0806/n40-square-packing](https://github.com/Guzhou0806/n40-square-packing) | The clipped-corner transfer `s(40) > 335427/50000` on wand125’s `rect_n40_L67` density, with its 401-direction nodal run and exact finite checks, and then the continuous-pose kernel `s(40) > 1340000/199529` on the same density, with its 43-slab interval cover, exact axis certificate and finite checks, and the same kernels’ `s(40) > 3359/500` on a new density of 685 rectangle orbits | **[Guzhou0806 n40 clipped corner 2026-10-10]**; [10 October packet](web/guzhou-n40-clipped-corner-2026-10-10/README.md), pinned `e5abeb4d078a5c5b35df6204dd9b93378e5a7880`; **[Guzhou0806 n40 continuous pose 2026-10-10]**; [10 October continuous-pose packet](web/guzhou-n40-continuous-pose-2026-10-10/README.md), pinned `71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3`; **[Guzhou0806 n40 new supports 2026-10-11]**; [11 October new-supports packet](web/guzhou-n40-new-supports-2026-10-11/README.md), pinned `6a65957e6c5c51cdf267917d882dab7f5b4928dd` |
 | [Mira-acc/17squares](https://github.com/Mira-acc/17squares) | Exact point and weighted certificates used in the `n = 17` lineage | **[n17 weighted certificates 2026-09-20]**; [20 September packet](web/n17-weighted-certificates-2026-09-20/README.md) |
 | [sam-bee/squarl](https://github.com/sam-bee/squarl) | Search-pipeline documentation and exact-rational lower-bound sources | **[Squarl n17 2026]**; [retained source](web/squarl-n17-2026/README.md) |
 
@@ -620,6 +622,9 @@ is [epistemics.md → Results by Others](../../epistemics.md#results-by-others).
 | **[Kleddamag n17 4.66001]** | Kleddamag, building on Squares Project (Joshua Levy), Mira and Guzhou0806: an exact weighted-certificate proof over 2,168 orientation intervals that `s(17) > 466001/100000 = 4.66001`, published on 2026-09-27 at the untagged commit `57519bb7` as `bounds/4.66001/` beside `v1.1.0`, whose two checkers it keeps byte for byte. Its 889 charge orbits, every rule of capacity one, combine two completed charge candidates, and eight of an original 2,048 intervals are split sixteen ways; counting surplus 54,340 units of `10⁻⁹`. The 33 files that changed or were added since `v1.1.0`, byte-identical, the other 103 being those already retained in **[Kleddamag n17 4.640020]** and **[Kleddamag n17 certified bound]**, plus receipts for the full two-checker replay (36 min 44 s here on one worker per checker, every interval ledger identical to the source’s), the integrity check and the controls. Verified at `V4`/`C3`; `C4` needs a method-distinct coverage decision that can read its feature kinds. Superseded on 2026-09-29 by **[Guzhou0806 n17 R068]** and kept as the previous verified bound | github.com/Kleddamag | `n17-kleddamag-466001-2026-09-27/` |
 | **[Guzhou0806 n17 R068]** | Guzhou0806 / N17 project’s R068 release of 28 September 2026 at `815b1626`, continuing Kleddamag’s public `4.66001` charge (Kleddamag building on Squares Project (Joshua Levy), Mira and Guzhou0806) and disclosing AI assistance: `s(17) > 116511/25000 = 4.66044` from that charge’s 889 rule orbits unchanged, one zero-weight site orbit moved and one weighted four-site point orbit added, over 4,991 angle intervals, counting surplus 7,404 units of `10⁻⁹`; its publisher ran no local validation and did not observe CI. The same day’s **[Guzhou0806 n17 R067]**, `233009/50000 = 4.66018` on the unchanged charge over 2,808 intervals, is retained beside it. The 93 files that changed or were added since `6f64e4b2`, byte-identical, plus complete paired replays of both here, Guzhou0806’s own C++ checker and Kleddamag’s Node BigInt checker agreeing with the published ledgers on every row (0 of 4 × 4,991 and 4 × 2,808 differing), and a structural comparison with `4.66001`. One event-cell method, so `V4`/`C3` | github.com/Guzhou0806 | `n17-guzhou-r068-2026-09-28/` |
 | **[Guzhou0806 n17 R071]** | Guzhou0806 / N17 project’s R071 release of 30 September 2026 at `8c11f696`, keeping unchanged R068’s continuation of Kleddamag’s public `4.66001` charge (Kleddamag building on Squares Project (Joshua Levy), Mira and Guzhou0806) and disclosing AI assistance: `s(17) > 18641771/4000000 = 4.66044275`, `11/4000000` above R068, from that charge at parent side `18452000/18641771` over 5,114 angle intervals, counting surplus 7,404 units of `10⁻⁹`. Its partition records are missing and a completion summary is retained; the source’s own CI replay passed and its publisher did not observe it. The previous day’s **[Guzhou0806 n17 R070]**, `46604427/10000000 = 4.6604427` over 5,107 intervals with complete four-partition ledgers, is retained beside it, with both releases’ research material that carries no bound: R070’s same-budget overlay and fixed-class obstruction and R071’s conditional joint geometry at `9321/2000`. The 45 retained of the 186 files the two commits changed or added since `815b1626`, byte-identical, the other 141 pinned by digest: 32 byte-identical to the R068 packet’s checker and notices, and 109 research files that carry no bound and that neither bound, the replay nor the audit reads; the CI run records; a pre-replay audit against R068; and the complete paired replay of R071 here on 5 October 2026, Guzhou0806’s C++ checker and Kleddamag’s Node BigInt checker agreeing on every row (0 of 4 × 5,114 differing), with two mutated certificates both checkers refuse. One event-cell method, so `V3`/`C3` | github.com/Guzhou0806 | `n17-guzhou-r071-2026-09-30/` |
+| **[Guzhou0806 n40 clipped corner 2026-10-10]** | Guzhou0806’s release `n40-670854-20261010` of 10 October 2026 at `e5abeb4d`, reported on jlevy/squares#485 with AI assistance disclosed: `s(40) > 335427/50000 = 6.70854`, `427/50000` above `T-068`’s `67/10` on the same density, wand125’s `rect_n40_L67`, unchanged and pinned by digest. Every side-`9977/10000` square at each of 401 half-angle tangents of step `83/80000` captures at least `10001/10000` of the density, and a continuous-angle transfer with a clipped-corner loss bound and the density’s essential supremum carries that to every unit square; the weaker full-core bound `s(40) > 67000√6400006889/798988091` needs no peak. Twenty files retained, the density and the vendored copy of this repository’s `sqverify_fast` pinned by digest; the release ZIP’s CI receipt kept beside the tree’s local one. Replayed here on 10 October 2026: the nodal statement by `sqverify-fast` at all 401 directions, the producer’s own nodal code, and the finite steps by a first-party exact audit that shares no code with the release’s, with controls A to H; the mathematics reviewed the same day with no blocking defect | github.com/Guzhou0806 | `guzhou-n40-clipped-corner-2026-10-10/` |
+| **[Guzhou0806 n40 continuous pose 2026-10-10]** | Guzhou0806’s release `n40-continuous-1340000-199529-20261010` of 10 October 2026 at `71c97d07`, reported in a follow-up comment on jlevy/squares#485 with AI assistance disclosed: `s(40) > 1340000/199529 = 6.7158157…`, `72586117/9976450000` above `T-133` on the same density, wand125’s `rect_n40_L67`, unchanged and pinned by digest. Every side-`199529/200000` square captures at least `4999/5000`: a continuous-pose interval kernel over 43 slabs of `tan(θ/2)` in `[10^-6, 83/200]` and an exact integer certificate at side `997643/1000000` for the rest. Twenty-seven files retained, the density pinned by digest; the release ZIP’s CI receipt kept beside the tree’s local one. Replayed here on 10 October 2026: both kernels rebuilt into the CI binaries and run in full, the producer’s own code, with controls A to H; the finite steps by a first-party exact audit that shares no code with the release’s; the near-axis statement and the 401-direction necessary condition by `sqverify-fast`; the mathematics reviewed the same day with no blocking defect. `T-145` records it at V3/C3 | github.com/Guzhou0806 | `guzhou-n40-continuous-pose-2026-10-10/` |
+| **[Guzhou0806 n40 new supports 2026-10-11]** | Guzhou0806’s release `n40-new-supports-6718-20261011` of 11 October 2026 at `6a65957e`, reported in a comment on jlevy/squares#485 with AI assistance disclosed: `s(40) > 3359/500 = 6.718`, `217911/99764500` above `T-145`, by the 10 October release’s two kernels, byte for byte, on a new rational density of 685 `D4` rectangle orbits, 522 rows of wand125’s `rect_n40_L67` pool and 163 generated outside it, every weight new. Every side-`3350/3359` square captures at least `4999/5000`: the continuous-pose kernel over the same 43 slabs of `tan(θ/2)` and the exact axis certificate at side `249329659/250000000`. The release also states an exact obstruction for the full original support family at `168/25`, which bears on no bound. Thirty-four files retained, the original pool pinned by digest; the release ZIP’s CI receipt kept beside the tree’s local one. Checked here on 11 October 2026: the finite steps by a first-party exact audit that shares no code with the release’s, with controls; the axis kernel rebuilt into the CI binary and run; the near-axis statement again by `sqverify-fast`. The 43-slab replay has not been run and no review of the release exists, so it is retained and not registered | github.com/Guzhou0806 | `guzhou-n40-new-supports-2026-10-11/` |
 | **[wand125 rectangle bounds 2026-09-28]** | wand125’s rectangle-density certificates at `39d8ecc` (28 September 2026), built with Tokoharu’s solver and decided by his unchanged interval verifier: 50 standing certificates from `n = 18` to `95`, 32 raised and six new (`n = 86, 88, 89, 91, 94, 95`) since the September 27 packet, whose 12 unchanged certificates and licence it reads rather than copies; the exact first-party preflight of all 50 passes, and coverage replays are recorded in each packet’s receipts as they complete | github.com/wand125 | `wand125-rectangle-certificates-2026-09-28/` |
 | **[wand125 point and mixed bounds 2026-09-28]** | wand125’s three non-rectangle certificate families at `39d8ecc` (28 September 2026): a point-only `s(45) = 7` (12,645 `D4`-invariant points, total `12666371418707823/2^48`) decided by Evan Daniel’s unmodified `zmx2`; a point-only `s(21) = 5` on Daniel’s support (4,604 weights, threshold `249987/250000`, gap `999979/125000000000`) decided by the source’s rational replay, with a Lean 4 reduction of all but the capture step; and `s(50) ≥ 37/5` from 553 rectangle orbits, checked by a research copy of Tokoharu’s `verify.cpp` at threshold one, with the superseded `147/20` and `3659/500`. No priority claimed for `s(21)` or `s(45)`. 64 files byte-identical, MIT; the 464 MB `s(21)` bundle and the three `n = 50` tarballs pinned by SHA-256. The exact audit passes; `zmx2` re-certifies `s(45)` here with the source’s box count and depth, recorded at `V4`/`C3` as a second certificate beside Daniel’s mixed cover; the complete `s(21)` and `n = 50` replays ran here on 29 September and are in the packet’s receipts, which verifies `s(50) ≥ 37/5` (and `s(51) ≥ 37/5` by its mass) and gives `s(21) = 5` a second, point-only route | github.com/wand125 | `wand125-point-and-mixed-2026-09-28/` |
 | **[wand125 rectangle bounds 2026-10-01]** | wand125’s rectangle-density certificates at `1a25a5ed` (1 October 2026), built with Tokoharu’s solver and decided by his unchanged interval verifier: the standing certificates raised or added since the September 28 packet, 34 of them requested for registration in jlevy/squares#281, with the standing certificates at `n = 59, 77, 78` that the request leaves out for exact values. The packet reads the unchanged certificates from the earlier packets; the exact first-party preflight passes, and no coverage replay of the new certificates has run | github.com/wand125 | `wand125-rectangle-certificates-2026-10-01/` |
@@ -640,6 +645,7 @@ is [epistemics.md → Results by Others](../../epistemics.md#results-by-others).
 | **[wand125 mixed bounds finer net 2026-10-06]** | wand125’s two mixed rectangle-measure certificates added on 6 October 2026 after `43050edc`, pinned at `65e408c9`, each on a net its candidate declares and requested in a comment on jlevy/squares#366: `s(18) ≥ 588/125` on core `1999/2000` and 832 half-angle tangents of step `1/2006`, superseding `mixed_n18_L470` of **[wand125 mixed bounds finer net 2026-10-05]**, and `s(19) ≥ 48229/10000` on that certificate’s net, superseding `rect_n19_L48175` of **[wand125 rectangle bounds 2026-10-01]**. Same checker as every earlier mixed certificate; `mixed_n18_L4704`’s driver differs from the earlier copies only in allowing more workers. The commit’s `verification/sqverify-net`, the source’s adaptation of this repository’s `sqverify_fast`, is pinned by digest and not retained. Exact premises and every pre-replay check pass; on 6 October 2026 `sqverify-fast`, this repository’s clean-room measure verifier, decided both at every direction of their declared nets, which verifies them, and the source’s own checker ran here at 10 directions of each and not in full. The proof-bundle tarballs are pinned by SHA-256 and not retained | github.com/wand125 | `wand125-mixed-bounds-finer-net-2026-10-06/` |
 | **[wand125 mixed bounds check2 2026-10-06]** | wand125’s ten mixed rectangle-measure certificates added on 6 October 2026 after `65e408c9`, pinned at `2fad66e0`, each on a net its candidate declares, none requested here: `s(29) ≥ 581/100`, a complete proof bundle with the checker of every earlier mixed certificate, and nine check2 bundles, at `n = 18, 19, 20, 26, 27, 28, 30, 39, 41`, which ship no C++ record and are checked at the source by its copy of this repository’s `sqverify_fast` changed to read a declared net, pinned by digest and not retained. `s(18) ≥ 941/200` and `s(19) ≥ 193/40` are on 2073 half-angle tangents of step `1/5002` at core `4999/5000`, superseding **[wand125 mixed bounds finer net 2026-10-06]**. Exact premises and every bundle binding pass; on 6 October 2026 `sqverify-fast`, this repository’s clean-room measure verifier, decided all ten at every direction of their declared nets, which verifies them, independently of the producer’s checker for `s(29)` and sharing its components for the nine check2 bundles, whose own check is a copy of the same crate; the source’s C++ checker ran here at sampled nodes and not in full. The tarballs are pinned by SHA-256 and not retained | github.com/wand125 | `wand125-mixed-bounds-check2-2026-10-06/` |
 | **[wand125 linear n82 2026-10-02]** | wand125’s linear certificate for `s(82) ≥ 233/25`, pinned at `b00fc70f` (first committed at `58f153f8`, 2 October 2026): the support of **[wand125 linear certificates 2026-10-02]**’s `n = 83` measure scaled by `932/935`, with its masses solved again, checked by the same `unified_linear_verify.cpp`; above Green’s reported value at `n = 82` and not resting on Green’s argument; requested in a comment on jlevy/squares#294. The complete replay here on 3 October 2026 matched the shipped run at all 201 directions, which verifies it; the proof-bundle tarball is pinned by SHA-256 and not retained | github.com/wand125 | `wand125-linear-n82-2026-10-02/` |
+| **[wand125 linear n122 2026-10-10]** | wand125’s linear certificate for `s(122) ≥ 563/50 = 11.26`, pinned at `a9f76c38` (10 October 2026, wand125/square-packing): 502 point, 1,268 segment and 3 rectangle orbits on the net of **[wand125 linear certificates 2026-10-02]**, checked by the same `unified_linear_verify.cpp`; by its mass also `s(123)` to `s(126)`, above Green’s reported value at 122 to 125 and Nagamochi’s at 126; no issue reports it. The T-080 route’s readers accept its exact premises and all 201 inputs, and two angles replayed here returned the certificate’s records; T-144 records it at V0/C0, and a complete replay is priced at about 11 CPU-hours and waits for a budget. The 31.8 MB release asset is pinned by size and SHA-256 and not retained | github.com/wand125 | `wand125-linear-n122-2026-10-10/` |
 | **[wand125 valid7 independent check 2026-10-02]** | wand125’s separately written exact-rational checker of Valid7 at `38dd31b3` (2 October 2026), run on Daniel’s `k = 7` cover: 156,800 root boxes of the unreduced pose space, 9,640,060 leaves, none uncertified, about 626 core-hours; its read log says Daniel’s checker and lemma write-ups were not read. Requested in jlevy/squares#296. The code is retained and the release records pinned by SHA-256; its `verify.sh` record check and an audit passed here on 2 October, and the complete run was repeated here on 2 and 3 October 2026 with review finding D-1’s line guarded: all 156,800 roots `VERIFIED` in 9,808,968 leaves, none uncertified, each of the 124,975 roots the source ran under V2 with its published leaves | github.com/wand125 | `wand125-valid7-independent-check-2026-10-02/` |
 | **[wand125 valid7 independent check 2026-10-03]** | The same checker at `da469ecf` (3 October 2026), fixing the three implementation findings of this repository’s 2 October method review: `tier_b2.nonneg_open` and `rf.nonneg_on` no longer accept a polynomial that vanishes at the sample (D-1, D-2), and `tier_b2` keys its line and value caches by exact text rather than Python’s `hash` (D-3); `check_record.py` gains `--seed` and `--claim tilt`. The release records are unchanged. Its `verify.sh` ran here on 5 October 2026 on the unchanged records, `RECORD OK`, and a probe of both revisions shows each finding present before and gone after | github.com/wand125 | `wand125-valid7-independent-check-2026-10-03/` |
 | **[wand125 valid7 independent check 2026-10-06]** | The same checker at `c561dbb3` (6 October 2026), run on Daniel’s box-9 cover for ValidTilt9, the finite premise of `s(k² − 4) = k` for `k ≥ 8` (`T-081`): 28,350 root boxes over centres `[0, 9/2]²` and `u = tan(θ/2)` in `[0, 7/16]`, 9,537,343 leaves, none uncertified, about 766 core-hours, with `da469ec`’s checking modules and a driver extended mid-run; its read log says Daniel’s checker, lemma write-ups and k2m4 run records were not read. The code is retained and the release `records-tilt9-v1` pinned by SHA-256. Its `verify_tilt9.sh` and an audit of the records passed here on 6 October 2026, and a sample of roots re-ran with their published leaves; the full run was not repeated here | github.com/wand125 | `wand125-valid7-independent-check-2026-10-06/` |
@@ -865,9 +871,11 @@ Source MIT licences and the earlier #375 namespace remain unchanged.
   `8dc415296f697f5140caea27c7a0193d52deb4e6`;
   [packet](web/ry-xu-new-packings-2026-10-08/README.md).
   All 25 rational certificates have complete exact finite-feasibility replay (T-125).
-  The separate undilated n = 51 construction in $Q(\sqrt 2)$ is confirmed by T-126. The
-  atlas selects 17 rational packings and that radical construction; eight rational
-  certificates remain as nonselected evidence.
+  The separate undilated n = 51 construction in $Q(\sqrt 2)$ is confirmed by T-126.
+  Since 11 October 2026 smaller confirmed certificates hold every case the rational
+  packings held, refinements and regularizations of Xu’s packings among them, so the
+  atlas draws only the radical construction and all 25 rational certificates remain as
+  nonselected evidence.
   Native exact checks find 119 touching pairs at n = 51; the source’s count of 191
   remains unconfirmed.
   These results establish finite upper bounds, without local or global optimality.
@@ -875,9 +883,10 @@ Source MIT licences and the earlier #375 namespace remain unchanged.
   does not treat the unlicensed source programs as a licensed software bundle.
 
 - **[Gupta rational refinements 2026-10-08]** — Siddharth Gupta’s seventeen complete
-  rational source cases at `9643cb5a78c1d4dcfc867c80a6920c3a6219d05a`; fourteen selected
-  finite upper-bound improvements and three withdrawals, T-127 at V3/C3.
-  [Factual packet](web/gupta-square-packing-refinements-2026-10-08/README.md).
+  rational source cases at `9643cb5a78c1d4dcfc867c80a6920c3a6219d05a`; fourteen finite
+  upper-bound improvements and three withdrawals, T-127 at V3/C3. Since 11 October 2026
+  seven of the fourteen cases hold smaller confirmed certificates, and the other seven
+  keep these. [Factual packet](web/gupta-square-packing-refinements-2026-10-08/README.md).
   Independently re-implemented deciding code verified every complete source certificate
   and full-roster control; actual private custody admitted the complete retained
   inputs/results without repeating geometry.
@@ -906,11 +915,31 @@ n28, n29 and n31. The
 records the reported bounds and complete source references.
 Independent whole-net replay and controls remain pending.
 
+**[wand125 fine-net n29 2026-10-10]**: wand125’s later n29 certificate,
+`mixed_n29_L582`, reports $s(29) \ge 291/50 = 5.82$ on the same 2,073-direction net,
+superseding the 1163/200 above.
+The [authored factual packet](web/wand125-fine-net-n29-2026-10-10/README.md) pins
+revision `22a23c8` and its release asset by digest, with the maintained premise check
+and a diagnostic eight-direction sample.
+A complete replay and whole-net controls remain pending.
+
+**[wand125 fine-net n28 n30 2026-10-10]**: wand125’s n28 and n30 certificates,
+`mixed_n28_L57425` and `mixed_n30_L58925`, report $s(28) \ge 2297/400 = 5.7425$ and
+$s(30) \ge 2357/400 = 5.8925$ on the same 2,073-direction net; no issue reports them.
+The [authored factual packet](web/wand125-fine-net-n28-n30-2026-10-10/README.md) pins
+revisions `36b85b9` and `ff9f269` and their release assets by digest, with the
+maintained premise checks and diagnostic eight-direction samples.
+T-142 and T-143 record them at V0/C0; a complete replay and whole-net controls remain
+pending.
+
 - **[Couzo exact refinements 2026-10-08]** — Francisco Couzo’s eight complete rational
-  certificates and separate decimal context poses; T-128 remains V0/C0 pending
-  historical source-house integration and confirmation.
-  All 24 native jobs completed their finite-feasibility and control outcomes in 6.64
-  wall minutes; actual private-worker custody passed complete stored-input and
+  certificates and separate decimal context poses.
+  T-128 is at V3/C3 on the
+  [review of 10 October](../../docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md),
+  which reproduced every job and decided all eight by a third exact route; since 11
+  October 2026 the cases at 108, 127, 180, 228 and 306 hold its certificates as the
+  house. All 24 native jobs completed their finite-feasibility and control outcomes in
+  6.64 wall minutes; actual private-worker custody passed complete stored-input and
   mutation-restoration checks.
   [Factual packet](web/couzo-exact-refinements-2026-10-08/README.md).
   Ryan Xu, Nate Chaoweeraprasit, Siddharth Gupta, David Ellsworth and Evan Daniel
@@ -954,11 +983,12 @@ Independent whole-net replay and controls remain pending.
   rational certificates at 84, 86, 105, 175 and 270, pinned at 2d32a6e and kept as
   derived exact facts with the complete pinned tree; no upstream byte is retained.
   [Derived packet](web/couzo-followup-refinements-2026-10-08/README.md).
-  T-130 remains V0/C0: all five positives passed both maintained exact routes and both
-  routes refused all ten controls, while independent review, historical source-house
-  integration and confirmation remain pending.
-  Ryan Xu, Evan Daniel and David Ellsworth receive the source’s seed and refinement
-  credits; no optimality is asserted.
+  All five positives passed both maintained exact routes and both routes refused all ten
+  controls; T-130 is at V3/C3 on the
+  [review of 10 October](../../docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md),
+  and since 11 October 2026 the cases at 84, 86 and 105 hold its certificates as the
+  house. Ryan Xu, Evan Daniel and David Ellsworth receive the source’s seed and
+  refinement credits; no optimality is asserted.
 
 ## Evan Daniel’s record-hunt certificates, 9 October 2026
 
@@ -968,12 +998,218 @@ Independent whole-net replay and controls remain pending.
 with their KKT points, inputs and solver reports;
 [packet](web/evand-record-hunt-2026-10-09/README.md).
 Both project exact routes accept both certificates and refuse all four controls.
-T-131 records the n = 132 side at V0/C0, pending independent review and adoption.
-The n = 155 side equals Couzo’s earlier issue451 certificate (T-128), with which it
-shares 152 of 155 exact poses, differing only in the free and flat-motion squares the
+T-131 records the n = 132 side at V3/C3 on the
+[review of 10 October](../../docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md);
+since 11 October 2026 the case at 132 holds issue 489’s smaller side (T-141) as the
+house. The n = 155 side equals Couzo’s earlier issue451 certificate (T-128), with which
+it shares 152 of 155 exact poses, differing only in the free and flat-motion squares the
 source’s report lists; it is recorded as an evidence update to T-128. The source credits
 Couzo’s and Chaoweeraprasit’s packings as starting points and discloses Claude
 assistance under Daniel’s direction.
+
+## Upper-bound imports of 9 and 10 October 2026
+
+The intake pass of 10 October 2026 imported these releases through
+`devtools.upper_bound_reports`; the
+[review of 10 October](../../docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md)
+replayed the four that issues #476, #481, #483 and #484 report.
+On 11 October 2026 the case records adopted the smallest of them at each count as its
+house, each earlier house kept as history.
+
+**[Couzo exact certificates 2026-10-09]**: Francisco Couzo’s exact rational certificates
+for n = 132, 237, 263, 267, 270 and 303, pinned at
+`02f969075f79d5e13fa21e09e381a44e8647b452`, retained as the source wrote them;
+[packet](web/couzo-exact-certificates-2026-10-09/README.md).
+Both project exact routes accept all 17 replayed certificates and refuse all 34
+controls, and a third exact route agrees on the six.
+T-134 records the six sides at V3/C3; the case at 267 holds its side as the house since
+11 October 2026, and smaller certificates hold the other five.
+The other 59 certificates of the commit are compared in the packet’s claim record and
+registered by no entry.
+
+**[Fang two-wedge certificates 2026-10-10]**: Kevin Fang’s exact rational certificates
+for n = 308, 343 and 344, pinned at `c75bebd87933416d3e1c7aba35ec733ea8ac7da0`, retained
+as the source wrote them;
+[packet](web/fang-two-wedge-certificates-2026-10-10/README.md).
+Both project exact routes accept all 3 replayed certificates and refuse all 6 controls,
+and a third exact route agrees.
+T-135 records the n = 308 side at V3/C3, verified and not selected: the case adopted
+issue #489’s smaller side (T-141). The n = 343 and 344 sides lie beyond the case corpus
+and are verified beyond-horizon rows.
+
+**[SQUISH third request 2026-10-09]**: Nate Chaoweeraprasit’s exact rational
+certificates for n = 131, 153, 154, 207, 209, 232, 236, 237, 259, 263, 269, 270, 292,
+302, 303, 305 and 307, pinned at `d45669b48cc97ad3aa17a6c847a8d06630f66eac`, kept as
+derived exact facts, no upstream byte retained;
+[packet](web/squish-481-third-request-2026-10-09/README.md).
+Both project exact routes accept all 17 replayed certificates and refuse all 34
+controls, and a third exact route agrees and held each fact to its pinned upstream file.
+T-136 records the seventeen sides at V3/C3; since 11 October 2026 the cases at 131, 154,
+232, 259 and 307 hold them as the house, and smaller certificates hold the other twelve.
+
+**[Deleeuw n70 refinement 2026-10-10]**: Eric Deleeuw’s exact rational certificate for n
+= 70, a refinement of Ryan Xu’s packing, pinned at
+`24221d5e51244ca5290d5b1c43f1fbe36f9749e0`, kept as a derived exact fact, no upstream
+byte retained; [packet](web/ebdeleeuw-n70-refinement-2026-10-10/README.md).
+Both project exact routes accept the replayed certificate and refuse both controls, and
+a third exact route agrees and held the fact to its pinned upstream file.
+T-137 records the side at V3/C3, verified and not selected: the case adopted Evan
+Daniel’s smaller regularized certificate (T-146).
+
+**[Mishapolk decimal poses 2026-10-09]**: Mishapolk’s decimal centre-and-angle poses at
+30 counts of the case corpus, pinned at `dd3da5c753c5ded6cb3b89476193b7b801005415`, kept
+as derived exact facts, no upstream byte retained;
+[packet](web/mishapolk-decimal-poses-2026-10-09/README.md).
+The exact rational witnesses are this repository’s: centres dilated about the box centre
+to each printed 12-decimal ceiling and half-angle tangents rounded down at 32 decimals.
+An interval measurement proves every dilated pose a packing at its ceiling, and both
+project exact routes accept all 30 witnesses and refuse all 60 controls.
+T-138 records the sixteen counts whose ceiling is below the case’s at V3/C3 on the
+[review of 10 October](../../docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md),
+which derived every witness again from its pinned file; the other 14 in-horizon poses
+have no entry.
+
+**[Daniel trio126 2026-10-09]**: Evan Daniel’s exact rational certificates of three n =
+126 packings reconstructed from a picture, pinned at
+`268af529546176a25224ea3b2c7d29cef8d9e911` and retained under the source’s MIT licence;
+[packet](web/evand-trio126-2026-10-09/README.md).
+Both project exact routes accept `n126_xu.cert`, the one below the case, and refuse both
+controls, and a third exact route agrees.
+T-139 records its side at V3/C3, a more precise certificate of Ryan Xu’s arrangement, 68
+of whose 126 squares sit elsewhere than in T-125’s; the case holds it as the house since
+11 October 2026.
+
+## Francisco Couzo’s exact certificates, 10 October 2026
+
+**[Couzo certificates 2026-10-10]**: Francisco Couzo’s exact rational certificates for n
+= 132, 175, 209, 237, 270 and 305, pinned at `3ef76349025bf4bfa99c9c3600bcc273f4c33e02`;
+the nine certificates the commit adds or changes are retained as factual data, and the
+other 54 are pinned against the issue-476 packet’s identical copies;
+[packet](web/couzo-certificates-2026-10-10/README.md).
+Both project exact routes accept all 9 replayed certificates and refuse all 18 controls,
+and the third route accepts the six requested ones.
+T-140 records the six sides at V3/C3 on the
+[review of 10 October](../../docs/project/reviews/review-2026-10-10-upper-bound-imports-488-489.md),
+and since 11 October 2026 the cases at 175, 209, 237, 270 and 305 hold them as the
+house; at n = 132 issue #489’s side is smaller.
+
+## Evan Daniel’s Hunt 3 certificates, 10 October 2026
+
+**[Daniel record hunt 3 2026-10-10]**: Evan Daniel’s exact rational certificates for n =
+132, 308, 343 and 344 from his Hunt 3 record hunt, pinned at the branch head
+`76a529bc6f36ed05827cae3d1412d6acb5be00fc` (byte-identical to `c013f43`, which the issue
+names) and retained under the source’s MIT licence with their KKT points, inputs and
+solver reports; [packet](web/evand-record-hunt3-2026-10-10/README.md).
+Both project exact routes accept all 5 replayed certificates and refuse all 10 controls,
+and the third route accepts the four requested ones.
+T-141 records the n = 132 and 308 sides at V3/C3 on the same review; both cases hold
+them as the house since 11 October 2026. The n = 343 and 344 sides lie beyond the case
+corpus and are verified beyond-horizon rows that supersede issue #484’s. The unnamed n =
+305 certificate has exactly issue #488’s side there, and the source’s log drops it as
+Couzo’s. The source credits Kevin Fang’s #484 packings at 308, 343 and 344 and discloses
+Claude assistance.
+
+## Evan Daniel’s regularized record lists, 10 October 2026
+
+**[Daniel regularized lists 2026-10-10]**: Evan Daniel’s exact rational certificates
+from his display-regularized record lists for n = 70, 102, 103, 123, 129, 146, 153, 236,
+258, 263, 269, 292, 295, 302 and 303, the fifteen below every value the record held,
+pinned at `ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7` and retained as their upstream gzip
+under the source’s MIT licence; [packet](web/evand-regularized-2026-10-10/README.md).
+Both project exact routes accept all fifteen and refuse all 30 controls, and a third
+exact route agrees. The source calls each a display view at the same side and not a new
+bound; T-146 records the sides at V3/C3 on the review of 11 October, which accepted all
+fifteen for finite feasibility only, and as regularizations of the packings the record
+credits to their finders; since 11 October 2026 thirteen of the cases hold their
+certificates as the house, and at 146 and 153 smaller certificates do (T-150, T-148).
+
+## PingYou Ltd’s exact certificates, 11 October 2026
+
+**[PingYou n207 certificate 2026-10-11]**: PingYou Ltd’s exact rational certificate for
+n = 207, two placed patches of Ryan Xu’s n70 construction from Evan Daniel’s exact n70
+certificate with two upright grids, pinned at
+`9dc93b6ac2f8fefe038062a74c9a75bf05afdba6`, kept as a derived exact fact, no upstream
+byte retained; [packet](web/pingyou-n207-certificate-2026-10-11/README.md).
+Both project exact routes accept the replayed certificate and refuse both controls, and
+a third exact route agrees and held the fact to the pinned certificate and witness.
+T-147 records the side at V3/C3 on the
+[review of 11 October](../../docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md),
+and the case at 207 holds it as the house since 11 October 2026. The first commit
+disclosed OpenAI Codex assistance, and the pinned commit removed the disclosure; asked
+which account stands, the author answered on jlevy/squares#503 on 12 October 2026, for
+this release and the n153 one: “Both solutions were AI assisted by ‘PY’, an unreleased
+agentic AI offering by PingYou Ltd.”
+
+**[PingYou n153 certificate 2026-10-11]**: PingYou Ltd’s exact rational certificate for
+n = 153, by its account Ryan Xu’s n70 construction composed with its reflection and an
+upright completion, its contacts reclosed at a new angle, pinned at
+`bc328a7d727aedd0eabebd6ea80285f572b65d2d`, kept as a derived exact fact, no upstream
+byte retained; [packet](web/pingyou-n153-certificate-2026-10-11/README.md).
+Both project exact routes accept the replayed certificate and refuse both controls, and
+a third exact route agrees and held the fact to the pinned certificate and witness.
+T-148 records the side at V3/C3 on the same review, and the case at 153 holds it as the
+house since 11 October 2026; the lineage from the n70 is by construction, not by pose.
+The release makes no statement about AI assistance; on jlevy/squares#503 the author
+answered on 12 October 2026, for this release and the n207 one: “Both solutions were AI
+assisted by ‘PY’, an unreleased agentic AI offering by PingYou Ltd.”
+
+## Daniil Ostashev’s and Robert Barnett’s certificates, 11 October 2026
+
+**[Ostashev records 2026-10-11]**: Daniil Ostashev’s exact rational certificates for n =
+155, 156 and 211, new packings his README says were built from scratch, pinned at the
+head the record read, `c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49`, and retained as the
+source wrote them under its MIT licence;
+[packet](web/dostashev-records-2026-10-11/README.md).
+Both project exact routes accept all three and refuse all six controls, and a third
+exact route agrees and held every file to its pinned bytes.
+T-149 records the sides at V3/C3 on the
+[review of 11 October](../../docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md),
+and the cases at all three hold them as the house since 11 October 2026; the issue
+prints the larger sides the head replaced.
+The source states nothing about AI assistance.
+
+**[Barnett refinements 2026-10-11]**: Robert Barnett’s exact rational certificates for n
+= 146 and 261, refinements of Ryan Xu’s packings, pinned at
+`2573ff51c4b160c952bbb2d1c399e7430d9f9ae2`, kept as derived exact facts, no upstream
+byte retained; [packet](web/barnett-refinements-2026-10-11/README.md).
+Both project exact routes accept all seven replayed certificates, the five the README
+marks superseded among them, and refuse all 14 controls, and a third exact route agrees
+on the two requested and held each fact to its pinned certificate.
+T-150 records the two sides at V3/C3 on the same review, and the cases at 146 and 261
+hold them as the house since 11 October 2026; the five superseded certificates are
+registered nowhere. OpenAI Codex assistance disclosed.
+
+## SQUISH’s fourth request and Francisco Couzo’s certificates, 11 October 2026
+
+**[SQUISH fourth request 2026-10-11]**: Nate Chaoweeraprasit’s exact rational
+certificates for n = 176, 181, 238, 239, 270, 271, 272, 304 and 305, composed by
+SQUISH’s Mondrian method from pieces of earlier packings, pinned at
+`aeacc6c124df339074f7370e1e010bb6e8c1b5ca`, kept as derived exact facts, no upstream
+byte retained; [packet](web/squish-500-fourth-request-2026-10-11/README.md).
+Both project exact routes accept all nine and refuse all 18 controls, and a third exact
+route agrees and held each fact to its pinned certificate and summary.csv row.
+T-151 records the exact fractions at V3/C3 on the
+[review of 11 October](../../docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md),
+and the cases at 176, 181, 238, 239, 270, 271 and 272 hold them as the house since 12
+October 2026; the issue’s 15-digit sides are cuts of them, and at 304 and 305 Francisco
+Couzo’s certificates below, built from these packings, are smaller.
+Claude Opus 5.5 assistance disclosed.
+
+**[Couzo certificates 2026-10-11]**: Francisco Couzo’s exact rational certificates for n
+= 304, 305, 338, 339, 344, 375, 376, 378, 379, 380 and 381, pinned at
+`337078ca3e05153aceb099237b175cf64af5748a`, retained as the source wrote them;
+[packet](web/couzo-certificates-2026-10-11/README.md).
+Both project exact routes accept all 15 certificates the two source commits add or
+change and refuse all 30 controls, and a third exact route agrees on the eleven
+requested and held every file to its pinned bytes.
+T-152 records the 304 and 305 sides, refinements of SQUISH’s Mondrian packings above, at
+V3/C3 on the
+[review of 12 October](../../docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md),
+and the cases at 304 and 305 hold them as the house since 12 October 2026. The nine
+sides beyond the case corpus are verified beyond-horizon rows that supersede the rows
+tracked at 338, 339, 344, 375, 376, 378 and 379; the four certificates the issue does
+not name, at 175, 308, 340 and 343, are registered nowhere.
+Claude assistance disclosed.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

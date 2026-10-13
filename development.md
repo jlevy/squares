@@ -7,7 +7,7 @@ This guide owns runtime support, code placement, validation, and refactoring pra
 
 The governing rule is assurance proportional to reuse and consequence.
 Shared code and research-state boundaries are designed, typed, tested, and kept easy to
-orient around. A retained checker for one value of $n$ may stay direct and specialized.
+navigate. A retained checker for one value of $n$ may stay direct and specialized.
 Do not turn a one-off investigation into a framework without a second real consumer.
 
 ## Supported Environment
@@ -26,6 +26,7 @@ uses the stable Cargo toolchain.
 From the repository root, then from `packing/`:
 
 ```shell
+git submodule update --init --recursive
 npm ci --ignore-scripts
 cd packing
 uv sync --frozen --all-extras --group dev
@@ -33,6 +34,8 @@ uv run --frozen --all-extras --group dev python --version
 uv run --frozen --all-extras --group dev packing-validate --fast
 ```
 
+The submodule command initializes `vendor/kpress`, the local dependency uv needs before
+it can sync the environment.
 `npm ci` installs the pinned Node tools the browser-floor step runs; without them that
 step fails. `make hooks-install` runs the same install and then the Git hooks.
 The version command must report Python 3.14.7. Do not run a bare `pip install`, commit a
@@ -186,7 +189,7 @@ alone is not full pre-merge evidence.
 | --- | --- | ---: | ---: | --- |
 | `--records` | contributor, before touching a registry; also every pull request | 49 of 107 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | 65 of 107 | 240 s | 59.4 s |
-| `--push` | contributor, once before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
+| `--push` | contributor, once before a push — the edit-tier prerequisites the diff can affect, plus tests reachable from it (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
 | `--fast` | contributor, at a block boundary; the union of the ten tiers below | 94 of 107 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
 | `--checks` | **CI, on every pull request**, in the `validate` job | 68 of 107 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
 | `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 107 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
@@ -735,7 +738,7 @@ uv run --frozen --all-extras --group dev packing-validate --edit
 uv run --frozen --all-extras --group dev packing-validate --push
 
 # The pull-request surface: the edit tier plus every behavioral test under the
-# per-test ceiling. CI runs it as the nine parts below, one per runner; run it whole
+# per-test ceiling. CI runs it as the ten parts below, one per runner; run it whole
 # here, where there is only one machine and nothing to overlap with.
 uv run --frozen --all-extras --group dev packing-validate --fast
 
@@ -815,14 +818,25 @@ Checks run concurrently, but their captured output is replayed in declared order
 workers.
 Strict mode cannot be combined with a partial selection and fails on every skip.
 
-`--push` is the pre-push floor (`BC-086`). It selects the edit tier plus a
-`reachable behavioral tests` step: `devtools.reachable_tests` computes the test files
-the change can reach — import closure over `src/sqpack`, `devtools`, `cases` and
-`tests`, text mention of a changed module or file, repository walkers always included —
-and errs toward running too many, up to the whole suite when nothing narrower is
-defensible. Each of 2026-08-30’s three red pushes broke a test reachable this way from
-the changed paths ([D-381, D-393](defects.md)), and the floor would have caught all
-three.
+`--push` is the pre-push floor (`BC-086`). It scopes edit-tier prerequisites and
+reachable behavioral tests from one changed-path snapshot, including old and new rename
+paths and deleted files.
+Unclaimed inputs and an empty diff retain the complete prerequisite floor; checks
+without declared inputs always run.
+Scoping is only as sound as each check’s declared inputs (`Step.touches`), so a contract
+test (`test_every_attributed_step_claims_the_modules_it_runs`) derives the Python
+modules every attributed check runs, follows their static import closure, lazy imports
+included, and fails on any file the check does not claim.
+The site renderers import one another, so the checks that reach them claim
+`packing/devtools/*` as a group; a change under `devtools/` therefore selects more
+prerequisites than its own name suggests.
+Under `--format json` the selection banners go to stderr, leaving stdout one document.
+For behavioral tests, `devtools.reachable_tests` computes the test files the change can
+reach — import closure over `src/sqpack`, `devtools`, `cases` and `tests`, text mention
+of a changed module or file, repository walkers always included — and errs toward
+running too many, up to the whole suite when nothing narrower is defensible.
+Each of 2026-08-30’s three red pushes broke a test reachable this way from the changed
+paths ([D-381, D-393](defects.md)), and the floor would have caught all three.
 
 The Pages workflow has an explicit publication invocation contract.
 Its first-party commands, named test files, explicit builder files and workflow/scope
@@ -1529,6 +1543,26 @@ results page carries its own, and the overviews of three sampled results carry e
 repository link the renderer writes for them ([D-512](defects.md)). Run it from a
 checkout at the deployed commit, since the register it reads is the checkout’s.
 
+The live command reports phase timings, unique transport requests, retries, and slow
+requests to stderr during execution.
+URL fragments share a transport request while query strings remain distinct; every
+original link retains its own verdict.
+Persistent HTTP errors fail verification after bounded retries; a connection that times
+out, resets or answers malformed headers is retried as unreachable rather than ending
+the audit.
+
+In the Pages workflow the `verify-deployment` job runs under a 30-minute
+`timeout-minutes` ceiling, and the checker’s own `--deadline-minutes 25` stops it first.
+At the deadline it prints every verdict it has, one failing line naming the phase it
+interrupted, and the summary, so a throttled audit still leaves its diagnosis in the
+log.
+The five minutes between them cover the job’s setup and teardown, which took 41–72 s
+and 2–6 s across forty measured jobs; the slowest healthy audit took 388 s. Run locally,
+the check has no deadline unless one is passed.
+A successful Pages deploy with a failed link audit remains incomplete publication
+verification; preserve the failed receipt and rerun only verification after diagnosing
+the external response.
+
 The check also reads every page’s head for the site’s identity and link-preview tags and
 fetches the card they name:
 [paper-design.md → Page Metadata and Social Cards](packing/devtools/templates/paper-design.md#page-metadata-and-social-cards)
@@ -1814,8 +1848,8 @@ It leaves the binary at `$CARGO_TARGET_DIR/release/sqverify-exact` when the targ
 directory is absolute.
 Pass that path to `devtools.verify_rectangle_density` with
 `--backend rust --rust-binary PATH`; Python remains the default.
-The [tooling overview](docs/project/verification-tooling.md) records the supported
-inputs, refusal behavior, golden controls and measured performance limits.
+The [tooling overview](docs/project/guides/verification-tooling.md) records the
+supported inputs, refusal behavior, golden controls and measured performance limits.
 This crate verifies rectangle geometry, a separate contract from the global n11 proof.
 
 The optional [n17 native kernel](packing/n17bb_native/README.md) accelerates the

@@ -159,7 +159,7 @@ exempt:
 - path: packing/atlas/known-best/video/spikes/v2-transitions/transition-stats.json
   reason: frozen
   bound_by: >-
-    Frozen historical output of a retired spike (v2-transitions/NOTES.md), written by
+    Frozen historical output of a retired spike (v2-transitions/notes.md), written by
     its own compact layout; re-laying it would lengthen it.
 - path: packing/campaign/agent-sessions/session-153-native-full.json
   reason: owner-decision

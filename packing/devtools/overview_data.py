@@ -49,7 +49,7 @@ from devtools.render_recent_results import (
 )
 from devtools.render_research_tables import load_cases
 from devtools.repo_links import path_kind, repo_url
-from devtools.result_credit import credit_line, result_credit_html
+from devtools.result_credit import credit_line, regularization_sentence, result_credit_html
 from devtools.significance import headline as first_sentence
 from sqpack.yamlio import safe_load
 
@@ -315,6 +315,10 @@ class Result:
     """Whether the result is superseded, wholly or in part, and by which results
     (`render_recent_results.supersessions`): what a table's status line names after
     its status, as `RESULTS.md` names it."""
+    regularizations: tuple[str, ...] = ()
+    """Each count at which the result's certificate regularizes a packing another result
+    holds, one sentence a count as `RESULTS.md` prints it
+    (`result_credit.regularization_sentence`)."""
 
     @property
     def activity(self) -> str:
@@ -519,6 +523,10 @@ def load() -> Overview:
                 standing=(stands := standing(r, records)),
                 status=result_status.status(r, evidence),
                 supersessions=tuple(supersessions(r, stands, records)),
+                regularizations=tuple(
+                    regularization_sentence(item, sources)
+                    for item in r.get("regularizations") or ()
+                ),
             )
             for r in members
         ]

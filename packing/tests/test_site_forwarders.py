@@ -26,6 +26,7 @@ from __future__ import annotations
 import contextlib
 import os
 import socket
+import time
 from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
@@ -333,6 +334,68 @@ def test_the_deployed_site_check_follows_the_same_forwarders(
         assert not passed
         assert "papers/not-a-paper.html" in line
     finally:
+        context.close()
+
+
+def test_deployed_forwarder_arrival_does_not_wait_for_destination_assets(
+    browser: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A committed destination with a stalled image must not consume the load timeout."""
+    served = "https://example.test/"
+    source = next(
+        page.html for page in site_renders.forwarders() if page.name == "explainer.html"
+    )
+    context = browser.new_context()
+    pending: list[Any] = []
+    timed_out: list[str] = []
+    sync_api = site_browser.api()
+    context.route(
+        f"{served}explainer.html*",
+        lambda route: route.fulfill(content_type="text/html", body=source),
+    )
+
+    def hold_image(route: Any) -> None:
+        pending.append(route)
+
+    context.route("**/held-image.png", hold_image)
+    context.route(
+        f"{served}{LOWER_BOUNDS_PAPER}*",
+        lambda route: route.fulfill(
+            content_type="text/html", body='<title>target</title><img src="held-image.png">'
+        ),
+    )
+    new_page = context.new_page
+
+    def observed_page() -> Any:
+        page = new_page()
+        goto = page.goto
+
+        def observed_goto(url: str, **kwargs: Any) -> Any:
+            try:
+                return goto(url, **kwargs)
+            except sync_api.TimeoutError:
+                timed_out.append(url)
+                raise
+
+        monkeypatch.setattr(page, "goto", observed_goto)
+        return page
+
+    monkeypatch.setattr(context, "new_page", observed_page)
+    monkeypatch.setattr(
+        render_overview, "MOVED_PAGES", (("explainer.html", LOWER_BOUNDS_PAPER),)
+    )
+    try:
+        started = time.monotonic()
+        ((passed, line),) = check_published_site.forwarder_arrivals(context, served, timeout=2)
+        print(
+            f"forwarder arrival: {time.monotonic() - started:.3f}s, "
+            f"load timeouts={len(timed_out)}"
+        )
+        assert passed, line
+        assert repr(served + LOWER_BOUNDS_PAPER + check_published_site.FORWARDED_SUFFIX) in line
+        assert timed_out == []
+    finally:
+        context.unroute_all(behavior="ignoreErrors")
         context.close()
 
 

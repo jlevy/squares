@@ -43,6 +43,7 @@ from __future__ import annotations
 import argparse
 import ast
 import gc
+import json
 import os
 import re
 import shlex
@@ -490,7 +491,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Select the test files a change can reach, erring toward running too many."
     )
-    parser.add_argument("--since", metavar="REF", default="origin/main")
+    change = parser.add_mutually_exclusive_group()
+    change.add_argument("--since", metavar="REF", default="origin/main")
+    change.add_argument(
+        "--changed-paths-file",
+        type=Path,
+        metavar="JSON",
+        help="use a captured JSON list of changed paths instead of re-reading Git",
+    )
     parser.add_argument(
         "--summary",
         action="store_true",
@@ -530,7 +538,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     if namespace.pool_workers is not None and not namespace.run:
         parser.error("--pool-workers requires --run")
 
-    changed = changed_paths(namespace.since)
+    if namespace.changed_paths_file is None:
+        changed = changed_paths(namespace.since)
+    else:
+        try:
+            value = json.loads(namespace.changed_paths_file.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as error:
+            parser.error(f"cannot read changed-path snapshot: {error}")
+        if not isinstance(value, list) or any(
+            not isinstance(path, str) or not path or "\0" in path for path in value
+        ):
+            parser.error("changed-path snapshot must be a JSON list of nonempty path strings")
+        changed = value
     selection = select_tests(changed)
     if namespace.summary:
         print("everything" if selection.everything else f"narrow {len(selection.tests)}")

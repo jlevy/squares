@@ -23,7 +23,7 @@ their validation, and where the videos are published.
 
 **Does not own:** The per-`n` renderings and the poster, which the
 [expansion plan](plan-2026-09-07-atlas-expansion-to-324.md) and the
-[figure playbook](../../../../packing/atlas/known-best/FIGURE-PLAYBOOK.md) own; the
+[figure playbook](../../../../packing/atlas/known-best/figure-playbook.md) own; the
 colour contract, which `sqpack/render/color.py` and its tests own; the safe SVG profile,
 which the
 [rendering toolkit plan](plan-2026-08-24-deterministic-svg-rendering-toolkit.md) owns;
@@ -1053,7 +1053,7 @@ Each phase closes on its own validation command and a commit by the coordinator.
   decide for each spike whether its code is promoted into Phase 1 or kept as reference;
   close the spike beads with a reason.
 
-Closed 2026-09-07: both NOTES.md files read and cited in “Spike findings” with the
+Closed 2026-09-07: both notes.md files read and cited in “Spike findings” with the
 coordinator’s own measurements; `D4`, `D5`, `D6`, `D8`, `D10` and `D11` revised; each
 spike’s code dispositioned there; `think-5oba` and `think-l78w` closed.
 
@@ -1267,7 +1267,7 @@ Nothing about the poster or the per-`n` renderings changes at any phase.
 
 ## References
 
-- [`packing/atlas/known-best/FIGURE-PLAYBOOK.md`](../../../../packing/atlas/known-best/FIGURE-PLAYBOOK.md),
+- [`packing/atlas/known-best/figure-playbook.md`](../../../../packing/atlas/known-best/figure-playbook.md),
   “The rule that matters”, “Staleness cannot pass quietly”, “Fonts”, “The two
   composites”
 - [Atlas expansion to 324](plan-2026-09-07-atlas-expansion-to-324.md), `D5` on the
@@ -1285,7 +1285,7 @@ Nothing about the poster or the per-`n` renderings changes at any phase.
 - [`X-025`](../../../../packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md),
   which owns the solver workbench Phase 0 grew, the three-axis decomposition of its
   modes, and the research candidates its measurements bear on
-- [`packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md`](../../../../packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md),
+- [`packing/atlas/known-best/video/spikes/v2-transitions/notes.md`](../../../../packing/atlas/known-best/video/spikes/v2-transitions/notes.md),
   revisions 6 to 13, the source for every workbench measurement quoted here
 - [`operating-rules.md`](../../../../operating-rules.md), OR-1, OR-9, OR-13, OR-14,
   OR-16

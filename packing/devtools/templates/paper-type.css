@@ -111,13 +111,12 @@
   }
 }
 
-/* The reading measure: forty of the base, which at 18px is the same 720px KPress's
-   default of forty-five gives at 16px, so the larger type keeps the column's width.
+/* The reading measure: thirty-five of the base, 630px at 18px before column insets.
    Declared on the scopes KPress declares its own on, so it wins there. */
 :root,
 .kpress,
 .kpress-page-main {
-  --kpress-measure: calc(var(--kpress-font-size-base) * 40);
+  --kpress-measure: calc(var(--kpress-font-size-base) * 35);
 }
 
 /* Section headings at 1.2 of the prose at every width. KPress steps its h2 up to 1.4

@@ -25,6 +25,7 @@ from devtools import (
     render_overview,
     repo_links,
     result_overview,
+    result_status,
     site_assets,
     site_urls,
 )
@@ -152,6 +153,25 @@ def test_the_head_says_what_a_declared_later_result_implies(bodies: dict[str, st
     assert "site-result-superseded" not in bodies["T-037"]
     successor = f'by <a href="{overview_sections.result_url("T-060")}">T-060</a>'
     assert successor in bodies["T-037"].split("</header>", 1)[0]
+
+
+def test_the_head_says_whose_packing_each_regularization_is(
+    overview: overview_data.Overview, bodies: dict[str, str]
+) -> None:
+    """A result whose certificate regularizes packings other results hold lists them
+    after the next rung, one sentence a count, as `RESULTS.md` prints them; T-146 is the
+    first, at fifteen counts. A result that regularizes nothing has no such row."""
+    result = _result(overview, "T-146")
+    assert len(result.regularizations) == 15
+    assert result.regularizations[0].startswith(
+        "n = 70: a regularization of T-125\u2019s packing by Daniel (fewest; solved to its"
+    )
+    head = bodies["T-146"].split("</header>", 1)[0]
+    value = result_overview.prose_html("\n".join(result.regularizations))
+    assert f"<dt>Regularizations</dt><dd>{value}</dd>" in head
+    assert head.index("<dt>Next rung</dt>") < head.index("<dt>Regularizations</dt>")
+    assert not _result(overview, "T-125").regularizations
+    assert "<dt>Regularizations</dt>" not in bodies["T-125"]
 
 
 @pytest.mark.parametrize("result_id", [SETTLED, EARLIER])
@@ -332,13 +352,22 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     assert 'rowspan="' in body
     for paragraph in register_prose.paragraphs(result.record["claim"]):
         assert f'<p class="site-result-claim">{overview_data.tex_bounds(paragraph)}</p>' in body
+    unfinished = result.record.get("unfinished_confirmations") or []
+    # T-124's one unfinished confirmation, an audit and an independent Lean build, is
+    # unpriced, and its page says so under the next rung.
+    assert [item["rung"] for item in unfinished] == ["C3"]
     for label, value in (
         ("Significance", result.record["significance"]["rationale"]),
         ("Composition", result.record.get("composition")),
         ("Next rung", result.record.get("next_rung")),
+        (
+            "Unfinished confirmations",
+            "\n".join(result_status.unfinished_sentence(item) for item in unfinished),
+        ),
     ):
         if value:
             assert f"<dt>{label}</dt><dd>{result_overview.prose_html(value)}</dd>" in body
+    assert "Lean proof. Not priced.</dd>" in body
     members = result_overview.chain(overview, cases)
     assert len(members) >= 67
     assert [identity for identity, _ in STEP.findall(body)] == [
@@ -357,7 +386,10 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     page = pages[0]
     assert page.name == "result/t-124.html"
     row = next(row for row in site_urls.load_registry() if row.path == page.name)
-    assert site_urls.page_budget(row) == 300_000
+    # The canonical result budget held the whole report until 10 October 2026, when four
+    # chain steps (T-135, T-141 to T-143) took it to 304,237 bytes; its measured exception
+    # keeps every case, step and link rather than dropping any to fit.
+    assert site_urls.page_budget(row) == site_urls.PAGE_BUDGET_EXCEPTIONS[page.name][0]
     record_property("html_bytes", len(page.html.encode("utf-8")))
     assert len(page.html.encode("utf-8")) <= site_urls.page_budget(row)
     article = page.html.split('<article class="site-result"', 1)[1].split("</article>", 1)[0]
@@ -922,9 +954,17 @@ def test_complete_result_batch_loads_the_address_registry_once(
     """Multiple real documents share one validated address registry per render pass."""
     rows = site_urls.load_registry()
     results = [_result(overview, result_id) for result_id in ("T-110", "T-116")]
+    # The two pages' links are still checked against the whole site: since the house
+    # adoption of 11 October 2026 T-116 links the results that hold its former houses.
+    check = result_overview.check_links
+
+    def check_whole(result_id: str, body: str, _batch: overview_data.Overview) -> None:
+        check(result_id, body, overview)
+
     with (
         patch.object(overview_data, "load", return_value=replace(overview, results=results)),
         patch.object(site_urls, "load_registry", return_value=rows) as loaded,
+        patch.object(result_overview, "check_links", check_whole),
     ):
         pages = render_overview.result_fragments()
     assert loaded.call_count == 1

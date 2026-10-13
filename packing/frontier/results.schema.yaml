@@ -282,6 +282,98 @@ $defs:
           what: {type: string, minLength: 1}
           since: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
           link: {type: string, minLength: 1}
+      unfinished_confirmations:
+        type: array
+        minItems: 1
+        description: >-
+          The confirmations of this result that the record names and that have not been
+          run or not finished (epistemics.md, Status): `what` the confirmation is, the
+          confirmation `rung` it would reach, and the bead, issue or file that owns it
+          (`link`). Optional, and listed only where the record knows the work concretely.
+          `estimated_cost` is filled wherever a price is known, in CPU-hours: the central
+          estimate, the upper end where the source gives one, how it was priced and the
+          day. `next_rung` stays the prose of the next evidence-improving action; this is
+          the structured, priced list of the confirmations it names that are not yet run.
+          `activity` is work under way; an unfinished confirmation is work not yet started
+          or not yet finished, and one that is under way is both. `devtools.check_results`
+          refuses an item at or below the result's `confirmation`, so an item is removed
+          when its confirmation lands, and refuses an upper end below the estimate, a
+          price dated after `last_reviewed`, and an item listed twice.
+        items:
+          type: object
+          additionalProperties: false
+          required: [what, rung]
+          properties:
+            what: {type: string, minLength: 1}
+            rung: {type: string, enum: [C1, C2, C3, C4, C5]}
+            link: {type: string, minLength: 1}
+            estimated_cost:
+              type: object
+              additionalProperties: false
+              required: [cpu_hours, basis, priced]
+              properties:
+                cpu_hours: {type: number, exclusiveMinimum: 0}
+                cpu_hours_high: {type: number, exclusiveMinimum: 0}
+                basis: {type: string, minLength: 1}
+                priced: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+      regularizations:
+        type: array
+        minItems: 1
+        description: >-
+          The counts at which the certificate this result states is a regularization of a
+          packing the register already credits (epistemics.md, Results by Others): at `n`,
+          the packing result `of` holds there, rearranged for display without changing
+          what the packing is meant to be. The packing's finder keeps its credit through
+          `of`'s own attribution; the regularizer, `by`, is credited with the
+          regularization, and is a bibliography key among this result's
+          `attribution.source_keys`, or `project` for this project's own regularization
+          of a result without `attribution`. `method` is the regularizer's own name for
+          the procedure or its variant. `side` is `same` where the packing was regularized
+          at its own side, or `solved` where it was first solved to an exact side and
+          regularized at that side. `changes` is what the regularization did, as its
+          source reports it: the largest angle by which determined rotation groups were
+          merged, in degrees, and how many free squares were turned to the axis
+          (`straightened`) or to another angle (`re_angled`). `identity` says what the
+          claim that the certificate is still the same packing rests on: the source's own
+          statement (`source-claim`), or a decision made here (`measured`). Either may
+          carry the measurements made here under the best symmetry of the box: whether
+          nearest centres pair the squares one to one (`one_to_one`), how many moved
+          beyond 1e-3 (`moved`), the largest move (`max_move`) and the largest turn in
+          degrees (`max_turn_deg`), with the review or receipt they come from in
+          `measured_in`. The record states a regularization as the same packing in its
+          own voice only where the basis is `measured`. `devtools.check_results` holds `n` to this result's scope,
+          once each; `of` to a registered result other than this one whose scope holds
+          `n` and whose date is no later than this result's; `by` to this result's
+          sources; and a `measured` identity to at least one measurement.
+        items:
+          type: object
+          additionalProperties: false
+          required: [n, of, by, method, side, identity]
+          properties:
+            n: {type: integer, minimum: 1}
+            of: {type: string, pattern: '^T-[0-9]{3}$'}
+            by: {type: string, pattern: '^(\[.+\]|project)$'}
+            method: {type: string, minLength: 1}
+            side: {enum: [same, solved]}
+            changes:
+              type: object
+              additionalProperties: false
+              minProperties: 1
+              properties:
+                merged_rotation_groups_deg: {type: number, minimum: 0}
+                straightened: {type: integer, minimum: 0}
+                re_angled: {type: integer, minimum: 0}
+            identity:
+              type: object
+              additionalProperties: false
+              required: [basis]
+              properties:
+                basis: {enum: [source-claim, measured]}
+                measured_in: {type: string, minLength: 1}
+                one_to_one: {type: boolean}
+                moved: {type: integer, minimum: 0}
+                max_move: {type: number, minimum: 0}
+                max_turn_deg: {type: number, minimum: 0}
       attribution:
         type: object
         additionalProperties: false

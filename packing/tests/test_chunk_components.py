@@ -95,8 +95,11 @@ def test_retained_census_reports_source_stratified_coverage() -> None:
     # squares than the rendering it replaced and fits six chunks with at most three free;
     # the new packings at n = 83 and 87 (T-089) leave both counts where they were.
     # The second SQUISH update replaces n = 88's 86 structured squares with 72.
-    # The selected RY houses at n70/84/86 retain 23 fewer structured squares.
-    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1755, 1860)
+    # The selected RY houses at n70/84/86 retain 23 fewer structured squares. The house
+    # adoption of 11 October 2026 (think-fvz4) moved those three again, 24 fewer in all:
+    # T-146's n = 70 structures 69 squares where Xu's structured 66, and Couzo's T-130
+    # packings structure 71 at n = 84 (Xu's 64) and 50 at n = 86 (Xu's 84).
+    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1731, 1860)
     assert non_grid["within_six_chunks_and_three_free"] == 25
 
     # The relaxed sweep still structures more of n = 68 and merges its angle classes; the

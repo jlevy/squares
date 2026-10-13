@@ -281,7 +281,8 @@ The repository is split by audience rather than by topic.
 [`README.md`](README.md) as the front door, then [`TUTORIAL.md`](TUTORIAL.md),
 [`SYNOPSIS.md`](SYNOPSIS.md), [`conventions.md`](conventions.md),
 [`development.md`](development.md), the generated [`defects.md`](defects.md), and
-`docs/project/` for reports, reviews, specs and postmortems.
+`docs/project/`, one directory per kind: guides, handoffs, postmortems, research,
+reviews and specs.
 
 **[`packing/`](packing/) holds the general library, data, and research record**: the
 `sqpack` package and its tests, the developer tools, the Rust search engine, the

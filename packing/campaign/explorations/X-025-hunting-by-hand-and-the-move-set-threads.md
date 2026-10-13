@@ -48,8 +48,8 @@ exploration:
   - packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md
   - packing/campaign/ideas.md
   - packing/atlas/known-best/video/spikes/README.md
-  - packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md
-  - packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+  - packing/atlas/known-best/video/spikes/v1-slideshow/notes.md
+  - packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   - packing/atlas/known-best/translation-escape-screen.json
   - packing/src/sqpack/verify.py
   - packing/src/sqpack/research/quench.py
@@ -122,7 +122,7 @@ per cent at $307 \to 308$. Then the annealing dial: raising it from level 0 to l
 more than halves the worst angle error twice over, $42.9^\circ$ to $19.9^\circ$ at
 $100 \to 101$ and $17.3^\circ$ to $7.6^\circ$ at $110 \to 111$, while the container side
 stays flat to within a few tenths of a per cent
-([the spike notes](../../atlas/known-best/video/spikes/v2-transitions/NOTES.md),
+([the spike notes](../../atlas/known-best/video/spikes/v2-transitions/notes.md),
 revision 7).
 
 Shaking harder fixes orientations and does nothing to the side.

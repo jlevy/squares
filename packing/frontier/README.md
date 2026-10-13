@@ -269,6 +269,16 @@ The process relies on these rules of the records:
   or a question is with the authors, the entry says so, dated and linked to the bead or
   issue that shows it, and the line is removed when the work lands or the answer
   arrives.
+- **`regularizations` says whose packing a regularized certificate is.** Where the
+  certificate an entry states rearranges a packing another registered result holds, the
+  entry lists each count: the result `of` whose packing it regularizes, whose finder
+  keeps the credit; the regularizer `by`, one of the entry’s source keys or `project`;
+  the regularizer’s `method`; the `side`, `same` or `solved` to an exact side first; the
+  `changes` the source reports; and what the `identity` rests on, the source’s claim or
+  a measurement here, with what was measured and where (`measured_in`).
+  [`devtools.check_results`](../devtools/check_results.py) holds each item to the
+  register, and the third exact route measures each certificate against the packing its
+  item names.
 - **Geometry is adapted once** to [`Witness/v2`](../witnesses/witness.schema.yaml), and
   then checked with `packing-witness inspect` or `check` under explicit arithmetic,
   precision, and tolerance.
@@ -402,7 +412,13 @@ certificate’s replay command.
    `produced_by` is optional and, when present, must name a recorded hypothesis, agenda
    cell, session, or experiment.
    `next_rung` names the next evidence-improving action or says why no independent one
-   applies. A registration also dates `last_reviewed` at the top of both files.
+   applies. Where it names a confirmation not yet run that would raise `confirmation`,
+   list it also in `unfinished_confirmations`: `what` it is, the `rung` it would reach,
+   the bead or issue that owns it in `link`, and, wherever a price is known, an
+   `estimated_cost` in CPU-hours with its upper end, its `basis` and the day it was
+   `priced` ([epistemics.md](../../epistemics.md#status)). The field is optional; remove
+   an item when its confirmation lands, since the checker refuses one at or below the
+   result’s rung. A registration also dates `last_reviewed` at the top of both files.
 
 6. **Derive the rung; do not choose it.** `verification` and `confirmation` are declared
    in the row and re-derived from the cited entries by the checker, which refuses a

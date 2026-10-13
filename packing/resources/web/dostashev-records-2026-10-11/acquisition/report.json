@@ -1,0 +1,43 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/501",
+  "author": "Daniil Ostashev",
+  "source_key": "[Ostashev records 2026-10-11]",
+  "report_evidence": "E-ostashev-501-certificate-report",
+  "receipt_format": "ostashev-501-exact-replay-v1",
+  "witness_prefix": "W-ostashev-501-n",
+  "claim_limitations": "Complete c3d17ab rational centre/half-angle certificate in the source's sqcert format, centres in [0, S]^2, read from the retained file at the pin. Finite construction feasibility only; no local minimum, KKT, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-11",
+  "read_at_main": "3a5a91a90f997a65da52c42000769c1e6b6c3eae",
+  "certificates": [
+    {"n": 155, "path": "records/n0155.sqcert", "format": "sqcert", "offered": "12.952425406958457", "printed_in": "https://github.com/dostashev/square-packing/blob/c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49/README.md", "first_committed": "2026-10-11T13:21:30Z"},
+    {"n": 156, "path": "records/n0156.sqcert", "format": "sqcert", "offered": "12.979172613644427", "printed_in": "https://github.com/dostashev/square-packing/blob/c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49/README.md", "first_committed": "2026-10-11T13:21:30Z"},
+    {"n": 211, "path": "records/n0211.sqcert", "format": "sqcert", "offered": "14.996336721336316", "printed_in": "https://github.com/dostashev/square-packing/blob/c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49/README.md", "first_committed": "2026-10-11T13:21:30Z"}
+  ],
+  "requested": [155, 156, 211],
+  "replayed": [155, 156, 211],
+  "houses": [
+    {"n": 155, "reader": "[SQUISH update 2026-10-07]", "source_key": "[SQUISH update 2026-10-07]", "holders": "Nate Chaoweeraprasit", "result": "T-115", "reported_value": "12.9525032026045129", "verified_value": "12.9525032026045129", "evidence": ["E-squish-update-2026-10-07-exact-replay"]},
+    {"n": 156, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "12.982082698516893102076828502036", "verified_value": "12.982082698516893102076828502036", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]},
+    {"n": 211, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Joost de Winter, improved by Evan Daniel", "result": "T-098", "reported_value": "14.997960704967361565181004478378", "verified_value": "14.997960704967361565181004478378", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]}
+  ],
+  "pending": [
+    {"n": 155, "report": "T-128 (#451)", "url": "https://github.com/jlevy/squares/issues/451", "holders": "Francisco Couzo", "result": "T-128", "reader": "[Couzo exact refinements 2026-10-08]"}
+  ],
+  "register": {
+    "title": "Daniil Ostashev's three record packings at c3d17ab, issue501",
+    "headline": "New packings of 155, 156 and 211 squares, each with an exact rational certificate",
+    "significance": 3,
+    "source_checks": "The author reports that each packing passes its own C++ checker (sqverify) in GMP rational arithmetic, both on the shipped certificates with no dilation and no tolerance and on certificates it rebuilds from the 60-digit decimal packings, and an 80-digit mpmath cross-check written separately in Python; the README also states that each side is the exact optimum of its packing's contact topology, with nonnegative KKT multipliers. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Daniil Ostashev (https://github.com/dostashev/square-packing) with the three packings and their certificates. The README says each was constructed from scratch, a V-shaped tilted band at a chosen angle with aligned corner blocks chosen by an integer program, no existing record geometry used, then re-hardened on a GPU with Yohei Nakajima's soft-to-rigid method, polished by the fixed-angle linear program it credits to this project, and solved to the exact optimum of its contact topology; its rational certificates follow Ryan Xu's construction. The source states no AI assistance.",
+    "next_rung": "Independently review the retained replay, then weigh adoption: each side is below its case's ceiling and below every pending report at its count, by 7.35e-05 at 155 (T-128), 2.91e-03 at 156 and 1.62e-03 at 211. The issue's sides are those of 41019fb; the retained c3d17ab certificates are smaller, and the author's account of the change and of AI assistance is pending. Then record source-specific adoption and confirming evidence. Final exact-head CI remains required.",
+    "bead": "think-e59i",
+    "bibliography": {
+      "authors": ["Ostashev"],
+      "lineage": "builds-on-project",
+      "credit": "Ostashev after Nakajima, Levy, Xu",
+      "short_credit": "Ostashev after Nakajima et al.",
+      "note": "Three complete exact certificates at c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49 in the source's sqcert format, at 155, 156 and 211, packings the README says were built from scratch and solved to the exact optimum of their contact topologies, each dilated by 1 + 1e-60. Methods credited: Nakajima's soft-to-rigid re-hardening, this project's fixed-angle linear program and Ryan Xu's certificate construction. Retained under the MIT licence with the source's C++ GMP checker and mpmath cross-check, neither run here. No AI assistance stated. No local or global optimality is registered."
+    }
+  }
+}

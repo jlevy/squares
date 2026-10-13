@@ -1,0 +1,6 @@
+# sqcert v1
+# test: square with t=1/2 ((cos,sin)=(3/5,4/5)) inscribed in side 7/5
+n 1
+s 7/5
+# x y t
+7/10 7/10 1/2

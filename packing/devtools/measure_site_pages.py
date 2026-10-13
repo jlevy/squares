@@ -1231,7 +1231,7 @@ def _role_rules(entry: dict[str, Any]) -> dict[str, tuple[float | None, float | 
         "colophon": (sans * tokens["--paper-colophon-scale"], regular),
         "nav name": (sans, bold),
         "nav link": (note, medium),
-        "section tab": (note, medium),
+        "section tab": (note * tokens["--paper-button-label-scale"], medium),
     }
 
 

@@ -17,7 +17,10 @@ none does, or that what it waits on has already happened.
 The sources, one section of the report each:
 
 - **GitHub issues**: `check_requests --github`'s comparison through `gh`: issues the
-  record lacks, replies missing from it, and comments after an entry's `read_through`.
+  record lacks, replies missing from it, comments created or edited after an entry's
+  `read_through`, and the `result-report` entries and entries marked `intake: true`
+  whose issues lack the `intake` label, which the pass adds under the
+  `github-workflows` grant.
 - **Watched repositories**: every repository the source register, a packet's acquisition
   record, or the site's list of other projects names. `git ls-remote` reads each head,
   and a fetch of commits and trees (no blobs) reads two things. Commits past every
@@ -110,6 +113,12 @@ KINGBIRD = "kingbird-current"
 IMPORT_LABEL = "result-import"
 _GITHUB = re.compile(r"https://github\.com/([\w.-]+)/([\w.-]+)")
 _GIST = re.compile(r"https://gist\.github\.com/(?:[\w.-]+/)?([0-9a-f]+)(?:\.git)?")
+#: An issue, pull request or discussion: a page read by hand, not a repository to watch.
+#: The SQUISH n153 source's address is an issue comment, and the sweep once watched
+#: jlevy/squares itself because of it.
+_TRACKER = re.compile(
+    r"https://github\.com/[\w.-]+/[\w.-]+/(?:issues|pull|discussions)(?:[/#?]|$)"
+)
 #: A register address's pinned revision, and the path within it the address names.
 _TREE = re.compile(r"/tree/([0-9a-f]{40})(?![0-9a-f])(?:/([^?#]*))?")
 _CAPTURE_DIR = re.compile(rf"{re.escape(CAPTURE_PREFIX)}(\d{{4}}-\d{{2}}-\d{{2}})")
@@ -386,9 +395,21 @@ def github_section(
 
 
 def _github_step(difference: str) -> str:
-    """What `result-import.md`'s After the Merge does with one kind of difference."""
+    """What `result-import.md`'s stage 0 and After the Merge do with one kind of difference."""
+    label = check_requests.INTAKE_LABEL
     if "is not in the record" in difference:
-        return "enter it in result-requests.yaml with triage: pending, and an import bead"
+        return (
+            "enter it in result-requests.yaml with triage: pending, and an import bead; "
+            "if it reports a new item for intake (a result, a counterexample or a method), "
+            f"give it the `{label}` label, and mark an entry of another kind intake: true"
+        )
+    if f"without the `{label}` label" in difference:
+        number = difference.split(" ", 1)[0].removeprefix("#")
+        return (
+            "add the label under the github-workflows grant "
+            f"(gh issue edit {number} --add-label {label}); "
+            "without the grant, list the issue for the owner"
+        )
     if "unread comment" in difference:
         return "read it: map any result it reports, then move the entry's read_through"
     if "reply missing" in difference:
@@ -400,7 +421,12 @@ def _github_step(difference: str) -> str:
 
 
 def repository(url: str) -> str | None:
-    """A source's address as its repository's, with no revision, path or `.git`."""
+    """A source's address as its repository's, with no revision, path or `.git`.
+
+    An issue, pull request or discussion is no repository's address: it is read by hand.
+    """
+    if _TRACKER.match(url):
+        return None
     if match := _GITHUB.match(url):
         name = match[2].rstrip(".").removesuffix(".git")
         return f"https://github.com/{match[1]}/{name}"

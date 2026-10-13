@@ -16,10 +16,13 @@ from typing import Any
 import pytest
 from jsonschema_rs import Draft202012Validator
 
+from devtools import adopt_houses
 from devtools import confirm_gupta_records as confirmation
 from devtools import gupta_house_links as houses
 from devtools import register_gupta_reports as register
 from devtools import register_refinement_reports as registry
+from devtools import upper_bound_houses as adopted
+from sqpack.witness import witness_document
 from sqpack.yamlio import safe_load
 
 SOURCE = register.REPO
@@ -57,6 +60,19 @@ def private_proposal(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     monkeypatch.setattr(register, "FRONTIER", repo / "packing/frontier")
     monkeypatch.setattr(register, "HISTORY", history)
     monkeypatch.setattr(registry.packets, "REPO", repo)
+    # The house adoption of 11 October 2026 moved seven of these cases to later sources
+    # (think-fvz4). Stage each as the Gupta confirmation left it: the record retained
+    # before that adoption, and the house rebuilt from this packet.
+    prior = adopt_houses.read_history()
+    facts = houses.reports.read_facts()
+    positives = houses.reports.check_certification()
+    for n in houses.NUMBERS:
+        if n in prior:
+            (register.FRONTIER / f"n-{n:03d}.md").write_text(prior[n])
+            witness = houses.expected_house(facts[n], positives[n])
+            houses.house_path(n).write_text(
+                witness_document(witness, schema="../witness.schema.yaml")
+            )
     # Construct the reported stage explicitly even after the live record is
     # confirmed. Its old verified ceiling comes from validated immutable history;
     # every deciding input and complete current source house remains untouched.
@@ -342,11 +358,19 @@ def test_interrupted_atomic_write_resumes_from_the_unchanged_complete_history(
     assert completed[retained] == original[retained]
 
 
-def test_confirmation_preserves_current_owned_assessment_rendering() -> None:
+def test_confirmation_preserves_current_owned_assessment_rendering(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     from devtools import assess_frontier_rigidity as assessment  # noqa: PLC0415
 
     # The transaction tests above admit the full receipts. This writer regression
-    # needs their fourteen immutable source sides, not a second custody transaction.
+    # needs their immutable source sides, not a second custody transaction, at the
+    # counts whose live record is still Gupta's: since the house adoption of 11 October
+    # 2026 later sources hold the other seven (think-fvz4).
+    history = register.read_history()
+    held = tuple(n for n in houses.NUMBERS if n not in adopted.ADOPTED)
+    monkeypatch.setattr(houses, "NUMBERS", held)
+    monkeypatch.setattr(register, "read_history", lambda: history)
     positives = {
         n: {"checker_input": {"side": str(houses.reports.read_fact(n).side)}}
         for n in houses.NUMBERS

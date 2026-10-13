@@ -1,0 +1,80 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-11T20:33Z",
+  "git_scope": "Full clone of the three-commit repository, checked out at the pin issue #503 names. The scope is the whole tree at the pin, seven files bound to their Git blobs: its parent 0d8b9c1 first published all seven, and the pin changed only 01-squares-project.zip, README.md and SHA256SUMS, removing a sentence on AI assistance. Under derived-only custody none is copied. The later commit bc328a7 leaves the five n207 files unchanged and belongs to the n153 packet. No source program was executed.",
+  "sources": [
+    {
+      "id": "buddenping-square-packing-certificates",
+      "source_url": "https://github.com/BuddenPing/square-packing-certificates",
+      "source_ref": "main",
+      "source_commit": "9dc93b6ac2f8fefe038062a74c9a75bf05afdba6",
+      "committed_utc": "2026-10-11T10:30:57Z",
+      "git_tree": "14d567766fef3053f29927f52274db33edeae533",
+      "archived_path": "packing/resources/web/pingyou-n207-certificate-2026-10-11/source",
+      "subtree_manifest": "packing/resources/web/pingyou-n207-certificate-2026-10-11/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "01-squares-project.zip",
+        "README.md",
+        "SHA256SUMS",
+        "n207-verified-comparison.pdf",
+        "n207.cert.json",
+        "n207.svg",
+        "pingyou-n207-rational.yaml"
+      ],
+      "subtree_file_count": 7,
+      "subtree_total_bytes": 485671,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "01-squares-project.zip",
+          "bytes": 146732,
+          "sha256": "d3b6505292ce647903708c7e5d6f8476a686d360ebcc22547dbd3c20ebe96ed6",
+          "reason": "The source's complete package of 33 files: the certificate and native witness again, the n70 parent, SQUISH's #481 n207 certificate, reconstruction, checker and conversion scripts, receipts, the comparison PDF and drawing, the prepared issue text, and copies of this repository's witness schema and LICENSE. No licence for the source's own files: pinned by digest only; no program in it was executed."
+        },
+        {
+          "path": "README.md",
+          "bytes": 3276,
+          "sha256": "4dd80c149763bfcf24cd7731fe07d6a32d1806d5361da92805d043226dda1a65",
+          "reason": "Author prose stating the claim, the construction and the credit, quoted in this packet's README. No licence: pinned by digest only."
+        },
+        {
+          "path": "SHA256SUMS",
+          "bytes": 509,
+          "sha256": "584bcae2e0631ae2f3ba8bdc1986c54dc36dd42810de365089bba38a434cfb1f",
+          "reason": "The source's digest list for the other six files, each equal to the digest this manifest records. Pinned by digest only."
+        },
+        {
+          "path": "n207-verified-comparison.pdf",
+          "bytes": 20317,
+          "sha256": "ae323e59850c8bad109358d00df487de51c7349989a6b25cbdf4b4e0518fa12e",
+          "reason": "The author's two-page comparison and construction explanation. No licence: pinned by digest only."
+        },
+        {
+          "path": "n207.cert.json",
+          "bytes": 44614,
+          "sha256": "1c334f3170ece68cf2c2f16341660f7a80ef44bf7a9cdb083940d1b99756c071",
+          "reason": "The exact rational certificate: n, s_exact and 207 [x, y, t] rows of rational strings, centres in [0, S]^2 and t = tan(theta/2), with the source's construction record. No licence, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "n207.svg",
+          "bytes": 45578,
+          "sha256": "c56d600c749471b328e5bcbe391b9a383c1c3353c5f4557b4dcf98ee0dbf7a88",
+          "reason": "The author's drawing of the packing. No licence: pinned by digest only."
+        },
+        {
+          "path": "pingyou-n207-rational.yaml",
+          "bytes": 224645,
+          "sha256": "09e6d0dff17ae71ae84bde1466b805a67f3b1592496f9ca438b02bde603f6182",
+          "reason": "The source's rational corners Witness/v2 of the same packing, in JSON syntax. No licence: pinned by digest only; derive reads it from the same checkout and holds it to the certificate's poses and side."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and GitHub detects none. The README says included upstream material keeps its own attribution and licence terms and that the repository adds no new licence grant for third-party material; it grants none for the source's own files. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source asks that PingYou Ltd be credited with the n207 assembly, Ryan Xu with the n70 construction and Evan Daniel with its exact retention.",
+      "claims": [
+        "Issue #503 reports the exact rational certificate s(207) <= 148809603730436756319360591381170501178639/10000000000000000000000000000000000000000 = 14.8809603730436756319360591381170501178639: two differently placed patches of Ryan Xu's n70 construction, keeping 60 and 69 whole squares, with upright 7x6 and 6x6 grids, centres and container dilated by 10000000001/10000000000. The author compares it with SQUISH's #481 n207 side, about 14.8855063088416777, 4.546e-3 larger.",
+        "The source reports that its own three exact checkers (vertex projections, centre and support-radius separating axes, and rational polygon clipping) accept all 21,321 pairs and every wall, that its script rebuilds all 207 poses from the n70 parent, and that this repository's sqpack exact_verify and check_rational_witness_independent at 5b0eb012 accept its native Witness/v2. These are author reports; no local or global optimality is claimed."
+      ]
+    }
+  ]
+}

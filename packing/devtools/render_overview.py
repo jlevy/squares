@@ -85,6 +85,8 @@ PAPER_TYPE_CSS = TEMPLATES / "paper-type.css"
 OVERVIEW_ARTICLE = TEMPLATES / "overview-article.md"
 ATLAS_ARTICLE = TEMPLATES / "atlas-article.md"
 ABOUT_ARTICLE = TEMPLATES / "about-article.md"
+#: The invitation to report results, with its button: About's and the overview's alike.
+REPORT_RESULTS = TEMPLATES / "report-results.md"
 RESULTS_ARTICLE = TEMPLATES / "all-results-article.md"
 VISUALIZE_ARTICLE = TEMPLATES / "visualize-article.md"
 PAPERS_ARTICLE = TEMPLATES / "papers-article.md"
@@ -132,11 +134,12 @@ OUTPUT = PACKING / "site"
 #: canonical URL and every address in a link preview is built from it (`canonical_url`,
 #: `head_tags`), and `render_n11_lower_bounds_explainer.SITE_URL` is this constant.
 SITE_URL = "https://jlevy.github.io/squares/"
-SITE_NAME = "Square Packing"
-#: The project's formal name (the owner, 2026-10-01). The name in the bar stays the
-#: shorter `SITE_NAME`; a page's title and its link preview carry the formal name
-#: (`page_title`, `head_tags`; think-3w07).
+#: The project's formal name (the owner, 2026-10-01). A page's title and its link
+#: preview carry it (`page_title`, `head_tags`; think-3w07), and since 2026-10-11 the
+#: bar's name in `site-nav.html` does too: the owner renamed the site from "Square
+#: Packing".
 PROJECT_NAME = "The Squares Project"
+SITE_NAME = PROJECT_NAME
 #: What stands between a page's own name and the project's in `<title>`.
 TITLE_SEPARATOR = " \u00b7 "
 #: The picture a shared link to any page of the site shows: the homepage's hero, the
@@ -158,8 +161,8 @@ DESCRIPTION_LIMIT = 160
 FLOWMARK_URL = "https://github.com/jlevy/flowmark"
 KPRESS_URL = "https://github.com/jlevy/kpress"
 #: Where a reader reports a result the site does not have yet: a new issue on the
-#: repository, which the overview's own statement links.
-NEW_ISSUE_URL = f"{repo_links.REPO_URL}/issues/new"
+#: repository, opened on its result-report form, which asks the name to credit.
+NEW_ISSUE_URL = f"{repo_links.REPO_URL}/issues/new?template=result-registration.md"
 OVERVIEW_DESCRIPTION = (
     "Packing unit squares in the smallest square: the problem, every current result, "
     "and how each one is verified."
@@ -492,6 +495,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     OVERVIEW_ARTICLE,
     ATLAS_ARTICLE,
     ABOUT_ARTICLE,
+    REPORT_RESULTS,
     RESULTS_ARTICLE,
     VISUALIZE_ARTICLE,
     PAPERS_ARTICLE,
@@ -822,7 +826,7 @@ def assert_fetches_only_assets(name: str, page: str) -> None:
 def nav_html(current: str, *, root: str = "") -> str:
     """The navigation bar, with the current page marked."""
     nav = SITE_NAV.read_text(encoding="utf-8")
-    nav = nav.replace("{{ROOT}}", root).replace("{{LOGO}}", site_logo())
+    nav = nav.replace("{{ROOT}}", root)
     if not current:
         return nav
     marker = f'data-page="{current}"'
@@ -915,21 +919,9 @@ def visualize_tabs(current: str, *, root: str = "") -> str:
     return f'<nav class="site-tabs" aria-label="Visualize">{links}</nav>'
 
 
-#: The logo's size in the bar and the icon's in a tab, in CSS pixels: whole pixels, so
-#: each drawing's one-pixel frame (`packing_svg(frame_px=)`) lands on the pixel grid.
-#: `site-nav.css` sets the logo to the same size.
-SITE_LOGO_PX = 18
+#: The icon's size in a tab, in CSS pixels: whole pixels, so its one-pixel frame
+#: (`packing_svg(frame_px=)`) lands on the pixel grid.
 FAVICON_PX = 16
-
-
-@cache
-def site_logo() -> str:
-    """The site's mark beside its name in the bar: case 11, the drawing the tab's icon
-    is, in the bar's own ink so it turns over with the theme."""
-    from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
-
-    svg = packing_svg(11, units=200, frame_px=SITE_LOGO_PX)
-    return svg.replace("<svg ", '<svg class="site-logo" ', 1)
 
 
 @cache
@@ -1303,6 +1295,17 @@ def _template_markdown(path: Path, values: dict[str, str]) -> str:
     )
 
 
+def report_results() -> str:
+    """The invitation to report a result, its two paragraphs and its button, as About
+    and the overview both carry it under a heading of their own."""
+    from devtools import overview_sections  # noqa: PLC0415
+
+    return _template_markdown(
+        REPORT_RESULTS,
+        {"NEW_ISSUE_URL": NEW_ISSUE_URL, "ARROW_RIGHT": overview_sections.arrow_icon("right")},
+    )
+
+
 def overview_page() -> Page:
     """A short introduction, bounded previews, papers, and links to the full pages."""
     from devtools import overview_data, overview_sections  # noqa: PLC0415
@@ -1316,6 +1319,7 @@ def overview_page() -> Page:
         "PDF_CARDS": overview_sections.homepage_pdf_card(),
         "VIDEO_PLAYER": overview_sections.homepage_video(FILM_URL),
         "RECENT": overview_sections.recent_table(overview),
+        "REPORT_RESULTS": report_results(),
         "RESULTS_LINK_ATTRIBUTES": overview_sections.all_results_link_attributes(overview),
         "OTHER_PROJECTS": overview_sections.other_project_cards(overview),
         "ARROW_RIGHT": overview_sections.arrow_icon("right"),
@@ -1383,7 +1387,7 @@ def about_page() -> Page:
     markdown = _template_markdown(
         ABOUT_ARTICLE,
         {
-            "NEW_ISSUE_URL": NEW_ISSUE_URL,
+            "REPORT_RESULTS": report_results(),
             "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
         },
     )

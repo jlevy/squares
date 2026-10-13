@@ -1213,7 +1213,7 @@ checks from retained-receipt composition and a full proof replay.
     [n = 11 result history](../../frontier/n-011.md);
     [result register](../../frontier/results.yaml).
 
-[^tools]: [Tooling overview and scope of independent verification](../../../docs/project/verification-tooling.md).
+[^tools]: [Tooling overview and scope of independent verification](../../../docs/project/guides/verification-tooling.md).
     T-059 concerns reported row-minimum equality, while T-060 concerns global
     optimality. A rectangle-density or row-minimum check cannot substitute for the
     latter’s complete case and capture argument.
@@ -1323,7 +1323,7 @@ checks from retained-receipt composition and a full proof replay.
     of the theorem it states.
 
 [^reproduce]: [Reproduction guide and disclosed limits](../../resources/web/n11-optimality-2026-09-29/README.md#reproducing-the-independent-checks);
-    [tooling overview](../../../docs/project/verification-tooling.md).
+    [tooling overview](../../../docs/project/guides/verification-tooling.md).
     The final composition has `geometry_rerun: false`; it binds the observed executions
     rather than replacing them.
 

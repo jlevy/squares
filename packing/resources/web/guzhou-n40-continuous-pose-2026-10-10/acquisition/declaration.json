@@ -1,0 +1,40 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "guzhou-n40-continuous-pose-2026-10-10",
+  "source_url": "https://github.com/Guzhou0806/n40-square-packing",
+  "source_ref": "n40-continuous-1340000-199529-20261010",
+  "source_commit": "71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3",
+  "retrieved_at_utc": "2026-10-10T17:25Z",
+  "git_scope": "Full clone checked out at the pinned commit, which the release tag n40-continuous-1340000-199529-20261010 names, for the 2026-10-10 follow-up comment on issue #485. The manifest covers all 28 files of the tree. The proof, the finite parameters, both frozen C++ kernels, the source's input and admission code, runner, audit and tests, the workflow, the local run's receipts and the licences are retained; the density is pinned against the copy the 2026-10-01 rect_n40_L67 packet retains. The release ZIP's differing CI receipts are kept beside the tree under release-ci/, outside this record.",
+  "archived_dir": "source",
+  "license": "MIT, copyright 2026 Guzhou0806 (LICENSE), for the new material; the density's MIT licence from wand125 is retained in licenses/wand125.txt, Tokoharu's in licenses/tokoharu.txt and this repository's in licenses/jlevy-squares.txt. SOURCES.md states the credit and that the continuous-pose extension, the smaller-square coverage, the near-axis patch and the composition are Guzhou0806's AI-assisted research.",
+  "claims": [
+    "The 2026-10-10 comment on issue #485 reports s(40) > 1340000/199529 = 6.715815746082023..., unrestricted rotations, from wand125's rect_n40_L67 density, raising the earlier release's 335427/50000 by 72586117/9976450000.",
+    "Every square of side B = 199529/200000 in [0, 67/10]^2 captures at least 4999/5000 of the density, and 40 * 4999/5000 - 3999/100 = 1/500: by verifier/continuous_pose.cpp over 43 closed slabs in t = tan(theta/2) covering [10^-6, 83/200], and by verifier/axis_integer_grid.cpp at side A = 997643/1000000 for t in [0, 10^-6] by containment.",
+    "The receipts report 43 of 43 slabs verified, 61,860,927 nodes, 30,930,485 leaves, 14,096,668 angle bisections, least leaf bound 2251349454150741/2^51, and the axis minimum 249950896232809301864786207/250000000000000000000000000 over 4,897,369 vertices."
+  ],
+  "scope": [
+    ".gitattributes",
+    ".github/workflows/verify.yml",
+    ".gitignore",
+    "LICENSE",
+    "PROOF.md",
+    "README.md",
+    "REPRODUCIBILITY.md",
+    "SHA256SUMS",
+    "SOURCES.md",
+    "VERIFICATION.md",
+    "certificate",
+    "licenses",
+    "results",
+    "tests",
+    "verifier"
+  ],
+  "pinned_only": [
+    {
+      "match": "certificate/certified_candidate.json",
+      "reason": "wand125's rect_n40_L67 density, byte for byte the copy the 2026-10-01 rectangle packet retains (SHA-256 71011d03..., as SOURCES.md pins it); not duplicated.",
+      "identical_to": "packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json"
+    }
+  ]
+}

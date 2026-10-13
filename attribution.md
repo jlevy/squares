@@ -87,6 +87,21 @@ evidence the result actually cites.
 Repairing a proof is `after` its author; proving a new property of a packing does not,
 by itself, make the packing’s finder a methodological antecedent.
 
+A regularization leaves the packing with its finder.
+A certificate that rearranges a packing the record already credits, for display or after
+solving it to an exact side, does not take the packing’s credit.
+The finder keeps the packing through the register result that holds it, which the
+regularized result names as `of` in its `regularizations`, one item a count.
+The regularizer is credited with the regularization, and with the certificate where it
+is theirs, and is typed there as `by`, with the method, the side and what the
+regularization changed: `T-146` regularizes Ryan Xu’s, Mishapolk’s and SQUISH’s packings
+and is credited `Daniel after Xu, Chaoweeraprasit, Mishapolk, Levy`. The record never
+says in its own voice that a regularization is the same packing as the one it was made
+from unless the item’s `identity.basis` is `measured`, a decision made here.
+Otherwise it says whose claim the identity is, as `T-146` says that each view’s identity
+rests on Evan Daniel’s sampled path test; measurements made here are recorded beside the
+claim and decide nothing.
+
 ## Website and PDF Presentation
 
 Use the same preferred person credit in records, notes, tables and paper credits.

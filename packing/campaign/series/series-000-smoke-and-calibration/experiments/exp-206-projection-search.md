@@ -158,7 +158,7 @@ experiment:
 ## What the round was for
 
 The
-[penalty calibration](../../../../atlas/known-best/video/spikes/v2-transitions/NOTES.md)
+[penalty calibration](../../../../atlas/known-best/video/spikes/v2-transitions/notes.md)
 of the day before ended in a precondition failure.
 Zero of 48 runs finished feasible.
 The least overlap anywhere was $0.0042$ of a unit side, and holding eleven squares from

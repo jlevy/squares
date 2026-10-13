@@ -1,0 +1,65 @@
+{
+ "driver_sha256": "8d95d59394c3802983398bdab3f72a762efd8046d8689c65b88f58d53a3bcc2a",
+ "exact_py_sha256": "3e2aa3ca8e324a39e018ccb28267606344a9de585d72f43d79d80663b7c312cf",
+ "kind": "continuous-pose-replay-release-g/v1",
+ "python": "3.14.7",
+ "runs": {
+  "G-release-axis-side": {
+   "argv": [
+    "python",
+    "-I",
+    "-c",
+    "SCALAR_DRIVER",
+    "G-release-axis-side.py"
+   ],
+   "change": [
+    "'axis_side':'997643/1000000'",
+    "'axis_side':'997644/1000000'"
+   ],
+   "copy_sha256": "8580535fa2f5c3664f6e13da31e2c6ee41770ca602ded98ae2e87723b9b759b9",
+   "cpu_seconds": 0.026,
+   "exit_code": 4,
+   "loadavg_after": [
+    12.77,
+    14.21,
+    11.18
+   ],
+   "loadavg_before": [
+    12.77,
+    14.21,
+    11.18
+   ],
+   "started_utc": "2026-10-10T18:09:13+00:00",
+   "stderr": "",
+   "stdout": "{\"refused\": \"NEAR_AXIS_CONTAINMENT\"}\n",
+   "wall_seconds": 0.03
+  },
+  "G-release-unchanged": {
+   "argv": [
+    "python",
+    "-I",
+    "-c",
+    "SCALAR_DRIVER",
+    "G-release-unchanged.py"
+   ],
+   "change": null,
+   "copy_sha256": "3e2aa3ca8e324a39e018ccb28267606344a9de585d72f43d79d80663b7c312cf",
+   "cpu_seconds": 0.028,
+   "exit_code": 0,
+   "loadavg_after": [
+    12.77,
+    14.21,
+    11.18
+   ],
+   "loadavg_before": [
+    12.77,
+    14.21,
+    11.18
+   ],
+   "started_utc": "2026-10-10T18:09:13+00:00",
+   "stderr": "",
+   "stdout": "{\"scalar\": {\"X\": \"1340000/199529\", \"axis_containment_margin\": \"589499411/125000000000125000\", \"claim\": \"s(40) > 1340000/199529\", \"counting_margin\": \"1/500\", \"mass\": \"3999/100\", \"threshold\": \"4999/5000\"}}\n",
+   "wall_seconds": 0.036
+  }
+ }
+}

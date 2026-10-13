@@ -32,7 +32,14 @@ from typing import Any
 import pytest
 
 from devtools import sqverify_fast_census as census
-from devtools.check_sqverify_fast import direction, mixed_exact, net_step, read_raw
+from devtools.check_sqverify_fast import (
+    direction,
+    metadata_net,
+    mixed_exact,
+    net_step,
+    read_raw,
+    scaled,
+)
 from sqpack.rectangle_density import coverage_at_point, load_candidate
 from sqpack.yamlio import safe_load
 
@@ -1094,6 +1101,38 @@ def test_the_exact_evaluator_reads_a_declared_net() -> None:
     x, y = (Fraction(value) for value in least["centre"])
     assert net_step(raw) == Fraction(1, 1001) == Fraction(entry["premises"]["D"])
     assert mixed_exact(raw, x, y, int(least["r"])) == Fraction(least["exact_coverage"])
+
+
+def test_the_census_reads_a_format_t_metadata_net(tmp_path: Path) -> None:
+    """GN-5 of the review of jlevy/squares#485: a format T file whose metadata sets a net
+    (rect_n40_L67's density on 401 directions of step 83/80000, as the release decided
+    it) is read on that net, as admission reads it: its direction count, its step, the
+    net its mutants keep, and the exact evaluator's angle. Before, the census counted 201
+    directions, scored the standard step, dropped the net from the mutants and could not
+    load the file in the evaluator."""
+    original = rectangle_cases()["rect_n40_L67"].candidate
+    raw = read_raw(original)
+    finer = {**raw, "certificate": {**raw["certificate"], "D": "83/80000", "angle_count": 401}}
+    path = tmp_path / "certified_candidate.json"
+    path.write_text(json.dumps(finer), encoding="utf-8")
+    case = census.Case("2026-10-10", "rect_n40_L67-401", 40, "67/10", path=path)
+    assert metadata_net(finer) == (Fraction(83, 80000), 401)
+    assert census.net_directions(case) == 401
+    assert net_step(finer) == Fraction(83, 80000)
+    assert scaled(finer, Fraction(99, 100))["certificate"] == {
+        "D": "83/80000",
+        "angle_count": 401,
+    }
+    # The standard net in metadata is still dropped from a mutant, as before.
+    assert metadata_net(raw) == (Fraction(83, 40000), 201)
+    assert "certificate" not in scaled(raw, Fraction(99, 100))
+    assert census.net_directions(rectangle_cases()["rect_n40_L67"]) == 201
+    # The release's control centre at direction 220 of the 401 net (the review's item 8).
+    x, y = Fraction(3.353931795732347), Fraction(5.09801085267264)
+    cosine, sine = direction(220, Fraction(83, 80000))
+    expected = coverage_at_point(load_candidate(original, n=40), x, y, cosine, sine)
+    assert census.exact_capture(case, finer, x, y, 220) == expected
+    assert float(expected) == pytest.approx(1.0013165657619967, abs=1e-15)
 
 
 def test_a_control_refuses_a_row_decided_on_another_net() -> None:

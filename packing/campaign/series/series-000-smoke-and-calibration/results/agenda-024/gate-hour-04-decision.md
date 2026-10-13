@@ -11,7 +11,7 @@ Subsequent gates likewise close on their completed evidence or declared cap, wit
 time recorded.
 
 The user’s exclusion of the credit interruption is recorded in the
-[current handoff](../../../../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#current-recovery-boundary).
+[current handoff](../../../../../../docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md#current-recovery-boundary).
 The revised eight-hour target is `2026-09-06T20:39:32Z`; the outer boundary is
 `2026-09-06T22:39:32Z`. The 24-hour research agenda retains all unspent active time.
 
@@ -34,7 +34,7 @@ They change no machine evidence or scientific value and are not duplicated here.
 ## Next Bounded Dispatch
 
 Apply the handoff’s
-[research-payoff policy](../../../../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#research-payoff-and-exposition).
+[research-payoff policy](../../../../../../docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md#research-payoff-and-exposition).
 The scalar probe tests a larger step; adaptive and dual work earn further time by
 removing a named obstacle to larger bounds or a closure theorem.
 Instrument completion and small refinements alone do not justify automatic follow-on

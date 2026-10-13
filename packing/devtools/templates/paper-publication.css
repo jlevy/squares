@@ -55,7 +55,7 @@ body {
 :is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-resolved-theme="dark"] {
   --kpress-doc-accent: oklch(76.68% 0.0861 186.4);
 }
-/* The reading measure (forty of the base) and the h2 scale (1.2) are in paper-type.css,
+/* The reading measure (thirty-five of the base) and the h2 scale (1.2) are in paper-type.css,
    shared with every page of the site. */
 .cert-page {
   padding-block-end: calc(var(--kpress-font-size-base) * 6);

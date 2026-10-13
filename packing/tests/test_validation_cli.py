@@ -3152,7 +3152,7 @@ def test_implicit_large_push_reserves_an_exclusive_test_phase(
     monkeypatch.setattr(
         validate,
         "_push_test_step",
-        lambda _base: validate.Step(
+        lambda _base, **_kwargs: validate.Step(
             name="reachable behavioral tests",
             action=lambda _context: "",
             fast=True,
@@ -5303,3 +5303,206 @@ def test_frontend_browser_workers_fit_outer_topology(
     ) in captured
     assert any("devtools.check_probes" in command for command in captured)
     assert any("devtools.check_motion_lab_pages" in command for command in captured)
+
+
+@pytest.mark.parametrize(
+    "paths",
+    [["site/style.css"], ["unknown.xyz"], [], ["site/style.css", "science/certificate.json"]],
+)
+def test_push_scopes_prerequisites_and_tests_from_one_snapshot(
+    monkeypatch: pytest.MonkeyPatch, paths: list[str]
+) -> None:
+    """Both selectors see the same Git result, even if the tree changes during the floor."""
+    prerequisites = (
+        validate.Step("unattributed", lambda _context: "ok", fast=True),
+        validate.Step("site", lambda _context: "ok", fast=True, touches=("site/*",)),
+        validate.Step("science", lambda _context: "ok", fast=True, touches=("science/*",)),
+    )
+    monkeypatch.setattr(validate, "STEPS", prerequisites)
+    reads: list[str] = []
+    original = paths.copy()
+
+    def changed(base: str) -> list[str]:
+        reads.append(base)
+        assert len(reads) == 1, "push must not re-read Git for a later phase"
+        return paths
+
+    monkeypatch.setattr(validate, "changed_paths", changed)
+    snapshots: list[list[str]] = []
+    files: list[Path] = []
+
+    def selector(
+        command: Sequence[str], **_options: object
+    ) -> subprocess.CompletedProcess[str]:
+        file = Path(command[command.index("--changed-paths-file") + 1])
+        files.append(file)
+        snapshots.append(json.loads(file.read_text()))
+        return subprocess.CompletedProcess(command, 0, stdout="narrow 1\n", stderr="")
+
+    monkeypatch.setattr(validate.subprocess, "run", selector)
+
+    def execute(_context: validate.Context, command: tuple[str, ...]) -> str:
+        selector(command)
+        return "tests passed"
+
+    monkeypatch.setattr(validate, "_run", execute)
+    monkeypatch.setattr(validate, "_begin_artifacts", lambda *_args: None)
+    selected_names: list[str] = []
+
+    def run(
+        selected: list[validate.Step], context: validate.Context, *_filters: object
+    ) -> validate.RunSummary:
+        selected_names.extend(step.name for step in selected)
+        paths.append("science/arrived-after-selection.json")
+        assert selected[-1].action(context) == "tests passed"
+        return validate.RunSummary(
+            results=[],
+            wall_seconds=0,
+            selected_count=len(selected),
+            total_count=len(prerequisites) + 1,
+        )
+
+    monkeypatch.setattr(validate, "_run_selected", run)
+    status, stdout, stderr = _invoke(
+        "--push", "--since", "base-ref", "--jobs", "1", "--inner-jobs", "1"
+    )
+    assert (status, stderr) == (0, "")
+    expected = (
+        ["unattributed", "site"]
+        if original == ["site/style.css"]
+        else ["unattributed", "site", "science"]
+    )
+    assert selected_names == [*expected, "reachable behavioral tests"]
+    assert snapshots == [original, original]
+    assert reads == ["base-ref"]
+    assert files[0] == files[1]
+    assert not files[0].exists()
+    assert "prerequisites" in stdout
+
+
+def test_push_prerequisites_keep_scientific_policy_and_browser_coverage() -> None:
+    prerequisites = validate._select_steps(only=[], fast=False, edit=True)
+    browser_floor = "browser floor (biome, eslint, tsc, node:test)"
+    inputs = {
+        "packing/src/sqpack/verify.py": "exact verification",
+        "packing/devtools/decide_certificate.py": "exact verification",
+        "packing/cases/n11_fractional_certificate/certificate.json": "exact verification",
+        "packing/src/sqpack/gate_budgets.py": "tier ceilings are declared and not slack",
+        "packing/devtools/gate-budgets.yaml": "tier ceilings are declared and not slack",
+        "packing/devtools/overview/atlas-view.js": browser_floor,
+        "packages/workbench/assets/workbench.css": browser_floor,
+        "packages/workbench/probes/atlas-transitions.d.ts": browser_floor,
+        "package-lock.json": browser_floor,
+    }
+    for path, expected in inputs.items():
+        selected = validate.select_for_paths([path], prerequisites)
+        assert expected in {step.name for step in selected.steps}, path
+        assert all(step in selected.steps for step in prerequisites if not step.touches)
+    mixed = validate.select_for_paths(list(inputs), prerequisites)
+    assert set(inputs.values()) <= {step.name for step in mixed.steps}
+
+
+@pytest.mark.parametrize("mode", ["push", "since"])
+@pytest.mark.parametrize(
+    "paths",
+    [
+        ["site/style.css"],
+        ["unknown.xyz", "another.xyz", "b.xyz", "c.xyz", "d.xyz", "e.xyz"],
+        [],
+    ],
+)
+def test_change_scoped_banners_leave_json_stdout_one_document(
+    monkeypatch: pytest.MonkeyPatch, mode: str, paths: list[str]
+) -> None:
+    """The `--push` and `--since` banners go where `--format json` can tolerate them.
+
+    PR 496 review E1: both blocks printed to stdout whatever the format, so a consumer of
+    `--list --format json` got two banner lines before the array and `json.loads` failed.
+    G4, from the same review: the `--push` banner said "unclaimed paths" without naming
+    them, while `--since` named the first five. One helper now serves both -- stdout in
+    text mode, stderr under JSON -- and both name the paths, which is the attribution
+    decision a reader has to make.
+    """
+    prerequisites = (
+        validate.Step("unattributed", lambda _context: "ok", fast=True),
+        validate.Step("site", lambda _context: "ok", fast=True, touches=("site/*",)),
+    )
+    monkeypatch.setattr(validate, "STEPS", prerequisites)
+    monkeypatch.setattr(validate, "changed_paths", lambda _base: list(paths))
+    monkeypatch.setattr(
+        validate.subprocess,
+        "run",
+        lambda command, **_options: subprocess.CompletedProcess(
+            command, 0, stdout="narrow 1\n", stderr=""
+        ),
+    )
+    arguments = (
+        ("--push", "--since", "base-ref", "--jobs", "1", "--inner-jobs", "1")
+        if mode == "push"
+        else ("--since", "base-ref")
+    )
+    expected_names = ["unattributed", "site"]
+    if mode == "push":
+        expected_names.append("reachable behavioral tests")
+
+    status, stdout, stderr = _invoke(*arguments, "--list", "--format", "json")
+    assert status == 0
+    # One document and nothing else: a banner before or after it fails the parse.
+    assert [entry["name"] for entry in json.loads(stdout)] == expected_names
+    if mode == "push":
+        assert "== pre-push prerequisites: " in stderr
+        assert "== pre-push floor against base-ref" in stderr
+    else:
+        assert "== change-scoped against base-ref: " in stderr
+    if len(paths) > 5:
+        assert (
+            "no step claims another.xyz, b.xyz, c.xyz, d.xyz, e.xyz (+1 more); "
+            "running the whole selection"
+        ) in stderr
+    elif not paths:
+        assert "no paths determined; running the whole selection" in stderr
+    else:
+        assert "running the whole selection" not in stderr
+        if mode == "since":
+            assert "2 steps reachable from those paths" in stderr
+
+    # The text form prints the same lines on stdout and nothing on stderr.
+    status, text_stdout, text_stderr = _invoke(*arguments, "--list")
+    assert (status, text_stderr) == (0, "")
+    banners = [line for line in stderr.splitlines() if line]
+    assert banners == [
+        line for line in text_stdout.splitlines() if line.startswith(("==", "  "))
+    ]
+
+
+@pytest.mark.parametrize("outcome", ["selector failed", "malformed summary"])
+def test_push_selector_errors_name_the_snapshot_they_were_given(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, outcome: str
+) -> None:
+    """With a snapshot the selector never reads the ref, so the error must not blame it
+    (PR 496 review G3): the first line a user reads names what was actually passed."""
+    snapshot = tmp_path / "changed-paths.json"
+    completed = (
+        subprocess.CompletedProcess(
+            args=("reachable-tests",),
+            returncode=2,
+            stdout="",
+            stderr="cannot read changed-path snapshot: boom",
+        )
+        if outcome == "selector failed"
+        else subprocess.CompletedProcess(
+            args=("reachable-tests",), returncode=0, stdout="noise\n", stderr=""
+        )
+    )
+    monkeypatch.setattr(validate.subprocess, "run", lambda *_args, **_kwargs: completed)
+    with pytest.raises(validate.UsageError) as error:
+        validate._push_test_step("origin/main", paths_file=snapshot)
+    message = str(error.value)
+    assert f"the changed-path snapshot {snapshot}" in message
+    assert "origin/main" not in message
+    if outcome == "selector failed":
+        assert message.endswith("cannot read changed-path snapshot: boom")
+    else:
+        assert message.endswith("'noise'")
+    with pytest.raises(validate.UsageError, match="the change against 'origin/main'"):
+        validate._push_test_step("origin/main")

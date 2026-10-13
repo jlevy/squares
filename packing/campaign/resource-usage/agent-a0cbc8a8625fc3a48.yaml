@@ -1,0 +1,559 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-a0cbc8a8625fc3a48.jsonl
+    sha256: be5291284baee04c05de9a73fba8b4bab0c983f3a2f912e7d56749d937da1663
+    bytes: 1654393
+    records: 313
+    session_id: 387dc0a2-0a91-51c6-bf71-f69e33945398
+    harness_versions:
+    - 2.1.296
+  span:
+    started_at: '2026-10-12T15:09:06.166Z'
+    ended_at: '2026-10-12T15:35:49.700Z'
+    wall_seconds: 1603.534
+  turns:
+    assistant: 132
+    sidechain: 132
+    by_model:
+      mathematics tier: 132
+    by_thinking_level:
+      xhigh: 132
+    by_model_and_thinking_level:
+      mathematics tier @ xhigh: 132
+    by_branch:
+      HEAD: 94
+      n40-stage4: 38
+    latency:
+      count: 123
+      total_seconds: 657.938
+      median_seconds: 2.552
+      max_seconds: 118.278
+  tokens:
+    cache_creation_input_tokens: 2475510
+    cache_read_input_tokens: 33657775
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 2475510
+    input_tokens: 3746
+    output_tokens: 1968
+    thinking_tokens: 594
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 2475510
+      cache_read_input_tokens: 33657775
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 2475510
+      input_tokens: 3746
+      output_tokens: 1968
+      thinking_tokens: 594
+  tool_calls:
+    total: 79
+    total_seconds: 1127.568
+    share_of_wall: 0.7032
+    errors: 2
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 8
+      total_seconds: 238.252
+      median_seconds: 21.224
+      max_seconds: 68.993
+    by_tool:
+      Bash:
+        count: 63
+        total_seconds: 1102.972
+        median_seconds: 12.643
+        max_seconds: 88.216
+      Edit:
+        count: 4
+        total_seconds: 11.178
+        median_seconds: 2.155
+        max_seconds: 6.794
+      Write:
+        count: 2
+        total_seconds: 10.356
+        median_seconds: 5.178
+        max_seconds: 10.185
+      Read:
+        count: 8
+        total_seconds: 2.613
+        median_seconds: 0.269
+        max_seconds: 0.592
+      SubagentHandback:
+        count: 1
+        total_seconds: 0.389
+        median_seconds: 0.389
+        max_seconds: 0.389
+      ToolSearch:
+        count: 1
+        total_seconds: 0.06
+        median_seconds: 0.06
+        max_seconds: 0.06
+    by_command:
+      sed:
+        count: 3
+        total_seconds: 125.629
+        median_seconds: 23.548
+        max_seconds: 80.594
+      git diff:
+        count: 6
+        total_seconds: 100.393
+        median_seconds: 17.888
+        max_seconds: 25.873
+      git && git && git && ls:
+        count: 1
+        total_seconds: 88.216
+        median_seconds: 88.216
+        max_seconds: 88.216
+      grep:
+        count: 2
+        total_seconds: 84.53
+        median_seconds: 42.265
+        max_seconds: 77.495
+      ? ",  && ])s+, text):\n        if re.search(rb( +  && .join(str(c) for c in counts)\
+        \ + r)b, sent):\n            print( && key, s.get(source_key),  && claims_record,\
+        \ bool(s.get(claims_record)),  && until in e[reason]): print(n, SUPERSEDED, e[source_id],\
+        \ e[value], ->, e.get(superseded_by), "
+      : count: 1
+        total_seconds: 68.993
+        median_seconds: 68.993
+        max_seconds: 68.993
+      python && m && v:
+        count: 1
+        total_seconds: 65.475
+        median_seconds: 65.475
+        max_seconds: 65.475
+      uv run packing-witness verify:
+        count: 1
+        total_seconds: 44.393
+        median_seconds: 44.393
+        max_seconds: 44.393
+      uv run python rederive.py:
+        count: 2
+        total_seconds: 43.049
+        median_seconds: 21.525
+        max_seconds: 37.869
+      cd:
+        count: 2
+        total_seconds: 42.449
+        median_seconds: 21.224
+        max_seconds: 22.882
+      differ && equal && retained && raise && 1 && exit && mismatch:
+        count: 1
+        total_seconds: 39.496
+        median_seconds: 39.496
+        max_seconds: 39.496
+      mkdir && git && git && git && ls && ls && python3:
+        count: 1
+        total_seconds: 29.806
+        median_seconds: 29.806
+        max_seconds: 29.806
+      'git && git && git && ^[-+]def && ^[-+]#:':
+        count: 1
+        total_seconds: 29.05
+        median_seconds: 29.05
+        max_seconds: 29.05
+      uv run python:
+        count: 1
+        total_seconds: 24.296
+        median_seconds: 24.296
+        max_seconds: 24.296
+      git && git && git && git && git && git && git:
+        count: 1
+        total_seconds: 24.004
+        median_seconds: 24.004
+        max_seconds: 24.004
+      git && git && git:
+        count: 1
+        total_seconds: 21.842
+        median_seconds: 21.842
+        max_seconds: 21.842
+      ls && epistemics.md && V3 && C3 && S3 && S2:
+        count: 1
+        total_seconds: 19.999
+        median_seconds: 19.999
+        max_seconds: 19.999
+      VERIFIED && exit && verdict && FAIL && equal && uptime:
+        count: 1
+        total_seconds: 19.74
+        median_seconds: 19.74
+        max_seconds: 19.74
+      git && git && git && git && git && git:
+        count: 1
+        total_seconds: 19.696
+        median_seconds: 19.696
+        max_seconds: 19.696
+      python3:
+        count: 1
+        total_seconds: 18.254
+        median_seconds: 18.254
+        max_seconds: 18.254
+      python && t:
+        count: 1
+        total_seconds: 18.042
+        median_seconds: 18.042
+        max_seconds: 18.042
+      head:
+        count: 1
+        total_seconds: 17.143
+        median_seconds: 17.143
+        max_seconds: 17.143
+      tbd prime:
+        count: 1
+        total_seconds: 17.091
+        median_seconds: 17.091
+        max_seconds: 17.091
+      gh && gh && {user:.user.login,:
+        count: 1
+        total_seconds: 16.184
+        median_seconds: 16.184
+        max_seconds: 16.184
+      wc:
+        count: 1
+        total_seconds: 15.111
+        median_seconds: 15.111
+        max_seconds: 15.111
+      n && packing-witness && devtools.upper_bound_reports && devtools.upper_bound_reports:
+        count: 1
+        total_seconds: 12.74
+        median_seconds: 12.74
+        max_seconds: 12.74
+      git && git:
+        count: 2
+        total_seconds: 12.016
+        median_seconds: 6.008
+        max_seconds: 8.281
+      def replay_receipt && raise && differ && retained && except && seconds && _require && KernelError:
+        count: 1
+        total_seconds: 11.03
+        median_seconds: 11.03
+        max_seconds: 11.03
+      ? devtools.adopt_houses && devtools.select_houses && devtools.select_houses && devtools.upper_bound_houses
+        && devtools.check_certificate_citations && devtools.check_source_coverage
+      : count: 1
+        total_seconds: 9.639
+        median_seconds: 9.639
+        max_seconds: 9.639
+      uptime:
+        count: 1
+        total_seconds: 7.715
+        median_seconds: 7.715
+        max_seconds: 7.715
+      gh pr:
+        count: 3
+        total_seconds: 6.93
+        median_seconds: 2.095
+        max_seconds: 2.806
+      gh && gh && gh && git && git && git && uptime:
+        count: 1
+        total_seconds: 6.865
+        median_seconds: 6.865
+        max_seconds: 6.865
+      ls && V3 && C3 && bS2b:
+        count: 1
+        total_seconds: 6.68
+        median_seconds: 6.68
+        max_seconds: 6.68
+      ? devtools.upper_bound_reports && devtools.upper_bound_reports && devtools.check_half_angle_area
+        && devtools.check_half_angle_area
+      : count: 1
+        total_seconds: 4.953
+        median_seconds: 4.953
+        max_seconds: 4.953
+      ^def replay_receipt( && ^def replay_receipt( && """ && raise && _require && seconds && differ && retained:
+        count: 1
+        total_seconds: 4.878
+        median_seconds: 4.878
+        max_seconds: 4.878
+      api &&  $taken  && A && ^**Review && gh:
+        count: 1
+        total_seconds: 4.299
+        median_seconds: 4.299
+        max_seconds: 4.299
+      4 && 11:
+        count: 1
+        total_seconds: 4.087
+        median_seconds: 4.087
+        max_seconds: 4.087
+      gh issue:
+        count: 2
+        total_seconds: 3.317
+        median_seconds: 1.659
+        max_seconds: 1.682
+      uv run packing-validate:
+        count: 1
+        total_seconds: 2.755
+        median_seconds: 2.755
+        max_seconds: 2.755
+      git && git && git && git && git:
+        count: 1
+        total_seconds: 2.519
+        median_seconds: 2.519
+        max_seconds: 2.519
+      '{author:.user.login, && gh':
+        count: 1
+        total_seconds: 2.489
+        median_seconds: 2.489
+        max_seconds: 2.489
+    by_command_family:
+      vcs:
+        count: 21
+        total_seconds: 331.032
+        median_seconds: 12.643
+        max_seconds: 88.216
+      inspection:
+        count: 9
+        total_seconds: 269.092
+        median_seconds: 19.999
+        max_seconds: 80.594
+      other:
+        count: 21
+        total_seconds: 225.695
+        median_seconds: 4.087
+        max_seconds: 68.993
+      toolchain:
+        count: 5
+        total_seconds: 143.158
+        median_seconds: 18.254
+        max_seconds: 65.475
+      project:
+        count: 4
+        total_seconds: 61.74
+        median_seconds: 7.296
+        max_seconds: 44.393
+      shell:
+        count: 2
+        total_seconds: 42.449
+        median_seconds: 21.224
+        max_seconds: 22.882
+      filesystem:
+        count: 1
+        total_seconds: 29.806
+        median_seconds: 29.806
+        max_seconds: 29.806
+    invoked:
+      echo: 114
+      cd: 33
+      head: 32
+      grep: 31
+      tail: 24
+      sed: 23
+      date: 19
+      git diff: 16
+      cut: 11
+      export: 9
+      gh pr: 6
+      retained: 6
+      git worktree: 5
+      ls: 5
+      uptime: 5
+      ^exit: 5
+      wc: 4
+      git show: 4
+      uv run python -m devtools.upper_bound_reports: 4
+      equal: 4
+      git fetch: 3
+      git merge-base: 3
+      git log: 3
+      gh issue: 3
+      cat: 3
+      uv run python: 3
+      awk: 3
+      VERIFIED: 3
+      verdict: 3
+      FAIL: 3
+      tr: 3
+      differ: 3
+      raise: 3
+      gh api: 2
+      python3: 2
+      V3: 2
+      C3: 2
+      git merge-tree: 2
+      uv run python -m devtools.select_houses: 2
+      uv run python -m devtools.check_half_angle_area: 2
+      uv run packing-witness verify: 2
+      uv run python rederive.py: 2
+      git status: 2
+      git merge: 2
+      exit: 2
+      certificates,: 2
+      replay: 2
+      ^s+{: 2
+      ^s+}: 2
+      ^{: 2
+      ^Mon: 2
+      Traceback: 2
+      seconds: 2
+      _require: 2
+      ^def replay_receipt(: 2
+      THIRD_506: 2
+      jq: 2
+      tbd prime: 1
+      '{author:.user.login,': 1
+      git cat-file: 1
+      git rev-parse: 1
+      mkdir: 1
+      git submodule: 1
+      (uv: 1
+      epistemics.md: 1
+      S3: 1
+      S2: 1
+      '{user:.user.login,': 1
+      bS2b: 1
+      gh run: 1
+      uv run python -m devtools.adopt_houses: 1
+      uv run python -m devtools.upper_bound_houses: 1
+      uv run python -m devtools.check_certificate_citations: 1
+      uv run python -m devtools.check_source_coverage: 1
+      ^[-+]def: 1
+      '^[-+]#:': 1
+      t: 1
+      n: 1
+      ', ': 1
+      ? "])s+, text):\n        if re.search(rb( + "
+      : 1
+      ? ".join(str(c) for c in counts) + r)b, sent):\n            print("
+      : 1
+      'key, s.get(source_key), ': 1
+      'claims_record, bool(s.get(claims_record)), ': 1
+      'until in e[reason]): print(n, SUPERSEDED, e[source_id], e[value], ->, e.get(superseded_by), ': 1
+      m: 1
+      v: 1
+      uv run packing-validate: 1
+      '4': 1
+      '11': 1
+      sleep: 1
+      ^s+]: 1
+      ^}: 1
+      credit: 1
+      arrangement: 1
+      lineage: 1
+      ^[0-9]+: 1
+      job: 1
+      status: 1
+      '1': 1
+      mismatch: 1
+      def replay_receipt: 1
+      except: 1
+      KernelError: 1
+      '"""': 1
+      KERNEL: 1
+      PLACEHOLDER: 1
+      api: 1
+      sort: 1
+      ' $taken ': 1
+      A: 1
+      ^**Review: 1
+    invoked_families:
+      shell: 176
+      inspection: 126
+      other: 120
+      vcs: 55
+      project: 15
+      toolchain: 8
+      filesystem: 1
+    by_shell_shape:
+      compound:
+        count: 48
+        total_seconds: 752.844
+        median_seconds: 7.29
+        max_seconds: 88.216
+      python_heredoc:
+        count: 7
+        total_seconds: 237.509
+        median_seconds: 22.882
+        max_seconds: 68.993
+      simple:
+        count: 4
+        total_seconds: 74.834
+        median_seconds: 23.824
+        max_seconds: 25.873
+      pipeline:
+        count: 3
+        total_seconds: 37.042
+        median_seconds: 12.916
+        max_seconds: 17.091
+      python_inline:
+        count: 1
+        total_seconds: 0.743
+        median_seconds: 0.743
+        max_seconds: 0.743
+    by_thinking_level:
+      xhigh:
+        count: 79
+        total_seconds: 1127.568
+        median_seconds: 6.794
+        max_seconds: 88.216
+    shell_traits:
+      pipes: 44
+      redirects_output: 12
+      substitutes: 8
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

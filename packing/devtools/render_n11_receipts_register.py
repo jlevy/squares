@@ -349,7 +349,7 @@ def _entries() -> dict[str, Entry]:
         "nonfield-reviewed-costs-2147.json.gz": Entry(
             "data",
             "nonfield-reviewed-costs",
-            "the source of the batch costs in docs/project/verification-tooling.md",
+            "the source of the batch costs in docs/project/guides/verification-tooling.md",
         ),
         "reachable-selector-cost.json": Entry(
             "control",

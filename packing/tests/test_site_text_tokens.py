@@ -27,7 +27,7 @@ from tests import site_renders
 #: The explainer's resolved values at a 1280px desktop, from `measure_site_pages type`.
 EXPLAINER = {
     "--kpress-font-size-base": "18px",
-    "--kpress-measure": "calc(18px * 40)",
+    "--kpress-measure": "calc(18px * 35)",
     "--kpress-font-size-h2": "calc(18px * 1.2)",
 }
 SANS = '"Source Sans 3 Variable"'
@@ -81,6 +81,7 @@ def test_a_report_resolves_the_explainers_text_tokens(
     roles = measured["roles"]
     assert roles["p"]["size"] == "18px"
     assert roles["p"]["line_height"] == "27px"
+    assert roles["p"]["text_width"] == "710px"
     assert roles["h2"]["size"] == "21.6px"
 
 

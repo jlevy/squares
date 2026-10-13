@@ -266,6 +266,17 @@ def test_confirmed_in_register_prose_says_which_kind() -> None:
         assert check_results.confirmation_prose_problems(said) == [], phrase
 
 
+def test_confirms_as_a_verb_also_says_which_kind() -> None:
+    bare = {"id": "T-999", "claim": "Complete exact replay confirms the bound at n = 68."}
+    (problem,) = check_results.confirmation_prose_problems(bare)
+    assert problem.startswith("T-999: claim says confirmed without saying how")
+    said = {
+        "id": "T-999",
+        "claim": "Complete exact replay, independently re-implemented, confirms the bound.",
+    }
+    assert check_results.confirmation_prose_problems(said) == []
+
+
 def test_the_prose_rule_reads_the_word_and_not_its_neighbours() -> None:
     record = {
         "id": "T-999",

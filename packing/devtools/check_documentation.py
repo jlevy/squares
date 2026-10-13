@@ -42,6 +42,49 @@ RETIRED_PHRASES = (
     "verified-construction",
 )
 
+#: Where a project document goes: the directory under `docs/project/` named for its kind,
+#: and for a dated record a name that starts with that kind and the record's date. Nothing
+#: sits loose in `docs/project/`, since a loose file says nothing about what kind of
+#: document it is (docs/project/specs/active/plan-2026-10-11-documentation-organization.md,
+#: think-mv16). A new kind of document is a new entry here.
+PROJECT_DOCS = "docs/project"
+DATED_KINDS = {
+    "handoffs": ("handoff",),
+    "postmortems": ("postmortem",),
+    "research": ("research",),
+    "reviews": ("review",),
+    "specs": ("plan", "spike"),
+}
+MAINTAINED_KINDS = {"guides", "policies"}
+DATE = r"\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])"
+SLUG = r"[a-z0-9]+(?:[.-][a-z0-9]+)*"
+DATED_NAME = re.compile(rf"(?P<kind>[a-z]+)-{DATE}-{SLUG}\.md")
+#: A document's name is lowercase kebab-case, except the names a tool or convention fixes
+#: and a registered record id spelled as in its frontmatter (`H-001-…`, `X-001-…`,
+#: `VE-001-…`; conventions.md section 2).
+KEBAB_NAME = re.compile(rf"{SLUG}\.md")
+FIXED_NAMES = {"README.md", "AGENTS.md", "CLAUDE.md"}
+IDENTIFIER_NAME = re.compile(rf"(?:H|X|VE)-\d+-{SLUG}\.md")
+#: Documents that predate the layout and wait on a move every open pull request would
+#: conflict with: the root guides, the frontier's generated views and the verifier guides
+#: that `evidence.yaml` cites (think-xz7z). The other deferred moves break no rule here.
+#: An entry that no longer breaks a rule fails, and `test_document_layout` refuses one that
+#: was not on the list when it was made, so the list only shrinks.
+LAYOUT_PENDING = frozenset(
+    {
+        "SYNOPSIS.md",
+        "TUTORIAL.md",
+        "docs/project/site-urls.md",
+        "packing/frontier/CERTIFICATE-REACH.md",
+        "packing/frontier/INVENTORY.md",
+        "packing/frontier/RESULTS.md",
+        "packing/frontier/STATUS.md",
+        "packing/frontier/VERIFIERS.md",
+        "packing/sqverify_fast/INDEPENDENCE.md",
+        "packing/sqverify_fast/SOUNDNESS.md",
+    }
+)
+
 
 def _matches(pattern: str) -> set[str]:
     return {path.relative_to(REPO).as_posix() for path in REPO.glob(pattern) if path.is_file()}
@@ -136,6 +179,61 @@ def _link_problems(path: Path) -> list[str]:
     return problems
 
 
+#: An absolute link to a path on this repository's `main`. The relative-link check skips it
+#: as external, and GitHub does not redirect a moved file, so a move leaves it dead without
+#: a word; it is held to the tree instead (think-mv16). A link pinned to a commit is not.
+MAIN_LINK = re.compile(
+    r"https://github\.com/jlevy/squares/(?:blob|tree)/main/([^\s)<>\"'`#?]+)"
+)
+
+
+def _main_link_problems(path: Path) -> list[str]:
+    label = path.relative_to(REPO).as_posix()
+    targets = MAIN_LINK.findall(_outside_fences(path.read_text(encoding="utf-8")))
+    return [
+        f"{label}: dead link to main -> {target}"
+        for target in dict.fromkeys(target.rstrip(".,;:!") for target in targets)
+        if not (REPO / unquote(target)).exists()
+    ]
+
+
+def _layout_problem(relative: str) -> str | None:
+    """Why a mapped document's place or name breaks the layout, or None if it does not."""
+    parts = relative.split("/")
+    name = parts[-1]
+    if relative.startswith(f"{PROJECT_DOCS}/"):
+        inside = parts[2:]
+        if len(inside) == 1:
+            if name != "README.md":
+                return "sits loose in docs/project/; put it in the directory for its kind"
+        elif inside[0] not in DATED_KINDS.keys() | MAINTAINED_KINDS:
+            return f"is in docs/project/{inside[0]}/, which is not a directory for a kind"
+        elif (kinds := DATED_KINDS.get(inside[0])) and name != "README.md":
+            match = DATED_NAME.fullmatch(name)
+            if not (match and match["kind"] in kinds):
+                names = " or ".join(f"{kind}-YYYY-MM-DD-topic.md" for kind in kinds)
+                return f"is not named {names}"
+    if not (
+        name in FIXED_NAMES or KEBAB_NAME.fullmatch(name) or IDENTIFIER_NAME.fullmatch(name)
+    ):
+        return "is not named in lowercase kebab-case"
+    return None
+
+
+def _layout_problems(mapped: set[str]) -> list[str]:
+    problems = [
+        f"{relative}: {problem}"
+        for relative in sorted(mapped - LAYOUT_PENDING)
+        if (problem := _layout_problem(relative))
+    ]
+    problems.extend(
+        f"layout allowlist entry no longer needed: {relative}"
+        for relative in sorted(LAYOUT_PENDING)
+        if relative not in mapped or _layout_problem(relative) is None
+    )
+    return problems
+
+
 def check() -> list[str]:
     document_map = load_map()
     problems: list[str] = []
@@ -217,6 +315,12 @@ def check() -> list[str]:
         if FOOTER not in text:
             problems.append(f"{relative}: common-doc footer is missing")
         problems.extend(_link_problems(REPO / relative))
+        problems.extend(_main_link_problems(REPO / relative))
+    # GitHub's templates live in a dot-directory the map does not cover, and one of them
+    # sends a contributor to a runbook by its `main` address.
+    for template in sorted(REPO.glob(".github/**/*.md")):
+        problems.extend(_main_link_problems(template))
+    problems.extend(_layout_problems(covered & actual))
 
     current_paths = {
         item["path"]

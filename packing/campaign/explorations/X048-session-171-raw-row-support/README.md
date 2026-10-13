@@ -1,6 +1,6 @@
 # Session 171: lazy raw-row support
 
-[D1 report](D1_REPORT.md) records the frozen diagnostic, limits and controls.
+[D1 report](d1-report.md) records the frozen diagnostic, limits and controls.
 D1 freshly replayed (same implementation, no search) support for **55 of 96 rows**; 41
 remain unresolved after the 100,000-node ceiling.
 No unsupported row or exclusion was claimed.
@@ -12,7 +12,7 @@ No unsupported row or exclusion was claimed.
 These are solutions of the frozen binary constraint network, not geometric packings.
 Any further search protocol requires separate preregistration.
 
-[D2 report](D2_REPORT.md) records the separately frozen forward-checking/MRV trial:
+[D2 report](d2-report.md) records the separately frozen forward-checking/MRV trial:
 69/96 rows supported by fresh replay (+14), 27 unresolved at the unchanged pair ceiling.
 
 Commits cited in this record that are not in this branch’s history resolve at the tag

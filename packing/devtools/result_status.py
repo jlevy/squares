@@ -22,7 +22,10 @@ its entry for a result of another kind that a later result implies, wholly or in
 (`superseded_by`, `render_recent_results.supersessions`). Its `activity` is who has the
 next move: this project, with work under way (`in analysis`), or another party, with a
 request on file (`waiting on …`). An activity is the one hand-recorded fact here, so it
-is dated, names the record that shows it, and expires (`activity_problems`).
+is dated, names the record that shows it, and expires (`activity_problems`). The
+confirmations an entry names and has not run, its `unfinished_confirmations`, are what is
+queued rather than under way; the views say each one's rung and its price in CPU-hours
+where the record knows it (`unfinished_label`, `unfinished_sentence`, `priced_hours`).
 
 Provisional: the vocabulary, the rung at which a result is `confirmed`, and whether the
 two activities are marks beside the status or statuses of their own are the owner's to
@@ -248,6 +251,57 @@ def activity_label(activity: Mapping[str, Any] | None) -> str:
     return f"waiting on {str(activity.get('party', '')).replace('-', ' ')}"
 
 
+def hours(value: object, digits: int = 2) -> str:
+    """CPU-hours as a reader is told them, to `digits` places and no trailing zeros:
+    `4.3`, `11.24`, `118`."""
+    return f"{round(float(str(value)), digits):g}"
+
+
+def cost_phrase(cost: Mapping[str, Any] | None) -> str:
+    """An unfinished confirmation's estimated cost as a reader is told it: `about 4.3
+    CPU-hours (priced 2026-10-10)`, with the upper end where the record gives one, or
+    `not priced`."""
+    if not cost:
+        return "not priced"
+    high = cost.get("cpu_hours_high")
+    upper = f", up to about {hours(high)}" if high is not None else ""
+    return (
+        f"about {hours(cost.get('cpu_hours'))} CPU-hours{upper} (priced {cost.get('priced')})"
+    )
+
+
+def unfinished_label(item: Mapping[str, Any]) -> str:
+    """One unfinished confirmation in a table cell: its rung and its cost, `C3: about
+    4.3 CPU-hours (priced 2026-10-10)`."""
+    return f"{item.get('rung')}: {cost_phrase(item.get('estimated_cost'))}"
+
+
+def unfinished_sentence(item: Mapping[str, Any]) -> str:
+    """One unfinished confirmation as a reader is told it in prose: the rung it would
+    reach, the bead or record that owns it, what it is, and its cost, `C3 (think-r333): a
+    complete sqverify-fast census .... About 4.3 CPU-hours (priced 2026-10-10).`"""
+    link = f" ({item['link']})" if item.get("link") else ""
+    what = " ".join(str(item.get("what", "")).split())
+    cost = cost_phrase(item.get("estimated_cost"))
+    return f"{item.get('rung')}{link}: {what}. {cost[:1].upper()}{cost[1:]}."
+
+
+def priced_hours(items: Sequence[Mapping[str, Any]]) -> tuple[float, float, int]:
+    """The known CPU-hours of `items`: the central estimates summed, the upper ends
+    summed with each central estimate standing in where no upper end is given, and how
+    many items carry no price."""
+    central = high = 0.0
+    unpriced = 0
+    for item in items:
+        cost = item.get("estimated_cost")
+        if not cost:
+            unpriced += 1
+            continue
+        central += float(cost["cpu_hours"])
+        high += float(cost.get("cpu_hours_high", cost["cpu_hours"]))
+    return central, high, unpriced
+
+
 def status_line(
     record: Record, evidence: Evidence, position: Sequence[str] = (), how: str = ""
 ) -> str:
@@ -263,7 +317,10 @@ def status_line(
     return ", ".join(mark for mark in marks if mark)
 
 
-def _link_problem(link: str) -> str | None:
+def link_problem(link: str) -> str | None:
+    """Why a workflow fact's `link` names nothing the record can follow, or nothing: it
+    is a bead, a GitHub issue, pull request or branch, or a repository-relative path that
+    exists."""
     if _BEAD.fullmatch(link) or _GITHUB.fullmatch(link):
         return None
     pure = PurePosixPath(link)
@@ -299,7 +356,7 @@ def activity_problems(record: Mapping[str, Any], last_reviewed: str) -> list[str
         for key in ("what", "link")
         if not str(activity.get(key) or "").strip()
     )
-    if activity.get("link") and (problem := _link_problem(str(activity["link"]))):
+    if activity.get("link") and (problem := link_problem(str(activity["link"]))):
         problems.append(f"{rid}: activity.link {problem}: {activity['link']}")
     try:
         since = date.fromisoformat(str(activity.get("since")))

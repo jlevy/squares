@@ -80,6 +80,14 @@ $defs:
         description: >-
           What the issue is: a result to register, a defect in something the record
           holds, a correction of the record's text, or anything else.
+      intake:
+        const: true
+        description: >-
+          Set on an entry of another kind whose issue reports a new item for intake: a
+          result, a counterexample or a method, such as a defect report with a
+          counterexample. A `result-report` is one by its kind and does not take it.
+          `check_requests --github` lists each such issue, and each result report, whose
+          live labels lack `intake` (campaign/result-import.md, stage 0).
       triage:
         enum: [pending, done]
         description: >-
@@ -91,7 +99,8 @@ $defs:
         format: date-time
         description: >-
           The creation time of the latest comment read into this entry, or the issue's
-          own when it has none. `check_requests --github` lists later comments as unread.
+          own when it has none. `check_requests --github` lists later comments as unread,
+          and earlier ones edited after it.
       results:
         type: array
         items: {$ref: '#/$defs/result'}
@@ -136,6 +145,11 @@ $defs:
           required: [closed]
         else:
           not: {required: [closed]}
+      - if:
+          properties: {kind: {const: result-report}}
+          required: [kind]
+        then:
+          not: {required: [intake]}
   result:
     type: object
     additionalProperties: false

@@ -7,8 +7,8 @@ tools without promoting unverified claims.
 
 Parent bead: **think-8cps**. The
 [mathematical intake review](../../reviews/review-2026-09-29-wand125-tools-mathematics.md)
-owns source findings; the [tooling overview](../../verification-tooling.md) owns the
-inventory of available checks and gaps.
+owns source findings; the [tooling overview](../../guides/verification-tooling.md) owns
+the inventory of available checks and gaps.
 
 ## Blocks and Ownership
 

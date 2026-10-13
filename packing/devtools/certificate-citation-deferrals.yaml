@@ -1,0 +1,11 @@
+# Verified certificates a register entry cites that no case record cites yet, each by a
+# recorded decision to defer the case records' adoption of it.
+#
+# `devtools.check_certificate_citations` fails such an orphan unless it is listed here.
+# Each entry names the evidence, the register entries that cite it, the open bead that
+# owns the adoption, what the adoption waits on (`blocked_on`, a pull request, an issue or
+# a bead), the day it was recorded and why. An entry fails as soon as a case record cites
+# its evidence (remove it in that change), a named entry stops citing it, or it is more
+# than 30 days older than the evidence register's `last_reviewed`, so the list cannot
+# outlive what it defers.
+deferrals: []

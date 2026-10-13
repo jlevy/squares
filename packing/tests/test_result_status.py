@@ -274,19 +274,22 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # lanes there from T-099 and T-100, the one count each held; forty-nine when wand125's
     # mixed certificate of 3 October for n = 52 (T-082), decided here by sqverify-fast,
     # took the last count T-070 held; fifty when T-117's exact rational refinements
-    # took n = 105 and 292, the last verified ceilings T-056 held.
+    # took n = 105 and 292, the last verified ceilings T-056 held; fifty-four when
+    # Guzhou0806's continuous-pose kernel (T-145) took both of n = 40's lower-bound lanes
+    # from his clipped-corner transfer (T-133) on the same density.
     # T-120..T-123 report exact side forms for historical source configurations; no
     # current frontier lane relies on these unverified catalogue assertions. Each claim
     # states its side cut where its root interval's ends agree. T-120's lies above the
     # ceiling T-125 holds at n = 102, so it is superseded; T-121..T-123's lie below the
     # outward-rounded rationals of the same configurations that T-098 holds, by about
-    # 1e-19, so they are pending adoption and not superseded (think-h0d1).
+    # 1e-19, so they are pending adoption and not superseded (think-h0d1). Since the house
+    # adoption of 11 October 2026 the ceiling at n = 102 is T-146's.
     assert "T-120" in derived
     for entry in ("T-121", "T-122", "T-123"):
         assert entry not in marked
         assert view.standing(records.results[entry], records) == view.PENDING_ADOPTION
     assert view.position_marks(records.results["T-120"], view.SUPERSEDED, records) == [
-        "superseded by T-125"
+        "superseded by T-146"
     ]
     # Gupta's confirmed fourteen-case refinement supersedes T-114's final ceiling.
     expected = {
@@ -340,20 +343,31 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-096",
         "T-099",
         "T-100",
+        "T-113",
         "T-114",
+        "T-115",
+        "T-116",
+        "T-117",
         "T-120",
+        "T-125",
         "T-129",
+        "T-131",
+        "T-133",
+        "T-135",
+        "T-137",
+        "T-138",
     }
-    # Couzo's eight-case source report of 8 October (T-128) holds no case lane either,
-    # but every side it states is below the ceiling its case holds: nothing has replaced
-    # it, so it is pending adoption and carries no mark (think-h0d1).
-    assert "T-128" not in marked
-    assert view.standing(records.results["T-128"], records) == view.PENDING_ADOPTION
-    # Couzo's 2d32a6e five-case follow-up (T-130) likewise holds no case lane, and each
-    # side it states is below its case's ceiling: it is pending adoption, unmarked
-    # (think-88r0).
-    assert "T-130" not in marked
-    assert view.standing(records.results["T-130"], records) == view.PENDING_ADOPTION
+    # The house adoption of 11 October 2026 moved 42 case records to the smallest
+    # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
+    # (T-113, T-115, T-116), the Rehwaldt refinements (T-117) and Ryan Xu's rational
+    # certificates (T-125) lost their last houses, and four confirmed reports smaller than
+    # their cases were never adopted, since a smaller one was (T-131, T-135, T-137, T-138).
+    # Couzo's eight-case report of 8 October (T-128) and five-case follow-up (T-130),
+    # pending adoption until then, hold case lanes at five counts and three, and are
+    # unmarked.
+    for entry in ("T-128", "T-130"):
+        assert entry not in marked
+        assert view.standing(records.results[entry], records) == view.HOLDS
     assert set(derived) == expected
     assert len(derived) == len(expected)
     assert {
@@ -389,12 +403,13 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "superseded by T-093, T-102 and T-103"
     ]
     # Only a bound supersedes: at n = 13 and 46 a correction and an audit carry the
-    # lower bound's evidence beside the optimality results that hold it.
+    # lower bound's evidence beside the optimality results that hold it, at n = 46 since
+    # 2026-10-11 T-064's replays of Daniel's s(k^2 - 3) = k family with T-008.
     for n, other in ((13, "T-005"), (46, "T-004")):
         assert other in view.held(n, records).lower_holders
         assert records.results[other]["kind"] not in check_results.BOUND_KINDS
     lower = {"id": "T-999", "kind": "lower-bound", "scope": {"n_values": [13, 46]}}
-    assert view.superseding(lower, records) == ("T-006", "T-008")
+    assert view.superseding(lower, records) == ("T-006", "T-008", "T-064")
     # An exact value is superseded by a proof, never by a construction: Trump's packing,
     # T-011, holds n = 11's upper bound and supersedes no proof of s(11).
     assert view.held(11, records).upper_holders == {"T-011"}
@@ -446,9 +461,16 @@ def test_a_superseding_report_is_named_as_one() -> None:
 
 
 def stating(records: Any, sides: dict[int, str], **changes: Any) -> Record:
-    """T-128, a source-only report at C0, stating `sides` as its claim and cut to them."""
+    """A source-only report at C0 whose evidence no case bound cites, T-129's dated n = 105
+    report, stating `sides` as its claim and cut to them."""
     claim = ", ".join(f"s({n}) <= {side}" for n, side in sides.items())
-    entry = {**records.results["T-128"], "claim": f"Reported {claim}."}
+    entry = {
+        **records.results["T-129"],
+        "verification": "V0",
+        "confirmation": "C0",
+        "evidence": ["E-daniel-375-dated-105-130-report"],
+        "claim": f"Reported {claim}.",
+    }
     return {**entry, "scope": {"n_values": list(sides)}, **changes}
 
 
@@ -457,58 +479,81 @@ def test_a_bound_better_than_its_cases_hold_is_pending_adoption_not_superseded()
     cases hold one at least as good as each it states, and named by the results that hold
     them; where one it states is strictly better, nothing has replaced it, and it is
     pending adoption, with no mark. Until 9 October T-128, eight sides below every ceiling
-    its cases hold, read "superseded by T-098, T-115, T-125 and T-127" (think-h0d1)."""
+    its cases held, read "superseded by T-098, T-115, T-125 and T-127" (think-h0d1); it was
+    pending adoption from then until the house adoption of 11 October 2026 took five of its
+    sides into the case records (think-fvz4). T-122, a report of n = 152's exact side cut
+    below the outward-rounded rational T-098 holds there, is pending adoption still."""
     view = render_recent_results
     records = view.load_records()
     evidence = records.register.evidence
-    entry = records.results["T-128"]
+    entry = records.results["T-122"]
     assert view.standing(entry, records) == view.PENDING_ADOPTION
     assert not view.superseded(entry, view.PENDING_ADOPTION)
     assert view.position_marks(entry, view.PENDING_ADOPTION, records) == []
-    assert status_line(entry, evidence) == RECORDED
     row = next(
-        row for row in render_results.render().splitlines() if row.startswith("| T-128 ")
+        row for row in render_results.render().splitlines() if row.startswith("| T-122 ")
     )
-    assert f"| {RECORDED} |" in row
+    assert f"| {status_line(entry, evidence)} |" in row
     assert "superseded" not in row
-    assert [finding.n for finding in check_standing.improvements(entry, records)] == [
-        105, 108, 127, 131, 155, 180, 228, 306,
-    ]  # fmt: skip
-    # A dated report above the ceilings its cases hold is superseded, by their holder:
+    # No live entry has been both confirmed and pending adoption since the house adoption
+    # of 11 October 2026. One raised to C3 by an independently re-implemented replay, as
+    # T-128 was by its review of 10 October, renders as T-128 did, with no mark.
+    confirmed = {
+        **entry,
+        "verification": "V3",
+        "confirmation": "C3",
+        "evidence": [*entry["evidence"], "E-couzo-451-exact-feasibility"],
+    }
+    held = view.standing(confirmed, records)
+    assert held == view.PENDING_ADOPTION
+    cell = status_line(
+        confirmed,
+        evidence,
+        view.position_marks(confirmed, held, records),
+        how=render_results.confirmed_how(confirmed, evidence),
+    )
+    assert cell == f"{CONFIRMED}, independently re-implemented"
+    assert [finding.n for finding in check_standing.improvements(entry, records)] == [152]
+    adopted = records.results["T-128"]
+    assert view.standing(adopted, records) == view.HOLDS
+    assert status_line(adopted, evidence) == CONFIRMED
+    # A dated report above the ceilings its cases hold is superseded, by their holders:
     # the earlier n = 105 source ceiling, and n = 108's one unit of the last place up.
     worse = stating(
         records,
-        {105: "10.80607786551970463257490535044771520398745274", 108: "10.9048247851109050"},
+        {105: "10.80607786551970463257490535044771520398745274", 108: "10.9048210123203566"},
     )
     assert view.standing(worse, records) == view.SUPERSEDED
-    assert view.position_marks(worse, view.SUPERSEDED, records) == ["superseded by T-125"]
-    # A tie is no improvement: the case holds that value under T-125's citation.
-    tie = stating(records, {105: "10.7906765754107907"})
+    assert view.position_marks(worse, view.SUPERSEDED, records) == [
+        "superseded by T-128 and T-130"
+    ]
+    # A tie is no improvement: the case holds that value under T-130's citation.
+    tie = stating(records, {105: "10.7893037837481589"})
     assert view.standing(tie, records) == view.SUPERSEDED
     # Better at one count and beaten at another: pending adoption as a whole, as a result
     # that holds one case of several stands; superseded on the beaten case alone.
-    mixed = stating(records, {105: "10.790618268107144505815379335866", 108: "10.95"})
+    mixed = stating(records, {105: "10.789303783748158831034729697920", 108: "10.95"})
     assert view.standing(mixed, records) == view.PENDING_ADOPTION
     assert view.position_marks(mixed, view.PENDING_ADOPTION, records) == []
     alone = {**mixed, "scope": {"n_values": [108]}}
     assert view.standing(alone, records) == view.SUPERSEDED
-    assert view.position_marks(alone, view.SUPERSEDED, records) == ["superseded by T-125"]
+    assert view.position_marks(alone, view.SUPERSEDED, records) == ["superseded by T-128"]
     assert view.standing({**mixed, "scope": {"n_values": [105]}}, records) == (
         view.PENDING_ADOPTION
     )
     # A result a case bound rests on holds it, whatever its words state.
-    held = records.results["T-125"]
+    held = records.results["T-130"]
     assert view.standing(held, records) == view.HOLDS
     assert view.standing({**held, "claim": "Reported s(105) <= 10.79."}, records) == view.HOLDS
     # Two lanes are never mixed: a report can hold only the reported lane, so a reported
     # ceiling below its side replaces it there, while a replayed result improves on the
     # verified ceiling it is below.
     case = records.cases[105]
-    lower = {**case["reported_upper_bound"], "value": "10.79", "exact_form": "1079/100"}
+    lower = {**case["reported_upper_bound"], "value": "10.789", "exact_form": "10789/1000"}
     split = dataclasses.replace(
         records, cases={**records.cases, 105: {**case, "reported_upper_bound": lower}}
     )
-    report = stating(records, {105: "10.790618268107144505815379335866"})
+    report = stating(records, {105: "10.7893"})
     assert view.standing(report, split) == view.SUPERSEDED
     assert view.standing({**report, "confirmation": "C3"}, split) == view.PENDING_ADOPTION
 
@@ -588,27 +633,27 @@ def test_a_superseded_bound_names_only_the_lanes_that_replaced_it() -> None:
     """A report can hold only the reported lane, so where a reported ceiling below its side
     replaces it, it is superseded by that lane's holder alone, and not by the holder of a
     verified ceiling it is still below. Held on n = 105 with its reported ceiling put at
-    10.79 under T-117's report and its verified one left with T-125 (think-h0d1)."""
+    10.789 under T-117's report and its verified one left with T-130 (think-h0d1)."""
     view = render_recent_results
     records = view.load_records()
     case = records.cases[105]
     lane = case["reported_upper_bound"]
     lower = {
         **lane,
-        "value": "10.79",
-        "exact_form": "1079/100",
+        "value": "10.789",
+        "exact_form": "10789/1000",
         "evidence": ["E-rehwaldt-couzo-refinements-2026-10-07-report"],
     }
     split = dataclasses.replace(
         records, cases={**records.cases, 105: {**case, "reported_upper_bound": lower}}
     )
-    report = stating(records, {105: "10.790618268107144505815379335866"})
+    report = stating(records, {105: "10.7893"})
     assert view.standing(report, split) == view.SUPERSEDED
     assert view.lane_holders(105, split, "upper", ["verified", "reported"]) == {
         "T-117",
-        "T-125",
+        "T-130",
     }
     assert view.superseding(report, split) == ("T-117",)
     # A bound whose words state nothing at the case is named by both lanes' holders.
     silent = {**report, "claim": "Reported an improvement at n = 105."}
-    assert view.superseding(silent, split) == ("T-117", "T-125")
+    assert view.superseding(silent, split) == ("T-117", "T-130")
