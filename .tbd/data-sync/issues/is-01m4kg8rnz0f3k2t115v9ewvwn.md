@@ -5,7 +5,7 @@ title: Populate key contributor profiles and reconcile the complete credit censu
 kind: feature
 status: in_progress
 priority: 2
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: codex@spud10
 labels: []
@@ -20,7 +20,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T18:12:41.260Z
-updated_at: 2026-10-10T22:26:21.129Z
+updated_at: 2026-10-13T08:00:21.809Z
 started_at: 2026-10-10T21:34:22.411Z
 ---
 Phase 1: reusable inventory of every result/archive/PDF/site credit occurrence, explicit identity review and disjoint subagent profile batches, reviewed bios/handles with provenance. Account for every occurrence; retain unresolved identities and non-person credits explicitly.
+
+## Notes
+
+PR #571 (owner comment https://github.com/jlevy/squares/pull/571#issuecomment-6139628718 items 3-4): after stack #560/#571/#577 lands, #578 merges main and runs devtools.contributor_census --reconcile to join the new Overbeck credit labels to packing/contributors/marc-leonard-overbeck.md, which links https://github.com/Kleddamag and https://x.com/kleddamag.
