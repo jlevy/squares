@@ -348,12 +348,19 @@ VERIFIER_TABLE = re.compile(
 #: prose no tool writes in a fixed form (`adopt_houses.historical`): the SQUISH update
 #: sections and the grid prose. Their owned parts are still compared.
 HAND_MARKED = frozenset({155, 258, 263, 302, 308})
+#: Record-wide edits made after a pass, which its replay cannot know: on 13 October 2026
+#: every credit to wand125 became Hosono, Hiroaki Hosono at a record's first mention
+#: (`attribution.md`, Hiroaki Hosono / wand125). Both sides are read in the compact credit.
+LATER_RENAMES = (("wand125’s", "Hosono’s"), ("Hiroaki Hosono", "Hosono"))
 
 
 def _body(text: str) -> str:
     """A record's body as the writer is answerable for it: flowmark's wrapping and escapes
-    undone and the verifier table left out."""
-    return _flat(VERIFIER_TABLE.sub("", text.split("---\n", 2)[2]).replace("\\+", "+"))
+    undone, the verifier table left out, and the later renames read alike."""
+    body = _flat(VERIFIER_TABLE.sub("", text.split("---\n", 2)[2]).replace("\\+", "+"))
+    for old, new in LATER_RENAMES:
+        body = body.replace(old, new)
+    return body
 
 
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
