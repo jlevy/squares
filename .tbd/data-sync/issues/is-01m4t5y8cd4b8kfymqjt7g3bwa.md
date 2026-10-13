@@ -5,15 +5,15 @@ title: "PR #549 A4: record every row-3 output's side so select's minimality is c
 kind: bug
 status: open
 priority: 2
-version: 4
+version: 5
 delegate: claude-code@vm
 labels: []
 dependencies: []
-parent_id: is-01m4t5xyswh7ea30knxw766epz
+parent_id: is-01m4mdbqsgkdz008e42ffjx4ej
 hold: null
 hold_until: null
 created_at: 2026-10-13T08:26:52.172Z
-updated_at: 2026-10-13T08:55:07.706Z
+updated_at: 2026-10-13T09:07:15.373Z
 started_at: 2026-10-13T08:54:58.859Z
 ---
 Low suggestion. selection.json. Review A https://github.com/jlevy/squares/pull/549#pullrequestreview-5500738911.

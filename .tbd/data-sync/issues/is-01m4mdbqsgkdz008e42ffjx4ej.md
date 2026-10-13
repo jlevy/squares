@@ -5,7 +5,7 @@ title: "Atlas: adopt the register's regularizations definition for the project's
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - regularization
@@ -13,10 +13,12 @@ dependencies:
   - type: blocks
     target: is-01m4mdbq6bhkv71fxeeckawsbt
 parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
+child_order_hints:
+  - is-01m4t5y8cd4b8kfymqjt7g3bwa
 hold: null
 hold_until: null
 created_at: 2026-10-11T02:41:07.376Z
-updated_at: 2026-10-12T11:32:17.338Z
+updated_at: 2026-10-13T09:07:15.382Z
 started_at: 2026-10-12T11:32:11.446Z
 ---
 Epic think-cdud. The project's own regularization layer (packing/atlas/known-best/regularized/index.json, contract packing.squares:RegularizedAtlasIndex/v1 with no softschema block; devtools/regularize_axis_components.py, algorithm regularize_axis_components/2; the view witnesses' open certificate.regularization and derived_from blocks) records provenance that no schema validates and no person or credit. Give index.json (and the view witnesses' regularization block) a softschema contract whose per-view provenance uses the same terms as the register's regularizations field (of/derived_from, by = project, method, side, changes, identity), and hold it in validate_schemas. Fold into the stacked regularization PR if that PR replaces the layer.
