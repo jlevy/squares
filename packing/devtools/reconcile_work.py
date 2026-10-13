@@ -44,6 +44,31 @@ CLOSE_RESOLUTIONS = frozenset({"canceled", "completed", "duplicate"})
 # costs a reviewer several beads' worth of time when lanes are balanced.
 SPEC_REVIEW_WEIGHT = 5
 STATUS_SCAN_LINES = 40
+# Words too common in bead titles to say two beads share a subject.
+TITLE_STOPWORDS = frozenset(
+    [
+        "a",
+        "an",
+        "and",
+        "as",
+        "at",
+        "by",
+        "for",
+        "from",
+        "in",
+        "into",
+        "is",
+        "it",
+        "its",
+        "of",
+        "on",
+        "or",
+        "the",
+        "to",
+        "with",
+    ]
+)
+DUPLICATE_THRESHOLD = 0.6
 # A commit-shaped token with at least one hex letter; all-digit runs are comment and run ids.
 COMMIT_TOKEN = re.compile(r"\b(?=[0-9a-f]*[a-f])[0-9a-f]{7,40}\b")
 STATUS_LINE = re.compile(r"\bstatus\b\W{0,4}:\W{0,4}\s*(.+)", re.IGNORECASE)
@@ -339,6 +364,52 @@ def verify_applied(
     return {"checked": checked, "not_in_snapshot": unverifiable, "problems": problems}
 
 
+def title_tokens(title: str) -> frozenset[str]:
+    return frozenset(
+        word
+        for word in re.findall(r"[a-z0-9]+", title.lower())
+        if len(word) > 1 and word not in TITLE_STOPWORDS
+    )
+
+
+def duplicate_candidates(
+    beads: list[dict[str, Any]], threshold: float = DUPLICATE_THRESHOLD
+) -> list[dict[str, Any]]:
+    """Pairs of beads whose titles share most of their words, at least one not closed.
+
+    A closed partner matters as much as an open one: an open bead that repeats finished
+    work is a duplicate of it. The score is the Jaccard index of the title words; a pair
+    is a question for a reviewer, never a verdict.
+    """
+    tokens = {str(b["id"]): title_tokens(str(b.get("title", ""))) for b in beads}
+    by_id = {str(b["id"]): b for b in beads}
+    index: dict[str, set[str]] = {}
+    for bead_id, words in tokens.items():
+        for word in words:
+            index.setdefault(word, set()).add(bead_id)
+    pairs: dict[tuple[str, str], float] = {}
+    for bead_id, words in tokens.items():
+        if by_id[bead_id].get("status") == "closed" or not words:
+            continue
+        for other in set().union(*(index[word] for word in words)) - {bead_id}:
+            key = (min(bead_id, other), max(bead_id, other))
+            if key in pairs or not tokens[other]:
+                continue
+            score = len(words & tokens[other]) / len(words | tokens[other])
+            if score >= threshold:
+                pairs[key] = score
+    return [
+        {
+            "ids": list(key),
+            "score": round(score, 3),
+            "statuses": [by_id[key[0]].get("status"), by_id[key[1]].get("status")],
+            "same_parent": by_id[key[0]].get("parentId") == by_id[key[1]].get("parentId"),
+            "titles": [by_id[key[0]].get("title"), by_id[key[1]].get("title")],
+        }
+        for key, score in sorted(pairs.items(), key=lambda item: (-item[1], item[0]))
+    ]
+
+
 def cited_commits(
     reviews: list[dict[str, Any]], repo: Path, base: str = "origin/main"
 ) -> dict[str, Any]:
@@ -400,6 +471,14 @@ def main() -> None:
         "--baseline", action="store_true", help="emit only the frozen review scope"
     )
     output.add_argument(
+        "--duplicates",
+        type=float,
+        nargs="?",
+        const=DUPLICATE_THRESHOLD,
+        metavar="THRESHOLD",
+        help="list bead pairs whose titles share most of their words",
+    )
+    output.add_argument(
         "--check-commits",
         type=Path,
         nargs="+",
@@ -429,11 +508,17 @@ def main() -> None:
         or args.split
         or args.prior
         or args.verify
+        or args.duplicates is not None
     ):
         parser.error(
-            "--lane, --path-repairs, --baseline, --split, --prior, and --verify "
+            "--lane, --path-repairs, --baseline, --split, --prior, --verify, and "
+            "--duplicates "
             "require a full tbd list snapshot"
         )
+    if args.duplicates is not None:
+        found = duplicate_candidates(snapshot, args.duplicates)
+        print(json.dumps({"threshold": args.duplicates, "pairs": found}, indent=2))
+        return
     if args.verify:
         verified = verify_applied(
             snapshot,

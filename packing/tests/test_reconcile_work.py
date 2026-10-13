@@ -10,6 +10,7 @@ import pytest
 from devtools.reconcile_work import (
     annotate_prior,
     cited_commits,
+    duplicate_candidates,
     inventory,
     main,
     review_coverage,
@@ -485,6 +486,39 @@ def test_cited_commits_must_be_on_the_base(tmp_path: Path) -> None:
     assert result["unresolved"] == ["think-c111: deadbeefcafe"]
 
 
+def test_duplicate_candidates_pair_open_beads_with_open_or_finished_twins() -> None:
+    beads = [
+        {
+            "id": "think-a111",
+            "status": "open",
+            "title": "Fix the atlas legend swatch alignment",
+        },
+        {
+            "id": "think-b111",
+            "status": "in_progress",
+            "title": "Atlas legend swatch alignment fix",
+        },
+        {
+            "id": "think-c111",
+            "status": "closed",
+            "title": "Fix the atlas legend swatch alignment",
+        },
+        {"id": "think-d111", "status": "closed", "title": "Atlas legend swatch alignment"},
+        {"id": "think-e111", "status": "open", "title": "Measure the verifier cohort"},
+    ]
+    pairs = duplicate_candidates(beads)
+    assert [pair["ids"] for pair in pairs] == [
+        ["think-a111", "think-b111"],
+        ["think-a111", "think-c111"],
+        ["think-b111", "think-c111"],
+        ["think-a111", "think-d111"],
+        ["think-b111", "think-d111"],
+    ]
+    assert pairs[0]["score"] == 1.0
+    assert all("think-e111" not in pair["ids"] for pair in pairs)
+    assert duplicate_candidates(beads, threshold=0.9)[-1]["ids"] == ["think-b111", "think-c111"]
+
+
 @pytest.mark.parametrize(
     "option",
     [
@@ -493,6 +527,7 @@ def test_cited_commits_must_be_on_the_base(tmp_path: Path) -> None:
         ("--baseline",),
         ("--split", "2"),
         ("--verify", "review.json"),
+        ("--duplicates",),
     ],
 )
 def test_cli_rejects_inventory_only_modes_for_retained_baseline(
