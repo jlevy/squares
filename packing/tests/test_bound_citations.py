@@ -903,13 +903,13 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # A parallel packing certified here: the finder's line, where the UnitSquare release
     # stood until then, confirmed by T-056 until 2026-10-05, when Evan Daniel's exact
     # optimum of the same packing took both lanes (T-098): the finder and the improver,
-    # with no year, since the year dates the find. Below it, wand125's rectangle bound of
+    # with no year, since the year dates the find. Below it, Hosono's rectangle bound of
     # 1 October replayed as T-074, which took the case on 2026-10-02 from its 28 September
     # certificate (T-070), itself raised that day from the point bound of T-044.
     68: (
         ("Couzo & Rehwaldt, GitHub (confirmed T-118)", "external", "verified"),
         (
-            "wand125 after Tokoharu, Levy et al. 2026, GitHub (confirmed T-074)",
+            "Hosono after Tokoharu, Levy et al. 2026, GitHub (confirmed T-074)",
             "external",
             "verified",
         ),
@@ -925,7 +925,7 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     101: (
         ("Friedman & Ellsworth, Squares in Squares (reported)", "external", "reported"),
         (
-            "wand125 after Tokoharu, Levy et al. 2026, GitHub (confirmed T-080)",
+            "Hosono after Tokoharu, Levy et al. 2026, GitHub (confirmed T-080)",
             "external",
             "verified",
         ),
@@ -977,13 +977,13 @@ def test_the_recorded_register_gives_these_lines(n: int) -> None:
     [
         (11, "Ahmed after Levy, Kleddamag", "GitHub", "T-060"),
         (17, "Guzhou0806 after Kleddamag et al.", "GitHub", "T-093"),
-        # Tokoharu's T-047 held n = 26 and 29 until 2026-10-02, when wand125's merged
+        # Tokoharu's T-047 held n = 26 and 29 until 2026-10-02, when Hosono's merged
         # rectangle replays raised both, n = 26 under T-045 and n = 29 under T-070, and
         # the replays of its 1 October certificates raised both again later that day
         # (T-074); its mixed certificates of 6 October on declared nets, decided by
         # sqverify-fast, raised both again (T-105, T-108).
-        (26, "wand125 after Tokoharu, Levy et al.", "GitHub", "T-105"),
-        (29, "wand125 after Tokoharu, Levy et al.", "GitHub", "T-108"),
+        (26, "Hosono after Tokoharu, Levy et al.", "GitHub", "T-105"),
+        (29, "Hosono after Tokoharu, Levy et al.", "GitHub", "T-108"),
     ],
 )
 def test_promoted_external_bounds_keep_the_sources_credit(
@@ -1059,7 +1059,7 @@ RECORDED_LINKS: dict[tuple[int, str], tuple[list[str], list[str]]] = {
     (101, "lower"): (["T-080"], ["T-080"]),
     # This project's own bound, established rather than confirmed, was T-030's until
     # 2026-10-02 (`test_a_novel_first_party_bound_cites_this_project_and_its_result` keeps
-    # that shape); then wand125's rectangle bound, which T-045 replays, until 2026-10-05;
+    # that shape); then Hosono's rectangle bound, which T-045 replays, until 2026-10-05;
     # then its mixed bound on a declared net, which T-096 replays, until 2026-10-06; then
     # its bound on a finer declared net, which sqverify-fast decides (T-099), and later
     # that day its check2 bound on the finest net yet, decided the same way (T-102).
@@ -1239,7 +1239,7 @@ def test_the_star_marks_recent_results_whoever_proved_them() -> None:
     Kleddamag's 3.875, developed from T-026, preceded the exact T-060 proof. Credit
     is the line's business: joint work names this project after the author, other work
     names only its own lineage, and this project's sole work names the project. n = 18
-    was this project's (T-030) until 2026-10-02 and is wand125's rectangle bound since,
+    was this project's (T-030) until 2026-10-02 and is Hosono's rectangle bound since,
     starred all the same.
     """
     lines = {entry["n"]: entry["lower"] for entry in _record()["entries"]}
@@ -1250,7 +1250,7 @@ def test_the_star_marks_recent_results_whoever_proved_them() -> None:
     # this project's (T-079), which named the project; the credit names Levy for Route B.
     assert lines[12]["text"] == "squarepacker after Daniel, Levy 2026, GitHub"
     assert lines[18]["recent"]
-    assert lines[18]["text"] == "wand125 after Tokoharu, Levy et al. 2026, GitHub"
+    assert lines[18]["text"] == "Hosono after Tokoharu, Levy et al. 2026, GitHub"
     assert all(line["recent"] for line in lines.values() if line and line["basis"] == "project")
     assert not lines[6]["recent"]  # Kearney and Shiu 2002
 
@@ -1293,7 +1293,7 @@ def test_the_corrections_on_record_are_recent_and_name_nagamochi_2005() -> None:
     # of the same day, when replayed certificates and covers recorded in parallel
     # (T-048, T-062, T-064, T-066, T-067, T-069 to T-072, T-074 and T-075) took 40 of the
     # corrected floors, none of them correcting anything; 220 since the second merge that
-    # day, when wand125's replayed linear certificate (T-080) took n = 101 to 105; 219
+    # day, when Hosono's replayed linear certificate (T-080) took n = 101 to 105; 219
     # since the third, when its replayed n = 82 linear certificate (T-076) took n = 82.
     assert len(corrected) == 219
     assert 37 not in corrected
