@@ -24,6 +24,7 @@ from devtools.contributor_census import (
 from devtools.contributor_credit import render_credit
 from devtools.result_credit import credit_line, result_credit_html
 from sqpack.contributor_occurrences import (
+    SCHEMA_PATH,
     CreditOccurrence,
     CreditOrigin,
     OccurrenceError,
@@ -67,7 +68,8 @@ def test_live_manifest_and_literal_result_credits() -> None:
 @pytest.fixture
 def manifest(tmp_path: Path) -> tuple[Path, dict[str, Any]]:
     source = PACKING / "contributors/occurrences.yaml"
-    shutil.copyfile(source.with_suffix(".schema.yaml"), tmp_path / "occurrences.schema.yaml")
+    (tmp_path / "schemas").mkdir()
+    shutil.copyfile(source.parent / SCHEMA_PATH, tmp_path / SCHEMA_PATH)
     document = load_yaml(source.read_text())
     document["occurrences"] = [
         next(row for row in document["occurrences"] if row["disposition"] == "resolved")

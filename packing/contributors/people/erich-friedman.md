@@ -1,18 +1,18 @@
 ---
 softschema:
   contract: packing.squares:Contributor/v1
-  schema: contributor.schema.yaml
+  schema: ../schemas/contributor.schema.yaml
   envelope: contributor
   status: enforced
 contributor:
-  id: hiroshi-nagamochi
-  display_name: 'Hiroshi Nagamochi'
-  real_name: 'Hiroshi Nagamochi'
-  aliases: ['Nagamochi']
+  id: erich-friedman
+  display_name: 'Erich Friedman'
+  real_name: 'Erich Friedman'
+  aliases: ['Friedman']
   sources:
     - id: primary-byline
-      archive_path: packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md
-      locator: 'Paper title and Hiroshi Nagamochi byline in the opening lines.'
+      archive_path: packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
+      locator: 'Opening paper byline, Authors: Erich Friedman.'
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source author, credit and credited_names fields retain the printed attribution labels.'

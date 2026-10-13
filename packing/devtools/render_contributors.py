@@ -21,7 +21,9 @@ from markdown_it import MarkdownIt
 
 from devtools.render_overview import PACKING, REPO, Page, PageMeta, static_content_page
 from devtools.repo_links import repo_url
+from sqpack.contributor_occurrences import MANIFEST as OCCURRENCES_MANIFEST
 from sqpack.contributors import (
+    PEOPLE_DIR,
     PROFILES_DIR,
     Contributor,
     ContributorError,
@@ -35,9 +37,10 @@ from sqpack.yamlio import load_yaml
 if TYPE_CHECKING:
     from sqpack.contributor_occurrences import CreditOccurrence
 
-#: The profile records' directory under `packing/`, not a published address.
-CONTRIBUTORS_DIR = "contributors"
-CONTRIBUTORS = PACKING / CONTRIBUTORS_DIR
+#: The person records' directory under `packing/` (`sqpack.contributors.PEOPLE_DIR`), not
+#: a published address; the occurrence manifest and the schemas sit beside it.
+CONTRIBUTORS = PACKING / PEOPLE_DIR
+MANIFEST = PACKING / OCCURRENCES_MANIFEST
 DIRECTORY_PATH = f"{PROFILES_DIR}/index.html"
 _LINK_LABELS = {
     "github": "GitHub",
@@ -72,7 +75,7 @@ def evidence_paths() -> tuple[Path, ...]:
                 ):
                     raise ContributorError(f"invalid contributor archive path: {raw}")
                 paths.add(REPO / raw)
-    manifest = CONTRIBUTORS / "occurrences.yaml"
+    manifest = MANIFEST
     if manifest.is_file():
         from sqpack.contributor_occurrences import dependency_paths  # noqa: PLC0415
 
@@ -83,7 +86,7 @@ def evidence_paths() -> tuple[Path, ...]:
 def inputs() -> tuple[Path, ...]:
     return (
         Path(__file__).resolve(),
-        CONTRIBUTORS,
+        CONTRIBUTORS.parent,
         PACKING / "devtools/templates/site-contributor.css",
         *evidence_paths(),
     )

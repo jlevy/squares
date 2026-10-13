@@ -1,6 +1,6 @@
 softschema:
   contract: packing.squares:ContributorOccurrences/v1
-  schema: occurrences.schema.yaml
+  schema: schemas/occurrences.schema.yaml
   status: enforced
 occurrences:
 - origin:

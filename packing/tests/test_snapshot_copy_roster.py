@@ -9,7 +9,7 @@ import yaml
 
 from devtools import run_negative_controls as controls
 from sqpack.contributor_occurrences import dependency_paths
-from sqpack.contributors import load_contributors
+from sqpack.contributors import PEOPLE_DIR, SCHEMA_PATH, load_contributors
 from sqpack.yamlio import load_yaml
 from tests.test_negative_controls import index_fixture_source
 
@@ -76,7 +76,7 @@ def test_roster_is_rebuilt_after_new_input_declaration(
 
 
 def test_contributor_seed_evidence_survives_archive_pruning() -> None:
-    registry = load_contributors(controls.ROOT / "contributors", repo=controls.REPO)
+    registry = load_contributors(controls.ROOT / PEOPLE_DIR, repo=controls.REPO)
     declared = {
         (controls.REPO / source.archive_path).resolve()
         for contributor in registry.by_id.values()
@@ -104,12 +104,13 @@ def test_contributor_seed_evidence_survives_archive_pruning() -> None:
 def test_snapshot_copies_only_declared_contributor_evidence(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    original = controls.ROOT / "contributors"
+    original = controls.ROOT / PEOPLE_DIR
     repo = tmp_path / "source"
     root = repo / "packing"
     directory = root / "contributors"
-    directory.mkdir(parents=True)
-    shutil.copyfile(original / "contributor.schema.yaml", directory / "contributor.schema.yaml")
+    (directory / "people").mkdir(parents=True)
+    (directory / "schemas").mkdir()
+    shutil.copyfile(original / SCHEMA_PATH, directory / "people" / SCHEMA_PATH)
     archive = root / "resources"
     archive.mkdir()
     cited = archive / "CITATION.cff"
@@ -134,7 +135,7 @@ def test_snapshot_copies_only_declared_contributor_evidence(
     document["contributor"]["sources"][0]["archive_path"] = "packing/resources/CITATION.cff"
     header = yaml.dump(document, sort_keys=False)
     footer = (original / "mira.md").read_text().split("---\n")[2]
-    (directory / "mira.md").write_text(f"---\n{header}---\n{footer}")
+    (directory / "people" / "mira.md").write_text(f"---\n{header}---\n{footer}")
     register = root / "frontier/results.yaml"
     register.parent.mkdir()
     register.write_text("results: []\n")
@@ -157,7 +158,7 @@ def test_snapshot_copies_only_declared_contributor_evidence(
     assert (worker / inspected.relative_to(repo)).read_bytes() == inspected.read_bytes()
     assert not (worker / pending.relative_to(repo)).exists()
     assert (
-        load_contributors(worker / "packing/contributors", repo=worker).by_id["mira"].id
+        load_contributors(worker / "packing" / PEOPLE_DIR, repo=worker).by_id["mira"].id
         == "mira"
     )
     tree = subprocess.run(

@@ -1,18 +1,18 @@
 ---
 softschema:
   contract: packing.squares:Contributor/v1
-  schema: contributor.schema.yaml
+  schema: ../schemas/contributor.schema.yaml
   envelope: contributor
   status: enforced
 contributor:
-  id: erich-friedman
-  display_name: 'Erich Friedman'
-  real_name: 'Erich Friedman'
-  aliases: ['Friedman']
+  id: sam-burns
+  display_name: 'Sam Burns'
+  real_name: 'Sam Burns'
+  aliases: ['Burns']
   sources:
     - id: primary-byline
-      archive_path: packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
-      locator: 'Opening paper byline, Authors: Erich Friedman.'
+      archive_path: packing/resources/web/n17-lower-bounds-2026/burns-near-record-arrangement.html
+      locator: 'First-party title and meta author attribute name Sam Burns.'
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source author, credit and credited_names fields retain the printed attribution labels.'

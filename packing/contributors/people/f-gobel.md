@@ -1,25 +1,22 @@
 ---
 softschema:
   contract: packing.squares:Contributor/v1
-  schema: contributor.schema.yaml
+  schema: ../schemas/contributor.schema.yaml
   envelope: contributor
   status: enforced
 contributor:
-  id: wolfram-bentz
-  display_name: 'Wolfram Bentz'
-  real_name: 'Wolfram Bentz'
-  aliases: ['Bentz']
+  id: f-gobel
+  display_name: 'F. Göbel'
+  aliases: ['Göbel', 'Gobel']
   sources:
     - id: primary-byline
-      archive_path: packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md
-      locator: 'Opening paper byline, Authors: Wolfram Bentz.'
+      archive_path: packing/resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf
+      locator: 'Page 1 title and F. GOBEL byline; initial retained rather than expanding a name.'
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source author, credit and credited_names fields retain the printed attribution labels.'
   provenance:
     - field: /display_name
-      sources: [primary-byline]
-    - field: /real_name
       sources: [primary-byline]
     - field: /aliases
       sources: [primary-byline, bibliography]

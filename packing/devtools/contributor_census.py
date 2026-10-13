@@ -28,7 +28,8 @@ from strif import atomic_write_text
 
 from sqpack.contributor_occurrences import (
     CONTRACT,
-    SCHEMA_NAME,
+    MANIFEST,
+    SCHEMA_PATH,
     CreditOccurrence,
     CreditOrigin,
     OccurrenceError,
@@ -36,7 +37,7 @@ from sqpack.contributor_occurrences import (
     load_occurrences,
     source_text,
 )
-from sqpack.contributors import ContributorRegistry, load_contributors
+from sqpack.contributors import PEOPLE_DIR, ContributorRegistry, load_contributors
 from sqpack.project import require_project_root
 from sqpack.yamlio import load_yaml
 
@@ -199,7 +200,7 @@ def tracked_pdfs(repo: Path) -> tuple[str, ...]:
 def census(repo: Path, registry: OccurrenceRegistry | None = None) -> dict[str, Any]:
     """Distinguish reviewed spans, new source fields, candidate spellings and unread PDFs."""
     registry = registry if registry is not None else load_occurrences(repo=repo)
-    profiles = load_contributors(repo / "packing/contributors", repo=repo)
+    profiles = load_contributors(repo / "packing" / PEOPLE_DIR, repo=repo)
     candidates = structured_occurrences(repo)
     reviewed = {(item.origin, item.start, item.end): item for item in registry.occurrences}
     counts: Counter[str] = Counter()
@@ -246,7 +247,7 @@ def stale_occurrences(repo: Path, path: Path | None = None) -> list[dict[str, An
 
     The manifest loader refuses the first such span; this reads the manifest without
     validating it, so one run shows the whole review a source change needs."""
-    path = path if path is not None else repo / "packing/contributors/occurrences.yaml"
+    path = path if path is not None else repo / "packing" / MANIFEST
     documents: dict[str, Any] = {}
     stale = []
     for row in load_yaml(path.read_text(encoding="utf-8"))["occurrences"]:
@@ -361,7 +362,7 @@ def reconcile(repo: Path, path: Path | None = None) -> dict[str, Any]:
     place; spans of fields the manifest never held are added after the last span from
     the same file. A new span is joined by `_label_identities`, or else by
     `_spelling_identities` where no review declined its label."""
-    path = path if path is not None else repo / "packing/contributors/occurrences.yaml"
+    path = path if path is not None else repo / "packing" / MANIFEST
     document = load_yaml(path.read_text(encoding="utf-8"))
     rows: list[dict[str, Any]] = document["occurrences"]
     stale_origins = {CreditOrigin(**item["origin"]) for item in stale_occurrences(repo, path)}
@@ -369,7 +370,7 @@ def reconcile(repo: Path, path: Path | None = None) -> dict[str, Any]:
     joins = _label_identities(kept)
     declined = _declined_labels(kept)
     spellings = _spelling_identities(
-        load_contributors(repo / "packing/contributors", repo=repo)
+        load_contributors(repo / "packing" / PEOPLE_DIR, repo=repo)
     )
     reviewed = {(CreditOrigin(**row["origin"]), row["start"], row["end"]) for row in kept}
     fresh: dict[CreditOrigin, list[dict[str, Any]]] = {}
@@ -475,7 +476,7 @@ def main(argv: list[str] | None = None) -> int:
             row.pop("contributor_id")
             rows.append(row)
         draft = {
-            "softschema": {"contract": CONTRACT, "schema": SCHEMA_NAME, "status": "enforced"},
+            "softschema": {"contract": CONTRACT, "schema": SCHEMA_PATH, "status": "enforced"},
             "occurrences": rows,
             "inspections": [
                 {

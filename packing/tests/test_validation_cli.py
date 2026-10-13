@@ -4328,8 +4328,8 @@ SITE_LAYOUT_STEP = "site table layout in Chromium"
     "path",
     [
         "packing/contributors/occurrences.yaml",
-        "packing/contributors/occurrences.schema.yaml",
-        "packing/contributors/walter-stromquist.md",
+        "packing/contributors/schemas/occurrences.schema.yaml",
+        "packing/contributors/people/walter-stromquist.md",
         "LICENSE",
     ],
 )

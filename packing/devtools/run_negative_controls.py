@@ -100,7 +100,8 @@ from devtools import upper_bound_houses as adopted_houses
 from devtools import wand125_fn1_bindings as fn1
 from devtools.check_checkout_imports import environment_for
 from devtools.repo_scope import tracked_files
-from sqpack.contributors import load_contributors
+from sqpack.contributor_occurrences import MANIFEST as OCCURRENCES_MANIFEST
+from sqpack.contributors import PEOPLE_DIR, load_contributors
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
 
@@ -1563,7 +1564,7 @@ def result_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
 
 def contributor_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
     """Pruned archive files explicitly supporting contributor identity and bio claims."""
-    directory = ROOT / "contributors"
+    directory = ROOT / PEOPLE_DIR
     if not directory.is_dir():
         return []
     registry = load_contributors(directory, repo=REPO)
@@ -1575,7 +1576,7 @@ def contributor_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[P
                 path = (REPO / source.archive_path).resolve()
                 if in_pruned_roots(path, selected_roots):
                     targets.add(path)
-    manifest = directory / "occurrences.yaml"
+    manifest = ROOT / OCCURRENCES_MANIFEST
     if manifest.is_file():
         from sqpack.contributor_occurrences import dependency_paths  # noqa: PLC0415
 
@@ -1799,9 +1800,9 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
     contributor_documents = sorted(
         path
         for path in inventory
-        if path.parent == ROOT / "contributors" and path.suffix == ".md"
+        if path.parent == ROOT / PEOPLE_DIR and path.suffix == ".md"
     )
-    occurrence_manifest = ROOT / "contributors/occurrences.yaml"
+    occurrence_manifest = ROOT / OCCURRENCES_MANIFEST
     readers = [*documents, register, *contributor_documents]
     if occurrence_manifest in inventory:
         readers.append(occurrence_manifest)

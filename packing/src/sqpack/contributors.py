@@ -26,10 +26,16 @@ from sqpack.yamlio import load_yaml
 
 CONTRACT = "packing.squares:Contributor/v1"
 SCHEMA_NAME = "contributor.schema.yaml"
+#: The person records under the project root: one `<id>.md` each, in a directory of
+#: their own, so no other file's name can read as a person's. Their schema is in the
+#: sibling `schemas/`, the path each record declares (`SCHEMA_PATH`), and the reviewed
+#: credit joins are `contributors/occurrences.yaml` beside them.
+PEOPLE_DIR = "contributors/people"
+SCHEMA_PATH = f"../schemas/{SCHEMA_NAME}"
 #: Where the site serves the profile directory and each person's profile, by path under
 #: the site root. The directory lists cited paper authors beside the project's own
 #: contributors, so its address and wording say profile rather than contributor
-#: (think-0v2c); the records themselves stay under `packing/contributors/`.
+#: (think-0v2c); the records themselves stay under `packing/contributors/people/`.
 PROFILES_DIR = "profiles"
 _ID = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 FOOTER = (
@@ -38,7 +44,7 @@ FOOTER = (
 )
 _META = {
     "contract": CONTRACT,
-    "schema": SCHEMA_NAME,
+    "schema": SCHEMA_PATH,
     "envelope": "contributor",
     "status": "enforced",
 }
@@ -271,7 +277,7 @@ def load_contributor(path: Path, *, repo: Path | None = None) -> Contributor:
             "softschema metadata must bind the enforced Contributor/v1 contract"
         )
     payload = cast(dict[str, Any], document["contributor"])
-    errors = list(_validator(path.parent / SCHEMA_NAME).iter_errors(payload))
+    errors = list(_validator(path.parent / SCHEMA_PATH).iter_errors(payload))
     if errors:
         raise ContributorError("; ".join(str(error) for error in errors))
     if path.stem != payload["id"]:
@@ -297,7 +303,7 @@ def load_contributor(path: Path, *, repo: Path | None = None) -> Contributor:
 def record_ids(directory: Path | None = None) -> tuple[str, ...]:
     """Each record's id, from its filename alone, so routes can be declared without
     reading records or the archive evidence they cite."""
-    directory = directory if directory is not None else require_project_root() / "contributors"
+    directory = directory if directory is not None else require_project_root() / PEOPLE_DIR
     ids = tuple(path.stem for path in sorted(directory.glob("*.md")))
     if any(_ID.fullmatch(identifier) is None for identifier in ids):
         raise ContributorError("contributor filenames must be stable lowercase ids")
@@ -308,7 +314,7 @@ def record_names(directory: Path | None = None) -> dict[str, str]:
     """Each record's display name, by id, read from its frontmatter alone, so a page's
     head can be declared where the archive evidence the record cites is not checked out
     (a paper's partial build); `load_contributors` is what validates that evidence."""
-    directory = directory if directory is not None else require_project_root() / "contributors"
+    directory = directory if directory is not None else require_project_root() / PEOPLE_DIR
     names = {}
     for identifier in record_ids(directory):
         match = _FRONTMATTER.fullmatch((directory / f"{identifier}.md").read_text("utf-8"))
@@ -324,7 +330,7 @@ def load_contributors(
     directory: Path | None = None, *, repo: Path | None = None
 ) -> ContributorRegistry:
     """Load records deterministically; ids are unique and names are candidate keys."""
-    directory = directory if directory is not None else require_project_root() / "contributors"
+    directory = directory if directory is not None else require_project_root() / PEOPLE_DIR
     records: dict[str, Contributor] = {}
     names: dict[str, list[Contributor]] = {}
     for path in sorted(directory.glob("*.md")):

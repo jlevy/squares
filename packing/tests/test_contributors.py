@@ -14,7 +14,8 @@ import yaml
 from devtools import validate_schemas
 from sqpack.contributors import (
     FOOTER,
-    SCHEMA_NAME,
+    PEOPLE_DIR,
+    SCHEMA_PATH,
     ContributorError,
     load_contributor,
     load_contributors,
@@ -24,14 +25,16 @@ from sqpack.yamlio import load_yaml
 
 PACKING = require_project_root()
 REPO = PACKING.parent
-RECORDS = PACKING / "contributors"
+RECORDS = PACKING / PEOPLE_DIR
 
 
 @pytest.fixture
 def record(tmp_path: Path) -> tuple[Path, dict[str, Any]]:
-    shutil.copyfile(RECORDS / SCHEMA_NAME, tmp_path / SCHEMA_NAME)
+    (tmp_path / "people").mkdir()
+    (tmp_path / "schemas").mkdir()
+    shutil.copyfile(RECORDS / SCHEMA_PATH, tmp_path / "people" / SCHEMA_PATH)
     document = load_yaml((RECORDS / "mira.md").read_text().split("---\n")[1])
-    return tmp_path / "mira.md", document
+    return tmp_path / "people" / "mira.md", document
 
 
 def write_record(path: Path, document: dict[str, Any], body: str = "") -> None:
@@ -258,7 +261,7 @@ def test_archive_symlink_cannot_escape_repository(record: tuple[Path, dict[str, 
     path, document = record
     repository = path.parent / "repo"
     repository.mkdir()
-    (repository / "escape.md").symlink_to(path.parent / SCHEMA_NAME)
+    (repository / "escape.md").symlink_to(path.parent / SCHEMA_PATH)
     document["contributor"]["sources"][0]["archive_path"] = "escape.md"
     write_record(path, document)
     with pytest.raises(ContributorError, match="archive_path"):

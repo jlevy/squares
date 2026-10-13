@@ -12,12 +12,17 @@ from typing import Any, cast
 
 from jsonschema_rs import Draft202012Validator
 
-from sqpack.contributors import ContributorRegistry, load_contributors
+from sqpack.contributors import PEOPLE_DIR, ContributorRegistry, load_contributors
 from sqpack.project import require_project_root
 from sqpack.yamlio import load_yaml
 
 CONTRACT = "packing.squares:ContributorOccurrences/v1"
 SCHEMA_NAME = "occurrences.schema.yaml"
+#: The manifest's schema, as the manifest declares it: in `schemas/` beside it, with the
+#: person records' (`sqpack.contributors.SCHEMA_PATH`).
+SCHEMA_PATH = f"schemas/{SCHEMA_NAME}"
+#: The manifest, under the project root, beside the `people/` records it joins.
+MANIFEST = "contributors/occurrences.yaml"
 _FRONTMATTER = re.compile(r"\A---\n(.*?)\n---(?:\n|\Z)", re.DOTALL)
 
 
@@ -157,11 +162,11 @@ def load_occurrences(
 ) -> OccurrenceRegistry:
     """Validate every retained join, including unresolved and non-person dispositions."""
     repo = repo if repo is not None else require_project_root().parent
-    path = path if path is not None else repo / "packing/contributors/occurrences.yaml"
+    path = path if path is not None else repo / "packing" / MANIFEST
     document = load_yaml(path.read_text(encoding="utf-8"))
     if not isinstance(document, dict) or document.get("softschema") != {
         "contract": CONTRACT,
-        "schema": SCHEMA_NAME,
+        "schema": SCHEMA_PATH,
         "status": "enforced",
     }:
         raise OccurrenceError(
@@ -169,7 +174,7 @@ def load_occurrences(
         )
     payload = {key: value for key, value in document.items() if key != "softschema"}
     errors = list(
-        Draft202012Validator(load_yaml((path.parent / SCHEMA_NAME).read_text())).iter_errors(
+        Draft202012Validator(load_yaml((path.parent / SCHEMA_PATH).read_text())).iter_errors(
             payload
         )
     )
@@ -178,7 +183,7 @@ def load_occurrences(
     profiles = (
         profiles
         if profiles is not None
-        else load_contributors(repo / "packing/contributors", repo=repo)
+        else load_contributors(repo / "packing" / PEOPLE_DIR, repo=repo)
     )
     documents: dict[str, Any] = {}
     by_origin: dict[CreditOrigin, list[CreditOccurrence]] = {}

@@ -1,18 +1,18 @@
 ---
 softschema:
   contract: packing.squares:Contributor/v1
-  schema: contributor.schema.yaml
+  schema: ../schemas/contributor.schema.yaml
   envelope: contributor
   status: enforced
 contributor:
-  id: gustavo-massaccesi
-  display_name: 'Gustavo Massaccesi'
-  real_name: 'Gustavo Massaccesi'
-  aliases: ['Massaccesi']
+  id: walter-trump
+  display_name: 'Walter Trump'
+  real_name: 'Walter Trump'
+  aliases: ['Trump']
   sources:
     - id: primary-byline
-      archive_path: packing/resources/web/n17-lower-bounds-2026/massaccesi-lower-bound-4_5058.html
-      locator: 'The retained first-party verifier credits Modified by Gustavo Massaccesi 2026.'
+      archive_path: packing/resources/papers/trump-2023-packing-11-unit-squares.raw.md
+      locator: 'Opening byline: Walter Trump, 2023-02-27, last update 2023-03-05.'
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source author, credit and credited_names fields retain the printed attribution labels.'

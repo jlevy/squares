@@ -615,6 +615,7 @@ case or experiment separately.
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
 | [Attribution Policy](attribution.md) | artifact and naming conventions | definitive | maintained | — |
+| [Person Profiles](packing/contributors/README.md) | component scope and use | current | maintained | — |
 | [Feature: Contributor Profiles and Linked Result Credits](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md) | implementation plan | current | transient | — |
 | [Owner Decisions of 13 October: s(11) Retired, s(17) Suspended, Duplicates Closed](docs/project/reviews/review-2026-10-13-owner-decisions.md) | dated review record | record | retained | — |
 | [Bead and Plan Reconciliation, Round 2, 12 October 2026](docs/project/reviews/review-2026-10-12-bead-reconciliation-round-2.md) | dated review record | record | retained | — |
@@ -1482,7 +1483,7 @@ case or experiment separately.
 | [Evan Daniel’s New Arrangements: Independent Replay Review](docs/project/reviews/review-2026-10-08-evand-new-arrangements.md) | dated review record | record | retained | — |
 | [Restricted N17 Family Cell Audit](docs/project/research/research-2026-10-09-n17-family-cell-audit.md) | research synthesis | supporting | retained | — |
 | [Review of FN-1 Original Compressed Input Custody](docs/project/reviews/review-2026-10-08-fn1-original-input-bindings.md) | dated review record | record | retained | — |
-| `packing/contributors/*.md` | hand-maintained registry | record | maintained | — |
+| `packing/contributors/people/*.md` | hand-maintained registry | record | maintained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
 | `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
 | `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |

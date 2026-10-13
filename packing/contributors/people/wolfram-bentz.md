@@ -1,18 +1,18 @@
 ---
 softschema:
   contract: packing.squares:Contributor/v1
-  schema: contributor.schema.yaml
+  schema: ../schemas/contributor.schema.yaml
   envelope: contributor
   status: enforced
 contributor:
-  id: peter-shiu
-  display_name: 'Peter Shiu'
-  real_name: 'Peter Shiu'
-  aliases: ['Shiu']
+  id: wolfram-bentz
+  display_name: 'Wolfram Bentz'
+  real_name: 'Wolfram Bentz'
+  aliases: ['Bentz']
   sources:
     - id: primary-byline
-      archive_path: packing/resources/papers/kearney-shiu-2002-efficient-packing-unit-squares.md
-      locator: 'Opening paper byline names Michael J. Kearney and Peter Shiu.'
+      archive_path: packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md
+      locator: 'Opening paper byline, Authors: Wolfram Bentz.'
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source author, credit and credited_names fields retain the printed attribution labels.'

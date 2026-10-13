@@ -18,8 +18,11 @@ from devtools import (
     validate_schemas,
 )
 from devtools.repo_links import RepositoryTree
+from sqpack.contributor_occurrences import SCHEMA_PATH as OCCURRENCES_SCHEMA
 from sqpack.contributor_occurrences import CreditOccurrence, CreditOrigin
 from sqpack.contributors import (
+    PEOPLE_DIR,
+    SCHEMA_PATH,
     ContributorError,
     FieldProvenance,
     load_contributors,
@@ -94,9 +97,9 @@ def test_contributor_routes_aliases_and_stale_output_removal(
         assert registered[path].status == "live"
         assert render_overview.canonical_url(path) in sitemap
     tree = RepositoryTree(
-        files=frozenset({"packing/contributors/mira.md"}), directories=frozenset()
+        files=frozenset({"packing/contributors/people/mira.md"}), directories=frozenset()
     )
-    assert site_documents.record_aliases(tree)["packing/contributors/mira.md"] == (
+    assert site_documents.record_aliases(tree)["packing/contributors/people/mira.md"] == (
         "profiles/mira.html"
     )
     monkeypatch.setattr(render_overview, "asset_files", lambda _files: {})
@@ -232,16 +235,15 @@ def test_separate_bibliography_credits_and_identifier_evidence_are_preserved() -
 def test_occurrence_schema_gate_checks_stale_reviewed_source(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    source = render_contributors.CONTRIBUTORS / "occurrences.yaml"
+    source = render_contributors.MANIFEST
     _markdown, datasets = validate_schemas.corpus_paths()
     assert source in datasets
     document = load_yaml(source.read_text())
     document["occurrences"][0]["expected_text"] = "stale credit"
     target = tmp_path / source.name
     target.write_text(yaml.dump(document))
-    shutil.copyfile(
-        source.with_name("occurrences.schema.yaml"), tmp_path / "occurrences.schema.yaml"
-    )
+    (tmp_path / "schemas").mkdir()
+    shutil.copyfile(source.parent / OCCURRENCES_SCHEMA, tmp_path / OCCURRENCES_SCHEMA)
     monkeypatch.setattr(validate_schemas, "CONTRIBUTOR_OCCURRENCES", target)
     assert "reviewed source text changed" in validate_schemas.check(target)[0]
 
@@ -256,14 +258,17 @@ def test_sparse_build_restores_only_declared_contributor_evidence(
         capture_output=True,
     )
     subprocess.run(
-        ["git", "sparse-checkout", "set", "--no-cone", "/packing/contributors/*.md"],
+        ["git", "sparse-checkout", "set", "--no-cone", "/packing/contributors/people/"],
         cwd=checkout,
         check=True,
         capture_output=True,
     )
     subprocess.run(["git", "checkout", "HEAD"], cwd=checkout, check=True, capture_output=True)
     monkeypatch.setattr(render_contributors, "REPO", checkout)
-    monkeypatch.setattr(render_contributors, "CONTRIBUTORS", checkout / "packing/contributors")
+    monkeypatch.setattr(render_contributors, "CONTRIBUTORS", checkout / "packing" / PEOPLE_DIR)
+    monkeypatch.setattr(
+        render_contributors, "MANIFEST", checkout / "packing/contributors/occurrences.yaml"
+    )
     evidence = render_contributors.evidence_paths()
     assert evidence
     assert all(not path.exists() for path in evidence)
@@ -295,11 +300,15 @@ def test_profile_heads_need_no_archive_evidence(tmp_path: Path) -> None:
     """A paper's partial build checks the profile forwarders without the archive the
     records cite, so the heads come from the records' names alone and match the pages."""
     records = render_contributors.CONTRIBUTORS
-    for path in (*records.glob("*.md"), records / "contributor.schema.yaml"):
-        shutil.copyfile(path, tmp_path / path.name)
-    names = record_names(tmp_path)
+    people, schemas = tmp_path / "people", tmp_path / "schemas"
+    people.mkdir()
+    schemas.mkdir()
+    for path in records.glob("*.md"):
+        shutil.copyfile(path, people / path.name)
+    shutil.copyfile(records / SCHEMA_PATH, people / SCHEMA_PATH)
+    names = record_names(people)
     with pytest.raises(ContributorError, match="archive_path"):
-        load_contributors(tmp_path, repo=tmp_path)
+        load_contributors(people, repo=tmp_path)
     profiles = load_contributors().by_id
     assert names == {
         identifier: profile.display_name for identifier, profile in profiles.items()

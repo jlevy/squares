@@ -2689,7 +2689,7 @@ address served there is a registered forwarder to its profile
 (`render_overview.LEGACY_PROFILES`), and no page links one.
 A profile added since has only its `profiles/` address.
 Module, record, schema, CSS class and `data-contributor*` names keep the contributor
-vocabulary of the records under `packing/contributors/`.
+vocabulary of the records under `packing/contributors/people/`.
 
 `render_contributors.contributor_article` writes the article once for either context:
 breadcrumb, public name, optional real name when different, aliases, optional bio,

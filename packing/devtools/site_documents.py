@@ -193,7 +193,7 @@ RECORD_PAGES: dict[str, str] = {
 #: Where every case's record is served, one address per case (`render_case_pages`).
 CASES_DIR = "cases"
 _CASE_FILE = re.compile(r"packing/frontier/n-(\d{3})\.md")
-_CONTRIBUTOR_FILE = re.compile(r"packing/contributors/([a-z0-9]+(?:-[a-z0-9]+)*)\.md")
+_CONTRIBUTOR_FILE = re.compile(r"packing/contributors/people/([a-z0-9]+(?:-[a-z0-9]+)*)\.md")
 #: A link as kpress writes one, with its text plain or one code span.
 _TEXT_LINK = re.compile(r'<a href="([^"]*)">(<code>)?([^<]*)(</code>)?</a>')
 _RESULT_ID = re.compile(r"T-\d{3}")

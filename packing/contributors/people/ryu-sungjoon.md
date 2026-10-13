@@ -1,18 +1,18 @@
 ---
 softschema:
   contract: packing.squares:Contributor/v1
-  schema: contributor.schema.yaml
+  schema: ../schemas/contributor.schema.yaml
   envelope: contributor
   status: enforced
 contributor:
-  id: walter-trump
-  display_name: 'Walter Trump'
-  real_name: 'Walter Trump'
-  aliases: ['Trump']
+  id: ryu-sungjoon
+  display_name: 'Ryu Sungjoon'
+  real_name: 'Ryu Sungjoon'
+  aliases: ['Ryu', 'squarepacker']
   sources:
     - id: primary-byline
-      archive_path: packing/resources/papers/trump-2023-packing-11-unit-squares.raw.md
-      locator: 'Opening byline: Walter Trump, 2023-02-27, last update 2023-03-05.'
+      archive_path: packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/README.md
+      locator: 'Credits section: Author: Ryu Sungjoon (@squarepacker).'
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source author, credit and credited_names fields retain the printed attribution labels.'

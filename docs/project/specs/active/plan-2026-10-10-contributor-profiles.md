@@ -142,10 +142,10 @@ personal alias; its person/infrastructure roles remain separate.
 
 ### Records and provenance
 
-Store `packing/contributors/<id>.md` with `contributor.schema.yaml`, contract
-`packing.squares:Contributor/v1`, envelope `contributor`, status `enforced`. Use the
-existing hermetic JSON Schema validator; the installed softschema CLI provides an
-independent compatibility and repair check.
+Store `packing/contributors/people/<id>.md` with `schemas/contributor.schema.yaml`,
+contract `packing.squares:Contributor/v1`, envelope `contributor`, status `enforced`.
+Use the existing hermetic JSON Schema validator; the installed softschema CLI provides
+an independent compatibility and repair check.
 New consumer fields require reviewed contract changes rather than an unvalidated
 extension hidden from CI.
 

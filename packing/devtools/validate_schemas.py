@@ -84,8 +84,9 @@ CONTACT_SCAFFOLD_ATLAS = (
 CONTACT_STRUCTURES = FRONTIER.parent / "atlas" / "known-best" / "contact-structures.json"
 #: Hosted-data manifests (OR-18): one per release that holds bulk data outside Git.
 HOSTED = FRONTIER.parent / "hosted"
-CONTRIBUTORS = FRONTIER.parent / "contributors"
-CONTRIBUTOR_OCCURRENCES = CONTRIBUTORS / "occurrences.yaml"
+#: The person records and their reviewed credit joins (`sqpack.contributors.PEOPLE_DIR`).
+CONTRIBUTORS = FRONTIER.parent / "contributors" / "people"
+CONTRIBUTOR_OCCURRENCES = FRONTIER.parent / "contributors" / "occurrences.yaml"
 
 
 def load_schema(name: str) -> dict:
