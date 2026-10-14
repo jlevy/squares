@@ -25,9 +25,8 @@ experiment:
 Registered before candidate measurements.
 Implementation was authorized just before this record was written; no candidate
 measurement had been observed.
-Status: implemented; the original 470-case semantic oracle passed on the 160-result
-corpus. The new 184-result main corpus requires a fresh semantic check before timing.
-No paired performance samples have run.
+Status: withdrawn on design and maintenance grounds after both fresh 184-result semantic
+oracles passed. No paired performance samples ran.
 
 ## Hypothesis and Frozen Criterion
 
@@ -84,6 +83,30 @@ Raw receipts and source snapshots belong in the existing task closeout archive u
 pr599-integration, outside disposable scratch.
 The campaign report is generated from validated records after measurement; no outcome is
 assigned before then.
+
+## Result and Withdrawal
+
+The fresh main #602 corpus passed all 470 checks in both modes, without skips or
+failures. The expected identities and all 2,707 frozen source inputs were unchanged.
+These are single semantic observations, not registered performance samples:
+
+- Local preparation: 110.380 seconds inclusive.
+- Shared preparation: 149.098 seconds inclusive, including a 91.151-second serial
+  controller barrier before the 54.70-second worker phase.
+
+The independent patched and deterministic producer checks correctly remain fresh after
+preparation. Their work still runs in workers.
+Current cost packing places three consumers on one shard and the fourth on another, so
+the combined cohort would not establish a benefit for either actual shard.
+
+The coordinator accepted the author’s recommendation to withdraw the roughly 500 lines
+of transport and lifecycle code on design and maintenance grounds.
+No paired timings were started and no three-pair numerical verdict is claimed.
+All five candidate files, the original 160-result oracle, both 184-result oracles and
+their source/phase audits are retained in the closeout archive under
+`ve009-publication-main602/`. The four tracked source files now match the pre-experiment
+implementation; the new test module is archived and staged in Trash.
+No CI opt-in was enabled and no criterion was relaxed.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
