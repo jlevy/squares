@@ -11,8 +11,8 @@ Every result that reached this site over {{ADDED_SPAN}} (its newest day and the
 Each id leads to its row in the table below; S4 and S5 are marked, and a muted entry
 says it has since been superseded.
 The heading opens the table on these days’ arrivals and each day’s link on that day’s;
-[what arrived in the last day]({{ADDED_LAST_DAY}}) counts whole days in UTC, as these
-dates are.
+[what arrived in the last day]({{ADDED_LAST_DAY}}) counts whole days on the same
+calendar as these dates.
 
 {{RECENT_ADDED}}
 
