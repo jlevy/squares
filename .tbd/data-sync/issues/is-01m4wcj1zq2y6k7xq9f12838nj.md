@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594)"
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: claude-code@vm
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:01.303Z
-updated_at: 2026-10-14T05:01:05.889Z
+updated_at: 2026-10-14T05:50:31.684Z
 started_at: 2026-10-14T05:01:05.888Z
 ---
 Stage 1 triage of jlevy/squares#594 (bengreff, Benjamin Greff, opened 2026-10-14T02:06:46Z, labelled intake, no comments when read at 04:44Z): "Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)". "External certificate" is wand125's title template of #279/#280: the author's own certificate in his own repository, not a citation of another's published result.
@@ -37,3 +37,51 @@ Validation plan, priced:
 - Lean: build of S76Lower.lean on Sqpack 1718a58, 15 min 21 s at the source, needs Mathlib's cache and more disk than this machine had (4.8 GB free). Discharging S76Cover in the kernel is the route wand125 took for s(59) at the same Sqpack (think-xk3f); unpriced here.
 
 Draft ratings (registering lane's draft, for the reviewer): enters V0/C0 as reported (T-066's path), V3/C3 after the replay evidence and a review with no blocking defect, confirmation reproduced with the producer's code (Daniel's checkers, which the author ran); V4/C4 needs two adversarial AI reviews and a human oversight record; V5/C5 needs S76Cover proved in Lean and expert formalization review. S3 (a substantive case result), beside T-066 and T-067. Novelty previously-published (the source).
+
+## Notes
+
+2026-10-14, triage resumed after a container restart (Claude Opus 5.5, xhigh; worktree review-594 at aeef99ef0). Issue re-read at 05:2xZ: body unchanged since the 04:44Z read, no comments, label intake. bengreff/s76-certificate head still 1cb924f (git ls-remote).
+
+## Spot checks (all receipts in the packet's receipts/; the comparisons re-run by receipts/programs/triage_checks.sh into receipts/n76_triage_checks.log)
+
+- Packet = pinned checkout (diff -r, 151 files); the source's SHA256SUMS passes 150/150 (it omits itself); acquire_source --check PACKET_MATCHES_ITS_CONTRACT; retained_data check clean. Cover, records and Lean unchanged since the first commit 7c78327 (2026-10-14T01:57:08Z).
+- Data facts: devtools.audit_evand_mixed_covers.audit_cover with the stated Case: total 3788361049/50000000 = 75.76722098 equals the stated, counts 41,633/9,744 as stated, D4-invariant entry by entry and as a measure, no point on a loaded line, no problems. The source's check_total.py agrees. Segments on x, y in {0..9}, lengths 1/500 (2,104), 1/50 (5,976), 1/16 (1,664); 16 lie on the container walls, 1/(4e8) each, 4e-8 in all.
+- Lean data: every (X, Y, w) and segment of S76T_Pts.lean equals the cover as mk_s76_lean.py aggregates it; same total; S76Cover = CovM over centres [0, 9/2]^2, u in [0, 1/2], D = 8000, W = 4e8. Lean not built.
+- Corner [0, 5/2)^2 = wand125's s(59) cover (6f4d2b64): 1,140 points and 452 segments, identical masses. The credit stands.
+- zmx2 replay (6b7f0f79 built from retained bytes, rustc 1.97.0, binary cba78a9e): 8,100 roots, 14,672,104 boxes, 7,268,720 certified, 71,364 empty, 18 uncertified in the 4 roots of failing_roots.txt, none capped; 147 s wall, 239 CPU-s. Every root's census and all 18 UNCERT boxes identical to the source's zmx2_v5.log.
+- zm_mixed.py replay (ee3e2915, bb89de15, 640fe453 from the retained evand packets, verify.sh's flags, 3 parallel): 64/64 VERIFIED-D4 (PARTIAL), 4,950 boxes, depth 15, 0 uncertified, 1,168 CPU-s; 04:52Z to 05:07Z. Headers (input path aside) and censuses (CPU aside) equal the source's 64 records. Read with exact fractions: 64 distinct 1/20 x 1/20 x 1/32 grid cells tiling the 4 failing roots exactly, settings and digests as pinned. The source's check_coverage.py accepts the replay's own logs. zeromargin.d4_roots covers the whole [0, m/2]^2 x [0, 1/2], so the partial-region filter selects exactly one root per job.
+- Controls (zmx2, default uncert cap, one root each): drop-heaviest-segment (8 x 44176716/4e8 at (0.98..1, 4) and images) refused at x5 y35, 234 uncertified, float-min 0.8968; drop-heaviest-point (8 x 2514512/4e8 at (1.49, 1.87) and images) refused at x15 y15, 235 uncertified, float-min 0.9968. zm_mixed.py pose, exact: the mutants capture 0.896817460548 and 0.997358632856 at poses where the published cover captures 1.007259250548 and 1.009931192856, so both refusals are true. A zm_mixed sweep of a mutation at depth 24 was not run (refusal needs the depth limit, exponential).
+- Wall control: zmx2 cert --d4 on the cover without its 16 wall segments (a253ed85): all 8,100 roots with identical census, box for box, same 18 boxes. No zmx2 decision depends on the wall segments, which no unit square needs (a flush square is a limit of squares moved off the wall).
+- The zmx2-failing poses near the 3-4-5 angle: exact mu 1.0066 to 1.0231 (zm_mixed pose), so they are discontinuities, not violations; zm_mixed closes them.
+
+## Assessment
+
+What is proved, if the checkers are sound: every closed unit square in [0,9]^2 captures mass >= 1 from a measure of total 75.767 < 76, hence s(76) >= 9; with the grid, s(76) = 9. The reduction is the T-066/T-067 one (scaling to side 9, concentric closed unit squares, exact D4 invariance, u = tan(theta/2) in [0, 1/2] covering theta <= 45 deg), and the checker digests are the ones the 2 October review of the s(59) and s(77) covers read. It is a checkable machine certificate (interval-certified plus exact-rational), not a published citation or an assertion, and it is re-run here with the producer's code (relationship same-implementation). New to the record, for the review lane: D = 8000; segments of length 1/16 and 1/500 on integer lines; the 16 wall segments; the zmx2 + zm_mixed composite, with zm_mixed's partial-region options (--cx-lo .. --u-hi) and its D4 partial mode, the first time zm_mixed would back a confirmation here (verifiers.yaml V-evand-zm-mixed-py: no confirming entry runs it yet); and the corner/cross seam the source's note 3 names.
+
+Novelty: no s(76) >= 9 anywhere the record looks: n-076.md open at 1793/200 (T-091, wand125); the literature archive (Friedman DS7: s(n^2-2) = s(n^2-1) = n, Nagamochi 2005; Kingbird lists 9 as best known); wand125/square-packing at c470527 (13 Oct: only mixed_n76_L894/L896/L8965 and rect_n76_*), evand/square-packing at fc094b1 (13 Oct: Exact/Packs/N76 is an upper-bound packing at 9). Novelty previously-published (the source), apparently first.
+
+The series: s(k^2-1) = k (Nagamochi 2005; held via Karakus, T-084, since Lemma 1 is false, T-085), s(k^2-2) = k (T-086, chelokot's Lean), s(k^2-3) = k for k >= 3 (T-064 with Bentz), s(k^2-4) = k for k >= 5 reported (T-081, V0/C1; s(21), s(32), s(45), s(60), s(77) each C3). s(k^2-5) = k: only k = 8 (T-066); k = 5, 6, 7 (n = 20, 31, 44) open with gaps 0.095, 0.0475, 0.0275; k = 10, 11 (n = 95, 116) open; k <= 4 false (s(11) < 4). This certificate is one instance: its cross was re-optimised by LP, so nothing carries to other k without an insertion lemma for a periodic band (H-269's d = 5 cell, corner deficit > 5/4, open). The author's next targets, s(95) and s(116), are per-instance runs.
+
+## Ratings draft (registering lane's draft, for the reviewer)
+
+Enters V0/C0 as reported. V3/C3 needs the replay evidence entry (zmx2 + zm_mixed composite, receipts committed) and a stage 4 review with no blocking defect: confirmation reproduced with the producer's code. V4/C4: two adversarial AI reviews by distinct reviewers and a human oversight record. V5: S76Cover proved in Lean (kernel discharge, as wand125 did for s(59) at the same Sqpack, think-xk3f) and an expert formalization review. S3, "a substantive case result", beside T-066 and T-067: an exact value for an open case by the recipe the record already holds, with no new technique.
+
+## Not checked, priced
+
+- Lean build of S76Lower.lean: Lean v4.33.1, Mathlib cache (about 5 GB) and Sqpack at evand 1718a58, which no packet retains (think-ilwc owns the read); 15 min at the source, about 45 to 90 min here plus the download; 12 GB free.
+- zmx2 cert --full (64,800 unreduced roots): about 8x the D4 run, 0.5 to 1 CPU-hour, plus zm_mixed on the images of its failing roots.
+- The source's full zm_mixed pass (129,600 roots): several hundred CPU-hours; audit its records when published (minutes).
+- W7 slice owed for C3: register case 76 in devtools.replay_evand_zmx2 (CONTROLS: drop-heaviest-point d4 x15 y15, drop-heaviest-segment d4 x5 y35) and devtools.audit_evand_mixed_covers, plus a zm_mixed composite audit (zmx2 root set plus sub-tiling) that neither reads today; then evidence entries. About 2 to 4 hours of agent work.
+- S76Cover kernel discharge: unpriced (wand125's s(59): 6,400 root cells, 290 batches, 43,154 generated files).
+
+## Packet
+
+Finished per stage 2: README, Original Gzip and Compressed Files tables, bibliography key [bengreff s76 certificate 2026-10-14] (Greff after Daniel, wand125; lineage independent, as the source states it) with credited name Benjamin Greff, resources README rows, receipts. Commit and push on claude/wizardly-meitner-wqn4x3-review-594 (SHA in the next note). Not edited: results.yaml, evidence, coverage, result-requests.yaml, SYNOPSIS.md, case records. No person record in atlas/known-best/credit-attributions.json: the owner sets those.
+
+## Draft acknowledgement (not posted; stage 1, no T-NNN, no rung)
+
+Thank you for the report, and for publishing the cover with the run records of both checkers. We have pinned bengreff/s76-certificate at 1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f and retained the whole tree here, with the credit and AI-assistance statements as your README and this issue give them.
+
+In triage we ran your certificate with Evan Daniel's checkers, built from the copies this repository already holds at the digests your verify.sh pins. zmx2 cert --d4 leaves the same 18 boxes in the same four roots, with every root's census equal to records/zmx2/zmx2_v5.log, and zm_mixed.py with your flags certifies all 64 sub-roots, with records equal to yours apart from the input path and the CPU time. The total, the D4 invariance and the tiling check exactly, the corners are wand125's s(59) cover as you say, and the Lean data matches the cover file. Two mutated covers are refused by zmx2, and zm_mixed.py pose finds a pose in each where the capture is below one.
+
+Next, the result is registered as reported, and a separate review of the mathematics, including the composite of the two checkers, decides how it stands. When the full zm_mixed.py pass is published, please post its commit here: we will retain it as a new revision. One small question: the cover carries sixteen segments of mass 1/(4·10⁸) on the container's walls. They change no zmx2 decision (we checked), so they look like LP residue; were they intended?
