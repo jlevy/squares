@@ -3,9 +3,9 @@ type: is
 id: is-01m4xpvghtj03w0tph56f9yk0s
 title: "Validate: Fang's 11 direct certificates s(421)..s(814) at 078789a, both exact routes, certify + check --replay (~3.0 CPU-h; running)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 2
+version: 3
 delegate: serene-hopper
 labels:
   - validation
@@ -13,7 +13,11 @@ labels:
 dependencies: []
 parent_id: is-01m4wt4ehr9401mzvgm1n3br4v
 created_at: 2026-10-14T17:20:11.322Z
-updated_at: 2026-10-14T17:20:58.787Z
+updated_at: 2026-10-14T20:27:01.531Z
+closed_at: 2026-10-14T20:27:01.530Z
+close_reason: "Replay of Fang's 11 other direct certificates (421-814) landed on main with #605 (merge 77fa15c7e): all 14 pass both routes, all 28 controls are refused, 1.54 CPU-h of routes; receipts are per count."
+resolution: null
+duplicate_of: null
 ---
 Validation part of think-7bw3 (Kevin Fang's direct certificates at TheSnakeFang/squarepack-certs 078789a). Split out so the validation backlog reads on its own; RUNNING now.
 
