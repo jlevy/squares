@@ -1,0 +1,6139 @@
+{
+ "schema": "closed-form-review-record-consistency/v1",
+ "program": "review/record_consistency.py",
+ "program_sha256": "a0fc92993452d20da1b9f36e3890c39acf3cce54f7e6598b4b6887266562a0ae",
+ "enclosures_sha256": "271264980e1dc235cc6ad8557f9c994ffdd7dc97429a7107ff53642149eeba79",
+ "summary": {
+  "non_square_counts": 264,
+  "lanes": {
+   "reported_upper_bound": {
+    "<": {
+     "count": 231,
+     "n": "50-60, 65-77, 82-96, 101-117, 122-140, 145-165, 170-192, 197-221, 226-252, 257-285, 290-320"
+    },
+    "=": {
+     "count": 33,
+     "n": "61-63, 78-80, 97-99, 118-120, 141-143, 166-168, 193-195, 222-224, 253-255, 286-288, 321-323"
+    }
+   },
+   "verified_upper_bound": {
+    "<": {
+     "count": 231,
+     "n": "50-60, 65-77, 82-96, 101-117, 122-140, 145-165, 170-192, 197-221, 226-252, 257-285, 290-320"
+    },
+    "=": {
+     "count": 33,
+     "n": "61-63, 78-80, 97-99, 118-120, 141-143, 166-168, 193-195, 222-224, 253-255, 286-288, 321-323"
+    }
+   },
+   "reported_lower_bound": {
+    "<": {
+     "count": 75,
+     "n": "50-60, 65-77, 82-96, 101-103, 117, 122-124, 140, 145-147, 165, 170-172, 192, 197-200, 221, 226-229, 252, 257-260, 285, 290-293, 320"
+    },
+    "=": {
+     "count": 33,
+     "n": "61-63, 78-80, 97-99, 118-120, 141-143, 166-168, 193-195, 222-224, 253-255, 286-288, 321-323"
+    },
+    ">": {
+     "count": 156,
+     "n": "104-116, 125-139, 148-164, 173-191, 201-220, 230-251, 261-284, 294-319"
+    }
+   },
+   "verified_lower_bound": {
+    "<": {
+     "count": 42,
+     "n": "50-60, 65-77, 82-96, 101-103"
+    },
+    "=": {
+     "count": 33,
+     "n": "61-63, 78-80, 97-99, 118-120, 141-143, 166-168, 193-195, 222-224, 253-255, 286-288, 321-323"
+    },
+    ">": {
+     "count": 189,
+     "n": "104-117, 122-140, 145-165, 170-192, 197-221, 226-252, 257-285, 290-320"
+    }
+   }
+  },
+  "known_values": {
+   "equal_at_m2_minus_1_2_3": "61-63, 78-80, 97-99, 118-120, 141-143, 166-168, 193-195, 222-224, 253-255, 286-288, 321-323",
+   "below_at_m2_minus_4": "60, 77, 96, 117, 140, 165, 192, 221, 252, 285, 320"
+  },
+  "a_nondecreasing_in_N_over_the_receipt": true,
+  "problems": []
+ },
+ "rows": [
+  {
+   "N": 50,
+   "k": 7,
+   "lo": "3788919395879537705335433224371265820873/531691198313966349161522824112137830400",
+   "hi": "1894459697939768852667716612185632910437/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "7.57142857142857",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "7.57142857142858",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "7.4",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "7.4",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 51,
+   "k": 7,
+   "lo": "15437473526974945542311011639464444536901/2126764793255865396646091296448551321600",
+   "hi": "30874947053949891084622023278928889073811/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "7.6903559372884918",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "7.6903559372884918",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "7.47",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "7.47",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 52,
+   "k": 7,
+   "lo": "31343266491752204769746949700746548129913/4253529586511730793292182592897102643200",
+   "hi": "15671633245876102384873474850373274064961/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "7.70710678118654",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "7.70710678118654752440084436210485",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "7.55",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "7.55",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 53,
+   "k": 7,
+   "lo": "371/50",
+   "hi": "371/50",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "7.82287565553229",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "7.82287565553230",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "7.6275",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "7.6275",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 54,
+   "k": 7,
+   "lo": "3975893824527019635416168608057488835127/531691198313966349161522824112137830400",
+   "hi": "496986728065877454427021076007186104391/66461399789245793645190353014017228800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "7.84666719284348",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "7.84666719284349",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "7.685",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "7.685",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 55,
+   "k": 7,
+   "lo": "806299617447595683799220498837128908219/106338239662793269832304564822427566080",
+   "hi": "3225198469790382735196881995348515632877/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "7.94577100750391",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "7.94577100750392",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "7.728",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "7.728",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 56,
+   "k": 7,
+   "lo": "325267243109948042048573550467536053337/42535295865117307932921825928971026432",
+   "hi": "3252672431099480420485735504675360533371/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "8.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "7.8025",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "7.8025",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 57,
+   "k": 7,
+   "lo": "3290162661725094610128194164496619695923/425352958651173079329218259289710264320",
+   "hi": "822540665431273652532048541124154923981/106338239662793269832304564822427566080",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "8.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "7.8725",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "7.8725",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 58,
+   "k": 7,
+   "lo": "39/5",
+   "hi": "39/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "8.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "7.935",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "7.935",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 59,
+   "k": 7,
+   "lo": "33458424644489265588897664730353020551057/4253529586511730793292182592897102643200",
+   "hi": "66916849288978531177795329460706041102133/8507059173023461586584365185794205286400",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "8.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 60,
+   "k": 7,
+   "lo": "13527500166677058701864971249780862767901/1701411834604692317316873037158841057280",
+   "hi": "16909375208346323377331214062226078459881/2126764793255865396646091296448551321600",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "8.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 61,
+   "k": 7,
+   "lo": "8",
+   "hi": "8",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "8.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "8",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "8",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "8",
+    "relation": "="
+   }
+  },
+  {
+   "N": 62,
+   "k": 7,
+   "lo": "8",
+   "hi": "8",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "8.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "8",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "8",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "8",
+    "relation": "="
+   }
+  },
+  {
+   "N": 63,
+   "k": 7,
+   "lo": "8",
+   "hi": "8",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "8.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "8",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "8",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "8",
+    "relation": "="
+   }
+  },
+  {
+   "N": 65,
+   "k": 8,
+   "lo": "34463441401931954449552141333503323803241/4253529586511730793292182592897102643200",
+   "hi": "2153965087620747153097008833343957737703/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "8.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8.53553390593273762200422181052425",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.35",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.35",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 66,
+   "k": 8,
+   "lo": "8731765321609269913686222052977275024663/1063382396627932698323045648224275660800",
+   "hi": "34927061286437079654744888211909100098661/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "8.65685424949238",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8.65685424949238019520675489683879",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.43",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.43",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 67,
+   "k": 8,
+   "lo": "17657421087236753638583961879421174312717/2126764793255865396646091296448551321600",
+   "hi": "35314842174473507277167923758842348625443/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "8.70710678118654",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8.70710678118654752440084436210485",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.48",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.48",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 68,
+   "k": 8,
+   "lo": "4462823397853049049807343368536356095877/531691198313966349161522824112137830400",
+   "hi": "2231411698926524524903671684268178047939/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "8.79879523721828390257668096702139408352101903022787926324037",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8.79879523721828390257668096702139408352101903022787926324037",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.51",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.51",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 69,
+   "k": 8,
+   "lo": "447784483604549999611065332931067868977/53169119831396634916152282411213783040",
+   "hi": "4477844836045499996110653329310678689771/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "8.82719465572973",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8.82719465572974",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.62",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.62",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 70,
+   "k": 8,
+   "lo": "180360030408509806516868296479029109115/21267647932558653966460912964485513216",
+   "hi": "1127250190053186290730426852993931931969/132922799578491587290380706028034457600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "8.8809603715555796",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8.8809603715555796",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.6575",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.6575",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 71,
+   "k": 8,
+   "lo": "3644664324637986107729039817047325358973/425352958651173079329218259289710264320",
+   "hi": "1822332162318993053864519908523662679487/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "8.94407155757031",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "8.94407155757032",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.721",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.721",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 72,
+   "k": 8,
+   "lo": "1834462266497284063447314214410184396363/212676479325586539664609129644855132160",
+   "hi": "3668924532994568126894628428820368792727/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.76",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.76",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 73,
+   "k": 8,
+   "lo": "740149316343767049328722251454772138059/85070591730234615865843651857942052864",
+   "hi": "462593322714854405830451407159232586287/53169119831396634916152282411213783040",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.813",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.813",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 74,
+   "k": 8,
+   "lo": "1866031025434086442606189362937359527363/212676479325586539664609129644855132160",
+   "hi": "3732062050868172885212378725874719054727/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.8675",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.8675",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 75,
+   "k": 8,
+   "lo": "3748410300673631902418658357122412326071/425352958651173079329218259289710264320",
+   "hi": "74968206013472638048373167142448246521439/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.94",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.94",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 76,
+   "k": 8,
+   "lo": "7558979905940932353582047584194101151911/850705917302346158658436518579420528640",
+   "hi": "75589799059409323535820475841941011519129/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "8.965",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "8.965",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 77,
+   "k": 8,
+   "lo": "38102429552779362919467502929581687819231/4253529586511730793292182592897102643200",
+   "hi": "76204859105558725838935005859163375638481/8507059173023461586584365185794205286400",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "9.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 78,
+   "k": 8,
+   "lo": "9",
+   "hi": "9",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "9.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "9",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "9",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "9",
+    "relation": "="
+   }
+  },
+  {
+   "N": 79,
+   "k": 8,
+   "lo": "9",
+   "hi": "9",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "9.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "9",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "9",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "9",
+    "relation": "="
+   }
+  },
+  {
+   "N": 80,
+   "k": 8,
+   "lo": "9",
+   "hi": "9",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "9.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "9",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "9",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "9",
+    "relation": "="
+   }
+  },
+  {
+   "N": 82,
+   "k": 9,
+   "lo": "7728582777500084577700316391771392617581/850705917302346158658436518579420528640",
+   "hi": "4830364235937552861062697744857120385989/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9.53553390593273762200422181052425",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.32",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.32",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 83,
+   "k": 9,
+   "lo": "4874029775206689298461397967676042417093/531691198313966349161522824112137830400",
+   "hi": "2437014887603344649230698983838021208547/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.63475764863108",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9.63475764863109",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.37",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.37",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 84,
+   "k": 9,
+   "lo": "39370639004521090809582992430728117990989/4253529586511730793292182592897102643200",
+   "hi": "19685319502260545404791496215364058995499/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.6979347990149214",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9.6979347990149214",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.411",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.411",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 85,
+   "k": 9,
+   "lo": "39696735949033364950038297114743032724101/4253529586511730793292182592897102643200",
+   "hi": "3969673594903336495003829711474303272411/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.74264068711928",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9.74264068711928514640506617262909",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.46",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.46",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 86,
+   "k": 9,
+   "lo": "47/5",
+   "hi": "47/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.8205354074967423",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9.8205354074967423",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.503",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.503",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 87,
+   "k": 9,
+   "lo": "125349115670243741354379919702503083711/13292279957849158729038070602803445760",
+   "hi": "5013964626809749654175196788100123348441/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.83881526994826",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9.83881526994827",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.58",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.58",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 88,
+   "k": 9,
+   "lo": "5041748279747838769152535205180036760799/531691198313966349161522824112137830400",
+   "hi": "6302185349684798461440669006475045951/664613997892457936451903530140172288",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.8824510304812469",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9.8824510304812469",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.62",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.62",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 89,
+   "k": 9,
+   "lo": "2032908096792668075116217345785317551997/212676479325586539664609129644855132160",
+   "hi": "813163238717067230046486938314127020799/85070591730234615865843651857942052864",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "9.94974746830583",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "9.94974746830583267080591053473394",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.65",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.65",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 90,
+   "k": 9,
+   "lo": "817381004707421025375635932900682443609/85070591730234615865843651857942052864",
+   "hi": "2043452511768552563439089832251706109023/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.73",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.73",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 91,
+   "k": 9,
+   "lo": "1028679018025584284074813678190718967787/106338239662793269832304564822427566080",
+   "hi": "4114716072102337136299254712762875871149/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.7625",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.7625",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 92,
+   "k": 9,
+   "lo": "4142491624809768168214107347697032146899/425352958651173079329218259289710264320",
+   "hi": "207124581240488408410705367384851607345/21267647932558653966460912964485513216",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.77",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.77",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 93,
+   "k": 9,
+   "lo": "49/5",
+   "hi": "49/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.88",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.88",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 94,
+   "k": 9,
+   "lo": "16735862535708700588739361764116563556831/1701411834604692317316873037158841057280",
+   "hi": "41839656339271751471848404410291408892087/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.95",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.95",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 95,
+   "k": 9,
+   "lo": "4211016143767854673760515556157435481159/425352958651173079329218259289710264320",
+   "hi": "84220322875357093475210311123148709623199/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "9.965",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.965",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 96,
+   "k": 9,
+   "lo": "42378504645707036232720193240659340657507/4253529586511730793292182592897102643200",
+   "hi": "84757009291414072465440386481318681315033/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "9.97",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 97,
+   "k": 9,
+   "lo": "10",
+   "hi": "10",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "10.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "10",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "10",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "10",
+    "relation": "="
+   }
+  },
+  {
+   "N": 98,
+   "k": 9,
+   "lo": "10",
+   "hi": "10",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "10.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "10",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "10",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "10",
+    "relation": "="
+   }
+  },
+  {
+   "N": 99,
+   "k": 9,
+   "lo": "10",
+   "hi": "10",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "10.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "10",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "10",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "10",
+    "relation": "="
+   }
+  },
+  {
+   "N": 101,
+   "k": 10,
+   "lo": "42843811230073029831673096465114050509419/4253529586511730793292182592897102643200",
+   "hi": "21421905615036514915836548232557025254713/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10.53553390593274",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.28",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "10.28",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 102,
+   "k": 10,
+   "lo": "5393284599117098932728606839539323696429/531691198313966349161522824112137830400",
+   "hi": "539328459911709893272860683953932369643/53169119831396634916152282411213783040",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.6058286964315784",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10.6058286964315784",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.28",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "10.28",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 103,
+   "k": 10,
+   "lo": "54347915351606020989203836053674845455/5316911983139663491615228241121378304",
+   "hi": "43478332281284816791363068842939876364009/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.6792320473613065",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10.6792320473613065",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.28",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "10.28",
+    "relation": "<"
+   }
+  },
+  {
+   "N": 104,
+   "k": 10,
+   "lo": "10940639408119843143468210339080683875621/1063382396627932698323045648224275660800",
+   "hi": "43762557632479372573872841356322735502493/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.70710678118654",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10.70710678118655",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.28",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.28",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 105,
+   "k": 10,
+   "lo": "1101106956827166367586595629997866391807/106338239662793269832304564822427566080",
+   "hi": "44044278273086654703463825199914655672289/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.7893037837481589",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10.7893037837481589",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.28",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.28",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 106,
+   "k": 10,
+   "lo": "2765851405914091567117187203910905573119/265845599156983174580761412056068915200",
+   "hi": "5531702811828183134234374407821811146239/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.822908044132847555194436943331",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10.822908044132847555194436943331",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.32737905308",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.3107084351",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 107,
+   "k": 10,
+   "lo": "2774574795580020203705684902886897788283/265845599156983174580761412056068915200",
+   "hi": "5549149591160040407411369805773795576567/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.84666719284348",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10.84666719284349",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.38083151964",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.3615414616",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 108,
+   "k": 10,
+   "lo": "348393776590847464105359018802771899483/33230699894622896822595176507008614400",
+   "hi": "5574300425453559425685744300844350391729/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.9048210123203565",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10.9048210123203565",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.43398113205",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.4121138007",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 109,
+   "k": 10,
+   "lo": "4488022576374946817829253726175545500733/425352958651173079329218259289710264320",
+   "hi": "2244011288187473408914626863087772750367/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.94974746830583",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10.94974746830584",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.4868329805",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.4624294225",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 110,
+   "k": 10,
+   "lo": "53/5",
+   "hi": "53/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "10.996783396631591639612746267957",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "10.996783396631591639612746267957",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.53939201416",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.5124921972",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 111,
+   "k": 10,
+   "lo": "4531711473636155318033830956873283531057/425352958651173079329218259289710264320",
+   "hi": "2265855736818077659016915478436641765529/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.59166304662",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.5623058987",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 112,
+   "k": 10,
+   "lo": "911253566475306726906436071943531933279/85070591730234615865843651857942052864",
+   "hi": "1139066958094133408633045089929414916599/106338239662793269832304564822427566080",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.64365076099",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.611874208",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 113,
+   "k": 10,
+   "lo": "916090224776968272137503814834521369807/85070591730234615865843651857942052864",
+   "hi": "1145112780971210340171879768543151712259/106338239662793269832304564822427566080",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.69535971483",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.6612007164",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 114,
+   "k": 10,
+   "lo": "54/5",
+   "hi": "54/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.7467943448",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.7102889283",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 115,
+   "k": 10,
+   "lo": "46171881282908458589630634556015433048589/4253529586511730793292182592897102643200",
+   "hi": "92343762565816917179261269112030866097197/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.79795897113",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.7591422643",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 116,
+   "k": 10,
+   "lo": "2900716313877023802809711656351978757227/265845599156983174580761412056068915200",
+   "hi": "92822922044064761689910773003263320231283/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "10.84885780179",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "10.807764064",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 117,
+   "k": 10,
+   "lo": "46649534930714135698429030226019038050917/4253529586511730793292182592897102643200",
+   "hi": "93299069861428271396858060452038076101853/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "10.8561575886",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 118,
+   "k": 10,
+   "lo": "11",
+   "hi": "11",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "11.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "11",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "11",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "11",
+    "relation": "="
+   }
+  },
+  {
+   "N": 119,
+   "k": 10,
+   "lo": "11",
+   "hi": "11",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "11.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "11",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "11",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "11",
+    "relation": "="
+   }
+  },
+  {
+   "N": 120,
+   "k": 10,
+   "lo": "11",
+   "hi": "11",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "11.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "11",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "11",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "11",
+    "relation": "="
+   }
+  },
+  {
+   "N": 122,
+   "k": 11,
+   "lo": "23529022029994665243312093464335411329411/2126764793255865396646091296448551321600",
+   "hi": "47058044059989330486624186928670822658829/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.53553390593274",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.22928087555",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "11.0475115548",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 123,
+   "k": 11,
+   "lo": "5915372191695346724869404227742237766347/531691198313966349161522824112137830400",
+   "hi": "1478843047923836681217351056935559441587/132922799578491587290380706028034457600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.5913781454976982",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.5913781454976982",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.22928087555",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "11.0948100502",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 124,
+   "k": 11,
+   "lo": "5948447117488567944485765177234774604713/531691198313966349161522824112137830400",
+   "hi": "2974223558744283972242882588617387302357/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.65685424949238",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.65685424949239",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.22928087555",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "11.1418983268",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 125,
+   "k": 11,
+   "lo": "47871688320142333771270353858596138472299/4253529586511730793292182592897102643200",
+   "hi": "11967922080035583442817588464649034618077/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.70710678118654",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.70710678118655",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.22928087555",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.1887791632",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 126,
+   "k": 11,
+   "lo": "12030389430502178660076451690728227604833/1063382396627932698323045648224275660800",
+   "hi": "48121557722008714640305806762912910419341/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.7426406871192852",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.7426406871192852",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.24695076595",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.2354552767",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 127,
+   "k": 11,
+   "lo": "48369720226185654503096975423217930897563/4253529586511730793292182592897102643200",
+   "hi": "12092430056546413625774243855804482724393/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.8108787875891799",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.8108787875891799",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.29563014098",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.2819293264",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 128,
+   "k": 11,
+   "lo": "6066701898778861254728814310294613534259/531691198313966349161522824112137830400",
+   "hi": "303335094938943062736440715514730676713/26584559915698317458076141205606891520",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.82509196821368",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.82509196821369",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.34408043278",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.3282039138",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 129,
+   "k": 11,
+   "lo": "3041860272400862576393746931745985235179/265845599156983174580761412056068915200",
+   "hi": "6083720544801725152787493863491970470359/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.8720298490811800",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.8720298490811800",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.39230484541",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.3742815854",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 130,
+   "k": 11,
+   "lo": "6106760823979126074417110365814826966221/531691198313966349161522824112137830400",
+   "hi": "3053380411989563037208555182907413483111/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.9044830325157865",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.9044830325157865",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.44030650891",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.4201648339",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 131,
+   "k": 11,
+   "lo": "2455465806175967551674716155192341653051/212676479325586539664609129644855132160",
+   "hi": "4910931612351935103349432310384683306103/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.9496595880358604",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.9496595880358604",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.4880884817",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.4658560997",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 132,
+   "k": 11,
+   "lo": "58/5",
+   "hi": "58/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "11.985680198845808811522231964102",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "11.9856801988458089",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.53565375285",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.5113577727",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 133,
+   "k": 11,
+   "lo": "4950295020951548326205426866305892298961/425352958651173079329218259289710264320",
+   "hi": "2475147510475774163102713433152946149481/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.58300524425",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.5566721937",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 134,
+   "k": 11,
+   "lo": "994438235738501160471250100655153226725/85070591730234615865843651857942052864",
+   "hi": "2486095589346252901178125251637883066813/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.63014581273",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.6018016555",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 135,
+   "k": 11,
+   "lo": "4994157229811843661330064093009852117041/425352958651173079329218259289710264320",
+   "hi": "2497078614905921830665032046504926058521/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.67707825203",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.6467484048",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 136,
+   "k": 11,
+   "lo": "5015812820509063690552645848902742679787/425352958651173079329218259289710264320",
+   "hi": "1253953205127265922638161462225685669947/106338239662793269832304564822427566080",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.72380529476",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.6915146427",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 137,
+   "k": 11,
+   "lo": "100543661969336060161065774249568769162677/8507059173023461586584365185794205286400",
+   "hi": "12567957746167007520133221781196096145337/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.77032961426",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.7361025271",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 138,
+   "k": 11,
+   "lo": "12622001253748744699173913916230815553883/1063382396627932698323045648224275660800",
+   "hi": "100976010029989957593391311329846524431083/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.81665382639",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.7805141726",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 139,
+   "k": 11,
+   "lo": "158447096575446486612103913933780246413/13292279957849158729038070602803445760",
+   "hi": "101406141808285751431746504917619357704339/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "11.8627804912",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "11.8247516529",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 140,
+   "k": 11,
+   "lo": "50917045520891284232554318268648732651741/4253529586511730793292182592897102643200",
+   "hi": "101834091041782568465108636537297465303501/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "11.8688170009",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 141,
+   "k": 11,
+   "lo": "12",
+   "hi": "12",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "12",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "12",
+    "relation": "="
+   }
+  },
+  {
+   "N": 142,
+   "k": 11,
+   "lo": "12",
+   "hi": "12",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "12",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "12",
+    "relation": "="
+   }
+  },
+  {
+   "N": 143,
+   "k": 11,
+   "lo": "12",
+   "hi": "12",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "12.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "12",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "12",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "12",
+    "relation": "="
+   }
+  },
+  {
+   "N": 145,
+   "k": 12,
+   "lo": "51281128398304785315200106346480710919147/4253529586511730793292182592897102643200",
+   "hi": "25640564199152392657600053173240355459577/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.53553390593274",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.21386694779",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "12.0433963806",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 146,
+   "k": 12,
+   "lo": "51520971197521209634370659793109817281401/4253529586511730793292182592897102643200",
+   "hi": "402507587480634450268520779633670447511/33230699894622896822595176507008614400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.5837822039510463",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.5837822039510463",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.21386694779",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "12.0866302262",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 147,
+   "k": 12,
+   "lo": "6469038664371882625836271833430321496063/531691198313966349161522824112137830400",
+   "hi": "197419392833614582087288569135446823/16225927682921336339157801028812800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.65685424949238",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.65685424949239",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.21386694779",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "12.1297033496",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 148,
+   "k": 12,
+   "lo": "13002713857533097134417660864272715250849/1063382396627932698323045648224275660800",
+   "hi": "10402171086026477707534128691418172200681/850705917302346158658436518579420528640",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.65685424949238",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.65685424949239",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.21386694779",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.1726175299",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 149,
+   "k": 12,
+   "lo": "1305878988078182242352468299710581548861/106338239662793269832304564822427566080",
+   "hi": "52235159523127289694098731988423261954449/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.70710678118654",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.70710678118655",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.22497216032",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.2153745138",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 150,
+   "k": 12,
+   "lo": "2098329056497512313551594954024839233669/170141183460469231731687303715884105728",
+   "hi": "26229113206218903919394936925310490420867/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.77817459305202",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.77817459305203",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.26942766958",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.2579760163",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 151,
+   "k": 12,
+   "lo": "6585164034581925565788096651922602467469/531691198313966349161522824112137830400",
+   "hi": "658516403458192556578809665192260246747/53169119831396634916152282411213783040",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.82287565553229",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.82287565553230",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.31370849898",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.3004237212",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 152,
+   "k": 12,
+   "lo": "660132085105052177893075939008281331421/53169119831396634916152282411213783040",
+   "hi": "6601320851050521778930759390082813314211/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.830718800976609954993823643412",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.830718800976609954993823643412",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.3578166916",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.3427192823",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 153,
+   "k": 12,
+   "lo": "827233899653182384156989858121955699563/66461399789245793645190353014017228800",
+   "hi": "1323574239445091814651183772995129119301/106338239662793269832304564822427566080",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.8700138504070441",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.8700138504070441",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.40175425099",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.384864324",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 154,
+   "k": 12,
+   "lo": "6639052136494335991802796183482876896419/531691198313966349161522824112137830400",
+   "hi": "331952606824716799590139809174143844821/26584559915698317458076141205606891520",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.9230702023011408",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.9230702023011408",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.44552314225",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.4268604418",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 155,
+   "k": 12,
+   "lo": "666791502320708453698949405164453143443/53169119831396634916152282411213783040",
+   "hi": "1066866403713133525918319048263125029509/85070591730234615865843651857942052864",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.9524254069584562",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.9524254069584562",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.48912529307",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.4687092035",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 156,
+   "k": 12,
+   "lo": "5355718322395891410959423787824800701557/425352958651173079329218259289710264320",
+   "hi": "2677859161197945705479711893912400350779/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "12.9791726136444261",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "12.9791726136444261",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.53256259467",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.5104121494",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 157,
+   "k": 12,
+   "lo": "1074048468543770395412472900304510768865/85070591730234615865843651857942052864",
+   "hi": "2685121171359425988531182250761276922163/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.57583690279",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.5519707931",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 158,
+   "k": 12,
+   "lo": "2694976639586659836982775798609703836281/212676479325586539664609129644855132160",
+   "hi": "5389953279173319673965551597219407672563/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.61895003862",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.5933866224",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 159,
+   "k": 12,
+   "lo": "5409996452733538443272541014920806605551/425352958651173079329218259289710264320",
+   "hi": "338124778295846152704533813432550412847/26584559915698317458076141205606891520",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.66190378969",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.6346610995",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 160,
+   "k": 12,
+   "lo": "2714847833004765872317179134446163062667/212676479325586539664609129644855132160",
+   "hi": "1085939133201906348926871653778465225067/85070591730234615865843651857942052864",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.70469991071",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.6757956618",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 161,
+   "k": 12,
+   "lo": "64/5",
+   "hi": "64/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.74734012447",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.7167917228",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 162,
+   "k": 12,
+   "lo": "21838626337501903751669897157305479650439/1701411834604692317316873037158841057280",
+   "hi": "54596565843754759379174742893263699126107/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.78982612255",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.7576506721",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 163,
+   "k": 12,
+   "lo": "54792534580132007336716808670655795238821/4253529586511730793292182592897102643200",
+   "hi": "109585069160264014673433617341311590477661/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.83215956619",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.7983738762",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 164,
+   "k": 12,
+   "lo": "54987676634384713500223222079999418843321/4253529586511730793292182592897102643200",
+   "hi": "109975353268769427000446444159998837686661/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "12.87434208703",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "12.8389626792",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 165,
+   "k": 12,
+   "lo": "110364004762000053498506313204122225997399/8507059173023461586584365185794205286400",
+   "hi": "55182002381000026749253156602061112998709/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "12.8794184031",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 166,
+   "k": 12,
+   "lo": "13",
+   "hi": "13",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "13",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "13",
+    "relation": "="
+   }
+  },
+  {
+   "N": 167,
+   "k": 12,
+   "lo": "13",
+   "hi": "13",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "13",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "13",
+    "relation": "="
+   }
+  },
+  {
+   "N": 168,
+   "k": 12,
+   "lo": "13",
+   "hi": "13",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "13.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "13",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "13",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "13",
+    "relation": "="
+   }
+  },
+  {
+   "N": 170,
+   "k": 13,
+   "lo": "55510383225427491631009023750200333978167/4253529586511730793292182592897102643200",
+   "hi": "27755191612713745815504511875100166989087/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.53553390593274",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.20012261982",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "13.0399362039",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 171,
+   "k": 13,
+   "lo": "55726106016044537129126801061440278750019/4253529586511730793292182592897102643200",
+   "hi": "27863053008022268564563400530720139375013/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.57142857142857",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.57142857142858",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.20012261982",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "13.0797456254",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 172,
+   "k": 13,
+   "lo": "6992043872344185362430342450685803027661/531691198313966349161522824112137830400",
+   "hi": "3496021936172092681215171225342901513831/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.61898895689939842899969151892",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.61898895689939842899969151892",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.20012261982",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "13.1194294641",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 173,
+   "k": 13,
+   "lo": "28085827693986257957716448598827418895101/2126764793255865396646091296448551321600",
+   "hi": "56171655387972515915432897197654837790211/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.65685424949238",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.65685424949239",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.20012261982",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.1589889011",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 174,
+   "k": 13,
+   "lo": "56375030447600983959067371722890771167819/4253529586511730793292182592897102643200",
+   "hi": "14093757611900245989766842930722692791957/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.70710678118654",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.70710678118655",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.20655561573",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.1984250992",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 175,
+   "k": 13,
+   "lo": "56577481957523377736059248180630716334537/4253529586511730793292182592897102643200",
+   "hi": "28288740978761688868029624090315358167273/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.7671207246923133",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.7671207246923133",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.24744871391",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.2377392028",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 176,
+   "k": 13,
+   "lo": "14194755596615473882184694094892784299889/1063382396627932698323045648224275660800",
+   "hi": "11355804477292379105747755275914227439913/850705917302346158658436518579420528640",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.8128562532770564",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.8128562532770564",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.28820572744",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.2769323391",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 177,
+   "k": 13,
+   "lo": "3561488305906606980902764098999580859903/265845599156983174580761412056068915200",
+   "hi": "7122976611813213961805528197999161719807/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.822979734169448600231882896281",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.822979734169448600231882896281",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.32882800593",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.3160056179",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 178,
+   "k": 13,
+   "lo": "671/50",
+   "hi": "671/50",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.84666719284348",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.84666719284349",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.36931687685",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.3549601321",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 179,
+   "k": 13,
+   "lo": "7151666356983616299499591135008357916027/531691198313966349161522824112137830400",
+   "hi": "1787916589245904074874897783752089479007/132922799578491587290380706028034457600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.8837954905108985",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.8837954905108985",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.40967364599",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.3937969582",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 180,
+   "k": 13,
+   "lo": "7171256505191573295268157686641983459333/531691198313966349161522824112137830400",
+   "hi": "3585628252595786647634078843320991729667/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.9169935224778325",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.9169935224778325",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.44989959798",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.4325171563",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 181,
+   "k": 13,
+   "lo": "2879044685489073988530897839963963896081/212676479325586539664609129644855132160",
+   "hi": "5758089370978147977061795679927927792163/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.9508195310229241",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.9508195310229241",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.48999599679",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.471121771",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 182,
+   "k": 13,
+   "lo": "5777532331714821428240189816564805628499/425352958651173079329218259289710264320",
+   "hi": "288876616585741071412009490828240281425/21267647932558653966460912964485513216",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "13.974090713121439007150130032772",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "13.974090713121439007150130032772",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.52996408614",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.5096118312",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 183,
+   "k": 13,
+   "lo": "5790684371333533763241085987660581912551/425352958651173079329218259289710264320",
+   "hi": "723835546416691720405135748457572739069/53169119831396634916152282411213783040",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.56980508997",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.5479883506",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 184,
+   "k": 13,
+   "lo": "726142053823441670040878997567548221207/53169119831396634916152282411213783040",
+   "hi": "5809136430587533360327031980540385769657/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.60952021291",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.5862523283",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 185,
+   "k": 13,
+   "lo": "5827436577598276608496737280390104867831/425352958651173079329218259289710264320",
+   "hi": "728429572199784576062092160048763108479/53169119831396634916152282411213783040",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.64911064067",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.6244047484",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 186,
+   "k": 13,
+   "lo": "2922748629138793266584418307246432180309/212676479325586539664609129644855132160",
+   "hi": "5845497258277586533168836614492864360619/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.68857754044",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.662446581",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 187,
+   "k": 13,
+   "lo": "5863493166020036820887800051641307590623/425352958651173079329218259289710264320",
+   "hi": "183234161438126150652743751613790862207/13292279957849158729038070602803445760",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.72792206135",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.7003787824",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 188,
+   "k": 13,
+   "lo": "58729282428199032778063323995096418909561/4253529586511730793292182592897102643200",
+   "hi": "117458564856398065556126647990192837819141/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.7671453348",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.7382022948",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 189,
+   "k": 13,
+   "lo": "29454588538514397882539420771588313402473/2126764793255865396646091296448551321600",
+   "hi": "117818354154057591530157683086353253609911/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.80624847486",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.7759180473",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 190,
+   "k": 13,
+   "lo": "118176863203080084693185861543107904062539/8507059173023461586584365185794205286400",
+   "hi": "59088431601540042346592930771553952031279/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.84523257866",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.8135269556",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 191,
+   "k": 13,
+   "lo": "118534105573613722078367459456769741550479/8507059173023461586584365185794205286400",
+   "hi": "59267052786806861039183729728384870775249/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "13.88409872672",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "13.8510299228",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 192,
+   "k": 13,
+   "lo": "118890094597756690354739297509805078889907/8507059173023461586584365185794205286400",
+   "hi": "59445047298878345177369648754902539444963/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "13.8884278389",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 193,
+   "k": 13,
+   "lo": "14",
+   "hi": "14",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "14",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "14",
+    "relation": "="
+   }
+  },
+  {
+   "N": 194,
+   "k": 13,
+   "lo": "14",
+   "hi": "14",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "14",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "14",
+    "relation": "="
+   }
+  },
+  {
+   "N": 195,
+   "k": 13,
+   "lo": "14",
+   "hi": "14",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "14.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "14",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "14",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "14",
+    "relation": "="
+   }
+  },
+  {
+   "N": 197,
+   "k": 14,
+   "lo": "149373988823660986222632018032764999001/10633823966279326983230456482242756608",
+   "hi": "14937398882366098622263201803276499900103/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.53553390593274",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.18776486123",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "14.0369863706",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 198,
+   "k": 14,
+   "lo": "11988018272342877920525248890326085912033/850705917302346158658436518579420528640",
+   "hi": "14985022840428597400656561112907607390043/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.57142857142857",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.57142857142858",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.18776486123",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "14.0738719604",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 199,
+   "k": 14,
+   "lo": "3758215770277277095796294029922674624029/265845599156983174580761412056068915200",
+   "hi": "7516431540554554191592588059845349248059/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.6175721735928069",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.6175721735928069",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.18776486123",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "14.1106575888",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 200,
+   "k": 14,
+   "lo": "7540459106502680022814128316489445187733/531691198313966349161522824112137830400",
+   "hi": "3770229553251340011407064158244722593867/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.65685424949238",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.65685424949239",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.18776486123",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "14.1473440639",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 201,
+   "k": 14,
+   "lo": "60534477472703668032992510245087748087747/4253529586511730793292182592897102643200",
+   "hi": "15133619368175917008248127561271937021939/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.70710678118654",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.70710678118655",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.19090595827",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.1839321834",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 202,
+   "k": 14,
+   "lo": "15179930236488523801262041653092683754663/1063382396627932698323045648224275660800",
+   "hi": "60719720945954095205048166612370735018661/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.72792206135785",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.72792206135786",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.22875655532",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.220422734",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 203,
+   "k": 14,
+   "lo": "30452132853116295096642457037629448598277/2126764793255865396646091296448551321600",
+   "hi": "60904265706232590193284914075258897196563/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.77817459305202",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.77817459305203",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.26649916142",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.2568164921",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 204,
+   "k": 14,
+   "lo": "3054405980037292602612657721230915147739/212676479325586539664609129644855132160",
+   "hi": "61088119600745852052253154424618302954789/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.82287565553229",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.82287565553230",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.30413469565",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.2931142241",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 205,
+   "k": 14,
+   "lo": "72/5",
+   "hi": "72/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.82445114612408",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.82445114612409",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.34166406412",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.3293166859",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 206,
+   "k": 14,
+   "lo": "721/50",
+   "hi": "721/50",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.860158663391903236840250629824",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.860158663391903236840250629824",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.37908816025",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.3654246238",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 207,
+   "k": 14,
+   "lo": "307404348920403025233386623900232971895/21267647932558653966460912964485513216",
+   "hi": "240159647594064863463583299922057009293/16615349947311448411297588253504307200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.8809603730436757",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.8809603730436757",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.41640786499",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.4014387744",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 208,
+   "k": 14,
+   "lo": "3851695777571563686158269609126414266523/265845599156983174580761412056068915200",
+   "hi": "7703391555143127372316539218252828533047/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.9245187720293559",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.9245187720293559",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.45362404707",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.4373598647",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 209,
+   "k": 14,
+   "lo": "772764264451205077239658069082453984857/53169119831396634916152282411213783040",
+   "hi": "6182114115609640617917264552659631878857/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.9462232264464511",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.9462232264464511",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.49073756323",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.4731886124",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 210,
+   "k": 14,
+   "lo": "1549983996695789824172122932779177453561/106338239662793269832304564822427566080",
+   "hi": "1239987197356631859337698346223341962849/85070591730234615865843651857942052864",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.973001116587625741983018050468",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.973001116587625741983018050468",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.52774925846",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.5089257261",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 211,
+   "k": 14,
+   "lo": "6212319390080581005723692657124249940551/425352958651173079329218259289710264320",
+   "hi": "776539923760072625715461582140531242569/53169119831396634916152282411213783040",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "14.9963367213363157",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "14.9963367213363157",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.56465996625",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.5445719051",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 212,
+   "k": 14,
+   "lo": "6229186317857761796191393059856005839057/425352958651173079329218259289710264320",
+   "hi": "3114593158928880898095696529928002919529/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.60147050873",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.5801278403",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 213,
+   "k": 14,
+   "lo": "390373115443086634652143671088446069583/26584559915698317458076141205606891520",
+   "hi": "6245969847089386154434298737415137113329/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.63818169698",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.6155942134",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 214,
+   "k": 14,
+   "lo": "3131388623616949663449797620846989573231/212676479325586539664609129644855132160",
+   "hi": "6262777247233899326899595241693979146463/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.67479433117",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.650971698",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 215,
+   "k": 14,
+   "lo": "3139697955027629882473631457060863332589/212676479325586539664609129644855132160",
+   "hi": "6279395910055259764947262914121726665179/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.7113092008",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.6862609591",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 216,
+   "k": 14,
+   "lo": "74/5",
+   "hi": "74/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.74772708486",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.7214626533",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 217,
+   "k": 14,
+   "lo": "15761710373238771636321369715996748936111/1063382396627932698323045648224275660800",
+   "hi": "126093682985910173090570957727973991488907/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.78404875209",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.7565774293",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 218,
+   "k": 14,
+   "lo": "15803133336340182823362104227487518337881/1063382396627932698323045648224275660800",
+   "hi": "126425066690721462586896833819900146703067/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.82027496108",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.7916059279",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 219,
+   "k": 14,
+   "lo": "126755449257424625346591863041165687271513/8507059173023461586584365185794205286400",
+   "hi": "31688862314356156336647965760291421817883/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.85640646055",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.8265487818",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 220,
+   "k": 14,
+   "lo": "63542419852566715326064047699051695457803/4253529586511730793292182592897102643200",
+   "hi": "5083393588205337226085123815924135636625/340282366920938463463374607431768211456",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "14.89244398944",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "14.8614066163",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 221,
+   "k": 14,
+   "lo": "25482649383669922473551282249657947743101/1701411834604692317316873037158841057280",
+   "hi": "31853311729587403091939102812072434678881/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "14.8961800488",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 222,
+   "k": 14,
+   "lo": "15",
+   "hi": "15",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "15",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "15",
+    "relation": "="
+   }
+  },
+  {
+   "N": 223,
+   "k": 14,
+   "lo": "15",
+   "hi": "15",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "15",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "15",
+    "relation": "="
+   }
+  },
+  {
+   "N": 224,
+   "k": 14,
+   "lo": "15",
+   "hi": "15",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "15.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "15",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "15",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "15",
+    "relation": "="
+   }
+  },
+  {
+   "N": 226,
+   "k": 15,
+   "lo": "999777926981401414844202894833072129413/66461399789245793645190353014017228800",
+   "hi": "15996446831702422637507246317329154070611/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.53553390593274",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.17657384178",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "15.0344418537",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 227,
+   "k": 15,
+   "lo": "401004441717003899662219912952206680041/26584559915698317458076141205606891520",
+   "hi": "64160710674720623945955186072353068806567/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.57106781186547",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.57106781186548",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.17657384178",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "15.0688022843",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 228,
+   "k": 15,
+   "lo": "321681358476599845925452841435086450483/21267647932558653966460912964485513216",
+   "hi": "2010508490478749037034080258969290315519/132922799578491587290380706028034457600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.6046014757296743",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.6046014757296743",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.17657384178",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "15.1030818665",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 229,
+   "k": 15,
+   "lo": "8064079947064567387212913789743048662157/531691198313966349161522824112137830400",
+   "hi": "4032039973532283693606456894871524331079/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.65685424949238",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.65685424949239",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.17657384178",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "15.1372811683",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 230,
+   "k": 15,
+   "lo": "2588355379842030981974407172871698854387/170141183460469231731687303715884105728",
+   "hi": "16177221124012693637340044830448117839921/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.68292682926829",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.68292682926830",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.17744687875",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.1714007511",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 231,
+   "k": 15,
+   "lo": "64879563625364895075524536512929326377301/4253529586511730793292182592897102643200",
+   "hi": "6487956362536489507552453651292932637731/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.70710678118654",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.70710678118655",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.21267040355",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.2054411698",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 232,
+   "k": 15,
+   "lo": "32524847880819705772452173722005966243107/2126764793255865396646091296448551321600",
+   "hi": "65049695761639411544904347444011932486223/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.7674283499418417",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.7674283499418417",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.24780684877",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.2394029729",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 233,
+   "k": 15,
+   "lo": "8152410766302825107433046443593812454891/531691198313966349161522824112137830400",
+   "hi": "65219286130422600859464371548750499639137/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.77817459305202",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.77817459305203",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.28285685708",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.2732867026",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 234,
+   "k": 15,
+   "lo": "65388339874587458694474659221830681279241/4253529586511730793292182592897102643200",
+   "hi": "1307766797491749173889493184436613625585/85070591730234615865843651857942052864",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.82287565553229",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.82287565553230",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.31782106327",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.3070928949",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 235,
+   "k": 15,
+   "lo": "8189611012585698432760490355914483432103/531691198313966349161522824112137830400",
+   "hi": "1023701376573212304095061294489310429013/66461399789245793645190353014017228800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.82660563342856",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.82660563342857",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.3527000944",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.3408220796",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 236,
+   "k": 15,
+   "lo": "1640239425399411042605681770196573347553/106338239662793269832304564822427566080",
+   "hi": "4100598563498527606514204425491433368883/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.8639557471592675",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.8639557471592675",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.38749456993",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.3744747806",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 237,
+   "k": 15,
+   "lo": "513649950706221434723660115552608516631/33230699894622896822595176507008614400",
+   "hi": "8218399211299542955578561848841736266097/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.9029496076778317",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.9029496076778317",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.42220510185",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.4080515158",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 238,
+   "k": 15,
+   "lo": "329418817901673163326756276879895804091/21267647932558653966460912964485513216",
+   "hi": "2058867611885457270792226730499348775569/132922799578491587290380706028034457600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.9241067853214947",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.9241067853214947",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.4568322948",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.4415527974",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 239,
+   "k": 15,
+   "lo": "6606344310118691698957291559151796780001/425352958651173079329218259289710264320",
+   "hi": "3303172155059345849478645779575898390001/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.9484433273005000",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.9484433273005000",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.49137674618",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.4749791318",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 240,
+   "k": 15,
+   "lo": "6622793623611061588769576763588043938997/425352958651173079329218259289710264320",
+   "hi": "3311396811805530794384788381794021969499/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.969685337530780336056074320582",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.969685337530780336056074320582",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.52583904633",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.5083310198",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 241,
+   "k": 15,
+   "lo": "78/5",
+   "hi": "78/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "15.988132439524990848590591447359",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "15.988132439524990848590591447359",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.56021977856",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.5416089564",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 242,
+   "k": 15,
+   "lo": "6650101430337277187101572291617144444507/425352958651173079329218259289710264320",
+   "hi": "1662525357584319296775393072904286111127/106338239662793269832304564822427566080",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.59451951932",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.5748134316",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 243,
+   "k": 15,
+   "lo": "833193309651452331438796167382992553617/53169119831396634916152282411213783040",
+   "hi": "6665546477211618651510369339063940428937/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.62873883832",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.6079449297",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 244,
+   "k": 15,
+   "lo": "6681219472393318589380769643112274715771/425352958651173079329218259289710264320",
+   "hi": "1670304868098329647345192410778068678943/106338239662793269832304564822427566080",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.66287829861",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.6410039297",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 245,
+   "k": 15,
+   "lo": "6696653393482477738536431310409295252633/425352958651173079329218259289710264320",
+   "hi": "3348326696741238869268215655204647626317/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.69693845669",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.6739909054",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 246,
+   "k": 15,
+   "lo": "1678011708435533675335115026030014143153/106338239662793269832304564822427566080",
+   "hi": "6712046833742134701340460104120056572613/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.73091986265",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.7069063257",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 247,
+   "k": 15,
+   "lo": "79/5",
+   "hi": "79/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.76482306023",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.7397506541",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 248,
+   "k": 15,
+   "lo": "8419383931994968382385958106479347207363/531691198313966349161522824112137830400",
+   "hi": "134710142911919494118175329703669555317827/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.79864858694",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.7725243493",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 249,
+   "k": 15,
+   "lo": "105482282243078893487556608884052534863/6646139978924579364519035301401722880",
+   "hi": "135017321271140983664072459371587244624659/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.83239697419",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.805227865",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 250,
+   "k": 15,
+   "lo": "135323701729430740339612425386879080152757/8507059173023461586584365185794205286400",
+   "hi": "16915462716178842542451553173359885019097/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.86606874731",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.8378616501",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 251,
+   "k": 15,
+   "lo": "135629290472358375042911734917878721400671/8507059173023461586584365185794205286400",
+   "hi": "13562929047235837504291173491787872140069/850705917302346158658436518579420528640",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "15.89966442575",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "15.8704261489",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 252,
+   "k": 15,
+   "lo": "27186818721196695519336230868007375045521/1701411834604692317316873037158841057280",
+   "hi": "16991761700747934699585144292504609403453/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "15.9029218007",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 253,
+   "k": 15,
+   "lo": "16",
+   "hi": "16",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "16",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "16",
+    "relation": "="
+   }
+  },
+  {
+   "N": 254,
+   "k": 15,
+   "lo": "16",
+   "hi": "16",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "16",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "16",
+    "relation": "="
+   }
+  },
+  {
+   "N": 255,
+   "k": 15,
+   "lo": "16",
+   "hi": "16",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "16.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "16",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "16",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "16",
+    "relation": "="
+   }
+  },
+  {
+   "N": 257,
+   "k": 16,
+   "lo": "1705618466250414506719187238023630523999/106338239662793269832304564822427566080",
+   "hi": "17056184662504145067191872380236305239993/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.53553390593274",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.16637581635",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "16.032224567",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 258,
+   "k": 16,
+   "lo": "13677285687388242243659018591281765102701/850705917302346158658436518579420528640",
+   "hi": "8548303554617651402286886619551103189189/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.5634480021337894",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.5634480021337894",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.16637581635",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "16.0643824162",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 259,
+   "k": 16,
+   "lo": "68551550165629491518380256647052328087467/4253529586511730793292182592897102643200",
+   "hi": "34275775082814745759190128323526164043737/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.5913781454976982",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.5913781454976982",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.16637581635",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "16.0964739604",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 260,
+   "k": 16,
+   "lo": "1073637082084690893534258222413779681221/66461399789245793645190353014017228800",
+   "hi": "8589096656677527148274065779310237449769/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.65685424949238",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.65685424949239",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.16637581635",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "16.128499608",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 261,
+   "k": 16,
+   "lo": "8609399378675613275703674406008905090989/531691198313966349161522824112137830400",
+   "hi": "860939937867561327570367440600890509099/53169119831396634916152282411213783040",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.6787798753432078",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.6787798753432078",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.16637581635",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.1604597633",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 262,
+   "k": 16,
+   "lo": "6905317352156832042443286765218463133113/425352958651173079329218259289710264320",
+   "hi": "69053173521568320424432867652184631331139/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.70710678118654",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.70710678118655",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.19868415357",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.1923548264",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 263,
+   "k": 16,
+   "lo": "69210940449573461189714529674234012805027/4253529586511730793292182592897102643200",
+   "hi": "17302735112393365297428632418558503201259/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.7331660078993790",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.7331660078993790",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.23154621172",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.2241851935",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 264,
+   "k": 16,
+   "lo": "69368275070953492316155468892527823888553/4253529586511730793292182592897102643200",
+   "hi": "34684137535476746158077734446263911944281/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.77817459305202",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.77817459305203",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.26433752247",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.2559512565",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 265,
+   "k": 16,
+   "lo": "34762590460059933792709869908639009644107/2126764793255865396646091296448551321600",
+   "hi": "69525180920119867585419739817278019288223/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.77817459305202",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.77817459305203",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.29705854077",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.2876534038",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 266,
+   "k": 16,
+   "lo": "8710234975155112889837781809902196457043/531691198313966349161522824112137830400",
+   "hi": "2177558743788778222459445452475549114261/132922799578491587290380706028034457600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.823028750756475970708783711254",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.8230287507564760",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.32970971675",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.3192920195",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 267,
+   "k": 16,
+   "lo": "8723822650309153762394846875369603574049/531691198313966349161522824112137830400",
+   "hi": "174476453006183075247896937507392071481/10633823966279326983230456482242756608",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.8388152699482623",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.8388152699482623",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.36229149573",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.3508674841",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 268,
+   "k": 16,
+   "lo": "4367614917760197558116073392347744807051/265845599156983174580761412056068915200",
+   "hi": "8735229835520395116232146784695489614103/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.878814821006764724747121053018",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.878814821006764724747121053018",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.39480431834",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.3823801742",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 269,
+   "k": 16,
+   "lo": "437571971995883190409948422473697289083/26584559915698317458076141205606891520",
+   "hi": "8751439439917663808198968449473945781661/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.9015135821891322",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.9015135821891322",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.42724862054",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.4138304628",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 270,
+   "k": 16,
+   "lo": "8767503209150958233515857262352925167991/531691198313966349161522824112137830400",
+   "hi": "1095937901143869779189482157794115645999/66461399789245793645190353014017228800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.9281969933290166",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.9281969933290166",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.45962483374",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.4452187191",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 271,
+   "k": 16,
+   "lo": "1406147150839166506783721326614115469691/85070591730234615865843651857942052864",
+   "hi": "878841969274479066739825829133822168557/53169119831396634916152282411213783040",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.9491166878150100",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.9491166878150100",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.49193338482",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.4765453086",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 272,
+   "k": 16,
+   "lo": "176150203501888692607176348272532976375/10633823966279326983230456482242756608",
+   "hi": "7046008140075547704287053930901319055001/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.9655864748376712",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.9655864748376712",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.52417469626",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.5078105935",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 273,
+   "k": 16,
+   "lo": "83/5",
+   "hi": "83/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "16.983925962650404316108837346991",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "16.983925962650404316108837346991",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.5563491861",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.5390149323",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 274,
+   "k": 16,
+   "lo": "1414322154578250963366898507548477991849/85070591730234615865843651857942052864",
+   "hi": "3535805386445627408417246268871194979623/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.58845726811",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.5701586799",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 275,
+   "k": 16,
+   "lo": "7086008537608151782434856226931720596849/425352958651173079329218259289710264320",
+   "hi": "708600853760815178243485622693172059685/42535295865117307932921825928971026432",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.62049935181",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.6012421881",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 276,
+   "k": 16,
+   "lo": "3550226757932734987106116772937540329233/212676479325586539664609129644855132160",
+   "hi": "7100453515865469974212233545875080658467/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.65247584249",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.6322658049",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 277,
+   "k": 16,
+   "lo": "7114995901513418490914625248809988835349/425352958651173079329218259289710264320",
+   "hi": "711499590151341849091462524880998883535/42535295865117307932921825928971026432",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.68438714135",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.6632298752",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 278,
+   "k": 16,
+   "lo": "7129367523123211480113890006638467520363/425352958651173079329218259289710264320",
+   "hi": "1782341880780802870028472501659616880091/106338239662793269832304564822427566080",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.7162336455",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.6941347407",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 279,
+   "k": 16,
+   "lo": "1785926610864227657527082826570057962213/106338239662793269832304564822427566080",
+   "hi": "7143706443456910630108331306280231848853/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.74801574802",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.7249807395",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 280,
+   "k": 16,
+   "lo": "71512408033712467775376241276716198326329/4253529586511730793292182592897102643200",
+   "hi": "143024816067424935550752482553432396652677/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.77973383805",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.755768207",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 281,
+   "k": 16,
+   "lo": "143311765030859088323873648015782041436543/8507059173023461586584365185794205286400",
+   "hi": "71655882515429544161936824007891020718281/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.81138830084",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.7864974749",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 282,
+   "k": 16,
+   "lo": "143598063256032593959006402361474171205501/8507059173023461586584365185794205286400",
+   "hi": "1794975790700407424487580029518427140069/106338239662793269832304564822427566080",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.84297951775",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.817168872",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 283,
+   "k": 16,
+   "lo": "14388371515016886924588486609391602402573/850705917302346158658436518579420528640",
+   "hi": "143883715150168869245884866093916024025749/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.87450786638",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.8477827242",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 284,
+   "k": 16,
+   "lo": "28833745014193433052640826877127497247861/1701411834604692317316873037158841057280",
+   "hi": "36042181267741791315801033596409371559831/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "16.90597372058",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "16.8783393541",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 285,
+   "k": 16,
+   "lo": "144453097327378190400795668780168769638547/8507059173023461586584365185794205286400",
+   "hi": "72226548663689095200397834390084384819283/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "16.9088390814",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 286,
+   "k": 16,
+   "lo": "17",
+   "hi": "17",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "17",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "17",
+    "relation": "="
+   }
+  },
+  {
+   "N": 287,
+   "k": 16,
+   "lo": "17",
+   "hi": "17",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "17",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "17",
+    "relation": "="
+   }
+  },
+  {
+   "N": 288,
+   "k": 16,
+   "lo": "17",
+   "hi": "17",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "17.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "17",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "17",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "17",
+    "relation": "="
+   }
+  },
+  {
+   "N": 290,
+   "k": 17,
+   "lo": "1132278751124363629549751817277255250057/66461399789245793645190353014017228800",
+   "hi": "3623292003597963614559205815287216800183/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.53553390593274",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.15703136722",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "17.0302752548",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 291,
+   "k": 17,
+   "lo": "72616147916075071349720240714303568922297/4253529586511730793292182592897102643200",
+   "hi": "1134627311188672989839378761160993264411/66461399789245793645190353014017228800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.53553390593273",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.53553390593274",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.15703136722",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "17.0604951616",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 292,
+   "k": 17,
+   "lo": "14553890084386350330689610189791152591383/850705917302346158658436518579420528640",
+   "hi": "36384725210965875826724025474477881478461/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.5913781454976982",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.5913781454976982",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.15703136722",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "17.090660023",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 293,
+   "k": 17,
+   "lo": "9114914044913101201121001961804530131701/531691198313966349161522824112137830400",
+   "hi": "4557457022456550600560500980902265065851/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.63414634146341",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.63414634146342",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.15703136722",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "17.1207701385",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 294,
+   "k": 17,
+   "lo": "4566891192611893953798395376909659544921/265845599156983174580761412056068915200",
+   "hi": "9133782385223787907596790753819319089843/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.65685424949238",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.65685424949239",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.15703136722",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.1508258053",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 295,
+   "k": 17,
+   "lo": "9154718164365044340546115462959877192441/531691198313966349161522824112137830400",
+   "hi": "73237745314920354724368923703679017539537/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.7042327907360304",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.7042327907360304",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.18641405623",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.1808273176",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 296,
+   "k": 17,
+   "lo": "14676958896172138797868705277743612673977/850705917302346158658436518579420528640",
+   "hi": "36692397240430346994671763194359031684947/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.70710678118654",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.70710678118655",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.21727474022",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.210774967",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 297,
+   "k": 17,
+   "lo": "14706298681377291959159809923704514099343/850705917302346158658436518579420528640",
+   "hi": "18382873351721614948949762404630642624181/1063382396627932698323045648224275660800",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.74041728754380185115320576776",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.74041728754380185115320576776",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.24807680927",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.2406690427",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 298,
+   "k": 17,
+   "lo": "14735568916746277679273952534768003194587/850705917302346158658436518579420528640",
+   "hi": "4604865286483211774773110167115000998309/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.77817459305202",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.77817459305203",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.27882059609",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.2705098312",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 299,
+   "k": 17,
+   "lo": "18455962618186745739665306960056754502107/1063382396627932698323045648224275660800",
+   "hi": "73823850472746982958661227840227018008437/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.82287565553229",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.82287565553230",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.3095064303",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.3002976164",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 300,
+   "k": 17,
+   "lo": "92464165636692086725417223604966798167/5316911983139663491615228241121378304",
+   "hi": "9246416563669208672541722360496679816701/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.82412338847854",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.82412338847855",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.34013463836",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.3300326797",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 301,
+   "k": 17,
+   "lo": "1851563520775767611087128827323578571811/106338239662793269832304564822427566080",
+   "hi": "578613600242427378464727758538618303691/33230699894622896822595176507008614400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.846667192843489783121781262887",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.846667192843489783121781262887",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.37070554374",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.3597153",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 302,
+   "k": 17,
+   "lo": "9269199205820902381618961979706880512041/531691198313966349161522824112137830400",
+   "hi": "4634599602910451190809480989853440256021/265845599156983174580761412056068915200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.8720298490811800",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.8720298490811800",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.40121946685",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.389345754",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 303,
+   "k": 17,
+   "lo": "928438435971517663003539201533679201207/53169119831396634916152282411213783040",
+   "hi": "9284384359715176630035392015336792012071/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.9130654627385324",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.9130654627385324",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.43167672515",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.4189243156",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 304,
+   "k": 17,
+   "lo": "1162435336075428417859135651889026987659/66461399789245793645190353014017228800",
+   "hi": "9299482688603427342873085215112215901273/531691198313966349161522824112137830400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.9295659468485010",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.9295659468485010",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.46207763315",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.4484512566",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 305,
+   "k": 17,
+   "lo": "931907008403740299722174496524773767137/53169119831396634916152282411213783040",
+   "hi": "7455256067229922397777395972198190137097/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.9504664821377123",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.9504664821377123",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.49242250247",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.4779268463",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 306,
+   "k": 17,
+   "lo": "7469508230239030520256200659378119309477/425352958651173079329218259289710264320",
+   "hi": "3734754115119515260128100329689059654739/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.9634337174914258",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.9634337174914258",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.52271164185",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.5073513516",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 307,
+   "k": 17,
+   "lo": "1496745699772747302462069805713431622453/85070591730234615865843651857942052864",
+   "hi": "3741864249431868256155174514283579056133/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.9808627840546911",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.9808627840546911",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.55294535724",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.5367250374",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 308,
+   "k": 17,
+   "lo": "7493281483787970972261655698067012221283/425352958651173079329218259289710264320",
+   "hi": "1873320370946992743065413924516753055321/106338239662793269832304564822427566080",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "17.998269879526255875387992744507",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "17.9982698795262559",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.58312395177",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.5660481658",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 309,
+   "k": 17,
+   "lo": "3753503259915797882294496052365776211387/212676479325586539664609129644855132160",
+   "hi": "1501401303966319152917798420946310484555/85070591730234615865843651857942052864",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.61324772583",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.5953209972",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 310,
+   "k": 17,
+   "lo": "3760306614001344927041735926280349223611/212676479325586539664609129644855132160",
+   "hi": "7520613228002689854083471852560698447223/425352958651173079329218259289710264320",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.64331697709",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.6245437895",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 311,
+   "k": 17,
+   "lo": "1506844078415106803018947080370083850709/85070591730234615865843651857942052864",
+   "hi": "3767110196037767007547367700925209626773/212676479325586539664609129644855132160",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.67333200053",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.6537167984",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 312,
+   "k": 17,
+   "lo": "7547695511196763332044676810929923200823/425352958651173079329218259289710264320",
+   "hi": "943461938899595416505584601366240400103/53169119831396634916152282411213783040",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.70329308849",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.6828402774",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 313,
+   "k": 17,
+   "lo": "3780571831922052398929653898214200559737/212676479325586539664609129644855132160",
+   "hi": "1512228732768820959571861559285680223895/85070591730234615865843651857942052864",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.73320053068",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.711914478",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 314,
+   "k": 17,
+   "lo": "89/5",
+   "hi": "89/5",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.76305461424",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.7409396495",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 315,
+   "k": 17,
+   "lo": "151632757703072687290664190023771118927809/8507059173023461586584365185794205286400",
+   "hi": "37908189425768171822666047505942779731957/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.79285562374",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.7699160391",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 316,
+   "k": 17,
+   "lo": "75950694516002084290084718164994596225427/4253529586511730793292182592897102643200",
+   "hi": "151901389032004168580169436329989192450873/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.82260384126",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.798843892",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 317,
+   "k": 17,
+   "lo": "38042371558427420732291856879651268213977/2126764793255865396646091296448551321600",
+   "hi": "152169486233709682929167427518605072855927/8507059173023461586584365185794205286400",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.85229954635",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.8277234511",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 318,
+   "k": 17,
+   "lo": "152437052481636323870740231479059733814257/8507059173023461586584365185794205286400",
+   "hi": "38109263120409080967685057869764933453569/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.88194301613",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.8565549577",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 319,
+   "k": 17,
+   "lo": "152704090917930733685834937429477082790267/8507059173023461586584365185794205286400",
+   "hi": "76352045458965366842917468714738541395143/4253529586511730793292182592897102643200",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "17.91153452528",
+    "relation": ">"
+   },
+   "verified_lower_bound": {
+    "value": "17.8853386507",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 320,
+   "k": 17,
+   "lo": "152970604653869618872439460273793573720377/8507059173023461586584365185794205286400",
+   "hi": "38242651163467404718109865068448393430099/2126764793255865396646091296448551321600",
+   "status": "open",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "<"
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "reported_lower_bound": {
+    "value": "18",
+    "relation": "<"
+   },
+   "verified_lower_bound": {
+    "value": "17.9140747672",
+    "relation": ">"
+   }
+  },
+  {
+   "N": 321,
+   "k": 17,
+   "lo": "18",
+   "hi": "18",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "18",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "18",
+    "relation": "="
+   }
+  },
+  {
+   "N": 322,
+   "k": 17,
+   "lo": "18",
+   "hi": "18",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "18",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "18",
+    "relation": "="
+   }
+  },
+  {
+   "N": 323,
+   "k": 17,
+   "lo": "18",
+   "hi": "18",
+   "status": "proved",
+   "reported_upper_bound": {
+    "value": "18.0",
+    "relation": "="
+   },
+   "verified_upper_bound": {
+    "value": "18",
+    "relation": "="
+   },
+   "reported_lower_bound": {
+    "value": "18",
+    "relation": "="
+   },
+   "verified_lower_bound": {
+    "value": "18",
+    "relation": "="
+   }
+  }
+ ]
+}

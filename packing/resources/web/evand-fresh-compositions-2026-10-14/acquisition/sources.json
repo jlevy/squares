@@ -1,0 +1,70 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T08:28Z",
+  "git_scope": "Sparse blobless checkout of the named files at 622cd2e21407700fe8d5ac5943af820725107921, the commit issue #596 names and the branch head when retrieved. All three certificates are retained with their 80-digit KKT points, binary64 inputs and per-count solver reports, and with the licence, credits and certificate-format README. The two source checkers are pinned by digest against the identical copies the issue-399 packet retains, and the packer log by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-fresh-compositions-2026-10-14",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "main",
+      "source_commit": "622cd2e21407700fe8d5ac5943af820725107921",
+      "committed_utc": "2026-10-14T06:50:09Z",
+      "git_tree": "b8724f1ff1bdabaf8a525efa0f74c02c11e20b48",
+      "archived_path": "packing/resources/web/evand-fresh-compositions-2026-10-14/source",
+      "subtree_manifest": "packing/resources/web/evand-fresh-compositions-2026-10-14/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/PACKER.md",
+        "search/packer/candidates/fresh_n365.cert",
+        "search/packer/candidates/fresh_n365.exact.txt",
+        "search/packer/candidates/fresh_n365.input.txt",
+        "search/packer/candidates/fresh_n365.json",
+        "search/packer/candidates/fresh_n370.cert",
+        "search/packer/candidates/fresh_n370.exact.txt",
+        "search/packer/candidates/fresh_n370.input.txt",
+        "search/packer/candidates/fresh_n370.json",
+        "search/packer/candidates/fresh_n460.cert",
+        "search/packer/candidates/fresh_n460.exact.txt",
+        "search/packer/candidates/fresh_n460.input.txt",
+        "search/packer/candidates/fresh_n460.json"
+      ],
+      "subtree_file_count": 18,
+      "subtree_total_bytes": 804613,
+      "retained_file_count": 15,
+      "retained_total_bytes": 521230,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two exact checkers, byte-identical to the copies the issue-399 packet retains; never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two exact checkers, byte-identical to the copies the issue-399 packet retains; never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert2.py"
+        },
+        {
+          "path": "search/packer/PACKER.md",
+          "bytes": 276881,
+          "sha256": "d014812630d86b2e4c00a345af6b32a7e48d4a1bd2c54fd97558bc95a209ede7",
+          "reason": "The packer's working log (277 KB), which records the fresh pass that found the three compositions; pinned for provenance."
+        }
+      ],
+      "license": "MIT, copyright 2026 Evan Daniel (LICENSE); attribution retained in CREDITS.md. Issue #596 states that the composer, the search, the checks and the request were done with Claude (Claude Code), directed and reviewed by Evan Daniel.",
+      "claims": [
+        "Issue #596 reports s(365) <= 19.621320343560, s(370) <= 19.767730746255 and s(460) <= 21.959969683021, the exact rational sides of the certificates rounded up at 12 places, for the beyond-horizon list; it prints the certificate sides 19.621320343559642573398746289751, 19.767730746254604158720695152869 and 21.959969683020493134160191682454 with the SHA-256 of each search/packer/candidates/fresh_nNNN.cert.",
+        "The issue says all three are two-piece compositions, from a pass over the packings posted in issues 586 and 593: at 365 the register's s(199) (Nate Chaoweeraprasit, SQUISH) whole with Erich Friedman's s(26) whole, so S* = s(26) + 14 = 14 + 7/2 + 3/sqrt(2); at 370 Francisco Couzo's s(175) (issue 488) whole with a 38-square (h + 2) x h rectangle from the author's rectangle search; at 460 an 81-square crop of Nate Chaoweeraprasit's s(306) (issue 481) and a 130-square crop of Francisco Couzo's s(380) (issue 586).",
+        "Each side is an 80-digit KKT point with positive multipliers on the load-bearing contacts, a reduced Hessian positive semidefinite modulo exact flat motions and a first-order MILP that finds no descent; the issue calls these numerical evidence, not interval proofs, and claims no optimality."
+      ]
+    }
+  ]
+}

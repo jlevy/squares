@@ -1,0 +1,23 @@
+{
+  "kind": "fine-net-followup-linear-sample/v1",
+  "certificate": "mixed_n145_L1224",
+  "candidate_digest": "31788dc7f098d82f5a60bae49a5a3afcd329cf3f792f44883dc11518d95eca69",
+  "angles": [35,111],
+  "rows": [
+    {"index":35,"status":"REPLAYED","report":{"index":35,"status":"LINEAR_ANGLE_REPLAYED","input_sha256":"b126ac48c46909ca60af462fd2b7f5c22d0c0ade335b6b3a52417d8eea2f4593","nodes":168149},"error":null,"replayed_sha256":"d5a44c6ca9d74ddf0423a8ae5a0d7a510688e215e831fce21507c15ffdb26cc7","started":"2026-10-14T09:35:42Z","finished":"2026-10-14T09:40:29Z","wall_seconds":286.933,"cpu_seconds":163.738,"load":[9.59326171875,8.8681640625,5.4765625],"passes":true,"source_seconds":138.141215134,"nodes":168149},
+    {"index":111,"status":"REPLAYED","report":{"index":111,"status":"LINEAR_ANGLE_REPLAYED","input_sha256":"5282b914157118818ec8daecb47b065df962704722dab037bb93049be2ad101c","nodes":380027},"error":null,"replayed_sha256":"71c7accb16eb5d04a6a54b85ab1bb266d463cc44f1842441591cd383bf801c4a","started":"2026-10-14T09:40:29Z","finished":"2026-10-14T09:47:10Z","wall_seconds":401.381,"cpu_seconds":382.367,"load":[2.98876953125,5.03515625,4.9443359375],"passes":true,"source_seconds":312.202659684,"nodes":380027}
+  ],
+  "bindings": {"status":"BUNDLE_BOUND_TO_PACKET","files":810,"checker_copies":202,"upstream_seconds":109342.3},
+  "preconditions": {"status":"DRIVER_PRECONDITIONS_HOLD","candidate_digest":"31788dc7f098d82f5a60bae49a5a3afcd329cf3f792f44883dc11518d95eca69","angles":201,"total_mass":"14499999/100000","checker_sha256":"0249726ab1e67dc481e0c53f43b524902a48f95d051b1b08865a3cf3ef89a06d"},
+  "inputs": {"status":"ALL_INPUTS_ENCLOSE_THE_CANDIDATE","inputs":2,"images":{"rectangle":72,"point":4752,"segment":12328}},
+  "binary_sha256": "f182da95b13a9eaeb43c74995a48eb84a01594d0f46e8d9b513dbae0b7c338cd",
+  "compile": "the shipped compile_verifier",
+  "environment": {"OPENBLAS_NUM_THREADS":"1","OMP_NUM_THREADS":"1","PYTHONOPTIMIZE":null},
+  "host": {"platform":"Linux-6.18.44-fc-v114-x86_64-with-glibc2.39","cpu":"Intel(R) Xeon(R) Processor @ 2.10GHz","logical_cpus":4,"python":"3.14.7 (main, Sep 29 2026, 15:01:40) [Clang 22.1.3 ]","c++":"c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0","rustc":"rustc 1.97.0 (2d8144b78 2026-07-07)","cargo":"cargo 1.97.0 (c980f4866 2026-06-30)","load_before":7.94580078125,"load_after":2.98974609375},
+  "workers": 1,
+  "wall_seconds": 688.8489789320001,
+  "price": {"sample_angles":2,"net_angles":201,"sample_cpu_seconds":546.105,"source_seconds_on_sample":450.343874818,"source_seconds_whole_net":109342.337008842,"ratio_to_source":1.2126400080842679,"full_replay_cpu_seconds_by_ratio":132592.8924343549,"full_replay_cpu_seconds_by_nodes":123965.59092560603,"full_replay_cpu_seconds":132592.8924343549,"control_angle":35,"control_cpu_seconds":502.546692710593,"total_cpu_seconds":133095.4391270655,"total_cpu_hours":36.97095531307375,"costliest_angle":0,"costliest_angle_cpu_seconds":3406.5242993116226,"workers":1,"total_wall_seconds_at_workers":133095.4391270655,"limit_cpu_seconds":1200,"full_replay_within_limit":false},
+  "ran_at": "2026-10-14T09:47:12Z",
+  "status": "DIAGNOSTIC_SAMPLE",
+  "scope": "A diagnostic sample: the source's replay function and unchanged checker, from this repository's retained copies, at the angles it ran; it decides only those angles and is not a replay. No control was run."
+}

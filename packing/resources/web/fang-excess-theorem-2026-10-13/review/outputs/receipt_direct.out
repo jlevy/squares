@@ -1,0 +1,35 @@
+receipt fang-direct-exact-replay-v1: routes ['exact_verify', 'independent'], 9 jobs
+  380 positive: side 1102997094976695021048786866207114120794307672281712078143966862895587101/55213970774324510460005687954914031282828270928685798549291030582132736 as retained; both routes pass; least wall clearance 2.710505e-20, least pair gap 2.332638e-20
+  380 duplicate-square-overlap: refused by both routes: {'exact_verify': ['overlap', 'squares 0 and 1 overlap'], 'independent': '1 overlapping pairs; worst exact gap -1'}
+  380 square-translated-outside-container: refused by both routes: {'exact_verify': ['container', 'square 0 violates x<=s'], 'independent': 'container penetration -369288255830759987739015240085207543562433955326838619794003027423969053/113231883247173779310544410356807261000841730575684230882660594520948736'}
+  381 positive: side 17234497240723668942314557127864871189472035564122930362827769318543721/862718293348820475141548404758626698746797696721330057918371520839680 as retained; both routes pass; least wall clearance 2.710505e-20, least pair gap 1.793194e-20
+  381 duplicate-square-overlap: refused by both routes: {'exact_verify': ['overlap', 'squares 0 and 1 overlap'], 'independent': '1 overlapping pairs; worst exact gap -1'}
+  381 square-translated-outside-container: refused by both routes: {'exact_verify': ['container', 'square 0 violates x<=s'], 'independent': 'container penetration -739430919379797063571528663605769322019687911797114441960141942449881553/226583852170738968669921438441616764427057942232242010442990903382507520'}
+  382 positive: side 269457653704352009538801091757719713332271894027604544062655799750885/13479973333575319909990991250831751289361739009640320293602072723456 as retained; both routes pass; least wall clearance 2.710505e-20, least pair gap 1.580820e-20
+  382 duplicate-square-overlap: refused by both routes: {'exact_verify': ['overlap', 'squares 0 and 1 overlap'], 'independent': '1 overlapping pairs; worst exact gap -1'}
+  382 square-translated-outside-container: refused by both routes: {'exact_verify': ['container', 'square 0 violates x<=s'], 'independent': 'container penetration -984684612385574349369908958634170709697779921568107127678752715192199/232136274206527939035978208054968699066365065899549989654464949125120'}
+  sums: 1,303,026 pair decisions over both routes, 652.1 route CPU s, 863.3 job wall s; longest job 138.3 s (381 duplicate-square-overlap)
+claims upper-bound-report-claims-v1: read at main f73e9de13, horizon 324
+  380: exact side rounds up to 19.976775433974195 at 15 places; below the grid 20 by 2.322e-02; case None; smallest #586
+    couzo-certificates-2026-10-11 (Francisco Couzo) prints 19.987440766556: this certificate is below it by 1.067e-02
+    #583 (Francisco Couzo) prints 19.973553606628: this certificate is above it by 3.222e-03
+    #586 (Francisco Couzo) prints 19.961611078672: this certificate is above it by 1.516e-02
+  381: exact side rounds up to 19.976969740405508 at 15 places; below the grid 20 by 2.303e-02; case None; smallest #583
+    couzo-certificates-2026-10-11 (Francisco Couzo) prints 19.992663288464: this certificate is below it by 1.569e-02
+    #582 (Miles Gray (mstrmg)) prints 19.985624661051481: this certificate is below it by 8.655e-03
+    #583 (Francisco Couzo) prints 19.974977397657: this certificate is above it by 1.992e-03
+  382: exact side rounds up to 19.989479729399675 at 15 places; below the grid 20 by 1.052e-02; case None; smallest #586
+    #583 (Francisco Couzo) prints 19.988600568289: this certificate is above it by 8.792e-04
+    #586 (Francisco Couzo) prints 19.987713157610: this certificate is above it by 1.767e-03
+  421: exact side rounds up to 20.986150316947159 at 15 places; below the grid 21 by 1.385e-02; case None; smallest this certificate
+  422: exact side rounds up to 20.988436524095744 at 15 places; below the grid 21 by 1.156e-02; case None; smallest this certificate
+  463: exact side rounds up to 21.986880406196935 at 15 places; below the grid 22 by 1.312e-02; case None; smallest this certificate
+  464: exact side rounds up to 21.991709536768996 at 15 places; below the grid 22 by 8.290e-03; case None; smallest this certificate
+  507: exact side rounds up to 22.997807183348823 at 15 places; below the grid 23 by 2.193e-03; case None; smallest this certificate
+  508: exact side rounds up to 22.994733849702143 at 15 places; below the grid 23 by 5.266e-03; case None; smallest this certificate
+  553: exact side rounds up to 23.998811020144984 at 15 places; below the grid 24 by 1.189e-03; case None; smallest this certificate
+  601: exact side rounds up to 24.998914572427130 at 15 places; below the grid 25 by 1.085e-03; case None; smallest this certificate
+  651: exact side rounds up to 25.991547815274380 at 15 places; below the grid 26 by 8.452e-03; case None; smallest this certificate
+  758: exact side rounds up to 27.996346242823117 at 15 places; below the grid 28 by 3.654e-03; case None; smallest this certificate
+  814: exact side rounds up to 28.999873603982716 at 15 places; below the grid 29 by 1.264e-04; case None; smallest this certificate
+RECEIPT_SUMMARY_HOLDS

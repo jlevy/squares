@@ -1,0 +1,10 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "issue": "(no issue)",
+  "source": "https://github.com/TheSnakeFang/squarepack-certs",
+  "revision": "078789a4cfd36f915f1bfbe76d742413d79b2965",
+  "horizon": 324,
+  "results": [
+    {"n": 932, "offered_side": "30.999950000000000", "exact_side": "619999/20000", "ceiling": "30.9999500000000000"}
+  ]
+}

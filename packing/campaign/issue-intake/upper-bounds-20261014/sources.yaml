@@ -1,0 +1,2229 @@
+# What `python -m devtools.intake_ledger gather` reads: the reports of 2026-10-14,
+# their GitHub coordinates and holders, the lanes' frozen claim records, and the
+# printed sides transcribed from the reports no claim record covers. Exact sides
+# marked with a source path were read from the certificate at its pinned commit.
+format: intake-ledger-sources-v1
+read_at_main: f73e9de13d8ccc40b91d844b164f9c2ad9c032c1
+read_on: '2026-10-14'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it's weaker after that, unless there's some key reason
+  it should be recorded.
+# How the ledger credits a case record's finder or improver where the owner asked for a
+# name other than the one the record writes. The owner, 2026-10-14: "also be sure we use
+# Ryan Xu real name or surname Xu not the handle for regular credits." Source keys, paths
+# and URLs keep the handle.
+display_names:
+  ry-xu: Ryan Xu
+lanes:
+- name: couzo
+  branch: claude/wizardly-meitner-wqn4x3-intake-1014-couzo
+  commit: f8ecf2173fa69c32729e1251cdeb96a6c3007f74
+- name: mishapolk
+  branch: claude/wizardly-meitner-wqn4x3-intake-1014-mishapolk
+  commit: d4c198d0da8fe619bef0bccf18a8e6e32520c0f3
+- name: pingyou
+  branch: claude/wizardly-meitner-wqn4x3-intake-1014-pingyou
+  commit: 680123806e979029a25948aa98d9aaf5473ccc33
+- name: pr574
+  branch: claude/wizardly-meitner-wqn4x3-intake-1014-pr574
+  commit: 56cf868c617975eaada5b0c10dab953cc6fa2e37
+  note: the lane's final head (base b8c930338); its claim records differ from f817bf191, read
+    earlier on 2026-10-14, only in the replayed flags of 21 rational rows
+- name: main
+  branch: main
+  commit: 7c672f5be85ea26003b7e210c65ced6aa3dec9f5
+  note: the fang-certs lane's packet as merged; Fang's exact sides at 380 to 382
+- name: ostashev
+  branch: claude/wizardly-meitner-wqn4x3-intake-1014-ostashev
+  commit: 8d396177be2f7e5067a1d41d1edff12075f6d7af
+reports:
+- report: '#528'
+  issue: 528
+  holders: Daniil Ostashev (dostashev)
+  bead: think-em0b
+  claims:
+  - n: 155
+    printed: '12.95242540695845613565'
+    rounding: cut
+    exact: 64762127034792280678268012662770039849775757530809316735783064762127034792280678268012662770039849775757530809316735783/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: records/n0155.sqcert (its s line) at dostashev/square-packing@a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f
+    first_committed: '2026-10-11T13:21:30Z'
+    note: 'the issue''s update to #501 at the same commit; T-149 registered #501''s packing'
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-149
+      source: '#528: the same commit stores #501''s 155, 156 and 211 ''at the exact optima
+        of their contact topologies ... with the same arrangements'''
+  - n: 156
+    printed: '12.97917261364442607531'
+    rounding: cut
+    exact: 8111982883527766297069290937797918339306619994848173142743008111982883527766297069290937797918339306619994848173142743/625000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: records/n0156.sqcert (its s line) at dostashev/square-packing@a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f
+    first_committed: '2026-10-11T13:21:30Z'
+    note: 'the issue''s update to #501 at the same commit; T-149 registered #501''s packing'
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-149
+      source: '#528: the same commit stores #501''s 155, 156 and 211 ''at the exact optima
+        of their contact topologies ... with the same arrangements'''
+  - n: 175
+    printed: '13.76417431748659662942782322004234282577'
+    rounding: up
+    exact: 27528348634973193258855646440084685651524191041221518308579027528348634973193258855646440084685651524191041221518308579/2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: records/n0175.sqcert (its s line) at dostashev/square-packing@a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f
+    first_committed: '2026-10-12T03:05:21Z'
+    new_packing:
+      source: '#528: ''All three are new arrangements, not refinements of the previous packings.'''
+  - n: 211
+    printed: '14.99633672133631569465'
+    rounding: cut
+    exact: 74981683606681578473292015533873289965462274509366086287257074981683606681578473292015533873289965462274509366086287257/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: records/n0211.sqcert (its s line) at dostashev/square-packing@a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f
+    first_committed: '2026-10-11T13:21:30Z'
+    note: 'the issue''s update to #501 at the same commit; T-149 registered #501''s packing'
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-149
+      source: '#528: the same commit stores #501''s 155, 156 and 211 ''at the exact optima
+        of their contact topologies ... with the same arrangements'''
+  - n: 232
+    printed: '15.76417431748659662944782322004234282577'
+    rounding: up
+    exact: 31528348634973193258895646440084685651524191041221518308579031528348634973193258895646440084685651524191041221518308579/2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: records/n0232.sqcert (its s line) at dostashev/square-packing@a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f
+    first_committed: '2026-10-12T03:05:21Z'
+    new_packing:
+      source: '#528: ''All three are new arrangements, not refinements of the previous packings.'''
+  - n: 264
+    printed: '16.77473513238783284261026458732177098083'
+    rounding: up
+    exact: 167747351323878328426102645873217709808239488409494842884223167747351323878328426102645873217709808239488409494842884223/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: records/n0264.sqcert (its s line) at dostashev/square-packing@a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f
+    first_committed: '2026-10-12T03:05:21Z'
+    new_packing:
+      source: '#528: ''All three are new arrangements, not refinements of the previous packings.'''
+- report: '#529'
+  issue: 529
+  holders: Rio Calle (riocalle)
+  bead: think-s2i8
+  claims:
+  - n: 102
+    printed: '10.605828696455852'
+    rounding: unstated
+    first_committed: '2026-10-12T04:23:19Z'
+    note: decimal poses at riocalle/my-repo@831368623f2d4dcef2e9434fd85c3e154083c97d; the
+      author's exact certificate is not public
+    new_packing:
+      source: '#529: found ''on its own'' from scratch; it ''arranges the squares differently''
+        from T-125''s'
+- report: '#552'
+  issue: 552
+  holders: Evan Daniel (evand)
+  bead: think-6no5
+  note: open, and not registered on main; think-6no5 holds its import
+  claims:
+  - n: 154
+    printed: '12.922566401934059503377267965457'
+    rounding: exact
+    first_committed: '2026-10-12T13:58:36Z'
+    note: S' = 12922566401934059503377267965457/10^30 as the issue states it; first commit
+      evand/square-packing@597e660c9a078a552991ab893cda3ab693cb5ac8 (think-6no5)
+    new_packing:
+      source: '#552: ''a different local minimum from T-136''s packing''; its comment traces
+        it to Couzo''s 155 less one square'
+- report: '#561'
+  issue: 561
+  holders: Francisco Couzo (franciscouzo)
+  bead: think-rfce
+  lanes:
+  - lane: couzo
+    packet: couzo-certificates-2026-10-12
+    record: claims.json
+  claims:
+  - n: 156
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issue''s lineage'
+      continues: Daniil Ostashev's arrangement (T-149)
+  - n: 176
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issue''s lineage'
+      continues: Daniil Ostashev's arrangement (#562's 176)
+  - n: 237
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issue''s lineage'
+      continues: Nate Chaoweeraprasit's SQUISH arrangement (the author's own T-140)
+  - n: 271
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issue''s lineage'
+      continues: Nate Chaoweeraprasit's SQUISH arrangement (T-151)
+  - n: 338
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issue''s lineage'
+      continues: the author's own L-border construction (#506)
+  - n: 344
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issue''s lineage'
+      continues: 'Kevin Fang''s 344 (#484), through the author''s #506'
+  - n: 375
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issue''s lineage'
+      continues: the author's own L-border construction (#506)
+  - n: 376
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issue''s lineage'
+      continues: the author's own L-border construction (#506)
+  - n: 378
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issue''s lineage'
+      continues: the author's own L-border construction (#506)
+- report: '#562'
+  issue: 562
+  holders: Daniil Ostashev (dostashev)
+  bead: think-nrqu
+  lanes:
+  - lane: ostashev
+    packet: dostashev-compositions-2026-10-12
+    record: claims.json
+  - lane: ostashev
+    packet: dostashev-compositions-2026-10-12
+    record: claims.json
+    counts:
+    - 176
+  claims:
+  - n: 129
+    new_packing:
+      source: '#562: 204 and 303 are new arrangements; 129 is ''a different local optimum,
+        not a refinement of Xu''s'' (packing/resources/web/dostashev-compositions-2026-10-12/README.md
+        at claude/wizardly-meitner-wqn4x3-intake-1014-ostashev@8d396177be2f7e5067a1d41d1edff12075f6d7af:
+        nothing there decides whether 129 is a placement of Ryan Xu''s packing)'
+  - n: 176
+    printed: '13.808663234387'
+    rounding: up
+    note: 'stated under ''Not requested: 176''; the issue does not ask for it (the lane reads
+      13.808663234386957 from the source README)'
+    new_packing:
+      source: '#562: a composition of #528''s 38-square block, the 44-square block and 94
+        aligned squares'
+  - n: 204
+    new_packing:
+      source: '#562: 204 and 303 are new arrangements; 129 is ''a different local optimum,
+        not a refinement of Xu''s'' (packing/resources/web/dostashev-compositions-2026-10-12/README.md
+        at claude/wizardly-meitner-wqn4x3-intake-1014-ostashev@8d396177be2f7e5067a1d41d1edff12075f6d7af:
+        nothing there decides whether 129 is a placement of Ryan Xu''s packing)'
+  - n: 303
+    new_packing:
+      source: '#562: 204 and 303 are new arrangements; 129 is ''a different local optimum,
+        not a refinement of Xu''s'' (packing/resources/web/dostashev-compositions-2026-10-12/README.md
+        at claude/wizardly-meitner-wqn4x3-intake-1014-ostashev@8d396177be2f7e5067a1d41d1edff12075f6d7af:
+        nothing there decides whether 129 is a placement of Ryan Xu''s packing)'
+- report: '#564'
+  issue: 564
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-z5gq
+  lanes:
+  - lane: pingyou
+    packet: pingyou-n302-certificate-2026-10-12
+    record: claims.json
+  claims:
+  - n: 302
+    reported_at: '2026-10-12T22:17:00Z'
+    note: the refined certificate replaced the issue's original one (17.8702753841786227538399992)
+      in an edit announced by comment 6133625109
+    new_packing:
+      source: 'packing/resources/web/pingyou-n302-certificate-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pingyou@680123806e979029a25948aa98d9aaf5473ccc33:
+        the source credits PingYou Ltd with the n302 construction and its refinement; the
+        issue refines its own original certificate, which no record holds'
+- report: '#504 comment 6133737268'
+  issue: 504
+  comment: 6133737268
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-rb3n
+  lanes:
+  - lane: pingyou
+    packet: pingyou-n153-refinement-2026-10-12
+    record: claims.json
+  claims:
+  - n: 153
+    refines:
+      packing_of: PingYou Ltd
+      entry: T-148
+      source: 'packing/resources/web/pingyou-n153-refinement-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pingyou@680123806e979029a25948aa98d9aaf5473ccc33:
+        a refined certificate of the n153 construction T-148 registers, the same packing'
+- report: '#503 comment 6133755143'
+  issue: 503
+  comment: 6133755143
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-z8aj
+  lanes:
+  - lane: pingyou
+    packet: pingyou-n207-refinement-2026-10-12
+    record: claims.json
+  claims:
+  - n: 207
+    refines:
+      packing_of: PingYou Ltd
+      entry: T-147
+      source: 'packing/resources/web/pingyou-n207-refinement-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pingyou@680123806e979029a25948aa98d9aaf5473ccc33:
+        a refined certificate of the n207 assembly T-147 registers'
+- report: '#566'
+  issue: 566
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-r8ti
+  lanes:
+  - lane: pingyou
+    packet: pingyou-n146-refinement-2026-10-12
+    record: claims.json
+  claims:
+  - n: 146
+    reported_at: '2026-10-12T23:41:41Z'
+    note: the further refinement replaced the issue's first certificate in an edit announced
+      by comment 6134736610
+    refines:
+      packing_of: Ryan Xu
+      entry: T-150
+      source: 'packing/resources/web/pingyou-n146-refinement-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pingyou@680123806e979029a25948aa98d9aaf5473ccc33:
+        a further refinement of Robert Barnett''s refinement (T-150) of Ryan Xu''s packing,
+        the same packing'
+- report: '#567'
+  issue: 567
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-9rm5
+  lanes:
+  - lane: pingyou
+    packet: pingyou-n261-refinement-2026-10-12
+    record: claims.json
+  claims:
+  - n: 261
+    reported_at: '2026-10-12T23:45:41Z'
+    note: the further refinement replaced the issue's first certificate in an edit announced
+      by comment 6134779741
+    refines:
+      packing_of: Ryan Xu
+      entry: T-150
+      source: 'packing/resources/web/pingyou-n261-refinement-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pingyou@680123806e979029a25948aa98d9aaf5473ccc33:
+        a further refinement of Robert Barnett''s refinement (T-150) of Ryan Xu''s packing,
+        the same packing'
+- report: '#568'
+  issue: 568
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-ztup
+  lanes:
+  - lane: pingyou
+    packet: pingyou-n105-refinement-2026-10-12
+    record: claims.json
+  claims:
+  - n: 105
+    refines:
+      packing_of: Ryan Xu
+      entry: T-130
+      source: 'packing/resources/web/pingyou-n105-refinement-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pingyou@680123806e979029a25948aa98d9aaf5473ccc33:
+        an exact contact refinement of Couzo''s refinement (T-130) of Ryan Xu''s packing,
+        the same packing'
+- report: '#569'
+  issue: 569
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-0qvc
+  lanes:
+  - lane: pingyou
+    packet: pingyou-n272-refinement-2026-10-12
+    record: claims.json
+  claims:
+  - n: 272
+    refines:
+      packing_of: Nate Chaoweeraprasit (SQUISH)
+      entry: T-151
+      source: 'packing/resources/web/pingyou-n272-refinement-2026-10-12/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pingyou@680123806e979029a25948aa98d9aaf5473ccc33:
+        an exact contact refinement of Nate Chaoweeraprasit''s SQUISH packing (T-151), the
+        same packing'
+- report: '#570'
+  issue: 570
+  holders: Francisco Couzo (franciscouzo)
+  bead: think-rfce
+  claims:
+  - n: 154
+    printed: '12.922499814643'
+    rounding: up
+    exact: 12922499814642397493692375652931/1000000000000000000000000000000
+    exact_from: 'certificates/n154.cert (its header) at franciscouzo/square-packing@45966700cf15d3f42e064fd6da51fcb9a5def2be,
+      the bytes #570 names by SHA-256 (5335cb3b...)'
+    note: '#570''s pin 1b31bc907d2d881c6962739b6b40cd10b1cd5a9c is no longer served by GitHub'
+    new_packing:
+      source: '#570: continued Evan Daniel''s arrangement from #552, then exact finishing'
+      continues: Evan Daniel's arrangement (#552)
+  - n: 379
+    printed: '19.953542593650'
+    rounding: up
+    note: 'the certificate #570 names (SHA-256 ac463682...) is in no reachable commit of the
+      source'
+    new_packing:
+      source: '#570: continued the author''s L-border construction reported in #506'
+      continues: the author's own L-border construction (#506)
+- report: '#573'
+  issue: 573
+  holders: Mishapolk (Mishapolk)
+  bead: think-2zz8
+  lanes:
+  - lane: mishapolk
+    packet: mishapolk-exact-certificates-2026-10-12
+    record: claims.json
+    all: true
+    printed_in_note: true
+  claims:
+  - n: 103
+    new_packing:
+      source: '#573: continued Ryan Xu''s arrangement from #432'
+      continues: Ryan Xu's arrangement (#432)
+  - n: 153
+    new_packing:
+      source: '#573: ''new arrangement discovered using basin hopping'''
+    measured:
+      against: PingYou Ltd's T-148 packing
+      finding: 51 of 153 squares coincide to 1e-6, 53 to 1e-3 and 147 lie within 0.1 (largest
+        displacement 0.139), best of the box's 8 symmetries; the side 2.56e-12 below T-148's
+      source: packing/campaign/issue-intake/upper-bounds-20261014/review/compare_geometry.py
+        (docs/project/reviews/review-2026-10-14-intake-ledger.md, M5)
+  - n: 207
+    new_packing:
+      source: '#573: ''new arrangement discovered using basin hopping'''
+    measured:
+      against: PingYou Ltd's T-147 packing
+      finding: 'all 207 squares lie within 2.8e-4 of T-147''s packing and 200 within 1e-6,
+        best of the box''s 8 symmetries; the side 1.49e-9 below T-147''s: the same contact
+        topology by measurement'
+      source: packing/campaign/issue-intake/upper-bounds-20261014/review/compare_geometry.py
+        (docs/project/reviews/review-2026-10-14-intake-ledger.md, M5)
+  - n: 209
+    new_packing:
+      source: '#573: ''new arrangement discovered using basin hopping'''
+  - n: 258
+    new_packing:
+      source: '#573: continued Nate Chaoweeraprasit''s (SQUISH) arrangement from the register'
+      continues: Nate Chaoweeraprasit's SQUISH arrangement (the register)
+  - n: 270
+    new_packing:
+      source: '#573: ''new arrangement discovered using basin hopping'''
+- report: 'PR #574'
+  pull: 574
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-9v2k
+  lanes:
+  - lane: pr574
+    packet: pingyou-pr574-certificates-2026-10-13
+    record: claims.json
+  - lane: pr574
+    packet: pingyou-pr574-certificates-2026-10-13
+    record: algebraic-claims.json
+    all: true
+  claims:
+  - n: 5
+    refines:
+      packing_of: Frits Göbel
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 10
+    refines:
+      packing_of: Frits Göbel
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 11
+    printed: '3.8770835900228141773078970601009627063765'
+    rounding: up
+    exact: 9967775525129488857910847345221762092823583224855535125340691887023025807464064426656968159106838316429280751476360768483269647470605062696766148672930398672092798300270353503338096444328406756095268179667990159779742058001529713911156996703267897568235632779990193022848272980654730223793730058188361012329301468316252786221990462310299292463587919450581459919955199265732102536001320348333980981690422887709192068656891131956457379374999942227720594203758827274054193503752/2570946768024373398277950050246035867351154760464540370012306692230571163114076643237160264347051434642189438681233596686470035996358384188427901188641683478818447317225886712746903297259990760155749994940105336049995866743881585537501399754017433147805810656202785719454957266144817502724420682102932379498856829409569198815982406856101327002108818096947316723574162792283149352610517763771364365379367460243733416807617646942005807171263997413050867039992875656132453690965
+    exact_from: packing/resources/web/pingyou-numerical-refinements-2026-10-13/claims.json
+      (side_exact) at pull/574 head 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde
+    first_committed: '2026-10-13T00:24:05Z'
+    note: a v2 row the lane does not declare; the side is the pull request's own, not replayed
+    refines:
+      packing_of: Walter Trump
+      entry: T-011
+      source: 'the pull request''s claims.json at 4c319c2: classification tighter_rational_certificate_same_known_nominal_design'
+  - n: 17
+    printed: '4.6755300936045509516341112704831466487672'
+    rounding: up
+    exact: 3115394394360095972682706770230785821156995881510509324634704631918243022936629050033001874076328139931910976106680050717506552671197270135264268609238663091968899647895295241065951610998552007792453799264043638452865417416810963610622336150721822548276142066762201057831840478880146919501498150930986366656507459990233649670960435136524280746815658679885862242450404814013860972900343924739200186411697137841028240403643770772140684353337936983471303573557924438525685188802162063535689971330633339136589292824244212201343749305037774689577995557286766235126221709802819034600160962379304595089342754533695545287449848899875658399602973668215392190573215809829961/666318969611917372277291779056354783080251728440949457289591418475538985545822209323559985138814100485918698667536650919880886505285767989155629980502842001642939427085184894657614083068368103165755622831595638356364780099765957123967629324733389539700758121641220944208823744889116762120944220012082618934097288135223276063580083108101959824843030035990957870300959229337593617215547352546196422820214465336947742332552675503116481718166353037236988006066528966023483431276487456203864953652353442455803631666985150858737007556540337396251455923083506190638996548877816174884084170952461270070263454794539530504206503953864934704188102680279399457519063004069767
+    exact_from: packing/resources/web/pingyou-numerical-refinements-2026-10-13/claims.json
+      (side_exact) at pull/574 head 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde
+    first_committed: '2026-10-13T00:24:05Z'
+    note: a v2 row the lane does not declare; the side is the pull request's own, not replayed
+    refines:
+      packing_of: John Bidwell
+      entry: '[Kingbird]'
+      source: 'the pull request''s claims.json at 4c319c2: classification tighter_rational_certificate_same_known_nominal_design'
+  - n: 18
+    refines:
+      packing_of: Pertti Hämäläinen
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 19
+    refines:
+      packing_of: Robert Wainwright
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 26
+    refines:
+      packing_of: Erich Friedman
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 27
+    refines:
+      packing_of: Frits Göbel
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 28
+    refines:
+      packing_of: the Kingbird catalogue (David Ellsworth), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 29
+    printed: '5.9338334626769291896894606163520191384339'
+    rounding: up
+    exact: 33022563535423359668136039581119360038720445483416840763411646713852285423491353302188490578733492347363109142588926150272072509759531098172296454224816754297412786984687758682711800340946322384169736030165007264185176605256060513930541248895740662174065536816975335181228612889643370123353743402597680477484903997483122358788311680427862015740852088118324453114450487288109709336750854928298521862420098810274285112950747699474761059547079187477814575193952657759480572267535546098764801316018529001570419882848719388773257624662041427040839265820449480129668156469939357696577987673153250543776086463350674867012355421269069408001603128967082016778568136309019/5565131502785030421779046332860148052527886235910167872998927275876609168288579831715867301920067246525753475292866777050410329212553687991010667983381571941218125667175529597381620404843324386941830852553357429617015751493762664670883016909880105069434163942588766116268073736365581039749817363527185299330721048892046598205105895990621678245702806248958548858472870842702167587851008100659948339328358628089953500335988762401974514862833696923564351703336211037204076669379083757449597382830970237557672538034962820923301658060789624402336976525086198541979225148279164313539837512704683389172717861054934001323245622552108638964356287953979173722692584499293
+    exact_from: packing/resources/web/pingyou-numerical-refinements-2026-10-13/claims.json
+      (side_exact) at pull/574 head 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde
+    first_committed: '2026-10-13T00:24:05Z'
+    note: a v2 row the lane does not declare; the side is the pull request's own, not replayed;
+      the case record packing/frontier/n-029.md prints its verified value 5.93383346267692918974379895098,
+      5.43e-20 above its own exact form 296691673133846459484473030817600957/5e34, a defect
+      of the record; this ledger compares against the exact form
+    refines:
+      packing_of: Thomas Schadt
+      entry: '[Kingbird]'
+      source: 'the pull request''s claims.json at 4c319c2: classification tighter_rational_certificate_same_known_nominal_design'
+  - n: 37
+    refines:
+      packing_of: the Kingbird catalogue (David W. Cantrell), verified by T-155's exact ceiling
+      entry: T-155
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 38
+    refines:
+      packing_of: Frits Göbel
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 39
+    refines:
+      packing_of: the Kingbird catalogue (Thomas Schadt), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 40
+    refines:
+      packing_of: Frits Göbel
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 41
+    refines:
+      packing_of: the Kingbird catalogue (Thomas Schadt), verified by T-155's exact ceiling
+      entry: T-155
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 50
+    refines:
+      packing_of: the Kingbird catalogue (Thomas Schadt), verified by T-155's exact ceiling
+      entry: T-155
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 51
+    refines:
+      packing_of: Ryan Xu
+      entry: T-126
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 52
+    refines:
+      packing_of: Frits Göbel
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 53
+    refines:
+      packing_of: David W. Cantrell
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 54
+    refines:
+      packing_of: David W. Cantrell
+      entry: '[Kingbird]'
+      source: 'think-9v2k: all are padding reductions or exact attainments of packings others
+        found; the pr574 lane''s README: the quartic side is below the verified ceiling'
+  - n: 55
+    refines:
+      packing_of: the Kingbird catalogue (Thomas Schadt), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 65
+    refines:
+      packing_of: Frits Göbel
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 66
+    refines:
+      packing_of: Evert Stenlund
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 67
+    refines:
+      packing_of: Evert Stenlund
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 68
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-118
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 69
+    refines:
+      packing_of: the Kingbird catalogue (Maurizio Morandi), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 70
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: 'think-9v2k: N70 attains Xu''s packing exactly, 8.9e-20 below the case'
+  - n: 71
+    refines:
+      packing_of: the Kingbird catalogue (Thomas Schadt), verified by T-155's exact ceiling
+      entry: T-155
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 82
+    refines:
+      packing_of: Frits Göbel
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 83
+    refines:
+      packing_of: the Kingbird catalogue (Károly Hajba), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 84
+    refines:
+      packing_of: Ryan Xu
+      entry: T-130
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 85
+    refines:
+      packing_of: Erich Friedman
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 86
+    refines:
+      packing_of: Ryan Xu
+      entry: T-130
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 87
+    refines:
+      packing_of: the Kingbird catalogue (David Ellsworth), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 88
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-127
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 89
+    refines:
+      packing_of: Evert Stenlund
+      entry: '[Kingbird],'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 101
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 102
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 103
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 104
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 105
+    refines:
+      packing_of: Ryan Xu
+      entry: T-130
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 106
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 107
+    refines:
+      packing_of: Károly Hajba
+      entry: '[Kingbird]'
+      source: 'think-9v2k: all are padding reductions or exact attainments of packings others
+        found; the pr574 lane''s README: the quartic side is below the verified ceiling'
+  - n: 108
+    refines:
+      packing_of: Ryan Xu
+      entry: T-128
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 109
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 110
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 122
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 123
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 124
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 125
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 126
+    refines:
+      packing_of: Ryan Xu
+      entry: T-139
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 127
+    refines:
+      packing_of: Ryan Xu
+      entry: T-128
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 128
+    refines:
+      packing_of: the Kingbird catalogue (David Ellsworth), verified by T-155's exact ceiling
+      entry: T-155
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 129
+    refines:
+      packing_of: Daniil Ostashev
+      entry: '#562'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176'
+  - n: 130
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-127
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 131
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-136
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 132
+    refines:
+      packing_of: Evan Daniel
+      entry: T-141
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 145
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 146
+    refines:
+      packing_of: Ryan Xu
+      entry: '#566'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176'
+  - n: 147
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 148
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 149
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 150
+    refines:
+      packing_of: David Ellsworth
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 151
+    refines:
+      packing_of: David Ellsworth
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 152
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 153
+    first_committed: '2026-10-13T01:29:11Z'
+    note: the lane records 2026-10-13T00:29:11Z; the commit that adds the N153/N302 manifest,
+      a006c45, is 02:29:11+01:00
+    refines:
+      packing_of: PingYou Ltd
+      entry: T-148
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        PingYou''s own constructions attained exactly, below T-148''s ceiling; think-9v2k'
+  - n: 155
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-149
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 156
+    refines:
+      packing_of: Francisco Couzo
+      entry: '#561'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176'
+  - n: 170
+    refines:
+      packing_of: Károly Hajba
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 171
+    refines:
+      packing_of: the Kingbird catalogue (David Ellsworth), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 172
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 173
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 174
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 175
+    refines:
+      packing_of: Daniil Ostashev
+      entry: '#528'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176; at 175, 232 and 264 the pr574 lane compares it with
+        #593, whose certificate there is #528''s exact side rounded up at 30 places (checked
+        in this ledger)'
+  - n: 176
+    refines:
+      packing_of: Daniil Ostashev
+      entry: '#575'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176'
+  - n: 177
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 178
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'think-9v2k: all are padding reductions or exact attainments of packings others
+        found; the pr574 lane''s README: the quartic side is below the verified ceiling'
+  - n: 179
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-127
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 180
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-128
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 181
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-151
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 182
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 197
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 198
+    refines:
+      packing_of: the Kingbird catalogue (), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 199
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-127
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 200
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 201
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 202
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 203
+    refines:
+      packing_of: David Ellsworth
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 204
+    refines:
+      packing_of: Daniil Ostashev
+      entry: '#562'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176'
+  - n: 205
+    refines:
+      packing_of: the Kingbird catalogue (David Ellsworth), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 206
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 207
+    refines:
+      packing_of: PingYou Ltd
+      entry: T-147
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        PingYou''s own constructions attained exactly, below T-147''s ceiling; think-9v2k'
+  - n: 208
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-127
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 209
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-140
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 210
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 211
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-149
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 226
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 227
+    refines:
+      packing_of: David Ellsworth
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 228
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-128
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 229
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 230
+    refines:
+      packing_of: the Kingbird catalogue (David Ellsworth), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 231
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 232
+    refines:
+      packing_of: Daniil Ostashev
+      entry: '#528'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176; at 175, 232 and 264 the pr574 lane compares it with
+        #593, whose certificate there is #528''s exact side rounded up at 30 places (checked
+        in this ledger)'
+  - n: 233
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 234
+    refines:
+      packing_of: David Ellsworth
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 235
+    refines:
+      packing_of: the Kingbird catalogue (David Ellsworth, David W. Cantrell), verified by
+        T-155's exact ceiling
+      entry: T-155
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 236
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 237
+    refines:
+      packing_of: Francisco Couzo
+      entry: '#561'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176'
+  - n: 238
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-151
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 239
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-151
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 240
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 241
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 257
+    refines:
+      packing_of: David Ellsworth
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 258
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 259
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-136
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 260
+    refines:
+      packing_of: David Ellsworth
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 261
+    refines:
+      packing_of: Ryan Xu
+      entry: '#567'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176'
+  - n: 262
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 263
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 264
+    refines:
+      packing_of: Daniil Ostashev
+      entry: '#528'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176; at 175, 232 and 264 the pr574 lane compares it with
+        #593, whose certificate there is #528''s exact side rounded up at 30 places (checked
+        in this ledger)'
+  - n: 265
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 266
+    refines:
+      packing_of: Evan Daniel
+      entry: T-119
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 267
+    refines:
+      packing_of: Ryan Xu
+      entry: T-134
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 268
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 269
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 270
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-151
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 271
+    refines:
+      packing_of: Francisco Couzo
+      entry: '#561'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176'
+  - n: 272
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-151
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 273
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 290
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 291
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 292
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 293
+    refines:
+      packing_of: the Kingbird catalogue (David Ellsworth), verified by T-101's exact ceiling
+      entry: T-101
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 294
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 295
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 296
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 297
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 298
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 299
+    refines:
+      packing_of: '[Kingbird]'
+      entry: '[Kingbird]'
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        the algebraic side is the case''s closed form exactly (16 counts in the verified lane,
+        37 in the reported lane); think-9v2k: exact attainments of packings others found'
+  - n: 300
+    refines:
+      packing_of: the Kingbird catalogue (David Ellsworth), verified by T-155's exact ceiling
+      entry: T-155
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 301
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 302
+    first_committed: '2026-10-13T01:29:11Z'
+    note: the lane records 2026-10-13T00:29:11Z; the commit that adds the N153/N302 manifest,
+      a006c45, is 02:29:11+01:00
+    refines:
+      packing_of: PingYou Ltd
+      entry: '#564'
+      source: 'think-9v2k (PingYou''s own N302; N153 and N302 already exact algebraic) and
+        the pull request''s commit 649e689, ''submit exact N153 and N302 attainments''; #564
+        states the same N302 construction'
+  - n: 303
+    refines:
+      packing_of: Daniil Ostashev
+      entry: '#562'
+      source: 'think-9v2k triage: 12 rational counts relay newer packings of open reports
+        (N129 #562, N146 #566, N156 #561, N175, N176 #575, N204 #562, N232, N237 #561, N261
+        #567, N264, N271 #561, N303 #562); think-rfce and the couzo lane''s README name #561
+        at 156, 237, 271 and #575 at 176'
+  - n: 304
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-152
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 305
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-152
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 306
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-128
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 307
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-136
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 308
+    refines:
+      packing_of: Kevin Fang
+      entry: T-141
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+- report: '#575'
+  issue: 575
+  holders: Daniil Ostashev (dostashev)
+  bead: think-34sy
+  lanes:
+  - lane: ostashev
+    packet: dostashev-merged-bands-2026-10-13
+    record: claims.json
+  claims:
+  - n: 176
+    new_packing:
+      source: '#575: ''All four are new arrangements.'' (packing/resources/web/dostashev-merged-bands-2026-10-13/README.md
+        at claude/wizardly-meitner-wqn4x3-intake-1014-ostashev@8d396177be2f7e5067a1d41d1edff12075f6d7af:
+        at 211 ''a different packing, not a refinement'' of T-149''s)'
+  - n: 211
+    note: replaces the packing T-149 registered at 211 (the ostashev lane)
+    new_packing:
+      source: '#575: ''All four are new arrangements.'' (packing/resources/web/dostashev-merged-bands-2026-10-13/README.md
+        at claude/wizardly-meitner-wqn4x3-intake-1014-ostashev@8d396177be2f7e5067a1d41d1edff12075f6d7af:
+        at 211 ''a different packing, not a refinement'' of T-149''s)'
+  - n: 241
+    new_packing:
+      source: '#575: ''All four are new arrangements.'' (packing/resources/web/dostashev-merged-bands-2026-10-13/README.md
+        at claude/wizardly-meitner-wqn4x3-intake-1014-ostashev@8d396177be2f7e5067a1d41d1edff12075f6d7af:
+        at 211 ''a different packing, not a refinement'' of T-149''s)'
+  - n: 304
+    reported_at: '2026-10-13T04:13:31Z'
+    note: added to the issue by the edit its comment 6138078023 announces; the certificate's
+      dilation is delta = 1e-59, not the 1e-60 the issue states (the ostashev lane)
+    new_packing:
+      source: '#575: ''All four are new arrangements.'' (packing/resources/web/dostashev-merged-bands-2026-10-13/README.md
+        at claude/wizardly-meitner-wqn4x3-intake-1014-ostashev@8d396177be2f7e5067a1d41d1edff12075f6d7af:
+        at 211 ''a different packing, not a refinement'' of T-149''s)'
+- report: '#582'
+  issue: 582
+  holders: Miles Gray (mstrmg)
+  bead: think-k8z2
+  claims:
+  - n: 381
+    printed: 19985624661051481/1000000000000000
+    rounding: exact
+    note: the side the issue states; the certificate is an issue attachment
+    new_packing:
+      source: '#582: grown from published 343 packings by a row and a column of squares, then
+        optimised'
+      continues: the 343 packings of Evan Daniel (#489) and Kevin Fang (#484)
+- report: '#583'
+  issue: 583
+  holders: Francisco Couzo (franciscouzo)
+  bead: think-rfce
+  lanes:
+  - lane: couzo
+    packet: couzo-certificates-2026-10-13
+    record: claims.json
+  claims:
+  - n: 154
+    printed: '12.922499814643'
+    rounding: up
+    exact: 12922499814642397493692375652931/1000000000000000000000000000000
+    exact_from: certificates/n154.cert (its header) at franciscouzo/square-packing@45966700cf15d3f42e064fd6da51fcb9a5def2be
+    note: 'the certificate #570 names (SHA-256 5335cb3b...); first in reachable history at
+      4596670, but #570 pinned it earlier at 1b31bc90, which GitHub no longer serves'
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: Evan Daniel's arrangement (#552)
+  - n: 211
+    printed: '14.993558914123'
+    rounding: up
+    exact: 5735936523425659529936799651/382560041700500000000000000
+    exact_from: certificates/n211.cert (its header) at franciscouzo/square-packing@45966700cf15d3f42e064fd6da51fcb9a5def2be
+    first_committed: '2026-10-13T13:53:57Z'
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: Daniil Ostashev's arrangement (#575)
+  - n: 241
+    printed: '15.987117095169'
+    rounding: up
+    exact: 56654293892568867634658195801/3543746727775500000000000000
+    exact_from: certificates/n241.cert (its header) at franciscouzo/square-packing@45966700cf15d3f42e064fd6da51fcb9a5def2be
+    first_committed: '2026-10-13T13:53:57Z'
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: Daniil Ostashev's arrangement (#575)
+  - n: 302
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: PingYou Ltd's arrangement (#564)
+  - n: 339
+    printed: '18.927383638495'
+    rounding: up
+    exact: 4247372425158980137376328899/224403568199500000000000000
+    exact_from: certificates/n339.cert (its header) at franciscouzo/square-packing@45966700cf15d3f42e064fd6da51fcb9a5def2be
+    first_committed: '2026-10-13T13:53:57Z'
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: the author's own L-border construction (#506)
+  - n: 379
+    printed: '19.953531531603'
+    rounding: up
+    exact: 3990706306320510429876555652417/200000000000000000000000000000
+    exact_from: certificates/n379.cert (its header) at franciscouzo/square-packing@45966700cf15d3f42e064fd6da51fcb9a5def2be
+    first_committed: '2026-10-13T13:53:57Z'
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: the author's own L-border construction (#506)
+  - n: 380
+    printed: '19.973553606628'
+    rounding: up
+    exact: 71405320581108789876116351057/3574993313028500000000000000
+    exact_from: certificates/n380.cert (its header) at franciscouzo/square-packing@45966700cf15d3f42e064fd6da51fcb9a5def2be
+    first_committed: '2026-10-13T13:53:57Z'
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: Kevin Fang's published arrangement (TheSnakeFang/squarepack-certs)
+  - n: 381
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: Kevin Fang's published arrangement (TheSnakeFang/squarepack-certs)
+  - n: 382
+    printed: '19.988600568289'
+    rounding: up
+    exact: 94198950843216391147752843823/4712633609411500000000000000
+    exact_from: certificates/n382.cert (its header) at franciscouzo/square-packing@45966700cf15d3f42e064fd6da51fcb9a5def2be
+    first_committed: '2026-10-13T13:53:57Z'
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: Kevin Fang's published arrangement (TheSnakeFang/squarepack-certs)
+- report: '#584'
+  issue: 584
+  holders: Evan Daniel (evand)
+  bead: think-x333
+  lanes:
+  - lane: ostashev
+    packet: evand-compositions-2026-10-13
+    record: claims.json
+  claims:
+  - n: 339
+    new_packing:
+      source: '#584: two-piece compositions, ''new arrangements of known pieces, not new local
+        structure'''
+  - n: 364
+    new_packing:
+      source: '#584: two-piece compositions, ''new arrangements of known pieces, not new local
+        structure'''
+  - n: 375
+    new_packing:
+      source: '#584: two-piece compositions, ''new arrangements of known pieces, not new local
+        structure'''
+- report: '#586'
+  issue: 586
+  holders: Francisco Couzo (franciscouzo)
+  bead: think-rfce
+  lanes:
+  - lane: couzo
+    packet: couzo-certificates-2026-10-13
+    record: claims.json
+  claims:
+  - n: 154
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: Evan Daniel's arrangement (#552)
+  - n: 211
+    refines:
+      packing_of: Francisco Couzo
+      entry: '#583'
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74:
+        #586 replaces #583''s certificates ''with tighter certificates of the same arrangements,
+        at 211 and 241'''
+  - n: 241
+    refines:
+      packing_of: Francisco Couzo
+      entry: '#583'
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74:
+        #586 replaces #583''s certificates ''with tighter certificates of the same arrangements,
+        at 211 and 241'''
+  - n: 339
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: the author's own L-border construction (#506)
+  - n: 379
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: the author's own L-border construction (#506)
+  - n: 380
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: Kevin Fang's published arrangement (TheSnakeFang/squarepack-certs)
+  - n: 382
+    new_packing:
+      source: 'packing/resources/web/couzo-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-couzo@f8ecf2173fa69c32729e1251cdeb96a6c3007f74,
+        Credit and Licence: the issues'' lineage'
+      continues: Kevin Fang's published arrangement (TheSnakeFang/squarepack-certs)
+- report: '#589'
+  issue: 589
+  holders: Miles Gray (mstrmg)
+  bead: think-ts16
+  note: 'closed by its author 20 seconds after it was opened; the same claim as #582'
+  claims:
+  - n: 381
+    printed: 19985624661051481/1000000000000000
+    rounding: exact
+    note: 'the same certificate as #582 (SHA-256 03650573...)'
+    new_packing:
+      source: '#589: the same certificate as #582, grown from published 343 packings'
+      continues: the 343 packings of Evan Daniel (#489) and Kevin Fang (#484)
+- report: '#593'
+  issue: 593
+  holders: Mishapolk (Mishapolk)
+  bead: think-2ep3
+  rounding: binary64
+  lanes:
+  - lane: mishapolk
+    packet: mishapolk-records-2026-10-14
+    record: claims.json
+    all: true
+  claims:
+  - n: 51
+    printed: '7.6903559372884915'
+    rounding: binary64
+    exact: 7690355937288491748079718099723/1000000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-records-2026-10-14/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-mishapolk@d4c198d0da8fe619bef0bccf18a8e6e32520c0f3,
+      from the header of certificates/n51.cert at Mishapolk/square-packing-records@46f638ce0537beeb1bad24242c6a3d357eecd9ee
+      (SHA-256 e066f65f...), which the review of 2026-10-14 re-read
+    note: held out of the lane's declaration, whose house reader cannot rebuild the radical
+      case side; the side is stated in its README
+  - n: 68
+    printed: '8.7987952372182843'
+    rounding: binary64
+  - n: 70
+    printed: '8.8809603715555792'
+    rounding: binary64
+    restates: 'restates the packing of the record T-146 (Ryan Xu, improved by Evan Daniel):
+      the same exact side'
+  - n: 84
+    printed: '9.6979347990149218'
+    rounding: binary64
+    restates: 'restates the packing of the record T-130 (Ryan Xu, improved by Francisco Couzo):
+      the same exact side'
+  - n: 86
+    printed: '9.8205354074967417'
+    rounding: binary64
+    restates: 'restates the packing of the record T-130 (Ryan Xu, improved by Francisco Couzo):
+      the same exact side'
+  - n: 88
+    printed: '9.8824510304812474'
+    rounding: binary64
+    restates: 'restates the packing of the record T-127 (Nate Chaoweeraprasit (itsnaka), improved
+      by Siddharth Gupta): the same exact side'
+  - n: 102
+    printed: '10.6058286964315780'
+    rounding: binary64
+    restates: 'restates the packing of the record T-146 (Ryan Xu, improved by Evan Daniel):
+      the same exact side'
+  - n: 103
+    printed: '10.6792320473613493'
+    rounding: binary64
+    restates: 'restates Mishapolk''s own #573 certificate: the same bytes, first committed
+      at 336bdf5 (the mishapolk lane''s README)'
+  - n: 105
+    printed: '10.7893037837481582'
+    rounding: binary64
+    restates: 'restates the packing of the record T-130 (Ryan Xu, improved by Francisco Couzo):
+      the same exact side'
+  - n: 106
+    printed: '10.8229080441328467'
+    rounding: binary64
+  - n: 108
+    printed: '10.9048210123203564'
+    rounding: binary64
+    restates: 'restates the packing of the record T-128 (Ryan Xu, improved by Francisco Couzo):
+      the same exact side'
+  - n: 110
+    printed: '10.9967833966315922'
+    rounding: binary64
+  - n: 123
+    printed: '11.5913781454976981'
+    rounding: binary64
+    restates: 'restates the packing of the record T-146 (Ryan Xu, improved by Evan Daniel):
+      the same exact side'
+  - n: 126
+    printed: '11.7426406871192857'
+    rounding: binary64
+    restates: 'restates the packing of the record T-139 (Ryan Xu, improved by Evan Daniel):
+      the same exact side'
+  - n: 127
+    printed: '11.8108787875891803'
+    rounding: binary64
+    restates: 'restates the packing of the record T-128 (Ryan Xu, improved by Francisco Couzo):
+      the same exact side'
+  - n: 129
+    printed: '11.8700138504044652'
+    rounding: binary64
+    restates: 'restates Daniil Ostashev''s #562 packing: its exact side rounded up at 30 places'
+  - n: 130
+    printed: '11.9044830325157864'
+    rounding: binary64
+    restates: 'restates the packing of the record T-127 (Nate Chaoweeraprasit (itsnaka), improved
+      by Siddharth Gupta): the same exact side'
+  - n: 131
+    printed: '11.9496595880358605'
+    rounding: binary64
+  - n: 132
+    printed: '11.9856801988458095'
+    rounding: binary64
+    restates: 'restates the packing of the record T-141 (Evan Daniel): the same exact side'
+  - n: 146
+    printed: '12.5837822039510456'
+    rounding: binary64
+  - n: 152
+    printed: '12.8307188009766104'
+    rounding: binary64
+  - n: 153
+    printed: '12.8700138504044794'
+    rounding: binary64
+    restates: 'restates Mishapolk''s own #573 certificate: the same bytes, first committed
+      at 336bdf5 (the mishapolk lane''s README)'
+  - n: 154
+    printed: '12.9224998146423982'
+    rounding: binary64
+    restates: 'restates Francisco Couzo''s #570 packing: the same exact side'
+  - n: 155
+    printed: '12.9524254069584561'
+    rounding: binary64
+    restates: 'restates Daniil Ostashev''s #528 packing: its exact side rounded up at 30 places'
+  - n: 156
+    printed: '12.9791658538342762'
+    rounding: binary64
+    restates: 'restates Francisco Couzo''s #561 packing: the same exact side'
+  - n: 172
+    printed: '13.6189889568993987'
+    rounding: binary64
+  - n: 175
+    printed: '13.7641743174865958'
+    rounding: binary64
+    restates: 'restates Daniil Ostashev''s #528 packing: its exact side rounded up at 30 places'
+  - n: 176
+    printed: '13.7958723184364072'
+    rounding: binary64
+    restates: 'restates Daniil Ostashev''s #575 packing: its exact side rounded up at 30 places'
+  - n: 177
+    printed: '13.8229797341694489'
+    rounding: binary64
+  - n: 179
+    printed: '13.8837954905108987'
+    rounding: binary64
+    restates: 'restates the packing of the record T-127 (Nate Chaoweeraprasit (itsnaka), improved
+      by Siddharth Gupta): the same exact side'
+  - n: 180
+    printed: '13.9169935224778314'
+    rounding: binary64
+    restates: 'restates the packing of the record T-128 (Nate Chaoweeraprasit (itsnaka), improved
+      by Siddharth Gupta, Francisco Couzo): the same exact side'
+  - n: 181
+    printed: '13.9508195310229244'
+    rounding: binary64
+  - n: 182
+    printed: '13.9740907131214396'
+    rounding: binary64
+  - n: 199
+    printed: '14.6175721735928068'
+    rounding: binary64
+    restates: 'restates the packing of the record T-127 (Nate Chaoweeraprasit (itsnaka), improved
+      by Siddharth Gupta): the same exact side'
+  - n: 204
+    printed: '14.8086632343869571'
+    rounding: binary64
+    restates: 'restates Daniil Ostashev''s #562 packing: its exact side rounded up at 30 places'
+  - n: 206
+    printed: '14.8601586633919034'
+    rounding: binary64
+  - n: 207
+    printed: '14.8809603715580003'
+    rounding: binary64
+    restates: 'restates Mishapolk''s own #573 certificate: the same bytes, first committed
+      at 336bdf5 (the mishapolk lane''s README)'
+  - n: 208
+    printed: '14.9245187720293568'
+    rounding: binary64
+    restates: 'restates the packing of the record T-127 (Nate Chaoweeraprasit (itsnaka), improved
+      by Siddharth Gupta): the same exact side'
+  - n: 209
+    printed: '14.9462232264464507'
+    rounding: binary64
+    restates: 'restates the packing of the record T-140 (Nate Chaoweeraprasit (itsnaka), improved
+      by Francisco Couzo): the same exact side'
+  - n: 210
+    printed: '14.9730011165876249'
+    rounding: binary64
+  - n: 211
+    printed: '14.9935589139740060'
+    rounding: binary64
+    restates: 'restates Francisco Couzo''s #586 packing: the same exact side'
+    note: Mishapolk's commit 8bb41af (2026-10-13T15:51:54Z) precedes Couzo's b85dee2 (17:30:53Z);
+      the bytes do not say which came from which
+  - n: 228
+    printed: '15.6046014757296749'
+    rounding: binary64
+    restates: 'restates the packing of the record T-128 (Francisco Couzo): the same exact
+      side'
+  - n: 232
+    printed: '15.7641743174865958'
+    rounding: binary64
+    restates: 'restates Daniil Ostashev''s #528 packing: its exact side rounded up at 30 places'
+  - n: 236
+    printed: '15.8639557471592685'
+    rounding: binary64
+  - n: 237
+    printed: '15.9027050578663669'
+    rounding: binary64
+  - n: 238
+    printed: '15.9241067853214950'
+    rounding: binary64
+  - n: 239
+    printed: '15.9484433273005006'
+    rounding: binary64
+  - n: 240
+    printed: '15.9696853375307803'
+    rounding: binary64
+  - n: 241
+    printed: '15.9871170951502393'
+    rounding: binary64
+    restates: 'restates Francisco Couzo''s #586 packing: the same exact side'
+    note: Mishapolk's commit 8bb41af (2026-10-13T15:51:54Z) precedes Couzo's b85dee2 (17:30:53Z);
+      the bytes do not say which came from which
+  - n: 258
+    printed: '16.5634480021371715'
+    rounding: binary64
+    restates: 'restates Mishapolk''s own #573 certificate: the same bytes, first committed
+      at 336bdf5 (the mishapolk lane''s README)'
+  - n: 259
+    printed: '16.5913781454976998'
+    rounding: binary64
+  - n: 261
+    printed: '16.6787798753432064'
+    rounding: binary64
+  - n: 263
+    printed: '16.7331660078993814'
+    rounding: binary64
+    restates: 'restates the packing of the record T-146 (Nate Chaoweeraprasit (itsnaka), improved
+      by Evan Daniel): the same exact side'
+  - n: 264
+    printed: '16.7747351323878320'
+    rounding: binary64
+    restates: 'restates Daniil Ostashev''s #528 packing: its exact side rounded up at 30 places'
+  - n: 266
+    printed: '16.8230287507564746'
+    rounding: binary64
+    restates: 'restates the packing of the record T-119 (Evan Daniel): the same exact side'
+  - n: 267
+    printed: '16.8388152699482632'
+    rounding: binary64
+    restates: 'restates the packing of the record T-134 (Ryan Xu, improved by Francisco Couzo):
+      the same exact side'
+  - n: 268
+    printed: '16.8788148210067632'
+    rounding: binary64
+  - n: 269
+    printed: '16.9015135821891320'
+    rounding: binary64
+    restates: 'restates the packing of the record T-146 (Nate Chaoweeraprasit (itsnaka), improved
+      by Evan Daniel): the same exact side'
+  - n: 270
+    printed: '16.9281969933290171'
+    rounding: binary64
+  - n: 271
+    printed: '16.9489923564512068'
+    rounding: binary64
+    restates: 'restates Francisco Couzo''s #561 packing: the same exact side'
+  - n: 272
+    printed: '16.9655864748376715'
+    rounding: binary64
+  - n: 273
+    printed: '16.9839259626504031'
+    rounding: binary64
+  - n: 292
+    printed: '17.5913781454976998'
+    rounding: binary64
+    restates: 'restates the packing of the record T-146 (Nate Chaoweeraprasit (itsnaka), improved
+      by Evan Daniel): the same exact side'
+  - n: 295
+    printed: '17.7042327907360288'
+    rounding: binary64
+    restates: 'restates the packing of the record T-146 (Ryan Xu, improved by Evan Daniel):
+      the same exact side'
+  - n: 297
+    printed: '17.7404172875438029'
+    rounding: binary64
+  - n: 301
+    printed: '17.8466671928434906'
+    rounding: binary64
+  - n: 302
+    printed: '17.8702753825550609'
+    rounding: binary64
+  - n: 303
+    printed: '17.9099582910699091'
+    rounding: binary64
+    restates: 'restates Daniil Ostashev''s #562 packing: its exact side rounded up at 30 places'
+  - n: 304
+    printed: '17.9294277580751746'
+    rounding: binary64
+    restates: 'restates Daniil Ostashev''s #575 packing: its exact side rounded up at 29 places'
+  - n: 305
+    printed: '17.9504664821377133'
+    rounding: binary64
+    restates: 'restates the packing of the record T-152 (Nate Chaoweeraprasit (itsnaka), improved
+      by Francisco Couzo): the same exact side'
+  - n: 306
+    printed: '17.9634337174914265'
+    rounding: binary64
+    restates: 'restates the packing of the record T-128 (Francisco Couzo): the same exact
+      side'
+  - n: 307
+    printed: '17.9808627840546897'
+    rounding: binary64
+  - n: 308
+    printed: '17.9982698795262550'
+    rounding: binary64
+    restates: 'restates the packing of the record T-141 (Kevin Fang, improved by Evan Daniel):
+      the same exact side'
+- report: '#596'
+  issue: 596
+  holders: Evan Daniel (evand)
+  bead: think-yxkt
+  lanes:
+  - lane: ostashev
+    packet: evand-fresh-compositions-2026-10-14
+    record: claims.json
+  claims:
+  - n: 365
+    new_packing:
+      source: '#596: two-piece compositions, ''a new arrangement of known pieces'''
+  - n: 370
+    new_packing:
+      source: '#596: two-piece compositions, ''a new arrangement of known pieces'''
+  - n: 460
+    new_packing:
+      source: '#596: two-piece compositions, ''a new arrangement of known pieces'''
+- report: TheSnakeFang/squarepack-certs@e646c47
+  url: https://github.com/TheSnakeFang/squarepack-certs/tree/e646c474561f96ddae0e020fbaa5275e2ecefc4e
+  reported_at: '2026-10-12T19:06:24Z'
+  holders: Kevin Fang (TheSnakeFang)
+  bead: ''
+  note: 'a publication no issue reports; #583 names it as its comparison at 380 and 381'
+  lanes:
+  - lane: main
+    packet: fang-direct-certificates-2026-10-13
+    record: claims.json
+    counts:
+    - 380
+    - 381
+    printed_in_note: true
+    not_ours:
+    - 421
+    - 422
+    - 463
+    - 464
+    - 507
+    - 508
+    - 553
+    - 601
+    - 651
+    - 758
+    - 814
+  claims:
+  - n: 380
+    new_packing:
+      source: 'commit e646c47''s message: ''Direct packings for n = 380, 381, ...'''
+  - n: 381
+    new_packing:
+      source: 'commit e646c47''s message: ''Direct packings for n = 380, 381, ...'''
+- report: TheSnakeFang/squarepack-certs@c284cd0
+  url: https://github.com/TheSnakeFang/squarepack-certs/tree/c284cd0633238f18e8eb99dac01e59ddca28fb04
+  reported_at: '2026-10-13T00:05:31Z'
+  holders: Kevin Fang (TheSnakeFang)
+  bead: ''
+  note: 'a publication no issue reports; #583 names it as its comparison at 382'
+  lanes:
+  - lane: main
+    packet: fang-direct-certificates-2026-10-13
+    record: claims.json
+    counts:
+    - 382
+    printed_in_note: true
+  claims:
+  - n: 382
+    new_packing:
+      source: 'commit c284cd0''s message: ''Six n^2-n+2 packings (382, ...)'''
+- report: franciscouzo/square-packing@93570ef
+  url: https://github.com/franciscouzo/square-packing/tree/93570ef79474fd8c35d1293addf095f9eee6a658
+  reported_at: '2026-10-12T21:31:43Z'
+  holders: Francisco Couzo (franciscouzo)
+  bead: think-rfce
+  note: 'a certificate no issue names, retained by the couzo lane at b85dee2 (the reply on
+    #586 asks whether to register it)'
+  lanes:
+  - lane: couzo
+    packet: couzo-certificates-2026-10-13
+    record: claims.json
+    counts:
+    - 176
+    printed_in_note: true
+- report: franciscouzo/square-packing@4596670
+  url: https://github.com/franciscouzo/square-packing/tree/45966700cf15d3f42e064fd6da51fcb9a5def2be
+  reported_at: '2026-10-13T13:53:57Z'
+  holders: Francisco Couzo (franciscouzo)
+  bead: think-rfce
+  note: 'certificates no issue names, retained by the couzo lane at b85dee2 (the reply on
+    #586 asks whether to register them); #584 cites the 375'
+  lanes:
+  - lane: couzo
+    packet: couzo-certificates-2026-10-13
+    record: claims.json
+    counts:
+    - 375
+    - 376
+    printed_in_note: true
+- report: franciscouzo/square-packing@b85dee2
+  url: https://github.com/franciscouzo/square-packing/tree/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d
+  reported_at: '2026-10-13T17:30:53Z'
+  holders: Francisco Couzo (franciscouzo)
+  bead: think-rfce
+  note: 'certificates no issue names, retained by the couzo lane (the reply on #586 asks whether
+    to register them)'
+  lanes:
+  - lane: couzo
+    packet: couzo-certificates-2026-10-13
+    record: claims.json
+    counts:
+    - 344
+    - 378
+    printed_in_note: true
+exceptions: []
+key_reason_candidates:
+- n: 102
+  report: '#529'
+  argument: An independent arrangement of Ryan Xu's design, found from scratch, credited as
+    the author asked, after the precedents T-120, T-137 and T-150.
+  proposed_as: T-159, an S2 entry that moves no case, in the coordinator's layer 6 (jlevy/squares#598
+    at bd2ae5869); not on main
+other_items:
+- issue: '#521'
+  url: https://github.com/jlevy/squares/issues/521
+  holders: E. Summins (Esummins)
+  kind: confirmation record
+  bead: think-6t6q
+  disposition: 'An independent replay of T-037 (Kleddamag''s s(11) > 31/8): no new entry;
+    an evidence update, the source retained.'
+- issue: '#522'
+  url: https://github.com/jlevy/squares/issues/522
+  holders: E. Summins (Esummins)
+  kind: proof strategy
+  bead: think-3m7d
+  disposition: 'The simple-square stratification with an n = 11 census theorem and scoreboard:
+    no bound; a proof-strategies entry is a records decision.'
+- issue: '#523'
+  url: https://github.com/jlevy/squares/issues/523
+  holders: E. Summins (Esummins)
+  kind: census and class exclusions
+  bead: think-j891
+  disposition: 'A 2,500-class census and class exclusions at n = 17 and n = 19, with a compute
+    request: no bound; ledger notes at most.'
+- issue: '#524'
+  url: https://github.com/jlevy/squares/issues/524
+  holders: E. Summins (Esummins)
+  kind: conjecture
+  bead: think-s1ru
+  disposition: 'Conjecture ONE-FLUSH(n), its equivalences, reduction and refuted routes: no
+    register entry.'
+- issue: '#525'
+  url: https://github.com/jlevy/squares/issues/525
+  holders: E. Summins (Esummins)
+  kind: theorems and a finding
+  bead: think-3nc2
+  disposition: 'Lemma SLOT-CROWD, Theorem FC and the forced-cell traction finding: no bound;
+    ledger notes at most.'
+- issue: '#526'
+  url: https://github.com/jlevy/squares/issues/526
+  holders: E. Summins (Esummins)
+  kind: theorems and refuted routes
+  bead: think-tnfo
+  disposition: 'k = 0 at n = 11: theorems, ten refuted routes with witnesses, measured facts;
+    no bound, kept in the packet.'
+- issue: '#527'
+  url: https://github.com/jlevy/squares/issues/527
+  holders: E. Summins (Esummins)
+  kind: method
+  bead: think-kok7
+  disposition: 'A geometry-before-LP toolkit for stratum trees with measured speed-ups: a
+    methods item, no bound.'
+- issue: '#545'
+  url: https://github.com/jlevy/squares/issues/545
+  holders: Evan Daniel (evand)
+  kind: exact-form and local-minimality reports
+  bead: think-6gti, think-7scz
+  disposition: 'A degree-7213 minimal polynomial of the s(29) record side (polynomial unpublished)
+    and grade-C local minima at 233 configurations: no new upper bound.'
+- issue: '#557'
+  url: https://github.com/jlevy/squares/issues/557
+  holders: Joshua Levy (jlevy), for Kleddamag
+  kind: optimality proof (tracking)
+  bead: think-6iv7
+  disposition: 'Tracking for Kleddamag''s announced n = 18 optimality proof; the bead lands
+    #560 and renames Kleddamag''s credit to Marc Leonard Overbeck. No upper bound.'
+- issue: '#565'
+  url: https://github.com/jlevy/squares/issues/565
+  holders: O. Fitzharding (ofitzharding)
+  kind: optimality proof (Lean)
+  bead: think-hcqr
+  disposition: A complete Lean 4 proof of s(17) = L, imported as an optimality result (the
+    reply is drafted in think-mxhc). No new upper bound.
+- issue: '#594'
+  url: https://github.com/jlevy/squares/issues/594
+  holders: Benjamin Greff (bengreff)
+  kind: exact value
+  bead: think-osvq
+  disposition: 's(76) = 9 by a mixed cover: a lower bound that meets the grid''s 9, an optimality
+    entry; no new upper bound.'

@@ -1,0 +1,4 @@
+$ python3 tools/rectcheck.py r19x18_n0325.cert
+n=325 W=18.994048655032 H=17.994048655032 ceilW-W=5.951e-03 ceilH-H=5.951e-03
+min wall margin 2.711e-20  min pair margin 2.312e-20  overlapping pairs 0
+STRICT VALID

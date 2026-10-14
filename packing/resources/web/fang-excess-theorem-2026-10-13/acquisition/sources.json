@@ -1,0 +1,858 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T09:19:47Z",
+  "git_scope": "Blobless clone checked out at the pinned commit, the repository's head, for the theorem material of bead think-0esw (no issue). In scope: the root README, attribution, changelog, verification notes, licence and manifest; theorem/ (its tables and notes, and the six inventory certificates the exact sample replays); rectangles/ (six squeezable rectangles); tools/ (the gluing program and two checkers); third_party/ (Evan Daniel's pieces, their licence and notice, and the fetch script for the unlicensed n = 211 piece); composites/ (the Section 5 tables and inputs). The direct square packings nNNNN/ are another packet's (bead think-7bw3) and are pinned by the commit alone. The other 70 inventory certificates, files another packet already retains byte for byte, the 38 shipped composites and the drawings are pinned by digest. No program was executed.",
+  "sources": [
+    {
+      "id": "thesnakefang-squarepack-certs",
+      "source_url": "https://github.com/TheSnakeFang/squarepack-certs",
+      "source_ref": "main",
+      "source_commit": "078789a4cfd36f915f1bfbe76d742413d79b2965",
+      "committed_utc": "2026-10-13T06:57:58Z",
+      "git_tree": "89b612b787b7a2004e26cc217011b0999dc5b092",
+      "archived_path": "packing/resources/web/fang-excess-theorem-2026-10-13/source",
+      "subtree_manifest": "packing/resources/web/fang-excess-theorem-2026-10-13/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "ATTRIBUTION.md",
+        "CHANGELOG.md",
+        "LICENSE",
+        "MANIFEST.sha256",
+        "README.md",
+        "VERIFICATION.md",
+        "verify.py",
+        "composites",
+        "rectangles",
+        "theorem",
+        "third_party",
+        "tools"
+      ],
+      "subtree_file_count": 200,
+      "subtree_total_bytes": 40834699,
+      "retained_file_count": 69,
+      "retained_total_bytes": 1613216,
+      "compressed": [
+        "source/rectangles/r17x16_n0257/r17x16_n0257.cert.json.gz",
+        "source/rectangles/r18x17_n0290/r18x17_n0290.cert.json.gz",
+        "source/rectangles/r19x18_n0325/r19x18_n0325.cert.json.gz",
+        "source/rectangles/r21x20_n0401/r21x20_n0401.cert.json.gz",
+        "source/rectangles/r22x21_n0442/r22x21_n0442.cert.json.gz",
+        "source/rectangles/r22x21_n0443/r22x21_n0443.cert.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "composites/n027_j1_703.cert",
+          "bytes": 156420,
+          "sha256": "0ba5cd285b5dd1a8b9892cc25b45611f54230760601d297bc9a126e1094d6ec6",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n028_j1_757.cert",
+          "bytes": 168534,
+          "sha256": "59be7894a91ed8cf7e5838c5c2481da169fca318f6a8cfec611d8e1598e878cb",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n029_j1_813.cert",
+          "bytes": 180473,
+          "sha256": "8d40e5245310e0138975481996693428a4b4a746544527484bec2bbcfeadbafb",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n030_j1_871.cert",
+          "bytes": 193106,
+          "sha256": "c80f07526b965f4d507b6fff14e80e17b8d77df5ae4637612899af386cdc25e3",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n031_j1_931.cert",
+          "bytes": 207342,
+          "sha256": "70db1803759ae335b796f05c7609421db39ef754336935fdf8aaa84b90d8017d",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n032_j2_994.cert",
+          "bytes": 221527,
+          "sha256": "aef770c71d1d8884c1937fd168ce71de9f18b5d7484723c9408f628d1e2050c2",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n033_j2_1058.cert",
+          "bytes": 236558,
+          "sha256": "c4f21bb2f507b7427017e5949aa689d18466ff353385d687d3eb52ef3dff32ef",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n034_j3_1125.cert",
+          "bytes": 295134,
+          "sha256": "4bbab3506f5db1737de476c29434509d2e706a3950944ed591357973f3a8722c",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n035_j3_1193.cert",
+          "bytes": 281162,
+          "sha256": "33125d831a730d40388e07e8ac2121082bd6b62a6e4784c1ca6a98e29496a579",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n036_j3_1263.cert",
+          "bytes": 294153,
+          "sha256": "021a0853f8f63a534e3ea4f5135743844ce6377657b174a73f74612d9017d2af",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n037_j3_1335.cert",
+          "bytes": 351369,
+          "sha256": "83cd7a54f7f9ef480ce868792e01036e61227c28593fbb16db7aad4456866ac9",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n038_j3_1409.cert",
+          "bytes": 407060,
+          "sha256": "fa8fb601ba29f088ae1de52d1b2e649b8e1e17f3d48012f64b4d3ab85bece58d",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n039_j3_1485.cert",
+          "bytes": 424295,
+          "sha256": "4414abe2106e2847ddb7cf1da456d005d127069fa221b1f92a46226dc93319c3",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n040_j3_1563.cert",
+          "bytes": 431677,
+          "sha256": "f94d8c17aa525fdae661021b5108bef55ad9e296c9756515b11dde47bd9e7437",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n041_j2_1642.cert",
+          "bytes": 457638,
+          "sha256": "fabe797b81c0580e51c30f1a351bce14513b1db5c6097993332e9937204da352",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n042_j2_1724.cert",
+          "bytes": 406580,
+          "sha256": "50f9c89de64e9dde0248a5f7625944b5587706cff810f13e79e7630fc116cb19",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n043_j2_1808.cert",
+          "bytes": 478961,
+          "sha256": "7a14861a764c7767320135bda7413b8a9aa58d52aba7ad98bfecd4613efd5015",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n044_j2_1894.cert",
+          "bytes": 482857,
+          "sha256": "7cd87c8ca3eafbed48d874f2ba858816d297fd19e966cfa2a23e8170323e8e4b",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n045_j2_1982.cert",
+          "bytes": 505715,
+          "sha256": "5e008dad9d5145caf2dfc9938779db653cef2e75c135b1d44909be19246f1d4a",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n046_j2_2072.cert",
+          "bytes": 529252,
+          "sha256": "009550ae68b36672356859d2d14a23e4eff5d4e7648f27b6bc779c1ec8e1d379",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n047_j2_2164.cert",
+          "bytes": 554649,
+          "sha256": "3dab9d68717931a8682ff9767c6b3ac0b9842792262ffc37b82bffbf35e78acf",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n048_j3_2259.cert",
+          "bytes": 580222,
+          "sha256": "a7d6480d88044d75f3d6d6cf8acc5f53ccce4bcd1f80df061d478bf012ae6228",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n049_j3_2355.cert",
+          "bytes": 606765,
+          "sha256": "cc461d4da79068cade4a7033fcd3b3cac2687188d5a80c2942feec8d8c89b898",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n050_j4_2454.cert",
+          "bytes": 760713,
+          "sha256": "b113b5bbd230921c22f8f31efa6f7d7bcdbd839bd597e299a32b5d53ba8eb1d2",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n051_j4_2554.cert",
+          "bytes": 674806,
+          "sha256": "f471c0d3c8f0abb4646b9f17baddb6e5c61761fd0da5fd54cfabe980668827f7",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n052_j4_2656.cert",
+          "bytes": 653357,
+          "sha256": "ba2fa8985ce2e47c02614bf95124a61b30c60d795cff5196acf248c188eb9810",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n053_j4_2760.cert",
+          "bytes": 770510,
+          "sha256": "0f8220a947a1b4ba69a97097055ccdc618ba4775a90ca267c16edca7bdf94f68",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n054_j4_2866.cert",
+          "bytes": 928383,
+          "sha256": "866c331035ca128c2fbf7faae800a5d8bdae4e4340cbdd28597fb4f84a3c9a54",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n055_j4_2974.cert",
+          "bytes": 871707,
+          "sha256": "8893c8394b141e077da5c41196b7d740dbd60465f94b111b6e482bf944d5721b",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n056_j4_3084.cert",
+          "bytes": 844583,
+          "sha256": "619f3fe0150d0a0536a1cad335c5c949de65ad8d5dd81aa78c4f8f51d4f0d7f1",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n057_j4_3196.cert",
+          "bytes": 864414,
+          "sha256": "162a91a9ffbdced6f95d7acde65a69613b16ca9a4d8b362ca6e01aeb6b86c721",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n058_j4_3310.cert",
+          "bytes": 1049888,
+          "sha256": "488a2fea19ca929cbe97c1e42f25463c6393018bf25fe5169401a60f371a1395",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n059_j4_3426.cert",
+          "bytes": 1127568,
+          "sha256": "fdc2aaecdf077b79228b1d29ddbad248299b44f75f6c8b4c7b11b5c61342c24e",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n060_j4_3544.cert",
+          "bytes": 1151376,
+          "sha256": "a7e1cc2eb891ff90571b453bb114f0d6fbb7455bcdcf6f1782701953c9a0a651",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n061_j4_3664.cert",
+          "bytes": 1157616,
+          "sha256": "1b53bbb1c3a71d4e1055b65e680ab076dece7fb79db8e296b9f16f2a48928838",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n062_j3_3785.cert",
+          "bytes": 1032480,
+          "sha256": "17927d6e3f619c553c1167e950237c483534f728e97bf71b3ef01e86aa407e83",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n063_j3_3909.cert",
+          "bytes": 1249992,
+          "sha256": "8263354997313bee7e60ba3e2dc753db68f051187aa9aa3d4f1f333312a80f7c",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "composites/n064_j3_4035.cert",
+          "bytes": 1257925,
+          "sha256": "7f5fa06f2f3bf833d3a81a9cdbb18a93735a2b21125ae3a39ad192e8a62b3864",
+          "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+        },
+        {
+          "path": "rectangles/r17x16_n0257/r17x16_n0257.svg",
+          "bytes": 34616,
+          "sha256": "a2a560df5de1439babcecffa196d5a96f21ca00b2ee8f8a5d0c0a0f74db62792",
+          "reason": "The drawing of a rectangle packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "rectangles/r18x17_n0290/r18x17_n0290.svg",
+          "bytes": 38909,
+          "sha256": "69f190793cb7d5eb89c83750919b1dd47b9f606278898fe234408725a46153ac",
+          "reason": "The drawing of a rectangle packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "rectangles/r19x18_n0325/r19x18_n0325.svg",
+          "bytes": 43644,
+          "sha256": "5443bf442afee126112eef8bd919be63cdd4538cad19e4f5966af1fac297a112",
+          "reason": "The drawing of a rectangle packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "rectangles/r21x20_n0401/r21x20_n0401.svg",
+          "bytes": 54056,
+          "sha256": "505363dc1051bc6aee0b9c28e5af0b5c6c8c7a2e985a32e56156321bd840c8ee",
+          "reason": "The drawing of a rectangle packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "rectangles/r22x21_n0442/r22x21_n0442.svg",
+          "bytes": 59761,
+          "sha256": "c39e7f984a0b44460b491dda49e82da63e322fcf3b523d8b98d3503dfb47384a",
+          "reason": "The drawing of a rectangle packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "rectangles/r22x21_n0443/r22x21_n0443.svg",
+          "bytes": 59757,
+          "sha256": "23f2d751ce6bc0a75e198398d6d3c24e43d4bb649bd004f9a323e9de66084ba7",
+          "reason": "The drawing of a rectangle packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "theorem/best/n019_j2.cert",
+          "bytes": 74132,
+          "sha256": "749fe98eb9c672dd89ef24beb651bd5ef268c32ec2925b27cbb197e849144f6e",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n020_j2.cert",
+          "bytes": 76624,
+          "sha256": "27a57622e3d5b51877fc44d7d9d99596ac530a4549a65cac784be75f4e7907db",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n021_j2.cert",
+          "bytes": 88428,
+          "sha256": "55ce699ec08d956b8b3db0db646a02a0c3e9deb274d88fd883be84831bb96db9",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n022_j2.cert",
+          "bytes": 102584,
+          "sha256": "fc4a1738f71142c90be7f15a8540f794ce5ad638dfbf57250beb4cb01d05affe",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n023_j2.cert",
+          "bytes": 109550,
+          "sha256": "4f9444bf2e5f8d50ab2c6f9a2788a04cf8a8dad661d7f618653c21995fc553b0",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n028_j2.cert",
+          "bytes": 160610,
+          "sha256": "f45e93a2ed8235b5dde983929a7909eb1641071ce7b10986a7c5f74a8e8d05ca",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n029_j2.cert",
+          "bytes": 176208,
+          "sha256": "5d6525abbe5a34ceb4f6074462e5f013a143cf0332f238de7088714021fdeee2",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n034_j3.cert",
+          "bytes": 146600,
+          "sha256": "7cf5d429d8f980f1d44fb62256f78cadf63bac1d91d87a53509feced441d057f",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n035_j3.cert",
+          "bytes": 156044,
+          "sha256": "78dc164982abce001d9be3f3f4cada4725b85ff3da22a5bbc23edf4f0f1b71c9",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n039_j4.cert",
+          "bytes": 196216,
+          "sha256": "8bd11ee5c296e9d943402b9bf54261fe34c8dc931027b021257f866f0d8dbe39",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n040_j4.cert",
+          "bytes": 204104,
+          "sha256": "0cd9a6c4493ec5a8686abe7fdeb5b0eebc4ce32853504febc409cffffac8cd81",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n041_j4.cert",
+          "bytes": 209302,
+          "sha256": "368704756adab5d564c4d5f598a939a8d077967d3e46497ef0902ba6ef520ee0",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n042_j4.cert",
+          "bytes": 221021,
+          "sha256": "17b4c23bbf1fde4362f74379cd5389b612aa8dcae7678db0bc68253146b6ee21",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n043_j4.cert",
+          "bytes": 237750,
+          "sha256": "1232b26498137315580177a647649033a64c2aa46258dc911db1776771314406",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n044_j4.cert",
+          "bytes": 248125,
+          "sha256": "354030e01d7dd14d15a1af1427c3776ca2fc57c192c3423f08f717e14424771c",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n049_j4.cert",
+          "bytes": 307859,
+          "sha256": "aff3006a8e3fbd06d121cc933ab0e5916d6d75cd5983cf196b9e4e5aa52ae3d5",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n050_j4.cert",
+          "bytes": 324922,
+          "sha256": "ba6b34cebf3a0f033c211bd909fb01282fb25e7c72cb01298918c412a5ee994f",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n051_j4.cert",
+          "bytes": 261248,
+          "sha256": "e22e195a006b2aa88e01d511e138da20d077dd789257014c84fb082ef87213b5",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n055_j5.cert",
+          "bytes": 304905,
+          "sha256": "f76e481d70ea605449e4c43f445a4cef0bc054965072a5ff64e3f3e81f37b4a0",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n056_j5.cert",
+          "bytes": 318074,
+          "sha256": "49ff5acd366b059f999f5a455eb2007eee69c8aae1969b6249cb345ce5aefe9e",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n060_j6.cert",
+          "bytes": 366490,
+          "sha256": "a17f179059286487b829a1eb8c0212b4b164c491a0a7c78cc0b4590d326c47ff",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n061_j6.cert",
+          "bytes": 373522,
+          "sha256": "fe55f65a51031df35f3488852effa72a6aa26fde0de7995422bc9631a0eb1423",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n062_j6.cert",
+          "bytes": 383226,
+          "sha256": "9bd7a2d475b5b419a4f92e583551e6ae52c3da3b615cac6e10f0b00719945aa5",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n063_j6.cert",
+          "bytes": 396448,
+          "sha256": "3933cbd010f73d5caea5e62cb0c0d3cdfc5464a0d3980776d4380a55b0458e46",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/best/n064_j6.cert",
+          "bytes": 411843,
+          "sha256": "2b0777e8ba8ca3cb4b16e98b3324a4d0aaad15c17778d10d610f3e55b1d938f0",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n019_F1.cert",
+          "bytes": 68979,
+          "sha256": "ba4e7fcc9e0356d8469fd2d42c740e4440b3ea13a65f8322a1cc9ff079414918",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n020_F1.cert",
+          "bytes": 81955,
+          "sha256": "e2ee9f837d9e42ca930988bc8803bef1e0f807f2c47e07acbfd682b26c205354",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n021_F1.cert",
+          "bytes": 88713,
+          "sha256": "c33389a0c8666d6930da5c17aacb10f9d6ce249dc4239281bff0982c0abca386",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n022_F1.cert",
+          "bytes": 99350,
+          "sha256": "50b1807da720e550cbcd0e21f364e3cd98fa4513f7e4cae6181a279ea2e6b674",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n023_F1.cert",
+          "bytes": 109260,
+          "sha256": "58c8e87a9c311f68654eacd67178419037c60ac5e6f9eacb32263245f859a1c4",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n024_F1.cert",
+          "bytes": 114783,
+          "sha256": "264f4c69de2bf1bbcab95980ddc87af6939daeb6a17ef855154e476ea048a07d",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n025_F1.cert",
+          "bytes": 130531,
+          "sha256": "9eb6a31ec7b602aa05c11199350af9bd435cc224b721e6da007fb6582cc003e4",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n026_F1.cert",
+          "bytes": 137420,
+          "sha256": "48917bbc2fda51b942dd448290dc12d023beb57ac7df3809abd58f8de95df6ea",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n027_F1.cert",
+          "bytes": 91649,
+          "sha256": "3a9ec2b82cc61bc5546b91f11e1b25f0d86674d503bd127a8e8b66d6b5b41776",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n028_F1.cert",
+          "bytes": 96844,
+          "sha256": "374c05c22b2bc7364d8cf5df8485357dd66cbcad49dd5c0894de80e2ed48505e",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n029_F1.cert",
+          "bytes": 102981,
+          "sha256": "df222b8359f9b30b1d9988401aedb46d5472b674fa688211dce9590b09795d68",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n030_F1.cert",
+          "bytes": 108085,
+          "sha256": "6b3863f44d78ff65a2ddc7ae4a1dc0f9aeed67955a3837966b0c57f6929dfd1f",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n032_F2.cert",
+          "bytes": 122615,
+          "sha256": "9e5a94fe9666929fd80049314c8268b39f39f9c1dda902584ccf5eddd281924f",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n033_F2.cert",
+          "bytes": 130668,
+          "sha256": "3cb41aea99797a4bb7ef207e8b4be54bc60197ebb1c02198bac0f9798ff4126e",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n034_F2.cert",
+          "bytes": 146406,
+          "sha256": "184c8c62b17edd104a64cb68ca2ad1dc6c751ddd14dd655a80ed7bf923595b18",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n035_F2.cert",
+          "bytes": 151350,
+          "sha256": "2623b0e8a48250638812917dcb11f36fdd9213e8ba4330b37aef45db51f6955a",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n036_F3.cert",
+          "bytes": 160905,
+          "sha256": "e7d235a5a5ec974221de49a61edb8a778b4ec53baa98c2a5f850ff0efae260ce",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n037_F3.cert",
+          "bytes": 168176,
+          "sha256": "36000201ecdf653b9392103e6112b7e9c67db64315477559baa2f15374f5b0f1",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n038_F3.cert",
+          "bytes": 178344,
+          "sha256": "791f2b1d91bf931a6d56150a1cebbee755a85a68d41a400b58e5348d2900d3ba",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n039_F3.cert",
+          "bytes": 196019,
+          "sha256": "db6553ba62c5a55c030266fe1d7c605578b8f06de54d15d799b328cd14a8392b",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n040_F3.cert",
+          "bytes": 199164,
+          "sha256": "c5e9dd5563912df55d1100688d25c6ef6cbc6cc3dd3d68394a570710464a9a2f",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n041_F3.cert",
+          "bytes": 214871,
+          "sha256": "818134fdbbdc9839b8c348a8244a779faafcc82c9077d7ad0ff131489e3c5252",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n042_F3.cert",
+          "bytes": 223078,
+          "sha256": "0f3239d53b947052c90bf7d64a570c0b4961b43a9af41e60ec6805a3cb8d4891",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n043_F3.cert",
+          "bytes": 235382,
+          "sha256": "9235d19107dc56ccb4ca70f43f1fee5b7999e30e8cbe953c0f3db89fc725fb9f",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n044_F3.cert",
+          "bytes": 247039,
+          "sha256": "06dbf4d76bc5ae173fbd8d0df11d51e9f20bff82861cf922ca93d2263a5112ae",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n045_F3.cert",
+          "bytes": 254223,
+          "sha256": "24637bef7415f047b43ed243293143cc70ba7934d1797aaac75672725a94f4f0",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n046_F3.cert",
+          "bytes": 271472,
+          "sha256": "be3151c8f814a09c1df7fa74c3cd14fea3670118e99dd8bbcbee695bd224ffc7",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n047_F3.cert",
+          "bytes": 280334,
+          "sha256": "12beb01763369400c28882abc68a7791b7e2b48cf944cad900f0d3fa970f321e",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n048_F3.cert",
+          "bytes": 236643,
+          "sha256": "d831ab4452ce27058a48c07450962e58ab02615ea4dafc2a35797bd9f37e60b2",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n049_F3.cert",
+          "bytes": 243610,
+          "sha256": "e2dd36547ccec952f43e805c7fcb5645d660c69cdfdd309e01f234db7f1bba9e",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n050_F3.cert",
+          "bytes": 251776,
+          "sha256": "60bdef2c21a6557c273a6fa7767ba18ea73acfae657df61ed91166c004e48e34",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n051_F3.cert",
+          "bytes": 259843,
+          "sha256": "9c3641cde39a70fd740e50a7adfa1537aa69fcfe8a8a58dc82f59b72fb4cfc3d",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n052_F4.cert",
+          "bytes": 265522,
+          "sha256": "3fe5ef025fc7b4a0864f0ed5e42792a0aed84ff541122779e102925e77783fbd",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n053_F4.cert",
+          "bytes": 279742,
+          "sha256": "740c4d19cc785424c92c09f65459303fb0dba529dae71850349d7481c13a609f",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n054_F4.cert",
+          "bytes": 288298,
+          "sha256": "78d5eb3925d56e53010a2b7964d6afbaca5ff22f00ff45e0f9a1989cf69bb08f",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n055_F4.cert",
+          "bytes": 304708,
+          "sha256": "08c2d62dd44d89d7058408ab8ae0742300e1824f9ac3a70f4f3a1893cf585fef",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n056_F4.cert",
+          "bytes": 313013,
+          "sha256": "878a7aa0bf7eba3752f9253476eb5c9173a9fdbb527d6035ba6f71beb8e3e91e",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n057_F5.cert",
+          "bytes": 324947,
+          "sha256": "9fad6656eee4bcb364ed13863caf34edf2c9e3fb80af5ce4b95f526c9082b768",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n058_F5.cert",
+          "bytes": 332382,
+          "sha256": "4a9bfe1ea8f28fe42259e0ac9ea000c99a09f47171117206bf0ed6e6d92381a6",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n059_F5.cert",
+          "bytes": 346716,
+          "sha256": "74fe98877ff8c6cc22e55829c55c1c82063c69a8649a37cfdc270f2f16d36e34",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n060_F5.cert",
+          "bytes": 366292,
+          "sha256": "d77d18f86205ab2c04956550c037b68a15271fc1abbded5ab506efc9f1ba7415",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n061_F5.cert",
+          "bytes": 368646,
+          "sha256": "cc3c4f0542af8f452225fb026b8bac4c5aa8fd744678cd69082ef91b608bde28",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n062_F5.cert",
+          "bytes": 389063,
+          "sha256": "428c14cba2ac2ad9d3e1782142999231d3e421bad7b05f37dd679f21d3cf998a",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n063_F5.cert",
+          "bytes": 398534,
+          "sha256": "833cd711fd48e8ef65e1d43fbb760afb4708fece9d7b8a64c7b7b857551c2e2a",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "theorem/n064_F5.cert",
+          "bytes": 409665,
+          "sha256": "30dc14fea32d4306936dd91c2d0950fa8bf5f33216e7bdc5849df2bfa5f2ae34",
+          "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+        },
+        {
+          "path": "third_party/daniel/LICENSE",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT licence, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-record-hunt3-2026-10-10/source/LICENSE"
+        },
+        {
+          "path": "third_party/daniel/hunt3_n308.cert",
+          "bytes": 52119,
+          "sha256": "41961a5e096afa5f7763419d81b2958c54f37aae5e54e51a0c54ca23946da734",
+          "reason": "Evan Daniel's issue #489 certificates, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-record-hunt3-2026-10-10/source/search/packer/candidates/hunt3_n308.cert"
+        },
+        {
+          "path": "third_party/daniel/hunt3_n343.cert",
+          "bytes": 57308,
+          "sha256": "bf05962c580d46bbeef5ad66fee5d3ca45dab7002d726c424126d9b9259f4332",
+          "reason": "Evan Daniel's issue #489 certificates, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-record-hunt3-2026-10-10/source/search/packer/candidates/hunt3_n343.cert"
+        },
+        {
+          "path": "third_party/daniel/hunt3_n344.cert",
+          "bytes": 57344,
+          "sha256": "54bb6b6696b96ccf6a30db313ee4e62240fe17c070624fd916b59b483f7b20cc",
+          "reason": "Evan Daniel's issue #489 certificates, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-record-hunt3-2026-10-10/source/search/packer/candidates/hunt3_n344.cert"
+        },
+        {
+          "path": "third_party/daniel/n-109.cert",
+          "bytes": 17648,
+          "sha256": "1ed2bb61e3e9f911997fa70178e92c2d140a8732e137cb48f41cb69732734070",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-109.cert"
+        },
+        {
+          "path": "third_party/daniel/n-110.cert",
+          "bytes": 18734,
+          "sha256": "fc6c309bd060e629a9d38287dc27b82a7a197ed84463879540df39986e4a5b8d",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-110.cert"
+        },
+        {
+          "path": "third_party/daniel/n-132.cert",
+          "bytes": 22758,
+          "sha256": "c08e34825e7112dfab3d8af87f473219bdb417ff9d8bc2b172cb272013d91fdb",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-132.cert"
+        },
+        {
+          "path": "third_party/daniel/n-156.cert",
+          "bytes": 26041,
+          "sha256": "f35bc8982fa5a96f4ffbb6d4d9170c6d21b2a9b0177bac1acc10cf887398e1ae",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-156.cert"
+        },
+        {
+          "path": "third_party/daniel/n-182.cert",
+          "bytes": 29844,
+          "sha256": "ad5c8eeac0c358fce1b9c4a65c6b4c9fc5767f44bf64be81bb4fee719580bd17",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-182.cert"
+        },
+        {
+          "path": "third_party/daniel/n-210.cert",
+          "bytes": 35043,
+          "sha256": "8d3555a54ac461177fe02a625ebe3a80137ecd8bebcfb3742e3b41e2e47dc4cf",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-210.cert"
+        },
+        {
+          "path": "third_party/daniel/n-241.cert",
+          "bytes": 39797,
+          "sha256": "9fe9370c0cd7a93096aa6c41877eb1675b46de432f8ab31381e724ef44de584e",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-241.cert"
+        },
+        {
+          "path": "third_party/daniel/n-273.cert",
+          "bytes": 45126,
+          "sha256": "4555cd31a62f243ecf74105ea370f62fff622d12a7b33a32ef29d95980b7c025",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-273.cert"
+        },
+        {
+          "path": "third_party/daniel/n-41.cert",
+          "bytes": 6778,
+          "sha256": "c9c8350a4857f9e5d0b4f5bc33a54ae037f9db95b6f4e73dbbaa69c7c580b697",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-41.cert"
+        },
+        {
+          "path": "third_party/daniel/n-55.cert",
+          "bytes": 8487,
+          "sha256": "36d91d3d7a3f4f5e51983681ac2f230d68786038bb9aacc614edf294f400fa35",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-55.cert"
+        },
+        {
+          "path": "third_party/daniel/n-71.cert",
+          "bytes": 10940,
+          "sha256": "acbe9dac9468e5fb03d27c32a7cf46de6503e6c91614d9235cf203062221d4d1",
+          "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-71.cert"
+        },
+        {
+          "path": "tools/verify_cert_daniel.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "Evan Daniel's verify_cert.py, unchanged; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py"
+        },
+        {
+          "path": "verify.py",
+          "bytes": 5706,
+          "sha256": "256f7aed59286af34aa14db6e6e2d4d70a058b6432b497144a07ede132a4e7be",
+          "reason": "The author's square checker, unchanged since c75bebd; another packet already retains the same bytes.",
+          "identical_to": "packing/resources/web/fang-two-wedge-certificates-2026-10-10/source/verify.py"
+        }
+      ],
+      "license": "MIT, copyright 2026 Kevin Fang (LICENSE), for verify.py, tools/glue.py, tools/rectcheck.py and the shell scripts; the README and ATTRIBUTION.md release the certificates, text files, tables and drawings in nNNNN/, rectangles/ and composites/ under CC0 1.0 and name no licence for theorem/; third_party/daniel/ and tools/verify_cert_daniel.py are Evan Daniel's, MIT (third_party/daniel/LICENSE, NOTICE). Five theorem/ certificates (n = 15, 31, 36, 52, 57) contain Daniel's certificate of Joost de Winter's unlicensed n = 211 packing, which the README says is fetched and not redistributed. The source discloses Claude assistance directed and reviewed by Kevin Fang.",
+      "claims": [
+        "Theorem 1 (README, note draft v0.6 of 2026-10-13, not in the repository): s(n^2 - n + 1) < n for every integer n >= 15.",
+        "Theorem 2: for n >= 15 and integers p, q >= 0 with 16p + 21q <= n - 15, n^2 - n + 1 + p + 2q unit squares pack in a square of side less than n; in particular s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q : 16p + 21q <= n - 15}.",
+        "Lemma 3 (tools/glue.py): a rectangle packing A in an a x b box (a > b) squeezed by d_A and a square packing B in an m x m box squeezed by d_B glue with two integer blocks into n^2 - waste_A - waste_B squares in side n - d, n = b + m, d = min(d_A, d_B, 1/2).",
+        "Proposition 4: R, 257 squares in (17 - delta) x (16 - delta), delta >= 7.436e-4 (rectangles/r17x16_n0257); and R', 443 squares in (22 - d) x (21 - d), d >= 0.0094, waste 19 (rectangles/r22x21_n0443), with four further rectangles of waste b - 1.",
+        "theorem/: for every n = 15..64, an exact strict certificate of n^2 - n + F(n) unit squares in a square of side n - 1/20000, built by the uniform construction at squeeze 1/10000, counts 211 to 4037; and 26 best-excess certificates in theorem/best/ at the same side, counts 308 to 4038.",
+        "composites/: the 230 Section 5 composites of draft v0.3, the best j for 27 <= n <= 64 shipped as 38 certificates, all regenerated bit for bit by composites/reproduce.sh; dominated in excess at every n by theorem/best.tsv.",
+        "VERIFICATION.md: all 76 theorem certificates pass squarepack.verify --strict, tools/rectcheck.py and Daniel's verify_cert.py; failures 0."
+      ]
+    }
+  ]
+}

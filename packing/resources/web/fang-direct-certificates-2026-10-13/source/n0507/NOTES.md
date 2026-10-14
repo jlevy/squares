@@ -1,0 +1,1 @@
+n = 507 = 23^2 - 23 + 1, S = 22.997807183348823 (rounded up; exact value in the certificate), built from a parametric two-wedge seed (eight lines per wedge, built from line lengths and angles, not from an earlier packing; see the note, Section 6), found 2026-10-10, not analytically optimised.

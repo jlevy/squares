@@ -578,13 +578,14 @@ repositories:
       README tables follow the same certificates.
   - url: https://github.com/itsnaka/squish-certs
     read_through: 56fa71f949234b63534772b3f3b4f1320fbf2afd
-    read_on: '2026-10-11'
-    bead: think-ga3m
+    read_on: '2026-10-14'
     note: >-
       Three commits past the squish-481-third-request-2026-10-09 packet's d45669b. aeacc6c adds
       squish-submission-2026-10-11, #500's nine packings (176, 181, 238, 239, 270, 271, 272, 304,
-      305) with 50-digit certificates and five earlier source packings, which think-ga3m owns until
-      a packet pins it; bd0c72e and 56fa71f only link #481 and #500 from the README.
+      305) with 50-digit certificates and five earlier source packings, which the
+      squish-500-fourth-request-2026-10-11 packet pins at aeacc6c and T-151 registers; bd0c72e and
+      56fa71f only link #481 and #500 from the README. Read again on 2026-10-14 (think-5pn5), when
+      the head was still 56fa71f: nothing to import.
   - url: https://github.com/ry-xu/square_packing
     read_through: 9535d65d84cc33f20f4e26329f8da12bdcef216e
     read_on: '2026-10-11'
@@ -710,3 +711,31 @@ repositories:
       later gains, median 0, and pass the best known only at 154) in PACKER.md, CLAIMS.md and
       CONFUSIONS.md, and adds search/packer/timetravel.py, which the 154 packet pins by digest.
       None states a bound or a certificate. Nothing else to import.
+  # The intake pass of 2026-10-14 (think-abi1; survey think-fxs7).
+  - url: https://github.com/ofitzharding/sq17-lean
+    read_through: d9653fd3c0a86633eac921793dfcae43379792b9
+    read_on: '2026-10-14'
+    note: >-
+      One commit of 13 October past the fitzharding-n17-lean-2026-10-13 packet's e6ee548:
+      d9653fd changes README.md alone (17 lines in, 6 out), its attribution: the proof builds on
+      this project's 24-cell cover, census, endpoint chart, subpatterns and rigidity framework,
+      uses eleven of wand125's #472 subpatterns and Overbeck's endpoint seed data through the
+      exp-237 root certificate, and was developed independently of Overbeck's candidate. No Lean
+      source, data or receipt changed. Nothing to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: 9a28a84bd55dc124bfa2919bb6c4fb504dda3149
+    read_on: '2026-10-14'
+    bead: think-xzob
+    note: >-
+      The 21 commits of 12 to 14 October (UTC) from d4a1981 to 9a28a84 past the f30cc2c read.
+      d4a1981 makes tools/sqverify_continuous v4, with --resume, the continuous-angle route for
+      the two n = 40 lower bounds, which think-xzob owns (#533).
+      dfb2cf8, 9f24185, 7a42c16 and 22f06b3 add the mixed certificates s(39) >= 533/80, s(44) >=
+      2799/400, s(37) >= 2599/400 and s(145) >= 306/25, which the
+      wand125-fine-net-n37-n39-n44-2026-10-13 and wand125-linear-n145-2026-10-13 packets retain
+      (think-u0av); eb0fd19 adds problems/closed-form, s(N) >= a(N) for every non-square N >= 49,
+      which the wand125-closed-form-2026-10-14 packet retains at 9a28a84 (think-tsox). 77d3fc5 proves
+      s(15) = 6 for a right isosceles triangle container, outside this record, which is squares in
+      a square. The other fifteen commits rebuild the site (themes, results tables, papers). The
+      release data/n17-m2048064-v1 of 13 October, one n = 17 sub-pattern certificate for #413, is
+      no commit's and think-p2cy owns it. Nothing else to import.

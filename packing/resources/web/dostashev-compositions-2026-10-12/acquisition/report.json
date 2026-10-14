@@ -1,0 +1,50 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/562",
+  "author": "Daniil Ostashev",
+  "source_key": "[Ostashev compositions 2026-10-12]",
+  "report_evidence": "E-ostashev-562-certificate-report",
+  "receipt_format": "ostashev-562-exact-replay-v1",
+  "witness_prefix": "W-ostashev-562-n",
+  "claim_limitations": "Complete fe43a64 rational centre/half-angle certificate in the source's sqcert format, centres in [0, S]^2, read from the retained file at the pin. Finite construction feasibility only; no local minimum, KKT, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "certificates": [
+    {"n": 129, "path": "records/n0129.sqcert", "format": "sqcert", "offered": "11.87001385040446434457885353928463864242", "first_committed": "2026-10-12T17:19:33Z"},
+    {"n": 176, "path": "records/n0176.sqcert", "format": "sqcert", "offered": "13.808663234386957", "printed_in": "https://github.com/dostashev/square-packing/blob/fe43a64ecf2581cdbd11830e8a5be0989746c5d3/README.md", "first_committed": "2026-10-12T14:25:07Z"},
+    {"n": 204, "path": "records/n0204.sqcert", "format": "sqcert", "offered": "14.80866323438695656647099008094596479529", "first_committed": "2026-10-12T14:25:07Z"},
+    {"n": 303, "path": "records/n0303.sqcert", "format": "sqcert", "offered": "17.90995829106990798159574108139873608005", "first_committed": "2026-10-12T14:51:10Z"}
+  ],
+  "requested": [129, 204, 303],
+  "replayed": [129, 204, 303],
+  "houses": [
+    {"n": 129, "reader": "[Daniel regularized lists 2026-10-10]", "source_key": "[Daniel regularized lists 2026-10-10]", "holders": "ry-xu, improved by Evan Daniel", "result": "T-146", "reported_value": "11.8720298490811800", "verified_value": "11.8720298490811800", "evidence": ["E-evand-regularized-exact-feasibility"]},
+    {"n": 176, "reader": "[SQUISH fourth request 2026-10-11]", "source_key": "[SQUISH fourth request 2026-10-11]", "holders": "Nate Chaoweeraprasit", "result": "T-151", "reported_value": "13.8128562532770564", "verified_value": "13.8128562532770564", "evidence": ["E-squish-500-exact-feasibility"]},
+    {"n": 204, "reader": "[evand exact optima 2026-10-05]", "source_key": "[Kingbird]", "holders": "the Kingbird catalogue, verified by Evan Daniel's exact ceiling", "result": "T-101", "reported_value": "14.82287565553229", "verified_value": "14.82287565553230", "evidence": ["E-evand-exact-ceilings-2026-10-05-exact-replay", "E-evand-exact-ceilings-2026-10-05-source-replay", "E-regularized-bounds-2026-10-12-exact-decision"], "reported_rounding": "unstated"},
+    {"n": 303, "reader": "[Daniel regularized lists 2026-10-10]", "source_key": "[Daniel regularized lists 2026-10-10]", "holders": "Nate Chaoweeraprasit, improved by Evan Daniel", "result": "T-146", "reported_value": "17.9130654627385324", "verified_value": "17.9130654627385324", "evidence": ["E-evand-regularized-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 129, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "11.8700138504044652", "rounding": "unstated"},
+    {"n": 176, "report": "#561", "url": "https://github.com/jlevy/squares/issues/561", "holders": "Francisco Couzo", "printed": "13.807637227056", "rounding": "up"},
+    {"n": 176, "report": "#575", "url": "https://github.com/jlevy/squares/issues/575", "holders": "Daniil Ostashev", "printed": "13.79587231843640726331185405391207744387", "rounding": "up"},
+    {"n": 176, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "13.7958723184364072", "rounding": "unstated"},
+    {"n": 204, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "14.8086632343869571", "rounding": "unstated"},
+    {"n": 303, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "17.9099582910699091", "rounding": "unstated"}
+  ],
+  "register": {
+    "title": "Daniil Ostashev's cut-out and composition packings at fe43a64, issue562",
+    "headline": "New packings of 129, 204 and 303 squares, a cut-out and two compositions, each certified exactly",
+    "significance": 3,
+    "source_checks": "The author reports that each packing passes its own C++ checker (sqverify --precise --certify, MPFR then GMP rationals) at delta = 1e-60, that sqverify --check-cert certifies the shipped certificates in GMP rationals with no dilation and no tolerance, and that a separately written 80-digit mpmath cross-check finds a least separation of 5.0e-21; the issue states that all three checkers are the author's, written with AI assistance, the first two sharing the C++ parser and geometry. It also states that each side is the exact first-order optimum of its contact topology, with nonnegative KKT multipliers at a 60-digit solution and the load-bearing squares scaled by 1 + 1e-20. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Daniil Ostashev (https://github.com/dostashev/square-packing) with the three packings and their certificates. The issue says 204 and 303 are new arrangements: two copies of a new rectangle packing in opposite corners with aligned squares filling the rest, 44 unit squares in an (h + 3) x h rectangle at 204 and 62 in an (h + 6) x h rectangle at 303, both found by a GPU soft-to-rigid search after Yohei Nakajima's idea, started from corner staircases. 129 is a cut-out: a 163-square (h + 3) x h rectangle cut from the s(302) house, Nate Chaoweeraprasit's packing in Evan Daniel's regularization, re-optimised as a rectangle, less its three rightmost unit columns; its aligned blocks are laid out like Ryan Xu's s(129) and its tilted squares sit in a different band, so the issue calls it a different local optimum and not a refinement of Xu's. Each was solved to the exact optimum of its contact topology. The author asks to be credited and leaves the pieces' acknowledgement to the record. The issue states AI assistance: an AI-assisted research loop the author drives with his own ideas, the rectangle library and composition being his; AI agents wrote and ran the search, composition and verification code, and an agent's check of the library against the register found 129.",
+    "next_rung": "Independently review the retained replay, then weigh adoption: each side is below its case's ceiling and below every other report at its count, by 2.02e-03 at 129 (T-146), 1.42e-02 at 204 (T-101 and T-155) and 3.11e-03 at 303 (T-146). Issue 593's prints at the three counts are above these sides; its certificates state these sides rounded up at 30 places. Then record source-specific adoption and confirming evidence. Final exact-head CI remains required.",
+    "bead": "think-nrqu",
+    "bibliography": {
+      "authors": ["Ostashev"],
+      "lineage": "builds-on-project",
+      "credit": "Ostashev after Nakajima, Chaoweeraprasit, Daniel, Xu, Levy",
+      "short_credit": "Ostashev after Nakajima et al.",
+      "note": "Three complete exact certificates at fe43a64ecf2581cdbd11830e8a5be0989746c5d3 in the source's sqcert format, at 129, 204 and 303: compositions at 204 and 303 with the author's new 44-square (h + 3) x h and 62-square (h + 6) x h rectangles, and at 129 a cut-out of a rectangle cut from Chaoweeraprasit's s(302) in Daniel's regularization, laid out like Xu's s(129), each solved to the exact optimum of its contact topology and dilated by 1 + 1e-60. Methods credited: Nakajima's soft-to-rigid search, this project's fixed-angle linear program and Ryan Xu's certificate construction. Retained under the MIT licence with the source's C++ GMP checker and mpmath cross-check pinned against the issue-501 packet, neither run here. The commit's earlier 176 composition is compared and not requested. AI assistance stated: AI agents wrote and ran the search, composition and verification code. No local or global optimality is registered."
+    }
+  }
+}

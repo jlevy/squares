@@ -1,0 +1,77 @@
+{
+ "schema": "cfcheck-run/v1",
+ "label": "control-scale-family",
+ "binary_sha256": "c5a163d48d10155dbe6d319a8a8cae8cab3feb9278c6fb7116c2d0396e686484",
+ "toolchain": {
+  "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+  "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)"
+ },
+ "command": [
+  "cfcheck",
+  "interval",
+  "interval_0.99_1",
+  "--intervals",
+  "intervals.json",
+  "--index",
+  "34",
+  "--threads",
+  "2",
+  "--max-roots",
+  "0"
+ ],
+ "cwd": "the run directory: intervals.json and assets/<asset>/ unpacked from the release",
+ "started": "2026-10-14T12:18:00Z",
+ "finished": "2026-10-14T12:18:01Z",
+ "wall_seconds": 0.19,
+ "cpu_seconds": {
+  "user": 0.145,
+  "system": 0.043
+ },
+ "max_rss_kib": 21888,
+ "host": {
+  "cpus": 4,
+  "load_average_before": [
+   4.62,
+   4.28,
+   3.57
+  ],
+  "load_average_after": [
+   4.62,
+   4.28,
+   3.57
+  ],
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+ },
+ "exit_code": 1,
+ "verdict": "CFCHECK REFUSE: wall period mass is not 9/5",
+ "stderr_tail": "",
+ "report": "scale-family.report.json",
+ "report_sha256": "7b7c6538a6de98e5c9d4776ee7cb0761aa2db6071d553683d6ad7a1371f412de",
+ "sample": {
+  "interval": 34,
+  "region": "-",
+  "note": "control: {\"mutation\": \"scale-family\", \"interval\": 34, \"from\": \"interval_0.99_1\", \"factor\": \"99/100\", \"scaled\": \"every F and T mass and every V density of both families\", \"resealed\": [\"family.json\", \"family_right.json\", \"SHA256SUMS\", \"intervals.json (digests and published counts)\"]}"
+ },
+ "summary": {
+  "ok": false,
+  "command": "interval",
+  "partial": false,
+  "incomplete": false,
+  "roots": 0,
+  "leaves": 0,
+  "resumed_roots": 0,
+  "seconds": 0.187076902,
+  "leaf_kinds": {},
+  "checked_leaf_kinds": {},
+  "refusal_count": 1,
+  "refusals": [
+   {
+    "where": "command",
+    "reason": "wall period mass is not 9/5"
+   }
+  ],
+  "interruptions": 0,
+  "regions": {},
+  "leaf_timing": {}
+ }
+}

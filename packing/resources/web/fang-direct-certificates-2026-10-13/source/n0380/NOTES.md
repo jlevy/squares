@@ -1,0 +1,1 @@
+n = 380 = 20^2 - 20, S = 19.976775433974195 (rounded up; exact value in the certificate), grown from Francisco Couzo's n = 342 packing (https://github.com/franciscouzo/square-packing; not redistributed here), with one square fewer than the n = 381 run, found 2026-10-09, not analytically optimised.

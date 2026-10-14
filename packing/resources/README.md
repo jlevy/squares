@@ -648,6 +648,9 @@ is [epistemics.md → Results by Others](../../epistemics.md#results-by-others).
 | **[wand125 mixed bounds check2 2026-10-06]** | wand125’s ten mixed rectangle-measure certificates added on 6 October 2026 after `65e408c9`, pinned at `2fad66e0`, each on a net its candidate declares, none requested here: `s(29) ≥ 581/100`, a complete proof bundle with the checker of every earlier mixed certificate, and nine check2 bundles, at `n = 18, 19, 20, 26, 27, 28, 30, 39, 41`, which ship no C++ record and are checked at the source by its copy of this repository’s `sqverify_fast` changed to read a declared net, pinned by digest and not retained. `s(18) ≥ 941/200` and `s(19) ≥ 193/40` are on 2073 half-angle tangents of step `1/5002` at core `4999/5000`, superseding **[wand125 mixed bounds finer net 2026-10-06]**. Exact premises and every bundle binding pass; on 6 October 2026 `sqverify-fast`, this repository’s clean-room measure verifier, decided all ten at every direction of their declared nets, which verifies them, independently of the producer’s checker for `s(29)` and sharing its components for the nine check2 bundles, whose own check is a copy of the same crate; the source’s C++ checker ran here at sampled nodes and not in full. The tarballs are pinned by SHA-256 and not retained | github.com/wand125 | `wand125-mixed-bounds-check2-2026-10-06/` |
 | **[wand125 linear n82 2026-10-02]** | wand125’s linear certificate for `s(82) ≥ 233/25`, pinned at `b00fc70f` (first committed at `58f153f8`, 2 October 2026): the support of **[wand125 linear certificates 2026-10-02]**’s `n = 83` measure scaled by `932/935`, with its masses solved again, checked by the same `unified_linear_verify.cpp`; above Green’s reported value at `n = 82` and not resting on Green’s argument; requested in a comment on jlevy/squares#294. The complete replay here on 3 October 2026 matched the shipped run at all 201 directions, which verifies it; the proof-bundle tarball is pinned by SHA-256 and not retained | github.com/wand125 | `wand125-linear-n82-2026-10-02/` |
 | **[wand125 linear n122 2026-10-10]** | wand125’s linear certificate for `s(122) ≥ 563/50 = 11.26`, pinned at `a9f76c38` (10 October 2026, wand125/square-packing): 502 point, 1,268 segment and 3 rectangle orbits on the net of **[wand125 linear certificates 2026-10-02]**, checked by the same `unified_linear_verify.cpp`; by its mass also `s(123)` to `s(126)`, above Green’s reported value at 122 to 125 and Nagamochi’s at 126; no issue reports it. The T-080 route’s readers accept its exact premises and all 201 inputs, and two angles replayed here returned the certificate’s records; T-144 records it at V0/C0, and a complete replay is priced at about 11 CPU-hours and waits for a budget. The 31.8 MB release asset is pinned by size and SHA-256 and not retained | github.com/wand125 | `wand125-linear-n122-2026-10-10/` |
+| **[wand125 linear n145 2026-10-13]** | wand125’s linear certificate for `s(145) ≥ 306/25 = 12.24`, pinned at `22f06b31` (13 October 2026, wand125/square-packing): 594 point, 1,541 segment and 9 rectangle orbits on the net of **[wand125 linear certificates 2026-10-02]**, checked by the same `unified_linear_verify.cpp`; by its mass also `s(146)` to `s(149)`, above Green’s reported value at 145 to 148 and Nagamochi’s at 149; no issue reports it. The T-080 route’s readers accept its exact premises and all 201 inputs, and two angles replayed here returned the certificate’s records; a complete replay is priced at about 37 CPU-hours on a loaded host and waits for a budget. The directory’s four MIT documents are retained, its `code/` is pinned as byte-identical to retained copies, and the 38.6 MB release asset is pinned by size and SHA-256 and not retained | github.com/wand125 | `wand125-linear-n145-2026-10-13/` |
+| **[wand125 closed form 2026-10-14]** | wand125’s closed-form lower bound `s(N) ≥ a(N)` for every non-square `N ≥ 49`, pinned at `9a28a84b` (14 October 2026, wand125/square-packing; added in `eb0fd193` on 13 October): one square root on each of 34 intervals of the fractional part, from a measure of line segments whose 68 families and 136 region records the source replayed with its Rust checker `replay4d` in 4,294 CPU-hours; no issue reports it. It is above the reported lower bound at 156 counts and the verified one at 189, and it gives `s(n² − 1) = s(n² − 2) = s(n² − 3) = n` for `n ≥ 8`. The source’s structure check passed here on all 68 families, and an exact evaluation here of `a(N)` from the retained intervals agrees with the source’s own at every count to 3600; no replay of the records has run here. The 815.7 MB release is pinned by digest and not retained | github.com/wand125 | `wand125-closed-form-2026-10-14/` |
+| **[wand125 cfcheck 2026-10-14]** | wand125’s second checker of **[wand125 closed form 2026-10-14]**, cfcheck, pinned at `746e2c5a` (14 October 2026, wand125/square-packing `problems/closed-form/indep-checker`, the child of that key’s pin): a Rust checker that its README says was written from SPEC.md and the published bundles only and shares no code with `replay4d`; the source reports intervals 1 and 34 of the 34 replayed completely, 3,138,681 leaves accepted with no refusal, and jlevy/squares#600 cites it. Here no file, line, comment, local crate or arithmetic kernel is shared with the producer’s checker, and its structural overlap traces to SPEC.md, the producer’s own description of its checker’s procedures; its premise checks passed in full on both intervals and a sample of 2,909 leaves was accepted, with three re-sealed mutants refused. The two intervals carry the record’s 33 counts `m² − 1`, `m² − 2`, `m² − 3`, already proved, and none of the counts the bound raises; a complete replay of both is priced at 288 worker-hours | github.com/wand125 | `wand125-closed-form-cfcheck-2026-10-14/` |
 | **[wand125 valid7 independent check 2026-10-02]** | wand125’s separately written exact-rational checker of Valid7 at `38dd31b3` (2 October 2026), run on Daniel’s `k = 7` cover: 156,800 root boxes of the unreduced pose space, 9,640,060 leaves, none uncertified, about 626 core-hours; its read log says Daniel’s checker and lemma write-ups were not read. Requested in jlevy/squares#296. The code is retained and the release records pinned by SHA-256; its `verify.sh` record check and an audit passed here on 2 October, and the complete run was repeated here on 2 and 3 October 2026 with review finding D-1’s line guarded: all 156,800 roots `VERIFIED` in 9,808,968 leaves, none uncertified, each of the 124,975 roots the source ran under V2 with its published leaves | github.com/wand125 | `wand125-valid7-independent-check-2026-10-02/` |
 | **[wand125 valid7 independent check 2026-10-03]** | The same checker at `da469ecf` (3 October 2026), fixing the three implementation findings of this repository’s 2 October method review: `tier_b2.nonneg_open` and `rf.nonneg_on` no longer accept a polynomial that vanishes at the sample (D-1, D-2), and `tier_b2` keys its line and value caches by exact text rather than Python’s `hash` (D-3); `check_record.py` gains `--seed` and `--claim tilt`. The release records are unchanged. Its `verify.sh` ran here on 5 October 2026 on the unchanged records, `RECORD OK`, and a probe of both revisions shows each finding present before and gone after | github.com/wand125 | `wand125-valid7-independent-check-2026-10-03/` |
 | **[wand125 valid7 independent check 2026-10-06]** | The same checker at `c561dbb3` (6 October 2026), run on Daniel’s box-9 cover for ValidTilt9, the finite premise of `s(k² − 4) = k` for `k ≥ 8` (`T-081`): 28,350 root boxes over centres `[0, 9/2]²` and `u = tan(θ/2)` in `[0, 7/16]`, 9,537,343 leaves, none uncertified, about 766 core-hours, with `da469ec`’s checking modules and a driver extended mid-run; its read log says Daniel’s checker, lemma write-ups and k2m4 run records were not read. The code is retained and the release `records-tilt9-v1` pinned by SHA-256. Its `verify_tilt9.sh` and an audit of the records passed here on 6 October 2026, and a sample of roots re-ran with their published leaves; the full run was not repeated here | github.com/wand125 | `wand125-valid7-independent-check-2026-10-06/` |
@@ -934,6 +937,17 @@ maintained premise checks and diagnostic eight-direction samples.
 T-142 and T-143 record them at V0/C0; a complete replay and whole-net controls remain
 pending.
 
+**[wand125 fine-net n37 n39 n44 2026-10-13]**: wand125’s n37, n39 and n44 certificates,
+`mixed_n37_L64975`, `mixed_n39_L66625` and `mixed_n44_L69975`, report
+$s(37) \ge 2599/400 = 6.4975$, $s(39) \ge 533/80 = 6.6625$ and
+$s(44) \ge 2799/400 = 6.9975$ on the same 2,073-direction net; no issue reports them.
+The [packet](web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md) retains the
+directories’ MIT documents at revision `7a42c16` and pins their release assets by
+digest, with the maintained premise checks, diagnostic eight-direction samples and the
+whole-net control’s mutant at two directions each; at n39 the axis refusal falls outside
+the census’s rounding allowance.
+A complete replay and whole-net controls remain pending.
+
 - **[Couzo exact refinements 2026-10-08]** — Francisco Couzo’s eight complete rational
   certificates and separate decimal context poses.
   T-128 is at V3/C3 on the
@@ -1038,6 +1052,29 @@ and a third exact route agrees.
 T-135 records the n = 308 side at V3/C3, verified and not selected: the case adopted
 issue #489’s smaller side (T-141). The n = 343 and 344 sides lie beyond the case corpus
 and are verified beyond-horizon rows.
+
+**[Fang direct certificates 2026-10-13]**: Kevin Fang’s exact rational certificates for
+n = 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, first
+committed in `e646c47` and `c284cd0` with no issue and pinned at
+`078789a4cfd36f915f1bfbe76d742413d79b2965`, retained as the source wrote them;
+[packet](web/fang-direct-certificates-2026-10-13/README.md).
+Both project exact routes accept the 3 replayed certificates, at 380, 381 and 382, and
+refuse all 6 controls; the other eleven wait for an owner’s replay budget.
+All fourteen sides lie beyond the case corpus, for the record’s beyond-horizon rows.
+
+**[Fang excess theorem 2026-10-13]**: Kevin Fang’s Theorems 1 and 2,
+$s(n^2 - n + 1) < n$ for every $n \ge 15$ and $s(n^2 - n + F(n)) < n$ with
+$F(n) = 1 + \max\{p + 2q : 16p + 21q \le n - 15\}$, as the README at
+`078789a4cfd36f915f1bfbe76d742413d79b2965` states them for the note draft v0.6, which is
+not in the repository, with the six squeezable rectangles, the gluing program, Evan
+Daniel’s pieces and the tables of the theorem inventory, retained as the source wrote
+them; of the inventory’s 76 exact certificates at side $n - 1/20000$ for $n = 15..64$,
+six are retained and 70, 16 MB, are pinned by digest with their headers frozen in the
+packet; [packet](web/fang-excess-theorem-2026-10-13/README.md).
+Every header and table of the release holds exactly, and both project exact routes
+accept the six retained certificates and refuse their twelve controls; the other 70 wait
+for a hosted-data release and a W7 route, and the rectangles in both dimensions for a W7
+route. Bead `think-0esw` owns its stage 3 entries.
 
 **[SQUISH third request 2026-10-09]**: Nate Chaoweeraprasit’s exact rational
 certificates for n = 131, 153, 154, 207, 209, 232, 236, 237, 259, 263, 269, 270, 292,

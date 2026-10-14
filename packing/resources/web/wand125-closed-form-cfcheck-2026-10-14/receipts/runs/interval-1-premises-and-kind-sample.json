@@ -1,0 +1,221 @@
+{
+ "schema": "cfcheck-run/v1",
+ "label": "interval-1-premises-and-kind-sample",
+ "binary_sha256": "c5a163d48d10155dbe6d319a8a8cae8cab3feb9278c6fb7116c2d0396e686484",
+ "toolchain": {
+  "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+  "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)"
+ },
+ "command": [
+  "cfcheck",
+  "interval",
+  "assets/interval_0_0.02",
+  "--intervals",
+  "intervals.json",
+  "--index",
+  "1",
+  "--threads",
+  "2",
+  "--chunk-leaves",
+  "1",
+  "--only-kinds",
+  "EMPTY,CORE,B3D,EDGE,EX:CORE,EX:B3D,EY:CORE,EY:B3D,B3U:x,B3U:y,B3U:xy,B3U:xyh,B3T:x,B3T:y,CORE1:P,CORE1:x,CORE1:y,CORE1:xy,CORE1:xyh,CORE1:Tx,CORE1:Ty,CORE1:TxHy,CORE1:TyHx",
+  "--max-leaves-per-kind",
+  "25"
+ ],
+ "cwd": "the run directory: intervals.json and assets/<asset>/ unpacked from the release",
+ "started": "2026-10-14T11:48:50Z",
+ "finished": "2026-10-14T12:05:31Z",
+ "wall_seconds": 1000.901,
+ "cpu_seconds": {
+  "user": 1467.493,
+  "system": 1.693
+ },
+ "max_rss_kib": 335912,
+ "host": {
+  "cpus": 4,
+  "load_average_before": [
+   1.97,
+   1.95,
+   2.77
+  ],
+  "load_average_after": [
+   2.43,
+   2.71,
+   2.77
+  ],
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+ },
+ "exit_code": 0,
+ "verdict": "CFCHECK PARTIAL",
+ "stderr_tail": "",
+ "report": "interval-1-premises-and-kind-sample.report.json",
+ "report_sha256": "df2d13645dd277c9dc3a756943241d5ba9ddfbd093d7d9d9bcda619cf4739d9b",
+ "sample": {
+  "interval": 1,
+  "region": null,
+  "note": "interval 1: digests, family structure, the product grid, the tiling of every root and the published counts of all four records in full; leaf tests on the first 25 leaves of each kind but B4U in each record"
+ },
+ "summary": {
+  "ok": true,
+  "command": "interval",
+  "partial": true,
+  "incomplete": false,
+  "roots": 40257,
+  "leaves": 1653457,
+  "resumed_roots": 0,
+  "seconds": 1000.86641527,
+  "leaf_kinds": {
+   "B3D": 216408,
+   "B3T:x": 11534,
+   "B3T:y": 14539,
+   "B3U:x": 14886,
+   "B3U:xy": 433,
+   "B3U:xyh": 19,
+   "B3U:y": 102096,
+   "B4U": 111,
+   "CORE": 503357,
+   "CORE1:P": 140107,
+   "CORE1:Tx": 127855,
+   "CORE1:TxHy": 1498,
+   "CORE1:Ty": 134675,
+   "CORE1:x": 128474,
+   "CORE1:xy": 6989,
+   "CORE1:xyh": 2943,
+   "CORE1:y": 170722,
+   "EDGE": 43128,
+   "EMPTY": 33605,
+   "EX:CORE": 14,
+   "EY:CORE": 64
+  },
+  "checked_leaf_kinds": {
+   "B3D": 100,
+   "B3T:x": 37,
+   "B3T:y": 50,
+   "B3U:x": 50,
+   "B3U:xy": 25,
+   "B3U:xyh": 19,
+   "B3U:y": 50,
+   "CORE": 100,
+   "CORE1:P": 81,
+   "CORE1:Tx": 75,
+   "CORE1:TxHy": 25,
+   "CORE1:Ty": 50,
+   "CORE1:x": 50,
+   "CORE1:xy": 25,
+   "CORE1:xyh": 25,
+   "CORE1:y": 50,
+   "EDGE": 75,
+   "EMPTY": 75,
+   "EX:CORE": 14,
+   "EY:CORE": 25
+  },
+  "refusal_count": 0,
+  "refusals": [],
+  "interruptions": 0,
+  "regions": {
+   "left": {
+    "checked_roots": 17442,
+    "accepted_roots": 57,
+    "resumed_roots": 0
+   },
+   "right": {
+    "checked_roots": 13338,
+    "accepted_roots": 70,
+    "resumed_roots": 0
+   },
+   "straddle": {
+    "checked_roots": 6804,
+    "accepted_roots": 97,
+    "resumed_roots": 0
+   },
+   "top": {
+    "checked_roots": 2673,
+    "accepted_roots": 9,
+    "resumed_roots": 0
+   }
+  },
+  "leaf_timing": {
+   "B3D": {
+    "leaves": 100,
+    "seconds": 764.473515076
+   },
+   "B3T:x": {
+    "leaves": 37,
+    "seconds": 104.63461735300001
+   },
+   "CORE": {
+    "leaves": 100,
+    "seconds": 0.20672847600000002
+   },
+   "CORE1:P": {
+    "leaves": 81,
+    "seconds": 17.094574159000004
+   },
+   "CORE1:Tx": {
+    "leaves": 75,
+    "seconds": 9.227606244000002
+   },
+   "CORE1:TxHy": {
+    "leaves": 25,
+    "seconds": 5.858958414000001
+   },
+   "EMPTY": {
+    "leaves": 75,
+    "seconds": 0.000439451
+   },
+   "B3T:y": {
+    "leaves": 50,
+    "seconds": 167.54078424
+   },
+   "B3U:y": {
+    "leaves": 50,
+    "seconds": 57.183235293999985
+   },
+   "CORE1:Ty": {
+    "leaves": 50,
+    "seconds": 21.375182451999997
+   },
+   "CORE1:y": {
+    "leaves": 50,
+    "seconds": 3.548584611
+   },
+   "EDGE": {
+    "leaves": 75,
+    "seconds": 0.006865921
+   },
+   "B3U:x": {
+    "leaves": 50,
+    "seconds": 65.12026134199999
+   },
+   "B3U:xy": {
+    "leaves": 25,
+    "seconds": 5.656496780999999
+   },
+   "B3U:xyh": {
+    "leaves": 19,
+    "seconds": 244.29278797800004
+   },
+   "CORE1:x": {
+    "leaves": 50,
+    "seconds": 6.204865509999999
+   },
+   "CORE1:xy": {
+    "leaves": 25,
+    "seconds": 2.5681140870000005
+   },
+   "CORE1:xyh": {
+    "leaves": 25,
+    "seconds": 7.039759426999999
+   },
+   "EX:CORE": {
+    "leaves": 14,
+    "seconds": 0.038836067999999994
+   },
+   "EY:CORE": {
+    "leaves": 25,
+    "seconds": 0.06500667100000002
+   }
+  }
+ }
+}

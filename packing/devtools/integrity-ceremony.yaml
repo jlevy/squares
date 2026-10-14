@@ -411,6 +411,15 @@ allowlist:
     boundary: >-
       Release assets of bulk data hosted outside Git (OR-18), each downloaded and held
       against the SHA-256 its committed manifest names; from main's PR 349.
+  - path: packing/cases/asymptotic/fang_excess_inventory.py
+    kind: external-checkout
+    boundary: >-
+      `--freeze-headers` reads Kevin Fang's squarepack-certs checked out at 078789a and
+      holds each of the 76 inventory certificates' bytes to the SHA-256 the packet's
+      manifest pinned when the packet was acquired, before taking its header into the
+      frozen list, catching a checkout at another revision or a locally altered file.
+      Checking the list reads headers only; no digest names a file this repository
+      wrote, decides geometry or pins code.
   - path: packing/devtools/check_general_pose_tree_census.py
     kind: external-checkout
     boundary: The general_pose_tree checker, another repository passed by --checker (C3).

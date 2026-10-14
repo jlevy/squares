@@ -1,0 +1,15 @@
+{
+ "mutation": "relabel-leaf",
+ "interval": 1,
+ "from": "interval_0_0.02",
+ "region": "top",
+ "line": 1,
+ "leaf": 1,
+ "kind_from": "CORE1:Tx",
+ "kind_to": "CORE",
+ "resealed": [
+  "top.rec",
+  "SHA256SUMS",
+  "intervals.json (digests and published counts)"
+ ]
+}

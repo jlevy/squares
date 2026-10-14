@@ -1,0 +1,1 @@
+n = 421 = 21^2 - 21 + 1, S = 20.986150316947159 (rounded up; exact value in the certificate), grown from our n = 381 packing, whose seed was Francisco Couzo's n = 342 packing (https://github.com/franciscouzo/square-packing; not redistributed here), found 2026-10-10, not analytically optimised.

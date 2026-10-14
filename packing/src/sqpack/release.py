@@ -85,6 +85,15 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.6.2",
+        first_published="October 14, 2026",
+        result_scope=(
+            "List the October 14 reviews and intake ledger in the synopsis document map, "
+            "refresh its session rollups, and re-anchor result-page bibliography links to "
+            "their entries."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.1",
         first_published="October 14, 2026",
         result_scope=(
@@ -636,6 +645,17 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.6.1",
+        version="v0.6.2",
+        impact="patch",
+        reason=(
+            "List the October 14 reviews and intake ledger in the synopsis document map, "
+            "refresh its session rollups, and re-anchor result-page bibliography links to "
+            "their entries."
+        ),
+    ),
+    ReleaseImpactDecision(
         component="paper:square-packing-methods-survey",
         previous_version="v0.2.1",
         version="v0.2.2",
@@ -736,6 +756,48 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical; the order of the explainer's empty style attribute on a math "
             "span varies between any two renders of the same code. Each PDF prints from "
             "that HTML, so every paper keeps its edition."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/pyproject.toml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Each paper was rendered with its own command at main's 37e6757ed and at "
+            "c6118ca59. The explainer's 55 files are byte-identical; the optimality, "
+            "threshold-bound and methods papers' HTML, Markdown and PDF are byte-identical "
+            "once the build commit their repository links pin is normalized. The inputs add "
+            "a beyond-horizon-only register plan and four HOUSES readers, reached from the "
+            "papers only through the atlas builder's import closure, and a BasedPyright "
+            "include that no render reads. The site v0.6.2 cut regenerates the claim "
+            "documents at its new link revision; the explainer rendered after that cut is "
+            "byte-identical in all 55 files to its render before it."
         ),
     ),
     ReleaseNoPublicChange(
@@ -984,7 +1046,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "93822bfe"
+PUBLICATION_REVISION = "c6118ca5"
 
 
 def data_pathspec() -> tuple[str, ...]:

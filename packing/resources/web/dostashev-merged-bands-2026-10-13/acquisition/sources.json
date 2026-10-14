@@ -1,0 +1,351 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T06:54Z",
+  "git_scope": "Full clone of main, checked out at b909e1b74cda50906e12b4373e010ddee39e47e4, the head and the commit issue #575 names after its edit of 2026-10-13T04:13Z, with the SHA-256 of its eight files; the 176, 211 and 241 files are unchanged from b572f10864c47f16e7bad7ecdeee4195eadcc757, the commit the issue first named. Against c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49, the issue-501 pin, the head changes README.md and the 211 files, adds the 129, 175, 176, 204, 232, 241, 264, 303 and 304 files, and rewrites the 129, 175, 204, 232, 264 and 303 files of fe43a64ecf2581cdbd11830e8a5be0989746c5d3 in canonical form (883aa4bb0da10390f9aa7c37768025eaf5c3936c) at the same exact sides. The README, the licence and the 176, 211, 241 and 304 files are retained; the six rewritten files of issues #528 and #562 are pinned by digest only; every other file is unchanged since c3d17ab and is pinned by digest against the copy the issue-501 packet retains. No source program was executed.",
+  "sources": [
+    {
+      "id": "dostashev-square-packing",
+      "source_url": "https://github.com/dostashev/square-packing",
+      "source_ref": "main",
+      "source_commit": "b909e1b74cda50906e12b4373e010ddee39e47e4",
+      "committed_utc": "2026-10-13T03:03:29Z",
+      "git_tree": "e2e293d66e4a4439d78da9a184df3688da5ec7de",
+      "archived_path": "packing/resources/web/dostashev-merged-bands-2026-10-13/source",
+      "subtree_manifest": "packing/resources/web/dostashev-merged-bands-2026-10-13/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "CMakeLists.txt",
+        "LICENSE",
+        "README.md",
+        "pyproject.toml",
+        "records",
+        "tools",
+        "verify",
+        "verify_all.sh"
+      ],
+      "subtree_file_count": 56,
+      "subtree_total_bytes": 1844269,
+      "retained_file_count": 10,
+      "retained_total_bytes": 656939,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "CMakeLists.txt",
+          "bytes": 255,
+          "sha256": "996b70e9f615f9dc1803221065ec90fca9fd620f772d07ca8d1e1bc94d063d7b",
+          "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/CMakeLists.txt"
+        },
+        {
+          "path": "pyproject.toml",
+          "bytes": 247,
+          "sha256": "e328e5e3889fd1f90dbe3609717acb8584a33880b0ded6e4668533d8860dbce1",
+          "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/pyproject.toml"
+        },
+        {
+          "path": "records/n0129.sqcert",
+          "bytes": 62902,
+          "sha256": "123031b8e95245cbbf23f1876ed071ca4f6b6d274ca20c01f03797fa35f4fa47",
+          "reason": "Issue 562's certificate rewritten in canonical form by 883aa4b at the same exact side; the dostashev-compositions-2026-10-12 packet retains the bytes issue 562 names, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0129.sqpk",
+          "bytes": 21124,
+          "sha256": "ef19c0291187735eecd222cb965fb72cdf7cf6aaad8a9fb2ceb3d9a6730c06d5",
+          "reason": "Issue 562's certificate rewritten in canonical form by 883aa4b at the same exact side; the dostashev-compositions-2026-10-12 packet retains the bytes issue 562 names, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0155.sqcert",
+          "bytes": 77556,
+          "sha256": "6c6949e837513e2b9257b70f5a6b6cb864e16f825c5997a62b1903cb9a69bf7b",
+          "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/records/n0155.sqcert"
+        },
+        {
+          "path": "records/n0155.sqpk",
+          "bytes": 21043,
+          "sha256": "9e53e66fdefb4e939fbfd38397eaa46f2fb3ece5453f832710625104e33dd7f5",
+          "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/records/n0155.sqpk"
+        },
+        {
+          "path": "records/n0156.sqcert",
+          "bytes": 81191,
+          "sha256": "694dcbf9f20ddb1ef19678fcbf7905736658834b0f2b31312d6d67380ca2534a",
+          "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/records/n0156.sqcert"
+        },
+        {
+          "path": "records/n0156.sqpk",
+          "bytes": 22623,
+          "sha256": "ce866795f15bceb501b089f39b9c07fd0053ae9ccce49e5ca2eee6988dbca82d",
+          "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/records/n0156.sqpk"
+        },
+        {
+          "path": "records/n0175.sqcert",
+          "bytes": 88883,
+          "sha256": "260dbc06037f3d08fb53049faaff66750a141a16c1c912ec47cdcff8bf5e4807",
+          "reason": "Issue 528's certificate rewritten in canonical form by 883aa4b at the same exact side; that import (think-em0b) retains the a8db6ff bytes, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0175.sqpk",
+          "bytes": 29047,
+          "sha256": "3cc31a90488b9a6abda5ae0a12c7f6ca7eccc85a66eb38d0c027f6f981d1d05c",
+          "reason": "Issue 528's certificate rewritten in canonical form by 883aa4b at the same exact side; that import (think-em0b) retains the a8db6ff bytes, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0204.sqcert",
+          "bytes": 105311,
+          "sha256": "44cc7ad3cafe4d4005b0972ea6620a92f8c1da787227fdc3237d32fdf9b67562",
+          "reason": "Issue 562's certificate rewritten in canonical form by 883aa4b at the same exact side; the dostashev-compositions-2026-10-12 packet retains the bytes issue 562 names, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0204.sqpk",
+          "bytes": 35604,
+          "sha256": "4ea40c13178c2b3b9abed338b26f94fd2714396b76fc3d483642d24af2808e19",
+          "reason": "Issue 562's certificate rewritten in canonical form by 883aa4b at the same exact side; the dostashev-compositions-2026-10-12 packet retains the bytes issue 562 names, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0232.sqcert",
+          "bytes": 111107,
+          "sha256": "6f3db14c05d43e370248cf3b41578dc797239faea8e439428924da8807704301",
+          "reason": "Issue 528's certificate rewritten in canonical form by 883aa4b at the same exact side; that import (think-em0b) retains the a8db6ff bytes, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0232.sqpk",
+          "bytes": 37892,
+          "sha256": "299b3027243645eb504311f300461a5110dc969f1dbf1b6040934a4e7acb82c0",
+          "reason": "Issue 528's certificate rewritten in canonical form by 883aa4b at the same exact side; that import (think-em0b) retains the a8db6ff bytes, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0264.sqcert",
+          "bytes": 136283,
+          "sha256": "4ecfe5b3f748ed8a53aec0253829036434add2559e2cc4fef9353b1b303804c7",
+          "reason": "Issue 528's certificate rewritten in canonical form by 883aa4b at the same exact side; that import (think-em0b) retains the a8db6ff bytes, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0264.sqpk",
+          "bytes": 45392,
+          "sha256": "4d425cc7affa47de3d9c77266ef98bd55afad86a87ec274c6d9d0a37d12b0ac7",
+          "reason": "Issue 528's certificate rewritten in canonical form by 883aa4b at the same exact side; that import (think-em0b) retains the a8db6ff bytes, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0303.sqcert",
+          "bytes": 151389,
+          "sha256": "b90c9ed1f0d1f6eb1f3032136495e6f45739bf0c1b14b570e460b1d5ee8a09d2",
+          "reason": "Issue 562's certificate rewritten in canonical form by 883aa4b at the same exact side; the dostashev-compositions-2026-10-12 packet retains the bytes issue 562 names, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "records/n0303.sqpk",
+          "bytes": 57252,
+          "sha256": "60a5155b6a52f6cf7a7b28a5d81acda5c6695d53aedc039aac637223ddb5bbfe",
+          "reason": "Issue 562's certificate rewritten in canonical form by 883aa4b at the same exact side; the dostashev-compositions-2026-10-12 packet retains the bytes issue 562 names, so this rewrite is pinned by digest only."
+        },
+        {
+          "path": "tools/crosscheck_mpmath.py",
+          "bytes": 6019,
+          "sha256": "8f83764f0e8e734ace2cafe868b19f44a17c70d6171f5dfd284e0cad0af1cee7",
+          "reason": "The author's mpmath cross-check and packing reader, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/tools/crosscheck_mpmath.py"
+        },
+        {
+          "path": "tools/sqpk.py",
+          "bytes": 5959,
+          "sha256": "642931ce944a4a2735bc8d7bf341ef35e15b748b1efb96f126a20f81d4ce29ad",
+          "reason": "The author's mpmath cross-check and packing reader, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/tools/sqpk.py"
+        },
+        {
+          "path": "verify/CMakeLists.txt",
+          "bytes": 4697,
+          "sha256": "ea2bc4b287f9417118485f6e6eacc2206cdc4221c0e162317e0046c1b9600804",
+          "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/CMakeLists.txt"
+        },
+        {
+          "path": "verify/src/geometry.hpp",
+          "bytes": 3491,
+          "sha256": "777223d2bfe9397e7aa74427210895b4837b64286433e8488078d48dc04fdde0",
+          "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src/geometry.hpp"
+        },
+        {
+          "path": "verify/src/json_out.cpp",
+          "bytes": 4430,
+          "sha256": "027b58371966cb167f7be664d7290e3d7966b41d4d31aab717ac5c90ac13c958",
+          "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src/json_out.cpp"
+        },
+        {
+          "path": "verify/src/json_out.hpp",
+          "bytes": 443,
+          "sha256": "9bb43eb2c053c8d97c895dd6cef2c4071a598558acba80254f384e5cdc1d6549",
+          "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src/json_out.hpp"
+        },
+        {
+          "path": "verify/src/numparse.cpp",
+          "bytes": 5821,
+          "sha256": "f944758463934ea9b5ef6d0c5af1c9902bea495f5449a4c2b25e51b6a6e9cd08",
+          "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src/numparse.cpp"
+        },
+        {
+          "path": "verify/src/numparse.hpp",
+          "bytes": 1207,
+          "sha256": "81eaf4bf18ff498af830c560fcdf10fe58be036cbda27f309685daa0a1d3b25a",
+          "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src/numparse.hpp"
+        },
+        {
+          "path": "verify/src/sqpk.cpp",
+          "bytes": 4527,
+          "sha256": "6fa549086b366e1a93c9d7646e7eae78f8a6bde58a641d69df33a68be7a44502",
+          "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src/sqpk.cpp"
+        },
+        {
+          "path": "verify/src/sqpk.hpp",
+          "bytes": 1206,
+          "sha256": "56a7a5ce8aa68fb1eb325456ec6e763fe77cdcb486d15cdb04f21ab15578da90",
+          "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src/sqpk.hpp"
+        },
+        {
+          "path": "verify/src/sqverify.cpp",
+          "bytes": 12098,
+          "sha256": "b5d840a05b9200ad547910dda7afb422468e971c2c7d1659c20cf6c20c152ba3",
+          "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src/sqverify.cpp"
+        },
+        {
+          "path": "verify/src/verifier.cpp",
+          "bytes": 31195,
+          "sha256": "96f4c4a9a9fb9ca9e9ad0725507551b1bb19e157d48cfd0e673ae342d135ec5c",
+          "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src/verifier.cpp"
+        },
+        {
+          "path": "verify/src/verifier.hpp",
+          "bytes": 3490,
+          "sha256": "948c2ba360d16e5da2ce2450662c8a4b3fa3ffe0197f5816c8697f213812ea13",
+          "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src/verifier.hpp"
+        },
+        {
+          "path": "verify/tests/data/goebel5.sqpk",
+          "bytes": 536,
+          "sha256": "5bea66465c51770bb2e8b87da31f1d3d9115e0a94c6930392202ce6c7cfba786",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/goebel5.sqpk"
+        },
+        {
+          "path": "verify/tests/data/grid4.sqcert",
+          "bytes": 93,
+          "sha256": "285a6911460e80d57d07677b4ada150666302a5e4053bc776fcb7db128c91203",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/grid4.sqcert"
+        },
+        {
+          "path": "verify/tests/data/grid4_bad.sqcert",
+          "bytes": 189,
+          "sha256": "c9364d4c7ba996be93b3b0f609f71711ef18c2e49f7a5361aac10b9a2ba28278",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/grid4_bad.sqcert"
+        },
+        {
+          "path": "verify/tests/data/grid9.sqpk",
+          "bytes": 151,
+          "sha256": "36b2ca86275466453da63432a2a938552727746fabb3740cfdef18b7827f4afd",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/grid9.sqpk"
+        },
+        {
+          "path": "verify/tests/data/malformed.sqpk",
+          "bytes": 38,
+          "sha256": "b498e7b28d0204e5d615cbef9f33546543bf044cedcb6dcbb7de185559878e21",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/malformed.sqpk"
+        },
+        {
+          "path": "verify/tests/data/overlap_1e20_axis.sqpk",
+          "bytes": 126,
+          "sha256": "5154f8881f6029ea3c74c756655be79fed63813bbe81074a2ed154bec78f4e15",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/overlap_1e20_axis.sqpk"
+        },
+        {
+          "path": "verify/tests/data/overlap_1e20_rotated.sqpk",
+          "bytes": 192,
+          "sha256": "223660018b60a48ea4cbb35b42eb2663173eac7c39292545ca961661036cf551",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/overlap_1e20_rotated.sqpk"
+        },
+        {
+          "path": "verify/tests/data/overlap_1e3.sqpk",
+          "bytes": 94,
+          "sha256": "faf8ed6ea27e1dbcc3eeee9fe60e5c09f24d3756761de812dea06ff69d7e4c40",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/overlap_1e3.sqpk"
+        },
+        {
+          "path": "verify/tests/data/overlap_pair.sqpk",
+          "bytes": 95,
+          "sha256": "c4e0d3dcf47a5770c95b1ed9712d213fe2d14b91ccae5515f62d21cc88f3c37b",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/overlap_pair.sqpk"
+        },
+        {
+          "path": "verify/tests/data/poking_out.sqpk",
+          "bytes": 100,
+          "sha256": "bc9adca283d251034628462574993dcd53a65b549af2406c9549cd1930e95f21",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/poking_out.sqpk"
+        },
+        {
+          "path": "verify/tests/data/pythagorean.sqcert",
+          "bytes": 114,
+          "sha256": "5a10e1d6e75d2677a382db4ce9e7cd677d2891f872e8bd0fbca11f93583228af",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/pythagorean.sqcert"
+        },
+        {
+          "path": "verify/tests/data/single_free.sqpk",
+          "bytes": 81,
+          "sha256": "5cae81f5213ec5d8ef13738df26f8547777137b1e926bddb31698e6fae5dc019",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/single_free.sqpk"
+        },
+        {
+          "path": "verify/tests/data/touching_rotated.sqpk",
+          "bytes": 157,
+          "sha256": "d2331ce31ad264ee93ed492fa02c45cb9e59ea17a0af412c9b5b25ccc66bee74",
+          "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data/touching_rotated.sqpk"
+        },
+        {
+          "path": "verify/tests/test_sqverify.cpp",
+          "bytes": 14563,
+          "sha256": "72bd16a6286b699284df67eca6a20e3f3c4b76e74aad8c708d3f143e1a1becad",
+          "reason": "The checker's tests, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/test_sqverify.cpp"
+        },
+        {
+          "path": "verify_all.sh",
+          "bytes": 1117,
+          "sha256": "971a1f5b2f8c8ddb8773c3c7c1d88d54e836f2d7ee02995498274ac865d8212b",
+          "reason": "The author's driver, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not run.",
+          "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify_all.sh"
+        }
+      ],
+      "license": "MIT (LICENSE, Copyright (c) 2026 Daniil Ostashev, added in c6893aa24ec2b2822ef42ab695c828de1ccb9015); the README says it covers the verification code and the record packings and certificates. The retained files are byte-identical with the licence beside them. Issue #575 credits Daniil Ostashev with the four packings, asks that the seeds' authors (Francisco Couzo, Evan Daniel, Joost de Winter) and the composition pieces' sources be acknowledged, and states AI assistance: an AI-assisted research loop the author drives with his own ideas, in which AI agents wrote and ran the search and verification code and an agent extended the band-merging move from the author's compositions to published two-band packings.",
+      "claims": [
+        "Issue #575 reports s(176) <= 13.79587231843640726331185405391207744387, s(211) <= 14.99369418658324657063591818176125142354, s(241) <= 15.98713424905084041461665739745571396866 and, added on 2026-10-13, s(304) <= 17.92942775807517496566632613898911486244, certified and rounded up; each records/n0NNN.sqcert gives the exact side, dilated by 1 + 1e-60 from the 60-digit optimum of its contact topology, and the README at the pin prints the same sides rounded up to 15 places.",
+        "The issue says all four are new arrangements: at 176, 211 and 241 an all-soft GPU re-hardening (soft-to-rigid, after Yohei Nakajima's idea) merged two tilted bands into one V, seeded from the author's earlier 176 composition, from Evan Daniel's exact optimum of Joost de Winter's 211 and from Evan Daniel's exact optimum of Francisco Couzo's 241; at 304 the same re-hardening relaxed the author's composition of a 55-square (h + 8) x h piece and a 68-square (h + 7) x h piece without forming a V. The 211 replaces the author's issue-501 packing, registered as T-149, with a different one.",
+        "The README at the pin states that Francisco Couzo has improved the author's 156 to 12.979165853835 and the author's first 176 (13.808663234387) to 13.807637227056, each starting from the author's packing; those are Couzo's claims, not this source's.",
+        "The author reports that its own C++ checker (sqverify) accepts all four in GMP rational arithmetic and that a separate 80-digit mpmath cross-check accepts them; each side is reported as the exact first-order optimum of its contact topology with nonnegative KKT multipliers, reached by two routes that agree. These are author reports; no optimality is claimed."
+      ]
+    }
+  ]
+}

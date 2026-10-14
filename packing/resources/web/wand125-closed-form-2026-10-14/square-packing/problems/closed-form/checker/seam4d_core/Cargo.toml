@@ -1,0 +1,16 @@
+[package]
+name = "seam4d_core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rug.workspace = true
+gmp-mpfr-sys.workspace = true
+serde_json.workspace = true
+
+[features]
+system-gmp = ["gmp-mpfr-sys/use-system-libs"]
+prof = []
+
+[target.'cfg(target_os = "macos")'.dependencies]
+gmp-mpfr-sys = { version = "1.6", default-features = false, features = ["use-system-libs", "force-cross"] }

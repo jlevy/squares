@@ -1,0 +1,29 @@
+{
+ "schema": "asset/v1",
+ "id": "square-lower-bounds-v1:certificates/mixed_n145_L1224",
+ "claim": "s(145) >= 306/25",
+ "release_tag": "square-lower-bounds-v1",
+ "release_url": "https://github.com/wand125/square-packing/releases/tag/square-lower-bounds-v1",
+ "assets": [
+  {
+   "asset": "certificates__mixed_n145_L1224.tar.gz",
+   "size": 38598220,
+   "sha256": "6a937dc726a392ead0c9f94a892025da2ac891816d8d9560f8e9364b01922a49"
+  }
+ ],
+ "unpack": "tar xzf certificates__mixed_n145_L1224.tar.gz -C problems/square-lower-bounds",
+ "unpack_note": "run from the repository root; restores the data files in place next to the documents",
+ "check": "tar xzf n145-L12.24-proof-bundle.tar.gz\nOPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 code/replay_linear_bundle.py n145-L12.24-proof-bundle --workers 3",
+ "check_cwd": "problems/square-lower-bounds/certificates/mixed_n145_L1224",
+ "check_note": null,
+ "check_extended": null,
+ "documents": [
+  "problems/square-lower-bounds/certificates/mixed_n145_L1224/README.md"
+ ],
+ "source": {
+  "repository": "wand125/square-packing",
+  "commit": null,
+  "path": "problems/square-lower-bounds/certificates/mixed_n145_L1224",
+  "published_after": "7a42c16eacaab112b537ab09e89d3485f6f4c75f"
+ }
+}

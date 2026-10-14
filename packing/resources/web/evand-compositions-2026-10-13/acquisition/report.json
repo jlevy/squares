@@ -1,0 +1,45 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/584",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel compositions 2026-10-13]",
+  "report_evidence": "E-evand-584-compositions-report",
+  "receipt_format": "evand-584-exact-replay-v1",
+  "witness_prefix": "W-evand-584-n",
+  "claim_limitations": "Complete 231d41d rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "certificates": [
+    {"n": 339, "path": "search/packer/candidates/comp2_n339.cert", "format": "evand-cert", "offered": "18.926898900357", "first_committed": "2026-10-13T14:24:04Z"},
+    {"n": 364, "path": "search/packer/candidates/comp2_n364.cert", "format": "evand-cert", "offered": "19.583782203951", "first_committed": "2026-10-13T14:24:04Z"},
+    {"n": 375, "path": "search/packer/candidates/comp2_n375.cert", "format": "evand-cert", "offered": "19.882451030482", "first_committed": "2026-10-13T14:24:04Z"}
+  ],
+  "requested": [339, 364, 375],
+  "replayed": [339, 364, 375],
+  "houses": [],
+  "pending": [
+    {"n": 339, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "18.929433883808", "rounding": "up"},
+    {"n": 339, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "printed": "18.927383638495", "rounding": "up"},
+    {"n": 339, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "printed": "18.925319360704", "rounding": "up"},
+    {"n": 364, "report": "couzo-extended-range-reports-2026-10-08", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.597249391207239", "rounding": "unstated"},
+    {"n": 375, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.906335145009", "rounding": "up"},
+    {"n": 375, "report": "#561", "url": "https://github.com/jlevy/squares/issues/561", "holders": "Francisco Couzo", "printed": "19.901618621328", "rounding": "up"},
+    {"n": 375, "report": "franciscouzo 4596670 (no issue)", "url": "https://github.com/franciscouzo/square-packing/blob/45966700cf15d3f42e064fd6da51fcb9a5def2be/certificates/n375.cert", "holders": "Francisco Couzo", "printed": "19.893906534236", "rounding": "up"}
+  ],
+  "register": {
+    "title": "Evan Daniel's two-piece composition certificates at 231d41d, issue584",
+    "headline": "Exact rational certificates at 339, 364 and 375, beyond the case corpus, from Evan Daniel's two-piece compositions",
+    "significance": 2,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept all three, standard library only, with least certified clearances of 1e-20 for pairs and 5e-21 for walls; they share an author and the certificate format, and their geometry tests differ. Each side is an 80-digit KKT point with positive multipliers on the load-bearing contacts, a reduced Hessian positive semidefinite modulo exact flat motions and a first-order MILP that finds no descent in any corner-corner branch; those are numerical evidence, as the source says, not interval proofs. No source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose composer found all three: two-piece compositions in the style of David Ellsworth's s(171) and Daniil Ostashev's issue 562 and 575 compositions, a rectangle of unit squares whose sides differ by an integer in each of two opposite corners and aligned squares filling the rest. The author asks that the packings the pieces came from be credited: at 339 two pieces cut from Daniil Ostashev's s(304) of issue 575, each re-optimised as a rectangle; at 364 BuddenPing's (PingYou Ltd's) s(146), issue 566's exact refinement of Robert Barnett's issue 505, whole in one corner and Thomas Schadt's s(50) = 53/7 in the other, so the side is s(146) + 7; at 375 a 69-square crop of Nate Chaoweeraprasit's (SQUISH) s(88) and a 118-square crop of Ryan Xu's s(129), the side s(88) + 10 to 13 digits. The issue says 364 and 375 are new arrangements of known pieces, not new local structure. The composer, the search, the checks and the request were done with Claude (Claude Code), directed and reviewed by Evan Daniel.",
+    "next_rung": "Independently review the retained replay, then record each count as a verified beyond-horizon row, as for issue 506: 364 and 375 are below every report known at their counts, by 1.35e-02 and 1.15e-02 at least, and 339 is below the tracked row and issue 583 but above Francisco Couzo's issue 586, 18.925319360704, by 1.58e-03. Final exact-head CI remains required.",
+    "bead": "think-x333",
+    "bibliography": {
+      "authors": ["Daniel"],
+      "lineage": "independent",
+      "credit": "Daniel after Ostashev, PingYou Ltd, Barnett, Schadt, Chaoweeraprasit, Xu, Ellsworth",
+      "short_credit": "Daniel after Ostashev et al.",
+      "note": "Three complete exact certificates at 231d41df7a03fccd89aa6e9ef5a540348a8214cc, all beyond the case corpus, at 339, 364 and 375: two-piece compositions in the style of Ellsworth's s(171) and Ostashev's compositions, from pieces of Ostashev's s(304), BuddenPing's (PingYou Ltd's) s(146), issue 566's refinement of Barnett's issue 505, with Schadt's s(50), and crops of Chaoweeraprasit's s(88) and Xu's s(129), each solved to an 80-digit KKT point and scaled by 1 + 1e-20. MIT-licensed certificates, KKT points, inputs and solver reports retained; the source's two exact checkers pinned against the issue-399 packet and not run here. Claude assistance disclosed. KKT and descent statements are the author's numerical evidence; no local or global optimality claim."
+    }
+  }
+}
