@@ -5,7 +5,7 @@ title: "Import Mishapolk: exact certificates at n = 103, 153, 207, 209, 258, 270
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T07:10:30.078Z
-updated_at: 2026-10-14T08:07:32.723Z
+updated_at: 2026-10-14T14:50:26.159Z
 started_at: 2026-10-14T07:10:40.964Z
 ---
 Stage 1-2 and stage 4 replay of issue #573 (Mishapolk/square-packing-records at 336bdf5efab4784e54e0ac32edf3ed12f9c8af7e), lane mishapolk of the 2026-10-14 intake pass, branch claude/wizardly-meitner-wqn4x3-intake-1014-mishapolk. Claim map, comparison and priced plan in notes.
@@ -84,3 +84,5 @@ as much replay.
 ## Acknowledgement posted (2026-10-14)
 
 https://github.com/jlevy/squares/issues/573#issuecomment-6163850092 (revised from the draft above; text in scratchpad mishapolk/ack573.md).
+
+Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-172 at 153 and 207, V0/C0 (the ledger records #573 there, before PR 574); 103, 209, 258, 270 not recorded.

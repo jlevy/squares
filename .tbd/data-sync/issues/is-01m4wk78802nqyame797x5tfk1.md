@@ -5,7 +5,7 @@ title: "Import dostashev: s(129) <= 11.870013850405, s(204) <= 14.808663234387, 
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T06:57:27.296Z
-updated_at: 2026-10-14T09:18:33.775Z
+updated_at: 2026-10-14T14:50:14.193Z
 started_at: 2026-10-14T06:57:53.843Z
 ---
 https://github.com/jlevy/squares/issues/562 (2026-10-12T19:10:14Z, unedited). dostashev/square-packing at fe43a64ecf2581cdbd11830e8a5be0989746c5d3, records/n0129, n0204, n0303 (.sqcert, .sqpk). Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports, intake lane ostashev of 2026-10-14.
@@ -60,3 +60,5 @@ Register plan: scratchpad register-plan-dostashev-compositions-2026-10-12.yaml (
 ## Stage 1 acknowledgement posted, 2026-10-14
 
 https://github.com/jlevy/squares/issues/562#issuecomment-6165052232 (states the pin, the retained and replayed certificates with controls refused, and the comparison at each count; the earlier draft above was not posted as written).
+
+Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-162 at 129, 204 and 303, V0/C0, S3.

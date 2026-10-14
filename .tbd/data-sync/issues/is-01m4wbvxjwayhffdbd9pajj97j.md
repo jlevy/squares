@@ -5,7 +5,7 @@ title: "Import BuddenPing: s(207) <= 14.880960371559, refining T-147 (#503 comme
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:55.899Z
-updated_at: 2026-10-14T07:05:33.318Z
+updated_at: 2026-10-14T14:50:18.253Z
 started_at: 2026-10-14T04:49:01.109Z
 ---
 https://github.com/jlevy/squares/issues/503#issuecomment-6133755143 (BuddenPing, 2026-10-12T22:25Z) and the issue body's dated update. BuddenPing/square-packing-certificates 10418630bfb00853a539ad7ad9908b2d746147c0, n207.cert.json and pingyou-n207-rational.yaml; a coordinate refinement of T-147; credit PingYou Ltd. Intake lane pingyou of 2026-10-14.
@@ -48,3 +48,5 @@ Branch `claude/wizardly-meitner-wqn4x3-intake-1014-pingyou`, commit `680123806` 
 @BuddenPing, thank you. We have the refined n207 certificate from your comment of 12 October, pinned at 1041863 (n207.cert.json, SHA-256 94dc19ce…). We retain it as derived exact facts beside T-147's, and this project's two maintained exact routes have decided it with both controls; it is the same assembly as T-147's, and smaller by the 1.4851194398617480221170501178639e-9 you state. A review and the registration follow; T-147 keeps its own claim, and the case record will say which is current. PR #574 states further n207 certificates; it is a separate import.
 
 Posted (stage 1 acknowledgement, 2026-10-14): https://github.com/jlevy/squares/issues/503#issuecomment-6162867217
+
+Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-166 at 207, V0/C0, regularizing T-147.
