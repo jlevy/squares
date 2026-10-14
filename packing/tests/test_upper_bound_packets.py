@@ -10,6 +10,7 @@ import pytest
 
 from devtools import apply_exact_optima as exact_optima
 from devtools import apply_upper_bound_packets as apply
+from devtools import source_supersession
 from devtools import upper_bound_packets as packets
 from devtools.check_case_prose import Reading
 from devtools.source_supersession import superseded_counts
@@ -114,6 +115,39 @@ def test_the_casson_packings_are_each_larger_than_couzos() -> None:
 
 def test_the_records_are_what_the_apply_tool_writes() -> None:
     assert apply.main(["--check"]) == 0
+
+
+def test_adoption_coverage_context_keeps_standalone_reads_fresh(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A batch reuses its explicit record; the next standalone call sees a new record."""
+    first = (
+        "sources: [{id: new, source_key: '[new]'}]\n"
+        "selected_overrides: [{n: 2, source_id: new}]\n"
+        "superseded_reports: [{n: 2, source_id: old, superseded_by: new}]\n"
+    )
+
+    class ChangingCoverage:
+        reads = 0
+
+        def read_text(self) -> str:
+            self.reads += 1
+            return first if self.reads == 1 else first.replace("[new]", "[different]")
+
+    changing = ChangingCoverage()
+    monkeypatch.setattr(source_supersession, "COVERAGE", changing)
+    text = "---\npacking: {reported_upper_bound: {source_key: '[new]'}}\n---\nbody"
+    preserve = source_supersession.preserve_selected_case
+    assert preserve(2, text, {"old"})
+    assert not preserve(2, text, {"old"})
+    assert changing.reads == 2
+    coverage = safe_load(first)
+    assert preserve(2, text, {"old"}, coverage=coverage)
+    assert not preserve(2, text, {"new"}, coverage=coverage)
+    assert changing.reads == 2
+    assert coverage == safe_load(first)
+    with pytest.raises(KeyError, match="selected_overrides"):
+        preserve(2, text, {"old"}, coverage={"superseded_reports": []})
 
 
 def _historical_body(plan: apply.Plan) -> str:

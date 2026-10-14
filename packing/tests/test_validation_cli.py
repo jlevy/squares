@@ -22,6 +22,7 @@ from textwrap import dedent
 from threading import Barrier, Event, Lock
 from threading import enumerate as enumerate_threads
 from typing import Any, override
+from unittest.mock import Mock
 
 import pytest
 
@@ -4443,6 +4444,53 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
     assert validate.REQUIRE_CHROMIUM == site_browser.REQUIRED
 
 
+class _SiteLayoutCollection:
+    """Collect real explicit file selections without constructing unused siblings."""
+
+    def __init__(self) -> None:
+        self.node_ids: list[str] = []
+        self.session: pytest.Session | None = None
+
+    def pytest_sessionstart(self, session: pytest.Session) -> None:
+        # Pytest has parsed options and node selectors. A directory would need its
+        # descendants, so refuse that shape rather than silently narrowing it.
+        if any(
+            not Path(argument.split("::", 1)[0]).is_file() for argument in session.config.args
+        ):
+            raise pytest.UsageError("site-layout partition collection requires explicit files")
+        self.session = session
+
+    @pytest.hookimpl(tryfirst=True)
+    def pytest_ignore_collect(self, collection_path: Path) -> bool | None:
+        # Pytest otherwise builds collectors for every sibling before discarding
+        # them while matching explicit paths. Keep all initial paths and ancestors.
+        if self.session is None or self.session.isinitpath(collection_path, with_parents=True):
+            return None
+        return True
+
+    def pytest_collection_finish(self, session: pytest.Session) -> None:
+        self.node_ids = [item.nodeid for item in session.items]
+
+
+def test_site_layout_collection_preserves_initial_paths_and_refuses_directory_scope() -> None:
+    collection = _SiteLayoutCollection()
+    selected = validate.PROJECT_ROOT / "tests/test_site_rendering.py"
+    parent = selected.parent
+    sibling = parent / "test_validation_cli.py"
+    session = Mock(spec=pytest.Session)
+    session.config = Mock(args=[f"{selected}::test_selected"])
+    session.isinitpath.side_effect = lambda path, *, with_parents: (
+        with_parents and path in {selected, parent}
+    )
+    collection.pytest_sessionstart(session)
+    assert collection.pytest_ignore_collect(selected) is None
+    assert collection.pytest_ignore_collect(parent) is None
+    assert collection.pytest_ignore_collect(sibling) is True
+    session.config.args = [str(parent)]
+    with pytest.raises(pytest.UsageError, match="requires explicit files"):
+        collection.pytest_sessionstart(session)
+
+
 def _collect_site_layout_partitions(commands: Sequence[Sequence[str]]) -> list[list[str]]:
     """Run each real selection in one isolated process, sharing only module imports.
 
@@ -4450,13 +4498,6 @@ def _collect_site_layout_partitions(commands: Sequence[Sequence[str]]) -> list[l
     each pytest invocation applies its own paths and expression to fresh items.
     """
     collections: list[list[str]] = []
-
-    class Collection:
-        def __init__(self) -> None:
-            self.node_ids: list[str] = []
-
-        def pytest_collection_finish(self, session: pytest.Session) -> None:
-            self.node_ids = [item.nodeid for item in session.items]
 
     for command in commands:
         assert tuple(command[1:3]) == ("-m", "pytest")
@@ -4468,7 +4509,7 @@ def _collect_site_layout_partitions(commands: Sequence[Sequence[str]]) -> list[l
             and not argument.startswith("--dist=")
             and command[index - 1] != "-n"
         ]
-        collection = Collection()
+        collection = _SiteLayoutCollection()
         captured = io.StringIO()
         with redirect_stdout(captured), redirect_stderr(captured):
             status = pytest.main([*serial, "-n", "0", "--collect-only"], plugins=[collection])

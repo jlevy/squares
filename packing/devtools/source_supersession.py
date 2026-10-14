@@ -30,13 +30,22 @@ def superseded_counts(coverage: Mapping[str, Any], source_ids: Collection[str]) 
     }
 
 
-def preserve_selected_case(n: int, text: str, source_ids: Collection[str]) -> bool:
-    """Preserve an adopted later report, while still admitting earlier drafting inputs."""
-    coverage = safe_load(COVERAGE.read_text())
-    if n not in superseded_counts(coverage, source_ids):
+def preserve_selected_case(
+    n: int,
+    text: str,
+    source_ids: Collection[str],
+    *,
+    coverage: Mapping[str, Any] | None = None,
+) -> bool:
+    """Preserve an adopted later report, while still admitting earlier drafting inputs.
+
+    A batch may supply its coverage snapshot; standalone calls read the current record.
+    """
+    record = safe_load(COVERAGE.read_text()) if coverage is None else coverage
+    if n not in superseded_counts(record, source_ids):
         return False
-    selected = next(row for row in coverage["selected_overrides"] if row["n"] == n)
-    source = next(row for row in coverage["sources"] if row["id"] == selected["source_id"])
+    selected = next(row for row in record["selected_overrides"] if row["n"] == n)
+    source = next(row for row in record["sources"] if row["id"] == selected["source_id"])
     case = safe_load(text.split("---\n", 2)[1])["packing"]
     return case["reported_upper_bound"]["source_key"] == source["source_key"]
 

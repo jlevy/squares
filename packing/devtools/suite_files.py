@@ -79,7 +79,7 @@ from dataclasses import dataclass
 from fnmatch import fnmatch
 from functools import cache
 from pathlib import Path, PurePosixPath
-from typing import TYPE_CHECKING, Any, Final
+from typing import TYPE_CHECKING, Any, Final, TextIO
 
 import pytest
 from strif import atomic_write_text
@@ -495,6 +495,20 @@ class FileCostReport:
         self.module_scope: dict[str, Any] = {}
         self.collected: defaultdict[str, int] = defaultdict(int)
         self.deselected = 0
+        self.events: TextIO | None = None
+
+    def _event(self, nodeid: str, phase: str, outcome: str | None = None) -> None:
+        if self.events is None:
+            self.target.parent.mkdir(parents=True, exist_ok=True)
+            self.events = self.target.with_suffix(".events.jsonl").open(
+                "w", encoding="utf-8", buffering=1
+            )
+        self.events.write(
+            json.dumps({"nodeid": nodeid, "phase": phase, "outcome": outcome}) + "\n"
+        )
+
+    def pytest_runtest_logstart(self, nodeid: str) -> None:
+        self._event(nodeid, "started")
 
     def pytest_sessionstart(self, session: pytest.Session) -> None:
         self.rootpath = session.config.rootpath
@@ -534,8 +548,11 @@ class FileCostReport:
         name = repository_path(location)
         self.seconds[name] += report.duration
         self.tests[name].add(report.nodeid)
+        self._event(report.nodeid, report.when, report.outcome)
 
     def pytest_sessionfinish(self, exitstatus: int | pytest.ExitCode) -> None:
+        if self.events is not None:
+            self.events.close()
         document = report_document(
             {name: (len(self.tests[name]), seconds) for name, seconds in self.seconds.items()},
             shard=self.shard,
@@ -574,6 +591,24 @@ def report_document(
         "seconds": round(sum(float(row["seconds"]) for row in rows), 3),
         "files": rows,
     }
+
+
+def unfinished_tests(events: Iterable[Mapping[str, Any]]) -> dict[str, str]:
+    """Report incomplete phases from flushed controller events, never infer passes."""
+    pending: dict[str, str] = {}
+    for event in events:
+        node, phase = event["nodeid"], event["phase"]
+        if not isinstance(node, str) or phase not in {"started", "setup", "call", "teardown"}:
+            raise SuiteFilesError("invalid test progress event")
+        if phase == "teardown":
+            pending.pop(node, None)
+        else:
+            pending[node] = {
+                "started": "setup",
+                "setup": "call" if event.get("outcome") == "passed" else "teardown",
+                "call": "teardown",
+            }[phase]
+    return pending
 
 
 # --- recording ---------------------------------------------------------------------
@@ -1026,6 +1061,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             "equal capacities"
         ),
     )
+    progress = commands.add_parser(
+        "unfinished", help="report phases left incomplete at a deadline"
+    )
+    _ = progress.add_argument("journal", type=Path)
     _ = commands.add_parser("show", help="print the recorded partition's shard totals")
     checking = commands.add_parser(
         "check", help="print each shard's unrecorded files; exit 1 over the threshold"
@@ -1048,6 +1087,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     arguments = parser.parse_args(argv)
     try:
+        if arguments.command == "unfinished":
+            lines = arguments.journal.read_text(encoding="utf-8").splitlines()
+            events = []
+            for position, line in enumerate(lines):
+                try:
+                    events.append(json.loads(line))
+                except json.JSONDecodeError:
+                    if position != len(lines) - 1:
+                        raise SuiteFilesError(
+                            "malformed progress event before the final line"
+                        ) from None
+                    print("note: final progress line is truncated", file=sys.stderr)
+            print(json.dumps(unfinished_tests(events), indent=2))
+            return 0
         if arguments.command == "check":
             return _check(
                 load_costs(),

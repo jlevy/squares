@@ -497,20 +497,20 @@ refusing missing or skipped required cases.
 
 ### Required-browser cost baseline
 
-The first complete measured assignment cohort, genuine-push run38583046153, finished
-all17891 pytest cases without assertion failures, but the checkpoint failed
-one21.78-second CALL and old-record drift.
+The first complete measured assignment cohort, genuine-push run 38583046153, finished
+all 17891 pytest cases without assertion failures, but the checkpoint failed one
+21.78-second CALL and old-record drift.
 Its whole-wall observations are cost evidence; they do not establish passing validation.
 The collection repair retains all three real selectors and their original partition
 assertions in one isolated process, sharing imports inside the measured CALL.
 
-The normal PR cohort38583060155 collected identical identities but skipped210 additional
-missing-Chromium cases: shard A/B/C/D extra omissions3/7/39/161. All210 passed in the
-enforced cohort. The required-browser workload therefore has its own first cost point;
-the normal cohort remains contrary cost evidence, including A358.02 and B407.46 seconds
-above their unchanged ceilings.
-Do not exclude a reading merely because it failed a cost rule, pool materially different
-executed workloads, or infer a distribution from one cohort.
+The normal PR cohort 38583060155 collected identical identities but skipped 210
+additional missing-Chromium cases: shard A/B/C/D extra omissions 3/7/39/161. All 210
+passed in the enforced cohort.
+The required-browser workload therefore has its own first cost point; the normal cohort
+remains contrary cost evidence, including A 358.02 and B 407.46 seconds above their
+unchanged ceilings. Do not exclude a reading merely because it failed a cost rule, pool
+materially different executed workloads, or infer a distribution from one cohort.
 Subsequent comparable required-browser readings belong in the retained evidence and
 geometric mean. The remeasurement preserves old records and attribution in chronological
 history, all ceilings, ratios and reference shapes, and names quantitative per-file
@@ -522,6 +522,36 @@ The narrow push trigger includes the checkpoint tool, measured cost and budget r
 and collection contract so changes to those timing inputs are enforced before the
 workflow’s first merge.
 Existing main/full workflows are unchanged.
+
+### Completed-workload pricing and timeout diagnosis
+
+The subsequent record uses all four complete required-browser reports from run
+38583046153, pricing 765 files instead of 763 from the earlier full-run cohort.
+All weights are produced by `suite_files record`, with capacities 131/154/154/131
+unchanged; 23 of 788 files remain unpriced, at most 4.9% of a shard.
+The enclosing source run failed one CALL; these are valid costs, not passing gate proof.
+No partial report from the later 900-second timeout is admitted.
+The earlier whole-wall points remain historical observations of the preceding
+assignment. The corrected assignment requires fresh all-four enforcement.
+
+The final call repairs retain all three actual layout collections and their original
+partition assertions, while declining noninitial sibling paths through pytest’s own
+initial-path predicate.
+The parsed configuration must request files; a directory selection is refused.
+The YAML policy still parses every Python file and uses the same AST refusal rule, with
+a conservative NFKC identifier screen reducing only unnecessary AST walks.
+Packet and exact-optimum CLIs read one fresh coverage snapshot per invocation;
+standalone calls remain fresh and no global cache is introduced.
+All 50 packet heads, their preceding layers, 47 overlapping exact calls and 48
+standalone exact calls retain their source/adoption decisions; full check audits report
+no drift.
+
+The suite cost reporter now flushes controller start/setup/call/teardown events beside
+its normal report. `suite_files unfinished JOURNAL` identifies outstanding phases when a
+command deadline prevents final JUnit/cost output, handles a truncated final line
+explicitly, and makes no passing-test claim.
+This will help diagnose the unresolved intermittent 900-second deadline; instrumentation
+itself is not a fix for that cause.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -720,6 +720,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
+            "packing/devtools/apply_exact_optima.py",
+            "packing/devtools/apply_upper_bound_packets.py",
+            "packing/devtools/source_supersession.py",
             "packing/devtools/build_known_best_atlas.py",
             "packing/devtools/overview_sections.py",
             "packing/devtools/regularized_drawings.py",
@@ -763,6 +766,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "ordering, the original defect-id regex and all semantic checks and "
             "diagnostics while pruning already excluded directories and text without "
             "a defect-id prefix. Its affected negative controls are replayed separately. "
+            "Per-invocation coverage snapshots preserve all 97 combined packet-CLI "
+            "and 48 exact-CLI "
+            "adoption checks (50 packet checks plus 47 overlapping exact calls); both "
+            "complete apply-tool check audits report no record "
+            "drift. Standalone calls still read fresh coverage and no global cache is added. "
             "These producer optimizations change no paper, drawing or component edition; "
             "the separately scoped launch-history bookkeeping updates About."
         ),

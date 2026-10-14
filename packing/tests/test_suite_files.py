@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import io
 import json
 import os
 import random
@@ -9,7 +10,7 @@ import subprocess
 import sys
 from copy import deepcopy
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import pytest
 
@@ -1099,3 +1100,46 @@ def test_local_admission_refuses_real_nonexecution_modes(
             files=[suite_files.repository_path(module)],
             report_sources=["unexecuted.json"],
         )
+
+
+def test_flushed_progress_retains_unfinished_call_and_teardown_without_claiming_passes() -> (
+    None
+):
+    report = suite_files.FileCostReport(Path("unused.test-files.json"), None)
+    journal = io.StringIO()
+    report.events = journal
+
+    def phase(
+        node: str,
+        when: Literal["setup", "call", "teardown"],
+        outcome: Literal["passed", "skipped"] = "passed",
+    ) -> None:
+        report.pytest_runtest_logreport(
+            pytest.TestReport(
+                nodeid=node,
+                location=("tests/test_probe.py", 0, node),
+                keywords={},
+                outcome=outcome,
+                longrepr=None,
+                when=when,
+                duration=0,
+            )
+        )
+
+    report.pytest_runtest_logstart("case_a")
+    phase("case_a", "setup")
+    phase("case_a", "call")
+    report.pytest_runtest_logstart("case_b")
+    phase("case_b", "setup")
+    report.pytest_runtest_logstart("case_skipped")
+    phase("case_skipped", "setup", "skipped")
+    report.pytest_runtest_logstart("case_complete")
+    phase("case_complete", "teardown")
+    events = [json.loads(line) for line in journal.getvalue().splitlines()]
+    assert suite_files.unfinished_tests(events) == {
+        "case_a": "teardown",
+        "case_b": "call",
+        "case_skipped": "teardown",
+    }
+    with pytest.raises(suite_files.SuiteFilesError, match="invalid test progress"):
+        suite_files.unfinished_tests([{"nodeid": "case", "phase": "unknown"}])

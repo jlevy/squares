@@ -11,6 +11,7 @@ import shlex
 import subprocess
 import sys
 import textwrap
+import unicodedata
 from contextlib import redirect_stdout
 from pathlib import Path
 from typing import cast
@@ -1665,16 +1666,53 @@ def test_yaml_is_read_only_through_the_project_loader() -> None:
         for path in sorted((PROJECT_ROOT / directory).rglob("*.py")):
             if path == owner:
                 continue
-            tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-            for node in ast.walk(tree):
-                if not isinstance(node, ast.Attribute) or node.attr not in {
-                    "safe_load",
-                    "SafeLoader",
-                }:
-                    continue
-                if isinstance(node.value, ast.Name) and node.value.id == "yaml":
-                    violations.append(
-                        f"{path.relative_to(PROJECT_ROOT)}:{node.lineno} uses "
-                        f"yaml.{node.attr}; import it from sqpack.yamlio instead"
-                    )
+            source = path.read_text(encoding="utf-8")
+            tree = ast.parse(source, filename=str(path))
+            violations.extend(
+                _yaml_loader_violations(source, path.relative_to(PROJECT_ROOT), tree)
+            )
     assert violations == []
+
+
+def _yaml_loader_violations(source: str, path: Path, tree: ast.Module) -> list[str]:
+    # Python normalizes identifiers with NFKC. This only rules out impossible AST
+    # matches; comments/strings may still cause a walk, and the AST decides violations.
+    identifiers = unicodedata.normalize("NFKC", source)
+    if (
+        re.search(r"\byaml\b", identifiers) is None
+        or re.search(r"\b(?:safe_load|SafeLoader)\b", identifiers) is None
+    ):
+        return []
+    violations: list[str] = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Attribute) or node.attr not in {"safe_load", "SafeLoader"}:
+            continue
+        if isinstance(node.value, ast.Name) and node.value.id == "yaml":
+            violations.append(
+                f"{path}:{node.lineno} uses yaml.{node.attr}; "
+                "import it from sqpack.yamlio instead"
+            )
+    return violations
+
+
+@pytest.mark.parametrize(
+    ("source", "violates"),
+    [
+        ("yaml.safe_load('record')", True),
+        ("loader = yaml.SafeLoader", True),
+        ("(yaml\n .safe_load)('record')", True),
+        (
+            "\uff59\uff41\uff4d\uff4c.\uff53\uff41\uff46\uff45\uff3f\uff4c\uff4f\uff41\uff44('record')",
+            True,
+        ),
+        ("yaml = __import__('yaml'); yaml.safe_load('record')", True),
+        ("import yaml as other; other.safe_load('record')", False),
+        ("from sqpack.yamlio import safe_load; safe_load('record')", False),
+        ("text = 'yaml.safe_load'; other.SafeLoader", False),
+    ],
+)
+def test_yaml_loader_candidate_screen_keeps_the_ast_refusals(
+    source: str, *, violates: bool
+) -> None:
+    tree = ast.parse(source)
+    assert bool(_yaml_loader_violations(source, Path("control.py"), tree)) is violates
