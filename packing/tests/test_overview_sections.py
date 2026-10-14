@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import html
+import inspect
 import re
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import replace
 from datetime import timedelta
-from typing import Any
+from typing import Any, cast
 from unittest.mock import patch
 
 import pytest
@@ -16,8 +17,9 @@ from devtools import overview_data, overview_sections
 
 
 @pytest.fixture(scope="module")
-def atlas_markup() -> tuple[str, str]:
-    """The two immutable Atlas surfaces, built once for these focused DOM checks."""
+def atlas_markup() -> Callable[[str], str]:
+    """Build each immutable surface once, inside the test call that first requests it."""
+    built: dict[str, str] = {}
     drawing = overview_sections._atlas_drawing  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
 
     def validated_drawing(
@@ -28,8 +30,21 @@ def atlas_markup() -> tuple[str, str]:
         assert upper is not None, "an atlas cell must reuse its validated case metadata"
         return drawing(n, regularized=regularized, side=side, upper=upper)
 
-    with patch.object(overview_sections, "_atlas_drawing", side_effect=validated_drawing):
-        return overview_sections.atlas_grid(), overview_sections.atlas_preview()
+    def surface(name: str) -> str:
+        if name not in {"grid", "preview"}:
+            raise ValueError(f"unknown Atlas surface: {name}")
+        if name not in built:
+            with patch.object(
+                overview_sections, "_atlas_drawing", side_effect=validated_drawing
+            ):
+                built[name] = (
+                    overview_sections.atlas_grid()
+                    if name == "grid"
+                    else overview_sections.atlas_preview()
+                )
+        return built[name]
+
+    return surface
 
 
 def test_homepage_legend_keeps_original_rungs_in_three_icon_and_label_rows() -> None:
@@ -64,9 +79,9 @@ def test_homepage_legend_keeps_original_rungs_in_three_icon_and_label_rows() -> 
 
 
 def test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts(
-    atlas_markup: tuple[str, str],
+    atlas_markup: Callable[[str], str],
 ) -> None:
-    grid, _preview = atlas_markup
+    grid = atlas_markup("grid")
     assert overview_sections.ATLAS_DEFAULT == "triangle"
     assert 'data-atlas-view="triangle" data-atlas-size="small"' in grid
     assert 'data-atlas-first="100" data-atlas-grid' in grid
@@ -152,9 +167,10 @@ def test_recent_preview_contains_only_the_twelve_newest_eligible_rows() -> None:
 
 
 def test_atlas_preview_reuses_canonical_split_rows_and_keeps_every_case(
-    atlas_markup: tuple[str, str],
+    atlas_markup: Callable[[str], str],
 ) -> None:
-    complete, preview = atlas_markup
+    complete = atlas_markup("grid")
+    preview = atlas_markup("preview")
     tiles = re.findall(r'<a class="site-atlas-cell"[^>]*>.*?</a>', preview)
     assert len(tiles) == 324
     assert tiles == re.findall(r'<a class="site-atlas-cell"[^>]*>.*?</a>', complete)
@@ -217,3 +233,42 @@ def test_validated_upper_metadata_keeps_the_drawing_without_reopening_the_case(
 
     monkeypatch.setattr(build_bound_citations, "load_case", reopened)
     assert drawing(n, regularized=regularized, side=side, upper=upper) == baseline
+
+
+def test_shared_atlas_markup_builds_lazily_and_restores_its_drawing_guard(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[str] = []
+    drawing = overview_sections._atlas_drawing  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+    def grid() -> str:
+        assert overview_sections._atlas_drawing is not drawing  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        calls.append("grid")
+        return "immutable grid"
+
+    def preview() -> str:
+        assert overview_sections._atlas_drawing is not drawing  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        calls.append("preview")
+        if calls.count("preview") == 1:
+            raise RuntimeError("injected render failure")
+        return "immutable preview"
+
+    monkeypatch.setattr(overview_sections, "atlas_grid", grid)
+    monkeypatch.setattr(overview_sections, "atlas_preview", preview)
+    factory = cast(Callable[[], Callable[[str], str]], inspect.unwrap(atlas_markup))
+    surface = factory()
+    assert calls == []
+    assert surface("grid") == "immutable grid"
+    assert overview_sections._atlas_drawing is drawing  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert surface("grid") == "immutable grid"
+    assert calls == ["grid"]
+    with pytest.raises(RuntimeError, match="injected render failure"):
+        surface("preview")
+    assert overview_sections._atlas_drawing is drawing  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert surface("preview") == "immutable preview"
+    assert surface("preview") == "immutable preview"
+    assert calls == ["grid", "preview", "preview"]
+    assert overview_sections._atlas_drawing is drawing  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    with pytest.raises(ValueError, match="unknown Atlas surface"):
+        surface("unexpected")
+    assert calls == ["grid", "preview", "preview"]
