@@ -85,6 +85,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.0",
+        first_published="October 14, 2026",
+        result_scope=(
+            "Add contributor profiles and reviewed credit links, and publish complete "
+            "result records with direct links and popovers."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.1",
         first_published="October 14, 2026",
         result_scope=(
@@ -403,6 +411,14 @@ EXPLAINER_REVISED = "October 13, 2026"
 #: (think-2cqu).
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.8",
+        first_published="October 14, 2026",
+        result_scope=(
+            "Correct Manasseh Ahmed's name and credit Hiroaki Hosono's checker and "
+            "formalization reports by name."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.7",
         first_published="October 7, 2026",
         result_scope=(
@@ -508,7 +524,7 @@ OPTIMALITY_REVIEW_EDITION = " ".join(
 #: prints, by the rule `EXPLAINER_REVISED` follows -- the author date of the last commit
 #: that changed its article, `n11-optimality-review-article.md`, held to git by
 #: `devtools.artifact_dates`. Change it in the commit that changes the article.
-OPTIMALITY_REVIEW_REVISED = "October 12, 2026"
+OPTIMALITY_REVIEW_REVISED = "October 13, 2026"
 
 #: The day the proof the review explains was published by its source, which the review's
 #: "Original proof" date prints. A fact about someone else's work, so it is typed, and
@@ -518,6 +534,11 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 #: Every edition of Part II, the review of Overbeck's certified lower bound
 #: `s(11) > 31/8` (T-037), newest first, as `OPTIMALITY_REVIEW_HISTORY` is Part III's.
 THRESHOLD_REVIEW_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.1",
+        first_published="October 14, 2026",
+        result_scope="Credit Hiroaki Hosono's checker and retained tools by name.",
+    ),
     PublicationHistoryEntry(
         version="v0.1.0",
         first_published="October 5, 2026",
@@ -636,6 +657,33 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.6.1",
+        version="v0.7.0",
+        impact="minor",
+        reason=(
+            "Add contributor profiles and reviewed credit links, and publish complete "
+            "result records with direct links and popovers."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-optimality-review",
+        previous_version="v0.1.7",
+        version="v0.1.8",
+        impact="patch",
+        reason=(
+            "Correct Manasseh Ahmed's name and credit Hiroaki Hosono's checker and "
+            "formalization reports by name."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-threshold-bound-review",
+        previous_version="v0.1.0",
+        version="v0.1.1",
+        impact="patch",
+        reason="Credit Hiroaki Hosono's checker and retained tools by name.",
+    ),
+    ReleaseImpactDecision(
         component="paper:square-packing-methods-survey",
         previous_version="v0.2.1",
         version="v0.2.2",
@@ -699,6 +747,96 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/devtools/contributor_credit.py",
+            "packing/devtools/overview_data.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/register_gupta_reports.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/devtools/render_case_pages.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_contributors.py",
+            "packing/devtools/render_frontier_page.py",
+            "packing/devtools/render_n11_optimality_review.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/result_credit.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/site_documents.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/state_ai_assistance.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/frontier/results.yaml",
+            "packing/src/sqpack/cli/validate.py",
+            "packing/src/sqpack/contributor_occurrences.py",
+            "packing/src/sqpack/contributors.py",
+        ),
+        outputs=("papers/n11-lower-bounds-explainer.md",),
+        reason=(
+            "The manuscript and producer are unchanged from main. Figure 3 consumes only "
+            "the n11 citation entry, which is identical; changed author credits at other "
+            "counts do not enter this paper. The current Markdown and its substitutions "
+            "retain the paper's text and figures. Shared site navigation and linked "
+            "source records do not revise the paper's content edition."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/devtools/contributor_credit.py",
+            "packing/devtools/overview_data.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/register_gupta_reports.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/devtools/render_case_pages.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_contributors.py",
+            "packing/devtools/render_frontier_page.py",
+            "packing/devtools/render_n11_optimality_review.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/result_credit.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/site_documents.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/state_ai_assistance.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/frontier/README.md",
+            "packing/frontier/n-029.md",
+            "packing/frontier/n-051.md",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-084.md",
+            "packing/frontier/n-086.md",
+            "packing/frontier/n-088.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-105.md",
+            "packing/frontier/n-108.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-127.md",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-131.md",
+            "packing/frontier/n-146.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=("papers/square-packing-methods-survey.md",),
+        reason=(
+            "Inspected the expanded Markdown with all five retained figures. The "
+            "manuscript and producer are unchanged from main, and the paper already "
+            "credits Ryan Xu by name. Changed frontier and source-coverage records are "
+            "linked citations; their bodies are not incorporated. Shared site navigation "
+            "and related-paper metadata do not revise this paper's content edition."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=(
