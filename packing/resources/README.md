@@ -626,7 +626,7 @@ is [epistemics.md → Results by Others](../../epistemics.md#results-by-others).
 | **[Guzhou0806 n17 R071]** | Guzhou0806 / N17 project’s R071 release of 30 September 2026 at `8c11f696`, keeping unchanged R068’s continuation of Overbeck’s public `4.66001` charge (Overbeck building on Squares Project (Joshua Levy), Mira and Guzhou0806) and disclosing AI assistance: `s(17) > 18641771/4000000 = 4.66044275`, `11/4000000` above R068, from that charge at parent side `18452000/18641771` over 5,114 angle intervals, counting surplus 7,404 units of `10⁻⁹`. Its partition records are missing and a completion summary is retained; the source’s own CI replay passed and its publisher did not observe it. The previous day’s **[Guzhou0806 n17 R070]**, `46604427/10000000 = 4.6604427` over 5,107 intervals with complete four-partition ledgers, is retained beside it, with both releases’ research material that carries no bound: R070’s same-budget overlay and fixed-class obstruction and R071’s conditional joint geometry at `9321/2000`. The 45 retained of the 186 files the two commits changed or added since `815b1626`, byte-identical, the other 141 pinned by digest: 32 byte-identical to the R068 packet’s checker and notices, and 109 research files that carry no bound and that neither bound, the replay nor the audit reads; the CI run records; a pre-replay audit against R068; and the complete paired replay of R071 here on 5 October 2026, Guzhou0806’s C++ checker and Overbeck’s Node BigInt checker agreeing on every row (0 of 4 × 5,114 differing), with two mutated certificates both checkers refuse. One event-cell method, so `V3`/`C3` | github.com/Guzhou0806 | `n17-guzhou-r071-2026-09-30/` |
 | **[Guzhou0806 n40 clipped corner 2026-10-10]** | Guzhou0806’s release `n40-670854-20261010` of 10 October 2026 at `e5abeb4d`, reported on jlevy/squares#485 with AI assistance disclosed: `s(40) > 335427/50000 = 6.70854`, `427/50000` above `T-068`’s `67/10` on the same density, wand125’s `rect_n40_L67`, unchanged and pinned by digest. Every side-`9977/10000` square at each of 401 half-angle tangents of step `83/80000` captures at least `10001/10000` of the density, and a continuous-angle transfer with a clipped-corner loss bound and the density’s essential supremum carries that to every unit square; the weaker full-core bound `s(40) > 67000√6400006889/798988091` needs no peak. Twenty files retained, the density and the vendored copy of this repository’s `sqverify_fast` pinned by digest; the release ZIP’s CI receipt kept beside the tree’s local one. Replayed here on 10 October 2026: the nodal statement by `sqverify-fast` at all 401 directions, the producer’s own nodal code, and the finite steps by a first-party exact audit that shares no code with the release’s, with controls A to H; the mathematics reviewed the same day with no blocking defect | github.com/Guzhou0806 | `guzhou-n40-clipped-corner-2026-10-10/` |
 | **[Guzhou0806 n40 continuous pose 2026-10-10]** | Guzhou0806’s release `n40-continuous-1340000-199529-20261010` of 10 October 2026 at `71c97d07`, reported in a follow-up comment on jlevy/squares#485 with AI assistance disclosed: `s(40) > 1340000/199529 = 6.7158157…`, `72586117/9976450000` above `T-133` on the same density, wand125’s `rect_n40_L67`, unchanged and pinned by digest. Every side-`199529/200000` square captures at least `4999/5000`: a continuous-pose interval kernel over 43 slabs of `tan(θ/2)` in `[10^-6, 83/200]` and an exact integer certificate at side `997643/1000000` for the rest. Twenty-seven files retained, the density pinned by digest; the release ZIP’s CI receipt kept beside the tree’s local one. Replayed here on 10 October 2026: both kernels rebuilt into the CI binaries and run in full, the producer’s own code, with controls A to H; the finite steps by a first-party exact audit that shares no code with the release’s; the near-axis statement and the 401-direction necessary condition by `sqverify-fast`; the mathematics reviewed the same day with no blocking defect. `T-145` records it at V3/C3 | github.com/Guzhou0806 | `guzhou-n40-continuous-pose-2026-10-10/` |
-| **[Guzhou0806 n40 new supports 2026-10-11]** | Guzhou0806’s release `n40-new-supports-6718-20261011` of 11 October 2026 at `6a65957e`, reported in a comment on jlevy/squares#485 with AI assistance disclosed: `s(40) > 3359/500 = 6.718`, `217911/99764500` above `T-145`, by the 10 October release’s two kernels, byte for byte, on a new rational density of 685 `D4` rectangle orbits, 522 rows of wand125’s `rect_n40_L67` pool and 163 generated outside it, every weight new. Every side-`3350/3359` square captures at least `4999/5000`: the continuous-pose kernel over the same 43 slabs of `tan(θ/2)` and the exact axis certificate at side `249329659/250000000`. The release also states an exact obstruction for the full original support family at `168/25`, which bears on no bound. Thirty-four files retained, the original pool pinned by digest; the release ZIP’s CI receipt kept beside the tree’s local one. Checked here on 11 October 2026: the finite steps by a first-party exact audit that shares no code with the release’s, with controls; the axis kernel rebuilt into the CI binary and run; the near-axis statement again by `sqverify-fast`. The 43-slab replay has not been run and no review of the release exists, so it is retained and not registered | github.com/Guzhou0806 | `guzhou-n40-new-supports-2026-10-11/` |
+| **[Guzhou0806 n40 new supports 2026-10-11]** | Guzhou0806’s release `n40-new-supports-6718-20261011` of 11 October 2026 at `6a65957e`, reported in a comment on jlevy/squares#485 with AI assistance disclosed: `s(40) > 3359/500 = 6.718`, `217911/99764500` above `T-145`, by the 10 October release’s two kernels, byte for byte, on a new rational density of 685 `D4` rectangle orbits, 522 rows of wand125’s `rect_n40_L67` pool and 163 generated outside it, every weight new. Every side-`3350/3359` square captures at least `4999/5000`: the continuous-pose kernel over the same 43 slabs of `tan(θ/2)` and the exact axis certificate at side `249329659/250000000`. The release also states an exact obstruction for the full original support family at `168/25`, which bears on no bound. Thirty-four files retained, the original pool pinned by digest; the release ZIP’s CI receipt kept beside the tree’s local one. Checked here on 11 October 2026: the finite steps by a first-party exact audit that shares no code with the release’s, with controls; the axis kernel rebuilt into the CI binary and run; the near-axis statement again by `sqverify-fast`. On 12 October both kernels were rebuilt into the CI run’s binaries and replayed in full here (the axis certificate, all 43 slabs, the contract’s controls, `sqverify-fast`’s two runs and the release’s dual programs, every output equal to both receipts apart from timing), and the 12 October review found no blocking defect; registered as `T-157`, and both lower-bound lanes of `n-040.md` move to `3359/500` | github.com/Guzhou0806 | `guzhou-n40-new-supports-2026-10-11/` |
 | **[wand125 rectangle bounds 2026-09-28]** | wand125’s rectangle-density certificates at `39d8ecc` (28 September 2026), built with Tokoharu’s solver and decided by his unchanged interval verifier: 50 standing certificates from `n = 18` to `95`, 32 raised and six new (`n = 86, 88, 89, 91, 94, 95`) since the September 27 packet, whose 12 unchanged certificates and licence it reads rather than copies; the exact first-party preflight of all 50 passes, and coverage replays are recorded in each packet’s receipts as they complete | github.com/wand125 | `wand125-rectangle-certificates-2026-09-28/` |
 | **[wand125 point and mixed bounds 2026-09-28]** | wand125’s three non-rectangle certificate families at `39d8ecc` (28 September 2026): a point-only `s(45) = 7` (12,645 `D4`-invariant points, total `12666371418707823/2^48`) decided by Evan Daniel’s unmodified `zmx2`; a point-only `s(21) = 5` on Daniel’s support (4,604 weights, threshold `249987/250000`, gap `999979/125000000000`) decided by the source’s rational replay, with a Lean 4 reduction of all but the capture step; and `s(50) ≥ 37/5` from 553 rectangle orbits, checked by a research copy of Tokoharu’s `verify.cpp` at threshold one, with the superseded `147/20` and `3659/500`. No priority claimed for `s(21)` or `s(45)`. 64 files byte-identical, MIT; the 464 MB `s(21)` bundle and the three `n = 50` tarballs pinned by SHA-256. The exact audit passes; `zmx2` re-certifies `s(45)` here with the source’s box count and depth, recorded at `V4`/`C3` as a second certificate beside Daniel’s mixed cover; the complete `s(21)` and `n = 50` replays ran here on 29 September and are in the packet’s receipts, which verifies `s(50) ≥ 37/5` (and `s(51) ≥ 37/5` by its mass) and gives `s(21) = 5` a second, point-only route | github.com/wand125 | `wand125-point-and-mixed-2026-09-28/` |
 | **[wand125 rectangle bounds 2026-10-01]** | wand125’s rectangle-density certificates at `1a25a5ed` (1 October 2026), built with Tokoharu’s solver and decided by his unchanged interval verifier: the standing certificates raised or added since the September 28 packet, 34 of them requested for registration in jlevy/squares#281, with the standing certificates at `n = 59, 77, 78` that the request leaves out for exact values. The packet reads the unchanged certificates from the earlier packets; the exact first-party preflight passes, and no coverage replay of the new certificates has run | github.com/wand125 | `wand125-rectangle-certificates-2026-10-01/` |
@@ -1046,8 +1046,10 @@ derived exact facts, no upstream byte retained;
 [packet](web/squish-481-third-request-2026-10-09/README.md).
 Both project exact routes accept all 17 replayed certificates and refuse all 34
 controls, and a third exact route agrees and held each fact to its pinned upstream file.
-T-136 records the seventeen sides at V3/C3; since 11 October 2026 the cases at 131, 154,
-232, 259 and 307 hold them as the house, and smaller certificates hold the other twelve.
+T-136 records the seventeen sides at V3/C3; since 11 October 2026 the cases at 131, 259
+and 307 hold them as the house, and at 154 and 232 until 12 October 2026, when Evan
+Daniel’s (T-160) and Daniil Ostashev’s (T-158) smaller certificates replaced them;
+smaller certificates hold the other twelve.
 
 **[Deleeuw n70 refinement 2026-10-10]**: Eric Deleeuw’s exact rational certificate for n
 = 70, a refinement of Ryan Xu’s packing, pinned at
@@ -1092,8 +1094,9 @@ Both project exact routes accept all 9 replayed certificates and refuse all 18 c
 and the third route accepts the six requested ones.
 T-140 records the six sides at V3/C3 on the
 [review of 10 October](../../docs/project/reviews/review-2026-10-10-upper-bound-imports-488-489.md),
-and since 11 October 2026 the cases at 175, 209, 237, 270 and 305 hold them as the
-house; at n = 132 issue #489’s side is smaller.
+and since 11 October 2026 the cases at 209 and 237 hold them as the house; at 175, 270
+and 305 they were the house until smaller certificates replaced them on 12 October 2026
+(T-158, T-151, T-152), and at n = 132 issue #489’s side is smaller.
 
 ## Evan Daniel’s Hunt 3 certificates, 10 October 2026
 
@@ -1275,6 +1278,59 @@ project “was developed with substantial assistance from Claude and Codex”.
 The author’s announcement of 13 October says it was “Built with @OpenAI Astra +
 @AnthropicAI Opus 5.5”. The author asked for its registration in issue #565 on 12
 October 2026, and the owner reported it on 13 October 2026.
+
+## Daniil Ostashev’s and Rio Calle’s certificates, 12 October 2026
+
+**[Ostashev records 2026-10-12]**: Daniil Ostashev’s exact rational certificates for n =
+175, 232 and 264, compositions with his new 38-square rectangle, pinned at
+`a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f` and retained as the source wrote them under
+its MIT licence; [packet](web/dostashev-records-2026-10-12/README.md).
+Both project exact routes accept all three and refuse all six controls, and a third
+exact route agrees and held every retained file to its pinned bytes.
+T-158 records the sides at V3/C3 on the
+[review of 12 October](../../docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md),
+and the cases at all three hold them as the house since 12 October 2026. The issue
+states that AI agents wrote and ran the search, composition and verification code.
+
+**[Calle n102 2026-10-12]**: Rio Calle’s decimal layout for n = 102, another arrangement
+of Ryan Xu’s design, pinned at `831368623f2d4dcef2e9434fd85c3e154083c97d`, kept as an
+exact certificate derived here, no upstream byte retained;
+[packet](web/riocalle-n102-2026-10-12/README.md).
+Both project exact routes accept the derived certificate and refuse both controls, and
+the third exact route agrees and derived it again from the layout at the pin.
+T-159 records the side at V3/C3 on the same review; the case at 102 holds a smaller
+certificate (T-146) and is unchanged.
+Claude assistance disclosed.
+
+## Evan Daniel’s n = 154 certificate, 12 October 2026
+
+**[Daniel n154 2026-10-12]**: Evan Daniel’s exact rational certificate for n = 154,
+pinned at `597e660c9a078a552991ab893cda3ab693cb5ac8`, retained as the source wrote it
+under its MIT licence with the regularized drawing of the same packing beside it;
+[packet](web/evand-n154-2026-10-12/README.md).
+Both project exact routes accept it and refuse its two controls, and the third exact
+route agrees and held the retained file to its pinned bytes.
+T-160 records the side at V3/C3 on the
+[review of 12 October](../../docs/project/reviews/review-2026-10-12-upper-bound-import-552.md),
+and the case at 154 holds it as the house since 12 October 2026, its start credited to
+Francisco Couzo’s 5 October packing of 155 squares as the author asks.
+Claude assistance disclosed.
+The data release `exact-data-2026-10-12` that #545 asked for is the sibling
+[packet](web/evand-exact-data-2026-10-12/README.md): the s(29) polynomial archive pinned
+by digest and the grade-C certificates retained as published; it registers nothing.
+
+## E. Summins’ stratification series, 12 October 2026
+
+**[Summins stratification series 2026-10-12]**: the outreach series of E. Summins’ n =
+11 lab, issues #521 to #527, at Esummins/packing
+`651a9a54688341880e9c0dc9fcfc19f2c04cd3cb`: the simple-square stratification and its n =
+11 Lean layer, a census at the n = 17 and n = 19 windows, a conjecture, structural
+theorems, a toolkit, and a third party’s re-run of Kleddamag’s certificate for T-037;
+[packet](web/esummins-packing-2026-10-12/README.md).
+No bound is claimed, and none is registered; the T-037 re-run is recorded beside its
+rung as the lab’s report, and its spot check was re-run here.
+Code MIT, documents and data CC BY 4.0; the lab states that AI agents (Claude) produced
+its work under the PI’s direction.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

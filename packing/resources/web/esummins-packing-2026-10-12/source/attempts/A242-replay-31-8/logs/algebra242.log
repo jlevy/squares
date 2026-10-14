@@ -1,0 +1,69 @@
+{
+  "status": "PASS_EXHAUSTIVE_THRESHOLD_IDENTITIES_AND_BUDGETS",
+  "records": [
+    {
+      "sites": 3,
+      "threshold": 1,
+      "budget": 3,
+      "boolean_patterns": 8,
+      "disjoint_assignments": 125,
+      "absolute_coefficient_sum": 7
+    },
+    {
+      "sites": 3,
+      "threshold": 2,
+      "budget": 1,
+      "boolean_patterns": 8,
+      "disjoint_assignments": 27,
+      "absolute_coefficient_sum": 5
+    },
+    {
+      "sites": 3,
+      "threshold": 3,
+      "budget": 1,
+      "boolean_patterns": 8,
+      "disjoint_assignments": 27,
+      "absolute_coefficient_sum": 1
+    },
+    {
+      "sites": 5,
+      "threshold": 1,
+      "budget": 5,
+      "boolean_patterns": 32,
+      "disjoint_assignments": 16807,
+      "absolute_coefficient_sum": 31
+    },
+    {
+      "sites": 5,
+      "threshold": 2,
+      "budget": 2,
+      "boolean_patterns": 32,
+      "disjoint_assignments": 1024,
+      "absolute_coefficient_sum": 49
+    },
+    {
+      "sites": 5,
+      "threshold": 3,
+      "budget": 1,
+      "boolean_patterns": 32,
+      "disjoint_assignments": 243,
+      "absolute_coefficient_sum": 31
+    },
+    {
+      "sites": 5,
+      "threshold": 4,
+      "budget": 1,
+      "boolean_patterns": 32,
+      "disjoint_assignments": 243,
+      "absolute_coefficient_sum": 9
+    },
+    {
+      "sites": 5,
+      "threshold": 5,
+      "budget": 1,
+      "boolean_patterns": 32,
+      "disjoint_assignments": 243,
+      "absolute_coefficient_sum": 1
+    }
+  ]
+}

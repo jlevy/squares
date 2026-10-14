@@ -1,0 +1,23 @@
+# A229 queue: <nid> <pad>:<start label> <wall>   (longest-first; re-run queue229.py at launch time --
+# the certificates keep changing, and a start node already killed is simply not in this list any more)
+k5_16_interior_Y1056 zero:R.2.6 1800     # 3734 s absorbed, 2 branch steps
+k5_16_interior_Y1056 g1:R.2.6 1800     # 3258 s absorbed, 2 branch steps
+k5_11_interior_Y0738 zero:R.3 1800     # 351 s absorbed, 1 branch steps
+k5_11_interior_Y0738 g1:R.3 1800     # 35 s absorbed, 1 branch steps
+k5_16_interior_Y1056 g1:R.3 1800     # 23 s absorbed, 1 branch steps
+k5_16_interior_Y0402 zero:R.3.4.p2.p1.2.2 1800     # 0 s absorbed, 6 branch steps
+k5_16_interior_Y0402 g1:R.3.4.p2 1800     # 0 s absorbed, 3 branch steps
+k5_16_interior_Y0402 g1:R.3.5 1800     # 0 s absorbed, 2 branch steps
+k5_16_interior_Y0402 zero:R.3.5 1800     # 0 s absorbed, 2 branch steps
+k5_16_interior_Y1056 zero:R.2.7 1800     # 0 s absorbed, 2 branch steps
+k5_16_interior_Y1056 zero:R.2.8 1800     # 0 s absorbed, 2 branch steps
+k5_16_interior_Y1056 zero:R.2.9 1800     # 0 s absorbed, 2 branch steps
+k5_16_interior_Y0402 g1:R.4 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y0402 g1:R.5 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y0402 g1:R.6 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y0402 zero:R.4 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y0402 zero:R.5 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y0402 zero:R.6 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y1056 g1:R.4 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y1056 zero:R.3 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y1056 zero:R.4 1800     # 0 s absorbed, 1 branch steps

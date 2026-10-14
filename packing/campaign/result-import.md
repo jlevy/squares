@@ -604,9 +604,15 @@ from the register:
 - *refuted* or *defect recorded*, from the entries’ reviews and evidence;
 - *open* while validation runs, and *queued* while it waits for import.
 
-A **reply is due** when the issue has had no reply, when an entry has been registered,
-renumbered or moved a rung since the last reply that spoke of it, or when a reply’s
-statement is marked `outdated` and no later reply `corrects` it.
+A **reply is due** when the issue has had no reply; when an entry a result maps to has
+no reply naming it under that result; when the entry has been renumbered since the last
+reply that named it there; when one of its rung or status fields has moved since the
+last reply that stated that field there; or when a reply’s statement is marked
+`outdated` and no later reply `corrects` it.
+A reply that mentions the result without naming the entry, or names the entry without
+stating a field, leaves the earlier statement standing.
+Each reason quotes the one reply it holds a field to, by its date, and by its kind or
+its address where the issue has another reply that day.
 An issue is **closeable** when triage is done, every result is confirmed or refuted (a
 reported defect: recorded against the entry it names), and no `ask` is queued.
 

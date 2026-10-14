@@ -88,8 +88,9 @@ from sqpack.yamlio import safe_load
 #: The first SQUISH update moved n = 179 and 258 onto packet-derived facts;
 #: the second also moved n = 88. Complete evand and ry-xu packets now supersede
 #: earlier catalogue sources. These inventory counts follow the current corpus; the house
-#: adoption of 12 October 2026 moved n = 176 onto SQUISH's issue 500 packet (think-fvz4).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 48}
+#: adoption of 12 October 2026 moved n = 176 onto SQUISH's issue 500 packet (think-fvz4),
+#: and its pass for issue 528 moved n = 264 onto Daniil Ostashev's packet (think-cq95).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 47}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -112,11 +113,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
         "packet-derived-facts": 34,
     },
     # 232 (from Kingbird) and 308 (from the grid) moved to packet houses in the house
-    # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4).
+    # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4), as
+    # did 264 (from Kingbird) in the pass for issue 528 (think-cq95).
     "n=1..324": {
         "exact-grid": 175,
-        "kingbird-derived-facts": 78,
-        "packet-derived-facts": 71,
+        "kingbird-derived-facts": 77,
+        "packet-derived-facts": 72,
     },
 }
 
@@ -2131,9 +2133,11 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     assert credit_block is not None
     # The house adoption of 11 October 2026 credits Fang, Mishapolk, PingYou Ltd, Ostashev
     # and Barnett and draws no de Winter packing, from eight more sources; that of 12
-    # October draws from SQUISH's and Couzo's 11 October releases (think-fvz4).
+    # October draws from SQUISH's and Couzo's 11 October releases (think-fvz4), and the
+    # pass for issue 528 from Daniil Ostashev's 12 October release, and that for issue 552
+    # from Evan Daniel's n = 154 packet (think-cq95).
     assert len(expected_names) == 26
-    assert len(expected_sources) == 20
+    assert len(expected_sources) == 22
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None

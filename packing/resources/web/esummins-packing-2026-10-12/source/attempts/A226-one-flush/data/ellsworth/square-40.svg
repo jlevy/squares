@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Frits Göbel in early 1979.
+
+    Is one of the very few rigid packings.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "6.82842712474619009760337744842"> <!-- 4 + Sqrt[2]*2 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M3,0 V1 H2 V2 H1 V3 H0 V0"/>
+        <path style=  "fill:none" d="M0,1 H3 V0
+                                     M0,2 H2 V0
+                                     M0,3 H1 V0"/>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s;    ) scale(-1  1)"/>
+    <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <use xlink:href="#side1" transform="translate(0   &s;) scale( 1 -1)"/>
+    <g transform="translate(2 2) rotate(45) translate(0 -2)">
+        <rect width="4" height="4"/>
+        <path style="fill:none" d="M0,1 H4 M1,0 V4
+                                   M0,2 H4 M2,0 V4
+                                   M0,3 H4 M3,0 V4"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

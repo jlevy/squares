@@ -1472,8 +1472,8 @@
       "family": null,
       "n": 40,
       "nagamochi": {"basis":"nagamochi-theorem-2","decimal":"6.385164807134","exact":"1 + sqrt(29)","exact_case":false},
-      "operative_lower_bound": {"cites_t007":false,"evidence":["E-n040-guzhou-continuous-pose-kernel-replay"],"exact_form":"1340000/199529","results":["T-145"],"t007_scope_covers_n":true,"value":"6.71581574608202"},
-      "reported_lower_bound": {"cites_t007":false,"evidence":["E-n040-guzhou-continuous-pose-report"],"value":"6.71581574608202"},
+      "operative_lower_bound": {"cites_t007":false,"evidence":["E-n040-guzhou-new-supports-kernel-replay"],"exact_form":"3359/500","results":["T-157"],"t007_scope_covers_n":true,"value":"6.718"},
+      "reported_lower_bound": {"cites_t007":false,"evidence":["E-n040-guzhou-new-supports-report"],"value":"6.718"},
       "reported_status": "open",
       "status": "open",
       "support": {
@@ -1482,9 +1482,9 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"6.352349955359","exact":"1/2 + (1/2)*sqrt(137)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.032814851774"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-044","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-045","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-133","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-145","kind":"lower-bound","verification":"V3"}],
-        "registered_reported": {"basis":"exact-form","decimal":"6.715815746082","exact":"1340000/199529","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.330650938948","sources":[{"evidence":["E-n040-guzhou-continuous-pose-report"],"n":40,"proved_by":["Guzhou0806"],"results":["T-145"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"6.715815746082","exact":"1340000/199529","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.330650938948","sources":[{"evidence":["E-n040-guzhou-continuous-pose-kernel-replay"],"n":40,"results":["T-145"],"via":"direct"}]}
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-044","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-045","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-133","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-145","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-157","kind":"lower-bound","verification":"V3"}],
+        "registered_reported": {"basis":"exact-form","decimal":"6.718000000000","exact":"3359/500","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.332835192866","sources":[{"evidence":["E-n040-guzhou-new-supports-report"],"n":40,"proved_by":["Guzhou0806"],"results":["T-157"],"via":"direct"}]},
+        "registered_verified": {"basis":"exact-form","decimal":"6.718000000000","exact":"3359/500","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.332835192866","sources":[{"evidence":["E-n040-guzhou-new-supports-kernel-replay"],"n":40,"results":["T-157"],"via":"direct"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null

@@ -380,6 +380,9 @@ def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
         original["selected_overrides"] = [
             prior_selections.get(row["n"], row) for row in original["selected_overrides"]
         ]
+        # A house a later pass displaced at a Gupta count (`adopt_houses.coverage`, "The
+        # house from DAY until DAY"), as T-160 displaced T-136 at 154, did not exist
+        # before the Gupta adoption either, so its row goes with that state.
         original["superseded_reports"] = [
             row
             for row in original["superseded_reports"]
@@ -387,6 +390,10 @@ def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
             and not (
                 row["n"] in prior_selections
                 and row["source_id"] == prior_selections[row["n"]]["source_id"]
+            )
+            and not (
+                row["n"] in prior_selections
+                and str(row.get("reason", "")).startswith("The house from ")
             )
         ]
         for row in original["superseded_reports"]:

@@ -1,0 +1,40 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/529",
+  "author": "Rio Calle",
+  "source_key": "[Calle n102 2026-10-12]",
+  "report_evidence": "E-calle-529-certificate-report",
+  "receipt_format": "calle-529-exact-replay-v1",
+  "witness_prefix": "W-calle-529-n",
+  "claim_limitations": "Exact rational centre/half-angle certificate derived here from the 8313686 decimal layout: every centre and the side as printed, each half-angle tangent tan(theta/2) rounded down at 40 places, from a checkout at the pin whose bytes have the digests the packet records; no upstream byte is retained, and the author's own exact certificate is not public. Finite construction feasibility only; no local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-12",
+  "read_at_main": "dead83f0eaf5e83ef1577e6ce902d7ab2b6eedf7",
+  "certificates": [
+    {"n": 102, "path": "n102_s10.605828696455852.txt", "format": "calle-txt", "offered": "10.605828696455852", "first_committed": "2026-10-12T04:23:19Z", "options": [{"name": "half_angle_places", "value": "40"}], "fact": "facts/n-102.yaml"}
+  ],
+  "requested": [102],
+  "replayed": [102],
+  "houses": [
+    {"n": 102, "reader": "[Daniel regularized lists 2026-10-10]", "source_key": "[Daniel regularized lists 2026-10-10]", "holders": "ry-xu, regularized by Evan Daniel", "result": "T-146", "reported_value": "10.6058286964315784", "verified_value": "10.6058286964315784", "evidence": ["E-evand-regularized-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 102, "report": "T-125 (#432)", "url": "https://github.com/jlevy/squares/issues/432", "holders": "ry-xu", "result": "T-125", "reader": "[ry-xu square packing 2026]"},
+    {"n": 102, "report": "T-120 (exact form)", "url": "https://github.com/jlevy/squares/issues/419", "holders": "Evan Daniel", "result": "T-120", "printed": "10.607174680176051125342523", "rounding": "unstated"}
+  ],
+  "register": {
+    "title": "Rio Calle's n102 arrangement at 8313686, issue529",
+    "headline": "Another arrangement of Ryan Xu's design for 102 squares, certified exactly from its decimal layout",
+    "significance": 2,
+    "source_checks": "The author reports that verify_exact.py, a 60-digit decimal separating-axis check over 931 nearby pairs and the walls, finds least gaps of 1.932e-12 between squares and 2.002e-12 to the walls, and that the author's private search engine's exact rational-interval certificate accepts the layout, with the same layout in a box 1e-11 smaller refused by both; both checkers were written with Claude and share no code. Run once here from scratch on the pinned layout and its JSON copy, verify_exact.py printed the same two gaps over 931 close pairs; it rounds at 60 digits, so it is no exact check, and the private engine's certificate cannot be replayed.",
+    "credit": "Credit Rio Calle (https://github.com/riocalle/my-repo, University of New Hampshire) with this arrangement, found by the author's own search engine (GPU simulated annealing, an exact LP finish and a beam search of structural edits) from scratch, and credit ry-xu (T-125) with finding the design and width first, as the issue asks: ry-xu published at 2026-10-08 00:03 UTC and the author's search finished its first packing of the design about ten hours later. The issue and README state AI assistance: the author designed and directed the project and its experiments, and Claude wrote and ran the code, the GPU search, the exact finishing step, the refinement search and both checkers.",
+    "next_rung": "Independently review the derived certificate and its replay, then decide registration: the certified side is below T-125 by 5.48e-11 but above the case's ceiling, Evan Daniel's regularization of ry-xu's packing (T-146), by 2.43e-11, so it moves no case. Measured for the credit, it matches ry-xu's packing one to one under a half turn of the box, 40 squares within 1e-9 and 62 moved, 19 beyond a tenth of a unit: another arrangement of ry-xu's design, not a refinement of his packing. Final exact-head CI remains required.",
+    "bead": "think-s2i8",
+    "bibliography": {
+      "authors": ["Calle"],
+      "lineage": "builds-on-project",
+      "credit": "Calle after Xu",
+      "short_credit": "Calle after Xu",
+      "note": "A decimal layout of 102 unit squares at 831368623f2d4dcef2e9434fd85c3e154083c97d, centres and radian rotations at 18 significant digits, of the design ry-xu published first (T-125); the record's exact certificate is derived here, every decimal read as printed and each half-angle tangent rounded down at 40 places, and kept as a derived fact. No licence: no upstream byte retained. The author's 60-digit decimal checker was run once outside the repository; the author's exact engine is private. AI assistance stated: Claude wrote and ran the search, finishing, refinement and checking code under the author's direction. No local or global optimality is registered."
+    }
+  }
+}

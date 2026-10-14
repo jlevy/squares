@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David W. Cantrell in September 2002.
+        Source: Packing Unit Squares in Squares: A Survey and New Results, by Erich Friedman, Versions 4 (November 8, 2005) and later: https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7/versions and https://erich-friedman.github.io/papers/squares/squares.html
+    Exact polynomial root solution first done by David W. Cantrell.
+        Source: https://www.wolframalpha.com/input?i=Pack+37+unit+squares+into+a+square
+    Exact polynomial root solution reconstructed by David Ellsworth on June 1, 2023.
+
+    RootReduce[Solve[{(s-5)*Sin[θ]+(s-4)*Cos[θ] == 3, 2+Sqrt[2]+2*Cos[θ]+(s-4)*Cos[2*θ]+6*Sin[θ] == s+(s-4)*Sin[2*θ]}, {s,θ}][[3]]]
+    s = Root[64068561 - 96673872*# + 63458276*#^2 - 23462672*#^3 + 5289248*#^4 - 733760*#^5 + 59768*#^6 - 2496*#^7 + 36*#^8, 1]
+    θ = ArcCot[Root[-49 - 48*#^2 + 22*#^4 + 32*#^6 + 7*#^8, 2]]
+    
+    s = Root[FactorList[s[[1, 1]], Extension -> Sqrt[2]][[2, 1]], 1]
+    s = Root[-11163 - 5502*Sqrt[2] + (7936 + 3658*Sqrt[2])*# + (-2058 - 850*Sqrt[2])*#^2 + (208 + 64*Sqrt[2])*#^3 - 6*#^4, 1]
+
+    θ = ToRadicals[θ]
+    θ = ArcCot[Sqrt[(-8 + 5*Sqrt[2] + Sqrt[65 + 18*Sqrt[2]])/7]]
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "6.59861960924436011617837046268" >
+    <!ENTITY a  "47.9133925257940968951470647263" > <!-- 90° - θ -->
+    <!ENTITY y1 "2.70710678118654752440084436210" > <!-- 2+1/Sqrt[2] -->
+    <!ENTITY x2 ".702236622111675543312166010545" > <!-- 1-(s-6)*Cos[θ]*Sin[θ] -->
+    <!ENTITY y2 "2.32969614911279769616252407621" > <!-- 2+(s-6)*Cos[θ]^2      -->
+    <!ENTITY r1 ".071879360194102417540224734130" > <!-- -(2-(1-(s-6)*Cos[θ]*Sin[θ]))*Sin[θ]+(s-3-(2+(s-6)*Cos[θ]^2))*Cos[θ]   -->
+    <!ENTITY r2 ".928120639805897582459775265870" > <!--  (2-(1-(s-6)*Cos[θ]*Sin[θ]))*Sin[θ]-(s-3-(2+(s-6)*Cos[θ]^2))*Cos[θ]+1 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1" height="1" id="one"/>
+        <g id="two">
+            <rect width="2" height="1"/>
+            <path style="fill:none" d="M1,0 V1"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g transform="rotate(-90) translate(-&s;)">
+        <g transform="translate(&s;) scale(-1 1)">
+            <path style="stroke:none" d="M3,0 V1 H2 V2 H1 V3 H0 V0"/>
+            <path style=  "fill:none" d="M3,0 V1 H0
+                                         M2,0 V2 H0
+                                         M1,0 V3 H0"/>
+        </g>
+        <g id="side1">
+            <path style="stroke:none" d="M2,0 V1 H1 V2 H0 V0"/>
+            <path style=  "fill:none" d="M2,0 V1 H0
+                                         M1,0 V2 H0"/>
+            <g transform="translate(&x2; &y2;) rotate(-&a;)">
+                <use xlink:href="#one"/>
+                <use xlink:href="#two" transform="translate( 1     &r1;)"/>
+                <use xlink:href="#two" transform="translate( &r2; 1&r1;)"/>
+                <use xlink:href="#one" transform="translate(-&r1; 1    )"/>
+            </g>
+        </g>
+        <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1 1) rotate(-90)"/>
+        <g transform="translate(0 &s;) scale(1 -1)">
+            <path style="stroke:none" d="M0,4 H1 V3 H2 V2 H3 V1 H4 V0 H0"/>
+            <path style=  "fill:none" d="M0,4 H1 V0
+                                         M0,3 H2 V0
+                                         M0,2 H3 V0
+                                         M0,1 H4 V0"/>
+        </g>
+        <g transform="translate(0 &s;) scale(1 -1) translate(2 &y1;) rotate(-45)">
+            <rect width="1" height="3"/>
+            <path style="fill:none" d="M0,1 H1
+                                       M0,2 H1
+                                       M0,3 H1"/>
+        </g>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

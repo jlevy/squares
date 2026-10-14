@@ -1,0 +1,12 @@
+Licensing for this repository (Esummins/packing)
+
+CODE -- every file under attempts/*/code/, certs/*.py, docs/**/*.py, lean/, and any other source file: MIT License
+(full text in LICENSE-MIT).
+
+DOCUMENTS AND DATA -- every file under docs/, writeup/, attempts/*/{notes,results,certs,BRIEF.md}, LOG.md,
+attempts/REGISTRY.md, certificates (*.json, *.jsonl), figures (*.svg) and all other non-code content:
+Creative Commons Attribution 4.0 International (CC BY 4.0; full text at
+https://creativecommons.org/licenses/by/4.0/legalcode, summary in LICENSE-CC-BY-4.0).
+
+Attribution: E. Summins (PI), the n = 11 square-packing lab, https://github.com/Esummins/packing.
+Third-party material retained under attempts/A242-replay-31-8/ext/ keeps its own licence.

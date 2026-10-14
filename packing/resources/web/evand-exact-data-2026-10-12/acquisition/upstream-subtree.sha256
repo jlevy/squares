@@ -1,0 +1,10 @@
+778884d09f88ce159ea2cea2134d30fb14bf01bf58fc9e69c6f3d77433da8168  ./CREDITS.md
+c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578  ./LICENSE
+093163347efa883e5045f9908e8902564eb1f3232cbf02165cc7a739d05e3d8b  ./search/exact/env.sh
+e2cd11d9578a8008d21f3117b90fc2a648fa5a718f4a68e37dc24c9f79e8a696  ./search/exact/geom.py
+61dcf21c2c051d3957e6092f115caa63b831e3b726204846cd785bd624f60a79  ./search/exact/gradec.py
+cd4fa79b2602506ad399501726a62f4af1626a7be3f1223796a10c36bf27bd07  ./search/exact/homotopy/N29.md
+5c74bc9e046f74cc48fa345ab568ab0a02982030463d3c55dec16cb839183d39  ./search/exact/localmin.py
+efe6d26daf56f866a3d8b7bfc245a94074e4786b8c3e5150b18738ca349be438  ./search/exact/minpoly/data/n-10.minpoly.json.gz
+a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4  ./search/exact/verify_exact.py
+10e3bcbc0f42ff060f9d689e613e327a125047c074edef029679288ca3bcc416  ./tasks/exact-minpoly/grade-C.md

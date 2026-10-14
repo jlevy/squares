@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by John Bidwell (an undergraduate student at the University of Hawaii) in 1997 or 1998.
+        Source: Private communication between Erich Friedman and John Bidwell, 1998
+            Source: Packing Unit Squares in Squares: A Survey and New Results, by Erich Friedman, Version 2 (July 17, 2000) and later: https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7/versions and https://erich-friedman.github.io/papers/squares/squares.html
+    First high-precision analytic solution by Thierry Gensane and Philippe Ryckelynck before May 19, 2004.
+        Source: https://doi.org/10.1007/s00454-004-1129-z (Page 11 out of 13)
+        The result of this solution was published as the "s" value to 14 decimal places, but it had a typo (the second "3" was missing, leaving only 13 decimal places).
+    Exact polynomial root solution by David Ellsworth on June 4, 2023. Subsequently confirmed independently by Boris Alexeev on the same day (about 7 hours later), using a very different solution method.
+
+    RootReduce[Solve[{RotationTransform[-a][{s - 1, 2}  - ({x1, 2} + RotationTransform[a][{u2 + 2, v0 - 2}])][[2]] == 0,
+                      RotationTransform[-a][{x5, y5}    - ({x1, 2} + RotationTransform[a][{u1 + 2, 0     }])][[1]] == 0,
+                      RotationTransform[ b][{s - 1, y4} - {x5, y5}                                          ][[1]] == 1}, {s, a, b}][[2]]]
+    RootReduce[Solve[{s+(s-2)*Tan[a]-3*Sec[a] == 3,
+                      Cos[a]*Sin[a] == Sin[a+b]*(1+Sin[b]*(2-s+2*Sec[a]+Sin[a]-(s-3)*Tan[a])),
+                      ((s-3)*(1+Cot[a])-2*Csc[a])*Sin[b]+Cos[b]*(s-2-2*Sec[a]-Sin[a]+(s-3)*Tan[a]) == 1}, {s, a, b}][[2]]]
+    s = Root[-2631254953 + 26662976550*# - 126167814419*#^2 + 358189195800*#^3 - 660388959899*#^4 + 808819596154*#^5 - 662986732745*#^6 + 350268230564*#^7 - 93528282146*#^8 - 18522084588*#^9 + 32970034584*#^10 - 18310153596*#^11 + 6502333062*#^12 - 1640654808*#^13 + 300416928*#^14 - 39318012*#^15 + 3501307*#^16 - 190430*#^17 + 4775*#^18, 2]
+    a = ArcCos[Root[-8 - 40*# - 55*#^2 + 56*#^3 + 218*#^4 + 136*#^5 - 151*#^6 - 232*#^7 - 48*#^8 + 96*#^9 + 46*#^10 - 104*#^11 - 122*#^12 + 56*#^13 + 140*#^14 + 32*#^15 - 24*#^16 + 5*#^18, 2]]
+    b = ArcCsc[Root[-2 - 12*# - 15*#^2 + 20*#^3 - 96*#^4 + 436*#^5 - 258*#^6 - 240*#^7 + 182*#^8 - 680*#^9 + 1015*#^10 + 336*#^11 - 1152*#^12 + 420*#^13 + 54*#^14 + 28*#^15 - 42*#^16 + 4*#^17 + #^18, 3]]
+
+    To get the simplified form of the first equation in the Solve[]: FullSimplify[RotationTransform[...] / Cos[a] == 0]
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "4.67553009360455095163411127048315">
+    <!ENTITY a  "39.8049589797677950558662536965423">
+    <!ENTITY b  "36.6237863834465893201859433547298">
+    <!ENTITY x1 ".640176192429266087584168543270317"> <!-- Sin[a] -->
+    <!ENTITY v0 ".056838696870287317626412465614310"> <!-- (s-3-Cos[a])*Cos[a]-Sin[a] -->                  <!-- RotationTransform[-a][{1, s - 1 - (2 + Cos[a])}][[2]] -->
+    <!ENTITY u1 ".276426766820379851031162763090775"> <!-- Cos[a]*(1-Sin[a])          -->                  <!-- RotationTransform[-a][{1 - Sin[a], 2 - 2      }][[1]] -->
+    <!ENTITY u2 ".404478693276882795154318979238136"> <!-- 2*Cos[a]-(1+Cos[a])*Sin[a] -->                  <!-- RotationTransform[-a][{2 - Sin[a], 1 - 2      }][[1]] -->
+    <!ENTITY x3 "1.84732482651028509718122846547049"> <!-- (-Sin[a]*s+3*Sin[a]+2+Sin[a]*Cos[a])/Cos[a] -->
+    <!ENTITY y4 "3.11346013251256404552110105703834"> <!-- 1-(-Sin[a]-2-3*Cos[a]+Cos[a]*s)/Sin[a] -->
+    <!ENTITY r5 ".505927428006637436155510942971393"> <!-- 1-(s-x3-2)*Sin[b] -->
+    <!--     x5                                   --> <!-- x3+1-r5*Sin[b] -->
+    <!--     y5                                   --> <!-- s -1-r5*Cos[b] -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0017" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1" height="1" id="one"/>
+        <g id="sider">
+            <rect style="stroke:none" y="-1" width="1" height="1"/>
+            <path style=  "fill:none" d="M0,0 V-1 H1 V0"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <g id="side1">
+            <path style="stroke:none" d="M0,2 H1 V1 H2 V0 H0"/>
+            <path style=  "fill:none" d="M0,2 L1,2 L1,0
+                                         M0,1 L2,1 L2,0"/>
+            <g transform="translate(0 &s;) scale(1 -1)">
+                <rect style="stroke:none" width="1" height="1"/>
+                <path style=  "fill:none" d="M0,1 H1 V0"/>
+            </g>
+        </g>
+        <use xlink:href="#side1" transform="translate(&s;) scale(-1 1)"/>
+        <g transform="translate(&x1; 2) rotate(&a;)">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="                   translate(1 &v0;)"/>
+            <use xlink:href="#one" transform="translate(&u1; -1)"/>
+            <use xlink:href="#one" transform="translate(&u1; -1) translate(1 &v0;)"/>
+            <use xlink:href="#one" transform="translate(&u2; -2)"/>
+            <use xlink:href="#one" transform="translate(&u2; -2) translate(1 &v0;)"/>
+        </g>
+        <g transform="translate(&x3; &s;)">
+            <use xlink:href="#sider"/>
+            <use xlink:href="#one" transform="translate(1 -1) rotate(-&b;) translate(0 -&r5;)"/>
+        </g>
+        <use xlink:href="#sider" transform="translate(&s; &y4;) rotate(-90)"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

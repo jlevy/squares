@@ -1,0 +1,44 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/552",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n154 2026-10-12]",
+  "report_evidence": "E-evand-552-n154-report",
+  "receipt_format": "evand-552-exact-replay-v1",
+  "witness_prefix": "W-evand-552-n",
+  "claim_limitations": "Complete 597e660 rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-12",
+  "read_at_main": "92649a2ebe93a52055cdb98afe00ec15f2253e0b",
+  "certificates": [
+    {"n": 154, "path": "search/packer/candidates/tt_n154.cert", "format": "evand-cert", "offered": "12922566401934059503377267965457/1000000000000000000000000000000", "first_committed": "2026-10-12T13:58:36Z"}
+  ],
+  "requested": [154],
+  "replayed": [154],
+  "houses": [
+    {"n": 154, "reader": "[SQUISH third request 2026-10-09]", "source_key": "[SQUISH third request 2026-10-09]", "holders": "Nate Chaoweeraprasit (itsnaka)", "result": "T-136", "reported_value": "12.9230702023011408", "verified_value": "12.9230702023011408", "evidence": ["E-squish-481-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 154, "report": "T-127 (#438)", "url": "https://github.com/jlevy/squares/issues/438", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta", "result": "T-127", "reader": "[Gupta rational refinements 2026-10-08]"},
+    {"n": 154, "report": "#470", "url": "https://github.com/jlevy/squares/issues/470", "holders": "Mishapolk", "reader": "[Mishapolk decimal poses 2026-10-09]"},
+    {"n": 154, "report": "T-115 (#401)", "url": "https://github.com/jlevy/squares/issues/401", "holders": "Nate Chaoweeraprasit", "result": "T-115", "reader": "[SQUISH update 2026-10-07]"},
+    {"n": 154, "report": "T-113 (#401)", "url": "https://github.com/jlevy/squares/issues/401", "holders": "Nate Chaoweeraprasit", "result": "T-113", "reader": "[SQUISH ten packings 2026-10-07]"},
+    {"n": 154, "report": "T-098 (#375)", "url": "https://github.com/jlevy/squares/issues/375", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reader": "[evand exact optima 2026-10-05]"},
+    {"n": 154, "report": "T-056", "url": "https://github.com/franciscouzo/square-packing", "holders": "Francisco Couzo", "result": "T-056", "printed": "12.931663721169976", "rounding": "up"}
+  ],
+  "register": {
+    "title": "Evan Daniel's n154 certificate at 597e660, issue552",
+    "headline": "A smaller packing of 154 squares from Evan Daniel's size-chaining explorer, certified exactly",
+    "significance": 3,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate and its regularized drawing, with least certified clearances of 1e-20 for pairs and 5e-21 for walls. The side is the 80-digit KKT point S* = 12.92256640193405950324804230143691... scaled by 1 + 1e-20 about the origin corner, with positive multipliers on the load-bearing contacts (least 1.5e-4), a reduced Hessian positive semidefinite modulo 45 exact flat motions and a jammed first-order MILP in every one of 98 corner-corner branches, and 8 rattlers; those are numerical evidence, as the source says, not proofs. No source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose size-chaining quality-diversity basin explorer, the explorer of issues 465 and 489, found the packing in a time-travel test restarted from the register of 5 October; and credit Francisco Couzo with its start, as the author asks: by the issue's comment of 12 October 14:13 UTC the packing descends from Couzo's 5 October packing of 155 squares with one square removed, after 17 productive rounds at n = 154. The chain never saw SQUISH's packing (T-136), and the source measures the result as a different local minimum from it. The search code, the run and the request were done with Claude (Claude Code), which Evan Daniel directed and reviewed.",
+    "next_rung": "Independently review the retained replay, then decide adoption at 154: the certificate is below the case's ceiling, SQUISH's T-136 adopted on 12 October, by 5.04e-04, and below every other report at 154. Measured for the credit by the third route's arrangement_gap and patch_lineage, it matches neither T-136's packing nor Couzo's 154 (T-098's exact optimum) square for square, and 32 of T-136's squares reappear in it within 1e-9 under the best placement patch_lineage finds, so it is another arrangement than T-136's. Blocks of upright squares reappear to the digit from both of Couzo's packings, 43 from the 155 and 45 from the 154 (T-098's exact optima), so that measurement does not tell the two starts apart; the source's round-by-round trace names the 155. Local minimality is the source's numerical evidence. Final exact-head CI remains required.",
+    "bead": "think-6no5",
+    "bibliography": {
+      "authors": ["Daniel"],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Couzo",
+      "short_credit": "Daniel after Couzo",
+      "note": "One complete exact certificate at 597e660c9a078a552991ab893cda3ab693cb5ac8, s(154) <= 12922566401934059503377267965457/10^30, from a time-travel test of the size-chaining explorer of issues 465 and 489 restarted from the register of 5 October; the author credits the start to Francisco Couzo's 5 October packing of 155 squares less one square. A regularized drawing of the same packing at the same side is retained beside it. MIT-licensed certificates and solver reports retained; Claude assistance disclosed. KKT and jamming statements are the author's numerical evidence; no local or global optimality claim."
+    }
+  }
+}

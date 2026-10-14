@@ -1874,8 +1874,8 @@ sources:
       unavoidable-set work by Stromquist, Burns and Massaccesi, and gives Guzhou0806's
       AI-assisted contribution as the new supports, the weight optimization, the
       continuous-cover certificate and the obstruction; the comment asks for credit in the
-      same terms (web/guzhou-n40-new-supports-2026-10-11/README.md). Retained and its finite
-      steps audited, not registered. Dated by that commit.
+      same terms (web/guzhou-n40-new-supports-2026-10-11/README.md). Retained, audited,
+      replayed in full and reviewed; registered as T-157. Dated by that commit.
   - key: '[Daniel regularized lists 2026-10-10]'
     authors: [Daniel]
     year: 2026
@@ -2111,6 +2111,77 @@ sources:
       credits Ahmed's formalization only as a reference for its trust boundary, where the
       issue names his s(11) proof for the proof's shape. The lineage stays
       credits-project, as the source's own files state it.
+  - key: '[Ostashev records 2026-10-12]'
+    authors: [Ostashev]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: Ostashev after Nakajima, Ellsworth, Schadt, Friedman, de Winter, Daniel, Levy, Xu
+    short_credit: Ostashev after Nakajima et al.
+    note: >-
+      Three complete exact certificates at a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f in the
+      source's sqcert format, at 175, 232 and 264: compositions with the author's new
+      38-square (h + 2) x h rectangle and pieces cut from Ellsworth's s(171) template
+      (Schadt's s(50)), Friedman's s(85) and Daniel's exact optimum of de Winter's s(126),
+      each solved to the exact optimum of its contact topology and dilated by 1 + 1e-60.
+      Methods credited: Nakajima's soft-to-rigid search, this project's fixed-angle linear
+      program and Ryan Xu's certificate construction. Retained under the MIT licence with
+      the source's C++ GMP checker and mpmath cross-check pinned against the issue-501
+      packet, neither run here. AI assistance stated: AI agents wrote and ran the search,
+      composition and verification code. No local or global optimality is registered.
+  - key: '[Calle n102 2026-10-12]'
+    authors: [Calle]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: credits-project
+    credit: Calle after Xu, Levy
+    note: >-
+      A decimal layout of 102 unit squares at 831368623f2d4dcef2e9434fd85c3e154083c97d,
+      centres and radian rotations at 18 significant digits, of the design ry-xu published
+      first (T-125), dated 11 October 2026 by its README, which compares it with this
+      project's register; the record's exact certificate is derived here, every decimal
+      read as printed and each half-angle tangent rounded down at 40 places, and kept as a
+      derived fact. No licence: no upstream byte retained. The author's 60-digit decimal
+      checker was run once outside the repository; the author's exact engine is private.
+      AI assistance stated: Claude wrote and ran the search, finishing, refinement and
+      checking code under the author's direction. No local or global optimality is
+      registered.
+  - key: '[Daniel n154 2026-10-12]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: Daniel after Couzo, Levy
+    note: >-
+      One complete exact certificate at 597e660c9a078a552991ab893cda3ab693cb5ac8, s(154) <=
+      12922566401934059503377267965457/10^30, from a time-travel test of the size-chaining
+      explorer of issues 465 and 489 restarted from this register as it stood on 5 October;
+      the author credits the start to Francisco Couzo's 5 October packing of 155 squares
+      less one square, which the record states as his statement. A regularized drawing of
+      the same packing at the same side is retained beside it. MIT-licensed certificate, KKT
+      point, input and solver reports retained; Claude assistance disclosed. KKT and jamming
+      statements are the author's numerical evidence; no local or global optimality claim.
+      Levy is named because the chain restarted from this register.
+  - key: '[Summins stratification series 2026-10-12]'
+    authors: [Summins]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    note: >-
+      The n = 11 lab of E. Summins (PI), Esummins/packing at
+      651a9a54688341880e9c0dc9fcfc19f2c04cd3cb: an eight-note outreach series written for
+      this project and filed as jlevy/squares#521 to #527, the simple-square stratification
+      as a proof strategy with its n = 11 census, scoreboard and Lean layer on three named
+      axioms, a census and descent at the n = 17 and n = 19 windows, Conjecture ONE-FLUSH(n),
+      Theorem FC, the k = 0 class at n = 11, a geometry-before-LP toolkit, and a third
+      party's re-run of Kleddamag's v1.0.2 certificate (T-037). No bound is claimed. Code
+      MIT, documents and data CC BY 4.0, by the licence the pinned commit added; the
+      series, the lemma corpus, the readable Lean layer and the cited attempts are retained.
+      The lab states that its campaigns, code, certificates, Lean files and notes were
+      produced by AI agents (Claude, Anthropic) under the PI's direction.
 credited_names:
   Oscar Fitzharding: Fitzharding
   Marc Leonard Overbeck: Overbeck

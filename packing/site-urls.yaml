@@ -3108,6 +3108,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-14'
   status: live
+- path: atlas/regularized/n-264.svg
+  canonical: atlas/regularized/n-264.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-14'
+  status: live
 - path: atlas/regularized/n-266.svg
   canonical: atlas/regularized/n-266.svg
   kind: asset-file
@@ -3450,7 +3458,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-11'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/103.html
   canonical: cases/103.html
@@ -3906,7 +3914,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-11'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/155.html
   canonical: cases/155.html
@@ -4090,7 +4098,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-11'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/176.html
   canonical: cases/176.html
@@ -4602,7 +4610,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-11'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/233.html
   canonical: cases/233.html
@@ -5490,7 +5498,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/41.html
   canonical: cases/41.html
@@ -7329,7 +7337,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-09-29'
+  lastmod: '2026-10-12'
   status: live
   identity:
     kind: lower-bound
@@ -7346,6 +7354,7 @@ urls:
     - E-n011-kleddamag-3875-report
     - E-n011-kleddamag-3875-source-replay
     - E-n011-kleddamag-3875-native-parent-core
+    - E-n011-kleddamag-3875-esummins-replay-report
     artifacts:
     - packing/resources/web/external-square-certificates-2026-09-22/README.md
     - packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/PROOF.md
@@ -7356,6 +7365,36 @@ urls:
     - packing/devtools/verify_kleddamag_n11_native.py
     - docs/project/reviews/review-2026-09-22-kleddamag-n11-mathematics.md
     - docs/project/reviews/review-2026-09-22-native-n11-parent-core.md
+  amendments:
+  - date: '2026-10-12'
+    reason: Cite E. Summins' n = 11 lab's re-run of the release's own sweep, reported on issue 521
+      (E-n011-kleddamag-3875-esummins-replay-report), beside the rung; scope, attribution and the
+      stated bound are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 11
+      established: null
+      attribution:
+        source_keys:
+        - '[Kleddamag n11 2026]'
+        published: '2026-09-22'
+      builds_on: null
+      evidence:
+      - E-n011-kleddamag-3875-report
+      - E-n011-kleddamag-3875-source-replay
+      - E-n011-kleddamag-3875-native-parent-core
+      artifacts:
+      - packing/resources/web/external-square-certificates-2026-09-22/README.md
+      - packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/PROOF.md
+      - packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/ATTRIBUTION.md
+      - packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/full-replay/RESULT.json
+      - packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/independent-audit.json
+      - packing/campaign/agent-sessions/session-153-native-full.json
+      - packing/devtools/verify_kleddamag_n11_native.py
+      - docs/project/reviews/review-2026-09-22-kleddamag-n11-mathematics.md
+      - docs/project/reviews/review-2026-09-22-native-n11-parent-core.md
 - path: result/t-038.html
   canonical: result/t-038.html
   kind: result
@@ -13312,6 +13351,145 @@ urls:
     - packing/devtools/regularize_grid_slack.py
     - packing/devtools/check_rational_witness_independent.py
     - docs/project/policies/regularization-policy.md
+- path: result/t-157.html
+  canonical: result/t-157.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-12'
+  lastmod: '2026-10-12'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 40
+    established: null
+    attribution:
+      source_keys:
+      - '[Guzhou0806 n40 new supports 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-n040-guzhou-new-supports-report
+    - E-n040-guzhou-new-supports-kernel-replay
+    - E-n040-guzhou-new-supports-finite-audit
+    - E-n040-guzhou-new-supports-crate-axis
+    artifacts:
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/README.md
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/parameters.json
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/verifier/continuous_pose.cpp
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/verifier/axis_integer_grid.cpp
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/results/verification.json
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/release-ci/results/verification.json
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/finite-audit.json
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-stage.json
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-check.json
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/builds.json
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-run.json
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/slabs.jsonl.gz
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/crate-runs.json.gz
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/duals.json
+    - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/replay-check.json
+    - packing/devtools/audit_n40_new_supports.py
+    - packing/devtools/audit_continuous_pose.py
+    - docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
+- path: result/t-158.html
+  canonical: result/t-158.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-12'
+  lastmod: '2026-10-12'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 175
+      - 232
+      - 264
+    established: null
+    attribution:
+      source_keys:
+      - '[Ostashev records 2026-10-12]'
+      published: '2026-10-12'
+    builds_on: null
+    evidence:
+    - E-ostashev-528-certificate-report
+    - E-ostashev-528-exact-feasibility
+    artifacts:
+    - packing/resources/web/dostashev-records-2026-10-12/README.md
+    - packing/resources/web/dostashev-records-2026-10-12/acquisition/claims.json
+    - packing/resources/web/dostashev-records-2026-10-12/source/records/n0175.sqcert
+    - packing/resources/web/dostashev-records-2026-10-12/source/records/n0232.sqcert
+    - packing/resources/web/dostashev-records-2026-10-12/source/records/n0264.sqcert
+    - packing/resources/web/dostashev-records-2026-10-12/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md
+- path: result/t-159.html
+  canonical: result/t-159.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-12'
+  lastmod: '2026-10-12'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 102
+    established: null
+    attribution:
+      source_keys:
+      - '[Calle n102 2026-10-12]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-calle-529-certificate-report
+    - E-calle-529-exact-feasibility
+    artifacts:
+    - packing/resources/web/riocalle-n102-2026-10-12/README.md
+    - packing/resources/web/riocalle-n102-2026-10-12/acquisition/claims.json
+    - packing/resources/web/riocalle-n102-2026-10-12/facts/n-102.yaml.gz
+    - packing/resources/web/riocalle-n102-2026-10-12/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md
+- path: result/t-160.html
+  canonical: result/t-160.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-12'
+  lastmod: '2026-10-12'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 154
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n154 2026-10-12]'
+      published: '2026-10-12'
+    builds_on: null
+    evidence:
+    - E-evand-552-n154-report
+    - E-evand-552-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n154-2026-10-12/README.md
+    - packing/resources/web/evand-n154-2026-10-12/acquisition/claims.json
+    - packing/resources/web/evand-n154-2026-10-12/source/search/packer/candidates/tt_n154.cert
+    - packing/resources/web/evand-n154-2026-10-12/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-12-upper-bound-import-552.md
 - path: results.html
   canonical: results.html
   kind: page

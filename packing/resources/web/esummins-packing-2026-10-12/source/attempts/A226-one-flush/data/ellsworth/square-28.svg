@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on December 29, 2025, using his modified version of Thomas Schadt's computer program, starting from randomness, followed by an exact polynomial solution based on that result.
+
+    Unset[{s, a, r1, solution}];
+    r1 = 1 - (s - 5)*Cos[a];
+    v2 = RotationTransform[-a][{3, 1} - {1, 2}][[1]] - 1;
+    solution = RootReduce[Solve[{RotationTransform[-a][{1, s-3} - {s-2, 1}][[2]] == 3,
+                                 ({2, s-1} + RotationTransform[a][{2-r1, -1}])[[2]] == s-1},
+                                {s, a}, GeneratedParameters->C][[4]]] /. _C->0
+    N[{s, a*180/Pi, r1, v2} /. solution, 40]
+(*
+    s = Root[-1615 + 882*# + 1025*#^2 - 812*#^3 + 212*#^4 - 24*#^5 + #^6, 3]
+    a = ArcTan[Root[1 - 6*# + 7*#^2 - 4*#^3 + 4*#^4 + 6*#^5 + #^6, 4]]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "5.824444616674059296958628758848381019903901347055291450106">
+    <!ENTITY a  "30.29140781651076883196499197898633682567489637045665129778">
+    <!ENTITY r1 ".2881158168348500069707083747656285569246393593752239049294">
+    <!ENTITY v2 ".2225442599180416717643728907604938895840525048258486714228">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="sideA">
+        <g id="side1">
+            <path style="stroke:none" d="M3,0 V1 H1 V2 H0 V0"/>
+            <path style=  "fill:none" d="M3,0 V1 H0
+                                         M2,0 V1
+                                         M1,0 V2 H0"/>
+            <g transform="translate(1 2) rotate(&a;) translate(0 -&r1;)">
+                <path style="stroke:none" d="M0,0 H2 V2 H1 V1 H0 Z"/>
+            </g>
+        </g>
+        <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1)"/>
+    </g>
+    <use xlink:href="#sideA" transform="translate(&s;) rotate(90)"/>
+    <g id="sideA_">
+        <g id="side1_" transform="translate(1 2) rotate(&a;) translate(0 -&r1;)">
+            <path style=  "fill:none" d="M0,0 H2 V&v2;
+                                         M2,2 H1 V1 H0 V0
+                                         M1,0 V1 H2"/>
+        </g>
+        <use xlink:href="#side1_" transform="translate(&s; &s;) scale(-1)"/>
+    </g>
+    <use xlink:href="#sideA_" transform="translate(&s;) rotate(90)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

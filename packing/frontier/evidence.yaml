@@ -31249,8 +31249,12 @@ evidence:
       80-digit mpmath cross-check, and that each side is the exact optimum of its contact
       topology with nonnegative KKT multipliers; neither program was built or run here, and
       the KKT statement is not decided. The source states nothing about AI assistance
-      (RW-2). The repository replay and its review are E-ostashev-501-exact-feasibility. No
-      local or global optimality is registered.
+      (RW-2). On 12 October 2026 the author stated on jlevy/squares#528 that AI agents
+      wrote and ran his search, composition and verification code; the verification code
+      it names is the one retained here, byte-identical at a8db6ff, and whether the
+      statement covers these three packings' search is asked (RX-4 of the 12 October
+      review, think-e59i). The repository replay and its review are
+      E-ostashev-501-exact-feasibility. No local or global optimality is registered.
     source_reviewed: '2026-10-11'
 
   - id: E-ostashev-501-exact-feasibility
@@ -32747,3 +32751,787 @@ evidence:
       rigidity or same-packing claim, and no certificate of the catalogue's closed-form
       side, which lies 4.8e-33 below this one.
     source_reviewed: '2026-10-13'
+
+  - id: E-n040-guzhou-new-supports-report
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    certificate: resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-guzhou-n40-continuous-pose, V-guzhou-n40-axis-integer-grid]
+    limitations: >-
+      Guzhou0806/n40-square-packing at 6a65957e6c5c51cdf267917d882dab7f5b4928dd (committed
+      2026-10-11T07:12:04Z, a child of T-145's 71c97d07), which the release
+      n40-new-supports-6718-20261011 names (n40-6718.zip, 196,420 bytes, SHA-256 e6e49590...),
+      reported in the comment of 2026-10-11T07:39:30Z on jlevy/squares#485, claims s(40) >
+      3359/500 = 6.718, unrestricted rotations, strict. It rests on a new rational density
+      (SHA-256 984fcd3a...): 685 positive D4 rectangle orbits, 522 rows of wand125's rect_n40_L67
+      pool (71011d03..., pinned by digest and not copied) and 163 generated outside it, mass
+      3999/100, and on the statement that every closed square of side 3350/3359 inside
+      [0, 67/10]^2 captures mass at least 4999/5000, so that 40 squares capture more than the mass
+      by 1/500. The source decides it with T-145's two frozen C++ kernels, byte for byte, on inputs
+      its exact.py regenerates from the density (pose input 6c64a2d2..., B written as a hexadecimal
+      pair; axis input 10dd46b0...): continuous_pose.cpp (da06206b...) over the same 43 closed
+      slabs of t = tan(theta/2) covering [10^-6, 83/200] with a 30,000,000-node budget each, and
+      axis_integer_grid.cpp (f5bc3f60...), now built with the pose kernel's flags, for horizontal
+      squares of side 249329659/250000000 on the density rounded inward to 10^-9, which covers t in
+      [0, 10^-6] because A W(10^-6) <= B by 424025836324581/839750000000839750000000. It reports two
+      complete runs driven by verifier/run.py, every non-timing slab and axis field identical: the
+      producer's local run in the tree's results/ (GCC 15.2.0, Python 3.14.4, 858.95 s at four
+      workers, binaries a5dcfa3e... and a3a82b57...) and GitHub Actions run 38120568498 on 6a65957e,
+      whose receipt the ZIP carries in place of the tree's (GCC 13.3.0, Python 3.12.3, 1,587.30 s,
+      binaries 69bc9e64..., T-145's, and 19288b2f...); both receipts are retained. Both report
+      60,500,889 nodes, 30,250,466 leaves, 13,812,428 angle bisections, least leaf bound
+      9005397816695287/2^53 and the axis minimum 1001486431423867090847280653/10^27 over
+      10,843,849 vertices, and the release's separate dual EXACT_DUAL_CODE_DISTINCT_CHECKED for
+      OBSTRUCTION.md, which bears on no bound. Its label REPLAYED_SAME_KERNEL means its two runs
+      are the same kernel on two compilers. wand125's comment of 2026-10-11T17:14:50Z (edited
+      2026-10-12T02:19Z) reports a third run of the entry point (1,552 s at six workers) and his
+      own continuous-angle verifier, now published at wand125/square-packing f30cc2cf (think-xzob),
+      with no receipts. No packing, optimality or priority claim. This is the public-claim entry;
+      the replays here are E-n040-guzhou-new-supports-kernel-replay,
+      E-n040-guzhou-new-supports-finite-audit and E-n040-guzhou-new-supports-crate-axis.
+    external_review:
+      state: informally-verified
+      date: '2026-10-12'
+      reviewed_by: >-
+        AI agent (Claude, at the highest reasoning effort), stage 4 of the import of the issue
+        485 follow-up of 11 October (think-tln9), the lane that ran the complete replay, prompted
+        separately from lane E and from the reviews of pull request 512
+        (docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md)
+      note: >-
+        No blocking defect. Re-derived: the density's admissibility (685 positive orbits in K,
+        522 equal to their pool rows with no index twice, 163 in none of the pool's D4 orbits,
+        5,424 distinct terms, D4-invariant, integral 3999/100); the reduction and the kernel's
+        lemmas as T-145's, with the kernel's input and threshold code read for independence from
+        the density; the near-axis containment at the new side, margin
+        424025836324581/839750000000839750000000; the counting and the strict endpoint at X =
+        3359/500. Findings GN-1 to GN-8, none blocking: the containment margin is 5.05e-10 and
+        the chain holds in exact rationals only (GN-1); the ZIP's results/ are the CI run's and
+        the pose binaries are T-145's (GN-2); the measured replay price (GN-3); nothing
+        first-party decides the continuous cover, so the confirmation is reproduced with the
+        producer's code (GN-4); the kernel contract held at the new parameters (GN-5);
+        OBSTRUCTION.md is a statement about a family, replayed and registered nowhere (GN-6);
+        wand125's sqverify_continuous is published and unretained, and a replay of it would move
+        the confirmation's mark and not the rung (GN-7); the release's tests were not run here
+        (GN-8). The complete 43-slab run is E-n040-guzhou-new-supports-kernel-replay.
+    source_reviewed: '2026-10-12'
+
+  - id: E-n040-guzhou-new-supports-kernel-replay
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    certificate: resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+    replay: >-
+      From packing/, with g++ and the project interpreter: uv run --frozen --all-extras --group
+      dev python -m devtools.audit_n40_new_supports run-replay --out DIR --workers 2
+      --crate-binary sqverify_fast/target/release/sqverify-fast regenerates both kernel inputs
+      from the retained density, copies the retained verifier/ and tests/ sources into DIR and
+      builds them there with the release's flags (g++ -O3 -std=c++17 -fno-fast-math
+      -ffp-contract=off for both kernels, from the tree's directory), runs the axis kernel, the
+      43 slabs as continuous PL PH 1000000 4999 5000 30000000 over the consecutive endpoints,
+      controls A to F and H, the release's own exact.py on control G, sqverify-fast's two runs
+      and the release's obstruction/run.py, writing each receipt with its wall and CPU time to
+      DIR/receipts, through devtools.audit_continuous_pose's runner parametrised by this
+      release; uv run ... python -m devtools.audit_n40_new_supports check-replay --receipts
+      DIR/receipts must then print REPLAY_HOLDS. Without --receipts it judges the packet's
+      receipts/ and its --output equals receipts/replay-check.json;
+      tests/test_audit_n40_new_supports.py holds the tool to its controls.
+    replay_status: passed
+    verifiers: [V-guzhou-n40-continuous-pose, V-guzhou-n40-axis-integer-grid, V-audit-n40-new-supports, V-audit-continuous-pose]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the near-axis statement by the release's axis kernel and the continuous cover of
+          all 43 slabs of t in [10^-6, 83/200] by its continuous-pose kernel, both rebuilt
+          from the retained source and run on inputs regenerated here
+        checked: 44
+        of: 44
+    proof:
+      source: packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
+      theorem: >-
+        Every closed square of side 3350/3359 inside [0, 67/10]^2, at any angle, captures mass at
+        least 4999/5000 of Guzhou0806's 685-orbit density; since 40 x 4999/5000 - 3999/100 = 1/500
+        > 0, no 40 unit squares pack in a square of side 3359/500, so s(40) > 3359/500.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        PROOF.md and the two kernels, byte for byte T-145's, whose lemmas the 10 October review
+        re-derived and whose code it read line by line; the 12 October review's items 1, 8 and 9
+        for what the density changes; the receipts named in replay.
+      assumptions:
+        - The kernel inputs are the retained density's D4 expansion, each number bracketed by a binary64 pair (pose) or rounded inward to 10^-9 (axis), which the first-party audit regenerates and binds to the digests both release receipts name.
+        - IEEE-754 binary64 with round-to-nearest and subnormals, SSE2 evaluation without fused multiply-add, and GCC honouring -fno-fast-math -ffp-contract=off at -O3; asserted at start-up where the kernel can (controls F) and trusted for the rest.
+        - Exact signed 128-bit integer arithmetic within the axis kernel's guarded bound.
+        - The finite steps, which E-n040-guzhou-new-supports-finite-audit decides in exact rationals.
+      audit_record: docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
+    limitations: >-
+      Both kernels decided their statements here on 2026-10-12, built by
+      devtools.audit_n40_new_supports run-replay (devtools.audit_continuous_pose's runner, this
+      release's Replay) from a scratch copy of the retained sources at their upstream paths, with
+      relative paths as the release's runner builds them, by g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1)
+      13.3.0, the CI run's compiler: the pose binary 69bc9e64... (T-145's) and the axis binary
+      19288b2f... are byte for byte the CI run's. Their inputs were regenerated here from the
+      retained density and are the digests both receipts name. The axis kernel:
+      AXIS_COVERAGE_PROVED, 3,293 x 3,293 vertices, minimum 1001486431423867090847280653/10^27 at
+      (3490012394, 6201340682)/10^9, direct sum matching, every field equal to both receipts',
+      7.0 s. The 43 slabs, each continuous PL PH 1000000 4999 5000 30000000 over the
+      consecutive endpoints of 1, 500, 10000, ..., 410000, 415000: every one verified, exit 0,
+      every non-timing field of its output equal to both receipts'; in all 60,500,889 nodes,
+      30,250,466 leaves, 13,812,428 angle bisections, least leaf bound 9005397816695287/2^53 at
+      slab 40, 2.0e-10 above 4999/5000; 12,629 s of wall time at two workers and 5,242.6
+      CPU-seconds on a shared 4-core x86-64 Linux container at a one-minute load average between
+      7.6 and 27.0 (the local receipt's slab time is 2,655.3 s, the CI receipt's
+      5,229.5 s; stage 1 priced it at 2,604 to 2,626). This is the producer's own kernel re-run:
+      it reproduces the release's verification and is not an independent decision of the
+      continuous cover (GC-4 of the 10 October review, GN-4 of the 12 October review). Controls
+      on the same binaries, each as the 10 October contract states it at this release's
+      parameters: A, the release's synthetic-negative and limited-budget, exit 3 unresolved,
+      beside its synthetic-positive, verified; B, uniform density tau(1 - 10^-9)/B^2 on three
+      slabs at the full budget, exit 3 within 92 nodes; C, the seven cut densities at
+      tau(1 - 10^-9) in both regimes, top and right, all 14 exit 3 (budget 1,500,000); D, the
+      five gap densities, all exit 3; E, C's at tau(1 + 10^-4), all 14 verified within 251,857
+      nodes, and D's at about tau(1 + 3.4e-4) on [400000, 410000], verified at 140,819;
+      F, the rounding harness's 1,000,008-value IEEE neighbour test passed, the wrong-rounding and
+      flush-to-zero runs (exit -6) and the NDEBUG and fast-math compilations (exit 1) refused;
+      G, the release's own exact.py, copied into scratch with A = 249329660/250000000, refused
+      NEAR_AXIS_CONTAINMENT, and the unchanged copy returned both receipts' scalar block; H, the
+      axis kernel at tau = 62593/62500, just above its minimum, AXIS_TEST_REFUSED, exit 2, at
+      500743/500000 proved, and at the contract's 1/2 proved. The release's obstruction/run.py,
+      on a scratch copy of the retained tree with the pinned pool restored, reproduced
+      EXACT_DUAL_CODE_DISTINCT_CHECKED with every non-timing field both receipts' in 703.0
+      s; it bears on no bound. The near-axis statement was also decided by sqverify-fast
+      (E-n040-guzhou-new-supports-crate-axis), and the finite steps are
+      E-n040-guzhou-new-supports-finite-audit's.
+    source_reviewed: '2026-10-12'
+
+  - id: E-n040-guzhou-new-supports-finite-audit
+    claim: derived-structure
+    scope: {n_values: [40]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    certificate: resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+    replay: >-
+      From packing/: uv run --frozen --all-extras --group dev python -m
+      devtools.audit_n40_new_supports check --output OUT.json must print FINITE_STEPS_HOLD, every
+      check ok and controls G, G2, G3, G4, D1, D2 and D3 refused, and OUT.json must equal the
+      packet's receipts/finite-audit.json byte for byte; tests/test_audit_n40_new_supports.py
+      holds the tool to its controls.
+    replay_status: passed
+    verifiers: [V-audit-n40-new-supports, V-audit-continuous-pose]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          every finite step of the claim: the density's orbit facts, its D4 expansion, both
+          kernel inputs' identity and enclosures, the dominated measure, the scalar chain and
+          every value of both release receipts
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            lane E of the 2026-10-11 intake pass (think-tln9), which wrote
+            audit_n40_new_supports; the stage 4 lane of 12 October, at the highest
+            reasoning effort, added its replay stages; tiers not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          audit_n40_new_supports was written without opening the release's exact.py,
+          audit.py, obstruction programs or tests (its docstring is the read log), and
+          exact.py was searched afterwards for the one string control G mutates. Its finite
+          checks reuse devtools.audit_continuous_pose, whose authors read T-145's kernels
+          line by line for their input formats, so the run is not clean-room. Guzhou0806's
+          release states AI assistance without naming the system, so authorship overlap is
+          unknown.
+    proof:
+      source: packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
+      theorem: >-
+        If every side-3350/3359 square at t in [10^-6, 83/200] captures at least 4999/5000 of
+        Guzhou0806's 685-orbit density (the slabs) and every horizontal side-249329659/250000000
+        square captures at least 4999/5000 of the density rounded inward to 10^-9 (the axis), then
+        every side-3350/3359 square in [0, 67/10]^2 does, and s(40) > 3359/500.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations, under the two hypotheses named.
+      pinpoints: >-
+        PROOF.md sections 1, 6 and 7, re-derived by the 12 October review (the density's
+        admissibility, the near-axis containment and the counting with the strict endpoint); the
+        audit's receipt receipts/finite-audit.json in the packet.
+      assumptions:
+        - JSON decimals read as their literal values with Fraction, and Python's unbounded integers, are exact.
+        - CPython's integer true division rounds to nearest, as the kernel's binary64 quotient of its threshold does.
+        - The slab and axis statements, the theorem's hypotheses, which this audit does not decide; E-n040-guzhou-new-supports-kernel-replay decides them.
+      audit_record: docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
+    limitations: >-
+      The finite steps, decided on 2026-10-11 in exact rationals from the retained density, the
+      retained pool and the release's parameters by devtools.audit_n40_new_supports, written
+      without opening the release's verifier/exact.py and sharing no code with it (its docstring
+      is the read log; exact.py was searched afterwards for one string, to run control G on it):
+      685 positive orbits, 522 inherited each equal to its pool row with no row twice, 163
+      generated D4-equivalent to none of the pool's 2,526 rectangles, every box proper in K, the
+      weights summing to 3999/100; 5,480 D4 terms and 5,424 distinct rectangles, invariant under
+      each of the eight maps, integral 3999/100; the pose input regenerated in the release's
+      order with all 27,402 of its numbers bracketing their rationals, SHA-256 6c64a2d2...; the
+      axis input regenerated in quarter-turn order, 5,480 rows each dominated by its term, none
+      dropped, quarter-turn invariant, of mass M - 2.57e-6, SHA-256 10dd46b0...; the int128 guard
+      627444222088298915573283512797161984 < 2^125; the 3,293 x 3,293 grid, of which the receipts'
+      minimiser is a vertex; the dominated measure's capture there, evaluated again in integers,
+      equal to the axis minimum, and the density's own there 1.0014864996...; X = L/B = 3359/500,
+      217911/99764500 above T-145; 40 tau - M = 1/500; L > B x 1414213562373096/10^15; T^2 + 2T -
+      1 = 89/40000; the 44 endpoints partitioning [10^-6, 83/200]; the kernel's threshold
+      up(fl(4999/5000)) above tau by 1.33e-16 and the receipts' least leaf bound above it by
+      2.0e-10; W(eps) >= 1, A <= B and B - A W(eps) = 424025836324581/839750000000839750000000,
+      PROOF.md's value; the axis minimum at least ceil(10^27 tau), by 1.69e-3. Every value equals
+      the parameters, scalar, admission, coverage and axis blocks of both release receipts, every
+      slab row of both is the contract's run with the receipt's binary and an empty stderr, the
+      fourteen control stages exited as the release requires, the source digests both receipts
+      list are the retained files', and the five files this release keeps from T-145's are byte
+      for byte T-145's retained files. Controls, each refused: G, A one step of 1/250000000
+      larger, fails the near-axis containment; tau = 3999/4000 fails the counting; T = 41/100
+      falls short of pi/4; eps = 10^-5 fails the containment and the partition; D1, a generated
+      site moved onto a pool rectangle's mirror image; D2, one weight scaled by 99/100; D3, a
+      hundredth of one site's weight moved to another, which keeps every orbit fact and the mass
+      and is refused only by the digests binding the density to both kernels' inputs. The
+      checks after the orbit facts are devtools.audit_continuous_pose's, made of this release
+      through its Release record rather than copied. It decides the finite steps and no
+      coverage; it is recorded as structure and not as a bound because it decides no bound alone.
+    source_reviewed: '2026-10-12'
+
+  - id: E-n040-guzhou-new-supports-crate-axis
+    claim: derived-structure
+    scope: {n_values: [40]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 new supports 2026-10-11]'
+    certificate: resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+    replay: >-
+      From packing/, in a tree whose crate is reviewed source (python -m
+      devtools.sqverify_fast_census --source-digest prints d97758bb... and exits 0) after cargo
+      build --release --locked in sqverify_fast/: python -m devtools.audit_n40_new_supports
+      run-axis --out DIR --crate-binary sqverify_fast/target/release/sqverify-fast, then
+      check-axis --receipts DIR/receipts must print AXIS_STAGE_HOLDS; without --receipts it judges
+      the packet's receipts/axis-stage.json and its --output equals receipts/axis-check.json. The
+      crate stage of run-replay repeats the axis run and adds the 401-direction run at side B,
+      which check-replay judges.
+    replay_status: passed
+    verifiers: [V-sqverify-fast, V-guzhou-n40-axis-integer-grid, V-audit-n40-new-supports]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the near-axis statement at side 249329659/250000000, decided by sqverify-fast's
+          exact axis-vertex sweep on the density itself over all 10,929,636 vertices, with
+          the 401-direction necessary condition at side 3350/3359 over all 401 directions
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's lanes that wrote and reviewed sqverify-fast, and lane E, which
+            derived its input; tiers and reasoning settings not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          sqverify-fast shares no code with axis_integer_grid.cpp. The release says its
+          concave-section calculations draw on this repository's sqverify_fast, so the
+          producer read the crate; whether the crate's authors read the release's kernels is
+          not recorded. Lane E derived the crate's input with audit_n40_new_supports, whose
+          read log names the release's PROOF.md, the runner's diff and the receipts, and with
+          audit_continuous_pose's input builders, whose author read both C++ kernels in full;
+          so the run is not clean-room. The release's AI system is not named.
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        Every horizontal closed square of side 249329659/250000000 inside [0, 67/10]^2 captures
+        at least 4999/5000 of Guzhou0806's 685-orbit density, decided as capture at least 1 of the
+        density scaled by 5000/4999 (mass 199950/4999 < 40), the same statement exactly.
+      scope: The near-axis lemma of the claim; with the slab cover it gives s(40) > 3359/500.
+      pinpoints: >-
+        SOUNDNESS.md's exact-event axis sweep, accepted with the crate by
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md; the format T
+        metadata-net admission of the 6 October declared-net review; the receipts named in replay.
+      assumptions:
+        - Scaling every weight by 5000/4999 turns capture at least 4999/5000 into capture at least 1, exactly.
+        - The axis-vertex sweep's lemma, that a horizontal square's capture is bilinear between breakpoints, as SOUNDNESS.md proves it.
+      audit_record: docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
+    limitations: >-
+      The near-axis statement decided twice. On 2026-10-11 (receipts/axis-stage.json, judged in
+      axis-check.json): the release's axis kernel, rebuilt from the retained source with the
+      release's flags by g++ 13.3.0 into 19288b2f..., the CI run's binary, printed
+      AXIS_COVERAGE_PROVED on the derived input with every field equal to both receipts', refused
+      tau = 62593/62500 just above its minimum (exit 2) and proved 500743/500000 just below; and
+      sqverify-fast, built with cargo build --release --locked -j 1 at rustc 1.98.0 from crate
+      source d97758bb..., the declared-net reviewed source, decided the statement on the new
+      685-orbit density itself, undominated, with its weights scaled by 5000/4999 and threshold 1
+      (input 192f5df6..., bound to the input derived here from the retained candidate by its
+      digest): verified by the exact axis-vertex sweep over 10,929,636 vertices, least certified
+      1.0016868361671276, in 2.8 s, with code that shares none with axis_integer_grid.cpp. On
+      2026-10-12 the replay's crate stage repeated that decision (the same vertices and bound,
+      pinned) and ran the 401-direction necessary condition at side 3350/3359 on the standard
+      83/80000 net: VERIFIED, 401 of 401 directions, no direction refused, 35,375,590 boxes, least
+      certified 1.000000000310131 at r = 398, 1,782.6 s of wall time and 720.9 CPU-seconds at two
+      threads on the shared host; the crate binary 567a0fd5..., the reviewed build, from the same
+      source digest at rustc 1.98.0 (the toolchain the crate pins); these values are pinned by
+      check-replay, a necessary condition of the claim and not the
+      claim. This decides the near-axis lemma a second way; nothing it decides covers the slabs.
+    source_reviewed: '2026-10-12'
+
+  - id: E-ostashev-528-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [175, 232, 264]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Ostashev records 2026-10-12]'
+    certificate: packing/resources/web/dostashev-records-2026-10-12/source/records/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-12'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-12 intake, prompted
+        separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md accepted the
+        three certificates for finite feasibility only, with eleven non-blocking findings
+        (RX-1 to RX-11); the replay it reproduced is E-ostashev-528-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of three exact rational certificates
+      at a8db6ff, the commit the issue names, retained byte for byte under the source's
+      MIT licence, with his C++ GMP checker and mpmath cross-check pinned at the digests
+      the issue-501 packet retains them at. The author reports that each passes his own
+      checker in GMP rationals with no dilation and no tolerance and an 80-digit mpmath
+      cross-check, and that each side is the exact optimum of its contact topology with
+      nonnegative KKT multipliers; neither program was built or run here, and the KKT
+      statement is not decided. The issue states AI assistance for the search,
+      composition and verification code. The repository replay and its review are
+      E-ostashev-528-exact-feasibility. No local or global optimality is registered.
+    source_reviewed: '2026-10-12'
+
+  - id: E-ostashev-528-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [175, 232, 264]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Ostashev records 2026-10-12]'
+    certificate: packing/resources/web/dostashev-records-2026-10-12/source/records/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      dostashev-records-2026-10-12 check --replay decides all 9 retained jobs again through
+      both maintained routes and holds each to its retained row (all equal on 2026-10-12,
+      34 min 31 s wall on a loaded host); check-claims rebuilds the frozen comparison
+      (equal); python -m devtools.check_half_angle_area decide-imports --workers 1
+      --imports '#528' '#529' --upstream dostashev-records-2026-10-12 DIRECTORY decides
+      each certificate by the third route with six controls and holds each retained file
+      to its bytes fetched at the pin into DIRECTORY (no disagreement, 335.7 s with issue
+      529's certificate).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the three complete certificates at n = 175, 232 and 264, every wall and every pair
+          decided by both maintained routes and again by the third route; the six kernel
+          controls and the third route's controls are retained separately
+        checked: 3
+        of: 3
+      read: [specification, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 12 October 2026, at extra-high reasoning effort,
+            which changed the third route in the run that decided these certificates and read
+            the source's verify/ sources; tier not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer-code entry is the review lane's reading: the review of 12 October
+          read the source's verify/ sources and
+          tools/crosscheck_mpmath.py at the pin, byte-identical to the issue-501 packet's
+          copies, and ran none of them; no route here imports or copies them. The issue says
+          AI agents wrote the source's search, composition and verification code without
+          naming the system.
+    independence_record: docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-12'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-12 intake, prompted
+        separately from the import lane
+      note: >-
+        Accepted for finite feasibility only. All 9 retained jobs reproduced on both
+        maintained routes in full, the frozen comparison rebuilt equal, and the third route
+        agreed with them at every side, pose, wall clearance and frozen claim, held each
+        retained file to its upstream bytes and reached every one of its 18 controls'
+        required outcomes. Findings RX-1 to RX-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic
+      only; no source program ran. The receipt's nine jobs hold 460422 pair decisions,
+      647.47 route CPU seconds and 1544.83 job wall seconds; the longest job took 291.46 s.
+      Every positive clears every wall by about 5.00e-21 and every pair by a least
+      Euclidean distance of 5.000000e-21. The kernel's two controls are gross (RX-6); the
+      third route's six are sharp. Private-worker custody was closed on 12 October 2026
+      (packing/devtools/house-custody-2026-10-11.json), when the case records adopted the
+      three certificates
+      as houses. Finite feasibility only: no local or global optimality, no rigidity, and
+      nothing about the 38-square rectangle or Friedman's piece beyond the author's
+      statement.
+    source_reviewed: '2026-10-12'
+
+  - id: E-calle-529-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [102]
+    assurance: reported
+    reported_method: numerical-multiprecision
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Calle n102 2026-10-12]'
+    certificate: packing/resources/web/riocalle-n102-2026-10-12/acquisition/sources.json
+    precision: {decimal_digits: 60, rounding: source-defined}
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-12'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-12 intake, prompted
+        separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md accepted the
+        derived certificate for finite feasibility only, with eleven non-blocking findings
+        (RX-1 to RX-11); the replay it reproduced is E-calle-529-exact-feasibility.
+    limitations: >-
+      This atom records Rio Calle's report at 8313686: a decimal layout of 102 unit squares,
+      centres and radian rotations at 18 significant digits, at the printed side
+      10.605828696455852, accepted by his verify_exact.py, a 60-digit decimal
+      separating-axis check that rounds, and by his search engine's exact rational-interval
+      certificate, which is private and cannot be rerun; verify_exact.py was run once by
+      the import lane outside the repository and reproduced its two gaps. No upstream byte
+      is retained, the source stating no licence; the certificate field names the
+      acquisition record that pins the layout by digest. The bound rests on the separate
+      confirming entry's derived certificate, E-calle-529-exact-feasibility. The source
+      states AI assistance (Claude). No local or global optimality is claimed.
+    source_reviewed: '2026-10-12'
+
+  - id: E-calle-529-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [102]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Calle n102 2026-10-12]'
+    certificate: packing/resources/web/riocalle-n102-2026-10-12/facts/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      riocalle-n102-2026-10-12 check --replay decides all 3 retained jobs again through
+      both maintained routes and holds each to its retained row (all equal, 2 min 0 s on
+      2026-10-12); check-claims rebuilds the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 --imports '#528' '#529'
+      --upstream riocalle-n102-2026-10-12 DIRECTORY decides the certificate by the third
+      route with six controls and derives it again from the layout fetched at the pin into
+      DIRECTORY with the route's own reader and arithmetic (no disagreement).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate derived here from Rio Calle's layout of 102 squares, every wall and
+          every pair decided by both maintained routes and again by the third route, which
+          also derived it again from the layout at the pin
+        checked: 1
+        of: 1
+      read: [specification, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the import lane of issue 529, which wrote the calle-txt adapter, and the stage 4
+            review lane (W2) at extra-high reasoning effort, which gave the third route its
+            decimal-layout reader; tiers not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue and README say Claude wrote and ran the source's code, its checkers among
+          them; the project's code is Claude's too, written from prompts of its own. The
+          review read the source's verify_exact.py and did not run it; the adapter and the
+          third route's reader parse the layout with code of their own.
+    independence_record: docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-12'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-12 intake, prompted
+        separately from the import lane
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes in full, the frozen comparison rebuilt equal, and the third route
+        agreed with them at the side, every pose, the wall clearance and the frozen claim,
+        derived the certificate again from its pinned layout and reached every one of its 6
+        controls' required outcomes. Findings RX-1 to RX-11, none blocking.
+    limitations: >-
+      The certificate is the repository's derivation from the pinned layout, every decimal
+      as printed and each half-angle tangent rounded down at 40 places, decided by two
+      maintained exact routes that share certificate parsing, the importer's interval
+      floor, Fraction arithmetic and the separating-axis method, and by a third exact route
+      with its own reader and floor that shares Fraction arithmetic only; no source
+      program ran here. The kernel's two controls are gross (RX-6); the third route's six
+      are sharp. No retained check binds the fact to upstream bytes beyond the review's
+      one derivation at the pin (RX-7). Finite feasibility only: no local or global optimality,
+      no rigidity, and nothing about the author's private certificate or his valley
+      bottom.
+    source_reviewed: '2026-10-12'
+
+  - id: E-n011-kleddamag-3875-esummins-replay-report
+    claim: lower-bound
+    scope: {n_values: [11]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: independent-external
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Summins stratification series 2026-10-12]'
+    certificate: resources/web/external-square-certificates-2026-09-22/kleddamag-11/global-certificate.json
+    replay_status: not-attempted
+    verifiers: [V-kleddamag-n11-verify]
+    limitations: >-
+      E. Summins' n = 11 lab, at Esummins/packing 651a9a54688341880e9c0dc9fcfc19f2c04cd3cb
+      (attempts/A242-replay-31-8/, reported on jlevy/squares#521), reports a third party's
+      re-run of Kleddamag's v1.0.2 certificate for s(11) > 31/8: the release's own exact
+      Python sweep (exact_mixed.py and integer_sweep.py, driven by the lab's rows242.py in
+      two shards, numba replaced by an identity shim) over all 12,028 rows, 0 differing
+      from both of the release's evidence files, minimum 999962528 at row 11962, budget
+      10999479944, surplus 107864, 86,299,918 slabs and 511,649,694,680 cells, 8,089 CPU
+      seconds at the lab; the release's controls and integrity check re-run; and a spot
+      check in the lab's own Fraction and integer code, spot242.py, of the scaling, the
+      budget, 3,240 exact poses and the counting margin. The lab's PIN.json names the
+      certificate and evidence file by the digests this repository's copies have. The
+      totals agree with E-n011-kleddamag-3875-source-replay. spot242.py was read and re-run
+      here from a scratch layout against the retained certificate with the lab's arguments
+      and reproduced its 3,240 rows byte for byte (the packet's receipts/spot242-rerun-*);
+      a sample of poses is a diagnostic, and the row sweep was not re-run here. The
+      deciding programs are the producer's, so this is a reproduction with the producer's
+      code, an attribute beside T-037's rung and no rung of its own; whether it is
+      recorded as a third party's retained replay (origin independently-external) is the
+      owner's decision (think-6t6q). The lab did not run the release's secondary
+      JavaScript checker. The lab states its work was produced by AI agents (Claude,
+      Anthropic) under the PI's direction.
+    source_reviewed: '2026-10-12'
+
+  - id: E-evand-552-n154-report
+    claim: upper-bound
+    scope:
+      n_values: [154]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n154 2026-10-12]'
+    certificate: packing/resources/web/evand-n154-2026-10-12/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-12'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-12 intake continuation,
+        prompted separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-12-upper-bound-import-552.md accepted the
+        certificate for finite feasibility only, with seven non-blocking findings (RD-1 to
+        RD-7); the replay it reproduced is E-evand-552-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      597e660, retained byte for byte under the source's MIT licence with the regularized
+      drawing of the same packing beside it, and of his two exact checkers, pinned and not
+      run here. A separate complete repository replay is retained for n = 154: 1 positive
+      and 2 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 70686 pair decisions; summed over the 3 jobs, the receipt records
+      40.97 route CPU seconds and 80.68 job wall seconds, the longest job 29.49 seconds.
+      Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21. The source's own checkers were not run here. The two maintained routes, the
+      sqpack rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. The KKT, Hessian and jamming statements and the chain's
+      history are the author's statements, recorded and not decided. No two independent
+      methods, human oversight or optimality is claimed.
+    source_reviewed: '2026-10-12'
+
+  - id: E-evand-552-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [154]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n154 2026-10-12]'
+    certificate: packing/resources/web/evand-n154-2026-10-12/source/search/packer/candidates/tt_n154.cert
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      evand-n154-2026-10-12 check --replay decides all 3 retained jobs again through both
+      maintained routes and holds each to its retained row (all equal on 2026-10-12, 51 s
+      wall on a loaded host); check-claims rebuilds the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 --imports '#552' --upstream
+      evand-n154-2026-10-12 DIRECTORY decides the certificate by the third route with six
+      controls and holds the retained file to its bytes fetched at the pin into DIRECTORY
+      (no disagreement, 25.05 s).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the complete certificate at n = 154, every wall and every pair decided by both
+          maintained routes and again by the third route; the two kernel controls and the
+          third route's controls are retained separately
+        checked: 1
+        of: 1
+      read: [specification, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the lane that wrote devtools.evand_exact_certificates for T-101's import of 5 and
+            6 October 2026, whose parse and half-angle map both maintained routes use;
+            tier and reasoning setting not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the source's search code, run and request were done with Claude,
+          which Evan Daniel directed; the project's routes are Claude's too, written from
+          prompts of their own. Both maintained routes take their parse and half-angle map
+          from devtools.evand_exact_certificates (V-evand-exact-certificates), whose read log
+          says its author read the source's verify_cert.py and verify_cert2.py before writing
+          it; the copies at 597e660 are byte-identical to those, so the run is not
+          clean-room. No route imports or copies them, and neither was run here.
+    independence_record: docs/project/reviews/review-2026-10-12-upper-bound-import-552.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-12'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-12 intake continuation,
+        prompted separately from the import lane
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes in full, the frozen comparison rebuilt equal, and the third route
+        agreed with them at the side, every pose, the least wall clearance and the frozen
+        claim, held the retained file to its upstream bytes and reached every one of its six
+        controls' required outcomes. Findings RD-1 to RD-7, none blocking.
+    limitations: >-
+      A replay of the retained certificate by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic
+      only; no source program ran. The receipt's three jobs hold 70686 pair decisions,
+      40.97 route CPU seconds and 80.68 job wall seconds; the longest job took 29.49 s. The
+      positive clears every wall by exactly 5.00e-21 at the low walls and 5.0000000007e-21
+      at the far walls, and every pair by a separating-axis gap just under 1.00e-20, which
+      the third route's least Euclidean distance equals exactly. The kernel's two controls
+      are gross (RD-6); the third route's six are sharp. Private-worker custody was closed
+      on 12 October 2026 (packing/devtools/house-custody-2026-10-11.json), when the case
+      record adopted the certificate as the house. Finite feasibility only: no local or
+      global optimality, no rigidity, and nothing about the chain the packing came from
+      beyond the author's statement.
+    source_reviewed: '2026-10-12'

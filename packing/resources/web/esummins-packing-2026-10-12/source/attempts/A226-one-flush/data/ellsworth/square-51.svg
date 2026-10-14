@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found               by Thomas Schadt   on or before January 15, 2026 using a simulated annealing computer program he wrote, starting from randomness.
+    Refined             by Thomas Schadt   on or before January 15, 2026 (to s=7.700804044578232) using a simulated annealing computer program he wrote, possibly incorporating the refinement technique from David Ellsworth's version of the program. (Not that this made any difference in the end, besides complicating the assignment of credit.)
+    Refound and refined by David Ellsworth on           January 31, 2026 (to s=7.700803901920673) using his modified version of Thomas Schadt's simulated annealing computer program, starting from randomness.
+    Optimized by David Ellsworth on February 1, 2026, with exact polynomial root solution.
+
+    Unset[{s, a, b, c, r1, v2, u3, u4, r5, u6, f1, f2, f3, solution}];
+    r1 = 1 - (s - 7)*Cos[a];
+    v2 = RotationTransform[a][{3, 1} - {1, 2}][[2]];
+    u3 = RotationTransform[a][{1, s - 4} - ({3, 1} + RotationTransform[-a][{-3 - r1, -v2}])][[1]];
+    u4 = Cos[a] - Sin[a];
+    r5 = 2 - RotationTransform[-b][{4, s - 2} - ({3, 1} + RotationTransform[-a][{-r1 + u3 + u4, 4}])][[2]];
+    u6 = Cos[b] - Sin[b];
+    y7 = Sin[c];
+    u8 = RotationTransform[c][{s, s - 2 - y7} - {s - 1, 4}][[1]];
+    u9 = RotationTransform[c][{s, s - 2 - y7} - {s - 2, 3}][[1]];
+    uA = u9 - RotationTransform[c][{s - 2, 3} - ({s, s - 2 - y7} + RotationTransform[-c][{-u9, -3}])][[2]]*Tan[c];
+    f1 = ({3, 1} + RotationTransform[-a][{-3 - r1, -v2}])[[1]];
+    f2 = RotationTransform[-b][{s - 1, s - 2} - ({3, 1} + RotationTransform[-a][{-r1 + u3 + u4, 4}])][[1]] - 2;
+    f3 = Det[Grad[{s, f1, f2}, {s, a, b}]];
+    f4 = RotationTransform[a][({s, s - 2 - y7} + RotationTransform[-c][{-1 - uA, -4}]) - {2, s - 3}][[1]] - 3;
+    solution = FindRoot[{f1==0, f2==0, f3==0, f4==0}, {{s, 7.7}, {a, 32*Pi/180}, {b, Pi/4}, {c, 41*Pi/180}}, WorkingPrecision -> 100];
+    N[{s, a*180/Pi, b*180/Pi, c*180/Pi, r1, v2, u3, u4, r5, u6, y7, u8, u9, uA, {f1, f2, f3, f4}} /. solution, 50]
+
+    algdep(s, 130, 22000)                    (* took 424.299 seconds; verified to 40000 digits *)
+    RootApproximant[Tan[a] /. solution, 12]  (* took   0.080 seconds; verified to 40000 digits *)
+    RootApproximant[Tan[b] /. solution, 12]  (* took   0.087 seconds; verified to 40000 digits *)
+(*
+    s = Root[-1119939 + 14600744*# - 1070690*#^2 - 4669592*#^3 + 5185145*#^4 - 3878332*#^5 + 1885642*#^6 - 584196*#^7 + 116250*#^8 - 14808*#^9 + 1168*#^10 - 52*#^11 + #^12, 4]
+    a = ArcTan[Root[-3 - 4*# + 32*#^2 - 28*#^3 + 110*#^4 - 252*#^5 + 182*#^6 - 152*#^7 + 121*#^8 - 60*#^9 - 2*#^10 + 8*#^11 + #^12, 3]]
+    b = ArcTan[Root[8892967 - 46826784*# + 123614746*#^2 - 215466912*#^3 + 275590361*#^4 - 277701440*#^5 + 218774252*#^6 - 133500736*#^7 + 62153577*#^8 - 20474272*#^9 + 4427738*#^10 + 524512*#^11 + 11895*#^12, 4]]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "7.7007992354170117234288477569189654333524112673258">
+    <!ENTITY a  "32.185836035353965468076907944246382894197571788373">
+    <!ENTITY b  "44.936616579606605641526486212902955590486416092341">
+    <!ENTITY c  "40.845666870995153990667615965673431924914082238021">
+    <!ENTITY r1 ".40689617717228177318240263256100858200884161449297">
+    <!ENTITY v2 ".21900927699632756453784130314013246177725065480476">
+    <!ENTITY u3 ".27561960747301062355310861636776036846663151883122">
+    <!ENTITY u4 ".31365779722766205542113195554081658632532781360004">
+    <!ENTITY r5 ".09236037771731266655845901993187378468008039823466">
+    <!ENTITY u6 ".00156447255328030748675811404285064063165413894213">
+    <!ENTITY y7 ".65402374964094440119194617161655936943415745944840">
+    <!ENTITY u8 ".07185798645341895319847968321152877201807178387596">
+    <!ENTITY u9 ".17430825150537811668393267279360627332455949498181">
+    <!ENTITY uA ".05013886840853914087654791404383985997858977601407">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+        <g id="two">
+            <rect width="2" height="1"/>
+            <path style="fill:none" d="M1,0 V1"/>
+        </g>
+        <g id="three">
+            <rect width="3" height="1"/>
+            <path style="fill:none" d="M1,0 V1
+                                       M2,0 V1"/>
+        </g>
+        <g id="two2">
+            <rect width="1" height="2"/>
+            <path style="fill:none" d="M0,1 H1"/>
+        </g>
+        <g id="two_two">
+            <rect width="2" height="2"/>
+            <path style="fill:none" d="M1,0 V2"/>
+            <path style="fill:none" d="M0,1 H2"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <path style="stroke:none" d="M3,0 V1 H1 V2 H0 V0"/>
+        <path style=  "fill:none" d="M3,0 V1 H0
+                                     M2,0 V1
+                                     M1,0 V2 H0"/>
+    </g>
+    <g transform="translate(&s;) scale(-1 1)">
+        <path style="stroke:none" d="M4,0 V1 H3 V2 H2 V3 H1 V4 H0 V0"/>
+        <path style=  "fill:none" d="M4,0 V1 H0
+                                     M3,0 V2 H0
+                                     M2,0 V3 H0
+                                     M1,0 V4 H0"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <path style="stroke:none" d="M5,0 V1 H4 V2 H2 V3 H1 V4 H0 V0"/>
+        <path style=  "fill:none" d="M5,0 V1 H0
+                                     M4,0 V2 H0
+                                     M3,0 V2
+                                     M2,0 V3 H0
+                                     M1,0 V4 H0"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1)">
+        <path style="stroke:none" d="M2,0 V1 H1 V2 H0 V0"/>
+        <path style=  "fill:none" d="M2,0 V1 H0
+                                     M1,0 V2 H0"/>
+    </g>
+    <g transform="translate(3 1) rotate(-&a;) translate(-&r1;)">
+        <use xlink:href="#one"/>
+        <g transform="translate(-3 -&v2;)">
+            <use xlink:href="#three"/>
+            <g transform="translate(&u3; 1)">
+                <use xlink:href="#two"/>
+                <use xlink:href="#two" transform="translate(2 &v2;)"/>
+                <g transform="translate(&u4; 1)">
+                    <use xlink:href="#two2"/>
+                    <g transform="translate(1 &v2;)">
+                        <use xlink:href="#two_two"/>
+                        <g transform="translate(2 2) rotate(&a;) rotate(&b;) translate(0 -&r5;)">
+                            <use xlink:href="#two"/>
+                            <use xlink:href="#two" transform="translate(-&u6; 1)"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(&s; &s;) translate(0 -2&y7;) rotate(-&c;) translate(-1 -1)">
+        <use xlink:href="#one"/>
+        <use xlink:href="#one" transform="translate(-&u8; -1)"/>
+        <use xlink:href="#one" transform="translate(-&u9; -2)"/>
+        <use xlink:href="#one" transform="translate(-&uA; -3)"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

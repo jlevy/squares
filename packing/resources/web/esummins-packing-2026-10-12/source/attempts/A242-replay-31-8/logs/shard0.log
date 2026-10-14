@@ -1,0 +1,33 @@
+shard 0/2 rows [0,6014) done 0 margin 1/1000000000000
+row 0 min 1000047518 elapsed 1s
+row 200 min 1000047518 elapsed 128s
+row 400 min 1000047518 elapsed 258s
+row 600 min 1000047518 elapsed 406s
+row 800 min 1000047518 elapsed 564s
+row 1000 min 1000047518 elapsed 700s
+row 1200 min 1000047518 elapsed 834s
+row 1400 min 1000047518 elapsed 966s
+row 1600 min 1000047518 elapsed 1094s
+row 1800 min 1000047518 elapsed 1218s
+row 2000 min 1000047518 elapsed 1345s
+row 2200 min 1000047518 elapsed 1471s
+row 2400 min 1000047518 elapsed 1596s
+row 2600 min 1000047518 elapsed 1720s
+row 2800 min 1000047518 elapsed 1847s
+row 3000 min 1000047518 elapsed 1970s
+row 3200 min 1000047518 elapsed 2099s
+row 3400 min 1000047518 elapsed 2224s
+row 3600 min 1000047518 elapsed 2356s
+row 3800 min 1000047518 elapsed 2494s
+row 4000 min 1000047518 elapsed 2623s
+row 4200 min 1000047518 elapsed 2752s
+row 4400 min 1000047518 elapsed 2881s
+row 4600 min 1000047518 elapsed 3011s
+row 4800 min 1000047518 elapsed 3142s
+row 5000 min 1000047518 elapsed 3272s
+row 5200 min 1000047518 elapsed 3403s
+row 5400 min 1000047518 elapsed 3533s
+row 5600 min 1000047518 elapsed 3664s
+row 5800 min 1000047518 elapsed 3795s
+row 6000 min 1000047518 elapsed 3926s
+shard 0/2 DONE 3935s

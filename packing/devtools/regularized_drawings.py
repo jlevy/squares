@@ -1362,7 +1362,13 @@ def first_certified_problems(register: Register) -> list[str]:
     must name it, as T-155's do at the 33 counts whose bound T-101's replay of Evan
     Daniel's certificates also proves. An item that names a result the case's bound does
     not rest on beside the registering one, or names one where the bound rests on the
-    registering result alone, is listed."""
+    registering result alone, is listed.
+
+    A count a later house adoption holds is history for the item: the case's bound rests
+    on the adopted house alone, below the item's side, and the item still names who first
+    stated that side, as T-155's does at n = 264, where issue 528's packing (T-158) was
+    adopted (`register_regularized_bounds.readopted`)."""
+    from devtools import register_regularized_bounds as registration  # noqa: PLC0415
     from devtools.check_results import result_date  # noqa: PLC0415
 
     dated = {str(result["id"]): result_date(result) for result in register.results}
@@ -1383,6 +1389,8 @@ def first_certified_problems(register: Register) -> list[str]:
             named = record.get(FIRST_CERTIFIED)
             earlier = [other for other in holders if other != rid and no_later(other, rid)]
             name = f"{rid}'s regularization at n = {n}"
+            if rid not in holders and registration.readopted_by(n, rid):
+                continue
             if named is not None and (rid not in holders or str(named) not in earlier):
                 found.append(
                     f"{name} names {named} as {FIRST_CERTIFIED}, but the case's verified "

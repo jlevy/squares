@@ -5,6 +5,7 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -1713,3 +1714,557 @@ def test_the_506_packings_are_their_named_parents_moved() -> None:
     shift = [Fraction(value) for value in placement["translation"]]
     assert all(Fraction(-9110, 10**8) < value < Fraction(-9109, 10**8) for value in shift)
     assert abs(shift[0] - shift[1]) < Fraction(1, 10**14)
+
+
+# --------------------------------------------------------------------------- #528 and #529
+
+#: Two squares in Rio Calle's decimal text: labelled comment lines, a prose comment, and
+#: centres and radian rotations as plain or scientific decimals.
+CALLE_TEXT = (
+    "# n = 2\n# s = 2.5\n# x y theta(rad) - square centres in the box [0, s]^2, side 1\n"
+    "5.0e-01 5.00000000000000000e-01 0.00000000000000000e+00\n"
+    "1.75 0.6 7.85398163397448279e-01\n"
+)
+CALLE_ROW: dict[str, Any] = {
+    "n": 2,
+    "path": "n2.txt",
+    "format": "calle-txt",
+    "offered": "2.5",
+    "options": [{"name": "half_angle_places", "value": "32"}],
+    "fact": "facts/n-002.yaml",
+}
+OSTASHEV_528 = {
+    175: Fraction(
+        27528348634973193258855646440084685651524191041221518308579027528348634973193258855646440084685651524191041221518308579,
+        2 * 10**117,
+    ),
+    232: Fraction(
+        31528348634973193258895646440084685651524191041221518308579031528348634973193258895646440084685651524191041221518308579,
+        2 * 10**117,
+    ),
+    264: Fraction(
+        167747351323878328426102645873217709808239488409494842884223167747351323878328426102645873217709808239488409494842884223,
+        10**118,
+    ),
+}
+CALLE_102 = Fraction(2651457174113963, 25 * 10**13)
+
+
+def test_the_528_and_529_rosters_are_the_counts_their_issues_request() -> None:
+    """#528's three retained sqcert files and #529's one derived fact, at the exact sides
+    their frozen claim records state."""
+    found = route.import_cases(("#528", "#529"))
+    assert [(case.issue, case.n, case.read) for case in found] == [
+        ("#528", 175, "source/records/n0175.sqcert"),
+        ("#528", 232, "source/records/n0232.sqcert"),
+        ("#528", 264, "source/records/n0264.sqcert"),
+        ("#529", 102, "facts/n-102.yaml"),
+    ]
+    sides = {(case.issue, case.n): case.side for case in found}
+    for case in found:
+        assert len(case.placements) == case.n
+    for n, side in OSTASHEV_528.items():
+        assert sides["#528", n] == side
+    assert sides["#529", 102] == CALLE_102
+    # Each is admitted against the print its declaration offers: #528's by rounding up at
+    # the issue's 38 places, #529's by equality with the printed side.
+    for case in found:
+        declared = upper.load_declaration(route.WEB / case.packet)["certificates"]
+        offered = next(row["offered"] for row in declared if row["n"] == case.n)
+        assert admitted(case.side, offered)
+        assert (literal(offered) == case.side) is (case.issue == "#529")
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("2.50000000000700018e+00", Fraction(250000000000700018, 10**17)),
+        ("-6.32021957015244111e-15", Fraction(-632021957015244111, 10**32)),
+        ("5.0e-01", Fraction(1, 2)),
+        ("1.0e+03", Fraction(1000)),
+        ("1.5", Fraction(3, 2)),
+        ("-0.25", Fraction(-1, 4)),
+        ("0.00000000000000000e+00", Fraction(0)),
+    ],
+)
+def test_a_scientific_decimal_is_read_exactly(text: str, expected: Fraction) -> None:
+    assert route.decimal_literal(text) == expected
+
+
+@pytest.mark.parametrize(
+    "text",
+    ["1e3", "1.", ".5", "1.0e3", "1.0e+1234", "+1.0", " 1.0", "1.0E+00", "1/2", "inf", ""],
+)
+def test_a_decimal_in_any_other_form_is_refused(text: str) -> None:
+    with pytest.raises(AreaRouteError):
+        route.decimal_literal(text)
+
+
+def test_the_calle_reader_reads_every_digit_exactly_and_skips_the_prose() -> None:
+    printed, squares = route.read_calle_txt(CALLE_TEXT.encode(), 2)
+    assert printed == "2.5"
+    assert squares == (
+        (Fraction(1, 2), Fraction(1, 2), Fraction(0)),
+        (Fraction(7, 4), Fraction(3, 5), Fraction(785398163397448279, 10**18)),
+    )
+    # The labelled lines may come in either order, among other comments.
+    swapped = CALLE_TEXT.replace("# n = 2\n# s = 2.5\n", "# s = 2.5\n# a note\n# n = 2\n")
+    assert route.read_calle_txt(swapped.encode(), 2) == (printed, squares)
+
+
+@pytest.mark.parametrize(
+    ("text", "n"),
+    [
+        (CALLE_TEXT, 3),
+        (CALLE_TEXT.replace("# n = 2\n", ""), 2),
+        (CALLE_TEXT.replace("# n = 2\n", "# n = 2\n# n = 2\n"), 2),
+        (CALLE_TEXT.replace("# n = 2\n", "# n = 02\n"), 2),
+        (CALLE_TEXT.replace("# s = 2.5\n", ""), 2),
+        (CALLE_TEXT.replace("# s = 2.5\n", "# s = 2.5\n# s = 2.5\n"), 2),
+        (CALLE_TEXT.replace("# s = 2.5\n", "# s = 2.5e+00\n"), 2),
+        (CALLE_TEXT.replace("1.75 0.6 ", "1.75 "), 2),
+        (CALLE_TEXT.replace("1.75 0.6 ", "1.75 0.6 0.0 "), 2),
+        (CALLE_TEXT + "0.5 1.5 0.0\n", 2),
+        (CALLE_TEXT.replace("1.75 0.6 7.85398163397448279e-01\n", ""), 2),
+        (CALLE_TEXT.replace("1.75 0.6", "7/4 0.6"), 2),
+        (CALLE_TEXT + "a prose line\n", 2),
+    ],
+)
+def test_the_calle_reader_refuses_what_its_format_does_not_state(text: str, n: int) -> None:
+    """Another count; the count or side line missing, doubled, padded or in scientific
+    notation; a short, long, missing or extra row; a rational field; an unmarked line."""
+    with pytest.raises(AreaRouteError):
+        route.read_calle_txt(text.encode(), n)
+
+
+def test_the_radian_half_angle_floor_is_the_tangent_rounded_down() -> None:
+    """tan(x) = x + x^3/3 + ...: at theta = 1e-15 the cubic term, about 4e-47, is below
+    the 40th place, so the floor is 5e-16 exactly; at -1e-15 the floor is one unit below."""
+    assert route.half_angle_floor_radians(Fraction(0), 40) == 0
+    assert route.half_angle_floor_radians(Fraction(1, 10**15), 40) == Fraction(5, 10**16)
+    assert route.half_angle_floor_radians(Fraction(-1, 10**15), 40) == -Fraction(
+        5 * 10**24 + 1, 10**40
+    )
+    # An irrational tangent floors one unit lower on the negative side.
+    positive = route.half_angle_floor_radians(Fraction(3, 7), 40)
+    negative = route.half_angle_floor_radians(Fraction(-3, 7), 40)
+    assert negative == -positive - Fraction(1, 10**40)
+    assert positive.denominator == 10**40
+    assert positive > Fraction(21, 100)
+    assert positive < Fraction(22, 100)
+
+
+@pytest.mark.parametrize("theta", [Fraction(3), Fraction(-3), Fraction(31, 10)])
+def test_the_radian_half_angle_floor_refuses_an_angle_near_the_pole(theta: Fraction) -> None:
+    with pytest.raises(AreaRouteError):
+        route.half_angle_floor_radians(theta, 32)
+
+
+@pytest.mark.parametrize(
+    "theta",
+    [
+        "-6.32021957015244111e-15",
+        "1.55692651715997998e+00",
+        "7.52069804568131661e-01",
+        "1.57079632679489523e+00",
+        "-1.2",
+        "2.9999",
+    ],
+)
+def test_the_radian_half_angle_floor_agrees_with_the_importers_interval_floor(
+    theta: str,
+) -> None:
+    angle = route.decimal_literal(theta)
+    for places in (32, 40):
+        expected = upper.half_angle_tangent_radians(angle, places)
+        assert route.half_angle_floor_radians(angle, places) == expected
+
+
+def _calle_witness() -> tuple[Fraction, tuple[route.Placed, ...]]:
+    t = route.half_angle_floor_radians(Fraction(785398163397448279, 10**18), 32)
+    return Fraction(5, 2), (
+        (Fraction(1, 2), Fraction(1, 2), Fraction(1), Fraction(0)),
+        (Fraction(7, 4), Fraction(3, 5), *rotation(t)),
+    )
+
+
+def test_a_calle_layout_is_derived_as_the_importers_adapter_derives_it() -> None:
+    raw = CALLE_TEXT.encode()
+    assert route.derive_calle_txt(raw, CALLE_ROW) == _calle_witness()
+    certificate = upper.calle_txt(raw, 2, {"half_angle_places": "32"})
+    derived = (certificate.side, tuple((p.x, p.y, *p.basis) for p in certificate.poses))
+    assert derived == _calle_witness()
+    assert {
+        "decimal-dilation": route.derive_decimal_pose,
+        "calle-txt": route.derive_calle_txt,
+    } == route.DERIVED_READERS
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"offered": "2.6"},
+        {"offered": "2.50000000000001"},
+        {"options": []},
+        {"options": [*CALLE_ROW["options"], {"name": "dilation", "value": "1"}]},
+        {"options": [{"name": "dilation", "value": "1"}]},
+    ],
+)
+def test_a_calle_layout_off_its_print_or_options_is_refused(change: dict[str, Any]) -> None:
+    with pytest.raises(AreaRouteError):
+        route.derive_calle_txt(CALLE_TEXT.encode(), {**CALLE_ROW, **change})
+
+
+@pytest.fixture
+def calle_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path, Path]:
+    """A #529-style packet of two derived squares, with its layout pinned by digest."""
+    monkeypatch.setattr(route, "REPO", tmp_path)
+    upstream = tmp_path / "upstream"
+    upstream.mkdir()
+    (upstream / CALLE_ROW["path"]).write_text(CALLE_TEXT, encoding="utf-8")
+    packet = tmp_path / "packet"
+    (packet / "acquisition").mkdir(parents=True)
+    (packet / "facts").mkdir()
+    digest = hashlib.sha256(CALLE_TEXT.encode()).hexdigest()
+    pinned = [{"path": CALLE_ROW["path"], "sha256": digest}]
+    record = {"sources": [{"source_commit": "3" * 40, "pinned_only": pinned}]}
+    (packet / "acquisition/sources.json").write_text(json.dumps(record), encoding="utf-8")
+    declaration = {"certificates": [CALLE_ROW], "requested": [2], "replayed": [2]}
+    (packet / "acquisition/report.json").write_text(json.dumps(declaration), encoding="utf-8")
+    (packet / "facts/n-002.yaml").write_text(_fact_text(*_calle_witness()), encoding="utf-8")
+    return packet, upstream
+
+
+def test_a_derived_calle_fact_is_held_to_its_pinned_layout(
+    calle_packet: tuple[Path, Path],
+) -> None:
+    packet, upstream = calle_packet
+    assert route.upstream_problems(packet, upstream) == (1, [])
+    side, placements = _calle_witness()
+    x, y, _c, _s = placements[1]
+    turned = (placements[0], (x, y, *rotation(Fraction(1, 10**32))))
+    (packet / "facts/n-002.yaml").write_text(_fact_text(side, turned), encoding="utf-8")
+    assert route.upstream_problems(packet, upstream) == (
+        1,
+        ["packet n=2: the fact is not the packing n2.txt states"],
+    )
+    (packet / "facts/n-002.yaml").write_text(_fact_text(side, placements), encoding="utf-8")
+    (upstream / "n2.txt").write_text(CALLE_TEXT.replace("0.6", "0.7"), encoding="utf-8")
+    assert route.upstream_problems(packet, upstream) == (
+        0,
+        ["packet: n2.txt is not the file the packet pins"],
+    )
+
+
+def test_the_houses_528_and_529_are_measured_against_are_read_as_their_entries_state() -> None:
+    """Couzo's refinement at 175 (T-140, #488's certificate), Couzo's unregistered 337078c
+    certificate at 175 (#506's unrequested row), Ryan Xu's at 175 and 102 (T-125), SQUISH's
+    at 232 (T-136), Evan Daniel's certificates of the catalogue packings at 264 and 171
+    (T-101) and of de Winter's s(126) (T-098), and his regularized view at 102 (T-146)."""
+    assert route.credited("#528", 175) == ("T-140", "#506", "T-125")
+    assert route.credited("#528", 232) == ("T-136",)
+    assert route.credited("#528", 264) == ("T-101",)
+    assert route.credited("#529", 102) == ("T-125", "T-146")
+    assert route.CREDITED_READERS["T-101"] is route.evand_optimum_packing
+    sides = {
+        ("T-140", 175): Fraction(860445045293269576081339809497, 625 * 10**26),
+        ("#506", 175): Fraction(27534238048396728577781532581, 2 * 10**27),
+        ("T-125", 175): Fraction(68844496383068844496383, 5 * 10**21),
+        ("T-101", 264): Fraction(4194543648263005692144267432271, 25 * 10**28),
+        ("T-101", 171): Fraction(13571428571428571428707142857143, 10**30),
+        ("T-098", 126): Fraction(5887367566193916421280132293661, 5 * 10**29),
+        ("T-125", 102): Fraction(21211657393021211657393, 2 * 10**21),
+        ("T-146", 102): Fraction(10605828696431578360490734944053, 10**30),
+    }
+    for (key, m), expected in sides.items():
+        side, placements = route.parent_packing(key, m)
+        assert side == expected
+        assert len(placements) == m
+    assert route.LINEAGE["#528", 175] == ("T-101", 171, Fraction(1))
+    assert route.LINEAGE["#528", 264] == ("T-098", 126, Fraction(1))
+
+
+#: #528's least wall clearance at 232 is the corner square's of #501's 155 and 156: half
+#: the 1 + 1e-20 scaling of the load-bearing squares carried through the 1 + 1e-60
+#: dilation; at 175 and 264 a tilted square is nearest and its clearance is a longer
+#: rational of the same size. #529's margins are the ones the issue states, exact.
+OSTASHEV_528_WALL = (
+    "1000000000000000000000000000000000000000100000000000000000001/" + "2" + "0" * 80
+)
+
+
+@pytest.mark.parametrize(
+    ("issue", "n", "clearance", "least_distance"),
+    [
+        ("#528", 175, "5.000000e-21", "5.000000e-21"),
+        pytest.param("#528", 232, "5.000000e-21", "5.000000e-21", marks=pytest.mark.slow),
+        pytest.param("#528", 264, "5.000000e-21", "5.000000e-21", marks=pytest.mark.slow),
+        ("#529", 102, "2.002066e-12", "1.932818e-12"),
+    ],
+)
+def test_the_528_and_529_imports_agree_with_their_receipts_plans_and_prints_to_every_digit(
+    issue: str, n: int, clearance: str, least_distance: str
+) -> None:
+    case = next(case for case in route.import_cases((issue,)) if case.n == n)
+    row = route.decide_import(case)
+    packet = route.WEB / case.packet
+    maintained = upper.check_certification(packet)[n]
+    claims = dict(
+        route.PLAN_CLAIM.findall(upper.register_plan(packet)["results.yaml"]["claim"])
+    )
+    frozen = next(r for r in upper.check_claims(packet)["results"] if r["n"] == n)
+    assert row["passed"]
+    assert row["wall_contacts"] == 0
+    assert f"{float(literal(row['wall_clearance'])):.6e}" == clearance
+    assert row["least_distance"] == least_distance
+    assert all(row["controls"].values())
+    if n == 232:
+        assert row["wall_clearance"] == row["far_wall_clearance"] == OSTASHEV_528_WALL
+    if issue == "#529":
+        # The box is closed at both ends by the same lift the README describes.
+        assert row["wall_clearance"] == row["far_wall_clearance"]
+    assert (
+        route.compare_import(
+            row, maintained, literal(claims[str(n)]), frozen, frozen["offered_side"]
+        )
+        == []
+    )
+
+
+@pytest.mark.slow
+def test_ostashevs_compositions_are_new_arrangements_and_calles_is_ryan_xus_design_moved() -> (
+    None
+):
+    """#528's three match no symmetry of the packing their cases hold or any report
+    pending at their counts; the pieces the issue names reappear by pose, 66 of Ellsworth's
+    s(171) squares in the 175 and 88 of de Winter's s(126) in the 264, each under a half
+    turn of its box. #529 pairs one to one with Ryan Xu's packing under a half turn, 40
+    squares within 1e-9 and 62 moved, 19 beyond a tenth: another arrangement of the
+    design, not a refinement of the packing."""
+    found = route.import_cases(("#528", "#529"))
+    gaps = route.credited_gaps(found)
+    unmatched = "no symmetry matches the two packings square for square"
+    for name in (
+        "#528 n=175 against T-140",
+        "#528 n=175 against #506",
+        "#528 n=175 against T-125",
+        "#528 n=232 against T-136",
+        "#528 n=264 against T-101",
+    ):
+        assert gaps[name]["unmatched"] == unmatched
+        assert Fraction(gaps[name]["side_difference"]) < 0
+    xu = gaps["#529 n=102 against T-125"]
+    assert (xu["symmetry"], xu["largest_displacement"]) == (2, "4.941324e-1")
+    assert xu["moved_beyond"] == {"1e-9": 62, "1e-6": 62, "1e-3": 61, "1e-2": 42, "1e-1": 19}
+    assert (xu["turned_beyond_1e-6"], xu["largest_orientation_sine"]) == (11, "6.831518e-01")
+    assert Fraction(xu["side_difference"]) == Fraction(-109507657393, 2 * 10**21)
+    daniel = gaps["#529 n=102 against T-146"]
+    assert (daniel["symmetry"], daniel["largest_displacement"]) == (1, "4.941324e-1")
+    assert daniel["moved_beyond"] == {
+        "1e-9": 61,
+        "1e-6": 61,
+        "1e-3": 59,
+        "1e-2": 44,
+        "1e-1": 25,
+    }
+    assert daniel["turned_beyond_1e-6"] == 11
+    assert Fraction(daniel["side_difference"]) == Fraction(24273639509265055947, 10**30)
+    lineage = route.lineage_gaps(found)
+    ellsworth = lineage["#528 n=175 from T-101 n=171"][0]
+    assert (ellsworth["symmetry"], ellsworth["squares"], ellsworth["turned_beyond_1e-6"]) == (
+        2,
+        66,
+        0,
+    )
+    de_winter = lineage["#528 n=264 from T-098 n=126"][0]
+    assert (de_winter["symmetry"], de_winter["squares"], de_winter["turned_beyond_1e-6"]) == (
+        2,
+        88,
+        0,
+    )
+    # The 126 sits five units along and one unit down from its box's half turn.
+    assert [round(float(Fraction(v)), 9) for v in de_winter["translation"]] == [5.0, -1.0]
+
+
+# --------------------------------------------------------------------------- #552
+
+DANIEL_552_SIDE = Fraction(12922566401934059503377267965457, 10**30)
+DANIEL_552_CERT = "source/search/packer/candidates/tt_n154.cert"
+#: The 1 + 1e-20 scaling of the KKT point about the origin corner puts the first square's
+#: centre (1 + 1e-20)/2 off each low wall; the far-wall clearance is what the scaling
+#: leaves once the side is rounded up at 30 places, the same along both axes.
+DANIEL_552_WALL = "1/200000000000000000000"
+DANIEL_552_FAR_WALL = "25000000003727/5000000000000000000000000000000000"
+COUZO_155 = Fraction(1295561959213445243801096476729, 10**29)
+COUZO_154 = Fraction(12931663721166847019324363825319, 10**30)
+SQUISH_154 = Fraction(
+    784162558492446266593660385683137819091796768322490163735346888314210507575675725,
+    60679277154496515024381071712664165344389803410694160363187109568787250164584599,
+)
+
+
+def _daniel_552_candidates() -> Path:
+    return route.WEB / "evand-n154-2026-10-12/source/search/packer/candidates"
+
+
+def test_the_552_roster_is_the_one_certificate_the_issue_requests() -> None:
+    """One retained certificate in Evan Daniel's text format at 154, admitted by equality
+    with the fraction the issue prints, 5.04e-4 below SQUISH's packing (T-136)."""
+    (case,) = route.import_cases(("#552",))
+    assert (case.issue, case.packet, case.n, case.read) == (
+        "#552",
+        "evand-n154-2026-10-12",
+        154,
+        DANIEL_552_CERT,
+    )
+    assert case.side == DANIEL_552_SIDE
+    assert len(case.placements) == 154
+    declared = upper.load_declaration(route.WEB / case.packet)["certificates"]
+    (offered,) = (row["offered"] for row in declared if row["n"] == 154)
+    assert admitted(case.side, offered)
+    assert literal(offered) == case.side
+    assert Fraction(5037, 10**7) < SQUISH_154 - case.side < Fraction(5039, 10**7)
+
+
+def test_the_552_certificate_is_its_kkt_point_scaled_by_1e_20_about_the_origin() -> None:
+    """Every centre is the 80-digit KKT centre times 1 + 1e-20 to the 35 places the
+    certificate prints, and the side is the scaled KKT side rounded up at 30 places: the
+    guard is in the certificate, as the issue says, and the routes believe none of it.
+    The KKT file's numbers run past `decimal_literal`'s 64 characters, so the standard
+    library reads them here; nothing is decided from them."""
+    side, poses = route.read_evand_cert(
+        (_daniel_552_candidates() / "tt_n154.cert").read_bytes(), 154
+    )
+    lines = (_daniel_552_candidates() / "tt_n154.exact.txt").read_text("utf-8").splitlines()
+    count, kkt_side = lines[0].split()
+    assert int(count) == 154
+    guard = 1 + Fraction(1, 10**20)
+    scaled = Fraction(Decimal(kkt_side)) * guard
+    assert side - Fraction(1, 10**30) < scaled <= side
+    assert side.denominator == 10**30
+    rows = [line.split() for line in lines[1:]]
+    assert len(rows) == 154
+    for (x, y, _t), (kx, ky, _angle) in zip(poses, rows, strict=True):
+        for value, printed in ((x, kx), (y, ky)):
+            assert abs(value - Fraction(Decimal(printed)) * guard) < Fraction(1, 10**34)
+    # 103 squares are upright, their KKT angles within 1e-60 of 0 or 1e-10 of 90 degrees.
+    assert sum(1 for _x, _y, t in poses if t == 0) == 103
+
+
+def test_the_packings_552_is_measured_against_are_read_as_their_entries_state() -> None:
+    """SQUISH's packing at 154 (T-136), the case's house, and Francisco Couzo's 5 October
+    packings at 154 and 155 as Evan Daniel's exact optima of them (T-098)."""
+    assert route.credited("#552", 154) == ("T-136", "T-098")
+    assert route.LINEAGE["#552", 154] == ("T-098", 155, Fraction(1))
+    sides = {("T-136", 154): SQUISH_154, ("T-098", 154): COUZO_154, ("T-098", 155): COUZO_155}
+    for (key, m), expected in sides.items():
+        side, placements = route.parent_packing(key, m)
+        assert side == expected
+        assert len(placements) == m
+
+
+def test_the_552_import_agrees_with_its_receipt_to_every_digit() -> None:
+    """The third route accepts the certificate with its six controls, finds no square
+    touching a wall, and agrees with both maintained routes' retained positive at the
+    side, every pose and the least wall clearance; its least Euclidean distance is at
+    least their separating-axis gap."""
+    (case,) = route.import_cases(("#552",))
+    row = route.decide_import(case)
+    maintained = upper.check_certification(route.WEB / case.packet)[154]
+    assert row["passed"]
+    assert row["wall_contacts"] == 0
+    assert row["wall_clearance"] == DANIEL_552_WALL
+    assert row["far_wall_clearance"] == DANIEL_552_FAR_WALL
+    assert row["least_distance"] == "1.000000e-20"
+    assert row["closest_pair"] == [141, 145]
+    assert all(row["controls"].values())
+    inputs = maintained["checker_input"]
+    assert literal(inputs["side"]) == case.side
+    assert [
+        (literal(x), literal(y), *rotation(literal(t))) for x, y, t in inputs["poses"]
+    ] == list(case.placements)
+    distance = literal(row["least_distance_squared"])
+    for name in ("exact_verify", "independent"):
+        found = maintained[name]
+        assert found["verification_passed"] is True
+        assert literal(found["minimum_containment_clearance"]) == literal(DANIEL_552_WALL)
+        gap = literal(found["minimum_best_pair_gap"])
+        assert Fraction(999, 10**23) < gap < Fraction(1, 10**20)
+        assert gap * gap <= distance
+
+
+@pytest.mark.slow
+def test_the_552_import_agrees_with_its_plan_frozen_claim_and_print() -> None:
+    """`compare_import` finds no disagreement with the retained positive, the register
+    plan's claim, the frozen claim record and the print the issue offers."""
+    (case,) = route.import_cases(("#552",))
+    row = route.decide_import(case)
+    packet = route.WEB / case.packet
+    maintained = upper.check_certification(packet)[154]
+    claims = dict(
+        route.PLAN_CLAIM.findall(upper.register_plan(packet)["results.yaml"]["claim"])
+    )
+    frozen = next(r for r in upper.check_claims(packet)["results"] if r["n"] == 154)
+    assert literal(frozen["offered_side"]) == case.side
+    assert (
+        route.compare_import(
+            row, maintained, literal(claims["154"]), frozen, frozen["offered_side"]
+        )
+        == []
+    )
+
+
+@pytest.mark.slow
+def test_the_regularized_drawing_of_552_passes_the_third_route_at_the_same_clearances() -> None:
+    """The source's display view of the same packing, retained beside the certificate and
+    no separate claim: the same side, the same least wall clearances and the same least
+    distance between the same closest pair. A diagnostic outside any receipt."""
+    raw = (_daniel_552_candidates() / "tt_n154_regularized.cert").read_bytes()
+    side, poses = route.read_evand_cert(raw, 154)
+    assert side == DANIEL_552_SIDE
+    row = route.verdict(side, tuple(placed(poses)))
+    assert row["passed"]
+    assert row["wall_clearance"] == DANIEL_552_WALL
+    assert row["far_wall_clearance"] == DANIEL_552_FAR_WALL
+    assert row["least_distance"] == "1.000000e-20"
+    assert row["closest_pair"] == [141, 145]
+    assert all(row["controls"].values())
+
+
+@pytest.mark.slow
+def test_daniels_154_is_another_arrangement_than_squishs_and_nearer_couzos_155() -> None:
+    """No symmetry pairs the certificate square for square with SQUISH's packing (T-136)
+    or with Couzo's 154 (T-098); under the best placement found, 32 of SQUISH's squares
+    land within 1e-9 of one of these, one to the digit. From Couzo's 155, 43 squares
+    reappear to the digit under one translation, and from Couzo's 154, 45 do, so the
+    measurement by pose does not tell the two starts apart; at a tenth of a unit the 155
+    is the nearer of Couzo's two, 114 of its squares landing on squares of this packing
+    against 87 of the 154's. The coarse count says nothing about descent: at that scale
+    SQUISH's packing lands 123, 32 of them turned, and only one to the digit."""
+    (case,) = route.import_cases(("#552",))
+    gaps = route.credited_gaps([case])
+    unmatched = "no symmetry matches the two packings square for square"
+    for key in ("T-136", "T-098"):
+        gap = gaps[f"#552 n=154 against {key}"]
+        assert gap["unmatched"] == unmatched
+        assert Fraction(gap["side_difference"]) < 0
+    (top, *_rest) = route.lineage_gaps([case])["#552 n=154 from T-098 n=155"]
+    assert (top["symmetry"], top["squares"], top["turned_beyond_1e-6"], top["exact"]) == (
+        0,
+        43,
+        0,
+        43,
+    )
+    child = (case.side, case.placements)
+    couzo_154 = route.parent_packing("T-098", 154)
+    (top_154, *_rest) = route.patch_lineage(child, couzo_154, Fraction(1))
+    assert (top_154["squares"], top_154["turned_beyond_1e-6"], top_154["exact"]) == (45, 0, 45)
+    squish = route.parent_packing("T-136", 154)
+    (top_136, *_rest) = route.patch_lineage(child, squish, Fraction(1))
+    assert (top_136["squares"], top_136["turned_beyond_1e-6"], top_136["exact"]) == (32, 0, 1)
+    tenth = Fraction(1, 10)
+    couzo_155 = route.parent_packing("T-098", 155)
+    coarse_155 = route.patch_lineage(child, couzo_155, Fraction(1), near=tenth)
+    coarse_154 = route.patch_lineage(child, couzo_154, Fraction(1), near=tenth)
+    assert max(placement["squares"] for placement in coarse_155) == 114
+    assert max(placement["squares"] for placement in coarse_154) == 87

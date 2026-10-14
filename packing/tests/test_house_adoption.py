@@ -513,9 +513,16 @@ def test_the_coverage_of_a_count_adopted_again_names_the_new_house_throughout(
 
 
 def test_a_conjecture_the_house_does_not_beat_stops_the_adoption(
-    replayed: list[adopt.Move],
+    selections: dict[int, select.Selection],
 ) -> None:
-    move = next(move for move in replayed if move.n == 232)
+    # The first pass withdrew the catalogue's conjecture at 232, so the record its later
+    # pass read (12 October, T-158) has none; the move is planned from the record the
+    # first pass read.
+    first = adopt.read_pass(houses.ADOPTED_ON)[232]
+    cases = {n: selection.case for n, selection in selections.items()}
+    cases[232] = select.parse_case(232, first)
+    planned = adopt.plan(select.select(cases=cases), texts={232: first})
+    move = next(move for move in planned if move.n == 232)
     conjecture = adopt.conjectured(move.packing)
     assert conjecture == Fraction(Decimal("15.77817459305202")) > move.house.side
     assert "  conjectured_optimum: null\n" in adopt.rewrite(move)

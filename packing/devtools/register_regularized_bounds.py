@@ -1229,6 +1229,36 @@ def batch_of(n: int) -> Batch | None:
     return next((batch for batch in BATCHES if n in committed(batch)), None)
 
 
+def readopted(n: int) -> bool:
+    """Whether a house adoption later than the batch that registers `n` holds the count.
+
+    Every batch leaves out the counts a house adoption held when its views were selected
+    (`REHOUSED`, `REHOUSED_553`), so a registered count that `upper_bound_houses` now houses
+    was adopted after it: on 12 October 2026, issue 528's packing (T-158) at `n = 264`,
+    `3.44e-03` below T-155's view there. Its case record is then `adopt_houses`'s, which
+    keeps this layer's prose as history (`adopt_houses._regularized_certificate`); this
+    layer writes nothing there, and `problems` holds the record's verified upper bound below
+    the view rather than at it. The view's bound stays true as stated.
+    """
+    from devtools import upper_bound_houses as houses  # noqa: PLC0415
+
+    batch = batch_of(n)
+    house = houses.ADOPTED.get(n)
+    return (
+        batch is not None
+        and house is not None
+        and house != batch.result
+        and houses.adopted_on(n) >= batch.registered
+    )
+
+
+def readopted_by(n: int, result: str) -> bool:
+    """Whether `result` is the batch that registers `n` and a later house holds the count
+    (`readopted`): its regularization at `n` is history there."""
+    batch = batch_of(n)
+    return batch is not None and batch.result == result and readopted(n)
+
+
 def holder(n: int) -> tuple[Batch, dict[str, Any]]:
     """The batch that registers `n`, and its row."""
     batch = batch_of(n)
@@ -1276,12 +1306,15 @@ def problems(batch: Batch = FIRST) -> list[str]:
         if side_text(side) != row["side_text"]:
             found.append(f"n={n}: the side's decimal is not the rule's")
         case = case_front(n)
-        if case["verified_upper_bound"] != verified_block(row, batch):
+        if readopted(n):
+            if Fraction(str(case["verified_upper_bound"]["exact_form"])) >= side:
+                found.append(f"n={n}: the later house's bound is not below the view")
+        elif case["verified_upper_bound"] != verified_block(row, batch):
             found.append(f"n={n}: the case record's verified upper bound is not the view's")
         if at_t101_side(row) and row["earlier_verified"]["evidence"] != list(t101_replays()):
             found.append(f"n={n}: the side is T-101's, but the record held another ceiling")
         found.extend(least_view_problems(n, row))
-        if batch.kind == GRID_KIND:
+        if batch.kind == GRID_KIND and not readopted(n):
             found.extend(witness_problems(n, row, batch))
         implied = row.get("implied_by")
         if implied is not None and not (
@@ -1954,8 +1987,8 @@ def body_text(n: int, body: str) -> str:
 
 def apply_case(n: int, text: str) -> str:
     """One case record with its verified upper lane on the registered view of the batch
-    that holds it; others unchanged."""
-    if batch_of(n) is None:
+    that holds it; others unchanged, a count a later house holds among them (`readopted`)."""
+    if batch_of(n) is None or readopted(n):
         return text
     _, front, body = text.split("---\n", 2)
     return f"---\n{front_matter(n, front)}---\n{body_text(n, body)}"

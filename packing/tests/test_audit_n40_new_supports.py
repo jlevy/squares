@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import dataclasses
 import functools
+import gzip
 import json
 import shutil
 from collections.abc import Callable, Sequence
@@ -866,3 +867,268 @@ def test_a_changed_scalar_is_refused_by_the_chain(
     claim = dataclasses.replace(CLAIM, **changes)
     f = dataclasses.replace(facts(), minimum=facts().minimum + drop)
     assert _failures(audit.chain_checks(claim, f, least() + shift, RELEASE)) == checks
+
+
+# --------------------------------------------------------------------------- the replay
+# Stage 4: the 43 slabs, the kernel controls, the crate's two runs, control G on the
+# release's exact.py and the release's two dual programs, replayed here and judged through
+# T-145's runner and judge with this release's contract (`Replay`), not through copies.
+
+
+def _replay_copy(tmp_path: Path) -> Path:
+    folder = tmp_path / "receipts"
+    shutil.copytree(audit.RECEIPT_DIR, folder)
+    return folder
+
+
+def _rewrite_jsonl(path: Path, edit: Callable[[list[dict[str, Any]]], None]) -> None:
+    lines = [json.loads(line) for line in gzip.decompress(path.read_bytes()).splitlines()]
+    edit(lines)
+    body = "".join(json.dumps(line, sort_keys=True) + "\n" for line in lines)
+    path.write_bytes(gzip.compress(body.encode(), mtime=0))
+
+
+def _rewrite_json(path: Path, edit: Callable[[dict[str, Any]], None]) -> None:
+    """A receipt stored plain or as gzip, edited in place in the form it is stored."""
+    packed = path.suffix == ".gz"
+    raw = gzip.decompress(path.read_bytes()) if packed else path.read_bytes()
+    value = json.loads(raw)
+    edit(value)
+    body = json.dumps(value, sort_keys=True).encode()
+    path.write_bytes(gzip.compress(body, mtime=0) if packed else body)
+
+
+def _replay_failures(folder: Path) -> tuple[set[str], str]:
+    report = audit.replay_check(folder)
+    return {c["name"] for c in report["checks"] if not c["held"]}, report["status"]
+
+
+def test_the_replay_is_t145s_runner_and_judge_not_copies() -> None:
+    for name in ("Replay", "run_replay", "replay_report", "STAGES"):
+        assert getattr(audit, name) is getattr(t145, name), name
+    assert audit.REPLAY.release is RELEASE
+    assert audit.REPLAY.expect is audit.EXPECT
+    assert set(audit.EXPECT) == set(t145.EXPECT)
+    assert audit.EXPECT["nodes"] != t145.EXPECT["nodes"]
+    assert (*t145.STAGES, "duals") == audit.REPLAY_STAGES
+    assert RELEASE.axis_flags == t145.FLAGS != t145.RELEASE.axis_flags
+
+
+def test_the_replay_contract_is_both_receipts_and_the_axis_stage() -> None:
+    expect = audit.EXPECT
+    for folder in audit.RECEIPTS.values():
+        coverage = audit.read_receipt(folder)["coverage"]
+        assert coverage["nodes"] == expect["nodes"]
+        assert coverage["leaves"] == expect["leaves"]
+        assert coverage["angle_bisections"] == expect["angle_splits"]
+        assert Fraction(coverage["minimum_capture_lower"]) == expect["least_bound"]
+    assert audit.least_bound(audit.read_slabs(audit.RECEIPTS["ci"])) == (
+        expect["least_bound"],
+        expect["least_bound_slab"],
+    )
+    assert Fraction(facts().minimum, audit.GRID**3) == expect["axis_minimum"]
+    names = [name for name, _ in audit.REPLAY_AXIS_CONTROLS]
+    assert names == ["H-tau-1-2", "H-above", "H-below"]
+    taus = dict(audit.REPLAY_AXIS_CONTROLS)
+    assert taus["H-above"] > expect["axis_minimum"] > taus["H-below"] > taus["H-tau-1-2"]
+    stage = json.loads((audit.RECEIPT_DIR / "axis-stage.json").read_text())
+    rows = [json.loads(line) for line in stage["crate"]["stdout"].splitlines() if line]
+    row = next(r for r in rows if "r" in r)
+    assert row["vertices"] == expect["crate_axis_vertices"]
+    assert row["min_certified_lower_bound"] == expect["crate_axis_bound"]
+    assert expect["crate_net_bound"] >= 1
+    assert 0 <= expect["crate_net_bound_r"] <= 400
+
+
+def test_control_gs_literal_sets_the_axis_side_once_in_the_retained_exact_py() -> None:
+    source = (audit.SOURCE / "verifier/exact.py").read_text(encoding="utf-8")
+    before, after = audit.RELEASE_G_CHANGE
+    assert source.count(before) == 1
+    assert after not in source
+    assert Fraction(249329660, 250000000) == CLAIM.A + Fraction(1, 250000000)
+    assert Fraction(249329660, 250000000) == audit.FINITE_CONTROLS[0].claim.A
+
+
+#: The shared judge's check names, in order, then the duals'.
+REPLAY_CHECKS = [
+    "builds: the release's flags, exit 0",
+    "builds: the CI run's binaries, on its compiler",
+    "axis run: exit 0",
+    "axis run: every field equals the local receipt's",
+    "axis run: every field equals the ci receipt's",
+    "slabs: 43 runs with the contract's arguments",
+    "slabs: every one verified, exit 0",
+    "slabs: every cover closes, nodes = 2 leaves - 1",
+    "slabs: the totals",
+    "slabs: the least leaf bound",
+    "slabs: every non-timing field equals the local receipt's",
+    "slabs: every non-timing field equals the ci receipt's",
+    *(f"control {control.name}" for control in t145.kernel_controls(CLAIM)),
+    "control F-ieee-neighbors",
+    "control F-wrong-rounding",
+    "control F-ftz",
+    "control F-reject-ndebug",
+    "control F-reject-fastmath",
+    "control H-tau-1-2",
+    "control H-above",
+    "control H-below",
+    "control G-release-unchanged: exact.py's scalar block is the receipts'",
+    "control G-release-axis-side: exact.py refuses NEAR_AXIS_CONTAINMENT",
+    "crate: reviewed source for a declared net, the binary embeds it",
+    "crate: the axis at side A by the exact vertex sweep",
+    "crate: the 401-direction necessary condition at side B",
+    "duals: the retained tree at its upstream paths, every file the manifest's",
+    "duals: the release's obstruction entry point, exit 0",
+    "duals: every non-timing field equals the local receipt's",
+    "duals: every non-timing field equals the ci receipt's",
+    "duals: with the CI run's compiler, the CI run's dual binary",
+]
+
+
+def test_the_replay_receipts_hold_and_the_judgement_is_this_run() -> None:
+    value = audit.replay_check(audit.RECEIPT_DIR)
+    assert [c["name"] for c in value["checks"]] == REPLAY_CHECKS
+    assert [c["name"] for c in value["checks"] if not c["held"]] == []
+    assert value["status"] == "REPLAY_HOLDS"
+    assert value["kind"] == "n40-new-supports-replay-check/v1"
+    assert value["binaries"]["pose"] == audit.CI_BINARIES["pose"]
+    assert value["binaries"]["axis"] == audit.CI_BINARIES["axis"]
+    retained = (audit.RECEIPT_DIR / "replay-check.json").read_text(encoding="utf-8")
+    assert retained == json.dumps(value, indent=1, sort_keys=True) + "\n"
+    assert audit.main(["check-replay"]) == 0
+
+
+def test_a_changed_replay_slab_is_refused(tmp_path: Path) -> None:
+    folder = _replay_copy(tmp_path)
+
+    def more_nodes(lines: list[dict[str, Any]]) -> None:
+        out = json.loads(lines[3]["stdout"])
+        out["nodes"] += 2
+        out["leaves"] += 1
+        lines[3]["stdout"] = json.dumps(out)
+
+    _rewrite_jsonl(folder / "slabs.jsonl.gz", more_nodes)
+    assert _replay_failures(folder) == (
+        {
+            "slabs: the totals",
+            "slabs: every non-timing field equals the local receipt's",
+            "slabs: every non-timing field equals the ci receipt's",
+        },
+        "REPLAY_CHECK_FAILED",
+    )
+
+
+def test_a_slab_whose_bound_fell_below_the_contracts_is_refused(tmp_path: Path) -> None:
+    folder = _replay_copy(tmp_path)
+
+    def lower(lines: list[dict[str, Any]]) -> None:
+        out = json.loads(lines[40]["stdout"])
+        out["lower_bound"] = "0.9997"
+        lines[40]["stdout"] = json.dumps(out)
+
+    _rewrite_jsonl(folder / "slabs.jsonl.gz", lower)
+    failed, status = _replay_failures(folder)
+    assert "slabs: the least leaf bound" in failed
+    assert status == "REPLAY_CHECK_FAILED"
+
+
+def test_a_control_that_was_accepted_is_refused(tmp_path: Path) -> None:
+    folder = _replay_copy(tmp_path)
+    name = "C-cut-top-500-10000-h100"
+
+    def accept(lines: list[dict[str, Any]]) -> None:
+        for line in lines:
+            if line["control"] == name:
+                line["exit_code"] = 0
+                line["stdout"] = json.dumps({"status": "verified", "nodes": 9})
+
+    _rewrite_jsonl(folder / "controls.jsonl.gz", accept)
+    assert _replay_failures(folder) == ({f"control {name}"}, "REPLAY_CHECK_FAILED")
+
+
+def test_an_axis_control_at_the_wrong_threshold_is_refused(tmp_path: Path) -> None:
+    folder = _replay_copy(tmp_path)
+
+    def prove(lines: list[dict[str, Any]]) -> None:
+        for line in lines:
+            if line["control"] == "H-above":
+                out = json.loads(line["stdout"])
+                out["status"] = "AXIS_COVERAGE_PROVED"
+                line["stdout"] = json.dumps(out)
+                line["exit_code"] = 0
+
+    _rewrite_jsonl(folder / "controls.jsonl.gz", prove)
+    assert _replay_failures(folder) == ({"control H-above"}, "REPLAY_CHECK_FAILED")
+
+
+def test_a_crate_run_with_other_values_is_refused(tmp_path: Path) -> None:
+    folder = _replay_copy(tmp_path)
+    path = next(p for p in folder.iterdir() if p.name.startswith("crate-runs.json"))
+
+    def other(value: dict[str, Any]) -> None:
+        for stem in ("crate-axis-A", "crate-net401-B"):
+            lines = value["runs"][stem]["stdout"].splitlines()
+            at = next(i for i, line in enumerate(lines) if '"r"' in line)
+            row = json.loads(lines[at])
+            row["min_certified_lower_bound"] = 0.9999
+            lines[at] = json.dumps(row)
+            value["runs"][stem]["stdout"] = "\n".join(lines) + "\n"
+
+    _rewrite_json(path, other)
+    assert _replay_failures(folder) == (
+        {
+            "crate: the axis at side A by the exact vertex sweep",
+            "crate: the 401-direction necessary condition at side B",
+        },
+        "REPLAY_CHECK_FAILED",
+    )
+
+
+def test_control_g_admitted_by_the_releases_exact_py_is_refused(tmp_path: Path) -> None:
+    folder = _replay_copy(tmp_path)
+
+    def admit(value: dict[str, Any]) -> None:
+        value["runs"]["G-release-axis-side"]["exit_code"] = 0
+        value["runs"]["G-release-axis-side"]["stdout"] = json.dumps({"scalar": {}})
+
+    _rewrite_json(folder / "control-G-release.json", admit)
+    assert _replay_failures(folder) == (
+        {"control G-release-axis-side: exact.py refuses NEAR_AXIS_CONTAINMENT"},
+        "REPLAY_CHECK_FAILED",
+    )
+
+
+DUAL_FIELDS: list[tuple[Callable[[dict[str, Any]], None], set[str]]] = [
+    (
+        lambda v: v["obstruction"]["python"].__setitem__("max_column", 200),
+        {
+            "duals: every non-timing field equals the local receipt's",
+            "duals: every non-timing field equals the ci receipt's",
+        },
+    ),
+    (
+        lambda v: v.__setitem__("exit_code", 1),
+        {"duals: the release's obstruction entry point, exit 0"},
+    ),
+    (
+        lambda v: v["tree"].__setitem__("obstruction/check.py", "0" * 64),
+        {"duals: the retained tree at its upstream paths, every file the manifest's"},
+    ),
+    (
+        lambda v: v["obstruction"].__setitem__("binary_sha256", "0" * 64),
+        {"duals: with the CI run's compiler, the CI run's dual binary"},
+    ),
+]
+
+
+@pytest.mark.parametrize(
+    ("edit", "checks"),
+    DUAL_FIELDS,
+    ids=["python.max_column", "exit_code", "tree digest", "binary"],
+)
+def test_a_dual_that_disagrees_or_was_refused_fails_its_check(
+    tmp_path: Path, edit: Callable[[dict[str, Any]], None], checks: set[str]
+) -> None:
+    folder = _replay_copy(tmp_path)
+    _rewrite_json(folder / "duals.json", edit)
+    assert _replay_failures(folder) == (checks, "REPLAY_CHECK_FAILED")

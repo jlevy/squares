@@ -21,6 +21,7 @@ from collections.abc import Callable
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -28,6 +29,12 @@ from devtools import apply_exact_ceilings, render_case_verifiers
 from devtools import register_regularized_bounds as registered
 from devtools.apply_upper_bound_packets import normalized
 from sqpack.assurance import bounds_agree_at_declared_precision
+
+
+def _held() -> dict[int, dict[str, Any]]:
+    """The first batch's rows whose case record this layer still writes: a count a later
+    house adoption holds keeps the view as history (`registered.readopted`)."""
+    return {n: row for n, row in registered.committed().items() if not registered.readopted(n)}
 
 
 def test_the_receipts_the_views_and_the_records_agree() -> None:
@@ -79,7 +86,7 @@ def test_the_printed_value_stays_unless_it_would_fall_below_the_side() -> None:
 def test_each_record_prints_its_earlier_decimal_beside_the_exact_side() -> None:
     """The value is the decimal the record printed before, an upper display of the new
     exact form; no count needed it raised, and agreement with the report is unchanged."""
-    for n, row in registered.committed().items():
+    for n, row in _held().items():
         upper = registered.case_front(n)["verified_upper_bound"]
         assert upper["value"] == row["earlier_verified"]["value"], n
         assert not row["value_raised"], n
@@ -105,7 +112,7 @@ def test_the_t101_layer_leaves_a_record_this_layer_owns(n: int) -> None:
 def test_each_record_says_whether_its_bound_agrees_with_the_report() -> None:
     """A bound that disagrees with the report at the declared precision carries the
     ceiling section and a `mathematics` blocker; one that agrees carries neither."""
-    for n, row in registered.committed().items():
+    for n, row in _held().items():
         case = registered.case_front(n)
         agrees = bounds_agree_at_declared_precision(
             case["reported_upper_bound"], case["verified_upper_bound"]
@@ -115,6 +122,28 @@ def test_each_record_says_whether_its_bound_agrees_with_the_report() -> None:
         assert (registered.CEILING_HEADING in body) != agrees, n
         assert registered.SECTION in body, n
         assert registered.FIRST.dated in body, n
+
+
+def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
+    """At n = 264 issue 528's packing (T-158) was adopted on 12 October 2026, below T-155's
+    view: the record's verified upper bound is the house's, this layer leaves the record as
+    it is, and the view's dated paragraph and section say it held until that day."""
+    assert [n for n in registered.committed() if registered.readopted(n)] == [264]
+    assert registered.readopted_by(264, "T-155")
+    assert not registered.readopted_by(264, "T-156")
+    row = registered.committed()[264]
+    assert Fraction(registered.case_front(264)["verified_upper_bound"]["exact_form"]) < (
+        Fraction(row["side"])
+    )
+    text = (registered.FRONTIER / "n-264.md").read_text(encoding="utf-8")
+    assert registered.apply_case(264, text) == text
+    flat = _flat(264)
+    assert registered.FIRST.dated in flat
+    assert "The verified upper bound was that side exactly until 12 October 2026" in flat
+    assert (
+        "That side was the exact form of the case’s `verified_upper_bound` until 12 October "
+        "2026, which cited both certificates (T-101, T-155)"
+    ) in flat
 
 
 def test_every_control_reached_its_outcome_on_both_routes() -> None:
@@ -206,7 +235,7 @@ def test_t101s_replays_stay_cited_where_they_prove_the_same_side() -> None:
     same = [n for n, row in registered.committed().items() if registered.at_t101_side(row)]
     assert len(same) == 33
     replays = [apply_exact_ceilings.EXACT_REPLAY, apply_exact_ceilings.SOURCE_REPLAY]
-    for n in registered.committed():
+    for n in _held():
         evidence = registered.case_front(n)["verified_upper_bound"]["evidence"]
         assert evidence == (
             [*replays, registered.EVIDENCE] if n in same else [registered.EVIDENCE]

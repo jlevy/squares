@@ -80,6 +80,35 @@ nearly whole piece (`LINEAGE`: Francisco Couzo's 127 of T-128 in the 176, SQUISH
 209 in the 270 and the 304), `patch_lineage` measures it, at `NEAR` and, in its tests,
 at a tenth of a unit.
 
+It reads the two releases of 12 October too, Daniil Ostashev's compositions at 175, 232
+and 264 (#528) and Rio Calle's n102 layout (#529) (``decide-imports --imports '#528'
+'#529'``), in the review ``review-2026-10-12-upper-bound-imports-528-529.md``. #528's
+are retained byte for byte in the sqcert format, read by `parse_sqcert` as #501's are;
+``--upstream`` holds each to its fetched bytes. #529's source publishes no exact
+certificate and states no licence, so its packet keeps the derived fact the importer's
+``calle-txt`` adapter writes; ``--upstream`` derives it again from the pinned layout with
+this route's own reader and arithmetic (`derive_calle_txt`): ``# n = N`` and ``# s = S``
+comment lines, then ``x y theta`` rows of decimals, plain or in scientific notation, each
+read exactly (`read_calle_txt`); the side the printed ``S``, undilated; and each
+``tan(theta/2)``, ``theta`` in radians, rounded down at the declared places by Taylor
+series in `decimal` arithmetic (`half_angle_floor_radians`), no pi needed. `CREDITED`
+measures #528's three against the packing each case holds and every report pending at its
+count, and #529 against Ryan Xu's packing (T-125), whose design the source says it shares,
+and Evan Daniel's regularized view of it (T-146); `LINEAGE` measures the pieces #528 names
+that the record retains, Evan Daniel's exact certificates of David Ellsworth's s(171)
+(T-101) in the 175 and of Joost de Winter's s(126) (T-098) in the 264.
+
+It reads Evan Daniel's #552 of 12 October too, one certificate at 154 in his text format
+(``decide-imports --imports '#552'``), in the review
+``review-2026-10-12-upper-bound-import-552.md``: retained byte for byte under the source's
+MIT licence, with the regularized drawing of the same packing beside it, and read by
+`parse_certificate` as #488's and #489's are; ``--upstream`` holds it to its fetched
+bytes. `CREDITED` measures it against SQUISH's packing at 154 (T-136), the case's house,
+which the source says it is a different local minimum from, and against Francisco
+Couzo's 154 as Evan Daniel's exact optimum of it (T-098); `LINEAGE` measures Couzo's 155
+as the same release's exact optimum (T-098), which the issue's comment names as the
+start, less one square.
+
 The register's two maintained routes (``devtools.evand_arrangement_reports``) share one
 parse and one half-angle conversion (``devtools.evand_exact_certificates``) and both decide
 pairs by the separating-axis theorem; at T-128 and T-130 one of them, ``sqpack.verify``, is
@@ -130,8 +159,9 @@ positive inputs and margins, to the side its packet's frozen claim record and re
 plan state, and to its printed side: equal to it, or rounding up to it at its places. A
 decided count the entry does not cite (#470's 132 and 267) must be absent from the plan's
 claim. ``--imports`` selects by key (``#476``, ``#481``, ``#483``, ``#484``, ``#470``,
-``trio126``, ``#488``, ``#489``, ``regularized``, ``#503``, ``#504``, ``#505``, ``#501``);
-it defaults to the first four, the roster of the first imports review.
+``trio126``, ``#488``, ``#489``, ``regularized``, ``#503``, ``#504``, ``#505``, ``#501``,
+``#500``, ``#506``, ``#528``, ``#529``, ``#552``); it defaults to the first four, the
+roster of the first imports review.
 
 ``replay-t128`` is the maintained two-route replay of T-128's retained receipt, which
 ``devtools.couzo_refinement_reports`` has no command for: every job decided again by the
@@ -763,6 +793,23 @@ IMPORTS_500 = {"#500": "squish-500-fourth-request-2026-10-11"}
 #: retained as factual data at 337078c, 304 and 305 in the case corpus and 338, 339, 344,
 #: 375, 376, 378, 379, 380 and 381 beyond it, each read by this route's own parser.
 IMPORTS_506 = {"#506": "couzo-certificates-2026-10-11"}
+#: The two releases of 12 October: Daniil Ostashev's compositions at 175, 232 and 264
+#: (#528), retained byte for byte under the source's MIT licence in its own sqcert
+#: format, as #501's are; and Rio Calle's n102 layout (#529), whose source states no
+#: licence and publishes no exact certificate, kept as the derived fact the importer's
+#: calle-txt adapter writes: every decimal as printed and each tan(theta/2), theta in
+#: radians, rounded down at 40 places.
+IMPORTS_528_529 = {
+    "#528": "dostashev-records-2026-10-12",
+    "#529": "riocalle-n102-2026-10-12",
+}
+#: Evan Daniel's #552 of 12 October: one certificate at 154 in his text format, retained
+#: byte for byte under the source's MIT licence at 597e660 with the regularized drawing
+#: of the same packing beside it, from a time-travel test of his size-chaining explorer
+#: restarted from the register of 5 October. Its side is the 80-digit KKT point scaled
+#: by 1 + 1e-20 about the origin corner and rounded up at 30 places; the guard is in the
+#: certificate, and this route believes none of it.
+IMPORTS_552 = {"#552": "evand-n154-2026-10-12"}
 ALL_IMPORTS = {
     **IMPORTS,
     **LATER_IMPORTS,
@@ -772,6 +819,8 @@ ALL_IMPORTS = {
     **IMPORTS_505_501,
     **IMPORTS_500,
     **IMPORTS_506,
+    **IMPORTS_528_529,
+    **IMPORTS_552,
 }
 #: Imports decided over their whole replayed roster rather than the counts the entry
 #: cites: #470's README-printed 132 and 267 are certified beside the issue's 28.
@@ -800,6 +849,21 @@ CREDITED: dict[tuple[str, int], tuple[str, ...]] = {
     ("#506", 304): ("#500",),
     ("#506", 305): ("#500",),
     ("#506", 344): ("#484", "#489"),
+    # Ostashev's #528 says its three are new arrangements: each against the packing its
+    # case holds and every report pending at its count, at 175 Couzo's refinement of Ryan
+    # Xu's packing (T-140, #488's certificate), Couzo's unregistered 337078c certificate
+    # (#506's unrequested row) and Ryan Xu's (T-125); at 232 SQUISH's (T-136); at 264 Evan
+    # Daniel's exact certificate of the catalogue's packing (T-101). Calle's #529 says it
+    # shares Ryan Xu's design: against his packing (T-125) and Evan Daniel's regularized
+    # view of it (T-146), the case's house.
+    ("#528", 175): ("T-140", "#506", "T-125"),
+    ("#528", 232): ("T-136",),
+    ("#528", 264): ("T-101",),
+    ("#529", 102): ("T-125", "T-146"),
+    # Evan Daniel's #552 says its 154 is a different local minimum from SQUISH's packing
+    # (T-136), the case's house, and descends from Francisco Couzo's 5 October packings:
+    # against T-136, and against Couzo's 154 as Evan Daniel's exact optimum of it (T-098).
+    ("#552", 154): ("T-136", "T-098"),
 }
 WEB = ROOT / "resources/web"
 REPO = ROOT.parent
@@ -1115,30 +1179,164 @@ def _tan_half(turn: Fraction, digits: int) -> Fraction:
         return Fraction(sine / cosine)
 
 
+def _decided_floor(tangent: Callable[[int], Fraction], places: int, label: str) -> Fraction:
+    """An irrational tangent rounded down at ``places`` decimals, once a bound decides it.
+
+    ``tangent(digits)`` computes it at about ``digits`` significant digits. The bound
+    allows ``10^(10 - digits)`` times ``(1 + |t|)(1 + t^2)`` either side of the computed
+    value, orders of magnitude more than the error of ``digits``-digit arithmetic, and the
+    working digits rise through `TANGENT_GUARDS` until both ends floor alike; since the
+    tangent is irrational, no rounding point is ever hit and a narrow enough bound decides.
+    """
+    scale = 10**places
+    for guard in TANGENT_GUARDS:
+        digits = places + guard
+        value = tangent(digits)
+        error = Fraction(1, 10 ** (digits - 10)) * (1 + abs(value)) * (1 + value * value)
+        low, high = math.floor((value - error) * scale), math.floor((value + error) * scale)
+        if low == high:
+            return Fraction(low, scale)
+    raise AreaRouteError(f"no precision decides {label} at {places} places")
+
+
 def half_angle_floor(degrees: Fraction, places: int) -> Fraction:
     """``tan(theta/2)`` for ``theta`` in degrees, rounded down at ``places`` decimals.
 
     The angle is reduced exactly to [-180, 180). The tangent is rational there only at 0
-    and +-90 degrees; elsewhere it is irrational, so no rounding point is ever hit and a
-    narrow enough bound decides the floor. The bound allows ``10^(10 - digits)`` times
-    ``(1 + |t|)(1 + t^2)`` either side of the computed tangent, orders of magnitude more
-    than the error of ``digits``-digit arithmetic, and the working digits rise until both
-    ends floor alike.
+    and +-90 degrees; elsewhere it is irrational, and `_decided_floor` decides the floor.
     """
     turn = (degrees + 180) % 360 - 180
     if turn == -180:
         raise AreaRouteError(f"{degrees} degrees has no finite half-angle tangent")
     if turn in RATIONAL_HALF_ANGLES:
         return RATIONAL_HALF_ANGLES[turn]
-    scale = 10**places
-    for guard in TANGENT_GUARDS:
-        digits = places + guard
-        value = _tan_half(turn, digits)
-        error = Fraction(1, 10 ** (digits - 10)) * (1 + abs(value)) * (1 + value * value)
-        low, high = math.floor((value - error) * scale), math.floor((value + error) * scale)
-        if low == high:
-            return Fraction(low, scale)
-    raise AreaRouteError(f"no precision decides tan({degrees}/2 degrees) at {places} places")
+    return _decided_floor(
+        lambda digits: _tan_half(turn, digits), places, f"tan({degrees}/2 degrees)"
+    )
+
+
+#: Radian angles this route takes a half-angle tangent of: ``|theta| < 3``, so the half
+#: angle stays below 1.5, short of the tangent's pole at pi/2 and with the tangent below
+#: 15. A square's rotation is read modulo a quarter turn, so no file needs more.
+RADIANS_LIMIT = Fraction(3)
+
+
+def _tan_half_radians(theta: Fraction, digits: int) -> Fraction:
+    """``tan(theta/2)``, ``theta`` in radians, at about ``digits`` significant digits.
+
+    Taylor series of the sine and cosine of the exact half angle, as `_tan_half` sums
+    them; the angle needs no pi, so none enters.
+    """
+    with localcontext() as context:
+        context.prec = digits
+        tiny = Decimal(10) ** -(digits + 5)
+        half = Decimal(theta.numerator) / (2 * Decimal(theta.denominator))
+        square = half * half
+        sine = sine_term = half
+        cosine = cosine_term = Decimal(1)
+        k = 1
+        while abs(sine_term) > tiny or abs(cosine_term) > tiny:
+            cosine_term = -cosine_term * square / ((2 * k - 1) * (2 * k))
+            sine_term = -sine_term * square / ((2 * k) * (2 * k + 1))
+            cosine += cosine_term
+            sine += sine_term
+            k += 1
+        return Fraction(sine / cosine)
+
+
+def half_angle_floor_radians(theta: Fraction, places: int) -> Fraction:
+    """``tan(theta/2)`` for ``theta`` in radians, rounded down at ``places`` decimals.
+
+    At ``theta = 0`` the tangent is 0, returned exactly. At every other rational angle it
+    is irrational (the tangent of a nonzero algebraic number is transcendental), so
+    `_decided_floor` decides the floor. An angle of `RADIANS_LIMIT` or more in size is
+    refused rather than reduced: the angle cannot be reduced exactly, and the tangent's
+    pole is near.
+    """
+    if theta == 0:
+        return Fraction(0)
+    if abs(theta) >= RADIANS_LIMIT:
+        raise AreaRouteError(f"{theta} radians: the half-angle tangent is not decided here")
+    return _decided_floor(
+        lambda digits: _tan_half_radians(theta, digits), places, f"tan({theta}/2 radians)"
+    )
+
+
+_CALLE_COUNT = re.compile(r"# n = ([1-9][0-9]*)")
+_CALLE_SIDE = re.compile(r"# s = ([0-9]+\.[0-9]+)")
+_CALLE_NUMBER = re.compile(r"(-?)([0-9]+)\.([0-9]+)(?:e([-+])([0-9]{1,3}))?")
+
+
+def decimal_literal(text: str) -> Fraction:
+    """A decimal with a fractional part, plain or in scientific notation, read exactly.
+
+    ``2.50000000000700018e+00`` is ``250000000000700018 / 10^17``; the exponent moves
+    the point and nothing is rounded. No other form is read.
+    """
+    match = _CALLE_NUMBER.fullmatch(text)
+    if match is None or len(text) > 64:
+        raise AreaRouteError(f"not a decimal: {text[:80]!r}")
+    sign, whole, fraction, direction, exponent = match.groups()
+    value = Fraction(int(whole + fraction), 10 ** len(fraction))
+    if exponent is not None:
+        power = Fraction(10) ** int(exponent)
+        value = value * power if direction == "+" else value / power
+    return -value if sign else value
+
+
+def read_calle_txt(raw: bytes, n: int) -> tuple[str, tuple[Pose, ...]]:
+    """Rio Calle's decimal text (#529): ``# n = N``, ``# s = S``, then ``x y theta`` rows.
+
+    The two labelled comment lines appear once each, in any order among other ``#``
+    lines, which are prose and not read; blank lines are skipped; every other line is one
+    square, its centre in ``[0, S]^2`` and its rotation about that centre in radians,
+    each a decimal read exactly. Returns the side as printed and each ``(x, y, theta)``.
+    """
+    lines = [line.strip() for line in raw.decode("utf-8").splitlines() if line.strip()]
+    comments = [line for line in lines if line.startswith("#")]
+    counts = [match for line in comments if (match := _CALLE_COUNT.fullmatch(line))]
+    sides = [match for line in comments if (match := _CALLE_SIDE.fullmatch(line))]
+    if len(counts) != 1 or int(counts[0].group(1)) != n:
+        raise AreaRouteError(f"n={n}: the file does not state `# n = {n}` once")
+    if len(sides) != 1:
+        raise AreaRouteError(f"n={n}: the file does not state `# s = S` once")
+    rows = [line.split() for line in lines if not line.startswith("#")]
+    if len(rows) != n:
+        raise AreaRouteError(f"n={n}: {len(rows)} square lines")
+    squares: list[Pose] = []
+    for index, row in enumerate(rows, start=1):
+        if len(row) != 3:
+            raise AreaRouteError(
+                f"n={n}: square {index} has {len(row)} fields, not `x y theta`"
+            )
+        try:
+            x, y, theta = (decimal_literal(field) for field in row)
+        except AreaRouteError as error:
+            raise AreaRouteError(f"n={n}: square {index}: {error}") from error
+        squares.append((x, y, theta))
+    return sides[0].group(1), tuple(squares)
+
+
+def derive_calle_txt(raw: bytes, row: dict[str, Any]) -> tuple[Fraction, tuple[Placed, ...]]:
+    """#529's exact witness, derived again from its decimal layout by this route's arithmetic.
+
+    The side is the printed ``S``, which must be the side the row offers, and no
+    dilation is applied; the one option must be the half-angle places. Each centre is
+    read as printed; each ``t`` is `half_angle_floor_radians` at the declared places.
+    """
+    n = row["n"]
+    printed_text, squares = read_calle_txt(raw, n)
+    side = literal(printed_text)
+    if literal(row["offered"]) != side:
+        raise AreaRouteError(f"n={n}: the offered {row['offered']} is not the printed side")
+    options = {option["name"]: option["value"] for option in row.get("options", [])}
+    if set(options) != {"half_angle_places"}:
+        raise AreaRouteError(f"n={n}: not exactly the half-angle places")
+    places = int(options["half_angle_places"])
+    placements = tuple(
+        (x, y, *rotation(half_angle_floor_radians(theta, places))) for x, y, theta in squares
+    )
+    return side, placements
 
 
 def derive_decimal_pose(raw: bytes, row: dict[str, Any]) -> tuple[Fraction, tuple[Placed, ...]]:
@@ -1171,6 +1369,18 @@ def derive_decimal_pose(raw: bytes, row: dict[str, Any]) -> tuple[Fraction, tupl
         for x, y, degrees in squares
     )
     return side, placements
+
+
+#: Readers that derive a fact again from the pinned decimal file its row names, by the
+#: declared format, each taking the row for its declared options: #470's decimal poses
+#: with a dilation and #529's radian layout with none.
+DERIVED_READERS: dict[
+    str, Callable[[bytes, dict[str, Any]], tuple[Fraction, tuple[Placed, ...]]]
+]
+DERIVED_READERS = {
+    "decimal-dilation": derive_decimal_pose,
+    "calle-txt": derive_calle_txt,
+}
 
 
 def stored_bytes(path: Path) -> bytes:
@@ -1512,7 +1722,8 @@ def upstream_problems(
     ``directory`` holds the source's files fetched at the pinned commit. Where a count
     has a derived fact, its upstream file must have the SHA-256 the packet pins and must
     state the packing the fact states, read by this route's own reader (`UPSTREAM_READERS`)
-    or, for #470's decimal poses, derived again by `derive_decimal_pose`; where the row
+    or, for a decimal file, derived again by this route's arithmetic (`DERIVED_READERS`:
+    #470's poses by `derive_decimal_pose`, #529's layout by `derive_calle_txt`); where the row
     names the file its side is printed in, that file must be there too, at its pinned
     digest, and the printed side must be a cell of its row for the count, as a retained
     certificate's JSON print must be. Where the packet retains the certificate, the
@@ -1575,8 +1786,9 @@ def upstream_problems(
             continue
         fact = read_fact(packet_bytes(packet / row["fact"]).decode("utf-8"), n)
         try:
-            if row["format"] == "decimal-dilation":
-                stated = derive_decimal_pose(raw, row)
+            derived = DERIVED_READERS.get(row["format"])
+            if derived is not None:
+                stated = derived(raw, row)
             else:
                 side, poses = UPSTREAM_READERS[row["format"]](raw, n)
                 stated = side, tuple(placed(poses))
@@ -1676,10 +1888,13 @@ def couzo_refinement_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
 
 
 def evand_optimum_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
-    """Evan Daniel's exact optimum at ``n`` (T-098), the retained ``n-N.cert``, read here.
+    """Evan Daniel's exact certificate at ``n``, the retained ``n-N.cert``, read here.
 
+    His release of 5 October 2026 holds, in one directory, the exact optima of 48 earlier
+    packings (T-098) and the exact certificates of 77 catalogue packings (T-101);
     `devtools.evand_exact_certificates.is_decided` admits the file as, byte for byte, the
-    one that packet's first-party receipt decided at ``n``; this route parses it itself.
+    one that packet's first-party receipt decided at ``n``, whichever entry cites it, and
+    this route parses it itself.
     """
     path = legacy.certificate_path(legacy.CERTS, n)
     if not legacy.is_decided(path, n):
@@ -1697,6 +1912,8 @@ CREDITED_READERS: dict[str, Callable[[int], tuple[Fraction, tuple[Placed, ...]]]
     "T-146": import_packing("regularized"),
     "T-128": couzo_refinement_packing,
     "T-098": evand_optimum_packing,
+    "T-101": evand_optimum_packing,
+    "T-140": import_packing("#488"),
 }
 
 
@@ -1843,6 +2060,21 @@ LINEAGE: dict[tuple[str, int], tuple[str, int, Fraction]] = {
     ("#506", 304): ("#500", 304, Fraction(1)),
     ("#506", 305): ("#500", 305, Fraction(1)),
     ("#506", 344): ("#484", 344, Fraction(1)),
+    # Ostashev's #528 names the pieces of its compositions that the record retains as
+    # exact certificates: David Ellsworth's s(171) template in the 175 (Evan Daniel's
+    # certificate of the catalogue packing, T-101) and Evan Daniel's exact optimum of
+    # Joost de Winter's s(126) in the 264 (T-098). Its 1 + 1e-20 scaling of load-bearing
+    # squares and 1 + 1e-60 dilation are far below `NEAR`, so no dilation is undone;
+    # Friedman's s(85), the 232's piece, is retained as no certificate and not measured.
+    ("#528", 175): ("T-101", 171, Fraction(1)),
+    ("#528", 264): ("T-098", 126, Fraction(1)),
+    # Daniel's #552 traces its 154, in the issue's comment of 12 October, to Couzo's 5
+    # October 155 less one square, read as Evan Daniel's exact optimum of it (T-098). Its
+    # 1 + 1e-20 scaling about the origin corner is far below `NEAR`, so no dilation is
+    # undone. Blocks of upright squares reappear to the digit from Couzo's 154 as well, 45
+    # squares against the 155's 43, so the measurement by pose does not tell the two
+    # starts apart; at a tenth of a unit the 155 is the nearer, 114 squares against 87.
+    ("#552", 154): ("T-098", 155, Fraction(1)),
 }
 #: How near a parent square must land on a child square to be counted as reappearing:
 #: its centre within 10^-9, and its edge direction within a sine of 10^-6 modulo a

@@ -114,6 +114,9 @@ class Prose:
     ai: str
     #: Where the source itself ran this repository's maintained routes, what to say instead.
     routes: str = ""
+    #: What the source says of where the packing came from and what was measured of it
+    #: here, where its review asked the record to say so (T-160's RD-1, RD-5 and RD-7).
+    lineage: str = ""
 
 
 #: Each adopted result, as its register entry and its review describe it.
@@ -249,6 +252,36 @@ RESULTS: dict[str, Prose] = {
             "under his direction."
         ),
     ),
+    "T-158": Prose(
+        author="Daniil Ostashev",
+        reported="on [jlevy/squares#528](https://github.com/jlevy/squares/issues/528)",
+        producer_route=False,
+        ai=(
+            "The issue says the author set up an AI-assisted research loop and drove it with "
+            "his own ideas, the rectangle library and the composition being his, and that AI "
+            "agents wrote and ran the search, composition and verification code."
+        ),
+    ),
+    "T-160": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#552](https://github.com/jlevy/squares/issues/552)",
+        producer_route=False,
+        ai=(
+            "The issue says the search code, the run and the request were done with Claude "
+            "(Claude Code), which Evan Daniel directed and reviewed."
+        ),
+        lineage=(
+            "The author states that the packing came from a time-travel test of his "
+            "size-chaining explorer, restarted from this register as it stood on 5 October, "
+            "and that it descends from Francisco Couzo’s 5 October packing of 155 squares "
+            "with one square removed; he asks that the start be credited to that packing, and "
+            "it is. Measured here, the packing is another arrangement than T-136’s: no "
+            "symmetry of the box pairs the two square for square. The measurements are "
+            "consistent with the author’s account of the start and do not establish it: 43 "
+            "squares of Couzo’s 155 reappear to the digit, but so do 45 of his 154, and the "
+            "round-by-round trace is not published."
+        ),
+    ),
 }
 
 XU = "ry-xu"
@@ -280,6 +313,12 @@ def _mondrian(pieces: str) -> Credit:
     return Credit(
         (SQUISH,), (), f"Nate Chaoweeraprasit’s SQUISH packing, composed from {pieces}"
     )
+
+
+def _composed(what: str) -> Credit:
+    """Daniil Ostashev's composition with his 38-square rectangle, as his issue names the
+    pieces (T-158); the pieces' sources are acknowledged, the packing is his."""
+    return Credit((OSTASHEV,), (), f"Daniil Ostashev’s composition of {what}")
 
 
 def _regularized(finder: str, whose: str, *, via: str | None = None) -> Credit:
@@ -320,10 +359,19 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s construction, after Ryan Xu’s n = 70 packing and Evan Daniel’s exact "
         "certificate of it",
     ),
-    154: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
+    # Evan Daniel's packing; the start he names, Couzo's 155 less one square, is his
+    # statement, consistent with the measurements and not established by them (T-160).
+    154: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from his size-chaining explorer",
+    ),
     155: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
     156: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
-    175: _couzo("Xu"),
+    175: _composed(
+        "two of his 38-square rectangles with David Ellsworth’s n = 171 template, in place "
+        "of its pieces of Thomas Schadt’s n = 50 packing"
+    ),
     176: _mondrian(
         "Francisco Couzo’s n = 127 packing and the Kingbird catalogue’s n = 5 packing"
     ),
@@ -343,7 +391,9 @@ CREDITS: dict[int, Credit] = {
     209: _couzo("SQUISH"),
     211: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
     228: Credit((COUZO,), (), "Francisco Couzo’s refinement of his own packing"),
-    232: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
+    232: _composed(
+        "his 38-square rectangle with a 76-square piece of Erich Friedman’s n = 85 packing"
+    ),
     236: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
     237: _couzo("SQUISH"),
     238: _mondrian("SQUISH’s own n = 305 and n = 154 packings"),
@@ -354,6 +404,10 @@ CREDITS: dict[int, Credit] = {
     259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
     261: Credit((XU,), (BARNETT,), "Robert Barnett’s refinement of Ryan Xu’s packing"),
     263: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
+    264: _composed(
+        "his 38-square rectangle with a 93-square piece of Evan Daniel’s exact optimum of "
+        "Joost de Winter’s n = 126 packing"
+    ),
     267: _couzo("Xu"),
     269: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
     270: _mondrian(
@@ -888,6 +942,8 @@ def section(move: Move) -> str:
         )
     if prose.ai:
         paragraphs.append(prose.ai)
+    if prose.lineage:
+        paragraphs.append(prose.lineage)
     earlier = set(_earlier(move.packing))
     others = [
         c for c in move.selection.candidates if c is not house and c.result not in earlier
@@ -942,10 +998,12 @@ def _earlier_ceiling(move: Move, text: str) -> str:
         rf"Until {until} the verified upper bound here was \1,",
         section,
     )
+    # T-101's ceiling section opens the sentence with "It is"; T-155's, where it took the
+    # ceiling to T-101's exact side, with "As printed it is" (`register_regularized_bounds`).
     section = re.sub(
-        r"It\s+is\s+\*\*larger\*\*\s+than\s+the\s+best\s+known\s+(\$[0-9.]+\$)\s+two\s+fields"
-        r"\s+above\s+it,",
-        r"It was **larger** than the catalogue’s printed side \1, then the best known,",
+        r"(It|As\s+printed\s+it)\s+is\s+\*\*larger\*\*\s+than\s+the\s+best\s+known\s+"
+        r"(\$[0-9.]+\$)\s+two\s+fields\s+above\s+it,",
+        r"\1 was **larger** than the catalogue’s printed side \2, then the best known,",
         section,
     )
     section = re.sub(
@@ -963,11 +1021,43 @@ def _earlier_ceiling(move: Move, text: str) -> str:
     return text[:start] + section + text[end:]
 
 
+def _regularized_certificate(move: Move, text: str) -> str:
+    """The prose `register_regularized_bounds` wrote, in the past tense from this adoption on.
+
+    Where a regularized view's exact side was registered (T-155) at exactly the side of Evan
+    Daniel's certificate of the same packing (T-101), that layer made the side the verified
+    upper bound in a dated paragraph and a section of fixed form; the house replaces both
+    lanes below it, so the view's bound is history and stays true as stated.
+    """
+    n, until = move.n, day_words(move.n)
+    bound = rf"\$s\({n}\)\s+\\le\s+[0-9.]+\$"
+    text = re.sub(
+        r"\bThe\s+verified\s+upper\s+bound\s+is\s+now\s+that\s+side\s+exactly,\s+resting\s+on"
+        r"\s+both\s+certificates\s+\(([^)]*)\),\s+and\s+the\s+record\s+still\s+prints\s+it\s+as",
+        rf"The verified upper bound was that side exactly until {until}, resting on both "
+        r"certificates (\1), and the record printed it as",
+        text,
+    )
+    text = re.sub(
+        rf"\bThat\s+proves\s+({bound})\.(\s+Evan\s+Daniel’s\s+certificate\s+of\s+this\s+packing"
+        r"\s+already\s+proves\s+the\s+same\s+bound)",
+        rf"That proves \1, the verified upper bound until {until}.\2",
+        text,
+    )
+    return re.sub(
+        r"\bThat\s+side\s+is\s+the\s+exact\s+form\s+of\s+the\s+case’s\s+`verified_upper_bound`,"
+        r"\s+which\s+cites\s+both\s+certificates\s+\(([^)]*)\)\s+and\s+prints\s+it\s+as",
+        rf"That side was the exact form of the case’s `verified_upper_bound` until {until}, "
+        r"which cited both certificates (\1) and printed it as",
+        text,
+    )
+
+
 def historical(move: Move, text: str) -> str:
     """The body's own statements of the earlier house, marked as history.
 
     `check_case_prose` holds every `s(n) <= x` a body writes to the front matter unless
-    its sentence says it is historical. Four kinds of prose state the earlier house, and
+    its sentence says it is historical. Five kinds of prose state the earlier house, and
     each says now that it held until this adoption:
 
     - the opening "Open." sentence the generator writes, of the best known packing;
@@ -975,6 +1065,8 @@ def historical(move: Move, text: str) -> str:
     - the exact-ceiling prose that `T-101` wrote where a certified side rounded up trails
       the catalogue's print (`apply_exact_ceilings`): its dated paragraph, its ceiling
       section, now "The earlier verified ceiling", and its certificate section;
+    - the regularized certificate's prose that `T-155` wrote at T-101's side
+      (`register_regularized_bounds`): its dated paragraph and its section;
     - a house an earlier pass of this adoption adopted, in its dated paragraph and its
       section.
 
@@ -998,6 +1090,7 @@ def historical(move: Move, text: str) -> str:
         flags=re.MULTILINE,
     )
     text = _earlier_ceiling(move, text)
+    text = _regularized_certificate(move, text)
     # The records are wrapped, so a sentence may break at any space; whitespace is
     # matched as such and the reflow is the formatter's.
     text = re.sub(
