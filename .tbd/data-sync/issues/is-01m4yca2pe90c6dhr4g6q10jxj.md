@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 14 campaign upper bounds (237, and 13 beyond 324
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,9 +14,48 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T23:35:08.750Z
-updated_at: 2026-10-14T23:35:12.236Z
+updated_at: 2026-10-14T23:51:54.817Z
 started_at: 2026-10-14T23:35:12.236Z
 ---
 Francisco Couzo (@franciscouzo) reports, in jlevy/squares#607 (filed 2026-10-14T23:18:36Z), 21 finite upper bounds plus two precision refinements, certificates at franciscouzo/square-packing 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2 submissions/2026-10-14/certificates/ (first committed 2026-10-14T19:15:09Z), comparison index upper_bounds.json at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d. Stages 1, 2 and the stage 4 replay in the 14 October evening intake lane (branch claude/wizardly-meitner-wqn4x3-intake-607); no register, case, request, coverage, bibliography, resources README or intake-watch record edited. Registration waits for a records PR.
 
 GitHub issue: https://github.com/jlevy/squares/issues/607
+
+## Notes
+
+**Lane.** 14 October evening intake lane under think-mq0k, branch `claude/wizardly-meitner-wqn4x3-intake-607` from `main` 9b32da04d (#602 merged, T-161 to T-184 on main). Stages 1, 2 and the stage 4 replay; no register, case, request, coverage, bibliography, resources README or intake-watch record edited (the records PR of think-3aum owns those). Packet: `packing/resources/web/couzo-certificates-2026-10-14/`. Tests: `packing/tests/test_upper_bound_reports_607.py`.
+
+**Pin.** franciscouzo/square-packing 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2 (2026-10-14T19:15:09Z, tree 17312eac), head of master when retrieved at 23:30Z; it adds only submissions/2026-10-14/ (50 files) to its parent 487b058 (17:45:39Z), whose upper_bounds.json (blob 58710e5c, the same at both) is the index the issue compares against. Issue filed 23:18:36Z; no comments or edits when read; labelled intake. All 49 SHA256SUMS lines and the manifest's 23 certificate digests agree with the bytes at the pin.
+
+**Claims (every one the issue makes).**
+- 14 campaign bounds (Couzo's own): s(237) <= 15.902603638284 (continues Mykhailo Polkovskyi's #593), and beyond 324: 339 18.915818555470, 382 19.987621154241, 409 20.767428349966, 419 20.959997582079, 450 21.767428350587, 461 21.973183753375, 552 23.968034845503, 599 24.968034846127, 648 25.968034846328, 649 25.976974088403, 651 25.984515068279, 757 27.991000865994, 804 28.920398747577.
+- 7 Kevin Fang composites, credited to Fang, replayed by Couzo: 703 26.999256308447, 812 28.988287236851, 930 30.988287236851, 931 30.994048655032, 992 31.997220361783, 993 31.991327887692, 994 31.999256308447.
+- 2 precision refinements listed separately: 342 18.964706723173, 542 23.828427124774.
+- Checker statements (sqpack verify at 37e6757; Evan Daniel's verify_cert.py at 622cd2e, SHA-256 3299ca0c; the campaign's Rust checker for the 16 own certificates) are the author's. No optimality claim.
+Each certificate's exact header side rounds up at 12 places to the printed side (read_facts admits all 23).
+
+**Fang's composites (for think-rn2y).** All seven certificates are Fang's byte for byte: each SHA-256 equals the sha256 column of its row in composites/table.csv (blob 04094421, the same at bef5c42 and 078789a), and each row is Fang's smallest at its count. 703 (L1_n27_703_r17x16_n0257+n-110) and 994 (L1_n32_994_r17x16_n0257+n-241) are shipped files, whose digests the fang-excess-theorem packet pins (0ba5cd28..., aef770c7...); 812, 930, 931 (r19x18 row; Fang's shipped 931 is 5.21e-3 larger), 992 and 993 are table-only rows the author regenerated with Fang's glue.py, and the bytes have the table's digests. They cover 2 of the 28 shipped-smallest counts (703, 994) and 5 of the 53 table-only-smallest counts (812, 930, 931, 992, 993). This packet retains all seven and replays them.
+
+**Comparison (main 9b32da04d; claims.json frozen by check-claims --write).**
+- 237: case ceiling T-140 (Chaoweeraprasit, improved by Couzo) 15.9029496076778317, below by 3.46e-4. Below every other report: #593 / T-183 (Polkovskyi) by 1.014e-4 (the smallest earlier report); #561 / T-161 and PR #574 / T-174 by 3.44e-4; #573 by 3.46e-4; T-136 by 3.86e-4; T-098, T-115, T-127, T-134, #505, #470 by 1.07e-3 or more. Mishapolk 70a033f has no 237.
+- Beyond 324 (current row, or grid): 339 below the current row (#586) by 9.50e-3 and Couzo's 487b058 by 2.29e-4; 342 below the current row (Couzo 8 Oct report) by 2.68e-10 and #476 (= 487b058's 342) by 2.86e-10; 382 below #586 by 9.20e-5, 487b058 by 1.34e-7, Fang c284cd0 by 1.86e-3; 409 / 450 below 487b058 by 5.07e-5; 419 by 1.50e-3; 461 by 1.29e-3; 542 by 1.02e-9; 552 by 5.73e-3 (Fang composite by 2.03e-2); 599 / 648 by 5.55e-3; 649 by 8.12e-4; 651 below the current row (Fang e646c47) by 7.03e-3 and 487b058 by 3.79e-4; 757 below 487b058 by 1.47e-3 and Fang's composites by 6.55e-3; 804 below 487b058 by 6.78e-3. At 703, 812, 930, 931, 992, 993, 994: the claim record is undecided against Fang's 15-place print (differences < 1e-15); the digests decide: the same file.
+
+**Report order and the per-count rule.** The certificates are reported at 43ac7d2's commit, 19:15:09Z (watched repository), before the issue. Recorded at 16 counts: 237 (a refinement of Polkovskyi's #593 packing, credited Couzo after Polkovskyi), and 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 757, 804 (342 and 542 refine the author's own packings; 382 and 651 continue Fang's). Not recorded at 7 counts: 703, 812, 930, 931, 992, 993, 994 tie Fang's earlier rows (bef5c42, 2026-10-12T19:13:41Z), so Fang keeps them; this packet's bytes and replay are evidence for Fang's rows (think-rn2y). 487b058's own certificates are earlier reports at 16 of these counts and an import of their own (think-nj7h).
+
+**Not this import (think-nj7h).** 487b058 adds 290 certificates (370, 403-991), changes 7 (211, 339, 378-382) and deletes 22, with no issue. Its n211.cert states 7496774813149710519467765230441/5e29 = 14.993549626299..., 9.29e-6 below #586 (best now at 211): an in-corpus report nobody has imported.
+
+**Replay.** REPLAY-NOTES
+
+## Acknowledgement draft (not posted)
+
+Thanks, Francisco. We have #607 and have retained the 23 certificates at franciscouzo/square-packing 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2 (submissions/2026-10-14/), with their digests; your SHA256SUMS and manifest agree with the bytes.
+
+Each certificate's exact side rounds up to the side you print. Against the record and every earlier report at each count, in the order they reached us (your certificates count from their commit at 19:15Z):
+
+- s(237) <= 15.902603638284 is 1.01e-4 below Mykhailo Polkovskyi's #593, the smallest earlier report there, and we'll credit it as your refinement of his packing, as you ask.
+- The 13 campaign bounds and the two precision refinements beyond 324 are each below every earlier report, your own 487b058 certificates included.
+- The seven composites at 703, 812, 930, 931, 992, 993 and 994 have exactly the SHA-256 Kevin Fang's table lists, so they are his certificates, published on 12 October. They'll be recorded as Fang's results, as you ask, with your files and our replay as evidence for them.
+
+Both of this repository's exact routes REPLAY-ACK. A records pull request will register the results; we'll reply here when it merges.
+
+One question: 487b058 also changes certificates/n211.cert, to 14.993549626299..., below your #586 certificate, and adds certificates at 370 and 403 to 991 that no issue reports. We'll take those up as a separate import, reading each from its commit; tell us if any should wait.
