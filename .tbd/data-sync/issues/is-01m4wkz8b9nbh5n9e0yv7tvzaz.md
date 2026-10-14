@@ -5,7 +5,7 @@ title: "Import Mishapolk: 73 upper bounds across n = 51 to 308 (#593)"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T07:10:33.832Z
-updated_at: 2026-10-14T07:41:41.860Z
+updated_at: 2026-10-14T08:04:21.771Z
 started_at: 2026-10-14T07:10:42.633Z
 ---
 Stage 1-2 and stage 4 replay of issue #593 (Mishapolk/square-packing-records at 46f638ce0537beeb1bad24242c6a3d357eecd9ee), lane mishapolk of the 2026-10-14 intake pass, branch claude/wizardly-meitner-wqn4x3-intake-1014-mishapolk. Claim map, comparison and priced plan in notes.
@@ -46,7 +46,7 @@ Evan Daniel's regularized lists (T-146) at 70, 102, 123, 269, 292, 295; Couzo's 
 submissions: update 12 certificates (108, 127, 146, 181, 209, 236, 261, 267, 270, 272,
 305, 306)". 103/153/207/258 are #573's bytes (first committed 336bdf5, 2026-10-12T23:52Z).
 
-**Claim map against main aeef99ef0 and every open report (frozen claims.json).**
+**Claim map against main aeef99ef0, re-read at b8c930338 and every open report (frozen claims.json).**
 - Equal to the case's exact side, 40: 70 84 86 88 102 105 106 108 110 123 126 127 130 132
   152 172 177 179 180 182 199 206 208 209 210 228 240 263 266 267 268 269 273 292 295 297
   301 305 306 308. Map: a request for a value already registered; no new entry.
@@ -85,3 +85,17 @@ Certify: 9 jobs, all pass/refuse as required, 474,246 pair decisions, 227.80 job
 > accepted the positives and refused the controls. Could you tell us which credit name
 > to use (Mykhailo Polkovskyi or Mikhail Polk), and how the 129, 176, 303 and 304
 > packings relate to Ostashev's #562 and #575, whose sides agree to 30 places?
+
+## Stage 2 and stage 4 (2026-10-14)
+
+Packet packing/resources/web/mishapolk-records-2026-10-14 (derived facts, 72 certificates),
+branch claude/wizardly-meitner-wqn4x3-intake-1014-mishapolk at d4c198d0d. Replay of 211,
+237, 241: certify 9 jobs, 3 positives accepted and 6 controls refused on both routes,
+474,246 pair decisions, 227.80 job wall s, 4 m 47 s wall; check --replay equal, 4 m 33 s.
+Least wall clearance 5e-21 and pair gap 1.00e-20 in each positive (1e-20 dilation).
+Register plan: scratchpad mishapolk/register-plan-593.yaml (regenerate with
+`upper_bound_reports mishapolk-records-2026-10-14 register-plan`); its template claims
+"improvements" at all 72 requested counts, so the records lane must restrict any entry
+to 237 (and decide 211/241 with Couzo #586). Not run: 69 counts, 75-125 min certify plus
+as much replay. Open questions: credit name; Ostashev priority at 129/176/204/303/304;
+Couzo priority at 211/241 and 156/271; 51 needs an algebraic house to compare in-tool.
