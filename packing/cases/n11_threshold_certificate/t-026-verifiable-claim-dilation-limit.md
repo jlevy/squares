@@ -187,14 +187,14 @@ bound.
 
 ## Evidence and Scope
 
-The repository's [`t-026-dilation-limit-proof.md`](https://github.com/jlevy/squares/blob/c6118ca5/packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md) states the retained
-proof and measurements. [`review-2026-09-09-threshold-certificate-theorem.md`](https://github.com/jlevy/squares/blob/c6118ca5/docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md) reviews the theorem's
+The repository's [`t-026-dilation-limit-proof.md`](https://github.com/jlevy/squares/blob/e4d46b8d/packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md) states the retained
+proof and measurements. [`review-2026-09-09-threshold-certificate-theorem.md`](https://github.com/jlevy/squares/blob/e4d46b8d/docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md) reviews the theorem's
 disjoint-trace budget, symmetry, net endpoint, event-cell boundaries, and
 inclusion-exclusion reduction. The retention gate
-[`decide_threshold_certificate.py`](https://github.com/jlevy/squares/blob/c6118ca5/packing/devtools/decide_threshold_certificate.py) reads [`certificate-191-50-net1440.json`](https://github.com/jlevy/squares/blob/c6118ca5/packing/cases/n11_threshold_certificate/certificate-191-50-net1440.json)
+[`decide_threshold_certificate.py`](https://github.com/jlevy/squares/blob/e4d46b8d/packing/devtools/decide_threshold_certificate.py) reads [`certificate-191-50-net1440.json`](https://github.com/jlevy/squares/blob/e4d46b8d/packing/cases/n11_threshold_certificate/certificate-191-50-net1440.json)
 once and requires agreement between the exact sweep in
-[`threshold.py`](https://github.com/jlevy/squares/blob/c6118ca5/packing/src/sqpack/fractional/threshold.py) and the directed-rounding interval decision in
-[`threshold_interval.py`](https://github.com/jlevy/squares/blob/c6118ca5/packing/src/sqpack/fractional/threshold_interval.py). The [`dilation_corollary.py`](https://github.com/jlevy/squares/blob/c6118ca5/packing/devtools/dilation_corollary.py) replay checks the source declarations and re-derives the exact limit record. [`review-2026-09-06-t022-dilation-limit.md`](https://github.com/jlevy/squares/blob/c6118ca5/docs/project/reviews/review-2026-09-06-t022-dilation-limit.md) reviews the sharpened containment, density, and upward-embedding argument.
+[`threshold.py`](https://github.com/jlevy/squares/blob/e4d46b8d/packing/src/sqpack/fractional/threshold.py) and the directed-rounding interval decision in
+[`threshold_interval.py`](https://github.com/jlevy/squares/blob/e4d46b8d/packing/src/sqpack/fractional/threshold_interval.py). The [`dilation_corollary.py`](https://github.com/jlevy/squares/blob/e4d46b8d/packing/devtools/dilation_corollary.py) replay checks the source declarations and re-derives the exact limit record. [`review-2026-09-06-t022-dilation-limit.md`](https://github.com/jlevy/squares/blob/e4d46b8d/docs/project/reviews/review-2026-09-06-t022-dilation-limit.md) reviews the sharpened containment, density, and upward-embedding argument.
 
 The verifier is an additional standard-library implementation of the exact event-cell
 decision. It uses the same certificate and theorem.
@@ -917,7 +917,7 @@ if __name__ == "__main__":
 
 ## Certificate
 
-The marked block is byte-for-byte [`certificate-191-50-net1440.json`](https://github.com/jlevy/squares/blob/c6118ca5/packing/cases/n11_threshold_certificate/certificate-191-50-net1440.json).
+The marked block is byte-for-byte [`certificate-191-50-net1440.json`](https://github.com/jlevy/squares/blob/e4d46b8d/packing/cases/n11_threshold_certificate/certificate-191-50-net1440.json).
 
 <!-- BEGIN THRESHOLD CERTIFICATE -->
 ```json
@@ -9634,7 +9634,7 @@ The marked block is byte-for-byte [`certificate-191-50-net1440.json`](https://gi
 
 ## Dilation Limit Record
 
-The marked block is byte-for-byte [`t-026-dilation-limit-corollary.json`](https://github.com/jlevy/squares/blob/c6118ca5/packing/cases/n11_threshold_certificate/t-026-dilation-limit-corollary.json).
+The marked block is byte-for-byte [`t-026-dilation-limit-corollary.json`](https://github.com/jlevy/squares/blob/e4d46b8d/packing/cases/n11_threshold_certificate/t-026-dilation-limit-corollary.json).
 
 <!-- BEGIN DILATION LIMIT RECORD -->
 ```json

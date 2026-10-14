@@ -827,11 +827,8 @@ def run_gallery_controls() -> dict[str, bool]:
 
     by_id = {example["id"]: example for example in examples}
     surface_expectations = {
-        "TUTORIAL.md": (
-            "n3-optimal-moduli",
-            "n11-trump-overview",
-            "n29-kingbird-overview",
-        ),
+        "TUTORIAL.md": ("n11-trump-overview",),
+        "TUTORIAL-ADVANCED.md": ("n3-optimal-moduli", "n29-kingbird-overview"),
         "SYNOPSIS.md": (
             "n5-exact-face-trajectory",
             "n11-trump-overview",

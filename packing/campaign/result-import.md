@@ -37,17 +37,21 @@ W1 phase on one branch:
 2. **Own each item** as [stage 0](#stage-0-sweep) says: a bead for each new result, a
    recorded read where there is nothing to import, a new owner for any deferral whose
    bead has closed, and a restart for any wait whose blocker has resolved.
-3. **Import** each new result through stages 1 to 3 on the same branch.
-   A stage 4 replay the source prices at minutes can run in the same branch; a longer
-   one waits in its bead for a budget the owner sets.
-   Start each new proof’s mathematical review as soon as its source is retained, in
-   parallel with stage 3, by [stage 4’s review lane](#stage-4-validate).
+3. **Import** each new result through stages 1 to 3 on the same branch, triaging every
+   one before anything heavier runs ([stage 1](#stage-1-triage)). Where several open
+   reports state upper bounds at one count, the
+   [report-order ledger](#several-reports-at-one-count) decides which stage 3 records.
+   A stage 4 replay runs in the branch when it fits under the pass’s
+   [compute cap](#the-compute-cap-and-the-validation-backlog); a larger one waits in its
+   validation bead. Start each new proof’s mathematical review as soon as its source is
+   retained, in parallel with stage 3, by [stage 4’s review lane](#stage-4-validate).
    It does not wait for a replay budget, and it lands in a pull request of its own when
    it returns.
-4. **Validate** from `packing/` with `packing-validate --records`, then `--push`.
-5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`. It
-   lists each item with its bead and the stage it reached, and every source under Not
-   Checked.
+4. **Validate** from `packing/` with `packing-validate --records`, then `--push`, and
+   leave `--fast` to CI ([stage 5](#stage-5-publish)).
+5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`,
+   labelled `intake`. It lists each item with its bead and the stage it reached, and
+   every source under Not Checked.
 6. **Render the announcement** of the results the pass registered, from `packing/`:
    `uv run --frozen --all-extras --group dev python -m devtools.render_announcement
    --ids T-NNN … --github`, with the pass’s own `T-NNN`. Select by id, not with
@@ -62,13 +66,17 @@ W1 phase on one branch:
 7. **Draft the replies** in each issue’s answer bead: every issue the pass touches gets
    one. Once the pull request merges, render each from `main`, check that `main` and the
    deployed site say what it says, post it, and record it under the issue’s `replies` in
-   the next change ([stage 7](#stage-7-answer)).
+   the next change ([stage 7](#stage-7-answer)). Where a ledger decided the pass’s
+   counts, each result issue also gets a
+   [report-order verdict comment](#report-order-verdict-comments).
 8. **Sweep again** with `make intake`, after the branch’s changes to the records and
    again after the merge.
    The sweep, like `check_requests --report`, is what finds the replies due: it lists
    `#N owes a reply` until a recorded reply covers the issue’s state.
-   The pass is done when nothing needs action and every reply it owes is posted and
-   recorded, or when the pull request says why each remaining item waits.
+   Each new item it finds is triaged read-only, with a proposed disposition, before any
+   of it is worked ([stage 1](#stage-1-triage)). The pass is done when nothing needs
+   action and every reply it owes is posted and recorded, or when the pull request says
+   why each remaining item waits.
 
 The pass needs network access to `github.com`, for Git and for the API through `gh`;
 `kingbird.myphotos.cc`, for the catalogue capture; `evand.github.io`, for imports from
@@ -78,18 +86,17 @@ A source the environment denies is reported as not checked, and the pull request
 so. On 2026-10-05 the agent sessions reached GitHub and PyPI and nothing else.
 
 A pass never merges without the owner’s word, never pushes to `main`, never posts the
-announcement, and never starts a replay measured in CPU-hours without a budget the owner
-has set. It does answer the issues, under the `github-workflows` grant
-(`tbd policy show`); the owner’s standing instruction of 2026-10-11 is why the rule
-exists. It comments on every issue it touches ([stage 7](#stage-7-answer) says what
-touching is) and follows up each later change of its state, each comment posted once the
-pull request that carries the change has merged, and it closes an issue only with its
-final comment.
-Without the grant it drafts each reply in the issue’s answer bead and asks
-the owner to post it.
-The owner may post instead.
-Under the same grant it adds the `intake` label; it edits nothing else on an issue
-without the owner’s word.
+announcement, and never starts a replay above the compute cap the owner set for it, or
+with no cap set, one measured in CPU-hours.
+It does answer the issues, under the `github-workflows` grant (`tbd policy show`); the
+owner’s standing instruction of 2026-10-11 is why the rule exists.
+It comments on every issue it touches ([stage 7](#stage-7-answer) says what touching is)
+and follows up each later change of its state, each comment posted once the pull request
+that carries the change has merged, and it closes an issue only with its final comment.
+Without the grant it drafts each reply in the issue’s answer bead and asks the owner to
+post it. The owner may post instead.
+Under the same grant it adds the `intake` label, and a case label where one applies; it
+edits nothing else on an issue without the owner’s word.
 
 ### The Prompt
 
@@ -113,16 +120,22 @@ claude/intake-YYYY-MM-DD, with today's date.
    or is resolved. An item whose blocker has resolved is resumed on this branch, or
    its bead says what it waits on now. An issue that reports a new item for intake
    (a result, a counterexample or a method) and lacks the `intake` label gets it under
-   the github-workflows grant (`gh issue edit N --add-label intake`); without the
-   grant, list those issues for the owner. Run `tbd sync`.
+   the github-workflows grant (`gh issue edit N --add-label intake`), and the case
+   label too where one applies (development.md, "Issue and Pull-Request Labels");
+   without the grant, list those issues for the owner. Run `tbd sync`.
 4. Take each new result through stages 1 to 3 of the runbook on this branch: triage,
-   retain the source in a packet at a pinned revision, register it as reported. Run a
-   stage 4 replay only when the source prices it at minutes; otherwise record it in
-   the bead for a budget. Start each new proof's mathematical review (stage 4, "Who
+   retain the source in a packet at a pinned revision, register it as reported.
+   Triage every result before any large token or CPU spend. Where several open
+   reports state upper bounds at one count, run the report-order ledger before
+   registering (stage 1, "Several Reports at One Count"). Run a stage 4 replay only
+   when it fits under the compute cap the owner set, recorded on the pass's epic bead,
+   or with no cap, when the source prices it at minutes; otherwise give it a
+   validation bead and a row in the backlog bead (stage 4, "The Compute Cap and the
+   Validation Backlog"). Start each new proof's mathematical review (stage 4, "Who
    reviews, and when") as soon as its source is retained, in parallel.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
-6. Commit, push the branch, and open one draft pull request with
+6. Commit, push the branch, and open one draft pull request, labelled intake, with
    `tbd shortcut create-or-update-pr-simple`. List every item with its bead and the
    stage it reached, and every source the sweep could not check.
 7. From packing/, run `uv run --frozen --all-extras --group dev python -m
@@ -134,21 +147,26 @@ claude/intake-YYYY-MM-DD, with today's date.
    gets a comment. Once the pull request merges, render each from main with
    `check_requests --draft N`, check that main and the deployed site say what it says
    (runbook stage 5, "Verify the Published Result"), post it, and record it under the
-   issue's replies in result-requests.yaml in the next change.
+   issue's replies in result-requests.yaml in the next change. Where the ledger
+   decided the pass's counts, draft each result issue's verdict comment with
+   devtools.intake_comments (stage 7, "Report-Order Verdict Comments").
 9. Run `make intake` again, and again after the merge: it and
-   `check_requests --report` list the replies still due. Report every item that still
-   needs action.
+   `check_requests --report` list the replies still due. Triage each new item it
+   lists read-only and propose its disposition on the epic bead (stage 1). Report
+   every item that still needs action.
 
 Never merge without the owner's word, never push to main, never post the announcement,
-and never start a replay measured in CPU-hours without a budget the owner has set.
-Under the github-workflows grant, comment on every issue the pass touches (runbook
-stage 7 says what touching is) and follow up each later change of its state until the
-issue is closed with a final comment; the owner's standing instruction of 2026-10-11 is
-why. Without the grant, draft each reply and ask the owner to post it. Post only after
-the pull request that carries the change has merged, link only to main, and check
-first that main and the deployed site say what the comment says. Add the `intake`
-label under the github-workflows grant; edit nothing else on a GitHub issue without
-the owner's word. If github.com, kingbird.myphotos.cc or evand.github.io is
+and never start a replay above the owner's compute cap for the pass, or with no cap
+set, one measured in CPU-hours. Under the github-workflows grant, comment on every
+issue the pass touches (runbook stage 7 says what touching is) and follow up each
+later change of its state until the issue is closed with a final comment; the owner's
+standing instruction of 2026-10-11 is why. Without the grant, draft each reply and ask
+the owner to post it. Post only after the pull request that carries the change has
+merged, link only to main, and check first that main and the deployed site say what
+the comment says; the verdict comment is the one exception, on the condition stage 7,
+"Report-Order Verdict Comments", states. Add the `intake` label, and a case label where
+one applies, under the github-workflows grant; edit nothing else on a GitHub issue
+without the owner's word. If github.com, kingbird.myphotos.cc or evand.github.io is
 unreachable, say so in the pull request and continue with the rest.
 ```
 
@@ -220,9 +238,12 @@ happened:
   track the intake of a reported item carry the label too, as #532 to #537 do; an issue
   that tracks other work does not.
   Under the `github-workflows` grant the pass adds the label with
-  `gh issue edit N --add-label intake`; without the grant, it lists those issues for the
-  owner. The sweep lists each `result-report` entry and each entry marked `intake: true`
-  whose issue lacks the label.
+  `gh issue edit N --add-label intake`, and the case label as well where one applies
+  (`--add-label n-17,intake`), as
+  [the label policy](../../development.md#issue-and-pull-request-labels) says; without
+  the grant, it lists those issues for the owner.
+  The sweep lists each `result-report` entry and each entry marked `intake: true` whose
+  issue lacks the label.
   The owner asked for the label on 12 October 2026, when no issue carried it.
 - **A watched repository with nothing to import gets a read** in
   [`intake-watch.yaml`](intake-watch.yaml): the head, the date, and a note saying what
@@ -274,6 +295,12 @@ happened:
 ## Stage 1: Triage
 
 Triage decides what the import is before anything is retained, in an hour or less.
+Every result a pass finds is triaged before the pass spends heavily on any of them, in
+tokens or in CPU, so the owner sees the whole intake first.
+An item the closing sweep finds is triaged the same way, read-only: read the source at
+its head and propose one of three dispositions on the pass’s epic bead, an import bead,
+an evidence update on the bead that owns the result, or a read in
+[`intake-watch.yaml`](intake-watch.yaml).
 
 1. **Pin the source**, the author’s own publication and not a report of it, at a full
    commit id or a DOI with file checksums: its current head, unless the claim depends on
@@ -282,16 +309,24 @@ Triage decides what the import is before anything is retained, in an hour or les
    Issue 227 asked about $n = 102$ and $103$; the source held 49 packings.
    A claim in scope that the request does not mention becomes an import of its own.
 3. **Map each claim to the register** by the table below, and say who else holds each
-   value.
+   value. Where other open reports state an upper bound at the same count, the
+   [report-order ledger](#several-reports-at-one-count) decides which are recorded.
 4. **Price the validation:** the checkers a complete replay needs, the cost the source
    reports, and whether anything here decides the certificate without the source’s code.
    A missing tool is a W7 slice, and the plan says so.
+   A replay the pass does not run gets a validation bead
+   ([stage 4](#the-compute-cap-and-the-validation-backlog)).
 5. **Open the bead and draft the acknowledgement:** what was received, the revision
    pinned, and what will be checked.
    It is posted by [stage 7](#stage-7-answer)’s rule, once the pull request that carries
    the triage has merged.
    It states no `T-NNN` and no rung unless that pull request registered the result, and
    then it is the import reply as well.
+   A result that reached the record with no issue and whose draft significance is `S4`
+   or above gets an issue the project opens for it, labelled `intake`, so its intake,
+   review and validation have one public place (the owner, 2026-10-14: “for significant
+   items S4+ we should create an issue ourselves for tracking purposes”);
+   [jlevy/squares#603](https://github.com/jlevy/squares/issues/603) was the first.
 
 | Claim | Register action |
 | --- | --- |
@@ -305,6 +340,58 @@ Triage decides what the import is before anything is retained, in an hour or les
 | New evidence or an author’s answer about a registered entry | No new entry: the source retained at the revision that holds it, and an evidence update |
 | A request for a result already registered | No new entry: link the issue and continue from the entry’s stage |
 | Below the standing bound and asking for no work | None; it stays in the packet |
+
+### Several Reports at One Count
+
+When two or more open reports state an upper bound at the same count, the owner’s rule
+of 2026-10-14 decides which are recorded: “If they are reported in order, then each one
+should be recorded as a result, as long as each one is stronger than the last.
+If a stronger result is reported first, then the other one should not be recorded since
+it’s weaker after that, unless there’s some key reason it should be recorded.”
+[`devtools.intake_ledger`](../devtools/intake_ledger.py) applies it to an intake
+directory, `campaign/issue-intake/<subject>-<YYYYMMDD>/`, and its module docstring owns
+the inputs and the comparison:
+
+- **The start** at each count is the record on `main`, frozen in `starts.yaml` at a
+  named `main` commit: both upper lanes of the case record, any smaller register bound
+  pending adoption, and above the horizon the beyond-horizon row or the grid.
+- **The order** is the time each claim reached this repository: the issue, comment or
+  pull request that made it, or the update comment or commit that added it later.
+  A certificate published in a watched repository with no issue is a report from its
+  first commit (the owner, 2026-10-14).
+- **The comparison** reads each printed side as the span its rounding allows (`up`,
+  `nearest`, `unstated`, `cut` or `binary64`), or as its exact side where a lane or the
+  certificate gives one.
+  A claim is recorded when every number it may be is below every member of the standing
+  side. A tie stays with the earlier report, and a comparison the printed precision
+  cannot decide is undecided, never guessed.
+- **A refinement** of a standing packing is recorded like a new packing and credited to
+  its finder after the finder of the packing it refines, as a regularization
+  ([stage 3](#stage-3-record)).
+
+Transcribe each report’s claims into the directory’s `sources.yaml`, then, from
+`packing/`, run `python -m devtools.intake_ledger gather DIR` (`--snapshot` reuses the
+saved `github-issues.json`; `--refresh-starts` freezes the starts again), `render DIR`
+with `--write` and then `--check`, and `check DIR`. Stage 3 registers what `ledger.json`
+records, and nothing it does not unless the owner names a key reason.
+
+A comparison the prints leave undecided, and an exact decision later settles, is
+transcribed into `sources.yaml` as the claim’s `record_relations`: the case lane’s value
+and exact form as `starts.yaml` froze them, or a pending register entry’s id and stated
+value; the relation and its margin; and a `read_from` naming the decision’s receipt and
+tool. The 14 October ledger’s PR #574 rows are the example
+(`upper-bounds-20261014/undecided-resolved.json`, from
+`devtools.decide_undecided_comparisons`).
+
+The ledger’s README lists what the rule leaves to the owner, without deciding it: how a
+publication in a watched repository is read, key-reason candidates, an identity measured
+against what the source says, refinement chains, exact ties between holders, a
+certificate committed before the report that holds its count, undecided comparisons and
+claims of unknown time.
+The pass puts these to the owner in its pull request.
+A decision that holds for later passes becomes a rule where the rules on its subject
+live: this runbook, or [epistemics.md](../../epistemics.md#results-by-others) for
+credit.
 
 ## Stage 2: Retain
 
@@ -323,7 +410,9 @@ Triage decides what the import is before anything is retained, in an hour or les
   packet from its manifest.
 - **The bibliography key** carries the date of the pinned revision as `dated`, and is
   defined in the [resources README](../resources/README.md) as well.
-  Credit is read from the source’s own files, now and not after the review.
+  Credit is read from the source’s own files, now and not after the review, and names
+  each person as [epistemics.md](../../epistemics.md#parallel-projects-and-their-credit)
+  says: by name, not by a handle.
 
 ## Stage 3: Record
 
@@ -452,8 +541,9 @@ samples, cited by the case record where it would derive a rung it does not suppo
 A program that decides nothing is kept, and its README says so.
 
 When it returns, the findings that are the record’s are fixed and the rest go to the
-author. The review is mapped as above, the entry’s `unfinished_confirmations` and the
-validation backlog (`devtools.check_requests --backlog`) are brought up to date, and
+author. The review is mapped as above, the entry’s `unfinished_confirmations`, the
+validation backlog (`devtools.check_requests --backlog`) and the pass’s
+[backlog bead](#the-compute-cap-and-the-validation-backlog) are brought up to date, and
 `devtools.check_results` re-derives `V` and `C`: a rung the evidence now supports is
 changed, and where none moves the entry says why.
 The reply that shares the review with the author is drafted in the import’s answer bead
@@ -473,12 +563,49 @@ re-implemented sharing named components, or independently re-implemented.
 The checker holds the register’s `claim`, `composition` and `next_rung` to it; the case
 record, the review and the reply are held to it here.
 
+### The Compute Cap and the Validation Backlog
+
+The owner sets each pass a compute cap in CPU-hours, and the pass’s epic bead records
+it. It is the budget a pass needs before it starts a replay measured in CPU-hours, and
+the work above it is tracked in beads (the owner, 2026-10-14, setting the first cap:
+“let’s be sure we have a clear backlog of validation work that’s tracked appropriately,
+and details are in beads”). A validation item priced within it runs in the pass, and one
+priced above it is *held* until the owner raises the cap or approves a subset.
+The cap applies to each item; whether the runnable items together may pass it is the
+owner’s call. With no cap set, only a replay the source prices at minutes runs.
+
+Every validation item the pass leaves pending is a bead labelled `validation` under the
+import bead it serves, and its description carries one block:
+
+```markdown
+## Validation
+- Claim: the result, its certificate and source pin, and the checker.
+- Run: the commands, and any preparation slice before them.
+- Cost: CPU-hours, and their basis: the source's receipt, a sample run here, or an estimate.
+- Budget status: running, runnable, gated on decision, or held, against the cap.
+- Possible subset under the cap: for a held item, proposed; it runs on the owner's word.
+- Depends on: beads, owner decisions and code slices that must land first.
+- Done when: what the receipts show and where the evidence is registered.
+- Machine note: what the run needs and whether it can share the machine with a gate.
+```
+
+*Gated on decision* means the item fits under the cap but waits for an owner decision or
+a code slice. One backlog bead under the epic tabulates every item, with its bead, cost,
+status and dependencies, then totals by status and what the record cannot yet price.
+Each item’s bead is the one the entry’s `unfinished_confirmations` names (stage 3).
+
 ## Stage 5: Publish
 
 The pull request that registers or raises a result runs
 [New Result Publication](documentation-pass.md#new-result-publication): the views are
 rendered in the commit that changes the record, and the data pin moves in the next.
 No documentation phase is opened for it.
+
+The pull request’s `--fast` surface runs on CI’s runners, not on a machine that is also
+running a replay, where a tier’s wall measures the contention rather than the branch
+([What each tier costs](../../development.md#what-each-tier-costs-and-where-its-ceiling-lives)).
+It merges on the owner’s word, by
+[the merge policy](../../development.md#merging-a-pull-request).
 
 ### Verify the Published Result
 
@@ -524,6 +651,11 @@ After merge:
    The final author reply states only the scope actually imported, reviewed and
    published; a later source revision or newly split issue remains queued with its own
    owner.
+6. In the next change, give the merged pull request its News/changelog entry in
+   [`site-changelog.yaml`](../site-changelog.yaml), with the `result_ids` it registered
+   or moved, or an editorial omission, as
+   [Maintaining the project changelog](../../development.md#maintaining-the-project-changelog)
+   says.
 
 ## Stage 6: Explain
 
@@ -572,6 +704,8 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
   only to `main`. A link into a working branch dies with the branch, and a `T-NNN`
   quoted from one can change.
   An agent drafts it in the issue’s answer bead while that pull request is open.
+  A [report-order verdict comment](#report-order-verdict-comments) is the one progress
+  comment that may come before, on the condition that section states.
 - **The poster validates first** that `main` and the deployed site say what the reply
   says: it is rendered with `check_requests --draft N` from `main`, and the site is
   checked as [Verify the Published Result](#verify-the-published-result) says.
@@ -583,6 +717,49 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
 - The reply that reports a confirmation names the programs that ran, and says whether
   they were the author’s own code re-run or a re-implementation.
 - The issue is closed with a final comment when nothing the author asked for is queued.
+
+### Report-Order Verdict Comments
+
+Where a [report-order ledger](#several-reports-at-one-count) decided a pass’s counts,
+each result issue gets one comment giving the verdicts at the counts it claims.
+[`devtools.intake_comments`](../devtools/intake_comments.py) drafts them from the
+ledger’s `ledger.json` and a `comments.yaml` beside it in the intake directory, from
+`packing/`:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.intake_comments \
+    campaign/issue-intake/<directory>/comments.yaml --out DIR
+```
+
+The tool owns the comment’s form: `@author,`, a thank-you and the rule, then a table of
+each count’s side at 12 places, its verdict and the best side now, then a pointer to the
+records pull request and the Claude Code footer.
+A comment over many counts can lead with a summary and fold the table into `<details>`.
+It refuses a draft that names a `T-NNN` or holds any `tree/` or `blob/` link, into
+`main` as well as into a branch, and a result issue that has neither a comment nor a
+stated skip. `comments.yaml` holds what one pass says that another would not:
+
+- the issues that get a comment and their authors, and each issue skipped because
+  another comment already covers it, with the reason;
+- the records pull request, and how a holder or handle the ledger prints is named, by
+  [the credit rule](../../epistemics.md#parallel-projects-and-their-credit);
+- each comment’s own sentences.
+  An owner decision a count waits on is one plain sentence.
+  Where an earlier reply said otherwise, the comment says so and that “this evaluation
+  replaces it”. A publication in a watched repository is named as a backticked
+  `owner/repository@commit`, never as a link.
+
+The verdict comment is a progress comment: it may go out before the records pull request
+merges, because it names no id, rung or branch link.
+When the ledger later changes what a posted comment stated, the comment is edited to the
+regenerated draft, as deciding 17 of PR #574’s undecided comparisons in the 14 October
+ledger required of the #574 and #593 comments.
+The reply with ids and rungs follows the merge, as above.
+Posting stays manual, under the `github-workflows` grant.
+The drafts go to a scratch directory, not into the record, and `--check DIR` confirms
+them against the committed ledger before they are posted.
+Each posted comment’s id goes on the bead that owns the comments, and the comment is
+recorded under the issue’s `replies` like any other reply.
 
 ### The Requests Record
 

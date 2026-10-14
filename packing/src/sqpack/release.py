@@ -85,6 +85,30 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.1",
+        first_published="October 14, 2026",
+        result_scope=(
+            "Document quick pre-push feedback, explicit deeper checks and the CI cost "
+            "policy."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.0",
+        first_published="October 14, 2026",
+        result_scope=(
+            "Add News with significance and topic filters, unify Explanations and split "
+            "the tutorial, and let the Atlas use the full available page width."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.6.3",
+        first_published="October 14, 2026",
+        result_scope=(
+            "Add the 14 October intake ledger to the project changelog and state on the "
+            "epistemics page that credits name people by name."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.2",
         first_published="October 14, 2026",
         result_scope=(
@@ -646,6 +670,36 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.0",
+        version="v0.7.1",
+        impact="patch",
+        reason=(
+            "Document quick pre-push feedback, explicit deeper checks and the CI cost "
+            "policy."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.6.3",
+        version="v0.7.0",
+        impact="minor",
+        reason=(
+            "Add News with significance and topic filters, unify Explanations and split "
+            "the tutorial, and let the Atlas use the full available page width."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.6.2",
+        version="v0.6.3",
+        impact="patch",
+        reason=(
+            "Add the 14 October intake ledger to the project changelog and state on the "
+            "epistemics page that credits name people by name."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.6.1",
         version="v0.6.2",
         impact="patch",
@@ -720,38 +774,7 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
-        components=("site", "paper:n11-lower-bounds-explainer"),
-        paths=("packing/src/sqpack/cli/validate.py",),
-        outputs=(
-            "index.html",
-            "development.html",
-            "papers/n11-lower-bounds-explainer.html",
-            "papers/n11-lower-bounds-explainer.md",
-        ),
-        reason=(
-            "The executable AST change from 08d23c06 is confined to the quick pytest "
-            "command's native xdist queue-order option. It preserves selectors, workers, "
-            "markers, verdict rules and limits. Public page and explainer producers do not "
-            "execute this quick-test command; their source, data, rendering and edition "
-            "fields are unchanged. This exact-path validation scheduling disposition "
-            "does not cover other validation changes or claim a measured speedup."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=("site",),
-        paths=("packing/site-changelog.yaml",),
-        outputs=("about.html",),
-        reason=(
-            "Adds verified launch-history entries for merged PRs #563, #590 and #598 to "
-            "About and the generated GitHub changelog, preserving earlier dates, "
-            "membership and delivery metadata. The displayed history changes under "
-            "the documented changelog-only bookkeeping exception; this maintenance "
-            "does not cut another site edition or revise paper or infographic content."
-        ),
-    ),
-    ReleaseNoPublicChange(
         components=(
-            "site",
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
@@ -760,27 +783,15 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/apply_exact_optima.py",
             "packing/devtools/apply_upper_bound_packets.py",
-            "packing/devtools/source_supersession.py",
             "packing/devtools/build_known_best_atlas.py",
             "packing/devtools/overview_sections.py",
             "packing/devtools/regularized_drawings.py",
+            "packing/devtools/source_supersession.py",
             "packing/devtools/validate_schemas.py",
+            "packing/src/sqpack/cli/validate.py",
             "packing/src/sqpack/witness.py",
         ),
         outputs=(
-            "about.html",
-            "atlas.html",
-            "conventions.html",
-            "development.html",
-            "epistemics.html",
-            "index.html",
-            "papers.html",
-            "readme.html",
-            "results.html",
-            "synopsis.html",
-            "tutorial.html",
-            "visualize.html",
-            "workbench/index.html",
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
             "papers/n11-lower-bounds-explainer.pdf",
@@ -795,22 +806,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "Atlas presentation reuses validated frontier metadata and reads exact "
-            "enclosing sides without constructing every square. Scalar source identity, "
-            "projection, wire-data refusals, receipt and claim checks, and full renderer "
-            "geometry are preserved; atlas markup remains byte-identical. The drawing "
-            "register retains its full audit and equivalent generated-block diagnostics. "
-            "The shared schema audit preserves every eligible citation source and its "
-            "ordering, the original defect-id regex and all semantic checks and "
-            "diagnostics while pruning already excluded directories and text without "
-            "a defect-id prefix. Its affected negative controls are replayed separately. "
-            "Per-invocation coverage snapshots preserve all 97 combined packet-CLI "
-            "and 48 exact-CLI "
-            "adoption checks (50 packet checks plus 47 overlapping exact calls); both "
-            "complete apply-tool check audits report no record "
-            "drift. Standalone calls still read fresh coverage and no global cache is added. "
-            "These producer optimizations change no paper, drawing or component edition; "
-            "the separately scoped launch-history bookkeeping updates About."
+            "Paper manuscripts, figures, scientific records, drawn assets and their "
+            "edition histories are unchanged. Exact-admission coverage caches remain "
+            "fresh per invocation; the presentation side reader retains scalar, literal "
+            "and receipt checks without constructing unrelated coordinates. Validation "
+            "changes select test lanes, native queue order and diagnostics; paper "
+            "producers do not execute those commands. Schema validation retains its "
+            "refusals while reusing already-read metadata. These shared import paths "
+            "are conservative paper inputs. The retained claim documents and source "
+            "pin match main; no new byte-identical PDF build is claimed. The changed "
+            "public development guide is owned separately by the site patch cut."
         ),
     ),
     ReleaseNoPublicChange(
@@ -821,13 +826,21 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
-            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
-            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
-            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
-            "packing/devtools/upper_bound_reports.py",
-            "packing/pyproject.toml",
+            "TUTORIAL.md",
+            "packing/devtools/news_highlights.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/probes/measure_atlas_views/layout.js",
+            "packing/devtools/probes/measure_atlas_views/widen.js",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/repo_links.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/site_documents.py",
+            "packing/devtools/site_topics.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/templates/site-nav.css",
+            "packing/devtools/templates/site-nav.html",
+            "packing/src/sqpack/cli/validate.py",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
@@ -844,15 +857,15 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "Each paper was rendered with its own command at main's 37e6757ed and at "
-            "c6118ca59. The explainer's 55 files are byte-identical; the optimality, "
-            "threshold-bound and methods papers' HTML, Markdown and PDF are byte-identical "
-            "once the build commit their repository links pin is normalized. The inputs add "
-            "a beyond-horizon-only register plan and four HOUSES readers, reached from the "
-            "papers only through the atlas builder's import closure, and a BasedPyright "
-            "include that no render reads. The site v0.6.2 cut regenerates the claim "
-            "documents at its new link revision; the explainer rendered after that cut is "
-            "byte-identical in all 55 files to its render before it."
+            "The four standalone paper manuscripts, mathematical figures and paper-owned "
+            "styles are unchanged. The split tutorials publish through the reader-document "
+            "pipeline; existing links retain their legacy section landings. Shared import "
+            "and page inventories include those reader sources conservatively. News, "
+            "topic labels, significance meters, article disclosures, reading-card discovery "
+            "and navigation are site chrome. Shared chooser styles also serve the "
+            "print-hidden navigation; the paper-owned typography is unchanged. The retained "
+            "claim documents and their source-link pin match main. No byte-identical PDF "
+            "rebuild is claimed."
         ),
     ),
     ReleaseNoPublicChange(
@@ -963,6 +976,26 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "retains their own histories, statuses and dates while the site's "
             "history advances independently. Deployment citation "
             "provenance is independent of a paper revision."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site v0.6.3 cut regenerates the five claim documents at its new link "
+            "revision and changes nothing else in them. The explainer rendered with "
+            "main's claim documents and release module and with this branch's is "
+            "byte-identical in all 54 files it writes, so the explainer keeps v0.4.6."
         ),
     ),
 )
@@ -1101,7 +1134,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "c6118ca5"
+PUBLICATION_REVISION = "e4d46b8d"
 
 
 def data_pathspec() -> tuple[str, ...]:

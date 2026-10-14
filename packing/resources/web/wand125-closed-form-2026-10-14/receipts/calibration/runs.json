@@ -1,0 +1,20 @@
+{
+ "note": "think-au7j, 14 October 2026: replay4d built with rustc 1.86.0 from this packet's crates (0.1.0) and from the 1c661b7 packet's (0.1.1), Cargo.lock locked, two jobs; the two smallest records of closed-form-v1 replayed by 0.1.0 with one thread each, two at once, at nice 10 on four cores that other agents shared; five controls on interval 26's top record. B3_PLAIN_RF was not set in any run here. The release archives, the unpacked records and the control inputs stay in scratch; controls.json gives the inputs' digests, and `devtools.audit_wand125_closed_form controls` writes them again.",
+ "binary_digests": "binaries.log",
+ "builds": {
+  "fetch, 9a28a84 crates": "fetch-9a28a84.log",
+  "test, replay4d 0.1.0": "test-9a28a84.log",
+  "build, replay4d 0.1.0": "build-9a28a84.log",
+  "test, replay4d 0.1.1": "test-1c661b7.log",
+  "build, replay4d 0.1.1": "build-1c661b7.log"
+ },
+ "runs": [
+  {"label": "interval 26, [0.495, 0.5], top, replay4d 0.1.0", "log": "i26-top.log", "summary": "i26-top.json", "expect": "ok", "binary": "replay4d-0.1.0", "interval": 26, "region": "top"},
+  {"label": "interval 14, [0.435, 0.44], top, replay4d 0.1.0", "log": "i14-top.log", "summary": "i14-top.json", "expect": "ok", "binary": "replay4d-0.1.0", "interval": 14, "region": "top"},
+  {"label": "control: the first two roots of interval 26's top record, replay4d 0.1.0", "log": "c-truncated-0.1.0.log", "summary": "c-truncated-0.1.0.json", "expect": "bad", "binary": "replay4d-0.1.0"},
+  {"label": "control: the 20 leaves of its first 20 roots, --leaves, replay4d 0.1.0", "log": "c-leaves-0.1.0.log", "summary": "c-leaves-0.1.0.json", "expect": "ok", "binary": "replay4d-0.1.0"},
+  {"label": "control: the same leaves, leaf 0 relabelled CORE1:Tx to CORE, replay4d 0.1.0", "log": "c-relabelled-0.1.0.log", "summary": "c-relabelled-0.1.0.json", "expect": "bad", "binary": "replay4d-0.1.0"},
+  {"label": "control: the first two roots, replay4d 0.1.1", "log": "c-truncated-0.1.1.log", "summary": "c-truncated-0.1.1.json", "expect": "bad", "binary": "replay4d-0.1.1"},
+  {"label": "control: the 20 leaves, --leaves, replay4d 0.1.1", "log": "c-leaves-0.1.1.log", "summary": "c-leaves-0.1.1.json", "expect": "ok", "binary": "replay4d-0.1.1"}
+ ]
+}

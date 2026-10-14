@@ -64,6 +64,8 @@ DATED_NAME = re.compile(rf"(?P<kind>[a-z]+)-{DATE}-{SLUG}\.md")
 #: `VE-001-…`; conventions.md section 2).
 KEBAB_NAME = re.compile(rf"{SLUG}\.md")
 FIXED_NAMES = {"README.md", "AGENTS.md", "CLAUDE.md", "CHANGELOG.md"}
+#: The advanced companion keeps the explicitly requested root manuscript name.
+FIXED_PATHS = {"TUTORIAL-ADVANCED.md"}
 IDENTIFIER_NAME = re.compile(rf"(?:H|X|VE)-\d+-{SLUG}\.md")
 #: Documents that predate the layout and wait on a move every open pull request would
 #: conflict with: the root guides, the frontier's generated views and the verifier guides
@@ -214,7 +216,10 @@ def _layout_problem(relative: str) -> str | None:
                 names = " or ".join(f"{kind}-YYYY-MM-DD-topic.md" for kind in kinds)
                 return f"is not named {names}"
     if not (
-        name in FIXED_NAMES or KEBAB_NAME.fullmatch(name) or IDENTIFIER_NAME.fullmatch(name)
+        relative in FIXED_PATHS
+        or name in FIXED_NAMES
+        or KEBAB_NAME.fullmatch(name)
+        or IDENTIFIER_NAME.fullmatch(name)
     ):
         return "is not named in lowercase kebab-case"
     return None

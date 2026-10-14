@@ -108,16 +108,71 @@ The structure check is a premise check: it decides SPEC.md §7.1 steps 1 and 2 a
 of step 5, and leaves the leaf tests to `replay4d`. The evaluation decides what the
 theorem implies at each count, and nothing about the certificate.
 
+## The Calibration Replay
+
+On 14 October, after the intake, the validation lane `vcheap` (bead think-au7j) built
+`replay4d` and replayed the two smallest records, to price the complete replay on this
+host. The receipts are in [`receipts/calibration/`](receipts/calibration/runs.json), and
+[`devtools.audit_wand125_closed_form`](../../../devtools/audit_wand125_closed_form.py)
+`calibrate` binds them in [`calibration.json`](receipts/calibration/calibration.json).
+The host was four cores that other agents shared.
+Its load average was 12 to 16 for most of the replays, and the two ran at `nice` 10 on
+one thread each, at about 42% of a core.
+
+- **The build.** The packet’s `checker/` was restored in scratch and matched to the
+  manifest, and so was the 1c661b7 revision’s, from
+  [`../wand125-closed-form-source-hash-2026-10-14/`](../wand125-closed-form-source-hash-2026-10-14/README.md).
+  With rustc 1.86.0, the source’s version, and `Cargo.lock` locked, `cargo test
+  --locked --release -p seam4d_core -p replay4d` passed all 28 tests for replay4d 0.1.0
+  in 229 CPU-seconds, which includes GMP and MPFR built from source.
+  The release build took 13 CPU-seconds.
+  replay4d 0.1.1 passed the same 28 tests.
+  The binaries’ SHA-256 are `d52b8d88…` (0.1.0) and `fb84677b…` (0.1.1).
+- **Custody.** `interval_0.495_0.5.tar.gz`, `interval_0.435_0.44.tar.gz` and
+  `SHA256SUMS` were downloaded at 2026-10-14T17:33:34Z. Their SHA-256 equal `ASSET.json`
+  (`93406cf4…`, `a0e14933…`, `2e31850c…`), each archive’s own `SHA256SUMS` passed, and
+  both hold plain files only.
+  They stay with the author.
+- **The two records**, replayed by 0.1.0 with `--threads 1` and the region bounds of
+  `intervals.json`. Each ended `REPLAY OK`. The family digest, the record digest, the
+  roots and the leaves of every kind equal `intervals.json`. The printed source hash is
+  `92002e0e…`, and `B3_PLAIN_RF` was not set.
+
+| Record | Roots | Leaves | CPU here | Source’s CPU | Ratio | Wall |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Interval 26, $[0.495, 0.5]$, `top` | 4,158 | 32,828 | 1,178.9 s, 0.328 h | 0.27 h | 1.213 | 2,171.8 s |
+| Interval 14, $[0.435, 0.44]$, `top` | 3,861 | 91,343 | 1,241.7 s, 0.345 h | 0.28 h | 1.232 | 2,241.0 s |
+| Both | 8,019 | 124,171 | 0.672 h | 0.55 h | **1.223** |  |
+
+CPU here is replay4d’s own `cpu_seconds`, the measure the source’s receipt sums, and it
+agrees with `getrusage` to 0.1 s. The source gives its times to two decimals, so the
+ratio is known to about 2% (1.20 to 1.25). At 1.223 the source’s complete replay, 4,294
+CPU-hours, is **about 5,250 CPU-hours on this host**. That is about 1,310 hours of wall
+on four dedicated cores.
+The time here was measured under load, so on a quiet host it may be lower.
+
+| Control, on interval 26’s `top` record | Build | Verdict |
+| --- | --- | --- |
+| Its first two roots alone, with the region bounds | 0.1.0, 0.1.1 | `REPLAY BAD (2)`, exit 1: the u-range does not cover 90 degrees, and the root intervals are not partitions |
+| The 20 leaves of its first 20 roots, `--leaves` | 0.1.0, 0.1.1 | `REPLAY OK` |
+| The same leaves with leaf 0 relabelled from `CORE1:Tx` to `CORE`, `--leaves` | 0.1.0 | `REPLAY BAD (1)`, exit 1, at that leaf |
+
+The controls also show what each build prints.
+0.1.0 prints source hash `92002e0e…`. 0.1.1 prints `f8cafeab…` and records
+`env.B3_PLAIN_RF` as `unset`. Both equal the hashes the 1c661b7 packet recomputes from
+the retained files. The control inputs are derived from the release; `controls.json`
+gives their digests, and the tool’s `controls` command writes them again.
+The calibration took 0.75 CPU-hours in all: 269 s to build and test, 2,421 s for the two
+records and 7 s for the controls.
+
 ## What Was Not Run
 
-No record was replayed and `replay4d` was not built.
-The source prices one complete replay at 4,294 CPU-hours (`receipts/replay.json`, 269
-runs on two machines).
-Even its smallest record takes 0.27 CPU-hours.
-The build needs network access to crates.io for the locked crates and compiles GMP from
-source. The archives unpack to about 18 GB. That is far above an intake’s budget, and no
-owner budget is set, so the replay waits in think-tsox.
-The [register plan](register-plan.md#validation-priced) prices each remaining step.
+No complete replay ran: 2 of the 136 records have been replayed here, and they set no
+rung. The source prices one complete replay at 4,294 CPU-hours (`receipts/replay.json`,
+269 runs on two machines), about 5,250 here by the calibration.
+The archives unpack to about 18 GB. That is far above an intake’s budget, and the
+owner’s cap holds anything above 40 CPU-hours, so the replay waits in think-wu73. The
+[register plan](register-plan.md#validation-priced) prices each remaining step.
 
 The source states its own limits.
 `replay4d` shares its core with the search tools that made the records, so its replay is
@@ -187,9 +242,10 @@ pinned by digest only.
 | `square-packing/problems/closed-form/checker/` | The Rust checker, its `Cargo.lock`, and `replay_all.py`, not built |
 | `square-packing/problems/closed-form/receipts/` | The source’s replay, structure, family-cleanup and published-checker receipts |
 | `square-packing/problems/closed-form/ASSET.json`, `LICENSE` | The release’s digests, and the MIT notice |
-| `receipts/` | This packet’s custody and structure-check receipts |
+| `receipts/` | This packet’s custody, structure-check and calibration receipts |
 | `evaluation/` | This project’s exact evaluation, its outputs, and the source’s `a_of_n.py` output |
 | `register-plan.md` | The plan for stage 3 |
+| `calibration-plan.md` | The evidence update for the calibration replay |
 
 ## Sources and Notices
 
@@ -232,6 +288,7 @@ From `packing/`:
 uv run --frozen --all-extras --group dev python -m devtools.acquire_source wand125-closed-form-2026-10-14 --check
 uv run --frozen --all-extras --group dev python -m devtools.retained_data check resources/web/wand125-closed-form-2026-10-14
 uv run --frozen --all-extras --group dev python -I resources/web/wand125-closed-form-2026-10-14/evaluation/closed_form_bounds.py
+uv run --frozen --all-extras --group dev python -m devtools.audit_wand125_closed_form calibrate --check
 ```
 
 <!-- This document follows common-doc-guidelines.md.

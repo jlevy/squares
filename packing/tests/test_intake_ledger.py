@@ -442,6 +442,108 @@ def test_a_frozen_below_an_interval_member_ends_at_its_high() -> None:
     assert ledger.clamped(claim, [record()]) is claim
 
 
+def test_a_decided_relation_to_a_pending_entry_holds_while_it_states_its_value() -> None:
+    # #1 lies inside T-123's stated span, so the prints leave it undecided; a receipt
+    # decided it exactly above the entry's exact side, by the margin the ledger shows.
+    stated = check_standing.Stated(Fraction("10.40"), Fraction(1, 100))
+    pending = ledger.side_of(ledger.pending_member({"id": "T-123"}, stated))
+    decided: ledger.RecordRelation = {
+        "lane": "T-123",
+        "relation": "above",
+        "value": "52/5",
+        "exact_form": "",
+        "read_from": "a receipt",
+        "margin": "1.25e-30",
+    }
+    printed = "10.400000000000000000000000000002"
+    assert ledger.compare(side("#1", printed), pending) == ledger.UNDECIDED
+    claim = side("#1", printed, record_relations=[decided])
+    walk = ledger.walk(100, [pending], [claim])
+    assert verdicts(walk) == [("#1", "not recorded", "register T-123, pending adoption")]
+    assert ledger.step_record(walk.steps[0])["difference"] == "above by 1.25e-30"
+    # Another entry, or the entry stating another value, does not take the relation.
+    other = ledger.side_of(ledger.pending_member({"id": "T-124"}, stated))
+    restated = check_standing.Stated(Fraction("10.39"), Fraction(2, 100))
+    moved = ledger.side_of(ledger.pending_member({"id": "T-123"}, restated))
+    assert ledger.compare(claim, other) == ledger.UNDECIDED
+    assert ledger.compare(claim, moved) == ledger.UNDECIDED
+
+
+def test_a_decided_relation_shows_its_margin_where_the_prints_meet() -> None:
+    lane = ledger.record_side(17, {"value": "4.67553009360455"}, ["[K]"])
+    relation: ledger.RecordRelation = {
+        "lane": "reported",
+        "relation": "above",
+        "value": "4.67553009360455",
+        "exact_form": "",
+        "read_from": "a receipt",
+        "margin": "1.28e-93",
+    }
+    printed = "4.675530093604550951634111270483"
+    walk = ledger.walk(17, lane, [side("#1", printed, record_relations=[relation])])
+    assert verdicts(walk) == [("#1", "not recorded", "record [K]")]
+    assert ledger.step_record(walk.steps[0])["difference"] == "above by 1.28e-93"
+    # Without a margin the difference is the prints' distance, which says only "about".
+    unmeasured = {key: value for key, value in relation.items() if key != "margin"}
+    walk = ledger.walk(17, lane, [side("#1", printed, record_relations=[unmeasured])])
+    assert ledger.step_record(walk.steps[0])["difference"].startswith("above by about ")
+
+
+def test_gather_keeps_a_lanes_relations_beside_the_transcribed_ones(tmp_path: Path) -> None:
+    read_at_main = "f" * 40
+    mapping = {
+        "lane": "lane",
+        "packet": "absent-packet-2026-10-14",
+        "record": "algebraic-claims.json",
+    }
+    decided = {**BELOW_THE_RECORD, "read_from": "a receipt"}
+    sources = {
+        "format": ledger.SOURCES_FORMAT,
+        "read_at_main": read_at_main,
+        "read_on": "2026-10-14",
+        "rule": "the owner's rule",
+        "lanes": [{"name": "lane", "branch": "a-branch", "commit": "a" * 40}],
+        "reports": [
+            {
+                "report": "owner/repo@abc1234",
+                "url": "https://github.com/owner/repo/tree/abc1234",
+                "reported_at": CLAIM_TIME,
+                "holders": "A",
+                "lanes": [{**mapping, "all": True}],
+                "claims": [{"n": 100, "record_relations": [decided]}],
+            }
+        ],
+    }
+    (tmp_path / ledger.SOURCES).write_text(yaml.safe_dump(sources), encoding="utf-8")
+    snapshot = {"format": ledger.SNAPSHOT_FORMAT, "items": []}
+    (tmp_path / ledger.SNAPSHOT).write_text(json.dumps(snapshot), encoding="utf-8")
+    member = ledger.lane_member(100, "reported", {"value": "10.5", "exact_form": "21/2"}, [])
+    starts = ledger.starts_document(read_at_main, {100: [member]})
+    (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(starts), encoding="utf-8")
+    row = {
+        "n": 100,
+        "side_decimal": "10.5000000000",
+        "degree": 2,
+        "first_committed": "2026-10-11T00:00:00Z",
+        "case": {
+            "verified_relation": "below",
+            "verified_value": "10.51",
+            "verified_exact_form": "1051/100",
+        },
+    }
+    copy_ = tmp_path / ledger.LANE_CLAIMS / "lane" / mapping["packet"] / mapping["record"]
+    copy_.parent.mkdir(parents=True)
+    copy_.write_text(json.dumps({"results": [row]}), encoding="utf-8")
+    assert ledger.gather(tmp_path, snapshot=True) == []
+    claim = ledger.load_ledger(tmp_path)["reports"][0]["claims"][0]
+    relations = claim.get("record_relations", [])
+    assert [(item["lane"], item["read_from"]) for item in relations] == [
+        ("verified", f"{ledger.record_path(mapping)} at a-branch@{'a' * 40}"),
+        ("reported", "a receipt"),
+    ]
+    assert claim["printed"] == "10.5000000000"
+
+
 def test_a_binary64_print_spans_one_ulp_and_a_cut_print_its_next_unit() -> None:
     span = ledger.printed_side("17.8702753825550609", "binary64")
     assert ledger.contains(span, Fraction("17.8702753825550621"))
@@ -479,8 +581,21 @@ def _minimal() -> dict[str, Any]:
     }
 
 
+DECIDED: ledger.RecordRelation = {
+    "lane": "T-123",
+    "relation": "above",
+    "value": "52/5",
+    "exact_form": "",
+    "read_from": "a receipt",
+    "margin": "1.0e-30",
+}
+
+
 def test_check_holds_the_schema_the_prints_and_the_times() -> None:
     assert ledger.problems(_minimal()) == []
+    decided = copy.deepcopy(_minimal())
+    decided["reports"][0]["claims"][0]["record_relations"] = [DECIDED]
+    assert ledger.problems(decided) == []
     above_its_print = copy.deepcopy(_minimal())
     above_its_print["reports"][0]["claims"][0]["exact"] = "10401/1000"
     assert "outside its own print" in " ".join(ledger.problems(above_its_print))
@@ -516,6 +631,30 @@ def test_check_holds_the_schema_the_prints_and_the_times() -> None:
         (
             lambda data: data["reports"][0]["claims"][0].update(record_relations="below"),
             "record_relations is not a list",
+        ),
+        (
+            lambda data: data["reports"][0]["claims"][0].update(
+                record_relations=[{**DECIDED, "lane": "register"}]
+            ),
+            "names the reported or verified lane or a register entry",
+        ),
+        (
+            lambda data: data["reports"][0]["claims"][0].update(
+                record_relations=[{**DECIDED, "margin": "-1.0e-30"}]
+            ),
+            "a record relation above has the margin -1.0e-30",
+        ),
+        (
+            lambda data: data["reports"][0]["claims"][0].update(
+                record_relations=[{**DECIDED, "margin": "about 1e-30"}]
+            ),
+            "margin 'about 1e-30' is not a number",
+        ),
+        (
+            lambda data: data["reports"][0]["claims"][0].update(
+                record_relations=[DECIDED, {**DECIDED, "relation": "below", "margin": "-1"}]
+            ),
+            "two record relations read T-123 at 52/5",
         ),
         (
             lambda data: data.update(exceptions=[{"n": "abc", "report": "#1", "reason": "r"}]),
@@ -625,6 +764,47 @@ def test_render_reads_the_frozen_starts_and_never_the_tree(
     (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(stale), encoding="utf-8")
     with pytest.raises(ledger.LedgerError, match="read at"):
         ledger.rendered(tmp_path)
+
+
+def test_a_record_relation_that_reads_no_member_of_its_start_is_refused(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    # A relation decides only a comparison with a start member that prints what it read;
+    # one naming another lane, value or register entry would decide nothing.
+    member = ledger.lane_member(
+        100, "reported", {"value": "10.5", "exact_form": "21/2"}, ["T-1"]
+    )
+    starts = ledger.starts_document(FROZEN_AT, {100: [member]})
+    (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(starts), encoding="utf-8")
+    lane, value, form = member["lanes"][0][:3]
+    live: ledger.RecordRelation = {
+        "lane": lane,
+        "relation": "below",
+        "value": value,
+        "exact_form": form,
+        "read_from": "a receipt",
+    }
+    for relation, refused in (
+        (live, False),
+        (DECIDED, True),
+        ({**live, "value": "10.6"}, True),
+        ({**live, "lane": "verified"}, True),
+    ):
+        data = _minimal()
+        data["reports"][0]["claims"][0]["record_relations"] = [relation]
+        (tmp_path / ledger.LEDGER).write_text(yaml.safe_dump(data), encoding="utf-8")
+        assert ledger.problems(data) == []
+        assert ledger.main(["check", str(tmp_path)]) == int(refused)
+        if not refused:
+            assert set(ledger.rendered(tmp_path)) == {ledger.VERDICTS, ledger.README}
+            continue
+        error = capsys.readouterr().err
+        assert error.startswith(
+            f"FAIL  check: #1 n = 100: the record relation to {relation['lane']} at "
+            f"{relation['value']!r} reads no member of the start"
+        )
+        with pytest.raises(ledger.LedgerError, match="reads no member of the start"):
+            ledger.rendered(tmp_path)
 
 
 FROZEN_AT = "f" * 40
@@ -788,6 +968,37 @@ def test_a_lane_row_no_report_takes_is_refused() -> None:
 def test_render_check_passes_on_the_committed_ledger() -> None:
     assert ledger.problems(ledger.load_yaml(ledger.DEFAULT_DIRECTORY / ledger.LEDGER)) == []
     assert ledger.render(ledger.DEFAULT_DIRECTORY, check=True) == []
+
+
+def test_the_committed_ledger_decides_pr574_as_its_receipt_does() -> None:
+    # The 17 comparisons decide_undecided_comparisons decided exactly are transcribed into
+    # sources.yaml; each relation is the receipt's, and the verdict follows from it.
+    directory = ledger.DEFAULT_DIRECTORY
+    receipt = json.loads((directory / "undecided-resolved.json").read_text("utf-8"))
+    (report,) = [
+        item for item in ledger.load_ledger(directory)["reports"] if item["report"] == "PR #574"
+    ]
+    claims = {claim["n"]: claim for claim in report["claims"]}
+    verdicts = json.loads((directory / ledger.VERDICTS).read_text("utf-8"))
+    steps = {
+        count["n"]: next(step for step in count["steps"] if step["report"] == "PR #574")
+        for count in verdicts["counts"]
+        if count["n"] in claims
+    }
+    for row in receipt["rows"]:
+        n = row["n"]
+        decided = [
+            (item["relation"], item.get("margin"))
+            for item in claims[n].get("record_relations", [])
+            if "undecided-resolved.json" in item["read_from"]
+        ]
+        assert decided == [(row["relation"], row["margin"])], n
+        assert (steps[n]["reason"], steps[n]["decided_against"]) == (
+            row["relation"],
+            [row["against"]],
+        )
+    undecided = [item["n"] for item in verdicts["owner_decisions"]["undecided"]]
+    assert undecided == [item["n"] for item in receipt["gated"]] == [29, 55, 71, 83]
 
 
 def test_refinements_render_with_their_packing_and_form_a_chain() -> None:

@@ -219,6 +219,7 @@ def test_the_five_under_selections_an_adversarial_review_found() -> None:
     cases = {
         # check_svg_rendering pins examples in TUTORIAL.md and walks REPO.rglob("*.md").
         "TUTORIAL.md": "deterministic SVG rendering",
+        "TUTORIAL-ADVANCED.md": "deterministic SVG rendering",
         # render_research_tables diffs the n=11 report cell by cell.
         "docs/project/research/research-2026-08-22-packing-11-unit-squares.md": (
             "generated tables in sync with frontier/"

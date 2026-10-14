@@ -1217,6 +1217,9 @@ case or experiment separately.
 | [The Squares Project](README.md) | reader orientation | definitive | maintained | — |
 | [Synopsis: The `s(n)` Program](SYNOPSIS.md) | current technical state and terminology | definitive | maintained | — |
 | [Tutorial: Square Packing from First Principles](TUTORIAL.md) | first-principles tutorial | supporting | maintained | — |
+| [Advanced Tutorial: Square Packing, Search, and Proof](TUTORIAL-ADVANCED.md) | first-principles tutorial | supporting | maintained | — |
+| [Feature: Basic and Advanced Square-Packing Tutorials](docs/project/specs/active/plan-2026-10-14-basic-and-advanced-tutorials.md) | implementation plan | current | transient | — |
+| [Editorial Review: The Basic and Advanced Square-Packing Tutorials](docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md) | dated review record | record | retained | — |
 | [Packing Atlas](packing/atlas/README.md) | component scope and use | supporting | maintained | — |
 | [Enumerated Contact-Scaffold Atlas](packing/atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |
 | [Known-Best Packing Atlas, `n = 1..324`](packing/atlas/known-best/README.md) | component scope and use | supporting | maintained | — |

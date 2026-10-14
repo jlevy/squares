@@ -318,6 +318,21 @@ allowlist:
   - path: packing/devtools/audit_wand125_tools.py
     kind: download
     boundary: wand125's published input digests against the regenerated input (H3).
+  - path: packing/devtools/audit_wand125_closed_form.py
+    kind: download
+    boundary: >-
+      wand125's closed form: replay4d's printed source hash and the structure receipt's
+      validate_family digest, as the source states them at 9a28a84 and 1c661b7, against
+      their recomputation from the pinned upstream files, which is the claim under test
+      (think-4wgw); and the downloaded closed-form-v1 records and families against the
+      digests intervals.json publishes, and the source's replay receipt joined to them by
+      record digest (think-au7j). Packet custody is acquire_source --check's.
+  - path: packing/devtools/decide_undecided_comparisons.py
+    kind: download
+    boundary: >-
+      PR #574's n = 17 v2 certificate, taken from the downloaded release archive, against
+      the certificate digest the pull request's claims.json names before its side is
+      read (think-abjj).
   - path: packing/devtools/audit_tokoharu_density.py
     kind: download
     boundary: Tokoharu's density packet against its file manifest (H4).

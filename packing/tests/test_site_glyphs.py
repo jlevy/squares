@@ -61,7 +61,7 @@ PAPERS = (EXPLAINER, THRESHOLD, PAPER)
 REVIEW_FIGURES = {PAPER: 12, THRESHOLD: 12}
 #: The site's own pages measured here: a long report, whose headings, tables and block
 #: quotes hold formulas, and the homepage, whose cards, chips and tables do.
-SITE_PAGES = ("tutorial.html", "index.html")
+SITE_PAGES = ("tutorial.html", "tutorial-advanced.html", "index.html")
 MAC, LINUX = "MacIntel", "Linux x86_64"
 #: A formula both papers set in their prose, as the page's pipeline writes its TeX.
 SHARED_FORMULA = r"s\mkern1mu(11)=T"
@@ -79,7 +79,7 @@ KNOWN: dict[str, dict[str, str]] = {
             "Source Sans 3 does not carry, so the reader's machine draws them"
         ),
     },
-    "tutorial.html": {
+    "tutorial-advanced.html": {
         r"(code block|inline code|other \(code in \.kpress-table\)) .*: drawn from .*host": (
             "mathematics written as code (≥, μ, Σ, √), in characters Planetaire Mono Text "
             "does not carry"

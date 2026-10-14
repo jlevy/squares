@@ -1058,9 +1058,9 @@ n = 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, fir
 committed in `e646c47` and `c284cd0` with no issue and pinned at
 `078789a4cfd36f915f1bfbe76d742413d79b2965`, retained as the source wrote them;
 [packet](web/fang-direct-certificates-2026-10-13/README.md).
-Both project exact routes accept the 3 replayed certificates, at 380, 381 and 382, and
-refuse all 6 controls; the other eleven wait for an owner’s replay budget.
-All fourteen sides lie beyond the case corpus, for the record’s beyond-horizon rows.
+Both project exact routes accept all 14 replayed certificates and refuse all 28
+controls. All fourteen sides lie beyond the case corpus, for the record’s beyond-horizon
+rows.
 
 **[Fang excess theorem 2026-10-13]**: Kevin Fang’s Theorems 1 and 2,
 $s(n^2 - n + 1) < n$ for every $n \ge 15$ and $s(n^2 - n + F(n)) < n$ with

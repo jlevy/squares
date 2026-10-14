@@ -1,0 +1,8 @@
+# command: ./replay4d-0.1.0 interval_0.495_0.5/family.json interval_0.495_0.5/top.rec --region 167/100 301/100 272/100 38/10 --threads 1 --out out/i26-top.json
+# cwd: the run directory: replay4d binaries and the unpacked release assets of closed-form-v1
+# python3: not used by this command
+# host: 4 cores; load 1.98 2.63 3.45; started 2026-10-14T17:37:20Z
+roots 4158 leaf kinds {"B3D":2530,"B3U:x":2296,"CORE":13475,"CORE1:P":78,"CORE1:Tx":1045,"CORE1:x":11023,"EDGE":2381}
+cpu 1178.915986s wall 2171.729701s
+REPLAY OK
+# finished 2026-10-14T18:13:31Z; exit 0; wall 2171.788 s; CPU 1179.0 s (user 1177.720 + sys 1.232); load 3.05 4.52 7.25

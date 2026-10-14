@@ -6197,6 +6197,14 @@ urls:
   lastmod: '2026-10-14'
   status: live
   target: papers/n11-optimality-review.pdf
+- path: news.html
+  canonical: news.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-14'
+  lastmod: '2026-10-14'
+  status: live
 - path: papers.html
   canonical: papers.html
   kind: page
@@ -13709,6 +13717,14 @@ urls:
   lastmod: '2026-10-14'
   status: live
   target: papers/n11-lower-bounds-explainer.pdf
+- path: tutorial-advanced.html
+  canonical: tutorial-advanced.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-14'
+  lastmod: '2026-10-14'
+  status: live
 - path: tutorial.html
   canonical: tutorial.html
   kind: page

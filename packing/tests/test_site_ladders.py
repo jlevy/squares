@@ -9,9 +9,9 @@ overview's until 2026-10-02) and measures the diagram
 with the probe `devtools.measure_site_pages ladders` reports from, at the widths the
 design is shot at and at the ones where a description is narrowest: 716 pixels, the least
 window that sets three columns, and 715, where the ladders stack; 768, where the page's
-margin widens and the wide track is 4 pixels more than at 716; 980, the least that sets
-a rung's description beside its chip in three columns, and 979, the widest that sets it
-under; and on a phone 360 and 320, the least that sets it beside, with 319 under. At
+margin widens and the wide track is 4 pixels more than at 716; 1100, the least that sets
+a rung's description beside its chip in three columns, and 1099, the widest that sets it
+under; and on a phone 360, the least that sets it beside, with 359 under. At
 each the diagram also stands inside whatever clips the page sideways, with the wide
 track's gutter either side.
 
@@ -37,6 +37,8 @@ from tests import site_renders
 #: Each width measured, and how many columns the rungs stand in there.
 WIDTHS = {
     1280: 3,
+    1100: 3,
+    1099: 3,
     1024: 3,
     980: 3,
     979: 3,
@@ -45,16 +47,13 @@ WIDTHS = {
     715: 1,
     390: 1,
     360: 1,
+    359: 1,
     320: 1,
     319: 1,
 }
-#: The widths at which a cell has 18rem, the widest rail's, significance's, with the
-#: gap and the least description, so a rung's description stands beside its chip; at
-#: the others it lies under the chip, across the cell. The cells turned at 16.5rem, the
-#: chips' rail's, from a 908-pixel window and on a phone from 296, until significance
-#: took marks in a wider rail (2026-10-03), and from 973 and 318 until that rail grew from
-#: 3.6rem to 3.75rem to hold S5's mark (2026-10-05).
-BESIDE = frozenset({1280, 1024, 980, 715, 390, 360, 320})
+#: The shared meter's 6.25rem rail + 0.75rem gap + 13.5rem description need
+#: 20.5rem: a 1100px window in three columns, or 360px in the stacked diagram.
+BESIDE = frozenset({1280, 1100, 715, 390, 360})
 #: A rung's height in pixels where its description stands beside its chip, and where it
 #: lies under it: the two lines, or the chip's line and the two, and 0.4rem
 #: (`--site-ladders-row-space`) above and below, which is all that parts the rows.
@@ -64,9 +63,9 @@ HEAD_RULE = 1
 #: `--site-ladders-meaning-min`, 13.5rem, in pixels: the narrowest a description is set.
 MEANING_MIN = 216
 #: How much narrower a significance description is than the others where it stands
-#: beside its rail: its rail, `--site-ladders-significance-rail`, 3.75rem, over the
+#: beside its rail: its rail, `--site-ladders-significance-rail`, 6.25rem, over the
 #: chips', `--site-ladders-rail`, 2.25rem, in pixels.
-SIGNIFICANCE_RAIL_MORE = 24
+SIGNIFICANCE_RAIL_MORE = 64
 #: `--site-ladders-gap`, 0.75rem, in pixels: the least room between a chip or mark and the
 #: description beside it.
 GAP = 12
@@ -106,13 +105,14 @@ def diagrams(results_page: Any) -> dict[int, dict[str, Any]]:
 
 @pytest.fixture(scope="module")
 def widened(results_page: Any, diagrams: dict[int, dict[str, Any]]) -> dict[str, Any]:
-    """The diagram at 1280 pixels with every significance mark set a sixth wider than
-    the page's face sets it, as a wider face does: S5's mark, 58.8 pixels in the page's
-    face, is 65 in the fallback face and more in some system faces. Taken after
-    `diagrams`, since the style stays on the page."""
+    """Enlarge the shared fixed-width meters by 20%, as a reader's font override can.
+    The rail must grow with the meter while keeping the words clear and on two lines.
+    """
     assert diagrams
     results_page.set_viewport_size({"width": 1280, "height": 900})
-    results_page.add_style_tag(content=".site-significance-label { letter-spacing: 0.3em; }")
+    results_page.add_style_tag(
+        content=".site-significance { font-size: calc(var(--site-font-size-note) * 1.2); }"
+    )
     results_page.wait_for_timeout(100)
     (found,) = results_page.evaluate(LADDERS)
     return found

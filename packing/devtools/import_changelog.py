@@ -157,6 +157,12 @@ def draft(rows: Sequence[Document], baseline: Document | None = None) -> Documen
             "pull_requests": [number],
             "summary": "Draft for editorial review: " + html.escape(delivery["title"]) + ".",
         }
+        if "significance" not in row:
+            raise ValueError(
+                f"PR #{number}: an editorial significance score and rationale are required; "
+                "supply significance metadata or --significance and --significance-rationale"
+            )
+        entry["significance"] = copy.deepcopy(row["significance"])
         cited = sorted(set(re.findall(r"\bT-\d{3,}\b", row.get("body") or "")) & known_results)
         if cited:
             entry["result_ids"] = cited
@@ -231,6 +237,16 @@ def _write_candidate(options: argparse.Namespace) -> None:
         )
         if receipt is not None:
             row["delivery_to_main"] = receipt
+    if (options.significance is None) != (options.significance_rationale is None):
+        raise ValueError(
+            "--significance and --significance-rationale must be supplied together"
+        )
+    if options.significance is not None:
+        for row in rows:
+            row["significance"] = {
+                "score": options.significance,
+                "rationale": options.significance_rationale,
+            }
     document = draft(rows, baseline)
     rendered = yaml.safe_dump(document, allow_unicode=True, sort_keys=False, width=96)
     audit = coverage_audit(document)
@@ -264,6 +280,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--main-ref", default="origin/main")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--audit", type=Path)
+    parser.add_argument("--significance", type=int, choices=range(1, 6))
+    parser.add_argument(
+        "--significance-rationale", help="Plain editorial reason for the candidate's importance"
+    )
     options = parser.parse_args(argv)
     try:
         _write_candidate(options)

@@ -1,0 +1,70 @@
+# command: cargo +1.86.0 test --locked --release -j 2 -p seam4d_core -p replay4d
+# cwd: problems/closed-form/checker/ of a scratch restore of the test-9a28a84 packet tree
+# python3: not used by this command
+# host: 4 cores; load 2.45 2.34 3.58; started 2026-10-14T17:33:20Z
+   Compiling libc v0.2.190
+   Compiling gmp-mpfr-sys v1.7.1
+   Compiling serde_core v1.0.229
+   Compiling libm v0.2.16
+   Compiling zmij v1.0.23
+   Compiling serde_json v1.0.151
+   Compiling rug v1.30.0
+   Compiling memchr v2.8.3
+   Compiling az v1.3.0
+   Compiling itoa v1.0.18
+   Compiling seam4d_core v0.1.0 (/tmp/claude-0/-home-user-squares/b631c4e5-343e-524d-b3e3-75217093489f/scratchpad/vcheap/build-9a28a84/problems/closed-form/checker/seam4d_core)
+   Compiling replay4d v0.1.0 (/tmp/claude-0/-home-user-squares/b631c4e5-343e-524d-b3e3-75217093489f/scratchpad/vcheap/build-9a28a84/problems/closed-form/checker/replay4d)
+    Finished `release` profile [optimized] target(s) in 2m 18s
+     Running unittests src/main.rs (/tmp/claude-0/-home-user-squares/b631c4e5-343e-524d-b3e3-75217093489f/scratchpad/vcheap/target/release/deps/replay4d-65e4656698945ac3)
+
+running 4 tests
+test tests::domain_uses_maximum_upper_endpoint ... ok
+test tests::rational_parser_and_rejection ... ok
+test tests::tiling_and_damage ... ok
+test sha256::tests::vectors ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (/tmp/claude-0/-home-user-squares/b631c4e5-343e-524d-b3e3-75217093489f/scratchpad/vcheap/target/release/deps/seam4d_core-8d61612f281140f6)
+
+running 23 tests
+test b3d::b4u_tests::all_b4u_preconditions_fail_closed ... ok
+test b3d::core1_tests::core1_closed_width_and_parallel_miss ... ok
+test b3d::b4u_tests::edge_chain_algebraic_components_resampling_and_limit ... ok
+test b3d::b4u_tests::edge_critical_value_below_both_endpoints ... ok
+test b3d::core1_tests::core1_common_pieces_translation_v_and_points ... ok
+test b3d::core1_tests::core1_guard_resampling_and_splitting ... ok
+test b3d::tests::clip_closed_boundary_and_symbolic_guard ... ok
+test b3d::tests::concave_conditions_exact_boundaries ... ok
+test b3d::tests::gcd_div ... ok
+test b3d::tests::local_u_includes_all_vertices_and_unnormalized_edges ... ok
+test b3d::tests::rootfree ... ok
+test b3d::tests::tangent_conditions_and_contract ... ok
+test replay::tests::b3t_rejects_zero_and_bad_tangent ... ok
+test replay::tests::b3u_rejects_zero_and_bad_concavity ... ok
+test b3d::core1_tests::core1_family_poly_threshold_domain_and_zero ... ok
+test replay::tests::core1_leaf_routing_and_conditions ... ok
+test replay::tests::core1_tan_half_leaf_conditions_and_threshold ... ok
+test replay::tests::derive_removes_all_line_segments_and_replaces_u ... ok
+test replay::tests::side_uses_original_family_and_rejects_below_ua ... ok
+test replay::tests::variant_b3d_rejects_cross_zero_and_core_none ... ok
+test b3d::core1_tests::core1_tan_half_hand_values_and_conditions ... ok
+test b3d::tests::sturm_cache_exact_and_scoped ... ok
+test replay::tests::b4u_leaf_routing_and_preconditions ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.71s
+
+     Running tests/w0.rs (/tmp/claude-0/-home-user-squares/b631c4e5-343e-524d-b3e3-75217093489f/scratchpad/vcheap/target/release/deps/w0-051f4abaf6de036c)
+
+running 1 test
+test w0_three_family ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests seam4d_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+# finished 2026-10-14T17:35:40Z; exit 0; wall 140.425 s; CPU 229.2 s (user 199.755 + sys 29.395); load 3.84 3.01 3.66

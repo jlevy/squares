@@ -113,9 +113,12 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "at 146 results."
         ),
     ),
-    "tutorial.html": (
+    "tutorial-advanced.html": (
         800_000,
-        "The complete authored tutorial and prepared formulas measure 742,713 bytes.",
+        (
+            "The advanced tutorial retains the original technical derivations and reference "
+            "tables; the complete authored text and prepared formulas measure 771,603 bytes."
+        ),
     ),
     "papers/n11-lower-bounds-explainer.html": (
         1_500_000,

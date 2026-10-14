@@ -424,6 +424,9 @@ reports:
     packet: pingyou-pr574-certificates-2026-10-13
     record: algebraic-claims.json
     all: true
+  # The record_relations at 17 counts are the exact decisions of undecided-resolved.json
+  # in this directory (devtools.decide_undecided_comparisons, think-abjj): each against
+  # the record lane or pending register entry the prints left the claim undecided with.
   claims:
   - n: 5
     refines:
@@ -463,6 +466,13 @@ reports:
       packing_of: John Bidwell
       entry: '[Kingbird]'
       source: 'the pull request''s claims.json at 4c319c2: classification tighter_rational_certificate_same_known_nominal_design'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '4.67553009360455'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 17], by devtools.decide_undecided_comparisons decide'
+      margin: '1.28e-93'
   - n: 18
     refines:
       packing_of: Pertti Hämäläinen
@@ -498,6 +508,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '5.82444461667405'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 28], by devtools.decide_undecided_comparisons decide'
+      margin: '4.49e-95'
   - n: 29
     printed: '5.9338334626769291896894606163520191384339'
     rounding: up
@@ -520,6 +537,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '6.59861960924436'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 37], by devtools.decide_undecided_comparisons decide'
+      margin: '2.19e-90'
   - n: 38
     refines:
       packing_of: Frits Göbel
@@ -534,6 +558,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '6.81072208306864'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 39], by devtools.decide_undecided_comparisons decide'
+      margin: '1.03e-90'
   - n: 40
     refines:
       packing_of: Frits Göbel
@@ -548,6 +579,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '6.92669309446880'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 41], by devtools.decide_undecided_comparisons decide'
+      margin: '1.19e-89'
   - n: 50
     refines:
       packing_of: the Kingbird catalogue (Thomas Schadt), verified by T-155's exact ceiling
@@ -582,6 +620,13 @@ reports:
       entry: '[Kingbird]'
       source: 'think-9v2k: all are padding reductions or exact attainments of packings others
         found; the pr574 lane''s README: the quartic side is below the verified ceiling'
+    record_relations:
+    - lane: reported
+      relation: equal
+      value: '7.84666719284348'
+      exact_form: '7 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))'
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 54], by devtools.decide_undecided_comparisons decide'
+      margin: '0'
   - n: 55
     refines:
       packing_of: the Kingbird catalogue (Thomas Schadt), verified by T-101's exact ceiling
@@ -624,6 +669,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '8.82719465572973'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 69], by devtools.decide_undecided_comparisons decide'
+      margin: '2.19e-89'
   - n: 70
     refines:
       packing_of: Ryan Xu
@@ -678,6 +730,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '9.83881526994826'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 87], by devtools.decide_undecided_comparisons decide'
+      margin: '1.99e-89'
   - n: 88
     refines:
       packing_of: Nate Chaoweeraprasit (itsnaka)
@@ -734,12 +793,26 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: T-121
+      relation: above
+      value: '10822908044132847555086207/1000000000000000000000000'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 106], by devtools.decide_undecided_comparisons decide'
+      margin: '1.01e-94'
   - n: 107
     refines:
       packing_of: Károly Hajba
       entry: '[Kingbird]'
       source: 'think-9v2k: all are padding reductions or exact attainments of packings others
         found; the pr574 lane''s README: the quartic side is below the verified ceiling'
+    record_relations:
+    - lane: reported
+      relation: equal
+      value: '10.84666719284348'
+      exact_form: '10 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))'
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 107], by devtools.decide_undecided_comparisons decide'
+      margin: '0'
   - n: 108
     refines:
       packing_of: Ryan Xu
@@ -810,6 +883,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '11.82509196821368'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 128], by devtools.decide_undecided_comparisons decide'
+      margin: '2.60e-89'
   - n: 129
     refines:
       packing_of: Daniil Ostashev
@@ -896,6 +976,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: T-122
+      relation: above
+      value: '3207679700244152488716379/250000000000000000000000'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 152], by devtools.decide_undecided_comparisons decide'
+      margin: '1.01e-94'
   - n: 153
     first_committed: '2026-10-13T01:29:11Z'
     note: the lane records 2026-10-13T00:29:11Z; the commit that adds the N153/N302 manifest,
@@ -980,12 +1067,26 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: T-123
+      relation: above
+      value: '276459594683388972001873/20000000000000000000000'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 177], by devtools.decide_undecided_comparisons decide'
+      margin: '1.39e-64'
   - n: 178
     refines:
       packing_of: '[Kingbird]'
       entry: '[Kingbird]'
       source: 'think-9v2k: all are padding reductions or exact attainments of packings others
         found; the pr574 lane''s README: the quartic side is below the verified ceiling'
+    record_relations:
+    - lane: reported
+      relation: equal
+      value: '13.84666719284348'
+      exact_form: '13 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))'
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 178], by devtools.decide_undecided_comparisons decide'
+      margin: '0'
   - n: 179
     refines:
       packing_of: Nate Chaoweeraprasit (itsnaka)
@@ -1078,6 +1179,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '14.82445114612408'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 205], by devtools.decide_undecided_comparisons decide'
+      margin: '1.13e-94'
   - n: 206
     refines:
       packing_of: Francisco Couzo
@@ -1193,6 +1301,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '15.82660563342856'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 235], by devtools.decide_undecided_comparisons decide'
+      margin: '1.30e-94'
   - n: 236
     refines:
       packing_of: Nate Chaoweeraprasit (itsnaka)
@@ -1437,6 +1552,13 @@ reports:
       source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
         at 73 counts the margin is padding below a certificate of the same packing (the case''s,
         as frozen in its claims.json); think-9v2k'
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '17.82412338847854'
+      exact_form: ''
+      read_from: 'packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json rows[n = 300], by devtools.decide_undecided_comparisons decide'
+      margin: '1.21e-94'
   - n: 301
     refines:
       packing_of: Francisco Couzo

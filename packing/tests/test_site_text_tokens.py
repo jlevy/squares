@@ -49,7 +49,12 @@ def browser() -> Iterator[Any]:
 
 @pytest.fixture(scope="module")
 def pages(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
-    return site_renders.write(tmp_path_factory.mktemp("site"), "tutorial.html", "readme.html")
+    return site_renders.write(
+        tmp_path_factory.mktemp("site"),
+        "tutorial.html",
+        "tutorial-advanced.html",
+        "readme.html",
+    )
 
 
 def typography(browser: Any, path: Path, *, host_font: bool = False) -> dict[str, Any]:
@@ -69,7 +74,7 @@ def typography(browser: Any, path: Path, *, host_font: bool = False) -> dict[str
         page.close()
 
 
-@pytest.mark.parametrize("name", ["tutorial.html", "readme.html"])
+@pytest.mark.parametrize("name", ["tutorial.html", "tutorial-advanced.html", "readme.html"])
 def test_a_report_resolves_the_explainers_text_tokens(
     browser: Any, pages: dict[str, Path], name: str
 ) -> None:
@@ -88,7 +93,7 @@ def test_a_report_resolves_the_explainers_text_tokens(
 def test_a_viewers_host_font_hook_does_not_replace_the_sites_faces(
     browser: Any, pages: dict[str, Path]
 ) -> None:
-    measured = typography(browser, pages["tutorial.html"], host_font=True)
+    measured = typography(browser, pages["tutorial-advanced.html"], host_font=True)
     tokens = measured["column_tokens"]
     assert FOREIGN not in tokens["--kpress-font-sans"]
     assert FOREIGN not in tokens["--kpress-font-prose"]

@@ -380,12 +380,13 @@ the summary of `bounds.json`.
 | The source’s structure check on all 68 families, with two mutations | Done here: ALL STRUCTURE OK, mutations refused | 68 s wall, 44 CPU-s |
 | An independent exact evaluation of $a(N)$ against the case records, with four controls | Done here | 19.5 s wall, 17.9 CPU-s |
 | The source’s `a_of_n.py`, 49 to 3600, as a cross-check | Done here: identical at 3,498 counts | 5.5 s |
-| A complete replay of the 136 records by replay4d | Not run: priced | 4,294 CPU-hours by the source’s receipt, uncalibrated here. That is about 1,070 hours of wall on this four-core host, or about 67 hours on 64 dedicated cores. It also needs 18 GB unpacked, network access to crates.io for the locked crates, and GMP built from source. |
-| A calibration replay of the two smallest records, with the build | Not run: priced | About one CPU-hour, plus the toolchain download |
+| A complete replay of the 136 records by replay4d | Not run: priced, and held by the owner’s 40 CPU-hour cap (think-wu73) | 4,294 CPU-hours by the source’s receipt, about 5,250 here by the calibration below. That is about 1,310 hours of wall on four dedicated cores, or about 82 hours on 64. It also needs 18 GB unpacked, network access to crates.io for the locked crates, and GMP built from source. |
+| A calibration replay of the two smallest records, with the build | Done after the intake (think-au7j): both `REPLAY OK`, three controls refused or accepted as expected; ratio to the source 1.223 | 0.75 CPU-hours, plus the toolchain download; the complete replay is about 5,250 CPU-hours here |
 | A mathematical review of SPEC.md, the structure check and replay4d’s trust boundary | Not run: runs in its own lane | Agent time at the strongest tier. The reading list in the packet README is about 6,200 lines |
 | An independently written checker of the leaf tests | Not planned: a W7 slice | Its engineering, plus a run likely of the same order as the source’s replay |
 
-No CPU-hour budget is set, so the replay waits in think-tsox for the owner.
+The owner’s cap of 14 October holds anything above 40 CPU-hours, so the complete replay
+waits in think-wu73 for the owner.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

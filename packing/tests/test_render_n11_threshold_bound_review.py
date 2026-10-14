@@ -230,7 +230,10 @@ def test_the_page_carries_the_sites_bar_and_the_shared_layers(
 ) -> None:
     html, _ = rendered
     assert render_overview.nav_html("papers", root="../") in html
-    assert '<a data-page="papers" aria-current="page" href="../papers.html">Papers</a>' in html
+    assert (
+        '<a data-page="explanations" aria-current="page" href="../papers.html">Explanations</a>'
+        in html
+    )
     assert len(re.findall(r'<a\b[^>]*\saria-current="page"', html)) == 1
     layer = paper.render_n11_lower_bounds_explainer.publication_layer()
     head = html.split("</head>", 1)[0]

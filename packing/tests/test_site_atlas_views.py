@@ -74,6 +74,7 @@ PREPARE_SHOT = probe(PROBES, "site_atlas_views/prepare-shot")
 CONTROLS = probe(PROBES, "site_atlas_views/controls")
 CONTAINER_MOVE = probe(PROBES, "site_atlas_views/container-move")
 SIZE_STATE = probe(PROBES, "site_atlas_views/size-state")
+WIDTH_CAP = probe(PROBES, "site_atlas_views/width-cap")
 
 GRID, TRIANGLE = atlas.tab("grid"), atlas.tab("triangle")
 SMALL, MEDIUM, LARGE = (atlas.size_tab(size) for size in atlas.SIZES)
@@ -1918,6 +1919,49 @@ def test_small_triangle_survives_disabled_javascript_and_mounting_without_bootst
         )
         assert _size_tabs(mounted)[size]["selected"] == "true"
         assert atlas.layout_problems(mounted) == []
+
+
+@pytest.mark.parametrize("name", ["index.html", "atlas.html"])
+def test_atlas_fills_available_width_with_and_without_scripts(
+    atlas_files: Path, row_browser: Any, name: str
+) -> None:
+    """The scroll frame reaches both page gutters, even beyond the former 140rem cap."""
+    for javascript in (False, True):
+        context = row_browser.new_context(
+            java_script_enabled=javascript, reduced_motion="reduce"
+        )
+        try:
+            page = context.new_page()
+            page.goto((atlas_files / name).as_uri(), wait_until="load")
+            check_site_rendering.wait_for_fonts(page)
+            for width in (390, 1920, 3200):
+                page.set_viewport_size({"width": width, "height": 900})
+                if javascript:
+                    atlas.settle(page)
+                for view in atlas.VIEWS if javascript else ("triangle",):
+                    if javascript:
+                        page.locator(atlas.tab(view)).click()
+                        atlas.settle(page)
+                    report = page.evaluate(LAYOUT)
+                    where = f"{name}, {width}px, {view}, scripts {javascript}"
+                    assert report["block"]["left"] == pytest.approx(
+                        report["available"]["left"], abs=0.5
+                    ), where
+                    assert report["block"]["right"] == pytest.approx(
+                        report["available"]["right"], abs=0.5
+                    ), where
+                    assert report["overflow"] == 0, where
+                    if width == 390 and view == "triangle":
+                        assert report["pan"]["width"] > report["pan"]["viewport"], where
+            control = page.evaluate(WIDTH_CAP)
+            capped = page.evaluate(LAYOUT)
+            assert capped["available"]["width"] - capped["block"]["width"] > 500, (
+                name,
+                javascript,
+                control,
+            )
+        finally:
+            context.close()
 
 
 def test_wide_triangle_uses_grid_capacity_without_a_row_length_cap(seen: Readings) -> None:

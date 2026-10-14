@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the site's own pages: the overview, the frontier atlas and the tutorial.
+"""Render the site's own pages: the overview, the frontier atlas and the tutorials.
 
 The published site used to have one top-level page, the n = 11 explainer. This renderer
 adds the front door and the pages around it, as the plan in
@@ -27,7 +27,7 @@ adds the front door and the pages around it, as the plan in
 - a forwarder at each address a page used to have (`MOVED_PAGES`), the papers' old
   addresses among them, so an old link still arrives, query and fragment kept
   (`forwarder_pages`);
-- `tutorial.html`, the tutorial rendered as a page;
+- `tutorial.html` and `tutorial-advanced.html`, the two tutorials as reader pages;
 - a forwarder at each address a page used to have (`MOVED_PAGES`), so an old link still
   arrives, query and fragment kept (`forwarder_pages`);
 - `visualize.html`, the Visualize section's first tab: the n = 1 to 324 film at full
@@ -84,6 +84,7 @@ PAPER_TYPE_CSS = TEMPLATES / "paper-type.css"
 OVERVIEW_ARTICLE = TEMPLATES / "overview-article.md"
 ATLAS_ARTICLE = TEMPLATES / "atlas-article.md"
 ABOUT_ARTICLE = TEMPLATES / "about-article.md"
+NEWS_ARTICLE = TEMPLATES / "news-article.md"
 #: The invitation to report results, with its button: About's and the overview's alike.
 REPORT_RESULTS = TEMPLATES / "report-results.md"
 RESULTS_ARTICLE = TEMPLATES / "all-results-article.md"
@@ -91,6 +92,9 @@ VISUALIZE_ARTICLE = TEMPLATES / "visualize-article.md"
 PAPERS_ARTICLE = TEMPLATES / "papers-article.md"
 BROWSER = PACKING / "devtools" / "overview"
 FORWARD_SCRIPT = BROWSER / "forward.js"
+NEWS_CARDS_SCRIPT = BROWSER / "news-cards.js"
+NEWS_FORWARD_SCRIPT = BROWSER / "news-forward.js"
+NEWS_FILTERS_SCRIPT = BROWSER / "news-filters.js"
 TABLE_SCRIPT = BROWSER / "table.js"
 MATH_SCRIPT = BROWSER / "math.js"
 POPOVER_SCRIPT = BROWSER / "popover.js"
@@ -172,8 +176,8 @@ ATLAS_DESCRIPTION = (
     "squares, with drawings, case records and the complete Frontier Survey."
 )
 PAPERS_DESCRIPTION = (
-    "Square packing from first principles, how record packings are found and verified, "
-    "and a three-part n = 11 series on lower bounds and optimality."
+    "Tutorials, papers and PDFs on square packing, with films and an interactive "
+    "workbench for exploring the problem and its proofs."
 )
 VISUALIZE_DESCRIPTION = (
     "The best packings known of n unit squares, n = 1 to 324, built one square at a "
@@ -197,10 +201,10 @@ def film_release_date() -> str:
     return f"{day.day} {day:%B}"
 
 
-#: The Visualize section's tabs, each its own page: its key, where it is served from the
-#: site's root, and its label. The film is the section's first tab and the bar's target.
+#: The Explanations section reuses the existing papers, film and workbench addresses.
+#: Each tab names its key, its address from the site root, and its label.
 VISUALIZE_TABS: tuple[tuple[str, str, str], ...] = (
-    ("film", "visualize.html", "Film"),
+    ("film", "papers.html#visuals", "Film"),
     ("workbench", "workbench/", "Workbench"),
 )
 FRONTIER_DESCRIPTION = (
@@ -408,12 +412,14 @@ def paper_path(slug: str, suffix: str = ".html") -> str:
 #: writes it. The navigation bar links only to these, and tests hold it to that.
 SITE_PAGES: tuple[str, ...] = (
     "index.html",
+    "news.html",
     "atlas.html",
     "about.html",
     RESULTS_PAGE,
     "papers.html",
     *(paper_path(paper.slug) for paper in PAPERS),
     "tutorial.html",
+    "tutorial-advanced.html",
     "visualize.html",
     "workbench/index.html",
     *DOCUMENT_PAGES,
@@ -476,6 +482,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "site-changelog.yaml",
     PACKING / "site-changelog.schema.yaml",
     PACKING / "devtools/render_changelog.py",
+    PACKING / "devtools/news_highlights.py",
     PACKING / "devtools/build_known_best_atlas.py",
     PACKING / "devtools/atlas_print_font.py",
     PACKING / "devtools/default_drawings.py",
@@ -496,6 +503,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     OVERVIEW_ARTICLE,
     ATLAS_ARTICLE,
     ABOUT_ARTICLE,
+    NEWS_ARTICLE,
     REPORT_RESULTS,
     RESULTS_ARTICLE,
     VISUALIZE_ARTICLE,
@@ -517,6 +525,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "atlas" / "known-best" / "regularized" / "index.json",
     PACKING / "atlas" / "known-best" / "regularized" / "rendering",
     REPO / repo_links.TUTORIAL,
+    REPO / repo_links.TUTORIAL_ADVANCED,
     REPO / repo_links.README,
     REPO / repo_links.SYNOPSIS,
     REPO / repo_links.CONVENTIONS,
@@ -821,6 +830,8 @@ def nav_html(current: str, *, root: str = "") -> str:
     """The navigation bar, with the current page marked."""
     nav = SITE_NAV.read_text(encoding="utf-8")
     nav = nav.replace("{{ROOT}}", root)
+    # Existing paper renderers and film callers share the Explanations destination.
+    current = {"papers": "explanations", "visualize": "explanations"}.get(current, current)
     marker = f'data-page="{current}"'
     if marker not in nav:
         raise SystemExit(f"site-nav.html has no entry for {current!r}")
@@ -893,7 +904,7 @@ def nav_shell(current: str, *, root: str, tabs: str = "") -> NavShell:
 
 
 def visualize_tabs(current: str, *, root: str = "") -> str:
-    """The Visualize section's tab bar, with the current tab marked.
+    """The Explanations section's tab bar, with the current tab marked.
 
     Each tab is a real link to its own page, so the bar needs no script and a tab can be
     opened, bookmarked and shared. Its look is `.site-tabs` in `site-nav.css`, the one
@@ -902,13 +913,13 @@ def visualize_tabs(current: str, *, root: str = "") -> str:
     the bar, not the slot, carries the rule on a page that has them.
     """
     if current not in {key for key, _, _ in VISUALIZE_TABS}:
-        raise SystemExit(f"the Visualize section has no tab {current!r}")
+        raise SystemExit(f"the Explanations section has no tab {current!r}")
     links = "".join(
         f'<a data-tab="{key}"{' aria-current="page"' if key == current else ""} '
         f'href="{root}{href}">{html.escape(label)}</a>'
         for key, href, label in VISUALIZE_TABS
     )
-    return f'<nav class="site-tabs" aria-label="Visualize">{links}</nav>'
+    return f'<nav class="site-tabs" aria-label="Visuals">{links}</nav>'
 
 
 #: The icon's size in a tab, in CSS pixels: whole pixels, so its one-pixel frame
@@ -1255,11 +1266,12 @@ def report_results() -> str:
 
 def overview_page() -> Page:
     """A short introduction, bounded previews, papers, and links to the full pages."""
-    from devtools import overview_data, overview_sections  # noqa: PLC0415
+    from devtools import news_highlights, overview_data, overview_sections  # noqa: PLC0415
 
     overview = overview_data.load()
     values = {
         "HERO": overview_sections.hero(),
+        "NEWS_PREVIEW": news_highlights.render(overview),
         "ATLAS_GRID": overview_sections.atlas_preview(),
         "PAPER_CARDS": overview_sections.paper_cards(),
         "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
@@ -1278,12 +1290,13 @@ def overview_page() -> Page:
         markdown,
         name="index.html",
         current="overview",
-        title="Square Packing: Bounds, Results and Best Packings",
+        title=PROJECT_NAME,
         description=OVERVIEW_DESCRIPTION,
         toc=False,
         rewrite_body=_case_links,
         page_styles=(HOMEPAGE_CSS,),
         page_scripts=(
+            NEWS_CARDS_SCRIPT,
             FILM_SCRIPT,
             FORWARD_SCRIPT,
             TABLE_SCRIPT,
@@ -1327,6 +1340,28 @@ def atlas_page() -> Page:
     )
 
 
+def news_page() -> Page:
+    """The complete retained contribution and launch history, grouped by day."""
+    from devtools import render_changelog  # noqa: PLC0415
+
+    markdown = _template_markdown(
+        NEWS_ARTICLE, {"NEWS": render_changelog.render_news(render_changelog.load())}
+    )
+    return kpress_page(
+        markdown,
+        name="news.html",
+        current="news",
+        title="News",
+        description=(
+            "Project news: newly launched results, papers, downloads and site features, "
+            "with the retained contribution history."
+        ),
+        toc=False,
+        page_scripts=(NEWS_CARDS_SCRIPT, NEWS_FILTERS_SCRIPT),
+        rewrite_body=_case_links,
+    )
+
+
 def about_page() -> Page:
     """The project narrative, approach, attribution, and supporting resources."""
     from devtools import overview_sections, render_changelog  # noqa: PLC0415
@@ -1336,8 +1371,8 @@ def about_page() -> Page:
         {
             "REPORT_RESULTS": report_results(),
             "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
-            "CHANGELOG": render_changelog.render_markdown(
-                render_changelog.load(), destination="site"
+            "NEWS_LEGACY_ANCHORS": render_changelog.legacy_news_anchors(
+                render_changelog.load()
             ),
         },
     )
@@ -1353,7 +1388,7 @@ def about_page() -> Page:
         ),
         toc=False,
         rewrite_body=_case_links,
-        page_scripts=(POPOVER_SCRIPT,),
+        page_scripts=(POPOVER_SCRIPT, NEWS_FORWARD_SCRIPT),
     )
 
 
@@ -1390,8 +1425,18 @@ def papers_page() -> Page:
     series are the cards' own addresses, filled from the one constant each."""
     from devtools import overview_sections  # noqa: PLC0415
 
+    tutorials = tuple(
+        paper
+        for paper in overview_sections.PAPERS
+        if paper.href in {"tutorial.html", "tutorial-advanced.html"}
+    )
     values = {
-        "PAPER_CARDS": overview_sections.paper_cards(),
+        "TUTORIAL_CARDS": overview_sections.paper_cards(papers=tutorials),
+        "PAPER_CARDS": overview_sections.paper_cards(
+            papers=tuple(paper for paper in overview_sections.PAPERS if paper not in tutorials)
+        ),
+        "VISUAL_TABS": visualize_tabs("film"),
+        "FILM": film_markdown(inline=True),
         "PDF_CARDS": overview_sections.pdf_cards(),
         "PDF_NOTE": overview_sections.pdf_note(),
         "LOWER_BOUNDS_PAPER": overview_sections.LOWER_BOUNDS_PAPER,
@@ -1406,10 +1451,11 @@ def papers_page() -> Page:
     return kpress_page(
         markdown,
         name="papers.html",
-        current="papers",
-        title="Papers",
+        current="explanations",
+        title="Explanations",
         description=PAPERS_DESCRIPTION,
         toc=False,
+        page_scripts=(FILM_SCRIPT,),
     )
 
 
@@ -1481,13 +1527,8 @@ def case_records() -> list[Page]:
     return build()
 
 
-def visualize_page() -> Page:
-    """The Visualize section's first tab: the film of the ascent at full size.
-
-    The film starts when the page is visited: its markup mutes it and marks it
-    `data-autoplay`, and `overview/film.js` starts it unless the reader asks for reduced
-    motion or the page is framed in a popover. No other page carries that script, so no
-    other film on the site starts unasked."""
+def film_markdown(*, inline: bool = False) -> str:
+    """The shared film and its evidence note; inline readers choose when to play."""
     values = {
         "FILM_URL": FILM_URL,
         "SHORT_FILM_URL": SHORT_FILM_URL,
@@ -1498,10 +1539,26 @@ def visualize_page() -> Page:
     markdown = fill(
         VISUALIZE_ARTICLE.read_text(encoding="utf-8"), values, where=VISUALIZE_ARTICLE.name
     )
+    if inline:
+        heading = '<h1 class="site-visually-hidden" id="visualize">Visualize</h1>'
+        if not markdown.startswith(heading):
+            raise ValueError("the film template no longer starts with its page heading")
+        markdown = markdown.removeprefix(heading).replace(" data-autoplay", "", 1)
+    return markdown
+
+
+def visualize_page() -> Page:
+    """The Visualize section's first tab: the film of the ascent at full size.
+
+    The film starts when the page is visited: its markup mutes it and marks it
+    `data-autoplay`, and `overview/film.js` starts it unless the reader asks for reduced
+    motion or the page is framed in a popover. No other page carries that script, so no
+    other film on the site starts unasked."""
+    markdown = film_markdown()
     return kpress_page(
         markdown,
         name="visualize.html",
-        current="visualize",
+        current="explanations",
         title="Visualize",
         description=VISUALIZE_DESCRIPTION,
         toc=False,
@@ -1522,11 +1579,13 @@ def _document_page(name: str) -> Callable[[], Page]:
 #: The pages this renderer owns, by served name.
 PAGES: dict[str, Callable[[], Page]] = {
     "index.html": overview_page,
+    "news.html": news_page,
     "atlas.html": atlas_page,
     "about.html": about_page,
     RESULTS_PAGE: results_page,
     "papers.html": papers_page,
     "tutorial.html": tutorial_page,
+    "tutorial-advanced.html": _document_page("tutorial-advanced.html"),
     "visualize.html": visualize_page,
     **{name: _document_page(name) for name in DOCUMENT_PAGES},
 }

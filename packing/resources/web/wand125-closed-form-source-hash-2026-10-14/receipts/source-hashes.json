@@ -1,0 +1,329 @@
+{
+ "schema": "wand125-replay4d-source-hash/v1",
+ "tool": "devtools.audit_wand125_closed_form hashes",
+ "rule": "replay4d main.rs source_hash(): for each covered file in order, its name as UTF-8, a NUL byte, its length as a 64-bit big-endian integer and its bytes; the SHA-256 of the concatenation",
+ "revisions": [
+  {
+   "commit": "9a28a84bd55dc124bfa2919bb6c4fb504dda3149",
+   "packet": "packing/resources/web/wand125-closed-form-2026-10-14",
+   "replay4d_version": {
+    "cargo_toml": "0.1.0",
+    "cargo_lock": [
+     "0.1.0"
+    ]
+   },
+   "rule": "main.rs fn source_hash(), read from this revision's own main.rs",
+   "covered": [
+    {
+     "name": "Cargo.toml",
+     "path": "problems/closed-form/checker/replay4d/Cargo.toml",
+     "bytes": 444,
+     "sha256": "0c8fba1f96a3eb137a6e96d02c1c6dec4bb5799145295a6a06baf8ded3096b04"
+    },
+    {
+     "name": "../Cargo.toml",
+     "path": "problems/closed-form/checker/Cargo.toml",
+     "bytes": 351,
+     "sha256": "f48993dc9f917426085631bdd9806786c6f053b9d0106affaad6e3bb24918e19"
+    },
+    {
+     "name": "../Cargo.lock",
+     "path": "problems/closed-form/checker/Cargo.lock",
+     "bytes": 4272,
+     "sha256": "16f5ebb7a38a9816e82bab38168b4b32dff0889c0f9385ae8997a820758ba932"
+    },
+    {
+     "name": "src/main.rs",
+     "path": "problems/closed-form/checker/replay4d/src/main.rs",
+     "bytes": 13247,
+     "sha256": "fc87c4280d0b24a833c4abf69acb322375fd08a7f6c30ebd104ee1c2c9b97271"
+    },
+    {
+     "name": "src/sha256.rs",
+     "path": "problems/closed-form/checker/replay4d/src/sha256.rs",
+     "bytes": 2691,
+     "sha256": "f4d24dfbfead9454018067e96f758350f495b38473eac148c0227287c64c6ec8"
+    },
+    {
+     "name": "../seam4d_core/Cargo.toml",
+     "path": "problems/closed-form/checker/seam4d_core/Cargo.toml",
+     "bytes": 387,
+     "sha256": "b00f08c4dea613e9c62795c6f37083e400317a2cdf641a3a153cb46e82ec9194"
+    },
+    {
+     "name": "../seam4d_core/src/lib.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/lib.rs",
+     "bytes": 24251,
+     "sha256": "e8b7be13f718d90710c83fce3b7e0c6ff36e9636b2f3a6834900e0d42a348eb8"
+    },
+    {
+     "name": "../seam4d_core/src/fast.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/fast.rs",
+     "bytes": 15964,
+     "sha256": "b86f5b188952f5aafc4bb113d9cc03599d7733c1fe613fcac02d32798f588fdc"
+    },
+    {
+     "name": "../seam4d_core/src/b3d.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "bytes": 98801,
+     "sha256": "2287450b69226be0602a12e885b8767eebee84989b0de9803719756bff97f3af"
+    },
+    {
+     "name": "../seam4d_core/src/replay.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/replay.rs",
+     "bytes": 21799,
+     "sha256": "cec36d631cfd184b7d06a22e93dba7bfb5b7167fcbd430dc1a972466fb35cadc"
+    }
+   ],
+   "covered_file_count": 10,
+   "covers_b3d_sort": false,
+   "source_sha256": "92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193",
+   "stated_source_sha256": "92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193",
+   "stated_in": "README.md: the source hash printed by replay4d is ... 92002e0e... for the published sources; receipts/published_checker.json names it",
+   "stated_value_in_readme": true,
+   "equal": true,
+   "summary_records_b3_plain_rf": false,
+   "b3d_sort_sha256": "23be1db0de55790110ff97c966bf34a6046c1d224a0f5bad98c6639866895928",
+   "b3d_sort_read_from": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d_sort.rs",
+   "validate_family_sha256": "22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786",
+   "structure_receipt_validate_family_sha256": "fdd61866ca180e4373062f440cb8c61a626a2b71a411b63f5df46443d12a16a0",
+   "structure_receipt_names_published_script": false
+  },
+  {
+   "commit": "746e2c5ac7a7f534996dd50a5e1fd9f1d8836a8d",
+   "packet": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14",
+   "replay4d_version": {
+    "cargo_toml": "0.1.0",
+    "cargo_lock": [
+     "0.1.0"
+    ]
+   },
+   "rule": "main.rs fn source_hash(), read from this revision's own main.rs",
+   "covered": [
+    {
+     "name": "Cargo.toml",
+     "path": "problems/closed-form/checker/replay4d/Cargo.toml",
+     "bytes": 444,
+     "sha256": "0c8fba1f96a3eb137a6e96d02c1c6dec4bb5799145295a6a06baf8ded3096b04"
+    },
+    {
+     "name": "../Cargo.toml",
+     "path": "problems/closed-form/checker/Cargo.toml",
+     "bytes": 351,
+     "sha256": "f48993dc9f917426085631bdd9806786c6f053b9d0106affaad6e3bb24918e19"
+    },
+    {
+     "name": "../Cargo.lock",
+     "path": "problems/closed-form/checker/Cargo.lock",
+     "bytes": 4272,
+     "sha256": "16f5ebb7a38a9816e82bab38168b4b32dff0889c0f9385ae8997a820758ba932"
+    },
+    {
+     "name": "src/main.rs",
+     "path": "problems/closed-form/checker/replay4d/src/main.rs",
+     "bytes": 13247,
+     "sha256": "fc87c4280d0b24a833c4abf69acb322375fd08a7f6c30ebd104ee1c2c9b97271"
+    },
+    {
+     "name": "src/sha256.rs",
+     "path": "problems/closed-form/checker/replay4d/src/sha256.rs",
+     "bytes": 2691,
+     "sha256": "f4d24dfbfead9454018067e96f758350f495b38473eac148c0227287c64c6ec8"
+    },
+    {
+     "name": "../seam4d_core/Cargo.toml",
+     "path": "problems/closed-form/checker/seam4d_core/Cargo.toml",
+     "bytes": 387,
+     "sha256": "b00f08c4dea613e9c62795c6f37083e400317a2cdf641a3a153cb46e82ec9194"
+    },
+    {
+     "name": "../seam4d_core/src/lib.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/lib.rs",
+     "bytes": 24251,
+     "sha256": "e8b7be13f718d90710c83fce3b7e0c6ff36e9636b2f3a6834900e0d42a348eb8"
+    },
+    {
+     "name": "../seam4d_core/src/fast.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/fast.rs",
+     "bytes": 15964,
+     "sha256": "b86f5b188952f5aafc4bb113d9cc03599d7733c1fe613fcac02d32798f588fdc"
+    },
+    {
+     "name": "../seam4d_core/src/b3d.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "bytes": 98801,
+     "sha256": "2287450b69226be0602a12e885b8767eebee84989b0de9803719756bff97f3af"
+    },
+    {
+     "name": "../seam4d_core/src/replay.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/replay.rs",
+     "bytes": 21799,
+     "sha256": "cec36d631cfd184b7d06a22e93dba7bfb5b7167fcbd430dc1a972466fb35cadc"
+    }
+   ],
+   "covered_file_count": 10,
+   "covers_b3d_sort": false,
+   "source_sha256": "92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193",
+   "stated_source_sha256": "92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193",
+   "stated_in": "replay4d unchanged since 9a28a84: the README repeats 92002e0e...",
+   "stated_value_in_readme": true,
+   "equal": true,
+   "summary_records_b3_plain_rf": false,
+   "b3d_sort_sha256": "23be1db0de55790110ff97c966bf34a6046c1d224a0f5bad98c6639866895928",
+   "b3d_sort_read_from": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d_sort.rs",
+   "validate_family_sha256": "22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786",
+   "structure_receipt_validate_family_sha256": "fdd61866ca180e4373062f440cb8c61a626a2b71a411b63f5df46443d12a16a0",
+   "structure_receipt_names_published_script": false
+  },
+  {
+   "commit": "1c661b705422b58b5eb169589776b50c14be2a2f",
+   "packet": "packing/resources/web/wand125-closed-form-source-hash-2026-10-14",
+   "replay4d_version": {
+    "cargo_toml": "0.1.1",
+    "cargo_lock": [
+     "0.1.1"
+    ]
+   },
+   "rule": "main.rs fn source_hash(), read from this revision's own main.rs",
+   "covered": [
+    {
+     "name": "Cargo.toml",
+     "path": "problems/closed-form/checker/replay4d/Cargo.toml",
+     "bytes": 444,
+     "sha256": "45146f8151afdbc582d985981d1ed8d8e8eb3a76dbec004a6fcb4d039d20c926"
+    },
+    {
+     "name": "../Cargo.toml",
+     "path": "problems/closed-form/checker/Cargo.toml",
+     "bytes": 351,
+     "sha256": "f48993dc9f917426085631bdd9806786c6f053b9d0106affaad6e3bb24918e19"
+    },
+    {
+     "name": "../Cargo.lock",
+     "path": "problems/closed-form/checker/Cargo.lock",
+     "bytes": 4272,
+     "sha256": "3146d621838a0a8f41cc14f0154d042555a12b1a52794e9eb98a50d3e831e861"
+    },
+    {
+     "name": "src/main.rs",
+     "path": "problems/closed-form/checker/replay4d/src/main.rs",
+     "bytes": 13442,
+     "sha256": "cce4bc4b7c20175cfdd64b3148d3c4b03a4f51bdeccead258d9039f060cd51bd"
+    },
+    {
+     "name": "src/sha256.rs",
+     "path": "problems/closed-form/checker/replay4d/src/sha256.rs",
+     "bytes": 2691,
+     "sha256": "f4d24dfbfead9454018067e96f758350f495b38473eac148c0227287c64c6ec8"
+    },
+    {
+     "name": "../seam4d_core/Cargo.toml",
+     "path": "problems/closed-form/checker/seam4d_core/Cargo.toml",
+     "bytes": 387,
+     "sha256": "b00f08c4dea613e9c62795c6f37083e400317a2cdf641a3a153cb46e82ec9194"
+    },
+    {
+     "name": "../seam4d_core/src/lib.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/lib.rs",
+     "bytes": 24251,
+     "sha256": "e8b7be13f718d90710c83fce3b7e0c6ff36e9636b2f3a6834900e0d42a348eb8"
+    },
+    {
+     "name": "../seam4d_core/src/fast.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/fast.rs",
+     "bytes": 15964,
+     "sha256": "b86f5b188952f5aafc4bb113d9cc03599d7733c1fe613fcac02d32798f588fdc"
+    },
+    {
+     "name": "../seam4d_core/src/b3d.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "bytes": 98801,
+     "sha256": "2287450b69226be0602a12e885b8767eebee84989b0de9803719756bff97f3af"
+    },
+    {
+     "name": "../seam4d_core/src/b3d_sort.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/b3d_sort.rs",
+     "bytes": 7212,
+     "sha256": "23be1db0de55790110ff97c966bf34a6046c1d224a0f5bad98c6639866895928"
+    },
+    {
+     "name": "../seam4d_core/src/replay.rs",
+     "path": "problems/closed-form/checker/seam4d_core/src/replay.rs",
+     "bytes": 21799,
+     "sha256": "cec36d631cfd184b7d06a22e93dba7bfb5b7167fcbd430dc1a972466fb35cadc"
+    }
+   ],
+   "covered_file_count": 11,
+   "covers_b3d_sort": true,
+   "source_sha256": "f8cafeab078e1de31bacdef9c5c08ad70938f1b1b20fd3a2e1e54de9f73f1742",
+   "stated_source_sha256": "f8cafeab078e1de31bacdef9c5c08ad70938f1b1b20fd3a2e1e54de9f73f1742",
+   "stated_in": "README.md: the published sources of 0.1.1 hash to f8cafeab...",
+   "stated_value_in_readme": true,
+   "equal": true,
+   "summary_records_b3_plain_rf": true,
+   "b3d_sort_sha256": "23be1db0de55790110ff97c966bf34a6046c1d224a0f5bad98c6639866895928",
+   "b3d_sort_read_from": "packing/resources/web/wand125-closed-form-source-hash-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d_sort.rs",
+   "validate_family_sha256": "22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786",
+   "structure_receipt_validate_family_sha256": "22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786",
+   "structure_receipt_names_published_script": true
+  }
+ ],
+ "all_equal_to_stated": true,
+ "controls": [
+  {
+   "mutation": "the last byte of problems/closed-form/checker/seam4d_core/src/b3d_sort.rs flipped (bit 0)",
+   "9a28a84": {
+    "hash_changes": false
+   },
+   "746e2c5": {
+    "hash_changes": false
+   },
+   "1c661b7": {
+    "hash_changes": true
+   }
+  },
+  {
+   "mutation": "the last byte of problems/closed-form/checker/seam4d_core/src/b3d.rs flipped (bit 0)",
+   "9a28a84": {
+    "hash_changes": true
+   },
+   "746e2c5": {
+    "hash_changes": true
+   },
+   "1c661b7": {
+    "hash_changes": true
+   }
+  }
+ ],
+ "unchanged_files": [
+  {
+   "path": "problems/closed-form/checker/seam4d_core/src/b3d_sort.rs",
+   "sha256_9a28a84": "23be1db0de55790110ff97c966bf34a6046c1d224a0f5bad98c6639866895928",
+   "sha256_1c661b7": "23be1db0de55790110ff97c966bf34a6046c1d224a0f5bad98c6639866895928",
+   "byte_identical": true
+  },
+  {
+   "path": "problems/closed-form/structure/validate_family.py",
+   "sha256_9a28a84": "22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786",
+   "sha256_1c661b7": "22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786",
+   "byte_identical": true
+  }
+ ],
+ "stated_b3d_sort_sha256": "23be1db0de55790110ff97c966bf34a6046c1d224a0f5bad98c6639866895928",
+ "b3d_sort_equals_stated": true,
+ "structure_receipt": {
+  "9a28a84": "fdd61866ca180e4373062f440cb8c61a626a2b71a411b63f5df46443d12a16a0",
+  "1c661b7": "22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786",
+  "fields_that_differ": [
+   "validate_family_sha256"
+  ]
+ },
+ "source_receipts": {
+  "published_checker.json checker_source_sha256": "92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193",
+  "replay.json checker_source_sha256": [
+   "306ad4b58b7e962f90e430b1adeaa8c52ad70f02f4807c96493036f6bb6cb476"
+  ],
+  "replay.json results naming a version": 0,
+  "note": "The 4,294 CPU-hour replay ran sources hashing to 306ad4b5..., which are not published and cannot be recomputed here; its receipts predate 0.1.1 and record neither a version nor B3_PLAIN_RF."
+ }
+}

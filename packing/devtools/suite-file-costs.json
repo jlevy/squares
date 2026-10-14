@@ -67,6 +67,7 @@
     "packing/tests/test_audit_s12_reweighted.py": 0.062,
     "packing/tests/test_audit_valid7_independent.py": 7.288,
     "packing/tests/test_audit_validtilt9_independent.py": 2.69,
+    "packing/tests/test_audit_wand125_closed_form.py": 0.064,
     "packing/tests/test_audit_wand125_declared_net.py": 2.612,
     "packing/tests/test_bc303_t2_charge_sweep.py": 0.451,
     "packing/tests/test_bc303_t2_geometry_control.py": 2.763,
@@ -206,6 +207,7 @@
     "packing/tests/test_decide_certificate.py": 1.063,
     "packing/tests/test_decide_relational_certificate.py": 2.012,
     "packing/tests/test_decide_threshold_certificate.py": 3.08,
+    "packing/tests/test_decide_undecided_comparisons.py": 4.913,
     "packing/tests/test_decimal_pose_margins.py": 0.044,
     "packing/tests/test_declare_least_cell_mass.py": 6.762,
     "packing/tests/test_deep_gate_workflow.py": 0.39,
@@ -321,6 +323,7 @@
     "packing/tests/test_independent_five_dot_union.py": 0.193,
     "packing/tests/test_index_n11_capture_source.py": 0.038,
     "packing/tests/test_inspect_n17_subpattern_relevance.py": 0.525,
+    "packing/tests/test_intake_comments.py": 0.04,
     "packing/tests/test_intake_ledger.py": 0.389,
     "packing/tests/test_intake_sweep.py": 2.499,
     "packing/tests/test_integral_piercing.py": 0.036,
@@ -799,6 +802,35 @@
           "report": "packing/devtools/suite-file-cost-admissions/intake-2026-10-14.json",
           "provenance": {},
           "tests": 87
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_intake_comments.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-comments-2026-10-14.json",
+          "provenance": {},
+          "tests": 15
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_audit_wand125_closed_form.py",
+        "packing/tests/test_decide_undecided_comparisons.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/wand125-closed-form-and-decide-undecided-2026-10-14.json",
+          "provenance": {},
+          "tests": 31
         }
       ]
     }

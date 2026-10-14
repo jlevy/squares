@@ -8,7 +8,7 @@ were cut. `preview_site.clipped` finds any such block, and this holds the site's
 none, at the widths a tablet and a phone have, with and without a scrollbar's width
 taken from the layout (`templates/paper-design.md`, Spacing).
 
-The same browser holds the Visualize section's tabs to their place on both its pages:
+The same browser holds the Explanations section's tabs to their place on its pages:
 under the rule that runs under the navigation bar, never over it, with the content the
 shared space under them (`preview_site.tabs_problems`, `templates/paper-design.md`,
 Section tabs).
@@ -55,7 +55,15 @@ from devtools.preview_site import (
 from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
 from tests import site_renders
 
-PAGES = ("index.html", "results.html", "atlas.html", "visualize.html", "tutorial.html")
+PAGES = (
+    "index.html",
+    "results.html",
+    "atlas.html",
+    "papers.html",
+    "visualize.html",
+    "tutorial.html",
+    "tutorial-advanced.html",
+)
 WIDTHS = (*CLIP_WIDTHS, 390)
 #: The rule the wide track had: its room measured from the window, a rem a side.
 FROM_THE_WINDOW = ".site-page .site-wide { --site-wide-room: calc(100vw - 2rem) !important; }"
@@ -142,8 +150,8 @@ def test_a_block_sized_from_the_window_is_caught(browser: Any, pages: dict[str, 
 
 @pytest.fixture(scope="module")
 def section_pages(pages: dict[str, Path]) -> dict[str, tuple[Path, str, float]]:
-    """The Visualize section's two pages, each with its current tab and the space its
-    content starts under the tabs, in rem: the film's page as the site renders it, and
+    """The Explanations pages, each with its current tab and the space its content
+    starts under the tabs, in rem: papers and the film as the site renders them, and
     the workbench's shell on its template with its own stylesheet and no program, which
     is all of that page the header's place needs."""
     from workbench_tools import build_site  # noqa: PLC0415
@@ -164,7 +172,7 @@ def section_pages(pages: dict[str, Path]) -> dict[str, tuple[Path, str, float]]:
 def test_the_section_tabs_stand_under_the_bars_rule(
     browser: Any, section_pages: dict[str, tuple[Path, str, float]], width: int
 ) -> None:
-    """On the film's page and on the workbench, from the top: the bar, the rule under it,
+    """On papers, the film and the workbench, from the top: the bar, the rule under it,
     the tabs, the content. The rule is the bar's own, at the bar's foot and as long as
     the bar, where it is on every other page; the tabs start `--site-tabs-space` under
     it with their own tab current; the film starts `--site-page-top` under the tabs, and
@@ -206,7 +214,7 @@ def test_tabs_over_the_rule_are_caught(
             page.close()
         assert len(problems) == 1, name
         assert problems[0].startswith("the section tabs start "), name
-        owner = "header.site-headroom" if name == "visualize.html" else "header"
+        owner = "header" if name == "workbench/" else "header.site-headroom"
         assert problems[0].endswith(f"which is on {owner}"), name
 
 
@@ -321,10 +329,20 @@ def test_the_name_stands_on_the_links_baseline(
             assert baseline_problems(found) == [], where
             lines = {link["top"] for link in found["links"]}
             assert len(lines) == rows, where
-            assert len(found["links"]) == 7, where
+            assert [link["label"] for link in found["links"]] == [
+                "Overview",
+                "News",
+                "Atlas",
+                "Results",
+                "Explanations",
+                "About",
+                "GitHub",
+            ], where
             first = min(found["links"], key=lambda link: link["top"])
             assert abs(found["name"] - first["baseline"]) <= BASELINE_TOLERANCE, where
-            assert len(found["tabs"]) == (0 if name == "atlas.html" else 2), where
+            assert [tab["label"] for tab in found["tabs"]] == (
+                [] if name == "atlas.html" else ["Film", "Workbench"]
+            ), where
             if rows == 1:
                 over_rule.setdefault(width, set()).add(found["current_above_rule"])
             if found["tabs"]:

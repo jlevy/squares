@@ -1,0 +1,31 @@
+{
+  "bad": [],
+  "bad_count": 0,
+  "cpu_seconds": 1178.9159860000002,
+  "family": {
+    "path": "interval_0.495_0.5/family.json",
+    "sha256": "224f6d0f43d6b864af1ec5cbeb1007fb39880c36881c36649d046dcc1fd72bd3"
+  },
+  "kinds": {
+    "B3D": 2530,
+    "B3U:x": 2296,
+    "CORE": 13475,
+    "CORE1:P": 78,
+    "CORE1:Tx": 1045,
+    "CORE1:x": 11023,
+    "EDGE": 2381
+  },
+  "leaves": [],
+  "mode": "replay",
+  "ok": true,
+  "records": [
+    {
+      "path": "interval_0.495_0.5/top.rec",
+      "sha256": "c3a19d700b5acee9e7ba9e0886de22e1416faaeb1536eee8b3470cf0c30ee296"
+    }
+  ],
+  "roots": 4158,
+  "source_sha256": "92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193",
+  "version": "0.1.0",
+  "wall_seconds": 2171.729700827
+}

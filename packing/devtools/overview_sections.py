@@ -27,7 +27,7 @@ from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 
 from devtools import repo_links
-from devtools.check_results import KINDS, kind_label
+from devtools.check_results import KINDS
 from devtools.overview_data import (
     APOSTROPHE,
     BIBLIOGRAPHY,
@@ -54,6 +54,7 @@ from devtools.render_overview import PAPERS as PAPER_RECORDS
 from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, superseded
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES, recent_contributions_by_case
+from devtools.site_topics import topic_chip, topic_label
 from sqpack.known_best import PackingSegment, grid_transitions
 from sqpack.yamlio import safe_load
 
@@ -83,19 +84,23 @@ SIGNIFICANCE_TOP = 5
 
 
 def significance_mark(level: int, meaning: str = "") -> str:
-    """A significance rung as the site draws it wherever it shows one: its letter and
-    level, `S4`, in the significance teal (`--site-significance`), and that many small
-    bars after it in the same ink, one to five. It is no chip: significance asks how
-    much a result matters, a different question from what the verification and
-    confirmation chips answer, so it looks different from them (the owner, 2026-10-03,
-    `think-m3m4`). It is one image to a screen reader, named by its level, and titled
-    with the rubric's `meaning` where one is given."""
-    bars = '<span class="site-significance-bar"></span>' * level
+    """One fixed-width significance meter everywhere: S plus five filled/empty bars.
+
+    Its ink and tooltip distinguish importance from verification and confirmation;
+    one accessible image names the score while its visual segments stay decorative.
+    """
+    if not 0 <= level <= SIGNIFICANCE_TOP:
+        raise ValueError("significance must be between zero and five")
+    bars = "".join(
+        '<span class="site-significance-bar" '
+        f'data-filled="{str(index < level).lower()}"></span>'
+        for index in range(SIGNIFICANCE_TOP)
+    )
     title = f' title="{_esc(meaning)}"' if meaning else ""
     return (
         f'<span class="site-significance" data-level="{level}" role="img" '
         f'aria-label="Significance S{level} of {SIGNIFICANCE_TOP}"{title}>'
-        f'<span class="site-significance-label" aria-hidden="true">S{level}</span>'
+        f'<span aria-hidden="true">S{level}</span>'
         f'<span class="site-significance-bars" aria-hidden="true">{bars}</span></span>'
     )
 
@@ -137,7 +142,7 @@ def kind_chip(result: Result) -> str:
     `case exclusion` (epistemics.md, Result Kinds). Every result has one; bound kinds
     use the same semantic hues as the corresponding bounds."""
     kind = str(result.record["kind"])
-    return f'<span class="site-chip" data-kind="{_esc(kind)}">{_esc(kind_label(kind))}</span>'
+    return topic_chip(kind, attribute="data-kind")
 
 
 def status_chip(status: str) -> str:
@@ -862,7 +867,7 @@ def result_filters(
         "</select></label>"
         for scale, label in RUNG_FILTERS
     )
-    kinds = [("", ALL), *((kind, kind_label(kind)) for kind in KINDS if kind in held)]
+    kinds = [("", ALL), *((kind, topic_label(kind)) for kind in KINDS if kind in held)]
     statuses = [("", ALL), *((status, status) for status in STATUSES if status in present)]
     sources = [("", ALL), ("ours", "This project"), ("others", "Others")]
     projects = [("", ALL), *((project_slug(url), project_name(url)) for url in project_urls())]
@@ -1576,6 +1581,7 @@ PAPER_DESCRIPTIONS: dict[str, str] = {
 
 #: The first-principles tutorial's title, as its own H1 writes it in TUTORIAL.md.
 TUTORIAL_TITLE = "Square Packing from First Principles"
+TUTORIAL_ADVANCED_TITLE = "Square Packing, Search, and Proof"
 
 #: Where each part of the series is served, under `papers/` by its slug
 #: (`render_overview.paper_path`); each renderer's `SITE_PATH` is the same path from the
@@ -1587,9 +1593,9 @@ OPTIMALITY_PAPER = paper_path(N11_OPTIMALITY_REVIEW)
 #: The site's papers, in the order the Papers page shows them, one large card each
 #: (`paper_cards`): the three parts of the n = 11 series in reading order, I, II, III,
 #: each labelled by its part (`render_overview.PAPERS`, the one registry a new paper is
-#: entered in), then the standalone methods tutorial and the first-principles tutorial,
-#: the background to the series, whose description is
-#: `TUTORIAL.md`'s own opening, its audience and what it owns.
+#: entered in), then the standalone methods paper and the two tutorials. Explanations
+#: places the basic and advanced tutorials first, in its own Tutorial section; the
+#: remaining papers retain the series' reading order.
 PAPERS: tuple[Paper, ...] = (
     *(
         Paper(
@@ -1604,11 +1610,15 @@ PAPERS: tuple[Paper, ...] = (
         href="tutorial.html",
         label="Tutorial",
         title=TUTORIAL_TITLE,
+        description=("The problem, bounds, small examples, and how to read a packing result."),
+    ),
+    Paper(
+        href="tutorial-advanced.html",
+        label="Advanced tutorial",
+        title=TUTORIAL_ADVANCED_TITLE,
         description=(
-            "An introduction for anyone new to the problem: what the objects are, why the "
-            "approach is shaped the way it is, and what the research has and has not "
-            "established. It introduces linear programming and algebraic number fields "
-            "and links further reading."
+            "Linear programs, exact certificates, search, regularization, "
+            "and global optimality proofs."
         ),
     ),
 )
@@ -1619,7 +1629,7 @@ THRESHOLD_REVIEW = next(paper for paper in PAPERS if paper.href == THRESHOLD_BOU
 OPTIMALITY = next(paper for paper in PAPERS if paper.href == OPTIMALITY_PAPER)
 
 
-def paper_cards() -> str:
+def paper_cards(*, papers: Sequence[Paper] | None = None) -> str:
     """One card per paper. Each card is the link itself and goes to its paper in the same
     tab, as the overview's page cards do (`page_cards`): a paper is a full page the site
     serves, so no popover previews it (`link_card`, `new_tab=False`). A link holds no
@@ -1634,7 +1644,7 @@ def paper_cards() -> str:
                 size=paper.size,
                 new_tab=False,
             )
-            for paper in PAPERS
+            for paper in (PAPERS if papers is None else papers)
         ]
     )
 
@@ -1657,12 +1667,12 @@ PAGES: tuple[tuple[str, str, str, str], ...] = (
         "Every Case from n = 1 to 324",
         "Reported and verified bounds side by side, with their sources.",
     ),
-    *((paper.href, paper.label, paper.title, paper.description) for paper in PAPERS[:-1]),
+    *((paper.href, paper.label, paper.title, paper.description) for paper in PAPERS[:-2]),
     (
         "tutorial.html",
         "Tutorial",
         TUTORIAL_TITLE,
-        "The problem, its configuration space, exact algebra and the search.",
+        "The problem, bounds, small examples, and how to read a packing result.",
     ),
     (
         "workbench/",
