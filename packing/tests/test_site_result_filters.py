@@ -342,7 +342,8 @@ def test_the_added_filter_shows_what_reached_the_site(
     """In Chromium, on the day the newest results reached the site: `?added-age=1` sets
     Added within and shows exactly the results that arrived that day or the day before,
     whatever the date their rows show or the day a lane registered them, and leaves Max
-    age empty (#514's review A, finding A1). The seven days' heading opens the table from
+    age empty (#514's review A, finding A1); the clock is noon, where the reader's day and
+    the UTC day an age of arrival counts in agree. The seven days' heading opens the table from
     the section's first day, `?added-since=`, with Added since in the bar, on the results
     the section lists (A3). The newest day's own link opens it on that day alone, with
     Added on in the bar naming the day; and a day nothing arrived on is named there too
@@ -408,6 +409,14 @@ def test_the_added_filter_shows_what_reached_the_site(
         assert found["count"] == count(0, overview)
         assert page.locator(added_on).is_visible()
         assert page.locator(added_on).input_value() == empty
+
+        # A day the date input cannot read is kept and shows no row, with Added since in
+        # the bar, as an unmatched select does (#514's review B, finding B5).
+        page.goto(pages[name].as_uri() + "?added-since=2026-10-6", wait_until="load")
+        found = state(page)
+        assert found["shown"] == []
+        assert found["count"] == count(0, overview)
+        assert page.locator(added_since).is_visible()
     finally:
         page.close()
 

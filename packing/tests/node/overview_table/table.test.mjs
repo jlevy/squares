@@ -121,6 +121,13 @@ void test("the reader's day is the local one, as an ISO date", () => {
   assert.equal(table.localDay(new Date(2026, 11, 31, 12)), "2026-12-31");
 });
 
+void test("the day a row arrived on is counted in UTC, as `landed` is written", () => {
+  // 08:00 on 15 October in UTC+10 is still 14 October in UTC (#514's review B, B4).
+  assert.equal(table.utcDay(new Date(Date.UTC(2026, 9, 14, 22, 0))), "2026-10-14");
+  assert.equal(table.utcDay(new Date(Date.UTC(2026, 9, 14, 23, 59))), "2026-10-14");
+  assert.equal(table.utcDay(new Date(Date.UTC(2026, 9, 15, 0, 0))), "2026-10-15");
+});
+
 void test("a case filter finds its number in a row's list of cases and ranges", () => {
   assert.ok(table.covers("11", 11));
   assert.ok(!table.covers("11", 1));

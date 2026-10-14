@@ -178,6 +178,16 @@
   }
 
   /**
+   * A day as an ISO date in UTC, the day the register's `landed` dates are written in,
+   * so an age of arrival counts whole UTC days wherever the reader is.
+   * @param {Date} now
+   * @returns {string}
+   */
+  function utcDay(now) {
+    return now.toISOString().slice(0, 10);
+  }
+
+  /**
    * The first day a row may be dated to be no older than `days` on `today`, both ISO
    * dates: 180 days on 2026-09-30 is 2026-04-03. Empty, which is no limit, when `days`
    * is not a number or reaches past the calendar.
@@ -231,6 +241,18 @@
       } else if (control instanceof HTMLInputElement || control instanceof HTMLSelectElement) {
         control.value = value;
         if (
+          control instanceof HTMLInputElement &&
+          control.value !== value &&
+          value !== "" &&
+          control.hasAttribute("data-preset")
+        ) {
+          // A date input empties a value it cannot read (`2026-10-6`); it is kept here and
+          // applied as matching no row, and dropped once the reader edits the control.
+          control.setAttribute("data-unmatched", value);
+          control.addEventListener("input", () => control.removeAttribute("data-unmatched"), {
+            once: true,
+          });
+        } else if (
           control instanceof HTMLSelectElement &&
           control.value !== value &&
           value !== "" &&
@@ -264,7 +286,7 @@
         label instanceof HTMLElement &&
         (control instanceof HTMLSelectElement || control instanceof HTMLInputElement)
       ) {
-        label.hidden = control.value === "";
+        label.hidden = control.value === "" && control.getAttribute("data-unmatched") === null;
       }
     }
   }
@@ -283,23 +305,30 @@
 
   /**
    * The filters a tools bar's controls currently express. An age becomes the day it
-   * reaches back to from `today`, so a row is held to a date and never to a clock.
+   * reaches back to from `today`, so a row is held to a date and never to a clock; an age
+   * of arrival (`data-filter="added"`) from `utcToday`, since the days a row arrived on
+   * are UTC days. A preset value a date input could not read matches no row.
    * @param {Element} tools
-   * @param {string} today an ISO date
+   * @param {string} today an ISO date, the reader's local day
+   * @param {string} [utcToday] an ISO date, the day in UTC
    * @returns {SiteTableFilter[]}
    */
-  function readFilters(tools, today) {
+  function readFilters(tools, today, utcToday = today) {
     /** @type {SiteTableFilter[]} */
     const filters = [];
     for (const control of tools.querySelectorAll("[data-filter]")) {
       const key = control.getAttribute("data-filter") ?? "";
       const bound = control.getAttribute("data-bound");
-      if (control instanceof HTMLSelectElement && !bound) {
+      const unmatched = control.getAttribute("data-unmatched");
+      if (control instanceof HTMLInputElement && unmatched !== null && control.value === "") {
+        filters.push({ key, kind: "equals", value: unmatched });
+      } else if (control instanceof HTMLSelectElement && !bound) {
         filters.push({ key, kind: "equals", value: control.value });
       } else if (control instanceof HTMLInputElement && control.type === "checkbox") {
         filters.push({ key, kind: "flag", value: control.checked ? "true" : "false" });
       } else if (control instanceof HTMLInputElement && bound === "age") {
-        filters.push({ key, kind: "since", value: ageCutoff(today, control.value) });
+        const day = key === "added" ? utcToday : today;
+        filters.push({ key, kind: "since", value: ageCutoff(day, control.value) });
       } else if (control instanceof HTMLInputElement || control instanceof HTMLSelectElement) {
         filters.push({ key, kind: BOUNDS[bound ?? ""] ?? "min", value: control.value });
       }
@@ -338,7 +367,8 @@
         return;
       }
       showPresets(tools);
-      const filters = readFilters(tools, localDay(new Date()));
+      const now = new Date();
+      const filters = readFilters(tools, localDay(now), utcDay(now));
       const target = fragmentTarget();
       const rows = Array.from(body.rows);
       const passes = rows.map(
@@ -485,6 +515,7 @@
     rowMatches,
     countText,
     localDay,
+    utcDay,
     ageCutoff,
     controlParam,
     init,
