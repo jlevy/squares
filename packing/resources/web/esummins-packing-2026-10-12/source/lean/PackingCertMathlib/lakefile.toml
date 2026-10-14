@@ -1,0 +1,27 @@
+name = "PackingCertMathlib"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["PackingCertMathlib"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.34.0-rc1"
+
+[[lean_lib]]
+name = "PackingCertMathlib"
+
+# A78 T5: the fixed-corpus native_decide replays.  A SECOND library so that the
+# default target (and CI) is unchanged -- build it explicitly with
+#   python attempts/A78-lean-wave6/code/lakeb.py PackingCertCorpus
+# or one certificate at a time with
+#   python attempts/A78-lean-wave6/code/lakeb.py PackingCertMathlib.Corpus.K61.Check_k5_06
+[[lean_lib]]
+name = "PackingCertCorpus"
+roots = ["PackingCertMathlib.Corpus"]

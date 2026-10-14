@@ -7,58 +7,58 @@ rollup:
   source:
     harness: claude-code
     filename: agent-a37be0a83978f08f6.jsonl
-    sha256: 61b014d5715a5f1ba167b3eba2026d369e571cc8c25877d5cc183ad79a011b93
-    bytes: 1331031
-    records: 512
+    sha256: 6dc5e65819be9ba491ecbabee27e649afe55eb8e28ff27c9b0e7dce7c35fcb0e
+    bytes: 1349032
+    records: 522
     session_id: 387dc0a2-0a91-51c6-bf71-f69e33945398
     harness_versions:
     - 2.1.296
   span:
     started_at: '2026-10-12T11:26:59.194Z'
-    ended_at: '2026-10-12T12:39:12.430Z'
-    wall_seconds: 4333.236
+    ended_at: '2026-10-12T12:40:57.633Z'
+    wall_seconds: 4438.439
   turns:
-    assistant: 238
-    sidechain: 238
+    assistant: 242
+    sidechain: 242
     by_model:
-      operations tier: 238
+      operations tier: 242
     by_thinking_level:
-      xhigh: 238
+      xhigh: 242
     by_model_and_thinking_level:
-      operations tier @ xhigh: 238
+      operations tier @ xhigh: 242
     by_branch:
       layer5: 205
-      layer6: 33
+      layer6: 37
     latency:
-      count: 227
-      total_seconds: 493.262
-      median_seconds: 1.673
+      count: 230
+      total_seconds: 501.593
+      median_seconds: 1.666
       max_seconds: 19.632
   tokens:
-    cache_creation_input_tokens: 1436169
-    cache_read_input_tokens: 28033907
+    cache_creation_input_tokens: 1438323
+    cache_read_input_tokens: 28754499
     ephemeral_1h_input_tokens: 0
-    ephemeral_5m_input_tokens: 1436169
-    input_tokens: 476
-    output_tokens: 7612
+    ephemeral_5m_input_tokens: 1438323
+    input_tokens: 484
+    output_tokens: 7660
     thinking_tokens: 2365
   tokens_by_thinking_level:
     xhigh:
-      cache_creation_input_tokens: 1436169
-      cache_read_input_tokens: 28033907
+      cache_creation_input_tokens: 1438323
+      cache_read_input_tokens: 28754499
       ephemeral_1h_input_tokens: 0
-      ephemeral_5m_input_tokens: 1436169
-      input_tokens: 476
-      output_tokens: 7612
+      ephemeral_5m_input_tokens: 1438323
+      input_tokens: 484
+      output_tokens: 7660
       thinking_tokens: 2365
   tool_calls:
-    total: 118
-    total_seconds: 3783.06
-    share_of_wall: 0.873
+    total: 121
+    total_seconds: 3877.534
+    share_of_wall: 0.8736
     errors: 9
     denied: 0
     unpaired_results: 0
-    outstanding_at_snapshot: 1
+    outstanding_at_snapshot: 0
     one_off_code:
       count: 3
       total_seconds: 2.485
@@ -66,8 +66,8 @@ rollup:
       max_seconds: 1.036
     by_tool:
       Bash:
-        count: 98
-        total_seconds: 3776.095
+        count: 100
+        total_seconds: 3870.059
         median_seconds: 1.942
         max_seconds: 601.653
       Write:
@@ -85,6 +85,11 @@ rollup:
         total_seconds: 1.966
         median_seconds: 0.438
         max_seconds: 0.775
+      SubagentHandback:
+        count: 1
+        total_seconds: 0.51
+        median_seconds: 0.51
+        max_seconds: 0.51
       Read:
         count: 1
         total_seconds: 0.181
@@ -131,6 +136,11 @@ rollup:
         total_seconds: 103.043
         median_seconds: 103.043
         max_seconds: 103.043
+      tbd && tbd && tbd && tbd && tbd && ^version:
+        count: 1
+        total_seconds: 92.47
+        median_seconds: 92.47
+        max_seconds: 92.47
       bash:
         count: 5
         total_seconds: 52.207
@@ -166,6 +176,11 @@ rollup:
         total_seconds: 14.178
         median_seconds: 14.178
         max_seconds: 14.178
+      git && git:
+        count: 4
+        total_seconds: 11.189
+        median_seconds: 2.77
+        max_seconds: 4.373
       '2':
         count: 1
         total_seconds: 10.962
@@ -181,11 +196,6 @@ rollup:
         total_seconds: 9.999
         median_seconds: 9.999
         max_seconds: 9.999
-      git && git:
-        count: 3
-        total_seconds: 9.695
-        median_seconds: 4.047
-        max_seconds: 4.373
       sed:
         count: 9
         total_seconds: 9.641
@@ -291,11 +301,6 @@ rollup:
         total_seconds: 1.411
         median_seconds: 0.706
         max_seconds: 0.772
-      gh && gh:
-        count: 1
-        total_seconds: 1.243
-        median_seconds: 1.243
-        max_seconds: 1.243
     by_command_family:
       inspection:
         count: 37
@@ -308,9 +313,9 @@ rollup:
         median_seconds: 2.114
         max_seconds: 601.653
       toolchain:
-        count: 8
-        total_seconds: 292.598
-        median_seconds: 30.157
+        count: 9
+        total_seconds: 385.068
+        median_seconds: 43.368
         max_seconds: 103.043
       project:
         count: 3
@@ -318,9 +323,9 @@ rollup:
         median_seconds: 4.523
         max_seconds: 176.078
       vcs:
-        count: 26
-        total_seconds: 120.938
-        median_seconds: 2.993
+        count: 27
+        total_seconds: 122.432
+        median_seconds: 2.87
         max_seconds: 29.205
       filesystem:
         count: 1
@@ -333,14 +338,14 @@ rollup:
         median_seconds: 0.789
         max_seconds: 0.789
     invoked:
-      head: 34
+      head: 35
       cat: 31
       grep: 30
       sed: 28
       tail: 27
       cd: 21
       echo: 16
-      git agent-a37be0a83978f08f6: 12
+      git agent-a37be0a83978f08f6: 14
       cut: 12
       sleep: 10
       ls: 9
@@ -414,17 +419,17 @@ rollup:
       tbd start: 1
       ^version: 1
     invoked_families:
-      inspection: 166
+      inspection: 167
       other: 67
       shell: 53
-      vcs: 34
+      vcs: 36
       toolchain: 21
       project: 6
       filesystem: 1
     by_shell_shape:
       compound:
-        count: 69
-        total_seconds: 3613.158
+        count: 71
+        total_seconds: 3707.122
         median_seconds: 1.816
         max_seconds: 601.653
       simple:
@@ -454,12 +459,12 @@ rollup:
         max_seconds: 1.036
     by_thinking_level:
       xhigh:
-        count: 118
-        total_seconds: 3783.06
-        median_seconds: 1.462
+        count: 121
+        total_seconds: 3877.534
+        median_seconds: 1.469
         max_seconds: 601.653
     shell_traits:
-      pipes: 49
+      pipes: 50
       redirects_output: 17
       substitutes: 5
   session_events:

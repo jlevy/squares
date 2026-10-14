@@ -9,7 +9,8 @@ author: Codex, for the repository owner
 
 **Author:** Codex, for the repository owner
 
-**Status:** Implemented in PR #590; final validation and publication pending.
+**Status:** Implemented and published in PR #590; launch accounting and CI corrections
+in PR #599.
 
 **Tracking:** `think-j7nb` (planning), `think-jpto` (implementation epic)
 
@@ -50,7 +51,7 @@ automatic publication of machine-written summaries are outside this feature.
 
 ## Background
 
-There is no project-wide changelog.
+Before this feature, there was no project-wide changelog.
 `PUBLICATION_HISTORY` in [`release.py`](../../../../packing/src/sqpack/release.py)
 covers publication editions, which should remain distinct from this PR-level project
 history.

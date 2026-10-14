@@ -1,0 +1,1972 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-12T08:12Z",
+  "git_scope": "Blobless shallow clone (--filter=blob:none --depth 1) of the pinned commit, which issues jlevy/squares#521 to #527 name, with a sparse checkout of the paths the outreach series cites: its index writeup/outreach/00-README.md section 4 is the manifest. The pinned tree holds 71,035 files and about 20.75 GB, 68,442 of them under attempts/; only the cited paths were fetched and digested, and the rest of the tree is pinned by the commit alone. Bulk data the manifest itself calls optional (tree records, galleries, logs) and the 248 gzipped spine certificates of A243 are pinned by digest or by the commit and not retained (OR-18).",
+  "sources": [
+    {
+      "id": "esummins-packing",
+      "source_url": "https://github.com/Esummins/packing",
+      "source_ref": "master",
+      "source_commit": "651a9a54688341880e9c0dc9fcfc19f2c04cd3cb",
+      "committed_utc": "2026-10-12T04:11:54Z",
+      "git_tree": "62ae9dc3bd990436b35cb9c6719d491b6047a7be",
+      "archived_path": "packing/resources/web/esummins-packing-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/esummins-packing-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "LICENSE",
+        "LICENSE-MIT",
+        "LICENSE-CC-BY-4.0",
+        "LOG.md",
+        "writeup/README.md",
+        "writeup/01_summary.md",
+        "writeup/02_mathematics.md",
+        "writeup/03_lab_timeline.md",
+        "writeup/04_related_work.md",
+        "writeup/05_status_sheet.md",
+        "writeup/06_compute_plan.md",
+        "writeup/outreach_simple_square_conjecture.md",
+        "writeup/outreach",
+        "docs/proofs",
+        "docs/residue_ledger.md",
+        "docs/shadows/STATUS.md",
+        "lean/AUDIT.md",
+        "lean/PackingCertMathlib/README.md",
+        "lean/PackingCertMathlib/lean-toolchain",
+        "lean/PackingCertMathlib/lakefile.toml",
+        "lean/PackingCertMathlib/lake-manifest.json",
+        "lean/PackingCertMathlib/PackingCertMathlib.lean",
+        "lean/PackingCertMathlib/PackingCertMathlib/Main.lean",
+        "lean/PackingCertMathlib/PackingCertMathlib/TopLevel.lean",
+        "lean/PackingCertMathlib/PackingCertMathlib/Statements",
+        "certs",
+        "attempts/REGISTRY.md",
+        "attempts/A53-simple-strata/results/name_to_slots.json",
+        "attempts/A53-simple-strata/results/name_to_shapes.json",
+        "attempts/A53-simple-strata/results/skeletons.json",
+        "attempts/A53-simple-strata/results/skeletons_young.json",
+        "attempts/A56-sparametric/results/scoreboard.json",
+        "attempts/A57-shadow-trees/code/verify_case.py",
+        "attempts/A57-shadow-trees/code/FREEZE_TAGS.txt",
+        "attempts/A135-polycore-verifier/code/verify_case_v3.py",
+        "attempts/A185-boxed-windows-clause/code/verify_case_v4.py",
+        "attempts/A190-guardline-clause/code/verify_case_v5.py",
+        "attempts/A232-swap-leaf/code/verify_swap232.py",
+        "attempts/A211-coarse-tree/code",
+        "attempts/A202-fast30/BRIEF.md",
+        "attempts/A202-fast30/code",
+        "attempts/A202-fast30/notes",
+        "attempts/A203-csp-consistency/BRIEF.md",
+        "attempts/A203-csp-consistency/code",
+        "attempts/A203-csp-consistency/notes",
+        "attempts/A213-int-polycore/BRIEF.md",
+        "attempts/A213-int-polycore/code",
+        "attempts/A213-int-polycore/notes",
+        "attempts/A213-int-polycore/tests",
+        "attempts/A214-c-kernel/BRIEF.md",
+        "attempts/A214-c-kernel/code",
+        "attempts/A214-c-kernel/notes",
+        "attempts/A214-c-kernel/tests",
+        "attempts/A215-closed-node-benchmark/results",
+        "attempts/A221-lane-cover/notes/lane221.md",
+        "attempts/A238-k4-benchmark/notes/k4_238.md",
+        "attempts/A238-k4-benchmark/results",
+        "attempts/A241-row-cascade/notes",
+        "attempts/A241-row-cascade/results",
+        "attempts/A241-row-cascade/code",
+        "attempts/A243-climb-17-19/BRIEF.md",
+        "attempts/A243-climb-17-19/notes",
+        "attempts/A243-climb-17-19/code",
+        "attempts/A243-climb-17-19/results",
+        "attempts/A243-climb-17-19/certs",
+        "attempts/A243-climb-17-19/logs/descend243_n17_w0.log",
+        "attempts/A243-climb-17-19/logs/descend243_n17_w1.log",
+        "attempts/A242-replay-31-8",
+        "attempts/A217-torque-probe/results/witnesses217.jsonl",
+        "attempts/A226-one-flush",
+        "attempts/A275-k0-knowledge/BRIEF.md"
+      ],
+      "subtree_file_count": 856,
+      "subtree_total_bytes": 28037432,
+      "retained_file_count": 548,
+      "retained_total_bytes": 14509766,
+      "compressed": [
+        "source/attempts/A241-row-cascade/results/rows241.json.gz",
+        "source/attempts/A242-replay-31-8/results/replay242_shard0of2.jsonl.gz",
+        "source/attempts/A242-replay-31-8/results/replay242_shard1of2.jsonl.gz",
+        "source/attempts/A242-replay-31-8/results/spot242.jsonl.gz",
+        "source/attempts/A243-climb-17-19/results/census243_n11.json.gz",
+        "source/attempts/A243-climb-17-19/results/census243_n17.json.gz",
+        "source/attempts/A243-climb-17-19/results/census243_n19.json.gz",
+        "source/attempts/A53-simple-strata/results/name_to_slots.json.gz",
+        "source/attempts/A53-simple-strata/results/skeletons.json.gz",
+        "source/attempts/A53-simple-strata/results/skeletons_young.json.gz",
+        "source/attempts/A56-sparametric/results/scoreboard.json.gz",
+        "source/certs/measure_certificate_3.80.json.gz",
+        "source/certs/measure_certificate_3.81.json.gz",
+        "source/certs/measure_certificate_3.82.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "LOG.md",
+          "bytes": 1136987,
+          "sha256": "bbcf8feedfc663ea4edf27c76bafeb86b6cca725a41d8d14089dddc93a6bf532",
+          "reason": "The lab notebook, 1.1 MB of prose; cited by 07-timeline.md only as a secondary source behind attempts/REGISTRY.md, which is retained. Pinned by digest."
+        },
+        {
+          "path": "attempts/A238-k4-benchmark/results/bench238.jsonl",
+          "bytes": 408641,
+          "sha256": "07d7021270156f59a2c41609ea7961ef57199515969cee8578101b20e184fc19",
+          "reason": "Raw per-node benchmark rows (409 KB); bench238.md, bench238_summary.json and forced238.* summarise them and are retained. Pinned by digest."
+        },
+        {
+          "path": "attempts/A238-k4-benchmark/results/rows211_raw.jsonl",
+          "bytes": 2279750,
+          "sha256": "136e21fb090d134e556e0a462fbf954177c839811399b37e2a71786ed99a1c56",
+          "reason": "Raw engine rows of 2.3 MB behind the k4 benchmark; the benchmark's summary rows and notes are retained. Pinned by digest."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k13_0184__spine.json",
+          "bytes": 181649,
+          "sha256": "2f9cef6a8d631c33153174bb889f77d219f5575f507f43ab97d0f7b40cbda2a3",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0158__spine.json.gz",
+          "bytes": 26384,
+          "sha256": "05ac2c1a91310e346377434a3927bdc7d84d253e14ae0d6f845e3b11a01675ef",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0160__spine.json.gz",
+          "bytes": 26548,
+          "sha256": "aa02f94f4f0ac66c9ad74ea1699e7afa6b63b9e3d0acad7e22e92c2cd3088ccd",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0162__spine.json.gz",
+          "bytes": 6098,
+          "sha256": "3dedfb7c0470bc53b2828db119ba00c76c8cd13a3e02225992b9a462ce7327ae",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0163__spine.json.gz",
+          "bytes": 1190,
+          "sha256": "af423ac4f2312e8dae04471cfeb87f3a637a6f93cf09e1bf5aafe8249ac97f2f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0166__spine.json.gz",
+          "bytes": 37167,
+          "sha256": "e90223bb4f057802769bb5c2e4ae43e280739bd5ac41d1e5d09952151dd6e8c2",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0167__spine.json.gz",
+          "bytes": 7973,
+          "sha256": "bedb1bc3855b959425b40a35055200907b35456e8c736abc6fbaddfcdad04625",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0170__spine.json.gz",
+          "bytes": 76229,
+          "sha256": "a597579f94ad8cdd6e2b018402e4ab2888587116e9aa70c0825b2e90691aedc3",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0171__spine.json.gz",
+          "bytes": 9211,
+          "sha256": "f12eb43462561e002307fad923b72953132e597de9370966944969180a06c4d4",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0173__spine.json.gz",
+          "bytes": 42623,
+          "sha256": "ec7906de4fccc4ee8b81e9ff75967a75cd0e8f103eac1b623492ab247fc086a0",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0174__spine.json.gz",
+          "bytes": 34965,
+          "sha256": "e0e64e1372209d7e5e6b79e0f70eee70c7300a7d81a53fe2c982f5a6c6e7d223",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0175__spine.json.gz",
+          "bytes": 40441,
+          "sha256": "9c149753345eb9c1d4885ece33a13a2330d3a5343e1fca9370f1b667d2213450",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0176__spine.json.gz",
+          "bytes": 35139,
+          "sha256": "11dccc40f85c658bfb3a6abecf78339f4087d640ed3886cd58598f986085ae00",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0177__spine.json.gz",
+          "bytes": 36629,
+          "sha256": "a730a4f943897f1818821998e53b1ba94d3e1550bda2d8ed8c5ac13b3b4a28f3",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0179__spine.json.gz",
+          "bytes": 34583,
+          "sha256": "5b4d4937eb2f1f8f56f00614ebc59525b5807796c4a4b26459cab281cbfe22b5",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0180__spine.json.gz",
+          "bytes": 73865,
+          "sha256": "830df2b616718df306ab4d08b376d4d127a96f820fc2d9b34fc41294b05856b8",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0181__spine.json.gz",
+          "bytes": 35784,
+          "sha256": "76f009797b05b81631b3afc0319b0ab443905bd15360da4c3e080ddb00aba0cb",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0183__spine.json.gz",
+          "bytes": 22233,
+          "sha256": "829cf6dab11f3e139134a021dde84f60190d31c910f64e85ccbf8536c82c2bde",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0184__spine.json.gz",
+          "bytes": 35697,
+          "sha256": "ac256c76e48f5878702ca7e08b2813bc859945422b226b9f2d8d49aa8edb7c0c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0185__spine.json.gz",
+          "bytes": 56643,
+          "sha256": "a417701ee06ea45389106fbcebb7606e78f005eb704b89f829a852d4b4450380",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0186__spine.json.gz",
+          "bytes": 76003,
+          "sha256": "8b4448f6e22a4a0073d6f3cafe5690f22df94afa511e41554534ac057317d0a5",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0188__spine.json.gz",
+          "bytes": 24237,
+          "sha256": "0ddf487c746a730f8d43ba06ebbf840e485289d3667b0d2da6d1c5ad08f361a9",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0189__spine.json.gz",
+          "bytes": 56735,
+          "sha256": "d0cd969c284ede810c31555468f576c3d8757c2cb70ad36e9c31a789aa594a86",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0190__spine.json.gz",
+          "bytes": 40316,
+          "sha256": "f06686a13dc3f5a238f9a4aab67718dc26d34112a51f55ab47f580c83a21282b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0191__spine.json.gz",
+          "bytes": 27962,
+          "sha256": "c658601b59f49a0dc91c2c51f52a45662027b3971a166dee487ac3c55df86836",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0192__spine.json.gz",
+          "bytes": 34909,
+          "sha256": "bf916bda19db039dc0f451ebff246c614cd3054a4c006846b66b0a2c583ddff9",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0193__spine.json.gz",
+          "bytes": 78305,
+          "sha256": "684b9eb0fb922ddacf018246454eca11a99bcbba933f347c20831d2f7b4aae18",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0194__spine.json.gz",
+          "bytes": 34806,
+          "sha256": "20ba8dcb1300e2b0647064bb42356c027ef3b3ba1333b2e885fda2c5b8f0dfc8",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0196__spine.json.gz",
+          "bytes": 48298,
+          "sha256": "6ef4595f417c20987b1236b3fc4b38e66e281bd3d513cca6295bfc90d9e3e8f6",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0197__spine.json.gz",
+          "bytes": 63857,
+          "sha256": "31f8b907036bd6114164a2eaf55049a2f387374b6f1ab4e858d1038180235241",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0198__spine.json.gz",
+          "bytes": 26865,
+          "sha256": "91c8416f1d92bff21ccef81867abc8bdd28b9b4fe19579f77393ec1d545691b7",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0201__spine.json.gz",
+          "bytes": 8673,
+          "sha256": "e8f144b4e3e594b597072398ef09ae16205c0af2ded1ae024ad8a9846bdd7157",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0203__spine.json.gz",
+          "bytes": 23053,
+          "sha256": "3bd0ab5205b968919a24a787c72b623fde55af831976bcdd74e14628de2ceb0a",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0205__spine.json.gz",
+          "bytes": 34737,
+          "sha256": "10afdcce8aa787f219e03a632f0152cc4f19a41ad2acbbbc8b7af4e2375ce9ec",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0206__spine.json.gz",
+          "bytes": 53023,
+          "sha256": "60ccd2d86aff1f0d146f5a4bb0d4ee41cebda2379b674f9475ff67db40ee0706",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0207__spine.json.gz",
+          "bytes": 34484,
+          "sha256": "c66946a63145e722eb3cac5914f7cf6ffa9a60075b9eb3f71c88f1ee40e8b2bb",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0208__spine.json.gz",
+          "bytes": 19474,
+          "sha256": "7f3e7314ee94b074832da721be9d62eb12e5ba053033a00456bfb79133b75fe3",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0209__spine.json.gz",
+          "bytes": 26163,
+          "sha256": "d695495a05a50e32c4f4ec46c74075bf97a6091d769416d3751a148a478fe758",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0210__spine.json.gz",
+          "bytes": 36364,
+          "sha256": "0d70cff25fbd6f9af290ca12f829edfa510ccfb87e901bc655c701afd66354e6",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0211__spine.json.gz",
+          "bytes": 49005,
+          "sha256": "55531a650fcb024d3648d3e637e8e4b1ed0e25495fdc2ec63ce4995015e0b08f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0212__spine.json.gz",
+          "bytes": 34159,
+          "sha256": "08314e447742b4d71845be7a389b126f469cfb131508e835e593c60ff2a4f959",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0214__spine.json.gz",
+          "bytes": 48287,
+          "sha256": "c789591d33fba776b18b6cc96c4075b3efab9e50e89496f428e9b5b50810827f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0215__spine.json.gz",
+          "bytes": 66163,
+          "sha256": "f0d88391637b12f58bcabf1517a794c8c15ae9e19be56c25e081ba1585cc9c39",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0216__spine.json.gz",
+          "bytes": 1190,
+          "sha256": "46e579c8ecf47886e1885e852901f24b180d91b37cba4e078c21c5033523fa94",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0218__spine.json.gz",
+          "bytes": 1191,
+          "sha256": "632e18683d32b1dca04f7e67a7459ccf20f808bb270c1dc0143b8f8ef6d1578f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0221__spine.json.gz",
+          "bytes": 1174,
+          "sha256": "426cabae922fe54e48582fc2012b0a63e4f06f24ececc80fe7dda408864bc579",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0222__spine.json.gz",
+          "bytes": 1189,
+          "sha256": "99c6b6e7c4f4ab68c4002d2cb4aa40299883f65dc255af3f488b15ec7b57c749",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0223__spine.json.gz",
+          "bytes": 40553,
+          "sha256": "959e3add07bd0ad0324b21e21c55837985a7ac8b97a1db8f0c14cdda4e2f867f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0224__spine.json.gz",
+          "bytes": 7595,
+          "sha256": "8fba14ccf62133b6563bdea5560b875e6866877d2d26be5ad12f7825d1a36657",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0225__spine.json.gz",
+          "bytes": 12616,
+          "sha256": "8095ebe44f1739cb27cfef73ab3ff280bc0a302bff998a7bf1c512efc79e0024",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0226__spine.json.gz",
+          "bytes": 1176,
+          "sha256": "a73e0c670b5c8401791f1b09402fdca7a8d253641f50b8c6002c94890ba37a12",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0227__spine.json.gz",
+          "bytes": 5508,
+          "sha256": "de55cc9c7bead6cf932d11a5cb3bd56b349a09a4997c15015ba87e3e08f81d9c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0228__spine.json.gz",
+          "bytes": 1187,
+          "sha256": "6f4bd78cfe75b062eee687118a32984a176dfab19319dfa36e7d4489ebe53a9a",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0231__spine.json.gz",
+          "bytes": 50117,
+          "sha256": "c5d05740d54b3c511e934a6285473d7b09cf13254a9c052538a3a19856929cd2",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0232__spine.json.gz",
+          "bytes": 98016,
+          "sha256": "fb1ed8aba5ccc27ffb810897201e97105311394941c4bf8dfc9a1f245630255b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0234__spine.json.gz",
+          "bytes": 73367,
+          "sha256": "5e1ff9d247582522211f1b73ba014db35313102ca0b5c9f5f1f902ecda0f3bcc",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0235__spine.json.gz",
+          "bytes": 56642,
+          "sha256": "76cf0e9a82d62f9da7c9e6c59f3def33d1fbe557fa710370630a036dcb28cc81",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0236__spine.json.gz",
+          "bytes": 61112,
+          "sha256": "9b076243817c3690fbd3a4c4ad33b92274803e00eed450e1e166a0d582401070",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0237__spine.json.gz",
+          "bytes": 61369,
+          "sha256": "3fc3e0447cdb35ab3cfb991712e8fe9cce2e994a828fb56c7c69565be8194d18",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0238__spine.json.gz",
+          "bytes": 36179,
+          "sha256": "13e918e63b38bd05b64b4c735983947562e1cb41a8e06179ede66dbf8a746719",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0239__spine.json.gz",
+          "bytes": 46358,
+          "sha256": "84635db839da1e332c84b0831e4d683db0cd1b6a3fe437219638b483fd44ed77",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0241__spine.json.gz",
+          "bytes": 107341,
+          "sha256": "222c225ff1828ed6b302eec485dd0acd80c0e1d3c886e1b2b4e8a77078b9cce7",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0242__spine.json.gz",
+          "bytes": 53019,
+          "sha256": "af7fae28d5d597d07ede6429fd86ed27804d60493f83d9142b2e272257a880e1",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0243__spine.json.gz",
+          "bytes": 50961,
+          "sha256": "67945e9dfadacccf56f12df15094aa95888cb0d7f03bddfb3df09fe9229e78b8",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0244__spine.json.gz",
+          "bytes": 26372,
+          "sha256": "950cc00399d0ca2b01f075490a78524852b7f7e3b82794c0d38f125a9478bcad",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0245__spine.json.gz",
+          "bytes": 94817,
+          "sha256": "2e42345f48cfab9fdcd02068a79d05952d2f8a26e45a274255e6b31208cf1b1e",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0253__spine.json.gz",
+          "bytes": 12210,
+          "sha256": "886cb988f39787c64423f12906851098a36942130bca8869c7ec836d94232a91",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0254__spine.json.gz",
+          "bytes": 61359,
+          "sha256": "c3034c438287c017dbc0dfa9c310712d6b18fd68d4d5216ce881e2b12da4cd5c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0255__spine.json.gz",
+          "bytes": 28746,
+          "sha256": "ba2584b20c74c71533bb2c000f69d1977f6f57fbe32f8f8472cdeb4368b9810b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0104__spine.json.gz",
+          "bytes": 6973,
+          "sha256": "f796acb887a2a54fe20a3e158c3dd37fde16392a7a02cd1dcd3e343a8c3167f4",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0105__spine.json.gz",
+          "bytes": 1158,
+          "sha256": "83a617992cf01bb57e1147dc944b83bf17f677f3a9c7f7890716ca72a647281f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0107__spine.json.gz",
+          "bytes": 1165,
+          "sha256": "0a48dc2cbb34c1ae018229dbaa9f9682096602e7c3a0c4d9466f717a6296109b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0108__spine.json.gz",
+          "bytes": 1167,
+          "sha256": "048423508d533fb58ce443a507c195004924bc6c26bf217c4d31406b0aa823e9",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0110__spine.json.gz",
+          "bytes": 1167,
+          "sha256": "e429e8feba9e45727107f1a7d2021383cc5e87d546d7fb1447025ea8d086dbfd",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0111__spine.json.gz",
+          "bytes": 7045,
+          "sha256": "3254d2cee373c1e12cbd2283c9901728b142b8e2b212510a343fd3e3bdc61848",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0112__spine.json.gz",
+          "bytes": 6943,
+          "sha256": "a455dc39233206cbbf6fa16bdc485b03ff500a5c10c9487e03d1ae5461ec403a",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0113__spine.json.gz",
+          "bytes": 7052,
+          "sha256": "d2a3b71142082caa0930b4e7a7ce7dc842fabc56887c56c943333a7d6cbca3fa",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0114__spine.json.gz",
+          "bytes": 1158,
+          "sha256": "0e6044ffcd9b423145434d9f4e033c9e8b29e797eca1fa6ae1dc669820efcb54",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0116__spine.json.gz",
+          "bytes": 7264,
+          "sha256": "20d02a06bfcfdefd792a32e514267325b7a5558b087adfbcda0ad82a5c7eca5f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0117__spine.json.gz",
+          "bytes": 7369,
+          "sha256": "009e6099195a6f56c5739f14bab981bfc96afb689fb056e7fac745d09337883e",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0119__spine.json.gz",
+          "bytes": 6879,
+          "sha256": "fd9d557082f225d8d46706fa6e032f6759d1f381a0652954de6d1754b41d114b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0120__spine.json.gz",
+          "bytes": 7501,
+          "sha256": "2975881db524d132046e064206683ab7eba4f0aa1c40a75b67ca77b373003039",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0122__spine.json.gz",
+          "bytes": 6980,
+          "sha256": "91fabeeaddff3438ec4be3033e36d792fd703b44f20e4bbc0e31b9783ddedf7f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0123__spine.json.gz",
+          "bytes": 6745,
+          "sha256": "f5420de2a5d9a8e375e3c2c14a8624f948c50cd322be72e40c378904d405a8d6",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0124__spine.json.gz",
+          "bytes": 7133,
+          "sha256": "927eb343ac43fd359774e461565f5dd81c5da8cb0e624e1f3186529f19e77032",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0125__spine.json.gz",
+          "bytes": 6830,
+          "sha256": "16ba9c125cdae27c71c6ffb527b960282e739f7d28978baef321bac36ec48d18",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0126__spine.json.gz",
+          "bytes": 6735,
+          "sha256": "e4e11806702792f1653e4c8c034a5ee6c65c7dc54cd567096e80a4ecaa4b5711",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0127__spine.json.gz",
+          "bytes": 6904,
+          "sha256": "e24fd737733a301dc9345f56d77cd94f2a143d44db8de94f4b532365d7112766",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0128__spine.json.gz",
+          "bytes": 6918,
+          "sha256": "0ab6061b27896b40b83a8100de222fac6a5a3e40d3f238f36bf263cfb4811c6d",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0129__spine.json.gz",
+          "bytes": 1158,
+          "sha256": "43c738668ca5bbdfefabdb85d2a5b2d816b9eccc23c45c765504a6ee85458100",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0130__spine.json.gz",
+          "bytes": 1166,
+          "sha256": "9fca0d384252c3c8c55c9db409218dadcba6f71b26370225178ab5bf07b9580c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0132__spine.json.gz",
+          "bytes": 1165,
+          "sha256": "92776bba0f0da96d2ac473604fbb73e7c434e62a4ccbda422836d43d274c0b5d",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0134__spine.json.gz",
+          "bytes": 7408,
+          "sha256": "7849319c4701254bcd679b52247e5cdf9c2bf0d46dff9170e7b6e4655fa580cf",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0136__spine.json.gz",
+          "bytes": 6931,
+          "sha256": "6fd201f2bd5bdbe50656fca54dfef6a489772bea75a98027fe746c26bfd1fdcb",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0137__spine.json.gz",
+          "bytes": 7514,
+          "sha256": "7c64a2a00892df8330290f11f77035a8442b09d606028eb6e651c0e504006bf4",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0138__spine.json.gz",
+          "bytes": 7017,
+          "sha256": "82d1ab3329e65977c556bca4d61238587917948489ff9f10ab7bcf8a765e160c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0139__spine.json.gz",
+          "bytes": 6812,
+          "sha256": "172952f1702210fa9b2f6cd0e5c4b1f012d46e89c7958cf916b10fbcd84e4c8f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0140__spine.json.gz",
+          "bytes": 6943,
+          "sha256": "8c36190d88d94f8d378a83892d24c6b0ca95df220cdf09bd9e9e55d16afd7983",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0141__spine.json.gz",
+          "bytes": 6927,
+          "sha256": "acd8e84b60a0b2c0156e1ece76eb509e195154c0f6dac4f1c9d6ab3561c003bf",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0142__spine.json.gz",
+          "bytes": 1166,
+          "sha256": "7398fd3329ae25f6b7627adda634b07a2b5983c8dad8edf359dcc720725645c4",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0143__spine.json.gz",
+          "bytes": 1167,
+          "sha256": "cc49ff371f7d9759c2294ea561ce4c5a830642d8558856ec44c424470e778d6b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0144__spine.json.gz",
+          "bytes": 6795,
+          "sha256": "d98116f638512cf652fac7ae586758b8099bd9b12f15418176d14bc95cbe8b3d",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0145__spine.json.gz",
+          "bytes": 7524,
+          "sha256": "4c7694325391d06b4ee2e81322995d4f35d1f3a7c335fd71d34c434565b5ad2f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k15_0147__spine.json.gz",
+          "bytes": 6664,
+          "sha256": "8e705aaf2f7c09f0eb687cd38ce3526ad119619fee964deac3afe0e34d8b9513",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0056__spine.json.gz",
+          "bytes": 5747,
+          "sha256": "129f3d588f8ab14f6b67ab8d218c2aa710d0cb3e134d077ff352bc9c17a7fbbb",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0057__spine.json.gz",
+          "bytes": 5600,
+          "sha256": "82c8144c43c9db3ae8621238ac7e90d71040060c1b4477bd72e7e5b795011e50",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0058__spine.json.gz",
+          "bytes": 5647,
+          "sha256": "7afb501e3f293cb5cfd8b4af30c5447db9f64deb0bba951e27571defa27ae299",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0059__spine.json.gz",
+          "bytes": 980,
+          "sha256": "8f442b6447865d4ee39cf65461de5a9416841176c412229d829a93928213c46c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0060__spine.json.gz",
+          "bytes": 977,
+          "sha256": "d0bf679af28571f2afc9e4cfb773a008c0262231181f4604ba3ac8375a6d3db2",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0061__spine.json.gz",
+          "bytes": 5467,
+          "sha256": "71346697970b0497f4a54295548d9f5da876222460fa5086d3bf35a8fbba0321",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0062__spine.json.gz",
+          "bytes": 5641,
+          "sha256": "6aec65f659dc3484fbdaf3db0338fb70756b02b9cb9010589053cdadd6de8478",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0063__spine.json.gz",
+          "bytes": 5644,
+          "sha256": "551c072a60efc3eb73a081f6ef4975ea4d61fe6bda447e3b80bafd74c3c9571c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0064__spine.json.gz",
+          "bytes": 979,
+          "sha256": "4f6d83b5f00f538e7c2a3028fb9dbaba1bbbe9cf789382a0545fbd4915f775f5",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0065__spine.json.gz",
+          "bytes": 5696,
+          "sha256": "f7b53219794e43eca10c2ccec60b7b3209a20b6ceb66bc6be10b09bd7a7b8217",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0066__spine.json.gz",
+          "bytes": 5519,
+          "sha256": "820a4814357842662630256bb8dcfba731c8751855545e9560acb99b465d81fd",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0067__spine.json.gz",
+          "bytes": 5542,
+          "sha256": "389084ecd40f0976704e8eb5e826bee253f8a1715d99d60790c3742853ebc2ab",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0068__spine.json.gz",
+          "bytes": 979,
+          "sha256": "2d74f7069bc2b18fb789696bd2b6cbcb0baca47c8264747634245573757619df",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0069__spine.json.gz",
+          "bytes": 978,
+          "sha256": "a95a22d6ab4d4cf688d431669911aa8e0238cee0d2923d820f741f41609f304a",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0070__spine.json.gz",
+          "bytes": 976,
+          "sha256": "1ab7da85e212f15b0e95415daee2c92b91fc60f40684f447707e8c6f2caf3633",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0071__spine.json.gz",
+          "bytes": 979,
+          "sha256": "9323feaa09bcaa862b2302c48232718289d3a44e9711b5c5cf9952e450d4e8b7",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k16_0072__spine.json.gz",
+          "bytes": 978,
+          "sha256": "fb6e53c1024617b08599b6d0dea56bc0b00511e996266d50bc9bf53feea043d9",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k13_0184__spine_window_s0.json",
+          "bytes": 170087,
+          "sha256": "9a076ac7f0502a6a5a4fe1bf4e584dd97c80159abe9d663c629dd27a232a4573",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0158__spine_window_s0.json.gz",
+          "bytes": 14255,
+          "sha256": "2ba1934b2966d0d4096aacd54cb52d2e34a516d7ca8e820541663592c70903d1",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0160__spine_window_s0.json.gz",
+          "bytes": 13792,
+          "sha256": "438e190bfded40a1ad74bb1728965ec9174a14efa5c9f30bda457abec80d549c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0162__spine_window_s0.json.gz",
+          "bytes": 13434,
+          "sha256": "cd22bfb13901218d9c22821cf5a9173630aa04d5883e328c2df8f371cf734bc9",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0163__spine_window_s0.json.gz",
+          "bytes": 12970,
+          "sha256": "044dde8d0c0be2841fc8d037430d31f5a98dfd0057f2b5894fc4ca62afbf2ac8",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0166__spine_window_s0.json.gz",
+          "bytes": 11442,
+          "sha256": "4b5707d4ff71b810b38f4a05def09b6072cf6ff06cbe5e6d97e2babbf49f633e",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0167__spine_window_s0.json.gz",
+          "bytes": 13933,
+          "sha256": "fb7f498ccaef09675a630041cc3d20f337e90dd47af7a957d8068eb462309d1d",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0170__spine_window_s0.json.gz",
+          "bytes": 11432,
+          "sha256": "d5230ea618690ef922f878e13fcf942f7e222707e77cf70f71151cf10c320130",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0171__spine_window_s0.json.gz",
+          "bytes": 15288,
+          "sha256": "4a81c54072e4dc18a32ee2325c0e38f4d6d47b6a850ca2772b9857157ddfa74c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0173__spine_window_s0.json.gz",
+          "bytes": 11219,
+          "sha256": "14dff40bc9b6a4583d0f6503737779915cec94590a6729826c3370bde522cb58",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0174__spine_window_s0.json.gz",
+          "bytes": 10931,
+          "sha256": "e4065259cb3c982988297d3478c5670cd65521e0ff6bbdfb3221a18e0d267494",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0175__spine_window_s0.json.gz",
+          "bytes": 11038,
+          "sha256": "373698beed89f07477e27c09e66d97d2d88380559ce9ba9e1ba36d33aa77546e",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0176__spine_window_s0.json.gz",
+          "bytes": 11045,
+          "sha256": "acefe7f964e7b38375660608cf079e1451d3de41a99b208a5a389f8961aaeea5",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0177__spine_window_s0.json.gz",
+          "bytes": 14238,
+          "sha256": "3310e8e0e81178a96005a5c6234121e5c8f4b98cba8e7dfce55ef52cc75d268e",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0179__spine_window_s0.json.gz",
+          "bytes": 11047,
+          "sha256": "b1701b235657df406137e3bcbd93ce69db78c14ec4a4e5b37d4da2af2a46bce1",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0180__spine_window_s0.json.gz",
+          "bytes": 12515,
+          "sha256": "5a897753d47ce74885e7a89c189bff8f5b1aec72e3058c61bf31459574b59b99",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0181__spine_window_s0.json.gz",
+          "bytes": 11171,
+          "sha256": "7b7a5feaad8c9560cdf6078bedb9550453700aa17297f35bf0fe0e17e5f13bee",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0183__spine_window_s0.json.gz",
+          "bytes": 10815,
+          "sha256": "f86769c7d83bbb47c55d035421e9c24746a238b4b4ec195906901595488e3b0e",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0184__spine_window_s0.json.gz",
+          "bytes": 10926,
+          "sha256": "81646c7a38327e79e1c4d43c3618d3417aafdf831cb0fa13ba18a14496895aa2",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0185__spine_window_s0.json.gz",
+          "bytes": 10936,
+          "sha256": "1c95c506d6c070365e082d4c2a5a404ada4d5303ee7f6d23a06d93a36f652973",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0186__spine_window_s0.json.gz",
+          "bytes": 7592,
+          "sha256": "1be93485ddffdee91eb43e10d03fdbbe44bed0cf6521724c2f544c6ab91ef9df",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0188__spine_window_s0.json.gz",
+          "bytes": 10864,
+          "sha256": "18f15fcc0d7e28cec5672a196ae4c9fc000a27b888379c22b1bd373b61849d5e",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0189__spine_window_s0.json.gz",
+          "bytes": 11436,
+          "sha256": "45fd4177b8827eb2d65c5ddd94c0d78fa4f1027b3af6efebb604b9d368549410",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0190__spine_window_s0.json.gz",
+          "bytes": 9983,
+          "sha256": "03d418d0b34d96a8be7cf707fddf282a1f45996af4993671bcc88b871d98a75f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0191__spine_window_s0.json.gz",
+          "bytes": 10949,
+          "sha256": "2cfe132511899e310ac27d5df73ecdbefbec46435a625e45feb40ca42829310c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0192__spine_window_s0.json.gz",
+          "bytes": 10988,
+          "sha256": "9a1e854cd55848297bf7624cf88e501c7013ea9033911bf49629806859a7c8d1",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0193__spine_window_s0.json.gz",
+          "bytes": 12487,
+          "sha256": "9ca401f4d063ff875842cb52016eed0847e11573aa6d3aca6fea3004967506fa",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0194__spine_window_s0.json.gz",
+          "bytes": 9966,
+          "sha256": "89421e0ff114356272e5d7b83c93b21c4a1430ef6b77a9840a630e20e4aa86e5",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0196__spine_window_s0.json.gz",
+          "bytes": 11014,
+          "sha256": "a786058adb0d41702939ac01a6d6676ed239a2cde3e73bf486a4c63ca4ca6c87",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0197__spine_window_s0.json.gz",
+          "bytes": 14475,
+          "sha256": "ec4eaca55608c31f4fea100441e0881d9dfba5fc6e5620ec26e690d61c7362cd",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0198__spine_window_s0.json.gz",
+          "bytes": 13848,
+          "sha256": "88d9eb79b62c3972b88a97840bd7f4faa41daec06c07c8de371cf434bf43681e",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0201__spine_window_s0.json.gz",
+          "bytes": 15140,
+          "sha256": "17d77e118384623f4b7146656bf45a46c04f24e8efa431fd5356b8427b4f02a4",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0203__spine_window_s0.json.gz",
+          "bytes": 12342,
+          "sha256": "97461ff1929d0073adc746bbd3d0780e4e581fb2b2ea66d1aeeec79a61eafde3",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0205__spine_window_s0.json.gz",
+          "bytes": 10593,
+          "sha256": "9b037ca873691c9251f08343556324e05a3da0fa3444a4ee9347f59e618c0047",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0206__spine_window_s0.json.gz",
+          "bytes": 12081,
+          "sha256": "8a7053de9e69299329ffc0c94037afe82bf366541a0b9cc3fdbda9ac0aa43438",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0207__spine_window_s0.json.gz",
+          "bytes": 10786,
+          "sha256": "fbbb873667abe0971d86b67b8386a6c6a0f16580b5048990a30bd682a0e6cbaa",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0208__spine_window_s0.json.gz",
+          "bytes": 10403,
+          "sha256": "ce5be1839e5aab19211c0caabe4a28f1cfdc27b47f3a22cd10097f706b356034",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0209__spine_window_s0.json.gz",
+          "bytes": 10685,
+          "sha256": "8b32b31fab83ef6554eaf5bbd7a079a698f51321108886bdf966d609d54acbfe",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0210__spine_window_s0.json.gz",
+          "bytes": 10567,
+          "sha256": "c83ccf1d1aecee1dc39205047d219b5c41cfeb47e2254b036641f79a85a29b27",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0211__spine_window_s0.json.gz",
+          "bytes": 12115,
+          "sha256": "b558b02d23330432d6e3e5579caaa0ca8c3f403219e8f1af3e7d735ad3745cef",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0212__spine_window_s0.json.gz",
+          "bytes": 9597,
+          "sha256": "29d1faccc26a6277bb596df04a5aeeeca5bdc98ffc3cde4b61184519b4810a01",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0214__spine_window_s0.json.gz",
+          "bytes": 10770,
+          "sha256": "3ed25c7aa9dda05f0c61143663d164113500f79ba240bc545f4d39d8fe5eb529",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0215__spine_window_s0.json.gz",
+          "bytes": 12658,
+          "sha256": "99230b1ce5cc4277dd7569e942f4b192878492938665653a139d5093b3c37101",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0216__spine_window_s0.json.gz",
+          "bytes": 12767,
+          "sha256": "44ca69fc70213c732d3de8d34ea5fa3bcaf098f964bb2c092687a984448957ca",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0218__spine_window_s0.json.gz",
+          "bytes": 12655,
+          "sha256": "e107afa4394cfa64fc1d134d1cee634f883d26da89cb5ed4b99ef0c40d8c5255",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0221__spine_window_s0.json.gz",
+          "bytes": 13267,
+          "sha256": "d85c04b1ad545716d9a3242bd5c5605016e1ba5d5328dee83362a53c97166689",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0222__spine_window_s0.json.gz",
+          "bytes": 13767,
+          "sha256": "fb30dcaaee83a9a20eeb550ca564dae55720ab24ba51d24842591744e334d0b6",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0223__spine_window_s0.json.gz",
+          "bytes": 11406,
+          "sha256": "4fea80e8d83dcedad4d6bed377c207fbef5adc663537ebf6e25d9bdd2d788c75",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0224__spine_window_s0.json.gz",
+          "bytes": 13746,
+          "sha256": "fbf684839151eebf6e00bdfef677a96d4655818f8c18f652e3ca33ed95ab0cb0",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0225__spine_window_s0.json.gz",
+          "bytes": 13579,
+          "sha256": "c5d9cd240eb5c0a4dd37fb22068d06c74c7fbfa65a5ff3136aece116452a6c76",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0226__spine_window_s0.json.gz",
+          "bytes": 13205,
+          "sha256": "3d4f7a8cc4bf2427b0325b7ecfe43de3f5345ca1f19a8e3d14b1fe280c61f91a",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0227__spine_window_s0.json.gz",
+          "bytes": 13147,
+          "sha256": "aa846132cf9dac9eeee76d986148d5a80a9665789e511b8f74a7a9e62f5daba6",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0228__spine_window_s0.json.gz",
+          "bytes": 13157,
+          "sha256": "fbea9a91a0832986123c67a1ac665c96ed806274204ee975b9904f345442ab5b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0231__spine_window_s0.json.gz",
+          "bytes": 11075,
+          "sha256": "284cff5f269392809f3fa21fae42ae599da863872b83bf7edc527bf823a87b77",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0232__spine_window_s0.json.gz",
+          "bytes": 12236,
+          "sha256": "6f45e2d54c842a4cbce2616191d2231825d870cfe79c354dc142813adde7cb47",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0234__spine_window_s0.json.gz",
+          "bytes": 11139,
+          "sha256": "d86daedc9224286072b04dd83e029b760eb84e44599c36139035e9c6dc4e66e3",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0235__spine_window_s0.json.gz",
+          "bytes": 9848,
+          "sha256": "94f648c1e7674d94d7898e63e1261c606d7de9ffeff5e75dfc27b8d2bd78961f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0236__spine_window_s0.json.gz",
+          "bytes": 11166,
+          "sha256": "f891c799da60d9d9dcf8bc7f27e0993195bb5da701c31c1625444473c2e1d6a1",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0237__spine_window_s0.json.gz",
+          "bytes": 11151,
+          "sha256": "991f2aca369b46f8369505521f74b0e0c2fd31d4a4addd258ddb6cec74b337e8",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0238__spine_window_s0.json.gz",
+          "bytes": 12763,
+          "sha256": "f02ab39bf520324d58a3617e28da1dd0fa0cab1ffd2e78572a6ba70aa8094f31",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0239__spine_window_s0.json.gz",
+          "bytes": 11150,
+          "sha256": "787d315b0d150b4097eab66d206618b265223d32b8dce5ce2fe69397a40fad77",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0241__spine_window_s0.json.gz",
+          "bytes": 13264,
+          "sha256": "50950e430041b2c9fcb6f1c248af2191688c0f77bd5c3979a0194958f093264e",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0242__spine_window_s0.json.gz",
+          "bytes": 11230,
+          "sha256": "fb3ca86e1ec40948a165e2e50db29aba06e7d5fcbea597f4baf97f9db1abda3e",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0243__spine_window_s0.json.gz",
+          "bytes": 13910,
+          "sha256": "3e64ff643d4e61256c9034c8bc6b2c3dbed9079b243d4c832b55b24ee8e13e3f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0244__spine_window_s0.json.gz",
+          "bytes": 12876,
+          "sha256": "eaf07de4d881b23606a7b440a91d91200c50eea526c7a8e317bce4f6598315fa",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0245__spine_window_s0.json.gz",
+          "bytes": 9674,
+          "sha256": "81ed4dc3c74221fd51e155f2bf3565e1a7ba7f986dcedc980de52774d858803c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0253__spine_window_s0.json.gz",
+          "bytes": 10593,
+          "sha256": "f2435cb54340b9f32fb6214bf5df1c2e98f26579069b26b500d35e1d1af6935b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0254__spine_window_s0.json.gz",
+          "bytes": 11059,
+          "sha256": "1c75d596eb78c942802537dd63fb128a7014e2209c65f44b71a59e94052d22d2",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0255__spine_window_s0.json.gz",
+          "bytes": 13191,
+          "sha256": "ef1cebc5e7c9913527a578f9006644c2242708a049c14598aae62f9009184f03",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0104__spine_window_s0.json.gz",
+          "bytes": 10862,
+          "sha256": "ac174836218c29732d6f08263cbab061a6e90762307ac4793ae98fd51aed43d0",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0105__spine_window_s0.json.gz",
+          "bytes": 10397,
+          "sha256": "c00cf33c1456ad2a4202796d617adaa886a004b673581d39d92f10e3c06d7ca1",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0107__spine_window_s0.json.gz",
+          "bytes": 9691,
+          "sha256": "f237c138d2ad5de63720659c08bc51a40676586001d0f7b9f35a159b11d07645",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0108__spine_window_s0.json.gz",
+          "bytes": 9801,
+          "sha256": "f77d6d617c680b9a28b5f43ce43ebe9703ad596b8a7ce1dee4e4b05c373fd5e2",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0110__spine_window_s0.json.gz",
+          "bytes": 9752,
+          "sha256": "631e8658782c185f99c288eda9d730443f6c7d042f01eda118accce1e619d233",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0111__spine_window_s0.json.gz",
+          "bytes": 10284,
+          "sha256": "5e9b39763be12dd25fb7e80d2e63e79a6da9288b5c1d5b63eb4382f5960dc498",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0112__spine_window_s0.json.gz",
+          "bytes": 10477,
+          "sha256": "6e9dbf1355033456b20edd24a5463c226bc78dc64417e7721fbb8c526e4a51c8",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0113__spine_window_s0.json.gz",
+          "bytes": 9518,
+          "sha256": "c7a1f00947e49cdb3355890ede0fd0c1d6a599eb4b895b60091f0828f34666c8",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0114__spine_window_s0.json.gz",
+          "bytes": 10290,
+          "sha256": "20de67acef380b1d3d3cd5d63e8a7d87076d48594761897c2c41d01cc39d7bfb",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0116__spine_window_s0.json.gz",
+          "bytes": 10704,
+          "sha256": "466670a2478fc20aedaa13c51d1252c6a6d16ec09b72b27556cc8e0f7555c5e0",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0117__spine_window_s0.json.gz",
+          "bytes": 11679,
+          "sha256": "752737ff81a012b2f618eb5057c6b4ae415d4aed6d5b6caa4f27998a8acf86c5",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0119__spine_window_s0.json.gz",
+          "bytes": 11657,
+          "sha256": "0c530544cc1dd826919b468f8072a0a6d27ec2bf8ae69c4829315aa69c80a6ac",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0120__spine_window_s0.json.gz",
+          "bytes": 11348,
+          "sha256": "acc046282a88fd2a9d3c85edd030c4510dacab37e760331e7bff2370307e059c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0122__spine_window_s0.json.gz",
+          "bytes": 10298,
+          "sha256": "823dd1a90ac323226e87a6a3820fbac9ccb1d4d0a62bd386869ef88dde44ca6b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0123__spine_window_s0.json.gz",
+          "bytes": 6685,
+          "sha256": "6dadc17288a2411a99927dd881fc93279deb85a6d92b8b49417717f620237836",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0124__spine_window_s0.json.gz",
+          "bytes": 10178,
+          "sha256": "372d3cb4e1aed28afbabe7aeb695a7b8d6f01c6aad30f2f27c01225323119254",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0125__spine_window_s0.json.gz",
+          "bytes": 10565,
+          "sha256": "449b0486e29c5f1c9dc47fdcf31422aa7e1824be7e6cf2f724f0e5ff386aee27",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0126__spine_window_s0.json.gz",
+          "bytes": 10677,
+          "sha256": "7e7f589ae7c6ce49bf527ee06d724b1f81f6ffef8867ffcea0a5a4c8c386b1c9",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0127__spine_window_s0.json.gz",
+          "bytes": 11776,
+          "sha256": "92807e161bf7d12091c551d1bac66059c71f0f468cab05abf7e65d2877b6fec5",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0128__spine_window_s0.json.gz",
+          "bytes": 12218,
+          "sha256": "a7f3f1a7d83ec737a591b4d14d225e8f6fbf89ee253c5f6c6ba9537b15e57a86",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0129__spine_window_s0.json.gz",
+          "bytes": 10366,
+          "sha256": "121974dc26e65d51d901e865ce0a72f451f1ecff5728c9f184eca2d294807587",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0130__spine_window_s0.json.gz",
+          "bytes": 9821,
+          "sha256": "efdc946f8e229752eabf9eb91d63060eb52b6ec779d9f33a56f13969b39d6e3b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0132__spine_window_s0.json.gz",
+          "bytes": 9813,
+          "sha256": "8e92939f1056d74ef9f814f258d97da030095c183ceda1bf3e0f3970b748fd9a",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0134__spine_window_s0.json.gz",
+          "bytes": 9578,
+          "sha256": "156910c7bf8981bc0737936b6f6449c6a7dd478b4841ffd455f0606fe70df187",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0136__spine_window_s0.json.gz",
+          "bytes": 11431,
+          "sha256": "248158e18ff6a94982ce10d366818b365116ff070cb67aabcfa05736db64a45a",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0137__spine_window_s0.json.gz",
+          "bytes": 10943,
+          "sha256": "4e21955a69bdb7eaa3b66c32588b301c57af9add96aabb758c0c0b5b5a42c984",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0138__spine_window_s0.json.gz",
+          "bytes": 9586,
+          "sha256": "4c214c4b82baa6a960d332c3e1f16f89d7d4bde1d18d74a59fe1905807f6334b",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0139__spine_window_s0.json.gz",
+          "bytes": 9555,
+          "sha256": "4528bb80969e515f83b7b831bfa22188b127b3c9db06231265646927a03813a2",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0140__spine_window_s0.json.gz",
+          "bytes": 11491,
+          "sha256": "b03a407e1670096870bef3f902b5843fb14ff3b159403be6e12f4e607dbd13a4",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0141__spine_window_s0.json.gz",
+          "bytes": 11382,
+          "sha256": "032e2eedadbaa4919e16518b6101eaefa3b9e6d264ad3bda83c8d5fd3f198087",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0142__spine_window_s0.json.gz",
+          "bytes": 9821,
+          "sha256": "c20614345af88bdbefe5abe651447793c31678290cad008d84f3b4d43d59d06f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0143__spine_window_s0.json.gz",
+          "bytes": 9776,
+          "sha256": "c228c6045379d534538593188cb767d1d75887a211df519995bd19b30a6b7f40",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0144__spine_window_s0.json.gz",
+          "bytes": 11605,
+          "sha256": "ca69784ca92c2e388d11f64372dc2c9421bf0bc4ab4ac26ff98e3407cedde624",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0145__spine_window_s0.json.gz",
+          "bytes": 11177,
+          "sha256": "f8d7647a6bb3c6fbb0a653dc8f1ca734bb763fbbc76c0d4654f42f1dbf6d415f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k15_0147__spine_window_s0.json.gz",
+          "bytes": 10022,
+          "sha256": "d7c1936bd82b1b8e386814f571507896d4d8a720a1a8c833db407c2363dfac26",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0056__spine_window_s0.json.gz",
+          "bytes": 6057,
+          "sha256": "32275f1864931fff48851877b7c68c3e5f5b3c451182af1c4369d0bcf3bdb313",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0057__spine_window_s0.json.gz",
+          "bytes": 5692,
+          "sha256": "98d26e156f68439482b23c75be12bef71b42c9985aa755e8695df9836b1d35ea",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0058__spine_window_s0.json.gz",
+          "bytes": 5699,
+          "sha256": "c459b5f70a8bef4b67106e97d43df28bee62cf40404c751efc83a898787779f5",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0059__spine_window_s0.json.gz",
+          "bytes": 4309,
+          "sha256": "5130fffd13c354221067fde24fb75eb06659afc87e6cd886938515c40cc0d65c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0060__spine_window_s0.json.gz",
+          "bytes": 4322,
+          "sha256": "e38916c6192430445dd4cf6522a03246eb4adfe40e0325ed688fa15c7db9cb55",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0061__spine_window_s0.json.gz",
+          "bytes": 5894,
+          "sha256": "9b04ec2ab9f8609f77008fe4dbd5260eca03c149434b275546de37f1a39a1fa9",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0062__spine_window_s0.json.gz",
+          "bytes": 5715,
+          "sha256": "bbe4f5950b0f6cd55a912304638b7a68886d0ba23217e13ba17c95b864f11546",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0063__spine_window_s0.json.gz",
+          "bytes": 5717,
+          "sha256": "673c35992fa8856b069a7c043c2294d9eedec6b41d292cfd428c9e2f328c1e1c",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0064__spine_window_s0.json.gz",
+          "bytes": 4316,
+          "sha256": "de3b549030ac065c227186d484ffa8f27e387780e1951ec20a07470bd154dc24",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0065__spine_window_s0.json.gz",
+          "bytes": 5935,
+          "sha256": "a372c9025d2a4aa07b0f81f91ffa8f0c2f78cb916ccef98f30523b5be1f8123a",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0066__spine_window_s0.json.gz",
+          "bytes": 5690,
+          "sha256": "ba1ebf21da354cab32f85f1d62f749dcfa85711099b9ff52967eee0784bcc3e1",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0067__spine_window_s0.json.gz",
+          "bytes": 5950,
+          "sha256": "80b7689879bc2ae7b43de7934592e102ef70b62751eab984ce65ae7ad64c8933",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0068__spine_window_s0.json.gz",
+          "bytes": 4329,
+          "sha256": "c0902d44ae835a3af25364ff5ae2a40b20037ffca0750d6e2fd78b2133bf4699",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0069__spine_window_s0.json.gz",
+          "bytes": 4326,
+          "sha256": "b0d621fb3356f092cb6806ef346f6f7c3c4402342c864993424c7ffd63529680",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0070__spine_window_s0.json.gz",
+          "bytes": 4325,
+          "sha256": "08ebf5f47ae7168c7089051ec43c7ebd33e0e39ea0a9a691f794c0b2c93f61aa",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0071__spine_window_s0.json.gz",
+          "bytes": 4313,
+          "sha256": "f52964d8685ee276768607f83463c044a3c8f68be2f182587b85432728436066",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0072__spine_window_s0.json.gz",
+          "bytes": 4276,
+          "sha256": "e2e2f90dd358ac411c3eb8101fd4e7a80ff4ae06d61d18173572ce59cb97acfc",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/probes/climb243_n17_k04_0016__spine.json",
+          "bytes": 1024500,
+          "sha256": "269379cdd42d44e9f087c2fed275480f2b5858d51f36bc64cad17991c6ce7ba3",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/probes/climb243_n17_k13_0100__spine.json",
+          "bytes": 2657495,
+          "sha256": "5d69b4897b7447a2baefce27f88ee906043f4ee19e1a91bc50bdb77b6f4565f6",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/probes/climb243_n17_k16_0000.json",
+          "bytes": 2073,
+          "sha256": "ba593ac49614b3dc37aaadc8c4b10ca4715c2958d2007b3a3ab505c87e8d96ab",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/probes/csp209_n17_k04_0016__spine_window_s0.json",
+          "bytes": 410900,
+          "sha256": "179edab5f7529f48d7af2e363fd918b193707eaa23395e612492052a4c634945",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/probes/csp209_n17_k13_0100__spine_window_s0.json",
+          "bytes": 190666,
+          "sha256": "c5b20621a9c856a2b5d03b8f7e0aef793c595c4e510621ab057e65a053378ab2",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/certs/probes/csp209_n17_k16_0000_window_s0.json",
+          "bytes": 69972,
+          "sha256": "9dc5f742581e0a018beee8ced1e98bab4e508ef88774bb52ba1577652160051f",
+          "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/results/probes_raw211_n17.jsonl",
+          "bytes": 28607,
+          "sha256": "d3563f46fc7dba3f52cacbaba3d74cd02652789e9a3b2a4c0b033863a47eb2e1",
+          "reason": "Raw probe rows of the n = 17 descent; the summarised probes_rows243_n17.jsonl is retained. Pinned by digest."
+        },
+        {
+          "path": "attempts/A243-climb-17-19/results/raw211_n17.jsonl",
+          "bytes": 669171,
+          "sha256": "bb9f8194bde2632fb8f31953f5d50852a48390ab21edf4ca2221ee76996cedba",
+          "reason": "Raw engine rows of the n = 17 descent (669 KB); the per-class verdict rows (verdicts243_n17.jsonl, rows243_n17.jsonl) are retained. Pinned by digest."
+        },
+        {
+          "path": "certs/__pycache__/verify_certificate.cpython-314.pyc",
+          "bytes": 10094,
+          "sha256": "2a2340782790741c6594f7aab7bf8587f2c6305be5a269e97551f3af6442e4ac",
+          "reason": "Python byte code committed by accident; pinned by digest, never executed."
+        },
+        {
+          "path": "certs/__pycache__/verify_measure.cpython-314.pyc",
+          "bytes": 55982,
+          "sha256": "cde3883b99419d84cad043f3eca65d54a798fdf42b0394233fbcb88291056c97",
+          "reason": "Python byte code committed by accident; pinned by digest, never executed."
+        },
+        {
+          "path": "certs/__pycache__/verify_unavoidable.cpython-314.pyc",
+          "bytes": 20177,
+          "sha256": "56a468523aec9d237a6ce6f3e660bc1e5d478c0cfac458117869cc787c857a41",
+          "reason": "Python byte code committed by accident; pinned by digest, never executed."
+        },
+        {
+          "path": "certs/a82/k4_08_958303_250000.json",
+          "bytes": 2522,
+          "sha256": "02d9db24bbb6d5603e26cf5429a5c0a2aea2870c72db9a24a07f3876d6340f8c",
+          "reason": "A82 side-scan certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/a82/k4_08_958303_250000.report.json",
+          "bytes": 1143,
+          "sha256": "851bac9687dc598e1ce04b6c3c3c8bf354c6813a70f054c0ea3dd91ea5552041",
+          "reason": "A82 side-scan certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/a82/k4_11_958303_250000.json",
+          "bytes": 4210,
+          "sha256": "1589940d81be4915aff8aa2a7b71d01b09879aa89c4e7026d4e54d1148cb774f",
+          "reason": "A82 side-scan certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/a82/k4_11_958303_250000.report.json",
+          "bytes": 1078,
+          "sha256": "1c674355f5ec3124b80df1356d93eee533d6ec58f62a0a8243cecc9843d17c89",
+          "reason": "A82 side-scan certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/manifest.json",
+          "bytes": 2740,
+          "sha256": "8124c83df2c4c807c5e1a7604c5df0dca040b056e1bc5bbeb2c089451ee9c358",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_00.json",
+          "bytes": 2486,
+          "sha256": "050dc70173bfc5b00de161367493fe464c37c49660149c59b3fc65d72d2de44a",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_00.report.json",
+          "bytes": 644,
+          "sha256": "62390a49e73eea81d5163dac13723ddb2371d92d30301aace44c255021969a7d",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_01.json",
+          "bytes": 2488,
+          "sha256": "f69d60f312818b2f06125a173ac7e31dec512b52ee3879c63e5e791c374cfc40",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_01.report.json",
+          "bytes": 646,
+          "sha256": "e14222fd2b141763f4378fb3e5341efa7f545a8bb86f497ba4df36b644112f83",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_02.json",
+          "bytes": 2489,
+          "sha256": "c94b49fc7281b2ede8dd63e4ba38487aaf136d2b96ce47ae81fcaa54d1d075f3",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_02.report.json",
+          "bytes": 645,
+          "sha256": "5855c10389c472107c5b77668dbb33c02f32001debb6a70d3887300aeb9ffd8a",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_03.json",
+          "bytes": 2484,
+          "sha256": "b21a695e251fc8f1015d3842530742e240b6d3b82c4dca3897ab19a3a4ed964b",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_03.report.json",
+          "bytes": 646,
+          "sha256": "a77ce9e0be9ce1a02b8151472b74ccb6bf2047023673b4f3530657ac15e6b206",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_04.json",
+          "bytes": 2491,
+          "sha256": "bb757180be60492afa3945a3a354f67006dd19c19f2d7186bc453ab3cda4bb63",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_04.report.json",
+          "bytes": 646,
+          "sha256": "5f8c46a3db8698c61a1a17601c5e82616ac72379c04b498c95c41a74661fcb31",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_05.json",
+          "bytes": 2490,
+          "sha256": "1d174baad77cdc1a3c34de00cfbb6a013d4be5e0c5f9671c82befb9c1e6f57ff",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_05.report.json",
+          "bytes": 645,
+          "sha256": "d6a06b35e240eacd1f80fe1503cf3832ba59e8ef8edebe0894392a559d7158c8",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_06.json",
+          "bytes": 2467,
+          "sha256": "749fe6023c1224dd091e4c4fa6564940bbb6decc71875ab471e53419fa0c5bec",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_06.report.json",
+          "bytes": 648,
+          "sha256": "dfe2e196fa9b856b383da93e1543499e94d35cf42d14a767390f21d1c7420424",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_07.json",
+          "bytes": 2459,
+          "sha256": "3a966dbac5871b5bb3b530b1c41438b5ecc30befe62ae487698f30dbe8061892",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_07.report.json",
+          "bytes": 649,
+          "sha256": "64af2b4b96a00d575a951c97ef071f769debf14193ce69e4835baae86d752690",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_08.json",
+          "bytes": 2466,
+          "sha256": "8676b71a678ddf77232bb63a39678e893ef5b0b28831fb0456d7d3cb699c845a",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_08.report.json",
+          "bytes": 649,
+          "sha256": "a21bc98b04dc618d8a6a387797d8ffdc5cd7d6f13056b2b47289d79f03e0eabf",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_09.json",
+          "bytes": 2462,
+          "sha256": "f2ae82659f78a7356c6c13cf19737cbcae2e6b314f99b920fa5a4c8e09d9d624",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_09.report.json",
+          "bytes": 649,
+          "sha256": "46a4ad7c3c62513c2bbccb8fd3deaaf4efc5eab2e98b7bc648e9facb0c75eb0e",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_10.json",
+          "bytes": 2470,
+          "sha256": "f1f9949dc626d83850ff9ba914d6a0438e2de21ffceab0b3b8653f134be13e57",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_2000/u1_final_d5e-4_10.report.json",
+          "bytes": 645,
+          "sha256": "5d97824aa354b9ebb61da2cd84b9be9328088b0a0b8cbd5b0579a0b7443bd12d",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/manifest.json",
+          "bytes": 2830,
+          "sha256": "7ae5df854e6db7a9e8fd2463b41450be3945807c2621c025e5a95c3601a9bd23",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_00.json",
+          "bytes": 2498,
+          "sha256": "6e0295072402844b2e3e314bb7df09ed499642b261b1be2999b01d8e0d31de2e",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_00.report.json",
+          "bytes": 647,
+          "sha256": "4cbdbfaeb5aa26eeec80d195a07d07d159642d4462a623f7c35ac0e24583dcd0",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_01.json",
+          "bytes": 2498,
+          "sha256": "a285294caff2b384c07a789877a977952e88d68e28a202edc87496e912f6d1fa",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_01.report.json",
+          "bytes": 648,
+          "sha256": "030ccb29515b78a41487ac24115edc98f234a6dbd7d9851f973152b6a1168c3b",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_02.json",
+          "bytes": 2506,
+          "sha256": "d1f17c67c06cecb9970d6c23e60a473158663a94c449c7fd9d507a5dda309c54",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_02.report.json",
+          "bytes": 647,
+          "sha256": "a6f3067e3adea96831e27e9340c077329c5624ee0e0b41c47d5870c95a1000f3",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_03.json",
+          "bytes": 2500,
+          "sha256": "6fec50c5013131a41bf2827caa6f51cde2389cd0321c5c0854f2aa80dd65d884",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_03.report.json",
+          "bytes": 647,
+          "sha256": "391406aaf2b6d120d48a62949b3fed1139aae01f4a09af14b25aa7c59d700937",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_04.json",
+          "bytes": 2503,
+          "sha256": "cb7339b2204e3678854dc883f6ab7515c81732f67cae5cbf3b7e3cc090fc54c9",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_04.report.json",
+          "bytes": 648,
+          "sha256": "590eb3e31d5f4bcf12ae0a078a006c7ca279392063d32de4a1d2caa74127132c",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_05.json",
+          "bytes": 2507,
+          "sha256": "239ef4ac8a4fc6623f43982839eb8cd8abce210ee4179809929f99da408d2b04",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_05.report.json",
+          "bytes": 647,
+          "sha256": "9fb0e5e32efe504ec12d0525fb3639908d2c6a89c7f932ca1aace85639c5bc38",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_06.json",
+          "bytes": 2481,
+          "sha256": "96429006b9e40d9feb9f4a3242a3addd2ab1c9f6b461ce452d00832c50656ab5",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_06.report.json",
+          "bytes": 651,
+          "sha256": "8c9b27017a64b09f3611c0f76b66a088fb4b0b548d1be6efd70b6d209295c654",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_07.json",
+          "bytes": 2475,
+          "sha256": "b8ad8872093900f88bef2d57aa06b6c7bbe3c7d1b01f087a40a1be571a72c4a7",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_07.report.json",
+          "bytes": 650,
+          "sha256": "b0f43e7c00eeabc486250843da6259cab2bb863375b8a0a12ad7910778bc5ff3",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_08.json",
+          "bytes": 2482,
+          "sha256": "0a73a24216426a1f376f0f765829b7b72512dc3867b87e75602e0959fa2239dd",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_08.report.json",
+          "bytes": 651,
+          "sha256": "273cf9d8498b9392579a4199e21719c216b94b7d72793cc5162ea28d0b6a12f3",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_09.json",
+          "bytes": 2476,
+          "sha256": "d612ac1896978ee13c480dbe00ff42c96a333a4a76c9e4a42ba53b1946c06c7c",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_09.report.json",
+          "bytes": 651,
+          "sha256": "28a47a3cb01adec790a7fea781824c8c68d0915b989d9bbf8a691af93ec95780",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_10.json",
+          "bytes": 2484,
+          "sha256": "9ceea36f28eadef5f9587928bf97687b1f1175de95b238f1b692385292e3eba1",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/uladder/u1_d1_4000/u1_final_d2.5e-4_10.report.json",
+          "bytes": 648,
+          "sha256": "770fa7da204cc739d3d3c35ae384d2b77e14f42c53e3a41af0c1e79bda58f8c4",
+          "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/unavoidable_10pt_3.7416.json",
+          "bytes": 1555,
+          "sha256": "0c810187468299a98a29e586dbf3db6389776ead99e2e65a9153d900448263d0",
+          "reason": "An A05 unavoidable-set certificate below Stromquist's bound that no outreach note cites; pinned by digest."
+        },
+        {
+          "path": "certs/verify_tube.py",
+          "bytes": 40636,
+          "sha256": "beabe41914058e1408969b237bf5ba175429c13f1bd30e33e389bf880b3fb99a",
+          "reason": "The tube certificates' stdlib verifier, 977 lines. Its verdict format string 'checker %s => %s' reads as a JavaScript arrow function to devtools.check_no_embedded_js, which scans every tracked Python file and admits no exception, so it is pinned by digest rather than retained. The certificates it checks are retained."
+        }
+      ],
+      "license": "The pinned commit itself adds the licence: LICENSE at the root says code is MIT (LICENSE-MIT) and documents and data are CC BY 4.0 (LICENSE-CC-BY-4.0), by the PI on 2026-10-11. GitHub's API reports NOASSERTION because the root LICENSE is a pointer file. The retained files are copied under those terms.",
+      "claims": [
+        "Issue #521: a third-party replay of Kleddamag's v1.0.2 certificate for s(11) > 31/8 (T-037): the release's exact Python sweep (exact_mixed.py and integer_sweep.py) re-run over all 12,028 rows under the lab's own shard driver, 0 rows differing from the release's recorded evidence (initial and portable), minimum 999962528, budget 10999479944, surplus 107864; the release's stdlib controls and its integrity check (54 files, twice) re-run; an exact spot check in the lab's own arithmetic (scaling, D4-expanded budget, 3,240 poses, strict counting) passing in 10.7 s. No new result is claimed; the release's secondary JavaScript checker was not run.",
+        "Issue #522: the simple-square stratification as a proof strategy for s(n); at n = 11 a census of 1110 tuples and 163 D4 classes exhaustive at every side in (3, 4) as a Lean theorem on standard axioms; 52 of 52 k5/k6 scoreboard rows certified empty on [191/50, 969271/250000] by parametric certificates under the frozen verifier verify_case.py; the k >= 6 tier empty; a residue of three k = 5 classes, sixteen K1-protected classes and k = 0; a Lean layer whose three main theorems rest on three named project axioms (stratum_kill, trump_residual, a22_exact_structure) and native_decide evaluations.",
+        "Issue #523: at the register's n = 17 window [116511/25000, 4675531/10^6] and n = 19 window [193/40, 4885619/10^6], a census of 2,500 slot-set classes, 632 containing all four corners; at n = 17 the four-corner classes with k = 16 (17 of 17) and k = 15 (35 of 35) dead at the tree root and k = 14 dead in 67 of 68, each kill an exact-rational trace with no verifier clause; the record classes n17_k08_0156 and n19_k11_0236 first-order rigid; a compute request for the descent to the record's k and the climb from the four-corner root.",
+        "Issue #524: Conjecture ONE-FLUSH(n), that for every n with s(n) < ceil(sqrt(n)) some optimal packing has a corner box met by at most one square, with four forms stated equivalent, its reduction to LOCKED-CROWD-FREE(n) by an extremal argument, the refuted local and counting proof routes with witnesses, and the measured support; a conjecture, not a result.",
+        "Issue #525: Theorem FC and Lemma SLOT-CROWD for any n (a packing containing the pins of a class S but not those of a closed extension S + p meets p's slot box with two distinct non-pin squares, with pad pi_i = (lambda_max - 1)(i + 1 + 1/sqrt 2) on the dilated page); the measured forced-cell traction finding; the refuted rule that all extensions dead implies the class dead; the exact statements of ONE-TILTED, WEDGED-SEAL, EPS and SNAP.",
+        "Issue #526: at n = 11, K0-FREE and SWAP/CELLS as Lean theorems on standard axioms, the extremal reduction to LOCKED-CROWD-FREE(n), ten refuted routes each with a witness, measured facts about four-crowds (0 of 883 free Fritz-John points, no teleport-stuck packing below side 4.0014, every witness has an improving corner swap, crowd rings below 4 hold one square), the swap-leaf verifier and the normal-ring chain; k0_00 is not closed.",
+        "Issue #527: the geometry-before-LP toolkit for stratum trees: stage 0, the CSP on pieces, multibox cores and the clip cascade, the leaf rules, inheritance across runs, integer polycore and C kernels; measured speed-ups of 7.22x (geometric mean over 11 closed nodes) and 5.0x (no-room nodes) with 0 regressions over 314 replayed rows; no verifier clause for a tree node.",
+        "In the retained files and claimed by no issue: s(11) >= 3.82 end to end in Lean (lower_bound_382, standard axioms plus a native_decide evaluation on certs/measure_certificate_3.82.json) and s(12) >= 3.90 certified by campaign A33, both below the register's verified bounds at those counts."
+      ]
+    }
+  ]
+}

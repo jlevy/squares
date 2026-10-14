@@ -6,6 +6,66 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: october-twelve-intake-and-house-admissions
+    date: '2026-10-14'
+    title: Four Reviewed Results and Four Adopted Packings
+    pull_requests:
+      - 598
+    categories:
+      - records
+      - regularization
+      - documentation
+    result_ids:
+      - T-157
+      - T-158
+      - T-159
+      - T-160
+    summary: |
+      Registered four reviewed results at V3/C3, raising the strict lower bound for
+      40 squares to 6.718 and adopting smaller exact packings at 154, 175, 232 and 264.
+      The launch retains source credit, certificate replays and displaced packings.
+    details: |
+      - Replayed Guzhou0806's new density certificate and its complete continuous
+        cover, with the producer's kernels and separate finite-step audits. A second
+        independent continuous-cover method has not been established.
+      - Adopted Daniil Ostashev's certificates at 175, 232 and 264 and Evan Daniel's
+        certificate at 154; these establish finite feasibility, without optimality claims.
+      - Certified Rio Calle's 102-square layout as another arrangement of Ryan Xu's
+        design. It was superseded on arrival and changes no standing bound.
+      - Updated regularized displays and their lineage, keeping the earlier
+        264-square solved view as history, and revised the methods paper's adoption account.
+    artifacts:
+      - kind: result
+        label: Current 40-square lower-bound record
+        target: https://jlevy.github.io/squares/result/t-157.html
+      - kind: result
+        label: Current Ostashev certificate record
+        target: https://jlevy.github.io/squares/result/t-158.html
+      - kind: result
+        label: Current Calle layout record
+        target: https://jlevy.github.io/squares/result/t-159.html
+      - kind: result
+        label: Current Daniel 154-square certificate record
+        target: https://jlevy.github.io/squares/result/t-160.html
+      - kind: paper
+        label: Current methods survey
+        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+      - kind: pdf
+        label: Current methods survey PDF
+        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf
+    publication:
+      date: '2026-10-14'
+      evidence: https://github.com/jlevy/squares/actions/runs/38558844519/job/115838577096
+    releases:
+      - component: site
+        version: v0.6.1
+      - component: paper:square-packing-methods-survey
+        version: v0.2.2
+    references:
+      - label: Current result register
+        target: packing/frontier/RESULTS.md
+      - label: Certificate adoption workflow
+        target: packing/campaign/result-import.md
   - id: project-changelog-and-independent-editions
     date: '2026-10-14'
     title: A Public Launch History and Independent Component Editions
@@ -670,6 +730,12 @@ entries:
       - label: Beyond-horizon source coverage
         target: packing/frontier/source-coverage.yaml
 deliveries:
+- number: 598
+  title: 'research: intake layer 6, the 12 October results (T-157 to T-160) and their
+    houses'
+  merged_at: '2026-10-14T11:45:27Z'
+  base_ref: main
+  merge_commit: e1f14898d549b71eb59cdbf8490380e25b23bbf9
 - number: 511
   title: 'feat: drive Evan Daniel''s regularizer, re-solve views at the record''s side, and draw a
     review gallery, with pilot spikes (think-up3h, think-7hmc, think-ubr0, think-pwmi)'
@@ -991,6 +1057,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 598
   - 592
   - 595
   - 591

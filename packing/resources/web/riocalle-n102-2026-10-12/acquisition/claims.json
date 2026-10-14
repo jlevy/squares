@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/529",
+  "source": "https://github.com/riocalle/my-repo",
+  "revision": "831368623f2d4dcef2e9434fd85c3e154083c97d",
+  "read_on": "2026-10-12",
+  "read_at_main": "dead83f0eaf5e83ef1577e6ce902d7ab2b6eedf7",
+  "horizon": 324,
+  "results": [
+    {"n": 102, "certificate": "n102_s10.605828696455852.txt", "format": "calle-txt", "requested": true, "replayed": true, "offered_side": "10.605828696455852", "printed_in": "https://github.com/jlevy/squares/issues/529", "exact_side": "2651457174113963/250000000000000", "ceiling": "10.6058286964558520", "first_committed": "2026-10-12T04:23:19Z", "grid_side": "11", "case": {"source_key": "[Daniel regularized lists 2026-10-10]", "holders": "ry-xu, regularized by Evan Daniel", "result": "T-146", "reported_value": "10.6058286964315784", "verified_value": "10.6058286964315784", "evidence": ["E-evand-regularized-exact-feasibility"], "exact_side": "10605828696431578360490734944053/1000000000000000000000000000000", "relation": "above", "difference": "-24273639509265055947/1000000000000000000000000000000"}, "pending": [{"report": "T-125 (#432)", "url": "https://github.com/jlevy/squares/issues/432", "holders": "ry-xu", "result": "T-125", "exact_side": "21211657393021211657393/2000000000000000000000", "relation": "below", "difference": "109507657393/2000000000000000000000"}, {"report": "T-120 (exact form)", "url": "https://github.com/jlevy/squares/issues/419", "holders": "Evan Daniel", "result": "T-120", "printed": "10.607174680176051125342523", "rounding": "unstated", "relation": "below", "difference": "1345983720199125342523/1000000000000000000000000"}], "smallest": "case: ry-xu, regularized by Evan Daniel"}
+  ]
+}

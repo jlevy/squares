@@ -1,0 +1,72 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-12T14:38Z",
+  "git_scope": "Sparse blobless checkout of the named files at 597e660, the commit issue #552 names, which adds the six n = 154 files under search/packer/candidates/ and the packer log's submission entry. All six are retained: the certificate the claim rests on (tt_n154.cert), its 80-digit KKT point, the binary64 input it was solved from, the solver's report, and the regularized drawing of the same packing with its report; with the licence, credits and certificate-format README. The two source checkers are pinned by digest against the identical copies the issue-399 packet retains, and the packer log and the time-travel test's report script by digest only. The branch head 31523f8 adds one line to the packer log and nothing else. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-n154-2026-10-12",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "main",
+      "source_commit": "597e660c9a078a552991ab893cda3ab693cb5ac8",
+      "committed_utc": "2026-10-12T13:58:36Z",
+      "git_tree": "a52316fa7075147cb9e486d8d7063caa643683ec",
+      "archived_path": "packing/resources/web/evand-n154-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/evand-n154-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/PACKER.md",
+        "search/packer/timetravel.py",
+        "search/packer/candidates/tt_n154.cert",
+        "search/packer/candidates/tt_n154.exact.txt",
+        "search/packer/candidates/tt_n154.input.txt",
+        "search/packer/candidates/tt_n154.json",
+        "search/packer/candidates/tt_n154_regularized.cert",
+        "search/packer/candidates/tt_n154_regularized.json"
+      ],
+      "subtree_file_count": 13,
+      "subtree_total_bytes": 313527,
+      "retained_file_count": 9,
+      "retained_total_bytes": 137477,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two exact checkers, byte-identical to the copies the issue-399 packet retains; never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two exact checkers, byte-identical to the copies the issue-399 packet retains; never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert2.py"
+        },
+        {
+          "path": "search/packer/PACKER.md",
+          "bytes": 166630,
+          "sha256": "9d4ed7a50af36d342f5155deaf57a8d7b79e7ce5e8dc479e5863a5254f450e6d",
+          "reason": "The packer's working log (167 KB), which holds the time-travel test's pre-registration and result, the n = 154 interim entry and the submission entry; pinned for provenance."
+        },
+        {
+          "path": "search/packer/timetravel.py",
+          "bytes": 2918,
+          "sha256": "60357d7ced331f3922039233bbfd782a28c049544013a2061c8c9a455dd4f712",
+          "reason": "The time-travel test's report script, which scores the chains against the 5 October register; it reads run directories the repository does not publish, and is pinned for provenance only."
+        }
+      ],
+      "license": "MIT, copyright 2026 Evan Daniel (LICENSE); attribution retained in CREDITS.md. The source discloses Claude assistance under Evan Daniel's direction, and issue #552 states that the search code, the run and the request were done with Claude (Claude Code), directed and reviewed by Evan Daniel.",
+      "claims": [
+        "Issue #552 reports an exact rational certificate s(154) <= S' = 12922566401934059503377267965457/10^30 = 12.922566401934059503377267965457, the 80-digit KKT point S* = 12.92256640193405950324804230143691... scaled by 1 + 1e-20 about the origin corner, 5.04e-4 below SQUISH's 12.9230702023011408 (#481, T-136).",
+        "The same commit holds a regularized drawing of the same packing, tt_n154_regularized.cert, at the same S' and S*, with rotation groups cut from 24 to 16 by angle moves the source path-checks at S*; the claim rests on tt_n154.cert.",
+        "The packing came from a time-travel test of the author's size-chaining explorer restarted from the 5 October register, and, by the issue's comment of 2026-10-12T14:13Z, descends from Francisco Couzo's 5 October n = 155 packing with one square removed, after 17 productive rounds at n = 154; the source calls it a different local minimum from T-136's packing, at RMS matching distance 0.319 per square.",
+        "KKT multipliers, the reduced Hessian modulo 45 exact flat motions and the corner-to-corner jamming MILP are numerical evidence at 80 digits, as the source says, not proofs; no closed form, interval proof of local optimality or optimality is claimed."
+      ]
+    }
+  ]
+}

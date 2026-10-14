@@ -1,0 +1,11 @@
+include("hp.jl")
+include(ARGS[1])
+H = [hpoly(f, tvars) for f in F]; G = [hpoly_grad(f, tvars) for f in F]
+maxd = maximum(h.maxd for h in H)
+x0 = ComplexF64.(tstar)
+newton_hp(H, G, x0, 2000, maxd)
+@time x, res = newton_hp(H, G, x0, 66500, maxd)
+println("res ", Float64(log10(res)), " diff ", Float64(log10(norm(x .- big.(tstar)))))
+setprecision(BigFloat, 66500)
+P = powers(x, maxd)
+@time val(H[5], P)

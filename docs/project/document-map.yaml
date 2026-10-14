@@ -23,6 +23,8 @@ documents:
   - {path: docs/project/reviews/review-2026-10-10-tbd-coordination.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-10-bead-reconciliation-a.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-10-bead-reconciliation-b.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-12-upper-bound-import-552.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md, role: review, authority: record, lifecycle: retained}
@@ -30,6 +32,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-11-recent-register-rungs.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-11-lean-backed-rungs.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-11-significance-scores.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-11-front-door-prose.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-11-top-level-prose.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md, role: review, authority: record, lifecycle: retained}

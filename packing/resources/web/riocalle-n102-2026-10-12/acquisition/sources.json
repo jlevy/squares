@@ -1,0 +1,105 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-12T08:03Z",
+  "git_scope": "Full clone of the one-commit repository, checked out at the pin issue #529 names, its head. All eleven files of the tree are in the scope and bound to their Git blobs; under derived-only custody none is copied. verify_exact.py was read and then run once from a scratch directory outside this repository, on the pinned layout; no other source program was executed.",
+  "sources": [
+    {
+      "id": "riocalle-my-repo",
+      "source_url": "https://github.com/riocalle/my-repo",
+      "source_ref": "main",
+      "source_commit": "831368623f2d4dcef2e9434fd85c3e154083c97d",
+      "committed_utc": "2026-10-12T04:23:19Z",
+      "git_tree": "4895d7e92c462b4f13478c23a4bec75df4bbd8f5",
+      "archived_path": "packing/resources/web/riocalle-n102-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/riocalle-n102-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "earlier",
+        "n102_s10.605828696455852.json",
+        "n102_s10.605828696455852.png",
+        "n102_s10.605828696455852.txt",
+        "n102_s10.605828696455852_submission.svg",
+        "verify_exact.py"
+      ],
+      "subtree_file_count": 11,
+      "subtree_total_bytes": 670800,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 3407,
+          "sha256": "3497a0543bd30c12e6df43414efb2daca7a153c0548c362fd2dd4b083accb3d2",
+          "reason": "Author prose stating the claim, its history and credit, quoted in this packet's README. No licence: pinned by digest only."
+        },
+        {
+          "path": "earlier/n102_s10.605828708.json",
+          "bytes": 8033,
+          "sha256": "77ca3826c9938c3b36fa098865ed8b83ce46045f943d6c28454e808646fea3a1",
+          "reason": "The author's earlier layout at s = 10.605828708 with its drawings, above the record's ceilings. No licence: pinned by digest only."
+        },
+        {
+          "path": "earlier/n102_s10.605828708.png",
+          "bytes": 281355,
+          "sha256": "b4daa9d2d67b3dbb15781f62b2c38e663f2b3cd14dd5450b7fd6198a05a1d0ec",
+          "reason": "The author's earlier layout at s = 10.605828708 with its drawings, above the record's ceilings. No licence: pinned by digest only."
+        },
+        {
+          "path": "earlier/n102_s10.605828708.svg",
+          "bytes": 12868,
+          "sha256": "09dd57717d8c097336f0ccbb410db48f7319aa4c62a090f7aef5d637401b8cd2",
+          "reason": "The author's earlier layout at s = 10.605828708 with its drawings, above the record's ceilings. No licence: pinned by digest only."
+        },
+        {
+          "path": "earlier/n102_s10.605828708.txt",
+          "bytes": 7464,
+          "sha256": "8963151c7f26efb4a76bac54bf60b49d25602617dc0b3bde48382c535fe4bfe1",
+          "reason": "The author's earlier layout at s = 10.605828708 with its drawings, above the record's ceilings. No licence: pinned by digest only."
+        },
+        {
+          "path": "earlier/n102_s10.605828708_submission.svg",
+          "bytes": 32057,
+          "sha256": "08b065c4b765b468b546e90d905db60cb431092ad66f75f3fc783a2079645ed3",
+          "reason": "The author's earlier layout at s = 10.605828708 with its drawings, above the record's ceilings. No licence: pinned by digest only."
+        },
+        {
+          "path": "n102_s10.605828696455852.json",
+          "bytes": 8086,
+          "sha256": "f5b97045a54c7879e1abe13c7c74a06b149c3ec18b2674ba7ba7f4988ba5e22b",
+          "reason": "The same layout as JSON, the same binary64 values in the same order. No licence: pinned by digest only."
+        },
+        {
+          "path": "n102_s10.605828696455852.png",
+          "bytes": 274921,
+          "sha256": "f94fac6b0fe8830c14d54caa03979f3bd33c0f8649bcc07f311ffcc3f881620f",
+          "reason": "The author's drawing of the layout. No licence: pinned by digest only."
+        },
+        {
+          "path": "n102_s10.605828696455852.txt",
+          "bytes": 7484,
+          "sha256": "d9531b5cb08b6c30ea540a7e2793ed661fa24f2eaa48bcfcd055062f08eca1bb",
+          "reason": "The layout the issue reports: centres and radian rotations as decimals. No licence in the tree, so derived-only custody: the importer reads it from a checkout at this pin, holds it to this digest and keeps the exact certificate it derives as facts/n-102.yaml."
+        },
+        {
+          "path": "n102_s10.605828696455852_submission.svg",
+          "bytes": 32157,
+          "sha256": "404ce3c2efc4bb20085628095275d3e168da7856c610978aa75b542e3969fd25",
+          "reason": "The same layout as an SVG drawing, each square's centre and angle as data attributes. No licence: pinned by digest only."
+        },
+        {
+          "path": "verify_exact.py",
+          "bytes": 2968,
+          "sha256": "8f2f7cdc3a98c7c6a33585e8b40b38e226eb155de86d2e65982e351610e2aff4",
+          "reason": "The author's 60-digit decimal separating-axis checker, written with Claude; it rounds, so it is no exact check. No licence: pinned by digest only, read, and run once outside the repository."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The issue and README credit Rio Calle (University of New Hampshire) with the arrangement, credit ry-xu with finding the design and width first, and state that Claude wrote and ran the search, finishing, refinement and checking code under the author's direction.",
+      "claims": [
+        "Issue #529 reports s(102) <= 10.605828696455852 from the layout n102_s10.605828696455852.txt: decimal centres in [0, s]^2 and rotations in radians, 18 significant digits, with JSON and SVG copies. The author states minimum gaps of 1.9e-12 between squares and 2.0e-12 to the walls, from a 60-digit decimal check (verify_exact.py), and an exact rational-interval certificate from a private engine that is not published.",
+        "The README says the packing shares ry-xu's design (T-125) and width, is a different arrangement in which 40 of the 102 squares coincide with ry-xu's turned by a half turn, and was found independently about ten hours after ry-xu's publication; solved to the bottom of its valley it reaches s = 10.605828696431638, an author report that is not certified here.",
+        "earlier/ holds the author's previous layout at s = 10.605828708, first reported in Davidebyzero/packing_squares_in_squares__tools issue 6 on 2026-10-08; it is above the record's ceilings and asks for no work."
+      ]
+    }
+  ]
+}

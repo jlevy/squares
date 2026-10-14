@@ -582,6 +582,12 @@ verifiers:
         note: >-
           Built here with g++ 13.3.0 -O3 -std=c++17 -fno-fast-math -ffp-contract=off from the
           tree's directory into 69bc9e64..., the CI run's binary.
+      - sha256: da06206b8e83a57b8a710ba62e743c6d3a1959e9160ff32ae89ede583841c73c
+        revision: 6a65957e6c5c51cdf267917d882dab7f5b4928dd
+        path: packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/verifier/continuous_pose.cpp
+        note: >-
+          The same bytes at the 11 October pin; built here with g++ 13.3.0 into 69bc9e64..., the
+          CI run's binary, and replayed on all 43 slabs for s(40) > 3359/500.
     note: >-
       Read line by line by the 10 October 2026 review of the release
       (docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md), which
@@ -609,6 +615,13 @@ verifiers:
       - sha256: f5bc3f60065aaea3d14ffb8465865750fca22cf8bbc6bd8739b5120200b6277d
         revision: 71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3
         note: Built here with g++ 13.3.0 -O2 -std=c++17 into cccecb9a..., the CI run's binary.
+      - sha256: f5bc3f60065aaea3d14ffb8465865750fca22cf8bbc6bd8739b5120200b6277d
+        revision: 6a65957e6c5c51cdf267917d882dab7f5b4928dd
+        path: packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/verifier/axis_integer_grid.cpp
+        note: >-
+          The same bytes at the 11 October pin, built with g++ 13.3.0 -O3 -std=c++17
+          -fno-fast-math -ffp-contract=off into 19288b2f..., the CI run's binary, for the axis
+          certificate at side 249329659/250000000.
     note: >-
       Read by the 10 October 2026 review, which re-derived the bilinear-cell lemma, the hinge
       expansion and the int128 bounds; replayed here. Its minimum was evaluated again at the
@@ -1414,6 +1427,56 @@ verifiers:
       written; exact.py was read afterwards, to run control G on it, and nothing in the finite
       part changed. It shares with exact.py the definition of the density, its D4 expansion, the
       kernels' input order, the enclosure rule and the inward rounding, and no code.
+      Since 12 October its Release and Replay records parametrise its finite checks, runner and
+      judge, and devtools.audit_n40_new_supports judges the 11 October release through them.
+
+  - id: V-audit-n40-new-supports
+    program: devtools.audit_n40_new_supports
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides the finite steps of Guzhou0806's s(40) > 3359/500 in exact rationals on the retained
+      density and pool (the orbit facts, both kernel inputs' identity and enclosures, the dominated
+      measure, the scalar chain, and every value of both release receipts), refuses seven finite
+      controls, prices and drives the complete replay of both kernels through
+      audit_continuous_pose's runner and judge with this release's contract, runs the release's
+      dual programs, and decides the near-axis statement a second way through sqverify-fast.
+    source:
+      - packing/devtools/audit_n40_new_supports.py
+      - packing/tests/test_audit_n40_new_supports.py
+    independence_record: packing/devtools/audit_n40_new_supports.py
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            lane E of the 2026-10-11 intake pass (think-tln9); the stage 4 lane of 12
+            October, at the highest reasoning effort, added the replay, check-replay and duals
+            stages; tiers not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Its docstring is the read log: the release's README, SOURCES, VERIFICATION,
+          REPRODUCIBILITY, OBSTRUCTION and PROOF, the parameters, the runner's diff against
+          T-145's pin, and the receipts and densities as data; not exact.py, audit.py, the
+          obstruction programs or the tests, though exact.py was searched afterwards for the
+          one string control G mutates. It reuses devtools.audit_continuous_pose's input
+          builders and finite checks, whose authors read T-145's kernels. Guzhou0806's
+          release states AI assistance without naming the system.
+    note: >-
+      Written on 11 October 2026 without opening the release's exact.py, audit.py, obstruction
+      programs or tests (its docstring is the read log); on 12 October exact.py was searched for
+      the one string control G mutates, and the replay, check-replay and duals stages were added.
+      Its finite checks after the orbit facts are audit_continuous_pose's, made of this release
+      through its Release record; the replay runs through the same module's Replay record.
 
   - id: V-check-half-angle-area
     program: devtools.check_half_angle_area
@@ -1429,12 +1492,14 @@ verifiers:
       interiors by the circumscribed-disc rule, else by the exact area of one square
       clipped by the other's four closed half-planes. It reads Evan Daniel's text format,
       SQUISH's JSON, the centred JSON of issue 483, PingYou Ltd's JSON, Daniil Ostashev's
-      sqcert files, rational corners witnesses and derived facts with readers of its own,
+      sqcert files, Rio Calle's decimal layouts, rational corners witnesses and derived
+      facts with readers of its own,
       runs six controls per certificate (two gross, and side and pair each at exact
       contact and 10^-40 or 10^-30 past it), and holds every side, pose, margin and
-      claimed side to the maintained routes' retained inputs and the record. For issue
-      470 it also derives each witness again from its pinned decimal pose file, with its
-      own parser, dilation and half-angle floor in decimal arithmetic, and measures each
+      claimed side to the maintained routes' retained inputs and the record. For issues
+      470 and 529 it also derives each witness again from its pinned decimal pose or
+      layout file, with its own parser, dilation and half-angle floor in decimal
+      arithmetic, and measures each
       arrangement against the packing it would be credited to, which decides nothing. Its
       replay-t128 command drives the kernel's own two-route replay of T-128's receipt.
     source:
@@ -1468,6 +1533,16 @@ verifiers:
       (docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md) ran it through a
       roster entry and credit keys that read another import's certificate, with no change
       to any decision, on the eleven certificates T-152 and its beyond-horizon rows cite.
+      The review lane of issues 528 and 529
+      (docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md) added a
+      reader of Rio Calle's decimal layout, with exact decimal literals and a half-angle
+      floor for radians by Taylor series in decimal arithmetic, a derivation of his
+      certificate from the layout, and the roster's credit and lineage measurements, and
+      ran it on the four certificates T-158 and T-159 cite. The import and review lanes
+      of issue 552
+      (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) gave it
+      that import's roster line with its credit and lineage keys, and ran it on the
+      certificate T-160 cites.
       Its author had read both
       maintained routes, their parser and the importer's adapters before writing it, so it
       is not clean-room; it imports none of their parsing or deciding code and shares
@@ -2685,12 +2760,12 @@ verifiers:
       Imports a report of rational upper-bound certificates by another author from its
       packet's declaration: admits custody through acquire_source, reads each retained
       file or derived fact by its declared adapter (Evan Daniel's text format, SQUISH's
-      JSON, centred JSON, PingYou Ltd's JSON, Daniil Ostashev's sqcert files, rational
-      corners witnesses, decimal poses by a declared dilation), holds a derived fact to
-      any file its row names as the same packing, admits each side only where it equals
-      or rounds up to its print, rebuilds the frozen claim comparison and the register
-      plan, and drives the arrangement kernel's two exact routes and two controls per
-      count. It decides no geometry itself.
+      JSON, centred JSON, PingYou Ltd's JSON, Daniil Ostashev's sqcert files, Rio Calle's
+      decimal layouts, rational corners witnesses, decimal poses by a declared dilation),
+      holds a derived fact to any file its row names as the same packing, admits each side
+      only where it equals or rounds up to its print, rebuilds the frozen claim comparison
+      and the register plan, and drives the arrangement kernel's two exact routes and two
+      controls per count. It decides no geometry itself.
     source:
       - packing/devtools/upper_bound_reports.py
       - packing/devtools/evand_arrangement_reports.py
@@ -2715,7 +2790,14 @@ verifiers:
       the reviews of issue 500
       (docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md) and of issue 506
       (docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md) read in full; the
-      second refroze issue 506's claim record against the first's exact sides.
+      second refroze issue 506's claim record against the first's exact sides. The import
+      lane of issues 528 and 529 added the calle-txt adapter, which floors each half-angle
+      tangent of a radian layout by an outward-rounded interval enclosure, and HOUSES
+      readers of both packets; the 12 October review of those issues
+      (docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md) read them in
+      full. The import lane of issue 552 added a HOUSES reader of its packet, which the
+      12 October review of that issue
+      (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read.
 
   - id: V-rehwaldt-n68-verify
     program: verify.py

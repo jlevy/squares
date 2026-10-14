@@ -34,6 +34,32 @@ First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/square
 
 PRs and supporting records: [\#592](https://github.com/jlevy/squares/pull/592) · [\#595](https://github.com/jlevy/squares/pull/595) · [Fitzharding mathematical review](docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md) · [Overbeck mathematical review](docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md) · [Evidence and independence rules](epistemics.md).
 
+<a id="changelog-entry-october-twelve-intake-and-house-admissions"></a>
+
+#### Four Reviewed Results and Four Adopted Packings
+
+Registered four reviewed results at V3/C3, raising the strict lower bound for
+40 squares to 6.718 and adopting smaller exact packings at 154, 175, 232 and 264.
+The launch retains source credit, certificate replays and displaced packings.
+
+- Replayed Guzhou0806's new density certificate and its complete continuous
+  cover, with the producer's kernels and separate finite-step audits. A second
+  independent continuous-cover method has not been established.
+- Adopted Daniil Ostashev's certificates at 175, 232 and 264 and Evan Daniel's
+  certificate at 154; these establish finite feasibility, without optimality claims.
+- Certified Rio Calle's 102-square layout as another arrangement of Ryan Xu's
+  design. It was superseded on arrival and changes no standing bound.
+- Updated regularized displays and their lineage, keeping the earlier
+  264-square solved view as history, and revised the methods paper's adoption account.
+
+Published artifacts: [Current 40-square lower-bound record](https://jlevy.github.io/squares/result/t-157.html) · [Current Ostashev certificate record](https://jlevy.github.io/squares/result/t-158.html) · [Current Calle layout record](https://jlevy.github.io/squares/result/t-159.html) · [Current Daniel 154-square certificate record](https://jlevy.github.io/squares/result/t-160.html) · [Current methods survey](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) · [Current methods survey PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf).
+
+Component editions: Site v0.6.1; How Record Square Packings Are Found v0.2.2.
+
+First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38558844519/job/115838577096)).
+
+PRs and supporting records: [\#598](https://github.com/jlevy/squares/pull/598) · [Current result register](packing/frontier/RESULTS.md) · [Certificate adoption workflow](packing/campaign/result-import.md).
+
 <a id="changelog-entry-project-changelog-and-independent-editions"></a>
 
 #### A Public Launch History and Independent Component Editions

@@ -1,0 +1,746 @@
+[
+ {
+  "cls": "trump5",
+  "k": 5,
+  "n_cells": 6,
+  "n_usable": 6,
+  "usable": [
+   [
+    "BL(0,2)",
+    "k6_07"
+   ],
+   [
+    "BL(1,1)",
+    "k6_19"
+   ],
+   [
+    "BR(0,1)",
+    "k6_21"
+   ],
+   [
+    "TR(0,1)",
+    "k6_22"
+   ],
+   [
+    "TR(1,0)",
+    "k6_24"
+   ],
+   [
+    "TL(0,0)",
+    "k6_23"
+   ]
+  ],
+  "blocked": [],
+  "n_images": null,
+  "image_bearing": false,
+  "pin_sets": null
+ },
+ {
+  "cls": "k4_03",
+  "k": 4,
+  "n_cells": 5,
+  "n_usable": 3,
+  "usable": [
+   [
+    "BL(1,1)",
+    "k5_09"
+   ],
+   [
+    "BL(2,0)",
+    "k5_02"
+   ],
+   [
+    "TL(1,0)",
+    "k5_10"
+   ]
+  ],
+  "blocked": [
+   [
+    "BR(0,0)",
+    "k5_11",
+    "OPEN"
+   ],
+   [
+    "TR(0,0)",
+    "trump5",
+    "OPEN"
+   ]
+  ],
+  "n_images": 1,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    1,
+    2,
+    3
+   ]
+  ]
+ },
+ {
+  "cls": "k4_05",
+  "k": 4,
+  "n_cells": 5,
+  "n_usable": 3,
+  "usable": [
+   [
+    "BR(0,1)",
+    "k5_15"
+   ],
+   [
+    "BR(1,0)",
+    "k5_13"
+   ],
+   [
+    "TL(1,0)",
+    "k5_12"
+   ]
+  ],
+  "blocked": [
+   [
+    "BL(1,0)",
+    "k5_11",
+    "OPEN"
+   ],
+   [
+    "TR(0,0)",
+    "k5_16",
+    "OPEN"
+   ]
+  ],
+  "n_images": 0,
+  "image_bearing": false,
+  "pin_sets": []
+ },
+ {
+  "cls": "k4_06",
+  "k": 4,
+  "n_cells": 5,
+  "n_usable": 3,
+  "usable": [
+   [
+    "TR(0,1)",
+    "k5_17"
+   ],
+   [
+    "TR(1,0)",
+    "k5_14"
+   ],
+   [
+    "TL(1,0)",
+    "k5_13"
+   ]
+  ],
+  "blocked": [
+   [
+    "BL(1,0)",
+    "trump5",
+    "OPEN"
+   ],
+   [
+    "BR(0,0)",
+    "k5_16",
+    "OPEN"
+   ]
+  ],
+  "n_images": 1,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    1,
+    2,
+    5
+   ]
+  ]
+ },
+ {
+  "cls": "k4_08",
+  "k": 4,
+  "n_cells": 7,
+  "n_usable": 5,
+  "usable": [
+   [
+    "BL(0,2)",
+    "k5_03"
+   ],
+   [
+    "BL(1,1)",
+    "k5_18"
+   ],
+   [
+    "BL(2,0)",
+    "k5_03"
+   ],
+   [
+    "TR(0,1)",
+    "k5_19"
+   ],
+   [
+    "TR(1,0)",
+    "k5_19"
+   ]
+  ],
+  "blocked": [
+   [
+    "BR(0,0)",
+    "trump5",
+    "OPEN"
+   ],
+   [
+    "TL(0,0)",
+    "trump5",
+    "OPEN"
+   ]
+  ],
+  "n_images": 2,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    1,
+    3,
+    5
+   ]
+  ]
+ },
+ {
+  "cls": "k4_11",
+  "k": 4,
+  "n_cells": 7,
+  "n_usable": 5,
+  "usable": [
+   [
+    "BL(0,2)",
+    "k5_07"
+   ],
+   [
+    "BR(0,1)",
+    "k5_15"
+   ],
+   [
+    "BR(1,0)",
+    "k5_12"
+   ],
+   [
+    "TR(0,1)",
+    "k5_17"
+   ],
+   [
+    "TR(1,0)",
+    "k5_20"
+   ]
+  ],
+  "blocked": [
+   [
+    "BL(1,0)",
+    "trump5",
+    "OPEN"
+   ],
+   [
+    "TL(0,0)",
+    "k5_16",
+    "OPEN"
+   ]
+  ],
+  "n_images": 1,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    2,
+    3,
+    5
+   ]
+  ]
+ },
+ {
+  "cls": "corners4",
+  "k": 4,
+  "n_cells": 8,
+  "n_usable": 0,
+  "usable": [],
+  "blocked": [
+   [
+    "BL(0,1)",
+    "k5_16",
+    "OPEN"
+   ],
+   [
+    "BL(1,0)",
+    "k5_16",
+    "OPEN"
+   ],
+   [
+    "BR(0,1)",
+    "k5_16",
+    "OPEN"
+   ],
+   [
+    "BR(1,0)",
+    "k5_16",
+    "OPEN"
+   ],
+   [
+    "TR(0,1)",
+    "k5_16",
+    "OPEN"
+   ],
+   [
+    "TR(1,0)",
+    "k5_16",
+    "OPEN"
+   ],
+   [
+    "TL(0,1)",
+    "k5_16",
+    "OPEN"
+   ],
+   [
+    "TL(1,0)",
+    "k5_16",
+    "OPEN"
+   ]
+  ],
+  "n_images": null,
+  "image_bearing": false,
+  "pin_sets": null
+ },
+ {
+  "cls": "k3_01",
+  "k": 3,
+  "n_cells": 4,
+  "n_usable": 0,
+  "usable": [],
+  "blocked": [
+   [
+    "BL(1,0)",
+    "k4_03",
+    "OPEN"
+   ],
+   [
+    "BR(0,0)",
+    "k4_05",
+    "OPEN"
+   ],
+   [
+    "TR(0,0)",
+    "k4_06",
+    "OPEN"
+   ],
+   [
+    "TL(1,0)",
+    "k4_04",
+    "closed by A55 (exact) -- but NO full-window scoreboard row"
+   ]
+  ],
+  "n_images": 1,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    1,
+    2
+   ]
+  ]
+ },
+ {
+  "cls": "k3_02",
+  "k": 3,
+  "n_cells": 6,
+  "n_usable": 0,
+  "usable": [],
+  "blocked": [
+   [
+    "BL(0,2)",
+    "k4_00",
+    "closed by A55 (exact) -- but NO full-window scoreboard row"
+   ],
+   [
+    "BL(1,1)",
+    "k4_07",
+    "closed by A55 (exact) -- but NO full-window scoreboard row"
+   ],
+   [
+    "BL(2,0)",
+    "k4_00",
+    "closed by A55 (exact) -- but NO full-window scoreboard row"
+   ],
+   [
+    "BR(0,0)",
+    "k4_03",
+    "OPEN"
+   ],
+   [
+    "TR(0,0)",
+    "k4_08",
+    "OPEN"
+   ],
+   [
+    "TL(0,0)",
+    "k4_03",
+    "OPEN"
+   ]
+  ],
+  "n_images": 2,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    1,
+    3
+   ]
+  ]
+ },
+ {
+  "cls": "k3_03",
+  "k": 3,
+  "n_cells": 6,
+  "n_usable": 0,
+  "usable": [],
+  "blocked": [
+   [
+    "BL(0,2)",
+    "k4_01",
+    "closed by A55 (exact) -- but NO full-window scoreboard row"
+   ],
+   [
+    "BL(1,0)",
+    "k4_03",
+    "OPEN"
+   ],
+   [
+    "BR(0,1)",
+    "k4_10",
+    "closed by A55 (exact) -- but NO full-window scoreboard row"
+   ],
+   [
+    "BR(1,0)",
+    "k4_04",
+    "closed by A55 (exact) -- but NO full-window scoreboard row"
+   ],
+   [
+    "TR(0,0)",
+    "k4_11",
+    "OPEN"
+   ],
+   [
+    "TL(0,0)",
+    "k4_05",
+    "OPEN"
+   ]
+  ],
+  "n_images": 1,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    2,
+    3
+   ]
+  ]
+ },
+ {
+  "cls": "k3_04",
+  "k": 3,
+  "n_cells": 6,
+  "n_usable": 0,
+  "usable": [],
+  "blocked": [
+   [
+    "BL(0,2)",
+    "k4_02",
+    "closed by A55 (exact) -- but NO full-window scoreboard row"
+   ],
+   [
+    "BL(1,0)",
+    "k4_08",
+    "OPEN"
+   ],
+   [
+    "BR(0,0)",
+    "k4_11",
+    "OPEN"
+   ],
+   [
+    "TR(0,1)",
+    "k4_12",
+    "closed by A55 (exact) -- but NO full-window scoreboard row"
+   ],
+   [
+    "TR(1,0)",
+    "k4_09",
+    "closed by A55 (exact) -- but NO full-window scoreboard row"
+   ],
+   [
+    "TL(0,0)",
+    "k4_06",
+    "OPEN"
+   ]
+  ],
+  "n_images": 2,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    1,
+    5
+   ],
+   [
+    0,
+    3,
+    5
+   ]
+  ]
+ },
+ {
+  "cls": "k3_05",
+  "k": 3,
+  "n_cells": 7,
+  "n_usable": 0,
+  "usable": [],
+  "blocked": [
+   [
+    "BL(0,1)",
+    "k4_05",
+    "OPEN"
+   ],
+   [
+    "BL(1,0)",
+    "k4_05",
+    "OPEN"
+   ],
+   [
+    "BR(0,1)",
+    "k4_11",
+    "OPEN"
+   ],
+   [
+    "BR(1,0)",
+    "k4_06",
+    "OPEN"
+   ],
+   [
+    "TR(0,0)",
+    "k4_13",
+    "OPEN"
+   ],
+   [
+    "TL(0,1)",
+    "k4_06",
+    "OPEN"
+   ],
+   [
+    "TL(1,0)",
+    "k4_11",
+    "OPEN"
+   ]
+  ],
+  "n_images": 2,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    2,
+    5
+   ]
+  ]
+ },
+ {
+  "cls": "k2_00",
+  "k": 2,
+  "n_cells": 5,
+  "n_usable": 0,
+  "usable": [],
+  "blocked": [
+   [
+    "BL(0,2)",
+    "k3_00",
+    "no full-window scoreboard row"
+   ],
+   [
+    "BL(1,0)",
+    "k3_02",
+    "OPEN"
+   ],
+   [
+    "BR(0,0)",
+    "k3_03",
+    "OPEN"
+   ],
+   [
+    "TR(0,0)",
+    "k3_04",
+    "OPEN"
+   ],
+   [
+    "TL(0,0)",
+    "k3_01",
+    "OPEN"
+   ]
+  ],
+  "n_images": 2,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    1
+   ],
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "cls": "k2_01",
+  "k": 2,
+  "n_cells": 6,
+  "n_usable": 0,
+  "usable": [],
+  "blocked": [
+   [
+    "BL(0,1)",
+    "k3_01",
+    "OPEN"
+   ],
+   [
+    "BL(1,0)",
+    "k3_03",
+    "OPEN"
+   ],
+   [
+    "BR(0,0)",
+    "k3_05",
+    "OPEN"
+   ],
+   [
+    "TR(0,0)",
+    "k3_05",
+    "OPEN"
+   ],
+   [
+    "TL(0,1)",
+    "k3_01",
+    "OPEN"
+   ],
+   [
+    "TL(1,0)",
+    "k3_03",
+    "OPEN"
+   ]
+  ],
+  "n_images": 4,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    2
+   ],
+   [
+    2,
+    5
+   ]
+  ]
+ },
+ {
+  "cls": "k2_02",
+  "k": 2,
+  "n_cells": 6,
+  "n_usable": 0,
+  "usable": [],
+  "blocked": [
+   [
+    "BL(0,1)",
+    "k3_04",
+    "OPEN"
+   ],
+   [
+    "BL(1,0)",
+    "k3_04",
+    "OPEN"
+   ],
+   [
+    "BR(0,0)",
+    "k3_05",
+    "OPEN"
+   ],
+   [
+    "TR(0,1)",
+    "k3_04",
+    "OPEN"
+   ],
+   [
+    "TR(1,0)",
+    "k3_04",
+    "OPEN"
+   ],
+   [
+    "TL(0,0)",
+    "k3_05",
+    "OPEN"
+   ]
+  ],
+  "n_images": 4,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0,
+    5
+   ]
+  ]
+ },
+ {
+  "cls": "k1_00",
+  "k": 1,
+  "n_cells": 5,
+  "n_usable": 0,
+  "usable": [],
+  "blocked": [
+   [
+    "BL(0,1)",
+    "k2_00",
+    "OPEN"
+   ],
+   [
+    "BL(1,0)",
+    "k2_00",
+    "OPEN"
+   ],
+   [
+    "BR(0,0)",
+    "k2_01",
+    "OPEN"
+   ],
+   [
+    "TR(0,0)",
+    "k2_02",
+    "OPEN"
+   ],
+   [
+    "TL(0,0)",
+    "k2_01",
+    "OPEN"
+   ]
+  ],
+  "n_images": 6,
+  "image_bearing": true,
+  "pin_sets": [
+   [
+    0
+   ],
+   [
+    2
+   ],
+   [
+    5
+   ]
+  ]
+ },
+ {
+  "cls": "k0_00",
+  "error": "KeyError('k0_00')",
+  "n_cells": null,
+  "n_usable": null
+ }
+]

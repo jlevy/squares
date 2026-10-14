@@ -357,7 +357,13 @@ allowlist:
       every run by this repository's serializer (audit_continuous_pose.crate_input), not
       supplied by the release, so a change to that serialization refuses the retained
       crate decision until run-axis is run again: about 3 s, with g++ and a cargo build
-      of the reviewed crate source.
+      of the reviewed crate source. The complete replay (run-replay, judged by
+      check-replay through audit_continuous_pose's judge with this release's contract)
+      holds its builds to the CI run's two binary digests on the CI compiler, its slab,
+      axis and dual outputs whole against both downloaded receipts, its crate runs to the
+      axis stage's recorded decision and to the 401-direction values its own first run
+      pinned, and the scratch tree its dual programs run in to the packet manifest;
+      no replay run is refused on a digest the release supplies.
   - path: packing/devtools/audit_evand_mixed_covers.py
     kind: download
     boundary: Evan D's run headers against the retained upstream files (H7).

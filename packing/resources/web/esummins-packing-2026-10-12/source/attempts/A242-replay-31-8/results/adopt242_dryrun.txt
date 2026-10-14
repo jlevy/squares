@@ -1,0 +1,16 @@
+A242 adopt242 --dry-run  (W = [191/50, s0] -> W' = [31/8, s0]; NOTHING EDITED)
+gate: replay=PASS_REPLAY_PYTHON_ALL_ROWS spot=True adoptable=True
+pads pi_0..2: W ['0.025510', '0.040454', '0.055397'] -> W' ['0.000918', '0.001456', '0.001994'] (x1/27.8)
+pad tables covering W': ['g1', 'g2', 'g3', 'g4', 'tube', 'window']
+node ledger (A211 + A270 + A269 last pass per node and pad): 1795 nodes, dead on W 1444, dead on W' 1543
+DEAD AT ONCE: 99 {'k5_11': 68, 'k5_16': 31, 'c0_': 0, 'other': 0}
+alive on W': 252 {'k5_11': 99, 'k5_16': 133, 'c0_': 17, 'other': 3} (s0-dead among them 0)
+A270 frontier (g1-dead = dead on W'): {'k5_11': {'nodes': 164, 'g1_dead': 161, 'zero_dead': 160, 'other_pads': []}, 'k5_16': {'nodes': 139, 'g1_dead': 139, 'zero_dead': 129, 'other_pads': []}}
+tube certs: 54; reach W 31, reach W' 53 (need T >= 0.002084)
+slabs wholly below 31/8 (void): ['A57 grid side 2 slab', 'A57 grid side 3 slab', 'A57 grid side 4 slab', 'A269 trump5 sub-slab']
+superseded: ['certs/measure_certificate_3.80.json', 'certs/measure_certificate_3.81.json', 'certs/measure_certificate_3.82.json (Theorem 1 stays a Lean theorem; T-037 is an axiom)']
+records missing: []
+note: A270 g2/g3/g4 and A269 window/tube pad campaigns: needed only for (3.82, 3.861637]; void on W'
+note: A185 k0 cells: no side field; implied [3.82, s0] by K0-WIDEN (pad 0.025509) -> 0.000918 on W'
+note: A207 basins: drift over [1, lambda_1] shrinks by the pad factor; LP-ONLY rows are re-run candidates
+note: CURRENT.json carries no window content; unchanged

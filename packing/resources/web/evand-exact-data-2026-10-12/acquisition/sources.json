@@ -1,0 +1,94 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-12T14:41Z",
+  "git_scope": "Sparse blobless checkout at 31523f8, the commit the release exact-data-2026-10-12 is tagged at, which issue #545's comment of 2026-10-12T14:15:44Z names. The release's two data archives are not in the Git tree; acquisition/release.json records them and what is retained of them. From the tree the packet retains LICENSE, CREDITS.md and the one exact form the n = 10 grade-C recomputation read, search/exact/minpoly/data/n-10.minpoly.json.gz, as its upstream gzip. The checker that recomputation ran (gradec.py with the three modules it imports and env.sh) and the two write-ups (homotopy/N29.md, tasks/exact-minpoly/grade-C.md) are pinned by digest against the identical copies the evand-exact-and-local-reports-2026-10-12 packet retains at ad86d42; nothing under search/exact/ or tasks/ changed between ad86d42 and 31523f8. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-exact-data-2026-10-12",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "exact-data-2026-10-12",
+      "source_commit": "31523f87316bdfda00f5459dd9077928e264f133",
+      "committed_utc": "2026-10-12T13:59:32Z",
+      "git_tree": "6312064612ccadffbbefab13818a23977e2475f0",
+      "archived_path": "packing/resources/web/evand-exact-data-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/evand-exact-data-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/minpoly/data/n-10.minpoly.json.gz",
+        "search/exact/gradec.py",
+        "search/exact/localmin.py",
+        "search/exact/verify_exact.py",
+        "search/exact/geom.py",
+        "search/exact/env.sh",
+        "search/exact/homotopy/N29.md",
+        "tasks/exact-minpoly/grade-C.md"
+      ],
+      "subtree_file_count": 10,
+      "subtree_total_bytes": 79342,
+      "retained_file_count": 3,
+      "retained_total_bytes": 9305,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/exact/env.sh",
+          "bytes": 1026,
+          "sha256": "093163347efa883e5045f9908e8902564eb1f3232cbf02165cc7a739d05e3d8b",
+          "reason": "The source's environment script, byte-identical to the copy the ad86d42 packet retains; its pinned package versions were installed for the n = 10 run, without nix.",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/env.sh"
+        },
+        {
+          "path": "search/exact/geom.py",
+          "bytes": 4027,
+          "sha256": "e2cd11d9578a8008d21f3117b90fc2a648fa5a718f4a68e37dc24c9f79e8a696",
+          "reason": "gradec.py and the three modules it imports, byte-identical to the copies the ad86d42 packet retains; gradec.py ran here once, at n = 10, from a copy outside the repository (receipts/gradec-n10-recompute.json).",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/geom.py"
+        },
+        {
+          "path": "search/exact/gradec.py",
+          "bytes": 22213,
+          "sha256": "61dcf21c2c051d3957e6092f115caa63b831e3b726204846cd785bd624f60a79",
+          "reason": "gradec.py and the three modules it imports, byte-identical to the copies the ad86d42 packet retains; gradec.py ran here once, at n = 10, from a copy outside the repository (receipts/gradec-n10-recompute.json).",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec.py"
+        },
+        {
+          "path": "search/exact/homotopy/N29.md",
+          "bytes": 9877,
+          "sha256": "cd4fa79b2602506ad399501726a62f4af1626a7be3f1223796a10c36bf27bd07",
+          "reason": "The s(29) write-up the release's README points to, byte-identical to the copy the ad86d42 packet retains.",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/N29.md"
+        },
+        {
+          "path": "search/exact/localmin.py",
+          "bytes": 11873,
+          "sha256": "5c74bc9e046f74cc48fa345ab568ab0a02982030463d3c55dec16cb839183d39",
+          "reason": "gradec.py and the three modules it imports, byte-identical to the copies the ad86d42 packet retains; gradec.py ran here once, at n = 10, from a copy outside the repository (receipts/gradec-n10-recompute.json).",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/localmin.py"
+        },
+        {
+          "path": "search/exact/verify_exact.py",
+          "bytes": 10735,
+          "sha256": "a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4",
+          "reason": "gradec.py and the three modules it imports, byte-identical to the copies the ad86d42 packet retains; gradec.py ran here once, at n = 10, from a copy outside the repository (receipts/gradec-n10-recompute.json).",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py"
+        },
+        {
+          "path": "tasks/exact-minpoly/grade-C.md",
+          "bytes": 10286,
+          "sha256": "10e3bcbc0f42ff060f9d689e613e327a125047c074edef029679288ca3bcc416",
+          "reason": "Theorem C and its proof, byte-identical to the copy the ad86d42 packet retains.",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/tasks/exact-minpoly/grade-C.md"
+        }
+      ],
+      "license": "MIT, copyright 2026 Evan Daniel (LICENSE); attribution retained in CREDITS.md. CREDITS.md says the repository's work was produced by Claude (Anthropic) under human direction. The release's archives carry no licence of their own; their README files name the repository.",
+      "claims": [
+        "The release exact-data-2026-10-12 (published 2026-10-12T14:14:15Z, tagged at 31523f8) publishes s29-minpoly.tar.zst, 87,237,962 bytes, SHA-256 708e1b8b45894667f90a0d18b55bb35ed6079b84d33f9656976fd5cfa6f3729c: the degree-7213 polynomial p of the s(29) record side (n29_poly_q4.json), the shape-lemma parametrization n29_param_t1..t5.json, the exported system n29_system.jl, the Krawczyk box n29_krawczyk.json (radius 1e-50), the side to about 40,000 digits (n29_S0.txt), the four roots recovered algebraically (n29_q4_ref133k.txt) and the original verification logs, 201,735,244 bytes in 21 files unpacked. The release rates irreducibility, Krawczyk uniqueness and the root link (link.py at PREC=220000) rigorous, the identities in Q[x]/(p) and the contact-system consistency Monte Carlo, and leaves the packing's non-overlap at the exact point unchecked.",
+        "It publishes gradec-233.tar.zst, 238,231 bytes, SHA-256 c71633f3850eb8b06c40ba04f824e9b6262b27b7996f62f69c6ad014a4ea9fa3: n-N.contacts.json and n-N.gradec.json for the 233 configurations gradec.py certifies VALID (231 directly, 230 and 261 with GRADEC_DROPZERO=1), and the run logs of all 250, including the 17 timeouts; 15,787,809 bytes in 723 files unpacked.",
+        "The issue comment reports that the author re-ran each s(29) step from the packed files (krawczyk.py the same t* in 46 s, link.py LINKED in 9 s, verify_mod.py and contacts_mod.py passing with one prime each, irred.py the same degree patterns), prices a full replay with 12, 50 and 21 primes at about 2.5 CPU-hours, almost all in verify_mod.py, and reports that recomputing the n = 10 grade-C certificate from the committed exact forms gave an identical certificate."
+      ],
+      "original_gzip": [
+        "source/search/exact/minpoly/data/n-10.minpoly.json.gz"
+      ]
+    }
+  ]
+}

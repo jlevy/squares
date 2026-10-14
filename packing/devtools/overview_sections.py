@@ -1846,8 +1846,16 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/dostashev/square-packing",
         "Daniil Ostashev",
         (
-            "New packings of 155, 156 and 211 squares with exact certificates and a GMP"
-            " checker; the three are replayed here (T-149)."
+            "New packings of 155, 156, 175, 211, 232 and 264 squares with exact"
+            " certificates and a GMP checker; all six are replayed here (T-149, T-158)."
+        ),
+    ),
+    (
+        "https://github.com/riocalle/my-repo",
+        "Rio Calle",
+        (
+            "A decimal layout of 102 squares, another arrangement of Ryan Xu's design;"
+            " certified here from the layout (T-159)."
         ),
     ),
     (
@@ -1909,7 +1917,7 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/Guzhou0806/n40-square-packing",
         "Guzhou0806",
-        "A strict lower bound for forty squares, on wand125's density.",
+        "Strict lower bounds for forty squares, on densities grown from wand125's.",
     ),
     (
         "https://github.com/DRMacIver/square-packing-research",

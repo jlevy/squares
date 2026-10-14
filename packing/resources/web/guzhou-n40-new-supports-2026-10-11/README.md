@@ -31,7 +31,9 @@ section 1), so the mass is $\sum w = M$.
 retains (SHA-256 `71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0`).
 Both kernels and the tests’ harnesses and oracle are byte for byte `T-145`’s, which the
 [10 October review](../../../../docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md)
-read line by line; no review of this release exists yet.
+read line by line; the review of this release is
+[review-2026-10-12-n40-new-supports-6718.md](../../../../docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md),
+which found no blocking defect, and the complete replay here is below.
 
 The release also states a separate negative result, in `OBSTRUCTION.md`: no nonnegative
 weighting of the 2,526 original uniform D4 rectangle orbits gives a uniform per-square
@@ -208,27 +210,107 @@ It refuses an axis stage whose record lacks this decision unless it is told
 `--without-crate`, and a judgement without it reports
 `AXIS_KERNEL_HOLDS_WITHOUT_CRATE`, never `AXIS_STAGE_HOLDS`.
 
-**Not run here:** the 43 slabs of the continuous-pose kernel, the release’s
-`run.py` controls, its tests and its two dual programs. The `price` block of the finite
-audit prices the slabs from both receipts, scaled by `T-145`’s replay here (1,854.9
-CPU-seconds against its local receipt’s 1,891.8 and its CI receipt’s 3,693.3): about
-2,630 CPU-seconds, 0.74 CPU-hours, with the longest slab about 164 s; about 45 minutes of
-wall time on one worker, 22 on two, 11 on four. The release’s full entry point, the
-duals included, took 859 s at four workers locally and 1,587 s on CI.
+The `price` block of the finite audit priced the slabs from both receipts, scaled by
+`T-145`’s replay here (1,854.9 CPU-seconds against its local receipt’s 1,891.8 and its
+CI receipt’s 3,693.3): about 2,630 CPU-seconds, 0.74 CPU-hours, with the longest slab
+about 164 s. The replay below measured 5,242.6 CPU-seconds.
+
+## The Replay Here
+
+On 12 October 2026 the complete replay ran, by `run-replay`, which drives
+[`devtools.audit_continuous_pose`](../../../devtools/audit_continuous_pose.py)’s runner
+and judge with this release’s contract (its `Replay` record: this density, both
+receipts’ totals, control H’s thresholds either side of this axis minimum, control G’s
+mutant in this release’s `exact.py`) and adds a stage for the release’s two dual
+programs; `check-replay` judges the receipts and must print `REPLAY_HOLDS`, and its
+output is [receipts/replay-check.json](receipts/replay-check.json), 70
+checks.
+The 10 October review’s contract is what ran, at the new parameters; the mathematical
+review of this release is
+[review-2026-10-12-n40-new-supports-6718.md](../../../../docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md).
+The runs were on a 4-core x86-64 Linux container shared with other work, at a one-minute
+load average between 7.6 and 27.0, with at most two worker processes.
+
+**The builds** ([receipts/builds.json](receipts/builds.json)): the retained
+`verifier/continuous_pose.cpp`, `verifier/axis_integer_grid.cpp` and
+`tests/rounding_harness.cpp` copied to their upstream paths in a scratch tree and built
+there with relative paths as `run.py` builds them, both kernels at
+`-O3 -std=c++17 -fno-fast-math -ffp-contract=off`, by
+`g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0`, the CI run’s compiler: the pose binary
+`69bc9e6485102d3636db5377884ba6304f749be94d6ca913d82d80108f1ed4ab` (`T-145`’s, and the
+CI run’s) and the axis binary
+`19288b2f9bcb1cfa86a0bde9db1e1fbb79d43dc8044bc7243af8f6ad405899af` (the CI run’s), byte
+for byte; the rounding harness `81f15ab0…`, which no receipt names.
+
+| Contract | Here |
+| --- | --- |
+| **3.** `axis axis-input.txt`: `AXIS_COVERAGE_PROVED`, 3,293 nodes per axis, minimum `1001486431423867090847280653` at scale $10^{27}$, minimiser `3490012394, 6201340682`, `direct_sum_matches`, evaluation bound `627444222088298915573283512797161984` | the same, every field equal to both receipts’, exit 0, 7.0 s ([receipts/axis-run.json](receipts/axis-run.json)) |
+| **3.** `sqverify-fast --candidate axis-A.json --n 40 --side 67/10 --directions 0 --threshold 1 --threads 1 --confirm` on the 685 rows scaled by $5000/4999$, input `192f5df6…` | `verified`, `axis-vertex-sweep`, 10,929,636 vertices, least certified 1.0016868361671276, the axis stage’s decision of 11 October again, 2.9 s |
+| **4.** the 43 slabs, `continuous PL PH 1000000 4999 5000 30000000` over the consecutive endpoints, each `verified`, exit 0, every non-timing field equal to `results/slabs.jsonl` | all 43, against both the local and the CI receipt ([receipts/slabs.jsonl.gz](receipts/slabs.jsonl.gz)) |
+| **4.** 60,500,889 nodes, 30,250,466 leaves, 13,812,428 angle splits, least `lower_bound` $9005397816695287/2^{53}$ at slab 40 | the same; $2.0 \times 10^{-10}$ above $\tau$; every slab’s nodes $= 2\,\text{leaves} - 1$ |
+| **4.** price: about 2,630 CPU-seconds, 22 minutes on two workers | 5,242.6 CPU-seconds and 12,629 s of wall time on two workers under the shared load (slab 0 took 68.6, slab 1 322.1 and slab 42 134.0 CPU-seconds, against the local receipt’s 32.8, 158.6 and 66.0 and the CI receipt’s 67.6, 327.3 and 104.6) |
+| **6.** `sqverify-fast` on the same rows at side $B = 3350/3359$, `D` $83/80000$, `angle_count` 401 (input `c458f7adc0b5529bcc70b4ceb877957950ad77270a55b3c2cf73e8dedc44b71f`), all directions, threshold 1, two threads | `VERIFIED`, 401 of 401, no direction refused, 35,375,590 boxes, least certified 1.000000000310131 at $r = 398$; at $r = 0$, the exact axis-vertex sweep at side $B$, least 1.001700339663363; 1,782.6 s of wall time and 720.9 CPU-seconds at two threads under the shared load ([receipts/crate-runs.json.gz](receipts/crate-runs.json.gz)) |
+
+The crate was built with `cargo build --release --locked -j 1` at rustc 1.98.0 (88d9e12ae 2026-08-18), the toolchain the crate pins from crate
+source `d97758bb…`, which `sqverify_fast_census --source-digest` names as reviewed source
+for declared nets; the binary is `567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4`.
+
+**5. Controls**, each as the contract states it at this release’s parameters, on the
+binaries above ([receipts/controls.jsonl.gz](receipts/controls.jsonl.gz) and
+[receipts/control-G-release.json](receipts/control-G-release.json)):
+
+| Control | Contract | Here |
+| --- | --- | --- |
+| A | the release’s `synthetic-negative` (uniform density $1/2$, slab `[1,415000]`, budget 10,000) and `limited-budget` (pose input, slab `[100000,110000]`, budget 1): exit 3, `unresolved` | exit 3, `unresolved`, at 83 and 1 nodes; the release’s `synthetic-positive` (density 2) beside them, `verified` at 117 |
+| B | uniform $\rho = \tau(1 - 10^{-9})/B^2$ on $K$: exit 3 within 100 nodes | three slabs, `[1,500]`, `[100000,110000]`, `[410000,415000]`, on the full budget: exit 3 at 92, 87 and 89 nodes |
+| C | density $\rho$ on $K$ less a strip of depth $h$ at the top or the right, scaled so the least capture, at the slab’s left end, is $\tau(1 - 10^{-9})$: exit 3 | the review’s seven slab–depth pairs, both regimes: all 14 exit 3, budget 1,500,000; the two on `[410000,415000]` by the budget, the rest at the width floor |
+| D | density off a gap $[0, L] \times [L/2 \pm 1/200]$, least capture $\tau(1 - 10^{-9})$ at the slab’s right end: exit 3 | five slabs: all exit 3, four by the budget of 1,500,000 |
+| E | C’s densities at $\tau(1 + 10^{-4})$; D’s at about $\tau(1 + 3.4 \times 10^{-4})$ on `[400000,410000]`: `verified` within 260,000 and 141,000 nodes | all 14 cuts `verified`, the largest at 251,857 nodes; the gap `verified` at 140,819 |
+| F | `ieee-neighbors`, `wrong-rounding`, `ftz`, `reject-ndebug`, `reject-fastmath`: exit 0, $-6$, $-6$, 1, 1 | the same: 1,000,008 values `PASSED`; the rounding and MXCSR assertions fire; both compilations stop at the kernel’s `#error` |
+| G | $A$ replaced by $249329660/250000000$, one step larger: `exact.py` refuses `NEAR_AXIS_CONTAINMENT` | the release’s `scalar()`, run on a scratch copy of `exact.py` with that one value changed, refuses `NEAR_AXIS_CONTAINMENT`, and on the unchanged copy returns both receipts’ scalar block |
+| H | $\tau = 62593/62500$ in the axis header, just above the minimum: `AXIS_TEST_REFUSED`, exit 2 | refused, exit 2; $\tau = 500743/500000$, just below, proved; the contract’s $1/2$, below the minimum, proved |
+
+**The duals** ([receipts/duals.json](receipts/duals.json)): the release’s
+`obstruction/run.py`, its own entry point for `OBSTRUCTION.md`, ran on a scratch copy of
+the retained tree at its upstream paths with the pinned pool restored from the
+2026-10-01 packet, every file the manifest’s, under the project interpreter and `g++`
+13.3.0 with Boost 1.83 headers: the Python `Fraction` program and the C++ Boost program
+both `EXACT_FAMILY_OBSTRUCTION`, column 201, score
+$24998348431654956215746/1000000000003000000000000$, slack `66062736801751370160`, the
+one-pose false dual refused (exit 2), `EXACT_DUAL_CODE_DISTINCT_CHECKED`; every
+non-timing field equal to both receipts’, in 703.0 s; the dual binary
+`d5ecc193a842c21e86281c7facdc4f92a70cec92a28f5f7e002ed5d3a77cf51c`, byte for byte the CI run’s. The result is a statement about the original support family and bears
+on no bound.
+
+**What the checkers share.** The continuous cover and the axis certificate were decided
+by the release’s own kernels, rebuilt from the retained source into the CI run’s
+binaries: the replay reproduces the producer’s run with the producer’s code.
+The near-axis statement was decided a second time by `sqverify-fast`, which shares no
+code with the axis kernel and reads the density itself rather than the dominated
+measure.
+The finite steps were re-implemented here apart from `exact.py`; the two share the
+density’s definition, its D4 expansion, the kernels’ input order, the enclosure rule and
+the inward rounding, and nothing else.
+`exact.py` was searched for the one string control G mutates, after the finite audit was
+written, and not otherwise read by the tool’s authors.
 
 ## What Is Not Established
 
-No replay here has decided the continuous cover for this density: the slabs wait for an
-owner budget. No review of this release exists; the kernels’ lemmas rest on the 10
-October review of `T-145`, and how the new density was found (the dual pricing and the
-rationalized weights) is outside every check, which needs only the density as it stands.
-wand125’s comment of 2026-10-11T17:14:50Z on the issue reports a fresh run of the
-release’s entry point (`COMPLETE`, `REPLAYED_SAME_KERNEL`, every count equal) and an
-unpublished continuous-angle mode of its own that verified the density in 86 roots; it
-publishes no receipt, binary or source, so it is a third party’s report and not retained
-here as a replay.
-`OBSTRUCTION.md`’s negative result was not checked. No packing, optimality or priority is
-claimed by the source or established here.
+No second method decided the continuous cover (GC-4 of the 10 October review, GN-4 of
+the 12 October review): nothing in this repository covers the pose domain with the angle
+as an interval dimension, and the 401-direction run of `sqverify-fast` is a necessary
+condition the claim passed, not the claim.
+The kernels’ lemmas rest on the 10 October review of `T-145`, which read the same bytes;
+how the new density was found (the dual pricing and the rationalized weights) is outside
+every check, which needs only the density as it stands.
+wand125’s comment of 2026-10-11T17:14:50Z on the issue, edited 2026-10-12T02:19Z,
+reports a fresh run of the release’s entry point (`COMPLETE`, `REPLAYED_SAME_KERNEL`,
+every count equal) and a continuous-angle verifier of his own, since published at
+`wand125/square-packing` `f30cc2cf` (`tools/sqverify_continuous`, v3), that verified the
+density in 86 roots; it publishes no receipt, so it is a third party’s report and not
+retained here as a replay (bead `think-xzob` holds the read of that commit).
+The release’s `tests/test_kernel.py` and `tests/test_admission.py` were not run here.
+No packing, optimality or priority is claimed by the source or established here.
 
 ## Credit and Licence
 
@@ -258,9 +340,15 @@ The two upstream data files of more than 1,000 lines are stored as deterministic
 | --- | --- | --- | --- |
 | `source/certificate/certified_candidate.json.gz` | upstream | `34b9e12db7add79fd0f809cade8dc1864844f146` | `984fcd3acc605fe3c50a84912eed77e0192ca5b7253b19b6aa31a4e28e1bf5c2` |
 | `source/obstruction/certificate.json.gz` | upstream | `82774999cec21733f21c886e4b76eef0adafd429` | `f4edfa9a08efaffe8916d3da2c2a8ff567489a2185319de742e8b9e97e3939f9` |
+| `receipts/slabs.jsonl.gz` | receipt | `7267a43204594b1aeefb96ba0075c28181dfe6ad` | `a0839747c0940d12cd179ebe711fabe9701c5f7e1a6d9108d6996ab0b9511477` |
+| `receipts/controls.jsonl.gz` | receipt | `7c12faf25da807e5f8cfeb1a3199462e974b4879` | `1705375a324946c543618f87ea8f802880cd8ae89a48ee3f4b4bc5a2011f0e12` |
+| `receipts/crate-runs.json.gz` | receipt | `3b7551f814a3629dbbc15e5cbfb7833bd8f98936` | `85a5949ea99981a8bd55ab123522de0af675ff161563679fc377053319ebc705` |
 
-The receipts are plain JSON: `finite-audit.json` from `check`, `axis-stage.json` from
-`run-axis` and `axis-check.json` from `check-axis`.
+The other receipts are plain JSON: `finite-audit.json` from `check`, `axis-stage.json`
+from `run-axis`, `axis-check.json` from `check-axis`, and from `run-replay`
+`builds.json` (the compiler, each build’s command, exit, wall and binary digest),
+`axis-run.json`, `control-G-release.json` and `duals.json`; `replay-check.json` is
+`check-replay`’s judgement of them all.
 
 ## Commands
 
@@ -273,11 +361,18 @@ python -m devtools.audit_n40_new_supports check-axis
 python -m devtools.audit_n40_new_supports derive --out SCRATCH
 python -m devtools.audit_n40_new_supports run-axis --out SCRATCH \
     --crate-binary sqverify_fast/target/release/sqverify-fast
+python -m devtools.audit_n40_new_supports run-replay --out SCRATCH --workers 2 \
+    --crate-binary sqverify_fast/target/release/sqverify-fast
+python -m devtools.audit_n40_new_supports check-replay [--receipts SCRATCH/receipts]
 ```
 
-`check` and `check-axis` read the retained files only, and their `--output` equals
-`receipts/finite-audit.json` and `receipts/axis-check.json`; `run-axis` needs `g++` and
-a crate build of reviewed source, and takes seconds.
+`check`, `check-axis` and `check-replay` read the retained files only, and their
+`--output` equals `receipts/finite-audit.json`, `receipts/axis-check.json` and
+`receipts/replay-check.json`; `run-axis` needs `g++` and a crate build of reviewed
+source, and takes seconds; `run-replay` needs those, the Boost headers for its `duals`
+stage, and about 1.5 CPU-hours, most of it the 43 slabs, which `--stages`
+splits as `devtools.audit_continuous_pose run` does (`duals` is this release’s own
+stage).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

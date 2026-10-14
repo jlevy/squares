@@ -510,9 +510,9 @@ def test_github_handles_reach_the_lines_and_their_sources_reach_stderr(
 def test_margins_are_opt_in_and_say_how_far_past_the_previous_best(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    lines, _ = run(capsys, ["--ids", "T-145", "--date", "2026-10-11"])
+    lines, _ = run(capsys, ["--ids", "T-157", "--date", "2026-10-12"])
     assert "previous best" not in lines[1]
-    lines, _ = run(capsys, ["--ids", "T-145", "--date", "2026-10-11", "--margins"])
+    lines, _ = run(capsys, ["--ids", "T-157", "--date", "2026-10-12", "--margins"])
     assert "above the previous best)" in lines[1]
 
 
