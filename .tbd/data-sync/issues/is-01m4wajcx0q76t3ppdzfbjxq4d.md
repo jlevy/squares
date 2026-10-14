@@ -5,7 +5,7 @@ title: "Finish PR 592 n17 formalization: recover reviews, address findings, vali
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -24,10 +24,11 @@ child_order_hints:
   - is-01m4wk40nh829gdxgzd4xw5fvn
   - is-01m4wk413rk776rgfy23r5sbdn
   - is-01m4wk41j03apkqqt3m5ch1gp8
+  - is-01m4wmqs3b7v81ybkqb70vj7qw
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:26:15.311Z
-updated_at: 2026-10-14T06:55:42.143Z
+updated_at: 2026-10-14T07:23:57.408Z
 started_at: 2026-10-14T04:26:53.175Z
 ---
 User authorized takeover of PR 592 and review/merge completion alongside the regularization closeout. Recover published A/B/C findings and unfinished fixes; preserve owner decisions only with trusted evidence; update against main, confirm evidence independence and parser safety, run required validation, publish dispositions, merge only after reviews and CI pass.
