@@ -5,7 +5,7 @@ title: "Import Mishapolk: exact certificates at n = 103, 153, 207, 209, 258, 270
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T07:10:30.078Z
-updated_at: 2026-10-14T08:04:22.787Z
+updated_at: 2026-10-14T08:07:32.723Z
 started_at: 2026-10-14T07:10:40.964Z
 ---
 Stage 1-2 and stage 4 replay of issue #573 (Mishapolk/square-packing-records at 336bdf5efab4784e54e0ac32edf3ed12f9c8af7e), lane mishapolk of the 2026-10-14 intake pass, branch claude/wizardly-meitner-wqn4x3-intake-1014-mishapolk. Claim map, comparison and priced plan in notes.
@@ -79,3 +79,8 @@ equal, 1 m 49 s. Register plan: scratchpad mishapolk/register-plan-573.yaml; its
 calls all six requested sides improvements, which holds only at 153 and 207 against the
 case, and neither is the smallest open report. Not run: 15 counts, 18-31 min certify plus
 as much replay.
+
+
+## Acknowledgement posted (2026-10-14)
+
+https://github.com/jlevy/squares/issues/573#issuecomment-6163850092 (revised from the draft above; text in scratchpad mishapolk/ack573.md).
