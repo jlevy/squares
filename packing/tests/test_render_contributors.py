@@ -44,6 +44,7 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     # contributors in its own voice; the colophon links it by the same name.
     assert "Contributors<" not in index
     assert '<a href="index.html">Profiles</a></span>' in index
+    assert 'data-contributor="' not in index
     for contributor in registry.by_id.values():
         assert contributor.profile_path == f"profiles/{contributor.id}.html"
         assert f'href="{contributor.id}.html"' in index

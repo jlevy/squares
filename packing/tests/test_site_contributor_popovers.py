@@ -178,7 +178,9 @@ def design_generated(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     )
     directory = render_contributors.contributor_pages()[0]
     reference = render_overview.static_content_page(
-        '<article class="title-reference"><h1>Shared page title</h1></article>',
+        '<article class="title-reference"><h1>Shared page title</h1>'
+        '<a href="profiles/evan-daniel.html" data-contributor="evan-daniel">'
+        "Evan Daniel</a></article>",
         meta=render_overview.PageMeta(
             "Shared page title", "Standard page heading reference.", "title-reference.html"
         ),
@@ -267,7 +269,7 @@ def test_generated_profile_uses_shared_roles_without_overflow(
 ) -> None:
     with _page(browser, viewport={"width": width, "height": 900}, color_scheme=theme) as page:
         if overlay:
-            page.goto(f"{design_generated}profiles/index.html", wait_until="load")
+            page.goto(f"{design_generated}title-reference.html", wait_until="load")
             page.locator('main a[data-contributor][href$="evan-daniel.html"]').click()
             selector = "#pop-contributor article.site-contributor"
         else:
@@ -496,28 +498,6 @@ def test_pending_case_can_be_reopened_after_escape(browser: Any, served: str) ->
         site_browser.api().expect(link).to_be_focused()
 
 
-def test_generated_directory_enhances_profile_link(browser: Any, generated: str) -> None:
-    with _page(browser) as page:
-        address = f"{generated}profiles/index.html"
-        page.goto(address, wait_until="load")
-        link = page.locator('main a[data-contributor][href$="walter-stromquist.html"]')
-        link.click()
-        panel = page.locator("#pop-contributor")
-        site_browser.api().expect(panel).to_be_visible(timeout=2000)
-        assert page.url == address
-        assert (
-            panel.locator("article.site-contributor").get_attribute("data-contributor-id")
-            == "walter-stromquist"
-        )
-        if directory := os.environ.get("SQPACK_CONTRIBUTOR_DESIGN_SHOTS"):
-            page.evaluate(DESIGN, "#pop-contributor article.site-contributor")
-            target = Path(directory) / "real-profile-popover-1280-light.png"
-            target.parent.mkdir(parents=True, exist_ok=True)
-            page.screenshot(path=str(target))
-        page.keyboard.press("Escape")
-        site_browser.api().expect(link).to_be_focused()
-
-
 @pytest.mark.parametrize(
     "record", ["profiles/walter-stromquist.html", "cases/10.html", "result/test.html"]
 )
@@ -554,7 +534,7 @@ def test_generated_standalone_pages_enhance_article_links(
         site_browser.api().expect(link).to_be_focused()
 
 
-@pytest.mark.parametrize("javascript", [False, True], ids=["no-javascript", "failed-fetch"])
+@pytest.mark.parametrize("javascript", [False, True], ids=["no-javascript", "javascript"])
 def test_generated_directory_keeps_native_profile_navigation(
     browser: Any, generated: str, *, javascript: bool
 ) -> None:
@@ -564,19 +544,12 @@ def test_generated_directory_keeps_native_profile_navigation(
         viewport={"width": 390, "height": 900},
         color_scheme="dark",
     ) as page:
-        if javascript:
-            page.route(
-                "**/profiles/walter-stromquist.html",
-                lambda route: (
-                    route.abort()
-                    if route.request.resource_type == "fetch"
-                    else route.continue_()
-                ),
-            )
         page.goto(f"{generated}profiles/index.html", wait_until="load")
-        page.locator('main a[data-contributor][href$="walter-stromquist.html"]').click()
+        page.locator('main a[href$="walter-stromquist.html"]').click()
         page.wait_for_url(f"{generated}profiles/walter-stromquist.html")
         assert (
             page.locator("main article.site-contributor h1").text_content()
             == "Walter Stromquist"
         )
+        page.locator('nav[aria-label="Breadcrumb"] a').click()
+        page.wait_for_url(f"{generated}profiles/index.html")

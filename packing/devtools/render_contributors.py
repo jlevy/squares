@@ -299,7 +299,7 @@ def contributor_pages() -> list[Page]:
         "and links to reviewed credits.</p>"
         '<nav aria-label="Profiles"><ul>'
         + "".join(
-            f'<li><a href="{contributor.profile_path}" data-contributor="{contributor.id}">'
+            f'<li><a href="{contributor.profile_path}">'
             f"{html.escape(contributor.display_name)}</a></li>"
             for contributor in contributors
         )

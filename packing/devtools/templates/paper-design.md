@@ -2675,11 +2675,13 @@ The profile directory at `profiles/` lists every published profile in public-nam
 It includes cited paper authors as well as the project’s contributors, so its visible
 text says **Profiles**: the directory’s title and heading, its list’s label, the
 colophon link and each profile’s breadcrumb.
-Its links and the colophon’s **Profiles** link are ordinary anchors.
-Each profile has one complete article at `profiles/ID.html`; the directory, credited
-names in tables and records, and the standalone profile use that address.
-A marked public-name link can open the same article in `#pop-contributor`, whose **Open
-profile** action reaches the complete page.
+Its names navigate directly to individual profile pages, with or without JavaScript; the
+directory does not open profile popovers.
+The colophon’s **Profiles** link and each profile’s breadcrumb navigate back to the
+directory. Each profile has one complete article at `profiles/ID.html`; the directory,
+credited names in tables and records, and the standalone profile use that address.
+A marked public-name credit in a result or case can open the same article in
+`#pop-contributor`, whose **Open profile** action reaches the complete page.
 The panel has the standard 36rem ceiling, shared padding, close target, viewport height
 limit, scrim and scrolling of a compact article popover.
 It retains the page opener across case/result/profile replacements.
