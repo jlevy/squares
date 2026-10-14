@@ -493,7 +493,7 @@ Before closing the calibration work:
 
 - Integrate and independently accept the observed-worker contract, maintained
   three-profile coordinator, source-distinct receipt reader, and final
-  [run sheet](../specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md).
+  [run sheet](../specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md).
 - Run at least three fresh repetitions of the intended profile, retaining complete
   metrics and all 14,404 direction rows per run.
 - Admit those receipts through source-distinct readback before any BC329 registration.
@@ -512,7 +512,7 @@ The reviewed sources were:
 - [BC329 preflight](review-2026-09-10-n11-bc329-packet-preflight.md),
   [agenda-035](../../../packing/campaign/agendas/agenda-035-n11-daytime-strategy.md),
   and the
-  [active daytime plan](../specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
+  [active daytime plan](../specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
 - [fixed_core_packet.py](../../../packing/devtools/fixed_core_packet.py) and its
   [target-free controls](../../../packing/tests/test_fixed_core_packet.py)
 - [threshold.py](../../../packing/src/sqpack/fractional/threshold.py),

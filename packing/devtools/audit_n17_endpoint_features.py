@@ -288,7 +288,7 @@ def audit(path: Path, repo: Path = exact.REPO) -> dict[str, Any]:
         "fixed root enclosure differs",
     )
     source = exact.read_bytes(repo / exact.SOURCE)
-    # The one digest here that crosses a boundary: Kleddamag's downloaded release
+    # The one digest here that crosses a boundary: Overbeck's downloaded release
     # against the value its review pinned (see `exact.SOURCE_SHA`).
     exact.require(
         hashlib.sha256(source).hexdigest()

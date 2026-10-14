@@ -1,0 +1,668 @@
+[
+ {
+  "n": 10,
+  "source": "Ellsworth catalogue square-10.svg",
+  "side": "3.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Frits Göbel in early 1979. Proved by Walter Stromquist in 2003. Explore group"
+ },
+ {
+  "n": 10,
+  "source": "Ellsworth catalogue square-10b.svg",
+  "side": "3.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.0,
+  "g": 0,
+  "attribution": "Alternative with minimal rotated squares. Adds an \"L\" to $s(5)$."
+ },
+ {
+  "n": 10,
+  "source": "Ellsworth catalogue square-10s.svg",
+  "side": "3.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 18,
+  "source": "Ellsworth catalogue square-18.svg",
+  "side": "4.822875655532",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Pertti Hämäläinen in 1980."
+ },
+ {
+  "n": 18,
+  "source": "Ellsworth catalogue square-18b.svg",
+  "side": "4.822875655532",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.770632,
+  "g": 1,
+  "attribution": "Found by Pertti Hämäläinen in 1980. Pictured alternative with minimal rotated squares found by Mats Gustafsson in 1981."
+ },
+ {
+  "n": 18,
+  "source": "Ellsworth catalogue square-18c.svg",
+  "side": "4.822875655532",
+  "relation": "same tilts, squares placed differently (perhaps the same packing via flat motions; not tested)",
+  "max_dev": 2.822876,
+  "g": 0,
+  "attribution": "Alternative found by David W. Cantrell in September 2002."
+ },
+ {
+  "n": 18,
+  "source": "Ellsworth catalogue square-18d.svg",
+  "side": "4.822875655532",
+  "relation": "same tilts, squares placed differently (perhaps the same packing via flat motions; not tested)",
+  "max_dev": 0.322876,
+  "g": 0,
+  "attribution": "Alternative found by Thierry Gensane and Philippe Ryckelynck in April 2004, using a computer program they wrote."
+ },
+ {
+  "n": 19,
+  "source": "Ellsworth catalogue square-19.svg",
+  "side": "4.885618083164",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found first by Robert Wainwright in late 1979. Based on packing found by Charles F. Cottingham in early 1979."
+ },
+ {
+  "n": 19,
+  "source": "Ellsworth catalogue square-19a.svg",
+  "side": "4.885618083164",
+  "relation": "same tilts, squares placed differently (perhaps the same packing via flat motions; not tested)",
+  "max_dev": 0.08088,
+  "g": 0,
+  "attribution": "Alternative with minimal rotated squares found by David W. Cantrell in 2002."
+ },
+ {
+  "n": 19,
+  "source": "Ellsworth catalogue square-19b0.svg",
+  "side": "4.885618083164",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.015339,
+  "g": 0,
+  "attribution": ""
+ },
+ {
+  "n": 19,
+  "source": "Ellsworth catalogue square-19b1.svg",
+  "side": "4.885618083164",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.040896,
+  "g": 0,
+  "attribution": "Alternative packing found by David W. Cantrell (see also min/max) in 2002."
+ },
+ {
+  "n": 19,
+  "source": "Ellsworth catalogue square-19b2.svg",
+  "side": "4.885618083164",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.030053,
+  "g": 0,
+  "attribution": ""
+ },
+ {
+  "n": 19,
+  "source": "Ellsworth catalogue square-19c0.svg",
+  "side": "4.885618083164",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.047413,
+  "g": 0,
+  "attribution": ""
+ },
+ {
+  "n": 19,
+  "source": "Ellsworth catalogue square-19c1.svg",
+  "side": "4.885618083164",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.049323,
+  "g": 0,
+  "attribution": "Alternative with minimal rotated squares found by David W. Cantrell (see also min) in 2002."
+ },
+ {
+  "n": 26,
+  "source": "Ellsworth catalogue square-26b.svg",
+  "side": "5.621320343560",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Erich Friedman in 1997. Unextends the $s(37)$ found by Evert Stenlund in early 1980."
+ },
+ {
+  "n": 26,
+  "source": "Ellsworth catalogue square-26c.svg",
+  "side": "5.621320343560",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": ""
+ },
+ {
+  "n": 27,
+  "source": "Ellsworth catalogue square-27.svg",
+  "side": "5.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 27,
+  "source": "Ellsworth catalogue square-27b.svg",
+  "side": "5.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.5,
+  "g": 0,
+  "attribution": "Alternative with minimal rotated squares found by David W. Cantrell in 2005."
+ },
+ {
+  "n": 27,
+  "source": "Ellsworth catalogue square-27s.svg",
+  "side": "5.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 38,
+  "source": "Ellsworth catalogue square-38.svg",
+  "side": "6.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 38,
+  "source": "Ellsworth catalogue square-38b.svg",
+  "side": "6.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.292893,
+  "g": 0,
+  "attribution": "Alternative with minimal rotated squares found by David W. Cantrell in 2005."
+ },
+ {
+  "n": 38,
+  "source": "Ellsworth catalogue square-38c.svg",
+  "side": "6.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.292893,
+  "g": 0,
+  "attribution": "Rotationally symmetric rearrangement of alternative with minimal rotated squares by David Ellsworth in December 2024."
+ },
+ {
+  "n": 38,
+  "source": "Ellsworth catalogue square-38s.svg",
+  "side": "6.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 52,
+  "source": "Ellsworth catalogue square-52.svg",
+  "side": "7.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 52,
+  "source": "Ellsworth catalogue square-52b.svg",
+  "side": "7.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.585786,
+  "g": 0,
+  "attribution": "Rigid alternative with minimal rotated squares found by David W. Cantrell in 2005."
+ },
+ {
+  "n": 65,
+  "source": "Ellsworth catalogue square-65.svg",
+  "side": "8.535533905933",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 65,
+  "source": "Ellsworth catalogue square-65b.svg",
+  "side": "8.535533905933",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.0,
+  "g": 0,
+  "attribution": "Rearrangement with minimal rotated squares found by David Ellsworth in June 2023."
+ },
+ {
+  "n": 66,
+  "source": "Ellsworth catalogue square-66.svg",
+  "side": "8.656854249492",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Evert Stenlund in early 1980."
+ },
+ {
+  "n": 66,
+  "source": "Ellsworth catalogue square-66b.svg",
+  "side": "8.656854249492",
+  "relation": "same tilts, squares placed differently (perhaps the same packing via flat motions; not tested)",
+  "max_dev": 0.267767,
+  "g": 0,
+  "attribution": "Alternative with rotational symmetry found by David W. Cantrell in 2023."
+ },
+ {
+  "n": 67,
+  "source": "Ellsworth catalogue square-67.svg",
+  "side": "8.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Evert Stenlund in early 1980, extending the $s(52)$ found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 67,
+  "source": "Ellsworth catalogue square-67b.svg",
+  "side": "8.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.035534,
+  "g": 0,
+  "attribution": "Alternative constructed by adding an \"L\" to the $s(52)$ found by Frits Göbel in early 1979."
+ },
+ {
+  "n": 67,
+  "source": "Ellsworth catalogue square-67c.svg",
+  "side": "8.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.37868,
+  "g": 2,
+  "attribution": "Alternative with minimal rotated squares found by David W. Cantrell in June 2023."
+ },
+ {
+  "n": 67,
+  "source": "Ellsworth catalogue square-67s.svg",
+  "side": "8.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 82,
+  "source": "Ellsworth catalogue square-82.svg",
+  "side": "9.535533905933",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Frits Göbel in early 1979. Adds two \"L\"s to $s(65)$."
+ },
+ {
+  "n": 82,
+  "source": "Ellsworth catalogue square-82b.svg",
+  "side": "9.535533905933",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.0,
+  "g": 0,
+  "attribution": ""
+ },
+ {
+  "n": 83,
+  "source": "Ellsworth catalogue square-83.svg",
+  "side": "9.634757648631",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Károly Hajba in September 2024. Improved upon the $s(83)$ found by Evert Stenlund in early 1980. Improved by Da"
+ },
+ {
+  "n": 83,
+  "source": "Ellsworth catalogue square-83_r4.svg",
+  "side": "9.634757648631",
+  "relation": "same tilts, squares placed differently (perhaps the same packing via flat motions; not tested)",
+  "max_dev": 0.099612,
+  "g": 0,
+  "attribution": "Improved by Allen Chang in September 2026, with GPT-5.6 Sol and GPT-6 Astra, to 68 decimal places of accuracy."
+ },
+ {
+  "n": 85,
+  "source": "Ellsworth catalogue square-85b.svg",
+  "side": "9.742640687119",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by Erich Friedman in 1997."
+ },
+ {
+  "n": 85,
+  "source": "Ellsworth catalogue square-85c.svg",
+  "side": "9.742640687119",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Alternative with minimal rotated squares."
+ },
+ {
+  "n": 87,
+  "source": "Ellsworth catalogue square-87.svg",
+  "side": "9.838815269948",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Found by David Ellsworth in December 2024, based on the $s(107)$ found by Károly Hajba in November 2024 and the $s(54)$ "
+ },
+ {
+  "n": 87,
+  "source": "Ellsworth catalogue square-87_r7.svg",
+  "side": "9.838815269948",
+  "relation": "same tilts, squares placed differently (perhaps the same packing via flat motions; not tested)",
+  "max_dev": 0.053382,
+  "g": 0,
+  "attribution": ""
+ },
+ {
+  "n": 89,
+  "source": "Ellsworth catalogue square-89.svg",
+  "side": "9.949747468306",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 1,
+  "attribution": "Found by Evert Stenlund in early 1980, by continuing a pattern found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 89,
+  "source": "Ellsworth catalogue square-89b.svg",
+  "side": "9.949747468306",
+  "relation": "same tilts, squares placed differently (perhaps the same packing via flat motions; not tested)",
+  "max_dev": 1.414214,
+  "g": 1,
+  "attribution": "Rearrangement with minimal rotated squares found by David Ellsworth in June 2023."
+ },
+ {
+  "n": 104,
+  "source": "Ellsworth catalogue square-104.svg",
+  "side": "10.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Extends the $s(52)$ found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 104,
+  "source": "Ellsworth catalogue square-104s.svg",
+  "side": "10.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 124,
+  "source": "Ellsworth catalogue square-124.svg",
+  "side": "11.656854249492",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Continues a pattern found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 124,
+  "source": "Ellsworth catalogue square-124b.svg",
+  "side": "11.656854249492",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Rearrangement with minimal rotated squares."
+ },
+ {
+  "n": 125,
+  "source": "Ellsworth catalogue square-125.svg",
+  "side": "11.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Extends the $s(52)$ found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 125,
+  "source": "Ellsworth catalogue square-125s.svg",
+  "side": "11.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.571068,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 149,
+  "source": "Ellsworth catalogue square-149.svg",
+  "side": "12.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Extends the $s(52)$ found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 149,
+  "source": "Ellsworth catalogue square-149b.svg",
+  "side": "12.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.682443,
+  "g": 1,
+  "attribution": "Extends the $s(52)$ found by Frits Göbel in early 1979. Rigid alternative with minimal rotated squares found by David El"
+ },
+ {
+  "n": 149,
+  "source": "Ellsworth catalogue square-149s.svg",
+  "side": "12.707106781187",
+  "relation": "same tilts, squares placed differently (perhaps the same packing via flat motions; not tested)",
+  "max_dev": 0.071068,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 174,
+  "source": "Ellsworth catalogue square-174.svg",
+  "side": "13.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Extends the $s(52)$ found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 174,
+  "source": "Ellsworth catalogue square-174s.svg",
+  "side": "13.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 201,
+  "source": "Ellsworth catalogue square-201.svg",
+  "side": "14.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Extends the $s(52)$ found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 201,
+  "source": "Ellsworth catalogue square-201b.svg",
+  "side": "14.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.724295,
+  "g": 0,
+  "attribution": "Mirror-symmetric alternative with minimal rotated squares arranged by David Ellsworth in December 2024, based on the tec"
+ },
+ {
+  "n": 201,
+  "source": "Ellsworth catalogue square-201c.svg",
+  "side": "14.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 13.697786,
+  "g": 1,
+  "attribution": "Alternative combining the $s(52)$ rigid alternative with minimal rotated squares found by David W. Cantrell in 2005, and"
+ },
+ {
+  "n": 201,
+  "source": "Ellsworth catalogue square-201d.svg",
+  "side": "14.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.61844,
+  "g": 1,
+  "attribution": "Rotationally symmetric alternative with minimal rotated squares arranged by David W. Cantrell in December 2024."
+ },
+ {
+  "n": 201,
+  "source": "Ellsworth catalogue square-201s.svg",
+  "side": "14.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 231,
+  "source": "Ellsworth catalogue square-231.svg",
+  "side": "15.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Extends the $s(52)$ found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 231,
+  "source": "Ellsworth catalogue square-231s.svg",
+  "side": "15.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 233,
+  "source": "Ellsworth catalogue square-233.svg",
+  "side": "15.778174593052",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Continues a pattern found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 233,
+  "source": "Ellsworth catalogue square-233b.svg",
+  "side": "15.778174593052",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Rearrangement with minimal rotated squares found by David Ellsworth in November 2024."
+ },
+ {
+  "n": 259,
+  "source": "ours (fewest rotation groups variant)",
+  "side": "16.5913781454976981594",
+  "relation": "alternate packing at the record side: not shown connected to the source (path blocked at s = 0.81)",
+  "groups": "52 -> 2",
+  "parent": "Francisco Couzo",
+  "cert": "search/regularize/lists/certs/alt/n-259.cert.gz"
+ },
+ {
+  "n": 262,
+  "source": "Ellsworth catalogue square-262.svg",
+  "side": "16.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 2,
+  "attribution": "Extends the $s(52)$ found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 262,
+  "source": "Ellsworth catalogue square-262s.svg",
+  "side": "16.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 2,
+  "attribution": "simplified"
+ },
+ {
+  "n": 265,
+  "source": "Ellsworth catalogue square-265.svg",
+  "side": "16.778174593052",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Continues a pattern found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 265,
+  "source": "Ellsworth catalogue square-265b.svg",
+  "side": "16.778174593052",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.0,
+  "g": 0,
+  "attribution": "Rearrangement with minimal rotated squares found by David Ellsworth in November 2024."
+ },
+ {
+  "n": 266,
+  "source": "ours (fewest rotation groups variant)",
+  "side": "16.8230287507564759705",
+  "relation": "alternate packing at the record side: not shown connected to the source (path blocked at s = 1.00)",
+  "groups": "22 -> 3",
+  "parent": "David Ellsworth",
+  "cert": "search/regularize/lists/certs/alt/n-266.cert.gz"
+ },
+ {
+  "n": 267,
+  "source": "ours (fewest rotation groups variant)",
+  "side": "16.8388152699482622602",
+  "relation": "alternate packing at the record side: not shown connected to the source (path blocked at s = 0.33)",
+  "groups": "126 -> 4",
+  "parent": "",
+  "cert": "search/regularize/lists/certs/alt/n-267.cert.gz"
+ },
+ {
+  "n": 296,
+  "source": "Ellsworth catalogue square-296.svg",
+  "side": "17.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "Extends the $s(52)$ found by Frits Göbel in early 1979. Explore group"
+ },
+ {
+  "n": 296,
+  "source": "Ellsworth catalogue square-296b.svg",
+  "side": "17.707106781187",
+  "relation": "distinct: different tilt structure",
+  "max_dev": 10.707107,
+  "g": 1,
+  "attribution": "Extends the $s(52)$ found by Frits Göbel in early 1979. Rigid alternative with minimal rotated squares based on the $s(5"
+ },
+ {
+  "n": 296,
+  "source": "Ellsworth catalogue square-296s.svg",
+  "side": "17.707106781187",
+  "relation": "same as the record up to symmetry / rattlers",
+  "max_dev": 0.0,
+  "g": 0,
+  "attribution": "simplified"
+ },
+ {
+  "n": 302,
+  "source": "ours (fewest rotation groups variant)",
+  "side": "17.8720298490811799736",
+  "relation": "alternate packing at the record side: not shown connected to the source (path blocked at s = 0.10)",
+  "groups": "71 -> 5",
+  "parent": "Francisco Couzo",
+  "cert": "search/regularize/lists/certs/alt/n-302.cert.gz"
+ }
+]

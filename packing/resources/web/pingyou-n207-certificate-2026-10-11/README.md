@@ -240,6 +240,10 @@ Its first commit and the issue as first posted said that OpenAI Codex assisted t
 verification, the comparison review and the package; the pinned commit, titled “Correct
 attribution in submission materials”, removed that sentence, and the issue was edited to
 match. Neither says why.
+Asked on the issue which account stands, the author answered on 12 October 2026, for
+this release and the n153 one
+([comment](https://github.com/jlevy/squares/issues/503#issuecomment-6129716138)): “Both
+solutions were AI assisted by ‘PY’, an unreleased agentic AI offering by PingYou Ltd.”
 
 ## Commands
 

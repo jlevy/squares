@@ -37,6 +37,10 @@ NAMED_EXCLUSIONS = {
     # A byte-identical mirror of `.agents/skills`, kept by `make skills-sync` and
     # compared by `make skills-check`; linting the source copy covers it.
     ".claude/skills/": "mirror of .agents/skills",
+    # Evan Daniel's regularizer, copied byte for byte at a pin and held to its manifest by
+    # `devtools.check_vendored_evand`: other authors' bytes, run as a generator whose every
+    # output this project's exact checkers decide, and changed only by a recorded patch.
+    "vendor/evand-regularize/": "vendored third-party code at a pin (its README.md)",
 }
 
 
@@ -159,9 +163,9 @@ def test_every_tracked_python_file_is_under_a_gate_or_named() -> None:
 
     unreached: list[str] = []
     project_python = _project_python()
+    # A submodule's files never appear here -- git lists its gitlink, not its contents --
+    # so `vendor/kpress` needs no entry; a vendored copy held as ordinary files is named.
     for path in project_python:
-        if path.startswith("vendor/"):
-            continue  # submodules carry their own tooling
         named = under(path, list(NAMED_EXCLUSIONS))
         linted = under(path, lint_roots) and not under(path, ruff_excluded)
         typed = under(path, pyright_included) and not under(path, pyright_excluded)

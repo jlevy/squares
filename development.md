@@ -187,24 +187,24 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 49 of 107 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 65 of 107 | 240 s | 59.4 s |
-| `--push` | contributor, once before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
-| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 94 of 107 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 68 of 107 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
-| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 107 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 107 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 107 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
-| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 107 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
-| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 107 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
-| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 107 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
-| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 107 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 107 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
-| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 107 | 90 s | pending its first hosted cohort under `think-th8p`; the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks`; the verifier’s step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 107 of 107 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
+| `--records` | contributor, before touching a registry; also every pull request | 50 of 108 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | 66 of 108 | 240 s | 59.4 s |
+| `--push` | contributor, once before a push — the edit-tier prerequisites the diff can affect, plus tests reachable from it (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
+| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 95 of 108 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 69 of 108 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 108 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 108 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 108 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
+| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 108 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
+| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 108 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
+| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 108 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
+| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 108 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 108 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
+| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 108 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 108 of 108 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
 
-Step counts describe the current 107-step registry, read from the validator’s canonical
-selection API on 2026-10-09. Its ten PR partitions cover all 94 fast steps.
+Step counts describe the current 108-step registry, read from the validator’s canonical
+selection API on 2026-10-11. Its ten PR partitions cover all 95 fast steps.
 Dated costs retain their measured source and resource shape; they are not fresh
 measurements of the new scheduling.
 
@@ -621,10 +621,29 @@ regularizes every record of the
 [derived layer](packing/atlas/known-best/README.md#the-regularized-views) again from its
 witness, re-runs both exact verifications, and requires the index and every retained
 view to come out byte-identical.
-Its stand-in on every pull request is the records-tier step `regularized atlas views
+Since 12 October 2026 the layer also draws views by Evan Daniel’s regularizer and by the
+grid-slack generator; for each of those the step requires the axis tool’s re-derived
+record to equal the `reference` kept beside it, and decides the drawn view again over
+the rationals on both maintained routes, with its square count, its identity against the
+witness and its shades measured again.
+The identity was the costly part until 14 October 2026: `arrangement_gap` compared every
+pair of centres exactly, 40 to 68 seconds a view at $n = 182$, $241$ and $297$, and over
+the 90 drawn views at #559, 62 of them decided again, the step took 1,410 s of wall at
+four workers on a loaded host (#559 review C, C1). It now compares exactly only the
+centres that binary64 puts within `nearest_reach` of the nearest, a margin far above
+binary64’s error, which always holds the exact nearest and its ties, so the matching and
+every measurement are the ones the exhaustive search gives.
+The identity at $n = 182$ takes 0.4 s, and the independent checker is most of a drawn
+view’s cost. At #559 the whole step then took 325.7 s of wall at four workers, 713 s of
+summed drawn-view time and 559 s of record time (measured on 2026-10-14, host load
+average 2 to 4), inside its 450 s ceiling.
+`think-uomm` holds the hosted reading still owed at this head: the last one, run
+38325954699 before the identity was measured again, read 445 s. Its stand-in on every
+pull request is the records-tier step `regularized atlas views
 match their index`, which compares the same index with the manifest, the witnesses and
-the views by digest in about a tenth of a second.
-The tool’s pool follows `PACK_JOBS`.
+the views by digest, reads each other generator’s view against its entry, and holds
+every drawn view’s exact side to the witness’s $s_W$ and to the case record’s $U$, in
+about two seconds. The tool’s pool follows `PACK_JOBS`.
 
 It was measured on 2026-10-02 on a four-cpu host that other sessions were also using, so
 read these as upper bounds:
@@ -823,6 +842,14 @@ reachable behavioral tests from one changed-path snapshot, including old and new
 paths and deleted files.
 Unclaimed inputs and an empty diff retain the complete prerequisite floor; checks
 without declared inputs always run.
+Scoping is only as sound as each check’s declared inputs (`Step.touches`), so a contract
+test (`test_every_attributed_step_claims_the_modules_it_runs`) derives the Python
+modules every attributed check runs, follows their static import closure, lazy imports
+included, and fails on any file the check does not claim.
+The site renderers import one another, so the checks that reach them claim
+`packing/devtools/*` as a group; a change under `devtools/` therefore selects more
+prerequisites than its own name suggests.
+Under `--format json` the selection banners go to stderr, leaving stdout one document.
 For behavioral tests, `devtools.reachable_tests` computes the test files the change can
 reach — import closure over `src/sqpack`, `devtools`, `cases` and `tests`, text mention
 of a changed module or file, repository walkers always included — and errs toward
@@ -1390,8 +1417,8 @@ uv run --frozen --all-extras --group dev python -m devtools.render_n11_threshold
 
 The outputs are `site/papers/n11-threshold-bound-review.html`, `.md`, and `.pdf`;
 `--site`, `--check` and `--revision` work as Part III’s do.
-Its Pages job, `n11-threshold-bound-review`, checks out the archived Kleddamag proof,
-the T-059 replay journal and the native verifier’s row journal beside the code, runs the
+Its Pages job, `n11-threshold-bound-review`, checks out the archived Overbeck proof, the
+T-059 replay journal and the native verifier’s row journal beside the code, runs the
 figure and renderer tests, and renders and checks the page, the Markdown and the PDF;
 `scope`’s notice says why when no input of it changed.
 It explains accepted evidence and reruns no sweep.
@@ -1527,7 +1554,18 @@ The live command reports phase timings, unique transport requests, retries, and 
 requests to stderr during execution.
 URL fragments share a transport request while query strings remain distinct; every
 original link retains its own verdict.
-Persistent HTTP errors fail verification after bounded retries.
+Persistent HTTP errors fail verification after bounded retries; a connection that times
+out, resets or answers malformed headers is retried as unreachable rather than ending
+the audit.
+
+In the Pages workflow the `verify-deployment` job runs under a 30-minute
+`timeout-minutes` ceiling, and the checker’s own `--deadline-minutes 25` stops it first.
+At the deadline it prints every verdict it has, one failing line naming the phase it
+interrupted, and the summary, so a throttled audit still leaves its diagnosis in the
+log.
+The five minutes between them cover the job’s setup and teardown, which took 41–72 s
+and 2–6 s across forty measured jobs; the slowest healthy audit took 388 s. Run locally,
+the check has no deadline unless one is passed.
 A successful Pages deploy with a failed link audit remains incomplete publication
 verification; preserve the failed receipt and rerun only verification after diagnosing
 the external response.
@@ -1639,7 +1677,7 @@ release may carry assets drawn from different revisions.
 Actions artifacts, Git LFS or a committed file; the tag; the upload’s content type; the
 receipt that travels with each video; and the `<video>` embed with its codec string --
 is
-[Publication](docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#publication)
+[Publication](docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#publication)
 in the delivery-profiles plan.
 To re-cut and publish them, follow
 [Regenerating and publishing the ascent videos](packages/workbench/README.md#regenerating-and-publishing-the-ascent-videos),
@@ -1687,7 +1725,7 @@ uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atl
 `--update-composites` refuses a stale pin and uncommitted data, since the stamp it draws
 has to name the data in the tree.
 `--update` rewrites the data layer alone: witnesses, renderings, manifest and frontier
-links. [The plan](docs/project/specs/active/plan-2026-10-01-release-assets-on-demand.md)
+links. [The plan](docs/project/specs/done/plan-2026-10-01-release-assets-on-demand.md)
 has the measurements behind this and the options that were weighed, and
 `python -m devtools.measure_release_assets` repeats them.
 
@@ -1817,8 +1855,8 @@ It leaves the binary at `$CARGO_TARGET_DIR/release/sqverify-exact` when the targ
 directory is absolute.
 Pass that path to `devtools.verify_rectangle_density` with
 `--backend rust --rust-binary PATH`; Python remains the default.
-The [tooling overview](docs/project/verification-tooling.md) records the supported
-inputs, refusal behavior, golden controls and measured performance limits.
+The [tooling overview](docs/project/guides/verification-tooling.md) records the
+supported inputs, refusal behavior, golden controls and measured performance limits.
 This crate verifies rectangle geometry, a separate contract from the global n11 proof.
 
 The optional [n17 native kernel](packing/n17bb_native/README.md) accelerates the
@@ -2423,7 +2461,7 @@ Do not replace those records with a timing comment or treat an incomplete CPU lo
 bound as total test CPU. The prior
 [efficiency infrastructure plan](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md)
 and
-[gate validation plan](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md)
+[gate validation plan](docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md)
 retain the earlier experiments and their outcomes.
 
 ### What a deep run repeats, and what that licenses

@@ -2004,8 +2004,8 @@ PAPER_DESCRIPTIONS: dict[str, str] = {
         "s(11) >= 3.8264\u2026, with interactive figures."
     ),
     N11_THRESHOLD_BOUND_REVIEW: (
-        "Explains Kleddamag\u2019s proof that s(11) > 31/8 (T-037): five-site k-of-m "
-        "charges, k-of-m charges on shrunken parents with strict cores, and a "
+        "Explains Marc Leonard Overbeck\u2019s proof that s(11) > 31/8 (T-037): "
+        "five-site k-of-m charges, k-of-m charges on shrunken parents with strict cores, and a "
         "reoptimized certificate over 12,028 angle rows."
     ),
     N11_OPTIMALITY_REVIEW: (
@@ -2324,13 +2324,26 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     ),
     (
         "https://github.com/Kleddamag/11-squares-certified-bound",
-        "Kleddamag",
+        "Marc Leonard Overbeck",
         "A certified lower bound for eleven squares.",
     ),
     (
         "https://github.com/Kleddamag/17-squares-certified-bound",
-        "Kleddamag",
+        "Marc Leonard Overbeck",
         "Certified lower bounds for seventeen squares.",
+    ),
+    (
+        "https://github.com/Kleddamag/the-seventeenth-square-candidate",
+        "Marc Leonard Overbeck",
+        "A candidate proof that Bidwell's packing of seventeen squares is optimal.",
+    ),
+    (
+        "https://github.com/ofitzharding/sq17-lean",
+        "Oscar Fitzharding",
+        (
+            "A Lean 4 proof that Bidwell's packing of seventeen squares is optimal, "
+            "trusting Lean's compiler for its certificates."
+        ),
     ),
     (
         "https://github.com/Guzhou0806/n17-square-packing",
@@ -2450,7 +2463,7 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         "Zenodo 23038546",
         "Ke Wang and Can Li",
         (
-            "An exact lower bound for eleven squares, a reweighting of Kleddamag\u2019s"
+            "An exact lower bound for eleven squares, a reweighting of Overbeck\u2019s"
             " certificate."
         ),
     ),

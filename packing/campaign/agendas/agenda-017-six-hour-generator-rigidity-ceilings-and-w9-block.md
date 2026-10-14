@@ -89,7 +89,7 @@ agenda:
           retained artifact was frozen to its own path before it was decided.
         evidence:
           - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
-          - docs/project/handoff-2026-09-04-block-close.md
+          - docs/project/handoffs/handoff-2026-09-04-block-close.md
         disposition: retire-success
         follow_up: null
       - scope: >-
@@ -780,7 +780,7 @@ agenda:
     artifacts:
     - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
     - packing/campaign/session-close-report.yaml
-    - docs/project/handoff-2026-09-04-block-close.md
+    - docs/project/handoffs/handoff-2026-09-04-block-close.md
     outcomes:
       - scope: >-
           Agenda 017 and session-085 terminal, every scope dispositioned, one next entry
@@ -880,7 +880,7 @@ agenda:
           - packing/campaign/agendas/agenda-020-efficiency-block-the-exact-sweep.md
           - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
           - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
-          - docs/project/handoff-2026-09-04-block-close.md
+          - docs/project/handoffs/handoff-2026-09-04-block-close.md
     validation:
       - scope: records-tier
         status: passed

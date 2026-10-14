@@ -276,7 +276,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # took the last count T-070 held; fifty when T-117's exact rational refinements
     # took n = 105 and 292, the last verified ceilings T-056 held; fifty-four when
     # Guzhou0806's continuous-pose kernel (T-145) took both of n = 40's lower-bound lanes
-    # from his clipped-corner transfer (T-133) on the same density.
+    # from his clipped-corner transfer (T-133) on the same density; fifty-five on 12
+    # October, when the regularized exact certificates (T-155) took n = 29's verified
+    # ceiling from its interval certificate (T-009), the one count that held.
     # T-120..T-123 report exact side forms for historical source configurations; no
     # current frontier lane relies on these unverified catalogue assertions. Each claim
     # states its side cut where its root interval's ends agree. T-120's lies above the
@@ -295,6 +297,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     expected = {
         "T-001",
         "T-002",
+        "T-009",
         "T-010",
         "T-015",
         "T-016",
@@ -374,8 +377,15 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-020", "T-021", "T-030", "T-043", "T-044", "T-047", "T-049", "T-057", "T-072",
         "T-056", "T-078", "T-079", "T-087", "T-088", "T-089", "T-092",
     } <= set(derived)  # fmt: skip
+    # A mark names the results the case's bound rests on now. At n = 29 that has been
+    # T-155's regularized certificate since 12 October. At n = 69 its side is exactly the
+    # side of Evan Daniel's certificate, below T-088's, so the case cites both T-101's
+    # replays and T-155's decision for it.
+    assert view.position_marks(records.results["T-009"], view.SUPERSEDED, records) == [
+        "superseded by T-155"
+    ]
     assert view.position_marks(records.results["T-088"], view.SUPERSEDED, records) == [
-        "superseded by T-101"
+        "superseded by T-101 and T-155"
     ]
     assert {str(records.results[entry]["kind"]) for entry in derived} == {
         "lower-bound",
@@ -398,9 +408,11 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     assert view.superseding(records.results["T-037"], records) == ("T-060",)
     # T-019's counts are held now by R071's replay at n = 17 (T-093) and by wand125's
     # check2 certificates of 6 October at n = 18 and 19 (T-102, T-103), which took both
-    # lanes there from T-099 and T-100 the same day.
+    # lanes there from T-099 and T-100 the same day. Since 12 October Overbeck's candidate
+    # equality (T-153), a report at C1, holds n = 17's reported lower bound, and the mark
+    # names it as one.
     assert view.position_marks(records.results["T-019"], view.SUPERSEDED, records) == [
-        "superseded by T-093, T-102 and T-103"
+        "superseded by T-093, T-102, T-103 and T-153 (reported)"
     ]
     # Only a bound supersedes: at n = 13 and 46 a correction and an audit carry the
     # lower bound's evidence beside the optimality results that hold it, at n = 46 since
@@ -435,8 +447,9 @@ def test_a_superseding_report_is_named_as_one() -> None:
     """A result no replay has confirmed holds a case's reported bound and never its
     verified one, so where it supersedes an entry the mark says so after its id. Until
     T-082's replays raised it to C3 on 6 October, T-044's mark named it, a report at C1,
-    beside the confirmed results; no live mark names a report since, so the rule is held
-    on the register with T-082 put back at C1."""
+    beside the confirmed results, and the rule is held on the register with T-082 put
+    back at C1. Since 12 October T-019's mark names one live report, T-153, Overbeck's
+    candidate equality at n = 17, beside the confirmed T-093, T-102 and T-103."""
     view = render_recent_results
     records = view.load_records()
     record = records.results["T-044"]
@@ -453,11 +466,15 @@ def test_a_superseding_report_is_named_as_one() -> None:
     assert mark.reported == {"T-082"}
     assert "T-082 (reported)" in mark.words()
     assert "T-070 (reported)" not in mark.words()
-    for entry in ("T-019", "T-037"):
-        other = records.results[entry]
-        marks = view.position_marks(other, view.standing(other, records), records)
-        assert marks
-        assert all("(reported)" not in words for words in marks), entry
+    other = records.results["T-037"]
+    marks = view.position_marks(other, view.standing(other, records), records)
+    assert marks
+    assert all("(reported)" not in words for words in marks)
+    other = records.results["T-019"]
+    (mark,) = view.supersessions(other, view.standing(other, records), records)
+    assert mark.reported == {"T-153"}
+    assert "T-153 (reported)" in mark.words()
+    assert "T-093 (reported)" not in mark.words()
 
 
 def stating(records: Any, sides: dict[int, str], **changes: Any) -> Record:

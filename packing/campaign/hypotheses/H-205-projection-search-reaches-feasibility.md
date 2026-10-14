@@ -50,7 +50,7 @@ hypothesis:
 ## Why this claim, and why now
 
 The
-[penalty calibration of 2026-09-08](../../atlas/known-best/video/spikes/v2-transitions/NOTES.md)
+[penalty calibration of 2026-09-08](../../atlas/known-best/video/spikes/v2-transitions/notes.md)
 ended in a precondition failure rather than a ranking.
 Zero of 48 runs finished feasible; the least overlap anywhere was $0.0042$ of a unit
 side; and holding eleven squares still for thirteen times as many steps moved the

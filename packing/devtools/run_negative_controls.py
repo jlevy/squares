@@ -431,7 +431,7 @@ PRUNE = frozenset(
         # gone. `e4ad5cedd` (2026-09-30) trimmed the root `README.md` to point at the
         # published site, and it now links neither vector nor any of the four exports.
         # The links that remain are in `atlas/README.md`, `atlas/known-best/README.md` and
-        # `FIGURE-PLAYBOOK.md`, which `linked_pruned_targets` does not scan and no control
+        # `figure-playbook.md`, which `linked_pruned_targets` does not scan and no control
         # link-checks: `check_links` runs on the root README and SYNOPSIS only, and the
         # ledger's `dead_links` on `campaign/` only. A pruned vector now leaves the worker,
         # and the four exports above stopped being inert on the same commit.
@@ -478,7 +478,7 @@ PRUNE = frozenset(
         # beside them are small and stay.
         ROOT / "atlas/known-best/regularized/rendering",
         # The pre-migration transition statistics are frozen historical output;
-        # v2-transitions/NOTES.md records that the live builder now generates its
+        # v2-transitions/notes.md records that the live builder now generates its
         # own statistics elsewhere. No registered control reads this old JSON,
         # and no checked document links it inline. Its 1,371,919 bytes are omitted
         # when Session153's complete proof artifacts take the snapshot to
@@ -904,6 +904,69 @@ REGULARIZED_WITNESSES = frozenset(
     (ROOT / "atlas/known-best/regularized").glob(REGULARIZED_WITNESS_PATTERN)
 )
 PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS | UNREAD_WORKER_OUTPUTS
+# 2026-10-11, #511 (the regularization tools layer): the driver of Evan Daniel's vendored
+# regularizer, the same-side re-solve, the review gallery and their tests took the
+# snapshot to 209,779,702 bytes, 64,502 over the cap. They run on request, outside any
+# gate, and only on run directories outside the checkout. `--audit-snapshot` with these
+# eight paths as candidates finds no registered mention and no inline or result rescue;
+# nothing else in the repository imports them (they import each other and their tests
+# import them). The one control that runs the whole suite points `testpaths` at a missing
+# directory and expects pytest to stop at configuration, before any test is collected,
+# so the consumer contract's declarations of the driver and the gallery are never read
+# in a worker. Left out, the snapshot measures 209,536,887 bytes, 178,313 under the
+# unchanged cap. 2026-10-12: the grid-slack prototype, the drawing-regularity census and
+# their tests join them on the same grounds (`--audit-snapshot` with the four as
+# candidates: no registered mention, no rescue); left out, 209,547,257 bytes, 167,943
+# under the cap. 2026-10-12, the layer's v2 contract and its first admission batch
+# (think-k35c): the index grew by 94,240 bytes, the register by 48,761 with its
+# generated `regularized_drawings` and their RESULTS.md section, and the layer's tools,
+# schema and tests by 65,635, taking the snapshot to 209,756,149, 40,949 over the cap.
+# The layer's own tests and the read-only comparison of Evan Daniel's lists with the
+# layer join this list on the same grounds (`--audit-snapshot` with the five as
+# candidates: no registered mention, no rescue, 78,281 bytes); the index, its schema,
+# the axis tool and `regularized_drawings` stay, since the controls' validate_schemas
+# and check_results read them. Left out, 209,677,868 bytes, 37,332 under the cap; with
+# the layer's documentation, the batch as drawn and this note, 209,685,086 bytes, 30,114
+# under it.
+# The driver's first-pass launcher and its one replica patch join them on the same
+# grounds; only the driver runs the one and applies the other. With the solve retry
+# ladder merged beneath this layer, the hosted shard measured the snapshot over the cap
+# where this checkout measured 17,453 bytes under it; the vendored regularizer's pin check
+# and its tests join the list (`--audit-snapshot`: no registered mention, no rescue,
+# 46,656 bytes), since the pin is checked by its validation step and no control runs it.
+# 2026-10-13: the selection tool that chooses among finished runs by the owner's rule of
+# that day, and its tests, join them on the same grounds (`--audit-snapshot` with the two
+# as candidates: no registered mention, no rescue; 42,891 bytes left out, the snapshot
+# 212,445,002 bytes, 14,047,414 under the cap).
+REGULARIZATION_TOOLS = frozenset(
+    ROOT / relative
+    for relative in (
+        "devtools/regularize_evand.py",
+        "devtools/regularize_evand_shim.py",
+        "devtools/regularize_evand_first_pass.py",
+        "devtools/regularize_evand_patches/probe-flat-stall-stop.patch",
+        "devtools/regularize_same_side.py",
+        "devtools/regularize_gallery.py",
+        "devtools/regularize_gallery.css",
+        "tests/test_regularize_evand.py",
+        "tests/test_regularize_same_side.py",
+        "tests/test_regularize_gallery.py",
+        "devtools/regularize_grid_slack.py",
+        "devtools/census_drawing_regularity.py",
+        "tests/test_regularize_grid_slack.py",
+        "tests/test_census_drawing_regularity.py",
+        "devtools/compare_evand_regularization.py",
+        "tests/test_compare_evand_regularization.py",
+        "tests/test_regularize_axis_components.py",
+        "tests/test_render_regularized_atlas.py",
+        "tests/test_regularized_drawings.py",
+        "devtools/check_vendored_evand.py",
+        "tests/test_check_vendored_evand.py",
+        "devtools/regularize_select.py",
+        "tests/test_regularize_select.py",
+    )
+)
+PRUNE |= REGULARIZATION_TOOLS
 # Build caches: excluded from the counted surface and from every worker tree, by
 # NAME at any depth. Not a prune, and the distinction is the point. Every entry in
 # `PRUNE` is a committed path that a worker does not need; these are generated
@@ -1036,6 +1099,12 @@ COPY_SEPARATELY = (
     ROOT / "resources/web/wand125-linear-n122-2026-10-10/receipts/linear-premises.json",
     ROOT
     / "resources/web/wand125-linear-n122-2026-10-10/receipts/linear-sample-diagnostic.json",
+    # SYNOPSIS.md maps the vendored regularizer's README, and the README links its licence,
+    # credits and manifest; the vendored code itself is never read by a control.
+    REPO / "vendor/evand-regularize/README.md",
+    REPO / "vendor/evand-regularize/LICENSE",
+    REPO / "vendor/evand-regularize/CREDITS.md",
+    REPO / "vendor/evand-regularize/vendored.yaml",
     REPO / ".flowmarkignore",
     REPO / ".gitignore",
     REPO / ".github/PULL_REQUEST_TEMPLATE.md",

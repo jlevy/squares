@@ -58,8 +58,9 @@ The most significant since August 2026:
   Trump’s 1979 packing ([T-011](packing/frontier/RESULTS.md)), by Mannaseh Ahmed’s
   Astra-assisted proof
   [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal), building
-  on this project and Kleddamag ([T-060](packing/frontier/RESULTS.md)). This repository
-  replayed the proof’s exact inputs and audited their composition.
+  on this project and Marc Leonard Overbeck (Kleddamag)
+  ([T-060](packing/frontier/RESULTS.md)). This repository replayed the proof’s exact
+  inputs and audited their composition.
   Trump’s packing is the only optimal one up to symmetry
   ([T-112](packing/frontier/RESULTS.md)). A Lean 4 formalization,
   [11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized), was
@@ -77,7 +78,7 @@ The most significant since August 2026:
 - **Seventeen squares bracketed:** both ends are machine-checked, Guzhou0806’s lower
   bound $s(17) > 4.66044275$ ([T-093](packing/frontier/RESULTS.md)) and the upper bound
   $s(17) \le 4.67553009\ldots$ of John Bidwell’s 1998 packing, certified exactly from
-  Kleddamag’s rational witness ([T-065](packing/frontier/RESULTS.md)).
+  Overbeck’s rational witness ([T-065](packing/frontier/RESULTS.md)).
 
 ## Papers
 
@@ -87,7 +88,7 @@ paper and its PDF. Three form a series on $n = 11$:
 1. [**New Lower Bounds for Square Packing for n = 11**](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html):
    weighted points and 2-of-3 threshold atoms prove $s(11) \ge 3.8264\ldots$.
 2. [**A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares**](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html):
-   Kleddamag’s proof by k-of-m charges and a certificate over 12,028 angle rows.
+   Overbeck’s proof by k-of-m charges and a certificate over 12,028 angle rows.
 3. [**A Review of the Optimality Proof of the Trump Packing of 11 Squares**](https://jlevy.github.io/squares/papers/n11-optimality-review.html):
    Ahmed’s proof that Trump’s packing is optimal.
 
@@ -115,7 +116,7 @@ every claim is graded, and every defect is logged
 | [**Atlas**](packing/atlas/README.md) | Known-best and prospective packings, contact-scaffold enumeration, and deterministic renderings |
 | [**Literature**](packing/resources/README.md) | Retained primary sources, cleaned transcriptions, raw extractions, and the [maintained index of upstream repositories](packing/resources/README.md#recent-external-github-repositories) we integrate from |
 | [**Reports**](#reports) | Research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |
-| [**Code and development guide**](development.md) | Exact verification, search, promotion, the [verification tooling overview](docs/project/verification-tooling.md) of what the checkers cover, and the [validation tiers and behavioral lanes](development.md#validation-tiers) that gate every change |
+| [**Code and development guide**](development.md) | Exact verification, search, promotion, the [verification tooling overview](docs/project/guides/verification-tooling.md) of what the checkers cover, and the [validation tiers and behavioral lanes](development.md#validation-tiers) that gate every change |
 | [**Campaign record**](packing/campaign/README.md) | Hypotheses, preregistered experiments, session records, agendas, and generated ledger |
 | [**Defect log**](defects.md) | Generated record of defects, detection methods, fixes, and regressions |
 
@@ -252,10 +253,12 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These 40 research reports are the durable topical syntheses:
+These 42 research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
+| [Regularizing Every Known-Best Packing for Display](docs/project/research/research-2026-10-11-regularization-state-and-approach.md) | What makes a drawing look irregular in the house conventions, everything tried so far, the spikes on 25 pilot counts, the full run over all 324 and the standard approach recommended for them; the runs stay outside the record |
+| [Evan Daniel’s Regularization Process, Assessed](docs/project/research/research-2026-10-11-evand-regularization-assessment.md) | Evan Daniel’s `search/regularize` read in full and run on three counts, its dilated certificates, the soundness obligations here, a cross-tabulation against `regularize_axis_components/2`, a five-slice adaptation plan and eight owner questions; no packing is regularized |
 | [n17 Restricted Family-Cell Audit](docs/project/research/research-2026-10-09-n17-family-cell-audit.md) | Exact replay forces the free square into side-S2 for a fixed sixteen-square endpoint skeleton on a restricted slider box; no perturbed-core capture or global exclusion |
 | [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | Prospective first-eight shared-centre pilot, exact endpoint feasibility control and bounded certificate contract; no LP implementation or result |
 | [Owned-Core Guarded Clauses](docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md) | Transport of the verified same-core implication to a polynomial pose guard, with endpoint disjointness and the complementary-cover obligation separated |
@@ -487,6 +490,7 @@ Changing agents changes the driver, not the record or the evidence required for 
 | This README | High-level orientation and the relationship among the layers |
 | [`SYNOPSIS.md`](SYNOPSIS.md) | Current research status and roadmap, technical state, workflow contracts, work-unit vocabulary, and handoff |
 | [`epistemics.md`](epistemics.md) | Whole-result V/C/S/N classifications, their executable boundary, and the policy for results by others: scope, credit, import, and reply |
+| [`docs/project/policies/regularization-policy.md`](docs/project/policies/regularization-policy.md) | What a regularized drawing or register regularization must satisfy, how it is reviewed and adjusted, and how it is credited |
 | [`conventions.md`](conventions.md) | IDs, filenames, artifact shape, evidence fields, provenance, corrections, and the boundary between machine checks and review |
 | [`operating-rules.md`](operating-rules.md) | How sessions choose, divide, validate, and hand off work |
 | [Campaign runbook](packing/campaign/README.md) | Hypothesis and experiment mechanics, clocks, budgets, verdicts, and routing |
@@ -512,6 +516,7 @@ Changing agents changes the driver, not the record or the evidence required for 
 ├── docs/images/            Pictures README shows, made by the devtools
 ├── docs/project/           Reports, reviews, specs, postmortems, and dated handoffs
 ├── docs/project/research/  The research reports listed above
+├── docs/project/policies/  Maintained project policies: regularization
 ├── packing/                Code, data, and the research record
 │   ├── campaign/           Hypotheses, experiments, sessions, agendas, and ledger
 │   ├── frontier/           Per-case claims, evidence, generated views, and results

@@ -36,7 +36,7 @@ SQUARE_FILL_PALETTE = SQUARE_HUE_PALETTE
 SQUARE_FILL_OPACITY = 1.0
 # Small grey labels sit a step darker than the muted ink. Helvetica has no
 # semibold, so figure labels buy their legibility from contrast rather than
-# weight; see atlas/known-best/FIGURE-PLAYBOOK.md.
+# weight; see atlas/known-best/figure-playbook.md.
 LABEL_MUTED_COLOR = "#47525f"
 # The figure's one accent: a lower bound this project proved. A step darker and more
 # saturated than any square fill, so it reads as a mark rather than as another tilt

@@ -1,4 +1,4 @@
-"""Source-bound figures for Paper II, the review of Kleddamag's s(11) > 31/8 (T-037).
+"""Source-bound figures for Paper II, the review of Overbeck's s(11) > 31/8 (T-037).
 
 Twelve static SVGs, II.1 to II.12 in reading order (plan
 `plan-2026-10-05-n11-explainer-series.md` §6.2), and the facts their captions state.
@@ -13,7 +13,7 @@ flattens, and the two readings are checked to agree charge for charge.
 Inputs, each pinned by its SHA-256 and listed in `FIGURE_INPUTS` for the renderer's
 `RENDER_INPUTS`:
 
-- Kleddamag's `global-certificate.json` (T-037) and its portable Python replay
+- Overbeck's `global-certificate.json` (T-037) and its portable Python replay
   `evidence/portable/python.json`, in the archived release;
 - T-026's retained certificate on the 1,440-step net;
 - T-059's replay journal (all 12,028 exact row minima with replayed exact witnesses),

@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-12'
+last_reviewed: '2026-10-13'
 results:
   - id: T-001
     kind: lower-bound
@@ -436,7 +436,7 @@ results:
   - id: T-009
     kind: upper-bound
     registered: '2026-08-31'
-    headline: "`s(29) ≤ 5.933833…`, by a Krawczyk interval certificate"
+    headline: "`s(29) ≤ 5.93383346267692918974…`, by a Krawczyk interval certificate"
     established: '2026-08-29'
     claim: >-
       s(29) <= 5.93383346267692918974379895098, by a Krawczyk interval
@@ -467,6 +467,12 @@ results:
       and a retained human oversight record (epistemics.md, No Blind Trust); none is
       retained for this result, so it stands at V3/C3: machine-checked, review record
       pending. The oversight record restores the rung.
+
+      On 12 October 2026 the exact regularized certificate of T-155 took the exact form of
+      the case's verified upper bound to the witness's own side,
+      5.93383346267692918968946061635201914, 5.4e-20 below this certificate's endpoint,
+      which the case record still prints. This entry stays true as stated and is
+      superseded there as a ceiling.
     next_rung: >-
       V4 and C4 need two adversarial AI reviews by distinct reviewers and a human oversight
       record, and none is retained. An exact-algebraic confirmation of the same witness would
@@ -3262,7 +3268,7 @@ results:
     registered: '2026-09-29'
     headline: "`s(11) > 31/8 = 3.875`"
     claim: >-
-      s(11) > 31/8 = 3.875, by Kleddamag's 11-squares-certified-bound v1.0.2 release of 22
+      s(11) > 31/8 = 3.875, by Marc Leonard Overbeck's 11-squares-certified-bound v1.0.2 release of 22
       September 2026. It raised the case's verified lower bound by 0.048002 over T-033 and
       leaves 0.0020836 to Trump's 3.8770835900.
 
@@ -3278,7 +3284,7 @@ results:
       branch and bound (devtools.verify_kleddamag_n11_native), which accepted all 12,028 rows
       with no stalled box.
 
-      Kleddamag,
+      Overbeck,
       [11-squares-certified-bound](https://github.com/Kleddamag/11-squares-certified-bound/tree/6a733f339395c3514f2ab63d8c4aa64cf63c0b5a),
       building on Squares Project (Joshua Levy): the release's ATTRIBUTION.md says the work
       builds on this project and that global-certificate.json was developed from T-026's
@@ -3293,7 +3299,7 @@ results:
         central open case of this project, and T-019 gave not being one as its first reason
         for staying below S5. The bound closes about 96 per cent of the gap the register
         held, from 0.0501 to 0.0021 below Trump's packing, and it is this project's T-026
-        certificate adopted and carried further outside it. The mathematics is Kleddamag's;
+        certificate adopted and carried further outside it. The mathematics is Overbeck's;
         this repository's part is the replay and the method-distinct second decision.
       scored: '2026-09-29'
       by: session-161 (repository; draft)
@@ -3354,7 +3360,7 @@ results:
     registered: '2026-09-29'
     headline: "`s(17) > 461300/99853 = 4.6197910929…`"
     claim: >-
-      s(17) > 461300/99853 = 4.6197910929..., by Kleddamag's 17-squares-certified-bound v1.0.0
+      s(17) > 461300/99853 = 4.6197910929..., by Marc Leonard Overbeck's 17-squares-certified-bound v1.0.0
       release of 21 September 2026. It raised the verified bound by 0.0067450 over
       Guzhou0806's R012 (T-032).
 
@@ -3369,11 +3375,12 @@ results:
       a Python and a JavaScript event-cell sweep, which agreed on all 509 histogram bins; they
       are one method.
 
-      Kleddamag,
+      Overbeck,
       [17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound/tree/a499e2c739ce7853fa04c8bcdc85caf1c2b01b37),
       in the lineage the release names itself: Mira, Guzhou0806 / N17 project, and this
-      repository's threshold-atom work. Its AUTHORS.md says the project was directed by
-      Kleddamag with the research, implementation and verification done by OpenAI Codex.
+      repository's threshold-atom work. Its AUTHORS.md names Overbeck as Kleddamag and
+      says he directed the project, with the research, implementation and verification
+      done by OpenAI Codex.
     scope: {n_values: [17]}
     verification: V3
     confirmation: C3
@@ -3444,8 +3451,8 @@ results:
 
       Guzhou0806 / N17 project,
       [n17-square-packing](https://github.com/Guzhou0806/n17-square-packing/tree/3bf1095c68a28fb9b2750fb0bc99edd5c22b7a61/certificates/R052),
-      on Kleddamag's v1.0.0 mixed point/threshold parent-core architecture (T-038). The
-      release names itself as produced "with AI assistance" and credits Kleddamag, Mira-acc
+      on Marc Leonard Overbeck's v1.0.0 mixed point/threshold parent-core architecture (T-038). The
+      release names itself as produced "with AI assistance" and credits Overbeck, Mira-acc
       and this repository's threshold lineage.
     scope: {n_values: [17]}
     verification: V3
@@ -3490,7 +3497,7 @@ results:
       certificate's 8,937 atoms, 9,261 sites and 44,685 member slots, so that its complete
       coverage decision can run; its four-row sizing run is not a decision. Rung 5 needs a
       proof-assistant formalization reviewed by human experts.
-      Superseded as the verified lower bound on 2026-09-27 by Kleddamag's v1.1.0 (T-040);
+      Superseded as the verified lower bound on 2026-09-27 by Overbeck's v1.1.0 (T-040);
       stays true as stated.
 
   - id: T-040
@@ -3498,7 +3505,7 @@ results:
     registered: '2026-09-29'
     headline: "`s(17) > 232001/50000 = 4.64002`"
     claim: >-
-      s(17) > 232001/50000 = 4.64002, by Kleddamag's 17-squares-certified-bound v1.1.0 release
+      s(17) > 232001/50000 = 4.64002, by Marc Leonard Overbeck's 17-squares-certified-bound v1.1.0 release
       of 26 September 2026. It raised the verified bound by exactly 1/50 over R052 (T-039).
 
       It widens v1.0.0's charge with weighted-threshold features (coefficients 2, 1, 1, 1 at
@@ -3512,11 +3519,11 @@ results:
       Python and JavaScript BigInt checkers over every interval; they agree with each other
       and with all three published ledger pairs, and they are one event-cell method.
 
-      Kleddamag,
+      Overbeck,
       [17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound/tree/13821ddfa24133a8d796648383464574404d5fa0/bounds/4.640020),
       building on Squares Project (Joshua Levy), Mira and Guzhou0806, as its ATTRIBUTION.md
-      states. Its AUTHORS.md says the work was produced with AI agents (OpenAI Codex) under
-      Kleddamag's direction.
+      states. Its AUTHORS.md names Overbeck as Kleddamag and says the work was produced
+      with AI agents (OpenAI Codex) under his direction.
     scope: {n_values: [17]}
     verification: V3
     confirmation: C3
@@ -3562,7 +3569,7 @@ results:
       the adversarial control is the source's controls.py, replayed here (eight corrupted
       certificates rejected by both checkers). Rung 5 needs a proof-assistant formalization
       reviewed by human experts.
-      Superseded as the verified lower bound on 2026-09-27 by Kleddamag's 466001/100000
+      Superseded as the verified lower bound on 2026-09-27 by Overbeck's 466001/100000
       (T-041); stays true as stated.
 
   - id: T-041
@@ -3570,7 +3577,7 @@ results:
     registered: '2026-09-29'
     headline: "`s(17) > 466001/100000 = 4.66001`"
     claim: >-
-      s(17) > 466001/100000 = 4.66001, by the bounds/4.66001/ package of Kleddamag's
+      s(17) > 466001/100000 = 4.66001, by the bounds/4.66001/ package of Marc Leonard Overbeck's
       17-squares-certified-bound, published untagged on 27 September 2026. It raised the
       verified bound by exactly 1999/100000 over T-040.
 
@@ -3585,10 +3592,11 @@ results:
       BigInt checkers, which agree on every interval and with both published ledger pairs;
       they are one event-cell method.
 
-      Kleddamag,
+      Overbeck,
       [17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound/tree/57519bb74085157cb7047ae94c599bce4a006430/bounds/4.66001),
       building on Squares Project (Joshua Levy), Mira and Guzhou0806, as its ATTRIBUTION.md
-      states, produced with AI agents (OpenAI Codex) under Kleddamag's direction.
+      states. Its AUTHORS.md names Overbeck as Kleddamag and says the work was produced
+      with AI agents (OpenAI Codex) under his direction.
     scope: {n_values: [17]}
     verification: V3
     confirmation: C3
@@ -3646,19 +3654,19 @@ results:
       September 2026. R068 (T-043) superseded it the same day, so it never held the case's
       verified field.
 
-      The certificate is Kleddamag's 4.66001 charge (T-041) unchanged, budget 17000402008
+      The certificate is Marc Leonard Overbeck's 4.66001 charge (T-041) unchanged, budget 17000402008
       units of 10^-9, at the larger parent side 32950/33287, with strict cores rebuilt over
       2,808 parent-angle intervals whose endpoints contain every 4.66001 endpoint. Seventeen
       cores at the minimum core charge 1000026844 exceed the budget by 54340.
 
       It was replayed here in full on 29 September 2026 by the source's paired launcher,
-      Guzhou0806's C++ checker with Kleddamag's Node BigInt checker, and
+      Guzhou0806's C++ checker with Overbeck's Node BigInt checker, and
       devtools.audit_guzhou_r068 found the fresh and published ledgers identical on all 2,808
       rows; the two checkers are one event-cell method.
 
       Guzhou0806 / N17 project,
       [n17-square-packing](https://github.com/Guzhou0806/n17-square-packing/tree/d4e2c287408b416683f7d1b7f19e69fb7c592d73/certificates/R067-4.66018),
-      on Kleddamag's charge. The release names itself as made "with AI assistance".
+      on Overbeck's charge. The release names itself as made "with AI assistance".
     scope: {n_values: [17]}
     verification: V3
     confirmation: C3
@@ -3705,7 +3713,7 @@ results:
     headline: "`s(17) > 116511/25000 = 4.66044`"
     claim: >-
       s(17) > 116511/25000 = 4.66044, by Guzhou0806 / N17 project's R068 release of 28
-      September 2026, continuing Kleddamag's public 4.66001 charge (T-041). It raised the
+      September 2026, continuing Marc Leonard Overbeck's public 4.66001 charge (T-041). It raised the
       verified bound by exactly 43/100000 over T-041 and leaves 0.0150901 to Bidwell's
       4.67553009.
 
@@ -3717,14 +3725,14 @@ results:
 
       It was replayed here in full on 28 and 29 September 2026, the first local validation on
       record: the package says its publisher ran no local validation and did not observe its
-      CI. Guzhou0806's own C++ checker and Kleddamag's Node BigInt checker ran over every
+      CI. Guzhou0806's own C++ checker and Overbeck's Node BigInt checker ran over every
       interval, and devtools.audit_guzhou_r068 found the fresh and published ledgers identical
       row for row; the two checkers are one event-cell method.
 
       Guzhou0806 / N17 project,
       [n17-square-packing](https://github.com/Guzhou0806/n17-square-packing/tree/815b16261f852e389968513eec94b4b9e5b3206d/certificates/R068-C010).
-      The package credits Kleddamag for the charge, the proof and the Node BigInt checker
-      (Kleddamag building on Squares Project (Joshua Levy), Mira and Guzhou0806), and
+      The package credits Overbeck for the charge, the proof and the Node BigInt checker
+      (Overbeck building on Squares Project (Joshua Levy), Mira and Guzhou0806), and
       discloses AI assistance.
     scope: {n_values: [17]}
     verification: V3
@@ -4162,7 +4170,7 @@ results:
       Superseded as the verified lower bound by wand125's replayed rectangle certificates
       at n = 27, 28 and 31 on 2026-09-27 (T-045), and at n = 26 and 30 (T-045) and n = 29
       (T-070) on 2026-10-02; at n = 11 it never held the field, being below T-033 and
-      Kleddamag's 31/8 (T-037). Stays true as stated.
+      Marc Leonard Overbeck's 31/8 (T-037). Stays true as stated.
 
   - id: T-048
     kind: lower-bound
@@ -5142,7 +5150,7 @@ results:
     headline: "Reported equality of 12028 n11 row minima reproduced by a complete bound replay"
     claim: >-
       wand125/square-packing-tools reports that its exact general_pose_tree checker reproduces
-      all 12028 per-row core minima of Kleddamag's n11 certificate, release v1.0.2, with
+      all 12028 per-row core minima of Marc Leonard Overbeck's n11 certificate, release v1.0.2, with
       global row minimum 999962528 units and all witnesses replayed. This is the source's
       row-scan equality claim only, not a new proof of the global counting theorem or
       independent rectangle-density coverage.
@@ -5214,7 +5222,7 @@ results:
 
       Ahmed,
       [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c),
-      Astra-assisted work building on Squares Project and Kleddamag. The matching construction
+      Astra-assisted work building on Squares Project and Marc Leonard Overbeck. The matching construction
       is Trump's.
     scope: {n_values: [11]}
     verification: V3
@@ -5320,7 +5328,7 @@ results:
       [11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) is
       imported (bead think-8spq). Its author, Ahmed, who posts on X as
       @ManassehA06, announced that day that the optimality "has been formalized in lean
-      thanks to Astra and Claude", thanking Joshua Levy, Kleddamag, wand125, Guzhou0806 and
+      thanks to Astra and Claude", thanking Joshua Levy, Overbeck, wand125, Guzhou0806 and
       ctjlewis; the retained first post of the thread does not name the repository. Its
       acknowledgements credit Ahmed, EvolvingPrograms and ctjlewis, wand125,
       Benjamin Gurevitch, Julian-JJ and Guzhou0806.
@@ -5350,7 +5358,7 @@ results:
       Zenodo record of 29 September 2026, reported on jlevy/squares#247. The step over 31/8 is
       exactly 31/7999999992, about 3.9e-9.
 
-      The certificate is Kleddamag's v1.0.2 global-certificate.json (T-037) with thirteen
+      The certificate is Marc Leonard Overbeck's v1.0.2 global-certificate.json (T-037) with thirteen
       threshold-charge orbits raised, which puts the minimum core charge at 1000047559 on
       every one of the 12,028 parent-angle intervals, and with the parent and every core side
       scaled by 999999999/1000000000, so that the container over the parent is (31/8) times
@@ -5358,16 +5366,16 @@ results:
       integer units.
 
       One more step of the scale factor, 1 - 2*10^-9, already fails at row 615, so these data
-      admit at most about twice the step. Scaling Kleddamag's certificate alone already passes
+      admit at most about twice the step. Scaling Overbeck's certificate alone already passes
       a full sweep, so the reweighting enlarges the surplus but is not needed for the bound.
 
-      It was replayed here in full by the authors' two verifiers and by Kleddamag's own Python
+      It was replayed here in full by the authors' two verifiers and by Overbeck's own Python
       and JavaScript event-cell sweeps, and decided a second time by this repository's native
       parent-core interval branch and bound, which accepted all 12,028 rows with no stalled
       box.
 
       Ke Wang and Can Li, [Zenodo record 23038546](https://doi.org/10.5281/zenodo.23038546),
-      building on Kleddamag and this project. The record makes no statement about AI
+      building on Overbeck and this project. The record makes no statement about AI
       assistance.
     scope: {n_values: [11]}
     verification: V3
@@ -5393,7 +5401,7 @@ results:
       evidence entries whose methods differ both passed on the retained certificate, which is
       C3 with the two methods shown beside the rung: the event-cell sweeps (exact-algebraic:
       the authors' primary,
-      Kleddamag's Python and JavaScript, and the authors' re-implementation are one
+      Overbeck's Python and JavaScript, and the authors' re-implementation are one
       method) and this repository's directed-rounding interval coverage of every row
       (interval-certified). Both rest on the certificate and on T-037's counting and
       transfer theorem, whose hypotheses were re-checked at the scaled sides.
@@ -5421,8 +5429,8 @@ results:
       and a human oversight record; the 2026-09-30 review is a same-project read and is not
       recorded in this entry's reviews. Rung 5 needs a proof-assistant formalization of the
       transfer theorem and the counting argument, reviewed by human experts. The
-      reweighting is not needed for the bound: Kleddamag's own weights at the scaled sides
-      pass Kleddamag's full event-cell sweep with the same minimum 999962528 and surplus
+      reweighting is not needed for the bound: Overbeck's own weights at the scaled sides
+      pass Overbeck's full event-cell sweep with the same minimum 999962528 and surplus
       107864 (the packet's scale-only receipt), so the scaling alone carries the step and
       the thirteen raised orbits only enlarge the surplus to 428125.
     notes: >-
@@ -5829,7 +5837,7 @@ results:
       of at most that side. The figure is a rational outward ceiling, not the exact side of
       the packing.
 
-      Kleddamag's release of 21 September 2026 carries John Bidwell's 1998 construction
+      Marc Leonard Overbeck's release of 21 September 2026 carries John Bidwell's 1998 construction
       forward as an exact rational witness, s(17) <= 4675530093604551/10^15, which two exact
       implementations here and the source's own checker accept: 17 unit squares, 68 vertices
       contained, 136 pairs separated.
@@ -5838,16 +5846,16 @@ results:
       chart: the root exists and is unique in a frozen rational box, and all 68 wall and 136
       pair obligations hold there, 36 as exact identities and 168 by rational interval
       bounds, and an independent audit reconstructs every interval record. This lowers
-      Kleddamag's rational ceiling in the seventeenth decimal.
+      Overbeck's rational ceiling in the seventeenth decimal.
 
       The ceiling agrees with Bidwell's record in the Kingbird catalogue at the catalogue's
       printed precision. No identity with the catalogue's degree-18 polynomial is proved, no
       new packing is claimed, and optimality is not claimed.
 
-      Kleddamag,
+      Overbeck,
       [Kleddamag/17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound),
-      for the rational witness of Bidwell's packing; its AUTHORS.md says the work was
-      produced with AI agents under Kleddamag's direction.
+      for the rational witness of Bidwell's packing; its AUTHORS.md names Overbeck as
+      Kleddamag and says the work was produced with AI agents under his direction.
     scope: {n_values: [17]}
     verification: V3
     confirmation: C3
@@ -5865,7 +5873,7 @@ results:
       source_keys: ['[Kleddamag n17 certified bound]']
       published: '2026-09-21'
     composition: >-
-      Two parts, both V3/C3. Kleddamag's rational witness is E-n017-kleddamag-rational-upper,
+      Two parts, both V3/C3. Overbeck's rational witness is E-n017-kleddamag-rational-upper,
       replayed here exactly. The registered ceiling is E-n017-certified-endpoint, derived
       here from that witness and audited here; its accepted root proof and its reviewed
       symbolic identities are stated premises of the audit. The second part sets the bound.
@@ -9212,15 +9220,15 @@ results:
       It was replayed here in full on 5 October 2026, the first replay of it outside its
       source: the source retains a completion summary of its own run and says the row
       records are missing, and its GitHub Actions replay passed unobserved by its publisher.
-      The source's run_public.js ran Guzhou0806's C++ checker and Kleddamag's Node BigInt
+      The source's run_public.js ran Guzhou0806's C++ checker and Marc Leonard Overbeck's Node BigInt
       checker over every interval, and devtools.audit_guzhou_r071 found the two fresh
       ledgers identical row for row, every row at 1000026844; the two checkers are T-043's
       byte for byte and one event-cell method. Both refuse two mutated certificates.
 
       Guzhou0806 / N17 project,
       [n17-square-packing](https://github.com/Guzhou0806/n17-square-packing/tree/8c11f6962506940c5de67a9fa73b3d1e2e151196/certificates/R071-C029),
-      on R068's continuation of Kleddamag's 4.66001 charge. The package credits Kleddamag
-      for the 4.66001 framework, proof and BigInt checker (Kleddamag building on Squares
+      on R068's continuation of Overbeck's 4.66001 charge. The package credits Overbeck
+      for the 4.66001 framework, proof and BigInt checker (Overbeck building on Squares
       Project (Joshua Levy), Mira and Guzhou0806), and discloses AI assistance.
     scope: {n_values: [17]}
     verification: V3
@@ -10343,6 +10351,15 @@ results:
       n = 266, 270 and 272 with strictly smaller feasible sides. This entry keeps its
       original source13ee36e certificates, poses, scope, credits and reviews; its
       historical decisions are not proofs of the newly adopted arrangements.
+
+      On 12 October 2026 the exact regularized certificates of T-155 took the exact form of
+      the verified upper bound at 58 of these counts to exact sides 2.2e-16 to 9.9e-15
+      below this entry's rounded-up ones, which the case records still print: at 33 exactly
+      the side of this entry's own certificate, which the record had carried rounded up at
+      the printed precision, and at 25 the witness's own side, below it. The counts
+      jlevy/squares#518 re-houses and n = 17 are not among them. This entry stays true as
+      stated and is superseded there as a ceiling; its certificates, credits and reviews
+      are unchanged, and T-155 names it as the result whose packings it regularizes.
 
   - id: T-102
     kind: lower-bound
@@ -13626,8 +13643,8 @@ results:
       FC-1) and a review that reads this certificate, by the checklist of the 6 October
       declared-net soundness review. The eight-direction sample prices the run and its
       controls at about 4.3 CPU-hours. The owner set its budget on 11 October 2026, and
-      the run is queued in think-r333 after the regularization work
-      (jlevy/squares#497).
+      the run is queued in think-r333 after the regularization of every packing
+      (think-ux1v, planned in jlevy/squares#497).
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
@@ -15254,8 +15271,8 @@ results:
       FC-1) and a review that reads this certificate, by the checklist of the 6 October
       declared-net soundness review. The eight-direction sample prices the run and its
       controls at about 3.3 CPU-hours. The owner set its budget on 11 October 2026, and
-      the run is queued in think-i85v after the regularization work
-      (jlevy/squares#497).
+      the run is queued in think-i85v after the regularization of every packing
+      (think-ux1v, planned in jlevy/squares#497).
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
@@ -15359,7 +15376,7 @@ results:
       mutant at every direction, FC-1) and a review that reads this certificate, by the checklist of the 6 October declared-net
       soundness review. The eight-direction sample prices the run and its controls at about
       4.5 CPU-hours. The owner set its budget on 11 October 2026, and the run is queued
-      in think-i85v after the regularization work (jlevy/squares#497).
+      in think-i85v after the regularization of every packing (think-ux1v, planned in jlevy/squares#497).
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
@@ -15464,7 +15481,7 @@ results:
       as the 2 October review read T-080's. The two-angle sample prices the replay and
       control at about 11.2 CPU-hours (the author's own replay suggests up to about 23).
       The owner set its budget on 11 October 2026, and the replay is queued in
-      think-nd7g after the regularization work (jlevy/squares#497).
+      think-nd7g after the regularization of every packing (think-ux1v, planned in jlevy/squares#497).
     unfinished_confirmations:
       - what: >-
           a complete replay of all 201 angles by the T-080 route, with the certificate
@@ -16193,7 +16210,9 @@ results:
       review and the package preparation were assisted by OpenAI Codex; minutes later a
       revision titled "Correct attribution in submission materials", the one the issue
       names, removed that sentence, and the issue was edited to match, with no reason
-      given. The record keeps both accounts until the author says which stands.
+      given. Asked which account stands, the author answered on jlevy/squares#503 on 12
+      October 2026, for this certificate and the n153 of issue 504 (T-148): "Both solutions
+      were AI assisted by 'PY', an unreleased agentic AI offering by PingYou Ltd."
     scope:
       n_values: [207]
     verification: V3
@@ -16358,8 +16377,10 @@ results:
       first published, and its issue as first posted, said that the verification, the
       comparison review and the package preparation were assisted by OpenAI Codex; minutes
       later a revision titled "Correct attribution in submission materials" removed that
-      sentence, and the issue was edited to match, with no reason given. The record keeps
-      both accounts until the author says which stands.
+      sentence, and the issue was edited to match, with no reason given. Asked on issue 503
+      which account stands for both releases, the author answered there on 12 October 2026:
+      "Both solutions were AI assisted by 'PY', an unreleased agentic AI offering by PingYou
+      Ltd."
     scope:
       n_values: [153]
     verification: V3
@@ -17188,3 +17209,2581 @@ results:
           lineage measured where the record retains the parent.
         verdict: accepted
         covers: [T-152]
+
+  - id: T-153
+    kind: optimality
+    registered: '2026-10-12'
+    headline: "Candidate proof that Bidwell's 1998 packing is optimal, `s(17) = 4.67553009360455…`"
+    claim: >-
+      Marc Leonard Overbeck (Kleddamag) claims, as a candidate proof, that `s(17) = L =
+      4.67553009360455095163…`, the side of John Bidwell's 1998 packing of seventeen unit
+      squares, with the squares closed, independently rotated and allowed to touch.
+
+      His STATEMENT.md defines `F(t,b)=t-3t^2-t^3-t^4+(1-t-t^4+t^5)b+(-3t+t^2-t^3-t^4)b^2` and
+      `G(t,b)=-2t^3-2t^4+(-1+3t-4t^2+t^4+t^5)b+(4-2t-2t^2+2t^3-2t^4)b^2+(-1-5t+4t^2+t^4+t^5)b^3+(2t+2t^2)b^4`,
+      takes `t_0` and `b_0` to 60 places.
+
+      It states, its TeX written out: "There exists exactly one simultaneous real zero
+      `(t*, b*)` in the isolating rectangle `[t0 - 10^-12, t0 + 10^-12] x [b0 - 10^-12, b0 +
+      10^-12]`. Set `L = (6+4t*)/(1+2t*-t*^2)`; its denominator is positive and
+      `4.67553009360455095163 < L < 4.67553009360455095164`. There exists a packing of
+      seventeen unit squares at side `L`, and for every `S >= 0`, existence of such a packing
+      at side `S` implies `L <= S`. Uniqueness of an optimal packing is not claimed."
+
+      The claim is conditional. STATEMENT_STATUS.md says to read it as holding "if the 210
+      obligations of `OBLIGATIONS.json` hold", 15 of them mathematical premises, and calls it
+      "the claim of a candidate proof, not an established theorem". Its five steps are the
+      upper bound; capture at side at most 4675531/10^6 by 98 weighted counting certificates,
+      leaving 11 cases; admission of each case into one of 11 regions; 13 tree certificates,
+      by which ten regions hold no packing below L and the eleventh only packings in a tube
+      around the known one; and a rigidity step, 17 exact rounds and a contraction of ratio
+      159201934153319/200000000000000.
+
+      Its audit was by AI sessions; Guzhou0806 read the
+      premises in an earlier state and ran a checker of his own on two of the 13 trees, and
+      nobody outside has verified the whole.
+
+      Here the argument has been read, with no mathematical defect found in what was read,
+      and parts of the computation have been run, all agreeing with the source: the author's
+      check.py; 34 capture rows and three trees, reproduced with the producer's code; 34
+      capture rows decided again by an independent implementation written from the proof
+      text; and the root, isolated independently. The complete capture recomputation and ten
+      trees have not been run. F, G, the rectangle and the side map are this repository's
+      H-255 chart, so L is the side of the certified endpoint that holds the case's verified
+      upper bound.
+
+      Overbeck,
+      [the-seventeenth-square-candidate](https://github.com/Kleddamag/the-seventeenth-square-candidate/tree/653b9589d0f8a152f01adc56b1d48ba53d49abc3),
+      12 October 2026, building on Squares Project (Joshua Levy), Ahmed's 11SquaresOptimal,
+      Mira, Guzhou0806's N17 project and Muhammad Maaz, as its CREDITS.md states. Its README
+      says: "The mathematics, the engines, the certificates, the checkers, the reviews and the
+      text were produced by AI systems under his direction and to his instructions: Codex
+      (OpenAI) and Claude (Anthropic). They are named and are not authors", and "Within the
+      project no human has read the mathematics."
+    scope: {n_values: [17]}
+    verification: V0
+    confirmation: C1
+    significance:
+      score: 5
+      rationale: >-
+        Scored as a claim, as T-060 was on 29 September while unverified, by the rubric's
+        anchor, movement on a central open case. n = 17 is, with n = 12, one of the two open
+        cases below n = 18; it is the case this project's own lane has worked longest, and
+        the one the owner gave priority on 12 October. The claim settles it exactly at Bidwell's 1998 side,
+        closing the whole 0.01508734360455 gap between the verified floor 4.66044275 and the
+        certified ceiling, where T-093's step was 2.75e-6. The method composes this project's
+        charge and local-isolation recipes with Ahmed's proof shape; that lineage is the
+        credit line's business, not the score's. Significance is separate from whether this
+        candidate proof is correct.
+      scored: '2026-10-12'
+      by: >-
+        Owner priority of 12 October and
+        docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md, section 7
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Overbeck n17 candidate 2026]']
+      published: '2026-10-12'
+    evidence: [E-n017-overbeck-optimality-candidate-report]
+    composition: >-
+      One cited entry, the source's report, which claims the exact value and carries the
+      review of 12 October as its external_review; the lower half sets both rungs. The upper
+      half, a packing at side L, is the certified endpoint T-065 holds
+      (E-n017-certified-endpoint), V3/C3 here and independent of the source; the statement's
+      F, G, rectangle and side map are that chart, which
+      E-n017-overbeck-statement-root-independent decides again. Neither is cited, since
+      citing the first would make this result hold the case's verified upper bound in
+      T-065's place.
+
+      The lower half rests on five steps, and the capture step sets the minimum. Its 98
+      statements, 1,728,000 rows per checker, are the source's reported executions: 34 rows
+      of 21 statements were reproduced with the producer's code
+      (E-n017-overbeck-capture-sample-replay), 34 rows of six statements were decided again
+      by an independent implementation (E-n017-overbeck-capture-independent-sample), and a
+      sample decides no statement whole. Of the 13 trees, three were reproduced with the
+      producer's code (E-n017-overbeck-tree-sample-replay) and ten were not run.
+
+      The rigidity stage's finite rounds and contraction ran in the author's check.py
+      (E-n017-overbeck-candidate-check-py-replay), which recomputes no capture row and no
+      tree. These runs are evidence on the case record and are not cited here: each is a
+      machine-shaped replay that passed on the part it ran, so citing them would make the
+      checker derive a higher rung from parts, which this note would then have to set
+      aside, as T-081's does; the case record cites them instead.
+
+      By epistemics.md's predicates: V3 needs, for every load-bearing part, a published or
+      audited proof or a machine certificate whose replay passed, and the capture step and
+      ten trees have neither, since a partial replay of the producer's computation is not a
+      full replay and the source calls its proof a candidate. No numerical method (V1) or
+      unavailable proof (V2) fits, so the result stands at V0. C3 would need
+      confirming-origin machine evidence with a passing replay for every load-bearing part,
+      and the same parts lack it; C2 needs a method that yields no certificate, which this
+      is not. C1's predicate holds: a qualifying, dated read with its reviewer and note.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, claude-fable-5-1, tbd-strong tier, reasoning xhigh), the
+          mathematical-review lane K2 of the #557 intake, prompted separately from the
+          retention lane K1 and the replay lane K3, sharing no context with either
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-12'
+        scope: >-
+          The statement and its root isolation; each of the five steps with its premises,
+          obligations, computations and trust boundary; the three places the author asks to
+          be read hardest (the class-row lemma, the root-admission geometry with distinctness
+          and the seams, and the hand-overs into the rigidity theorem); the fifteen premises;
+          what each replay would establish; and the record's rungs and significance, at
+          653b9589d. It ran no checker, and did not read the normalized 52-row gate of
+          G20S_PHYSICAL, the tree and capture checkers' code, or any certificate.
+        verdict: accepted
+        covers: [T-153]
+      - path: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md
+        kind: adversarial
+        reviewer: >-
+          an AI agent, the second adversarial review lane of the #557 intake (bead
+          think-4j3n), model claude-opus-5-5, tbd-strong-max tier, reasoning setting max,
+          prompted separately from the first review lane and blind to its document until its
+          own findings were written
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-13'
+        scope: >-
+          The normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110) for every core
+          radius up to 1/5000, re-derived with this review's own code: the root by a
+          Krawczyk test, the 52 base-gap identities by a Groebner basis, the audit of all
+          152 options, and an independent row builder that implies every stored row and
+          carries the B6 prefix, the stop cuts and the five stopped rounds to a ratio of
+          0.79202. Also the tree checkers' specification in full and the Python tree
+          checker at every step that decides acceptance; the capture engine's core, with
+          all 98 budgets recomputed and the 9,000 rows of FRAME_0917 re-decided; the JQ
+          certificate as data; the root admission, target separation and capacity, coarse
+          quartics and stop cuts recomputed exactly; and the upper construction in
+          interval arithmetic, at 653b9589d. It ran no checker of the edition, replayed no
+          tree or capture sweep, did not re-derive the seventeen finite rounds, and did
+          not read the 84 selected clauses, the written frame, KEY_W, C7/C8 and
+          wall-partition premises, the coarse regions' dimensions, verify_classes_wb.js
+          or exact_restricted.py.
+        verdict: accepted
+        covers: [T-153]
+    artifacts:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/README.md
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/facts/statement.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts/statement-comparison.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts/check-py/stdout.txt
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts/recomputation-price.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/upper-bound.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/capture-sample.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/capture-independent.json
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/trees.json
+      - docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md
+    next_rung: >-
+      V3 and C3 need every load-bearing part replayed in full, here or by a third party
+      whose replay is retained here, the first review's section 5:
+      the author's check.py to PASS, done on 12 October; all 98 capture statements, every
+      row, with at least one of the producer's two capture checkers, compared row for row
+      with the stored receipts; all 13 trees with at least one frozen checker and
+      h_report30.py, three of them done; and one mutated-input control per kind, refused.
+      That would be reproduction with the producer's code. An independent implementation of
+      the capture sweep, begun on 34 rows, and of the tree checker would be an attribute
+      beside the rung.
+
+      V4 and C4 need, on top of V3 and C3, the owner's oversight record naming
+      trust-boundary, certificate-meaning and ai-findings. The second adversarial AI review
+      they also need, by a distinct reviewer whose verdict accepts and who reads the
+      normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110), is on file: the review of 13
+      October read the gate, re-derived it with its own code and accepted, with nine
+      defects, none blocking, for the oversight record to disposition. Rung 5 needs the Lean
+      formalization the source plans and has not started. T-154's Lean proof is separate:
+      it proves the same equality by another route and does not formalize this argument.
+
+      On 13 October the owner held the ten-tree replay and the capture recomputation. Each
+      remaining option, with its price and where it could run, is a bead under think-lqtu.
+    unfinished_confirmations:
+      - what: >-
+          all 98 capture statements recomputed in full with the producer's capture checkers,
+          1,728,000 rows each, compared row for row with the stored receipts, with a
+          mutated-certificate control refused: one of the two unfinished parts of C3, which
+          T-153 reaches only when the ten-tree replay below has passed too, so this item
+          stays listed until both have
+        rung: C3
+        link: think-0at1
+        estimated_cost:
+          cpu_hours: 1273
+          cpu_hours_high: 2347
+          basis: >-
+            The sum over the 1,152 selected slices of each stored output's per-row CPU
+            seconds: 1,273 CPU-hours for the Python checker, the one C3 needs, and 2,347 with
+            the Node checker as well, on the author's Linux x86_64 runners with four workers
+            per checker. Lane K3 measured the Python checker here at 1.08 times the stored
+            CPU per row
+            (packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/capture-sample.json).
+          priced: '2026-10-12'
+      - what: >-
+          the ten trees not yet replayed (JG, JPA_v5, G20S, HW, JPG15m_v5, JPG17p_v5,
+          JPG3m_v5, JPG3p_v5, JPW13 and JPWS_v4) with the producer's two v3.0 checkers and
+          h_report30.py, each report compared with the stored second execution, with a
+          mutated-certificate control refused: the other unfinished part of C3, which T-153
+          reaches only when the capture recomputation above has passed too, so this item
+          stays listed until both have
+        rung: C3
+        link: think-fgmr
+        estimated_cost:
+          cpu_hours: 7.1
+          cpu_hours_high: 21
+          basis: >-
+            The stored second execution of these ten trees took 7.1 CPU-hours on the author's
+            macOS arm64 machine; the three trees replayed here ran up to six times slower in
+            the Node checker on this shared host, about 21 CPU-hours for the ten. JPA_v5's
+            Node run peaked at 7.0 GB resident
+            (packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/trees.json).
+          priced: '2026-10-12'
+    notes: >-
+      Registered on 12 October 2026 by the fast path the owner asked for, as T-060 was on 29
+      September: at S5 before the complete replays, with the verified lanes unchanged. The
+      first review was written before lane K3's receipts and proposed V0/C1; those
+      receipts move no rung, as the composition says, since each replays a part of the
+      producer's computation and not all of it, and the case record and not this entry cites
+      them. V0 is declared, with this note as the ladder
+      asks: the only entry for the whole lower half is the source's report, and the source's
+      own executions and internal audit are retained in the source and not here.
+
+      On 13 October the owner confirmed that n = 17 is recorded as reported proved on this
+      claim, at the rungs its evidence earns, and that its verified status stays open until
+      the complete replay passes.
+
+      A newer route to the same equality: Oscar Fitzharding's Lean 4 proof (T-154). By
+      GitHub's server-side times its repository was public later on 12 October 2026, about
+      six hours after this edition's release large-files-v1, and its release v1.0.0 about
+      seven and three-quarter hours after it; n-017's priority notes give the times. It is
+      a separate proof that leaves no premise open within its stated trust boundary, not a
+      formalization of this argument, and its source names this candidate as independent
+      and published on 12 October 2026. This entry stays the first report of the value and
+      keeps the case's reported lower bound.
+
+      The first review lists ten non-blocking defects, among them the ROOT_ADMISSION
+      geometry, written only in the proof text and a script comment (KNOWN_ISSUES.md item
+      1), two routes with different constants for the same step of G20S_PHYSICAL, and file
+      bindings outside the proof packet; its eleven questions for the author are in its
+      section 8. The second lists nine, none blocking, the largest that nothing in the
+      edition rebuilt the normalized model's rows independently of the producer's code,
+      and six questions, the fifth withdrawn by its status addendum of 13 October; its
+      programs and their output are in the packet's review-2/.
+
+      T-093 (R071) keeps the case's verified lower bound, 18641771/4000000; this entry holds
+      the reported one. The edition carries this repository's exp-237 and exp-238
+      certificates and its endpoint checker (THIRD_PARTY.md). Overbeck publishes on GitHub as
+      Kleddamag, the handle under which he published T-037, T-038, T-040, T-041 and T-065,
+      now credited to him by name, and on X as @kleddamag. CREDITS.md lists
+      wand125's certificates, kernel and verifier as context, not as a premise. Issue #557's
+      title says n=18; the source is n = 17.
+
+  - id: T-154
+    kind: simplification
+    registered: '2026-10-13'
+    headline: "`s(17) = 4.67553009360455…` by a second route, a Lean 4 proof with no premise left"
+    claim: >-
+      `s(17) = 4.67553009360455095163…`, T-153's value L, the side of John Bidwell's 1998
+      packing of seventeen unit squares, proved by a second route: Oscar Fitzharding's Lean
+      4 proof, which does not formalize T-153's argument.
+
+      Its theorem, `Sq17.square17_optimality (L : ℝ) : Sq17.HalfPlaneAssembly.PlainPacking L
+      ↔ Sq17.EndpointGeometry.side ≤ L`, says that seventeen closed unit squares, each
+      independently translated and rotated, with pairwise disjoint interiors, fit in the
+      axis-aligned square [0, L]^2 exactly when L is at least `EndpointGeometry.side`;
+      existence at that side is part of it, so the minimum is attained. That constant is
+      T-153's L by identity of definition: `(6+4t)/(1+2t-t^2)` at the unique common zero of
+      the same two polynomials, H-255's F and G, in the same box of radius 10^-12 about
+      exp-237's 60-place centre, which is the chart of the certified endpoint that holds the
+      case's verified upper bound (the packet's receipts/endpoint-comparison.json).
+
+      The route: a cover of the centre box by 24 cells, each holding at most one centre; a
+      census, checked by Lean's kernel, that reduces every occupancy of 17 cells to 35 small
+      patterns and 2,781 full cases; half-plane propagation traces that exclude the patterns
+      and 2,776 ordinary cases at every side up to a little above `side`, branch trees and a
+      chain for four neighbouring cases, and, for the last case, the occupancy of Bidwell's
+      packing, a capture trace into a chart near the endpoint, where 52 contact rows and a
+      dual certificate over 93 boxes force the side to be exactly `side`. Every bridge from
+      a trace to geometry is a Lean theorem.
+
+      The theorem has no certificate-acceptance or case-exclusion premise left. Its trust
+      boundary, as the source states it: the geometric soundness arguments are checked by
+      Lean's kernel, and 13,343 finite certificate facts are decided by `native_decide`, so
+      Lean's compiler, native evaluator and the C toolchain are trusted, with the standard
+      axioms propext, Classical.choice and Quot.sound and no sorryAx.
+
+      The source reports a clean rebuild of the 4,951 modules of the theorem's import
+      closure from its published sources with Lean 4.34.1, on two Linux machines, with the
+      axiom set matching its own build. Nothing here has repeated that build. The review of
+      13 October read the statement, the endpoint, the trust boundary and the chain to the
+      final theorem, and found no mathematical defect; it did not read the checkers'
+      soundness proofs or the certificates.
+
+      Fitzharding,
+      [sq17-lean](https://github.com/ofitzharding/sq17-lean/tree/0a7167efa8dcae7fa73855890630fb7e2de550ed),
+      release v1.0.0 of 12 October 2026. Its README credits Bidwell, Pertti Hämäläinen's 1980
+      arrangement, Friedman's survey, the Squares Project, Ahmed and collaborators'
+      eleven-square formalization as a reference for its trust boundary, and David MacIver's
+      earlier Lean work on a seventeen-square lower bound; issue #565 also names Ahmed's
+      s(11) proof as a methodological reference.
+
+      The README states that Overbeck "published an independent candidate proof of
+      seventeen-square optimality" on 12 October 2026 and that "This repository presents a
+      separate Lean formalization". It says the project "was developed with substantial
+      assistance from Claude and Codex"; the author's post says it was "Built with @OpenAI
+      Astra + @AnthropicAI Opus 5.5" and thanks Ahmed and Joshua Levy for prior work.
+    scope: {n_values: [17]}
+    verification: V0
+    confirmation: C1
+    significance:
+      score: 5
+      rationale: >-
+        Of the reports this record holds, the first proof of s(17) = L that leaves no
+        premise open, within the trust boundary it states: T-153, public earlier the same
+        day by GitHub's times, is a candidate resting on 15 mathematical premises by its own
+        statement. n = 17 is, with n = 12, one of the two open cases below n = 18. Its kind
+        is a simplification because the record already holds the value; what it adds is a
+        route whose whole lower half is one proof-assistant build, so a single complete
+        build, here or by a third party and retained here, would carry it to V3 and C3,
+        where T-153 needs its capture recomputation and ten trees replayed. Significance is
+        separate from whether the proof is correct. Proposed for the owner's confirmation.
+      scored: '2026-10-13'
+      by: Intake of 13 October (think-hcqr), draft for the owner
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Fitzharding n17 Lean 2026]']
+      published: '2026-10-12'
+    evidence: [E-n017-fitzharding-lean-report]
+    composition: >-
+      One cited entry, the source's report (E-n017-fitzharding-lean-report), which claims
+      the exact value and carries the review of 13 October as its external_review; it sets
+      both rungs. The upper half, a packing at side L, is proved in the Lean without native
+      evaluation: endpoint_plainPacking, in PackingStatement, whose 241-module import
+      closure holds no native_decide, wraps EndpointPacking's endpoint_packing, whose
+      18-module closure holds none either (the packet's receipts/closures.json). It is the
+      certified endpoint T-065 holds (E-n017-certified-endpoint), V3/C3 here and
+      independent of the source. That entry is not cited, since citing it would make
+      this result hold the case's verified upper bound in T-065's place.
+
+      The lower half rests on the Lean build: the cover's capacities, the census, the case
+      routing and the local endpoint argument are proved in Lean, several by decide +kernel,
+      and the exclusion of the 35 patterns, the 2,776 ordinary cases and the four
+      neighbouring cases, and the capture trace, rest on the 13,343 native_decide facts. The
+      only record of that build is the source's own receipt.
+
+      By epistemics.md's predicates: V3 needs proof-assistant-checked evidence with a
+      certificate, a replay command and a passing replay, and no build of the proof is
+      retained here, so the result stands at V0, declared with the notes as the ladder asks;
+      no numerical method (V1) or unavailable proof (V2) fits. C3 would need that build with
+      a confirming origin; C2 needs a method that yields no certificate, which this is not.
+      C1's predicate holds: a qualifying, dated read with its reviewer and note.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
+        kind: adversarial
+        reviewer: >-
+          an AI agent, the adversarial review lane of the sq17-lean intake (bead
+          think-xjb2), model claude-opus-5-5 at the tbd-strong tier, reasoning setting xhigh
+          on all 282 of its turns by its rollup
+          (packing/campaign/resource-usage/agent-a45ab9e0e00fe9076.yaml), though its brief
+          did not state one, prompted separately from the packet lane and sharing no context
+          with it
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-13'
+        scope: >-
+          Statement fidelity of Sq17.square17_optimality against the record's s(17) = L; the
+          endpoint constant against exp-237's chart and H-255's formulas, recomputed in
+          exact arithmetic; the trust boundary, from the axiom report and a keyword scan of
+          the 1,215 tree files and the 526 members of generated-sources.tar.gz; that no
+          premise is left; the architecture, its lineage in this project's n = 17 plan and
+          its independence of T-153; the chronology against Overbeck's candidate; and the
+          replay price, at e6ee548. It built and ran nothing from the source, and did not
+          read the checkers' soundness proofs, the generated certificates except as named,
+          or the two release archives it did not download.
+        verdict: accepted
+        covers: [T-154]
+    artifacts:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/README.md
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/PackingStatement.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/EndpointGeometry.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/EndpointRootData.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/clean-build-receipt.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/Square17Optimality.log.gz
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/source-consistency.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/endpoint-comparison.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/cover-comparison.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/closures.json
+      - docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
+    next_rung: >-
+      V3 and C3 need a complete build of the theorem's 4,951-module import closure that the
+      record can rest on, with its axiom receipt: the source's own command run from the
+      retained pin and the three release archives at Lean 4.34.1, here or by a third party
+      whose build is retained here (think-r109). That would be reproduction with the
+      producer's code. The intake's host, with 4 cores, 15 GB of memory and 18 GB of free
+      disk, is too small for it. Two cheaper checks decide parts first and move no rung:
+      building the statement and endpoint closures here and printing their axioms
+      (think-s7s4), and scanning the two release archives not yet scanned (think-c1kz). The
+      impossibility half is decided only by the full build.
+
+      If that build lands before T-153's complete replay, this entry would state a lower
+      bound above n = 17's verified one, and a simplification moves no bound: its standing
+      reads pending adoption until the case record adopts it, and its kind is then
+      revisited, with its result page's registered identity amended by a dated reason in
+      packing/site-urls.yaml (epistemics.md, Result Kinds).
+
+      V4 and C4 need, on top of V3 and C3, a second adversarial AI review by a distinct
+      reviewer whose verdict accepts, and the owner's oversight record naming
+      trust-boundary, certificate-meaning and ai-findings. V5 needs a retained formalization
+      review by a named human expert in Lean and the mathematics who is not the author,
+      checking statement fidelity, the definitions, the axioms (the 13,343 native_decide
+      facts among them) and that build; C5 needs the build made here, an open_review pointer
+      and two such reviews.
+    unfinished_confirmations:
+      - what: >-
+          the source's complete build of the theorem's 4,951-module import closure, from the
+          retained pin and the three v1.0.0 archives with Lean 4.34.1 and the Mathlib
+          v4.34.1 cache, accepted only on REPRODUCTION_ACCEPTED Sq17Lean.Square17Optimality
+          with the axiom set of verification/Square17Optimality.log, run here or by a third
+          party whose build is retained here. It carries no estimated_cost: the source
+          publishes no CPU or wall time, only that the build "requires substantial CPU time
+          and tens of gigabytes of disk and memory" with --jobs 40 --proof-jobs 8 suggested,
+          so the price is to be measured (the review's section 6)
+        rung: C3
+        link: think-r109
+    notes: >-
+      Registered on 13 October 2026 from issue #565, which Fitzharding opened on 12 October
+      asking that the result be registered under his name and the proof linked from the n =
+      17 case page and from #405, and from the owner's report of the repository and the
+      author's post the same day (think-hcqr). It is a result of its own: the owner asked
+      that a formalization be reported as its own result where it is one, and this is a
+      separate proof by another route, not a formalization of T-153's argument; by
+      epistemics.md's kind rules a second proof of a value the record holds is a
+      simplification. V0 is declared, with this note as the ladder asks: the only entry is
+      the source's report of its own build, and no build of the proof is retained here.
+
+      Priority, stated and not defended: by GitHub's server-side times Overbeck's candidate
+      was public first. Both were published on 12 October 2026:
+      Kleddamag/the-seventeenth-square-candidate at 13:46:05Z and its release
+      large-files-v1 at 14:24:20Z; this proof's repository at 20:42:08Z, about six hours
+      after that release, and its release v1.0.0 at 22:06:23Z, about seven and
+      three-quarter hours after it; issue #565 at 22:23:37Z, and the author's post on 13
+      October. n-017's priority notes and the review's section 5 give the sources of the
+      times.
+
+      The source names Overbeck's candidate as independent and published on 12
+      October 2026, and does not say which came first. T-153 is the first report of the
+      value and keeps the case's reported lower bound. Of the reports this record holds,
+      this entry is the first of a proof of the value that leaves no premise open; the
+      source's own search of 12 October, as its README reports it, "found no earlier
+      complete Lean proof of this optimality result".
+
+      The README and the issue say the proof was developed independently of Overbeck's
+      candidate. The code shares none of that candidate's objects, but its public history
+      begins at the release, so the order of development cannot be checked (the review's
+      F-7).
+
+      Lineage, the review's findings F-1 and F-2, to put to the author: the proof runs on
+      this project's n = 17 plan and data, which the README and CITATION.cff credit only as
+      "The Squares Project collects the wider research record".
+
+      The 24 cells are the exp-247
+      cover (H-266) vertex for vertex and under its cell names, with H-259's wall lemma and
+      parameters; the cap 1169/250 is H-266's and the 43,593-orbit census exp-246's; 32 of
+      the 35 excluded patterns are entries of this project's certified sub-pattern ledger,
+      eleven of them closed by wand125 through issue #472; the endpoint chart and layout are
+      H-255's, exp-237's and H-256's, whose 60-place centre is Overbeck's seed of 21
+      September 2026; and the local half follows the 52-row recipe of the review of 2
+      October. The packet's first-party comparisons retain the cover, pattern and endpoint
+      identities (receipts/cover-comparison.json and receipts/endpoint-comparison.json).
+
+      Issue #565 names Ahmed's s(11) proof and its formalization as methodological
+      references for finite exclusion, capture and the local endpoint argument, while the
+      README credits the formalization only for its trust boundary. The bibliography's
+      lineage stays credits-project, as the source's own
+      files state it. What the proof adds to this record is the exclusion of every residual
+      case (3,636 orbits were open under this project's 72 certified entries), the capture,
+      and a formal proof of every bridge from a certificate to geometry.
+
+      The review's other findings: module docstrings that still describe conditional states
+      (F-3); generators and inputs named in the generated files and not published (F-4); the
+      compiled routines inside the trust boundary (F-5); a build receipt with no per-module
+      log, timing or machine description (F-6); and a Zenodo DOI added and then withdrawn
+      while it awaits activation, so the record cites the release (F-8). Its six questions
+      for the author are in its section 9.
+
+  - id: T-155
+    kind: upper-bound
+    registered: '2026-10-12'
+    headline: Exact regularized sides at 59 counts, `5.4e-20` to `9.9e-15` below the ceilings they replace
+    established: '2026-10-12'
+    claim: >-
+      For each of 59 counts n from 28 to 300, s(n) <= s_n, where s_n is the exact side of a
+      rational packing that this project made from the register's known-best witness at n
+      with Evan Daniel's exact solver and regularizer and decided here over Q; at 57 of the
+      counts it is measured here as the witness's packing, and at n = 204 and 299 that is
+      not decided.
+
+      Each s_n lies below the verified upper bound the record held, by 5.4e-20 at n = 29 to
+      9.9e-15 at n = 37, and each is now the exact form of its case's verified upper bound,
+      which the case record still prints at the decimal it printed before. The counts are
+      28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125,
+      128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203,
+      204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293,
+      294, 296, 298, 299 and 300.
+
+      The bounds are s(28) <= 5.824444616674059297016873205016, s(29) <=
+      5.93383346267692918968946061635201914, s(37) <= 6.59861960924436011617837046268, s(39)
+      <= 6.810722083068648851765886665183, s(41) <= 6.926693094468802231581078913560208950…,
+      s(50) <= 7.57142857142857142857142857142857143, s(53) <=
+      7.822875655532295295250807876819630217…, s(54) <=
+      7.846667192843489782943314590960000004…, s(55) <= 7.945771007503912979037467248603,
+      s(69) <= 8.827194655729738915019741327146, s(71) <=
+      8.944071557570315506565203868717210450… and s(83) <= 9.634757648631082029356431370282.
+
+      Then s(87) <= 9.838815269948262260364481342204, s(101) <=
+      10.53553390593273762200422181052425, s(104) <= 10.707106781186547524507915429917,
+      s(107) <= 10.846667192843489783051781262887, s(109) <=
+      10.949747468305832670915408009418, s(122) <= 11.53553390593273762200422181052425,
+      s(124) <= 11.65685424949238019520675489684, s(125) <=
+      11.707106781186547524517915429917, s(128) <= 11.825091968213687029149282424753443192…,
+      s(145) <= 12.53553390593273762200422181052425, s(147) <=
+      12.65685424949238019520675489684 and s(148) <= 12.65685424949238019520675489684.
+
+      Then s(149) <= 12.707106781186547524527915429917, s(151) <=
+      12.822875655532295295379036633375, s(170) <= 13.535533905932737622139577149584, s(171)
+      <= 13.571428571428571428707142857143, s(173) <= 13.65685424949238019520675489684,
+      s(174) <= 13.707106781186547524537915429917, s(178) <=
+      13.846667192843489782943314590960000000…, s(197) <=
+      14.53553390593273762200422181052425, s(198) <= 14.571428571428571428717142857143,
+      s(200) <= 14.65685424949238019520675489684 and s(201) <=
+      14.707106781186547524547915429917.
+
+      Then s(202) <= 14.727922061357855439362477738501, s(203) <=
+      14.778174593052022768557069729084, s(204) <= 14.822875655532295295399036633375, s(205)
+      <= 14.824451146124088223663726065684, s(226) <= 15.53553390593273762200422181052425,
+      s(227) <= 15.5710678118654752440084436210484904, s(229) <=
+      15.65685424949238019520675489684, s(230) <= 15.682926829268292683083658536586, s(231)
+      <= 15.707106781186547524557915429917, s(233) <= 15.778174593052022768567069729084,
+      s(234) <= 15.822875655532295295409036633375 and s(235) <=
+      15.8266056334285680695673962075609972.
+
+      And s(257) <= 16.535533905932737622169577149584, s(260) <=
+      16.65685424949238019520675489684, s(262) <= 16.707106781186547524567915429917, s(264)
+      <= 16.778174593052022768577069729084, s(265) <= 16.778174593052022768577069729084,
+      s(291) <= 17.53553390593273762200422181052425, s(293) <=
+      17.63414634146341463432268292683, s(294) <= 17.65685424949238019520675489684, s(296)
+      <= 17.707106781186547524577915429917, s(298) <= 17.778174593052022768587069729084,
+      s(299) <= 17.822875655532295295429036633375 and s(300) <=
+      17.824123388478543470893201807357410338….
+
+      At 33 counts the certificate is the regularizer's own, at the side the solve reached,
+      scaled by 1 + 1e-20 and rounded up, and that side is exactly the side of Evan Daniel's
+      earlier certificate of the same packing (T-101), which the record had carried rounded
+      up at the fourteen decimals the catalogue prints.
+
+      Those 33 bounds are previously published: Evan Daniel's certificates of 5 October 2026
+      state each side exactly, and T-101's replay here, by two checkers that share no code
+      with each other or with the source, already proves each. The case records cite that
+      replay beside this result's there; what is new at those counts is a second certificate
+      at the same side and the record carrying the side exactly rather than rounded up.
+
+      At 25 the certificate is this project's same-side re-solve of the regularized view at
+      the witness's own side, 6.6e-20 to 1.8e-19 below that certificate's side; at n = 29 it
+      is the same, 5.4e-20 below the endpoint of the interval certificate (T-009).
+
+      Every certificate was decided here on 12 October 2026, every pair and every wall over
+      Q, by sqpack.witness.exact_verify and devtools.check_rational_witness_independent,
+      which share no geometry or verification code with each other: all 59 valid under both,
+      1051241 pair decisions. These are the checkers the regularization run decided the
+      views with, so the replay reproduces that decision with the producer's code.
+
+      Both refuse every certificate with its tightest pair pushed into overlap and with its
+      box shrunk past its least top or right clearance. Both accept each of the 33
+      regularizer certificates with its box shrunk by one unit of its side's denominator,
+      since each clears the top and right walls by more than that, and refuse each of the 26
+      same-side views so shrunk, since each touches the top or right wall.
+
+      Measured against each witness's exact frame under the box's eight symmetries, 57
+      certificates pair one to one with the witness by nearest centres; at n = 204 and 299
+      they do not, where the regularizer reports moving rows of squares by up to 0.56 and
+      0.82. At 37 counts the certificate draws the same picture as the witness; at the other
+      22 it redraws the packing, and the regularized layer decides that drawing on its own.
+
+      The views were made from the packings the Kingbird catalogue credits to their finders,
+      as T-101 and T-009 record them, and the regularizations below name those results. The
+      solver and the regularizer are Evan Daniel's (https://github.com/evand/square-packing,
+      MIT), vendored here; the run, the same-side re-solve, the exact decisions and the
+      registration are this project's. No optimality, local minimum or rigidity is claimed.
+    scope: {n_values: [28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125, 128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293, 294, 296, 298, 299, 300]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 1
+      rationale: >-
+        Fifty-nine verified ceilings moved from fourteen-place round-ups to the exact sides
+        of certificates of packings the record already holds, by at most 9.9e-15 at each: a
+        routine consequence of registering the views the regularization policy holds back,
+        S1. No new packing, no reported side moved and no theorem; the method is Evan
+        Daniel's.
+      scored: '2026-10-12'
+      by: the registering lane's draft (repository)
+    novelty: apparently-novel
+    builds_on:
+      credit: [Daniel]
+      source_keys: ['[Daniel regularizer 2026-10-11]']
+    composition: >-
+      One machine entry decides all 59 bounds, each at its case's verified value: the exact
+      decision here by two checkers that share no code with each other (exact-algebraic),
+      the checkers the producing run used, so reproduced with the producer's code. That is
+      C3 with one machine method. The identity measurements, the drawing decisions and the
+      comparisons with the earlier ceilings, the printed sides and the closed forms are
+      recorded values and set no rung. At the 33 counts whose side is that of Evan Daniel's
+      certificate, T-101's replay by an independent implementation proves the same bound,
+      and the case records cite it beside this entry; this result's rung rests on its own
+      entry alone.
+    regularizations:
+      - n: 28
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 7.53e-20
+          max_turn_deg: 1.297e-34
+      - n: 29
+        of: T-009
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 3
+          max_move: 0.01241
+          max_turn_deg: 0.0
+      - n: 37
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        changes: {re_angled: 3}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 7
+          max_move: 0.1617
+          max_turn_deg: 8.418e-35
+      - n: 39
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        changes: {straightened: 5, re_angled: 2}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 11
+          max_move: 0.07236
+          max_turn_deg: 0.003266
+      - n: 41
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        changes: {straightened: 2}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 5
+          max_move: 0.02334
+          max_turn_deg: 0.0
+      - n: 50
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        changes: {straightened: 2, re_angled: 4}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 6
+          max_move: 0.009524
+          max_turn_deg: 0.0
+      - n: 53
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 3
+          max_move: 0.03682
+          max_turn_deg: 0.0
+      - n: 54
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 8
+          max_move: 0.06804
+          max_turn_deg: 0.0
+      - n: 55
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        changes: {re_angled: 3}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 1.053e-19
+          max_turn_deg: 3.246e-34
+      - n: 69
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        changes: {straightened: 1}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 1.534e-15
+          max_turn_deg: 4.256e-16
+      - n: 71
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        changes: {straightened: 2}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 3
+          max_move: 0.02717
+          max_turn_deg: 0.0
+      - n: 83
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 14
+          max_move: 0.03034
+          max_turn_deg: 2.123e-15
+      - n: 87
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        changes: {straightened: 11, re_angled: 4}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 6
+          max_move: 0.002806
+          max_turn_deg: 2.208e-15
+      - n: 101
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 5.97e-31
+          max_turn_deg: 0.0
+      - n: 104
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 1.444e-19
+          max_turn_deg: 9.781e-35
+      - n: 107
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 4
+          max_move: 0.1038
+          max_turn_deg: 4.175e-34
+      - n: 109
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 1.478e-19
+          max_turn_deg: 9.781e-35
+      - n: 122
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 5.97e-31
+          max_turn_deg: 8.418e-35
+      - n: 124
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        changes: {re_angled: 2}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.415e-30
+          max_turn_deg: 0.0
+      - n: 125
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 1.585e-19
+          max_turn_deg: 9.781e-35
+      - n: 128
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        changes: {straightened: 1}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 7.173e-31
+          max_turn_deg: 0.0
+      - n: 145
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 5.97e-31
+          max_turn_deg: 0.0
+      - n: 147
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.415e-30
+          max_turn_deg: 0.0
+      - n: 148
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.415e-30
+          max_turn_deg: 0.0
+      - n: 149
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 1.726e-19
+          max_turn_deg: 9.781e-35
+      - n: 151
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 1
+          max_move: 0.8229
+          max_turn_deg: 5.476e-34
+      - n: 170
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 1.844e-19
+          max_turn_deg: 9.781e-35
+      - n: 171
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        changes: {re_angled: 8}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 12
+          max_move: 0.02034
+          max_turn_deg: 3.438e-34
+      - n: 173
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.415e-30
+          max_turn_deg: 0.0
+      - n: 174
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 1.868e-19
+          max_turn_deg: 9.781e-35
+      - n: 178
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 16
+          max_move: 0.126
+          max_turn_deg: 0.0
+      - n: 197
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 5.97e-31
+          max_turn_deg: 0.0
+      - n: 198
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        changes: {straightened: 2, re_angled: 8}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 12
+          max_move: 0.02034
+          max_turn_deg: 3.438e-34
+      - n: 200
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.415e-30
+          max_turn_deg: 0.0
+      - n: 201
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.009e-19
+          max_turn_deg: 9.781e-35
+      - n: 202
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.012e-19
+          max_turn_deg: 9.781e-35
+      - n: 203
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        changes: {straightened: 8}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.019e-19
+          max_turn_deg: 9.781e-35
+      - n: 204
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: false
+      - n: 205
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        changes: {straightened: 1}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.026e-19
+          max_turn_deg: 9.754e-34
+      - n: 226
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 5.97e-31
+          max_turn_deg: 8.418e-35
+      - n: 227
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 1
+          max_move: 0.2855
+          max_turn_deg: 0.0
+      - n: 229
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.415e-30
+          max_turn_deg: 0.0
+      - n: 230
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 32
+          max_move: 0.03448
+          max_turn_deg: 4.149e-35
+      - n: 231
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.151e-19
+          max_turn_deg: 9.781e-35
+      - n: 233
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.161e-19
+          max_turn_deg: 9.781e-35
+      - n: 234
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 6
+          max_move: 0.09869
+          max_turn_deg: 5.476e-34
+      - n: 235
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 0.000386
+          max_turn_deg: 0.0
+      - n: 257
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        changes: {straightened: 12, re_angled: 3}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 5.015e-06
+          max_turn_deg: 9.781e-35
+      - n: 260
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.415e-30
+          max_turn_deg: 0.0
+      - n: 262
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.292e-19
+          max_turn_deg: 9.781e-35
+      - n: 264
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.232e-19
+          max_turn_deg: 9.781e-35
+      - n: 265
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.302e-19
+          max_turn_deg: 9.781e-35
+      - n: 291
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 5.97e-31
+          max_turn_deg: 8.418e-35
+      - n: 293
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 27
+          max_move: 0.03448
+          max_turn_deg: 0.0
+      - n: 294
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.65e-30
+          max_turn_deg: 8.418e-35
+      - n: 296
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 2.433e-19
+          max_turn_deg: 9.781e-35
+      - n: 298
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 2
+          max_move: 0.7782
+          max_turn_deg: 9.781e-35
+      - n: 299
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: false
+      - n: 300
+        of: T-101
+        by: project
+        method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        side: same
+        changes: {straightened: 1}
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 7.339e-31
+          max_turn_deg: 0.0
+    evidence:
+      - E-regularized-bounds-2026-10-12-exact-decision
+    artifacts:
+      - packing/cases/regularized_bounds/README.md
+      - packing/cases/regularized_bounds/selection.json
+      - packing/cases/regularized_bounds/exact-decision.json
+      - packing/devtools/register_regularized_bounds.py
+      - packing/devtools/check_rational_witness_independent.py
+      - docs/project/policies/regularization-policy.md
+    controls:
+      - packing/cases/regularized_bounds/negative-controls.json
+      - packing/tests/test_register_regularized_bounds.py
+    next_rung: >-
+      V4 and C4 need two adversarial AI reviews of the complete claim by distinct reviewers
+      and a human oversight record; none is retained. A method-distinct second route, such
+      as the half-angle area route on the certificates converted from Evan Daniel's format,
+      would be shown beside the rung. Where the catalogue's side is an irrational closed
+      form, the verified upper bound reaches the report only through an exact algebraic
+      certificate of the packing at that side.
+    notes: >-
+      Registered on 12 October 2026 under the owner's answer of that day to the
+      regularization policy's question 3, "regularize and correct always": every exact view
+      below its case's verified upper bound is registered as a result, in batches, and drawn
+      once registered. This is the batch from the full run of 11 and 12 October 2026 over n
+      = 1 to 324 and its re-runs; devtools.register_regularized_bounds select took, at each
+      candidate, the view with the least exact side, so that no view of the count lies below
+      the new bound.
+
+      Left out: n = 17, which the owner holds (think-x4v4), and the 42 counts
+      jlevy/squares#518 re-houses, whose witnesses that pull request replaces; at 10 of
+      those (70, 102, 103, 123, 126, 129, 146, 232, 267 and 295) the run also held a view
+      below the bound, and they wait for their new witnesses. Also left out are the nine
+      counts jlevy/squares#553 re-housed after the run (176, 181, 238, 239, 270, 271, 272,
+      304 and 305); of them only 176 held a view below the bound, at
+      13.822875655532295295389036633375, and #553's certificate now proves s(176) <=
+      13.8128562532770564 (T-151), below it.
+
+      Each case record keeps the decimal it printed as its verified upper bound's value, the
+      side of Evan Daniel's certificate rounded up at the printed precision, or at n = 29
+      the interval certificate's endpoint, which lies above the new exact side, and carries
+      the exact side as its exact form, as records at n = 70 and elsewhere print a rounded
+      value beside a rational exact form. So the bound agrees with the catalogue's printed
+      side at the printed precision wherever it did before. Where the catalogue prints a
+      closed form, each exact side lies above it, by 1.4e-36 at n = 50 to 1.8e-19, so the
+      ceiling still trails the report there, as it does at n = 29.
+
+      The id is T-155 because T-151 and T-152 were registered on main by jlevy/squares#553,
+      T-153 by jlevy/squares#560 and T-154, Fitzharding's Lean proof that s(17) = L, by
+      jlevy/squares#588; a renumbering at merge follows the register's rule. Reviews,
+      dispositions and pull-request text written before 14 October 2026, among them the
+      dated verification-gaps review of 13 October, call this batch "T-154"; they are not
+      edited, and their "T-154" is this entry, T-155.
+
+      Of the views as drawings, the run's reclassification after registration admits 16,
+      sends 3 to review (39, 204 and 299) and refuses 3 (53, 151 and 298), where a house or
+      stage total of shared sides falls; the rest draw no change. Registration does not
+      depend on that decision.
+
+      The full run took 3.8 wall hours on four workers, 49,302 CPU seconds, for all 324
+      counts; the decision here took 438.4 CPU seconds. The views were registered by an AI
+      agent (Claude) in the overnight regularization work of 12 October 2026; no review is
+      yet retained.
+
+# Generated by python -m devtools.regularized_drawings from the regularized layer's
+# index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
+regularized_drawings:
+  index: packing/atlas/known-best/regularized/index.json
+  unregistered:
+    - n: 18
+      reason: "no registered result attributes the witness's source Kingbird derived numerical facts"
+    - n: 26
+      reason: "no registered result attributes the witness's source Kingbird derived numerical facts"
+    - n: 66
+      reason: "no registered result attributes the witness's source Kingbird derived numerical facts"
+    - n: 85
+      reason: "no registered result attributes the witness's source Kingbird derived numerical facts"
+  items:
+    - n: 29
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 3
+        max_move: 0.01240888
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-029-regularized.yaml.gz
+    - n: 37
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {re_angled: 3}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 7
+        max_move: 0.1617445
+        max_turn_deg: 8.41808e-35
+      view: packing/atlas/known-best/regularized/n-037-regularized.yaml.gz
+    - n: 41
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 2}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 5
+        max_move: 0.02333619
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-041-regularized.yaml.gz
+    - n: 50
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 2, re_angled: 4}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 6
+        max_move: 0.00952381
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-050-regularized.yaml.gz
+    - n: 54
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 8
+        max_move: 0.06804477
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-054-regularized.yaml.gz
+    - n: 68
+      of: T-118
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 2, re_angled: 1}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 22
+        max_move: 0.03728388
+        max_turn_deg: 0.129312
+      view: packing/atlas/known-best/regularized/n-068-regularized.yaml.gz
+    - n: 70
+      of: T-146
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 0
+        max_move: 7.516648e-20
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-070-regularized.yaml.gz
+    - n: 71
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 2}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 3
+        max_move: 0.02716503
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-071-regularized.yaml.gz
+    - n: 83
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 14
+        max_move: 0.03034451
+        max_turn_deg: 2.12298e-15
+      view: packing/atlas/known-best/regularized/n-083-regularized.yaml.gz
+    - n: 84
+      of: T-130
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 8, re_angled: 7}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 45
+        max_move: 0.07206638
+        max_turn_deg: 1.06592
+      view: packing/atlas/known-best/regularized/n-084-regularized.yaml.gz
+    - n: 86
+      of: T-130
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 30, re_angled: 6}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 64
+        max_move: 0.2786435
+        max_turn_deg: 2.34669
+      view: packing/atlas/known-best/regularized/n-086-regularized.yaml.gz
+    - n: 87
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 11, re_angled: 4}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 6
+        max_move: 0.002806002
+        max_turn_deg: 2.20801e-15
+      view: packing/atlas/known-best/regularized/n-087-regularized.yaml.gz
+    - n: 88
+      of: T-127
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 8, re_angled: 3}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 35
+        max_move: 0.1504462
+        max_turn_deg: 2.36147
+      view: packing/atlas/known-best/regularized/n-088-regularized.yaml.gz
+    - n: 102
+      of: T-146
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 1
+        max_move: 0.02188279
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-102-regularized.yaml.gz
+    - n: 103
+      of: T-146
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 0
+        max_move: 7.516648e-20
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-103-regularized.yaml.gz
+    - n: 105
+      of: T-130
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 31
+        max_move: 0.1631154
+        max_turn_deg: 0.327601
+      view: packing/atlas/known-best/regularized/n-105-regularized.yaml.gz
+    - n: 106
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 1}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 28
+        max_move: 0.4116039
+        max_turn_deg: 2.31046
+      view: packing/atlas/known-best/regularized/n-106-regularized.yaml.gz
+    - n: 107
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 4
+        max_move: 0.1038167
+        max_turn_deg: 4.17525e-34
+      view: packing/atlas/known-best/regularized/n-107-regularized.yaml.gz
+    - n: 108
+      of: T-128
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {re_angled: 2}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 13
+        max_move: 0.1213071
+        max_turn_deg: 0.50547
+      view: packing/atlas/known-best/regularized/n-108-regularized.yaml.gz
+    - n: 110
+      of: T-056
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 3
+        max_move: 0.05404527
+        max_turn_deg: 5.99868e-14
+      view: packing/atlas/known-best/regularized/n-110-regularized.yaml.gz
+    - n: 123
+      of: T-146
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 8
+        max_move: 0.202407
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-123-regularized.yaml.gz
+    - n: 126
+      of: T-139
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 10, re_angled: 3}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 59
+        max_move: 0.1903344
+        max_turn_deg: 28.4472
+      view: packing/atlas/known-best/regularized/n-126-regularized.yaml.gz
+    - n: 127
+      of: T-128
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 13, re_angled: 5}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 53
+        max_move: 0.1915518
+        max_turn_deg: 0.0653528
+      view: packing/atlas/known-best/regularized/n-127-regularized.yaml.gz
+    - n: 129
+      of: T-146
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 22
+        max_move: 0.1274132
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-129-regularized.yaml.gz
+    - n: 130
+      of: T-127
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 15
+        max_move: 0.004243049
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-130-regularized.yaml.gz
+    - n: 131
+      of: T-136
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 3
+        max_move: 0.2662965
+        max_turn_deg: 1.10466e-53
+      view: packing/atlas/known-best/regularized/n-131-regularized.yaml.gz
+    - n: 132
+      of: T-141
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 3, re_angled: 3}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 18
+        max_move: 0.02146846
+        max_turn_deg: 0.346905
+      view: packing/atlas/known-best/regularized/n-132-regularized.yaml.gz
+    - n: 146
+      of: T-150
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 26
+        max_move: 0.0502318
+        max_turn_deg: 1.07177
+      view: packing/atlas/known-best/regularized/n-146-regularized.yaml.gz
+    - n: 152
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 1}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 16
+        max_move: 0.2626856
+        max_turn_deg: 10.8334
+      view: packing/atlas/known-best/regularized/n-152-regularized.yaml.gz
+    - n: 153
+      of: T-148
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 15
+        max_move: 0.1801566
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-153-regularized.yaml.gz
+    - n: 154
+      of: T-136
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 51
+        max_move: 0.06320055
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-154-regularized.yaml.gz
+    - n: 155
+      of: T-149
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 4
+        max_move: 0.02888519
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-155-regularized.yaml.gz
+    - n: 156
+      of: T-149
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 7
+        max_move: 0.01568611
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-156-regularized.yaml.gz
+    - n: 171
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {re_angled: 8}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 12
+        max_move: 0.02034287
+        max_turn_deg: 3.43775e-34
+      view: packing/atlas/known-best/regularized/n-171-regularized.yaml.gz
+    - n: 172
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 2, re_angled: 7}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 69
+        max_move: 0.1901146
+        max_turn_deg: 1.3138
+      view: packing/atlas/known-best/regularized/n-172-regularized.yaml.gz
+    - n: 175
+      of: T-140
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 15
+        max_move: 0.2347488
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-175-regularized.yaml.gz
+    - n: 176
+      of: T-151
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 65
+        max_move: 0.1602348
+        max_turn_deg: 3.0308
+      view: packing/atlas/known-best/regularized/n-176-regularized.yaml.gz
+    - n: 177
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {re_angled: 2}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 28
+        max_move: 0.1182462
+        max_turn_deg: 5.64624
+      view: packing/atlas/known-best/regularized/n-177-regularized.yaml.gz
+    - n: 178
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 16
+        max_move: 0.1260085
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-178-regularized.yaml.gz
+    - n: 179
+      of: T-127
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 27
+        max_move: 0.3164016
+        max_turn_deg: 0.000274934
+      view: packing/atlas/known-best/regularized/n-179-regularized.yaml.gz
+    - n: 180
+      of: T-128
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 21
+        max_move: 0.0327378
+        max_turn_deg: 0.00572958
+      view: packing/atlas/known-best/regularized/n-180-regularized.yaml.gz
+    - n: 181
+      of: T-151
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 3
+        max_move: 0.01862801
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-181-regularized.yaml.gz
+    - n: 182
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {re_angled: 1}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 27
+        max_move: 0.08738553
+        max_turn_deg: 1.00929
+      view: packing/atlas/known-best/regularized/n-182-regularized.yaml.gz
+    - n: 198
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 2, re_angled: 8}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 12
+        max_move: 0.02034287
+        max_turn_deg: 3.43775e-34
+      view: packing/atlas/known-best/regularized/n-198-regularized.yaml.gz
+    - n: 199
+      of: T-127
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 55
+        max_move: 0.3135603
+        max_turn_deg: 1.61089
+      view: packing/atlas/known-best/regularized/n-199-regularized.yaml.gz
+    - n: 206
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 37, re_angled: 4}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 96
+        max_move: 0.3654251
+        max_turn_deg: 1.94952
+      view: packing/atlas/known-best/regularized/n-206-regularized.yaml.gz
+    - n: 207
+      of: T-147
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 0
+        max_move: 1.251e-09
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-207-regularized.yaml.gz
+    - n: 208
+      of: T-127
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 3}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 20
+        max_move: 0.08253422
+        max_turn_deg: 2.29188
+      view: packing/atlas/known-best/regularized/n-208-regularized.yaml.gz
+    - n: 209
+      of: T-140
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 5, re_angled: 1}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 23
+        max_move: 0.05203656
+        max_turn_deg: 0.151234
+      view: packing/atlas/known-best/regularized/n-209-regularized.yaml.gz
+    - n: 210
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 2}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 33
+        max_move: 0.3430005
+        max_turn_deg: 0.499815
+      view: packing/atlas/known-best/regularized/n-210-regularized.yaml.gz
+    - n: 211
+      of: T-149
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 14
+        max_move: 0.02387516
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-211-regularized.yaml.gz
+    - n: 227
+      of: T-155
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 1
+        max_move: 0.2855339
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-227-regularized.yaml.gz
+    - n: 228
+      of: T-128
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 5, re_angled: 6}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 46
+        max_move: 0.2653826
+        max_turn_deg: 0.0986462
+      view: packing/atlas/known-best/regularized/n-228-regularized.yaml.gz
+    - n: 230
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 32
+        max_move: 0.03448276
+        max_turn_deg: 4.149e-35
+      view: packing/atlas/known-best/regularized/n-230-regularized.yaml.gz
+    - n: 232
+      of: T-136
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 52
+        max_move: 0.1491268
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-232-regularized.yaml.gz
+    - n: 234
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 6
+        max_move: 0.09869176
+        max_turn_deg: 5.47587e-34
+      view: packing/atlas/known-best/regularized/n-234-regularized.yaml.gz
+    - n: 236
+      of: T-146
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 0
+        max_move: 1.350926e-19
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-236-regularized.yaml.gz
+    - n: 237
+      of: T-140
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 9, re_angled: 5}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 82
+        max_move: 0.09239296
+        max_turn_deg: 0.660323
+      view: packing/atlas/known-best/regularized/n-237-regularized.yaml.gz
+    - n: 238
+      of: T-151
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 11
+        max_move: 0.08167349
+        max_turn_deg: 4.33173
+      view: packing/atlas/known-best/regularized/n-238-regularized.yaml.gz
+    - n: 239
+      of: T-151
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 16
+        max_move: 0.1352992
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-239-regularized.yaml.gz
+    - n: 240
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 1, re_angled: 2}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 28
+        max_move: 0.3846198
+        max_turn_deg: 0.461031
+      view: packing/atlas/known-best/regularized/n-240-regularized.yaml.gz
+    - n: 241
+      of: T-056
+      by: project
+      method: "regularize_grid_slack/0: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 38
+        max_move: 0.3106441
+        max_turn_deg: 0.0673815
+      view: packing/atlas/known-best/regularized/n-241-regularized.yaml.gz
+    - n: 258
+      of: T-146
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 0
+        max_move: 1.350926e-19
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-258-regularized.yaml.gz
+    - n: 259
+      of: T-136
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 2, re_angled: 27}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 151
+        max_move: 0.1315596
+        max_turn_deg: 0.403258
+      view: packing/atlas/known-best/regularized/n-259-regularized.yaml.gz
+    - n: 261
+      of: T-150
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 0
+        max_move: 1.433421e-10
+        max_turn_deg: 5.82125e-14
+      view: packing/atlas/known-best/regularized/n-261-regularized.yaml.gz
+    - n: 263
+      of: T-146
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 0
+        max_move: 2.05061e-19
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-263-regularized.yaml.gz
+    - n: 266
+      of: T-119
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      changes: {straightened: 14, re_angled: 5}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 27
+        max_move: 0.1194113
+        max_turn_deg: 3.13656
+      view: packing/atlas/known-best/regularized/n-266-regularized.yaml.gz
+    - n: 267
+      of: T-134
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 208
+        max_move: 0.1303293
+        max_turn_deg: 0.584252
+      view: packing/atlas/known-best/regularized/n-267-regularized.yaml.gz
+    - n: 268
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 3, re_angled: 4}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 117
+        max_move: 0.3616834
+        max_turn_deg: 2.00513
+      view: packing/atlas/known-best/regularized/n-268-regularized.yaml.gz
+    - n: 269
+      of: T-146
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 1
+        max_move: 0.00562924
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-269-regularized.yaml.gz
+    - n: 270
+      of: T-151
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 6
+        max_move: 0.1548666
+        max_turn_deg: 3.28361e-53
+      view: packing/atlas/known-best/regularized/n-270-regularized.yaml.gz
+    - n: 271
+      of: T-151
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 18
+        max_move: 0.1062867
+        max_turn_deg: 1.0867e-53
+      view: packing/atlas/known-best/regularized/n-271-regularized.yaml.gz
+    - n: 272
+      of: T-151
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 21
+        max_move: 0.3479096
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-272-regularized.yaml.gz
+    - n: 273
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 5, re_angled: 4}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 36
+        max_move: 0.346411
+        max_turn_deg: 3.88951
+      view: packing/atlas/known-best/regularized/n-273-regularized.yaml.gz
+    - n: 292
+      of: T-146
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 59
+        max_move: 0.1642337
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-292-regularized.yaml.gz
+    - n: 293
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 27
+        max_move: 0.03448276
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-293-regularized.yaml.gz
+    - n: 295
+      of: T-146
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 0
+        max_move: 1.05119e-19
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-295-regularized.yaml.gz
+    - n: 297
+      of: T-056
+      by: project
+      method: "regularize_grid_slack/0: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 56
+        max_move: 0.1463971
+        max_turn_deg: 0.122662
+      view: packing/atlas/known-best/regularized/n-297-regularized.yaml.gz
+    - n: 301
+      of: T-098
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: solved
+      changes: {straightened: 163, re_angled: 1}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 189
+        max_move: 0.4403689
+        max_turn_deg: 1.34112
+      view: packing/atlas/known-best/regularized/n-301-regularized.yaml.gz
+    - n: 302
+      of: T-146
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 18
+        max_move: 0.04981787
+        max_turn_deg: 0.170795
+      view: packing/atlas/known-best/regularized/n-302-regularized.yaml.gz
+    - n: 303
+      of: T-146
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 0
+        max_move: 1.727759e-19
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-303-regularized.yaml.gz
+    - n: 304
+      of: T-152
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 6
+        max_move: 0.007611834
+        max_turn_deg: 0.00384108
+      view: packing/atlas/known-best/regularized/n-304-regularized.yaml.gz
+    - n: 305
+      of: T-152
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 19
+        max_move: 0.13004
+        max_turn_deg: 4.46319
+      view: packing/atlas/known-best/regularized/n-305-regularized.yaml.gz
+    - n: 306
+      of: T-128
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 36
+        max_move: 0.3680417
+        max_turn_deg: 3.09622
+      view: packing/atlas/known-best/regularized/n-306-regularized.yaml.gz
+    - n: 307
+      of: T-136
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 7
+        max_move: 0.0630167
+        max_turn_deg: 8.26288e-52
+      view: packing/atlas/known-best/regularized/n-307-regularized.yaml.gz
+    - n: 308
+      of: T-141
+      by: project
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 19
+        max_move: 0.1565181
+        max_turn_deg: 0.00391055
+      view: packing/atlas/known-best/regularized/n-308-regularized.yaml.gz

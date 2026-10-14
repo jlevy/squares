@@ -846,7 +846,7 @@ def test_retired_transition_statistics_are_not_a_mutation_worker_input(
     for retained in (
         ROOT / "campaign/agent-sessions/session-153-native-full.json",
         ROOT / "campaign/agent-sessions/session-153-native-full.rows.jsonl",
-        source.with_name("NOTES.md"),
+        source.with_name("notes.md"),
     ):
         assert (
             tree / retained.relative_to(controls.REPO)

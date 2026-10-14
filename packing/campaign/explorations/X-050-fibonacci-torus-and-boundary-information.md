@@ -42,8 +42,8 @@ This is W1 source intake, W2 confirmation of reconstructible claims, and W3 asse
 of the next questions.
 It is not a new optimality result or a completed replay of the unseen manuscript.
 The intake is `think-hleq`; the
-[plan](../../../docs/project/specs/active/plan-2026-10-07-fibonacci-torus.md) records
-the parallel review lanes and confirmation contracts.
+[plan](../../../docs/project/specs/done/plan-2026-10-07-fibonacci-torus.md) records the
+parallel review lanes and confirmation contracts.
 
 ## What Was Supplied and What Is Already Known
 

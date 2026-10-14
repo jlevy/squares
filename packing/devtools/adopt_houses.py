@@ -188,7 +188,10 @@ RESULTS: dict[str, Prose] = {
         ai=(
             "The source’s first commit and the issue as first posted said that verification, "
             "comparison review and package preparation were assisted by OpenAI Codex; the "
-            "pinned commit removed that sentence, giving no reason."
+            "pinned commit removed that sentence, giving no reason. Asked which account "
+            "stands, the author wrote on jlevy/squares#503 on 12 October 2026: “Both "
+            "solutions were AI assisted by ‘PY’, an unreleased agentic AI offering by "
+            "PingYou Ltd.”"
         ),
         routes=(
             "The source ran both maintained routes itself before reporting; both predate it, "
@@ -202,7 +205,9 @@ RESULTS: dict[str, Prose] = {
         ai=(
             "The source makes no statement about AI assistance; the same author’s n207 "
             "release, eight minutes earlier, removed a disclosure of OpenAI Codex assistance "
-            "at its pin."
+            "at its pin. Asked which account stands for both releases, the author wrote on "
+            "jlevy/squares#503 on 12 October 2026: “Both solutions were AI assisted by ‘PY’, "
+            "an unreleased agentic AI offering by PingYou Ltd.”"
         ),
         routes=(
             "The source ran both maintained routes itself before reporting; both predate it, "

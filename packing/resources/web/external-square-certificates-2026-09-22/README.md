@@ -13,6 +13,22 @@ The social-source captures are
 [`acquisition/x-tokoharu.txt`](acquisition/x-tokoharu.txt); their attached images are
 retained beside them.
 
+Overbeck’s two posts announcing `s(11) > 31/8` were captured again on 13 October 2026, as
+JSON from X’s syndication endpoint, the form the
+[n = 11 formalization packet](../queuingtheorydotcom-n11-lean-2026-10-06/README.md)
+keeps its announcements in:
+
+| Post | Account | Created | Retrieved | Receipt |
+| --- | --- | --- | --- | --- |
+| 1/2, `2102358756591907112` | @kleddamag, account 1496776810767519746, displayed as “Marc Leonard Overbeck” | 2026-09-22T11:26:02Z | 2026-10-13T17:52:09Z | [`acquisition/tweet-2102358756591907112.json`](acquisition/tweet-2102358756591907112.json) |
+| 2/2, `2102358760471564308`, a reply to 1/2 | the same | 2026-09-22T11:26:03Z | 2026-10-13T17:52:11Z | [`acquisition/tweet-2102358760471564308.json`](acquisition/tweet-2102358760471564308.json) |
+
+Their text and times are those of [`social-transcripts.md`](social-transcripts.md) and
+the September capture, with the “1/2” and “2/2” markers the transcript keeps, and the
+second post’s link expands to `https://github.com/Kleddamag/11-squares-certified-bound`.
+`acquisition/sources.json` lists both under `social_sources`, after the September
+captures, with each one’s size, SHA-256 and retrieval time.
+
 ## Retained Repositories
 
 | Source | Revision | Retention | Public claims relevant here |

@@ -14,7 +14,7 @@
 (`claude/experiment-loop-access-6a0e36`, 55 files, +7,761/−37): the experiment-loop
 skill, the `campaign/` record with its first measured round, the `sqsearch` engine, and
 the consolidation that rebuilt the
-[plan spec](../specs/active/plan-2026-08-22-minimal-packing-toolkit.md) around a shared
+[plan spec](../specs/paused/plan-2026-08-22-minimal-packing-toolkit.md) around a shared
 spine. Reviewed from the standpoint of the five research reports, the
 [standing review](review-2026-08-23-toolkit-docs-and-first-experiments.md), and the
 [search-philosophy report](../research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
@@ -357,7 +357,7 @@ workflow, findings are recorded here and on the PR, not fixed.
 - [A Search Philosophy for Square Packing](../research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
   — the strategy layer the consolidation adopts; source of the calibration correction
   the campaign records.
-- [Minimal packing toolkit plan spec](../specs/active/plan-2026-08-22-minimal-packing-toolkit.md)
+- [Minimal packing toolkit plan spec](../specs/paused/plan-2026-08-22-minimal-packing-toolkit.md)
   — revised by this PR; Phases 2–7 and the revision history.
 - [Infrastructure for Square-Packing Exploration](../research/research-2026-08-22-infrastructure-for-packing-exploration.md)
   — the one-predicate rule and tier model behind D-1.

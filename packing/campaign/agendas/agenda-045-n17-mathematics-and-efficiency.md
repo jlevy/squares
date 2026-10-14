@@ -29,12 +29,12 @@ agenda:
       next entry.
     bead: think-2mzl
     depends_on: []
-    next_evidence: docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md
+    next_evidence: docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md
     workflows:
     - review-planning-oversight
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md
     - packing/campaign/agent-sessions/session-186-n17-mathematics-and-efficiency.md
     parallel_group: n17-six-hour
     outcomes:
@@ -81,7 +81,7 @@ agenda:
     - insight-iteration
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md
     - packing/campaign/agent-sessions/session-186-n17-mathematics-and-efficiency.md
     parallel_group: n17-six-hour
     outcomes:
@@ -129,7 +129,7 @@ agenda:
     - efficiency-loop
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md
     - packing/campaign/agent-sessions/session-186-n17-mathematics-and-efficiency.md
     parallel_group: n17-six-hour
     outcomes:
@@ -169,7 +169,7 @@ agenda:
     - insight-iteration
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md
     - packing/campaign/agent-sessions/session-186-n17-mathematics-and-efficiency.md
     - docs/project/research/research-2026-10-07-n17-global-contact-budget.md
     parallel_group: n17-six-hour
@@ -203,7 +203,7 @@ agenda:
     - remediation
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md
     - packing/campaign/agent-sessions/session-186-n17-mathematics-and-efficiency.md
     parallel_group: n17-six-hour
     outcomes:
@@ -306,7 +306,7 @@ agenda:
 
 [Session186](../agent-sessions/session-186-n17-mathematics-and-efficiency.md) owns
 actual phases and the
-[plan](../../../docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md)
+[plan](../../../docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md)
 owns the fixed schedule.
 Mathematical progress leads; measured mechanics run in parallel.
 

@@ -25,7 +25,7 @@ exploration:
     - packing/campaign/explorations/X-048-n17-optimality-after-n11.md
     - packing/campaign/explorations/X-046-n11-settlement-program.md
     - packing/campaign/explorations/X-050-fibonacci-torus-and-boundary-information.md
-    - docs/project/n17-optimality-explainer.md
+    - docs/project/guides/n17-optimality-explainer.md
     - packing/frontier/n-017.md
     - packing/frontier/results.yaml
     - epistemics.md

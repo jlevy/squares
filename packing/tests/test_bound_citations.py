@@ -871,7 +871,7 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     11: (
         ("Trump 1979, Squares in Squares (confirmed T-011)", "external", "verified"),
         (
-            "Ahmed after Levy, Kleddamag 2026, GitHub (confirmed T-060)",
+            "Ahmed after Levy, Overbeck 2026, GitHub (confirmed T-060)",
             "external",
             "verified",
         ),
@@ -975,8 +975,8 @@ def test_the_recorded_register_gives_these_lines(n: int) -> None:
 @pytest.mark.parametrize(
     ("n", "author", "venue", "entry"),
     [
-        (11, "Ahmed after Levy, Kleddamag", "GitHub", "T-060"),
-        (17, "Guzhou0806 after Kleddamag et al.", "GitHub", "T-093"),
+        (11, "Ahmed after Levy, Overbeck", "GitHub", "T-060"),
+        (17, "Guzhou0806 after Overbeck et al.", "GitHub", "T-093"),
         # Tokoharu's T-047 held n = 26 and 29 until 2026-10-02, when wand125's merged
         # rectangle replays raised both, n = 26 under T-045 and n = 29 under T-070, and
         # the replays of its 1 October certificates raised both again later that day
@@ -1019,8 +1019,9 @@ def test_n29_credits_finder_and_optimizer_and_takes_the_registers_verdict() -> N
 
     Its assurance is whatever `bounds_agree_at_declared_precision` says, as for every other
     case; this test names it so a change of that rule is seen here, not special-cased. The
-    certificate is scored new and the packing is still Schadt and Ellsworth's. T-009
-    remains linked to the case but its weaker ceiling does not confirm the displayed bound.
+    certificate is scored new and the packing is still Schadt and Ellsworth's. Since 12
+    October 2026 the ceiling is the exact regularized view's side (T-155), below T-009's
+    endpoint; it still lies above the truncated decimal, so it confirms no displayed bound.
     """
     case = citations.load_case(29)
     upper = _entry(29)["upper"]
@@ -1029,7 +1030,7 @@ def test_n29_credits_finder_and_optimizer_and_takes_the_registers_verdict() -> N
     assert (upper["basis"], upper["confirmed_by"], upper["results"]) == (
         "external",
         [],
-        ["T-009"],
+        ["T-155"],
     )
     agrees = bounds_agree_at_declared_precision(
         case["reported_upper_bound"], case["verified_upper_bound"]
@@ -1236,7 +1237,7 @@ def test_the_project_lower_bounds_are_exactly_those_first_proved_here() -> None:
 def test_the_star_marks_recent_results_whoever_proved_them() -> None:
     """n = 11 is starred as Ahmed's, and project bounds are too.
 
-    Kleddamag's 3.875, developed from T-026, preceded the exact T-060 proof. Credit
+    Overbeck's 3.875, developed from T-026, preceded the exact T-060 proof. Credit
     is the line's business: joint work names this project after the author, other work
     names only its own lineage, and this project's sole work names the project. n = 18
     was this project's (T-030) until 2026-10-02 and is wand125's rectangle bound since,
@@ -1244,7 +1245,7 @@ def test_the_star_marks_recent_results_whoever_proved_them() -> None:
     """
     lines = {entry["n"]: entry["lower"] for entry in _record()["entries"]}
     assert lines[11]["recent"]
-    assert lines[11]["text"] == "Ahmed after Levy, Kleddamag 2026, GitHub"
+    assert lines[11]["text"] == "Ahmed after Levy, Overbeck 2026, GitHub"
     assert lines[12]["recent"]
     # squarepacker's re-weighting of Daniel's points since 5 October 2026 (T-095), after
     # this project's (T-079), which named the project; the credit names Levy for Route B.

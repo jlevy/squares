@@ -47,7 +47,7 @@ artificial lower bound zero.
 The consumer must bind the accepted lower-bound premise; an unverified numerical lower
 bound would not suffice.
 The accepted bound and its T-093 replay status are recorded in the
-[n17 bracket](../n17-optimality-explainer.md#the-bracket).
+[n17 bracket](../guides/n17-optimality-explainer.md#the-bracket).
 
 ### Component Obstructions
 

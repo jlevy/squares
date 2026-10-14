@@ -172,7 +172,7 @@ The explainer plays, and the README links, two cuts of this page’s Animate mod
 1080p60 with the CITATION section on: $n = 1\ldots100$ under the `social` profile and
 the full $n = 1\ldots324$ under `archive`. They are GitHub Release assets, never
 committed. Why, and what each profile holds, is the
-[delivery-profiles plan](../../docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#publication);
+[delivery-profiles plan](../../docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#publication);
 this section is the procedure, in order.
 The spikes under `packing/atlas/known-best/video/spikes/` are not part of it.
 
@@ -306,7 +306,7 @@ of each `python -m` and `squares-workbench-*` command below.
    (`gh api repos/jlevy/squares/releases/tags/$TAG --jq '.assets[] | [.name, .content_type] | @tsv'`).
    The download itself is served as `application/octet-stream`, which is expected; the
    plan’s
-   [procedure](../../docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#the-procedure)
+   [procedure](../../docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#the-procedure)
    says why a player accepts it.
 
 9. **Open one pull request** with the poster from step 6 and these edits, then run
@@ -318,10 +318,10 @@ of each `python -m` and `squares-workbench-*` command below.
      Figure 2: the tag in its three release URLs and the full cut’s length (“runs 8m
      14s”).
    - The plan’s
-     [What was published](../../docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#what-was-published):
+     [What was published](../../docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#what-was-published):
      tag, commit and date, the table rows from the receipts, the page digest prefix and
      stamp, and the cadence findings from step 5; and the URL in
-     [The embed](../../docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#the-embed)
+     [The embed](../../docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#the-embed)
      if the tag changed.
 
 10. **After it merges**, confirm the deploy as

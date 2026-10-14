@@ -771,8 +771,8 @@
       "n": 17,
       "nagamochi": {"basis":"nagamochi-theorem-2","decimal":"4.162277660168","exact":"1 + sqrt(10)","exact_case":false},
       "operative_lower_bound": {"cites_t007":false,"evidence":["E-n017-guzhou-r071-source-replay"],"exact_form":"18641771/4000000","results":["T-093"],"t007_scope_covers_n":true,"value":"4.66044275"},
-      "reported_lower_bound": {"cites_t007":false,"evidence":["E-n017-guzhou-r071-report"],"value":"4.66044275"},
-      "reported_status": "open",
+      "reported_lower_bound": {"cites_t007":false,"evidence":["E-n017-overbeck-optimality-candidate-report"],"value":"4.67553009360455095163"},
+      "reported_status": "proved",
       "status": "open",
       "support": {
         "area_bound": {"basis":"area","decimal":"4.123105625617","exact":"sqrt(17)","nagamochi_excess":"0.039172034550"},
@@ -793,9 +793,11 @@
           {"confirmation":"C3","id":"T-043","kind":"lower-bound","verification":"V3"},
           {"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},
           {"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},
-          {"confirmation":"C3","id":"T-093","kind":"lower-bound","verification":"V3"}
+          {"confirmation":"C3","id":"T-093","kind":"lower-bound","verification":"V3"},
+          {"confirmation":"C1","id":"T-153","kind":"optimality","verification":"V0"},
+          {"confirmation":"C1","id":"T-154","kind":"simplification","verification":"V0"}
         ],
-        "registered_reported": {"basis":"exact-form","decimal":"4.660442750000","exact":"18641771/4000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.498165089832","sources":[{"evidence":["E-n017-guzhou-r071-report"],"n":17,"proved_by":["Guzhou0806"],"results":["T-093"],"via":"direct"}]},
+        "registered_reported": {"basis":"display-decimal-as-printed","decimal":"4.675530093604","exact":"467553009360455095163/100000000000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.513252433437","sources":[{"evidence":["E-n017-overbeck-optimality-candidate-report"],"n":17,"proved_by":["Overbeck"],"results":["T-153"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"4.660442750000","exact":"18641771/4000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.498165089832","sources":[{"evidence":["E-n017-guzhou-r071-source-replay"],"n":17,"results":["T-093"],"via":"direct"}]}
       },
       "weakened_to": null,

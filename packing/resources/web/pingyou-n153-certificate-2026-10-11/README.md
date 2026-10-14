@@ -239,6 +239,10 @@ certificate (T-146), and Nate Chaoweeraprasit (SQUISH) with the prior n153 const
 boundary-patch approach of its n207 result.
 It claims neither the n70 packing nor patch composition in general.
 The source makes no statement about AI assistance at this pin.
+Asked on [issue #503](https://github.com/jlevy/squares/issues/503#issuecomment-6129716138)
+which account stands, the author answered there on 12 October 2026, for this release and
+the n207 one: “Both solutions were AI assisted by ‘PY’, an unreleased agentic AI offering
+by PingYou Ltd.”
 
 ## Commands
 

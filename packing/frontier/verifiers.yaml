@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-10'
+last_reviewed: '2026-10-13'
 verifiers:
   # --- External programs -------------------------------------------------------------
   - id: V-tokoharu-verify-cpp
@@ -408,7 +408,7 @@ verifiers:
 
   - id: V-kleddamag-n11-verify
     program: verify.py, its Python checker and its JavaScript BigInt secondary checker
-    author: Kleddamag
+    author: Overbeck
     provenance: external
     language: [Python, JavaScript]
     methods: [exact-algebraic]
@@ -427,7 +427,7 @@ verifiers:
 
   - id: V-kleddamag-n17-verify
     program: verify.py, its Python checker and its Node BigInt checker
-    author: Kleddamag
+    author: Overbeck
     provenance: external
     language: [Python, JavaScript]
     methods: [exact-algebraic]
@@ -451,7 +451,7 @@ verifiers:
       - sha256: c22091862df631f8cfd1f1bb8e5013f0b9c216f20be268fcd7104768919c49b7
         path: packing/resources/web/n17-kleddamag-466001-2026-09-27/kleddamag-17-squares-certified-bound/bounds/4.66001/verify_global_variable.js
         note: the Node BigInt checker of 4.66001, which Guzhou0806's R067 to R071 bundle byte for byte
-    note: Guzhou0806's paired n = 17 launchers run Kleddamag's Node BigInt checker beside their own C++.
+    note: Guzhou0806's paired n = 17 launchers run Overbeck's Node BigInt checker beside their own C++.
 
   - id: V-wang-li-n11-verify
     program: verify.py of the Zenodo release
@@ -502,7 +502,7 @@ verifiers:
     methods: [exact-algebraic]
     role: decides
     summary: >-
-      The source's C++ exclusion checker, run interval by interval beside Kleddamag's
+      The source's C++ exclusion checker, run interval by interval beside Overbeck's
       Node BigInt checker by the paired launcher, which requires both to pass.
     source:
       - packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/certificates/R068-C010/upstream/cpp/verify.cpp
@@ -720,7 +720,7 @@ verifiers:
     role: decides
     summary: >-
       The source's ceiling transfer for the fixed B = 9977/10000 and its general pose
-      tree, which reports exact per-row minima for Kleddamag's n = 11 certificate.
+      tree, which reports exact per-row minima for Overbeck's n = 11 certificate.
     source:
       - packing/resources/web/wand125-tools-2026-09-29/upstream.tar.gz
     versions:
@@ -766,6 +766,128 @@ verifiers:
       - packing/resources/web/n17-github-certificates-2026/anabologyco-square17-lower-bound/scripts/check_certificate.py
     versions:
       - {sha256: 6d523f7bfae041d585af174aa1313454b97116a6ded6b8fbbe0ea60365b42f8d, revision: 396da6f7c112f49b50b5f4563ad2486ef38ac909}
+
+  - id: V-overbeck-n17-check-py
+    program: >-
+      check.py, the edition's one checking command, with the producers' runner and the 31
+      public check scripts it runs, check_equivalence.py, check_comparison_records.py and
+      the independent reader's own_endpoint_enclosure.py
+    author: Overbeck
+    provenance: external
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides the structural claim of a candidate n = 17 optimality edition: every file,
+      large file and pin has its digest, the 31 cheap public checks reproduce their recorded
+      outcomes, every stored capture row's decision follows from its recorded numbers, and
+      the stored tree outputs pass. It recomputes no capture row and no tree certificate, so
+      it decides no bound.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/acquisition/upstream-subtree.sha256
+    versions:
+      - sha256: c17240b5189821c9244b1e5568e7d6b73c3c4de0fae741ec4206f9852d86a7cb
+        revision: 653b9589d0f8a152f01adc56b1d48ba53d49abc3
+        note: check.py of the verification edition, version 1 (candidate), as the release notes of large-files-v1 give it
+    note: >-
+      Pinned only and never retained: the edition grants no licence for reuse, so the packet
+      keeps the digests of check.py and of every file it runs (MANIFEST.sha256) and no
+      upstream byte. Its levels 0 to 2 do not run Node.js. The source says AI systems (Codex,
+      Claude) wrote it under Marc Leonard Overbeck's direction.
+
+  - id: V-overbeck-n17-capture-checkers
+    program: >-
+      recompute_slice.py, which recomputes chosen rows of one capture statement with the
+      producers' Python checker exact_classes.py (with exact_general.py, exact_restricted.py,
+      integer_sweep.py and boolean_rule.py) and their Node checker verify_classes_wb.js, and
+      compares both with the stored rows
+    author: Overbeck
+    provenance: external
+    language: [Python, JavaScript]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides, for the rows it is given of one of the 98 capture statements of the candidate
+      n = 17 proof, the per-level minimum charge of every cell in both checkers, and that both
+      agree with each other and with the stored row.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/acquisition/upstream-subtree.sha256
+    versions:
+      - sha256: d6d887911d480ea24639facbd6cf304b54ab38af8d2c96c9e7c15363cd81e47d
+        revision: 653b9589d0f8a152f01adc56b1d48ba53d49abc3
+        note: recompute_slice.py
+      - sha256: 802dc62aa4f2a9e15ae406d39d5161540403972abbf21819660191d67dd6150b
+        revision: 653b9589d0f8a152f01adc56b1d48ba53d49abc3
+        note: exact_classes.py, the Python capture checker
+      - sha256: 7f6b234768f812b7acf515c28cc4ced0e5b7fb5bcd4c0ba03114733975087d40
+        revision: 653b9589d0f8a152f01adc56b1d48ba53d49abc3
+        note: verify_classes_wb.js, the Node capture checker
+    note: >-
+      Pinned only and never retained, for the reason V-overbeck-n17-check-py gives; the
+      packet's manifest pins every source file named above. The source says both checkers
+      were written by sessions of one AI system from one specification.
+
+  - id: V-overbeck-n17-tree-checkers
+    program: >-
+      wxcheck_v30.py and wxcheck2_v30.js, the two frozen v3.0 checkers of SPEC_v3.0.md, with
+      the post-check h_report30.py
+    author: Overbeck
+    provenance: external
+    language: [Python, JavaScript]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides a tree certificate of the candidate n = 17 proof against SPEC_v3.0.md in both
+      checkers; the post-check accepts it only when the root node equals the named region and
+      an EMPTY conclusion has no terminal leaf.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/acquisition/upstream-subtree.sha256
+    versions:
+      - sha256: cf8db52bfa1cc565d8610bf13b279d1b5da2f84c91ce2854d15a3b0a88cd096c
+        revision: 653b9589d0f8a152f01adc56b1d48ba53d49abc3
+        note: wxcheck_v30.py
+      - sha256: 97210adf74a3ebed7cde021a3cb1ff6ea6380d8d2d55540a2a2a1cb17dc27542
+        revision: 653b9589d0f8a152f01adc56b1d48ba53d49abc3
+        note: wxcheck2_v30.js
+      - sha256: 0314aa1f8f742cd7156cc490764c8a308663ba87f359e0d8b97fb3d7189950db
+        revision: 653b9589d0f8a152f01adc56b1d48ba53d49abc3
+        note: h_report30.py
+    note: >-
+      Pinned only and never retained, for the reason V-overbeck-n17-check-py gives. The
+      source says both checkers were written by sessions of one AI system from one
+      specification.
+
+  - id: V-fitzharding-n17-lean
+    program: >-
+      The sq17-lean Lean 4 development (Sq17Lean), built by lake at its pinned toolchain,
+      with scripts/unpack.py authenticating and extracting the three release archives
+      against manifest.json and scripts/reproduce.py compiling the five checker modules to
+      native libraries, building the theorem's import closure and printing its axioms
+    author: Fitzharding
+    provenance: external
+    language: [Lean 4, Python]
+    methods: [proof-assistant-checked]
+    role: decides
+    summary: >-
+      Proves Sq17.square17_optimality, s(17) = L, in Lean 4.34.1 with Mathlib v4.34.1 at
+      d13f23b7: the geometry, the endpoint root, the checkers' soundness and the assembly
+      kernel-checked, and 13,343 finite certificate facts decided by native_decide through
+      five checker modules compiled to native code. The driver accepts a build only on
+      REPRODUCTION_ACCEPTED Sq17Lean.Square17Optimality with the axiom report.
+    source:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/scripts/reproduce.py
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/scripts/unpack.py
+    versions:
+      - {revision: e6ee548090dc1dbf938ecf8590481de837a6a454, note: "the pinned head, whose proof files are release v1.0.0's at 0a7167efa8dcae7fa73855890630fb7e2de550ed (the two later commits change only CITATION.cff), with the three release archives pinned by SHA-256 in the packet; the source reports a clean build of it, not built here"}
+    note: >-
+      Only the theorem file, the nine files whose definitions its statements use, the two control
+      modules, the two data files the packet's comparisons read (ExactCellCoverData.lean and
+      RepresentativeCaseData.lean), the build pins, manifest.json, the two scripts and
+      verification/ are retained; the other 1,201 tree modules and the 3,738 archived modules are pinned by
+      the commit, by manifest.json's SHA-256 of each, and by the archives' SHA-256. The
+      README says the project "was developed with substantial assistance from Claude and
+      Codex".
 
   # --- First-party programs: deciders ----------------------------------------------------
   - id: V-check-basic-bounds
@@ -979,7 +1101,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Runs the pinned general pose tree on every row of Kleddamag's n = 11 certificate,
+      Runs the pinned general pose tree on every row of Overbeck's n = 11 certificate,
       binds the inputs, requires row-minimum equality and re-evaluates each witness exactly.
     source: [packing/devtools/check_general_pose_tree_census.py]
 
@@ -1352,6 +1474,49 @@ verifiers:
       Fraction with every exact checker here. It is a second pair-deciding procedure
       within one method, exact-algebraic, not a second method.
 
+  - id: V-k3-n17-capture-row-checker
+    program: k3_capture_row.py, with compare_independent.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides chosen rows of one fixed-symmetry capture statement of the candidate n = 17
+      proof in Fraction arithmetic, on its own cell arrangement: every cell's charge against
+      its class level, the per-level minima, and the whole certificate's budget, strict
+      inequality and row chain; the comparison holds each minimum to the stored Python and
+      Node rows.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_capture_row.py
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/compare_independent.py
+    independence_record: packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_capture_row.py
+    note: >-
+      Lane K3 of the #557 intake wrote it on 12 October 2026 from the edition's
+      CLASS_ROW_LEMMA.md, PROOF.md section 3 and RESTRICTED_CHECKER.md, without reading the
+      producers' sweep code; its module statement says so and that it imports none of it.
+      Pure Python, about 17 times the producers' CPU per row.
+
+  - id: V-k3-n17-root-isolation
+    program: k3_root_isolation.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides, from STATEMENT.md of the candidate n = 17 proof, that F and G have exactly one
+      common zero in the stated box (a Krawczyk test in rational intervals, and a Sturm count
+      of the resultant), encloses L, compares the chart with exp-237 and tests that L is a
+      root of n-017's degree-18 polynomial; a perturbed F must fail.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_root_isolation.py
+    independence_record: packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_root_isolation.py
+    note: >-
+      Lane K3 of the #557 intake wrote it on 12 October 2026 without reading the author's
+      endpoint programs, as its module statement says. SymPy parses the polynomials and
+      computes the resultant; every decision is Fraction arithmetic.
+
   # --- First-party programs: premise checks and replay drivers ------------------------
   - id: V-evand-exact-certificates
     program: devtools.evand_exact_certificates
@@ -1402,6 +1567,53 @@ verifiers:
     source:
       - packing/devtools/audit_n11_lean.py
       - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/AuditN11Statement.lean
+
+  - id: V-fitzharding-n17-source-manifest
+    program: check_source_manifest.py, the sq17-lean packet's consistency check
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [proof-assistant-checked]
+    role: premises
+    summary: >-
+      Reads the sq17-lean packet and a checkout of its pin as data: holds every tree module
+      and root file to the size and SHA-256 manifest.json gives, lists for each archive the
+      member count manifest.json records beside the modules it assigns to that archive (it
+      opens no archive), holds the axiom report of Sq17.square17_optimality to the three
+      standard axioms and 13,343 native_decide facts with no other axiom and no sorryAx,
+      and the axiom and control logs to the digests of the source's receipt. It builds
+      nothing and decides no bound.
+    source:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/check_source_manifest.py
+
+  - id: V-fitzharding-n17-premise-comparisons
+    program: >-
+      compare_endpoint.py, compare_cover.py and check_closures.py, the sq17-lean packet's
+      comparisons with this project's n = 17 data
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Reads sq17-lean's Lean files as text and compares them exactly with this project's
+      records: the endpoint's polynomials, midpoint, radius and side map with exp-237's
+      certificate and H-255's formulas, the Lean's contraction certificate recomputed and
+      the side to 60 places; the 24 cells with UNIQUE_24 (exp-247) and the 35 patterns,
+      up to the cover's symmetry, with the admitted entries of the certified sub-pattern
+      ledger; and, on a checkout of the pin and the release archive generated-sources.tar.gz,
+      each module of the statement's and the upper bound's import closures, held to
+      manifest.json's size and SHA-256, for native_decide and the other tokens
+      devtools.audit_n11_lean counts. It runs nothing from the source and decides no bound.
+    source:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/compare_endpoint.py
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/compare_cover.py
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/check_closures.py
+    note: >-
+      Retained on 13 October 2026, after review A of PR #588, from the scratch programs of
+      the adversarial review (docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md,
+      section 10), whose outputs it reproduces; the outputs are the packet's
+      receipts/endpoint-comparison.json, cover-comparison.json and closures.json.
 
   - id: V-audit-n17-endpoint-receipt
     program: devtools.audit_n17_endpoint_receipt
@@ -1921,3 +2133,22 @@ verifiers:
       jobs, required controls and fourteen complete selected houses.
     note: Reconciles retained executions and ordinary private scientific inputs. No geometric predicate
       runs and admission alone confers no confirmation rung.
+  - id: V-register-regularized-bounds
+    program: devtools.register_regularized_bounds
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Selects the regularized views whose exact side lies below the case's verified upper
+      bound from the regularization runs' reports, retains each view as the run wrote it,
+      measures its identity against the witness's exact frame, hands each view to
+      sqpack.witness.exact_verify and devtools.check_rational_witness_independent, which
+      decide it, makes the negative controls, and writes the case records' verified upper
+      lane.
+    source: [packing/devtools/register_regularized_bounds.py]
+    note: >-
+      Reads the views and the receipts; decides nothing itself. The two programs it hands
+      each view to are the ones the run that made the views decided them with, so its
+      replay is a reproduction with the producer's code.

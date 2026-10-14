@@ -287,7 +287,7 @@ No accepted proof source, receipt, count or frontier value was changed.
 [levels]: ../../../epistemics.md
 [reproduction]: ../../../packing/resources/web/n11-optimality-2026-09-29/README.md#reproducing-the-independent-checks
 [citation-review]: review-2026-09-30-n11-explainer-citations-and-docs.md
-[illustrations]: ../specs/active/plan-2026-09-30-n11-optimality-illustrations.md
+[illustrations]: ../specs/done/plan-2026-09-30-n11-optimality-illustrations.md
 [generic-result]: ../../../packing/resources/web/n11-optimality-2026-09-29/receipts/generic-mask2095-intake/full-result.json
 [generic-objects]: ../../../packing/resources/web/n11-optimality-2026-09-29/receipts/generic-mask2095-intake/objects/
 [fresh-check]: ../../../packing/devtools/check_n11_generic_fresh.py

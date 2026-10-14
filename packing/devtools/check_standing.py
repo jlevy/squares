@@ -31,7 +31,10 @@ same direction, in both lanes:
 - an entry that is the **current best** states, at some case, exactly the verified bound
   (the reported one, where it is the current best as reported), and never more than the
   record carries;
-- a **second certificate** states exactly the verified value at every case;
+- a **second certificate** states exactly the verified value at every case, and a
+  reported one may state exactly the reported value instead where the verified lane does
+  not beat it: a report that proves again a value an open case's reported lane holds under
+  another entry's citation (`restates`);
 - an entry with **no standing**, one whose evidence claims no bound, states none.
 
 An entry that still holds one case of several is not superseded, and this reports the
@@ -70,7 +73,7 @@ from typing import Any, NamedTuple
 
 from devtools import render_recent_results as view
 from devtools.build_bound_citations import own_evidence
-from devtools.check_results import kind_label, scope_values
+from devtools.check_results import SIMPLIFICATION, kind_label, scope_values
 
 LOWER = "lower"
 UPPER = "upper"
@@ -105,13 +108,16 @@ _FOR = re.compile(r"`? for `?n = (?P<cases>\d[\d, …]*(?: and \d+)?)")
 
 BEATEN = "beaten"
 #: Confirmation rungs that no replay reached: an entry at one is held in the reported
-#: lane alone when it is superseded.
-UNREPLAYED = frozenset({"C0", "C1"})
+#: lane alone. The one partition `render_recent_results` also labels a second certificate
+#: by, so the lane and the word agree at every rung.
+UNREPLAYED = view.UNREPLAYED
 EN_DASH = "\u2013"
 EQUAL = "equal"
 EXCEEDS = "exceeds"
 #: The directions each bound kind bounds, the only ones in which it can improve on its
-#: case record: a lower bound's words may quote a ceiling, and that is no claim of its.
+#: case record: a lower bound's words may quote a ceiling, and that is no claim of its. A
+#: simplification has none of its own; the relations its words state stand in
+#: (`directions`).
 KIND_DIRECTIONS: Mapping[str, tuple[str, ...]] = {
     "lower-bound": (LOWER,),
     "upper-bound": (UPPER,),
@@ -243,27 +249,58 @@ def findings(record: Mapping[str, Any], records: view.Records) -> list[Finding]:
     return found
 
 
+def directions(record: Mapping[str, Any], found: Sequence[Finding]) -> frozenset[str]:
+    """The directions in which an entry's stated bounds are claims of its own: those its
+    kind bounds (`KIND_DIRECTIONS`), and for a simplification, which proves again a result
+    the record holds and states that result's relation, every direction its words state.
+    So `s(17) = …` is a claim on both sides whether its kind is optimality or a second
+    proof of one, and a kind that is no bound claims none."""
+    kind = str(record.get("kind"))
+    if kind == SIMPLIFICATION:
+        return frozenset(finding.direction for finding in found)
+    return frozenset(KIND_DIRECTIONS.get(kind, ()))
+
+
 def improvements(record: Mapping[str, Any], records: view.Records) -> list[Finding]:
     """The bounds an entry states that are strictly better than its case record's bound of
     the same direction in a lane the entry can hold: the reported lane for a report
     (`UNREPLAYED`), either lane for a replayed result, since two lanes are never mixed.
-    Only a direction its kind bounds counts (`KIND_DIRECTIONS`), and a kind that is no
-    bound improves on nothing.
+    Only a direction the entry claims counts (`directions`), and a kind that is no bound
+    improves on nothing.
 
     Each is a bound that nothing on record has replaced, so an entry that holds no case
     bound and states one is pending adoption (`render_recent_results.PENDING_ADOPTION`)
-    and not superseded. A tie is no improvement: the case record holds that value under
-    another entry's citation. Compared as `relation` compares, by sets of numbers: cut
-    decimals improve on a bound only where every number they stand for is better than
-    every number the case record's bound may be."""
+    and not superseded: a simplification replayed here before its case records adopt the
+    value it proves again is one. A tie is no improvement: the case record holds that
+    value under another entry's citation. Compared as `relation` compares, by sets of
+    numbers: cut decimals improve on a bound only where every number they stand for is
+    better than every number the case record's bound may be."""
     report = str(record.get("confirmation")) in UNREPLAYED
-    directions = KIND_DIRECTIONS.get(str(record.get("kind")), ())
+    found = findings(record, records)
+    claimed = directions(record, found)
     return [
         finding
-        for finding in findings(record, records)
-        if finding.direction in directions
+        for finding in found
+        if finding.direction in claimed
         and (finding.reported == EXCEEDS or (not report and finding.verified == EXCEEDS))
     ]
+
+
+def restates(record: Mapping[str, Any], records: view.Records) -> bool:
+    """Whether an entry states at least one bound and every one equals its case record's
+    bound of the same direction in the lane the entry can hold: the verified lane for a
+    replayed result, and for a report (`UNREPLAYED`) the reported lane, where the verified
+    lane must not beat it either, since a reported value the verified lane has passed is
+    replaced whatever the reported lane still carries. A simplification that holds no
+    bound and restates its case record's value so is a second certificate
+    (`render_recent_results.standing`), such as a report that proves again the value an
+    open case's reported lane holds under another entry's citation."""
+    found = findings(record, records)
+    if str(record.get("confirmation")) in UNREPLAYED:
+        held = [f.reported == EQUAL and f.verified != BEATEN for f in found]
+    else:
+        held = [f.verified == EQUAL for f in found]
+    return bool(held) and all(held)
 
 
 def citing(record: Mapping[str, Any], records: view.Records) -> list[int]:
@@ -340,11 +377,21 @@ def problems(record: Mapping[str, Any], standing: str, records: view.Records) ->
                 "cites its evidence: the record has taken it in"
             )
     elif standing in {view.SECOND_CERTIFICATE, view.SECOND_CERTIFICATE_REPORTED}:
-        off = [f for f in found if f.verified != EQUAL]
+        # A reported second certificate may restate the reported value of an open case,
+        # where the verified lane does not beat it (`restates`).
+        reported_ok = standing == view.SECOND_CERTIFICATE_REPORTED
+        off = [
+            f
+            for f in found
+            if f.verified != EQUAL
+            and not (reported_ok and f.reported == EQUAL and f.verified != BEATEN)
+        ]
         if off:
+            stated = "the verified value"
+            if reported_ok:
+                stated += ", or a reported one the verified bound does not beat"
             wrong.append(
-                f"{entry} is a second certificate, yet at {_at(off)} it does not state "
-                "the verified value"
+                f"{entry} is a second certificate, yet at {_at(off)} it does not state {stated}"
             )
     else:
         lane = "reported" if standing == view.HOLDS_REPORTED else "verified"
@@ -366,7 +413,10 @@ def problems(record: Mapping[str, Any], standing: str, records: view.Records) ->
 def summary(record: Mapping[str, Any], standing: str, records: view.Records) -> str:
     """One line for an entry: its standing, and where its stated bounds still hold."""
     found = findings(record, records)
-    lane = "reported" if standing == view.HOLDS_REPORTED else "verified"
+    reported = standing == view.HOLDS_REPORTED or (
+        standing == view.SECOND_CERTIFICATE_REPORTED and restates(record, records)
+    )
+    lane = "reported" if reported else "verified"
     holds = [f for f in found if (f.reported if lane == "reported" else f.verified) == EQUAL]
     better = improvements(record, records) if standing == view.PENDING_ADOPTION else []
     beaten = [f for f in found if f.verified == BEATEN and f not in holds]

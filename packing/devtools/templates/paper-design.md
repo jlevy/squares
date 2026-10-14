@@ -2770,14 +2770,14 @@ weight, the gap above and the width of every line and chip, and
 The three papers on $n = 11$ are one series, read in order, and every listing of them
 keeps that order: the Papers page, the home cards (one line of three), README and each
 paper’s strip.
-[The series plan](../../../docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md)
+[The series plan](../../../docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md)
 holds the decisions and their evidence; these are the rules a change to any of the three
 keeps.
 
 | Part | Slug | Explains |
 | --- | --- | --- |
 | I | `n11-lower-bounds-explainer` | The project’s point and 2-of-3 certificates: T-018, T-025, T-026 |
-| II | `n11-threshold-bound-review` | Kleddamag’s `s(11) > 31/8` (T-037): k-of-m charges, parents with strict cores over angle rows, the exact sweep |
+| II | `n11-threshold-bound-review` | Overbeck’s `s(11) > 31/8` (T-037): k-of-m charges, parents with strict cores over angle rows, the exact sweep |
 | III | `n11-optimality-review` | Ahmed’s `s(11) = T` (T-060): cover, pose invariant, charge transfer, symmetry, capture, isolation |
 
 - **Every paper stands alone, and each concept has one owner.** One paper derives a

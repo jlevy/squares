@@ -167,9 +167,9 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     rendered: tuple[str, str],
 ) -> None:
     """The article carries one slot for its front; the page and the Markdown edition take
-    it from `paper_front`: the original proof first, by Kleddamag's name in bold and the
-    repository's address as a plain link; this review's own credits a line's space
-    below; the draft's version linking the version history; then the dates from
+    it from `paper_front`: the original proof first, by Marc Leonard Overbeck's name in
+    bold and the repository's address as a plain link; this review's own credits a line's
+    space below; the draft's version linking the version history; then the dates from
     `sqpack.release`'s `THRESHOLD_*` names. The hero sets the title's formula as the
     page's own math span, as Part I does, and the head keeps the title plain."""
     article = ARTICLE.read_text(encoding="utf-8")
@@ -185,7 +185,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     assert lines[0] == (
         '<span class="credits-source">From the original proof by '
         '<a href="https://x.com/kleddamag" target="_blank" rel="noopener noreferrer">'
-        "<strong>Kleddamag</strong></a></span>"
+        "<strong>Marc Leonard Overbeck</strong></a></span>"
     )
     assert lines[1] == (
         f'<span class="credits-source"><a href="https://{address}" target="_blank" '
@@ -214,7 +214,8 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     # The shared rule keeps the hero's caps off the formula (`paper-publication.css`).
     assert ".hero h1 .tex,\n.hero h1 .kpress-math {" in html
     assert markdown.startswith(
-        f"# {paper.HERO_TITLE}\n\n- From the original proof by [**Kleddamag**](https://x.com/kleddamag)\n"
+        f"# {paper.HERO_TITLE}\n\n"
+        "- From the original proof by [**Marc Leonard Overbeck**](https://x.com/kleddamag)\n"
     )
     assert (
         f"- {release.THRESHOLD_REVIEW_EDITION} ([version history](#version-history))"
@@ -392,7 +393,7 @@ def test_relative_link_must_resolve_to_a_repo_file() -> None:
 
 
 def test_the_archived_sources_resolve_and_are_declared() -> None:
-    """Every archived Kleddamag file the article links exists in the retained copy, is
+    """Every archived Overbeck file the article links exists in the retained copy, is
     declared as a citation source, and so is one of the page's inputs."""
     article = ARTICLE.read_text(encoding="utf-8")
     archive = "../../resources/web/external-square-certificates-2026-09-22/kleddamag-11/"

@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-10'
+last_reviewed: '2026-10-12'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -3492,7 +3492,7 @@ issues:
       bead: think-r333
       note: Priced at about 4.3 CPU-hours from an eight-direction diagnostic sample (receipts in
         wand125-fine-net-n29-2026-10-10). The owner set its budget on 11 October 2026, and the replay is
-        queued in think-r333 after the regularization work (jlevy/squares#497). The 1163/200 report and its evidence
+        queued in think-r333 after the regularization of every packing (think-ux1v, planned in jlevy/squares#497). The 1163/200 report and its evidence
         entry stand, and the unreported 2327/400 certificate of dd6a7cc stays with think-ndvg's
         2026-10-09 watch read.
     - what: Run a reviewed maintained-only complete seven-case native capture and whole-net v2 control
@@ -3778,14 +3778,28 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/438#issuecomment-6116242868
+      outdated:
+      - '#553, in review, registers SQUISH''s #500 packings at 238 and 239 and moves those two cases,
+        keeping T-127 as history; #553 merged on 12 October, and T-151 is the house at 238 and 239
+        with T-127 as history'
+    - url: https://github.com/jlevy/squares/issues/438#issuecomment-6130070537
+      date: '2026-10-12'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: precision-refinements-14
+        id: T-127
+      corrects:
+      - https://github.com/jlevy/squares/issues/438#issuecomment-6127527608
     close_when: The fourteen finite bounds and three withdrawals are published from main with their
       actual evidence scope, and the owner posts the final registration disposition.
     read_through: '2026-10-08T03:08:01Z'
     notes: >-
       The final reply of 12 October says that #553, in review, registers SQUISH's #500 packings at
-      238 and 239 and moves those two cases, keeping T-127 as history. When #553 merges, that
-      statement is to be marked `outdated` on the final reply, and a one-line follow-up saying so
-      names the final reply in `corrects` (think-fvz4).
+      238 and 239 and moves those two cases, keeping T-127 as history. #553 merged on 12 October:
+      that statement is marked `outdated` on the final reply, and the follow-up posted that day,
+      which says T-151 is now the house at both and T-127 remains it at 88, 130, 179, 199 and 208,
+      names the final reply in `corrects` (think-fvz4, think-ckjc).
   - number: 445
     title: 'verify_n17_bb_certificate.py: full mode keeps every internal node in memory'
     author: wand125
@@ -4385,6 +4399,19 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/481#issuecomment-6116243829
+      outdated:
+      - '#553, in review, registers and adopts the author''s #500 packings at 270 and 305, at 305
+        through Francisco Couzo''s #506 refinement; #553 merged on 12 October, and T-151 is the
+        house at 270 and T-152 at 305'
+    - url: https://github.com/jlevy/squares/issues/481#issuecomment-6130070910
+      date: '2026-10-12'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fifteen-new-packings
+        id: T-136
+      corrects:
+      - https://github.com/jlevy/squares/issues/481#issuecomment-6127531070
     close_when: The import and its disposition are on main and the owner has posted the resulting state;
       local and global optimality are outside this request.
     notes: >-
@@ -4394,9 +4421,11 @@ issues:
       replay confirmed, and, as on #238, no comment is to be posted only to name them.
 
       The final reply of 12 October says that #553, in review, registers and adopts the author's
-      #500 packings at 270 and 305, at 305 through Francisco Couzo's #506 refinement. When #553
-      merges, that statement is to be marked `outdated` on the final reply, and a one-line follow-up
-      saying so names the final reply in `corrects` (think-fvz4).
+      #500 packings at 270 and 305, at 305 through Francisco Couzo's #506 refinement. #553 merged
+      on 12 October: that statement is marked `outdated` on the final reply, and the follow-up
+      posted that day, which says T-151 is now the house at 270 and T-152 at 305, with T-136
+      verified and not selected at both, names the final reply in `corrects` (think-fvz4,
+      think-ckjc).
   - number: 483
     title: 'n=70 exact rational precision refinement of Ryan Xu''s packing: registration request'
     author: ebdeleeuw
@@ -4884,6 +4913,19 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/488#issuecomment-6116244574
+      outdated:
+      - 'at 270 and 305, #553, in review, registers SQUISH''s #500 and the author''s #506 sides and
+        moves both cases, keeping T-140 as history; #553 merged on 12 October, and T-151 is the
+        house at 270 and T-152 at 305, with T-140 as history at both'
+    - url: https://github.com/jlevy/squares/issues/488#issuecomment-6130071279
+      date: '2026-10-12'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: six-exact-certificates
+        id: T-140
+      corrects:
+      - https://github.com/jlevy/squares/issues/488#issuecomment-6127533578
     close_when: The import and its disposition are on main and the owner has posted the resulting state;
       optimality and the credit for the starting packings' constructions stay with their sources.
     notes: >-
@@ -4893,9 +4935,11 @@ issues:
       and, as on #238, no comment is to be posted only to name them.
 
       The final reply of 12 October says that #553, in review, registers SQUISH's #500 and the
-      author's #506 sides at 270 and 305 and moves both cases, keeping T-140 as history. When #553
-      merges, that statement is to be marked `outdated` on the final reply, and a one-line follow-up
-      saying so names the final reply in `corrects` (think-fvz4).
+      author's #506 sides at 270 and 305 and moves both cases, keeping T-140 as history. #553
+      merged on 12 October: that statement is marked `outdated` on the final reply, and the
+      follow-up posted that day, which says T-151 is now the house at 270 and T-152 at 305 and
+      T-140 remains it at 175, 209 and 237, names the final reply in `corrects` (think-fvz4,
+      think-ckjc).
   - number: 489
     title: 'New packings: s(132), s(308), s(343), s(344): registration request'
     author: evand
@@ -4990,6 +5034,20 @@ issues:
       - result: hunt3-343-344
       corrects:
       - https://github.com/jlevy/squares/issues/489#issuecomment-6116244764
+      outdated:
+      - '#553, in review, records Francisco Couzo''s #506 side at 344 as a verified beyond-horizon
+        row; #553 merged on 12 October, and that row, 18.994353244944, supersedes the Hunt 3 row at
+        344'
+    - url: https://github.com/jlevy/squares/issues/489#issuecomment-6130071583
+      date: '2026-10-12'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: hunt3-132-308
+        id: T-141
+      - result: hunt3-343-344
+      corrects:
+      - https://github.com/jlevy/squares/issues/489#issuecomment-6127534278
     close_when: The import and its disposition, including the beyond-horizon counts, are on main and the
       owner has posted the resulting state; Kevin Fang's credit for the two-wedge constructions and
       optimality stay with their sources.
@@ -5000,9 +5058,10 @@ issues:
       replay confirmed, and, as on #238, no comment is to be posted only to name them.
 
       The final reply of 12 October says that #553, in review, records Francisco Couzo's #506 side
-      at 344 as a verified beyond-horizon row. When #553 merges, that statement is to be marked
-      `outdated` on the final reply, and a one-line follow-up saying so names the final reply in
-      `corrects` (think-fvz4).
+      at 344 as a verified beyond-horizon row. #553 merged on 12 October: that statement is marked
+      `outdated` on the final reply, and the follow-up posted that day, which says the row
+      supersedes the author's Hunt 3 row there by 9.73e-05, his 343 row stays and T-141 remains
+      the house at 132 and 308, names the final reply in `corrects` (think-fvz4, think-ckjc).
   - number: 494
     title: 'n17 hard tail: wall-chain elimination (width 1) does not see m851903''s obstruction — float negative'
     author: evand
@@ -5134,9 +5193,10 @@ issues:
       its pinned certificate and witness, measured the two patches where the source places them and
       found no blocking defect. Registered as T-147 at V3/C3; the case record's house adoption is
       the next layer. The first commit, 0d8b9c1, and the issue as first posted disclosed OpenAI
-      Codex assistance; the pinned commit and the edited issue removed it without a reason, and
-      which account stands is the author's to say.
-    read_through: '2026-10-11T10:31:52Z'
+      Codex assistance; the pinned commit and the edited issue removed it without a reason. Asked
+      which account stands, the author answered on 12 October, for this issue and #504: "Both
+      solutions were AI assisted by 'PY', an unreleased agentic AI offering by PingYou Ltd."
+    read_through: '2026-10-12T17:57:46Z'
     results:
     - key: n207-exact-certificate
       claim: s(207) <= 148809603730436756319360591381170501178639/10^40 =
@@ -5185,6 +5245,9 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/503#issuecomment-6125247333
+      outdated:
+      - 'the AI-assistance question is still open; the author answered on #503 on 12 October 2026,
+        for both issues, and the record carries the answer'
     close_when: The import and its disposition are on main, the house adoption at 207 has landed or
       is owned, the author has been asked which AI-assistance account stands, and the owner has
       posted the resulting state; optimality is outside this request.
@@ -5193,6 +5256,17 @@ issues:
       E-pingyou-503-certificate-report and E-pingyou-503-exact-feasibility. The confirmation of 12
       October named both at the status they hold now, the report reviewed and the replay confirmed,
       and, as on #238, no comment is to be posted only to name them.
+
+      BuddenPing's comment of 12 October 2026, 17:57:46Z
+      (https://github.com/jlevy/squares/issues/503#issuecomment-6129716138), answers the
+      question both replies asked: "Both solutions were AI assisted by "PY", an unreleased agentic
+      AI offering by PingYou Ltd." It covers #504 as well. T-147 and T-148, their case records,
+      both packets' READMEs, their bibliography and evidence entries and the resources README now
+      carry it in the author's words, and devtools.state_ai_assistance holds both case records to
+      it. A short thank-you saying the record now carries the statement is owed here once that
+      change is on main (think-ckjc). The final reply's "still open" statement is marked
+      `outdated`, so a reply is due here until the thank-you names that reply in `corrects`
+      (review A3 of #558).
   - number: 504
     title: 's(153) ≤ 12.870013850408: registration request'
     author: BuddenPing
@@ -5215,8 +5289,10 @@ issues:
       its pinned certificate and witness and found no blocking defect; the lineage from the n70 is
       by construction, not by pose. Registered as T-148 at V3/C3; the case record's house adoption
       is the next layer. The issue omits the template's AI-assistance section; the same author's
-      #503 disclosed OpenAI Codex assistance and then removed it.
-    read_through: '2026-10-11T20:26:51Z'
+      #503 disclosed OpenAI Codex assistance and then removed it, and on #503 the author answered
+      on 12 October, for both issues: "Both solutions were AI assisted by 'PY', an unreleased
+      agentic AI offering by PingYou Ltd."
+    read_through: '2026-10-12T17:57:46Z'
     results:
     - key: n153-exact-certificate
       claim: s(153) <= 6435006925203522001385040447/500000000000000000000000000 =
@@ -5271,6 +5347,9 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/504#issuecomment-6125249586
+      outdated:
+      - 'the AI-assistance question is still open; the author answered on #503 on 12 October 2026,
+        for both issues, and the record carries the answer'
     close_when: The import and its disposition are on main, the house adoption at 153 has landed or
       is owned, and the owner has posted the resulting state; optimality and the undilated contact
       solution are outside this request.
@@ -5279,6 +5358,14 @@ issues:
       E-pingyou-504-certificate-report and E-pingyou-504-exact-feasibility. The confirmation of 12
       October named both at the status they hold now, the report reviewed and the replay confirmed,
       and, as on #238, no comment is to be posted only to name them.
+
+      The AI-assistance question was answered on #503, for both issues, by BuddenPing's comment of
+      12 October 2026, 17:57:46Z (https://github.com/jlevy/squares/issues/503#issuecomment-6129716138);
+      `read_through` is that comment's time, since it is the latest read into this entry, and no
+      comment on #504 is later than it. The thank-you owed on #503 covers this issue too
+      (think-ckjc). The final reply's "still open" statement is marked `outdated`, and since
+      `corrects` names replies on the same issue, a one-line pointer here to the #503 thank-you,
+      naming the final reply in `corrects`, clears the reply due (review A3 of #558).
   - number: 501
     title: New results for n=155, n=156 and n=211 to the best of my knowledge
     author: dostashev
@@ -5459,7 +5546,8 @@ issues:
       239 (#401) and 270, 305 (#481): registration request'
     author: itsnaka
     opened: '2026-10-11'
-    state: open
+    state: closed
+    closed: '2026-10-12'
     kind: result-report
     triage: done
     summary: >-
@@ -5501,15 +5589,39 @@ issues:
     - think-ga3m
     - think-720n
     answer_bead: think-ga3m
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/500#issuecomment-6130062157
+      date: '2026-10-12'
+      by: jlevy
+      kind: final
+      reported:
+      - result: nine-mondrian-packings
+        id: T-151
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: nine-mondrian-packings
+        id: E-squish-500-certificate-report
+        status: reviewed
+      - result: nine-mondrian-packings
+        id: E-squish-500-exact-feasibility
+        status: confirmed
+      - result: nearby-search-squeeze
     close_when: The import and its disposition are on main, the house adoption at its counts has
       landed or is owned, and the owner has posted the resulting state; the sources/ pieces are not
       requested, and optimality is outside this request.
+    notes: >-
+      Registration (T-151) and the house adoption landed together in #553, merged on 12 October
+      2026 as 06c425eca, so one reply confirmed and closed the issue once the Pages deployment of
+      that commit had passed: T-151 is the house at 176, 181, 238, 239, 270, 271 and 272, and at
+      304 and 305 Francisco Couzo's #506 refinements (T-152) are smaller and hold the case, T-151
+      verified and not selected there (think-ckjc).
   - number: 506
     title: '304, 305 and nine counts above 324 (338–381): registration request'
     author: franciscouzo
     opened: '2026-10-11'
-    state: open
+    state: closed
+    closed: '2026-10-12'
     kind: result-report
     triage: done
     summary: >-
@@ -5568,8 +5680,213 @@ issues:
     - think-om5l
     - think-720n
     answer_bead: think-om5l
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/506#issuecomment-6130063939
+      date: '2026-10-12'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n304-n305-exact-optima
+        id: T-152
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n304-n305-exact-optima
+        id: E-couzo-506-certificate-report
+        status: reviewed
+      - result: n304-n305-exact-optima
+        id: E-couzo-506-exact-feasibility
+        status: confirmed
+      - result: nine-beyond-horizon
+        id: E-couzo-506-certificate-report
+        status: reviewed
+      - result: nine-beyond-horizon
+        id: E-couzo-506-exact-feasibility
+        status: confirmed
+      - result: kkt-exact-optima
+      - result: unnamed-175-308-340-343
     close_when: The import and its disposition, including the beyond-horizon counts, are on main,
       the house adoption at 304 and 305 has landed or is owned, and the owner has posted the
       resulting state; the four unnamed certificates are imports of their own, and optimality is
       outside this request.
+    notes: >-
+      Registration (T-152), the nine verified beyond-horizon rows and the house adoption at 304
+      and 305 landed together in #553, merged on 12 October 2026 as 06c425eca, so one reply
+      confirmed and closed the issue once the Pages deployment of that commit had passed. It gives
+      each beyond-horizon row's margin against the row it replaces, not the issue's own before
+      column (RY-3), and asks the author to correct the certificates README's 1 + 1e-12 at 375
+      (RY-2).
+
+      The unnamed 175 was the smallest side known at its count when the import read it; Daniil
+      Ostashev's #528 has since reported a smaller one (think-em0b), and the reply says so rather
+      than repeat the claim above (think-ckjc).
+
+      The reply followed `not_registered` above as it stands on main, saying 175's "own import is
+      queued", while think-9fjl records the plan of the 12 October review's RX-5: the certificate
+      stays in the couzo-certificates-2026-10-11 packet and is not registered unless the author
+      asks. The reply asked nothing, so that bead's closing condition is not met. A follow-up here
+      waits for layer 6, which registers and adopts T-154 at 175, to be on main; it says the
+      certificate stays in the packet unless he wants it registered, asks whether he does, and
+      names the final reply in `corrects` once that reply's statement is marked `outdated` (review
+      A1 of #558).
+  - number: 557
+    title: Intake on optimality proof of n=18
+    author: jlevy
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The owner's tracking issue for Marc Leonard Overbeck's (Kleddamag) verification edition
+      of a candidate proof that Bidwell's 1998 packing is optimal, s(17) = L =
+      4.67553009360455095163..., in Kleddamag/the-seventeenth-square-candidate at
+      653b9589d0f8a152f01adc56b1d48ba53d49abc3 with release large-files-v1. The issue's title
+      says n=18; the source is n = 17. The claim is conditional on 210 listed obligations, 15
+      of them mathematical premises, and the source says Codex and Claude produced it under
+      the author's direction and that no human within the project has read the mathematics.
+      Retained on 12 October 2026 as digests, derived facts and receipts (no licence for
+      reuse), read by a mathematical review that found no mathematical defect in what it
+      read and, on 13 October, by a second review that read and re-derived the normalized
+      52-row gate of the rigidity step and found no blocking defect, and partly run here:
+      the author's check.py passed, 34 capture rows and three of
+      the 13 trees reproduced with the producer's code, 34 rows decided again by an
+      independent implementation and the root isolated independently, all agreeing.
+      Registered as T-153 at V0/C1 and S5; the complete capture recomputation and ten trees
+      have not been run, and the verified bounds are unchanged.
+    read_through: '2026-10-12T16:42:56Z'
+    results:
+    - key: n17-optimality-candidate
+      claim: >-
+        s(17) = L, where L = (6+4t*)/(1+2t*-t*^2) with (t*, b*) the unique common zero of the
+        stated F and G in the rectangle of half-width 10^-12 about (t0, b0), and
+        4.67553009360455095163 < L < 4.67553009360455095164: a packing at side L exists and
+        none at a smaller side; uniqueness not claimed. A candidate proof, conditional on the
+        210 obligations of OBLIGATIONS.json.
+      source: body
+      register:
+      - T-153
+      evidence:
+      - E-n017-overbeck-optimality-candidate-report
+      - E-n017-overbeck-candidate-check-py-replay
+      - E-n017-overbeck-capture-sample-replay
+      - E-n017-overbeck-capture-independent-sample
+      - E-n017-overbeck-tree-sample-replay
+      - E-n017-overbeck-statement-root-independent
+    asks:
+    - what: >-
+        The owner's priority of 12 October: validate fully, tabulate in the record as soon as
+        possible, and confirm as far as possible. Still to run: the ten trees not yet
+        replayed (about 7.1 CPU-hours by the author's records, about 21 here; think-fgmr),
+        the complete capture recomputation (about 1,273 CPU-hours with the Python checker,
+        2,347 with both; think-0at1) and a mutated-input control of each kind. On 13 October
+        the owner held the ten-tree replay and the capture recomputation; every remaining
+        option, with its price, is a bead under think-lqtu, and the owner's oversight record
+        for rung 4 is think-ofoc.
+      state: queued
+      bead: think-lqtu
+    - what: >-
+        Under the same priority, a second adversarial review that reads the normalized 52-row
+        gate of the rigidity step (think-4j3n).
+      state: done
+      note: >-
+        docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md, of 13
+        October: it read the gate, re-derived it with its own code and accepted, with nine
+        defects, none blocking; T-153's rungs did not move.
+    beads:
+    - think-00y8
+    - think-r7m8
+    - think-lqtu
+    - think-fgmr
+    - think-0at1
+    - think-4j3n
+    - think-ofoc
+    answer_bead: think-00y8
+    replies: []
+    close_when: >-
+      T-153 is on main and either reaches a complete replay or has a defect recorded against
+      it, the remaining replays are done or dispositioned by the owner, and the
+      resulting state is posted on the issue.
+    notes: >-
+      Lane K1 of the #557 intake (think-mq0k) acquired the source, ran check.py and retained
+      the packet kleddamag-n17-candidate-2026-10-12; lane K2 wrote the review
+      (docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md); lane K3
+      (think-r7m8) ran the sampled replays in receipts-here/; the second review lane
+      (think-4j3n) wrote docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md,
+      whose programs and output are in the packet's review-2/. The statement's F, G,
+      rectangle and side map are this repository's H-255 chart exactly, and L is below
+      n-017's verified ceiling by 1.04e-22.
+  - number: 565
+    title: 'Complete Lean proof of s(17) optimality: registration request'
+    author: ofitzharding
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Oscar Fitzharding's request to register his Lean 4 proof that Bidwell's 1998 packing of
+      seventeen unit squares is optimal, Sq17.square17_optimality (L : ℝ) : PlainPacking L ↔
+      EndpointGeometry.side ≤ L, in ofitzharding/sq17-lean with release v1.0.0 (the issue
+      pins 0a7167efa8dcae7fa73855890630fb7e2de550ed), with no certificate-acceptance or
+      case-exclusion premise left and a trust boundary of the three standard axioms and
+      13,343 native_decide facts. Retained on 13 October 2026 at e6ee548, whose proof files
+      are v1.0.0's, and read by an adversarial review that found no mathematical defect,
+      found EndpointGeometry.side to be this record's L by identity of definition, and found
+      that the proof runs on this project's n = 17 plan and data without crediting its
+      components specifically (F-1). Registered as T-154, a simplification of T-153
+      (Overbeck's candidate, whose release was public about six hours before this proof's
+      repository by GitHub's times), at V0/C1 with S5 proposed; the source's clean build was
+      not repeated here, and the verified bounds are unchanged.
+    read_through: '2026-10-12T22:23:37Z'
+    results:
+    - key: n17-optimality-lean
+      claim: >-
+        s(17) = EndpointGeometry.side, about 4.675530093604551, Bidwell's side: for every real
+        L, seventeen closed unit squares with arbitrary rotations, boundary contact allowed
+        and disjoint interiors fit in [0, L]^2 exactly when side ≤ L, existence at the
+        endpoint included. Proved in Lean 4.34.1 with Mathlib, trusting Lean's compiler,
+        native evaluator and C toolchain for 13,343 native_decide facts, with a fresh Linux
+        rebuild of all 4,951 modules that the author reports.
+      source: body
+      register:
+      - T-154
+      evidence:
+      - E-n017-fitzharding-lean-report
+    asks:
+    - what: Link the proof from the n = 17 case page.
+      state: done
+      note: >-
+        packing/frontier/n-017.md links sq17-lean and its retained packet under T-154, in its
+        reported lower bound's note, its priority notes and its prose; the published case page
+        carries it once the change merges.
+    - what: Link the proof from #405, the owner's n = 17 tracker.
+      state: queued
+      bead: think-mxhc
+      note: >-
+        A comment on #405 is the owner's to post, after the merge, with the reply to this
+        issue; the draft is in think-mxhc.
+    beads:
+    - think-hcqr
+    - think-acbk
+    - think-xjb2
+    - think-r109
+    - think-s7s4
+    - think-c1kz
+    - think-mxhc
+    answer_bead: think-mxhc
+    replies: []
+    close_when: >-
+      T-154 is on main, the author has been told what was registered and asked the review's
+      questions, #405 links the proof, and the full build has either passed, here or by a
+      third party retained here, or been dispositioned by the owner, with the resulting state
+      posted on the issue.
+    notes: >-
+      The owner reported the repository and the author's post of 13 October 2026 separately,
+      asked for a full intake crediting everything and a decision on which report came first,
+      and set Oscar Fitzharding as the definitive name (think-hcqr). Lane think-acbk retained
+      the packet fitzharding-n17-lean-2026-10-13, lane think-xjb2 wrote
+      docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md. Overbeck's candidate
+      (#557, T-153) was public first and keeps the case's reported lower bound; the issue and
+      the README name it as related work developed independently. The issue offers help with
+      reproduction and statement review. The review's attribution findings F-1 and F-2 and
+      its six questions (section 9) are for the reply. The full build (think-r109) waits on an
+      owner budget: the source publishes no CPU time, and the intake's host is too small.

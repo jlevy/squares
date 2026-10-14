@@ -1,0 +1,9 @@
+'Sq17.Propagation.HalfPlaneState.PositiveControl.no_false_exclusion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Sq17.Propagation.HalfPlaneState.PositiveControl.no_false_tree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Sq17.Propagation.HalfPlaneState.PositiveControl.represented_packing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

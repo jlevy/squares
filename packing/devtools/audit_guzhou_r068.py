@@ -1,6 +1,6 @@
-"""Audit Guzhou0806's R067 and R068 lower bounds for s(17) against Kleddamag's 4.66001.
+"""Audit Guzhou0806's R067 and R068 lower bounds for s(17) against Overbeck's 4.66001.
 
-Two releases of github.com/Guzhou0806/n17-square-packing continue Kleddamag's public
+Two releases of github.com/Guzhou0806/n17-square-packing continue Overbeck's public
 ``466001/100000`` certificate (SHA-256 ``280af3d4…e6e5``): R067 at ``d4e2c287`` claims
 ``s(17) > 233009/50000`` and R068 at ``815b1626`` claims ``s(17) > 116511/25000``. Both
 packages are retained byte-identical in ``resources/web/n17-guzhou-r068-2026-09-28/``,
@@ -235,7 +235,7 @@ def refinement(
 
 
 def structure(name: str) -> dict[str, Any]:
-    """What the release's certificate changes relative to Kleddamag's 4.66001."""
+    """What the release's certificate changes relative to Overbeck's 4.66001."""
     release = RELEASES[name]
     base = load_json(BASELINE, BASELINE_SHA256)
     cert = load_json(release.certificate, release.sha256)
@@ -420,7 +420,7 @@ def compare(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    shape = commands.add_parser("structure", help="the certificate against Kleddamag's 4.66001")
+    shape = commands.add_parser("structure", help="the certificate against Overbeck's 4.66001")
     shape.add_argument("release", choices=sorted(RELEASES))
     shape.add_argument("--output", type=Path)
     replay = commands.add_parser("compare", help="a paired replay against the published rows")

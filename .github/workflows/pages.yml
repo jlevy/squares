@@ -463,7 +463,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  # Part II of the series, the review of Kleddamag's s(11) > 31/8 (T-037), built as
+  # Part II of the series, the review of Overbeck's s(11) > 31/8 (T-037), built as
   # the optimality review is: its figures' and renderer's tests, then the page, its
   # Markdown and its PDF under `site/papers/`. Its partial checkout keeps the archived
   # proof it cites and reads, the T-059 replay journal and the native verifier's row
@@ -2242,7 +2242,14 @@ jobs:
     if: ${{ !cancelled() && needs.deploy.result == 'success' }}
     runs-on: ubuntu-latest
     # Bound the live network audit; exceeding this ceiling leaves verification
-    # failed (think-6y2j).
+    # failed (think-6y2j). A job killed here prints no verdict, so the checker's own
+    # `--deadline-minutes` below stops it first, with every verdict it reached. Over
+    # the 40 verify jobs measured on 2026-10-10 (PR #496, review F) the steps before
+    # the audit took 41–72 s and those after it 2–6 s; the slowest healthy audit step
+    # was 388 s, and the failing ones ran 256–3,465 s, the three GitHub 503 storms
+    # among them 825–3,465 s. A 25-minute deadline leaves 5 of the 30 minutes for
+    # setup and teardown, about 3.9× the slowest measured, and is about 3.9× the
+    # slowest healthy audit. `test_pages_workflow` pins both values.
     timeout-minutes: 30
     steps:
       - name: Check out the repository
@@ -2280,3 +2287,4 @@ jobs:
           uv run --frozen --group dev python -m devtools.check_published_site
           --site "${{ needs.deploy.outputs.page-url }}"
           --commit "${{ github.sha }}"
+          --deadline-minutes 25

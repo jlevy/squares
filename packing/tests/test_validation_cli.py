@@ -47,11 +47,12 @@ FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
 # Source-reported closures from T-062 to T-064, and T-066 and T-067 at n = 59 and 77,
 # change this lane alone; the verified/formal lane above remains open until
 # certificate replay. 2026-10-03: Daniel's reported s(k^2 - 4) = k (T-081) closes
-# n = 96, 117, 140, 165, 192, 221, 252, 285 and 320 in this lane only.
+# n = 96, 117, 140, 165, 192, 221, 252, 285 and 320 in this lane only. 2026-10-12:
+# Overbeck's candidate equality s(17) = L (T-153) closes n = 17 in this lane only.
 REPORTED_LANE_SPLIT: dict[str, tuple[int, int]] = {
-    "n=1..100": (46, 54),
-    "n=1..200": (66, 134),
-    "n=1..324": (86, 238),
+    "n=1..100": (47, 53),
+    "n=1..200": (67, 133),
+    "n=1..324": (87, 237),
 }
 
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"
@@ -5378,3 +5379,109 @@ def test_push_prerequisites_keep_scientific_policy_and_browser_coverage() -> Non
         assert all(step in selected.steps for step in prerequisites if not step.touches)
     mixed = validate.select_for_paths(list(inputs), prerequisites)
     assert set(inputs.values()) <= {step.name for step in mixed.steps}
+
+
+@pytest.mark.parametrize("mode", ["push", "since"])
+@pytest.mark.parametrize(
+    "paths",
+    [
+        ["site/style.css"],
+        ["unknown.xyz", "another.xyz", "b.xyz", "c.xyz", "d.xyz", "e.xyz"],
+        [],
+    ],
+)
+def test_change_scoped_banners_leave_json_stdout_one_document(
+    monkeypatch: pytest.MonkeyPatch, mode: str, paths: list[str]
+) -> None:
+    """The `--push` and `--since` banners go where `--format json` can tolerate them.
+
+    PR 496 review E1: both blocks printed to stdout whatever the format, so a consumer of
+    `--list --format json` got two banner lines before the array and `json.loads` failed.
+    G4, from the same review: the `--push` banner said "unclaimed paths" without naming
+    them, while `--since` named the first five. One helper now serves both -- stdout in
+    text mode, stderr under JSON -- and both name the paths, which is the attribution
+    decision a reader has to make.
+    """
+    prerequisites = (
+        validate.Step("unattributed", lambda _context: "ok", fast=True),
+        validate.Step("site", lambda _context: "ok", fast=True, touches=("site/*",)),
+    )
+    monkeypatch.setattr(validate, "STEPS", prerequisites)
+    monkeypatch.setattr(validate, "changed_paths", lambda _base: list(paths))
+    monkeypatch.setattr(
+        validate.subprocess,
+        "run",
+        lambda command, **_options: subprocess.CompletedProcess(
+            command, 0, stdout="narrow 1\n", stderr=""
+        ),
+    )
+    arguments = (
+        ("--push", "--since", "base-ref", "--jobs", "1", "--inner-jobs", "1")
+        if mode == "push"
+        else ("--since", "base-ref")
+    )
+    expected_names = ["unattributed", "site"]
+    if mode == "push":
+        expected_names.append("reachable behavioral tests")
+
+    status, stdout, stderr = _invoke(*arguments, "--list", "--format", "json")
+    assert status == 0
+    # One document and nothing else: a banner before or after it fails the parse.
+    assert [entry["name"] for entry in json.loads(stdout)] == expected_names
+    if mode == "push":
+        assert "== pre-push prerequisites: " in stderr
+        assert "== pre-push floor against base-ref" in stderr
+    else:
+        assert "== change-scoped against base-ref: " in stderr
+    if len(paths) > 5:
+        assert (
+            "no step claims another.xyz, b.xyz, c.xyz, d.xyz, e.xyz (+1 more); "
+            "running the whole selection"
+        ) in stderr
+    elif not paths:
+        assert "no paths determined; running the whole selection" in stderr
+    else:
+        assert "running the whole selection" not in stderr
+        if mode == "since":
+            assert "2 steps reachable from those paths" in stderr
+
+    # The text form prints the same lines on stdout and nothing on stderr.
+    status, text_stdout, text_stderr = _invoke(*arguments, "--list")
+    assert (status, text_stderr) == (0, "")
+    banners = [line for line in stderr.splitlines() if line]
+    assert banners == [
+        line for line in text_stdout.splitlines() if line.startswith(("==", "  "))
+    ]
+
+
+@pytest.mark.parametrize("outcome", ["selector failed", "malformed summary"])
+def test_push_selector_errors_name_the_snapshot_they_were_given(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, outcome: str
+) -> None:
+    """With a snapshot the selector never reads the ref, so the error must not blame it
+    (PR 496 review G3): the first line a user reads names what was actually passed."""
+    snapshot = tmp_path / "changed-paths.json"
+    completed = (
+        subprocess.CompletedProcess(
+            args=("reachable-tests",),
+            returncode=2,
+            stdout="",
+            stderr="cannot read changed-path snapshot: boom",
+        )
+        if outcome == "selector failed"
+        else subprocess.CompletedProcess(
+            args=("reachable-tests",), returncode=0, stdout="noise\n", stderr=""
+        )
+    )
+    monkeypatch.setattr(validate.subprocess, "run", lambda *_args, **_kwargs: completed)
+    with pytest.raises(validate.UsageError) as error:
+        validate._push_test_step("origin/main", paths_file=snapshot)
+    message = str(error.value)
+    assert f"the changed-path snapshot {snapshot}" in message
+    assert "origin/main" not in message
+    if outcome == "selector failed":
+        assert message.endswith("cannot read changed-path snapshot: boom")
+    else:
+        assert message.endswith("'noise'")
+    with pytest.raises(validate.UsageError, match="the change against 'origin/main'"):
+        validate._push_test_step("origin/main")

@@ -20,6 +20,7 @@ separately for an independent check of either profile.
 from __future__ import annotations
 
 import functools
+import json
 import pathlib
 import re
 import sys
@@ -80,6 +81,9 @@ CONTACT_SCAFFOLD_ATLAS = (
     FRONTIER.parent / "atlas" / "enumerated" / "contact-scaffolds-size5.json"
 )
 CONTACT_STRUCTURES = FRONTIER.parent / "atlas" / "known-best" / "contact-structures.json"
+#: The regularized drawing layer's index: which generator drew each count, and each drawn
+#: view's regularization in the register's terms (think-k35c, 12 October 2026).
+REGULARIZED_INDEX = FRONTIER.parent / "atlas" / "known-best" / "regularized" / "index.json"
 #: Hosted-data manifests (OR-18): one per release that holds bulk data outside Git.
 HOSTED = FRONTIER.parent / "hosted"
 
@@ -88,10 +92,28 @@ def load_schema(name: str) -> dict:
     return load_yaml((FRONTIER / name).read_text(encoding="utf-8"))
 
 
+def _unique_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
+    """A JSON object, refusing a repeated key as `load_yaml` refuses one in YAML."""
+    found: dict[str, object] = {}
+    for key, value in pairs:
+        if key in found:
+            raise ValueError(f"duplicate key {key!r}")
+        found[key] = value
+    return found
+
+
 def payload_and_meta(path: pathlib.Path) -> tuple[dict, dict]:
-    """Return (payload, softschema metadata) for either profile."""
+    """Return (payload, softschema metadata) for either profile.
+
+    A `.json` dataset is read as JSON: YAML 1.1 reads a JSON number written without a
+    point in its mantissa, such as `1e-15`, as a string."""
     text = path.read_text(encoding="utf-8")
-    doc = load_yaml(text.split("---\n")[1]) if path.suffix == ".md" else load_yaml(text)
+    if path.suffix == ".md":
+        doc = load_yaml(text.split("---\n")[1])
+    elif path.suffix == ".json":
+        doc = json.loads(text, object_pairs_hook=_unique_keys)
+    else:
+        doc = load_yaml(text)
     meta = doc.get("softschema")
     if meta is None:
         raise ValueError("no softschema metadata block")
@@ -323,6 +345,7 @@ def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
     datasets.append(PROSPECTIVE_ATLAS_SEED)
     datasets.append(CONTACT_SCAFFOLD_ATLAS)
     datasets.append(CONTACT_STRUCTURES)
+    datasets.append(REGULARIZED_INDEX)
     # One record per harness session log. The logs themselves are not retained, so
     # these are the durable artifact rather than a pointer to one and are enforced like
     # any other dataset.

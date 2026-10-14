@@ -431,7 +431,7 @@ identifies a meaningful class and its matched point baseline.
 ## First Block and Reprioritization
 
 The
-[daytime plan](../specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
+[daytime plan](../specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
 and [agenda035](../../../packing/campaign/agendas/agenda-035-n11-daytime-strategy.md)
 already make BC326 active and BC328 complete.
 The first action is to publish BC326’s admitted production instrument, prospectively

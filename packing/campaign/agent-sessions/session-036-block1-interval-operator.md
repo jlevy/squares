@@ -280,7 +280,7 @@ session:
 
 Block 1 of [agenda-006](../agendas/agenda-006-overnight-research-blocks.md), advancing
 `BC-045` through phases 1 and 2 of
-[plan-2026-08-28-interval-certification](../../../docs/project/specs/active/plan-2026-08-28-interval-certification.md).
+[plan-2026-08-28-interval-certification](../../../docs/project/specs/done/plan-2026-08-28-interval-certification.md).
 
 ## What this block was for
 

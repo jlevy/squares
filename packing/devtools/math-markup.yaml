@@ -34,14 +34,17 @@ migrated:
 - TUTORIAL.md
 - conventions.md
 - development.md
-- docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
-- docs/project/handoff-2026-08-23-quench-spine.md
-- docs/project/handoff-2026-09-04-block-close.md
-- docs/project/handoff-2026-09-06-post-381-t2-commissioning.md
-- docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md
-- docs/project/handoff-2026-09-21-n17-external-intake.md
-- docs/project/handoff-2026-09-22-low-n-review-and-the-2880-rung.md
-- docs/project/n17-optimality-explainer.md
+- docs/project/guides/n17-optimality-explainer.md
+- docs/project/guides/three-lane-research-method.md
+- docs/project/guides/verification-tooling.md
+- docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md
+- docs/project/handoffs/handoff-2026-08-23-quench-spine.md
+- docs/project/handoffs/handoff-2026-09-04-block-close.md
+- docs/project/handoffs/handoff-2026-09-06-post-381-t2-commissioning.md
+- docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md
+- docs/project/handoffs/handoff-2026-09-21-n17-external-intake.md
+- docs/project/handoffs/handoff-2026-09-22-low-n-review-and-the-2880-rung.md
+- docs/project/policies/regularization-policy.md
 - docs/project/postmortems/postmortem-2026-08-23-soundness-class.md
 - docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md
 - docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md
@@ -59,6 +62,7 @@ migrated:
 - docs/project/research/research-2026-09-13-bc303-literal-parent-union-result.md
 - docs/project/research/research-2026-09-13-bc303-t2-charge-bridge.md
 - docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md
+- docs/project/research/research-2026-10-11-evand-regularization-assessment.md
 - docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
 - docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md
 - docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
@@ -112,6 +116,7 @@ migrated:
 - docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md
 - docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md
 - docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md
+- docs/project/reviews/review-2026-09-07-stromquist-helper-arguments.md
 - docs/project/reviews/review-2026-09-07-stromquist-incorporation.md
 - docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md
 - docs/project/reviews/review-2026-09-07-stromquist-segment-helper.md
@@ -221,51 +226,49 @@ migrated:
 - docs/project/reviews/review-2026-10-01-result-import-process.md
 - docs/project/reviews/review-2026-10-01-site-documentation-records.md
 - docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md
-- docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
-- docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 - docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 - docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
-- docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md
 - docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
-- docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md
-- docs/project/specs/active/plan-2026-08-28-interval-certification.md
-- docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md
-- docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md
-- docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md
-- docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
-- docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
 - docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 - docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
 - docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
 - docs/project/specs/active/plan-2026-09-07-math-text-face.md
 - docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
-- docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
-- docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 - docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 - docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
-- docs/project/specs/active/plan-2026-09-13-n11-bc329-runset-verifier.md
-- docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
-- docs/project/specs/active/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md
-- docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
 - docs/project/specs/active/plan-2026-09-22-upper-bound-certification-blocks.md
-- docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
-- docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md
 - docs/project/specs/active/plan-2026-09-29-github-pages-overview.md
 - docs/project/specs/active/plan-2026-09-29-native-rectangle-verification.md
 - docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md
 - docs/project/specs/active/plan-2026-09-29-third-party-results-register.md
-- docs/project/specs/active/plan-2026-09-30-epistemics-ladder-review.md
-- docs/project/specs/active/plan-2026-09-30-n11-optimality-illustrations.md
-- docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
-- docs/project/specs/active/plan-2026-10-01-release-assets-on-demand.md
 - docs/project/specs/active/plan-2026-10-01-result-import-first-application.md
-- docs/project/specs/active/plan-2026-10-01-result-kinds.md
-- docs/project/specs/active/plan-2026-10-01-result-status.md
-- docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md
-- docs/project/stromquist-helper-arguments-math-review.md
-- docs/project/three-lane-research-method.md
-- docs/project/verification-tooling.md
+- docs/project/specs/active/plan-2026-10-11-documentation-organization.md
+- docs/project/specs/archive/plan-2026-08-28-numeric-symbolic-round-trip.md
+- docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+- docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md
+- docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
+- docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md
+- docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md
+- docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+- docs/project/specs/done/plan-2026-08-26-overnight-constructive-enumeration.md
+- docs/project/specs/done/plan-2026-08-28-interval-certification.md
+- docs/project/specs/done/plan-2026-08-28-symbolic-promotion-and-the-atlas.md
+- docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md
+- docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md
+- docs/project/specs/done/plan-2026-09-13-n11-bc329-runset-verifier.md
+- docs/project/specs/done/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md
+- docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md
+- docs/project/specs/done/plan-2026-09-30-epistemics-ladder-review.md
+- docs/project/specs/done/plan-2026-09-30-n11-optimality-illustrations.md
+- docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md
+- docs/project/specs/done/plan-2026-10-01-release-assets-on-demand.md
+- docs/project/specs/done/plan-2026-10-01-result-kinds.md
+- docs/project/specs/done/plan-2026-10-01-result-status.md
+- docs/project/specs/done/spike-2026-08-25-n5-motion-lab.md
+- docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
+- docs/project/specs/paused/plan-2026-08-25-generalized-motion-lab.md
+- docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md
 - docs/tbd/shortcuts/create-or-update-pr-simple.md
 - docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md
 - epistemics.md
@@ -275,11 +278,11 @@ migrated:
 - packages/workbench/tests/fixtures/benchmark-foundation/README.md
 - packing/atlas/README.md
 - packing/atlas/enumerated/README.md
-- packing/atlas/known-best/FIGURE-PLAYBOOK.md
 - packing/atlas/known-best/README.md
+- packing/atlas/known-best/figure-playbook.md
 - packing/atlas/known-best/video/spikes/README.md
-- packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md
-- packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- packing/atlas/known-best/video/spikes/v1-slideshow/notes.md
+- packing/atlas/known-best/video/spikes/v2-transitions/notes.md
 - packing/atlas/prospective/README.md
 - packing/atlas/rendering/README.md
 - packing/benchmarks/gate-cost-at-324/README.md
@@ -1555,6 +1558,7 @@ migrated:
 - packing/frontier/n-323.md
 - packing/frontier/n-324.md
 - packing/strategies/preview/README.md
+
 keep:
 - path: SYNOPSIS.md
   span: +W
@@ -1638,7 +1642,7 @@ keep:
 - path: docs/project/reviews/review-2026-09-28-wand125-n50-mixed-verifier.md
   span: g++
   reason: the compiler's name
-- path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+- path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
   span: --
   reason: the literal character pair XML comments forbid
 - path: docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
@@ -1670,17 +1674,17 @@ keep:
 - path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
   span: 200 900
   reason: a CSS font-weight range
-- path: docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
+- path: docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
   span: 4 / 5400 / 7200 / 2
   reason: the frozen worker and time-allowance tuple of a command, not a quotient
-- path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
+- path: docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md
   span: '00'
   reason: a hexadecimal byte of the avc1 codec string (the constraint flags), not
     a number
-- path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
+- path: docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md
   span: '28'
   reason: a hexadecimal byte of the avc1 codec string (the level), not a number
-- path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
+- path: docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md
   span: '64'
   reason: a hexadecimal byte of the avc1 codec string (the profile), not a number
 - path: packages/workbench/README.md
@@ -1810,80 +1814,80 @@ keep:
 - path: packing/atlas/enumerated/README.md
   span: '3'
   reason: a base-four digit of a stable identity string, literal text
-- path: packing/atlas/known-best/FIGURE-PLAYBOOK.md
+- path: packing/atlas/known-best/figure-playbook.md
   span: R
   reason: the rigidity badge's glyph as the figure draws it
-- path: packing/atlas/known-best/FIGURE-PLAYBOOK.md
+- path: packing/atlas/known-best/figure-playbook.md
   span: g
   reason: the SVG `g` element
 - path: packing/atlas/known-best/README.md
   span: F
   reason: the label of free-count minimality, paired with the chunk label `C`, not
     a variable
-- path: packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v1-slideshow/notes.md
   span: (p/q)
   reason: a token of the exact-form grammar, listed with `INT` and `sqrt(...)`
-- path: packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v1-slideshow/notes.md
   span: 0,198 198,198 198,0 0,0
   reason: an SVG polygon's points attribute, literal text
-- path: packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v1-slideshow/notes.md
   span: O
   reason: a badge glyph as the page draws it
-- path: packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v1-slideshow/notes.md
   span: R
   reason: a badge glyph as the page draws it
-- path: packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v1-slideshow/notes.md
   span: U+2208, U+221A, U+2248, U+2264-2265, U+2308-230B
   reason: a CSS unicode-range value
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: 028
   reason: a pair's zero-padded file label
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: 110 100 307
   reason: a command's arguments
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: = R
   reason: a badge-glyph combination as the panel draws it
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: O
   reason: a badge glyph as the panel draws it
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: O =
   reason: a badge-glyph combination as the panel draws it
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: O = R
   reason: a badge-glyph combination as the panel draws it
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: R
   reason: a badge glyph as the panel draws it
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: a
   reason: a keyboard key
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: b
   reason: a keyboard key
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: c
   reason: a keyboard key
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: d
   reason: a keyboard key
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: k
   reason: a keyboard key
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: l
   reason: a keyboard key
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: m
   reason: a keyboard key
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: p
   reason: a keyboard key
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: s
   reason: a keyboard key
-- path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md
+- path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md
   span: t
   reason: a keyboard key
 - path: packing/atlas/rendering/README.md

@@ -1,0 +1,10 @@
+{
+  "round": "addendum to round 2, recorded 2026-10-13: a plan move made under review A on #493 that no round's record carried",
+  "recorded": "2026-10-13",
+  "reviewer": "claude-address-pr579-0vpobe",
+  "order": "after review-2026-10-12-bead-reconciliation-applied.json and before review-2026-10-13-owner-decisions-applied.json",
+  "beads": [],
+  "specs": [
+    {"path":"docs/project/specs/draft/plan-2026-08-28-numeric-symbolic-round-trip.md","action":"move_archive","reason":"Moved from draft/ to archive/ under review A on #493 (finding A2): superseded by the promotion-pipeline plan, under which agenda-005 built the round trip (BC-043, BC-044, BC-047 and BC-048 complete; 176e8ad14). Round 2 had retained it in draft/; no applied record carried this move until this addendum.","evidence":["#493 review A finding A2, fixed in c60db5740 on #493's branch codex/bead-spec-reconciliation","#579 carries the same move in 2a8ce4aea","the plan stands at docs/project/specs/archive/plan-2026-08-28-numeric-symbolic-round-trip.md"]}
+  ]
+}

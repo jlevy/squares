@@ -103,7 +103,7 @@ session:
     next_action: Keep the response as history and rewrite the handoff as the current compact entry point.
   outputs:
   - docs/project/reviews/review-2026-08-23-response-to-pr15-review.md
-  - docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+  - docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md
   - docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md F-29 through F-34
   - defects.yaml D-075 through D-079
   - think-v6n1, think-dqhd, think-sk4a, think-djru, think-hej7, and think-55m2

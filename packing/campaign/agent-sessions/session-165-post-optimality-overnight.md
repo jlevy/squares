@@ -1124,7 +1124,7 @@ session:
 # Session 165: Post-optimality Research
 
 The
-[session plan](../../../docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md)
+[session plan](../../../docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md)
 and [X-048](../explorations/X-048-n17-optimality-after-n11.md) define the scope.
 The fixed morning deadline is October 1 at 08:00 Pacific; finalization begins at 07:30.
 The three opening lanes are read-only and the coordinator owns shared records.

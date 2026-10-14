@@ -1,0 +1,4417 @@
+{
+ "format": "regularized-bounds-receipt-v1",
+ "tool": "python -m devtools.register_regularized_bounds select",
+ "policy": "docs/project/policies/regularization-policy.md",
+ "what": "Every count where a view of the regularization runs is decided at row 3 of the policy's table, its side below the case's verified upper bound, apart from the held n = 17 and the counts jlevy/squares#518 and #553 re-house: the view with the least exact side, retained under views/, with the bound the record held before, the printed side and closed form, the drawing decision, and the identity measured on the retained view against the witness's exact frame.",
+ "runs": [
+  {
+   "run": "full",
+   "generator": {
+    "name": "evand-regularize",
+    "source_url": "https://github.com/evand/square-packing",
+    "pin": "675a5ea",
+    "source_commit": "675a5eaa8712542daac8b4515b0f69ad7044df44",
+    "patches": [],
+    "interpreter": "CPython 3.14.7"
+   },
+   "parameters": {
+    "timeout": 1800.0,
+    "regularize_timeout": 1800.0,
+    "variant": "conservative",
+    "orient": "0",
+    "from_stage": "input",
+    "same_mode": "relax",
+    "frame": "kkt",
+    "style": "coincide",
+    "dps": 80,
+    "eps": "1e-20",
+    "workers": 4
+   },
+   "counts": 324,
+   "cost": {
+    "wall_seconds": 13812.25,
+    "cpu_seconds": 49301.63,
+    "driver_cpu_seconds": 11.93,
+    "count_cpu_seconds": 49289.7,
+    "workers": 4,
+    "counts": 324,
+    "measured_by": "resource.getrusage: each count's worker RUSAGE_SELF plus RUSAGE_CHILDREN (its solve and shim), summed, plus the driver's RUSAGE_SELF"
+   }
+  },
+  {
+   "run": "same2",
+   "generator": {
+    "name": "evand-regularize",
+    "source_url": "https://github.com/evand/square-packing",
+    "pin": "675a5ea",
+    "source_commit": "675a5eaa8712542daac8b4515b0f69ad7044df44",
+    "patches": [],
+    "interpreter": "CPython 3.14.7"
+   },
+   "parameters": {
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "variant": "conservative",
+    "orient": "0",
+    "from_stage": "import",
+    "same_mode": "relax",
+    "frame": "kkt",
+    "style": "coincide",
+    "dps": 80,
+    "eps": "1e-20",
+    "workers": 2
+   },
+   "counts": 34,
+   "cost": {
+    "wall_seconds": 3355.87,
+    "cpu_seconds": 3062.97,
+    "driver_cpu_seconds": 0.97,
+    "count_cpu_seconds": 3062.0,
+    "workers": 2,
+    "counts": 34,
+    "measured_by": "resource.getrusage: each count's worker RUSAGE_SELF plus RUSAGE_CHILDREN (its solve and shim), summed, plus the driver's RUSAGE_SELF"
+   }
+  },
+  {
+   "run": "same3",
+   "generator": {
+    "name": "evand-regularize",
+    "source_url": "https://github.com/evand/square-packing",
+    "pin": "675a5ea",
+    "source_commit": "675a5eaa8712542daac8b4515b0f69ad7044df44",
+    "patches": [],
+    "interpreter": "CPython 3.14.7"
+   },
+   "parameters": {
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "variant": "conservative",
+    "orient": "0",
+    "from_stage": "import",
+    "same_mode": "relax",
+    "frame": "kkt",
+    "style": "coincide",
+    "dps": 80,
+    "eps": "1e-20",
+    "workers": 1
+   },
+   "counts": 1,
+   "cost": {
+    "wall_seconds": 91.72,
+    "cpu_seconds": 87.75,
+    "driver_cpu_seconds": 0.03,
+    "count_cpu_seconds": 87.72,
+    "workers": 1,
+    "counts": 1,
+    "measured_by": "resource.getrusage: each count's worker RUSAGE_SELF plus RUSAGE_CHILDREN (its solve and shim), summed, plus the driver's RUSAGE_SELF"
+   }
+  },
+  {
+   "run": "ladder",
+   "generator": {
+    "name": "evand-regularize",
+    "source_url": "https://github.com/evand/square-packing",
+    "pin": "675a5ea",
+    "source_commit": "675a5eaa8712542daac8b4515b0f69ad7044df44",
+    "patches": [],
+    "interpreter": "CPython 3.14.7"
+   },
+   "parameters": {
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "variant": "conservative",
+    "orient": "0",
+    "from_stage": "input",
+    "same_mode": "relax",
+    "frame": "kkt",
+    "style": "coincide",
+    "dps": 80,
+    "eps": "1e-20",
+    "workers": 2
+   },
+   "counts": 3,
+   "cost": {
+    "wall_seconds": 243.02,
+    "cpu_seconds": 273.53,
+    "driver_cpu_seconds": 0.07,
+    "count_cpu_seconds": 273.46,
+    "workers": 2,
+    "counts": 3,
+    "measured_by": "resource.getrusage: each count's worker RUSAGE_SELF plus RUSAGE_CHILDREN (its solve and shim), summed, plus the driver's RUSAGE_SELF"
+   }
+  }
+ ],
+ "candidates": [
+  17,
+  28,
+  29,
+  37,
+  39,
+  41,
+  50,
+  53,
+  54,
+  55,
+  69,
+  70,
+  71,
+  83,
+  87,
+  101,
+  102,
+  103,
+  104,
+  107,
+  109,
+  122,
+  123,
+  124,
+  125,
+  126,
+  128,
+  129,
+  145,
+  146,
+  147,
+  148,
+  149,
+  151,
+  170,
+  171,
+  173,
+  174,
+  176,
+  178,
+  197,
+  198,
+  200,
+  201,
+  202,
+  203,
+  204,
+  205,
+  226,
+  227,
+  229,
+  230,
+  231,
+  232,
+  233,
+  234,
+  235,
+  257,
+  260,
+  262,
+  264,
+  265,
+  267,
+  291,
+  293,
+  294,
+  295,
+  296,
+  298,
+  299,
+  300
+ ],
+ "excluded": [
+  17,
+  70,
+  102,
+  103,
+  123,
+  126,
+  129,
+  146,
+  176,
+  232,
+  267,
+  295
+ ],
+ "registered": [
+  28,
+  29,
+  37,
+  39,
+  41,
+  50,
+  53,
+  54,
+  55,
+  69,
+  71,
+  83,
+  87,
+  101,
+  104,
+  107,
+  109,
+  122,
+  124,
+  125,
+  128,
+  145,
+  147,
+  148,
+  149,
+  151,
+  170,
+  171,
+  173,
+  174,
+  178,
+  197,
+  198,
+  200,
+  201,
+  202,
+  203,
+  204,
+  205,
+  226,
+  227,
+  229,
+  230,
+  231,
+  233,
+  234,
+  235,
+  257,
+  260,
+  262,
+  264,
+  265,
+  291,
+  293,
+  294,
+  296,
+  298,
+  299,
+  300
+ ],
+ "rows": [
+  {
+   "n": 28,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "728055577084257412127109150627/125000000000000000000000000000",
+   "side_decimal": "5.824444616674059297016873205016",
+   "side_text": "5.824444616674059297016873205016",
+   "value": "5.82444461667406",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "5.82444461667406",
+    "exact_form": "291222230833703/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.0298e-16,
+   "t101_side": "728055577084257412127109150627/125000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "291222230833702964847931437942419051/50000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "5.82444461667405",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 9.297e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 7.529902e-20,
+    "max_turn_deg": 1.29724e-34,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 29,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same"
+   ],
+   "side": "296691673133846459484473030817600957/50000000000000000000000000000000000",
+   "side_decimal": "5.93383346267692918968946061635201914",
+   "side_text": "5.93383346267692918968946061635201914",
+   "value": "5.93383346267692918974379895098",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "5.93383346267692918974379895098",
+    "exact_form": "296691673133846459487189947549/50000000000000000000000000000",
+    "evidence": [
+     "E-n029-interval-certified-upper"
+    ]
+   },
+   "below_earlier_by": 5.4338e-20,
+   "t101_side": null,
+   "below_t101_side_by": null,
+   "witness_side": "296691673133846459484473030817600957/50000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "5.93383346267692",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 9.1897e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 3,
+    "moved_beyond": {
+     "1e-9": 3,
+     "1e-6": 3,
+     "1e-3": 3,
+     "1e-2": 3,
+     "1e-1": 0
+    },
+    "max_move": 0.01240888,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-009",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 37,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "164965490231109002904459261567/25000000000000000000000000000",
+   "side_decimal": "6.59861960924436011617837046268",
+   "side_text": "6.59861960924436011617837046268",
+   "value": "6.59861960924437",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "6.59861960924437",
+    "exact_form": "659861960924437/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 9.8838e-15,
+   "t101_side": "6598619609244360116244356658771/1000000000000000000000000000000",
+   "below_t101_side_by": 6.5986e-20,
+   "witness_side": "164965490231109002904459261567/25000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "6.59861960924436",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 1.1618e-16,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 7,
+    "moved_beyond": {
+     "1e-9": 7,
+     "1e-6": 7,
+     "1e-3": 7,
+     "1e-2": 7,
+     "1e-1": 3
+    },
+    "max_move": 0.1617445,
+    "max_turn_deg": 8.41808e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 5
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {
+     "re_angled": 3
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 39,
+   "run": "same2",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "6810722083068648851765886665183/1000000000000000000000000000000",
+   "side_decimal": "6.810722083068648851765886665183",
+   "side_text": "6.810722083068648851765886665183",
+   "value": "6.81072208306865",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "6.81072208306865",
+    "exact_form": "136214441661373/20000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 1.1482e-15,
+   "t101_side": "6810722083068648851765886665183/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "681072208306864885169777944435175263/100000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "6.81072208306864",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 8.8518e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "review",
+    "index_record": null,
+    "reason": "squares [26] turned without a recorded angle change: for review"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 11,
+    "moved_beyond": {
+     "1e-9": 17,
+     "1e-6": 17,
+     "1e-3": 11,
+     "1e-2": 10,
+     "1e-1": 0
+    },
+    "max_move": 0.07236459,
+    "max_turn_deg": 0.00326572,
+    "turned": 8,
+    "unnamed_turns": [
+     26
+    ],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {
+     "straightened": 5,
+     "re_angled": 2
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 41,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "479768440817958626045142953622937499897065243765211133296503125758084818291688464353501845122603783894278481/69263706977442076582141718006995605133664448137108429896191176062896089000000000000000000000000000000000000",
+   "side_decimal": "6.926693094468802231581078913560208950430",
+   "side_text": "6.926693094468802231581078913560208951",
+   "value": "6.92669309446881",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "6.92669309446881",
+    "exact_form": "692669309446881/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.7684e-15,
+   "t101_side": "1385338618893760446330069168901/200000000000000000000000000000",
+   "below_t101_side_by": 6.9267e-20,
+   "witness_side": "479768440817958626045142953622937499897065243765211133296503125758084818291688464353501845122603783894278481/69263706977442076582141718006995605133664448137108429896191176062896089000000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "6.92669309446880",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 2.2316e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 5,
+    "moved_beyond": {
+     "1e-9": 5,
+     "1e-6": 5,
+     "1e-3": 5,
+     "1e-2": 2,
+     "1e-1": 0
+    },
+    "max_move": 0.02333619,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {
+     "straightened": 2
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 50,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "757142857142857142857142857142857143/100000000000000000000000000000000000",
+   "side_decimal": "7.57142857142857142857142857142857143",
+   "side_text": "7.57142857142857142857142857142857143",
+   "value": "7.57142857142858",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "7.57142857142858",
+    "exact_form": "378571428571429/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 8.5714e-15,
+   "t101_side": "7571428571428571428647142857143/1000000000000000000000000000000",
+   "below_t101_side_by": 7.5714e-20,
+   "witness_side": "757142857142857142857142857142857143/100000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "7.57142857142857",
+   "printed_exact_form": "7 + (4/7)",
+   "printed_exact_form_degree": 1,
+   "above_printed_side_by": 1.4286e-15,
+   "above_exact_side_by": 1.4286e-36,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 6,
+    "moved_beyond": {
+     "1e-9": 6,
+     "1e-6": 6,
+     "1e-3": 6,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 0.00952381,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {
+     "straightened": 2,
+     "re_angled": 4
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 53,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "846662303743146120044858147095203729184452687173783855889207587068962740050787026154244302953124909685073507/108229037635845729482168900306561771451117458269560776822204029446269228900000000000000000000000000000000000",
+   "side_decimal": "7.822875655532295295250807876819630217361",
+   "side_text": "7.822875655532295295250807876819630218",
+   "value": "7.82287565553230",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "7.82287565553230",
+    "exact_form": "78228756555323/10000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 4.7047e-15,
+   "t101_side": "62583005244258362362632293067/8000000000000000000000000000",
+   "below_t101_side_by": 7.8229e-20,
+   "witness_side": "846662303743146120044858147095203729184452687173783855889207587068962740050787026154244302953124909685073507/108229037635845729482168900306561771451117458269560776822204029446269228900000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "7.82287565553229",
+   "printed_exact_form": "(13/2) + (1/2)sqrt(7)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 5.2953e-15,
+   "above_exact_side_by": 4.5058e-36,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "refuse",
+    "index_record": "refused",
+    "reason": "a house or stage total of shared sides falls"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 3,
+    "moved_beyond": {
+     "1e-9": 3,
+     "1e-6": 3,
+     "1e-3": 3,
+     "1e-2": 3,
+     "1e-1": 0
+    },
+    "max_move": 0.03681944,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 54,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "312411060944608208367841498690854892883189283298420063951972168900339871665396069525107494339582754365627943/39814491078395808676235606394114758949952880245334657566739337857841105031250000000000000000000000000000000",
+   "side_decimal": "7.846667192843489782943314590960000004401",
+   "side_text": "7.846667192843489782943314590960000005",
+   "value": "7.84666719284349",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "7.84666719284349",
+    "exact_form": "784666719284349/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.1706e-16,
+   "t101_side": "7846667192843489783021781262887/1000000000000000000000000000000",
+   "below_t101_side_by": 7.8467e-20,
+   "witness_side": "312411060944608208367841498690854892883189283298420063951972168900339871665396069525107494339582754365627943/39814491078395808676235606394114758949952880245334657566739337857841105031250000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "7.84666719284348",
+   "printed_exact_form": "7 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))",
+   "printed_exact_form_degree": 4,
+   "above_printed_side_by": 9.7829e-15,
+   "above_exact_side_by": 1.7021e-30,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 8,
+    "moved_beyond": {
+     "1e-9": 8,
+     "1e-6": 8,
+     "1e-3": 8,
+     "1e-2": 8,
+     "1e-1": 0
+    },
+    "max_move": 0.06804477,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 55,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "7945771007503912979037467248603/1000000000000000000000000000000",
+   "side_decimal": "7.945771007503912979037467248603",
+   "side_text": "7.945771007503912979037467248603",
+   "value": "7.94577100750392",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "7.94577100750392",
+    "exact_form": "99322137593799/12500000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.021e-15,
+   "t101_side": "7945771007503912979037467248603/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "45008359536676929723997448113489843709436139445456950516174878752515824289700170265182591561250697416365677/5664442065366778049749479118750280607150684798937346061911509803080302250000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "7.94577100750391",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 2.979e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 1.052991e-19,
+    "max_turn_deg": 3.24577e-34,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {
+     "re_angled": 3
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 69,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "4413597327864869457509870663573/500000000000000000000000000000",
+   "side_decimal": "8.827194655729738915019741327146",
+   "side_text": "8.827194655729738915019741327146",
+   "value": "8.82719465572974",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "8.82719465572974",
+    "exact_form": "441359732786487/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 1.085e-15,
+   "t101_side": "4413597327864869457509870663573/500000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "441359732786487/50000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "8.82719465572973",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 8.915e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": null,
+    "index_record": null,
+    "reason": null
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 1.534401e-15,
+    "max_turn_deg": 4.25641e-16,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {
+     "straightened": 1
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 71,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "136300560887555212282659896276803209757457026743038443329017138521073256159874054529680831315468699936907403/15239207335297938742953337681996889056902567727681542179117428274427657800000000000000000000000000000000000",
+   "side_decimal": "8.944071557570315506565203868717210450401",
+   "side_text": "8.944071557570315506565203868717210451",
+   "value": "8.94407155757032",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "8.94407155757032",
+    "exact_form": "111800894469629/12500000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 4.4934e-15,
+   "t101_side": "8944071557570315506654644584293/1000000000000000000000000000000",
+   "below_t101_side_by": 8.9441e-20,
+   "witness_side": "136300560887555212282659896276803209757457026743038443329017138521073256159874054529680831315468699936907403/15239207335297938742953337681996889056902567727681542179117428274427657800000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "8.94407155757031",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 5.5066e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 3,
+    "moved_beyond": {
+     "1e-9": 3,
+     "1e-6": 3,
+     "1e-3": 3,
+     "1e-2": 2,
+     "1e-1": 0
+    },
+    "max_move": 0.02716503,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {
+     "straightened": 2
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 83,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "4817378824315541014678215685141/500000000000000000000000000000",
+   "side_decimal": "9.634757648631082029356431370282",
+   "side_text": "9.634757648631082029356431370282",
+   "value": "9.63475764863109",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "9.63475764863109",
+    "exact_form": "963475764863109/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.9706e-15,
+   "t101_side": "4817378824315541014678215685141/500000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "280016353066750833870146445318437455470980744577358967112811227450390193208135920575283642650799536755658752006367649176759313134669660491515113499262697734611261180929458185068539719681247384009007820937779915003914341212053631310127968911759668990184488548631/29063144427564910789038942267319459823923758584002043964485215049658426025000000000000000000000000000259047103210657352436349023892369464919807149792073412925525421299999316110750072886622973689513191491964944229980345884570460848344370481320410000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "9.63475764863108",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 2.0294e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 14,
+    "moved_beyond": {
+     "1e-9": 16,
+     "1e-6": 16,
+     "1e-3": 14,
+     "1e-2": 10,
+     "1e-1": 0
+    },
+    "max_move": 0.03034451,
+    "max_turn_deg": 2.12298e-15,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 87,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "2459703817487065565091120335551/250000000000000000000000000000",
+   "side_decimal": "9.838815269948262260364481342204",
+   "side_text": "9.838815269948262260364481342204",
+   "value": "9.83881526994827",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "9.83881526994827",
+    "exact_form": "983881526994827/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.7396e-15,
+   "t101_side": "2459703817487065565091120335551/250000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "5345751349388770216464483994012523389909749749126591128943049296586093893037993966546833/543332830500117805051467399234200663939831217048049186251501656039621324500000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "9.83881526994826",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 2.2604e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 6,
+    "moved_beyond": {
+     "1e-9": 6,
+     "1e-6": 6,
+     "1e-3": 6,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 0.002806002,
+    "max_turn_deg": 2.20801e-15,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {
+     "straightened": 11,
+     "re_angled": 4
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 101,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "42142135623730950488016887242097/4000000000000000000000000000000",
+   "side_decimal": "10.53553390593273762200422181052425",
+   "side_text": "10.53553390593273762200422181052425",
+   "value": "10.53553390593274",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "10.53553390593274",
+    "exact_form": "526776695296637/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.378e-15,
+   "t101_side": "658470869120796101381848571849/62500000000000000000000000000",
+   "below_t101_side_by": 1.0536e-19,
+   "witness_side": "42142135623730950488016887242097/4000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "10.53553390593273",
+   "printed_exact_form": "7 + (5/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.622e-15,
+   "above_exact_side_by": 4.8036e-33,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 5.96982e-31,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 2
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 104,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "10707106781186547524507915429917/1000000000000000000000000000000",
+   "side_decimal": "10.707106781186547524507915429917",
+   "side_text": "10.707106781186547524507915429917",
+   "value": "10.70710678118655",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "10.70710678118655",
+    "exact_form": "214142135623731/20000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.4755e-15,
+   "t101_side": "10707106781186547524507915429917/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "107071067811865475244008443621/10000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "10.70710678118654",
+   "printed_exact_form": "10 + (1/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.5245e-15,
+   "above_exact_side_by": 1.0707e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 1.443503e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 107,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "10846667192843489783051781262887/1000000000000000000000000000000",
+   "side_decimal": "10.846667192843489783051781262887",
+   "side_text": "10.846667192843489783051781262887",
+   "value": "10.84666719284349",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "10.84666719284349",
+    "exact_form": "1084666719284349/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.1695e-16,
+   "t101_side": "10846667192843489783051781262887/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "108466671928434897829433145909582979/10000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "10.84666719284348",
+   "printed_exact_form": "10 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))",
+   "printed_exact_form_degree": 4,
+   "above_printed_side_by": 9.7831e-15,
+   "above_exact_side_by": 1.0847e-19,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 4,
+    "moved_beyond": {
+     "1e-9": 4,
+     "1e-6": 4,
+     "1e-3": 4,
+     "1e-2": 4,
+     "1e-1": 4
+    },
+    "max_move": 0.1038167,
+    "max_turn_deg": 4.17525e-34,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 109,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "5474873734152916335457704004709/500000000000000000000000000000",
+   "side_decimal": "10.949747468305832670915408009418",
+   "side_text": "10.949747468305832670915408009418",
+   "value": "10.94974746830584",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "10.94974746830584",
+    "exact_form": "136871843353823/12500000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.3291e-15,
+   "t101_side": "5474873734152916335457704004709/500000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "547487373415291633540295526736697/50000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "10.94974746830583",
+   "printed_exact_form": "6 + (7/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 2.6709e-15,
+   "above_exact_side_by": 1.095e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 1.477817e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 122,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "46142135623730950488016887242097/4000000000000000000000000000000",
+   "side_decimal": "11.53553390593273762200422181052425",
+   "side_text": "11.53553390593273762200422181052425",
+   "value": "11.53553390593274",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "11.53553390593274",
+    "exact_form": "576776695296637/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.378e-15,
+   "t101_side": "720970869120796101382473571849/62500000000000000000000000000",
+   "below_t101_side_by": 1.1536e-19,
+   "witness_side": "46142135623730950488016887242097/4000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "11.53553390593273",
+   "printed_exact_form": "8 + (5/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.622e-15,
+   "above_exact_side_by": 4.8036e-33,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 5.96982e-31,
+    "max_turn_deg": 8.41808e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 7
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 124,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "291421356237309504880168872421/25000000000000000000000000000",
+   "side_decimal": "11.65685424949238019520675489684",
+   "side_text": "11.65685424949238019520675489684",
+   "value": "11.65685424949239",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "11.65685424949239",
+    "exact_form": "1165685424949239/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 9.8048e-15,
+   "t101_side": "5828427124746190097661661719667/500000000000000000000000000000",
+   "below_t101_side_by": 1.1657e-19,
+   "witness_side": "291421356237309504880168872421/25000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "11.65685424949238",
+   "printed_exact_form": "6 + 4 sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 1.9521e-16,
+   "above_exact_side_by": 1.2077e-30,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.41537e-30,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {
+     "re_angled": 2
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 125,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "11707106781186547524517915429917/1000000000000000000000000000000",
+   "side_decimal": "11.707106781186547524517915429917",
+   "side_text": "11.707106781186547524517915429917",
+   "value": "11.70710678118655",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "11.70710678118655",
+    "exact_form": "234142135623731/20000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.4755e-15,
+   "t101_side": "11707106781186547524517915429917/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "117071067811865475244008443621/10000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "11.70710678118654",
+   "printed_exact_form": "11 + (1/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.5245e-15,
+   "above_exact_side_by": 1.1707e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 1.584924e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 128,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "15946588300418089052686127216298892684189866048511230071012446353225496225199934581340998616193148665347973/1348538205308097941204911454642206214200137655557233094688252969172018405000000000000000000000000000000000",
+   "side_decimal": "11.82509196821368702914928242475344319235",
+   "side_text": "11.825091968213687029149282424753443193",
+   "value": "11.82509196821369",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "11.82509196821369",
+    "exact_form": "1182509196821369/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.9709e-15,
+   "t101_side": "2956272992053421757316883336109/250000000000000000000000000000",
+   "below_t101_side_by": 1.1825e-19,
+   "witness_side": "15946588300418089052686127216298892684189866048511230071012446353225496225199934581340998616193148665347973/1348538205308097941204911454642206214200137655557233094688252969172018405000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "11.82509196821368",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 7.0291e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 7.173373e-31,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {
+     "straightened": 1
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 145,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "50142135623730950488016887242097/4000000000000000000000000000000",
+   "side_decimal": "12.53553390593273762200422181052425",
+   "side_text": "12.53553390593273762200422181052425",
+   "value": "12.53553390593274",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "12.53553390593274",
+    "exact_form": "626776695296637/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.378e-15,
+   "t101_side": "783470869120796101383098571849/62500000000000000000000000000",
+   "below_t101_side_by": 1.2536e-19,
+   "witness_side": "50142135623730950488016887242097/4000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "12.53553390593273",
+   "printed_exact_form": "9 + (5/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.622e-15,
+   "above_exact_side_by": 4.8036e-33,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 5.96982e-31,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 2
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 147,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "316421356237309504880168872421/25000000000000000000000000000",
+   "side_decimal": "12.65685424949238019520675489684",
+   "side_text": "12.65685424949238019520675489684",
+   "value": "12.65685424949239",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "12.65685424949239",
+    "exact_form": "1265685424949239/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 9.8048e-15,
+   "t101_side": "6328427124746190097666661719667/500000000000000000000000000000",
+   "below_t101_side_by": 1.2657e-19,
+   "witness_side": "316421356237309504880168872421/25000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "12.65685424949238",
+   "printed_exact_form": "7 + 4 sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 1.9521e-16,
+   "above_exact_side_by": 1.2077e-30,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.415371e-30,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 148,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "316421356237309504880168872421/25000000000000000000000000000",
+   "side_decimal": "12.65685424949238019520675489684",
+   "side_text": "12.65685424949238019520675489684",
+   "value": "12.65685424949239",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "12.65685424949239",
+    "exact_form": "1265685424949239/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 9.8048e-15,
+   "t101_side": "6328427124746190097666661719667/500000000000000000000000000000",
+   "below_t101_side_by": 1.2657e-19,
+   "witness_side": "316421356237309504880168872421/25000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "12.65685424949238",
+   "printed_exact_form": "7 + 4 sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 1.9521e-16,
+   "above_exact_side_by": 1.2077e-30,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.415371e-30,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 149,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "12707106781186547524527915429917/1000000000000000000000000000000",
+   "side_decimal": "12.707106781186547524527915429917",
+   "side_text": "12.707106781186547524527915429917",
+   "value": "12.70710678118655",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "12.70710678118655",
+    "exact_form": "254142135623731/20000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.4755e-15,
+   "t101_side": "12707106781186547524527915429917/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "127071067811865475244008443621/10000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "12.70710678118654",
+   "printed_exact_form": "12 + (1/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.5245e-15,
+   "above_exact_side_by": 1.2707e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 1.726346e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 151,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "102583005244258362363032293067/8000000000000000000000000000",
+   "side_decimal": "12.822875655532295295379036633375",
+   "side_text": "12.822875655532295295379036633375",
+   "value": "12.82287565553230",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "12.82287565553230",
+    "exact_form": "128228756555323/10000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 4.7046e-15,
+   "t101_side": "102583005244258362363032293067/8000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "64114378277661476476254039384098151/5000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "12.82287565553229",
+   "printed_exact_form": "(23/2) + (1/2)sqrt(7)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 5.2954e-15,
+   "above_exact_side_by": 1.2823e-19,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "refuse",
+    "index_record": "refused",
+    "reason": "a house or stage total of shared sides falls"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 1,
+    "moved_beyond": {
+     "1e-9": 25,
+     "1e-6": 25,
+     "1e-3": 1,
+     "1e-2": 1,
+     "1e-1": 1
+    },
+    "max_move": 0.8228757,
+    "max_turn_deg": 5.47587e-34,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 170,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "845970869120796101383723571849/62500000000000000000000000000",
+   "side_decimal": "13.535533905932737622139577149584",
+   "side_text": "13.535533905932737622139577149584",
+   "value": "13.53553390593274",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "13.53553390593274",
+    "exact_form": "676776695296637/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.3779e-15,
+   "t101_side": "845970869120796101383723571849/62500000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "3383883476483184405501055452631/250000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "13.53553390593273",
+   "printed_exact_form": "10 + (5/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.6221e-15,
+   "above_exact_side_by": 1.3536e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 1.843503e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 171,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "13571428571428571428707142857143/1000000000000000000000000000000",
+   "side_decimal": "13.571428571428571428707142857143",
+   "side_text": "13.571428571428571428707142857143",
+   "value": "13.57142857142858",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "13.57142857142858",
+    "exact_form": "678571428571429/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 8.5713e-15,
+   "t101_side": "13571428571428571428707142857143/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "67857142857142857142857142857142857/5000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "13.57142857142857",
+   "printed_exact_form": "13 + (4/7)",
+   "printed_exact_form_degree": 1,
+   "above_printed_side_by": 1.4287e-15,
+   "above_exact_side_by": 1.3571e-19,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 12,
+    "moved_beyond": {
+     "1e-9": 12,
+     "1e-6": 12,
+     "1e-3": 12,
+     "1e-2": 6,
+     "1e-1": 0
+    },
+    "max_move": 0.02034287,
+    "max_turn_deg": 3.43775e-34,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {
+     "re_angled": 8
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 173,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "341421356237309504880168872421/25000000000000000000000000000",
+   "side_decimal": "13.65685424949238019520675489684",
+   "side_text": "13.65685424949238019520675489684",
+   "value": "13.65685424949239",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "13.65685424949239",
+    "exact_form": "1365685424949239/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 9.8048e-15,
+   "t101_side": "6828427124746190097671661719667/500000000000000000000000000000",
+   "below_t101_side_by": 1.3657e-19,
+   "witness_side": "341421356237309504880168872421/25000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "13.65685424949238",
+   "printed_exact_form": "8 + 4 sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 1.9521e-16,
+   "above_exact_side_by": 1.2077e-30,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.415371e-30,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 174,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "13707106781186547524537915429917/1000000000000000000000000000000",
+   "side_decimal": "13.707106781186547524537915429917",
+   "side_text": "13.707106781186547524537915429917",
+   "value": "13.70710678118655",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "13.70710678118655",
+    "exact_form": "274142135623731/20000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.4755e-15,
+   "t101_side": "13707106781186547524537915429917/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "137071067811865475244008443621/10000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "13.70710678118654",
+   "printed_exact_form": "13 + (1/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.5245e-15,
+   "above_exact_side_by": 1.3707e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 1.867767e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 178,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "8820768118639728966804082192888695142650886332190042535167785180566518372237881490876221235050827157614108183/637031857254332938819769702305836143199246083925354521067829405725457680500000000000000000000000000000000000",
+   "side_decimal": "13.84666719284348978294331459096000000021",
+   "side_text": "13.846667192843489782943314590960000001",
+   "value": "13.84666719284349",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "13.84666719284349",
+    "exact_form": "1384666719284349/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.1706e-16,
+   "t101_side": "13846667192843489783081781262887/1000000000000000000000000000000",
+   "below_t101_side_by": 1.3847e-19,
+   "witness_side": "8820768118639728966804082192888695142650886332190042535167785180566518372237881490876221235050827157614108183/637031857254332938819769702305836143199246083925354521067829405725457680500000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "13.84666719284348",
+   "printed_exact_form": "13 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))",
+   "printed_exact_form_degree": 4,
+   "above_printed_side_by": 9.7829e-15,
+   "above_exact_side_by": 1.7021e-30,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 16,
+    "moved_beyond": {
+     "1e-9": 16,
+     "1e-6": 16,
+     "1e-3": 16,
+     "1e-2": 16,
+     "1e-1": 4
+    },
+    "max_move": 0.1260085,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 197,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "58142135623730950488016887242097/4000000000000000000000000000000",
+   "side_decimal": "14.53553390593273762200422181052425",
+   "side_text": "14.53553390593273762200422181052425",
+   "value": "14.53553390593274",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "14.53553390593274",
+    "exact_form": "726776695296637/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.378e-15,
+   "t101_side": "908470869120796101384348571849/62500000000000000000000000000",
+   "below_t101_side_by": 1.4536e-19,
+   "witness_side": "58142135623730950488016887242097/4000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "14.53553390593273",
+   "printed_exact_form": "11 + (5/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.622e-15,
+   "above_exact_side_by": 4.8036e-33,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 5.96982e-31,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 2
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 198,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "14571428571428571428717142857143/1000000000000000000000000000000",
+   "side_decimal": "14.571428571428571428717142857143",
+   "side_text": "14.571428571428571428717142857143",
+   "value": "14.57142857142858",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "14.57142857142858",
+    "exact_form": "728571428571429/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 8.5713e-15,
+   "t101_side": "14571428571428571428717142857143/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "72857142857142857142857142857142857/5000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "14.57142857142857",
+   "printed_exact_form": "14 + (4/7)",
+   "printed_exact_form_degree": 1,
+   "above_printed_side_by": 1.4287e-15,
+   "above_exact_side_by": 1.4571e-19,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 12,
+    "moved_beyond": {
+     "1e-9": 12,
+     "1e-6": 12,
+     "1e-3": 12,
+     "1e-2": 6,
+     "1e-1": 0
+    },
+    "max_move": 0.02034287,
+    "max_turn_deg": 3.43775e-34,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {
+     "straightened": 2,
+     "re_angled": 8
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 200,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "366421356237309504880168872421/25000000000000000000000000000",
+   "side_decimal": "14.65685424949238019520675489684",
+   "side_text": "14.65685424949238019520675489684",
+   "value": "14.65685424949239",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "14.65685424949239",
+    "exact_form": "1465685424949239/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 9.8048e-15,
+   "t101_side": "7328427124746190097676661719667/500000000000000000000000000000",
+   "below_t101_side_by": 1.4657e-19,
+   "witness_side": "366421356237309504880168872421/25000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "14.65685424949238",
+   "printed_exact_form": "9 + 4 sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 1.9521e-16,
+   "above_exact_side_by": 1.2077e-30,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.415371e-30,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 201,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "14707106781186547524547915429917/1000000000000000000000000000000",
+   "side_decimal": "14.707106781186547524547915429917",
+   "side_text": "14.707106781186547524547915429917",
+   "value": "14.70710678118655",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "14.70710678118655",
+    "exact_form": "294142135623731/20000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.4755e-15,
+   "t101_side": "14707106781186547524547915429917/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "147071067811865475244008443621/10000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "14.70710678118654",
+   "printed_exact_form": "14 + (1/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.5245e-15,
+   "above_exact_side_by": 1.4707e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.009188e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 202,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "14727922061357855439362477738501/1000000000000000000000000000000",
+   "side_decimal": "14.727922061357855439362477738501",
+   "side_text": "14.727922061357855439362477738501",
+   "value": "14.72792206135786",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "14.72792206135786",
+    "exact_form": "736396103067893/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 4.5606e-15,
+   "t101_side": "14727922061357855439362477738501/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "14727922061357855439215198517887/1000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "14.72792206135785",
+   "printed_exact_form": "2 + 9 sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 5.4394e-15,
+   "above_exact_side_by": 1.4728e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.012132e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 203,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "3694543648263005692139267432271/250000000000000000000000000000",
+   "side_decimal": "14.778174593052022768557069729084",
+   "side_text": "14.778174593052022768557069729084",
+   "value": "14.77817459305203",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "14.77817459305203",
+    "exact_form": "1477817459305203/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.2314e-15,
+   "t101_side": "3694543648263005692139267432271/250000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "295563491861040455368185759663/20000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "14.77817459305202",
+   "printed_exact_form": "7 + (11/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 2.7686e-15,
+   "above_exact_side_by": 1.4778e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.019239e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {
+     "straightened": 8
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 204,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "118583005244258362363192293067/8000000000000000000000000000",
+   "side_decimal": "14.822875655532295295399036633375",
+   "side_text": "14.822875655532295295399036633375",
+   "value": "14.82287565553230",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "14.82287565553230",
+    "exact_form": "148228756555323/10000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 4.7046e-15,
+   "t101_side": "118583005244258362363192293067/8000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "9264297284707684559531754923/625000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "14.82287565553229",
+   "printed_exact_form": "(27/2) + (1/2)sqrt(7)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 5.2954e-15,
+   "above_exact_side_by": 1.4823e-19,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "review",
+    "index_record": null,
+    "reason": "no one-to-one pairing: for review"
+   },
+   "identity": {
+    "one_to_one": false,
+    "moved": null,
+    "moved_beyond": null,
+    "max_move": null,
+    "max_turn_deg": null,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": null
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 205,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "3706112786531022055915931516421/250000000000000000000000000000",
+   "side_decimal": "14.824451146124088223663726065684",
+   "side_text": "14.824451146124088223663726065684",
+   "value": "14.82445114612409",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "14.82445114612409",
+    "exact_form": "1482445114612409/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 1.7763e-15,
+   "t101_side": "3706112786531022055915931516421/250000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "160031930206799656647731871217803989692498884144319356539193652142678145364134403269663702885471946187597427/10795133568816181230144891790196418243508541990581797958915744040100662890000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "14.82445114612408",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 8.2237e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.025783e-19,
+    "max_turn_deg": 9.75396e-34,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {
+     "straightened": 1
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 226,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "62142135623730950488016887242097/4000000000000000000000000000000",
+   "side_decimal": "15.53553390593273762200422181052425",
+   "side_text": "15.53553390593273762200422181052425",
+   "value": "15.53553390593274",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "15.53553390593274",
+    "exact_form": "776776695296637/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.378e-15,
+   "t101_side": "970970869120796101384973571849/62500000000000000000000000000",
+   "below_t101_side_by": 1.5536e-19,
+   "witness_side": "62142135623730950488016887242097/4000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "15.53553390593273",
+   "printed_exact_form": "12 + (5/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.622e-15,
+   "above_exact_side_by": 4.8036e-33,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 5.96982e-31,
+    "max_turn_deg": 8.41808e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 7
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 227,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "19463834764831844055010554526310613/1250000000000000000000000000000000",
+   "side_decimal": "15.5710678118654752440084436210484904",
+   "side_text": "15.5710678118654752440084436210484904",
+   "value": "15.57106781186548",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "15.57106781186548",
+    "exact_form": "389276695296637/25000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 4.756e-15,
+   "t101_side": "486595869120796101380129821849/31250000000000000000000000000",
+   "below_t101_side_by": 1.5571e-19,
+   "witness_side": "19463834764831844055010554526310613/1250000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "15.57106781186547",
+   "printed_exact_form": "(17/2) + 5 sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 5.244e-15,
+   "above_exact_side_by": 7.1516e-36,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 1,
+    "moved_beyond": {
+     "1e-9": 1,
+     "1e-6": 1,
+     "1e-3": 1,
+     "1e-2": 1,
+     "1e-1": 1
+    },
+    "max_move": 0.2855339,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 229,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "391421356237309504880168872421/25000000000000000000000000000",
+   "side_decimal": "15.65685424949238019520675489684",
+   "side_text": "15.65685424949238019520675489684",
+   "value": "15.65685424949239",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "15.65685424949239",
+    "exact_form": "1565685424949239/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 9.8048e-15,
+   "t101_side": "7828427124746190097681661719667/500000000000000000000000000000",
+   "below_t101_side_by": 1.5657e-19,
+   "witness_side": "391421356237309504880168872421/25000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "15.65685424949238",
+   "printed_exact_form": "10 + 4 sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 1.9521e-16,
+   "above_exact_side_by": 1.2077e-30,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.415371e-30,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 230,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "7841463414634146341541829268293/500000000000000000000000000000",
+   "side_decimal": "15.682926829268292683083658536586",
+   "side_text": "15.682926829268292683083658536586",
+   "value": "15.68292682926830",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "15.68292682926830",
+    "exact_form": "156829268292683/10000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.3169e-15,
+   "t101_side": "7841463414634146341541829268293/500000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "156829268292682926829268292682926829/10000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "15.68292682926829",
+   "printed_exact_form": "15 + (28/41)",
+   "printed_exact_form_degree": 1,
+   "above_printed_side_by": 2.6831e-15,
+   "above_exact_side_by": 1.5683e-19,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 32,
+    "moved_beyond": {
+     "1e-9": 32,
+     "1e-6": 32,
+     "1e-3": 32,
+     "1e-2": 32,
+     "1e-1": 0
+    },
+    "max_move": 0.03448276,
+    "max_turn_deg": 4.149e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 231,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "15707106781186547524557915429917/1000000000000000000000000000000",
+   "side_decimal": "15.707106781186547524557915429917",
+   "side_text": "15.707106781186547524557915429917",
+   "value": "15.70710678118655",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "15.70710678118655",
+    "exact_form": "314142135623731/20000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.4754e-15,
+   "t101_side": "15707106781186547524557915429917/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "157071067811865475244008443621/10000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "15.70710678118654",
+   "printed_exact_form": "15 + (1/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.5246e-15,
+   "above_exact_side_by": 1.5707e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.15061e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 233,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "3944543648263005692141767432271/250000000000000000000000000000",
+   "side_decimal": "15.778174593052022768567069729084",
+   "side_text": "15.778174593052022768567069729084",
+   "value": "15.77817459305203",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "15.77817459305203",
+    "exact_form": "1577817459305203/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.2314e-15,
+   "t101_side": "3944543648263005692141767432271/250000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "315563491861040455368185759663/20000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "15.77817459305202",
+   "printed_exact_form": "8 + (11/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 2.7686e-15,
+   "above_exact_side_by": 1.5778e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.16066e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 234,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "126583005244258362363272293067/8000000000000000000000000000",
+   "side_decimal": "15.822875655532295295409036633375",
+   "side_text": "15.822875655532295295409036633375",
+   "value": "15.82287565553230",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "15.82287565553230",
+    "exact_form": "158228756555323/10000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 4.7046e-15,
+   "t101_side": "126583005244258362363272293067/8000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "264895888122488269610528789022783110204087959733491005047555687940272209587883812853701309906157866195471/16741324010207355800877399085231925859985176302805128370324629228393210000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "15.82287565553229",
+   "printed_exact_form": "(29/2) + (1/2)sqrt(7)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 5.2954e-15,
+   "above_exact_side_by": 1.5823e-19,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 6,
+    "moved_beyond": {
+     "1e-9": 6,
+     "1e-6": 6,
+     "1e-3": 6,
+     "1e-2": 6,
+     "1e-1": 0
+    },
+    "max_move": 0.09869176,
+    "max_turn_deg": 5.47587e-34,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 235,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "39566514083571420173918490518902493/2500000000000000000000000000000000",
+   "side_decimal": "15.8266056334285680695673962075609972",
+   "side_text": "15.8266056334285680695673962075609972",
+   "value": "15.82660563342857",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "15.82660563342857",
+    "exact_form": "1582660563342857/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 1.9304e-15,
+   "t101_side": "1978325704178571008715707782987/125000000000000000000000000000",
+   "below_t101_side_by": 1.5827e-19,
+   "witness_side": "39566514083571420173918490518902493/2500000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "15.82660563342856",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 8.0696e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 4,
+     "1e-6": 4,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 0.0003860014,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 257,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "1033470869120796101385598571849/62500000000000000000000000000",
+   "side_decimal": "16.535533905932737622169577149584",
+   "side_text": "16.535533905932737622169577149584",
+   "value": "16.53553390593274",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "16.53553390593274",
+    "exact_form": "826776695296637/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.3778e-15,
+   "t101_side": "1033470869120796101385598571849/62500000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "4133883476483184405501055452631/250000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "16.53553390593273",
+   "printed_exact_form": "13 + (5/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.6222e-15,
+   "above_exact_side_by": 1.6536e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 85,
+     "1e-6": 85,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 5.014871e-06,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {
+     "straightened": 12,
+     "re_angled": 3
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 260,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "416421356237309504880168872421/25000000000000000000000000000",
+   "side_decimal": "16.65685424949238019520675489684",
+   "side_text": "16.65685424949238019520675489684",
+   "value": "16.65685424949239",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "16.65685424949239",
+    "exact_form": "1665685424949239/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 9.8048e-15,
+   "t101_side": "8328427124746190097686661719667/500000000000000000000000000000",
+   "below_t101_side_by": 1.6657e-19,
+   "witness_side": "416421356237309504880168872421/25000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "16.65685424949238",
+   "printed_exact_form": "11 + 4 sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 1.9521e-16,
+   "above_exact_side_by": 1.2077e-30,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.415371e-30,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 262,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "16707106781186547524567915429917/1000000000000000000000000000000",
+   "side_decimal": "16.707106781186547524567915429917",
+   "side_text": "16.707106781186547524567915429917",
+   "value": "16.70710678118655",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "16.70710678118655",
+    "exact_form": "334142135623731/20000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.4754e-15,
+   "t101_side": "16707106781186547524567915429917/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "167071067811865475244008443621/10000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "16.70710678118654",
+   "printed_exact_form": "16 + (1/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.5246e-15,
+   "above_exact_side_by": 1.6707e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.292031e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 264,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "4194543648263005692144267432271/250000000000000000000000000000",
+   "side_decimal": "16.778174593052022768577069729084",
+   "side_text": "16.778174593052022768577069729084",
+   "value": "16.77817459305203",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "16.77817459305203",
+    "exact_form": "1677817459305203/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.2314e-15,
+   "t101_side": "4194543648263005692144267432271/250000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "335563491861040455368185759663/20000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "16.77817459305202",
+   "printed_exact_form": "9 + (11/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 2.7686e-15,
+   "above_exact_side_by": 1.6778e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.232491e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 265,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "4194543648263005692144267432271/250000000000000000000000000000",
+   "side_decimal": "16.778174593052022768577069729084",
+   "side_text": "16.778174593052022768577069729084",
+   "value": "16.77817459305203",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "16.77817459305203",
+    "exact_form": "1677817459305203/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.2314e-15,
+   "t101_side": "4194543648263005692144267432271/250000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "335563491861040455368185759663/20000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "16.77817459305202",
+   "printed_exact_form": "9 + (11/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 2.7686e-15,
+   "above_exact_side_by": 1.6778e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.302082e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 291,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "70142135623730950488016887242097/4000000000000000000000000000000",
+   "side_decimal": "17.53553390593273762200422181052425",
+   "side_text": "17.53553390593273762200422181052425",
+   "value": "17.53553390593274",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "17.53553390593274",
+    "exact_form": "876776695296637/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.378e-15,
+   "t101_side": "1095970869120796101386223571849/62500000000000000000000000000",
+   "below_t101_side_by": 1.7536e-19,
+   "witness_side": "70142135623730950488016887242097/4000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "17.53553390593273",
+   "printed_exact_form": "14 + (5/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.622e-15,
+   "above_exact_side_by": 4.8036e-33,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 5.970074e-31,
+    "max_turn_deg": 8.41808e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 7
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 293,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "1763414634146341463432268292683/100000000000000000000000000000",
+   "side_decimal": "17.63414634146341463432268292683",
+   "side_text": "17.63414634146341463432268292683",
+   "value": "17.63414634146342",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "17.63414634146342",
+    "exact_form": "881707317073171/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 5.3657e-15,
+   "t101_side": "1763414634146341463432268292683/100000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "176341463414634146341463414634146341/10000000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "17.63414634146341",
+   "printed_exact_form": "17 + (26/41)",
+   "printed_exact_form_degree": 1,
+   "above_printed_side_by": 4.6343e-15,
+   "above_exact_side_by": 1.7634e-19,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "admit",
+    "index_record": "regularized",
+    "reason": "every admission condition holds"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 27,
+    "moved_beyond": {
+     "1e-9": 27,
+     "1e-6": 27,
+     "1e-3": 27,
+     "1e-2": 27,
+     "1e-1": 0
+    },
+    "max_move": 0.03448276,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 294,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "441421356237309504880168872421/25000000000000000000000000000",
+   "side_decimal": "17.65685424949238019520675489684",
+   "side_text": "17.65685424949238019520675489684",
+   "value": "17.65685424949239",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "17.65685424949239",
+    "exact_form": "1765685424949239/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 9.8048e-15,
+   "t101_side": "8828427124746190097691661719667/500000000000000000000000000000",
+   "below_t101_side_by": 1.7657e-19,
+   "witness_side": "441421356237309504880168872421/25000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "17.65685424949238",
+   "printed_exact_form": "12 + 4 sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 1.9521e-16,
+   "above_exact_side_by": 1.2077e-30,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.649939e-30,
+    "max_turn_deg": 8.41808e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 5
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 296,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "17707106781186547524577915429917/1000000000000000000000000000000",
+   "side_decimal": "17.707106781186547524577915429917",
+   "side_text": "17.707106781186547524577915429917",
+   "value": "17.70710678118655",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "17.70710678118655",
+    "exact_form": "354142135623731/20000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.4754e-15,
+   "t101_side": "17707106781186547524577915429917/1000000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "177071067811865475244008443621/10000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "17.70710678118654",
+   "printed_exact_form": "17 + (1/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.5246e-15,
+   "above_exact_side_by": 1.7707e-19,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 2.433452e-19,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 298,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "4444543648263005692146767432271/250000000000000000000000000000",
+   "side_decimal": "17.778174593052022768587069729084",
+   "side_text": "17.778174593052022768587069729084",
+   "value": "17.77817459305203",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "17.77817459305203",
+    "exact_form": "1777817459305203/100000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 7.2314e-15,
+   "t101_side": "4444543648263005692146767432271/250000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "355563491861040455368185759663/20000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "17.77817459305202",
+   "printed_exact_form": "10 + (11/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 2.7686e-15,
+   "above_exact_side_by": 1.7778e-19,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "refuse",
+    "index_record": "refused",
+    "reason": "a house or stage total of shared sides falls"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 2,
+    "moved_beyond": {
+     "1e-9": 2,
+     "1e-6": 2,
+     "1e-3": 2,
+     "1e-2": 2,
+     "1e-1": 2
+    },
+    "max_move": 0.7781746,
+    "max_turn_deg": 9.781e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 299,
+   "run": "full",
+   "output": "solved",
+   "outputs_at_row_3": [
+    "solved"
+   ],
+   "side": "142583005244258362363432293067/8000000000000000000000000000",
+   "side_decimal": "17.822875655532295295429036633375",
+   "side_text": "17.822875655532295295429036633375",
+   "value": "17.82287565553230",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "17.82287565553230",
+    "exact_form": "178228756555323/10000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 4.7046e-15,
+   "t101_side": "142583005244258362363432293067/8000000000000000000000000000",
+   "below_t101_side_by": 0.0,
+   "witness_side": "11139297284707684559531754923/625000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "17.82287565553229",
+   "printed_exact_form": "(33/2) + (1/2)sqrt(7)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 5.2954e-15,
+   "above_exact_side_by": 1.7823e-19,
+   "agrees_with_report": false,
+   "drawing": "held",
+   "after_registration": {
+    "decision": "review",
+    "index_record": null,
+    "reason": "no one-to-one pairing: for review"
+   },
+   "identity": {
+    "one_to_one": false,
+    "moved": null,
+    "moved_beyond": null,
+    "max_move": null,
+    "max_turn_deg": null,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": null
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "solved",
+    "changes": {}
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  },
+  {
+   "n": 300,
+   "run": "full",
+   "output": "same",
+   "outputs_at_row_3": [
+    "same",
+    "solved"
+   ],
+   "side": "481203609374438041866078176512741310488265899007280893222937668728430443835310303371165966893560412114627/26997322610854821658680507847264156175680436273660726180218276743669792100000000000000000000000000000000",
+   "side_decimal": "17.82412338847854347089320180735741033863",
+   "side_text": "17.824123388478543470893201807357410339",
+   "value": "17.82412338847855",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "17.82412338847855",
+    "exact_form": "356482467769571/20000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 6.5291e-15,
+   "t101_side": "17824123388478543471071443041243/1000000000000000000000000000000",
+   "below_t101_side_by": 1.7824e-19,
+   "witness_side": "481203609374438041866078176512741310488265899007280893222937668728430443835310303371165966893560412114627/26997322610854821658680507847264156175680436273660726180218276743669792100000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "17.82412338847854",
+   "printed_exact_form": null,
+   "printed_exact_form_degree": null,
+   "above_printed_side_by": 3.4709e-15,
+   "above_exact_side_by": null,
+   "agrees_with_report": true,
+   "drawing": "no-change",
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 7.338965e-31,
+    "max_turn_deg": 0.0,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 0
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+    "side": "same",
+    "changes": {
+     "straightened": 1
+    }
+   },
+   "generator": {
+    "name": "evand-regularize",
+    "pin": "675a5ea",
+    "patches": [],
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt"
+   }
+  }
+ ]
+}

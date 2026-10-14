@@ -108,7 +108,7 @@ agenda:
     - packing/tests/test_fractional_sweep_integer.py
     - packing/frontier/results.yaml
     - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
-    - docs/project/handoff-2026-09-04-block-close.md
+    - docs/project/handoffs/handoff-2026-09-04-block-close.md
     next_evidence: >-
       Whether BC-191's row-generation and site-density costs, now the binding cost with
       the gate an order of magnitude cheaper, move by a comparable factor once measured
@@ -187,7 +187,7 @@ agenda:
       paths:
       - packing/frontier/results.yaml
       - packing/frontier/RESULTS.md
-      - docs/project/handoff-2026-09-04-block-close.md
+      - docs/project/handoffs/handoff-2026-09-04-block-close.md
       - packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md
       - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
       - packing/campaign/ledger.md

@@ -4,8 +4,8 @@
 
 **Author:** Codex, with delegated source analysis and Astra review
 
-**Status:** Initial Repairs Merged; Cleanup Implementation Complete; Verification
-Tracked in PR #496
+**Status:** Initial Repairs Merged; Cleanup Merged in PR #496; Review Follow-Up in
+Progress
 
 ## Overview
 
@@ -116,9 +116,14 @@ bounded probes. The retry passed 3,907 of 3,932 checks and failed on 25 GitHub H
 responses after 27m36s of checking.
 Local paired HEAD and GET probes both returned 200; this does not establish
 method-sensitive failure.
-A complete local audit of the same deployed revision is running with the new progress
-reporting and a 30-minute ceiling.
-Keep `think-xio5` open until the complete publication audit succeeds.
+A complete local audit of the same deployed revision with the patched checker then
+passed 3,932 of 3,932 checks in 511.65 seconds, with 993 unique transport requests and
+no retries
+([review C](https://github.com/jlevy/squares/pull/496#pullrequestreview-5481651340)
+records the receipt).
+After PR #496 merged as `8aba9508`, the hosted `verify-deployment` job passed in 3m45s
+([run 38117038690](https://github.com/jlevy/squares/actions/runs/38117038690)).
+`think-xio5` is closed.
 `think-9k61` owns scoping pre-push prerequisites: the merged entry point runs all 65,
 while its existing dependency selector reaches 9 for a website-test edit.
 A broad package pattern still reaches 58 for the CI-policy module.
@@ -185,6 +190,35 @@ two-worker host limit: the existing normal pytest lane derives nine workers from
 CPUs minus two outer jobs plus one, with `PACK_JOBS=1`; its pool-heavy lane uses one
 process with `PACK_JOBS=2`. Account for this allocation when scheduling validators
 alongside other local work.
+
+## Review Follow-Up
+
+PR #496 merged as `8aba9508` before three later reviews were addressed: a full senior
+review (E), a performance review (F) and a correctness review (G). The follow-up branch
+`claude/pr496-review-fixes` (`think-jjs7`) carries their fixes.
+
+- **Prerequisite attribution (G1, G2).** Push scoping trusted `Step.touches`, but 48
+  attributed steps imported 171 files they did not claim, and `*.py` being claimed by
+  the lint floor left no fallback.
+  Every attributed step now claims the static import closure of what it runs; a contract
+  test enforces it in 3 to 20 seconds, depending on the host and disk.
+  The site renderers form one 138-file import cycle, so 17 steps claim it as a group and
+  21 claim `packing/devtools/*` in all, against 6 before.
+  A one-file `devtools` change now selects 21 of 65 prerequisites instead of 10; most of
+  the added time is `exact verification` (118 s), which reaches the cycle through one
+  function-local import (`think-2cuz`, review A4 on PR #507).
+- **Bounded audit (F1, F2).** The 30-minute job ceiling killed the checker before it
+  printed anything. The checker now stops itself at `--deadline-minutes 25` and prints
+  what it reached. Timeouts and dropped connections are retried rather than ending the
+  audit.
+- **Smaller repairs.** JSON output stays one document under `--push` (E1, G4), selector
+  errors name the snapshot (G3), the test doubles always receive `on_retry` (E2), the
+  ceiling and deadline are pinned (E3), and the snapshot argument refusals are tested
+  (E6). G5 needed no claim: the math-markup step never imports kpress.
+- **Deferred under `think-ht59`.** Budgets for large narrow selections (`think-ri5z`),
+  reusing the probe’s selection (`think-tqwo`), host-level handling of github.com
+  throttling (`think-h7c0`), and claiming the paths that most often force the full
+  fallback (`think-7qbv`).
 
 ## References
 

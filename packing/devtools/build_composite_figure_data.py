@@ -122,7 +122,7 @@ def _first_party_lower_bounds() -> frozenset[str]:
 def _recent_lower_bounds() -> frozenset[int]:
     """The cases whose lower bound is a recent result, which the figure stars.
 
-    The star used to be `first_proved_here`, and so it went out at n = 11 when Kleddamag's
+    The star used to be `first_proved_here`, and so it went out at n = 11 when Overbeck's
     3.875, developed from T-026, became the verified bound. The owner (2026-09-27) wants the
     figures to show the current state of understanding, with recent changes marked as new
     and credit given case by case on each line. `devtools.build_bound_citations` decides it

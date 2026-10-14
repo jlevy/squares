@@ -953,7 +953,7 @@ and
 [maintained replay receipt](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-corrected-replay/geometry-receipt.json).
 The independent A6 upper-certificate check and PR139’s final combined validation are
 complete. The superseding
-[daytime strategy](../specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
+[daytime strategy](../specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
 separates parent-domain, changed-atom, structural-selection, core/net and reserve
 blocks, each with a declared control and scoped outcome.
 It records the source handoff, review findings and dependencies in beads before changing

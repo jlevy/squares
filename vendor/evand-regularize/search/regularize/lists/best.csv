@@ -1,0 +1,325 @@
+n,side,finder,variant,level,level_text,groups,orientation,shape,symmetry,input,cert
+1,1.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-001.cert.gz
+2,2.0,-,conservative,0,identical,1 -> 1,as source,none,[4],exact batch (register witness),search/regularize/lists/certs/n-002.cert.gz
+3,2.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-003.cert.gz
+4,2.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-004.cert.gz
+5,2.70710678118654752440,Frits Göbel,conservative,2,same packing (traversable without expansion),2 -> 2,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-005.cert.gz
+6,3.0,"Michael Kearney, Peter Shiu",conservative,0,identical,1 -> 1,as source,none,[4],exact batch (register witness),search/regularize/lists/certs/n-006.cert.gz
+7,3.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-007.cert.gz
+8,3.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-008.cert.gz
+9,3.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-009.cert.gz
+10,3.70710678118654752440,Frits Göbel,conservative,1,rattlers only,3 -> 2,as source,none,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-010.cert.gz
+11,3.87708359002281417730,Walter Trump,conservative,0,identical,2 -> 2,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-011.cert.gz
+12,4.0,-,conservative,0,identical,1 -> 1,as source,none,[4],exact batch (register witness),search/regularize/lists/certs/n-012.cert.gz
+13,4.0,Wolfram Bentz,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-013.cert.gz
+14,4.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-014.cert.gz
+15,4.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-015.cert.gz
+16,4.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-016.cert.gz
+17,4.67553009360455095163,John Bidwell,conservative,1,rattlers only,4 -> 3,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-017.cert.gz
+18,4.82287565553229529525,Pertti Hämäläinen,conservative,2,same packing (traversable without expansion),4 -> 2,rotated 90° anticlockwise,strip,[2],exact batch (register witness),search/regularize/lists/certs/n-018.cert.gz
+19,4.88561808316412673173,Robert Wainwright,conservative,1,rattlers only,3 -> 2,as source,strip,[7],exact batch (register witness),search/regularize/lists/certs/n-019.cert.gz
+20,5.0,-,conservative,0,identical,1 -> 1,as source,none,[4],exact batch (register witness),search/regularize/lists/certs/n-020.cert.gz
+21,5.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-021.cert.gz
+22,5.0,Wolfram Bentz,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-022.cert.gz
+23,5.0,Hiroshi Nagamochi,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-023.cert.gz
+24,5.0,Erich Friedman,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-024.cert.gz
+25,5.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-025.cert.gz
+26,5.62132034355964257320,Erich Friedman,conservative,1,rattlers only,4 -> 2,rotated 90° clockwise,strip,[],exact batch (register witness),search/regularize/lists/certs/n-026.cert.gz
+27,5.70710678118654752440,Frits Göbel,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-027.cert.gz
+28,5.82444461667405929695,David Ellsworth,conservative,0,identical,2 -> 2,as source,strip,"[1, 2, 3]",exact batch (register witness),search/regularize/lists/certs/n-028.cert.gz
+29,5.93383346267692918968,Thomas Schadt,conservative,2,same packing (traversable without expansion),8 -> 6,reflected in the anti-diagonal,strip,[],exact batch (register witness),search/regularize/lists/certs/n-029.cert.gz
+30,6.0,-,conservative,0,identical,1 -> 1,as source,none,[4],exact batch (register witness),search/regularize/lists/certs/n-030.cert.gz
+31,6.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-031.cert.gz
+32,6.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-032.cert.gz
+33,6.0,Wolfram Bentz,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-033.cert.gz
+34,6.0,Hiroshi Nagamochi,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-034.cert.gz
+35,6.0,Erich Friedman,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-035.cert.gz
+36,6.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-036.cert.gz
+37,6.59861960924436011617,David W. Cantrell,conservative,2,same packing (traversable without expansion),7 -> 4,as source,strip,[7],exact batch (register witness),search/regularize/lists/certs/n-037.cert.gz
+38,6.70710678118654752440,Frits Göbel,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-038.cert.gz
+39,6.81072208306864885169,Thomas Schadt,conservative,2,same packing (traversable without expansion),11 -> 3,rotated 90° clockwise,arc,[],exact batch (register witness),search/regularize/lists/certs/n-039.cert.gz
+40,6.82842712474619009760,Frits Göbel,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-040.cert.gz
+41,6.92669309446880223158,Thomas Schadt,conservative,2,same packing (traversable without expansion),4 -> 3,rotated 90° anticlockwise,arc,[],exact batch (register witness),search/regularize/lists/certs/n-041.cert.gz
+42,7.0,-,conservative,0,identical,1 -> 1,as source,none,[4],exact batch (register witness),search/regularize/lists/certs/n-042.cert.gz
+43,7.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-043.cert.gz
+44,7.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-044.cert.gz
+45,7.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-045.cert.gz
+46,7.0,Wolfram Bentz,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-046.cert.gz
+47,7.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-047.cert.gz
+48,7.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-048.cert.gz
+49,7.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-049.cert.gz
+50,7.57142857142857142857,Thomas Schadt,conservative,2,same packing (traversable without expansion),6 -> 2,rotated 90° anticlockwise,strip,[2],exact batch (register witness),search/regularize/lists/certs/n-050.cert.gz
+51,7.69035593728849174800,Thomas Schadt,conservative,1,rattlers only,3 -> 2,as source,gray,[7],store best (refreshed),search/regularize/lists/certs/n-051.cert.gz
+52,7.70710678118654752440,Frits Göbel,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-052.cert.gz
+53,7.82287565553229529525,David W. Cantrell,conservative,2,same packing (traversable without expansion),4 -> 4,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-053.cert.gz
+54,7.84666719284348978294,David W. Cantrell,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,[2],exact batch (register witness),search/regularize/lists/certs/n-054.cert.gz
+55,7.94577100750391297895,Thomas Schadt,conservative,1,rattlers only,9 -> 7,as source,gray,[],exact batch (register witness),search/regularize/lists/certs/n-055.cert.gz
+56,8.0,-,conservative,0,identical,1 -> 1,as source,none,[4],exact batch (register witness),search/regularize/lists/certs/n-056.cert.gz
+57,8.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-057.cert.gz
+58,8.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-058.cert.gz
+59,8.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-059.cert.gz
+60,8.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-060.cert.gz
+61,8.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-061.cert.gz
+62,8.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-062.cert.gz
+63,8.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-063.cert.gz
+64,8.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-064.cert.gz
+65,8.53553390593273762200,Frits Göbel,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-065.cert.gz
+66,8.65685424949238019520,Evert Stenlund,conservative,2,same packing (traversable without expansion),31 -> 2,as source,strip,[7],exact batch (register witness),search/regularize/lists/certs/n-066.cert.gz
+67,8.70710678118654752440,Evert Stenlund,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-067.cert.gz
+68,8.79879523721828390257,Francisco Couzo,conservative,2,same packing (traversable without expansion),13 -> 9,as source,gray,[],exact batch (register witness),search/regularize/lists/certs/n-068.cert.gz
+69,8.82719465572973891493,Maurizio Morandi,conservative,1,rattlers only,4 -> 3,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-069.cert.gz
+70,8.88096037155557959469,Joe DeVincentis,fewest,2,same packing (traversable without expansion),12 -> 2,as source,strip,[],store best (refreshed),search/regularize/lists/certs/n-070.cert.gz
+71,8.94407155757031550656,Thomas Schadt,conservative,2,same packing (traversable without expansion),8 -> 6,rotated 90° anticlockwise,arc,[],exact batch (register witness),search/regularize/lists/certs/n-071.cert.gz
+72,9.0,-,conservative,0,identical,1 -> 1,as source,none,[4],exact batch (register witness),search/regularize/lists/certs/n-072.cert.gz
+73,9.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-073.cert.gz
+74,9.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-074.cert.gz
+75,9.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-075.cert.gz
+76,9.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-076.cert.gz
+77,9.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-077.cert.gz
+78,9.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-078.cert.gz
+79,9.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-079.cert.gz
+80,9.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-080.cert.gz
+81,9.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-081.cert.gz
+82,9.53553390593273762200,Frits Göbel,conservative,2,same packing (traversable without expansion),2 -> 2,rotated 180°,strip,[5],exact batch (register witness),search/regularize/lists/certs/n-082.cert.gz
+83,9.63475764863108202926,Károly Hajba,conservative,2,same packing (traversable without expansion),4 -> 4,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-083.cert.gz
+84,9.69793479901492130706,Evert Stenlund,conservative,2,same packing (traversable without expansion),18 -> 5,as source,gray,[],store best (refreshed),search/regularize/lists/certs/n-084.cert.gz
+85,9.74264068711928514640,Erich Friedman,conservative,1,rattlers only,4 -> 2,rotated 90° clockwise,strip,[],exact batch (register witness),search/regularize/lists/certs/n-085.cert.gz
+86,9.82053540749674220987,Erich Friedman,conservative,2,same packing (traversable without expansion),40 -> 4,rotated 90° anticlockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-086.cert.gz
+87,9.83881526994826226026,David Ellsworth,conservative,2,same packing (traversable without expansion),16 -> 3,reflected in the anti-diagonal,strip,[],exact batch (register witness),search/regularize/lists/certs/n-087.cert.gz
+88,9.88245103048124681932,David Ellsworth,fewest,2,same packing (traversable without expansion),18 -> 3,as source,gray,[],store best (refreshed),search/regularize/lists/certs/n-088.cert.gz
+89,9.94974746830583267080,Evert Stenlund,conservative,1,rattlers only,3 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-089.cert.gz
+90,10.0,-,conservative,0,identical,1 -> 1,as source,none,[4],exact batch (register witness),search/regularize/lists/certs/n-090.cert.gz
+91,10.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-091.cert.gz
+92,10.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-092.cert.gz
+93,10.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-093.cert.gz
+94,10.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-094.cert.gz
+95,10.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-095.cert.gz
+96,10.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-096.cert.gz
+97,10.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-097.cert.gz
+98,10.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-098.cert.gz
+99,10.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-099.cert.gz
+100,10.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-100.cert.gz
+101,10.5355339059327376220,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-101.cert.gz
+102,10.6058286964315783603,Francisco Couzo,conservative,2,same packing (traversable without expansion),19 -> 3,rotated 90° anticlockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-102.cert.gz
+103,10.6792320473613064425,Francisco Couzo,conservative,2,same packing (traversable without expansion),16 -> 8,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-103.cert.gz
+104,10.7071067811865475244,-,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-104.cert.gz
+105,10.7893037837481588309,Francisco Couzo,conservative,2,same packing (traversable without expansion),17 -> 9,rotated 180°,arc,[],store best (refreshed),search/regularize/lists/certs/n-105.cert.gz
+106,10.8229080441328475550,Francisco Couzo,conservative,2,same packing (traversable without expansion),14 -> 3,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-106.cert.gz
+107,10.8466671928434897829,Károly Hajba,conservative,2,same packing (traversable without expansion),3 -> 3,as source,strip,[7],exact batch (register witness),search/regularize/lists/certs/n-107.cert.gz
+108,10.9048210123203564289,Károly Hajba,conservative,2,same packing (traversable without expansion),11 -> 9,rotated 90° anticlockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-108.cert.gz
+109,10.9497474683058326708,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-109.cert.gz
+110,10.9967833966315916395,Francisco Couzo,conservative,2,same packing (traversable without expansion),18 -> 16,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-110.cert.gz
+111,11.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-111.cert.gz
+112,11.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-112.cert.gz
+113,11.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-113.cert.gz
+114,11.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-114.cert.gz
+115,11.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-115.cert.gz
+116,11.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-116.cert.gz
+117,11.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-117.cert.gz
+118,11.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-118.cert.gz
+119,11.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-119.cert.gz
+120,11.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-120.cert.gz
+121,11.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-121.cert.gz
+122,11.5355339059327376220,-,conservative,2,same packing (traversable without expansion),2 -> 2,rotated 180°,strip,[5],exact batch (register witness),search/regularize/lists/certs/n-122.cert.gz
+123,11.5913781454976981594,Francisco Couzo,conservative,2,same packing (traversable without expansion),15 -> 2,reflected in the anti-diagonal,strip,[],store best (refreshed),search/regularize/lists/certs/n-123.cert.gz
+124,11.6568542494923801952,-,conservative,1,rattlers only,3 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-124.cert.gz
+125,11.7071067811865475244,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-125.cert.gz
+126,11.7426406871192851464,Joost de Winter,conservative,2,same packing (traversable without expansion),15 -> 2,rotated 90° anticlockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-126.cert.gz
+127,11.8108787875891798395,-,conservative,2,same packing (traversable without expansion),27 -> 9,as source,gray,[],store best (refreshed),search/regularize/lists/certs/n-127.cert.gz
+128,11.8250919682136870291,David Ellsworth,conservative,1,rattlers only,4 -> 3,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-128.cert.gz
+129,11.8720298490811799736,David Ellsworth,fewest,2,same packing (traversable without expansion),31 -> 4,as source,strip,[],store best (refreshed),search/regularize/lists/certs/n-129.cert.gz
+130,11.9044830325157864399,Francisco Couzo,conservative,2,same packing (traversable without expansion),10 -> 10,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-130.cert.gz
+131,11.9496595880358603966,Francisco Couzo,conservative,2,same packing (traversable without expansion),14 -> 13,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-131.cert.gz
+132,11.9856801988458088114,Francisco Couzo,conservative,2,same packing (traversable without expansion),18 -> 12,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-132.cert.gz
+133,12.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-133.cert.gz
+134,12.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-134.cert.gz
+135,12.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-135.cert.gz
+136,12.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-136.cert.gz
+137,12.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-137.cert.gz
+138,12.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-138.cert.gz
+139,12.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-139.cert.gz
+140,12.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-140.cert.gz
+141,12.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-141.cert.gz
+142,12.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-142.cert.gz
+143,12.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-143.cert.gz
+144,12.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-144.cert.gz
+145,12.5355339059327376220,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-145.cert.gz
+146,12.5837822774150768818,David W. Cantrell,conservative,2,same packing (traversable without expansion),25 -> 3,as source,strip,[],store best (refreshed),search/regularize/lists/certs/n-146.cert.gz
+147,12.6568542494923801952,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,[5],exact batch (register witness),search/regularize/lists/certs/n-147.cert.gz
+148,12.6568542494923801952,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-148.cert.gz
+149,12.7071067811865475244,-,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-149.cert.gz
+150,12.7781745930520227684,David Ellsworth,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,[7],exact batch (register witness),search/regularize/lists/certs/n-150.cert.gz
+151,12.8228756555322952952,David Ellsworth,conservative,2,same packing (traversable without expansion),7 -> 3,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-151.cert.gz
+152,12.8307188009766099548,Francisco Couzo,conservative,2,same packing (traversable without expansion),6 -> 3,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-152.cert.gz
+153,12.8720298490811799736,David Ellsworth,fewest,2,same packing (traversable without expansion),27 -> 5,rotated 180°,strip,[],store best (refreshed),search/regularize/lists/certs/n-153.cert.gz
+154,12.9230702023011407489,Francisco Couzo,conservative,2,same packing (traversable without expansion),16 -> 12,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-154.cert.gz
+155,12.9524989440140073818,Francisco Couzo,conservative,2,same packing (traversable without expansion),20 -> 19,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-155.cert.gz
+156,12.9820826985168931019,Francisco Couzo,conservative,2,same packing (traversable without expansion),17 -> 16,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-156.cert.gz
+157,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-157.cert.gz
+158,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-158.cert.gz
+159,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-159.cert.gz
+160,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-160.cert.gz
+161,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-161.cert.gz
+162,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-162.cert.gz
+163,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-163.cert.gz
+164,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-164.cert.gz
+165,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-165.cert.gz
+166,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-166.cert.gz
+167,13.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-167.cert.gz
+168,13.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-168.cert.gz
+169,13.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-169.cert.gz
+170,13.5355339059327376220,Károly Hajba,conservative,1,rattlers only,10 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-170.cert.gz
+171,13.5714285714285714285,David Ellsworth,conservative,2,same packing (traversable without expansion),5 -> 3,rotated 180°,arc,[5],exact batch (register witness),search/regularize/lists/certs/n-171.cert.gz
+172,13.6189889568993984288,Francisco Couzo,fewest,2,same packing (traversable without expansion),23 -> 6,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-172.cert.gz
+173,13.6568542494923801952,-,conservative,2,same packing (traversable without expansion),2 -> 2,rotated 180°,strip,[5],exact batch (register witness),search/regularize/lists/certs/n-173.cert.gz
+174,13.7071067811865475244,-,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-174.cert.gz
+175,13.7671207246923132171,David Ellsworth,conservative,2,same packing (traversable without expansion),21 -> 15,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-175.cert.gz
+176,13.8228756555322952952,-,conservative,2,same packing (traversable without expansion),5 -> 2,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-176.cert.gz
+177,13.8229797341694486000,Francisco Couzo,conservative,2,same packing (traversable without expansion),12 -> 4,as source,strip,[],store best (refreshed),search/regularize/lists/certs/n-177.cert.gz
+178,13.8466671928434897829,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,[2],exact batch (register witness),search/regularize/lists/certs/n-178.cert.gz
+179,13.8837954905108984401,David Ellsworth,conservative,2,same packing (traversable without expansion),11 -> 6,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-179.cert.gz
+180,13.9169935224778324834,Francisco Couzo,conservative,2,same packing (traversable without expansion),18 -> 16,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-180.cert.gz
+181,13.9537488219544024979,Francisco Couzo,conservative,2,same packing (traversable without expansion),21 -> 20,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-181.cert.gz
+182,13.9740907131214390070,Francisco Couzo,conservative,2,same packing (traversable without expansion),16 -> 15,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-182.cert.gz
+183,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-183.cert.gz
+184,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-184.cert.gz
+185,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-185.cert.gz
+186,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-186.cert.gz
+187,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-187.cert.gz
+188,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-188.cert.gz
+189,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-189.cert.gz
+190,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-190.cert.gz
+191,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-191.cert.gz
+192,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-192.cert.gz
+193,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-193.cert.gz
+194,14.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-194.cert.gz
+195,14.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-195.cert.gz
+196,14.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-196.cert.gz
+197,14.5355339059327376220,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-197.cert.gz
+198,14.5714285714285714285,-,conservative,2,same packing (traversable without expansion),7 -> 3,rotated 180°,arc,[5],exact batch (register witness),search/regularize/lists/certs/n-198.cert.gz
+199,14.6175721735928068435,Francisco Couzo,fewest,2,same packing (traversable without expansion),22 -> 4,rotated 180°,strip,[],store best (refreshed),search/regularize/lists/certs/n-199.cert.gz
+200,14.6568542494923801952,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-200.cert.gz
+201,14.7071067811865475244,-,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-201.cert.gz
+202,14.7279220613578554392,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-202.cert.gz
+203,14.7781745930520227684,David Ellsworth,conservative,1,rattlers only,6 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-203.cert.gz
+204,14.8228756555322952952,-,conservative,2,same packing (traversable without expansion),5 -> 2,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-204.cert.gz
+205,14.8244511461240882235,David Ellsworth,conservative,1,rattlers only,4 -> 3,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-205.cert.gz
+206,14.8601586633919032366,Francisco Couzo,conservative,2,same packing (traversable without expansion),45 -> 4,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-206.cert.gz
+207,14.8855063088416776824,Francisco Couzo,conservative,2,same packing (traversable without expansion),20 -> 6,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-207.cert.gz
+208,14.9245187720293558859,Francisco Couzo,conservative,2,same packing (traversable without expansion),22 -> 19,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-208.cert.gz
+209,14.9462232264464510551,Francisco Couzo,conservative,2,same packing (traversable without expansion),28 -> 22,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-209.cert.gz
+210,14.9730011165876257418,Francisco Couzo,conservative,2,same packing (traversable without expansion),29 -> 27,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-210.cert.gz
+211,14.9979607049673615650,Joost de Winter,conservative,2,same packing (traversable without expansion),21 -> 20,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-211.cert.gz
+212,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-212.cert.gz
+213,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-213.cert.gz
+214,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-214.cert.gz
+215,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-215.cert.gz
+216,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-216.cert.gz
+217,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-217.cert.gz
+218,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-218.cert.gz
+219,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-219.cert.gz
+220,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-220.cert.gz
+221,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-221.cert.gz
+222,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-222.cert.gz
+223,15.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-223.cert.gz
+224,15.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-224.cert.gz
+225,15.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-225.cert.gz
+226,15.5355339059327376220,-,conservative,2,same packing (traversable without expansion),2 -> 2,rotated 180°,strip,[5],exact batch (register witness),search/regularize/lists/certs/n-226.cert.gz
+227,15.5710678118654752440,David Ellsworth,conservative,1,rattlers only,4 -> 2,rotated 90° clockwise,strip,[],exact batch (register witness),search/regularize/lists/certs/n-227.cert.gz
+228,15.6046014757296742845,Francisco Couzo,conservative,2,same packing (traversable without expansion),19 -> 8,reflected in the anti-diagonal,strip,[],store best (refreshed),search/regularize/lists/certs/n-228.cert.gz
+229,15.6568542494923801952,-,conservative,2,same packing (traversable without expansion),2 -> 2,rotated 180°,strip,[5],exact batch (register witness),search/regularize/lists/certs/n-229.cert.gz
+230,15.6829268292682926829,David Ellsworth,conservative,2,same packing (traversable without expansion),2 -> 2,rotated 90° anticlockwise,strip,[2],store best (refreshed),search/regularize/lists/certs/n-230.cert.gz
+231,15.7071067811865475244,-,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-231.cert.gz
+232,15.7674283499418416069,-,conservative,2,same packing (traversable without expansion),22 -> 15,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-232.cert.gz
+233,15.7781745930520227684,-,conservative,1,rattlers only,4 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-233.cert.gz
+234,15.8228756555322952952,David Ellsworth,conservative,2,same packing (traversable without expansion),3 -> 2,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-234.cert.gz
+235,15.8266056334285680695,"David Ellsworth, David W. Cantrell",conservative,2,same packing (traversable without expansion),6 -> 4,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-235.cert.gz
+236,15.8639557471592674224,Francisco Couzo,fewest,2,same packing (traversable without expansion),20 -> 6,as source,gray,[],store best (refreshed),search/regularize/lists/certs/n-236.cert.gz
+237,15.9029496076778316895,Francisco Couzo,fewest,2,same packing (traversable without expansion),31 -> 11,rotated 90° anticlockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-237.cert.gz
+238,15.9261468570109783464,Francisco Couzo,conservative,2,same packing (traversable without expansion),21 -> 19,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-238.cert.gz
+239,15.9493131697276961581,Francisco Couzo,conservative,2,same packing (traversable without expansion),22 -> 20,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-239.cert.gz
+240,15.9696853375307803358,Francisco Couzo,conservative,2,same packing (traversable without expansion),22 -> 19,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-240.cert.gz
+241,15.9881324395249908484,Francisco Couzo,conservative,2,same packing (traversable without expansion),25 -> 22,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-241.cert.gz
+242,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-242.cert.gz
+243,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-243.cert.gz
+244,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-244.cert.gz
+245,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-245.cert.gz
+246,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-246.cert.gz
+247,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-247.cert.gz
+248,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-248.cert.gz
+249,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-249.cert.gz
+250,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-250.cert.gz
+251,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-251.cert.gz
+252,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-252.cert.gz
+253,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-253.cert.gz
+254,16.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-254.cert.gz
+255,16.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-255.cert.gz
+256,16.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-256.cert.gz
+257,16.5355339059327376220,David Ellsworth,conservative,2,same packing (traversable without expansion),7 -> 2,rotated 90° clockwise,strip,[5],exact batch (register witness),search/regularize/lists/certs/n-257.cert.gz
+258,16.5634480021337893796,-,conservative,2,same packing (traversable without expansion),20 -> 3,as source,strip,[],store best (refreshed),search/regularize/lists/certs/n-258.cert.gz
+259,16.5913781454976981594,Francisco Couzo,conservative,2,same packing (traversable without expansion),52 -> 6,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-259.cert.gz
+260,16.6568542494923801952,David Ellsworth,conservative,1,rattlers only,27 -> 2,rotated 180°,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-260.cert.gz
+261,16.6829268292682926829,-,conservative,2,same packing (traversable without expansion),6 -> 2,mirrored top-bottom,strip,[],exact batch (register witness),search/regularize/lists/certs/n-261.cert.gz
+262,16.7071067811865475244,-,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-262.cert.gz
+263,16.7331660078993789705,Francisco Couzo,fewest,2,same packing (traversable without expansion),40 -> 5,reflected in the anti-diagonal,strip,[],store best (refreshed),search/regularize/lists/certs/n-263.cert.gz
+264,16.7781745930520227684,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,[5],exact batch (register witness),search/regularize/lists/certs/n-264.cert.gz
+265,16.7781745930520227684,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-265.cert.gz
+266,16.8230287507564759705,David Ellsworth,conservative,2,same packing (traversable without expansion),22 -> 4,as source,strip,[],store best (refreshed),search/regularize/lists/certs/n-266.cert.gz
+267,16.8388152699482622602,-,conservative,2,same packing (traversable without expansion),126 -> 11,reflected in the anti-diagonal,strip,[],store best (refreshed),search/regularize/lists/certs/n-267.cert.gz
+268,16.8788148210067647245,Francisco Couzo,conservative,2,same packing (traversable without expansion),20 -> 4,as source,strip,[2],exact batch (register witness),search/regularize/lists/certs/n-268.cert.gz
+269,16.9015135821891321983,Francisco Couzo,fewest,2,same packing (traversable without expansion),25 -> 12,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-269.cert.gz
+270,16.9297753535413595821,Francisco Couzo,conservative,2,same packing (traversable without expansion),25 -> 23,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-270.cert.gz
+271,16.9508207926249587862,Francisco Couzo,fewest,2,same packing (traversable without expansion),29 -> 24,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-271.cert.gz
+272,16.9681101457696005048,Francisco Couzo,conservative,2,same packing (traversable without expansion),34 -> 32,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-272.cert.gz
+273,16.9839259626504043159,Francisco Couzo,conservative,2,same packing (traversable without expansion),30 -> 22,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-273.cert.gz
+274,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-274.cert.gz
+275,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-275.cert.gz
+276,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-276.cert.gz
+277,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-277.cert.gz
+278,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-278.cert.gz
+279,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-279.cert.gz
+280,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-280.cert.gz
+281,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-281.cert.gz
+282,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-282.cert.gz
+283,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-283.cert.gz
+284,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-284.cert.gz
+285,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-285.cert.gz
+286,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-286.cert.gz
+287,17.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-287.cert.gz
+288,17.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-288.cert.gz
+289,17.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-289.cert.gz
+290,17.5355339059327376220,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,arc,[5],exact batch (register witness),search/regularize/lists/certs/n-290.cert.gz
+291,17.5355339059327376220,-,conservative,2,same packing (traversable without expansion),2 -> 2,rotated 180°,arc,[5],exact batch (register witness),search/regularize/lists/certs/n-291.cert.gz
+292,17.5913781454976981594,Francisco Couzo,fewest,2,same packing (traversable without expansion),62 -> 4,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-292.cert.gz
+293,17.6341463414634146341,David Ellsworth,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-293.cert.gz
+294,17.6568542494923801952,-,conservative,1,rattlers only,9 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-294.cert.gz
+295,17.7042327907360303578,-,conservative,2,same packing (traversable without expansion),100 -> 2,as source,gray,[],store best (refreshed),search/regularize/lists/certs/n-295.cert.gz
+296,17.7071067811865475244,-,conservative,1,rattlers only,3 -> 2,as source,strip,"[2, 5, 7]",exact batch (register witness),search/regularize/lists/certs/n-296.cert.gz
+297,17.7404172875438018509,Francisco Couzo,fewest,2,same packing (traversable without expansion),36 -> 6,reflected in the anti-diagonal,strip,[],exact batch (register witness),search/regularize/lists/certs/n-297.cert.gz
+298,17.7781745930520227684,-,conservative,2,same packing (traversable without expansion),2 -> 2,as source,strip,[5],exact batch (register witness),search/regularize/lists/certs/n-298.cert.gz
+299,17.8228756555322952952,-,conservative,2,same packing (traversable without expansion),7 -> 2,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-299.cert.gz
+300,17.8241233884785434708,David Ellsworth,conservative,1,rattlers only,4 -> 3,reflected in the anti-diagonal,strip,[],exact batch (register witness),search/regularize/lists/certs/n-300.cert.gz
+301,17.8466671928434897829,Francisco Couzo,fewest,2,same packing (traversable without expansion),76 -> 3,as source,strip,[],exact batch (register witness),search/regularize/lists/certs/n-301.cert.gz
+302,17.8720298490811799736,Francisco Couzo,conservative,2,same packing (traversable without expansion),71 -> 10,as source,gray,[],store best (refreshed),search/regularize/lists/certs/n-302.cert.gz
+303,17.9130654627385323056,Francisco Couzo,conservative,2,same packing (traversable without expansion),22 -> 15,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-303.cert.gz
+304,17.9346500183906817239,Francisco Couzo,conservative,2,same packing (traversable without expansion),25 -> 22,as source,arc,[],exact batch (register witness),search/regularize/lists/certs/n-304.cert.gz
+305,17.9511397722069975457,Francisco Couzo,conservative,2,same packing (traversable without expansion),24 -> 21,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-305.cert.gz
+306,17.9634337174914257394,Francisco Couzo,conservative,2,same packing (traversable without expansion),31 -> 30,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-306.cert.gz
+307,17.9808627840546910639,Francisco Couzo,conservative,2,same packing (traversable without expansion),27 -> 26,rotated 90° clockwise,arc,[],store best (refreshed),search/regularize/lists/certs/n-307.cert.gz
+308,17.9982698795262558752,-,conservative,2,same packing (traversable without expansion),33 -> 32,as source,arc,[],store best (refreshed),search/regularize/lists/certs/n-308.cert.gz
+309,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-309.cert.gz
+310,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-310.cert.gz
+311,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-311.cert.gz
+312,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-312.cert.gz
+313,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-313.cert.gz
+314,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-314.cert.gz
+315,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-315.cert.gz
+316,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-316.cert.gz
+317,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-317.cert.gz
+318,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-318.cert.gz
+319,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-319.cert.gz
+320,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-320.cert.gz
+321,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-321.cert.gz
+322,18.0,-,conservative,0,identical,1 -> 1,as source,none,[],exact batch (register witness),search/regularize/lists/certs/n-322.cert.gz
+323,18.0,-,conservative,0,identical,1 -> 1,as source,none,[5],exact batch (register witness),search/regularize/lists/certs/n-323.cert.gz
+324,18.0,-,conservative,0,identical,1 -> 1,as source,none,"[1, 2, 3, 4, 5, 6, 7]",exact batch (register witness),search/regularize/lists/certs/n-324.cert.gz

@@ -244,7 +244,7 @@ def test_the_spot_checked_results_read_as_their_records_say() -> None:
     # the certificate loader.
     for rid in ("T-017", "T-018"):
         assert code(rid) == "shared-components", rid
-    # Kleddamag's n = 11 certificate, decided again by the native parent-core coverage.
+    # Overbeck's n = 11 certificate, decided again by the native parent-core coverage.
     assert code("T-037") == "independent-implementation"
 
 

@@ -488,11 +488,11 @@ agenda:
       to BC-391 given beads, prices, stop conditions and an order.
     bead: think-f0if
     depends_on: []
-    next_evidence: docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
+    next_evidence: docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md
     workflows:
     - review-planning-oversight
     artifacts:
-    - docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
+    - docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md
     - docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md
     parallel_group: after-r052-planning
     note: 'Not selected: a first-party n17 producer beyond 4.62002 waits for BC-387 and is reconsidered
@@ -506,7 +506,7 @@ agenda:
         rung 1 is the relaxation, so a per-node bound must price all pairs at once. Six commitments were
         selected, and BC-384 was narrowed to two designs. Nothing in the block moves a bound.
       evidence:
-      - docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
+      - docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md
       disposition: retire-success
       follow_up: null
   - id: BC-386
@@ -549,7 +549,7 @@ agenda:
         loader also reads R052's schema as a subset if a second data point is ever wanted; nothing was
         run.
       evidence:
-      - docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md
+      - docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md
       disposition: defer-dependency
       follow_up: think-0rbj
   - id: BC-387
@@ -714,7 +714,7 @@ agenda:
         past 4.89 and past every point-certificate rung the register could reach at n = 21. The intake
         of those certificates is other lanes''.'
       evidence:
-      - docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md
+      - docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md
       disposition: retire-negative
       follow_up: null
   - id: BC-392
@@ -743,11 +743,11 @@ agenda:
       stop conditions and a queue; BC-386, BC-387, BC-391 and BC-380 dispositioned.
     bead: think-0v60
     depends_on: []
-    next_evidence: docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md
+    next_evidence: docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md
     workflows:
     - review-planning-oversight
     artifacts:
-    - docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md
+    - docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md
     parallel_group: after-4640020-planning
     note: 'Not selected: a first-party n17 producer beyond 4.640020 (the same dictionary caps near 4.646;
       BC-387''s price at 4.65 decides), the Kleddamag/Guzhou family at n = 18..21 (the rectangle route
@@ -763,7 +763,7 @@ agenda:
         50 and 82..97, gaps near 0.49); tonight runs BC-390, BC-394 and BC-395, and the day builds BC-393,
         BC-388 and BC-387. Nothing in the block moves a bound.
       evidence:
-      - docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md
+      - docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md
       disposition: retire-success
       follow_up: null
   - id: BC-393
@@ -794,7 +794,7 @@ agenda:
     - factual-review
     program: low-n-angles
     artifacts:
-    - docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md
+    - docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md
     - docs/project/reviews/review-2026-09-27-n17-kleddamag-466001.md
     - packing/devtools/verify_guzhou_r052_native.py
     parallel_group: n17-native-c4
@@ -1581,7 +1581,7 @@ agenda:
     program: post-optimality-low-n
     parallel_group: n17-overnight-182
     artifacts:
-    - docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+    - docs/project/specs/done/plan-2026-10-05-n17-overnight.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-252-h264-n17-overnight-per-state-price.md
     - docs/project/reviews/review-2026-10-05-exp-252-h264.md
     note: >-
@@ -1626,7 +1626,7 @@ agenda:
     program: post-optimality-low-n
     parallel_group: n17-overnight-182
     artifacts:
-    - docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+    - docs/project/specs/done/plan-2026-10-05-n17-overnight.md
     - packing/campaign/explorations/X048-session-182-overnight/kernel-targets.txt
     note: >-
       Under BC-418, lane K of the n17 overnight plan. Targets: arity at most seven, at least three wall
@@ -1668,7 +1668,7 @@ agenda:
     program: post-optimality-low-n
     parallel_group: n17-overnight-182
     artifacts:
-    - docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+    - docs/project/specs/done/plan-2026-10-05-n17-overnight.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-255-h273-n17-distance-two-survey.md
     - packing/campaign/explorations/X048-session-182-overnight/receipts/E
     note: >-
@@ -1743,7 +1743,7 @@ agenda:
     program: post-optimality-low-n
     parallel_group: n17-overnight-182
     artifacts:
-    - docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+    - docs/project/specs/done/plan-2026-10-05-n17-overnight.md
     note: >-
       Under BC-418, a future slice added at a check-in (the plan's rule 8); no frozen
       criterion and no running ceiling changes. The recipe is SW9's frozen one except
@@ -2131,7 +2131,7 @@ A lane that finishes early frees its slot for the next ready item in priority or
 ## After R052
 
 Session 159’s planning block, BC-385, added six commitments after R052 was integrated;
-the [plan](../../../docs/project/specs/active/plan-2026-09-25-after-r052-planning.md)
+the [plan](../../../docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md)
 keeps the assessments behind them.
 Each runs within about three agents at once.
 
@@ -2146,7 +2146,7 @@ Each runs within about three agents at once.
 Two days later Kleddamag’s v1.1.0 proved $s(17) > 4.640020$ and wand125 published
 rectangle certificates past every low-n rung here.
 The planning block BC-392
-([plan](../../../docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md))
+([plan](../../../docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md))
 retired BC-386 and BC-391 as superseded, retargeted BC-387 to $4.65$ in clique-weighted
 form, and reordered the nights around what is launcher-only today.
 Later the same day Kleddamag’s $s(17) > 4.66001$ (`57519bb`) superseded $4.640020$; the
@@ -2210,7 +2210,7 @@ radius and the BC-410 cover.
 ## October 5 n17 Overnight
 
 [Session 182](../agent-sessions/session-182-n17-overnight-lanes.md) runs the
-[n17 overnight plan](../../../docs/project/specs/active/plan-2026-10-05-n17-overnight.md)
+[n17 overnight plan](../../../docs/project/specs/done/plan-2026-10-05-n17-overnight.md)
 under BC-418, with three cells registered before the first target run.
 
 | Cell | Lane | Disposition |

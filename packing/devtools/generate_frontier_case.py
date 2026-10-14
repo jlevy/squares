@@ -2346,9 +2346,11 @@ def adopt_upper_bound_packet(n: int, text: str) -> str:
     `devtools.catalogue_upper_bounds` moves the verified upper lane and its blocker the
     same way, and leaves the body, whose intake prose is the record's own. Then, at the 48
     counts whose packing Evan Daniel solved to its exact optimum (T-098),
-    `devtools.apply_exact_optima` moves both upper lanes to the certified side; last, at
+    `devtools.apply_exact_optima` moves both upper lanes to the certified side; then, at
     the 77 counts where his other certificates lower the verified ceiling (T-101),
-    `devtools.apply_exact_ceilings` moves the verified upper lane.
+    `devtools.apply_exact_ceilings` moves the verified upper lane; last, at the counts
+    where a regularized view's exact side lies below that ceiling (T-155),
+    `devtools.register_regularized_bounds` moves it onto that side.
     """
     intake, plans, earlier = _upper_bound_packets()
     plan = plans.get(n)
@@ -2356,6 +2358,9 @@ def adopt_upper_bound_packet(n: int, text: str) -> str:
     adopted = _catalogue_certificates().apply_case(n, adopted)
     adopted = importlib.import_module("devtools.apply_exact_optima").apply_case(n, adopted)
     adopted = importlib.import_module("devtools.apply_exact_ceilings").apply_case(n, adopted)
+    adopted = importlib.import_module("devtools.register_regularized_bounds").apply_case(
+        n, adopted
+    )
     if adopted == text:
         return text
     # The intake moves the verified upper bound's evidence, so the record's

@@ -97,10 +97,10 @@ formula in “Removing poses that force overlap” has no worked geometric examp
 First show a simple possible-center region and another square’s guaranteed interior,
 deleting only centers that force overlap.
 Then use the accepted row already selected in the
-[illustration plan](../specs/active/plan-2026-09-30-n11-optimality-illustrations.md):
-case 2095, step 1, owner 10, row 17. Show four aligned panels: possible centers over a
-whole angle interval; the strict core and another square’s guaranteed hull; the
-forbidden center region; and the retained remainder.
+[illustration plan](../specs/done/plan-2026-09-30-n11-optimality-illustrations.md): case
+2095, step 1, owner 10, row 17. Show four aligned panels: possible centers over a whole
+angle interval; the strict core and another square’s guaranteed hull; the forbidden
+center region; and the retained remainder.
 Introduce the sum $K+(-Q)$ after the picture explains why the centers are forbidden.
 Label this as one row of a complete update, not as a complete exclusion or a case-438
 capture step.
@@ -183,7 +183,7 @@ Preserve the provenance links at the start.
 
 The user approved implementation of the restructuring.
 The
-[illustration plan’s implementation record](../specs/active/plan-2026-09-30-n11-optimality-illustrations.md#implementation-record)
+[illustration plan’s implementation record](../specs/done/plan-2026-09-30-n11-optimality-illustrations.md#implementation-record)
 maps every finding above to an article change, figure and bead.
 The paper now has twelve SVGs in eleven numbered figures.
 Static panels carry the complete explanations into HTML, Markdown and PDF; optional

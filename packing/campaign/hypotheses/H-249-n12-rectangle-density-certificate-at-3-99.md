@@ -48,7 +48,7 @@ hypothesis:
   registered: '2026-09-27'
   notes: >-
     From the 2026-09-27 planning block
-    (docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md). A
+    (docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md). A
     fourteen-minute probe from the trivial seed started at 3.3808 and accepted 1/200
     rungs every 60 to 100 s with LP mass 9.009 against budget 12. T-017 holds 3.96;
     the parent-core architecture cannot reach the integer endpoint 4 and the additive

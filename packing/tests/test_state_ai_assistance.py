@@ -4,12 +4,16 @@
 `devtools.state_ai_assistance` finds the paragraph that describes the source's result and
 appends the source's statement to it. The rules are tested over small hand-written
 records, and the committed records are held to having every statement they owe, less a
-named list that only shrinks.
+named list that only shrinks. Each statement a committed record makes is also dropped from
+it, and the check must see the drop.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
+
+import pytest
 
 from devtools import state_ai_assistance as assistance
 
@@ -92,6 +96,58 @@ def test_a_marker_already_in_the_paragraph_is_the_statement_made() -> None:
 def test_every_committed_record_makes_the_statements_it_owes() -> None:
     missing, _ = assistance.report(assistance.records(None))
     assert {label.split(":", 1)[0] for label in missing} <= PENDING
+
+
+def _without_marker(text: str, statement: assistance.Statement) -> str:
+    """The record with `statement`'s marker taken out of every paragraph anchored to it.
+
+    Each anchored paragraph is rejoined onto one line first, since the formatter may have
+    broken the marker across two.
+    """
+    front, lines = assistance.split_record(text)
+    anchored = [
+        paragraph
+        for paragraph in assistance.paragraphs(lines)
+        if statement.anchor.search(paragraph.text)
+    ]
+    for paragraph in reversed(anchored):
+        lines[paragraph.first : paragraph.last + 1] = [
+            paragraph.text.replace(statement.marker, "")
+        ]
+    return text.split("---\n", 2)[0] + "---\n" + front + "---\n" + "\n".join(lines)
+
+
+@pytest.mark.parametrize(
+    "statement",
+    assistance.STATEMENTS,
+    ids=[min(statement.keys).strip("[]") for statement in assistance.STATEMENTS],
+)
+def test_each_statement_a_committed_record_makes_is_missed_when_its_marker_is_dropped(
+    statement: assistance.Statement, tmp_path: Path
+) -> None:
+    """Presence alone, as the test above holds it, would pass a check that never looked.
+
+    Every committed record that owes and makes `statement` has the marker dropped from the
+    paragraphs anchored to it, and `report()` must list each one as missing that statement:
+    not as fine, and not as unanchored. The label names the statement's cited keys, so a
+    drop that also takes another statement's marker cannot stand in for this one.
+    """
+    dropped: set[str] = set()
+    for path in assistance.records(None):
+        text = path.read_text(encoding="utf-8")
+        front, lines = assistance.split_record(text)
+        if not any(
+            owed is statement and paragraph is not None and said
+            for owed, paragraph, said in assistance.owed(front, lines)
+        ):
+            continue
+        (tmp_path / path.name).write_text(_without_marker(text, statement), encoding="utf-8")
+        cited = ", ".join(sorted(key for key in statement.keys if key in front))
+        dropped.add(f"{path.name}: {cited}")
+    assert dropped, "no committed record makes this statement, so no drop is measured"
+    missing, unanchored = assistance.report(sorted(tmp_path.iterdir()), catalogue={})
+    assert dropped <= set(missing)
+    assert not dropped & set(unanchored)
 
 
 CATALOGUE_RECORD = """title: s(7)

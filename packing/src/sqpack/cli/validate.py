@@ -112,9 +112,12 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # merged on 2026-10-03: the formal-open and reported-open counts are the replays' and
     # reports' above, and the Nagamochi-bounded count is the correction's, zero; T-076
     # raised n = 82 from Karakus's floor instead, which moves none of the three counts.
-    "n=1..100": (55, 54, 0),
-    "n=1..200": (139, 134, 0),
-    "n=1..324": (247, 238, 0),
+    # 2026-10-12: Overbeck's candidate equality s(17) = L (T-153) made n = 17
+    # reported-proved, as T-060's report did n = 11 on 2026-09-29, and left its verified
+    # lane open, so only the reported-open count falls, by one in every corpus.
+    "n=1..100": (55, 53, 0),
+    "n=1..200": (139, 133, 0),
+    "n=1..324": (247, 237, 0),
 }
 #: n = 68, 103, 105, 110 and 131 left the exclusions on 2026-09-29, when their records
 #: moved from UnitSquare renderings to Francisco Couzo's packings (T-056), and n = 69, the
@@ -286,6 +289,10 @@ _SITE_INPUTS = (
     "packing/devtools/*",
     "packing/tests/test_site_*.py",
     "packing/tests/site_*.py",
+    # The site tests import the frontier page's test module for its fixtures, and the
+    # site builder they drive is the workbench package's.
+    "packing/tests/test_frontier_page.py",
+    "packages/workbench/tools/*",
     "packing/tests/probes/*",
     "packing/frontier/*",
     "packing/atlas/*",
@@ -3622,10 +3629,16 @@ def _t007_consumer_audit(context: Context) -> str:
 
 
 def _regularized_atlas(context: Context) -> str:
-    # About a tenth of a second: the derived regularized views (X-049, think-bgkz) are
-    # compared with their index and their source witnesses by digest, re-verifying
-    # nothing. Re-deriving them exactly is `--verify-atlas`, about five minutes, which
-    # belongs to a deferred checkpoint rather than here.
+    # About two seconds: the derived regularized views (X-049, think-bgkz) are compared
+    # with their index and their source witnesses by digest, re-verifying nothing; a view
+    # another generator made (Evan Daniel's regularizer through `regularize_evand`, or the
+    # grid-slack generator, think-k35c) is also read and held to its entry: its label,
+    # generator, credit line, side and regularization record, and the decision table's
+    # admission. Every drawn view's exact side is held to the witness's `s_W` and to its
+    # case record's verified upper bound `U`, decided exactly for closed forms too, so no
+    # view lies below `U`, a `bound` view lies at it, and a view above it lies at a count
+    # that `ABOVE_U` names (#548 review B1, think-du42). Re-deriving and re-deciding the
+    # views exactly is `--verify-atlas`, which belongs to a deferred checkpoint instead.
     output = _module(context, "devtools.regularize_axis_components", "--check-atlas")
     _require_text(output, "regularized atlas check passed")
     return output
@@ -3639,8 +3652,12 @@ def _regularized_atlas_verify(context: Context) -> str:
     regularization again for all 324 records -- the exact frame, the straightening and
     compaction, the non-regression rounds, both exact verifications over `Q` and the
     census's shades of each file -- and requires every index record and every retained
-    view to come out byte-identical. It is the only check that the verdicts the index
-    records were earned by the code that now ships.
+    view to come out byte-identical. Where the layer draws another generator's view, the
+    axis tool's record of the count is held to the `reference` beside it, and the drawn
+    view is decided again over `Q` on both maintained routes, with its square count, its
+    identity against the source witness (the half-angle route's `arrangement_gap`, as at
+    admission; #548 review B3) and its shades measured again. It is the only check that
+    the verdicts the index records were earned by the code that now ships.
 
     Deferred on its own measurement: about 800 cpu-seconds on a four-cpu host, 223s of
     wall at four workers, against the 0.1s digest check that stays on every pull
@@ -3659,6 +3676,18 @@ def _regularized_atlas_drawings(context: Context) -> str:
     # added, changed or dropped by the layer cannot leave a stale drawing behind.
     output = _module(context, "devtools.render_regularized_atlas", "--check")
     _require_text(output, "regularized renderings check passed")
+    return output
+
+
+def _vendored_evand(context: Context) -> str:
+    # About 0.2s: `vendor/evand-regularize`, Evan Daniel's regularizer copied at a pin, is
+    # held to its manifest -- each file's size, SHA-256 and mode at the upstream commit,
+    # each recorded local change, no link and no file beside them. That catches accidental
+    # edits only; `--upstream`, which holds the manifest to upstream, needs the network
+    # and is run by hand (think-vwlm). The digests cross a real boundary (downloaded
+    # third-party code, OR-16); nothing but this check reads them.
+    output = _module(context, "devtools.check_vendored_evand")
+    _require_text(output, "vendored copy check passed")
     return output
 
 
@@ -3993,11 +4022,33 @@ def _campaign_record(context: Context) -> str:
 # `fnmatch` is not a path glob -- its `*` crosses separators -- so `packing/src/sqpack/*`
 # covers the whole subtree, and every pattern here is repo-relative.
 _TOOLCHAIN = ("packing/pyproject.toml", "packing/uv.lock", "packing/.python-version")
-# `devtools/__init__.py` is imported by every devtools-invoking step and is covered by no
-# per-file devtools pattern, so it belongs with the shared core rather than repeated.
-_CORE = ("packing/src/sqpack/*", "packing/devtools/__init__.py", *_TOOLCHAIN)
+# A package's `__init__.py` runs whenever a step imports a module of that package, and no
+# per-file pattern claims it, so the two package initializers belong with the shared core
+# rather than repeated. Every step that runs a `devtools` or `cases` module carries
+# `_CORE`; three devtools-running steps did not until review G of PR 496 measured that a
+# change to `devtools/__init__.py` selected 59 of 65, and
+# `test_every_attributed_step_claims_the_modules_it_runs` now holds each step to the
+# import closure of what it runs.
+_CORE = (
+    "packing/src/sqpack/*",
+    "packing/devtools/__init__.py",
+    "packing/cases/__init__.py",
+    *_TOOLCHAIN,
+)
+# The gate's own module, where every step's action is defined. An attributed step that
+# runs no mapped Python claims it by hand: an edit to its command list must select it,
+# and until PR 507 review A7 four such steps passed `--push` unselected. The others reach
+# it through `_CORE` or `*.py`, and
+# `test_every_attributed_step_claims_the_module_that_defines_its_action` holds every one.
+_GATE = ("packing/src/sqpack/cli/validate.py",)
+# pytest loads `conftest.py` without an import edge, so the run-module derivation cannot
+# see it from a test target. Every step that runs a pytest target claims it by hand, and
+# `test_every_attributed_step_claims_the_modules_it_runs` adds each conftest on the path
+# to a target to the closure it holds the step to (PR 507 review A6).
+_PYTEST_CONFTESTS = ("packing/tests/conftest.py",)
 _ENGINE_SRC = ("packing/sqsearch/*",)
 _MEASURE_VERIFIER_SRC = (
+    *_CORE,
     "packing/sqverify_fast/*",
     "packing/devtools/check_sqverify_fast.py",
     "packing/src/sqpack/rectangle_density.py",
@@ -4006,6 +4057,7 @@ _MEASURE_VERIFIER_SRC = (
     "packing/resources/web/wand125-rectangle-certificates-2026-10-01/receipts/controls/*",
 )
 _EXACT_GEOMETRY_SRC = (
+    *_CORE,
     "packing/sqverify_exact/*",
     "packing/devtools/check_exact_rust_kernel.py",
     "packing/src/sqpack/rectangle_density.py",
@@ -4017,6 +4069,21 @@ _CASES = ("packing/cases/*",)
 # The retained replay archives. Whole subtree, not the named files: several steps
 # discover which archives to replay by globbing, so adding one changes what runs.
 _RESULTS = ("packing/campaign/series/*",)
+# The site renderers import one another lazily -- `render_overview`, the n=11 explainer,
+# `site_urls`, `check_results`, and `migrate_math` through `check_katex` -- and between
+# them reach most of `devtools/` and the four case packages the overview draws. A step
+# whose import closure enters that family claims the family whole: a list of its members
+# would move with every renderer edit, and the closure test holds the step to the
+# closure, not to the path its own run happens to take through it. Measured over the
+# static graph from `render_overview` on 2026-10-11, with the closure test's own helpers
+# (PR 507 review A3): 138 files, 97 of them under `devtools/`.
+_RENDERER_HUB = (
+    "packing/devtools/*",
+    "packing/cases/gobel10/*",
+    "packing/cases/kingbird29/*",
+    "packing/cases/n5/*",
+    "packing/cases/trump11/*",
+)
 # `build_site.RENDER_INPUTS` is the builder's own declaration and this is the gate's copy,
 # which cannot import the optional package; `test_change_scoped_selection.py` requires every
 # declared render input to select the step that checks the page.
@@ -4052,7 +4119,10 @@ _WORKBENCH_INPUTS = (
     "packing/devtools/check_motion_lab_pages.py",
     "packing/devtools/probes/check_motion_lab_pages/*",
     "packing/tests/golden/motion-lab-pages.json",
-    *_TOOLCHAIN,
+    # The builder imports the overview renderer, which is the hub above, and the
+    # library beneath it.
+    *_CORE,
+    *_RENDERER_HUB,
 )
 
 # What `fast` means since 2026-09-05: the tier a pull request runs, and therefore the
@@ -4212,6 +4282,12 @@ STEPS: tuple[Step, ...] = (
             "**/*.mts",
             "**/*.cts",
             "**/*.css",
+            # The workbench's `node:test` files read their JSON fixtures and
+            # `design-allowlist.json`, and Biome formats every JSON under the package;
+            # `*.json` is claimed by `retained JSON`, so without this there is no
+            # whole-gate fallback for a fixture edit (PR 496 review G2).
+            "packages/workbench/*.json",
+            *_GATE,
         ),
     ),
     Step(
@@ -4227,6 +4303,10 @@ STEPS: tuple[Step, ...] = (
             "tsconfig*.json",
             "package.json",
             "package-lock.json",
+            # The contract test imports the gate, the bead reader and the explainer.
+            *_CORE,
+            *_RENDERER_HUB,
+            *_PYTEST_CONFTESTS,
         ),
     ),
     # 2.5s locally for 892 Python files and 188 probes: the guard parses every Python file
@@ -4275,7 +4355,13 @@ STEPS: tuple[Step, ...] = (
         _site_url_registry,
         fast=True,
         records=True,
-        touches=(*_SITE_INPUTS, "packing/site-urls.yaml", "docs/project/site-urls.md"),
+        touches=(
+            *_CORE,
+            *_SITE_INPUTS,
+            *_RENDERER_HUB,
+            "packing/site-urls.yaml",
+            "docs/project/site-urls.md",
+        ),
     ),
     # Hosted PR 462 run 38056029813: site 268.42s started after floor 44.36s and
     # liveness 24.40s, making the wall 337.19s. Start both browser lanes in the two
@@ -4287,7 +4373,7 @@ STEPS: tuple[Step, ...] = (
         broad=True,
         frontend=True,
         start_early=True,
-        touches=(*_CORE, *_SITE_INPUTS),
+        touches=(*_CORE, *_SITE_INPUTS, *_RENDERER_HUB, *_PYTEST_CONFTESTS),
     ),
     # 9.63s.
     Step(
@@ -4477,6 +4563,7 @@ STEPS: tuple[Step, ...] = (
             "packing/atlas/known-best/*",
             "packing/witnesses/*",
             "packing/devtools/screen_translation_escape.py",
+            "packing/devtools/atlas_orientation.py",
         ),
     ),
     # The whole re-screen, off the pull-request surface since 2026-09-07 and, since
@@ -4514,6 +4601,7 @@ STEPS: tuple[Step, ...] = (
             "packing/atlas/known-best/*",
             "packing/witnesses/*",
             "packing/devtools/screen_translation_escape.py",
+            "packing/devtools/atlas_orientation.py",
         ),
     ),
     # 2.09s, so `fast` without `broad`: cheaper than several steps the edit tier already
@@ -4668,6 +4756,8 @@ STEPS: tuple[Step, ...] = (
             "packing/golden/*",
             "packing/frontier/*",
             "packing/devtools/check_golden_basins.py",
+            # The checker anneals through the perimeter's module.
+            "packing/devtools/check_soundness_perimeter.py",
         ),
     ),
     # 4.95s.
@@ -4689,7 +4779,9 @@ STEPS: tuple[Step, ...] = (
         fast=True,
         records=True,
         touches=(
+            *_CORE,
             "packing/devtools/wand125_fn1_bindings.py",
+            "packing/devtools/audit_wand125_declared_net.py",
             "packing/devtools/acquire_source.py",
             "packing/devtools/retained_data.py",
             "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/*",
@@ -4702,6 +4794,7 @@ STEPS: tuple[Step, ...] = (
         fast=True,
         records=True,
         touches=(
+            *_CORE,
             *_RESULTS,
             *_CASES,
             "packing/devtools/check_class_record_claims.py",
@@ -4717,6 +4810,7 @@ STEPS: tuple[Step, ...] = (
         fast=True,
         records=True,
         touches=(
+            *_CORE,
             # Any tracked JSON can cross the threshold, and `biome.json` says which are
             # Biome's rather than a retained result's.
             "*.json",
@@ -4742,7 +4836,7 @@ STEPS: tuple[Step, ...] = (
         fast=True,
         broad=True,
         needs_engine=True,
-        touches=_ENGINE_SRC,
+        touches=(*_ENGINE_SRC, *_GATE),
     ),
     Step(
         "lint floor (rust)",
@@ -4753,6 +4847,7 @@ STEPS: tuple[Step, ...] = (
             *_ENGINE_SRC,
             "packing/devtools/check_rust_floor.py",
             "packing/tests/test_rust_floor_contract.py",
+            *_GATE,
         ),
     ),
     # The clean-room measure verifier (think-gpe0): its crate's lint, tests and release
@@ -4786,8 +4881,16 @@ STEPS: tuple[Step, ...] = (
             "packing/tests/test_n17_bb_native.py",
             "packing/tests/test_n17_bb_native_edges.py",
             "packing/tests/test_build_n17_bb_native.py",
+            *_PYTEST_CONFTESTS,
             "packing/devtools/check_rust_floor.py",
             "packing/tests/test_rust_floor_contract.py",
+            # What the pilot and its replay tests import beneath the names above.
+            "packing/devtools/check_n17_contact_chart.py",
+            "packing/devtools/check_n17_endpoint_feasibility.py",
+            "packing/devtools/check_n17_root_certificate.py",
+            "packing/devtools/check_rational_witness_independent.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/devtools/provenance.py",
         ),
     ),
     Step(
@@ -4871,6 +4974,9 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/decide_certificate.py",
             "packing/devtools/generate_known_best_n011_rational_control.py",
             "packing/devtools/check_rational_witness_independent.py",
+            # `cases.gobel_strip.verify_exact` reads the Ryxu report history through
+            # `devtools.register_ryxu_reports`, whose closure enters the renderer hub.
+            *_RENDERER_HUB,
         ),
     ),
     Step(
@@ -4888,6 +4994,7 @@ STEPS: tuple[Step, ...] = (
             "packing/cases/n11_threshold_certificate/route-s-compression-admission.json",
             "packing/cases/n11_threshold_certificate/route-s-compression-admission-receipt.json",
             "packing/devtools/admit_threshold_compression.py",
+            "packing/devtools/decide_threshold_certificate.py",
         ),
     ),
     # The whole grid replay, off the pull-request surface since 2026-09-07 and on its own
@@ -4914,7 +5021,8 @@ STEPS: tuple[Step, ...] = (
     # T-024's limit records replay their five source conditions over 721 and 1441
     # directions, 173s and 352s on one core; the docstring on `_finer_net_limit_record`
     # carries the measurements and the cheap stand-in the pull-request surface keeps.
-    # Each touches what `exact verification` touches.
+    # Each touches what `exact verification` touches. `dilation_corollary` imports both
+    # deciders, so each of the four limit-record steps claims both.
     Step(
         "finer-net dilation-limit record, 720 steps",
         _finer_net_limit_record_720,
@@ -4924,6 +5032,7 @@ STEPS: tuple[Step, ...] = (
             "packing/frontier/*",
             "packing/devtools/dilation_corollary.py",
             "packing/devtools/decide_certificate.py",
+            "packing/devtools/decide_threshold_certificate.py",
         ),
     ),
     Step(
@@ -4935,6 +5044,7 @@ STEPS: tuple[Step, ...] = (
             "packing/frontier/*",
             "packing/devtools/dilation_corollary.py",
             "packing/devtools/decide_certificate.py",
+            "packing/devtools/decide_threshold_certificate.py",
         ),
     ),
     # T-026's two limit records do the same over threshold atoms, and their replay is the
@@ -4950,6 +5060,7 @@ STEPS: tuple[Step, ...] = (
             *_CASES,
             "packing/frontier/*",
             "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_certificate.py",
             "packing/devtools/decide_threshold_certificate.py",
         ),
     ),
@@ -4961,6 +5072,7 @@ STEPS: tuple[Step, ...] = (
             *_CASES,
             "packing/frontier/*",
             "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_certificate.py",
             "packing/devtools/decide_threshold_certificate.py",
         ),
     ),
@@ -5012,6 +5124,9 @@ STEPS: tuple[Step, ...] = (
             # `MAIN` is the n=11 research report, read and compared cell by cell; the
             # step exists to catch a hand-edited table in exactly that file.
             "docs/*",
+            # The tables renderer imports `check_source_coverage`, whose closure enters
+            # the renderer hub.
+            *_RENDERER_HUB,
         ),
     ),
     Step(
@@ -5043,7 +5158,7 @@ STEPS: tuple[Step, ...] = (
         fast=True,
         records=True,
         # The mirrored list is a Make variable, so the Makefile is part of the contract.
-        touches=("Makefile", ".agents/*", ".claude/*"),
+        touches=("Makefile", ".agents/*", ".claude/*", *_GATE),
     ),
     Step(
         "X-027 mathematics parses with pinned KaTeX",
@@ -5061,6 +5176,8 @@ STEPS: tuple[Step, ...] = (
             "packing/uv.lock",
             "vendor/kpress",
             "vendor/kpress/*",
+            # The explainer is a member of the renderer hub.
+            *_RENDERER_HUB,
         ),
     ),
     Step("synopsis agrees with the artifacts", _synopsis, fast=True, records=True),
@@ -5083,6 +5200,10 @@ STEPS: tuple[Step, ...] = (
             # The ratchet sorts generated views and exclusions by these two.
             "docs/project/document-map.yaml",
             ".flowmarkignore",
+            # `migrate_math` imports `check_katex` lazily, and the check's own path never
+            # takes that branch (PR 496 review G5, settled statically and by import
+            # trace); the closure claims it anyway, as it claims every lazy import.
+            *_RENDERER_HUB,
         ),
     ),
     Step(
@@ -5106,6 +5227,7 @@ STEPS: tuple[Step, ...] = (
         fast=True,
         records=True,
         touches=(
+            *_CORE,
             "AGENTS.md",
             "CLAUDE.md",
             "operating-rules.md",
@@ -5232,6 +5354,10 @@ STEPS: tuple[Step, ...] = (
             *_CORE,
             "packing/devtools/close_session.py",
             "packing/devtools/codex_task_tree_delta.py",
+            "packing/devtools/check_session_rollups.py",
+            "packing/devtools/render_pr_rollup.py",
+            "packing/devtools/codex_log_rollup.py",
+            "packing/devtools/significance.py",
             "packing/campaign/agent-sessions/*.md",
             "packing/campaign/resource-usage/*.yaml",
             "packing/campaign/schemas/codex-task-tree-delta.schema.yaml",
@@ -5250,6 +5376,9 @@ STEPS: tuple[Step, ...] = (
             *_CORE,
             "packing/devtools/render_pr_rollup.py",
             "packing/devtools/codex_task_tree_delta.py",
+            "packing/devtools/check_session_rollups.py",
+            "packing/devtools/codex_log_rollup.py",
+            "packing/devtools/significance.py",
             "packing/campaign/agent-sessions/*.md",
             "packing/campaign/resource-usage/*.yaml",
             "packing/campaign/schemas/codex-task-tree-delta.schema.yaml",
@@ -5260,7 +5389,9 @@ STEPS: tuple[Step, ...] = (
         _control_anchors,
         fast=True,
         records=True,
-        touches=(*_CORE, "packing/devtools/controls.yaml", "packing/devtools/*.py"),
+        # The control runner it imports reaches the renderer hub through the SQUISH
+        # confirmation and `check_case_prose`.
+        touches=(*_CORE, "packing/devtools/controls.yaml", *_RENDERER_HUB),
     ),
     Step(
         "tier ceilings are declared and not slack",
@@ -5271,6 +5402,7 @@ STEPS: tuple[Step, ...] = (
             *_CORE,
             "packing/devtools/check_gate_budgets.py",
             "packing/devtools/check_pr_wall.py",
+            "packing/devtools/bead_state.py",
             "packing/devtools/gate-budgets.yaml",
             # The step also checks that the guide still names every tier, so editing the
             # guide has to be able to fail it.
@@ -5302,15 +5434,21 @@ STEPS: tuple[Step, ...] = (
         _regularized_atlas,
         fast=True,
         records=True,
+        # `upper_bound_packets` imports `check_source_coverage`, whose closure enters the
+        # renderer hub; the three regularized-atlas steps claim it for that reason.
         touches=(
             *_CORE,
             "packing/devtools/regularize_axis_components.py",
+            "packing/atlas/known-best/regularized-atlas-index.schema.yaml",
             "packing/devtools/census_atlas_contact_shades.py",
             "packing/devtools/check_rational_witness_independent.py",
             "packing/devtools/upper_bound_packets.py",
             "packing/atlas/known-best/regularized/*",
             "packing/atlas/known-best/manifest.json",
             "packing/witnesses/*",
+            # Each drawn view's side is held to its case record's verified upper bound.
+            "packing/frontier/n-*.md",
+            *_RENDERER_HUB,
         ),
     ),
     # The whole re-derivation behind the digest check above, deferred on its measured
@@ -5328,6 +5466,7 @@ STEPS: tuple[Step, ...] = (
             "packing/atlas/known-best/regularized/*",
             "packing/atlas/known-best/manifest.json",
             "packing/witnesses/*",
+            *_RENDERER_HUB,
         ),
     ),
     Step(
@@ -5344,6 +5483,7 @@ STEPS: tuple[Step, ...] = (
             "packing/src/sqpack/render/*",
             "packing/atlas/known-best/regularized/*",
             "packing/witnesses/known-best/*",
+            *_RENDERER_HUB,
         ),
     ),
     Step(
@@ -5355,6 +5495,17 @@ STEPS: tuple[Step, ...] = (
             *_CORE,
             "packing/devtools/replay_chelokot_lean.py",
             "packing/campaign/series/series-000-smoke-and-calibration/results/chelokot-lean-replay/*",
+        ),
+    ),
+    Step(
+        "the vendored regularizer matches its manifest",
+        _vendored_evand,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "vendor/evand-regularize/*",
+            "packing/devtools/check_vendored_evand.py",
         ),
     ),
     Step(
@@ -5426,6 +5577,8 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/render_results_headline.py",
             "packing/devtools/render_research_tables.py",
             "packing/devtools/significance.py",
+            # Through the tables renderer, as `generated tables` above.
+            *_RENDERER_HUB,
         ),
     ),
     Step(
@@ -5471,6 +5624,8 @@ STEPS: tuple[Step, ...] = (
             "packing/frontier/evidence.yaml",
             "packing/frontier/n-*.md",
             "packing/resources/bibliography.yaml",
+            # `check_results` is a member of the renderer hub.
+            *_RENDERER_HUB,
         ),
     ),
     Step(
@@ -5483,6 +5638,8 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/squish_followup_packets.py",
             "packing/devtools/squish_upper_bound_packets.py",
             "packing/devtools/import_half_angle_witness.py",
+            "packing/devtools/check_rational_witness_independent.py",
+            "packing/devtools/retained_data.py",
             "packing/resources/web/squish-401-update-2026-10-07/**",
             "packing/witnesses/squish-401-update-2026/**",
         ),
@@ -5505,6 +5662,9 @@ STEPS: tuple[Step, ...] = (
             "packing/witnesses/witness.schema.yaml",
             "packing/resources/web/squish-422-second-update-2026-10-07/**",
             "packing/witnesses/squish-422-second-update-2026/**",
+            # The packets module imports `check_case_prose`, whose closure enters the
+            # renderer hub.
+            *_RENDERER_HUB,
         ),
     ),
     Step(
@@ -5515,6 +5675,10 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/refinement_*.py",
+            "packing/devtools/squish_upper_bound_packets.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/devtools/check_rational_witness_independent.py",
+            "packing/devtools/retained_data.py",
             "packing/hosted/refinement-evidence-425-428-v1.yaml",
             "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/**",
             "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/**",
@@ -5536,6 +5700,8 @@ STEPS: tuple[Step, ...] = (
             "packing/campaign/schemas/result-requests.schema.yaml",
             "packing/frontier/results.yaml",
             "packing/frontier/evidence.yaml",
+            # `result_status` reaches `check_results`, a member of the renderer hub.
+            *_RENDERER_HUB,
         ),
     ),
     Step(
@@ -5548,6 +5714,8 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/check_case_prose.py",
             "packing/devtools/check_rung_figures.py",
             "packing/frontier/n-*.md",
+            # The checker imports `migrate_math`, which enters the renderer hub.
+            *_RENDERER_HUB,
         ),
     ),
     Step(
@@ -5580,6 +5748,8 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/check_session_rollups.py",
+            "packing/devtools/codex_task_tree_delta.py",
+            "packing/devtools/codex_log_rollup.py",
             "packing/campaign/agent-sessions/*.md",
             "packing/campaign/resource-usage/*.yaml",
             "packing/campaign/schemas/agent-session.schema.yaml",
@@ -5606,7 +5776,7 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/price_gobel_family.py",
-            "packing/cases/gobel40/packing.py",
+            "packing/cases/gobel40/*",
             "packing/frontier/n-*.md",
             "packing/campaign/series/*/results/bc-049-gobel-family-coverage.json",
         ),
@@ -5618,6 +5788,7 @@ STEPS: tuple[Step, ...] = (
             *_CORE,
             "packing/devtools/assess_n40_rigidity.py",
             "packing/devtools/assess_n5_rigidity.py",
+            "packing/devtools/n40_rays.py",
             *_CASES,
             "packing/campaign/series/*/results/bc-049-n40-rigidity-bracket.json",
         ),
@@ -5765,6 +5936,38 @@ def select_for_paths(paths: Sequence[str], steps: Sequence[Step] | None = None) 
     return Selection(steps=reached, unattributed_paths=(), universe_size=len(universe))
 
 
+def _whole_selection_reason(selection: Selection, paths: Sequence[str]) -> str | None:
+    """Why a change-scoped selection is the whole tier, naming the paths that made it so.
+
+    None when the selection is narrow. The unclaimed paths are the attribution decision
+    a reader has to make -- claim them or accept the fallback -- so the first five are
+    named rather than counted (PR 496 review F7, G4).
+    """
+    if selection.unattributed_paths:
+        shown = ", ".join(selection.unattributed_paths[:5])
+        more = (
+            f" (+{len(selection.unattributed_paths) - 5} more)"
+            if len(selection.unattributed_paths) > 5
+            else ""
+        )
+        return f"  no step claims {shown}{more}; running the whole selection"
+    if not paths:
+        return "  no paths determined; running the whole selection"
+    return None
+
+
+def _announce(namespace: argparse.Namespace, *lines: str) -> None:
+    """Print a run banner on stdout, or on stderr under `--format json`.
+
+    Under `--format json` stdout is one JSON document and nothing else: the banners the
+    `--push`, `--since` and verified-tree paths print are for a reader, and a consumer
+    that parses the output must not have to skip them (PR 496 review E1).
+    """
+    stream = sys.stderr if namespace.format == "json" else sys.stdout
+    for line in lines:
+        print(line, file=stream)
+
+
 def _git(*args: str) -> str:
     result = subprocess.run(
         ("git", *args), cwd=REPOSITORY_ROOT, capture_output=True, text=True, check=False
@@ -5817,7 +6020,8 @@ def changed_paths(since: str) -> list[str]:
 
 
 def _push_test_step(base: str, *, paths_file: Path | None = None) -> Step:
-    """The behavioral tests reachable from the change against `base` (BC-086).
+    """The behavioral tests reachable from the change (BC-086): the changed-path snapshot
+    in `paths_file` when one is given, else the diff against `base`.
 
     Selection happens in `devtools.reachable_tests`, which errs toward inclusion the
     same way `Step.touches` does; this wrapper only needs to know whether the answer is
@@ -5826,11 +6030,12 @@ def _push_test_step(base: str, *, paths_file: Path | None = None) -> Step:
     probe is a subprocess because the selector lives in `devtools`, which `sqpack` does
     not import.
     """
-    change_arguments = (
-        ("--changed-paths-file", str(paths_file))
-        if paths_file is not None
-        else ("--since", base)
-    )
+    if paths_file is not None:
+        change_arguments = ("--changed-paths-file", str(paths_file))
+        change = f"the changed-path snapshot {paths_file}"
+    else:
+        change_arguments = ("--since", base)
+        change = f"the change against {base!r}"
     probe = subprocess.run(
         (sys.executable, "-m", "devtools.reachable_tests", "--summary", *change_arguments),
         cwd=PROJECT_ROOT,
@@ -5840,7 +6045,7 @@ def _push_test_step(base: str, *, paths_file: Path | None = None) -> Step:
     )
     if probe.returncode != 0:
         detail = probe.stderr.strip() or probe.stdout.strip() or "selector failed"
-        raise UsageError(f"--push could not resolve the change against {base!r}: {detail}")
+        raise UsageError(f"--push could not resolve {change}: {detail}")
     report = probe.stdout.strip()
     if report == "everything":
         everything = True
@@ -5849,7 +6054,7 @@ def _push_test_step(base: str, *, paths_file: Path | None = None) -> Step:
         everything = False
         reachable_test_files = int(match.group(1))
     else:
-        raise UsageError(f"--push selector returned no valid summary for {base!r}: {report!r}")
+        raise UsageError(f"--push selector returned no valid summary for {change}: {report!r}")
 
     def action(context: Context) -> str:
         return _run(
@@ -5984,6 +6189,9 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         "regularized atlas views match their index",
         "regularized atlas drawings match their index",
         "the Lean replay receipt for s(k^2-2) = k holds",
+        # The vendored files and their manifest, compared byte for byte; git is asked only
+        # which files the tree holds. No clock, no network, no history.
+        "the vendored regularizer matches its manifest",
         "the inventory agrees with the register",
         "results rungs are earned and the view agrees",
         "the synopsis headline carries every result",
@@ -6155,11 +6363,12 @@ def _unless_verified(namespace: argparse.Namespace, selected: list[Step]) -> lis
             "it is not combined with a tier, --only or --since"
         )
     narrowed = _after_verified_pull_request(selected)
-    print(
+    _announce(
+        namespace,
         f"== pull-request run {verified_run} passed this exact tree: "
         f"{len(selected) - len(narrowed)} tree-reusable fast steps are not repeated, "
-        f"and {len(narrowed)} deferred or fail-closed steps still run ==\n",
-        file=sys.stderr if namespace.format == "json" else sys.stdout,
+        f"and {len(narrowed)} deferred or fail-closed steps still run ==",
+        "",
     )
     return narrowed
 
@@ -7441,14 +7650,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             paths_file = Path(directory) / "changed-paths.json"
             paths_file.write_text(json.dumps(paths), encoding="utf-8")
             step = _push_test_step(base, paths_file=paths_file)
-            print(
+            reason = _whole_selection_reason(selection, paths)
+            _announce(
+                namespace,
                 f"== pre-push prerequisites: {len(selected)}/{selection.universe_size} "
-                f"from {len(paths)} changed paths =="
+                f"from {len(paths)} changed paths ==",
+                *([reason] if reason is not None else []),
             )
-            if selection.unattributed_paths:
-                print("  unclaimed paths; running the whole prerequisite selection")
-            elif not paths:
-                print("  no paths determined; running the whole prerequisite selection")
             # A large proper subset can cost as much as the whole fallback. When both
             # resource settings are implicit and there are enough selected files to
             # occupy the host, let the edit pool drain, then give pytest the host. The
@@ -7467,23 +7675,22 @@ def main(argv: Sequence[str] | None = None) -> int:
                 exclusive_step_name = step.name
             selected = [*selected, step]
             scope = "the whole suite" if step.broad else "a reachable subset"
-            print(f"== pre-push floor against {base}: tests select {scope} ==\n")
+            _announce(
+                namespace, f"== pre-push floor against {base}: tests select {scope} ==", ""
+            )
         elif namespace.since:
             paths = changed_paths(namespace.since)
             selection = select_for_paths(paths, selected)
             selected = list(selection.steps)
-            print(f"== change-scoped against {namespace.since}: {len(paths)} paths ==")
-            if selection.unattributed_paths:
-                shown = ", ".join(selection.unattributed_paths[:5])
-                more = (
-                    f" (+{len(selection.unattributed_paths) - 5} more)"
-                    if len(selection.unattributed_paths) > 5
-                    else ""
-                )
-                print(f"  no step claims {shown}{more}; running the whole selection")
-            else:
-                print(f"  {len(selected)} steps reachable from those paths")
-            print()
+            reason = _whole_selection_reason(selection, paths)
+            _announce(
+                namespace,
+                f"== change-scoped against {namespace.since}: {len(paths)} paths ==",
+                f"  {len(selected)} steps reachable from those paths"
+                if reason is None
+                else reason,
+                "",
+            )
         if namespace.budgets or namespace.list:
             return _render_early_exit(namespace, selected)
         environment = _validation_environment()

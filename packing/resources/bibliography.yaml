@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:Bibliography/v1
   schema: bibliography.schema.yaml
   status: enforced
-last_reviewed: '2026-10-10'
+last_reviewed: '2026-10-13'
 # The citation fields a generator needs, keyed by the source keys the frontier records
 # use. The Markdown tables in README.md stay the human index; this file holds only what
 # a line of citation text is built from, for the keys something cites.
@@ -70,7 +70,7 @@ sources:
     venue: GitHub
     short_venue: Web
     dated: '2026-09-29'
-    credit: Ahmed after Levy, Kleddamag
+    credit: Ahmed after Levy, Overbeck
     short_credit: Ahmed after Levy et al.
     lineage: builds-on-project
     note: >-
@@ -80,7 +80,7 @@ sources:
       in web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/announcement/).
       README and THIRD_PARTY_NOTICES credit jlevy/squares at c55726e1e885227f63110131c0a914665175ff89,
       Walter Trump's construction and David Ellsworth's reconstruction diagram; the
-      announcement credits Kleddamag. No blanket license covers the collection.
+      announcement credits Marc Leonard Overbeck (@kleddamag on X). No blanket license covers the collection.
       The public derivative has not had a fresh full geometric replay according to
       docs/PUBLICATION.md. Retained intake: web/n11-optimality-2026-09-29/.
   - key: '[Ahmed 11SquaresFormalized 2026]'
@@ -95,7 +95,7 @@ sources:
       11SquaresFormalized at cdc746ed907d258057c283aeb6d077cb2c27e349, the Lean 4
       formalization of T-060's optimality proof. Mannaseh Ahmed, who posts on X as
       @ManassehA06, announced on 6 October 2026 that it "has been formalized in lean thanks
-      to Astra and Claude", thanking Joshua Levy (@ojoshe), Kleddamag, wand125, Guzhou0806
+      to Astra and Claude", thanking Joshua Levy (@ojoshe), Marc Leonard Overbeck (@kleddamag), wand125, Guzhou0806
       and ctjlewis "for aiding in the process"; the post, the author's own and 1/n of a
       thread, links this project's n = 11 page as its image credit and does not name the
       repository. Joshua Levy quoted it that day
@@ -126,7 +126,7 @@ sources:
       the numerical bounds published in square-packing-bounds. Its own attribution names
       Tokoharu and Evan Daniel; this entry does not infer a direct credit to this project
       from those upstream projects' lineage. The general pose tree extends wand125's n21
-      checker to point and threshold-charge measures and tests Kleddamag's certificate.
+      checker to point and threshold-charge measures and tests Marc Leonard Overbeck's n = 11 certificate.
   - key: '[Bentz 2010]'
     authors: [Bentz]
     year: 2010
@@ -224,71 +224,74 @@ sources:
       Massaccesi's LP note (mira-17squares/certificates/lower_bound_4p613/ATTRIBUTION.md,
       lines 26-29).
   - key: '[Kleddamag n17 certified bound]'
-    authors: [Kleddamag]
+    authors: [Overbeck]
     year: 2026
     venue: GitHub
     dated: '2026-09-21'
-    credit: Kleddamag after Levy, Mira, Guzhou0806
+    credit: Overbeck after Levy, Mira, Guzhou0806
     lineage: builds-on-project
     note: >-
-      The retained v1.0.0 release; its AUTHORS.md names Kleddamag as the project's
+      The retained v1.0.0 release by Marc Leonard Overbeck, who publishes on GitHub as
+      Kleddamag and on X as @kleddamag; its AUTHORS.md names Kleddamag as the project's
       director and says the work was produced with AI agents (OpenAI Codex) under that
       direction (web/n17-kleddamag-certified-bound-2026-09-21/README.md).
   - key: '[Kleddamag n17 4.66001]'
-    authors: [Kleddamag]
+    authors: [Overbeck]
     year: 2026
     venue: GitHub
     dated: '2026-09-27'
-    credit: Kleddamag after Levy, Mira, Guzhou0806
+    credit: Overbeck after Levy, Mira, Guzhou0806
     lineage: builds-on-project
     note: >-
       Commit 57519bb7 of Kleddamag/17-squares-certified-bound, 2026-09-27, untagged,
-      whose bounds/4.66001/ package proves s(17) > 466001/100000. Kleddamag, building
+      whose bounds/4.66001/ package proves s(17) > 466001/100000. Marc Leonard Overbeck, building
       on Squares Project (Joshua Levy), Mira and Guzhou0806: its ATTRIBUTION.md
       credits this project's weighted-covering, strict-core, event-cell and
       threshold-budget lineage, Mira-acc/17squares and Guzhou0806 / N17 project's
-      R038, and claims no invention of those methods. Kleddamag publishes a handle
-      only. Its AUTHORS.md says the work was produced with AI agents (OpenAI Codex)
+      R038, and claims no invention of those methods. It was published under his handle,
+      Kleddamag; his edition of 12 October 2026 names him ([Overbeck n17 candidate 2026]).
+      Its AUTHORS.md says the work was produced with AI agents (OpenAI Codex)
       under Kleddamag's direction (web/n17-kleddamag-466001-2026-09-27/README.md).
   - key: '[Kleddamag n17 4.640020]'
-    authors: [Kleddamag]
+    authors: [Overbeck]
     year: 2026
     venue: GitHub
     dated: '2026-09-26'
-    credit: Kleddamag after Levy, Mira, Guzhou0806
+    credit: Overbeck after Levy, Mira, Guzhou0806
     lineage: builds-on-project
     note: >-
       The v1.1.0 release of Kleddamag/17-squares-certified-bound at 13821ddf,
       2026-09-26, whose bounds/4.640020/ package proves s(17) > 232001/50000.
-      Kleddamag, building on Squares Project (Joshua Levy), Mira and Guzhou0806, on
-      the same lineage its ATTRIBUTION.md states. Its AUTHORS.md says the work was
-      produced with AI agents (OpenAI Codex) under Kleddamag's direction
+      Marc Leonard Overbeck, building on Squares Project (Joshua Levy), Mira and Guzhou0806, on
+      the same lineage its ATTRIBUTION.md states. Its AUTHORS.md names Overbeck as
+      Kleddamag and says the work was produced with AI agents (OpenAI Codex) under his
+      direction
       (web/n17-kleddamag-4640020-2026-09-26/README.md).
   - key: '[Guzhou0806 n17 R052]'
     authors: [Guzhou0806]
     year: 2026
     venue: GitHub
     dated: '2026-09-25'
-    credit: Guzhou0806 after Kleddamag, Mira, Levy
+    credit: Guzhou0806 after Overbeck, Mira, Levy
     lineage: builds-on-project
     note: >-
       The R052 release of Guzhou0806/n17-square-packing at 3bf1095c, 2026-09-25,
       which names itself as produced by "Guzhou0806 / N17 project with AI
-      assistance" on Kleddamag's v1.0.0 architecture
+      assistance" on Marc Leonard Overbeck's v1.0.0 architecture
       (web/n17-guzhou-r052-2026-09-25/README.md).
   - key: '[Guzhou0806 n17 R068]'
     authors: [Guzhou0806]
     year: 2026
     venue: GitHub
     dated: '2026-09-28'
-    credit: Guzhou0806 after Kleddamag, Mira, Levy
-    short_credit: Guzhou0806 after Kleddamag et al.
+    credit: Guzhou0806 after Overbeck, Mira, Levy
+    short_credit: Guzhou0806 after Overbeck et al.
     lineage: builds-on-project
     note: >-
       The R068 release of Guzhou0806/n17-square-packing at 815b1626, 2026-09-28, whose
       certificates/R068-C010/accepted/4.66044/ proves s(17) > 116511/25000. Guzhou0806 /
-      N17 project, continuing Kleddamag's public 4.66001 charge (Kleddamag building on
-      Squares Project (Joshua Levy), Mira and Guzhou0806): the package credits Kleddamag
+      N17 project, continuing Marc Leonard Overbeck's public 4.66001 charge (Overbeck building on
+      Squares Project (Joshua Levy), Mira and Guzhou0806): the package credits Overbeck
       for the charge, proof and Node BigInt checker, and its C++ checker is Guzhou0806's
       own. Its ATTRIBUTION.md keeps the historical attribution in upstream/notices, whose
       ATTRIBUTION.md credits Mira-acc/17squares, Guzhou0806's R038 and Joshua Levy, the
@@ -300,11 +303,11 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-09-28'
-    credit: Guzhou0806 after Kleddamag, Mira, Levy
+    credit: Guzhou0806 after Overbeck, Mira, Levy
     lineage: builds-on-project
     note: >-
       The R067 release of Guzhou0806/n17-square-packing at d4e2c287, 2026-09-28, whose
-      certificates/R067-4.66018/ proves s(17) > 233009/50000 on Kleddamag's 4.66001
+      certificates/R067-4.66018/ proves s(17) > 233009/50000 on Marc Leonard Overbeck's 4.66001
       charge unchanged, named by "Guzhou0806 / N17 project with AI assistance"; its
       ATTRIBUTION.md retains the "historical notices for Mira, Joshua Levy and this
       project" in upstream_notices (R067-4.66018/ATTRIBUTION.md, line 9). Superseded by
@@ -315,16 +318,16 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-09-30'
-    credit: Guzhou0806 after Kleddamag, Mira, Levy
-    short_credit: Guzhou0806 after Kleddamag et al.
+    credit: Guzhou0806 after Overbeck, Mira, Levy
+    short_credit: Guzhou0806 after Overbeck et al.
     lineage: builds-on-project
     note: >-
       The R071 release of Guzhou0806/n17-square-packing at 8c11f696, 2026-09-30, whose
       certificates/R071-C029/bounds/c027/ claims s(17) > 18641771/4000000 on R068's
       charge at a smaller parent. Its ATTRIBUTION.md says the improvements to 4.6604427
       and 4.66044275 "belong to AI-assisted research in the Guzhou0806/N17 project; they
-      are not new results of Kleddamag", that the 4.66001 framework, proof and
-      JavaScript checker are Kleddamag's, and that "Nagamochi's measure, chelokot's
+      are not new results of Kleddamag" (the handle of Marc Leonard Overbeck), that the
+      4.66001 framework, proof and JavaScript checker are Overbeck's, and that "Nagamochi's measure, chelokot's
       repair/compensation proof and Lean work, and other upstream algorithms retain their
       original attribution", without saying which part rests on them; it keeps the
       notices crediting Mira-acc/17squares, Guzhou0806's R038 and Joshua Levy, the
@@ -335,13 +338,13 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-09-29'
-    credit: Guzhou0806 after Kleddamag, Mira, Levy
+    credit: Guzhou0806 after Overbeck, Mira, Levy
     lineage: builds-on-project
     note: >-
       The R070 release of Guzhou0806/n17-square-packing at 8988d933, 2026-09-29, whose
       certificates/R070-4.6604427/ claims s(17) > 46604427/10000000 on R068's charge, and
       which its ATTRIBUTION.md credits to "AI-assisted work in the Guzhou/N17 project" on
-      Kleddamag's 4.66001 construction, proof and JavaScript checker. Superseded by R071
+      Marc Leonard Overbeck's 4.66001 construction, proof and JavaScript checker. Superseded by R071
       the next day and retained in R071's packet
       (web/n17-guzhou-r071-2026-09-30/README.md).
   - key: '[evand square-packing 2026]'
@@ -602,15 +605,16 @@ sources:
       web/squarepacker-s12-lower-bound-2026-10-05/, the v1.0 files it leaves unchanged
       pinned to the 2 October packet; dated by that revision, 2026-10-05 UTC.
   - key: '[Kleddamag n11 2026]'
-    authors: [Kleddamag]
+    authors: [Overbeck]
     year: 2026
     venue: GitHub
     dated: '2026-09-22'
-    credit: Kleddamag after Levy, Guzhou0806, Mira
-    short_credit: Kleddamag after Levy et al.
+    credit: Overbeck after Levy, Guzhou0806, Mira
+    short_credit: Overbeck after Levy et al.
     lineage: builds-on-project
     note: >-
-      The v1.0.2 release of Kleddamag/11-squares-certified-bound, pinned in
+      The v1.0.2 release of Kleddamag/11-squares-certified-bound by Marc Leonard Overbeck,
+      who publishes on GitHub as Kleddamag and on X as @kleddamag, pinned in
       web/external-square-certificates-2026-09-22/acquisition/sources.json,
       and the author's September 22 announcement retained in acquisition/x-kleddamag.txt.
       Joint with this project: its ATTRIBUTION.md says the work "builds on Joshua Levy,
@@ -625,16 +629,16 @@ sources:
     year: 2026
     venue: Zenodo
     dated: '2026-09-29'
-    credit: Wang, Li after Kleddamag, Levy
-    short_credit: Wang, Li after Kleddamag et al.
+    credit: Wang, Li after Overbeck, Levy
+    short_credit: Wang, Li after Overbeck et al.
     lineage: builds-on-project
     note: >-
       Zenodo record 23038546 (DOI 10.5281/zenodo.23038546), version 1.0.0, published
       2026-09-29 by Ke Wang and Can Li of Fudan University under CC-BY-4.0, retained in
       web/wang-li-n11-2026-09-29/ and reported on jlevy/squares#247. It reweights thirteen
-      threshold-charge orbits of Kleddamag's v1.0.2 certificate and scales the parent and
+      threshold-charge orbits of Marc Leonard Overbeck's v1.0.2 certificate and scales the parent and
       core sides by 999999999/1000000000. Its SOURCE_ATTRIBUTION.md describes the work as a
-      derivative continuation of Kleddamag's release and keeps that release's attribution
+      derivative continuation of Overbeck's release and keeps that release's attribution
       to this project's T-026 certificate. The record, the archive and the preprint make no
       statement about AI assistance. On jlevy/squares#247 on 2026-09-30 the authors wrote
       that "AI assistance was used for most of the computational exploration, code drafting
@@ -1907,8 +1911,10 @@ sources:
       were measured here exactly where the source places them. The source checks with
       Squares Project (Levy) verification code and supplies a corners Witness/v2. Derived
       exact facts only; no upstream byte is retained. OpenAI Codex assistance was disclosed
-      in the first commit, 0d8b9c1, and the disclosure removed at the pin. No local or
-      global optimality claim.
+      in the first commit, 0d8b9c1, and the disclosure removed at the pin; asked which
+      account stands, the author answered on jlevy/squares#503 on 12 October 2026, for this
+      release and the n153 one: "Both solutions were AI assisted by 'PY', an unreleased
+      agentic AI offering by PingYou Ltd." No local or global optimality claim.
   - key: '[PingYou n153 certificate 2026-10-11]'
     authors: [PingYou Ltd]
     year: 2026
@@ -1927,7 +1933,10 @@ sources:
       source checks with Squares Project (Levy) verification code
       and supplies a corners Witness/v2. Derived exact facts only; no upstream byte is
       retained. No AI-assistance statement; the same author's n207 release disclosed OpenAI
-      Codex assistance and removed it. No local or global optimality claim.
+      Codex assistance and removed it. Asked on jlevy/squares#503 which account stands, the
+      author answered there on 12 October 2026, for both releases: "Both solutions were AI
+      assisted by 'PY', an unreleased agentic AI offering by PingYou Ltd." No local or global
+      optimality claim.
   - key: '[Ostashev records 2026-10-11]'
     authors: [Ostashev]
     year: 2026
@@ -2002,7 +2011,109 @@ sources:
       source checks with Squares Project (Levy) verification code; this project lineage is
       not independent. The certificates are retained as factual data; the unlicensed prose
       is hash-pinned. Claude assistance disclosed. No optimizer, local or global claim.
+  - key: '[Daniel regularizer 2026-10-11]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-11'
+    note: >-
+      evand/square-packing at 675a5eaa8712542daac8b4515b0f69ad7044df44 (2026-10-11): the
+      exact solver and its two exact checkers under search/exact/ and the display
+      regularizer under search/regularize/, vendored unmodified under vendor/evand-regularize/
+      with its manifest vendored.yaml, under the MIT licence ("Copyright (c) 2026 Evan
+      Daniel"). This project runs it on its own known-best witnesses through
+      devtools.regularize_evand; its batch inputs and lists derive from those witnesses (CC
+      BY 4.0, Joshua Levy). Its CREDITS.md says the work was produced by Claude (Anthropic)
+      under his direction.
+  - key: '[Overbeck n17 candidate 2026]'
+    authors: [Overbeck]
+    year: 2026
+    venue: GitHub
+    short_venue: Web
+    dated: '2026-10-12'
+    credit: Overbeck after Levy, Ahmed, Mira, Guzhou0806, Maaz
+    short_credit: Overbeck after Levy et al.
+    lineage: builds-on-project
+    note: >-
+      Seventeen unit squares: verification edition of a candidate proof, version 1
+      (candidate), Kleddamag/the-seventeenth-square-candidate at
+      653b9589d0f8a152f01adc56b1d48ba53d49abc3 (committed 2026-10-12T14:40:59Z) with its
+      release large-files-v1, pinned in web/kleddamag-n17-candidate-2026-10-12/. README.md
+      and CITATION.cff name the author Marc Leonard Overbeck (ORCID 0009-0008-8607-8197), who
+      publishes on GitHub as Kleddamag, the handle of the [Kleddamag n11 2026] and
+      [Kleddamag n17 ...] keys, and on X as @kleddamag. CREDITS.md says the result depends
+      on, or follows the idea of, Joshua Levy and the squares project (the charge method,
+      the exact certification of L, the core-stress and local-minimum recipe, the
+      parent-centre contract and the plan to follow the n = 11 proof shape), Manasseh Ahmed's 11SquaresOptimal (the proof shape),
+      Mira-acc/17squares (the certificate frame), Guzhou0806's N17 project (the angle
+      catalogue, the parent-side reduction and the first exact JavaScript checker) and
+      Muhammad Maaz (the semidefinite leaves); Bidwell for the packing, and Gensane and
+      Ryckelynck and David Ellsworth for its exact description. It lists wand125's
+      certificates, kernel and verifier as context, not as a premise. README.md: "The
+      mathematics, the engines, the certificates, the checkers, the reviews and the text
+      were produced by AI systems under his direction and to his instructions: Codex
+      (OpenAI) and Claude (Anthropic). They are named and are not authors", and "Within the
+      project no human has read the mathematics." No licence for reuse. He announced it on
+      X on 12 October 2026 at 14:52:55Z
+      (https://x.com/kleddamag/status/2109658579678761429): "A proof candidate for 17
+      squares: the 1998 packing cannot be beaten. s(17) = 4.67553009…", "Built with @OpenAI
+      Codex and @AnthropicAI Claude. Thanks to @ojoshe, @_Mira___Mira_, @guzhou0806 and
+      @ManassehA06, whose work this builds on."; the post is retained in the packet's
+      receipts/announcement/.
+  - key: '[Fitzharding n17 Lean 2026]'
+    authors: [Fitzharding]
+    year: 2026
+    venue: GitHub
+    short_venue: Web
+    dated: '2026-10-13'
+    credit: Fitzharding after Levy, Ahmed, MacIver
+    short_credit: Fitzharding after Levy et al.
+    lineage: credits-project
+    note: >-
+      A Lean 4 proof, Sq17.square17_optimality, that seventeen unit squares pack in a square
+      of side L exactly when L is at least the side of Bidwell's 1998 packing:
+      ofitzharding/sq17-lean at e6ee548090dc1dbf938ecf8590481de837a6a454 (committed
+      2026-10-13T01:59:58Z), with the three certificate-source archives of its release
+      v1.0.0 (0a7167efa8dcae7fa73855890630fb7e2de550ed, 1,962,867,415 bytes) pinned by size
+      and SHA-256, in web/fitzharding-n17-lean-2026-10-13/. CITATION.cff and LICENSE name
+      the author Oscar Fitzharding, who publishes on GitHub and X as ofitzharding. README.md
+      credits: "John Bidwell discovered the packing in 1998, improving Pertti Hämäläinen's
+      1980 arrangement; see Friedman's survey. The Squares Project collects the wider
+      research record. Mannaseh Ahmed and collaborators' eleven-square formalization
+      provided a useful reference for computer-assisted formalization and its trust
+      boundary. David MacIver's earlier Lean work concerns a lower bound for seventeen
+      squares." It reports that a search on 12 October 2026 "found no earlier complete Lean
+      proof of this optimality result", and states: "Marc Overbeck published an independent
+      candidate proof of seventeen-square optimality on 12 October 2026, using mathematical
+      arguments and Python and JavaScript certificate checkers. This repository presents a
+      separate Lean formalization." AI assistance, README.md: "This project was developed
+      with substantial assistance from Claude and Codex." Fitzharding announced it on X on
+      13 October 2026 at 00:06:56Z (https://x.com/ofitzharding/status/2109798000008597616):
+      "I've released the first complete Lean proof of optimality for Bidwell's 1998 packing
+      of 17 squares. Built with @OpenAI Astra + @AnthropicAI Opus 5.5. Thanks to
+      @ManassehA06 & @ojoshe for prior work."; the post is retained in the packet's
+      receipts/announcement/. The source trusts Lean's compiler, native evaluator and C
+      toolchain for 13,343 native_decide facts. MIT licence. Issue #565 on this repository,
+      opened by the author on 12 October 2026 at 22:23:37Z to ask for the registration,
+      credits Bidwell, says Ahmed's s(11) proof and its Lean formalization "were useful
+      methodological references for finite exclusion, capture and the local endpoint
+      argument", thanks "the Squares Project's contributors and the Lean/Mathlib
+      communities", and says "Development used Claude and Codex assistance." The review of
+      13 October (docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md) records
+      two attribution findings to put to the author. F-1: the proof runs on this project's
+      24-cell cover, cap, census, endpoint chart and layout and 52-row local recipe, and on
+      32 patterns of its certified sub-pattern ledger, eleven of them wand125's, none of
+      which the README or CITATION.cff credits beyond collecting "the wider research
+      record"; and Overbeck's 60-place seed of 21 September 2026 fixes the centre of the
+      endpoint box. The packet's first-party comparison programs retain the cover, pattern
+      and endpoint identities this rests on, with their outputs
+      (receipts/cover-comparison.json, receipts/endpoint-comparison.json). F-2: the README
+      credits Ahmed's formalization only as a reference for its trust boundary, where the
+      issue names his s(11) proof for the proof's shape. The lineage stays
+      credits-project, as the source's own files state it.
 credited_names:
+  Oscar Fitzharding: Fitzharding
+  Marc Leonard Overbeck: Overbeck
   Daniil Ostashev: Ostashev
   Robert Barnett: Barnett
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit

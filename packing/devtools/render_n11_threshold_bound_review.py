@@ -101,7 +101,7 @@ TITLE = "A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares"
 HERO_TITLE = TITLE.replace("s(11) > 31/8", "$s(11) > 31/8$")
 #: One line of at most 160 characters, the §8 one-liner cut to the head's limit.
 DESCRIPTION = (
-    "Explains Kleddamag's proof that s(11) > 31/8 (T-037): five-site k-of-m charges, "
+    "Explains Overbeck's proof that s(11) > 31/8 (T-037): five-site k-of-m charges, "
     "strict cores on shrunken parents, and a certificate over 12,028 angle rows."
 )
 #: The archived copy of the source proof, which the article cites file by file, and this
@@ -118,7 +118,7 @@ FRONT = paper_front.check(
         slug=SLUG,
         title=HERO_TITLE,
         source=paper_front.Source(
-            "Kleddamag",
+            "Marc Leonard Overbeck",
             "https://github.com/Kleddamag/11-squares-certified-bound",
             author_url="https://x.com/kleddamag",
         ),
@@ -253,7 +253,7 @@ RELATIVE_ANCHOR = re.compile(r'(?P<start><a\b[^>]*\bhref=")(?P<url>\.\.?/[^"]+)(
 ONLY_ON_SCREEN = re.compile(
     r"\b(?:chooser|hover|tap|drag|click|button|slider|toggle)\b", re.IGNORECASE
 )
-#: The archived Kleddamag files the article links, each pinned to a repository blob.
+#: The archived Overbeck files the article links, each pinned to a repository blob.
 ARCHIVED_CITATION_SOURCES = (
     ARCHIVE / "README.md",
     ARCHIVE / "PROOF.md",

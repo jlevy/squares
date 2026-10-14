@@ -479,7 +479,7 @@ prospective allocations for L1 (current certificates) and L2 (richer witnesses).
 The scalar probe runs independently of adaptive-verifier implementation.
 Scientific criteria below remain applicable.
 The
-[continuation addendum’s scalar command](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#scalar-6116-launch)
+[continuation addendum’s scalar command](../../../docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md#scalar-6116-launch)
 supersedes the historical scalar invocation below; historical schedules do not authorize
 an additional BC-232 final leg.
 

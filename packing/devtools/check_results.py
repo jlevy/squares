@@ -1213,6 +1213,64 @@ def regularizations_problems(
     return problems
 
 
+def regularized_drawings_problems(
+    register: Mapping[str, Any], scopes: Mapping[str, set[int]], *, drift: bool = True
+) -> list[str]:
+    """What is wrong with the register's `regularized_drawings`, this project's own
+    regularizations of registered packings as the atlas's regularized layer draws them.
+
+    Each item is held as a result's `regularizations` item is, less what a result alone
+    has: its count listed once, its `of` registered with the count in its scope, `by` this
+    project, the measurements numbers no lower than zero with `moved` no more squares than
+    the count holds, a measured identity carrying a measurement, and its `measured_in`
+    a repository file. The drawings date from the layer's own runs, which carry no
+    register date, so `of` is not held to a date, and each `view` is the layer's to hold
+    (`regularize_axis_components --check-atlas`). The block as a whole must be what
+    `devtools.regularized_drawings` generates from the layer's index (`drift`).
+    """
+    drawings = register.get("regularized_drawings") or {}
+    problems: list[str] = []
+    seen: set[int] = set()
+    for item in drawings.get("items") or []:
+        n = item.get("n")
+        name = f"regularized drawing at n = {n}"
+        if n in seen:
+            problems.append(f"{name} is listed twice")
+        seen.add(n)
+        other = str(item.get("of"))
+        if other not in scopes:
+            problems.append(f"{name} names {other}, which is not registered")
+        elif n not in scopes[other]:
+            problems.append(f"{name} names {other}, whose scope does not hold n = {n}")
+        if item.get("by") != PROJECT_REGULARIZER:
+            problems.append(f"{name} is by {item.get('by')}, not `{PROJECT_REGULARIZER}`")
+        problems.extend(_regularization_number_problems(name, item))
+        identity = item.get("identity") or {}
+        moved = identity.get("moved")
+        if isinstance(moved, int) and isinstance(n, int) and moved > n:
+            problems.append(f"{name}: identity.moved, {moved}, is more squares than n = {n}")
+        measured_in = identity.get("measured_in")
+        if measured_in and (problem := repository_file_problem(str(measured_in))):
+            problems.append(f"{name}: identity.measured_in {problem}: {measured_in}")
+        if identity.get("basis") == "measured" and not any(
+            field in identity for field in IDENTITY_MEASUREMENTS
+        ):
+            problems.append(
+                f"{name}: an identity measured here carries at least one of "
+                f"{', '.join(IDENTITY_MEASUREMENTS)}"
+            )
+    listed = {row.get("n") for row in drawings.get("unregistered") or []}
+    problems.extend(
+        f"regularized drawing at n = {n} is both an item and unregistered"
+        for n in sorted(seen & listed)
+    )
+    if drift:
+        from devtools import regularized_drawings  # noqa: PLC0415
+
+        problems.extend(regularized_drawings.problems())
+    return problems
+
+
 def coverage_problems(
     results: list[dict],
     evidence_index: dict[str, dict],
@@ -1505,6 +1563,7 @@ def main() -> int:
         standings[rid] = Standing(declared_v, declared_c, derived_v, derived_c)
 
     problems.extend(coverage_problems(results, evidence_index, sources, case_bound_evidence()))
+    problems.extend(regularized_drawings_problems(register, scopes))
     problems.extend(rung_label_problems(results, standings))
 
     known = set(actual_ids)

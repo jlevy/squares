@@ -423,7 +423,7 @@ The site publishes the poster family beside the first figure once Phase 4 closes
 
 ## References
 
-- [`packing/atlas/known-best/FIGURE-PLAYBOOK.md`](../../../../packing/atlas/known-best/FIGURE-PLAYBOOK.md),
+- [`packing/atlas/known-best/figure-playbook.md`](../../../../packing/atlas/known-best/figure-playbook.md),
   section “Extending to n = 1..200”
 - [`packing/atlas/prospective/README.md`](../../../../packing/atlas/prospective/README.md),
   “Remaining Work”
@@ -431,7 +431,7 @@ The site publishes the poster family beside the first figure once Phase 4 closes
   the retention policy
 - [PR44 review](../../reviews/review-2026-08-26-pr44-constructive-enumeration-and-known-best-atlas.md),
   finding F3 on the unseen corpus
-- [`plan-2026-08-28-symbolic-promotion-and-the-atlas.md`](plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
+- [`plan-2026-08-28-symbolic-promotion-and-the-atlas.md`](../done/plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
 - [Source survey beyond 100](../../research/research-2026-09-07-square-packing-sources-beyond-100.md),
   Phase 0’s report
 - Beads: `think-ezcx`, `think-k5z2`, `think-givb` (closed), `think-aaxz` (closed),

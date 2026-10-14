@@ -1,0 +1,112 @@
+{
+  "format": "k17-release-assets-v1",
+  "source_url": "https://github.com/Kleddamag/the-seventeenth-square-candidate",
+  "release": {
+    "tag": "large-files-v1",
+    "name": "Large files",
+    "created_utc": "2026-10-12T14:40:59Z",
+    "published_utc": "2026-10-12T14:24:20Z",
+    "target": "main",
+    "url": "https://github.com/Kleddamag/the-seventeenth-square-candidate/releases/tag/large-files-v1",
+    "notes_manifest_sha256": "9ecfa0db00fc9afaf98c6df8eeee920df8cb1e4737c88521ac3c64366ec7689e",
+    "notes_check_py_sha256": "c17240b5189821c9244b1e5568e7d6b73c3c4de0fae741ec4206f9852d86a7cb"
+  },
+  "edition_commit": "653b9589d0f8a152f01adc56b1d48ba53d49abc3",
+  "retrieved_at_utc": "2026-10-12T16:53Z",
+  "how": "Fetched with the author's fetch_large.py (read first; standard library, writes only under _large/) through gh release download, which reported FETCH RESULT: PASS; then re-hashed here with hashlib independently of that script. Each file's size and SHA-256 equal its LARGE_FILES.tsv row and the release's own asset digest. No asset is retained.",
+  "local_digests": {
+    "MANIFEST.sha256": "9ecfa0db00fc9afaf98c6df8eeee920df8cb1e4737c88521ac3c64366ec7689e",
+    "check.py": "c17240b5189821c9244b1e5568e7d6b73c3c4de0fae741ec4206f9852d86a7cb",
+    "LARGE_FILES.tsv": "9a01cac28d3377a2ce900b92a99688890d6831d62e767c08d07da0daa12f28cb",
+    "manifest_matches_release_notes": true,
+    "check_py_matches_release_notes": true
+  },
+  "assets": [
+    {
+      "path": "local-research/claude-20261002/results/assembly/JG/JG.cert.jsonl.gz",
+      "bytes": 371866669,
+      "sha256": "e7587199a38d4772394c1284b0abe4b90e8f98f7dc3845c639e5dc08839ac7b5",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "local-research/claude-20261002/results/assembly/JPA_v5/JPA_v5.cert.jsonl.gz",
+      "bytes": 1704473363,
+      "sha256": "b9f9283979d2fab1f20307ac09f988e23dbd3b51abb827b9982c50c48214d2a7",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "local-research/claude-20261002/results/assembly/JPG15m_v5/JPG15m_v5.cert.jsonl.gz",
+      "bytes": 206602266,
+      "sha256": "ed66c59b16b4b3549826311b8ba2b5be9c538e0235abab3cebb19789b9637c58",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "local-research/claude-20261002/results/assembly/JPG17m_v5/JPG17m_v5.cert.jsonl.gz",
+      "bytes": 106187146,
+      "sha256": "68613d8407cb5a9f8fdb7142641b3d4237f36f002ba856f6498bff7a66aa1751",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "local-research/claude-20261002/results/assembly/JPG17p_v5/JPG17p_v5.cert.jsonl.gz",
+      "bytes": 166879611,
+      "sha256": "f392b6ba42c9abc3a60957cceeb70078dd72b200c2ef032ebdb8a0c6a7044b97",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "local-research/claude-20261002/results/assembly/JPG3m_v5/JPG3m_v5.cert.jsonl.gz",
+      "bytes": 137008711,
+      "sha256": "7535735021ff18c43e84956180d0389e423ff863e5dd2e2cf661e227f0a94fd4",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "local-research/claude-20261002/results/assembly/JPG3p_v5/JPG3p_v5.cert.jsonl.gz",
+      "bytes": 136592253,
+      "sha256": "804ae79493f6733645b3d70c10edc05d5ab0c20fea416284af16c9e855c7c0ea",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "local-research/claude-20261002/results/assembly/JPW13/JPW13.cert.jsonl.gz",
+      "bytes": 969247519,
+      "sha256": "7147d7780da9006064160c6b49a4196678bcc20cd31234f1b3a0a4c54fcc050b",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "local-research/claude-20261002/results/assembly/JPWS_v4/JPWS_v4.cert.jsonl.gz",
+      "bytes": 402763192,
+      "sha256": "538a6a512a10b72dd59f7a4eeec710c6bddb12411c6728745c7bbcf9cb333cf4",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "research/finishing-threshold-goal-20261007/current-author-20261012t/morning-contract-20261010/larger-leaf/RESULT.json",
+      "bytes": 127792931,
+      "sha256": "e0b99376cc1239a843ad2d5cd2cebe29cf8791edfce13debd264a3874fc25a6b",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "research/window-extension-20261008/bigbox/gen17/G20S_tree.jsonl.gz",
+      "bytes": 261242637,
+      "sha256": "3275f52aca2e23e1916744d294bfdca827dd71db7cfe38fede277cca94c68f84",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    },
+    {
+      "path": "research/window-extension-20261008/bigbox/gen17/HW_tree.jsonl.gz",
+      "bytes": 195062782,
+      "sha256": "c974a9c5dce91e7db0e04fb17a7a5500b477a48448073d7ed29779423bf0be73",
+      "matches_large_files_tsv": true,
+      "matches_release_asset_digest": true
+    }
+  ],
+  "total_bytes": 4785719080,
+  "all_match": true
+}

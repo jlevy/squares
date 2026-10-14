@@ -1718,6 +1718,24 @@ def symmetric(side: Fraction, square: Placed, k: int) -> Placed:
     return x, y, c, s
 
 
+def nearest_reach(points: Sequence[tuple[float, float]]) -> float:
+    """How far above the least binary64 squared distance between two of these centres an
+    exact nearest one can read, with a wide margin.
+
+    Each coordinate is its exact value correctly rounded, within ``M * 2^-53`` of it for
+    ``M`` the largest magnitude, and the difference, the squares and the sum each round
+    once more, so a squared distance read in binary64 is within ``48 * M^2 * 2^-53`` of
+    the exact one, and certainly within ``64 * M^2 * 2^-53``. The exact nearest reads at
+    most twice that above the least read value, and so does every exact tie with it. This
+    allows ``(1 + M)^2 * 2^-40``, at least 64 times twice that bound, so the search never
+    drops a centre it would have needed; a coordinate past binary64's range is refused.
+    """
+    largest = max((max(abs(x), abs(y)) for x, y in points), default=0.0)
+    if not math.isfinite(largest):
+        raise AreaRouteError("a centre's coordinate is past binary64's range")
+    return (1.0 + largest) ** 2 * 2.0**-40
+
+
 def arrangement_gap(
     first: tuple[Fraction, Sequence[Placed]], second: tuple[Fraction, Sequence[Placed]]
 ) -> dict[str, Any]:
@@ -1730,16 +1748,31 @@ def arrangement_gap(
     the two squares' edges), how many squares moved by more than each of ``10^-9`` to
     ``10^-1`` (`MOVED`), and how many turned by a sine above ``10^-6``. A measurement for
     credit; it decides nothing.
+
+    The nearest centre is the exact one, the least exact squared distance and then the
+    least index, as an exact search over every pair finds it; only the search is cheaper
+    (think-uomm). Each squared distance is first taken in binary64 and only the centres
+    within `nearest_reach` of the least of those are compared exactly, which always
+    holds the exact nearest and every exact tie with it.
     """
     side, left = first
     other_side, right = second
     best: dict[str, Any] | None = None
+    near = [(float(x), float(y)) for x, y, _c, _s in left]
     for k in range(8):
         mapped = [symmetric(other_side, square, k) for square in right]
+        far = [(float(u), float(v)) for u, v, _a, _b in mapped]
+        reach = nearest_reach([*near, *far])
         nearest: list[tuple[Fraction, int]] = []
-        for x, y, _c, _s in left:
+        for (x, y, _c, _s), (fx, fy) in zip(left, near, strict=True):
+            rough = [(fx - fu) ** 2 + (fy - fv) ** 2 for fu, fv in far]
+            within = min(rough) + reach
             nearest.append(
-                min(((x - u) ** 2 + (y - v) ** 2, j) for j, (u, v, _a, _b) in enumerate(mapped))
+                min(
+                    ((x - u) ** 2 + (y - v) ** 2, j)
+                    for j, (u, v, _a, _b) in enumerate(mapped)
+                    if rough[j] <= within
+                )
             )
         if len({j for _d, j in nearest}) != len(left):
             continue

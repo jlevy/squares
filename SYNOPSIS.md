@@ -74,35 +74,36 @@ $s(11) \ge 955000 \cdot \sqrt{518400042893309449}/179696714646249 = 3.8264474\ld
 $s(11) \ge 955000 \cdot \sqrt{2073600042893309449}/359341754646249 = 3.8269975\ldots$ at
 `V3/C3`. The exact value is now $s(11) = T = 3.877083590022814\ldots$: T-060’s
 independently replayed global lower bound matches T-011’s exact Trump witness.
-Kleddamag’s $s(11) > 31/8 = 3.875$ remains the earlier verified T-037 bound, and Wang
-and Li’s scaling of its certificate, $s(11) > 3875000000/999999999$ (T-061), a later
-historical one. Future research follows the
-[payoff policy](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#research-payoff-and-exposition):
+The $s(11) > 31/8 = 3.875$ of Marc Leonard Overbeck (Kleddamag) remains the earlier
+verified T-037 bound, and Wang and Li’s scaling of its certificate,
+$s(11) > 3875000000/999999999$ (T-061), a later historical one.
+Future research follows the
+[payoff policy](docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md#research-payoff-and-exposition):
 prioritize substantial bound improvements and methods or theorems that make them
 possible.
 
 The
 [September 22 external intake](docs/project/reviews/review-2026-09-22-external-square-certificates-integration.md)
-verifies Kleddamag’s stronger $s(11) > 3.875$ bound and Tokoharu’s rectangle-density
+verifies Overbeck’s stronger $s(11) > 3.875$ bound and Tokoharu’s rectangle-density
 certificates at $s(26) \ge 5.508$ and $s(29) \ge 5.71$, with pinned sources,
 mathematical reviews and complete replays.
 These now supply the verified Frontier bounds; the records retain literal source reports
 and state the verification methods separately.
 The
 [complete native n11 decision](docs/project/reviews/review-2026-09-22-native-n11-parent-core.md)
-adds a distinct interval coverage method for Kleddamag’s strict $3.875$ bound (T-037,
+adds a distinct interval coverage method for Overbeck’s strict $3.875$ bound (T-037,
 `V3/C3`), with no new bound.
 [Part II of the n = 11 series](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html)
 explains that proof and what it inherits.
 The
 [R052 review of 25 September](docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md)
 verifies Guzhou0806’s strict $s(17) > 231001/50000 = 4.62002$, built with AI assistance
-on Kleddamag’s `v1.0.0` mixed point/threshold architecture, at `V3/C3`. All four of the
+on Overbeck’s `v1.0.0` mixed point/threshold architecture, at `V3/C3`. All four of the
 source’s replay modes pass here, but both full sweeps are one event-cell method and the
 native interval route refuses the certificate at its engine ceilings, so there is no
 method-distinct decision.
 It supplied the verified Frontier bound for $n = 17$ from 25 to 27 September, about
-$0.000229$ above Kleddamag’s $461300/99853$. Kleddamag’s `v1.1.0` of 26 September then
+$0.000229$ above Overbeck’s $461300/99853$. Overbeck’s `v1.1.0` of 26 September then
 proved $s(17) > 232001/50000 = 4.64002$, exactly $0.02$ above R052, on the same author’s
 architecture extended with weighted thresholds and pairwise-intersecting winning-subset
 rules. Both of its complete checkers pass here and agree on all 2,048 intervals, with a
@@ -110,7 +111,7 @@ counting surplus of 5,629 units of $10^{-9}$; they share one event-cell method, 
 native parent-core route cannot yet represent the new features, so it is `V3/C3`, and
 its [proof review](docs/project/reviews/review-2026-09-27-n17-kleddamag-4640020.md) is a
 separate record. It supplied the verified Frontier bound for $n = 17$ on 27 September.
-The same day $s(17) > 466001/100000 = 4.66001$ followed, $0.01999$ above it: Kleddamag,
+The same day $s(17) > 466001/100000 = 4.66001$ followed, $0.01999$ above it: Overbeck,
 building on Squares Project (Joshua Levy), Mira and Guzhou0806, an exact
 weighted-certificate proof over 2,168 orientation intervals on the same two checkers.
 Both pass here and agree on every interval, with a counting surplus of 54,340 units of
@@ -172,8 +173,10 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-024](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `apparently-novel` | s(11) >= 3175000*sqrt(518400042893309449)/598960960743657 = 3.816609502788862, proved by an exact dilation-limit corollary of T-018’s retained atoms re-certified on a finer direction net. |
 | [T-025](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `apparently-novel` | s(11) >= 191/50 = 3.82, by a threshold certificate: 584 point atoms of mass 271052551/31250000 and 320 threshold atoms, every one 2-of-3, of budget 143352577/62500000, on the D4-symmetric site set at shrunken side 9977/10000 and the 181-direction net. |
 | [T-026](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `apparently-novel` | s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939, proved by an exact dilation-limit corollary of T-025’s threshold certificate re-certified on a finer direction net. |
-| [T-037](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `previously-published` | s(11) > 31/8 = 3.875, by Kleddamag’s 11-squares-certified-bound v1.0.2 release of 22 September 2026. |
+| [T-037](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `previously-published` | s(11) > 31/8 = 3.875, by Marc Leonard Overbeck’s 11-squares-certified-bound v1.0.2 release of 22 September 2026. |
 | [T-060](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `previously-published` | `s(11) = T = (6u+4)/(1+2u−u²) = 3.8770835900228141773078970601…`, where `u` is the unique root in `(9/25, 37/100)` of `5u⁸−10u⁷−2u⁶+14u⁵+12u⁴−6u³+2u²+2u−1 = 0`. |
+| [T-153](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | Marc Leonard Overbeck (Kleddamag) claims, as a candidate proof, that `s(17) = L = 4.67553009360455095163…`, the side of John Bidwell’s 1998 packing of seventeen unit squares, with the squares closed, independently rotated and allowed to touch. |
+| [T-154](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | `s(17) = 4.67553009360455095163…`, T-153’s value L, the side of John Bidwell’s 1998 packing of seventeen unit squares, proved by a second route: Oscar Fitzharding’s Lean 4 proof, which does not formalize T-153’s argument. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V3` | `C3` | `S4` | `apparently-novel` | s(12) >= 99/25, by this project’s weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V3` | `C3` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from this project’s weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
@@ -205,11 +208,11 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-033](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S3` | `apparently-novel` | s(11) >= 955000*sqrt(2073600042893309449)/359341754646249 = 3.826997548829543624, proved by an exact dilation-limit corollary of T-025’s threshold certificate re-certified on the 2880-step direction net. |
 | [T-034](packing/frontier/RESULTS.md) | 21 | `V3` | `C3` | `S3` | `apparently-novel` | s(21) >= 122/25, from this project’s weighted fractional unavoidable-set certificate at container side 122/25 = 4.88. |
 | [T-035](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t* = 0.365769307604677 …), whose side is at most the rational U_hi of the certificate header (U_hi - U = 2.03e-45), lies, after the quarter turn that puts its tilted centroid in the closed upper-right quadrant and the relabelling that orders each class by x + y/4, strictly within rho = 808514697/200000000000 of Trump’s labelled image (rotation 1, labels [3,4,2,5,0,1,8,10,6,9,7]) in every centre coordinate, with every tilted orientation within 2.0e-6 radians of Trump’s; every other packing in the family has side greater than U_hi. |
-| [T-038](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S3` | `previously-published` | s(17) > 461300/99853 = 4.6197910929 …, by Kleddamag’s 17-squares-certified-bound v1.0.0 release of 21 September 2026. |
+| [T-038](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S3` | `previously-published` | s(17) > 461300/99853 = 4.6197910929 …, by Marc Leonard Overbeck’s 17-squares-certified-bound v1.0.0 release of 21 September 2026. |
 | [T-039](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S3` | `previously-published` | s(17) > 231001/50000 = 4.62002, by Guzhou0806 / N17 project’s R052 release of 25 September 2026. |
-| [T-040](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S3` | `previously-published` | s(17) > 232001/50000 = 4.64002, by Kleddamag’s 17-squares-certified-bound v1.1.0 release of 26 September 2026. |
-| [T-041](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S3` | `previously-published` | s(17) > 466001/100000 = 4.66001, by the bounds/4.66001/ package of Kleddamag’s 17-squares-certified-bound, published untagged on 27 September 2026. |
-| [T-043](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S3` | `previously-published` | s(17) > 116511/25000 = 4.66044, by Guzhou0806 / N17 project’s R068 release of 28 September 2026, continuing Kleddamag’s public 4.66001 charge (T-041). |
+| [T-040](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S3` | `previously-published` | s(17) > 232001/50000 = 4.64002, by Marc Leonard Overbeck’s 17-squares-certified-bound v1.1.0 release of 26 September 2026. |
+| [T-041](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S3` | `previously-published` | s(17) > 466001/100000 = 4.66001, by the bounds/4.66001/ package of Marc Leonard Overbeck’s 17-squares-certified-bound, published untagged on 27 September 2026. |
+| [T-043](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S3` | `previously-published` | s(17) > 116511/25000 = 4.66044, by Guzhou0806 / N17 project’s R068 release of 28 September 2026, continuing Marc Leonard Overbeck’s public 4.66001 charge (T-041). |
 | [T-044](packing/frontier/RESULTS.md) | 26, 29, 39, 40, 41, 52, 53, 54, 55, 56, 57, 68, 69, 70, 71, 72, 73 | `V3` | `C3` | `S3` | `previously-published` | Ten exact weighted point certificates in wand125/square-packing-bounds, of 22 September 2026, prove s(26) >= 109/20, s(29) >= 557/100, s(39) >= 13/2, s(40) >= 13/2, s(53) >= 369/50, s(55) >= 377/50, s(56) >= 381/50, s(69) >= 841/100, s(70) >= 171/20 and s(72) >= 861/100. |
 | [T-045](packing/frontier/RESULTS.md) | 18, 19, 20, 26, 27, 28, 30, 31, 32, 40, 61, 75, 76, 77, 78 | `V3` | `C3` | `S3` | `previously-published` | Twelve rectangle-density certificates in wand125/square-packing-bounds, added on 26 and 27 September 2026, prove s(18) >= 939/200, s(19) >= 963/200, s(20) >= 979/200, s(26) >= 553/100, s(27) >= 28/5, s(30) >= 1173/200, s(31) >= 148/25, s(32) >= 119/20, s(40) >= 1339/200, s(61) >= 199/25, s(75) >= 889/100 and s(78) >= 1791/200. |
 | [T-048](packing/frontier/RESULTS.md) | 50, 51 | `V3` | `C3` | `S3` | `previously-published` | s(50) >= 37/5 = 7.4, by wand125’s mixed rectangle-density certificate of 28 September 2026. |
@@ -298,7 +301,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-054](packing/frontier/RESULTS.md) | 45 | `V3` | `C3` | `S2` | `previously-published` | s(45) = 7 by a second, point-only route: the lower half by wand125’s point-only measure of 28 September 2026, the upper half by the 7 x 7 grid. |
 | [T-055](packing/frontier/RESULTS.md) | 21 | `V3` | `C3` | `S2` | `previously-published` | s(21) = 5 by a second, point-only route: the lower half by wand125’s point-only measure, completed on 28 September 2026 with a Lean 4 reduction, the upper half by the 5 x 5 grid. |
 | [T-058](packing/frontier/RESULTS.md) | 1-100 | `V3` | `C3` | `S2` | `previously-published` | A rectangle-density certificate with core side B = 9977/10000 and the 201-direction net of step D = 83/40000 cannot have mass below n at any side L >= α U, where U is the side of any packing of n unit squares and α = B(1 + D) = 399908091/400000000; if every orientation of that packing lies in the net’s D4 orbit, L >= B U suffices. |
-| [T-059](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `previously-published` | wand125/square-packing-tools reports that its exact general_pose_tree checker reproduces all 12028 per-row core minima of Kleddamag’s n11 certificate, release v1.0.2, with global row minimum 999962528 units and all witnesses replayed. |
+| [T-059](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `previously-published` | wand125/square-packing-tools reports that its exact general_pose_tree checker reproduces all 12028 per-row core minima of Marc Leonard Overbeck’s n11 certificate, release v1.0.2, with global row minimum 999962528 units and all witnesses replayed. |
 | [T-061](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `previously-published` | s(11) > 3875000000/999999999 = 3.875000003875000003875 …, by Ke Wang and Can Li’s Zenodo record of 29 September 2026, reported on jlevy/squares#247. |
 | [T-078](packing/frontier/RESULTS.md) | 12 | `V3` | `C3` | `S2` | `previously-published` | s(12) >= 31360/7901 = 3.96911783 …, by squarepacker (Ryu Sungjoon) after Evan Daniel, published on 2 October 2026 and reported on jlevy/squares#309. |
 | [T-088](packing/frontier/RESULTS.md) | 69 | `V3` | `C3` | `S2` | `previously-published` | s(69) <= 8.82719465572975, by David Ellsworth’s packing of 69 unit squares, certified here exactly. |
@@ -318,6 +321,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-123](packing/frontier/RESULTS.md) | 177 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports s(177) <= alpha_177, where alpha_177 is the feasible side of the source configuration and the selected root of the degree-32 integer polynomial in reported-catalogue.json, new_form_claims.177, with its retained rational root interval, whose ends agree to 23 places, so s(177) <= 13.82297973416944860009365… The same source asserts that this polynomial is minimal; that additional algebraic assertion has not been independently established here. |
 | [T-124](packing/frontier/RESULTS.md) | 1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 20, 21, 22, 23, 24, 25, 28, 30, 31, 32, 33, 34, 35, 36, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 60, 61, 62, 63, 64, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports that 178 configurations are non-strict local minima under the source matched-index perturbation convention. |
 | [T-063](packing/frontier/RESULTS.md) | 61 | `V3` | `C3` | `S1` | `previously-published` | s(61) = 8, as a corollary of s(60) = 8 (T-062), which Evan Daniel published with it on 28 September 2026. |
+| [T-155](packing/frontier/RESULTS.md) | 28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125, 128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293, 294, 296, 298, 299, 300 | `V3` | `C3` | `S1` | `apparently-novel` | For each of 59 counts n from 28 to 300, s(n) <= s_n, where s_n is the exact side of a rational packing that this project made from the register’s known-best witness at n with Evan Daniel’s exact solver and regularizer and decided here over Q; at 57 of the counts it is measured here as the witness’s packing, and at n = 204 and 299 that is not decided. |
 | [T-129](packing/frontier/RESULTS.md) | 105, 130, 292 | `V0` | `C0` | `S1` | `previously-published` | Complete author certificate reports at 105, 130 and 292 are retained with matching inputs and separate immutable pins, at the exact sides they state: s(105) <= 10.806077865519704632682966129102, s(130) <= 11.911187706535762355657987890878 and s(292) <= 17.597249391156465040647414499422. |
 
 | Significance | What [`epistemics.md`](epistemics.md#significance-and-novelty) anchors it to |
@@ -353,7 +357,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 152 | 152 registered, 122 by others |
+| Frontier results | 155 | 155 registered, 124 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -418,7 +422,7 @@ A draft or proposed direction is not a registered hypothesis, and a registered
 hypothesis is not a frontier result.
 
 The exact value is now $s(11) = T = 3.877083590022814\ldots$ by T-060 and T-011. Session
-152 fully replayed and mathematically reviewed Kleddamag’s earlier external certificate,
+152 fully replayed and mathematically reviewed Overbeck’s earlier external certificate,
 which closed 95.89% of the gap from T-026 to the Trump upper bound; Wang and Li’s
 scaling of it (T-061) then added $3.9 \times 10^{-9}$. Session 153 independently
 certifies every one of the 12,028 parent-angle intervals by directed-rounding box
@@ -613,6 +617,15 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Adversarial Review: Fitzharding’s Lean Proof That `s(17) = L`](docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md) | dated review record | record | retained | — |
+| [Review: Verification Gaps in the Drawn Packings and the Upper-Bound Register](docs/project/reviews/review-2026-10-13-verification-gaps.md) | dated review record | record | retained | — |
+| [Overbeck’s Candidate Proof of s(17) = L: Second Adversarial Review](docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md) | dated review record | record | retained | — |
+| [Mathematical Review: Kleddamag’s Candidate Proof That `s(17) = L`](docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md) | dated review record | record | retained | — |
+| [Owner Decisions of 13 October: s(11) Retired, s(17) Suspended, Duplicates Closed](docs/project/reviews/review-2026-10-13-owner-decisions.md) | dated review record | record | retained | — |
+| [Bead and Plan Reconciliation, Round 2, 12 October 2026](docs/project/reviews/review-2026-10-12-bead-reconciliation-round-2.md) | dated review record | record | retained | — |
+| [Bead and Plan Reconciliation, 10 October 2026](docs/project/reviews/review-2026-10-10-tbd-coordination.md) | dated review record | record | retained | — |
+| [Bead Reconciliation, Lane A — 2026-10-10](docs/project/reviews/review-2026-10-10-bead-reconciliation-a.md) | dated review record | record | retained | — |
+| [Bead Reconciliation Review: Lane B](docs/project/reviews/review-2026-10-10-bead-reconciliation-b.md) | dated review record | record | retained | — |
 | [Review: Robert Barnett’s and Daniil Ostashev’s Rational Upper-Bound Imports of 11 October (#505, #501)](docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md) | dated review record | record | retained | — |
 | [Review: Francisco Couzo’s Eleven Rational Upper-Bound Imports of 11 October (#506)](docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md) | dated review record | record | retained | — |
 | [Review: SQUISH’s Fourth Request, Nine Rational Upper-Bound Imports of 11 October (#500)](docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md) | dated review record | record | retained | — |
@@ -640,6 +653,9 @@ case or experiment separately.
 | [PR410 Integration Review for the n17 Continuation](docs/project/reviews/review-2026-10-07-n17-pr410-integration.md) | dated review record | record | retained | — |
 | [Session186 storage disposition](docs/project/reviews/review-2026-10-07-n17-session-186-storage.md) | dated review record | record | retained | — |
 | [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | research synthesis | supporting | retained | — |
+| [Assessment: Evan Daniel’s regularization process, and adapting it to every packing n = 1..324](docs/project/research/research-2026-10-11-evand-regularization-assessment.md) | research synthesis | supporting | retained | — |
+| [Research: Regularizing Every Known-Best Packing for Display](docs/project/research/research-2026-10-11-regularization-state-and-approach.md) | research synthesis | supporting | retained | — |
+| [Evan Daniel’s Regularizer, Vendored](vendor/evand-regularize/README.md) | component scope and use | definitive | maintained | — |
 | [Saved-pose incircle discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/README.md) | typed session record | record | retained | — |
 | [n17 Owned-Core Guarded Clauses](docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md) | research synthesis | record | retained | — |
 | [n17 Case-Preserving Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md) | research synthesis | record | retained | — |
@@ -649,7 +665,7 @@ case or experiment separately.
 | [n17 Two-Child Collective Propagation](docs/project/research/research-2026-10-07-n17-two-child-collective-propagation.md) | research synthesis | record | retained | — |
 | [n17 One-Round Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-one-round-owned-domain-propagation.md) | research synthesis | record | retained | — |
 | [n17 Strict-Core Regional Transfer](docs/project/research/research-2026-10-07-n17-strict-core-regional-transfer.md) | research synthesis | record | retained | — |
-| [n17 Six-Hour Mathematical and Efficiency Continuation](docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md) | implementation plan | current | transient | — |
+| [n17 Six-Hour Mathematical and Efficiency Continuation](docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md) | implementation plan | record | retained | — |
 | [n17 Session 186 W3 Strategy](docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md) | research synthesis | record | retained | — |
 | [n17 Session186 Performance and Validation Review](docs/project/reviews/review-2026-10-07-n17-session-186-performance.md) | dated review record | record | retained | — |
 | [n17 Session186 Implementation Readiness](docs/project/reviews/review-2026-10-07-n17-session-186-readiness.md) | dated review record | record | retained | — |
@@ -682,7 +698,7 @@ case or experiment separately.
 | [Matched Exact Replay Diagnostic](packing/campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/README.md) | typed session record | record | retained | — |
 | [Full-Square Partner Coupling for the n17 Witness](docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md) | research synthesis | record | retained | — |
 | [Complete Partner-Pose Coupling for the n17 Parent](docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md) | research synthesis | record | retained | — |
-| [n17 Four-Hour Coupling and Replay Continuation](docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md) | implementation plan | current | transient | — |
+| [n17 Four-Hour Coupling and Replay Continuation](docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md) | implementation plan | record | retained | — |
 | [n17 W3 Capacity and Route Selection](docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md) | research synthesis | record | retained | — |
 | [Fixed-Angle Feasible-Center Relaxation](packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/README.md) | research synthesis | record | retained | — |
 | [One-Square Pooled Relaxation Witness](packing/campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/README.md) | research synthesis | record | retained | — |
@@ -695,15 +711,16 @@ case or experiment separately.
 | [Session 184: TailA Dependency Reports](packing/campaign/retained/session-184-tail-a-dependencies/README.md) | typed session record | record | retained | — |
 | [Session 184: n11 First-Round Readiness Objects](packing/campaign/retained/session-184-n11-readiness/README.md) | typed session record | record | retained | — |
 | [n17 Proof Interfaces and Finite-Angle LP Contract](docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md) | research synthesis | record | retained | — |
-| [n17 Ten-Hour Overnight Session](docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md) | implementation plan | current | transient | — |
+| [n17 Ten-Hour Overnight Session](docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md) | implementation plan | record | retained | — |
 | [Refinement Replay Custody and Worker Admission Review](docs/project/reviews/review-2026-10-07-refinement-custody-closure.md) | dated review record | record | retained | — |
 | [Refinement Host Relocation and Rational Feasibility Review](docs/project/reviews/review-2026-10-07-refinement-host-rebind.md) | dated review record | record | retained | — |
 | [Published Site URLs](docs/project/site-urls.md) | generated status view | generated | generated | — |
 | [Fibonacci Torus: Independent Algebra Audit](docs/project/reviews/review-2026-10-07-fibonacci-torus-algebra.md) | dated review record | record | retained | — |
 | [Review: The Fibonacci-Torus Contact Geometry](docs/project/reviews/review-2026-10-07-fibonacci-torus-geometry.md) | dated review record | record | retained | — |
 | [Fibonacci Torus Source Review](docs/project/reviews/review-2026-10-07-fibonacci-torus-sources.md) | dated review record | record | retained | — |
-| [Fibonacci Torus Research and Audit](docs/project/specs/active/plan-2026-10-07-fibonacci-torus.md) | implementation plan | record | retained | — |
+| [Fibonacci Torus Research and Audit](docs/project/specs/done/plan-2026-10-07-fibonacci-torus.md) | implementation plan | record | retained | — |
 | [Fibonacci Torus Confirmation Checks](packing/cases/fibonacci_torus/README.md) | component scope and use | record | retained | — |
+| [Regularized Views Registered as Verified Upper Bounds](packing/cases/regularized_bounds/README.md) | component scope and use | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
@@ -713,11 +730,12 @@ case or experiment separately.
 | [Session 173: Windows owned-Job supervision](packing/campaign/results/session-173-windows-supervision/README.md) | typed session record | record | retained | — |
 | [Windows owned-Job supervision](packing/devtools/windows-supervision.md) | engineering and validation rules | current | maintained | — |
 | [Retained n17 diagnostics](packing/devtools/n17-diagnostics.md) | engineering and validation rules | current | maintained | — |
-| [The n = 17 Optimality Proof, Explained](docs/project/n17-optimality-explainer.md) | first-principles tutorial | supporting | maintained | — |
-| [N11: A Three-Paper Explainer Series](docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md) | implementation plan | current | transient | — |
-| [Feature: A Static, Crawlable Site with a Registered URL Scheme](docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md) | implementation plan | current | transient | — |
+| [The n = 17 Optimality Proof, Explained](docs/project/guides/n17-optimality-explainer.md) | first-principles tutorial | supporting | maintained | — |
+| [N11: A Three-Paper Explainer Series](docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md) | implementation plan | record | retained | — |
+| [Feature: A Static, Crawlable Site with a Registered URL Scheme](docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md) | implementation plan | record | retained | — |
 | [Feature: Compact Homepage, Consistent Case Layouts, and Scroll-Aware Navigation](docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md) | implementation plan | current | transient | — |
 | [Feature: A Shorter Website Development Loop](docs/project/specs/active/plan-2026-10-10-website-development-loop.md) | implementation plan | current | transient | — |
+| [Feature: One Documentation Layout Under `docs/project/`](docs/project/specs/active/plan-2026-10-11-documentation-organization.md) | implementation plan | current | transient | — |
 | [Proof Review: squarepacker’s k^2 - M(k) >= 0.033 log k](docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md) | dated review record | record | retained | — |
 | [Delta Proof Review: Ryu’s k² − M(k) Bound, Version 1.2](docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md) | dated review record | record | retained | — |
 | [Review of Ryu’s Quarter-Power and Cube-Root Proof Chains](docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md) | dated review record | record | retained | — |
@@ -789,8 +807,8 @@ case or experiment separately.
 | [Session 180: Bounded Producer Memory Investigation](packing/campaign/explorations/X048-session-169-pilots/README.md) | research synthesis | record | retained | — |
 | [A bounded residual-compatibility diagnostic](packing/campaign/explorations/X048-session-170-compatibility/README.md) | research synthesis | record | retained | — |
 | [Session 171: lazy raw-row support](packing/campaign/explorations/X048-session-171-raw-row-support/README.md) | research synthesis | record | retained | — |
-| [D1: lazy raw-piece row support on the frozen B state](packing/campaign/explorations/X048-session-171-raw-row-support/D1_REPORT.md) | research synthesis | record | retained | — |
-| [D2: forward checking and MRV on the same raw graph](packing/campaign/explorations/X048-session-171-raw-row-support/D2_REPORT.md) | research synthesis | record | retained | — |
+| [D1: lazy raw-piece row support on the frozen B state](packing/campaign/explorations/X048-session-171-raw-row-support/d1-report.md) | research synthesis | record | retained | — |
+| [D2: forward checking and MRV on the same raw graph](packing/campaign/explorations/X048-session-171-raw-row-support/d2-report.md) | research synthesis | record | retained | — |
 | [Session 172: the frozen raw binary graph supports every row](packing/campaign/explorations/X048-session-172-capacity-support/README.md) | research synthesis | record | retained | — |
 | [Fixed-witness half-interval/octagon sensitivity](packing/campaign/explorations/X048-session-174-core-refinement/README.md) | research synthesis | record | retained | — |
 | [Enhanced-model replacement supports](packing/campaign/explorations/X048-session-175-enhanced-support/README.md) | research synthesis | record | retained | — |
@@ -816,8 +834,8 @@ case or experiment separately.
 | [Independent Review of the n17 Exact Root Certificate](packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/output-review.md) | dated review record | record | retained | — |
 | [Independent Review of the n17 Endpoint Feasibility Certificate](packing/campaign/series/series-000-smoke-and-calibration/results/exp-238-n17-endpoint-feasibility/output-review.md) | dated review record | record | retained | — |
 | [Independent Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/output-review.md) | dated review record | record | retained | — |
-| [Plan: Transfer Recent Optimality Methods to n = 17 and Other Low Cases](docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md) | implementation plan | current | transient | — |
-| [Plan: Release Assets on Demand, and One Rule per Date](docs/project/specs/active/plan-2026-10-01-release-assets-on-demand.md) | implementation plan | current | transient | — |
+| [Plan: Transfer Recent Optimality Methods to n = 17 and Other Low Cases](docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md) | implementation plan | record | retained | — |
+| [Plan: Release Assets on Demand, and One Rule per Date](docs/project/specs/done/plan-2026-10-01-release-assets-on-demand.md) | implementation plan | record | retained | — |
 | [N11 Optimality Review — Intuition and Visual Structure](docs/project/reviews/review-2026-09-30-n11-explainer-intuition.md) | dated review record | record | retained | — |
 | [Research: Publishing GitHub Work from Codex Cloud](docs/project/research/research-2026-10-07-codex-cloud-github-publication.md) | research synthesis | record | retained | — |
 | [Cloud Intake State Checkpoint](docs/project/research/research-2026-10-07-cloud-intake-state-checkpoint.md) | research synthesis | record | retained | — |
@@ -830,7 +848,7 @@ case or experiment separately.
 | [Eleven-Square Optimality Explainer: Mathematical Review](docs/project/reviews/review-2026-09-30-n11-optimality-explainer.md) | dated review record | record | retained | — |
 | [N11 Optimality Explainer Citation and Documentation Review](docs/project/reviews/review-2026-09-30-n11-explainer-citations-and-docs.md) | dated review record | record | retained | — |
 | [Eleven-Square Explainer: Adversarial Proof Reconciliation](docs/project/reviews/review-2026-09-30-n11-explainer-proof-reconciliation.md) | dated review record | record | retained | — |
-| [Plan for Proof-Linked n11 Optimality Illustrations](docs/project/specs/active/plan-2026-09-30-n11-optimality-illustrations.md) | implementation plan | current | transient | — |
+| [Plan for Proof-Linked n11 Optimality Illustrations](docs/project/specs/done/plan-2026-09-30-n11-optimality-illustrations.md) | implementation plan | record | retained | — |
 | [D-490 PDF Incident: Run 35784981711](packing/campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711.md) | failure analysis and lessons | record | retained | — |
 | [Senior Review of PRs 199–201](docs/project/reviews/review-2026-09-19-pr199-201-correctness.md) | dated review record | record | retained | — |
 | [Proof Review: R012 `s(17) >= 461300/99999` and Mira’s `4.613` Certificate](docs/project/reviews/review-2026-09-20-n17-r012-and-mira-4613-proof-review.md) | dated review record | record | retained | — |
@@ -853,28 +871,28 @@ case or experiment separately.
 | [Research: Annealing for Square Packing, and How Far It Actually Reaches](docs/project/research/research-2026-09-08-annealing-for-square-packing.md) | research synthesis | supporting | maintained | — |
 | [Video Spikes: The Sources, Not the Pages](packing/atlas/known-best/video/spikes/README.md) | component scope and use | supporting | maintained | — |
 | [A Pages Preview, Served Locally](packing/strategies/preview/README.md) | component scope and use | supporting | maintained | — |
-| [Slideshow candidate v1 — notes](packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md) | research synthesis | record | retained | — |
-| [Spike v2: animated transitions between consecutive known-best packings](packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md) | research synthesis | record | retained | — |
+| [Slideshow candidate v1 — notes](packing/atlas/known-best/video/spikes/v1-slideshow/notes.md) | research synthesis | record | retained | — |
+| [Spike v2: animated transitions between consecutive known-best packings](packing/atlas/known-best/video/spikes/v2-transitions/notes.md) | research synthesis | record | retained | — |
 | [stats-summary.md](packing/atlas/known-best/video/spikes/v2-transitions/stats-summary.md) | generated status view | record | retained | — |
 | [A6 Fixed-Support Dual Admission](packing/cases/n11_fractional_certificate/a6_dual_upper/README.md) | research synthesis | record | retained | — |
 | [A6 Scope and Overnight Plan Review](docs/project/reviews/review-2026-09-10-n11-a6-scope-and-plan.md) | dated review record | record | retained | — |
-| [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) | implementation plan | current | transient | — |
+| [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) | implementation plan | record | superseded | [`s(11)` — solved](packing/frontier/n-011.md) |
 | [Feature: The Workbench, From Spike to Product](docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md) | implementation plan | current | transient | — |
-| [BC329 Target-Free Three-Profile Run Sheet](docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md) | implementation plan | current | transient | — |
-| [PR157 Integrated Calibration Launch Supplement](docs/project/specs/active/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md) | implementation plan | current | transient | — |
-| [BC329 Run-Set Verifier Contract](docs/project/specs/active/plan-2026-09-13-n11-bc329-runset-verifier.md) | implementation plan | current | transient | — |
-| [Feature: Video delivery profiles](docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md) | implementation plan | current | transient | — |
+| [BC329 Target-Free Three-Profile Run Sheet](docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md) | implementation plan | record | retained | — |
+| [PR157 Integrated Calibration Launch Supplement](docs/project/specs/done/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md) | implementation plan | record | retained | — |
+| [BC329 Run-Set Verifier Contract](docs/project/specs/done/plan-2026-09-13-n11-bc329-runset-verifier.md) | implementation plan | record | retained | — |
+| [Feature: Video delivery profiles](docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md) | implementation plan | record | retained | — |
 | [Plan: Certify the Reported Upper Bounds, One Validation Block at a Time](docs/project/specs/active/plan-2026-09-22-upper-bound-certification-blocks.md) | implementation plan | current | transient | — |
-| [Plan: What R052 and Rung 0 Change at n = 11 and n = 17](docs/project/specs/active/plan-2026-09-25-after-r052-planning.md) | implementation plan | current | transient | — |
-| [Plan: An Overnight Queue After s(17) > 4.640020](docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md) | implementation plan | current | transient | — |
+| [Plan: What R052 and Rung 0 Change at n = 11 and n = 17](docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md) | implementation plan | record | superseded | [Agenda 042: The n11 Settlement Ladder and Low-n Angles](packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md) |
+| [Plan: An Overnight Queue After s(17) > 4.640020](docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md) | implementation plan | record | superseded | [Agenda 042: The n11 Settlement Ladder and Low-n Angles](packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md) |
 | [Plan: Others’ Results in the Results Register](docs/project/specs/active/plan-2026-09-29-third-party-results-register.md) | implementation plan | current | transient | — |
-| [Plan: Revising the Verification and Confirmation Ladders](docs/project/specs/active/plan-2026-09-30-epistemics-ladder-review.md) | implementation plan | current | transient | — |
-| [Plan: A Kind for Every Registered Result](docs/project/specs/active/plan-2026-10-01-result-kinds.md) | implementation plan | current | transient | — |
-| [Plan: A Workflow Status for Every Result, and No Separate Block for Reported Ones](docs/project/specs/active/plan-2026-10-01-result-status.md) | implementation plan | current | transient | — |
+| [Plan: Revising the Verification and Confirmation Ladders](docs/project/specs/done/plan-2026-09-30-epistemics-ladder-review.md) | implementation plan | record | retained | — |
+| [Plan: A Kind for Every Registered Result](docs/project/specs/done/plan-2026-10-01-result-kinds.md) | implementation plan | record | retained | — |
+| [Plan: A Workflow Status for Every Result, and No Separate Block for Reported Ones](docs/project/specs/done/plan-2026-10-01-result-status.md) | implementation plan | record | retained | — |
 | [Plan: An Independent, Fast Verifier for Measure-Capture Certificates](docs/project/specs/active/plan-2026-10-02-independent-measure-verifier.md) | implementation plan | current | transient | — |
 | [Plan: The First Application of the Result Import Process](docs/project/specs/active/plan-2026-10-01-result-import-first-application.md) | implementation plan | current | transient | — |
 | [Measure Verifier Milestone C: The Continuous-Angle Family](docs/project/specs/active/plan-2026-10-03-measure-verifier-milestone-c.md) | implementation plan | current | transient | — |
-| [Plan: n = 17 Overnight, 5 October 2026](docs/project/specs/active/plan-2026-10-05-n17-overnight.md) | implementation plan | current | transient | — |
+| [Plan: n = 17 Overnight, 5 October 2026](docs/project/specs/done/plan-2026-10-05-n17-overnight.md) | implementation plan | record | retained | — |
 | [Feature: A Top-Level Overview Page for the Published Site](docs/project/specs/active/plan-2026-09-29-github-pages-overview.md) | implementation plan | current | transient | — |
 | [BC329 Calibration Reader: Source-Distinct Review](docs/project/reviews/review-2026-09-13-n11-bc329-source-distinct-reader.md) | dated review record | record | retained | — |
 | [BC329 Reader Repair: Exact-Commit Rereview](docs/project/reviews/review-2026-09-13-n11-bc329-reader-rereview.md) | dated review record | record | retained | — |
@@ -894,7 +912,7 @@ case or experiment separately.
 | [PR 156 Run-Sheet Flowmark Final Rereview](docs/project/reviews/review-2026-09-13-n11-bc329-run-sheet-flowmark-final.md) | dated review record | record | retained | — |
 | [PR156 Native Usage Delta Audit](docs/project/reviews/review-2026-09-13-pr156-usage-delta.md) | dated review record | record | retained | — |
 | [Exact Review of the Repaired BC303 T1 Reader](docs/project/reviews/review-2026-09-13-n11-bc303-t1-reader-final-math.md) | dated review record | record | retained | — |
-| [N11: Three Overnight Research Blocks After PR139](docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md) | implementation plan | record | superseded | [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) |
+| [N11: Three Overnight Research Blocks After PR139](docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md) | implementation plan | record | superseded | [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) |
 | [Independent Review of the Unit-Parent Centre Bound](docs/project/reviews/review-2026-09-10-n11-parent-centre-independent-review.md) | dated review record | record | retained | — |
 | [Independent Review of the Adopted Parent Adapter](docs/project/reviews/review-2026-09-10-n11-parent-adapter-admission.md) | dated review record | record | retained | — |
 | [The Retained Point Obstruction in the Individual-Parent Domain](docs/project/reviews/review-2026-09-10-n11-parent-domain-translation.md) | dated review record | record | retained | — |
@@ -999,7 +1017,7 @@ case or experiment separately.
 | [Exp-224 n=19 at Four Times the Budget](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-224-n19-10x/exp-224-n19-10x-receipt.md) | research synthesis | record | retained | — |
 | [Exp-225 n=27, n=28 and n=29 at 548/100 by Re-Bumping the n=29 Atoms](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-225-n27-n28-548-100-rebump-receipt.md) | research synthesis | record | retained | — |
 | [Exp-226 The `n = 11` Threshold Atoms at the 2880-Step Net](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-226-n11-net2880-receipt.md) | research synthesis | record | retained | — |
-| [Handoff: the Low-`n` Review, the Efficiency Block, and the 2880 Rung, 22 September 2026](docs/project/handoff-2026-09-22-low-n-review-and-the-2880-rung.md) | dated handoff record | record | retained | — |
+| [Handoff: the Low-`n` Review, the Efficiency Block, and the 2880 Rung, 22 September 2026](docs/project/handoffs/handoff-2026-09-22-low-n-review-and-the-2880-rung.md) | dated handoff record | record | retained | — |
 | [n=20 973/200 T-021-Seeded Four-Grid Window-7 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n20-973-200-t021-grid4-windows7-receipt.md) | research synthesis | record | retained | — |
 | [n=20 973/200 T-021-Seeded Four-Grid Window-7 2400 s Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n20-973-200-t021-grid4-windows7-2400-receipt.md) | research synthesis | record | retained | — |
 | [n=21 97/20 T-021-Seeded Auto Window-6 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n21-97-20-t021-auto-windows6-receipt.md) | research synthesis | record | retained | — |
@@ -1056,8 +1074,8 @@ case or experiment separately.
 | [sqverify-fast](packing/sqverify_fast/README.md) | component scope and use | supporting | maintained | — |
 | [n17bb-native](packing/n17bb_native/README.md) | component scope and use | supporting | maintained | — |
 | [n17_kernel_verifier: an independent Rust verifier of n = 17 kernel certificates](packing/n17_kernel_verify/README.md) | component scope and use | supporting | maintained | — |
-| [Provenance of `n17_kernel_verifier/`](packing/n17_kernel_verify/PROVENANCE.md) | component scope and use | supporting | maintained | — |
-| [Tests](packing/n17_kernel_verify/TESTING.md) | component scope and use | supporting | maintained | — |
+| [Provenance of `n17_kernel_verifier/`](packing/n17_kernel_verify/provenance.md) | component scope and use | supporting | maintained | — |
+| [Tests](packing/n17_kernel_verify/testing.md) | component scope and use | supporting | maintained | — |
 | [Native n17 Branch-and-Bound Benchmark](packing/benchmarks/n17-bb-native/README.md) | component scope and use | supporting | maintained | — |
 | [Milestone A Census](packing/benchmarks/measure-verifier/census/README.md) | generated status view | generated | generated | — |
 | [Milestone B Census](packing/benchmarks/measure-verifier/census-mixed/README.md) | generated status view | generated | generated | — |
@@ -1157,7 +1175,7 @@ case or experiment separately.
 | [BC-260 Direct Hybrid Contracts](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md) | dated review record | record | retained | — |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | research synthesis | supporting | maintained | — |
 | [Review: Incorporating Stromquist’s Memos and Helper Arguments](docs/project/reviews/review-2026-09-07-stromquist-incorporation.md) | dated review record | record | retained | — |
-| [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/stromquist-helper-arguments-math-review.md) | dated review record | supporting | maintained | — |
+| [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/reviews/review-2026-09-07-stromquist-helper-arguments.md) | dated review record | supporting | maintained | — |
 | [Five-Dot Obstruction for the Six-Square Problem](docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md) | dated review record | record | retained | — |
 | [An Explicit Five-Point Piercing Obstruction Near Side Three](docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md) | dated review record | record | retained | — |
 | [Stromquist’s Segment Helper: An Independent Derivation](docs/project/reviews/review-2026-09-07-stromquist-segment-helper.md) | dated review record | record | retained | — |
@@ -1182,11 +1200,14 @@ case or experiment separately.
 | [Packing Atlas](packing/atlas/README.md) | component scope and use | supporting | maintained | — |
 | [Enumerated Contact-Scaffold Atlas](packing/atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |
 | [Known-Best Packing Atlas, `n = 1..324`](packing/atlas/known-best/README.md) | component scope and use | supporting | maintained | — |
-| [Composite figure playbook](packing/atlas/known-best/FIGURE-PLAYBOOK.md) | component scope and use | supporting | maintained | — |
+| [Composite figure playbook](packing/atlas/known-best/figure-playbook.md) | component scope and use | supporting | maintained | — |
+| [Design System](packing/devtools/templates/paper-design.md) | component scope and use | supporting | maintained | — |
 | [Prospective Packing Atlas, `n = 101..324`](packing/atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](packing/atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
 | [Epistemics](epistemics.md) | whole-result evidence classifications | definitive | maintained | — |
+| [Regularization Policy](docs/project/policies/regularization-policy.md) | component scope and use | definitive | maintained | — |
+| [Regularization Process](docs/project/guides/regularization-process.md) | component scope and use | supporting | maintained | — |
 | [Operating Rules](operating-rules.md) | how a session is conducted | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign: W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
@@ -1327,7 +1348,7 @@ case or experiment separately.
 | [Review 2026-09-04 — PR #80, the Stacked Hardening of the s(11) ≥ 381/100 Claim](docs/project/reviews/review-2026-09-04-pr80-stacked-hardening.md) | dated review record | record | retained | — |
 | [Adversarial review of the \(s(11)\ge 3.81\) claim](docs/project/reviews/review-2026-09-05-gpt6-pro-adversarial-review.md) | dated review record | record | retained | — |
 | [Review: external strategies for pushing the \(s(11)\) lower bound past 3.81](docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md) | dated review record | record | superseded | [X-016 — After 3.81: Two Managers, Six Gates, One Proof Boundary](packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md) |
-| [Adversarial Senior Review of the Agenda 024 Portfolio](docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md) | dated review record | record | superseded | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) |
+| [Adversarial Senior Review of the Agenda 024 Portfolio](docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md) | dated review record | record | superseded | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoffs/handoff-2026-09-06-post-381-t2-commissioning.md) |
 | [Independent Review of the T-022 Exact-Containment Limit](docs/project/reviews/review-2026-09-06-t022-dilation-limit.md) | dated review record | record | retained | — |
 | [Independent Review of the Fixed-Weight Core-Shrink Obstruction](docs/project/reviews/review-2026-09-06-core-shrink-obstruction.md) | dated review record | record | retained | — |
 | [Research: Adversarial Review of the s(11) ≥ 381/100 Explainer](docs/project/reviews/review-2026-09-06-claude-code-adversarial-review.md) | dated review record | record | retained | — |
@@ -1358,7 +1379,7 @@ case or experiment separately.
 | [Rectangle Corner Bound and Pending-Box Review](docs/project/reviews/review-2026-09-29-rectangle-corner-bound.md) | dated review record | record | retained | — |
 | [Exact Rectangle Derivative Bound](docs/project/reviews/review-2026-09-30-rectangle-derivative-bound.md) | dated review record | record | retained | — |
 | [Validation Parallelism Efficiency Block](docs/project/reviews/review-2026-09-29-validation-parallelism.md) | dated review record | record | retained | — |
-| [Verification Tooling and Its Boundaries](docs/project/verification-tooling.md) | component scope and use | record | retained | — |
+| [Verification Tooling and Its Boundaries](docs/project/guides/verification-tooling.md) | component scope and use | record | retained | — |
 | [Native Rectangle Verification and wand125 Tools Intake](docs/project/specs/active/plan-2026-09-29-native-rectangle-verification.md) | implementation plan | record | maintained | — |
 | [Proof Review: Evan Daniel’s `s(21) = 5` and `s(45) = 7` by Mixed Covers](docs/project/reviews/review-2026-09-28-evand-s21-s45-mixed-covers.md) | dated review record | record | retained | — |
 | [Post-optimality W3: First Discriminators](docs/project/reviews/review-2026-10-01-post-optimality-w3-opening.md) | dated review record | record | retained | — |
@@ -1391,11 +1412,11 @@ case or experiment separately.
 | [Review: The Interval Route for T-056 and T-057 (`devtools.upper_bound_intervals`)](docs/project/reviews/review-2026-09-30-interval-route-t056-t057.md) | dated review record | record | retained | — |
 | [Mathematical Review: Wang–Li `s(11) > 3875000000/999999999` (issue #247)](docs/project/reviews/review-2026-09-30-issue-247-wang-li-n11.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Kernel-Checked `s(13) = 4`, Built Here](docs/project/reviews/review-2026-09-30-lean-s13.md) | dated review record | record | retained | — |
-| [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
-| [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
-| [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
-| [Handoff: the `n = 17` External Intake, 21 September 2026](docs/project/handoff-2026-09-21-n17-external-intake.md) | dated handoff record | record | retained | — |
-| [Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [The Three-Lane Research Method](docs/project/guides/three-lane-research-method.md) | component scope and use | record | retained | — |
+| [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoffs/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
+| [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoffs/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
+| [Handoff: the `n = 17` External Intake, 21 September 2026](docs/project/handoffs/handoff-2026-09-21-n17-external-intake.md) | dated handoff record | record | retained | — |
+| [Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10](docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
 | [W3 Lower-Bound Direction Diagnostics](packing/cases/w3_lower_bound_directions/README.md) | component scope and use | record | retained | — |
 | [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | component scope and use | supporting | maintained | — |
@@ -1415,33 +1436,33 @@ case or experiment separately.
 | [Prospective Exact Census of Coarse Owner Classes](packing/cases/n11_five_dot_cover/owner-case-census-design.md) | research synthesis | record | retained | — |
 | [Verifiable Claim: $s(11) \ge 19/5$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) | generated status view | generated | generated | — |
 | [Verifiable Claim: $s(11) \ge 381/100$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md) | generated status view | generated | generated | — |
-| [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
-| [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [Handoff: Where the Square-Packing Loop Stands](docs/project/handoffs/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
 | [Postmortem: Three Catalogue Intakes Nobody Owned](docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md) | failure analysis and lessons | record | retained | — |
 | [Proof Verification Consolidation and Independent n11 Completion](docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md) | implementation plan | current | transient | — |
-| [n17 Eight-Hour Proof Block](docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md) | implementation plan | current | transient | — |
-| [n17 Three-Block Session Plan](docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md) | implementation plan | current | transient | — |
-| [Feature: Minimal Packing Toolkit](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | implementation plan | current | transient | — |
+| [n17 Eight-Hour Proof Block](docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md) | implementation plan | current | transient | — |
+| [n17 Three-Block Session Plan](docs/project/specs/future/plan-2026-10-10-n17-three-block-session.md) | implementation plan | current | transient | — |
+| [Feature: Minimal Packing Toolkit](docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md) | implementation plan | current | transient | — |
 | [Feature: Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | implementation plan | current | transient | — |
 | [Feature: Frontier Assurance and Verification](docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md) | implementation plan | current | transient | — |
 | [Feature: Research-Loop Efficiency Infrastructure](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md) | implementation plan | current | transient | — |
-| [Overnight Run: Constructive Enumeration Groundwork](docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md) | implementation plan | current | transient | — |
-| [Plan: The Symbolic Promotion Gap, and What a Complete Atlas Would Need](docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md) | implementation plan | current | transient | — |
-| [Feature: The Numeric–Symbolic Round Trip](docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md) | implementation plan | current | transient | — |
-| [Feature: Promotion Pipeline Implementation](docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
-| [Feature: The Interval Certification Bridge](docs/project/specs/active/plan-2026-08-28-interval-certification.md) | implementation plan | current | transient | — |
-| [Feature: Gate Validation Speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md) | implementation plan | current | transient | — |
+| [Overnight Run: Constructive Enumeration Groundwork](docs/project/specs/done/plan-2026-08-26-overnight-constructive-enumeration.md) | implementation plan | record | retained | — |
+| [Plan: The Symbolic Promotion Gap, and What a Complete Atlas Would Need](docs/project/specs/done/plan-2026-08-28-symbolic-promotion-and-the-atlas.md) | implementation plan | record | retained | — |
+| [Feature: The Numeric–Symbolic Round Trip](docs/project/specs/archive/plan-2026-08-28-numeric-symbolic-round-trip.md) | implementation plan | record | superseded | [Feature: Promotion Pipeline Implementation](docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md) |
+| [Feature: Promotion Pipeline Implementation](docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
+| [Feature: The Interval Certification Bridge](docs/project/specs/done/plan-2026-08-28-interval-certification.md) | implementation plan | record | retained | — |
+| [Feature: Gate Validation Speed](docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md) | implementation plan | record | retained | — |
 | [Feature: Validation Efficiency and Checkpoints](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md) | implementation plan | current | transient | — |
-| [Plan: Research Lanes Beyond 3.81](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md) | implementation plan | supporting | transient | — |
+| [Plan: Research Lanes Beyond 3.81](docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md) | implementation plan | record | retained | — |
 | [Plan: Extend the Known-Best Atlas to `n = 324`, and Draw the Poster](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) | implementation plan | current | transient | — |
 | [Feature: Math Text Face Integration](docs/project/specs/active/plan-2026-09-07-math-text-face.md) | implementation plan | current | transient | — |
 | [Plan: A Video of Every Known-Best Packing, `n = 1..324`](docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md) | implementation plan | current | transient | — |
 | [Feature: Packing Strategies as a Shared Language](docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md) | implementation plan | current | transient | — |
-| [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](packing/atlas/README.md) |
+| [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](packing/atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
-| [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
-| [Feature: Generalized Square-Packing Motion Lab](docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md) | implementation plan | current | transient | — |
+| [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/done/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
+| [Feature: Generalized Square-Packing Motion Lab](docs/project/specs/paused/plan-2026-08-25-generalized-motion-lab.md) | implementation plan | current | transient | — |
 | [create-or-update-pr-simple.md](docs/tbd/shortcuts/create-or-update-pr-simple.md) | component scope and use | definitive | maintained | — |
 | [create-or-update-pr-with-validation-plan.md](docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md) | component scope and use | definitive | maintained | — |
 | [Change-Scoped Exhaustive Validation](docs/project/reviews/review-2026-09-06-change-scoped-exhaustive-validation.md) | dated review record | record | retained | — |
@@ -1700,7 +1721,7 @@ controller, not permission to blur contracts.
 ### Current Handoff
 
 The prepared
-[eight-hour X-052 continuation](docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md)
+[eight-hour X-052 continuation](docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md)
 is owned by BC-455 / `think-wnbr` under BC-418. Its
 [agenda-046](packing/campaign/agendas/agenda-046-n17-eight-hour-proof-block.md) is
 paused pending launch.
@@ -1709,7 +1730,7 @@ nonterminal exclusions and capture/terminal mathematics, with independent Astra 
 GPT-6.1 Sol implements the selected proof tools; repeated confirmation receives a
 bounded support allocation.
 The
-[three-block session plan](docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md)
+[three-block session plan](docs/project/specs/future/plan-2026-10-10-n17-three-block-session.md)
 maps two conditional further eight-hour blocks, each replanned from the preceding
 block’s evidence and recorded with fresh session clocks.
 The next entry is W10 launch selection with real session clocks and resource checks.
@@ -1724,7 +1745,7 @@ follows the reviewed W3 memo.
 It preserves every frozen experimental criterion and the held-control decision; no new
 target run or mathematical verdict belongs to that consolidation.
 The
-[ten-hour launch plan](docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md)
+[ten-hour launch plan](docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md)
 selects BC-430 / `think-ipel` under BC-418, with Astra for mathematical strategy and
 GPT-6.1 Sol for engineering, review and tracking.
 [Session 184](packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md)
@@ -2025,11 +2046,11 @@ separate scopes. PR 246 merged with the verified result; the next handoff is a b
 fresh-ensemble replay entry point.
 
 The n = 11 papers form one series, read in order
-([plan](docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md)):
+([plan](docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md)):
 [Part I](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html), the
 project’s lower bounds T-018, T-025 and T-026;
 [Part II](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html), a
-review of Kleddamag’s $s(11) > 31/8$ (T-037), its k-of-m charges, shrunken parents with
+review of Overbeck’s $s(11) > 31/8$ (T-037), its k-of-m charges, shrunken parents with
 strict cores and exact sweep
 ([source](packing/devtools/templates/n11-threshold-bound-review-article.md)); and
 [Part III](https://jlevy.github.io/squares/papers/n11-optimality-review.html), the
@@ -2109,7 +2130,7 @@ landed the agenda-040 overnight stack and the n = 17 intake on main, repairing f
 confirmed review findings at the integration point rather than after it, and left the
 session’s own analysis as records: `X-041`’s ranked slate and the 2026-09-21
 derived-artifact currency review.
-It also replayed and reviewed a fifth external n = 17 value, Kleddamag’s $461300/99853$,
+It also replayed and reviewed a fifth external n = 17 value, Overbeck’s $461300/99853$,
 which reproduced byte-identically through both of its own checkers and drew no Blocker
 and no High from an adversarial proof review.
 That artifact is retained at V4/C3 with C4 blocked, and **no bound moved for it**: the
@@ -2124,7 +2145,7 @@ and `think-3umt`, where a record authored terminal can never earn its first rece
 retained and reviewed the complete external n11 threshold, rectangle-density and point
 certificate packet. Complete source replays and mathematical audits support 19 newly
 audited verified-field improvements, and the session corrects n17 to the stronger
-Kleddamag bound already replayed and reviewed in Session 150, for 20 promotions in all.
+Overbeck bound already replayed and reviewed in Session 150, for 20 promotions in all.
 The n11 and n17 paired source checkers each share one event-cell method, and the density
 global decision remains the source C++ method, so the adopted evidence is stated at C3
 rather than C4. The density continuation driver’s wrong-count and stale-side imports are
@@ -2218,15 +2239,15 @@ per-node bound comes before H-112. Hosted full run 36075268969 certified the clo
 session.
 
 **[Session 159](packing/campaign/agent-sessions/session-159-n17-guzhou-r052-intake.md)**
-took in Guzhou0806’s R052, $s(17) > 231001/50000 = 4.62002$, built on Kleddamag’s
+took in Guzhou0806’s R052, $s(17) > 231001/50000 = 4.62002$, built on Overbeck’s
 architecture. All four of the source’s replay modes pass here, both full sweeps
 reproducing its row ledgers exactly, and a Fable max review found no mathematical defect
 ([review](docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md)). It became the
-verified n = 17 lower bound at `V4/C3`, until Kleddamag’s `v1.1.0` $232001/50000$
+verified n = 17 lower bound at `V4/C3`, until Overbeck’s `v1.1.0` $232001/50000$
 superseded it on 27 September; the native interval route refuses it at its engine
 ceilings, so there is no method-distinct decision yet.
 A planning block then asked what R052 and the closed rung 0 make possible
-([plan](docs/project/specs/active/plan-2026-09-25-after-r052-planning.md)). At n = 17,
+([plan](docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md)). At n = 17,
 R052’s certificate is nearly saturated, so a first-party increment of $10^{-4}$ is not
 worth building; an unreviewed lemma says a triangle-free overlap family of 34 squares at
 side $S$ caps every capacity-one certificate at $S$, which a cheap search can price.
@@ -2237,12 +2258,12 @@ Agenda-042 gains BC-386 to BC-391 and H-243 to H-247. Hosted full run 3612100112
 certified the closed session.
 
 **The 27 September planning block** (BC-392,
-[plan](docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md)) followed
-Kleddamag v1.1.0’s $s(17) > 232001/50000 = 4.640020$ and wand125’s rectangle
-certificates for n = 18 to 78. Every atom of v1.1.0 has capacity one, so the certificate
-itself refutes H-243’s $4.63$ family and the ceiling search moves to $4.65$ in
-clique-weighted form (H-248); a reweighting of its dictionary is worth of order
-$10^{-3}$ in charge, an unmeasured amount of side (the
+[plan](docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md)) followed
+Overbeck v1.1.0’s $s(17) > 232001/50000 = 4.640020$ and wand125’s rectangle certificates
+for n = 18 to 78. Every atom of v1.1.0 has capacity one, so the certificate itself
+refutes H-243’s $4.63$ family and the ceiling search moves to $4.65$ in clique-weighted
+form (H-248); a reweighting of its dictionary is worth of order $10^{-3}$ in charge, an
+unmeasured amount of side (the
 [lemma check](docs/project/reviews/review-2026-09-27-plan-4640020-lemma-check.md)
 withdrew the plan’s $+0.006$ cap).
 BC-386 is superseded by BC-393, the same cap lift aimed at v1.1.0 through a
@@ -2255,7 +2276,7 @@ evand/square-packing’s claims ($s(32) = 6$ by a zero-margin closed cover, $s(1
 $3.99$ and add BC-396 (H-252): the same cover carried upward to $n = 45$, side $7$.
 
 [Session 160](packing/campaign/agent-sessions/session-160-n17-4640020-evand-wand125-intake.md)
-took in Kleddamag’s $s(17) > 232001/50000$ at `V4/C3`, Evan Daniel’s $s(32) = 6$ at
+took in Overbeck’s $s(17) > 232001/50000$ at `V4/C3`, Evan Daniel’s $s(32) = 6$ at
 `V4/C1` with $s(12) \ge 15680/3951$ and $s(21) \ge 5000/1001$ at `V4/C3`, and wand125’s
 rectangle bounds for n = 18 to 78, each after a Fable max review, and contained D-509’s
 explainer PDF wobble on PR 235.
@@ -3021,13 +3042,13 @@ upstream tbd proposal.
 Automatic exhaustive selection and evidence reuse remain planned.
 
 **Research continuation.** The
-[T+2-to-T+10 continuation addendum](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
+[T+2-to-T+10 continuation addendum](docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md)
 is the cold-review entry point for the partially completed post-T+2 continuation.
 The
 [Agenda 024 allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 owns prospective priorities.
 Its planning block BC-250 links the
-[tbd assessment](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md)
+[tbd assessment](docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md)
 of both prior reviews, and distills their directions into H-093–103 and the existing
 agendas. Coordinator `think-jgnv` next dispatches scalar BC-251, adaptive controls
 BC-231, density support BC-254, and restricted assessment BC-255 as capacity and their
@@ -4096,9 +4117,9 @@ geometry witness.
 
 ### Verification Capability Ladder
 
-The [verification tooling overview](docs/project/verification-tooling.md) maps feasible
-witnesses, point and threshold certificates, adaptive parent cores, rectangle densities,
-and mixed covers to their actual checkers and remaining gaps.
+The [verification tooling overview](docs/project/guides/verification-tooling.md) maps
+feasible witnesses, point and threshold certificates, adaptive parent cores, rectangle
+densities, and mixed covers to their actual checkers and remaining gaps.
 Native point and threshold gates have complete distinct coverage methods.
 The native rectangle prototype passes a complete analytic control; existing retained
 rectangle-bound replays still use Tokoharu’s checker, with independent exact premises
@@ -4776,7 +4797,7 @@ machine-verified at a stated `V`/`C` rung, numerically observed, or conjectured.
 
 **As of 2026-09-23, the verified bracket was
 $3.875 < s(11) \le 3.87708359002281417\ldots$**, a gap of $0.002083590022814177\ldots$
-([`n-011`](packing/frontier/n-011.md)). The lower end is Kleddamag’s external
+([`n-011`](packing/frontier/n-011.md)). The lower end is Overbeck’s external
 certificate, replayed here by two complete methods; the upper end is Trump’s 1979
 packing, verified exactly.
 Every first-party counting family is capped below $3.875$, no counting certificate can
@@ -4807,12 +4828,12 @@ Two refinements carry the rest of the story:
   $\lfloor \lvert S\rvert/k \rfloor$ cores are charged and the atom costs that multiple
   of its weight: a 2-of-3 atom buys two points’ coverage for one point’s budget.
   The charge is not additive in the points a core captures.
-- **Parent-core charges**, Kleddamag’s form, replace one shrink and one direction net by
+- **Parent-core charges**, Overbeck’s form, replace one shrink and one direction net by
   a catalogue of rows.
   Each row fixes a half-angle interval for the parent square, a core direction and a
   core side chosen so that the core fits strictly inside every parent in the interval,
   and the charge is required only at centres a legal parent can occupy
-  ([Kleddamag review](docs/project/reviews/review-2026-09-22-kleddamag-n11-mathematics.md)).
+  ([review of Overbeck’s n = 11 proof](docs/project/reviews/review-2026-09-22-kleddamag-n11-mathematics.md)).
 
 **Point certificates have a proved ceiling.** An exact depth-one family of eighty-eight
 closed shrunken squares at six net directions, of total weight exactly eleven, shows
@@ -4820,7 +4841,7 @@ that no D4-symmetric point-atom measure of mass below eleven exists at $191/50$ 
 retained shrink; scaled to unit squares, the same family caps the one-body point method
 at $38200/9977 \approx 3.8288$ ([`n-011`](packing/frontier/n-011.md)). Threshold charges
 are not bound by it: `T-025` proves $191/50$ where point atoms are foreclosed, and
-Kleddamag’s certificate reaches $3.875$.
+Overbeck’s certificate reaches $3.875$.
 
 **Trump’s pose is machine-verified to be locally optimal, and that says nothing far from
 it.**
@@ -4897,7 +4918,7 @@ of about $0.0501$.
 
 ### What the external intake changed
 
-**Kleddamag’s certificate proves $s(11) > 31/8 = 3.875$.**
+**Overbeck’s certificate proves $s(11) > 31/8 = 3.875$.**
 [Session 152](packing/campaign/agent-sessions/session-152-external-density-and-n11-review.md)
 retained the pinned `v1.0.2` source on 2026-09-22. The container side is $L = 191/50$
 and the parent side $A = 764/775$, so the bound is $L/A = 31/8$. 679 site orbits expand
@@ -4908,7 +4929,7 @@ cores need $107{,}864$ units more than the budget holds.
 The 12,028 parent half-angle intervals run from $0$ to $207107/500000$, past
 $\tan(\pi/8)$. A 2-of-5 feature costs twice its weight, and the review checked that the
 source’s proof and its budget computation both charge it so
-([Kleddamag review](docs/project/reviews/review-2026-09-22-kleddamag-n11-mathematics.md)).
+([review of Overbeck’s n = 11 proof](docs/project/reviews/review-2026-09-22-kleddamag-n11-mathematics.md)).
 The source credits this repository’s `T-026`.
 
 **Which ingredient beat the first-party ceilings is not established.** The threshold
@@ -4927,7 +4948,7 @@ ablation attributes the improvement to any one of them.
 | Mathematical review | Threshold counting, strict core containment, coverage of every legal centre, exact arithmetic, boundaries and strictness | No blocking mathematical defect |
 
 The case record holds `verified_lower_bound: 31/8` on both evidence entries and states
-that this confirms Kleddamag’s published bound ([`n-011`](packing/frontier/n-011.md)).
+that this confirms Overbeck’s published bound ([`n-011`](packing/frontier/n-011.md)).
 The existing `T-037` registers that published result at `V4/C4`; this review adds no new
 result or C5 claim. The certificate closes `95.89%` of the interval from `T-026` to $U$;
 the review is explicit that the percentage is not a probability of optimality.
@@ -4936,7 +4957,7 @@ the review is explicit that the percentage is not a probability of optimality.
 rectangle-density certificate proves the weaker $381/100$ here, fully replayed
 ([integration review](docs/project/reviews/review-2026-09-22-external-square-certificates-integration.md));
 wand125’s ten point certificates concern other $n$; and Guzhou0806’s R038 scanner enters
-only as the pinned lineage of Kleddamag’s JavaScript sweep.
+only as the pinned lineage of Overbeck’s JavaScript sweep.
 
 **The first-party record was reconciled to it.**
 [Session 154](packing/campaign/agent-sessions/session-154-pr221-pr222-reconciliation.md)
@@ -4959,7 +4980,7 @@ no hypothesis.
   certificate’s own low-charge poses and co-designed core menus to group budgets, a
   capture theorem ending in Trump’s ball, a positive-semidefinite kernel, and small
   higher-order exclusions.
-  Its token-group spike on Kleddamag’s ten 2-of-5 orbits found zero budget saving in all
+  Its token-group spike on Overbeck’s ten 2-of-5 orbits found zero budget saving in all
   four eligible unions.
 - [X-044](packing/campaign/explorations/X-044-low-n-certificate-transfer.md) maps what
   transfers between the low open cases, keeps $n = 11$ first and makes $n = 12$ the next
@@ -4973,7 +4994,7 @@ no hypothesis.
   components on each of which the side is constant, so some cutoff $L < U$ exists, with
   no effective value. Throughout $[31/8, U]$, at most three squares touch any wall.
   An exact audit adds two negatives: Trump’s top-right corner is empty, so an
-  all-four-corners premise is false, and Kleddamag’s first row already fails at $U$, its
+  all-four-corners premise is false, and Overbeck’s first row already fails at $U$, its
   unchanged core capping that row near $3.8750124$.
 
 **Session 156’s reviews changed what counts as progress.** Four independent reviews of
@@ -4985,7 +5006,7 @@ PR 230 found no fatal error
    residue is that first-order descent is an admissible leaf.
 2. Settling $n = 11$ is verified global optimization, and the angles are the bottleneck;
    the X-045 reviewer proposed a rigorous `H-112` as the first theorem milestone.
-3. Kleddamag’s certificate has no side headroom.
+3. Overbeck’s certificate has no side headroom.
    Its least core collar $A - B$ is $3.26 \times 10^{-9}$, so the unchanged-core ceiling
    is $31/8 + 10^{-8}$, and 11,981 of its rows attain their minimum at the corner-flush
    parent pose. Any certificate gain at $n = 11$ needs an adaptive parent-core producer
@@ -5020,7 +5041,7 @@ A full search is priced by two constants: $c$, the side lost per radian of box w
 the relaxation, and $V(\varepsilon)$, the volume of
 $\lbrace f \le U + \varepsilon\rbrace$ modulo symmetry.
 Until both are measured, X-046 prices “settle by search” as between a week and never.
-Its four unretained `f64` probes include one showing that Kleddamag’s per-row minimum
+Its four unretained `f64` probes include one showing that Overbeck’s per-row minimum
 charge falls by 68.2% at the axis angle when the container grows to ratio $3.877084$, so
 the certificate carries no transferable slack to $U$.
 
@@ -5079,11 +5100,11 @@ the certificate carries no transferable slack to $U$.
 
 | Item | Outcome | Evidence |
 | --- | --- | --- |
-| External intake: pin, replay, audit, native re-decision | Worked: two complete methods and a mathematical review in about a day, leaving an $n$-general native parent-core verifier | [Kleddamag review](docs/project/reviews/review-2026-09-22-kleddamag-n11-mathematics.md), [native review](docs/project/reviews/review-2026-09-22-native-n11-parent-core.md) |
+| External intake: pin, replay, audit, native re-decision | Worked: two complete methods and a mathematical review in about a day, leaving an $n$-general native parent-core verifier | [review of Overbeck’s n = 11 proof](docs/project/reviews/review-2026-09-22-kleddamag-n11-mathematics.md), [native review](docs/project/reviews/review-2026-09-22-native-n11-parent-core.md) |
 | Rung-0 cell tree and independent reader | The instrument worked; the relaxation did not, at about a thousand times the estimated tree | [exp-231](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-231-h236-rung-zero-cell-tree.md), [rung-0 review](docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md) |
 | [`capture_radius.py`](packing/cases/trump11/capture_radius.py) | Worked as a tool, reproducing BC-199’s modulus to 32 digits, and proved a negative | [exp-227](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-227-h237-trump-growth-cone-capture-radius.md) |
 | Descent filter | Worked: it made the quench census readable and found two new minima | [exp-228](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-228-h238-descent-filtered-census.md) |
-| Kleddamag’s certificate as slack at $U$; counting as a route to $s(11) = U$ | Did not work: the certificate is corner-pinned with a collar of $3.26 \times 10^{-9}$, and counting cannot exclude the feasible side $U$ | [PR 230 review](docs/project/reviews/review-2026-09-23-pr230-w3-directions.md), [X-046](packing/campaign/explorations/X-046-n11-settlement-program.md) |
+| Overbeck’s certificate as slack at $U$; counting as a route to $s(11) = U$ | Did not work: the certificate is corner-pinned with a collar of $3.26 \times 10^{-9}$, and counting cannot exclude the feasible side $U$ | [PR 230 review](docs/project/reviews/review-2026-09-23-pr230-w3-directions.md), [X-046](packing/campaign/explorations/X-046-n11-settlement-program.md) |
 | First-party languages: frozen-family refinement, point-only certificates, the corner tree at $96/25$ | Exhausted below the bound, at $3.82755$ and by lemma at $3.8288$; the corner tree cannot close by clipping | [`n-011`](packing/frontier/n-011.md) |
 | Routes A and S | Stopped at the representation boundary; encode-only timed out | [Research Program Status and Roadmap](#research-program-status-and-roadmap) |
 | X-046’s estimate of $10^3$–`10⁵` LPs per rung-0 box | Wrong by about three orders of magnitude | [exp-231](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-231-h236-rung-zero-cell-tree.md) |
@@ -5137,7 +5158,7 @@ older $n = 11$ rows they touch:
 | 214 | shaped | A low-degree PSD kernel on the residual pose domain | Needs an exact PSD certificate that beats a control-strength optimum |
 | 215 | shaped | Jointly infeasible pair-compatible triples or quadruples | Needs complete local separation branches; one validated compatible tuple kills it |
 | 224 | shaped | An explicit local-minimum cutoff below $U$ | The review: equivalent to the whole problem |
-| 225 | shaped | A redesigned mixed certificate at $U$ forcing a role profile | Unpriced: it needs a non-flat, near-tight certificate at $U$, Kleddamag’s rows spread only $8.5 \times 10^{-5}$, and X-046 finds no in-repository optimizer for one |
+| 225 | shaped | A redesigned mixed certificate at $U$ forcing a role profile | Unpriced: it needs a non-flat, near-tight certificate at $U$, Overbeck’s rows spread only $8.5 \times 10^{-5}$, and X-046 finds no in-repository optimizer for one |
 | 226 | shaped | Joint corner and contact information | One complete positive-width two-parent class; X-045 names Trump’s top-right pair as the necessary positive control |
 | 227 | shaped | Descent certificates for surviving families | exp-228’s filter is a first instrument, not yet a leaf type in the tree |
 | 228–230 | shaped | Charge profiles into charts; critical-value polynomials; a corner-chain alternative | Each needs one complete family; row 230’s all-four-corners premise is already false |
@@ -5158,7 +5179,7 @@ Montanher and coauthors’ unit squares in a circle.
 packing. [T-011](packing/frontier/RESULTS.md) verifies the algebraic witness and
 [T-060](packing/frontier/RESULTS.md) supplies the matching global lower bound for
 arbitrarily rotated unit squares with disjoint interiors and boundary contact allowed.
-The latter is Ahmed’s Astra-assisted proof, building on this project and Kleddamag,
+The latter is Ahmed’s Astra-assisted proof, building on this project and Overbeck,
 independently replayed and mathematically audited here at `V3/C3/S5`.
 
 The [proof review](docs/project/reviews/review-2026-09-29-n11-optimality.md) maps the
@@ -5171,7 +5192,7 @@ Four final-state digests in the publisher’s cached audits are stale, so those 
 PASS records do not establish the claim; the fresh source-bound replay and final
 composition do.
 
-Kleddamag’s $s(11) > 31/8$ ([T-037](packing/frontier/RESULTS.md)) remains an earlier,
+Overbeck’s $s(11) > 31/8$ ([T-037](packing/frontier/RESULTS.md)) remains an earlier,
 independently verified lower bound.
 The restricted six-plus-five theorem and local Trump theorem
 ([T-035](packing/frontier/RESULTS.md) and [T-036](packing/frontier/RESULTS.md)) retain
@@ -5459,7 +5480,7 @@ through two unrelated constraint sets.
 
 The formulation is exact; the *build* is not, and conflating the two caused a critical
 defect. Three corrections, recorded in the
-[plan spec’s revision note](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md):
+[plan spec’s revision note](docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md):
 
 - **A float LP solver does not deliver the cell optimum.** At its default primal
   feasibility tolerance of $10^{-7}$ HiGHS returned a packing violating its own
@@ -6215,8 +6236,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 297 | 76,355 | 42,099 | 885 | 6,096 | 646.8 h |
-| claimed by none | 138 | 40,153 | 23,263 | 819 | 2,292 | 187.1 h |
-| **measured** | **435** | **116,508** | **65,362** | **1,704** | **8,388** | **833.9 h** |
+| claimed by none | 153 | 45,498 | 26,157 | 861 | 2,524 | 215.0 h |
+| **measured** | **450** | **121,853** | **68,256** | **1,746** | **8,620** | **861.8 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -7144,14 +7165,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 519 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 521 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 108 | asserted something false about the mathematics |
+| soundness | 109 | asserted something false about the mathematics |
 | validity | 128 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 194 | recorded something its own evidence contradicts |
+| bookkeeping | 195 | recorded something its own evidence contradicts |
 | robustness | 70 | did not finish, or finished only by luck |
 | performance | 19 | worked, but cost far more than it should |
 
@@ -7171,13 +7192,21 @@ is an observed workaround rather than a controlled speedup or validation of the 
 cost-aware allocation.
 That allocation remains unimplemented and needs measurement.
 
+[D-521](defects.md) is open: a numerical witness receipt records, as its minimum
+clearance and pair gap, a value within the check’s tolerance of the minimum rather than
+the minimum, so the receipts understate the violations they report.
+At $n = 10$ the receipt records 0 where an exact reading of the printed pose finds four
+overlaps;
+[the verification-gaps review](docs/project/reviews/review-2026-10-13-verification-gaps.md)
+found it, and `think-jtot` owns the fix.
+
 Two observations the log exists to make.
 
-**84 of the 108 soundness defects pointed in the *flattering* direction**, where the
+**85 of the 109 soundness defects pointed in the *flattering* direction**, where the
 error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught eighty-two defects in 519, and no soundness defect
+**The automated gate has caught eighty-two defects in 521, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

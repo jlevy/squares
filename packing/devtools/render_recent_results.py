@@ -25,16 +25,21 @@ the interval decision several first-party certificates cite, does not make every
 decided hold the bound. Where only a reported bound rests on an entry, it is the current
 best as reported. An entry that holds no bound is a *second certificate* where it proves
 the exact value of a proved case (it cites that case's verified upper bound beside a
-lower bound of its own). Any other bound that holds none is *superseded* where its case
-records hold a bound at least as good as every bound it states, and *pending adoption*
-(`PENDING_ADOPTION`) where one it states is strictly better than the case record's, in
-a lane it can hold (`check_standing.improvements`): a report the case records have not
-taken in yet, such as `T-128`'s eight rational certificates, which nothing on record has
-replaced. Superseded means replaced, so it is decided by the numbers the entry's words
-state, compared exactly where the case record's bound is exact and, beside a closed form,
-within one unit of its printed value's last place (`span`), where a tie is all that can
-be said; an entry whose words state no bound the check reads is held to the structure
-alone, and is superseded wherever no case bound rests on it.
+lower bound of its own), or where it is a simplification, a second proof of a value the
+record holds, whose every stated bound equals its case record's in the lane it can hold
+(`check_standing.restates`), such as a report that proves again a value the case's
+reported lane holds under another entry's citation. Any other bound that holds none is
+*superseded* where its case records hold a bound at least as good as every bound it
+states, and *pending adoption* (`PENDING_ADOPTION`) where one it states is strictly
+better than the case record's, in a lane it can hold (`check_standing.improvements`): a
+report the case records have not taken in yet, such as `T-128`'s eight rational
+certificates, which nothing on record has replaced, or a simplification replayed here
+before its case records adopt the value its claim states. Superseded means replaced, so
+it is decided by the numbers the entry's words state, compared exactly where the case
+record's bound is exact and, beside a closed form, within one unit of its printed value's
+last place (`span`), where a tie is all that can be said; an entry whose words state no
+bound the check reads is held to the structure alone, and is superseded wherever no case
+bound rests on it.
 
 **Standing is about bounds, so an entry whose evidence claims none has no standing**
 (`NO_STANDING`): no later bound supersedes a rigidity or a case exclusion. The views show
@@ -87,7 +92,7 @@ from devtools.build_bound_citations import (
     project_result,
     results_carrying,
 )
-from devtools.check_results import BOUND_KINDS, recent_evidence, scope_values
+from devtools.check_results import BOUND_KINDS, SIMPLIFICATION, recent_evidence, scope_values
 from devtools.result_credit import source_lineage
 from devtools.result_status import CONFIRMED_FROM
 from sqpack.assurance import bounds_agree_at_declared_precision
@@ -117,8 +122,9 @@ ELLIPSIS = "…"
 HOLDS = "current best"
 HOLDS_REPORTED = "current best, reported"
 SECOND_CERTIFICATE = "second certificate"
-#: A second route to a proved value that this repository has not replayed: the same word
-#: as a replayed one would say it had been checked here.
+#: A second route to a value the case records hold, proved or reported, that no replay
+#: has confirmed (`UNREPLAYED`): the same word as a replayed one would say it had been
+#: checked.
 SECOND_CERTIFICATE_REPORTED = "second certificate, reported"
 #: A bound no case bound rests on, that states one strictly better than its case record
 #: holds in a lane it can hold: not yet taken into the case records, and replaced by
@@ -142,8 +148,13 @@ STANDINGS = (
 )
 #: What `standing` returns for an entry whose evidence claims no bound: it has none.
 NO_STANDING = ""
-#: The confirmation rungs at which a certificate has been replayed here (epistemics.md).
-REPLAYED_RUNGS = frozenset({"C3", "C4", "C5"})
+#: The confirmation rungs below a passed replay (epistemics.md, Confirmation), where a
+#: result is recorded or reviewed and the status is not yet `confirmed`
+#: (`devtools.result_status.CONFIRMED_FROM`). An entry at one is a report: it can hold the
+#: reported lane and never the verified one (`check_standing`), and a second certificate
+#: at one is `SECOND_CERTIFICATE_REPORTED`. One partition serves both, so the lane an
+#: entry is held to and the word its standing takes cannot disagree at `C2`.
+UNREPLAYED = frozenset(f"C{rung}" for rung in range(CONFIRMED_FROM))
 #: The evidence claims that make an entry a bound on `s(n)`, as the evidence schema types
 #: them; `derived-structure` and the witness claims are not bounds.
 BOUND_CLAIMS = frozenset({"lower-bound", "upper-bound", "exact-value"})
@@ -542,15 +553,18 @@ def standing(record: Mapping[str, Any], records: Records) -> str:
     claims = {records.register.evidence[item].get("claim") for item in cited}
     if not claims & BOUND_CLAIMS:
         return NO_STANDING
-    if "lower-bound" in claims and any(
-        case.proved and cited & case.upper_evidence for case in cases
-    ):
-        if str(record["confirmation"]) in REPLAYED_RUNGS:
-            return SECOND_CERTIFICATE
-        return SECOND_CERTIFICATE_REPORTED
     # `check_standing` reads this module, so its reader of stated bounds is imported here.
-    from devtools.check_standing import improvements  # noqa: PLC0415
+    from devtools.check_standing import improvements, restates  # noqa: PLC0415
 
+    # A second proof: of a proved case's value, or a simplification that restates the
+    # value its case records hold in the lane it can hold.
+    second = (
+        "lower-bound" in claims
+        and any(case.proved and cited & case.upper_evidence for case in cases)
+    ) or (str(record.get("kind")) == SIMPLIFICATION and restates(record, records))
+    if second:
+        reported = str(record["confirmation"]) in UNREPLAYED
+        return SECOND_CERTIFICATE_REPORTED if reported else SECOND_CERTIFICATE
     return PENDING_ADOPTION if improvements(record, records) else SUPERSEDED
 
 
@@ -685,11 +699,11 @@ def supersessions(
 
 def reports(results: Iterable[str], records: Records) -> frozenset[str]:
     """The results among `results` that no replay has confirmed: below `C2`, which is
-    recorded or reviewed (`devtools.result_status`)."""
+    recorded or reviewed (`UNREPLAYED`)."""
     return frozenset(
         result
         for result in results
-        if int(str(records.results[result]["confirmation"])[1]) < CONFIRMED_FROM
+        if str(records.results[result]["confirmation"]) in UNREPLAYED
     )
 
 

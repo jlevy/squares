@@ -1847,7 +1847,7 @@ class VerifiedLowerBound:
 
     value: Fraction
     display: str
-    #: The reference without its venue, `Kleddamag after Levy et al. 2026`: who and when, which
+    #: The reference without its venue, `Overbeck after Levy et al. 2026`: who and when, which
     #: is what the figure's other sources print (`Stromquist 1984/2003`).
     credit: str
     confirmed_by: tuple[str, ...]
@@ -2395,7 +2395,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
             f"side specified in the [case record]({repo_url(FRONTIER_N11)}). The decimal "
             f"${verified_tex}$ is a truncated display, not the definition of $T$. "
             "[Part II]({{PAPER:n11-threshold-bound-review}}) of this series explains "
-            "Kleddamag's intermediate $s(11) \\gt 31/8$ (T-037), "
+            "Marc Leonard Overbeck's intermediate $s(11) \\gt 31/8$ (T-037), "
             "[Part III]({{PAPER:n11-optimality-review}}) explains that proof, and the "
             f"[mathematical review]({repo_url(OPTIMALITY_REVIEW)}) records its "
             "independent checks. This article retains the earlier T-018, T-025, and T-026 "
@@ -2418,7 +2418,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         )
     else:
         frontier_update = (
-            "**Frontier update, September 22, 2026:** We have verified Kleddamag's "
+            "**Frontier update, September 22, 2026:** We have verified Marc Leonard Overbeck's "
             "stronger lower bound, developed from the T-026 certificate below, so the "
             f"[current bracket]({repo_url(FRONTIER_N11)}) is "
             f"${verified.display} < s(11) \\le {truncated(BEST_PACKING, tex=True)}$. "

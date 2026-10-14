@@ -586,8 +586,8 @@ The spec does not duplicate mutable bead statuses.
 
 This plan owns the public witness interchange, evidence contracts, `inspect`/`check`/
 `verify`/`promote` semantics, and the general exact-or-interval promotion path.
-The [minimal packing toolkit plan](plan-2026-08-22-minimal-packing-toolkit.md) owns
-search, quench, basin identity, atlas runtime, and the low-level verifier
+The [minimal packing toolkit plan](../paused/plan-2026-08-22-minimal-packing-toolkit.md)
+owns search, quench, basin identity, atlas runtime, and the low-level verifier
 implementation.
 The work is shared rather than duplicated: toolkit bead `think-0md2` owns
 the certificate type, `think-kmwb` owns exact corpus re-verification, and `think-2lyb`
@@ -800,7 +800,7 @@ promotion while it is unresolved.
 - [Packing conventions](../../../../conventions.md)
 - [Frontier map](../../../../packing/frontier/README.md)
 - [Campaign runbook](../../../../packing/campaign/README.md)
-- [Minimal packing toolkit plan](plan-2026-08-22-minimal-packing-toolkit.md)
+- [Minimal packing toolkit plan](../paused/plan-2026-08-22-minimal-packing-toolkit.md)
 - [Unattended research readiness plan](plan-2026-08-23-overnight-cartography-run.md)
 - [Schadt `n = 29` repository](https://github.com/BalthasarStrauss/Squares-packing_S-29-_New-Record)
 - [Kingbird square-packing catalogue](https://kingbird.myphotos.cc/packing/squares_in_squares.html)

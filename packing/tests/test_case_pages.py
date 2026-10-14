@@ -472,11 +472,18 @@ def test_case_291_typesets_the_general_bound_and_retains_the_exact_ceiling(
     assert "sqrt(" not in formula[1]
     assert "&gt;=" not in formula[1]
     assert "<msqrt>" in formula[1]
-    assert "<mn>876776695296637</mn>" in record
-    assert "<mn>50000000000000</mn>" in record
+    # Since T-155 the ceiling is the regularized certificate's exact side, a fraction too
+    # long for the bound's panel (`render_case_pages.bound_tex`), which prints its decimal;
+    # the record's prose typesets the side itself.
+    assert 'id="the-verified-upper-bound-is-a-ceiling"' in record
+    assert "<mn>17.53553390593273762200422181052425</mn>" in record
     assert "17.53553390593274" in record
     assert "Trevor Green" in record
     assert "Source-reported only; no verification promotion." in record
+    # n = 290 still holds the earlier ceiling, short enough to set as a fraction.
+    earlier = _record(records, 290)
+    assert "<mn>876776695296637</mn>" in earlier
+    assert "<mn>50000000000000</mn>" in earlier
 
 
 def test_case_11_carries_its_polynomial_results_verification_and_links(

@@ -25,7 +25,9 @@ rests on now, the results its cases' bounds rest on instead, both derived from t
 records; for a result of another kind, the later results its entry declares imply it
 (`superseded_by`), and `superseded in part` where they imply only some of it.
 Under the tables, each result whose certificate regularizes packings other results hold
-lists its `regularizations`, one sentence a count (`result_credit.regularization_sentence`).
+lists its `regularizations`, one sentence a count (`result_credit.regularization_sentence`),
+and the register's `regularized_drawings`, this project's own regularizations of the
+packings the atlas draws regularized, follow in the same sentences.
 The closing list gives each result's next action, its `next_rung`, and under it each of
 its `unfinished_confirmations` with the rung it would reach and its estimated cost.
 
@@ -206,6 +208,49 @@ def regularizations(results: list[dict], sources: Mapping[str, Mapping[str, Any]
     return lines
 
 
+def regularized_drawings(
+    drawings: Mapping[str, Any] | None, sources: Mapping[str, Mapping[str, Any]]
+) -> list[str]:
+    """The section listing this project's own regularizations of registered packings,
+    one item a count the atlas draws regularized, then the drawn counts whose packing no
+    registered result holds; none where the register carries none."""
+    if not drawings or not (drawings.get("items") or drawings.get("unregistered")):
+        return []
+    items = drawings.get("items") or []
+    lines = [
+        "## Regularized Drawings",
+        "",
+        (
+            f"The atlas draws these counts from views this project regularized at the side "
+            f"the record already states ([the regularization policy]"
+            f"(../../docs/project/policies/regularization-policy.md)): each "
+            f"is a regularization of the packing a registered result holds, which keeps "
+            f"its finder{APOSTROPHE}s credit, and changes no side, frontier value or rung. "
+            f"Each identity was measured here; the layer{APOSTROPHE}s index "
+            "([`index.json`](../atlas/known-best/regularized/index.json)) retains the "
+            "measurements and the view."
+        ),
+        "",
+    ]
+    lines.extend(f"- {regularization_sentence(item, sources)}" for item in items)
+    unregistered = drawings.get("unregistered") or []
+    if unregistered:
+        counts = ", ".join(str(row["n"]) for row in unregistered)
+        lines.extend(
+            [
+                "",
+                (
+                    f"The atlas also draws {len(unregistered)} regularized "
+                    f"{'count' if len(unregistered) == 1 else 'counts'} whose packing no "
+                    f"registered result holds, so their record stays in the layer{APOSTROPHE}s "
+                    f"index alone: n = {counts}."
+                ),
+            ]
+        )
+    lines.append("")
+    return lines
+
+
 def order(record: dict) -> tuple[int, int, str]:
     """Significance descending, then confirmation descending, then id."""
     return (-record["significance"]["score"], -int(record["confirmation"][1]), record["id"])
@@ -295,6 +340,7 @@ def render() -> str:
             )
             lines.append("")
     lines.extend(regularizations(results, sources))
+    lines.extend(regularized_drawings(register.get("regularized_drawings"), sources))
     lines.extend(verification_code(results, evidence))
     lines.append("## Next actions")
     lines.append("")

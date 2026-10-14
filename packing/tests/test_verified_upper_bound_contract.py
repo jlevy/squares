@@ -90,6 +90,88 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/regularize_evand.py": (
+        "the regularization driver reads each case's verified bound as U, the ceiling a "
+        "regularized view's exact side is compared with (policy rows 3 and 4), held exactly: "
+        "a rational U as itself, a closed form as a root of its minimal polynomial, and a form "
+        "it cannot read as deciding nothing. A side below it is a register-result candidate, "
+        "a side exactly at a rational U is a drawing frame (`bound`), and a side above it is "
+        "not; `reclassify --refresh-bounds` copies it into a finished run's reports again "
+        "from the case record before deciding. It never reads the field as s(n) or as the "
+        "witness's side, which it takes from the witness"
+    ),
+    "packing/tests/test_regularize_evand.py": (
+        "a synthetic report for the driver's tests carries U as the driver writes it, so the "
+        "test can check a view at exactly U is decided as `bound`; it is a ceiling there, "
+        "never s(n)"
+    ),
+    "packing/devtools/register_regularized_bounds.py": (
+        "writes the ceiling an exact regularized view proves at 59 counts (T-155): the view's "
+        "exact side as the exact form, below the ceiling it replaces, and the decimal the "
+        "record printed before as the value, an upper display of it; it keeps a blocker and a "
+        "ceiling section where that value and the report disagree at the printed precision, "
+        "and reads the field as a ceiling and never as s(n)"
+    ),
+    "packing/tests/test_register_regularized_bounds.py": (
+        "holds the case records' ceilings to the registered views' exact sides (T-155) and "
+        "to the earlier ceilings they replace; a ceiling throughout, never s(n)"
+    ),
+    "packing/devtools/regularize_gallery.py": (
+        "the regularization review gallery prints U from a run's report beside the view's "
+        "side, labelled as the certified upper bound; a ceiling shown for comparison, never "
+        "s(n)"
+    ),
+    "packing/devtools/regularize_grid_slack.py": (
+        "the grid-slack generator re-solves a view at the case's verified bound U where the "
+        "witness's own side is not a frame, and only where U is rational exactly "
+        "(`rational_bound`): a closed form's evaluation is not U; U is the ceiling the "
+        "view's side is held to, never s(n)"
+    ),
+    "packing/devtools/regularize_select.py": (
+        "the selection among finished regularization runs reads each case's verified bound "
+        "as U through the driver: a view whose exact side is above it is not drawn, one "
+        "below it is listed as a register candidate (policy row 3) and never drawn; U is "
+        "the ceiling a view's side is held to, never s(n) or the witness's side"
+    ),
+    "packing/tests/test_regularize_select.py": (
+        "a stand-in case record for the selection's tests carries U as the driver reads it, "
+        "so a synthetic run is decided against a ceiling its view at the bound meets; the "
+        "test also holds every drawn view's exact side to the case records' U. A ceiling "
+        "throughout, never s(n)"
+    ),
+    "packing/devtools/regularized_drawings.py": (
+        "the regularized-drawings record reads a count's verified bound to test whether a "
+        "drawn view's exact side is at it and, only where it is, to find the registered result "
+        "whose evidence holds that ceiling and name it as the drawn packing's result; a "
+        "ceiling and its holder, never s(n)"
+    ),
+    "packing/atlas/known-best/regularized-atlas-index.schema.yaml": (
+        "the regularized layer's index schema names the field `view_minus_verified_upper_bound`"
+        ", the view's side minus the case's ceiling U as its generator measured it; it "
+        "states a difference to a ceiling, never s(n)"
+    ),
+    "packing/tests/test_regularize_axis_components.py": (
+        "synthetic index entries and case records for the axis tool's tests carry the v2 "
+        "contract's `view_minus_verified_upper_bound` and a case's verified bound U, so the "
+        "test can check the layer's check holds a drawn view's side to U; a ceiling there, "
+        "never s(n)"
+    ),
+    "packing/devtools/regularize_axis_components.py": (
+        "the regularized layer's check reads each drawn count's verified bound U from its "
+        "case record and decides the view's exact side against it: none below U, a `bound` "
+        "view at it, and the views above it named; U is the ceiling a drawing frame is held "
+        "to, never s(n) (#548 review B1)"
+    ),
+    "packing/tests/test_regularize_gallery.py": (
+        "a synthetic run report for the gallery's tests carries U as the driver writes it; "
+        "the test checks it is printed, and reads no value from it"
+    ),
+    "vendor/evand-regularize/search/exact/batch/register.py": (
+        "Evan Daniel's vendored batch builder (third-party bytes at a pin, changed only by "
+        "a recorded patch): copies the frontier's verified value beside the reported one into "
+        "his results.json as the record a count was solved against, a ceiling it compares "
+        "with and never s(n); this project's driver writes its own inputs and does not run it"
+    ),
     "packing/devtools/result_status.py": (
         "reads ceiling evidence to distinguish grid bounds from certified construction "
         "reports, without redating the reported construction; a ceiling alone never "
@@ -166,7 +248,14 @@ DECLARED_CONSUMERS = {
     "packing/devtools/source_supersession.py": (
         "rebuilds an explicitly selected source report from exact facts while retaining "
         "the historical independently certified ceiling until the reviewed SQUISH lane "
-        "is present; the two fields remain upper bounds, never exact optima"
+        "is present; and tells an earlier ceiling layer when a later layer holds the lane "
+        "below the ceiling it would write; the two fields remain upper bounds, never exact "
+        "optima"
+    ),
+    "packing/tests/test_source_supersession.py": (
+        "replaces a record's ceiling with a later layer's, below and above an earlier "
+        "layer's own, to test that the earlier layer leaves only the lower one alone; a "
+        "ceiling throughout, never s(n)"
     ),
     "packing/devtools/render_n11_lower_bounds_explainer.py": (
         "admits the solved n11 caption only when the case is proved, its exact lower "
@@ -275,6 +364,11 @@ DECLARED_CONSUMERS = {
         "the check of that review's fixes, quoting its proposed bracket of a conjecture "
         "between the verified floor and ceiling; a ceiling, not s(n)"
     ),
+    "docs/project/reviews/review-2026-10-13-verification-gaps.md": (
+        "the verification-gaps review measures each drawn side and each reported side "
+        "against the field as U, the best side the record verifies exactly; it reads it "
+        "as a ceiling, never as s(n)"
+    ),
     "packing/devtools/register_evand_arrangements.py": (
         "adopts an exact rational feasible ceiling for the complete new #399 pose; "
         "preserves older ceilings and poses as historical evidence, never as s(n)"
@@ -308,7 +402,7 @@ DECLARED_CONSUMERS = {
         "reads the verified ceiling to measure a bounded transfer-diagnostic gap; it "
         "does not identify that ceiling with s(n) or claim optimality"
     ),
-    "packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md": (
+    "packing/atlas/known-best/video/spikes/v1-slideshow/notes.md": (
         "a retained prototype's notes, listing the record fields the slideshow panel "
         "deliberately does not draw; it names this field to say the figure omits it "
         "because it is a ceiling rather than s(n), which is the contract's own reading"
@@ -450,7 +544,7 @@ DECLARED_CONSUMERS = {
     "packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md": (
         "plans promotion work that reads the ceiling, never as the value"
     ),
-    "docs/project/specs/active/plan-2026-08-28-interval-certification.md": (
+    "docs/project/specs/done/plan-2026-08-28-interval-certification.md": (
         "specs certification that would tighten the ceiling toward the report"
     ),
     "packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md": (

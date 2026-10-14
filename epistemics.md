@@ -331,7 +331,7 @@ was (`second certificate`, `not a bound`). The first is now the superseded mark,
 second is the status, and the third is the result’s kind: a second certificate is a
 *simplification*. The vocabulary is provisional until the owner confirms it; the
 proposal and the status of every result are in
-[the result-status plan](docs/project/specs/active/plan-2026-10-01-result-status.md).
+[the result-status plan](docs/project/specs/done/plan-2026-10-01-result-status.md).
 
 ## What Changed on 2026-09-30
 
@@ -354,7 +354,7 @@ A significance rationale is dated by its `scored`, but it scores the claim and n
 rungs, so since 2026-10-06 the checker holds it to the same rule: it may say what a rung
 would need, and not which rung the result stands at.
 The proposal behind the change is
-[the ladder review of 2026-09-30](docs/project/specs/active/plan-2026-09-30-epistemics-ladder-review.md).
+[the ladder review of 2026-09-30](docs/project/specs/done/plan-2026-09-30-epistemics-ladder-review.md).
 
 ## Significance and Novelty
 
@@ -449,6 +449,15 @@ it; a later result that implies it is declared instead ([Status](#status)). Of a
 standing, the register’s views show one thing, the *superseded* mark, which a standing
 gives only a bound; another kind carries the mark only where its entry declares it.
 
+A simplification’s standing reads the relation its claim restates as a bound’s. While
+every bound it states equals its case record’s in the lane it can hold, it is a second
+certificate. Its own build can land before that of the result it proves again, as when a
+reported proof of a value the record holds only as reported is replayed first.
+It then states a bound better than the case’s verified one, and its standing is pending
+adoption. A simplification moves no bound, so when the case record adopts that bound the
+kind is revisited, and the result page’s registered identity is amended with a dated
+reason (`packing/site-urls.yaml`).
+
 ## Results by Others
 
 The register holds others’ results beside this project’s, under the same `T-NNN`
@@ -497,7 +506,7 @@ to credit it as carefully as this project’s own.
   authors, then `after` and the work the source says it builds on
   (`Daniel after Burns, Massaccesi`). The atlas citation line and the register renderers
   print it, and hand-written prose may add to it but never drops a link.
-  A chain through an intermediate author names every link the source names: Kleddamag’s
+  A chain through an intermediate author names every link the source names: Overbeck’s
   $4.66001$ builds on Squares Project (Joshua Levy), Mira and Guzhou0806. The atlas
   stage sets each line in 66 characters, so where the whole line does not fit it prints
   the source’s `short_credit`: the same authors and the first of the same links, ending

@@ -91,7 +91,7 @@ session:
       plan's +0.006 side cap as unestablished. BC-386 stops in favour of BC-393 and BC-391
       is retired.
     evidence:
-    - docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md
+    - docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md
     - docs/project/reviews/review-2026-09-27-plan-4640020-lemma-check.md
     - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
     stop_reason: The queue is selected and its corrections are applied.
@@ -193,7 +193,7 @@ session:
   - packing/resources/web/n17-kleddamag-466001-2026-09-27/README.md
   - packing/frontier/evidence.yaml
   - packages/workbench/README.md
-  - docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md
+  - docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md
   checks:
   - 'full gate: fast at f26053cf7ba24bb74995519c840da166a66ccfa5: passed (hosted Packing validation run 36359659779; Certificate page run 36359659839 also passed)'
   - Kleddamag v1.1.0 verify.py passed here (PASS_COMPLETE_SEVENTEEN_SQUARE_EXCLUSION, 2,204 s), with controls.py and check_integrity.py.

@@ -151,6 +151,9 @@ def test_standing_agrees_with_the_recent_rows(
         # A second, point-only route to s(21) = 5, reported until its complete replay here
         # was recorded on 2026-10-02.
         ("T-055", view.SECOND_CERTIFICATE),
+        # Fitzharding's Lean proof of s(17) = L, a simplification of the value T-153 holds
+        # in n = 17's reported lane, not yet built here.
+        ("T-154", view.SECOND_CERTIFICATE_REPORTED),
         # Couzo's eight rational certificates of 8 October, pending adoption until the
         # house adoption of 11 October 2026 took five of them into the case records.
         ("T-128", view.HOLDS),

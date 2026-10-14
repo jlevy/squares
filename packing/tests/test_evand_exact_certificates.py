@@ -23,6 +23,7 @@ from devtools import (
 )
 from devtools import check_rational_witness_independent as independent
 from devtools import evand_exact_certificates as certificates
+from devtools import register_regularized_bounds as regularized
 from devtools.check_source_coverage import load_claims
 from devtools.source_supersession import superseded_counts
 from devtools.upper_bound_packets import verified_value
@@ -349,7 +350,11 @@ def test_n29_trails_its_report_and_keeps_its_own_ceiling() -> None:
     assert unmoved[29]["certified_above_verified_by"] > 0
     assert 29 not in certificates.CEILINGS
     case = certificates.case_record(29)
-    assert case["verified_upper_bound"]["evidence"] == ["E-n029-interval-certified-upper"]
+    # The interval certificate held it until 12 October 2026, when the exact regularized
+    # view at the witness's own side, below both, became its exact form (T-155), the
+    # endpoint still printed as its value; this survey never moved it.
+    assert case["verified_upper_bound"]["evidence"] == [regularized.EVIDENCE]
+    assert "E-n029-interval-certified-upper" in case["evidence"]
 
 
 @pytest.mark.parametrize("n", [28, 50, 69, 83, 127, 230, 300])
@@ -383,6 +388,15 @@ def test_each_ceiling_is_the_certified_side_rounded_up_at_the_printed_precision(
             continue
         verified = case["verified_upper_bound"]
         side = Fraction(row["certified_side"])
+        if regularized.EVIDENCE in verified["evidence"]:
+            # A regularized view's exact side is now the lane's exact form (T-155): at most
+            # this certificate's side, and below its rounding up, which the record still
+            # prints as the value; this certificate stays cited.
+            assert verified["value"] == row["verified_value"], n
+            assert Fraction(verified["exact_form"]) <= side, n
+            assert Fraction(verified["exact_form"]) < Fraction(row["verified_value"]), n
+            assert apply_exact_ceilings.EXACT_REPLAY in case["evidence"], n
+            continue
         assert verified["value"] == verified_value(row["printed_side"], side), n
         assert Fraction(verified["exact_form"]) == Fraction(verified["value"]) >= side, n
         assert verified["evidence"] == [

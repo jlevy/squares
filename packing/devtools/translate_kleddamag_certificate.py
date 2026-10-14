@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Translate the external n = 17 Kleddamag measure into this repository's threshold schema.
+"""Translate Overbeck's external n = 17 measure into this repository's threshold schema.
 
 The retained artifact under `packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/`
 carries a weighted covering measure -- 1,134 point orbits and 253 two-of-three orbits over

@@ -13,7 +13,7 @@ The geometry records, drawings and exports in this directory are generated.
 [`credit-attributions.json`](credit-attributions.json) is the curated input for
 lower-bound and optimality-proof acknowledgments; it retains names, roles, source
 references and evidenced dates without changing any scientific result.
-[FIGURE-PLAYBOOK.md](FIGURE-PLAYBOOK.md) is the playbook for both: how to rebuild them,
+[figure-playbook.md](figure-playbook.md) is the playbook for both: how to rebuild them,
 where each fact on them comes from, what a third would take, and how the poster’s byte
 budget was measured.
 
@@ -151,30 +151,116 @@ chosen:
 uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --report
 ```
 
-[The playbook](FIGURE-PLAYBOOK.md#the-two-composites) has the measurements and what each
+[The playbook](figure-playbook.md#the-two-composites) has the measurements and what each
 one bought.
 
 ## The regularized views
 
-[`regularized/`](regularized/index.json) holds exact derived views of 55 records,
-written by `python -m devtools.regularize_axis_components --update-atlas`, checked by
-digest with `--check-atlas` and re-derived with `--verify-atlas`. A view straightens
-near-axis squares and slides axis-aligned ones into exact contact at the certified side,
-verified twice over the rationals; it never replaces a witness, changes a side or
-promotes a tier. The selected website drawings use these verified views directly; the
-index and source records retain their provenance.
+The [regularization policy](../../../docs/project/policies/regularization-policy.md)
+governs every view here: what admits a view, what goes to manual review, and what is a
+register result instead.
+
+[`regularized/`](regularized/index.json) holds the exact derived views the atlas draws,
+one index entry a record under the contract `packing.squares:RegularizedAtlasIndex/v2`
+([schema](regularized-atlas-index.schema.yaml)). Each entry names the generator that
+decided it:
+
+- **`regularize_axis_components/2`**, this project’s tool, run over every record by
+  `python -m devtools.regularize_axis_components --update-atlas`. It straightens
+  near-axis squares and slides axis-aligned ones into exact contact at the certified
+  side.
+- **Evan Daniel’s regularizer**, vendored under `vendor/evand-regularize/` and driven by
+  `devtools.regularize_evand`, which brings each view to the record’s own side over the
+  rationals where it can.
+- **The grid-slack generator**, `devtools.regularize_grid_slack`, a port of his
+  coincidence placement that starts from the witness’s exact frame and closes free grid
+  slack.
+
+A view from either of the last two enters only where the policy’s decision table admits
+it (row 10), by `python -m devtools.regularize_evand layer --select admitted` (a
+grid-slack run’s views by adding `--grid-run DIR --grid-counts N ...`, which draws that
+run’s view at those counts in place of Evan Daniel’s), and only where it shares at least
+as many full sides as the view it replaces.
+The axis tool’s own record of that count stays beside it as `reference`. Such a view
+carries the credit line *Regularized by the Squares Project with Evan Daniel’s
+regularizer (evand/square-packing, MIT)*, in the index, in the view and in its drawing.
+The [regularization process](../../../docs/project/guides/regularization-process.md)
+gives the steps from a run to a merged view: generate, select with
+`python -m devtools.regularize_select`, admit, render, record and validate.
+
+On 13 October 2026 the index draws 90 views: 20 by the axis tool, 48 by Evan Daniel’s
+regularizer (29 at the witness’s side and 19 at the verified upper bound) and 22 by the
+grid-slack generator (2 by its version 0 and 20 by its version 1), with 181 records
+unchanged and 53 refused.
+At sixteen counts Evan Daniel’s views lay below the earlier ceilings and were held; they
+were admitted once T-155 registered their exact sides and the runs were decided again
+against the case records as they stand (`python -m devtools.regularize_evand reclassify
+--refresh-bounds`); at 227 the grid-slack view is drawn instead.
+At the 42 counts jlevy/squares#518 re-housed, both generators ran again on the new
+witnesses. 14 of Evan Daniel’s views are drawn, each worse on no measure of the drawing
+and better on at least one, and 10 grid-slack views where his regularizer admitted none
+and the grid view draws better with nothing worse.
+16 keep the axis tool’s view: 232’s grid view awaits review; at 236 his view turned two
+squares 0.000537 degrees off their group and drew one more angle class; at 180 and 207
+his views tied the axis tool’s on all seven measures at the same side, which the owner’s
+rule of 13 October 2026 does not draw (“better on one or drawn at a smaller side”); the
+three were withdrawn on 13 October; and at the rest neither generator draws better.
+At 270 and 305, which jlevy/squares#553 re-housed again after those runs, the views
+lapsed with the witnesses they were made from, and the axis tool’s views of the new
+witnesses were drawn.
+On 13 October 2026 the owner set what a drawn view must be: exactly verified at a side
+no larger than the verified upper bound, and better or equal on the drawing, its pose
+free to change
+([the policy’s section 9](../../../docs/project/policies/regularization-policy.md#9-owner-decisions),
+questions 13 to 15). Nineteen counts were drawn again under that rule.
+At eight (87, 106, 152, 172, 182, 206, 268 and 301) the drawing sat above the bound, at
+a decimal witness’s side, and Evan Daniel’s exact view at the bound is drawn instead.
+At eleven a grid-slack view straightened at up to 1 or 5 degrees, or a new half-degree
+view, draws better: 146, 176, 181, 199, 238, 239, 267, 270, 271, 305 and 306. Over the
+nineteen, light / uneven / near-axis squares go from 78 / 232 / 113 to 39 / 117 / 1, and
+house sides from 10,764 to 11,560; light squares under the house rule fall atlas-wide
+from 5,455 to 5,381. Seven drawn views stay above the bound, each an exception question
+13 names: at 18, 26, 66 and 85 Evan Daniel’s views sit about $10^{-30}$ above a
+closed-form optimum (question 4), and at 110, 241 and 297 the drawing is at Francisco
+Couzo’s decimal side, $3 \times 10^{-12}$ to $1.3 \times 10^{-11}$ above Evan Daniel’s
+exact optimum, where the view at the bound draws fewer shared sides (110 and 241) or
+awaits the owner’s review (297). `--check-atlas` and
+`packing/tests/test_regularize_select.py` fail on a view above the bound at any other
+count, both reading the one list, the axis tool’s `ABOVE_U`. Every drawn view carries
+its regularization in the register’s terms (`by: project`, the method, the side and the
+identity measured here), and `results.yaml`’s `regularized_drawings` records each one
+whose packing a registered result holds, generated by
+`python -m devtools.regularized_drawings`. No view changes a side, a frontier value, an
+evidence tier or a credit, and none replaces a witness.
 Exploration
 [X-049](../../campaign/explorations/X-049-families-shading-and-the-large-n-limit.md#exact-regularization)
-explains why and what it changes.
+explains why the layer exists and what the axis tool changes.
 
-`--check-atlas` runs in the records tier on every pull request.
+`--check-atlas` runs in the records tier on every pull request: it holds the index to
+the manifest, the witnesses and the views by digest, and reads each other generator’s
+view against its entry (label, generator, credit, side and regularization).
+It also holds every drawn view’s exact side to the witness’s own side $s_W$, which is
+what `same` means, and to the case record’s verified upper bound $U$, decided exactly
+for a closed-form $U$ as well: no view below $U$, a `bound` view exactly at it, and no
+view above it at a count the tool’s `ABOVE_U` list does not name with its reason.
+Seven views sit above $U$ at this layer, each a rounding above it and each an exception
+question 13 names: four of Evan Daniel’s about $10^{-30}$ above a closed-form optimum,
+and three at Francisco Couzo’s decimal side, $3 \times 10^{-12}$ to
+$1.3 \times 10^{-11}$ above Evan Daniel’s exact optimum.
 `--verify-atlas` is the deferred step `regularized atlas views re-derive exactly`, on a
 `regularized-views` runner of its own in both the deep gate and the post-merge
 checkpoint
-([development.md](../../../development.md#the-deep-gate-the-deferred-surface-before-the-merge)).
+([development.md](../../../development.md#the-deep-gate-the-deferred-surface-before-the-merge)):
+it re-derives every axis-tool record, the references included, and decides each other
+generator’s view again on both maintained exact routes, with its square count, its
+identity against the witness and its shades measured again.
 
-**The 87 refused Kingbird-derived records stay refused.** Their 36-digit poses overlap
-by a rounding sliver at centre dilation 1, the only factor the layer uses.
+**The axis tool still refuses 71 Kingbird-derived records.** Their 36-digit poses
+overlap by a rounding sliver at centre dilation 1, the only factor the tool uses; Evan
+Daniel’s regularizer, re-solved at that promotion’s side, now draws three of them
+($n = 18$, $66$ and $85$), and the rest stay refused here.
+The index refuses one more record, $n = 51$, whose witness is exact over
+$\mathbb{Q}(\sqrt{2})$, because the layer has no field arithmetic.
 `promote_rational` would try wider ones: it scales every centre about the container’s
 centre by $1 + 10^{-p}$, $p = 31, 29, \ldots, 3$, and keeps the first exact packing
 within $10^{-9}$ of the printed side.
@@ -194,12 +280,18 @@ rational packings; the historical census below describes the earlier poses:
 Every view passed both exact verifiers, and none made a square lighter or needed a hold.
 The views still fail the claim boundary, for two reasons:
 
-- **Most would promote a tier.** For 73 of the 89 the register’s verified upper bound is
-  the grid ceiling, because the Kingbird catalogue is reported evidence that has never
-  been replayed. An exactly verified view there is a rational packing 0.05 to 0.46 below
-  that bound. A drawing would then carry a certificate the register does not.
-  At $n = 17$ and $n = 29$ the view lies $10^{-22}$ and $5 \times 10^{-20}$ below the
-  certified endpoint the register holds, which is the same promotion at smaller scale.
+- **Most would promote a tier.** On 2026-10-02, for 73 of the 89 the register’s verified
+  upper bound was the grid ceiling, because the Kingbird catalogue was reported evidence
+  that had never been replayed.
+  An exactly verified view there was a rational packing 0.05 to 0.46 below that bound,
+  and a drawing would have carried a certificate the register did not.
+  At $n = 17$ and $n = 29$ the view lay $10^{-22}$ and $5 \times 10^{-20}$ below the
+  certified endpoint the register held, which is the same promotion at smaller scale.
+  The grid-ceiling count no longer holds: T-101 (registered 2026-10-06) made Evan
+  Daniel’s exact certificates the verified upper bound at 74 Kingbird counts, and on 11
+  October none of the 74 records the layer then refused had the grid ceiling as its
+  verified bound. The 72 it refuses now are among those 74
+  ([the assessment, section 3.2](../../../docs/project/research/research-2026-10-11-evand-regularization-assessment.md#32-the-side-relation-same-or-solved)).
 - **The rest would change the side.** For the other 14 the register already verifies the
   reported bound, but a dilated view’s container is $2.9 \times 10^{-31}$ to
   $8.8 \times 10^{-29}$ larger than the printed side and lies above the verified bound,
@@ -394,7 +486,7 @@ Commit those data records and re-pin the release before redrawing the composites
 The two composites and their exports are drawn apart, by `--update-composites`, at a
 version bump or on demand; each states the data commit it was drawn from, and
 `--check-composites` holds it to that statement without rebuilding anything
-([the figure playbook](FIGURE-PLAYBOOK.md#rebuild-it)). `--report` measures what those
+([the figure playbook](figure-playbook.md#rebuild-it)). `--report` measures what those
 exports cost — bytes, square polygons, bytes per square, and how each composite encodes
 a square — without rebuilding anything.
 Rasters are drawn by cairosvg, the same renderer that draws the PDFs, so every export of

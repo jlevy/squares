@@ -1,0 +1,177 @@
+{
+  "schema": "k17-recomputation-price/v1",
+  "capture": {
+    "statements": 98,
+    "slices_per_checker": 1152,
+    "rows_per_checker": 1728000,
+    "python_cpu_hours": 1273.2,
+    "node_cpu_hours": 1073.9,
+    "both_checkers_cpu_hours": 2347.1,
+    "python_wall_hours_4_workers": 322.3,
+    "node_wall_hours_4_workers": 276.6,
+    "slice_record_wall_hours_sum": 600.8,
+    "python_cpu_s_per_row_median": 2.505,
+    "python_cpu_s_per_row_max_slice": 9.784,
+    "first_slice_started_utc": "2026-10-11T18:43:18Z",
+    "last_slice_finished_utc": "2026-10-11T23:14:30Z",
+    "runtimes": [
+      {
+        "system": "Linux",
+        "arch": "x86_64",
+        "python": "3.12.14",
+        "node": "v24.19.0",
+        "py_workers": 4,
+        "node_workers": 4,
+        "slices": 1041
+      },
+      {
+        "system": "Linux",
+        "arch": "x86_64",
+        "python": "3.11.17",
+        "node": "v22.22.0",
+        "py_workers": 4,
+        "node_workers": 4,
+        "slices": 111
+      }
+    ],
+    "basis": "sum over the 1,152 selected slices of each output's cpu_seconds_rows (CPU) and seconds (wall); the author's Linux x86_64 runners"
+  },
+  "trees": {
+    "per_tree": {
+      "JQ": {
+        "C1": {
+          "real_s": 28.99,
+          "cpu_s": 28.74
+        },
+        "C2": {
+          "real_s": 5.97,
+          "cpu_s": 6.52
+        }
+      },
+      "JPG15p_v5": {
+        "C1": {
+          "real_s": 366.52,
+          "cpu_s": 364.38
+        },
+        "C2": {
+          "real_s": 70.38,
+          "cpu_s": 74.45
+        }
+      },
+      "JPG17m_v5": {
+        "C1": {
+          "real_s": 529.89,
+          "cpu_s": 526.83
+        },
+        "C2": {
+          "real_s": 105.58,
+          "cpu_s": 113.01
+        }
+      },
+      "JPG3m_v5": {
+        "C1": {
+          "real_s": 708.18,
+          "cpu_s": 704.13
+        },
+        "C2": {
+          "real_s": 138.47,
+          "cpu_s": 147.18
+        }
+      },
+      "JPG3p_v5": {
+        "C1": {
+          "real_s": 750.93,
+          "cpu_s": 722.98
+        },
+        "C2": {
+          "real_s": 135.87,
+          "cpu_s": 144.73
+        }
+      },
+      "JPG17p_v5": {
+        "C1": {
+          "real_s": 886.64,
+          "cpu_s": 857.16
+        },
+        "C2": {
+          "real_s": 178.18,
+          "cpu_s": 186.98
+        }
+      },
+      "JPG15m_v5": {
+        "C1": {
+          "real_s": 1002.65,
+          "cpu_s": 984.96
+        },
+        "C2": {
+          "real_s": 194.55,
+          "cpu_s": 206.46
+        }
+      },
+      "G20S": {
+        "C1": {
+          "real_s": 625.15,
+          "cpu_s": 610.43
+        },
+        "C2": {
+          "real_s": 298.82,
+          "cpu_s": 320.41
+        }
+      },
+      "HW": {
+        "C1": {
+          "real_s": 457.87,
+          "cpu_s": 456.45
+        },
+        "C2": {
+          "real_s": 206.35,
+          "cpu_s": 227.02
+        }
+      },
+      "JG": {
+        "C1": {
+          "real_s": 1589.57,
+          "cpu_s": 1577.69
+        },
+        "C2": {
+          "real_s": 335.09,
+          "cpu_s": 358.2
+        }
+      },
+      "JPWS_v4": {
+        "C1": {
+          "real_s": 1971.69,
+          "cpu_s": 1953.56
+        },
+        "C2": {
+          "real_s": 398.22,
+          "cpu_s": 421.18
+        }
+      },
+      "JPW13": {
+        "C1": {
+          "real_s": 4654.71,
+          "cpu_s": 4623.7
+        },
+        "C2": {
+          "real_s": 955.64,
+          "cpu_s": 1012.41
+        }
+      },
+      "JPA_v5": {
+        "C1": {
+          "real_s": 8448.49,
+          "cpu_s": 8358.12
+        },
+        "C2": {
+          "real_s": 1670.13,
+          "cpu_s": 1766.69
+        }
+      }
+    },
+    "python_checker_cpu_hours": 6.05,
+    "node_checker_cpu_hours": 1.38,
+    "both_checkers_cpu_hours": 7.43,
+    "basis": "user+sys of the time line each stored second-execution output ends with; the author's macOS arm64 build machine, one process per checker; JPA_v5's Node checker peaked at 7.0 GB RSS"
+  }
+}

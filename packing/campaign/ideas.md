@@ -67,7 +67,7 @@ These are W3 handoffs; no new target experiment is registered from the abstract 
 The existing owner-requested optimality program is
 [X-048: Optimality Routes After n = 11](explorations/X-048-n17-optimality-after-n11.md),
 with its
-[session plan](../../docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md).
+[session plan](../../docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md).
 At the plan’s merged-main baseline, n11 and n21 are settled in the machine-checked
 record; n17 is the primary new target and n12 is secondary.
 The older n11 bracket and route premises below describe the historical program and must
@@ -98,7 +98,7 @@ be reconciled before selecting its unfinished tasks.
 | [X-048 periodic deficit-four family](explorations/X-048-n17-optimality-after-n11.md#new-leads-from-the-october-evand-review) | registered as [H-269](hypotheses/H-269-periodic-certificates-k2-minus-4-and-5.md) | Require exact deficit D > 1 before selecting the costly width-three coverage campaign |
 
 The historical starting bracket for the program below was
-`3.875 < s(11) <= 3.877083590022814177...`. The strict lower end is Kleddamag’s verified
+`3.875 < s(11) <= 3.877083590022814177...`. The strict lower end is Overbeck’s verified
 $31/8$ certificate. The upper end is Walter Trump’s 1979 packing — six axis-aligned
 squares plus a tightly constrained block of five tilted at $\approx40.1819^\circ$ — and
 the case record carries its verified exact algebraic expression.
@@ -822,7 +822,7 @@ the registered rows.
 ## After R052 and Rung 0 — Session 159
 
 The
-[Session 159 plan](../../docs/project/specs/active/plan-2026-09-25-after-r052-planning.md)
+[Session 159 plan](../../docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md)
 kept two Fable max assessments of what R052 at n17 and the closed rung 0 at n11 make
 possible. [Agenda 042](agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md)
 selected these rows as BC-386 to BC-391.
@@ -841,7 +841,7 @@ selected these rows as BC-386 to BC-391.
 ## After 4.640020 — the 27 September Planning Block
 
 The
-[27 September plan](../../docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md)
+[27 September plan](../../docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md)
 kept one Fable max assessment of what Kleddamag v1.1.0 ($s(17) > 4.640020$) and
 wand125’s rectangle certificates change, with probes under `attic/planning-160/`.
 [Agenda 042](agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md) selected

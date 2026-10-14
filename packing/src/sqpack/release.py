@@ -187,7 +187,7 @@ DATA_EXCLUDED: tuple[str, ...] = (
     "packing/atlas/known-best/video",
     "packing/frontier/README.md",
     "packing/atlas/known-best/README.md",
-    "packing/atlas/known-best/FIGURE-PLAYBOOK.md",
+    "packing/atlas/known-best/figure-playbook.md",
 )
 
 #: How many characters of that commit the version carries (the owner, 2026-09-22).
@@ -204,7 +204,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "e81fa106196f1f9b92cc8d645954d68fdb485e9f"
+DATA_REVISION = "3199ca2a9f57bfb3e4b9bfa3f4902e3ca7b397c5"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -266,7 +266,7 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:           the n = 12 and n = 17 bounds others have since raised (249d42c37,
 #:           d205561f0, 7862dc3e8, a6f630dd7); a patch revision of the paper (the owner,
 #:           2026-10-01), published under the v0.4.2 label until it was numbered
-#:   v0.4.2  the frontier update of September 22 records Kleddamag's verified
+#:   v0.4.2  the frontier update of September 22 records Overbeck's verified
 #:           s(11) >= 3.875, built on T-026's certificate, and the paper presents T-026's
 #:           bound as historical; Figure 2's star marks every recent result
 #:   v0.4.0  the article rewritten around T-025 and T-026, the 381/100 proof kept as the
@@ -303,7 +303,7 @@ EXPLAINER_HISTORY = (
         first_published="October 5, 2026",
         result_scope=(
             "The series revision: the paper is Part I of three; its frontier update and "
-            "Further Reading link Part II, on Kleddamag's T-037, and Part III, on T-060."
+            "Further Reading link Part II, on Overbeck's T-037, and Part III, on T-060."
         ),
     ),
     PublicationHistoryEntry(
@@ -319,7 +319,7 @@ EXPLAINER_HISTORY = (
         version="v0.4.2",
         first_published="September 28, 2026",
         result_scope=(
-            "The recent-results edition: a frontier update records Kleddamag's verified "
+            "The recent-results edition: a frontier update records Overbeck's verified "
             "$s(11) ≥ 3.875$, built on the T-026 certificate, so the paper presents "
             "T-026's bound as historical, and the star on the atlas in Figure 2 marks "
             "every recent result."
@@ -358,7 +358,7 @@ EXPLAINER_FIRST_PUBLISHED = EXPLAINER_HISTORY[-1].first_published
 #: `PUBLICATION_DATE`, the day the edition was first published, which stood still while
 #: the article changed under it: merging is the whole publish, so the text a reader sees
 #: moves between editions. Change it in the commit that changes the article.
-EXPLAINER_REVISED = "October 10, 2026"
+EXPLAINER_REVISED = "October 13, 2026"
 
 #: The optimality review's own editions, newest first, each with the day it was first
 #: published and what changed in the paper: the review's history, as `EXPLAINER_HISTORY`
@@ -472,14 +472,14 @@ OPTIMALITY_REVIEW_EDITION = " ".join(
 #: prints, by the rule `EXPLAINER_REVISED` follows -- the author date of the last commit
 #: that changed its article, `n11-optimality-review-article.md`, held to git by
 #: `devtools.artifact_dates`. Change it in the commit that changes the article.
-OPTIMALITY_REVIEW_REVISED = "October 10, 2026"
+OPTIMALITY_REVIEW_REVISED = "October 12, 2026"
 
 #: The day the proof the review explains was published by its source, which the review's
 #: "Original proof" date prints. A fact about someone else's work, so it is typed, and
 #: held by `devtools.artifact_dates` to the day the register records for T-060.
 OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 
-#: Every edition of Part II, the review of Kleddamag's certified lower bound
+#: Every edition of Part II, the review of Overbeck's certified lower bound
 #: `s(11) > 31/8` (T-037), newest first, as `OPTIMALITY_REVIEW_HISTORY` is Part III's.
 THRESHOLD_REVIEW_HISTORY = (
     PublicationHistoryEntry(
@@ -503,9 +503,9 @@ THRESHOLD_REVIEW_EDITION = " ".join(
 #: When Part II's text last changed, by the rule `OPTIMALITY_REVIEW_REVISED` follows: the
 #: author date of the last commit that changed `n11-threshold-bound-review-article.md`,
 #: held to git by `devtools.artifact_dates`.
-THRESHOLD_REVIEW_REVISED = "October 9, 2026"
+THRESHOLD_REVIEW_REVISED = "October 13, 2026"
 
-#: The day Kleddamag published the proof Part II reviews (v1.0.2 of
+#: The day Overbeck published the proof Part II reviews (v1.0.2 of
 #: 11-squares-certified-bound), which its "Original proof" date prints.
 THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 

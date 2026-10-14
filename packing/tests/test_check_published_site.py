@@ -3,15 +3,22 @@
 from __future__ import annotations
 
 import hashlib
+import http.client
 import re
 import struct
+import threading
+import time
+import urllib.error
+import urllib.request
 from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from types import SimpleNamespace
-from typing import NoReturn
+from typing import NoReturn, Self, cast
 
 import pytest
+from playwright.sync_api import Browser
 from playwright.sync_api import Error as PlaywrightError
 
 from devtools import (
@@ -354,9 +361,16 @@ def fake_site(
     lost: Sequence[str] = (),
 ) -> Fetch:
     """A deployed site at any root: its pages, the workbench, the PDF, and every link.
-    An address ending in one of `lost` is a 404."""
+    An address ending in one of `lost` is a 404. It answers at once or not at all, so
+    the retry callback the check always offers (#496 E2) is accepted and never called."""
 
-    def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,  # noqa: ARG001 - the seam's signature
+    ) -> tuple[int, bytes]:
         assert timeout == 1
         if requested is not None:
             requested.append(url)
@@ -704,11 +718,13 @@ def test_check_accepts_the_deployed_lazy_record_links_without_refetching(
         *,
         timeout: float,
         rows: Sequence[site_urls.SiteURL],
+        results: list[tuple[bool, str]],
     ) -> list[tuple[bool, str]]:
+        """The seam's shape: a walk appends its verdicts to `results`. This one has none."""
         assert rows
         for address in OVERVIEWS:
             read(f"{site.rstrip('/')}/{address}", timeout=timeout)
-        return []
+        return results
 
     monkeypatch.setattr(check_published_site, "deployed_registry_checks", registry_prefetch)
     assert all(
@@ -729,13 +745,21 @@ def test_check_shares_fragment_requests_but_keeps_queries_methods_and_failures(
     requested: list[tuple[str, bool]] = []
     resource = f"{REPO_URL}/blob/main/README.md"
 
-    def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
         requested.append((url, head))
         if "?missing" in url:
             return 503, b""
-        return website(url, head=head, timeout=timeout)
+        return website(url, head=head, timeout=timeout, on_retry=on_retry)
 
-    def registry_prefetch(_site: str, read: Fetch, **_kwargs: object) -> list[tuple[bool, str]]:
+    def registry_prefetch(
+        _site: str, read: Fetch, *, results: list[tuple[bool, str]], **_kwargs: object
+    ) -> list[tuple[bool, str]]:
         read(resource + "#L1", timeout=1)
         read(resource + "#L2", head=True, timeout=1)
         read(resource + "?raw=1#L1", head=True, timeout=1)
@@ -743,7 +767,7 @@ def test_check_shares_fragment_requests_but_keeps_queries_methods_and_failures(
         read(resource + "?raw=2#L1", timeout=1)
         for url in (resource + "?missing#L1", resource + "?missing#L2"):
             assert read(url, head=True, timeout=1) == (503, b"")
-        return []
+        return results  # A walk's verdicts go into `results`; this one contributes none.
 
     monkeypatch.setattr(check_published_site, "fetch", fetch)
     monkeypatch.setattr(check_published_site, "deployed_registry_checks", registry_prefetch)
@@ -839,17 +863,414 @@ def test_live_cli_keeps_progress_separate_and_preserves_failure_exit_status(
         _commit: str,
         *,
         progress: Callable[[str], object],
+        results: list[tuple[bool, str]],
         **_kwargs: object,
     ) -> list[tuple[bool, str]]:
         progress("audit registry: start")
         assert capsys.readouterr().err == "audit registry: start\n"
-        return [(False, "link HTTP 503: https://example.org/missing")]
+        results.append((False, "link HTTP 503: https://example.org/missing"))
+        return results
 
     monkeypatch.setattr(check_published_site, "check", check)
     assert check_published_site.main(["--commit", COMMIT, "--no-browser"]) == 1
     assert capsys.readouterr().out == (
         "FAIL link HTTP 503: https://example.org/missing\n0 of 1 checks passed\n"
     )
+
+
+def test_check_always_offers_fetch_its_retry_callback(monkeypatch: pytest.MonkeyPatch) -> None:
+    """A retry is counted whether or not progress is reported (#496 E2): the callback is
+    the check's, not a feature of progress, so no test double shapes the production
+    call. With progress, the retry the transport reports is the one line it prints."""
+    website = fake_site(site_pages())
+    assert failures(monkeypatch, website) == []
+    offered: list[object] = []
+
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        offered.append(on_retry)
+        assert on_retry is not None
+        if url == "https://example.org/":
+            on_retry(503, 2.0)
+        return website(url, head=head, timeout=timeout)
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    silent = check_published_site.check("https://example.org", COMMIT, timeout=1, browser=False)
+    assert offered
+    assert all(callable(callback) for callback in offered)
+    events: list[str] = []
+    reported = check_published_site.check(
+        "https://example.org", COMMIT, timeout=1, browser=False, progress=events.append
+    )
+    assert reported == silent
+    retry = "retry GET https://example.org/: HTTP 503, waiting 2s"
+    assert any(retry in line for line in events)
+    assert events[-1].endswith("total_retries=1")
+
+
+def verdict_lines(results: Sequence[tuple[bool, str]]) -> list[str]:
+    """The verdicts as `main` prints them, then its summary."""
+    failed = sum(not passed for passed, _ in results)
+    return [f"{'ok  ' if passed else 'FAIL'} {line}" for passed, line in results] + [
+        f"{len(results) - failed} of {len(results)} checks passed"
+    ]
+
+
+def live_main(
+    monkeypatch: pytest.MonkeyPatch, *, browser: bool = False
+) -> tuple[list[str], list[str]]:
+    """A live `main` against the fixture site on a clock that moves a minute a request
+    and a minute for the forwarders' visit: the requests it makes, by URL, and the names
+    of the browser phases it opens, each as a list the test clears between runs."""
+    requested: list[str] = []
+    opened: list[str] = []
+    clock = [0.0]
+
+    def forwarders_followed(*_args: object, **_kwargs: object) -> list[tuple[bool, str]]:
+        opened.append("forwarders")
+        clock[0] += 60.0
+        return []
+
+    def workbench_startup(*_args: object, **_kwargs: object) -> tuple[bool, str]:
+        opened.append("workbench")
+        return True, "browser started"
+
+    monkeypatch.setattr(check_published_site, "forwarders_followed", forwarders_followed)
+    monkeypatch.setattr(check_published_site, "workbench_startup", workbench_startup)
+    monkeypatch.setattr(check_published_site.time, "monotonic", lambda: clock[0])
+    website = fake_site(site_pages())
+    assert failures(monkeypatch, website, browser=browser) == []
+    opened.clear()
+
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        requested.append(url)
+        clock[0] += 60.0
+        return website(url, head=head, timeout=timeout, on_retry=on_retry)
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    return requested, opened
+
+
+LIVE_ARGS = ("--site", "https://example.org", "--commit", COMMIT, "--timeout", "1")
+
+
+def test_the_live_cli_prints_the_same_verdicts_with_no_deadline(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Without a deadline the output is what `check` returns, line for line, and the
+    exit status is the verdicts': the deadline is an option, not a change (#496 F1)."""
+    requested, opened = live_main(monkeypatch)
+    expected = check_published_site.check(
+        "https://example.org", COMMIT, timeout=1, browser=False
+    )
+    requested.clear()
+    capsys.readouterr()
+    assert check_published_site.main([*LIVE_ARGS, "--no-browser"]) == 0
+    assert capsys.readouterr().out == "".join(f"{line}\n" for line in verdict_lines(expected))
+    assert len(requested) > 1
+    assert opened == []
+
+
+def test_a_deadline_prints_the_verdicts_reached_and_fails_the_audit(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A run the job's ceiling would kill prints nothing, so the audit stops itself first
+    (#496 F1, E5): every verdict reached, in order, then one failure naming the phase
+    the deadline passed in and how many checks were made, then the summary. No request
+    is made past the deadline; the minute a request takes here is the clock's."""
+    requested, _ = live_main(monkeypatch)
+    expected = verdict_lines(
+        check_published_site.check("https://example.org", COMMIT, timeout=1, browser=False)
+    )[:-1]
+    requested.clear()
+    capsys.readouterr()
+    arguments = [*LIVE_ARGS, "--no-browser", "--deadline-minutes", "3"]
+    assert check_published_site.main(arguments) == 1
+    printed = capsys.readouterr().out.splitlines()
+    verdicts, deadline, summary = printed[:-2], printed[-2], printed[-1]
+    assert 0 < len(verdicts) < len(expected)
+    assert verdicts == expected[: len(verdicts)]
+    assert deadline == (
+        f'FAIL audit deadline of 3 min exceeded during phase "content" after '
+        f"{len(verdicts)} checks; remaining checks not run"
+    )
+    assert summary == f"{len(verdicts)} of {len(verdicts) + 1} checks passed"
+    assert len(requested) == 3
+
+
+def test_a_deadline_in_the_registry_walk_keeps_the_verdicts_it_reached() -> None:
+    """The registry walk is the audit's first phase and fetches every registered page,
+    so it appends to the caller's list as it goes: a deadline that passes during it
+    leaves the registry checks and every page verdict already reached for `main` to
+    print (#496 F1)."""
+    walked: list[str] = []
+
+    def read(url: str, **_kwargs: object) -> tuple[int, bytes]:
+        if len(walked) == 2:
+            raise check_published_site._DeadlineError("registry", 60.0)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        walked.append(url)
+        return 200, b"<!doctype html><title>page</title>"
+
+    rows = site_urls.load_registry()
+    registry = site_urls.validate_registry(rows)
+    results: list[tuple[bool, str]] = []
+    with pytest.raises(check_published_site._DeadlineError):  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        check_published_site.deployed_registry_checks(
+            "https://example.org", read, timeout=1, rows=rows, results=results
+        )
+    assert results[: len(registry)] == registry
+    first = walked[0].removeprefix("https://example.org/")
+    assert any(line.startswith(f"registered {first}: HTTP 200") for _, line in results)
+
+
+def test_a_deadline_is_read_at_each_phase_boundary_before_a_browser_opens(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The browser phases keep their own timeouts, so the boundary before each is what
+    bounds them: a deadline that passes during the last request before the forwarders
+    are visited stops the audit there, and no browser is opened; one that passes while
+    they are visited stops it before the workbench is started."""
+    requested, opened = live_main(monkeypatch, browser=True)
+    events: list[str] = []
+    expected = verdict_lines(
+        check_published_site.check(
+            "https://example.org", COMMIT, timeout=1, browser=True, progress=events.append
+        )
+    )[:-1]
+    assert opened == ["forwarders", "workbench"]
+    # Each phase starts at a whole minute of the clock, one a request: the deadline that
+    # lands there, in minutes, and the requests made by then.
+    started = re.compile(r"audit \+(\d+)\.00s (.+): start; total_unique_requests=(\d+) .*")
+    starts = {
+        found[2]: (int(found[1]) // 60, int(found[3]))
+        for line in events
+        if (found := started.fullmatch(line))
+    }
+    before_forwarders, requests_before = starts["browser forwarders"]
+    before_workbench, _ = starts["workbench"]
+    assert before_forwarders == requests_before
+    assert before_workbench == before_forwarders + 1
+    assert requests_before < len(requested)
+
+    for minutes, phase, visited in (
+        (before_forwarders, "publication files", []),
+        (before_workbench, "browser forwarders", ["forwarders"]),
+    ):
+        requested.clear()
+        opened.clear()
+        capsys.readouterr()
+        assert check_published_site.main([*LIVE_ARGS, "--deadline-minutes", str(minutes)]) == 1
+        printed = capsys.readouterr().out.splitlines()
+        verdicts, deadline = printed[:-2], printed[-2]
+        assert verdicts == expected[: len(verdicts)]
+        assert deadline == (
+            f'FAIL audit deadline of {minutes} min exceeded during phase "{phase}" after '
+            f"{len(verdicts)} checks; remaining checks not run"
+        )
+        assert len(requested) == before_forwarders
+        assert opened == visited
+
+
+class FakePage:
+    """A page of `FakeBrowser`: `goto` takes a minute of the clock and commits the start
+    address, `wait_for_url` commits the arrival, so every visit arrives."""
+
+    def __init__(self, clock: list[float]) -> None:
+        self.clock = clock
+        self.url = ""
+        self.closed = False
+
+    def goto(self, url: str, *, wait_until: str, timeout: float) -> None:
+        assert wait_until == "commit"
+        assert timeout > 0
+        self.clock[0] += 60.0
+        self.url = url
+
+    def wait_for_url(self, url: str, *, wait_until: str, timeout: float) -> None:
+        assert wait_until == "commit"
+        assert timeout > 0
+        self.url = url
+
+    def close(self) -> None:
+        self.closed = True
+
+
+class FakeBrowser:
+    """The pages it opened, each on the shared clock, and whether it was closed."""
+
+    def __init__(self, clock: list[float]) -> None:
+        self.clock = clock
+        self.pages: list[FakePage] = []
+        self.closed = False
+
+    def new_page(self) -> FakePage:
+        assert not self.closed
+        page = FakePage(self.clock)
+        self.pages.append(page)
+        return page
+
+    def close(self) -> None:
+        self.closed = True
+
+
+def test_a_deadline_between_forwarder_visits_stops_before_the_next_and_keeps_the_arrivals() -> (
+    None
+):
+    """Each visit waits up to twice the timeout, so the boundary before the phase alone
+    does not bound it (#507 A1): `before_visit` is read before every visit, what it
+    raises leaves the arrivals already reached in the caller's list, and no page is
+    opened past it. With nothing to read, every moved page is visited and arrives."""
+    site = "https://example.org/"
+    clock = [0.0]
+    browser = FakeBrowser(clock)
+    arrivals = check_published_site.forwarder_arrivals(cast(Browser, browser), site, timeout=1)
+    assert [passed for passed, _ in arrivals] == [True] * len(render_overview.MOVED_PAGES)
+    assert len(browser.pages) == len(render_overview.MOVED_PAGES) > 3
+    assert all(page.closed for page in browser.pages)
+
+    stopped = FakeBrowser(clock)
+    results: list[tuple[bool, str]] = []
+
+    def before_visit() -> None:
+        if len(stopped.pages) == 3:
+            raise check_published_site._DeadlineError("browser forwarders", 180.0)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+    with pytest.raises(check_published_site._DeadlineError):  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        check_published_site.forwarder_arrivals(
+            cast(Browser, stopped), site, timeout=1, before_visit=before_visit, results=results
+        )
+    assert results == arrivals[:3]
+    assert len(stopped.pages) == 3
+    assert all(page.closed for page in stopped.pages)
+
+
+def test_a_deadline_during_the_forwarder_visits_prints_the_arrivals_and_closes_the_browser(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Through `main`, on a clock that moves a minute a request and a minute a visit: a
+    deadline that passes while the forwarders are visited stops the audit before the
+    next visit, prints every arrival reached and then the line naming the phase, closes
+    the browser, and starts no workbench. `_DeadlineError` is not a browser error, so
+    `forwarders_followed` lets it through rather than reporting a failed visit."""
+    clock = [0.0]
+    launched: list[FakeBrowser] = []
+    opened: list[str] = []
+
+    class Chromium:
+        def launch(self, **_options: object) -> FakeBrowser:
+            launched.append(FakeBrowser(clock))
+            return launched[-1]
+
+    @contextmanager
+    def driver() -> Iterator[SimpleNamespace]:
+        yield SimpleNamespace(chromium=Chromium())
+
+    def workbench_startup(*_args: object, **_kwargs: object) -> tuple[bool, str]:
+        opened.append("workbench")
+        return True, "browser started"
+
+    monkeypatch.setattr(check_published_site, "sync_playwright", driver)
+    monkeypatch.setattr(check_published_site, "workbench_startup", workbench_startup)
+    monkeypatch.setattr(check_published_site.time, "monotonic", lambda: clock[0])
+    website = fake_site(site_pages())
+    assert failures(monkeypatch, website, browser=True) == []
+
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        clock[0] += 60.0
+        return website(url, head=head, timeout=timeout, on_retry=on_retry)
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    launched.clear()
+    opened.clear()
+    events: list[str] = []
+    expected = verdict_lines(
+        check_published_site.check(
+            "https://example.org", COMMIT, timeout=1, browser=True, progress=events.append
+        )
+    )[:-1]
+    # With no deadline every moved page is visited, in a browser that is then closed.
+    (whole,) = launched
+    assert len(whole.pages) == len(render_overview.MOVED_PAGES) > 3
+    assert all(page.closed for page in whole.pages)
+    assert whole.closed
+    assert opened == ["workbench"]
+    started = re.compile(r"audit \+(\d+)\.00s browser forwarders: start; .*")
+    (before_forwarders,) = [
+        int(found[1]) // 60 for line in events if (found := started.fullmatch(line))
+    ]
+
+    launched.clear()
+    opened.clear()
+    capsys.readouterr()
+    minutes = before_forwarders + 3
+    assert check_published_site.main([*LIVE_ARGS, "--deadline-minutes", str(minutes)]) == 1
+    printed = capsys.readouterr().out.splitlines()
+    verdicts, deadline = printed[:-2], printed[-2]
+    assert verdicts == expected[: len(verdicts)]
+    arrived = "ok   visiting https://example.org/"
+    assert [line.startswith(arrived) for line in verdicts[-4:]] == [False, True, True, True]
+    assert deadline == (
+        f'FAIL audit deadline of {minutes} min exceeded during phase "browser forwarders" '
+        f"after {len(verdicts)} checks; remaining checks not run"
+    )
+    (stopped,) = launched
+    assert len(stopped.pages) == 3
+    assert all(page.closed for page in stopped.pages)
+    assert stopped.closed
+    assert opened == []
+
+
+def test_an_interrupted_audit_prints_the_verdicts_reached(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A reader who stops the audit still sees what it had checked, and the run fails."""
+
+    def check(
+        _site: str, _commit: str, *, results: list[tuple[bool, str]], **_kwargs: object
+    ) -> list[tuple[bool, str]]:
+        results.append((True, "page https://example.org/: HTTP 200, 5 bytes"))
+        results.append((False, "link HTTP 503: https://example.org/missing"))
+        raise KeyboardInterrupt
+
+    monkeypatch.setattr(check_published_site, "check", check)
+    assert check_published_site.main(["--commit", COMMIT, "--no-browser"]) == 1
+    assert capsys.readouterr().out == (
+        "ok   page https://example.org/: HTTP 200, 5 bytes\n"
+        "FAIL link HTTP 503: https://example.org/missing\n"
+        "FAIL audit interrupted after 2 checks; remaining checks not run\n"
+        "1 of 3 checks passed\n"
+    )
+
+
+def test_a_deadline_bounds_the_live_audit_only(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], tmp_path: Path
+) -> None:
+    monkeypatch.setattr(check_published_site, "check", lambda *_args, **_kwargs: [])
+    for arguments in (
+        ["--local", str(tmp_path), "--deadline-minutes", "5"],
+        ["--commit", COMMIT, "--deadline-minutes", "0"],
+        ["--commit", COMMIT, "--deadline-minutes", "-1"],
+    ):
+        with pytest.raises(SystemExit, match="2"):
+            check_published_site.main(arguments)
+        assert "--deadline-minutes" in capsys.readouterr().err
 
 
 @pytest.mark.parametrize(
@@ -1076,8 +1497,14 @@ def test_check_requires_each_lazy_rows_served_record_page(
         pages[address] += f'<nav><a href="{RECORD}">Another link</a></nav>'.encode()
     base = fake_site(pages, lost=(address,) if mutation == "missing" else ())
 
-    def served(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
-        status, body = base(url, head=head, timeout=timeout)
+    def served(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        status, body = base(url, head=head, timeout=timeout, on_retry=on_retry)
         return (
             (503, body) if mutation == "non-200" and url.endswith(address) else (status, body)
         )
@@ -1553,6 +1980,95 @@ def test_fetch_retries_a_transient_answer_before_reporting_it(
     assert pauses == [], "a refusal is an answer, not a deploy still settling"
 
 
+#: Every way the transport fails short of an answer: `urlopen` wraps a refused
+#: connection in `URLError`, and raises the rest bare, from the connection or the read.
+TRANSPORT_FAILURES = [
+    pytest.param(urllib.error.URLError("connection refused"), id="refused"),
+    pytest.param(TimeoutError("timed out"), id="stalled"),
+    pytest.param(ConnectionResetError("reset by peer"), id="reset"),
+    pytest.param(http.client.IncompleteRead(b"<!doctype"), id="cut-short"),
+    pytest.param(http.client.RemoteDisconnected("closed without response"), id="dropped"),
+]
+
+
+@pytest.mark.parametrize("failure", TRANSPORT_FAILURES)
+@pytest.mark.parametrize("where", ["open", "read"])
+def test_fetch_retries_a_transport_failure_as_an_unreachable_answer(
+    monkeypatch: pytest.MonkeyPatch, failure: Exception, where: str
+) -> None:
+    """A response that stalls or breaks is unreachable (0), which is transient, so it is
+    asked again and reported through the retry callback; it used to escape `fetch_once`
+    as the one exception the audit did not catch, and end it unretried (#496 F2)."""
+
+    class Broken:
+        status = 200
+
+        def __enter__(self) -> Self:
+            return self
+
+        def __exit__(self, *_exc: object) -> None:
+            return None
+
+        def read(self) -> bytes:
+            raise failure
+
+    attempts: list[tuple[str, float]] = []
+
+    def urlopen(request: urllib.request.Request, *, timeout: float) -> Broken:
+        attempts.append((request.get_method(), timeout))
+        if where == "open":
+            raise failure
+        return Broken()
+
+    monkeypatch.setattr(check_published_site.urllib.request, "urlopen", urlopen)
+    assert check_published_site.fetch_once("https://example.org/", timeout=1) == (0, b"")
+    assert attempts == [("GET", 1)]
+    pauses: list[float] = []
+    retried: list[tuple[int, float]] = []
+    answer = check_published_site.fetch(
+        "https://example.org/",
+        timeout=1,
+        delays=(1.0, 2.0),
+        sleep=pauses.append,
+        on_retry=lambda status, delay: retried.append((status, delay)),
+    )
+    assert answer == (0, b"")
+    assert pauses == [1.0, 2.0]
+    assert retried == [(0, 1.0), (0, 2.0)]
+    assert len(attempts) == 4
+
+
+def test_fetch_once_reports_a_server_that_stalls_its_answer_as_unreachable() -> None:
+    """The real transport, against a server on this machine that accepts the connection
+    and sends nothing until the test lets it: the request ends at its timeout with the
+    unreachable answer, not an exception, and well inside a second."""
+    released = threading.Event()
+
+    class Stalling(BaseHTTPRequestHandler):
+        def do_GET(self) -> None:
+            # Answer nothing: by the time this returns the client has gone.
+            released.wait(5)
+
+        def log_message(self, format: str, *args: object) -> None:  # noqa: A002
+            pass
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Stalling)
+    server.daemon_threads = True
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    try:
+        started = time.monotonic()
+        answer = check_published_site.fetch_once(
+            f"http://127.0.0.1:{server.server_port}/", timeout=0.1
+        )
+        elapsed = time.monotonic() - started
+    finally:
+        released.set()
+        server.shutdown()
+        server.server_close()
+    assert answer == (0, b"")
+    assert elapsed < 1.0
+
+
 def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -1673,9 +2189,12 @@ def test_check_visits_the_forwarders_only_with_a_browser(
     )
     visited: list[str] = []
 
-    def followed(site: str, *, timeout: float) -> list[tuple[bool, str]]:
+    def followed(
+        site: str, *, timeout: float, results: list[tuple[bool, str]], **_kwargs: object
+    ) -> list[tuple[bool, str]]:
         visited.append(site)
-        return [(False, f"visiting {site}explainer.html arrives nowhere in {timeout}s")]
+        results.append((False, f"visiting {site}explainer.html arrives nowhere in {timeout}s"))
+        return results
 
     monkeypatch.setattr(check_published_site, "forwarders_followed", followed)
     assert failures(monkeypatch, fake_site(site_pages())) == []

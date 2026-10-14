@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 519
+count: 521
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -423,7 +423,7 @@ defects:
     affects speed rather than the answer. Measured over nine cells at n = 5, 10 and 11:
     the free pass never improved on the class-converged point.
   regression: 'the free pass runs by default and its verdict is carried in the result reason'
-  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+  recorded_in: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
   bead: think-0zs9
 - id: D-021
   title: Floating LP refinement has a noise floor, and eight rounds sit on it
@@ -572,7 +572,7 @@ defects:
     tools/check_beads.py, run from test.sh: no open bead may sit under a closed parent,
     and no two open beads under one parent may share a title. Skipped, loudly, where
     tbd is unavailable.
-  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+  recorded_in: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 - id: D-026
   title: The plan spec's checklist contradicted the state the spec was cited as authority for
   date: '2026-08-23'
@@ -600,7 +600,7 @@ defects:
     No check is left behind: reconciling a checkbox against bead state needs the bead
     database, which lives on `tbd-sync` and not in the tree.
   regression: none
-  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+  recorded_in: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 - id: D-027
   title: A generated view was left reflowable by the Markdown auto-formatter
   date: '2026-08-23'
@@ -2150,7 +2150,7 @@ defects:
   regression: none
   recurrence_of: D-034
   bead: think-dqhd
-  recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+  recorded_in: docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md
 - id: D-077
   title: The PR 16 handoff presented stale state and priorities as a current dependency queue
   date: '2026-08-23'
@@ -2173,7 +2173,7 @@ defects:
   regression: none
   recurrence_of: D-028
   bead: think-sk4a
-  recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+  recorded_in: docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md
 - id: D-078
   title: The n=5 rank correction still named equality independence as the sufficient condition
   date: '2026-08-23'
@@ -2221,7 +2221,7 @@ defects:
   regression: none
   recurrence_of: D-063
   bead: think-djru
-  recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+  recorded_in: docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md
 - id: D-080
   title: The original neighbor-transfer criterion was satisfied by the cold-start grid
   date: '2026-08-24'
@@ -17478,3 +17478,82 @@ defects:
     reading, a bead whose stated blocker merged, a queued result with no bead of its own,
     and, on a real repository, a commit a pin contains that no packet retains.
   recorded_in: docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md
+- id: D-520
+  title: The open-gap ranking filtered on the reported status, so a case reported closed but open in the verified lane left the table
+  date: '2026-10-12'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: inspection
+  latent_for: >-
+    Thirteen days, 2026-09-29 to 2026-10-12. The filter dates from the tool's first commit
+    (94d37d7fb, 2026-08-31) and first dropped a verified-open case on 2026-09-29, when
+    T-060's report made n = 11 reported proved a day before its audit proved it; from
+    2026-10-03 it kept n = 96 and T-081's other k^2 - 4 counts out of the ranking until
+    the #560 calibration found it.
+  severity: medium
+  status: fixed
+  bead: think-k1aa
+  what: >-
+    devtools.gap_ranking says it ranks "every open case by its verified gap", the best
+    known packing minus the verified lower bound, but open_cases() skipped every case
+    whose reported_status was not open. A report can close a case while its verified lane
+    stays open: T-081 made n = 96, 117, 140, 165, 192, 221, 252, 285 and 320 so on
+    2026-10-03, and T-153 made n = 17 so on 2026-10-12. With T-153 registered, the tool
+    ranked 237 cases where the verified lane holds 247, and frontier/README.md's
+    hand-written Smallest Open Gaps table, which says it is what the tool computes, had no
+    row for n = 96.
+  consequence: >-
+    The table that sequences proof-lane work (D-405, X-010) read an unreplayed report as
+    a closure. n = 96, fourth narrowest at n <= 100 (0.0300), was missing from it for
+    nine days, and T-153 would have removed n = 17, the narrowest gap (0.0151), from its
+    head while n = 17 stays open in the verified lane. Conservative, as D-405 was: no
+    record lane carried a false value, and the cost was sequencing.
+  fix: >-
+    e5759d96f filters on status, the verified lane's, so the tool ranks the 247
+    verified-open cases with n = 17 first and n = 96 fourth, and the README table gained
+    n = 96. The module docstring now states D-405's measurement as dated history rather
+    than naming a table head the record has since closed.
+  regression: >-
+    packing/tests/test_gap_ranking.py: test_a_case_reported_proved_but_open_in_the_verified_lane_is_ranked
+    holds the filter on synthetic records of the three shapes;
+    test_the_ranked_cases_are_exactly_the_verified_open_cases_of_the_record ties the
+    ranking to the cases with status open and to FRONTIER_COUNTS' formal-open count, and
+    requires a reported-closed, verified-open case to exist and be ranked; and
+    test_the_readme_table_is_the_tools_head_of_the_ranking compares the README's six rows
+    with the tool's first six at n <= 100, the check D-405's regression named as unbuilt.
+    All three fail with the old filter.
+  recorded_in: packing/tests/test_gap_ranking.py
+- id: D-521
+  title: Numerical witness receipts record tolerance-blurred values as the minimum clearance and pair gap
+  date: '2026-10-13'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    At least since 2026-08-28, the earliest history of sqpack/witness.py under its
+    present path; every numerical feasibility receipt carries it, the 92 known-best
+    receipts included.
+  severity: medium
+  status: outstanding
+  bead: think-jtot
+  what: >-
+    sqpack.witness.numerical_check records minimum_containment_clearance and
+    minimum_best_pair_gap from _margin_summary, which compares candidates with the
+    check's tolerance-aware sign, so a value replaces the running minimum only when it
+    is lower by more than the tolerance. The recorded figures are some value within the
+    tolerance (1e-8 or 1e-12) of the minimum, not the minimum.
+  consequence: >-
+    The receipts understate the violations they exist to report. At n = 10 the receipt
+    records 0 for both figures, while an exact reading of the printed pose finds four
+    overlaps of 6.858e-30; at n = 106 it records a containment clearance of -3.10e-16
+    where the exact reading gives -8.28e-16. A reader of a receipt sees a witness closer
+    to feasible than it is. check_passed is unaffected: it is decided under the same
+    tolerance, and says so.
+  fix: >-
+    None yet. think-jtot: take both minima with the plain sign at the working precision,
+    regenerate the 92 known-best receipts, and record beside each the outcome of the
+    full-precision exact reading that think-8ucp runs.
+  regression: none
+  recorded_in: docs/project/reviews/review-2026-10-13-verification-gaps.md
