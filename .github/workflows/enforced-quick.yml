@@ -1,0 +1,199 @@
+name: Enforced quick checkpoint
+
+# A real push or dispatch enforces the existing 12s CALL ceiling. This is only the
+# four canonical quick suites and ten affected schema controls; normal PR frontend
+# and the remaining deferred evidence stay separate.
+"on":
+  workflow_dispatch:
+    inputs:
+      baseline_ref:
+        description: "Scope baseline for changed test modules (blank: origin/main)"
+        required: false
+        default: ""
+        type: string
+  push:
+    paths:
+      - .github/workflows/enforced-quick.yml
+      - packing/tests/test_enforced_quick_workflow.py
+
+permissions:
+  contents: read
+
+concurrency:
+  group: enforced-quick-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}-enforced-quick-artifacts
+  SQPACK_REQUIRE_CHROMIUM: "1"
+  PYTHONDONTWRITEBYTECODE: "1"
+
+jobs:
+  suite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [a, b, c, d]
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          submodules: true
+          persist-credentials: false
+      - name: Prepare scratch and source identity
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          mkdir -p "$RUNNER_TEMP/enforced-quick/tmp" "$PACKING_VALIDATION_ARTIFACT_DIR"
+          printf 'TMPDIR=%s/enforced-quick/tmp\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          printf 'UV_CACHE_DIR=%s/enforced-quick/uv-cache\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          printf 'CARGO_TARGET_DIR=%s/enforced-quick/cargo-target\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          printf '%s\n' "$GITHUB_SHA" > "$PACKING_VALIDATION_ARTIFACT_DIR/source-sha.txt"
+          git rev-parse 'HEAD^{tree}' > "$PACKING_VALIDATION_ARTIFACT_DIR/tree-sha.txt"
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+      - name: Install Node 24
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install the pinned browser toolchain
+        working-directory: .
+        run: npm ci --ignore-scripts
+      - name: Cache the pinned Chromium shell
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
+      - name: Install the pinned Chromium shell
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m playwright install --with-deps --only-shell chromium
+      - name: Run the canonical enforced quick shard
+        id: quick
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --suite-${{ matrix.suite }} --jobs 1 --inner-jobs 1
+      - name: Require actual changed-case execution
+        env:
+          SCOPE_BASELINE: ${{ github.event_name == 'push' && github.event.before || inputs.baseline_ref }}
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m devtools.check_enforced_quick
+          --artifacts "$PACKING_VALIDATION_ARTIFACT_DIR" --source-sha "$GITHUB_SHA"
+          --suite "${{ matrix.suite }}" --baseline-ref "$SCOPE_BASELINE"
+      - name: Preserve source identity, timings, JUnit and omissions
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: enforced-quick-${{ github.sha }}-${{ matrix.suite }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: error
+          retention-days: 30
+
+  negative-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          submodules: true
+          persist-credentials: false
+      - name: Prepare private mutation snapshots and source identity
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          mkdir -p "$RUNNER_TEMP/enforced-quick/tmp" "$PACKING_VALIDATION_ARTIFACT_DIR"
+          printf 'TMPDIR=%s/enforced-quick/tmp\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          printf 'UV_CACHE_DIR=%s/enforced-quick/uv-cache\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          printf 'CARGO_TARGET_DIR=%s/enforced-quick/cargo-target\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          printf '%s\n' "$GITHUB_SHA" > "$PACKING_VALIDATION_ARTIFACT_DIR/source-sha.txt"
+          git rev-parse 'HEAD^{tree}' > "$PACKING_VALIDATION_ARTIFACT_DIR/tree-sha.txt"
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+      - name: Run the exact affected schema mutation inventory
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m devtools.check_enforced_quick --negative-controls
+          --artifacts "$PACKING_VALIDATION_ARTIFACT_DIR" --source-sha "$GITHUB_SHA"
+      - name: Preserve selected controls, individual verdicts and source identity
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: enforced-quick-${{ github.sha }}-negative-controls-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: error
+          retention-days: 30
+
+  enforced-quick-required:
+    if: always()
+    needs: [suite, negative-controls]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Require every matrix result
+        env:
+          SUITE_RESULT: ${{ needs.suite.result }}
+          CONTROLS_RESULT: ${{ needs.negative-controls.result }}
+        run: |
+          test "$SUITE_RESULT" = "success"
+          test "$CONTROLS_RESULT" = "success"
+      - name: Check out the exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          submodules: true
+          persist-credentials: false
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+      - name: Synchronize the locked development environment
+        working-directory: packing
+        run: uv sync --frozen --all-extras --group dev
+      - name: Read the four shard and mutation receipts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          pattern: enforced-quick-${{ github.sha }}-*-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/enforced-quick-receipts
+      - name: Require the complete successful source-bound receipt set
+        working-directory: packing
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m devtools.check_enforced_quick --aggregate
+          --artifacts "$RUNNER_TEMP/enforced-quick-receipts" --source-sha "$GITHUB_SHA"

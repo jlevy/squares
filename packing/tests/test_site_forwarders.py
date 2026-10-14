@@ -165,7 +165,16 @@ def _arrivals(root: str) -> dict[str, str]:
     }
 
 
-def test_each_old_address_arrives_with_its_query_and_fragment(browser: Any, site: Path) -> None:
+@pytest.mark.parametrize("old", [old for old, _new in render_overview.MOVED_PAGES])
+@pytest.mark.parametrize(
+    "suffix",
+    ["", "?view=embed#retained-forwarder-fragment"],
+    ids=["plain", "query-fragment"],
+)
+def test_each_old_address_arrives_with_its_query_and_fragment(
+    browser: Any, site: Path, old: str, suffix: str
+) -> None:
+    """Each file arrival independently retains its address, query and fragment checks."""
     moved = dict(render_overview.MOVED_PAGES)
     assert moved["all-results.html"] == "results.html"
     assert moved["status.html"] == "atlas.html"
@@ -175,29 +184,17 @@ def test_each_old_address_arrives_with_its_query_and_fragment(browser: Any, site
     root = site.as_uri()
     arrivals = _arrivals(root)
     assert set(arrivals) == set(moved)
-    for old, target in arrivals.items():
-        assert (
-            _arrives(
-                browser,
-                f"{root}/{old}",
-                target,
-                scripts=True,
-                atlas=old in {"cases.html", "cases/index.html"},
-            )
-            == target
-        ), old
-        kept = f"{target}?view=embed#retained-forwarder-fragment"
-        came = f"{root}/{old}?view=embed#retained-forwarder-fragment"
-        assert (
-            _arrives(
-                browser,
-                came,
-                kept,
-                scripts=True,
-                atlas=old in {"cases.html", "cases/index.html"},
-            )
-            == kept
-        ), old
+    target = arrivals[old] + suffix
+    assert (
+        _arrives(
+            browser,
+            f"{root}/{old}{suffix}",
+            target,
+            scripts=True,
+            atlas=old in {"cases.html", "cases/index.html"},
+        )
+        == target
+    ), old
 
 
 @pytest.mark.parametrize(
@@ -395,27 +392,30 @@ def test_deployed_forwarder_arrival_does_not_wait_for_destination_assets(
         context.close()
 
 
+@pytest.mark.parametrize("old", [old for old, _new in render_overview.MOVED_PAGES])
 @pytest.mark.parametrize("scripts", [True, False])
 def test_published_forwarders_reach_canonical_content(
-    served: str, browser: Any, *, scripts: bool
+    served: str, browser: Any, old: str, *, scripts: bool
 ) -> None:
-    """HTTP uses canonical script targets and the physical no-script fallback.
+    """Each HTTP arrival checks its script target or physical no-script fallback.
 
     Both retired case directories reach Atlas with the same canonical identity.
     """
-    for old, target in _arrivals(served.rstrip("/")).items():
-        suffix = "?view=embed#retained-forwarder-fragment"
-        expected = target + suffix if scripts else target
-        assert (
-            _arrives(
-                browser,
-                served + old + suffix,
-                expected,
-                scripts=scripts,
-                atlas=old in {"cases.html", "cases/index.html"},
-            )
-            == expected
-        ), old
+    arrivals = _arrivals(served.rstrip("/"))
+    assert set(arrivals) == set(dict(render_overview.MOVED_PAGES))
+    target = arrivals[old]
+    suffix = "?view=embed#retained-forwarder-fragment"
+    expected = target + suffix if scripts else target
+    assert (
+        _arrives(
+            browser,
+            served + old + suffix,
+            expected,
+            scripts=scripts,
+            atlas=old in {"cases.html", "cases/index.html"},
+        )
+        == expected
+    ), old
 
 
 @pytest.mark.parametrize("transport", ["site", "served"])

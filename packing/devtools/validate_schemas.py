@@ -251,6 +251,35 @@ def cross_checks() -> list[str]:
     return errs
 
 
+def defect_citation_paths(root: pathlib.Path) -> list[pathlib.Path]:
+    """Enumerate citation sources in the existing YAML-before-Markdown order.
+
+    Excluded directories contain no admitted source, so prune them before descent rather
+    than traversing them twice and discarding their descendants afterward.
+    """
+    if "resources" in root.parts or ".venv" in root.parts:
+        return []
+    yaml_paths: list[pathlib.Path] = []
+    markdown_paths: list[pathlib.Path] = []
+    for parent, directories, filenames in root.walk():
+        directories[:] = [
+            name
+            for name in directories
+            if not name.startswith(".") and name not in {"resources", "node_modules"}
+        ]
+        # rglob also yields matching directory names; retain that behavior rather than
+        # silently accepting a directory where an eligible source file should be.
+        for name in filenames + directories:
+            if name.startswith("."):
+                continue
+            path = parent / name
+            if path.suffix == ".yaml":
+                yaml_paths.append(path)
+            elif path.suffix == ".md":
+                markdown_paths.append(path)
+    return sorted(yaml_paths) + sorted(markdown_paths)
+
+
 def defect_checks() -> list[str]:
     """Whole-set invariants for the defect log that a JSON Schema cannot express."""
     errs = []
@@ -303,14 +332,13 @@ def defect_checks() -> list[str]:
         "controls.yaml",
         "review-2026-09-04-pr78-s11-adversarial.md",
     }
-    for path in sorted(root.rglob("*.yaml")) + sorted(root.rglob("*.md")):
-        if path.name in skip or "resources" in path.parts or ".venv" in path.parts:
+    for path in defect_citation_paths(root):
+        if path.name in skip:
             continue
-        # Dot-directories hold vendored agent skills and tooling caches, not our prose.
-        parts = path.relative_to(root).parts
-        if any(part.startswith(".") or part == "node_modules" for part in parts):
+        text = path.read_text(encoding="utf-8")
+        if "D-" not in text:
             continue
-        cited = set(re.findall(r"\bD-[0-9]{3}\b", path.read_text(encoding="utf-8")))
+        cited = set(re.findall(r"\bD-[0-9]{3}\b", text))
         errs.extend(
             f"{path.relative_to(root)}: cites {missing}, not in defects.yaml"
             for missing in sorted(cited - known)

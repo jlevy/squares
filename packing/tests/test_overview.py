@@ -6710,15 +6710,22 @@ def test_no_page_links_an_address_a_paper_used_to_have(
 def test_the_site_writes_its_forwarders_and_checks_them(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """`render_overview` writes the forwarders with the pages, each in the directory its
-    old address was in, and `--check` holds them to a fresh render as it holds a page."""
+    """`render_overview` writes each forwarder at its old address, and `--check`
+    holds every on-disk page to the rendered output, including corrupted forwarders."""
     page = render_overview.Page("index.html", "<p>page</p>")
     monkeypatch.setattr(render_overview, "render_all", lambda: [page])
     monkeypatch.setattr(render_overview, "result_fragments", list)
     monkeypatch.setattr(render_overview, "case_records", list)
     moved = [old for old, _ in render_overview.MOVED_PAGES]
-    assert [file.name for file in render_overview.render_site()] == ["index.html", *moved]
+    rendered = render_overview.render_site()
+    assert [file.name for file in rendered] == ["index.html", *moved]
     assert {"explainer.html", "n11-optimality/index.html"} < set(moved)
+    # The real render above validates the complete case-routing inventory during this
+    # test call. Immutable forwarder bytes are the expected output for every CLI
+    # filesystem check below; none of its corruptions changes the source inventory.
+    # Each invocation still rereads all pages, crawl files, support files and assets.
+    forwarders = tuple(rendered[1:])
+    monkeypatch.setattr(render_overview, "forwarder_pages", lambda: list(forwarders))
     assert render_overview.main(["--output", str(tmp_path)]) == 0
     crawl, crawl_assets = site_urls.crawl_files()
     assert set(crawl) == {
