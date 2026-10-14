@@ -5,15 +5,15 @@ title: "PR #592 A6: T-154's claim reads as self-contradictory"
 kind: bug
 status: in_progress
 priority: 3
-version: 2
-delegate: addresser-592-review-a
+version: 3
+delegate: codex@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m4w0w8x81jgrxwd2dshv8f0v
 hold: null
 hold_until: null
 created_at: 2026-10-14T02:35:08.536Z
-updated_at: 2026-10-14T02:35:14.162Z
+updated_at: 2026-10-14T04:45:31.555Z
 started_at: 2026-10-14T02:35:14.162Z
 ---
 Nit. results.yaml:17471-17474. Fix: 'proved in Lean 4 by Oscar Fitzharding, by a route of its own rather than by formalizing T-153's argument.' Review A (senior, round 1, head 7a1aadceb), PR #592: https://github.com/jlevy/squares/pull/592#issuecomment-6159185393

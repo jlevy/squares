@@ -5,8 +5,8 @@ title: "PR #592 (merge): formalization kind, n = 17 correctness reviews, documen
 kind: task
 status: in_progress
 priority: 1
-version: 12
-delegate: coordinator-stoic-clarke
+version: 13
+delegate: codex@spud10.local
 labels: []
 dependencies: []
 child_order_hints:
@@ -21,7 +21,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T01:36:53.160Z
-updated_at: 2026-10-14T02:35:09.574Z
+updated_at: 2026-10-14T04:45:31.493Z
 started_at: 2026-10-14T01:36:54.191Z
 ---
 
