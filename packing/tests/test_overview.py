@@ -5801,12 +5801,15 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: 146 results, and its ceiling kept about a hundred kilobytes above that. With the seven
 #: days' arrivals and the weekly rollup above its table it measured 924,981 bytes at 160
 #: results on 14 October, about six results under that ceiling, while the 14 October
-#: intake registers about thirty (#514's review A, finding A2). The ceiling now holds
-#: room for `RESULTS_ROOM` more (`test_the_results_page_has_room_for_forty_more_results`).
+#: intake registers about thirty (#514's review A, finding A2). The ceiling now holds the
+#: page through `RESULTS_ROOM_THROUGH` results
+#: (`test_the_results_page_has_room_through_two_hundred_results`).
 PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_150_000}
-#: How many more results the results page keeps room for under its ceiling, each at what
-#: the table's 90th-percentile row costs now and an average entry of the seven days.
-RESULTS_ROOM = 40
+#: How many results the results page's ceiling was set to hold, each result past the
+#: register's count at what the table's 90th-percentile row costs now and an average
+#: entry of the seven days: 160 on 14 October and 40 more. A fixed count, so the room
+#: does not slide up with every registration (#514's review B, finding B1).
+RESULTS_ROOM_THROUGH = 200
 
 
 def test_no_page_carries_a_result_overview(
@@ -5841,11 +5844,13 @@ def test_no_page_carries_a_result_overview(
     )
 
 
-def test_the_results_page_has_room_for_forty_more_results(results: str) -> None:
-    """The results page stays under its ceiling with `RESULTS_ROOM` more results, each
-    costing what the table's 90th-percentile row costs now and an average entry of the
-    seven days, so an import lane meets the ceiling as a measured choice and not as a red
-    build (#514's review A, finding A2)."""
+def test_the_results_page_has_room_through_two_hundred_results(results: str) -> None:
+    """The results page stays under its ceiling through `RESULTS_ROOM_THROUGH` results,
+    each result past the register's count costing what the table's 90th-percentile row
+    costs now and an average entry of the seven days, so an import lane meets the ceiling
+    as a measured choice and not as a red build (#514's review A, finding A2). The room is
+    to a fixed count: it shrinks as results are registered, and the test fails only when
+    the page could not reach that count at today's cost (review B, finding B1)."""
     table = results[results.index("site-table site-results") : results.index("</table>")]
     found = re.findall(r'<tr id="t-\d+".*?</tr>', table, re.DOTALL)
     rows = sorted(len(row.encode()) for row in found)
@@ -5855,10 +5860,11 @@ def test_the_results_page_has_room_for_forty_more_results(results: str) -> None:
     row = rows[int(len(rows) * 0.9)]
     entry = sum(len(item.encode()) for item in entries) // len(entries)
     size = len(results.encode("utf-8"))
-    projected = size + RESULTS_ROOM * (row + entry)
+    more = max(0, RESULTS_ROOM_THROUGH - len(found))
+    projected = size + more * (row + entry)
     print(
-        f"results.html: {size:,} bytes + {RESULTS_ROOM} x ({row:,} + {entry:,}) = "
-        f"{projected:,} / {PAGE_CEILINGS[render_overview.RESULTS_PAGE]:,}"
+        f"results.html: {size:,} bytes at {len(found)} results + {more} x ({row:,} + "
+        f"{entry:,}) = {projected:,} / {PAGE_CEILINGS[render_overview.RESULTS_PAGE]:,}"
     )
     assert projected < PAGE_CEILINGS[render_overview.RESULTS_PAGE]
     ceiling = site_urls.PAGE_BUDGET_EXCEPTIONS[render_overview.RESULTS_PAGE][0]
