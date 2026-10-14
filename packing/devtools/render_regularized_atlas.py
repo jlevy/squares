@@ -18,9 +18,11 @@ draws each such view to
 `atlas/known-best/regularized/rendering/n-NNN.svg` with `sqpack.render`, the renderer
 that draws `atlas/known-best/rendering/n-NNN.svg`, at the same settings. A square's
 shade is therefore the house rule (`sqpack.render.color`) applied to the regularized
-pose, and the homepage's atlas reduces a regularized drawing to a tile by the code that
-reduces a house drawing (`render_frontier_page.packing_svg`), so the House/Regularized
-toggle compares two drawings made one way.
+pose, and the site reduces a regularized drawing to a tile by the code that reduces a
+house drawing (`render_frontier_page.packing_svg`), so a count's default picture
+(`devtools.default_drawings`) and its house drawing, which the case page keeps as
+published, are two drawings made one way. The posters draw a regularized default from
+the same frame (`build_known_best_atlas.tile_frame`).
 
 The set is read from the index, never listed here: a view another run adds is drawn by
 the next `--update`, and `--check` fails until it is. A view is drawn only from the

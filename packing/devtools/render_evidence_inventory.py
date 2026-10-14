@@ -30,7 +30,7 @@ from collections import Counter
 from collections.abc import Sequence
 from pathlib import Path
 
-from devtools.verifier_registry import SHORT_LABELS, runs_code
+from devtools.verifier_registry import SHORT_LABELS, coverage_line, runs_code, sampled
 from sqpack.assurance import conditions, discharges, undischarged
 from sqpack.yamlio import safe_load
 
@@ -134,7 +134,8 @@ def render() -> str:
         "",
     ]
 
-    formal = [r for r in records if r.get("assurance") == "verified"]
+    samples = [r for r in records if sampled(r)]
+    formal = [r for r in records if r.get("assurance") == "verified" and not sampled(r)]
     own_formal = [r for r in formal if ours(r)]
     external = [r for r in records if r.get("origin") in EXTERNAL_ORIGINS]
     unreviewed = [
@@ -150,7 +151,8 @@ def render() -> str:
         "",
         (
             f"- **{len(records)}** evidence records. **{len(formal)}** are formal; "
-            f"**{len(own_formal)}** of those were established here."
+            f"**{len(own_formal)}** of those were established here. "
+            f"**{len(samples)}** are samples, counted separately."
         ),
         (
             f"- **{len(external)}** rest on an argument made elsewhere, of which "
@@ -194,9 +196,9 @@ def render() -> str:
         "",
         (
             "| evidence | cases | claim | assurance | method decides "
-            "| whose work | read here | novelty | code | programs |"
+            "| whose work | read here | novelty | code | coverage | programs |"
         ),
-        "| --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
 
     for record in records:
@@ -211,7 +213,8 @@ def render() -> str:
         lines.append(
             f"| `{record['id']}` | {load.get(record['id'], 0)} "
             f"| {claim_text(record, by_id)} | {record.get('assurance', '-')} "
-            f"| {decides} | {whose} | {review} | {novelty} | {code} | {programs} |"
+            f"| {decides} | {whose} | {review} | {novelty} | {code} "
+            f"| {coverage_line(record)} | {programs} |"
         )
 
     lines += ["", "## What the register rests on", ""]

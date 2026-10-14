@@ -22,7 +22,7 @@ import pytest
 
 from devtools import check_standing
 from devtools import render_recent_results as view
-from devtools.check_results import BOUND_KINDS
+from devtools.check_results import BOUND_KINDS, SECOND_PROOF_KINDS
 from devtools.check_standing import BEATEN, EQUAL, EXCEEDS, LOWER, UPPER, Stated
 
 EXACT = Fraction(0)
@@ -278,18 +278,20 @@ def test_a_standing_entry_whose_every_bound_is_beaten_is_refused(records: view.R
     )
 
 
-def test_a_simplification_of_a_reported_value_is_a_reported_second_certificate(
-    records: view.Records,
+@pytest.mark.parametrize("kind", sorted(SECOND_PROOF_KINDS))
+def test_a_second_proof_of_a_reported_value_is_a_reported_second_certificate(
+    records: view.Records, kind: str
 ) -> None:
-    """T-154, Fitzharding's Lean proof of s(17) = L, is a simplification at C1 of the value
-    T-153 holds in n = 17's reported lane, and holds no bound itself. It restates the
-    reported value, which the verified lane does not beat, so it is a reported second
-    certificate, held to the reported lane, and not superseded. Given a bound's kind, the
-    same words tie the reported lane under T-153's citation and derive superseded, which
-    the check refuses: a tie is cited by the case record or recorded as a
-    simplification."""
-    record = records.results["T-154"]
-    assert record["kind"] == "simplification"
+    """T-154, Fitzharding's Lean proof of s(17) = L, is a formalization at C1 of the value
+    T-153 holds in n = 17's reported lane, and holds no bound itself; it was a
+    simplification until the owner's decision of 13 October 2026 (think-8e0p), and both
+    kinds of second proof read the same here. It restates the reported value, which the
+    verified lane does not beat, so it is a reported second certificate, held to the
+    reported lane, and not superseded. Given a bound's kind, the same words tie the
+    reported lane under T-153's citation and derive superseded, which the check refuses: a
+    tie is cited by the case record or recorded as a second proof."""
+    assert records.results["T-154"]["kind"] == "formalization"
+    record = _entry(records, "T-154", kind=kind)
     assert record["confirmation"] in check_standing.UNREPLAYED
     assert check_standing.restates(record, records)
     reported = view.SECOND_CERTIFICATE_REPORTED
@@ -306,17 +308,26 @@ def test_a_simplification_of_a_reported_value_is_a_reported_second_certificate(
     assert "no worse than the reported one" in refused
 
 
-def test_a_simplification_keeps_a_standing_through_its_later_rungs(
-    records: view.Records,
+@pytest.mark.parametrize("kind", sorted(SECOND_PROOF_KINDS))
+def test_a_second_proof_keeps_a_standing_through_its_later_rungs(
+    records: view.Records, kind: str
 ) -> None:
-    """A simplification's claim states the relations of the result it proves again, so
-    those relations stand in for a bound kind's directions. Replayed (C2 or C3) before the
-    case records adopt it, T-154's `s(17) = …` states a lower bound strictly above n = 17's
-    verified one: it is pending adoption, not superseded, and the check agrees. Adopted,
-    with n = 17's verified lower bound citing its evidence, it is the current best. A
-    simplification that states only what its case records hold still has nothing to
-    improve on (`test_an_entry_improves_only_in_the_directions_its_kind_bounds`)."""
-    record = records.results["T-154"]
+    """The claim of a simplification or a formalization states the relations of the
+    result it proves again, so those relations stand in for a bound kind's directions.
+    Replayed (C2 or C3) before the case records adopt it, T-154's `s(17) = …` states a
+    lower bound strictly above n = 17's verified one: it is pending adoption, not
+    superseded, and the check agrees. Adopted, with n = 17's verified lower bound citing
+    its evidence, it is the current best, and a second proof moves no bound by itself, so
+    the check refuses it until its kind is revisited (review A4 on #592); so too where
+    the reported lane alone cites it. The owner decides the kind it then takes, and once
+    the register records one outside the second proofs, the check is satisfied. A second
+    proof that states only what its case records hold still has nothing to improve on
+    (`test_an_entry_improves_only_in_the_directions_its_kind_bounds`)."""
+    record = _entry(records, "T-154", kind=kind)
+    assert check_standing.directions(record, check_standing.findings(record, records)) == {
+        LOWER,
+        UPPER,
+    }
     for rung in ("C2", "C3"):
         replayed = {**record, "confirmation": rung}
         assert not check_standing.restates(replayed, records)
@@ -326,6 +337,7 @@ def test_a_simplification_keeps_a_standing_through_its_later_rungs(
         assert check_standing.problems(replayed, view.PENDING_ADOPTION, records) == []
         line = check_standing.summary(replayed, view.PENDING_ADOPTION, records)
         assert "better than the case record at n = 17" in line
+        assert not view.superseded(replayed, view.PENDING_ADOPTION)
     case = records.cases[17]
     lane = {**case["reported_lower_bound"], "evidence": ["E-n017-fitzharding-lean-report"]}
     adopted = dataclasses.replace(
@@ -334,7 +346,48 @@ def test_a_simplification_keeps_a_standing_through_its_later_rungs(
     )
     replayed = {**record, "confirmation": "C3"}
     assert view.standing(replayed, adopted) == view.HOLDS
-    assert check_standing.problems(replayed, view.HOLDS, adopted) == []
+    (revisit,) = check_standing.problems(replayed, view.HOLDS, adopted)
+    assert revisit.startswith(f"T-154 is a {kind}, yet a case bound rests on it (current best)")
+    assert "its kind is revisited, as the owner decides" in revisit
+    assert "packing/site-urls.yaml" in revisit
+    reported = dataclasses.replace(
+        records, cases={**records.cases, 17: {**case, "reported_lower_bound": lane}}
+    )
+    assert view.standing(record, reported) == view.HOLDS_REPORTED
+    (alone,) = check_standing.problems(record, view.HOLDS_REPORTED, reported)
+    assert "a case bound rests on it (current best, reported)" in alone
+    # Whichever kind the owner decides; a bound's kind stands for any outside the two.
+    decided = {**replayed, "kind": "optimality"}
+    assert view.standing(decided, adopted) == view.HOLDS
+    assert check_standing.problems(decided, view.HOLDS, adopted) == []
+
+
+@pytest.mark.parametrize("kind", sorted(SECOND_PROOF_KINDS))
+def test_a_second_proof_of_a_value_no_lane_holds_is_refused(
+    records: view.Records, kind: str
+) -> None:
+    """A simplification or a formalization proves again a value the record holds. Given
+    the words `s(17) = 4.68`, above n = 17's reported lower bound, T-154 states a value
+    no lane holds: it derives pending adoption at C1 and at C3, and the check refuses it
+    at both, since by the first rule of Result Kinds it takes that value's kind (review A3
+    on #592). T-154 as written, replayed, beats the verified lane alone and is refused
+    nothing (`test_a_second_proof_keeps_a_standing_through_its_later_rungs`)."""
+    probe = _entry(records, "T-154", kind=kind, headline="`s(17) = 4.68` in Lean 4")
+    for rung in ("C1", "C3"):
+        beyond = {**probe, "confirmation": rung}
+        (finding,) = [
+            f for f in check_standing.findings(beyond, records) if f.direction == LOWER
+        ]
+        assert finding.reported == EXCEEDS
+        assert view.standing(beyond, records) == view.PENDING_ADOPTION
+        (problem,) = check_standing.problems(beyond, view.PENDING_ADOPTION, records)
+        assert problem.startswith(
+            f"T-154 is a {kind}, yet at n = 17 it states a bound better than the reported one"
+        )
+    assert (
+        check_standing.problems({**probe, "kind": "optimality"}, view.PENDING_ADOPTION, records)
+        == []
+    )
 
 
 def test_a_reported_second_certificate_is_not_beaten_in_the_verified_lane(

@@ -388,9 +388,9 @@ def test_each_ceiling_is_the_certified_side_rounded_up_at_the_printed_precision(
             continue
         verified = case["verified_upper_bound"]
         side = Fraction(row["certified_side"])
-        if regularized.EVIDENCE in verified["evidence"]:
-            # A regularized view's exact side is now the lane's exact form (T-155): at most
-            # this certificate's side, and below its rounding up, which the record still
+        if any(batch.evidence in verified["evidence"] for batch in regularized.BATCHES):
+            # A regularized view's exact side is now the lane's exact form (T-155, T-156): at
+            # most this certificate's side, and below its rounding up, which the record still
             # prints as the value; this certificate stays cited.
             assert verified["value"] == row["verified_value"], n
             assert Fraction(verified["exact_form"]) <= side, n

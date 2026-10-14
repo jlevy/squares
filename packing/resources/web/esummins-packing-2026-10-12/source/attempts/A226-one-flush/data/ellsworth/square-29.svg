@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Thomas Schadt on December 8, 2025 using a computer program he wrote, starting from randomness.
+        Source: Private communication from Thomas Schadt to David Ellsworth, December 8, 2025.
+            URL: https://github.com/BalthasarStrauss/Squares-packing_S-29-_New-Record
+    Improved by David Ellsworth on December 10, 2025, with exact analytic solution.
+
+    Unset[{s, a, b, c, d, i, r1, r2, r3, r4, r5, r8, rB, rC, rD, f1, f2, f3, f4, f5, solution}];
+    r1 = (s - 5)*Sin[a];
+    r2 = 1 - (s - 5)*Cos[b];
+    r3 = (({s - 1, 3} + RotationTransform[-c][{-1, 1}])[[2]] - (s - 2))/Cos[c];
+    r4 = (({s - 3, 1} + RotationTransform[a][{1 - (s - 5)*Cos[a], 0}])[[2]] - 1)/Cos[d];
+    r5 = ((s - 1) - ({2, 1} + RotationTransform[a][{1, -r1}] + RotationTransform[d][{1, -r4}] + RotationTransform[d][{1, 0}])[[1]])/Sin[d];
+    r8 = 2 - RotationTransform[-b][{2, s - 1} - {s - 2, s - 2}][[2]];
+    rB = -({s - 2, s - 2} + RotationTransform[b][{-4, 1 - r8}])[[1]]/Sin[b];
+    rC = 1 - RotationTransform[-i][({s - 2, s - 2} + RotationTransform[b][{-3, -r8 - rB}]) - {1, 2}][[2]];
+    rD = RotationTransform[-b][({2, 1} + RotationTransform[a][{1, 1 - r1}]) - ({1, 2} + RotationTransform[i][{1, -rC}])][[2]]/Cos[i - b];
+    f1 = RotationTransform[-a][({1, 2} + RotationTransform[i][{1, -rC}]) - ({2, 1} + RotationTransform[a][{0, 1 - r1}])][[2]];
+    f2 = RotationTransform[-d][({1, 2} + RotationTransform[i][{1, -rC + rD}] + RotationTransform[b][{2, 0}]) - ({2, 1} + RotationTransform[a][{1, -r1}] + RotationTransform[d][{1, -r4}] + RotationTransform[d][{0, 1 - r5}])][[2]];
+    f3 = RotationTransform[-b][({1, 2} + RotationTransform[i][{1, -rC + rD}] + RotationTransform[b][{2, 0}]) - ({2, 1} + RotationTransform[a][{1, -r1}] + RotationTransform[d][{1, 1 - r4}])][[2]];
+    f4 = RotationTransform[-b][({s - 1, 3} + RotationTransform[-c][{-1, -r3}]) - ({1, 2} + RotationTransform[i][{1, -rC + rD}] + RotationTransform[b][{2, 0}])][[1]];
+    f5 = RotationTransform[-b][({s - 2, s - 2} + RotationTransform[b][{-1, -r8}]) - ({1, 2} + RotationTransform[i][{1, -rC + rD}] + RotationTransform[b][{0, 1}])][[2]];
+    f6 = RotationTransform[c][{s - 1, 3} - ({s - 2, s - 2} + RotationTransform[b][{0, -r8}])][[1]] - 1;
+    solution = FindRoot[{f1==0, f2==0, f3==0, f4==0, f5==0, f6==0}, {{s, 5.9339}, {a, 24.95*Pi/180}, {b, 20.77*Pi/180}, {c, 17.89*Pi/180}, {d, 24.70*Pi/180}, {i, 24.20*Pi/180}}, WorkingPrecision -> 200];
+    N[{s, a*180/Pi, b*180/Pi, c*180/Pi, d*180/Pi, i*180/Pi, r1, r2, r3, r4, r5, r8, rB, rC, rD, {f1, f2, f3, f4, f5, f6}} /. solution, 100]
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "5.933833462676929189689460616352019138433834181077886974638825915080254236879801441252051729965280562">
+    <!ENTITY a  "25.25865530835140585135676143694111418779206257866020955517423750707952407263611500841675173083482093">
+    <!ENTITY b  "20.80012676269961056631462320333770038629476929931847099617399480255193274631165435889175586072038847">
+    <!ENTITY c  "17.50626847573236750078686915755740894145912617399149287150960015336430912897066375344789198142726155">
+    <!ENTITY d  "24.96258798943771868107143092483542087551139413120856796506293424989497102448589171676661314234196695">
+    <!ENTITY i  "24.30835840134690672646763404730449999187672584919944931912858456844188703745036306310777597442994371">
+    <!ENTITY r1 ".3984717488301091159605357126070835674130406264879638299159127483929569112907679212870127989850725192">
+    <!ENTITY r2 ".1270292352783789007932399181915016362077349753950989959583936990434533923873148845654800021730522744">
+    <!ENTITY r3 ".3362337080054560159600522078885425967632286321896312751193291541341220426483337306546695732238652100">
+    <!ENTITY r4 ".0731661446593354427734368978069724386463636880960002319549410365329767692716639793177433689974416930">
+    <!ENTITY r5 ".0364138230898914001101438150471394553001001865591922355679048611955265662074560367624090349045529622">
+    <!ENTITY r8 ".3784533829032517130906613027643401269812054001281481639750923928005046001948491052475436818478223189">
+    <!ENTITY rB ".0737320505580844830129530815562941638215518926762302448730379694871834134355770420929824876178410837">
+    <!ENTITY rC ".7130808389041399164105824864343715819372149259740084340531959043020435064150027935015002102447667172">
+    <!ENTITY rD ".0381355786236203356323708866991443177853830319602056434416369114709926337099201881385596270239827158">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+
+    <path style="stroke:none" d="M0,0 H2 V1 H1 V2 H0"/>
+    <path style=  "fill:none" d="M0,1 H2 V0
+                                 M0,2 H1 V0"/>
+    <g transform="translate(&s;) scale(-1 1)">
+        <path style="stroke:none" d="M0,0 V3 H1 V1 H3 V0 H0"/>
+        <path style=  "fill:none" d="M0,1 H3 V0
+                                     M0,2 H1
+                                     M1,0 V3 H0
+                                     M2,0 V1"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <rect style="stroke:none" x="0" y="0" width="2" height="1"/>
+        <path style=  "fill:none" d="M0,1 H2 V0
+                                     M1,0 V1"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1 -1)">
+        <path style="stroke:none" d="M0,0 H3 V1 H2 V2 H0"/>
+        <path style=  "fill:none" d="M3,0 V1 H0
+                                     M2,0 V2 H0
+                                     M1,0 V2"/>
+    </g>
+    <g transform="translate(2 1) rotate(&a;) translate(0 -&r1;)">
+        <use xlink:href="#one"/>
+        <g transform="translate(1) rotate(-&a;) rotate(&d;) translate(0 -&r4;)">
+            <use xlink:href="#one"/>
+            <g transform="translate(1) rotate(-&d;) rotate(&d;) translate(0 -&r5;)">
+                <use xlink:href="#one"/>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(0 &s;) translate(2 -1) rotate(&b;) translate(-&r2; -1)">
+        <use xlink:href="#one"/>
+        <use xlink:href="#one" transform="translate(-1)"/>
+        <use xlink:href="#one" transform="translate(-2)"/>
+    </g>
+    <g transform="translate(&s;) translate(-1 3) rotate(-&c;) translate(-1 -&r3;)">
+        <use xlink:href="#one"/>
+    </g>
+    <g transform="translate(&s; &s;) translate(-2 -2) rotate(&b;) translate(-1 -&r8;)">
+        <use xlink:href="#one"/>
+        <use xlink:href="#one" transform="translate(-1)"/>
+        <use xlink:href="#one" transform="translate(-2)"/>
+        <use xlink:href="#one" transform="translate(-3 -&rB;)"/>
+    </g>
+    <g transform="translate(1 2) rotate(&i;) translate(0 -&rC;)">
+        <use xlink:href="#one"/>
+        <g transform="translate(1 &rD;) rotate(-&i;) rotate(&b;)">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="translate(1)"/>
+        </g>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

@@ -1200,15 +1200,17 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_check_declared_bounds.py": {
             "test_n68_depth_bound_is_named_by_its_refusal_test",  # 3.4s
         },
-        # 95s of call time across six nodes in five functions before the four #500 and #506
-        # functions at the end. The 489 node measured 4.1s on 2026-10-10 at load 4.7 on
-        # four cores. The two lineage nodes of the #503/#504 and #505/#501 imports were
-        # measured on 2026-10-12 on four cores at load 5.5 to 7.1, each alone and again
-        # with the file's other slow nodes (`-m slow --durations=0`): 4.75s and 4.74s for
-        # the n207 patches, 49.61s and 57.11s for the Barnett and Ostashev gaps, so
-        # neither shares a build. The two decide functions mark one or two cases each with
-        # `pytest.param(..., marks=pytest.mark.slow)`, and their other cases stay on the
-        # pull-request surface.
+        # 41s of call time across four nodes in three functions before the four #500 and #506
+        # functions at the end. The #489 node measured 4.1s on 2026-10-10 at load 4.7 on
+        # four cores, but 0.66s on hosted run 38503790618/job115656519709, below the 1s
+        # floor, so its marker was removed. The #503/#504 n207 lineage node measured
+        # 4.75s alone and 4.74s with the file's other slow nodes on 2026-10-12 on four
+        # cores at load 5.5 to 7.1 (`-m slow --durations=0`), so it does not share a build.
+        # The #505/#501 Barnett and Ostashev lineage node measured 49.61s and 57.11s
+        # in that local run, but 0.80s on hosted run 38527537364, below the 1s floor,
+        # so its marker was removed too. The two decide functions mark one or two
+        # cases each with `pytest.param(..., marks=pytest.mark.slow)`, and their other
+        # cases stay on the pull-request surface.
         #
         # The four #500 and #506 functions carry the marker themselves, so every case is
         # deferred. They were measured on 2026-10-12 on four cores at load 15 to 24 (a
@@ -1222,10 +1224,16 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # 38276665178, `--jobs 1 --inner-jobs 2`): 56.7s, 56.1s, 58.3s and 96.6s, 267.8s
         # in all, and the whole lane 225 tests in 844.5s of its 1800s budget, so it
         # stays under its ceiling with every case where it is.
+        #
+        # The #528/#529 decide function marks its n232 and n264 cases, and the four #528,
+        # #529 and #552 functions at the end carry the marker themselves. The #528/#529
+        # arrangement measurement took 87.1s on 2026-10-12 in one `-m slow --durations=0`
+        # run of the #500, #506, #528 and #529 nodes on four cores at load 14 to 20. The
+        # three #552 nodes were measured on 2026-10-12 in one `-m slow
+        # --durations=0` run on four cores at load 4 to 7: the import 6.74s, its regularized
+        # drawing 3.07s and the arrangement measurement 35.75s.
         "test_check_half_angle_area.py": {
-            "test_the_489_certificate_at_305_has_488s_side_in_a_quarter_turned_arrangement",
             "test_the_n207_certificate_is_two_placed_patches_of_the_n70_and_the_n153_is_not",
-            "test_barnetts_refinements_are_ryan_xus_packings_moved_and_ostashevs_are_not",
             # The #503 n207 case, 7.05s.
             "test_the_pingyou_imports_agree_with_their_receipts_plans_and_prints_to_every_digit",
             # The #505 n261 case, 18.26s, and the #501 n211 case, 11.40s.
@@ -1235,6 +1243,13 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_the_500_pieces_reappear_to_the_eye_and_not_by_pose",
             "test_the_506_imports_agree_with_their_receipt_plan_and_print_to_every_digit",
             "test_the_506_packings_are_their_named_parents_moved",
+            # The #528 n232 case, 10.00s, and n264 case, 14.35s.
+            "test_the_528_and_529_imports_agree_with_their_receipts_plans_and_prints_to_every_digit",
+            # The #528, #529 and #552 functions, every case.
+            "test_ostashevs_compositions_are_new_arrangements_and_calles_is_ryan_xus_design_moved",
+            "test_the_552_import_agrees_with_its_plan_frozen_claim_and_print",
+            "test_the_regularized_drawing_of_552_passes_the_third_route_at_the_same_clearances",
+            "test_daniels_154_is_another_arrangement_than_squishs_and_nearer_couzos_155",
         },
         # 24s of call time across 1.
         "test_contact_assembly_labels.py": {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Proved optimal by Frits Göbel in early 1979.
+
+    Is one of the very few rigid packings.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "2.70710678118654752440084436210"> <!-- 2 + Sqrt[2]/2 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0012" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="one">
+        <rect style="stroke:none" width="1" height="1"/>
+        <path style=  "fill:none" d="M1,0 V1 H0"/>
+    </g>
+    <use xlink:href="#one" transform="translate(&s;    ) scale(-1  1)"/>
+    <use xlink:href="#one" transform="translate(0   &s;) scale( 1 -1)"/>
+    <use xlink:href="#one" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <rect width="1" height="1" transform="translate(1 1) rotate(45) translate(0 -.5)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

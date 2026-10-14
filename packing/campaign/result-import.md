@@ -42,16 +42,35 @@ W1 phase on one branch:
 3. **Import** each new result through stages 1 to 3 on the same branch.
    A stage 4 replay the source prices at minutes can run in the same branch; a longer
    one waits in its bead for a budget the owner sets.
+   Start each new proof’s mathematical review as soon as its source is retained, in
+   parallel with stage 3, by [stage 4’s review lane](#stage-4-validate).
+   It does not wait for a replay budget, and it lands in a pull request of its own when
+   it returns.
 4. **Validate** from `packing/` with `packing-validate --records`, then `--push`.
 5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`. It
    lists each item with its bead and the stage it reached, and every source under Not
    Checked.
-6. **Draft the replies** each issue is owed, in its answer bead.
-   They are posted after the merge, from `main`, by the owner or at the owner’s request
-   ([stage 7](#stage-7-answer)).
-7. **Sweep again** with `make intake`, after the branch’s changes to the records.
-   The pass is done when nothing needs action, or when the pull request says why each
-   remaining item waits.
+6. **Render the announcement** of the results the pass registered, from `packing/`:
+   `uv run --frozen --all-extras --group dev python -m devtools.render_announcement
+   --ids T-NNN … --github`, with the pass’s own `T-NNN`. Select by id, not with
+   `--since`: the date the register received a result also picks up what other passes
+   registered that day.
+   [The tool](../devtools/render_announcement.py) prints a dated header and one brief
+   line per result, crediting its finders by an X handle the record or their GitHub
+   profile declares and by full name otherwise, never the owner, and says on stderr what
+   it left out and where each handle came from.
+   Put its output in the pull request description under **Announcement**, for the owner
+   to post; an agent never posts it.
+7. **Draft the replies** in each issue’s answer bead: every issue the pass touches gets
+   one. Once the pull request merges, render each from `main`, check that `main` and the
+   deployed site say what it says, post it, and record it under the issue’s `replies` in
+   the next change ([stage 7](#stage-7-answer)).
+8. **Sweep again** with `make intake`, after the branch’s changes to the records and
+   again after the merge.
+   The sweep, like `check_requests --report`, is what finds the replies due: it lists
+   `#N owes a reply` until a recorded reply covers the issue’s state.
+   The pass is done when nothing needs action and every reply it owes is posted and
+   recorded, or when the pull request says why each remaining item waits.
 
 The pass needs network access to `github.com`, for Git and for the API through `gh`;
 `kingbird.myphotos.cc`, for the catalogue capture; `evand.github.io`, for imports from
@@ -60,10 +79,19 @@ Evan Daniel’s site, which his repository builds; and `pypi.org` with
 A source the environment denies is reported as not checked, and the pull request says
 so. On 2026-10-05 the agent sessions reached GitHub and PyPI and nothing else.
 
-A pass never merges, never pushes to `main`, and never starts a replay measured in
-CPU-hours without a budget the owner has set.
-It never posts, edits or closes anything on an issue without the owner’s word, except
-adding the `intake` label under the `github-workflows` grant.
+A pass never merges without the owner’s word, never pushes to `main`, never posts the
+announcement, and never starts a replay measured in CPU-hours without a budget the owner
+has set. It does answer the issues, under the `github-workflows` grant
+(`tbd policy show`); the owner’s standing instruction of 2026-10-11 is why the rule
+exists. It comments on every issue it touches ([stage 7](#stage-7-answer) says what
+touching is) and follows up each later change of its state, each comment posted once the
+pull request that carries the change has merged, and it closes an issue only with its
+final comment.
+Without the grant it drafts each reply in the issue’s answer bead and asks
+the owner to post it.
+The owner may post instead.
+Under the same grant it adds the `intake` label; it edits nothing else on an issue
+without the owner’s word.
 
 ### The Prompt
 
@@ -92,19 +120,37 @@ claude/intake-YYYY-MM-DD, with today's date.
 4. Take each new result through stages 1 to 3 of the runbook on this branch: triage,
    retain the source in a packet at a pinned revision, register it as reported. Run a
    stage 4 replay only when the source prices it at minutes; otherwise record it in
-   the bead for a budget.
+   the bead for a budget. Start each new proof's mathematical review (stage 4, "Who
+   reviews, and when") as soon as its source is retained, in parallel.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request with
    `tbd shortcut create-or-update-pr-simple`. List every item with its bead and the
    stage it reached, and every source the sweep could not check.
-7. Draft each reply an issue is owed in its answer bead. Do not post it.
-8. Run `make intake` again and report every item that still needs action.
+7. From packing/, run `uv run --frozen --all-extras --group dev python -m
+   devtools.render_announcement --ids T-NNN ... --github` with the T-NNN this pass
+   registered (not --since, which also picks up other passes' results), and add its
+   output to the pull request description under "Announcement", for the owner to
+   post. Do not post it.
+8. Draft the reply each issue the pass touches is owed in its answer bead; every one
+   gets a comment. Once the pull request merges, render each from main with
+   `check_requests --draft N`, check that main and the deployed site say what it says
+   (runbook stage 5, "Verify the Published Result"), post it, and record it under the
+   issue's replies in result-requests.yaml in the next change.
+9. Run `make intake` again, and again after the merge: it and
+   `check_requests --report` list the replies still due. Report every item that still
+   needs action.
 
-Never merge, never push to main, and never start a replay measured in CPU-hours
-without a budget the owner has set. Never post, edit or close anything on a GitHub
-issue without the owner's word, except adding the `intake` label under the
-github-workflows grant. If github.com, kingbird.myphotos.cc or evand.github.io is
+Never merge without the owner's word, never push to main, never post the announcement,
+and never start a replay measured in CPU-hours without a budget the owner has set.
+Under the github-workflows grant, comment on every issue the pass touches (runbook
+stage 7 says what touching is) and follow up each later change of its state until the
+issue is closed with a final comment; the owner's standing instruction of 2026-10-11 is
+why. Without the grant, draft each reply and ask the owner to post it. Post only after
+the pull request that carries the change has merged, link only to main, and check
+first that main and the deployed site say what the comment says. Add the `intake`
+label under the github-workflows grant; edit nothing else on a GitHub issue without
+the owner's word. If github.com, kingbird.myphotos.cc or evand.github.io is
 unreachable, say so in the pull request and continue with the rest.
 ```
 
@@ -140,7 +186,7 @@ steps, and `--json` prints the whole sweep.
 | 4. Validate | W2 | Replay evidence, a mapped review and the rungs they derive: status `confirmed`, or `incomplete` |
 | 5. Publish | The change that moves the record | The reader documents state the result; once stage 4 has passed, *integrated* |
 | 6. Explain | W8, with a W2 review | A review paper, for the results that warrant one |
-| 7. Answer | The owner | The reply on the issue: *answered* |
+| 7. Answer | After each merge, by the pass | A reply on the issue for each change of its state, to the final comment: *answered* |
 
 Stage 0 finds the inputs, stages 1 to 3 are the import, stage 4 is the correctness part,
 and stages 5 to 7 are the publication.
@@ -244,8 +290,10 @@ Triage decides what the import is before anything is retained, in an hour or les
    A missing tool is a W7 slice, and the plan says so.
 5. **Open the bead and draft the acknowledgement:** what was received, the revision
    pinned, and what will be checked.
-   It states no `T-NNN` and no rung, and the owner, or an agent at the owner’s request,
-   posts it within a day.
+   It is posted by [stage 7](#stage-7-answer)’s rule, once the pull request that carries
+   the triage has merged.
+   It states no `T-NNN` and no rung unless that pull request registered the result, and
+   then it is the import reply as well.
 
 | Claim | Register action |
 | --- | --- |
@@ -253,7 +301,7 @@ Triage decides what the import is before anything is retained, in an hour or les
 | Bounds of one kind at several counts in one release | One entry whose `scope` covers them |
 | A later release that raises an earlier entry’s values or adds counts | A new entry; the earlier one keeps its claim, and the case records decide which is current |
 | A theorem with an unbounded parameter | One entry stating the theorem, whose `scope` lists the cases this record holds |
-| A second certificate for a value the record holds | A new `simplification` entry |
+| A second certificate for a value the record holds | A new `simplification` entry, or a `formalization` entry where a proof assistant checked it |
 | A consequence of another claim, such as monotonicity, at a count where the record holds no such value | Its own entry only when it settles a case; otherwise the parent’s `scope` covers it |
 | A consequence that another entry already registers | No new entry and no change of scope: both stand, and the older claim gains a sentence naming the newer route |
 | New evidence or an author’s answer about a registered entry | No new entry: the source retained at the revision that holds it, and an evidence update |
@@ -381,6 +429,38 @@ It is recorded as `external_review` on the reported evidence entry, which makes 
 entry `reviewed`, or `incomplete` when the read found a defect, and listed in the
 register entry’s `reviews` under the kind it was run as.
 
+**Who reviews, and when.** Every proof an import registers gets a mathematical review, a
+formalization registered as its own result included, and it starts at intake: once the
+source is retained, in parallel with stage 3. It runs as a sub-agent at the strongest
+tier, `tbd-strong-max`, at maximum reasoning, in a worktree of its own; it reads the
+source as data and runs only code it writes.
+It does not read an earlier review of the same result until its own findings are
+written, and then adds a section comparing them; anything of an earlier review it saw
+first, it discloses.
+It is written to be shared with the author: a summary the author can read first,
+findings graded blocking, major, minor or note with the source file and line, and
+questions; it names no `T-NNN` that is not yet on `main`, and its reviewer line names
+the system family, tier and reasoning setting, not a model identifier.
+
+Its code is kept and registered as
+[epistemics.md, Every Run’s Code Is Kept](../../epistemics.md#every-runs-code-is-kept)
+requires: in the result’s packet with a README that says what each program does, what it
+read, how to run it and what it printed; each program in
+[`verifiers.yaml`](../frontier/verifiers.yaml) with its structured `independence`
+record, which says what its authors read (the mathematics, the proof text, a
+specification, the producer’s code), whether it is clean-room, what it shares and who
+wrote it; and an evidence entry, with its coverage, for each thing a run decides or
+samples, cited by the case record where it would derive a rung it does not support.
+A program that decides nothing is kept, and its README says so.
+
+When it returns, the findings that are the record’s are fixed and the rest go to the
+author. The review is mapped as above, the entry’s `unfinished_confirmations` and the
+validation backlog (`devtools.check_requests --backlog`) are brought up to date, and
+`devtools.check_results` re-derives `V` and `C`: a rung the evidence now supports is
+changed, and where none moves the entry says why.
+The reply that shares the review with the author is drafted in the import’s answer bead
+and posted at [stage 7](#stage-7-answer), on the owner’s word.
+
 **The exit** follows both lanes.
 It adds the replay evidence, moves the verified lane if the review has no blocking
 defect open, rewrites the entry’s `claim`, `notes` and `next_rung` together and removes
@@ -406,7 +486,7 @@ No documentation phase is opened for it.
 
 An import’s publication includes its public results and drawings.
 Passing a local build or PR CI establishes the candidate; verify the deployed main tree
-before the final publication reply in stage 7.
+before any reply in stage 7 that reports it.
 
 Before merge, check the generated result/evidence registers, owning case pages, bound
 citations and selected case/overview graphics together.
@@ -474,14 +554,35 @@ follows the series rules in
 
 [epistemics.md](../../epistemics.md#import-integration-and-reply) says what an answer
 contains and who posts it.
-The process adds when and how:
+The process adds when and how.
+The owner’s standing instruction of 2026-10-11 is why: “be sure the process codifies
+that you need to comment on every issue and follow up on each”, and “An update on the
+issues as they are approved.
+We should validate everything follows and then comment after the PRs are merged.”
+What lets an agent post is the `github-workflows` grant, which covers issues.
 
-- An agent drafts the reply in the bead when the pull request merges.
-- A reply is written after the merge and links only to `main`. A link into a working
-  branch dies with the branch, and a `T-NNN` quoted from one can change.
-- There is one reply when the result is imported and one when it is confirmed or a
-  defect is found, and a follow-up whenever the record moves past what a reply said.
-  The reply that reports a confirmation names the programs that ran, and says whether
+- **Every issue a pass touches gets a comment**, and every later change of its state
+  gets a follow-up: imported, registered, confirmed or a defect found, a rung or status
+  moved, adopted on its case, superseded, closed.
+  No issue is left without a reply, and the last is the final comment that closes it.
+- **A pass touches an issue** when its change makes one of those changes to a result the
+  issue reports or asks for, or reads one of the issue’s comments into the record: a
+  review, case record, register entry or bead that quotes the comment or rests on it.
+  A change of significance alone touches no issue: a reply states ids, rungs and status,
+  and a score guides reading order and changes none of them.
+- **A reply follows the merge** of the pull request that carries the change, and links
+  only to `main`. A link into a working branch dies with the branch, and a `T-NNN`
+  quoted from one can change.
+  An agent drafts it in the issue’s answer bead while that pull request is open.
+- **The poster validates first** that `main` and the deployed site say what the reply
+  says: it is rendered with `check_requests --draft N` from `main`, and the site is
+  checked as [Verify the Published Result](#verify-the-published-result) says.
+- **An agent posts it as part of the pass**, under the `github-workflows` grant; without
+  the grant it drafts the reply in the answer bead and asks the owner to post it.
+  The owner may post instead.
+  Either way the reply is recorded under the issue’s `replies` in the next change
+  ([After the Merge](#after-the-merge)).
+- The reply that reports a confirmation names the programs that ran, and says whether
   they were the author’s own code re-run or a re-implementation.
 - The issue is closed with a final comment when nothing the author asked for is queued.
 
@@ -505,9 +606,15 @@ from the register:
 - *refuted* or *defect recorded*, from the entries’ reviews and evidence;
 - *open* while validation runs, and *queued* while it waits for import.
 
-A **reply is due** when the issue has had no reply, when an entry has been registered,
-renumbered or moved a rung since the last reply that spoke of it, or when a reply’s
-statement is marked `outdated` and no later reply `corrects` it.
+A **reply is due** when the issue has had no reply; when an entry a result maps to has
+no reply naming it under that result; when the entry has been renumbered since the last
+reply that named it there; when one of its rung or status fields has moved since the
+last reply that stated that field there; or when a reply’s statement is marked
+`outdated` and no later reply `corrects` it.
+A reply that mentions the result without naming the entry, or names the entry without
+stating a field, leaves the earlier statement standing.
+Each reason quotes the one reply it holds a field to, by its date, and by its kind or
+its address where the issue has another reply that day.
 An issue is **closeable** when triage is done, every result is confirmed or refuted (a
 reported defect: recorded against the entry it names), and no `ask` is queued.
 
@@ -529,17 +636,22 @@ Run each command from `packing/` as
 | `--draft N` | The status comment for issue N, ending in the Claude Code footer; it refuses unless `HEAD` is on `origin/main` |
 | `--github` | Read-only: the issues the record lacks, the replies missing from it, the comments created or edited after an entry’s `read_through`, and the `result-report` entries and entries marked `intake: true` whose issues lack the `intake` label |
 
-A reply due is reported and never fails the gate: it is the owner’s next move, not a
+A reply due is reported and never fails the gate: it is owed after the merge, not a
 broken record.
 
 ### After the Merge
 
 1. On `main`, run `--github` and take into the record any issue, reply or comment it
    lacks. A new issue enters with `triage: pending`, and stage 1 maps its results.
-2. For each issue that `--report` marks reply due, render `--draft N`. The owner posts
-   it, or an agent does at the owner’s request.
-3. Record the reply under the issue’s `replies`: its URL, date and kind, and in
-   `reported` the id, rungs and status it stated for each result.
+2. For each issue that `--report` marks reply due, and each other issue the merged
+   change touched, render `--draft N`, check that `main` and the deployed site say what
+   it says, and post it; an agent does as part of the pass, or the owner does.
+   `--report` marks what the register shows: no reply yet, a new or renumbered id, a
+   moved rung or status, an `outdated` statement.
+   A change it does not show, such as a case adopting the result, a supersession or a
+   comment read into the record, is followed up by the pass that makes it.
+3. Record the reply under the issue’s `replies` in the next change: its URL, date and
+   kind, and in `reported` the id, rungs and status it stated for each result.
    Name in `corrects` any earlier reply whose `outdated` statements it corrects.
 4. When `--report` says an issue is closeable, close it with the final comment and set
    the entry’s `state` and `closed`.

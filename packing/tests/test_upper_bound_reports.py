@@ -48,6 +48,12 @@ OSTASHEV = "dostashev-records-2026-10-11"
 SQUISH_500 = "squish-500-fourth-request-2026-10-11"
 #: Issue #506: Couzo's next release, two counts in the corpus and nine beyond it.
 COUZO_506 = "couzo-certificates-2026-10-11"
+#: Issue #528, Ostashev's three compositions in sqcert, and issue #529, Rio Calle's n = 102
+#: layout, whose exact certificate is derived here (`test_upper_bound_reports_528_529`).
+OSTASHEV_528 = "dostashev-records-2026-10-12"
+CALLE = "riocalle-n102-2026-10-12"
+#: Issue #552, Evan Daniel's s(154) in his own text format (`test_upper_bound_reports_552`).
+DANIEL_552 = "evand-n154-2026-10-12"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -61,6 +67,9 @@ EVERY = (
     OSTASHEV,
     SQUISH_500,
     COUZO_506,
+    OSTASHEV_528,
+    CALLE,
+    DANIEL_552,
 )
 
 
@@ -998,6 +1007,9 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         OSTASHEV: "2026-10-11",
         SQUISH_500: "2026-10-11",
         COUZO_506: "2026-10-11",
+        OSTASHEV_528: "2026-10-12",
+        CALLE: "2026-10-12",
+        DANIEL_552: "2026-10-12",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

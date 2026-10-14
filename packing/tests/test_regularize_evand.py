@@ -757,6 +757,103 @@ def test_an_admitted_view_enters_the_layer_under_its_contract(
     assert axis.main(["--verify-atlas"], layout=layout) == 0
 
 
+def _fresh_receipt(run_dir: Path, again: Path) -> None:
+    """A fresh run's receipt: the run's own, with a cost of its own. A run block whose cost
+    repeats an earlier run's is a reclassified copy, which the index records with no cost
+    (`regularize_axis_components.costed_once`, #548 review B5)."""
+    receipt = json.loads((run_dir / "receipt.json").read_text(encoding="utf-8"))
+    receipt["cost"] = {**receipt["cost"], "cpu_seconds": 3.5, "wall_seconds": 4.0}
+    (again / "receipt.json").write_text(json.dumps(receipt), encoding="utf-8")
+
+
+def test_a_ladder_report_admits_its_rungs_and_records_them_only_for_its_own_view(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Since the retry ladder a report keeps its solve's rungs, not `retried_with`, so
+    admission copies them; `rungs` records them for a view admitted without them, from a
+    report whose admitted view is the drawn view byte for byte, and from no other, names
+    the run that supplied them, and never writes over rungs or a retry already recorded."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    path = run_dir / "n-004" / "report.json"
+    report = json.loads(path.read_text(encoding="utf-8"))
+    report["solve"] = {"status": "KKT local min", "rungs": ["force-kkt"]}
+    path.write_text(json.dumps(report), encoding="utf-8")
+    drive.write_layer([run_dir], root, "admitted")
+    (entry,) = json.loads(layout.index.read_text())["entries"]
+    assert entry["run"] == {
+        "id": "evand-regularize-full",
+        "output": "same",
+        "rungs": ["force-kkt"],
+    }
+
+    def admitted_without(*fields: str) -> None:
+        index = json.loads(layout.index.read_text())
+        for field in fields:
+            index["entries"][0]["run"].pop(field, None)
+        layout.index.write_text(axis.index_text(index), encoding="utf-8")
+
+    # An entry admitted before the field gains it from its own run's report, which it
+    # names as the run that supplied them.
+    admitted_without("rungs")
+    assert drive.record_rungs([run_dir], root)["recorded"] == [4]
+    (entry,) = json.loads(layout.index.read_text())["entries"]
+    assert entry["run"]["rungs"] == ["force-kkt"]
+    assert entry["run"]["rungs_from"] == "evand-regularize-full"
+    assert axis.check_atlas(layout) == []
+
+    # Rungs already recorded, or a retry recorded before the ladder, are never written
+    # over, whatever a later report says.
+    report["solve"]["rungs"] = []
+    path.write_text(json.dumps(report), encoding="utf-8")
+    assert drive.record_rungs([run_dir], root)["already_recorded"] == [4]
+    (entry,) = json.loads(layout.index.read_text())["entries"]
+    assert entry["run"]["rungs"] == ["force-kkt"]
+    admitted_without("rungs", "rungs_from")
+    index = json.loads(layout.index.read_text())
+    index["entries"][0]["run"]["retried_with"] = ["--dps", "100"]
+    layout.index.write_text(axis.index_text(index), encoding="utf-8")
+    assert drive.record_rungs([run_dir], root)["already_recorded"] == [4]
+    assert "rungs" not in json.loads(layout.index.read_text())["entries"][0]["run"]
+    admitted_without("retried_with")
+
+    # A fresh run of the count that makes the very view drawn supplies them, and enters
+    # the index's runs so that `rungs_from` names a run it records.
+    again = tmp_path / "again"
+    again.mkdir()
+    _fresh_receipt(run_dir, again)
+    for source in run_dir.glob("n-*/*"):
+        target = again / source.parent.name / source.name
+        target.parent.mkdir(exist_ok=True)
+        target.write_bytes(source.read_bytes())
+    assert drive.record_rungs([again], root)["recorded"] == [4]
+    index = json.loads(layout.index.read_text())
+    assert index["entries"][0]["run"] == {
+        "id": "evand-regularize-full",
+        "output": "same",
+        "rungs": [],
+        "rungs_from": "evand-regularize-again",
+    }
+    assert [run["id"] for run in index["runs"]] == [
+        "evand-regularize-full",
+        "evand-regularize-again",
+    ]
+    assert axis.check_atlas(layout) == []
+
+    # A report whose view is not the drawn one, here decided for another reason, and a
+    # report from before the ladder, which kept no rungs, record nothing.
+    admitted_without("rungs", "rungs_from")
+    report["decision"] = {**report["decision"], "reason": "another reason"}
+    path.write_text(json.dumps(report), encoding="utf-8")
+    assert drive.record_rungs([run_dir], root)["differs"] == [4]
+    del report["solve"]["rungs"]
+    path.write_text(json.dumps(report), encoding="utf-8")
+    assert drive.record_rungs([run_dir], root)["not_drawn"] == [4]
+    (entry,) = json.loads(layout.index.read_text())["entries"]
+    assert "rungs" not in entry["run"]
+
+
 def test_only_an_admitted_grid_view_is_admitted() -> None:
     """The decision table decides a grid-slack view as it decides the driver's own."""
     grid = importlib.import_module("devtools.regularize_grid_slack")
@@ -819,6 +916,72 @@ def source_side(n: int) -> Fraction:
 # --------------------------------------------------------------------------------------
 # One count, end to end
 # --------------------------------------------------------------------------------------
+
+
+def test_a_run_that_only_supplied_rungs_is_renamed_with_why(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A run's receipt records no id, and the driver names a run by its directory, so a
+    fresh run in a directory an earlier run also used takes that run's id. `rename-run`
+    gives a run that only supplied rungs a distinct id, moves every `rungs_from` that
+    names it, and says on its block why the id was assigned (`id_note`); a run an entry
+    draws from, a taken id, an unknown one and an empty note are refused (PR #585,
+    review B3)."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    path = run_dir / "n-004" / "report.json"
+    report = json.loads(path.read_text(encoding="utf-8"))
+    report["solve"] = {"status": "KKT local min", "rungs": []}
+    path.write_text(json.dumps(report), encoding="utf-8")
+    drive.write_layer([run_dir], root, "admitted")
+    index = json.loads(layout.index.read_text())
+    index["entries"][0]["run"].pop("rungs")
+    layout.index.write_text(axis.index_text(index), encoding="utf-8")
+    again = tmp_path / "rerun" / "full"
+    again.mkdir(parents=True)
+    _fresh_receipt(run_dir, again)
+    for source in run_dir.glob("n-*/*"):
+        target = again / source.parent.name / source.name
+        target.parent.mkdir(exist_ok=True)
+        target.write_bytes(source.read_bytes())
+    # Recorded under the convention, the fresh run would take the drawing run's own id;
+    # here that run is recorded first under a scratch name, as `adopt518-v2` was.
+    scratch = tmp_path / "rerun" / "adopt"
+    again.rename(scratch)
+    assert drive.record_rungs([scratch], root)["recorded"] == [4]
+    with pytest.raises(drive.EvandRunError, match="draw from"):
+        drive.rename_run(root, "evand-regularize-full", "evand-regularize-x", "why")
+    with pytest.raises(drive.EvandRunError, match="already records"):
+        drive.rename_run(root, "evand-regularize-adopt", "evand-regularize-full", "why")
+    with pytest.raises(drive.EvandRunError, match="0 runs"):
+        drive.rename_run(root, "evand-regularize-none", "evand-regularize-x", "why")
+    with pytest.raises(drive.EvandRunError, match="--note"):
+        drive.rename_run(root, "evand-regularize-adopt", "evand-regularize-x", " ")
+    assert (
+        drive.main(
+            [
+                "rename-run",
+                "--from",
+                "evand-regularize-adopt",
+                "--to",
+                "evand-regularize-adopt-rerun-2026-10-13",
+                "--note",
+                "Assigned afterwards: the run recorded no id.",
+                "--repo-root",
+                str(root),
+            ]
+        )
+        == 0
+    )
+    index = json.loads(layout.index.read_text())
+    assert index["entries"][0]["run"]["rungs_from"] == "evand-regularize-adopt-rerun-2026-10-13"
+    renamed = index["runs"][-1]
+    assert list(renamed)[:2] == ["id", "id_note"]
+    assert renamed["id"] == "evand-regularize-adopt-rerun-2026-10-13"
+    assert renamed["id_note"] == "Assigned afterwards: the run recorded no id."
+    assert "evand-regularize-adopt" not in {run["id"] for run in index["runs"]}
+    assert axis.check_atlas(layout) == []
 
 
 def test_n26_runs_end_to_end(tmp_path: Path) -> None:

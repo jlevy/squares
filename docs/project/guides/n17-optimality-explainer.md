@@ -10,12 +10,13 @@ particular
 [§9, How an Optimality Proof Is Built](../../../TUTORIAL.md#9-how-an-optimality-proof-is-built),
 and wants the $n = 17$ case itself: its numbers, its records and its status.
 
-**Owns:** the account of the proof in progress, as of 2026-10-06. Every number below is
-taken from a linked record, and each claim is labelled by its evidential status:
-*proved* (an exact argument with its machine-checking and review scope stated),
-*verified* (an exact or outward-interval computation with a replay and a review),
-*projected* (an exact consequence of something not yet admitted), *heuristic* (a search
-result that certifies nothing), or *modelled* (an estimate).
+**Owns:** the account of this project’s route to a proof, as it stood on 2026-10-06; the
+route was suspended on 13 October (below).
+Every number below is taken from a linked record, and each claim is labelled by its
+evidential status: *proved* (an exact argument with its machine-checking and review
+scope stated), *verified* (an exact or outward-interval computation with a replay and a
+review), *projected* (an exact consequence of something not yet admitted), *heuristic*
+(a search result that certifies nothing), or *modelled* (an estimate).
 Where this document and a record differ, the record is right.
 The [October 6 consolidation](../reviews/review-2026-10-06-n17-w3-consolidation.md) sets
 the next research decisions; the dated experiments preserve their original verdicts.
@@ -24,6 +25,22 @@ the next research decisions; the dated experiments preserve their original verdi
 [`n-017.md`](../../../packing/frontier/n-017.md) and the
 [results register](../../../packing/frontier/RESULTS.md) hold, or the general machinery,
 which the tutorial explains and this document only names.
+
+**Since this account:** on 12 October 2026 others published two proofs, by separate
+routes, that Bidwell’s packing is optimal: a candidate proof by Marc Leonard Overbeck
+(Kleddamag), registered as [T-153](../../../packing/frontier/RESULTS.md), and a Lean 4
+proof by Oscar Fitzharding (ofitzharding), registered as
+[T-154](../../../packing/frontier/RESULTS.md).
+Reviews here read parts of both and found no mathematical defect in what they read, but
+neither has been replayed in full: parts of T-153’s computation have been rerun here,
+and T-154’s Lean build has not been repeated.
+Both stand at `V0/C1` as reported results; the
+[case record](../../../packing/frontier/n-017.md) lists $n = 17$ as reported proved and
+verified open, and the verified bracket below is unchanged.
+On 13 October the owner suspended new work on this project’s own route, judging it
+likely subsumed by Overbeck’s proof
+([owner decisions](../reviews/review-2026-10-13-owner-decisions.md)). What follows is
+that route as it stood on 6 October.
 
 ## The Bracket
 

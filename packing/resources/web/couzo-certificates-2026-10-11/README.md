@@ -181,8 +181,11 @@ them:
 - **175.** Below the case ceiling, 13.7688992766137689 (Ryan Xu, T-125), by
   $1.78 \times 10^{-3}$, and below T-140 (#488) by $1.70 \times 10^{-6}$, T-130 (#460)
   and the issue-476 certificate by $3.61 \times 10^{-5}$ and T-138 (#470) by
-  $3.61 \times 10^{-5}$. It is the smallest side known at 175, and the source’s
-  standing table calls it best known.
+  $3.61 \times 10^{-5}$. It was the smallest side known at 175 when this import read
+  it, and the source’s standing table calls it best known. Daniil Ostashev’s #528
+  (T-158), registered and adopted as the house on 12 October 2026, is
+  $2.94 \times 10^{-3}$ below it; the certificate stays in this packet unless its author
+  asks for it to be registered.
 - **308.** Below the grid’s 18 by $1.54 \times 10^{-3}$ and Kevin Fang’s T-135 (#484)
   by $8.50 \times 10^{-4}$; Evan Daniel’s T-141 (#489) is smaller by
   $1.90 \times 10^{-4}$, and the source marks this one superseded.

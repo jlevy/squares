@@ -109,6 +109,12 @@ Link a person’s name to their profile wherever that surface supports it.
 The profile can supply handles, the optional biography and identity evidence; a compact
 credit line does not need to repeat `Joshua Levy (jlevy, ojoshe)` on each occurrence.
 
+News entries use the profile’s preferred display name at first mention and link it
+directly to the profile.
+Author the link to `packing/contributors/people/<id>.md` in the changelog record; the
+website resolves it to `profiles/<id>.html`, and GitHub keeps the repository link.
+Retained PR titles, quotations and source identifiers keep their original wording.
+
 A paper explaining another person’s proof leads with the original proof and its author,
 then distinguishes the paper’s exposition, oversight and assistance.
 Keep a direct link to the actual source work: a person profile does not replace a

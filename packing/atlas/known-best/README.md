@@ -7,7 +7,11 @@ The range widened from 100 on 2026-09-07 under
 [the expansion plan](../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md).
 Two composites are drawn from it: the published figure of the first hundred, with its
 10-by-10 layout, and a poster of the whole corpus beside it.
-The calibration annotations further down stay pinned to the first hundred by design.
+Each tile of both, like every drawing of a count on the site, shows the count’s default
+picture: its [regularized view](#the-regularized-views) where that view improves on the
+packing as published, and the house rendering of its witness everywhere else
+([the default picture](#the-default-picture)). The calibration annotations further down
+stay pinned to the first hundred by design.
 
 The geometry records, drawings and exports in this directory are generated.
 [`credit-attributions.json`](credit-attributions.json) is the curated input for
@@ -23,9 +27,11 @@ budget was measured.
 
 The composite is a native 10-by-10 SVG, not a screenshot montage.
 Its 5,050 square polygons come from the same normalized witnesses as the individual
-figures under [`rendering/`](rendering/). The title and plain black “The Squares Project
-· github.com/jlevy/squares” line sit above the grid; its problem description, legend,
-construction, lower-bound and optimality-proof credits and dated diagram credit occupy a
+figures under [`rendering/`](rendering/) and the regularized views under
+[`regularized/`](regularized/index.json).
+The title and plain black “The Squares Project · github.com/jlevy/squares” line sit
+above the grid; its problem description, legend, construction, lower-bound and
+optimality-proof credits, regularization credits and dated diagram credit occupy a
 footer.
 
 Both composites share the same two-line problem description, two-column legend and
@@ -33,21 +39,32 @@ construction credits.
 Each counted legend item names the count and number of cases in that composite, such as
 “proved optimal (45 of 100)” or “proved optimal (77 of 324)”. Titles, problem
 descriptions and all ordinary text use black; case numbers remain gray.
-Recent-result marks and the angle/contact swatches keep their semantic colors.
+Changed numerical values and the angle/contact swatches keep their semantic colors.
 A bundled bold sans-serif face supplies the print text and its layout measurements.
 The gap between information blocks is three body-text ems, measured between their ink
 bounds; the lines within a block share 1.50 leading and weight 700. All three credit
 paragraphs use the width of the balanced three-line construction paragraph, with
 complete names and role clauses kept together.
+A fourth paragraph uses the owner’s approved two-line credit on both posters:
+
+```text
+Drawn packings are regularized for cleaner display using Squares Project rules,
+based on Daniel’s regularizer
+```
+
+The paragraph’s SVG group retains the depicted regularized cases in
+`data-regularized-cases` and the generators’ complete section 7 credits in
+`data-generator-credits`. These structured values preserve the counts and attribution;
+they are not printed in the compact credit.
 
 The composite ships in four forms, all drawn from that one SVG in one build:
 
 | File | Size | For |
 | --- | --- | --- |
-| [`known-best-1-100.svg`](known-best-1-100.svg) | 2150 × 3823 units | the source; scales to anything |
-| [`known-best-1-100.png`](known-best-1-100.png) | 2150 × 3823 px | the GitHub-facing raster preview |
-| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4300 × 7646 px | attaching, or downscaling for social media |
-| [`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) | 22.40 × 39.82 in | printing; vector, so text stays selectable |
+| [`known-best-1-100.svg`](known-best-1-100.svg) | 2150 × 3898 units | the source; scales to anything |
+| [`known-best-1-100.png`](known-best-1-100.png) | 2150 × 3898 px | the GitHub-facing raster preview |
+| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4300 × 7796 px | attaching, or downscaling for social media |
+| [`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) | 22.40 × 40.60 in | printing; vector, so text stays selectable |
 
 Each export carries the SHA-256 of its source SVG, so `--check` rejects any one of them
 that has fallen behind the drawing.
@@ -101,8 +118,8 @@ Acquisition and snapshot dates do not establish priority.
 The construction paragraph names all recorded finders and improvers.
 The lower-bound paragraph names current bound-source authors; its metadata also retains
 method, prerequisite and historical contributions.
-The proof paragraph separately identifies formalization and verification contributions
-alongside mathematical proof authors.
+The proof paragraph names mathematical proof authors, then everyone who worked on a
+formalization or its verification infrastructure in one “formalization by” clause.
 Both PDFs use the same acknowledgments for the full $n = 1..324$ corpus; their diagram
 counts and depicted ranges remain specific to each figure.
 Names wrap intact into balanced lines without bracketed citations or final periods.
@@ -230,11 +247,78 @@ count, both reading the one list, the axis tool’s `ABOVE_U`. Every drawn view 
 its regularization in the register’s terms (`by: project`, the method, the side and the
 identity measured here), and `results.yaml`’s `regularized_drawings` records each one
 whose packing a registered result holds, generated by
-`python -m devtools.regularized_drawings`. No view changes a side, a frontier value, an
-evidence tier or a credit, and none replaces a witness.
+`python -m devtools.regularized_drawings`. The same tool writes a `regularization` note
+into the case record of every drawn count: who regularized the drawing, with which of
+this project’s modifications to Evan Daniel’s regularizer, at which side and of which
+result’s packing, and that it is a pure regularization, which proves no new bound and is
+not a result, or, at the fifteen counts where `T-155` registered the drawn
+regularization’s exact side as an upper bound, that its side is registered as that
+result
+([the policy’s question 16](../../../docs/project/policies/regularization-policy.md#9-owner-decisions)).
+Where the house is itself a regularization its source published, as at the thirteen
+counts drawn from `T-146`’s certificates, the note credits the source first.
+The 44 counts where `T-155` registered this project’s regularization but the layer draws
+another view or none carry the note as well, crediting the Squares Project and naming
+`T-155`. At 33 of `T-155`’s 59 counts, eight drawn and 25 not, its side is the side of
+Evan Daniel’s earlier certificate (`T-101`), so the note says that `T-155` registers it,
+that his certificate first certified it, naming `T-101`, and that it proves no new
+bound. No view changes a side, a frontier value, an evidence tier or a credit, and none
+replaces a witness. The modifications are read from each entry’s `run` and `method`: the
+retry rungs the solve climbed (`run.rungs`), or before the retry ladder of 12 October
+the one retry’s arguments (`run.retried_with`). The 23 vendored views admitted after the
+ladder had no rungs recorded; on 13 October 2026
+`python -m devtools.regularize_evand rungs` recorded them from their runs’ retained
+reports at eight counts and, at the fifteen then drawn from the run on
+jlevy/squares#518’s witnesses, from a fresh run of those counts,
+`evand-regularize-adopt518-v2-rerun-2026-10-13` (917 s of wall, 2,097 CPU seconds at
+three workers), whose views came out byte for byte the drawn ones.
+Thirteen of the fifteen are drawn now, so 21 entries carry the rungs: Evan Daniel’s
+views at 180 and 207 were withdrawn the same day, and their entries with them.
+Each entry names the run that supplied its rungs as `run.rungs_from`, and the index’s
+`runs` records the fresh run beside the runs whose views it draws.
+A run’s receipt records no id, and the driver names a run by its directory,
+`evand-regularize-<run directory>`; the fresh run’s directory was also `adopt518-v2`, so
+that convention gives it the id of the 12 October run of 37 counts in
+`runs/adopt518-v2`, whose reports `evand-regularize-refreshed-adopt518-v2` decided
+again. Its id was therefore assigned afterwards, on 13 October 2026, by
+`python -m devtools.regularize_evand rename-run`, and its block’s `id_note` says so.
+The tool never writes over rungs or a retry an entry already records.
+Only 152 climbed a rung (`force-kkt`); with 18’s earlier `dps-100`, those are the two
+vendored views drawn with a retry, and none used a replica patch.
 Exploration
 [X-049](../../campaign/explorations/X-049-families-shading-and-the-large-n-limit.md#exact-regularization)
 explains why the layer exists and what the axis tool changes.
+
+### The default picture
+
+On 13 October 2026 the owner made the regularized view the default picture, with the
+house drawing kept as published
+([the policy’s section 12](../../../docs/project/policies/regularization-policy.md#12-the-default-picture)).
+A count’s tile on both composites, its atlas tile and frontier-survey thumbnail on the
+site and the drawing that heads its case page are its regularized view where the view is
+exactly verified on both routes, at a side no larger than the verified upper bound or
+one of the exceptions question 13 names, and improves on the house drawing under the
+policy’s
+[improvement rule](../../../docs/project/policies/regularization-policy.md#11-the-improvement-rule):
+worse on none of its goals and better on at least one, exactness included.
+The case page keeps the house drawing one click away, under *As published*, with its
+source’s credit; everywhere else the house drawing is the picture.
+
+[`default-drawings.json`](default-drawings.json)
+([schema](default-drawings.schema.yaml)), written by
+`python -m devtools.default_drawings --update`, records each drawn view’s default, its
+reason, and both drawings’ measures.
+Its `totals` say how many views are defaults; its entries say which, and why each of the
+others keeps the house: a view that replaces a numerically checked witness with an
+exactly verified one may tie it on every measure, and a view that ties an exactly
+verified house at its own side on every goal is no improvement, so the house stays its
+picture and its case page says so.
+The records-tier step `default pictures improve on their house drawings` measures every
+view and its house drawing again on each pull request, fails on a stale record or a
+regularized default the rule refuses, and lists the counts that keep the house; this
+file states no count of its own, so it cannot fall behind the record.
+It reads the exceptions above the bound from `devtools.default_drawings.ABOVE_U`, which
+`packing/tests/test_regularize_select.py` holds to the layer.
 
 `--check-atlas` runs in the records tier on every pull request: it holds the index to
 the manifest, the witnesses and the views by digest, and reads each other generator’s

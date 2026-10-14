@@ -28,7 +28,6 @@
     const icon = document.createElement("span");
     icon.className = "site-film-play-icon";
     icon.setAttribute("aria-hidden", "true");
-    icon.textContent = "▶";
     play.append(icon);
     picture.append(play);
     const sync = () => {

@@ -1,10 +1,11 @@
 """The owner's choice rule of 13 October 2026, on rows whose exact work is done by fiat.
 
 A view is adoptable when both exact routes accept it, its side is at most `U` and at most
-today's drawn side, row 10 admits it, its run draws it, and it is worse than today's
-drawing on no measure (light, uneven and near-axis squares, angle classes and hues, house
-and stage sides) while better on one or drawn at a smaller side, unless it replaces a
-numerically checked witness. Each refusal is named. Among adoptable views the first in
+today's drawn side, row 10 admits it, its run draws it, and it improves on today's drawing
+under the policy's improvement rule (`devtools.improvement_rule`): worse on no goal (light,
+uneven and near-axis squares, angle classes and hues, house and stage sides, the side) and
+better on one, exactness included where it replaces a numerically checked witness. A tie
+on every goal is no improvement. Each refusal is named. Among adoptable views the first in
 preference order (Evan Daniel's, then grid-slack by rising threshold) that no other
 dominates is chosen, and the `layer` commands admit exactly the chosen views: a driver
 run whose stored report `layer` would read differently, such as one written before a
@@ -147,7 +148,7 @@ def test_a_view_at_a_smaller_side_is_adoptable_without_a_gain() -> None:
             {"measures": {"near_axis": 0, "stage_total": 109}},
             "worse than today's drawing on stage_total",
         ),
-        ({}, "neither better on a measure nor at a smaller side"),
+        ({}, "no improvement: it ties today's drawing on every goal"),
     ],
 )
 def test_each_reason_a_view_is_refused_is_named(overrides: dict[str, Any], reason: str) -> None:

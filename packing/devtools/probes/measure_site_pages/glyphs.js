@@ -125,6 +125,7 @@
   const roles = [
     ["nav name", ".site-name-text"],
     ["nav link", ".site-nav a:not(.site-name)"],
+    ["compact chooser", '.site-tabs.site-chooser-small [role="tab"]'],
     ["section tab", '.site-tabs :is(a, [role="tab"])'],
     ["source chip", ".doc-links .chip"],
     ["chip", ".site-chip"],
@@ -417,6 +418,7 @@
     ["--paper-support-scale", false],
     ["--paper-note-scale", false],
     ["--paper-button-label-scale", false],
+    ["--site-chooser-small-size", true],
     ["--paper-colophon-scale", false],
     ["--paper-heading-leading", false],
   ];

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import html
 import re
 from dataclasses import replace
 from datetime import timedelta
@@ -10,35 +9,16 @@ from datetime import timedelta
 from devtools import overview_data, overview_sections
 
 
-def test_homepage_legend_keeps_original_rungs_in_three_icon_and_label_rows() -> None:
-    home = overview_sections.rung_legend(here=False, heading="Legend")
-    complete = overview_sections.rung_legend(here=True)
-    assert '<h2 class="site-rung-legend-heading">Legend</h2>' in home
-    assert 'href="results.html#verification-ladders"' in home
-    assert home.count('<span class="site-rung-legend-icons">') == 3
-    assert re.findall(r'<span class="site-rung-legend-name">([^<]+)</span>', home) == [
-        "Significance",
-        "Verification",
-        "Confirmation",
-    ]
-    assert "What each rung means" not in home
-    meanings = overview_sections.rung_meanings()
-    for scale, levels in overview_sections.rubric_levels().items():
-        for level, _ in levels:
-            label = f"{scale}{level}"
-            assert f'title="{html.escape(meanings[label], quote=True)}"' in home
-            if scale == "S":
-                mark = overview_sections.significance_mark(level, meanings[label])
-                assert mark in home
-                assert mark in complete
-    chips = re.findall(r'<span class="site-chip site-rung-fill"[^>]*>[^<]+</span>', home)
-    assert len(chips) == 12
-    assert all(chip in complete for chip in chips)
-    assert 'class="is-new-result">new result</span>' not in home
-    assert "site-star" not in home + complete
-    assert '<a href="#verification-ladders">What each rung means</a>' in complete
-    assert complete.count("<p>") == 3
-    assert "site-rung-legend-icons" not in complete
+def test_results_table_omits_the_superseded_bottom_legend() -> None:
+    overview = overview_data.load()
+    table = overview_sections.results_table(overview)
+    assert "site-rung-legend" not in table
+    assert "What each rung means" not in table
+    # The full Results documentation still defines every rung and remains linkable.
+    ladders = overview_sections.verification_block()
+    for label in overview_sections.rung_meanings():
+        assert label in ladders
+    assert overview_sections.LADDERS_SECTION == "verification-ladders"
 
 
 def test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts() -> None:
@@ -154,11 +134,18 @@ def test_atlas_preview_reuses_canonical_split_rows_and_keeps_every_case() -> Non
         assert 'class="site-atlas-n is-new-result"' not in tile
         assert "evidence-badge" not in tile
     assert preview.count('id="pop-case"') == 1
-    assert preview.count('role="tab"') == complete.count('role="tab"') == 8
+    assert preview.count('role="tab"') == complete.count('role="tab"') == 10
+    assert 'data-atlas-drawing="regularized"' in preview
+    drawing_tabs = overview_sections.atlas_drawing_tabs("homepage-atlas-cells")
+    assert preview.count(drawing_tabs) == 1
+    assert drawing_tabs.count('role="tab"') == 2
+    selected = re.findall(r'<button[^>]*aria-selected="true"[^>]*>', drawing_tabs)
+    assert len(selected) == 1
+    assert 'data-atlas-drawing-tab="regularized"' in selected[0]
     assert "data-atlas-toggle data-homepage-atlas-toggle" in preview
     assert preview.count("data-atlas-legend") == complete.count("data-atlas-legend")
     assert 'aria-controls="atlas-cells"' not in preview
-    assert preview.count('aria-controls="homepage-atlas-cells"') == 9
+    assert preview.count('aria-controls="homepage-atlas-cells"') == 11
     assert len(preview.encode("utf-8")) < 400_000
     for absent in (
         "data-homepage-atlas-gzip",

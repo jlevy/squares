@@ -30,6 +30,7 @@ import copy
 import hashlib
 import json
 import re
+import shutil
 import struct
 import subprocess
 import time
@@ -47,7 +48,7 @@ from io import BytesIO
 from itertools import combinations, pairwise
 from math import isqrt
 from pathlib import Path
-from tempfile import TemporaryDirectory
+from tempfile import TemporaryDirectory, mkdtemp
 from typing import Any, Literal
 from xml.etree import ElementTree as ET
 
@@ -63,8 +64,8 @@ from devtools import (
 )
 from devtools import evand_arrangement_houses as evand_houses
 from devtools import evand_arrangement_reports as evand_reports
-from devtools import evand_exact_certificates as evand_certificates
 from devtools import gupta_house_links as gupta_houses
+from devtools import pictured_source as pictured
 from devtools import refinement_house_links as refinement_houses
 from devtools import refinement_packets as refinements
 from devtools import ryxu_house_links as ryxu_houses
@@ -79,7 +80,7 @@ from devtools.atlas_orientation import orient_atlas_witness
 from devtools.build_composite_figure_data import load_record as load_figure_record
 from devtools.result_status import RecentContributions, recent_contributions_by_case
 from devtools.rigidity_status import load_context as load_rigidity_context
-from sqpack import retained_json
+from sqpack import release, retained_json
 from sqpack.field import FieldElement
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
@@ -110,11 +111,14 @@ from sqpack.known_best import (
 from sqpack.release import (
     COMPOSITES_MAY_TRAIL,
     DATA_REVISION,
-    PUBLICATION_VERSION,
+    INFOGRAPHIC_VERSION,
     commit_date,
+    component_version,
     data_pathspec,
     data_revision,
-    edition_at,
+    infographic_edition_at,
+    parsed_version,
+    validate_release_impacts,
 )
 from sqpack.render import render_packing_svg
 from sqpack.render.color import (
@@ -196,9 +200,9 @@ PACKET_KIND = "packet-derived-facts"
 SQUISH_SOURCE_KEYS = frozenset(squish_packets.source_key(n) for n in squish_packets.NUMBERS)
 #: The report that solved 48 known-best packings to their exact optima (T-098). It moves
 #: a case's side by at most 5e-11 and keeps its packing, so the atlas pictures the
-#: packing from the source that held the count before, which the packet's comparison
-#: receipt names (`devtools.evand_exact_certificates compare`).
-EXACT_OPTIMA_SOURCE_KEY = "[evand exact optima 2026-10-05]"
+#: packing from the source that held the count before (`devtools.pictured_source`, the
+#: rule the case pages' "as published" credit reads too).
+EXACT_OPTIMA_SOURCE_KEY = pictured.EXACT_OPTIMA_SOURCE_KEY
 
 #: The cases this build covers, end to end: sources, witnesses, house renderings,
 #: frontier back-links and manifest entries.
@@ -394,6 +398,9 @@ PNG_RENDER_TIMEOUT_SECONDS = 120
 #: The two facts a composite records about itself, as its metadata names them.
 IDENTITY_REVISION_KEY = "data-revision"
 IDENTITY_DATE_KEY = "data-date"
+IDENTITY_VERSION_KEY = render_composite_pdf.SVG_VERSION_KEY
+#: Existing baseline drawings predate an explicit semantic-version metadata field.
+LEGACY_INFOGRAPHIC_VERSION = render_composite_pdf.LEGACY_INFOGRAPHIC_VERSION
 
 
 @dataclass(frozen=True)
@@ -416,11 +423,12 @@ class CompositeIdentity:
 
     data_revision: str
     data_date: str
+    version: str = LEGACY_INFOGRAPHIC_VERSION
 
     @property
     def stamp(self) -> str:
         """The footer's last line: the edition as it read at this data revision."""
-        return edition_at(self.data_revision)
+        return infographic_edition_at(self.data_revision, self.version)
 
     @property
     def formatted_date(self) -> str:
@@ -446,6 +454,10 @@ class CompositeIdentity:
     def problems(self) -> list[str]:
         """What is wrong with the record as written, before git is asked anything."""
         found = []
+        try:
+            parsed_version(self.version)
+        except ValueError as error:
+            found.append(str(error))
         if re.fullmatch(r"[0-9a-f]{40}", self.data_revision) is None:
             found.append(f"{IDENTITY_REVISION_KEY} {self.data_revision!r} is not a full commit")
         try:
@@ -829,6 +841,16 @@ COMPOSITES: tuple[CompositeCanvas, ...] = tuple(
 #: because a set built from this one called the poster an artifact nobody owned.
 PRIMARY_COMPOSITE = COMPOSITES[0]
 
+#: What both composites' descriptions say of the drawings their tiles show: the
+#: regularization policy's default picture (section 12), credited as its section 7 and
+#: section 9, question 16 say, by the credit paragraph `_regularization_lines` writes.
+POSTER_REGULARIZATION_PROSE = (
+    "A tile draws its packing's regularized view, an exact redrawing of the same packing "
+    "at the same side, where that view improves on the packing as published, and the "
+    "packing as published elsewhere. The information block gives the compact credit; "
+    "metadata records the regularized cases and their complete generator attribution."
+)
+
 #: The accessible title and description, per composite. Prose about a particular range
 #: is written rather than computed -- nothing spells "one through one hundred" from two
 #: integers -- so it is recorded per stem, and a composite with no entry here cannot be
@@ -841,6 +863,7 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "n equals 1 through 100. Each tile is normalized to its own container and "
             "labeled with n, the best known upper bound on the container side and, where "
             "the value is not yet settled, the best proved lower bound beneath it. "
+            f"{POSTER_REGULARIZATION_PROSE} "
             "Crimson marks a recent construction giving an upper bound, a proof of a "
             "lower bound or an optimality proof since August 2026. Badges mark "
             "which side lengths are proved optimal, and whether a side length is pinned "
@@ -848,7 +871,7 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "The black title and inline project reference sit above the grid. "
             "The black two-line definition, shared eight-item legend and unique "
             "corpus-wide construction, lower-bound and optimality credits sit below it, "
-            "followed by the diagram credit and "
+            "followed by the regularization credits, the diagram credit and "
             "dated edition. Every counted legend item includes the depicted total. "
             "Case counts are crimson for recent results and gray otherwise; ordinary bounds "
             "and annotations are black. "
@@ -873,7 +896,9 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "contains the title, complete legend and publication details. Each tile is "
             "normalized to its own container and labeled with n, the best known upper "
             "bound on the container side and, where the value is not yet settled, the "
-            "best proved lower bound beneath it. Crimson marks a recent construction giving "
+            "best proved lower bound beneath it. "
+            f"{POSTER_REGULARIZATION_PROSE} "
+            "Crimson marks a recent construction giving "
             "an upper bound, a proof of a lower bound or an optimality proof since August "
             "2026. Badges mark which side lengths are proved "
             "optimal, and whether a side length is pinned exactly by a radical or a "
@@ -883,7 +908,9 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "text and ordinary bound captions are black. Every counted legend item "
             "includes the depicted total. The same corpus-wide construction, lower-bound "
             "and optimality credit paragraphs name contributors oldest first, "
-            "with formalization and verification roles explicitly qualified. "
+            "with formalization, verification infrastructure included, credited in one "
+            "clause, and a one-sentence regularization paragraph counts the regularized "
+            "tiles and credits who regularized them. "
             "Full source and per-case attribution is retained in the SVG metadata. "
             "The diagram credit and dated edition follow. "
             "A blank line precedes the plain project reference and address. "
@@ -970,23 +997,11 @@ def _unitsquare_source_path(n: int) -> Path:
     return found[0] if found else UNITSQUARE_ROOT / filename
 
 
-@cache
-def _exact_optima_pictured() -> dict[int, str]:
-    """The source key each exact optimum's packing is pictured from, by count."""
-    receipt = json.loads(evand_certificates.COMPARISON_RECEIPT.read_text(encoding="utf-8"))
-    return {int(row["n"]): str(row["earlier_source_key"]) for row in receipt["rows"]}
-
-
 def pictured_source_key(case: FrontierCase) -> str:
-    """The source whose geometry the atlas reads for a case: the record's own, except
-    where an exact optimum of a packing reports the side and its finder's source holds
-    the pose."""
-    if case.reported_source_key != EXACT_OPTIMA_SOURCE_KEY:
-        return case.reported_source_key
-    pictured = _exact_optima_pictured().get(case.n)
-    if pictured is None:
-        raise ValueError(f"n={case.n}: no source holds the packing of its exact optimum")
-    return pictured
+    """The source whose geometry the atlas reads for a case (`devtools.pictured_source`):
+    the record's own, except where an exact optimum of a packing reports the side and its
+    finder's source holds the pose."""
+    return pictured.pictured_source_key(case.n, case.reported_source_key)
 
 
 def _source_plan(
@@ -1136,6 +1151,7 @@ def clear_build_caches() -> None:
     source_plans.cache_clear()
     _built_corpus.cache_clear()
     _expected_outputs.cache_clear()
+    _regularized_tiles.cache_clear()
 
 
 @cache
@@ -1903,6 +1919,33 @@ def _composite_bound_display(
     raise ValueError("a triangle bound caption collides with its algebraic degree")
 
 
+@cache
+def _regularized_tiles() -> dict[int, dict[str, Any]]:
+    """The layer's index entries of the cases whose default picture is their regularized
+    view (regularization policy, section 12): the record `devtools.default_drawings`
+    writes and the records tier checks, refused where it is not the index's."""
+    from devtools.default_drawings import regularized_defaults  # noqa: PLC0415
+    from devtools.render_regularized_atlas import regularized_entries  # noqa: PLC0415
+
+    drawn = regularized_defaults()
+    return {entry["n"]: entry for entry in regularized_entries() if entry["n"] in drawn}
+
+
+def tile_frame(built: BuiltCase) -> PackingFrame:
+    """The frame a composite's card draws: the case's default picture. That is its
+    regularized view where the view improves on the house drawing, read as the homepage's
+    regularized drawings read it (`render_regularized_atlas.regularized_frame`: the
+    view's squares and certified side under the record's own evidence tier and check,
+    with the view's source id), and its retained witness everywhere else. The card's
+    labels and badges are the record's either way."""
+    entry = _regularized_tiles().get(built.frontier.n)
+    if entry is None:
+        return frame_from_witness(built.witness)
+    from devtools.render_regularized_atlas import regularized_frame  # noqa: PLC0415
+
+    return regularized_frame(entry)
+
+
 def _append_summary_card(
     root: ET.Element,
     built: BuiltCase,
@@ -1919,7 +1962,7 @@ def _append_summary_card(
     card_x, card_y = position.left, position.top
     packing_x = card_x + SUMMARY_PACKING_INSET_X
     packing_y = card_y + SUMMARY_PACKING_INSET_Y
-    frame = frame_from_witness(built.witness)
+    frame = tile_frame(built)
     side = frame.container_side.projected
     reference_side = Decimal(isqrt(n - 1) + 1) if row_sizing else side
     scale = SUMMARY_PACKING_SIZE / reference_side
@@ -2053,9 +2096,7 @@ def _append_summary_card(
             "font-size": "29",
             "font-weight": "700",
             "letter-spacing": "-0.5",
-            "fill": FIRST_PARTY_ACCENT_COLOR
-            if recent is not None and recent.any
-            else LABEL_MUTED_COLOR,
+            "fill": LABEL_MUTED_COLOR,
         },
     ).text = str(n)
 
@@ -2075,9 +2116,7 @@ def _append_summary_card(
             label,
             x=cursor,
             top=badge_top,
-            accent=FIRST_PARTY_ACCENT_COLOR
-            if recent is not None and recent.optimal and glyph == "O"
-            else None,
+            accent=None,
         )
         cursor -= SUMMARY_BADGE_SIZE + Decimal(4)
     bound = sub(
@@ -2573,9 +2612,7 @@ def _append_summary_legend(
                 font_family=POSTER_BODY_FONT,
                 font_weight=POSTER_BODY_WEIGHT,
                 mark_font_weight=POSTER_BODY_WEIGHT,
-                label_fill=FIRST_PARTY_ACCENT_COLOR
-                if item.key == "recent"
-                else SUMMARY_SMALL_FILL,
+                label_fill=SUMMARY_SMALL_FILL,
             )
             if item.key == "recent":
                 recent = column[-1]
@@ -2744,6 +2781,18 @@ def _balanced_credit_lines(
         if line_count is not None
         else "poster attribution credits exceed their information block"
     )
+    return _balanced_atoms(atoms, line_count=line_count, measure=measure, failure=failure)
+
+
+def _balanced_atoms(
+    atoms: Sequence[str],
+    *,
+    line_count: int | None = None,
+    measure: Decimal = POSTER_INFORMATION_WIDTH,
+    failure: str,
+) -> tuple[str, ...]:
+    """Consecutive runs of `atoms`, each kept whole, as the fewest lines within `measure`
+    (or exactly `line_count` of them), balanced in width."""
     # The retained face measures unkerned advances, so span widths are exactly additive.
     # Measure each indivisible role-prefix/name atom once, even in a four-line search.
     atom_widths = tuple(_text_width(atom, POSTER_BODY_SIZE) for atom in atoms)
@@ -2823,6 +2872,7 @@ class InformationLayout:
     legend_baseline: Decimal
     credit_baselines: tuple[Decimal, ...]
     attribution_baselines: tuple[tuple[Decimal, ...], ...]
+    regularization_baselines: tuple[Decimal, ...]
     diagram_baseline: Decimal
     stamp_baseline: Decimal
     project_baseline: Decimal
@@ -2844,6 +2894,60 @@ def _print_attribution_lines() -> tuple[tuple[str, ...], ...]:
         _balanced_credit_lines(paragraph, measure=measure)
         for paragraph in _print_attributions().paragraphs
     )
+
+
+#: The owner's compact print credit; detailed generator attribution stays in metadata.
+POSTER_REGULARIZATION_LINES = (
+    "Drawn packings are regularized for cleaner display using Squares Project rules,",
+    "based on Daniel\u2019s regularizer",
+)
+POSTER_REGULARIZATION_CREDIT = " ".join(POSTER_REGULARIZATION_LINES)
+
+
+@cache
+def _full_names() -> tuple[tuple[str, str], ...]:
+    """Every full personal name the print credits know and the name they print it as:
+    each alias of several words in `credit-attributions.json` that begins or ends with
+    the name it normalizes to, longest first. A project's or a handle's alias ("Squares
+    Project" for Levy) is not a full name and is left alone."""
+    aliases = json.loads(_print_attributions().metadata)["name_aliases"]
+    found = {
+        (alias, name)
+        for alias, name in aliases.items()
+        if " " in alias
+        and alias != name
+        and (alias.endswith(f" {name}") or alias.startswith(f"{name} "))
+    }
+    return tuple(sorted(found, key=lambda pair: (-len(pair[0]), pair[0])))
+
+
+def regularization_sentences(
+    numbers: Sequence[int], _count: int
+) -> tuple[tuple[str, ...], ...]:
+    """The compact print credit, with detailed attribution in the poster's metadata."""
+    return (tuple(POSTER_REGULARIZATION_CREDIT.split()),) if numbers else ()
+
+
+def _regularization_generator_credits(numbers: Sequence[int]) -> tuple[str, ...]:
+    """Full generator credit for every pictured regularization, retained as metadata."""
+    from devtools.default_drawings import credit_line  # noqa: PLC0415
+
+    return tuple(dict.fromkeys(credit_line(n) for n in numbers))
+
+
+def _regularized_numbers(canvas: CompositeCanvas) -> tuple[int, ...]:
+    """The cases a composite draws from their regularized views."""
+    return tuple(n for n in canvas.spec.numbers if n in _regularized_tiles())
+
+
+@cache
+def _regularization_lines_for(numbers: tuple[int, ...], _count: int) -> tuple[str, ...]:
+    return POSTER_REGULARIZATION_LINES if numbers else ()
+
+
+def _regularization_lines(canvas: CompositeCanvas) -> tuple[str, ...]:
+    """The owner's two-line print credit for regularized default pictures."""
+    return _regularization_lines_for(_regularized_numbers(canvas), canvas.spec.count)
 
 
 @cache
@@ -2933,6 +3037,16 @@ def _information_layout(
         baselines = tuple(first + pitch * index for index in range(len(lines)))
         attribution_baselines.append(baselines)
         credit_bottom = baselines[-1] + _print_ink_bounds(lines[-1], body_size)[1]
+    regularization = _regularization_lines(canvas)
+    regularization_baselines: tuple[Decimal, ...] = ()
+    if regularization:
+        first = credit_bottom + gap - _print_ink_bounds(regularization[0], body_size)[0]
+        regularization_baselines = tuple(
+            first + pitch * index for index in range(len(regularization))
+        )
+        credit_bottom = (
+            regularization_baselines[-1] + _print_ink_bounds(regularization[-1], body_size)[1]
+        )
     diagram_baseline = (
         credit_bottom + gap - _print_ink_bounds(POSTER_DIAGRAM_CREDIT, body_size)[0]
     )
@@ -2966,6 +3080,7 @@ def _information_layout(
         legend_baseline,
         credit_baselines,
         tuple(attribution_baselines),
+        regularization_baselines,
         diagram_baseline,
         stamp_baseline,
         project_baseline,
@@ -3135,6 +3250,29 @@ def _append_composite_information(
             text_line(
                 f"{paragraph.key}-credit-line", content, baseline, parent=attribution_block
             )
+    regularization_lines: list[ET.Element] = []
+    if layout.regularization_baselines:
+        regularization_block = sub(
+            block,
+            "g",
+            {
+                "data-feature": "regularization-credits",
+                "data-depicted-range": canvas.spec.cases.label,
+                "data-regularized-cases": json.dumps(list(_regularized_numbers(canvas))),
+                "data-generator-credits": json.dumps(
+                    _regularization_generator_credits(_regularized_numbers(canvas)),
+                    ensure_ascii=False,
+                ),
+            },
+        )
+        regularization_lines = [
+            text_line(
+                "regularization-credit-line", content, baseline, parent=regularization_block
+            )
+            for content, baseline in zip(
+                _regularization_lines(canvas), layout.regularization_baselines, strict=True
+            )
+        ]
     text_line("credit", POSTER_DIAGRAM_CREDIT, layout.diagram_baseline)
     text_line("release-stamp", identity.poster_stamp, layout.stamp_baseline)
     if corner:
@@ -3159,6 +3297,7 @@ def _append_composite_information(
         ],
         list(credit_block.findall(svg_tag("text"))),
         *(list(paragraph.findall(svg_tag("text"))) for paragraph in attribution_blocks),
+        regularization_lines,
         [
             node
             for node in block.findall(svg_tag("text"))
@@ -3249,6 +3388,11 @@ def render_known_best_summary_svg(
             "first-n": str(composite.first_n),
             IDENTITY_DATE_KEY: identity.data_date,
             IDENTITY_REVISION_KEY: identity.data_revision,
+            **(
+                {IDENTITY_VERSION_KEY: identity.version}
+                if identity.version != LEGACY_INFOGRAPHIC_VERSION
+                else {}
+            ),
             "generated-by": GENERATOR,
             "last-n": str(composite.last_n),
             "rows": str(composite.rows),
@@ -3416,7 +3560,11 @@ def _png_matches_summary(export: RasterExport, svg_text: str) -> bool:
 
 
 def _update_png_export(
-    export: RasterExport, svg_text: str, *, full_png: bytes | None = None
+    export: RasterExport,
+    svg_text: str,
+    *,
+    full_png: bytes | None = None,
+    preserve_edition: bool = False,
 ) -> None:
     """Draw one raster from the SVG, with the same rasteriser that draws the PDF.
 
@@ -3432,13 +3580,32 @@ def _update_png_export(
     than written. Crops are always derived again, since a matching size and receipt
     cannot distinguish an old shortened-viewport render from the full raster's pixels.
     """
-    if export.crop_units is None and _png_matches_summary(export, svg_text):
-        return
-    stamped = png_export_bytes(export, svg_text, full_png=full_png)
+    stamped = prepared_png_export(
+        export, svg_text, full_png=full_png, preserve_edition=preserve_edition
+    )
     if export.path.is_file() and export.path.read_bytes() == stamped:
         return
     with atomic_output_file(export.path, make_parents=True) as temporary:
         temporary.write_bytes(stamped)
+
+
+def prepared_png_export(
+    export: RasterExport,
+    svg_text: str,
+    *,
+    full_png: bytes | None = None,
+    preserve_edition: bool = False,
+) -> bytes:
+    """Produce one guarded export candidate without publishing it."""
+    if export.crop_units is None and _png_matches_summary(export, svg_text):
+        return export.path.read_bytes()
+    stamped = png_export_bytes(export, svg_text, full_png=full_png)
+    if preserve_edition and export.path.is_file() and export.path.read_bytes() != stamped:
+        raise ValueError(
+            f"{export.path.name} would change under its existing infographic version; "
+            "cut a patch or minor successor before correcting the export"
+        )
+    return stamped
 
 
 def png_export_bytes(
@@ -3496,7 +3663,9 @@ def png_export_bytes(
     return stamped
 
 
-def _update_png_exports(canvas: CompositeCanvas, svg_text: str) -> None:
+def _update_png_exports(
+    canvas: CompositeCanvas, svg_text: str, *, preserve_edition: bool = False
+) -> None:
     """Redraw every raster of one composite from the SVG this run produced."""
     full_exports: dict[int, RasterExport] = {}
     for export in canvas.rasters:
@@ -3505,12 +3674,15 @@ def _update_png_exports(canvas: CompositeCanvas, svg_text: str) -> None:
             export,
             svg_text,
             full_png=full_export.path.read_bytes() if full_export is not None else None,
+            preserve_edition=preserve_edition,
         )
         if export.crop_units is None:
             full_exports[export.scale] = export
 
 
-def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]:
+def _composite_pdf_problems(
+    canvas: CompositeCanvas, svg_text: str, *, pdf_path: Path | None = None
+) -> list[str]:
     """Report one composite's PDF export against the SVG this build produced.
 
     The PDF is written by `render_composite_pdf`, which owns the page geometry and
@@ -3518,7 +3690,7 @@ def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]
     check reports the whole family, rather than passing three of four exports and
     leaving the reader to run a second command to learn about the fourth.
     """
-    pdf = render_composite_pdf.composite_pdf(canvas.spec.stem)
+    pdf = pdf_path or render_composite_pdf.composite_pdf(canvas.spec.stem)
     name = f"atlas/known-best/{pdf.name}"
     if not pdf.is_file():
         return [f"missing {name}"]
@@ -3528,6 +3700,15 @@ def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]
         return [f"{name} is not a readable PDF"]
     if recorded != hashlib.sha256(svg_text.encode("utf-8")).hexdigest():
         return [f"missing or stale {name} export receipt"]
+    expected_version = render_composite_pdf.svg_metadata(svg_text).get(
+        IDENTITY_VERSION_KEY, LEGACY_INFOGRAPHIC_VERSION
+    )
+    try:
+        version = render_composite_pdf.pdf_version(pdf.read_bytes())
+    except ValueError as error:
+        return [f"{name} has an invalid infographic edition: {error}"]
+    if version != expected_version:
+        return [f"{name} carries another infographic edition than {expected_version}"]
     return []
 
 
@@ -4081,7 +4262,7 @@ def drawable_identity() -> CompositeIdentity:
             "its stamp does not name; commit them and re-pin first:\n"
             + (dirty.stdout.rstrip() or dirty.stderr.strip())
         )
-    return CompositeIdentity(DATA_REVISION, day)
+    return CompositeIdentity(DATA_REVISION, day, INFOGRAPHIC_VERSION)
 
 
 def retained_identity(svg_text: str) -> CompositeIdentity:
@@ -4093,7 +4274,11 @@ def retained_identity(svg_text: str) -> CompositeIdentity:
             f"records no {' or '.join(missing)}: it does not say what data it was drawn "
             "from; redraw it with --update-composites"
         )
-    return CompositeIdentity(values[IDENTITY_REVISION_KEY], values[IDENTITY_DATE_KEY])
+    return CompositeIdentity(
+        values[IDENTITY_REVISION_KEY],
+        values[IDENTITY_DATE_KEY],
+        values.get(IDENTITY_VERSION_KEY, LEGACY_INFOGRAPHIC_VERSION),
+    )
 
 
 def _without_composite_geometry(document: dict, envelope: str) -> dict:
@@ -4154,6 +4339,173 @@ def update_composite_records() -> None:
     print("known-best composite records refreshed: layout only; case facts preserved")
 
 
+def _published_composite_text(path: Path) -> str:
+    """The immutable main drawing, separate from a retained review candidate."""
+    relative = path.relative_to(REPOSITORY_ROOT).as_posix()
+    result = _git_result("show", f"origin/main:{relative}")
+    if result.returncode:
+        raise ValueError(f"the published main drawing is unavailable: {relative}")
+    return result.stdout
+
+
+def validate_composite_redraws(
+    drawings: Sequence[tuple[CompositeCanvas, str]], identity: CompositeIdentity
+) -> None:
+    """Keep the published edition immutable and a selected successor fixed in review."""
+    validate_release_impacts()
+    if identity.version != component_version("infographics"):
+        raise ValueError("the infographic redraw must use its current owning edition")
+    expected_paths = {canvas.svg_path for canvas in resolved_composites()}
+    if (
+        len(drawings) != len(expected_paths)
+        or {canvas.svg_path for canvas, _svg_text in drawings} != expected_paths
+    ):
+        raise ValueError("the infographic redraw requires the complete pair")
+    published = release.published_infographic_version(REPOSITORY_ROOT)
+    if identity.version != published:
+        validate_release_impacts(
+            externally_changed=("infographics",),
+            previous_versions={"infographics": published},
+        )
+    for canvas, svg_text in drawings:
+        if retained_identity(svg_text) != identity:
+            raise ValueError(
+                f"{_relative(canvas.svg_path)} has a mixed infographic redraw identity"
+            )
+        retained = canvas.svg_path
+        if retained.is_file():
+            previous_identity = retained_identity(retained.read_text(encoding="utf-8"))
+            if previous_identity.version not in {published, identity.version}:
+                raise ValueError(
+                    "the retained infographic version is neither main "
+                    "nor its selected successor"
+                )
+        if identity.version == published and svg_text != _published_composite_text(retained):
+            raise ValueError(
+                f"{_relative(retained)} would change under existing infographic version "
+                f"{identity.version}; cut its patch or minor successor first"
+            )
+
+
+class CompositePromotionError(RuntimeError):
+    """Publication rollback failed; external staging backups must be retained."""
+
+
+def staged_composite_family(
+    drawings: Sequence[tuple[CompositeCanvas, str]], identity: CompositeIdentity, stage: Path
+) -> dict[Path, Path]:
+    """Stage every vector and export and verify the whole family before promotion."""
+    validate_composite_redraws(drawings, identity)
+    stage.mkdir(parents=True, exist_ok=True)
+    outputs: dict[Path, Path] = {}
+    for canvas, svg_text in drawings:
+        staged = stage / canvas.svg_path.name
+        staged.write_text(svg_text, encoding="utf-8")
+        outputs[canvas.svg_path] = staged
+    for canvas, svg_text in drawings:
+        preserve_edition = identity.version == release.published_infographic_version(
+            REPOSITORY_ROOT
+        )
+        full_pngs: dict[int, bytes] = {}
+        for export in canvas.rasters:
+            content = prepared_png_export(
+                export,
+                svg_text,
+                full_png=full_pngs.get(export.scale) if export.crop_units is not None else None,
+                preserve_edition=preserve_edition,
+            )
+            staged = stage / export.path.name
+            staged.write_bytes(content)
+            outputs[export.path] = staged
+            if export.crop_units is None:
+                full_pngs[export.scale] = content
+        pdf = render_composite_pdf.composite_pdf(canvas.spec.stem)
+        content = render_composite_pdf.prepared_pdf(
+            svg_text, pdf.read_bytes() if pdf.is_file() else None
+        )
+        staged = stage / pdf.name
+        staged.write_bytes(content)
+        outputs[pdf] = staged
+    _require_valid_composite_family(outputs)
+    return outputs
+
+
+def _require_valid_composite_family(outputs: Mapping[Path, Path] | None = None) -> None:
+    if outputs is not None:
+        expected: set[Path] = set()
+        for canvas in resolved_composites():
+            expected.add(canvas.svg_path)
+            expected.update(export.path for export in canvas.rasters)
+            expected.add(render_composite_pdf.composite_pdf(canvas.spec.stem))
+        if set(outputs) != expected:
+            raise ValueError("staging requires every configured SVG, PNG and PDF")
+    findings = composite_findings(outputs=outputs)
+    if findings.problems:
+        raise ValueError(
+            "composite family failed validation:\n  " + "\n  ".join(findings.problems[:20])
+        )
+    if outputs is not None:
+        for canvas in resolved_composites():
+            svg_text = outputs[canvas.svg_path].read_text(encoding="utf-8")
+            stated = render_composite_pdf.pdf_date_text(
+                render_composite_pdf.svg_data_date(svg_text)
+            )
+            pdf = render_composite_pdf.composite_pdf(canvas.spec.stem)
+            if render_composite_pdf.pdf_dates(outputs[pdf].read_bytes()) != {
+                "CreationDate": stated,
+                "ModDate": stated,
+            }:
+                raise ValueError(
+                    f"staged {pdf.name} has PDF dates other than its SVG's data date"
+                )
+
+
+def _promote_composite_file(destination: Path, staged: Path) -> None:
+    with atomic_output_file(destination, make_parents=True) as temporary:
+        shutil.copy2(staged, temporary)
+
+
+def promote_composite_family(outputs: Mapping[Path, Path], stage: Path) -> None:
+    """Promote validated candidates; restore all old finals if promotion fails."""
+    _require_valid_composite_family(outputs)
+    backups = stage / "backups"
+    backups.mkdir(exist_ok=True)
+    previous: dict[Path, Path | None] = {}
+    for index, destination in enumerate(outputs):
+        if destination.is_file():
+            backup = backups / str(index)
+            shutil.copy2(destination, backup)
+            previous[destination] = backup
+        else:
+            previous[destination] = None
+    attempted: list[Path] = []
+    try:
+        for destination, candidate in outputs.items():
+            if destination.is_file() and destination.read_bytes() == candidate.read_bytes():
+                continue
+            attempted.append(destination)
+            _promote_composite_file(destination, candidate)
+        _require_valid_composite_family()
+    except BaseException as error:
+        failures = []
+        for destination in reversed(attempted):
+            try:
+                backup = previous[destination]
+                if backup is None:
+                    destination.unlink(missing_ok=True)
+                else:
+                    _promote_composite_file(destination, backup)
+            # Any rollback failure must retain recovery evidence, including cancellation.
+            except BaseException as rollback_error:  # noqa: BLE001
+                failures.append(f"{destination.name}: {rollback_error}")
+        if failures:
+            raise CompositePromotionError(
+                f"composite promotion failed and rollback was incomplete; keep backups at "
+                f"{backups}: {'; '.join(failures)}"
+            ) from error
+        raise
+
+
 def update_composites() -> None:
     """Redraw both composites and every export, from the retained witnesses.
 
@@ -4173,24 +4525,22 @@ def update_composites() -> None:
             "from them would too; run --update first:\n  " + "\n  ".join(problems[:20])
         )
     cases = retained_cases(CORPUS.numbers)
-    rasters = 0
-    for canvas in resolved_composites():
-        svg_text = render_known_best_summary_svg(_cards(cases, canvas), canvas, identity)
-        retained = canvas.svg_path
-        if not retained.is_file() or retained.read_text(encoding="utf-8") != svg_text:
-            with atomic_output_file(retained, make_parents=True) as temporary:
-                temporary.write_text(svg_text, encoding="utf-8")
-        # Each composite ships as one family drawn from one SVG in one run: the vector
-        # itself, every PNG raster, and the PDF. Splitting the exports across commands
-        # is what would let four of the five be current and the fifth be last week's.
-        _update_png_exports(canvas, svg_text)
-        render_composite_pdf.update(canvas.spec.stem)
-        rasters += len(canvas.rasters)
-    findings = composite_findings()
-    if findings.problems:
-        raise ValueError(
-            "composite redraw postflight failed:\n  " + "\n  ".join(findings.problems[:20])
-        )
+    drawings = [
+        (canvas, render_known_best_summary_svg(_cards(cases, canvas), canvas, identity))
+        for canvas in resolved_composites()
+    ]
+    stage = Path(mkdtemp(prefix="sqpack-infographic-family-"))
+    retain_backups = False
+    try:
+        outputs = staged_composite_family(drawings, identity, stage)
+        promote_composite_family(outputs, stage)
+    except CompositePromotionError:
+        retain_backups = True
+        raise
+    finally:
+        if not retain_backups:
+            shutil.rmtree(stage)
+    rasters = sum(len(canvas.rasters) for canvas, _svg_text in drawings)
     print(
         f"known-best composites redrawn from {identity.stamp}, data of "
         f"{identity.data_date}: {len(COMPOSITES)} SVG, {rasters} PNG rasters, "
@@ -4440,6 +4790,8 @@ def _identity_git_problems(path: str, identity: CompositeIdentity) -> list[str]:
 
 def composite_findings(
     redraw: Callable[[CompositeCanvas, CompositeIdentity], str] | None = None,
+    *,
+    outputs: Mapping[Path, Path] | None = None,
 ) -> CompositeFindings:
     """Every retained composite, held to its own record, the release and its exports.
 
@@ -4463,12 +4815,15 @@ def composite_findings(
     """
     problems: list[str] = []
     notes: list[str] = []
+    family_versions: set[str] = set()
+    staged = outputs or {}
     for canvas in resolved_composites():
         path = _relative(canvas.svg_path)
-        if not canvas.svg_path.is_file():
+        svg_path = staged.get(canvas.svg_path, canvas.svg_path)
+        if not svg_path.is_file():
             problems.append(f"missing {path}")
             continue
-        svg_text = canvas.svg_path.read_text(encoding="utf-8")
+        svg_text = svg_path.read_text(encoding="utf-8")
         root = ET.fromstring(svg_text)
         if (root.get("width"), root.get("height")) != (str(canvas.width), str(canvas.height)):
             problems.append(f"{path} is not the canvas its specification computes")
@@ -4482,6 +4837,7 @@ def composite_findings(
             identity = None
         differing = _composite_label_problems(canvas, root)
         if identity is not None:
+            family_versions.add(identity.version)
             problems.extend(_composite_edition_problems(canvas, root, identity))
             problems.extend(_identity_git_problems(path, identity))
             if redraw is not None:
@@ -4511,9 +4867,18 @@ def composite_findings(
         problems.extend(
             f"missing or stale {export.name} {export.role} receipt"
             for export in canvas.rasters
-            if not _png_matches_summary(export, svg_text)
+            if not _png_matches_summary(
+                replace(export, path=staged.get(export.path, export.path)), svg_text
+            )
         )
-        problems.extend(_composite_pdf_problems(canvas, svg_text))
+        pdf = render_composite_pdf.composite_pdf(canvas.spec.stem)
+        problems.extend(
+            _composite_pdf_problems(canvas, svg_text, pdf_path=staged.get(pdf, pdf))
+        )
+    if len(family_versions) > 1:
+        problems.append(
+            f"infographic family has mixed versions: {', '.join(sorted(family_versions))}"
+        )
     return CompositeFindings(tuple(problems), tuple(notes))
 
 
@@ -4618,13 +4983,11 @@ def _composite_edition_problems(
         )
         if actual != expected:
             problems.append(f"{path} {feature} is {actual!r}; expected {expected!r}")
-            if feature == "release-stamp" and not any(
-                PUBLICATION_VERSION in text for text in actual
-            ):
-                problems.append(
-                    f"{path} was drawn for another version than {PUBLICATION_VERSION}; "
-                    "redraw it with --update-composites"
-                )
+    if identity.version != INFOGRAPHIC_VERSION:
+        problems.append(
+            f"{path} was drawn for another version than {INFOGRAPHIC_VERSION}; "
+            "redraw it with --update-composites after cutting the infographic edition"
+        )
     return problems
 
 

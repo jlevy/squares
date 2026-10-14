@@ -106,14 +106,16 @@ DECLARED_CONSUMERS = {
         "never s(n)"
     ),
     "packing/devtools/register_regularized_bounds.py": (
-        "writes the ceiling an exact regularized view proves at 59 counts (T-155): the view's "
+        "writes the ceiling an exact regularized view proves at 59 counts (T-155) and at "
+        "n = 290 (T-156): the view's "
         "exact side as the exact form, below the ceiling it replaces, and the decimal the "
         "record printed before as the value, an upper display of it; it keeps a blocker and a "
         "ceiling section where that value and the report disagree at the printed precision, "
         "and reads the field as a ceiling and never as s(n)"
     ),
     "packing/tests/test_register_regularized_bounds.py": (
-        "holds the case records' ceilings to the registered views' exact sides (T-155) and "
+        "holds the case records' ceilings to the registered views' exact sides (T-155, T-156) "
+        "and "
         "to the earlier ceilings they replace; a ceiling throughout, never s(n)"
     ),
     "packing/devtools/regularize_gallery.py": (
@@ -640,6 +642,26 @@ def trailing_ceilings(loaded_cases: dict[int, dict]) -> dict[int, tuple[Decimal,
         if not bounds_agree_at_declared_precision(reported, verified):
             trailing[n] = (Decimal(reported["value"]), Decimal(verified["value"]))
     return trailing
+
+
+def test_no_verified_ceiling_lies_above_the_next_counts() -> None:
+    """`s(n) <= s(n + 1)`, since deleting a square from a packing leaves a packing in the
+    same square, so a ceiling above the next count's is weaker than the record already
+    proves. From 12 October 2026, when T-155 certified n = 291 at the side T-156 later
+    registered, n = 290's ceiling lay 2.4e-15 above n = 291's until T-156 moved it (PR
+    #587, review B1). A count whose ceiling the next one implies is registered by
+    monotonicity, as T-002 and T-156 are, and this test finds the next such gap."""
+    loaded = cases()
+    ceilings = {
+        n: apply_exact_ceilings.bound_value(case["verified_upper_bound"])
+        for n, case in loaded.items()
+    }
+    above = [
+        (n, float(ceilings[n] - ceilings[n + 1]))
+        for n in sorted(ceilings)
+        if n + 1 in ceilings and ceilings[n] > ceilings[n + 1]
+    ]
+    assert above == []
 
 
 def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> None:

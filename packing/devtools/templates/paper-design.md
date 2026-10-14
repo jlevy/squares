@@ -1311,7 +1311,7 @@ contributor articles use their component sheets and the same text tokens.
   A result that still stands draws no chip for that: `current best` is the default, so
   it is left unsaid. That a bound is only reported is no chip of its own: it is the
   status `recorded`. A second proof of a value another result holds says so by its kind,
-  `simplification`, and a result that bounds nothing by its kind too.
+  `simplification` or `formalization`, and a result that bounds nothing by its kind too.
   Each of these chips adds no style of its own, so every one is the same plain gray
   chip, one font size, line height and height, and they differ only in their words.
   The Rungs column is as wide as its widest chip, so in a table each chip of the status
@@ -1654,17 +1654,19 @@ contributor articles use their component sheets and the same text tokens.
   The printed posters put “recent result (since August, 2026)” after the degree key,
   with only “recent result” in red, the suffix in black, and no count.
   Both 100- and 324-case SVG, PNG and PDF exports share that legend (`think-rxkc`). A
-  case with a retained derived view in `atlas/known-best/regularized/` (X-049) uses that
-  selected drawing directly, without a website layer badge, label or legend link.
+  case whose default picture is its retained derived view in
+  `atlas/known-best/regularized/` (X-049; the regularization policy’s section 12, as
+  `atlas/known-best/default-drawings.json` records it) uses that drawing directly,
+  without a website layer badge, label or legend link.
   The index and atlas documentation keep the provenance.
-  `devtools.render_regularized_atlas` draws the selected views and its `--check`
-  verifies them against the index.
-  Each tile opens the same case record, whose drawing is the house rendering.
-  `devtools.measure_atlas_views` checks count centering, actual outline and count-ink
-  clearances, first-grid horizontal separation, uniform row pitch, complete rows and
-  their right endpoints; `tests/test_site_atlas_views.py` checks the selected counts
-  against the canonical manifest and verifies the initial CSS layout and actual
-  scroll-frame extent too.
+  `devtools.render_regularized_atlas` draws the views and its `--check` verifies them
+  against the index. Each tile opens the same case record, which draws the same picture
+  first and keeps the house rendering one click away, under *As published*, with its
+  source’s credit. `devtools.measure_atlas_views` checks count centering, actual outline
+  and count-ink clearances, first-grid horizontal separation, uniform row pitch,
+  complete rows and their right endpoints; `tests/test_site_atlas_views.py` checks the
+  selected counts against the canonical manifest and verifies the initial CSS layout and
+  actual scroll-frame extent too.
 
 - **Action under a table or grid.** Where one control follows a table or a grid, it is
   the site’s one action button, `.site-action`, in a centred `.site-action-row`: the

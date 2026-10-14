@@ -13,6 +13,9 @@ interface SiteAtlasParts {
   /** Complete the visible preview with freshly measured capacity, before layout writes. */
   beforeArrange?: (capacity: number) => void;
   scales?: HTMLElement | null;
+  drawings?: HTMLElement | null;
+  /** Restart preparation for the sources selected by the drawing chooser. */
+  onDrawingChange?: () => void;
 }
 
 /** A mounted block's two acts: arrange the triangle for the width, and change the

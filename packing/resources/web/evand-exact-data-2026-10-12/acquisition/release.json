@@ -1,0 +1,246 @@
+{
+  "format": "evand-release-custody-v1",
+  "release_url": "https://github.com/evand/square-packing/releases/tag/exact-data-2026-10-12",
+  "release_id": 410678872,
+  "tag": "exact-data-2026-10-12",
+  "target_commit": "31523f87316bdfda00f5459dd9077928e264f133",
+  "name": "s(29) minimal polynomial (degree 7213) and grade-C certificates: data",
+  "created_at": "2026-10-12T13:59:32Z",
+  "published_at": "2026-10-12T14:14:15Z",
+  "immutable": false,
+  "retrieved_at_utc": "2026-10-12T14:41Z",
+  "announced_in": "https://github.com/jlevy/squares/issues/545#issuecomment-6126076974",
+  "assets": [
+    {
+      "name": "SHA256SUMS",
+      "id": 633984924,
+      "url": "https://github.com/evand/square-packing/releases/download/exact-data-2026-10-12/SHA256SUMS",
+      "bytes": 171,
+      "github_digest": "sha256:cd98b11150843e1a38b1f1afb943b17c2464c9df0d4088bfcb9dd96dab860e03",
+      "sha256": "cd98b11150843e1a38b1f1afb943b17c2464c9df0d4088bfcb9dd96dab860e03",
+      "uploaded_at": "2026-10-12T14:14:09Z",
+      "disposition": "retained",
+      "reason": "The release's own digest list for its two archives; both digests match the downloads.",
+      "retained_path": "acquisition/release/SHA256SUMS"
+    },
+    {
+      "name": "gradec-233.tar.zst",
+      "id": 633984916,
+      "url": "https://github.com/evand/square-packing/releases/download/exact-data-2026-10-12/gradec-233.tar.zst",
+      "bytes": 238231,
+      "github_digest": "sha256:c71633f3850eb8b06c40ba04f824e9b6262b27b7996f62f69c6ad014a4ea9fa3",
+      "sha256": "c71633f3850eb8b06c40ba04f824e9b6262b27b7996f62f69c6ad014a4ea9fa3",
+      "uploaded_at": "2026-10-12T14:14:09Z",
+      "disposition": "retained",
+      "reason": "The grade-C data, retained as published: 723 files and 15,787,809 bytes unpacked, every file a single-line JSON or a short log, so the compressed archive keeps them in 238 KB and binds them to the digest the release states. It unpacks with Python 3.14's standard library (tarfile mode r:zst). The README and the two status files are also kept unpacked beside it, under acquisition/release/gradec/.",
+      "retained_path": "acquisition/release/gradec-233.tar.zst"
+    },
+    {
+      "name": "s29-minpoly.tar.zst",
+      "id": 633984929,
+      "url": "https://github.com/evand/square-packing/releases/download/exact-data-2026-10-12/s29-minpoly.tar.zst",
+      "bytes": 87237962,
+      "github_digest": "sha256:708e1b8b45894667f90a0d18b55bb35ed6079b84d33f9656976fd5cfa6f3729c",
+      "sha256": "708e1b8b45894667f90a0d18b55bb35ed6079b84d33f9656976fd5cfa6f3729c",
+      "uploaded_at": "2026-10-12T14:14:09Z",
+      "disposition": "pinned-only",
+      "reason": "Bulk data (87 MB; 193 MB unpacked), kept out of Git (OR-18) and pinned by its digest and its members' digests. Its README, its SHA256SUMS and the Krawczyk box are retained unpacked under acquisition/release/s29/."
+    }
+  ],
+  "s29_archive": {
+    "members": [
+      {
+        "path": "n29-minpoly/README.md",
+        "bytes": 3010,
+        "sha256": "9b43d5cf9c3a7d112b9c90901fe7ad61a4ca2a86ab147e79b5536f6f0ec9ee9c"
+      },
+      {
+        "path": "n29-minpoly/SHA256SUMS",
+        "bytes": 1635,
+        "sha256": "2ef7584e07f86f82e395582e911137bbdfe503602ae00bc9ef0796a513aeb25d"
+      },
+      {
+        "path": "n29-minpoly/n29_S0.txt",
+        "bytes": 40040,
+        "sha256": "1d48659da5b726fc16ccaf0567fe351a085bb00c5dd2cf8ffce9e801a3b860ba"
+      },
+      {
+        "path": "n29-minpoly/n29_cmod.log",
+        "bytes": 2110,
+        "sha256": "0f93964848b5bfa865e4ef75efca1ba5170767c96312d651d6dc21b940511121"
+      },
+      {
+        "path": "n29-minpoly/n29_irred.log",
+        "bytes": 1606,
+        "sha256": "1ca6581a9bb0430ec8b2337912f4c91e2a0543957460b2c5795b28058e7f433a"
+      },
+      {
+        "path": "n29-minpoly/n29_krawczyk.json",
+        "bytes": 550,
+        "sha256": "e8f7b94f9e898585aba3375902c13fd584da463f6e2c2b452c5c03d5a19e7373"
+      },
+      {
+        "path": "n29-minpoly/n29_link.log",
+        "bytes": 641,
+        "sha256": "c13236396ebbf505f3e55b735a3ec4d5711edfe8ecf227454079390949da90c5"
+      },
+      {
+        "path": "n29-minpoly/n29_param_t1.json",
+        "bytes": 33365393,
+        "sha256": "fb8caab383bfa4b3eec7d09f7a0ad3524c411077450a4f27b833dc042def2f15"
+      },
+      {
+        "path": "n29-minpoly/n29_param_t2.json",
+        "bytes": 33539119,
+        "sha256": "c38a60278847a277213d94c7a4d5c689fa3229433354090f6f9c68635fefa6aa"
+      },
+      {
+        "path": "n29-minpoly/n29_param_t3.json",
+        "bytes": 29835601,
+        "sha256": "f383b514965e5cb00a75444cfdb41cf2d7dde703fc61a978c11555eb83fcdd04"
+      },
+      {
+        "path": "n29-minpoly/n29_param_t4.json",
+        "bytes": 36953343,
+        "sha256": "ffd246202149fd46d764d0e120900a18facf96c6f535d85ad48dfcddd814d67e"
+      },
+      {
+        "path": "n29-minpoly/n29_param_t5.json",
+        "bytes": 39032755,
+        "sha256": "c7a78bbd455286d1f75470695b523038284956723526d775f477bba80fc6062b"
+      },
+      {
+        "path": "n29-minpoly/n29_poly_q4.json",
+        "bytes": 27866169,
+        "sha256": "0cba5ea250da54d67741803e86f1e46a2010f60fbf6b85be34fe69640e28ee5e"
+      },
+      {
+        "path": "n29-minpoly/n29_q4_ref133k.txt",
+        "bytes": 961045,
+        "sha256": "f77170a918c04cda53d81dde9b7658f07541f7c107c5deba69c5fcaf50bac0b5"
+      },
+      {
+        "path": "n29-minpoly/n29_system.jl",
+        "bytes": 126767,
+        "sha256": "cf92c1e447ec6ca336d0cdb96b90cbbd9c27908a51e25e008e178b3688cea790"
+      },
+      {
+        "path": "n29-minpoly/n29_vmod_11.log",
+        "bytes": 910,
+        "sha256": "7ec1d9c2f06e702a74760ed8ab71a930bdfb2421f5cfa79489d805697aba2f8f"
+      },
+      {
+        "path": "n29-minpoly/n29_vmod_12.log",
+        "bytes": 910,
+        "sha256": "7a0642d65ccf24fdbdf987d1490119e3f9eb534aecd99d986e090d2073ed7710"
+      },
+      {
+        "path": "n29-minpoly/n29_vmod_13.log",
+        "bytes": 910,
+        "sha256": "e5a2e7e7fe3389f98d55799b6e36ee689644b837b3627d5a5254346b2e5aaa7a"
+      },
+      {
+        "path": "n29-minpoly/n29_vmod_14.log",
+        "bytes": 910,
+        "sha256": "a64469a4d19f4e6f04bc6ffd314d2d70faa6891567836bf5e4f0cfcda3d58d4d"
+      },
+      {
+        "path": "n29-minpoly/n29_vmod_15.log",
+        "bytes": 910,
+        "sha256": "0694f7370a80fd6a8fe0c9bb8144ee85a317a38e93274dd22596d17be14f190b"
+      },
+      {
+        "path": "n29-minpoly/n29_vmod_16.log",
+        "bytes": 910,
+        "sha256": "52d3f60ca3ca53313e18a2906c3abf1a995e92cf368ae4653c130937b4a3558c"
+      }
+    ],
+    "member_count": 21,
+    "unpacked_bytes": 201735244,
+    "inner_sha256sums_verified": "all 20 listed members match, streamed here without unpacking to disk",
+    "retained_unpacked": [
+      "acquisition/release/s29/README.md",
+      "acquisition/release/s29/SHA256SUMS",
+      "acquisition/release/s29/n29_krawczyk.json"
+    ],
+    "polynomial": {
+      "member": "n29-minpoly/n29_poly_q4.json",
+      "sha256": "0cba5ea250da54d67741803e86f1e46a2010f60fbf6b85be34fe69640e28ee5e",
+      "bytes": 27866169,
+      "degree": 7213,
+      "coefficient_count": 7214,
+      "coefficients": "decimal strings, ascending (coeffs_ascending)",
+      "leading_coefficient_digits": 325,
+      "leading_coefficient_sign": 1,
+      "height_digits": 5074,
+      "constant_term_digits": 4566,
+      "coefficients_newline_joined_sha256": "6acefb87593610bc715c2339b89f20bbb68d57a0fe8aec5fbd3bc4da5d42bb4a",
+      "source_metadata": {
+        "degree": 7213,
+        "roots_real": 165,
+        "height_digits": 5074,
+        "int_err_log10": -34946.052979788576,
+        "recognised": true,
+        "irreducible_by_patterns": true,
+        "possible_factor_degrees": [],
+        "patterns_first": [
+          [
+            1,
+            5,
+            7,
+            37,
+            194,
+            243,
+            254,
+            316,
+            644,
+            686,
+            1830,
+            2996
+          ],
+          [
+            1,
+            4,
+            6,
+            9,
+            9,
+            12,
+            48,
+            105,
+            1542,
+            2366,
+            3111
+          ],
+          [
+            5,
+            6,
+            12,
+            39,
+            42,
+            46,
+            302,
+            6761
+          ]
+        ]
+      },
+      "measured_here": "degree, coefficient count and digit counts read from the file; irreducibility, the root link and the identities were not checked here"
+    }
+  },
+  "gradec_archive": {
+    "file_count": 723,
+    "unpacked_bytes": 15787809,
+    "contacts_files": 233,
+    "certificate_files": 233,
+    "run_logs": 250,
+    "dropzero_logs": 3,
+    "inner_sha256sums_verified": "all 722 listed files match after unpacking in scratch space",
+    "retained_unpacked": [
+      "acquisition/release/gradec/README.md",
+      "acquisition/release/gradec/logs/_status.txt",
+      "acquisition/release/gradec/logs/_dropzero_status.txt"
+    ],
+    "recomputed": [
+      "receipts/gradec-n10-recompute.json"
+    ]
+  }
+}

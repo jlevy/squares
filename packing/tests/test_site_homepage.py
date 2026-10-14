@@ -139,6 +139,11 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
         assert not state["autoplay"]
         assert not state["marked_autoplay"]
         assert state["paused"]
+        assert state["play_icon"]["content"] == '""'
+        assert state["play_icon"]["width"] > 0
+        assert state["play_icon"]["half_height"] > 0
+        assert state["play_icon"]["color"] != "rgba(0, 0, 0, 0)"
+        assert not state["play_icon"]["text"]
         assert state["ready"] == state["time"] == 0
         assert state["source"] == render_overview.FILM_URL
         assert state["poster"] == "ascent-n1-324-poster.png"
@@ -292,6 +297,7 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
         "Atlas layout",
         "Atlas tile size",
         "Atlas drawing scale",
+        "Atlas drawings",
     ]
     assert initial["atlas_legend"]
     for control in initial["control_type"]:
@@ -754,7 +760,7 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
             destination = f"{origin}results.html#verification-ladders"
             sync_api.expect(page).to_have_url(destination)
             sync_api.expect(page.locator("#verification-ladders")).to_be_in_viewport()
-            sync_api.expect(page.locator("div.site-rung-legend[role=note]")).to_have_count(1)
+            sync_api.expect(page.locator("div.site-rung-legend[role=note]")).to_have_count(0)
             keyboard_destination = page.url
             page.goto(f"{origin}index.html?s=4", wait_until="load")
             all_results = page.get_by_role(

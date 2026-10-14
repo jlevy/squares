@@ -63,7 +63,7 @@ DATED_NAME = re.compile(rf"(?P<kind>[a-z]+)-{DATE}-{SLUG}\.md")
 #: and a registered record id spelled as in its frontmatter (`H-001-…`, `X-001-…`,
 #: `VE-001-…`; conventions.md section 2).
 KEBAB_NAME = re.compile(rf"{SLUG}\.md")
-FIXED_NAMES = {"README.md", "AGENTS.md", "CLAUDE.md"}
+FIXED_NAMES = {"README.md", "AGENTS.md", "CLAUDE.md", "CHANGELOG.md"}
 IDENTIFIER_NAME = re.compile(rf"(?:H|X|VE)-\d+-{SLUG}\.md")
 #: Documents that predate the layout and wait on a move every open pull request would
 #: conflict with: the root guides, the frontier's generated views and the verifier guides
@@ -266,7 +266,13 @@ def check() -> list[str]:
             problems.append(f"collection schema does not exist: {collection['schema']}")
         for relative in sorted(matched):
             try:
-                metadata = _frontmatter(REPO / relative)["softschema"]
+                source = REPO / relative
+                record = (
+                    safe_load(source.read_text(encoding="utf-8"))
+                    if source.suffix in {".yaml", ".yml"}
+                    else _frontmatter(source)
+                )
+                metadata = record["softschema"]
             except (KeyError, TypeError, ValueError) as error:
                 problems.append(f"{relative}: cannot read softschema metadata: {error}")
                 continue

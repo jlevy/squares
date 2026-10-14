@@ -1,0 +1,141 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "esummins-packing",
+  "source_url": "https://github.com/Esummins/packing",
+  "source_ref": "master",
+  "source_commit": "651a9a54688341880e9c0dc9fcfc19f2c04cd3cb",
+  "retrieved_at_utc": "2026-10-12T08:12Z",
+  "git_scope": "Blobless shallow clone (--filter=blob:none --depth 1) of the pinned commit, which issues jlevy/squares#521 to #527 name, with a sparse checkout of the paths the outreach series cites: its index writeup/outreach/00-README.md section 4 is the manifest. The pinned tree holds 71,035 files and about 20.75 GB, 68,442 of them under attempts/; only the cited paths were fetched and digested, and the rest of the tree is pinned by the commit alone. Bulk data the manifest itself calls optional (tree records, galleries, logs) and the 248 gzipped spine certificates of A243 are pinned by digest or by the commit and not retained (OR-18).",
+  "archived_dir": "source",
+  "license": "The pinned commit itself adds the licence: LICENSE at the root says code is MIT (LICENSE-MIT) and documents and data are CC BY 4.0 (LICENSE-CC-BY-4.0), by the PI on 2026-10-11. GitHub's API reports NOASSERTION because the root LICENSE is a pointer file. The retained files are copied under those terms.",
+  "claims": [
+    "Issue #521: a third-party replay of Kleddamag's v1.0.2 certificate for s(11) > 31/8 (T-037): the release's exact Python sweep (exact_mixed.py and integer_sweep.py) re-run over all 12,028 rows under the lab's own shard driver, 0 rows differing from the release's recorded evidence (initial and portable), minimum 999962528, budget 10999479944, surplus 107864; the release's stdlib controls and its integrity check (54 files, twice) re-run; an exact spot check in the lab's own arithmetic (scaling, D4-expanded budget, 3,240 poses, strict counting) passing in 10.7 s. No new result is claimed; the release's secondary JavaScript checker was not run.",
+    "Issue #522: the simple-square stratification as a proof strategy for s(n); at n = 11 a census of 1110 tuples and 163 D4 classes exhaustive at every side in (3, 4) as a Lean theorem on standard axioms; 52 of 52 k5/k6 scoreboard rows certified empty on [191/50, 969271/250000] by parametric certificates under the frozen verifier verify_case.py; the k >= 6 tier empty; a residue of three k = 5 classes, sixteen K1-protected classes and k = 0; a Lean layer whose three main theorems rest on three named project axioms (stratum_kill, trump_residual, a22_exact_structure) and native_decide evaluations.",
+    "Issue #523: at the register's n = 17 window [116511/25000, 4675531/10^6] and n = 19 window [193/40, 4885619/10^6], a census of 2,500 slot-set classes, 632 containing all four corners; at n = 17 the four-corner classes with k = 16 (17 of 17) and k = 15 (35 of 35) dead at the tree root and k = 14 dead in 67 of 68, each kill an exact-rational trace with no verifier clause; the record classes n17_k08_0156 and n19_k11_0236 first-order rigid; a compute request for the descent to the record's k and the climb from the four-corner root.",
+    "Issue #524: Conjecture ONE-FLUSH(n), that for every n with s(n) < ceil(sqrt(n)) some optimal packing has a corner box met by at most one square, with four forms stated equivalent, its reduction to LOCKED-CROWD-FREE(n) by an extremal argument, the refuted local and counting proof routes with witnesses, and the measured support; a conjecture, not a result.",
+    "Issue #525: Theorem FC and Lemma SLOT-CROWD for any n (a packing containing the pins of a class S but not those of a closed extension S + p meets p's slot box with two distinct non-pin squares, with pad pi_i = (lambda_max - 1)(i + 1 + 1/sqrt 2) on the dilated page); the measured forced-cell traction finding; the refuted rule that all extensions dead implies the class dead; the exact statements of ONE-TILTED, WEDGED-SEAL, EPS and SNAP.",
+    "Issue #526: at n = 11, K0-FREE and SWAP/CELLS as Lean theorems on standard axioms, the extremal reduction to LOCKED-CROWD-FREE(n), ten refuted routes each with a witness, measured facts about four-crowds (0 of 883 free Fritz-John points, no teleport-stuck packing below side 4.0014, every witness has an improving corner swap, crowd rings below 4 hold one square), the swap-leaf verifier and the normal-ring chain; k0_00 is not closed.",
+    "Issue #527: the geometry-before-LP toolkit for stratum trees: stage 0, the CSP on pieces, multibox cores and the clip cascade, the leaf rules, inheritance across runs, integer polycore and C kernels; measured speed-ups of 7.22x (geometric mean over 11 closed nodes) and 5.0x (no-room nodes) with 0 regressions over 314 replayed rows; no verifier clause for a tree node.",
+    "In the retained files and claimed by no issue: s(11) >= 3.82 end to end in Lean (lower_bound_382, standard axioms plus a native_decide evaluation on certs/measure_certificate_3.82.json) and s(12) >= 3.90 certified by campaign A33, both below the register's verified bounds at those counts."
+  ],
+  "scope": [
+    "README.md",
+    "LICENSE",
+    "LICENSE-MIT",
+    "LICENSE-CC-BY-4.0",
+    "LOG.md",
+    "writeup/README.md",
+    "writeup/01_summary.md",
+    "writeup/02_mathematics.md",
+    "writeup/03_lab_timeline.md",
+    "writeup/04_related_work.md",
+    "writeup/05_status_sheet.md",
+    "writeup/06_compute_plan.md",
+    "writeup/outreach_simple_square_conjecture.md",
+    "writeup/outreach",
+    "docs/proofs",
+    "docs/residue_ledger.md",
+    "docs/shadows/STATUS.md",
+    "lean/AUDIT.md",
+    "lean/PackingCertMathlib/README.md",
+    "lean/PackingCertMathlib/lean-toolchain",
+    "lean/PackingCertMathlib/lakefile.toml",
+    "lean/PackingCertMathlib/lake-manifest.json",
+    "lean/PackingCertMathlib/PackingCertMathlib.lean",
+    "lean/PackingCertMathlib/PackingCertMathlib/Main.lean",
+    "lean/PackingCertMathlib/PackingCertMathlib/TopLevel.lean",
+    "lean/PackingCertMathlib/PackingCertMathlib/Statements",
+    "certs",
+    "attempts/REGISTRY.md",
+    "attempts/A53-simple-strata/results/name_to_slots.json",
+    "attempts/A53-simple-strata/results/name_to_shapes.json",
+    "attempts/A53-simple-strata/results/skeletons.json",
+    "attempts/A53-simple-strata/results/skeletons_young.json",
+    "attempts/A56-sparametric/results/scoreboard.json",
+    "attempts/A57-shadow-trees/code/verify_case.py",
+    "attempts/A57-shadow-trees/code/FREEZE_TAGS.txt",
+    "attempts/A135-polycore-verifier/code/verify_case_v3.py",
+    "attempts/A185-boxed-windows-clause/code/verify_case_v4.py",
+    "attempts/A190-guardline-clause/code/verify_case_v5.py",
+    "attempts/A232-swap-leaf/code/verify_swap232.py",
+    "attempts/A211-coarse-tree/code",
+    "attempts/A202-fast30/BRIEF.md",
+    "attempts/A202-fast30/code",
+    "attempts/A202-fast30/notes",
+    "attempts/A203-csp-consistency/BRIEF.md",
+    "attempts/A203-csp-consistency/code",
+    "attempts/A203-csp-consistency/notes",
+    "attempts/A213-int-polycore/BRIEF.md",
+    "attempts/A213-int-polycore/code",
+    "attempts/A213-int-polycore/notes",
+    "attempts/A213-int-polycore/tests",
+    "attempts/A214-c-kernel/BRIEF.md",
+    "attempts/A214-c-kernel/code",
+    "attempts/A214-c-kernel/notes",
+    "attempts/A214-c-kernel/tests",
+    "attempts/A215-closed-node-benchmark/results",
+    "attempts/A221-lane-cover/notes/lane221.md",
+    "attempts/A238-k4-benchmark/notes/k4_238.md",
+    "attempts/A238-k4-benchmark/results",
+    "attempts/A241-row-cascade/notes",
+    "attempts/A241-row-cascade/results",
+    "attempts/A241-row-cascade/code",
+    "attempts/A243-climb-17-19/BRIEF.md",
+    "attempts/A243-climb-17-19/notes",
+    "attempts/A243-climb-17-19/code",
+    "attempts/A243-climb-17-19/results",
+    "attempts/A243-climb-17-19/certs",
+    "attempts/A243-climb-17-19/logs/descend243_n17_w0.log",
+    "attempts/A243-climb-17-19/logs/descend243_n17_w1.log",
+    "attempts/A242-replay-31-8",
+    "attempts/A217-torque-probe/results/witnesses217.jsonl",
+    "attempts/A226-one-flush",
+    "attempts/A275-k0-knowledge/BRIEF.md"
+  ],
+  "pinned_only": [
+    {
+      "match": "LOG.md",
+      "reason": "The lab notebook, 1.1 MB of prose; cited by 07-timeline.md only as a secondary source behind attempts/REGISTRY.md, which is retained. Pinned by digest."
+    },
+    {
+      "match": "attempts/A243-climb-17-19/certs/**",
+      "reason": "The 248 spine certificates of the n = 17 descent, 8.8 MB, nearly all gzipped JSON: bulk data by OR-18, pinned by digest so a replay can fetch them at the pin and compare. The verdict rows that summarise them are retained."
+    },
+    {
+      "match": "attempts/A238-k4-benchmark/results/rows211_raw.jsonl",
+      "reason": "Raw engine rows of 2.3 MB behind the k4 benchmark; the benchmark's summary rows and notes are retained. Pinned by digest."
+    },
+    {
+      "match": "attempts/A238-k4-benchmark/results/bench238.jsonl",
+      "reason": "Raw per-node benchmark rows (409 KB); bench238.md, bench238_summary.json and forced238.* summarise them and are retained. Pinned by digest."
+    },
+    {
+      "match": "attempts/A243-climb-17-19/results/raw211_n17.jsonl",
+      "reason": "Raw engine rows of the n = 17 descent (669 KB); the per-class verdict rows (verdicts243_n17.jsonl, rows243_n17.jsonl) are retained. Pinned by digest."
+    },
+    {
+      "match": "attempts/A243-climb-17-19/results/probes_raw211_n17.jsonl",
+      "reason": "Raw probe rows of the n = 17 descent; the summarised probes_rows243_n17.jsonl is retained. Pinned by digest."
+    },
+    {
+      "match": "certs/__pycache__/*",
+      "reason": "Python byte code committed by accident; pinned by digest, never executed."
+    },
+    {
+      "match": "certs/a82/**",
+      "reason": "A82 side-scan certificates that no outreach note cites; pinned by digest."
+    },
+    {
+      "match": "certs/uladder/**",
+      "reason": "A65 re-insertion certificates that no outreach note cites; pinned by digest."
+    },
+    {
+      "match": "certs/unavoidable_10pt_3.7416.json",
+      "reason": "An A05 unavoidable-set certificate below Stromquist's bound that no outreach note cites; pinned by digest."
+    },
+    {
+      "match": "certs/verify_tube.py",
+      "reason": "The tube certificates' stdlib verifier, 977 lines. Its verdict format string 'checker %s => %s' reads as a JavaScript arrow function to devtools.check_no_embedded_js, which scans every tracked Python file and admits no exception, so it is pinned by digest rather than retained. The certificates it checks are retained."
+    }
+  ]
+}

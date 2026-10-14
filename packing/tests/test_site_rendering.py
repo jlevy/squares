@@ -373,7 +373,7 @@ def _prose_font_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[s
         session.detach()
 
 
-@pytest.mark.parametrize("fallback", ["platform", "times", "unadjusted"])
+@pytest.mark.parametrize("fallback", ["platform", "times", "mismatched"])
 def test_results_prose_font_arrival_retains_layout(
     browser: Browser, results_font_site: str, fallback: str
 ) -> None:
@@ -402,9 +402,17 @@ def test_results_prose_font_arrival_retains_layout(
 
             def select_fallback(route: Route) -> None:
                 response = route.fetch()
-                css = re.sub(r'"Site Prose Georgia"\s*,\s*', "", response.text())
-                if fallback == "unadjusted":
-                    css = re.sub(r'"Site Prose Times"\s*,\s*', "", css)
+                css = response.text()
+                if fallback == "times":
+                    css = re.sub(r'"Site Prose Georgia"\s*,\s*', "", css)
+                else:
+                    # Native untuned faces can happen to wrap this page similarly.
+                    # Corrupt both local fallbacks' metrics for a deterministic
+                    # negative control of a font-driven shift past the CLS budget.
+                    css, changed = re.subn(
+                        r"size-adjust: (?:101|110\.5)%;", "size-adjust: 200%;", css
+                    )
+                    assert changed == 2
                 route.fulfill(response=response, body=css)
 
             context.route("**/assets/css/site.*.css", select_fallback)
@@ -452,9 +460,8 @@ def test_results_prose_font_arrival_retains_layout(
         # not the production load protocol. Keep readability and native CLS here;
         # The production CLI enforces LCP, task and blocking budgets on normal loads.
         assert not check_site_rendering.problems(report, javascript=False), report
-        if fallback == "unadjusted":
-            # The original fallback is a real negative control: exposing a
-            # first paint before PT Serif arrives must still trip the .1 guard.
+        if fallback == "mismatched":
+            # Deliberately wrong fallback metrics must trip the unchanged .1 guard.
             assert report["cls"] > check_site_rendering.CLS_LIMIT, report
         else:
             assert report["cls"] <= check_site_rendering.CLS_LIMIT, report

@@ -31,7 +31,7 @@ from typing import Any
 import pytest
 
 from devtools.preview_site import settle_math
-from devtools.render_frontier_page import recent_lower_bounds
+from devtools.render_frontier_page import drawing_path, drawn_regularized, recent_lower_bounds
 from sqpack.probes import probe
 from tests import site_browser, site_renders
 from tests.test_frontier_page import COLUMNS, column
@@ -87,10 +87,12 @@ def page(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Any]:
 def laid(page: Any) -> dict[int, dict[str, Any]]:
     """The table as laid out at each width, read before any test sorts or filters it."""
     found: dict[int, dict[str, Any]] = {}
+    defaults = drawn_regularized()
+    drawings = {f"n-{n}": drawing_path(n, regularized=n in defaults) for n in CASES}
     for width in WIDTHS:
         page.set_viewport_size({"width": width, "height": 900})
         page.wait_for_timeout(150)
-        found[width] = page.evaluate(LAYOUT, {"rows": ROWS})
+        found[width] = page.evaluate(LAYOUT, {"rows": ROWS, "drawings": drawings})
     page.set_viewport_size({"width": WIDTHS[0], "height": 900})
     page.wait_for_timeout(150)
     return found

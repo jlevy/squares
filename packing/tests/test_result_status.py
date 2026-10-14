@@ -206,17 +206,21 @@ def test_a_status_line_is_the_status_then_the_activity_then_the_place() -> None:
 def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() -> None:
     """Of a standing a table draws one mark, `superseded`, on a result whose kind is a
     bound. That a bound is only reported is the status; a second proof of a held value
-    is the kind simplification; and a result that is no bound is not superseded by its
-    standing, though it may cite a bound's evidence and so derive it. Such a result is
-    marked only where its entry declares a later result that implies it
-    (`superseded_by`): `superseded` for the whole of it, `superseded in part` for some,
-    which keeps it current (think-nlo0). Every mark names what supersedes it."""
+    is the kind simplification, or formalization where a proof assistant checked it; and
+    a result that is no bound is not superseded by its standing, though it may cite a
+    bound's evidence and so derive it. Such a result is marked only where its entry
+    declares a later result that implies it (`superseded_by`): `superseded` for the whole
+    of it, `superseded in part` for some, which keeps it current (think-nlo0). Every mark
+    names what supersedes it."""
     view = render_recent_results
     bound = {"kind": "lower-bound"}
     for held in (view.HOLDS, view.HOLDS_REPORTED, view.NO_STANDING):
         assert not view.superseded(bound, held), held
     for held in (view.SECOND_CERTIFICATE, view.SECOND_CERTIFICATE_REPORTED):
-        assert not view.superseded({"kind": "simplification"}, held), held
+        for second in check_results.SECOND_PROOF_KINDS:
+            assert not view.superseded({"kind": second}, held), (second, held)
+    for second in check_results.SECOND_PROOF_KINDS:
+        assert not view.superseded({"kind": second}, view.PENDING_ADOPTION), second
     for kind in check_results.KINDS:
         marked = view.superseded({"kind": kind}, view.SUPERSEDED)
         assert marked is (kind in check_results.BOUND_KINDS), kind
@@ -278,7 +282,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # Guzhou0806's continuous-pose kernel (T-145) took both of n = 40's lower-bound lanes
     # from his clipped-corner transfer (T-133) on the same density; fifty-five on 12
     # October, when the regularized exact certificates (T-155) took n = 29's verified
-    # ceiling from its interval certificate (T-009), the one count that held.
+    # ceiling from its interval certificate (T-009), the one count that held. The same
+    # day the same kernels on his new-supports density (T-157) took both of n = 40's
+    # lanes from T-145.
     # T-120..T-123 report exact side forms for historical source configurations; no
     # current frontier lane relies on these unverified catalogue assertions. Each claim
     # states its side cut where its root interval's ends agree. T-120's lies above the
@@ -359,6 +365,8 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-135",
         "T-137",
         "T-138",
+        "T-145",
+        "T-159",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -367,7 +375,8 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # their cases were never adopted, since a smaller one was (T-131, T-135, T-137, T-138).
     # Couzo's eight-case report of 8 October (T-128) and five-case follow-up (T-130),
     # pending adoption until then, hold case lanes at five counts and three, and are
-    # unmarked.
+    # unmarked. Rio Calle's n = 102 certificate (T-159) is superseded from the day it was
+    # registered: T-146, the house there, is smaller.
     for entry in ("T-128", "T-130"):
         assert entry not in marked
         assert view.standing(records.results[entry], records) == view.HOLDS
@@ -515,11 +524,30 @@ def test_a_bound_better_than_its_cases_hold_is_pending_adoption_not_superseded()
     # No live entry has been both confirmed and pending adoption since the house adoption
     # of 11 October 2026. One raised to C3 by an independently re-implemented replay, as
     # T-128 was by its review of 10 October, renders as T-128 did, with no mark.
+    confirmation_ref = "E-test-n152-upper-replay"
+    evidence = {
+        **evidence,
+        confirmation_ref: {
+            "id": confirmation_ref,
+            "claim": "upper-bound",
+            "scope": {"n_values": [152]},
+            "origin": "replayed-here",
+            "method": "exact-algebraic",
+            "certificate": "a synthetic n152 upper-bound certificate",
+            "replay": "a synthetic complete replay",
+            "replay_status": "passed",
+            "relationship_to_generator": "independent-implementation",
+            "independence": {"coverage": {"extent": "full", "unit": "the n152 certificate"}},
+        },
+    }
+    records = dataclasses.replace(
+        records, register=dataclasses.replace(records.register, evidence=evidence)
+    )
     confirmed = {
         **entry,
         "verification": "V3",
         "confirmation": "C3",
-        "evidence": [*entry["evidence"], "E-couzo-451-exact-feasibility"],
+        "evidence": [*entry["evidence"], confirmation_ref],
     }
     held = view.standing(confirmed, records)
     assert held == view.PENDING_ADOPTION

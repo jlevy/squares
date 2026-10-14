@@ -5,8 +5,10 @@ async (/** @type {{holder: string}} */ { holder }) => {
   if (!held) {
     return null;
   }
-  let graphic = held.querySelector("svg");
   const image = held.querySelector("img");
+  // Atlas links may also carry a frame-only reference overlay. Inspect their image,
+  // while the hero's inline SVG remains its actual artwork.
+  let graphic = image instanceof HTMLImageElement ? null : held.querySelector("svg");
   /** @type {HTMLDivElement | null} */
   let reference = null;
   /** @type {{x: number, y: number, width: number, height: number} | null} */

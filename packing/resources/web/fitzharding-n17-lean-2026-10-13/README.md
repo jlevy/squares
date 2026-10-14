@@ -241,6 +241,19 @@ packet from its manifest.
 - `sq17-lean/verification/` is the source’s own replay receipt, retained as it is
   published. Nothing here rebuilt any module, ran `#print axioms`, or ran the controls.
 
+## The Second Review’s Programs
+
+[review-2/](review-2/README.md) holds the programs of the
+[second review](../../../../docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md),
+the mathematical-correctness lane of 13 October 2026, kept as they ran, with the output
+each printed. They read a checkout of the pin and members of `generated-sources.tar.gz`
+as data and execute nothing of the source: an 80-digit re-derivation of the endpoint and
+the frames, an exact rebuild of the census and the classifier, the cell geometry, an
+exact recomputation of the 93-box dual certificate, and a Python transcription of the
+compiled trace checker that re-evaluated ten of the 13,343 `native_decide` facts. Its
+README says what each program read and decides, and the evidence entries that record
+them; n-017’s case record cites those entries, and T-154 does not.
+
 ## Compressed Files
 
 | Stored file | Origin | Git blob | SHA-256 |

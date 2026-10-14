@@ -13,21 +13,25 @@
   return {
     controls: box(controls),
     choosers: [
-      ...controls.querySelectorAll("[data-atlas-views], [data-atlas-sizes], [data-atlas-scales]"),
-    ].map((chooser) => {
-      const tab = chooser.querySelector('[role="tab"]');
-      if (!(tab instanceof HTMLElement)) {
-        throw new Error("Each visible Atlas chooser needs an actual tab");
-      }
-      const style = getComputedStyle(tab);
-      return {
-        ...box(chooser),
-        fontSize: style.fontSize,
-        lineHeight: style.lineHeight,
-        weight: style.fontWeight,
-        padding: style.padding,
-      };
-    }),
+      ...controls.querySelectorAll(
+        "[data-atlas-views], [data-atlas-sizes], [data-atlas-scales], [data-atlas-drawings]",
+      ),
+    ]
+      .filter((chooser) => chooser.getClientRects().length > 0)
+      .map((chooser) => {
+        const tab = chooser.querySelector('[role="tab"]');
+        if (!(tab instanceof HTMLElement)) {
+          throw new Error("Each visible Atlas chooser needs an actual tab");
+        }
+        const style = getComputedStyle(tab);
+        return {
+          ...box(chooser),
+          fontSize: style.fontSize,
+          lineHeight: style.lineHeight,
+          weight: style.fontWeight,
+          padding: style.padding,
+        };
+      }),
     columns: [...legend.querySelectorAll(".site-atlas-legend-column")].map((column) => ({
       box: box(column),
       items: [...column.querySelectorAll(".site-atlas-legend-item")].map((item) => ({

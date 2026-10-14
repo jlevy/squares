@@ -1905,6 +1905,13 @@ def drawn_elsewhere(record: dict[str, Any] | None) -> bool:
     return record is not None and record.get("generator", ALGORITHM) != ALGORITHM
 
 
+def named_runs(record: dict[str, Any]) -> set[str]:
+    """The runs an index entry names: the one its view came from, and the one whose
+    report supplied its retry rungs after admission (`run.rungs_from`), where another."""
+    run = record["run"]
+    return {str(run["id"]), *([str(run["rungs_from"])] if run.get("rungs_from") else [])}
+
+
 def carried_index(
     committed: dict[str, Any] | None,
     records: Sequence[dict[str, Any]],
@@ -1914,7 +1921,7 @@ def carried_index(
     """The index over `records`, keeping the generators and runs of the committed index
     that some entry still draws from."""
     used = {record["generator"] for record in records if drawn_elsewhere(record)}
-    runs = {record["run"]["id"] for record in records if drawn_elsewhere(record)}
+    runs = {run for record in records if drawn_elsewhere(record) for run in named_runs(record)}
     committed = committed or {}
     return atlas_index(
         records,
@@ -2146,8 +2153,11 @@ def _generator_problems(index: dict[str, Any], records: Sequence[dict[str, Any]]
     runs = [str(run.get("id")) for run in index.get("runs") or []]
     if len(runs) != len(set(runs)):
         problems.append("index runs are not named once each")
-    drawn = {str(record["run"]["id"]) for record in records if drawn_elsewhere(record)}
-    problems.extend(f"index run {run} draws no entry" for run in sorted(set(runs) - drawn))
+    drawn = {run for record in records if drawn_elsewhere(record) for run in named_runs(record)}
+    problems.extend(
+        f"index run {run} draws no entry and supplies none's rungs"
+        for run in sorted(set(runs) - drawn)
+    )
     problems.extend(
         f"entries name run {run}, which the index does not record"
         for run in sorted(drawn - set(runs))

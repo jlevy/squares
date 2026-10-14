@@ -116,6 +116,7 @@ from devtools import regularize_axis_components as layer
 from devtools import regularize_evand as driver
 from devtools import regularize_same_side as same
 from devtools.build_known_best_atlas import frame_from_witness
+from devtools.regularized_drawings import grid_written_method
 from devtools.retained_data import git_blob
 from sqpack.render import render_packing_svg
 from sqpack.render.model import RenderSpec
@@ -1563,12 +1564,16 @@ def decided(
     report: Mapping[str, Any],
     witness: Mapping[str, Any],
     routes: Mapping[str, bool] | None = None,
+    *,
+    upper: Fraction | None = None,
 ) -> driver.Decision:
     """The policy's decision table (section 4) applied to one count's view, as the driver
     applies it to its own: the exact routes, the side against `s_W` and `U`, and the
     per-square and total contact counts decide; the pairing, unnamed turns and largest
     move are measured and named in the reason, and decide nothing (rows 6 and 9, retired
-    13 October 2026).
+    13 October 2026). `U` is the case record's, held exactly, unless `upper` is given, as
+    `devtools.register_regularized_bounds` gives the view's own side to ask how the view
+    is decided once it is registered.
 
     The exact routes are `routes` where admission ran them on the view as it is now
     (`view_decided`), else the verdicts the run recorded, as a run's own summary reads
@@ -1585,9 +1590,13 @@ def decided(
     frame = driver.source_frame(witness)
     printed = frame.side if frame.side is not None else None
     # `U` held exactly (`verified_bound`): a closed form is compared with the side as the
-    # root it is, not read as unknown; `upper` is `U` only where it is rational.
-    facts = driver.case_facts(int(report["n"]))
-    upper = driver.upper_bound(facts)
+    # root it is, not read as unknown; `upper` is `U` only where it is rational. A given
+    # `upper` is a rational `U`, held so.
+    if upper is None:
+        bound = driver.verified_bound(driver.case_facts(int(report["n"])))
+        upper = None if bound is None else bound.rational
+    else:
+        bound = driver.VerifiedBound(None, rational=upper)
     relation = driver.side_relation(side, printed, upper)
     current = shaded.get("against_current") or {}
     return driver.classify(
@@ -1603,7 +1612,7 @@ def decided(
             relation=relation,
             side=side,
             upper=upper,
-            bound=driver.verified_bound(facts),
+            bound=bound,
             one_to_one=bool(ident.get("one_to_one")),
             unnamed_turns=tuple(ident.get("unnamed_turns") or ()),
             regressions=len(shaded.get("regressions") or [])
@@ -1686,7 +1695,7 @@ def admitted(directory: Path, run_id: str) -> driver.Admitted:
             facts, (witness.get("source") or {}).get("key"), relation
         ),
         "by": "project",
-        "method": f"{METHOD}, through devtools.regularize_grid_slack",
+        "method": grid_written_method(METHOD),
         "side": "same" if relation == "same" else "solved",
     }
     # No `changes`: the register counts there the free squares a regularizer turns, and

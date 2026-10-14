@@ -1,0 +1,84 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "dostashev-square-packing",
+  "source_url": "https://github.com/dostashev/square-packing",
+  "source_ref": "main",
+  "source_commit": "a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f",
+  "retrieved_at_utc": "2026-10-12T08:03Z",
+  "git_scope": "Full clone of main, checked out at a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f, the head and the commit issue #528 names. Against c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49, the issue-501 pin, the commit adds records/n0175, n0232 and n0264 (.sqpk and .sqcert) and changes README.md; those seven files and the licence are retained. Every other file of the tree but .gitignore is unchanged since c3d17ab and is pinned by digest against the copy the issue-501 packet retains. No source program was executed.",
+  "archived_dir": "source",
+  "license": "MIT (LICENSE, Copyright (c) 2026 Daniil Ostashev, added in c6893aa24ec2b2822ef42ab695c828de1ccb9015); the README says it covers the verification code and the record packings and certificates. The retained files are byte-identical with the licence beside them. Issue #528 credits Daniil Ostashev with the three packings, names the pieces each composition uses and their sources, and states AI assistance: the author set up and drove an AI-assisted research loop, and AI agents wrote and ran the search, composition and verification code.",
+  "claims": [
+    "Issue #528 reports s(175) <= 13.76417431748659662942782322004234282577, s(232) <= 15.76417431748659662944782322004234282577 and s(264) <= 16.77473513238783284261026458732177098083, certified and rounded up; each records/n0NNN.sqcert gives the exact side, dilated by 1 + 1e-60 from the 60-digit optimum of its contact topology, and the README at the pin prints the same sides rounded up to 15 places.",
+    "The issue says all three are new arrangements and not refinements: compositions of two library rectangles in opposite corners plus aligned squares, each using a new packing of 38 unit squares in an (h + 2) x h rectangle with h = 5.76417431748659662929..., found by a GPU soft-to-rigid search after Yohei Nakajima's idea; 175 with David Ellsworth's s(171) template, whose pieces are cut from Thomas Schadt's s(50), 232 with a 76-square piece of Erich Friedman's s(85), and 264 with a 93-square piece of Evan Daniel's exact optimum of Joost de Winter's s(126).",
+    "The issue restates issue 501's sides at the same commit, s(155) <= 12.95242540695845613565..., s(156) <= 12.97917261364442607531... and s(211) <= 14.99633672133631569465..., the c3d17ab certificates, which a8db6ff does not change.",
+    "The author reports that its own C++ checker (sqverify) accepts all three in GMP rational arithmetic and that a separate 80-digit mpmath cross-check accepts them; each side is reported as the exact first-order optimum of its contact topology with nonnegative KKT multipliers. These are author reports; no optimality is claimed."
+  ],
+  "scope": [
+    "CMakeLists.txt",
+    "LICENSE",
+    "README.md",
+    "pyproject.toml",
+    "records",
+    "tools",
+    "verify",
+    "verify_all.sh"
+  ],
+  "pinned_only": [
+    {
+      "match": "records/n0155.*",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/records"
+    },
+    {
+      "match": "records/n0156.*",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/records"
+    },
+    {
+      "match": "records/n0211.*",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/records"
+    },
+    {
+      "match": "tools/*",
+      "reason": "The author's mpmath cross-check and packing reader, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not run.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/tools"
+    },
+    {
+      "match": "verify/src/*",
+      "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src"
+    },
+    {
+      "match": "verify/tests/data/*",
+      "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data"
+    },
+    {
+      "match": "verify/tests/*",
+      "reason": "The checker's tests, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not run.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests"
+    },
+    {
+      "match": "verify/CMakeLists.txt",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/CMakeLists.txt"
+    },
+    {
+      "match": "CMakeLists.txt",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/CMakeLists.txt"
+    },
+    {
+      "match": "pyproject.toml",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/pyproject.toml"
+    },
+    {
+      "match": "verify_all.sh",
+      "reason": "The author's driver, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not run.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify_all.sh"
+    }
+  ]
+}

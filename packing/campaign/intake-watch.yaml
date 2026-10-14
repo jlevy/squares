@@ -593,3 +593,120 @@ repositories:
       adds cube_packing_records.json, packings of 34, 35 and 36 unit cubes in a cube with float
       centres and quaternions. Three-dimensional cube packing is outside this record, which is
       squares in a square. Nothing to import.
+
+  # The closing sweep of the 2026-10-11 pass found two heads past every pin and read; read on
+  # 2026-10-12 (think-58lu).
+  - url: https://github.com/RobertBarnettProjects/square-packing-research
+    read_through: 52cf1cc7ba006731ef76818267216c87bb63281e
+    read_on: '2026-10-12'
+    note: >-
+      Three commits of 11 October (14:28 to 14:44 UTC) past 2573ff5, #505's pin and the
+      barnett-refinements-2026-10-11 packet's. fa1322a adds six certificates of 10 October under
+      certificates/refinements-2026-10-10/, at 70, 103, 123, 129, 146 and 295, with
+      results/threshold-2026-10-10.json and a .gitattributes, and records the #505 submission in
+      results/review-2026-10-11.json; 9947091 adds diagrams of 146 and 261 under images/; 52cf1cc
+      moves those six, the five historical certificates (70, 103, 123, 237, 295, byte for byte)
+      and both dated result files under superseded/, with its README and archive-index.json.
+      certificates/n146.cert and n261.cert are unchanged. Each of the six states its exact side
+      in its header, and each file's SHA-256 is the one the threshold file gives; read here
+      exactly, the sides are above T-146's at 70, 103, 123, 129 and 295, by 1.31e-13 to
+      1.24e-12, and above T-150's at 146 by 4.89e-10. The author marks all of them superseded.
+      Nothing to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: f30cc2cf345a3a3f6af778925f354d9ec979868b
+    read_on: '2026-10-12'
+    bead: think-xzob
+    note: >-
+      One commit of 12 October (01:00 UTC) past the 04fbef0 read: f30cc2c adds
+      tools/sqverify_continuous/, this repository's sqverify-fast with a continuous-angle mode
+      (v3, source_sha256 1266a8b9...), MIT code and CC BY 4.0 upstream documents. It decides a
+      rectangle density's capture at every angle and centre, so s(n) > L/B without a net, and its
+      n = 40 examples verify T-145's 1340000/199529 and #485's 3359/500 with refused controls:
+      the continuous-angle replay wand125 described in his review of #485. Its PROVENANCE.md
+      limits the independence: its author read Guzhou0806's continuous_pose.cpp, T-145's kernel,
+      while reviewing #485 before writing it, the two share an outline (a branch and bound over
+      (u, v, tan(theta/2)), concave-section lower bounds, translation derivatives and an
+      axis-aligned patch near t = 0), and "So this is independent code, but not an independent
+      method". That bears on any C-rung use. No packet retains it; think-xzob owns evaluating it
+      as a route for T-145 and the 6.718 claim. INDEX.json and two lines each of tools/README.md
+      and tools/THIRD_PARTY_NOTICES.md index it. Nothing else to import.
+
+  # The intake of 2026-10-12 (think-mq0k) read three heads on 2026-10-12: evand's and wand125's
+  # past their earlier reads, by lane W (think-01y3, think-3ppi), and E. Summins' lab, new to the
+  # record, by lane Z.
+  - url: https://github.com/evand/square-packing
+    read_through: ad86d42d0f743076d735036702ba04a41ce24a8c
+    read_on: '2026-10-12'
+    note: >-
+      The 26 commits of 11 and 12 October (UTC) from 2b89650 to ad86d42 past the 675a5ea read;
+      ad86d42 is the pin of the evand-exact-and-local-reports-2026-10-12 packet, which retains
+      the two reports among them. 169a827 adds search/exact/homotopy/N29.md and its scripts: the
+      side of the s(29) record configuration, 5.9338334626769291896894606163520..., is a root of
+      an irreducible integer polynomial of degree 7213, by homotopy continuation, with
+      irreducibility, a Krawczyk enclosure and the root link rated rigorous and two identity
+      checks Monte Carlo; the polynomial is gitignored and the packing at the exact side is not
+      checked, so it bounds nothing below the verified ceiling (think-6gti). 0d0146e and e493eea
+      add search/exact/gradec.py and tasks/exact-minpoly/grade-C.md: Theorem C, local
+      minimality with exact flat motions, reported VALID for 233 of the source's 250
+      configurations of field degree at most 4 (230 and 261 after dropping zero-force rows, 17
+      timeouts), certificates gitignored; 64 counts are outside T-124, 53 at the case's current
+      side, and the configuration at 261 is the superseded 684/41, above T-150 by 4.15e-3
+      (think-7scz). 7ea600b adds the pickup notes and batch runner. 7e3176f and 563aa47 add the
+      s(12) strip leaf: Lean wallStripBound_117, guillotine_false_117 and the stitch strip_leaf
+      given SeamOK and RegionOK, and the finding that no point cover proves the region lemma
+      (fractional packing bound about 7.97 against 8); paused, no bound. 2b89650's Mondrian
+      corner-overlap sweep finds 0 wins and 164 ties. The rest is the s(110) packer: census v2
+      and v3, finisher and kick-retry negatives, verdict and identity definitions, run
+      manifests, frozen reference sets and holdouts, CLAIMS.md, CONFUSIONS.md, a review, the
+      explainer page and a re-solve of weak minima (store 778 certified below 11); the least
+      census minimum is T-098's exact side, 1.10e-19 below the case's verified rational, no
+      other is below the record, and no census packing has a published certificate.
+      notes/refresh-2026-10-11.md is the author's read of other sources. Nothing else to
+      import.
+  - url: https://github.com/wand125/square-packing
+    read_through: d4a19815e2b0cca5faa562f00c7a80b93d3402ef
+    read_on: '2026-10-12'
+    bead: think-xzob
+    note: >-
+      One commit of 12 October (01:29 UTC) past the f30cc2c read: d4a1981 makes
+      tools/sqverify_continuous v4 (source_sha256 619b3c00...), adding --resume, which takes
+      over verified root lines of an earlier run whose run_key (input, build and every
+      parameter that affects a root) matches; the author states the search and every verdict
+      are unchanged from v3, and no certificate or receipt changes. No packet retains the
+      tool; think-xzob owns evaluating it as a route for T-145 and the 6.718 claim, and now has
+      v3 and v4 to choose between. Off the default branch, which this read does not cover:
+      stream-verify (2b31528, 10 October) streams tools/n17_bb_verifier, n = 17 tooling under
+      think-x4v4's hold. Nothing else to import.
+  - url: https://github.com/Esummins/packing
+    read_through: eb3ae15418ce99ab72c448551f998628d2d5d76a
+    read_on: '2026-10-12'
+    note: >-
+      New to the record on 2026-10-12: E. Summins' n = 11 lab, whose outreach series is issues
+      #521 to #527. The esummins-packing-2026-10-12 packet pins 651a9a5 (2026-10-12T04:11:54Z),
+      the commit the issues name, and retains the paths its index writeup/outreach/00-README.md
+      section 4 cites; the tree is 71,035 files and about 20.75 GB, almost all under attempts/,
+      pinned by the commit. One commit follows the pin at the read, eb3ae15 (04:13:07Z,
+      "outreach: posted as jlevy/squares issues 521-527"), which adds only
+      writeup/outreach/POSTED.md (13 lines); nothing to import from it. Later commits of the
+      running campaigns (A243's descent, the k0 chains) are expected and hold nothing to import
+      unless a note of the series changes.
+  - url: https://github.com/evand/square-packing
+    read_through: 31523f87316bdfda00f5459dd9077928e264f133
+    read_on: '2026-10-12'
+    note: >-
+      The six commits of 12 October from 7d5cc3f to 31523f8 past the ad86d42 read. 597e660 adds
+      search/packer/candidates/tt_n154.* and tt_n154_regularized.*, s(154) <=
+      12922566401934059503377267965457/10^30, which issue #552 reports and the
+      evand-n154-2026-10-12 packet retains at 597e660 (think-6no5; T-160). 31523f8, the head and
+      the tag of the release exact-data-2026-10-12, adds one packer-log line recording the post;
+      the release's two archives, the s(29) polynomial data and the grade-C certificates of
+      #545, are release assets, not tree files, and the evand-exact-data-2026-10-12 packet pins
+      both by digest at 31523f8 (think-6gti, think-7scz). The rest is the packer's development:
+      7d5cc3f pre-registers census v4 (census_v4.py, refset.py --rule groups, the h110_J0,
+      h110_grand and h110_recnb reference sets with their starts) and the time-travel test;
+      a767047 and c90470a record census v4 batch a and the batch b predictions; c3655cc records
+      batch b (the n = 110 record re-found 8 of 8 with its count neighbourhood withheld, claim
+      C24), the time-travel result (chains from the 5 October register recover about 7% of the
+      later gains, median 0, and pass the best known only at 154) in PACKER.md, CLAIMS.md and
+      CONFUSIONS.md, and adds search/packer/timetravel.py, which the 154 packet pins by digest.
+      None states a bound or a certificate. Nothing else to import.

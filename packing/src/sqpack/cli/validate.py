@@ -149,11 +149,12 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: T-127 refreshes fourteen Gupta rows; all three corpus tripwires below sum their
 #: current complete retained motions, with the other 310 screen rows unchanged.
 #: The house adoption of 11 October 2026 (think-fvz4) re-screened its 42 counts, with the
-#: other 282 rows unchanged, and its pass of 12 October the nine counts it moved.
+#: other 282 rows unchanged, its pass of 12 October the nine counts it moved, and the pass
+#: for issue 528 (T-158) the three counts it moved, 175, 232 and 264.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 146, 86, 659),
-    "n=1..200": (65, 530, 182, 2178),
-    "n=1..324": (120, 1483, 302, 5030),
+    "n=1..200": (65, 535, 182, 2182),
+    "n=1..324": (121, 1502, 302, 5038),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -3454,11 +3455,25 @@ def _skills_mirrored(context: Context) -> str:
 
 
 def _synopsis(context: Context) -> str:
+    impact_baseline = (
+        ("--base", "HEAD^1")
+        if _git("rev-parse", "HEAD").strip() == _git("rev-parse", "origin/main").strip()
+        else ("--baseline-ref", "origin/main")
+    )
     return _commands(
         context,
         (
             (sys.executable, "-m", "devtools.check_documentation"),
             (sys.executable, "-m", "devtools.check_synopsis"),
+            (
+                sys.executable,
+                "-m",
+                "devtools.render_changelog",
+                "--check",
+                "--baseline-ref",
+                "origin/main",
+            ),
+            (sys.executable, "-m", "devtools.check_release_impact", *impact_baseline),
         ),
     )
 
@@ -3682,6 +3697,20 @@ def _regularized_atlas_drawings(context: Context) -> str:
     return output
 
 
+def _default_drawings(context: Context) -> str:
+    # About 20 cpu-seconds: 5.5 s of wall at four workers on a quiet host, 24 to 34 s in
+    # the records tier on a loaded one (2026-10-13 and 14, 90 views), the tier's slowest
+    # step and well inside its 300 s ceiling: every view the regularized layer draws, and
+    # its house drawing, measured again on the improvement rule's goals and decided under the
+    # policy's sections 11 and 12, then compared with the retained record the site and
+    # the posters draw from. A regularized default that the rule refuses, a stale record,
+    # or a policy goal list that differs from the goals the code judges fails it; the counts
+    # that keep the house picture are listed and fail nothing.
+    output = _module(context, "devtools.default_drawings", "--check")
+    _require_text(output, "default drawings check passed")
+    return output
+
+
 def _vendored_evand(context: Context) -> str:
     # About 0.2s: `vendor/evand-regularize`, Evan Daniel's regularizer copied at a pin, is
     # held to its manifest -- each file's size, SHA-256 and mode at the upstream commit,
@@ -3808,7 +3837,7 @@ def _result_requests(context: Context) -> str:
     # the record against the register -- that every issue's results name entries that
     # exist and every reply is a comment on its own issue, the join stage 7 of the result
     # import process reads to say which author is owed a reply. A reply due is reported,
-    # never failed: it is the owner's next move, not a broken record.
+    # never failed: it is owed after the merge, not a broken record.
     return _module(context, "devtools.check_requests")
 
 
@@ -5490,6 +5519,23 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step(
+        "default pictures improve on their house drawings",
+        _default_drawings,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/src/sqpack/render/*",
+            "packing/atlas/known-best/default-drawings.json",
+            "packing/atlas/known-best/default-drawings.schema.yaml",
+            "packing/atlas/known-best/regularized/*",
+            "packing/witnesses/known-best/*",
+            "packing/frontier/n-*.md",
+            "docs/project/policies/regularization-policy.md",
+            *_RENDERER_HUB,
+        ),
+    ),
+    Step(
         "the Lean replay receipt for s(k^2-2) = k holds",
         _chelokot_lean_replay,
         fast=True,
@@ -6191,6 +6237,9 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         "the register's reliance on T-007 is inventoried",
         "regularized atlas views match their index",
         "regularized atlas drawings match their index",
+        # The layer's views, their house witnesses, the case records' bounds and the
+        # policy's statement, measured and compared: no clock, no network, no history.
+        "default pictures improve on their house drawings",
         "the Lean replay receipt for s(k^2-2) = k holds",
         # The vendored files and their manifest, compared byte for byte; git is asked only
         # which files the tree holds. No clock, no network, no history.

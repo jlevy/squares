@@ -1,13 +1,14 @@
 import json, sys
+from pathlib import Path
 from fractions import Fraction as Fr
 import mpmath
 from mpmath import mp
-sys.path.insert(0, sys.argv[1])
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import geom
 mp.dps = 60
 t, b = geom.newton_root()
 side, pts, axes, aux = geom.layout(t, b)
-d = json.load(open(sys.argv[2]))
+d = json.load(open(sys.argv[1]))
 print('Sref - L =', mpmath.nstr(mp.mpf(Fr(d['side']).numerator)/Fr(d['side']).denominator - side, 6))
 c, s = aux['c'], aux['s']
 for i, sq in enumerate(d['squares']):

@@ -561,7 +561,7 @@ unresolved, among them Chaoweeraprasit, Ostashev, Wang, Li and Maaz.
 
 ### Regularization Integration
 
-The next upstream merge brings `main` at `aeef99ef0` into PR #578, including the
+The first regularization merge brought `main` at `aeef99ef0` into PR #578, including the
 regularized-bounds result T-155. The five conflicts retain both the upstream exact
 certificate and the profile branch’s preferred personal credits, both independent
 renderer regressions, and regenerated result and citation views.
@@ -573,6 +573,28 @@ The n=29 explanation distinguishes its historical Schadt ceiling from the curren
 regularized certificate.
 Merge acceptance remains tracked by `think-5bao`, with final validation receipts on the
 PR.
+
+### News and Later Upstream Results
+
+The 14 October integration brings `origin/main` at `37e6757ed` into PR #578, including
+the news history and the later result registrations.
+`think-5bao` tracks merge validation; `think-dpvm` tracks news attribution.
+News prose links reviewed people to their standalone profiles and uses the preferred
+name from each person record, normally the real name.
+The first mention in each entry uses the full preferred name.
+Retained delivery titles, quotations, source identifiers and URLs keep their original
+text, as required by [the attribution policy](../../../../attribution.md).
+People without reviewed profiles remain named without speculative links.
+
+Both the profiles overview and news use ordinary navigation to individual profile pages.
+Contextual credit popovers remain available on result and case pages.
+The merged census adds thirteen reviewed joins and eleven unresolved spans, removes four
+superseded spans, and has no stale joins.
+The URL registry contains 1,026 rows with no failures.
+The census now covers 27 profiles and 1,165 structured spans: 929 resolved, six
+non-person and 230 unresolved.
+All 146 tracked PDFs still need full inspection receipts.
+Remaining population work stays in Phase 4; validation receipts are recorded on PR #578.
 
 ## WIP Handoff: 2026-10-10
 

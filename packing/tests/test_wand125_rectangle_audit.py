@@ -954,3 +954,21 @@ def test_an_earlier_dated_paragraph_of_another_source_is_never_retired(tmp_path:
     _write_paragraphs(path, head, [*parts[:1], foreign, *parts[1:]])
     before = path.read_text(encoding="utf-8")
     assert apply.apply_case(plan, newest, frontier) == before
+
+
+def test_importer_preserves_retained_complete_coverage_outside_current_case_citations() -> None:
+    evidence = (FRONTIER / "evidence.yaml").read_text(encoding="utf-8")
+    texts = {
+        int(path.stem.removeprefix("n-")): path.read_text(encoding="utf-8")
+        for path in FRONTIER.glob("n-*.md")
+    }
+    identifier = "E-wand125-rectangle-source-replay"
+    registration = next(row for row in apply.REGISTRATIONS if row.replay == identifier)
+    assert f"- {identifier}\n" not in texts[32].split("---\n", 2)[1]
+    assert 32 in monotone_bounds(apply.replayed(registration), upto=32)
+    rewritten = apply.update_evidence(evidence, apply.registered(), texts)
+    entry = next(
+        row for row in apply.safe_load(rewritten)["evidence"] if row["id"] == identifier
+    )
+    assert 32 in entry["scope"]["n_values"]
+    assert rewritten == evidence

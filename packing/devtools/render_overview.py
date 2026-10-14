@@ -97,8 +97,7 @@ TABLE_SCRIPT = BROWSER / "table.js"
 MATH_SCRIPT = BROWSER / "math.js"
 POPOVER_SCRIPT = BROWSER / "popover.js"
 ROW_POPOVER_SCRIPT = BROWSER / "row-popover.js"
-#: The atlas's two views and three sizes of tile, and the move between layouts. The
-#: drawing tabs' own script, `atlas-layer.js`, went with them on 2026-10-04 (think-k8x9).
+#: Atlas layout, size, scale and page-local Regularized/Original drawing controls.
 ATLAS_VIEW_SCRIPT = BROWSER / "atlas-view.js"
 ATLAS_GRID_SCRIPT = BROWSER / "atlas-grid.js"
 EMBED_SCRIPT = BROWSER / "embed.js"
@@ -525,8 +524,15 @@ FORWARDER = TEMPLATES / "site-forwarder.html"
 #: vendored kpress and the locked environment are inputs, as they are the explainer's.
 RENDER_INPUTS: tuple[Path, ...] = (
     Path(__file__).resolve(),
+    PACKING / "site-changelog.yaml",
+    PACKING / "site-changelog.schema.yaml",
+    PACKING / "devtools/render_changelog.py",
     PACKING / "devtools/build_known_best_atlas.py",
     PACKING / "devtools/atlas_print_font.py",
+    PACKING / "devtools/default_drawings.py",
+    PACKING / "devtools/improvement_rule.py",
+    PACKING / "devtools/pictured_source.py",
+    PACKING / "devtools/evand_exact_certificates.py",
     PACKING / "devtools/fonts/atlas-print",
     SITE_CSS,
     PACKING / "devtools/templates/site-math.css",
@@ -791,6 +797,7 @@ def inputs() -> tuple[Path, ...]:
     """
     from devtools import overview_data  # noqa: PLC0415
     from devtools import render_n11_lower_bounds_explainer as explainer  # noqa: PLC0415
+    from devtools.evand_exact_certificates import COMPARISON_RECEIPT  # noqa: PLC0415
     from devtools.render_case_pages import CASES_INPUTS  # noqa: PLC0415
     from devtools.render_contributors import inputs as contributor_inputs  # noqa: PLC0415
     from devtools.render_frontier_page import FRONTIER_INPUTS  # noqa: PLC0415
@@ -802,6 +809,7 @@ def inputs() -> tuple[Path, ...]:
                 BROWSER / "favicon-48.png",
                 BROWSER / "apple-touch-icon.png",
                 *overview_data.INPUTS,
+                COMPARISON_RECEIPT,
                 *FRONTIER_INPUTS,
                 *CASES_INPUTS,
                 *contributor_inputs(),
@@ -1429,13 +1437,16 @@ def atlas_page() -> Page:
 
 def about_page() -> Page:
     """The project narrative, approach, attribution, and supporting resources."""
-    from devtools import overview_sections  # noqa: PLC0415
+    from devtools import overview_sections, render_changelog  # noqa: PLC0415
 
     markdown = _template_markdown(
         ABOUT_ARTICLE,
         {
             "REPORT_RESULTS": report_results(),
             "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
+            "CHANGELOG": render_changelog.render_markdown(
+                render_changelog.load(), destination="site"
+            ),
         },
     )
     return kpress_page(

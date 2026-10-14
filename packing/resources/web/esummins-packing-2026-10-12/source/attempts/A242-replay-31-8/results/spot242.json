@@ -1,0 +1,43 @@
+{
+ "a_scaling": {
+  "L": "191/50",
+  "A": "764/775",
+  "L_over_A": "31/8",
+  "pass": true
+ },
+ "b_budget": {
+  "sites": 5284,
+  "positive_point_sites": 496,
+  "charge_sets": 2220,
+  "positive_charge_sets": 2220,
+  "families_units": {
+   "point": 2247714156,
+   "2-of-5": 989672288,
+   "2-of-3": 3188007592,
+   "3-of-5": 4574085908
+  },
+  "M_units": 10999479944,
+  "budget_units_in_cert": 10999479944,
+  "d4_invariant": true,
+  "pass": true
+ },
+ "d_counting": {
+  "Gamma_units": 999962528,
+  "M_units": 10999479944,
+  "11Gamma_minus_M": 107864,
+  "pass": true
+ },
+ "c_charges": {
+  "poses": 3240,
+  "random_rows": 2000,
+  "critical_rows_drawn": 1000,
+  "critical_rows": 47,
+  "corner_domains": 60,
+  "failures": 0,
+  "min_charge_units": 1000047518,
+  "seed": 242,
+  "pass": true
+ },
+ "all_pass": true,
+ "seconds": 10.7
+}

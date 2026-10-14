@@ -1,0 +1,109 @@
+# Each count's default picture, `default-drawings.json`.
+#
+# One entry per count the regularized layer draws a view of
+# (`regularized/index.json`): whether the atlas, the site and the posters draw that view
+# by default or the house drawing, and why, under the regularization policy's sections 11
+# and 12 (docs/project/policies/regularization-policy.md). `devtools.default_drawings
+# --update` writes it; what a JSON Schema cannot say -- that each verdict is what the
+# measures give, and that the record covers exactly the index's views --
+# `devtools.default_drawings --check` holds, by measuring every view and its house
+# drawing again.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:DefaultDrawings/v1
+title: Default pictures of the known-best atlas
+type: object
+additionalProperties: false
+required:
+  - contract
+  - generated_by
+  - policy_document
+  - rule
+  - measured_by
+  - measures
+  - totals
+  - entries
+properties:
+  softschema: {type: object}
+  contract: {const: packing.squares:DefaultDrawings/v1}
+  generated_by: {const: python -m devtools.default_drawings --update}
+  policy_document: {const: docs/project/policies/regularization-policy.md}
+  rule:
+    description: Where the policy states the improvement rule the entries are judged by.
+    type: string
+    minLength: 1
+  measured_by: {type: string, minLength: 1}
+  measures:
+    type: array
+    items: {type: string}
+    minItems: 1
+  totals:
+    type: object
+    additionalProperties: false
+    required: [views, regularized, house]
+    properties:
+      views: {type: integer, minimum: 0}
+      regularized: {type: integer, minimum: 0}
+      house: {type: integer, minimum: 0}
+  entries:
+    type: array
+    items: {$ref: "#/$defs/entry"}
+$defs:
+  entry:
+    type: object
+    additionalProperties: false
+    required:
+      - n
+      - default
+      - reason
+      - generator
+      - view
+      - exact_routes
+      - side
+      - house_exact
+      - better
+      - worse
+      - measures
+    properties:
+      n: {type: integer, minimum: 1}
+      default:
+        description: The picture drawn by default.
+        enum: [regularized, house]
+      reason:
+        description: >-
+          The goals the view is better on, where it is the default; else why the house
+          picture stays ("no gain", "above U, not in the exceptions", a goal it is worse
+          on, or an exact route's refusal).
+        type: string
+        minLength: 1
+      generator: {type: [string, "null"]}
+      view:
+        description: The view's repository path, as the index names it.
+        type: string
+        pattern: ^packing/atlas/known-best/regularized/n-[0-9]{3}-regularized\.yaml\.gz$
+      exact_routes:
+        description: Whether both maintained exact routes accepted the view, as the index records.
+        type: boolean
+      side:
+        type: object
+        additionalProperties: false
+        required: [view_minus_U, named_above_U, against_house]
+        properties:
+          view_minus_U: {type: [string, "null"]}
+          named_above_U: {type: boolean}
+          against_house:
+            description: The view's exact side against the house's, where that is exact.
+            enum: [smaller, same, larger, null]
+      house_exact:
+        description: Whether the house witness is exactly verified.
+        type: boolean
+      better: {type: array, items: {type: string}}
+      worse: {type: array, items: {type: string}}
+      measures:
+        type: object
+        additionalProperties:
+          type: object
+          additionalProperties: false
+          required: [view, house]
+          properties:
+            view: {type: [integer, "null"]}
+            house: {type: [integer, "null"]}

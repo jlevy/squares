@@ -701,16 +701,44 @@ def half_angle_tangent(degrees: Fraction, places: int) -> Fraction:
     _require(turn != -180, f"an angle of {degrees} degrees has no finite half-angle tangent")
     if turn in EXACT_TANGENTS:
         return EXACT_TANGENTS[turn]
+    return _tangent_floor(
+        lambda: decimal_poses.enclose(turn) * mp.iv.pi / 360,
+        places,
+        f"tan({degrees}/2 degrees)",
+    )
+
+
+def half_angle_tangent_radians(radians: Fraction, places: int) -> Fraction:
+    """``tan(theta/2)`` for an angle in radians, rounded down at ``places`` decimals.
+
+    At 0 the tangent is 0, returned exactly. At every other rational angle it is
+    irrational (the tangent of a nonzero algebraic number is transcendental), so, as in
+    `half_angle_tangent`, an outward-rounded enclosure narrow enough decides the floor and
+    the working precision rises until it does; a floor no enclosure decides is refused,
+    as is an enclosure that meets a pole of the tangent.
+    """
+    if radians == 0:
+        return Fraction(0)
+    return _tangent_floor(
+        lambda: decimal_poses.enclose(radians) / 2, places, f"tan({radians}/2 radians)"
+    )
+
+
+def _tangent_floor(half_angle: Callable[[], Any], places: int, label: str) -> Fraction:
+    """The tangent of an enclosed half-angle, rounded down at ``places``, once decided.
+
+    ``half_angle`` builds the enclosure at the working precision it is called under.
+    """
     scale = 10**places
     for guard in GUARD_DIGITS:
         with decimal_poses.working_precision(places + guard):
-            enclosure = mp.iv.tan(decimal_poses.enclose(turn) * mp.iv.pi / 360)
+            enclosure = mp.iv.tan(half_angle())
             low, high = (_exact_endpoint(end) for end in (enclosure.a, enclosure.b))
         if low is not None and high is not None:
             floor = math.floor(low * scale)
             if floor == math.floor(high * scale):
                 return Fraction(floor, scale)
-    raise ReportError(f"no enclosure decides tan({degrees}/2 degrees) at {places} places")
+    raise ReportError(f"no enclosure decides {label} at {places} places")
 
 
 def _dilation_options(options: Mapping[str, str]) -> tuple[Fraction, int]:
@@ -773,6 +801,65 @@ def decimal_dilation(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.C
     return _certificate(n, side, rows)
 
 
+_CALLE_COUNT = re.compile(r"# n = ([1-9][0-9]*)")
+_CALLE_SIDE = re.compile(r"# s = ([0-9]+\.[0-9]+)")
+_CALLE_NUMBER = re.compile(r"-?[0-9]+\.[0-9]+(?:e[-+][0-9]{1,3})?")
+#: The longest number `calle_txt` reads; the source prints 18 significant digits.
+MAX_CALLE_CHARS = 64
+
+
+def _calle_number(text: str, where: str) -> Fraction:
+    _require(
+        len(text) <= MAX_CALLE_CHARS and _CALLE_NUMBER.fullmatch(text) is not None,
+        f"{where}: not a plain or scientific decimal: {text[:80]!r}",
+    )
+    return Fraction(Decimal(text))
+
+
+def calle_txt(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """Rio Calle's decimal text (#529), made exact by rounding each half-angle tangent.
+
+    The file states ``# n = N`` and ``# s = S`` as comment lines, then ``x y theta`` for
+    each square: its centre in ``[0, S]^2`` and its rotation about that centre in
+    radians, every number a decimal, in scientific notation or not. Other comment lines
+    are prose, read and not believed, and blank lines are skipped. Every decimal is read
+    exactly as printed; the side is the printed ``S``, and no dilation is applied. Each
+    square's ``t = tan(theta/2)`` is the exact tangent rounded down at the declared
+    ``half_angle_places``, from 30 to 100 (`half_angle_tangent_radians`), the one option
+    read. The file is no exact certificate, and only the exact routes decide whether the
+    result packs.
+    """
+    _require(
+        set(options) == {HALF_ANGLE_PLACES},
+        f"calle-txt reads exactly {HALF_ANGLE_PLACES}, not {sorted(options)}",
+    )
+    places = options[HALF_ANGLE_PLACES]
+    _require(
+        _PLACES.fullmatch(places)
+        and MIN_HALF_ANGLE_PLACES <= int(places) <= MAX_HALF_ANGLE_PLACES,
+        f"{HALF_ANGLE_PLACES} is an integer from {MIN_HALF_ANGLE_PLACES} to "
+        f"{MAX_HALF_ANGLE_PLACES}, not {places[:80]!r}",
+    )
+    lines = [line.strip() for line in _text(raw).splitlines() if line.strip()]
+    comments = [line for line in lines if line.startswith("#")]
+    counts = [match for line in comments if (match := _CALLE_COUNT.fullmatch(line))]
+    sides = [match for line in comments if (match := _CALLE_SIDE.fullmatch(line))]
+    _require(
+        len(counts) == 1 and int(counts[0].group(1)) == n,
+        f"n={n}: the file must state `# n = {n}` once",
+    )
+    _require(len(sides) == 1, f"n={n}: the file must state `# s = S` once")
+    rows = []
+    data = [line for line in lines if not line.startswith("#")]
+    for index, line in enumerate(data, start=1):
+        where = f"n={n} square {index}"
+        fields = line.split()
+        _require(len(fields) == 3, f"{where}: {len(fields)} fields, not `x y theta`")
+        x, y, theta = (_calle_number(field, where) for field in fields)
+        rows.append((x, y, half_angle_tangent_radians(theta, int(places))))
+    return _certificate(n, Fraction(Decimal(sides[0].group(1))), rows)
+
+
 #: Every certificate format a declaration may name. The module docstring says how to add one.
 ADAPTERS: dict[str, Adapter] = {
     "evand-cert": evand_cert,
@@ -782,6 +869,7 @@ ADAPTERS: dict[str, Adapter] = {
     "centred-json": centred_json,
     "decimal-dilation": decimal_dilation,
     "sqcert": sqcert,
+    "calle-txt": calle_txt,
 }
 
 
@@ -1010,6 +1098,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Barnett refinements 2026-10-11]": _import("barnett-refinements-2026-10-11"),
     "[SQUISH fourth request 2026-10-11]": _import("squish-500-fourth-request-2026-10-11"),
     "[Couzo certificates 2026-10-11]": _import("couzo-certificates-2026-10-11"),
+    "[Ostashev records 2026-10-12]": _import("dostashev-records-2026-10-12"),
+    "[Calle n102 2026-10-12]": _import("riocalle-n102-2026-10-12"),
+    "[Daniel n154 2026-10-12]": _import("evand-n154-2026-10-12"),
 }
 
 

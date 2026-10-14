@@ -97,6 +97,14 @@ $defs:
           review that established it. A new evidence entry whose
           relationship_to_generator is independent-implementation names a deciding
           program that has one, or carries its own independence_record.
+      independence:
+        $ref: '#/$defs/authorship'
+        description: >-
+          The structured independence record (epistemics.md, The Independence Record):
+          what the program's authors read, whether it is clean-room, the producer's
+          components it shares, who wrote it, and whether that authorship overlaps the
+          producer's. Required on a first-party program that decides, registered from 14
+          October 2026; devtools.verifier_registry exempts the earlier ones by name.
       summary:
         type: string
         minLength: 1
@@ -107,3 +115,86 @@ $defs:
           properties: {provenance: {const: external}}
         then:
           required: [versions]
+  authorship:
+    type: object
+    additionalProperties: false
+    required: [read, clean_room, shares, written_by, overlaps_producer]
+    properties:
+      read:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        description: >-
+          What its authors read that bears on what this program decides. mathematics --
+          the argument as mathematics, in a paper or this record's own derivation.
+          proof-text -- the producer's written proof. specification -- a specification of
+          the checker or of what a certificate means. certificate-format -- the format of
+          the data the program reads. producer-code -- the producer's own verification
+          code, its checker or its definitions in a proof assistant. producer-output --
+          the producer's stored outputs or receipts, read to compare. earlier-review --
+          another review of the same result.
+        items:
+          enum: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output, earlier-review]
+      clean_room:
+        type: boolean
+        description: >-
+          true only when the authors never read the producer's code for what this
+          program decides, and the program shares none of it. A lane that wrote several
+          programs can hold a clean room for one and not for another.
+      shares:
+        type: array
+        uniqueItems: true
+        description: >-
+          The components of the producer's code the program reuses, by name: a parser,
+          the certificate loader, an arithmetic kernel. Empty when it reuses none.
+        items: {type: string, minLength: 1}
+      written_by:
+        type: array
+        minItems: 1
+        description: Who wrote the program, people by name and AI systems by family.
+        items: {$ref: '#/$defs/author'}
+      overlaps_producer:
+        type: object
+        additionalProperties: false
+        required: [extent, separate_prompt, separate_code, note]
+        description: >-
+          Whether the program's authorship overlaps the producer's, and whether it was
+          written apart from the producer's work.
+        properties:
+          extent:
+            enum: [none, system-family, people, unknown]
+            description: >-
+              none -- no person and no AI system family in common. system-family -- an AI
+              system family the producer's authors also used (Claude, Codex), whatever
+              the model or version. people -- a person in common. unknown -- the
+              producer's authorship is not known.
+          separate_prompt:
+            type: [boolean, "null"]
+            description: >-
+              true when the program's authors worked from a prompt of their own, sharing no
+              conversation or session context with the producer's. null means not recorded.
+          separate_code:
+            type: boolean
+            description: >-
+              true when the program is written in files of its own that import or copy
+              none of the producer's code.
+          note: {type: string, minLength: 1}
+      note: {type: string, minLength: 1}
+  author:
+    type: object
+    additionalProperties: false
+    required: [kind]
+    description: >-
+      One author: a person by name, or an AI system by its family and the tier and
+      reasoning setting it ran at. The record names the system family, not a model
+      identifier.
+    properties:
+      kind: {enum: [person, ai]}
+      name: {type: string, minLength: 1, description: A person's name.}
+      system: {type: string, minLength: 1, description: 'An AI system family and its maker, such as Claude (Anthropic) or Codex (OpenAI).'}
+      setting: {type: string, minLength: 1, description: The role, tier and reasoning setting an AI system ran at.}
+    allOf:
+      - if: {properties: {kind: {const: person}}}
+        then: {required: [name]}
+      - if: {properties: {kind: {const: ai}}}
+        then: {required: [system]}

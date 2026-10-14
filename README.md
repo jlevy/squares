@@ -75,10 +75,26 @@ The most significant since August 2026:
   project. His $s(k^2 - 4) = k$ for every $k \ge 5$
   ([T-081](packing/frontier/RESULTS.md)) awaits its full replay here, so its nine new
   cases, $n = 96, 117, \ldots, 320$, are on the frontier as reported bounds.
-- **Seventeen squares bracketed:** both ends are machine-checked, Guzhou0806’s lower
-  bound $s(17) > 4.66044275$ ([T-093](packing/frontier/RESULTS.md)) and the upper bound
-  $s(17) \le 4.67553009\ldots$ of John Bidwell’s 1998 packing, certified exactly from
-  Overbeck’s rational witness ([T-065](packing/frontier/RESULTS.md)).
+- **Seventeen squares reported proved:** on 12 October 2026 two proofs were published,
+  by separate routes, that John Bidwell’s 1998 packing is optimal, so that
+  $s(17) = 4.67553009360455\ldots$. Marc Leonard Overbeck (Kleddamag) published what he
+  calls a candidate proof, one that holds if the 210 obligations it lists hold
+  ([T-153](packing/frontier/RESULTS.md),
+  [#557](https://github.com/jlevy/squares/issues/557)); its README says the mathematics,
+  engines, certificates, checkers, reviews and text were produced by AI systems under
+  his direction, Codex (OpenAI) and Claude (Anthropic).
+  Oscar Fitzharding (ofitzharding) published a Lean 4 proof that leaves no premise open
+  within its stated trust boundary ([T-154](packing/frontier/RESULTS.md),
+  [#565](https://github.com/jlevy/squares/issues/565)); its README says the project “was
+  developed with substantial assistance from Claude and Codex”.
+  Reviews here read parts of both and found no mathematical defect in what they read,
+  but neither has been replayed in full: parts of T-153’s computation have been rerun
+  here, and T-154’s Lean build has not been repeated.
+  So the record holds both as reported (`V0/C1`), and until a replay passes, the
+  [case record](packing/frontier/n-017.md) keeps the verified bracket: Guzhou0806’s
+  lower bound $s(17) > 4.66044275$ ([T-093](packing/frontier/RESULTS.md)) and the upper
+  bound of Bidwell’s packing, certified exactly from Overbeck’s rational witness
+  ([T-065](packing/frontier/RESULTS.md)).
 
 ## Papers
 
@@ -96,8 +112,8 @@ paper and its PDF. Three form a series on $n = 11$:
 is a tutorial on geometric construction, physics-inspired search, annealing, surgery,
 local refinement, and upper-bound certification.
 
-The website and the atlas posters are at edition `v0.5.0`; each paper carries its own
-version.
+The website is at edition `v0.6.1` and the atlas posters at `v0.6.0`; each paper carries
+its own version.
 
 ## Repository Guide
 
@@ -109,6 +125,7 @@ every claim is graded, and every defect is logged
 
 | Where | What |
 | --- | --- |
+| [**Changelog**](CHANGELOG.md) | Noteworthy merged contributions and launched papers, PDFs, results and site features; also at the bottom of [About](https://jlevy.github.io/squares/about.html#changelog) |
 | [**Tutorial**](TUTORIAL.md) | First-principles introduction to the objects, bounds, cells, stationary branches, search, and proof obligations |
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
@@ -507,6 +524,7 @@ Changing agents changes the driver, not the record or the evidence required for 
 
 ```
 .
+├── CHANGELOG.md            Noteworthy contributions and public launches
 ├── TUTORIAL.md             First-principles orientation for a newcomer
 ├── SYNOPSIS.md             Current research status, roadmap, results, and handoff
 ├── conventions.md          Artifact, identifier, evidence, and correction rules

@@ -1,0 +1,58 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-12T08:40Z",
+  "git_scope": "Sparse blobless checkout of the named files at the branch head, read by lane W of the 2026-10-12 intake (think-mq0k); no issue asked. The two reports retained here were added in 169a827 (2026-10-11T23:01:11Z, the s(29) minimal polynomial), 0d0146e (2026-10-12T02:29:22Z, gradec.py and its batch) and e493eea (2026-10-12T02:38:47Z, GRADEC_DROPZERO and n = 230, 261), and 7ea600b (2026-10-12T04:24:53Z) added N29.md's pickup section, the batch runner and the task README refresh; nothing in the scope changed after 7ea600b. Retained: the s(29) write-up and every script and Julia file of search/exact/homotopy/ but its install log; gradec.py, gradec_explore.py, the batch status files and runner; the three modules gradec.py imports from the same directory (localmin.py, verify_exact.py, geom.py) and env.sh; minpoly/results.json, the roster of the source's configurations with their exact sides and field degrees, from which the grade-C batch took its 250 inputs; the two inputs at n = 230 and 261 as their upstream gzip; the grade-C and exact-minpoly task notes; LICENSE and CREDITS.md. Not published by the source and so not retained: the degree-7213 polynomial and its parametrization (work/, gitignored), the grade-C certificates minpoly/solve/n-N.gradec.json and their n-N.contacts.json inputs (gitignored), and every run log. The other minpoly/data inputs and the rest of the tree are pinned by the commit alone.",
+  "sources": [
+    {
+      "id": "evand-exact-and-local-reports-2026-10-12",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "main",
+      "source_commit": "ad86d42d0f743076d735036702ba04a41ce24a8c",
+      "committed_utc": "2026-10-12T04:39:01Z",
+      "git_tree": "660a967d5c5727eaa73e1eefa06348d33101f92b",
+      "archived_path": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/homotopy",
+        "search/exact/gradec.py",
+        "search/exact/gradec_explore.py",
+        "search/exact/gradec_runs",
+        "search/exact/localmin.py",
+        "search/exact/verify_exact.py",
+        "search/exact/geom.py",
+        "search/exact/env.sh",
+        "search/exact/minpoly/results.json",
+        "search/exact/minpoly/data/n-230.minpoly.json.gz",
+        "search/exact/minpoly/data/n-261.minpoly.json.gz",
+        "tasks/exact-minpoly/grade-C.md",
+        "tasks/exact-minpoly/README.md"
+      ],
+      "subtree_file_count": 48,
+      "subtree_total_bytes": 320519,
+      "retained_file_count": 47,
+      "retained_total_bytes": 296637,
+      "compressed": [
+        "source/search/exact/minpoly/results.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "search/exact/homotopy/install.log",
+          "bytes": 23882,
+          "sha256": "7ec598e12c04ca57c819de059f6e9ce728949f0c658e4d0f6ba74b43e7c4bae8",
+          "reason": "The log of installing the Julia packages Project.toml and Manifest.toml name, which the retained manifest already pins; no claim depends on it. Pinned for provenance."
+        }
+      ],
+      "license": "MIT, copyright 2026 Evan Daniel (LICENSE); attribution retained in CREDITS.md. CREDITS.md says the repository's work was produced by Claude (Anthropic) under human direction, and each commit read here is co-authored by Claude Opus 5.5.",
+      "claims": [
+        "search/exact/homotopy/N29.md (169a827, 2026-10-11T23:01:11Z) reports that the side of the source's s(29) record configuration, 5.93383346267692918968946061635201913843383418107788697463882591508025..., is a root of an irreducible integer polynomial p of degree 7213 (leading coefficient 325 digits, height 5074 digits), which is therefore its minimal polynomial, found by homotopy continuation: 7,209 regular roots from 44,448 polyhedral paths, and 4 more recovered algebraically from a K = 4 lattice. It rates irreducibility (irred.py, degree patterns modulo 12 primes near 2^61), a Krawczyk enclosure of radius 1e-50 of the eliminated system's zero (krawczyk.py) and the link of that zero to a root of p (link.py) rigorous, and the identities F_k(tau) = 0, Sn(tau) = x Sd(tau) in Q[x]/(p) and the consistency of the full 152-row contact system Monte Carlo (verify_mod.py and contacts_mod.py, modulo 50 and 21 random 62-bit primes). It does not check non-overlap at the exact point, and the coefficients (work/n29_poly_q4.json, 27 MB) are gitignored and not published.",
+        "tasks/exact-minpoly/grade-C.md (0d0146e and e493eea, 2026-10-12T02:29:22Z and 02:38:47Z) states Theorem C, a sufficient condition for a configuration with exact flat motions to be a local minimum of the side (IsLocalMinPacking: no packing in a smaller square within a pose-space ball, squares matched by index, angles modulo 90 degrees), with a paper proof, and reports search/exact/gradec.py's batch over the 250 source configurations of field degree at most 4 in search/exact/minpoly/results.json, exact in the number field with signs by interval arithmetic: 231 VALID with every load-bearing incidence as a row; n = 230 and 261 VALID with GRADEC_DROPZERO=1, which drops 24 rows that carry zero force in every multiplier vector; 17 timeouts at the 30-minute cap (n = 174, 201, 204, 231, 234, 257, 262, 274, 275, 295, 296, 299 and 308 to 312). So 233 of the 250 are VALID. gradec_runs/_status.txt and _dropzero_status.txt give each run's exit code; the certificates, their inputs and the logs are gitignored and not published."
+      ],
+      "original_gzip": [
+        "source/search/exact/minpoly/data/n-230.minpoly.json.gz",
+        "source/search/exact/minpoly/data/n-261.minpoly.json.gz"
+      ]
+    }
+  ]
+}

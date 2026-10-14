@@ -285,3 +285,7 @@ docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1-recheck.
 
 # Generated URL registry: devtools.site_urls checks its renderer for drift.
 docs/project/site-urls.md
+
+# Generated changelog: devtools.render_changelog --check compares it byte-for-byte
+# with its YAML source; formatting must not diverge from that renderer.
+CHANGELOG.md
