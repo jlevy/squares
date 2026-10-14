@@ -5,14 +5,23 @@ title: "PR #592 (merge): formalization kind, n = 17 correctness reviews, documen
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 12
 delegate: coordinator-stoic-clarke
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m4w46vwppxrngcwfqaec682g
+  - is-01m4w46wctqb23441kpe4ksg17
+  - is-01m4w46wxs3d28feb8vm671ge8
+  - is-01m4w46xdak0nd3kmxcp1zm4vq
+  - is-01m4w46xw173rgshbzzkr2zzhy
+  - is-01m4w46ybr3v07r4statsr8eme
+  - is-01m4w46yvdzemx6xfb596cnz55
+  - is-01m4w46zc6xmqckenrsfk9gf5s
 hold: null
 hold_until: null
 created_at: 2026-10-14T01:36:53.160Z
-updated_at: 2026-10-14T01:58:51.982Z
+updated_at: 2026-10-14T02:35:09.574Z
 started_at: 2026-10-14T01:36:54.191Z
 ---
 
