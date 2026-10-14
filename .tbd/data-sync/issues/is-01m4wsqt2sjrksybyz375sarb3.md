@@ -5,7 +5,7 @@ title: "Intake 2026-10-14: evaluate every open upper-bound report per count, in 
 kind: epic
 status: in_progress
 priority: 1
-version: 22
+version: 23
 delegate: serene-hopper
 labels:
   - result-import
@@ -33,7 +33,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T08:51:21.304Z
-updated_at: 2026-10-14T17:25:23.829Z
+updated_at: 2026-10-14T18:35:53.318Z
 started_at: 2026-10-14T08:51:46.973Z
 ---
 Owner's request in session 0132qkwt8gAB9vM3aQcCJLsQ (branch claude/serene-hopper-xxh80m, off origin/main f73e9de13): review every outstanding GitHub issue for intake; build one per-n ledger across all open reports; at each count, walk the reports in the order they reached the record, and record a report only where it is stronger than the record and every earlier report; a report an earlier, stronger (or equal) report already beats is not recorded unless there is a key reason, which the ledger names; track every item as beads; comment progress on the issues; finish with a summary table of every intake item, recorded or not, and why.
@@ -44,5 +44,5 @@ Coordination: the stages 1-3 imports of #521-#596 are held by the 2026-10-14 lan
 
 Owner decisions, 2026-10-14 ~17:05-17:15Z (verbatim):
 - Compute: "Let's, for now, hold off on anything more than 40 CPU-hours but let's be sure we have a clear backlog of validation work that's tracked appropriately, and details are in beads." This replaces the earlier < 4 h delegation threshold. Items above 40 CPU-h are HELD.
-- Publication reading (#582), decision 1: "yes though for significant items S4+ we should create an issue ourselves for tracking purposes." Watched-repository publications count from their first commit, the ledger's default. For S4+ results with no issue we open one: #603, Fang's excess theorem (T-178 in #602). T-180 has #600.
+- Publication reading (#582), decision 1: "yes though for significant items S4+ we should create an issue ourselves for tracking purposes." Watched-repository publications count from their first commit, the ledger's default. For S4+ results with no issue we open one: #603, Fang's excess theorem (T-163 in #602 after its review renumbering; it was T-178). T-180 has #600.
 - Credits: "also be sure we use Ryan Xu real name or surname Xu not the handle for regular credits." This applies to the bibliography credited_names and authors, register prose, and the ledger displays. Identifiers stay as they are (keys, paths, URLs).
