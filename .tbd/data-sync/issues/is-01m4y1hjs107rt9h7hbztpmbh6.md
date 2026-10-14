@@ -3,9 +3,9 @@ type: is
 id: is-01m4y1hjs107rt9h7hbztpmbh6
 title: "Records PR after #602 merges: credit Ryan Xu by name on main; T-174 and T-180 text; Fang direct evidence and rows 421-814 to replayed; #605's News entry"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: serene-hopper-records
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4wsqt2sjrksybyz375sarb3
 hold: null
 hold_until: null
 created_at: 2026-10-14T20:27:00.250Z
-updated_at: 2026-10-14T23:13:52.217Z
+updated_at: 2026-10-14T23:42:02.986Z
 started_at: 2026-10-14T22:04:00.417Z
+closed_at: 2026-10-14T23:42:02.986Z
+close_reason: "Landed with #608 (merge 0dd9003e0): Ryan Xu credited by name across bibliography, register and case records; T-174's 17 decided comparisons; T-180's calibration basis with E-wand125-closed-form-replay4d-sample; Fang direct evidence for all 14 counts, rows 421-814 verified; #602's 21 follow-ups and the verdict comments in result-requests; News entries for #602 and #605, #597 omission; site v0.7.2."
+resolution: null
+duplicate_of: null
 ---
 The follow-on edits the coordinator handed over, all on files #602 owns until it merges. Open the PR after #602 lands, on claude/serene-hopper-xxh80m restarted from main.
 
