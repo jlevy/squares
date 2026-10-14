@@ -10,9 +10,13 @@ import subprocess
 import sys
 from copy import deepcopy
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Literal, cast
+from unittest.mock import Mock
 
 import pytest
+from xdist.remote import setup_config as setup_xdist_worker_config
+from xdist.scheduler.loadfile import LoadFileScheduling
+from xdist.workermanage import WorkerController
 
 from devtools import suite_files
 from devtools.suite_files import RecordedCosts, Shard, SuiteFilesError
@@ -1143,3 +1147,334 @@ def test_flushed_progress_retains_unfinished_call_and_teardown_without_claiming_
     }
     with pytest.raises(suite_files.SuiteFilesError, match="invalid test progress"):
         suite_files.unfinished_tests([{"nodeid": "case", "phase": "unknown"}])
+
+
+def _cost_order_item(name: str, case: str) -> pytest.Item:
+    item = Mock(spec=pytest.Item)
+    item.path = REPO / name
+    item.nodeid = f"{name}::{case}"
+    return item
+
+
+def test_cost_order_keeps_every_identity_and_module_case_order(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    heavy = "packing/tests/test_heavy.py"
+    cheap = "packing/tests/test_cheap.py"
+    tie = "packages/workbench/tests/test_tie.py"
+    unknown = "packing/tests/test_unknown.py"
+    items = [
+        _cost_order_item(cheap, "test_z"),
+        _cost_order_item(heavy, "TestGroup::test_a[value::part]"),
+        _cost_order_item(unknown, "test_a"),
+        _cost_order_item(heavy, "test_z"),
+        _cost_order_item(cheap, "test_a"),
+        _cost_order_item(tie, "test_only"),
+    ]
+    resolved: list[Path] = []
+    original = suite_files.repository_path
+
+    def canonical(path: Path) -> str:
+        resolved.append(path)
+        return original(path)
+
+    monkeypatch.setattr(suite_files, "repository_path", canonical)
+    costs = RecordedCosts(4, {heavy: 20, cheap: 1, tie: 20})
+    ordered = suite_files.cost_ordered_items(items, costs)
+    assert ordered == [items[index] for index in (2, 5, 1, 3, 0, 4)]
+    assert len(ordered) == len(items)
+    assert {id(item) for item in ordered} == {id(item) for item in items}
+    for path in {item.path for item in items}:
+        assert [item.nodeid for item in ordered if item.path == path] == [
+            item.nodeid for item in items if item.path == path
+        ]
+    assert len(resolved) == len({item.path for item in items})
+    assert suite_files.cost_ordered_items([], costs) == []
+
+
+@pytest.mark.parametrize(
+    ("shard", "distribution", "reorder"),
+    [
+        (None, "loadfile", False),
+        (Shard(1, 4), "no", False),
+        (Shard(1, 4), "loadscope", False),
+        (Shard(1, 4), "worksteal", False),
+        (Shard(1, 4), "loadfile", True),
+        (Shard(1, 4), "loadfile", None),
+    ],
+)
+def test_cost_order_hook_is_a_no_op_outside_the_exact_scope(
+    monkeypatch: pytest.MonkeyPatch,
+    shard: Shard | None,
+    distribution: str,
+    *,
+    reorder: bool | None,
+) -> None:
+    items = [_cost_order_item("packing/tests/test_b.py", "test_b")]
+    config = Mock(spec=pytest.Config)
+    config.stash = pytest.Stash()
+    config.stash[suite_files._SHARD] = shard  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    options = {"dist": distribution, "loadscopereorder": reorder}
+    config.getoption.side_effect = lambda name, *, default: options.get(name, default)
+    monkeypatch.setattr(suite_files, "_packed", Mock(side_effect=AssertionError("read costs")))
+    unchanged = list(items)
+    suite_files.pytest_collection_modifyitems(config, items)
+    assert items == unchanged
+
+
+def test_cost_order_hook_uses_the_configured_validated_record(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    heavy = "packing/tests/test_heavy.py"
+    cheap = "packing/tests/test_cheap.py"
+    items = [_cost_order_item(cheap, "test_a"), _cost_order_item(heavy, "test_b")]
+    config = Mock(spec=pytest.Config)
+    config.stash = pytest.Stash()
+    config.stash[suite_files._SHARD] = Shard(1, 4)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    record = REPO / "packing/devtools/suite-file-costs.json"
+    options = {"dist": "loadfile", "loadscopereorder": False, "--suite-file-costs": str(record)}
+    config.getoption.side_effect = lambda name, *, default=None: options.get(name, default)
+    loaded: list[Path] = []
+
+    def costs(path: Path) -> tuple[RecordedCosts, dict[str, int]]:
+        loaded.append(path)
+        return RecordedCosts(4, {heavy: 20, cheap: 1}), {}
+
+    monkeypatch.setattr(suite_files, "_packed", costs)
+    suite_files.pytest_collection_modifyitems(config, items)
+    assert [item.nodeid for item in items] == [f"{heavy}::test_b", f"{cheap}::test_a"]
+    assert loaded == [record]
+
+
+def test_native_loadfile_preserves_cost_order_locality_and_crash_requeue() -> None:
+    """Exercise the installed scheduler, including its pending-case low watermark."""
+    config = Mock(spec=pytest.Config)
+    config.getvalue.return_value = ["popen", "popen"]
+    config.option = Mock(loadscopereorder=False)
+    scheduler = LoadFileScheduling(config)
+    workers = [Mock(spec=WorkerController), Mock(spec=WorkerController)]
+    for index, worker in enumerate(workers):
+        worker.shutting_down = False
+        worker.gateway = Mock(id=f"gw{index}")
+    heavy = [_cost_order_item("packing/tests/test_heavy.py", f"test_{n}") for n in range(3)]
+    medium = [_cost_order_item("packing/tests/test_medium.py", f"test_{n}") for n in range(3)]
+    cheap = [_cost_order_item("packing/tests/test_cheap.py", f"test_{n}") for n in range(9)]
+    tiny = [_cost_order_item("packing/tests/test_tiny.py", "test_only")]
+    costs = RecordedCosts(
+        4,
+        {
+            heavy[0].path.relative_to(REPO).as_posix(): 100,
+            medium[0].path.relative_to(REPO).as_posix(): 20,
+            cheap[0].path.relative_to(REPO).as_posix(): 1,
+            tiny[0].path.relative_to(REPO).as_posix(): 0.1,
+        },
+    )
+    nodeids = [
+        item.nodeid
+        for item in suite_files.cost_ordered_items([*cheap, *tiny, *heavy, *medium], costs)
+    ]
+    for worker in workers:
+        scheduler.add_node(worker)
+        scheduler.add_node_collection(worker, nodeids)
+    scheduler.schedule()
+    assert workers[0].send_runtest_some.call_count == 1
+    assert workers[0].send_runtest_some.call_args.args[0] == list(range(3))
+    assert workers[1].send_runtest_some.call_count == 1
+    assert workers[1].send_runtest_some.call_args.args[0] == list(range(3, 6))
+    # Three pending cases leave the next file in the queue; one completion reaches two.
+    scheduler.mark_test_complete(workers[0], 0)
+    assert workers[0].send_runtest_some.call_args.args[0] == list(range(6, 15))
+    assert scheduler.remove_node(workers[0]) == nodeids[1]
+    requeued = {
+        nodeid
+        for unit in scheduler.workqueue.values()
+        for nodeid, done in unit.items()
+        if not done
+    }
+    assert set(nodeids[1:3]) | set(nodeids[6:15]) <= requeued
+    assert nodeids[0] not in requeued
+    for workload in scheduler.assigned_work.values():
+        for module, cases in workload.items():
+            assert all(nodeid.partition("::")[0] == module for nodeid in cases)
+
+
+def test_cost_order_resolves_each_recorded_module_once_at_full_collection_scale(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """An 18,000-case collection pays path resolution once per physical module."""
+    costs = suite_files.load_costs()
+    paths = [REPO / name for name in costs.seconds]
+    assert paths
+
+    class Item:
+        __slots__ = ("nodeid", "path")
+
+        def __init__(self, path: Path, index: int) -> None:
+            self.path = path
+            self.nodeid = f"{path}::case_{index}"
+
+    items = cast("list[pytest.Item]", [Item(paths[n % len(paths)], n) for n in range(18_000)])
+    counts: dict[Path, int] = {}
+    original = suite_files.repository_path
+
+    def canonical(path: Path) -> str:
+        counts[path] = counts.get(path, 0) + 1
+        return original(path)
+
+    monkeypatch.setattr(suite_files, "repository_path", canonical)
+    ordered = suite_files.cost_ordered_items(items, costs)
+    assert len(ordered) == len(items)
+    assert {id(item) for item in ordered} == {id(item) for item in items}
+    assert counts == dict.fromkeys(paths, 1)
+    expected: dict[Path, list[str]] = {}
+    actual: dict[Path, list[str]] = {}
+    for item in items:
+        expected.setdefault(item.path, []).append(item.nodeid)
+    for item in ordered:
+        actual.setdefault(item.path, []).append(item.nodeid)
+    assert actual == expected
+
+
+@pytest.mark.parametrize("metadata", ["enabled", "absent", "disabled", "wrong-shard"])
+def test_cost_order_survives_the_actual_xdist_worker_config_rewrite(
+    monkeypatch: pytest.MonkeyPatch, metadata: str
+) -> None:
+    heavy = "packing/tests/test_heavy.py"
+    cheap = "packing/tests/test_cheap.py"
+    record = REPO / "packing/devtools/suite-file-costs.json"
+    controller = Mock(spec=pytest.Config)
+    controller.stash = pytest.Stash()
+    controller.stash[suite_files._SHARD] = Shard(1, 4)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    options = {"dist": "loadfile", "loadscopereorder": False, "--suite-file-costs": str(record)}
+    controller.getoption.side_effect = lambda name, *, default=None: options.get(name, default)
+    node = Mock(spec=WorkerController)
+    node.config = controller
+    node.workerinput = {}
+    suite_files.pytest_configure_node(node)
+    assert node.workerinput == {
+        suite_files.COST_ORDER_WORKER_KEY: {"enabled": True, "shard": "1/4"}
+    }
+    worker = Mock(spec=pytest.Config)
+    worker.stash = pytest.Stash()
+    worker.stash[suite_files._SHARD] = Shard(1, 4)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    worker.option = Mock(dist="loadfile", loadscopereorder=False)
+    worker.getvalue.side_effect = lambda name: getattr(worker.option, name)
+    worker.getoption.side_effect = lambda name, *, default=None: (
+        str(record) if name == "--suite-file-costs" else getattr(worker.option, name, default)
+    )
+    setup_xdist_worker_config(worker, None)
+    assert worker.getoption("dist") == "no"
+    worker.workerinput = deepcopy(node.workerinput)
+    if metadata == "absent":
+        worker.workerinput.clear()
+    elif metadata == "disabled":
+        worker.workerinput[suite_files.COST_ORDER_WORKER_KEY]["enabled"] = False
+    elif metadata == "wrong-shard":
+        worker.workerinput[suite_files.COST_ORDER_WORKER_KEY]["shard"] = "2/4"
+    monkeypatch.setattr(
+        suite_files, "_packed", lambda _path: (RecordedCosts(4, {heavy: 20, cheap: 1}), {})
+    )
+    items = [_cost_order_item(cheap, "test_a"), _cost_order_item(heavy, "test_b")]
+    suite_files.pytest_collection_modifyitems(worker, items)
+    expected = (heavy, cheap) if metadata == "enabled" else (cheap, heavy)
+    assert [item.path.relative_to(REPO).as_posix() for item in items] == list(expected)
+
+
+def test_cost_order_controller_disables_worker_metadata_outside_loadfile(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    config = Mock(spec=pytest.Config)
+    config.stash = pytest.Stash()
+    config.stash[suite_files._SHARD] = Shard(1, 4)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    options = {"dist": "loadscope", "loadscopereorder": False}
+    config.getoption.side_effect = lambda name, *, default=None: options.get(name, default)
+    node = Mock(spec=WorkerController)
+    node.config = config
+    node.workerinput = {}
+    suite_files.pytest_configure_node(node)
+    assert node.workerinput[suite_files.COST_ORDER_WORKER_KEY]["enabled"] is False
+    monkeypatch.setattr(suite_files, "_packed", Mock(side_effect=AssertionError("read costs")))
+    config.workerinput = node.workerinput
+    options["dist"] = "no"
+    items = [_cost_order_item("packing/tests/test_b.py", "test_b")]
+    suite_files.pytest_collection_modifyitems(config, items)
+    assert len(items) == 1
+
+
+@pytest.mark.pool_heavy
+def test_cost_order_runs_in_two_real_workers_and_preserves_all_nodes(tmp_path: Path) -> None:
+    """The controller metadata must reach real workers whose distribution became no."""
+    suite = tmp_path / "suite"
+    suite.mkdir()
+    files = {"test_a_cheap.py": 9, "test_z_heavy.py": 3}
+    for name, count in files.items():
+        (suite / name).write_text(
+            "\n".join(f"def test_{n}():\n    pass\n" for n in range(count))
+        )
+    (tmp_path / "conftest.py").write_text(
+        "import json\n"
+        "from pathlib import Path\n"
+        "from devtools import suite_files\n\n"
+        "def pytest_collection_finish(session):\n"
+        "    config = session.config\n"
+        "    if not hasattr(config, 'workerinput'):\n"
+        "        return\n"
+        "    metadata = config.workerinput.get(suite_files.COST_ORDER_WORKER_KEY)\n"
+        "    receipt = {'dist': config.getoption('dist'), 'ordering': metadata,\n"
+        "               'plugin': str(Path(suite_files.__file__).resolve()),\n"
+        "               'nodes': [item.nodeid for item in session.items]}\n"
+        "    filename = 'collection-' + config.workerinput['workerid'] + '.json'\n"
+        "    text = json.dumps(receipt, sort_keys=True)\n"
+        "    (Path(__file__).parent / filename).write_text(text)\n"
+    )
+    record = tmp_path / "costs.json"
+    record.write_text(
+        json.dumps(
+            {
+                "schema": suite_files.COSTS_SCHEMA,
+                "shards": 1,
+                "files": {
+                    suite_files.repository_path(suite / "test_a_cheap.py"): 1,
+                    suite_files.repository_path(suite / "test_z_heavy.py"): 20,
+                },
+            }
+        )
+    )
+    report = tmp_path / "executed.json"
+    process = _probe(
+        tmp_path,
+        "--suite-shard=1/1",
+        f"--suite-file-costs={record}",
+        f"--test-file-costs={report}",
+        "-n",
+        "2",
+        "--dist=loadfile",
+        "--no-loadscope-reorder",
+        "--basetemp",
+        str(tmp_path / "worker-temp"),
+    )
+    status, output = _finish(process)
+    assert status == 0, output
+    receipts = [
+        json.loads(path.read_text()) for path in sorted(tmp_path.glob("collection-gw*.json"))
+    ]
+    assert len(receipts) == 2
+    assert receipts[0] == receipts[1]
+    receipt = receipts[0]
+    assert receipt["dist"] == "no"
+    assert receipt["ordering"] == {"enabled": True, "shard": "1/1"}
+    assert receipt["plugin"] == str(Path(suite_files.__file__).resolve())
+    expected = [f"suite/test_z_heavy.py::test_{n}" for n in range(3)] + [
+        f"suite/test_a_cheap.py::test_{n}" for n in range(9)
+    ]
+    assert receipt["nodes"] == expected
+    assert len(set(receipt["nodes"])) == 12
+    executed = suite_files.read_report(report)
+    assert executed["exit_status"] == 0
+    assert executed["tests"] == 12
+    assert {row["file"]: row["tests"] for row in executed["files"]} == {
+        suite_files.repository_path(suite / name): count for name, count in files.items()
+    }
+    print(
+        json.dumps({"workers": 2, "collection": receipt, "executed_tests": 12}, sort_keys=True)
+    )

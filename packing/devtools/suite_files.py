@@ -87,6 +87,8 @@ from strif import atomic_write_text
 if TYPE_CHECKING:
     from collections.abc import Iterable, Sequence
 
+    from xdist.workermanage import WorkerController
+
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
 #: The recorded per-file costs the partition packs, keyed by repository-relative path.
@@ -397,6 +399,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
 
 
 _SHARD: Final = pytest.StashKey[Shard | None]()
+COST_ORDER_WORKER_KEY: Final = "sqpack_suite_cost_order"
 
 
 def _costs_option(config: pytest.Config) -> Path:
@@ -481,6 +484,65 @@ def pytest_ignore_collect(collection_path: Path, config: pytest.Config) -> bool 
     if shard_of(repository_path(collection_path), costs, packed) == shard.index:
         return None
     return True
+
+
+def cost_ordered_items(items: Sequence[pytest.Item], costs: RecordedCosts) -> list[pytest.Item]:
+    """Whole modules in recorded cost order, with their original case order intact.
+
+    Unknown costs run first by canonical path; their priority does not assign a weight.
+    Resolve each distinct item path once, rather than paying filesystem resolution for
+    every parametrized case. The same physical workbench module has one record key.
+    """
+    canonical: dict[Path, str] = {}
+    modules: dict[str, list[pytest.Item]] = {}
+    for item in items:
+        path = item.path
+        if path not in canonical:
+            canonical[path] = repository_path(path)
+        modules.setdefault(canonical[path], []).append(item)
+
+    def priority(name: str) -> tuple[int, float, str]:
+        seconds = costs.seconds.get(name)
+        return (0, 0.0, name) if seconds is None else (1, -seconds, name)
+
+    return [item for name in sorted(modules, key=priority) for item in modules[name]]
+
+
+def cost_order_enabled(config: pytest.Config) -> bool:
+    """Use the controller's exact decision after xdist rewrites worker distribution."""
+    shard = config.stash.get(_SHARD, None)
+    if shard is None or config.getoption("loadscopereorder", default=True) is not False:
+        return False
+    if hasattr(config, "workerinput"):
+        workerinput = getattr(config, "workerinput", None)
+        metadata = (
+            workerinput.get(COST_ORDER_WORKER_KEY) if isinstance(workerinput, Mapping) else None
+        )
+        return (
+            isinstance(metadata, Mapping)
+            and metadata.get("enabled") is True
+            and metadata.get("shard") == str(shard)
+        )
+    return config.getoption("dist", default="no") == "loadfile"
+
+
+@pytest.hookimpl(optionalhook=True)
+def pytest_configure_node(node: WorkerController) -> None:
+    """Transmit validated controller applicability through supported xdist metadata."""
+    shard = node.config.stash.get(_SHARD, None)
+    node.workerinput[COST_ORDER_WORKER_KEY] = {
+        "enabled": cost_order_enabled(node.config),
+        "shard": None if shard is None else str(shard),
+    }
+
+
+@pytest.hookimpl(trylast=True)
+def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
+    """Preserve cost order only where xdist explicitly preserves loadfile queue order."""
+    if not cost_order_enabled(config):
+        return
+    costs, _packed_files = _packed(_costs_option(config))
+    items[:] = cost_ordered_items(items, costs)
 
 
 class FileCostReport:

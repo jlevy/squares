@@ -13,6 +13,7 @@ Selected test hashes do not establish whole-tree equivalence. Within-arm whole-t
 | [VE-003](experiments/VE-003-checks-start-order.md) | No passing samples | No passing samples | Incomplete or unsuccessful observation; no acceptance |
 | [VE-004](experiments/VE-004-checks-start-order.md) | 93.18 (90.81-94.13), n=3 | 71.84 (64.96-73.09), n=3 | Screen passes (22.9% median reduction); correctness and complexity review required |
 | [VE-005](experiments/VE-005-rollup-corpus-snapshot.md) | 47.72 (44.96-50.80), n=3 | 2.31 (2.29-3.20), n=3 | Screen passes (95.2% median reduction); correctness and complexity review required; whole-tree diff varied within an arm: affected-source audit required, whole-tree equivalence is not established |
+| [VE-006](experiments/VE-006-recorded-cost-first-loadfile.md) | No passing samples | No passing samples | Pending samples |
 
 ## Observations
 

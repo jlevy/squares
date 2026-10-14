@@ -830,6 +830,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "-n",
         "4",
         "--dist=loadfile",
+        "--no-loadscope-reorder",
         "-p",
         "devtools.suite_files",
         "--suite-shard=1/4",
@@ -861,6 +862,7 @@ def test_the_quick_lane_asks_for_no_xdist_worker_on_a_single_core_machine(
 
     assert "-n" not in command
     assert "--dist=loadfile" not in command
+    assert "--no-loadscope-reorder" not in command
     assert command[-4:] == (
         "--durations=0",
         f"--durations-min={validate.QUICK_TEST_WALL_BACKSTOP_SECONDS:g}",

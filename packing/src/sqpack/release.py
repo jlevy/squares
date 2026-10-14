@@ -700,6 +700,24 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("site", "paper:n11-lower-bounds-explainer"),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "index.html",
+            "development.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The executable AST change from 08d23c06 is confined to the quick pytest "
+            "command's native xdist queue-order option. It preserves selectors, workers, "
+            "markers, verdict rules and limits. Public page and explainer producers do not "
+            "execute this quick-test command; their source, data, rendering and edition "
+            "fields are unchanged. This exact-path validation scheduling disposition "
+            "does not cover other validation changes or claim a measured speedup."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("site",),
         paths=("packing/site-changelog.yaml",),
         outputs=("about.html",),

@@ -1613,7 +1613,7 @@ _SUITE_FILES_PLUGIN = "devtools.suite_files"
 
 def _quick_lane_command(jobs: int, shard: int) -> tuple[str, ...]:
     distribution = _xdist_distribution(jobs)
-    loadfile = ("--dist=loadfile",) if distribution else ()
+    loadfile = ("--dist=loadfile", "--no-loadscope-reorder") if distribution else ()
     return (
         sys.executable,
         "-m",
