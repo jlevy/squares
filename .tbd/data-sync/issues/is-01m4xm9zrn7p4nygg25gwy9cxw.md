@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m4xm9zrn7p4nygg25gwy9cxw
-title: Publish launch history as News with homepage preview and daily sans-serif cards
+title: Publish individual tagged News articles and newest three S5 homepage highlights
 kind: feature
 status: in_progress
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10
 labels: []
@@ -21,10 +21,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:35:39.924Z
-updated_at: 2026-10-14T18:29:21.714Z
+updated_at: 2026-10-14T18:30:00.385Z
 started_at: 2026-10-14T16:36:49.748Z
 ---
-User directs moving the whole changelog/history to a dedicated News page and second navigation tab after Home. Use the usual uppercase sans-serif News H1; operational news body in sans-serif, grouped into hairline-bordered boxes per day. Homepage previews the first two news items and has a styled All news → button. Keep YAML/GitHub source history authoritative and frozen; About links to News and legacy About/changelog anchors remain navigable. Delegated to the site implementation agent together with full-width Atlas on separate delivery branch; apply component release policy, independent review and hosted/live verification.
+Current owner requirements supersede earlier daily-details/hover-open notes: dedicated second News navigation tab, one card per individual entry (25), actual article rendered once with about ten visible lines and fade; explicit click/tap or keyboard expansion and contraction, hover only light green indication. Reuse Results subject chip colors, paper-style dates, compact small-caps titles, shared footer chevrons and shared transitions with reduced-motion/no-JS fallbacks. Rewrite all retained items as reader-relevant news while preserving metadata/evidence. Homepage shows newest three S5 results with existing claim/status/credit and visible verification caveat. Document extensions in existing paper-design.md and active feature plan. PR604 head8c465d209 has normal hooks/local bounded browser checks passing, Pages38614518630 green; hosted frontend38614518600 has three test-contract failures tracked think-i7qh and independent correctness review B is in progress. Site v0.7.0, posters0.6.0 and independent paper versions; no current launch/deployment claim. Root coordinates remaining reviews, batched fixes, current-head hosted proof, merge and live verification.
 
 ## Notes
 
