@@ -112,8 +112,8 @@ paper and its PDF. Three form a series on $n = 11$:
 is a tutorial on geometric construction, physics-inspired search, annealing, surgery,
 local refinement, and upper-bound certification.
 
-The website and the atlas posters are at edition `v0.5.0`; each paper carries its own
-version.
+The website is at edition `v0.6.0` and the atlas posters at `v0.6.0`; each paper carries
+its own version.
 
 ## Repository Guide
 
@@ -125,6 +125,7 @@ every claim is graded, and every defect is logged
 
 | Where | What |
 | --- | --- |
+| [**Changelog**](CHANGELOG.md) | Noteworthy merged contributions and launched papers, PDFs, results and site features; also at the bottom of [About](https://jlevy.github.io/squares/about.html#changelog) |
 | [**Tutorial**](TUTORIAL.md) | First-principles introduction to the objects, bounds, cells, stationary branches, search, and proof obligations |
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
@@ -522,6 +523,7 @@ Changing agents changes the driver, not the record or the evidence required for 
 
 ```
 .
+├── CHANGELOG.md            Noteworthy contributions and public launches
 ├── TUTORIAL.md             First-principles orientation for a newcomer
 ├── SYNOPSIS.md             Current research status, roadmap, results, and handoff
 ├── conventions.md          Artifact, identifier, evidence, and correction rules

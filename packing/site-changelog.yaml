@@ -1,0 +1,1063 @@
+# Authoritative editorial history. Delivery metadata is acquired during authoring;
+# rendering and validation never contact GitHub.
+softschema:
+  contract: packing.squares:SiteChangelog/v1
+  schema: site-changelog.schema.yaml
+  status: enforced
+repository: https://github.com/jlevy/squares
+entries:
+  - id: n17-proof-reports-and-verification-policy
+    date: '2026-10-14'
+    title: Two Reported 17-Square Proofs and Their Verification Limits
+    pull_requests:
+      - 592
+      - 595
+    grouping: related
+    categories:
+      - records
+      - documentation
+      - pipeline
+    result_ids:
+      - T-153
+      - T-154
+    summary: |
+      Clarified Overbeck’s candidate proof and Fitzharding’s Lean formalization of the
+      17-square optimum, with retained mathematical reviews and public explanations.
+      Both remain reported at V0/C1; complete proof replays have not been established here.
+    details: |
+      - Distinguished formalization and simplification from a new mathematical proof,
+        while allowing a simplification to carry its own proof-assistant check.
+      - Required verification evidence to cover the stated claim and every count;
+        sampled and component checks cannot upgrade an entire bound or optimum.
+      - Documented verifier authorship, shared components and what each independent
+        program’s authors read, with coverage visible beside the retained replays.
+    artifacts:
+      - kind: result
+        label: Current Overbeck proof report
+        target: https://jlevy.github.io/squares/result/t-153.html
+      - kind: result
+        label: Current Fitzharding formalization report
+        target: https://jlevy.github.io/squares/result/t-154.html
+      - kind: paper
+        label: Current explainer, including the 17-square reports
+        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+    publication:
+      date: '2026-10-14'
+      evidence: https://github.com/jlevy/squares/actions/runs/38536230832/job/115761676874
+    references:
+      - label: Fitzharding mathematical review
+        target: docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md
+      - label: Overbeck mathematical review
+        target: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+      - label: Evidence and independence rules
+        target: epistemics.md
+  - id: regularized-drawings-and-exact-side-admissions
+    date: '2026-10-14'
+    title: Regularized Drawings, Exact Side Admissions and Original Comparison
+    pull_requests:
+      - 511
+      - 530
+      - 548
+      - 549
+      - 559
+      - 580
+      - 585
+      - 587
+      - 591
+    stack_id: 498
+    categories:
+      - regularization
+      - records
+      - site
+    result_ids:
+      - T-155
+      - T-156
+    summary: |
+      Launched regularized views across the atlas and both posters, with the packing
+      as published still available for comparison. The workflow registers exact
+      sides before using them as bounds and records drawing credit separately.
+    details: |
+      - Added a reproducible regularizer driver, exact same-side re-solving and grid-slack
+        cleanup, followed by comparison, selection and admission tools.
+      - Registered a 59-count exact-side batch as T-155 at V3/C3. T-156 records the
+        290-square ceiling already implied by T-155, with its own exact certificate;
+        it adds no new bound beyond that implication.
+      - Selected 79 of 90 views as regularized defaults using the documented improvement
+        rule; the other 11 retain their house drawings. Regularized / Original controls
+        and the case pages’ “As published” disclosures preserve the source comparison.
+      - Redrew both posters with the selected views and compact attribution, while
+        retaining generator, modifications and construction credit in the records.
+    artifacts:
+      - kind: page
+        label: Current atlas with Regularized / Original comparison
+        target: https://jlevy.github.io/squares/atlas.html
+      - kind: pdf
+        label: Current 1–100 packing infographic
+        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+      - kind: pdf
+        label: Current 1–324 packing poster
+        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+      - kind: result
+        label: Current exact-side batch record
+        target: https://jlevy.github.io/squares/result/t-155.html
+      - kind: result
+        label: Current 290-square exact certificate record
+        target: https://jlevy.github.io/squares/result/t-156.html
+    publication:
+      date: '2026-10-14'
+      evidence: https://github.com/jlevy/squares/actions/runs/38527537367/job/115733950233
+    references:
+      - label: Regularization policy
+        target: docs/project/policies/regularization-policy.md
+      - label: Regularization process
+        target: docs/project/guides/regularization-process.md
+  - id: fitzharding-n17-reported-proof
+    date: '2026-10-13'
+    title: A Second Reported Proof of the Optimal 17-Square Packing
+    pull_requests: [588]
+    categories: [records]
+    result_ids: [T-154]
+    summary: |
+      Imported Oscar Fitzharding’s Lean proof, retaining its source packet,
+      announcements and an adversarial review with exact source comparisons.
+      The result is recorded at V0/C1; the full Lean build has not been replayed here.
+    artifacts:
+      - kind: result
+        label: Current 17-square Lean proof report
+        target: https://jlevy.github.io/squares/result/t-154.html
+    publication:
+      date: '2026-10-13'
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    references:
+      - label: Source and premise review
+        target: docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
+  - id: regularization-foundations
+    date: '2026-10-13'
+    title: Regularization Policy and Reproducible Tooling
+    pull_requests: [497, 509]
+    stack_id: 498
+    categories: [regularization, pipeline]
+    summary: |
+      Established the regularization policy and retained Evan Daniel’s regularizer
+      as the foundation for improving the project’s packing representations.
+    details: |
+      - Assessed adaptation across $n = 1\ldots324$ and documented the admission policy.
+        - Use conservative regularization; register an improved bound before drawing it.
+        - Admit an exact view at the verified bound as a bound view; send unsettled cases to review.
+      - Added a reproducible comparison tool for evaluating the proposed workflow.
+      - Vendored the upstream regularizer and exact solver with credit, provenance and a pin check.
+
+      Driver, exact re-solving, grid cleanup, gallery and admission layers remain open.
+      This delivery changes no drawing or bound.
+    references:
+      - label: Regularization policy
+        target: docs/project/policies/regularization-policy.md
+      - label: Assessment
+        target: docs/project/research/research-2026-10-11-evand-regularization-assessment.md
+      - label: Retained regularizer
+        target: vendor/evand-regularize/README.md
+  - id: drawn-packing-verification-gaps
+    date: '2026-10-13'
+    title: Verification Gaps in Drawn Packings
+    pull_requests: [581]
+    categories: [records, regularization]
+    summary: |
+      Reviewed the gap between drawn packings, exact certificates and standing
+      verified bounds, with a 92-row witness audit and a recorded defect in
+      tolerance-blurred receipt minima.
+    details: |
+      - Distinguished numerical drawings, exact drawings above the verified bound,
+        and reported sides without an exact certificate at that side.
+      - Recorded the remaining verification and labeling decisions and proposed a
+        gate for exactly verified drawings at or below the verified upper bound.
+
+      The proposed gate and the missing certificates were not delivered by this review.
+    references:
+      - label: Verification-gap review
+        target: docs/project/reviews/review-2026-10-13-verification-gaps.md
+  - id: overbeck-n17-candidate-proof
+    date: '2026-10-13'
+    title: A Reported Proof of the Optimal 17-Square Packing
+    pull_requests: [560]
+    categories: [records]
+    result_ids: [T-153]
+    summary: |
+      Registered Marc Leonard Overbeck’s candidate proof that $s(17) = L$ at V0/C1,
+      with retained sources, a proof review and sampled producer and independent
+      checks. The reported lane records the claimed optimum; the verified lane
+      remains open while the complete capture and tree replays are held.
+    artifacts:
+      - kind: result
+        label: Current 17-square candidate-proof record
+        target: https://jlevy.github.io/squares/result/t-153.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    references:
+      - label: Candidate-proof review
+        target: docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md
+  - id: publication-audit-and-import-scoping-repairs
+    date: '2026-10-12'
+    title: Import-Aware Push Checks and Audit Deadlines
+    pull_requests: [507]
+    categories: [pipeline, site]
+    summary: |
+      Corrected the push-check attribution introduced in #496 so importing checks
+      run when their dependencies change. Added a 25-minute live-audit deadline
+      inside the 30-minute job ceiling, partial verdict reporting and retries for
+      stalled or truncated transport responses.
+    references:
+      - label: Publication and validation workflow
+        target: development.md
+  - id: pingyou-ai-assistance-disclosure
+    date: '2026-10-12'
+    title: PingYou’s AI-Assistance Disclosure
+    pull_requests: [558]
+    categories: [records]
+    result_ids: [T-147, T-148]
+    summary: |
+      Recorded PingYou Ltd’s statement that both solutions used its unreleased
+      agentic AI offering, PY, in the result records, case pages and source notes.
+      Preserved the earlier disclosure history; the update changes no bound or
+      verification rung.
+    artifacts:
+      - kind: result
+        label: Current 207-square PingYou record
+        target: https://jlevy.github.io/squares/result/t-147.html
+      - kind: result
+        label: Current 153-square PingYou record
+        target: https://jlevy.github.io/squares/result/t-148.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+  - id: replayed-upper-bound-admissions
+    date: '2026-10-12'
+    title: Improved Upper Bounds from Replayed Certificates
+    pull_requests: [553]
+    stack_id: 517
+    categories: [records, pipeline]
+    result_ids: [T-151, T-152]
+    summary: |
+      Registered Nate Chaoweeraprasit’s nine SQUISH constructions and Francisco
+      Couzo’s refinements at $n = 304$ and $305$ at V3/C3. Adopted nine improved
+      upper bounds, preserved the previous bounds as history and recorded nine
+      verified beyond-horizon rows.
+    details: |
+      - Replayed the exact certificates on both maintained routes and a third exact route,
+        with separate adversarial reviews and credited construction lineage.
+      - Made later adoption passes retain the state they displaced, so a rerun reproduces
+        both the current certificate and dated history.
+
+      These are finite-feasibility upper bounds; they establish no lower bound or optimum.
+    artifacts:
+      - kind: result
+        label: Current SQUISH admission record
+        target: https://jlevy.github.io/squares/result/t-151.html
+      - kind: result
+        label: Current Couzo refinement record
+        target: https://jlevy.github.io/squares/result/t-152.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    references:
+      - label: SQUISH certificate review
+        target: docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md
+      - label: Couzo certificate review
+        target: docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md
+  - id: october-eleven-intake-and-adoption
+    date: '2026-10-12'
+    title: Four Certificate Admissions and 42 Adopted Upper Bounds
+    pull_requests: [512, 516, 518]
+    stack_id: 517
+    categories: [records, pipeline]
+    result_ids: [T-147, T-148, T-149, T-150]
+    summary: |
+      Imported and reviewed exact certificates from PingYou Ltd, Daniil Ostashev
+      and Robert Barnett as T-147 through T-150 at V3/C3, then adopted the smallest
+      reviewed certificates at 42 counts from this and the preceding intake.
+    details: |
+      - Recorded the watched-repository and issue reads and retained Guzhou0806’s
+        reported $s(40) > 3359/500$ release.
+        - Audited its finite steps and independently checked the near-axis patch.
+        - Left the complete 43-slab kernel replay and result registration to later work.
+      - Added certificate readers and a third exact checking route, retaining credited
+        lineage and the source packets behind the four admissions.
+      - Updated case ceilings and drawing sources together, with displaced certificates
+        kept as history, private-worker custody checks and a repeatable adoption tool.
+
+      The four admissions establish finite feasibility, without an optimality claim.
+    artifacts:
+      - kind: result
+        label: Current PingYou 207-square admission
+        target: https://jlevy.github.io/squares/result/t-147.html
+      - kind: result
+        label: Current PingYou 153-square admission
+        target: https://jlevy.github.io/squares/result/t-148.html
+      - kind: result
+        label: Current Ostashev admission
+        target: https://jlevy.github.io/squares/result/t-149.html
+      - kind: result
+        label: Current Barnett refinement admission
+        target: https://jlevy.github.io/squares/result/t-150.html
+      - kind: page
+        label: Current atlas of adopted packings
+        target: https://jlevy.github.io/squares/atlas.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    references:
+      - label: PingYou certificate review
+        target: docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md
+      - label: Barnett and Ostashev certificate review
+        target: docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md
+  - id: edited-intake-comment-detection
+    date: '2026-10-12'
+    title: Detect Edited Intake Comments
+    pull_requests: [531]
+    categories: [pipeline]
+    summary: |
+      Made the intake sweep flag a source comment edited after its recorded
+      read-through time, even if the original comment was already read. This
+      keeps later corrections visible to the next intake pass.
+    references:
+      - label: Intake workflow
+        target: packing/campaign/result-import.md
+  - id: public-site-prose-and-reading-width
+    date: '2026-10-11'
+    title: Site Typography, Navigation and Public Prose
+    pull_requests: [513]
+    categories: [site, documentation]
+    summary: |
+      Narrowed the prose column, added responsive text-only navigation and applied
+      editorial corrections across the site and reader documents. Retained two
+      full editorial reviews with 16 substantive follow-ups requiring evidence
+      or author decisions.
+    artifacts:
+      - kind: page
+        label: Current project overview
+        target: https://jlevy.github.io/squares/
+      - kind: page
+        label: Current About page
+        target: https://jlevy.github.io/squares/about.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    references:
+      - label: Front-door prose review
+        target: docs/project/reviews/review-2026-10-11-front-door-prose.md
+      - label: Reader-document prose review
+        target: docs/project/reviews/review-2026-10-11-top-level-prose.md
+  - id: evan-daniel-attribution-corrections
+    date: '2026-10-11'
+    title: Evan Daniel’s Credit Across Reader Surfaces
+    pull_requests: [508]
+    categories: [records, documentation]
+    result_ids: [T-062, T-064, T-081]
+    summary: |
+      Audited Evan Daniel’s credit across the register, atlas and reader pages.
+      Corrected the missing $n = 46$ citation and added his $s(60) = 8$ result
+      to README and About, keeping the unreplayed family’s reported status explicit.
+    artifacts:
+      - kind: page
+        label: Current contributor and result overview
+        target: https://jlevy.github.io/squares/about.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+  - id: website-front-door-and-result-reports
+    date: '2026-10-11'
+    title: A Website Front Door and an Invitation to Report Results
+    pull_requests: [502]
+    categories: [site, documentation]
+    summary: |
+      Put the website and its packing atlas at the front of README and added a
+      shared invitation to report results on the homepage and About. The result
+      form asks contributors for the name they want credited.
+    artifacts:
+      - kind: page
+        label: Project homepage
+        target: https://jlevy.github.io/squares/
+      - kind: page
+        label: Reporting results on About
+        target: https://jlevy.github.io/squares/about.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+  - id: bounded-publication-audits
+    date: '2026-10-11'
+    title: Bounded Publication Audits and Selective Push Checks
+    pull_requests: [496]
+    categories: [pipeline, site]
+    summary: |
+      Shared HTTP transport, exposed live-audit progress and bounded publication
+      verification. Scoped local push checks to relevant inputs while preserving
+      the validation contract; the change does not establish an overall loop speedup.
+    references:
+      - label: Publication and validation workflow
+        target: development.md
+  - id: october-ten-intake-replays
+    date: '2026-10-11'
+    title: Exact Certificate Replays and New Bound Reports
+    pull_requests: [487]
+    categories: [records, pipeline]
+    result_ids: [T-128, T-129, T-130, T-131, T-132, T-133, T-134, T-135, T-136, T-137, T-138, T-139, T-140, T-141, T-142, T-143, T-144, T-145, T-146]
+    summary: |
+      Completed the 10 October intake with retained source packets, exact
+      certificate replays, independent checks and mathematical reviews across
+      the upper-bound batch and two $n = 40$ lower bounds.
+    details: |
+      - Confirmed and reviewed twelve upper-bound entries at V3/C3, including
+        Evan Daniel’s fifteen regularized certificates; adoption followed in a later delivery.
+      - Confirmed Guzhou0806’s clipped-corner and continuous-pose lower bounds
+        at V3/C3, moving both $n = 40$ lanes to the continuous-pose bound.
+      - Recorded wand125’s $n = 28$, $29$, $30$ and $122\ldots126$ lower-bound
+        reports at V0/C0, with complete confirmation runs still pending.
+      - Added declaration-driven imports, a third exact feasibility route and
+        typed records for unfinished confirmations and regularizations.
+
+      The admission batch does not itself adopt the new upper bounds or confirm the pending reports.
+    artifacts:
+      - kind: result
+        label: Current 40-square continuous-pose admission
+        target: https://jlevy.github.io/squares/result/t-145.html
+      - kind: result
+        label: Current Daniel regularized-certificate admission
+        target: https://jlevy.github.io/squares/result/t-146.html
+      - kind: page
+        label: Current result register
+        target: https://jlevy.github.io/squares/results.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    references:
+      - label: Final lower-bound review
+        target: docs/project/reviews/review-2026-10-11-final-lower-bounds.md
+      - label: Final upper-bound review
+        target: docs/project/reviews/review-2026-10-11-final-upper-bounds.md
+      - label: Final asymptotic and grading review
+        target: docs/project/reviews/review-2026-10-11-final-asymptotic-and-grading.md
+  - id: unified-site-navigation
+    date: '2026-10-11'
+    title: A Unified Overview, Atlas and Results Navigation
+    pull_requests: [462]
+    categories: [site]
+    summary: |
+      Unified the website’s overview, atlas and results navigation with shared
+      packing previews, consistent controls, readable formulas and export links.
+    details: |
+      - Added a shared overview of the atlas, recent results, papers, visuals and documentation.
+      - Gave case and result pages consistent diagram placement, navigation and responsive controls.
+      - Replaced recency stars with red recent-result indicators while preserving independent proof and bound status.
+    artifacts:
+      - kind: page
+        label: Overview
+        target: https://jlevy.github.io/squares/
+      - kind: page
+        label: Atlas
+        target: https://jlevy.github.io/squares/atlas.html
+      - kind: page
+        label: Results
+        target: https://jlevy.github.io/squares/results.html
+      - kind: page
+        label: Papers and downloads
+        target: https://jlevy.github.io/squares/papers.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+  - id: paper-typography-and-title-case
+    date: '2026-10-10'
+    title: Consistent Paper Typography and Titles
+    pull_requests: [492]
+    categories: [documentation, pipeline]
+    summary: |
+      Applied typographic punctuation to generated version histories, shared
+      Chicago title case across paper fronts and references, and kept Part I’s
+      colophon with its final source notes in the 22-page PDF.
+    artifacts:
+      - kind: paper
+        label: Current Part I paper
+        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+      - kind: pdf
+        label: Current Part I PDF
+        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.pdf
+      - kind: paper
+        label: Current Part II paper
+        target: https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html
+      - kind: pdf
+        label: Current Part II PDF
+        target: https://jlevy.github.io/squares/papers/n11-threshold-bound-review.pdf
+      - kind: paper
+        label: Current Part III paper
+        target: https://jlevy.github.io/squares/papers/n11-optimality-review.html
+      - kind: pdf
+        label: Current Part III PDF
+        target: https://jlevy.github.io/squares/papers/n11-optimality-review.pdf
+      - kind: paper
+        label: Current methods tutorial
+        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+      - kind: pdf
+        label: Current methods tutorial PDF
+        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    releases:
+      - component: paper:n11-lower-bounds-explainer
+        version: v0.4.5
+      - component: paper:square-packing-methods-survey
+        version: v0.2.1
+  - id: illustrated-packing-methods-tutorial
+    date: '2026-10-10'
+    title: An Illustrated Tutorial on Finding Record Packings
+    pull_requests: [477]
+    categories: [documentation]
+    summary: |
+      Revised the methods tutorial with 32 selected upper-bound improvements,
+      finer explanations of search and certification, and five attributed packing
+      illustrations. Distinguished Daniel’s replayed intake certificates from
+      standing-bound adoption and local rigidity from optimality evidence.
+    artifacts:
+      - kind: paper
+        label: Current methods tutorial
+        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+      - kind: pdf
+        label: Current methods tutorial PDF
+        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    releases:
+      - component: paper:square-packing-methods-survey
+        version: v0.2.0
+  - id: readable-atlas-and-print-exports
+    date: '2026-10-10'
+    title: Packing Atlas Layouts and Printable Exports
+    pull_requests: [474]
+    categories: [site]
+    summary: |
+      Made the web atlas easier to compare and published redesigned posters of
+      100 and 324 packings with readable typography and complete named credits.
+    details: |
+      - Added Small Triangle and Grid layouts with Fixed, Row and Global scales.
+      - Rebuilt both posters’ SVG, PNG and PDF exports with shared legends,
+        compact complete rows and printable project addresses.
+      - Corrected attributed names and the orientation of the 211-square drawing,
+        preserving the distinction between rigidity and verification.
+
+      The redesign adds no mathematical result or proof and retains the published v0.5.0 edition.
+    artifacts:
+      - kind: page
+        label: Current interactive atlas
+        target: https://jlevy.github.io/squares/atlas.html
+      - kind: pdf
+        label: Current 100-packing infographic PDF
+        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+      - kind: pdf
+        label: Current 324-packing infographic PDF
+        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+      - kind: graphic
+        label: Current 100-packing SVG
+        target: https://jlevy.github.io/squares/known-best-1-100.svg
+      - kind: graphic
+        label: Current 324-packing SVG
+        target: https://jlevy.github.io/squares/known-best-1-324.svg
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+  - id: daniel-record-hunt-source-intake
+    date: '2026-10-10'
+    title: Daniel’s Record-Hunt Certificates and Source Evidence
+    pull_requests: [478]
+    categories: [records, pipeline]
+    result_ids: [T-131, T-128]
+    summary: |
+      Retained and exactly replayed Evan Daniel’s 132-square certificate and
+      155-square evidence. Registered T-131 at V0/C0 pending review and adoption;
+      the 155-square evidence matches T-128’s exact side, with an exact pose
+      comparison that establishes no connecting motion or local-minimum equivalence.
+    artifacts:
+      - kind: result
+        label: Current 132-square record-hunt record
+        target: https://jlevy.github.io/squares/result/t-131.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    references:
+      - label: Retained record-hunt source packet
+        target: packing/resources/web/evand-record-hunt-2026-10-09/README.md
+  - id: dated-beyond-horizon-reports
+    date: '2026-10-10'
+    title: Dated History for Beyond-Horizon Reports
+    pull_requests: [479]
+    categories: [records, pipeline]
+    summary: |
+      Added dated supersession to beyond-horizon coverage and retained Francisco
+      Couzo’s newer reports at $n = 375$ and $378$ without rewriting the earlier
+      source facts. These remain author reports outside the 1–324 case corpus;
+      no geometry replay or selected bound is claimed.
+    references:
+      - label: Beyond-horizon source coverage
+        target: packing/frontier/source-coverage.yaml
+deliveries:
+- number: 511
+  title: 'feat: drive Evan Daniel''s regularizer, re-solve views at the record''s side, and draw a
+    review gallery, with pilot spikes (think-up3h, think-7hmc, think-ubr0, think-pwmi)'
+  merged_at: '2026-10-14T02:57:39Z'
+  base_ref: main
+  merge_commit: aeef99ef0ef27ace054434094118a6ac355da384
+  stack_id: 498
+- number: 530
+  title: 'feat: close free grid slack exactly at the record''s side, with a census of how evenly the
+    atlas draws its grids (prototype)'
+  merged_at: '2026-10-14T02:57:40Z'
+  base_ref: claude/busy-pascal-vgiccb
+  merge_commit: aeef99ef0ef27ace054434094118a6ac355da384
+  delivery_to_main:
+    commit: aeef99ef0ef27ace054434094118a6ac355da384
+    evidence: https://github.com/jlevy/squares/commit/aeef99ef0ef27ace054434094118a6ac355da384
+  stack_id: 498
+- number: 548
+  title: 'feat: a multi-generator regularized layer, its frontier record, and the first admission
+    batch (think-k35c)'
+  merged_at: '2026-10-14T02:57:41Z'
+  base_ref: claude/busy-pascal-vgiccb-grid
+  merge_commit: aeef99ef0ef27ace054434094118a6ac355da384
+  delivery_to_main:
+    commit: aeef99ef0ef27ace054434094118a6ac355da384
+    evidence: https://github.com/jlevy/squares/commit/aeef99ef0ef27ace054434094118a6ac355da384
+  stack_id: 498
+- number: 549
+  title: 'register: exact regularized sides at 59 counts as T-155, and draw the 16 counts they admit
+    with 4 grid-slack replacements'
+  merged_at: '2026-10-14T02:57:43Z'
+  base_ref: claude/busy-pascal-vgiccb-record
+  merge_commit: aeef99ef0ef27ace054434094118a6ac355da384
+  delivery_to_main:
+    commit: aeef99ef0ef27ace054434094118a6ac355da384
+    evidence: https://github.com/jlevy/squares/commit/aeef99ef0ef27ace054434094118a6ac355da384
+  stack_id: 498
+- number: 559
+  title: 'atlas: draw the 42 counts #518 re-housed from regularized views made on their new witnesses'
+  merged_at: '2026-10-14T02:57:44Z'
+  base_ref: claude/busy-pascal-vgiccb-register
+  merge_commit: aeef99ef0ef27ace054434094118a6ac355da384
+  delivery_to_main:
+    commit: aeef99ef0ef27ace054434094118a6ac355da384
+    evidence: https://github.com/jlevy/squares/commit/aeef99ef0ef27ace054434094118a6ac355da384
+  stack_id: 498
+- number: 580
+  title: 'atlas: draw nineteen counts at the best known side and more regular, by the owner''s rules
+    of 13 October'
+  merged_at: '2026-10-14T02:57:45Z'
+  base_ref: claude/busy-pascal-vgiccb-518
+  merge_commit: aeef99ef0ef27ace054434094118a6ac355da384
+  delivery_to_main:
+    commit: aeef99ef0ef27ace054434094118a6ac355da384
+    evidence: https://github.com/jlevy/squares/commit/aeef99ef0ef27ace054434094118a6ac355da384
+  stack_id: 498
+- number: 585
+  title: 'records: credit each regularized drawing on its case record, with the project''s modifications,
+    and never as a result'
+  merged_at: '2026-10-14T07:18:57Z'
+  base_ref: main
+  merge_commit: 9f48ccc80cee8dcf94c7cadbcaded01408f94fa2
+  stack_id: 498
+- number: 587
+  title: 'register: s(290) by monotonicity from T-155, with its grid-slack view as its own exact certificate
+    (T-156)'
+  merged_at: '2026-10-14T07:18:58Z'
+  base_ref: claude/upbeat-ptolemy-1lxxx8-credits
+  merge_commit: 9f48ccc80cee8dcf94c7cadbcaded01408f94fa2
+  delivery_to_main:
+    commit: 9f48ccc80cee8dcf94c7cadbcaded01408f94fa2
+    evidence: https://github.com/jlevy/squares/commit/9f48ccc80cee8dcf94c7cadbcaded01408f94fa2
+  stack_id: 498
+- number: 591
+  title: 'atlas: draw the regularized view by default wherever it improves on the packing as published,
+    house kept as published'
+  merged_at: '2026-10-14T07:18:59Z'
+  base_ref: claude/upbeat-ptolemy-1lxxx8-register290
+  merge_commit: 9f48ccc80cee8dcf94c7cadbcaded01408f94fa2
+  delivery_to_main:
+    commit: 9f48ccc80cee8dcf94c7cadbcaded01408f94fa2
+    evidence: https://github.com/jlevy/squares/commit/9f48ccc80cee8dcf94c7cadbcaded01408f94fa2
+  stack_id: 498
+- number: 592
+  title: 'feat: formalization kind for T-154, the n = 17 correctness reviews, and documented independence
+    of confirmations'
+  merged_at: '2026-10-14T08:35:46Z'
+  base_ref: main
+  merge_commit: f73e9de13d8ccc40b91d844b164f9c2ad9c032c1
+- number: 595
+  title: 'docs: state the two reported n = 17 proofs on README, TUTORIAL, the explainer and the Frontier
+    page'
+  merged_at: '2026-10-14T07:25:31Z'
+  base_ref: main
+  merge_commit: b8c930338ee3577a43faccb52472c6975ab7eccd
+- number: 588
+  title: Import Fitzharding's Lean proof that s(17) = L as T-154 (#565), and the n = 11 and n = 17 announcement
+    posts
+  merged_at: '2026-10-13T22:04:08Z'
+  base_ref: main
+  merge_commit: df9767225ef6011aa84b49408e423b70858d2af1
+- number: 509
+  title: 'vendor: Evan Daniel''s regularizer at evand/square-packing@675a5ea, with credit and a pin check
+    (think-csds)'
+  merged_at: '2026-10-13T20:19:14Z'
+  base_ref: main
+  merge_commit: 7d51fdd855f8c89ed83f620e3edef7151e24b53c
+  stack_id: 498
+- number: 497
+  title: 'research: assess Evan Daniel''s regularization and plan its adaptation to n = 1..324 (think-kl2v)'
+  merged_at: '2026-10-13T18:14:15Z'
+  base_ref: main
+  merge_commit: 9310284ba99d6494f750560563c68987c6d95a3c
+  stack_id: 498
+- number: 581
+  title: 'review: verification gaps in the drawn packings and the upper-bound register'
+  merged_at: '2026-10-13T17:45:00Z'
+  base_ref: main
+  merge_commit: fd3da945849b4610464b34757b2c596fdec73f76
+- number: 560
+  title: 'register: #557, Overbeck''s candidate proof that s(17) = L, as T-153 (V0/C1, S5, reported)'
+  merged_at: '2026-10-13T17:07:04Z'
+  base_ref: main
+  merge_commit: 5584b2283c4047a833e415ddd73959316a04721d
+- number: 579
+  title: 'process: reconcile beads and plan specs in three rounds and clarify agent ownership'
+  merged_at: '2026-10-13T08:31:35Z'
+  base_ref: main
+  merge_commit: 34c826f08fc75dc51eb8d6f72c04b0f74b0c4ffb
+- number: 576
+  title: 'docs: one directory per kind in docs/project, lowercase names, and a layout check (think-mv16)'
+  merged_at: '2026-10-13T05:28:00Z'
+  base_ref: main
+  merge_commit: ea227e62df86d3eadf650211e39c5586adc7aa3e
+- number: 507
+  title: 'fix: address PR #496 reviews: hold push scoping to imports and bound the live audit'
+  merged_at: '2026-10-12T23:07:24Z'
+  base_ref: main
+  merge_commit: e96e9ea95c15c6ad3a9a547a8cb02760e721cfc4
+- number: 558
+  title: 'records: replies after #553 merged, and #503''s AI-assistance answer (think-ckjc)'
+  merged_at: '2026-10-12T21:24:02Z'
+  base_ref: main
+  merge_commit: 074ac28d4ceb9a1897303f936d794771cfc6a7bd
+- number: 556
+  title: 'fix(requests): hold each entry to the last reply that named it (#555 A1)'
+  merged_at: '2026-10-12T18:14:49Z'
+  base_ref: main
+  merge_commit: 562fdbdff1d98948f68b36b81b53f9c8165ffd08
+- number: 553
+  title: 'intake 2026-10-11 (4/6): #500 and #506 replayed, reviewed, registered as T-151 and T-152, and
+    adopted'
+  merged_at: '2026-10-12T17:56:19Z'
+  base_ref: main
+  merge_commit: 06c425eca69e43c17bb480d90572efadb294e277
+  stack_id: 517
+- number: 555
+  title: 'records: the seventeen final replies and closes after #518 merged'
+  merged_at: '2026-10-12T16:41:07Z'
+  base_ref: main
+  merge_commit: 61ac6f2d81879901ca4ec597b8fba797a784ad6c
+- number: 518
+  title: 'intake 2026-10-11 (3/6): adopt 42 reviewed V3/C3 upper bounds on their case records'
+  merged_at: '2026-10-12T15:11:27Z'
+  base_ref: main
+  merge_commit: e10fd85d444c8a3859ed4abb0edcf7be385f4171
+  stack_id: 517
+- number: 551
+  title: 'records: the four confirmations posted after #516 merged (#503, #504, #501, #505)'
+  merged_at: '2026-10-12T13:59:44Z'
+  base_ref: main
+  merge_commit: 25de5a42e8e35ca01668ed07747ed2a3601f4280
+- number: 516
+  title: 'intake 2026-10-11 (2/6): #503, #504, #501, #505 replayed, reviewed and registered as T-147 to
+    T-150 at V3/C3'
+  merged_at: '2026-10-12T13:14:01Z'
+  base_ref: main
+  merge_commit: 4a4910524983de9db09905ae3f3e3e712cfe783d
+  stack_id: 517
+- number: 547
+  title: 'test: the atlas second-press probe waits on the move''s clock, not a timer'
+  merged_at: '2026-10-12T12:49:25Z'
+  base_ref: main
+  merge_commit: 9d720975695f297ff4c139c584df4c1f45aee14d
+- number: 546
+  title: 'intake: every report carries the intake label; the sweep lists one that does not'
+  merged_at: '2026-10-12T10:41:36Z'
+  base_ref: main
+  merge_commit: 0d6010ff9f70ad0b5e26ffd4fd8751c7238ee9d3
+- number: 531
+  title: 'records: the five follow-ups posted after #512 merged (#419, #413, #494, #495, #485)'
+  merged_at: '2026-10-12T08:09:46Z'
+  base_ref: main
+  merge_commit: 7847cf3d53f220f7b2bf22257251fa18dc38b233
+- number: 512
+  title: 'intake 2026-10-11 (1/4): the reads, #494 and #495 entered, and #485''s s(40) > 3359/500 retained
+    and audited'
+  merged_at: '2026-10-12T06:37:28Z'
+  base_ref: main
+  merge_commit: ad00d7f844fba8c75df4f053ef7d7bfafbc0ccb4
+  stack_id: 517
+- number: 519
+  title: 'records: the 21 issue replies posted on 12 October for results already on main'
+  merged_at: '2026-10-12T05:54:56Z'
+  base_ref: main
+  merge_commit: 8647fcae7867691f27c09cde4017518487c767e5
+- number: 520
+  title: 'test: result filters wait for their own navigation, not KPress''s scroll stamp'
+  merged_at: '2026-10-12T05:49:02Z'
+  base_ref: main
+  merge_commit: 528572b1b8871b60210fce5f0d2a771d4e0ea3d6
+- number: 513
+  title: 'style: polish site typography, navigation, and public prose'
+  merged_at: '2026-10-11T22:44:05Z'
+  base_ref: main
+  merge_commit: cc8c3c4214395c6d6fe6d6f7d793ccd937b421b0
+- number: 508
+  title: 'credit: Evan Daniel where the record omitted him (n = 46, README, About)'
+  merged_at: '2026-10-11T20:41:26Z'
+  base_ref: main
+  merge_commit: 189d7c1d1a4a5fdc09e68bdb1064cc9386294a0e
+- number: 502
+  title: Make the website the README's front door and invite result reports
+  merged_at: '2026-10-11T19:32:41Z'
+  base_ref: main
+  merge_commit: 3a5a91a90f997a65da52c42000769c1e6b6c3eae
+- number: 496
+  title: 'fix: bound publication audits and scope local push checks'
+  merged_at: '2026-10-11T06:07:36Z'
+  base_ref: main
+  merge_commit: 8aba95081b634a4dd4e70c07359b5c11b8a7b1cf
+- number: 499
+  title: 'records: stale wording left by the 10 October intake, after PR #487'
+  merged_at: '2026-10-11T05:43:16Z'
+  base_ref: main
+  merge_commit: 42b7e5541bc33f8cdfe2f19403a4a6eaab4ecdc8
+- number: 487
+  title: 'intake: the 2026-10-10 pass over eight new issues, the unread replies and five watched repositories'
+  merged_at: '2026-10-11T04:46:46Z'
+  base_ref: main
+  merge_commit: c6bf2d46f50d05931f1b925ba94b36b81798e264
+- number: 462
+  title: 'feat(site): unify website overview, atlas, and result navigation'
+  merged_at: '2026-10-11T01:27:57Z'
+  base_ref: main
+  merge_commit: 6038af33cc6c4b5b7121eeca4d7c1ad528cfecc0
+- number: 492
+  title: 'fix: enforce paper typography and Chicago title case'
+  merged_at: '2026-10-10T22:49:17Z'
+  base_ref: main
+  merge_commit: 8fc98341411ecf22bd045cef96ca6fe0946a615e
+- number: 477
+  title: 'docs: update and illustrate the square packing methods survey'
+  merged_at: '2026-10-10T21:03:34Z'
+  base_ref: main
+  merge_commit: 3be3285cff654c6667dcdea88e9d034b550eee02
+- number: 491
+  title: 'docs: prioritize n17 proof progress and plan three eight-hour blocks'
+  merged_at: '2026-10-10T20:49:26Z'
+  base_ref: main
+  merge_commit: 7ce19de1b1a25f87ce63c7f9394e01ea03749fc3
+- number: 474
+  title: 'feat: refine square-packing atlas layouts, legends and exports'
+  merged_at: '2026-10-10T11:30:22Z'
+  base_ref: main
+  merge_commit: af17208c02b08f343199ac102401d40278cf0dfc
+- number: 478
+  title: 'intake: retain Daniel n132 certificate and n155 evidence (#465)'
+  merged_at: '2026-10-10T01:59:56Z'
+  base_ref: main
+  merge_commit: 657cc486130e9020608ff244d8a86d1d04153634
+- number: 482
+  title: 'docs(n17): plan proof and confirmation as parallel paths'
+  merged_at: '2026-10-10T01:13:05Z'
+  base_ref: main
+  merge_commit: 6af6aadf3a02a3264cd73b656e641caaafd01a4f
+- number: 480
+  title: 'ci: raise the quick-lane suite ceilings for the moment (think-2hm6)'
+  merged_at: '2026-10-10T00:28:55Z'
+  base_ref: main
+  merge_commit: 1871b14dc630f802084695b7bd6007bac53b3714
+- number: 479
+  title: 'frontier: dated beyond-horizon updates, and Couzo''s newer n = 375 and 378 reports (think-1545)'
+  merged_at: '2026-10-10T00:28:20Z'
+  base_ref: main
+  merge_commit: a97b712b94a138ebe9998070dd08d0ba0f320e09
+stacks:
+- id: 498
+  pull_requests:
+  - 497
+  - 509
+  - 511
+  - 530
+  - 548
+  - 549
+  - 559
+  - 580
+  - 585
+  - 587
+  - 591
+  evidence: https://github.com/jlevy/squares/pull/497
+- id: 517
+  pull_requests:
+  - 512
+  - 516
+  - 518
+  - 553
+  evidence: https://github.com/jlevy/squares/pull/518
+coverage:
+  pull_requests:
+  - 592
+  - 595
+  - 591
+  - 587
+  - 585
+  - 580
+  - 559
+  - 549
+  - 548
+  - 530
+  - 511
+  - 588
+  - 509
+  - 497
+  - 581
+  - 560
+  - 579
+  - 576
+  - 507
+  - 558
+  - 556
+  - 553
+  - 555
+  - 518
+  - 551
+  - 516
+  - 547
+  - 546
+  - 531
+  - 512
+  - 519
+  - 520
+  - 513
+  - 508
+  - 502
+  - 496
+  - 499
+  - 487
+  - 462
+  - 492
+  - 477
+  - 491
+  - 474
+  - 478
+  - 482
+  - 480
+  - 479
+  omissions:
+  - pull_request: 579
+    reason: Internal work reconciliation, tracker cleanup and agent-ownership procedures; no independent
+      public result or publication.
+  - pull_request: 576
+    reason: Internal documentation moves, filename normalization and layout/link maintenance; no public
+      contribution needing its own announcement.
+  - pull_request: 556
+    reason: Routine reply-tracker correction; no result, bound, admission or public artifact change.
+  - pull_request: 555
+    reason: Recorded final replies and issue closures after the 42-bound adoption; no new admission or
+      bound.
+  - pull_request: 551
+    reason: Recorded four confirmation replies for T-147 through T-150, whose admissions are covered by
+      the intake delivery.
+  - pull_request: 547
+    reason: Test-only repair to the atlas interruption probe; no user-facing animation or capability change.
+  - pull_request: 546
+    reason: Routine intake-label administration and sweep maintenance; no new result or public artifact.
+  - pull_request: 519
+    reason: Recorded 21 acknowledgements of results already delivered to main; no new result, rung or
+      adoption.
+  - pull_request: 520
+    reason: Test-only navigation-wait repair; no user-facing results or navigation change.
+  - pull_request: 499
+    reason: 'Corrected stale intake wording and acknowledgement metadata after #487; no independent result,
+      capability or publication.'
+  - pull_request: 491
+    reason: Internal scheduling and resource planning for an unlaunched research agenda; no new result.
+  - pull_request: 482
+    reason: Internal proof/confirmation component planning; no new result or public deliverable.
+  - pull_request: 480
+    reason: Temporary CI-budget maintenance and retained measurements; the structural efficiency improvement
+      remains future work.
+frozen_entries:
+- id: fitzharding-n17-reported-proof
+  date: '2026-10-13'
+  pull_requests:
+  - 588
+- id: regularization-foundations
+  date: '2026-10-13'
+  pull_requests:
+  - 497
+  - 509
+- id: drawn-packing-verification-gaps
+  date: '2026-10-13'
+  pull_requests:
+  - 581
+- id: overbeck-n17-candidate-proof
+  date: '2026-10-13'
+  pull_requests:
+  - 560
+- id: publication-audit-and-import-scoping-repairs
+  date: '2026-10-12'
+  pull_requests:
+  - 507
+- id: pingyou-ai-assistance-disclosure
+  date: '2026-10-12'
+  pull_requests:
+  - 558
+- id: replayed-upper-bound-admissions
+  date: '2026-10-12'
+  pull_requests:
+  - 553
+- id: october-eleven-intake-and-adoption
+  date: '2026-10-12'
+  pull_requests:
+  - 512
+  - 516
+  - 518
+- id: edited-intake-comment-detection
+  date: '2026-10-12'
+  pull_requests:
+  - 531
+- id: public-site-prose-and-reading-width
+  date: '2026-10-11'
+  pull_requests:
+  - 513
+- id: evan-daniel-attribution-corrections
+  date: '2026-10-11'
+  pull_requests:
+  - 508
+- id: website-front-door-and-result-reports
+  date: '2026-10-11'
+  pull_requests:
+  - 502
+- id: bounded-publication-audits
+  date: '2026-10-11'
+  pull_requests:
+  - 496
+- id: october-ten-intake-replays
+  date: '2026-10-11'
+  pull_requests:
+  - 487
+- id: unified-site-navigation
+  date: '2026-10-11'
+  pull_requests:
+  - 462
+- id: paper-typography-and-title-case
+  date: '2026-10-10'
+  pull_requests:
+  - 492
+- id: illustrated-packing-methods-tutorial
+  date: '2026-10-10'
+  pull_requests:
+  - 477
+- id: readable-atlas-and-print-exports
+  date: '2026-10-10'
+  pull_requests:
+  - 474
+- id: daniel-record-hunt-source-intake
+  date: '2026-10-10'
+  pull_requests:
+  - 478
+- id: dated-beyond-horizon-reports
+  date: '2026-10-10'
+  pull_requests:
+  - 479

@@ -7,12 +7,11 @@ rollup:
   source:
     harness: claude-code
     filename: agent-af79b930e2e4e5db3.jsonl
-    sha256: 41fcf7764f6e640f896821410a08bf04adc5921d83b9877d0c9469127257021e
-    bytes: 3200460
+    sha256: 0aee02604e9de34671e3e65c692214a3e114737b60720b55f2734f30958d9d20
+    bytes: 3107651
     records: 657
     session_id: 387dc0a2-0a91-51c6-bf71-f69e33945398
-    harness_versions:
-    - 2.1.296
+    harness_versions: []
   span:
     started_at: '2026-10-11T21:03:20.696Z'
     ended_at: '2026-10-11T22:12:56.699Z'
@@ -27,11 +26,7 @@ rollup:
     by_model_and_thinking_level:
       operations tier @ xhigh: 275
     by_branch:
-      claude/wizardly-meitner-wqn4x3: 187
-      worktree-agent-a3d3681a4b18ca3ed: 30
-      worktree-agent-aea6e45c2fb8e7a4d: 23
-      worktree-agent-af79b930e2e4e5db3: 21
-      worktree-agent-a790e638083667522: 14
+      HEAD: 275
     latency:
       count: 243
       total_seconds: 841.539
@@ -43,8 +38,8 @@ rollup:
     ephemeral_1h_input_tokens: 0
     ephemeral_5m_input_tokens: 2255068
     input_tokens: 550
-    output_tokens: 9679
-    thinking_tokens: 2171
+    output_tokens: 9005
+    thinking_tokens: 2079
   tokens_by_thinking_level:
     xhigh:
       cache_creation_input_tokens: 2255068
@@ -52,8 +47,8 @@ rollup:
       ephemeral_1h_input_tokens: 0
       ephemeral_5m_input_tokens: 2255068
       input_tokens: 550
-      output_tokens: 9679
-      thinking_tokens: 2171
+      output_tokens: 9005
+      thinking_tokens: 2079
   tool_calls:
     total: 164
     total_seconds: 3141.775

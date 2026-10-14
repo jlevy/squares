@@ -126,6 +126,11 @@ UNKNOWN_FOUR_SHARD_OWNERS: Final = {
     "packing/tests/test_check_n17_full_square_partner_coupling.py": 2,
     "packing/tests/test_check_n17_normalized_contact_rank_filter.py": 2,
     "packing/tests/test_check_n17_incircle_disk_projection.py": 3,
+    # 2026-10-14 real-tree check: 783 files / 68 unknown, shard 4 at 20/184 (10.9%).
+    # Move these two new unmeasured modules to shard 1: 15/19/16/18 unknown files,
+    # all below the unchanged 10% guard, without assigning cost weights.
+    "packing/tests/test_changelog.py": 1,
+    "packing/tests/test_release_impact.py": 1,
 }
 #: What a test file is called where no pytest configuration says otherwise.
 _PYTHON_FILES: Final = ("test_*.py",)

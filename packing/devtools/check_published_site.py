@@ -55,6 +55,7 @@ from devtools import (
     overview_data,
     overview_sections,
     render_case_pages,
+    render_changelog,
     render_overview,
     result_overview,
     site_urls,
@@ -119,7 +120,9 @@ SITE_PAGES = tuple(render_overview.PAGES)
 #: links already are when they are rendered; asking GitHub would cost a request per link
 #: on every deploy. The results page is one, since its records are the register's links
 #: and were asked of GitHub when the table was on the overview.
-LINK_CHECKED_PAGES = frozenset({"index.html", "atlas.html", render_overview.RESULTS_PAGE})
+LINK_CHECKED_PAGES = frozenset(
+    {"index.html", "atlas.html", "about.html", render_overview.RESULTS_PAGE}
+)
 
 #: Each paper's own version, as its front prints it (`sqpack.release`), by slug: the
 #: explainer's number, and each review's status and number (`Draft v0.1.4`). A test holds
@@ -544,6 +547,38 @@ def shared_descriptions(pages: Mapping[str, str]) -> list[str]:
 RECORD_PROBLEMS_SHOWN = 3
 
 
+def changelog_checks(text: str) -> list[tuple[bool, str]]:
+    """Hold the served launch index to its retained entries and public destinations."""
+    try:
+        document = render_changelog.load()
+    except ValueError as error:
+        return [(False, f"about.html: changelog record is invalid: {error}")]
+    markup = _RecordMarkup(text)
+    problems: list[str] = []
+    if markup.ids.get("changelog") != 1:
+        problems.append("requires one changelog section")
+    links = {element.attrs.get("href") for element in markup.find(tag="a")}
+    for entry in document["entries"]:
+        if markup.ids.get(render_changelog.entry_anchor(entry["id"])) != 1:
+            problems.append(f"missing or repeated entry {entry['id']}")
+        targets = [
+            *(f"{document['repository']}/pull/{number}" for number in entry["pull_requests"]),
+            *(artifact["target"] for artifact in entry.get("artifacts", [])),
+        ]
+        if missing := [
+            target
+            for target in targets
+            if render_changelog.serialized_target(target, destination="site") not in links
+        ]:
+            problems.append(f"{entry['id']}: missing launch/PR links {missing}")
+    line = (
+        f"about.html: changelog: {'; '.join(problems[:5])}"
+        if problems
+        else f"about.html: all {len(document['entries'])} changelog entries and launch links"
+    )
+    return [(not problems, line)]
+
+
 def head_checks(
     pages: Mapping[str, str],
     forwarders: Mapping[str, tuple[str, str]],
@@ -628,6 +663,8 @@ def head_checks(
             else f"card {address}: a PNG of {size[0]}x{size[1]}, {len(card)} bytes"
         )
         results.append((not problems, line))
+    if "about.html" in pages:
+        results.extend(changelog_checks(pages["about.html"]))
     return results
 
 

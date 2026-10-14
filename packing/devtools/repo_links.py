@@ -62,6 +62,7 @@ EPISTEMICS = "epistemics.md"
 RESULTS = "packing/frontier/RESULTS.md"
 STATUS = "packing/frontier/STATUS.md"
 DEFECTS = "defects.md"
+CHANGELOG = "CHANGELOG.md"
 
 Kind = Literal["blob", "tree", "raw"]
 

@@ -1,0 +1,100 @@
+# Editorial examples for the plan, not the complete production backfill.
+softschema:
+  contract: packing.squares:SiteChangelog/v1
+  schema: plan-2026-10-13-site-changelog.schema.yaml
+  status: permissive
+repository: https://github.com/jlevy/squares
+entries:
+  - id: fitzharding-n17-reported-proof
+    date: '2026-10-13'
+    title: A Second Reported Proof of the Optimal 17-Square Packing
+    pull_requests: [588]
+    categories: [records]
+    result_ids: [T-154]
+    artifacts:
+      - kind: result
+        label: Current 17-square proof report
+        target: https://jlevy.github.io/squares/result/t-154.html
+    publication:
+      date: '2026-10-13'
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    summary: |
+      Imported Oscar Fitzharding’s Lean proof, retaining its source packet,
+      announcements and an adversarial review with exact source comparisons.
+      The result is recorded at V0/C1; the full Lean build has not been replayed here.
+    references:
+      - label: Reported proof and evidence
+        target: packing/frontier/results.yaml
+  - id: regularization-foundations
+    date: '2026-10-13'
+    title: Regularization Policy and Reproducible Tooling
+    pull_requests: [497, 509]
+    stack_id: 498
+    categories: [regularization, pipeline]
+    summary: |
+      Established the regularization policy and retained Evan Daniel’s regularizer
+      as the foundation for improving the project’s packing representations.
+    details: |
+      - Assessed adaptation across n = 1…324 and documented the admission policy.
+      - Added a reproducible comparison tool for evaluating the proposed workflow.
+      - Vendored the upstream regularizer with credit, recorded provenance and a pin check.
+
+      Driver, exact re-solving, grid cleanup, review-gallery and admission layers
+      remain open; this delivery changes no drawing or bound.
+    references:
+      - label: Regularization policy
+        target: docs/project/policies/regularization-policy.md
+      - label: Retained regularizer
+        target: vendor/evand-regularize/README.md
+  - id: replayed-upper-bound-admissions
+    date: '2026-10-12'
+    title: Improved Upper Bounds from Replayed Certificates
+    pull_requests: [553]
+    categories: [records]
+    result_ids: [T-151, T-152]
+    artifacts:
+      - kind: result
+        label: Current SQUISH admission record
+        target: https://jlevy.github.io/squares/result/t-151.html
+      - kind: result
+        label: Current Couzo refinement record
+        target: https://jlevy.github.io/squares/result/t-152.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    summary: |
+      Registered Nate Chaoweeraprasit’s nine SQUISH constructions and Francisco
+      Couzo’s refinements at n = 304 and 305 at V3/C3. Adopted nine improved
+      upper bounds, preserved the previous bounds as history and recorded nine
+      verified beyond-horizon rows.
+    references:
+      - label: Admission and adoption record
+        target: packing/frontier/results.yaml
+  - id: bounded-publication-audits
+    date: '2026-10-11'
+    title: Bounded Publication Audits and Selective Push Checks
+    pull_requests: [496]
+    categories: [pipeline, site]
+    summary: |
+      Shared HTTP transport, exposed live-audit progress and bounded publication
+      verification. Scoped local push checks to relevant inputs while preserving
+      the validation contract; the change does not establish an overall loop speedup.
+  - id: unified-site-navigation
+    date: '2026-10-11'
+    title: A Unified Overview, Atlas and Results Navigation
+    pull_requests: [462]
+    categories: [site]
+    artifacts:
+      - kind: page
+        label: Overview
+        target: https://jlevy.github.io/squares/
+      - kind: page
+        label: Atlas
+        target: https://jlevy.github.io/squares/atlas.html
+      - kind: page
+        label: Results
+        target: https://jlevy.github.io/squares/results.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
+    summary: |
+      Unified the website’s overview, atlas and results navigation with shared
+      packing previews, consistent controls, readable formulas and export links.

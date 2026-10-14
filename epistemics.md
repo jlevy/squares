@@ -737,7 +737,14 @@ Its three end points are fixed here.
 3. **Answered.** An author who asked for the registration, on an issue here or
    otherwise, has been told what was registered, at which rung, what was replayed, and
    what remains. The answer goes on their issue, which stays open while work they asked
-   for is still queued; the owner posts it, or an agent does at the owner’s request.
+   for is still queued.
+   Every issue an intake pass touches is answered, and every later change of its state
+   gets a follow-up until the issue closes with a final comment (stage 7 of
+   [result-import.md](packing/campaign/result-import.md#stage-7-answer) says what
+   touching is). An agent posts each as part of the pass, under the `github-workflows`
+   grant, once the pull request that carries the change has merged, and without the
+   grant drafts it for the owner; the owner’s standing instruction of 2026-10-11 is why
+   the rule exists, and the owner may post instead.
    An answer is kept true: when an id or a rung it states changes, a follow-up says so.
 
 ### Where the Frontier Is Recorded

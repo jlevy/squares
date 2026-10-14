@@ -51,6 +51,7 @@ SESSION_CLOSE_REPORT = RESOURCE_USAGE.parent / "session-close-report.yaml"
 #: How far an intake pass read each watched repository past its packets.
 INTAKE_WATCH = RESOURCE_USAGE.parent / "intake-watch.yaml"
 DOCUMENT_MAP = FRONTIER.parent.parent / "docs" / "project" / "document-map.yaml"
+SITE_CHANGELOG = FRONTIER.parent / "site-changelog.yaml"
 COMPOSITE_FIGURE = FRONTIER.parent / "atlas" / "known-best" / "composite-figure.json"
 BOUND_CITATIONS = FRONTIER.parent / "atlas" / "known-best" / "bound-citations.json"
 #: The citation fields behind `BOUND_CITATIONS`, kept beside the archive index they mirror.
@@ -331,6 +332,7 @@ def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
         path for path in WITNESSES.rglob("*.yaml") if not path.name.endswith(".schema.yaml")
     )
     datasets.append(DOCUMENT_MAP)
+    datasets.append(SITE_CHANGELOG)
     datasets.append(KNOWN_BEST_MANIFEST)
     datasets.append(COMPOSITE_FIGURE)
     datasets.append(BOUND_CITATIONS)
@@ -382,6 +384,13 @@ def main() -> int:
     for e in cross_checks() + defect_checks():
         failures += 1
         print(f"FAIL cross-check: {e}", file=sys.stderr)
+    from devtools import render_changelog  # noqa: PLC0415
+
+    try:
+        render_changelog.load(SITE_CHANGELOG)
+    except ValueError as error:
+        failures += 1
+        print(f"FAIL site changelog semantics: {error}", file=sys.stderr)
     if failures:
         return 1
     print(

@@ -1,38 +1,29 @@
 #!/usr/bin/env python3
-"""Prepare a site version bump: name the edition, redraw the release assets, check them.
+"""Prepare one component's patch or minor edition and its release-impact decision.
 
-A version bump is when the large generated assets are rebuilt (the owner, 2026-10-01),
-and it was a paragraph of manual steps in `development.md`. This is those steps as one
-command. It edits `sqpack/release.py`, redraws the atlas posters, regenerates the claim
-documents and runs the checks that hold them, in that order, and stops at the first
-failure. It commits nothing and publishes nothing: those are the owner's, and it ends by
-printing them.
-
-It bumps the site's version and nothing else. The papers are versioned on their own
-(the owner, 2026-10-01): a site bump adds no entry to any paper's history and changes no
-paper's version line, and a paper's own bump is an edit to its history in `release.py`
-(`development.md`, Bumping a paper's version). Nor is a tag or a GitHub release part of
-a bump: the site's version is complete when the merge deploys and `check_published_site`
-passes, and a release is cut only when there are generated assets that need a download
-address, the films (`render_overview.FILM_RELEASE`); the posters are served from the
-site itself.
+Site cuts regenerate claim documents and leave infographic and paper editions alone.
+Infographic cuts redraw both posters and every PDF/PNG export at one shared version.
+Paper cuts change only that paper's history and regenerate its HTML, Markdown and PDF.
+Every cut records the complete delivered change in `release.RELEASE_IMPACTS`; the scope
+explains the patch or minor choice. Internal work and changelog bookkeeping need no cut.
 
 Usage, from `packing/`:
-    uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.5.0 \
-        --scope "One sentence on what the edition adds." --dry-run
-    uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.5.0 \
-        --scope "One sentence on what the edition adds."
+    uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.6.0 \
+        --component site --impact minor --scope "Add a substantial capability." --dry-run
+    uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.5.1 \
+        --component infographics --impact patch --scope "Refresh the displayed results."
 
-`--date` is the day the edition will first be published, written `October 2, 2026`; it
-defaults to today in UTC, which is how `PUBLICATION_HISTORY` dates an edition, and is
-corrected afterwards if the deployment lands on another day. `--dry-run` prints the plan
-and changes nothing. On macOS the redraw needs Homebrew's Cairo:
-`DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` (development.md, Supported Environment).
+`--date` is the planned first-publication day, written `October 13, 2026`; it defaults
+ to today in UTC and is corrected if deployment lands on another day. The command
+commits and publishes nothing. Keep the selected edition fixed through review, then
+confirm deployment with `check_published_site`. A GitHub release is needed only for
+assets whose public download addresses use it, such as the films.
 """
 
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import re
 import subprocess
@@ -49,73 +40,119 @@ from sqpack import release
 
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
-VERSION = re.compile(r"v(\d+)\.(\d+)\.(\d+)")
-HISTORY_OPEN = "PUBLICATION_HISTORY = (\n"
 REVISION_LINE = re.compile(r'^PUBLICATION_REVISION = "([0-9a-f]{7,40})"$', re.MULTILINE)
-#: How wide a line of the edition's scope may be once it is indented and quoted.
+IMPACTS_OPEN = "RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = ("
 SCOPE_WIDTH = 76
-#: The pull-request tests that hold an edition: the stamp, the posters redrawn for it and
-#: the explainer's figure of them, the entry points that name it, the claim documents
-#: that link its revision, and the dates.
 TESTS = (
     "tests/test_release.py",
+    "tests/test_release_components.py",
     "tests/test_n11_lower_bounds_explainer.py",
     "tests/test_verify_claim.py",
     "tests/test_known_best_composites.py",
     "tests/test_artifact_dates.py",
 )
+PAPER_MODULES = {
+    "paper:n11-lower-bounds-explainer": "devtools.render_n11_lower_bounds_explainer",
+    "paper:n11-optimality-review": "devtools.render_n11_optimality_review",
+    "paper:n11-threshold-bound-review": "devtools.render_n11_threshold_bound_review",
+    "paper:square-packing-methods-survey": "devtools.render_packing_methods",
+}
 
 
 def parsed(version: str) -> tuple[int, int, int]:
-    found = VERSION.fullmatch(version)
-    if found is None:
-        raise ValueError(f"{version!r} is not a version: vMAJOR.MINOR.PATCH")
-    major, minor, patch = (int(part) for part in found.groups())
-    return major, minor, patch
+    """The semantic core shared by all public component histories."""
+    return release.parsed_version(version)
 
 
-def with_edition(
-    source: str, *, version: str, first_published: str, scope: str, revision: str
-) -> str:
-    """`source`, the text of `release.py`, with a new edition at the front of its history.
+def _current(source: str, history_name: str) -> str:
+    """Read the selected history's head without executing source or trusting imports."""
+    for node in ast.parse(source).body:
+        if not isinstance(node, ast.Assign) or not any(
+            isinstance(target, ast.Name) and target.id == history_name
+            for target in node.targets
+        ):
+            continue
+        if isinstance(node.value, ast.Tuple) and node.value.elts:
+            entry = node.value.elts[0]
+            if isinstance(entry, ast.Call):
+                for keyword in entry.keywords:
+                    if keyword.arg == "version" and isinstance(keyword.value, ast.Constant):
+                        value = keyword.value.value
+                        if isinstance(value, str):
+                            parsed(value)
+                            return value
+    raise ValueError(f"release.py has no literal head edition in {history_name}")
 
-    The entry is written the way the formatter leaves one, so the lint floor passes on
-    the result. `PUBLICATION_REVISION` becomes `revision`, the commit the claim
-    documents link to. `DATA_REVISION` is left alone: it follows the data, not the
-    edition.
-    """
-    current = release.PUBLICATION_HISTORY[0].version
-    if parsed(version) <= parsed(current):
-        raise ValueError(f"{version} is not after the current edition, {current}")
-    datetime.strptime(first_published, "%B %d, %Y")  # noqa: DTZ007
-    if scope.strip() != scope or not scope.endswith(".") or "\n" in scope:
-        raise ValueError("the scope is one trimmed sentence ending in a full stop")
-    if re.fullmatch(r"[0-9a-f]{7,40}", revision) is None:
-        raise ValueError(f"{revision!r} is not a commit")
-    if source.count(HISTORY_OPEN) != 1 or len(REVISION_LINE.findall(source)) != 1:
-        raise ValueError("release.py is not laid out as cut_release expects")
+
+def _scope_literal(scope: str) -> str:
     pieces = textwrap.wrap(scope, SCOPE_WIDTH, break_long_words=False, break_on_hyphens=False)
-    # Every piece but the last carries the space that joined it to the next.
     quoted = [
         json.dumps(piece + (" " if index < len(pieces) - 1 else ""), ensure_ascii=False)
         for index, piece in enumerate(pieces)
     ]
-    literal = (
-        f"result_scope={quoted[0]},"
-        if len(quoted) == 1 and len(quoted[0]) <= SCOPE_WIDTH - 8
-        else "result_scope=(\n"
-        + "".join(f"            {piece}\n" for piece in quoted)
-        + "        ),"
-    )
+    if len(quoted) == 1 and len(quoted[0]) <= SCOPE_WIDTH - 8:
+        return quoted[0]
+    return "(\n" + "".join(f"            {piece}\n" for piece in quoted) + "        )"
+
+
+def with_edition(
+    source: str,
+    *,
+    version: str,
+    first_published: str,
+    scope: str,
+    revision: str,
+    component: str = "site",
+    impact: release.ReleaseImpact = "patch",
+) -> str:
+    """Add one owning history entry and impact decision; leave other editions intact."""
+    release.component_history(component)
+    history_name = release.COMPONENT_HISTORY_NAMES[component]
+    history_open = f"{history_name} = (\n"
+    current = _current(source, history_name)
+    if parsed(version) <= parsed(current):
+        raise ValueError(f"{version} is not after the current edition, {current}")
+    expected = release.successor_version(current, impact)
+    if version != expected:
+        raise ValueError(
+            f"{component} {impact} impact requires successor {expected}, not {version}"
+        )
+    datetime.strptime(first_published, "%B %d, %Y")  # noqa: DTZ007
+    if scope.strip() != scope or not scope.endswith(".") or "\n" in scope or scope == ".":
+        raise ValueError("the scope is one trimmed sentence ending in a full stop")
+    if re.fullmatch(r"[0-9a-f]{7,40}", revision) is None:
+        raise ValueError(f"{revision!r} is not a commit")
+    if (
+        source.count(history_open) != 1
+        or source.count(IMPACTS_OPEN) != 1
+        or len(REVISION_LINE.findall(source)) != 1
+    ):
+        raise ValueError("release.py is not laid out as cut_release expects")
+    literal = _scope_literal(scope)
     entry = (
         "    PublicationHistoryEntry(\n"
         f'        version="{version}",\n'
         f'        first_published="{first_published}",\n'
-        f"        {literal}\n"
+        f"        result_scope={literal},\n"
         "    ),\n"
     )
-    bumped = source.replace(HISTORY_OPEN, HISTORY_OPEN + entry)
-    return REVISION_LINE.sub(f'PUBLICATION_REVISION = "{revision}"', bumped)
+    decision = (
+        "    ReleaseImpactDecision(\n"
+        f'        component="{component}",\n'
+        f'        previous_version="{current}",\n'
+        f'        version="{version}",\n'
+        f'        impact="{impact}",\n'
+        f"        reason={literal},\n"
+        "    ),\n"
+    )
+    bumped = source.replace(history_open, history_open + entry)
+    if IMPACTS_OPEN + ")" in bumped:
+        bumped = bumped.replace(IMPACTS_OPEN + ")", IMPACTS_OPEN + "\n" + decision + ")")
+    else:
+        bumped = bumped.replace(IMPACTS_OPEN + "\n", IMPACTS_OPEN + "\n" + decision)
+    if component == "site":
+        return REVISION_LINE.sub(f'PUBLICATION_REVISION = "{revision}"', bumped)
+    return bumped
 
 
 def _git(*arguments: str) -> str:
@@ -125,59 +162,67 @@ def _git(*arguments: str) -> str:
     return done.stdout.strip()
 
 
-def steps(version: str) -> list[tuple[str, tuple[str, ...]]]:
-    """What runs after `release.py` is edited, each as a module's own command."""
-    return [
-        (
-            "redraw both atlas posters and their six exports",
-            ("devtools.build_known_best_atlas", "--update-composites"),
-        ),
-        ("regenerate the claim documents", ("devtools.render_verifiable_claim",)),
-        (
-            f"hold the posters to {version}",
-            ("devtools.build_known_best_atlas", "--check-composites"),
-        ),
-        ("run the tests that hold an edition", ("pytest", "-q", *TESTS)),
-    ]
+def steps(version: str, component: str = "site") -> list[tuple[str, tuple[str, ...]]]:
+    """Component-owned generation, then checks; a site cut never redraws posters."""
+    release.component_history(component)
+    plan: list[tuple[str, tuple[str, ...]]]
+    if component == "infographics":
+        plan = [
+            (
+                "redraw both infographics and all their exports",
+                ("devtools.build_known_best_atlas", "--update-composites"),
+            ),
+            (
+                f"hold the complete infographic family to {version}",
+                ("devtools.build_known_best_atlas", "--check-composites"),
+            ),
+        ]
+    elif component == "site":
+        plan = [("regenerate the claim documents", ("devtools.render_verifiable_claim",))]
+    else:
+        module = PAPER_MODULES[component]
+        if component == "paper:n11-lower-bounds-explainer":
+            plan = [
+                ("regenerate this paper's HTML and Markdown", (module,)),
+                ("regenerate this paper's PDF", (module + "_pdf",)),
+            ]
+        else:
+            plan = [("regenerate this paper's HTML, Markdown and PDF", (module, "--pdf"))]
+    plan.append(("run the tests that hold component editions", ("pytest", "-q", *TESTS)))
+    return plan
 
 
-def remaining(version: str) -> str:
-    """What the command leaves to the owner, as text to print.
-
-    No tag and no GitHub release: the site's version is complete when the merge deploys
-    and `check_published_site` passes. A release exists to give generated assets a
-    download address, which only the films need (`render_overview.FILM_RELEASE`); the
-    posters are served from the site. And no paper moves: each is versioned on its own.
-    """
+def remaining(version: str, component: str = "site") -> str:
+    history_name = release.COMPONENT_HISTORY_NAMES[component]
+    artifacts = {
+        "site": "the regenerated claim documents and the site's changed public outputs",
+        "infographics": "both infographic SVGs, every PNG export and both PDFs together",
+    }.get(component, "this paper's HTML, Markdown and PDF together")
     return textwrap.dedent(
         f"""\
         Left to do, none of it done here:
-          1. Review the diff, then commit release.py, the eight atlas files and the
-             regenerated claim documents together, and merge. README.md names the
-             site's edition; TUTORIAL.md names the explainer's own version, which
-             this bump does not move.
-          2. Wait for the "Certificate page" workflow on main, then from packing/:
+          1. Review the impact decision and diff, then commit release.py and {artifacts}.
+             Keep {version} fixed through review. Other components keep their own editions.
+          2. Merge, wait for the "Certificate page" workflow on main, then from packing/:
                python -m devtools.check_published_site --commit <merge commit>
-             The site's version {version} is complete when that passes. No tag and
-             no GitHub release: a release is cut only to host generated assets that
-             need a download address, and the films stay on the release that
-             carries them (render_overview.FILM_RELEASE) until they are cut again;
-             packages/workbench/README.md has that runbook.
-          3. If the deployment's UTC date is not the one in PUBLICATION_HISTORY, correct
-             it, and record the deployment in the comment above the history.
-          4. Neither paper's version changed: the papers are versioned on their own
-             (release.EXPLAINER_HISTORY, OPTIMALITY_REVIEW_VERSION), and a paper's
-             bump is development.md, Bumping a paper's version."""
+             The {component} version {version} is complete when that passes.
+          3. If the deployment's UTC date differs, correct {history_name}'s new date
+             and record the deployment evidence beside its history.
+        No tag or GitHub release is created here. A release is cut only to host generated
+        assets needing a download address. Films stay on render_overview.FILM_RELEASE
+        until re-cut; packages/workbench/README.md carries their publication runbook."""
     )
 
 
-def prepared(version: str, first_published: str, scope: str) -> tuple[str, str]:
-    """The revision the claim documents will link and `release.py` as bumped, or a refusal.
-
-    Refused before anything is written: a bump that is not one, a tree with uncommitted
-    changes, and a stale pin. A poster drawn over either of the last two would be stamped
-    with data it does not show.
-    """
+def prepared(
+    version: str,
+    first_published: str,
+    scope: str,
+    *,
+    component: str = "site",
+    impact: release.ReleaseImpact = "patch",
+) -> tuple[str, str]:
+    """Prepare the complete edit, refusing dirty input or a stale data pin before writes."""
     revision = _git("rev-parse", "--short=8", "HEAD")
     bumped = with_edition(
         release_pin.RELEASE.read_text(encoding="utf-8"),
@@ -185,6 +230,8 @@ def prepared(version: str, first_published: str, scope: str) -> tuple[str, str]:
         first_published=first_published,
         scope=scope,
         revision=revision,
+        component=component,
+        impact=impact,
     )
     dirty = _git("status", "--porcelain")
     if dirty:
@@ -197,28 +244,42 @@ def prepared(version: str, first_published: str, scope: str) -> tuple[str, str]:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("version", help="the new edition, as vMAJOR.MINOR.PATCH")
-    parser.add_argument("--scope", required=True, help="one sentence: what the edition adds")
-    parser.add_argument("--date", help="the day it is first published: October 2, 2026")
+    parser.add_argument(
+        "--component", choices=tuple(release.COMPONENT_HISTORY_NAMES), default="site"
+    )
+    parser.add_argument("--impact", choices=("patch", "minor"), required=True)
+    parser.add_argument(
+        "--scope", required=True, help="one sentence explaining the delivered change"
+    )
+    parser.add_argument("--date", help="the planned first-publication day: October 13, 2026")
     parser.add_argument("--dry-run", action="store_true", help="print the plan; change nothing")
     arguments = parser.parse_args(argv)
     today = datetime.now(UTC)
     first_published = arguments.date or f"{today:%B} {today.day}, {today.year}"
     try:
-        revision, bumped = prepared(arguments.version, first_published, arguments.scope)
+        revision, bumped = prepared(
+            arguments.version,
+            first_published,
+            arguments.scope,
+            component=arguments.component,
+            impact=arguments.impact,
+        )
     except (RuntimeError, ValueError, subprocess.CalledProcessError) as error:
         print(f"FAIL: {error}", file=sys.stderr)
         return 1
-    plan = steps(arguments.version)
+    plan = steps(arguments.version, arguments.component)
     print(
-        f"{release.PUBLICATION_VERSION} -> {arguments.version}, first published "
-        f"{first_published}, claim documents linked at {revision}"
+        f"{arguments.component}: {release.component_version(arguments.component)} -> "
+        f"{arguments.version}, first published {first_published}; {arguments.impact} impact"
     )
-    print("  1. add the edition to release.PUBLICATION_HISTORY and set PUBLICATION_REVISION")
+    print(
+        f"  1. add the owning history entry and release-impact decision (revision {revision})"
+    )
     for number, (what, command) in enumerate(plan, start=2):
         print(f"  {number}. {what}: python -m {' '.join(command)}")
     if arguments.dry_run:
         print("dry run: nothing was changed")
-        print(remaining(arguments.version))
+        print(remaining(arguments.version, arguments.component))
         return 0
     with atomic_output_file(release_pin.RELEASE) as temporary:
         temporary.write_text(bumped, encoding="utf-8")
@@ -227,13 +288,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         done = subprocess.run((sys.executable, "-m", *command), cwd=PACKING, check=False)
         if done.returncode != 0:
             print(
-                f"FAIL: could not {what}. release.py is edited and anything already "
-                "redrawn is in the tree; fix the cause and rerun the remaining commands "
-                "above by hand",
+                f"FAIL: could not {what}. release.py is edited and completed outputs are "
+                "in the tree; repair the failure and run the remaining commands above. "
+                "Do not publish an incomplete family or choose another version during review.",
                 file=sys.stderr,
             )
             return done.returncode
-    print(remaining(arguments.version))
+    print(remaining(arguments.version, arguments.component))
     return 0
 
 

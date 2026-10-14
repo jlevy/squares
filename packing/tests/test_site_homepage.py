@@ -760,7 +760,7 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
             destination = f"{origin}results.html#verification-ladders"
             sync_api.expect(page).to_have_url(destination)
             sync_api.expect(page.locator("#verification-ladders")).to_be_in_viewport()
-            sync_api.expect(page.locator("div.site-rung-legend[role=note]")).to_have_count(1)
+            sync_api.expect(page.locator("div.site-rung-legend[role=note]")).to_have_count(0)
             keyboard_destination = page.url
             page.goto(f"{origin}index.html?s=4", wait_until="load")
             all_results = page.get_by_role(

@@ -40,7 +40,7 @@ MARKS = "".join(
     result_overview.badge_glyph(glyph, style, meaning, named=True)
     for glyph, style, meaning in PROPERTY_MEANINGS
 )
-RATINGS = overview_sections.rung_legend(here=False, heading="Legend")
+RATINGS = overview_sections.verification_block()
 BODY = (
     f'<h1>Rating explanations</h1><p id="properties">{MARKS}</p>{RATINGS}'
     '<p><a id="fetch-case" href="cases/11.html" data-case="11">Open case 11</a></p>'
@@ -190,7 +190,7 @@ def test_meaningful_keyboard_tooltips_work_in_every_shared_shell(
                 assert seen["text"] == meaning
             for label, meaning in overview_sections.rung_meanings().items():
                 selector = (
-                    f'.site-rung-legend .site-significance[data-level="{label[1:]}"]'
+                    f'.site-ladders-cell .site-significance[data-level="{label[1:]}"]'
                     if label.startswith("S")
                     else f'.site-rung-fill[data-rung="{label[0]}"][data-level="{label[1:]}"]'
                 )
@@ -305,9 +305,8 @@ def test_hover_transition_and_touch_badges_keep_the_enclosing_card_destination(
         seen = _assert_tooltip(touch, selector, reduced=False)
         assert "V5" in seen["text"]
         assert touch.url == f"{ORIGIN}ordinary.html"
-        assert touch.locator("a.site-rung-legend").get_attribute("href") == (
-            "results.html#verification-ladders"
-        )
+        assert touch.locator("a.site-rung-legend").count() == 0
+        assert touch.locator(".site-ladders").count() == 1
     finally:
         touch.close()
 
@@ -321,8 +320,8 @@ def test_source_titles_and_meanings_survive_without_javascript(
         page.goto(f"{ORIGIN}ordinary.html", wait_until="load")
         assert (
             page.locator(
-                ".site-rung-legend .site-significance[title], "
-                ".site-rung-legend .site-rung-fill[title]"
+                ".site-ladders-cell .site-significance[title], "
+                ".site-ladders-cell .site-rung-fill[title]"
             ).count()
             == 17
         )

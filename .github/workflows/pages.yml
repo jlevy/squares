@@ -3,6 +3,10 @@ name: Certificate page
 "on":
   workflow_dispatch:
     inputs:
+      redraw_infographics:
+        description: Build and retain the complete candidate infographic pair without deployment
+        type: boolean
+        default: false
       trace_pdf:
         description: Retain math geometry and repeated PDF draws for diagnosis
         type: boolean
@@ -180,6 +184,9 @@ name: Certificate page
       - packing/devtools/check_published_site.py
       - packing/devtools/site_urls.py
       - packing/site-urls.yaml
+      - packing/site-changelog.yaml
+      - packing/site-changelog.schema.yaml
+      - packing/devtools/render_changelog.py
       - packing/devtools/site_math.py
       - packing/devtools/node/render-site-math.mjs
       - packing/devtools/site_assets.py
@@ -287,6 +294,95 @@ concurrency:
 # `site/papers/` on their own runner, where they are served, so every check reads the
 # page at its published path and `publish` renames nothing.
 jobs:
+  # An explicitly selected export run can finish while normal Pages checks await the
+  # reviewed candidate assets. It joins no publication or required-check dependency.
+  candidate-infographics:
+    if: github.event_name == 'workflow_dispatch' && inputs.redraw_infographics
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: packing
+        shell: bash
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - name: Prepare isolated candidate scratch
+        working-directory: ${{ runner.temp }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/candidate-infographics-tmp" "$RUNNER_TEMP/candidate-infographics-uv" "$RUNNER_TEMP/candidate-infographics-cargo" "$RUNNER_TEMP/candidate-infographics"
+          printf 'TMPDIR=%s\n' "$RUNNER_TEMP/candidate-infographics-tmp" >> "$GITHUB_ENV"
+          printf 'UV_CACHE_DIR=%s\n' "$RUNNER_TEMP/candidate-infographics-uv" >> "$GITHUB_ENV"
+          printf 'CARGO_TARGET_DIR=%s\n' "$RUNNER_TEMP/candidate-infographics-cargo" >> "$GITHUB_ENV"
+
+      - name: Check out the selected source commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          submodules: true
+          persist-credentials: false
+          filter: blob:none
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: false
+
+      - name: Install Node 24
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+
+      - name: Install Cairo and font registration libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y libcairo2 fontconfig
+
+      - name: Install locked dependencies
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Install locked browser dependencies without scripts
+        working-directory: .
+        run: npm ci --ignore-scripts
+
+      - name: Redraw and verify the complete infographic family
+        run: |
+          uv run --frozen --no-sync --all-extras --group dev python -m devtools.build_known_best_atlas --update-composites
+          uv run --frozen --no-sync --all-extras --group dev python -m devtools.build_known_best_atlas --check-composites
+
+      - name: Retain the eight exports and exact source identity
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          exports=(
+            known-best-1-100.svg
+            known-best-1-100.png
+            known-best-1-100@2x.png
+            known-best-1-100-card.png
+            known-best-1-324.svg
+            known-best-1-324.png
+            square-packings-100-20261008.pdf
+            square-packings-324-20261008.pdf
+          )
+          for name in "${exports[@]}"; do
+            test -s "atlas/known-best/$name"
+            cp "atlas/known-best/$name" "$RUNNER_TEMP/candidate-infographics/$name"
+          done
+          printf '%s\n' "$GITHUB_SHA" > "$RUNNER_TEMP/candidate-infographics/source-sha.txt"
+
+      - name: Upload the reviewed-source candidate family
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: candidate-infographics-${{ github.sha }}
+          path: ${{ runner.temp }}/candidate-infographics/
+          if-no-files-found: error
+          retention-days: 7
+
   # Which builds this change can affect: each paper, the workbench, and the site's own
   # pages (the overview at `/` and the pages beside it). A pull request that touches
   # none of their inputs does no browser work at
@@ -2237,6 +2333,7 @@ jobs:
     needs: [publish, pages-required]
     if: >-
       ${{ !cancelled() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+      && !inputs.redraw_infographics
       && needs.publish.result == 'success' && needs.pages-required.result == 'success' }}
     runs-on: ubuntu-latest
     outputs:

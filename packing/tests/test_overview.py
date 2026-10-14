@@ -443,9 +443,7 @@ def test_home_and_about_share_the_documentation_introduction_and_cards(
         "Squares Project Documentation</h1>"
     )
     home_section = page.split(heading, 1)[1].split('<h1 id="more-resources"', 1)[0]
-    about_section = about.split(heading, 1)[1].split(
-        "<!-- This document follows common-doc-guidelines.md.", 1
-    )[0]
+    about_section = about.split(heading, 1)[1].split('<h2 id="changelog">', 1)[0]
     home_block, action_row = home_section.rsplit('<p class="site-action-row site-more">', 1)
     assert re.findall(r"<p>(.*?)</p>", home_block, re.DOTALL) == re.findall(
         r"<p>(.*?)</p>", about_section, re.DOTALL
@@ -1851,47 +1849,18 @@ def _ladders(results: str) -> str:
     return section.split('<div class="site-ladders-frame site-wide">', 1)[1].split("<p", 1)[0]
 
 
-def _legend(served: str) -> str:
-    """The legend under a page's table of results (`rung_legend`)."""
-    match = re.search(
-        r'<(?P<tag>a|div)\b[^>]*class="[^"]*\bsite-rung-legend\b[^"]*"'
-        r"[^>]*>.*?</(?P=tag)>",
-        served,
-        re.DOTALL,
-    )
-    assert match is not None
-    return match[0]
-
-
-def test_a_table_of_results_has_a_legend_of_every_rungs_mark_under_it(
+def test_a_table_of_results_uses_the_ladder_documentation_without_a_bottom_legend(
     page: str, results: str
 ) -> None:
-    """The complete table retains every titled rung, without an obsolete recency key;
-    the homepage links the account through actions instead of repeating its legend."""
+    """Results retains its complete ladder account and table without a second legend."""
     assert not hasattr(overview_sections, "rung_key")
+    assert not hasattr(overview_sections, "rung_legend")
     assert "site-rung-legend" not in page
-    meanings = overview_sections.rung_meanings()
-    expected = [
-        f"{scale}{level}"
-        for scale in "SVC"
-        for level, _ in sorted(overview_sections.rubric_levels()[scale])
-    ]
-    legend = _legend(results)
-    assert results.count(legend) == 1
-    at = results.index(legend)
+    assert "site-rung-legend" not in results
+    assert 'id="verification-ladders"' in results
     assert results.index('<div class="site-table-tools') < results.index(
         '<table class="kpress-table site-table site-results"'
     )
-    assert re.search(r"</table>(?:</div>)+$", results[:at]) is not None
-    assert legend.count("<p>") == 3
-    assert RUNG_CHIP.findall(legend) == expected
-    for label in expected:
-        assert f'title="{html.escape(meanings[label], quote=True)}"' in legend, label
-    assert legend.startswith('<div class="site-rung-legend"')
-    assert '<a href="#verification-ladders">What each rung means</a>' in legend
-    assert "is-new-result" not in legend
-    assert overview_sections.NEW_RESULT not in _seen(legend)
-    assert "site-star" not in legend
     assert "site-ladders-key" not in page
 
 
@@ -3187,11 +3156,6 @@ def test_every_page_lists_significance_first(
     before them (`test_each_results_row_shows_its_rungs_significance_first`). No run
     repeats a scale or puts a later one first."""
     shown = case_pages[name] if name.startswith("cases/") else rendered(name)
-    # The legend under a table of results lists every mark of a ladder in a row, by
-    # design, and is no result's rungs
-    # (`test_a_table_of_results_has_a_legend_of_every_rungs_mark_under_it`).
-    if "site-rung-legend" in shown:
-        shown = shown.replace(_legend(shown), "")
     runs = [run for run in _rung_runs(shown) if len(run) > 1]
     if name.startswith("cases/"):
         assert any(len(run) == len(RUNG_ORDER) for run in runs), name
@@ -4172,7 +4136,8 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
         "squares-project-documentation",
     ]
     assert all('class="site-title"' in tag for tag in re.findall(r"<h1\b[^>]*>", about))
-    assert re.search(r"<h2\b", about) is None
+    assert re.search(r"<h2\b", about.split('<h2 id="changelog">', 1)[0]) is None
+    assert re.findall(r'<h2\b[^>]*\bid="([^"]+)"', about) == ["changelog"]
     following = about.split(heading, 1)[1].lstrip()
     assert following.startswith("<p>Work on the square packing problem")
     assert "Work on the square packing problem has exploded" not in page
@@ -4727,7 +4692,7 @@ def test_a_recent_result_keeps_neutral_dates_and_its_significance_marks(
     assert overview_sections.new_result_label(by_id["T-060"], overview).endswith("n = 11")
     assert "site-star" not in table + recent + page + results
     assert "Red indicates a recent result." not in _rendered_text(results)
-    assert '<span class="is-new-result">new result</span>' not in _legend(results)
+    assert '<span class="is-new-result">new result</span>' not in results
     assert "site-rung-legend" not in page
     assert "\u00a0" not in table + recent
 

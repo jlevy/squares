@@ -1,64 +1,43 @@
-"""The version this project's site and data carry, the rule that keeps it true, and the
-papers' own versions beside it.
+"""Independent public editions for the site, the infographic pair and each paper.
 
-Every site page prints the site's version in its footer, the workbench shows it on its
-stage, and the atlas posters and the films carry it too, so a release is stamped in one
-place and all of them follow. This is the publication's version, not the package's:
-`pyproject.toml` versions the code, and the two move for different reasons.
+`PUBLICATION_EDITION` stamps the site's footer and workbench. The infographic family
+has its own `INFOGRAPHIC_HISTORY` and `INFOGRAPHIC_VERSION`; its two SVGs, PDFs and PNG
+exports carry one shared semantic core plus their derivation revision. Every paper
+retains its own history, draft status and dates, with no site edition or data suffix.
+The Python package version in `pyproject.toml` is separate from these public editions.
 
-**The papers do not carry it.** Each paper has a version of its own, declared at the foot
-of this module (`EXPLAINER_HISTORY`, `OPTIMALITY_REVIEW_EDITION`), and its front prints
-that (`devtools.paper_front`); the site's version and the data hash appear nowhere on a
-paper page, its Markdown edition or its PDF (the owner, 2026-10-01: "the repository
-version should not go on the papers anymore. Papers should be individually versioned").
-
-It is written `v0.4.1-f5e113` (the owner, 2026-09-22): the edition's semver core, then
-the first six characters of the last commit that changed the evidence and data. Two
-artifacts drawn from the same data carry the same version, whatever code commit built
-them. The rule that keeps that true without any artifact chasing its own hash:
-
-1. **Every site page prints `PUBLICATION_EDITION`, whose hash is the pinned
-   `DATA_REVISION`.** Nothing reads git to stamp a version, so a render needs no history
-   -- the deploy's shallow checkout and a source tarball stamp the same string as a full
-   clone.
-2. **`DATA_REVISION` must be what git says** -- `data_revision`, the last commit that
-   changed `DATA_PATHS`. `tests/test_release.py` fails when the two differ, wherever git
-   can answer; the pull-request behavioral shards check out full history, so every pull
-   request asks.
-3. **A commit that changes the data is followed by one that re-pins, and a re-pin is one
-   line**: `DATA_REVISION` set to the hash the failing test names, which
-   `python -m devtools.release_pin --update` writes. No commit can contain its own hash,
-   so the pin trails the data by one commit. Only a branch's head has to agree: merges
-   here are merge commits, so the data commit a branch pinned is still the last one on
-   `main` after it lands. If `main`'s data also moved meanwhile, the merge is itself the
-   new data commit, so the pull request's merge ref fails the check until the branch
-   merges `main` and re-pins. **Nothing is rebuilt for a re-pin.**
-4. **A drawn release asset states the data it was drawn from, and is never re-stamped.**
-   The atlas posters and the films are expensive to draw, so each is stamped once, with
-   the edition as it read when the asset was drawn (`edition_at`), and redrawn at a
-   version bump or on demand. A poster records the data commit and its date in its own
-   metadata (`devtools.build_known_best_atlas.CompositeIdentity`), so the stamp in its
-   footer is held to the poster's own record and not to the pin. Until 2026-10-01 the
-   posters printed the pin itself, and every data commit rewrote eight binaries to
-   change six characters: thirty re-pins in a row, 13.6 MB of blobs each, and not one
-   changed a card (`devtools.measure_release_assets --history`).
-5. **A poster may trail the data until the next version bump** (`COMPOSITES_MAY_TRAIL`;
-   the owner, 2026-10-01). While a poster's data revision is the pin, every claim on it
-   must agree with the current record. Once the pin has moved, the cards that differ
-   are listed by every check and fail none. A version bump redraws: a poster whose
-   stamp does not carry `PUBLICATION_VERSION` fails.
-6. **The re-pinning commit is not itself a data commit, and neither is a redraw.** The
-   artifacts that carry a stamp are excluded from the data (`DATA_EXCLUDED`); counting
-   them would make each redraw a new data commit, and the pin would chase its own hash
-   forever. A test fails when a text file inside the data paths carries the stamp
-   without being excluded.
+1. `DATA_REVISION` pins the last commit changing `DATA_PATHS`. Rendering never reads
+   Git, so shallow deploys stamp the same edition as a complete checkout. Where Git
+   can answer, `test_release` holds the pin to `data_revision()`. A data commit is
+   followed by a one-line `release_pin --update` commit; re-pinning rebuilds nothing.
+2. Drawn assets record the data commit and date they show. They keep those facts when
+   the pin advances. The atlas posters formerly printed the pin, causing thirty
+   re-pins to rewrite 13.6 MB of assets each without changing a card. Derivation
+   receipts bind each PDF and PNG to its SVG independently of its edition.
+3. An untouched poster may trail current data (`COMPOSITES_MAY_TRAIL`). Claims on a
+   poster naming the current data must agree with the current record. Both posters
+   must carry the current infographic version; a site cut moves neither.
+4. A reader-visible infographic revision requires the family's patch or minor
+   successor and rebuilds both complete export families. Changing a drawing under
+   its existing semantic version is refused before any output is written. A
+   byte-identical rebuild creates no edition.
+5. Public component cuts retain their delivered impact and reason in `RELEASE_IMPACTS`.
+   Patch covers corrections and ordinary refreshes; minor covers substantial new
+   scope or capability and resets patch to zero. One component gets one bump for its
+   complete batch, with minor winning if both apply. Internal work creates no edition.
+6. Re-pins and drawn artifacts are excluded from the data paths, preventing a stamp
+   from chasing the hash of its own redraw. Existing published history entries keep
+   their numbers and publication dates; no impact decision is invented for old cuts.
 """
 
 from __future__ import annotations
 
+import ast
+import re
 import subprocess
+from collections.abc import Iterable, Mapping, Sequence
 from pathlib import Path
-from typing import NamedTuple
+from typing import Literal, NamedTuple
 
 
 class PublicationHistoryEntry(NamedTuple):
@@ -72,7 +51,7 @@ class PublicationHistoryEntry(NamedTuple):
 
 
 #: Every edition this publication, the site and its data, has had, newest first, and NONE
-#: is ever removed. It is the site's record: the posters and the films are stamped from
+#: is ever removed. It is the site's record: its pages and workbench are stamped from
 #: it, the claim documents are regenerated at each entry, and `development.md` (Cutting
 #: an edition) is where a reader finds it. It is not a paper's history: a paper lists its
 #: own editions (`EXPLAINER_HISTORY`, below), which are the ones in which that paper
@@ -105,6 +84,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: Reproduce with `gh api "repos/jlevy/squares/deployments?environment=github-pages"` and,
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.6.0",
+        first_published="October 14, 2026",
+        result_scope=(
+            "Add the project changelog and an About index of launched results, papers and "
+            "downloads."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.5.0",
         first_published="October 2, 2026",
@@ -151,13 +138,35 @@ PUBLICATION_HISTORY = (
     ),
 )
 
-#: The edition the site's pages, the posters and the films state. Choose at most one
+#: The edition the site's pages and workbench state. Choose at most one
 #: version bump per merge, and keep it fixed while revising that pull request.
 PUBLICATION_VERSION = PUBLICATION_HISTORY[0].version
 
 #: Where the edition stands, said ahead of the version. Empty once it is final; the
 #: join below then drops it and the stray space with it, so going final is one edit.
 PUBLICATION_STATUS = ""
+
+#: The already printed infographic edition becomes this family's independent baseline.
+#: Its first-live date is the v0.5.0 Pages deployment recorded above (8aaa411dc,
+#: 2026-10-02T01:07:03Z), not an export filename or the date of a later redraw.
+#: Both retained 1-100 and 1-324 graphics, their PDFs and PNGs share this history.
+INFOGRAPHIC_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.6.0",
+        first_published="October 14, 2026",
+        result_scope=(
+            "Show regularized defaults on both atlas posters with compact attribution and "
+            "original-source comparison."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.5.0",
+        first_published="October 2, 2026",
+        result_scope="The retained infographic pair's already published v0.5.0 edition.",
+    ),
+)
+INFOGRAPHIC_VERSION = INFOGRAPHIC_HISTORY[0].version
+
 
 #: What the shared version's hash names (the owner, 2026-09-22): the last commit that
 #: changed the evidence and data every artifact is drawn from. Repository-relative, as
@@ -194,7 +203,7 @@ DATA_EXCLUDED: tuple[str, ...] = (
 DATA_REVISION_LENGTH = 6
 
 #: Whether an atlas poster may show data older than the pin between version bumps (rule
-#: 5; the owner, 2026-10-01: the large assets are regenerated "whenever we do an official
+#: 3; the owner, 2026-10-01: the large assets are regenerated "whenever we do an official
 #: site version number bump", and on demand). `True`: a card that differs from the
 #: current record is listed and fails nothing, once the pin has moved past the poster's
 #: own data revision. `False`: it fails, and the poster is redrawn whenever a card
@@ -204,7 +213,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "5c4380794f027950370907fb9d76e76c5a818181"
+DATA_REVISION = "60adedcb10b0ceeecd00b3f12b1bc1db30ae638f"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -231,6 +240,16 @@ def edition_at(revision: str) -> str:
 #: so neither can disagree about whether the reader is holding a draft, nor about how
 #: the version is spelled. A paper's footer leaves it out (`render_overview.colophon_lines`).
 PUBLICATION_EDITION = edition_at(DATA_REVISION)
+
+
+def infographic_edition_at(revision: str, version: str | None = None) -> str:
+    """A poster's own edition and derivation revision, independent of the site."""
+    core = INFOGRAPHIC_VERSION if version is None else version
+    parsed_version(core)
+    return f"{core}-{revision[:DATA_REVISION_LENGTH]}"
+
+
+INFOGRAPHIC_EDITION = f"{INFOGRAPHIC_VERSION}-{DATA_REVISION[:DATA_REVISION_LENGTH]}"
 
 #: When the current edition was first published, written the way a reader reads it.
 PUBLICATION_DATE = PUBLICATION_HISTORY[0].first_published
@@ -290,6 +309,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.6",
+        first_published="October 14, 2026",
+        result_scope=(
+            "Explain the two reported 17-square optimality proofs and their V0/C1 "
+            "verification limits."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.5",
         first_published="October 10, 2026",
@@ -547,6 +574,275 @@ PACKING_METHODS_VERSION = PACKING_METHODS_HISTORY[0].version
 PACKING_METHODS_EDITION = PACKING_METHODS_VERSION
 PACKING_METHODS_FIRST_PUBLISHED = PACKING_METHODS_HISTORY[-1].first_published
 PACKING_METHODS_REVISED = "October 12, 2026"
+
+
+# Public component identifiers are shared with changelog release references and cuts.
+COMPONENT_HISTORY_NAMES = {
+    "site": "PUBLICATION_HISTORY",
+    "infographics": "INFOGRAPHIC_HISTORY",
+    "paper:n11-lower-bounds-explainer": "EXPLAINER_HISTORY",
+    "paper:n11-optimality-review": "OPTIMALITY_REVIEW_HISTORY",
+    "paper:n11-threshold-bound-review": "THRESHOLD_REVIEW_HISTORY",
+    "paper:square-packing-methods-survey": "PACKING_METHODS_HISTORY",
+}
+
+# Editions already retained when independent component-impact policy began. Historical
+# releases keep their published numbers; impact decisions are required for successors.
+RELEASE_POLICY_BASELINES = {
+    "site": "v0.5.0",
+    "infographics": "v0.5.0",
+    "paper:n11-lower-bounds-explainer": "v0.4.5",
+    "paper:n11-optimality-review": "v0.1.7",
+    "paper:n11-threshold-bound-review": "v0.1.0",
+    "paper:square-packing-methods-survey": "v0.2.1",
+}
+
+ReleaseImpact = Literal["patch", "minor"]
+
+
+class ReleaseImpactDecision(NamedTuple):
+    """One component's complete delivered change, its chosen bump, and its reason.
+
+    Patch covers corrections, ordinary refreshes and small fixes within existing scope.
+    Minor covers substantial capabilities, coverage, redesigns, exposition or methods.
+    A batch with both takes minor; internal work and bookkeeping create no edition.
+    """
+
+    component: str
+    previous_version: str
+    version: str
+    impact: ReleaseImpact
+    reason: str
+
+
+# New component cuts append decisions here, newest first, alongside their own histories.
+# No impact is invented retrospectively for the published baseline editions.
+RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.5",
+        version="v0.4.6",
+        impact="patch",
+        reason=(
+            "Explain the two reported 17-square optimality proofs and their V0/C1 "
+            "verification limits."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="infographics",
+        previous_version="v0.5.0",
+        version="v0.6.0",
+        impact="minor",
+        reason=(
+            "Show regularized defaults on both atlas posters with compact attribution and "
+            "original-source comparison."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.5.0",
+        version="v0.6.0",
+        impact="minor",
+        reason=(
+            "Add the project changelog and an About index of launched results, papers and "
+            "downloads."
+        ),
+    ),
+)
+
+
+class ReleaseNoPublicChange(NamedTuple):
+    """A reviewed, path-scoped finding that named component outputs did not change."""
+
+    components: tuple[str, ...]
+    paths: tuple[str, ...]
+    outputs: tuple[str, ...]
+    reason: str
+
+
+RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("TUTORIAL.md",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The tutorial's explainer version label changes from v0.4.5 to v0.4.6. "
+            "The methods survey links the tutorial's unchanged anchors without "
+            "incorporating its body; its manuscript, figures, references and edition "
+            "remain unchanged."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-threshold-bound-review",
+            "paper:n11-optimality-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/build_known_best_atlas.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_composite_pdf.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/repo_links.py",
+            "packing/devtools/site_documents.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/src/sqpack/release.py",
+        ),
+        outputs=(
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "These shared helpers change About assembly, repository links, the "
+            "Results legend, schema and closeout checks, and infographic export "
+            "transactions. None changes the three untouched papers' manuscripts, figures, "
+            "typography, front matter or content editions. The component resolver "
+            "retains their own histories, statuses and dates while the site's "
+            "history advances independently. Deployment citation "
+            "provenance is independent of a paper revision."
+        ),
+    ),
+)
+
+
+def component_history(component: str) -> tuple[PublicationHistoryEntry, ...]:
+    """Retained editions for one component, including historical changelog references."""
+    try:
+        name = COMPONENT_HISTORY_NAMES[component]
+    except KeyError as error:
+        raise ValueError(f"unknown release component {component!r}") from error
+    return globals()[name]
+
+
+def component_version(component: str) -> str:
+    """The current semantic core, without a draft label or a derivation suffix."""
+    return component_history(component)[0].version
+
+
+def parsed_version(version: str) -> tuple[int, int, int]:
+    """A canonical public semantic-version core, with no status or data suffix."""
+    match = re.fullmatch(r"v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)", version)
+    if match is None:
+        raise ValueError(f"{version!r} is not a version: vMAJOR.MINOR.PATCH")
+    major, minor, patch = (int(part) for part in match.groups())
+    return major, minor, patch
+
+
+def successor_version(version: str, impact: ReleaseImpact) -> str:
+    """One patch or minor successor for the complete component batch."""
+    major, minor, patch = parsed_version(version)
+    if impact == "patch":
+        return f"v{major}.{minor}.{patch + 1}"
+    if impact == "minor":
+        return f"v{major}.{minor + 1}.0"
+    raise ValueError(f"unknown release impact {impact!r}; choose patch or minor")
+
+
+def published_infographic_version(repo: Path) -> str:
+    """Read the authoritative main edition without executing prior release source.
+
+    A working-tree successor stays a candidate through review, including redraws.
+    Main retains the published baseline; pre-policy main used the site history.
+    """
+    result = subprocess.run(
+        ["git", "-C", str(repo), "show", "origin/main:packing/src/sqpack/release.py"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode:
+        raise ValueError(
+            "an infographic redraw requires the local origin/main publication baseline"
+        )
+    fields = {
+        target.id: node.value
+        for node in ast.parse(result.stdout).body
+        if isinstance(node, ast.Assign)
+        for target in node.targets
+        if isinstance(target, ast.Name)
+    }
+    history = fields.get("INFOGRAPHIC_HISTORY", fields.get("PUBLICATION_HISTORY"))
+    if isinstance(history, (ast.Tuple, ast.List)) and history.elts:
+        first = history.elts[0]
+        if isinstance(first, ast.Call):
+            for keyword in first.keywords:
+                if keyword.arg == "version" and isinstance(keyword.value, ast.Constant):
+                    version = keyword.value.value
+                    if isinstance(version, str):
+                        parsed_version(version)
+                        return version
+    raise ValueError("main has no literal published infographic history head")
+
+
+def validate_release_impacts(
+    decisions: Sequence[ReleaseImpactDecision] | None = None,
+    *,
+    externally_changed: Iterable[str] = (),
+    previous_versions: Mapping[str, str] | None = None,
+) -> None:
+    """Hold cuts to their owning history and require each delivered change's decision.
+
+    The default checks the retained policy-era cuts. A release closeout additionally
+    passes components whose public content changed; each must have a decision for its
+    current edition. Callers determine that set from rendered changes, not file count,
+    provenance changes, significance scores or evidence grades.
+    """
+    selected = RELEASE_IMPACTS if decisions is None else decisions
+    indexed: dict[tuple[str, str], ReleaseImpactDecision] = {}
+    for decision in selected:
+        history = component_history(decision.component)
+        versions = [entry.version for entry in history]
+        key = (decision.component, decision.version)
+        if key in indexed:
+            raise ValueError(f"duplicate release-impact decision for {key}")
+        if decision.version not in versions or decision.previous_version not in versions:
+            raise ValueError(f"release-impact decision {key} names an unretained edition")
+        index = versions.index(decision.version)
+        if index + 1 >= len(versions) or versions[index + 1] != decision.previous_version:
+            raise ValueError(
+                f"release-impact decision {key} does not follow its owning history"
+            )
+        expected = successor_version(decision.previous_version, decision.impact)
+        if decision.version != expected:
+            raise ValueError(f"{key} requires its {decision.impact} successor {expected}")
+        if not re.search(r"\w", decision.reason) or decision.reason.strip() != decision.reason:
+            raise ValueError(f"release-impact decision {key} needs a trimmed reason")
+        indexed[key] = decision
+    for component, baseline in RELEASE_POLICY_BASELINES.items():
+        versions = [entry.version for entry in component_history(component)]
+        if baseline not in versions:
+            raise ValueError(f"{component} has lost its retained policy baseline {baseline}")
+        for version in versions[: versions.index(baseline)]:
+            if (component, version) not in indexed:
+                raise ValueError(f"{component} {version} needs a release-impact decision")
+    for component in externally_changed:
+        version = component_version(component)
+        key = (component, version)
+        if key not in indexed:
+            raise ValueError(
+                f"externally changed {component} needs an impact decision and successor"
+            )
+        if previous_versions is not None:
+            if component not in previous_versions:
+                raise ValueError(f"externally changed {component} has no previous edition")
+            previous = previous_versions[component]
+            if version == previous or indexed[key].previous_version != previous:
+                raise ValueError(
+                    f"externally changed {component} needs a successor to {previous}"
+                )
+
 
 #: The commit the committed claim documents link to
 #: (`render_n11_lower_bounds_explainer.edition_file`), at this repository's short length. It is
