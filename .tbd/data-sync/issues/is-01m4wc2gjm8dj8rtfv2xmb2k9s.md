@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 154, 156, 176, 211, 237, 241, 271, 302 and beyon
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:52:31.956Z
-updated_at: 2026-10-14T07:15:14.620Z
+updated_at: 2026-10-14T07:35:38.589Z
 started_at: 2026-10-14T04:52:38.993Z
 ---
 Francisco Couzo (franciscouzo/square-packing) reports exact rational upper-bound certificates in four issues filed 12-13 October 2026: #561 at 0fa0e0de (156, 176, 237, 271; beyond the corpus 338, 344, 375, 376, 378), #570 at 1b31bc90 (154, 379; superseded by #583 and #586), #583 at 45966700 (154, 211, 241, 302; 339, 379, 380, 381, 382) and #586 at b85dee2b (updates #583: 154, 339, 379, 380, 382 and precision refinements at 211 and 241). Stages 1, 2 and the stage 4 replay of the 2026-10-14 intake lane couzo (think-mq0k), on branch claude/wizardly-meitner-wqn4x3-intake-1014-couzo.
@@ -86,7 +86,7 @@ Thank you, Francisco. We have received #561, #570, #583 and #586 and retained th
 
 **Stage 2.** Packets couzo-certificates-2026-10-12 (0fa0e0de, nine certificates, all requested by #561) and couzo-certificates-2026-10-13 (b85dee2b, 14 certificates: nine requested by #583/#586, and 176, 344, 375, 376, 378 named by no issue, compared only). acquire_source --check: PACKET_MATCHES_ITS_CONTRACT for both. Importer change: rounding `binary64` for #593's '%.16f' prints, with a test.
 
-**Open PR #574 (PingYou Ltd / BuddenPing, opened 2026-10-13T00:13Z), found on resume and added as a pending report in both packets.** Its numerical-refinements claims state Couzo's #561 certificates at 156, 237 and 271, Ostashev's #575 at 176, and the case ceilings at 211 (T-149), 241 (T-098) and 304 (T-152), each with the side multiplied by 1 - 1e-20 (1.3e-19 to 1.8e-19 smaller); at 302 an exact algebraic side 17.87027538255505966957... Not read or replayed here. Effect: at 156, 176 and 271 #574 is the smallest stated side, undecided only against #593's binary64 prints; 237 stays #593; 211, 241, 302 stay Couzo (#574 above). Not on the coordinator's list of PRs; flagged to the coordinator.
+**Open PR #574 (PingYou Ltd / BuddenPing, opened 2026-10-13T00:13Z), found on resume and added as a pending report in both packets.** Its numerical-refinements claims state Couzo's #561 certificates at 156, 237 and 271, Ostashev's #575 at 176, and the case ceilings at 211 (T-149), 241 (T-098) and 304 (T-152), each tightened so the side is smaller by about one part in 1e20 (1.3e-19 to 1.8e-19); at 302 an exact algebraic side 17.87027538255505966957... Not read or replayed here. Effect: at 156, 176 and 271 #574 is the smallest stated side, undecided only against #593's binary64 prints; 237 stays #593; 211, 241, 302 stay Couzo (#574 above). Not on the coordinator's list of PRs; flagged to the coordinator.
 
 **Stage 4 replay (both maintained exact routes, --workers 1).**
 - #561 packet: 27 jobs, 9 positives pass both routes, 18 controls refused on both; 2,519,208 pair decisions, 601.97 route CPU s, 939.01 job wall s, longest 97.82 s. certify decided 26 jobs 05:01Z-05:15Z before the restart; the 27th by decide-job; certify --finished admitted the receipt. check --replay: all 27 equal, 18 min 17 s.
@@ -94,3 +94,14 @@ Thank you, Francisco. We have received #561, #570, #583 and #586 and retained th
 - Margins: exact optima clear walls by exactly 5e-21 and pairs by just under 1e-20; rational witnesses clear walls by exactly 1e-15 and pairs by 7.3e-13 to 7.6e-11.
 
 **Register plans** kept for the records lane (register-plan output of both packets). The beyond-horizon rows are 338, 344, 375, 376, 378 (#561) and 339, 379, 380, 381, 382 (#583/#586); at 344, 375, 376 and 378 the b85dee2 certificates no issue names are smaller than #561's, and at 375 evand #584 is smaller than both.
+
+**Committed and pushed** as f8ecf2173fa69c32729e1251cdeb96a6c3007f74 on claude/wizardly-meitner-wqn4x3-intake-1014-couzo (no PR). Checks: tests/test_upper_bound_reports.py 201 passed; the six other importer-dependent modules 87 passed; tests/test_check_half_angle_area.py 153 passed; packing-validate --records 50 of 50 steps passed. Records-lane work (T-NNN, evidence, coverage rows, bibliography, resources README, case records) not done here, by the brief.
+
+## Stage 1 acknowledgement posted (2026-10-14)
+
+The draft above was rewritten before posting to state only what was measured: the pins, the replay on both exact checkers (23 certificates, 69 jobs, controls refused), and the comparison with the current register entry at each count (case ceiling, or the #506 row above 324; the grid at 382). No T-NNN id or rung; it asks Couzo whether the five unrequested b85dee2b certificates (176, 344, 375, 376, 378) should be registered.
+
+- Main reply, #586: https://github.com/jlevy/squares/issues/586#issuecomment-6163323439
+- Pointer, #561: https://github.com/jlevy/squares/issues/561#issuecomment-6163323684
+- Pointer, #570: https://github.com/jlevy/squares/issues/570#issuecomment-6163324127
+- Pointer, #583: https://github.com/jlevy/squares/issues/583#issuecomment-6163324490
