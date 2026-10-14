@@ -5,7 +5,7 @@ title: "Import wand125: s(37) >= 2599/400, s(39) >= 533/80, s(44) >= 2799/400 (c
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 13
 delegate: serene-hopper
 labels:
   - result-import
@@ -13,10 +13,14 @@ dependencies: []
 parent_id: is-01m4wsqt2sjrksybyz375sarb3
 child_order_hints:
   - is-01m4xe5txp3t3t4xczs1swedc9
+  - is-01m4xpvhty2mmgcx131estyhkg
+  - is-01m4xpvk3p35kqfqcrszjw9zp6
+  - is-01m4xpvm51z8nvp3j5xxjgdhr0
+  - is-01m4xpvnd65tdxfgyjzvc1pzwh
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:14:31.758Z
-updated_at: 2026-10-14T14:50:36.756Z
+updated_at: 2026-10-14T17:22:38.256Z
 started_at: 2026-10-14T09:14:41.660Z
 ---
 Found by the 2026-10-14 watch survey (think-fxs7): problems/square-lower-bounds/certificates/mixed_n37_L64975 (7a42c16, 2026-10-13T03:18Z), mixed_n39_L66625 (dfb2cf8, 03:01Z), mixed_n44_L69975 (9f24185, 03:01Z), mixed_n145_L1224 (22f06b3, 06:18Z). Against main: 37 above 161/25 = 6.44; 39 above 133/20 = 6.65; 44 above 2789/400 = 6.9725; 145 above the reported 12.2138669 (Green DS7, disputed in #308) and the verified 12.0434, and by monotonicity lifting 146-149. The 37/39/44 bundles take the T-142/T-143 route (think-i85v): stages 1-2 with the release assets, a priced stage 4 replay with sqverify-fast from reviewed source over all directions with whole-net controls, held for an owner budget.
@@ -38,3 +42,7 @@ Price (none ran; owner budget needed): n37 6.53 CPU-h (high 7.49), n39 7.09 (7.5
 Register plan: four entries at V0/C0, pending adoption, in report order n39, n44, n37, n145, with evidence, coverage and COPY_SEPARATELY lists, in each packet's register-plan.yaml for the records lane. Case records unchanged. No issue asked, so no reply is owed.
 
 Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-175 (s(39)), T-176 (s(44)), T-177 (s(37)) and T-179 (s(145) to s(149)), V0 with C1 from the review; F-1 is think-4uun.
+
+## Validation backlog (2026-10-14, owner's cap: hold anything > 40 CPU-h)
+
+Each count's replay is its own bead: think-w76a s(37) 6.53 CPU-h, think-567s s(39) 7.09 CPU-h (its control waits on think-4uun), think-ec27 s(44) 16.95 CPU-h, think-v511 s(145) ~37 CPU-h (range 24-64, run with a stop at 40). Each is within the cap; the three fine-net counts wait on the owner's #543 answer on retaining the candidates where the census reads them. The total, 67.5 CPU-h, is over 40 only summed. The whole backlog is think-lh7d.

@@ -5,16 +5,20 @@ title: "Import wand125: the closed-form lower bound s(N) >= a(N) for every non-s
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 10
 delegate: serene-hopper
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4wsqt2sjrksybyz375sarb3
+child_order_hints:
+  - is-01m4xpw60d6b166a3xvv0n8rn2
+  - is-01m4xpw72p25ttba77475p8s6n
+  - is-01m4xpwnpsr6echsj2ex1s947k
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:14:32.462Z
-updated_at: 2026-10-14T16:44:00.630Z
+updated_at: 2026-10-14T17:22:38.926Z
 started_at: 2026-10-14T09:14:41.667Z
 ---
 Found by the 2026-10-14 watch survey (think-fxs7): wand125/square-packing problems/closed-form (eb0fd19, 2026-10-13T09:36Z): s(N) >= a(N) for every non-square N >= 49, with a Rust replay checker; gives s(k^2-1), s(k^2-2), s(k^2-3) = k for k >= 8 without Nagamochi's lemma. The survey's own evaluation of a(N) from intervals.json (50-digit decimals, not the author's checker) beats the reported lower bound at 156 counts (104-116, 125-139, 148-164, 173-191, 201-220, 230-251, 261-284, 294-319) and the verified lower bound at 189. Stages 1-2, a priced replay of the author's checker, and a mathematical review of the theorem.
@@ -72,3 +76,7 @@ Coordination: the stages 1-3 imports of #521-#596 are held by the 2026-10-14 lan
 
 
 2026-10-14 sweep (triage, read only): wand125 1c661b7 (12:17Z), one commit past cfcheck's 746e2c5, publishes replay4d 0.1.1. Its source_hash now covers b3d_sort.rs (f8cafeab..., 11 files; was 92002e0e..., 10 files at 9a28a84, both recomputed). Results record env.B3_PLAIN_RF, and receipts/structure.json's validate_family_sha256 is regenerated from fdd61866... to 22e55f17..., the published script's hash. b3d_sort.rs (23be1db0...) and validate_family.py are byte-identical at both commits. It answers #600 questions: Q1 yes; Q2 from 0.1.1 on (the existing 4,294 CPU-h receipts are still 0.1.0, though the file is unchanged); Q3 for future runs only. A later-revision packet retains pin 1c661b7, the 7 changed files and b3d_sort.rs, and notes that the replay receipts are at 0.1.0. No new release: closed-form-v1 (2026-10-13) stands.
+
+## Validation backlog (2026-10-14, owner's cap: hold anything > 40 CPU-h)
+
+Validation beads: think-au7j, the replay4d build and calibration on the two smallest records (~1 CPU-h, runnable); think-4wgw, the 1c661b7 later revision's source hashes and structure digest (<0.1 CPU-h, runnable); think-wu73, the complete replay of 136 records (4,294 CPU-h by the source, HELD; depends on think-au7j; a proposed subset is one interval, e.g. interval 24 at 18.32 CPU-h). The whole backlog is think-lh7d.

@@ -5,13 +5,15 @@ title: "Import Mishapolk 70a033f (no issue): 12 KKT refinements below best now a
 kind: task
 status: open
 priority: 1
-version: 1
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4wsqt2sjrksybyz375sarb3
+child_order_hints:
+  - is-01m4xpwd1rtgx6ht2cqfm4qbm7
 created_at: 2026-10-14T16:43:19.409Z
-updated_at: 2026-10-14T16:43:19.409Z
+updated_at: 2026-10-14T17:21:12.762Z
 ---
 Mishapolk/square-packing-records 70a033f (2026-10-14T16:11:31Z), 7 commits past #593's pin 46f638c. No issue reports it. Commit message: 'Refine 14 contested certificates to ultra-precision KKT endpoints'. census.json credits 14 counts to Mykhailo Polkovskyi and 10 re-cut counts to 'Antigravity'.
 
@@ -20,4 +22,4 @@ Exact comparison against ledger.json best now (triage 2026-10-14, scratchpad tri
 - Undecided: 207, 1.46e-41 over PR #574's 40-place print. Deciding it needs PR #574's degree-5 root past 41 places.
 - Not below best now (read note only): 153, 155, 181, 209, 267, 270, 272, 305-308.
 
-Gated on the owner's publication reading (#582): whether an unreported watched-repository commit enters in report order at its first commit. Under the ledger's current reading it does, after every report already in the ledger, so it changes no existing verdict, only adds rows.
+Owner decided 2026-10-14: counts from first commit. It enters in report order at its first commit, after every report already in the ledger, so it changes no existing verdict, only adds rows. Validation: think-j7f1 (24 certificates, ~0.8 CPU-h, runnable).
