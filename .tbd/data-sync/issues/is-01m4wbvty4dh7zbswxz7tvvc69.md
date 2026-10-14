@@ -5,7 +5,7 @@ title: "Import BuddenPing: s(261) <= 16.6787798753429098149372205115301919485639
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:53.188Z
-updated_at: 2026-10-14T07:01:29.791Z
+updated_at: 2026-10-14T07:05:39.484Z
 started_at: 2026-10-14T04:49:01.078Z
 ---
 https://github.com/jlevy/squares/issues/567 (BuddenPing, opened 2026-10-12T22:40Z; updated 2026-10-12T23:45Z). BuddenPing/square-packing-certificates e70342d149f9363b32ef6043ecfa8d0e0c4b51aa, n261.cert.json and pingyou-n261-rational.yaml; a further refinement of Robert Barnett's T-150 at 261; credit PingYou Ltd. Intake lane pingyou of 2026-10-14.
@@ -46,3 +46,5 @@ Branch `claude/wizardly-meitner-wqn4x3-intake-1014-pingyou`, commit `680123806` 
 ### Draft acknowledgement (not posted)
 
 @BuddenPing, thank you. We have the n261 certificate from your update of 12 October, pinned at e70342d (n261.cert.json, SHA-256 f850cb35…). We retain it as derived exact facts; its size needed our importer's limits raised, and this project's two maintained exact routes have decided it with both controls. As your release says it permits, the certificate has exact contacts: some square touches the wall and some pair of squares touch, and both routes admit them. A review and the registration follow. PR #574 states a further n261 certificate; it is a separate import.
+
+Posted (stage 1 acknowledgement, 2026-10-14): https://github.com/jlevy/squares/issues/567#issuecomment-6162868252

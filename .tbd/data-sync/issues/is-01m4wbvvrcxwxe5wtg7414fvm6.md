@@ -5,7 +5,7 @@ title: "Import BuddenPing: s(105) <= 10.7893037837481588309268366600396176597363
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:54.028Z
-updated_at: 2026-10-14T07:01:30.616Z
+updated_at: 2026-10-14T07:05:43.763Z
 started_at: 2026-10-14T04:49:01.089Z
 ---
 https://github.com/jlevy/squares/issues/568 (BuddenPing, 2026-10-12T22:57Z). BuddenPing/square-packing-certificates 260aaf50230483654802790589c2dfce73237604, n105.cert.json and pingyou-n105-rational.yaml; an exact contact refinement of Francisco Couzo's n105 (T-130, the case); credit PingYou Ltd. Intake lane pingyou of 2026-10-14.
@@ -46,3 +46,5 @@ Branch `claude/wizardly-meitner-wqn4x3-intake-1014-pingyou`, commit `680123806` 
 ### Draft acknowledgement (not posted)
 
 @BuddenPing, thank you. We have the n105 contact refinement from #568, pinned at 260aaf5 (n105.cert.json, SHA-256 8c684d15…). We retain it as derived exact facts, and this project's two maintained exact routes have decided it with both controls. A review follows; it will say how the record treats a side that differs from Francisco Couzo's certificate at the scale of that certificate's padding. PR #574 states a further n105 certificate; it is a separate import.
+
+Posted (stage 1 acknowledgement, 2026-10-14): https://github.com/jlevy/squares/issues/568#issuecomment-6162868542

@@ -5,7 +5,7 @@ title: "Import BuddenPing: s(153) <= 12.870013850408, refining T-148 (#504 comme
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:56.732Z
-updated_at: 2026-10-14T07:01:27.044Z
+updated_at: 2026-10-14T07:05:30.070Z
 started_at: 2026-10-14T04:49:01.118Z
 ---
 https://github.com/jlevy/squares/issues/504#issuecomment-6133737268 (BuddenPing, 2026-10-12T22:24Z) and the issue body's dated update. BuddenPing/square-packing-certificates 431186b6c20d444b26b5d321a1cd85d2f2d63274, n153.cert.json and pingyou-n153-rational.yaml; a centre/side refinement of T-148; credit PingYou Ltd. Intake lane pingyou of 2026-10-14.
@@ -46,3 +46,5 @@ Branch `claude/wizardly-meitner-wqn4x3-intake-1014-pingyou`, commit `680123806` 
 ### Draft acknowledgement (not posted)
 
 @BuddenPing, thank you. We have the refined n153 certificate from your comment of 12 October, pinned at 431186b (n153.cert.json, SHA-256 1ca754f0…). We retain it as derived exact facts beside T-148's, and this project's two maintained exact routes have decided it with both controls; it is the same packing as T-148's, two squares moved, and 1.0000000000002e-14 smaller, as you state. A review and the registration follow; T-148 keeps its own claim, and the case record will say which is current. PR #574 states further n153 certificates; it is a separate import.
+
+Posted (stage 1 acknowledgement, 2026-10-14): https://github.com/jlevy/squares/issues/504#issuecomment-6162867546
