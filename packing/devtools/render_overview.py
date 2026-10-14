@@ -107,7 +107,8 @@ THEME_SCRIPT = BROWSER / "theme.js"
 HEADROOM_SCRIPT = BROWSER / "headroom.js"
 TOOLTIP_SCRIPT = BROWSER / "rating-tooltips.js"
 HOMEPAGE_CSS = BROWSER / "homepage.css"
-#: The results page's own styles: its weekly overview above the table (think-2z22).
+#: The results page's own styles: its overview above the table, the last seven days'
+#: registrations and the weekly rollup before them (think-2z22).
 RESULTS_CSS = BROWSER / "results.css"
 #: The frame the site's flattened kpress client modules are placed in.
 KPRESS_CLIENT_FRAME = BROWSER / "kpress-client.js"
@@ -1355,7 +1356,18 @@ def results_page() -> Page:
     overview = overview_data.load()
     values = {
         "EPISTEMICS_URL": "epistemics.html",
-        # The weekly overview above the table, from the same register (think-2z22).
+        # The overview above the table, from the same register (think-2z22): the last
+        # seven days' registrations, a block a day, then the weekly S3+ rollup before them.
+        "RECENT_ADDED": overview_sections.recent_added(overview),
+        "ADDED_LINK": overview_sections.added_link(f"added-age={overview_sections.ADDED_DAYS}"),
+        "ADDED_DAYS": overview_sections.ADDED_DAYS_WORD[overview_sections.ADDED_DAYS],
+        "ADDED_DAYS_TITLE": overview_sections.ADDED_DAYS_WORD[
+            overview_sections.ADDED_DAYS
+        ].capitalize(),
+        "ADDED_SPAN": overview_sections.span_label(
+            overview_sections.added_since(overview), overview_sections.reference_date(overview)
+        ),
+        "ADDED_FIRST": overview_sections.day_label(overview_sections.added_since(overview)),
         "RECENT_ROLLUP": overview_sections.recent_rollup(overview),
         "ROLLUP_FLOOR": f"S{overview_sections.ROLLUP_FLOOR}",
         "ROLLUP_WEEKS": overview_sections.ROLLUP_WEEKS_WORD[overview_sections.ROLLUP_WEEKS],

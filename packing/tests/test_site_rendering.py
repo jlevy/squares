@@ -320,31 +320,36 @@ def test_native_closed_optional_math_is_outside_the_initial_readability_sample(
         server.server_close()
 
 
-#: The results page with its weekly overview taken out, served beside the page as
-#: shipped, so that its first screen is the prose the fallback faces were tuned on. With
-#: the overview first (think-2z22), a 390 by 900 screen ends inside its open week: the
-#: unadjusted face rewraps the overview's introduction by one line and moves the week
-#: below it, CLS 0.014, and the Verification Ladders prose the negative control was
+#: The results page with its overview taken out, served beside the page as shipped, so
+#: that its first screen is the prose the fallback faces were tuned on. With the overview
+#: first (think-2z22), a 390 by 900 screen ends inside its open blocks: the unadjusted
+#: face rewraps the overview's introduction and moves the blocks below it, CLS 0.014
+#: with the weekly prototype, and the Verification Ladders prose the negative control was
 #: written against is off the screen. A taller screen does not bring it back, since CLS
 #: divides each move by the screen's height (0.077 at 1800). Taken out, the control reads
 #: 0.105 again, its value before the overview.
 PROSE_FIRST = "results-prose-first.html"
-#: The overview's heading, introduction and weeks: to the next section's heading, which
+#: The overview's two sections, the last seven days' registrations and the weekly rollup
+#: under them, headings, introductions and blocks: to the next section's heading, which
 #: is the next `h2` at the top of the page or `All Results` if it moves above the table.
-_WEEKLY_OVERVIEW = re.compile(r'<h2 id="recent-results-by-week">.*?(?=<h[12][ >])', re.DOTALL)
+_OVERVIEW = re.compile(
+    r'<h2 id="added-in-the-last-seven-days">.*?'
+    r'<h2 id="earlier-results-by-week-published">.*?(?=<h[12][ >])',
+    re.DOTALL,
+)
 
 
 @pytest.fixture(scope="module")
 def results_font_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     """One actual results page and its asset closure, without other producer trees,
-    and beside it the same page with its weekly overview taken out (`PROSE_FIRST`)."""
+    and beside it the same page with its overview taken out (`PROSE_FIRST`)."""
     from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
 
     root = tmp_path_factory.mktemp("results-font-layout")
     rendered = render_overview.results_page()
     (root / rendered.name).write_text(rendered.html, encoding="utf-8")
-    prose_first, taken = _WEEKLY_OVERVIEW.subn("", rendered.html)
-    assert taken == 1, "the results page no longer has one weekly overview to take out"
+    prose_first, taken = _OVERVIEW.subn("", rendered.html)
+    assert taken == 1, "the results page no longer has one overview to take out"
     (root / PROSE_FIRST).write_text(prose_first, encoding="utf-8")
     assets = render_overview.asset_files([rendered])
     assert sum(map(len, assets.values())) + len(rendered.html.encode()) < 3 * 1024 * 1024

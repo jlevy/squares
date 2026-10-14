@@ -6092,10 +6092,14 @@ RESULT_FILTERS = [
     ("source", ""),
     ("n", "covers"),
     ("date", "age"),
-    # The two preset-only controls, out of the bar until a link sets them: the listed
-    # project a row is attributed to, and its significance exactly.
+    # The day the register took the row in, as an age like the date's (`?added-age=1`).
+    ("added", "age"),
+    # The three preset-only controls, out of the bar until a link sets them: the listed
+    # project a row is attributed to, its significance exactly, and the one day it was
+    # added (`?added=2026-10-12`, each day of the overview's seven).
     ("project", "has"),
     ("s", ""),
+    ("added", ""),
 ]
 
 #: The bar's one checkbox, as `result_filters` writes it: its own label, after Status.
@@ -6152,8 +6156,8 @@ def test_both_tables_of_results_carry_the_identical_filter_set(page: str, result
         "source": "",
     }
     assert HIDE_SUPERSEDED.format(checked="") in bar
-    assert bar.count(" selected>") == bar.count("<select ") == 8
-    assert bar.count("<input ") == 3
+    assert bar.count(" selected>") == bar.count("<select ") == 9
+    assert bar.count("<input ") == 4
 
 
 def test_the_filter_bar_is_one_helpers_and_reads_the_whole_register(
@@ -6234,8 +6238,9 @@ def test_every_facet_a_result_row_carries_has_a_filter_and_every_filter_a_facet(
 ) -> None:
     """A row of either table carries the same facets, each from the register: whose
     result it is, its V, C and S levels, its kind, the listed projects it is attributed
-    to, its status, whether it is current, which is to say not superseded, its cases and
-    its date. The bar has a control for each and no control without one."""
+    to, its status, whether it is current, which is to say not superseded, its cases, its
+    date and the day the register took it in. The bar has a control for each and no
+    control without one."""
     filtered = {key for key, _ in RESULT_FILTERS}
     recent = _recent_table(page)
     listed = {r.id for r in _recent_entries(overview)}
@@ -6252,6 +6257,7 @@ def test_every_facet_a_result_row_carries_has_a_filter_and_every_filter_a_facet(
             "current": "false" if overview_sections.is_superseded(result) else "true",
             "n": overview_sections.result_cases(result),
             "date": overview_sections.first_day(result.dated[1]),
+            "added": str(record["registered"]),
         }
         assert set(expected) == filtered
         tags = [_row(results, result.id).split(">", 1)[0]]
@@ -6260,6 +6266,7 @@ def test_every_facet_a_result_row_carries_has_a_filter_and_every_filter_a_facet(
         for tag in tags:
             assert _facets(html.unescape(tag)) == expected, result.id
         assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", expected["date"]), result.id
+        assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", expected["added"]), result.id
         assert re.fullmatch(r"\d+(?:-\d+)?(?: \d+(?:-\d+)?)*", expected["n"]), result.id
 
 

@@ -4,11 +4,23 @@
 
 </div>
 
-## Recent Results by Week
+## [Added in the Last {{ADDED_DAYS_TITLE}} Days]({{ADDED_LINK}})
 
-Results at {{ROLLUP_FLOOR}} and above from the last {{ROLLUP_WEEKS}}, by the week each
-was published (or established, for this project’s own), with who found them.
-Each id leads to its row in the table below; a muted id has since been superseded.
+Every result added to the register over {{ADDED_SPAN}} (its newest day and the
+{{ADDED_DAYS}} before it), at any significance, by the day it was added, newest first.
+Each id leads to its row in the table below; S4 and S5 are marked, and a muted entry has
+since been superseded.
+The heading opens the table on the last {{ADDED_DAYS}} days’ additions, counted from the
+reader’s own day, and each day’s link on that day’s.
+
+{{RECENT_ADDED}}
+
+## Earlier Results by Week Published
+
+Results at {{ROLLUP_FLOOR}} and above from the {{ROLLUP_WEEKS}} before {{ADDED_FIRST}},
+by the week each was published (or established, for this project’s own), with who found
+them. A result added above that was published earlier is listed here too.
+A muted id has since been superseded.
 
 {{RECENT_ROLLUP}}
 

@@ -321,6 +321,76 @@ def test_kind_shows_the_results_of_one_kind(
         page.close()
 
 
+def _added_since(overview: overview_data.Overview, days: int) -> list[str]:
+    """The ids of the results registered at most `days` before the register's newest
+    registration, which is the day the page's clock is set to, sorted."""
+    reference = overview_sections.reference_date(overview)
+    cutoff = overview_sections.age_cutoff(reference, days)
+    return sorted(
+        result.id.lower()
+        for result in overview.results
+        if str(result.record["registered"]) >= cutoff
+    )
+
+
+def test_the_added_filter_shows_what_the_register_took_in(
+    browser: Any, pages: dict[str, Path], overview: overview_data.Overview
+) -> None:
+    """In Chromium, on the register's newest day: `?added-age=1` sets Added within and
+    shows exactly the results registered that day or the day before, whatever the date
+    their rows show, and leaves Max age empty; the seven days' heading opens the table on
+    `?added-age=7`, the results the section lists; and the newest day's own link opens it
+    on that day alone, with Added on in the bar naming the day."""
+    name = "results.html"
+    last_day = _added_since(overview, 1)
+    assert 0 < len(last_day) < len(overview.results)
+    # The filter reads registration, not the row's date: some row added in the last day
+    # shows a date before it.
+    reference = overview_sections.reference_date(overview)
+    assert any(
+        overview_sections.first_day(result.dated[1])
+        < overview_sections.age_cutoff(reference, 1)
+        for result in overview.results
+        if result.id.lower() in last_day
+    )
+    added_age = '[data-filter="added"][data-bound="age"]'
+    page = opened(browser, pages[name], overview)
+    try:
+        page.goto(pages[name].as_uri() + "?added-age=1", wait_until="load")
+        assert page.locator(added_age).input_value() == "1"
+        assert page.locator('[data-filter="date"][data-bound="age"]').input_value() == ""
+        found = state(page)
+        assert sorted(found["shown"]) == last_day
+        assert found["count"] == count(len(last_day), overview)
+
+        page.goto(pages[name].as_uri(), wait_until="load")
+        heading = page.get_by_role("heading", name="Added in the Last Seven Days")
+        with page.expect_navigation(url=arrival(pages[name]), wait_until="load"):
+            heading.get_by_role("link").click()
+        assert urlsplit(page.url).query == "added-age=7"
+        assert urlsplit(page.url).fragment == "all-results"
+        listed = sorted(
+            (link.get_attribute("href") or "").removeprefix("#")
+            for link in page.locator(".site-added li > a:first-child").all()
+        )
+        found = state(page)
+        assert sorted(found["shown"]) == listed == _added_since(overview, 7)
+
+        page.goto(pages[name].as_uri(), wait_until="load")
+        newest = reference.isoformat()
+        day = page.locator(f'.site-added details[data-day="{newest}"]')
+        with page.expect_navigation(url=arrival(pages[name]), wait_until="load"):
+            day.locator("p a").click()
+        assert urlsplit(page.url).query == f"added={newest}"
+        found = state(page)
+        assert sorted(found["shown"]) == _added_since(overview, 0)
+        assert page.locator('select[data-filter="added"]').is_visible()
+        assert page.locator('select[data-filter="added"]').input_value() == newest
+        assert page.locator(added_age).input_value() == ""
+    finally:
+        page.close()
+
+
 def test_a_link_can_set_it_or_clear_it(
     browser: Any, pages: dict[str, Path], overview: overview_data.Overview
 ) -> None:

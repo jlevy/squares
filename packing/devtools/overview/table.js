@@ -16,7 +16,8 @@
 //   <select data-filter="s" data-bound="min">     row's data-s at least the value
 //   <input type="number" data-filter="date" data-bound="age">
 //                                                 row's data-date, an ISO date, at most
-//                                                 that many days before the reader's day
+//                                                 that many days before the reader's day;
+//                                                 data-filter="added" holds data-added so
 //   <input type="number" data-filter="n" data-bound="covers">
 //                                                 row's data-n, a list of numbers and
 //                                                 ranges ("27 28 31-32"), holds the value
@@ -36,8 +37,9 @@
 // The bar's `.site-count` shows how many rows remain. A link can open the table
 // filtered: each query parameter presets the control it names, `status=proved`,
 // `recent=true`, `n-max=100` for a bound, `n=11` for a `covers` control, `age=180`
-// for an age, or `project=evand-square-packing` for a `has` control, so a card can point
-// at a filtered view. A control marked `data-preset` is for such links alone: its label
+// for the age of a row's date and `added-age=1` for the age of its registration, or
+// `project=evand-square-packing` for a `has` control, so a card can point at a
+// filtered view. A control marked `data-preset` is for such links alone: its label
 // is `hidden` in the HTML and shows only while the control filters, so a reader sees
 // what narrows the table and can set it back.
 // The pure functions are published
@@ -188,14 +190,16 @@
 
   /**
    * The query parameter that presets a filter control: its key, with its bound if it
-   * is one end of a range, and `age` for an age, whatever it is the age of.
+   * is one end of a range or an age, `added-age` for how long ago a row was added; and
+   * `age` alone for the age of the date a row shows, Max age, which the links in use
+   * already carry.
    * @param {string} key
    * @param {string | null} bound
    * @returns {string}
    */
   function controlParam(key, bound) {
     if (bound === "age") {
-      return bound;
+      return key === "date" ? bound : `${key}-${bound}`;
     }
     return bound && bound !== "covers" && bound !== "has" ? `${key}-${bound}` : key;
   }
@@ -423,6 +427,8 @@
               "c-max",
               "age",
               "age-max",
+              "added",
+              "added-age",
               "superseded",
               "current",
               "search",

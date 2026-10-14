@@ -736,7 +736,8 @@ def result_facets(result: Result) -> str:
     a filter of `result_filters`: whose result it is, its V, C and S rungs as numbers,
     its kind, the listed projects it is attributed to, as their slugs a space apart
     (`result_projects`; empty for most rows), its status, whether it is current, which
-    is to say not superseded (`is_superseded`), its cases and the date the table shows."""
+    is to say not superseded (`is_superseded`), its cases, the date the table shows, and
+    the day the register took it in (`registered_day`), which the Added filters read."""
     record = result.record
     return (
         f'data-source="{"ours" if result.ours else "others"}" '
@@ -748,7 +749,8 @@ def result_facets(result: Result) -> str:
         f'data-status="{_esc(result.status)}" '
         f'data-current="{"false" if is_superseded(result) else "true"}" '
         f'data-n="{_esc(result_cases(result))}" '
-        f'data-date="{_esc(first_day(result.dated[1]))}"'
+        f'data-date="{_esc(first_day(result.dated[1]))}" '
+        f'data-added="{_esc(result.record["registered"])}"'
     )
 
 
@@ -821,9 +823,11 @@ def result_filters(
     One control per facet a row carries (`result_facets`), and they compose: Significance,
     Verification and Confirmation as floors (`data-bound="min"`), Kind, Status and
     Source as equalities, "Hide superseded" as a flag the row must carry
-    (`data-current`), Case as a number the row's cases must hold (`covers`), and Max age
+    (`data-current`), Case as a number the row's cases must hold (`covers`), Max age
     as the most days the row's date may lie behind the reader's day (`age`), empty for no
-    limit.
+    limit, and "Added within" as the same for the day the register took the row in
+    (`data-added`, `?added-age=1`), which is not the date the row shows: T-087, published
+    in 2018, was added on 3 October 2026.
 
     Kind offers the kinds the register holds, in the rubric's order. Status offers the
     workflow statuses some result has (`result_status`): recorded, reviewed, confirmed
@@ -831,13 +835,15 @@ def result_filters(
     question, the result's place on the frontier: checked, it hides exactly the
     superseded rows (`is_superseded`), whatever their status.
 
-    Two more controls are preset-only (`data-preset`): Project, which holds a row to one
+    Three more controls are preset-only (`data-preset`): Project, which holds a row to one
     of the listed projects it is attributed to (`has`, against the row's `data-project`),
-    and At significance, which holds it to one S rung exactly. Each is `hidden` in the
-    HTML and starts at all. A link sets them, `results.html?project=…&s=4`, as the
-    tallies on the other projects' cards do (`project_tally`), and the script shows a
-    preset control while it filters, so the reader sees what narrows the table and can
-    set it back to All.
+    At significance, which holds it to one S rung exactly, and Added on, which holds it to
+    one day of registration, offering every day the register took a result in, newest
+    first. Each is `hidden` in the HTML and starts at all. A link sets them,
+    `results.html?project=…&s=4`, as the tallies on the other projects' cards do
+    (`project_tally`) and each day of the overview's seven does (`?added=2026-10-12`,
+    `recent_added`), and the script shows a preset control while it filters, so the
+    reader sees what narrows the table and can set it back to All.
 
     A table's `defaults` are where Significance, Max age and "Hide superseded" start;
     every other control starts at all. The tables write the rows outside those defaults
@@ -868,6 +874,8 @@ def result_filters(
     sources = [("", ALL), ("ours", "This project"), ("others", "Others")]
     projects = [("", ALL), *((project_slug(url), project_name(url)) for url in project_urls())]
     exact = [("", ALL), *((str(level), f"S{level}") for level in significance_levels())]
+    taken = sorted({registered_day(result) for result in overview.results}, reverse=True)
+    added = [("", ALL), *((day.isoformat(), day_label(day)) for day in taken)]
     shown = sum(shown_by_default(result, defaults, reference) for result in listed)
     return (
         '<div class="site-table-tools site-result-filters">'
@@ -880,10 +888,14 @@ def result_filters(
         f'min="1"{last} placeholder="any"></label>'
         '<label>Max age <input type="number" data-filter="date" data-bound="age" '
         f'min="0" placeholder="any"{age}> days</label>'
+        '<label>Added within <input type="number" data-filter="added" data-bound="age" '
+        'min="0" placeholder="any"> days</label>'
         '<label hidden>Project <select data-filter="project" data-bound="has" data-preset>'
         f"{_options(projects)}</select></label>"
         '<label hidden>At significance <select data-filter="s" data-preset>'
         f"{_options(exact)}</select></label>"
+        '<label hidden>Added on <select data-filter="added" data-preset>'
+        f"{_options(added)}</select></label>"
         '<span class="site-count" data-count data-noun="results" aria-live="polite">'
         f"{count_text(shown, len(listed))}</span></div>"
     )
@@ -1205,25 +1217,43 @@ def results_table(overview: Overview, defaults: FilterDefaults = RESULTS_DEFAULT
     return table_of_results(overview, defaults, here=True)
 
 
-# ---------- Recent results by week: the results page's overview above its table ----------
+# ---------- Recent results: the results page's overview above its table ----------
+#
+# Two parts, both read from the register at render time (`think-2z22`): what the
+# register took in over the last seven days, a block for each day it took anything in and
+# every result of that day at any significance (`recent_added`); and under it the weekly
+# rollup of S3 and above by publication, for the weeks before those days
+# (`recent_rollup`).
 
-#: The lowest significance the weekly overview lists: `S3`, "a substantive case result
+#: How far back "Added in the Last Seven Days" reaches: every result registered at most
+#: this many days before the register's newest registration (`added_since`), which is
+#: what `results.html?added-age=7` shows when read on that day (`age_cutoff`).
+ADDED_DAYS = 7
+#: The count of days as the section's heading and introduction write it.
+ADDED_DAYS_WORD = {7: "seven"}
+#: How many of the newest day blocks start open; every older block starts closed.
+ADDED_OPEN = 2
+#: The longest list of cases an entry writes whole (`added_cases`). A longer one, T-124's
+#: 178 counts among them, is written as how many and its first and last.
+ADDED_CASES = 40
+#: The id of the table's heading, `# All Results`, where a filter link lands.
+ALL_RESULTS = "all-results"
+#: The lowest significance the weekly rollup lists: `S3`, "a substantive case result
 #: or machine audit" (epistemics.md, Significance and Novelty), and above. The owner
 #: asked for S3 and above on 2026-10-11 (`think-2z22`).
 ROLLUP_FLOOR = 3
-#: How many calendar weeks the overview covers, the newest included: about a month.
+#: How many calendar weeks the weekly rollup covers before the seven days: about a month.
 ROLLUP_WEEKS = 4
-#: The weekly overview's count of weeks as its introduction writes it.
+#: The weekly rollup's count of weeks as its introduction writes it.
 ROLLUP_WEEKS_WORD = {1: "week", 2: "two weeks", 3: "three weeks", 4: "four weeks"}
 #: The bound kinds a line names as nouns of their own; every other kind is "a ... result".
 _KIND_NOUNS = {"lower-bound": "lower bound", "upper-bound": "upper bound"}
 
 
 class RollupCredit(NamedTuple):
-    """One line of a week in the weekly overview: whose results they are, as the credit
+    """One line of a week in the weekly rollup: whose results they are, as the credit
     line names its finder (`credit_finder`); those results, oldest first; and the listed
-    projects the record attributes any of them to (`result_projects`), by address, the
-    one holding most of them first and the list's order breaking a tie."""
+    projects the record attributes any of them to (`finder_projects`), by address."""
 
     finder: str
     results: tuple[Result, ...]
@@ -1231,16 +1261,26 @@ class RollupCredit(NamedTuple):
 
 
 class RollupWeek(NamedTuple):
-    """One calendar week, Monday to Sunday, and its lines, the most significant first
-    (`rollup_order`)."""
+    """One calendar week, from its Monday to `last`, its Sunday or, for a week the
+    seven days above begin inside, the day before they do; and its lines, the most
+    significant first (`rollup_order`)."""
 
     monday: date
+    last: date
     credits: tuple[RollupCredit, ...]
 
     @property
     def total(self) -> int:
         """How many results the week lists."""
         return sum(len(credit.results) for credit in self.credits)
+
+
+class AddedDay(NamedTuple):
+    """One day the register took results in, and every result it took that day, the
+    most significant first and then by id (`added_order`)."""
+
+    day: date
+    results: tuple[Result, ...]
 
 
 def credit_finder(credit: str) -> str:
@@ -1250,7 +1290,7 @@ def credit_finder(credit: str) -> str:
 
 
 def week_start(day: date) -> date:
-    """The Monday of `day`'s calendar week, the ISO week (ISO 8601) the overview groups
+    """The Monday of `day`'s calendar week, the ISO week (ISO 8601) the rollup groups
     by."""
     return day - timedelta(days=day.weekday())
 
@@ -1258,15 +1298,55 @@ def week_start(day: date) -> date:
 def result_day(result: Result) -> date:
     """The day a result's row shows (`Result.dated`): its publication for a result by
     others, its establishment for this project's, a year or a month read as its first
-    day (`first_day`)."""
+    day (`first_day`). The weekly rollup places a result by it."""
     return date.fromisoformat(first_day(result.dated[1]))
 
 
-def rollup_reference(overview: Overview) -> date:
-    """The day the weekly overview's newest week holds: the newest of `reference_date`,
-    the register's newest `registered`, and any date a row shows. It is the record's,
-    never the clock's, so a render of one tree is the same bytes on any day."""
-    return max(reference_date(overview), *(result_day(result) for result in overview.results))
+def registered_day(result: Result) -> date:
+    """The day the register took a result in, its `registered`: what the seven days
+    group by and the table's Added filters read (`data-added`), as against the day its
+    row shows (`result_day`), which can be years earlier."""
+    return date.fromisoformat(str(result.record["registered"]))
+
+
+def added_since(overview: Overview, days: int = ADDED_DAYS) -> date:
+    """The first day "Added in the Last Seven Days" covers: `days` before the register's
+    newest registration (`reference_date`), the cutoff `?added-age=7` holds a row to when
+    read on that day (`age_cutoff`). It is the register's and never the clock's, so a
+    render of one tree is the same bytes on any day, and the page names dates, never
+    "today"."""
+    return reference_date(overview) - timedelta(days=days)
+
+
+def added_order(result: Result) -> tuple[int, str]:
+    """A day's results in the order its block lists them: the highest S rung first, then
+    by id."""
+    return (-significance(result), result.id)
+
+
+def added_days(results: Iterable[Result], since: date) -> list[AddedDay]:
+    """The days from `since` on that the register took any result in, newest first, each
+    with every result registered that day (`registered_day`) at every significance. A day
+    the register took nothing in has no block."""
+    taken: dict[date, list[Result]] = {}
+    for result in results:
+        day = registered_day(result)
+        if day >= since:
+            taken.setdefault(day, []).append(result)
+    return [
+        AddedDay(day, tuple(sorted(taken[day], key=added_order)))
+        for day in sorted(taken, reverse=True)
+    ]
+
+
+def finder_projects(results: Iterable[Result]) -> tuple[str, ...]:
+    """The listed projects the record attributes any of `results` to (`result_projects`),
+    by address, the one holding most of them first and the list's order breaking a tie."""
+    held = Counter(slug for result in results for slug in result_projects(result))
+    addresses = {project_slug(url): url for url in project_urls()}
+    # `sorted` is stable, so projects holding as many stay in the list's order.
+    ranked = sorted((slug for slug in addresses if slug in held), key=lambda slug: -held[slug])
+    return tuple(addresses[slug] for slug in ranked)
 
 
 def rollup_order(credit: RollupCredit) -> tuple[int, int, int, str]:
@@ -1283,14 +1363,15 @@ def rollup_order(credit: RollupCredit) -> tuple[int, int, int, str]:
 
 def rollup_weeks(
     results: Iterable[Result],
-    reference: date,
+    last: date,
     *,
     weeks: int = ROLLUP_WEEKS,
     floor: int = ROLLUP_FLOOR,
 ) -> list[RollupWeek]:
-    """The weekly overview's weeks, newest first: the `weeks` calendar weeks up to and
-    including `reference`'s, each holding every result at `floor` or above whose row's
-    date falls in it (`result_day`), one line for each finder (`credit_finder`).
+    """The weekly rollup's weeks, newest first: the `weeks` calendar weeks up to and
+    including `last`'s, the newest ending on `last`, each holding every result at
+    `floor` or above whose row's date falls in it (`result_day`), one line for each
+    finder (`credit_finder`).
 
     Every result at the floor counts, whatever else is true of it: a superseded one was
     new in its week, and the line marks it (`rollup_ids`); one pending adoption, one
@@ -1298,40 +1379,48 @@ def rollup_weeks(
     table shows them. The rows are the register's entries, so a claim outside the case
     corpus, which the source-coverage register tracks and no entry holds, is in none.
     """
-    newest = week_start(reference)
+    newest = week_start(last)
     mondays = [newest - timedelta(weeks=back) for back in range(weeks)]
     found: dict[date, dict[str, list[Result]]] = {monday: {} for monday in mondays}
     for result in results:
-        finders = found.get(week_start(result_day(result)))
-        if finders is not None and significance(result) >= floor:
+        day = result_day(result)
+        finders = found.get(week_start(day))
+        if finders is not None and day <= last and significance(result) >= floor:
             finders.setdefault(credit_finder(result.credit), []).append(result)
-    addresses = {project_slug(url): url for url in project_urls()}
     weekly = []
     for monday in mondays:
         lines = []
         for finder, own in found[monday].items():
             own.sort(key=lambda result: (result_day(result), result.id))
-            held = Counter(slug for result in own for slug in result_projects(result))
-            # `sorted` is stable, so projects holding as many stay in the list's order.
-            ranked = sorted(
-                (slug for slug in addresses if slug in held), key=lambda slug: -held[slug]
-            )
-            projects = tuple(addresses[slug] for slug in ranked)
-            lines.append(RollupCredit(finder, tuple(own), projects))
-        weekly.append(RollupWeek(monday, tuple(sorted(lines, key=rollup_order))))
+            lines.append(RollupCredit(finder, tuple(own), finder_projects(own)))
+        ends = min(monday + timedelta(days=6), last)
+        weekly.append(RollupWeek(monday, ends, tuple(sorted(lines, key=rollup_order))))
     return weekly
 
 
+def span_label(first: date, last: date) -> str:
+    """A run of days as a summary names it, joined by an en dash, closed up within a
+    month and spaced across two: `5-11 October 2026`, `28 September - 4 October 2026`
+    (each `-` an en dash on the page), across a new year both years, and one day alone,
+    `5 October 2026`."""
+    if first == last:
+        return day_label(first)
+    if first.year != last.year:
+        return f"{first.day} {first:%B %Y} {EN_DASH} {last.day} {last:%B %Y}"
+    if first.month != last.month:
+        return f"{first.day} {first:%B} {EN_DASH} {last.day} {last:%B %Y}"
+    return f"{first.day}{EN_DASH}{last.day} {last:%B %Y}"
+
+
 def week_label(monday: date) -> str:
-    """A week as its summary names it, Monday to Sunday joined by an en dash, closed up
-    within a month and spaced across two: `5-11 October 2026`, `28 September - 4 October
-    2026` (each `-` an en dash on the page), and across a new year both years."""
-    sunday = monday + timedelta(days=6)
-    if monday.year != sunday.year:
-        return f"{monday.day} {monday:%B %Y} {EN_DASH} {sunday.day} {sunday:%B %Y}"
-    if monday.month != sunday.month:
-        return f"{monday.day} {monday:%B} {EN_DASH} {sunday.day} {sunday:%B %Y}"
-    return f"{monday.day}{EN_DASH}{sunday.day} {sunday:%B %Y}"
+    """A whole week as its summary names it, Monday to Sunday (`span_label`)."""
+    return span_label(monday, monday + timedelta(days=6))
+
+
+def day_label(day: date) -> str:
+    """A day as its block's summary names it, never relative to the reader's day: `12
+    October 2026`."""
+    return f"{day.day} {day:%B %Y}"
 
 
 def kind_phrase(results: Sequence[Result]) -> str:
@@ -1353,16 +1442,20 @@ def external_link(url: str, text: str) -> str:
     return f'<a href="{_esc(url)}" target="_blank" rel="noopener noreferrer">{text}</a>'
 
 
-def rollup_who(credit: RollupCredit) -> str:
-    """A line's credit: the finder's name as the register's credit line gives it,
-    linked to the listed project that holds most of the line's results
-    (`RollupCredit.projects`), the address its card on the overview opens. A finder whose
+def credit_link(finder: str, projects: Sequence[str]) -> str:
+    """A credit as both parts of the overview name it: the finder's name as the
+    register's credit line gives it, linked to the first of `projects`
+    (`finder_projects`), the address its card on the overview opens. A finder whose
     results no listed project holds, this project's own among them, is named plainly.
     Where a contributor's own page exists, this is the one place to link it instead."""
-    name = _esc(credit.finder)
-    if credit.projects:
-        name = external_link(credit.projects[0], name)
-    return f'<span class="site-rollup-who">{name}</span>'
+    name = _esc(finder)
+    return external_link(projects[0], name) if projects else name
+
+
+def rollup_who(credit: RollupCredit) -> str:
+    """A line's credit (`credit_link`), linked to the project holding most of its
+    results, in the medium weight that opens the line."""
+    return f'<span class="site-rollup-who">{credit_link(credit.finder, credit.projects)}</span>'
 
 
 def rollup_ids(results: Sequence[Result]) -> str:
@@ -1391,37 +1484,102 @@ def rollup_line(credit: RollupCredit) -> str:
     )
 
 
+def counted(count: int) -> str:
+    """A block's count as its summary ends: `1 result`, `14 results`, `no results`."""
+    return f"{count} result{'' if count == 1 else 's'}" if count else "no results"
+
+
+def disclosure_summary(label: str, count: int) -> str:
+    """A block's summary: its days and its count, one run of text beside the
+    disclosure's chevron, so a summary that wraps wraps as a line does, before its
+    count."""
+    return (
+        f"<summary><span>{_esc(label)} "
+        f'<span class="site-rollup-count">· {counted(count)}</span></span></summary>'
+    )
+
+
 def recent_rollup(overview: Overview, *, weeks: int = ROLLUP_WEEKS) -> str:
-    """The results page's weekly overview (`rollup_weeks`), above its table: one
-    disclosure a week, newest first, its summary the week and its count, its body one
-    line a finder. The newest week with a result starts open and the others closed, so
-    the page opens on a few lines and every earlier week is one press away; without
-    scripts every disclosure still works. It is generated from the register at render
-    time and holds no list of its own."""
-    reference = rollup_reference(overview)
-    weekly = rollup_weeks(overview.results, reference, weeks=weeks)
-    opened = next((week.monday for week in weekly if week.total), None)
+    """The results page's weekly rollup (`rollup_weeks`), under the seven days: one
+    disclosure a week, newest first, the newest ending the day before the seven days
+    begin (`added_since`), its summary the week and its count, its body one line a
+    finder. Every week starts closed, since the seven days above open on the newest
+    days; without scripts every disclosure still works. It is generated from the
+    register at render time and holds no list of its own."""
+    last = added_since(overview) - timedelta(days=1)
     blocks = []
-    for week in weekly:
-        count = week.total
-        counted = f"{count} result{'' if count == 1 else 's'}" if count else "no results"
-        # One run of text beside the disclosure's chevron, so a summary that wraps
-        # wraps as a line does, before its count.
-        summary = (
-            f"<span>{_esc(week_label(week.monday))} "
-            f'<span class="site-rollup-count">· {counted}</span></span>'
-        )
+    for week in rollup_weeks(overview.results, last, weeks=weeks):
         body = (
             f"<ul>{''.join(rollup_line(credit) for credit in week.credits)}</ul>"
-            if count
+            if week.total
             else f"<p>No result at S{ROLLUP_FLOOR} or above.</p>"
         )
-        state = " open" if week.monday == opened else ""
         blocks.append(
-            f'<details data-week="{week.monday.isoformat()}"{state}>'
-            f"<summary>{summary}</summary>{body}</details>"
+            f'<details data-week="{week.monday.isoformat()}">'
+            f"{disclosure_summary(span_label(week.monday, week.last), week.total)}"
+            f"{body}</details>"
         )
     return f'<div class="site-rollup">{"".join(blocks)}</div>'
+
+
+def added_link(query: str) -> str:
+    """The results table opened by a filter link from this page (`overview/table.js`,
+    `presetFilters`), landing on the table's heading: `results.html?added-age=7#all-results`."""
+    return f"{RESULTS_PAGE}?{query}#{ALL_RESULTS}"
+
+
+def added_cases(result: Result) -> str:
+    """An entry's cases: the row's own list (`Result.scope`) after `n =`, or, where that
+    runs past `ADDED_CASES` characters, how many and the first and last, `178 counts
+    from 1 to 324`."""
+    if len(result.scope) <= ADDED_CASES:
+        return f"n = {result.scope}"
+    scope = result.record["scope"]
+    values = scope.get("n_values") or range(scope["n_min"], scope["n_max"] + 1)
+    return f"{len(values)} counts from {min(values)} to {max(values)}"
+
+
+def added_entry(result: Result) -> str:
+    """One result in a day's block: its id, linking to its row of the table below; its
+    headline as plain text (`plain_text`), the math as written; then, on a quieter line,
+    its cases (`added_cases`), its V and C rungs and its S score, and its credit
+    (`credit_link`). An S4 or S5 score is set in the significance ink, and a result
+    since superseded (`is_superseded`) is muted and its id titled so, as the weekly
+    lines mark them."""
+    record = result.record
+    level = significance(result)
+    score = f"<b>S{level}</b>" if level > ROLLUP_FLOOR else f"S{level}"
+    superseded = is_superseded(result)
+    mark = ' class="site-rollup-superseded"' if superseded else ""
+    title = ' title="Superseded"' if superseded else ""
+    headline = html.escape(plain_text(result.summary), quote=False)
+    rungs = f"{_esc(record['verification'])} {_esc(record['confirmation'])} {score}"
+    who = credit_link(credit_finder(result.credit), finder_projects((result,)))
+    return (
+        f'<li{mark}><a href="#{_esc(result.id.lower())}"{title}>{_esc(result.id)}</a> '
+        f"{headline}<small>{_esc(added_cases(result))} · {rungs} · {who}</small></li>"
+    )
+
+
+def recent_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
+    """The results page's top section: every result the register took in over the
+    `days` to its newest registration (`added_days`), one disclosure a day, newest
+    first, its summary the date and its count, its body every entry (`added_entry`) and
+    a link that opens the table on that day alone (`?added=`). The `ADDED_OPEN` newest
+    days start open and the others closed."""
+    blocks = []
+    for index, added in enumerate(added_days(overview.results, added_since(overview, days))):
+        state = " open" if index < ADDED_OPEN else ""
+        count = len(added.results)
+        day = added.day.isoformat()
+        blocks.append(
+            f'<details data-day="{day}"{state}>'
+            f"{disclosure_summary(day_label(added.day), count)}"
+            f"<ul>{''.join(added_entry(result) for result in added.results)}</ul>"
+            f'<p><a href="{_esc(added_link(f"added={day}"))}">'
+            f"Show {'it' if count == 1 else f'these {count}'} in the table</a></p></details>"
+        )
+    return f'<div class="site-rollup site-added">{"".join(blocks)}</div>'
 
 
 #: The rubric's three scored dimensions, in the site's order, significance first: the

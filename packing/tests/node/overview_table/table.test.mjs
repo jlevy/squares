@@ -190,6 +190,14 @@ void test("a covers control takes the plain key as its query parameter, and an a
   assert.equal(table.controlParam("s", "min"), "s-min");
 });
 
+void test("the age of a row's registration is `added-age`, apart from the date's `age`", () => {
+  // Two age controls on one bar must not answer to one parameter: `?age=7` is Max age's,
+  // as the links in use have it, and `?added-age=1` the Added filter's.
+  assert.equal(table.controlParam("added", "age"), "added-age");
+  assert.equal(table.controlParam("added", null), "added");
+  assert.notEqual(table.controlParam("added", "age"), table.controlParam("date", "age"));
+});
+
 /**
  * Run the real homepage init with its statically registered result ids.
  * @param {string} search
@@ -258,6 +266,11 @@ void test("the home link carries supported filters and a known historical result
   assert.equal(target.pathname, "/results.html");
   assert.equal(target.search, "?kind=rigidity&current=true&s-min=3&age=180");
   assert.equal(target.hash, "#t-031");
+});
+
+void test("the home link carries the Added filters to the complete table", () => {
+  const target = homepageLink("?added-age=1&added=2026-10-12&unrelated=omitted", "");
+  assert.equal(target.search, "?added-age=1&added=2026-10-12");
 });
 
 void test("the authored complete-table anchor survives supported filters and fragment changes", () => {
