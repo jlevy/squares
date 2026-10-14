@@ -30,6 +30,7 @@ import copy
 import hashlib
 import json
 import re
+import shutil
 import struct
 import subprocess
 import time
@@ -47,7 +48,7 @@ from io import BytesIO
 from itertools import combinations, pairwise
 from math import isqrt
 from pathlib import Path
-from tempfile import TemporaryDirectory
+from tempfile import TemporaryDirectory, mkdtemp
 from typing import Any, Literal
 from xml.etree import ElementTree as ET
 
@@ -79,7 +80,7 @@ from devtools.atlas_orientation import orient_atlas_witness
 from devtools.build_composite_figure_data import load_record as load_figure_record
 from devtools.result_status import RecentContributions, recent_contributions_by_case
 from devtools.rigidity_status import load_context as load_rigidity_context
-from sqpack import retained_json
+from sqpack import release, retained_json
 from sqpack.field import FieldElement
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
@@ -110,11 +111,14 @@ from sqpack.known_best import (
 from sqpack.release import (
     COMPOSITES_MAY_TRAIL,
     DATA_REVISION,
-    PUBLICATION_VERSION,
+    INFOGRAPHIC_VERSION,
     commit_date,
+    component_version,
     data_pathspec,
     data_revision,
-    edition_at,
+    infographic_edition_at,
+    parsed_version,
+    validate_release_impacts,
 )
 from sqpack.render import render_packing_svg
 from sqpack.render.color import (
@@ -394,6 +398,9 @@ PNG_RENDER_TIMEOUT_SECONDS = 120
 #: The two facts a composite records about itself, as its metadata names them.
 IDENTITY_REVISION_KEY = "data-revision"
 IDENTITY_DATE_KEY = "data-date"
+IDENTITY_VERSION_KEY = render_composite_pdf.SVG_VERSION_KEY
+#: Existing baseline drawings predate an explicit semantic-version metadata field.
+LEGACY_INFOGRAPHIC_VERSION = render_composite_pdf.LEGACY_INFOGRAPHIC_VERSION
 
 
 @dataclass(frozen=True)
@@ -416,11 +423,12 @@ class CompositeIdentity:
 
     data_revision: str
     data_date: str
+    version: str = LEGACY_INFOGRAPHIC_VERSION
 
     @property
     def stamp(self) -> str:
         """The footer's last line: the edition as it read at this data revision."""
-        return edition_at(self.data_revision)
+        return infographic_edition_at(self.data_revision, self.version)
 
     @property
     def formatted_date(self) -> str:
@@ -446,6 +454,10 @@ class CompositeIdentity:
     def problems(self) -> list[str]:
         """What is wrong with the record as written, before git is asked anything."""
         found = []
+        try:
+            parsed_version(self.version)
+        except ValueError as error:
+            found.append(str(error))
         if re.fullmatch(r"[0-9a-f]{40}", self.data_revision) is None:
             found.append(f"{IDENTITY_REVISION_KEY} {self.data_revision!r} is not a full commit")
         try:
@@ -3376,6 +3388,11 @@ def render_known_best_summary_svg(
             "first-n": str(composite.first_n),
             IDENTITY_DATE_KEY: identity.data_date,
             IDENTITY_REVISION_KEY: identity.data_revision,
+            **(
+                {IDENTITY_VERSION_KEY: identity.version}
+                if identity.version != LEGACY_INFOGRAPHIC_VERSION
+                else {}
+            ),
             "generated-by": GENERATOR,
             "last-n": str(composite.last_n),
             "rows": str(composite.rows),
@@ -3543,7 +3560,11 @@ def _png_matches_summary(export: RasterExport, svg_text: str) -> bool:
 
 
 def _update_png_export(
-    export: RasterExport, svg_text: str, *, full_png: bytes | None = None
+    export: RasterExport,
+    svg_text: str,
+    *,
+    full_png: bytes | None = None,
+    preserve_edition: bool = False,
 ) -> None:
     """Draw one raster from the SVG, with the same rasteriser that draws the PDF.
 
@@ -3559,13 +3580,32 @@ def _update_png_export(
     than written. Crops are always derived again, since a matching size and receipt
     cannot distinguish an old shortened-viewport render from the full raster's pixels.
     """
-    if export.crop_units is None and _png_matches_summary(export, svg_text):
-        return
-    stamped = png_export_bytes(export, svg_text, full_png=full_png)
+    stamped = prepared_png_export(
+        export, svg_text, full_png=full_png, preserve_edition=preserve_edition
+    )
     if export.path.is_file() and export.path.read_bytes() == stamped:
         return
     with atomic_output_file(export.path, make_parents=True) as temporary:
         temporary.write_bytes(stamped)
+
+
+def prepared_png_export(
+    export: RasterExport,
+    svg_text: str,
+    *,
+    full_png: bytes | None = None,
+    preserve_edition: bool = False,
+) -> bytes:
+    """Produce one guarded export candidate without publishing it."""
+    if export.crop_units is None and _png_matches_summary(export, svg_text):
+        return export.path.read_bytes()
+    stamped = png_export_bytes(export, svg_text, full_png=full_png)
+    if preserve_edition and export.path.is_file() and export.path.read_bytes() != stamped:
+        raise ValueError(
+            f"{export.path.name} would change under its existing infographic version; "
+            "cut a patch or minor successor before correcting the export"
+        )
+    return stamped
 
 
 def png_export_bytes(
@@ -3623,7 +3663,9 @@ def png_export_bytes(
     return stamped
 
 
-def _update_png_exports(canvas: CompositeCanvas, svg_text: str) -> None:
+def _update_png_exports(
+    canvas: CompositeCanvas, svg_text: str, *, preserve_edition: bool = False
+) -> None:
     """Redraw every raster of one composite from the SVG this run produced."""
     full_exports: dict[int, RasterExport] = {}
     for export in canvas.rasters:
@@ -3632,12 +3674,15 @@ def _update_png_exports(canvas: CompositeCanvas, svg_text: str) -> None:
             export,
             svg_text,
             full_png=full_export.path.read_bytes() if full_export is not None else None,
+            preserve_edition=preserve_edition,
         )
         if export.crop_units is None:
             full_exports[export.scale] = export
 
 
-def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]:
+def _composite_pdf_problems(
+    canvas: CompositeCanvas, svg_text: str, *, pdf_path: Path | None = None
+) -> list[str]:
     """Report one composite's PDF export against the SVG this build produced.
 
     The PDF is written by `render_composite_pdf`, which owns the page geometry and
@@ -3645,7 +3690,7 @@ def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]
     check reports the whole family, rather than passing three of four exports and
     leaving the reader to run a second command to learn about the fourth.
     """
-    pdf = render_composite_pdf.composite_pdf(canvas.spec.stem)
+    pdf = pdf_path or render_composite_pdf.composite_pdf(canvas.spec.stem)
     name = f"atlas/known-best/{pdf.name}"
     if not pdf.is_file():
         return [f"missing {name}"]
@@ -3655,6 +3700,15 @@ def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]
         return [f"{name} is not a readable PDF"]
     if recorded != hashlib.sha256(svg_text.encode("utf-8")).hexdigest():
         return [f"missing or stale {name} export receipt"]
+    expected_version = render_composite_pdf.svg_metadata(svg_text).get(
+        IDENTITY_VERSION_KEY, LEGACY_INFOGRAPHIC_VERSION
+    )
+    try:
+        version = render_composite_pdf.pdf_version(pdf.read_bytes())
+    except ValueError as error:
+        return [f"{name} has an invalid infographic edition: {error}"]
+    if version != expected_version:
+        return [f"{name} carries another infographic edition than {expected_version}"]
     return []
 
 
@@ -4208,7 +4262,7 @@ def drawable_identity() -> CompositeIdentity:
             "its stamp does not name; commit them and re-pin first:\n"
             + (dirty.stdout.rstrip() or dirty.stderr.strip())
         )
-    return CompositeIdentity(DATA_REVISION, day)
+    return CompositeIdentity(DATA_REVISION, day, INFOGRAPHIC_VERSION)
 
 
 def retained_identity(svg_text: str) -> CompositeIdentity:
@@ -4220,7 +4274,11 @@ def retained_identity(svg_text: str) -> CompositeIdentity:
             f"records no {' or '.join(missing)}: it does not say what data it was drawn "
             "from; redraw it with --update-composites"
         )
-    return CompositeIdentity(values[IDENTITY_REVISION_KEY], values[IDENTITY_DATE_KEY])
+    return CompositeIdentity(
+        values[IDENTITY_REVISION_KEY],
+        values[IDENTITY_DATE_KEY],
+        values.get(IDENTITY_VERSION_KEY, LEGACY_INFOGRAPHIC_VERSION),
+    )
 
 
 def _without_composite_geometry(document: dict, envelope: str) -> dict:
@@ -4281,6 +4339,173 @@ def update_composite_records() -> None:
     print("known-best composite records refreshed: layout only; case facts preserved")
 
 
+def _published_composite_text(path: Path) -> str:
+    """The immutable main drawing, separate from a retained review candidate."""
+    relative = path.relative_to(REPOSITORY_ROOT).as_posix()
+    result = _git_result("show", f"origin/main:{relative}")
+    if result.returncode:
+        raise ValueError(f"the published main drawing is unavailable: {relative}")
+    return result.stdout
+
+
+def validate_composite_redraws(
+    drawings: Sequence[tuple[CompositeCanvas, str]], identity: CompositeIdentity
+) -> None:
+    """Keep the published edition immutable and a selected successor fixed in review."""
+    validate_release_impacts()
+    if identity.version != component_version("infographics"):
+        raise ValueError("the infographic redraw must use its current owning edition")
+    expected_paths = {canvas.svg_path for canvas in resolved_composites()}
+    if (
+        len(drawings) != len(expected_paths)
+        or {canvas.svg_path for canvas, _svg_text in drawings} != expected_paths
+    ):
+        raise ValueError("the infographic redraw requires the complete pair")
+    published = release.published_infographic_version(REPOSITORY_ROOT)
+    if identity.version != published:
+        validate_release_impacts(
+            externally_changed=("infographics",),
+            previous_versions={"infographics": published},
+        )
+    for canvas, svg_text in drawings:
+        if retained_identity(svg_text) != identity:
+            raise ValueError(
+                f"{_relative(canvas.svg_path)} has a mixed infographic redraw identity"
+            )
+        retained = canvas.svg_path
+        if retained.is_file():
+            previous_identity = retained_identity(retained.read_text(encoding="utf-8"))
+            if previous_identity.version not in {published, identity.version}:
+                raise ValueError(
+                    "the retained infographic version is neither main "
+                    "nor its selected successor"
+                )
+        if identity.version == published and svg_text != _published_composite_text(retained):
+            raise ValueError(
+                f"{_relative(retained)} would change under existing infographic version "
+                f"{identity.version}; cut its patch or minor successor first"
+            )
+
+
+class CompositePromotionError(RuntimeError):
+    """Publication rollback failed; external staging backups must be retained."""
+
+
+def staged_composite_family(
+    drawings: Sequence[tuple[CompositeCanvas, str]], identity: CompositeIdentity, stage: Path
+) -> dict[Path, Path]:
+    """Stage every vector and export and verify the whole family before promotion."""
+    validate_composite_redraws(drawings, identity)
+    stage.mkdir(parents=True, exist_ok=True)
+    outputs: dict[Path, Path] = {}
+    for canvas, svg_text in drawings:
+        staged = stage / canvas.svg_path.name
+        staged.write_text(svg_text, encoding="utf-8")
+        outputs[canvas.svg_path] = staged
+    for canvas, svg_text in drawings:
+        preserve_edition = identity.version == release.published_infographic_version(
+            REPOSITORY_ROOT
+        )
+        full_pngs: dict[int, bytes] = {}
+        for export in canvas.rasters:
+            content = prepared_png_export(
+                export,
+                svg_text,
+                full_png=full_pngs.get(export.scale) if export.crop_units is not None else None,
+                preserve_edition=preserve_edition,
+            )
+            staged = stage / export.path.name
+            staged.write_bytes(content)
+            outputs[export.path] = staged
+            if export.crop_units is None:
+                full_pngs[export.scale] = content
+        pdf = render_composite_pdf.composite_pdf(canvas.spec.stem)
+        content = render_composite_pdf.prepared_pdf(
+            svg_text, pdf.read_bytes() if pdf.is_file() else None
+        )
+        staged = stage / pdf.name
+        staged.write_bytes(content)
+        outputs[pdf] = staged
+    _require_valid_composite_family(outputs)
+    return outputs
+
+
+def _require_valid_composite_family(outputs: Mapping[Path, Path] | None = None) -> None:
+    if outputs is not None:
+        expected: set[Path] = set()
+        for canvas in resolved_composites():
+            expected.add(canvas.svg_path)
+            expected.update(export.path for export in canvas.rasters)
+            expected.add(render_composite_pdf.composite_pdf(canvas.spec.stem))
+        if set(outputs) != expected:
+            raise ValueError("staging requires every configured SVG, PNG and PDF")
+    findings = composite_findings(outputs=outputs)
+    if findings.problems:
+        raise ValueError(
+            "composite family failed validation:\n  " + "\n  ".join(findings.problems[:20])
+        )
+    if outputs is not None:
+        for canvas in resolved_composites():
+            svg_text = outputs[canvas.svg_path].read_text(encoding="utf-8")
+            stated = render_composite_pdf.pdf_date_text(
+                render_composite_pdf.svg_data_date(svg_text)
+            )
+            pdf = render_composite_pdf.composite_pdf(canvas.spec.stem)
+            if render_composite_pdf.pdf_dates(outputs[pdf].read_bytes()) != {
+                "CreationDate": stated,
+                "ModDate": stated,
+            }:
+                raise ValueError(
+                    f"staged {pdf.name} has PDF dates other than its SVG's data date"
+                )
+
+
+def _promote_composite_file(destination: Path, staged: Path) -> None:
+    with atomic_output_file(destination, make_parents=True) as temporary:
+        shutil.copy2(staged, temporary)
+
+
+def promote_composite_family(outputs: Mapping[Path, Path], stage: Path) -> None:
+    """Promote validated candidates; restore all old finals if promotion fails."""
+    _require_valid_composite_family(outputs)
+    backups = stage / "backups"
+    backups.mkdir(exist_ok=True)
+    previous: dict[Path, Path | None] = {}
+    for index, destination in enumerate(outputs):
+        if destination.is_file():
+            backup = backups / str(index)
+            shutil.copy2(destination, backup)
+            previous[destination] = backup
+        else:
+            previous[destination] = None
+    attempted: list[Path] = []
+    try:
+        for destination, candidate in outputs.items():
+            if destination.is_file() and destination.read_bytes() == candidate.read_bytes():
+                continue
+            attempted.append(destination)
+            _promote_composite_file(destination, candidate)
+        _require_valid_composite_family()
+    except BaseException as error:
+        failures = []
+        for destination in reversed(attempted):
+            try:
+                backup = previous[destination]
+                if backup is None:
+                    destination.unlink(missing_ok=True)
+                else:
+                    _promote_composite_file(destination, backup)
+            # Any rollback failure must retain recovery evidence, including cancellation.
+            except BaseException as rollback_error:  # noqa: BLE001
+                failures.append(f"{destination.name}: {rollback_error}")
+        if failures:
+            raise CompositePromotionError(
+                f"composite promotion failed and rollback was incomplete; keep backups at "
+                f"{backups}: {'; '.join(failures)}"
+            ) from error
+        raise
+
+
 def update_composites() -> None:
     """Redraw both composites and every export, from the retained witnesses.
 
@@ -4300,24 +4525,22 @@ def update_composites() -> None:
             "from them would too; run --update first:\n  " + "\n  ".join(problems[:20])
         )
     cases = retained_cases(CORPUS.numbers)
-    rasters = 0
-    for canvas in resolved_composites():
-        svg_text = render_known_best_summary_svg(_cards(cases, canvas), canvas, identity)
-        retained = canvas.svg_path
-        if not retained.is_file() or retained.read_text(encoding="utf-8") != svg_text:
-            with atomic_output_file(retained, make_parents=True) as temporary:
-                temporary.write_text(svg_text, encoding="utf-8")
-        # Each composite ships as one family drawn from one SVG in one run: the vector
-        # itself, every PNG raster, and the PDF. Splitting the exports across commands
-        # is what would let four of the five be current and the fifth be last week's.
-        _update_png_exports(canvas, svg_text)
-        render_composite_pdf.update(canvas.spec.stem)
-        rasters += len(canvas.rasters)
-    findings = composite_findings()
-    if findings.problems:
-        raise ValueError(
-            "composite redraw postflight failed:\n  " + "\n  ".join(findings.problems[:20])
-        )
+    drawings = [
+        (canvas, render_known_best_summary_svg(_cards(cases, canvas), canvas, identity))
+        for canvas in resolved_composites()
+    ]
+    stage = Path(mkdtemp(prefix="sqpack-infographic-family-"))
+    retain_backups = False
+    try:
+        outputs = staged_composite_family(drawings, identity, stage)
+        promote_composite_family(outputs, stage)
+    except CompositePromotionError:
+        retain_backups = True
+        raise
+    finally:
+        if not retain_backups:
+            shutil.rmtree(stage)
+    rasters = sum(len(canvas.rasters) for canvas, _svg_text in drawings)
     print(
         f"known-best composites redrawn from {identity.stamp}, data of "
         f"{identity.data_date}: {len(COMPOSITES)} SVG, {rasters} PNG rasters, "
@@ -4567,6 +4790,8 @@ def _identity_git_problems(path: str, identity: CompositeIdentity) -> list[str]:
 
 def composite_findings(
     redraw: Callable[[CompositeCanvas, CompositeIdentity], str] | None = None,
+    *,
+    outputs: Mapping[Path, Path] | None = None,
 ) -> CompositeFindings:
     """Every retained composite, held to its own record, the release and its exports.
 
@@ -4590,12 +4815,15 @@ def composite_findings(
     """
     problems: list[str] = []
     notes: list[str] = []
+    family_versions: set[str] = set()
+    staged = outputs or {}
     for canvas in resolved_composites():
         path = _relative(canvas.svg_path)
-        if not canvas.svg_path.is_file():
+        svg_path = staged.get(canvas.svg_path, canvas.svg_path)
+        if not svg_path.is_file():
             problems.append(f"missing {path}")
             continue
-        svg_text = canvas.svg_path.read_text(encoding="utf-8")
+        svg_text = svg_path.read_text(encoding="utf-8")
         root = ET.fromstring(svg_text)
         if (root.get("width"), root.get("height")) != (str(canvas.width), str(canvas.height)):
             problems.append(f"{path} is not the canvas its specification computes")
@@ -4609,6 +4837,7 @@ def composite_findings(
             identity = None
         differing = _composite_label_problems(canvas, root)
         if identity is not None:
+            family_versions.add(identity.version)
             problems.extend(_composite_edition_problems(canvas, root, identity))
             problems.extend(_identity_git_problems(path, identity))
             if redraw is not None:
@@ -4638,9 +4867,18 @@ def composite_findings(
         problems.extend(
             f"missing or stale {export.name} {export.role} receipt"
             for export in canvas.rasters
-            if not _png_matches_summary(export, svg_text)
+            if not _png_matches_summary(
+                replace(export, path=staged.get(export.path, export.path)), svg_text
+            )
         )
-        problems.extend(_composite_pdf_problems(canvas, svg_text))
+        pdf = render_composite_pdf.composite_pdf(canvas.spec.stem)
+        problems.extend(
+            _composite_pdf_problems(canvas, svg_text, pdf_path=staged.get(pdf, pdf))
+        )
+    if len(family_versions) > 1:
+        problems.append(
+            f"infographic family has mixed versions: {', '.join(sorted(family_versions))}"
+        )
     return CompositeFindings(tuple(problems), tuple(notes))
 
 
@@ -4745,13 +4983,11 @@ def _composite_edition_problems(
         )
         if actual != expected:
             problems.append(f"{path} {feature} is {actual!r}; expected {expected!r}")
-            if feature == "release-stamp" and not any(
-                PUBLICATION_VERSION in text for text in actual
-            ):
-                problems.append(
-                    f"{path} was drawn for another version than {PUBLICATION_VERSION}; "
-                    "redraw it with --update-composites"
-                )
+    if identity.version != INFOGRAPHIC_VERSION:
+        problems.append(
+            f"{path} was drawn for another version than {INFOGRAPHIC_VERSION}; "
+            "redraw it with --update-composites after cutting the infographic edition"
+        )
     return problems
 
 

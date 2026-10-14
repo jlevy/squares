@@ -35,7 +35,7 @@ import hashlib
 import re
 import sys
 import zlib
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from datetime import date
 from html import unescape
 from pathlib import Path
@@ -43,6 +43,7 @@ from pathlib import Path
 from strif import atomic_output_file
 
 from devtools import atlas_print_font
+from sqpack import release
 from sqpack.known_best import KNOWN_BEST_COMPOSITES, composite_pdf_name
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -56,6 +57,9 @@ GENERATOR = "python -m devtools.render_composite_pdf"
 CSS_PIXELS_PER_INCH = 96
 PDF_SOURCE_KEY = b"sqpack-source-svg-sha256"
 PDF_SIGNATURE = b"%PDF-"
+PDF_VERSION_KEY = b"sqpack-infographic-version"
+SVG_VERSION_KEY = "infographic-version"
+LEGACY_INFOGRAPHIC_VERSION = release.RELEASE_POLICY_BASELINES["infographics"]
 #: What the composite's metadata calls the date of the data it was drawn from
 #: (`build_known_best_atlas.IDENTITY_DATE_KEY`, which a test holds to this).
 DATA_DATE_KEY = "data-date"
@@ -84,8 +88,30 @@ def _source_digest(stem: str = DEFAULT_STEM) -> str:
     return hashlib.sha256(composite_svg(stem).read_bytes()).hexdigest()
 
 
-def _with_receipt(content: bytes, digest: str) -> bytes:
-    return content + b"\n%" + PDF_SOURCE_KEY + b": " + digest.encode("ascii") + b"\n"
+def _with_receipt(content: bytes, digest: str, version: str | None = None) -> bytes:
+    edition = (
+        b"\n%" + PDF_VERSION_KEY + b": " + version.encode("ascii")
+        if version is not None
+        else b""
+    )
+    return content + edition + b"\n%" + PDF_SOURCE_KEY + b": " + digest.encode("ascii") + b"\n"
+
+
+def pdf_version(content: bytes) -> str:
+    """The PDF's owning edition; retained pre-policy PDFs are bounded to the baseline."""
+    versions = re.findall(b"%" + PDF_VERSION_KEY + rb": ([^\r\n]+)(?:\r?\n|\Z)", content)
+    if PDF_VERSION_KEY in content and len(versions) != 1:
+        raise ValueError("the PDF must carry one unambiguous infographic edition")
+    version = versions[0].decode("ascii") if versions else LEGACY_INFOGRAPHIC_VERSION
+    release.parsed_version(version)
+    return version
+
+
+def svg_version(svg_text: str) -> str:
+    """The canonical SVG edition, with the bounded pre-policy fallback."""
+    version = svg_metadata(svg_text).get(SVG_VERSION_KEY, LEGACY_INFOGRAPHIC_VERSION)
+    release.parsed_version(version)
+    return version
 
 
 def pdf_receipt(content: bytes) -> str | None:
@@ -110,10 +136,15 @@ def svg_metadata(svg_text: str) -> dict[str, str]:
 
 def data_date(stem: str = DEFAULT_STEM) -> date:
     """The day of the data a composite was drawn from, as the composite records it."""
-    recorded = svg_metadata(composite_svg(stem).read_text(encoding="utf-8")).get(DATA_DATE_KEY)
+    return svg_data_date(composite_svg(stem).read_text(encoding="utf-8"))
+
+
+def svg_data_date(svg_text: str) -> date:
+    """The drawing's own data date, without reading or replacing retained artwork."""
+    recorded = svg_metadata(svg_text).get(DATA_DATE_KEY)
     if recorded is None:
         raise ValueError(
-            f"{composite_svg(stem).name} records no {DATA_DATE_KEY}; redraw it with "
+            f"the composite records no {DATA_DATE_KEY}; redraw it with "
             "`python -m devtools.build_known_best_atlas --update-composites`"
         )
     return date.fromisoformat(recorded)
@@ -146,12 +177,17 @@ def pdf_dates(content: bytes) -> dict[str, str]:
 
 def render_pdf_bytes(stem: str = DEFAULT_STEM) -> bytes:
     """Render a composite SVG to PDF bytes at the artwork's intrinsic size."""
+    return render_svg_pdf_bytes(composite_svg(stem).read_text(encoding="utf-8"))
+
+
+def render_svg_pdf_bytes(svg_text: str) -> bytes:
+    """Render prepared SVG bytes without publishing the SVG or any final export."""
     # Reading a PDF receipt does not require loading the native renderer.
     import cairocffi  # noqa: PLC0415
     from cairosvg.surface import PDFSurface  # noqa: PLC0415
 
     atlas_print_font.register_print_fonts()
-    stated = f"{data_date(stem).isoformat()}T{PDF_TIME}"
+    stated = f"{svg_data_date(svg_text).isoformat()}T{PDF_TIME}"
 
     class DatedSurface(PDFSurface):
         """cairosvg's PDF surface, with the document dated by its data and not the clock."""
@@ -163,19 +199,64 @@ def render_pdf_bytes(stem: str = DEFAULT_STEM) -> bytes:
             return surface, width, height
 
     # convert returns None only when handed a write target, which we never do.
-    content = DatedSurface.convert(url=str(composite_svg(stem)), dpi=CSS_PIXELS_PER_INCH)
+    content = DatedSurface.convert(bytestring=svg_text.encode("utf-8"), dpi=CSS_PIXELS_PER_INCH)
     if not isinstance(content, bytes):
         raise TypeError("cairosvg did not return PDF bytes")
     return content
 
 
+def prepared_pdf(
+    svg_text: str, previous: bytes | None, *, render: Callable[[], bytes] | None = None
+) -> bytes:
+    """Produce an immutable-edition PDF candidate without writing the retained file."""
+    version = svg_version(svg_text)
+    release.validate_release_impacts()
+    if version != release.component_version("infographics"):
+        raise ValueError("the PDF must use the current owning infographic edition")
+    published = release.published_infographic_version(ROOT.parent)
+    if version != published:
+        release.validate_release_impacts(
+            externally_changed=("infographics",),
+            previous_versions={"infographics": published},
+        )
+    digest = hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+    previous_version = pdf_version(previous) if previous is not None else None
+    if previous_version is not None and previous_version not in {published, version}:
+        raise ValueError("the retained PDF version is neither main nor its selected successor")
+    if previous is not None:
+        try:
+            receipt = pdf_receipt(previous)
+        except ValueError:
+            receipt = None
+        if receipt == digest and previous_version == version:
+            return previous
+    raw = render() if render is not None else render_svg_pdf_bytes(svg_text)
+    if not raw.startswith(PDF_SIGNATURE):
+        raise ValueError("the PDF producer returned no PDF")
+    candidate = _with_receipt(
+        raw, digest, version if version != LEGACY_INFOGRAPHIC_VERSION else None
+    )
+    if candidate == previous:
+        return candidate
+    if version == published:
+        raise ValueError(
+            f"the PDF would change under existing infographic version {version}; "
+            "cut a patch or minor successor before correcting the export"
+        )
+    return candidate
+
+
 def update(stem: str = DEFAULT_STEM) -> None:
     pdf = composite_pdf(stem)
-    digest = _source_digest(stem)
-    if pdf.is_file() and pdf_receipt(pdf.read_bytes()) == digest:
+    previous = pdf.read_bytes() if pdf.is_file() else None
+    content = prepared_pdf(
+        composite_svg(stem).read_text(encoding="utf-8"),
+        previous,
+        render=lambda: render_pdf_bytes(stem),
+    )
+    if content == previous:
         print(f"composite PDF already current: {pdf.name}")
         return
-    content = _with_receipt(render_pdf_bytes(stem), digest)
     with atomic_output_file(pdf, make_parents=True) as temporary:
         temporary.write_bytes(content)
     print(f"composite PDF updated: {pdf.name} ({len(content)} bytes)")
@@ -192,6 +273,11 @@ def check(stem: str = DEFAULT_STEM) -> None:
         raise ValueError(
             f"stale {pdf.relative_to(ROOT)}; regenerate it after changing the composite"
         )
+    version = svg_version(composite_svg(stem).read_text(encoding="utf-8"))
+    if pdf_version(pdf.read_bytes()) != version or version != release.component_version(
+        "infographics"
+    ):
+        raise ValueError(f"{pdf.name} does not carry the current owning infographic edition")
     print(f"composite PDF check passed: {pdf.name} matches the current {stem}.svg")
 
 
@@ -219,6 +305,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     arguments = parser.parse_args(argv)
     stems = (arguments.stem,) if arguments.stem else published_stems()
     try:
+        if arguments.update and any(stem in published_stems() for stem in stems):
+            # A published edition is the complete pair. This command shares the same
+            # staged lifecycle as the atlas entry point rather than updating one PDF.
+            from devtools import build_known_best_atlas  # noqa: PLC0415
+
+            build_known_best_atlas.update_composites()
+            return 0
         for stem in stems:
             if arguments.update:
                 update(stem)

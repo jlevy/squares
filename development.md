@@ -1592,8 +1592,9 @@ writes.
 page’s footer and the workbench stage print `PUBLICATION_EDITION` from
 `src/sqpack/release.py`, written like `v0.4.1-3b50e2`. The version comes from the first
 entry in `PUBLICATION_HISTORY`, and the six characters after it name the data.
-The atlas posters and the films carry the same spelling at the data commit each was
-drawn from, as
+The atlas posters use the independent `INFOGRAPHIC_VERSION` with the data revision they
+were drawn from. Both poster families share that edition; the films retain the stamp of
+their capture. See
 [Release assets](#release-assets-are-drawn-at-a-version-bump-or-on-demand) describes.
 The six characters after the version name the data, not the build: they are the pinned
 `DATA_REVISION`, the last commit that changed `DATA_PATHS` (the frontier records and the
@@ -1697,12 +1698,14 @@ Only a branch’s head has to agree; a merge keeps the branch’s data commit un
 data moved too, and then the merge is the data commit and the branch re-pins after
 merging `main`.
 
-### Release assets are drawn at a version bump, or on demand
+<a id="release-assets-are-drawn-at-a-version-bump-or-on-demand"></a>
+
+### Release assets are drawn at their component’s version bump
 
 The atlas posters (`known-best-1-100` and `known-best-1-324`, each an SVG with its PNG
 and PDF exports) and the films are expensive to draw and large to keep, so they are
-drawn when the version is bumped and when someone asks, never because the data moved
-(the owner, 2026-10-01). Each states what it was drawn from.
+drawn at a deliberate component revision, never because the data moved (the owner,
+2026-10-01). Each states what it was drawn from.
 A poster records the data commit and that commit’s date in its SVG metadata, prints them
 as its footer stamp and its dateline, and binds its PNGs and PDF to the SVG by digest
 receipts. A film’s frames carry the stamp they were captured with.
@@ -1710,7 +1713,7 @@ receipts. A film’s frames carry the stamp they were captured with.
 A poster may therefore trail the data between bumps.
 While its data revision is the pin, every label on it must agree with the figure record.
 Once the pin has moved, the cards that differ are listed by every check and fail none.
-A version bump fails every poster until it is redrawn.
+An infographic version bump fails every poster until the complete family is redrawn.
 `COMPOSITES_MAY_TRAIL` in `release.py` is the switch; `False` makes a trailing card a
 failure. From `packing/`:
 
@@ -1718,12 +1721,16 @@ failure. From `packing/`:
 # Hold the retained posters to their own records. Rebuilds nothing; about five seconds.
 uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --check-composites
 
-# Redraw both posters and their six exports from the retained witnesses. About a minute.
-uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --update-composites
+# Prepare a shared patch edition and redraw both posters and all their exports.
+uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.6.1 \
+    --component infographics --impact patch --scope "Refresh the atlas posters."
 ```
 
 `--update-composites` refuses a stale pin and uncommitted data, since the stamp it draws
 has to name the data in the tree.
+Changing published infographic content or exports requires a new edition; an unpublished
+successor can be corrected at its selected edition throughout review.
+A byte-identical rebuild may retain its edition.
 `--update` rewrites the data layer alone: witnesses, renderings, manifest and frontier
 links. [The plan](docs/project/specs/done/plan-2026-10-01-release-assets-on-demand.md)
 has the measurements behind this and the options that were weighed, and
@@ -1750,14 +1757,17 @@ its source and whether it is what the rule gives:
 
 ### Cutting an edition
 
-Bumping the site’s version is editorial, and it is when the release assets are redrawn.
-Use at most one publication patch bump per merge, and keep the chosen version fixed
+Bumping a component’s version is editorial.
+Select patch for an ordinary correction or refresh, and minor for substantial new
+capability or coverage.
+Use at most one bump per component per merge, and keep the chosen version fixed
 throughout a pull request.
 One command prepares the bump and prints what is left.
 From `packing/`, on a clean tree whose pin is current:
 
 ```bash
-uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.5.0 \
+uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.7.0 \
+    --component site --impact minor \
     --scope "One sentence on what the edition adds."
 ```
 
@@ -1767,42 +1777,70 @@ It does these, and `--dry-run` lists them without doing any:
    UTC by default; correct it if the deployment lands on another day), and sets
    `PUBLICATION_REVISION`, the commit the claim documents link to, to `HEAD`.
    `DATA_REVISION` follows the data, not the edition.
-2. Redraws both posters and their exports (`build_known_best_atlas --update-composites`;
-   see the cairo note under Supported Environment).
-3. Regenerates the claim documents (`render_verifiable_claim`).
-4. Runs `--check-composites` and
-   `pytest tests/test_release.py tests/test_n11_lower_bounds_explainer.py tests/test_verify_claim.py tests/test_known_best_composites.py tests/test_artifact_dates.py`.
+2. Records the component’s patch or minor release-impact decision.
+3. Regenerates the claim documents (`render_verifiable_claim`) for a site cut.
+4. Runs the relevant release and artifact checks.
+   An `infographics` cut redraws both posters and their complete exports; a site cut
+   keeps those editions.
 
 It commits nothing and publishes nothing, and it moves no paper: a site bump adds no
 entry to any paper’s history and changes no paper’s version line.
-What it prints for the owner to do: commit the release module, the eight atlas files and
-the generated documents together and merge them, with README’s edition sentence updated;
-wait for the “Certificate page” workflow and run `check_published_site`, which completes
-the version; correct the date and record the deployment above the history.
+Commit the release module and the generated outputs selected by the cut together, with
+README’s edition sentence updated; wait for the “Certificate page” workflow and run
+`check_published_site`, which completes the version; correct the date and record the
+deployment above the history.
 No tag and no GitHub release: a release is cut only when there are generated assets that
 need a download address, the films, and they stay on `render_overview.FILM_RELEASE`
 until they are cut again
 ([Regenerating and publishing the ascent videos](packages/workbench/README.md#regenerating-and-publishing-the-ascent-videos)).
 The papers’ PDFs are built by Pages from the merge.
 
+#### Hosted infographic exports when local scratch is unavailable
+
+After committing the selected edition and checking its data pin, set `CANDIDATE_REF` to
+the reviewed branch and dispatch the existing Pages workflow:
+
+```bash
+gh workflow run pages.yml --ref "$CANDIDATE_REF" -f redraw_infographics=true
+```
+
+The optional `candidate-infographics` job has a fifteen-minute ceiling and builds the
+complete pair independently of publication checks.
+It uploads eight checked SVG/PNG/PDF exports plus `source-sha.txt` as
+`candidate-infographics-<full-source-sha>`. Before promotion, match that receipt to the
+reviewed commit, reject missing or extra archive members, and review all eight outputs.
+Commit the complete family and rerun the ordinary publication gates; those gates build
+the explainer’s own HTML and PDF. The candidate job uploads outputs without deployment,
+commits or repository writes.
+An unchanged selected successor can be redrawn through review; main’s published edition
+remains immutable.
+
 ### Bumping a paper’s version
 
 A paper’s version moves when the paper changes in a way its author calls a new version,
 and only then; a site bump, a re-pin, a redraw of the posters and a change to the page’s
 chrome are not versions of the paper.
-It is one edit, in the commit that makes the change, with no command:
+Prepare the article revision, then cut the paper’s own patch or minor successor from a
+clean tree. For example, a patch to Part I’s current edition:
 
-1. Add a `PublicationHistoryEntry` to the front of the paper’s history in `release.py`
-   (`EXPLAINER_HISTORY`; the review gets one as the explainer’s when it leaves
-   `OPTIMALITY_REVIEW_VERSION` behind, linked from its front through
-   `PaperFront.history`): the new number, the day it will first be published, written
-   `October 2, 2026`, and one sentence on what changed in the paper.
-   The number is the paper’s own and is not the site’s; a number already published is
-   never changed.
-2. Set `EXPLAINER_REVISED` (or `THRESHOLD_REVIEW_REVISED`, or
-   `OPTIMALITY_REVIEW_REVISED`) to the commit’s date, as any change to the article
-   requires; `python -m devtools.artifact_dates --check` and
-   `tests/test_artifact_dates.py` hold it to git.
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.4.7 \
+    --component paper:n11-lower-bounds-explainer --impact patch \
+    --scope "Correct the explanation of the threshold argument."
+```
+
+1. Set `EXPLAINER_REVISED`, `THRESHOLD_REVIEW_REVISED`, `OPTIMALITY_REVIEW_REVISED` or
+   `PACKING_METHODS_REVISED` to the article commit’s date and commit the article
+   revision, as any change to the article requires;
+   `python -m devtools.artifact_dates --check` and `tests/test_artifact_dates.py` hold
+   it to git.
+2. Run the component cut command.
+   It adds the owning `PublicationHistoryEntry` and `ReleaseImpactDecision`, enforces
+   the selected patch or minor successor, and builds that paper’s HTML, Markdown and
+   PDF. Use `--date` for its planned first-publication date and correct it if deployment
+   lands on another day.
+   Keep the selected edition fixed through review; a published edition is never
+   renumbered.
 3. Where the entry points name the paper’s version, update them: TUTORIAL.md names the
    explainer’s (`test_reader_facing_version_references_follow_release_metadata`).
 4. Run
@@ -1812,6 +1850,75 @@ It is one edit, in the commit that makes the change, with no command:
 
 The version line and the history on a paper reflect versions of the paper, not of the
 website or anything else.
+
+### Maintaining the project changelog
+
+[`CHANGELOG.md`](CHANGELOG.md) and the bottom of
+[About](https://jlevy.github.io/squares/about.html#changelog) are generated from
+[`packing/site-changelog.yaml`](packing/site-changelog.yaml).
+Edit the YAML, then run
+`uv run --frozen --all-extras --group dev python -m devtools.render_changelog` from
+`packing/`; its `--check` mode runs in the ordinary documentation gate.
+The enforced Soft Schema contract validates the stored fields, and the loader checks
+calendar dates, unique PR membership, delivered stack layers and release references.
+
+At PR closeout, record a noteworthy contribution after the source PR has merged into
+`main`. Keep the summary to a sentence or a few lines, and use a short bullet list for
+the parts of a larger effort.
+Group delivered layers of a formal stack; later deliveries get a new entry with the same
+stack ID. Preserve an existing entry’s date and PR membership.
+Record an editorial omission reason for purely administrative work or a changelog
+synchronization PR.
+
+The candidate importer reads merged PR metadata during authoring, retains that metadata
+with the candidate YAML, and leaves the wording for editorial review.
+Normal rendering uses the committed inputs and makes no network requests.
+Run its `--help` for the authoring options.
+Review the candidate against the merged diff and local records before publishing it; a
+PR description is a starting point for the summary.
+
+Link public papers, PDF downloads, result reports and other launched artifacts directly.
+Add `publication` evidence before calling a change launched.
+Its optional UTC date is the evidenced date the complete announced set became public;
+leave it absent when that date is unknown.
+The entry’s date remains its merge date.
+A moving download URL must be labeled as the current artifact, rather than an archived
+edition.
+
+Release references name entries in the component’s retained history.
+The site, shared infographic family and each paper have distinct histories; changelog
+bookkeeping alone does not cut a release.
+Review the release-impact decision for every externally changed component: an ordinary
+correction or refresh advances patch, while a substantial new capability or coverage
+expansion advances minor and resets patch.
+Both infographic families and every advertised export advance together.
+Paper content and typesetting revisions advance the affected paper’s edition; a site
+navigation or footer update keeps the paper’s content edition.
+
+The ordinary documentation gate runs `devtools.check_release_impact`. It compares
+producer-owned inputs against the local main merge base and requires a disposition for
+each candidate component: a valid owning successor, or a fresh `ReleaseNoPublicChange`
+review in `release.py` naming the exact changed paths, outputs examined and reason.
+A prior no-change review cannot excuse another batch.
+Tests and checker changes do not independently select a public component; broad builder
+inputs can select one even when the changed code does not run in that output.
+Changelog-only maintenance can use the explicit bookkeeping exception; its reason should
+acknowledge the updated changelog rather than claim identical output.
+
+This gate verifies ownership, coverage and successor arithmetic.
+Reviewers decide whether the public output changed and whether patch or minor is
+appropriate; an input diff does not prove visual equality.
+The existing page and PDF checks still verify the actual artifacts.
+`--baseline-ref origin/main` uses the branch’s merge base; `--base` selects a delivery
+baseline explicitly.
+The validator uses `HEAD^1` on a main checkout whose head already equals `origin/main`,
+so it checks the preceding delivery rather than comparing a commit with itself.
+
+Validate with the change-reachable push tier, review both reader views, and verify the
+published About section with the normal deployment audit after merging.
+The
+[initial backfill review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md)
+records the disposition of the first 36 PRs.
 
 ## Focused Quality Commands
 

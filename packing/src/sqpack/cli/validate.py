@@ -3451,11 +3451,25 @@ def _skills_mirrored(context: Context) -> str:
 
 
 def _synopsis(context: Context) -> str:
+    impact_baseline = (
+        ("--base", "HEAD^1")
+        if _git("rev-parse", "HEAD").strip() == _git("rev-parse", "origin/main").strip()
+        else ("--baseline-ref", "origin/main")
+    )
     return _commands(
         context,
         (
             (sys.executable, "-m", "devtools.check_documentation"),
             (sys.executable, "-m", "devtools.check_synopsis"),
+            (
+                sys.executable,
+                "-m",
+                "devtools.render_changelog",
+                "--check",
+                "--baseline-ref",
+                "origin/main",
+            ),
+            (sys.executable, "-m", "devtools.check_release_impact", *impact_baseline),
         ),
     )
 
@@ -3819,7 +3833,7 @@ def _result_requests(context: Context) -> str:
     # the record against the register -- that every issue's results name entries that
     # exist and every reply is a comment on its own issue, the join stage 7 of the result
     # import process reads to say which author is owed a reply. A reply due is reported,
-    # never failed: it is the owner's next move, not a broken record.
+    # never failed: it is owed after the merge, not a broken record.
     return _module(context, "devtools.check_requests")
 
 

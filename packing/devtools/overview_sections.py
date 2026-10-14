@@ -1124,78 +1124,12 @@ def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool
         '<table class="kpress-table site-table site-results" data-site-table>'
         f"{result_head()}"
         f"<tbody>{''.join(body)}</tbody></table></div>"
-        f"{rung_legend(here=True) if here else ''}"
         f"{notices}{''.join(popovers)}</div>"
     )
 
 
 #: Where the rating ladders define every rung in full: the Results page's section.
 LADDERS_SECTION = "verification-ladders"
-
-
-def rung_legend(*, here: bool, heading: str = "") -> str:
-    """The legend under a table of results, boxed, three short lines: every significance
-    mark, S1 to S5; every verification and confirmation chip, V0 to C5; and recency,
-    with a link to where the ladders define each rung in full, on the results page
-    (`here`) or from another page. Each mark and chip is titled with the rubric's
-    meaning. It took the place, on 2026-10-03, of the whole ladder grid the overview
-    set under its table (the owner, `think-42dx`), and stood between the table's bar and
-    the table until 2026-10-04, when the owner moved it under the table in a box of its
-    own, so it reads as a legend and not as more of the filters. An optional heading
-    names the homepage's whole-card link; the complete Results legend keeps its layout."""
-    meanings = rung_meanings()
-    levels = rubric_levels()
-
-    def chips(scale: str) -> str:
-        return " ".join(
-            f'<span class="site-chip site-rung-fill" title="{_esc(meanings[label])}" '
-            f"{_fill(label)}>{label}</span>"
-            for label in (f"{scale}{level}" for level, _ in sorted(levels[scale]))
-        )
-
-    names = {scale: name for scale, name, _, _ in DIMENSIONS}
-    marks = " ".join(
-        significance_mark(level, meanings[f"S{level}"]) for level, _ in sorted(levels["S"])
-    )
-    href = f"#{LADDERS_SECTION}" if here else f"{RESULTS_PAGE}#{LADDERS_SECTION}"
-
-    def group(scale: str, shown: str) -> str:
-        return (
-            '<span class="site-rung-legend-group">'
-            f'<span class="site-rung-legend-name">{_esc(names[scale])}</span> {shown}</span>'
-        )
-
-    title = f'<h2 class="site-rung-legend-heading">{_esc(heading)}</h2>' if heading else ""
-    checks = (
-        f"<p>{group('V', chips('V'))}</p><p>{group('C', chips('C'))}</p>"
-        if heading
-        else f"<p>{group('V', chips('V'))} {group('C', chips('C'))}</p>"
-    )
-    if heading:
-
-        def row(label: str, shown: str) -> str:
-            return (
-                f'<p><span class="site-rung-legend-icons">{shown}</span>'
-                f'<span class="site-rung-legend-name">{_esc(label)}</span></p>'
-            )
-
-        return (
-            '<a class="site-card site-card-link site-rung-legend" '
-            f'data-card-size="medium" data-go="page" href="{href}" '
-            'aria-label="Legend: what the significance, verification and confirmation '
-            'ratings mean">'
-            f"{title}{row(names['S'], marks)}{row(names['V'], chips('V'))}"
-            f"{row(names['C'], chips('C'))}</a>"
-        )
-    return (
-        '<div class="site-rung-legend" role="note" aria-label="What a row\u2019s marks mean">'
-        f"{title}"
-        f"<p>{group('S', marks)}</p>"
-        f"{checks}"
-        "<p>"
-        f'<a href="{href}">What each rung means</a></p>'
-        "</div>"
-    )
 
 
 def results_table(overview: Overview, defaults: FilterDefaults = RESULTS_DEFAULTS) -> str:

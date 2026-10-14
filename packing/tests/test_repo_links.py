@@ -72,8 +72,8 @@ def test_a_path_the_checkout_lacks_is_asked_of_the_commit(
 
 def test_the_named_documents_exist_and_are_the_pages_the_site_serves() -> None:
     """Each document the site links by name is defined once. The reader documents are
-    served as pages; the three generated views are not, and each is either shown by a
-    page built from the same record or linked on `main`."""
+    served as pages, the changelog also on About; each generated record view is shown
+    by a page built from the same record or linked on `main`."""
     documents = {
         repo_links.README,
         repo_links.TUTORIAL,
@@ -82,12 +82,16 @@ def test_the_named_documents_exist_and_are_the_pages_the_site_serves() -> None:
         repo_links.DEVELOPMENT,
         repo_links.EPISTEMICS,
     }
-    views = {repo_links.DEFECTS, repo_links.RESULTS, repo_links.STATUS}
+    views = {repo_links.DEFECTS, repo_links.RESULTS, repo_links.STATUS, repo_links.CHANGELOG}
     for path in documents | views:
         assert (REPO / path).is_file(), path
     served = {doc.source.relative_to(REPO).as_posix() for doc in site_documents.DOCUMENTS}
     assert served == documents
-    assert set(site_documents.RECORD_PAGES) == {repo_links.RESULTS, repo_links.STATUS}
+    assert set(site_documents.RECORD_PAGES) == {
+        repo_links.RESULTS,
+        repo_links.STATUS,
+        repo_links.CHANGELOG,
+    }
     assert views - set(site_documents.RECORD_PAGES) == {repo_links.DEFECTS}
 
 

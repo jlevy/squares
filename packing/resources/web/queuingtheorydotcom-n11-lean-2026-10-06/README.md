@@ -169,6 +169,13 @@ packet from its manifest.
   same results. The
   [statement audit](../../../../docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md)
   reads them.
+- [`receipts/lean/build-statement-closure-2026-10-11.log`](receipts/lean/build-statement-closure-2026-10-11.log)
+  is the same build repeated on 11 October from 20:56 to 21:15 UTC by the same command
+  on the same pins, with Mathlib’s cache fetched for the closure’s 22 Mathlib imports
+  only (lane R2 of the 2026-10-11 intake pass, bead `think-66e5`): all 18 modules exit
+  0, the probe elaborates, and the same six theorems print `propext`,
+  `Classical.choice` and `Quot.sound`. Nineteen minutes of wall on a host whose load
+  average stayed between 8 and 13, against eight minutes on 6 October.
 
 The three checks are repeated from this packet by
 [`devtools.audit_n11_lean`](../../../devtools/audit_n11_lean.py): `axioms` and `scan`

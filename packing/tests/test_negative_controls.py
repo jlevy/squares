@@ -1345,7 +1345,6 @@ def test_unread_worker_outputs_leave_workers_while_declared_files_return(
     for relative in (
         "exp-249-n17-first-certified-sub-patterns/census.json",
         "exp-246-n17-capacity-one-cover/audit/wall_lemma.py.txt",
-        "chelokot-lean-replay/receipt.json",
     ):
         source = results / relative
         assert source.relative_to(controls.REPO) in copied_targets

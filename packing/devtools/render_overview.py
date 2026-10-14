@@ -473,6 +473,9 @@ FORWARDER = TEMPLATES / "site-forwarder.html"
 #: vendored kpress and the locked environment are inputs, as they are the explainer's.
 RENDER_INPUTS: tuple[Path, ...] = (
     Path(__file__).resolve(),
+    PACKING / "site-changelog.yaml",
+    PACKING / "site-changelog.schema.yaml",
+    PACKING / "devtools/render_changelog.py",
     PACKING / "devtools/build_known_best_atlas.py",
     PACKING / "devtools/atlas_print_font.py",
     PACKING / "devtools/default_drawings.py",
@@ -1326,13 +1329,16 @@ def atlas_page() -> Page:
 
 def about_page() -> Page:
     """The project narrative, approach, attribution, and supporting resources."""
-    from devtools import overview_sections  # noqa: PLC0415
+    from devtools import overview_sections, render_changelog  # noqa: PLC0415
 
     markdown = _template_markdown(
         ABOUT_ARTICLE,
         {
             "REPORT_RESULTS": report_results(),
             "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
+            "CHANGELOG": render_changelog.render_markdown(
+                render_changelog.load(), destination="site"
+            ),
         },
     )
     return kpress_page(

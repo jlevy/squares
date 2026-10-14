@@ -67,12 +67,13 @@ from sqpack.release import (
     EXPLAINER_HISTORY,
     EXPLAINER_REVISED,
     EXPLAINER_VERSION,
+    INFOGRAPHIC_VERSION,
     PUBLICATION_EDITION,
     PUBLICATION_HISTORY,
     PUBLICATION_STAMP,
     PUBLICATION_VERSION,
     commit_date,
-    edition_at,
+    infographic_edition_at,
 )
 from sqpack.yamlio import safe_load
 from workbench_tools.build_site import NOTE as WORKBENCH_NOTE
@@ -1191,11 +1192,11 @@ def test_every_repository_link_names_main_and_exists_there(page: str, document: 
 
 
 def test_the_atlas_figure_carries_the_shared_version_at_its_own_data_commit() -> None:
-    """A poster names and dates the data it was drawn from, in the site's one spelling
-    at its own data commit, and is not re-stamped when the pin moves (release rule 4):
-    the posters agree with the site's edition in the version and may differ in the six
-    characters after it. The posters are the site's assets, so they keep the site's
-    version; the paper that shows them does not."""
+    """The pair carries its shared infographic edition and its own data revision/date.
+
+    Re-pinning preserves the drawings' stamps. The paper keeps its own edition, and
+    site cuts advance the site's separate history.
+    """
     for composite in (path for path in COMPOSITE_ASSETS if path.suffix == ".svg"):
         text = composite.read_text()
         footer = re.search(r'<text data-feature="release-stamp"[^>]*>([^<]*)</text>', text)
@@ -1204,12 +1205,14 @@ def test_the_atlas_figure_carries_the_shared_version_at_its_own_data_commit() ->
         assert drawn_from is not None, composite.name
         identity = build_known_best_atlas.retained_identity(text)
         assert identity.data_revision == drawn_from.group(1)
-        assert identity.stamp == edition_at(drawn_from.group(1)), composite.name
+        assert identity.stamp == infographic_edition_at(drawn_from.group(1)), composite.name
         day = date.fromisoformat(commit_date(REPO, drawn_from.group(1)))
         assert identity.data_date == day.isoformat(), composite.name
-        expected_footer = f"{day:%B} {day.day}, {day.year} · {edition_at(drawn_from.group(1))}"
+        expected_footer = (
+            f"{day:%B} {day.day}, {day.year} · {infographic_edition_at(drawn_from.group(1))}"
+        )
         assert footer.group(1) == expected_footer, composite.name
-        assert identity.stamp.rsplit("-", 1)[0] == PUBLICATION_EDITION.rsplit("-", 1)[0]
+        assert identity.stamp.rsplit("-", 1)[0] == INFOGRAPHIC_VERSION
 
 
 def test_the_credits_print_the_papers_own_version_and_not_the_sites(

@@ -72,9 +72,9 @@ from sqpack.known_best import (
 from sqpack.release import (
     COMPOSITES_MAY_TRAIL,
     DATA_PATHS,
-    PUBLICATION_VERSION,
+    INFOGRAPHIC_VERSION,
     data_pathspec,
-    edition_at,
+    infographic_edition_at,
 )
 from sqpack.render.color import ANGLE_CLASS_CONTRACT
 from sqpack.render.model import RenderSpec
@@ -3504,13 +3504,13 @@ def test_fast_composite_check_rejects_a_stamp_that_is_not_the_composites_own() -
     canvas = known_best_builder.CompositeCanvas(
         CompositeSpec(first_n=18, last_n=18, columns=1, stem="synthetic")
     )
-    identity = known_best_builder.CompositeIdentity("1" * 40, "2026-09-28")
+    identity = known_best_builder.CompositeIdentity("1" * 40, "2026-09-28", INFOGRAPHIC_VERSION)
     assert identity.dateline == "Including new results (September 28, 2026)"
-    assert identity.stamp == edition_at("1" * 40)
+    assert identity.stamp == infographic_edition_at("1" * 40)
     assert not identity.current
     root = ET.fromstring(
         f"""<svg xmlns="http://www.w3.org/2000/svg">
-        <text data-feature="release-stamp">{PUBLICATION_VERSION}-000000</text>
+        <text data-feature="release-stamp">{INFOGRAPHIC_VERSION}-000000</text>
         </svg>"""
     )
 
@@ -3518,7 +3518,7 @@ def test_fast_composite_check_rejects_a_stamp_that_is_not_the_composites_own() -
         canvas, root, identity
     )
     expected = (
-        f"atlas/known-best/synthetic.svg release-stamp is ('{PUBLICATION_VERSION}-000000',); "
+        f"atlas/known-best/synthetic.svg release-stamp is ('{INFOGRAPHIC_VERSION}-000000',); "
         f"expected ({identity.poster_stamp!r},)"
     )
     assert problems == [expected]
@@ -3550,7 +3550,7 @@ def test_composite_identity_checks_each_modes_visible_date_and_edition(
     canvas = known_best_builder.CompositeCanvas(
         CompositeSpec(1, 1, 1, "synthetic", placement=placement)
     )
-    identity = known_best_builder.CompositeIdentity("1" * 40, data_date)
+    identity = known_best_builder.CompositeIdentity("1" * 40, data_date, INFOGRAPHIC_VERSION)
     assert identity.formatted_date == formatted_date
     assert identity.poster_stamp == f"{formatted_date} · {identity.stamp}"
     root = ET.Element(f"{{{SVG['svg']}}}svg")

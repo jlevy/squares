@@ -31,7 +31,7 @@ Modes, from ``packing/`` with the project interpreter::
 
 The default mode reads two files and the register and touches no clock, network or
 history, so its verdict is a function of the tree. Only the ids and the schema can fail
-it: a reply that is due is the owner's next move, not a broken record. ``--draft``
+it: a reply that is due is owed after the merge, not a broken record. ``--draft``
 refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until it
 merges and a reply links only to `main`. ``--github`` reads the live issues through
 ``gh api`` and writes nothing anywhere.

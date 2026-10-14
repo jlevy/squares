@@ -54,7 +54,7 @@ from itertools import pairwise
 from pathlib import Path
 from urllib.parse import quote, unquote
 
-from devtools import render_overview, repo_links
+from devtools import render_changelog, render_overview, repo_links
 from devtools.render_overview import REPO, Page
 from devtools.repo_links import RepositoryTree, repo_url, repository_tree
 
@@ -188,6 +188,7 @@ _BY_SOURCE = {doc.source.relative_to(REPO).as_posix(): doc for doc in DOCUMENTS}
 RECORD_PAGES: dict[str, str] = {
     repo_links.RESULTS: render_overview.RESULTS_PAGE,
     repo_links.STATUS: "atlas.html",
+    repo_links.CHANGELOG: "about.html#changelog",
 }
 #: Where every case's record is served, one address per case (`render_case_pages`).
 CASES_DIR = "cases"
@@ -290,6 +291,14 @@ def rewrite_link(url: str, *, tag: str, context: LinkContext, report: LinkReport
     document = _BY_SOURCE.get(path)
     if path in context.aliases:
         link = context.aliases[path]
+        if path == repo_links.CHANGELOG:
+            landing, _, default_anchor = link.partition("#")
+            chosen_anchor = anchor or default_anchor
+            if anchor and anchor != "changelog" and not anchor.startswith("changelog-"):
+                chosen_anchor = render_changelog.entry_anchor(anchor)
+            link = landing + (f"#{chosen_anchor}" if chosen_anchor else "")
+            if chosen_anchor:
+                report.anchors.append((landing, unquote(chosen_anchor), url))
     elif document is not None:
         if anchor:
             report.anchors.append((document.name, unquote(anchor), url))
@@ -441,6 +450,12 @@ def render_document(
 def unresolved(pages: dict[str, Page], report: LinkReport) -> list[str]:
     """Every link the render could not resolve, missing files and anchors together."""
     ids = {name: element_ids(page.html) for name, page in pages.items()}
+    # Reader documents are also rendered on their own. About is a record landing,
+    # so validate its anchors against the actual page even in that partial build.
+    if "about.html" not in ids and any(
+        name == "about.html" for name, _anchor, _url in report.anchors
+    ):
+        ids["about.html"] = element_ids(render_overview.about_page().html)
     problems = [f"no such path in the tree: {url}" for url in report.missing]
     problems += [
         f"no heading #{anchor} in {name}: {url}"
