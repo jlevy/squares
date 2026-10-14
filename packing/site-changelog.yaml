@@ -6,6 +6,117 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: october-fourteen-intake-records
+    date: '2026-10-14'
+    title: "Two Bound Families and 22 More Results From the 14 October Intake"
+    significance:
+      score: 4
+      rationale: "The registered results include two S4 bound families, Kevin Fang’s theorem and Hiroaki Hosono’s closed form."
+    topics: [upper-bound, lower-bound, optimality, verification]
+    pull_requests:
+      - 602
+    categories:
+      - records
+    result_ids:
+      - T-161
+      - T-162
+      - T-163
+      - T-164
+      - T-165
+      - T-166
+      - T-167
+      - T-168
+      - T-169
+      - T-170
+      - T-171
+      - T-172
+      - T-173
+      - T-174
+      - T-175
+      - T-176
+      - T-177
+      - T-178
+      - T-179
+      - T-180
+      - T-181
+      - T-182
+      - T-183
+      - T-184
+    summary: |
+      The 14 October intake registers 24 results, T-161 to T-184, in the order their
+      reports reached the project, as the report-order ledger records them. Kevin Fang
+      reports a proof that n² − n + 1 unit squares fit in a square of side less than n
+      for every n ≥ 15, and Hiroaki Hosono’s closed form raises the reported lower bound
+      at 154 counts. No case adopts a new best known packing yet.
+    details: |
+      - Smaller exact packings and certificates at 69 counts, from Francisco Couzo,
+        Daniil Ostashev, PingYou Ltd and Mykhailo Polkovskyi, were replayed exactly, the
+        rational ones on two routes; independent review and adoption come next.
+      - Fang’s theorem has a mathematical review and replayed finite bounds. The closed
+        form s(N) ≥ a(N), for every non-square N ≥ 49, has a review; its complete replay
+        waits on a compute budget.
+      - wand125 reports lower bounds at 37, 39, 44 and 145 to 149, each read by a
+        review, and Benjamin Greff reports s(76) = 9 by a mixed cover.
+      - Each recorded certificate is credited to its finder, and a refinement of an
+        earlier packing is listed as a regularization of it.
+    artifacts:
+      - kind: result
+        label: Current Fang theorem record
+        target: https://jlevy.github.io/squares/result/t-163.html
+      - kind: result
+        label: Current closed-form lower-bound record
+        target: https://jlevy.github.io/squares/result/t-180.html
+    publication:
+      date: '2026-10-14'
+      evidence: https://github.com/jlevy/squares/actions/runs/38644709027/job/116130903550
+    releases:
+      - component: site
+        version: v0.7.1
+    references:
+      - label: Current result register
+        target: packing/frontier/RESULTS.md
+      - label: The intake ledger
+        target: packing/campaign/issue-intake/upper-bounds-20261014/README.md
+  - id: reusable-intake-process-and-decided-comparisons
+    date: '2026-10-14'
+    title: "A Reusable Intake Process and 17 Decided Comparisons"
+    significance:
+      score: 2
+      rationale: "Process, policy and verification work on reports already recorded; it registers no new result."
+    topics: [engineering, verification, documentation]
+    pull_requests:
+      - 605
+    categories:
+      - pipeline
+      - documentation
+      - records
+    summary: |
+      The result-intake process is now a reusable runbook: the report-order ledger, the
+      owner’s standing decisions, a compute cap with a tracked validation backlog, and
+      verdict comments drafted from the ledger. Seventeen comparisons the printed
+      precision left undecided for PR #574 are now decided exactly, and none is below
+      the side already recorded.
+    details: |
+      - Pull requests merge with a merge commit by default, issues and pull requests
+        share one label set, and credits name people by name, keeping a handle only as
+        an identifier.
+      - A tool drafts each issue’s report-order verdict comment from the ledger; posting
+        stays manual.
+      - wand125’s replay4d 0.1.1 source hashes were recomputed, and a calibration
+        replay of two records prices the complete replay at about 5,250 CPU-hours here.
+      - Kevin Fang’s other eleven direct certificates, at 421 to 814, were replayed on
+        two exact routes.
+    publication:
+      date: '2026-10-14'
+      evidence: https://github.com/jlevy/squares/actions/runs/38632014131/job/116088520863
+    releases:
+      - component: site
+        version: v0.6.3
+    references:
+      - label: The intake runbook
+        target: packing/campaign/result-import.md
+      - label: The decided comparisons
+        target: packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json
   - id: october-fourteen-intake-ledger
     date: '2026-10-14'
     title: An Audit of Every Open Packing Report
@@ -1202,6 +1313,22 @@ deliveries:
   merged_at: '2026-10-14T18:51:22Z'
   base_ref: main
   merge_commit: 2319afaa581355a6e35a27f51698aa1c64d487f4
+- number: 605
+  title: 'research: the intake process as a reusable runbook, PR #574''s 17 decided comparisons,
+    and wand125''s 0.1.1 audit and calibration'
+  merged_at: '2026-10-14T20:25:56Z'
+  base_ref: main
+  merge_commit: 77fa15c7e8dfe8adf62e446198792a23b43864d9
+- number: 602
+  title: 'research: the 14 October intake records, T-161 to T-184 in report order'
+  merged_at: '2026-10-14T22:01:42Z'
+  base_ref: main
+  merge_commit: 9b32da04d8ca7e4972ea7db51dce3605810ea250
+- number: 597
+  title: 'fix(check_requests): hold each stated field to the last reply that stated it'
+  merged_at: '2026-10-14T12:16:17Z'
+  base_ref: main
+  merge_commit: 37e6757ed4c51a1d93f2f999814c2a5efbe2a223
 stacks:
 - id: 498
   pull_requests:
@@ -1277,7 +1404,12 @@ coverage:
   - 563
   - 590
   - 601
+  - 605
+  - 602
+  - 597
   omissions:
+  - pull_request: 597
+    reason: Reply-tracker correction; no result, bound, admission or public artifact change.
   - pull_request: 579
     reason: Internal work reconciliation, tracker cleanup and agent-ownership procedures; no independent
       public result or publication.

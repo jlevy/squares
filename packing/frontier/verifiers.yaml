@@ -3365,6 +3365,8 @@ verifiers:
       - >-
         packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs
       - >-
+        packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d_sort.rs
+      - >-
         packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/fast.rs
       - >-
         packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay_all.py
@@ -3372,10 +3374,24 @@ verifiers:
       - sha256: 92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193
         note: >-
           replay4d's printed source hash of the published crates; the source's full replay
-          ran 306ad4b5..., which differs in comments only, as the source says
+          ran 306ad4b5..., which differs in comments only, as the source says. It does not
+          cover b3d_sort.rs. Built here as the binary d52b8d88...
+      - sha256: f8cafeab078e1de31bacdef9c5c08ad70938f1b1b20fd3a2e1e54de9f73f1742
+        path: packing/resources/web/wand125-closed-form-source-hash-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs
+        note: >-
+          replay4d 0.1.1 (wand125/square-packing 1c661b7), its printed source hash, which from
+          this version also covers seam4d_core/src/b3d_sort.rs; the only other change is that
+          each result records env.B3_PLAIN_RF. Recomputed here
+          (wand125-closed-form-source-hash-2026-10-14/receipts/source-hashes.json). Built here
+          as the binary fb84677b...
     note: >-
-      Not built or run here. The source says seam4d_core is the code its search tools use to
-      evaluate leaves, so a replay with it is the producer's own code re-run.
+      Built here on 14 October 2026 with rustc 1.86.0 and the locked Cargo.lock, from the
+      retained crates (0.1.0, binary d52b8d88...) and the 1c661b7 revision's (0.1.1, binary
+      fb84677b...); each passed its 28 tests and printed the source hash its packet
+      recomputes. 0.1.0 replayed two records of the 136 and refused a truncated record and a
+      relabelled leaf (wand125-closed-form-2026-10-14/receipts/calibration/). The source
+      says seam4d_core is the code its search tools use to evaluate leaves, so a replay with
+      it is the producer's own code re-run.
   - id: V-wand125-closed-form-structure
     program: structure/validate_family.py, run by structure/structure_all.py
     author: wand125
@@ -3403,7 +3419,8 @@ verifiers:
         note: structure_all.py
     note: >-
       Run here unchanged on 14 October 2026 (receipts/structure-check/). The source's
-      receipt names validate_family.py at fdd61866..., which is not the published file.
+      receipt named validate_family.py at fdd61866..., never published; at 1c661b7 it names
+      the published 22e55f17... with the same results.
   - id: V-closed-form-evaluation
     program: closed_form_bounds.py
     author: Squares Project (Levy)

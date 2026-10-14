@@ -1193,8 +1193,18 @@ def reports_for_intake(issue: Mapped) -> bool:
     return issue["kind"] == RESULT_REPORT or bool(issue.get("intake"))
 
 
+def _issue_url(url: str) -> str:
+    """A comment's address in the form the record writes: GitHub gives a pull request's
+    comments as `/pull/N#issuecomment-…`, and the record as `/issues/N#…`, which GitHub
+    serves too."""
+    return re.sub(r"/pull/(\d+)#issuecomment-", r"/issues/\1#issuecomment-", url)
+
+
 def compare_github(record: Mapped, fetch: Fetch = gh_fetch) -> list[str]:
     """Where the live issues differ from the record: issues, states, replies, comments.
+
+    A pull request is compared only where the record holds it, as it holds PR #574, which
+    reports results; any other pull request is not a request.
 
     An entry that reports a new item for intake (`reports_for_intake`), open or closed, is
     listed when its live labels lack `intake` (`result-import.md`, stage 0).
@@ -1207,12 +1217,12 @@ def compare_github(record: Mapped, fetch: Fetch = gh_fetch) -> list[str]:
     """
     repository, owner = str(record["repository"]), str(record["owner"])
     differences: list[str] = []
+    recorded = {issue["number"]: issue for issue in record["issues"]}
     live = [
         item
         for item in fetch(f"repos/{repository}/issues?state=all&per_page=100")
-        if "pull_request" not in item
+        if "pull_request" not in item or item["number"] in recorded
     ]
-    recorded = {issue["number"]: issue for issue in record["issues"]}
     differences.extend(
         f"#{item['number']} is not in the record: {item['title']}"
         for item in live
@@ -1236,7 +1246,7 @@ def compare_github(record: Mapped, fetch: Fetch = gh_fetch) -> list[str]:
         live_replies = set()
         read_through = str(issue["read_through"])
         for comment in comments:
-            url = str(comment["html_url"])
+            url = _issue_url(str(comment["html_url"]))
             created = str(comment["created_at"])
             edited = str(comment.get("updated_at") or created)
             if _is_reply(comment, owner, author):

@@ -5012,13 +5012,13 @@ sources:
   - E-fang-direct-exact-feasibility
   notes: 'All 14 complete certificates are retained as the source wrote them, each admitted only where
     its exact side equals, or rounds up to, the side its source prints. Every requested count lies beyond
-    the case corpus, so no register entry records them; each is a beyond-horizon row. All 9 native jobs
+    the case corpus, so no register entry records them; each is a beyond-horizon row. All 42 native jobs
     have full outcomes. No selected override or superseded claim is created at this source-only stage;
-    current cases and earlier source ownership remain unchanged. The rows at 380, 381 and 382 are verified:
-    both maintained routes replayed them and the 14 October review confirmed the replay (E-fang-direct-exact-feasibility).
-    The two-route replay of the other eleven, at 421 to 814, which would confirm their rows at C3, is
-    priced at 3.02 CPU-hours, 1.51 for certify and as much for check --replay, about 4 hours of one-worker
-    wall, on 14 October 2026 under think-7bw3; it waits for an owner''s budget.'
+    current cases and earlier source ownership remain unchanged. The rows at all 14 counts are verified:
+    both maintained routes replayed every certificate (E-fang-direct-exact-feasibility), the nine jobs
+    at 380, 381 and 382 first, which the 14 October review confirmed, and the 33 at 421 to 814 on 14
+    October 2026 under think-7bw3, once the owner set a replay budget, with a fresh serial check --replay
+    of all 42 equal to the retained rows.'
   claims_record: resources/web/fang-direct-certificates-2026-10-13/acquisition/beyond-horizon-claims.json
 - id: wand125-closed-form-cfcheck-2026-10-14
   title: Independent checker cfcheck for the closed-form bound, intervals 1 and 34, issue 600
@@ -8020,14 +8020,14 @@ beyond_horizon_claims:
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '20.986150316947159'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 422
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '20.988436524095744'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 460
@@ -8041,63 +8041,63 @@ beyond_horizon_claims:
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '21.986880406196935'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 464
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '21.991709536768996'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 507
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '22.997807183348823'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 508
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '22.994733849702143'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 553
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '23.998811020144984'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 601
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '24.998914572427130'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 651
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '25.991547815274380'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 758
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '27.996346242823117'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 814
   source_id: fang-direct-certificates-2026-10-13
   claim: upper-bound
   value: '28.999873603982716'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-7bw3
 - n: 932

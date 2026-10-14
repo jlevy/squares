@@ -13953,12 +13953,108 @@ urls:
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/algebraic-claims.json
+    - packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json
     - packing/devtools/algebraic_witness_reports.py
     - packing/devtools/upper_bound_reports.py
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n070.json.xz
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n153.json.xz
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n207.json.xz
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n302.json.xz
+  amendments:
+  - date: '2026-10-14'
+    reason: 'Cite the receipt of PR #574''s 17 exactly decided comparisons (campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json)
+      among the artifacts; scope, attribution, evidence and the stated bounds are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 68
+        - 70
+        - 84
+        - 86
+        - 88
+        - 102
+        - 103
+        - 105
+        - 108
+        - 110
+        - 123
+        - 126
+        - 127
+        - 129
+        - 130
+        - 131
+        - 132
+        - 146
+        - 153
+        - 155
+        - 156
+        - 172
+        - 175
+        - 176
+        - 179
+        - 180
+        - 181
+        - 182
+        - 199
+        - 204
+        - 206
+        - 207
+        - 208
+        - 209
+        - 210
+        - 211
+        - 228
+        - 232
+        - 236
+        - 237
+        - 238
+        - 239
+        - 240
+        - 241
+        - 258
+        - 259
+        - 261
+        - 263
+        - 264
+        - 266
+        - 267
+        - 268
+        - 269
+        - 270
+        - 271
+        - 272
+        - 273
+        - 292
+        - 295
+        - 297
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+      established: null
+      attribution:
+        source_keys:
+        - '[PingYou PR 574 certificates 2026-10-13]'
+        published: '2026-10-13'
+      builds_on: null
+      evidence:
+      - E-pingyou-574-certificate-report
+      - E-pingyou-574-algebraic-report
+      artifacts:
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/algebraic-claims.json
+      - packing/devtools/algebraic_witness_reports.py
+      - packing/devtools/upper_bound_reports.py
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n070.json.xz
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n153.json.xz
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n207.json.xz
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n302.json.xz
 - path: result/t-175.html
   canonical: result/t-175.html
   kind: result
@@ -14398,13 +14494,305 @@ urls:
     - E-wand125-closed-form-report
     - E-wand125-closed-form-cfcheck-report
     - E-wand125-closed-form-cfcheck-sample
+    - E-wand125-closed-form-replay4d-sample
     artifacts:
     - packing/resources/web/wand125-closed-form-2026-10-14/README.md
+    - packing/resources/web/wand125-closed-form-source-hash-2026-10-14/README.md
     - packing/resources/web/wand125-closed-form-2026-10-14/receipts/release-custody.json
     - packing/resources/web/wand125-closed-form-2026-10-14/receipts/structure-check/run.json
     - packing/resources/web/wand125-closed-form-2026-10-14/evaluation/closed_form_bounds.py
     - packing/resources/web/wand125-closed-form-2026-10-14/evaluation/outputs/bounds.json
     - docs/project/reviews/review-2026-10-14-wand125-closed-form-lower-bound.md
+  amendments:
+  - date: '2026-10-14'
+    reason: Cite the replay4d calibration sample (E-wand125-closed-form-replay4d-sample) and the replay4d
+      0.1.1 source-hash packet among the evidence and artifacts; scope, attribution and the stated
+      bound are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 50
+        - 51
+        - 52
+        - 53
+        - 54
+        - 55
+        - 56
+        - 57
+        - 58
+        - 59
+        - 60
+        - 61
+        - 62
+        - 63
+        - 65
+        - 66
+        - 67
+        - 68
+        - 69
+        - 70
+        - 71
+        - 72
+        - 73
+        - 74
+        - 75
+        - 76
+        - 77
+        - 78
+        - 79
+        - 80
+        - 82
+        - 83
+        - 84
+        - 85
+        - 86
+        - 87
+        - 88
+        - 89
+        - 90
+        - 91
+        - 92
+        - 93
+        - 94
+        - 95
+        - 96
+        - 97
+        - 98
+        - 99
+        - 101
+        - 102
+        - 103
+        - 104
+        - 105
+        - 106
+        - 107
+        - 108
+        - 109
+        - 110
+        - 111
+        - 112
+        - 113
+        - 114
+        - 115
+        - 116
+        - 117
+        - 118
+        - 119
+        - 120
+        - 122
+        - 123
+        - 124
+        - 125
+        - 126
+        - 127
+        - 128
+        - 129
+        - 130
+        - 131
+        - 132
+        - 133
+        - 134
+        - 135
+        - 136
+        - 137
+        - 138
+        - 139
+        - 140
+        - 141
+        - 142
+        - 143
+        - 145
+        - 146
+        - 147
+        - 148
+        - 149
+        - 150
+        - 151
+        - 152
+        - 153
+        - 154
+        - 155
+        - 156
+        - 157
+        - 158
+        - 159
+        - 160
+        - 161
+        - 162
+        - 163
+        - 164
+        - 165
+        - 166
+        - 167
+        - 168
+        - 170
+        - 171
+        - 172
+        - 173
+        - 174
+        - 175
+        - 176
+        - 177
+        - 178
+        - 179
+        - 180
+        - 181
+        - 182
+        - 183
+        - 184
+        - 185
+        - 186
+        - 187
+        - 188
+        - 189
+        - 190
+        - 191
+        - 192
+        - 193
+        - 194
+        - 195
+        - 197
+        - 198
+        - 199
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 209
+        - 210
+        - 211
+        - 212
+        - 213
+        - 214
+        - 215
+        - 216
+        - 217
+        - 218
+        - 219
+        - 220
+        - 221
+        - 222
+        - 223
+        - 224
+        - 226
+        - 227
+        - 228
+        - 229
+        - 230
+        - 231
+        - 232
+        - 233
+        - 234
+        - 235
+        - 236
+        - 237
+        - 238
+        - 239
+        - 240
+        - 241
+        - 242
+        - 243
+        - 244
+        - 245
+        - 246
+        - 247
+        - 248
+        - 249
+        - 250
+        - 251
+        - 252
+        - 253
+        - 254
+        - 255
+        - 257
+        - 258
+        - 259
+        - 260
+        - 261
+        - 262
+        - 263
+        - 264
+        - 265
+        - 266
+        - 267
+        - 268
+        - 269
+        - 270
+        - 271
+        - 272
+        - 273
+        - 274
+        - 275
+        - 276
+        - 277
+        - 278
+        - 279
+        - 280
+        - 281
+        - 282
+        - 283
+        - 284
+        - 285
+        - 286
+        - 287
+        - 288
+        - 290
+        - 291
+        - 292
+        - 293
+        - 294
+        - 295
+        - 296
+        - 297
+        - 298
+        - 299
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        - 309
+        - 310
+        - 311
+        - 312
+        - 313
+        - 314
+        - 315
+        - 316
+        - 317
+        - 318
+        - 319
+        - 320
+        - 321
+        - 322
+        - 323
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 closed form 2026-10-14]'
+        published: '2026-10-13'
+      builds_on: null
+      evidence:
+      - E-wand125-closed-form-report
+      - E-wand125-closed-form-cfcheck-report
+      - E-wand125-closed-form-cfcheck-sample
+      artifacts:
+      - packing/resources/web/wand125-closed-form-2026-10-14/README.md
+      - packing/resources/web/wand125-closed-form-2026-10-14/receipts/release-custody.json
+      - packing/resources/web/wand125-closed-form-2026-10-14/receipts/structure-check/run.json
+      - packing/resources/web/wand125-closed-form-2026-10-14/evaluation/closed_form_bounds.py
+      - packing/resources/web/wand125-closed-form-2026-10-14/evaluation/outputs/bounds.json
+      - docs/project/reviews/review-2026-10-14-wand125-closed-form-lower-bound.md
 - path: result/t-181.html
   canonical: result/t-181.html
   kind: result
