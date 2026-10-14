@@ -108,7 +108,9 @@ ONLY = "rests-on-t007-only"
 CLASSES = (UNAFFECTED, REPROVED, WEAKENED, ONLY)
 
 #: Result kinds that carry a lower bound on `s(n)`, for the per-case list of other results.
-LOWER_KINDS = frozenset({"lower-bound", "optimality", "simplification", "audit", "correction"})
+LOWER_KINDS = frozenset(
+    {"lower-bound", "optimality", "simplification", "formalization", "audit", "correction"}
+)
 
 KARAKUS_ARCHIVE = "packing/resources/papers/karakus-2026-counterexample-nagamochi-scoring-lemma"
 KARAKUS_TEXT = f"{KARAKUS_ARCHIVE}.md"

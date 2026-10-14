@@ -155,9 +155,9 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     # its evidence makes its standing, the limit of a method among them (T-003), unless
     # a later result is declared to imply all of it: T-031 goes, and T-036, superseded
     # only in part, stays. T-154, Fitzharding's Lean proof of the value T-153 holds in
-    # n = 17's reported lane, stands as a reported second certificate since 13 October
-    # 2026, as T-055 did until its replay of 2 October. A bound pending adoption stays
-    # too: nothing has replaced it (think-h0d1).
+    # n = 17's reported lane, a formalization, stands as a reported second certificate
+    # since 13 October 2026, as T-055 did until its replay of 2 October. A bound pending
+    # adoption stays too: nothing has replaced it (think-h0d1).
     kept = [result for result in overview.results if result.id.lower() in current]
     assert {result.standing for result in kept} == {
         render_recent_results.HOLDS,
@@ -296,13 +296,15 @@ def test_kind_shows_the_results_of_one_kind(
     browser: Any, pages: dict[str, Path], overview: overview_data.Overview
 ) -> None:
     """Kind is the bar's select for what a result is. Each kind the register holds shows
-    exactly its results and the count follows; All shows every row again; it composes
-    with Status, so a kind with no recorded result leaves no row; and a link can preset
-    it, `?kind=optimality`."""
+    exactly its results and the count follows, formalization (T-154) and simplification
+    (T-054, T-055) apart; All shows every row again; it composes with Status, so a kind
+    with no recorded result leaves no row; and a link can preset it, `?kind=optimality`."""
     by_kind: dict[str, list[str]] = {}
     for result in overview.results:
         by_kind.setdefault(str(result.record["kind"]), []).append(result.id.lower())
     assert {"lower-bound", "upper-bound", "optimality", "rigidity"} <= set(by_kind)
+    assert "t-154" in by_kind["formalization"]
+    assert {"t-054", "t-055"} <= set(by_kind["simplification"])
     page = opened(browser, pages["results.html"], overview)
     try:
         for kind, ids in by_kind.items():

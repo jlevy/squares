@@ -1,0 +1,4 @@
+Neighbour329.Chunk0000: side-L? side=4.675530093604551 shift=1.000e-12 table 64 entries, owners 17
+Neighbour329.Chunk0000: S0 rows [64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64], E rows [64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64], steps 3894 {'wall': 868, 'cut': 3026}
+Neighbour329.Chunk0000: all 3894 steps accepted; final rows [64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64]; R == E exactly: True
+runToCheck replayed = True

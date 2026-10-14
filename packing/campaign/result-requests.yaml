@@ -5747,10 +5747,14 @@ issues:
       Retained on 12 October 2026 as digests, derived facts and receipts (no licence for
       reuse), read by a mathematical review that found no mathematical defect in what it
       read and, on 13 October, by a second review that read and re-derived the normalized
-      52-row gate of the rigidity step and found no blocking defect, and partly run here:
+      52-row gate of the rigidity step and found no blocking defect, and, on 13 and 14
+      October, by a third, mathematical-correctness review written for the author, which
+      found no step false, and partly run here:
       the author's check.py passed, 34 capture rows and three of
       the 13 trees reproduced with the producer's code, 34 rows decided again by an
-      independent implementation and the root isolated independently, all agreeing.
+      independent implementation and the root isolated independently, all agreeing; the
+      second and third reviews' own code decided the 52-row gate, the root, the upper
+      construction, the admission, the literal facts and the hand-overs, and the tree JQ.
       Registered as T-153 at V0/C1 and S5; the complete capture recomputation and ten trees
       have not been run, and the verified bounds are unchanged.
     read_through: '2026-10-12T16:42:56Z'
@@ -5772,6 +5776,13 @@ issues:
       - E-n017-overbeck-capture-independent-sample
       - E-n017-overbeck-tree-sample-replay
       - E-n017-overbeck-statement-root-independent
+      - E-n017-overbeck-gate-review2
+      - E-n017-overbeck-endpoint-review3
+      - E-n017-overbeck-upper-construction-review3
+      - E-n017-overbeck-literal-checks-review3
+      - E-n017-overbeck-admission-review3
+      - E-n017-overbeck-jq-tree-review3
+      - E-n017-overbeck-handovers-review3
     asks:
     - what: >-
         The owner's priority of 12 October: validate fully, tabulate in the record as soon as
@@ -5792,6 +5803,17 @@ issues:
         docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md, of 13
         October: it read the gate, re-derived it with its own code and accepted, with nine
         defects, none blocking; T-153's rungs did not move.
+    - what: >-
+        The owner's word of 13 October: a mathematical-correctness review at the strongest
+        tier, with a full review document to share with the author, its findings addressed
+        and its code registered (think-0393, think-mlkx).
+      state: done
+      note: >-
+        docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md, of
+        13 and 14 October: no step false, seven findings, none blocking, and four questions
+        for the author; its programs are in the packet's review-3/ and registered with
+        their evidence entries. T-153's rungs did not move. The reply that shares it is
+        the owner's to post (think-00y8).
     beads:
     - think-00y8
     - think-r7m8
@@ -5800,6 +5822,8 @@ issues:
     - think-0at1
     - think-4j3n
     - think-ofoc
+    - think-0393
+    - think-mlkx
     answer_bead: think-00y8
     replies: []
     close_when: >-
@@ -5812,7 +5836,10 @@ issues:
       (docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md); lane K3
       (think-r7m8) ran the sampled replays in receipts-here/; the second review lane
       (think-4j3n) wrote docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md,
-      whose programs and output are in the packet's review-2/. The statement's F, G,
+      whose programs and output are in the packet's review-2/; the mathematical-correctness
+      lane (think-0393) wrote
+      docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md,
+      whose programs are in review-3/. The statement's F, G,
       rectangle and side map are this repository's H-255 chart exactly, and L is below
       n-017's verified ceiling by 1.04e-22.
   - number: 565
@@ -5832,10 +5859,14 @@ issues:
       are v1.0.0's, and read by an adversarial review that found no mathematical defect,
       found EndpointGeometry.side to be this record's L by identity of definition, and found
       that the proof runs on this project's n = 17 plan and data without crediting its
-      components specifically (F-1). Registered as T-154, a simplification of T-153
-      (Overbeck's candidate, whose release was public about six hours before this proof's
-      repository by GitHub's times), at V0/C1 with S5 proposed; the source's clean build was
-      not repeated here, and the verified bounds are unchanged.
+      components specifically (F-1), and by a second, mathematical-correctness review
+      written for the author, which read the checkers and their soundness proofs and found
+      no defect. Registered as T-154, a formalization: a Lean proof of
+      T-153's value (Overbeck's candidate, whose release was public about six hours before
+      this proof's repository by GitHub's times) by a route of its own, at V0/C1 with S5
+      proposed; the source's clean build was not repeated here, and the verified bounds are
+      unchanged. T-154 was registered as a simplification on 13 October, and the owner moved
+      it to the new kind formalization, decided 13 October, recorded 14 October (think-8e0p).
     read_through: '2026-10-12T22:23:37Z'
     results:
     - key: n17-optimality-lean
@@ -5851,6 +5882,11 @@ issues:
       - T-154
       evidence:
       - E-n017-fitzharding-lean-report
+      - E-n017-fitzharding-endpoint-frames-review2
+      - E-n017-fitzharding-census-review2
+      - E-n017-fitzharding-cell-geometry-review2
+      - E-n017-fitzharding-rigidity-dual-review2
+      - E-n017-fitzharding-native-facts-review2
     asks:
     - what: Link the proof from the n = 17 case page.
       state: done
@@ -5864,6 +5900,17 @@ issues:
       note: >-
         A comment on #405 is the owner's to post, after the merge, with the reply to this
         issue; the draft is in think-mxhc.
+    - what: >-
+        The owner's word of 13 October: a mathematical-correctness review at the strongest
+        tier, with a full review document to share with the author, its findings addressed
+        and its code registered (think-32rl, think-mlkx).
+      state: done
+      note: >-
+        docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md, of
+        13 October: no defect blocking or major, six findings and six questions for the
+        author; its programs are in the packet's review-2/ and registered with their
+        evidence entries. T-154's rungs did not move. The reply that shares it is the
+        owner's to post (think-mxhc).
     beads:
     - think-hcqr
     - think-acbk
@@ -5872,6 +5919,8 @@ issues:
     - think-s7s4
     - think-c1kz
     - think-mxhc
+    - think-32rl
+    - think-mlkx
     answer_bead: think-mxhc
     replies: []
     close_when: >-
@@ -5887,6 +5936,8 @@ issues:
       docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md. Overbeck's candidate
       (#557, T-153) was public first and keeps the case's reported lower bound; the issue and
       the README name it as related work developed independently. The issue offers help with
-      reproduction and statement review. The review's attribution findings F-1 and F-2 and
-      its six questions (section 9) are for the reply. The full build (think-r109) waits on an
+      reproduction and statement review. The first review's attribution findings F-1 and
+      F-2 and its six questions (section 9) are for the reply, and so are the second
+      review (think-32rl, docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md),
+      its findings MR-1 to MR-6 and its six questions. The full build (think-r109) waits on an
       owner budget: the source publishes no CPU time, and the intake's host is too small.

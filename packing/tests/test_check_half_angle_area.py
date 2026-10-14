@@ -1412,7 +1412,6 @@ def test_the_505_and_501_imports_agree_with_their_receipts_plans_and_prints_to_e
     )
 
 
-@pytest.mark.slow
 def test_barnetts_refinements_are_ryan_xus_packings_moved_and_ostashevs_are_not() -> None:
     """#505's 146 and 261 match Ryan Xu's certificates square for square at the identity,
     261 moved by at most 9.1e-6 and 146 by at most 5.0e-2 (nearer than Evan Daniel's

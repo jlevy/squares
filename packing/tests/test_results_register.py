@@ -907,6 +907,9 @@ def test_not_a_bound_is_not_a_kind(
         ("T-003", "case-exclusion", "and no cited evidence claims `derived-structure`"),
         # A simplification names the result it proves again, on a case they share.
         ("T-001", "simplification", "a simplification's claim names the registered result"),
+        # So does a formalization, and it cites evidence a proof assistant checked.
+        ("T-001", "formalization", "a formalization's claim names the registered result"),
+        ("T-001", "formalization", "kind is formalization, and no cited evidence of its own"),
     ],
 )
 def test_a_kind_its_record_contradicts_is_refused(result: str, kind: str, refusal: str) -> None:
@@ -959,9 +962,8 @@ def test_the_kind_a_headline_opens_with_is_derived() -> None:
     register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))
     for record in register["results"]:
         opens = derive(record["headline"])
-        assert opens in {None, record["kind"]} or record["kind"] == "simplification", record[
-            "id"
-        ]
+        second = record["kind"] in check_results.SECOND_PROOF_KINDS
+        assert opens in {None, record["kind"]} or second, record["id"]
 
 
 def test_optimality_needs_both_halves_or_an_exact_value() -> None:
@@ -987,6 +989,7 @@ def test_a_simplification_names_a_result_on_a_case_it_shares() -> None:
     record = {
         "id": "T-999",
         "kind": "simplification",
+        "proves_kind": "optimality",
         "headline": "`s(45) = 7` by a shorter route",
         "claim": "s(45) = 7, proved again without segments; T-053 holds the value.",
     }
@@ -1001,6 +1004,119 @@ def test_a_simplification_names_a_result_on_a_case_it_shares() -> None:
     assert check_results.kind_problems(record, cited, {"T-999": {45}, "T-053": {21}}) == unnamed
     silent = {**record, "claim": "s(45) = 7, proved again."}
     assert check_results.kind_problems(silent, cited, {"T-999": {45}}) == unnamed
+
+
+def test_a_formalization_names_a_result_and_cites_a_proof_assistant() -> None:
+    """A formalization proves in a proof assistant a result the record already holds, by
+    formalizing an existing argument or by a route of its own (owner, 13 October 2026). Its
+    claim names that result on a case they share, and it cites evidence whose method,
+    performed or reported, is `proof-assistant-checked`. A simplification may cite such
+    evidence too: where a second proof is both, either kind fits and the owner chooses
+    at registration. Declared a simplification, T-154 is not refused either."""
+    record = {
+        "id": "T-999",
+        "kind": "formalization",
+        "proves_kind": "optimality",
+        "headline": "`s(17) = 4.67553009360455…` in Lean 4",
+        "claim": "s(17) = 4.67553009360455095163…, T-153's value, proved in Lean 4.",
+    }
+    scopes = {"T-999": {17}, "T-153": {17}}
+    formal = check_results.FORMAL_METHOD
+    reported = {
+        "id": "E-report",
+        "claim": "exact-value",
+        "scope": {"n_values": [17]},
+        "reported_method": formal,
+    }
+    built = {
+        "id": "E-build",
+        "claim": "exact-value",
+        "scope": {"n_values": [17]},
+        "method": formal,
+    }
+    paper = {"id": "E-paper", "claim": "exact-value", "method": "published-proof"}
+    assert check_results.kind_problems(record, [reported], scopes) == []
+    assert check_results.kind_problems(record, [built], scopes) == []
+    assert check_results.kind_problems(record, [paper], scopes) == [
+        (
+            "T-999: kind is formalization, and no cited evidence of its own is "
+            "`proof-assistant-checked`, performed or reported"
+        )
+    ]
+    assert check_results.kind_problems(record, [reported], {"T-999": {17}, "T-153": {11}}) == [
+        (
+            "T-999: a formalization's claim names the registered result it formalizes or "
+            "proves again, on a case they share"
+        )
+    ]
+    simpler = {**record, "kind": "simplification"}
+    assert check_results.kind_problems(simpler, [paper], scopes) == []
+    assert check_results.kind_problems(simpler, [paper, built], scopes) == []
+    live, live_cited, live_scopes = _live_record("T-154")
+    assert live["kind"] == "formalization"
+    as_simpler = {**live, "kind": "simplification"}
+    assert check_results.kind_problems(as_simpler, live_cited, live_scopes) == []
+    # Its headline may restate the relation of the result it proves again, as a
+    # simplification's may; a kind that is no bound may not.
+    assert check_results.headline_kind(record["headline"]) == "optimality"
+    rigid = {**record, "kind": "rigidity"}
+    assert any(
+        "its headline opens with an exact value" in problem
+        for problem in check_results.kind_problems(rigid, [reported], scopes)
+    )
+
+
+def test_a_second_proof_is_held_to_its_own_proof_assistant_evidence() -> None:
+    """The proof-assistant rule reads the second proof's own evidence, and not what the
+    result it proves again cites (review A1 on #592). A paper proof of T-060's `s(11)`
+    that cites its own published proof and, for a half it shares, T-060's Lean report
+    is a simplification; declared a formalization, the same record is refused, since a
+    proof assistant's check of T-060 is no check of it. With a Lean build of its own
+    beside T-060's report, it is a formalization."""
+    target, target_cited, scopes = _live_record("T-060")
+    lean = next(entry for entry in target_cited if check_results.proof_assistant_checked(entry))
+    paper = {"id": "E-paper", "claim": "exact-value", "method": "published-proof"}
+    record = {
+        "id": "T-999",
+        "kind": "simplification",
+        "proves_kind": "optimality",
+        "headline": "`s(11) = 3.877…` by a shorter route",
+        "claim": "s(11) = T, T-060's value, proved again on paper by a shorter route.",
+    }
+    scopes = {**scopes, "T-999": {11}}
+    evidence_of = {"T-060": target["evidence"]}
+    assert check_results.kind_problems(record, [paper, lean], scopes, evidence_of) == []
+    formal = {**record, "kind": "formalization"}
+    assert check_results.kind_problems(formal, [paper, lean], scopes, evidence_of) == [
+        (
+            "T-999: kind is formalization, and no cited evidence of its own is "
+            "`proof-assistant-checked`, performed or reported"
+        )
+    ]
+    built = {
+        "id": "E-build",
+        "claim": "exact-value",
+        "scope": {"n_values": [11]},
+        "method": check_results.FORMAL_METHOD,
+    }
+    assert check_results.kind_problems(formal, [paper, lean, built], scopes, evidence_of) == []
+
+
+def test_the_second_proof_kinds_are_registered_kinds() -> None:
+    """Formalization stands after simplification in the rubric's order, which the views
+    and the site's Kind filter follow; the schema's enum is the same tuple
+    (`test_the_kind_vocabulary_is_one_list_in_three_places`). T-154, Fitzharding's Lean 4
+    proof of T-153's value, is a formalization; T-054 and T-055 are simplifications. Other
+    results may join either kind, so membership is what is held."""
+    kinds = check_results.KINDS
+    assert {"simplification", "formalization"} == check_results.SECOND_PROOF_KINDS
+    assert kinds.index("formalization") == kinds.index("simplification") + 1
+    register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))
+    by_kind: dict[str, set[str]] = {}
+    for record in register["results"]:
+        by_kind.setdefault(record["kind"], set()).add(record["id"])
+    assert "T-154" in by_kind["formalization"]
+    assert {"T-054", "T-055"} <= by_kind["simplification"]
 
 
 def _superseded_by(*later: tuple[str, str], kind: str = "case-exclusion") -> dict:
@@ -1768,3 +1884,147 @@ def test_results_md_says_whose_packing_each_regularization_is() -> None:
     register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))
     listed = sum(len(record.get("regularizations") or []) for record in register["results"])
     assert section.count("  - n = ") == listed
+
+
+@pytest.mark.parametrize("rid", ["T-153", "T-154"])
+def test_full_part_citations_cannot_promote_the_whole_result(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    rid: str,
+) -> None:
+    register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))
+    record = next(row for row in register["results"] if row["id"] == rid)
+    parts = (
+        [
+            "E-n017-overbeck-gate-review2",
+            "E-n017-overbeck-endpoint-review3",
+            "E-n017-overbeck-upper-construction-review3",
+            "E-n017-overbeck-admission-review3",
+            "E-n017-overbeck-literal-checks-review3",
+            "E-n017-overbeck-handovers-review3",
+        ]
+        if rid == "T-153"
+        else ["E-n017-fitzharding-census-review2", "E-n017-fitzharding-rigidity-dual-review2"]
+    )
+    cited = [*record["evidence"], *parts]
+    ordinary = _changed_result(tmp_path, rid, evidence=cited)
+    monkeypatch.setattr(check_results, "RESULTS", ordinary)
+    assert check_results.main() == 0
+    assert (
+        check_results.derive_verification(
+            [
+                entry
+                for entry in safe_load(check_results.EVIDENCE.read_text(encoding="utf-8"))[
+                    "evidence"
+                ]
+                if entry["id"] in cited
+            ],
+            record=record,
+        )
+        == "V0"
+    )
+    promoted = _changed_result(tmp_path, rid, evidence=cited, verification="V3")
+    monkeypatch.setattr(check_results, "RESULTS", promoted)
+    assert check_results.main() == 1
+    assert f"{rid}: declares V3 but the cited atoms support only V0" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    ("claim", "counts"), [("exact-value", [11]), ("derived-structure", [17])]
+)
+def test_unrelated_formal_evidence_cannot_qualify_the_second_proof(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    claim: str,
+    counts: list[int],
+) -> None:
+    """Scope and whole-claim support apply in the full register gate, even for reports."""
+    document = safe_load(check_results.EVIDENCE.read_text(encoding="utf-8"))
+    own = next(
+        row for row in document["evidence"] if row["id"] == "E-n017-fitzharding-lean-report"
+    )
+    own["reported_method"] = "published-proof"
+    unrelated = dict(
+        own,
+        id="E-test-unrelated-formal",
+        claim=claim,
+        scope={"n_values": counts},
+        reported_method=check_results.FORMAL_METHOD,
+    )
+    document["evidence"].append(unrelated)
+    path = tmp_path / "evidence.yaml"
+    path.write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
+    monkeypatch.setattr(check_results, "EVIDENCE", path)
+    monkeypatch.setattr(
+        check_results,
+        "RESULTS",
+        _changed_result(
+            tmp_path, "T-154", evidence=["E-n017-fitzharding-lean-report", unrelated["id"]]
+        ),
+    )
+    assert check_results.main() == 1
+    assert (
+        "T-154: kind is formalization, and no cited evidence of its own"
+        in capsys.readouterr().out
+    )
+
+
+def test_second_proof_conclusion_matches_the_target_and_every_case() -> None:
+    record = {
+        "id": "T-999",
+        "kind": "formalization",
+        "proves_kind": "lower-bound",
+        "headline": "A second lower bound",
+        "claim": "T-998 proved again.",
+    }
+    evidence = [
+        {
+            "id": "E-own",
+            "claim": "lower-bound",
+            "scope": {"n_values": [17, 18]},
+            "reported_method": check_results.FORMAL_METHOD,
+        }
+    ]
+    scopes = {"T-999": {17, 18}, "T-998": {17, 18}}
+    target = {"T-998": {"kind": "lower-bound"}}
+    assert check_results.kind_problems(record, evidence, scopes, records=target) == []
+    for incompatible in [
+        {"kind": "optimality"},
+        {"kind": "formalization", "proves_kind": "optimality"},
+    ]:
+        assert any(
+            "proves_kind does not match" in issue
+            for issue in check_results.kind_problems(
+                record, evidence, scopes, records={"T-998": incompatible}
+            )
+        )
+    target["T-998"] = {"kind": "simplification", "proves_kind": "lower-bound"}
+    assert check_results.kind_problems(record, evidence, scopes, records=target) == []
+    scopes["T-998"] = {17}
+    assert any(
+        "every claimed case" in issue
+        for issue in check_results.kind_problems(record, evidence, scopes, records=target)
+    )
+    evidence[0]["scope"] = {"n_values": [17]}
+    assert any(
+        "no cited evidence of its own" in issue
+        for issue in check_results.kind_problems(record, evidence, scopes, records=target)
+    )
+
+
+def test_registration_backfill_preserves_second_proof_dates_and_is_idempotent() -> None:
+    text = (
+        "results:\n  - id: T-001\n    kind: formalization\n"
+        "    proves_kind: optimality\n    registered: '2026-10-13'\n"
+        "  - id: T-002\n    kind: simplification\n"
+        "    proves_kind: lower-bound\n    claim: a shorter proof\n"
+    )
+    dates = {"T-001": "x", "T-002": "2026-10-14"}
+    wanted = text.replace(
+        "    claim: a shorter proof\n",
+        "    registered: '2026-10-14'\n    claim: a shorter proof\n",
+    )
+    assert backfill_result_registration.insert_dates(text, dates) == wanted
+    assert backfill_result_registration.insert_dates(wanted, dates) == wanted

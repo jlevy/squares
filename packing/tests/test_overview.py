@@ -3404,8 +3404,14 @@ def test_every_result_shows_its_status_and_its_place_on_the_frontier(
     shown = overview_sections.supersession_marks(before)
     assert f"{t082} (reported)" in shown
     assert html.unescape(re.sub(r"<[^>]+>", "", shown)) == reported.words()
-    for second in ("T-054", "T-055"):
-        assert by_id[second].record["kind"] == "simplification"
+    # A second proof says so by its kind, a simplification or, since the owner's decision
+    # of 13 October 2026, a formalization (T-154), and draws no standing chip.
+    for second, kind in (
+        ("T-054", "simplification"),
+        ("T-055", "simplification"),
+        ("T-154", "formalization"),
+    ):
+        assert by_id[second].record["kind"] == kind, second
         assert "second certificate" not in _row(results, second), second
     for other in render_recent_results.STANDINGS:
         assert "data-tone" not in overview_sections.standing_chip(other), other
@@ -6217,11 +6223,13 @@ def test_the_filter_bar_is_one_helpers_and_reads_the_whole_register(
     assert set(re.findall(r'<option value="([^"]+)"', statuses[1])) == {
         result.status for result in overview.results
     }
-    # Kind offers the kinds the register holds, in the rubric's order and words.
+    # Kind offers the kinds the register holds, in the rubric's order and words: since 13
+    # October 2026 formalization (T-154), straight after simplification.
     kinds = re.search(r'<label>Kind <select data-filter="kind">(.*?)</select>', full)
     assert kinds
     held = {result.record["kind"] for result in overview.results}
-    assert re.findall(r'<option value="([^"]*)"[^>]*>([^<]*)</option>', kinds[1]) == [
+    offered = re.findall(r'<option value="([^"]*)"[^>]*>([^<]*)</option>', kinds[1])
+    assert offered == [
         ("", "All"),
         *(
             (kind, check_results.kind_label(kind))
@@ -6229,6 +6237,9 @@ def test_the_filter_bar_is_one_helpers_and_reads_the_whole_register(
             if kind in held
         ),
     ]
+    values = [value for value, _ in offered]
+    assert ("formalization", "formalization") in offered
+    assert values.index("formalization") == values.index("simplification") + 1
     assert f' min="1" max="{max(overview.cases)}" ' in full
     assert 'data-bound="age" min="0" placeholder="any"> days</label>' in full
     assert 'data-bound="age" min="0" placeholder="any" value="180"> days</label>' in part

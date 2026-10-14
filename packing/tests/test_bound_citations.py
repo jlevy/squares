@@ -925,7 +925,7 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     101: (
         ("Friedman & Ellsworth, Squares in Squares (reported)", "external", "reported"),
         (
-            "wand125 after Tokoharu, Levy et al. 2026, GitHub (confirmed T-080)",
+            "wand125 after Tokoharu, Levy et al. 2026 (confirmed T-073, T-080)",
             "external",
             "verified",
         ),
@@ -1057,7 +1057,7 @@ RECORDED_LINKS: dict[tuple[int, str], tuple[list[str], list[str]]] = {
     # here since 2026-10-06. n = 101 stood here until its linear certificate's replay was
     # recorded (T-080) on 3 October.
     (106, "lower"): (["T-083"], ["T-083"]),
-    (101, "lower"): (["T-080"], ["T-080"]),
+    (101, "lower"): (["T-073", "T-080"], ["T-073", "T-080"]),
     # This project's own bound, established rather than confirmed, was T-030's until
     # 2026-10-02 (`test_a_novel_first_party_bound_cites_this_project_and_its_result` keeps
     # that shape); then wand125's rectangle bound, which T-045 replays, until 2026-10-05;

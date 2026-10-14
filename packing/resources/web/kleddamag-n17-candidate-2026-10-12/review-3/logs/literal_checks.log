@@ -1,0 +1,196 @@
+delta = 469/2000000  physical centre box (Fraction(1000469, 2000000), Fraction(8351531, 2000000))
+OK   physical centre box equals [1000469/2000000, 8351531/2000000] (P054)
+OK   rho^2 + 2 rho - 1 = 309449/250000000000 > 0, so 2 atan(rho) > pi/4 (P040, P050)
+OK   marker hexagon bounding-box diameter^2 = 493/1250 (= 493/1250 claimed, P040)
+OK   marker hexagon diameter^2 = 9437/31250 < 1
+OK   marker hexagon x-range symmetric about U/2 (reflection-invariant, P040/P047)
+OK   marker hexagon is invariant under x -> U - x as a point set
+OK   L_3's marker M is the half-marker: gate [0, rho]
+OK   FRAME_0506 symmetry mirror_x
+OK   FRAME_1114 symmetry mirror_x
+OK   FRAME_0917 symmetry mirror_x
+OK   frame bounds 137/8, 137/8, 145/8 (P039)
+OK   FRAME_MARKER: orbit symmetry, bound 17, threshold 0 (P039)
+OK   FRAME_MARKER class is the hexagon with all directions
+OK   FRAME_0506 thresholds 5/4 (BOX) and 7/8 (W0/E0)
+OK   FRAME_0506 all gates are all-direction [-rho, rho]
+OK   FRAME_0506: high union and low union strictly disjoint (q = 0 in P041)
+OK   FRAME_0506 BOX contains the marker hexagon (so the marker occupant counts in m)
+OK   FRAME_1114 thresholds 5/4 (HEX) and 7/8 (IW/IE)
+OK   FRAME_1114: high union and low union strictly disjoint
+OK   FRAME_1114 HEX equals the marker hexagon
+OK   FRAME_0917 thresholds: HEX, BONUS_1114, BONUS_0506 at 5/4; L9/L17 union at 7/8
+OK   BONUS_0506 (with mirror) equals FRAME_0506's low union (with mirror) as polygons
+OK   BONUS_1114 (with mirror) equals FRAME_1114's low union (with mirror) as polygons
+OK   FRAME_0917 HEX equals the marker hexagon
+OK   FRAME_0917: HEX, BONUS_1114, BONUS_0506 pairwise strictly disjoint (h >= 1+2+2)
+OK   FRAME_0917: high union strictly disjoint from V = L9 u L17 (12 separations claimed)
+OK   L9 = mirror of T_region17 = [-131/250,4501/5000]x[24137/10000,29637/10000] (P042)
+OK   L9 and L17 strictly disjoint
+OK   L9 clipped to the physical box: diameter^2 = 1849889604761/4000000000000 <= 11566501/25000000 < 1
+OK   L17 clipped to the physical box: diameter^2 = 1849889604761/4000000000000 <= 11566501/25000000 < 1
+OK   17 + m/4 - t/8 < 137/8 with m >= 1 forces t >= 2m (P041)
+OK   17 + h/4 - N/8 < 145/8 with h >= 5 forces N >= 2 (P041)
+OK   with N = 2 the same inequality forces h = 5 exactly (P041)
+OK   KEY_W: bound 20, half-marker at threshold 4
+OK   KEY_W low union: threshold 0, three slots
+OK   KEY_W slot 1 = L9 x [30651/100000, 44941/100000] (P049)
+OK   KEY_W slots 2, 3 are wall slots (x <= 53/100): off-wall only slot 1 can hold the L9 parent
+OK   only the identity lift of slot 1's gate meets the canonical theta9 in [0, pi/2): +pi/2 lift starts above tan-half 1, -pi/2 lift ends below 0
+OK   lower exit end 61301/200000 is below the KEY_W gate by exactly 1/200000 (P053)
+OK   high atom t9 > 44941/100000 excluded; 44941/100000 < 1
+OK   T9 trigger slot: off-wall L9 part x [-408817/1000000, 61301/200000]
+OK   +pi/2 lift of -408817/1000000 is exactly 591183/1408817: the open gate is (61301/200000, 591183/1408817) (P052)
+OK   gate upper end 591183/1408817 < 44941/100000: JPA interval nonempty
+OK   C_1 escape union X has 9 slots
+OK   X: the two angular exits on the whole L9: [0,613/2000] and [-5803/14197,0]
+OK   lower exit gap: 61301/200000 - 613/2000 = 1/200000 (P057)
+OK   upper quarter-turn gap: lift(-5803/14197) = 4197/10000; minus 591183/1408817 = 974949/14088170000 > 0 (P057 prints 974949/14197000000; equal? False)
+OK   X: the recut AQ wall-pose slot [613/2000, 4197/10000] (P055/PROOF_BRIDGE_V2 note)
+OK   X: six signed ungated arms [1/20,rho], [-rho,-1/20] on the whole coarse regions 3, 15, 17
+OK   C_1: same X union, bound 20, M threshold 4, other classes threshold 0
+OK   C_2: same X union, bound 20, M threshold 4, other classes threshold 0
+OK   C_5: same X union, bound 20, M threshold 4, other classes threshold 0
+OK   C_6: same X union, bound 20, M threshold 4, other classes threshold 0
+OK   C_10: same X union, bound 20, M threshold 4, other classes threshold 0
+OK   C_11: same X union, bound 20, M threshold 4, other classes threshold 0
+OK   C_12: same X union, bound 20, M threshold 4, other classes threshold 0
+OK   C_13: same X union, bound 20, M threshold 4, other classes threshold 0
+OK   C_14: same X union, bound 20, M threshold 4, other classes threshold 0
+OK   C_16: same X union, bound 20, M threshold 4, other classes threshold 0
+OK   L_3: AQ = [-131/250,53/100]x[24137/10000,13/5], all directions, threshold 0
+OK   L_3: bound 20, half-marker threshold 4
+OK   L_3: S_3 all directions, threshold 0
+OK   L_4: AQ = [-131/250,53/100]x[24137/10000,13/5], all directions, threshold 0
+OK   L_4: bound 20, half-marker threshold 4
+OK   L_4: S_4 all directions, threshold 0
+OK   L_15: AQ = [-131/250,53/100]x[24137/10000,13/5], all directions, threshold 0
+OK   L_15: bound 20, half-marker threshold 4
+OK   L_15: S_15 all directions, threshold 0
+OK   L_17: AQ = [-131/250,53/100]x[24137/10000,13/5], all directions, threshold 0
+OK   L_17: bound 20, half-marker threshold 4
+OK   L_17: S_17 all directions, threshold 0
+OK   AQ is contained in L9 and has x <= 53/100 (empty off-wall, P054)
+OK   WC = wall column part of L9 (x <= 53/100): empty off-wall
+OK   S_3 clipped diameter^2 = 1097067164761/4000000000000 (claimed 1097067164761/4000000000000) < 1 (P054)
+OK   S_15 clipped diameter^2 = 799624844761/4000000000000 (claimed 799624844761/4000000000000) < 1 (P054)
+OK   S_17 clipped diameter^2 = 1059571044761/4000000000000 (claimed 1059571044761/4000000000000) < 1 (P054)
+OK   S_4 clipped diameter^2 = 1249531044761/4000000000000 < 1
+OK   S_3 and S_15 disjoint
+OK   S_3 and S_17 disjoint
+OK   S_3 disjoint from the marker and from L9
+OK   S_15 and S_17 disjoint
+OK   S_15 disjoint from the marker and from L9
+OK   S_17 disjoint from the marker and from L9
+OK   S17 lies in the frame region L17 (P054)
+OK   clipped S_3 lies in clipped coarse region 3 (P055)
+OK   clipped S_15 lies in clipped coarse region 15 (P055)
+OK   clipped S_17 lies in clipped coarse region 17 (P055)
+OK   clipped coarse 17 diameter^2 = 1851391155161/4000000000000 (claimed 1851391155161/4e12) < 1
+OK   clipped frame L17 lies in clipped coarse 17 (P055)
+OK   coarse 17 differs from frame L17 by -469/1000000 in x (P055)
+OK   region 3: w = width = 529/750, H = top - delta = 2821531/2000000 (P066)
+OK   region 3: quartic identity (1+u^2)^2 [1 - aw - bH + b(a+b)/2] = P(u) holds (random exact tests)
+OK   region 3: all Bernstein coefficients on 128 subintervals positive; minimum 634043429/125829120000 (claimed 634043429/125829120000)
+OK   region 3: minimum Bernstein coefficient equals the claimed value
+OK   region 3: P > 0 on a grid of 4097 points of [0,1]
+OK   region 15: w = width = 3427/5000, H = (U - delta) - bottom = 2859531/2000000 (P066)
+OK   region 15: quartic identity (1+u^2)^2 [1 - aw - bH + b(a+b)/2] = P(u) holds (random exact tests)
+OK   region 15: all Bernstein coefficients on 128 subintervals positive; minimum 43535731167/8388608000000 (claimed 43535731167/8388608000000)
+OK   region 15: minimum Bernstein coefficient equals the claimed value
+OK   region 15: P > 0 on a grid of 4097 points of [0,1]
+OK   cos|theta|+sin|theta| at |theta| = 2 atan(31/1000) exceeds 53/50: a square in x >= 0 with centre x < 53/100 has |theta| < 2 atan(31/1000)
+OK   gated label 9: min over the gate ends of (cos+sin)/2 - p9x = -0.00989657012635931 > -9897/10^6 (P079)
+OK   E07A: all-direction marker hexagon at threshold 4, bound 20
+OK   literal C7 target equals the E07A target, gate +-751411/10^7
+OK   reflected C7 target lies inside the literal C8 target with the same symmetric gate
+OK   C8 upper x end exceeds the reflected target by 3/125
+OK   C7 and C8 x-projections separated by 8189/2500 > 1: distinct parents
+OK   E07A marker is the hexagon (reflection-invariant)
+OK   JG: diameter^2 of marker hexagon u C12 target = 0.3952979177669444 < 3953/10000 (P078)
+OK   PS PB12: diameter^2 of marker u target12 = 0.301984 <= 9437/31250 (P045)
+OK   Q12 QB12: diameter^2 of marker u target12 = 0.301984 <= 9437/31250 (P045)
+OK   PW12 HULL12: diameter^2 of marker u target12 = 0.301984 <= 9437/31250 (P045)
+OK   Q_1 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_2 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_5 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_6 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_7 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_8 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_10 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_11 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_12 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_13 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_14 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_16 trigger = wall column below the cut, all directions, threshold 4, bound 23
+OK   Q_3 trigger = AQ (y up to 13/5), all directions, threshold 4
+OK   Q_4 trigger = AQ (y up to 13/5), all directions, threshold 4
+OK   Q_15 trigger = AQ (y up to 13/5), all directions, threshold 4
+OK   Q_17 trigger = AQ (y up to 13/5), all directions, threshold 4
+OK   PW_1 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_2 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_5 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_6 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_7 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_8 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_10 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_11 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_12 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_13 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_14 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   PW_16 trigger = wall column above the cut, all directions, threshold 4, bound 23
+OK   SL11_T020 trigger = slab [129/50, 13/5] of the wall column, threshold 4, bound 23
+OK   CLASS_PSSW37_L11_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSSW37_L11_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L01_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L01_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L02_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L02_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L05_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L05_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L06_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L06_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L07_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L07_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L08_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L08_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L10_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L10_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L12_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L12_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L13_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L13_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L14_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L14_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L16_T03: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSS_L16_T15: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSW37_L11_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PSW37_L11_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L01_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L01_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L02_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L02_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L05_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L05_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L06_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L06_T17_ENDm_H4T4: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L06_T17_ENDp_H4T4: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L07_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L07_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L08_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L08_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L10_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L10_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L12_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L12_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L13_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L13_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L14_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L14_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L16_T09: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L16_T17: bound 23; high = M (half marker) and one trigger at 4; low = target and WC at 0
+OK   CLASS_PS_L06_T17_ENDm_H4T4: trigger arm (Fraction(-207107, 500000), Fraction(-1, 20)) on the whole coarse 17 (P069)
+OK   CLASS_PS_L06_T17_ENDp_H4T4: trigger arm (Fraction(1, 20), Fraction(207107, 500000)) on the whole coarse 17 (P069)
+OK   case partition: on all 15000 product atoms exactly one of the 13 literal predicates holds and it is the case of my own decision function
+
+FAILURES: 0

@@ -8786,7 +8786,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-02'
-  lastmod: '2026-10-02'
+  lastmod: '2026-10-14'
   status: live
   identity:
     kind: lower-bound
@@ -8808,6 +8808,7 @@ urls:
     - E-n083-wand125-linear-935-report
     - E-n083-wand125-linear-935-source-replay
     - E-n101-wand125-linear-1028-report
+    - E-n101-wand125-linear-1028-source-replay
     artifacts:
     - packing/resources/web/wand125-linear-certificates-2026-10-02/README.md
     - packing/resources/web/wand125-linear-certificates-2026-10-02/square-packing-bounds/certificates/mixed_n101_L1028/README.md
@@ -8817,6 +8818,39 @@ urls:
     - packing/resources/web/wand125-linear-certificates-2026-10-02/receipts/n83/merged.json
     - packing/resources/web/wand125-linear-certificates-2026-10-02/receipts/n101/merged.json
     - packing/devtools/audit_wand125_linear.py
+  amendments:
+  - date: '2026-10-14'
+    reason: C1's claim-wide coverage check adds the already retained n = 101 to 105 complete replay
+      cited by T-080 to T-073 as well; the bound, scope and V3/C3 status are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 83
+        - 101
+        - 102
+        - 103
+        - 104
+        - 105
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 linear certificates 2026-10-02]'
+        published: '2026-10-02'
+      builds_on: null
+      evidence:
+      - E-n083-wand125-linear-935-report
+      - E-n083-wand125-linear-935-source-replay
+      - E-n101-wand125-linear-1028-report
+      artifacts:
+      - packing/resources/web/wand125-linear-certificates-2026-10-02/README.md
+      - packing/resources/web/wand125-linear-certificates-2026-10-02/square-packing-bounds/certificates/mixed_n101_L1028/README.md
+      - packing/resources/web/wand125-linear-certificates-2026-10-02/square-packing-bounds/certificates/mixed_n83_L935/README.md
+      - packing/resources/web/wand125-linear-certificates-2026-10-02/square-packing-bounds/certificates/mixed_n101_L1028/code/unified_linear_verify.cpp
+      - packing/resources/web/wand125-linear-certificates-2026-10-02/receipts/linear-audit.json
+      - packing/resources/web/wand125-linear-certificates-2026-10-02/receipts/n83/merged.json
+      - packing/resources/web/wand125-linear-certificates-2026-10-02/receipts/n101/merged.json
+      - packing/devtools/audit_wand125_linear.py
 - path: result/t-074.html
   canonical: result/t-074.html
   kind: result
@@ -13101,10 +13135,10 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-13'
+  lastmod: '2026-10-14'
   status: live
   identity:
-    kind: simplification
+    kind: formalization
     scope:
       n_values:
       - 17
@@ -13129,6 +13163,37 @@ urls:
     - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/cover-comparison.json
     - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/closures.json
     - docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
+  amendments:
+  - date: '2026-10-14'
+    reason: Owner's decision of 13 October 2026 (think-8e0p) moves T-154, Fitzharding's Lean 4 proof
+      of T-153's value by a route of its own, from simplification to the new kind formalization; no
+      change to the claim's statement, scope, evidence, status or bound.
+    previous:
+      kind: simplification
+      scope:
+        n_values:
+        - 17
+      established: null
+      attribution:
+        source_keys:
+        - '[Fitzharding n17 Lean 2026]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-n017-fitzharding-lean-report
+      artifacts:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/README.md
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/PackingStatement.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/EndpointGeometry.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/EndpointRootData.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/clean-build-receipt.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/Square17Optimality.log.gz
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/source-consistency.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/endpoint-comparison.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/cover-comparison.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/closures.json
+      - docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
 - path: result/t-155.html
   canonical: result/t-155.html
   kind: result

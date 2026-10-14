@@ -1,0 +1,49 @@
+OK   file: a header line and one node line, no empty line
+OK   schema wx-cert-3
+OK   packing_sha256 is the SHA-256 of upper-packing-certificate.json
+OK   header Sref equals the file's side
+OK   labels = 17 (JSON integer)
+OK   4 <= S_floor <= Sref
+OK   header keys
+OK   root is the one node; id a non-empty string
+OK   node keys
+OK   header alpha ranges
+OK   node data: lo <= hi, S_lo <= S_hi
+OK   node data: cos P^- > 0, cos P^+ > 0, sin P^- <= sin P^+
+OK   root: parent null, empty assumption list
+OK   root: S_lo <= S_floor and S_hi >= Sref
+OK   root box contains the window box
+OK   ROOT CONTAINS WINDOW (section 8, with the window's centres): cos Ab^+- > 0, sin Ab^+ >= alpha, sin Ab^- <= -alpha
+OK   (info) the root centres equal the window centres
+OK   one round
+OK   round keys
+OK   start store not EMPTY (box, side, arcs; no rarc, no cuts)
+OK   every declaration's precondition holds on the start store (opt: 7 others excluded; ind: unlisted options excluded)
+OK   (R2) no pair has both an opt and an ind declaration
+   opt-available options: [(10, 7, 'b', 1), (10, 9, 'a', -1), (16, 8, 'b', 1)]
+   ind declarations: 33 pairs, 70 indicator variables
+   (info) listed options that are themselves excluded on the store: 0
+OK   one step with keys form/sense/value/centre/terms
+OK   the step is on the form 0 with sense lo
+   ... 5000 terms, Rem has 5727 monomials, 4 s
+   ... 10000 terms, Rem has 11968 monomials, 7 s
+   ... 15000 terms, Rem has 18344 monomials, 13 s
+   ... 20000 terms, Rem has 18485 monomials, 15 s
+   ... 25000 terms, Rem has 24090 monomials, 33 s
+   ... 30000 terms, Rem has 30026 monomials, 60 s
+   ... 35000 terms, Rem has 36359 monomials, 88 s
+   ... 40000 terms, Rem has 42130 monomials, 118 s
+   ... 45000 terms, Rem has 47570 monomials, 147 s
+OK   48209 terms read
+OK   term rules (T1) lambda >= 0 unless circ, (T2) pol only with circ, (T3) guard rule, (T4) availability: violations {'T1': 0, 'T2': 0, 'T3': 0, 'T4': 0}
+   Rem: 42417 monomials; max degree 5
+   L = 531048774625989119516903261554767666330475243900599849930927... (~ 0.0069450121), value = 3455339/552809052 (~ 0.00625051089)
+OK   the 0 step is ACCEPTED: L >= value > 0
+OK   L equals the zero_step_L of the author's stored acceptance report exactly (cross-check)
+OK   store keys; no rarc, no cuts
+OK   every entry of the proposed store is accepted (each is the old entry or looser)
+OK   closure infeasible, evidenced by the accepted 0 step of the evaluated round
+
+CONCLUSION: F(root) is empty: no feasible configuration (17 labels, S = Sref) has every xi in the root box and every a_i in the root arc.
+time 161 s
+FAILURES: 0

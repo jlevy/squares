@@ -1,0 +1,6 @@
+Node3: table entries parsed: 791
+Node3: owners 17, initial rows per owner [256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256], steps 14851 {'cut': 11762, 'kill': 1061, 'split': 808, 'wall': 1210, 'dead': 10}
+Node3: all steps accepted; owners with no live row: [12]; excludes = True
+Node3: final rows per owner [255, 256, 256, 256, 256, 256, 256, 256, 255, 253, 254, 256, 0, 256, 256, 256, 256]
+no bounds found in tree file for Node3
+exit 0

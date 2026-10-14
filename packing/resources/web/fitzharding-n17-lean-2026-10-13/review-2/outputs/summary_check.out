@@ -1,0 +1,6 @@
+summaryTargets order: target0,target1,target2,target3,target4,target5,target6,target7,target8,target9,target10,target11,target12,target13,targ
+table 15399 entries; E rows per owner [1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024]; targets 17, half-planes per target [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]
+failing (owner,row): []
+summaryCheck replayed = True
+failing (owner,row): [(3, 1023)]
+summaryCheck replayed = False

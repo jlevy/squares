@@ -1,0 +1,16 @@
+A. interior cells (16..23) squared diameters:
+   cell 16 interior-SW  diam^2 = 0.742527  <= 29377/31250 ? True
+   cell 17 interior-NW  diam^2 = 0.742527  <= 29377/31250 ? True
+   cell 18 interior-W   diam^2 = 0.940064  <= 29377/31250 ? True
+   cell 19 interior-S   diam^2 = 0.940064  <= 29377/31250 ? True
+   cell 20 interior-N   diam^2 = 0.940064  <= 29377/31250 ? True
+   cell 21 interior-E   diam^2 = 0.940064  <= 29377/31250 ? True
+   cell 22 interior-SE  diam^2 = 0.742527  <= 29377/31250 ? True
+   cell 23 interior-NE  diam^2 = 0.742527  <= 29377/31250 ? True
+B. cover grid 401x401: uncovered points = 0; random 20000: 0; vertices: 0
+   sum of cell areas = 11713929331624477/860959506000000 = 13.605668152788219  (box area 13.512976 )
+C. wall classes (width, depth, start): [(0.79, 0.79, 0.5), (0.7053333333333334, 0.911, 1.29), (0.6853333333333333, 0.93, 1.9953333333333334)]
+   class 0: max separating gap found = -0.018163  (negative => always overlapping)  at ([1.2892542226045087, 1.2868061100758479, 0.5884777668347131], [0.5006084166079405, 0.6982923683000741, 0.5868185001230314])
+   class 1: max separating gap found = -0.017181  (negative => always overlapping)  at ([1.9858732999008064, 1.40918635645497, -0.7275105246852461], [1.2928189300349315, 0.709645454982666, 0.8443080499370835])
+   class 2: max separating gap found = -0.013399  (negative => always overlapping)  at ([1.9959621430801644, 1.4283241435533571, 0.6031054965941999], [2.678263538921718, 0.6973424199569304, -0.9608524517892078])
+exit 0

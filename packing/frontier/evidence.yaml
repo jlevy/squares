@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-13'
+last_reviewed: '2026-10-14'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -1272,7 +1272,7 @@ evidence:
 
   - id: E-wand125-rectangle-source-replay
     claim: lower-bound
-    scope: {n_values: [18, 19, 20, 26, 27, 28, 30, 31, 40, 61, 75, 76, 77, 78]}
+    scope: {n_values: [18, 19, 20, 26, 27, 28, 30, 31, 32, 40, 61, 75, 76, 77, 78]}
     assurance: verified
     method: interval-certified
     performed_by: repository
@@ -1284,7 +1284,7 @@ evidence:
     replay: >-
       wand125_replay_output="$(mktemp -d "${TMPDIR:-/tmp}/wand125-rectangle-replay.XXXXXX")" &&
       .venv/bin/python3 -m devtools.audit_wand125_rectangles --out "$wand125_replay_output"
-      --replay --workers 2 --n 18 --n 19 --n 20 --n 26 --n 27 --n 30 --n 31 --n 40 --n 61 --n 75 --n 78
+      --replay --workers 2 --n 18 --n 19 --n 20 --n 26 --n 27 --n 30 --n 31 --n 32 --n 40 --n 61 --n 75 --n 78
     replay_status: passed
     verifiers: [V-tokoharu-verify-cpp, V-audit-wand125-rectangles]
     proof:
@@ -1316,11 +1316,11 @@ evidence:
         to the pinned n; r = 0 runs as one unpartitioned process) affect no
         registration.
     limitations: >-
-      The scope lists the counts whose verified lower bound this entry carries: each
+      The scope lists every count whose certificate passed the complete replay: each
       is a count whose own standing certificate passed the complete 201-direction
       replay, or a larger count reached by monotonicity from one. The replay command
       names the replayed certificates. The n32 certificate's complete replay also
-      passed and its receipt is retained, but n32 is outside the scope: Evan Daniel's
+      passed and its receipt is retained, supporting T-045 even though Evan Daniel's
       separately registered s(32) = 6 supersedes 119/20 there. The first-party exact preflight regenerates
       every checker input from its candidate, requires the SHA-256 the upstream run
       recorded, and checks orbit normalization, the exact total mass, the net and
@@ -31709,8 +31709,11 @@ evidence:
       (E-n017-overbeck-capture-sample-replay, E-n017-overbeck-tree-sample-replay); 34 rows
       of six statements decided again by an independently written checker
       (E-n017-overbeck-capture-independent-sample); and the statement's root and L, isolated
-      independently (E-n017-overbeck-statement-root-independent). Every one agrees with the
-      source. The statement's polynomials, isolating rectangle and side map are exactly this
+      independently (E-n017-overbeck-statement-root-independent). On 13 and 14 October the
+      second and third reviews' own programs decided the normalized 52-row gate, the root,
+      the upper construction, the admission, the literal facts and the hand-overs in full,
+      and the tree JQ, one of 13 (E-n017-overbeck-gate-review2 and the
+      E-n017-overbeck-*-review3 entries). Every one agrees with the source. The statement's polynomials, isolating rectangle and side map are exactly this
       repository's H-255 chart (exp-237), so its upper half is the certified endpoint
       E-n017-certified-endpoint. No licence for reuse: the packet keeps digests, receipts
       and derived facts only.
@@ -31718,8 +31721,10 @@ evidence:
       kind: mathematics
       detail: >-
         Replay here all 98 capture statements and the ten trees not yet replayed, each with a
-        mutated-input control, and have the normalized 52-row gate of G20S_PHYSICAL read,
-        before the verified lower bound or the case status moves.
+        mutated-input control, before the verified lower bound or the case status moves. The
+        normalized 52-row gate of G20S_PHYSICAL, which this blocker also asked to have read,
+        was read and re-derived by the second review on 13 October
+        (E-n017-overbeck-gate-review2).
     source_reviewed: '2026-10-12'
 
   - id: E-n017-overbeck-candidate-check-py-replay
@@ -31785,6 +31790,12 @@ evidence:
       stored rows.
     replay_status: passed
     verifiers: [V-overbeck-n17-capture-checkers]
+    independence:
+      coverage:
+        extent: sample
+        unit: capture rows per checker, no statement whole
+        checked: 34
+        of: 1728000
     limitations: >-
       Run here by lane K3 on 12 October 2026 on a shared 4-core Linux x86_64 container,
       CPython 3.12.3 with numpy 2.0.2, numba 0.60.0 and SymPy 1.14.0, and Node.js v22.22.0:
@@ -31822,6 +31833,27 @@ evidence:
       C_10 row 2321 the row must fail.
     replay_status: passed
     verifiers: [V-k3-n17-capture-row-checker]
+    independence:
+      coverage:
+        extent: sample
+        unit: capture rows, no statement whole
+        checked: 34
+        of: 1728000
+      read: [mathematics, proof-text, specification, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: not recorded
+          setting: lane K3; system family, tier and reasoning setting not retained
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: null
+        separate_code: true
+        note: >-
+          The retained module records the read scope and that no producer sweep code
+          was read or imported. K3's system family and prompt separation are not
+          recorded, so authorship diversity is unknown.
     limitations: >-
       Run here by lane K3 on 12 October 2026 under CPython 3.14.7 in pure Fraction and
       integer arithmetic: 34 rows of six statements (C_10, CLASS_PS_L06_T17_ENDm_H4T4, Q_13,
@@ -31863,6 +31895,12 @@ evidence:
       second-execution report once paths and times are dropped.
     replay_status: passed
     verifiers: [V-overbeck-n17-tree-checkers]
+    independence:
+      coverage:
+        extent: sample
+        unit: tree certificates
+        checked: 3
+        of: 13
     limitations: >-
       Run here by lane K3 on 12 October 2026 on the host of
       E-n017-overbeck-capture-sample-replay: three of the 13 trees, JQ (one node), JPG17m_v5
@@ -32025,7 +32063,11 @@ evidence:
       textual match a comment, with generated-sources.tar.gz at the size and SHA-256
       manifest.json gives (receipts/closures.json); by the review, the statement, the
       trust boundary and that GitHub's asset digest for generated-sources.tar.gz is
-      manifest.json's. The full
+      manifest.json's; and by the second review's own programs, kept in the packet's
+      review-2/, the census and the classifier, the 93-box dual certificate and the
+      endpoint's frames in full, the eight interior cells' capacities, and ten of the 13,343
+      native_decide facts, a sample (the E-n017-fitzharding-*-review2 entries, which the case
+      record cites). The full
       build was not attempted: this host has 4 cores, 15 GB of memory and 18 GB of free disk,
       which do not hold the archives, the expanded sources, the Mathlib cache and the build
       outputs together (think-r109). No module was elaborated here (think-s7s4), and two of
@@ -32035,6 +32077,492 @@ evidence:
       the proof's validity does not need them.
     source_reviewed: '2026-10-13'
 
+  - id: E-n017-fitzharding-native-facts-review2
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components: [HalfPlaneFast, CaptureRunFast, CaptureTableFast, CaptureSummaryFast]
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n17 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/README.md
+    replay: >-
+      From packing/, with CLONE a checkout of ofitzharding/sq17-lean at
+      e6ee548090dc1dbf938ecf8590481de837a6a454 (devtools.acquire_source
+      fitzharding-n17-lean-2026-10-13 --checkout CLONE) and X the members of release
+      v1.0.0's generated-sources.tar.gz, unpacked from the archive with the size and SHA-256
+      manifest.json gives, run the fast_replay.py, chunk_replay.py, table_check.py and
+      summary_check.py commands of
+      resources/web/fitzharding-n17-lean-2026-10-13/review-2/README.md with
+      .venv/bin/python3 -I -B. Each run must print what its file in review-2/outputs/ holds:
+      excludes = True for T1528's Node3; every step accepted and R == E exactly for the six
+      chunks; freshCheck 44 replayed = True for the two tables; summaryCheck replayed = True,
+      and False with --perturb.
+    replay_status: passed
+    verifiers: [V-sq17-review2-trace-checker]
+    independence:
+      coverage:
+        extent: sample
+        unit: >-
+          native_decide facts of the theorem's axiom report: excludes on one node of the
+          three branch trees (T1528's Node3, 14,851 steps), runToCheck on 6 of the 273 chunk
+          runs (Neighbour329 chunks 0000, 0050 and 0107 of 108; CaptureOpen chunks 0000,
+          0080 and 0164 of 165), freshCheck 44 on two capture tables, and summaryCheck on the
+          terminal capture state over all 17 x 1,024 rows
+        checked: 10
+        of: 13343
+    limitations: >-
+      Run here on 13 October 2026 by the second review of the Lean proof, the
+      mathematical-correctness lane, on copies of the generated files read as data under
+      Python 3.14.7 in exact integers and fractions: every step accepted in the recorded
+      order, every final state equal to the declared one, the node's excludes true, both
+      tables' fresh entries passing at degree 44, and every summary row passing. Three
+      controls were refused: one integer of Neighbour329 chunk 0000's declared end state
+      changed by one, one cut offset lowered by 10^30 (rejected at step 868), and one
+      summary target lowered by 10^-12 (failing at owner 3, row 1023); the first two ran
+      on edited copies the lane did not keep. The checker is a Python transcription of the
+      Lean definitions of HalfPlaneFast, CaptureRunFast, CaptureTableFast and
+      CaptureSummaryFast, written after reading them: it re-evaluates the same definitions
+      a second way, so it tests the compiled evaluator, the native_decide trust boundary,
+      on these ten facts and not the definitions, whose soundness lemmas the review read.
+      A sample: 10 of 13,343 facts. None of the 2,776 ordinary traces, the 35 pattern
+      traces, the other two trees or the node's own table check was replayed.
+    source_reviewed: '2026-10-13'
+
+  - id: E-n017-fitzharding-census-review2
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n17 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/outputs/census_check.out
+    replay: >-
+      From packing/, with CLONE and X as in E-n017-fitzharding-native-facts-review2, run
+      .venv/bin/python3 -I -B
+      resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/census_check.py CLONE
+      X. It must print what review-2/outputs/census_check.out holds: the permutation table
+      the D4 action, 43,593 orbits by Burnside and by enumeration, 346,104 distinct rows
+      equal to all 7-subsets of the 24 cells, the classifier mirroring the representative
+      tree with 0 violations, and exit 0.
+    replay_status: passed
+    verifiers: [V-sq17-review2-census]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the census and the classifier: the D4 tables, the 43,593 representatives, the
+          346,104 rows in 338 chunks, the 35 patterns, the 2,781 full rosters, every
+          representative's routing, and the rosters of the four neighbour cases and the
+          capture case
+    limitations: >-
+      Run here on 13 October 2026 by the second review of the Lean proof under Python
+      3.14.7: the eight permutation tables are the geometric action of D4 on the cells'
+      vertices; the orbit count is 43,593 by Burnside and by enumeration, one per tree node;
+      the rows are all of the 7-subsets, with increasing tags, each mapping to its
+      representative; 40,812 representatives are pattern-covered and 2,781 full; and the
+      rosters 209, 1158, 1161, 1193 and 204 equal those the Lean dispatchers bind. The
+      Lean proves the same facts by decide +kernel, which this does not replace; it
+      decides the census, not the traces that exclude its cases.
+    source_reviewed: '2026-10-13'
+
+  - id: E-n017-fitzharding-cell-geometry-review2
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n17 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/outputs/geometry_checks.out
+    replay: >-
+      From packing/, with CLONE as in E-n017-fitzharding-native-facts-review2, run
+      .venv/bin/python3 -I -B
+      resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/geometry_checks.py
+      CLONE. Every interior cell's squared diameter must be at most 29377/31250, no grid,
+      random or vertex point uncovered, and every wall-class gap found negative; the search
+      is unseeded, so its gaps differ from review-2/outputs/geometry_checks.out.
+    replay_status: passed
+    verifiers: [V-sq17-review2-cell-geometry]
+    independence:
+      coverage:
+        extent: sample
+        unit: >-
+          cells whose capacity of one centre is decided: the eight interior cells, by exact
+          squared diameter; the cover of the box by the 24 cells was only sampled, at 401 x
+          401 grid points, 20,000 random points and every vertex, and the sixteen wall cells'
+          capacity only searched at random in floating point
+        checked: 8
+        of: 24
+    limitations: >-
+      Run here on 13 October 2026 by the second review of the Lean proof: squared
+      diameters 0.742527 for the corner type and 0.940064, exactly 29377/31250, for the side
+      cells, so the bound is tight; no uncovered point; largest separating gaps -0.018163,
+      -0.017181 and -0.013399 in the three wall classes. The grid and the search decide
+      nothing: the Lean proves the cover by its certificate and the wall capacity through
+      the positivity of a quartic and the finite-axis theorem, by decide +kernel.
+    source_reviewed: '2026-10-13'
+
+  - id: E-n017-fitzharding-rigidity-dual-review2
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n17 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/outputs/rigidity_dual_check.out
+    replay: >-
+      From packing/, with CLONE and X as in E-n017-fitzharding-native-facts-review2, run
+      .venv/bin/python3 -I -B
+      resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/rigidity_dual_check.py
+      CLONE X. It must print what review-2/outputs/rigidity_dual_check.out holds: all 93
+      weight checks pass, the worst residual budget 0.199543 at most 1/4, the largest mass
+      at most 12,000, the 93 boxes covering the slider box for all 90 signed directions, and
+      q/4 + 600000 q^2 < q at q = 1e-7.
+    replay_status: passed
+    verifiers: [V-sq17-review2-rigidity-dual]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the local-rigidity dual certificate: the 93 affine weight certificates over the 90
+          signed coordinate directions, their residual budgets and masses, and the cover of
+          the slider box
+    limitations: >-
+      Run here on 13 October 2026 by the second review of the Lean proof, with exact
+      fractions: dense and sparse residuals agree, every certificate's target is the signed
+      unit coordinate of its direction, and the largest mass is
+      131499357511999117439/10995116277760000. It takes the 430 coefficient intervals of
+      LocalRigidityMatrixData as given: their derivation from the contact geometry was read
+      in the Lean, theorem by theorem, and not recomputed. The Lean proves the same checks
+      by decide +kernel.
+    source_reviewed: '2026-10-13'
+
+  - id: E-n017-fitzharding-endpoint-frames-review2
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n17 Lean 2026]'
+    precision: {decimal_digits: 80, rounding: nearest}
+    tolerance: '1e-60'
+    replay: >-
+      From packing/, with CLONE as in E-n017-fitzharding-native-facts-review2, run
+      .venv/bin/python3 -I -B
+      resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/endpoint_check.py
+      CLONE. It must print what review-2/outputs/endpoint_check.out holds: the root within
+      5e-61 of the declared midpoint, L = 4.675530093604550951634111270483146648767, the
+      neighbour frame's slacks 1.0005e-12 and 9.9949e-13, and side_decimal_bounds and
+      side_sharp_bounds holding.
+    replay_status: passed
+    verifiers: [V-sq17-review2-endpoint-frames]
+    independence:
+      coverage:
+        extent: full
+        unit: the endpoint's root and side, and the Lower and Upper margins of the ordinary and neighbour frames
+    limitations: >-
+      Run here on 13 October 2026 by the second review of the Lean proof, at 80 digits in
+      mpmath from a crude start: a numerical cross-check, not a certificate. The endpoint
+      is decided exactly by the Lean's Newton contraction and, here, by
+      V-fitzharding-n17-premise-comparisons (receipts/endpoint-comparison.json). What it
+      adds is the frames: the neighbour and capture frame's side is L + 1.136e-17, and its
+      two conditions hold with slack of about 1e-12, so the thin margin is a frame
+      constant that no step depends on (the review's MR-5).
+    source_reviewed: '2026-10-13'
+
+  - id: E-n017-overbeck-jq-tree-review3
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Overbeck n17 candidate 2026]'
+    certificate: packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/logs/jq_leaf_check.log
+    replay: >-
+      From packing/, with CLONE a checkout of Kleddamag/the-seventeenth-square-candidate at
+      653b9589d0f8a152f01adc56b1d48ba53d49abc3 (devtools.acquire_source
+      kleddamag-n17-candidate-2026-10-12 --checkout CLONE), run .venv/bin/python3 -I -B
+      resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/jq_leaf_check.py
+      CLONE. It must end FAILURES: 0, with the zero step ACCEPTED and L equal to the stored
+      zero_step_L, as review-3/logs/jq_leaf_check.log does; seed_packing_check.py CLONE and
+      spec_lemmas_numeric.py are its premise checks.
+    replay_status: passed
+    verifiers:
+      - V-overbeck-review3-jq-tree-checker
+      - V-overbeck-review3-seed-packing
+      - V-overbeck-review3-spec-lemmas
+    independence:
+      coverage:
+        extent: sample
+        unit: tree certificates of the candidate's step 4, JQ decided in full by a checker that handles one-node trees only
+        checked: 1
+        of: 13
+    limitations: >-
+      Run here on 13 and 14 October 2026 by the third review of the candidate, the
+      mathematical-correctness lane, in exact rationals, 161 s: the root conditions with the
+      window's centres, a non-empty start store, the preconditions of 3 opt and 33 ind
+      declarations, no term rule violated in 48,209 terms, and the centred rule's bound
+      about 0.0069450 at least the value 3455339/552809052, about 0.0062505, so F(root) is
+      empty for JQ; the bound equals the stored zero_step_L to its last digit. Its premise
+      checks: the rational seed is a packing at side R with 14 flush walls and no touching
+      pair, and every lemma of SPEC_v3.0.md held on seeded random instances. A sample: 1 of
+      13 trees. E-n017-overbeck-tree-sample-replay reproduced JQ and two other trees with
+      the producer's code; ten trees have not been run.
+    source_reviewed: '2026-10-14'
+
+  - id: E-n017-overbeck-endpoint-review3
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Overbeck n17 candidate 2026]'
+    certificate: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    replay: >-
+      From packing/, run .venv/bin/python3 -I -B
+      resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_isolation.py.
+      It must report K(X) strictly inside the statement's rectangle, the norm of I - YJ at
+      most 4.985e-11, L = 4.675530093604550951634111270483146648767..., L < R < C < U, R - L
+      - epsilon > 0 and the 20-place bound true, as the review's sections 1 and 8 record.
+    replay_status: passed
+    verifiers: [V-overbeck-review3-root-isolation]
+    independence:
+      coverage:
+        extent: full
+        unit: the statement's isolating rectangle, its unique common zero of F and G, and L to ninety places
+    limitations: >-
+      Run here on 13 October 2026 by the third review of the candidate, in exact rational
+      intervals: the Krawczyk step is on the statement's rectangle itself, not on a box
+      about a Newton point, so it covers the sliver the second review's boxes left out.
+      The lane kept no output of this program; the review's sections 1 and 8 record what
+      it printed. It decides the premise ALGEBRAIC_ENDPOINT, as
+      E-n017-overbeck-statement-root-independent did by another program on 12 October.
+    source_reviewed: '2026-10-14'
+
+  - id: E-n017-overbeck-upper-construction-review3
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Overbeck n17 candidate 2026]'
+    certificate: packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/logs/upper_at_L_check.log
+    replay: >-
+      From packing/, run .venv/bin/python3 -I -B
+      resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/upper_at_L_check.py.
+      It must end FAILURES: 0 with 53 strict and 15 identity walls and 115 strict and 21
+      touching pairs, as review-3/logs/upper_at_L_check.log does.
+    replay_status: passed
+    verifiers: [V-overbeck-review3-upper-at-l]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the upper construction at side L: its 68 wall clearances and 136 pairs, with the 36
+          contacts, 15 walls and 21 pairs, proved by ideal membership modulo F and G
+        checked: 204
+        of: 204
+    limitations: >-
+      Run here on 13 and 14 October 2026 by the third review of the candidate: strict facts
+      by interval arithmetic over its own enclosure of the root, equalities by reducing
+      each numerator to zero modulo a lex Groebner basis of (F, G) of three polynomials of
+      degrees 22, 22 and 23, with every denominator bounded away from zero. The first run
+      counted by corner and by first holding option, 243 strict and 29 zero clearances and
+      114 strict and 22 tangent pairs; the retained program and log are the rerun in the
+      proof text's counting convention. It decides the premise UPPER independently of the
+      author's check_endpoint.py; the case's verified upper bound stays T-065's.
+    source_reviewed: '2026-10-14'
+
+  - id: E-n017-overbeck-admission-review3
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Overbeck n17 candidate 2026]'
+    certificate: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    replay: >-
+      From packing/, with CLONE as in E-n017-overbeck-jq-tree-review3, run
+      .venv/bin/python3 -I -B
+      resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/admission_check.py
+      CLONE. Every root must admit all seventeen labels, the eleven parent profiles must be
+      distinct, and the smallest margin must be exactly 0 at label 1, as the review's
+      sections 2 and 8 record.
+    replay_status: passed
+    verifiers: [V-overbeck-review3-admission]
+    independence:
+      coverage:
+        extent: full
+        unit: the admission of the 11 roots, 17 labels each, and the distinctness of their parent profiles
+        checked: 187
+        of: 187
+    limitations: >-
+      Run here on 13 October 2026 by the third review of the candidate, in its own chart
+      over its own enclosure of L: largest clipped target diameter squared 0.4635 at the
+      wall roots and 0.4395 off the wall, and the smallest arc margin exactly 0, where a
+      closed root-arc end meets a closed gate end, which is sound (its finding 3). It used,
+      for each root and label, the class region the selection names, so it does not
+      decide SELECTOR_LOGIC. The lane kept no output of this program; the review records
+      what it printed.
+    source_reviewed: '2026-10-14'
+
+  - id: E-n017-overbeck-literal-checks-review3
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Overbeck n17 candidate 2026]'
+    certificate: packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/logs/literal_checks.log
+    replay: >-
+      From packing/, with CLONE at 653b9589d0f8a152f01adc56b1d48ba53d49abc3 as in
+      E-n017-overbeck-jq-tree-review3, run
+      .venv/bin/python3 -I -B
+      resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/literal_checks.py
+      CLONE. It must end FAILURES: 0, as the review's section 8 records.
+    replay_status: passed
+    verifiers: [V-overbeck-review3-literal-checks]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the literal geometric facts of the proof text's sections 3 to 6 over the 98
+          capture class files and the case partition: 192 printed literal checks at
+          83 sites, plus one partition check on all 15,000 product atoms
+        checked: 193
+        of: 193
+    limitations: >-
+      Run here on 13 October 2026 by the third review of the candidate, in exact
+      rationals: the frame thresholds, bounds, disjointness and bonus equalities, the
+      clipped diameters of the frame polygons, the counting of P041 and P042, the KEY_W
+      slot and gaps, the 29 wall triggers, the loose and coarse capacities with their
+      quartic by Bernstein coefficients, the C7/C8 transfer and the C12 unions, and the case
+      partition against the source's thirteen predicates. It decides literal facts and
+      not the class-row lemma's rows, which the author's capture checkers decide. The
+      retained copy parses the predicates where the lane's evaluated their text (the
+      packet's review-3/README.md); the original lane kept no output.
+      The retained parser was replayed on 14 October 2026 with Python 3.14.7 at that
+      exact pin, reading only JSON data, with the full stdout in review-3/logs/literal_checks.log:
+      193 printed checks passed, including the partition on all 15,000 product atoms,
+      FAILURES: 0, exit 0. This records the current run's 192 literal checks plus the
+      partition check; the earlier review reported 194 literal checks.
+      The original eval line was not retained, so output equivalence to the lane's
+      program remains unestablished.
+    source_reviewed: '2026-10-14'
+
+  - id: E-n017-overbeck-handovers-review3
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Overbeck n17 candidate 2026]'
+    certificate: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    replay: >-
+      From packing/, with CLONE as in E-n017-overbeck-jq-tree-review3, run
+      .venv/bin/python3 -I -B
+      resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/handover_check.py
+      CLONE. It must end FAILURES: 0, each cut shown necessary, as the review's sections 4
+      and 8 record.
+    replay_status: passed
+    verifiers: [V-overbeck-review3-handovers]
+    independence:
+      coverage:
+        extent: full
+        unit: the three hand-overs of the rigidity step, P092 to P095, between the regions stated in EXPECT_G20S.json, EXPECT_HW.json and JG_exact_v2.json
+        checked: 3
+        of: 3
+    limitations: >-
+      Run here on 13 October 2026 by the third review of the candidate: the JG terminal
+      equals the G20S window; the G20S tube cut by xi_(2,1) <= 0 lies in the HW window and
+      without the cut does not; the HW tube with the same cut lies in the sixteen-square
+      entry and without it does not. It decides the comparisons between the stated regions.
+      It prints fields of the stored G20S and HW acceptance reports for inspection only,
+      without checking their status or comparing their windows to EXPECT; those reports
+      and the trees that close the regions are outside this entry's coverage; G20S, HW and JG have not been run here. The lane kept
+      no output of this program; the review records what it printed.
+    source_reviewed: '2026-10-14'
+
+  - id: E-n017-overbeck-gate-review2
+    claim: derived-structure
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Overbeck n17 candidate 2026]'
+    certificate: packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/RESULTS.txt
+    replay: >-
+      From packing/, with CLONE as in E-n017-overbeck-jq-tree-review3, run bash
+      resources/web/kleddamag-n17-candidate-2026-10-12/review-2/run.sh CLONE; its output must
+      agree with the computed result lines of review-2/RESULTS.txt, in particular
+      geom.py's two Krawczyk boxes inside,
+      identities.py's 52 base-gap identities in the ideal of F and G, check_rows.py's every
+      geometric row implied, and replay.py's final ratios
+      159201934153319/200000000000000 on the stored models and 0.792020707575807 on its own
+      rows.
+    replay_status: passed
+    verifiers:
+      - V-overbeck-review2-row-builder
+      - V-overbeck-review2-groebner-identities
+      - V-overbeck-review2-duality-bounds
+      - V-overbeck-review2-krawczyk-root
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110): the 152 separating
+          options, the 52 base-gap identities, the 52 geometric rows of each of the five
+          stored stopped models, and the chain from B6 through the five stopped rounds,
+          taking the stop cuts as premises stated by PROOF.md P096
+    limitations: >-
+      Run here on 13 October 2026 by the second review of the candidate and kept with
+      run.sh, which reproduced its output on a checkout of the pin the same day (Python
+      3.14.7, SymPy 1.14.0, mpmath 1.3.0). At closeout cmp_file.py was restricted to
+      sibling imports and one certificate argument; the retained output keeps its
+      historical command line. The gate is valid for every core radius up to
+      1/5000 by rows and arithmetic of the review's own, using the producer's multipliers
+      only as hints; it takes P096's stop cuts as premises rather than deriving them,
+      and rests on the domain hypotheses the seventeen finite rounds supply,
+      which were not re-derived, and on the exactness of mpmath's interval arithmetic and
+      SymPy's reduction. Registered on 14 October 2026; before then no evidence entry
+      cited these programs.
+    source_reviewed: '2026-10-13'
   - id: E-regularized-bounds-2026-10-12-exact-decision
     claim: upper-bound
     scope: {n_values: [28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125, 128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293, 294, 296, 298, 299, 300]}
@@ -32078,6 +32606,15 @@ evidence:
       and the case records to each other.
     replay_status: passed
     verifiers: [V-sqpack-verify, V-check-rational-witness-independent, V-register-regularized-bounds]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          retained rational packing views, every wall and every pair decided by both
+          maintained checkers: 1,051,241 pair decisions per checker, with the 177
+          negative-control decisions on the 59 views retained separately
+        checked: 59
+        of: 59
     limitations: >-
       Proves, for each listed count, s(n) at most the exact side of the retained view, by
       deciding the view here, every pair and every wall over Q, by two checkers that share
@@ -32166,6 +32703,15 @@ evidence:
       the case record to each other.
     replay_status: passed
     verifiers: [V-sqpack-verify, V-check-rational-witness-independent, V-register-regularized-bounds]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the retained rational packing view at n = 290, every wall and all 41,905 pairs
+          decided by both maintained checkers; the three negative-control decisions
+          on two distinct mutants are retained separately
+        checked: 1
+        of: 1
     limitations: >-
       Proves s(290) at most the exact side of the retained view,
       70142135623730950488016887242097/4000000000000000000000000000000, by deciding the view

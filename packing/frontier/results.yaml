@@ -4745,6 +4745,7 @@ results:
 
   - id: T-054
     kind: simplification
+    proves_kind: optimality
     registered: '2026-09-29'
     headline: "`s(45) = 7` by a second, point-only route"
     claim: >-
@@ -4817,6 +4818,7 @@ results:
 
   - id: T-055
     kind: simplification
+    proves_kind: optimality
     registered: '2026-09-29'
     headline: "`s(21) = 5` by a point-only route"
     claim: >-
@@ -6836,12 +6838,13 @@ results:
       replay runs the source's C++ checker unchanged: one interval-certified method,
       replayed here, C3. Coverage is decided by that checker alone, which the 2 October
       review read function by function. n = 83's replay entry is cited here; n = 101's
-      is entered once, in T-080, which carries n = 101 to 105 in the verified lane, so a
-      case's citation names one result.
+      is cited here and by T-080, which carries n = 101 to 105 in the verified lane.
+      The same complete replay supports both registered claims.
     evidence:
       - E-n083-wand125-linear-935-report
       - E-n083-wand125-linear-935-source-replay
       - E-n101-wand125-linear-1028-report
+      - E-n101-wand125-linear-1028-source-replay
     reviews:
       - path: docs/project/reviews/review-2026-10-02-wand125-linear-certificates-and-n76.md
         kind: adversarial
@@ -17250,14 +17253,17 @@ results:
       premises in an earlier state and ran a checker of his own on two of the 13 trees, and
       nobody outside has verified the whole.
 
-      Here the argument has been read, with no mathematical defect found in what was read,
-      and parts of the computation have been run, all agreeing with the source: the author's
-      check.py; 34 capture rows and three trees, reproduced with the producer's code; 34
-      capture rows decided again by an independent implementation written from the proof
-      text; and the root, isolated independently. The complete capture recomputation and ten
-      trees have not been run. F, G, the rectangle and the side map are this repository's
-      H-255 chart, so L is the side of the certified endpoint that holds the case's verified
-      upper bound.
+      Here the argument has been read by three separately prompted AI review lanes, with no
+      mathematical defect found in what was read, and parts of the computation have been
+      run, all agreeing with the source: the author's check.py; 34 capture rows and three
+      trees, reproduced with the producer's code; and, by independent implementations, a
+      sample of 34 capture rows and one of the 13 trees, JQ, and in full the root, the
+      normalized 52-row gate of the rigidity step, the upper construction with its
+      contacts, the root admission, the literal facts of the capture step and the
+      hand-overs. The complete capture recomputation and ten trees have not been run.
+
+      F, G, the rectangle and the side map are this repository's H-255 chart, so L is the
+      side of the certified endpoint that holds the case's verified upper bound.
 
       Overbeck,
       [the-seventeenth-square-candidate](https://github.com/Kleddamag/the-seventeenth-square-candidate/tree/653b9589d0f8a152f01adc56b1d48ba53d49abc3),
@@ -17307,7 +17313,9 @@ results:
       (E-n017-overbeck-capture-sample-replay), 34 rows of six statements were decided again
       by an independent implementation (E-n017-overbeck-capture-independent-sample), and a
       sample decides no statement whole. Of the 13 trees, three were reproduced with the
-      producer's code (E-n017-overbeck-tree-sample-replay) and ten were not run.
+      producer's code (E-n017-overbeck-tree-sample-replay) and ten were not run; one of the
+      three, JQ, was also decided again by an independent implementation
+      (E-n017-overbeck-jq-tree-review3), a sample of one tree.
 
       The rigidity stage's finite rounds and contraction ran in the author's check.py
       (E-n017-overbeck-candidate-check-py-replay), which recomputes no capture row and no
@@ -17315,6 +17323,13 @@ results:
       machine-shaped replay that passed on the part it ran, so citing them would make the
       checker derive a higher rung from parts, which this note would then have to set
       aside, as T-081's does; the case record cites them instead.
+
+      The second and third reviews' own programs decided, in full, the normalized 52-row
+      gate (E-n017-overbeck-gate-review2), the root, the upper construction, the root
+      admission, the literal facts of the capture step and the hand-overs (the
+      E-n017-overbeck-*-review3 entries). Each decides a premise or a step other than the
+      capture rows and the ten trees, so they too are on the case record and not cited here
+      (epistemics.md, Every Run's Code Is Kept).
 
       By epistemics.md's predicates: V3 needs, for every load-bearing part, a published or
       audited proof or a machine certificate whose replay passed, and the capture step and
@@ -17372,6 +17387,32 @@ results:
           or exact_restricted.py.
         verdict: accepted
         covers: [T-153]
+      - path: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+        kind: adversarial
+        reviewer: >-
+          an AI agent, the mathematical-correctness review lane of the #557 intake (bead
+          think-0393), a Claude model at the tbd-strong-max tier, reasoning max, prompted
+          separately from the two earlier review lanes and blind to their documents and to
+          T-153's notes until its sections 0 to 9 were written, except that, before writing
+          its findings, it saw the second review's verdict sentence and the list of that
+          review's programs in the packet's README (its section 9)
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-14'
+        scope: >-
+          The statement, the proof text, the fifteen premises and the documents bound to
+          them, the certificate specification SPEC_v3.0.md with the Python tree checker's
+          acceptance paths, and the capture checkers, at 653b9589d. With its own code: the
+          root by an exact Krawczyk step on the statement's rectangle; the packing at side L,
+          every contact by ideal membership; the rational seed; 194 literal checks of the
+          capture step's sections and the case partition; the admission of the eleven
+          roots; the three hand-overs; random tests of every SPEC lemma and of the
+          parallel-pair rows; and the tree JQ decided whole by a checker of its own. It
+          reran no capture row and none of the other twelve trees, did not replay the
+          seventeen finite rounds or the continuation, and did not read the Node tree
+          checker or the selected clauses' alternatives.
+        verdict: accepted
+        covers: [T-153]
     artifacts:
       - packing/resources/web/kleddamag-n17-candidate-2026-10-12/README.md
       - packing/resources/web/kleddamag-n17-candidate-2026-10-12/facts/statement.json
@@ -17391,15 +17432,15 @@ results:
       with the stored receipts; all 13 trees with at least one frozen checker and
       h_report30.py, three of them done; and one mutated-input control per kind, refused.
       That would be reproduction with the producer's code. An independent implementation of
-      the capture sweep, begun on 34 rows, and of the tree checker would be an attribute
-      beside the rung.
+      the capture sweep, begun on 34 rows, and of the tree checker, begun on the one-node
+      tree JQ, would be an attribute beside the rung and not a rung.
 
       V4 and C4 need, on top of V3 and C3, the owner's oversight record naming
-      trust-boundary, certificate-meaning and ai-findings. The second adversarial AI review
-      they also need, by a distinct reviewer whose verdict accepts and who reads the
-      normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110), is on file: the review of 13
-      October read the gate, re-derived it with its own code and accepted, with nine
-      defects, none blocking, for the oversight record to disposition. Rung 5 needs the Lean
+      trust-boundary, certificate-meaning and ai-findings. The adversarial AI reviews they
+      also need are on file: three, by distinct, separately prompted reviewers, all
+      accepting, the second of which read the normalized 52-row gate of G20S_PHYSICAL
+      (PROOF.md P110) and re-derived it with its own code. Their findings, ten, nine and
+      seven, none blocking, are for the oversight record to disposition. Rung 5 needs the Lean
       formalization the source plans and has not started. T-154's Lean proof is separate:
       it proves the same equality by another route and does not formalize this argument.
 
@@ -17462,10 +17503,11 @@ results:
       GitHub's server-side times its repository was public later on 12 October 2026, about
       six hours after this edition's release large-files-v1, and its release v1.0.0 about
       seven and three-quarter hours after it; n-017's priority notes give the times. It is
-      a separate proof that leaves no premise open within its stated trust boundary, not a
-      formalization of this argument, and its source names this candidate as independent
-      and published on 12 October 2026. This entry stays the first report of the value and
-      keeps the case's reported lower bound.
+      a separate proof that leaves no premise open within its stated trust boundary,
+      registered as a formalization: a Lean proof of this value by a route of its own,
+      which does not formalize this argument. Its source names this candidate as
+      independent and published on 12 October 2026. This entry stays the first report of
+      the value and keeps the case's reported lower bound.
 
       The first review lists ten non-blocking defects, among them the ROOT_ADMISSION
       geometry, written only in the proof text and a script comment (KNOWN_ISSUES.md item
@@ -17474,7 +17516,23 @@ results:
       section 8. The second lists nine, none blocking, the largest that nothing in the
       edition rebuilt the normalized model's rows independently of the producer's code,
       and six questions, the fifth withdrawn by its status addendum of 13 October; its
-      programs and their output are in the packet's review-2/.
+      programs and their output are in the packet's review-2/, four of them registered
+      since 14 October with the entry E-n017-overbeck-gate-review2.
+
+      Rungs on 14 October 2026, after the third review (think-0393): nothing moved. T-153
+      holds three accepting adversarial AI reviews by distinct reviewers, which is what
+      rung 4 asks of reviews, but rung 4 also needs V3 and C3, the complete capture
+      recomputation and the ten trees, and the owner's oversight record. The new runs are
+      either samples, one tree of 13, or decide parts other than those two, and are on the
+      case record.
+
+      The third review lists seven findings, none blocking. Three are minor, all of
+      presentation: the ROOT_ADMISSION wall lemma stands only in a script comment, P110
+      states the normalization more briefly than its record, and the admission margins,
+      one exactly zero, are printed nowhere. Four are notes: P057's quarter-turn gap is
+      given in an unnamed chart, SPEC_v3.0.md section 11 names a terminal instance the proof
+      does not use, the evidence boundary, and two tree sizes it could not check. Its four
+      questions go to the author.
 
       T-093 (R071) keeps the case's verified lower bound, 18641771/4000000; this entry holds
       the reported one. The edition carries this repository's exp-237 and exp-238
@@ -17485,13 +17543,14 @@ results:
       title says n=18; the source is n = 17.
 
   - id: T-154
-    kind: simplification
+    kind: formalization
+    proves_kind: optimality
     registered: '2026-10-13'
-    headline: "`s(17) = 4.67553009360455…` by a second route, a Lean 4 proof with no premise left"
+    headline: "`s(17) = 4.67553009360455…` in Lean 4, by a route of its own, with no premise left"
     claim: >-
       `s(17) = 4.67553009360455095163…`, T-153's value L, the side of John Bidwell's 1998
-      packing of seventeen unit squares, proved by a second route: Oscar Fitzharding's Lean
-      4 proof, which does not formalize T-153's argument.
+      packing of seventeen unit squares, proved in Lean 4 by Oscar Fitzharding, by a route of
+      its own rather than by formalizing T-153's argument.
 
       Its theorem, `Sq17.square17_optimality (L : ℝ) : Sq17.HalfPlaneAssembly.PlainPacking L
       ↔ Sq17.EndpointGeometry.side ≤ L`, says that seventeen closed unit squares, each
@@ -17520,10 +17579,14 @@ results:
 
       The source reports a clean rebuild of the 4,951 modules of the theorem's import
       closure from its published sources with Lean 4.34.1, on two Linux machines, with the
-      axiom set matching its own build. Nothing here has repeated that build. The review of
-      13 October read the statement, the endpoint, the trust boundary and the chain to the
-      final theorem, and found no mathematical defect; it did not read the checkers'
-      soundness proofs or the certificates.
+      axiom set matching its own build. Nothing here has repeated that build.
+
+      Two reviews of 13 October, by separately prompted AI lanes, found no mathematical
+      defect. The first read the statement, the endpoint, the trust boundary and the chain
+      to the final theorem. The second read the checkers and their soundness proofs in
+      full, recomputed the census, the interior cells' capacities and the 93-box dual
+      certificate exactly, and re-evaluated ten of the 13,343 native_decide facts with an independent
+      implementation, all agreeing with the source; ten facts are a sample.
 
       Fitzharding,
       [sq17-lean](https://github.com/ofitzharding/sq17-lean/tree/0a7167efa8dcae7fa73855890630fb7e2de550ed),
@@ -17548,11 +17611,12 @@ results:
         premise open, within the trust boundary it states: T-153, public earlier the same
         day by GitHub's times, is a candidate resting on 15 mathematical premises by its own
         statement. n = 17 is, with n = 12, one of the two open cases below n = 18. Its kind
-        is a simplification because the record already holds the value; what it adds is a
-        route whose whole lower half is one proof-assistant build, so a single complete
-        build, here or by a third party and retained here, would carry it to V3 and C3,
-        where T-153 needs its capture recomputation and ten trees replayed. Significance is
-        separate from whether the proof is correct. Proposed for the owner's confirmation.
+        is formalization, a proof-assistant proof of a value the record already holds; what
+        it adds is a route whose whole lower half is one proof-assistant build, so a single
+        complete build, here or by a third party and retained here, would carry it to V3
+        and C3, where T-153 needs its capture recomputation and ten trees replayed.
+        Significance is separate from whether the proof is correct. Proposed for the owner's
+        confirmation.
       scored: '2026-10-13'
       by: Intake of 13 October (think-hcqr), draft for the owner
     novelty: previously-published
@@ -17562,7 +17626,7 @@ results:
     evidence: [E-n017-fitzharding-lean-report]
     composition: >-
       One cited entry, the source's report (E-n017-fitzharding-lean-report), which claims
-      the exact value and carries the review of 13 October as its external_review; it sets
+      the exact value and carries the first review of 13 October as its external_review; it sets
       both rungs. The upper half, a packing at side L, is proved in the Lean without native
       evaluation: endpoint_plainPacking, in PackingStatement, whose 241-module import
       closure holds no native_decide, wraps EndpointPacking's endpoint_packing, whose
@@ -17576,6 +17640,13 @@ results:
       and the exclusion of the 35 patterns, the 2,776 ordinary cases and the four
       neighbouring cases, and the capture trace, rest on the 13,343 native_decide facts. The
       only record of that build is the source's own receipt.
+
+      The second review's own programs decided the census and the classifier, the 93-box
+      dual certificate and the endpoint's frames in full, the eight interior cells'
+      capacities, and ten native_decide facts, a sample. They are evidence on n-017's case
+      record and are not cited here: none is a build of the proof, and each decides a part,
+      so citing them would make the checker derive a rung from parts (epistemics.md, Every
+      Run's Code Is Kept).
 
       By epistemics.md's predicates: V3 needs proof-assistant-checked evidence with a
       certificate, a replay command and a passing replay, and no build of the proof is
@@ -17608,6 +17679,31 @@ results:
           or the two release archives it did not download.
         verdict: accepted
         covers: [T-154]
+      - path: docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md
+        kind: adversarial
+        reviewer: >-
+          an AI agent, the mathematical-correctness review lane of the sq17-lean intake (bead
+          think-32rl), a Claude model at the tbd-strong-max tier, reasoning max, prompted
+          separately from the first review lane and blind to its document and to the
+          register entries until its own findings were written
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-13'
+        scope: >-
+          The statement and its scope; the endpoint and the frames, re-derived; the
+          reduction to cells and orbits, with the census and the classifier recomputed
+          exactly and the cell geometry checked; the half-plane trace checker and the
+          soundness lemma of every step kind, with the seeds, covers, branch trees, chunk
+          composition and decoders, read in full; the dispatch of the 43,593
+          representatives; the capture and the local rigidity, with the 93-box dual
+          certificate recomputed exactly; the hand-overs; and ten of the 13,343
+          native_decide facts re-evaluated by a Python transcription of the checker, at
+          e6ee548. It ran no Lean and nothing of the source, replayed none of the 2,776
+          ordinary or 35 pattern traces and 267 of the 273 chunk runs, did not compare the
+          compiled libraries with their sources, and did not recompute the endpoint
+          construction or the local model's 430 coefficient intervals.
+        verdict: accepted
+        covers: [T-154]
     artifacts:
       - packing/resources/web/fitzharding-n17-lean-2026-10-13/README.md
       - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
@@ -17627,20 +17723,26 @@ results:
       retained pin and the three release archives at Lean 4.34.1, here or by a third party
       whose build is retained here (think-r109). That would be reproduction with the
       producer's code. The intake's host, with 4 cores, 15 GB of memory and 18 GB of free
-      disk, is too small for it. Two cheaper checks decide parts first and move no rung:
+      disk, is too small for it.
+
+      Two cheaper checks decide parts first and move no rung:
       building the statement and endpoint closures here and printing their axioms
       (think-s7s4), and scanning the two release archives not yet scanned (think-c1kz). The
-      impossibility half is decided only by the full build.
+      impossibility half is decided only by the full build. An independent implementation
+      of the compiled checkers, begun on ten native_decide facts, would be an attribute
+      beside the rung and not a rung.
 
       If that build lands before T-153's complete replay, this entry would state a lower
-      bound above n = 17's verified one, and a simplification moves no bound: its standing
-      reads pending adoption until the case record adopts it, and its kind is then
-      revisited, with its result page's registered identity amended by a dated reason in
-      packing/site-urls.yaml (epistemics.md, Result Kinds).
+      bound above n = 17's verified one, and a formalization moves no bound by itself: its
+      standing reads pending adoption until the case record adopts it, and its kind is then
+      revisited, as the owner decides, with its result page's registered identity amended by
+      a dated reason in packing/site-urls.yaml; until the register records that decision,
+      the standing check refuses it (epistemics.md, Result Kinds).
 
-      V4 and C4 need, on top of V3 and C3, a second adversarial AI review by a distinct
-      reviewer whose verdict accepts, and the owner's oversight record naming
-      trust-boundary, certificate-meaning and ai-findings. V5 needs a retained formalization
+      V4 and C4 need, on top of V3 and C3, the owner's oversight record naming
+      trust-boundary, certificate-meaning and ai-findings, which would disposition the two
+      reviews' fourteen findings, none blocking; the two accepting adversarial AI reviews by
+      distinct reviewers they also need are on file since 13 October. V5 needs a retained formalization
       review by a named human expert in Lean and the mathematics who is not the author,
       checking statement fidelity, the definitions, the axioms (the 13,343 native_decide
       facts among them) and that build; C5 needs the build made here, an open_review pointer
@@ -17654,7 +17756,7 @@ results:
           party whose build is retained here. It carries no estimated_cost: the source
           publishes no CPU or wall time, only that the build "requires substantial CPU time
           and tens of gigabytes of disk and memory" with --jobs 40 --proof-jobs 8 suggested,
-          so the price is to be measured (the review's section 6)
+          so the price is to be measured (the first review's section 6)
         rung: C3
         link: think-r109
     notes: >-
@@ -17662,11 +17764,29 @@ results:
       asking that the result be registered under his name and the proof linked from the n =
       17 case page and from #405, and from the owner's report of the repository and the
       author's post the same day (think-hcqr). It is a result of its own: the owner asked
-      that a formalization be reported as its own result where it is one, and this is a
-      separate proof by another route, not a formalization of T-153's argument; by
-      epistemics.md's kind rules a second proof of a value the record holds is a
-      simplification. V0 is declared, with this note as the ladder asks: the only entry is
-      the source's report of its own build, and no build of the proof is retained here.
+      that a formalization be reported as its own result where it is one, since a proof may
+      be formalized later or by someone else. V0 is declared, with this note as the ladder
+      asks: the only entry is the source's report of its own build, and no build of the
+      proof is retained here.
+
+      Kind, by the owner's decision of 13 October 2026: it was registered as a
+      simplification, a second proof of a value the record holds, and the owner moved it to
+      a new kind, formalization, decided 13 October, recorded 14 October ("simplification is
+      one thing but formalization is another"; "let's go with formalization then"), which
+      epistemics.md's Result Kinds holds (think-8e0p): a proof in a proof assistant of a
+      result the record already holds, by formalizing an existing argument or by a route of
+      its own. Review A (https://github.com/jlevy/squares/pull/592#issuecomment-6159185393)
+      relays the owner's third remark as "simplification should be allowed too but that is
+      different"; the original human message was not recovered. Where a second proof fits
+      both kinds, the owner chooses at registration.
+
+      Why formalization: this proof does not formalize T-153's argument, and T-153 has no
+      formalization: Overbeck's is a candidate proof with Python and JavaScript checkers,
+      and the Lean formalization it plans has not started. So, of the reports this record
+      holds, this is the first proof-assistant proof of the value, and its kind is
+      formalization; simplification stays the kind of a second proof by a shorter, cleaner
+      or more elementary route. The result page's registered identity records the change as
+      a dated amendment (packing/site-urls.yaml).
 
       Priority, stated and not defended: by GitHub's server-side times Overbeck's candidate
       was public first. Both were published on 12 October 2026:
@@ -17674,7 +17794,7 @@ results:
       large-files-v1 at 14:24:20Z; this proof's repository at 20:42:08Z, about six hours
       after that release, and its release v1.0.0 at 22:06:23Z, about seven and
       three-quarter hours after it; issue #565 at 22:23:37Z, and the author's post on 13
-      October. n-017's priority notes and the review's section 5 give the sources of the
+      October. n-017's priority notes and the first review's section 5 give the sources of the
       times.
 
       The source names Overbeck's candidate as independent and published on 12
@@ -17686,10 +17806,26 @@ results:
 
       The README and the issue say the proof was developed independently of Overbeck's
       candidate. The code shares none of that candidate's objects, but its public history
-      begins at the release, so the order of development cannot be checked (the review's
+      begins at the release, so the order of development cannot be checked (the first review's
       F-7).
 
-      Lineage, the review's findings F-1 and F-2, to put to the author: the proof runs on
+      Rungs on 14 October 2026, after the second review (think-32rl): nothing moved. T-154
+      holds two accepting adversarial AI reviews by distinct, separately prompted
+      reviewers, which is what rung 4 asks of reviews, but rung 4 also needs V3 and C3, a
+      complete build here or by a third party, and the owner's oversight record, and
+      neither exists. The runs of the second review are on n-017's case record and derive
+      no rung here.
+
+      The second review's six findings, MR-1 to MR-6, are none blocking: module docstrings
+      that still call the development conditional (MR-1, the first review's F-3), modules
+      in the build the theorem does not use (MR-2), a summary check that accepts a row whose
+      entry index lies outside the table, which its soundness lemma covers (MR-3), this
+      project's exp-237, exp-247 and exp-248 data reused without being named (MR-4, read
+      with F-1), a frame constant 1.1e-17 above L that no step depends on (MR-5), and
+      capture-table angle rows beyond a quarter turn (MR-6). Its six questions go to the
+      author.
+
+      Lineage, the first review's findings F-1 and F-2, to put to the author: the proof runs on
       this project's n = 17 plan and data, which the README and CITATION.cff credit only as
       "The Squares Project collects the wider research record".
 
@@ -17711,7 +17847,7 @@ results:
       case (3,636 orbits were open under this project's 72 certified entries), the capture,
       and a formal proof of every bridge from a certificate to geometry.
 
-      The review's other findings: module docstrings that still describe conditional states
+      The first review's other findings: module docstrings that still describe conditional states
       (F-3); generators and inputs named in the generated files and not published (F-4); the
       compiled routines inside the trust boundary (F-5); a build receipt with no per-module
       log, timing or machine description (F-6); and a Zenodo DOI added and then withdrawn

@@ -339,7 +339,8 @@ certificate’s replay command.
    The rung is derived from them, so what each carries decides what the row may declare:
    a machine entry has `method` `exact-algebraic` or `interval-certified`, `origin`
    `audited-here` or `replayed-here`, `certificate`, `replay`, and
-   `replay_status: passed`, and counts toward `C3` only with all five.
+   `replay_status: passed`, and counts toward `C3` only with all five and not as a
+   sample ([epistemics.md](../../epistemics.md#the-independence-record)).
    `assurance: verified` needs a formal method and may not carry `precision` or
    `tolerance`. Choose novelty from the retained source search, independently of who
    produced the result.

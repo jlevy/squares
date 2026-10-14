@@ -205,7 +205,7 @@ receipts, each reading the edition as data and run with `-I` from outside it:
 `derive_facts.py` (the comparison and the facts, Python 3.14 with this repository’s
 `devtools`), and `price_recomputation.py` (the prices).
 
-[review-2/programs/](review-2/programs/) holds the seventeen programs the
+[review-2/programs/](review-2/programs/) holds the eighteen programs the
 [second adversarial review](../../../../docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md)
 wrote and ran on 13 October 2026, kept as run, each reading the edition’s files as data
 from a checkout of the pin. Among them are `geom.py` (the exact-root layout and its
@@ -215,12 +215,21 @@ file), `identities.py` (the 52 base-gap identities in the ideal of `F` and `G`),
 independent row builder against the five stored stopped models), `replay.py` (the
 duality bounds and the contraction ratio), `stops.py`, `budgets.py`, `admission.py` and
 `profiles.py`. [review-2/run.sh](review-2/run.sh) runs them all in the order of the
-review’s checks table and prints each command before its output;
+review’s checks table and prints each command before its output. `cmp_file.py` takes
+only the certificate path and imports its sibling `geom.py` from its own directory;
 [review-2/RESULTS.txt](review-2/RESULTS.txt) is its complete output on a checkout of the
-pin, under Python 3.14.7, SymPy 1.14.0 and mpmath 1.3.0, with the checkout’s path
+pin before that argument restriction, under Python 3.14.7, SymPy 1.14.0 and mpmath
+1.3.0, with the checkout’s path
 written `CLONE` and the review’s `G/` folder written `G`. The review’s “Checks Run
-Here” section summarizes it. They decide nothing on the register’s behalf: no evidence
-entry cites them, and T-153’s rungs rest on neither review’s checks.
+Here” section summarizes it. Four of them are registered since 14 October 2026, each in
+[`verifiers.yaml`](../../../frontier/verifiers.yaml) with its structured independence
+record: `geom.py` (`V-overbeck-review2-krawczyk-root`), `audit.py` with `identities.py`
+(`V-overbeck-review2-groebner-identities`), `rows.py` with `check_rows.py`
+(`V-overbeck-review2-row-builder`) and `replay.py` (`V-overbeck-review2-duality-bounds`),
+and `E-n017-overbeck-gate-review2` records what they decide: the normalized 52-row gate
+of `G20S_PHYSICAL`, re-derived with P096’s stop cuts taken as premises. n-017’s case record cites it and T-153 does not, since
+it is not the complete replay T-153’s rungs wait on. The other twelve decide nothing on
+the register’s behalf: no evidence entry cites them.
 
 `stops_eps.py`’s output at core radius $501/100000$ is not what the review’s check 8
 says of it. It compares $b$ and $b + z$ with the root-scale cuts $-17/50000$ and
@@ -234,6 +243,16 @@ compares each radius with its own cuts: all six hold, at $501/100000$ with margi
 $7.6 \times 10^{-6}$ and more. The review’s
 [status addendum](../../../../docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md#status-addendum-2026-10-13)
 records the correction.
+
+[review-3/](review-3/README.md) holds the programs of the
+[third review](../../../../docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md),
+the mathematical-correctness lane of 13 and 14 October 2026, with the two logs it kept:
+its own root isolation, the upper construction at side $L$ with every contact proved by
+ideal membership, 192 literal checks plus one case-partition check, the admission of the eleven
+roots, the hand-overs, random tests of the specification’s lemmas and of the
+parallel-pair rows, and a checker of its own that decides the one-node tree `JQ`. Its
+README says what each program read and decides, the one line changed at retention, and
+the evidence entries that record them.
 
 ## Commands
 

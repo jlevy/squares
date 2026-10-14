@@ -3859,9 +3859,9 @@ sources:
     standard axioms and 13,343 native_decide facts; nothing here built it (think-r109). The
     review of 13 October (docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md)
     read the statement, the endpoint and the trust boundary and accepted, with findings F-1
-    to F-8, none blocking. T-154 records the claim as a simplification of T-153, which
-    keeps the case's reported lower bound; the verified lanes and the case status are
-    unchanged. Issue #565 asked for the registration.
+    to F-8, none blocking. T-154 records the claim as a formalization, a Lean proof of
+    T-153's value by a route of its own; T-153 keeps the case's reported lower bound, and
+    the verified lanes and the case status are unchanged. Issue #565 asked for the registration.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

@@ -1200,15 +1200,16 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_check_declared_bounds.py": {
             "test_n68_depth_bound_is_named_by_its_refusal_test",  # 3.4s
         },
-        # 91s of call time across five nodes in four functions before the four #500 and #506
+        # 41s of call time across four nodes in three functions before the four #500 and #506
         # functions at the end. The #489 node measured 4.1s on 2026-10-10 at load 4.7 on
         # four cores, but 0.66s on hosted run 38503790618/job115656519709, below the 1s
-        # floor, so its marker was removed. The two lineage nodes of the #503/#504 and
-        # #505/#501 imports were measured on 2026-10-12 on four cores at load 5.5 to 7.1,
-        # each alone and again with the file's other slow nodes (`-m slow --durations=0`):
-        # 4.75s and 4.74s for the n207 patches, 49.61s and 57.11s for the Barnett and
-        # Ostashev gaps, so neither shares a build. The two decide functions mark one or
-        # two cases each with `pytest.param(..., marks=pytest.mark.slow)`, and their other
+        # floor, so its marker was removed. The #503/#504 n207 lineage node measured
+        # 4.75s alone and 4.74s with the file's other slow nodes on 2026-10-12 on four
+        # cores at load 5.5 to 7.1 (`-m slow --durations=0`), so it does not share a build.
+        # The #505/#501 Barnett and Ostashev lineage node measured 49.61s and 57.11s
+        # in that local run, but 0.80s on hosted run 38527537364, below the 1s floor,
+        # so its marker was removed too. The two decide functions mark one or two
+        # cases each with `pytest.param(..., marks=pytest.mark.slow)`, and their other
         # cases stay on the pull-request surface.
         #
         # The four #500 and #506 functions carry the marker themselves, so every case is
@@ -1225,7 +1226,6 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # stays under its ceiling with every case where it is.
         "test_check_half_angle_area.py": {
             "test_the_n207_certificate_is_two_placed_patches_of_the_n70_and_the_n153_is_not",
-            "test_barnetts_refinements_are_ryan_xus_packings_moved_and_ostashevs_are_not",
             # The #503 n207 case, 7.05s.
             "test_the_pingyou_imports_agree_with_their_receipts_plans_and_prints_to_every_digit",
             # The #505 n261 case, 18.26s, and the #501 n211 case, 11.40s.

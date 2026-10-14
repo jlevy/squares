@@ -40,6 +40,10 @@ W1 phase on one branch:
 3. **Import** each new result through stages 1 to 3 on the same branch.
    A stage 4 replay the source prices at minutes can run in the same branch; a longer
    one waits in its bead for a budget the owner sets.
+   Start each new proof’s mathematical review as soon as its source is retained, in
+   parallel with stage 3, by [stage 4’s review lane](#stage-4-validate).
+   It does not wait for a replay budget, and it lands in a pull request of its own when
+   it returns.
 4. **Validate** from `packing/` with `packing-validate --records`, then `--push`.
 5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`. It
    lists each item with its bead and the stage it reached, and every source under Not
@@ -90,7 +94,8 @@ claude/intake-YYYY-MM-DD, with today's date.
 4. Take each new result through stages 1 to 3 of the runbook on this branch: triage,
    retain the source in a packet at a pinned revision, register it as reported. Run a
    stage 4 replay only when the source prices it at minutes; otherwise record it in
-   the bead for a budget.
+   the bead for a budget. Start each new proof's mathematical review (stage 4, "Who
+   reviews, and when") as soon as its source is retained, in parallel.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request with
@@ -251,7 +256,7 @@ Triage decides what the import is before anything is retained, in an hour or les
 | Bounds of one kind at several counts in one release | One entry whose `scope` covers them |
 | A later release that raises an earlier entry’s values or adds counts | A new entry; the earlier one keeps its claim, and the case records decide which is current |
 | A theorem with an unbounded parameter | One entry stating the theorem, whose `scope` lists the cases this record holds |
-| A second certificate for a value the record holds | A new `simplification` entry |
+| A second certificate for a value the record holds | A new `simplification` entry, or a `formalization` entry where a proof assistant checked it |
 | A consequence of another claim, such as monotonicity, at a count where the record holds no such value | Its own entry only when it settles a case; otherwise the parent’s `scope` covers it |
 | A consequence that another entry already registers | No new entry and no change of scope: both stand, and the older claim gains a sentence naming the newer route |
 | New evidence or an author’s answer about a registered entry | No new entry: the source retained at the revision that holds it, and an evidence update |
@@ -378,6 +383,38 @@ checker’s trust boundary and what any two share; and marks each defect blockin
 It is recorded as `external_review` on the reported evidence entry, which makes the
 entry `reviewed`, or `incomplete` when the read found a defect, and listed in the
 register entry’s `reviews` under the kind it was run as.
+
+**Who reviews, and when.** Every proof an import registers gets a mathematical review, a
+formalization registered as its own result included, and it starts at intake: once the
+source is retained, in parallel with stage 3. It runs as a sub-agent at the strongest
+tier, `tbd-strong-max`, at maximum reasoning, in a worktree of its own; it reads the
+source as data and runs only code it writes.
+It does not read an earlier review of the same result until its own findings are
+written, and then adds a section comparing them; anything of an earlier review it saw
+first, it discloses.
+It is written to be shared with the author: a summary the author can read first,
+findings graded blocking, major, minor or note with the source file and line, and
+questions; it names no `T-NNN` that is not yet on `main`, and its reviewer line names
+the system family, tier and reasoning setting, not a model identifier.
+
+Its code is kept and registered as
+[epistemics.md, Every Run’s Code Is Kept](../../epistemics.md#every-runs-code-is-kept)
+requires: in the result’s packet with a README that says what each program does, what it
+read, how to run it and what it printed; each program in
+[`verifiers.yaml`](../frontier/verifiers.yaml) with its structured `independence`
+record, which says what its authors read (the mathematics, the proof text, a
+specification, the producer’s code), whether it is clean-room, what it shares and who
+wrote it; and an evidence entry, with its coverage, for each thing a run decides or
+samples, cited by the case record where it would derive a rung it does not support.
+A program that decides nothing is kept, and its README says so.
+
+When it returns, the findings that are the record’s are fixed and the rest go to the
+author. The review is mapped as above, the entry’s `unfinished_confirmations` and the
+validation backlog (`devtools.check_requests --backlog`) are brought up to date, and
+`devtools.check_results` re-derives `V` and `C`: a rung the evidence now supports is
+changed, and where none moves the entry says why.
+The reply that shares the review with the author is drafted in the import’s answer bead
+and posted at [stage 7](#stage-7-answer), on the owner’s word.
 
 **The exit** follows both lanes.
 It adds the replay evidence, moves the verified lane if the review has no blocking

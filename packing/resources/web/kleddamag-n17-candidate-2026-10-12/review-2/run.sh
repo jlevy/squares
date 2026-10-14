@@ -42,7 +42,7 @@ run() {
 } | norm
 
 run "$progs/geom.py"                                      # check 1
-run "$progs/cmp_file.py" "$progs" "$clone/upper-packing-certificate.json"   # check 2
+run "$progs/cmp_file.py" "$clone/upper-packing-certificate.json"   # check 2
 run "$progs/audit.py" "$work/audit.json"                  # check 3
 run "$progs/identities.py" "$receipt" "$work/audit.json"  # check 4
 run "$progs/check_rows.py" "$receipt" "$work/audit.json" \

@@ -9,7 +9,8 @@ cannot read history (its checkout is sparse and shallow), so the date is written
 the record once, here, and reviewed as data like any other field; afterwards a new
 entry carries its date from the start and this tool has nothing left to do.
 
-It inserts a `registered:` line after the `id:` and `kind:` lines of every entry that
+It inserts a `registered:` line after the `id:`, `kind:` and optional `proves_kind:`
+lines of every entry that
 lacks one and leaves every other byte of the file alone, so the diff is the backfill and
 nothing else. An entry the history does not know yet (added in the working tree and not
 committed) is dated today. An entry that already carries a date is never rewritten.
@@ -38,7 +39,7 @@ RESULTS = ROOT / "frontier" / "results.yaml"
 _ID_LINE = re.compile(r"^(?P<indent>\s*)- id: (?P<id>T-\d{3})\s*$")
 _REGISTERED = re.compile(r"^\s*registered:")
 #: The line an entry writes right after its `id:`, which a backfilled date follows.
-_KIND = re.compile(r"^\s*kind:")
+_KIND = re.compile(r"^\s*(?:kind|proves_kind):")
 
 
 def first_added(result_id: str, path: Path = RESULTS) -> str | None:
@@ -65,7 +66,7 @@ def first_added(result_id: str, path: Path = RESULTS) -> str | None:
 
 def insert_dates(text: str, dates: dict[str, str]) -> str:
     """The register text with a `registered:` line in each undated entry, after its
-    `id:` and the `kind:` that follows it."""
+    `id:`, `kind:` and any `proves_kind:` that follows them."""
     lines = text.splitlines(keepends=True)
     out: list[str] = []
     entry: re.Match[str] | None = None

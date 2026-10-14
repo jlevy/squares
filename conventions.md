@@ -348,6 +348,10 @@ its authors read).
 [epistemics.md → Which Code Confirmed It](epistemics.md#which-code-confirmed-it) defines
 the values; `devtools.backfill_verifier_relation` fills `verifiers` and audits the
 relation after a merge.
+Since 14 October 2026 a program written here that decides, and a new independent entry,
+carry a structured `independence` record: what the authors read, clean-room or not, what
+is shared, who wrote it, and the run’s coverage
+([epistemics.md → The Independence Record](epistemics.md#the-independence-record)).
 
 **“Confirmed” says which confirmation.**
 [checked in the register’s prose; convention elsewhere] Wherever a claim, a case record,

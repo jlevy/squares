@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-13'
+last_reviewed: '2026-10-14'
 verifiers:
   # --- External programs -------------------------------------------------------------
   - id: V-tokoharu-verify-cpp
@@ -1517,7 +1517,697 @@ verifiers:
       endpoint programs, as its module statement says. SymPy parses the polynomials and
       computes the resultant; every decision is Fraction arithmetic.
 
+  - id: V-sq17-review2-trace-checker
+    program: hpfast.py, with its drivers fast_replay.py, chunk_replay.py, table_check.py and summary_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Re-evaluates native_decide facts of Fitzharding's Lean proof of s(17) = L in exact
+      integers and fractions: excludes on a branch-tree node, runToCheck on a chunk of
+      the neighbour chain or the capture, freshCheck 44 on a chunk table, and
+      summaryCheck on the terminal capture state, by a Python transcription of the
+      definitions of HalfPlaneFast, CaptureRunFast, CaptureTableFast and
+      CaptureSummaryFast.
+    source:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/hpfast.py
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/fast_replay.py
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/chunk_replay.py
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/table_check.py
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/summary_check.py
+    independence_record: docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md
+    independence:
+      read: [proof-text, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: [HalfPlaneFast, CaptureRunFast, CaptureTableFast, CaptureSummaryFast]
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the sq17-lean intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          The source's README says it was developed with substantial assistance from
+          Claude and Codex. These programs were written by a Claude agent prompted
+          separately from the source and from the first review lane, in files of their own
+          that transcribe the four producer definitions named above.
+      note: >-
+        Written after reading the Lean text of the four checker modules and their
+        soundness proofs, by eye: a transcription of the same definitions into Python.
+        It therefore tests the compiled evaluator, the native_decide trust boundary, on
+        the facts it replays, and not the definitions themselves. The declared end states
+        it compares with are the producer's.
+    note: >-
+      The second review of the Lean proof wrote it on 13 October 2026 and ran it on ten
+      of the 13,343 native_decide facts, with three controls refused. Kept as run in the
+      packet's review-2/, with the output each run printed.
+
+  - id: V-sq17-review2-census
+    program: census_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Rebuilds, for Fitzharding's Lean proof of s(17) = L, the D4 action on the 24 cells
+      from their vertices, counts the orbits of 7-subsets by Burnside and by enumeration,
+      and checks the 43,593 representatives, the 346,104 census rows, the 35 patterns,
+      the 2,781 full rosters, the classifier that routes every representative, and the
+      rosters of the four neighbour cases and the capture case.
+    source:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/census_check.py
+    independence_record: docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md
+    independence:
+      read: [mathematics, proof-text, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the sq17-lean intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's README says it was developed with Claude and Codex. Written by a
+          Claude agent prompted separately, in a file of its own that imports none of the
+          source.
+      note: >-
+        It counts the orbits from scratch; its authors had read the census's Lean checker
+        (FiniteOrbitCoverCheck, OrbitCensus) and the classifier's before writing it.
+    note: >-
+      Kept in the Lean packet's review-2/, with its output, as it ran but for one line
+      written another way at retention, with the same behaviour, so that the repository's
+      check on JavaScript in Python strings passes (the folder's README).
+
+  - id: V-sq17-review2-cell-geometry
+    program: geometry_checks.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic, numerical-f64]
+    role: decides
+    summary: >-
+      For Fitzharding's Lean proof of s(17) = L: decides exactly that the eight interior
+      cells have squared diameter at most 29377/31250; samples the cover of the centre box
+      by the 24 cells at grid points, random points and every vertex; and searches at
+      random, in floating point, for two separable squares in each wall-cell class.
+    source:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/geometry_checks.py
+    independence_record: docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md
+    independence:
+      read: [mathematics, proof-text, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the sq17-lean intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's README says it was developed with Claude and Codex. Written by a
+          Claude agent prompted separately, in a file of its own.
+      note: >-
+        Its authors had read InteriorCellCapacity, ExactWallCapacity and the cover
+        certificate's Lean proofs before writing it. Its wall-class search is unseeded.
+    note: >-
+      Kept in the Lean packet's review-2/, with its output, as it ran but for one line
+      written another way at retention, with the same behaviour, so that the repository's
+      check on JavaScript in Python strings passes (the folder's README).
+
+  - id: V-sq17-review2-rigidity-dual
+    program: rigidity_dual_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Re-implements, with exact fractions, the affine weight check and the sparse
+      residual check of the 93-box local-rigidity dual certificate of Fitzharding's Lean
+      proof of s(17) = L, the cover of the slider box by the 93 boxes for every one of the
+      90 signed directions, and the final inequality q/4 + 6e5 q^2 < q at q = 1e-7, from
+      the 430 coefficient intervals as given.
+    source:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/rigidity_dual_check.py
+    independence_record: docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md
+    independence:
+      read: [mathematics, proof-text, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the sq17-lean intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's README says it was developed with Claude and Codex. Written by a
+          Claude agent prompted separately, in a file of its own.
+      note: >-
+        Its authors had read LocalRigidityWeightCheck, LocalRigiditySparseResidual and the
+        rest of the local-rigidity modules before writing it. It does not re-derive the
+        430 coefficient intervals from the geometry.
+    note: Kept as run in the Lean packet's review-2/, with its output.
+
+  - id: V-sq17-review2-endpoint-frames
+    program: endpoint_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [numerical-multiprecision]
+    role: decides
+    summary: >-
+      Solves the two endpoint polynomials of Fitzharding's Lean proof of s(17) = L by
+      Newton's method at 80 digits from a crude start, compares the root with the
+      declared midpoint, computes the side, and computes the margins by which the two
+      frames' Lower and Upper conditions hold.
+    source:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/endpoint_check.py
+    independence_record: docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md
+    independence:
+      read: [mathematics, proof-text, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the sq17-lean intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's README says it was developed with Claude and Codex. Written by a
+          Claude agent prompted separately, in a file of its own; mpmath does the
+          arithmetic.
+      note: >-
+        It works from the polynomials, but its authors had read EndpointRootData,
+        PolynomialNewtonRoot and HalfPlaneFrameBounds before writing it.
+    note: >-
+      Kept as run in the Lean packet's review-2/, with its output. A numerical
+      cross-check: V-fitzharding-n17-premise-comparisons decides the endpoint exactly.
+
+  - id: V-overbeck-review3-root-isolation
+    program: root_isolation.py, with root_box.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides, for Overbeck's candidate proof of s(17) = L, that F and G have exactly one
+      common zero in the statement's isolating rectangle, by an exact Krawczyk test in
+      rational intervals with a hand-derived Jacobian, and encloses L to ninety places by
+      five refinements with outward rounding; root_box.py gives the enclosure to the
+      other checks.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_isolation.py
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_box.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    independence:
+      read: [mathematics, proof-text, earlier-review]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition's README says its mathematics, engines, checkers and text were
+          produced by Codex (OpenAI) and Claude (Anthropic). Written by a Claude agent
+          prompted separately from the edition and from the earlier review lanes, in files
+          of its own that import none of the edition.
+      note: >-
+        From STATEMENT.md and ENDPOINT_AUDIT.md; its authors did not read the author's
+        endpoint programs. Before writing, the lane saw the second review's verdict
+        sentence, which names a Krawczyk proof of the root box (the review's section 9).
+    note: Kept as run in the Overbeck packet's review-3/; the lane kept no output of it.
+
+  - id: V-overbeck-review3-upper-at-l
+    program: upper_at_L_check.py, with root_box.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides that the seventeen squares of the candidate's UPPER_FORMULAS.md, at the
+      algebraic root of F and G, lie in [0, L]^2 with pairwise disjoint interiors: strict
+      facts by interval arithmetic over root_box.py's enclosure, each wall contact and
+      tangency by reducing its numerator to zero modulo a lex Groebner basis of (F, G),
+      with its denominator bounded away from zero.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/upper_at_L_check.py
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_box.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    independence:
+      read: [mathematics, proof-text, producer-code, earlier-review]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately, in a file of its own; SymPy computes the Groebner basis.
+      note: >-
+        It computes from UPPER_FORMULAS.md's rational functions; its authors had also read
+        the producer's layout script UPPER_LAYOUT.py.txt in full (the review's section
+        0), so it is not recorded as clean-room. The second review's verdict sentence,
+        seen first, names a Groebner-basis proof of base-gap identities.
+    note: >-
+      Kept in the Overbeck packet's review-3/ as rerun after the review's section 10 in
+      P014's counting convention, with that run's log.
+
+  - id: V-overbeck-review3-literal-checks
+    program: literal_checks.py, with geom_util.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides exactly the literal geometric facts of sections 3 to 6 of the candidate's
+      proof text over its 98 capture class files, 192 printed literal checks at 83 sites (the frame
+      assignment, the KEY_W slot, the wall triggers, the loose and coarse capacities,
+      the C7/C8 transfer and the C12 unions), and re-decides the case partition with a
+      decision function of its own against the source's thirteen predicates.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/literal_checks.py
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/geom_util.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    independence:
+      read: [proof-text, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately, in files of their own that import none of the edition.
+      note: >-
+        Its authors had read check_case_partition.py, the capture checkers and the premise
+        records before writing it. The retained copy replaces one line, the eval of the
+        source's predicate text, with a parser of their one form (the packet's
+        review-3/README.md).
+    note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+  - id: V-overbeck-review3-admission
+    program: admission_check.py, with geom_util.py and root_box.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides the root admission of the candidate proof of s(17) = L in a chart of its
+      own over its own enclosure of L: for each of the eleven roots, every one of the
+      seventeen labels' target regions lies in the root box and its directions in the
+      root arcs, the clipped target regions have diameter below one and are pairwise
+      disjoint, and the eleven parent profiles are distinct.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/admission_check.py
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/geom_util.py
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_box.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    independence:
+      read: [proof-text, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately, in files of its own.
+      note: >-
+        Its authors had read the producer's admission scripts run_adm.py and adm.py in
+        full before writing it.
+    note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+  - id: V-overbeck-review3-handovers
+    program: handover_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides the three hand-overs of the candidate's rigidity step (P092 to P095): the
+      JG terminal equals the G20S window, the G20S tube cut by xi_(2,1) <= 0 lies in the
+      HW window, and the HW tube with the same cut lies in the sixteen-square entry; and
+      that without the cut neither inclusion holds.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/handover_check.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    independence:
+      read: [proof-text, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately, in a file of its own.
+      note: >-
+        It reads the windows and tubes from the EXPECT files and the stored acceptance
+        reports; its authors had read the post-check h_report30.py before writing it.
+    note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+  - id: V-overbeck-review3-jq-tree-checker
+    program: jq_leaf_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides the candidate's one-node tree certificate JQ (schema wx-cert-3) by the
+      rules of SPEC_v3.0.md with exact rationals: the root conditions with the window's
+      centres, the start store, every opt and ind declaration's precondition, the term
+      rules, the centred remainder rule and the acceptance of the zero step, then
+      compares its lower bound with the author's stored report. It implements no splits,
+      cuts, stored relative arcs or terminal test, so it decides one-node trees only.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/jq_leaf_check.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    independence:
+      read: [specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition's two tree checkers were written by sessions of one AI system from
+          one specification (its KNOWN_ISSUES.md); this checker was written by a Claude
+          agent prompted separately, in a file of its own that imports none of the
+          edition.
+      note: >-
+        Its docstring says it was written from SPEC_v3.0.md alone; the lane had also read
+        the acceptance paths of the Python tree checker wxcheck_v30.py (sections F to K)
+        and h_report30.py (the review's section 0), so it is not recorded as clean-room.
+        The stored zero_step_L is read last, as a cross-check.
+    note: Kept as run in the Overbeck packet's review-3/, with its log.
+
+  - id: V-overbeck-review2-krawczyk-root
+    program: geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [interval-certified]
+    role: decides
+    summary: >-
+      Transcribes the exact-root layout of Overbeck's candidate proof of s(17) = L from
+      STATEMENT.md and UPPER_FORMULAS.md, finds the root of F and G by Newton's method at
+      160 digits, and proves it unique in the boxes of radius 1e-12 and 1e-100 about the
+      Newton point by a Krawczyk test in mpmath interval arithmetic with outward
+      rounding.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/geom.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the second adversarial review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately from the edition and from the first review lane, in files of its own
+          that import none of the edition.
+      note: >-
+        Its authors read the producer's rigidity.py, root_geometry.py, uniform.py and
+        bridge.py in full, and independent_model.py in part, before writing the gate's
+        programs (the review's Scope and Evidence). Its boxes are centred on the Newton
+        point, which leaves a sliver of the statement's rectangle out (the review's
+        status addendum).
+    note: Retained as run in the Overbeck packet's review-2/, whose RESULTS.txt is the output of run.sh.
+
+  - id: V-overbeck-review2-groebner-identities
+    program: identities.py, with audit.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic, interval-certified]
+    role: decides
+    summary: >-
+      For the normalized 52-row gate of Overbeck's candidate proof (G20S_PHYSICAL): audits
+      the 152 separating options of the 19 retained pairs at root scale in interval
+      arithmetic (audit.py), then shows that each of the 52 base-gap numerators lies in
+      the ideal of F and G by reduction modulo a lex Groebner basis (SymPy), that every
+      denominator is nonzero at the root, and that every slider coefficient vanishes
+      identically.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/identities.py
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/audit.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the second adversarial review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately, in files of its own; SymPy and mpmath do the algebra and the
+          intervals.
+      note: >-
+        Its authors had read the producer's rigidity code before writing it (the review's
+        Scope and Evidence); it reads the labels of the producer's gate receipt as data.
+    note: Retained as run in the Overbeck packet's review-2/.
+
+  - id: V-overbeck-review2-row-builder
+    program: rows.py, with check_rows.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Builds the 52 geometric rows of the normalized gate of Overbeck's candidate proof
+      from first principles, with its own remainders, coefficient enclosures and
+      rounding grid (rows.py), and decides in exact rationals that every geometric row of
+      the producer's five stored stopped models is implied, on that round's incoming box,
+      by its own necessary inequality, the 192 product rows being the McCormick rows of
+      the box (check_rows.py).
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/rows.py
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/check_rows.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the second adversarial review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately, in files of its own.
+      note: >-
+        Its authors had read the producer's rigidity.py and the edition's
+        independent_model.py before writing it; its rounding follows the producer's
+        scheme (a coefficient grid, with rounding paid as loss times radius) on a grid
+        of its own.
+    note: Retained as run in the Overbeck packet's review-2/.
+
+  - id: V-overbeck-review2-duality-bounds
+    program: replay.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Replays the normalized contraction chain of Overbeck's candidate proof by exact weak
+      duality: on the producer's five stored stopped models, every one of the 460 stored
+      bounds and every outgoing box, to the stated ratio 159201934153319/200000000000000;
+      and on rows.py's rows alone, the six B6 steps, the stop cuts and the five stopped
+      rounds, to a final 45-core ratio of 0.792020707575807.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/replay.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the second adversarial review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately, in a file of its own.
+      note: >-
+        It uses the producer's stored multipliers as hints, and in its second mode builds
+        every row and box itself; its authors had read the producer's rigidity code.
+    note: Retained as run in the Overbeck packet's review-2/.
+
   # --- First-party programs: premise checks and replay drivers ------------------------
+  - id: V-overbeck-review3-seed-packing
+    program: seed_packing_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Checks exactly that the candidate's rational seed upper-packing-certificate.json, the
+      reference file every tree certificate names, is a packing of seventeen unit squares
+      at its side R: 68 wall conditions and 136 pair separations by the eight-axis test.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/seed_packing_check.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    independence:
+      read: [mathematics, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately, in a file of its own.
+      note: From the file's format and the geometry; its authors read none of the edition's seed checks.
+    note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+  - id: V-overbeck-review3-spec-lemmas
+    program: spec_lemmas_numeric.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [numerical-f64]
+    role: premises
+    summary: >-
+      Tests every lemma of the candidate's tree-checker specification SPEC_v3.0.md
+      (sections 4.1 to 4.8, 5 and 8) on seeded random floating-point instances: a guard
+      against misreading a sign or a convention, not a proof.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/spec_lemmas_numeric.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    independence:
+      read: [mathematics, specification, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately, in a file of its own.
+      note: Written from the specification's text; the lane had read the tree checker's acceptance paths.
+    note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+  - id: V-overbeck-review3-parallel-rows
+    program: parallel_row_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [numerical-f64]
+    role: premises
+    summary: >-
+      Tests the parallel-pair row derivation of the candidate's proof text (P100 to P106)
+      on 28,326 seeded random floating-point instances of two unit squares with a common
+      reference side; it decides nothing, and no evidence entry names it.
+    source:
+      - packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/parallel_row_check.py
+    independence_record: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md
+    independence:
+      read: [mathematics, proof-text, earlier-review]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the mathematical-correctness review lane of the #557 intake, tbd-strong-max tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The edition was produced by Codex and Claude. Written by a Claude agent prompted
+          separately, in a file of its own.
+      note: >-
+        From PROOF.md P098 to P107 and FINITE_PARALLEL_DERIVATION.md; the lane did not read
+        the producer's rigidity code. It had seen the second review's verdict sentence,
+        which names an independent row builder.
+    note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
   - id: V-evand-exact-certificates
     program: devtools.evand_exact_certificates
     author: Squares Project (Levy)
