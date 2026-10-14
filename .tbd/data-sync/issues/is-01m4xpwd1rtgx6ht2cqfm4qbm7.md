@@ -3,16 +3,20 @@ type: is
 id: is-01m4xpwd1rtgx6ht2cqfm4qbm7
 title: "Validate: Mishapolk 70a033f's 24 refined certificates, both exact routes, certify + check --replay, and decide 207 exactly (~0.8 CPU-h)"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
+delegate: claude-code@vm
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m4xmr0fhhynbfzj5vj0sh358
+hold: null
+hold_until: null
 created_at: 2026-10-14T17:20:40.504Z
-updated_at: 2026-10-14T17:20:40.504Z
+updated_at: 2026-10-14T23:04:32.810Z
+started_at: 2026-10-14T23:04:32.810Z
 ---
 Validation part of think-o644 (Mishapolk/square-packing-records 70a033f, 2026-10-14T16:11:31Z; no issue). Record-changing: 12 counts below best now. Not gated: the owner decided 2026-10-14 that a watched-repository publication counts from its first commit.
 
