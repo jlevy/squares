@@ -217,30 +217,26 @@ def test_legacy_frontier_row_section_and_query_links_arrive_on_atlas(
     assert _arrives(browser, f"{served}frontier.html{suffix}", arrival, scripts=True) == arrival
 
 
-def test_without_scripts_the_refresh_still_arrives(browser: Any, site: Path) -> None:
+@pytest.mark.parametrize("old", [old for old, _new in render_overview.MOVED_PAGES])
+@pytest.mark.parametrize("suffix", ["", "#fn-3"], ids=["plain", "fragment"])
+def test_without_scripts_the_refresh_still_arrives(
+    browser: Any, site: Path, old: str, suffix: str
+) -> None:
     """A reader without scripts is sent on by the refresh, which cannot keep a fragment."""
     root = site.as_uri()
-    for old, target in _arrivals(root).items():
-        assert (
-            _arrives(
-                browser,
-                f"{root}/{old}",
-                target,
-                scripts=False,
-                atlas=old in {"cases.html", "cases/index.html"},
-            )
-            == target
-        ), old
-        assert (
-            _arrives(
-                browser,
-                f"{root}/{old}#fn-3",
-                target,
-                scripts=False,
-                atlas=old in {"cases.html", "cases/index.html"},
-            )
-            == target
-        ), old
+    arrivals = _arrivals(root)
+    assert set(arrivals) == set(dict(render_overview.MOVED_PAGES))
+    target = arrivals[old]
+    assert (
+        _arrives(
+            browser,
+            f"{root}/{old}{suffix}",
+            target,
+            scripts=False,
+            atlas=old in {"cases.html", "cases/index.html"},
+        )
+        == target
+    ), old
 
 
 @pytest.mark.parametrize("suffix", EXPLAINER_LINKS)

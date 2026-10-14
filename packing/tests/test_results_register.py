@@ -328,7 +328,13 @@ def _changed_result(tmp_path: Path, result_id: str, **changes: object) -> Path:
     record.update(changes)
     target = tmp_path / "results.yaml"
     target.write_text(
-        yaml.safe_dump(register, sort_keys=False, allow_unicode=True, width=96),
+        yaml.dump(
+            register,
+            Dumper=getattr(yaml, "CSafeDumper", yaml.SafeDumper),
+            sort_keys=False,
+            allow_unicode=True,
+            width=96,
+        ),
         encoding="utf-8",
     )
     return target
@@ -1887,11 +1893,14 @@ def test_results_md_says_whose_packing_each_regularization_is() -> None:
 
 
 @pytest.mark.parametrize("rid", ["T-153", "T-154"])
+@pytest.mark.parametrize("promoted", [False, True], ids=["accept-parts", "refuse-whole-value"])
 def test_full_part_citations_cannot_promote_the_whole_result(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
     rid: str,
+    *,
+    promoted: bool,
 ) -> None:
     register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))
     record = next(row for row in register["results"] if row["id"] == rid)
@@ -1908,9 +1917,11 @@ def test_full_part_citations_cannot_promote_the_whole_result(
         else ["E-n017-fitzharding-census-review2", "E-n017-fitzharding-rigidity-dual-review2"]
     )
     cited = [*record["evidence"], *parts]
-    ordinary = _changed_result(tmp_path, rid, evidence=cited)
-    monkeypatch.setattr(check_results, "RESULTS", ordinary)
-    assert check_results.main() == 0
+    changed = _changed_result(
+        tmp_path, rid, evidence=cited, **({"verification": "V3"} if promoted else {})
+    )
+    monkeypatch.setattr(check_results, "RESULTS", changed)
+    assert check_results.main() == int(promoted)
     assert (
         check_results.derive_verification(
             [
@@ -1924,10 +1935,10 @@ def test_full_part_citations_cannot_promote_the_whole_result(
         )
         == "V0"
     )
-    promoted = _changed_result(tmp_path, rid, evidence=cited, verification="V3")
-    monkeypatch.setattr(check_results, "RESULTS", promoted)
-    assert check_results.main() == 1
-    assert f"{rid}: declares V3 but the cited atoms support only V0" in capsys.readouterr().out
+    if promoted:
+        assert (
+            f"{rid}: declares V3 but the cited atoms support only V0" in capsys.readouterr().out
+        )
 
 
 @pytest.mark.parametrize(

@@ -4,10 +4,32 @@ from __future__ import annotations
 
 import html
 import re
+from collections.abc import Mapping
 from dataclasses import replace
 from datetime import timedelta
+from typing import Any
+from unittest.mock import patch
+
+import pytest
 
 from devtools import overview_data, overview_sections
+
+
+@pytest.fixture(scope="module")
+def atlas_markup() -> tuple[str, str]:
+    """The two immutable Atlas surfaces, built once for these focused DOM checks."""
+    drawing = overview_sections._atlas_drawing  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+    def validated_drawing(
+        n: int, *, regularized: bool, side: float, upper: Mapping[str, Any] | None = None
+    ) -> str:
+        # frontier_cases still validates every real case; each cell must receive that
+        # metadata. Recency independently reads complete cases through the same loader.
+        assert upper is not None, "an atlas cell must reuse its validated case metadata"
+        return drawing(n, regularized=regularized, side=side, upper=upper)
+
+    with patch.object(overview_sections, "_atlas_drawing", side_effect=validated_drawing):
+        return overview_sections.atlas_grid(), overview_sections.atlas_preview()
 
 
 def test_homepage_legend_keeps_original_rungs_in_three_icon_and_label_rows() -> None:
@@ -41,8 +63,10 @@ def test_homepage_legend_keeps_original_rungs_in_three_icon_and_label_rows() -> 
     assert "site-rung-legend-icons" not in complete
 
 
-def test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts() -> None:
-    grid = overview_sections.atlas_grid()
+def test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts(
+    atlas_markup: tuple[str, str],
+) -> None:
+    grid, _preview = atlas_markup
     assert overview_sections.ATLAS_DEFAULT == "triangle"
     assert 'data-atlas-view="triangle" data-atlas-size="small"' in grid
     assert 'data-atlas-first="100" data-atlas-grid' in grid
@@ -127,9 +151,10 @@ def test_recent_preview_contains_only_the_twelve_newest_eligible_rows() -> None:
     assert "data-retired-results=" in attributes
 
 
-def test_atlas_preview_reuses_canonical_split_rows_and_keeps_every_case() -> None:
-    preview = overview_sections.atlas_preview()
-    complete = overview_sections.atlas_grid()
+def test_atlas_preview_reuses_canonical_split_rows_and_keeps_every_case(
+    atlas_markup: tuple[str, str],
+) -> None:
+    complete, preview = atlas_markup
     tiles = re.findall(r'<a class="site-atlas-cell"[^>]*>.*?</a>', preview)
     assert len(tiles) == 324
     assert tiles == re.findall(r'<a class="site-atlas-cell"[^>]*>.*?</a>', complete)
@@ -173,3 +198,22 @@ def test_atlas_preview_reuses_canonical_split_rows_and_keeps_every_case() -> Non
         "<noscript>",
     ):
         assert absent not in preview
+
+
+@pytest.mark.parametrize("regularized", [False, True])
+def test_validated_upper_metadata_keeps_the_drawing_without_reopening_the_case(
+    monkeypatch: pytest.MonkeyPatch, *, regularized: bool
+) -> None:
+    from devtools import build_bound_citations  # noqa: PLC0415
+
+    n = next(iter(overview_sections.atlas_regularized()))
+    upper = build_bound_citations.load_case(n)["reported_upper_bound"]
+    side = overview_sections.atlas_enclosing_sides(original=not regularized)[n]
+    drawing = overview_sections._atlas_drawing  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    baseline = drawing(n, regularized=regularized, side=side)
+
+    def reopened(_n: int) -> dict:
+        pytest.fail("validated atlas metadata must not reopen its frontier case")
+
+    monkeypatch.setattr(build_bound_citations, "load_case", reopened)
+    assert drawing(n, regularized=regularized, side=side, upper=upper) == baseline

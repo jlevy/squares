@@ -896,17 +896,22 @@ def test_the_generated_block_check_fails_on_an_edited_block() -> None:
     index = drawings.index_document()
     assert drawings.problems(text, index) == []
     head, block = drawings.split(text)
-    named = safe_load(block)[drawings.KEY]["items"]
+    # The full audit above establishes this block's items against the real index and
+    # all case records. Its byte-mutation controls reuse only that validated comparison.
+    generated = safe_load(block)[drawings.KEY]
+    named = generated["items"]
+    unregistered = generated["unregistered"]
     first, second = named[0], named[1]
 
     edited = block.replace(f"      of: {first['of']}\n", "      of: T-999\n", 1)
     assert edited != block
-    (problem,) = drawings.problems(head + edited, index)
+    (problem,) = drawings.generated_block_problems(edited, named, unregistered)
     assert problem.startswith(f"results.yaml's {drawings.KEY} differs")
 
     renumbered = block.replace(f"    - n: {second['n']}\n", "    - n: 999\n", 1)
-    (problem,) = drawings.problems(head + renumbered, index)
+    (problem,) = drawings.generated_block_problems(renumbered, named, unregistered)
     assert f"items for [{second['n']}] missing, [999] extra" in problem
 
-    (problem,) = drawings.problems(head, index)
+    assert head
+    (problem,) = drawings.generated_block_problems("", named, unregistered)
     assert "missing" in problem

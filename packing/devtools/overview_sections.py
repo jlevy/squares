@@ -2903,16 +2903,20 @@ def atlas_frame_ink_inset() -> float:
     return (float(frame.attrib["x"]) - left - float(frame.attrib["stroke-width"]) / 2) / extent
 
 
-def _atlas_drawing(n: int, *, regularized: bool, side: float) -> str:
+def _atlas_drawing(
+    n: int, *, regularized: bool, side: float, upper: Mapping[str, Any] | None = None
+) -> str:
     """One lazy image, with current-source credit and the approved comparison pair."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.build_bound_citations import load_case  # noqa: PLC0415
     from devtools.default_drawings import credit_line  # noqa: PLC0415
     from devtools.pictured_source import pictured_source_key  # noqa: PLC0415
 
-    upper = load_case(n)["reported_upper_bound"]
-    credit = html.unescape(frontier.credit(upper.get("found_by"), upper.get("found_year")))
-    source = pictured_source_key(n, str(upper.get("source_key") or ""))
+    reported = load_case(n)["reported_upper_bound"] if upper is None else upper
+    credit = html.unescape(
+        frontier.credit(reported.get("found_by"), reported.get("found_year"))
+    )
+    source = pictured_source_key(n, str(reported.get("source_key") or ""))
     original_credit = ", ".join(
         part for part in ("Packing as published", credit, source) if part
     )
@@ -2944,6 +2948,7 @@ def _atlas_cell(
     side: float | None = None,
     grid_from: int | None = None,
     segment: PackingSegment | None = None,
+    upper: Mapping[str, Any] | None = None,
 ) -> str:
     """A selected drawing and count, linking to its case record.
 
@@ -2966,7 +2971,7 @@ def _atlas_cell(
         f"--o:{int(row > 1 and n == (row - 1) ** 2 + 1)};"
         f'--site-atlas-side:{side}"'
     )
-    drawing = _atlas_drawing(n, regularized=regularized, side=side)
+    drawing = _atlas_drawing(n, regularized=regularized, side=side, upper=upper)
     needs_reference = bool(reference) or (
         regularized and atlas_enclosing_sides(original=True)[n] < row
     )
@@ -3174,6 +3179,7 @@ def _atlas_rows(first: int) -> tuple[list[str], str]:
                     side=sides[n],
                     grid_from=transition.grid.first_n,
                     segment=segment,
+                    upper=by_n[n]["reported_upper_bound"],
                 )
                 for n in segment.numbers
             )
