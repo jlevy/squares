@@ -5201,9 +5201,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel new arrangements 2026-10-07]'
@@ -5457,9 +5459,11 @@ occurrences:
   end: 14
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact refinements 2026-10-08]'
@@ -5743,9 +5747,11 @@ occurrences:
   end: 14
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo follow-up refinements 2026-10-08]'
@@ -6164,9 +6170,11 @@ occurrences:
   end: 49
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact certificates 2026-10-09]'
@@ -6351,9 +6359,11 @@ occurrences:
   end: 31
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -6455,9 +6465,11 @@ occurrences:
   end: 16
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Deleeuw n70 refinement 2026-10-10]'
@@ -6578,9 +6590,11 @@ occurrences:
   end: 73
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk decimal poses 2026-10-09]'
@@ -6630,9 +6644,11 @@ occurrences:
   end: 15
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel trio126 2026-10-09]'
@@ -6704,9 +6720,11 @@ occurrences:
   end: 42
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-10]'
@@ -7248,9 +7266,11 @@ occurrences:
   end: 15
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel regularized lists 2026-10-10]'
@@ -7321,9 +7341,11 @@ occurrences:
   end: 20
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n207 certificate 2026-10-11]'
@@ -7383,9 +7405,11 @@ occurrences:
   end: 20
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n153 certificate 2026-10-11]'
@@ -7470,9 +7494,11 @@ occurrences:
   end: 33
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Barnett refinements 2026-10-11]'
@@ -7506,9 +7532,11 @@ occurrences:
   end: 16
   label: Xu
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - identity-review
+  contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Barnett refinements 2026-10-11]'
@@ -9177,9 +9205,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-051.md
     record_key: '51'
@@ -9634,9 +9664,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-070.md
     record_key: '70'
@@ -9903,9 +9935,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-084.md
     record_key: '84'
@@ -9968,9 +10002,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-086.md
     record_key: '86'
@@ -10276,9 +10312,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-102.md
     record_key: '102'
@@ -10314,9 +10352,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-103.md
     record_key: '103'
@@ -10377,9 +10417,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-105.md
     record_key: '105'
@@ -10479,9 +10521,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-108.md
     record_key: '108'
@@ -10711,9 +10755,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-123.md
     record_key: '123'
@@ -10772,9 +10818,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-126.md
     record_key: '126'
@@ -10810,9 +10858,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-127.md
     record_key: '127'
@@ -10901,9 +10951,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-129.md
     record_key: '129'
@@ -11182,9 +11234,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-146.md
     record_key: '146'
@@ -11729,9 +11783,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-175.md
     record_key: '175'
@@ -13459,9 +13515,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-261.md
     record_key: '261'
@@ -13598,9 +13656,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-267.md
     record_key: '267'
@@ -14133,9 +14193,11 @@ occurrences:
   end: 5
   label: ry-xu
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - packet
+  - github-profile
+  contributor_id: ryan-xu
 - origin:
     path: packing/frontier/n-295.md
     record_key: '295'

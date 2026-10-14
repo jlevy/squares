@@ -813,6 +813,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/oscar-fitzharding.html | profiles/oscar-fitzharding.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/peter-shiu.html | profiles/peter-shiu.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/philippe-ryckelynck.html | profiles/philippe-ryckelynck.html | page | overview | 2026-10-13 | 2026-10-13 | live |
+| profiles/ryan-xu.html | profiles/ryan-xu.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/ryu-sungjoon.html | profiles/ryu-sungjoon.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/sam-burns.html | profiles/sam-burns.html | page | overview | 2026-10-13 | 2026-10-13 | live |
 | profiles/thierry-gensane.html | profiles/thierry-gensane.html | page | overview | 2026-10-13 | 2026-10-13 | live |
