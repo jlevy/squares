@@ -5,7 +5,7 @@ title: "Import BuddenPing: 148 certificate refinements, 60 of them exact algebra
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T08:06:14.598Z
-updated_at: 2026-10-14T11:18:47.780Z
+updated_at: 2026-10-14T11:26:29.824Z
 started_at: 2026-10-14T08:06:19.172Z
 ---
 Pull request jlevy/squares#574 (BuddenPing, PingYou Ltd), head 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde of BuddenPing/squares (2026-10-13T01:58:38Z), treated as an intake report: never merged, approved or commented on here. Lane pr574 of the 2026-10-14 intake pass (think-mq0k), branch claude/wizardly-meitner-wqn4x3-intake-1014-pr574. Packet packing/resources/web/pingyou-pr574-certificates-2026-10-13/. Claim map, comparison, replay plan and draft acknowledgement in the notes.
@@ -119,3 +119,5 @@ certificate refinements. We will reply again with the outcome.
 - register-plan (rational, 85 counts) run; T-NNN at V0/C0, S1 drafted, published
   2026-10-13; output kept at scratch register-plan.yaml (131 KB; claim states 85
   exact sides as long fractions).
+
+Branch head: 56cf868c617975eaada5b0c10dab953cc6fa2e37 (pushed). records tier: only failure is the URL-history step against the advanced origin/main (0 failures against base b8c930338).
