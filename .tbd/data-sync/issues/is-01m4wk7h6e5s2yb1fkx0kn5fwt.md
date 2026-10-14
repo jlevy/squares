@@ -5,7 +5,7 @@ title: "Import dostashev: s(176) <= 13.795872318437, s(211) <= 14.993694186584, 
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T06:57:36.461Z
-updated_at: 2026-10-14T07:18:39.571Z
+updated_at: 2026-10-14T09:18:35.611Z
 started_at: 2026-10-14T06:57:49.305Z
 ---
 https://github.com/jlevy/squares/issues/575 (2026-10-13T00:42:43Z; body edited 2026-10-13T04:13:29Z to add 304, comment of 04:13:31Z). dostashev/square-packing at b909e1b74cda50906e12b4373e010ddee39e47e4, records/n0176, n0211, n0241, n0304 (.sqcert, .sqpk). Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports, intake lane ostashev of 2026-10-14.
@@ -48,3 +48,15 @@ Validation plan (priced): sqcert adapter; both maintained exact routes, --worker
 ## Draft acknowledgement (not posted)
 
 Thank you, Daniil. We received the four certificates at dostashev/square-packing b909e1b (records/n0176, n0211, n0241 and n0304), and the eight SHA-256 values match the files there, including the 176, 211 and 241 files unchanged since b572f10. We will retain that commit, read each .sqcert exactly, and decide each packing with a duplicate-square and an outside-container control on our two maintained exact routes, then on a third exact route in review. We will compare each side with the record at its count and with the other reports open there; at 211 and 241, Francisco Couzo's #583 and #586, which continue your arrangements, are currently smaller. Your new 211 is a different packing from T-149, so it will be its own entry, and T-149 keeps its claim.
+
+## Stage 2 and the stage 4 replay, 2026-10-14, lane ostashev (branch claude/wizardly-meitner-wqn4x3-intake-1014-ostashev, head 8d396177b)
+
+Packet packing/resources/web/dostashev-merged-bands-2026-10-13 (source key [Ostashev merged bands 2026-10-13], evidence E-ostashev-575-certificate-report): README, LICENSE and records/n0176, n0211, n0241, n0304 retained (10 files, 656,939 bytes); 34 files pinned identical to the #501 packet; the six 883aa4b canonical-form rewrites (129, 175, 204, 232, 264, 303) by digest only. The 304 header and side use delta = 1e-59 (59-digit optimum), not the 1e-60 the issue states; each side is its header's claimed_s times 1 + delta (test).
+
+certify --workers 1: 12 jobs, all 4 positives pass and all 8 controls refused on both routes, 675,186 pair decisions, 480.19 route CPU s, 11m09s at load 9-12; least wall >= 5.00e-21, pair >= 4.99e-21 (4.995e-21 at 176 and 304, as the issue says). check --replay: 12 jobs equal, 11m34s.
+
+Register plan: scratchpad register-plan-dostashev-merged-bands-2026-10-13.yaml (T-NNN over 176, 211, 241, 304; published 2026-10-13). Its notes say "smallest: #593" at 304 from #593's binary64 print; the certificates say otherwise (next_rung states it).
+
+## Stage 1 acknowledgement posted, 2026-10-14
+
+https://github.com/jlevy/squares/issues/575#issuecomment-6165052668 (states the pin, the retained and replayed certificates with controls refused, and the comparison at each count; the earlier draft above was not posted as written).

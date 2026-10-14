@@ -5,7 +5,7 @@ title: "Import dostashev: s(129) <= 11.870013850405, s(204) <= 14.808663234387, 
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T06:57:27.296Z
-updated_at: 2026-10-14T07:18:37.881Z
+updated_at: 2026-10-14T09:18:33.775Z
 started_at: 2026-10-14T06:57:53.843Z
 ---
 https://github.com/jlevy/squares/issues/562 (2026-10-12T19:10:14Z, unedited). dostashev/square-packing at fe43a64ecf2581cdbd11830e8a5be0989746c5d3, records/n0129, n0204, n0303 (.sqcert, .sqpk). Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports, intake lane ostashev of 2026-10-14.
@@ -48,3 +48,15 @@ Validation plan (priced): sqcert adapter exists; both maintained exact routes (u
 ## Draft acknowledgement (not posted)
 
 Thank you, Daniil. We received the three certificates at dostashev/square-packing fe43a64 (records/n0129, n0204 and n0303), and the six SHA-256 values match the files there. We will retain that commit, read each .sqcert exactly, and decide each packing with a duplicate-square and an outside-container control on our two maintained exact routes, then on a third exact route in review. We will compare each side with the record at its count and with the other reports open at it. We note that your head, b909e1b, rewrites these three files in canonical form at the same exact sides; we keep the bytes this issue names. We will also keep the 176 composition in the packet, unregistered, as you asked.
+
+## Stage 2 and the stage 4 replay, 2026-10-14, lane ostashev (branch claude/wizardly-meitner-wqn4x3-intake-1014-ostashev, head 8d396177b, rebased on main f73e9de13)
+
+Packet packing/resources/web/dostashev-compositions-2026-10-12 (source key [Ostashev compositions 2026-10-12], evidence E-ostashev-562-certificate-report): README, LICENSE and records/n0129, n0176, n0204, n0303 retained (10 files, 564,351 bytes); 36 files pinned identical to the #501 packet, #528's 175/232/264 by digest only. acquire_source --check passes. claims.json frozen against main aeef99ef0 (unchanged when rewritten on f73e9de13).
+
+certify --workers 1: 9 jobs (129, 204, 303), all 3 positives pass and all 6 controls refused on both routes, 448,290 pair decisions, 363.99 route CPU s, 7m38s wall at load 10-14; least wall clearance >= 5.00e-21, pair >= 4.99e-21 on both routes. check --replay: 9 jobs equal, 7m04s. The unrequested 176 is compared, not replayed (3 jobs, about 3 min).
+
+Register plan: scratchpad register-plan-dostashev-compositions-2026-10-12.yaml (T-NNN over 129, 204, 303; published 2026-10-12).
+
+## Stage 1 acknowledgement posted, 2026-10-14
+
+https://github.com/jlevy/squares/issues/562#issuecomment-6165052232 (states the pin, the retained and replayed certificates with controls refused, and the comparison at each count; the earlier draft above was not posted as written).

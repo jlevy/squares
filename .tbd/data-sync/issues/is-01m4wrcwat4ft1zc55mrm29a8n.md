@@ -5,7 +5,7 @@ title: "Import evand: s(365) <= 19.621320343560, s(370) <= 19.767730746255, s(46
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T08:27:54.586Z
-updated_at: 2026-10-14T08:31:59.803Z
+updated_at: 2026-10-14T09:18:31.411Z
 started_at: 2026-10-14T08:27:59.898Z
 ---
 https://github.com/jlevy/squares/issues/596 (2026-10-14T06:51:07Z, unedited). evand/square-packing at 622cd2e21407700fe8d5ac5943af820725107921, search/packer/candidates/fresh_n365, n370, n460 (.cert, .exact.txt, .input.txt, .json). All three counts lie beyond n = 324: verified beyond-horizon rows in source-coverage.yaml, as #506 and #584. Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports, intake lane ostashev of 2026-10-14 (added by the coordinator).
@@ -42,3 +42,15 @@ Validation plan (priced): evand-cert adapter; both maintained exact routes, --wo
 ## Draft acknowledgement (not posted)
 
 Thank you, Evan. We received the three certificates at evand/square-packing 622cd2e (search/packer/candidates/fresh_n365, n370 and n460), and the three SHA-256 values match the files there. All three counts lie beyond the n <= 324 case corpus, so they go to the source register's beyond-horizon rows, as #584's do. We will retain the commit, read each certificate exactly, decide each packing with a duplicate-square and an outside-container control on our two maintained exact routes, and compare each side with what the record holds at its count; it tracks no row at 365, 370 or 460 today. Your 365 side is, to within its 1 + 1e-20 scaling, 14 + 7/2 + 3/sqrt(2), as you say.
+
+## Stage 2 and the stage 4 replay, 2026-10-14, lane ostashev (branch claude/wizardly-meitner-wqn4x3-intake-1014-ostashev, head 8d396177b)
+
+Packet packing/resources/web/evand-fresh-compositions-2026-10-14 (source key [Daniel fresh compositions 2026-10-14], evidence E-evand-596-compositions-report): 12 fresh_* files, LICENSE, CREDITS.md, search/exact/README.md retained (15 files, 521,230 bytes); checkers pinned to the issue-399 packet, PACKER.md by digest.
+
+certify --workers 1: 9 jobs, all 3 positives pass and all 6 controls refused on both routes, 1,441,590 pair decisions, 654.96 route CPU s, 13m54s at load 4-7; least wall >= 5.00e-21, pair just under 1e-20. check --replay: 9 jobs equal, 18m27s at load 7-10.
+
+Register plan: scratchpad register-plan-evand-fresh-compositions-2026-10-14.yaml (evidence, source row, three beyond-horizon rows at 19.621320343560, 19.767730746255, 21.959969683021).
+
+## Stage 1 acknowledgement posted, 2026-10-14
+
+https://github.com/jlevy/squares/issues/596#issuecomment-6165053338 (states the pin, the retained and replayed certificates with controls refused, and the comparison at each count; the earlier draft above was not posted as written).

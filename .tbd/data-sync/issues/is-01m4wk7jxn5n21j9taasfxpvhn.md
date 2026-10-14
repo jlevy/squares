@@ -5,7 +5,7 @@ title: "Import evand: s(339) <= 18.926898900357, s(364) <= 19.583782203951, s(37
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T06:57:38.228Z
-updated_at: 2026-10-14T07:18:41.423Z
+updated_at: 2026-10-14T09:18:29.175Z
 started_at: 2026-10-14T06:57:50.383Z
 ---
 https://github.com/jlevy/squares/issues/584 (2026-10-13T14:31:16Z, unedited). evand/square-packing at 231d41df7a03fccd89aa6e9ef5a540348a8214cc, search/packer/candidates/comp2_n339, n364, n375 (.cert, .exact.txt, .input.txt, .json). All three counts lie beyond n = 324: verified beyond-horizon rows in source-coverage.yaml, as #506. Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports, intake lane ostashev of 2026-10-14.
@@ -47,3 +47,17 @@ Validation plan (priced): evand-cert adapter; both maintained exact routes, --wo
 ## Draft acknowledgement (not posted)
 
 Thank you, Evan. We received the three certificates at evand/square-packing 231d41d (search/packer/candidates/comp2_n339, n364 and n375), and the three SHA-256 values match the files there. All three counts lie beyond the n <= 324 case corpus, so they go to the source register's beyond-horizon rows rather than to a register entry, as #506's did. We will retain the commit, read each certificate exactly, decide each packing with a duplicate-square and an outside-container control on our two maintained exact routes, and compare each side with the rows and reports at its count. At 339, Francisco Couzo's #586 (18.925319360704) is now below this side; at 364 and 375 this side is below everything we hold. We register no rows for the L-step corollaries at 403 and 414, as you asked.
+
+## Stage 2 and the stage 4 replay, 2026-10-14, lane ostashev (branch claude/wizardly-meitner-wqn4x3-intake-1014-ostashev, head 8d396177b)
+
+Packet packing/resources/web/evand-compositions-2026-10-13 (source key [Daniel compositions 2026-10-13], evidence E-evand-584-compositions-report): 12 comp2 files, LICENSE, CREDITS.md retained (14 files, 454,778 bytes); checkers pinned to the issue-399 packet, search/exact/README.md to the issue-489 packet, PACKER.md by digest. claims.json and beyond-horizon-claims.json frozen against main aeef99ef0 (unchanged on f73e9de13).
+
+Importer: devtools.upper_bound_reports accepts a declaration requesting only beyond-horizon counts; register-plan then emits evidence, source row and beyond-horizon rows, no results.yaml entry (tests).
+
+certify --workers 1: 9 jobs, all 3 positives pass and all 6 controls refused on both routes, 1,160,892 pair decisions, 477.89 route CPU s, 12m49s at load 9-11; least wall >= 5.00e-21, pair >= 9.99e-21. check --replay: 9 jobs equal, 8m39s.
+
+Register plan: scratchpad register-plan-evand-compositions-2026-10-13.yaml (evidence, source row, three beyond-horizon rows at 18.926898900357, 19.583782203951, 19.882451030482, assurance reported until review).
+
+## Stage 1 acknowledgement posted, 2026-10-14
+
+https://github.com/jlevy/squares/issues/584#issuecomment-6165052968 (states the pin, the retained and replayed certificates with controls refused, and the comparison at each count; the earlier draft above was not posted as written).

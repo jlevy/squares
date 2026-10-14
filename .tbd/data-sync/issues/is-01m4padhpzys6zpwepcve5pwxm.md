@@ -3,9 +3,9 @@ type: is
 id: is-01m4padhpzys6zpwepcve5pwxm
 title: "Import itsnaka (SQUISH): nine Mondrian packings at n = 176-305, smaller packings of 238, 239, 270, 305 (#500)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 7
+version: 12
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:09.823Z
-updated_at: 2026-10-12T23:42:05.145Z
+updated_at: 2026-10-14T09:26:41.611Z
 started_at: 2026-10-11T20:28:23.635Z
 closed_at: null
 close_reason: null
@@ -63,3 +63,8 @@ Checks: acquire_source --check PACKET_MATCHES_ITS_CONTRACT; derive --check match
 Not run: the source's own checkers (SQUISH's Fraction checker, Ellsworth's check_packing.py); the third exact route (check_half_angle_area, a separate review lane); no review. No shared record edited; register-plan output handed to the records lane.
 
 Reopened: Reopened by the 2026-10-12 reconciliation (think-va12): packing/campaign/intake-watch.yaml still names this bead as the owner of its repository's read-through, and check_bead_tree requires a record that declares a deferral to name an open bead. The import itself is complete; close this bead in the change where the next intake pass updates that intake-watch entry.
+
+
+2026-10-14 09:25Z: reopened. intake-watch.yaml on main still names think-ga3m as the open owner of the itsnaka read through 56fa71f, so closing it failed check_bead_tree on every branch (D-025). Close it when think-5pn5's watch read re-points that entry.
+
+2026-10-14T09:30Z (squares-43, think-5pn5): claude/serene-hopper-xxh80m commit 31a817e8e re-points the itsnaka/squish-certs read through 56fa71f with no bead (aeacc6c pinned by squish-500-fourth-request-2026-10-11, T-151). Close this bead in the session that sees 31a817e8e reach main, not before: main's intake-watch.yaml names it until then.
