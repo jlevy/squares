@@ -5,7 +5,7 @@ title: "Import Kevin Fang: s(380), s(381), s(382) and any other new certificates
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: serene-hopper
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T08:58:15.479Z
-updated_at: 2026-10-14T17:22:37.713Z
+updated_at: 2026-10-14T20:04:43.738Z
 started_at: 2026-10-14T08:58:19.610Z
 ---
 Watched repository TheSnakeFang/squarepack-certs, head 078789a4cfd3, 11 commits (2026-10-12) past the fang-two-wedge-certificates-2026-10-10 pin. The couzo lane's claims list n0380, n0381, n0382 (printed 19.976775433975, 19.976969740406, 19.989479729400) as pending; think-k8z2 dates n0381 to e646c47, 2026-10-12T19:06Z. Under the owner's report-order rule (think-abi1), a watched-repository publication is reported at its first commit, so Fang's certificates are recorded before Couzo's #583/#586 where they were below the record then. Stages 1-2 and the stage 4 replay on claude/serene-hopper-xxh80m (squares-43); the claims.json and register plan go to session 01UXZs37jGv5vqVGADH7Gkn8's records lane (agreed 2026-10-14T08:57Z), which registers in report order.
@@ -49,24 +49,7 @@ STAGES 2 AND 4 (branch lane/fang-certs, commit 4275f846f, on the ostashev lane's
 Packet packing/resources/web/fang-direct-certificates-2026-10-13: 93 files retained, 29 pinned (14 svg, 14 decimal .txt, verify_cert_daniel.py identical to the issue-399 copy). Key [Fang direct certificates 2026-10-13] in resources/bibliography.yaml and resources/README.md. Tests: packing/tests/test_upper_bound_reports_fang_direct.py.
 Replay: replayed = [380, 381, 382] (coordinator's instruction; the one-worker certify over all 14, begun 09:29:38Z, was stopped at 09:44:12Z as its first 421 job started, and certify --finished assembled the receipt from the nine 380-382 outputs). 9 jobs, 1,303,026 pair decisions, 652.11 route CPU s, 863.27 job wall s, longest 138.29 s; all positives pass both routes, all 6 controls refused; least wall clearance 2^-65, least pair gaps 2.33e-20, 1.79e-20, 1.58e-20. check --replay (serial, one process): equal to the retained rows, 15m35s wall, 10m57s CPU, load 3-14, exit 0.
 
-WAITING ON AN OWNER BUDGET (this bead): the replay of 421, 422, 463, 464, 507, 508, 553, 601, 651, 758, 814. For the register plan (no register entry exists in a beyond-only plan, so the records lane chooses where this lives):
-unfinished_confirmations:
-  - what: >-
-      complete one-worker certify and check --replay of the fang-direct-certificates-2026-10-13
-      certificates at 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814 on both
-      maintained exact routes, 33 jobs
-    rung: C3
-    link: think-7bw3
-    estimated_cost:
-      cpu_hours: 3.02
-      basis: >-
-        10,865,736 pair decisions in each of certify and check --replay (1.51 CPU-hours each),
-        at the 5.0e-4 route CPU seconds a decision the 380-382 receipt measured (652.11 s for
-        1,303,026), cost taken as linear in pairs; about 4.0 hours of one-worker wall at load 6
-        to 10, up to 5.8. Each 814 job: 331 CPU s, 438 s of wall, up to 634 s at the worst
-        wall-to-CPU ratio seen (1.92), against the kernel's fixed 600 s JOB_TIMEOUT; each 758
-        job up to 550 s.
-      priced: '2026-10-14'
+REPLAY OF THE OTHER ELEVEN, DONE 2026-10-14 under the owner's budget (replays under 4 CPU-h), branch lane/fang-certs-replay; the 3.02 CPU-h unfinished confirmation is removed. replayed = all 14. certify --workers 1 over 421-814: 33 jobs, 16:32:40Z-18:20:44Z, 108m04s wall, 92m49s CPU, exit 0, no timeout; 10,865,736 pair decisions, 5,554.48 route CPU s, 6,446.79 job wall s; longest job 496.24 s (758 outside-container); 814 jobs 386, 352, 374 s wall (under the 600 s JOB_TIMEOUT). certify --finished assembled all 42 jobs (the nine 380-382 outputs reused, equal to the earlier receipt's rows) into 14 per-count receipt shards. Every positive passes both routes, all 28 controls refused; least wall clearance 2^-65 everywhere; least pair gaps equal the source's verify_output.txt. check --replay over all 42: equal to the retained rows, 102m47s wall, 98m01s CPU, load 1-8, exit 0.
 
 Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): the 14 beyond-horizon rows, verified at 380, 381 and 382 by E-fang-direct-exact-feasibility; the other eleven's replay priced at 3.02 CPU-hours.
 
