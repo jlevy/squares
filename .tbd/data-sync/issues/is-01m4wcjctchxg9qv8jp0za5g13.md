@@ -5,7 +5,7 @@ title: Repair regularization pre-push coverage, fixture isolation and browser re
 kind: bug
 status: in_progress
 priority: 1
-version: 8
+version: 10
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -17,10 +17,12 @@ child_order_hints:
   - is-01m4wds22twm2dtqwtsvkh1d9a
   - is-01m4wds2gvkq4ykv50mw0tqytg
   - is-01m4wds2z1rdbysrsxkj78mzka
+  - is-01m4whgptxkkcc0z6vanba6wsz
+  - is-01m4whgqb9hc2tmad1p1nmr7x7
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:12.395Z
-updated_at: 2026-10-14T05:22:20.256Z
+updated_at: 2026-10-14T06:27:40.520Z
 started_at: 2026-10-14T05:02:45.055Z
 ---
 At 80880db57 pre-push records/edit checks passed but 310-file behavioral selection produced13 failures and31 browser setup errors. Resolve new default-drawings Pages trigger coverage; fix tests leaking deterministic sibling directories and memoized synthetic paths under mandated failed-only pytest retention; diagnose and fix browser default-image/layout contracts without weakening checks. Preserve certificate behavior and rerun all affected groups.
