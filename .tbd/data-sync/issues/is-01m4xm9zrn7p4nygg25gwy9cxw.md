@@ -5,7 +5,7 @@ title: Publish launch history as News with homepage preview and daily sans-serif
 kind: feature
 status: in_progress
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10
 labels: []
@@ -17,10 +17,11 @@ child_order_hints:
   - is-01m4xq69vadfbk7k9wfehn22r8
   - is-01m4xrgsc3pb07b2b95s6dn0bb
   - is-01m4xrpdhct6kjaqad5wetq2yy
+  - is-01m4xtt5nyeqz0efzgcd8gb6h4
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:35:39.924Z
-updated_at: 2026-10-14T17:52:21.546Z
+updated_at: 2026-10-14T18:29:21.714Z
 started_at: 2026-10-14T16:36:49.748Z
 ---
 User directs moving the whole changelog/history to a dedicated News page and second navigation tab after Home. Use the usual uppercase sans-serif News H1; operational news body in sans-serif, grouped into hairline-bordered boxes per day. Homepage previews the first two news items and has a styled All news → button. Keep YAML/GitHub source history authoritative and frozen; About links to News and legacy About/changelog anchors remain navigable. Delegated to the site implementation agent together with full-width Atlas on separate delivery branch; apply component release policy, independent review and hosted/live verification.
