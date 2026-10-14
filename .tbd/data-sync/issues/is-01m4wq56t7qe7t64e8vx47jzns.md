@@ -5,7 +5,7 @@ title: "Import BuddenPing: 148 certificate refinements, 60 of them exact algebra
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T08:06:14.598Z
-updated_at: 2026-10-14T08:24:54.755Z
+updated_at: 2026-10-14T11:18:47.780Z
 started_at: 2026-10-14T08:06:19.172Z
 ---
 Pull request jlevy/squares#574 (BuddenPing, PingYou Ltd), head 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde of BuddenPing/squares (2026-10-13T01:58:38Z), treated as an intake report: never merged, approved or commented on here. Lane pr574 of the 2026-10-14 intake pass (think-mq0k), branch claude/wizardly-meitner-wqn4x3-intake-1014-pr574. Packet packing/resources/web/pingyou-pr574-certificates-2026-10-13/. Claim map, comparison, replay plan and draft acknowledgement in the notes.
@@ -98,3 +98,24 @@ certificates on the exact number-field route, comparing every count with the cur
 case records and the other open reports, and will register the results that the record
 does not already hold, crediting each packing's finder and PingYou Ltd for the
 certificate refinements. We will reply again with the outcome.
+
+## Stage 2 and stage 4 results (2026-10-14, branch claude/wizardly-meitner-wqn4x3-intake-1014-pr574)
+
+- Packet retained: pingyou-pr574-certificates-2026-10-13 (acquire_source --check passes;
+  derive --check passes for 85 rational and 60 algebraic facts from the pin and assets).
+- Rational replay, both routes, --workers 1 (one job at a time): 39 of the 60 counts
+  below every report finished before the session's 2-hour background ceiling stopped
+  the driver (08:11-10:13Z). 117 jobs, 39 positives pass both routes, 78 controls
+  refused; 4,555,860 pair decisions, 4,836 route CPU s, 6,992 job wall s, longest 204 s.
+  All positives are exact-contact certificates (wall clearance 0; pair gap 0 at 38).
+  check --replay re-decided N129, N156, N175, N176, N258, N261, N271 (21 jobs, 21m43s),
+  equal; all 117 admitted.
+- Algebraic replay, one route (sqpack exact_verify in the field): N70, N153, N207; 9 jobs
+  pass/refuse as required; 106,092 pair decisions, 699 CPU s, 787 wall s; check --replay
+  equal (12m57s).
+- Not run, priced: 21 remaining below-every-report rational counts ~2.8 h; other 25
+  declared rational counts ~0.8 h; rational check --replay of the other 32 counts ~1.5 h;
+  57 algebraic counts ~2.2 h on route 1; a second number-field route needs a W7 slice.
+- register-plan (rational, 85 counts) run; T-NNN at V0/C0, S1 drafted, published
+  2026-10-13; output kept at scratch register-plan.yaml (131 KB; claim states 85
+  exact sides as long fractions).
