@@ -5,7 +5,7 @@ title: "Address PR #602 reviews A and B: register prose, renumbering, closed-for
 kind: task
 status: open
 priority: 1
-version: 24
+version: 33
 labels: []
 dependencies: []
 child_order_hints:
@@ -32,7 +32,16 @@ child_order_hints:
   - is-01m4xnx72nt0n2ggzk7y3zw4t1
   - is-01m4xnx845np9xka60de83xqhf
   - is-01m4xnx9b0qp7t5cjaysqqywya
+  - is-01m4xz74qh2b30v01k7syxdgzr
+  - is-01m4xz75rmgeryvq86cwz2d17x
+  - is-01m4xz76srye962yacqj4xhjnf
+  - is-01m4xz77v8w8xks7jw8hq3vb2r
+  - is-01m4xz78ysa68w1s9nv6rt6rvy
+  - is-01m4xz79xxgt1gb7shssvexwam
+  - is-01m4xz7b00xpbabsvgm8s6rsgx
+  - is-01m4xz7c0gs64cr8rdftmhs1fj
+  - is-01m4xz7d2nxhtfyasgg1zma343
 created_at: 2026-10-14T17:03:11.592Z
-updated_at: 2026-10-14T17:03:40.896Z
+updated_at: 2026-10-14T19:46:29.589Z
 ---
 Review A (correctness) https://github.com/jlevy/squares/pull/602#pullrequestreview-5521587983; review B (senior engineering) https://github.com/jlevy/squares/pull/602#pullrequestreview-5521526635. One child per finding.
