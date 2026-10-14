@@ -21,8 +21,8 @@ experiment:
 Registered before source edits or timing.
 Operator: Astra subagent news_security_c; parent owns campaign indexes, source
 integration, and independent review.
-Status: measured; the exploratory performance hypothesis is rejected below.
-Source disposition awaits independent review and the parent’s integration decision.
+Status: rejected; the implementation is withdrawn.
+The frozen performance criterion was not met.
 
 ## Hypothesis and Frozen Criterion
 
@@ -102,8 +102,8 @@ changed.
 
 ## What the Prediction Missed
 
-The plan eliminates 28 repeated full-roster reads while preserving complete admission,
-but the measured node still prepares the full function-scoped private proposal, checks
+The plan replaces 28 per-case full-roster reads while preserving complete admission, but
+the measured node still prepares the full function-scoped private proposal, checks
 houses and history, parses registries, and validates schemas.
 Its setup remains roughly four seconds.
 The proposed change addresses only part of the inclusive cost.
@@ -119,6 +119,16 @@ planning, and reject changed full facts on a subsequent public request.
 Receipt and history validation remain fresh and unchanged.
 The parent may retain the refactor for reduced repeated work and explicit late-input
 protection, but this experiment does not satisfy its performance acceptance threshold.
+
+## Final Disposition
+
+The three-file production/fixture proposal is withdrawn.
+The original thin driver called `run_sample` directly; its receipts lack the maintained
+CLI’s complete provenance and registered arm labels.
+Its 11.97% arithmetic reduction already misses the frozen 15% rule.
+Preserve those observations as limited evidence, not campaign acceptance.
+The extra batching and freshness machinery had no separately demonstrated correctness
+requirement sufficient to retain it after that failure.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

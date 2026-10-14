@@ -19,9 +19,10 @@ experiment:
 # Batch Admitted Gupta Rendering Within Each Private Fixture
 
 Registered before this variant’s source change or timing.
-Operator: Astra subagent news_security_c. Status: in progress for this bounded turn;
-parent owns campaign indexes and independent source disposition.
-VE-008 and VE-009 belong to other work.
+Operator: Astra subagent news_security_c. Status: rejected and withdrawn; the retained
+CLI cohort misses the frozen range-separation criterion.
+The coordinator owns campaign indexes and source disposition.
+VE-008 and VE-009 are separate experiments.
 
 ## Hypothesis and Criterion
 
@@ -69,6 +70,34 @@ Raw receipts, exact control/candidate source snapshots and the thin driver calli
 maintained instrument live in
 `/Users/levy/wrk/github/squares/.codex/regularization-closeout-evidence-2026-10-13/pr599-integration/ve010-gupta/`.
 No timings had been taken for this variant at registration.
+
+## Result and Withdrawal
+
+The original thin-driver cohort passed all six tests and showed a numerical median
+reduction from 9.9090 to 7.8679 seconds (20.60%), with separated ranges.
+It used the primary Python 3.14.7 build from August 5 with Clang 21. Its incomplete
+receipt metadata prevents full campaign acceptance; no pooling with a different
+interpreter is valid.
+
+A separate repeat used the maintained CLI, registered arm labels and complete provenance
+with the existing external Python 3.14.7 build from August 25 with Clang 22. All six
+functional observations passed.
+The generated arithmetic comparison is:
+
+- Control: 10.66 (9.08-10.96), n=3 seconds.
+- Candidate: 7.24 (7.17-11.67), n=3 seconds.
+- Verdict: **No detectable effect: ranges overlap or candidate is slower.**
+
+The 11.6740-second candidate remains in the data without selective retry or exclusion.
+The [generated report](../report.md) uses the original CLI receipts and JUnit; the
+original thin-driver receipts remain in the external archive separately.
+
+Semantic preservation and independent static review do not establish performance
+acceptance or an integrated gate pass.
+The author recommended withdrawal on complexity grounds, and the coordinator accepted
+it. All three routine source files now equal the pre-experiment version.
+No threshold, marker, ceiling or scientific acceptance rule changed.
+Exact candidate source snapshots and both interpreter cohorts are retained.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

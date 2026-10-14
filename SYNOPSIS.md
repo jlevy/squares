@@ -646,6 +646,13 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Feature: Predictable CI Feedback and Reusable Checkpoint Evidence](docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md) | implementation plan | current | transient | — |
+| [Start Loadfile Work Units in Recorded Cost Order](packing/benchmarks/validation-efficiency/experiments/VE-006-recorded-cost-first-loadfile.md) | research synthesis | record | retained | — |
+| [Reuse Admitted Gupta Facts Within One Confirmation Plan](packing/benchmarks/validation-efficiency/experiments/VE-007-gupta-invocation-facts.md) | research synthesis | record | retained | — |
+| [Reuse one paper visit for figure and credit probes](packing/benchmarks/validation-efficiency/experiments/VE-008-paper-layout-probes.md) | research synthesis | record | retained | — |
+| [Share complete immutable publications within one pytest invocation](packing/benchmarks/validation-efficiency/experiments/VE-009-shared-test-publication.md) | research synthesis | record | retained | — |
+| [Batch Admitted Gupta Rendering Within Each Private Fixture](packing/benchmarks/validation-efficiency/experiments/VE-010-gupta-fixture-renderings.md) | research synthesis | record | retained | — |
+| [Copy Complete Guarded Native Receipts](packing/benchmarks/validation-efficiency/experiments/VE-011-guarded-receipt-copies.md) | research synthesis | record | retained | — |
 | [Review: the 2026-10-14 upper-bound intake ledger](docs/project/reviews/review-2026-10-14-intake-ledger.md) | dated review record | record | retained | — |
 | [Mathematical Review: wand125’s Fine-Net Lower Bounds at n = 37, 39 and 44 and the Linear Lower Bound at n = 145](docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md) | dated review record | record | retained | — |
 | [Fang’s Excess Theorem and Direct Certificates: Mathematical Review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) | dated review record | record | retained | — |

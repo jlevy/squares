@@ -1,0 +1,6 @@
+.                                                                        [100%]
+============================== slowest durations ===============================
+5.69s setup    tests/test_confirm_gupta_records.py::test_late_case_or_registry_refuses_the_entire_write_plan[result-scope]
+4.33s call     tests/test_confirm_gupta_records.py::test_late_case_or_registry_refuses_the_entire_write_plan[result-scope]
+0.04s teardown tests/test_confirm_gupta_records.py::test_late_case_or_registry_refuses_the_entire_write_plan[result-scope]
+1 passed in 10.67s

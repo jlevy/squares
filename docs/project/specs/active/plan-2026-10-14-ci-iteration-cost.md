@@ -264,6 +264,45 @@ in the external archive above.
 This is remaining measurement work, not a production scheduler change in PR599 or a
 measured improvement.
 
+## Current Stabilization Batch
+
+News and Explanations are delivered: PR604 merged as `16ea3bd06`, and its main
+deployment passed 4,243 live expectations.
+The remaining work here is CI stabilization, not an unpublished News feature.
+PR602 subsequently merged as `9b32da04d`, adding 24 results and the reviewed intake
+material. PR599 preserves that main’s publication history and pins, keeps its three
+complete-module cost admissions, and reserves the site-only successor v0.7.2 for the
+public guide and bundled code-font correction.
+
+The `77152fb83` hosted cohort exposed three ordinary-suite failures: a non-tier CLI flag
+was not classified, and two release-generator format checks failed.
+The strict cohort also found that literal `ℝ` in site code fell back outside the bundled
+font. Focused repairs retain the existing thresholds and glyph refusal controls.
+They require the final combined source gate; an earlier isolated pass is not that gate.
+
+The measured optimization candidates are kept separate:
+
+| Candidate | Evidence and disposition |
+| --- | --- |
+| VE007: one Gupta fact admission per plan | The thin-driver arithmetic reduction was 11.97%, below the declared 15%. The receipts also lack the complete CLI provenance. Rejected and withdrawn. |
+| VE010: Gupta plan plus fixture batching | The thin-driver cohort showed 20.60%, but a separate full-provenance CLI cohort had overlapping ranges despite six functional passes. The generated report rejects it. Both interpreter cohorts and the slow candidate observation remain; all three routine source files are restored. |
+| VE008: one paper visit for two probes | The full actual oracle refused one figure field, 0.371 versus 0.372, after 130.667s. All 68 credit rows and the other 62-figure fields matched. No timing samples ran. The routine optimization is withdrawn; source, driver, reports and the earlier bootstrap failures are retained. |
+| VE009: one complete test publication | Twenty-five transport/refusal controls passed, including three real workers. The old 160-result corpus passed all 470 consumer tests in 125.852s, including 79.539s of controller preparation. Main now contains 184 results, so a new source freeze and actual corpus oracle precede paired timing. Nothing is enabled in CI on this evidence alone. |
+| VE011: guarded native receipt copies | The maintained diagnostic admitted all nine historical houses and their refusal controls. Four deep copies account for 2.2382s of profiled cumulative time; profiling adds overhead. The isolated test-helper candidate preserves all custody checks and has no runtime or performance verdict yet. |
+
+The
+[existing campaign report](../../../../packing/benchmarks/validation-efficiency/report.md)
+uses original full-provenance receipts and JUnit.
+Thin-driver and standalone-oracle observations remain separately identified.
+Exact multi-node/module targets use the existing experiment contract’s new list form;
+every command token and complete JUnit identity set must match.
+This is a representation correction, not a changed criterion.
+
+The retained nine-house profile is diagnostic only and receives no gate credit.
+Rejected hypotheses do not justify retrying, deleting a field, moving fixture work
+outside the timer, changing markers or raising a ceiling.
+The three-minute objective remains unproved.
+
 ## Design
 
 ### One coverage plan, existing execution surfaces

@@ -14,14 +14,20 @@ experiment:
   minimum_samples: 3
   minimum_improvement: 0.15
   maximum_allocation_ratio: 1.25
-  target: "tests/test_overview.py tests/test_site_head.py tests/test_site_documents.py tests/test_repo_links.py; quick marker; four loadfile workers"
+  target:
+    - tests/test_overview.py
+    - tests/test_site_head.py
+    - tests/test_site_documents.py
+    - tests/test_repo_links.py
 ---
 # Share complete immutable publications within one pytest invocation
 
 Registered before candidate measurements.
 Implementation was authorized just before this record was written; no candidate
 measurement had been observed.
-Status: pending bounded implementation and its review.
+Status: implemented; the original 470-case semantic oracle passed on the 160-result
+corpus. The new 184-result main corpus requires a fresh semantic check before timing.
+No paired performance samples have run.
 
 ## Hypothesis and Frozen Criterion
 
@@ -63,9 +69,13 @@ existing campaign instrument.
 Other source edits may be light; no known heavy local measurement overlaps these
 observations. Keep all original failures and incomplete observations.
 
-The baseline is the current 77152fb83 source with the common reviewed functional font
-and CLI repairs. Capture those exact bytes before alternating the owned candidate files;
-do not substitute a different rendered corpus or source revision between arms.
+The original semantic check used the 77152fb83 source with the common reviewed font and
+CLI repairs. Main PR #602 subsequently expanded the corpus from 160 to 184 results.
+The timing baseline is now the integration at `f13efcb7a`, preserving main `9b32da04d`
+and its new results, plus the common functional repairs.
+Record the final documentation baseline commit and exact source bytes before a fresh
+corpus check and alternating the candidate files.
+Keep that corpus and source fixed between arms.
 Retained hosted timings identify the candidate, not recoverable time or CPU attribution.
 
 ## Evidence

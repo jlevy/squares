@@ -14,15 +14,19 @@ experiment:
   minimum_samples: 3
   minimum_improvement: 0.15
   maximum_allocation_ratio: 1.25
-  target: "tests/test_site_glyphs.py: existing two figure cases and two front-layout width cases"
+  target:
+    - tests/test_site_glyphs.py::test_every_paper_sets_every_figure_one_way
+    - tests/test_site_glyphs.py::test_the_first_figure_is_the_drawing_alone_at_the_first_papers_width
+    - tests/test_site_glyphs.py::test_every_paper_lays_the_front_out_one_way[1280]
+    - tests/test_site_glyphs.py::test_every_paper_lays_the_front_out_one_way[390]
 ---
 # Reuse one paper visit for figure and credit probes
 
 Registered before candidate measurements.
 Implementation was authorized just before this record was written; no candidate
 measurement had been observed.
-Status: bounded implementation is present; real-browser verification and timing have not
-started.
+Status: rejected by the exact-report validity oracle; the routine-code optimization was
+withdrawn. No timed control/candidate observations ran.
 
 ## Hypothesis and Frozen Criterion
 
@@ -82,8 +86,9 @@ Its failed start/end receipt is retained unchanged; no report comparison or perf
 observation completed.
 
 The existing locked external environment has Python 3.14.7 and the required
-dependencies. All actual browser verification and six timed observations use that
-absolute interpreter.
+dependencies.
+Actual browser verification used that absolute interpreter; the six planned
+timed observations did not run.
 Its KPress source is clean at the repository’s pinned revision; the referenced workbench
 tools match the frozen source.
 The instrument still places the candidate’s `packing/src` and `packing` first for
@@ -94,12 +99,50 @@ All frozen production and test inputs were checked unchanged before the correcte
 verification. Source-freeze v2 retains this chronology and the automatically captured
 interpreter/module context; the original snapshot and failed receipt remain available.
 
+The external-interpreter verification next reached the unchanged full site fixture, then
+stopped in 12.792 seconds because four new synopsis links were absent from the committed
+Git inventory. No layout probes or comparison completed.
+The publication link guard was kept intact; a normal docs-only commit included the four
+registered experiment records before source-freeze v3.
+
+Each timed observation’s complete retained report must also equal the verified canonical
+report outside the timed interval.
+Any changed field invalidates that observation and stops the screen; no field is dropped
+or normalized to obtain agreement.
+
+## Outcome: Exact-Report Refusal
+
+The completed source-freeze-v3 oracle took **130.667 seconds** and refused the
+candidate. Both arms returned 62 figure rows and 68 credit rows.
+All credit fields matched exactly between the independent DPR1 reader and the combined
+DPR2 reader. One figure field differed: `n11-lower-bounds-explainer.html`, width 1280,
+figure 3, `share` was `0.371` in the independent control and `0.372` in the candidate.
+The other fields, report order and inventories matched.
+The cause of that difference was not established.
+
+The frozen validity rule rejected this candidate before performance sampling.
+There were **zero timed observations**: no three-pair screen, timing median, range or
+speedup verdict exists.
+The 0.719-second import bootstrap failure and 12.792-second Git inventory fixture
+failure above remain failed receipts; neither is a performance sample or a passing
+semantic result. No tolerance was widened, report field dropped or oracle retried after
+the one-field refusal.
+
+The combined reader, shared test fixture and cost-only tests were withdrawn.
+The independent APIs and all original figure, front, platform and disabled-head checks
+remain. The functional font/CLI repairs and literal-code browser negative controls are
+retained. Exact candidate source snapshots, the reproduction patch and the moved thin
+driver remain under `pr599-integration/ve008-paper-layout/rejected-candidate/` in the
+closeout evidence archive, outside disposable scratch.
+The full raw report is `report-verify-27b2a2e74c4543de8792a355e4253693.json`; its oracle
+run is `928cfb49348b4dda828cc1e2f5fbab24`.
+
 ## Evidence
 
 Raw receipts and source snapshots belong in the existing task closeout archive under
 pr599-integration, outside disposable scratch.
-The campaign report is generated from validated records after measurement; no outcome is
-assigned before then.
+The campaign report is generated from retained records; this experiment has an explicit
+validity refusal and no performance result.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

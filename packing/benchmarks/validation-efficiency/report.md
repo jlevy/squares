@@ -14,6 +14,11 @@ Selected test hashes do not establish whole-tree equivalence. Within-arm whole-t
 | [VE-004](experiments/VE-004-checks-start-order.md) | 93.18 (90.81-94.13), n=3 | 71.84 (64.96-73.09), n=3 | Screen passes (22.9% median reduction); correctness and complexity review required |
 | [VE-005](experiments/VE-005-rollup-corpus-snapshot.md) | 47.72 (44.96-50.80), n=3 | 2.31 (2.29-3.20), n=3 | Screen passes (95.2% median reduction); correctness and complexity review required; whole-tree diff varied within an arm: affected-source audit required, whole-tree equivalence is not established |
 | [VE-006](experiments/VE-006-recorded-cost-first-loadfile.md) | No passing samples | No passing samples | Pending samples |
+| [VE-007](experiments/VE-007-gupta-invocation-facts.md) | No passing samples | No passing samples | Pending samples |
+| [VE-008](experiments/VE-008-paper-layout-probes.md) | No passing samples | No passing samples | Pending samples |
+| [VE-009](experiments/VE-009-shared-test-publication.md) | No passing samples | No passing samples | Pending samples |
+| [VE-010](experiments/VE-010-gupta-fixture-renderings.md) | 10.66 (9.08-10.96), n=3 | 7.24 (7.17-11.67), n=3 | No detectable effect: ranges overlap or candidate is slower |
+| [VE-011](experiments/VE-011-guarded-receipt-copies.md) | No passing samples | No passing samples | Pending samples |
 
 ## Observations
 
@@ -44,6 +49,12 @@ Every observation is listed, including incomplete or failed work.
 - `9548d7299e50469180f6f37a58027e13`: rollup-corpus-candidate, passed, 3.20s, 1 test cases; [output](runs/9548d7299e50469180f6f37a58027e13.stdout.log), [errors](runs/9548d7299e50469180f6f37a58027e13.stderr.log).
 - `3ea1ba12b3314ffa8530235f20062d6f`: rollup-corpus-control, passed, 50.80s, 1 test cases; [output](runs/3ea1ba12b3314ffa8530235f20062d6f.stdout.log), [errors](runs/3ea1ba12b3314ffa8530235f20062d6f.stderr.log).
 - `954782ba85ac461e8f046fff6eb454a0`: rollup-corpus-candidate, passed, 2.31s, 1 test cases; [output](runs/954782ba85ac461e8f046fff6eb454a0.stdout.log), [errors](runs/954782ba85ac461e8f046fff6eb454a0.stderr.log).
+- `58b59c11cc154330a9b7af7705ddff9a`: gupta-original-control, passed, 9.08s, 1 test cases; [output](runs/58b59c11cc154330a9b7af7705ddff9a.stdout.log), [errors](runs/58b59c11cc154330a9b7af7705ddff9a.stderr.log).
+- `81eaffed803b4feebd12536e574b6c09`: gupta-production-and-fixture-candidate, passed, 7.17s, 1 test cases; [output](runs/81eaffed803b4feebd12536e574b6c09.stdout.log), [errors](runs/81eaffed803b4feebd12536e574b6c09.stderr.log).
+- `12f3b81a7812499d90ff22205de9400d`: gupta-original-control, passed, 10.66s, 1 test cases; [output](runs/12f3b81a7812499d90ff22205de9400d.stdout.log), [errors](runs/12f3b81a7812499d90ff22205de9400d.stderr.log).
+- `0698d977871f4ef3aacbd35f8f4cc84e`: gupta-production-and-fixture-candidate, passed, 11.67s, 1 test cases; [output](runs/0698d977871f4ef3aacbd35f8f4cc84e.stdout.log), [errors](runs/0698d977871f4ef3aacbd35f8f4cc84e.stderr.log).
+- `5d4b0e0e81784e61ac9508ab88cfc2f5`: gupta-original-control, passed, 10.96s, 1 test cases; [output](runs/5d4b0e0e81784e61ac9508ab88cfc2f5.stdout.log), [errors](runs/5d4b0e0e81784e61ac9508ab88cfc2f5.stderr.log).
+- `903ae7b657424c6d9c0c92fe4a81fcce`: gupta-production-and-fixture-candidate, passed, 7.24s, 1 test cases; [output](runs/903ae7b657424c6d9c0c92fe4a81fcce.stdout.log), [errors](runs/903ae7b657424c6d9c0c92fe4a81fcce.stderr.log).
 
 The append-only [receipts](runs/receipts.jsonl) retain commands and provenance.
 

@@ -9,9 +9,10 @@ author: Codex, for the repository owner
 
 **Author:** Codex, for the repository owner
 
-**Status:** Changelog published in PR #590; News and full-width Atlas merged in PR #604,
-with deployment verification pending.
-CI delivery corrections continue in PR #599.
+**Status:** Changelog, News, Explanations and full-width Atlas are published.
+PR #604 merged as `16ea3bd06`; its main deployment passed all 4,243 live checks.
+CI delivery corrections continue separately in PR #599, now integrating the later
+24-result intake in PR #602.
 
 **Tracking:** `think-j7nb` (planning), `think-jpto` (implementation epic), `think-kzet`
 (News), `think-q65u` (Atlas width)
