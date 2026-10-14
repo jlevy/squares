@@ -3,15 +3,19 @@ type: is
 id: is-01m4vczk3s9agjadp837m0479x
 title: "Stack 498: #511/#530 must merge atomically with #580 (yield_to_bound, BOUND_FIRST)"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels:
   - stack-498
   - merge-constraint
 dependencies: []
 created_at: 2026-10-13T19:49:10.393Z
-updated_at: 2026-10-13T19:49:10.393Z
+updated_at: 2026-10-14T02:58:06.572Z
+closed_at: 2026-10-14T02:58:06.572Z
+close_reason: "Merged atomically: #511, #530, #548, #549, #559 and #580 in one stack merge at aeef99e (14 Oct 2026)"
+resolution: null
+duplicate_of: null
 ---
 Formal stack 498 has merged layers singly: #487 on 11 October, and #497 alone at
 2026-10-13T18:14:15Z. Two layers carry correctness fixes that live in #580 only, so
