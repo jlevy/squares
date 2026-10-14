@@ -313,6 +313,7 @@ def test_side_reader_retains_the_full_frames_scalar_identity(kind: str) -> None:
         ("decimal-nan", "finite value"),
         ("decimal-infinity", "finite value"),
         ("decimal-corner-nan", "finite value"),
+        ("decimal-corner-triple", "too many values to unpack"),
         ("missing-receipt", "numerical receipt is absent or failed"),
         ("failed-receipt", "numerical receipt is absent or failed"),
         ("missing-claim-field", "limitations"),
@@ -345,6 +346,11 @@ def test_side_reader_preserves_malformed_literal_and_receipt_refusals(
     elif mutation == "decimal-corner-nan":
         witness["representation"] = "corners"
         witness["squares"] = [{"corners": [["NaN", "0"], ["1", "0"], ["1", "1"], ["0", "1"]]}]
+    elif mutation == "decimal-corner-triple":
+        witness["representation"] = "corners"
+        witness["squares"] = [
+            {"corners": [["0", "0", "not-a-number"], ["1", "0"], ["1", "1"], ["0", "1"]]}
+        ]
     elif mutation == "missing-receipt":
         del witness["certificate"]
     elif mutation == "failed-receipt":

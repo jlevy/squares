@@ -1674,7 +1674,7 @@ def side_from_witness(witness: dict) -> ScalarSource:
                 return scalar_from_decimal(str(value))
             return _decimal_pose_literal(value)
 
-        validate_presentation_literals(witness, parse)
+        validate_presentation_literals(witness, parse, unpack_corners=True)
     _witness_check(witness)
     _witness_source(witness)
     return side

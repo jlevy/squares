@@ -388,6 +388,7 @@ def validate_presentation_literals(
     parse: Callable[[Any], Scalar],
     *,
     angle_basis_allowed: bool = True,
+    unpack_corners: bool = False,
 ) -> None:
     """Parse the recorded coordinate literals without constructing square vertices.
 
@@ -401,8 +402,12 @@ def validate_presentation_literals(
     for square in witness["squares"]:
         if representation == "corners":
             for point in square["corners"]:
-                parse(point[0])
-                parse(point[1])
+                if unpack_corners:
+                    x, y = point
+                else:
+                    x, y = point[0], point[1]
+                parse(x)
+                parse(y)
         else:
             parse(square["center"][0])
             parse(square["center"][1])

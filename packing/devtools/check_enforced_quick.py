@@ -18,6 +18,9 @@ from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree as ET
 
+import pytest
+from _pytest.junitxml import mangle_test_address
+
 from devtools import run_negative_controls, suite_files
 from sqpack.cli import validate
 from sqpack.yamlio import safe_load
@@ -246,16 +249,26 @@ def modules_for_shard(modules: set[str], suite: str) -> list[str]:
     )
 
 
-def node_key(node: str) -> str:
-    path, *parts = node.split("::")
-    module = path.removesuffix(".py").removeprefix("../").replace("/", ".")
-    return ".".join((module, *parts[:-1])) + "::" + parts[-1]
+COLLECTION_PREFIX = "ENFORCED_QUICK_COLLECTION="
+
+
+def pytest_collection_finish(session: pytest.Session) -> None:
+    """Report physical paths and pytest's actual JUnit identities without guesses."""
+    rows = []
+    for item in session.items:
+        names = mangle_test_address(item.nodeid)
+        rows.append(
+            {
+                "path": str(item.path.relative_to(REPO)),
+                "key": ".".join(names[:-1]) + "::" + names[-1],
+            }
+        )
+    print(COLLECTION_PREFIX + json.dumps(rows))
 
 
 def collect_nodes(modules: Sequence[str]) -> set[str]:
     if not modules:
         return set()
-    paths = [os.path.relpath(REPO / path, ROOT) for path in modules]
     environment = dict(os.environ)
     environment.pop("PACKING_VALIDATION_ARTIFACT_DIR", None)
     result = subprocess.run(
@@ -267,9 +280,11 @@ def collect_nodes(modules: Sequence[str]) -> set[str]:
             "-q",
             "-p",
             "no:cacheprovider",
+            "-p",
+            "devtools.check_enforced_quick",
             "-m",
             validate.QUICK_TESTS,
-            *paths,
+            *validate.BEHAVIORAL_TEST_ROOTS,
         ),
         cwd=ROOT,
         env=environment,
@@ -279,16 +294,19 @@ def collect_nodes(modules: Sequence[str]) -> set[str]:
     )
     if result.returncode:
         raise CoverageError(f"required-case collection failed: {result.stdout}{result.stderr}")
-    nodes = {
-        node_key(line)
+    documents = [
+        line.removeprefix(COLLECTION_PREFIX)
         for line in result.stdout.splitlines()
-        if any(line.startswith(path + "::") for path in paths)
-    }
-    for path in paths:
-        prefix = path.removesuffix(".py").removeprefix("../").replace("/", ".")
-        if not any(node.startswith((prefix + "::", prefix + ".")) for node in nodes):
+        if line.startswith(COLLECTION_PREFIX)
+    ]
+    if len(documents) != 1:
+        raise CoverageError("required-case collection did not produce one physical-path census")
+    rows = json.loads(documents[0])
+    selected = [row for row in rows if row["path"] in modules]
+    for path in modules:
+        if not any(row["path"] == path for row in selected):
             raise CoverageError(f"required module collected no quick cases: {path}")
-    return nodes
+    return {row["key"] for row in selected}
 
 
 def junit_nodes(documents: Sequence[str]) -> dict[str, str]:
@@ -319,7 +337,10 @@ def execution_problems(
         if observed.get(node) != "passed"
     ]
     prefixes = {
-        path.removeprefix("packing/").removesuffix(".py").replace("/", ".")
+        path.removeprefix("packing/")
+        .removeprefix("packages/workbench/tests/")
+        .removesuffix(".py")
+        .replace("/", ".")
         for path in protected_modules
     }
     for node, status in observed.items():

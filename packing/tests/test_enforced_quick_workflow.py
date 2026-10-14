@@ -225,3 +225,59 @@ def test_schema_control_selection_and_journal_require_exact_ten_current_controls
         step.get("if") == "always()" and "upload-artifact@" in step.get("uses", "")
         for step in job["steps"]
     )
+
+
+def test_required_collection_uses_physical_paths_and_actual_junit_names(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import json  # noqa: PLC0415
+
+    paths = ["packing/tests/test_one.py", "packages/workbench/tests/test_poster.py"]
+    rows = [
+        {"path": paths[0], "key": "tests.test_one.TestGroup::test_case[a::b]"},
+        {"path": paths[1], "key": "test_poster::test_poster[a::b]"},
+        {"path": "packing/tests/test_other.py", "key": "tests.test_other::test_case"},
+    ]
+    calls: list[tuple[str, ...]] = []
+
+    def collected(command: tuple[str, ...], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        calls.append(command)
+        return subprocess.CompletedProcess(
+            command, 0, coverage.COLLECTION_PREFIX + json.dumps(rows), ""
+        )
+
+    monkeypatch.setattr(coverage.subprocess, "run", collected)
+    assert coverage.collect_nodes(paths) == {rows[0]["key"], rows[1]["key"]}
+    assert calls[0][-2:] == validate.BEHAVIORAL_TEST_ROOTS
+    assert "devtools.check_enforced_quick" in calls[0]
+    with pytest.raises(coverage.CoverageError, match="no quick cases"):
+        coverage.collect_nodes(["packages/workbench/tests/test_missing.py"])
+    skipped = "test_poster::test_ffmpeg_returns_the_frame_asked_for"
+    assert coverage.execution_problems(set(), {skipped: "skipped"}, {paths[1]})
+
+
+def test_collection_hook_preserves_workbench_path_class_and_parameter_identity(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    import json  # noqa: PLC0415
+    from types import SimpleNamespace  # noqa: PLC0415
+
+    session = cast(
+        pytest.Session,
+        SimpleNamespace(
+            items=[
+                SimpleNamespace(
+                    path=REPO / "packages/workbench/tests/test_poster.py",
+                    nodeid="test_poster.py::TestGroup::test_poster[a::b]",
+                )
+            ]
+        ),
+    )
+    coverage.pytest_collection_finish(session)
+    output = capsys.readouterr().out.strip().removeprefix(coverage.COLLECTION_PREFIX)
+    assert json.loads(output) == [
+        {
+            "path": "packages/workbench/tests/test_poster.py",
+            "key": "test_poster.TestGroup::test_poster[a::b]",
+        }
+    ]

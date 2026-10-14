@@ -478,6 +478,23 @@ controls must run at the corrected source too.
 This bounded completion is tracked in think-4syd; the main full run remains the
 backstop, and supplies no missing pre-merge evidence.
 
+### Measured shard assignment
+
+PR #599 refreshes the cost record from all four pytest reports in hosted run
+38565361504, preserving the existing planning capacities and enforcement limits.
+Each report records pytest exit status zero and its actual source and cohort identity.
+The encompassing full validation failed four CALL ceilings; those failures remain failed
+evidence.
+Measured costs support assigning test files, not declaring the gate successful.
+The complete cohort reduces unrecorded files from 73 to 25 of 788; the largest shard
+share is 5.4%, below the existing 10% limit.
+The corrected assignment still requires a fresh enforced run.
+
+The checkpoint collects both canonical test roots and joins physical module paths to
+pytest’s own JUnit identities.
+This preserves workbench names, class names and parameter text containing `::`, while
+refusing missing or skipped required cases.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
