@@ -3,9 +3,9 @@ type: is
 id: is-01m4padhpzys6zpwepcve5pwxm
 title: "Import itsnaka (SQUISH): nine Mondrian packings at n = 176-305, smaller packings of 238, 239, 270, 305 (#500)"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 12
+version: 13
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,10 +14,10 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:09.823Z
-updated_at: 2026-10-14T09:26:41.611Z
+updated_at: 2026-10-14T18:51:37.117Z
 started_at: 2026-10-11T20:28:23.635Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-14T18:51:37.116Z
+close_reason: "itsnaka 56fa71f read landed on main with #601 (merge 2319afaa5); the read's commit is 1364b0f1b after the message rewrite (was 31a817e8e)."
 resolution: null
 duplicate_of: null
 ---
