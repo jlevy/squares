@@ -1,6 +1,6 @@
 # Feature: Recent Results on the Results Page
 
-**Date:** 2026-10-11, revised 2026-10-12
+**Date:** 2026-10-11, revised 2026-10-12 and 2026-10-14
 
 **Author:** Claude, lane W of the 2026-10-11 intake pass, bead `think-2z22`
 
@@ -50,16 +50,21 @@ question.
   it is what the table’s Date column and its Max age filter use.
   The weekly rollup’s heading says “by Week Published”.
 
-A result published before the seven days and registered in them appears in both
-sections, under the day it was added and the week it was published.
-On 12 October that is T-090, T-091 and T-092. No row shows a day after its registration
-(the tests hold the register to this), so a result shown on any day from the rollup’s
-first Monday on is in at least one of the two sections.
+A result published before the seven days and registered in them appears in both sections
+if it is at S3 or above, under the day it was added and the week it was published.
+On the register at the merge with `main` (`aeef99ef0`) one result is placed so: T-101,
+published on 5 October and added on 6 October, which is at S2 and so is listed only
+under 6 October.
+On 12 October the same rule put T-090, T-091 and T-092 in both sections.
+No row shows a day after its registration (the tests hold the register to this), so a
+result at the floor shown on any day from the rollup’s first Monday on is in at least
+one of the two sections.
 
 ### The seven days
 
 The window is the register’s newest `registered` date, `reference_date`, and the seven
-days before it: 5 to 12 October 2026 on this branch.
+days before it: 6 to 13 October 2026 on the register at the merge with `main`, eight
+blocks holding 57 results.
 That is the cutoff `?added-age=7` holds a row to on that day (`age_cutoff`, the function
 Max age already uses), so the section and its heading’s link list the same results when
 read on the day of the last registration.
@@ -104,8 +109,9 @@ The homepage’s link to the complete table forwards both parameters.
 
 The weekly rollup covers the four ISO weeks (Monday to Sunday) up to the day before the
 seven days begin. If they begin mid-week, the newest week is cut at that day and its
-summary names the days it covers (`span_label`). On this branch they begin on a Monday,
-so the weeks are 7 September to 4 October.
+summary names the days it covers (`span_label`). On the register at the merge with
+`main` they begin on Tuesday 6 October, so the newest week is 5 October alone and the
+others run from 14 September to 4 October.
 
 ### What a weekly line says
 
@@ -143,8 +149,10 @@ That is a one-function change in `credit_link`.
   rubric’s “a substantive case result or machine audit”.
   The template takes `S3` and “four weeks” from `ROLLUP_FLOOR` and `ROLLUP_WEEKS`, and
   “seven” from `ADDED_DAYS`. The seven days have no floor.
-- **Draft scores count as recorded.** The intake stack’s significance review (layer 5)
-  confirms every draft, so the question does not block this work.
+- **Draft scores count as recorded.** On the register at the merge with `main`, 87 of
+  the 155 entries carry a score whose `by` says draft.
+  The intake stack’s significance review (layer 5) confirms every draft, so the question
+  does not block this work.
 - **Superseded results are included, muted, and titled “Superseded”** in both sections:
   a result superseded since was still new in its day and its week.
   The owner kept this choice.
@@ -174,13 +182,15 @@ unchanged.
 
 ## Byte Cost
 
+Measured on the register at the merge with `main` (`aeef99ef0`):
+
 | Measure | Bytes |
 | --- | ---: |
-| The seven days, 65 results over 5 to 12 October | 20,013 |
-| The weekly rollup, 55 results in the four weeks before | 8,174 |
-| Both sections | 28,187 |
+| The seven days, 57 results over 6 to 13 October | 17,545 |
+| The weekly rollup, 55 results in the four weeks before | 8,285 |
+| Both sections | 25,830 |
 | Ceiling for both (`tests/test_results_rollup.py`, `ROLLUP_BYTES`) | 48,000 |
-| `results.html` on this branch | 896,074 |
+| `results.html` on this branch | 909,180 |
 | Page ceiling (`site_urls.PAGE_BUDGET_EXCEPTIONS`, `test_overview.PAGE_CEILINGS`) | 950,000 |
 
 An entry of the seven days costs about 308 bytes: its id link, headline, cases, rungs
@@ -189,7 +199,7 @@ The weekly rollup costs about 30 bytes an id and 250 a line, as before.
 The prototype’s ceiling of 24,000 held the weekly rollup alone.
 The busiest eight days so far, to 6 October, registered 76 results, about 23,400 bytes
 at that rate, so the ceiling is 48,000, about 1.4 times the largest the record has given
-and 1.7 times the current size.
+and 1.9 times the current size.
 Past it the remedy is a shorter entry, not a higher number, because the page’s own
 ceiling is shared with every row of the table.
 

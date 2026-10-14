@@ -80,7 +80,9 @@ DAY_LINK = re.compile(
 #: asked for, and 8,174 for the 55 S3+ results of the four weeks before. The busiest
 #: eight days so far, to 6 October, registered 76 results, about 23,400 bytes at that
 #: rate, and the four-week rollup has held 91 (11,605), so this is about 1.4 times the
-#: largest the record has given and 1.7 times today's.
+#: largest the record has given. On the register at the merge with `main` on 14 October
+#: (`aeef99ef0`) the two measure 25,830: 17,545 for the 57 results added over 6-13
+#: October and 8,285 for 55 in the weeks before, so the ceiling is 1.9 times that.
 #: Past it the overview is becoming a second table, and the remedy is a shorter entry,
 #: not a higher number: the page's own ceiling (`test_overview.PAGE_CEILINGS`) is shared
 #: with every row of the table.
