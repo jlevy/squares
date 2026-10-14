@@ -737,7 +737,7 @@ def result_facets(result: Result) -> str:
     its kind, the listed projects it is attributed to, as their slugs a space apart
     (`result_projects`; empty for most rows), its status, whether it is current, which
     is to say not superseded (`is_superseded`), its cases, the date the table shows, and
-    the day the register took it in (`registered_day`), which the Added filters read."""
+    the day it reached the site (`landed_day`), which the Added filters read."""
     record = result.record
     return (
         f'data-source="{"ours" if result.ours else "others"}" '
@@ -750,7 +750,7 @@ def result_facets(result: Result) -> str:
         f'data-current="{"false" if is_superseded(result) else "true"}" '
         f'data-n="{_esc(result_cases(result))}" '
         f'data-date="{_esc(first_day(result.dated[1]))}" '
-        f'data-added="{_esc(result.record["registered"])}"'
+        f'data-added="{landed_day(result).isoformat()}"'
     )
 
 
@@ -825,7 +825,7 @@ def result_filters(
     Source as equalities, "Hide superseded" as a flag the row must carry
     (`data-current`), Case as a number the row's cases must hold (`covers`), Max age
     as the most days the row's date may lie behind the reader's day (`age`), empty for no
-    limit, and "Added within" as the same for the day the register took the row in
+    limit, and "Added within" as the same for the day the row reached the site
     (`data-added`, `?added-age=1`), which is not the date the row shows: T-087, published
     in 2018, was added on 3 October 2026.
 
@@ -835,15 +835,17 @@ def result_filters(
     question, the result's place on the frontier: checked, it hides exactly the
     superseded rows (`is_superseded`), whatever their status.
 
-    Three more controls are preset-only (`data-preset`): Project, which holds a row to one
+    Four more controls are preset-only (`data-preset`): Project, which holds a row to one
     of the listed projects it is attributed to (`has`, against the row's `data-project`),
-    At significance, which holds it to one S rung exactly, and Added on, which holds it to
-    one day of registration, offering every day the register took a result in, newest
-    first. Each is `hidden` in the HTML and starts at all. A link sets them,
-    `results.html?project=…&s=4`, as the tallies on the other projects' cards do
-    (`project_tally`) and each day of the overview's seven does (`?added=2026-10-12`,
-    `recent_added`), and the script shows a preset control while it filters, so the
-    reader sees what narrows the table and can set it back to All.
+    At significance, which holds it to one S rung exactly, Added on, which holds it to
+    one day of arrival, offering every day a result reached the site, newest first, and
+    Added since, which holds it to that day or later (`since`). Each is `hidden` in the
+    HTML and starts at all. A link sets them, `results.html?project=…&s=4`, as the
+    tallies on the other projects' cards do (`project_tally`), each day of the
+    overview's seven does (`?added=2026-10-12`) and its heading does
+    (`?added-since=2026-10-06`, `recent_added`), and the script shows a preset control
+    while it filters, so the reader sees what narrows the table and can set it back to
+    All. A preset value no option offers is kept and applied, so it shows no row.
 
     A table's `defaults` are where Significance, Max age and "Hide superseded" start;
     every other control starts at all. The tables write the rows outside those defaults
@@ -874,7 +876,7 @@ def result_filters(
     sources = [("", ALL), ("ours", "This project"), ("others", "Others")]
     projects = [("", ALL), *((project_slug(url), project_name(url)) for url in project_urls())]
     exact = [("", ALL), *((str(level), f"S{level}") for level in significance_levels())]
-    taken = sorted({registered_day(result) for result in overview.results}, reverse=True)
+    taken = sorted({landed_day(result) for result in overview.results}, reverse=True)
     added = [("", ALL), *((day.isoformat(), day_label(day)) for day in taken)]
     shown = sum(shown_by_default(result, defaults, reference) for result in listed)
     return (
@@ -896,6 +898,8 @@ def result_filters(
         f"{_options(exact)}</select></label>"
         '<label hidden>Added on <select data-filter="added" data-preset>'
         f"{_options(added)}</select></label>"
+        '<label hidden>Added since <input type="date" data-filter="added" data-bound="since" '
+        "data-preset></label>"
         '<span class="site-count" data-count data-noun="results" aria-live="polite">'
         f"{count_text(shown, len(listed))}</span></div>"
     )
@@ -1159,9 +1163,10 @@ def results_table(overview: Overview, defaults: FilterDefaults = RESULTS_DEFAULT
 # rollup of S3 and above by publication, for the weeks before those days
 # (`recent_rollup`).
 
-#: How far back "Added in the Last Seven Days" reaches: every result registered at most
-#: this many days before the register's newest registration (`added_since`), which is
-#: what `results.html?added-age=7` shows when read on that day (`age_cutoff`).
+#: How far back "Added in the Last Seven Days" reaches: every result that reached the
+#: site at most this many days before the newest arrival (`added_since`), which is what
+#: `results.html?added-age=7` shows when read on that day (`age_cutoff`), and what the
+#: heading's `?added-since=` shows on any day.
 ADDED_DAYS = 7
 #: The count of days as the section's heading and introduction write it.
 ADDED_DAYS_WORD = {7: "seven"}
@@ -1210,7 +1215,7 @@ class RollupWeek(NamedTuple):
 
 
 class AddedDay(NamedTuple):
-    """One day the register took results in, and every result it took that day, the
+    """One day results reached the site, and every result that arrived that day, the
     most significant first and then by id (`added_order`)."""
 
     day: date
@@ -1237,19 +1242,33 @@ def result_day(result: Result) -> date:
 
 
 def registered_day(result: Result) -> date:
-    """The day the register took a result in, its `registered`: what the seven days
-    group by and the table's Added filters read (`data-added`), as against the day its
-    row shows (`result_day`), which can be years earlier."""
+    """The day a lane wrote a result into the register, its `registered`, which the
+    result reaches the site up to two days after (`landed_day`)."""
     return date.fromisoformat(str(result.record["registered"]))
 
 
+def landed_day(result: Result) -> date:
+    """The day a result reached `main`, and with it the site, its `landed`: what the seven
+    days group by and the table's Added filters read (`data-added`), as against the day
+    its row shows (`result_day`), which can be years earlier, and the day a lane wrote it
+    (`registered_day`), up to two days before (#514's review A, finding A1). An entry a
+    branch adds carries no `landed` until the merge step stamps it
+    (`devtools.stamp_landed`), and a render of the branch places it by `registered`."""
+    return date.fromisoformat(str(result.record.get("landed") or result.record["registered"]))
+
+
+def added_reference(overview: Overview) -> date:
+    """The newest day a result reached the site: the last day "Added in the Last Seven
+    Days" covers. It is the register's and never the clock's, so a render of one tree is
+    the same bytes on any day, and the page names dates, never "today"."""
+    return max(landed_day(result) for result in overview.results)
+
+
 def added_since(overview: Overview, days: int = ADDED_DAYS) -> date:
-    """The first day "Added in the Last Seven Days" covers: `days` before the register's
-    newest registration (`reference_date`), the cutoff `?added-age=7` holds a row to when
-    read on that day (`age_cutoff`). It is the register's and never the clock's, so a
-    render of one tree is the same bytes on any day, and the page names dates, never
-    "today"."""
-    return reference_date(overview) - timedelta(days=days)
+    """The first day "Added in the Last Seven Days" covers: `days` before the newest
+    arrival (`added_reference`), the cutoff `?added-age=7` holds a row to when read on
+    that day (`age_cutoff`) and the day the heading's `?added-since=` names."""
+    return added_reference(overview) - timedelta(days=days)
 
 
 def added_order(result: Result) -> tuple[int, str]:
@@ -1259,12 +1278,12 @@ def added_order(result: Result) -> tuple[int, str]:
 
 
 def added_days(results: Iterable[Result], since: date) -> list[AddedDay]:
-    """The days from `since` on that the register took any result in, newest first, each
-    with every result registered that day (`registered_day`) at every significance. A day
-    the register took nothing in has no block."""
+    """The days from `since` on that any result reached the site, newest first, each with
+    every result that arrived that day (`landed_day`) at every significance. A day
+    nothing arrived on has no block."""
     taken: dict[date, list[Result]] = {}
     for result in results:
-        day = registered_day(result)
+        day = landed_day(result)
         if day >= since:
             taken.setdefault(day, []).append(result)
     return [
@@ -1392,16 +1411,22 @@ def rollup_who(credit: RollupCredit) -> str:
     return f'<span class="site-rollup-who">{credit_link(credit.finder, credit.projects)}</span>'
 
 
+#: What a muted id in the weekly lines says to a screen reader, which the grey cannot.
+SUPERSEDED_SPOKEN = '<span class="site-visually-hidden"> (superseded)</span>'
+
+
 def rollup_ids(results: Sequence[Result]) -> str:
     """A line's results, each its id as a link to its row of the table below (`#t-018`,
     the row's own address on this page), oldest first. A result above the floor, S4 or
     S5, carries its rung after its id in the significance ink; one since superseded
-    (`is_superseded`) is muted and says so in its title."""
+    (`is_superseded`) is muted, underlined so it still reads as a link, and says so to a
+    screen reader and in its title (#514's review A, finding A4)."""
     links = []
     for result in results:
         superseded = is_superseded(result)
         attributes = ' class="site-rollup-superseded" title="Superseded"' if superseded else ""
-        link = f'<a href="#{_esc(result.id.lower())}"{attributes}>{_esc(result.id)}</a>'
+        said = SUPERSEDED_SPOKEN if superseded else ""
+        link = f'<a href="#{_esc(result.id.lower())}"{attributes}>{_esc(result.id)}{said}</a>'
         level = significance(result)
         if level > ROLLUP_FLOOR:
             link += f'<span class="site-rollup-s">S{level}</span>'
@@ -1458,7 +1483,8 @@ def recent_rollup(overview: Overview, *, weeks: int = ROLLUP_WEEKS) -> str:
 
 def added_link(query: str) -> str:
     """The results table opened by a filter link from this page (`overview/table.js`,
-    `presetFilters`), landing on the table's heading: `results.html?added-age=7#all-results`."""
+    `presetFilters`), landing on the table's heading:
+    `results.html?added-since=2026-10-06#all-results`."""
     return f"{RESULTS_PAGE}?{query}#{ALL_RESULTS}"
 
 
@@ -1477,9 +1503,10 @@ def added_entry(result: Result) -> str:
     """One result in a day's block: its id, linking to its row of the table below; its
     headline as plain text (`plain_text`), the math as written; then, on a quieter line,
     its cases (`added_cases`), its V and C rungs and its S score, and its credit
-    (`credit_link`). An S4 or S5 score is set in the significance ink, and a result
-    since superseded (`is_superseded`) is muted and its id titled so, as the weekly
-    lines mark them."""
+    (`credit_link`). An S4 or S5 score is set in the significance ink. A result since
+    superseded (`is_superseded`) is muted, its id titled so, and its quiet line ends
+    "superseded", where touch screens and screen readers see it too; its links keep their
+    colour (#514's review A, finding A4)."""
     record = result.record
     level = significance(result)
     score = f"<b>S{level}</b>" if level > ROLLUP_FLOOR else f"S{level}"
@@ -1489,18 +1516,19 @@ def added_entry(result: Result) -> str:
     headline = html.escape(plain_text(result.summary), quote=False)
     rungs = f"{_esc(record['verification'])} {_esc(record['confirmation'])} {score}"
     who = credit_link(credit_finder(result.credit), finder_projects((result,)))
+    note = " · superseded" if superseded else ""
     return (
         f'<li{mark}><a href="#{_esc(result.id.lower())}"{title}>{_esc(result.id)}</a> '
-        f"{headline}<small>{_esc(added_cases(result))} · {rungs} · {who}</small></li>"
+        f"{headline}<small>{_esc(added_cases(result))} · {rungs} · {who}{note}</small></li>"
     )
 
 
 def recent_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
-    """The results page's top section: every result the register took in over the
-    `days` to its newest registration (`added_days`), one disclosure a day, newest
-    first, its summary the date and its count, its body every entry (`added_entry`) and
-    a link that opens the table on that day alone (`?added=`). The `ADDED_OPEN` newest
-    days start open and the others closed."""
+    """The results page's top section: every result that reached the site over the
+    `days` to the newest arrival (`added_days`), one disclosure a day, newest first, its
+    summary the date and its count, its body every entry (`added_entry`) and a link that
+    opens the table on that day alone (`?added=`). The `ADDED_OPEN` newest days start open
+    and the others closed."""
     blocks = []
     for index, added in enumerate(added_days(overview.results, added_since(overview, days))):
         state = " open" if index < ADDED_OPEN else ""

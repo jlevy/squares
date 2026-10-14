@@ -148,8 +148,9 @@ function page({ search = "", hash = "", age = "", hide = false, today = "2026-10
     project: new Preset("project", "has", ""),
     exact: new Preset("s", null, ""),
     day: new Preset("added", null, ""),
+    since: new Preset("added", "since", ""),
   };
-  const presets = [controls.project, controls.exact, controls.day];
+  const presets = [controls.project, controls.exact, controls.day, controls.since];
   const count = { textContent: "2 of 5 results", getAttribute: () => "results" };
   /** @type {Record<string, (() => void)[]>} */
   const listeners = { change: [], hashchange: [], click: [] };
@@ -433,6 +434,17 @@ void test("a link can open the table on what the register took in, by age or on 
   day.choose({ day: "" });
   assert.equal(day.controls.day.label.hidden, true);
   assert.equal(day.count.textContent, "5 results");
+  // `added-since` names the preset-only first day of a run, the seven days' heading's
+  // link: the rows that arrived on it or later, whatever the reader's day, and the
+  // control in the bar while it filters.
+  const since = page({ search: "?s-min=&added-since=2026-09-30", today: "2026-10-09" });
+  assert.equal(since.controls.since.value, "2026-09-30");
+  assert.deepEqual(since.shown().rows, ["t-001", "t-002", "t-003", "t-005"]);
+  assert.equal(since.controls.since.label.hidden, false);
+  assert.equal(since.count.textContent, "4 of 5 results");
+  since.choose({ since: "" });
+  assert.equal(since.controls.since.label.hidden, true);
+  assert.equal(since.count.textContent, "5 results");
 });
 
 void test("a link can open the table filtered, by each control's parameter", () => {

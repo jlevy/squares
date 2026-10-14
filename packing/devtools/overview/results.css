@@ -50,8 +50,10 @@
   white-space: nowrap;
 }
 
+/* A superseded id is muted and underlined, so it still reads as the link it is. */
 .kpress .site-rollup-ids a.site-rollup-superseded {
   color: var(--site-support-color);
+  text-decoration-line: underline;
 }
 
 .kpress .site-rollup-s {
@@ -83,8 +85,9 @@
   font-weight: var(--site-font-weight-sans-medium);
 }
 
-.kpress .site-added li.site-rollup-superseded,
-.kpress .site-added li.site-rollup-superseded a {
+/* A superseded entry's text is muted; its id and credit stay link-coloured, and its
+   quiet line says "superseded". */
+.kpress .site-added li.site-rollup-superseded {
   color: var(--site-support-color);
 }
 

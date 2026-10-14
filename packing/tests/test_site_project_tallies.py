@@ -250,7 +250,7 @@ def test_a_tally_link_selects_exactly_its_projects_rows(
     assert not re.search(r"<tr id=\"t-\d+\"[^>]*\shidden", results)
     bar = results.split('<div class="site-table-tools site-result-filters">', 1)[1]
     bar = bar.split("</div>", 1)[0]
-    assert bar.count("<label hidden>") == 3
+    assert bar.count("<label hidden>") == 4
     assert (
         '<label hidden>Project <select data-filter="project" data-bound="has" data-preset>'
         in bar
@@ -260,7 +260,7 @@ def test_a_tally_link_selects_exactly_its_projects_rows(
     # The bar's own controls keep their order, and the preset-only ones follow them.
     order = re.findall(r'data-filter="([a-z]+)"', bar)
     own = ["s", "v", "c", "kind", "status", "current", "source", "n", "date", "added"]
-    assert order == [*own, "project", "s", "added"]
+    assert order == [*own, "project", "s", "added", "added"]
 
 
 class _Nesting(HTMLParser):

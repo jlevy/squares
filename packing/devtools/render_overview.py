@@ -1368,15 +1368,21 @@ def results_page() -> Page:
     values = {
         "EPISTEMICS_URL": "epistemics.html",
         # The overview above the table, from the same register (think-2z22): the last
-        # seven days' registrations, a block a day, then the weekly S3+ rollup before them.
+        # seven days' arrivals, a block a day, then the weekly S3+ rollup before them. The
+        # heading's link names the section's own first day, so it lists the section's
+        # results on any day (#514's review A, finding A3); the last day's counts from
+        # the reader's.
         "RECENT_ADDED": overview_sections.recent_added(overview),
-        "ADDED_LINK": overview_sections.added_link(f"added-age={overview_sections.ADDED_DAYS}"),
+        "ADDED_LINK": overview_sections.added_link(
+            f"added-since={overview_sections.added_since(overview).isoformat()}"
+        ),
+        "ADDED_LAST_DAY": overview_sections.added_link("added-age=1"),
         "ADDED_DAYS": overview_sections.ADDED_DAYS_WORD[overview_sections.ADDED_DAYS],
         "ADDED_DAYS_TITLE": overview_sections.ADDED_DAYS_WORD[
             overview_sections.ADDED_DAYS
         ].capitalize(),
         "ADDED_SPAN": overview_sections.span_label(
-            overview_sections.added_since(overview), overview_sections.reference_date(overview)
+            overview_sections.added_since(overview), overview_sections.added_reference(overview)
         ),
         "ADDED_FIRST": overview_sections.day_label(overview_sections.added_since(overview)),
         "RECENT_ROLLUP": overview_sections.recent_rollup(overview),

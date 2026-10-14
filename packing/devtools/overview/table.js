@@ -17,7 +17,11 @@
 //   <input type="number" data-filter="date" data-bound="age">
 //                                                 row's data-date, an ISO date, at most
 //                                                 that many days before the reader's day;
-//                                                 data-filter="added" holds data-added so
+//                                                 data-filter="added" holds data-added,
+//                                                 the day a row reached the site, the same
+//                                                 way (`?added-age=1`)
+//   <input type="date" data-filter="added" data-bound="since">
+//                                                 row's data-added on or after the value
 //   <input type="number" data-filter="n" data-bound="covers">
 //                                                 row's data-n, a list of numbers and
 //                                                 ranges ("27 28 31-32"), holds the value
@@ -37,11 +41,14 @@
 // The bar's `.site-count` shows how many rows remain. A link can open the table
 // filtered: each query parameter presets the control it names, `status=proved`,
 // `recent=true`, `n-max=100` for a bound, `n=11` for a `covers` control, `age=180`
-// for the age of a row's date and `added-age=1` for the age of its registration, or
-// `project=evand-square-packing` for a `has` control, so a card can point at a
-// filtered view. A control marked `data-preset` is for such links alone: its label
-// is `hidden` in the HTML and shows only while the control filters, so a reader sees
-// what narrows the table and can set it back.
+// for the age of a row's date, `added-age=1` for the age of its arrival and
+// `added-since=2026-10-06` for its first day, or `project=evand-square-packing` for a
+// `has` control, so a card can point at a filtered view. A control marked
+// `data-preset` is for such links alone: its label is `hidden` in the HTML and shows
+// only while the control filters, so a reader sees what narrows the table and can set
+// it back. A preset value no option offers, such as a day nothing reached the site on,
+// is added to its select as a disabled option and applied, so the table shows none of
+// its rows and the bar names the value, rather than quietly showing every row.
 // The pure functions are published
 // on `globalThis.SiteTable` for the Node tests; nothing else leaves this file.
 
@@ -223,6 +230,19 @@
         control.checked = value === "true";
       } else if (control instanceof HTMLInputElement || control instanceof HTMLSelectElement) {
         control.value = value;
+        if (
+          control instanceof HTMLSelectElement &&
+          control.value !== value &&
+          value !== "" &&
+          control.hasAttribute("data-preset")
+        ) {
+          const missing = control.ownerDocument.createElement("option");
+          missing.value = value;
+          missing.textContent = value;
+          missing.disabled = true;
+          control.append(missing);
+          control.value = value;
+        }
       }
     }
   }
@@ -231,7 +251,7 @@
    * What each `data-bound` makes of its control.
    * @type {Readonly<Record<string, SiteTableFilter["kind"]>>}
    */
-  const BOUNDS = { min: "min", max: "max", covers: "covers", has: "has" };
+  const BOUNDS = { min: "min", max: "max", covers: "covers", has: "has", since: "since" };
 
   /**
    * Show each preset-only control's label while the control filters, and only then.
@@ -240,7 +260,10 @@
   function showPresets(tools) {
     for (const control of tools.querySelectorAll("[data-preset]")) {
       const label = control.closest("label");
-      if (label instanceof HTMLElement && control instanceof HTMLSelectElement) {
+      if (
+        label instanceof HTMLElement &&
+        (control instanceof HTMLSelectElement || control instanceof HTMLInputElement)
+      ) {
         label.hidden = control.value === "";
       }
     }
@@ -429,6 +452,7 @@
               "age-max",
               "added",
               "added-age",
+              "added-since",
               "superseded",
               "current",
               "search",

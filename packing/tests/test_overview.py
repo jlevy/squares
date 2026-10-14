@@ -6072,14 +6072,16 @@ RESULT_FILTERS = [
     ("source", ""),
     ("n", "covers"),
     ("date", "age"),
-    # The day the register took the row in, as an age like the date's (`?added-age=1`).
+    # The day the row reached the site, as an age like the date's (`?added-age=1`).
     ("added", "age"),
-    # The three preset-only controls, out of the bar until a link sets them: the listed
-    # project a row is attributed to, its significance exactly, and the one day it was
-    # added (`?added=2026-10-12`, each day of the overview's seven).
+    # The four preset-only controls, out of the bar until a link sets them: the listed
+    # project a row is attributed to, its significance exactly, the one day it arrived
+    # (`?added=2026-10-12`, each day of the overview's seven) and the first day of a run
+    # (`?added-since=2026-10-06`, the seven days' heading).
     ("project", "has"),
     ("s", ""),
     ("added", ""),
+    ("added", "since"),
 ]
 
 #: The bar's one checkbox, as `result_filters` writes it: its own label, after Status.
@@ -6137,7 +6139,7 @@ def test_both_tables_of_results_carry_the_identical_filter_set(page: str, result
     }
     assert HIDE_SUPERSEDED.format(checked="") in bar
     assert bar.count(" selected>") == bar.count("<select ") == 9
-    assert bar.count("<input ") == 4
+    assert bar.count("<input ") == 5
 
 
 def test_the_filter_bar_is_one_helpers_and_reads_the_whole_register(
@@ -6242,7 +6244,7 @@ def test_every_facet_a_result_row_carries_has_a_filter_and_every_filter_a_facet(
             "current": "false" if overview_sections.is_superseded(result) else "true",
             "n": overview_sections.result_cases(result),
             "date": overview_sections.first_day(result.dated[1]),
-            "added": str(record["registered"]),
+            "added": str(record.get("landed") or record["registered"]),
         }
         assert set(expected) == filtered
         tags = [_row(results, result.id).split(">", 1)[0]]

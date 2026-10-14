@@ -6,12 +6,12 @@
 
 ## [Added in the Last {{ADDED_DAYS_TITLE}} Days]({{ADDED_LINK}})
 
-Every result added to the register over {{ADDED_SPAN}} (its newest day and the
-{{ADDED_DAYS}} before it), at any significance, by the day it was added, newest first.
-Each id leads to its row in the table below; S4 and S5 are marked, and a muted entry has
-since been superseded.
-The heading opens the table on the last {{ADDED_DAYS}} days’ additions, counted from the
-reader’s own day, and each day’s link on that day’s.
+Every result that reached this site over {{ADDED_SPAN}} (its newest day and the
+{{ADDED_DAYS}} before it), at any significance, by the day it arrived, newest first.
+Each id leads to its row in the table below; S4 and S5 are marked, and a muted entry
+says it has since been superseded.
+The heading opens the table on these days’ arrivals and each day’s link on that day’s;
+[what arrived in the last day]({{ADDED_LAST_DAY}}) counts from the reader’s own day.
 
 {{RECENT_ADDED}}
 
@@ -20,7 +20,7 @@ reader’s own day, and each day’s link on that day’s.
 Results at {{ROLLUP_FLOOR}} and above from the {{ROLLUP_WEEKS}} before {{ADDED_FIRST}},
 by the week each was published (or established, for this project’s own), with who found
 them. A result added above that was published earlier is listed here too.
-A muted id has since been superseded.
+A muted, underlined id has since been superseded.
 
 {{RECENT_ROLLUP}}
 

@@ -54,19 +54,22 @@ LINE = re.compile(
     r"(.*?)</li>",
     re.DOTALL,
 )
-#: One result's link in a line, with its attributes.
+#: One result's link in a line, with its attributes, and what it says to a screen
+#: reader past its id when it has been superseded.
 ID_LINK = re.compile(
-    r'<a href="#(t-\d{3})"([^>]*)>(T-\d{3})</a>(<span class="site-rollup-s">'
-    r"S(\d)</span>)?"
+    r'<a href="#(t-\d{3})"([^>]*)>(T-\d{3})'
+    r'(<span class="site-visually-hidden"> \(superseded\)</span>)?</a>'
+    r'(<span class="site-rollup-s">S(\d)</span>)?'
 )
 #: One result in a day: whether it is muted, its row, the title of its id, its id, its
 #: headline, its cases, its V and C rungs, its S score (bold above the floor), the
-#: project its credit links to if any, and the credit's name.
+#: project its credit links to if any, the credit's name, and the word that says it has
+#: been superseded.
 ENTRY = re.compile(
     r'<li( class="site-rollup-superseded")?><a href="#(t-\d{3})"( title="Superseded")?>'
     r"(T-\d{3})</a> ([^<]*)<small>([^<]*) · (V\d) (C\d) (<b>S\d</b>|S\d) · "
     r'(?:<a href="([^"]+)" target="_blank" rel="noopener noreferrer">)?([^<]+)(?:</a>)?'
-    r"</small></li>"
+    r"( · superseded)?</small></li>"
 )
 #: A day's link to its own rows: the day it filters on and how many it says it shows.
 DAY_LINK = re.compile(
@@ -80,9 +83,10 @@ DAY_LINK = re.compile(
 #: asked for, and 8,174 for the 55 S3+ results of the four weeks before. The busiest
 #: eight days so far, to 6 October, registered 76 results, about 23,400 bytes at that
 #: rate, and the four-week rollup has held 91 (11,605), so this is about 1.4 times the
-#: largest the record has given. On the register at the merge with `main` on 14 October
-#: (`287d9cba1`) the two measure 25,952: 17,722 for the 58 results added over 6-13
-#: October and 8,230 for 55 in the weeks before, so the ceiling is 1.8 times that.
+#: largest the record has given. Grouped by the day each result reached the site
+#: (`landed`), on the register at the merge with `main` on 14 October (`37e6757ed`), the
+#: two measure 25,891: 15,452 for the 48 results that arrived over 7-14 October and
+#: 10,439 for 68 in the weeks before, so the ceiling is 1.9 times that.
 #: Past it the overview is becoming a second table, and the remedy is a shorter entry,
 #: not a higher number: the page's own ceiling (`test_overview.PAGE_CEILINGS`) is shared
 #: with every row of the table.
@@ -122,6 +126,12 @@ def _registered(record: dict) -> date:
     return date.fromisoformat(str(record["registered"]))
 
 
+def _landed(record: dict) -> date:
+    """The day an entry reached the site, read from the register directly: its `landed`,
+    or for an entry a branch adds and no merge has stamped yet, its `registered`."""
+    return date.fromisoformat(str(record.get("landed") or record["registered"]))
+
+
 def _shown_day(record: dict) -> date:
     """The day a register entry's row shows, read from the register directly: its
     publication for a result by others, else its establishment, else its registration;
@@ -136,9 +146,9 @@ def _shown_day(record: dict) -> date:
 
 
 def _window(overview: overview_data.Overview) -> tuple[date, date]:
-    """The seven days' first and last day, read from the register: its newest
-    registration and the seven days before it."""
-    newest = max(_registered(result.record) for result in overview.results)
+    """The seven days' first and last day, read from the register: the newest day an
+    entry reached the site and the seven days before it."""
+    newest = max(_landed(result.record) for result in overview.results)
     return newest - timedelta(days=ADDED_DAYS), newest
 
 
@@ -165,31 +175,35 @@ def test_the_overview_sits_above_the_table_and_leaves_it_whole(
 def test_the_introductions_state_the_window_and_the_floor_from_the_code(
     results: str, overview: overview_data.Overview
 ) -> None:
-    """The template types neither the days, the floor nor the weeks: all are filled in,
-    and the seven days' heading opens the table on the same age of registration."""
+    """The template types neither the days, the floor nor the weeks: all are filled in.
+    The seven days' heading opens the table on the section's own days, from its first,
+    `?added-since=`, so it lists the same results on any later day (#514's review A,
+    finding A3); the introduction links the last day's arrivals by the reader's day."""
     first, last = _window(overview)
     days = ADDED_DAYS_WORD[ADDED_DAYS]
     assert (
-        '<h2 id="added-in-the-last-seven-days"><a href="results.html?added-age='
-        f'{ADDED_DAYS}#all-results">Added in the Last {days.capitalize()} Days</a></h2>'
+        '<h2 id="added-in-the-last-seven-days"><a href="results.html?added-since='
+        f'{first.isoformat()}#all-results">Added in the Last {days.capitalize()} Days</a></h2>'
     ) in results
     prose = " ".join(results.split())
-    assert f"over {span_label(first, last)} (its newest day and the {days} before it)" in prose
+    assert f"reached this site over {span_label(first, last)} (its newest day and the" in prose
+    last_day = '<a href="results.html?added-age=1#all-results">what arrived in the last day</a>'
+    assert last_day in prose
     words = ROLLUP_WEEKS_WORD[ROLLUP_WEEKS]
     shown = overview_sections.day_label(first)
     assert f"Results at S{ROLLUP_FLOOR} and above from the {words} before {shown}," in prose
 
 
-def test_each_day_lists_exactly_the_entries_registered_on_it(
+def test_each_day_lists_exactly_the_entries_that_arrived_on_it(
     added: str, overview: overview_data.Overview
 ) -> None:
-    """The blocks are the days from the window's first to the register's newest on which
-    it took any result in, newest first, each once; each lists every entry registered
-    that day, at any significance, each once, and its count says how many. The two
-    newest start open, the rest closed."""
+    """The blocks are the days from the window's first to the newest on which any result
+    reached the site (`landed`), newest first, each once; each lists every entry that
+    arrived that day, at any significance, each once, and its count says how many. The
+    two newest start open, the rest closed."""
     first, last = _window(overview)
     records = [result.record for result in overview.results]
-    taken = Counter(_registered(record) for record in records if _registered(record) >= first)
+    taken = Counter(_landed(record) for record in records if _landed(record) >= first)
     days = DAY.findall(added)
     assert [date.fromisoformat(day) for day, _, _ in days] == sorted(taken, reverse=True)
     assert date.fromisoformat(days[0][0]) == last
@@ -200,7 +214,7 @@ def test_each_day_lists_exactly_the_entries_registered_on_it(
         expected = sorted(
             str(record["id"]).lower()
             for record in records
-            if _registered(record) == date.fromisoformat(day)
+            if _landed(record) == date.fromisoformat(day)
         )
         shown = [entry[1] for entry in ENTRY.findall(body)]
         assert sorted(shown) == expected, day
@@ -225,7 +239,20 @@ def test_a_day_entry_says_what_the_row_says(
     for _, _, body in DAY.findall(added):
         entries = ENTRY.findall(body)
         keys = []
-        for muted, anchor, title, label, headline, cases, v, c, score, href, name in entries:
+        for (
+            muted,
+            anchor,
+            title,
+            label,
+            headline,
+            cases,
+            v,
+            c,
+            score,
+            href,
+            name,
+            note,
+        ) in entries:
             result = by_id[anchor]
             record = result.record
             assert label.lower() == anchor
@@ -243,7 +270,7 @@ def test_a_day_entry_says_what_the_row_says(
             projects = overview_sections.result_projects(result)
             assert href == (addresses[projects[0]] if projects else ""), anchor
             superseded = overview_sections.is_superseded(result)
-            assert bool(muted) == bool(title) == superseded, anchor
+            assert bool(muted) == bool(title) == bool(note) == superseded, anchor
             keys.append((-level, result.id))
         assert keys == sorted(keys)
 
@@ -252,9 +279,10 @@ def test_each_day_and_the_heading_open_the_table_on_their_rows(
     added: str, results: str
 ) -> None:
     """A day's link opens the table on that day alone, `?added=2026-10-12`, which the
-    bar's preset-only Added on control offers, every day the register took anything in
-    among its choices; the heading's opens it on an age of registration, `?added-age=7`,
-    which the visible Added within control takes."""
+    bar's preset-only Added on control offers, every day anything reached the site among
+    its choices; the heading's opens it from the section's first day, `?added-since=`,
+    which the preset-only Added since control takes; and the visible Added within control
+    takes an age of arrival, `?added-age=1`."""
     days = DAY.findall(added)
     bar = results.split('<div class="site-table-tools site-result-filters">', 1)[1]
     bar = bar.split("</div>", 1)[0]
@@ -271,6 +299,10 @@ def test_each_day_and_the_heading_open_the_table_on_their_rows(
     assert (
         '<label>Added within <input type="number" data-filter="added" data-bound="age" '
         'min="0" placeholder="any"> days</label>'
+    ) in bar
+    assert (
+        '<label hidden>Added since <input type="date" data-filter="added" data-bound="since" '
+        "data-preset></label>"
     ) in bar
     for day, _, body in days:
         link = DAY_LINK.search(body)
@@ -317,8 +349,8 @@ def test_every_result_at_the_floor_since_the_rollup_begins_is_in_one_section_or_
 ) -> None:
     """No gap between the two: a result at S3 or above shown on any day from the
     rollup's first Monday on is in the weekly rollup, the seven days, or both, since no
-    row shows a day later than its registration. One published before the seven days
-    and registered in them is in both."""
+    row shows a day later than its registration, and none was registered after it reached
+    the site. One published before the seven days and arriving in them is in both."""
     first, _ = _window(overview)
     last = first - timedelta(days=1)
     oldest = last - timedelta(days=last.weekday()) - timedelta(weeks=ROLLUP_WEEKS - 1)
@@ -326,7 +358,7 @@ def test_every_result_at_the_floor_since_the_rollup_begins_is_in_one_section_or_
     in_weeks = {found[0] for found in ID_LINK.findall(rollup)}
     for result in overview.results:
         record = result.record
-        assert _shown_day(record) <= _registered(record), result.id
+        assert _shown_day(record) <= _registered(record) <= _landed(record), result.id
         if overview_sections.significance(result) >= ROLLUP_FLOOR and (
             _shown_day(record) >= oldest
         ):
@@ -337,7 +369,7 @@ def test_every_id_leads_to_its_own_row_on_this_page(rollup: str, results: str) -
     """An id's link is the fragment of its row in the table below, and names it."""
     links = ID_LINK.findall(rollup)
     assert links
-    for anchor, _, label, _, _ in links:
+    for anchor, _, label, _, _, _ in links:
         assert anchor == label.lower()
         assert f'<tr id="{anchor}"' in results
 
@@ -373,14 +405,15 @@ def test_a_line_credits_its_finder_and_links_the_project_holding_most_of_it(
 def test_superseded_results_are_muted_and_the_most_significant_carry_their_rung(
     rollup: str, overview: overview_data.Overview
 ) -> None:
-    """An id is muted, and titled so, exactly where its result is superseded; a result
-    above the floor carries its S rung after its id, and one at the floor does not."""
+    """An id is muted, titled so and says so to a screen reader exactly where its result
+    is superseded (#514's review A, finding A4); a result above the floor carries its S
+    rung after its id, and one at the floor does not."""
     by_id = {result.id.lower(): result for result in overview.results}
-    for anchor, attributes, _, rung, level in ID_LINK.findall(rollup):
+    for anchor, attributes, _, spoken, rung, level in ID_LINK.findall(rollup):
         result = by_id[anchor]
         muted = 'class="site-rollup-superseded"' in attributes
         assert muted == overview_sections.is_superseded(result), anchor
-        assert ('title="Superseded"' in attributes) == muted, anchor
+        assert ('title="Superseded"' in attributes) == bool(spoken) == muted, anchor
         score = overview_sections.significance(result)
         assert bool(rung) == (score > ROLLUP_FLOOR), anchor
         assert not rung or int(level) == score, anchor
@@ -411,44 +444,57 @@ def _entry(
     credit: str,
     kind: str = "lower-bound",
     registered: str | None = None,
+    landed: str | None = None,
 ) -> overview_data.Result:
     """A register entry made from `base`: its id, the day it was published, its S rung,
-    its credit line, its kind and the day it was registered, the day it was published
-    unless given, attributed to no listed project."""
+    its credit line, its kind, the day it was registered, the day it was published
+    unless given, and the day it reached the site, the day it was registered unless given,
+    or none when `landed` is empty, as a branch's new entry has; attributed to no listed
+    project."""
     record = {
         **base.record,
         "id": result_id,
         "kind": kind,
         "registered": registered or day,
+        "landed": landed if landed is not None else registered or day,
         "significance": {**base.record["significance"], "score": score},
         "attribution": {"published": day, "source_keys": []},
     }
+    if not record["landed"]:
+        del record["landed"]
     return dataclasses.replace(base, record=record, credit=credit)
 
 
-def test_days_group_by_registration_and_not_by_publication(
+def test_days_group_by_arrival_and_not_by_registration_or_publication(
     overview: overview_data.Overview,
 ) -> None:
-    """The rules on entries made for the purpose: a result is placed by the day it was
-    registered, so one published in 2018 and registered on 11 October is in that day's
-    block and in no recent week; results registered on different days are in different
-    blocks, newest first; one registered before the window is in none; every
-    significance counts, the highest first within a day; and a day with nothing
-    registered has no block."""
+    """The rules on entries made for the purpose: a result is placed by the day it reached
+    the site (`landed`), so one published in 2018, registered on 10 October and landing on
+    11 October is in that day's block and in no recent week, and so is one registered on
+    9 October that waited two days to merge (#514's review A, finding A1); results
+    arriving on different days are in different blocks, newest first; one that arrived
+    before the window is in none; an entry a branch adds, with no `landed` yet, is placed
+    by its registration; every significance counts, the highest first within a day; and a
+    day nothing arrived on has no block."""
     base = overview.results[0]
     entries = [
-        _entry(base, "T-921", "2018", 2, credit="Old", registered="2026-10-11"),
+        _entry(
+            base, "T-921", "2018", 2, credit="Old", registered="2026-10-10", landed="2026-10-11"
+        ),
         _entry(base, "T-922", "2026-10-12", 4, credit="New"),
         _entry(base, "T-923", "2026-10-03", 5, credit="Before"),
-        _entry(base, "T-924", "2026-10-09", 3, credit="Late", registered="2026-10-11"),
+        _entry(base, "T-924", "2026-10-09", 3, credit="Late", landed="2026-10-11"),
         _entry(base, "T-925", "2026-10-07", 1, credit="Low"),
+        _entry(base, "T-926", "2026-10-12", 1, credit="Branch", landed=""),
     ]
     days = added_days(entries, date(2026, 10, 5))
     assert [(day.day, [result.id for result in day.results]) for day in days] == [
-        (date(2026, 10, 12), ["T-922"]),
+        (date(2026, 10, 12), ["T-922", "T-926"]),
         (date(2026, 10, 11), ["T-924", "T-921"]),
         (date(2026, 10, 7), ["T-925"]),
     ]
+    assert 'data-added="2026-10-11"' in overview_sections.result_facets(entries[3])
+    assert 'data-added="2026-10-12"' in overview_sections.result_facets(entries[5])
     # An entry says its own rungs whatever its day: an S4 or S5 in bold, below that plain.
     assert "<b>S4</b> · " in overview_sections.added_entry(entries[1])
     assert " S2 · " in overview_sections.added_entry(entries[0])
@@ -459,12 +505,16 @@ def test_days_group_by_registration_and_not_by_publication(
     ] == ["T-923"]
 
 
-def test_the_seven_days_start_from_the_registers_newest_registration(
+def test_the_seven_days_start_from_the_registers_newest_arrival(
     overview: overview_data.Overview,
 ) -> None:
-    """The window is the register's, never the clock's: its newest registration and the
-    seven days before it, as `?added-age=7` reaches back on that day (`age_cutoff`)."""
-    reference = overview_sections.reference_date(overview)
+    """The window is the register's, never the clock's: the newest day an entry reached
+    the site and the seven days before it, as `?added-age=7` reaches back on that day
+    (`age_cutoff`). It is no earlier than the newest registration, which runs ahead of
+    arrival."""
+    reference = overview_sections.added_reference(overview)
+    assert reference == max(_landed(result.record) for result in overview.results)
+    assert reference >= overview_sections.reference_date(overview)
     since = overview_sections.added_since(overview)
     assert since == reference - timedelta(days=ADDED_DAYS)
     assert since.isoformat() == overview_sections.age_cutoff(reference, ADDED_DAYS)
