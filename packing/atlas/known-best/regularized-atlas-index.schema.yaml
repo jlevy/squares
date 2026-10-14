@@ -1,0 +1,326 @@
+# The regularized drawing layer's index, `regularized/index.json`.
+#
+# One entry per atlas record. Each entry names the generator that decided it: this
+# project's `regularize_axis_components/2`, Evan Daniel's regularizer driven by
+# `devtools.regularize_evand`, or the grid-slack generator `devtools.regularize_grid_slack`
+# (docs/project/policies/regularization-policy.md, sections 2 and 3). A view the layer
+# draws carries its regularization in the register's own terms (`results.schema.yaml`,
+# `$defs/result/properties/regularizations`), with `of_witness` standing in for `of`: the
+# frontier record resolves it to the registered result that holds the packing. What a JSON
+# Schema cannot say -- the views' bytes, the source witnesses' digests, the totals and the
+# exact verdicts -- `devtools.regularize_axis_components --check-atlas` and
+# `--verify-atlas` hold.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:RegularizedAtlasIndex/v2
+title: Regularized atlas layer index
+type: object
+additionalProperties: false
+required:
+  - contract
+  - generated_by
+  - label
+  - policy
+  - policy_document
+  - credit
+  - digests
+  - generators
+  - runs
+  - totals
+  - entries
+properties:
+  contract: {const: packing.squares:RegularizedAtlasIndex/v2}
+  generated_by: {type: string, minLength: 1}
+  label: {const: regularized}
+  policy: {type: string, minLength: 1}
+  policy_document: {const: docs/project/policies/regularization-policy.md}
+  credit:
+    description: >-
+      The line the index and every drawing made from a view of Evan Daniel's method carry
+      (policy section 7).
+    type: string
+    minLength: 1
+  digests: {type: string, minLength: 1}
+  generators:
+    type: object
+    additionalProperties: false
+    required: [regularize_axis_components/2]
+    properties:
+      regularize_axis_components/2: {$ref: '#/$defs/axis_generator'}
+      evand-regularize: {$ref: '#/$defs/generator'}
+      regularize_grid_slack/0: {$ref: '#/$defs/generator'}
+      regularize_grid_slack/1: {$ref: '#/$defs/generator'}
+  runs:
+    description: >-
+      The generator runs whose views the layer draws, each as its receipt recorded it: the
+      run receipts themselves stay outside the repository with the solves.
+    type: array
+    items: {$ref: '#/$defs/run'}
+  totals: {type: object}
+  entries:
+    type: array
+    minItems: 1
+    items: {$ref: '#/$defs/entry'}
+$defs:
+  generator_id:
+    enum: [regularize_axis_components/2, evand-regularize, regularize_grid_slack/0,
+           regularize_grid_slack/1]
+  axis_generator:
+    type: object
+    additionalProperties: false
+    required: [tool, generated_by, method, parameters]
+    properties:
+      tool: {const: packing/devtools/regularize_axis_components.py}
+      generated_by: {type: string, minLength: 1}
+      method: {const: regularize_axis_components/2}
+      parameters: {type: object}
+  generator:
+    type: object
+    additionalProperties: false
+    required: [tool, generated_by, method, credit]
+    properties:
+      tool: {type: string, pattern: '^packing/devtools/[a-z_]+\.py$'}
+      generated_by: {type: string, minLength: 1}
+      method: {type: string, minLength: 1}
+      credit: {type: string, minLength: 1}
+      vendored: {type: string, minLength: 1}
+      source_url: {type: string, minLength: 1}
+      pin: {type: string, minLength: 1}
+      source_commit: {type: string, pattern: '^[0-9a-f]{40}$'}
+      patches: {type: array}
+      settings: {type: object}
+  run:
+    type: object
+    additionalProperties: false
+    required: [id, generator, finished, parameters, counts, cost]
+    properties:
+      id: {type: string, pattern: '^[a-z0-9-]+$'}
+      generator: {$ref: '#/$defs/generator_id'}
+      finished: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+      interpreter: {type: string, minLength: 1}
+      parameters: {type: object}
+      counts: {type: integer, minimum: 1}
+      decisions:
+        type: object
+        additionalProperties: {type: integer, minimum: 0}
+      reclassified_from:
+        description: >-
+          The run this one decided again on a copy of its directory without re-running a
+          stage: its cost is recorded there, and this run's is zero.
+        type: string
+        pattern: '^[a-z0-9-]+$'
+      cost:
+        type: object
+        additionalProperties: false
+        required: [cpu_seconds, wall_seconds, workers]
+        properties:
+          cpu_seconds: {type: number, minimum: 0}
+          wall_seconds: {type: number, minimum: 0}
+          workers: {type: integer, minimum: 1}
+          note: {type: string, minLength: 1}
+  source:
+    type: object
+    additionalProperties: false
+    required: [witness, id, scalar_kind, sha256]
+    properties:
+      witness: {type: string, pattern: '^packing/'}
+      id: {type: string, minLength: 1}
+      scalar_kind: {enum: [rational, decimal, algebraic-number-field]}
+      sha256: {type: string, pattern: '^[0-9a-f]{64}$'}
+  view:
+    type: object
+    additionalProperties: false
+    required: [path, sha256]
+    properties:
+      path: {type: string, pattern: '^packing/.*-regularized\.yaml\.gz$'}
+      sha256: {type: string, pattern: '^[0-9a-f]{64}$'}
+  shade_rule:
+    type: object
+    additionalProperties: false
+    required: [green_before, light_before, green_after, light_after]
+    properties:
+      green_before: {type: integer, minimum: 0}
+      light_before: {type: integer, minimum: 0}
+      green_after: {type: integer, minimum: 0}
+      light_after: {type: integer, minimum: 0}
+  shades:
+    type: object
+    additionalProperties: false
+    required: [house, stage]
+    properties:
+      house: {$ref: '#/$defs/shade_rule'}
+      stage: {$ref: '#/$defs/shade_rule'}
+  exact_verification:
+    type: object
+    additionalProperties: false
+    required: [repository_verifier, independent_checker, passed]
+    properties:
+      repository_verifier: {type: boolean}
+      independent_checker: {type: boolean}
+      pairs_tested_independently: {type: integer, minimum: 0}
+      half_angle: {type: boolean}
+      passed: {type: boolean}
+  regularization:
+    description: >-
+      The regularization in the register's terms (`results.schema.yaml`), with
+      `of_witness`, the source witness's id, standing in for `of` until the frontier
+      record resolves it; `provenance` is the case record's credit for the packing,
+      which a regularization never changes. Identity is measured here, so its basis is
+      `measured` and `measured_in` names this index, where the measurements are retained.
+    type: object
+    additionalProperties: false
+    required: [n, of_witness, by, method, side, identity]
+    properties:
+      n: {type: integer, minimum: 1}
+      of_witness: {type: string, minLength: 1}
+      provenance:
+        type: object
+        additionalProperties: false
+        properties:
+          source_key: {type: [string, 'null']}
+          found_by: {type: array, items: {type: string}}
+          improved_by: {type: array, items: {type: string}}
+      by: {const: project}
+      method: {type: string, minLength: 1}
+      side: {enum: [same, solved]}
+      changes:
+        type: object
+        additionalProperties: false
+        minProperties: 1
+        properties:
+          merged_rotation_groups_deg: {type: number, minimum: 0}
+          straightened: {type: integer, minimum: 0}
+          re_angled: {type: integer, minimum: 0}
+      identity:
+        type: object
+        additionalProperties: false
+        required: [basis, measured_in, one_to_one, moved, max_move, max_turn_deg]
+        properties:
+          basis: {const: measured}
+          measured_in: {type: string, pattern: '^packing/.*index\.json$'}
+          one_to_one: {type: boolean}
+          moved: {type: integer, minimum: 0}
+          max_move: {type: number, minimum: 0}
+          max_turn_deg: {type: number, minimum: 0}
+  axis_record:
+    description: >-
+      What `regularize_axis_components/2` derives for a record, byte for byte as
+      `--verify-atlas` re-derives it.
+    type: object
+    additionalProperties: false
+    required: [n, status, generator, source, shades]
+    properties:
+      n: {type: integer, minimum: 1}
+      status: {enum: [regularized, unchanged, refused]}
+      generator: {const: regularize_axis_components/2}
+      source: {$ref: '#/$defs/source'}
+      refusal:
+        type: object
+        additionalProperties: false
+        required: [kind, reason]
+        properties:
+          kind: {type: string, minLength: 1}
+          reason: {type: string, minLength: 1}
+      exact_frame: {type: object}
+      moves: {type: object}
+      statuses: {type: object}
+      non_regression: {type: object}
+      side: {type: object}
+      changed_squares: {type: integer, minimum: 1}
+      view: {$ref: '#/$defs/view'}
+      shades: {$ref: '#/$defs/shades'}
+      exact_verification: {$ref: '#/$defs/exact_verification'}
+      regularization: {$ref: '#/$defs/regularization'}
+    allOf:
+      - if: {properties: {status: {const: regularized}}}
+        then:
+          required: [exact_frame, moves, statuses, non_regression, side, changed_squares, view,
+                     exact_verification, regularization]
+      - if: {properties: {status: {const: refused}}}
+        then: {required: [refusal]}
+      - if: {properties: {status: {const: unchanged}}}
+        then: {required: [exact_frame, moves, statuses, non_regression, side]}
+  generated_record:
+    description: >-
+      A view another generator made and the decision table admitted (policy section 4,
+      row 10), or a review record admitted. `reference` is the axis tool's own record of
+      the count, kept beside it as the policy's section 4 asks, so `--verify-atlas` still
+      re-derives every count.
+    type: object
+    additionalProperties: false
+    required: [n, status, generator, run, source, side, view, shades, exact_verification,
+               decision, measured, regularization, reference]
+    properties:
+      n: {type: integer, minimum: 1}
+      status: {const: regularized}
+      generator: {enum: [evand-regularize, regularize_grid_slack/0, regularize_grid_slack/1]}
+      run:
+        type: object
+        additionalProperties: false
+        required: [id]
+        properties:
+          id: {type: string, pattern: '^[a-z0-9-]+$'}
+          retried_with: {type: array, items: {type: string}}
+          output: {enum: [same, solved, grid]}
+      source: {$ref: '#/$defs/source'}
+      side:
+        type: object
+        additionalProperties: false
+        required: [reported, view, relation, view_minus_reported, view_minus_verified_upper_bound]
+        properties:
+          reported: {type: string, minLength: 1}
+          view: {type: string, pattern: '^[0-9]+(/[0-9]+)?$'}
+          relation: {enum: [same, bound]}
+          view_minus_reported: {type: string, minLength: 1}
+          view_minus_verified_upper_bound: {type: [string, 'null']}
+      view: {$ref: '#/$defs/view'}
+      shades: {$ref: '#/$defs/shades'}
+      exact_verification:
+        allOf:
+          - {$ref: '#/$defs/exact_verification'}
+          - properties: {passed: {const: true}}
+      decision:
+        type: object
+        additionalProperties: false
+        required: [row, decision, reason]
+        properties:
+          row: {const: 10}
+          decision: {const: admit}
+          reason: {type: string, minLength: 1}
+      measured:
+        type: object
+        additionalProperties: false
+        required: [identity_by, shades_by, contacts, symmetry, regressions]
+        properties:
+          identity_by: {type: string, minLength: 1}
+          shades_by: {type: string, minLength: 1}
+          contacts:
+            type: object
+            additionalProperties: false
+            required: [house, stage]
+            properties:
+              house: {$ref: '#/$defs/histograms'}
+              stage: {$ref: '#/$defs/histograms'}
+          symmetry: {type: integer, minimum: 0, maximum: 7}
+          regressions: {type: integer, minimum: 0}
+          level: {type: [integer, 'null']}
+          groups: {type: array, items: {type: integer}}
+          source_note:
+            description: >-
+              Said where a grid-slack run's report records no exact side of the witness it
+              read: the view is held to the admitting checkout's witness by the
+              measurements made again at admission.
+            type: string
+            minLength: 1
+      regularization: {$ref: '#/$defs/regularization'}
+      reference: {$ref: '#/$defs/axis_record'}
+  histograms:
+    type: object
+    additionalProperties: false
+    required: [before, after]
+    properties:
+      before: {type: array, minItems: 5, maxItems: 5, items: {type: integer, minimum: 0}}
+      after: {type: array, minItems: 5, maxItems: 5, items: {type: integer, minimum: 0}}
+  entry:
+    if: {properties: {generator: {const: regularize_axis_components/2}}}
+    then: {$ref: '#/$defs/axis_record'}
+    else: {$ref: '#/$defs/generated_record'}

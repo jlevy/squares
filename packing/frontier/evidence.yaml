@@ -32034,3 +32034,87 @@ evidence:
       left. The generators and inputs named in the generated files are not published (F-4);
       the proof's validity does not need them.
     source_reviewed: '2026-10-13'
+
+  - id: E-regularized-bounds-2026-10-12-exact-decision
+    claim: upper-bound
+    scope: {n_values: [28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125, 128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293, 294, 296, 298, 299, 300]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The register's verified upper bounds at these counts, Evan Daniel's exact
+        certificates of the catalogue's packings rounded up at the printed precision (T-101)
+        and the interval certificate at n = 29 (T-009); the Kingbird catalogue capture of 30
+        September 2026 the reported lanes transcribe; and Evan Daniel's regularized record
+        lists (T-146) and site as retained here.
+      searched: '2026-10-12, by devtools.register_regularized_bounds select against the case records'
+      novel_object: >-
+        Exact rational certificates of the catalogue's packings at the witnesses' own sides
+        at 26 counts, below the record's ceilings, and at 25 of them below the sides of Evan
+        Daniel's certificates of the same packings (T-101). At the other 33 the side is
+        exactly that of Evan Daniel's certificate, previously published on 5 October 2026
+        and proved here by T-101's replays, so there only a second certificate at that side
+        is new, not the bound. The packings are their finders'; the solver and the
+        regularizer are Evan Daniel's.
+      gaps: >-
+        No search beyond this record and its retained sources. Evan Daniel's certificates
+        (T-101) state the 33 sides exactly, which is why the novel object leaves them out;
+        his solved points, from which the views were made, are not retained here.
+    source_key: '[Daniel regularizer 2026-10-11]'
+    certificate: cases/regularized_bounds/views/
+    replay: >-
+      uv run --frozen --all-extras --group dev python -m
+      devtools.register_regularized_bounds decide, which decompresses each retained view and
+      decides it, every pair and every wall over Q, by sqpack.witness.exact_verify and by
+      devtools.check_rational_witness_independent; it must report all 59 views VALID under
+      both (cases/regularized_bounds/exact-decision.json). The controls are
+      devtools.register_regularized_bounds controls
+      (cases/regularized_bounds/negative-controls.json), and
+      devtools.register_regularized_bounds --check holds the receipts, the retained views
+      and the case records to each other.
+    replay_status: passed
+    verifiers: [V-sqpack-verify, V-check-rational-witness-independent, V-register-regularized-bounds]
+    limitations: >-
+      Proves, for each listed count, s(n) at most the exact side of the retained view, by
+      deciding the view here, every pair and every wall over Q, by two checkers that share
+      no geometry or verification code with each other: sqpack.witness.exact_verify on the
+      view's rational centre-basis witness and devtools.check_rational_witness_independent
+      on its rational corners. Both accepted all 59 on 12 October 2026, 1051241 pair
+      decisions each in 438.4 CPU seconds for the two. The 33 regularizer certificates clear
+      every wall by 5e-21 and every pair by about 1e-20; the 26 same-side views touch a wall
+      and a neighbour exactly, least clearance 0, and both deciders accept contact, which is
+      sound for s(n). The regularization run of 11 and 12 October 2026
+      (devtools.regularize_evand, Evan Daniel's vendored exact solver and regularizer at
+      evand/square-packing@675a5ea, conservative, coincide, 80 digits) made each view and
+      decided it with the same two checkers, so this replay reproduces the producing run's
+      decision with its own code and is not an independent implementation; the solver and
+      the regularizer decide nothing. At 33 counts the view is the regularizer's certificate
+      at the side the solve reached, scaled by 1 + 1e-20 and rounded up, exactly the side of
+      T-101's certificate; at 26 it is the same-side re-solve's view at the witness's side
+      s_W, the 36-digit rational promotion of a decimal witness. Three controls on each
+      view, decided by both checkers (negative-controls.json): one square of the tightest
+      pair moved along the pair's best separating face axis by that axis's gap plus one unit
+      of the side's denominator, doubled until the independent checker's pair gap is
+      negative, and the box shrunk by its least top or right clearance plus that unit, are
+      refused by both at all 59 (177 controls in 1307.2 CPU seconds); the box shrunk by the
+      unit alone is accepted by both at the 33 regularizer certificates, which clear the top
+      and right walls by more than that unit, and refused by both at the 26 same-side views,
+      which touch one of them. At those 26 the least clearance is 0, so the shrink past it
+      is the one-unit shrink: the 177 decisions are of 151 distinct mutants. The overlap
+      mutant is chosen by the independent checker's own
+      pair gap, so that checker's refusal of it is circular; it is invalid regardless, by
+      the separating-axis theorem. Identity is measured against the witness's exact frame
+      (check_half_angle_area.arrangement_gap under the box's eight symmetries); at n = 204
+      and 299 nearest centres do not pair the view's squares one to one with the witness's,
+      so there the view's identity with the credited packing is not decided here. The case
+      records carry each exact side as the verified upper bound's exact_form and keep the
+      decimal they printed before, which lies above it, as its value; at the 33 counts whose
+      side is T-101's they cite T-101's two replays beside this entry, the independent one
+      first. No optimality, local
+      minimum, rigidity or same-packing claim, and no certificate of a closed-form side:
+      where the catalogue prints one, each side lies above it.
+    source_reviewed: '2026-10-12'

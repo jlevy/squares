@@ -319,6 +319,10 @@ class Result:
     """Each count at which the result's certificate regularizes a packing another result
     holds, one sentence a count as `RESULTS.md` prints it
     (`result_credit.regularization_sentence`)."""
+    drawings: tuple[str, ...] = ()
+    """Each count at which the atlas draws this result's packing from a view this project
+    regularized, one sentence a count from the register's `regularized_drawings`, as
+    `RESULTS.md` prints it."""
 
     @property
     def activity(self) -> str:
@@ -509,6 +513,7 @@ def load() -> Overview:
     evidence = _evidence()
     records = load_records()
     register_lines, evidence_lines = LineIndex.read(RESULTS), LineIndex.read(EVIDENCE)
+    drawn = (register.get("regularized_drawings") or {}).get("items") or []
     results: list[Result] = []
     groups: list[tuple[str, list[Result]]] = []
     for title, members in render_results.grouped_results(register, sources):
@@ -526,6 +531,11 @@ def load() -> Overview:
                 regularizations=tuple(
                     regularization_sentence(item, sources)
                     for item in r.get("regularizations") or ()
+                ),
+                drawings=tuple(
+                    regularization_sentence(item, sources)
+                    for item in drawn
+                    if item["of"] == r["id"]
                 ),
             )
             for r in members

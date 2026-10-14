@@ -49,6 +49,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-07-n17-session-186-storage.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md, role: research-report, authority: supporting, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-11-evand-regularization-assessment.md, role: research-report, authority: supporting, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-11-regularization-state-and-approach.md, role: research-report, authority: supporting, lifecycle: retained}
   - {path: vendor/evand-regularize/README.md, role: component-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md, role: research-report, authority: record, lifecycle: retained}
@@ -114,6 +115,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-07-fibonacci-torus-sources.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/specs/done/plan-2026-10-07-fibonacci-torus.md, role: plan, authority: record, lifecycle: retained}
   - {path: packing/cases/fibonacci_torus/README.md, role: component-guide, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_bounds/README.md, role: component-guide, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md, role: review, authority: record, lifecycle: retained}
@@ -600,6 +602,7 @@ documents:
   - {path: conventions.md, role: conventions, authority: definitive, lifecycle: maintained}
   - {path: epistemics.md, role: epistemic-policy, authority: definitive, lifecycle: maintained}
   - {path: docs/project/policies/regularization-policy.md, role: component-guide, authority: definitive, lifecycle: maintained}
+  - {path: docs/project/guides/regularization-process.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: operating-rules.md, role: operating-rules, authority: definitive, lifecycle: maintained}
   - {path: development.md, role: development-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/README.md, role: research-runbook, authority: definitive, lifecycle: maintained}

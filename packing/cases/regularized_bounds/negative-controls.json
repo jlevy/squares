@@ -1,0 +1,2016 @@
+{
+ "format": "regularized-bounds-receipt-v1",
+ "tool": "python -m devtools.register_regularized_bounds controls",
+ "what": "Three mutants of each retained view, decided by both maintained routes: the tightest pair pushed into overlap and the box shrunk past its least top or right clearance, which both must refuse, and the box shrunk by one unit of the side's denominator, which both must accept where the clearance exceeds that unit. The overlap is judged by the independent checker's own pair gap, so its refusal of that mutant is circular; the mutant is invalid regardless, since a negative gap on every face axis means, by the separating-axis theorem, that the interiors meet.",
+ "controls": 177,
+ "all_as_expected": true,
+ "cpu_seconds": 1307.2,
+ "rows": [
+  {
+   "n": 28,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    26,
+    27
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 8e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 28,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000087839e-21,
+   "unit": 8e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 28,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000087839e-21,
+   "unit": 8e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 29,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 2e-35,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 29,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 2e-35,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 29,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 2e-35,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 37,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 37,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 37,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 39,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    38,
+    39
+   ],
+   "exact_gap": 9.999999999999992e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 39,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000056088e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 39,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000056088e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 41,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 1.4437575515929024e-107,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 41,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 1.4437575515929024e-107,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 41,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 1.4437575515929024e-107,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 50,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 1e-35,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 50,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 1e-35,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 50,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 1e-35,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 53,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 9.239664528522034e-108,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 53,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 9.239664528522034e-108,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 53,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 9.239664528522034e-108,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 54,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 2.511648329325554e-107,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 54,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 2.511648329325554e-107,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 54,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 2.511648329325554e-107,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 55,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    46,
+    48
+   ],
+   "exact_gap": 9.99999999999999e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 55,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.0000000004828e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 55,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.0000000004828e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 69,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    56,
+    58
+   ],
+   "exact_gap": 9.999999999999996e-21,
+   "moved_by_gap_plus": 2e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 69,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000038066e-21,
+   "unit": 2e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 69,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000038066e-21,
+   "unit": 2e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 71,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    64
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 6.562021094651963e-107,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 71,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 6.562021094651963e-107,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 71,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 6.562021094651963e-107,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 83,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    57,
+    58
+   ],
+   "exact_gap": 9.999999999999992e-21,
+   "moved_by_gap_plus": 2e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 83,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000037525e-21,
+   "unit": 2e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 83,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000037525e-21,
+   "unit": 2e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 87,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    86,
+    87
+   ],
+   "exact_gap": 9.999999999999992e-21,
+   "moved_by_gap_plus": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 87,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000085984e-21,
+   "unit": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 87,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000085984e-21,
+   "unit": 4e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 101,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 101,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 101,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 104,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    94,
+    95
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 104,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 104,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 107,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    87,
+    93
+   ],
+   "exact_gap": 9.999999999999992e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 107,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000026719e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 107,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000026719e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 109,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    62,
+    69
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 2e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 109,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.0000000009984e-21,
+   "unit": 2e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 109,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.0000000009984e-21,
+   "unit": 2e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 122,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 122,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 122,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 124,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 124,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 124,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 125,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    113,
+    114
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 125,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 125,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 128,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 7.415436923209246e-106,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 128,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 7.415436923209246e-106,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 128,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 7.415436923209246e-106,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 145,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 145,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 145,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 147,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 147,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 147,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 148,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 148,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 148,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 149,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    136,
+    137
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 149,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 149,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 151,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    129,
+    130
+   ],
+   "exact_gap": 9.99999999999999e-21,
+   "moved_by_gap_plus": 1.25e-28,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 151,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000004683e-21,
+   "unit": 1.25e-28,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 151,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000004683e-21,
+   "unit": 1.25e-28,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 170,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    112,
+    113
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1.6e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 170,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000042743e-21,
+   "unit": 1.6e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 170,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000042743e-21,
+   "unit": 1.6e-29,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 171,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    18,
+    36
+   ],
+   "exact_gap": 9.999999999999996e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 171,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000014286e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 171,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000014286e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 173,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 173,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 173,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 174,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    160,
+    161
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 174,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 174,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 178,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    2,
+    3
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 1.5697802058284712e-108,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 178,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 1.5697802058284712e-108,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 178,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 1.5697802058284712e-108,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 197,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 197,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 197,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 198,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    18,
+    36
+   ],
+   "exact_gap": 9.999999999999996e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 198,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000014286e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 198,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000014286e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 200,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 200,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 200,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 201,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    185,
+    186
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 201,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 201,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 202,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    185,
+    186
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 202,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000013874e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 202,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000013874e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 203,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    93,
+    101
+   ],
+   "exact_gap": 9.999999999999992e-21,
+   "moved_by_gap_plus": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 203,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000014034e-21,
+   "unit": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 203,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000014034e-21,
+   "unit": 4e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 204,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    176,
+    177
+   ],
+   "exact_gap": 9.99999999999999e-21,
+   "moved_by_gap_plus": 1.25e-28,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 204,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000004683e-21,
+   "unit": 1.25e-28,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 204,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000004683e-21,
+   "unit": 1.25e-28,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 205,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    198,
+    200
+   ],
+   "exact_gap": 9.99999999999999e-21,
+   "moved_by_gap_plus": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 205,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000088681e-21,
+   "unit": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 205,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000088681e-21,
+   "unit": 4e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 226,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 226,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 226,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 227,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 8e-34,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 227,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 8e-34,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 227,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 8e-34,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 229,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 229,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 229,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 230,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    178,
+    218
+   ],
+   "exact_gap": 9.99999999999999e-21,
+   "moved_by_gap_plus": 2e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 230,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000063415e-21,
+   "unit": 2e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 230,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000063415e-21,
+   "unit": 2e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 231,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    214,
+    215
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 231,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 231,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 233,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    114,
+    125
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 233,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000014034e-21,
+   "unit": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 233,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000014034e-21,
+   "unit": 4e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 234,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    218,
+    219
+   ],
+   "exact_gap": 9.999999999999987e-21,
+   "moved_by_gap_plus": 1.25e-28,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 234,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000004683e-21,
+   "unit": 1.25e-28,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 234,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000004683e-21,
+   "unit": 1.25e-28,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 235,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 4e-34,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 235,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 4e-34,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 235,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 4e-34,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 257,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    173,
+    178
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1.6e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 257,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000042743e-21,
+   "unit": 1.6e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 257,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000042743e-21,
+   "unit": 1.6e-29,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 260,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 260,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 260,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 262,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    244,
+    245
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 262,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 262,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 264,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    145,
+    156
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 264,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000014034e-21,
+   "unit": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 264,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000014034e-21,
+   "unit": 4e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 265,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    146,
+    157
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 265,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000014034e-21,
+   "unit": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 265,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000014034e-21,
+   "unit": 4e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 291,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 291,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 291,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 293,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    238,
+    241
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 293,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000073171e-21,
+   "unit": 1e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 293,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000073171e-21,
+   "unit": 1e-29,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 294,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 294,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 294,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 4e-29,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 296,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    275,
+    276
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 296,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 296,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000028549e-21,
+   "unit": 1e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 298,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    179,
+    190
+   ],
+   "exact_gap": 9.999999999999993e-21,
+   "moved_by_gap_plus": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 298,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000014034e-21,
+   "unit": 4e-30,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 298,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000014034e-21,
+   "unit": 4e-30,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 299,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    285,
+    286
+   ],
+   "exact_gap": 9.999999999999989e-21,
+   "moved_by_gap_plus": 1.25e-28,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 299,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 5.00000000004683e-21,
+   "unit": 1.25e-28,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 299,
+   "control": "side-shrunk-one-unit",
+   "clearance": 5.00000000004683e-21,
+   "unit": 1.25e-28,
+   "expect": "accepted",
+   "exact_verify": true,
+   "independent": true,
+   "as_expected": true
+  },
+  {
+   "n": 300,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 3.704071008870819e-104,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 300,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 3.704071008870819e-104,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 300,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 3.704071008870819e-104,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  }
+ ]
+}

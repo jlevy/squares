@@ -28,9 +28,20 @@ license_file: LICENSE
 copyright: 'Copyright (c) 2026 Evan Daniel'
 
 # Reviewed patches to the vendored copy, each {path, kind: modified | added |
-# removed, date, bead, reason}. A modified file keeps its pinned entry below, so the
-# pristine bytes stay reconstructible from the upstream pin.
-local_changes: []
+# removed | replica, date, bead, reason}, and a replica patch's `patch` file. A
+# modified file keeps its pinned entry below, so the pristine bytes stay
+# reconstructible from the upstream pin; a replica patch leaves them as they are.
+local_changes:
+  - path: search/exact/exactsolve.py
+    kind: replica
+    patch: packing/devtools/regularize_evand_patches/probe-flat-stall-stop.patch
+    date: '2026-10-12'
+    bead: think-ux1v
+    reason: >-
+      probe_flat also stops at its stall floor (residual below 1e-34, falling less than
+      tenfold a step), applied by devtools.regularize_evand to a copy of search/exact in
+      its scratch replica on the retry after a solve timeout only; the acceptance test,
+      the KKT point and the certificate are unchanged (n = 290 certifies in 222 s).
 
 # 351 files, 2089912 bytes.
 files:

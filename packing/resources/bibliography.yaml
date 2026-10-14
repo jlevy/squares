@@ -2013,6 +2013,20 @@ sources:
       source checks with Squares Project (Levy) verification code; this project lineage is
       not independent. The certificates are retained as factual data; the unlicensed prose
       is hash-pinned. Claude assistance disclosed. No optimizer, local or global claim.
+  - key: '[Daniel regularizer 2026-10-11]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-11'
+    note: >-
+      evand/square-packing at 675a5eaa8712542daac8b4515b0f69ad7044df44 (2026-10-11): the
+      exact solver and its two exact checkers under search/exact/ and the display
+      regularizer under search/regularize/, vendored unmodified under vendor/evand-regularize/
+      with its manifest vendored.yaml, under the MIT licence ("Copyright (c) 2026 Evan
+      Daniel"). This project runs it on its own known-best witnesses through
+      devtools.regularize_evand; its batch inputs and lists derive from those witnesses (CC
+      BY 4.0, Joshua Levy). Its CREDITS.md says the work was produced by Claude (Anthropic)
+      under his direction.
   - key: '[Overbeck n17 candidate 2026]'
     authors: [Overbeck]
     year: 2026

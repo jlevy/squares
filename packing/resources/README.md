@@ -1214,6 +1214,19 @@ tracked at 338, 339, 344, 375, 376, 378 and 379; the four certificates the issue
 not name, at 175, 308, 340 and 343, are registered nowhere.
 Claude assistance disclosed.
 
+## Evan Daniel’s regularizer, vendored 11 October 2026
+
+**[Daniel regularizer 2026-10-11]**: Evan Daniel’s exact solver, its two exact checkers
+and his display regularizer, from
+[evand/square-packing](https://github.com/evand/square-packing/tree/675a5eaa8712542daac8b4515b0f69ad7044df44/search/regularize)
+at its 11 October 2026 revision, vendored unmodified under the MIT licence in
+[`vendor/evand-regularize/`](../../vendor/evand-regularize/README.md), whose manifest
+records the pin and every file.
+It is the generator of this project’s regularized drawing layer and decides nothing
+here.
+The exact views of its runs whose sides lie below a case’s verified upper bound are
+this project’s certificates of T-155, which credits it through `builds_on`.
+
 ## Overbeck’s candidate proof that s(17) = L, 12 October 2026
 
 **[Overbeck n17 candidate 2026]**: Marc Leonard Overbeck’s (GitHub Kleddamag)

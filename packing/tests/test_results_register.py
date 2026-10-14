@@ -1738,4 +1738,6 @@ def test_results_md_says_whose_packing_each_regularization_is() -> None:
         "identity: the source\u2019s claim; nearest centres one to one; 10 squares moved, "
         "at most 0.222; turns up to 22.5\u00b0)."
     ) in section
-    assert section.count("  - n = ") == 15
+    register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))
+    listed = sum(len(record.get("regularizations") or []) for record in register["results"])
+    assert section.count("  - n = ") == listed

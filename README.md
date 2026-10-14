@@ -253,10 +253,11 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These 41 research reports are the durable topical syntheses:
+These 42 research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
+| [Regularizing Every Known-Best Packing for Display](docs/project/research/research-2026-10-11-regularization-state-and-approach.md) | What makes a drawing look irregular in the house conventions, everything tried so far, the spikes on 25 pilot counts, the full run over all 324 and the standard approach recommended for them; the runs stay outside the record |
 | [Evan Daniel’s Regularization Process, Assessed](docs/project/research/research-2026-10-11-evand-regularization-assessment.md) | Evan Daniel’s `search/regularize` read in full and run on three counts, its dilated certificates, the soundness obligations here, a cross-tabulation against `regularize_axis_components/2`, a five-slice adaptation plan and eight owner questions; no packing is regularized |
 | [n17 Restricted Family-Cell Audit](docs/project/research/research-2026-10-09-n17-family-cell-audit.md) | Exact replay forces the free square into side-S2 for a fixed sixteen-square endpoint skeleton on a restricted slider box; no perturbed-core capture or global exclusion |
 | [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | Prospective first-eight shared-centre pilot, exact endpoint feasibility control and bounded certificate contract; no LP implementation or result |

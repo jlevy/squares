@@ -296,3 +296,15 @@ def test_quoting_normalisation_does_not_hide_a_real_difference() -> None:
         "'b' is a required property"
     )
     assert re.search(r"required", normalise_message('"a" is a required property'))
+
+
+def test_a_json_dataset_is_read_as_json(tmp_path: pathlib.Path) -> None:
+    """YAML 1.1 reads `1e-15` as a string; the regularized index holds n = 84's turn so."""
+    dataset = tmp_path / "index.json"
+    dataset.write_text('{"softschema": {"schema": "x"}, "turn": 1e-15, "gap": 2e-06}\n')
+    payload, meta = payload_and_meta(dataset)
+    assert payload == {"turn": 1e-15, "gap": 2e-06}
+    assert meta == {"schema": "x"}
+    dataset.write_text('{"softschema": {"schema": "x"}, "turn": 1, "turn": 2}\n')
+    with pytest.raises(ValueError, match="duplicate key 'turn'"):
+        payload_and_meta(dataset)

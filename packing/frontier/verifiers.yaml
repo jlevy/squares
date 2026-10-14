@@ -2133,3 +2133,22 @@ verifiers:
       jobs, required controls and fourteen complete selected houses.
     note: Reconciles retained executions and ordinary private scientific inputs. No geometric predicate
       runs and admission alone confers no confirmation rung.
+  - id: V-register-regularized-bounds
+    program: devtools.register_regularized_bounds
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Selects the regularized views whose exact side lies below the case's verified upper
+      bound from the regularization runs' reports, retains each view as the run wrote it,
+      measures its identity against the witness's exact frame, hands each view to
+      sqpack.witness.exact_verify and devtools.check_rational_witness_independent, which
+      decide it, makes the negative controls, and writes the case records' verified upper
+      lane.
+    source: [packing/devtools/register_regularized_bounds.py]
+    note: >-
+      Reads the views and the receipts; decides nothing itself. The two programs it hands
+      each view to are the ones the run that made the views decided them with, so its
+      replay is a reproduction with the producer's code.

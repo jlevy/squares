@@ -92,6 +92,13 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         400_000,
         "Complete broad scope history and prepared exact bounds measure 304,237 bytes.",
     ),
+    "result/t-155.html": (
+        400_000,
+        (
+            "Fifty-nine counts' exact regularized sides, their regularizations and "
+            "prepared math measure 303,829 bytes."
+        ),
+    ),
     "atlas.html": (
         1_000_000,
         (

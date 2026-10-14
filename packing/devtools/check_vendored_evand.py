@@ -52,9 +52,12 @@ invalidates a result, whose soundness rests on the exact checkers, not on the ge
 **What passes offline.** Every pinned file is present with its size, SHA-256 and
 executable bit, unless the manifest's `local_changes` records it: `modified` (present, no
 longer the pinned bytes, and for code a header comment naming
-`vendor/evand-regularize/README.md`), `removed` (absent), or `added` (a file upstream never
-had, present). The README's Local Changes section names each recorded change's path, so
-the prose account and the manifest cannot drift apart; the section alone counts, since the
+`vendor/evand-regularize/README.md`), `removed` (absent), `added` (a file upstream never
+had, present), or `replica` (a patch applied only to a scratch replica of the copy, so the
+file here stays the pinned bytes, and the patch, a unified diff at the repository-relative
+`patch` path, still applies to them exactly). The README's Local Changes section names
+each recorded change's path, and a replica patch's file name, so the prose account and
+the manifest cannot drift apart; the section alone counts, since the
 README's role table names every file. The licence file is never a local change: the MIT
 grant requires its notice with every copy. Nothing else is in the directory besides its
 `README.md` and `vendored.yaml`, the project's own two files. No path in it is a symbolic
@@ -121,7 +124,9 @@ OWN_FILES = frozenset({DOCUMENT, MANIFEST_NAME})
 #: the record of the change.
 HEADER_MARK = "vendor/evand-regularize/README.md"
 FORMAT = "vendored-source-v1"
-KINDS = ("modified", "added", "removed")
+#: `replica` is a patch applied to a scratch replica only (`devtools.regularize_evand`), so
+#: the vendored file stays the pinned bytes and the patch is checked to apply to them.
+KINDS = ("modified", "added", "removed", "replica")
 #: A patched or added file of these kinds carries a header comment pointing here.
 COMMENTED_SUFFIXES = frozenset({".py", ".sh"})
 HEADER_LINES = 20
@@ -182,6 +187,7 @@ _COMMIT = re.compile(r"^[0-9a-f]{40}$")
 _HEX256 = re.compile(r"^[0-9a-f]{64}$")
 _DAY = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 _BEAD = re.compile(r"^think-[a-z0-9]{4}$")
+_HUNK = re.compile(r"^@@ -\d+(?:,(\d+))? \+\d+(?:,(\d+))? @@")
 #: Directories the fallback walk skips: interpreter caches, never content.
 _SKIP = frozenset({"__pycache__", ".git"})
 
@@ -211,6 +217,10 @@ class ManifestError(ValueError):
     """The manifest is not in the shape this check reads."""
 
 
+class PatchError(ValueError):
+    """A replica patch that does not apply exactly."""
+
+
 @dataclass(frozen=True, slots=True)
 class Pinned:
     """One upstream file at the pin."""
@@ -230,6 +240,8 @@ class Change:
     day: str
     bead: str
     reason: str
+    #: A `replica` change's unified diff, repository-relative; None for the other kinds.
+    patch: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -314,7 +326,8 @@ def _change(entry: object, place: int) -> Change:
     if not _BEAD.match(bead):
         msg = f"{where} ({path}): `bead` must name the bead that tracks it (think-xxxx)"
         raise ManifestError(msg)
-    return Change(path, kind, day, bead, _text(record, "reason", where))
+    patch = _relative(_text(record, "patch", where), where) if kind == "replica" else None
+    return Change(path, kind, day, bead, _text(record, "reason", where), patch)
 
 
 def parse_manifest(document: object) -> Manifest:
@@ -461,6 +474,99 @@ def present_files(directory: Path) -> set[str]:
 
 
 # ---------------------------------------------------------------------------
+# Replica patches
+# ---------------------------------------------------------------------------
+
+
+def _hunks(diff: str) -> list[tuple[str, str]]:
+    """Each hunk of a unified diff as its text before and after; lines outside hunks are
+    the diff's own prose and headers. A hunk is read by the line counts its header gives."""
+    lines = diff.splitlines(keepends=True)
+    hunks: list[tuple[str, str]] = []
+    place = 0
+    while place < len(lines):
+        header = _HUNK.match(lines[place])
+        place += 1
+        if header is None:
+            continue
+        old, new = int(header.group(1) or 1), int(header.group(2) or 1)
+        before: list[str] = []
+        after: list[str] = []
+        while len(before) < old or len(after) < new:
+            if place == len(lines):
+                msg = "a hunk ends before the line counts its header gives"
+                raise PatchError(msg)
+            line = lines[place]
+            place += 1
+            # An empty context line may have lost its leading space to an editor.
+            tag, body = (" ", line) if line in {"\n", "\r\n"} else (line[:1], line[1:])
+            if tag in {" ", "-"}:
+                before.append(body)
+            if tag in {" ", "+"}:
+                after.append(body)
+            if tag not in {" ", "-", "+", "\\"}:
+                msg = f"a line in a hunk starts with neither ' ', '-' nor '+': {line!r}"
+                raise PatchError(msg)
+        hunks.append(("".join(before), "".join(after)))
+    if not hunks:
+        msg = "the patch has no hunk"
+        raise PatchError(msg)
+    return hunks
+
+
+def apply_patch(text: str, diff: str) -> str:
+    """`text` with each hunk of the unified `diff` applied by its exact text before.
+
+    Line numbers are not trusted and nothing is fuzzed: each hunk's context and removed
+    lines must occur exactly once in the text as the hunks before it left it, as whole
+    lines and counting occurrences that overlap, so a patch that no longer fits the bytes
+    it was written against, or could land in two places, is refused, never half applied.
+    """
+    for before, after in _hunks(diff):
+        lines, block = _lines(text), _lines(before)
+        width = len(block)
+        found = [
+            start
+            for start in range(len(lines) - width + 1)
+            if width and lines[start : start + width] == block
+        ]
+        if len(found) != 1:
+            where = "is not in the text" if not found else f"occurs {len(found)} times"
+            first = block[0] if block else ""
+            msg = f"the hunk beginning {first.strip()!r} {where}"
+            raise PatchError(msg)
+        start = found[0]
+        text = "".join([*lines[:start], after, *lines[start + width :]])
+    return text
+
+
+def _lines(text: str) -> list[str]:
+    """`text` as its lines, each with its newline: only a newline ends a line, as in a diff."""
+    return [line for line in re.split(r"(?<=\n)", text) if line]
+
+
+def project_root(directory: Path) -> Path:
+    """The repository that holds a vendored directory at `vendor/<name>`."""
+    return directory.resolve().parents[1]
+
+
+def _replica_problems(directory: Path, path: str, change: Change) -> list[str]:
+    """A replica patch's file is there and still applies to the vendored file."""
+    if change.patch is None:  # parse_manifest gives every replica change its patch
+        return [f"{path}: a replica change names no patch"]
+    patch = project_root(directory) / change.patch
+    if not patch.is_file():
+        return [f"{path}: its replica patch {change.patch} is missing"]
+    try:
+        apply_patch(
+            (directory / path).read_text(encoding="utf-8"), patch.read_text(encoding="utf-8")
+        )
+    except PatchError as refusal:
+        return [f"{path}: its replica patch {change.patch} does not apply: {refusal}"]
+    return []
+
+
+# ---------------------------------------------------------------------------
 # The check
 # ---------------------------------------------------------------------------
 
@@ -554,6 +660,10 @@ def _pinned_problems(
         elif path not in present:
             problems.append(f"{path}: pinned, but missing from the vendored copy")
         else:
+            if change is not None and change.kind == "replica":
+                # A replica patch changes only the scratch replica: the file here is pristine.
+                problems += _replica_problems(directory, path, change)
+                change = None
             mode = _mode(where)
             if mode != _pinned_mode(pinned):
                 problems.append(
@@ -653,6 +763,12 @@ def check(directory: Path, manifest: Manifest, present: Iterable[str]) -> list[s
         f"{path}: recorded as a local change, but README.md's Local Changes does not name it"
         for path in sorted(manifest.changes)
         if path not in described
+    ]
+    problems += [
+        f"{path}: its replica patch {Path(change.patch).name} is not named in README.md's "
+        "Local Changes"
+        for path, change in sorted(manifest.changes.items())
+        if change.patch is not None and Path(change.patch).name not in described
     ]
     expected = set(manifest.files) | set(manifest.changes) | OWN_FILES | linked
     problems += [
@@ -871,7 +987,8 @@ def compare_upstream(
                 f"{path}: vendored.yaml pins mode {_pinned_mode(pinned)}, upstream's is {mode}"
             )
         change = manifest.changes.get(path)
-        if change is None:
+        if change is None or change.kind == "replica":
+            # A replica patch leaves the file here pristine, so it is held to upstream's blob.
             if path in held and link_in(directory, path) is None:
                 pristine.append((path, oid))
         elif change.kind != "added":
@@ -928,8 +1045,9 @@ def render_manifest(
         f"copyright: {_quoted(metadata['copyright'])}",
         "",
         "# Reviewed patches to the vendored copy, each {path, kind: modified | added |",
-        "# removed, date, bead, reason}. A modified file keeps its pinned entry below, so the",
-        "# pristine bytes stay reconstructible from the upstream pin.",
+        "# removed | replica, date, bead, reason}, and a replica patch's `patch` file. A",
+        "# modified file keeps its pinned entry below, so the pristine bytes stay",
+        "# reconstructible from the upstream pin; a replica patch leaves them as they are.",
         "local_changes: []",
         "",
         f"# {len(files)} files, {sum(item.size for item in files)} bytes.",

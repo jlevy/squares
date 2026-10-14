@@ -3632,10 +3632,16 @@ def _t007_consumer_audit(context: Context) -> str:
 
 
 def _regularized_atlas(context: Context) -> str:
-    # About a tenth of a second: the derived regularized views (X-049, think-bgkz) are
-    # compared with their index and their source witnesses by digest, re-verifying
-    # nothing. Re-deriving them exactly is `--verify-atlas`, about five minutes, which
-    # belongs to a deferred checkpoint rather than here.
+    # About two seconds: the derived regularized views (X-049, think-bgkz) are compared
+    # with their index and their source witnesses by digest, re-verifying nothing; a view
+    # another generator made (Evan Daniel's regularizer through `regularize_evand`, or the
+    # grid-slack generator, think-k35c) is also read and held to its entry: its label,
+    # generator, credit line, side and regularization record, and the decision table's
+    # admission. Every drawn view's exact side is held to the witness's `s_W` and to its
+    # case record's verified upper bound `U`, decided exactly for closed forms too, so no
+    # view lies below `U`, a `bound` view lies at it, and a view above it lies at a count
+    # that `ABOVE_U` names (#548 review B1, think-du42). Re-deriving and re-deciding the
+    # views exactly is `--verify-atlas`, which belongs to a deferred checkpoint instead.
     output = _module(context, "devtools.regularize_axis_components", "--check-atlas")
     _require_text(output, "regularized atlas check passed")
     return output
@@ -3649,8 +3655,12 @@ def _regularized_atlas_verify(context: Context) -> str:
     regularization again for all 324 records -- the exact frame, the straightening and
     compaction, the non-regression rounds, both exact verifications over `Q` and the
     census's shades of each file -- and requires every index record and every retained
-    view to come out byte-identical. It is the only check that the verdicts the index
-    records were earned by the code that now ships.
+    view to come out byte-identical. Where the layer draws another generator's view, the
+    axis tool's record of the count is held to the `reference` beside it, and the drawn
+    view is decided again over `Q` on both maintained routes, with its square count, its
+    identity against the source witness (the half-angle route's `arrangement_gap`, as at
+    admission; #548 review B3) and its shades measured again. It is the only check that
+    the verdicts the index records were earned by the code that now ships.
 
     Deferred on its own measurement: about 800 cpu-seconds on a four-cpu host, 223s of
     wall at four workers, against the 0.1s digest check that stays on every pull
@@ -5432,12 +5442,15 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/regularize_axis_components.py",
+            "packing/atlas/known-best/regularized-atlas-index.schema.yaml",
             "packing/devtools/census_atlas_contact_shades.py",
             "packing/devtools/check_rational_witness_independent.py",
             "packing/devtools/upper_bound_packets.py",
             "packing/atlas/known-best/regularized/*",
             "packing/atlas/known-best/manifest.json",
             "packing/witnesses/*",
+            # Each drawn view's side is held to its case record's verified upper bound.
+            "packing/frontier/n-*.md",
             *_RENDERER_HUB,
         ),
     ),

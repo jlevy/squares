@@ -73,12 +73,18 @@ records.
    A drawing needs `same` or `bound`, and $s_V \ge U$. A view with $s_V < U$ is
    registered as a result first and drawn after (owner, 12 October 2026: “regularize and
    correct always”), and a `solved` view with $s_V > U$ is not a drawing frame
-   ([the decision table](#the-decision-table)).
-3. **Identity.** Measured and recorded for every view, from every generator.
-   The view pairs one to one with the witness, and every square turned by more than
-   $10^{-6}$ (as a sine) is one the run’s recorded angle changes name; a view that fails
-   either goes to review, which admits it as the packing or records it as an alternate.
-   A view in which some square moves by more than $1/2$ is admitted only by review.
+   ([the decision table](#the-decision-table)). Where the witness’s side is above $U$
+   and a view at the bound exists, that view is the one decided and drawn, and the
+   same-side view is set aside with its measurements (owner, 13 October 2026: a valid
+   view has “equal or smaller side”).
+3. **Identity.** Measured and recorded for every view, from every generator: the
+   one-to-one pairing with the witness, each square turned by more than $10^{-6}$ (as a
+   sine) that the run’s recorded angle changes do not name, and the largest move.
+   A changed pose no longer stops a view (owner, 13 October 2026: “the pose doesn’t
+   matter if it changes as long as it’s optimal and conforms with our regularization
+   guidelines”): a view without the pairing, with an unnamed turn or with a move over
+   $1/2$ is admitted when every other obligation holds, and the reason it is admitted
+   with names the change.
 4. **Non-regression.** Neither the house nor the stage total of shared sides falls,
    against the source witness or against the admitted view it would replace.
    A view in which some square’s count falls while neither total does goes to review
@@ -93,13 +99,12 @@ records.
    receipt; the review record, if any; and the measurements of obligations 2 to 4. The
    index header cites this policy.
 
-**The move bound is provisional.** One-to-one pairing and named turns are the rule.
-The bound of $1/2$ on any square’s move for automatic admission has not been measured
-over the corpus. It comes from the fifteen views `T-146` measured, where no view that
-paired one to one moved a square more than $0.496$ and each of the three that did not
-needed a move of at least $0.589$, and from the current layer’s largest move, $0.421$ at
-$n = 181$. The owner re-sets it from the first full run’s distribution, and the decision
-is recorded here.
+**The move bound is a measurement, not a gate.** Until 13 October 2026 a move over $1/2$
+sent a view to review.
+The bound came from the fifteen views `T-146` measured, where no view that paired one to
+one moved a square more than $0.496$ and each of the three that did not needed a move of
+at least $0.589$, and from the then layer’s largest move, $0.421$ at $n = 181$. It is
+still measured and named, and decides nothing.
 
 ## 4. The Automated Pass
 
@@ -118,6 +123,8 @@ is recorded here.
 The generator runs on request, never as a gate ([section 8](#8-gates)). Every run writes
 a receipt: the generator version, the interpreter, each count’s status, sides and
 seconds, and the run’s cost.
+The [regularization process](../guides/regularization-process.md) gives the commands
+that run the generators, choose one view per count and admit it.
 
 ### The Decision Table
 
@@ -132,18 +139,20 @@ first row that matches decides.
 | 3 | $s_V < U$, under any relation | Register first: a result through the import runbook, in batches, with its identity measured for its `regularizations` item; drawn once registered | None; the receipt lists it |
 | 4 | `solved`, $s_V > U$ | Not a drawing frame | None, `dilated-side` |
 | 5 | `same` or `bound`, and the view’s pose equals the witness’s exactly | No view | `unchanged` |
-| 6 | `same` or `bound`, not one to one, or a square turned that the recorded angle changes do not name | Review: admitted as the packing or recorded as an alternate | Review queue |
+| 6 | Retired 13 October 2026: a view not one to one, or with a turn the recorded angle changes do not name, goes on to rows 7 to 10, the change named | None | None |
 | 7 | `same` or `bound`, a square’s house or stage count falls against the witness or the view it would replace | Refuse when a house or stage total falls; review when neither does | `refused`, `regression`, or the review queue |
 | 8 | `same` or `bound`, variant `fewest` with a merge of determined groups, or level 3 | Alternate: review only, never drawn as the packing | Review queue |
-| 9 | `same` or `bound`, a square moved by more than $1/2$ | Review | Review queue |
-| 10 | `same` or `bound`, one to one, every turn named, every move within $1/2$, no regression, `conservative`, level 2 or below | Admit | `regularized` |
+| 9 | Retired 13 October 2026: a move over $1/2$ goes on to row 10, named | None | None |
+| 10 | `same` or `bound`, no regression, `conservative`, level 2 or below | Admit, naming any change of pose | `regularized` |
 
 Row 10 is the only automatic admission.
 Rows 6 and 7 were refusals until the owner’s answers of 12 October 2026: a case the
 rules cannot settle goes to review, and only an exact route’s refusal or a fall in a
-total refuses. Views from `regularize_axis_components/2` are classified by the same
-table; having no variant or level, they meet row 10’s last two conditions by
-construction. A view in the review queue is not drawn until a review record admits it.
+total refuses. Rows 6 and 9 were retired by the owner’s answers of 13 October 2026: the
+pose may change, so only rows 7 and 8 still send a view to a person.
+Views from `regularize_axis_components/2` are classified by the same table; having no
+variant or level, they meet row 10’s last two conditions by construction.
+A view in the review queue is not drawn until a review record admits it.
 
 **How a decision is reported** (owner, 11 October 2026). “Refused” is kept for a view
 that would change the drawing and fails an obligation.
@@ -155,7 +164,7 @@ A run reports every count in one of these words, in this order of precedence:
 | **no change** | The view would draw the same picture: no square moves beyond $10^{-3}$ or turns, and the angle classes and the house contact counts are the source’s. Whatever its side relation, nothing is drawn differently, so there is nothing to refuse; a side below $U$ is still listed as a register-result candidate in the receipt | 3 to 7 and 10, when nothing visible changes; 5 |
 | **refused** | The view changes the drawing and an exact route refuses it (2), or a house or stage total falls (7) | 2, 7 |
 | **held** | The view changes the drawing, passes every route, and waits on the record: a register result first (3) or a side the record does not hold (4); the reason is shown with it | 3, 4 |
-| **review** or **alternate** | The pairing or a turn needs a person (6), a square loses a contact while no total falls (7), or as rows 8 and 9 say | 6, 7, 8, 9 |
+| **review** or **alternate** | A square loses a contact while no total falls (7), or as row 8 says | 7, 8 |
 | **admitted** | Row 10 | 10 |
 
 This changes how decisions are worded, not what is drawn: only an admitted view, or a
@@ -189,7 +198,6 @@ where there is one.
 
 | Decision | How it is made reproducible |
 | --- | --- |
-| Admit a row 9 view | The review record; the view is unchanged |
 | Admit a row 8 alternate | Only once question 2 is answered yes, and then labelled an alternate, never the credited packing |
 | Choose symmetry or contact, attached or separate sub-blocks, or a placement style | A per-count generator parameter in the review record, which the driver reads on every later run |
 | Choose an orientation | A recorded isometry of the witness’s frame, as `devtools/atlas_orientation.py` records them |
@@ -279,59 +287,71 @@ So it runs on request with a receipt, and the gates hold the decisions it produc
 
 | Check | What it holds | Where it runs |
 | --- | --- | --- |
-| `regularized atlas views match their index` | The index against the manifest, the witnesses and the views, by digest; with the layer’s contract, also the generator, method, side relation, identity and review-record fields | Records tier, every pull request |
+| `regularized atlas views match their index` | The index against the manifest, the witnesses and the views, by digest; with the layer’s contract, also the generator, method, side relation, identity and review-record fields; every drawn view’s exact side against $s_W$ and against the case record’s $U$, decided exactly, with the views above $U$ named in `ABOVE_U` | Records tier, every pull request |
 | `regularized atlas drawings match their index` | Every drawing re-rendered from its retained view | Records tier, every pull request |
 | `results rungs are earned and the view agrees` | `devtools.check_results` on each register result’s `regularizations` items | Records tier, every pull request |
-| `regularized atlas views re-derive exactly` | Every `regularize_axis_components/2` view re-derived byte for byte | Deferred: the `regularized-views` job, under its 450 s ceiling |
-| Re-decision of vendored-generator views | Every retained view decided again over $\mathbb{Q}$ on the maintained routes, its identity and shades re-measured and its digests held | Deferred, once its cost is measured inside a ceiling; selected per invocation while it is above one |
+| `regularized atlas views re-derive exactly` | Every `regularize_axis_components/2` view re-derived byte for byte; every other generator’s view decided again over $\mathbb{Q}$ on the maintained routes, its square count, identity and shades re-measured and its digests held | Deferred: the `regularized-views` job, whose 450 s ceiling bead think-uomm revisits |
 | The generator run | The views reproduced from the pinned code and inputs | On request only, with a receipt |
 
 ## 9. Owner Decisions
 
 The assessment’s eight
 [open questions](../research/research-2026-10-11-evand-regularization-assessment.md#open-owner-questions),
-and the four the pilots of 11 October 2026 raised, each with its answer or, where none
-is recorded, the default the policy applies until there is one.
+the four the pilots of 11 October 2026 raised, and the three the owner settled on 13
+October 2026 after the stack’s re-posed views were audited, each with its answer or,
+where none is recorded, the default the policy applies until there is one.
 
 1. **Variant:** `conservative` only; `fewest` is not run.
    *Answered by the owner on 12 October 2026:* yes.
    At $n = 129$ `fewest` lost 26 of 79 four-side squares and the one-to-one pairing.
+
 2. **A `fewest` merge of determined groups as the same packing:** no.
    Such views are alternates (row 8) and are not admitted.
+
 3. **Exact views below the verified bound:** *answered by the owner on 12 October 2026,
    “regularize and correct always”:* every such view is registered as a result through
    the import runbook, in batches with a `regularizations` item per count, and drawn
    once registered (row 3). The first batch is the exact packings at the decimal
    witnesses’ printed sides, about $10^{-14}$ below bounds rounded up at fourteen
    decimals.
+
 4. **Irrational optima:** the status quo.
    A dilated certificate is not a drawing frame (row 4), and views over a number field
    are a follow-up, $\mathbb{Q}(\sqrt{2})$ first; $n = 11$, whose proved optimum lies in
    a field of degree 8, stays drawn from its witness.
+
 5. **Orientation:** the source’s; any isometry is recorded as `atlas_orientation`
    records one.
+
 6. **Tie-breaks of taste:** the generator’s defaults, flagged in the gallery for the
    reviewer.
+
 7. **Method credit:** the owner directed on 11 October 2026 that the vendored code be
    properly credited, so its notice and the vendored README carry Evan Daniel’s credit.
    Until the owner says where else, the index, the drawings and a register result’s
    `builds_on` carry it as [section 7](#7-credit) states; the atlas README and the
    composites do not yet.
+
 8. **Retention of the solve:** kept.
    The solved points and contact structures go in a pinned packet or release asset
    outside Git
    ([OR-18](../../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)),
    named by digest in the receipt: they can be discarded later, and a discard cannot be
    undone.
+
 9. **A view at exactly the verified bound:** *answered by the owner on 12 October 2026:*
    admitted, as the side relation `bound` (rows 5 to 10). It certifies exactly what the
    register holds.
+
 10. **Cases the rules cannot settle:** *answered by the owner on 12 October 2026:* they
     go to review, not to refusal.
-    Rows 6 and 7 send a view to review unless a total of shared sides falls; only an
-    exact route’s refusal or a falling total refuses.
+    Row 7 sends a view to review unless a total of shared sides falls, as row 6 did
+    until question 14 retired it; only an exact route’s refusal or a falling total
+    refuses.
+
 11. **A view that changes nothing visible:** *answered by the owner on 12 October 2026:*
     as now. It is reported as no change and no file is written for it.
+
 12. **Registered refinements the case records have not adopted:** *answered by the owner
     on 12 October 2026, as recommended:* the register’s lower exact certificates
     (`T-146` at its fifteen counts first) become the atlas witnesses before their counts
@@ -339,8 +359,55 @@ is recorded, the default the policy applies until there is one.
     and after the imports in flight at the same counts land.
     A view derived from a witness that later changes is re-reviewed (section 5). The
     intake’s #518, merged on 12 October 2026, adopted these houses on the case records
-    directly, citing an owner decision of 11 October 2026 not to wait for #403; #559 is
-    to regularize its 42 counts again on the new witnesses.
+    directly, citing an owner decision of 11 October 2026 not to wait for #403; #559
+    regularizes its 42 counts again on the new witnesses.
+
+13. **What a valid view is:** *answered by the owner on 13 October 2026:* “valid means a
+    valid packing with equal or smaller side”, “with exact verification”, where the side
+    is “optimal as best as known”.
+    A view is valid when both maintained exact routes accept it and its side is at most
+    $U$. A same-side view above $U$ gives way to a view at the bound where the solve
+    reached it (obligation 2), and the grid-slack generator tries a rational $U$ first
+    wherever the witness’s side is above it.
+    A view at a side below $U$ is a new result and is registered, as question 3
+    answered. Seven drawn views sit above $U$ and stay, by name, until a view at $U$
+    draws as well. At 18, 26, 66 and 85 Evan Daniel’s views are rationals about
+    $10^{-30}$ above a closed-form optimum, the status quo of question 4. At 110, 241
+    and 297 the drawing is at Francisco Couzo’s decimal side, $3 \times 10^{-12}$ to
+    $1.3 \times 10^{-11}$ above Evan Daniel’s exact optimum: the view at $U$ draws fewer
+    shared sides at 110 and 241 (bead think-jnso) and goes to the owner at row 7 at 297.
+    `packing/tests/test_regularize_select.py` reads every drawn view’s side against $U$
+    and fails on a view above it at any other count, and on a listed count once it is
+    drawn at $U$.
+
+14. **A changed pose:** *answered by the owner on 13 October 2026:* “once things have
+    been verified correct, that they are equal or better, we can commit and use them.
+    the pose doesn’t matter if it changes as long as it’s optimal and conforms with our
+    regularization guidelines.”
+    Rows 6 and 9 are retired: no pairing, an unnamed turn or a move over $1/2$ is named
+    in the admission’s reason and decides nothing.
+    Rows 7 and 8 stand, so a per-square loss of contact still goes to review.
+    “Equal or better” is the choice rule of section 10, item 4, now an answer: a view
+    replaces the drawing when it is worse on no measure of the drawing and either better
+    on one or drawn at a smaller side.
+    The measures are seven: light, uneven and near-axis squares, angle classes and hues
+    (fewer is better), and the house and stage totals of shared sides (more is better);
+    classes and hues joined after a review of #559 found a view at 236 that tied the
+    other five and drew one more hue.
+    A view that improves no measure at the same side is not drawn, except where it
+    replaces a numerically checked witness with an exactly verified view at a side no
+    larger than $U$ (question 15). `devtools.regularize_select` applies the rule, and
+    the [regularization process](../guides/regularization-process.md) says how a pass
+    runs. The grid-slack generator’s straightening threshold is a per-run setting: a view
+    from a run at 1 or 5 degrees is admitted on the same terms as one from the default
+    half degree.
+
+15. **Exact verification of every packing:** *answered by the owner on 13 October 2026:*
+    “Every packing, even after regularization, should be exactly verified.”
+    Every view the layer draws is decided by both exact routes, at admission and again
+    by `--verify-atlas`. The packings drawn without a view, and the decimal witnesses
+    the case pages draw, are not; the verification gaps review of 13 October 2026
+    records them as a serious gap to be filled, as the owner asked.
 
 An answer, like any other change to this policy, is an owner decision recorded here with
 its date. It replaces the default, and the counts it bears on are re-reviewed.
@@ -373,7 +440,9 @@ recorded where it is implemented, and reversing one is a change to that layer.
    (#530).
 4. **Choosing between generators:** where both yield an admissible view, Evan Daniel’s
    is drawn unless the grid-slack view is better on a measure of the drawing (light,
-   uneven or near-axis squares, or a house or stage total) and worse on none (#548).
+   uneven or near-axis squares, or a house or stage total) and worse on none (#548). The
+   owner confirmed this rule on 13 October 2026, with the measures section 9, question
+   14 lists.
 5. **The layer’s contract and checks:** every index entry names its generator; the
    records-tier check reads each non-axis view against its entry, and the full tier
    re-derives the axis tool’s views and decides every other view again on both exact
@@ -383,11 +452,13 @@ recorded where it is implemented, and reversing one is a change to that layer.
    resolved to the registered result that holds the packing; a count whose packing no
    registered result holds is listed as unregistered (#548). A drawing proves no bound,
    so no register result is made for one.
-7. **Registering exact views below the bound** (question 3’s answer, to be carried out
-   in #549): the row 3 views outside the counts #518 and #553 re-housed are to be
-   registered as one batch result, under the next free result id, with the case records’
-   exact forms moved to the registered sides and their printed values kept, so no
-   citation weakens.
+7. **Registering exact views below the bound** (question 3’s answer, carried out in
+   #549): the row 3 views outside the counts #518 and #553 re-housed are registered as
+   one batch result, `T-155`, with the case records’ exact forms moved to the registered
+   sides and their printed values kept, so no citation weakens.
+   Where a registered side is exactly the side of an earlier exact certificate, as it is
+   of Evan Daniel’s (T-101) at 33 counts, that bound was already published, and the
+   records cite the earlier certificate’s independent replay beside the batch’s.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

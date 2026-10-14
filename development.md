@@ -621,10 +621,29 @@ regularizes every record of the
 [derived layer](packing/atlas/known-best/README.md#the-regularized-views) again from its
 witness, re-runs both exact verifications, and requires the index and every retained
 view to come out byte-identical.
-Its stand-in on every pull request is the records-tier step `regularized atlas views
+Since 12 October 2026 the layer also draws views by Evan Daniel’s regularizer and by the
+grid-slack generator; for each of those the step requires the axis tool’s re-derived
+record to equal the `reference` kept beside it, and decides the drawn view again over
+the rationals on both maintained routes, with its square count, its identity against the
+witness and its shades measured again.
+The identity was the costly part until 14 October 2026: `arrangement_gap` compared every
+pair of centres exactly, 40 to 68 seconds a view at $n = 182$, $241$ and $297$, and over
+the 90 drawn views at #559, 62 of them decided again, the step took 1,410 s of wall at
+four workers on a loaded host (#559 review C, C1). It now compares exactly only the
+centres that binary64 puts within `nearest_reach` of the nearest, a margin far above
+binary64’s error, which always holds the exact nearest and its ties, so the matching and
+every measurement are the ones the exhaustive search gives.
+The identity at $n = 182$ takes 0.4 s, and the independent checker is most of a drawn
+view’s cost. At #559 the whole step then took 325.7 s of wall at four workers, 713 s of
+summed drawn-view time and 559 s of record time (measured on 2026-10-14, host load
+average 2 to 4), inside its 450 s ceiling.
+`think-uomm` holds the hosted reading still owed at this head: the last one, run
+38325954699 before the identity was measured again, read 445 s. Its stand-in on every
+pull request is the records-tier step `regularized atlas views
 match their index`, which compares the same index with the manifest, the witnesses and
-the views by digest in about a tenth of a second.
-The tool’s pool follows `PACK_JOBS`.
+the views by digest, reads each other generator’s view against its entry, and holds
+every drawn view’s exact side to the witness’s $s_W$ and to the case record’s $U$, in
+about two seconds. The tool’s pool follows `PACK_JOBS`.
 
 It was measured on 2026-10-02 on a four-cpu host that other sessions were also using, so
 read these as upper bounds:

@@ -59,7 +59,9 @@ REPO = Path(__file__).resolve().parents[2]
 INDEX = REPO / "packing/atlas/known-best/regularized/index.json"
 #: Upstream's best-choice list as vendored at its pin (vendor/evand-regularize/README.md).
 VENDORED_BEST = REPO / "vendor/evand-regularize/search/regularize/lists/best.json"
-INDEX_CONTRACT = "packing.squares:RegularizedAtlasIndex/v1"
+INDEX_CONTRACT = "packing.squares:RegularizedAtlasIndex/v2"
+#: The index before it named a generator per entry: every entry was the axis tool's.
+INDEX_CONTRACT_V1 = "packing.squares:RegularizedAtlasIndex/v1"
 STATUSES = ("regularized", "unchanged", "refused")
 LEVELS = (0, 1, 2, 3)
 #: Working precision for a tilt, in significant digits.
@@ -148,23 +150,27 @@ def read_best(rows: Sequence[Mapping[str, Any]]) -> dict[int, Pick]:
 
 
 def read_index(document: Mapping[str, Any]) -> dict[int, Mapping[str, Any]]:
-    """The project index's entries by count, refusing one that disagrees with its totals."""
-    if document.get("contract") != INDEX_CONTRACT:
+    """The project tool's record of each count, by count, refusing an index that
+    disagrees with its totals. Since v2 an entry may draw another generator's view, and
+    the axis tool's own record of that count is kept beside it as `reference`; that is
+    the record compared here, with the totals recounted over the entries as drawn."""
+    if document.get("contract") not in {INDEX_CONTRACT, INDEX_CONTRACT_V1}:
         raise InputRefusedError(f"index.json: contract is not {INDEX_CONTRACT}")
-    entries = document["entries"]
+    drawn = document["entries"]
+    entries = [entry.get("reference") or entry for entry in drawn]
     _counts_once((entry["n"] for entry in entries), "index.json")
-    statuses = Counter(entry["status"] for entry in entries)
+    statuses = Counter(entry["status"] for entry in drawn)
     unknown = sorted(set(statuses) - set(STATUSES))
     if unknown:
         raise InputRefusedError(f"index.json: unknown statuses {unknown}")
     totals = document["totals"]
-    if dict(statuses) != totals["statuses"] or len(entries) != totals["records"]:
+    if dict(statuses) != totals["statuses"] or len(drawn) != totals["records"]:
         raise InputRefusedError(
             f"index.json: entries recount to {dict(statuses)} over {len(entries)}, "
             f"its totals say {totals['statuses']} over {totals['records']}"
         )
     refusals = Counter(
-        entry["refusal"]["kind"] for entry in entries if entry["status"] == "refused"
+        entry["refusal"]["kind"] for entry in drawn if entry["status"] == "refused"
     )
     if dict(refusals) != totals["refusals"]:
         raise InputRefusedError(

@@ -7909,6 +7909,20 @@ occurrences:
   - packet
   contributor_id: david-r-maciver
 - origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularizer 2026-10-11]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence: &id021
+  - repository-license
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 52 spans so labelled.
+- origin:
     path: packing/frontier/results.yaml
     record_key: T-001
     field: /builds_on/credit/0
@@ -8312,6 +8326,19 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: manasseh-ahmed
+- origin:
+    path: packing/frontier/results.yaml
+    record_key: T-155
+    field: /builds_on/credit/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence: *id021
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 52 spans so labelled.
 - origin:
     path: packing/frontier/n-005.md
     record_key: '5'
@@ -9207,7 +9234,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: &id021
+  evidence: &id022
   - github-profile
   - owner-confirmation
   contributor_id: ryan-xu
@@ -9667,7 +9694,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -9693,7 +9720,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: &id023
+  evidence: &id024
   - repository-license
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
@@ -9937,7 +9964,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -9963,7 +9990,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: &id022
+  evidence: &id023
   - primary-byline
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
@@ -10003,7 +10030,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -10029,7 +10056,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10312,7 +10339,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -10338,7 +10365,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10351,7 +10378,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -10389,7 +10416,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10415,7 +10442,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -10441,7 +10468,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10518,7 +10545,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -10544,7 +10571,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10751,7 +10778,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -10776,7 +10803,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10813,7 +10840,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -10839,7 +10866,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10852,7 +10879,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -10878,7 +10905,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10944,7 +10971,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -10970,7 +10997,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -11045,7 +11072,7 @@ occurrences:
   label: Evan Daniel
   role: construction-finder
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -11226,7 +11253,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -11774,7 +11801,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -11800,7 +11827,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -11964,7 +11991,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -12502,7 +12529,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -13006,7 +13033,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13044,7 +13071,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -13442,7 +13469,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13505,7 +13532,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -13580,7 +13607,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13645,7 +13672,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -13671,7 +13698,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -14106,7 +14133,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14181,7 +14208,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -14207,7 +14234,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14403,7 +14430,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14441,7 +14468,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14466,7 +14493,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -14504,7 +14531,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -14606,7 +14633,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id023
+  evidence: *id024
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:

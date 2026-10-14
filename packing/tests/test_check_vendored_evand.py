@@ -125,14 +125,18 @@ def test_the_real_manifest_pins_the_licence_and_the_commit() -> None:
     assert manifest.license_file == "LICENSE"
     assert "README.md" not in manifest.files  # the project's own, never an upstream file
     assert "Copyright (c) 2026 Evan Daniel" in (vendored.VENDORED / "LICENSE").read_text()
-    # A re-render of the parsed manifest is the file itself, so `--write` reproduces it.
-    record = safe_load((vendored.VENDORED / vendored.MANIFEST_NAME).read_text())
+    # A re-render of the parsed manifest is the file itself, so `--write` reproduces it;
+    # the recorded local changes are edited by hand, and a re-pin starts without them.
+    text = (vendored.VENDORED / vendored.MANIFEST_NAME).read_text()
+    record = safe_load(text)
     rendered = vendored.render_manifest(
         metadata={key: str(record[key]) for key in METADATA},
         files=list(manifest.files.values()),
         retrieved=str(record["retrieved"]),
     )
-    assert rendered == (vendored.VENDORED / vendored.MANIFEST_NAME).read_text()
+    start = text.index("local_changes:")
+    recorded = text[start : text.index("\n\n", start) + 1]
+    assert rendered == text.replace(recorded, "local_changes: []\n")
 
 
 def test_a_pristine_copy_passes(tmp_path: Path) -> None:
@@ -233,6 +237,111 @@ def test_a_removal_and_an_addition_are_held_to_what_they_say(tmp_path: Path) -> 
         "# Added here (think-abcd); see vendor/evand-regularize/README.md.\n"
     )
     assert _problems(directory) == []
+
+
+STALL = "packing/devtools/patches/tool-path.patch"
+PATCH = """A replica patch: prose before the first hunk is the patch's own account.
+
+--- a/search/tool.py
++++ b/search/tool.py
+@@ -1,2 +1,3 @@
++# Patched in a replica (think-abcd); see vendor/evand-regularize/README.md.
+ import sys
+-print(sys.argv)
++print(sys.path)
+"""
+
+
+def _replica(tmp_path: Path, patch: str | None = PATCH) -> Path:
+    change = (
+        "[{path: search/tool.py, kind: replica, patch: "
+        f"{STALL}, date: '2026-10-12', bead: think-abcd, reason: why}}]"
+    )
+    directory = _copy(tmp_path, change)
+    if patch is not None:
+        (tmp_path / STALL).parent.mkdir(parents=True)
+        (tmp_path / STALL).write_text(patch)
+    (directory / "README.md").write_text(
+        "### Local Changes\n\n`search/tool.py`, `tool-path.patch`: prints sys.path.\n"
+    )
+    return directory
+
+
+def test_a_replica_patch_leaves_the_file_pinned_and_must_still_apply(tmp_path: Path) -> None:
+    directory = _replica(tmp_path)
+    assert _problems(directory) == []
+    manifest = vendored.load_manifest(directory / vendored.MANIFEST_NAME)
+    assert manifest.changes["search/tool.py"].patch == STALL
+    # Applying it here instead of to a replica is an unrecorded edit, and the patch then
+    # no longer applies to the bytes in the copy.
+    (directory / "search/tool.py").write_text(
+        vendored.apply_patch(UPSTREAM["search/tool.py"].decode(), PATCH)
+    )
+    problems = _problems(directory)
+    assert any("does not apply" in line for line in problems)
+    assert any("not the pinned" in line for line in problems)
+
+
+def test_a_replica_patch_must_be_there_and_named_in_the_readme(tmp_path: Path) -> None:
+    directory = _replica(tmp_path, patch=None)
+    assert _problems(directory) == [f"search/tool.py: its replica patch {STALL} is missing"]
+    (tmp_path / STALL).parent.mkdir(parents=True)
+    (tmp_path / STALL).write_text(PATCH)
+    (directory / "README.md").write_text("### Local Changes\n\n`search/tool.py` patched.\n")
+    assert _problems(directory) == [
+        (
+            "search/tool.py: its replica patch tool-path.patch is not named in README.md's "
+            "Local Changes"
+        )
+    ]
+
+
+def test_a_replica_change_names_its_patch(tmp_path: Path) -> None:
+    manifest = _copy(tmp_path, _change("search/tool.py", "replica")) / vendored.MANIFEST_NAME
+    with pytest.raises(vendored.ManifestError, match="`patch` must be a non-empty string"):
+        vendored.load_manifest(manifest)
+
+
+def test_a_patch_applies_by_its_exact_context_or_not_at_all() -> None:
+    original = UPSTREAM["search/tool.py"].decode()
+    assert vendored.apply_patch(original, PATCH) == (
+        "# Patched in a replica (think-abcd); see vendor/evand-regularize/README.md.\n"
+        "import sys\nprint(sys.path)\n"
+    )
+    with pytest.raises(vendored.PatchError, match="is not in the text"):
+        vendored.apply_patch("import os\nprint(sys.argv)\n", PATCH)
+    with pytest.raises(vendored.PatchError, match="occurs 2 times"):
+        vendored.apply_patch(original + original, PATCH)
+    with pytest.raises(vendored.PatchError, match="no hunk"):
+        vendored.apply_patch(original, "prose only\n")
+    with pytest.raises(vendored.PatchError, match="ends before"):
+        vendored.apply_patch(original, PATCH.rsplit("\n", 3)[0] + "\n")
+
+
+def test_a_hunk_that_could_land_in_two_places_or_mid_line_is_refused() -> None:
+    """Review B of #511, B9: occurrences are whole lines, and overlapping ones count."""
+    hunk = "--- a/f\n+++ b/f\n@@ -1,3 +1,3 @@\n x\n-y\n+Z\n x\n"
+    with pytest.raises(vendored.PatchError, match="occurs 2 times"):
+        vendored.apply_patch("x\ny\nx\ny\nx\n", hunk)
+    assert vendored.apply_patch("w\nx\ny\nx\n", hunk) == "w\nx\nZ\nx\n"
+    tail = "--- a/f\n+++ b/f\n@@ -1,1 +1,1 @@\n-y = 1\n+y = 2\n"
+    with pytest.raises(vendored.PatchError, match="is not in the text"):
+        vendored.apply_patch("xy = 1\n", tail)
+    assert vendored.apply_patch("x = 0\ny = 1\n", tail) == "x = 0\ny = 2\n"
+
+
+def test_the_real_replica_patch_applies_to_the_pinned_solver() -> None:
+    manifest = vendored.load_manifest(vendored.VENDORED / vendored.MANIFEST_NAME)
+    change = manifest.changes["search/exact/exactsolve.py"]
+    assert change.kind == "replica"
+    assert change.patch is not None
+    pinned = (vendored.VENDORED / change.path).read_text(encoding="utf-8")
+    patched = vendored.apply_patch(
+        pinned, (vendored.project_root(vendored.VENDORED) / change.patch).read_text()
+    )
+    added = sorted(set(patched.splitlines()) - set(pinned.splitlines()))
+    assert any("nr > prev / 10" in line for line in added)
+    assert len(patched.splitlines()) == len(pinned.splitlines()) + 8
 
 
 #: Each kind of local change, applied correctly: the path it records and the bytes it

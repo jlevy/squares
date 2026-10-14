@@ -191,9 +191,33 @@ The check refuses an edit with no entry, an entry whose file is still the pinned
 a patched script with no header comment, and an entry Local Changes does not name.
 Only that section counts: the role table above names every file.
 
+A *replica patch* changes what runs without changing this directory.
+It is a unified diff kept outside `vendor/`, recorded with `kind: replica` and its
+repository-relative `patch` path, and the driver applies it to a copy in its scratch
+replica, never here.
+The file it patches stays the pinned bytes, and the check refuses an entry whose patch
+is missing, no longer applies exactly to those bytes, or is not named below.
+The patched copy carries the header comment the rule above asks of a modified script,
+and every run that used the patch lists it in its report and receipt.
+
 ### Local Changes
 
-None. Every file is byte-identical to the pin.
+Every file in this directory is byte-identical to the pin.
+One replica patch is recorded:
+
+- **`search/exact/exactsolve.py`, `probe-flat-stall-stop.patch`** (replica, 12 October
+  2026, think-ux1v), at `packing/devtools/regularize_evand_patches/`. `probe_flat`, the
+  realization test of the zero modes, runs Gauss–Newton until the residual is below
+  `10^-(dps-20)`, or for 40 iterations.
+  Redundant contacts that meet tangentially floor the residual near `1e-39`, as
+  upstream’s own comment expects, so the stop is never reached; at n = 290 each of 78
+  modes spent all 80 least-squares solves and the solve ran out of 1,800 s. The patch
+  also stops once the residual is below `1e-34` and fell less than tenfold in the last
+  step. The acceptance test is upstream’s, the probe works on copies of the point, and
+  the KKT point and certificate do not depend on it: n = 18 gives byte-identical outputs
+  with and without it, and n = 290 certifies in 222 s at upstream’s published `S'`.
+  `devtools.regularize_evand` applies it only on the retry ladder’s rung for a solve
+  that timed out.
 
 ## Re-pinning
 

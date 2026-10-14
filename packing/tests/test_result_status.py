@@ -276,7 +276,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # took the last count T-070 held; fifty when T-117's exact rational refinements
     # took n = 105 and 292, the last verified ceilings T-056 held; fifty-four when
     # Guzhou0806's continuous-pose kernel (T-145) took both of n = 40's lower-bound lanes
-    # from his clipped-corner transfer (T-133) on the same density.
+    # from his clipped-corner transfer (T-133) on the same density; fifty-five on 12
+    # October, when the regularized exact certificates (T-155) took n = 29's verified
+    # ceiling from its interval certificate (T-009), the one count that held.
     # T-120..T-123 report exact side forms for historical source configurations; no
     # current frontier lane relies on these unverified catalogue assertions. Each claim
     # states its side cut where its root interval's ends agree. T-120's lies above the
@@ -295,6 +297,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     expected = {
         "T-001",
         "T-002",
+        "T-009",
         "T-010",
         "T-015",
         "T-016",
@@ -374,8 +377,15 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-020", "T-021", "T-030", "T-043", "T-044", "T-047", "T-049", "T-057", "T-072",
         "T-056", "T-078", "T-079", "T-087", "T-088", "T-089", "T-092",
     } <= set(derived)  # fmt: skip
+    # A mark names the results the case's bound rests on now. At n = 29 that has been
+    # T-155's regularized certificate since 12 October. At n = 69 its side is exactly the
+    # side of Evan Daniel's certificate, below T-088's, so the case cites both T-101's
+    # replays and T-155's decision for it.
+    assert view.position_marks(records.results["T-009"], view.SUPERSEDED, records) == [
+        "superseded by T-155"
+    ]
     assert view.position_marks(records.results["T-088"], view.SUPERSEDED, records) == [
-        "superseded by T-101"
+        "superseded by T-101 and T-155"
     ]
     assert {str(records.results[entry]["kind"]) for entry in derived} == {
         "lower-bound",

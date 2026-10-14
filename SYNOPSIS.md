@@ -322,6 +322,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-123](packing/frontier/RESULTS.md) | 177 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports s(177) <= alpha_177, where alpha_177 is the feasible side of the source configuration and the selected root of the degree-32 integer polynomial in reported-catalogue.json, new_form_claims.177, with its retained rational root interval, whose ends agree to 23 places, so s(177) <= 13.82297973416944860009365… The same source asserts that this polynomial is minimal; that additional algebraic assertion has not been independently established here. |
 | [T-124](packing/frontier/RESULTS.md) | 1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 20, 21, 22, 23, 24, 25, 28, 30, 31, 32, 33, 34, 35, 36, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 60, 61, 62, 63, 64, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports that 178 configurations are non-strict local minima under the source matched-index perturbation convention. |
 | [T-063](packing/frontier/RESULTS.md) | 61 | `V3` | `C3` | `S1` | `previously-published` | s(61) = 8, as a corollary of s(60) = 8 (T-062), which Evan Daniel published with it on 28 September 2026. |
+| [T-155](packing/frontier/RESULTS.md) | 28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125, 128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293, 294, 296, 298, 299, 300 | `V3` | `C3` | `S1` | `apparently-novel` | For each of 59 counts n from 28 to 300, s(n) <= s_n, where s_n is the exact side of a rational packing that this project made from the register’s known-best witness at n with Evan Daniel’s exact solver and regularizer and decided here over Q; at 57 of the counts it is measured here as the witness’s packing, and at n = 204 and 299 that is not decided. |
 | [T-129](packing/frontier/RESULTS.md) | 105, 130, 292 | `V0` | `C0` | `S1` | `previously-published` | Complete author certificate reports at 105, 130 and 292 are retained with matching inputs and separate immutable pins, at the exact sides they state: s(105) <= 10.806077865519704632682966129102, s(130) <= 11.911187706535762355657987890878 and s(292) <= 17.597249391156465040647414499422. |
 
 | Significance | What [`epistemics.md`](epistemics.md#significance-and-novelty) anchors it to |
@@ -357,7 +358,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 154 | 154 registered, 124 by others |
+| Frontier results | 155 | 155 registered, 124 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -657,6 +658,7 @@ case or experiment separately.
 | [Session186 storage disposition](docs/project/reviews/review-2026-10-07-n17-session-186-storage.md) | dated review record | record | retained | — |
 | [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | research synthesis | supporting | retained | — |
 | [Assessment: Evan Daniel’s regularization process, and adapting it to every packing n = 1..324](docs/project/research/research-2026-10-11-evand-regularization-assessment.md) | research synthesis | supporting | retained | — |
+| [Research: Regularizing Every Known-Best Packing for Display](docs/project/research/research-2026-10-11-regularization-state-and-approach.md) | research synthesis | supporting | retained | — |
 | [Evan Daniel’s Regularizer, Vendored](vendor/evand-regularize/README.md) | component scope and use | definitive | maintained | — |
 | [Saved-pose incircle discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/README.md) | typed session record | record | retained | — |
 | [n17 Owned-Core Guarded Clauses](docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md) | research synthesis | record | retained | — |
@@ -722,6 +724,7 @@ case or experiment separately.
 | [Fibonacci Torus Source Review](docs/project/reviews/review-2026-10-07-fibonacci-torus-sources.md) | dated review record | record | retained | — |
 | [Fibonacci Torus Research and Audit](docs/project/specs/done/plan-2026-10-07-fibonacci-torus.md) | implementation plan | record | retained | — |
 | [Fibonacci Torus Confirmation Checks](packing/cases/fibonacci_torus/README.md) | component scope and use | record | retained | — |
+| [Regularized Views Registered as Verified Upper Bounds](packing/cases/regularized_bounds/README.md) | component scope and use | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
@@ -1208,6 +1211,7 @@ case or experiment separately.
 | [Conventions for `packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
 | [Epistemics](epistemics.md) | whole-result evidence classifications | definitive | maintained | — |
 | [Regularization Policy](docs/project/policies/regularization-policy.md) | component scope and use | definitive | maintained | — |
+| [Regularization Process](docs/project/guides/regularization-process.md) | component scope and use | supporting | maintained | — |
 | [Operating Rules](operating-rules.md) | how a session is conducted | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign: W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |

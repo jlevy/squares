@@ -101,17 +101,26 @@ def _committed_totals() -> dict[str, Any]:
     return json.loads(compare.INDEX.read_text(encoding="utf-8"))["totals"]
 
 
+def _axis_refused() -> int:
+    """The axis tool's own refusals: since v2 another generator's view may be drawn where
+    the axis tool refused, so the index's totals, which count what is drawn, can be fewer."""
+    return sum(entry["status"] == "refused" for entry in compare.load_index().values())
+
+
 def test_the_committed_index_recounts_to_its_totals() -> None:
-    # load_index refuses an index whose entries do not recount to its totals; what is
-    # asserted here holds at any index, not the counts of one merge.
+    # load_index refuses an index whose drawn entries do not recount to its totals; what
+    # is asserted here holds at any index, not the counts of one merge.
     index = compare.load_index()
     totals = _committed_totals()
     statuses = [entry["status"] for entry in index.values()]
     assert sorted(index) == list(range(1, 325))
+    assert set(statuses) <= set(compare.STATUSES)
     assert totals["records"] == 324
-    assert {name: statuses.count(name) for name in totals["statuses"]} == totals["statuses"]
     assert sum(totals["statuses"].values()) == 324
     assert sum(totals["refusals"].values()) == totals["statuses"]["refused"]
+    # A drawn view of another generator replaces only a record the axis tool refused or
+    # drew, never adds a refusal.
+    assert _axis_refused() >= totals["statuses"]["refused"]
 
 
 def test_an_index_that_disagrees_with_its_totals_is_refused() -> None:
@@ -180,8 +189,7 @@ def test_the_refused_records_split_by_their_witness_tilts() -> None:
     counts, records = result["counts"], result["records"]
     assert set(counts) == {"all-45", "other-tilt", "axis-only"}
     assert {kind: len(members) for kind, members in records.items()} == counts
-    refused = _committed_totals()["statuses"]["refused"]
-    assert sum(counts.values()) == result["refused"] == refused
+    assert sum(counts.values()) == result["refused"] == _axis_refused()
     # Every refused record holds a tilted square.
     assert counts["axis-only"] == 0
     # n = 51's witness is exact over Q(sqrt 2), with 17 squares at 45 degrees.

@@ -559,6 +559,21 @@ The renamed records keep forwarders at their previewed addresses
 are 27 records. Population continues under `think-m7il`: 221 structured spans are
 unresolved, among them Chaoweeraprasit, Ostashev, Wang, Li and Maaz.
 
+### Regularization Integration
+
+The next upstream merge brings `main` at `aeef99ef0` into PR #578, including the
+regularized-bounds result T-155. The five conflicts retain both the upstream exact
+certificate and the profile branch’s preferred personal credits, both independent
+renderer regressions, and regenerated result and citation views.
+The census joins two new Daniel spans without unresolved or stale additions, and the URL
+registry has 1,020 rows with no failures.
+Recorded derivation provenance and direct quotations retain their original labels;
+published person credits come from the reviewed case and profile records.
+The n=29 explanation distinguishes its historical Schadt ceiling from the current exact
+regularized certificate.
+Merge acceptance remains tracked by `think-5bao`, with final validation receipts on the
+PR.
+
 ## WIP Handoff: 2026-10-10
 
 The owner requested a work-in-progress PR and handoff before further implementation.
