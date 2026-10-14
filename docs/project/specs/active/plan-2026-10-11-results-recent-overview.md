@@ -52,7 +52,7 @@ question.
 
 A result published before the seven days and registered in them appears in both sections
 if it is at S3 or above, under the day it was added and the week it was published.
-On the register at the merge with `main` (`aeef99ef0`) one result is placed so: T-101,
+On the register at the merge with `main` (`b8c930338`) one result is placed so: T-101,
 published on 5 October and added on 6 October, which is at S2 and so is listed only
 under 6 October.
 On 12 October the same rule put T-090, T-091 and T-092 in both sections.
@@ -64,7 +64,7 @@ one of the two sections.
 
 The window is the register’s newest `registered` date, `reference_date`, and the seven
 days before it: 6 to 13 October 2026 on the register at the merge with `main`, eight
-blocks holding 57 results.
+blocks holding 58 results.
 That is the cutoff `?added-age=7` holds a row to on that day (`age_cutoff`, the function
 Max age already uses), so the section and its heading’s link list the same results when
 read on the day of the last registration.
@@ -149,8 +149,8 @@ That is a one-function change in `credit_link`.
   rubric’s “a substantive case result or machine audit”.
   The template takes `S3` and “four weeks” from `ROLLUP_FLOOR` and `ROLLUP_WEEKS`, and
   “seven” from `ADDED_DAYS`. The seven days have no floor.
-- **Draft scores count as recorded.** On the register at the merge with `main`, 87 of
-  the 155 entries carry a score whose `by` says draft.
+- **Draft scores count as recorded.** On the register at the merge with `main`, 88 of
+  the 156 entries carry a score whose `by` says draft.
   The intake stack’s significance review (layer 5) confirms every draft, so the question
   does not block this work.
 - **Superseded results are included, muted, and titled “Superseded”** in both sections:
@@ -182,24 +182,24 @@ unchanged.
 
 ## Byte Cost
 
-Measured on the register at the merge with `main` (`aeef99ef0`):
+Measured on the register at the merge with `main` (`b8c930338`):
 
 | Measure | Bytes |
 | --- | ---: |
-| The seven days, 57 results over 6 to 13 October | 17,545 |
+| The seven days, 58 results over 6 to 13 October | 17,722 |
 | The weekly rollup, 55 results in the four weeks before | 8,285 |
-| Both sections | 25,830 |
+| Both sections | 26,007 |
 | Ceiling for both (`tests/test_results_rollup.py`, `ROLLUP_BYTES`) | 48,000 |
-| `results.html` on this branch | 909,180 |
+| `results.html` on this branch | 914,341 |
 | Page ceiling (`site_urls.PAGE_BUDGET_EXCEPTIONS`, `test_overview.PAGE_CEILINGS`) | 950,000 |
 
-An entry of the seven days costs about 308 bytes: its id link, headline, cases, rungs
+An entry of the seven days costs about 306 bytes: its id link, headline, cases, rungs
 and a linked credit.
 The weekly rollup costs about 30 bytes an id and 250 a line, as before.
 The prototype’s ceiling of 24,000 held the weekly rollup alone.
-The busiest eight days so far, to 6 October, registered 76 results, about 23,400 bytes
+The busiest eight days so far, to 6 October, registered 76 results, about 23,300 bytes
 at that rate, so the ceiling is 48,000, about 1.4 times the largest the record has given
-and 1.9 times the current size.
+and 1.8 times the current size.
 Past it the remedy is a shorter entry, not a higher number, because the page’s own
 ceiling is shared with every row of the table.
 
