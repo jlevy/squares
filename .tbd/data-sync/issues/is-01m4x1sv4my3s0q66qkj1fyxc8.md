@@ -3,9 +3,9 @@ type: is
 id: is-01m4x1sv4my3s0q66qkj1fyxc8
 title: Record the verified PR563, PR590 and PR598 launches in the project changelog
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: claude-code@spud10.local
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m4vns6xeff13savsant84279
 hold: null
 hold_until: null
 created_at: 2026-10-14T11:12:16.531Z
-updated_at: 2026-10-14T12:53:01.269Z
+updated_at: 2026-10-14T21:16:33.094Z
 started_at: 2026-10-14T11:12:26.849Z
+closed_at: 2026-10-14T21:16:33.093Z
+close_reason: Delivered in PR604 merge16ea3bd0606c4fae2c343bf11de969301ca0f724. Final-head Packing38634417915/Pages38634417893 passed; deployment38636016372 live audit job116103959611 passed4243of4243checks at that exact revision. Independent reviewsA-H and dispositions are published. Final News has26articles, shared canonicaltopics/compactchoosers, defaultS4/S5, consistentcards/meters, T154/T153/T060highlights; Explanations hasTutorial/Papers/PDFs/Visuals and Film|Workbench; tutorial definitions/anchors preserved, Atlas uncapped withpan. Separate CI and literalcodeglyph follow-ups remain inPR599, without blocking this delivered slice.
+resolution: null
+duplicate_of: null
 ---
 Post-delivery bookkeeping in PR599: importer verifies merged-main metadata, adapt noteworthy summaries for significance audit/announcement tooling and project changelog/independent editions, freeze the existing22 entries, add publication receipts, regenerate CHANGELOG.md and About source, and record explicit site-only bookkeeping exception without inventing an edition or proof replay. Final hosted publication must show24entries/49deliveries/36noteworthyPRs/13omissions.
 
