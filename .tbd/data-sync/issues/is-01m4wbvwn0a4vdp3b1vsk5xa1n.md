@@ -5,7 +5,7 @@ title: "Import BuddenPing: s(272) <= 16.9655864748376706357560070334220455696299
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:54.944Z
-updated_at: 2026-10-14T07:05:47.010Z
+updated_at: 2026-10-14T14:50:24.957Z
 started_at: 2026-10-14T04:49:01.096Z
 ---
 https://github.com/jlevy/squares/issues/569 (BuddenPing, 2026-10-12T22:58Z). BuddenPing/square-packing-certificates 260aaf50230483654802790589c2dfce73237604, n272.cert.json and pingyou-n272-rational.yaml; an exact contact refinement of SQUISH's #500 n272 (T-151); credit PingYou Ltd. Intake lane pingyou of 2026-10-14.
@@ -48,3 +48,5 @@ Branch `claude/wizardly-meitner-wqn4x3-intake-1014-pingyou`, commit `680123806` 
 @BuddenPing, thank you. We have the n272 contact refinement from #569, pinned at 260aaf5 (n272.cert.json, SHA-256 1bfe74e4…). We retain it as derived exact facts, and this project's two maintained exact routes have decided it with both controls. A review and the registration follow. PR #574 states a further n272 certificate; it is a separate import.
 
 Posted (stage 1 acknowledgement, 2026-10-14): https://github.com/jlevy/squares/issues/569#issuecomment-6162868775
+
+Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-170 at 272, V0/C0, regularizing T-151.

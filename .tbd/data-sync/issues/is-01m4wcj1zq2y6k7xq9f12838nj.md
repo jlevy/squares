@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594)"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:01.303Z
-updated_at: 2026-10-14T06:21:48.280Z
+updated_at: 2026-10-14T14:50:31.664Z
 started_at: 2026-10-14T05:01:05.888Z
 ---
 Stage 1 triage of jlevy/squares#594 (bengreff, Benjamin Greff, opened 2026-10-14T02:06:46Z, labelled intake, no comments when read at 04:44Z): "Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)". "External certificate" is wand125's title template of #279/#280: the author's own certificate in his own repository, not a citation of another's published result.
@@ -89,3 +89,5 @@ Next, the result is registered as reported, and a separate review of the mathema
 ## Validation of the commit
 
 packing-validate --push: all 16 edit checks passed (basedpyright and the browser floor included); its reachable-tests phase selected the whole suite and was stopped at the 25-minute limit under a load average near 20, unfinished, no failure reported. The tests reachable from the change then passed directly: 640 passed in 348 s (test_bound_citations, test_acquire_source, test_acquire_original_gzip, test_retained_data, test_retained_json, test_retained_json_layout, test_results_register, test_state_ai_assistance, test_check_archive_annotations, test_certificate_citations, test_evand_mixed_covers, test_intake_sweep, test_check_requests). acquire_source --check: PACKET_MATCHES_ITS_CONTRACT. The lefthook pre-commit hook did not run in this worktree (lefthook not on PATH); packing/resources/README.md was formatted with the pinned flowmark-rs 0.4.0 before the commit, and packet READMEs are excluded from flowmark.
+
+Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-184, s(76) = 9, V0/C0, S3; the author's second route at 06993982 (comment of 14 October) is not yet retained.

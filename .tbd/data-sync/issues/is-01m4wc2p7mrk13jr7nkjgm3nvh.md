@@ -5,7 +5,7 @@ title: "Import mstrmg (Miles Gray): s(381) <= 19.985624661051481, beyond the cas
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: blocked
 hold_until: null
 created_at: 2026-10-14T04:52:37.747Z
-updated_at: 2026-10-14T07:35:52.923Z
+updated_at: 2026-10-14T14:50:35.495Z
 started_at: 2026-10-14T04:52:50.738Z
 ---
 Miles Gray (GitHub mstrmg) reports s(381) <= 19985624661051481/10^15 in an exact rational certificate attached to issue #582 (n381-19.985624661051.cert.txt, SHA-256 03650573fc283abe721947d0170d833b3725a6550d4e8a9283c41f10c4a371f4); #589 is the same request, closed as its duplicate. Stages 1, 2 and the stage 4 replay of the 2026-10-14 intake lane couzo (think-mq0k), on branch claude/wizardly-meitner-wqn4x3-intake-1014-couzo.
@@ -50,3 +50,5 @@ Not imported here. The custody and beyond-horizon-only tooling priced above (an 
 Replaces the draft above: thanks mstrmg, states that Couzo's #583 certificate at 381 (19.974977397657) is 1.06e-2 below #582's 19.985624661051481 and has been retained and replayed, so the record will carry Couzo's; #582 is not imported for now; further improvements are best sent as a new issue with an exact certificate in a repository.
 
 - #582: https://github.com/jlevy/squares/issues/582#issuecomment-6163324766
+
+Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): #582 not recorded: Kevin Fang's 381 (12 October) is earlier and smaller; close at merge.

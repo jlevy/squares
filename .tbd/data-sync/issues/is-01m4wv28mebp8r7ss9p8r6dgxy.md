@@ -5,7 +5,7 @@ title: "Import wand125: the closed-form lower bound s(N) >= a(N) for every non-s
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: serene-hopper
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4wsqt2sjrksybyz375sarb3
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:14:32.462Z
-updated_at: 2026-10-14T10:07:31.210Z
+updated_at: 2026-10-14T14:50:38.190Z
 started_at: 2026-10-14T09:14:41.667Z
 ---
 Found by the 2026-10-14 watch survey (think-fxs7): wand125/square-packing problems/closed-form (eb0fd19, 2026-10-13T09:36Z): s(N) >= a(N) for every non-square N >= 49, with a Rust replay checker; gives s(k^2-1), s(k^2-2), s(k^2-3) = k for k >= 8 without Nagamochi's lemma. The survey's own evaluation of a(N) from intervals.json (50-digit decimals, not the author's checker) beats the reported lower bound at 156 counts (104-116, 125-139, 148-164, 173-191, 201-220, 230-251, 261-284, 294-319) and the verified lower bound at 189. Stages 1-2, a priced replay of the author's checker, and a mathematical review of the theorem.
@@ -30,3 +30,5 @@ Claim map: (1) theorem s(N) >= a(N) for every non-square N >= 49 (SPEC.md 1.1) -
 Checks run here: release custody; the source's structure_all.py/validate_family.py unchanged on all 68 families: ALL STRUCTURE OK, 680 checks, 68 s wall / 44 CPU-s, results equal to the source's receipt, two mutations refused. Finding: the source's receipts/structure.json names validate_family.py sha256 fdd61866..., the published file is 22e55f17.... First-party evaluation/closed_form_bounds.py (sha256 1a430c09...): two exact routes (closed form; the theorem's inequality), every case bound, four controls refused: 19.5 s wall / 17.9 CPU-s; identical to the source's a_of_n.py (30 places) and site table (9 places) at all 3,498 counts to 3600.
 
 Priced, not run: complete replay of 136 records by replay4d, 4,294 CPU-hours (source's receipts/replay.json; uncalibrated here; smallest record 0.27 CPU-h; needs crates.io and a GMP build; 18 GB unpacked) -> waits for an owner budget. Calibration on two smallest records ~1 CPU-h. Mathematical review: own lane; reading list in the packet README. Independent leaf-test checker: a W7 slice.
+
+Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-180, the closed form, V0/C1, S4; devtools.apply_closed_form raises the reported lane at 154 counts (125 and 148 stay, where T-144 and T-179 are stronger); #600's entry in result-requests.yaml maps to it.

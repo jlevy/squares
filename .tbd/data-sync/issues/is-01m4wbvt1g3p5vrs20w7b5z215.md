@@ -5,7 +5,7 @@ title: "Import BuddenPing: s(146) <= 12.5837822039508342919134679370511513667729
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:52.272Z
-updated_at: 2026-10-14T07:05:36.434Z
+updated_at: 2026-10-14T14:50:21.037Z
 started_at: 2026-10-14T04:49:01.069Z
 ---
 https://github.com/jlevy/squares/issues/566 (BuddenPing, opened 2026-10-12T22:38Z; updated 2026-10-12T23:41Z). BuddenPing/square-packing-certificates 820b9ffb11dd602d735f7a03cd472db98a2d3bb6, n146.cert.json and pingyou-n146-rational.yaml; a further refinement of Robert Barnett's T-150 at 146; credit PingYou Ltd. Intake lane pingyou of 2026-10-14.
@@ -48,3 +48,5 @@ Branch `claude/wizardly-meitner-wqn4x3-intake-1014-pingyou`, commit `680123806` 
 @BuddenPing, thank you. We have the n146 certificate from your update of 12 October, pinned at 820b9ff (n146.cert.json, SHA-256 a88ede7e…). We retain it as derived exact facts, and this project's two maintained exact routes have decided it with both controls. A review and the registration follow, and a reply from main will say what was registered. PR #574 states a further n146 certificate; it is a separate import.
 
 Posted (stage 1 acknowledgement, 2026-10-14): https://github.com/jlevy/squares/issues/566#issuecomment-6162867895
+
+Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-167 at 146, V0/C0, regularizing T-150.

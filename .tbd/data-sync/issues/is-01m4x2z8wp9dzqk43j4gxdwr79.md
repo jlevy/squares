@@ -5,7 +5,7 @@ title: "Import wand125: the independent checker cfcheck for the closed form (pro
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: serene-hopper
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4wsqt2sjrksybyz375sarb3
 hold: null
 hold_until: null
 created_at: 2026-10-14T11:32:43.030Z
-updated_at: 2026-10-14T12:36:43.079Z
+updated_at: 2026-10-14T14:50:39.513Z
 started_at: 2026-10-14T11:32:48.901Z
 ---
 746e2c5 (2026-10-14T10:38:27Z), after think-tsox's 9a28a84 pin, adds cfcheck under problems/closed-form/indep-checker/: a Rust checker written from SPEC.md only, the author says sharing no code with replay4d, which accepted every leaf of intervals 1 and 34 (91,044 roots, 3,138,681 leaves, 0 refusals). New evidence for the closed-form claim (#600): a later-revision packet, a priced or run replay of intervals 1 and 34 here, and an evidence-update plan for the records lane (session 01UXZs37jGv5vqVGADH7Gkn8).
@@ -34,3 +34,5 @@ Stage 4, a stated sample (receipts/): build from the retained copy, rustc 1.97.0
 Evidence-update plan for the records lane: packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/evidence-plan.md (E-wand125-closed-form-cfcheck-report, E-wand125-closed-form-cfcheck-sample, V-wand125-cfcheck). No rung moves.
 
 Gate: packing-validate --edit, 2 steps failed, both identical on clean 10a8e0b4b (branch is 50 commits behind origin/main): published URL registry (t-157..t-160, t-037, n-264) and synopsis release impact.
+
+Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): cfcheck's evidence on T-180: E-wand125-closed-form-cfcheck-report, E-wand125-closed-form-cfcheck-sample and V-wand125-cfcheck; no rung moves.
