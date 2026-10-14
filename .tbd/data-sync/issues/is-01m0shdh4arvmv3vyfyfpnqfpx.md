@@ -5,8 +5,8 @@ title: Execute H-032 exact n=3 quotient-family control
 kind: task
 status: closed
 priority: 1
-version: 7
-spec_path: explorations/packing/campaign/hypotheses/H-032-small-n-optimal-moduli.md
+version: 8
+spec_path: packing/campaign/hypotheses/H-032-small-n-optimal-moduli.md
 labels:
   - packing
   - focus-insight
@@ -18,7 +18,7 @@ child_order_hints:
   - is-01m0skpc6wnj82yk9am1rc06p6
   - is-01m0sny9yg5f5w6kfmtp1nsv5h
 created_at: 2026-08-24T09:25:25.257Z
-updated_at: 2026-08-24T10:48:19.293Z
+updated_at: 2026-10-12T23:40:25.356Z
 closed_at: 2026-08-24T10:48:19.278Z
 close_reason: Exp-014 terminalized on exact checker commit 257cb0d. The full rotatable n=3 side-2 space is two labelled 12-cycles, its S3 quotient one four-cycle, and its D4 x S3 quotient a closed interval with C/G/M strata. Retained semantic and SVG replay, nine controls, 0.63s generation-plus-replay, and the 27-step strict/deep gate all pass.
 resolution: null

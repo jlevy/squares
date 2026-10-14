@@ -5,7 +5,7 @@ title: "Import itsnaka (SQUISH): nine Mondrian packings at n = 176-305, smaller 
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:09.823Z
-updated_at: 2026-10-11T22:18:23.542Z
+updated_at: 2026-10-12T23:42:05.145Z
 started_at: 2026-10-11T20:28:23.635Z
+closed_at: null
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/500 (2026-10-11T05:30Z). itsnaka/squish-certs aeacc6c124df339074f7370e1e010bb6e8c1b5ca squish-submission-2026-10-11, nNNN.cert.json exact rational (SQUISH format). Counts 176, 181, 238, 239, 270, 271, 272, 304, 305. 304 and 305 superseded by #506 (Couzo, built on these). Stages 1-4 replay through devtools.upper_bound_reports.
 
@@ -57,3 +61,5 @@ certify --workers 1: 27 jobs (9 positives, 18 controls), 2026-10-11T20:39:56Z to
 check --replay: all 27 jobs decided again, equal to their rows; 21:20:20Z to 22:14:01Z (53 min 41 s, serial, load 12 to 19). "9 certificates and 27 jobs admitted".
 Checks: acquire_source --check PACKET_MATCHES_ITS_CONTRACT; derive --check matches the checkout; check-claims rebuilds; pytest test_upper_bound_reports.py + _488_489 + _regularized: 168 passed; test_upper_bound_reports_500.py: 5 passed; packing-validate --records: 49 steps passed, exit 0.
 Not run: the source's own checkers (SQUISH's Fraction checker, Ellsworth's check_packing.py); the third exact route (check_half_angle_area, a separate review lane); no review. No shared record edited; register-plan output handed to the records lane.
+
+Reopened: Reopened by the 2026-10-12 reconciliation (think-va12): packing/campaign/intake-watch.yaml still names this bead as the owner of its repository's read-through, and check_bead_tree requires a record that declares a deferral to name an open bead. The import itself is complete; close this bead in the change where the next intake pass updates that intake-watch entry.

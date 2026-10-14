@@ -3,9 +3,9 @@ type: is
 id: is-01m4mtdc4km4sy3qqmsftn3rnq
 title: "PR #496 follow-up: fix review findings E, F and G on main"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m4mdnpf7raye5cx00cmdfb55
 hold: null
 hold_until: null
 created_at: 2026-10-11T06:29:12.466Z
-updated_at: 2026-10-11T18:17:02.374Z
+updated_at: 2026-10-12T23:39:25.705Z
 started_at: 2026-10-11T06:29:13.240Z
+closed_at: 2026-10-12T23:39:25.705Z
+close_reason: "Completed: PR #507 merged (e96e9ea95), fixing or deferring every #496 review E/F/G finding."
+resolution: null
+duplicate_of: null
 ---
 PR #496 merged before its review findings were addressed. This follow-up PR (branch claude/pr496-review-fixes from main 8aba95081) fixes or defers every finding from review E (senior, Fable: https://github.com/jlevy/squares/pull/496#pullrequestreview-5481683586), review F (performance, Opus: #pullrequestreview-5481911429) and review G (correctness, Fable: #pullrequestreview-5481975880), posts one disposition reply per review on #496 linking this PR, gets a Fable follow-up review (owner's choice), and merges with the owner's confirmation for the new PR number.
 

@@ -3,9 +3,9 @@ type: is
 id: is-01m4padtzpm1sj8gg4ygyrjjck
 title: "Records lane 2026-10-11: register the new imports (T-NNN), evidence, coverage, bibliography, result-requests entries"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:19.318Z
-updated_at: 2026-10-12T15:09:07.866Z
+updated_at: 2026-10-12T23:39:17.214Z
 started_at: 2026-10-11T22:05:03.285Z
+closed_at: 2026-10-12T23:39:17.213Z
+close_reason: "Completed: the 2026-10-11 imports are registered (T-147 to T-152) with evidence, coverage and result-requests entries for #500-#506, all triaged and closed; landed through PRs #516, #518, #553 and #555 (merged 2026-10-12)."
+resolution: null
+duplicate_of: null
 ---
 Register each 2026-10-11 import as reported, then at V3/C3 once its review lands, by the import lanes' register plans; result-requests.yaml entries for #500, #501, #503, #504, #505, #506 with triage done; views rendered by New Result Publication; DATA_REVISION re-pinned.
 

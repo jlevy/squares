@@ -5,8 +5,8 @@ title: "atlas: the deduplicated basin store"
 kind: task
 status: closed
 priority: 1
-version: 8
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 10
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies:
   - type: blocks
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m0pw85tzfrdrtxjnw05hkrdp
 parent_id: is-01m0p49s01h862tq6wp0dd085c
 created_at: 2026-08-23T01:38:28.354Z
-updated_at: 2026-10-10T22:47:27.640Z
+updated_at: 2026-10-12T23:50:43.680Z
 closed_at: 2026-08-23T19:40:14.282Z
 close_reason: |
   Built as sqpack/atlas.py with atlas/atlas.schema.yaml and tools/atlas_check.py on claude/packing-overnight-strategy-queue (PR #14), wired into test.sh with negative controls.

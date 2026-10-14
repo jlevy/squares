@@ -5,8 +5,8 @@ title: "Begin next W3 session: low-n endpoint opportunity review"
 kind: task
 status: closed
 priority: 2
-version: 4
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 5
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels: []
 dependencies:
@@ -16,7 +16,7 @@ parent_id: is-01m3v9vq36ykk2jdzce75req44
 hold: null
 hold_until: null
 created_at: 2026-10-01T08:43:36.109Z
-updated_at: 2026-10-01T10:40:55.030Z
+updated_at: 2026-10-12T23:40:14.524Z
 started_at: 2026-10-01T10:33:58.460Z
 closed_at: 2026-10-01T10:40:55.030Z
 close_reason: Opening W3 source/math findings retained in review-2026-10-01-post-optimality-w3-opening.md. Selected existing n17 rational certificate admission; global and low-n routes have explicit readiness limitations, not scientific verdicts.

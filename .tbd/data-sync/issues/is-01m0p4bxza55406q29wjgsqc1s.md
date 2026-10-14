@@ -5,12 +5,12 @@ title: "H-006: LP duals as unavoidable-set generators"
 kind: task
 status: open
 priority: 3
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bxca8pjaj4v9jwww1kvg
 created_at: 2026-08-23T01:39:38.090Z
-updated_at: 2026-10-10T22:48:25.014Z
+updated_at: 2026-10-12T23:52:43.944Z
 ---
 Discretize poses and candidate points, solve the fractional-transversal LP at side 4 for n=12; ask whether the dual support concentrates on structured loci. A discretized LP proves nothing, but as a generator of candidate certificates it is the first mechanized step anyone would have taken in the proof lane. Kill: dual support diffuse at all tested resolutions.

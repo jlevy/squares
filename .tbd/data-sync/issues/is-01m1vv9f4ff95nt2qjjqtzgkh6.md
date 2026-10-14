@@ -5,13 +5,13 @@ title: Reconcile live beads and publish the revised strategic sequence
 kind: task
 status: closed
 priority: 1
-version: 10
-spec_path: docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
+version: 12
+spec_path: docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md
 labels: []
 dependencies: []
 parent_id: is-01m1vv7m9vnn4k7hnbx3sdz3rv
 created_at: 2026-09-06T17:12:08.590Z
-updated_at: 2026-09-06T18:56:47.917Z
+updated_at: 2026-10-12T23:51:18.353Z
 closed_at: 2026-09-06T18:56:47.916Z
 close_reason: BC250 planning is distilled into H093–103 and reused H036, Agenda024 allocations, child agendas/BC items, beads, and W10. Independent source, math, and framework reviews are complete. Planning and integration are published in PR97, merged as c14451f5 after required hosted checks passed. The operator deferred long tooling; two late local infrastructure-check failures are recorded and owned separately by think-exlq under continuation epic think-jgnv. No full-gate pass or new research execution is claimed. Next actual research starts on a new branch/PR using the committed Current Allocation.
 resolution: null

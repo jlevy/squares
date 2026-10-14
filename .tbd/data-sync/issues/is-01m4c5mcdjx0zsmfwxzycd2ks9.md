@@ -5,13 +5,14 @@ title: "n17: quantitatively lift the accepted 25-row point restriction to one cl
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
 spec_path: docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
+hold: paused
 created_at: 2026-10-07T21:52:06.576Z
-updated_at: 2026-10-08T05:38:03.361Z
+updated_at: 2026-10-13T00:55:28.140Z
 ---
 The accepted exp296 certificate removes25 complete owner18 (label11) closed rows,
 indices19–23 and33–52, under the fixed owner0 pose at tau=53/128.
@@ -52,3 +53,5 @@ Session186 disposition:297 freshly reconstructed originalregionaldomains but onl
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
+
+2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. Lift of the n17 25-row point restriction to a closed region; new s(17) research.

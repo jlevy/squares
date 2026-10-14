@@ -5,13 +5,13 @@ title: "BC-385: W10 planning block after R052 and rung 0 (n=11, n=17)"
 kind: task
 status: closed
 priority: 1
-version: 2
-spec_path: docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
+version: 3
+spec_path: docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md
 labels: []
 dependencies: []
 parent_id: is-01m3bsc3bsdbq1jk7xnx6p0hev
 created_at: 2026-09-25T09:06:15.435Z
-updated_at: 2026-09-25T09:21:34.528Z
+updated_at: 2026-10-12T23:51:24.289Z
 closed_at: 2026-09-25T09:21:34.527Z
 close_reason: "W10 block complete: plan-2026-09-25-after-r052-planning.md; BC-386..BC-391 selected; next entry think-l8g4"
 resolution: null

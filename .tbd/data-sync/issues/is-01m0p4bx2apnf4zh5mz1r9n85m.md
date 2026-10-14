@@ -5,13 +5,13 @@ title: "H-018: basin-entry measurement at n=11"
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 7
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bvjsw40qb2e41ycygyqr
 created_at: 2026-08-23T01:39:37.161Z
-updated_at: 2026-10-10T22:47:35.723Z
+updated_at: 2026-10-12T23:50:53.384Z
 closed_at: 2026-10-06T08:46:01.668Z
 close_reason: "Done: H-018 basin-entry at n=11 was measured and refuted as stated by exp-005 (ledger on main: H-018 refuted; packing/campaign/ideas.md row 7)."
 resolution: null

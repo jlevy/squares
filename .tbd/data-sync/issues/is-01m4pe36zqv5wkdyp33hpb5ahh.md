@@ -3,9 +3,9 @@ type: is
 id: is-01m4pe36zqv5wkdyp33hpb5ahh
 title: Survey wand125 and evand repositories for unimported results and proofs (2026-10-11)
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:32:25.463Z
-updated_at: 2026-10-11T22:02:23.693Z
+updated_at: 2026-10-12T23:38:31.101Z
 started_at: 2026-10-11T21:32:33.200Z
+closed_at: 2026-10-12T23:38:31.101Z
+close_reason: Survey of wand125 and evand repositories (2026-10-11) delivered in the bead notes; candidates routed to their owning lanes, nothing further to import.
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

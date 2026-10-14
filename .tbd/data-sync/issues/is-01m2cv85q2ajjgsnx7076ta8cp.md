@@ -5,8 +5,8 @@ title: Teach the profile coordinator the observed-topology receipt contract
 kind: bug
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 6
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - calibration
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m2ctdap5jwdr8h4qb8dxwt8z
 created_at: 2026-09-13T07:38:31.521Z
-updated_at: 2026-09-14T02:25:19.436Z
+updated_at: 2026-10-13T00:57:16.639Z
 closed_at: 2026-09-14T02:25:19.434Z
 close_reason: docs/project/reviews/review-2026-09-13-n11-bc329-coordinator-rereview.md records direct repairs for its three topology defects; follow-ups 3291, ind2 and d9xh are closed; coordinator blob 2e98fd58 accepted at 775c71d5 is unchanged at 2f8925b2.
 resolution: null

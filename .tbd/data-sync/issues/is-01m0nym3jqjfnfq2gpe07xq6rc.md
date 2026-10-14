@@ -5,13 +5,13 @@ title: "E1: exact re-verification of the whole record corpus"
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 5
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p5tswc9s27gb5c1d3da27b
 created_at: 2026-08-22T23:59:14.519Z
-updated_at: 2026-10-10T22:47:17.269Z
+updated_at: 2026-10-12T23:50:33.650Z
 closed_at: 2026-08-23T06:00:53.228Z
 close_reason: Duplicate of think-kmwb. Both say 'verify every analytically-optimized record in frontier/ exactly, recording filter rates per n'. This one is the pre-revision tree's copy (created 2026-08-22T23:59Z); think-kmwb is the rebuilt spec's (2026-08-23T01:39Z) and is the live one. The pair collided when the superseded verification-core epic's children were re-parented onto think-u83z, which already carried the rebuilt copy. Remainder of D-025.
 resolution: duplicate

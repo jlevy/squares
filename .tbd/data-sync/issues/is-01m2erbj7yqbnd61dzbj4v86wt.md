@@ -5,8 +5,8 @@ title: Account for X-032 publication and experiment usage separately
 kind: task
 status: closed
 priority: 2
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 6
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: codex@spud10.local
 labels:
   - n11
@@ -18,7 +18,7 @@ parent_id: is-01m2eddtqbpv11d9g5yk0s8cv0
 hold: null
 hold_until: null
 created_at: 2026-09-14T01:26:25.789Z
-updated_at: 2026-10-06T08:41:42.981Z
+updated_at: 2026-10-13T00:59:07.554Z
 started_at: 2026-09-14T01:47:02.289Z
 closed_at: 2026-10-06T08:41:42.981Z
 close_reason: "Obsolete: the X-032 BC303 corner-equipment PR it would cost was never opened (commit 646bb66a absent; the X-032 id was reused on main for Route S). s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical."

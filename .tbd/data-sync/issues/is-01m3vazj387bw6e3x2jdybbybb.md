@@ -5,15 +5,15 @@ title: Audit current evand sources and citation coverage under W1
 kind: task
 status: closed
 priority: 1
-version: 6
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 7
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m3va5041zf3cn20707gfmm4d
 parent_id: is-01m3v9vq36ykk2jdzce75req44
 created_at: 2026-10-01T08:58:30.370Z
-updated_at: 2026-10-01T19:07:01.504Z
+updated_at: 2026-10-12T23:40:14.524Z
 closed_at: 2026-10-01T09:33:48.903Z
 close_reason: Scoped W1 source/citation audit and Astra-max W2 mathematical review completed and retained in PR265 and companion PR267, with source pins, reviewed mechanisms and explicit omissions. No fresh certificate replay claimed. Separate acceptance and gap beads remain open.
 resolution: null

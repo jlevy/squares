@@ -5,8 +5,8 @@ title: Publish reviewed BC303 T2 geometry as a separate draft exploration PR
 kind: task
 status: closed
 priority: 1
-version: 12
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 14
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - bc303
@@ -20,7 +20,7 @@ dependencies:
     target: is-01m2eeb7adc0784cx52qfa9qtk
 parent_id: is-01m2b4ywxym84rgf3b254v4jw6
 created_at: 2026-09-13T18:33:27.415Z
-updated_at: 2026-09-14T00:26:37.211Z
+updated_at: 2026-10-13T00:57:53.490Z
 closed_at: 2026-09-14T00:26:37.210Z
 close_reason: "PR #162 ready at 92320abf on #161 ac6f39b8. Geometry/method unique diff 10 files +1515/-1. Exact --push 46/74, 1,371 tests; hosted CI green. No target charge or new bound."
 resolution: null

@@ -5,15 +5,15 @@ title: Repair stale Route S certification records after PR 182 merge
 kind: bug
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 6
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - records
 dependencies: []
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 created_at: 2026-09-16T08:18:13.026Z
-updated_at: 2026-09-16T08:36:20.322Z
+updated_at: 2026-10-13T00:55:37.863Z
 closed_at: 2026-09-16T08:36:20.313Z
 close_reason: "PR #187 merged as b1b2d30f from independently reviewed exact head 50376758 after all required hosted checks passed. Sessions 134/135, agenda, specs, synopsis, ledger, agenda map, and handoff control now consistently route future Route S work to open bead think-ufmk."
 resolution: null

@@ -5,8 +5,8 @@ title: Integrate accepted BC329 calibration tooling onto PR156
 kind: task
 status: closed
 priority: 1
-version: 12
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 14
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - calibration
@@ -20,7 +20,7 @@ child_order_hints:
   - is-01m2e0e4ct972w6eapcr8c3xjz
   - is-01m2e7adq6sc2j6mzgsx89sg8h
 created_at: 2026-09-13T07:23:51.876Z
-updated_at: 2026-10-06T08:35:50.482Z
+updated_at: 2026-10-13T00:57:16.332Z
 closed_at: 2026-10-06T08:35:50.482Z
 close_reason: "Done: the accepted calibration tooling, observed-worker topology and three-profile coordinator landed with PR #156 (merged 2026-09-14): packing/devtools/calibrate_fixed_core_packet.py and read_fixed_core_calibration_profile.py are on origin/main, and fc3e314d is an ancestor of main. No profile or BC329 target was to run here."
 resolution: null

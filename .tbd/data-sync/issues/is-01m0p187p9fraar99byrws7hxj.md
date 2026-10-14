@@ -5,15 +5,15 @@ title: "Canonical basin identity: D4+relabel geometric key, contact-graph struct
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 5
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m0nym4keyvqar7my3z1vxh9m
 parent_id: is-01m0nym0701fv1qq9fbqq9qz0w
 created_at: 2026-08-23T00:45:11.241Z
-updated_at: 2026-10-10T22:47:21.750Z
+updated_at: 2026-10-12T23:50:37.422Z
 closed_at: 2026-08-23T02:23:18.082Z
 close_reason: Duplicate of think-t1s9, which restates the same canonical-identity work under the revised plan's Phase 1. Superseded, not dropped.
 ---

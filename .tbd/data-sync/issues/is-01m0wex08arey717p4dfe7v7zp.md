@@ -5,8 +5,8 @@ title: Avoid host-Python diagnosis of Python 3.14 syntax
 kind: bug
 status: closed
 priority: 0
-version: 3
-spec_path: explorations/packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md
+version: 4
+spec_path: packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md
 labels:
   - packing
   - robustness
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0rvm4r4s2kf1d81dcscwm2c
 created_at: 2026-08-25T12:39:09.833Z
-updated_at: 2026-08-25T12:50:49.340Z
+updated_at: 2026-10-12T23:41:03.157Z
 closed_at: 2026-08-25T12:50:49.339Z
 close_reason: Retracted the false cache diagnosis, restored the Python 3.14/Ruff-canonical source, and verified the complete locked gate. D-307 preserves the measurement error.
 resolution: null

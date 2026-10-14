@@ -5,7 +5,7 @@ title: Maintain the review, defect logbook, and bead reconciliation map
 kind: task
 status: in_progress
 priority: 0
-version: 12
+version: 13
 spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -18,8 +18,9 @@ child_order_hints:
   - is-01m0rj3jzb99380az12g72g6n8
   - is-01m0vjwrx8aaxesazw5h90gddg
   - is-01m0vjxas2pfd1qn71sqhrgscf
+  - is-01m4swdpkr3x5x2rknkkwa2tnz
 created_at: 2026-08-23T21:18:32.967Z
-updated_at: 2026-10-10T22:53:54.228Z
+updated_at: 2026-10-13T05:40:32.503Z
 ---
 Keep one authoritative crosswalk from every technical review finding to its defect-logbook entry, remediation bead, evidential status, regression control, and final disposition. Reconcile generated defect views and the campaign ledger after each correction.
 

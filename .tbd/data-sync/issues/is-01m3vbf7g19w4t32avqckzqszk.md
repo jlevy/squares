@@ -5,13 +5,13 @@ title: Replay evand finite family premise and reconcile the conditional Lean red
 kind: task
 status: closed
 priority: 1
-version: 6
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 7
+spec_path: docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md
 labels: []
 dependencies: []
 parent_id: is-01m3yrzkz80qd1wv5sjr0kkkv0
 created_at: 2026-10-01T09:07:03.806Z
-updated_at: 2026-10-04T06:33:57.773Z
+updated_at: 2026-10-12T23:51:32.601Z
 closed_at: 2026-10-04T06:33:57.773Z
 close_reason: "Done on origin/main e5a48b310: T-064 V3/C3 (check_requests --report) with E-k2m3-evand-valid7-qx2-replay (full qx2 replay), E-k2m3-evand-bentz-lean-build (Lean reduction, standard axioms), and E-k2m3-wand125-valid7-independent (wand125 independent checker replayed in full with --guard-d1, replay_status passed, 156,800 roots; #329). #296 closed 2026-10-03 with follow-up reply."
 resolution: null

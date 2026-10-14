@@ -5,8 +5,8 @@ title: "N11 overnight: admit parent domains and compare the fixed escape"
 kind: task
 status: closed
 priority: 1
-version: 22
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 23
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies:
   - type: blocks
@@ -18,7 +18,7 @@ child_order_hints:
   - is-01m25430wcdx8wn8f3qs7b4qjv
   - is-01m268mz0me7vv3jy38c31y939
 created_at: 2026-09-10T04:57:58.569Z
-updated_at: 2026-09-10T22:21:24.983Z
+updated_at: 2026-10-13T00:55:37.863Z
 closed_at: 2026-09-10T22:08:12.753Z
 close_reason: "BC326 completed its sole registered run and was disposed exactly: complete old-model incompatibility, H158 unresolved, no parent-domain gain or global n11 claim."
 resolution: null

@@ -5,7 +5,7 @@ title: Certify and structurally constrain the n = 11 optimum
 kind: task
 status: open
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -20,7 +20,7 @@ child_order_hints:
   - is-01m0sg2venckvcs3q1cr5v1qzc
   - is-01m3qw8b5q2xgjp85cxx24134c
 created_at: 2026-08-23T18:21:33.076Z
-updated_at: 2026-10-10T22:54:31.269Z
+updated_at: 2026-10-13T00:55:45.963Z
 ---
 Category: tractable open questions. Separate three questions currently blurred together: exact verification of Trump’s construction, local optimality or rigidity of its active set, and global optimality among all packings. Build interval KKT or nonsmooth directional certification for the known cell, then prove or computationally certify structural necessities for any packing below selected side thresholds.
 
@@ -29,3 +29,5 @@ Acceptance: the exact upper-bound witness is generated from the promotion pipeli
 ## Notes
 
 Exp-013 confirms H-026 at commit faba023: 11 wall incidences expand to 20 rows, 14 contacts yield 24 raw SAT features, 512 nonlinear selections reduce to 128 derivative-distinct 42-by-33 exact matrices, and every matrix has rank 33 plus a strictly positive Q(u) left-kernel stress. Separate replay validates all 128 with zero unresolved branches. A finite-branch subsequence lemma proves qualitative local isolation and strict local side optimality modulo finite symmetry. This does not prove global optimality or give a radius. think-kfb4 owns the quantitative radius, minimal-support, and side-perturbation successor; H-034 tests the pure ten-point fractional ceiling; H-036 asks for a robust 0/45-degree neighborhood theorem.
+
+2026-10-13 owner decision: s(11) is settled by T-060. Global optimality, this bead's third question, is answered by T-060, and restricted global results are no longer needed. Live parts: think-3i74 (T-060 verification tooling) and think-kfb4 (quantitative isolation radius and minimal rigidity supports).

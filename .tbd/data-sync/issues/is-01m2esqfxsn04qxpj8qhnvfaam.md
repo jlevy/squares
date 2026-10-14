@@ -5,8 +5,8 @@ title: Independently audit fixed-Q0 conditional cover and pose-cell dual designs
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 7
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - math-audit
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m2etj2hqjhh0bhkzys9km9jy
 parent_id: is-01m2eray9ae7g38emjwcedm49j
 created_at: 2026-09-14T01:50:25.208Z
-updated_at: 2026-10-06T08:37:43.365Z
+updated_at: 2026-10-13T00:58:38.117Z
 closed_at: 2026-10-06T08:37:43.365Z
 close_reason: "Superseded: a fixed-Q0 cover/dual design audit toward a conditional n11 certificate at 96/25. The domain is posed at a side below Kleddamag's verified s(11) > 31/8 = 3.875 (T-037), where T-060 already excludes every packing. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical."
 resolution: canceled

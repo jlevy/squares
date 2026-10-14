@@ -5,8 +5,8 @@ title: Name exact interval and dilation directions in partial BC329 receipts
 kind: task
 status: closed
 priority: 2
-version: 9
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 11
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol high isolated implementation; root integration
 labels:
   - n11
@@ -22,7 +22,7 @@ dependencies:
     target: is-01m2b1h805emc13mx1cykp5s5x
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T12:26:06.304Z
-updated_at: 2026-09-13T05:13:28.207Z
+updated_at: 2026-10-13T00:58:54.533Z
 closed_at: 2026-09-13T05:13:28.207Z
 close_reason: Reviewed corrections integrated and published in the stack. Fresh T025/T026 exact replays pass; PR149 delta gate passes46steps/1109tests; final PR156 gate passes46steps/1284tests. Runner source and independent mathematical reviews accept the repairs. Final hosted checkpoint and overall readiness remain open under think-0adb; BC329 calibration/execution remains blocked separately.
 resolution: null

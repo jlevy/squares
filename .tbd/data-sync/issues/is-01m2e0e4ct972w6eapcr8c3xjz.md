@@ -5,8 +5,8 @@ title: Publish the PR156 draft checkpoint with exact local gates and final hoste
 kind: task
 status: closed
 priority: 1
-version: 23
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 24
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: codex@spud10.local
 labels:
   - n11
@@ -31,7 +31,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-13T18:28:24.089Z
-updated_at: 2026-09-14T02:25:38.667Z
+updated_at: 2026-10-13T00:57:51.624Z
 started_at: 2026-09-13T18:35:26.795Z
 closed_at: 2026-09-13T23:14:25.175Z
 close_reason: Published PR156 at 2f8925b2 with origin/main merged, cost-first exact-head body, scoped local validation evidence, and final green hosted CI (required packing, suite, Pages and mergeability). PR intentionally remains draft because calibration profiles, integrated scientific admission and BC329 target are unrun. The separate macOS local pre-push EPERM/contention defect remains open as think-hsq6.

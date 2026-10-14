@@ -5,7 +5,7 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 19
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T18:39:54.681Z
+updated_at: 2026-10-13T11:23:36.106Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -36,44 +36,137 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 
 ## Notes
 
-## Latest Upstream Integration Checkpoint
+## Current published checkpoint, October 13
 
-Fetched origin/main at 562fdbdff1d98948f68b36b81b53f9c8165ffd08 and used the native
-formal-stack rebase, preserving main → PR403 → PR435. Parent integration is complete at
-c1f1540f049a8aed741542b15d11dee55e8aee01; child replay is continuing after reviewed
-builder/schema/test conflict resolutions.
-Neither new layer has been pushed.
+Formal stack 447: main → PR403 → PR435, OPEN/DRAFT and unmerged.
+Parent `3ee60c3e5157a82c0e9b5a48e54fc6c1f57539f5`; final child
+`273abfa593d64a01256f8da0059aeae2e4d64186`; integrated fetched main
+`34c826f08fc75dc51eb8d6f72c04b0f74b0c4ffb`. Completed source work is committed, pushed
+and captured on both PRs; both source trees are clean.
+Science, custody and pins are unchanged by the latest six-line fix.
+Parent: 437 records / 320 exact; child: 621 / 321 exact; public: 337. All 49 current
+native bindings remain V3/C3. Polynomial report remains HTML/Markdown only, with no PDF.
+Numeric, ordinal, reported geometry/Lean, contact and other owner scopes below remain
+open.
 
-The preceding 42-record refresh is committed.
-Its frozen input contains 324 current and 102 historical records; all 42 native
-identities, 83 historical native source occurrences and all displaced old polynomials
-passed independent conservation.
-The ordinary builder controls passed (184), the upstream controls passed (81), and
-focused refusal/cache controls plus static checks passed.
-The maintained records gate passed 50 of 108 selected steps in 33.61 seconds; this is
-not full qualification.
+Cleanup complete: six expanded fixture roots and Lean build removed after verified
+complete PAX archival and fresh activity checks.
+Allocated footprint: 6,244,765,696 B → 2,255,253,504 B archives + 17,903,616 B
+compressed manifests.
+Additional inactive Cargo/web/signature leaves total 1,161,801,728 B removed; observed
+external gain during those deletion steps about 1.06 GB, subject to APFS sharing and
+concurrent writers. Source/research, current failures, active caches, dirty reviews,
+current/rollback runtimes and pending update preserved.
+Lean bytes retained because 3,520 source paths had uncertain recovery.
+Darwin temp audit is partial.
+Free-space observation: admin/disk-cleanup-final-checkpoint.json.
 
-The new upstream pass adopts T-151 at 176/181/238/239/270/271/272 and T-152 at 304/305,
-bringing current native houses to 49. Both results are registered V3/C3. Eleven newly
-scoped source occurrences have independently checked retained native bindings.
-The new per-pass adapter must preserve the Oct11 archive unchanged and retain nine full
-prior current identities plus nine complete Oct12 source occurrences.
-In particular, intermediate T-140 adoption at 270/305 must survive the replacement.
-Source adaptation and final regeneration/validation are in progress.
+Prior exact child 9382 Git audit: 58 union commits / 575 paths; thin 5,978,268 B,
+non-thin 8,216,941 B; largest novel historical blob 2,629,925 B. Final child adds one
+six-line test commit: parent 22 / child 37 / union 59 commits, same 575 union paths, 680
+additional thin-pack bytes relative to 9382. All other objects/modes,
+science/custody/pins preserved.
+Pack bytes are not disk allocation or additive whole-stack cost.
+No new PDF/full HTML, retained pack or history rewrite.
 
-Remaining: finish native child replay, restore exact child stash
-2da9b1b02e8a64b6f5ab4c263dc2caab1ba01b16 including its untracked fixture, regenerate
-both layers, measure the actual latest corpus/public projection, check web caps and
-responsive/no-JS views, run required local and final-head hosted checks, audit Git
-sizes, push both existing stacked PRs and update their descriptions.
-The polynomial report remains strictly web-only.
+Latest repair requires the restored figure’s prescribed 20rem computed width before
+freezing direct/fetched snapshots.
+Production CSS/JS and all 167 original assertion ASTs/decorators unchanged.
+Eight siblings pass in 56.54 s; static checks zero.
+Declared 200 ms transition control passes in 31.49 s; permanently wrong 18rem width
+correctly refused. Exact native-duration Linux timing did not reproduce locally.
+
+Maintained --push --since 9382 selects nine prerequisites and 122 test modules.
+All nine prerequisites pass; normal lane completes 5,068 passes / 35 skips / four
+warnings in 514.35 s. Pool phase starts, then combined command hits unchanged 900 s
+deadline (901.03 s step, 915.07 s total).
+No terminal pool or whole pre-push pass.
+Prior 591-file child gate passes 68 prerequisites then times out at 900 s; older parent
+1,800 s timeout remains separate.
+No guard, assertion or cap relaxed.
+
+Hosted ordinary: parent 3ee green; final child 273abfa terminal green at 11:04:57Z, 32
+SUCCESS / 26 SKIPPED, gh-watch 0 / tee 0. Packing 38386467512, Pages 38386467610 and
+merge 38386461403 pass; duplicate skipped contexts retained.
+New full 38387914891 dispatched once on exact final child, attempt 1; terminal outcome
+pending.
+Old child full 38381750627 on 9382 now FAILED: all eleven separate prerequisites
+pass; core 3,557.73 s. Four failed steps: longest-task assertion 311 ms > 300 ms at
+native-frontier[390-light], eleven call-wall nodes across shards A/C, and shard B’s 900
+s command cap. No terminal shard B pass or navigation-cause inference.
+Receipt: validation/child273abfa-hosted-checkpoint/
+old-full-9382-terminal-failure-classification.json; complete failure log retained.
+Current full on 273 remains separately pending.
+Parent full 38375099262 FAILED on fifteen 12 s call guards across four shards: core 95
+steps / 2,827.84 s; all eleven separate prerequisites pass.
+Slow lane: 227 passes / 1,091.04 s; physical custody copy 21.41 s. No terminal full pass
+or landing verdict.
+
+Next engineering entry: inspect current full receipt, then resolve parent timing and
+local pool/timeout routing under w0if/ht59 without relaxed guards.
+Selected research entry remains W7 exporter and independent contact-derived n=11 control
+before bounded adopted-current n=102. Engineering passes close no scientific owners.
+Leave this bead in progress.
+
+Evidence root:
+/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635.
+Receipts: validation/child 273abfa-hosted-checkpoint/;
+validation/child9382-case-drawing-repair/ready.json and final-pre-push.log;
+validation/main34-parent-hosted-checkpoint/; admin/child 273abfa-small-fix-size.json;
+admin/drawing-pr-publication-verification.json;
+admin/disk-cleanup-final-checkpoint.json; admin/archive-slice-final-receipt.json;
+admin/archive-manifest-compaction-summary.json; admin/disk-followup-reclamation.json;
+admin/old-web-build-reclamation.json; admin/remaining-beads-current-source.json.
+Prior complete notes snapshot: admin/bead-before-drawing-publication.json.
+Source handoff: docs/project/handoffs/handoff-2026-10-10-polynomial-pr-stack.md.
+
+--- Earlier dated checkpoints and unique evidence ---
+
+## Current Upstream and Table Checkpoint
+
+The final native upstream fetch/rebase confirms origin/main
+562fdbdff1d98948f68b36b81b53f9c8165ffd08. The existing formal stack remains main → PR403
+→ PR435. Parent candidate is f725d901d3ae5c07aac921535b3152819c3bfa97; child candidate
+before final URL-registry reconciliation and publication re-pin is
+fd70d7e349c5c62e1b6ccc6561e94a5e9970ebb4. Neither candidate has been pushed.
+
+The October 12 refresh adopts seven current T-151 native houses and two scoped T-152
+houses, bringing the current native roster to 49, all registered V3/C3. Parent: 437
+canonical records / 436 recursive coefficient vectors / 1,403 integer strings.
+Child: 621 canonical records / 643 vectors / 6,544 strings, with all 324 current rows.
+Public projection: 337 records / 337 vectors / 2,096 strings; superseded identities
+remain canonical. Child register is 913,496 gzip / 3,283,520 decoded bytes.
+Historical native custody is 89 occurrences: 86 V3/C3 replayed and three V0/C0
+source-reported. All lower/status lanes remain equal: 77 proved and 247 open.
+The n=83 row retains every coefficient; its ordinal 27 remains independently uncounted.
+Current n=102 route metadata now binds validated adopted Daniel T-146 custody.
+The report remains strictly web-only; no polynomial PDF.
+
+The parent broad push gate at a0beeda failed one of 65 selected steps: normal behavior
+had 24 failures, 15,539 passes, 51 skips and one xfail; pool behavior never ran.
+All 24 concrete failures have focused passing controls after a bounded six-file fix: 190
+writer/frontier controls, 13 dated-source refusal controls and seven consumer contract
+controls. Static checks have zero findings.
+A fresh broad parent gate is running at f725d901 with the unchanged 1,800-second cap,
+six outer jobs and two inner jobs; no terminal pass is claimed.
+
+Web checks at the pre-final child revision pass all eight compact/complete views,
+scripts and the 10% startup threshold: 248,861 / 3,212,387 bytes = 7.7469184%. Complete
+HTML is 1,682,134 bytes under the unchanged 2,000,000-byte cap.
+The partial consumer check correctly refused obsolete public payload paths still in the
+generated URL registry.
+A maintained unpublished-retirement reconciliation is under review; no validator is
+weakened. Final re-pin, clean web qualification, child pre-push, size audit, leased push
+and final-head hosted checks remain pending.
+
+Continue from this slice.
 No PR landing is authorized.
-Existing scientific owners and unknown local timeout bead think-w0if remain open.
-
-The external volume returned and was verified writable; builds use external scratch.
-The outage comments remain dated evidence, not a current blocked state.
-Evidence: upstream-refresh-20261012-0635/review/main-562f-integration-plan.md,
-main-562f-intake-bindings.json and main-562f-archive-dimensions.json.
+Remaining research owners, three numeric identities, reported geometry gaps, n=83
+ordinal work and unknown local timeout bead think-w0if retain their actual open scopes.
+Selected research entry is W7 exporter/independent n=11 control, followed by the
+adopted-current n=102 protocol.
+Source records and all unique evidence stay outside disposable external scratch.
+Evidence: upstream-refresh-20261012-0635/validation and /review.
 
 --- Earlier dated checkpoints and unique evidence ---
 

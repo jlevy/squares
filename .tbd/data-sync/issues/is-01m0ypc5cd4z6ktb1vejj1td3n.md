@@ -5,14 +5,14 @@ title: "W7: deterministic chunk partitions and contact-assembly grammar"
 kind: feature
 status: closed
 priority: 1
-version: 18
-spec_path: docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md
+version: 19
+spec_path: docs/project/specs/done/plan-2026-08-26-overnight-constructive-enumeration.md
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m0zt27jnvzpg665ds23j4qw9
 created_at: 2026-08-26T09:28:15.500Z
-updated_at: 2026-10-10T23:01:02.402Z
+updated_at: 2026-10-12T23:51:11.102Z
 closed_at: 2026-08-27T01:32:23.185Z
 close_reason: BC-019 and review findings R1-R5 are integrated on exact pushed head bc58fdee13bada7ca4ce9798790a42f0e3d8ca5d; strict local validation and fresh final-head Linux/macOS CI are green.
 resolution: null

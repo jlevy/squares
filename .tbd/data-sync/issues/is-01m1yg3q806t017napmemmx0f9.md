@@ -3,17 +3,22 @@ type: is
 id: is-01m1yg3q806t017napmemmx0f9
 title: "H120 re-entry: justify an exact skeleton discriminator"
 kind: task
-status: open
+status: closed
 priority: 3
-version: 2
+version: 4
 spec_path: packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md
 assignee: codex
 labels: []
 dependencies: []
 parent_id: is-01m1x7d097z73jgvwb22rh8brz
-hold: paused
+hold: null
+hold_until: null
 created_at: 2026-09-07T17:54:29.246Z
-updated_at: 2026-09-07T17:54:43.805Z
+updated_at: 2026-10-13T00:54:36.752Z
+closed_at: 2026-10-13T00:54:36.752Z
+close_reason: "Canceled: obsolete under the owner decision of 2026-10-13. Its purpose was n = 11 lower-bound research (agenda-028), and T-060 settles s(11) = T."
+resolution: canceled
+duplicate_of: null
 ---
 BC282 independently accepts the exact40/45 open translation-fiber reduction but refuses a full target. Keep H120 target work parked. Re-entry requires a justified structural-tuple selection rule, complete fixed-parameter open-fiber decision or bounded uniform templates, independent binding to all K* parameters/features and a credible total price through validation. Exact10 feasibility would refute skeleton emptiness; no failed six-source chain or arbitrary tuple sampling counts. Existing closed-cover tangencies do not supply a checker. Do not implement or launch a target from this issue alone; select a bounded protocol only after these prerequisites are concrete. Existing BC264 remains separately owned and higher priority.
 
