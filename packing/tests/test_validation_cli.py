@@ -4443,6 +4443,72 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
     assert validate.REQUIRE_CHROMIUM == site_browser.REQUIRED
 
 
+def _collect_site_layout_partitions(commands: Sequence[Sequence[str]]) -> list[list[str]]:
+    """Run each real selection in one isolated process, sharing only module imports.
+
+    Collection stays in the calling test's measured phase. No fixtures execute and
+    each pytest invocation applies its own paths and expression to fresh items.
+    """
+    collections: list[list[str]] = []
+
+    class Collection:
+        def __init__(self) -> None:
+            self.node_ids: list[str] = []
+
+        def pytest_collection_finish(self, session: pytest.Session) -> None:
+            self.node_ids = [item.nodeid for item in session.items]
+
+    for command in commands:
+        assert tuple(command[1:3]) == ("-m", "pytest")
+        # Collection needs no xdist worker: preserve selection, remove allocation.
+        serial = [
+            argument
+            for index, argument in enumerate(command[3:], start=3)
+            if argument != "-n"
+            and not argument.startswith("--dist=")
+            and command[index - 1] != "-n"
+        ]
+        collection = Collection()
+        captured = io.StringIO()
+        with redirect_stdout(captured), redirect_stderr(captured):
+            status = pytest.main([*serial, "-n", "0", "--collect-only"], plugins=[collection])
+        if status != pytest.ExitCode.OK:
+            raise RuntimeError(
+                f"site layout collection failed ({status}): {captured.getvalue()}"
+            )
+        collections.append(collection.node_ids)
+    return collections
+
+
+def test_site_layout_partition_collection_refuses_a_failed_selection(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A passing original collection cannot hide a failed functional selection."""
+    commands, _environments, _output = _captured_site_layout_commands(monkeypatch)
+    arguments: list[tuple[str, ...]] = []
+
+    def collect(command: Sequence[str], *, plugins: Sequence[object]) -> pytest.ExitCode:
+        assert len(plugins) == 1
+        arguments.append(tuple(command))
+        if len(arguments) == 1:
+            return pytest.ExitCode.OK
+        print("functional selection failed")
+        return pytest.ExitCode.NO_TESTS_COLLECTED
+
+    monkeypatch.setattr(pytest, "main", collect)
+    with pytest.raises(RuntimeError, match="functional selection failed"):
+        _collect_site_layout_partitions([commands[1], commands[0]])
+    assert arguments[0][-3:] == ("-n", "0", "--collect-only")
+    assert arguments[1][-5:] == (
+        "-k",
+        "not test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets",
+        "-n",
+        "0",
+        "--collect-only",
+    )
+    assert all("--dist=loadfile" not in command for command in arguments)
+
+
 def test_site_layout_commands_partition_the_original_collection(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -4452,37 +4518,34 @@ def test_site_layout_commands_partition_the_original_collection(
     commands, _environments, _output = _captured_site_layout_commands(monkeypatch)
     assert len(commands) == 2
 
-    def collect(command: Sequence[str]) -> set[str]:
-        # Collection needs no xdist worker: preserve selection, remove allocation.
-        serial = [
-            argument
-            for index, argument in enumerate(command)
-            if argument != "-n"
-            and not argument.startswith("--dist=")
-            and (index == 0 or command[index - 1] != "-n")
-        ]
-        completed = subprocess.run(
-            (*serial, "-n", "0", "--collect-only"),
-            cwd=validate.PROJECT_ROOT,
-            capture_output=True,
-            text=True,
-            check=True,
-            timeout=30,
-        )
-        return {line for line in completed.stdout.splitlines() if line.startswith("tests/")}
-
-    original = collect(
+    completed = subprocess.run(
         (
             sys.executable,
             "-m",
-            "pytest",
-            "-q",
-            "-p",
-            "no:cacheprovider",
-            *validate.SITE_LAYOUT_TESTS,
-        )
+            "tests.test_validation_cli",
+            "--collect-site-layout-partitions",
+            json.dumps(
+                [
+                    (
+                        sys.executable,
+                        "-m",
+                        "pytest",
+                        "-q",
+                        "-p",
+                        "no:cacheprovider",
+                        *validate.SITE_LAYOUT_TESTS,
+                    ),
+                    *commands,
+                ]
+            ),
+        ),
+        cwd=validate.PROJECT_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+        timeout=30,
     )
-    parallel, serial = (collect(command) for command in commands)
+    original, parallel, serial = (set(nodes) for nodes in json.loads(completed.stdout))
     assert serial == {
         f"tests/test_site_rendering.py::"
         f"test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets[{case}]"
@@ -5485,3 +5548,11 @@ def test_push_selector_errors_name_the_snapshot_they_were_given(
         assert message.endswith("'noise'")
     with pytest.raises(validate.UsageError, match="the change against 'origin/main'"):
         validate._push_test_step("origin/main")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Isolated site-layout partition collection")
+    parser.add_argument("--collect-site-layout-partitions", required=True)
+    arguments = parser.parse_args()
+    collection_commands: list[list[str]] = json.loads(arguments.collect_site_layout_partitions)
+    print(json.dumps(_collect_site_layout_partitions(collection_commands)))

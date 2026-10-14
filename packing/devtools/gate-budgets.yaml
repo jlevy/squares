@@ -780,56 +780,66 @@ tiers:
   # OR-14's 180 s outer edge for the whole pull-request wall; that is the cost the owner
   # selected for the moment, and why the raise is tracked.
   ceiling_seconds: 335.0
-  measured_seconds: 180.84
-  measured_on: '2026-10-09'
+  measured_seconds: 292.49
+  measured_on: '2026-10-14'
   measured_where: >-
-    The geometric mean of 160 readings at the reference shape on 2026-10-09: every suite-a
-    job that started that day, 00:16Z to 20:38Z, in a pull-request run of Packing
-    validation, each the gate's own wall for the one `fast behavioral tests, shard A` step
-    with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
-    jobs API's filter=all listing, a carried-over job counted once and a job whose step
-    failed a test not counted. Median 197.15 s, p10 127.5 s, p90 223.0 s; from 92.84 s
-    (run 37864114853, job 113606632385) to 250.54 s (run 37939031866, job 113848352236).
-    133 of the 160 were over the 143 s ceiling they ran against. Spread 2.70x, wider than
-    the 2.5x a band may span (drift_ratio / stale_ratio), so this is a point record with
-    no band: the day's runs crossed several revisions of the partition record on thirty
-    branches, stack 430's per-layer admissions and the re-record of 600068983 among them,
-    as well as the runner pool. The day's two complete runs on the re-recorded partition
-    read 184.35 s (run 37975867696, #469 at 600068983) and 246.02 s (run 37988339329, a
-    pull request into main after d3860c97a). The two days before are measured and not
-    averaged in, because the lane grew under them: geometric means of 124.8 s on
-    2026-10-07 (29 readings) and 153.7 s on 2026-10-08 (128), and 163.70 s over all 317
-    readings from 2026-10-07T06:25Z. Of the day's own readings, one, the 92.84 s low, is
-    under the stale edge of 0.6 x the record (108.50 s). On a pull request a reading like
-    it prints a stale warning; off one, at the reference shape, it would fail.
-    think-e5y4 folds the window sampling and the per-shard growth below into
-    `read_tier_walls` and `suite_files`, so these readings can be re-derived from the jobs
-    API rather than from a retained list.
+    The fixed complete genuine-push cohort of run 38583046153 after the 763-file
+    measured repartition: shard A, one canonical step, 4 available CPUs,
+    --jobs 1 --inner-jobs 1 and four xdist workers, Python 3.14.7. Pytest exit status
+    zero, 4129 reported cases over 174 files. Actual tier wall
+    292.49 seconds, excluding workflow setup and the post-run receipt guard.
+    Shard A completed all assertions but the separate CALL guard failed the layout
+      partition collection at 21.78 seconds. This pre-optimization point is a cost
+      observation, not passing gate evidence.
+    The encompassing checkpoint FAILED; a fresh corrected-source checkpoint must
+    pass every CALL guard and whole-tier budget. No shard is independently selected
+    from another run. The complete same-tree normal PR cohort 38583060155 is retained
+    as contrary evidence: A 358.02, B 407.46, C 246.76 and D 185.72 seconds; A/B exceed
+    unchanged ceilings. Neither stability nor a runner distribution is established.
+    This first complete required-browser point is a distinct executed workload:
+    both cohorts collect 17891 identities, but enforced skips A/B/C/D 2/16/24/5
+    versus normal 5/23/63/166. All 210 extra normal omissions name missing Chromium
+    and pass in enforced: A hover-motion 2/project-tallies 1; B atlas-drawings 4/
+    text-tokens 3; C glyphs 26/wide-blocks 13; D drawing-hover 15/forwarders 101/
+    ladders 45. Normal is not pooled merely by CPU shape with the required-browser
+    baseline. It remains valid contrary cost evidence, not an invalid sample or
+    omitted because it exceeds a ceiling. This initial point is not a sampled mean
+    or distribution; subsequent comparable required-browser readings must be kept
+    and summarized by geometric mean. Original Oct9 records and attributions are
+    retained in history.
   attribution:
     cause: >-
-      The lane grew 2.62x in recorded test-seconds between the record this supersedes and
-      this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
-      from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
-      over 708 files in the record re-taken on 2026-10-09 from run 37932934865
-      (600068983). The 162 files the current packing gives shard 1/4 went from 295.57 to
-      730.59 test-seconds; 47 of them were absent from the earlier record (230.70
-      test-seconds), the week's result imports and n17 checks, and recorded files grew as
-      well; the largest growth is listed below. The two records came from different
-      runners, so a recorded file's before and after are not on one clock; an added file's
-      after is. No step was added: the tier is still the one shard step.
+      The shard assignment was rebuilt from the complete hosted pytest cohort
+      38565361504, preserving capacities 131/154/154/131. The prior record priced
+      715 files; the new record prices 763, reducing unpriced files from 73 to 25.
+      For this shard's current file membership, prior recorded costs total
+      696.624 test-seconds and this run reports 987.705; 12 files
+      absent from the prior record contribute 111.961 seconds.
+      These observations quantify selected work and changed membership, rather than
+      isolating code speed: source, assignment and runners differ, and prior weights
+      were measured on another clock. Recorded module growth and added modules below
+      are not attributed wholesale to repartition or runner variance. All limits,
+      ratios, reference shape and markers remain unchanged; think-t01m tracks this
+      remeasurement and think-j4xs tracks the failed collection call's actual repair.
     unit: test-seconds
     source: >-
-      The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
-      600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
-      the later record, whose shard totals `python -m devtools.suite_files show` prints
-      as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
-      devtools.read_tier_walls --job-id` over the jobs measured_where describes.
+      Prior devtools/suite-file-costs.json from cohort 37932934865 and its retained
+      local admissions, compared over current physical membership with raw shard
+      A TestFileCosts/2 in artifact 11904760542 of run 38583046153,
+      all pytest reports exit zero. Actual whole walls are the gate verdicts, not
+      summed file phases. Complete enforced and normal cohorts are retained in the
+      coordinator's regularization-closeout-evidence-2026-10-13 directory. The eight
+      largest positive per-file differences are recorded below; omitted negative
+      differences remain in the complete raw reports. This is not a passing CI claim.
     grew:
-    - {name: 'packing/tests/test_overview.py', before: 57.47, after: 167.61}
-    - {name: 'packing/tests/test_case_pages.py', before: 1.94, after: 49.66}
-    - {name: 'packing/tests/test_ryxu_house_links.py', before: 0.00, after: 40.71}
-    - {name: 'packing/tests/test_check_n17_two_child_collective_propagation.py', before: 0.00, after: 32.42}
-    - {name: 'packing/tests/test_census_n17_certified.py', before: 0.00, after: 28.81}
+    - {name: 'packing/tests/test_results_register.py', before: 61.247, after: 214.568}
+    - {name: 'packing/tests/test_upper_bound_reports.py', before: 0.000, after: 45.611}
+    - {name: 'packing/tests/test_check_half_angle_area.py', before: 0.000, after: 40.219}
+    - {name: 'packing/tests/test_validation_cli.py', before: 27.688, after: 55.660}
+    - {name: 'packing/tests/test_site_project_tallies.py', before: 9.075, after: 33.466}
+    - {name: 'packing/tests/test_site_assets.py', before: 0.220, after: 11.677}
+    - {name: 'packing/tests/test_reachable_tests.py', before: 20.450, after: 28.306}
+    - {name: 'packing/tests/test_regularized_drawings.py', before: 0.000, after: 6.705}
   history:
   - measured_seconds: 150.54
     measured_on: '2026-09-15'
@@ -946,6 +956,56 @@ tiers:
       - {name: 'packing/tests/test_render_n11_optimality_explainer.py', before: 0.0, after: 5.43}
       - {name: 'packing/tests/test_site_frontier_table.py', before: 0.0, after: 4.73}
       - {name: 'packing/tests/test_check_math_markup.py', before: 0.0, after: 4.54}
+  - measured_seconds: 180.84
+    measured_on: '2026-10-09'
+    measured_where: >-
+      The geometric mean of 160 readings at the reference shape on 2026-10-09: every suite-a
+      job that started that day, 00:16Z to 20:38Z, in a pull-request run of Packing
+      validation, each the gate's own wall for the one `fast behavioral tests, shard A` step
+      with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
+      jobs API's filter=all listing, a carried-over job counted once and a job whose step
+      failed a test not counted. Median 197.15 s, p10 127.5 s, p90 223.0 s; from 92.84 s
+      (run 37864114853, job 113606632385) to 250.54 s (run 37939031866, job 113848352236).
+      133 of the 160 were over the 143 s ceiling they ran against. Spread 2.70x, wider than
+      the 2.5x a band may span (drift_ratio / stale_ratio), so this is a point record with
+      no band: the day's runs crossed several revisions of the partition record on thirty
+      branches, stack 430's per-layer admissions and the re-record of 600068983 among them,
+      as well as the runner pool. The day's two complete runs on the re-recorded partition
+      read 184.35 s (run 37975867696, #469 at 600068983) and 246.02 s (run 37988339329, a
+      pull request into main after d3860c97a). The two days before are measured and not
+      averaged in, because the lane grew under them: geometric means of 124.8 s on
+      2026-10-07 (29 readings) and 153.7 s on 2026-10-08 (128), and 163.70 s over all 317
+      readings from 2026-10-07T06:25Z. Of the day's own readings, one, the 92.84 s low, is
+      under the stale edge of 0.6 x the record (108.50 s). On a pull request a reading like
+      it prints a stale warning; off one, at the reference shape, it would fail.
+      think-e5y4 folds the window sampling and the per-shard growth below into
+      `read_tier_walls` and `suite_files`, so these readings can be re-derived from the jobs
+      API rather than from a retained list.
+    attribution:
+      cause: >-
+        The lane grew 2.62x in recorded test-seconds between the record this supersedes and
+        this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
+        from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
+        over 708 files in the record re-taken on 2026-10-09 from run 37932934865
+        (600068983). The 162 files the current packing gives shard 1/4 went from 295.57 to
+        730.59 test-seconds; 47 of them were absent from the earlier record (230.70
+        test-seconds), the week's result imports and n17 checks, and recorded files grew as
+        well; the largest growth is listed below. The two records came from different
+        runners, so a recorded file's before and after are not on one clock; an added file's
+        after is. No step was added: the tier is still the one shard step.
+      unit: test-seconds
+      source: >-
+        The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
+        600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
+        the later record, whose shard totals `python -m devtools.suite_files show` prints
+        as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
+        devtools.read_tier_walls --job-id` over the jobs measured_where describes.
+      grew:
+      - {name: 'packing/tests/test_overview.py', before: 57.47, after: 167.61}
+      - {name: 'packing/tests/test_case_pages.py', before: 1.94, after: 49.66}
+      - {name: 'packing/tests/test_ryxu_house_links.py', before: 0.00, after: 40.71}
+      - {name: 'packing/tests/test_check_n17_two_child_collective_propagation.py', before: 0.00, after: 32.42}
+      - {name: 'packing/tests/test_census_n17_certified.py', before: 0.00, after: 28.81}
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     Pre-collection shard A of the quick behavioural lane. `devtools.suite_files` packs
@@ -1040,57 +1100,65 @@ tiers:
   # OR-14's 180 s outer edge for the whole pull-request wall; that is the cost the owner
   # selected for the moment, and why the raise is tracked.
   ceiling_seconds: 360.0
-  measured_seconds: 215.82
-  measured_on: '2026-10-09'
+  measured_seconds: 325.55
+  measured_on: '2026-10-14'
   measured_where: >-
-    The geometric mean of 171 readings at the reference shape on 2026-10-09: every suite-b
-    job that started that day, 00:09Z to 20:38Z, in a pull-request run of Packing
-    validation, each the gate's own wall for the one `fast behavioral tests, shard B` step
-    with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
-    jobs API's filter=all listing, a carried-over job counted once and a job whose step
-    failed a test not counted. Median 234.57 s, p10 142.2 s, p90 289.7 s; from 124.82 s
-    (run 37881664173, job 113662498242) to 327.07 s (run 37921107074, job 113788973088).
-    140 of the 171 were over the 168 s ceiling they ran against. Spread 2.62x, wider than
-    the 2.5x a band may span (drift_ratio / stale_ratio), so this is a point record with
-    no band: the day's runs crossed several revisions of the partition record on thirty
-    branches, stack 430's per-layer admissions and the re-record of 600068983 among them,
-    as well as the runner pool. The day's two complete runs on the re-recorded partition
-    read 168.98 s (run 37975867696, #469 at 600068983) and 258.41 s (run 37988339329, a
-    pull request into main after d3860c97a). The two days before are measured and not
-    averaged in, because the lane grew under them: geometric means of 155.9 s on
-    2026-10-07 (36 readings) and 194.1 s on 2026-10-08 (131), and 200.08 s over all 338
-    readings from 2026-10-07T06:25Z. Of the day's own readings, three, the 124.82 s low
-    among them, are under the stale edge of 0.6 x the record (129.49 s); one, the 327.07 s
-    high, is over the drift edge of 1.5 x (323.73 s). On a pull request a reading like
-    those prints a stale or drift warning; off one, at the reference shape, it would fail.
-    think-e5y4 folds the window sampling and the per-shard growth below into
-    `read_tier_walls` and `suite_files`, so these readings can be re-derived from the jobs
-    API rather than from a retained list.
+    The fixed complete genuine-push cohort of run 38583046153 after the 763-file
+    measured repartition: shard B, one canonical step, 4 available CPUs,
+    --jobs 1 --inner-jobs 1 and four xdist workers, Python 3.14.7. Pytest exit status
+    zero, 4374 reported cases over 208 files. Actual tier wall
+    325.55 seconds, excluding workflow setup and the post-run receipt guard.
+    Shard B completed all assertions and CALL guards but failed old-record drift.
+      This point is a cost observation, not passing gate evidence.
+    The encompassing checkpoint FAILED; a fresh corrected-source checkpoint must
+    pass every CALL guard and whole-tier budget. No shard is independently selected
+    from another run. The complete same-tree normal PR cohort 38583060155 is retained
+    as contrary evidence: A 358.02, B 407.46, C 246.76 and D 185.72 seconds; A/B exceed
+    unchanged ceilings. Neither stability nor a runner distribution is established.
+    This first complete required-browser point is a distinct executed workload:
+    both cohorts collect 17891 identities, but enforced skips A/B/C/D 2/16/24/5
+    versus normal 5/23/63/166. All 210 extra normal omissions name missing Chromium
+    and pass in enforced: A hover-motion 2/project-tallies 1; B atlas-drawings 4/
+    text-tokens 3; C glyphs 26/wide-blocks 13; D drawing-hover 15/forwarders 101/
+    ladders 45. Normal is not pooled merely by CPU shape with the required-browser
+    baseline. It remains valid contrary cost evidence, not an invalid sample or
+    omitted because it exceeds a ceiling. This initial point is not a sampled mean
+    or distribution; subsequent comparable required-browser readings must be kept
+    and summarized by geometric mean. Original Oct9 records and attributions are
+    retained in history.
   attribution:
     cause: >-
-      The lane grew 2.62x in recorded test-seconds between the record this supersedes and
-      this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
-      from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
-      over 708 files in the record re-taken on 2026-10-09 from run 37932934865
-      (600068983). The 192 files the current packing gives shard 2/4 went from 322.18 to
-      858.86 test-seconds; 61 of them were absent from the earlier record (208.61
-      test-seconds), the week's result imports and n17 checks, and recorded files grew as
-      well; the largest growth is listed below. The two records came from different
-      runners, so a recorded file's before and after are not on one clock; an added file's
-      after is. No step was added: the tier is still the one shard step.
+      The shard assignment was rebuilt from the complete hosted pytest cohort
+      38565361504, preserving capacities 131/154/154/131. The prior record priced
+      715 files; the new record prices 763, reducing unpriced files from 73 to 25.
+      For this shard's current file membership, prior recorded costs total
+      985.912 test-seconds and this run reports 1096.115; 16 files
+      absent from the prior record contribute 63.922 seconds.
+      These observations quantify selected work and changed membership, rather than
+      isolating code speed: source, assignment and runners differ, and prior weights
+      were measured on another clock. Recorded module growth and added modules below
+      are not attributed wholesale to repartition or runner variance. All limits,
+      ratios, reference shape and markers remain unchanged; think-t01m tracks this
+      remeasurement and think-j4xs tracks the failed collection call's actual repair.
     unit: test-seconds
     source: >-
-      The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
-      600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
-      the later record, whose shard totals `python -m devtools.suite_files show` prints
-      as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
-      devtools.read_tier_walls --job-id` over the jobs measured_where describes.
+      Prior devtools/suite-file-costs.json from cohort 37932934865 and its retained
+      local admissions, compared over current physical membership with raw shard
+      B TestFileCosts/2 in artifact 11905050286 of run 38583046153,
+      all pytest reports exit zero. Actual whole walls are the gate verdicts, not
+      summed file phases. Complete enforced and normal cohorts are retained in the
+      coordinator's regularization-closeout-evidence-2026-10-13 directory. The eight
+      largest positive per-file differences are recorded below; omitted negative
+      differences remain in the complete raw reports. This is not a passing CI claim.
     grew:
-    - {name: 'packing/tests/test_generate_frontier_case.py', before: 13.85, after: 120.28}
-    - {name: 'packing/tests/test_n17_core_stress.py', before: 0.05, after: 61.88}
-    - {name: 'packing/tests/test_site_documents.py', before: 25.80, after: 71.30}
-    - {name: 'packing/tests/test_bound_citations.py', before: 2.11, after: 46.91}
-    - {name: 'packing/tests/test_refinement_custody.py', before: 0.00, after: 32.83}
+    - {name: 'packing/tests/test_check_published_site.py', before: 31.240, after: 84.469}
+    - {name: 'packing/tests/test_case_pages.py', before: 49.665, after: 80.017}
+    - {name: 'packing/tests/test_regularize_evand.py', before: 0.000, after: 22.710}
+    - {name: 'packing/tests/test_site_atlas_drawings.py', before: 0.000, after: 20.165}
+    - {name: 'packing/tests/test_squish_update_certification.py', before: 37.797, after: 52.678}
+    - {name: 'packing/tests/test_site_text_tokens.py', before: 0.550, after: 12.198}
+    - {name: 'packing/tests/test_certificate_citations.py', before: 2.470, after: 8.834}
+    - {name: 'packing/tests/test_suite_files.py', before: 2.629, after: 7.555}
   history:
   - measured_seconds: 119.54
     measured_on: '2026-09-15'
@@ -1206,6 +1274,57 @@ tiers:
       (154 s until 2026-10-05), 2.12x its 79.30 s low edge, before any rule fires.
       Superseded on 2026-10-09 by that day's readings of the grown lane; it carried
       measured_band {low: 79.30, high: 139.35}.
+  - measured_seconds: 215.82
+    measured_on: '2026-10-09'
+    measured_where: >-
+      The geometric mean of 171 readings at the reference shape on 2026-10-09: every suite-b
+      job that started that day, 00:09Z to 20:38Z, in a pull-request run of Packing
+      validation, each the gate's own wall for the one `fast behavioral tests, shard B` step
+      with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
+      jobs API's filter=all listing, a carried-over job counted once and a job whose step
+      failed a test not counted. Median 234.57 s, p10 142.2 s, p90 289.7 s; from 124.82 s
+      (run 37881664173, job 113662498242) to 327.07 s (run 37921107074, job 113788973088).
+      140 of the 171 were over the 168 s ceiling they ran against. Spread 2.62x, wider than
+      the 2.5x a band may span (drift_ratio / stale_ratio), so this is a point record with
+      no band: the day's runs crossed several revisions of the partition record on thirty
+      branches, stack 430's per-layer admissions and the re-record of 600068983 among them,
+      as well as the runner pool. The day's two complete runs on the re-recorded partition
+      read 168.98 s (run 37975867696, #469 at 600068983) and 258.41 s (run 37988339329, a
+      pull request into main after d3860c97a). The two days before are measured and not
+      averaged in, because the lane grew under them: geometric means of 155.9 s on
+      2026-10-07 (36 readings) and 194.1 s on 2026-10-08 (131), and 200.08 s over all 338
+      readings from 2026-10-07T06:25Z. Of the day's own readings, three, the 124.82 s low
+      among them, are under the stale edge of 0.6 x the record (129.49 s); one, the 327.07 s
+      high, is over the drift edge of 1.5 x (323.73 s). On a pull request a reading like
+      those prints a stale or drift warning; off one, at the reference shape, it would fail.
+      think-e5y4 folds the window sampling and the per-shard growth below into
+      `read_tier_walls` and `suite_files`, so these readings can be re-derived from the jobs
+      API rather than from a retained list.
+    attribution:
+      cause: >-
+        The lane grew 2.62x in recorded test-seconds between the record this supersedes and
+        this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
+        from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
+        over 708 files in the record re-taken on 2026-10-09 from run 37932934865
+        (600068983). The 192 files the current packing gives shard 2/4 went from 322.18 to
+        858.86 test-seconds; 61 of them were absent from the earlier record (208.61
+        test-seconds), the week's result imports and n17 checks, and recorded files grew as
+        well; the largest growth is listed below. The two records came from different
+        runners, so a recorded file's before and after are not on one clock; an added file's
+        after is. No step was added: the tier is still the one shard step.
+      unit: test-seconds
+      source: >-
+        The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
+        600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
+        the later record, whose shard totals `python -m devtools.suite_files show` prints
+        as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
+        devtools.read_tier_walls --job-id` over the jobs measured_where describes.
+      grew:
+      - {name: 'packing/tests/test_generate_frontier_case.py', before: 13.85, after: 120.28}
+      - {name: 'packing/tests/test_n17_core_stress.py', before: 0.05, after: 61.88}
+      - {name: 'packing/tests/test_site_documents.py', before: 25.80, after: 71.30}
+      - {name: 'packing/tests/test_bound_citations.py', before: 2.11, after: 46.91}
+      - {name: 'packing/tests/test_refinement_custody.py', before: 0.00, after: 32.83}
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     Pre-collection shard B under the same complete and disjoint assignment as shard A.
@@ -1277,57 +1396,64 @@ tiers:
   # OR-14's 180 s outer edge for the whole pull-request wall; that is the cost the owner
   # selected for the moment, and why the raise is tracked.
   ceiling_seconds: 360.0
-  measured_seconds: 190.24
-  measured_on: '2026-10-09'
+  measured_seconds: 282.04
+  measured_on: '2026-10-14'
   measured_where: >-
-    The geometric mean of 164 readings at the reference shape on 2026-10-09: every suite-c
-    job that started that day, 00:23Z to 20:38Z, in a pull-request run of Packing
-    validation, each the gate's own wall for the one `fast behavioral tests, shard C` step
-    with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
-    jobs API's filter=all listing, a carried-over job counted once and a job whose step
-    failed a test not counted. Median 210.81 s, p10 133.2 s, p90 237.9 s; from 108.29 s
-    (run 37866241734, job 113613539488) to 294.60 s (run 37975867696, job 113973890841).
-    111 of the 164 were over the 168 s ceiling they ran against. Spread 2.72x, wider than
-    the 2.5x a band may span (drift_ratio / stale_ratio), so this is a point record with
-    no band: the day's runs crossed several revisions of the partition record on thirty
-    branches, stack 430's per-layer admissions and the re-record of 600068983 among them,
-    as well as the runner pool. The day's two complete runs on the re-recorded partition
-    read the two highest: 294.60 s (run 37975867696, #469 at 600068983) and 290.95 s (run
-    37988339329, a pull request into main after d3860c97a). The two days before are
-    measured and not averaged in, because the lane grew under them: geometric means of
-    148.7 s on 2026-10-07 (33 readings) and 167.6 s on 2026-10-08 (136), and 176.30 s over
-    all 333 readings from 2026-10-07T06:25Z. Of the day's own readings, three, the 108.29
-    s low among them, are under the stale edge of 0.6 x the record (114.14 s); two, the
-    294.60 s high among them, are over the drift edge of 1.5 x (285.36 s). On a pull
-    request a reading like those prints a stale or drift warning; off one, at the
-    reference shape, it would fail. think-e5y4 folds the window sampling and the per-shard
-    growth below into `read_tier_walls` and `suite_files`, so these readings can be
-    re-derived from the jobs API rather than from a retained list.
+    The fixed complete genuine-push cohort of run 38583046153 after the 763-file
+    measured repartition: shard C, one canonical step, 4 available CPUs,
+    --jobs 1 --inner-jobs 1 and four xdist workers, Python 3.14.7. Pytest exit status
+    zero, 6075 reported cases over 207 files. Actual tier wall
+    282.04 seconds, excluding workflow setup and the post-run receipt guard.
+    This shard completed all assertions, CALL guards and its whole-tier verdict.
+    The encompassing checkpoint FAILED; a fresh corrected-source checkpoint must
+    pass every CALL guard and whole-tier budget. No shard is independently selected
+    from another run. The complete same-tree normal PR cohort 38583060155 is retained
+    as contrary evidence: A 358.02, B 407.46, C 246.76 and D 185.72 seconds; A/B exceed
+    unchanged ceilings. Neither stability nor a runner distribution is established.
+    This first complete required-browser point is a distinct executed workload:
+    both cohorts collect 17891 identities, but enforced skips A/B/C/D 2/16/24/5
+    versus normal 5/23/63/166. All 210 extra normal omissions name missing Chromium
+    and pass in enforced: A hover-motion 2/project-tallies 1; B atlas-drawings 4/
+    text-tokens 3; C glyphs 26/wide-blocks 13; D drawing-hover 15/forwarders 101/
+    ladders 45. Normal is not pooled merely by CPU shape with the required-browser
+    baseline. It remains valid contrary cost evidence, not an invalid sample or
+    omitted because it exceeds a ceiling. This initial point is not a sampled mean
+    or distribution; subsequent comparable required-browser readings must be kept
+    and summarized by geometric mean. Original Oct9 records and attributions are
+    retained in history.
   attribution:
     cause: >-
-      The lane grew 2.62x in recorded test-seconds between the record this supersedes and
-      this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
-      from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
-      over 708 files in the record re-taken on 2026-10-09 from run 37932934865
-      (600068983). The 191 files the current packing gives shard 3/4 went from 307.20 to
-      858.86 test-seconds; 61 of them were absent from the earlier record (355.75
-      test-seconds), the week's result imports and n17 checks, and recorded files grew as
-      well; the largest growth is listed below. The two records came from different
-      runners, so a recorded file's before and after are not on one clock; an added file's
-      after is. No step was added: the tier is still the one shard step.
+      The shard assignment was rebuilt from the complete hosted pytest cohort
+      38565361504, preserving capacities 131/154/154/131. The prior record priced
+      715 files; the new record prices 763, reducing unpriced files from 73 to 25.
+      For this shard's current file membership, prior recorded costs total
+      859.295 test-seconds and this run reports 996.249; 10 files
+      absent from the prior record contribute 43.275 seconds.
+      These observations quantify selected work and changed membership, rather than
+      isolating code speed: source, assignment and runners differ, and prior weights
+      were measured on another clock. Recorded module growth and added modules below
+      are not attributed wholesale to repartition or runner variance. All limits,
+      ratios, reference shape and markers remain unchanged; think-t01m tracks this
+      remeasurement and think-j4xs tracks the failed collection call's actual repair.
     unit: test-seconds
     source: >-
-      The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
-      600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
-      the later record, whose shard totals `python -m devtools.suite_files show` prints
-      as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
-      devtools.read_tier_walls --job-id` over the jobs measured_where describes.
+      Prior devtools/suite-file-costs.json from cohort 37932934865 and its retained
+      local admissions, compared over current physical membership with raw shard
+      C TestFileCosts/2 in artifact 11903573824 of run 38583046153,
+      all pytest reports exit zero. Actual whole walls are the gate verdicts, not
+      summed file phases. Complete enforced and normal cohorts are retained in the
+      coordinator's regularization-closeout-evidence-2026-10-13 directory. The eight
+      largest positive per-file differences are recorded below; omitted negative
+      differences remain in the complete raw reports. This is not a passing CI claim.
     grew:
-    - {name: 'packing/tests/test_confirm_gupta_records.py', before: 0.00, after: 89.92}
-    - {name: 'packing/tests/test_negative_controls.py', before: 17.59, after: 100.18}
-    - {name: 'packing/tests/test_result_overview.py', before: 5.93, after: 57.24}
-    - {name: 'packing/tests/test_gupta_adoption.py', before: 0.00, after: 43.18}
-    - {name: 'packing/tests/test_repo_links.py', before: 26.77, after: 63.75}
+    - {name: 'packing/tests/test_site_glyphs.py', before: 0.756, after: 192.551}
+    - {name: 'packing/tests/test_site_wide_blocks.py', before: 0.361, after: 45.363}
+    - {name: 'packing/tests/test_ryxu_house_links.py', before: 40.708, after: 64.981}
+    - {name: 'packing/tests/test_known_best_atlas.py', before: 20.166, after: 38.540}
+    - {name: 'packing/tests/test_default_drawings.py', before: 0.000, after: 14.630}
+    - {name: 'packing/tests/test_render_announcement.py', before: 0.000, after: 12.683}
+    - {name: 'packing/tests/test_audit_n40_new_supports.py', before: 0.000, after: 12.681}
+    - {name: 'packing/tests/test_verifier_registry.py', before: 6.094, after: 16.418}
   history:
   - measured_seconds: 88.59
     measured_on: '2026-09-30'
@@ -1406,6 +1532,57 @@ tiers:
       - {name: 'packing/tests/test_site_ladders.py', before: 0.0, after: 5.46}
       - {name: 'packing/tests/test_upper_bound_intervals.py', before: 0.0, after: 5.35}
       - {name: 'packing/tests/test_pages_workflow.py', before: 1.94, after: 7.18}
+  - measured_seconds: 190.24
+    measured_on: '2026-10-09'
+    measured_where: >-
+      The geometric mean of 164 readings at the reference shape on 2026-10-09: every suite-c
+      job that started that day, 00:23Z to 20:38Z, in a pull-request run of Packing
+      validation, each the gate's own wall for the one `fast behavioral tests, shard C` step
+      with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
+      jobs API's filter=all listing, a carried-over job counted once and a job whose step
+      failed a test not counted. Median 210.81 s, p10 133.2 s, p90 237.9 s; from 108.29 s
+      (run 37866241734, job 113613539488) to 294.60 s (run 37975867696, job 113973890841).
+      111 of the 164 were over the 168 s ceiling they ran against. Spread 2.72x, wider than
+      the 2.5x a band may span (drift_ratio / stale_ratio), so this is a point record with
+      no band: the day's runs crossed several revisions of the partition record on thirty
+      branches, stack 430's per-layer admissions and the re-record of 600068983 among them,
+      as well as the runner pool. The day's two complete runs on the re-recorded partition
+      read the two highest: 294.60 s (run 37975867696, #469 at 600068983) and 290.95 s (run
+      37988339329, a pull request into main after d3860c97a). The two days before are
+      measured and not averaged in, because the lane grew under them: geometric means of
+      148.7 s on 2026-10-07 (33 readings) and 167.6 s on 2026-10-08 (136), and 176.30 s over
+      all 333 readings from 2026-10-07T06:25Z. Of the day's own readings, three, the 108.29
+      s low among them, are under the stale edge of 0.6 x the record (114.14 s); two, the
+      294.60 s high among them, are over the drift edge of 1.5 x (285.36 s). On a pull
+      request a reading like those prints a stale or drift warning; off one, at the
+      reference shape, it would fail. think-e5y4 folds the window sampling and the per-shard
+      growth below into `read_tier_walls` and `suite_files`, so these readings can be
+      re-derived from the jobs API rather than from a retained list.
+    attribution:
+      cause: >-
+        The lane grew 2.62x in recorded test-seconds between the record this supersedes and
+        this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
+        from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
+        over 708 files in the record re-taken on 2026-10-09 from run 37932934865
+        (600068983). The 191 files the current packing gives shard 3/4 went from 307.20 to
+        858.86 test-seconds; 61 of them were absent from the earlier record (355.75
+        test-seconds), the week's result imports and n17 checks, and recorded files grew as
+        well; the largest growth is listed below. The two records came from different
+        runners, so a recorded file's before and after are not on one clock; an added file's
+        after is. No step was added: the tier is still the one shard step.
+      unit: test-seconds
+      source: >-
+        The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
+        600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
+        the later record, whose shard totals `python -m devtools.suite_files show` prints
+        as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
+        devtools.read_tier_walls --job-id` over the jobs measured_where describes.
+      grew:
+      - {name: 'packing/tests/test_confirm_gupta_records.py', before: 0.00, after: 89.92}
+      - {name: 'packing/tests/test_negative_controls.py', before: 17.59, after: 100.18}
+      - {name: 'packing/tests/test_result_overview.py', before: 5.93, after: 57.24}
+      - {name: 'packing/tests/test_gupta_adoption.py', before: 0.00, after: 43.18}
+      - {name: 'packing/tests/test_repo_links.py', before: 26.77, after: 63.75}
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     Third whole-file shard of the same quick behavioral lane. Its absolute ceiling
@@ -1472,59 +1649,64 @@ tiers:
   # OR-14's 180 s outer edge for the whole pull-request wall; that is the cost the owner
   # selected for the moment, and why the raise is tracked.
   ceiling_seconds: 335.0
-  measured_seconds: 183.08
-  measured_on: '2026-10-09'
+  measured_seconds: 234.55
+  measured_on: '2026-10-14'
   measured_where: >-
-    The geometric mean of 167 readings at the reference shape on 2026-10-09: every suite-d
-    job that started that day, 00:09Z to 20:38Z, in a pull-request run of Packing
-    validation, each the gate's own wall for the one `fast behavioral tests, shard D` step
-    with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
-    jobs API's filter=all listing, a carried-over job counted once and a job whose step
-    failed a test not counted. Median 189.27 s, p10 125.7 s, p90 250.8 s; from 90.60 s
-    (run 37863896708, job 113605910646) to 288.47 s (run 37932934865, job 113827860288),
-    the cohort the partition was re-recorded from, which failed its job on the 2x hang
-    detector with every test green and is counted: a wall the raised ceiling admits is a
-    reading of what it allows. 145 of the 167 were over the 143 s ceiling they ran
-    against. Spread 3.18x, wider than the 2.5x a band may span (drift_ratio /
-    stale_ratio), so this is a point record with no band: the day's runs crossed several
-    revisions of the partition record on thirty branches, stack 430's per-layer admissions
-    and the re-record of 600068983 among them, as well as the runner pool. The day's two
-    complete runs on the re-recorded partition read 242.23 s (run 37975867696, #469 at
-    600068983) and 189.99 s (run 37988339329, a pull request into main after d3860c97a).
-    The two days before are measured and not averaged in, because the lane grew under
-    them: geometric means of 121.9 s on 2026-10-07 (38 readings) and 146.3 s on 2026-10-08
-    (135), and 160.03 s over all 340 readings from 2026-10-07T06:25Z. Of the day's own
-    readings, eight, the 90.60 s low among them, are under the stale edge of 0.6 x the
-    record (109.85 s); one, the 288.47 s high, is over the drift edge of 1.5 x (274.62 s).
-    On a pull request a reading like those prints a stale or drift warning; off one, at
-    the reference shape, it would fail. think-e5y4 folds the window sampling and the
-    per-shard growth below into `read_tier_walls` and `suite_files`, so these readings can
-    be re-derived from the jobs API rather than from a retained list.
+    The fixed complete genuine-push cohort of run 38583046153 after the 763-file
+    measured repartition: shard D, one canonical step, 4 available CPUs,
+    --jobs 1 --inner-jobs 1 and four xdist workers, Python 3.14.7. Pytest exit status
+    zero, 3313 reported cases over 176 files. Actual tier wall
+    234.55 seconds, excluding workflow setup and the post-run receipt guard.
+    This shard completed all assertions, CALL guards and its whole-tier verdict.
+    The encompassing checkpoint FAILED; a fresh corrected-source checkpoint must
+    pass every CALL guard and whole-tier budget. No shard is independently selected
+    from another run. The complete same-tree normal PR cohort 38583060155 is retained
+    as contrary evidence: A 358.02, B 407.46, C 246.76 and D 185.72 seconds; A/B exceed
+    unchanged ceilings. Neither stability nor a runner distribution is established.
+    This first complete required-browser point is a distinct executed workload:
+    both cohorts collect 17891 identities, but enforced skips A/B/C/D 2/16/24/5
+    versus normal 5/23/63/166. All 210 extra normal omissions name missing Chromium
+    and pass in enforced: A hover-motion 2/project-tallies 1; B atlas-drawings 4/
+    text-tokens 3; C glyphs 26/wide-blocks 13; D drawing-hover 15/forwarders 101/
+    ladders 45. Normal is not pooled merely by CPU shape with the required-browser
+    baseline. It remains valid contrary cost evidence, not an invalid sample or
+    omitted because it exceeds a ceiling. This initial point is not a sampled mean
+    or distribution; subsequent comparable required-browser readings must be kept
+    and summarized by geometric mean. Original Oct9 records and attributions are
+    retained in history.
   attribution:
     cause: >-
-      The lane grew 2.62x in recorded test-seconds between the record this supersedes and
-      this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
-      from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
-      over 708 files in the record re-taken on 2026-10-09 from run 37932934865
-      (600068983). The 163 files the current packing gives shard 4/4 went from 263.17 to
-      730.59 test-seconds; 60 of them were absent from the earlier record (378.32
-      test-seconds), the week's result imports and n17 checks, and recorded files grew as
-      well; the largest growth is listed below. The two records came from different
-      runners, so a recorded file's before and after are not on one clock; an added file's
-      after is. No step was added: the tier is still the one shard step.
+      The shard assignment was rebuilt from the complete hosted pytest cohort
+      38565361504, preserving capacities 131/154/154/131. The prior record priced
+      715 files; the new record prices 763, reducing unpriced files from 73 to 25.
+      For this shard's current file membership, prior recorded costs total
+      650.875 test-seconds and this run reports 795.253; 13 files
+      absent from the prior record contribute 85.781 seconds.
+      These observations quantify selected work and changed membership, rather than
+      isolating code speed: source, assignment and runners differ, and prior weights
+      were measured on another clock. Recorded module growth and added modules below
+      are not attributed wholesale to repartition or runner variance. All limits,
+      ratios, reference shape and markers remain unchanged; think-t01m tracks this
+      remeasurement and think-j4xs tracks the failed collection call's actual repair.
     unit: test-seconds
     source: >-
-      The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
-      600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
-      the later record, whose shard totals `python -m devtools.suite_files show` prints
-      as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
-      devtools.read_tier_walls --job-id` over the jobs measured_where describes.
+      Prior devtools/suite-file-costs.json from cohort 37932934865 and its retained
+      local admissions, compared over current physical membership with raw shard
+      D TestFileCosts/2 in artifact 11904118452 of run 38583046153,
+      all pytest reports exit zero. Actual whole walls are the gate verdicts, not
+      summed file phases. Complete enforced and normal cohorts are retained in the
+      coordinator's regularization-closeout-evidence-2026-10-13 directory. The eight
+      largest positive per-file differences are recorded below; omitted negative
+      differences remain in the complete raw reports. This is not a passing CI claim.
     grew:
-    - {name: 'packing/tests/test_squish_second_update_confirmation.py', before: 0.00, after: 96.73}
-    - {name: 'packing/tests/test_check_n17_one_round_owned_domain_propagation.py', before: 0.00, after: 54.58}
-    - {name: 'packing/tests/test_site_head.py', before: 28.85, after: 72.72}
-    - {name: 'packing/tests/test_squish_update_certification.py', before: 0.00, after: 37.80}
-    - {name: 'packing/tests/test_check_published_site.py', before: 2.47, after: 31.24}
+    - {name: 'packing/tests/test_site_forwarders.py', before: 1.613, after: 104.373}
+    - {name: 'packing/tests/test_site_head.py', before: 72.725, after: 119.465}
+    - {name: 'packing/tests/test_case_page_subsets.py', before: 0.000, after: 36.771}
+    - {name: 'packing/tests/test_house_adoption.py', before: 0.000, after: 16.239}
+    - {name: 'packing/tests/test_overview_sections.py', before: 0.000, after: 16.176}
+    - {name: 'packing/tests/test_check_n17_one_round_owned_domain_propagation.py', before: 54.578, after: 68.127}
+    - {name: 'packing/tests/test_site_drawing_hover.py', before: 8.782, after: 20.313}
+    - {name: 'packing/tests/test_check_vendored_evand.py', before: 0.000, after: 7.132}
   history:
   - measured_seconds: 104.95
     measured_on: '2026-10-01'
@@ -1538,6 +1720,59 @@ tiers:
       of 104.95 s. This is one historical baseline reading, with no empirical spread
       estimate; it is not a measurement of the current enlarged shard.
       Superseded on 2026-10-09 by that day's readings of the grown lane.
+  - measured_seconds: 183.08
+    measured_on: '2026-10-09'
+    measured_where: >-
+      The geometric mean of 167 readings at the reference shape on 2026-10-09: every suite-d
+      job that started that day, 00:09Z to 20:38Z, in a pull-request run of Packing
+      validation, each the gate's own wall for the one `fast behavioral tests, shard D` step
+      with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
+      jobs API's filter=all listing, a carried-over job counted once and a job whose step
+      failed a test not counted. Median 189.27 s, p10 125.7 s, p90 250.8 s; from 90.60 s
+      (run 37863896708, job 113605910646) to 288.47 s (run 37932934865, job 113827860288),
+      the cohort the partition was re-recorded from, which failed its job on the 2x hang
+      detector with every test green and is counted: a wall the raised ceiling admits is a
+      reading of what it allows. 145 of the 167 were over the 143 s ceiling they ran
+      against. Spread 3.18x, wider than the 2.5x a band may span (drift_ratio /
+      stale_ratio), so this is a point record with no band: the day's runs crossed several
+      revisions of the partition record on thirty branches, stack 430's per-layer admissions
+      and the re-record of 600068983 among them, as well as the runner pool. The day's two
+      complete runs on the re-recorded partition read 242.23 s (run 37975867696, #469 at
+      600068983) and 189.99 s (run 37988339329, a pull request into main after d3860c97a).
+      The two days before are measured and not averaged in, because the lane grew under
+      them: geometric means of 121.9 s on 2026-10-07 (38 readings) and 146.3 s on 2026-10-08
+      (135), and 160.03 s over all 340 readings from 2026-10-07T06:25Z. Of the day's own
+      readings, eight, the 90.60 s low among them, are under the stale edge of 0.6 x the
+      record (109.85 s); one, the 288.47 s high, is over the drift edge of 1.5 x (274.62 s).
+      On a pull request a reading like those prints a stale or drift warning; off one, at
+      the reference shape, it would fail. think-e5y4 folds the window sampling and the
+      per-shard growth below into `read_tier_walls` and `suite_files`, so these readings can
+      be re-derived from the jobs API rather than from a retained list.
+    attribution:
+      cause: >-
+        The lane grew 2.62x in recorded test-seconds between the record this supersedes and
+        this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
+        from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
+        over 708 files in the record re-taken on 2026-10-09 from run 37932934865
+        (600068983). The 163 files the current packing gives shard 4/4 went from 263.17 to
+        730.59 test-seconds; 60 of them were absent from the earlier record (378.32
+        test-seconds), the week's result imports and n17 checks, and recorded files grew as
+        well; the largest growth is listed below. The two records came from different
+        runners, so a recorded file's before and after are not on one clock; an added file's
+        after is. No step was added: the tier is still the one shard step.
+      unit: test-seconds
+      source: >-
+        The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
+        600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
+        the later record, whose shard totals `python -m devtools.suite_files show` prints
+        as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
+        devtools.read_tier_walls --job-id` over the jobs measured_where describes.
+      grew:
+      - {name: 'packing/tests/test_squish_second_update_confirmation.py', before: 0.00, after: 96.73}
+      - {name: 'packing/tests/test_check_n17_one_round_owned_domain_propagation.py', before: 0.00, after: 54.58}
+      - {name: 'packing/tests/test_site_head.py', before: 28.85, after: 72.72}
+      - {name: 'packing/tests/test_squish_update_certification.py', before: 0.00, after: 37.80}
+      - {name: 'packing/tests/test_check_published_site.py', before: 2.47, after: 31.24}
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     Fourth whole-file shard of the quick behavioural lane, added on 2026-10-01 when the

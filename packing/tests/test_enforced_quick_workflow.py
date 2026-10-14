@@ -34,6 +34,10 @@ def test_checkpoint_self_changes_bootstrap_on_a_real_push_and_can_be_dispatched(
         "paths": [
             ".github/workflows/enforced-quick.yml",
             "packing/tests/test_enforced_quick_workflow.py",
+            "packing/devtools/check_enforced_quick.py",
+            "packing/devtools/gate-budgets.yaml",
+            "packing/devtools/suite-file-costs.json",
+            "packing/tests/test_validation_cli.py",
         ]
     }
     assert "branches" not in document["on"]["push"]

@@ -495,6 +495,34 @@ pytest’s own JUnit identities.
 This preserves workbench names, class names and parameter text containing `::`, while
 refusing missing or skipped required cases.
 
+### Required-browser cost baseline
+
+The first complete measured assignment cohort, genuine-push run38583046153, finished
+all17891 pytest cases without assertion failures, but the checkpoint failed
+one21.78-second CALL and old-record drift.
+Its whole-wall observations are cost evidence; they do not establish passing validation.
+The collection repair retains all three real selectors and their original partition
+assertions in one isolated process, sharing imports inside the measured CALL.
+
+The normal PR cohort38583060155 collected identical identities but skipped210 additional
+missing-Chromium cases: shard A/B/C/D extra omissions3/7/39/161. All210 passed in the
+enforced cohort. The required-browser workload therefore has its own first cost point;
+the normal cohort remains contrary cost evidence, including A358.02 and B407.46 seconds
+above their unchanged ceilings.
+Do not exclude a reading merely because it failed a cost rule, pool materially different
+executed workloads, or infer a distribution from one cohort.
+Subsequent comparable required-browser readings belong in the retained evidence and
+geometric mean. The remeasurement preserves old records and attribution in chronological
+history, all ceilings, ratios and reference shapes, and names quantitative per-file
+growth and assignment changes without attributing them wholesale to runner variance.
+A fresh corrected-source checkpoint must pass every CALL guard and whole-tier verdict
+before merging.
+
+The narrow push trigger includes the checkpoint tool, measured cost and budget records,
+and collection contract so changes to those timing inputs are enforced before the
+workflow’s first merge.
+Existing main/full workflows are unchanged.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
