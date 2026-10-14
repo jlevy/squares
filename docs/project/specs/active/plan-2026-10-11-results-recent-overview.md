@@ -1,6 +1,6 @@
 # Feature: Recent Results on the Results Page
 
-**Date:** 2026-10-11, revised 2026-10-12 and 2026-10-14 (twice)
+**Date:** 2026-10-11, revised 2026-10-12 and 2026-10-14 (three times)
 
 **Author:** Claude, lane W of the 2026-10-11 intake pass, bead `think-2z22`
 
@@ -56,17 +56,21 @@ Each section uses the date that answers its question.
   it is what the table’s Date column and its Max age filter use.
   The weekly rollup’s heading says “by Week Published”.
 
-`landed` is recorded, not derived: a page never reads Git (OR-18).
-`devtools.stamp_landed` writes it.
-The entries already on `main` were dated once from its first-parent history
-(`--backfill`), each by the first commit whose register holds it, which for a merged
-pull request is the merge.
-From now on the merge step stamps a records pull request’s new entries with the day it
-merges (`--apply`, in
-[result-import.md](../../../../packing/campaign/result-import.md)), and
-`tests/test_stamp_landed.py` fails on `main` if any entry there has none.
-An entry a branch adds carries no `landed` until it is stamped, and a render of the
-branch places it by `registered`.
+`landed` is recorded, not derived: no page and no gate reads Git (OR-18; #514’s review
+B, finding B3). The schema requires it on every entry, and a lane writes it with each
+new entry, as the day it registers it.
+The merge step re-dates a records pull request’s new entries, those `origin/main` lacks,
+to the day of the stamp (`devtools.stamp_landed --apply`, with its re-pin, as the last
+commits before the merge; Stage 5 of
+[result-import.md](../../../../packing/campaign/result-import.md)). That is the merge
+day when the stamp is the last step before the merge, and running it again after a
+re-merge or a slip past midnight UTC re-dates them again (review B, finding B2). A
+forgotten re-date leaves those entries a day or two early, the lag A1 measured, and
+turns nothing red. The entries on `main` before the field existed were dated once from
+its first-parent history (`--backfill`), each by the first commit whose register holds
+it, which for a merged pull request is the merge.
+`--audit` compares every entry on `main` with that history after a merge and gates
+nothing; its corrections ride the next records pull request.
 
 A result published before the seven days and arriving in them appears in both sections
 if it is at S3 or above, under the day it arrived and the week it was published.
@@ -86,8 +90,8 @@ one tree is the same bytes on any day.
 The heading links to `results.html?added-since=2026-10-07#all-results`, the section’s
 own first day, so it lists the section’s results however long after the build it is
 followed (#514’s review A, finding A3). The introduction’s “what arrived in the last
-day” links `?added-age=1`, which counts from the reader’s day: on the day of the newest
-arrival it lists the two newest blocks.
+day” links `?added-age=1`, which counts whole UTC days, as `landed` is written (review
+B, finding B4): on the day of the newest arrival it lists the two newest blocks.
 
 A day nothing arrived on has no block.
 Within a day, entries run from the highest S rung, then by id.
@@ -111,9 +115,10 @@ counts from 1 to 324`).
 
 The rows carry `data-added`, the `landed` date (`landed_day`). The bar has a visible
 control, **Added within *n* days**, with `data-filter="added"` and `data-bound="age"`.
-It uses the same mechanism as Max age: an age measured from the reader’s day by
-`overview/table.js` (`ageCutoff`). `?added-age=1` shows the results that reached the
-site on the reader’s day or the day before.
+It uses the same mechanism as Max age, an age measured by `overview/table.js`
+(`ageCutoff`), but from the day in UTC (`utcDay`), since `landed` is a UTC day; Max age
+keeps the reader’s local day.
+`?added-age=1` shows the results that reached the site on the UTC day or the day before.
 
 `controlParam` gave every age control the one parameter `age`. Two age controls would
 then answer to one parameter, so an age now takes its key, as the bounds do
@@ -124,10 +129,12 @@ to one day. It offers every day something reached the site, newest first, and is
 until a link sets it, as Project and At significance are.
 A preset-only date input, **Added since** (`data-bound="since"`, `?added-since=`), holds
 a row to a day or later; the section’s heading sets it.
-A preset value no option offers, such as `?added=` on a day nothing arrived, is added to
-its select as a disabled option and applied, so the table shows no row and the bar names
-the day, rather than quietly showing every row (#514’s review A, finding A5). The
-homepage’s link to the complete table forwards all three parameters.
+A value the input cannot read, such as `2026-10-6`, is kept, shows no row and keeps the
+control in the bar (review B, finding B5). A preset value no option offers, such as
+`?added=` on a day nothing arrived, is added to its select as a disabled option and
+applied, so the table shows no row and the bar names the day, rather than quietly
+showing every row (#514’s review A, finding A5). The homepage’s link to the complete
+table forwards all three parameters.
 
 ### Weeks before the seven days
 
@@ -232,10 +239,14 @@ is most of a result’s cost: 3,447 bytes on average and 4,660 at the 90th perce
 against about 320 for its entry in the seven days, which only a recent result has.
 The new sections are 26 KB, about 3% of the page, so trimming them could not buy the
 room; the ceiling is raised to 1,150,000 instead, below the 2,000,000 hard limit every
-page is held to. `test_the_results_page_has_room_for_forty_more_results` holds room for
-40 more results at the 90th-percentile row and an average entry: 924,981 + 40 × (4,660 +
-281\) = 1,122,621 bytes.
-At the average row the ceiling holds 59 more.
+page is held to. `test_the_results_page_has_room_through_two_hundred_results` holds the
+page through a fixed count, `RESULTS_ROOM_THROUGH = 200`, 160 on 14 October and 40 more:
+each result past the register’s count costs the 90th-percentile row and an average
+entry, so on 14 October 924,981 + 40 × (4,660 + 281) = 1,122,621 bytes.
+The room shrinks as results are registered, and the test fails only when the page could
+not reach 200 at today’s cost; measured from the page alone it would have slid up with
+every registration and failed the next intake about 190 KB under the ceiling (#514’s
+review B, finding B1). At the average row the ceiling holds about 220 results.
 Past it, the remedy is a lighter table row, which every result pays for.
 
 The filter adds `data-added` to each row (about 25 bytes), one option to Added on for
@@ -251,23 +262,26 @@ each day something arrived, and the Added since control.
   It also checks that no result at the floor falls between the two sections.
   It tests the grouping rules on entries made for the purpose: one published in 2018 and
   landing in the window, one registered two days before it landed, which goes under the
-  day it landed, and a branch’s new entry with no `landed`, placed by its registration.
-- `tests/test_stamp_landed.py` holds the stamp, the backfill on a scratch repository (a
-  branch’s entry lands with its merge, and on the merge’s UTC day), the check’s rules,
-  and the live register: every entry on `origin/main` carries `landed`, none before its
-  registration.
+  day it landed, and a record with no `landed`, which the schema no longer allows in the
+  register, placed by its registration.
+- `tests/test_stamp_landed.py` holds the merge step’s re-date (a branch’s new entries,
+  rewritten in place and re-datable), the history on a scratch repository (a branch’s
+  entry lands with its merge, on the merge’s UTC day) and the audit, the ids the parsed
+  register and the line scan must agree on, and the live register read from the tree
+  alone: every entry carries `landed`, none before its registration.
 - `tests/test_overview.py` and `tests/test_site_project_tallies.py` hold the bar’s
-  controls and every row’s facets, `added` included, and the page’s room for 40 more
+  controls and every row’s facets, `added` included, and the page’s room through 200
   results.
 - `tests/node/overview_table/` tests the `added-age`, `added` and `added-since` presets,
-  their composition with Max age, the reader’s-day measurement, and the homepage link’s
-  forwarding.
+  their composition with Max age, the reader’s-day and UTC-day measurements, and the
+  homepage link’s forwarding.
 - `tests/test_site_result_filters.py` runs the filter in Chromium, its clock on the day
   of the newest arrival.
   It checks that `?added-age=1` shows exactly the results that arrived that day or the
   day before, some of them registered earlier; that the heading’s `?added-since=` shows
   the section’s results with Added since in the bar; that a day’s link shows that day’s
-  results; and that a day nothing arrived on shows no row and is named in the bar.
+  results; and that a day nothing arrived on, or one the date input cannot read, shows
+  no row and is named in the bar.
 - `tests/test_site_rendering.py` serves the page with both sections taken out for the
   font-arrival negative control.
 - Screenshots in Chromium at 1280 and 390 px, light and dark, show no horizontal
