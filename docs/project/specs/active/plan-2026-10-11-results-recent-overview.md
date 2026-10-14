@@ -62,8 +62,9 @@ The entries already on `main` were dated once from its first-parent history
 (`--backfill`), each by the first commit whose register holds it, which for a merged
 pull request is the merge.
 From now on the merge step stamps a records pull request’s new entries with the day it
-merges (`--apply`, in [result-import.md](../../../packing/campaign/result-import.md)),
-and `tests/test_stamp_landed.py` fails on `main` if any entry there has none.
+merges (`--apply`, in
+[result-import.md](../../../../packing/campaign/result-import.md)), and
+`tests/test_stamp_landed.py` fails on `main` if any entry there has none.
 An entry a branch adds carries no `landed` until it is stamped, and a render of the
 branch places it by `registered`.
 
