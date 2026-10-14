@@ -5,7 +5,7 @@ title: "Import BuddenPing: 148 certificate refinements, 60 of them exact algebra
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T08:06:14.598Z
-updated_at: 2026-10-14T17:59:53.307Z
+updated_at: 2026-10-14T19:25:26.000Z
 started_at: 2026-10-14T08:06:19.172Z
 ---
 Pull request jlevy/squares#574 (BuddenPing, PingYou Ltd), head 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde of BuddenPing/squares (2026-10-13T01:58:38Z), treated as an intake report: never merged, approved or commented on here. Lane pr574 of the 2026-10-14 intake pass (think-mq0k), branch claude/wizardly-meitner-wqn4x3-intake-1014-pr574. Packet packing/resources/web/pingyou-pr574-certificates-2026-10-13/. Claim map, comparison, replay plan and draft acknowledgement in the notes.
@@ -126,4 +126,4 @@ Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-me
 
 Replay with the owner budget (2026-10-14): all 64 recorded rational counts and the 4 recorded algebraic counts (incl. 302) now have receipts (head 7dc75a64b and later); check --replay of the remaining counts runs in chunks. T-id per the records lane after #602: T-174.
 
-Renumbered on 14 October at review A3 of #602 (records PR, branch claude/wizardly-meitner-wqn4x3-records-1014): Kevin Fang's theorem, T-178 above, is now T-163, at Theorem 1's first commit (6028f31, 12 October); T-163 to T-177 above are now T-164 to T-178. T-179 to T-184 keep their ids.
+Budgeted replay done (2026-10-14, head e9eb6935a): 64 recorded rational counts, 192 jobs on both routes, 64 pass / 128 controls refused; 4 recorded algebraic counts, 12 jobs on route 1, 4 pass / 8 refused; check --replay of every recorded count equal. Unreplayed: 21 declared rational counts the ledger does not record, 56 algebraic counts.
