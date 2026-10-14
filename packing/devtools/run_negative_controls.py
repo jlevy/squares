@@ -1101,6 +1101,37 @@ COPY_SEPARATELY = (
     ROOT / "resources/web/wand125-linear-n122-2026-10-10/receipts/linear-premises.json",
     ROOT
     / "resources/web/wand125-linear-n122-2026-10-10/receipts/linear-sample-diagnostic.json",
+    # The 14 October intake's wand125 lower bounds (T-176 to T-178 and T-179) cite these,
+    # as their register plans list them: 143,089 bytes in all.
+    *(
+        ROOT / "resources/web/wand125-fine-net-n37-n39-n44-2026-10-13" / name
+        for name in (
+            "README.md",
+            "acquisition/sources.json",
+            *(
+                f"square-packing/problems/square-lower-bounds/certificates/{cert}/bundle.json"
+                for cert in ("mixed_n37_L64975", "mixed_n39_L66625", "mixed_n44_L69975")
+            ),
+            *(
+                f"receipts/{kind}-n{n}.json"
+                for kind in ("premises", "sample-diagnostic", "control-sample")
+                for n in (37, 39, 44)
+            ),
+        )
+    ),
+    *(
+        ROOT / "resources/web/wand125-linear-n145-2026-10-13" / name
+        for name in (
+            "README.md",
+            "acquisition/sources.json",
+            (
+                "square-packing/problems/square-lower-bounds/certificates/mixed_n145_L1224/"
+                "completion-audit.json"
+            ),
+            "receipts/linear-premises.json",
+            "receipts/linear-sample-diagnostic.json",
+        )
+    ),
     # SYNOPSIS.md maps the vendored regularizer's README, and the README links its licence,
     # credits and manifest; the vendored code itself is never read by a control.
     REPO / "vendor/evand-regularize/README.md",
@@ -1375,6 +1406,22 @@ def root_files() -> tuple[Path, ...]:
 # 3a5a91a90). Nothing copied changes; three portable workers are bounded at 648 MiB.
 # With this change's comments and tests counted, the snapshot measures 210,101,768
 # bytes, 16,390,648 under the raised cap.
+#
+# 2026-10-14, the records of the 14 October intake (T-161 to T-184): their artifacts
+# rescued 8,950,701 bytes and took the snapshot to 228,704,672, 2,212,256 over the cap.
+# T-174, PR #574's 68 counts, listed each count's fact file, 3,684,559 bytes; its
+# evidence names the facts directory and its claims record and receipts stay artifacts,
+# so the facts left its list. When the #574 lane's last replays came in (review B6 of
+# #602), all 64 rational receipts, 2,383,524 bytes, left it as well, its notes naming
+# their directory. With this comment counted the snapshot measured 224,357,130 bytes,
+# 2,135,286 under the cap.
+#
+# Merged with main at 16ea3bd06 (#604, #605), it measured 226,885,384, 392,968 over, and
+# suites C and D of #602 failed on it. The other imports' replay receipts left their
+# entries' artifacts the way T-174's did, 610,704 bytes from T-161 to T-183, each entry's
+# notes naming its receipt. With this comment counted the snapshot measures 226,274,880
+# bytes, 217,536 under the cap; the next intake needs the owner's decision on the cap
+# or think-b6ir's narrower copy-back.
 SNAPSHOT_MAX_BYTES = 216 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0

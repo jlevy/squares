@@ -367,6 +367,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-138",
         "T-145",
         "T-159",
+        "T-163",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -376,7 +377,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # Couzo's eight-case report of 8 October (T-128) and five-case follow-up (T-130),
     # pending adoption until then, hold case lanes at five counts and three, and are
     # unmarked. Rio Calle's n = 102 certificate (T-159) is superseded from the day it was
-    # registered: T-146, the house there, is smaller.
+    # registered: T-146, the house there, is smaller. Kevin Fang's theorem (T-163) states
+    # finite bounds at 211, 241, 273 and 307 that the houses there already beat, so it is
+    # superseded at every count it holds, as its claim says.
     for entry in ("T-128", "T-130"):
         assert entry not in marked
         assert view.standing(records.results[entry], records) == view.HOLDS

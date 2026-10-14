@@ -33535,3 +33535,1144 @@ evidence:
       global optimality, no rigidity, and nothing about the chain the packing came from
       beyond the author's statement.
     source_reviewed: '2026-10-12'
+  - id: E-couzo-561-certificate-report
+    claim: upper-bound
+    scope: {n_values: [156, 176, 237, 271, 338, 344, 375, 376, 378]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo certificates 2026-10-12]'
+    certificate: packing/resources/web/couzo-certificates-2026-10-12/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 9 exact rational certificates at
+      0fa0e0d. A separate complete repository replay is retained for n = 156, 176, 237, 271,
+      338, 344, 375, 376 and 378: 9 positives and 18 duplicate-square and outside-container
+      controls passed their required outcomes on both routes, 2519208 pair decisions; summed
+      over the 27 jobs, the receipt records 601.97 route CPU seconds and 939.01 job wall
+      seconds, the longest job 97.82 seconds. Every positive clears every wall by at least
+      5.00e-21 and every pair by at least 9.99e-21. Independent review and confirmation
+      remain pending. The source's own checkers were not run here. The two maintained
+      routes, the sqpack rational witness verifier and the independent rational corner
+      checker, share certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
+  - id: E-ostashev-562-certificate-report
+    claim: upper-bound
+    scope: {n_values: [129, 204, 303]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Ostashev compositions 2026-10-12]'
+    certificate: packing/resources/web/dostashev-compositions-2026-10-12/source/records/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 3 exact rational certificates at
+      fe43a64. A separate complete repository replay is retained for n = 129, 204 and 303: 3
+      positives and 6 duplicate-square and outside-container controls passed their required
+      outcomes on both routes, 448290 pair decisions; summed over the 9 jobs, the receipt
+      records 363.99 route CPU seconds and 447.45 job wall seconds, the longest job 85.77
+      seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
+      least 4.99e-21. Independent review and confirmation remain pending. The source's own
+      checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-pingyou-564-certificate-report
+    claim: upper-bound
+    scope: {n_values: [302]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou n302 certificate 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n302-certificate-2026-10-12/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      5a86ac3. A separate complete repository replay is retained for n = 302: 1 positive and
+      2 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 272706 pair decisions; summed over the 3 jobs, the receipt records 51.27
+      route CPU seconds and 64.61 job wall seconds, the longest job 21.66 seconds. Every
+      positive clears every wall by at least 5.00e-12 and every pair by at least 9.99e-12.
+      Independent review and confirmation remain pending. The source's own checkers were not
+      run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-couzo-583-586-certificate-report
+    claim: upper-bound
+    scope: {n_values: [154, 176, 211, 241, 302, 339, 344, 375, 376, 378, 379, 380, 381, 382]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo certificates 2026-10-13]'
+    certificate: packing/resources/web/couzo-certificates-2026-10-13/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 14 exact rational certificates at
+      b85dee2. A separate complete repository replay is retained for n = 154, 176, 211, 241,
+      302, 339, 344, 375, 376, 378, 379, 380, 381 and 382: 14 positives and 28
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 4444044 pair decisions; summed over the 42 jobs, the receipt records 1473.51
+      route CPU seconds and 2536.72 job wall seconds, the longest job 157.79 seconds. Every
+      positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
+      Independent review and confirmation remain pending. The source's own checkers were not
+      run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-pingyou-504-refinement-report
+    claim: upper-bound
+    scope: {n_values: [153]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou n153 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n153-refinement-2026-10-12/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      431186b. A separate complete repository replay is retained for n = 153: 1 positive and
+      2 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 69768 pair decisions; summed over the 3 jobs, the receipt records 12.55
+      route CPU seconds and 36.81 job wall seconds, the longest job 12.43 seconds. Every
+      positive clears every wall by at least 1.00e-13 and every pair by at least 1.87e-13.
+      Independent review and confirmation remain pending. The source's own checkers were not
+      run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-pingyou-503-refinement-report
+    claim: upper-bound
+    scope: {n_values: [207]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou n207 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n207-refinement-2026-10-12/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      1041863. A separate complete repository replay is retained for n = 207: 1 positive and
+      2 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 127926 pair decisions; summed over the 3 jobs, the receipt records 21.96
+      route CPU seconds and 40.17 job wall seconds, the longest job 15.77 seconds. Every
+      positive clears every wall by at least 1.00e-13 and every pair by at least 1.89e-13.
+      Independent review and confirmation remain pending. The source's own checkers were not
+      run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-pingyou-566-certificate-report
+    claim: upper-bound
+    scope: {n_values: [146]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou n146 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n146-refinement-2026-10-12/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      820b9ff. A separate complete repository replay is retained for n = 146: 1 positive and
+      2 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 63510 pair decisions; summed over the 3 jobs, the receipt records 32.7
+      route CPU seconds and 48.92 job wall seconds, the longest job 16.69 seconds. Every
+      positive clears every wall by at least 5.00e-81 and every pair by at least 9.99e-81.
+      Independent review and confirmation remain pending. The source's own checkers were not
+      run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-pingyou-567-certificate-report
+    claim: upper-bound
+    scope: {n_values: [261]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou n261 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n261-refinement-2026-10-12/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      e70342d. A separate complete repository replay is retained for n = 261: 1 positive and
+      2 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 203580 pair decisions; summed over the 3 jobs, the receipt records
+      1391.79 route CPU seconds and 2068.46 job wall seconds, the longest job 930.66
+      seconds. In every positive squares touch the box, a least wall clearance of exactly 0,
+      and every pair clears by at least 0. Independent review and confirmation remain
+      pending. The source's own checkers were not run here. The two maintained routes, the
+      sqpack rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
+  - id: E-pingyou-568-certificate-report
+    claim: upper-bound
+    scope: {n_values: [105]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou n105 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n105-refinement-2026-10-12/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      260aaf5. A separate complete repository replay is retained for n = 105: 1 positive and
+      2 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 32760 pair decisions; summed over the 3 jobs, the receipt records 21.77
+      route CPU seconds and 29.39 job wall seconds, the longest job 11.04 seconds. Every
+      positive clears every wall by at least 5.00e-81 and every pair by at least 9.99e-81.
+      Independent review and confirmation remain pending. The source's own checkers were not
+      run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-pingyou-569-certificate-report
+    claim: upper-bound
+    scope: {n_values: [272]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou n272 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n272-refinement-2026-10-12/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      260aaf5. A separate complete repository replay is retained for n = 272: 1 positive and
+      2 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 221136 pair decisions; summed over the 3 jobs, the receipt records 185.95
+      route CPU seconds and 240.0 job wall seconds, the longest job 106.39 seconds. Every
+      positive clears every wall by at least 5.00e-101 and every pair by at least 9.99e-101.
+      Independent review and confirmation remain pending. The source's own checkers were not
+      run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-couzo-583-certificate-report
+    claim: upper-bound
+    scope: {n_values: [154, 211, 241, 339, 379, 380, 382]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue-583 certificates 2026-10-13]'
+    certificate: packing/resources/web/couzo-issue583-2026-10-13/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 7 exact rational certificates at
+      4596670. A separate complete repository replay is retained for n = 154, 211, 241, 339,
+      379, 380 and 382: 7 positives and 14 duplicate-square and outside-container controls
+      passed their required outcomes on both routes, 2019354 pair decisions; summed over the
+      21 jobs, the receipt records 696.74 route CPU seconds and 709.36 job wall seconds, the
+      longest job 54.35 seconds. Every positive clears every wall by at least 5.00e-21 and
+      every pair by at least 9.99e-21. Independent review and confirmation remain pending.
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
+  - id: E-mishapolk-573-certificate-report
+    claim: upper-bound
+    scope: {n_values: [103, 153, 207, 209, 258, 270]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk exact certificates 2026-10-12]'
+    certificate: packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 6 exact rational certificates at
+      336bdf5. A separate complete repository replay is retained for n = 153, 154, 175 and
+      207: 4 positives and 8 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 359730 pair decisions; summed over the 12 jobs, the
+      receipt records 93.79 route CPU seconds and 205.66 job wall seconds, the longest job
+      23.93 seconds. Every positive clears every wall by at least 1.20e-15 and every pair by
+      at least 6.38e-16. Independent review and confirmation remain pending. The source's
+      own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-pingyou-574-certificate-report
+    claim: upper-bound
+    scope: {n_values: [28, 37, 39, 41, 50, 55, 68, 69, 71, 83, 84, 86, 87, 88, 102, 103,
+                        105, 106, 108, 110, 123, 126, 127, 128, 129, 130, 131, 132, 146,
+                        152, 155, 156, 171, 172, 175, 176, 177, 179, 180, 181, 182, 198,
+                        199, 204, 205, 206, 208, 209, 210, 211, 228, 230, 232, 235, 236,
+                        237, 238, 239, 240, 241, 258, 259, 261, 263, 264, 266, 267, 268,
+                        269, 270, 271, 272, 273, 292, 293, 295, 297, 300, 301, 303, 304,
+                        305, 306, 307, 308]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou PR 574 certificates 2026-10-13]'
+    certificate: packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 85 exact rational certificates at
+      4c319c2. A separate complete repository replay is retained for n = 68, 84, 86, 88,
+      102, 103, 105, 108, 110, 123, 126, 127, 129, 130, 131, 132, 146, 155, 156, 172,
+      175, 176, 179, 180, 181, 182, 199, 204, 206, 208, 209, 210, 211, 228, 232, 236,
+      237, 238, 239, 240, 241, 258, 259, 261, 263, 264, 266, 267, 268, 269, 270, 271,
+      272, 273, 292, 295, 297, 301, 303, 304, 305, 306, 307 and 308: 64 positives and
+      128 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 9164850 pair decisions; summed over the 192 jobs, the receipt
+      records 14497.02 route CPU seconds and 16968.51 job wall seconds, the longest job
+      509.89 seconds. In every positive squares touch the box, a least wall clearance of
+      exactly 0, and every pair clears by at least 0. check --replay decided every one
+      of the 192 jobs again, every row equal to the retained one. The 21 declared
+      rational counts the intake ledger does not record were not replayed, priced at
+      under an hour. Independent review and confirmation remain pending. The source's
+      own checkers were not run here. The two maintained routes, the sqpack rational
+      witness verifier and the independent rational corner checker, share certificate
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method. No two independent methods, human oversight or optimality is claimed.
+  - id: E-pingyou-574-algebraic-report
+    claim: upper-bound
+    scope: {n_values: [5, 10, 18, 19, 26, 27, 38, 40, 51, 52, 53, 54, 65, 66, 67, 70,
+                        82, 85, 89, 101, 104, 107, 109, 122, 124, 125, 145, 147, 148,
+                        149, 150, 151, 153, 170, 173, 174, 178, 197, 200, 201, 202, 203,
+                        207, 226, 227, 229, 231, 233, 234, 257, 260, 262, 265, 290, 291,
+                        294, 296, 298, 299, 302]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou PR 574 certificates 2026-10-13]'
+    certificate: packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 60 exact algebraic certificates at
+      4c319c2, each side a root of an integer polynomial that the author isolates by
+      rational Sturm counts. A separate complete repository replay is retained for n =
+      70, 153, 207 and 302, on one route: sqpack's exact witness verifier decided each
+      positive and its duplicate-square and outside-container controls over the
+      witness's field, 12 jobs and 242445 pair decisions, 1001.0 route CPU seconds and
+      1094.42 job wall seconds, the longest job 166.45 seconds; the four positives pass,
+      squares touching the box and each other exactly, and the eight controls are
+      refused. check --replay decided the 12 jobs again with the same outcomes. The
+      other 56 counts were not replayed, priced at about 2.1 hours on the one route. No
+      second route over a number field exists here: the independent corner checker reads
+      rational corners only. Independent review and confirmation remain pending. The
+      source's own checkers were not run here. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-ostashev-575-certificate-report
+    claim: upper-bound
+    scope: {n_values: [176, 211, 241, 304]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Ostashev merged bands 2026-10-13]'
+    certificate: packing/resources/web/dostashev-merged-bands-2026-10-13/source/records/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 4 exact rational certificates at
+      b909e1b. A separate complete repository replay is retained for n = 176, 211, 241 and
+      304: 4 positives and 8 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 675186 pair decisions; summed over the 12 jobs, the
+      receipt records 480.19 route CPU seconds and 656.86 job wall seconds, the longest job
+      89.14 seconds. Every positive clears every wall by at least 5.00e-21 and every pair by
+      at least 4.99e-21. Independent review and confirmation remain pending. The source's
+      own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-wand125-fine-net-n39-66625-report
+    claim: lower-bound
+    scope: {n_values: [39]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n39_L66625/bundle.json
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 533/80 at all 2073 directions of the net its candidate declares
+      (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this repository's
+      sqverify_fast, at dfb2cf8, on no issue, in a check2 run (1,682.7 s at 12 threads) and
+      a pre-publication run on a fresh machine (697 s). Complete source-byte custody and the
+      maintained mass, net and check2 premises are accepted (receipts/premises-n39.json).
+      Eight sampled directions run here by sqverify-fast verified and matched the source's
+      log; that is a diagnostic, not a replay. The 32-direction 197/200 control remains
+      sampled. The 99/100 mutant's axis refusal does not count under the census's
+      AXIS_ROUNDING (gap 1.26e-9; receipts/control-sample-n39.json), so a whole-net control
+      cannot pass as the census stands. A complete capture, whole-net controls, restored
+      positives and a review that reads this certificate remain pending under think-u0av,
+      priced at about 7.1 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes; T-110 stands.
+    source_reviewed: '2026-10-14'
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, max reasoning), the stage 4 mathematical review lane
+        of the wand125-lb import (think-u0av), prompted separately from the intake lane that
+        retained the two packets
+      note: >-
+        Read in the review of 14 October
+        (docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md):
+        the argument re-derived and the certificate's exact premises recomputed, with
+        sampled directions decided exactly; no blocking defect. Its F-1, major for the
+        record and not a defect of any certificate, says the census control's axis tolerance
+        is a constant where the test needs the sweep's enclosure; F-2 to F-8 are minor or
+        notes.
+  - id: E-wand125-fine-net-n44-69975-report
+    claim: lower-bound
+    scope: {n_values: [44]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n44_L69975/bundle.json
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 2799/400 at all 2073 directions of the net its candidate declares
+      (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this repository's
+      sqverify_fast, at 9f24185, on no issue, in a check2 run (2,785.4 s at 16 threads) and
+      a pre-publication run on a fresh machine (1,654 s). Complete source-byte custody and
+      the maintained mass, net and check2 premises are accepted
+      (receipts/premises-n44.json). Eight sampled directions run here by sqverify-fast
+      verified and matched the source's log; that is a diagnostic, not a replay. The
+      32-direction 197/200 control remains sampled. A complete capture, whole-net controls,
+      restored positives and a review that reads this certificate remain pending under
+      think-u0av, priced at about 17 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes; T-090 stands.
+    source_reviewed: '2026-10-14'
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, max reasoning), the stage 4 mathematical review lane
+        of the wand125-lb import (think-u0av), prompted separately from the intake lane that
+        retained the two packets
+      note: >-
+        Read in the review of 14 October
+        (docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md):
+        the argument re-derived and the certificate's exact premises recomputed, with
+        sampled directions decided exactly; no blocking defect. Its F-1, major for the
+        record and not a defect of any certificate, says the census control's axis tolerance
+        is a constant where the test needs the sweep's enclosure; F-2 to F-8 are minor or
+        notes.
+  - id: E-wand125-fine-net-n37-64975-report
+    claim: lower-bound
+    scope: {n_values: [37]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n37_L64975/bundle.json
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 2599/400 at all 2073 directions of the net its candidate declares
+      (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this repository's
+      sqverify_fast, at 7a42c16, on no issue, in a check2 run (1,146.4 s at 16 threads) and
+      a pre-publication run on a fresh machine (619 s). Complete source-byte custody and the
+      maintained mass, net and check2 premises are accepted (receipts/premises-n37.json).
+      Eight sampled directions run here by sqverify-fast verified and matched the source's
+      log; that is a diagnostic, not a replay. The 32-direction 197/200 control remains
+      sampled. A complete capture, whole-net controls, restored positives and a review that
+      reads this certificate remain pending under think-u0av, priced at about 6.5 CPU-hours.
+      The shared crate establishes no independent implementation. No standing bound or
+      rating changes; T-069 stands.
+    source_reviewed: '2026-10-14'
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, max reasoning), the stage 4 mathematical review lane
+        of the wand125-lb import (think-u0av), prompted separately from the intake lane that
+        retained the two packets
+      note: >-
+        Read in the review of 14 October
+        (docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md):
+        the argument re-derived and the certificate's exact premises recomputed, with
+        sampled directions decided exactly; no blocking defect. Its F-1, major for the
+        record and not a defect of any certificate, says the census control's axis tolerance
+        is a constant where the test needs the sweep's enclosure; F-2 to F-8 are minor or
+        notes.
+  - id: E-fang-excess-theorem-report
+    claim: upper-bound
+    scope: {n_values: [211, 241, 273, 307, 932]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Fang excess theorem 2026-10-13]'
+    certificate: packing/resources/web/fang-excess-theorem-2026-10-13/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 5 exact rational certificates at
+      078789a. A separate complete repository replay is retained for n = 211, 241, 273, 307,
+      308 and 932: 6 positives and 12 duplicate-square and outside-container controls passed
+      their required outcomes on both routes, 3697788 pair decisions; summed over the 18
+      jobs, the receipt records 1278.59 route CPU seconds and 1733.86 job wall seconds, the
+      longest job 485.37 seconds. Every positive clears every wall by at least 8.06e-07 and
+      every pair by at least 1.61e-06. Independent review and confirmation remain pending.
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, max reasoning), the mathematical review lane of the
+        think-0esw import at stage 4, in a worktree and session of its own
+      note: >-
+        Accepted in the review of 14 October
+        (docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md):
+        Theorems 1 and 2 re-derived from the retained material, Lemma 3 and the scaling
+        lemma elementary; the eighteen pieces the chains use decided strict-valid by a
+        checker written for the review; all 76 inventory certificates rebuilt byte for byte
+        from the retained pieces and decided; the direct certificates at 380, 381 and 382
+        confirmed as the packet states them. Findings MR-1 to MR-7, none blocking or major.
+  - id: E-fang-excess-theorem-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [211, 241, 273, 307, 308, 932]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fang excess theorem 2026-10-13]'
+    certificate: packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time: python -m
+      devtools.upper_bound_reports fang-excess-theorem-2026-10-13 certify --workers 1
+      decided the 18 jobs of the six retained inventory certificates, each with its
+      duplicate-square and outside-container controls, through both maintained routes on
+      2026-10-14, and check --replay decided them again, equal to the retained rows.
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every
+          wall and every pair decided by both maintained routes; the twelve kernel controls
+          are retained separately
+        checked: 6
+        of: 6
+      read: [specification, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026; each
+            lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the lane that wrote devtools.evand_exact_certificates for T-101's import of 5 and
+            6 October 2026, whose parse and half-angle map both maintained routes use;
+            tier and reasoning setting not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source states that its search, verifier and bundle were written and run with
+          Claude, directed and reviewed by Kevin Fang; the project's routes are Claude's
+          too, written from prompts of their own. The certificates are in Evan Daniel's
+          format and the source's checker is his; both maintained routes take their parse
+          and half-angle map from devtools.evand_exact_certificates, whose author read that
+          checker before writing it, so the run is not clean-room. No route imports or
+          copies the source's code, and it was not run here.
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, max reasoning), the mathematical review lane of the
+        think-0esw import at stage 4, in a worktree and session of its own
+      note: >-
+        Accepted in the review of 14 October
+        (docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md):
+        Theorems 1 and 2 re-derived from the retained material, Lemma 3 and the scaling
+        lemma elementary; the eighteen pieces the chains use decided strict-valid by a
+        checker written for the review; all 76 inventory certificates rebuilt byte for byte
+        from the retained pieces and decided; the direct certificates at 380, 381 and 382
+        confirmed as the packet states them. Findings MR-1 to MR-7, none blocking or major.
+    limitations: >-
+      Both maintained routes accept the six retained inventory certificates, at 211, 241,
+      273, 307, 308 and 932, and refuse their twelve controls: 3,697,788 pair decisions,
+      1,278.59 route CPU seconds and 1,733.86 job wall seconds over the 18 jobs. Every
+      positive clears every wall by at least 8.06e-07 and every pair by at least 1.61e-06.
+      The two routes share certificate parsing, half-angle conversion, Fraction arithmetic
+      and the separating-axis method. Finite feasibility of the six only: the theorem for
+      every n rests on the review's reading of Lemma 3 and the induction.
+    source_reviewed: '2026-10-14'
+  - id: E-wand125-linear-n145-1224-report
+    claim: lower-bound
+    scope: {n_values: [145, 146, 147, 148, 149]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 linear n145 2026-10-13]'
+    certificate: >-
+      packing/resources/web/wand125-linear-n145-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n145_L1224/completion-audit.json
+    replay_status: not-attempted
+    verifiers: [V-wand125-unified-linear-verify-cpp]
+    limitations: >-
+      wand125/square-packing at 22f06b31a9295c8185be5d30a1a7b19982b16847, on no issue,
+      reports s(145) >= 306/25 = 12.24 from a linear measure of 594 point, 1,541 segment and
+      9 rectangle orbits under D4, total mass 14499999/100000, core side 9977/10000 and 201
+      net half-angles of step 83/40000, checked at all 201 angles by
+      code/unified_linear_verify.cpp (SHA-256 0249726a...), T-080's checker; 124,435,707
+      nodes. A packing of 146 to 149 squares contains one of 145, so the value is also the
+      strongest report at those counts. Complete source-byte custody of the 38,598,220-byte
+      release asset and the T-080 route's exact premises, bundle bindings and 201 input
+      enclosures are accepted (receipts/linear-premises.json). Two angles replayed here (35
+      and 111) by the shipped replay function and checker from this repository's retained
+      copies returned the certificate's records; that is a diagnostic, not a replay. The
+      author's complete replay (2 h 8 min at 30 workers) has no published receipt. A
+      complete replay, the route's control and a review that reads this certificate remain
+      pending under think-u0av, priced at about 37 CPU-hours. No standing bound or rating
+      changes.
+    source_reviewed: '2026-10-14'
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, max reasoning), the stage 4 mathematical review lane
+        of the wand125-lb import (think-u0av), prompted separately from the intake lane that
+        retained the two packets
+      note: >-
+        Read in the review of 14 October
+        (docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md):
+        the argument re-derived and the certificate's exact premises recomputed, with
+        sampled directions decided exactly; no blocking defect. Its F-1, major for the
+        record and not a defect of any certificate, says the census control's axis tolerance
+        is a constant where the test needs the sweep's enclosure; F-2 to F-8 are minor or
+        notes.
+  - id: E-wand125-closed-form-report
+    claim: lower-bound
+    scope: {n_values: [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 66,
+                        67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 83, 84,
+                        85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 101,
+                        102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114,
+                        115, 116, 117, 118, 119, 120, 122, 123, 124, 125, 126, 127, 128,
+                        129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141,
+                        142, 143, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155,
+                        156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168,
+                        170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182,
+                        183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195,
+                        197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209,
+                        210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222,
+                        223, 224, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236,
+                        237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249,
+                        250, 251, 252, 253, 254, 255, 257, 258, 259, 260, 261, 262, 263,
+                        264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276,
+                        277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 290,
+                        291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303,
+                        304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316,
+                        317, 318, 319, 320, 321, 322, 323]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 closed form 2026-10-14]'
+    certificate: >-
+      packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/intervals.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-replay4d]
+    limitations: >-
+      wand125/square-packing problems/closed-form (closed-form-v1), on no issue, reports
+      s(N) >= a(N) for every non-square N >= 49: on each of 34 intervals of delta a family
+      of line segments defines, for every k >= 7, a C4-symmetric measure on [0, k + delta]^2
+      of total mass (k + delta)^2 - 4 S(delta) with mass at least 1 on every closed unit
+      square, checked in four local regions by 187,183,108 exact leaf tests in 136 records.
+      The source reports every record replayed and accepted by replay4d (Rust, exact
+      rational and real-algebraic arithmetic; 4,294 CPU-hours over 269 runs on two
+      machines), the published build replaying intervals 1 and 34 again (124.65 CPU-hours),
+      and all 68 families passing structure/validate_family.py. replay4d shares its core,
+      seam4d_core, with the source's search tools, so the source's replay is not independent
+      of its producer. Here: complete custody of the 35 release assets (815,734,366 bytes)
+      against ASSET.json, the release API digests and SHA256SUMS; the source's structure
+      check run unchanged on all 68 families, ALL STRUCTURE OK, with its results equal to
+      the source's receipt, whose validate_family digest (fdd61866...) is not the published
+      script's (22e55f17...), and two mutations refused; and an exact evaluation of a(n) at
+      every count, which decides only what the theorem implies. No record was replayed here.
+    source_reviewed: '2026-10-14'
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, max reasoning), the mathematical review lane of the
+        wand125-cf import (think-tsox), in a worktree of its own
+      note: >-
+        Accepted in the review of 14 October
+        (docs/project/reviews/review-2026-10-14-wand125-closed-form-lower-bound.md): the
+        argument re-derived from the certificate to the claim; the closed form, the
+        localization and the receipt arithmetic checked; no blocking or major finding (F1 to
+        F4 minor, N5 to N11 notes).
+  - id: E-mishapolk-593-certificate-report
+    claim: upper-bound
+    scope: {n_values: [68, 70, 84, 86, 88, 102, 103, 105, 106, 108, 110, 123, 126, 127,
+                        129, 130, 131, 132, 146, 152, 153, 154, 155, 156, 172, 175, 176,
+                        177, 179, 180, 181, 182, 199, 204, 206, 207, 208, 209, 210, 211,
+                        228, 232, 236, 237, 238, 239, 240, 241, 258, 259, 261, 263, 264,
+                        266, 267, 268, 269, 270, 271, 272, 273, 292, 295, 297, 301, 302,
+                        303, 304, 305, 306, 307, 308]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk records 2026-10-14]'
+    certificate: packing/resources/web/mishapolk-records-2026-10-14/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 72 exact rational certificates at
+      46f638c. A separate complete repository replay is retained for n = 211, 237 and 241: 3
+      positives and 6 duplicate-square and outside-container controls passed their required
+      outcomes on both routes, 474246 pair decisions; summed over the 9 jobs, the receipt
+      records 176.28 route CPU seconds and 227.8 job wall seconds, the longest job 33.87
+      seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
+      least 9.99e-21. Independent review and confirmation remain pending. The source's own
+      checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-bengreff-594-cover-report
+    claim: lower-bound
+    scope: {n_values: [76]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[bengreff s76 certificate 2026-10-14]'
+    certificate: >-
+      packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate/cover/s76_cover_v5.txt.gz
+    replay_status: not-attempted
+    verifiers:
+      - V-evand-zmx2
+      - V-evand-zm-mixed-py
+    limitations: >-
+      bengreff/s76-certificate at 1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f, on issue 594,
+      reports s(76) >= 9 from a mixed cover of 41,633 points and 9,744 segments, total
+      3788361049/50000000 < 76, exactly D4-invariant, decided by zmx2 on 8,096 of 8,100 root
+      cells and by zm_mixed.py on the 64 cells tiling the other four. At retention here the
+      cover's data facts were recomputed and both checkers were rerun from the pinned bytes,
+      equal to the source's records, with two mutations refused (packet receipts/); that
+      reproduction with the producer's code is not yet an evidence entry. The Lean wrapper
+      is unbuilt and takes the covering statement as a hypothesis.
+    source_reviewed: '2026-10-14'
+  - id: E-evand-584-compositions-report
+    claim: upper-bound
+    scope: {n_values: [339, 364, 375]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel compositions 2026-10-13]'
+    certificate: >-
+      packing/resources/web/evand-compositions-2026-10-13/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 3 exact rational certificates at
+      231d41d. A separate complete repository replay is retained for n = 339, 364 and 375: 3
+      positives and 6 duplicate-square and outside-container controls passed their required
+      outcomes on both routes, 1160892 pair decisions; summed over the 9 jobs, the receipt
+      records 477.89 route CPU seconds and 755.18 job wall seconds, the longest job 108.47
+      seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
+      least 9.99e-21. Independent review and confirmation remain pending. The source's own
+      checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-evand-596-compositions-report
+    claim: upper-bound
+    scope: {n_values: [365, 370, 460]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel fresh compositions 2026-10-14]'
+    certificate: >-
+      packing/resources/web/evand-fresh-compositions-2026-10-14/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 3 exact rational certificates at
+      622cd2e. A separate complete repository replay is retained for n = 365, 370 and 460: 3
+      positives and 6 duplicate-square and outside-container controls passed their required
+      outcomes on both routes, 1441590 pair decisions; summed over the 9 jobs, the receipt
+      records 654.96 route CPU seconds and 822.92 job wall seconds, the longest job 153.56
+      seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
+      least 9.99e-21. Independent review and confirmation remain pending. The source's own
+      checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-fang-direct-certificate-report
+    claim: upper-bound
+    scope: {n_values: [380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758, 814]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Fang direct certificates 2026-10-13]'
+    certificate: packing/resources/web/fang-direct-certificates-2026-10-13/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-14'
+    limitations: >-
+      This atom records the source author's report of 14 exact rational certificates at
+      078789a. A separate complete repository replay is retained for n = 380, 381 and 382: 3
+      positives and 6 duplicate-square and outside-container controls passed their required
+      outcomes on both routes, 1303026 pair decisions; summed over the 9 jobs, the receipt
+      records 652.11 route CPU seconds and 863.27 job wall seconds, the longest job 138.29
+      seconds. Every positive clears every wall by at least 2.71e-20 and every pair by at
+      least 1.58e-20. Independent review and confirmation remain pending. The source's own
+      checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, max reasoning), the mathematical review lane of the
+        think-0esw import at stage 4, in a worktree and session of its own
+      note: >-
+        Confirmed in the review of 14 October
+        (docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md):
+        the receipt decides the retained certificates at their exact sides on both routes
+        and refuses its six controls, the claims record holds, and the review's own exact
+        checker decided the same three certificates and found the same least margins to the
+        exact fraction; it decided the other eleven strict-valid on one route.
+  - id: E-fang-direct-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [380, 381, 382]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fang direct certificates 2026-10-13]'
+    certificate: packing/resources/web/fang-direct-certificates-2026-10-13/source/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time: python -m
+      devtools.upper_bound_reports fang-direct-certificates-2026-10-13 certify --workers 1
+      decided the 9 jobs of the certificates at 380, 381 and 382, each with its
+      duplicate-square and outside-container controls, through both maintained routes on
+      2026-10-14, and a fresh serial check --replay decided all nine again, equal to the
+      retained rows.
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the complete certificates at 380, 381 and 382, every wall and every pair decided by
+          both maintained routes; the six kernel controls are retained separately
+        checked: 3
+        of: 3
+      read: [specification, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026; each
+            lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the lane that wrote devtools.evand_exact_certificates for T-101's import of 5 and
+            6 October 2026, whose parse and half-angle map both maintained routes use;
+            tier and reasoning setting not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source states that its search, verifier and bundle were written and run with
+          Claude, directed and reviewed by Kevin Fang; the project's routes are Claude's
+          too, written from prompts of their own. The certificates are in Evan Daniel's
+          format and the source's checker is his; both maintained routes take their parse
+          and half-angle map from devtools.evand_exact_certificates, whose author read that
+          checker before writing it, so the run is not clean-room. No route imports or
+          copies the source's code, and it was not run here.
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, max reasoning), the mathematical review lane of the
+        think-0esw import at stage 4, in a worktree and session of its own
+      note: >-
+        Confirmed in the review of 14 October
+        (docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md):
+        the receipt decides the retained certificates at their exact sides on both routes
+        and refuses its six controls, the claims record holds, and the review's own exact
+        checker decided the same three certificates and found the same least margins to the
+        exact fraction; it decided the other eleven strict-valid on one route.
+    limitations: >-
+      Both maintained routes accept the three certificates and refuse their six controls:
+      1,303,026 pair decisions, 652.11 route CPU seconds and 863.27 job wall seconds. In
+      every positive the least wall clearance is exactly 2^-65 and the least pair gaps are
+      2.33e-20, 1.79e-20 and 1.58e-20. The other eleven certificates, 421 to 814, are not
+      replayed here; their two-route replay is priced at 3.02 CPU-hours (think-7bw3). Finite
+      feasibility only.
+    source_reviewed: '2026-10-14'
+  - id: E-wand125-closed-form-cfcheck-report
+    claim: lower-bound
+    scope: {n_values: [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 66,
+                        67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 83, 84,
+                        85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 101,
+                        102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114,
+                        115, 116, 117, 118, 119, 120, 122, 123, 124, 125, 126, 127, 128,
+                        129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141,
+                        142, 143, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155,
+                        156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168,
+                        170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182,
+                        183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195,
+                        197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209,
+                        210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222,
+                        223, 224, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236,
+                        237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249,
+                        250, 251, 252, 253, 254, 255, 257, 258, 259, 260, 261, 262, 263,
+                        264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276,
+                        277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 290,
+                        291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303,
+                        304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316,
+                        317, 318, 319, 320, 321, 322, 323]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: independent-implementation
+    independence_record: >-
+      packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/README.md
+    independence:
+      coverage:
+        extent: sample
+        unit: region records of the closed-form certificate
+        checked: 8
+        of: 136
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 cfcheck 2026-10-14]'
+    certificate: >-
+      packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/intervals.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-cfcheck]
+    limitations: >-
+      wand125/square-packing at 746e2c5ac7a7f534996dd50a5e1fd9f1d8836a8d
+      (2026-10-14T10:38:27Z) adds problems/closed-form/indep-checker/, cfcheck, which its
+      README says was written from SPEC.md and the published bundles only, shares no code
+      with replay4d, seam4d_core or validate_family.py, which were not read, and was written
+      with AI assistance (OpenAI Codex) and reviewed by the author. The source reports that
+      it replayed intervals 1, (0, 1/50], and 34, (99/100, 1], completely, all four records
+      of each: 91,044 roots and 3,138,681 leaves accepted with no refusal, the published
+      counts of every kind, in 242.02 worker-hours of summed per-leaf time, with 24,226
+      roots of interval 1 resumed from checkpoints of earlier runs of the same checker that
+      are not published. The other 32 intervals were not checked with it. Of the record's
+      counts, only the 33 at m^2 - 1, m^2 - 2 and m^2 - 3 for m = 8 to 18 have a(N) attained
+      on these intervals (interval 34, the cap k + 1), all proved already; none of the
+      counts where a(N) is above the record is. Here the code was compared with the
+      producer's: no file, line, comment, local crate or arithmetic kernel is shared, and
+      the structure it shares traces to procedures SPEC.md states step by step. SPEC.md is
+      the producer's description of its own checker's procedures, and the person who
+      reviewed cfcheck wrote the producer's code, so it is an independent implementation of
+      the producer's specification. The clean room is the source's statement, consistent
+      with the code and not checkable here. A report, not a replay; a sample of the
+      certificate.
+    source_reviewed: '2026-10-14'
+  - id: E-wand125-closed-form-cfcheck-sample
+    claim: lower-bound
+    scope: {n_values: [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 66,
+                        67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 83, 84,
+                        85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 101,
+                        102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114,
+                        115, 116, 117, 118, 119, 120, 122, 123, 124, 125, 126, 127, 128,
+                        129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141,
+                        142, 143, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155,
+                        156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168,
+                        170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182,
+                        183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195,
+                        197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209,
+                        210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222,
+                        223, 224, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236,
+                        237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249,
+                        250, 251, 252, 253, 254, 255, 257, 258, 259, 260, 261, 262, 263,
+                        264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276,
+                        277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 290,
+                        291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303,
+                        304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316,
+                        317, 318, 319, 320, 321, 322, 323]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    independence_record: >-
+      packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/README.md
+    independence:
+      coverage:
+        extent: sample
+        unit: leaves of the closed-form certificate
+        checked: 2909
+        of: 187183108
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 cfcheck 2026-10-14]'
+    certificate: >-
+      packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/receipts/runs/interval-1-premises-and-kind-sample.json
+    replay: >-
+      Restore problems/closed-form/ in scratch from this packet and the 9a28a84 packet and
+      match it to this packet's manifest; cargo fetch --locked, then cargo build --release
+      --locked --offline in indep-checker/; unpack interval_0_0.02.tar.gz and
+      interval_0.99_1.tar.gz of closed-form-v1, checked against ASSET.json and SHA256SUMS,
+      under assets/ beside intervals.json; then run the three cfcheck commands that
+      receipts/runs/*.json record, through replay/cfcheck_replay.py run. Each must exit 0
+      with CFCHECK PARTIAL and no refusal; the three commands of receipts/controls/*.json,
+      on the mutants replay/cfcheck_replay.py mutate writes, must each exit 1 with the
+      refusal the receipt names.
+    replay_status: passed
+    verifiers: [V-wand125-cfcheck]
+    limitations: >-
+      Run here on 14 October 2026 from the retained cfcheck at 746e2c5, built with rustc
+      1.97.0 (the source used 1.99.0), on four shared cores; its 42 tests passed. On
+      intervals 1 and 34 in full: every input digest, the structure of all four families,
+      the region bounds, the product grid and 90-degree cover of the roots of all eight
+      records, the bisection tiling of all 91,044 roots and the published counts, none
+      refused. Leaf tests on a stated sample only: the first 200 leaves of each kind of
+      interval 1's top.rec, the smallest record, and the first 25 (interval 1) and 20
+      (interval 34) leaves of each kind but B4U in each record, 2,909 distinct leaves of the
+      3,138,681, all accepted; 42.9 CPU-minutes in all. A duplicated root, a leaf relabelled
+      from CORE1:Tx to CORE and both families' masses scaled by 99/100, each re-sealed, were
+      refused for the targeted reason. A complete replay of the two intervals is priced at
+      288 worker-hours by the source's own rates, about 320 to 650 CPU-hours here. A sample
+      decides the leaves it checked and nothing about the others; it sets no rung.
+    source_reviewed: '2026-10-14'

@@ -1,0 +1,1363 @@
+{
+  "format": "algebraic-witness-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/pull/574",
+  "author": "PingYou Ltd",
+  "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+  "receipt_format": "pingyou-574-algebraic-route1-v1",
+  "witness_prefix": "W-pingyou-574-alg-n",
+  "claim_limitations": "Complete algebraic-number-field Witness/v2 of PR 574 at 4c319c2, read exactly from a release asset whose size and SHA-256 a manifest of that commit pins; no upstream byte is retained. Decided on one exact route, sqpack exact_verify over the witness's field; no second route over a number field is maintained. Finite construction feasibility only; an exact certificate of a construction others found, with no novelty, priority, local minimum, rigidity or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "b8c930338ee3577a43faccb52472c6975ab7eccd",
+  "witnesses": [
+    {
+      "n": 5,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n005/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n005/native.yaml",
+        "sha256": "d9276725c976a8581dd26f3f896cc92fbb9817720b6c1393ba4b87c929b4ed23"
+      },
+      "fact": "facts/alg-n-005.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 10,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n010/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n010/native.yaml",
+        "sha256": "8f46370de30e2521995a2cbbb4f36a7b2dd6885be95f3d47b8ab7f011b799047"
+      },
+      "fact": "facts/alg-n-010.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 18,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n018/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n018/native.yaml",
+        "sha256": "bab79f2938cd0ebbd7b494fa4242e0d826e701cff6f6a1afb0187c1d2574bac0"
+      },
+      "fact": "facts/alg-n-018.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 19,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n019/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n019/native.yaml",
+        "sha256": "0bd85474f717df94351336fd077f75f3606fa7ab1bf299263cdcb290532f2f69"
+      },
+      "fact": "facts/alg-n-019.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 26,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n026/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n026/native.yaml",
+        "sha256": "2e27de814036c8262b05e4f251d00d5b92b70eb609eb72676421e0c6386c9bc0"
+      },
+      "fact": "facts/alg-n-026.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 27,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n027/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n027/native.yaml",
+        "sha256": "cc94a027282a218d057744d8386d5af5ba68d32c3f89d175b1e3414db951492d"
+      },
+      "fact": "facts/alg-n-027.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 38,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n038/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n038/native.yaml",
+        "sha256": "0530385f7b56c7f2e676c202f7b59b0cfc35032e2c048c01763c3d511159c441"
+      },
+      "fact": "facts/alg-n-038.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 40,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n040/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n040/native.yaml",
+        "sha256": "039ed3dc701ddd58657b9918e113cc412c1be9938f5e8972ef060ce708f0ef42"
+      },
+      "fact": "facts/alg-n-040.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 51,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n051/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n051/native.yaml",
+        "sha256": "74eba81454b092435e0ad51ee39725d672d10be60f713ffab8eac6d7dfe2156a"
+      },
+      "fact": "facts/alg-n-051.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 52,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n052/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n052/native.yaml",
+        "sha256": "7e02a662d9452da37478b0024b834dec15c1cb5b84c3c1e1b2878b27a542e8eb"
+      },
+      "fact": "facts/alg-n-052.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 53,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n053/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n053/native.yaml",
+        "sha256": "4b554adacc13b05e996eb568e377c8393c6fbfa5b469a16244f7073c313361fd"
+      },
+      "fact": "facts/alg-n-053.yaml",
+      "degree": 8,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 54,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n054/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n054/native.yaml",
+        "sha256": "0436607c1e8549288c5230b6c1db93eba41dd98f7dc4c080db6dadd3a01db367"
+      },
+      "fact": "facts/alg-n-054.yaml",
+      "degree": 4,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 65,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n065/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n065/native.yaml",
+        "sha256": "95973cfa0a46dc8fc9e049649a968e8cd951eb240ddc7209f9770441a159d1d4"
+      },
+      "fact": "facts/alg-n-065.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 66,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n066/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n066/native.yaml",
+        "sha256": "aa896669d24cd4c796a7d1424f5c481f662345004708db289229a15725c373df"
+      },
+      "fact": "facts/alg-n-066.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 67,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n067/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n067/native.yaml",
+        "sha256": "78f9891b6650ebe086551d5de4e6afb130f848248232d9d078960783ffb33276"
+      },
+      "fact": "facts/alg-n-067.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 70,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n070/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n070/native.yaml",
+        "sha256": "8edc8c428ae5d6a44172fcd6732f2328b3f042b78a2b08c1e32ff2de4def17e2"
+      },
+      "fact": "facts/alg-n-070.yaml",
+      "degree": 5,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 82,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n082/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n082/native.yaml",
+        "sha256": "768be021d2ef59915bb9691c3f86462428051f1441d6acf00ba2837ef48b5dff"
+      },
+      "fact": "facts/alg-n-082.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 85,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n085/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n085/native.yaml",
+        "sha256": "8dc676940875560258df69cef11091b0d48650c7abbab948c86a4756fbf1688d"
+      },
+      "fact": "facts/alg-n-085.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 89,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n089/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n089/native.yaml",
+        "sha256": "b8627794dcc629844269fa6342b6a91cd84787aecb889c6c06a80e2e617f9aff"
+      },
+      "fact": "facts/alg-n-089.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 101,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n101/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n101/native.yaml",
+        "sha256": "4aa571a8481e3853af0a6fd6cefcd5b8ff6e3630c8bf00f27fd26c36ba34a514"
+      },
+      "fact": "facts/alg-n-101.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 104,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n104/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n104/native.yaml",
+        "sha256": "8bd76a5dea754cde421a4b8ed06834500692a284a3873465a22e050df84be8f0"
+      },
+      "fact": "facts/alg-n-104.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 107,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n107/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n107/native.yaml",
+        "sha256": "ae642b95aca7be88706a75c3c7628e7422dd085e3531a61ec096b6e2907abc1f"
+      },
+      "fact": "facts/alg-n-107.yaml",
+      "degree": 4,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 109,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n109/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n109/native.yaml",
+        "sha256": "c77fddeb717a2ab257f49af5fcbb57f4796c6cfa481fe00abe882750f100be3f"
+      },
+      "fact": "facts/alg-n-109.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 122,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n122/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n122/native.yaml",
+        "sha256": "47843661c5af3d15924e5b31ef9bf56b25b2bdc6aaaf7287e97e4479fe890308"
+      },
+      "fact": "facts/alg-n-122.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 124,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n124/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n124/native.yaml",
+        "sha256": "c398f9797cbb450e117eed360a58cb300233647909617ab8389db4e72633fd67"
+      },
+      "fact": "facts/alg-n-124.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 125,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n125/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n125/native.yaml",
+        "sha256": "9b5fdd330d00dcfa4bed8c1b222f73e199c06436a3b0b5308097694374c63125"
+      },
+      "fact": "facts/alg-n-125.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 145,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n145/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n145/native.yaml",
+        "sha256": "9a27d200847d1a5fe19fe5d843f229e880a7b3707ae114d4ce3d666d9e060174"
+      },
+      "fact": "facts/alg-n-145.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 147,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n147/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n147/native.yaml",
+        "sha256": "2b0f35cba409a9cdbd607ba3c8f07f6b9ba1c619b2fb61349f545c9e520a3d0a"
+      },
+      "fact": "facts/alg-n-147.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 148,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n148/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n148/native.yaml",
+        "sha256": "2ad6848ec56bcfaf90faa4a4fb77e5bf04b0cb2cddde37e4ae97d42ba775860c"
+      },
+      "fact": "facts/alg-n-148.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 149,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n149/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n149/native.yaml",
+        "sha256": "28a15baef9aa000e57860e8a80b749a43dfb385db0bbb0b52bccc6b000958072"
+      },
+      "fact": "facts/alg-n-149.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 150,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n150/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n150/native.yaml",
+        "sha256": "6ed4222bf6f375a3bba703cae7fe39c72c7289d5a79f20f8f88827706fe46a6c"
+      },
+      "fact": "facts/alg-n-150.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 151,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n151/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n151/native.yaml",
+        "sha256": "97b6779671521e20cc5bb8eb33843ea020e3d93f04fd5be3696d425a32cce409"
+      },
+      "fact": "facts/alg-n-151.yaml",
+      "degree": 4,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 153,
+      "path": "pingyou-exact-153-302/n153/native/pingyou-n153-algebraic.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-exact-153-302-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-exact-153-302-2026-10-13-v1",
+        "asset": "pingyou-exact-153-302-2026-10-13.zip",
+        "member": "pingyou-exact-153-302/n153/native/pingyou-n153-algebraic.yaml",
+        "sha256": "1867a80b90d5bb50b45549cecece4a2dfe1dcd6f6da441952e0a118c9284b6c7"
+      },
+      "fact": "facts/alg-n-153.yaml",
+      "degree": 7,
+      "first_committed": "2026-10-13T00:29:11Z"
+    },
+    {
+      "n": 170,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n170/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n170/native.yaml",
+        "sha256": "971158369834723be5ed470d5405835a950368ecd9621997f77703caf92276e5"
+      },
+      "fact": "facts/alg-n-170.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 173,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n173/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n173/native.yaml",
+        "sha256": "6abd956cb254c5eb8866b6f390c97068ab4d295de7cfc45615b3be0a74694e17"
+      },
+      "fact": "facts/alg-n-173.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 174,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n174/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n174/native.yaml",
+        "sha256": "d4c8e0967e7a1b27b44f5660a3b620033f8bb9b017b1577a3346645663e08c38"
+      },
+      "fact": "facts/alg-n-174.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 178,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n178/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n178/native.yaml",
+        "sha256": "9298976ea4e385955648249f9c0f64a47cc4be0a7d78dc5ebdcc7e35b990a750"
+      },
+      "fact": "facts/alg-n-178.yaml",
+      "degree": 4,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 197,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n197/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n197/native.yaml",
+        "sha256": "7f0e40b8f3eafa39a276dbfd0dc61b57a04cfb4815d7fb16b28a3db9879b5833"
+      },
+      "fact": "facts/alg-n-197.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 200,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n200/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n200/native.yaml",
+        "sha256": "d40ce844f02b554c4795422744a27c87c444373385bc5c514bdb8c377faaaf70"
+      },
+      "fact": "facts/alg-n-200.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 201,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n201/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n201/native.yaml",
+        "sha256": "93277de943b0b737c8465debce1e86625804d888b00fe192438336e919d8ec8b"
+      },
+      "fact": "facts/alg-n-201.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 202,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n202/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n202/native.yaml",
+        "sha256": "5b90b82b9926b232c8db78d0db327aa62317b9f0c38fa1aecf5df3a022b8fe8e"
+      },
+      "fact": "facts/alg-n-202.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 203,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n203/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n203/native.yaml",
+        "sha256": "7d676438ad2aa9a1d9b6841011e9e14051c6e7fbe374435a043a1ae6f5ad8681"
+      },
+      "fact": "facts/alg-n-203.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 207,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n207/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n207/native.yaml",
+        "sha256": "65cd31bda6f422c6947f2648fc75fbfd251f4d4544f46060ecf27fb6d2d5919b"
+      },
+      "fact": "facts/alg-n-207.yaml",
+      "degree": 5,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 226,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n226/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n226/native.yaml",
+        "sha256": "a3635b1730d8281c0d2ee4592a2337ded1d73fc7dfd0de3a8e04de34ebcba64b"
+      },
+      "fact": "facts/alg-n-226.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 227,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n227/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n227/native.yaml",
+        "sha256": "c40eac6d15a51af1500ee982d39c7f4bdc7849ec8bf144895f6e93be99855f1d"
+      },
+      "fact": "facts/alg-n-227.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 229,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n229/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n229/native.yaml",
+        "sha256": "7224db5bd8ab23bc2e52e8ddf8c4c249620ffed2c27c7478846d7bda8195a736"
+      },
+      "fact": "facts/alg-n-229.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 231,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n231/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n231/native.yaml",
+        "sha256": "acbf3e4c5bbffff3e34f0f5b25ff8b1621328986ed5d719d54061b38291cf084"
+      },
+      "fact": "facts/alg-n-231.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 233,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n233/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n233/native.yaml",
+        "sha256": "fe460858c78551e0ff4be134ded3a6e02ffc01dfe6d618106f2c9278168a14fb"
+      },
+      "fact": "facts/alg-n-233.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 234,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n234/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n234/native.yaml",
+        "sha256": "c6271246915a785220dc5ea39c496e8e1c75ccc0f38c7aae0c1df8e462a65503"
+      },
+      "fact": "facts/alg-n-234.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 257,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n257/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n257/native.yaml",
+        "sha256": "801676b1f13108b71749a576096f639b863df7354b13dab86f2424564aa45cce"
+      },
+      "fact": "facts/alg-n-257.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 260,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n260/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n260/native.yaml",
+        "sha256": "e94cd48bcc556a07333dffa0c1dae4eedc9afe25cbf8d290ea5badc78491b0fc"
+      },
+      "fact": "facts/alg-n-260.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 262,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n262/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n262/native.yaml",
+        "sha256": "7819fb6cfdeaf4566ccd64b1caee7a398c85959607c705be677374ed4d8ab711"
+      },
+      "fact": "facts/alg-n-262.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 265,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n265/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n265/native.yaml",
+        "sha256": "4c0742998c6710ec1de25dc571b55afbb86fcba536eaf937204012492e46d388"
+      },
+      "fact": "facts/alg-n-265.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 290,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n290/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n290/native.yaml",
+        "sha256": "3b4051d109c6ea83548e7aa3045b40ca202703577639bdacc63562a0d5ad7da6"
+      },
+      "fact": "facts/alg-n-290.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 291,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n291/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n291/native.yaml",
+        "sha256": "a982bced7f06e311fbb2a2c5ad07a05e28bb81519307b446a4e8598e224f9001"
+      },
+      "fact": "facts/alg-n-291.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 294,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n294/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n294/native.yaml",
+        "sha256": "3e92797a83643c1848e25f1af4e3767d392218cfa560ea68460af177fbcce2af"
+      },
+      "fact": "facts/alg-n-294.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 296,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n296/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n296/native.yaml",
+        "sha256": "bf6ab147af0771c212131b460f651444c59376c5988fa2d601c18557b588775b"
+      },
+      "fact": "facts/alg-n-296.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 298,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n298/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n298/native.yaml",
+        "sha256": "7ca56a0fcdb045f113330848016930cca6d0c75d2e7f8b7a3e690f7511d37842"
+      },
+      "fact": "facts/alg-n-298.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 299,
+      "path": "pingyou-algebraic-refinements-2026-10-13/n299/native.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-algebraic-refinements-2026-10-13-v1",
+        "asset": "pingyou-algebraic-refinements-2026-10-13.zip",
+        "member": "pingyou-algebraic-refinements-2026-10-13/n299/native.yaml",
+        "sha256": "a4056d149ff984ef851dc961ffadf7cca9efc53fd576bff10323ce74d1e97715"
+      },
+      "fact": "facts/alg-n-299.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-13T01:58:06Z"
+    },
+    {
+      "n": 302,
+      "path": "pingyou-exact-153-302/n302/native/pingyou-n302-algebraic.yaml",
+      "archive": {
+        "manifest": "packing/hosted/pingyou-exact-153-302-2026-10-13.yaml",
+        "repository": "BuddenPing/square-packing-certificates",
+        "tag": "data/pingyou-exact-153-302-2026-10-13-v1",
+        "asset": "pingyou-exact-153-302-2026-10-13.zip",
+        "member": "pingyou-exact-153-302/n302/native/pingyou-n302-algebraic.yaml",
+        "sha256": "62d266786469b1a9f202a133430e6a1d86cf0822031844f8a384a11b9b0c9a45"
+      },
+      "fact": "facts/alg-n-302.yaml",
+      "degree": 3,
+      "first_committed": "2026-10-13T00:29:11Z"
+    }
+  ],
+  "replayed": [
+    70,
+    153,
+    207,
+    302
+  ],
+  "pending": [
+    {
+      "n": 51,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mishapolk (Mykhailo Polkovskyi)",
+      "printed": "7.6903559372884915",
+      "rounding": "binary64"
+    },
+    {
+      "n": 53,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "printed": "7.822875655532295295250807876819630217",
+      "rounding": "unstated"
+    },
+    {
+      "n": 54,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "printed": "7.846667192843489782943314590960000004",
+      "rounding": "unstated"
+    },
+    {
+      "n": 70,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mishapolk (Mykhailo Polkovskyi)",
+      "printed": "8.8809603715555792",
+      "rounding": "binary64"
+    },
+    {
+      "n": 70,
+      "report": "T-137 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "An exact rational refinement of Ryan Xu's packing of 70 squares",
+      "exact": "888096037156625096037155737/100000000000000000000000000"
+    },
+    {
+      "n": 70,
+      "report": "T-146 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact rational certificates at fifteen counts from Evan Daniel's regularized record lists",
+      "exact": "8880960371555579594785501178639/1000000000000000000000000000000"
+    },
+    {
+      "n": 101,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "42142135623730950488016887242097/4000000000000000000000000000000"
+    },
+    {
+      "n": 104,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "10707106781186547524507915429917/1000000000000000000000000000000"
+    },
+    {
+      "n": 107,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "10846667192843489783051781262887/1000000000000000000000000000000"
+    },
+    {
+      "n": 109,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "5474873734152916335457704004709/500000000000000000000000000000"
+    },
+    {
+      "n": 122,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "46142135623730950488016887242097/4000000000000000000000000000000"
+    },
+    {
+      "n": 124,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "291421356237309504880168872421/25000000000000000000000000000"
+    },
+    {
+      "n": 125,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "11707106781186547524517915429917/1000000000000000000000000000000"
+    },
+    {
+      "n": 145,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "50142135623730950488016887242097/4000000000000000000000000000000"
+    },
+    {
+      "n": 147,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "316421356237309504880168872421/25000000000000000000000000000"
+    },
+    {
+      "n": 148,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "316421356237309504880168872421/25000000000000000000000000000"
+    },
+    {
+      "n": 149,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "12707106781186547524527915429917/1000000000000000000000000000000"
+    },
+    {
+      "n": 151,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "102583005244258362363032293067/8000000000000000000000000000"
+    },
+    {
+      "n": 153,
+      "report": "#504 comment",
+      "url": "https://github.com/jlevy/squares/issues/504",
+      "holders": "PingYou Ltd (BuddenPing)",
+      "printed": "12.870013850408",
+      "rounding": "up"
+    },
+    {
+      "n": 153,
+      "report": "#573",
+      "url": "https://github.com/jlevy/squares/issues/573",
+      "holders": "Mishapolk (Mykhailo Polkovskyi)",
+      "printed": "12.870013850405",
+      "rounding": "up"
+    },
+    {
+      "n": 153,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mishapolk (Mykhailo Polkovskyi)",
+      "printed": "12.8700138504044794",
+      "rounding": "binary64"
+    },
+    {
+      "n": 153,
+      "report": "T-114 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "s(153) ≤ 7250614903299225/562949953421312, from a SQUISH rational packing",
+      "exact": "7250614903299225/562949953421312"
+    },
+    {
+      "n": 153,
+      "report": "T-136 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Seventeen exact rational packings from SQUISH's third request",
+      "exact": "123797999524180008078530976954463155877532124256188212074430292658566758958161323/9617597300166052747813209874613658336103061290746859396882208758750786210512186"
+    },
+    {
+      "n": 153,
+      "report": "T-146 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact rational certificates at fifteen counts from Evan Daniel's regularized record lists",
+      "exact": "402250932783786874180075932249/31250000000000000000000000000"
+    },
+    {
+      "n": 153,
+      "report": "T-148 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "A packing of 153 squares built from Ryan Xu's packing of 70, its contacts reclosed at a new angle",
+      "exact": "6435006925203522001385040447/500000000000000000000000000"
+    },
+    {
+      "n": 170,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "845970869120796101383723571849/62500000000000000000000000000"
+    },
+    {
+      "n": 173,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "341421356237309504880168872421/25000000000000000000000000000"
+    },
+    {
+      "n": 174,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "13707106781186547524537915429917/1000000000000000000000000000000"
+    },
+    {
+      "n": 178,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "printed": "13.84666719284348978294331459096",
+      "rounding": "unstated"
+    },
+    {
+      "n": 197,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "58142135623730950488016887242097/4000000000000000000000000000000"
+    },
+    {
+      "n": 200,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "366421356237309504880168872421/25000000000000000000000000000"
+    },
+    {
+      "n": 201,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "14707106781186547524547915429917/1000000000000000000000000000000"
+    },
+    {
+      "n": 202,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "14727922061357855439362477738501/1000000000000000000000000000000"
+    },
+    {
+      "n": 203,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "3694543648263005692139267432271/250000000000000000000000000000"
+    },
+    {
+      "n": 207,
+      "report": "#503 comment",
+      "url": "https://github.com/jlevy/squares/issues/503",
+      "holders": "PingYou Ltd (BuddenPing)",
+      "printed": "14.880960371559",
+      "rounding": "up"
+    },
+    {
+      "n": 207,
+      "report": "#573",
+      "url": "https://github.com/jlevy/squares/issues/573",
+      "holders": "Mishapolk (Mykhailo Polkovskyi)",
+      "printed": "14.880960371558",
+      "rounding": "up"
+    },
+    {
+      "n": 207,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mishapolk (Mykhailo Polkovskyi)",
+      "printed": "14.8809603715580003",
+      "rounding": "binary64"
+    },
+    {
+      "n": 207,
+      "report": "T-136 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Seventeen exact rational packings from SQUISH's third request",
+      "exact": "735531374822863515605402999283143325118010869312518967079087271050773613271161277/49412586952851805135714733794522095254473298746909591292001747563872946931057236"
+    },
+    {
+      "n": 207,
+      "report": "T-147 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "A packing of 207 squares from two placed patches of Ryan Xu's packing of 70",
+      "exact": "148809603730436756319360591381170501178639/10000000000000000000000000000000000000000"
+    },
+    {
+      "n": 226,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "62142135623730950488016887242097/4000000000000000000000000000000"
+    },
+    {
+      "n": 227,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "19463834764831844055010554526310613/1250000000000000000000000000000000"
+    },
+    {
+      "n": 229,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "391421356237309504880168872421/25000000000000000000000000000"
+    },
+    {
+      "n": 231,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "15707106781186547524557915429917/1000000000000000000000000000000"
+    },
+    {
+      "n": 233,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "3944543648263005692141767432271/250000000000000000000000000000"
+    },
+    {
+      "n": 234,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "126583005244258362363272293067/8000000000000000000000000000"
+    },
+    {
+      "n": 257,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "1033470869120796101385598571849/62500000000000000000000000000"
+    },
+    {
+      "n": 260,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "416421356237309504880168872421/25000000000000000000000000000"
+    },
+    {
+      "n": 262,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "16707106781186547524567915429917/1000000000000000000000000000000"
+    },
+    {
+      "n": 265,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "4194543648263005692144267432271/250000000000000000000000000000"
+    },
+    {
+      "n": 290,
+      "report": "T-156 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "s(290) ≤ 17.5355339059327376…, by monotonicity from T-155, with its own exact certificate",
+      "printed": "17.5355339059327376",
+      "rounding": "unstated"
+    },
+    {
+      "n": 291,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "70142135623730950488016887242097/4000000000000000000000000000000"
+    },
+    {
+      "n": 294,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "441421356237309504880168872421/25000000000000000000000000000"
+    },
+    {
+      "n": 296,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "17707106781186547524577915429917/1000000000000000000000000000000"
+    },
+    {
+      "n": 298,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "4444543648263005692146767432271/250000000000000000000000000000"
+    },
+    {
+      "n": 299,
+      "report": "T-155 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact regularized sides at 59 counts, 5.4e-20 to 9.9e-15 below the ceilings they replace",
+      "exact": "142583005244258362363432293067/8000000000000000000000000000"
+    },
+    {
+      "n": 302,
+      "report": "#564",
+      "url": "https://github.com/jlevy/squares/issues/564",
+      "holders": "PingYou Ltd (BuddenPing)",
+      "printed": "17.870275382734",
+      "rounding": "up"
+    },
+    {
+      "n": 302,
+      "report": "#583",
+      "url": "https://github.com/jlevy/squares/issues/583",
+      "holders": "Francisco Couzo",
+      "printed": "17.870013850405",
+      "rounding": "up"
+    },
+    {
+      "n": 302,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mishapolk (Mykhailo Polkovskyi)",
+      "printed": "17.8702753825550609",
+      "rounding": "binary64"
+    },
+    {
+      "n": 302,
+      "report": "T-136 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Seventeen exact rational packings from SQUISH's third request",
+      "exact": "820999445009309740922029456921019877028889439831661589361637087272075109744743203/45937671990376526418357407123080370268809104789707150587775569201223938448317194"
+    },
+    {
+      "n": 302,
+      "report": "T-138 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact witnesses at Mishapolk's printed ceilings, the smallest known at 103 and 258 when registered",
+      "exact": "17881306218091/1000000000000"
+    },
+    {
+      "n": 302,
+      "report": "T-146 (register)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Exact rational certificates at fifteen counts from Evan Daniel's regularized record lists",
+      "exact": "558500932783786874181638432249/31250000000000000000000000000"
+    }
+  ]
+}

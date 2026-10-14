@@ -1,0 +1,13 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/583",
+  "source": "https://github.com/franciscouzo/square-packing",
+  "revision": "45966700cf15d3f42e064fd6da51fcb9a5def2be",
+  "horizon": 324,
+  "results": [
+    {"n": 339, "offered_side": "18.927383638495", "exact_side": "4247372425158980137376328899/224403568199500000000000000", "ceiling": "18.9273836384944072"},
+    {"n": 379, "offered_side": "19.953531531603", "exact_side": "3990706306320510429876555652417/200000000000000000000000000000", "ceiling": "19.9535315316025522"},
+    {"n": 380, "offered_side": "19.973553606628", "exact_side": "71405320581108789876116351057/3574993313028500000000000000", "ceiling": "19.9735536066272759"},
+    {"n": 382, "offered_side": "19.988600568289", "exact_side": "94198950843216391147752843823/4712633609411500000000000000", "ceiling": "19.9886005682881175"}
+  ]
+}

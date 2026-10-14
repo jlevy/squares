@@ -1,0 +1,44 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/569",
+  "author": "PingYou Ltd",
+  "source_key": "[PingYou n272 refinement 2026-10-12]",
+  "report_evidence": "E-pingyou-569-certificate-report",
+  "receipt_format": "pingyou-569-exact-replay-v1",
+  "witness_prefix": "W-pingyou-569-n",
+  "claim_limitations": "Complete 260aaf5 rational centre/half-angle certificate converted exactly from a checkout at the pin whose bytes have the digests the packet records, and equal there to the source's own corners Witness/v2; no upstream byte is retained. Finite construction feasibility only; no local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "certificates": [
+    {"n": 272, "path": "n272.cert.json", "format": "pingyou-json", "offered": "1696558647483767063575600703342204556962987576825904423514291493830293022275118026464939778830359993334240647227/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "first_committed": "2026-10-12T22:57:18Z", "same_packing": [{"path": "pingyou-n272-rational.yaml", "format": "witness-corners"}], "fact": "facts/n-272.yaml"}
+  ],
+  "requested": [272],
+  "replayed": [272],
+  "houses": [
+    {"n": 272, "reader": "[SQUISH fourth request 2026-10-11]", "source_key": "[SQUISH fourth request 2026-10-11]", "holders": "Nate Chaoweeraprasit (itsnaka)", "result": "T-151", "reported_value": "16.9655864748376712", "verified_value": "16.9655864748376712", "evidence": ["E-squish-500-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 272, "report": "T-098 (#375)", "url": "https://github.com/jlevy/squares/issues/375", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reader": "[evand exact optima 2026-10-05]"},
+    {"n": 272, "report": "T-119 (#399)", "url": "https://github.com/jlevy/squares/issues/399", "holders": "Evan Daniel", "result": "T-119", "reader": "[Daniel new arrangements 2026-10-07]"},
+    {"n": 272, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 272, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd", "reader": "[PingYou PR 574 certificates 2026-10-13]"}
+  ],
+  "register": {
+    "title": "PingYou Ltd's n272 contact refinement at 260aaf5, issue569",
+    "headline": "An exact contact refinement of SQUISH's packing of 272 squares",
+    "significance": 1,
+    "source_checks": "The author reports that exact separating-axis and rational polygon-intersection implementations accept all 272 squares, 1,088 wall conditions and 36,856 pairs, for the new witness, the prior certificate and a pre-stationarity projection, with duplicate and outside controls refused and the conversion to its corners Witness/v2 lossless; and that this repository's sqpack exact_verify and check_rational_witness_independent, unchanged at 074ac28, accept that witness. Those statements are the author's; no source program ran here.",
+    "credit": "Credit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with this contact refinement, as the source asks, of Nate Chaoweeraprasit's SQUISH n272 (T-151, issue 500), whose components the source names as SQUISH's s(240) and the former Kingbird s(182) catalogue construction, with Evan Daniel's exact contact solver. The issue states: 'Computation, checking and submission preparation were AI-assisted; the requested attribution is as stated above.' The pinned source makes no statement about AI assistance.",
+    "next_rung": "Independently review the retained replay, then record source-specific adoption of the n272 side, 5.26e-16 below the ceiling T-151 holds and below every other report at 272 but the author's own PR #574, whose 40-place print does not separate it from this side. Final exact-head CI remains required.",
+    "bead": "think-0qvc",
+    "bibliography": {
+      "authors": [
+        "PingYou Ltd"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PingYou Ltd after Chaoweeraprasit, Daniel, Levy",
+      "short_credit": "PingYou Ltd after Chaoweeraprasit et al.",
+      "note": "One complete exact certificate at 260aaf50230483654802790589c2dfce73237604, a contact refinement of Chaoweeraprasit's SQUISH n272 with Daniel's exact solver. The source checks with Squares Project (Levy) verification code and supplies a corners Witness/v2. Derived exact facts only; no upstream byte is retained. No local or global optimality claim."
+    }
+  }
+}

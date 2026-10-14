@@ -107,10 +107,17 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        950_000,
+        1_100_000,
         (
-            "The complete registered-result table with prepared math measures 843,037 bytes "
-            "at 146 results."
+            "The complete registered-result table with prepared math measures 976,783 bytes "
+            "at 184 results, about 3.5 kB a row; it measured 843,037 at 146."
+        ),
+    ),
+    "result/t-180.html": (
+        400_000,
+        (
+            "The closed form's result, its scope of 264 counts and prepared math measure "
+            "341,524 bytes."
         ),
     ),
     "tutorial-advanced.html": (

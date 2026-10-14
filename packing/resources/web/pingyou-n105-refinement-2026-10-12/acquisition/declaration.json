@@ -1,0 +1,59 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "buddenping-square-packing-certificates",
+  "source_url": "https://github.com/BuddenPing/square-packing-certificates",
+  "source_ref": "main",
+  "source_commit": "260aaf50230483654802790589c2dfce73237604",
+  "retrieved_at_utc": "2026-10-14T04:47Z",
+  "git_scope": "Full clone of the sixteen-commit repository, head 318ab94 at retrieval, checked out at the pin issue #568 names. The scope is the seven n105 files, which 21498b1 first published and of which the pin changed only the package and its digest list, and witness.schema.yaml, which the release's digest list names; the pin's n272 files belong to the n272 packet, which pins the same commit. Every file in the scope has the same blob at the head 318ab94. Under derived-only custody none is copied. No source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence file in the pinned tree, and GitHub detects none. The release READMEs say that upstream software and schema licences are retained beside the files they cover and that no new licence is asserted for third-party material; nothing grants one for the source's own files. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source asks that PingYou Ltd be credited with this contact refinement, Ryan Xu with the original layout, Francisco Couzo with the preceding refinement, and Evan Daniel with the contact solver.",
+  "claims": [
+    "Issue #568 reports the exact rational certificate s(105) <= 10789303783748158830926836660039617659736218711424421332884365754662904597598593330008796151/10^90 (rounded up, 10.7893037837481588309268366600396176597363): Evan Daniel's exact solver at 77f3c0a, seeded with Francisco Couzo's guarded n105 certificate at 93570ef, projecting onto its 435 inherited corner, edge and wall equations and closing them with 32 translation coordinates frozen, at 140 digits with a 1e-80 rational guard. The author compares it with that source certificate, 10.789303783748158831034729697921, and with the interval its unpadded design must lie in, below which it lies by more than 4.29007519545e-29.",
+    "The source reports that exact separating-axis and rational polygon-intersection implementations accept all 105 squares, 420 wall conditions and 5,460 pairs, and that this repository's sqpack exact_verify and check_rational_witness_independent at 074ac28 accept its native Witness/v2. These are author reports; no stationarity, local or global optimality is claimed."
+  ],
+  "scope": [
+    "n105-README.txt",
+    "n105-SHA256SUMS",
+    "n105-native-replay.json",
+    "n105-squares-project.zip",
+    "n105-verification.json",
+    "n105.cert.json",
+    "pingyou-n105-rational.yaml",
+    "witness.schema.yaml"
+  ],
+  "pinned_only": [
+    {
+      "match": "n105.cert.json",
+      "reason": "The exact rational certificate: n, s_exact and 105 [x, y, t] rows of rational strings, centres in [0, S]^2 and t = tan(theta/2). No licence, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+    },
+    {
+      "match": "pingyou-n105-rational.yaml",
+      "reason": "The source's rational corners Witness/v2 of the same packing, in JSON syntax. No licence: pinned by digest only; derive reads it from the same checkout and holds it to the certificate's poses and side."
+    },
+    {
+      "match": "n105-squares-project.zip",
+      "reason": "The source's complete package of 49 files: the certificate and witness again, the method and provenance, the source certificate and Evan Daniel's solver with its licence, the 140-digit report and equations, exact checkers, receipts, and the sources and licences of this repository's two checkers at 074ac28. No licence for the source's own files: pinned by digest only; no program in it was executed."
+    },
+    {
+      "match": "n105-README.txt",
+      "reason": "Author prose stating the claim, the method, the credit and the replay commands, quoted in this packet's README. No licence: pinned by digest only."
+    },
+    {
+      "match": "n105-SHA256SUMS",
+      "reason": "The source's digest list for the n105 release files, each equal to the digest this manifest records. Pinned by digest only."
+    },
+    {
+      "match": "n105-native-replay.json",
+      "reason": "The author's receipt of this repository's two exact checkers run on the release's witness at 074ac28, an author report. Pinned by digest only."
+    },
+    {
+      "match": "n105-verification.json",
+      "reason": "The author's receipt of its own exact checks, an author report. Pinned by digest only."
+    },
+    {
+      "match": "witness.schema.yaml",
+      "reason": "This repository's witness schema as the source copied it; the release's digest list names it. Pinned by digest only."
+    }
+  ]
+}

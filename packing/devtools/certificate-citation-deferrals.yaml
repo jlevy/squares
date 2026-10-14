@@ -8,4 +8,14 @@
 # its evidence (remove it in that change), a named entry stops citing it, or it is more
 # than 30 days older than the evidence register's `last_reviewed`, so the list cannot
 # outlive what it defers.
-deferrals: []
+deferrals:
+  - evidence: E-wand125-closed-form-cfcheck-sample
+    results: [T-180]
+    bead: think-3n1x
+    blocked_on: think-tsox
+    recorded: '2026-10-14'
+    reason: >-
+      cfcheck's sample replay decides 2,909 leaves of the closed form's intervals 1 and 34
+      and no count: a sample sets no rung, and the 33 counts those intervals carry are
+      proved by T-064, T-084 and T-086, whose case records the generator drafts. A case
+      record cites it once a complete replay moves the closed form's verified lane.

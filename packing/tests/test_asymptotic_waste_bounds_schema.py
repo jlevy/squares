@@ -39,7 +39,8 @@ def test_the_register_holds_both_kinds(
 ) -> None:
     assert _errors(validator, register) == []
     exponents = [row.get("exponent") for row in register["deficiency_upper_bounds"]]
-    assert exponents == [0.5, 0.4, 0.375, 0.375]
+    # Kevin Fang's linear k - 1 - F(k) (T-163) leads; Ryu's rows follow.
+    assert exponents == [1, 0.5, 0.4, 0.375, 0.375]
     assert all(
         row["bound"].startswith("REPORTED:") for row in register["deficiency_upper_bounds"]
     )

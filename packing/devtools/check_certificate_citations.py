@@ -44,6 +44,7 @@ import re
 from collections.abc import Mapping, Sequence
 from datetime import date
 from pathlib import Path
+from typing import Any
 
 from sqpack.yamlio import safe_load
 
@@ -138,6 +139,49 @@ def method_limit_evidence(evidence_by_id: Mapping[str, Mapping[str, object]]) ->
     }
 
 
+#: The largest count with a case record (`devtools.upper_bound_reports.HORIZON`). Past
+#: it a report is a beyond-horizon row of the source register, never a case.
+HORIZON = 324
+
+
+def beyond_horizon_evidence(
+    evidence_by_id: Mapping[str, Mapping[str, object]],
+    coverage: Mapping[str, Any] | None = None,
+) -> set[str]:
+    """Evidence wholly beyond the case corpus that the source register cites.
+
+    No case record exists past `HORIZON`, so a certificate whose counts all lie past it
+    has no case to cite it. Its citing record is the source register: a source lists the
+    evidence, and a beyond-horizon row of that source stands at every count the evidence
+    covers. Evidence with any count inside the horizon is left to its case records, so the
+    exception cannot hide a bound a case should carry. `coverage` is the source register,
+    read from `frontier/source-coverage.yaml` when not given.
+    """
+    register: Mapping[str, Any] = (
+        coverage
+        if coverage is not None
+        else safe_load((FRONTIER / "source-coverage.yaml").read_text(encoding="utf-8"))
+    )
+    listing: dict[str, set[str]] = {}
+    for source in register.get("sources") or []:
+        for identifier in source.get("evidence") or []:
+            listing.setdefault(str(identifier), set()).add(str(source["id"]))
+    rows = {
+        (row["n"], str(row["source_id"])) for row in register.get("beyond_horizon_claims") or []
+    }
+    found: set[str] = set()
+    for identifier, sources in listing.items():
+        scope = (evidence_by_id.get(identifier) or {}).get("scope") or {}
+        counts = list(scope.get("n_values") or []) if isinstance(scope, Mapping) else []
+        if (
+            counts
+            and min(counts) > HORIZON
+            and all(any((n, source) in rows for source in sources) for n in counts)
+        ):
+            found.add(identifier)
+    return found
+
+
 def orphaned_evidence(evidence_by_id: dict[str, dict]) -> list[str]:
     """Verified, replayable evidence that no frontier record cites.
 
@@ -155,12 +199,17 @@ def orphaned_evidence(evidence_by_id: dict[str, dict]) -> list[str]:
     method can reach across many cases, and a case record has no block for that. Its
     citing record is the method-limit result in the register (T-058's exact ceilings).
     Evidence that claims a bound still needs a case to cite it (`method_limit_evidence`).
+
+    A certificate wholly past the case corpus is the other: no case record can exist for
+    it, and its citing record is the source register's row at each of its counts
+    (`beyond_horizon_evidence`).
     """
     cited: set[str] = set()
     for path in sorted(FRONTIER.glob("n-*.md")):
         case = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
         cited |= referenced_evidence(case["packing"])
     cited |= method_limit_evidence(evidence_by_id)
+    cited |= beyond_horizon_evidence(evidence_by_id)
 
     return sorted(
         identifier

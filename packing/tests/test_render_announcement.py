@@ -576,13 +576,14 @@ def test_all_keeps_a_long_since_clause_postable(capsys: pytest.CaptureFixture[st
 def test_a_line_about_a_few_counts_prints_each_bound_where_the_line_stays_brief(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    """T-149's three bounds fit; T-151's seven counts do not and stay elided (review A,
-    A8)."""
-    lines, _ = run(capsys, ["--ids", "T-149", "T-151", "--date", "2026-10-12"])
-    assert lines[1].startswith(
-        "s(155) ≤ 12.95243, s(156) ≤ 12.97918, s(211) ≤ 14.99634, new best known (verified): "
+    """T-162's three bounds fit; T-151's five counts do not and stay elided (review A,
+    A8). T-149's three were the example until the intake of 14 October left it the best
+    known at 155 alone."""
+    lines, _ = run(capsys, ["--ids", "T-151", "T-162", "--date", "2026-10-14"])
+    assert lines[2].startswith(
+        "s(129) ≤ 11.87002, s(204) ≤ 14.80867, s(303) ≤ 17.90996, new best known (reported): "
     )
-    assert lines[2].startswith("s(n) ≤ … at 7 counts, n = 176\u2013272, new best known ")
+    assert lines[1].startswith("s(n) ≤ … at n = 181, 238, 239, 270, 272, new best known ")
     record = {"id": "T-900", "headline": "s(n) ≤ 10", "claim": ""}
     group = [ra.Count(n, UPPER, exact(f"{n}.5")) for n in (10, 11)]
     assert ra.statement(record, group) == "s(10) ≤ 10.5, s(11) ≤ 11.5"
@@ -640,9 +641,10 @@ def test_a_refinement_of_a_requests_packings_credits_the_entry_its_claim_names(
 ) -> None:
     """T-152 refines "SQUISH's Mondrian packings", which its claim names as T-151's, Nate
     Chaoweeraprasit's; the line credits him, since T-151's own line no longer names 304 or
-    305 (review B, B1)."""
+    305 (review B, B1). Since the intake of 14 October T-152 is the best known at 305
+    alone, so the packing is singular."""
     lines, err = run(capsys, ["--ids", "T-152", "--date", "2026-10-12"])
-    assert ": Francisco Couzo, refining Nate Chaoweeraprasit's packings " in lines[1]
+    assert ": Francisco Couzo, refining Nate Chaoweeraprasit's packing " in lines[1]
     assert "Chaoweeraprasit" in err.split("printed by name: ", 1)[1]
     refinement = ra.refined(records.results["T-152"], records)
     assert refinement is not None

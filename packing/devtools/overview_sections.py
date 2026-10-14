@@ -1869,6 +1869,22 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/BuddenPing/squares",
+        "PingYou Ltd",
+        (
+            "Pull request #574's tighter certificates of others' packings, recorded at 68"
+            " counts and replayed at every one of them here (T-174)."
+        ),
+    ),
+    (
+        "https://github.com/bengreff/s76-certificate",
+        "Benjamin Greff",
+        (
+            "A mixed cover of points and grid-line segments for s(76) = 9, with the run"
+            " records of both checkers; reported, its census replayed in triage (T-184)."
+        ),
+    ),
+    (
         "https://github.com/RobertBarnettProjects/square-packing-research",
         "Robert Barnett",
         (

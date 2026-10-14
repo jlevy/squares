@@ -13,7 +13,10 @@ declaration ``devtools.acquire_source`` writes the packet from:
   packet's own acquisition record, so its bytes have the digests the packet pins. The
   fact names those digests, and ``read_facts`` holds it to its own rebuild. A pinned file
   the row names as stating the same packing, such as the source's own Witness/v2, is
-  compared with the certificate by ``derive``, from the same checkout;
+  compared with the certificate by ``derive``, from the same checkout. Where the source
+  keeps its geometry in release assets and pins them by digest in a manifest of its tree,
+  as PR #574 does, a row names the asset member (`ArchiveMember`), and ``derive`` reads it
+  from a local copy of the asset that has the manifest's size and digest;
 - **format.** Each certificate is read by the adapter its row names (`ADAPTERS`) into the
   kernel's exact centre/half-angle certificate, with centres in ``[0, S]^2``;
 - **admission.** A certificate is admitted only where its exact side equals, or rounds up
@@ -44,7 +47,8 @@ no KKT, local-minimum, rigidity, novelty or optimality statement is replayed her
 
 From ``packing/``, with the project interpreter::
 
-    python -m devtools.upper_bound_reports PACKET derive --checkout CHECKOUT [--check]
+    python -m devtools.upper_bound_reports PACKET derive --checkout CHECKOUT [--check] \\
+        [--assets DIR]
     python -m devtools.upper_bound_reports PACKET check-claims [--write]
     python -m devtools.upper_bound_reports PACKET certify --jobs-dir SCRATCH/jobs --workers 2
     python -m devtools.upper_bound_reports PACKET check [--n N ...] [--replay]
@@ -65,6 +69,8 @@ from __future__ import annotations
 
 import argparse
 import functools
+import hashlib
+import io
 import json
 import math
 import re
@@ -72,7 +78,9 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from collections.abc import Callable, Mapping
+import zipfile
+import zlib
+from collections.abc import Callable, Collection, Mapping
 from concurrent.futures import ThreadPoolExecutor
 from decimal import Decimal
 from fractions import Fraction
@@ -94,6 +102,7 @@ from devtools import evand_exact_certificates as legacy
 from devtools import evand_hunt_reports as evand_hunt
 from devtools import gupta_refinement_reports as gupta
 from devtools import refinement_packets as rehwaldt
+from devtools import register_regularized_bounds as regularized
 from devtools import ryxu_arrangement_reports as ryxu
 from devtools import squish_followup_packets as squish_update
 from devtools import squish_second_update_packets as squish_second
@@ -138,10 +147,23 @@ JOBS = kernel.JOBS
 ROUTES = kernel.ROUTES
 JOB_TIMEOUT = kernel.JOB_TIMEOUT
 MAX_WORKERS = 2
-MAX_SOURCE_BYTES = 1_000_000
-MAX_LITERAL_CHARS = 1024
-#: How a printed side was rounded: up, as the report states, or not stated.
-ROUNDINGS = ("up", "unstated")
+#: The largest file an adapter reads. #567's n261 release pins a 1,076,936-byte certificate
+#: and a 4,842,525-byte corners witness of the same packing.
+MAX_SOURCE_BYTES = 6_000_000
+#: The longest rational literal an adapter reads, the longest a receipt row may state:
+#: that witness has corner literals of 2,522 characters, and PR #574's n146 witness has
+#: rotation literals of 6,023 characters.
+MAX_LITERAL_CHARS = kernel.MAX_RATIONAL_CHARS
+#: The longest integer part a literal may have: Python's default limit on converting
+#: between integers and decimal strings, which every writer downstream shares (the
+#: kernel's `to_witness` and `_rational`, and any printed side), so a literal past it is
+#: refused when it is read rather than failing where it is written. The longest integer
+#: part any retained packet states, in PR #574's n146 receipt, has 3,011 digits.
+MAX_INTEGER_DIGITS = kernel.MAX_INTEGER_DIGITS
+#: How a printed side was rounded: up, as the report states; not stated; or ``binary64``,
+#: a decimal rendering of the IEEE double nearest the side, as #593 prints its sides at 16
+#: places, whose last places a double of that size does not determine (`printed_span`).
+ROUNDINGS = ("up", "unstated", "binary64")
 THIS = "this certificate"
 _PRINTED = re.compile(r"[0-9]+\.[0-9]+")
 _FRACTION = re.compile(r"[1-9][0-9]*/[1-9][0-9]*")
@@ -166,17 +188,41 @@ class Option(TypedDict):
     value: str
 
 
+class ArchiveMember(TypedDict):
+    """A file inside a release asset that a pinned manifest binds, not a file of the tree.
+
+    PR #574 keeps its geometry outside Git: its pinned commit adds HostedData manifests
+    (``packing.squares:HostedData/v1``) that name each release asset of the source's
+    repository by size and SHA-256, and the certificates are members of those zip assets.
+
+    - ``manifest``: the pinned upstream path of the HostedData manifest.
+    - ``repository``, ``tag``: the release the manifest names, which it must state.
+    - ``asset``: the asset's file name, one of the manifest's ``objects``.
+    - ``member``: the file's path inside the zip asset.
+    - ``sha256``: the member's SHA-256, which a derived fact names as its digest.
+    """
+
+    manifest: str
+    repository: str
+    tag: str
+    asset: str
+    member: str
+    sha256: str
+
+
 class SamePacking(TypedDict):
     """Another file of the same count, which must state the identical packing.
 
     Beside a retained certificate it is a retained file, compared whenever the
     certificate is read. Beside a derived fact it is a file the packet pins and does not
     retain, so ``derive`` compares it, from the same checkout, when it writes or checks
-    the fact.
+    the fact. Beside a fact read from a release asset it may be another asset's member
+    (``archive``), compared by ``derive`` from the same assets directory.
     """
 
     path: str
     format: str
+    archive: NotRequired[ArchiveMember]
 
 
 class CertificateRow(TypedDict):
@@ -194,6 +240,9 @@ class CertificateRow(TypedDict):
     - ``same_packing`` (optional): other retained files that state the same packing.
     - ``fact`` (optional): the packet-relative derived fact, ``facts/n-NNN.yaml``, read in
       place of ``path`` where no upstream byte is retained (``derive``).
+    - ``archive`` (optional, with ``fact``): where ``path`` is a member of a release asset
+      that a pinned manifest binds rather than a file of the pinned tree (`ArchiveMember`);
+      ``path`` is then the member's path.
     """
 
     n: int
@@ -205,6 +254,7 @@ class CertificateRow(TypedDict):
     options: NotRequired[list[Option]]
     same_packing: NotRequired[list[SamePacking]]
     fact: NotRequired[str]
+    archive: NotRequired[ArchiveMember]
 
 
 class House(TypedDict):
@@ -319,6 +369,37 @@ def _profile(declaration: Declaration) -> dict[str, str]:
     }
 
 
+_ASSET = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+_REPOSITORY = re.compile(r"[A-Za-z0-9][A-Za-z0-9-]*/[A-Za-z0-9._-]+")
+_TAG = re.compile(r"[A-Za-z0-9][A-Za-z0-9._/-]*")
+_SHA256 = re.compile(r"[0-9a-f]{64}")
+
+
+def _plain_path(path: str) -> bool:
+    relative = PurePosixPath(path)
+    return (
+        bool(path)
+        and not relative.is_absolute()
+        and ".." not in relative.parts
+        and relative.as_posix() == path
+    )
+
+
+def archive_spec(spec: ArchiveMember, path: str, where: str) -> None:
+    """Refuse a release-asset member that is not named plainly and bound by a digest."""
+    _require(spec["member"] == path, f"{where}: the row's path is not its asset member")
+    _require(
+        _plain_path(spec["member"])
+        and _plain_path(spec["manifest"])
+        and _ASSET.fullmatch(spec["asset"])
+        and _REPOSITORY.fullmatch(spec["repository"])
+        and _TAG.fullmatch(spec["tag"])
+        and ".." not in spec["tag"]
+        and _SHA256.fullmatch(spec["sha256"]),
+        f"{where}: a release-asset member names its manifest, release, asset, path and digest",
+    )
+
+
 def load_declaration(packet: Path) -> Declaration:
     """The packet's import declaration, refused unless every part of it is well formed."""
     ensure_private(packet / DECLARATION)
@@ -357,9 +438,15 @@ def load_declaration(packet: Path) -> Declaration:
                 fact.parent.as_posix() == FACTS and fact.name == f"n-{row['n']:03d}.yaml",
                 f"n={row['n']}: a derived fact is facts/n-NNN.yaml",
             )
+        if "archive" in row:
+            _require("fact" in row, f"n={row['n']}: a release-asset certificate is a fact")
+            archive_spec(row["archive"], row["path"], f"n={row['n']}")
         _require(_UTC.fullmatch(row["first_committed"]), f"n={row['n']}: first_committed")
         for other in row.get("same_packing", []):
             _require(other["format"] in ADAPTERS, f"n={row['n']}: unknown format")
+            if "archive" in other:
+                _require("archive" in row, f"n={row['n']}: an asset member beside a tree file")
+                archive_spec(other["archive"], other["path"], f"n={row['n']} same packing")
     _require(
         [house["n"] for house in declaration["houses"]] == [n for n in counts if n <= HORIZON],
         "the houses must be exactly the in-horizon counts, in order",
@@ -430,6 +517,10 @@ def _literal(value: object, where: str) -> Fraction:
         or _LITERAL.fullmatch(value) is None
     ):
         raise ReportError(f"{where}: not a bounded rational string")
+    _require(
+        kernel.integer_parts_bounded(value),
+        f"{where}: an integer part longer than {MAX_INTEGER_DIGITS} digits",
+    )
     return Fraction(value)
 
 
@@ -499,11 +590,19 @@ PINGYOU_METADATA: dict[str, tuple[type, ...]] = {
     "dilation_exact": (str,),
     "raw_side": (int, float),
     "provenance": (dict,),
+    # PR #574's construction records at n = 50, 171 and 230: the source's account of how
+    # the poses were made, which the exact routes do not read.
+    "construction": (str,),
+    "source_ids": (list,),
+    "rules": (list,),
+    "reflection_center": (list,),
+    "boundary_word": (dict,),
+    "registration": (list,),
 }
 
 
 def pingyou_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
-    """PingYou Ltd's JSON (#503, #504): ``s_exact`` and ``[x, y, t]`` squares in [0, S]^2.
+    """PingYou Ltd's JSON (#503, #504, #564, #566-#569): ``s_exact`` and ``[x, y, t]`` squares.
 
     The rows are SQUISH's. ``note``, ``dilation_exact``, ``raw_side`` and ``provenance``
     are the source's prose, its guard dilation, its undilated floating-point side and its
@@ -589,6 +688,58 @@ def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Ce
             pose_corners(pose) == corners,
             f"{where}: the corners are not a unit square's in the order pose_corners writes",
         )
+        rows.append((pose.x, pose.y, pose.t))
+    return _certificate(n, _literal(witness["side"], f"n={n} side"), rows)
+
+
+def witness_center_basis(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """A rational ``center-basis`` Witness/v2 (PR #574's n146 and n261), read exactly.
+
+    The document is held to this repository's witness schema and semantic checks whatever
+    schema path it names, since a packet's upstream file is read where it was found and
+    the path it names is the source's. It must state ``n`` unit squares with distinct ids
+    in the lower-left frame. Each pose is the centre and ``t = s / (1 + c)`` from the basis
+    ``(c, s)``, and the basis must be exactly the rotation that ``t`` gives, which holds only
+    where ``c^2 + s^2 = 1``.
+    """
+    _no_options(options, "witness-center-basis")
+    try:
+        document = load_yaml(_text(raw))
+    except yaml.YAMLError as error:
+        raise ReportError(f"n={n}: invalid witness YAML: {error}") from error
+    metadata = document.get("softschema") if type(document) is dict else None
+    _require(type(metadata) is dict, f"n={n}: not a witness document")
+    fields = cast("dict[str, Any]", document)
+    try:
+        witness = validate_witness_document(
+            {
+                **fields,
+                "softschema": {**cast("dict[str, Any]", metadata), "schema": CORNER_SCHEMA},
+            },
+            path=WITNESS_SCHEMA,
+            fallback_schema=WITNESS_SCHEMA,
+        )
+    except WitnessError as error:
+        raise ReportError(f"n={n}: not a valid witness: {error}") from error
+    _require(
+        witness["n"] == n
+        and witness["representation"] == "center-basis"
+        and witness["scalar"] == {"kind": "rational"}
+        and witness["square_size"] == "1"
+        and witness["coordinates"] == CORNER_FRAME,
+        f"n={n}: not a rational centre-basis witness of {n} unit squares in the lower-left "
+        "frame",
+    )
+    ids = [square["id"] for square in witness["squares"]]
+    _require(len(ids) == len(set(ids)) == n, f"n={n}: square ids are not {n} distinct ids")
+    rows = []
+    for index, square in enumerate(witness["squares"], start=1):
+        where = f"n={n} square {index}"
+        x, y = (_literal(value, where) for value in square["center"])
+        c, s = (_literal(value, where) for value in square["basis"])
+        _require(c != -1, f"{where}: no finite half-angle")
+        pose = legacy.Pose(x, y, s / (1 + c))
+        _require(pose.basis == (c, s), f"{where}: the basis is no rotation")
         rows.append((pose.x, pose.y, pose.t))
     return _certificate(n, _literal(witness["side"], f"n={n} side"), rows)
 
@@ -747,7 +898,9 @@ def _dilation_options(options: Mapping[str, str]) -> tuple[Fraction, int]:
     )
     value, places = options[DILATION], options[HALF_ANGLE_PLACES]
     _require(
-        len(value) <= MAX_LITERAL_CHARS and _POSITIVE.fullmatch(value),
+        len(value) <= MAX_LITERAL_CHARS
+        and _POSITIVE.fullmatch(value)
+        and kernel.integer_parts_bounded(value),
         f"{DILATION} is no positive integer or p/q: {value[:80]!r}",
     )
     dilation = Fraction(value)
@@ -864,6 +1017,7 @@ ADAPTERS: dict[str, Adapter] = {
     "squish-json": squish_json,
     "pingyou-json": pingyou_json,
     "witness-corners": witness_corners,
+    "witness-center-basis": witness_center_basis,
     "centred-json": centred_json,
     "decimal-dilation": decimal_dilation,
     "sqcert": sqcert,
@@ -934,20 +1088,34 @@ def fact_witness(
     """A derived fact: the positive job's deciding witness, with the pinned file it is from.
 
     ``revision_sha256`` is the digest the packet's acquisition record pins for the file,
-    which is not retained; ``derive`` writes the fact only from bytes that have it.
+    which is not retained; ``derive`` writes the fact only from bytes that have it. For a
+    member of a release asset it is the member's own digest, the file the manifest pinned
+    at ``revision`` binds through the asset's, and the address is the asset's, with the
+    member as its fragment.
     """
     record = _record(packet)
     source = record["sources"][0]
     pinned = {item["path"]: item for item in source["pinned_only"]}
-    _require(row["path"] in pinned, f"n={row['n']}: a fact for a file the packet does not pin")
+    archive = row.get("archive")
+    bound = row["path"] if archive is None else archive["manifest"]
+    _require(bound in pinned, f"n={row['n']}: a fact for a file the packet does not pin")
     witness = kernel.to_witness(certificate, **_profile(declaration))
+    if archive is None:
+        url = f"{source['source_url']}/blob/{source['source_commit']}/{row['path']}"
+        digest = pinned[row["path"]]["sha256"]
+    else:
+        url = (
+            f"https://github.com/{archive['repository']}/releases/download/{archive['tag']}/"
+            f"{archive['asset']}#{archive['member']}"
+        )
+        digest = archive["sha256"]
     witness["source"] = {
         "key": declaration["source_key"],
         "path": (packet / acquire_source.RECORD).relative_to(REPO).as_posix(),
-        "url": f"{source['source_url']}/blob/{source['source_commit']}/{row['path']}",
+        "url": url,
         "retrieved": record["retrieved_at_utc"][:10],
         "revision": source["source_commit"],
-        "revision_sha256": pinned[row["path"]]["sha256"],
+        "revision_sha256": digest,
     }
     return witness
 
@@ -1003,14 +1171,22 @@ def read_fact(
     return certificate
 
 
-def read_facts(packet: Path) -> dict[int, legacy.Certificate]:
-    """Admit every declared certificate once the packet's custody check passes."""
+def read_facts(
+    packet: Path, numbers: Collection[int] | None = None
+) -> dict[int, legacy.Certificate]:
+    """Admit every declared certificate once the packet's custody check passes.
+
+    With ``numbers``, only those counts' certificates are read: a deciding child needs its
+    own, and PR #574's 85 facts take longer to admit than most of its jobs take to decide.
+    """
     ensure_private(packet)
     declaration = load_declaration(packet)
     source = REPO / acquisition(packet)["archived_path"]
     certificates = {}
     for row in declaration["certificates"]:
         n = row["n"]
+        if numbers is not None and n not in numbers:
+            continue
         if "fact" in row:
             certificate = read_fact(packet, declaration, row)
         else:
@@ -1049,9 +1225,15 @@ def _import_sides(packet: Path) -> dict[int, Fraction]:
     return {n: certificate.side for n, certificate in read_facts(packet).items()}
 
 
+def import_side(name: str, n: int) -> Fraction:
+    """One exact side of the import packet named ``name``, its directory name."""
+    return _import_sides(packet_path(name))[n]
+
+
 def _import(name: str) -> Callable[[int], Fraction]:
-    """The reader of one import packet's exact sides, by the packet's directory name."""
-    return lambda n: _import_sides(packet_path(name))[n]
+    """The reader of one import packet's exact sides, by the packet's directory name; the
+    packet is the reader's ``args[0]``."""
+    return functools.partial(import_side, name)
 
 
 def _evand_optima(n: int) -> Fraction:
@@ -1096,13 +1278,32 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Barnett refinements 2026-10-11]": _import("barnett-refinements-2026-10-11"),
     "[SQUISH fourth request 2026-10-11]": _import("squish-500-fourth-request-2026-10-11"),
     "[Couzo certificates 2026-10-11]": _import("couzo-certificates-2026-10-11"),
-    "[Ostashev records 2026-10-12]": _import("dostashev-records-2026-10-12"),
-    "[Calle n102 2026-10-12]": _import("riocalle-n102-2026-10-12"),
-    "[Daniel n154 2026-10-12]": _import("evand-n154-2026-10-12"),
+    "[PingYou n302 certificate 2026-10-12]": _import("pingyou-n302-certificate-2026-10-12"),
+    "[PingYou n153 refinement 2026-10-12]": _import("pingyou-n153-refinement-2026-10-12"),
+    "[PingYou n207 refinement 2026-10-12]": _import("pingyou-n207-refinement-2026-10-12"),
+    "[PingYou n146 refinement 2026-10-12]": _import("pingyou-n146-refinement-2026-10-12"),
+    "[PingYou n261 refinement 2026-10-12]": _import("pingyou-n261-refinement-2026-10-12"),
+    "[PingYou n105 refinement 2026-10-12]": _import("pingyou-n105-refinement-2026-10-12"),
+    "[PingYou n272 refinement 2026-10-12]": _import("pingyou-n272-refinement-2026-10-12"),
+    "[Couzo certificates 2026-10-12]": _import("couzo-certificates-2026-10-12"),
+    "[Couzo certificates 2026-10-13]": _import("couzo-certificates-2026-10-13"),
+    "[Mishapolk exact certificates 2026-10-12]": _import(
+        "mishapolk-exact-certificates-2026-10-12"
+    ),
+    "[Mishapolk records 2026-10-14]": _import("mishapolk-records-2026-10-14"),
     "[Ostashev compositions 2026-10-12]": _import("dostashev-compositions-2026-10-12"),
     "[Ostashev merged bands 2026-10-13]": _import("dostashev-merged-bands-2026-10-13"),
     "[Daniel compositions 2026-10-13]": _import("evand-compositions-2026-10-13"),
     "[Daniel fresh compositions 2026-10-14]": _import("evand-fresh-compositions-2026-10-14"),
+    "[Ostashev records 2026-10-12]": _import("dostashev-records-2026-10-12"),
+    "[Calle n102 2026-10-12]": _import("riocalle-n102-2026-10-12"),
+    "[Daniel n154 2026-10-12]": _import("evand-n154-2026-10-12"),
+    "[Couzo issue-583 certificates 2026-10-13]": _import("couzo-issue583-2026-10-13"),
+    "[PingYou PR 574 certificates 2026-10-13]": _import(
+        "pingyou-pr574-certificates-2026-10-13"
+    ),
+    # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
+    "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
 
 
@@ -1133,13 +1334,20 @@ def exact_span(value: Fraction) -> Span:
 def printed_span(printed: str, rounding: str) -> Span:
     """A side printed rounded up lies in ``(p - u, p]``, otherwise within ``u`` of ``p``.
 
-    ``u`` is one unit in the last printed place.
+    ``u`` is one unit in the last printed place. A ``binary64`` print renders the double
+    nearest the side, which is within half an ulp of the side, to within half a unit of
+    that double; the side then lies within one ulp of the double ``p`` reads as, plus
+    ``u``. Read as ``unstated``, #593's 16-place prints at 271 and 302 exclude their own
+    certificates' exact sides, which lie 1.2e-15 from them.
     """
     _require(_PRINTED.fullmatch(printed) and rounding in ROUNDINGS, "printed side, rounding")
     value = Fraction(Decimal(printed))
     unit = Fraction(1, 10 ** len(printed.partition(".")[2]))
     if rounding == "up":
         return Span(value - unit, value, open_low=True, open_high=False)
+    if rounding == "binary64":
+        slack = Fraction(math.ulp(float(value))) + unit
+        return Span(value - slack, value + slack, open_low=False, open_high=False)
     return Span(value - unit, value + unit, open_low=False, open_high=False)
 
 
@@ -1445,29 +1653,123 @@ def _checkout_bytes(packet: Path, checkout: Path, path: str) -> bytes:
         return stream.read(MAX_SOURCE_BYTES + 1)
 
 
-def derive(packet: Path, checkout: Path, *, check: bool = False) -> list[retained_data.Row]:
+#: The largest release asset `_asset_bytes` reads: PR #574's native-witness archive is
+#: 21,737,024 bytes.
+MAX_ASSET_BYTES = 64_000_000
+
+
+class ReleaseAssets:
+    """Release assets read from a local directory, each held to the pinned manifest once.
+
+    An asset is admitted only where a manifest the checkout pins, read from that admitted
+    checkout, names its repository and tag and lists it by name with exactly its size and
+    SHA-256. A member is then read from the admitted bytes, and must have the digest the
+    declaration states.
+    """
+
+    def __init__(self, packet: Path, checkout: Path, directory: Path | None) -> None:
+        self.packet, self.checkout, self.directory = packet, checkout, directory
+        self.admitted: dict[tuple[str, str], bytes] = {}
+
+    def asset(self, spec: ArchiveMember) -> bytes:
+        key = (spec["manifest"], spec["asset"])
+        if key in self.admitted:
+            return self.admitted[key]
+        _require(self.directory is not None, "a release-asset member needs --assets")
+        directory = cast("Path", self.directory)
+        raw = _checkout_bytes(self.packet, self.checkout, spec["manifest"])
+        try:
+            loaded: object = safe_load(raw.decode("utf-8"))
+        except (UnicodeDecodeError, yaml.YAMLError) as error:
+            raise ReportError(f"{spec['manifest']}: not a YAML manifest: {error}") from error
+        _require(type(loaded) is dict, f"{spec['manifest']}: not a manifest")
+        manifest = cast("dict[str, Any]", loaded)
+        _require(
+            manifest.get("repository") == spec["repository"]
+            and manifest.get("tag") == spec["tag"],
+            f"{spec['manifest']}: does not name {spec['repository']} at {spec['tag']}",
+        )
+        objects = [
+            item
+            for item in manifest.get("objects") or []
+            if type(item) is dict and item.get("asset") == spec["asset"]
+        ]
+        _require(len(objects) == 1, f"{spec['manifest']}: does not list {spec['asset']} once")
+        size, digest = objects[0].get("size"), objects[0].get("sha256")
+        path = directory / spec["asset"]
+        _require(
+            path.is_file() and not path.is_symlink() and path.stat().st_size == size,
+            f"{spec['asset']}: no local file of the manifest's {size} bytes",
+        )
+        _require(type(size) is int and size <= MAX_ASSET_BYTES, f"{spec['asset']}: too large")
+        data = path.read_bytes()
+        _require(
+            len(data) == size and hashlib.sha256(data).hexdigest() == digest,
+            f"{spec['asset']}: the local file is not the asset the manifest pins",
+        )
+        self.admitted[key] = data
+        return data
+
+    def member(self, spec: ArchiveMember) -> bytes:
+        try:
+            with zipfile.ZipFile(io.BytesIO(self.asset(spec))) as archive:
+                info = archive.getinfo(spec["member"])
+                _require(
+                    info.file_size <= MAX_SOURCE_BYTES, f"{spec['member']}: exceeds its ceiling"
+                )
+                data = archive.read(info)
+        except (
+            KeyError,
+            zipfile.BadZipFile,
+            RuntimeError,
+            NotImplementedError,
+            EOFError,
+            zlib.error,
+        ) as error:
+            raise ReportError(
+                f"{spec['asset']}: no member {spec['member']}: {error}"
+            ) from error
+        _require(
+            hashlib.sha256(data).hexdigest() == spec["sha256"],
+            f"{spec['member']}: the member is not the bytes the declaration names",
+        )
+        return data
+
+
+def derive(
+    packet: Path, checkout: Path, *, check: bool = False, assets: Path | None = None
+) -> list[retained_data.Row]:
     """Write, or with ``check`` compare, each derived fact from a checkout at the pin.
 
     A fact is stored as ``facts/n-NNN.yaml.gz``, deterministic gzip by the archive's rule,
     and its row belongs in the packet README's Compressed Files table, origin ``receipt``.
     Each ``same_packing`` file of a fact's row is read from the same checkout and must
-    state the certificate's packing exactly, or the fact is refused.
+    state the certificate's packing exactly, or the fact is refused. A row read from a
+    release asset (``archive``) is read from ``assets``, a directory holding the assets
+    by name, through a manifest the checkout pins (`ReleaseAssets`).
     """
     ensure_private(packet)
     declaration = load_declaration(packet)
     acquisition(packet)
     if problems := checkout_problems(packet, checkout):
         raise ReportError("; ".join(problems))
+    store = ReleaseAssets(packet, checkout, assets)
+
+    def read(item: CertificateRow | SamePacking) -> bytes:
+        if "archive" in item:
+            return store.member(item["archive"])
+        return _checkout_bytes(packet, checkout, item["path"])
+
     written = []
     for row in declaration["certificates"]:
         if "fact" not in row:
             continue
         n = row["n"]
-        raw = _checkout_bytes(packet, checkout, row["path"])
+        raw = read(row)
         certificate = parse_certificate(raw, n, row["format"], row_options(row))
         admit(certificate, row["offered"])
         for other in row.get("same_packing", []):
-            raw = _checkout_bytes(packet, checkout, other["path"])
+            raw = read(other)
             copy = parse_certificate(raw, n, other["format"])
             _require(copy == certificate, f"n={n}: {other['path']} states another packing")
         witness = fact_witness(packet, declaration, row, certificate)
@@ -1660,9 +1962,12 @@ def certify(
 
 def decide_job(packet: Path, n: int, control: str, output: Path) -> None:
     """The child's side of `run_job`: decide one job and write its validated row."""
-    declaration, facts = replayed_facts(packet)
-    _require(n in facts and control in JOBS, "job outside the declared roster")
+    declaration = load_declaration(packet)
+    _require(
+        n in declaration["replayed"] and control in JOBS, "job outside the declared roster"
+    )
     _require(not output.exists(), "refusing to overwrite a deciding job")
+    facts = read_facts(packet, {n})
     kernel.decide_job(facts[n], control, output, **_profile(declaration))
 
 
@@ -2069,6 +2374,7 @@ def main(argv: list[str] | None = None) -> int:
     derivation = sub.add_parser("derive")
     derivation.add_argument("--checkout", type=Path, required=True)
     derivation.add_argument("--check", action="store_true")
+    derivation.add_argument("--assets", type=Path)
     claims = sub.add_parser("check-claims")
     claims.add_argument("--write", action="store_true")
     campaign = sub.add_parser("certify")
@@ -2087,7 +2393,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     packet = packet_path(args.packet)
     if args.action == "derive":
-        rows = derive(packet, args.checkout, check=args.check)
+        rows = derive(packet, args.checkout, check=args.check, assets=args.assets)
         verb = "match the checkout" if args.check else "written"
         print(f"{len(rows)} derived facts {verb}; their Compressed Files rows:")
         for row in rows:

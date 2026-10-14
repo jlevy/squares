@@ -5885,8 +5885,10 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: The native homepage SVG preview and inert compressed expansion payload measured
 #: 1,172,468 bytes on 10 October 2026; the retained startup budget is 1,300,000 bytes.
 #: Merged with that layout on 11 October, the results page measured 843,037 bytes at
-#: 146 results, and its ceiling keeps about a hundred kilobytes above that.
-PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 950_000}
+#: 146 results, and its ceiling keeps about a hundred kilobytes above that. The intake of
+#: 14 October took the register to 184 results and the page to 976,783 bytes, about 3.5 kB
+#: a row; the ceiling moves to 1,100,000 to keep that margin.
+PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_100_000}
 
 
 def test_no_page_carries_a_result_overview(

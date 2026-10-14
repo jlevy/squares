@@ -17,6 +17,7 @@ import pytest
 import yaml
 
 from devtools import adopt_houses as adopt
+from devtools import apply_closed_form as closed_form
 from devtools import select_houses as select
 from devtools import upper_bound_houses as houses
 from sqpack.yamlio import safe_load
@@ -365,13 +366,16 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     certificate section, and the rest of the body, which it marks as history, with
     whitespace collapsed, since flowmark rewraps it. The verifier table and the rigidity
     scope are refreshed by their own tools. A count adopted twice is replayed from the
-    record the earlier pass left (`adopt_houses.before_last_pass`).
+    record the earlier pass left (`adopt_houses.before_last_pass`). A writer that ran
+    after the adoption is replayed after it: `apply_closed_form`, of 14 October 2026,
+    raises the reported lower lane, adds its evidence, resource and paragraph, and moves
+    `source_reviewed` no earlier.
     """
     assert [move.n for move in replayed] == sorted(houses.ADOPTED)
     for move in replayed:
         assert move.house.result == houses.ADOPTED[move.n]
         committed = select.case_path(move.n).read_text(encoding="utf-8")
-        written = adopt.rewrite(move)
+        written = closed_form.replay(move.n, adopt.rewrite(move))
         held, wrote = _front(committed), _front(written)
         for key in OWNED:
             assert held.get(key) == wrote.get(key), f"n={move.n}: packing.{key}"

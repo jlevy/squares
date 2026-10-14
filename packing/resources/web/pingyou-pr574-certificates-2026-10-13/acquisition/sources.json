@@ -1,0 +1,99 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T07:37Z",
+  "git_scope": "The head of jlevy/squares#574, fetched from the fork BuddenPing/squares by commit id into a no-checkout worktree; the ten files the pull request adds over its base e96e9ea95c15c6ad3a9a547a8cb02760e721cfc4 were extracted from the pinned commit with git archive and each is bound to its Git blob here. The scope is exactly those ten files: three HostedData manifests and three submission packets of README.md and JSON records. The geometry and replay material are not in Git: the three manifests pin four release assets of BuddenPing/square-packing-certificates by size and SHA-256, which acquisition/release-assets.json records as fetched. Under derived-only custody no upstream byte is copied. No source program was executed.",
+  "sources": [
+    {
+      "id": "buddenping-squares-pr574",
+      "source_url": "https://github.com/BuddenPing/squares",
+      "source_ref": "codex/numerical-certificate-refinements",
+      "source_commit": "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "committed_utc": "2026-10-13T01:58:38Z",
+      "git_tree": "b5273e75f92f8c5dee022bd778bb9713615adc3b",
+      "archived_path": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/source",
+      "subtree_manifest": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+        "packing/hosted/pingyou-exact-153-302-2026-10-13.yaml",
+        "packing/hosted/pingyou-numerical-refinements-2026-10-13.yaml",
+        "packing/resources/web/pingyou-algebraic-refinements-2026-10-13",
+        "packing/resources/web/pingyou-exact-153-302-2026-10-13",
+        "packing/resources/web/pingyou-numerical-refinements-2026-10-13"
+      ],
+      "subtree_file_count": 10,
+      "subtree_total_bytes": 1515729,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "packing/hosted/pingyou-algebraic-refinements-2026-10-13.yaml",
+          "bytes": 616,
+          "sha256": "e2696c0ca1cc4b9db5d208d56982f7a9af29bebe84eaf1e7f5d9321d84fb4a45",
+          "reason": "A HostedData manifest binding one release of BuddenPing/square-packing-certificates: its tag and each asset's name, size and SHA-256, the only binding of the geometry outside Git. No licence for the submission: pinned by digest only; derive reads it from a checkout at this pin and admits an asset only where it has the manifest's size and digest."
+        },
+        {
+          "path": "packing/hosted/pingyou-exact-153-302-2026-10-13.yaml",
+          "bytes": 589,
+          "sha256": "5a4aab8861e4c3aff36354e253e687402f5ba568f19dee636eea0f26e5de0ef0",
+          "reason": "A HostedData manifest binding one release of BuddenPing/square-packing-certificates: its tag and each asset's name, size and SHA-256, the only binding of the geometry outside Git. No licence for the submission: pinned by digest only; derive reads it from a checkout at this pin and admits an asset only where it has the manifest's size and digest."
+        },
+        {
+          "path": "packing/hosted/pingyou-numerical-refinements-2026-10-13.yaml",
+          "bytes": 830,
+          "sha256": "5626f0e1f887d2abf8fbcc168a5a2b12d00c6a8b014059737da1aea70f5acca0",
+          "reason": "A HostedData manifest binding one release of BuddenPing/square-packing-certificates: its tag and each asset's name, size and SHA-256, the only binding of the geometry outside Git. No licence for the submission: pinned by digest only; derive reads it from a checkout at this pin and admits an asset only where it has the manifest's size and digest."
+        },
+        {
+          "path": "packing/resources/web/pingyou-algebraic-refinements-2026-10-13/README.md",
+          "bytes": 4609,
+          "sha256": "323a803ce81c95ad8558249d4f573cdb0c5f8323b9db5e7a45cf869dac225368",
+          "reason": "Author prose for one part of the submission: its claims, custody, replay commands and credit, quoted in this packet's README. No licence for the submission: pinned by digest only."
+        },
+        {
+          "path": "packing/resources/web/pingyou-algebraic-refinements-2026-10-13/claims.json",
+          "bytes": 234016,
+          "sha256": "2c1bd9340152abd6e2a234bb3e53c0cb13006ffa567c14836e99da3c1294c343",
+          "reason": "The submission's claim records: per count the exact side or field, the predecessor's side and digest, the geometry and native-witness digests and the gains. Read here for the claim map and not believed; the sides that enter a decision are read from the certificates. No licence: pinned by digest only."
+        },
+        {
+          "path": "packing/resources/web/pingyou-exact-153-302-2026-10-13/README.md",
+          "bytes": 4321,
+          "sha256": "c1bbb6d7d963185333c21958c44b5cb62c433f3552b4dc74a25003caa84ed6be",
+          "reason": "Author prose for one part of the submission: its claims, custody, replay commands and credit, quoted in this packet's README. No licence for the submission: pinned by digest only."
+        },
+        {
+          "path": "packing/resources/web/pingyou-exact-153-302-2026-10-13/claims.json",
+          "bytes": 3061,
+          "sha256": "d2cbe5ed5697b1a0d51001d253272f857013dcc0dbf29a7b8d7daee99ae93a30",
+          "reason": "The submission's claim records: per count the exact side or field, the predecessor's side and digest, the geometry and native-witness digests and the gains. Read here for the claim map and not believed; the sides that enter a decision are read from the certificates. No licence: pinned by digest only."
+        },
+        {
+          "path": "packing/resources/web/pingyou-numerical-refinements-2026-10-13/README.md",
+          "bytes": 6756,
+          "sha256": "56e8c951c8cfd23254625d7fd3e17f2b4bc541533826b47c766421adf4aa97bd",
+          "reason": "Author prose for one part of the submission: its claims, custody, replay commands and credit, quoted in this packet's README. No licence for the submission: pinned by digest only."
+        },
+        {
+          "path": "packing/resources/web/pingyou-numerical-refinements-2026-10-13/claims.json",
+          "bytes": 753807,
+          "sha256": "1cb5110dd26933812e0f340c17b466674a131e449d23f1691e92476e7e18980d",
+          "reason": "The submission's claim records: per count the exact side or field, the predecessor's side and digest, the geometry and native-witness digests and the gains. Read here for the claim map and not believed; the sides that enter a decision are read from the certificates. No licence: pinned by digest only."
+        },
+        {
+          "path": "packing/resources/web/pingyou-numerical-refinements-2026-10-13/comparison.json",
+          "bytes": 507124,
+          "sha256": "a16fe93d193d5e0a5e002465cfe2989216b2135a99948da5c9a3083f857771ce",
+          "reason": "The submission's comparison of the 149 audited v2 counts with their pre-batch and preceding public certificates. Read and not believed. No licence: pinned by digest only."
+        }
+      ],
+      "license": "The pull request adds its files under packing/resources/, which the repository's LICENSE names as third-party material not covered by any of its grants, and each submission README says that it asserts no new blanket licence over geometry or retained source material. The release repository BuddenPing/square-packing-certificates has no licence file, and GitHub detects none. Derived-only custody under the known-best retention policy: no upstream byte is retained, every scoped file is bound here by SHA-256 and at the pin by its Git blob, the release assets by size and SHA-256, and no redistribution permission or licence determination is asserted. The submission asks that PingYou Ltd be credited with the certificate refinements and that original construction authors, preceding refiners and source and tool authors keep their roles per count.",
+      "claims": [
+        "Pull request #574 (BuddenPing, PingYou Ltd), title 'research: submit 148 square-packing certificate refinements with exact endpoints', opened 2026-10-13T00:13Z, head 4c319c2 at 2026-10-13T01:58:38Z; no comments or reviews when read. It submits complete certificates at 148 counts from 5 to 308: the 147 rational certificates of the v2 release, of which the algebraic supplement replaces 58 with algebraic certificates and N146 with a tighter rational one, and the exact N153/N302 supplement replaces two with algebraic certificates; and a tighter rational N261 certificate, outside the 147.",
+        "The algebraic supplement (release data/pingyou-algebraic-refinements-2026-10-13-v1) states 60 exact certificates: 48 over Q(sqrt(2)), eight other quadratic, quartic or cap constructions (N18, N53, N54, N107, N151, N178, N234, N299), the degree-five N70 and N207, and rational N146 and N261, each strictly below its named predecessor; N53's enclosing side lies in Q(sqrt(7)) but its coordinates use a degree-eight field, and N151 a biquadratic one. COVERAGE-147.json accounts for the 147 v2 counts: 59 improved, 82 retained pending algebraic reconstruction, N50 and N171 already exact rational, N153 and N302 already exact algebraic, N204 and N264 older radical constructions dominated.",
+        "The exact supplement (release data/pingyou-exact-153-302-2026-10-13-v1) states s(153) <= 12 + (1+3t^2)/(1+2t-t^2) with t the root in (7/20, 9/25) of t^7-9t^6+3t^5-t^4-t^3+t^2-3t+1, and s(302) <= 33/2 + (7/2)t + t^2 with t the root in (7/20, 9/25) of 2t^3-3t^2-2t+1.",
+        "The submission states that the padding reductions and attainments are not 148 new nominal constructions, new algebraic optima or optimality proofs, that original construction authors keep their credit, and that its own checkers, a standard-library SAT and polygon checker and this repository's two verifiers at e96e9ea, accepted every final certificate. These are author reports."
+      ]
+    }
+  ]
+}

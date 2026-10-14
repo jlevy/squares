@@ -2640,9 +2640,10 @@ def redraft(
 ) -> str:
     """Draft `n` again as the register holds it: its lower-bound promotion and its intake.
 
-    The two things a later step adds to a record and a fresh draft does not know about,
-    the reviewed lower-bound promotion and a certified packet's intake, are carried from
-    the existing record, so the result differs from it only where the inputs moved.
+    The things a later step adds to a record and a fresh draft does not know about, the
+    reviewed lower-bound promotion, a certified packet's intake and the closed form's
+    reported lane, are carried from the existing record, so the result differs from it
+    only where the inputs moved.
     """
     generated = generate_record(
         n,
@@ -2665,8 +2666,14 @@ def redraft(
         )
     from devtools.source_supersession import adopt_selected_report  # noqa: PLC0415
 
+    closed_form = importlib.import_module("devtools.apply_closed_form")
     try:
-        return adopt_selected_report(n, existing, adopt_upper_bound_packet(n, generated))
+        drafted = adopt_selected_report(n, existing, adopt_upper_bound_packet(n, generated))
+        # Hiroaki Hosono's closed form (T-180) is the third such step: where the existing
+        # record carries its reported lane, `devtools.apply_closed_form` replays it as the
+        # last layer, after any house adoption, which composes from the existing record
+        # (review C2 of #602). A fresh draft leaves it to that tool.
+        return closed_form.replay(n, drafted) if closed_form.carried(existing) else drafted
     except ValueError as error:
         raise GenerationError(str(error)) from error
 

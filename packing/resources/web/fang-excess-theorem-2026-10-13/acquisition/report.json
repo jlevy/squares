@@ -27,7 +27,23 @@
     {"n": 308, "reader": "[Daniel record hunt 3 2026-10-10]", "source_key": "[Daniel record hunt 3 2026-10-10]", "holders": "Evan Daniel after Kevin Fang", "result": "T-141", "reported_value": "17.998269879526255875387992744507", "verified_value": "17.9982698795262559", "evidence": ["E-evand-489-exact-feasibility"]}
   ],
   "pending": [
-    {"n": 308, "report": "T-135 (#484)", "url": "https://github.com/jlevy/squares/issues/484", "holders": "Kevin Fang", "result": "T-135", "reader": "[Fang two-wedge certificates 2026-10-10]"}
+    {"n": 211, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 211, "report": "#575", "url": "https://github.com/jlevy/squares/issues/575", "holders": "Daniil Ostashev", "reader": "[Ostashev merged bands 2026-10-13]"},
+    {"n": 211, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "reader": "[Couzo issue-583 certificates 2026-10-13]"},
+    {"n": 211, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 211, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 241, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 241, "report": "#575", "url": "https://github.com/jlevy/squares/issues/575", "holders": "Daniil Ostashev", "reader": "[Ostashev merged bands 2026-10-13]"},
+    {"n": 241, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "reader": "[Couzo issue-583 certificates 2026-10-13]"},
+    {"n": 241, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 241, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 273, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 273, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 307, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 307, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 308, "report": "T-135 (#484)", "url": "https://github.com/jlevy/squares/issues/484", "holders": "Kevin Fang", "result": "T-135", "reader": "[Fang two-wedge certificates 2026-10-10]"},
+    {"n": 308, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 308, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"}
   ],
   "register": {
     "title": "Kevin Fang's n^2 - n + F(n) theorem and its inventory at 078789a (no issue)",

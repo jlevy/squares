@@ -2251,12 +2251,37 @@ sources:
       series, the lemma corpus, the readable Lean layer and the cited attempts are retained.
       The lab states that its campaigns, code, certificates, Lean files and notes were
       produced by AI agents (Claude, Anthropic) under the PI's direction.
-  - key: '[wand125 closed form 2026-10-14]'
-    authors: [wand125]
+  - key: '[bengreff s76 certificate 2026-10-14]'
+    authors: [Greff]
     year: 2026
     venue: GitHub
     dated: '2026-10-14'
-    credit: wand125
+    credit: Greff after Daniel, wand125
+    lineage: independent
+    note: >-
+      bengreff/s76-certificate at 1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f
+      (2026-10-14T02:05:47Z), Benjamin Greff's mixed cover for s(76) >= 9, hence s(76) = 9
+      with the 9 x 9 grid: 41,633 points and 9,744 segments in Evan Daniel's mixed 1
+      format, total 3788361049/50000000 < 76, first committed in 7c78327 at
+      2026-10-14T01:57:08Z, decided by Daniel's zmx2 and zm_mixed.py pinned at
+      evand/square-packing b91d70b6, with a Lean wrapper on Daniel's Sqpack at 1718a58 that
+      takes the covering statement as a hypothesis. Registration was requested in
+      jlevy/squares#594. The README credits Evan Daniel for the method at margin zero, the
+      mixed format, the checkers and the Lean library, and wand125 for the s(59) = 8 cover
+      reused for the corners, the band-insertion construction and the pinned toolchain;
+      it does not mention this project, and the issue cites the record's n-076.md only for
+      the standing bound. AI assistance, README.md: "Benjamin Greff directed the work. The
+      search, LP and verification pipeline were built and run with Claude (Anthropic) as an
+      AI assistant." The issue adds that Claude, working as an agent in Claude Code, built
+      and ran the LP search, the export, the verification script, the coverage checks, the
+      Lean wrapper and the replay, and drafted the write-up. MIT licence. Retained whole in
+      web/bengreff-s76-certificate-2026-10-14/. Dated by that revision, 2026-10-14 UTC.
+  - key: '[wand125 closed form 2026-10-14]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-14'
+    credit: Hosono
     lineage: independent
     note: >-
       wand125/square-packing problems/closed-form (closed-form-v1), added in eb0fd1938fcabf9b81b638f9d6b6db7f80b8985a
@@ -2269,14 +2294,293 @@ sources:
       s(n^2 - 2) = s(n^2 - 3) = n for n >= 8 without Nagamochi's lemma, values it says are not new. The
       folder README credits Hiroaki Hosono (wand125) and names no method it builds on; it cites
       Nagamochi 2005, Karakus 2026, Evan Daniel's Valid7 and jlevy/squares#295 for comparison and for the
-      discussion of Nagamochi's gap. The commit names Claude Opus 5.5 as co-author; the folder's prose
-      says nothing about AI assistance. MIT for problems/closed-form/. Dated by the pin.
-  - key: '[wand125 cfcheck 2026-10-14]'
-    authors: [wand125]
+      discussion of Nagamochi's gap. The commit names Claude as co-author; the folder's prose says
+      nothing about AI assistance, and issue 600, which asks to credit Hiroaki Hosono (wand125), states
+      that the search, the certificates, the checkers and the text were produced with AI assistance
+      (Claude and Codex), under his direction and review. MIT for problems/closed-form/. Dated by the
+      pin.
+  - key: '[Couzo certificates 2026-10-12]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: Couzo after Ostashev, Chaoweeraprasit, Fang, Daniel, Ellsworth, Levy
+    short_credit: Couzo after Ostashev et al.
+    note: >-
+      Nine complete exact certificates at 0fa0e0de2ef0b414655e871b1baffcfe0d33c815, all
+      requested on issue 561: 156 and 176 continued from Ostashev's arrangements, 237 and
+      271 from Chaoweeraprasit's SQUISH arrangements with Daniel's fq, and five beyond the
+      case corpus continuing the author's issue-506 L-border constructions and Fang's 344;
+      five exact optima from Daniel's exact contact solver and four dilated rational
+      witnesses. The source checks with Squares Project (Levy) verification code; this
+      project lineage is not independent. The certificates are retained as factual data; the
+      unlicensed prose is hash-pinned. No optimizer, local or global claim.
+  - key: '[Ostashev compositions 2026-10-12]'
+    authors: [Ostashev]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: Ostashev after Nakajima, Chaoweeraprasit, Daniel, Xu, Levy
+    short_credit: Ostashev after Nakajima et al.
+    note: >-
+      Three complete exact certificates at fe43a64ecf2581cdbd11830e8a5be0989746c5d3 in the
+      source's sqcert format, at 129, 204 and 303: compositions at 204 and 303 with the
+      author's new 44-square (h + 3) x h and 62-square (h + 6) x h rectangles, and at 129 a
+      cut-out of a rectangle cut from Chaoweeraprasit's s(302) in Daniel's regularization,
+      laid out like Xu's s(129), each solved to the exact optimum of its contact topology
+      and dilated by 1 + 1e-60. Methods credited: Nakajima's soft-to-rigid search, this
+      project's fixed-angle linear program and Ryan Xu's certificate construction. Retained
+      under the MIT licence with the source's C++ GMP checker and mpmath cross-check pinned
+      against the issue-501 packet, neither run here. The commit's earlier 176 composition
+      is compared and not requested. AI assistance stated: AI agents wrote and ran the
+      search, composition and verification code. No local or global optimality is
+      registered.
+  - key: '[PingYou n302 certificate 2026-10-12]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: PingYou Ltd after Xu, Daniel, Levy
+    short_credit: PingYou Ltd after Xu et al.
+    note: >-
+      One complete exact certificate at 5a86ac3ec09beae5f11e2a8f7115954e76fa616a composing
+      four placed patches of Xu's n70 construction, taken from Daniel's exact n70
+      certificate, with two upright banks, centres and container dilated by 1 + 1e-11. The
+      source checks with Squares Project (Levy) verification code and supplies a corners
+      Witness/v2. Derived exact facts only; no upstream byte is retained. No local or global
+      optimality claim.
+  - key: '[Couzo certificates 2026-10-13]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-13'
+    lineage: builds-on-project
+    credit: Couzo after Daniel, Ostashev, BuddenPing, Fang, Ellsworth, Levy
+    short_credit: Couzo after Daniel et al.
+    note: >-
+      Fourteen complete exact certificates at b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d, nine
+      of them requested on issues 583 and 586: 154 continued from Daniel's issue-552
+      arrangement, 211 and 241 from Ostashev's, 302 from BuddenPing's, and five beyond the
+      case corpus continuing the author's issue-506 L-border constructions and Fang's
+      380-382; exact optima from Daniel's exact contact solver and dilated rational
+      witnesses. Five further certificates at 176, 344, 375, 376 and 378 are named by no
+      issue. The source checks with Squares Project (Levy) verification code; this project
+      lineage is not independent. The certificates are retained as factual data; the
+      unlicensed prose is hash-pinned. No optimizer, local or global claim.
+  - key: '[PingYou n153 refinement 2026-10-12]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: PingYou Ltd after Xu, Daniel, Levy
+    short_credit: PingYou Ltd after Xu et al.
+    note: >-
+      One complete exact certificate at 431186b6c20d444b26b5d321a1cd85d2f2d63274, a tighter
+      centre and side realization of the n153 construction T-148 registers, with its
+      orientations and guard unchanged. The source checks with Squares Project (Levy)
+      verification code and supplies a corners Witness/v2. Derived exact facts only; no
+      upstream byte is retained. No local or global optimality claim.
+  - key: '[PingYou n207 refinement 2026-10-12]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: PingYou Ltd after Xu, Daniel, Levy
+    short_credit: PingYou Ltd after Xu et al.
+    note: >-
+      One complete exact certificate at 10418630bfb00853a539ad7ad9908b2d746147c0, a new
+      rational approximation to the frame of the n207 assembly T-147 registers, with its
+      guard reduced to 1 + 2e-13. The source checks with Squares Project (Levy) verification
+      code and supplies a corners Witness/v2. Derived exact facts only; no upstream byte is
+      retained. No local or global optimality claim.
+  - key: '[PingYou n146 refinement 2026-10-12]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: PingYou Ltd after Xu, Barnett, Daniel, Levy
+    short_credit: PingYou Ltd after Xu et al.
+    note: >-
+      One complete exact certificate at 820b9ffb11dd602d735f7a03cd472db98a2d3bb6, a coupled
+      contact realization refining Barnett's refinement of Xu's n146 with Daniel's
+      contact-solver source. The source checks with Squares Project (Levy) verification code
+      and supplies a corners Witness/v2. Derived exact facts only; no upstream byte is
+      retained. No local or global optimality claim.
+  - key: '[PingYou n261 refinement 2026-10-12]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: PingYou Ltd after Xu, Barnett, Daniel, Levy
+    short_credit: PingYou Ltd after Xu et al.
+    note: >-
+      One complete exact certificate at e70342d149f9363b32ef6043ecfa8d0e0c4b51aa, a repaired
+      contact realization refining Barnett's refinement of Xu's n261 with Daniel's
+      contact-solver source. The source checks with Squares Project (Levy) verification code
+      and supplies a corners Witness/v2. Derived exact facts only; no upstream byte is
+      retained. No local or global optimality claim.
+  - key: '[PingYou n105 refinement 2026-10-12]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: PingYou Ltd after Xu, Couzo, Daniel, Levy
+    short_credit: PingYou Ltd after Xu et al.
+    note: >-
+      One complete exact certificate at 260aaf50230483654802790589c2dfce73237604, a contact
+      refinement of Couzo's refinement of Xu's n105 with Daniel's exact solver. The source
+      checks with Squares Project (Levy) verification code and supplies a corners
+      Witness/v2. Derived exact facts only; no upstream byte is retained. No local or global
+      optimality claim.
+  - key: '[PingYou n272 refinement 2026-10-12]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: PingYou Ltd after Chaoweeraprasit, Daniel, Levy
+    short_credit: PingYou Ltd after Chaoweeraprasit et al.
+    note: >-
+      One complete exact certificate at 260aaf50230483654802790589c2dfce73237604, a contact
+      refinement of Chaoweeraprasit's SQUISH n272 with Daniel's exact solver. The source
+      checks with Squares Project (Levy) verification code and supplies a corners
+      Witness/v2. Derived exact facts only; no upstream byte is retained. No local or global
+      optimality claim.
+  - key: '[Couzo issue-583 certificates 2026-10-13]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-13'
+    lineage: builds-on-project
+    credit: Couzo after Daniel, Ostashev, Fang, Ellsworth, Levy
+    short_credit: Couzo after Daniel et al.
+    note: >-
+      Seven complete exact certificates at 45966700cf15d3f42e064fd6da51fcb9a5def2be that
+      issue 583 names and b85dee2 replaced: 154 (issue 570's, by SHA-256) continued from
+      Daniel's issue-552 arrangement, 211 and 241 from Ostashev's, and 339, 379, 380 and 382
+      beyond the case corpus continuing the author's issue-506 L-border constructions and
+      Fang's 380-382. The source checks with Squares Project (Levy) verification code; this
+      project lineage is not independent. The certificates are retained as factual data; the
+      unlicensed prose is hash-pinned. No optimizer, local or global claim.
+  - key: '[Mishapolk exact certificates 2026-10-12]'
+    authors: [Polkovskyi]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: credits-project
+    credit: Polkovskyi after Xu, Chaoweeraprasit, Levy
+    short_credit: Polkovskyi after Xu et al.
+    note: >-
+      Nineteen complete exact certificates at 336bdf5efab4784e54e0ac32edf3ed12f9c8af7e in
+      Evan Daniel's format, six of them requested in issue 573 (103, 153, 207, 209, 258,
+      270); the four at 103, 153, 207 and 258 are unchanged in the release of issue 593.
+      Derived exact facts only; no upstream byte is retained. Gemini assistance disclosed.
+      No local or global optimality claim.
+  - key: '[PingYou PR 574 certificates 2026-10-13]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-13'
+    lineage: builds-on-project
+    credit: >-
+      PingYou Ltd after Friedman, Ellsworth, Daniel, Xu, Barnett, Couzo, Ostashev,
+      Chaoweeraprasit, Gupta, Fang, Polkovskyi, Levy
+    short_credit: PingYou Ltd after Friedman et al.
+    note: >-
+      Pull request jlevy/squares#574 at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde
+      (BuddenPing/squares): three submission packets and HostedData manifests pinning four
+      release assets of BuddenPing/square-packing-certificates, which hold 148 complete
+      certificates, 88 rational and 60 over algebraic number fields, each a tighter
+      certificate of a packing that others found. Derived exact facts only; no upstream byte
+      is retained. No new nominal construction, local or global optimality claim.
+  - key: '[Ostashev merged bands 2026-10-13]'
+    authors: [Ostashev]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-13'
+    lineage: builds-on-project
+    credit: Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu
+    short_credit: Ostashev after Nakajima et al.
+    note: >-
+      Four complete exact certificates at b909e1b74cda50906e12b4373e010ddee39e47e4 in the
+      source's sqcert format, at 176, 211, 241 and 304: three two-band packings merged into
+      one V band by an all-soft GPU re-hardening, seeded from the author's own 176
+      composition, Daniel's exact optimum of de Winter's 211 and Daniel's exact optimum of
+      Couzo's 241, and a relaxed two-piece composition at 304, each solved to the exact
+      optimum of its contact topology and dilated by 1 + 1e-60, or at 304, where the header
+      states a 59-digit optimum, by 1 + 1e-59. Methods credited: Nakajima's soft-to-rigid
+      search, this project's fixed-angle linear program and Ryan Xu's certificate
+      construction. Retained under the MIT licence with the source's C++ GMP checker and
+      mpmath cross-check pinned against the issue-501 packet, neither run here. AI
+      assistance stated: AI agents wrote and ran the search and verification code. No local
+      or global optimality is registered.
+  - key: '[Mishapolk records 2026-10-14]'
+    authors: [Polkovskyi]
     year: 2026
     venue: GitHub
     dated: '2026-10-14'
-    credit: wand125
+    lineage: credits-project
+    credit: Polkovskyi after Friedman, Daniel, Xu, Chaoweeraprasit, Barnett, Couzo, Ostashev, Ellsworth, Fang, Levy
+    short_credit: Polkovskyi after Friedman et al.
+    note: >-
+      Seventy-three complete exact certificates at 46f638ce0537beeb1bad24242c6a3d357eecd9ee
+      in Evan Daniel's format, issue 593, each admitted at the exact side_fraction of the
+      release's census. Thirteen are byte for byte other authors' certificates already
+      retained here and 40 state the case's exact side; the smallest known side only at 237.
+      Derived exact facts only; no upstream byte is retained. Gemini assistance
+      disclosed. No local or global optimality claim.
+  - key: '[Daniel compositions 2026-10-13]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-13'
+    lineage: independent
+    credit: >-
+      Daniel after Ostashev, PingYou Ltd, Barnett, Schadt, Chaoweeraprasit, Xu, Ellsworth
+    short_credit: Daniel after Ostashev et al.
+    note: >-
+      Three complete exact certificates at 231d41df7a03fccd89aa6e9ef5a540348a8214cc, all
+      beyond the case corpus, at 339, 364 and 375: two-piece compositions in the style of
+      Ellsworth's s(171) and Ostashev's compositions, from pieces of Ostashev's s(304),
+      BuddenPing's (PingYou Ltd's) s(146), issue 566's refinement of Barnett's issue 505,
+      with Schadt's s(50), and crops of Chaoweeraprasit's s(88) and Xu's s(129), each solved
+      to an 80-digit KKT point and scaled by 1 + 1e-20. MIT-licensed certificates, KKT
+      points, inputs and solver reports retained; the source's two exact checkers pinned
+      against the issue-399 packet and not run here. Claude assistance disclosed. KKT and
+      descent statements are the author's numerical evidence; no local or global optimality
+      claim.
+  - key: '[Daniel fresh compositions 2026-10-14]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-14'
+    lineage: independent
+    credit: Daniel after Chaoweeraprasit, Friedman, Couzo
+    short_credit: Daniel after Chaoweeraprasit et al.
+    note: >-
+      Three complete exact certificates at 622cd2e21407700fe8d5ac5943af820725107921, all
+      beyond the case corpus, at 365, 370 and 460: two-piece compositions from
+      Chaoweeraprasit's s(199) with Friedman's s(26), Couzo's s(175) with the author's
+      38-square rectangle, and crops of Chaoweeraprasit's s(306) and Couzo's s(380), each
+      solved to an 80-digit KKT point and scaled by 1 + 1e-20. MIT-licensed certificates,
+      KKT points, inputs and solver reports retained; the source's two exact checkers pinned
+      against the issue-399 packet and not run here. Claude assistance disclosed. KKT and
+      descent statements are the author's numerical evidence; no local or global optimality
+      claim.
+  - key: '[wand125 cfcheck 2026-10-14]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-14'
+    credit: Hosono
     lineage: independent
     note: >-
       wand125/square-packing problems/closed-form/indep-checker at 746e2c5ac7a7f534996dd50a5e1fd9f1d8836a8d
@@ -2288,9 +2592,12 @@ sources:
       refusal; the other 32 intervals are not checked with it. Cargo.toml names Hiroaki Hosono (wand125)
       as author and neither README names a method it builds on or cites this project; the README says it
       was written with AI assistance (OpenAI Codex) and reviewed by the author, the commit names Claude
-      Opus 5.5 as co-author, and issue #600 names Claude and Codex for the search, the certificates and
+      as co-author, and issue #600 names Claude and Codex for the search, the certificates and
       both checkers. MIT. Dated by the pin.
 credited_names:
+  Benjamin Greff: Greff
+  Hiroaki Hosono: Hosono
+  Mykhailo Polkovskyi: Polkovskyi
   Oscar Fitzharding: Fitzharding
   Marc Leonard Overbeck: Overbeck
   Daniil Ostashev: Ostashev

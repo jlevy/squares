@@ -1,0 +1,49 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/564",
+  "author": "PingYou Ltd",
+  "source_key": "[PingYou n302 certificate 2026-10-12]",
+  "report_evidence": "E-pingyou-564-certificate-report",
+  "receipt_format": "pingyou-564-exact-replay-v1",
+  "witness_prefix": "W-pingyou-564-n",
+  "claim_limitations": "Complete 5a86ac3 rational centre/half-angle certificate converted exactly from a checkout at the pin whose bytes have the digests the packet records, and equal there to the source's own corners Witness/v2; no upstream byte is retained. Finite construction feasibility only; no local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "certificates": [
+    {"n": 302, "path": "n302.cert.json", "format": "pingyou-json", "offered": "1787027538273375975382555057/100000000000000000000000000", "first_committed": "2026-10-12T22:16:11Z", "same_packing": [{"path": "pingyou-n302-rational.yaml", "format": "witness-corners"}], "fact": "facts/n-302.yaml"}
+  ],
+  "requested": [302],
+  "replayed": [302],
+  "houses": [
+    {"n": 302, "reader": "[Daniel regularized lists 2026-10-10]", "source_key": "[Daniel regularized lists 2026-10-10]", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Evan Daniel", "result": "T-146", "reported_value": "17.8720298490811800", "verified_value": "17.8720298490811800", "evidence": ["E-evand-regularized-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 302, "report": "T-098 (#375)", "url": "https://github.com/jlevy/squares/issues/375", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reader": "[evand exact optima 2026-10-05]"},
+    {"n": 302, "report": "T-116 (#422)", "url": "https://github.com/jlevy/squares/issues/422", "holders": "Nate Chaoweeraprasit", "result": "T-116", "reader": "[SQUISH second update 2026-10-07]"},
+    {"n": 302, "report": "T-136 (#481)", "url": "https://github.com/jlevy/squares/issues/481", "holders": "Nate Chaoweeraprasit", "result": "T-136", "reader": "[SQUISH third request 2026-10-09]"},
+    {"n": 302, "report": "T-138 (#470)", "url": "https://github.com/jlevy/squares/issues/470", "holders": "Mykhailo Polkovskyi (Mishapolk)", "result": "T-138", "reader": "[Mishapolk decimal poses 2026-10-09]"},
+    {"n": 302, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 302, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 302, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd", "printed": "17.8702753825550596695726925733982414085506", "rounding": "unstated"},
+    {"n": 302, "report": "#573", "url": "https://github.com/jlevy/squares/issues/573", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk exact certificates 2026-10-12]"},
+    {"n": 302, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"}
+  ],
+  "register": {
+    "title": "PingYou Ltd's n302 certificate at 5a86ac3, issue564",
+    "headline": "A packing of 302 squares from four boundary patches of Ryan Xu's packing of 70 and two upright banks",
+    "significance": 3,
+    "source_checks": "The author reports that three exact checkers, its own rational polygon-projection checker and Evan Daniel's unchanged verify_cert.py and verify_cert2.py, accept all 302 squares, 1,208 wall conditions and 45,451 pairs; that its package replays the recorded rational construction and checks the lossless conversion to its corners Witness/v2; and that this repository's sqpack exact_verify and check_rational_witness_independent, unchanged at 074ac28, accept that witness. Those statements are the author's; no source program ran here.",
+    "credit": "Credit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with the n302 construction and its refinement, as the source asks: four boundary patches of Ryan Xu's n70 construction (ry-xu, issue 432), taken from Evan Daniel's exact n70 certificate (the regularized n-070 certificate T-146 retains), with two upright banks of 105 and 147 squares. The source names Nate Chaoweeraprasit's SQUISH n302 (issue 481) and Evan Daniel's regularization of it (T-146) only as its comparison, and claims neither the n70 packing nor patch composition in general. The pinned source makes no statement about AI assistance; the author's statement of 12 October on issue 503 covers the n207 and n153 results only.",
+    "next_rung": "Independently review the retained replay, then decide adoption at 302: the certificate is 1.75e-3 below the ceiling T-146 holds, but Francisco Couzo's #583, which continues this arrangement, prints a side 2.62e-4 smaller, Mishapolk's #593 one 1.79e-10 smaller, and the author's own PR #574 states smaller sides, so adoption waits on their imports. Final exact-head CI remains required.",
+    "bead": "think-z5gq",
+    "bibliography": {
+      "authors": [
+        "PingYou Ltd"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PingYou Ltd after Xu, Daniel, Levy",
+      "short_credit": "PingYou Ltd after Xu et al.",
+      "note": "One complete exact certificate at 5a86ac3ec09beae5f11e2a8f7115954e76fa616a composing four placed patches of Xu's n70 construction, taken from Daniel's exact n70 certificate, with two upright banks, centres and container dilated by 1 + 1e-11. The source checks with Squares Project (Levy) verification code and supplies a corners Witness/v2. Derived exact facts only; no upstream byte is retained. No local or global optimality claim."
+    }
+  }
+}

@@ -24,16 +24,21 @@
     {"n": 304, "reader": "[Couzo certificates 2026-10-11]", "source_key": "[Couzo certificates 2026-10-11]", "holders": "Nate Chaoweeraprasit, improved by Francisco Couzo", "result": "T-152", "reported_value": "17.9295659468485010", "verified_value": "17.9295659468485010", "evidence": ["E-couzo-506-exact-feasibility"]}
   ],
   "pending": [
-    {"n": 176, "report": "#561", "url": "https://github.com/jlevy/squares/issues/561", "holders": "Francisco Couzo", "printed": "13.807637227056", "rounding": "up"},
-    {"n": 176, "report": "fe43a64 (#562, not requested)", "url": "https://github.com/dostashev/square-packing/blob/fe43a64ecf2581cdbd11830e8a5be0989746c5d3/README.md", "holders": "Daniil Ostashev", "printed": "13.808663234386957", "rounding": "up"},
-    {"n": 176, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "13.7958723184364072", "rounding": "unstated"},
-    {"n": 211, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "printed": "14.993558914123", "rounding": "up"},
-    {"n": 211, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "printed": "14.993558913975", "rounding": "up"},
-    {"n": 211, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "14.9935589139740060", "rounding": "unstated"},
-    {"n": 241, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "printed": "15.987117095169", "rounding": "up"},
-    {"n": 241, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "printed": "15.987117095151", "rounding": "up"},
-    {"n": 241, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "15.9871170951502393", "rounding": "unstated"},
-    {"n": 304, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "17.9294277580751746", "rounding": "unstated"}
+    {"n": 176, "report": "#561", "url": "https://github.com/jlevy/squares/issues/561", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-12]"},
+    {"n": 176, "report": "fe43a64 (#562, not requested)", "url": "https://github.com/dostashev/square-packing/blob/fe43a64ecf2581cdbd11830e8a5be0989746c5d3/README.md", "holders": "Daniil Ostashev", "reader": "[Ostashev compositions 2026-10-12]"},
+    {"n": 176, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 176, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 176, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 211, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "reader": "[Couzo issue-583 certificates 2026-10-13]"},
+    {"n": 211, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 211, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 211, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 241, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "reader": "[Couzo issue-583 certificates 2026-10-13]"},
+    {"n": 241, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 241, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 241, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 304, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 304, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"}
   ],
   "register": {
     "title": "Daniil Ostashev's merged-band and relaxed-composition packings at b909e1b, issue575",

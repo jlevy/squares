@@ -280,6 +280,15 @@ allowlist:
       and when reading their complete copied source bytes. Internal exact inputs
       and all native verdict fields are compared structurally; these source
       digests neither decide geometry nor bind results to internal code hashes.
+  - path: packing/devtools/upper_bound_reports.py
+    kind: download
+    boundary: >-
+      A release asset of another author's repository, outside Git, is admitted only at
+      the size and SHA-256 that a manifest in the pinned source checkout lists for it (PR
+      #574's v2 release), and a member read from the admitted archive only at the digest
+      the packet's declaration names. Both values come from the source, pinned at
+      retention; no digest names a file this repository wrote, decides geometry or pins
+      code.
   - path: packing/devtools/evand_exact_certificates.py
     kind: download
     boundary: Evan Daniel's exact certificates and checker sources at 13ee36e against the digests the packet pinned at retention, and the controls derived from them against their receipts' digests (#375).

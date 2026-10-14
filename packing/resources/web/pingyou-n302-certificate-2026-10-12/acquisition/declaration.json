@@ -1,0 +1,59 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "buddenping-square-packing-certificates",
+  "source_url": "https://github.com/BuddenPing/square-packing-certificates",
+  "source_ref": "main",
+  "source_commit": "5a86ac3ec09beae5f11e2a8f7115954e76fa616a",
+  "retrieved_at_utc": "2026-10-14T04:47Z",
+  "git_scope": "Full clone of the sixteen-commit repository, head 318ab94 at retrieval, checked out at the pin issue #564 names. The scope is the eight paths the pinned commit changed: the six n302 files, which its parent a0e6fb4 first published with the original certificate the issue supersedes, and README.md and SHA256SUMS. Every n302 file has the same blob at the head 318ab94. Under derived-only custody none is copied. No source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence file in the pinned tree, and GitHub detects none. The release READMEs say that upstream software and schema licences are retained beside the files they cover and that no new licence is asserted for third-party material; nothing grants one for the source's own files. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source asks that PingYou Ltd be credited with the n302 construction and its refinement, Ryan Xu with the n70 construction its patches come from, Evan Daniel with that construction's exact retention, and Nate Chaoweeraprasit (SQUISH) and Evan Daniel with the prior n302 it compares against.",
+  "claims": [
+    "Issue #564, as updated at 2026-10-12T22:17Z, reports the exact rational certificate s(302) <= 1787027538273375975382555057/100000000000000000000000000 = 17.87027538273375975382555057: four boundary patches of Ryan Xu's n70 construction (16, 9, 9 and 16 whole squares) and two upright banks of 105 and 147, two mirrored tilted populations of 24 at a frame from a root of 2t^3-3t^2-2t+1 = 0, centres and container dilated by 100000000001/100000000000. It supersedes the issue's original certificate at a0e6fb4, side 17.8702753841786227538399992, by 0.00000000144486300001444863, and compares itself with Evan Daniel's regularization of SQUISH's n302 (T-146), 17.872029849081179973812429831968.",
+    "The source reports that three exact checkers (its own rational polygon-projection checker and Evan Daniel's unchanged verify_cert.py and verify_cert2.py) accept all 302 squares, 1,208 wall conditions and 45,451 pairs, that its script replays the recorded construction exactly, and that this repository's sqpack exact_verify and check_rational_witness_independent at 074ac28 accept its native Witness/v2. These are author reports; no local or global optimality is claimed."
+  ],
+  "scope": [
+    "README.md",
+    "SHA256SUMS",
+    "n302-SHA256SUMS",
+    "n302-squares-project.zip",
+    "n302-verified-comparison.pdf",
+    "n302.cert.json",
+    "n302.svg",
+    "pingyou-n302-rational.yaml"
+  ],
+  "pinned_only": [
+    {
+      "match": "n302.cert.json",
+      "reason": "The exact rational certificate: n, s_exact and 302 [x, y, t] rows of rational strings, centres in [0, S]^2 and t = tan(theta/2). No licence, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+    },
+    {
+      "match": "pingyou-n302-rational.yaml",
+      "reason": "The source's rational corners Witness/v2 of the same packing, in JSON syntax. No licence: pinned by digest only; derive reads it from the same checkout and holds it to the certificate's poses and side."
+    },
+    {
+      "match": "n302-squares-project.zip",
+      "reason": "The source's complete package of 51 files: the certificate and witness again, the n70 parent, the construction table and replay, three exact checkers with Evan Daniel's two, receipts, the comparison figure, and the sources and licences of this repository's two checkers at 074ac28. No licence for the source's own files: pinned by digest only; no program in it was executed."
+    },
+    {
+      "match": "README.md",
+      "reason": "Author prose for every release in the tree at this pin, with the n302 claim, construction and credit quoted in this packet's README. No licence: pinned by digest only."
+    },
+    {
+      "match": "SHA256SUMS",
+      "reason": "The source's digest list for the tree's release files. Pinned by digest only."
+    },
+    {
+      "match": "n302-SHA256SUMS",
+      "reason": "The source's digests of the five n302 artifacts, each equal to the digest this manifest records. Pinned by digest only."
+    },
+    {
+      "match": "n302-verified-comparison.pdf",
+      "reason": "The author's comparison figure. No licence: pinned by digest only."
+    },
+    {
+      "match": "n302.svg",
+      "reason": "The author's drawing of the packing. No licence: pinned by digest only."
+    }
+  ]
+}
