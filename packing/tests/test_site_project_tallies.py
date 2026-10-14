@@ -431,4 +431,5 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     assert [(preset["value"], preset["out"]) for preset in cleared["presets"]] == [
         ("", True),
         (str(level), False),
+        ("", True),
     ]
