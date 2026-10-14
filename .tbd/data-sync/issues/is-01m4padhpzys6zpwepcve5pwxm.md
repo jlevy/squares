@@ -5,7 +5,7 @@ title: "Import itsnaka (SQUISH): nine Mondrian packings at n = 176-305, smaller 
 kind: task
 status: open
 priority: 1
-version: 11
+version: 12
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:09.823Z
-updated_at: 2026-10-14T09:22:32.349Z
+updated_at: 2026-10-14T09:26:41.611Z
 started_at: 2026-10-11T20:28:23.635Z
 closed_at: null
 close_reason: null
@@ -66,3 +66,5 @@ Reopened: Reopened by the 2026-10-12 reconciliation (think-va12): packing/campai
 
 
 2026-10-14 09:25Z: reopened. intake-watch.yaml on main still names think-ga3m as the open owner of the itsnaka read through 56fa71f, so closing it failed check_bead_tree on every branch (D-025). Close it when think-5pn5's watch read re-points that entry.
+
+2026-10-14T09:30Z (squares-43, think-5pn5): claude/serene-hopper-xxh80m commit 31a817e8e re-points the itsnaka/squish-certs read through 56fa71f with no bead (aeacc6c pinned by squish-500-fourth-request-2026-10-11, T-151). Close this bead in the session that sees 31a817e8e reach main, not before: main's intake-watch.yaml names it until then.
