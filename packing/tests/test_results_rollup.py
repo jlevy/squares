@@ -449,7 +449,7 @@ def _entry(
     """A register entry made from `base`: its id, the day it was published, its S rung,
     its credit line, its kind, the day it was registered, the day it was published
     unless given, and the day it reached the site, the day it was registered unless given,
-    or none when `landed` is empty, as a branch's new entry has; attributed to no listed
+    or none when `landed` is empty, which the schema no longer allows; attributed to no listed
     project."""
     record = {
         **base.record,
@@ -473,8 +473,9 @@ def test_days_group_by_arrival_and_not_by_registration_or_publication(
     11 October is in that day's block and in no recent week, and so is one registered on
     9 October that waited two days to merge (#514's review A, finding A1); results
     arriving on different days are in different blocks, newest first; one that arrived
-    before the window is in none; an entry a branch adds, with no `landed` yet, is placed
-    by its registration; every significance counts, the highest first within a day; and a
+    before the window is in none; a record with no `landed`, which the schema no longer
+    allows in the register, is placed by its registration; every significance counts, the
+    highest first within a day; and a
     day nothing arrived on has no block."""
     base = overview.results[0]
     entries = [
@@ -485,7 +486,7 @@ def test_days_group_by_arrival_and_not_by_registration_or_publication(
         _entry(base, "T-923", "2026-10-03", 5, credit="Before"),
         _entry(base, "T-924", "2026-10-09", 3, credit="Late", landed="2026-10-11"),
         _entry(base, "T-925", "2026-10-07", 1, credit="Low"),
-        _entry(base, "T-926", "2026-10-12", 1, credit="Branch", landed=""),
+        _entry(base, "T-926", "2026-10-12", 1, credit="Unstamped", landed=""),
     ]
     days = added_days(entries, date(2026, 10, 5))
     assert [(day.day, [result.id for result in day.results]) for day in days] == [

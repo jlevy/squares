@@ -1251,9 +1251,10 @@ def landed_day(result: Result) -> date:
     """The day a result reached `main`, and with it the site, its `landed`: what the seven
     days group by and the table's Added filters read (`data-added`), as against the day
     its row shows (`result_day`), which can be years earlier, and the day a lane wrote it
-    (`registered_day`), up to two days before (#514's review A, finding A1). An entry a
-    branch adds carries no `landed` until the merge step stamps it
-    (`devtools.stamp_landed`), and a render of the branch places it by `registered`."""
+    (`registered_day`), up to two days before (#514's review A, finding A1). The schema
+    requires it, a lane writes it with the entry, and the merge step re-dates it
+    (`devtools.stamp_landed`); a record without one, as a test's may be, is placed by
+    `registered`."""
     return date.fromisoformat(str(result.record.get("landed") or result.record["registered"]))
 
 
