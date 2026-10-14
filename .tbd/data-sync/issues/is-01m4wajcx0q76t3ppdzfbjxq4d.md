@@ -3,9 +3,9 @@ type: is
 id: is-01m4wajcx0q76t3ppdzfbjxq4d
 title: "Finish PR 592 n17 formalization: recover reviews, address findings, validate and merge"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 17
+version: 18
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -28,7 +28,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:26:15.311Z
-updated_at: 2026-10-14T07:23:57.408Z
+updated_at: 2026-10-14T09:02:44.036Z
 started_at: 2026-10-14T04:26:53.175Z
+closed_at: 2026-10-14T09:02:44.036Z
+close_reason: Regularization stack585/587/591 merged9f48; PR592 mergedf73. Main pushPacking38536230813 passes all10deep workers+aggregate including corrected slow floor; Pages38536230832 published/deployed and liveverified exactf73. All review findings fixed or explicitly deferred with owning beads. N17 remainsV0/C1 with full proofs separately tracked; changelog continues underjpto.
+resolution: null
+duplicate_of: null
 ---
 User authorized takeover of PR 592 and review/merge completion alongside the regularization closeout. Recover published A/B/C findings and unfinished fixes; preserve owner decisions only with trusted evidence; update against main, confirm evidence independence and parser safety, run required validation, publish dispositions, merge only after reviews and CI pass.
