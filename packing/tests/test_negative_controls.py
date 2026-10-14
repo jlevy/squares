@@ -175,8 +175,6 @@ def test_historical_push_logs_leave_workers_but_keep_scientific_consumers(
         assert source.relative_to(controls.REPO) not in copied_targets
         assert not (tree / HERE / "campaign/agent-sessions" / name).exists()
     for relative in (
-        "campaign/agent-sessions/session-164-efficiency-push.log.gz",
-        "campaign/agent-sessions/session-164-push-final.log.gz",
         "campaign/agent-sessions/session-153-native-full.json",
         "campaign/agent-sessions/session-153-native-full.rows.jsonl",
         "frontier/results.yaml",
@@ -196,9 +194,6 @@ def test_historical_push_logs_leave_workers_but_keep_scientific_consumers(
             assert tree / HERE / relative not in (tracked_files(tree, "packing") or [])
             continue
         assert tree / HERE / relative in (tracked_files(tree, "packing") or []), relative
-        if relative.endswith(".log.gz"):
-            assert read_retained_bytes(tree / HERE / relative) == read_retained_bytes(source)
-            assert not (tree / HERE / relative.removesuffix(".gz")).exists()
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
@@ -1081,6 +1076,107 @@ def test_historical_byproducts_are_kept_in_git_but_not_workers(
         / "bentz2016-one-spare-receipt.md",
     ):
         assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
+
+
+def test_ci_profile_outputs_leave_workers_without_changing_scientific_inputs(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    tree, copied_targets = control_snapshot
+    outputs = controls.CI_RESEARCH_OUTPUTS
+    assert outputs <= PRUNE
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    assert all(
+        not controls.in_pruned_roots(path.resolve(), outputs) for path in COPY_SEPARATELY
+    )
+    for output in outputs:
+        sources = [output] if output.is_file() else list(output.rglob("*"))
+        sources = [path for path in sources if path.is_file()]
+        assert sources, "primary diagnostic evidence must remain intact"
+        for control in specification["controls"]:
+            assert not controls.in_pruned_roots((ROOT / control["file"]).resolve(), outputs)
+            assert output.name not in control["run"]
+        for source in sources:
+            relative = source.relative_to(controls.REPO)
+            assert relative not in copied_targets
+            assert not (tree / relative).exists()
+    # These older logs remain losslessly readable in the primary checkout.
+    for name in ("session-164-efficiency-push.log.gz", "session-164-push-final.log.gz"):
+        assert read_retained_bytes(ROOT / "campaign/agent-sessions" / name)
+    for relative in (
+        "frontier/results.yaml",
+        "frontier/evidence.yaml",
+        "campaign/agent-sessions/session-153-native-full.json",
+        "campaign/agent-sessions/session-153-native-full.rows.jsonl",
+        "devtools/check_results.py",
+    ):
+        assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
+    assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
+@pytest.mark.parametrize("rescue", ["review", "README", "SYNOPSIS", "campaign", "registered"])
+def test_ci_profile_copyback_follows_real_checked_links_and_result_registration(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, rescue: str
+) -> None:
+    repository = tmp_path / "source"
+    packing = repository / "packing"
+    output = packing / "benchmarks/ci-profile/telemetry.json"
+    output.parent.mkdir(parents=True)
+    payload = b'{"diagnostic":true}\n'
+    output.write_bytes(payload)
+    reader = packing / "reader.py"
+    reader.write_bytes(b"ordinary source\n")
+    review = repository / "docs/review.md"
+    review.parent.mkdir()
+    readme, synopsis = repository / "README.md", repository / "SYNOPSIS.md"
+    record = packing / "campaign/record.md"
+    record.parent.mkdir()
+    register = packing / "frontier/results.yaml"
+    register.parent.mkdir()
+    documents = (review, readme, synopsis, record)
+    for document in documents:
+        document.write_text("Retained record.\n")
+    review.write_text(f"[diagnostic]({os.path.relpath(output, review.parent)})\n")
+    register.write_text("results: []\n")
+    if rescue in {"README", "SYNOPSIS", "campaign"}:
+        document = {"README": readme, "SYNOPSIS": synopsis, "campaign": record}[rescue]
+        document.write_text(f"[required]({os.path.relpath(output, document.parent)})\n")
+    elif rescue == "registered":
+        register.write_text(
+            "results:\n- artifacts: [packing/benchmarks/ci-profile/telemetry.json]\n"
+        )
+    index_fixture_source(repository)
+    monkeypatch.setattr(controls, "REPO", repository)
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
+    monkeypatch.setattr(controls, "DESCEND", frozenset(output.parents))
+    monkeypatch.setattr(controls, "CI_RESEARCH_OUTPUTS", frozenset({output}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (review.parent, readme, synopsis))
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "_linked_documents", lambda: list(documents))
+    expected = [] if rescue == "review" else [output]
+    assert controls.snapshot_pruned_targets() == expected
+    worker = tmp_path / "worker"
+    clone_tree(worker)
+    copied = worker / output.relative_to(repository)
+    ordinary = (reader, review, readme, synopsis, record, register)
+    assert all(
+        (worker / path.relative_to(repository)).read_bytes() == path.read_bytes()
+        for path in ordinary
+    )
+    if rescue == "review":
+        assert not copied.exists()
+    else:
+        assert copied.read_bytes() == payload
+        assert not copied.is_symlink()
+        assert copied in (tracked_files(worker, ".") or [])
+        copied.write_bytes(b"private mutation\n")
+    assert output.read_bytes() == payload
+    assert snapshot_source_bytes() == sum(path.stat().st_size for path in ordinary) + (
+        len(payload) if expected else 0
+    )
 
 
 def test_historical_diagnostics_have_no_declared_worker_consumer() -> None:

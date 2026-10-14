@@ -365,9 +365,13 @@ def test_site_code_symbol_stylesheet_publishes_its_joined_face() -> None:
     bundle = site_assets.shared()
     files = bundle.assets.referenced([head])
     sheets = [name for name in files if name.startswith("css/code-symbols.")]
-    faces = [name for name in files if name.startswith("fonts/KaTeX_AMS-Regular-code-symbols.")]
-    assert len(sheets) == len(faces) == 1
-    assert files[faces[0]].startswith(b"wOF2")
-    assert f'url("../{faces[0]}")' in files[sheets[0]].decode()
-    assert "unicode-range: U+211D;" in files[sheets[0]].decode()
+    assert len(sheets) == 1
+    css = files[sheets[0]].decode()
+    for face in ("KaTeX_AMS-Regular", "KaTeX_Main-Regular"):
+        faces = [name for name in files if name.startswith(f"fonts/{face}-code-symbols.")]
+        assert len(faces) == 1
+        assert files[faces[0]].startswith(b"wOF2")
+        assert f'url("../{faces[0]}")' in css
+    assert "unicode-range: U+211D;" in css
+    assert "unicode-range: U+2194, U+2264;" in css
     assert code_symbol_face_css(kpress_static()) in bundle.assets.inlined(head)

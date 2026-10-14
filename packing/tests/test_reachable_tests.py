@@ -14,6 +14,7 @@ import os
 import re
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
 from collections.abc import Sequence
 from pathlib import Path
 from types import SimpleNamespace
@@ -285,7 +286,7 @@ def test_running_selected_tests_preserves_coverage_and_uses_requested_workers(
             *targets,
             "-m",
             marker,
-            *(("-n", "4") if workers == 4 else ()),
+            *(("-n", "4", "--dist=loadfile") if workers == 4 else ()),
             "--durations=0",
             "--durations-min=0",
         )
@@ -351,7 +352,8 @@ def test_the_selection_runs_under_the_workers_the_caller_asks_for() -> None:
     assert serial[-4:] == ("-m", validate.QUICK_TESTS, "--durations=0", "--durations-min=0")
 
     parallel = pytest_command(["tests"], 4)
-    assert parallel[-4:] == ("-n", "4", "--durations=0", "--durations-min=0")
+    assert parallel[-5:] == ("-n", "4", "--dist=loadfile", "--durations=0", "--durations-min=0")
+    assert "--dist=loadfile" not in serial
     assert parallel[: parallel.index("-n")] == serial[: serial.index("--durations=0")]
 
 
@@ -709,3 +711,73 @@ def test_since_and_a_snapshot_are_refused_together(
         )
     assert error.value.code == 2
     assert "not allowed with argument" in capsys.readouterr().err
+
+
+@pytest.mark.pool_heavy
+def test_native_loadfile_preserves_every_case_and_builds_a_module_fixture_once(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The native scheduler changes fixture allocation, not the selected work."""
+    module = tmp_path / "test_shared_builder.py"
+    module.write_text(
+        """import os
+from pathlib import Path
+import pytest
+
+@pytest.fixture(scope="module")
+def shared_value():
+    destination = Path(os.environ["FIXTURE_REPORT"])
+    destination.mkdir(parents=True, exist_ok=True)
+    with (destination / os.environ["PYTEST_XDIST_WORKER"]).open("x") as output:
+        output.write("complete")
+    return 17
+
+@pytest.mark.parametrize("number", range(8))
+def test_every_case(shared_value, number):
+    assert shared_value == 17
+    with (Path(os.environ["CASE_REPORT"]) / str(number)).open("x") as output:
+        output.write("executed")
+""",
+        encoding="utf-8",
+    )
+    identities: list[set[tuple[str, str]]] = []
+    for distribution in ("load", "loadfile"):
+        reports = tmp_path / distribution
+        reports.mkdir()
+        cases = reports / "cases"
+        cases.mkdir()
+        builds = reports / "builds"
+        monkeypatch.setenv("FIXTURE_REPORT", str(builds))
+        monkeypatch.setenv("CASE_REPORT", str(cases))
+        junit = reports / "cases.xml"
+        command = tuple(
+            f"--dist={distribution}" if part == "--dist=loadfile" else part
+            for part in pytest_command([str(module)], 2)
+        )
+        result = subprocess.run(
+            (
+                *command,
+                f"--junitxml={junit}",
+                f"--basetemp={reports / 'pytest-tmp'}",
+                "-p",
+                "no:cacheprovider",
+            ),
+            cwd=tmp_path,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=30,
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
+        executed = ET.parse(junit).findall(".//testcase")
+        assert len(executed) == 8
+        assert all(not list(case) for case in executed)
+        identities.append(
+            {(case.attrib["classname"], case.attrib["name"]) for case in executed}
+        )
+        assert all((cases / str(number)).read_text() == "executed" for number in range(8))
+        assert sum((builds / worker).is_file() for worker in ("gw0", "gw1")) == (
+            2 if distribution == "load" else 1
+        )
+    assert len(identities[0]) == 8
+    assert identities[0] == identities[1]

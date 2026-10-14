@@ -469,7 +469,8 @@ def pytest_command(
     explicit `--lane slow` or `--lane all` (`--push --include-reachable-slow` in the parent).
     The requested lane retains the same worker distribution.
     """
-    distribution = ("-n", str(workers)) if workers > 1 else ()
+    # Preserve module-scoped builders instead of rebuilding them in every worker.
+    distribution = ("-n", str(workers), "--dist=loadfile") if workers > 1 else ()
     receipts = (
         ("-p", "devtools.reachable_progress", f"--junitxml={artifact_stem}.junit.xml")
         if artifact_stem is not None

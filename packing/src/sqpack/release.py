@@ -89,7 +89,7 @@ PUBLICATION_HISTORY = (
         first_published="October 14, 2026",
         result_scope=(
             "Document quick pre-push feedback, explicit deeper checks and CI costs, and "
-            "render the real-number symbol in site code with the bundled font."
+            "render mathematical symbols in site code with bundled fonts."
         ),
     ),
     PublicationHistoryEntry(
@@ -693,7 +693,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         impact="patch",
         reason=(
             "Document quick pre-push feedback, explicit deeper checks and CI costs, and "
-            "render the real-number symbol in site code with the bundled font."
+            "render mathematical symbols in site code with bundled fonts."
         ),
     ),
     ReleaseImpactDecision(
@@ -828,6 +828,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/regularized_drawings.py",
             "packing/devtools/render_n11_lower_bounds_explainer.py",
             "packing/devtools/render_overview.py",
+            "packing/devtools/run_negative_controls.py",
             "packing/devtools/source_supersession.py",
             "packing/devtools/validate_schemas.py",
             "packing/src/sqpack/cli/validate.py",
@@ -852,7 +853,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "edition histories are unchanged. Exact-admission coverage caches remain "
             "fresh per invocation; the presentation side reader retains scalar, literal "
             "and receipt checks without constructing unrelated coordinates. Validation "
-            "changes select test lanes, native queue order and diagnostics; paper "
+            "changes select test lanes, native queue order and diagnostics. Worker "
+            "snapshots omit only unconsumed CI telemetry, preserving math inputs; paper "
             "producers do not execute those commands. Schema validation retains its "
             "refusals while reusing already-read metadata. These shared import paths "
             "are conservative paper inputs. The retained claim documents and source "

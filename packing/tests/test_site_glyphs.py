@@ -708,21 +708,38 @@ def test_literal_lean_code_uses_the_shared_glyph_without_host_fallback(
 
     head, _script = render_overview.page_assets()
     code_sheet = next(line for line in head.splitlines() if "css/code-symbols." in line)
-    literal = "Sq17.square17_optimality (L : \N{DOUBLE-STRUCK CAPITAL R}) : Sq17."
+    literal = (
+        "Sq17.square17_optimality (L : \N{DOUBLE-STRUCK CAPITAL R}) : "
+        "Sq17.HalfPlaneAssembly.PlainPacking L ↔ Sq17.EndpointGeometry.side ≤ L"
+    )
     body = (
         f'<main class="kpress"><code id="literal">{literal}</code>'
         '<code id="ascii">Sq17.square17_optimality (L : R) : Sq17.</code></main>'
     )
+    complete = site_assets.shared().assets.inlined(f"<head>{head}</head>{body}")
+    symbols = render_n11_lower_bounds_explainer.code_symbol_face_css(
+        render_n11_lower_bounds_explainer.kpress_static()
+    )
+    relation = next(
+        block
+        for block in render_n11_lower_bounds_explainer.FONT_FACE_BLOCK.findall(symbols)
+        if "U+2194, U+2264" in block
+    )
+    assert symbols in complete
     widths: list[float] = []
     with sync_playwright() as driver:
         browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
         try:
             page = browser.new_page()
-            for joined in (False, True):
-                styles = head if joined else head.replace(code_sheet, "")
-                page.set_content(
-                    site_assets.shared().assets.inlined(f"<head>{styles}</head>{body}")
-                )
+            without_symbols = site_assets.shared().assets.inlined(
+                f"<head>{head.replace(code_sheet, '')}</head>{body}"
+            )
+            for joined, document in (
+                (False, without_symbols),
+                (False, complete.replace(relation, "")),
+                (True, complete),
+            ):
+                page.set_content(document)
                 # Locator screenshots wait for fonts.ready; no timing guess or new JS probe.
                 page.locator("#literal").screenshot()
                 assert page.locator("#literal").text_content() == literal
@@ -744,10 +761,9 @@ def test_literal_lean_code_uses_the_shared_glyph_without_host_fallback(
                     assert any("Planetaire" in font["familyName"] for font in drawn["ascii"])
                     if joined:
                         assert all(font["isCustomFont"] for font in drawn["literal"])
-                        assert any(
-                            font["postScriptName"] == "KaTeX_AMS-Regular"
-                            for font in drawn["literal"]
-                        )
+                        assert {"KaTeX_AMS-Regular", "KaTeX_Main-Regular"} <= {
+                            font["postScriptName"] for font in drawn["literal"]
+                        }
                     else:
                         assert any(not font["isCustomFont"] for font in drawn["literal"])
                     box = page.locator("#ascii").bounding_box()
@@ -757,7 +773,7 @@ def test_literal_lean_code_uses_the_shared_glyph_without_host_fallback(
                     session.detach()
         finally:
             browser.close()
-    assert widths[0] == pytest.approx(widths[1], abs=0.01)
+    assert widths == pytest.approx([widths[0]] * 3, abs=0.01)
 
 
 @pytest.fixture(scope="module")

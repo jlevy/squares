@@ -200,6 +200,24 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
         "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint",
     )
 )
+# CI/profile observations have no registered mutation-command reader. Their owning
+# plans and reviews remain in each worker, but those documents' outgoing links are
+# not recursively checked there. Keep all primary bytes; checked document links and
+# result registrations still rescue exact private copies. This bounded 241,072-byte
+# selection repairs the October 14 integration breach, not future snapshot growth.
+CI_RESEARCH_OUTPUTS = frozenset(
+    ROOT / relative
+    for relative in (
+        "benchmarks/validation-efficiency/retrospective-2026-10-14.json",
+        "benchmarks/results/author-checker-profile-2026-10-02",
+        "campaign/agent-sessions/session-153-hosted-full.json",
+        "campaign/agent-sessions/session-164-push-final.log.gz",
+        "campaign/agent-sessions/session-164-efficiency-push.log.gz",
+        "campaign/agent-sessions/session-164-pool-phase-initial.log",
+        "campaign/agent-sessions/session-164-pool-phase-passed.log",
+        "campaign/agent-sessions/session-164-publication-initial.log",
+    )
+)
 # 2026-10-09, #464 on the landed n17 stack: output roots and files that no registered
 # control opens. All 174 controls ran mutated under `strace -f -e trace=%file` in worker
 # trees that still held them, and all 174 fired; the only reader of any of these bytes was
@@ -905,7 +923,12 @@ REGULARIZED_WITNESS_PATTERN = "n-*-regularized.yaml*"
 REGULARIZED_WITNESSES = frozenset(
     (ROOT / "atlas/known-best/regularized").glob(REGULARIZED_WITNESS_PATTERN)
 )
-PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS | UNREAD_WORKER_OUTPUTS
+PRUNE |= (
+    REGULARIZED_WITNESSES
+    | HISTORICAL_SNAPSHOT_OUTPUTS
+    | UNREAD_WORKER_OUTPUTS
+    | CI_RESEARCH_OUTPUTS
+)
 # 2026-10-11, #511 (the regularization tools layer): the driver of Evan Daniel's vendored
 # regularizer, the same-side re-solve, the review gallery and their tests took the
 # snapshot to 209,779,702 bytes, 64,502 over the cap. They run on request, outside any
@@ -1594,17 +1617,19 @@ def _linked_documents() -> list[Path]:
 
 
 def _link_needs_private_target(document: Path, target: Path) -> bool:
-    """Rescue historical browser outputs only for a link a worker actually checks.
+    """Rescue diagnostic outputs only for a link a worker actually checks.
 
-    The math-startup run root is already pruned: its reporter and Pages jobs read
-    these observations, but no registered mutation command does. A root review's
-    links copied its two PDFs and frozen HTML back into every worker anyway. The
-    registered link checks read README/SYNOPSIS and campaign Markdown; a link to a
-    review checks its existence or heading, without following that review's links.
+    Browser observations and the exact CI/profile roster have primary-tree readers,
+    but no registered mutation-command reader. Plans and reviews copied their linked
+    outputs back unnecessarily: worker link checks read README/SYNOPSIS and campaign
+    Markdown, without recursively following a linked plan's or review's own links.
     Keep other rescue surfaces, explicit custody and result registration unchanged.
     """
+    diagnostic = target.is_relative_to(
+        ROOT / "benchmarks/math-startup/runs"
+    ) or in_pruned_roots(target, CI_RESEARCH_OUTPUTS)
     return (
-        not target.is_relative_to(ROOT / "benchmarks/math-startup/runs")
+        not diagnostic
         or document in {REPO / "README.md", REPO / "SYNOPSIS.md"}
         or document.is_relative_to(ROOT / "campaign")
     )
