@@ -273,9 +273,9 @@ def defect_citation_paths(root: pathlib.Path) -> list[pathlib.Path]:
             if name.startswith("."):
                 continue
             path = parent / name
-            if path.suffix == ".yaml":
+            if path.match("*.yaml"):
                 yaml_paths.append(path)
-            elif path.suffix == ".md":
+            elif path.match("*.md"):
                 markdown_paths.append(path)
     return sorted(yaml_paths) + sorted(markdown_paths)
 

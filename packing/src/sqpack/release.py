@@ -723,6 +723,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/build_known_best_atlas.py",
             "packing/devtools/overview_sections.py",
             "packing/devtools/regularized_drawings.py",
+            "packing/devtools/validate_schemas.py",
             "packing/src/sqpack/witness.py",
         ),
         outputs=(
@@ -758,6 +759,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "projection, wire-data refusals, receipt and claim checks, and full renderer "
             "geometry are preserved; atlas markup remains byte-identical. The drawing "
             "register retains its full audit and equivalent generated-block diagnostics. "
+            "The shared schema audit preserves every eligible citation source and its "
+            "ordering, the original defect-id regex and all semantic checks and "
+            "diagnostics while pruning already excluded directories and text without "
+            "a defect-id prefix. Its affected negative controls are replayed separately. "
             "These producer optimizations change no paper, drawing or component edition; "
             "the separately scoped launch-history bookkeeping updates About."
         ),

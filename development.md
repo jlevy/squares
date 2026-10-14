@@ -183,34 +183,6 @@ Record the checked source and base, selected steps, and failures or skips.
 Expensive final evidence must not delay every editing cycle, but a green fast surface
 alone is not full pre-merge evidence.
 
-### Enforced quick-lane checkpoint
-
-For a test-call timing repair, `enforced-quick.yml` runs the canonical four quick shards
-under a real push or manual-dispatch event.
-The existing twelve-second CALL ceiling is enforced on that event; the pull-request
-timing exception does not apply.
-Each runner installs the pinned browser toolchain, requires Chromium, and preserves
-source identity, collection, JUnit, skips and timing receipts.
-The aggregate requires all four shards to succeed.
-Changed cases must be collected and executed.
-
-This selection covers the four quick shards, not the complete PR fast surface or a full
-checkpoint. Current-tree frontend evidence accounts for the browser-floor and layout
-tests the shards exclude.
-Source, record and negative-control checks retain their ordinary PR gates.
-Optional omissions are reported explicitly; they are not recorded as executed tests.
-
-A self-change push trigger validates the workflow and its contract before its first
-merge. After it exists on the default branch it can also be dispatched manually.
-The existing main, daily and full workflows retain their selections and behavior.
-To complete a previously failed checkpoint, record the failed run unchanged, rerun its
-invalidated checks, and identify the unchanged input scope that supports reuse of
-successful mathematical results.
-A schema-audit change invalidates the controls that execute that audit, so those
-controls must run at the corrected source too.
-This bounded completion is tracked in think-4syd; the main full run remains the
-backstop, and supplies no missing pre-merge evidence.
-
 ### The tiers
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |

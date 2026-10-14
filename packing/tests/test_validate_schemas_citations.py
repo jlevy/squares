@@ -67,3 +67,12 @@ def test_citation_scan_retains_unknown_refusal_and_regex_boundaries(
     monkeypatch.setattr(validate_schemas, "REPO", tmp_path)
     monkeypatch.setattr(validate_schemas, "FRONTIER", frontier)
     assert validate_schemas.defect_checks() == ["README.md: cites D-000, not in defects.yaml"]
+
+
+def test_citation_extensions_retain_native_glob_case_rules(tmp_path: Path) -> None:
+    for name in ("UPPER.MD", "UPPER.YAML", "lower.md", "lower.yaml"):
+        (tmp_path / name).write_text("No citation.", encoding="utf-8")
+    assert validate_schemas.defect_citation_paths(tmp_path) == [
+        *sorted(tmp_path.rglob("*.yaml")),
+        *sorted(tmp_path.rglob("*.md")),
+    ]
