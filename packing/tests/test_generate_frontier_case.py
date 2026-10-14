@@ -151,6 +151,10 @@ NOT_REPRODUCED = {
         "left null on purpose: the translation-escape screen and the rigidity assessment "
         "write this field later in the promotion path"
     ),
+    "packing.regularization": (
+        "never drafted: devtools.regularized_drawings writes it from the regularized "
+        "layer's index, and its own check holds it there"
+    ),
 }
 #: Cases whose prose is bespoke rather than templated, and why.
 BODY_NOT_REPRODUCED = {
@@ -535,11 +539,14 @@ def test_regenerates_a_hand_written_record_field_by_field(n: int) -> None:
         if verdict != "reproduced":
             print(f"  {verdict}: {path}")
     assert failures == [], "\n".join(failures)
-    # The allowlists are not a place to hide a growing set of exceptions: exactly one
-    # front-matter block is left for a later step, and it is `rigidity`.
+    # The allowlists are not a place to hide a growing set of exceptions: exactly two
+    # front-matter blocks are left for a later step, `rigidity` and the generated
+    # `regularization` note of a count the regularized layer draws.
     unreproduced = [path for path, verdict in verdicts.items() if verdict == "not reproduced"]
     assert unreproduced, "the rigidity block should be reported, not silently absent"
-    assert all(path.startswith("packing.rigidity") for path in unreproduced), unreproduced
+    assert all(
+        path.startswith(("packing.rigidity", "packing.regularization")) for path in unreproduced
+    ), unreproduced
 
 
 @pytest.mark.parametrize("n", [68, 105, 292])
@@ -603,7 +610,8 @@ def test_the_whole_record_is_byte_identical_apart_from_the_allowlist(n: int) -> 
     if n in BODY_NOT_REPRODUCED:
         return
     # Drop the rigidity block from the committed record and the `rigidity: null` line
-    # from the generated one; nothing else may differ. The generator's own `--check`
+    # from the generated one, and the committed record's generated regularization note;
+    # nothing else may differ. The generator's own `--check`
     # makes exactly this allowance, and uses this function to make it.
     stripped = without_rigidity(committed)
     assert without_rigidity(generated) == stripped

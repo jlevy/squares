@@ -1827,9 +1827,21 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
             "/packing/campaign/agent-sessions/session-153-native-reconciliation.json",
         ),
     }
-    assert set(kept) == PAPER_JOBS
+    kept["overview"] = (
+        "/packing/resources/web/",
+        "!/packing/resources/web/*",
+        "/packing/resources/web/evand-square-packing-2026-10-05/",
+        "!/packing/resources/web/evand-square-packing-2026-10-05/*",
+        "/packing/resources/web/evand-square-packing-2026-10-05/receipts/",
+        "!/packing/resources/web/evand-square-packing-2026-10-05/receipts/*",
+        "/packing/resources/web/evand-square-packing-2026-10-05/receipts/register-comparison.json",
+    )
+    kept["publish"] = kept["overview"]
+    assert set(kept) == PAPER_JOBS | {"overview", "publish"}
 
     def keeps(job: str, declared: Path) -> bool:
+        if job in {"overview", "publish"}:
+            return declared == REPO / kept["overview"][-1].removeprefix("/")
         for pattern in kept.get(job, ()):
             path = REPO / pattern.strip("/")
             if declared == path or (pattern.endswith("/") and declared.is_relative_to(path)):
@@ -1911,6 +1923,19 @@ def test_optimality_archive_links_are_all_in_its_sparse_checkout() -> None:
 #: What each review's partial checkout must materialize of the two omitted trees, and two
 #: files beside them it must not.
 REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
+    "overview": (
+        (
+            "packing/resources/bibliography.yaml",
+            "packing/resources/web/evand-square-packing-2026-10-05/receipts/register-comparison.json",
+        ),
+        (
+            "packing/resources/web/unrelated/README.md",
+            "packing/resources/web/evand-square-packing-2026-10-05/README.md",
+            "packing/resources/web/evand-square-packing-2026-10-05/receipts/other.json",
+            "packing/resources/web/evand-square-packing-2026-10-05/square-packing/README.md",
+            "packing/campaign/old/README.md",
+        ),
+    ),
     "square-packing-methods-survey": (
         tuple(pattern.removeprefix("/") for pattern in METHODS_ARCHIVED_RENDER_PATTERNS),
         (
@@ -1955,11 +1980,14 @@ REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
 }
 
 
+REVIEW_CHECKOUTS["publish"] = REVIEW_CHECKOUTS["overview"]
+
+
 @pytest.mark.parametrize("job", sorted(REVIEW_CHECKOUTS))
 def test_each_review_sparse_checkout_keeps_only_its_archive_inputs(
     tmp_path: Path, job: str
 ) -> None:
-    """Git must actually materialize a review's data and citations despite the archive
+    """Git must actually materialize a page's data and citations despite the archive
     and campaign exclusions, and nothing else of them."""
     source = tmp_path / "source"
     checkout = tmp_path / "checkout"

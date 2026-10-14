@@ -327,7 +327,9 @@ def test_native_closed_optional_math_is_outside_the_initial_readability_sample(
 #: with the weekly prototype, and the Verification Ladders prose the negative control was
 #: written against is off the screen. A taller screen does not bring it back, since CLS
 #: divides each move by the screen's height (0.077 at 1800). Taken out, the control reads
-#: 0.105 again, its value before the overview.
+#: 0.105 again, its value before the overview. The control now sets both fallbacks'
+#: metrics wrong (`mismatched`, from `main`'s 2b67bb679) rather than relying on the
+#: unadjusted face, and it still runs here, on the prose it was written against.
 PROSE_FIRST = "results-prose-first.html"
 #: The overview's two sections, the last seven days' registrations and the weekly rollup
 #: under them, headings, introductions and blocks: to the next section's heading, which
@@ -403,7 +405,7 @@ def _prose_font_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[s
         ("times", "shipped"),
         ("platform", "prose-first"),
         ("times", "prose-first"),
-        ("unadjusted", "prose-first"),
+        ("mismatched", "prose-first"),
     ],
 )
 def test_results_prose_font_arrival_retains_layout(
@@ -437,9 +439,17 @@ def test_results_prose_font_arrival_retains_layout(
 
             def select_fallback(route: Route) -> None:
                 response = route.fetch()
-                css = re.sub(r'"Site Prose Georgia"\s*,\s*', "", response.text())
-                if fallback == "unadjusted":
-                    css = re.sub(r'"Site Prose Times"\s*,\s*', "", css)
+                css = response.text()
+                if fallback == "times":
+                    css = re.sub(r'"Site Prose Georgia"\s*,\s*', "", css)
+                else:
+                    # Native untuned faces can happen to wrap this page similarly.
+                    # Corrupt both local fallbacks' metrics for a deterministic
+                    # negative control of a font-driven shift past the CLS budget.
+                    css, changed = re.subn(
+                        r"size-adjust: (?:101|110\.5)%;", "size-adjust: 200%;", css
+                    )
+                    assert changed == 2
                 route.fulfill(response=response, body=css)
 
             context.route("**/assets/css/site.*.css", select_fallback)
@@ -487,9 +497,8 @@ def test_results_prose_font_arrival_retains_layout(
         # not the production load protocol. Keep readability and native CLS here;
         # The production CLI enforces LCP, task and blocking budgets on normal loads.
         assert not check_site_rendering.problems(report, javascript=False), report
-        if fallback == "unadjusted":
-            # The original fallback is a real negative control: exposing a
-            # first paint before PT Serif arrives must still trip the .1 guard
+        if fallback == "mismatched":
+            # Deliberately wrong fallback metrics must trip the unchanged .1 guard
             # on the opening prose it was written against (`PROSE_FIRST`).
             assert report["cls"] > check_site_rendering.CLS_LIMIT, report
         else:

@@ -770,7 +770,6 @@ def test_a_regularized_slide_too_far_to_match_is_recorded_not_refused(
     }
 
 
-@pytest.mark.slow
 def test_the_489_certificate_at_305_has_488s_side_in_a_quarter_turned_arrangement() -> None:
     """Hunt 3's unnamed n305 certificate states exactly the side #488 reports there.
 

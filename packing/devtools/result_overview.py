@@ -443,7 +443,6 @@ def film_facts_html(fact: dict[str, Any]) -> str:
             glyph,
             style,
             text,
-            "is-new-result" if text == "optimal" and flags.optimal else "",
             recent=text == "optimal" and flags.optimal,
         )
         for glyph, style, text in fact["badges"]
@@ -467,7 +466,7 @@ def film_facts_html(fact: dict[str, Any]) -> str:
         )
         cites.append(
             f'<p class="site-atlas-pop-cite"><span '
-            f'class="site-atlas-pop-which {contribution_class(int(fact["n"]), which)}">'
+            f'class="site-atlas-pop-which is-{which}">'
             f"{which}</span>{_esc(line['text'])}{corrects}{note}</p>"
         )
     citation = (

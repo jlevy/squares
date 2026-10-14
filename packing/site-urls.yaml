@@ -5114,7 +5114,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-13'
   status: live
 - path: cases/291.html
   canonical: cases/291.html
@@ -13214,6 +13214,37 @@ urls:
     - packing/cases/regularized_bounds/selection.json
     - packing/cases/regularized_bounds/exact-decision.json
     - packing/devtools/register_regularized_bounds.py
+    - packing/devtools/check_rational_witness_independent.py
+    - docs/project/policies/regularization-policy.md
+- path: result/t-156.html
+  canonical: result/t-156.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-13'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 290
+    established: '2026-10-13'
+    attribution: null
+    builds_on:
+      credit:
+      - Daniel
+      source_keys:
+      - '[Daniel regularizer 2026-10-11]'
+    evidence:
+    - E-regularized-bounds-2026-10-13-grid-slack-exact-decision
+    - E-regularized-bounds-2026-10-12-exact-decision
+    artifacts:
+    - packing/cases/regularized_bounds/README.md
+    - packing/cases/regularized_bounds/grid-slack-2026-10-13/selection.json
+    - packing/cases/regularized_bounds/grid-slack-2026-10-13/exact-decision.json
+    - packing/devtools/register_regularized_bounds.py
+    - packing/devtools/regularize_grid_slack.py
     - packing/devtools/check_rational_witness_independent.py
     - docs/project/policies/regularization-policy.md
 - path: results.html

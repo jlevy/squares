@@ -8,10 +8,10 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **523** evidence records. **320** are formal; **313** of those were established here.
+- **524** evidence records. **321** are formal; **314** of those were established here.
 - **195** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
-- **42** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -431,8 +431,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-evand-exact-optima-2026-10-05-exact-replay` | 14 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-exact-certificates` |
 | `E-evand-exact-optima-2026-10-05-source-replay` | 14 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py`, `V-evand-exact-certificates` |
 | `E-evand-exact-ceilings-2026-10-05-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py` |
-| `E-evand-exact-ceilings-2026-10-05-exact-replay` | 35 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-exact-certificates` |
-| `E-evand-exact-ceilings-2026-10-05-source-replay` | 35 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py`, `V-evand-exact-certificates` |
+| `E-evand-exact-ceilings-2026-10-05-exact-replay` | 34 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-exact-certificates` |
+| `E-evand-exact-ceilings-2026-10-05-source-replay` | 34 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py`, `V-evand-exact-certificates` |
 | `E-n018-wand125-mixed-4704-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
 | `E-n019-wand125-mixed-48229-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
 | `E-n018-wand125-mixed-4704-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | `V-sqverify-fast` |
@@ -546,13 +546,14 @@ results, it is a statement about what this repository has itself examined.
 | `E-n017-overbeck-statement-root-independent` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-k3-n17-root-isolation` |
 | `E-n017-fitzharding-lean-report` | 0 | exact-value | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-fitzharding-n17-lean`, `V-fitzharding-n17-source-manifest`, `V-fitzharding-n17-premise-comparisons` |
 | `E-regularized-bounds-2026-10-12-exact-decision` | 59 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-register-regularized-bounds` |
+| `E-regularized-bounds-2026-10-13-grid-slack-exact-decision` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-register-regularized-bounds` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 199, verified 320
-- **method**: exact-algebraic 139, interval-certified 165, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 199
-- **novelty**: apparently-novel 42, common-knowledge 4, not assessed 14, previously-published 463
-- **relationship to the producer's code**: generator 5, independent-implementation 187, not-applicable 23, same-implementation 285, shared-components 17, unknown-historical 6
+- **assurance**: numerically-checked 4, reported 199, verified 321
+- **method**: exact-algebraic 140, interval-certified 165, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 199
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 463
+- **relationship to the producer's code**: generator 5, independent-implementation 187, not-applicable 23, same-implementation 286, shared-components 17, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -568,6 +569,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |
 | `E-n040-first-order-flexibility` | 40 | That the tilted block turns at first order and every turn is refused at second; DS7 asserts n = 40 is rigid and this refines rather than contradicts it | 1 | verified |
+| `E-regularized-bounds-2026-10-13-grid-slack-exact-decision` | 290 | An exact rational certificate of the catalogue's own packing at n = 290 at the witness's own side, 2.4e-15 below the record's ceiling and 1.8e-19 below the side of Evan Daniel's certificate of the same packing (T-101). The packing is the catalogue's; the regularizer is this project's port of Evan Daniel's coincidence placement. The bound it proves is not new: T-155's certificate at n = 291, at exactly this side, implies it by monotonicity (a packing of 291 unit squares contains a packing of 290), so what is new is the certificate of n = 290's own packing, not the bound. | 1 | verified |
 | `E-green17-sixteen-point-lower` | 17, 18 | The certified object: sixteen rational points unavoidable in [0, 4426213/1000000]^2, every decision an exact rational sign. The bound's value sits below Green's reported number, so what is new is the verified certificate, not the frontier of reported claims. | 0 | verified |
 | `E-n011-corner-class-96-25-exact-decision` | 11 | A weighted fractional unavoidable-set certificate whose row domain is clipped by corner triangles, excluding one corner-bin class of eleven-square packings at side 96/25; the corpus contains no conditioned point certificate of this shape and no statement that every eleven-square packing at 3.84 has a square meeting a corner triangle of depth 1/2 | 0 | verified |
 | `E-n011-corner-class-96-25-interval-decision` | 11 | The same certificate decided by an independent interval route on the clipped domain. | 0 | verified |
@@ -613,7 +615,7 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 | `E-karakus-strip-measure-interval` | 203 | here | - |
 | `E-basic-grid-upper` | 175 | here | - |
 | `E-regularized-bounds-2026-10-12-exact-decision` | 59 | here | - |
-| `E-evand-exact-ceilings-2026-10-05-exact-replay` | 35 | here | - |
+| `E-evand-exact-ceilings-2026-10-05-exact-replay` | 34 | here | - |
 
 The most-cited argument this repository did not produce is `E-karakus-strip-lower`, carrying 203 frontier cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
 

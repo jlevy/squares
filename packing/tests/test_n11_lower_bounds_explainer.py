@@ -851,6 +851,9 @@ def test_the_pages_filter_covers_every_overview_input() -> None:
     declared = render_overview.inputs()
     assert REPO / "TUTORIAL.md" in declared
     assert REPO / "packing/frontier/evidence.yaml" in declared
+    from devtools.evand_exact_certificates import COMPARISON_RECEIPT  # noqa: PLC0415
+
+    assert COMPARISON_RECEIPT in declared
     for event, patterns in pages_filters().items():
         missing = [
             path.relative_to(REPO).as_posix()
@@ -861,6 +864,10 @@ def test_the_pages_filter_covers_every_overview_input() -> None:
         without_documents = [p for p in patterns if p != "TUTORIAL.md"]
         exposed = [path for path in declared if not covered(path, without_documents)]
         assert exposed == [REPO / "TUTORIAL.md"], event
+        receipt = COMPARISON_RECEIPT.relative_to(REPO).as_posix()
+        without_receipt = [pattern for pattern in patterns if pattern != receipt]
+        exposed = [path for path in declared if not covered(path, without_receipt)]
+        assert exposed == [COMPARISON_RECEIPT], event
 
 
 def test_every_declared_overview_input_exists() -> None:

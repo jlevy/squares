@@ -33,11 +33,11 @@ and has not run, to rungs above its own, one listing each, a link that resolves 
 price that is positive, ordered and dated no later than the register's last review
 (`unfinished_confirmations_problems`). It holds an entry's `regularizations`, the counts
 at which its certificate rearranges a packing another result holds, to counts in its
-scope, each once, to a registered result (`of`) dated no later whose scope holds the
-count, to a regularizer among the entry's own sources (or `project`, on a result of
-this project), and to measurements that are numbers no lower than zero, one at least
-where the identity was decided here (`regularizations_problems`). Human review owns
-evidence relevance, claim
+scope, each once, to a registered result (`of`, and `first_certified_in` where named)
+dated no later whose scope holds the count, to a regularizer among the entry's own
+sources (or `project`, on a result of this project), and to measurements that are
+numbers no lower than zero, one at least where the identity was decided here
+(`regularizations_problems`). Human review owns evidence relevance, claim
 coverage, composition, significance, novelty, whether a headline says what its
 claim says, and the choice between kinds the record cannot tell apart.
 
@@ -1114,6 +1114,13 @@ REGULARIZATION_NUMBERS = {
 REGULARIZATION_COUNTS = frozenset({"straightened", "re_angled", "moved"})
 #: The measurements an identity decided here rests on; `measured` needs one at least.
 IDENTITY_MEASUREMENTS = ("one_to_one", "moved", "max_move", "max_turn_deg")
+#: The fields of a regularization that name an earlier registered result, with what
+#: each names: the result holding the packing (`of`, required), and the one whose
+#: certificate first stated the item's exact side (`first_certified_in`, optional).
+REGULARIZATION_EARLIER = {
+    "of": "the packing it regularizes",
+    "first_certified_in": "the certificate that first stated its side",
+}
 
 
 def _regularization_number_problems(name: str, item: Mapping[str, Any]) -> list[str]:
@@ -1144,9 +1151,11 @@ def regularizations_problems(
     Results by Others).
 
     Each count lies in this result's scope and is listed once. The result it names as
-    `of` is registered, is not this one, holds that count in its scope and is dated no
-    later than this one (`result_date`, as `superseded_by_problems` compares them): a
-    packing is regularized after it is published. `by` is one of this result's
+    `of`, and as `first_certified_in` where it names one, is registered, is not this one,
+    holds that count in its scope and is dated no later than this one (`result_date`, as
+    `superseded_by_problems` compares them): a packing is regularized after it is
+    published, and a side is first certified before it is registered again. `by` is one
+    of this result's
     `attribution.source_keys`, or `project` on a result of this project, which has none.
     The counts and measurements are numbers no lower than zero, `moved` is no more
     squares than the count holds, a `measured_in` names a repository file, and an
@@ -1169,19 +1178,22 @@ def regularizations_problems(
         seen.add(n)
         if n not in own:
             problems.append(f"{name} is outside this result's scope")
-        other = str(item.get("of"))
-        if other == rid:
-            problems.append(f"{name} names the result itself as the packing it regularizes")
-        elif other not in dated:
-            problems.append(f"{name} names {other}, which is not registered")
-        else:
-            if n not in scopes.get(other, set()):
-                problems.append(f"{name} names {other}, whose scope does not hold n = {n}")
-            if _earlier(dated[rid], dated[other]):
-                problems.append(
-                    f"{name} names {other}, dated {dated[other]}, after this result's "
-                    f"{dated[rid]}"
-                )
+        for field, role in REGULARIZATION_EARLIER.items():
+            if field != "of" and item.get(field) is None:
+                continue
+            other = str(item.get(field))
+            if other == rid:
+                problems.append(f"{name} names the result itself as {role}")
+            elif other not in dated:
+                problems.append(f"{name} names {other}, which is not registered")
+            else:
+                if n not in scopes.get(other, set()):
+                    problems.append(f"{name} names {other}, whose scope does not hold n = {n}")
+                if _earlier(dated[rid], dated[other]):
+                    problems.append(
+                        f"{name} names {other}, dated {dated[other]}, after this result's "
+                        f"{dated[rid]}"
+                    )
         by = str(item.get("by"))
         if keys and by not in keys:
             problems.append(

@@ -10361,6 +10361,13 @@ results:
       stated and is superseded there as a ceiling; its certificates, credits and reviews
       are unchanged, and T-155 names it as the result whose packings it regularizes.
 
+      On 13 October 2026 the exact regularized certificate of T-156 took the exact form of
+      the verified upper bound at n = 290 to the witness's own side,
+      17.53553390593273762200422181052425, 2.4e-15 below this entry's rounded-up side and
+      1.8e-19 below the side of this entry's certificate itself; the case record still
+      prints 17.53553390593274. This entry stays true as stated and is superseded there as
+      a ceiling, and T-156 names it as the result whose packing it regularizes.
+
   - id: T-102
     kind: lower-bound
     registered: '2026-10-06'
@@ -17846,7 +17853,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -17858,6 +17868,7 @@ results:
         of: T-009
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
         side: same
         identity:
           basis: measured
@@ -17870,6 +17881,7 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
         side: same
         changes: {re_angled: 3}
         identity:
@@ -17883,7 +17895,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         changes: {straightened: 5, re_angled: 2}
         identity:
           basis: measured
@@ -17896,6 +17911,7 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
         side: same
         changes: {straightened: 2}
         identity:
@@ -17909,6 +17925,7 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
         side: same
         changes: {straightened: 2, re_angled: 4}
         identity:
@@ -17922,6 +17939,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -17934,6 +17953,7 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
         side: same
         identity:
           basis: measured
@@ -17946,7 +17966,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         changes: {re_angled: 3}
         identity:
           basis: measured
@@ -17959,7 +17982,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         changes: {straightened: 1}
         identity:
           basis: measured
@@ -17972,6 +17998,7 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
         side: same
         changes: {straightened: 2}
         identity:
@@ -17985,7 +18012,9 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -17997,7 +18026,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         changes: {straightened: 11, re_angled: 4}
         identity:
           basis: measured
@@ -18010,6 +18042,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18022,7 +18056,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18034,7 +18071,9 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18046,7 +18085,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18058,6 +18100,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18070,6 +18114,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         changes: {re_angled: 2}
         identity:
@@ -18083,7 +18129,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18095,6 +18144,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         changes: {straightened: 1}
         identity:
@@ -18108,6 +18159,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18120,6 +18173,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18132,6 +18187,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18144,7 +18201,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18156,7 +18216,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18168,7 +18231,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18180,7 +18246,9 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
         side: solved
+        first_certified_in: T-101
         changes: {re_angled: 8}
         identity:
           basis: measured
@@ -18193,6 +18261,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18205,7 +18275,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18217,6 +18290,7 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
         side: same
         identity:
           basis: measured
@@ -18229,6 +18303,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18241,7 +18317,9 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
         side: solved
+        first_certified_in: T-101
         changes: {straightened: 2, re_angled: 8}
         identity:
           basis: measured
@@ -18254,6 +18332,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18266,7 +18346,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18278,7 +18361,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18290,7 +18376,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         changes: {straightened: 8}
         identity:
           basis: measured
@@ -18303,7 +18392,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18312,7 +18404,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         changes: {straightened: 1}
         identity:
           basis: measured
@@ -18325,6 +18420,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18337,6 +18434,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18349,6 +18448,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18361,7 +18462,9 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18373,7 +18476,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18385,7 +18491,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18397,7 +18506,9 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18409,6 +18520,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18421,7 +18534,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         changes: {straightened: 12, re_angled: 3}
         identity:
           basis: measured
@@ -18434,6 +18550,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18446,7 +18564,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18458,7 +18579,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18470,7 +18594,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18482,6 +18609,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18494,7 +18623,9 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18506,6 +18637,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -18518,7 +18651,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18530,7 +18666,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18542,7 +18681,10 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
+        first_certified_in: T-101
         identity:
           basis: measured
           measured_in: packing/cases/regularized_bounds/selection.json
@@ -18551,6 +18693,8 @@ results:
         of: T-101
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+        modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         changes: {straightened: 1}
         identity:
@@ -18623,6 +18767,171 @@ results:
       agent (Claude) in the overnight regularization work of 12 October 2026; no review is
       yet retained.
 
+  - id: T-156
+    kind: upper-bound
+    registered: '2026-10-13'
+    headline: "`s(290) ≤ 17.5355339059327376…`, by monotonicity from T-155, with its own exact certificate"
+    established: '2026-10-13'
+    claim: >-
+      s(290) <= 17.53553390593273762200422181052425, which is
+      70142135623730950488016887242097/4000000000000000000000000000000 exactly, by
+      monotonicity from T-155 (a packing of 291 unit squares contains a packing of 290):
+      T-155 certifies n = 291 at exactly this side. It is also the exact side of a rational
+      packing that this project made from the register's known-best witness at n = 290
+      with its grid-slack regularizer, its port of Evan Daniel's coincidence placement, and
+      decided here over Q, a certificate of the catalogue's own packing of 290 squares at
+      that side. Measured here, it is the witness's packing.
+
+      The bound is not new. It has followed from T-155's certificate at n = 291 since 12
+      October 2026, when T-155 registered that count at this side; what this result adds
+      is n = 290's verified upper bound moved onto the side, and the second certificate,
+      which is of n = 290's own packing.
+
+      The side is the witness's own, the 36-digit rational promotion of the decimal witness
+      at centre dilation 1. It lies 2.4e-15 below the verified upper bound the record held,
+      17.53553390593274 exactly, the side of Evan Daniel's exact certificate of the same
+      packing rounded up at the fourteen decimals the catalogue prints (T-101), and 1.8e-19
+      below that certificate's own side. It is now the exact form of the case's verified
+      upper bound, which the case record still prints as 17.53553390593274.
+
+      This is not a new packing: it is the same construction certified at a tighter
+      rational side. The catalogue gives the packing's side as 14 + (5/2)sqrt(2), an
+      irrational number 4.8e-33 below the certificate's side, which no rational
+      certificate reaches, so the ceiling still trails the report there.
+
+      The certificate was decided here on 13 October 2026, every pair and every wall over
+      Q, by sqpack.witness.exact_verify and devtools.check_rational_witness_independent,
+      which share no geometry or verification code with each other: valid under both,
+      41905 pair decisions each. These are the checkers the regularization run decided the
+      view with, so the replay reproduces that decision with the producer's code.
+
+      Both refuse the certificate with its tightest pair pushed into overlap and with its
+      box shrunk by one unit of its side's denominator, 2.5e-31: it touches a wall and a
+      neighbour exactly, so that shrink is also the shrink past its least top or right
+      clearance, and the three controls are two distinct mutants.
+
+      Measured against the witness's exact frame under the box's eight symmetries, the
+      certificate pairs one to one with the witness by nearest centres, the largest move is
+      6.0e-31 and none turns by more than 1e-6 as a sine. It draws the same picture as the
+      witness, so the atlas drawing does not change.
+
+      The packing is the one the Kingbird catalogue lists, as T-101 records it, and the
+      regularization below names that result. The regularizer is this project's port of
+      Evan Daniel's coincidence placement (https://github.com/evand/square-packing, MIT),
+      devtools.regularize_grid_slack; the run, the exact re-solve, the exact decisions and
+      the registration are this project's. No optimality, local minimum or rigidity is
+      claimed.
+    scope: {n_values: [290]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 1
+      rationale: >-
+        The bound already followed from T-155's certificate at n = 291 by monotonicity; what
+        this adds is n = 290's verified ceiling moved from a fourteen-place round-up onto
+        that side, 2.4e-15 lower, and a certificate of n = 290's own packing there:
+        bookkeeping and a routine consequence, S1. No new packing, no new bound, no reported
+        side moved and no theorem; the method is Evan Daniel's, ported here.
+      scored: '2026-10-13'
+      by: the registering lane's draft (repository)
+    novelty: apparently-novel
+    builds_on:
+      credit: [Daniel]
+      source_keys: ['[Daniel regularizer 2026-10-11]']
+    composition: >-
+      Two certificates prove the bound at the same side. Derived: the minimum over T-155
+      and the monotonicity step, which is one recorded line (any packing of 291 unit
+      squares contains a packing of 290) carried in the evidence limitations and the n-290
+      case body. T-155's certificate at n = 291 was made by a different generator, Evan
+      Daniel's regularizer through devtools.regularize_evand, and decided by the same two
+      checkers; T-155 sits at V3/C3.
+
+      Direct: one machine entry decides n = 290's own certificate at the case's verified
+      value, the exact decision here by two checkers that share no code with each other
+      (exact-algebraic), the checkers the producing run used, so reproduced with the
+      producer's code. That is C3 with one machine method, and either route alone keeps
+      the rungs. The identity measurement, the drawing decision and the comparisons with
+      the earlier ceiling, the next count's ceiling, the printed side and the closed
+      form are recorded values and set no rung.
+    regularizations:
+      - n: 290
+        of: T-101
+        by: project
+        method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+        modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+        side: same
+        identity:
+          basis: measured
+          measured_in: packing/cases/regularized_bounds/grid-slack-2026-10-13/selection.json
+          one_to_one: true
+          moved: 0
+          max_move: 5.97e-31
+          max_turn_deg: 8.418e-35
+    evidence:
+      - E-regularized-bounds-2026-10-13-grid-slack-exact-decision
+      - E-regularized-bounds-2026-10-12-exact-decision
+    artifacts:
+      - packing/cases/regularized_bounds/README.md
+      - packing/cases/regularized_bounds/grid-slack-2026-10-13/selection.json
+      - packing/cases/regularized_bounds/grid-slack-2026-10-13/exact-decision.json
+      - packing/devtools/register_regularized_bounds.py
+      - packing/devtools/regularize_grid_slack.py
+      - packing/devtools/check_rational_witness_independent.py
+      - docs/project/policies/regularization-policy.md
+    controls:
+      - packing/cases/regularized_bounds/grid-slack-2026-10-13/negative-controls.json
+      - packing/tests/test_register_regularized_bounds.py
+    next_rung: >-
+      V4 and C4 need two adversarial AI reviews of the claim by distinct reviewers and a
+      human oversight record; none is retained. A method-distinct second route, such as the
+      half-angle area route on the certificate, would be shown beside the rung. The
+      catalogue's side is an irrational closed form, which the verified upper bound reaches
+      only through an exact algebraic certificate of the packing at that side.
+    notes: >-
+      Kept on the owner's decision of 13 October 2026 (jlevy/squares#587): this result
+      stays, says that its bound follows from T-155 by monotonicity and so is no new upper
+      bound, and keeps the grid-slack view as its own certificate of n = 290's packing at
+      that side. The regularization policy's section 9, question 16 registers an exactly
+      verified side below the verified upper bound as a result however it was made, and
+      calls it a new upper bound only where no larger count's verified upper bound is at or
+      below it; here T-155's at n = 291 is.
+
+      The owner's words of that day were "Any new upper bounds should also be recorded as
+      results. Pure regularization should not be considered a new result, but it is a
+      credited part of the frontier record", which restate the answer to question 3 of 12
+      October 2026, "regularize and correct always", under which T-155 registered the
+      first batch; this is the second, from the grid-slack runs of 13 October 2026.
+
+      Its count is not among T-155's, but its bound was: T-155's certificate at n = 291
+      is at exactly this side, and deleting square 139 from it, the square the n = 290
+      witness lacks, leaves a packing of 290 that both exact routes accept, 41905 pair
+      decisions each (review B of jlevy/squares#587, reproduced by the registering
+      lane). The registration as first drafted compared the side with n = 290's own
+      ceiling only and missed this. The selection row records the next count's ceiling
+      (implied_by), and the case record says both.
+
+      The grid-slack regularizer's run at 5 degrees on 13 October 2026, recorded in the
+      regularized layer's index as grid-slack-deg5-1013-a, held the view at row 3 of the
+      policy's table, and a re-run here at 0.5 degrees, the generator's default, made the
+      same view byte for byte. devtools.register_regularized_bounds select --batch
+      grid-slack took it from both runs, the 5-degree run's first; Evan Daniel's
+      regularizer gave no view of n = 290 below the bound in the full run of 11 and 12
+      October 2026, whose selection does not list the count.
+
+      The case record keeps the decimal it printed as its verified upper bound's value, the
+      side of Evan Daniel's certificate rounded up at the printed precision, which lies
+      above the new exact side, and carries the exact side as its exact form. So the bound
+      trails the catalogue's printed side at the printed precision, as it did before; its
+      ceiling section and mathematics blocker now name this certificate.
+
+      The id is T-156, the next after T-155; a renumbering at merge follows the register's
+      rule.
+
+      As a drawing the view is no change, before registration and after, so the atlas draws
+      nothing new at n = 290. The run took 19.2 seconds at this count; the decision here
+      took 14.9 CPU seconds and the controls 48.2. The view was registered by an AI agent
+      (Claude) on 13 October 2026; no review is yet retained.
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:
@@ -18641,6 +18950,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -18654,6 +18964,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {re_angled: 3}
       identity:
@@ -18668,6 +18979,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 2}
       identity:
@@ -18682,6 +18994,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 2, re_angled: 4}
       identity:
@@ -18696,6 +19009,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -18709,6 +19023,7 @@ regularized_drawings:
       of: T-118
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 2, re_angled: 1}
       identity:
@@ -18736,6 +19051,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 2}
       identity:
@@ -18750,6 +19066,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       identity:
         basis: measured
@@ -18763,6 +19080,7 @@ regularized_drawings:
       of: T-130
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 8, re_angled: 7}
       identity:
@@ -18777,6 +19095,7 @@ regularized_drawings:
       of: T-130
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 30, re_angled: 6}
       identity:
@@ -18791,6 +19110,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {straightened: 11, re_angled: 4}
       identity:
@@ -18805,6 +19125,7 @@ regularized_drawings:
       of: T-127
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 8, re_angled: 3}
       identity:
@@ -18845,6 +19166,7 @@ regularized_drawings:
       of: T-130
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -18858,6 +19180,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {straightened: 1}
       identity:
@@ -18872,6 +19195,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       identity:
         basis: measured
@@ -18885,6 +19209,7 @@ regularized_drawings:
       of: T-128
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {re_angled: 2}
       identity:
@@ -18925,6 +19250,7 @@ regularized_drawings:
       of: T-139
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 10, re_angled: 3}
       identity:
@@ -18939,6 +19265,7 @@ regularized_drawings:
       of: T-128
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 13, re_angled: 5}
       identity:
@@ -18953,6 +19280,7 @@ regularized_drawings:
       of: T-146
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -18966,6 +19294,7 @@ regularized_drawings:
       of: T-127
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -18979,6 +19308,7 @@ regularized_drawings:
       of: T-136
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -18992,6 +19322,7 @@ regularized_drawings:
       of: T-141
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 3, re_angled: 3}
       identity:
@@ -19006,6 +19337,7 @@ regularized_drawings:
       of: T-150
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19019,6 +19351,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["retry rung force-kkt"]
       side: solved
       changes: {straightened: 1}
       identity:
@@ -19033,6 +19366,7 @@ regularized_drawings:
       of: T-148
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19072,6 +19406,7 @@ regularized_drawings:
       of: T-149
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19085,6 +19420,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {re_angled: 8}
       identity:
@@ -19099,6 +19435,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {straightened: 2, re_angled: 7}
       identity:
@@ -19113,6 +19450,7 @@ regularized_drawings:
       of: T-140
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19126,6 +19464,7 @@ regularized_drawings:
       of: T-151
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19139,6 +19478,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {re_angled: 2}
       identity:
@@ -19153,6 +19493,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19192,6 +19533,7 @@ regularized_drawings:
       of: T-151
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19205,6 +19547,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {re_angled: 1}
       identity:
@@ -19219,6 +19562,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {straightened: 2, re_angled: 8}
       identity:
@@ -19233,6 +19577,7 @@ regularized_drawings:
       of: T-127
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19246,6 +19591,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {straightened: 37, re_angled: 4}
       identity:
@@ -19273,6 +19619,7 @@ regularized_drawings:
       of: T-127
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 3}
       identity:
@@ -19287,6 +19634,7 @@ regularized_drawings:
       of: T-140
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 5, re_angled: 1}
       identity:
@@ -19301,6 +19649,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {straightened: 2}
       identity:
@@ -19315,6 +19664,7 @@ regularized_drawings:
       of: T-149
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19328,6 +19678,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19341,6 +19692,7 @@ regularized_drawings:
       of: T-128
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 5, re_angled: 6}
       identity:
@@ -19355,6 +19707,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       identity:
         basis: measured
@@ -19381,6 +19734,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       identity:
         basis: measured
@@ -19407,6 +19761,7 @@ regularized_drawings:
       of: T-140
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 9, re_angled: 5}
       identity:
@@ -19421,6 +19776,7 @@ regularized_drawings:
       of: T-151
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19434,6 +19790,7 @@ regularized_drawings:
       of: T-151
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19447,6 +19804,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {straightened: 1, re_angled: 2}
       identity:
@@ -19461,6 +19819,7 @@ regularized_drawings:
       of: T-056
       by: project
       method: "regularize_grid_slack/0: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/0) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19487,6 +19846,7 @@ regularized_drawings:
       of: T-136
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 2, re_angled: 27}
       identity:
@@ -19527,6 +19887,7 @@ regularized_drawings:
       of: T-119
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       changes: {straightened: 14, re_angled: 5}
       identity:
@@ -19541,6 +19902,7 @@ regularized_drawings:
       of: T-134
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19554,6 +19916,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {straightened: 3, re_angled: 4}
       identity:
@@ -19581,6 +19944,7 @@ regularized_drawings:
       of: T-151
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19594,6 +19958,7 @@ regularized_drawings:
       of: T-151
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19620,6 +19985,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {straightened: 5, re_angled: 4}
       identity:
@@ -19634,6 +20000,7 @@ regularized_drawings:
       of: T-146
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19647,6 +20014,7 @@ regularized_drawings:
       of: T-155
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       identity:
         basis: measured
@@ -19673,6 +20041,7 @@ regularized_drawings:
       of: T-056
       by: project
       method: "regularize_grid_slack/0: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/0) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19686,6 +20055,7 @@ regularized_drawings:
       of: T-098
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: solved
       changes: {straightened: 163, re_angled: 1}
       identity:
@@ -19700,6 +20070,7 @@ regularized_drawings:
       of: T-146
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19739,6 +20110,7 @@ regularized_drawings:
       of: T-152
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19752,6 +20124,7 @@ regularized_drawings:
       of: T-128
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19765,6 +20138,7 @@ regularized_drawings:
       of: T-136
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -19778,6 +20152,7 @@ regularized_drawings:
       of: T-141
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured

@@ -992,6 +992,7 @@ def test_recent_upper_lower_and_optimal_marks_follow_independent_contributions()
         "title": "optimal",
     }
     assert badges.count('data-recent="true"') == 1
+    assert "is-new-result" not in result_overview.film_facts_html(facts[11])
     assert 'class="is-upper is-exact-value"' in result_overview.film_bound(facts[11])
     assert "is-new-result" not in result_overview.film_bound(facts[11])
     assert 'class="is-upper" style=' in result_overview.gap_bar(facts[11])

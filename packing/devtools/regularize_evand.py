@@ -10,6 +10,8 @@ Usage, from `packing/`, each after
     reclassify --run-dir DIR [--n N ...] [--refresh-bounds]
     layer --run-dir DIR [DIR ...] --repo-root TREE [--select admitted|preview]
         [--exclude N ...] [--grid-run DIR --grid-counts N ...]
+    rungs --run-dir DIR [DIR ...] --repo-root TREE
+    rename-run --from ID --to ID --note TEXT --repo-root TREE
     provenance --repo-root TREE [--check]
     report --run-dir DIR [--json]
 
@@ -3007,9 +3009,13 @@ def evand_admitted(
         text = (directory / f"view-{chosen}.yaml").read_text(encoding="utf-8")
     document = load_yaml(text)
     run: dict[str, Any] = {"id": run_id, "output": chosen}
-    retried = (report.get("solve") or {}).get("retried_with")
+    solved = report.get("solve") or {}
+    # Before the retry ladder a report kept the retry's arguments; since, its rungs.
+    retried = solved.get("retried_with")
     if retried:
         run["retried_with"] = [str(argument) for argument in retried]
+    if "rungs" in solved:
+        run["rungs"] = [str(rung) for rung in solved.get("rungs") or []]
     decision = report.get("decision") or {}
     record = report.get("regularization")
     if not record:
@@ -3598,6 +3604,129 @@ def write_layer(
     return {"select": select, **summary, "refused": refused}
 
 
+def record_rungs(run_dirs: Sequence[Path], root: Path) -> dict[str, Any]:
+    """Record in the layer's index the retry rungs each drawn view's solve climbed
+    (`run.rungs`), from finished runs' reports, for a view admitted without them, and the
+    run whose report supplied them (`run.rungs_from`).
+
+    `evand_admitted` records them from 13 October 2026. Before the retry ladder of 12
+    October a report kept only the arguments of the one retry it made, which the index
+    keeps as `retried_with`; between the two, the reports kept the rungs and the index
+    nothing. An entry that already records either is left as it is and listed
+    (`already_recorded`): what admission or an earlier pass recorded is never written over.
+    A report answers for a drawn view only when its admitted view, recorded under the
+    entry's own run, renders to the drawn view byte for byte: the same solve,
+    regularization and decision. The comparison is of the text itself, the stored view
+    decompressed against the one rendered here, not of a digest (OR-16): the layer's check
+    (`check_atlas`) already holds the stored view to its index entry. Then its rungs are
+    written, so a run of the same counts again records the rungs of a solve that makes the
+    very view drawn; a view that differs records nothing and is listed. A supplying run
+    other than the entry's own enters the index's `runs` from its receipt, as an admitted
+    one does, so `rungs_from` names a run the index records.
+    """
+    root = root.resolve()
+    index_path = root / LAYER_INDEX_PATH
+    index = read_json(index_path)
+    entries = {int(entry["n"]): entry for entry in index["entries"]}
+    layout = layer_layout(root)
+    summary: dict[str, list[int]] = {
+        "recorded": [],
+        "already_recorded": [],
+        "differs": [],
+        "not_drawn": [],
+    }
+    supplying: dict[str, Path] = {}
+    for run_dir in run_dirs:
+        run_id = f"{axis.EVAND_GENERATOR}-{Path(run_dir).name}"
+        for path in sorted(Path(run_dir).glob("n-*/report.json")):
+            report = read_json(path)
+            n = int(report["n"])
+            entry = entries.get(n) or {}
+            solved = report.get("solve") or {}
+            if (
+                entry.get("status") != "regularized"
+                or entry.get("generator") != axis.EVAND_GENERATOR
+                or layer_candidate(report, "admitted") is None
+                or "rungs" not in solved
+            ):
+                summary["not_drawn"].append(n)
+                continue
+            run = entry["run"]
+            if "rungs" in run or "retried_with" in run:
+                summary["already_recorded"].append(n)
+                continue
+            admitted = evand_admitted(report, path.parent, str(run["id"]))
+            text = witness_document(layer_view(admitted), schema=layout.schema_reference())
+            stored = gzip.decompress((root / entry["view"]["path"]).read_bytes())
+            if stored.decode("utf-8") != text:
+                summary["differs"].append(n)
+                continue
+            run["rungs"] = [str(rung) for rung in solved.get("rungs") or []]
+            run["rungs_from"] = run_id
+            supplying[run_id] = Path(run_dir)
+            summary["recorded"].append(n)
+    known = {str(block["id"]) for block in index.get("runs") or []}
+    index["runs"] = [
+        *(index.get("runs") or []),
+        *(
+            run_block(run_dir, run_id)
+            for run_id, run_dir in supplying.items()
+            if run_id not in known
+        ),
+    ]
+    with atomic_output_file(index_path) as temporary:
+        temporary.write_text(axis.index_text(index), encoding="utf-8")
+    return {key: sorted(set(counts)) for key, counts in summary.items()}
+
+
+def rename_run(root: Path, old: str, new: str, note: str) -> dict[str, Any]:
+    """Give a run the layer's index records only as a supplier of rungs another id, and
+    say why on its block (`id_note`).
+
+    A run's receipt records no id: `layer` and `rungs` name it by the driver's convention,
+    `evand-regularize-<run directory>`, so two runs in directories of the same name get
+    the same id. The fresh run of 13 October 2026 that supplied the rungs of the fifteen
+    views drawn from the run on jlevy/squares#518's witnesses was named
+    `evand-regularize-adopt518-v2` that way, the id the convention also gives the 12
+    October run of 37 counts in `runs/adopt518-v2`. This renames the block and every
+    entry's `run.rungs_from` that names it, and records `note` on the block, so the id
+    says it was assigned afterwards. A run an entry draws from (`run.id`) is refused: its
+    id is in the drawn view's text, which the layer's check holds to the index. So is a
+    new id the index already records, an old one it does not, and an empty note."""
+    root = root.resolve()
+    index_path = root / LAYER_INDEX_PATH
+    index = read_json(index_path)
+    blocks = [block for block in index.get("runs") or [] if str(block["id"]) == old]
+    if len(blocks) != 1:
+        raise EvandRunError(f"the index records {len(blocks)} runs named {old!r}")
+    if any(str(block["id"]) == new for block in index.get("runs") or []):
+        raise EvandRunError(f"the index already records a run named {new!r}")
+    if not note.strip():
+        raise EvandRunError("a renamed run says why its id was assigned (--note)")
+    drawing = sorted(
+        int(entry["n"])
+        for entry in index["entries"]
+        if str((entry.get("run") or {}).get("id")) == old
+    )
+    if drawing:
+        raise EvandRunError(
+            f"entries {drawing} draw from {old!r}, whose id their views record; not renamed"
+        )
+    renamed: list[int] = []
+    for entry in index["entries"]:
+        run = entry.get("run") or {}
+        if str(run.get("rungs_from")) == old:
+            run["rungs_from"] = new
+            renamed.append(int(entry["n"]))
+    block = blocks[0]
+    rest = {key: value for key, value in block.items() if key not in {"id", "id_note"}}
+    block.clear()
+    block.update({"id": new, "id_note": note.strip(), **rest})
+    with atomic_output_file(index_path) as temporary:
+        temporary.write_text(axis.index_text(index), encoding="utf-8")
+    return {"renamed": old, "to": new, "rungs_from": sorted(renamed)}
+
+
 def write_receipt(
     run_dir: Path,
     reports: Mapping[int, Mapping[str, Any]],
@@ -3822,6 +3951,18 @@ def parser() -> argparse.ArgumentParser:
         default=[],
         help="the counts at which to draw the grid-slack run's view rather than this one's",
     )
+    rungs_command = sub.add_parser(
+        "rungs", help="record the retry rungs of drawn views that finished runs reproduce"
+    )
+    rungs_command.add_argument("--run-dir", type=Path, nargs="+", required=True)
+    rungs_command.add_argument("--repo-root", type=Path, required=True)
+    rename_command = sub.add_parser(
+        "rename-run", help="give a run that only supplied rungs another id, saying why"
+    )
+    rename_command.add_argument("--from", dest="old", required=True)
+    rename_command.add_argument("--to", dest="new", required=True)
+    rename_command.add_argument("--note", required=True, help="why the id was assigned")
+    rename_command.add_argument("--repo-root", type=Path, required=True)
     provenance_command = sub.add_parser(
         "provenance", help="restate the drawn views' credit by packing_credit"
     )
@@ -3831,6 +3972,25 @@ def parser() -> argparse.ArgumentParser:
     report_command.add_argument("--run-dir", type=Path, required=True)
     report_command.add_argument("--json", action="store_true")
     return command
+
+
+def layer_command(arguments: argparse.Namespace) -> dict[str, Any]:
+    """Run a command that writes the layer's index (`layer`, `rungs`, `rename-run`) and
+    return its summary; `main` then runs the layer's check."""
+    if arguments.command == "rungs":
+        return record_rungs(arguments.run_dir, arguments.repo_root)
+    if arguments.command == "rename-run":
+        return rename_run(arguments.repo_root, arguments.old, arguments.new, arguments.note)
+    exclude = parse_counts(arguments.exclude)
+    if arguments.grid_run is None:
+        return write_layer(arguments.run_dir, arguments.repo_root, arguments.select, exclude)
+    return write_layer_with_grid(
+        arguments.run_dir,
+        arguments.repo_root,
+        grid_run=arguments.grid_run,
+        grid_counts=parse_counts(arguments.grid_counts),
+        exclude=exclude,
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -3858,21 +4018,8 @@ def main(argv: list[str] | None = None) -> int:
                 "again (--from-stage import), asking for the settings they ran with"
             )
         return 0
-    if arguments.command == "layer":
-        exclude = parse_counts(arguments.exclude)
-        if arguments.grid_run is None:
-            summary = write_layer(
-                arguments.run_dir, arguments.repo_root, arguments.select, exclude
-            )
-        else:
-            summary = write_layer_with_grid(
-                arguments.run_dir,
-                arguments.repo_root,
-                grid_run=arguments.grid_run,
-                grid_counts=parse_counts(arguments.grid_counts),
-                exclude=exclude,
-            )
-        print(json.dumps(summary))
+    if arguments.command in {"layer", "rungs", "rename-run"}:
+        print(json.dumps(layer_command(arguments)))
         problems = axis.check_atlas(layer_layout(arguments.repo_root))
         for problem in problems:
             print(problem)

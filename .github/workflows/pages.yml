@@ -63,6 +63,7 @@ name: Certificate page
       - packing/resources/web/evand-record-hunt-2026-10-09/README.md
       - packing/resources/web/evand-record-hunt-2026-10-09/acquisition/claims.json
       - packing/resources/web/evand-square-packing-2026-10-05/README.md
+      - packing/resources/web/evand-square-packing-2026-10-05/receipts/register-comparison.json
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/README.md
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/README.md
       - packing/resources/web/franciscouzo-square-packing-2026-09-27/README.md
@@ -101,6 +102,7 @@ name: Certificate page
       - packing/atlas/known-best/bound-citations.json
       - packing/atlas/known-best/rendering/**
       - packing/atlas/known-best/regularized/index.json
+      - packing/atlas/known-best/default-drawings.json
       - packing/atlas/known-best/regularized/rendering/**
       - packing/witnesses/known-best/**
       - packing/devtools/templates/n11-lower-bounds-explainer-shell.html
@@ -125,6 +127,10 @@ name: Certificate page
       - packing/devtools/overview_sections.py
       - packing/devtools/build_known_best_atlas.py
       - packing/devtools/atlas_print_font.py
+      - packing/devtools/default_drawings.py
+      - packing/devtools/improvement_rule.py
+      - packing/devtools/pictured_source.py
+      - packing/devtools/evand_exact_certificates.py
       - packing/devtools/fonts/atlas-print/**
       - packing/devtools/result_overview.py
       - packing/devtools/atlas_legend.py
@@ -851,9 +857,10 @@ jobs:
       run:
         working-directory: packing
     steps:
-      # The same partial checkout as `prepare`, for the same reason. The one file the
-      # render reads under `packing/resources` is `bibliography.yaml`, a top-level file the
-      # pattern keeps (2026-09-29, every file the render opened, audited). The reader
+      # The same partial checkout as `prepare`, with the exact-optima comparison receipt
+      # also retained for pictured-source credit. Reopen only its ancestors and file;
+      # the remaining archive stays omitted. Top-level bibliography.yaml is kept too.
+      # The reader
       # documents' repository links, which name `main`, are resolved against the checked-out
       # commit's tree with `git ls-tree`, which reads only tree objects: a blobless clone of
       # depth one already holds every tree of that commit, so the render needs no history
@@ -870,6 +877,13 @@ jobs:
             /*
             !/packing/resources/*/
             !/packing/campaign/*/
+            /packing/resources/web/
+            !/packing/resources/web/*
+            /packing/resources/web/evand-square-packing-2026-10-05/
+            !/packing/resources/web/evand-square-packing-2026-10-05/*
+            /packing/resources/web/evand-square-packing-2026-10-05/receipts/
+            !/packing/resources/web/evand-square-packing-2026-10-05/receipts/*
+            /packing/resources/web/evand-square-packing-2026-10-05/receipts/register-comparison.json
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -1951,6 +1965,13 @@ jobs:
             /*
             !/packing/resources/*/
             !/packing/campaign/*/
+            /packing/resources/web/
+            !/packing/resources/web/*
+            /packing/resources/web/evand-square-packing-2026-10-05/
+            !/packing/resources/web/evand-square-packing-2026-10-05/*
+            /packing/resources/web/evand-square-packing-2026-10-05/receipts/
+            !/packing/resources/web/evand-square-packing-2026-10-05/receipts/*
+            /packing/resources/web/evand-square-packing-2026-10-05/receipts/register-comparison.json
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0

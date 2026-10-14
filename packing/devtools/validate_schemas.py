@@ -84,6 +84,7 @@ CONTACT_STRUCTURES = FRONTIER.parent / "atlas" / "known-best" / "contact-structu
 #: The regularized drawing layer's index: which generator drew each count, and each drawn
 #: view's regularization in the register's terms (think-k35c, 12 October 2026).
 REGULARIZED_INDEX = FRONTIER.parent / "atlas" / "known-best" / "regularized" / "index.json"
+DEFAULT_DRAWINGS = FRONTIER.parent / "atlas" / "known-best" / "default-drawings.json"
 #: Hosted-data manifests (OR-18): one per release that holds bulk data outside Git.
 HOSTED = FRONTIER.parent / "hosted"
 
@@ -346,6 +347,7 @@ def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
     datasets.append(CONTACT_SCAFFOLD_ATLAS)
     datasets.append(CONTACT_STRUCTURES)
     datasets.append(REGULARIZED_INDEX)
+    datasets.append(DEFAULT_DRAWINGS)
     # One record per harness session log. The logs themselves are not retained, so
     # these are the durable artifact rather than a pointer to one and are enforced like
     # any other dataset.

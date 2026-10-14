@@ -196,7 +196,16 @@ def regularizations(results: list[dict], sources: Mapping[str, Mapping[str, Any]
             f"packing keeps its finder{APOSTROPHE}s credit through it, and the regularizer "
             "is credited with the arrangement. That a regularization is still the same "
             f"packing is the source{APOSTROPHE}s claim unless it was measured here "
-            "([`epistemics.md`](../../epistemics.md#results-by-others))."
+            "([`epistemics.md`](../../epistemics.md#results-by-others)). Where this "
+            f"project{APOSTROPHE}s own regularization was made with Evan Daniel{APOSTROPHE}s "
+            f"regularizer, its line names this project{APOSTROPHE}s modifications to it as "
+            "far as the item establishes them. An item records no solve, so where the "
+            f"atlas{APOSTROPHE}s regularized layer draws that very solve the item takes its "
+            f"retry rungs from the layer{APOSTROPHE}s index, and elsewhere whether the solve "
+            "climbed a retry rung is said to be not recorded. Where an earlier result"
+            f"{APOSTROPHE}s certificate first stated the item{APOSTROPHE}s exact side, its "
+            "line names that result: the item registers the side exactly and proves no new "
+            "bound."
         ),
         "",
     ]
@@ -228,7 +237,13 @@ def regularized_drawings(
             f"its finder{APOSTROPHE}s credit, and changes no side, frontier value or rung. "
             f"Each identity was measured here; the layer{APOSTROPHE}s index "
             "([`index.json`](../atlas/known-best/regularized/index.json)) retains the "
-            "measurements and the view."
+            "measurements and the view. Where Evan Daniel"
+            f"{APOSTROPHE}s regularizer or the grid-slack port of his placement made a view, "
+            f"its line names this project{APOSTROPHE}s modifications to it, or says it ran "
+            f"unmodified, and each count{APOSTROPHE}s case record carries the same credit in "
+            "its `regularization` note. A pure regularization, one that proves no new "
+            "bound, is never a result; one whose exact side proves a new upper bound is "
+            "registered as a result and listed under that result above."
         ),
         "",
     ]

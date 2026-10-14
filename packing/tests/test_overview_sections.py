@@ -154,11 +154,18 @@ def test_atlas_preview_reuses_canonical_split_rows_and_keeps_every_case() -> Non
         assert 'class="site-atlas-n is-new-result"' not in tile
         assert "evidence-badge" not in tile
     assert preview.count('id="pop-case"') == 1
-    assert preview.count('role="tab"') == complete.count('role="tab"') == 8
+    assert preview.count('role="tab"') == complete.count('role="tab"') == 10
+    assert 'data-atlas-drawing="regularized"' in preview
+    drawing_tabs = overview_sections.atlas_drawing_tabs("homepage-atlas-cells")
+    assert preview.count(drawing_tabs) == 1
+    assert drawing_tabs.count('role="tab"') == 2
+    selected = re.findall(r'<button[^>]*aria-selected="true"[^>]*>', drawing_tabs)
+    assert len(selected) == 1
+    assert 'data-atlas-drawing-tab="regularized"' in selected[0]
     assert "data-atlas-toggle data-homepage-atlas-toggle" in preview
     assert preview.count("data-atlas-legend") == complete.count("data-atlas-legend")
     assert 'aria-controls="atlas-cells"' not in preview
-    assert preview.count('aria-controls="homepage-atlas-cells"') == 9
+    assert preview.count('aria-controls="homepage-atlas-cells"') == 11
     assert len(preview.encode("utf-8")) < 400_000
     for absent in (
         "data-homepage-atlas-gzip",

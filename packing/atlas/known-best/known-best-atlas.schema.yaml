@@ -48,20 +48,20 @@ properties:
               required: [width, height]
               properties:
                 width: {const: 2150}
-                height: {const: 3823}
+                height: {const: 3898}
             png_preview:
               type: object
               required: [width, height]
               properties:
                 width: {const: 2150}
-                height: {const: 3823}
+                height: {const: 3898}
             png_high_resolution:
               type: object
               required: [scale, width, height]
               properties:
                 scale: {const: 2}
                 width: {const: 4300}
-                height: {const: 7646}
+                height: {const: 7796}
             png_link_preview_card:
               type: object
               required: [top_crop, width, height]

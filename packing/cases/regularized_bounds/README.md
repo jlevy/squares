@@ -5,7 +5,15 @@ run of 11 and 12 October 2026 whose sides lie below their cases’ verified uppe
 registered as results under the
 [regularization policy](../../../docs/project/policies/regularization-policy.md) (row 3,
 “register first”, and the owner’s answer to its question 3 of 12 October 2026,
-“regularize and correct always”).
+“regularize and correct always”). Under `grid-slack-2026-10-13/` it holds the second
+batch, T-156, the grid-slack view of $n = 290$ ([below](#the-grid-slack-batch)). Under
+the policy’s question 16, as the owner answered it on 13 October 2026, a side below the
+verified upper bound is registered as a result however it was made, and is a new upper
+bound only where no earlier certificate stated that side exactly, as Evan Daniel’s had
+at 33 of T-155’s counts, and no larger count’s verified upper bound is at or below it.
+T-156’s bound was not new: T-155’s certificate at $n = 291$ is at the same side and
+already implied it by monotonicity, and T-156 is kept as the certificate of $n = 290$’s
+own packing at that side.
 [`devtools.register_regularized_bounds`](../../devtools/register_regularized_bounds.py)
 wrote everything here and holds it to the case records.
 
@@ -14,9 +22,10 @@ wrote everything here and holds it to the case records.
 | Path | What it is |
 | --- | --- |
 | `views/n-NNN.yaml.gz` | Each registered view, a rational centre-basis Witness/v2, byte for byte as the run wrote it, gzip-compressed |
-| `selection.json` | One row per count: the view, its exact side and display, the bound the record held before and the margin, the printed side and closed form, the drawing decision, the identity measured on the retained view against the witness, and the regularization in the register’s terms |
+| `selection.json` | One row per count: the view, its exact side and display, the bound the record held before and the margin, the printed side and closed form, the drawing decision, the identity measured on the retained view against the witness, and the regularization in the register’s terms; a grid-slack row also records the next count’s ceiling where it already implies the bound |
 | `exact-decision.json` | Each retained view decided over $\mathbb{Q}$ by both maintained exact routes |
 | `negative-controls.json` | Three mutants of each view, decided by both routes |
+| `grid-slack-2026-10-13/` | The second batch (T-156), with the same four kinds of file |
 
 ## How the Views Were Chosen
 
@@ -116,6 +125,7 @@ uv run --frozen --all-extras --group dev python -m devtools.register_regularized
 uv run --frozen --all-extras --group dev python -m devtools.register_regularized_bounds --check
 ```
 
+`--batch grid-slack` after `decide` or `controls` decides the second batch.
 `select` needs the run directories, which are outside the repository; the solved points
 they hold are not retained here.
 
@@ -191,13 +201,87 @@ registered; the regularized layer decides the drawing on its own.
 | 299 | `solved` | `17.8228756555322952955…` | `17.82287565553230` | `4.7e-15` | 0 | no | held, then review | not one to one |
 | 300 | `same` | `17.8241233884785434709…` | `17.82412338847855` | `6.5e-15` | `1.8e-19` | yes | no-change, then no-change | none |
 
+## The Grid-Slack Batch
+
+The owner wrote on 13 October 2026: “Any new upper bounds should also be recorded as
+results. Pure regularization should not be considered a new result, but it is a credited
+part of the frontier record” (the policy’s section 9, question 16). The policy reads it
+so: a side below the case’s verified upper bound $U$ is registered as a result however
+it was made, and it is a new upper bound only where no larger count’s verified upper
+bound is at or below it; otherwise the result says that its bound follows by
+monotonicity and names the result that proves it.
+A view of [`devtools.regularize_grid_slack`](../../devtools/regularize_grid_slack.py),
+this project’s port of Evan Daniel’s coincidence placement, whose side lies below $U$ is
+registered so, as a batch of its own; T-156 registered the first, and its bound was not
+new (below).
+
+**The view.** The grid-slack run of 13 October 2026 at 5 degrees, recorded in the
+regularized layer’s index as `grid-slack-deg5-1013-a`, made a view of $n = 290$ at the
+witness’s own side,
+$s_W = 70142135623730950488016887242097/4000000000000000000000000000000$, which is
+$17.53553390593273762200422181052425$ exactly.
+That lies `2.4e-15` below the $U$ the record held, Evan Daniel’s certificate side
+rounded up at fourteen decimals (T-101), and `1.8e-19` below that certificate’s own
+side. The catalogue’s closed form, $14 + (5/2)\sqrt{2}$, lies `4.8e-33` below it, so the
+bound still trails the printed side.
+It is the same packing certified at a tighter rational side, not a new one: no square
+moves by more than `6e-31` and none turns.
+Evan Daniel’s regularizer gave no view of $n = 290$ below $U$ in the full run, whose
+selection does not list it.
+Run again here at 0.5 degrees, the generator’s default, the generator made the same view
+byte for byte.
+
+**A bound already implied.** $s(290) \le s(291)$, since deleting a square from a packing
+of 291 leaves a packing of 290 in the same square.
+T-155 registered $n = 291$ on 12 October 2026 at exactly this side, so from that day its
+certificate proved the bound T-156 registers, while $n = 290$’s verified upper bound
+still lay above the next count’s. Review B of jlevy/squares#587 found this, deleting
+square 139 from T-155’s certificate, the square the $n = 290$ witness lacks, and
+deciding the rest valid on both exact routes.
+The owner decided on 13 October 2026 to keep T-156 and say so: its bound follows from
+T-155 by monotonicity, and the grid-slack view is a certificate of $n = 290$’s own
+packing, the catalogue’s, at that side.
+The selection row records the next count’s ceiling where it implies the bound
+(`implied_by`), and the case record says both.
+
+**Selection.** `select --batch grid-slack --run-dir RUN ... --n 290` decides each named
+run’s view by the policy’s table against the case record’s $U$
+(`regularize_grid_slack.decided`) and takes the row-3 view with the least exact side,
+the first run named among equals.
+Its row keys every row-3 side by run (`run_sides`, `runs_at_row_3`), where a row of the
+first batch keys them by output (`row_three_sides`, `outputs_at_row_3`), and records the
+witness’s own side as read from the witness (`witness_side`), which `--check` reads
+again. It refuses a view of another generator, one not derived from the checkout’s
+witness, one not at that witness’s own side or labelled other than the same-side view,
+one whose side lies above the next count’s verified upper bound, which already proves
+more than the view and whose count is registered by monotonicity instead, two runs of
+one name, and a count the owner holds or another batch registers, and it writes the view
+and the selection only once every refusal has run.
+
+**Decision.** Both maintained routes accepted the view on 13 October 2026, 41,905 pair
+decisions each, in 14.9 CPU seconds for the two; it touches a wall and a neighbour
+exactly, and both accept contact.
+The three controls reached their required outcomes (48.2 CPU seconds): the overlap and
+the shrink past the clearance were refused, and so was the one-unit shrink, which at a
+least clearance of 0 is the same mutant.
+
+**Drawing.** No change, before registration and after: the view draws the same picture
+as the witness, so the atlas draws nothing new at $n = 290$.
+
+| n | View | Exact side | Printed as | Below the earlier bound by | Below T-101’s side by | Agrees | Drawing | Moved, largest |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 290 | `same` | `17.5355339059327376221…` | `17.53553390593274` | `2.4e-15` | `1.8e-19` | no | no-change, then no-change | none |
+
 ## Credit
 
 The packings are the ones the Kingbird catalogue credits to their finders, as T-101 and
 T-009 record them, and the register entry’s regularizations name those results.
 The solver and the regularizer are Evan Daniel’s
 ([evand/square-packing](https://github.com/evand/square-packing), MIT); the run, the
-same-side re-solve, the exact decisions and the registration are this project’s.
+same-side re-solve, the exact decisions and the registration are this project’s. T-156’s
+view was made by this project’s port of his coincidence placement, not his code; the
+method stays credited to him, and the regularization, the decision and the registration
+are this project’s.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

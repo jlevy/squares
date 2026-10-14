@@ -1373,19 +1373,29 @@ different endpoint under a different toolchain.
 This is why portable mathematical predicates and provenance-bound characterization are
 being separated into different surfaces.
 
-**7. Whether $s(17)$ is Bidwell’s side.** The bracket is
-$4.66044 < s(17) \le 4.675530\ldots$, and a proof by the shape that settled $n = 11$ is
-in progress, with its cover and its local half proved and its global half and capture
-not. [§9](#9-how-an-optimality-proof-is-built) explains the machinery in general, and
-[the `n = 17` explainer](docs/project/guides/n17-optimality-explainer.md) gives the
-case’s numbers, records and status, with no forecast of success.
+**7. Whether $s(17)$ is Bidwell’s side.** Two proofs that it is were published on 12
+October 2026, by separate routes: Marc Leonard Overbeck’s candidate proof
+([T-153](packing/frontier/RESULTS.md)) and Oscar Fitzharding’s Lean 4 proof
+([T-154](packing/frontier/RESULTS.md)). Reviews here read parts of both and found no
+mathematical defect in what they read, but neither has been replayed in full, so both
+stand at `V0/C1` as reported results and the verified bracket is still
+$4.66044 < s(17) \le 4.675530\ldots$ ([case record](packing/frontier/n-017.md)). What is
+open is that replay: T-153’s capture recomputation and ten of its thirteen trees, and a
+complete build of T-154’s Lean proof.
+This project’s own route to a proof by the shape that settled $n = 11$, with its cover
+and its local half proved and its global half and capture not, was suspended on 13
+October, the owner judging it likely subsumed by Overbeck’s proof
+([owner decisions](docs/project/reviews/review-2026-10-13-owner-decisions.md)).
+[§9](#9-how-an-optimality-proof-is-built) explains the machinery in general, and
+[the `n = 17` explainer](docs/project/guides/n17-optimality-explainer.md) gives that
+route’s numbers, records and status.
 
 Items 1 and 2 decide whether the cartography strategy is sound.
 Items 3, 5, and 6 have concrete experimental or engineering paths.
 Item 4 is what remains at $n = 11$ now that T-060 has determined $s(11)$: a shorter
 proof is mathematical work, not an engineering task whose tractability is established.
-Item 7 is the one open case with a proof under way, and the only one whose remaining
-steps are named.
+Item 7 has two reported proofs, and what it waits on is named: the replays the register
+lists for each.
 
 ## 9. How an Optimality Proof Is Built
 
@@ -1396,10 +1406,11 @@ isolation, a complete pattern cover with exclusions, a symmetry reduction and a 
 graph.
 This section explains those pieces in general, as they apply to any $n$ whose best
 known packing is to be proved optimal.
-$n = 11$, where the proof is complete, and $n = 17$, where one is in progress, supply
-the illustrations; the
-[`n = 17` explainer](docs/project/guides/n17-optimality-explainer.md) gives that case’s
-numbers, records and status, and nothing below is a result about it.
+$n = 11$, where the proof is complete, and this project’s own route at $n = 17$,
+suspended on 13 October 2026 pending Overbeck’s proof, which the owner judged likely to
+subsume it (item 7 of [§8](#8-what-is-known-and-what-is-not)), supply the illustrations;
+the [`n = 17` explainer](docs/project/guides/n17-optimality-explainer.md) gives that
+route’s numbers, records and status, and nothing below is a result about the case.
 
 ### Three parts
 
@@ -1960,7 +1971,8 @@ An optional system is used only to rederive one constant.
 | If you want | Read |
 | --- | --- |
 | the state of the program, and every result with its status | [`SYNOPSIS.md`](SYNOPSIS.md)—**start here after this page** |
-| the $n = 17$ optimality proof in progress, with its numbers, records and status | [The `n = 17` explainer](docs/project/guides/n17-optimality-explainer.md) |
+| the two reported proofs of $s(17)$ and what each still waits on | [The `n = 17` case record](packing/frontier/n-017.md) |
+| this project’s own route to an $n = 17$ optimality proof, suspended on 13 October 2026, with its numbers, records and status | [The `n = 17` explainer](docs/project/guides/n17-optimality-explainer.md) |
 | what is in the directory and how to run it | [`README.md`](README.md) |
 | every rule the directory runs on, and which are machine-checked | [`conventions.md`](conventions.md) |
 | the mutable size-by-size experiment priority queue | [Basin confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |

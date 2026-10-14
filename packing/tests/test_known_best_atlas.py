@@ -11,6 +11,7 @@ import hashlib
 import io
 import json
 import lzma
+import math
 import os
 import re
 import subprocess
@@ -170,10 +171,7 @@ def _assert_print_body_ink(nodes: Sequence[ET.Element]) -> None:
     assert len(recent[0]) == 1
     assert recent[0][0].text == " (since August, 2026)"
     assert recent[0][0].attrib["fill"] == "#000000"
-    assert all(
-        node.attrib["fill"] == (FIRST_PARTY_ACCENT_COLOR if node is recent[0] else "#000000")
-        for node in nodes
-    )
+    assert all(node.attrib["fill"] == "#000000" for node in nodes)
 
 
 @pytest.fixture
@@ -516,7 +514,7 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
             "layout": "10 by 10, row-major n=1..100",
             "png_high_resolution": {
                 "derived_from": "atlas/known-best/known-best-1-100.svg",
-                "height": 7646,
+                "height": 7796,
                 "path": "atlas/known-best/known-best-1-100@2x.png",
                 "scale": 2,
                 "width": 4300,
@@ -531,7 +529,7 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
             },
             "png_preview": {
                 "derived_from": "atlas/known-best/known-best-1-100.svg",
-                "height": 3823,
+                "height": 3898,
                 "path": "atlas/known-best/known-best-1-100.png",
                 "scale": 1,
                 "width": 2150,
@@ -542,7 +540,7 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
             "square_count": 5050,
             "stem": "known-best-1-100",
             "svg": {
-                "height": 3823,
+                "height": 3898,
                 "path": "atlas/known-best/known-best-1-100.svg",
                 "width": 2150,
             },
@@ -933,7 +931,7 @@ def test_known_best_composite_png_is_derived_from_current_svg() -> None:
 
     assert known_best_builder.png_summary_receipt(png) == (
         2150,
-        3823,
+        3898,
         hashlib.sha256(svg_text.encode("utf-8")).hexdigest(),
     )
 
@@ -944,7 +942,7 @@ def test_known_best_composite_high_resolution_png_is_derived_from_current_svg() 
     It exists so the atlas can be attached or downscaled without going back to the
     vector, which means it is the copy most likely to be handed to someone who cannot
     check it. Pinning the exact pixel count matters as much as pinning the receipt:
-    4300 by 7646 is twice 2150 by 3823, and the whole-number scale is what keeps the
+    4300 by 7796 is twice 2150 by 3898, and the whole-number scale is what keeps the
     file small. A fractional scale puts every edge on a fractional pixel boundary, and
     the antialiasing shades the rasteriser then invents cost more bytes than the extra
     pixels do -- a 4096-wide export of this drawing is 11% larger than this one while
@@ -955,7 +953,7 @@ def test_known_best_composite_high_resolution_png_is_derived_from_current_svg() 
 
     assert known_best_builder.png_summary_receipt(png) == (
         4300,
-        7646,
+        7796,
         hashlib.sha256(svg_text.encode("utf-8")).hexdigest(),
     )
 
@@ -1023,7 +1021,8 @@ def test_the_1_100_canvas_is_what_its_specification_computes() -> None:
     """Pin content-derived footer geometry without moving the ten-by-ten drawing grid.
 
     The black definition is 26.125 units; body text is 19 units. The three shared
-    credit paragraphs use ink-measured section gaps and give a 3823-unit page height.
+    credit paragraphs and the regularization credits use ink-measured section gaps and
+    give a 3898-unit page height.
     Literal baselines hold the maintained derivation to the published drawing.
     """
     canvas = known_best_builder.PRIMARY_COMPOSITE
@@ -1033,13 +1032,13 @@ def test_the_1_100_canvas_is_what_its_specification_computes() -> None:
     assert (composite.count, composite.rows, composite.square_count) == (100, 10, 5050)
     assert composite.layout == "10 by 10, row-major n=1..100"
     assert composite.card_units == 1256
-    assert (canvas.width, canvas.height) == (2150, 3823)
+    assert (canvas.width, canvas.height) == (2150, 3898)
     assert canvas.grid_bottom == 3044
     assert float(canvas.legend_baseline) == pytest.approx(3209.53936767578125)
     assert float(canvas.explainer_baseline) == pytest.approx(3092.930419921875)
     assert canvas.citations_baseline == 114
-    assert float(canvas.credit_baseline) == pytest.approx(3765.13165283203125)
-    assert float(canvas.stamp_baseline) == pytest.approx(3793.63165283203125)
+    assert float(canvas.credit_baseline) == pytest.approx(3839.92559814453125)
+    assert float(canvas.stamp_baseline) == pytest.approx(3868.42559814453125)
     assert (composite.svg_name, composite.pdf_name) == (
         "known-best-1-100.svg",
         "square-packings-100-20261008.pdf",
@@ -1091,11 +1090,12 @@ def test_the_poster_canvas_is_what_its_specification_computes() -> None:
     assert (canvas.information_left, canvas.information_right) == (204, 2804)
     assert float(canvas.legend_baseline) == pytest.approx(778.7511853125)
     assert float(canvas.explainer_baseline) == pytest.approx(484.16015625)
-    # Two lower-bound and four optimality-credit lines precede the closing anchors.
+    # Two lower-bound and three optimality-credit lines, then the two lines of the
+    # regularization credit, precede the closing anchors.
     # The default canvas reserves the deepest possible date descender.
-    assert float(canvas.citations_baseline) == pytest.approx(2443.3058728125)
-    assert float(canvas.credit_baseline) == pytest.approx(2182.3527478125)
-    assert float(canvas.stamp_baseline) == pytest.approx(2254.3527478125)
+    assert float(canvas.citations_baseline) == pytest.approx(2632.2589978125)
+    assert float(canvas.credit_baseline) == pytest.approx(2371.3058728125)
+    assert float(canvas.stamp_baseline) == pytest.approx(2443.3058728125)
     assert (composite.svg_name, composite.pdf_name) == (
         "known-best-1-324.svg",
         "square-packings-324-20261008.pdf",
@@ -1285,7 +1285,7 @@ def test_poster_complete_rows_share_a_right_edge_and_leave_room_for_left_informa
     assert canvas.grid_top == 120
     assert known_best_builder.POSTER_INFORMATION_TOP == 120
     primary = known_best_builder.PRIMARY_COMPOSITE
-    assert (primary.width, primary.height, primary.row_pitch) == (2150, 3823, 287)
+    assert (primary.width, primary.height, primary.row_pitch) == (2150, 3898, 287)
     assert primary.card_left(1) == 60
     assert primary.grid_top == 174
     assert Decimal("1.39") <= Decimal(canvas.width) / canvas.height <= Decimal("1.40")
@@ -1489,15 +1489,17 @@ def test_print_cards_color_recent_numbers_and_keep_independent_accents(index: in
         )
     assert not root.findall(".//svg:polygon[@data-feature='legend-star']", SVG)
     cards = {int(card.attrib["data-n"]): card for card in root}
-    for n, card in cards.items():
+    for card in cards.values():
         number = card.find("svg:text[@data-feature='packing-label']", SVG)
         assert number is not None
-        assert number.attrib["fill"] == (
-            FIRST_PARTY_ACCENT_COLOR if flags[n].any else known_best_builder.LABEL_MUTED_COLOR
-        )
+        assert number.attrib["fill"] == known_best_builder.LABEL_MUTED_COLOR
     optimal = cards[11].find("svg:rect[@data-evidence='proved optimal']", SVG)
     assert optimal is not None
-    assert optimal.attrib["fill"] == FIRST_PARTY_ACCENT_COLOR
+    assert optimal.attrib["fill"] != FIRST_PARTY_ACCENT_COLOR
+    for card in cards.values():
+        label = card.find("svg:text[@data-feature='packing-label']", SVG)
+        assert label is not None
+        assert label.attrib["fill"] == known_best_builder.LABEL_MUTED_COLOR
     for feature in ("side-bound", "lower-bound"):
         line = cards[17].find(f"svg:text[@data-feature='{feature}']", SVG)
         assert line is not None
@@ -1515,7 +1517,7 @@ def test_print_cards_color_recent_numbers_and_keep_independent_accents(index: in
         if (node.text or "").startswith("recent result")
     ]
     assert len(recent) == 1
-    assert recent[0].attrib["fill"] == FIRST_PARTY_ACCENT_COLOR
+    assert recent[0].attrib["fill"] == known_best_builder.SUMMARY_SMALL_FILL
 
 
 def test_print_arrangements_share_measured_outline_and_annotation_clearances() -> None:
@@ -1708,7 +1710,144 @@ def test_triangle_crop_resolves_complete_records_and_row_major_skips_grid_prefli
     assert (
         known_best_builder.PRIMARY_COMPOSITE.width,
         known_best_builder.PRIMARY_COMPOSITE.height,
-    ) == (2150, 3823)
+    ) == (2150, 3898)
+
+
+def test_composite_tiles_draw_each_case_s_default_picture_and_credit_it() -> None:
+    """Regularization policy, section 12 (the owner, 13 October 2026): a card draws its
+    case's regularized view where `devtools.default_drawings` records the view as the
+    default picture, and the house witness everywhere else; the card's labels are the
+    record's either way.
+
+    Each retained composite is held to itself always: the cards it marks as drawn from a
+    regularized view (`data-source-id` ending in `-regularized`) are the cases its
+    regularization block lists in structured metadata. The printed text is the approved
+    two-line credit; full generator attribution remains in SVG metadata. It is held to
+    the current record only while it shows the pinned data, or
+    when trailing is off: a composite that trails the pin may show defaults the record
+    has since changed (`sqpack.release`, rule 5), as its sibling tests allow and
+    `--check-composites` lists (review A1 of #591)."""
+    from devtools.default_drawings import regularized_defaults  # noqa: PLC0415
+
+    for canvas in known_best_builder.resolved_composites():
+        svg_text = canvas.svg_path.read_text(encoding="utf-8")
+        root = ET.fromstring(svg_text)
+        cards = {
+            int(card.attrib["data-n"]): card
+            for card in root.iter(f"{{{SVG['svg']}}}g")
+            if card.attrib.get("data-feature") == "packing-card"
+        }
+        assert list(cards) == list(canvas.spec.numbers)
+        marked = [
+            n
+            for n, card in cards.items()
+            if card.attrib["data-source-id"].endswith("-regularized")
+        ]
+        assert marked, canvas.spec.stem
+        block = root.find("svg:g/svg:g[@data-feature='regularization-credits']", SVG)
+        assert block is not None, canvas.spec.stem
+        assert json.loads(block.attrib["data-regularized-cases"]) == marked
+        feature = "svg:text[@data-feature='regularization-credit-line']"
+        printed = " ".join("".join(node.itertext()) for node in block.findall(feature, SVG))
+        assert printed == known_best_builder.POSTER_REGULARIZATION_CREDIT
+        for card in cards.values():
+            label = card.find("svg:text[@data-feature='packing-label']", SVG)
+            assert label is not None
+            assert label.attrib["fill"] == known_best_builder.LABEL_MUTED_COLOR
+        assert printed.count("Squares Project") == 1
+        assert "Daniel\u2019s regularizer" in printed
+        assert "regularized" in printed
+        # The owner, 14 October 2026: people are named by surname, as in every other print
+        # credit; the only full name in the information block is the diagram's credit.
+        information = root.find("svg:g[@data-feature='poster-information']", SVG)
+        assert information is not None
+        text = " ".join(
+            "".join(node.itertext()) for node in information.iter(f"{{{SVG['svg']}}}text")
+        )
+        full_names = known_best_builder._full_names()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+        assert [full for full, _name in full_names if full in text] == ["Joshua Levy"]
+        assert text.count("Joshua Levy") == text.count(known_best_builder.POSTER_DIAGRAM_CREDIT)
+        description = root.find("svg:desc", SVG)
+        assert description is not None
+        assert known_best_builder.POSTER_REGULARIZATION_PROSE in (description.text or "")
+        identity = known_best_builder.retained_identity(svg_text)
+        if identity.current or not COMPOSITES_MAY_TRAIL:
+            defaults = regularized_defaults()
+            assert marked == [n for n in canvas.spec.numbers if n in defaults], canvas.spec.stem
+            sentences = known_best_builder.regularization_sentences(
+                tuple(marked), canvas.spec.count
+            )
+            assert printed == " ".join(" ".join(atoms) for atoms in sentences)
+
+
+def test_a_composite_trailing_the_pin_may_show_defaults_the_record_has_changed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review A1 of #591: when a regularization pass withdraws a default, as #559 does at
+    180, the record moves, the pin moves with it, and the retained posters trail until
+    they are redrawn (`sqpack.release`, rule 5). The composite test then holds each poster
+    to itself and passes. While a poster still claims the pinned data, the same change
+    fails it, as every claim on a current poster must agree with the record."""
+    from devtools import default_drawings  # noqa: PLC0415
+
+    canvas = known_best_builder.resolved_composites()[-1]
+    svg_text = canvas.svg_path.read_text(encoding="utf-8")
+    retained = known_best_builder.retained_identity(svg_text)
+    root = ET.fromstring(svg_text)
+    marked = {
+        int(card.attrib["data-n"]): {}
+        for card in root.iter(f"{{{SVG['svg']}}}g")
+        if card.attrib.get("data-feature") == "packing-card"
+        and card.attrib["data-source-id"].endswith("-regularized")
+    }
+    block = root.find("svg:g/svg:g[@data-feature='regularization-credits']", SVG)
+    assert block is not None
+    printed = " ".join(
+        "".join(node.itertext())
+        for node in block.findall("svg:text[@data-feature='regularization-credit-line']", SVG)
+    )
+    # Freeze unrelated credit changes so the only failing claim is the withdrawn card.
+    monkeypatch.setattr(known_best_builder, "resolved_composites", lambda: (canvas,))
+    monkeypatch.setattr(
+        known_best_builder, "regularization_sentences", lambda *_a: ((printed,),)
+    )
+    monkeypatch.setattr(known_best_builder, "DATA_REVISION", retained.data_revision)
+    monkeypatch.setattr(default_drawings, "regularized_defaults", lambda *_a, **_k: marked)
+    test_composite_tiles_draw_each_case_s_default_picture_and_credit_it()
+    withdrawn_n = next(n for n in sorted(marked) if n > 100)
+    withdrawn = {n: row for n, row in marked.items() if n != withdrawn_n}
+    monkeypatch.setattr(default_drawings, "regularized_defaults", lambda *_a, **_k: withdrawn)
+    with pytest.raises(AssertionError, match=re.escape(canvas.spec.stem)):
+        test_composite_tiles_draw_each_case_s_default_picture_and_credit_it()
+    monkeypatch.setattr(known_best_builder, "DATA_REVISION", "0" * 40)
+    test_composite_tiles_draw_each_case_s_default_picture_and_credit_it()
+
+
+def test_the_regularization_credit_is_compact_and_preserves_full_generator_attribution(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import default_drawings  # noqa: PLC0415
+
+    generator_credits = {
+        1: "Regularized by tool A (MIT)",
+        2: "Regularized by tool B",
+        3: "Regularized by tool A (MIT)",
+    }
+    monkeypatch.setattr(default_drawings, "credit_line", generator_credits.__getitem__)
+    assert [
+        " ".join(atoms) for atoms in known_best_builder.regularization_sentences((1, 2, 3), 9)
+    ] == [
+        (
+            "Drawn packings are regularized for cleaner display using Squares Project rules, "
+            "based on Daniel\u2019s regularizer"
+        )
+    ]
+    assert known_best_builder.regularization_sentences((), 9) == ()
+    found = known_best_builder._regularization_generator_credits((1, 2, 3))  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert found == (
+        generator_credits[1],
+        generator_credits[2],
+    )
 
 
 def test_poster_enlarges_information_type_without_changing_card_geometry() -> None:
@@ -1733,6 +1872,7 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
         "packing-credit-line": 19,
         "lower-bound-credit-line": 19,
         "optimality-credit-line": 19,
+        "regularization-credit-line": 19,
     }
     block = root.find("svg:g[@data-feature='poster-information']", SVG)
     assert block is not None
@@ -1752,6 +1892,7 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
         "packing-credit-line",
         "lower-bound-credit-line",
         "optimality-credit-line",
+        "regularization-credit-line",
         "credit",
         "release-stamp",
         "citations",
@@ -1760,7 +1901,9 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
     body_lines = [
         node for node in information_text if node.attrib.get("data-feature") in body_features
     ]
-    assert len(body_lines) == 15 + sum(
+    regularization = known_best_builder._regularization_lines(canvas)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert regularization
+    assert len(body_lines) == 15 + len(regularization) + sum(
         len(lines)
         for lines in known_best_builder._print_attribution_lines()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     )
@@ -2098,9 +2241,16 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     proof_lines = information.findall(
         "svg:g/svg:text[@data-feature='optimality-credit-line']", SVG
     )
-    assert _print_text_ink_bounds(ending[0])[0] - _print_text_ink_bounds(proof_lines[-1])[
-        1
-    ] == pytest.approx(144, abs=1)
+    regularization_lines = information.findall(
+        "svg:g/svg:text[@data-feature='regularization-credit-line']", SVG
+    )
+    assert regularization_lines
+    assert _print_text_ink_bounds(regularization_lines[0])[0] - _print_text_ink_bounds(
+        proof_lines[-1]
+    )[1] == pytest.approx(144, abs=1)
+    assert _print_text_ink_bounds(ending[0])[0] - _print_text_ink_bounds(
+        regularization_lines[-1]
+    )[1] == pytest.approx(144, abs=1)
     assert _print_text_ink_bounds(ending[2])[0] - _print_text_ink_bounds(ending[1])[
         1
     ] == pytest.approx(144, abs=1)
@@ -2154,7 +2304,11 @@ def test_poster_accents_recent_contributions_independently_in_svg_and_pdf() -> N
     cards = {int(card.attrib["data-n"]): card for card in root}
     optimal = cards[11].find("svg:rect[@data-evidence='proved optimal']", SVG)
     assert optimal is not None
-    assert optimal.attrib["fill"] == FIRST_PARTY_ACCENT_COLOR
+    assert optimal.attrib["fill"] != FIRST_PARTY_ACCENT_COLOR
+    for card in cards.values():
+        label = card.find("svg:text[@data-feature='packing-label']", SVG)
+        assert label is not None
+        assert label.attrib["fill"] == known_best_builder.LABEL_MUTED_COLOR
     upper = cards[11].find("svg:text[@data-feature='side-bound']", SVG)
     assert upper is not None
     assert "".join(upper.itertext()) == "s(11) = 3.87708"
@@ -2178,7 +2332,7 @@ def test_poster_accents_recent_contributions_independently_in_svg_and_pdf() -> N
     accent = tuple(
         int(FIRST_PARTY_ACCENT_COLOR[index : index + 2], 16) / 255 for index in (1, 3, 5)
     )
-    assert any(
+    assert not any(
         all(
             abs(actual - expected) < 1e-6
             for actual, expected in zip(color, accent, strict=True)
@@ -2231,8 +2385,8 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
     assert lookups == [True]
     assert (root.attrib["width"], root.attrib["height"], root.attrib["viewBox"]) == (
         "2150",
-        "3823",
-        "0 0 2150 3823",
+        "3898",
+        "0 0 2150 3898",
     )
     entries = {entry["n"]: entry for entry in record["entries"]}
     assert [
@@ -2285,7 +2439,7 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
     assert card is not None
     optimal = card.find("svg:rect[@data-evidence='proved optimal']", SVG)
     assert optimal is not None
-    assert (optimal.attrib["fill"] == FIRST_PARTY_ACCENT_COLOR) is contributions[11].optimal
+    assert optimal.attrib["fill"] != FIRST_PARTY_ACCENT_COLOR
     upper = card.find("svg:text[@data-feature='side-bound']", SVG)
     assert upper is not None
     assert "".join(upper.itertext()) == "s(11) = 3.877084"
@@ -2294,7 +2448,7 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
     if marked:
         assert marked[0].text == "3.877084"
     for node, expected_accent in (
-        (optimal, contributions[11].optimal),
+        (optimal, False),
         (upper, contributions[11].upper),
     ):
         isolated = ET.Element(f"{{{SVG['svg']}}}svg", root.attrib)
@@ -2456,7 +2610,7 @@ def test_poster_legend_columns_align_left_and_end_with_the_recent_result_key(
         "recent result (since August, 2026)",
     ]
     assert labels[1][-1].text == "recent result"
-    assert labels[1][-1].attrib["fill"] == FIRST_PARTY_ACCENT_COLOR
+    assert labels[1][-1].attrib["fill"] == known_best_builder.SUMMARY_SMALL_FILL
     assert labels[1][-1][0].text == " (since August, 2026)"
     assert labels[1][-1][0].attrib["fill"] == "#000000"
     assert not root.findall(".//svg:polygon[@data-feature='legend-star']", SVG)
@@ -2595,7 +2749,7 @@ def test_both_pdf_legends_label_only_the_first_two_angle_swatches(index: int) ->
     assert Decimal(recent.attrib["y"]) == canvas.legend_baseline + 3 * pitch
     assert "".join(recent.itertext()) == "recent result (since August, 2026)"
     assert recent.text == "recent result"
-    assert recent.attrib["fill"] == FIRST_PARTY_ACCENT_COLOR
+    assert recent.attrib["fill"] == known_best_builder.SUMMARY_SMALL_FILL
     assert recent[0].attrib["fill"] == "#000000"
 
 
@@ -2807,7 +2961,17 @@ def test_a_second_composite_is_a_specification_and_not_a_second_set_of_constants
     third = known_best_builder.CompositeCanvas(CompositeSpec(1, 400, 20, "known-best-1-400"))
     assert (third.spec.rows, third.spec.square_count) == (20, 80200)
     assert third.width == figure.width + 10 * known_best_builder.SUMMARY_COLUMN_PITCH
-    assert third.height == figure.height + 10 * known_best_builder.SUMMARY_ROW_PITCH
+    # Ten more rows, and the regularization credits' lines for the cases it would draw
+    # from regularized views, one line per generator that made one in its range.
+    layout = known_best_builder._information_layout  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    paragraph = known_best_builder._regularization_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    extra_lines = len(paragraph(third)) - len(paragraph(figure))
+    assert layout(third).bottom - layout(figure).bottom == (
+        10 * known_best_builder.SUMMARY_ROW_PITCH + extra_lines * layout(figure).line_pitch
+    )
+    assert third.height == math.ceil(
+        layout(third).bottom + known_best_builder.SUMMARY_BOTTOM_MARGIN
+    )
     assert third.spec.stem not in known_best_builder.SUMMARY_PROSE
 
 
@@ -4009,6 +4173,8 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
             for key in ("lower-bound", "optimality")
         ]
         assert all(node is not None for node in attribution_blocks)
+        regularization = block.find("svg:g[@data-feature='regularization-credits']", SVG)
+        assert regularization is not None
         assert all(node is not None for node in closing)
         assert len(legend.findall("svg:g[@data-feature='legend-column']", SVG)) == 2
         assert len(legend.findall(".//svg:text[@data-feature='legend-label']", SVG)) == 8
@@ -4022,6 +4188,7 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
                 "packing-credit-line",
                 "lower-bound-credit-line",
                 "optimality-credit-line",
+                "regularization-credit-line",
                 "credit",
                 "release-stamp",
                 "citations",
@@ -4043,6 +4210,7 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
                 for node in attribution_blocks
                 if node is not None
             ),
+            list(regularization.iter(f"{{{SVG['svg']}}}text")),
             [node for node in closing if node is not None],
         ]
         bounds = [
@@ -4064,7 +4232,7 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
             ),
         )
         gaps = [below[0] - above[1] for above, below in pairwise(bounds)]
-        assert gaps == pytest.approx([size * 3] * 5, abs=1.0)
+        assert gaps == pytest.approx([size * 3] * 6, abs=1.0)
         if canvas.information_in_corner:
             title = block.find("svg:text[@data-feature='poster-title']", SVG)
             assert title is not None
@@ -4376,8 +4544,17 @@ def test_shared_print_attributions_preserve_full_roles_sources_and_corpus_scope(
     lower, optimal = attributions.paragraphs
     assert list(lower.names) == expected_lower
     assert list(optimal.clauses[0].names) == expected_optimal
-    assert set(optimal.clauses[1].names) == {"Gurevitch", "Guzhou0806"}
-    assert set(optimal.clauses[2].names) == {"Lewis", "Julian-JJ", "EvolvingPrograms"}
+    # Formalization and its verification infrastructure print as one clause (the owner,
+    # 14 October 2026); the curated roles stay apart in the input and the metadata.
+    assert len(optimal.clauses) == 2
+    assert optimal.clauses[1].prefix == "formalization by"
+    assert set(optimal.clauses[1].names) == {
+        "Gurevitch",
+        "Guzhou0806",
+        "Lewis",
+        "Julian-JJ",
+        "EvolvingPrograms",
+    }
     assert len(optimal.names) == len(set(optimal.names)) == 18
     assert "Nagamochi" not in optimal.names
     assert attributions.normalize_name("wand125") == "Hosono"
@@ -4439,8 +4616,13 @@ def test_shared_print_attributions_preserve_full_roles_sources_and_corpus_scope(
         assert all("primary_sources" in source for source in proof_sources.values())
     assert rendered[0] == rendered[1]
     assert rendered[0][1].startswith("Lower bounds due to Göbel, Stromquist,")
-    assert "formalization contributions by" in rendered[0][2]
-    assert "verification infrastructure and execution by" in rendered[0][2]
+    # Formalization and verification infrastructure share one clause (the owner, 14
+    # October 2026), each contributor once.
+    assert "; formalization by " in rendered[0][2]
+    assert "formalization contributions by" not in rendered[0][2]
+    assert "verification infrastructure" not in rendered[0][2]
+    formalization = rendered[0][2].split("; formalization by ", 1)[1].split(", ")
+    assert len(formalization) == len(set(formalization))
 
 
 def test_print_construction_credits_normalize_aliases_before_deduplicating() -> None:
@@ -4553,7 +4735,7 @@ def test_print_attribution_paragraphs_share_the_balanced_packing_measure() -> No
     width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     measure = max(width(line, known_best_builder.POSTER_BODY_SIZE) for line in packing)
     assert len(packing) == 3
-    assert [len(lines) for lines in attributed] == [2, 4]
+    assert [len(lines) for lines in attributed] == [2, 3]
     for paragraph, lines in zip(paragraphs, attributed, strict=True):
         assert " ".join(lines) == " ".join(paragraph.atoms)
         assert (

@@ -63,8 +63,8 @@ from devtools import (
 )
 from devtools import evand_arrangement_houses as evand_houses
 from devtools import evand_arrangement_reports as evand_reports
-from devtools import evand_exact_certificates as evand_certificates
 from devtools import gupta_house_links as gupta_houses
+from devtools import pictured_source as pictured
 from devtools import refinement_house_links as refinement_houses
 from devtools import refinement_packets as refinements
 from devtools import ryxu_house_links as ryxu_houses
@@ -196,9 +196,9 @@ PACKET_KIND = "packet-derived-facts"
 SQUISH_SOURCE_KEYS = frozenset(squish_packets.source_key(n) for n in squish_packets.NUMBERS)
 #: The report that solved 48 known-best packings to their exact optima (T-098). It moves
 #: a case's side by at most 5e-11 and keeps its packing, so the atlas pictures the
-#: packing from the source that held the count before, which the packet's comparison
-#: receipt names (`devtools.evand_exact_certificates compare`).
-EXACT_OPTIMA_SOURCE_KEY = "[evand exact optima 2026-10-05]"
+#: packing from the source that held the count before (`devtools.pictured_source`, the
+#: rule the case pages' "as published" credit reads too).
+EXACT_OPTIMA_SOURCE_KEY = pictured.EXACT_OPTIMA_SOURCE_KEY
 
 #: The cases this build covers, end to end: sources, witnesses, house renderings,
 #: frontier back-links and manifest entries.
@@ -829,6 +829,16 @@ COMPOSITES: tuple[CompositeCanvas, ...] = tuple(
 #: because a set built from this one called the poster an artifact nobody owned.
 PRIMARY_COMPOSITE = COMPOSITES[0]
 
+#: What both composites' descriptions say of the drawings their tiles show: the
+#: regularization policy's default picture (section 12), credited as its section 7 and
+#: section 9, question 16 say, by the credit paragraph `_regularization_lines` writes.
+POSTER_REGULARIZATION_PROSE = (
+    "A tile draws its packing's regularized view, an exact redrawing of the same packing "
+    "at the same side, where that view improves on the packing as published, and the "
+    "packing as published elsewhere. The information block gives the compact credit; "
+    "metadata records the regularized cases and their complete generator attribution."
+)
+
 #: The accessible title and description, per composite. Prose about a particular range
 #: is written rather than computed -- nothing spells "one through one hundred" from two
 #: integers -- so it is recorded per stem, and a composite with no entry here cannot be
@@ -841,6 +851,7 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "n equals 1 through 100. Each tile is normalized to its own container and "
             "labeled with n, the best known upper bound on the container side and, where "
             "the value is not yet settled, the best proved lower bound beneath it. "
+            f"{POSTER_REGULARIZATION_PROSE} "
             "Crimson marks a recent construction giving an upper bound, a proof of a "
             "lower bound or an optimality proof since August 2026. Badges mark "
             "which side lengths are proved optimal, and whether a side length is pinned "
@@ -848,7 +859,7 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "The black title and inline project reference sit above the grid. "
             "The black two-line definition, shared eight-item legend and unique "
             "corpus-wide construction, lower-bound and optimality credits sit below it, "
-            "followed by the diagram credit and "
+            "followed by the regularization credits, the diagram credit and "
             "dated edition. Every counted legend item includes the depicted total. "
             "Case counts are crimson for recent results and gray otherwise; ordinary bounds "
             "and annotations are black. "
@@ -873,7 +884,9 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "contains the title, complete legend and publication details. Each tile is "
             "normalized to its own container and labeled with n, the best known upper "
             "bound on the container side and, where the value is not yet settled, the "
-            "best proved lower bound beneath it. Crimson marks a recent construction giving "
+            "best proved lower bound beneath it. "
+            f"{POSTER_REGULARIZATION_PROSE} "
+            "Crimson marks a recent construction giving "
             "an upper bound, a proof of a lower bound or an optimality proof since August "
             "2026. Badges mark which side lengths are proved "
             "optimal, and whether a side length is pinned exactly by a radical or a "
@@ -883,7 +896,9 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "text and ordinary bound captions are black. Every counted legend item "
             "includes the depicted total. The same corpus-wide construction, lower-bound "
             "and optimality credit paragraphs name contributors oldest first, "
-            "with formalization and verification roles explicitly qualified. "
+            "with formalization, verification infrastructure included, credited in one "
+            "clause, and a one-sentence regularization paragraph counts the regularized "
+            "tiles and credits who regularized them. "
             "Full source and per-case attribution is retained in the SVG metadata. "
             "The diagram credit and dated edition follow. "
             "A blank line precedes the plain project reference and address. "
@@ -970,23 +985,11 @@ def _unitsquare_source_path(n: int) -> Path:
     return found[0] if found else UNITSQUARE_ROOT / filename
 
 
-@cache
-def _exact_optima_pictured() -> dict[int, str]:
-    """The source key each exact optimum's packing is pictured from, by count."""
-    receipt = json.loads(evand_certificates.COMPARISON_RECEIPT.read_text(encoding="utf-8"))
-    return {int(row["n"]): str(row["earlier_source_key"]) for row in receipt["rows"]}
-
-
 def pictured_source_key(case: FrontierCase) -> str:
-    """The source whose geometry the atlas reads for a case: the record's own, except
-    where an exact optimum of a packing reports the side and its finder's source holds
-    the pose."""
-    if case.reported_source_key != EXACT_OPTIMA_SOURCE_KEY:
-        return case.reported_source_key
-    pictured = _exact_optima_pictured().get(case.n)
-    if pictured is None:
-        raise ValueError(f"n={case.n}: no source holds the packing of its exact optimum")
-    return pictured
+    """The source whose geometry the atlas reads for a case (`devtools.pictured_source`):
+    the record's own, except where an exact optimum of a packing reports the side and its
+    finder's source holds the pose."""
+    return pictured.pictured_source_key(case.n, case.reported_source_key)
 
 
 def _source_plan(
@@ -1136,6 +1139,7 @@ def clear_build_caches() -> None:
     source_plans.cache_clear()
     _built_corpus.cache_clear()
     _expected_outputs.cache_clear()
+    _regularized_tiles.cache_clear()
 
 
 @cache
@@ -1903,6 +1907,33 @@ def _composite_bound_display(
     raise ValueError("a triangle bound caption collides with its algebraic degree")
 
 
+@cache
+def _regularized_tiles() -> dict[int, dict[str, Any]]:
+    """The layer's index entries of the cases whose default picture is their regularized
+    view (regularization policy, section 12): the record `devtools.default_drawings`
+    writes and the records tier checks, refused where it is not the index's."""
+    from devtools.default_drawings import regularized_defaults  # noqa: PLC0415
+    from devtools.render_regularized_atlas import regularized_entries  # noqa: PLC0415
+
+    drawn = regularized_defaults()
+    return {entry["n"]: entry for entry in regularized_entries() if entry["n"] in drawn}
+
+
+def tile_frame(built: BuiltCase) -> PackingFrame:
+    """The frame a composite's card draws: the case's default picture. That is its
+    regularized view where the view improves on the house drawing, read as the homepage's
+    regularized drawings read it (`render_regularized_atlas.regularized_frame`: the
+    view's squares and certified side under the record's own evidence tier and check,
+    with the view's source id), and its retained witness everywhere else. The card's
+    labels and badges are the record's either way."""
+    entry = _regularized_tiles().get(built.frontier.n)
+    if entry is None:
+        return frame_from_witness(built.witness)
+    from devtools.render_regularized_atlas import regularized_frame  # noqa: PLC0415
+
+    return regularized_frame(entry)
+
+
 def _append_summary_card(
     root: ET.Element,
     built: BuiltCase,
@@ -1919,7 +1950,7 @@ def _append_summary_card(
     card_x, card_y = position.left, position.top
     packing_x = card_x + SUMMARY_PACKING_INSET_X
     packing_y = card_y + SUMMARY_PACKING_INSET_Y
-    frame = frame_from_witness(built.witness)
+    frame = tile_frame(built)
     side = frame.container_side.projected
     reference_side = Decimal(isqrt(n - 1) + 1) if row_sizing else side
     scale = SUMMARY_PACKING_SIZE / reference_side
@@ -2053,9 +2084,7 @@ def _append_summary_card(
             "font-size": "29",
             "font-weight": "700",
             "letter-spacing": "-0.5",
-            "fill": FIRST_PARTY_ACCENT_COLOR
-            if recent is not None and recent.any
-            else LABEL_MUTED_COLOR,
+            "fill": LABEL_MUTED_COLOR,
         },
     ).text = str(n)
 
@@ -2075,9 +2104,7 @@ def _append_summary_card(
             label,
             x=cursor,
             top=badge_top,
-            accent=FIRST_PARTY_ACCENT_COLOR
-            if recent is not None and recent.optimal and glyph == "O"
-            else None,
+            accent=None,
         )
         cursor -= SUMMARY_BADGE_SIZE + Decimal(4)
     bound = sub(
@@ -2573,9 +2600,7 @@ def _append_summary_legend(
                 font_family=POSTER_BODY_FONT,
                 font_weight=POSTER_BODY_WEIGHT,
                 mark_font_weight=POSTER_BODY_WEIGHT,
-                label_fill=FIRST_PARTY_ACCENT_COLOR
-                if item.key == "recent"
-                else SUMMARY_SMALL_FILL,
+                label_fill=SUMMARY_SMALL_FILL,
             )
             if item.key == "recent":
                 recent = column[-1]
@@ -2744,6 +2769,18 @@ def _balanced_credit_lines(
         if line_count is not None
         else "poster attribution credits exceed their information block"
     )
+    return _balanced_atoms(atoms, line_count=line_count, measure=measure, failure=failure)
+
+
+def _balanced_atoms(
+    atoms: Sequence[str],
+    *,
+    line_count: int | None = None,
+    measure: Decimal = POSTER_INFORMATION_WIDTH,
+    failure: str,
+) -> tuple[str, ...]:
+    """Consecutive runs of `atoms`, each kept whole, as the fewest lines within `measure`
+    (or exactly `line_count` of them), balanced in width."""
     # The retained face measures unkerned advances, so span widths are exactly additive.
     # Measure each indivisible role-prefix/name atom once, even in a four-line search.
     atom_widths = tuple(_text_width(atom, POSTER_BODY_SIZE) for atom in atoms)
@@ -2823,6 +2860,7 @@ class InformationLayout:
     legend_baseline: Decimal
     credit_baselines: tuple[Decimal, ...]
     attribution_baselines: tuple[tuple[Decimal, ...], ...]
+    regularization_baselines: tuple[Decimal, ...]
     diagram_baseline: Decimal
     stamp_baseline: Decimal
     project_baseline: Decimal
@@ -2844,6 +2882,60 @@ def _print_attribution_lines() -> tuple[tuple[str, ...], ...]:
         _balanced_credit_lines(paragraph, measure=measure)
         for paragraph in _print_attributions().paragraphs
     )
+
+
+#: The owner's compact print credit; detailed generator attribution stays in metadata.
+POSTER_REGULARIZATION_LINES = (
+    "Drawn packings are regularized for cleaner display using Squares Project rules,",
+    "based on Daniel\u2019s regularizer",
+)
+POSTER_REGULARIZATION_CREDIT = " ".join(POSTER_REGULARIZATION_LINES)
+
+
+@cache
+def _full_names() -> tuple[tuple[str, str], ...]:
+    """Every full personal name the print credits know and the name they print it as:
+    each alias of several words in `credit-attributions.json` that begins or ends with
+    the name it normalizes to, longest first. A project's or a handle's alias ("Squares
+    Project" for Levy) is not a full name and is left alone."""
+    aliases = json.loads(_print_attributions().metadata)["name_aliases"]
+    found = {
+        (alias, name)
+        for alias, name in aliases.items()
+        if " " in alias
+        and alias != name
+        and (alias.endswith(f" {name}") or alias.startswith(f"{name} "))
+    }
+    return tuple(sorted(found, key=lambda pair: (-len(pair[0]), pair[0])))
+
+
+def regularization_sentences(
+    numbers: Sequence[int], _count: int
+) -> tuple[tuple[str, ...], ...]:
+    """The compact print credit, with detailed attribution in the poster's metadata."""
+    return (tuple(POSTER_REGULARIZATION_CREDIT.split()),) if numbers else ()
+
+
+def _regularization_generator_credits(numbers: Sequence[int]) -> tuple[str, ...]:
+    """Full generator credit for every pictured regularization, retained as metadata."""
+    from devtools.default_drawings import credit_line  # noqa: PLC0415
+
+    return tuple(dict.fromkeys(credit_line(n) for n in numbers))
+
+
+def _regularized_numbers(canvas: CompositeCanvas) -> tuple[int, ...]:
+    """The cases a composite draws from their regularized views."""
+    return tuple(n for n in canvas.spec.numbers if n in _regularized_tiles())
+
+
+@cache
+def _regularization_lines_for(numbers: tuple[int, ...], _count: int) -> tuple[str, ...]:
+    return POSTER_REGULARIZATION_LINES if numbers else ()
+
+
+def _regularization_lines(canvas: CompositeCanvas) -> tuple[str, ...]:
+    """The owner's two-line print credit for regularized default pictures."""
+    return _regularization_lines_for(_regularized_numbers(canvas), canvas.spec.count)
 
 
 @cache
@@ -2933,6 +3025,16 @@ def _information_layout(
         baselines = tuple(first + pitch * index for index in range(len(lines)))
         attribution_baselines.append(baselines)
         credit_bottom = baselines[-1] + _print_ink_bounds(lines[-1], body_size)[1]
+    regularization = _regularization_lines(canvas)
+    regularization_baselines: tuple[Decimal, ...] = ()
+    if regularization:
+        first = credit_bottom + gap - _print_ink_bounds(regularization[0], body_size)[0]
+        regularization_baselines = tuple(
+            first + pitch * index for index in range(len(regularization))
+        )
+        credit_bottom = (
+            regularization_baselines[-1] + _print_ink_bounds(regularization[-1], body_size)[1]
+        )
     diagram_baseline = (
         credit_bottom + gap - _print_ink_bounds(POSTER_DIAGRAM_CREDIT, body_size)[0]
     )
@@ -2966,6 +3068,7 @@ def _information_layout(
         legend_baseline,
         credit_baselines,
         tuple(attribution_baselines),
+        regularization_baselines,
         diagram_baseline,
         stamp_baseline,
         project_baseline,
@@ -3135,6 +3238,29 @@ def _append_composite_information(
             text_line(
                 f"{paragraph.key}-credit-line", content, baseline, parent=attribution_block
             )
+    regularization_lines: list[ET.Element] = []
+    if layout.regularization_baselines:
+        regularization_block = sub(
+            block,
+            "g",
+            {
+                "data-feature": "regularization-credits",
+                "data-depicted-range": canvas.spec.cases.label,
+                "data-regularized-cases": json.dumps(list(_regularized_numbers(canvas))),
+                "data-generator-credits": json.dumps(
+                    _regularization_generator_credits(_regularized_numbers(canvas)),
+                    ensure_ascii=False,
+                ),
+            },
+        )
+        regularization_lines = [
+            text_line(
+                "regularization-credit-line", content, baseline, parent=regularization_block
+            )
+            for content, baseline in zip(
+                _regularization_lines(canvas), layout.regularization_baselines, strict=True
+            )
+        ]
     text_line("credit", POSTER_DIAGRAM_CREDIT, layout.diagram_baseline)
     text_line("release-stamp", identity.poster_stamp, layout.stamp_baseline)
     if corner:
@@ -3159,6 +3285,7 @@ def _append_composite_information(
         ],
         list(credit_block.findall(svg_tag("text"))),
         *(list(paragraph.findall(svg_tag("text"))) for paragraph in attribution_blocks),
+        regularization_lines,
         [
             node
             for node in block.findall(svg_tag("text"))

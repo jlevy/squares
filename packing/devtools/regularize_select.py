@@ -31,22 +31,25 @@ decided on four counts:
    --refresh-bounds` runs (`U` read again from the case record, a same-side view above it
    set aside); a grid-slack report by `regularize_grid_slack.decided`. Only row 10
    (`admit`) is adoptable; rows 7 and 8 go to the owner.
-4. **Drawing.** Seven measures against today's drawing. Five come from the house
-   renderer's colouring (`census_drawing_regularity.regularity`), fewer being better: light,
-   uneven and near-axis squares, distinct angle classes and hues; a square turned a hair
-   off its group adds a class and a hue though the other measures tie (n = 236, two
-   squares 0.000537 degrees off). Two are the house and stage totals of full shared sides,
-   more being better: the view's from its report's histograms, today's from
-   `regularize_evand.contact_partners` on the tree's drawing.
+4. **Drawing.** The policy's improvement rule (section 11, read from the policy by
+   `devtools.improvement_rule`) against today's drawing. Its seven measures: five come
+   from the house renderer's colouring (`census_drawing_regularity.regularity`), fewer
+   being better: light, uneven and near-axis squares, distinct angle classes and hues; a
+   square turned a hair off its group adds a class and a hue though the other measures
+   tie (n = 236, two squares 0.000537 degrees off). Two are the house and stage totals of
+   full shared sides, more being better: the view's from its report's histograms,
+   today's from `regularize_evand.contact_partners` on the tree's drawing. Its other two
+   goals are the side and exactness.
 
 A view is **adoptable** when both routes accept it, its side is at most `U` and at most
-today's drawn side, row 10 admits it, it is the view its run draws, it is worse than
-today's drawing on no measure, and it is better on one or drawn at a smaller side. A
-change that improves no measure at the same side is not made, except where it replaces a
-drawing that is not exactly verified (a numerically checked witness) with an exactly
-verified view. At each count the first adoptable view in preference order (Evan Daniel's,
-then grid-slack by rising threshold, then the order the runs were given) that no other
-adoptable view dominates (better on some measure, worse on none) is chosen.
+today's drawn side, row 10 admits it, it is the view its run draws, and it improves on
+today's drawing under the improvement rule: worse on no goal and better on one, whether a
+measure, a smaller side, or exactness, where it replaces a drawing that is not exactly
+verified (a numerically checked witness) with an exactly verified view. A tie on every
+goal is no improvement, and the change is not made. At each count the first adoptable view
+in preference order (Evan Daniel's, then grid-slack by rising threshold, then the order the
+runs were given) that no other adoptable view dominates (better on some measure, worse on
+none) is chosen.
 
 The output is every candidate with its verdicts and the reasons it was not adopted, a
 Markdown table of the choices and the register candidates, and the `regularize_evand
@@ -78,8 +81,15 @@ from typing import Any, Literal
 from strif import atomic_output_file
 
 from devtools import census_drawing_regularity as census
+from devtools import improvement_rule
 from devtools import regularize_evand as driver
 from devtools import regularize_grid_slack as grid
+from devtools.improvement_rule import (
+    CONTACT_MEASURES,
+    DRAWING_MEASURES,
+    MEASURES,
+    compare,
+)
 from devtools.register_regularized_bounds import decide_view
 from sqpack.yamlio import load_yaml
 
@@ -87,12 +97,6 @@ ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
 FORMAT = "regularized-view-selection-v1"
 GENERATOR = "python -m devtools.regularize_select"
-#: The house renderer's colouring of a drawing, fewer being better.
-DRAWING_MEASURES = ("light_axis", "uneven_axis", "near_axis", "classes", "hues")
-#: Full shared sides under the house and stage rules, more being better.
-CONTACT_MEASURES = ("house_total", "stage_total")
-MEASURES = DRAWING_MEASURES + CONTACT_MEASURES
-FEWER_IS_BETTER = frozenset(DRAWING_MEASURES)
 #: An Evan Daniel report's outputs, in the order a count's candidates are listed. A
 #: same-side view above the bound is `same_above_bound` once `yield_to_bound` sets it aside.
 EVAND_OUTPUTS = ("same", "solved", "same_above_bound")
@@ -101,14 +105,21 @@ VIEW_FILES = {
     "solved": "view-solved.yaml",
     "same_above_bound": "view-same.yaml",
 }
-RULE = (
-    "adoptable: both exact routes accept the view, its side is at most U and at most "
-    "today's drawn side, row 10 admits it, it is the view its run draws, it is worse than "
-    "today's drawing on no measure, and better on one or at a smaller side, or replaces a "
-    "drawing that is not exactly verified; chosen: the "
-    "first adoptable view (Evan Daniel's, then grid-slack by rising threshold) that no "
-    "other adoptable view dominates"
-)
+
+
+def rule() -> str:
+    """The rule the selection reports: adoptability, with the policy's improvement rule
+    read from the policy when it is asked for, never at import, so a broken marker is the
+    named problem of the check that reads it (`improvement_rule.problems`) rather than an
+    import error of every module that imports this one."""
+    return (
+        "adoptable: both exact routes accept the view, its side is at most U and at most "
+        "today's drawn side, row 10 admits it, it is the view its run draws, and it "
+        "improves on today's drawing under the policy's improvement rule "
+        f"({improvement_rule.SECTION}): {improvement_rule.statement()} Chosen: the first "
+        "adoptable view (Evan Daniel's, then grid-slack by rising threshold) that no other "
+        "adoptable view dominates"
+    )
 
 
 @dataclass(frozen=True)
@@ -355,22 +366,6 @@ def today(unit: tuple[Path, int, Mapping[int, Mapping[str, Any]]]) -> dict[str, 
 # --------------------------------------------------------------------------------------
 
 
-def compare(
-    view: Mapping[str, int | None], now: Mapping[str, int | None]
-) -> tuple[list[str], list[str]]:
-    """The measures on which a view is better and worse than today's drawing; a measure
-    either side lacks is not compared."""
-    gains: list[str] = []
-    worse: list[str] = []
-    for key in MEASURES:
-        mine, theirs = view.get(key), now.get(key)
-        if mine is None or theirs is None or mine == theirs:
-            continue
-        better = mine < theirs if key in FEWER_IS_BETTER else mine > theirs
-        (gains if better else worse).append(key)
-    return gains, worse
-
-
 def dominates(a: Mapping[str, Any], b: Mapping[str, Any]) -> bool:
     """Whether view `a` is better than view `b` on some measure and worse on none."""
     better, worse = compare(a["measures"], b["measures"])
@@ -402,10 +397,19 @@ def refusals(row: Mapping[str, Any]) -> list[str]:
         reasons.append("not the view its run draws, the only one `layer` admits")
     if not row["measured"]:
         reasons.append("its contacts were not measured")
+    judgement = improvement_rule.judge(
+        row["gains"],
+        row["worse"],
+        smaller=row["smaller"],
+        larger=row["above_drawn"],
+        exact_gain=row["replaces_unverified"],
+    )
     if row["worse"]:
         reasons.append(f"worse than today's drawing on {', '.join(row['worse'])}")
-    if not row["gains"] and not row["smaller"] and not row["replaces_unverified"]:
-        reasons.append("neither better on a measure nor at a smaller side")
+    elif not judgement.improves and not judgement.worse:
+        reasons.append(
+            "no improvement: it ties today's drawing on every goal of the improvement rule"
+        )
     return reasons
 
 
@@ -684,7 +688,7 @@ def select(
         "format": FORMAT,
         "generated_by": GENERATOR,
         "policy": driver.POLICY,
-        "rule": RULE,
+        "rule": rule(),
         "tree": str(tree),
         "runs": {
             "evand": [str(run.resolve()) for run in evand_runs],

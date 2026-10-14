@@ -32118,3 +32118,86 @@ evidence:
       minimum, rigidity or same-packing claim, and no certificate of a closed-form side:
       where the catalogue prints one, each side lies above it.
     source_reviewed: '2026-10-12'
+  - id: E-regularized-bounds-2026-10-13-grid-slack-exact-decision
+    claim: upper-bound
+    scope: {n_values: [290]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The register's verified upper bound at n = 290, Evan Daniel's exact certificate of
+        the catalogue's packing rounded up at the printed precision (T-101); the Kingbird
+        catalogue capture of 30 September 2026 the reported lane transcribes; the first
+        batch of exact regularized sides (T-155); and Evan Daniel's regularized record lists
+        (T-146) and site as retained here.
+      searched: '2026-10-13, by devtools.register_regularized_bounds select --batch grid-slack against the case record'
+      novel_object: >-
+        An exact rational certificate of the catalogue's own packing at n = 290 at the
+        witness's own side, 2.4e-15 below the record's ceiling and 1.8e-19 below the side of
+        Evan Daniel's certificate of the same packing (T-101). The packing is the
+        catalogue's; the regularizer is this project's port of Evan Daniel's coincidence
+        placement. The bound it proves is not new: T-155's certificate at n = 291, at
+        exactly this side, implies it by monotonicity (a packing of 291 unit squares
+        contains a packing of 290), so what is new is the certificate of n = 290's own
+        packing, not the bound.
+      gaps: >-
+        No search beyond this record and its retained sources. The search as first run
+        compared the side with n = 290's own record and not with the next count's: T-155 had
+        certified n = 291 at the same side on 12 October 2026, which implies this bound
+        (review B of jlevy/squares#587); the selection now records the next count's ceiling
+        (implied_by). The catalogue's closed form, 14 + (5/2)sqrt(2), lies 4.8e-33 below the
+        side; it is reported, and not certified here.
+    source_key: '[Daniel regularizer 2026-10-11]'
+    certificate: packing/cases/regularized_bounds/grid-slack-2026-10-13/views/
+    replay: >-
+      uv run --frozen --all-extras --group dev python -m
+      devtools.register_regularized_bounds decide --batch grid-slack, which decompresses the
+      retained view and decides it, every pair and every wall over Q, by
+      sqpack.witness.exact_verify and by devtools.check_rational_witness_independent; it
+      must report the view VALID under both
+      (packing/cases/regularized_bounds/grid-slack-2026-10-13/exact-decision.json). The
+      controls are devtools.register_regularized_bounds controls --batch grid-slack
+      (packing/cases/regularized_bounds/grid-slack-2026-10-13/negative-controls.json), and
+      devtools.register_regularized_bounds --check holds the receipts, the retained view and
+      the case record to each other.
+    replay_status: passed
+    verifiers: [V-sqpack-verify, V-check-rational-witness-independent, V-register-regularized-bounds]
+    limitations: >-
+      Proves s(290) at most the exact side of the retained view,
+      70142135623730950488016887242097/4000000000000000000000000000000, by deciding the view
+      here, every pair and every wall over Q, by two checkers that share no geometry or
+      verification code with each other: sqpack.witness.exact_verify on the view's rational
+      centre-basis witness and devtools.check_rational_witness_independent on its rational
+      corners. Both accepted it on 13 October 2026, 41905 pair decisions each in 14.9 CPU
+      seconds for the two. The view touches a wall and a neighbour exactly, least clearance
+      0, and both deciders accept contact, which is sound for s(n). The grid-slack
+      regularizer's run of 13 October 2026 (devtools.regularize_grid_slack,
+      regularize_grid_slack/1, at 5 degrees; a re-run at 0.5 degrees made the same bytes)
+      made the view and decided it with the same two checkers, so this replay reproduces the
+      producing run's decision with its own code and is not an independent implementation;
+      the generator's float placement decides nothing. The view is the same-side re-solve at
+      the witness's side s_W, the 36-digit rational promotion of a decimal witness. Three
+      controls, decided by both checkers (negative-controls.json): one square of the
+      tightest pair moved along the pair's best separating face axis by that axis's gap plus
+      one unit of the side's denominator, doubled until the independent checker's pair gap
+      is negative, and the box shrunk by its least top or right clearance plus that unit,
+      are refused by both; the box shrunk by the unit alone is refused by both as well,
+      since the view touches the top or right wall, so the last two are one mutant and the
+      three decisions are of two (48.2 CPU seconds). The overlap mutant is chosen by the
+      independent checker's own pair gap, so that checker's refusal of it is circular; it is
+      invalid regardless, by the separating-axis theorem. Identity is measured against the
+      witness's exact frame (check_half_angle_area.arrangement_gap under the box's eight
+      symmetries): nearest centres pair the view's squares one to one with the witness's,
+      and the largest move is 6.0e-31. The bound also follows from T-155's certificate at
+      n = 291, at the same side, by monotonicity, which is one line: deleting a square from
+      a packing of 291 unit squares leaves a packing of 290 in the same square; this entry
+      decides n = 290's own packing at that side. The case record carries the exact side
+      as the verified upper bound's exact_form and keeps the decimal it printed before,
+      17.53553390593274, which lies above it, as its value. No optimality, local minimum,
+      rigidity or same-packing claim, and no certificate of the catalogue's closed-form
+      side, which lies 4.8e-33 below this one.
+    source_reviewed: '2026-10-13'

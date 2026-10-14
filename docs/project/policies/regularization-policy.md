@@ -272,10 +272,37 @@ every defect found here.
 | The regularization | `by: project`, with `method` naming the generator and variant, for this project’s runs; another regularizer’s bibliography key for theirs, as `T-146` credits Evan Daniel’s lists |
 | Evan Daniel’s method | Whenever his generator or a derivative made the view: `method` names it (“Evan Daniel’s regularizer, `conservative`, `coincide`”); the index and every drawing made from the view carry the line *Regularized by the Squares Project with Evan Daniel’s regularizer (evand/square-packing, MIT)*; and a register result is credited `Levy after Daniel` through `builds_on`, which cites a bibliography key for the vendored code |
 | This project’s tool | `by: project`, `method: regularize_axis_components/2`, credited as the Squares Project |
+| This project’s modifications to his regularizer | Named beside his credit wherever his regularizer or the grid-slack port of his placement made the view, as `modifications`: the retry rungs its solve climbed (`dps-100`, `force-kkt`, the `first-pass` shim), the vendored copy’s patches its `method` names (the replica patch `probe-flat-stall-stop`), and the exact re-solve that brought it to the witness’s side (`devtools.regularize_same_side`); a grid-slack view is this project’s port of his coincidence placement (`regularize_grid_slack`), not his code. Where none applied the record says *unmodified* |
 
 The record states a regularization as the same packing in its own voice only where the
 identity basis is `measured`. A regularization taken in from elsewhere states its
 identity as its source’s claim until a measurement here decides it.
+
+The owner asked on 13 October 2026: “If we’re using our own modifications to Evan
+Daniel’s regularizer, we should note that as well.”
+Each drawn view’s item in `results.yaml`’s `regularized_drawings` and its case record’s
+`regularization` note (question 16) name them, read by `devtools.regularized_drawings`
+from the view’s index entry alone: the rungs from `run.rungs`, or before the retry
+ladder from `run.retried_with`, and the patches from `method`. A view admitted after the
+ladder and before `run.rungs` existed has its rungs recorded from its run’s reports by
+`python -m devtools.regularize_evand rungs`, which writes them only where a report
+reproduces the drawn view byte for byte, never over rungs or a retry already recorded,
+and names the run that supplied them as `run.rungs_from`. A registered result’s own
+regularization (`by: project` in its `regularizations`, as `T-155`’s 59 are) names them
+too, written by the same tool from the item’s `method` and `side`: the patches and the
+same-side re-solve.
+An item records no solve, and `T-155`’s selection kept none while its
+runs’ reports are not retained, so its items say in `modifications_unrecorded` that
+whether the solve climbed a retry rung is not recorded, rather than reading as
+*unmodified*. Where the layer draws that very solve, the item reads the rungs from the
+drawn entry instead and records nothing as unrecorded, so the register and the drawing
+read one solve one way: the result registers the drawing itself, and its registration
+receipt (`T-155`’s `selection.json`) names, at that count, a run whose receipt the
+entry’s run block records, with the entry’s output and exact side.
+At fourteen counts `T-155`’s certificate is the full run’s view the layer draws, which
+ran no retry, so its item reads *unmodified* or names the same-side re-solve alone.
+At 87 the layer draws a later run’s view at the same side, which says nothing of the
+solve `T-155` registered, so its item still says the rungs are not recorded.
 
 ## 8. Gates
 
@@ -289,7 +316,8 @@ So it runs on request with a receipt, and the gates hold the decisions it produc
 | --- | --- | --- |
 | `regularized atlas views match their index` | The index against the manifest, the witnesses and the views, by digest; with the layer’s contract, also the generator, method, side relation, identity and review-record fields; every drawn view’s exact side against $s_W$ and against the case record’s $U$, decided exactly, with the views above $U$ named in `ABOVE_U` | Records tier, every pull request |
 | `regularized atlas drawings match their index` | Every drawing re-rendered from its retained view | Records tier, every pull request |
-| `results rungs are earned and the view agrees` | `devtools.check_results` on each register result’s `regularizations` items | Records tier, every pull request |
+| `default pictures improve on their house drawings` | Every drawn view measured against its house drawing again, each count’s default picture decided under the improvement rule ([section 11](#11-the-improvement-rule)) and held to `default-drawings.json` | Records tier, every pull request |
+| `results rungs are earned and the view agrees` | `devtools.check_results` on each register result’s `regularizations` items, and on `regularized_drawings` and every case record’s `regularization` note against the layer’s index | Records tier, every pull request |
 | `regularized atlas views re-derive exactly` | Every `regularize_axis_components/2` view re-derived byte for byte; every other generator’s view decided again over $\mathbb{Q}$ on the maintained routes, its square count, identity and shades re-measured and its digests held | Deferred: the `regularized-views` job, whose 450 s ceiling bead think-uomm revisits |
 | The generator run | The views reproduced from the pinned code and inputs | On request only, with a receipt |
 
@@ -297,9 +325,10 @@ So it runs on request with a receipt, and the gates hold the decisions it produc
 
 The assessment’s eight
 [open questions](../research/research-2026-10-11-evand-regularization-assessment.md#open-owner-questions),
-the four the pilots of 11 October 2026 raised, and the three the owner settled on 13
-October 2026 after the stack’s re-posed views were audited, each with its answer or,
-where none is recorded, the default the policy applies until there is one.
+the four the pilots of 11 October 2026 raised, the three the owner settled on 13 October
+2026 after the stack’s re-posed views were audited, and the owner’s rule of the same day
+on credit and results, each with its answer or, where none is recorded, the default the
+policy applies until there is one.
 
 1. **Variant:** `conservative` only; `fewest` is not run.
    *Answered by the owner on 12 October 2026:* yes.
@@ -329,8 +358,20 @@ where none is recorded, the default the policy applies until there is one.
 7. **Method credit:** the owner directed on 11 October 2026 that the vendored code be
    properly credited, so its notice and the vendored README carry Evan Daniel’s credit.
    Until the owner says where else, the index, the drawings and a register result’s
-   `builds_on` carry it as [section 7](#7-credit) states; the atlas README and the
-   composites do not yet.
+   `builds_on` carry it as [section 7](#7-credit) states.
+   Since the regularized view became the default picture
+   ([section 12](#12-the-default-picture)), the composites carry it too, and so does the
+   case page that draws one; the atlas README names it in its account of the layer.
+   Both composites print the owner’s approved two-line wording:
+
+   ```text
+   Drawn packings are regularized for cleaner display using Squares Project rules,
+   based on Daniel’s regularizer
+   ```
+
+   Their SVG metadata retains the full generator credits in `data-generator-credits` and
+   the depicted regularized cases in `data-regularized-cases`. The compact printed
+   credit does not replace that attribution.
 
 8. **Retention of the solve:** kept.
    The solved points and contact structures go in a pinned packet or release asset
@@ -387,20 +428,18 @@ where none is recorded, the default the policy applies until there is one.
     Rows 6 and 9 are retired: no pairing, an unnamed turn or a move over $1/2$ is named
     in the admission’s reason and decides nothing.
     Rows 7 and 8 stand, so a per-square loss of contact still goes to review.
-    “Equal or better” is the choice rule of section 10, item 4, now an answer: a view
-    replaces the drawing when it is worse on no measure of the drawing and either better
-    on one or drawn at a smaller side.
-    The measures are seven: light, uneven and near-axis squares, angle classes and hues
-    (fewer is better), and the house and stage totals of shared sides (more is better);
-    classes and hues joined after a review of #559 found a view at 236 that tied the
-    other five and drew one more hue.
-    A view that improves no measure at the same side is not drawn, except where it
-    replaces a numerically checked witness with an exactly verified view at a side no
-    larger than $U$ (question 15). `devtools.regularize_select` applies the rule, and
-    the [regularization process](../guides/regularization-process.md) says how a pass
-    runs. The grid-slack generator’s straightening threshold is a per-run setting: a view
-    from a run at 1 or 5 degrees is admitted on the same terms as one from the default
-    half degree.
+    “Equal or better” is the choice rule of section 10, item 4, now an answer, and since
+    the owner’s further answer of the same day it is the improvement rule of
+    [section 11](#11-the-improvement-rule), which is stated there and nowhere else: a
+    view replaces the drawing only when it improves on it.
+    Of the rule’s seven measures, classes and hues joined after a review of #559 found a
+    view at 236 that tied the other five and drew one more hue; exactness counts as a
+    goal because an exactly verified view at a side no larger than $U$ replaces a
+    numerically checked witness (question 15). `devtools.regularize_select` applies the
+    rule, and the [regularization process](../guides/regularization-process.md) says how
+    a pass runs. The grid-slack generator’s straightening threshold is a per-run setting:
+    a view from a run at 1 or 5 degrees is admitted on the same terms as one from the
+    default half degree.
 
 15. **Exact verification of every packing:** *answered by the owner on 13 October 2026:*
     “Every packing, even after regularization, should be exactly verified.”
@@ -408,6 +447,59 @@ where none is recorded, the default the policy applies until there is one.
     by `--verify-atlas`. The packings drawn without a view, and the decimal witnesses
     the case pages draw, are not; the verification gaps review of 13 October 2026
     records them as a serious gap to be filled, as the owner asked.
+
+16. **Credit and results:** *answered by the owner on 13 October 2026:* “can we review
+    how we’re doing credits?
+    It seems like we should put a note on our frontier records about which ones have
+    done regularization and if the regularization is due to us (squares project)”, and
+    “Any new upper bounds should also be recorded as results.
+    Pure regularization should not be considered a new result, but it is a credited part
+    of the frontier record.”
+    A pure regularization, one whose exact side is not below $U$ and which so proves no
+    new bound, redraws a registered packing and is never a result: it changes no side,
+    frontier value, evidence tier or credit, and no register result is made for one.
+    It is credited in `results.yaml`’s `regularized_drawings` and on the case record of
+    every count the atlas draws regularized.
+    The record’s generated `regularization` field says who regularized the drawing
+    (`by: project`, with the generator, its credit line and this project’s
+    modifications, section 7), at which side relation (`same` or `bound`), which
+    registered result holds the packing (`of`, or that none does), and the view’s path.
+    Where the drawn regularization is itself registered, as `T-155`’s are at fifteen
+    drawn counts, the field names that result (`registered_in`) and the note says the
+    exact side is registered in it; the drawing adds no further result.
+    `T-155` registers 59 exact sides: 26 are new and prove new upper bounds, and 33
+    equal the sides of Evan Daniel’s earlier certificates (`T-101`), which the record
+    had carried rounded up and which `T-101`’s replay already proves.
+    At those 33, eight of them drawn, the item names `T-101` as `first_certified_in`,
+    and the note says that the regularization is the Squares Project’s, that its exact
+    side is registered in `T-155`, and that the same side was first certified by Evan
+    Daniel’s certificate (`T-101`), so it proves no new bound.
+    Where a result registers this project’s own regularization of a count that the atlas
+    does not draw, as `T-155` does at 43 counts, or draws by another method, as at 227,
+    the field carries it too, after any drawing: in the register’s terms (`method`,
+    `side`, `of`, `registered_in`) with the generator its method names, its credit line
+    and its modifications, and the note credits the Squares Project and names the
+    result, so every record whose count this project regularized says so whether or not
+    the view is drawn. Where the house is itself a regularization its source published,
+    as `T-146`’s certificates are, the field credits the source first, in the register’s
+    terms (`by` its bibliography key, `of` the result whose packing it regularizes,
+    `registered_in` the result that registered it).
+    `devtools.regularized_drawings` writes it from the layer’s index, its check in the
+    records tier holds every case record to the index, and the site’s case page prints
+    its note. An exactly verified side below $U$ is always registered as a result however
+    it was made (row 3, question 3), as `T-155` registered the exact views below the
+    bound. It is a new upper bound only where no earlier certificate already stated that
+    side exactly and no larger count’s verified upper bound is at or below it, since
+    $s(n) \le s(m)$ for $m > n$. Otherwise the result says that its bound is not new and
+    names the result that already proves it: at the 33 of `T-155`’s counts where Evan
+    Daniel’s certificate stated the side first, the item names `T-101` as
+    `first_certified_in`, and `T-156`, which registered the grid-slack view of $n = 290$
+    on 13 October 2026 at the witness’s own side `2.4e-15` below $U$, says that its
+    bound follows by monotonicity from `T-155`’s certificate at $n = 291$, at the same
+    side. The owner decided on 13 October 2026 to keep `T-156`, to say so, and to keep
+    the grid-slack view as the certificate of $n = 290$’s own packing at that side
+    (jlevy/squares#587); that view draws no change, so the atlas draws nothing new
+    there.
 
 An answer, like any other change to this policy, is an owner decision recorded here with
 its date. It replaces the default, and the counts it bears on are re-reviewed.
@@ -452,6 +544,9 @@ recorded where it is implemented, and reversing one is a change to that layer.
    resolved to the registered result that holds the packing; a count whose packing no
    registered result holds is listed as unregistered (#548). A drawing proves no bound,
    so no register result is made for one.
+   The owner confirmed this on 13 October 2026 (section 9, question 16), and each drawn
+   count’s case record now carries the same credit in its generated `regularization`
+   note.
 7. **Registering exact views below the bound** (question 3’s answer, carried out in
    #549): the row 3 views outside the counts #518 and #553 re-housed are registered as
    one batch result, `T-155`, with the case records’ exact forms moved to the registered
@@ -459,6 +554,96 @@ recorded where it is implemented, and reversing one is a change to that layer.
    Where a registered side is exactly the side of an earlier exact certificate, as it is
    of Evan Daniel’s (T-101) at 33 counts, that bound was already published, and the
    records cite the earlier certificate’s independent replay beside the batch’s.
+
+## 11. The Improvement Rule
+
+The owner, 13 October 2026: “tie is fine on exactness or regularity as long as it is
+making some improvement wrt our regularity or heuristic goals”, and “that should be
+codified in our regularization standards doc”.
+The rule below is that answer.
+It decides whether a view is drawn in place of today’s drawing (question 14), and
+whether a drawn view is a count’s default picture in place of its house drawing
+([section 12](#12-the-default-picture)).
+
+<!-- BEGIN RULE: improvement (devtools.improvement_rule) -->
+
+A view improves on a drawing when it is worse than the drawing on none of the goals and
+better on at least one.
+Ties on the other goals are fine, and a tie on every goal is no improvement.
+
+- light squares: fewer is better
+- uneven squares: fewer is better
+- near-axis squares: fewer is better
+- angle classes: fewer is better
+- hues: fewer is better
+- house total of full shared sides: more is better
+- stage total of full shared sides: more is better
+- exact side: smaller is better
+- exactness: exactly verified is better than numerically checked
+
+<!-- END RULE: improvement -->
+
+The marked text is the rule’s one statement: two sentences and its goals, one line each,
+with the direction in which each is better.
+The first five goals are regularity as the house renderer’s colouring shows it, counted
+by `devtools.census_drawing_regularity`; the house and stage totals are the full shared
+sides of `regularize_evand.contact_partners`; the exact side is a larger one worse; and
+exactness is an exactly verified view against a numerically checked witness.
+`devtools.improvement_rule` reads the statement from this file and decides it, and its
+readers take it from there: `devtools.regularize_select` prints it in the rule it
+reports, and `devtools.default_drawings` prints it with its check.
+That check parses the goal lines and compares them with the goals and directions the
+code judges, both ways, so a goal added or dropped here, or a direction changed, fails
+it until the code agrees.
+Every view the layer draws is exactly verified, so exactness is never worse.
+A change to the rule is an owner decision recorded here, made to the statement and to
+the code together.
+
+## 12. The Default Picture
+
+**Owner decision, 13 October 2026.** Asked “why do we even have ‘house’ on the diagrams?
+are there any benefits other than the historic accuracy?
+I’d be inclined to make all diagrams just default to regularized ones”, the owner
+approved the plan “regularized drawing is the default where one exists; house kept as
+‘as published’ on case pages and the toggle; posters redrawn”, adding that “having
+original records seems good but it seems like regularization should be a strict
+improvement if we’ve done it correctly”.
+
+So a count’s default picture is its regularized view wherever the layer draws one that
+is valid and improves on the house drawing:
+
+1. both maintained exact routes accept it, as its index entry records;
+2. its exact side is at most $U$, or it is one of the views question 13 names above it;
+3. it improves on the house drawing under the rule of
+   [section 11](#11-the-improvement-rule), measured as the selection measures a view
+   against today’s drawing.
+
+Everywhere else the house drawing is the picture.
+That includes a drawn view that ties an exactly verified house drawing on every goal at
+its own side, whose picture differs from the house’s by little more than a square’s
+small slide, and at most counts by less than a pixel at tile size; the layer keeps such
+views, admitted before this rule, and draws none of them by default.
+
+Where the default is the view, the homepage and atlas tiles, the frontier survey’s
+thumbnail, both posters and the case page draw it, and the case page keeps the house
+drawing one click away as *as published*, with the credit of the source whose packing it
+pictures.
+The owner’s follow-up on 13 October 2026 adds **Regularized | Original** to the
+homepage and atlas page.
+Each page starts with Regularized, using the defaults above and the house drawing where
+no view passes the improvement rule.
+Original shows the current house packing as published, with its source credit.
+Switching preserves the tiles and their links, and the drawing choice lasts for that
+page only; a new page starts with Regularized.
+Without scripts, the default drawings remain available.
+Where the layer holds a view that is not the default, the case page’s regularization
+note says why it draws the house drawing.
+The house witness stays the record’s witness, and the view changes no side, value, tier
+or credit (section 1). `devtools.default_drawings` writes each count’s default and its
+reason to `packing/atlas/known-best/default-drawings.json`; its check, in the records
+tier on every pull request, measures every view against its house drawing again, fails
+when the record or a default departs from the rule, and lists the counts that keep the
+house picture and why.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

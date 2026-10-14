@@ -1704,6 +1704,33 @@ def test_t146_regularizes_each_credited_packing_and_the_schema_knows_the_field()
         assert not validator.is_valid(payload), refused
 
 
+def test_a_side_first_certified_elsewhere_names_an_earlier_result_on_its_count() -> None:
+    """`first_certified_in`, the earlier result whose certificate first stated a
+    regularization's exact side, is held as `of` is: registered, another result, holding
+    the count and dated no later; RESULTS.md names it after the side (PR #585, review B1)."""
+    own = _regularization(
+        by="project",
+        identity={"basis": "measured", "one_to_one": True},
+        first_certified_in="T-125",
+    )
+    assert _regularization_problems(own, rid="T-148", attributed=False) == []
+    for named, problem in (
+        ("T-148", "names the result itself as the certificate that first stated its side"),
+        ("T-999", "names T-999, which is not registered"),
+        ("T-001", "names T-001, whose scope does not hold n = 70"),
+        ("T-147", "names T-147, dated 2026-10-12, after this result's 2026-10-11"),
+    ):
+        assert _regularization_problems(
+            {**own, "first_certified_in": named}, rid="T-148", attributed=False
+        ) == [f"T-148: regularization at n = 70 {problem}"]
+    sources = render_results.load_sources()
+    assert result_credit.regularization_sentence(own, sources) == (
+        "n = 70: a regularization of T-125\u2019s packing by Levy (fewest; solved to its "
+        "side, first certified in T-125; rotation groups merged by up to 0.93\u00b0, 3 free "
+        "angles moved; identity: measured here; nearest centres one to one)."
+    )
+
+
 def test_results_md_says_whose_packing_each_regularization_is() -> None:
     """Each count is one sentence: whose packing, who regularized it, the method and the
     side, what changed, and what the identity rests on with what was measured here."""

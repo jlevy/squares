@@ -38,10 +38,12 @@ TEMPLATES = PACKING / "devtools" / "templates"
 FRONTIER_ARTICLE = TEMPLATES / "frontier-article.md"
 RENDERINGS = PACKING / "atlas" / "known-best" / "rendering"
 #: The regularized views' index and their drawings, by the house renderer at the house
-#: settings (`devtools.render_regularized_atlas`), which the homepage's atlas offers as
-#: its second layer and reduces to tiles with `packing_svg(root=)`.
+#: settings (`devtools.render_regularized_atlas`), which every drawing on the site reduces
+#: with `packing_svg(root=)`. A count's default picture is its view where
+#: `DEFAULT_DRAWINGS` says so (regularization policy, section 12), else its house drawing.
 REGULARIZED_INDEX = PACKING / "atlas" / "known-best" / "regularized" / "index.json"
 REGULARIZED_RENDERINGS = REGULARIZED_INDEX.parent / "rendering"
+DEFAULT_DRAWINGS = PACKING / "atlas" / "known-best" / "default-drawings.json"
 TABLE_SCRIPT = PACKING / "devtools" / "overview" / "table.js"
 #: The two repository documents the page's prose links: the literature archive's README
 #: and the evidence inventory.
@@ -57,6 +59,8 @@ FRONTIER_INPUTS: tuple[Path, ...] = (
     TABLE_SCRIPT,
     PACKING / "frontier",
     RENDERINGS,
+    REGULARIZED_RENDERINGS,
+    DEFAULT_DRAWINGS,
     BOUND_CITATIONS,
     PACKING / "resources" / "bibliography.yaml",
     PACKING / "devtools" / "render_research_tables.py",
@@ -348,14 +352,30 @@ def evidence_links(refs: Iterable[str]) -> str:
     )
 
 
+def drawn_regularized() -> frozenset[int]:
+    """The counts whose default picture is their regularized view (regularization
+    policy, section 12), from the retained record `devtools.default_drawings` writes and
+    the records tier checks; every other count is drawn from its house rendering."""
+    from devtools.default_drawings import regularized_defaults  # noqa: PLC0415
+
+    return frozenset(regularized_defaults())
+
+
+def default_root(n: int) -> Path:
+    """Where case `n`'s default picture is drawn from: its regularized view's rendering,
+    or its house rendering."""
+    return REGULARIZED_RENDERINGS if n in drawn_regularized() else RENDERINGS
+
+
 def thumbnail_svg(n: int) -> str:
-    """The case's cached 1000-unit SVG, in a reserved 50-pixel square image.
+    """The case's cached 1000-unit SVG of its default picture, in a reserved 50-pixel
+    square image.
 
     The drawing lives at its declared atlas address and can be cached across pages.
     The table cell sizes the image without embedding another copy of its geometry.
     """
 
-    return drawing_img(n, size=50)
+    return drawing_img(n, regularized=n in drawn_regularized(), size=50)
 
 
 def packing_svg(

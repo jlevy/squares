@@ -51,8 +51,9 @@ properties:
       regularize_grid_slack/1: {$ref: '#/$defs/generator'}
   runs:
     description: >-
-      The generator runs whose views the layer draws, each as its receipt recorded it: the
-      run receipts themselves stay outside the repository with the solves.
+      The generator runs whose views the layer draws, or whose reports supplied a drawn
+      view's retry rungs after admission (`run.rungs_from`), each as its receipt recorded
+      it: the run receipts themselves stay outside the repository with the solves.
     type: array
     items: {$ref: '#/$defs/run'}
   totals: {type: object}
@@ -94,6 +95,13 @@ $defs:
     required: [id, generator, finished, parameters, counts, cost]
     properties:
       id: {type: string, pattern: '^[a-z0-9-]+$'}
+      id_note:
+        type: string
+        minLength: 1
+        description: >-
+          Why a run's id was assigned after the run, where the run recorded none of its
+          own and the driver's convention (`evand-regularize-<run directory>`) gives
+          another run the same id (`regularize_evand rename-run`).
       generator: {$ref: '#/$defs/generator_id'}
       finished: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
       interpreter: {type: string, minLength: 1}
@@ -257,9 +265,22 @@ $defs:
         type: object
         additionalProperties: false
         required: [id]
+        description: >-
+          The run a view came from. `retried_with` is the one retry's arguments a report
+          kept before the retry ladder of 12 October 2026; `rungs` the ladder rungs the
+          kept solve climbed, empty where it climbed none (the vendored driver's
+          `solve.rungs`), which `devtools.regularize_evand rungs` records for a view
+          admitted without them, never over either field, naming in `rungs_from` the run
+          whose report rendered the drawn view byte for byte and supplied them (the
+          index's `runs` records it). A view with neither came from a run before the
+          ladder that retried nothing.
         properties:
           id: {type: string, pattern: '^[a-z0-9-]+$'}
           retried_with: {type: array, items: {type: string}}
+          rungs:
+            type: array
+            items: {enum: [dps-100, force-kkt, first-pass, stall-stop]}
+          rungs_from: {type: string, pattern: '^[a-z0-9-]+$'}
           output: {enum: [same, solved, grid]}
       source: {$ref: '#/$defs/source'}
       side:

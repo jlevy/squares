@@ -8,6 +8,7 @@
   const tabs = grid?.querySelector("[data-atlas-views]");
   const sizes = grid?.querySelector("[data-atlas-sizes]");
   const scales = grid?.querySelector("[data-atlas-scales]");
+  const drawings = grid?.querySelector("[data-atlas-drawings]");
   if (
     !(grid instanceof HTMLElement) ||
     !(cells instanceof HTMLElement) ||
@@ -103,6 +104,19 @@
     tabs,
     sizes: sizes instanceof HTMLElement ? sizes : null,
     scales: scales instanceof HTMLElement ? scales : null,
+    drawings: drawings instanceof HTMLElement ? drawings : null,
+    onDrawingChange: () => {
+      generation += 1;
+      for (const image of images) {
+        if (image.dataset.atlasImageState !== "ready") {
+          delete image.dataset.atlasImageState;
+        }
+      }
+      decoded = images.filter((image) => image.dataset.atlasImageState === "ready").length;
+      grid.dataset.atlasImagesReady = String(decoded);
+      pendingRows.splice(0, pendingRows.length, ...rows);
+      prepare();
+    },
     beforeArrange: completePreview,
     scoped,
   });
@@ -114,6 +128,7 @@
   const pendingRows = [...rows];
   let preparing = false;
   let decoded = 0;
+  let generation = 0;
   /** @param {Element} row */
   const prepareRow = (row) => {
     for (const image of row.querySelectorAll("img")) {
@@ -125,13 +140,29 @@
       if (image.fetchPriority !== "high") {
         image.fetchPriority = "low";
       }
+      const source = image.src;
+      const started = generation;
       void image.decode().then(
         () => {
+          if (
+            started !== generation ||
+            image.src !== source ||
+            image.dataset.atlasImageState !== "preparing"
+          ) {
+            return;
+          }
           image.dataset.atlasImageState = "ready";
           decoded += 1;
           grid.dataset.atlasImagesReady = String(decoded);
         },
         () => {
+          if (
+            started !== generation ||
+            image.src !== source ||
+            image.dataset.atlasImageState !== "preparing"
+          ) {
+            return;
+          }
           // A missing drawing keeps its canonical case link and reserved geometry.
           image.dataset.atlasImageState = "failed";
         },

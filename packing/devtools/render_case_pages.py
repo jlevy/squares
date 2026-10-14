@@ -695,6 +695,34 @@ def _rigidity(case: dict[str, Any]) -> str:
     )
 
 
+def _regularization(case: dict[str, Any]) -> str:
+    """Who regularized the drawing the atlas shows, and whether it is a pure
+    regularization, which is no result, or one whose exact side a result registers, or
+    where the atlas draws no regularized view, this project's regularization a result
+    registers: the record's generated note (`devtools.regularized_drawings`), one short
+    credit line, labelled for what it credits; nothing for a record without one."""
+    field = case.get("regularization") or {}
+    note = field.get("note")
+    if not note:
+        return ""
+    # The label says a regularized drawing only where the page draws one: a view that ties
+    # its house drawing on every goal is not the default picture (policy, section 12).
+    drawn = any(item.get("view") for item in field.get("items") or []) and (
+        case["n"] in frontier.drawn_regularized()
+    )
+    label = "Regularized drawing" if drawn else "Regularization"
+    from devtools.default_drawings import held_note  # noqa: PLC0415
+
+    # Where the layer holds a view that is not the default picture, the note says why the
+    # page draws the house instead, from the default record's reason.
+    held = held_note(case["n"])
+    text = " ".join(str(note).split()) + (f" {held}" if held else "")
+    return (
+        f'<div class="site-case-note"><span class="site-card-label">{label}</span>'
+        f"<p>{_esc(text)}</p></div>"
+    )
+
+
 def _open_questions(case: dict[str, Any]) -> str:
     items = []
     for label, entries in (("Conflict", case["conflicts"]), ("Blocker", case["blockers"])):
@@ -800,18 +828,58 @@ def _sources(case: dict[str, Any]) -> str:
 
 
 def packing_figure(n: int, *, units: int = 1000, upper: dict[str, Any] | None = None) -> str:
-    """The original packing drawing and optional best-known side/source caption."""
-    figcaption = ""
+    """The case's default picture and optional best-known side/source caption.
+
+    Where the default picture is the case's regularized view (regularization policy,
+    section 12), the figure draws the view and its caption carries the regularization's
+    credit line (section 7), and the house drawing follows one click away, in a
+    disclosure named "As published", with its source's credit (`as_published`).
+    """
+    regularized = n in frontier.drawn_regularized()
+    root = frontier.REGULARIZED_RENDERINGS if regularized else frontier.RENDERINGS
+    caption = []
     if upper is not None:
-        figcaption = (
-            f"<figcaption>The best packing known for {n} square{'s' if n != 1 else ''}, "
+        caption.append(
+            f"The best packing known for {n} square{'s' if n != 1 else ''}, "
             f"side {_math(bound_tex(upper))}, "
             f"{frontier.credit(upper.get('found_by'), upper.get('found_year'))}"
-            "</figcaption>"
         )
+    if regularized:
+        from devtools.default_drawings import credit_line  # noqa: PLC0415
+
+        caption.append(f'<span class="site-case-regularized">{_esc(credit_line(n))}</span>')
+    figcaption = f"<figcaption>{'. '.join(caption)}</figcaption>" if caption else ""
     return (
-        f'<figure class="site-case-figure">{frontier.packing_svg(n, units=units)}'
-        f"{figcaption}</figure>"
+        f'<figure class="site-case-figure">{frontier.packing_svg(n, units=units, root=root)}'
+        f"{figcaption}</figure>{as_published(n, units=units) if regularized else ''}"
+    )
+
+
+def as_published(n: int, *, units: int = 1000) -> str:
+    """The house drawing of a case drawn by default from its regularized view, as
+    published: a disclosure under the figure, closed until it is pressed, holding the
+    house rendering of the record's witness and its credit. Without scripts it opens as
+    any `details` does.
+
+    The credit is the finders' and the source whose packing the house drawing pictures
+    (`devtools.pictured_source`, the rule the atlas builder reads the witness by), which
+    is not always the source of the side: where an exact optimum of a packing reports the
+    side, the packing is its finder's. A record that names no finder is credited to its
+    source alone."""
+    from devtools.build_bound_citations import load_case  # noqa: PLC0415
+    from devtools.pictured_source import pictured_source_key  # noqa: PLC0415
+
+    upper = load_case(n)["reported_upper_bound"]
+    credit = frontier.credit(upper.get("found_by"), upper.get("found_year"))
+    key = pictured_source_key(n, str(upper.get("source_key") or ""))
+    finders = f", {credit}" if credit else ""
+    source = f' <span class="site-credit">{_esc(key)}</span>' if key else ""
+    return (
+        '<details class="site-case-published"><summary>As published</summary>'
+        '<figure class="site-case-figure site-case-published-figure">'
+        f"{frontier.packing_svg(n, units=units)}"
+        f"<figcaption>The packing as published{finders}{source}</figcaption></figure>"
+        "</details>"
     )
 
 
@@ -905,7 +973,8 @@ def record_head(
         f"{verified_lower}"
         f"{_gap_panel(case)}</div>"
         f'<h3 class="site-case-heading">Results in the register</h3>{results_block(n)}'
-        f"{_verification(case)}{_rigidity(case)}{_open_questions(case)}"
+        f"{_verification(case)}{_rigidity(case)}{_regularization(case)}"
+        f"{_open_questions(case)}"
         '<div class="site-case-note"><span class="site-card-label">Evidence and sources</span>'
         f"<details><summary>{len(evidence)} evidence entries</summary>"
         f"<p>{frontier.evidence_links(evidence)}</p></details>{_sources(case)}</div>"
