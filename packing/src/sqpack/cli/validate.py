@@ -6065,7 +6065,9 @@ def changed_paths(since: str) -> list[str]:
     return sorted(out)
 
 
-def _push_test_step(base: str, *, paths_file: Path | None = None) -> Step:
+def _push_test_step(
+    base: str, *, paths_file: Path | None = None, include_slow: bool = False
+) -> Step:
     """The behavioral tests reachable from the change (BC-086): the changed-path snapshot
     in `paths_file` when one is given, else the diff against `base`.
 
@@ -6111,13 +6113,15 @@ def _push_test_step(base: str, *, paths_file: Path | None = None) -> Step:
                 "devtools.reachable_tests",
                 "--run",
                 *change_arguments,
+                "--lane",
+                "all" if include_slow else "quick",
                 # The same distribution both behavioural lanes take, forwarded because the
                 # selector's runner cannot work it out: `cpus - jobs + 1` is about how many
                 # outer slots this run has busy, which only the caller knows. Without it the
                 # step ran in one process at every shape, `--jobs 1` included, which is
                 # `D-488`. The selector expands to everything for any workflow or
-                # suite-configuration change, so the serial case was the whole non-exhaustive
-                # suite -- quick lane and slow lane together.
+                # suite-configuration change. Lane choice remains explicit: quick by default,
+                # with slow tests included only when the caller requests them.
                 *_xdist_distribution(context.jobs),
                 # Explicit resource shapes need the same complementary pool lane as
                 # implicit broad pushes; otherwise each xdist worker inherits a pool.
@@ -6136,8 +6140,9 @@ def _push_test_step(base: str, *, paths_file: Path | None = None) -> Step:
         fast=True,
         broad=everything,
         reachable_test_files=reachable_test_files,
-        # When the selector expands to everything this is the whole non-exhaustive suite,
-        # and it takes that fallback's budget. D-432 is the run that did not: the
+        # A whole-file fallback keeps its existing conservative command budget; choosing
+        # a quick or explicit slow lane does not raise a deadline. D-432 is the run that
+        # lacked that budget: the
         # whole-suite fallback died at the shared 900s cap at 84%, and the
         # failing test it had reached could not be named from what it printed. A true
         # subset keeps the shared cap, which is the guard against one hung test.
@@ -7403,9 +7408,14 @@ def _parser() -> ArgumentParser:
         "--push",
         action="store_true",
         help=(
-            "run the pre-push floor: the edit tier plus the behavioral tests reachable "
+            "run the pre-push floor: the edit tier plus quick behavioral tests reachable "
             "from the change against --since REF (default origin/main)"
         ),
+    )
+    parser.add_argument(
+        "--include-reachable-slow",
+        action="store_true",
+        help="with --push, include reachable slow tests; exhaustive checks stay separate",
     )
     parser.add_argument(
         "--records",
@@ -7505,9 +7515,12 @@ def _validate_invocation(
     measure_verifier: bool = False,
     since: str | None = None,
     push: bool = False,
+    include_reachable_slow: bool = False,
     skip: Sequence[str] = (),
     exhaustive_shard: str = "",
 ) -> None:
+    if include_reachable_slow and not push:
+        raise UsageError("--include-reachable-slow requires --push")
     selections = (
         checks,
         frontend,
@@ -7639,6 +7652,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             measure_verifier=namespace.measure_verifier,
             since=namespace.since,
             push=namespace.push,
+            include_reachable_slow=namespace.include_reachable_slow,
             skip=namespace.skip,
             exhaustive_shard=exhaustive_shard,
         )
@@ -7698,7 +7712,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             directory = resources.enter_context(TemporaryDirectory(prefix="packing-push-"))
             paths_file = Path(directory) / "changed-paths.json"
             paths_file.write_text(json.dumps(paths), encoding="utf-8")
-            step = _push_test_step(base, paths_file=paths_file)
+            step = _push_test_step(
+                base, paths_file=paths_file, include_slow=namespace.include_reachable_slow
+            )
             reason = _whole_selection_reason(selection, paths)
             _announce(
                 namespace,
@@ -7725,7 +7741,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             selected = [*selected, step]
             scope = "the whole suite" if step.broad else "a reachable subset"
             _announce(
-                namespace, f"== pre-push floor against {base}: tests select {scope} ==", ""
+                namespace,
+                f"== pre-push floor against {base}: tests select {scope} "
+                f"({'quick + slow' if namespace.include_reachable_slow else 'quick'} lane) ==",
+                "",
             )
         elif namespace.since:
             paths = changed_paths(namespace.since)

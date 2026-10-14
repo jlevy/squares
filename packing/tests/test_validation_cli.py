@@ -2931,11 +2931,9 @@ def test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands(
     budget is one constant both steps read. A selected subset stays on the shared cap,
     which is the guard against a hung test.
 
-    Since `BC-214` the step that reads the same constant is `slow behavioral tests`. The
-    whole-suite fallback runs `-m "not exhaustive_exact"`, which is the quick lane and the
-    slow lane together, and the slow lane is the half that costs the wall -- so the
-    constant that bounds `--push` is the one the slow lane declares, not the quick one's
-    absent budget.
+    Since `BC-214` the step that reads the same constant is `slow behavioral tests`.
+    Whole-file fallback retains that existing ceiling for the default quick lane and
+    explicit combined lane; selecting a lane does not revise its timing budget.
     """
 
     def probe(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:
@@ -3020,6 +3018,8 @@ def test_push_tests_forward_the_shared_worker_allocation(
             "--run",
             "--since",
             "origin/main",
+            "--lane",
+            "quick",
             "-n",
             "4",
             "--pool-workers",
@@ -3102,8 +3102,10 @@ def test_explicit_push_runs_complementary_normal_and_exclusive_pool_lanes(
     normal, pooled = calls
     assert normal[1] == "1"
     assert pooled[1] == "2"
-    assert normal[0][normal[0].index("-m", 3) + 1] == "not exhaustive_exact and not pool_heavy"
-    assert pooled[0][pooled[0].index("-m", 3) + 1] == "not exhaustive_exact and pool_heavy"
+    assert (
+        normal[0][normal[0].index("-m", 3) + 1] == f"{validate.QUICK_TESTS} and not pool_heavy"
+    )
+    assert pooled[0][pooled[0].index("-m", 3) + 1] == f"{validate.QUICK_TESTS} and pool_heavy"
     assert normal[0][normal[0].index("-n") + 1] == "4"
     assert "-n" not in pooled[0]
     for command, _jobs in calls:
@@ -5394,10 +5396,12 @@ def test_frontend_browser_workers_fit_outer_topology(
     "paths",
     [["site/style.css"], ["unknown.xyz"], [], ["site/style.css", "science/certificate.json"]],
 )
+@pytest.mark.parametrize("include_slow", [False, True])
 def test_push_scopes_prerequisites_and_tests_from_one_snapshot(
-    monkeypatch: pytest.MonkeyPatch, paths: list[str]
+    monkeypatch: pytest.MonkeyPatch, paths: list[str], *, include_slow: bool
 ) -> None:
     """Both selectors see the same Git result, even if the tree changes during the floor."""
+    paths = paths.copy()
     prerequisites = (
         validate.Step("unattributed", lambda _context: "ok", fast=True),
         validate.Step("site", lambda _context: "ok", fast=True, touches=("site/*",)),
@@ -5428,6 +5432,7 @@ def test_push_scopes_prerequisites_and_tests_from_one_snapshot(
 
     def execute(_context: validate.Context, command: tuple[str, ...]) -> str:
         selector(command)
+        assert command[command.index("--lane") + 1] == ("all" if include_slow else "quick")
         return "tests passed"
 
     monkeypatch.setattr(validate, "_run", execute)
@@ -5449,7 +5454,14 @@ def test_push_scopes_prerequisites_and_tests_from_one_snapshot(
 
     monkeypatch.setattr(validate, "_run_selected", run)
     status, stdout, stderr = _invoke(
-        "--push", "--since", "base-ref", "--jobs", "1", "--inner-jobs", "1"
+        "--push",
+        "--since",
+        "base-ref",
+        "--jobs",
+        "1",
+        "--inner-jobs",
+        "1",
+        *(("--include-reachable-slow",) if include_slow else ()),
     )
     assert (status, stderr) == (0, "")
     expected = (
@@ -5599,3 +5611,9 @@ if __name__ == "__main__":
     arguments = parser.parse_args()
     collection_commands: list[list[str]] = json.loads(arguments.collect_site_layout_partitions)
     print(json.dumps(_collect_site_layout_partitions(collection_commands)))
+
+
+def test_reachable_slow_opt_in_requires_the_push_entrypoint() -> None:
+    status, _stdout, stderr = _invoke("--include-reachable-slow")
+    assert status == 2
+    assert "--include-reachable-slow requires --push" in stderr
