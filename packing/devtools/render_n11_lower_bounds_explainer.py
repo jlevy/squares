@@ -1306,6 +1306,52 @@ def relation_face_css(static: Path, faces: FaceSink = inline_face) -> str:
     )
 
 
+@cache
+def _code_symbol_font(static: Path) -> bytes:
+    """The literal real-number code glyph, without changing ASCII code or paper assets."""
+    from fontTools import subset  # noqa: PLC0415
+    from fontTools.ttLib import TTFont  # noqa: PLC0415
+
+    if not any(
+        _face_family(block) == "Planetaire Mono Text"
+        for block in FONT_FACE_BLOCK.findall(kpress_css(static))
+    ):
+        raise SystemExit("kpress declares no Planetaire Mono Text family for code symbols")
+    source = static / "katex/fonts/KaTeX_AMS-Regular.woff2"
+    font = TTFont(source, recalcTimestamp=False)
+    # KaTeX encodes its blackboard R at ASCII R; literal Lean code uses U+211D.
+    # Join the same outline at U+211D only, leaving ordinary R in Planetaire.
+    glyph = (font.getBestCmap() or {}).get(ord("R"))
+    if glyph is None:
+        raise SystemExit("KaTeX_AMS carries no blackboard R for literal code")
+    for table in font["cmap"].tables:
+        if table.isUnicode():
+            table.cmap[0x211D] = glyph
+    options = subset.Options(flavor="woff2")
+    options.layout_features = []
+    options.notdef_outline = False
+    options.hinting = False
+    options.glyph_names = False
+    subsetter = subset.Subsetter(options=options)
+    subsetter.populate(unicodes=(0x211D,))
+    subsetter.subset(font)
+    buffer = io.BytesIO()
+    font.flavor = "woff2"
+    font.save(buffer)
+    return buffer.getvalue()
+
+
+def code_symbol_face_css(static: Path, faces: FaceSink = inline_face) -> str:
+    """Opt-in site code glyphs; standalone papers keep their existing font declarations."""
+    url = faces("KaTeX_AMS-Regular-code-symbols.woff2", _code_symbol_font(static))
+    return (
+        '@font-face { font-family: "Planetaire Mono Text";\n'
+        f'  src: url("{url}") format("woff2");\n'
+        "  font-weight: 400; font-style: normal; font-display: block;\n"
+        "  unicode-range: U+211D; }"
+    )
+
+
 #: The host supplies custom context and TeX spacing; KPress owns profile selection,
 #: metric installation, font readiness, and rendering for every caller.
 KATEX_RUNTIME = "katex/katex-math-runtime.js"

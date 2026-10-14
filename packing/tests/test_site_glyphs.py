@@ -701,6 +701,65 @@ def test_the_probe_only_marks_exact_local_prose_fallback_sources_optional(
             browser.close()
 
 
+def test_literal_lean_code_uses_the_shared_glyph_without_host_fallback(
+    chromium: None,  # noqa: ARG001
+) -> None:
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    head, _script = render_overview.page_assets()
+    code_sheet = next(line for line in head.splitlines() if "css/code-symbols." in line)
+    literal = "Sq17.square17_optimality (L : \N{DOUBLE-STRUCK CAPITAL R}) : Sq17."
+    body = (
+        f'<main class="kpress"><code id="literal">{literal}</code>'
+        '<code id="ascii">Sq17.square17_optimality (L : R) : Sq17.</code></main>'
+    )
+    widths: list[float] = []
+    with sync_playwright() as driver:
+        browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
+        try:
+            page = browser.new_page()
+            for joined in (False, True):
+                styles = head if joined else head.replace(code_sheet, "")
+                page.set_content(
+                    site_assets.shared().assets.inlined(f"<head>{styles}</head>{body}")
+                )
+                # Locator screenshots wait for fonts.ready; no timing guess or new JS probe.
+                page.locator("#literal").screenshot()
+                assert page.locator("#literal").text_content() == literal
+                session = page.context.new_cdp_session(page)
+                try:
+                    session.send("DOM.enable")
+                    session.send("CSS.enable")
+                    root = session.send("DOM.getDocument", {"depth": 0})["root"]["nodeId"]
+                    drawn: dict[str, list[dict[str, Any]]] = {}
+                    for name in ("literal", "ascii"):
+                        node = session.send(
+                            "DOM.querySelector", {"nodeId": root, "selector": f"#{name}"}
+                        )["nodeId"]
+                        drawn[name] = session.send(
+                            "CSS.getPlatformFontsForNode", {"nodeId": node}
+                        )["fonts"]
+                    assert drawn["ascii"]
+                    assert all(font["isCustomFont"] for font in drawn["ascii"])
+                    assert any("Planetaire" in font["familyName"] for font in drawn["ascii"])
+                    if joined:
+                        assert all(font["isCustomFont"] for font in drawn["literal"])
+                        assert any(
+                            font["postScriptName"] == "KaTeX_AMS-Regular"
+                            for font in drawn["literal"]
+                        )
+                    else:
+                        assert any(not font["isCustomFont"] for font in drawn["literal"])
+                    box = page.locator("#ascii").bounding_box()
+                    assert box is not None
+                    widths.append(box["width"])
+                finally:
+                    session.detach()
+        finally:
+            browser.close()
+    assert widths[0] == pytest.approx(widths[1], abs=0.01)
+
+
 @pytest.fixture(scope="module")
 def site(chromium: None, tmp_path_factory: pytest.TempPathFactory) -> Path:  # noqa: ARG001
     """The two papers and the site's own pages, rendered once, in one directory, with

@@ -18,7 +18,7 @@ Selected test hashes do not establish whole-tree equivalence. Within-arm whole-t
 | [VE-008](experiments/VE-008-paper-layout-probes.md) | No passing samples | No passing samples | Pending samples |
 | [VE-009](experiments/VE-009-shared-test-publication.md) | No passing samples | No passing samples | Pending samples |
 | [VE-010](experiments/VE-010-gupta-fixture-renderings.md) | 10.66 (9.08-10.96), n=3 | 7.24 (7.17-11.67), n=3 | No detectable effect: ranges overlap or candidate is slower |
-| [VE-011](experiments/VE-011-guarded-receipt-copies.md) | No passing samples | No passing samples | Pending samples |
+| [VE-011](experiments/VE-011-guarded-receipt-copies.md) | 39.14 (37.36-50.06), n=3 | 37.69 (34.56-62.62), n=3 | No detectable effect: ranges overlap or candidate is slower |
 
 ## Observations
 
@@ -55,6 +55,12 @@ Every observation is listed, including incomplete or failed work.
 - `0698d977871f4ef3aacbd35f8f4cc84e`: gupta-production-and-fixture-candidate, passed, 11.67s, 1 test cases; [output](runs/0698d977871f4ef3aacbd35f8f4cc84e.stdout.log), [errors](runs/0698d977871f4ef3aacbd35f8f4cc84e.stderr.log).
 - `5d4b0e0e81784e61ac9508ab88cfc2f5`: gupta-original-control, passed, 10.96s, 1 test cases; [output](runs/5d4b0e0e81784e61ac9508ab88cfc2f5.stdout.log), [errors](runs/5d4b0e0e81784e61ac9508ab88cfc2f5.stderr.log).
 - `903ae7b657424c6d9c0c92fe4a81fcce`: gupta-production-and-fixture-candidate, passed, 7.24s, 1 test cases; [output](runs/903ae7b657424c6d9c0c92fe4a81fcce.stdout.log), [errors](runs/903ae7b657424c6d9c0c92fe4a81fcce.stderr.log).
+- `788b3cb5eb9d44f8bd2fb35f68365afb`: guarded-copy-original-control, passed, 39.14s, 1 test cases; [output](runs/788b3cb5eb9d44f8bd2fb35f68365afb.stdout.log), [errors](runs/788b3cb5eb9d44f8bd2fb35f68365afb.stderr.log).
+- `aa7556ffeaaf4b97af8e164511ae5d44`: guarded-copy-json-candidate, passed, 62.62s, 1 test cases; [output](runs/aa7556ffeaaf4b97af8e164511ae5d44.stdout.log), [errors](runs/aa7556ffeaaf4b97af8e164511ae5d44.stderr.log).
+- `3668fa66bf414f6994829361ee540189`: guarded-copy-original-control, passed, 50.06s, 1 test cases; [output](runs/3668fa66bf414f6994829361ee540189.stdout.log), [errors](runs/3668fa66bf414f6994829361ee540189.stderr.log).
+- `73f8cd475b104f3cb6d9f4b87daba927`: guarded-copy-json-candidate, passed, 34.56s, 1 test cases; [output](runs/73f8cd475b104f3cb6d9f4b87daba927.stdout.log), [errors](runs/73f8cd475b104f3cb6d9f4b87daba927.stderr.log).
+- `e460cd431d434eaea2df2770ec0f8f95`: guarded-copy-original-control, passed, 37.36s, 1 test cases; [output](runs/e460cd431d434eaea2df2770ec0f8f95.stdout.log), [errors](runs/e460cd431d434eaea2df2770ec0f8f95.stderr.log).
+- `700a6fec69b347d39169e5e3ef2f4982`: guarded-copy-json-candidate, passed, 37.69s, 1 test cases; [output](runs/700a6fec69b347d39169e5e3ef2f4982.stdout.log), [errors](runs/700a6fec69b347d39169e5e3ef2f4982.stderr.log).
 
 The append-only [receipts](runs/receipts.jsonl) retain commands and provenance.
 

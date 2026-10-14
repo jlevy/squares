@@ -10,7 +10,7 @@
 | Admit Gupta facts once per invocation | [VE-007](experiments/VE-007-gupta-invocation-facts.md) retains the rejected complete-roster experiment and its contrary timing evidence |
 | Reuse paper navigation for independent read-only probes | [VE-008](experiments/VE-008-paper-layout-probes.md) was rejected on a one-field equality refusal; no timed samples ran |
 | Share complete immutable test publications | [VE-009](experiments/VE-009-shared-test-publication.md) was withdrawn on controller critical-path and maintenance cost after both corpus oracles passed |
-| Copy guarded receipts through their JSON representation | [VE-011](experiments/VE-011-guarded-receipt-copies.md) preserves exact types/order, fresh nested values and every nine-case custody guard |
+| Copy guarded receipts through their JSON representation | [VE-011](experiments/VE-011-guarded-receipt-copies.md) was rejected after six passing native observations missed the frozen inclusive timing screen |
 | Bound nested pools and schedule exhaustive tests | Instrument and worker-cap regression first; register a measured scheduling experiment after profiling |
 | Remove duplicate n=40 replay | Review equality and CLI contracts before proposing a replacement |
 | Attribute negative-control time | Add incremental per-control receipts before optimizing repeated checker work |

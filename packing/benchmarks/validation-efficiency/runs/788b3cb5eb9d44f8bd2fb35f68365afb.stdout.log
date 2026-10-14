@@ -1,0 +1,6 @@
+.                                                                        [100%]
+============================== slowest durations ===============================
+25.45s setup    tests/test_negative_controls.py::test_second_squish_consumers_survive_native_worker_boundaries[house-reads]
+5.62s call     tests/test_negative_controls.py::test_second_squish_consumers_survive_native_worker_boundaries[house-reads]
+0.00s teardown tests/test_negative_controls.py::test_second_squish_consumers_survive_native_worker_boundaries[house-reads]
+1 passed in 36.90s

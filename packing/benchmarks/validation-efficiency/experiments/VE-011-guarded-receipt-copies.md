@@ -54,6 +54,29 @@ No candidate runtime observation has been taken.
 C owns the host measurement budget; this slice is limited to source work until that
 budget is released.
 
+## Result and Withdrawal
+
+The separate native positive oracle and all six registered observations passed the real
+nine-house checks and both owner refusals.
+Exact source guards passed before and after every observation; the candidate was
+restored in `finally` before disposition.
+
+- Control inclusive wall: 39.1359, 50.0571, 37.3616 seconds; median 39.1359 seconds.
+- Candidate inclusive wall: 62.6207, 34.5586, 37.6866 seconds; median 37.6866 seconds.
+
+The median reduction is 3.70%, below the frozen 15% criterion, and ranges overlap.
+The slower 62.6207-second candidate remains in the data.
+Private-fixture setup is included; the diagnostic profile’s deep-copy cost does not
+replace inclusive evidence.
+
+The coordinator withdrew the helper change and its five new copy controls.
+The existing nine premise guards and native tests are unchanged.
+The generated report includes the original six native CLI receipts and their raw
+JUnit/output files without rewriting provenance.
+The separate oracle, both complete source variants and withdrawal record remain in the
+closeout archive under `ve011-guarded-admission/`. No ceiling, selector, criterion or
+scientific rule changed.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

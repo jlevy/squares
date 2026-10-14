@@ -820,6 +820,29 @@ def test_the_relation_subset_carries_the_three_glyphs_and_its_own_name() -> None
     assert len(base64.b64decode(encoded.group(1))) < 2000
 
 
+def test_literal_code_symbol_subset_keeps_blackboard_r_without_replacing_ascii() -> None:
+    from fontTools.ttLib import TTFont  # noqa: PLC0415
+
+    css = render_n11_lower_bounds_explainer.code_symbol_face_css(kpress_static())
+    assert 'font-family: "Planetaire Mono Text";' in css
+    assert "unicode-range: U+211D;" in css
+    encoded = re.search(r'base64,([A-Za-z0-9+/=]+)"', css)
+    assert encoded is not None
+    face = TTFont(io.BytesIO(base64.b64decode(encoded.group(1))))
+    cmap = face.getBestCmap() or {}
+    assert set(cmap) == {0x211D}
+    source = TTFont(kpress_static() / "katex/fonts/KaTeX_AMS-Regular.woff2")
+    original = (source.getBestCmap() or {})[ord("R")]
+    from fontTools.pens.recordingPen import RecordingPen  # noqa: PLC0415
+
+    actual_outline, original_outline = RecordingPen(), RecordingPen()
+    face.getGlyphSet()[cmap[0x211D]].draw(actual_outline)
+    source.getGlyphSet()[original].draw(original_outline)
+    assert actual_outline.value == original_outline.value
+    assert "KaTeX_AMS-Regular" in (face["name"].getDebugName(6) or "")
+    assert "U+211D" not in relation_face_css(kpress_static())
+
+
 def test_the_shared_math_runtime_is_embedded_without_rewriting_its_source(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

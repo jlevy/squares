@@ -410,7 +410,14 @@ def test_every_boolean_flag_is_classified_as_a_tier_or_not() -> None:
     Every `store_true` option on the parser is therefore either a tier or named here as
     deliberately not one.
     """
-    not_a_tier = {"strict", "deep", "list", "budgets", "enforce_budget"}
+    not_a_tier = {
+        "strict",
+        "deep",
+        "list",
+        "budgets",
+        "enforce_budget",
+        "include_reachable_slow",
+    }
     # A `store_true` flag is exactly one that defaults to False in the parsed namespace,
     # which reads the real parser without reaching into argparse's internals.
     defaults = vars(validate._parser().parse_args([]))

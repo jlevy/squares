@@ -88,7 +88,8 @@ PUBLICATION_HISTORY = (
         version="v0.7.2",
         first_published="October 14, 2026",
         result_scope=(
-            "Document quick pre-push feedback, explicit deeper checks and the CI cost policy."
+            "Document quick pre-push feedback, explicit deeper checks and CI costs, and "
+            "render the real-number symbol in site code with the bundled font."
         ),
     ),
     PublicationHistoryEntry(
@@ -683,7 +684,8 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.7.2",
         impact="patch",
         reason=(
-            "Document quick pre-push feedback, explicit deeper checks and the CI cost policy."
+            "Document quick pre-push feedback, explicit deeper checks and CI costs, and "
+            "render the real-number symbol in site code with the bundled font."
         ),
     ),
     ReleaseImpactDecision(
@@ -806,6 +808,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/build_known_best_atlas.py",
             "packing/devtools/overview_sections.py",
             "packing/devtools/regularized_drawings.py",
+            "packing/devtools/render_n11_lower_bounds_explainer.py",
+            "packing/devtools/render_overview.py",
             "packing/devtools/source_supersession.py",
             "packing/devtools/validate_schemas.py",
             "packing/src/sqpack/cli/validate.py",
@@ -835,7 +839,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "refusals while reusing already-read metadata. These shared import paths "
             "are conservative paper inputs. The retained claim documents and source "
             "pin match main; no new byte-identical PDF build is claimed. The changed "
-            "public development guide is owned separately by the site patch cut."
+            "public development guide and opt-in site code-symbol font are owned "
+            "separately by the site patch cut. The paper renderer keeps its default "
+            "font CSS; only site page assets opt into the Unicode code-symbol font. "
         ),
     ),
     ReleaseNoPublicChange(

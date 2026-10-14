@@ -288,7 +288,7 @@ The measured optimization candidates are kept separate:
 | VE010: Gupta plan plus fixture batching | The thin-driver cohort showed 20.60%, but a separate full-provenance CLI cohort had overlapping ranges despite six functional passes. The generated report rejects it. Both interpreter cohorts and the slow candidate observation remain; all three routine source files are restored. |
 | VE008: one paper visit for two probes | The full actual oracle refused one figure field, 0.371 versus 0.372, after 130.667s. All 68 credit rows and the other 62-figure fields matched. No timing samples ran. The routine optimization is withdrawn; source, driver, reports and the earlier bootstrap failures are retained. |
 | VE009: one complete test publication | Withdrawn on design and maintenance grounds. Both fresh 184-result oracles passed all 470 checks; single inclusive observations were 110.380s local and 149.098s shared, including a 91.151s serial controller barrier. Direct producers remain fresh, actual consumers split across two shards, and roughly 500 transport/lifecycle lines have no established benefit. Zero paired samples; no numerical screen verdict or CI opt-in. Source and all oracles are retained. |
-| VE011: guarded native receipt copies | The maintained diagnostic admitted all nine historical houses and their refusal controls. Four deep copies account for 2.2382s of profiled cumulative time; profiling adds overhead. The isolated test-helper candidate preserves all custody checks and has no runtime or performance verdict yet. |
+| VE011: guarded native receipt copies | Rejected and withdrawn. The separate native oracle and all six paired observations passed; inclusive control/candidate medians were 39.1359s/37.6866s, a 3.70% reduction with overlapping ranges. All native receipts and source variants are retained, including the 62.6207s candidate. The test helper and five copy controls are restored to the pre-experiment implementation. |
 
 The
 [existing campaign report](../../../../packing/benchmarks/validation-efficiency/report.md)
@@ -302,6 +302,10 @@ The retained nine-house profile is diagnostic only and receives no gate credit.
 Rejected hypotheses do not justify retrying, deleting a field, moving fixture work
 outside the timer, changing markers or raising a ceiling.
 The three-minute objective remains unproved.
+
+The next producer-profile slice is tracked as `think-xoiw`. It follows stabilization
+rather than expanding this branch and will inspect repetition within the existing
+producer boundary before proposing any implementation.
 
 ## Design
 
