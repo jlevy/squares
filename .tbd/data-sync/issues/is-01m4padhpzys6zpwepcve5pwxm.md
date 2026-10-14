@@ -3,9 +3,9 @@ type: is
 id: is-01m4padhpzys6zpwepcve5pwxm
 title: "Import itsnaka (SQUISH): nine Mondrian packings at n = 176-305, smaller packings of 238, 239, 270, 305 (#500)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,10 +14,10 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:09.823Z
-updated_at: 2026-10-12T23:42:05.145Z
+updated_at: 2026-10-14T09:15:16.664Z
 started_at: 2026-10-11T20:28:23.635Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-14T09:15:16.664Z
+close_reason: "Done: #500 (SQUISH fourth request) registered as T-151 on main via #553 (2026-10-12); #500 closed. itsnaka 56fa71f read (squares-43) adds nothing."
 resolution: null
 duplicate_of: null
 ---
