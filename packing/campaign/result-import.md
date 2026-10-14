@@ -91,6 +91,16 @@ The owner may post instead.
 Under the same grant it adds the `intake` label; it edits nothing else on an issue
 without the owner’s word.
 
+**Stamp the day it lands.** When the owner gives the word to merge a pull request that
+adds register entries, its branch’s last two commits, made just before the merge, are
+the stamp, `uv run --frozen --all-extras --group dev python -m devtools.stamp_landed
+--apply` from `packing/`, and its re-pin, `python -m devtools.release_pin --update`. It
+gives each new entry `landed`, today in UTC: the day the result reaches `main` and the
+site, which the results page’s Added in the Last Seven Days and its Added filter read.
+`registered` stays the day the lane wrote the entry, often a day or two earlier.
+`test_stamp_landed` fails on `main` if an entry there has no `landed`; running the same
+command on a follow-up branch is the fix.
+
 ### The Prompt
 
 A session asked to run the intake takes this as its instruction:

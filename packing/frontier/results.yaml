@@ -7,6 +7,7 @@ results:
   - id: T-001
     kind: lower-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(17) ≥ 4426213/1000000 = 4.426213`, from a sixteen-point unavoidable set"
     established: '2026-08-31'
     claim: >-
@@ -55,6 +56,7 @@ results:
   - id: T-002
     kind: lower-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(18) ≥ 4426213/1000000`, by monotonicity from T-001"
     established: '2026-08-31'
     claim: >-
@@ -103,6 +105,7 @@ results:
   - id: T-003
     kind: method-limit
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "The sixteen-point set's unavoidability ceiling lies in `[4426213/1000000, 4427/1000)`"
     established: '2026-08-31'
     claim: >-
@@ -154,6 +157,7 @@ results:
   - id: T-004
     kind: audit
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "Bentz 2010, Theorem 8 (`s(46) ≥ 7`) is correct as printed, machine-audited in full"
     claim: >-
       Bentz 2010, Theorem 8: the printed 45-point unavoidable-set argument for
@@ -197,6 +201,7 @@ results:
   - id: T-005
     kind: correction
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "Bentz 2010, Lemma 10 is false as printed and true as corrected to `(1.74, 1)`"
     established: '2026-08-31'
     claim: >-
@@ -241,6 +246,7 @@ results:
   - id: T-006
     kind: optimality
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(13) = 4`"
     claim: >-
       s(13) = 4 (Bentz 2010, Theorem 9). Proved again, without cases, by Evan Daniel's
@@ -316,6 +322,7 @@ results:
   - id: T-007
     kind: lower-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(n) ≥ min(⌈√n⌉, √(n - 2⌊√n⌋ + 1) + 1)` for `4 ≤ n ≤ 324`"
     claim: >-
       For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives
@@ -390,6 +397,7 @@ results:
   - id: T-008
     kind: optimality
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(46) = 7`"
     claim: >-
       s(46) = 7: the lower half by T-004's audited unavoidable set, the upper
@@ -436,6 +444,7 @@ results:
   - id: T-009
     kind: upper-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(29) ≤ 5.93383346267692918974…`, by a Krawczyk interval certificate"
     established: '2026-08-29'
     claim: >-
@@ -483,6 +492,7 @@ results:
   - id: T-010
     kind: lower-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(11) ≥ 2 + 4/√5`, by a repair of Stromquist 2003's Figure 14 point set"
     established: '2026-08-24'
     claim: >-
@@ -531,6 +541,7 @@ results:
   - id: T-011
     kind: upper-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "Trump's 1979 packing is exactly valid, so `s(11) ≤ 3.877083590022814…`"
     claim: >-
       Trump's 1979 packing is exactly valid: 11 unit squares in a square of
@@ -575,6 +586,7 @@ results:
   - id: T-012
     kind: rigidity
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "Goebel's `n = 5` packing is second-order rigid at fixed side"
     established: '2026-08-30'
     claim: >-
@@ -621,6 +633,7 @@ results:
   - id: T-013
     kind: rigidity
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "Goebel's `n = 40` packing: seven verified first-order flexes, each refused at second order"
     established: '2026-08-30'
     claim: >-
@@ -663,6 +676,7 @@ results:
   - id: T-014
     kind: rigidity
     registered: '2026-09-03'
+    landed: '2026-09-03'
     headline: "Goebel's `n = 5` optimum is rigid at fixed side: its pose is an isolated feasible point"
     established: '2026-09-03'
     claim: >-
@@ -769,6 +783,7 @@ results:
   - id: T-015
     kind: lower-bound
     registered: '2026-09-03'
+    landed: '2026-09-03'
     headline: "`s(17) ≥ 22529/5000 = 4.5058`"
     claim: >-
       s(17) >= 22529/5000 = 4.5058, by Massaccesi's 168-atom fractional unavoidable-set
@@ -846,6 +861,7 @@ results:
   - id: T-016
     kind: lower-bound
     registered: '2026-09-03'
+    landed: '2026-09-03'
     headline: "`s(n) ≥ 22529/5000` for `n = 18, 19`, by monotonicity from T-015"
     claim: >-
       s(18) >= 22529/5000 and s(19) >= 22529/5000, by monotonicity from T-015 (a
@@ -901,6 +917,7 @@ results:
   - id: T-017
     kind: lower-bound
     registered: '2026-09-04'
+    landed: '2026-09-05'
     headline: "`s(12) ≥ 99/25 = 3.96`"
     established: '2026-09-04'
     claim: >-
@@ -1047,6 +1064,7 @@ results:
   - id: T-018
     kind: lower-bound
     registered: '2026-09-04'
+    landed: '2026-09-05'
     headline: "`s(11) ≥ 381/100 = 3.81`"
     established: '2026-09-04'
     claim: >-
@@ -1198,6 +1216,7 @@ results:
   - id: T-019
     kind: lower-bound
     registered: '2026-09-04'
+    landed: '2026-09-05'
     headline: "`s(n) ≥ 459/100 = 4.59` for `n = 17, 18, 19`"
     established: '2026-09-04'
     claim: >-
@@ -1369,6 +1388,7 @@ results:
   - id: T-020
     kind: lower-bound
     registered: '2026-09-04'
+    landed: '2026-09-05'
     headline: "`s(n) ≥ 24/5 = 4.80` for `n = 19, 20, 21`"
     established: '2026-09-04'
     claim: >-
@@ -1508,6 +1528,7 @@ results:
   - id: T-021
     kind: lower-bound
     registered: '2026-09-05'
+    landed: '2026-09-05'
     headline: "`s(n) ≥ 97/20 = 4.85` for `n = 20, 21`"
     established: '2026-09-05'
     claim: >-
@@ -1616,6 +1637,7 @@ results:
   - id: T-022
     kind: lower-bound
     registered: '2026-09-06'
+    landed: '2026-09-06'
     headline: "`s(11) ≥ 38100√(8100042893309449)/899996306539 = 3.8100257…`"
     established: '2026-09-06'
     claim: >-
@@ -1698,6 +1720,7 @@ results:
   - id: T-023
     kind: case-exclusion
     registered: '2026-09-08'
+    landed: '2026-09-10'
     headline: "Conditional exclusion: no eleven-square packing in the four-owner branch at `q = 96/25`"
     established: '2026-09-08'
     claim: >-
@@ -1794,6 +1817,7 @@ results:
   - id: T-024
     kind: lower-bound
     registered: '2026-09-09'
+    landed: '2026-09-10'
     headline: "`s(11) ≥ 3175000√(518400042893309449)/598960960743657 = 3.8166095…`"
     established: '2026-09-09'
     claim: >-
@@ -1915,6 +1939,7 @@ results:
   - id: T-025
     kind: lower-bound
     registered: '2026-09-09'
+    landed: '2026-09-10'
     headline: "`s(11) ≥ 191/50 = 3.82`, by a threshold certificate"
     established: '2026-09-09'
     claim: >-
@@ -2024,6 +2049,7 @@ results:
   - id: T-026
     kind: lower-bound
     registered: '2026-09-09'
+    landed: '2026-09-10'
     headline: "`s(11) ≥ 955000√(518400042893309449)/179696714646249 = 3.8264474…`"
     established: '2026-09-09'
     claim: >-
@@ -2158,6 +2184,7 @@ results:
   - id: T-027
     kind: lower-bound
     registered: '2026-09-18'
+    landed: '2026-09-20'
     headline: "`s(18) ≥ 467/100 = 4.67`"
     established: '2026-09-18'
     claim: >-
@@ -2234,6 +2261,7 @@ results:
   - id: T-028
     kind: lower-bound
     registered: '2026-09-19'
+    landed: '2026-09-20'
     headline: "`s(18) ≥ 187/40 = 4.675`"
     established: '2026-09-19'
     claim: >-
@@ -2311,6 +2339,7 @@ results:
   - id: T-029
     kind: lower-bound
     registered: '2026-09-19'
+    landed: '2026-09-20'
     headline: "`s(18) ≥ 1871/400 = 4.6775`"
     established: '2026-09-19'
     claim: >-
@@ -2389,6 +2418,7 @@ results:
   - id: T-030
     kind: lower-bound
     registered: '2026-09-19'
+    landed: '2026-09-20'
     headline: "`s(18) ≥ 4679/1000 = 4.679`"
     established: '2026-09-19'
     claim: >-
@@ -2477,6 +2507,7 @@ results:
   - id: T-031
     kind: case-exclusion
     registered: '2026-09-20'
+    landed: '2026-09-21'
     headline: "The octagon corner class (threshold `1/2`) holds no eleven-square packing at side `96/25`"
     established: '2026-09-20'
     claim: >-
@@ -2617,6 +2648,7 @@ results:
   - id: T-032
     kind: lower-bound
     registered: '2026-09-21'
+    landed: '2026-09-21'
     headline: "`s(17) ≥ 461300/99999 = 4.61304613…`, and beneath it Mira's `s(17) ≥ 4613/1000`"
     claim: >-
       s(17) >= 461300/99999 = 4.61304613..., by Guzhou0806's R012 parent-angle certificate of
@@ -2738,6 +2770,7 @@ results:
   - id: T-033
     kind: lower-bound
     registered: '2026-09-22'
+    landed: '2026-09-23'
     headline: "`s(11) ≥ 955000√(2073600042893309449)/359341754646249 = 3.8269975…`"
     established: '2026-09-22'
     claim: >-
@@ -2896,6 +2929,7 @@ results:
   - id: T-034
     kind: lower-bound
     registered: '2026-09-23'
+    landed: '2026-09-25'
     headline: "`s(21) ≥ 122/25 = 4.88`"
     established: '2026-09-23'
     claim: >-
@@ -3015,6 +3049,7 @@ results:
   - id: T-035
     kind: case-exclusion
     registered: '2026-09-24'
+    landed: '2026-09-25'
     headline: "Six-plus-five packings near Trump's tilt with side `≤ U_hi` lie within `rho` of his pose"
     established: '2026-09-24'
     claim: >-
@@ -3110,6 +3145,7 @@ results:
   - id: T-036
     kind: restricted-optimality
     registered: '2026-09-24'
+    landed: '2026-09-25'
     headline: "Trump's pose is optimal among six-plus-five packings near its tilt, unique up to symmetry"
     established: '2026-09-24'
     claim: >-
@@ -3266,6 +3302,7 @@ results:
   - id: T-037
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(11) > 31/8 = 3.875`"
     claim: >-
       s(11) > 31/8 = 3.875, by Marc Leonard Overbeck's 11-squares-certified-bound v1.0.2 release of 22
@@ -3371,6 +3408,7 @@ results:
   - id: T-038
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 461300/99853 = 4.6197910929…`"
     claim: >-
       s(17) > 461300/99853 = 4.6197910929..., by Marc Leonard Overbeck's 17-squares-certified-bound v1.0.0
@@ -3449,6 +3487,7 @@ results:
   - id: T-039
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 231001/50000 = 4.62002`"
     claim: >-
       s(17) > 231001/50000 = 4.62002, by Guzhou0806 / N17 project's R052 release of 25
@@ -3523,6 +3562,7 @@ results:
   - id: T-040
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 232001/50000 = 4.64002`"
     claim: >-
       s(17) > 232001/50000 = 4.64002, by Marc Leonard Overbeck's 17-squares-certified-bound v1.1.0 release
@@ -3599,6 +3639,7 @@ results:
   - id: T-041
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 466001/100000 = 4.66001`"
     claim: >-
       s(17) > 466001/100000 = 4.66001, by the bounds/4.66001/ package of Marc Leonard Overbeck's
@@ -3673,6 +3714,7 @@ results:
   - id: T-042
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 233009/50000 = 4.66018`"
     claim: >-
       s(17) > 233009/50000 = 4.66018, by Guzhou0806 / N17 project's R067 release of 28
@@ -3740,6 +3782,7 @@ results:
   - id: T-043
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 116511/25000 = 4.66044`"
     claim: >-
       s(17) > 116511/25000 = 4.66044, by Guzhou0806 / N17 project's R068 release of 28
@@ -3819,6 +3862,7 @@ results:
   - id: T-044
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "Weighted point lower bounds for ten counts in `n = 26…72`, plus seven from the same files"
     claim: >-
       Ten exact weighted point certificates in wand125/square-packing-bounds, of 22 September
@@ -3921,6 +3965,7 @@ results:
   - id: T-045
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "Rectangle-density lower bounds replayed at 15 counts in `n = 18…78`"
     claim: >-
       Twelve rectangle-density certificates in wand125/square-packing-bounds, added on 26 and
@@ -4021,6 +4066,7 @@ results:
   - id: T-046
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "Rectangle-density lower bounds reported for 48 counts in `n = 18…95`"
     claim: >-
       wand125/square-packing-bounds reports one standing rectangle-density certificate for
@@ -4142,6 +4188,7 @@ results:
   - id: T-047
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(11) ≥ 381/100`; `s(n) ≥ 1377/250` for `n = 26…28`; `s(n) ≥ 571/100` for `n = 29…31`"
     claim: >-
       s(11) >= 381/100, s(26) >= 1377/250 and s(29) >= 571/100, by Tokoharu's
@@ -4224,6 +4271,7 @@ results:
   - id: T-048
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(50) ≥ 37/5 = 7.4`"
     claim: >-
       s(50) >= 37/5 = 7.4, by wand125's mixed rectangle-density certificate of 28 September
@@ -4330,6 +4378,7 @@ results:
   - id: T-049
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(12) ≥ 15680/3951 = 3.9686155…`"
     claim: >-
       s(12) >= 15680/3951 = 3.9686155..., by Evan Daniel's weighted point certificate,
@@ -4415,6 +4464,7 @@ results:
   - id: T-050
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(21) ≥ 5000/1001 = 4.995004995…`"
     claim: >-
       s(21) >= 5000/1001 = 4.995004995..., by Evan Daniel's weighted point certificate of 23
@@ -4481,6 +4531,7 @@ results:
   - id: T-051
     kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(32) = 6`"
     claim: >-
       s(32) = 6: the lower half by Evan Daniel's weighted closed cover of 26 September 2026,
@@ -4647,6 +4698,7 @@ results:
   - id: T-052
     kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(21) = 5`, by a mixed cover of points and grid-line segments"
     claim: >-
       s(21) = 5: the lower half by Evan Daniel's mixed cover of 27 September 2026, the upper
@@ -4732,6 +4784,7 @@ results:
   - id: T-053
     kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(45) = 7`, by a mixed cover of points and grid-line segments"
     claim: >-
       s(45) = 7: the lower half by Evan Daniel's mixed cover of 27 September 2026, the upper
@@ -4816,6 +4869,7 @@ results:
     kind: simplification
     proves_kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(45) = 7` by a second, point-only route"
     claim: >-
       s(45) = 7 by a second, point-only route: the lower half by wand125's point-only measure
@@ -4891,6 +4945,7 @@ results:
     kind: simplification
     proves_kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(21) = 5` by a point-only route"
     claim: >-
       s(21) = 5 by a second, point-only route: the lower half by wand125's point-only
@@ -4984,6 +5039,7 @@ results:
   - id: T-056
     kind: upper-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "Smaller packings for 49 counts from `n = 68` to `307`, each certified two independent ways"
     claim: >-
       For each of 49 counts n from 68 to 307, s(n) is at most the verified upper bound its
@@ -5082,6 +5138,7 @@ results:
   - id: T-057
     kind: upper-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(211) ≤ 14.99796070496771500150 < 15`, the first packing of 211 squares below the grid on record"
     claim: >-
       s(211) <= 14.99796070496771500150 < 15, by Joost de Winter's packing of 16 September
@@ -5159,6 +5216,7 @@ results:
   - id: T-058
     kind: method-limit
     registered: '2026-09-29'
+    landed: '2026-09-30'
     headline: "Rectangle-certificate ceiling `α·UB(n)` proved for n = 1..100; `B·UB(n)` on 64 grid rows"
     claim: >-
       A rectangle-density certificate with core side B = 9977/10000 and the 201-direction
@@ -5231,6 +5289,7 @@ results:
   - id: T-059
     kind: audit
     registered: '2026-09-29'
+    landed: '2026-09-30'
     headline: "Reported equality of 12028 n11 row minima reproduced by a complete bound replay"
     claim: >-
       wand125/square-packing-tools reports that its exact general_pose_tree checker reproduces
@@ -5297,6 +5356,7 @@ results:
   - id: T-060
     kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-30'
     headline: "Trump's eleven-square packing is globally optimal"
     claim: >-
       `s(11) = T = (6u+4)/(1+2u−u²) = 3.8770835900228141773078970601…`, where `u` is the
@@ -5440,6 +5500,7 @@ results:
   - id: T-061
     kind: lower-bound
     registered: '2026-09-30'
+    landed: '2026-10-01'
     headline: "`s(11) > 3875000000/999999999 = 3.875000003875…`, 3.9e-9 above `31/8`"
     claim: >-
       s(11) > 3875000000/999999999 = 3.875000003875000003875..., by Ke Wang and Can Li's
@@ -5547,6 +5608,7 @@ results:
   - id: T-062
     kind: optimality
     registered: '2026-10-01'
+    landed: '2026-10-01'
     headline: "`s(60) = 8`, by a mixed cover of points and grid-line segments"
     claim: >-
       s(60) = 8: the lower half by Evan Daniel's mixed cover of 28 September 2026, the upper
@@ -5653,6 +5715,7 @@ results:
   - id: T-063
     kind: optimality
     registered: '2026-10-01'
+    landed: '2026-10-01'
     headline: "`s(61) = 8`, by monotonicity from T-062"
     claim: >-
       s(61) = 8, as a corollary of s(60) = 8 (T-062), which Evan Daniel published with it on
@@ -5755,6 +5818,7 @@ results:
   - id: T-064
     kind: optimality
     registered: '2026-10-01'
+    landed: '2026-10-01'
     headline: "`s(k² − 3) = k` for every integer `k` from 6 up; `k = 6…18` are the cases held here"
     claim: >-
       Evan Daniel's theorem s(k^2 - 3) = k for every integer k >= 6, dated 29 September 2026
@@ -5936,6 +6000,7 @@ results:
   - id: T-065
     kind: upper-bound
     registered: '2026-10-01'
+    landed: '2026-10-01'
     headline: "`s(17) ≤ 4.6755300936045509…`, Bidwell's packing certified exactly"
     claim: >-
       s(17) <= 4.6755300936045509516342148538535054: seventeen unit squares fit in a square
@@ -6023,6 +6088,7 @@ results:
   - id: T-066
     kind: optimality
     registered: '2026-10-01'
+    landed: '2026-10-03'
     headline: "`s(59) = 8`, by a mixed cover of points and grid-line segments"
     claim: >-
       s(59) = 8: the lower half by wand125's mixed cover of 1 October 2026, the upper half
@@ -6131,6 +6197,7 @@ results:
   - id: T-067
     kind: optimality
     registered: '2026-10-01'
+    landed: '2026-10-03'
     headline: "`s(77) = 9`, by a mixed cover extended from Daniel's `s(60)` cover"
     claim: >-
       s(77) = 9: the lower half by wand125's mixed cover of 1 October 2026, the upper half
@@ -6255,6 +6322,7 @@ results:
   - id: T-068
     kind: lower-bound
     registered: '2026-10-01'
+    landed: '2026-10-03'
     headline: "Rectangle-density lower bounds verified at 34 counts in `n = 19…95`"
     claim: >-
       Thirty-four rectangle-density certificates of wand125/square-packing-bounds, one at each
@@ -6452,6 +6520,7 @@ results:
   - id: T-069
     kind: lower-bound
     registered: '2026-10-01'
+    landed: '2026-10-03'
     headline: "Mixed rectangle-measure lower bounds replayed at `n = 37, 65, 66, 90, 92`"
     claim: >-
       Five rectangle densities of wand125/square-packing-bounds, checked at coverage one and
@@ -6560,6 +6629,7 @@ results:
   - id: T-070
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-03'
     headline: "Rectangle-density lower bounds replayed at 25 counts in `n = 29…95`"
     claim: >-
       Sixteen rectangle-density certificates in wand125/square-packing-bounds, added or
@@ -6682,6 +6752,7 @@ results:
   - id: T-071
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-03'
     headline: "Mixed rectangle-measure lower bounds replayed at `n = 84…87`"
     claim: >-
       Two rectangle densities of wand125/square-packing-bounds, checked at coverage one and
@@ -6787,6 +6858,7 @@ results:
   - id: T-072
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-03'
     headline: "Mixed rectangle-measure lower bound replayed at `n = 76`"
     claim: >-
       s(76) >= 447/50 = 8.94, by a rectangle density of wand125/square-packing-bounds
@@ -6882,6 +6954,7 @@ results:
   - id: T-073
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-03'
     headline: "Linear-measure lower bounds replayed at `n = 83` and `n = 101…105`"
     claim: >-
       Two measures of points, segments and rectangles that wand125/square-packing-bounds
@@ -7009,6 +7082,7 @@ results:
   - id: T-074
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-03'
     headline: "Rectangle-density lower bounds replayed at 31 counts in `n = 19…95`"
     claim: >-
       Twenty-nine rectangle-density certificates in wand125/square-packing-bounds, raised or
@@ -7113,6 +7187,7 @@ results:
   - id: T-075
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "Mixed rectangle-measure lower bounds replayed at nine counts in `n = 83…96`"
     claim: >-
       Six rectangle-density certificates that wand125/square-packing-bounds published on the
@@ -7270,6 +7345,7 @@ results:
   - id: T-076
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "Linear-measure lower bound replayed at `n = 82`"
     claim: >-
       A measure of points, segments and rectangles that wand125/square-packing-bounds
@@ -7365,6 +7441,7 @@ results:
   - id: T-077
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "Rectangle-density lower bounds replayed at `n = 20`, 42 and 70"
     claim: >-
       Three rectangle-density certificates in wand125/square-packing-bounds, raised on 2
@@ -7507,6 +7584,7 @@ results:
   - id: T-078
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "`s(12) ≥ 31360/7901 = 3.9691178…`, Daniel's certificate rescaled by `7902/7901`"
     claim: >-
       s(12) >= 31360/7901 = 3.96911783..., by squarepacker (Ryu Sungjoon) after Evan
@@ -7626,6 +7704,7 @@ results:
   - id: T-079
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "`s(12) ≥ 15680000/3949423 = 3.9702002…`, Daniel's points re-weighted"
     established: '2026-10-02'
     claim: >-
@@ -7741,6 +7820,7 @@ results:
   - id: T-080
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "Linear-measure lower bound replayed at `n = 101…105`"
     claim: >-
       A measure of points, segments and rectangles that wand125/square-packing-bounds
@@ -7832,6 +7912,7 @@ results:
   - id: T-081
     kind: optimality
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "`s(k² − 4) = k` for every integer `k` from 5 up; `k = 5…18` are the cases held here"
     claim: >-
       Evan Daniel's theorem s(k^2 - 4) = k for every integer k >= 5, published in his
@@ -8020,6 +8101,7 @@ results:
   - id: T-082
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "Mixed rectangle-measure lower bounds verified at 22 counts in `n = 51…96`"
     claim: >-
       Twenty-two rectangle densities of wand125/square-packing-bounds, checked at coverage
@@ -8267,6 +8349,7 @@ results:
   - id: T-083
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-04'
     headline: "`s(n) ≥ 1/2 + √(n − ⌊√n⌋ + 1/4)` for every nonsquare `8 ≤ n ≤ 324`"
     claim: >-
       For every nonsquare integer 8 <= N <= 324, Karakuş 2026, Corollary 6.2 gives
@@ -8354,6 +8437,7 @@ results:
   - id: T-084
     kind: optimality
     registered: '2026-10-02'
+    landed: '2026-10-04'
     headline: "`s(k² − 1) = k` for every integer `k ≥ 3`; `k = 3…18` are the cases held here"
     claim: >-
       s(k^2 - 1) = k for every integer k >= 3: Karakuş 2026, Corollary 1.2. The lower half
@@ -8445,6 +8529,7 @@ results:
   - id: T-085
     kind: correction
     registered: '2026-10-02'
+    landed: '2026-10-04'
     headline: "Nagamochi 2005, Lemma 1 is false for every container with `a > 3` and `b > 2`"
     claim: >-
       Lemma 1 of Nagamochi 2005 -- every square of side in (1, 1.01] inside [0,a] x [0,b]
@@ -8499,6 +8584,7 @@ results:
   - id: T-086
     kind: optimality
     registered: '2026-10-02'
+    landed: '2026-10-04'
     headline: "`s(k² − 2) = k` for every integer `k ≥ 2`; `k = 3…18` are the cases held here"
     claim: >-
       s(k^2 - 2) = k for every integer k >= 2: chelokot's Lean theorem
@@ -8568,6 +8654,7 @@ results:
   - id: T-087
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-04'
     headline: "`s(37) ≥ 5√3/2 + 2√2 − 1` and `s(61) ≥ 7√3/2 + 2√2 − 1`, by optimal piercing"
     claim: >-
       Bašić and Slivková 2018, Theorem 7 with Proposition 8: no more than B(x) unit squares
@@ -8632,6 +8719,7 @@ results:
   - id: T-088
     kind: upper-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "`s(69) ≤ 8.82719465572975`, Ellsworth's degree-38 packing, certified exactly from its picture"
     claim: >-
       s(69) <= 8.82719465572975, by David Ellsworth's packing of 69 unit squares, certified
@@ -8748,6 +8836,7 @@ results:
   - id: T-089
     kind: upper-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "`s(83) ≤ 9.63475764863195` and `s(87) ≤ 9.83881526994915`, Chang's packings, certified exactly"
     claim: >-
       s(83) <= 9.63475764863195 and s(87) <= 9.83881526994915, by two packings by Allen
@@ -8873,6 +8962,7 @@ results:
   - id: T-090
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "Mixed rectangle-measure lower bounds verified at 17 counts in `n = 42…96`"
     claim: >-
       Sixteen rectangle densities of wand125/square-packing-bounds, checked at coverage one
@@ -9059,6 +9149,7 @@ results:
   - id: T-091
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "Mixed rectangle-measure lower bounds verified at 17 counts in `n = 53…95`"
     claim: >-
       Twelve rectangle densities of wand125/square-packing-bounds, checked at coverage one
@@ -9227,6 +9318,7 @@ results:
   - id: T-092
     kind: upper-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "Smaller packings again at seven counts from `n = 208` to `306`, each certified two independent ways"
     claim: >-
       For seven counts, s(n) is at most the bound certified here from Francisco Couzo's
@@ -9334,6 +9426,7 @@ results:
   - id: T-093
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "`s(17) > 18641771/4000000 = 4.66044275`"
     claim: >-
       s(17) > 18641771/4000000 = 4.66044275, by Guzhou0806 / N17 project's R071 release of
@@ -9432,6 +9525,7 @@ results:
   - id: T-094
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "Mixed rectangle-measure lower bounds verified at `n = 67` and `84`"
     claim: >-
       Two rectangle densities of wand125/square-packing-bounds, checked at coverage one and
@@ -9537,6 +9631,7 @@ results:
   - id: T-095
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-06'
     headline: "`s(12) ≥ 7943/2000 = 3.9715`, Daniel's points dilated and re-weighted"
     claim: >-
       s(12) >= 7943/2000 = 3.9715, by squarepacker (Ryu Sungjoon) after Evan Daniel and this
@@ -9674,6 +9769,7 @@ results:
   - id: T-096
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound replayed at `n = 18`, on a net the certificate declares"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net
@@ -9779,6 +9875,7 @@ results:
   - id: T-097
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 66`"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one and
@@ -9897,6 +9994,7 @@ results:
   - id: T-098
     kind: upper-bound
     registered: '2026-10-05'
+    landed: '2026-10-06'
     headline: "Exact optima of 48 known-best packings: `s(n) ≤ S'`, `3.5e-13` to `5.0e-11` below each printed side"
     claim: >-
       For each of 48 counts n from 68 to 307, s(n) <= S', where S' is the side of an exact
@@ -10053,6 +10151,7 @@ results:
   - id: T-099
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 18`, on a finer declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net
@@ -10179,6 +10278,7 @@ results:
   - id: T-100
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 19`, past the best 18-square packing"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net
@@ -10299,6 +10399,7 @@ results:
   - id: T-101
     kind: upper-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Exact certificates of 77 catalogue packings: `s(n) ≤ S'`, `1.2e-16` to `9.8e-15` above each side"
     claim: >-
       For each of 77 counts n from 28 to 300, s(n) <= S', where S' is the side of an exact
@@ -10503,6 +10604,7 @@ results:
   - id: T-102
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 18`, on the finest declared net yet"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -10633,6 +10735,7 @@ results:
   - id: T-103
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 19`, on the finest declared net yet"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -10763,6 +10866,7 @@ results:
   - id: T-104
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 20`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -10892,6 +10996,7 @@ results:
   - id: T-105
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 26`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11022,6 +11127,7 @@ results:
   - id: T-106
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 27`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11153,6 +11259,7 @@ results:
   - id: T-107
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 28`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11282,6 +11389,7 @@ results:
   - id: T-108
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 29`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11407,6 +11515,7 @@ results:
   - id: T-109
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 30`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11538,6 +11647,7 @@ results:
   - id: T-110
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 39`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11667,6 +11777,7 @@ results:
   - id: T-111
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 41`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11796,6 +11907,7 @@ results:
   - id: T-112
     kind: uniqueness
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Trump's packing is the only optimal packing of eleven squares, up to symmetry"
     established: '2026-10-06'
     claim: >-
@@ -11940,6 +12052,7 @@ results:
   - id: T-113
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-07'
     headline: "`s(n) ≤ S_n` at ten counts, n = 108 to 303, from new SQUISH rational packings"
     claim: |
       Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(n) <= S_n for n = 108, 126, 129,
@@ -12072,6 +12185,7 @@ results:
   - id: T-114
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-07'
     headline: "`s(153) ≤ 7250614903299225/562949953421312`, from a SQUISH rational packing"
     claim: |
       Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(153) <=
@@ -12185,6 +12299,7 @@ results:
   - id: T-115
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-07'
     headline: '`s(n) ≤ S_n` at twelve counts, from the SQUISH update’s new and smaller rational packings'
     claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes feasible rational packing upper
       bounds for n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. Seven counts are
@@ -12309,6 +12424,7 @@ results:
   - id: T-116
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-08'
     headline: '`s(n) ≤ S_n` at nine counts, from the second SQUISH update’s new rational packings'
     claim: Nine unchanged rational SQUISH packings establish feasible upper bounds at n = 88, 108, 179,
       180, 199, 207, 236, 263 and 302. Both exact local routes accepted all nine and rejected both complete-roster
@@ -12450,6 +12566,7 @@ results:
   - id: T-117
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Exact rational ceiling refinements at n = 105, 292
     claim: Complete exact replay, independently re-implemented, confirms the finite rational upper-bound refinement at n = 105, 292.
       Only finite feasibility enters; no optimality claim is registered.
@@ -12508,6 +12625,7 @@ results:
   - id: T-118
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Exact rational ceiling refinements at n = 68
     claim: Complete exact replay, reproduced with the producer's code, confirms the finite rational upper-bound refinement at n = 68. Only
       finite feasibility enters; no optimality claim is registered.
@@ -12561,6 +12679,7 @@ results:
   - id: T-119
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Three exact feasible upper bounds at n=266,270,272 from new source arrangements
     claim: Complete rational packings establish s(266)<=16.8230287507564760, s(270)<=16.9378072284460292
       and s(272)<=16.9681101457696006. All displays are upward ceilings of exact rational sides; arrangement
@@ -12623,6 +12742,7 @@ results:
   - id: T-120
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Reported `s(102) ≤ alpha_102` with a degree-8 exact side form
     claim: >-
       Evan Daniel reports s(102) <= alpha_102, where alpha_102 is the feasible side of the source
@@ -12671,6 +12791,7 @@ results:
   - id: T-121
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Reported `s(106) ≤ alpha_106` with a degree-32 exact side form
     claim: >-
       Evan Daniel reports s(106) <= alpha_106, where alpha_106 is the feasible side of the source
@@ -12719,6 +12840,7 @@ results:
   - id: T-122
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Reported `s(152) ≤ alpha_152` with a degree-40 exact side form
     claim: >-
       Evan Daniel reports s(152) <= alpha_152, where alpha_152 is the feasible side of the source
@@ -12767,6 +12889,7 @@ results:
   - id: T-123
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Reported `s(177) ≤ alpha_177` with a degree-32 exact side form
     claim: >-
       Evan Daniel reports s(177) <= alpha_177, where alpha_177 is the feasible side of the source
@@ -12815,6 +12938,7 @@ results:
   - id: T-124
     kind: restricted-optimality
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Reported non-strict local minima for 178 source configurations
     claim: Evan Daniel reports that 178 configurations are non-strict local minima under the source
       matched-index perturbation convention. The retained catalogue names 176 integer-band cases and
@@ -13045,6 +13169,7 @@ results:
   - id: T-125
     kind: upper-bound
     registered: '2026-10-08'
+    landed: '2026-10-09'
     headline: Complete rational construction reports at 25 counts
     claim: Complete independently reviewed exact replay, independently re-implemented, confirms finite feasibility of all 25 rational source certificates. Superseded configurations retain their complete inputs and outcomes; no optimality
       or local-minimum theorem.
@@ -13138,6 +13263,7 @@ results:
   - id: T-126
     kind: upper-bound
     registered: '2026-10-08'
+    landed: '2026-10-09'
     headline: Undilated n51 construction over Q(sqrt2)
     claim: Complete independently reviewed exact replay, independently re-implemented, confirms the undilated 51-square construction ceiling s(51) <= (16+5sqrt(2))/3. This is finite feasibility, not equality with the optimum or
       the unconfirmed source contact count.
@@ -13191,6 +13317,7 @@ results:
   - id: T-127
     kind: upper-bound
     registered: '2026-10-08'
+    landed: '2026-10-09'
     headline: Fourteen rational refinements, seventeen complete source cases
     claim: Independently re-implemented exact verification confirms finite feasibility of all seventeen
       rational source certificates; fourteen strictly improve both prior finite upper lanes. Three withdrawn
@@ -13266,6 +13393,7 @@ results:
   - id: T-128
     kind: upper-bound
     registered: '2026-10-08'
+    landed: '2026-10-09'
     headline: Eight complete rational refinements from Francisco Couzo
     claim: >-
       Eight complete rational source certificates by Francisco Couzo, reported on
@@ -13425,6 +13553,7 @@ results:
   - id: T-129
     kind: upper-bound
     registered: '2026-10-08'
+    landed: '2026-10-09'
     headline: Three dated Daniel certificate reports with historical source custody
     claim: >-
       Complete author certificate reports at 105, 130 and 292 are retained with matching inputs and
@@ -13469,6 +13598,7 @@ results:
   - id: T-130
     kind: upper-bound
     registered: '2026-10-09'
+    landed: '2026-10-09'
     headline: Five follow-up rational refinements from Francisco Couzo
     claim: >-
       Five complete rational source certificates by Francisco Couzo, reported in a comment
@@ -13616,6 +13746,7 @@ results:
   - id: T-131
     kind: upper-bound
     registered: '2026-10-09'
+    landed: '2026-10-10'
     headline: "`s(132) ≤ 11.987099332245063…` from Evan Daniel's record hunt"
     claim: >-
       One complete rational source certificate by Evan Daniel, reported on
@@ -13753,6 +13884,7 @@ results:
   - id: T-132
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "Mixed rectangle-measure lower bound `s(29) ≥ 291/50` reported, on a 2,073-direction declared net"
     claim: >-
       A rectangle measure of wand125/square-packing, published on 10 October 2026 and
@@ -13856,6 +13988,7 @@ results:
   - id: T-133
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "`s(40) > 335427/50000 = 6.70854`, by a clipped-corner transfer on a 401-direction net"
     claim: >-
       s(40) > 335427/50000 = 6.70854, by Guzhou0806, published on 10 October 2026 as
@@ -14024,6 +14157,7 @@ results:
   - id: T-134
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Six exact rational certificates from Francisco Couzo
     claim: >-
       Six complete rational source certificates by Francisco Couzo, reported on
@@ -14189,6 +14323,7 @@ results:
   - id: T-135
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: A packing of 308 squares below the grid, from Kevin Fang
     claim: >-
       One complete rational source certificate by Kevin Fang, reported on
@@ -14337,6 +14472,7 @@ results:
   - id: T-136
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Seventeen exact rational packings from SQUISH's third request
     claim: >-
       Seventeen complete rational source certificates by Nate Chaoweeraprasit, using
@@ -14604,6 +14740,7 @@ results:
   - id: T-137
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: An exact rational refinement of Ryan Xu's packing of 70 squares
     claim: >-
       One complete rational source certificate by Eric Deleeuw, reported on
@@ -14741,6 +14878,7 @@ results:
   - id: T-138
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Exact witnesses at Mishapolk's printed ceilings, the smallest known at 103 and 258 when registered
     claim: >-
       Exact rational witnesses derived here from Mishapolk's decimal centre-and-angle poses,
@@ -14931,6 +15069,7 @@ results:
   - id: T-139
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: A more precise certificate of Ryan Xu's 126-square arrangement, from Evan Daniel
     claim: >-
       One complete rational source certificate by Evan Daniel, published in his repository and
@@ -15069,6 +15208,7 @@ results:
   - id: T-140
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Six more exact rational certificates from Francisco Couzo
     claim: >-
       Six complete rational source certificates by Francisco Couzo, reported on
@@ -15239,6 +15379,7 @@ results:
   - id: T-141
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Exact rational certificates at 132 and 308 from Evan Daniel's third record hunt
     claim: >-
       Two complete rational source certificates by Evan Daniel, reported on
@@ -15394,6 +15535,7 @@ results:
   - id: T-142
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "Mixed rectangle-measure lower bound `s(28) ≥ 2297/400` reported, on a 2,073-direction declared net"
     claim: >-
       A rectangle measure of wand125/square-packing, published on 10 October 2026 and
@@ -15499,6 +15641,7 @@ results:
   - id: T-143
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "Mixed rectangle-measure lower bound `s(30) ≥ 2357/400` reported, on a 2,073-direction declared net"
     claim: >-
       A rectangle measure of wand125/square-packing, published on 10 October 2026 and
@@ -15603,6 +15746,7 @@ results:
   - id: T-144
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "Linear-measure lower bound `s(n) ≥ 563/50 = 11.26` for `n = 122…126`, reported"
     claim: >-
       A measure of points, segments and rectangles that wand125/square-packing published on
@@ -15709,6 +15853,7 @@ results:
   - id: T-145
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "`s(40) > 1340000/199529 = 6.7158157…`, by a continuous-pose interval kernel"
     claim: >-
       s(40) > 1340000/199529 = 6.715815746082023…, by Guzhou0806, published on 10 October 2026
@@ -15881,6 +16026,7 @@ results:
   - id: T-146
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Exact rational certificates at fifteen counts from Evan Daniel's regularized record lists
     claim: >-
       Fifteen complete rational certificates from Evan Daniel's display-regularized record
@@ -16354,6 +16500,7 @@ results:
   - id: T-147
     kind: upper-bound
     registered: '2026-10-11'
+    landed: '2026-10-12'
     headline: A packing of 207 squares from two placed patches of Ryan Xu's packing of 70
     claim: >-
       One complete rational source certificate by PingYou Ltd, reported on
@@ -16507,6 +16654,7 @@ results:
   - id: T-148
     kind: upper-bound
     registered: '2026-10-11'
+    landed: '2026-10-12'
     headline: A packing of 153 squares built from Ryan Xu's packing of 70, its contacts reclosed at a new angle
     claim: >-
       One complete rational source certificate by PingYou Ltd, reported on
@@ -16681,6 +16829,7 @@ results:
   - id: T-149
     kind: upper-bound
     registered: '2026-10-11'
+    landed: '2026-10-12'
     headline: New packings of 155, 156 and 211 squares, each with an exact rational certificate
     claim: >-
       Three complete rational source certificates by Daniil Ostashev, reported on
@@ -16849,6 +16998,7 @@ results:
   - id: T-150
     kind: upper-bound
     registered: '2026-10-11'
+    landed: '2026-10-12'
     headline: Exact rational refinements of Ryan Xu's packings of 146 and 261 squares
     claim: >-
       Two complete rational source certificates by Robert Barnett, reported on
@@ -17007,6 +17157,7 @@ results:
   - id: T-151
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-12'
     headline: Nine exact rational packings from SQUISH's fourth request
     claim: >-
       Nine complete rational source certificates by Nate Chaoweeraprasit, using SQUISH,
@@ -17215,6 +17366,7 @@ results:
   - id: T-152
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-12'
     headline: Exact rational refinements of SQUISH's Mondrian packings of 304 and 305 squares
     claim: >-
       Two complete rational source certificates by Francisco Couzo, reported on
@@ -17416,6 +17568,7 @@ results:
   - id: T-153
     kind: optimality
     registered: '2026-10-12'
+    landed: '2026-10-13'
     headline: "Candidate proof that Bidwell's 1998 packing is optimal, `s(17) = 4.67553009360455…`"
     claim: >-
       Marc Leonard Overbeck (Kleddamag) claims, as a candidate proof, that `s(17) = L =
@@ -17739,6 +17892,7 @@ results:
     kind: formalization
     proves_kind: optimality
     registered: '2026-10-13'
+    landed: '2026-10-13'
     headline: "`s(17) = 4.67553009360455…` in Lean 4, by a route of its own, with no premise left"
     claim: >-
       `s(17) = 4.67553009360455095163…`, T-153's value L, the side of John Bidwell's 1998
@@ -18050,6 +18204,7 @@ results:
   - id: T-155
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-14'
     headline: Exact regularized sides at 59 counts, `5.4e-20` to `9.9e-15` below the ceilings they replace
     established: '2026-10-12'
     claim: >-
@@ -19107,6 +19262,7 @@ results:
   - id: T-156
     kind: upper-bound
     registered: '2026-10-13'
+    landed: '2026-10-14'
     headline: "`s(290) ≤ 17.5355339059327376…`, by monotonicity from T-155, with its own exact certificate"
     established: '2026-10-13'
     claim: >-
@@ -19272,6 +19428,7 @@ results:
   - id: T-157
     kind: lower-bound
     registered: '2026-10-12'
+    landed: '2026-10-14'
     headline: "`s(40) > 3359/500 = 6.718`, by T-145's continuous-pose kernel on a density with 163 new supports"
     claim: >-
       s(40) > 3359/500 = 6.718, by Guzhou0806, published on 11 October 2026 as release
@@ -19435,6 +19592,7 @@ results:
   - id: T-158
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-14'
     headline: New packings of 175, 232 and 264 squares built on a new 38-square rectangle, each certified exactly
     claim: >-
       Three complete rational source certificates by Daniil Ostashev, reported on
@@ -19615,6 +19773,7 @@ results:
   - id: T-159
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-14'
     headline: Another arrangement of Ryan Xu's design for 102 squares, certified exactly from its decimal layout
     claim: >-
       An exact rational certificate derived here from Rio Calle's decimal layout of 102 unit
@@ -19763,6 +19922,7 @@ results:
   - id: T-160
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-14'
     headline: A smaller packing of 154 squares from Evan Daniel's size-chaining explorer, certified exactly
     claim: >-
       One complete rational source certificate by Evan Daniel, reported on
