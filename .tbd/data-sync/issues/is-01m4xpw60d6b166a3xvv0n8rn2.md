@@ -5,7 +5,7 @@ title: "Validate: wand125 closed form, calibration replay of the two smallest re
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: serene-hopper-vcheap
 labels:
   - validation
@@ -17,7 +17,7 @@ parent_id: is-01m4wv28mebp8r7ss9p8r6dgxy
 hold: null
 hold_until: null
 created_at: 2026-10-14T17:20:33.292Z
-updated_at: 2026-10-14T17:32:14.103Z
+updated_at: 2026-10-14T18:31:18.631Z
 started_at: 2026-10-14T17:32:14.102Z
 ---
 Validation part of think-tsox (wand125's closed form, T-180 in the 14 October records PR #602). The first step of any replay4d replay: it builds the checker and prices the 4,294 CPU-h full replay on this host. Not record-changing by itself.
@@ -31,3 +31,23 @@ Validation part of think-tsox (wand125's closed form, T-180 in the 14 October re
 - Depends on: network access to crates.io and the Rust toolchain host from the session (environment). No owner decision. Optionally after the 1c661b7 check (think-4wgw), so that the build can also be compared with replay4d 0.1.1.
 - Done when: both records end `REPLAY OK` with the receipt's root and leaf counts, a receipt with CPU s, wall s, binary digest and source hash is kept in the packet, and the ratio to the source is written into think-wu73's Cost line.
 - Machine note: 4 CPUs shared with gates; a run > 2 wall-h should be scheduled outside a validation gate. Under an hour of wall including the build.
+
+## Notes
+
+2026-10-14 validation lane vcheap (serene-hopper-vcheap), branch lane/validation-cheap, commit 598c8ab7c (with 99d1864dc for the gate; not pushed).
+
+Build: rustup toolchain 1.86.0 (rustc 1.86.0 05f9846f8, minimal; rustup also self-updated). Checker trees restored in scratch from the 9a28a84 packet (0.1.0) and the 1c661b7 packet (0.1.1), each matched to its manifest by sha256sum -c (14 files). cargo +1.86.0 fetch/test/build --locked, -j 2, shared target: 28 tests pass on each (4 + 23 + 1); test 0.1.0 229.2 CPU-s incl. GMP/MPFR from source; builds 12.6 and 13.3 CPU-s; binaries d52b8d88... (0.1.0), fb84677b... (0.1.1). Build total 269 CPU-s.
+
+Custody: interval_0.495_0.5.tar.gz 93406cf4...51f7, interval_0.435_0.44.tar.gz a0e14933...f456, SHA256SUMS 2e31850c... downloaded 17:33:34Z by release URL (gh API not enabled for that repo); equal ASSET.json; members pass their SHA256SUMS; plain files.
+
+Replays, replay4d 0.1.0, --threads 1, B3_PLAIN_RF unset, two at once at nice 10 (load avg 12-16, ~42% of a core each):
+- interval 26 [0.495, 0.5] top: REPLAY OK, 4,158 roots, 32,828 leaves; 1,178.9 CPU-s = 0.3275 h vs source 0.27 -> 1.213; wall 2,171.8 s.
+- interval 14 [0.435, 0.44] top: REPLAY OK, 3,861 roots, 91,343 leaves; 1,241.7 CPU-s = 0.3449 h vs source 0.28 -> 1.232; wall 2,241.0 s.
+Family digest, record digest, roots and leaves per kind equal intervals.json; printed source hash 92002e0e....
+MEASURED RATE: 1.223 x the source's CPU (0.6724 / 0.55; 1.20 to 1.25 at the source's two decimals; measured under load). Complete replay: 4,294 x 1.223 = about 5,250 CPU-h here; interval 24 subset 18.32 -> about 22.4 CPU-h.
+
+Controls on interval 26 top: first two roots alone REPLAY BAD (2) on 0.1.0 and 0.1.1 (u-range does not cover 90 degrees; root intervals not partitions); 20 leaves --leaves REPLAY OK on both; leaf 0 relabelled CORE1:Tx -> CORE REPLAY BAD (1) on 0.1.0. 0.1.1 printed f8cafeab... and env.B3_PLAIN_RF unset. Controls 6.9 CPU-s.
+
+Total 0.75 CPU-h (build 269 s + replays 2,421 s + controls 7 s). Receipts: packing/resources/web/wand125-closed-form-2026-10-14/receipts/calibration/ (runs.json, logs, replay4d summaries, controls.json, calibration.json by devtools.audit_wand125_closed_form calibrate; 120 KB); archives and records stay in scratch. Packet README section "The Calibration Replay"; calibration-plan.md for the records lane (T-180 basis, V-wand125-replay4d note, optional sample entry).
+
+Remaining: the ratio written into think-wu73's Cost line (proposed text in calibration-plan.md, "think-wu73"). Not done here because editing think-wu73 needs a claim, which would mark a held bead in progress; left to the coordinator. Bead left open for that step.
