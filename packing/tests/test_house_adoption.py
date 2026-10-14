@@ -350,8 +350,18 @@ VERIFIER_TABLE = re.compile(
 HAND_MARKED = frozenset({155, 258, 263, 302, 308})
 #: Record-wide edits made after a pass, which its replay cannot know: on 13 October 2026
 #: every credit to wand125 became Hosono, Hiroaki Hosono at a record's first mention
-#: (`attribution.md`, Hiroaki Hosono / wand125). Both sides are read in the compact credit.
-LATER_RENAMES = (("wand125’s", "Hosono’s"), ("Hiroaki Hosono", "Hosono"))
+#: (`attribution.md`, Hiroaki Hosono / wand125), and on 14 October every credit to ry-xu
+#: became Xu, Ryan Xu in finder lists and at first mention (Ryan Xu / ry-xu). Both sides
+#: are read in the compact credit.
+LATER_RENAMES = (
+    ("wand125’s", "Hosono’s"),
+    ("Hiroaki Hosono", "Hosono"),
+    ("ry-xu reports", "Xu reports"),
+    ("Ryan Xu reports", "Xu reports"),
+    ("The ry-xu construction", "The Xu construction"),
+)
+#: The finder lists those renames changed, which the writer carries from the prior state.
+LATER_FINDERS = (("\n    - ry-xu\n", "\n    - Ryan Xu\n"),)
 
 
 def _body(text: str) -> str:
@@ -379,6 +389,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         assert move.house.result == houses.ADOPTED[move.n]
         committed = select.case_path(move.n).read_text(encoding="utf-8")
         written = adopt.rewrite(move)
+        for old, new in LATER_FINDERS:
+            written = written.replace(old, new)
         held, wrote = _front(committed), _front(written)
         for key in OWNED:
             assert held.get(key) == wrote.get(key), f"n={move.n}: packing.{key}"

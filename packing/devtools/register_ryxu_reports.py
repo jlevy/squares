@@ -28,6 +28,11 @@ RADICAL_EXACT = "E-ryxu-432-radical-n51-feasibility"
 RATIONAL_EXACT = "E-ryxu-432-rational-feasibility"
 HISTORY = houses.reports.PACKET / "acquisition/frontier-prior-state.json.xz"
 SECTION = "## The Xu construction"
+#: The heading before 14 October 2026, when every credit to ry-xu became Xu
+#: (`attribution.md`, Ryan Xu / ry-xu). Records read from history still carry it.
+EARLIER_SECTION = "## The ry-xu construction"
+#: Either heading, so a record of any date is read alike.
+SECTION_PATTERN = f"(?:{re.escape(SECTION)}|{re.escape(EARLIER_SECTION)})"
 
 
 def reported_bound(n: int) -> dict[str, Any]:
@@ -40,7 +45,7 @@ def reported_bound(n: int) -> dict[str, Any]:
         "catalogue_rigid": "not-stated",
         "construction_method": "unknown",
         "tilt_angles_deg": None,
-        "found_by": ["ry-xu"],
+        "found_by": ["Ryan Xu"],
         "found_year": 2026,
         "improved_by": [],
         "catalogue_pictured": False,
@@ -110,7 +115,12 @@ def _historical_prose(body: str) -> str:
 
 def historical_upper_prose(n: int, body: str) -> str:
     """Retain older source numbers with explicit past-tense upper-bound attribution."""
-    historical, separator, construction = body.partition("\n" + SECTION + "\n")
+    heading = re.search(rf"\n{SECTION_PATTERN}\n", body)
+    historical, separator, construction = (
+        (body[: heading.start()], heading.group(), body[heading.end() :])
+        if heading
+        else (body, "", "")
+    )
     historical = historical.replace(
         "`verified_upper_bound` for this case is",
         "The verified ceiling at that intake was",
@@ -249,7 +259,7 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
         body = body.replace(marker, lower.group() + marker, 1)
     elif count != 1:
         raise ValueError("selected ry-xu case needs one generated lower-bound section")
-    pattern = rf"\n{SECTION}\n.*?(?=\n## |\n<!-- This document follows)"
+    pattern = rf"\n{SECTION_PATTERN}\n.*?(?=\n## |\n<!-- This document follows)"
     body, count = re.subn(
         pattern, lambda _match: section(n, confirmed=confirmed), body, flags=re.DOTALL
     )
@@ -594,8 +604,7 @@ def register() -> None:
             previous.update(
                 superseded_by=houses.RADICAL_SOURCE_ID if n == 51 else houses.SOURCE_ID,
                 reason=(
-                    "Historical source ceiling superseded by a smaller exact Xu "
-                    "construction."
+                    "Historical source ceiling superseded by a smaller exact Xu construction."
                 ),
             )
             start = text.index("beyond_horizon_claims:")
@@ -643,7 +652,7 @@ def register() -> None:
         [
             {
                 "key": houses.SOURCE_KEY,
-                "authors": ["ry-xu"],
+                "authors": ["Xu"],
                 "year": 2026,
                 "venue": "GitHub",
                 "dated": DAY,

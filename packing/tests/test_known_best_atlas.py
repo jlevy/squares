@@ -2024,7 +2024,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Rehwaldt",
         "Gupta",
         "Barnett",
-        "ry-xu",
+        "Xu",
         "Chang",
         "DeVincentis",
         "hmbelvedere",

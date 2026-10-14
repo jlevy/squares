@@ -476,11 +476,15 @@ def confirmation_frontier(
         # which gave most of these cases to later sources. The reported stage it confirms
         # is rebuilt from what the adoption retained: each moved case as it stood before
         # (`adopt_houses.read_history`), and its Xu selection, which the coverage
-        # register keeps among the superseded reports.
+        # register keeps among the superseded reports. The finder lists take the later
+        # rename of ry-xu to Ryan Xu (`attribution.md`, Ryan Xu / ry-xu), as the reported
+        # stage `register_ryxu_reports.reported_bound` writes does.
         moved = [n for n in houses.NUMBERS if n in adopted.ADOPTED]
         prior = adopt_houses.read_history()
         for n in moved:
-            (frontier / f"n-{n:03d}.md").write_text(prior[n])
+            (frontier / f"n-{n:03d}.md").write_text(
+                prior[n].replace("\n    - ry-xu\n", "\n    - Ryan Xu\n")
+            )
         restore_ryxu_selections(frontier / "source-coverage.yaml", moved)
         for name, field, identifiers in (
             ("results.yaml", "results", {"T-125", "T-126"}),

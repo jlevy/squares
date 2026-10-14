@@ -124,10 +124,12 @@ def test_reconcile_replaces_stale_spans_and_joins_only_reviewed_labels(
     )
     stale.update(expected_text="Somebody Else", label="Somebody Else", start=0, end=13)
     levy = next(row for row in rows if row["label"] == "Levy")["origin"]
-    xu = next(
-        row for row in rows if row["label"] == "Xu" and row["disposition"] == "unresolved"
+    open_label = next(
+        row
+        for row in rows
+        if row["label"] == "Chaoweeraprasit" and row["disposition"] == "unresolved"
     )
-    removed = (levy, xu["origin"])
+    removed = (levy, open_label["origin"])
     document["occurrences"] = [row for row in rows if row["origin"] not in removed]
     path.write_text(yaml.safe_dump(document, sort_keys=False, allow_unicode=True))
 
@@ -150,9 +152,11 @@ def test_reconcile_replaces_stale_spans_and_joins_only_reviewed_labels(
     joined = next(item for item in levy_items if item.label == "Levy")
     assert (joined.disposition, joined.contributor_id) == ("resolved", "joshua-levy")
     assert joined.note.startswith("Joined by the reviewed identity")
-    xu_origin = xu["origin"]
-    reopened = by_origin[(xu_origin["path"], xu_origin["record_key"], xu_origin["field"])]
-    assert [item.disposition for item in reopened if item.label == "Xu"] == ["unresolved"]
+    origin = open_label["origin"]
+    reopened = by_origin[(origin["path"], origin["record_key"], origin["field"])]
+    assert [item.disposition for item in reopened if item.label == "Chaoweeraprasit"] == [
+        "unresolved"
+    ]
 
 
 def test_a_renamed_credit_joins_by_the_spelling_its_record_sources() -> None:

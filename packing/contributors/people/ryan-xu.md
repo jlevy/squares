@@ -29,19 +29,16 @@ contributor:
       archive_path: packing/resources/web/ry-xu-new-packings-2026-10-08/README.md
       url: https://github.com/ry-xu/square_packing/tree/8dc415296f697f5140caea27c7a0193d52deb4e6
       locator: 'Opening paragraphs: the 25 packings of issue #432 from ry-xu/square_packing at 8dc4152; “Credit for the reported constructions belongs to ry-xu. The source describes an LLM-assisted search and certificate workflow.”'
-    - id: identity-review
-      archive_path: docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md
-      locator: 'The identity table and RK-7 name the T-125 packings Ryan Xu’s.'
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
-      locator: 'Source authors and credits print Xu; the [ry-xu square packing 2026] key keeps the handle, and the later credits that build on his issue #432 packings name Xu.'
+      locator: 'Source authors and credits print Xu; the [ry-xu square packing 2026] key keeps the handle. The later credits that build on his issue #432 packings name Xu, and their notes call those packings Ryan Xu’s ([Deleeuw n70 refinement 2026-10-10], [SQUISH third request 2026-10-09], [Ostashev records 2026-10-11]).'
   provenance:
     - field: /display_name
       sources: [github-profile, owner-confirmation]
     - field: /real_name
       sources: [github-profile, owner-confirmation]
     - field: /aliases/0
-      sources: [bibliography, identity-review]
+      sources: [bibliography, owner-confirmation]
     - field: /aliases/1
       sources: [packet, github-profile]
     - field: /aliases/2

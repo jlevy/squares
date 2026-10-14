@@ -192,7 +192,7 @@ def case_plan() -> list[tuple[Path, str]]:
                 reported in block["evidence"] and "Issue432 remains V0/C0" in block["detail"]
             )
         ]
-        pattern = rf"\n{register.SECTION}\n.*?(?=\n## |\n<!-- This document follows)"
+        pattern = rf"\n{register.SECTION_PATTERN}\n.*?(?=\n## |\n<!-- This document follows)"
         body, count = re.subn(
             pattern,
             lambda _match, n=n: register.section(n, confirmed=True),

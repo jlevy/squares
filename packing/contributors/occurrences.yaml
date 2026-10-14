@@ -5204,7 +5204,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
   note: Joined by the reviewed identity of 13 spans so labelled.
 - origin:
@@ -5463,7 +5463,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -5751,7 +5751,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6174,7 +6174,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6363,7 +6363,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6469,7 +6469,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6594,7 +6594,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6648,7 +6648,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -6724,7 +6724,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -7270,7 +7270,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -7345,7 +7345,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -7409,7 +7409,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -7498,7 +7498,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
@@ -7536,7 +7536,7 @@ occurrences:
   disposition: resolved
   evidence:
   - bibliography
-  - identity-review
+  - owner-confirmation
   contributor_id: ryan-xu
 - origin:
     path: packing/resources/bibliography.yaml
