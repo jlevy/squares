@@ -3,9 +3,9 @@ type: is
 id: is-01m4wcjctchxg9qv8jp0za5g13
 title: Repair regularization pre-push coverage, fixture isolation and browser regressions
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 11
+version: 12
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -23,7 +23,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:12.395Z
-updated_at: 2026-10-14T06:55:42.621Z
+updated_at: 2026-10-14T09:02:44.029Z
 started_at: 2026-10-14T05:02:45.055Z
+closed_at: 2026-10-14T09:02:44.029Z
+close_reason: Regularization stack585/587/591 merged9f48; PR592 mergedf73. Main pushPacking38536230813 passes all10deep workers+aggregate including corrected slow floor; Pages38536230832 published/deployed and liveverified exactf73. All review findings fixed or explicitly deferred with owning beads. N17 remainsV0/C1 with full proofs separately tracked; changelog continues underjpto.
+resolution: null
+duplicate_of: null
 ---
 At 80880db57 pre-push records/edit checks passed but 310-file behavioral selection produced13 failures and31 browser setup errors. Resolve new default-drawings Pages trigger coverage; fix tests leaking deterministic sibling directories and memoized synthetic paths under mandated failed-only pytest retention; diagnose and fix browser default-image/layout contracts without weakening checks. Preserve certificate behavior and rerun all affected groups.
