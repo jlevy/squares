@@ -709,6 +709,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/overview_sections.py",
             "packing/devtools/render_overview.py",
+            "packing/devtools/site_urls.py",
+            "packing/frontier/results.yaml",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
@@ -722,10 +724,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "The results page's overview and its Added filter (#514) change only the "
-            "results page and the results table's rows and bar. Rendered with main's two "
+            "results page, the results table's rows and bar, the results page's byte "
+            "ceiling and each register entry's new `landed` day. Rendered with main's four "
             "files and with this branch's, the four papers' HTML and Markdown are "
             "byte-identical, except that the explainer's empty style attribute moves on "
-            "one math span, an order that varies between any two renders of the same "
+            "two math spans, an order that varies between any two renders of the same "
             "code. Each PDF prints from that HTML, so every paper keeps its edition."
         ),
     ),
