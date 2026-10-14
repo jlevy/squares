@@ -5,7 +5,7 @@ title: "Import dostashev: s(176) <= 13.795872318437, s(211) <= 14.993694186584, 
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T06:57:36.461Z
-updated_at: 2026-10-14T14:50:28.957Z
+updated_at: 2026-10-14T17:59:54.554Z
 started_at: 2026-10-14T06:57:49.305Z
 ---
 https://github.com/jlevy/squares/issues/575 (2026-10-13T00:42:43Z; body edited 2026-10-13T04:13:29Z to add 304, comment of 04:13:31Z). dostashev/square-packing at b909e1b74cda50906e12b4373e010ddee39e47e4, records/n0176, n0211, n0241, n0304 (.sqcert, .sqpk). Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports, intake lane ostashev of 2026-10-14.
@@ -62,3 +62,5 @@ Register plan: scratchpad register-plan-dostashev-merged-bands-2026-10-13.yaml (
 https://github.com/jlevy/squares/issues/575#issuecomment-6165052668 (states the pin, the retained and replayed certificates with controls refused, and the comparison at each count; the earlier draft above was not posted as written).
 
 Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-174 at 211, 241 and 304, V0/C0, S3; 176 not recorded (PR 574 states the packing first).
+
+Renumbered on 14 October at review A3 of #602 (records PR, branch claude/wizardly-meitner-wqn4x3-records-1014): Kevin Fang's theorem, T-178 above, is now T-163, at Theorem 1's first commit (6028f31, 12 October); T-163 to T-177 above are now T-164 to T-178. T-179 to T-184 keep their ids.

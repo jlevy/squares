@@ -5,7 +5,7 @@ title: "Import BuddenPing: s(105) <= 10.7893037837481588309268366600396176597363
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:54.028Z
-updated_at: 2026-10-14T14:50:23.543Z
+updated_at: 2026-10-14T17:59:49.862Z
 started_at: 2026-10-14T04:49:01.089Z
 ---
 https://github.com/jlevy/squares/issues/568 (BuddenPing, 2026-10-12T22:57Z). BuddenPing/square-packing-certificates 260aaf50230483654802790589c2dfce73237604, n105.cert.json and pingyou-n105-rational.yaml; an exact contact refinement of Francisco Couzo's n105 (T-130, the case); credit PingYou Ltd. Intake lane pingyou of 2026-10-14.
@@ -50,3 +50,5 @@ Branch `claude/wizardly-meitner-wqn4x3-intake-1014-pingyou`, commit `680123806` 
 Posted (stage 1 acknowledgement, 2026-10-14): https://github.com/jlevy/squares/issues/568#issuecomment-6162868542
 
 Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-169 at 105, V0/C0, regularizing T-130.
+
+Renumbered on 14 October at review A3 of #602 (records PR, branch claude/wizardly-meitner-wqn4x3-records-1014): Kevin Fang's theorem, T-178 above, is now T-163, at Theorem 1's first commit (6028f31, 12 October); T-163 to T-177 above are now T-164 to T-178. T-179 to T-184 keep their ids.

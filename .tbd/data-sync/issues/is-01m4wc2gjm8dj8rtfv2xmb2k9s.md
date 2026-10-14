@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 154, 156, 176, 211, 237, 241, 271, 302 and beyon
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:52:31.956Z
-updated_at: 2026-10-14T14:50:12.903Z
+updated_at: 2026-10-14T17:59:39.952Z
 started_at: 2026-10-14T04:52:38.993Z
 ---
 Francisco Couzo (franciscouzo/square-packing) reports exact rational upper-bound certificates in four issues filed 12-13 October 2026: #561 at 0fa0e0de (156, 176, 237, 271; beyond the corpus 338, 344, 375, 376, 378), #570 at 1b31bc90 (154, 379; superseded by #583 and #586), #583 at 45966700 (154, 211, 241, 302; 339, 379, 380, 381, 382) and #586 at b85dee2b (updates #583: 154, 339, 379, 380, 382 and precision refinements at 211 and 241). Stages 1, 2 and the stage 4 replay of the 2026-10-14 intake lane couzo (think-mq0k), on branch claude/wizardly-meitner-wqn4x3-intake-1014-couzo.
@@ -107,3 +107,5 @@ The draft above was rewritten before posting to state only what was measured: th
 - Pointer, #583: https://github.com/jlevy/squares/issues/583#issuecomment-6163324490
 
 Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-161 (#561 at 156, 176, 237, 271), T-164 (b85dee2's 176), T-171 (#570's 154), T-181 (#583 at 211, 241, 302) and T-182 (#586 at 154, 211, 241, regularizing T-181's at 211 and 241), all V0/C0, with beyond-horizon rows in report order.
+
+Renumbered on 14 October at review A3 of #602 (records PR, branch claude/wizardly-meitner-wqn4x3-records-1014): Kevin Fang's theorem, T-178 above, is now T-163, at Theorem 1's first commit (6028f31, 12 October); T-163 to T-177 above are now T-164 to T-178. T-179 to T-184 keep their ids.

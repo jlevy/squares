@@ -5,7 +5,7 @@ title: "Import BuddenPing: s(207) <= 14.880960371559, refining T-147 (#503 comme
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:55.899Z
-updated_at: 2026-10-14T14:50:18.253Z
+updated_at: 2026-10-14T17:59:44.662Z
 started_at: 2026-10-14T04:49:01.109Z
 ---
 https://github.com/jlevy/squares/issues/503#issuecomment-6133755143 (BuddenPing, 2026-10-12T22:25Z) and the issue body's dated update. BuddenPing/square-packing-certificates 10418630bfb00853a539ad7ad9908b2d746147c0, n207.cert.json and pingyou-n207-rational.yaml; a coordinate refinement of T-147; credit PingYou Ltd. Intake lane pingyou of 2026-10-14.
@@ -50,3 +50,5 @@ Branch `claude/wizardly-meitner-wqn4x3-intake-1014-pingyou`, commit `680123806` 
 Posted (stage 1 acknowledgement, 2026-10-14): https://github.com/jlevy/squares/issues/503#issuecomment-6162867217
 
 Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-166 at 207, V0/C0, regularizing T-147.
+
+Renumbered on 14 October at review A3 of #602 (records PR, branch claude/wizardly-meitner-wqn4x3-records-1014): Kevin Fang's theorem, T-178 above, is now T-163, at Theorem 1's first commit (6028f31, 12 October); T-163 to T-177 above are now T-164 to T-178. T-179 to T-184 keep their ids.
