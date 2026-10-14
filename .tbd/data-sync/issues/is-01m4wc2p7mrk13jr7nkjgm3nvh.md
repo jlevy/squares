@@ -5,16 +5,16 @@ title: "Import mstrmg (Miles Gray): s(381) <= 19.985624661051481, beyond the cas
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-10-14T04:52:37.747Z
-updated_at: 2026-10-14T05:04:37.141Z
+updated_at: 2026-10-14T06:41:10.016Z
 started_at: 2026-10-14T04:52:50.738Z
 ---
 Miles Gray (GitHub mstrmg) reports s(381) <= 19985624661051481/10^15 in an exact rational certificate attached to issue #582 (n381-19.985624661051.cert.txt, SHA-256 03650573fc283abe721947d0170d833b3725a6550d4e8a9283c41f10c4a371f4); #589 is the same request, closed as its duplicate. Stages 1, 2 and the stage 4 replay of the 2026-10-14 intake lane couzo (think-mq0k), on branch claude/wizardly-meitner-wqn4x3-intake-1014-couzo.
@@ -40,3 +40,7 @@ GitHub issue: https://github.com/jlevy/squares/issues/582 (Miles Gray, GitHub ms
 ## Draft acknowledgement (not posted)
 
 Thank you, Miles. We have received #582 (and closed #589 as its duplicate) and downloaded the attached certificate; its SHA-256 is the 03650573... you state, and it reads as 381 unit squares in a square of side 19985624661051481/10^15. That side is below the row the register tracks at 381 (Francisco Couzo's #506 certificate, 19.992663288464). Two smaller certificates were published at 381 before or shortly after your report: Kevin Fang's 19.976969740406 in TheSnakeFang/squarepack-certs (12 October) and Francisco Couzo's 19.974977397657 (#583, 13 October). We will record your certificate with its credit to Evan Daniel's and Kevin Fang's 343 packings, replay it on this repository's two exact routes once our importer can retain an issue attachment, and reply with the result.
+
+## Lane couzo, resumed after the container restart (2026-10-14T06:45Z)
+
+Not imported here. The custody and beyond-horizon-only tooling priced above (an attachment source in acquire_source and a beyond-horizon-only declaration in upper_bound_reports, about 2 to 3 hours with tests, W7) was not built, and the certificate was not replayed: #582 is not the smallest known at 381, so it is not one of the quick new-best results this pass lands first. Its comparison is frozen in packing/resources/web/couzo-certificates-2026-10-13/acquisition/claims.json (branch claude/wizardly-meitner-wqn4x3-intake-1014-couzo): Couzo's #583 certificate, exact side 19974977397656713743580918961689/10^30 (19.974977397657 rounded up), is below #582's 19.985624661051481 by 1.06e-2, and Kevin Fang's 078789a print 19.976969740406 is below it by 8.65e-3; Couzo's #506 row (19.992663288464) and the grid are above it. On import its beyond-horizon row would be tracked and superseded on arrival. Hold: blocked on the W7 slice.
