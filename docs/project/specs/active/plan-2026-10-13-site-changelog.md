@@ -553,6 +553,44 @@ explicitly, and makes no passing-test claim.
 This will help diagnose the unresolved intermittent 900-second deadline; instrumentation
 itself is not a fix for that cause.
 
+### Current complete-cohort assignment correction
+
+Required-browser run
+[38594336170](https://github.com/jlevy/squares/actions/runs/38594336170) at
+`58b6a8688d87661a7ebeac6ef3e5c944f09efd01` completed all four pytest processes with exit
+status zero. The enclosing checkpoint remains failed: A exceeded the pool-worker CALL
+limit at 14.45 seconds and its whole-wall limit at 339.70 seconds; B passed every
+functional assertion and CALL guard but exceeded its 360-second wall limit at 384.18
+seconds. C and D passed at 289.65 and 231.76 seconds.
+The exact ten affected schema mutations and current ordinary Packing/Pages checks
+passed.
+No 900-second deadline occurred; this does not explain or prove fixed the earlier
+intermittent deadline.
+
+The retained four complete reports under
+`.codex/regularization-closeout-evidence-2026-10-13/suite-cost-cohort-38594336170/`
+measure the current 33-path workload after the coverage, AST-walk and collection
+optimizations. Their combined per-file phase sums were 1239.379/1325.159/989.187/834.394
+seconds under the preceding assignment.
+These are sums of setup/call/teardown time across workers, not whole-wall observations.
+The canonical `suite_files.record` reconstruction now balances those 765 measured files
+at 1008.498/1185.562/1185.562/1008.497 summed seconds, preserving the original
+131/154/154/131 planning capacities.
+There are still 23 unpriced files among 788, with no shard exceeding 4.9% unpriced.
+No hand-edited cost, enforcement ceiling, ratio, marker, source observation or
+historical budget point changes.
+
+Fresh enforcement of all four shards remains required because assignment changed.
+Previous raw cohorts and failed gate verdicts remain retained.
+The journal is diagnostic and the pending deadline follow-up remains `think-ma3y`. The
+real multiprocessing atlas comparison now uses n=4, 11 and 51 and explicitly guards its
+current exact-grid, decimal Kingbird and algebraic packet source/scalar kinds.
+It retains serial-versus-two-worker production calls and all four original comparisons.
+The historical n=68 UnitSquare representative now incurs a full exact refinement replay;
+that replay and byte comparison remain in the unchanged complete atlas/composite checks,
+with its quick custody and metadata refusals retained.
+Source review and actual hosted pool CALL timing remain required under `think-jxo0`.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
