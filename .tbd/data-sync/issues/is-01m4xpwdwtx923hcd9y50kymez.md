@@ -3,16 +3,20 @@ type: is
 id: is-01m4xpwdwtx923hcd9y50kymez
 title: "Validate: decide the ledger's 21 undecided PR #574 comparisons exactly (17 computable, 4 lack an exact side; <0.1 CPU-h)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: serene-hopper-vcheap
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m4wsqt2sjrksybyz375sarb3
+hold: null
+hold_until: null
 created_at: 2026-10-14T17:20:41.370Z
-updated_at: 2026-10-14T17:20:41.370Z
+updated_at: 2026-10-14T17:41:54.453Z
+started_at: 2026-10-14T17:41:54.453Z
 ---
 Exact comparisons left undecided by the 2026-10-14 ledger (packing/campaign/issue-intake/upper-bounds-20261014/README.md, Undecided Comparisons): 21 rows, all PR #574 (PingYou Ltd) against the reported lane or a pending register entry. Cheap exact checks; each could change a verdict from undecided to recorded or not recorded.
 
