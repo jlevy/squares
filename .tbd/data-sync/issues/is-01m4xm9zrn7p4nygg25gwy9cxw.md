@@ -5,7 +5,7 @@ title: Publish individual tagged News articles and newest three S5 homepage high
 kind: feature
 status: in_progress
 priority: 1
-version: 17
+version: 19
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10
 labels: []
@@ -23,10 +23,12 @@ child_order_hints:
   - is-01m4xwgh6kp2t9j9sy8t5sfztn
   - is-01m4xwghprsgr138h0akwfrdyh
   - is-01m4xz69dnv72vzagtwf8emtaq
+  - is-01m4y09z9p7we8zr1ncvk7ycf8
+  - is-01m4y09zpndtpme3qk80fdmskt
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:35:39.924Z
-updated_at: 2026-10-14T19:45:53.064Z
+updated_at: 2026-10-14T20:05:22.772Z
 started_at: 2026-10-14T16:36:49.748Z
 ---
 Publish the project history on News, the second navigation item, with 25 individual articles and six subject topics. Each card uses the same component on News and the homepage: paper-style date, ordinary H3 in the theme foreground, smaller Results-style topic chips, and the article. Show about ten lines with a fade and a footer chevron. Click, tap or the keyboard expands and contracts; hover only adds a light green indication. Preserve mathematical markup, ordinary links, keyboard and touch access, reduced motion, no-script reading, and old About bookmarks. Rewrite the retained articles as news while preserving historical identities and publication evidence. The homepage highlights the three newest S5 results with credit and explicit verification limits. Explanations replaces Papers and Visualize in the main navigation, with shared Papers, Film and Workbench section tabs at their existing URLs. The homepage browser and sharing title is The Squares Project. Document these roles in the existing design system and feature plan. Current pushed head is d08551e0 on PR604; local checks and reviews are recorded, and current-head hosted CI and deployment remain open.
