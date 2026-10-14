@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594)"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:01.303Z
-updated_at: 2026-10-14T05:50:31.684Z
+updated_at: 2026-10-14T06:21:48.280Z
 started_at: 2026-10-14T05:01:05.888Z
 ---
 Stage 1 triage of jlevy/squares#594 (bengreff, Benjamin Greff, opened 2026-10-14T02:06:46Z, labelled intake, no comments when read at 04:44Z): "Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)". "External certificate" is wand125's title template of #279/#280: the author's own certificate in his own repository, not a citation of another's published result.
@@ -76,7 +76,7 @@ Enters V0/C0 as reported. V3/C3 needs the replay evidence entry (zmx2 + zm_mixed
 
 ## Packet
 
-Finished per stage 2: README, Original Gzip and Compressed Files tables, bibliography key [bengreff s76 certificate 2026-10-14] (Greff after Daniel, wand125; lineage independent, as the source states it) with credited name Benjamin Greff, resources README rows, receipts. Commit and push on claude/wizardly-meitner-wqn4x3-review-594 (SHA in the next note). Not edited: results.yaml, evidence, coverage, result-requests.yaml, SYNOPSIS.md, case records. No person record in atlas/known-best/credit-attributions.json: the owner sets those.
+Finished per stage 2: README, Original Gzip and Compressed Files tables, bibliography key [bengreff s76 certificate 2026-10-14] (Greff after Daniel, wand125; lineage independent, as the source states it) with credited name Benjamin Greff, resources README rows, receipts. Committed as e25e1c1b6e0bf1aa11b7dee97ea7847e6860f105 and pushed to claude/wizardly-meitner-wqn4x3-review-594 (no pull request opened). Not edited: results.yaml, evidence, coverage, result-requests.yaml, SYNOPSIS.md, case records. No person record in atlas/known-best/credit-attributions.json: the owner sets those.
 
 ## Draft acknowledgement (not posted; stage 1, no T-NNN, no rung)
 
@@ -85,3 +85,7 @@ Thank you for the report, and for publishing the cover with the run records of b
 In triage we ran your certificate with Evan Daniel's checkers, built from the copies this repository already holds at the digests your verify.sh pins. zmx2 cert --d4 leaves the same 18 boxes in the same four roots, with every root's census equal to records/zmx2/zmx2_v5.log, and zm_mixed.py with your flags certifies all 64 sub-roots, with records equal to yours apart from the input path and the CPU time. The total, the D4 invariance and the tiling check exactly, the corners are wand125's s(59) cover as you say, and the Lean data matches the cover file. Two mutated covers are refused by zmx2, and zm_mixed.py pose finds a pose in each where the capture is below one.
 
 Next, the result is registered as reported, and a separate review of the mathematics, including the composite of the two checkers, decides how it stands. When the full zm_mixed.py pass is published, please post its commit here: we will retain it as a new revision. One small question: the cover carries sixteen segments of mass 1/(4·10⁸) on the container's walls. They change no zmx2 decision (we checked), so they look like LP residue; were they intended?
+
+## Validation of the commit
+
+packing-validate --push: all 16 edit checks passed (basedpyright and the browser floor included); its reachable-tests phase selected the whole suite and was stopped at the 25-minute limit under a load average near 20, unfinished, no failure reported. The tests reachable from the change then passed directly: 640 passed in 348 s (test_bound_citations, test_acquire_source, test_acquire_original_gzip, test_retained_data, test_retained_json, test_retained_json_layout, test_results_register, test_state_ai_assistance, test_check_archive_annotations, test_certificate_citations, test_evand_mixed_covers, test_intake_sweep, test_check_requests). acquire_source --check: PACKET_MATCHES_ITS_CONTRACT. The lefthook pre-commit hook did not run in this worktree (lefthook not on PATH); packing/resources/README.md was formatted with the pinned flowmark-rs 0.4.0 before the commit, and packet READMEs are excluded from flowmark.
