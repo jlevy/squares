@@ -20125,6 +20125,7 @@ results:
   - id: T-161
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: Exact rational certificates at 156, 176, 237 and 271 from Francisco Couzo
     claim: >-
       Four complete rational source certificates report finite upper-bound improvements at
@@ -20274,6 +20275,7 @@ results:
   - id: T-162
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       New packings of 129, 204 and 303 squares, a cut-out and two compositions, each
       certified exactly
@@ -20390,6 +20392,7 @@ results:
   - id: T-163
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       s(n² − n + 1) < n for every n ≥ 15, and n² − n + F(n) squares below side n, from Kevin
       Fang
@@ -20526,6 +20529,7 @@ results:
   - id: T-164
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       A packing of 302 squares from four boundary patches of Ryan Xu's packing of 70 and two
       upright banks
@@ -20612,6 +20616,7 @@ results:
   - id: T-165
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: A tighter certificate at 176 from Francisco Couzo, published with no issue
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -20693,6 +20698,7 @@ results:
   - id: T-166
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: A tighter rational realization of PingYou Ltd's packing of 153 squares
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -20783,6 +20789,7 @@ results:
   - id: T-167
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: A tighter rational realization of PingYou Ltd's packing of 207 squares
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -20872,6 +20879,7 @@ results:
   - id: T-168
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       A further exact refinement of Ryan Xu's packing of 146 squares, after Robert Barnett's
     claim: >-
@@ -20957,6 +20965,7 @@ results:
   - id: T-169
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       A further exact refinement of Ryan Xu's packing of 261 squares, after Robert Barnett's
     claim: >-
@@ -21044,6 +21053,7 @@ results:
   - id: T-170
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       An exact contact refinement of Ryan Xu's packing of 105 squares, after Francisco
       Couzo's
@@ -21131,6 +21141,7 @@ results:
   - id: T-171
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: An exact contact refinement of SQUISH's packing of 272 squares
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -21216,6 +21227,7 @@ results:
   - id: T-172
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       A packing of 154 squares from Francisco Couzo, continuing Evan Daniel's arrangement
     claim: >-
@@ -21297,6 +21309,7 @@ results:
   - id: T-173
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Mykhailo Polkovskyi's packings of 153 and 207 squares, each below the earlier
       refinements there
@@ -21396,6 +21409,7 @@ results:
   - id: T-174
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Tighter certificates at 68 counts from PingYou Ltd, of others' packings and its own
     claim: >-
@@ -22498,6 +22512,7 @@ results:
   - id: T-175
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       New packings of 211, 241 and 304 squares, two with merged tilted bands, each certified
       exactly
@@ -22622,6 +22637,7 @@ results:
   - id: T-176
     kind: lower-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Mixed rectangle-measure lower bound `s(39) ≥ 533/80` reported, on a 2,073-direction
       declared net
@@ -22760,6 +22776,7 @@ results:
   - id: T-177
     kind: lower-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Mixed rectangle-measure lower bound `s(44) ≥ 2799/400` reported, on a 2,073-direction
       declared net
@@ -22895,6 +22912,7 @@ results:
   - id: T-178
     kind: lower-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Mixed rectangle-measure lower bound `s(37) ≥ 2599/400` reported, on a 2,073-direction
       declared net
@@ -23029,6 +23047,7 @@ results:
   - id: T-179
     kind: lower-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: Linear-measure lower bound `s(n) ≥ 306/25 = 12.24` for `n = 145…149`, reported
     claim: >-
       A measure of points, segments and rectangles that wand125/square-packing published on
@@ -23164,6 +23183,7 @@ results:
   - id: T-180
     kind: lower-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: Closed-form lower bound `s(N) ≥ a(N)` for every non-square `N ≥ 49`, reported
     claim: >-
       For every non-square integer N >= 49, with k = floor(sqrt(N)), Hiroaki Hosono
@@ -23339,6 +23359,7 @@ results:
   - id: T-181
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: Exact rational certificates at 211, 241 and 302 from Francisco Couzo
     claim: >-
       Three complete rational source certificates report finite upper-bound improvements at
@@ -23486,6 +23507,7 @@ results:
   - id: T-182
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: Exact rational certificates at 154, 211 and 241 from Francisco Couzo
     claim: >-
       Three complete rational source certificates report finite upper-bound improvements at
@@ -23643,6 +23665,7 @@ results:
   - id: T-183
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Mykhailo Polkovskyi's certificate for 237 squares, the smallest known side there
     claim: >-
@@ -23741,6 +23764,7 @@ results:
   - id: T-184
     kind: optimality
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: '`s(76) = 9`, by a mixed cover of points and grid-line segments, reported'
     claim: >-
       Benjamin Greff reports s(76) = 9: the lower half by a mixed cover, the upper half by
