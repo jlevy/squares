@@ -184,18 +184,30 @@ def test_each_ostashev_side_is_its_labelled_optimum_dilated_by_its_labelled_delt
     assert deltas[OSTASHEV_575, 304] == Fraction(1, 10**59)
 
 
-def test_the_562_sides_are_the_smallest_and_its_unrequested_176_is_superseded() -> None:
+def test_the_562_sides_are_below_593_and_its_unrequested_176_is_superseded() -> None:
+    """Read at their exact sides, PR 574's refinements are smaller by about 1e-19 at all
+    three counts, and #593's are larger (review A1 of #602)."""
     rows = _rows(OSTASHEV_562)
     assert [n for n, row in rows.items() if row["requested"]] == [129, 204, 303]
     for n in (129, 204, 303):
-        assert (rows[n]["smallest"], rows[n]["case"]["relation"]) == (reports.THIS, "below")
-        assert _others(rows[n]) == {"#593": "below"}
+        assert (rows[n]["smallest"], rows[n]["case"]["relation"]) == ("PR #574", "below")
+        assert _others(rows[n]) == {
+            "#593": "below",
+            "PR #574": "above",
+            **({"#573": "below"} if n == 303 else {}),
+        }
     assert [rows[n]["case"]["result"] for n in (129, 204, 303)] == ["T-146", "T-101", "T-146"]
     # The README's 176 is compared and not replayed: the author's own #575 and Couzo's
     # #561, which started from it, are both smaller.
     assert not rows[176]["replayed"]
     assert rows[176]["case"]["relation"] == "below"
-    assert _others(rows[176]) == {"#561": "above", "#575": "above", "#593": "above"}
+    assert _others(rows[176]) == {
+        "#561": "above",
+        "#575": "above",
+        "#593": "above",
+        "PR #574": "above",
+        "#586": "above",
+    }
 
 
 def test_the_575_sides_are_below_each_case_and_above_couzos_continuations() -> None:
@@ -205,8 +217,14 @@ def test_the_575_sides_are_below_each_case_and_above_couzos_continuations() -> N
     assert rows[211]["case"]["result"] == "T-149"
     assert rows[211]["case"]["source_key"] == "[Ostashev records 2026-10-11]"
     for n in (211, 241):
-        assert _others(rows[n]) == {"#583": "above", "#586": "above", "#593": "above"}
-        assert rows[n]["undecided_among"] == ["#586", "#593"]
+        assert _others(rows[n]) == {
+            "#583": "above",
+            "#586": "above",
+            "#593": "above",
+            "PR #574": "below",
+        }
+        # Read exactly, #593's sides here are #586's (review A1 of #602).
+        assert rows[n]["tied"] == ["#586", "#593"]
     assert _others(rows[176])["#561"] == "below"
     assert _others(rows[176])["fe43a64 (#562, not requested)"] == "below"
 
@@ -230,8 +248,9 @@ def test_a_beyond_horizon_plan_registers_no_entry_and_one_row_a_count(
 
 def test_the_584_sides_are_smallest_at_364_and_375_and_couzos_586_at_339() -> None:
     rows = _rows(EVAND_584)
+    # At 339 issue 586's certificate is the source register's current row, read as that row.
     assert {n: row["smallest"] for n, row in rows.items()} == {
-        339: "#586",
+        339: "couzo-certificates-2026-10-13",
         364: reports.THIS,
         375: reports.THIS,
     }
@@ -239,7 +258,7 @@ def test_the_584_sides_are_smallest_at_364_and_375_and_couzos_586_at_339() -> No
     assert _others(rows[339]) == {
         "couzo-certificates-2026-10-11": "below",
         "#583": "below",
-        "#586": "above",
+        "couzo-certificates-2026-10-13": "above",
     }
     assert set(_others(rows[375]).values()) == {"below"}
     # A later import reads these sides exactly, by the packet's source key.

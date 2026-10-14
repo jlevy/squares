@@ -19,11 +19,11 @@
   "houses": [],
   "pending": [
     {"n": 339, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "18.929433883808", "rounding": "up"},
-    {"n": 339, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "printed": "18.927383638495", "rounding": "up"},
-    {"n": 339, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "printed": "18.925319360704", "rounding": "up"},
+    {"n": 339, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "reader": "[Couzo issue-583 certificates 2026-10-13]"},
+    {"n": 339, "report": "couzo-certificates-2026-10-13", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "18.925319360704", "rounding": "up"},
     {"n": 364, "report": "couzo-extended-range-reports-2026-10-08", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.597249391207239", "rounding": "unstated"},
     {"n": 375, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.906335145009", "rounding": "up"},
-    {"n": 375, "report": "#561", "url": "https://github.com/jlevy/squares/issues/561", "holders": "Francisco Couzo", "printed": "19.901618621328", "rounding": "up"},
+    {"n": 375, "report": "#561", "url": "https://github.com/jlevy/squares/issues/561", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-12]"},
     {"n": 375, "report": "franciscouzo 4596670 (no issue)", "url": "https://github.com/franciscouzo/square-packing/blob/45966700cf15d3f42e064fd6da51fcb9a5def2be/certificates/n375.cert", "holders": "Francisco Couzo", "printed": "19.893906534236", "rounding": "up"}
   ],
   "register": {

@@ -1,0 +1,59 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "buddenping-square-packing-certificates",
+  "source_url": "https://github.com/BuddenPing/square-packing-certificates",
+  "source_ref": "main",
+  "source_commit": "10418630bfb00853a539ad7ad9908b2d746147c0",
+  "retrieved_at_utc": "2026-10-14T04:47Z",
+  "git_scope": "Full clone of the sixteen-commit repository, head 318ab94 at retrieval, checked out at the pin the 12 October comment on issue #503 names. The scope is the eight paths the pinned commit changed: 01-squares-project.zip and the n207 certificate, witness, figure and drawing, which 0d8b9c1 and 9dc93b6 first published with the certificate T-147 registers, the new n207-SHA256SUMS, and README.md and SHA256SUMS. Every n207 file has the same blob at the head 318ab94. Under derived-only custody none is copied. No source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence file in the pinned tree, and GitHub detects none. The release READMEs say that upstream software and schema licences are retained beside the files they cover and that no new licence is asserted for third-party material; nothing grants one for the source's own files. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source asks that PingYou Ltd be credited with the n207 assembly and its refinement, Ryan Xu with the n70 construction its patches come from, and Evan Daniel with that construction's exact retention and exact checking tools.",
+  "claims": [
+    "The comment of 2026-10-12T22:25Z on issue #503, and the dated update at the top of its body, report a refined certificate of the same n207 construction, s(207) <= 3720240092889639048018577779/250000000000000000000000000 = 14.880960371558556192074311116, 1.4851194398617480221170501178639e-9 below the certificate T-147 registers: a new rational approximation to the inherited frame and the centre and container guard reduced from 10000000001/10000000000 to 5000000000001/5000000000000, with the whole-owner assembly retained. The author asks that T-147 be re-verified and updated.",
+    "The source reports that three exact checkers accept all 207 squares, 828 wall conditions and 21,321 pairs, that its package replays the recorded rational construction and owner lineage, and that this repository's sqpack exact_verify and check_rational_witness_independent at 074ac28 accept its native Witness/v2. These are author reports; no local or global optimality is claimed."
+  ],
+  "scope": [
+    "01-squares-project.zip",
+    "README.md",
+    "SHA256SUMS",
+    "n207-SHA256SUMS",
+    "n207-verified-comparison.pdf",
+    "n207.cert.json",
+    "n207.svg",
+    "pingyou-n207-rational.yaml"
+  ],
+  "pinned_only": [
+    {
+      "match": "n207.cert.json",
+      "reason": "The exact rational certificate: n, s_exact and 207 [x, y, t] rows of rational strings, centres in [0, S]^2 and t = tan(theta/2). No licence, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+    },
+    {
+      "match": "pingyou-n207-rational.yaml",
+      "reason": "The source's rational corners Witness/v2 of the same packing, in JSON syntax. No licence: pinned by digest only; derive reads it from the same checkout and holds it to the certificate's poses and side."
+    },
+    {
+      "match": "01-squares-project.zip",
+      "reason": "The source's complete package of 49 files: the certificate and witness again, the construction table and replay, the n70 parent, three exact checkers with Evan Daniel's two, receipts, the comparison figure, and the sources and licences of this repository's two checkers at 074ac28. No licence for the source's own files: pinned by digest only; no program in it was executed."
+    },
+    {
+      "match": "README.md",
+      "reason": "Author prose for every release in the tree at this pin, with the n207 refinement and credit quoted in this packet's README. No licence: pinned by digest only."
+    },
+    {
+      "match": "SHA256SUMS",
+      "reason": "The source's digest list for the tree's release files. Pinned by digest only."
+    },
+    {
+      "match": "n207-SHA256SUMS",
+      "reason": "The source's digests of the five n207 artifacts, each equal to the digest this manifest records. Pinned by digest only."
+    },
+    {
+      "match": "n207-verified-comparison.pdf",
+      "reason": "The author's comparison figure. No licence: pinned by digest only."
+    },
+    {
+      "match": "n207.svg",
+      "reason": "The author's drawing of the packing. No licence: pinned by digest only."
+    }
+  ]
+}

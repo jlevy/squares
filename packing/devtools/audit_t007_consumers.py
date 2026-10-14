@@ -969,7 +969,7 @@ def case_row(
 # ---------------------------------------------------------------------------------------
 
 DOCUMENT_GROUPS: tuple[tuple[str, tuple[str, ...]], ...] = (
-    ("reader", ("README.md", "SYNOPSIS.md", "TUTORIAL.md")),
+    ("reader", ("README.md", "SYNOPSIS.md", "TUTORIAL.md", "TUTORIAL-ADVANCED.md")),
     ("frontier", ("packing/frontier/README.md",)),
     ("case-record", ("packing/frontier/n-*.md",)),
     (

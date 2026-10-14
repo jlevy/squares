@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **547** evidence records. **332** are formal; **325** of those were established here. **6** are samples, counted separately.
-- **200** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **577** evidence records. **334** are formal; **327** of those were established here. **8** are samples, counted separately.
+- **227** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -121,7 +121,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n076-wand125-mixed-894-source-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-audit-wand125-point-and-mixed` |
 | `E-n083-wand125-linear-935-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp` |
 | `E-n083-wand125-linear-935-source-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp`, `V-audit-wand125-linear` |
-| `E-n101-wand125-linear-1028-report` | 5 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp` |
+| `E-n101-wand125-linear-1028-report` | 3 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp` |
 | `E-n101-wand125-linear-1028-source-replay` | 5 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp`, `V-audit-wand125-linear` |
 | `E-n083-wand125-mixed-937-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
 | `E-n083-wand125-mixed-937-source-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-audit-wand125-point-and-mixed` |
@@ -149,7 +149,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-tokoharu-density-monotone-report` | 0 | lower-bound | reported | - | here | - | previously-published | no code | not recorded | `V-tokoharu-verify-cpp` |
 | `E-wand125-point-monotone-report` | 0 | lower-bound | reported | - | here | - | previously-published | no code | not recorded | `V-wand125-check-with-sqpack`, `V-sqpack-fractional-exact` |
 | `E-tokoharu-density-source-replay` | 0 | lower-bound | verified | strict inequalities only | here | informally-verified | previously-published | producer’s code | not recorded | `V-tokoharu-verify-cpp`, `V-audit-tokoharu-density` |
-| `E-green-ds7-theorem9-reported-lower` | 30 | lower-bound | reported | - | elsewhere | defect-found | previously-published | unknown | not recorded | - |
+| `E-green-ds7-theorem9-reported-lower` | 27 | lower-bound | reported | - | elsewhere | defect-found | previously-published | unknown | not recorded | - |
 | `E-green-ds7-theorem10-reported-lower` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published | unknown | not recorded | - |
 | `E-friedman-ds7-table2-opaque-lower` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | unknown | not recorded | - |
 | `E-n017-maciver-reported-lower` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published | unknown | not recorded | *none held* |
@@ -159,7 +159,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-unitsquare-release1-report` | 0 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-basic-grid-upper` | 175 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
 | `E-basic-area-lower` | 18 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
-| `E-nagamochi-lower` | 175 | lower-bound | reported | - | elsewhere | defect-found | previously-published | no code | not recorded | - |
+| `E-nagamochi-lower` | 26 | lower-bound | reported | - | elsewhere | defect-found | previously-published | no code | not recorded | - |
 | `E-karakus-strip-lower` | 203 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published | no code | not recorded | - |
 | `E-karakus-strip-measure-interval` | 203 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-check-karakus-strip-measure` |
 | `E-nagamochi-lemma1-counterexample` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-check-nagamochi-lemma1-counterexample` |
@@ -570,13 +570,43 @@ results, it is a statement about what this repository has itself examined.
 | `E-n011-kleddamag-3875-esummins-replay-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-kleddamag-n11-verify` |
 | `E-evand-552-n154-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-552-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
+| `E-couzo-561-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-ostashev-562-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-564-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-couzo-583-586-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-504-refinement-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-503-refinement-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-566-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-567-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-568-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-569-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-couzo-583-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-mishapolk-573-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-574-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-574-algebraic-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-ostashev-575-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-wand125-fine-net-n39-66625-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
+| `E-wand125-fine-net-n44-69975-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
+| `E-wand125-fine-net-n37-64975-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
+| `E-fang-excess-theorem-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-fang-excess-theorem-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
+| `E-wand125-linear-n145-1224-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp` |
+| `E-wand125-closed-form-report` | 154 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-replay4d` |
+| `E-mishapolk-593-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-bengreff-594-cover-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-evand-zmx2`, `V-evand-zm-mixed-py` |
+| `E-evand-584-compositions-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-596-compositions-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-fang-direct-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-fang-direct-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 3 of 3: the complete certificates at 380, 381 and 382, every wall and every pair decided by both maintained routes; the six kernel controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
+| `E-wand125-closed-form-cfcheck-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | independent | sample, 8 of 136: region records of the closed-form certificate | `V-wand125-cfcheck` |
+| `E-wand125-closed-form-cfcheck-sample` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | sample, 2,909 of 187,183,108: leaves of the closed-form certificate | `V-wand125-cfcheck` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 204, verified 338
-- **method**: exact-algebraic 156, interval-certified 166, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 204
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 486
-- **relationship to the producer's code**: generator 5, independent-implementation 203, not-applicable 23, same-implementation 292, shared-components 18, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 231, verified 341
+- **method**: exact-algebraic 159, interval-certified 166, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 231
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 516
+- **relationship to the producer's code**: generator 5, independent-implementation 207, not-applicable 23, same-implementation 318, shared-components 18, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

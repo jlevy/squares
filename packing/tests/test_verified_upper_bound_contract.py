@@ -222,6 +222,21 @@ DECLARED_CONSUMERS = {
         "its claim record is frozen, and refuses a rewrite once that ceiling has moved; a "
         "smaller side establishes neither s(n) nor adoption"
     ),
+    "packing/devtools/algebraic_witness_reports.py": (
+        "compares each algebraic witness's exact side with the case's verified ceiling, "
+        "exactly over its field, and records the relation and the ceiling's value and exact "
+        "form in the frozen comparison; a smaller side establishes neither s(n) nor "
+        "adoption"
+    ),
+    "packing/devtools/apply_closed_form.py": (
+        "refuses to raise a case's reported lower bound to the closed form's a(n) unless a(n) "
+        "is below the case's verified upper bound, read exactly where its exact form is a "
+        "rational; a lower bound below the ceiling establishes neither s(n) nor a house"
+    ),
+    "packing/tests/test_apply_closed_form.py": (
+        "writes a synthetic record's verified upper bound to hold the closed-form writer to "
+        "its refusal when a(n) is not below that ceiling; it reads no case's bound"
+    ),
     "packing/devtools/check_half_angle_area.py": (
         "prints the case's verified finite ceiling beside each certificate it decides, as "
         "context for the review; it decides feasibility only, never s(n) or adoption"

@@ -1,0 +1,4 @@
+1 root boxes x 1 cover(s), depth limit 24, pitch 1/20, u-bins 16, CHAIN on, Lemma T on, Lemma L on
+done in 30s: boxes 67, max depth 6, CPU 30 s
+  leaves: PIECE 0  ADM 0  P1 0  MIX 0  CHAIN 19  SPLIT 15  EMPTY 0  UNCERTIFIED 0   (leaves where Lemma T / Lemma L raised the piece bound: 0 / 34; closed by Lemma T with line points: 0)
+VERIFIED-D4 (PARTIAL)

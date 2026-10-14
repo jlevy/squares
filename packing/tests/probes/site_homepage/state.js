@@ -179,7 +179,15 @@ async () => {
         : null,
     headings: [...document.querySelectorAll("h2.site-title")].map((heading) => heading.id),
     main_titles: [...document.querySelectorAll("h1.site-title")].map((heading) => heading.id),
-    lower_headings: document.querySelectorAll("h3, h4, h5, h6").length,
+    news_headings: [...document.querySelectorAll(".site-news-item > .site-news-header > h3")].map(
+      (heading) => ({
+        entry: heading.closest(".site-news-item")?.getAttribute("data-news-entry"),
+        title: heading.textContent?.trim(),
+      }),
+    ),
+    other_lower_headings: [...document.querySelectorAll("h3, h4, h5, h6")]
+      .filter((heading) => !heading.matches(".site-news-item > .site-news-header > h3"))
+      .map((heading) => ({ tag: heading.tagName, title: heading.textContent?.trim() })),
     main_title_style: mainTitle ? titleStyle(mainTitle) : null,
     h1_spacing: [...document.querySelectorAll("h1.site-title")].map((heading) => ({
       id: heading.id,

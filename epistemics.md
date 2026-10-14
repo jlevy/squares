@@ -692,14 +692,18 @@ to credit it as carefully as this project’s own.
   finder: the packing is the result’s subject, and its argument owes it nothing.
   The credit carries the lineage in both directions, so a table of results needs no
   grouping to say whose work rests on whose.
-- **People and projects, never tools.** Credit names people, or the handles they publish
-  under. A bound this project holds is cited on the atlas as `Squares Project (Levy)`;
-  its results and its place in another source’s credit line are `Levy`. An AI agent is
-  never a credited author.
-  Where a source states that AI assisted its work, its case record or register entry
-  says so in the source’s own terms, and so does any README prose about the result;
-  `devtools.state_ai_assistance` names a case record that cites such a source without
-  saying so.
+- **People and projects, never tools.** Credit names people by name, and a credit line
+  by surname: `Xu`, not the handle `ry-xu` (the owner, 2026-10-14: “use Ryan Xu real
+  name or surname Xu not the handle for regular credits”). A handle stands in a credit
+  only for an author whose sources give no other name.
+  Everywhere else a handle is an identifier and stays as it is: in a source key, a path,
+  a URL or a repository name.
+  A bound this project holds is cited on the atlas as `Squares Project (Levy)`; its
+  results and its place in another source’s credit line are `Levy`. An AI agent is never
+  a credited author. Where a source states that AI assisted its work, its case record or
+  register entry says so in the source’s own terms, and so does any README prose about
+  the result; `devtools.state_ai_assistance` names a case record that cites such a
+  source without saying so.
 - **A citation, not a disclaimer.** A register claim names the result’s authors, its
   date and its source, with a link.
   That a result is another’s is what its credit line and `attribution` state, and where

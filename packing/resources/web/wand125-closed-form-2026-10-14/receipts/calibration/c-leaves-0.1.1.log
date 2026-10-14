@@ -1,0 +1,28 @@
+# command: ./replay4d-0.1.1 interval_0.495_0.5/family.json controls/leaves.jsonl --leaves --threads 1 --out out/c-leaves-0.1.1.json
+# cwd: the run directory: replay4d binaries and the unpacked release assets of closed-form-v1
+# python3: not used by this command
+# host: 4 cores; load 2.69 4.31 7.11; started 2026-10-14T18:13:57Z
+roots 0 leaf kinds {"CORE1:Tx":20}
+LEAF {"box":["167/100","177/100","68/25","141/50","-9/32","-1/4","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":16},"ok":true},"source":"controls/leaves.jsonl:1"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-3/32","-1/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":24},"ok":true},"source":"controls/leaves.jsonl:2"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-1/32","0","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":24},"ok":true},"source":"controls/leaves.jsonl:3"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-7/32","-3/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":32},"ok":true},"source":"controls/leaves.jsonl:4"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-13/32","-3/8","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/leaves.jsonl:5"}
+LEAF {"box":["167/100","177/100","68/25","141/50","1/32","1/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":24},"ok":true},"source":"controls/leaves.jsonl:6"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-1/16","-1/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/leaves.jsonl:7"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-5/32","-1/8","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/leaves.jsonl:8"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-1/8","-3/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/leaves.jsonl:9"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-3/8","-11/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":48},"ok":true},"source":"controls/leaves.jsonl:10"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-3/16","-5/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":48},"ok":true},"source":"controls/leaves.jsonl:11"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-5/16","-9/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":64},"ok":true},"source":"controls/leaves.jsonl:12"}
+LEAF {"box":["167/100","177/100","68/25","141/50","3/32","1/8","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":48},"ok":true},"source":"controls/leaves.jsonl:13"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-11/32","-5/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":72},"ok":true},"source":"controls/leaves.jsonl:14"}
+LEAF {"box":["167/100","177/100","68/25","141/50","1/16","3/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":72},"ok":true},"source":"controls/leaves.jsonl:15"}
+LEAF {"box":["167/100","177/100","68/25","141/50","5/32","3/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/leaves.jsonl:16"}
+LEAF {"box":["167/100","177/100","68/25","141/50","7/32","1/4","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":48},"ok":true},"source":"controls/leaves.jsonl:17"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-1/4","-7/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":88},"ok":true},"source":"controls/leaves.jsonl:18"}
+LEAF {"box":["167/100","177/100","68/25","141/50","13/32","7/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/leaves.jsonl:19"}
+LEAF {"box":["167/100","177/100","141/50","73/25","-7/32","-3/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":32},"ok":true},"source":"controls/leaves.jsonl:20"}
+cpu 2.277265s wall 2.298064s
+REPLAY OK
+# finished 2026-10-14T18:13:59Z; exit 0; wall 2.305 s; CPU 2.3 s (user 2.275 + sys 0.008); load 2.72 4.29 7.09

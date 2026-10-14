@@ -18,7 +18,6 @@ from types import SimpleNamespace
 from typing import NoReturn, Self, cast
 
 import pytest
-from kpress.format.markdown import parse_markdown
 from playwright.sync_api import Browser
 from playwright.sync_api import Error as PlaywrightError
 
@@ -90,12 +89,11 @@ REPOSITORY_LINKS = (
 
 COMMIT = "0123456789abcdef0123456789abcdef01234567"
 
-#: About carries the current retained history, including the merged launch groups.
+#: News carries the current retained history, including the merged launch groups.
 #: Parse only this small section; the fixture does not rebuild the site or prepare math.
-CHANGELOG_BODY = parse_markdown(
-    render_changelog.render_markdown(render_changelog.load(), destination="site"),
-    title="Changelog",
-).html
+CHANGELOG_BODY = '<h1 id="changelog">News</h1>' + render_changelog.render_news(
+    render_changelog.load()
+)
 
 #: The tree `main` holds at the deploy: every path a fixture page links on `main`.
 CHANGELOG_LINKS = branch_paths(CHANGELOG_BODY)
@@ -189,7 +187,7 @@ def page(
     return (
         f"{head(path)}{bar}"
         f'<p>({stamp})</p><a href="{REPO_URL}/blob/{ref}/{link}">Repository</a>{index}'
-        + (CHANGELOG_BODY if path == "about.html" else "")
+        + (CHANGELOG_BODY if path == "news.html" else "")
     ).encode()
 
 
@@ -503,7 +501,13 @@ def test_the_checked_pages_are_every_page_the_site_serves_but_the_workbench() ->
     assert PAGE_URL.endswith(f"/squares/{EXPLAINER}")
     assert EXPLAINER == "papers/n11-lower-bounds-explainer.html"
     assert {*SITE_PAGES, EXPLAINER, "workbench/index.html"} <= set(render_overview.SITE_PAGES)
-    assert {"index.html", "atlas.html", "about.html", "results.html"} == LINK_CHECKED_PAGES
+    assert {
+        "index.html",
+        "news.html",
+        "atlas.html",
+        "about.html",
+        "results.html",
+    } == LINK_CHECKED_PAGES
     assert render_overview.canonical_url("index.html") == check_published_site.SITE_URL
     assert render_overview.canonical_url("tutorial.html").endswith("/squares/tutorial.html")
     # The papers page was added to the renderer alone, and is checked here for it.

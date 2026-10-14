@@ -1,7 +1,7 @@
 # Design System
 
 This is the one description of how every page of the site looks: the explainer, the
-overview, Atlas, About, case and result records, Frontier, papers, tutorial and
+overview, News, Atlas, About, case and result records, Frontier, papers, tutorial and
 Visualize. Each stylesheet implements what is written here and points back to it; when a
 page needs something new, it is added here first and then to the stylesheet that owns
 it.
@@ -191,9 +191,15 @@ A significance rung is drawn in an ink of its own on the page, not on a chip:
 `--site-significance`, a dark teal at hue 205, between the confirmation green and the
 verification blue so it reads as neither, and darker and bluer than the accent so it
 never reads as a link; it is light in dark mode.
-The rung is its letter and level, `S4`, at the sans medium weight, then as many short
-bars in the same ink as its level, one to five, so a column of them reads as a meter
-(`overview_sections.significance_mark`). It is the second column of a table of results,
+Every score uses `overview_sections.significance_mark`: an S label and five segments in
+one square-cornered border box, 5.5em wide at the shared note size and sans medium
+weight. Each bar is 0.5em wide and 0.6em tall; the first S bars are solid and the rest
+are empty outlines.
+The box keeps the same width from S0 through S5, while its accessible
+name states the score and its tooltip explains the judgment.
+News, Results tables, ladders, result overviews, case records and popovers share this
+component; significance continues to describe importance rather than V/C assurance.
+It keeps the shared chip height, 1.45em. It is the second column of a table of results,
 narrow, and it stands first among the rungs in a result’s overview, a case record and
 the rating ladders.
 
@@ -737,15 +743,16 @@ it.
   (0.5rem) nearer the bar, since a drawing has no line spacing above its edge.
   On the explainer the source chips sit in that space and the title starts the token
   below them. Print keeps KPress’s spacing, so the explainer’s PDF does not move.
-  Its entries are Overview, Results, Papers, Frontier, Visualize and GitHub, in that
-  order on every page: the order is the partial’s, `site-nav.html`, which is the one
-  place it is written, and it is the keyboard’s order too.
-  On a phone, where the links take two lines, the first holds Overview, Results, Papers
-  and Frontier and the second Visualize, GitHub and the gear.
-  Papers leads to the papers page (`papers.html`) and is current on it and on both
-  papers, the explainer and the tutorial, which keep their own addresses.
-  Visualize leads to the film (`visualize.html`) and is current on both pages of the
-  Visualize section, the film and the workbench.
+  Its entries are Overview, News, Atlas, Results, Explanations, About and GitHub.
+  Their order comes from `site-nav.html` and is also the keyboard order.
+  Links wrap naturally on narrow screens.
+  Explanations leads to `papers.html` and is current on the papers, tutorial, film and
+  Workbench. The landing page starts with a prominent Tutorial section of its own,
+  followed by Papers, PDFs and Visuals.
+  The existing tutorial card appears only in its top section; the paper cards keep their
+  shared content. Visuals contains the film and the two-choice Film/Workbench switch.
+  The film does not autoplay there.
+  These pages keep their existing addresses.
   The workbench is an application rather than a KPress page, so its build
   (`workbench_tools.build_site`) takes the bar, its stylesheet, the theme bootstrap and
   the gear’s script from `render_overview.nav_shell`, in a shell that gives it the page
@@ -754,9 +761,11 @@ it.
   itself has no dark mode yet.
 
 - **Section tabs.** A section that spans pages carries one small tab bar under the
-  navigation bar; the Visualize section is the one that does, with two tabs, **Film**
-  (`visualize.html`, the section’s first page) and **Workbench** (`workbench/`). Each
-  tab is a real link to its own page, so the bar needs no script, and a tab can be
+  navigation bar where the destination is a dedicated visual page.
+  The shared Visuals switch has **Film** (`papers.html#visuals`) and **Workbench**
+  (`workbench/`). On Explanations, it sits in the Visuals section after Tutorial, Papers
+  and PDFs; it is not a page-wide Papers tab.
+  Each tab is a real link to its own page, so the bar needs no script, and a tab can be
   opened, bookmarked and shared; every existing `workbench/` address lands on the
   Workbench tab. The bar is a centred strip with square corners and the cards’ thin
   border, a hairline between tabs, in the bar’s sans at the links’ own size
@@ -765,15 +774,15 @@ it.
   page background in the page’s own text colour.
   It is `.site-tabs`, rendered by `render_overview.visualize_tabs`, and defined in
   `site-nav.css` rather than `site.css` because the workbench carries only the bar’s
-  stylesheet. On the film’s page it opens the document; on the workbench it sits in the
-  application shell under the bar, above the application.
+  stylesheet. On the legacy Film page it opens the document; on the workbench it sits in
+  the application shell under the bar, above the application.
   The same strip also switches a view in place: there it is a `tablist` of buttons
   (`role="tab"`), each stripped of a button’s own chrome and taking the strip’s type,
   the selected one filled as the current page’s link is.
   The dedicated Atlas uses it for its Grid and Triangle views (**Atlas views**, below)
   and for its Small, Medium and Large tiles (**Atlas sizes**, below); `site-nav.css`
   draws both forms, and the header rules above take only the `nav` strip.
-  From the top, both pages read bar, rule, tabs, content: the tabs stand under the rule
+  From the top, these pages read bar, rule, tabs, content: the tabs stand under the rule
   that runs under the bar, never over it.
   They are in the header slot, whose lower border is that rule, so a header that holds
   tabs gives up its border and the bar draws the rule at its own foot (`:has()`, in
@@ -782,10 +791,6 @@ it.
   On the film’s page the first block starts `--site-page-top` under the tabs; on the
   workbench, where the application starts at the shell’s lower edge, the tabs keep the
   same 0.7rem below them.
-  Measured at 1280px, on both pages: the bar from 16 to 67.6px with the rule its last
-  pixel, the tabs from 78.8 to 115.4px, then the film at 179.4px and the application at
-  126.6px; at 390px, where the bar wraps to two lines, the rule ends at 84.8px, the tabs
-  run from 96.0 to 132.6px, the film starts at 196.6px and the application at 143.8px.
   `devtools.measure_site_pages header` reports these, `preview_site` fails a built page
   whose tabs start over the rule (`tabs_problems`), and `tests/test_site_wide_blocks.py`
   holds both pages to it in a browser.
@@ -846,8 +851,11 @@ it.
   workbench’s does, so a re-pin puts every such page in the Pages workflow’s scope
   (`devtools.pages_scope`); nothing compares a page’s bytes with an earlier build’s.
 
-- **Homepage.** A short problem introduction opens the page.
-  The next sections are Atlas, Recent Major Results, Papers, PDFs, Video, Squares
+- **Homepage.** Its browser title and sharing title are **The Squares Project**, from
+  the shared project-name constant.
+  The opening content section remains The Square Packing Problem.
+  A short problem introduction opens the page.
+  The next sections are Atlas, News, Recent Major Results, Papers, PDFs, Video, Squares
   Project Documentation, then More Resources (`think-5c8r`, `think-sq1i`). Papers shares
   all reading cards with the Papers page; Squares Project Documentation shares its
   introductory text and cards with About.
@@ -869,6 +877,61 @@ it.
   appear on the homepage; **About** sits immediately before **GitHub** in the shared
   navigation.
 
+- **News.** News is the second navigation item and carries the complete retained project
+  history. Its H1 uses the shared sans-serif caps; its operational text uses the sans
+  face. Each entry is one hairline-bordered card containing its actual article once.
+  Dates use the paper heading’s sans-base date role.
+  Each card starts with an ordinary H3 in the theme’s text foreground, followed by the
+  date, then a metadata row with smaller Results-style topic chips on the left and the
+  shared significance meter fixed at the right.
+  The article follows.
+  H3 typography comes from the shared heading role; the chips retain shared fills,
+  corners and leading at 85% of the note-size chip scale.
+  Homepage News and the archive use the same card renderer and CSS roles.
+  Every post has an explicit importance score and a plain rationale.
+  The meter’s accessible label names its S level; its shared tooltip explains the level
+  and the post’s rationale.
+  Homepage highlights keep their actual result scores and assurance qualifiers, with one
+  S meter per card. Archive controls default to S4/S5 and all topics, with OR within a
+  facet and AND across facets.
+  All significance and All topics clear their facet; Reset restores the defaults.
+  The compact chooser groups share the homepage’s small controls, wrap inline, and keep
+  their group names accessible without visible headings.
+  Counts use the Results control row, right aligned above the cards; an empty state
+  describes a selection without matches.
+  URL state preserves unrelated query parameters and browser history; a low-score
+  bookmark widens the filters to reveal its target.
+  Without JavaScript the controls stay hidden and the complete history remains visible.
+  After the enhancement loads, about ten lines are visible.
+  Clicking or tapping the card or its small shared arrow in the footer expands or
+  contracts it inline; Enter and Space activate the button.
+  A short fade marks the clipped edge.
+  News and Atlas disclosure footers center their expand/contract control on the content
+  through one shared rule; ordinary navigation actions keep their own roles.
+  Height, fade and arrow rotation share the existing motion timing and honor reduced
+  motion. Hover adds a subtle green wash without changing height.
+  Article links retain their ordinary actions; body-link focus reveals the article.
+  Readers without scripting see complete articles.
+  Entry and legacy date fragments reveal their corresponding card.
+  Topic labels reuse square-cornered Results chips with distinct subject metadata: lower
+  and upper bounds and optimality reuse bound fills, engineering uses the accent tint,
+  verification the review-blue palette, and documentation the neutral chip.
+  These subject labels assert no result kind or verification status.
+  Results and News use the shared topic vocabulary and sentence-case labels in
+  `devtools/site_topics.py`. Every registered result kind keeps its precise topic; News
+  also accepts Engineering, Verification and Documentation.
+  News filters offer the topics present in the archive, in the shared vocabulary’s
+  order. Topic chips explicitly reset text transformation, small caps and letter spacing,
+  so parent headings cannot change their casing.
+  The chip renderer preserves each consumer’s filter attribute.
+  All surfaces retain the result’s real kind, status, claim and credit.
+  The homepage highlights the three newest S5 results from the results register, using
+  their existing claims, credit and evidence, and follows them with “All news →”.
+  Formalization and simplification highlights use their precise registered topic labels
+  and retain the original result-kind and evidence chips.
+  About keeps one short News link; its old history bookmarks forward without duplicating
+  the feed.
+
 - **Page headings.** The homepage opens with “The Square Packing Problem” as its `h1`,
   followed by visible section `h1`s in the same title style.
   The Visualize page shows no title: the bar, the section tabs and the film are the
@@ -880,11 +943,11 @@ it.
   A page that has a title (the Frontier page, the Results page, the Papers page, the
   canonical case record) sets it in the hero, centred.
   The Frontier page’s title is “The Frontier Survey”, the Results page’s “Every Result”
-  and the Papers page’s “Papers”; each stood over a subtitle the owner dictated on 1
-  October (“A survey of everything known for cases $n = 1, \ldots, 324$”, “A survey of
-  all reviewed results”, “Papers and interactive explanations for specific results”) and
-  dropped on 2 October as adding little (`think-wz9d`); the page descriptions in each
-  `<head>` are their own constants and stay.
+  and the Explanations page’s “Explanations”; each stood over a subtitle the owner
+  dictated on 1 October (“A survey of everything known for cases $n = 1, \ldots, 324$”,
+  “A survey of all reviewed results”, “Papers and interactive explanations for specific
+  results”) and dropped on 2 October as adding little (`think-wz9d`); the page
+  descriptions in each `<head>` are their own constants and stay.
   Individual case pages use their own case heading; the Atlas replaces the former
   separate case-directory hero and index (**Case records**, below).
   A subtitle, where a page has one, is the sans face at 1.1 times the sans base
@@ -1091,6 +1154,10 @@ it.
   (`overview_sections.py`), so its lines are one grid; the size is the one its typical
   card’s text asks for, the median card’s, which for an even count is the mean of the
   two middle lengths, and `tests/test_overview.py` holds the two together.
+  Explanations’ Tutorial section is the one explicit exception: its two brief
+  introductory cards use the papers’ large reading-card layout to give readers a
+  prominent starting point.
+  Tutorial and Papers remain separate sections when checking typical text lengths.
   The page cards, the atlas cards and the other projects are medium; the documents,
   whose notes are a line, are small.
   A section can also be set in lines of its own, in `SECTION_CARD_LINES`, where one
@@ -1344,20 +1411,15 @@ it.
   - **Rows.** Every rung is the same height at any one width, since each is a chip and a
     two-line box; a significance mark stands as tall as a chip, the chip’s line height
     and margin. A cell arranges the two by its own width.
-    With 18rem or more it sets the chip in a rail, 2.25rem, the chip’s own width, or
-    3.75rem for significance, the widest mark’s (`--site-ladders-significance-rail`;
-    S5’s is 58.8px in the page’s face), and the description beside it, 0.75rem on,
-    64.1px a row: at 1280 and 1024 pixels, down to a 980-pixel window, and on a phone
-    down to 320 pixels. The rail is never narrower than what stands in it
-    (`minmax(rail, max-content)`): at 3.6rem S5’s mark ran 1.2px past it, and a wider
-    face, 65px in the fallback and more in some system faces, ran it into the words
-    beside it (the owner, 2026-10-05). Every cell turns at the widest rail’s width, so a
-    row’s rungs stay one height and a significance description, 1.5rem narrower than the
-    others beside its wider rail, is never under its least: at 16.5rem, the chips’
-    rail’s, it was set 21.6px short and took a third line (2026-10-03). Narrower, it
-    sets the chip on a line of its own and the description under it across the cell,
-    91.8px a row, from 979 pixels down to 716, so at 768 and 908. A description is never
-    set narrower than 13.5rem (`--site-ladders-meaning-min`).
+    A cell at least 20.5rem wide places its mark in a rail beside the description:
+    2.25rem for V/C chips or 6.25rem for the significance meter, then a 0.75rem gap and
+    at least 13.5rem for the two-line meaning.
+    All cells turn together, preserving uniform row heights; narrower cells put their
+    meanings below the mark.
+    The rail uses `minmax(rail, max-content)` so a reader’s enlarged meter remains clear
+    of its description. The three-column boundary is 1100px; on the stacked diagram the
+    side-by-side boundary is 360px. Retained browser checks cover both sides of each
+    boundary and a 20% enlarged-meter control.
   - **Columns.** The three columns are equal, and each keeps 0.75rem
     (`--site-ladders-inset`) clear after its words, before the next column’s chip.
     Three columns therefore need 42.75rem: three times the least description and its
@@ -1388,13 +1450,12 @@ it.
 - **Atlas grid.** The complete grid at `atlas.html` holds every tracked case, n = 1 to
   324, as a cached square SVG image with its n beneath.
   The artwork uses dark ink on a white canvas in both page themes.
-  The grid bleeds past the wide track as the window grows, to 140rem less the page
-  gutters, and its cells keep a readable size (at least 6.4rem, 4.6rem on a phone, at
-  the Medium size; **Atlas sizes**, below), so a wider screen shows more cases per row:
-  4 at 390 pixels, 10 at 1280, 16 at 1920 and 20 at 2560 (measured on 2026-10-04; the
-  figures for 1280 and 1920 had read 11 and 17). A cell washes on hover and on keyboard
-  focus, and is a link to its case’s record file, `cases/11.html`, which opens in the
-  page’s one case popover (**Case records**, below).
+  The grid fills the available page width less its edge gutters, and its cells keep a
+  readable size (at least 6.4rem, 4.6rem on a phone, at the Medium size; **Atlas
+  sizes**, below), so a wider screen shows more cases per row: 4 at 390 pixels, 10 at
+  1280 and 16 at 1920. A cell washes on hover and on keyboard focus, and is a link to
+  its case’s record file, `cases/11.html`, which opens in the page’s one case popover
+  (**Case records**, below).
   The wash is the cell’s background, behind the drawing, and it is the only thing that
   changes: every line of the artwork keeps its fixed ink at rest, hovered, focused and
   pressed, in both themes.
@@ -1619,14 +1680,14 @@ it.
   Without scripting, the homepage shows its first 100 cases and Explore link; the
   dedicated Atlas exposes all 324 cases.
 
-- **About and Papers.** About separates the project narrative into paragraphs for its
-  origins, subsequent work, independent results, and current role.
+- **About and Explanations.** About separates the project narrative into paragraphs for
+  its origins, subsequent work, independent results, and current role.
   **Report Your Results!** is an H1 over the reporting invitation, which asks for the
   name to credit and ends in a **Report a Result** button opening the repository’s
   result form; the old `#contribute-your-results` anchor stays on the heading.
   The overview carries the same invitation (`report-results.md`) as an H2 after Recent
   Major Results. Project documentation remains on About.
-  Papers holds the paper, tutorial, and PDF cards.
+  Explanations holds the Tutorial, Papers and PDFs sections, followed by Visuals.
   About no longer carries Reading and Research; omit redundant Frontier Survey and
   Workbench cards from both pages (`think-h21i`).
 
@@ -1668,11 +1729,12 @@ it.
   It is independent of the prose measure, thirty-five times the base, so changes to
   reading lines preserve the room tables and card grids need.
   Two kinds bleed past it.
-  The atlas grid bleeds at every width, up to `--site-bleed-max` (140rem). A data table
-  bleeds only above `--site-table-bleed-from` (80rem, 1280 pixels): from there it grows
-  one pixel for each pixel of window, `--site-table-wide`, until it reaches the page
-  gutters or `--site-table-max` (100rem, 1600 pixels), past which its columns would only
-  spread apart and a row would be harder to follow.
+  The atlas grid fills the available page width less its edge gutters, with no fixed
+  maximum. Complete Triangle rows still pan horizontally when they exceed that frame.
+  A data table bleeds only above `--site-table-bleed-from` (80rem, 1280 pixels): from
+  there it grows one pixel for each pixel of window, `--site-table-wide`, until it
+  reaches the page gutters or `--site-table-max` (100rem, 1600 pixels), past which its
+  columns would only spread apart and a row would be harder to follow.
   So nothing changes at 1280 pixels or narrower, and on a large screen a table’s text
   columns wrap less. The frontier table, whose own track is 86rem, is the page’s content
   area less its gutters up to 1456 pixels and goes from 1376 to 1600 above that.
@@ -1714,11 +1776,19 @@ it.
   no styling class. Popover detail and mathematical record headings retain their
   dedicated compact rules.
 
-- **Small choosers.** Atlas layout, size and scale use `site-chooser-small`, shared on
-  the homepage and Atlas.
-  The text uses the Results widget control size, 1.35 leading, and 0.15rem by 0.65rem
-  padding (`think-ticj`). All action groups use a shared 0.7rem gap and wrap together at
-  narrow widths; no section owns separate button spacing.
+- **Small choosers.** Single-select and multi-select choices share the homepage Atlas’s
+  `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the Results
+  widget control size, 1.35 leading, and 0.15rem by 0.65rem padding (`think-ticj`).
+  Borders, selected fill, hover, keyboard focus and motion use the same rules on every
+  page. Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select
+  groups use native buttons with `aria-pressed`. Group names remain accessible when
+  visually hidden. Momentary All and Reset actions use the same compact button appearance
+  without a selected state.
+  Chooser strips wrap at narrow widths; pages only place the groups.
+  All action groups use a shared 0.7rem gap and wrap together at narrow widths; no
+  section owns separate button spacing.
+  Filter counts use the Results `site-table-tools` row and `site-count` role, aligned to
+  the right above the items they describe, with the shared control typography.
 
 - **Visual summary.** A case has one view wherever it is shown, its visual summary
   (`render_case_pages.visual_summary`, a `section.site-case-summary`), shared by the
@@ -1967,8 +2037,8 @@ it.
   The widths follow from each column’s floor and from what the n column asks for.
   The id, the significance, the rungs, the status, the details and the date are as
   narrow as what they hold.
-  The significance is as wide as its widest mark, S5’s five bars, with the cell’s 0.2rem
-  padding either side: its bars are 0.36em wide, 0.2em after the label.
+  The significance column holds the shared 5.5em meter, with the cell’s 0.2rem padding
+  either side and room for a new-result star.
   The details are as wide as their widest link, “evidence 10”, 102 pixels, and a result
   with many records is the tallest row: T-075’s sixteen links stand 410 pixels.
   The rungs column is as wide as its widest chip, since no chip wraps: the two rungs
@@ -2430,26 +2500,25 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `preview_site.moved_links` hold the pages to that, and `check_published_site` asks the
   deployed site for each one.
 
-- **Papers page.** The site’s papers, the optimality paper, the explainer and the
-  tutorial, share one entry in the navigation bar, “Papers”, after Results.
-  It leads to `papers.html`: a hero title, “Papers”, a subtitle, a short introduction
-  and one large card for each paper (`data-card-size="large"`), saying what the paper
-  is. The cards come from one ordered list, `overview_sections.PAPERS`, each entry a
-  paper’s address, label, title, description and card size, so a new paper is one entry.
-  Each is a direct card: a paper is a full page the site serves, so its card is the link
-  itself and goes to the paper in the same tab, as the overview’s page cards do, with no
-  popover and no framed preview (`link_card`, `new_tab=False`; see Cards).
-  A link holds no other link, so what a description names is linked from the page’s
-  introduction (`templates/papers-article.md`), which links T-060’s row and the
-  optimality paper. The optimality paper is first: it explains the result that stands,
-  T-060, where the explainer proves the lower bounds T-060 superseded and the tutorial
-  is the background to both.
-  The explainer’s card names the newer optimality proofs, and reads the same on the
-  overview. The page has no popover, so it carries no popover script.
-  The two papers are served under `papers/`, each by its slug, with its Markdown and its
-  PDF beside it under the same slug: `papers/n11-optimality-review.html` and
-  `papers/n11-lower-bounds-explainer.html`. The tutorial stays at `tutorial.html`.
-  Papers is the current entry on the papers page and on each of them.
+- **Explanations page.** The shared navigation entry after Results leads to
+  `papers.html`, headed “Explanations”.
+  Its sections are Tutorial, Papers, PDFs and Visuals, in that order.
+  Tutorial presents the basic introduction and advanced companion as two large reading
+  cards. Papers presents the three parts of the $n = 11$ series in reading order,
+  followed by the methods survey.
+  PDFs offers the two infographic posters.
+  Visuals retains the Film | Workbench chooser and a paused inline film.
+  Reading cards come from `overview_sections.PAPERS`, each entry a document’s address,
+  label, title, description and card size.
+  Each card links directly to its document in the same tab, with no popover or framed
+  preview (`link_card`, `new_tab=False`; see Cards).
+  Links cited by descriptions belong in the section introduction rather than inside a
+  linked card. The standalone papers keep their existing `papers/` addresses and
+  independent publication editions.
+  The tutorials remain `tutorial.html` and `tutorial-advanced.html`, using the
+  reader-document pipeline.
+  Explanations is the current navigation entry on these pages.
+  The legacy `visualize.html` film remains available.
   The addresses the papers had before 2026-10-01, `explainer.html` and
   `n11-optimality/t-060-explainer.html` with its directory, each serve a forwarder: a
   page of a few lines that sends a reader on with the query string and the fragment they

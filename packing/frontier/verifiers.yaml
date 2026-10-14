@@ -2924,3 +2924,808 @@ verifiers:
       Reads the views and the receipts; decides nothing itself. The two programs it hands
       each view to are the ones the run that made the views decided them with, so its
       replay is a reproduction with the producer's code.
+  - id: V-wand125-lb-review-fine-net-premises
+    program: check_candidate.py, check_source_logs.py and nested_crate.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes, apart from the crate and the tools, every exact premise of a check2
+      candidate on its declared net (the measure and its mass, lemma N0's premises and the
+      last bin, the per-bin domains, lemma F3's caps, the semantic digest), reads the
+      source's run and control logs and receipts against the candidate, and ties the nested
+      verifier archive to its build digest and, file by file, to reviewed source.
+    source:
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/fine_net_exact.py
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/check_candidate.py
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/check_source_logs.py
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/nested_crate.py
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage-4 mathematical review lane of the wand125-lb import (think-u0av),
+            strong tier, max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits name Claude as co-author. Written by a Claude agent prompted
+          separately from the source and from the intake lane, in files of their own that
+          import nothing from the crate, the tools or the source.
+      note: >-
+        Written after reading SOUNDNESS.md, the crate's axis, interval, exact and
+        certificate modules, the census control and the exact evaluator in devtools, and the
+        source's candidate format and digest rule. The producer's checker is this
+        repository's crate adapted, so no clean room with respect to it is claimed.
+  - id: V-wand125-lb-review-fine-net-exact-capture
+    program: fine_net_exact.capture, driven by check_source_logs.py and sample_directions.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The exact mass a closed core at a given centre and net angle captures from a format M
+      measure on a declared net, by Sutherland-Hodgman clipping of the rotated core against
+      each D4 image in fractions. Decides the capture at the poses it evaluates: the
+      source's control witnesses, the tightest leaf centres of the source's runs, and the
+      leaves and witnesses of the reviewed sqverify-fast at the directions
+      sample_directions.py runs. It agrees with the crate's exact witnesses digit for digit
+      at 99 oblique poses.
+    source:
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/fine_net_exact.py
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/check_source_logs.py
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/sample_directions.py
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage-4 mathematical review lane of the wand125-lb import (think-u0av),
+            strong tier, max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: As above.
+      note: >-
+        Clipping and areas in fractions, written from the claim's definition of the density;
+        no code of the crate's oracle, of mixed_exact or of the source.
+  - id: V-wand125-lb-review-axis-sweep-emulation
+    program: sweep_emulation.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods:
+      - numerical-f64
+      - exact-algebraic
+    role: premises
+    summary: >-
+      A transcription of sqverify-fast's axis vertex sweep and directed rounding into Python
+      floats, walked at one column, which reproduces the crate's certified bound to the last
+      digit and reports the enclosure the crate does not: a diagnostic of the census
+      control's axis tolerance. It decides nothing.
+    source:
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/sweep_emulation.py
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/fine_net_exact.py
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md
+    independence:
+      read:
+        - mathematics
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares:
+        - axis::verify_axis
+        - interval::Iv
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage-4 mathematical review lane of the wand125-lb import (think-u0av),
+            strong tier, max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          Transcribed from the crate's Rust by eye, not imported, so its code is the
+          crate's sweep in another language; the crate is this repository's, which the
+          producer adapted.
+      note: >-
+        Its purpose is to share the sweep's arithmetic: equality of its lower end with the
+        crate's bound is what shows the enclosure it reports is the crate's.
+  - id: V-wand125-lb-review-linear-premises
+    program: check_linear_candidate.py, check_linear_records.py and check_inputs_sample.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes, apart from the tools, every exact premise of a linear certificate (the
+      measure, its mass, its D4 invariance, the digest, the net, the centre domains), the
+      arithmetic of its scope against the closed forms and the case records, its 201 records
+      and the digests its documents state, and a sample of the proof bundle's inputs against
+      the exact images.
+    source:
+      - packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/linear_exact.py
+      - >-
+        packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/check_linear_candidate.py
+      - >-
+        packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/check_linear_records.py
+      - >-
+        packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/check_inputs_sample.py
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md
+    independence:
+      read:
+        - mathematics
+        - certificate-format
+        - producer-code
+        - producer-output
+        - earlier-review
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage-4 mathematical review lane of the wand125-lb import (think-u0av),
+            strong tier, max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: As above.
+      note: >-
+        The export order of the images and the digest rule were read from the producer's
+        retained unified_measure.py; the checker was not re-read, the 2 October review
+        having read it.
+  - id: V-wand125-lb-review-linear-exact-capture
+    program: linear_exact.capture, driven by point_checks.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The exact mass a closed core captures from a point, segment and rectangle measure at a
+      given centre and net angle, in fractions. Decides only the fifteen captures
+      point_checks.py evaluated, which are no evidence of the claim.
+    source:
+      - packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/linear_exact.py
+      - packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/point_checks.py
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md
+    independence:
+      read:
+        - mathematics
+        - certificate-format
+        - producer-code
+        - earlier-review
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage-4 mathematical review lane of the wand125-lb import (think-u0av),
+            strong tier, max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: As above.
+  - id: V-fang-review-exact-checker
+    program: rectangle_check.py, with its module squares_exact.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides a square or rectangle certificate in Evan Daniel's text format strict-valid in
+      both dimensions in Fraction arithmetic: every corner strictly inside the open box and
+      every pair strictly separated along an edge normal, pairs with centres farther than
+      sqrt 2 apart decided by the exact distance test within a grid of cells of side 2, or
+      every pair by the axis test with --all-pairs; reports the exact squeeze, least wall
+      clearance and least pair gap, and refuses the duplicate-square and outside-container
+      controls.
+    source:
+      - >-
+        packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/rectangle_check.py
+      - >-
+        packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/squares_exact.py
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the mathematical review lane of the fang-theorem intake, strong tier, max
+            reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source states that its search, verifier and bundle were written with Claude
+          (Anthropic). This program was written by a Claude agent prompted separately, in
+          files of its own, from the README's statement of the certificate convention and
+          the separating-axis theorem; the source's checkers verify.py, tools/rectcheck.py
+          and verify_cert.py were not read.
+      note: >-
+        The producer's stored checker outputs were read afterwards to compare the least
+        margins, which agree to the printed digits on every rectangle.
+    note: >-
+      The mathematical review of 14 October 2026 wrote it and ran it on the six rectangles,
+      the 25 square pieces, the 76 inventory certificates (six retained, 70 rebuilt
+      byte-identical to the pinned files) and the fourteen direct certificates, all
+      strict-valid, with the all-pairs route agreeing on R, R', 932 and 380 and the two
+      controls refused. Kept as run in the packet's review/, with every output.
+  - id: V-fang-review-glue-rebuild
+    program: glue_rebuild.py, with squares_exact.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Rebuilds each certificate of Fang's theorem inventory from the retained pieces by its
+      chain, as the Lemma 3 composite at the common squeeze 1/10000 scaled once by 1 +
+      d0/(2(n - d0)), and decides whether its bytes are the shipped file's by the SHA-256
+      the frozen header list and the tables record, and by the bytes where the file is
+      retained.
+    source:
+      - packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/glue_rebuild.py
+      - >-
+        packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/squares_exact.py
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
+    independence:
+      read:
+        - mathematics
+        - producer-code
+        - certificate-format
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the mathematical review lane of the fang-theorem intake, strong tier, max
+            reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Written after reading tools/glue.py, the producer's construction, in code of its
+          own that copies none of it; instantiate_theorem.py, which built the inventory, is
+          private and was not read. The source states Claude assistance.
+      note: >-
+        It decides identity, not geometry: 76 of 76 rebuilt certificates have the digests of
+        the shipped files, which binds the 70 pinned ones to the retained pieces and Lemma
+        3's layout.
+    note: >-
+      The mathematical review of 14 October 2026 wrote and ran it; the rebuilt files are not
+      kept (OR-18) and are written again in two seconds.
+  - id: V-fang-review-excess-arithmetic
+    program: excess_arithmetic.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides the arithmetic of Theorem 2 from its definition: F(n) and its maximiser with
+      the base in 15..30 for n = 15..2000, every row of inventory.tsv and best.tsv with its
+      chain recounted from the pieces' counts and boxes, and the deficiency comparison with
+      Ryu's and Arslanov, Mustafin and Shangitbayev's bounds.
+    source:
+      - >-
+        packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/excess_arithmetic.py
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the mathematical review lane of the fang-theorem intake, strong tier, max
+            reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Written from the README's definition of F(n) and the tables, read as data; it
+          shares nothing with cases/asymptotic/fang_excess_inventory.py either, which was
+          read only after its results were in hand.
+      note: Every statement it decides held.
+    note: >-
+      The mathematical review of 14 October 2026 wrote and ran it; output kept in the
+      packet's review/outputs/.
+  - id: V-fang-review-receipt-summary
+    program: receipt_summary.py, with squares_exact.py; pieces_digests.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Reads an upper-bound packet's exact replay receipt and claims record and holds them to
+      the retained certificates: each job's input, verdicts, least margins and controls, the
+      summed statistics, and every claim comparison recomputed from the exact sides;
+      pieces_digests.py says which files the PIECES.md digests identify.
+    source:
+      - >-
+        packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/receipt_summary.py
+      - >-
+        packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/pieces_digests.py
+      - >-
+        packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/squares_exact.py
+    independence_record: >-
+      docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
+    independence:
+      read:
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the mathematical review lane of the fang-theorem intake, strong tier, max
+            reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Reads this repository's receipts and claims records and the retained certificates;
+          decides no geometry. The source states Claude assistance.
+      note: A premise check for the two packets' receipts.
+    note: >-
+      The mathematical review of 14 October 2026 wrote and ran it on the theorem and the
+      direct-certificates packets; both receipts and both claims records held.
+  - id: V-wand125-replay4d
+    program: replay4d, with seam4d_core, driven by checker/replay_all.py
+    author: wand125
+    provenance: external
+    language:
+      - Rust
+      - Python
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides one region record of the closed-form certificate: that its roots are exactly
+      the product grid of the region, its leaves tile each root by midpoint bisection, and
+      each leaf passes its named exact test (EMPTY, CORE, B3D, EDGE, EX/EY, B3U, B3T, the
+      nine CORE1 kinds, B4U) against the family.
+    source:
+      - >-
+        packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs
+      - >-
+        packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs
+      - >-
+        packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs
+      - >-
+        packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs
+      - >-
+        packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/fast.rs
+      - >-
+        packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay_all.py
+    versions:
+      - sha256: 92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193
+        note: >-
+          replay4d's printed source hash of the published crates; the source's full replay
+          ran 306ad4b5..., which differs in comments only, as the source says
+    note: >-
+      Not built or run here. The source says seam4d_core is the code its search tools use to
+      evaluate leaves, so a replay with it is the producer's own code re-run.
+  - id: V-wand125-closed-form-structure
+    program: structure/validate_family.py, run by structure/structure_all.py
+    author: wand125
+    provenance: external
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Checks each family's format and nonnegativity, the wall profile on the 1/5 grid with
+      mass 9/5 per period, the corner separation, the saving at both ends against the
+      certified line and delta/2, the total mass and C4 invariance for k = 7, 8, 9,
+      agreement with the local model on [0, 24/5]^2, the reduction of k >= 10 by wall
+      shifts, the right-side family, and the region bounds.
+    source:
+      - >-
+        packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/validate_family.py
+      - >-
+        packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/structure_all.py
+    versions:
+      - sha256: 22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786
+        note: validate_family.py as published and as run here
+      - sha256: 7e32c71d6e9bf65954a34739705543b34db827558589ebc7aec5d9c878044943
+        path: >-
+          packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/structure_all.py
+        note: structure_all.py
+    note: >-
+      Run here unchanged on 14 October 2026 (receipts/structure-check/). The source's
+      receipt names validate_family.py at fdd61866..., which is not the published file.
+  - id: V-closed-form-evaluation
+    program: closed_form_bounds.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Decides, from the retained intervals.json, what the closed-form theorem implies at
+      each count 49 to 324 by two routes, the closed form and the theorem's inequality, and
+      compares the value exactly with every case bound.
+    source:
+      - >-
+        packing/resources/web/wand125-closed-form-2026-10-14/evaluation/closed_form_bounds.py
+    versions:
+      - sha256: 1a430c0925d5abb20a0782f95aaff443d6b7bb77750b416a8a67f10a8df1e251
+    independence_record: >-
+      packing/resources/web/wand125-closed-form-2026-10-14/evaluation/README.md
+    independence:
+      read:
+        - mathematics
+        - proof-text
+        - producer-code
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the intake lane wand125-cf of the 14 October intake, tbd-moderate tier
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commit names Claude as co-author. Written by a Claude agent in a file
+          of its own that imports none of the source; its authors had read a_of_n.py,
+          README.md and SPEC.md first.
+    note: It decides nothing about the measure certificate.
+  - id: V-closed-form-review-a-by-definition
+    program: review/a_of_n_by_definition.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Encloses a(N) from the supremum of SPEC.md section 1.1 alone, by exact bisection on
+      each interval and exact separation of the candidates, at every non-square count to
+      3600, and decides the interval facts the corollaries use; compares the 30-place values
+      of the source's a_of_n.py and of the intake evaluation.
+    source:
+      - packing/resources/web/wand125-closed-form-2026-10-14/review/a_of_n_by_definition.py
+    versions:
+      - sha256: 6e7ed56592d13c25446f6bd76d1634b9532fef5ec0ca8acb2a8ebaa135bb0ad1
+    independence_record: >-
+      packing/resources/web/wand125-closed-form-2026-10-14/review/README.md
+    independence:
+      read:
+        - mathematics
+        - proof-text
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the mathematical review lane of the wand125-cf import (think-tsox), strong tier,
+            max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commit names Claude as co-author. Written by a Claude agent in a lane
+          prompted separately from the source and from the intake lane, in a file of its own
+          that imports none of the source; its author had read SPEC.md, README.md, a_of_n.py
+          and the checker first.
+    note: It decides what the theorem implies at a count and nothing about the certificate.
+  - id: V-closed-form-review-record-consistency
+    program: review/record_consistency.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Compares the enclosures of a(N) with the four lanes of the case records n = 49..324
+      and with the known values at m^2 - 1, -2, -3 and -4: a lower bound above a recorded
+      upper bound, or above a known value, would refute the claim.
+    source:
+      - packing/resources/web/wand125-closed-form-2026-10-14/review/record_consistency.py
+    versions:
+      - sha256: a0fc92993452d20da1b9f36e3890c39acf3cce54f7e6598b4b6887266562a0ae
+    independence_record: >-
+      packing/resources/web/wand125-closed-form-2026-10-14/review/README.md
+    independence:
+      read:
+        - mathematics
+        - proof-text
+        - specification
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the mathematical review lane of the wand125-cf import (think-tsox), strong tier,
+            max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          As above; it reads the case records through PyYAML and the enclosures of the first
+          program.
+    note: A consistency check that can refute and cannot establish.
+  - id: V-closed-form-review-localization
+    program: review/localization_checks.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Decides exactly the 29 numerical inequalities that SPEC.md sections 2.3, 4.1 and 5.1
+      assert in prose and no program of the source checks: corner and edge reach for k >= 7,
+      the periodic-shift ranges, the window containment of the checked regions, the coverage
+      of [0, 3.8 + delta] x [0, 3.8] by the four regions, the quarter-turn condition on the
+      u-range, the half-width bound, the window premise and the slopes.
+    source:
+      - packing/resources/web/wand125-closed-form-2026-10-14/review/localization_checks.py
+    versions:
+      - sha256: b3bbe6413b6e3dae0ab2a0cf1a2eb3c04cb4ff0c0c41e8baf04623ab96c4894a
+    independence_record: >-
+      packing/resources/web/wand125-closed-form-2026-10-14/review/README.md
+    independence:
+      read:
+        - mathematics
+        - proof-text
+        - specification
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the mathematical review lane of the wand125-cf import (think-tsox), strong tier,
+            max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          As above; the inequalities are the specification's, decided from its constants.
+    note: >-
+      These are premises of the proof that the structure check leaves to the specification.
+  - id: V-closed-form-review-replay-receipt
+    program: review/replay_receipt_pieces.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Checks the source's replay receipt against itself and the published files: the 158
+      pieces of the 25 cut records tile their regions, root counts and line-hash sums add
+      up, run and CPU-hour totals add up, and every record and family digest chains to
+      intervals.json through families.json and the published-build receipt.
+    source:
+      - packing/resources/web/wand125-closed-form-2026-10-14/review/replay_receipt_pieces.py
+    versions:
+      - sha256: 3da9b960c45e589150cdc42407683744dd6eb42ebcadbf931da48ee0a5156c96
+    independence_record: >-
+      packing/resources/web/wand125-closed-form-2026-10-14/review/README.md
+    independence:
+      read:
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the mathematical review lane of the wand125-cf import (think-tsox), strong tier,
+            max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: As above.
+    note: >-
+      A receipt is the author's statement; this decides only that it is consistent and names
+      the published files.
+  - id: V-closed-form-review-family-probe
+    program: review/family_probe.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      For one released interval: re-derives the family's structure and savings from SPEC.md
+      with code of its own, builds the global measure for several k and delta and decides
+      the mass identity, the support and the window identity, re-decides the product grid
+      and the tiling of the four region records by volume and pairwise disjointness, and
+      computes the mass of the global measure on closed unit squares exactly at random,
+      delicate and descent-found poses, which must be at least 1.
+    source:
+      - packing/resources/web/wand125-closed-form-2026-10-14/review/family_probe.py
+    versions:
+      - sha256: bb7a9d1df6d971964752e673230f088755792edced0dff7f6c571974863398b6
+    independence_record: >-
+      packing/resources/web/wand125-closed-form-2026-10-14/review/README.md
+    independence:
+      read:
+        - mathematics
+        - proof-text
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the mathematical review lane of the wand125-cf import (think-tsox), strong tier,
+            max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          As above. Its author read validate_family.py and the checker before writing it,
+          and ran validate_family.py once on one family to compare decompositions while
+          fixing a clipping bug of its own; the structure and savings code is written from
+          SPEC.md sections 2.1 and 3.2 and shares no line with the source.
+    note: >-
+      A sample: it ran to completion on interval 20 of 34, with 1,345 poses, and its runs on
+      intervals 7 and 34 were stopped before a receipt was written. It decides the structure
+      of interval 20's two families and the grids of its four records fully, the tiling of
+      its top record fully and of the other three on 200 roots each, and the claim itself
+      only at the poses it visited.
+  - id: V-wand125-cfcheck
+    program: cfcheck (indep-checker), its coverage, family, region and interval commands
+    author: wand125
+    provenance: external
+    language: [Rust]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides one interval of the closed-form certificate from SPEC.md: the input digests
+      against SHA256SUMS and intervals.json; both families' structure (the wall period of
+      mass 9/5, the reversal identities, the saving at both ends against the stored saving
+      and the certified line, global against local agreement at k = 7, 8, 9, the right-side
+      family); the region bounds; the product grid and 90-degree cover of each record's
+      roots; the bisection tiling of every root; the published counts; and every leaf by its
+      named exact test (EMPTY, CORE, B3D, EDGE, EX/EY, B3U, B3T, the nine CORE1 kinds, B4U),
+      with no fallback between tests. Its coverage command checks that the 34 intervals
+      partition (0, 1].
+    source:
+      - >-
+        packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src
+      - >-
+        packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/Cargo.toml
+      - >-
+        packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/Cargo.lock
+    versions:
+      - revision: 746e2c5ac7a7f534996dd50a5e1fd9f1d8836a8d
+        note: >-
+          The commit that adds it. The source's production build used rustc 1.99.0; the
+          build here used rustc 1.97.0 with the locked crates, and its release binary had
+          SHA-256 c5a163d48d10155dbe6d319a8a8cae8cab3feb9278c6fb7116c2d0396e686484.
+    independence_record: >-
+      packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/README.md
+    independence:
+      read:
+        - proof-text
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: person
+          name: Hiroaki Hosono (wand125)
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: >-
+            named by the checker's README, "written with AI assistance (OpenAI Codex),
+            reviewed by the author"; role, tier and reasoning setting not stated
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: named co-author of the commit that adds it; its role is not stated
+      overlaps_producer:
+        extent: people
+        separate_prompt: null
+        separate_code: true
+        note: >-
+          The person who reviewed it, Hiroaki Hosono, wrote the producer's code, and issue
+          #600 says the search, the certificates and both checkers were produced with Claude
+          and Codex, so the authorship overlaps in the person and in both system families.
+          clean_room is the source's statement ("which were not read"), which the code is
+          consistent with and which cannot be checked here. The code shares no file, line,
+          comment, local crate or arithmetic kernel with replay4d or seam4d_core
+          (comparison/outputs/shared-code.json); its structural overlap, 8 to 23 times that
+          of unrelated exact checkers, traces to procedures SPEC.md states step by step.
+          SPEC.md is the producer's description of its own checker's procedures: cfcheck
+          reads it as the specification and follows its names and constants, and reads the
+          producer's published counts and five a(N) values of its README table as outputs to
+          compare.
+    note: >-
+      Its relationship to the producer's code is independent-implementation. Its trust
+      boundary is SPEC.md's procedures: an error in replay4d's code is one it can expose,
+      and an error in a procedure SPEC.md prescribes is one it cannot. Not reviewed here for
+      soundness; the mathematical review of 14 October 2026 read replay4d and SPEC.md, not
+      cfcheck.

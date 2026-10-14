@@ -121,6 +121,7 @@ name: Certificate page
       - packing/devtools/templates/overview-article.md
       - packing/devtools/templates/atlas-article.md
       - packing/devtools/templates/about-article.md
+      - packing/devtools/templates/news-article.md
       - packing/devtools/templates/report-results.md
       - packing/devtools/templates/all-results-article.md
       - packing/devtools/templates/visualize-article.md
@@ -162,6 +163,7 @@ name: Certificate page
       - packing/resources/bibliography.yaml
       - epistemics.md
       - TUTORIAL.md
+      - TUTORIAL-ADVANCED.md
       - README.md
       - SYNOPSIS.md
       - conventions.md
@@ -187,6 +189,7 @@ name: Certificate page
       - packing/site-changelog.yaml
       - packing/site-changelog.schema.yaml
       - packing/devtools/render_changelog.py
+      - packing/devtools/news_highlights.py
       - packing/devtools/site_math.py
       - packing/devtools/node/render-site-math.mjs
       - packing/devtools/site_assets.py

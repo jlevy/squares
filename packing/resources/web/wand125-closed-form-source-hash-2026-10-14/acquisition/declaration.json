@@ -1,0 +1,108 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "wand125-closed-form",
+  "source_url": "https://github.com/wand125/square-packing",
+  "source_ref": "refs/heads/main",
+  "source_commit": "1c661b705422b58b5eb169589776b50c14be2a2f",
+  "retrieved_at_utc": "2026-10-14T17:26:58Z",
+  "git_scope": "Blobless clone of main, sparse-checked out at its head 1c661b7 (committed 2026-10-14T12:17:00Z), the only commit after the 746e2c5 pin of web/wand125-closed-form-cfcheck-2026-10-14/. It changes seven files of problems/closed-form/ and nothing else in the tree: README.md, SPEC.md, checker/Cargo.lock, checker/replay4d/Cargo.toml, checker/replay4d/src/main.rs, checker/replay_all.py and receipts/structure.json. The scope is the whole claim folder and the root LICENSE.md. The seven changed files are retained, with checker/seam4d_core/src/b3d_sort.rs, which the new source hash covers, its CPython licence notice, and the two licence files; the other 49 files are byte-identical to the copies the 9a28a84 and 746e2c5 packets retain and are pinned here against them. The release assets of closed-form-v1 are unchanged (ASSET.json is one of the identical files) and stay with the author. No source program was executed at acquisition.",
+  "archived_dir": "square-packing",
+  "license": "MIT for problems/closed-form/ (its LICENSE, Copyright (c) 2026 wand125), and for problems/closed-form/indep-checker/ (its LICENSE, Copyright (c) 2026 Hiroaki Hosono (wand125)). checker/seam4d_core/src/b3d_sort.rs is a port of CPython's list sort and keeps the Python Software Foundation licence beside it in CPYTHON_SORT_LICENSE. The root LICENSE.md says the repository has no single licence and that each folder keeps its own. The commit names Claude Opus 5.5 as co-author; the folder prose says nothing about AI assistance for replay4d.",
+  "claims": [
+    "replay4d 0.1.1 (checker/replay4d/Cargo.toml, Cargo.lock; README.md; SPEC.md section 9.4): the source hash replay4d prints now also covers seam4d_core/src/b3d_sort.rs, which b3d.rs includes and which versions up to 0.1.0 did not cover; the published sources of 0.1.1 hash to f8cafeab078e1de31bacdef9c5c08ad70938f1b1b20fd3a2e1e54de9f73f1742, against 92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193 for the published 0.1.0 sources and 306ad4b58b7e962f90e430b1adeaa8c52ad70f02f4807c96493036f6bb6cb476 for the sources of the full replay.",
+    "b3d_sort.rs (README.md): its SHA-256 is 23be1db0de55790110ff97c966bf34a6046c1d224a0f5bad98c6639866895928 in the sources used for the replay and in the published sources, and the file has not changed since. Nothing else in the checker changed except that each result now records B3_PLAIN_RF.",
+    "B3_PLAIN_RF (README.md, main.rs, replay_all.py): B3_PLAIN_RF=1 switches the rational-function arithmetic to the step-by-step reduction of the Python reference, with the same reduced form and so the same decisions; no run in the receipts set it, since neither the replay driver nor the commands of published_checker.json set the variable; from 0.1.1 each result records env.B3_PLAIN_RF (unset if not set), and replay_all.py prints it.",
+    "The structure receipt (receipts/structure.json; the commit message): regenerated with the published validate_family.py, whose SHA-256 22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786 it now names in place of fdd61866ca180e4373062f440cb8c61a626a2b71a411b63f5df46443d12a16a0."
+  ],
+  "scope": [
+    "LICENSE.md",
+    "problems/closed-form"
+  ],
+  "pinned_only": [
+    {
+      "match": "problems/closed-form/indep-checker/tests/fixtures/intervals.json",
+      "reason": "cfcheck's test fixture, unchanged since 746e2c5 and byte-identical to the certificate's intervals.json, which web/wand125-closed-form-2026-10-14/ retains.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/intervals.json"
+    },
+    {
+      "match": "problems/closed-form/indep-checker/*",
+      "reason": "cfcheck, unchanged since 746e2c5 and retained byte-identical in web/wand125-closed-form-cfcheck-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker"
+    },
+    {
+      "match": "problems/closed-form/indep-checker/.cargo/*",
+      "reason": "cfcheck, unchanged since 746e2c5 and retained byte-identical in web/wand125-closed-form-cfcheck-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/.cargo"
+    },
+    {
+      "match": "problems/closed-form/indep-checker/receipts/*",
+      "reason": "cfcheck, unchanged since 746e2c5 and retained byte-identical in web/wand125-closed-form-cfcheck-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/receipts"
+    },
+    {
+      "match": "problems/closed-form/indep-checker/src/*",
+      "reason": "cfcheck, unchanged since 746e2c5 and retained byte-identical in web/wand125-closed-form-cfcheck-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src"
+    },
+    {
+      "match": "problems/closed-form/indep-checker/tests/*",
+      "reason": "cfcheck, unchanged since 746e2c5 and retained byte-identical in web/wand125-closed-form-cfcheck-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/tests"
+    },
+    {
+      "match": "problems/closed-form/indep-checker/tests/fixtures/*",
+      "reason": "cfcheck, unchanged since 746e2c5 and retained byte-identical in web/wand125-closed-form-cfcheck-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/tests/fixtures"
+    },
+    {
+      "match": "problems/closed-form/indep-checker/tests/support/*",
+      "reason": "cfcheck, unchanged since 746e2c5 and retained byte-identical in web/wand125-closed-form-cfcheck-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/tests/support"
+    },
+    {
+      "match": "problems/closed-form/[!RLS]*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form"
+    },
+    {
+      "match": "problems/closed-form/checker/Cargo.toml",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker"
+    },
+    {
+      "match": "problems/closed-form/checker/replay4d/src/sha256.rs",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src"
+    },
+    {
+      "match": "problems/closed-form/checker/seam4d_core/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core"
+    },
+    {
+      "match": "problems/closed-form/checker/seam4d_core/src/b3d.rs",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src"
+    },
+    {
+      "match": "problems/closed-form/checker/seam4d_core/src/[flr]*.rs",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src"
+    },
+    {
+      "match": "problems/closed-form/checker/seam4d_core/tests/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/tests"
+    },
+    {
+      "match": "problems/closed-form/receipts/[!s]*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/receipts"
+    },
+    {
+      "match": "problems/closed-form/structure/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure"
+    }
+  ]
+}

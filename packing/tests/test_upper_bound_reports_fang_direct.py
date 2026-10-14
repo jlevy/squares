@@ -42,9 +42,8 @@ PRINTED = {
     758: ("27.996346242823117", SECOND),
     814: ("28.999873603982716", SECOND),
 }
-#: The counts the receipt covers: those the report-order ledger turns on. The other eleven
-#: wait for an owner's replay budget (think-7bw3).
-REPLAYED = [380, 381, 382]
+#: The counts the receipt covers: all fourteen, each kept as its own receipt shard.
+REPLAYED = list(PRINTED)
 #: When each other report at 380, 381 and 382 reached the record: the standing rows from
 #: issue #506, then Miles Gray's #582 and Francisco Couzo's #583 and #586.
 REACHED = {
@@ -52,6 +51,8 @@ REACHED = {
     "#582": "2026-10-13T11:38:11Z",
     "#583": "2026-10-13T14:11:17Z",
     "#586": "2026-10-13T17:37:01Z",
+    # Issue 586's packet, read as the source register's current row at 380 to 382.
+    "couzo-certificates-2026-10-13": "2026-10-13T17:37:01Z",
 }
 
 
@@ -142,23 +143,24 @@ def test_the_claims_name_couzos_later_reports_smallest_at_380_381_and_382() -> N
     rows = _rows()
     assert all(row["case"] is None and row["requested"] for row in rows.values())
     assert [n for n, row in rows.items() if row["replayed"]] == REPLAYED
-    assert {n: row["smallest"] for n, row in rows.items() if n <= 382} == {
-        380: "#586",
-        381: "#583",
-        382: "#586",
-    }
+    # Issue 586's certificates are the source register's current rows at 380 to 382, and at
+    # 381 issue 583's is the same certificate; each is read as that row (review A1 of #602).
+    current = "couzo-certificates-2026-10-13"
+    assert {n: row["smallest"] for n, row in rows.items() if n <= 382} == dict.fromkeys(
+        (380, 381, 382), current
+    )
     relations = {n: {p["report"]: p["relation"] for p in rows[n]["pending"]} for n in rows}
     assert relations[380] == {
         "couzo-certificates-2026-10-11": "below",
         "#583": "above",
-        "#586": "above",
+        current: "above",
     }
     assert relations[381] == {
         "couzo-certificates-2026-10-11": "below",
         "#582": "below",
-        "#583": "above",
+        current: "above",
     }
-    assert relations[382] == {"#583": "above", "#586": "above"}
+    assert relations[382] == {"#583": "above", current: "above"}
     # Nothing the record tracks, and no other report, names the other eleven counts.
     for n in set(rows) - {380, 381, 382}:
         assert (rows[n]["pending"], rows[n]["smallest"]) == ([], reports.THIS)
@@ -184,7 +186,9 @@ def test_in_report_order_each_certificate_at_380_to_382_is_below_every_earlier_r
             set() if n == 382 else {"couzo-certificates-2026-10-11"}
         )
         assert {p["report"] for p in later if p["relation"] == "above"} == (
-            {"#583"} if n == 381 else {"#583", "#586"}
+            {"couzo-certificates-2026-10-13"}
+            if n == 381
+            else {"#583", "couzo-certificates-2026-10-13"}
         )
 
 
@@ -218,10 +222,13 @@ def test_the_plan_registers_no_entry_and_one_beyond_horizon_row_a_count() -> Non
     assert plan["bibliography.yaml"]["dated"] == "2026-10-13"
 
 
-def test_the_receipt_admits_every_job_of_the_three_replayed_counts_on_both_routes() -> None:
+def test_the_receipt_admits_every_job_of_every_count_on_both_routes() -> None:
     packet = _packet()
     positives = reports.check_certification(packet)
     assert list(positives) == REPLAYED
+    # The whole would exceed the kernel's evidence ceiling, so each count has its shard.
+    assert not (packet / reports.RECEIPT).exists()
+    assert all((packet / reports.shard(n)).is_file() for n in REPLAYED)
     _declaration, facts = reports.replayed_facts(packet)
     parts = reports.receipt_parts(packet, facts)
     record = {"cases": [row for part, _ in parts for row in part["cases"]]}

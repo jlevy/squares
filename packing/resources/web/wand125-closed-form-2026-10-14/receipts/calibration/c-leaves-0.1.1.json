@@ -1,0 +1,449 @@
+{
+  "bad": [],
+  "bad_count": 0,
+  "cpu_seconds": 2.277265,
+  "env": {
+    "B3_PLAIN_RF": "unset"
+  },
+  "family": {
+    "path": "interval_0.495_0.5/family.json",
+    "sha256": "224f6d0f43d6b864af1ec5cbeb1007fb39880c36881c36649d046dcc1fd72bd3"
+  },
+  "kinds": {
+    "CORE1:Tx": 20
+  },
+  "leaves": [
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-9/32",
+        "-1/4",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 16
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:1"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-3/32",
+        "-1/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 24
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:2"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-1/32",
+        "0",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 24
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:3"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-7/32",
+        "-3/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 32
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:4"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-13/32",
+        "-3/8",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:5"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "1/32",
+        "1/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 24
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:6"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-1/16",
+        "-1/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:7"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-5/32",
+        "-1/8",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:8"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-1/8",
+        "-3/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:9"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-3/8",
+        "-11/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 48
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:10"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-3/16",
+        "-5/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 48
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:11"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-5/16",
+        "-9/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 64
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:12"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "3/32",
+        "1/8",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 48
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:13"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-11/32",
+        "-5/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 72
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:14"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "1/16",
+        "3/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 72
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:15"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "5/32",
+        "3/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:16"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "7/32",
+        "1/4",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 48
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:17"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-1/4",
+        "-7/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 88
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:18"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "13/32",
+        "7/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:19"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "141/50",
+        "73/25",
+        "-7/32",
+        "-3/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 32
+        },
+        "ok": true
+      },
+      "source": "controls/leaves.jsonl:20"
+    }
+  ],
+  "mode": "leaves",
+  "ok": true,
+  "records": [
+    {
+      "path": "controls/leaves.jsonl",
+      "sha256": "1f2425cbf9f6c49556ab2c9bf2365038e56ab32f8ca8f68d4bbcde1662a79ae3"
+    }
+  ],
+  "roots": 0,
+  "source_sha256": "f8cafeab078e1de31bacdef9c5c08ad70938f1b1b20fd3a2e1e54de9f73f1742",
+  "version": "0.1.1",
+  "wall_seconds": 2.298063929
+}

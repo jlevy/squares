@@ -47,9 +47,8 @@ browser made of that:
   to the triangle (0, 25, 50, 75 and 100 percent).
 - `readme` writes the one picture README opens with to `--out`: the tiles alone, every
   case in the triangle at the page's own size, in the light theme, at twice the pixels
-  of a window wide enough that no row pans (`README_WINDOW`) once the block's cap on its
-  width is lifted (the `widen` probe), cut to the tiles. Run it on the published site, so
-  the picture shows what a reader who clicks it finds.
+  of a window wide enough that no row pans (`README_WINDOW`), cut to the tiles. Run it
+  on the published site, so the picture shows what a reader who clicks it finds.
 
 `PAGE` is a built `atlas.html`, a directory `preview_site` built, or the address of a
 published one, such as `https://jlevy.github.io/squares/atlas.html`. `--render` renders
@@ -95,7 +94,6 @@ SETTLED = probe(PROBES, "measure_atlas_views/settled")
 TOP = probe(PROBES, "measure_atlas_views/top")
 QUIET = probe(PROBES, "measure_atlas_views/quiet")
 DRAWN = probe(PROBES, "measure_atlas_views/drawn")
-WIDEN = probe(PROBES, "measure_atlas_views/widen")
 WHOLE = probe(PROBES, "measure_atlas_views/whole")
 
 MODES = ("layout", "move", "shots", "readme")
@@ -672,7 +670,6 @@ def readme(address: str, target: Path) -> Path:
         browser = launch(driver)
         page = open_atlas(browser, address, width=width, height=height, pixels=README_PIXELS)
         expand(page)
-        page.evaluate(WIDEN)
         page.wait_for_function(WHOLE)
         settle(page)
         page.mouse.move(0, 0)

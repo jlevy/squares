@@ -5579,6 +5579,7 @@ STEPS: tuple[Step, ...] = (
             "SYNOPSIS.md",
             "README.md",
             "TUTORIAL.md",
+            "TUTORIAL-ADVANCED.md",
         ),
     ),
     Step(

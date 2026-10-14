@@ -1,0 +1,87 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T04:47Z",
+  "git_scope": "Full clone of the sixteen-commit repository, head 318ab94 at retrieval, checked out at the pin issue #569 names. The scope is the seven n272 files the pinned commit adds and witness.schema.yaml, which the release's digest list names; the pin's n105 files belong to the n105 packet, which pins the same commit. Every file in the scope has the same blob at the head 318ab94. Under derived-only custody none is copied. No source program was executed.",
+  "sources": [
+    {
+      "id": "buddenping-square-packing-certificates",
+      "source_url": "https://github.com/BuddenPing/square-packing-certificates",
+      "source_ref": "main",
+      "source_commit": "260aaf50230483654802790589c2dfce73237604",
+      "committed_utc": "2026-10-12T22:57:18Z",
+      "git_tree": "77398835e64d7623683e164080b9628d6c4c9221",
+      "archived_path": "packing/resources/web/pingyou-n272-refinement-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/pingyou-n272-refinement-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "n272-README.txt",
+        "n272-SHA256SUMS",
+        "n272-native-replay.json",
+        "n272-squares-project.zip",
+        "n272-verification.json",
+        "n272.cert.json",
+        "pingyou-n272-rational.yaml",
+        "witness.schema.yaml"
+      ],
+      "subtree_file_count": 8,
+      "subtree_total_bytes": 1476638,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "n272-README.txt",
+          "bytes": 3195,
+          "sha256": "be84525d1b247db55391302c1a662f6516bb2adacd8af8bc4ff20702e86fa9b4",
+          "reason": "Author prose stating the claim, the method, the credit and the replay commands, quoted in this packet's README. No licence: pinned by digest only."
+        },
+        {
+          "path": "n272-SHA256SUMS",
+          "bytes": 612,
+          "sha256": "8022b9f3cf921a02935e54be31afb9b5d2948bdc14b59b648b31ceb3854d3e6d",
+          "reason": "The source's digest list for the n272 release files, each equal to the digest this manifest records. Pinned by digest only."
+        },
+        {
+          "path": "n272-native-replay.json",
+          "bytes": 4483,
+          "sha256": "19d759cdab86d4755c7b8c443cb9787ad6ea461e8b5f1723bd2b8ef5e1d8eaf9",
+          "reason": "The author's receipt of this repository's two exact checkers run on the release's witness at 074ac28, an author report. Pinned by digest only."
+        },
+        {
+          "path": "n272-squares-project.zip",
+          "bytes": 464822,
+          "sha256": "ccc49fa5c2660a4cc95255951870e2f0d271272cd9c2d698755e55ccd32d3a5e",
+          "reason": "The source's complete package of 65 files: the certificate and witness again, the construction equations and solver states, the source certificate and Evan Daniel's solver with its licence, the pre-stationarity projection and a scoped dual bound, exact checkers, receipts, and the sources and licences of this repository's two checkers at 074ac28. No licence for the source's own files: pinned by digest only; no program in it was executed."
+        },
+        {
+          "path": "n272-verification.json",
+          "bytes": 3388,
+          "sha256": "eb2d84da9d7b34ffc6c7fec02ccb2ff01c1d1b4e96ea2d5fd34ae2ccd6dc1cc9",
+          "reason": "The author's receipt of its own exact checks, an author report. Pinned by digest only."
+        },
+        {
+          "path": "n272.cert.json",
+          "bytes": 150545,
+          "sha256": "1bfe74e4af5dba4bfb6865ad953ff169620c2b85d91f919abd0ef5527cae21e0",
+          "reason": "The exact rational certificate: n, s_exact and 272 [x, y, t] rows of rational strings, centres in [0, S]^2 and t = tan(theta/2). No licence, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "pingyou-n272-rational.yaml",
+          "bytes": 840580,
+          "sha256": "b620b946df1c5f9ab2926c9d545dbf5de42d11f5f1f58d2329655abd0a38820d",
+          "reason": "The source's rational corners Witness/v2 of the same packing, in JSON syntax. No licence: pinned by digest only; derive reads it from the same checkout and holds it to the certificate's poses and side."
+        },
+        {
+          "path": "witness.schema.yaml",
+          "bytes": 9013,
+          "sha256": "754ddd6eea0558344c174302318ed1e7235d9665f37ef4f6fdea1f1e627664dc",
+          "reason": "This repository's witness schema as the source copied it; the release's digest list names it. Pinned by digest only."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and GitHub detects none. The release READMEs say that upstream software and schema licences are retained beside the files they cover and that no new licence is asserted for third-party material; nothing grants one for the source's own files. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source asks that PingYou Ltd be credited with this contact refinement, Nate Chaoweeraprasit (SQUISH) with the original arrangement and its components, and Evan Daniel with the contact solver.",
+      "claims": [
+        "Issue #569 reports the exact rational certificate s(272) <= 1696558647483767063575600703342204556962987576825904423514291493830293022275118026464939778830359993334240647227/10^110 (rounded up, 16.9655864748376706357560070334220455696299): Evan Daniel's solver at 31523f8, seeded with SQUISH's n272 certificate at itsnaka/squish-certs 56fa71f, solving its 1,564 inherited incidence equations and the stationarity system with 22 translation coordinates frozen, at 120 digits with a 1e-100 rational guard. The author compares it with that certificate (T-151), whose side it reduces by about 5.26079948951952e-16.",
+        "The source reports that exact separating-axis and rational polygon-intersection implementations accept all 272 squares, 1,088 wall conditions and 36,856 pairs, and that this repository's sqpack exact_verify and check_rational_witness_independent at 074ac28 accept its native Witness/v2. These are author reports; no stationarity, local or global optimality is claimed."
+      ]
+    }
+  ]
+}

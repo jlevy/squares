@@ -1558,6 +1558,12 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_valid_pooled_topologies_include_overlap_one_child_and_touching_boundaries",
             "test_execution_manifest_closure_and_every_missing_path",  # 10.47s
         },
+        # 5s of call time across 1, on 2026-10-14 under load. Rebuilds the whole receipt,
+        # all 17 decided comparisons and the four gated rows, from the retained sides;
+        # the fast tests re-decide eight cheap rows.
+        "test_decide_undecided_comparisons.py": {
+            "test_the_whole_receipt_is_current",  # 5.0s
+        },
         # 7s of call time across 1.
         "test_render_colors.py": {
             "test_right_angles_and_diagonals_are_pinned_across_the_atlas",  # 6.5s

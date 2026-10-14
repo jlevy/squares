@@ -1178,6 +1178,46 @@ The gate step `the branch cost rollup renders` runs the renderer over every bran
 the records, including one no rollup mentions, because a division by a turn count fails
 on exactly that edge.
 
+## Merging a Pull Request
+
+**A pull request merges with a merge commit.** That is the repository’s policy (the
+owner, 2026-10-14: “Always merge with a merge commit.
+Squashes cause problems.”). Squash only for a significant reason, such as removing
+extraneous items from history, and say in the pull request why.
+Rebase-merging is not the default either.
+
+A squash or a rebase lands the branch as new commits, and leaves the branch’s own
+commits on no branch once it is deleted.
+The record names those commits:
+
+- A release cut sets `PUBLICATION_REVISION` to the commit it runs on, the branch’s head
+  at the cut ([Cutting an edition](#cutting-an-edition)), and the claim documents link
+  to it, so it has to stay reachable from `main`.
+- Recorded engine and provenance commits, which `check_provenance` resolves, and the
+  claim documents’ verifier pins name branch commits.
+- A stacked or dependent branch loses its ancestry: its base’s commits are no longer in
+  `main`, and merging it replays them as conflicts.
+- A link to the commit a page was built from 404s, which is why `check_published_site`
+  refuses repository links that name a commit
+  ([Publishing the Explainer](#publishing-the-explainer)).
+
+## Issue and Pull-Request Labels
+
+Issues and pull requests on jlevy/squares carry labels from this set, which is the
+repository’s policy (the owner, 2026-10-14). Labels combine: an import for the
+seventeen-square case carries `n-17,intake`.
+
+| Label | Carried by |
+| --- | --- |
+| `intake` | An issue or pull request that brings in, validates, tabulates or credits new results: every result-registration issue, every intake pull request, an external pull request that submits results (jlevy/squares#574), and an issue the project opens itself for an unreported result scored `S4` or above |
+| `tracker` | A tracking issue for a major effort |
+| `n-11`, `n-17`, `n-18` | Work on a notable case. A count gets a case label once it has a tracker issue of its own, or an optimality proof or claim under review. A new one is named `n-<k>`, coloured `7E3D1D` as the others are, and described `Work on the n = <k> case…` |
+| `deep-gate` | A pull request whose [deferred surface](#the-deep-gate-the-deferred-surface-before-the-merge) runs before merge; the label’s own description lists what that surface runs |
+| `bug`, `enhancement`, `documentation`, `question`, `duplicate`, `invalid`, `wontfix`, `good first issue`, `help wanted` | GitHub’s defaults, in their usual senses; `question` also marks a list of decisions for the owner, such as jlevy/squares#543 |
+
+An intake pass adds `intake` and any case label under the `github-workflows` grant
+([the runbook’s stage 0](packing/campaign/result-import.md#stage-0-sweep)).
+
 ## The Published Site
 
 Every content page is complete in its first HTML response: navigation, headings,
@@ -1853,9 +1893,8 @@ website or anything else.
 
 ### Maintaining the project changelog
 
-[`CHANGELOG.md`](CHANGELOG.md) and the bottom of
-[About](https://jlevy.github.io/squares/about.html#changelog) are generated from
-[`packing/site-changelog.yaml`](packing/site-changelog.yaml).
+[`CHANGELOG.md`](CHANGELOG.md) and [News](https://jlevy.github.io/squares/news.html) are
+generated from [`packing/site-changelog.yaml`](packing/site-changelog.yaml).
 Edit the YAML, then run
 `uv run --frozen --all-extras --group dev python -m devtools.render_changelog` from
 `packing/`; its `--check` mode runs in the ordinary documentation gate.
@@ -1915,7 +1954,7 @@ The validator uses `HEAD^1` on a main checkout whose head already equals `origin
 so it checks the preceding delivery rather than comparing a commit with itself.
 
 Validate with the change-reachable push tier, review both reader views, and verify the
-published About section with the normal deployment audit after merging.
+published News page with the normal deployment audit after merging.
 The
 [initial backfill review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md)
 records the disposition of the first 36 PRs.

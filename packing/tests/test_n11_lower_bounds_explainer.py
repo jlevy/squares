@@ -145,8 +145,11 @@ def test_the_bar_marks_papers_current_on_the_explainer(page: str) -> None:
     so the bar's links climb one level to the site's root. The bar is the site's one
     partial, so its entries stand in the order every other page has them."""
     assert page.count(render_overview.nav_html("papers", root=SITE_ROOT)) == 1
-    assert re.findall(r'<a data-page="(\w+)" aria-current="page"', page) == ["papers"]
-    assert '<a data-page="papers" aria-current="page" href="../papers.html">Papers</a>' in page
+    assert re.findall(r'<a data-page="(\w+)" aria-current="page"', page) == ["explanations"]
+    assert (
+        '<a data-page="explanations" aria-current="page" href="../papers.html">Explanations</a>'
+        in page
+    )
     assert 'data-page="explainer"' not in page
     assert SLUG == "n11-lower-bounds-explainer"
     assert f"papers/{SLUG}.html" == SITE_PATH
@@ -850,7 +853,8 @@ def test_the_pages_filter_covers_every_overview_input() -> None:
     and the pages beside it showing the previous render with every check green.
     """
     declared = render_overview.inputs()
-    assert REPO / "TUTORIAL.md" in declared
+    for tutorial in ("TUTORIAL.md", "TUTORIAL-ADVANCED.md"):
+        assert REPO / tutorial in declared
     assert REPO / "packing/frontier/evidence.yaml" in declared
     from devtools.evand_exact_certificates import COMPARISON_RECEIPT  # noqa: PLC0415
 
@@ -862,9 +866,10 @@ def test_the_pages_filter_covers_every_overview_input() -> None:
             if not covered(path, patterns)
         ]
         assert not missing, f"{event}: overview inputs not covered by paths: {missing}"
-        without_documents = [p for p in patterns if p != "TUTORIAL.md"]
-        exposed = [path for path in declared if not covered(path, without_documents)]
-        assert exposed == [REPO / "TUTORIAL.md"], event
+        for tutorial in ("TUTORIAL.md", "TUTORIAL-ADVANCED.md"):
+            without_documents = [p for p in patterns if p != tutorial]
+            exposed = [path for path in declared if not covered(path, without_documents)]
+            assert exposed == [REPO / tutorial], event
         receipt = COMPARISON_RECEIPT.relative_to(REPO).as_posix()
         without_receipt = [pattern for pattern in patterns if pattern != receipt]
         exposed = [path for path in declared if not covered(path, without_receipt)]
@@ -1328,7 +1333,7 @@ def test_reader_facing_version_references_follow_release_metadata() -> None:
     readme = (REPO / "README.md").read_text()
     assert PUBLICATION_VERSION in readme
     assert "its papers and the atlas posters are at edition" not in readme
-    tutorial = (REPO / "TUTORIAL.md").read_text()
+    tutorial = (REPO / "TUTORIAL-ADVANCED.md").read_text()
     assert f"the standalone {EXPLAINER_VERSION} explainer" in tutorial
     if PUBLICATION_VERSION != EXPLAINER_VERSION:
         assert PUBLICATION_VERSION not in tutorial

@@ -102,7 +102,7 @@ ceiling from its holder’s own packet.
 
 | n | Case ceiling, holder | Below it by | Other reports at the count | Smallest |
 | --- | --- | --- | --- | --- |
-| 129 | 11.8720298490811800, ry-xu’s packing in Evan Daniel’s regularization (T-146) | $2.02 \times 10^{-3}$ | #593 prints 11.8700138504044652 | this certificate |
+| 129 | 11.8720298490811800, Ryan Xu’s packing in Evan Daniel’s regularization (T-146) | $2.02 \times 10^{-3}$ | #593 prints 11.8700138504044652 | this certificate |
 | 204 | 14.82287565553229 = 27/2 + √7/2 in the catalogue; verified at 14.82287565553230 by Evan Daniel’s exact ceiling (T-101, T-155) | $1.42 \times 10^{-2}$ | #593 prints 14.8086632343869571 | this certificate |
 | 303 | 17.9130654627385324, Nate Chaoweeraprasit’s packing in Evan Daniel’s regularization (T-146) | $3.11 \times 10^{-3}$ | #593 prints 17.9099582910699091 | this certificate |
 | 176, not requested | 13.8128562532770564, Nate Chaoweeraprasit (T-151) | $4.19 \times 10^{-3}$ | #561 (Couzo) 13.807637227056, #575 and #593 are each smaller, by $1.03 \times 10^{-3}$, $1.28 \times 10^{-2}$ and $1.28 \times 10^{-2}$ | #575 or #593, undecided at #593’s print |

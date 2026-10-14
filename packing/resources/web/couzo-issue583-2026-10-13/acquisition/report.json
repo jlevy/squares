@@ -1,0 +1,68 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/583",
+  "author": "Francisco Couzo",
+  "source_key": "[Couzo issue-583 certificates 2026-10-13]",
+  "report_evidence": "E-couzo-583-certificate-report",
+  "receipt_format": "couzo-583-exact-replay-v1",
+  "witness_prefix": "W-couzo-583-n",
+  "claim_limitations": "Complete 4596670 rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "287d9cba1d1777ec5531aa8eb73817e7faf82c2a",
+  "certificates": [
+    {"n": 154, "path": "certificates/n154.cert", "format": "evand-cert", "offered": "12.922499814643", "first_committed": "2026-10-13T13:53:57Z"},
+    {"n": 211, "path": "certificates/n211.cert", "format": "evand-cert", "offered": "14.993558914123", "first_committed": "2026-10-13T13:53:57Z"},
+    {"n": 241, "path": "certificates/n241.cert", "format": "evand-cert", "offered": "15.987117095169", "first_committed": "2026-10-13T13:53:57Z"},
+    {"n": 339, "path": "certificates/n339.cert", "format": "evand-cert", "offered": "18.927383638495", "first_committed": "2026-10-13T13:53:57Z"},
+    {"n": 379, "path": "certificates/n379.cert", "format": "evand-cert", "offered": "19.953531531603", "first_committed": "2026-10-13T13:53:57Z"},
+    {"n": 380, "path": "certificates/n380.cert", "format": "evand-cert", "offered": "19.973553606628", "first_committed": "2026-10-13T13:53:57Z"},
+    {"n": 382, "path": "certificates/n382.cert", "format": "evand-cert", "offered": "19.988600568289", "first_committed": "2026-10-13T13:53:57Z"}
+  ],
+  "requested": [154, 211, 241, 339, 379, 380, 382],
+  "replayed": [154, 211, 241, 339, 379, 380, 382],
+  "houses": [
+    {"n": 154, "reader": "[Daniel n154 2026-10-12]", "source_key": "[Daniel n154 2026-10-12]", "holders": "Evan Daniel", "result": "T-160", "reported_value": "12.9225664019340596", "verified_value": "12.9225664019340596", "evidence": ["E-evand-552-exact-feasibility"]},
+    {"n": 211, "reader": "[Ostashev records 2026-10-11]", "source_key": "[Ostashev records 2026-10-11]", "holders": "Daniil Ostashev", "result": "T-149", "reported_value": "14.9963367213363157", "verified_value": "14.9963367213363157", "evidence": ["E-ostashev-501-exact-feasibility"]},
+    {"n": 241, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "15.988132439524990848590591447359", "verified_value": "15.988132439524990848590591447359", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]}
+  ],
+  "pending": [
+    {"n": 154, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 154, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 154, "report": "#573", "url": "https://github.com/jlevy/squares/issues/573", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk exact certificates 2026-10-12]"},
+    {"n": 211, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 211, "report": "#575", "url": "https://github.com/jlevy/squares/issues/575", "holders": "Daniil Ostashev", "reader": "[Ostashev merged bands 2026-10-13]"},
+    {"n": 211, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 211, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 241, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 241, "report": "#575", "url": "https://github.com/jlevy/squares/issues/575", "holders": "Daniil Ostashev", "reader": "[Ostashev merged bands 2026-10-13]"},
+    {"n": 241, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 241, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 339, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "18.929433883808", "rounding": "up"},
+    {"n": 339, "report": "#584", "url": "https://github.com/jlevy/squares/issues/584", "holders": "Evan Daniel", "reader": "[Daniel compositions 2026-10-13]"},
+    {"n": 339, "report": "couzo-certificates-2026-10-13", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "18.925319360704", "rounding": "up"},
+    {"n": 379, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.953572709539", "rounding": "up"},
+    {"n": 379, "report": "#570", "url": "https://github.com/jlevy/squares/issues/570", "holders": "Francisco Couzo", "printed": "19.953542593650", "rounding": "up"},
+    {"n": 379, "report": "couzo-certificates-2026-10-13", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.953531362123", "rounding": "up"},
+    {"n": 380, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.987440766556", "rounding": "up"},
+    {"n": 380, "report": "Kevin Fang's publication of 12 October", "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/n0380/n0380.cert", "holders": "Kevin Fang", "printed": "19.976775433975", "rounding": "up"},
+    {"n": 380, "report": "couzo-certificates-2026-10-13", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.961611078672", "rounding": "up"},
+    {"n": 382, "report": "Kevin Fang's publication of 13 October", "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/n0382/n0382.cert", "holders": "Kevin Fang", "printed": "19.989479729400", "rounding": "up"},
+    {"n": 382, "report": "couzo-certificates-2026-10-13", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.987713157610", "rounding": "up"}
+  ],
+  "register": {
+    "title": "Francisco Couzo's exact rational certificates at 4596670, issues 570 and 583",
+    "headline": "Exact rational certificates at 211 and 241 from Francisco Couzo, later tightened by issue 586",
+    "significance": 2,
+    "source_checks": "The author reports that every certificate of issue 583 passes this repository's sqpack verify.py at 562fdbd and Evan Daniel's verify_cert.py at 31523f8 in exact rational arithmetic; that 154, 211, 241, 302 and 381 are exact optima from Evan Daniel's exact contact solver; and that 339, 379, 380 and 382 are rational witnesses of their decimal packings. Issue 570's 154 is this commit's n154.cert by its SHA-256. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), with the packings each started from, as the author asks: Evan Daniel's 154 arrangement of issue 552, continued through the author's browser refinement, native basin hopping and exact finishing; Daniil Ostashev's 211 and 241 arrangements of issue 575, continued with native search and refinement. Beyond the case corpus, 339 and 379 continue the author's L-border constructions of issue 506, and 380 and 382 continue Kevin Fang's published arrangements (TheSnakeFang/squarepack-certs). Evan Daniel's optimizer, exact contact solver and verifier, David Ellsworth's search and refinement ideas, and this project's sqpack verifier were used. The author states that OpenAI Codex assisted the search implementation, the verification orchestration and the requests, that earlier search work used Claude Code, and that he directed the work.",
+    "next_rung": "Independently review the retained replay before any selected-house replacement: issue 586's certificates at b85dee2 are smaller at every count this packet holds, and at 154 issue 570 reported this same certificate first. Then record source-specific adoption and confirming evidence. Final exact-head CI remains required.",
+    "bead": "think-rfce",
+    "bibliography": {
+      "authors": ["Couzo"],
+      "lineage": "builds-on-project",
+      "credit": "Couzo after Daniel, Ostashev, Fang, Ellsworth, Levy",
+      "short_credit": "Couzo after Daniel et al.",
+      "note": "Seven complete exact certificates at 45966700cf15d3f42e064fd6da51fcb9a5def2be that issue 583 names and b85dee2 replaced: 154 (issue 570's, by SHA-256) continued from Daniel's issue-552 arrangement, 211 and 241 from Ostashev's, and 339, 379, 380 and 382 beyond the case corpus continuing the author's issue-506 L-border constructions and Fang's 380-382. The source checks with Squares Project (Levy) verification code; this project lineage is not independent. The certificates are retained as factual data; the unlicensed prose is hash-pinned. No optimizer, local or global claim."
+    }
+  }
+}

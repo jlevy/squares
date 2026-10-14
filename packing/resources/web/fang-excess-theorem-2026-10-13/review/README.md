@@ -43,6 +43,12 @@ and in files of its own.
 | [`receipt_summary.py`](programs/receipt_summary.py) | Reads a packet’s exact replay receipt and claims record: the jobs and their sums, each positive’s deciding input against the retained certificate, both routes’ verdicts and least margins, each control’s refusal; each claim’s round-ups, grid gap and every comparison with another report, recomputed | `acquisition/report.json`, `acquisition/claims.json`, `receipts/exact-certification.json.xz`, the retained certificates, of this packet and of the direct-certificates packet | [`receipt_theorem.out`](outputs/receipt_theorem.out), [`receipt_direct.out`](outputs/receipt_direct.out) |
 | [`pieces_digests.py`](programs/pieces_digests.py) | Which file each digest of `theorem/PIECES.md` identifies: the retained file, its bytes without comment lines, or neither | `theorem/PIECES.md` and the 31 piece files | [`pieces_digests.out`](outputs/pieces_digests.out) |
 
+`receipt_direct.out` read the direct-certificates packet's single-file receipt, which then
+covered 380 to 382. The replay of the other eleven direct certificates on 14 October split
+that packet's receipt into per-count files (`receipts/exact-certification-nNNN.json.xz`),
+so `receipt_summary.py` still reads this packet's receipt but no longer the direct packet's.
+The kept output stands for what it read.
+
 ## What They Decide
 
 Nothing here is registered yet; the review proposes the `verifiers.yaml` entries and the

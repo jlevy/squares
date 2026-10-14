@@ -18,18 +18,24 @@
   "requested": [129, 204, 303],
   "replayed": [129, 204, 303],
   "houses": [
-    {"n": 129, "reader": "[Daniel regularized lists 2026-10-10]", "source_key": "[Daniel regularized lists 2026-10-10]", "holders": "ry-xu, improved by Evan Daniel", "result": "T-146", "reported_value": "11.8720298490811800", "verified_value": "11.8720298490811800", "evidence": ["E-evand-regularized-exact-feasibility"]},
+    {"n": 129, "reader": "[Daniel regularized lists 2026-10-10]", "source_key": "[Daniel regularized lists 2026-10-10]", "holders": "Ryan Xu, improved by Evan Daniel", "result": "T-146", "reported_value": "11.8720298490811800", "verified_value": "11.8720298490811800", "evidence": ["E-evand-regularized-exact-feasibility"]},
     {"n": 176, "reader": "[SQUISH fourth request 2026-10-11]", "source_key": "[SQUISH fourth request 2026-10-11]", "holders": "Nate Chaoweeraprasit", "result": "T-151", "reported_value": "13.8128562532770564", "verified_value": "13.8128562532770564", "evidence": ["E-squish-500-exact-feasibility"]},
     {"n": 204, "reader": "[evand exact optima 2026-10-05]", "source_key": "[Kingbird]", "holders": "the Kingbird catalogue, verified by Evan Daniel's exact ceiling", "result": "T-101", "reported_value": "14.82287565553229", "verified_value": "14.82287565553230", "evidence": ["E-evand-exact-ceilings-2026-10-05-exact-replay", "E-evand-exact-ceilings-2026-10-05-source-replay", "E-regularized-bounds-2026-10-12-exact-decision"], "reported_rounding": "unstated"},
     {"n": 303, "reader": "[Daniel regularized lists 2026-10-10]", "source_key": "[Daniel regularized lists 2026-10-10]", "holders": "Nate Chaoweeraprasit, improved by Evan Daniel", "result": "T-146", "reported_value": "17.9130654627385324", "verified_value": "17.9130654627385324", "evidence": ["E-evand-regularized-exact-feasibility"]}
   ],
   "pending": [
-    {"n": 129, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "11.8700138504044652", "rounding": "unstated"},
-    {"n": 176, "report": "#561", "url": "https://github.com/jlevy/squares/issues/561", "holders": "Francisco Couzo", "printed": "13.807637227056", "rounding": "up"},
-    {"n": 176, "report": "#575", "url": "https://github.com/jlevy/squares/issues/575", "holders": "Daniil Ostashev", "printed": "13.79587231843640726331185405391207744387", "rounding": "up"},
-    {"n": 176, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "13.7958723184364072", "rounding": "unstated"},
-    {"n": 204, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "14.8086632343869571", "rounding": "unstated"},
-    {"n": 303, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "17.9099582910699091", "rounding": "unstated"}
+    {"n": 129, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 129, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 176, "report": "#561", "url": "https://github.com/jlevy/squares/issues/561", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-12]"},
+    {"n": 176, "report": "#575", "url": "https://github.com/jlevy/squares/issues/575", "holders": "Daniil Ostashev", "reader": "[Ostashev merged bands 2026-10-13]"},
+    {"n": 176, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 176, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 176, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 204, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 204, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 303, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 303, "report": "#573", "url": "https://github.com/jlevy/squares/issues/573", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk exact certificates 2026-10-12]"},
+    {"n": 303, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"}
   ],
   "register": {
     "title": "Daniil Ostashev's cut-out and composition packings at fe43a64, issue562",

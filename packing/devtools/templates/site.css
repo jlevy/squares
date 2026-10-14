@@ -127,12 +127,9 @@ body {
      It is independent of the prose measure so tables and card grids retain their room
      when reading lines change (paper-design.md, Wide bleed). */
   --site-wide: calc(var(--kpress-font-size-base) * 40 + 24rem);
-  /* How far a block may bleed past the wide track (the atlas grid, and a data table
-     above `--site-table-bleed-from`): paper-design.md, Wide bleed. */
-  --site-bleed-max: 140rem;
   --site-table-bleed-from: 80rem;
-  /* A table stops at 100rem, short of the atlas's cap: past it, its columns only spread
-     apart and a row gets harder to follow. */
+  /* A table stops at 100rem: past it, its columns only spread apart and a row gets
+     harder to follow. */
   --site-table-max: 100rem;
   /* The tables of results hold eight columns since 2026-10-04 (`think-46fw`; nine from
      2026-10-03, `think-m3m4`), and on a very wide window they bleed further than the
@@ -530,7 +527,9 @@ body {
   mask: var(--site-arrow) center / contain no-repeat;
   rotate: var(--site-arrow-turn);
   scale: var(--site-arrow-flip) 1;
-  transition: translate var(--site-hover-duration) var(--site-hover-easing);
+  transition:
+    translate var(--site-hover-duration) var(--site-hover-easing),
+    rotate var(--site-hover-duration) var(--site-hover-easing);
   vertical-align: -0.125em;
 }
 .kpress
@@ -1204,6 +1203,9 @@ body {
    the text light. A plain chip is a neutral tint; a status chip takes its status's
    fill (below). A rung chip adds `site-rung-fill`. */
 .site-chip {
+  font-variant-caps: normal;
+  letter-spacing: normal;
+  text-transform: none;
   background: color-mix(
     in oklch,
     var(--kpress-doc-muted) var(--site-chip-tint),
@@ -1232,7 +1234,12 @@ body {
    `confirmed` is the green of the confirmation rungs, at C3's strength, and its
    `reviewed` the verification rungs' blue. Bound kinds use the bound colours, recorded is yellow, and
    superseded standings keep the plain gray chip. `devtools.rung_scale` measures these fills too. */
-.site-chip:is([data-case-status], [data-status="confirmed"], [data-status="reviewed"]) {
+.site-chip:is(
+  [data-case-status],
+  [data-status="confirmed"],
+  [data-status="reviewed"],
+  [data-news-topic="verification"]
+) {
   --rung-chroma-boost: 0;
   background: oklch(
     calc(var(--site-rung-base) + var(--rung-level) * var(--site-rung-step))
@@ -1249,7 +1256,8 @@ body {
   --rung-hue: 158;
   --rung-level: 3;
 }
-.site-chip[data-status="reviewed"] {
+.site-chip[data-status="reviewed"],
+.site-chip[data-news-topic="verification"] {
   --rung-hue: 250;
   --rung-level: 2;
 }
@@ -1264,17 +1272,33 @@ body {
 }
 
 /* Bound chips share the plotted bound hues, diluted into the current page background. */
-.site-chip:is([data-kind="lower-bound"], [data-status="incomplete"]) {
+.site-chip:is(
+  [data-kind="lower-bound"],
+  [data-status="incomplete"],
+  [data-news-topic="lower-bound"]
+) {
   background: color-mix(
     in oklab,
     var(--site-bound-lower) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
 }
-.site-chip:is([data-kind="upper-bound"], [data-kind="optimality"]) {
+.site-chip:is(
+  [data-kind="upper-bound"],
+  [data-kind="optimality"],
+  [data-news-topic="upper-bound"],
+  [data-news-topic="optimality"]
+) {
   background: color-mix(
     in oklab,
     var(--site-bound-upper) var(--site-chip-tint),
+    var(--kpress-doc-bg)
+  );
+}
+.site-chip[data-news-topic="engineering"] {
+  background: color-mix(
+    in oklab,
+    var(--kpress-doc-accent) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
 }
@@ -1324,34 +1348,43 @@ body {
 .site-star {
   color: var(--site-new-result);
 }
-/* A significance rung is its letter and level in the significance teal, medium weight,
-   then as many short bars in the same ink as its level, one to five, so a column of them
-   reads as a meter: no chip, since significance asks a different question from the
-   verification and confirmation chips beside it. The bars sit at the label's middle, a
-   line apart, and never wrap away from it. */
+/* One boxed meter for every significance score: identical width and five larger
+   segments, with filled bars showing the level and outlined bars the remainder. */
 .site-significance {
   align-items: center;
+  block-size: 1.45em;
+  border: 1px solid currentColor;
+  box-sizing: border-box;
   color: var(--site-significance);
   display: inline-flex;
+  flex-shrink: 0;
   font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note);
   font-variant-numeric: tabular-nums;
   font-weight: var(--site-font-weight-sans-medium);
-  gap: 0.2em;
+  gap: 0.3em;
+  inline-size: 5.5em;
+  justify-content: space-between;
+  padding-inline: 0.28em;
   vertical-align: baseline;
   white-space: nowrap;
 }
 .site-significance-bars {
   display: inline-flex;
-  gap: 0.08em;
+  gap: 0.12em;
 }
 .site-significance-bar {
-  background: currentcolor;
-  block-size: 0.26em;
-  border-radius: 0.06em;
-  inline-size: 0.36em;
+  background: transparent;
+  block-size: 0.6em;
+  border: 1px solid currentColor;
+  box-sizing: border-box;
+  inline-size: 0.5em;
+}
+.site-significance-bar[data-filled="true"] {
+  background: currentColor;
 }
 @media (forced-colors: active) {
-  .site-significance-bar {
+  .site-significance-bar[data-filled="true"] {
     background: CanvasText;
   }
 }
@@ -1459,15 +1492,8 @@ body {
 .site-rung-legend .site-significance + .site-significance {
   margin-inline-start: 0.3rem;
 }
-/* Significance is the second column, narrow but prominent: its mark on one line, and a
-   new result's star after the bars, where it stood after the result's text until
-   2026-10-03 (`think-m3m4`). The column is as wide as its widest mark, KPress's 6rem
-   floor given up as the cases' is: S5's and a star, 77.4px. The mark was trimmed to
-   that the same day (`think-r3rd`), its bars 0.36em wide and 0.2em after its label
-   (`.site-significance`, above), the cell's padding 0.2rem and the star's margin below,
-   from 90.4px, which set the nine columns' floors 7.8px past the 1200 a 1280-pixel
-   window gives the table; now they leave it 2. The padding went from 0.3rem to 0.2rem
-   when two results' tenth evidence links widened the details column by 6.3px. */
+/* The significance column holds the shared fixed-width meter and an optional
+   new-result star. The result's text takes the remaining table width. */
 .site-results .site-col-s {
   white-space: nowrap;
 }
@@ -1945,7 +1971,7 @@ body {
   --site-ladders-line: calc(var(--site-font-size-note) * var(--site-ladders-leading));
   /* The rail holds a chip and nothing else, so it is the chip's own width. */
   --site-ladders-rail: 2.25rem;
-  --site-ladders-significance-rail: 3.75rem;
+  --site-ladders-significance-rail: 6.25rem;
   --site-ladders-gap: 0.75rem;
   /* The narrowest a description is ever set: `SHORT_MEANING_LINE` characters a line. */
   --site-ladders-meaning-min: 13.5rem;
@@ -2017,12 +2043,8 @@ body {
   min-inline-size: var(--site-ladders-rail);
   text-align: center;
 }
-/* Significance's rungs are marks, not chips (`significance_mark`): its column's rail is
-   as wide as the widest, S5 and its five bars (58.8 pixels at the note size), so every description in it starts on one
-   line, as the chips' do. A mark stands as tall as a chip, the chip's line height and
-   margin, so a rung of it is as tall as any other where it stands on a line of its own
-   over its description, and its letters are level with its description's first line
-   where it stands beside it. */
+/* The shared fixed-width meter needs its own wider rail. It keeps the chip's
+   height so a row still lines up across all three dimensions. */
 .site-ladders-cell[data-ladder="S"] {
   --site-ladders-rail: var(--site-ladders-significance-rail);
 }
@@ -2036,16 +2058,9 @@ body {
   block-size: calc(2 * var(--site-ladders-line));
   grid-area: meaning;
 }
-/* A rung with room, 18rem (the widest rail, significance's, the gap and the least
-   description): the chip in its rail and the description beside it, its first line
-   level with the chip's letters, which the chip's own margin sets down. Every cell
-   turns at that one width, so a row's rungs stay one height; at 16.5rem, the chips'
-   rail's, a significance description was set 21.6 pixels short of its least and took
-   a third line (2026-10-03). The rail is at least its width and never narrower than
-   what stands in it: S5's mark, 58.8 pixels in the page's face, ran 1.2 past a 3.6rem
-   rail, and a wider face (65 pixels in the fallback, more in some system faces) ran it
-   into its description (the owner, 2026-10-05). */
-@container (inline-size >= 18rem) {
+/* Rail + gap + the minimum two-line description: 6.25 + 0.75 + 13.5rem.
+   Every cell turns together; max-content also protects a reader's enlarged meter. */
+@container (inline-size >= 20.5rem) {
   .site-ladders-rung {
     align-items: start;
     grid-template-areas: "chip meaning";
@@ -2088,9 +2103,9 @@ body {
 }
 
 /* The atlas grid: every case's known-best packing in a square cell, numbered beneath.
-   It bleeds past the wide track as the window grows, up to 140rem, and its cells keep a
-   size that reads, so the row holds more cases the wider the screen: at Medium, four on
-   a phone, ten at 1280 pixels, sixteen at 1920 and twenty at 2560. A cell washes on hover
+   It fills the page container less its edge gutters at every window width, and its
+   cells keep a size that reads, so the row holds more cases the wider the screen: at
+   Medium, four on a phone, ten at 1280 pixels and sixteen at 1920. A cell washes on hover
    like a card and opens the case popover (Case records, below). The wash is the cell's
    background,
    behind the drawing, and it is all that changes: every line keeps the page's ink. */
@@ -2101,7 +2116,7 @@ body:has([data-atlas-preview]) {
   overflow-anchor: none;
 }
 .site-page .site-atlas-grid {
-  --site-wide: var(--site-bleed-max);
+  --site-wide: var(--site-wide-room);
   --site-atlas-toggle-space: 1.2rem;
   /* Both views share the grid's readable cell minimum and gap. The script reads
      these tokens in rem or px; complete Triangle rows pan at that cell width. The size's
@@ -3396,4 +3411,177 @@ html[data-site-atlas-view="triangle"]
   justify-content: space-between;
   gap: 1rem;
   margin-block-start: 2rem;
+}
+
+/* News is operational content: sans text, with one quiet frame for each entry. */
+.kpress .site-news {
+  --site-news-hover-tint: 7%;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-sans-base);
+  font-weight: var(--site-font-weight-sans-light);
+  line-height: var(--kpress-line-height-normal);
+}
+.kpress .site-news-day {
+  border: 1px solid var(--kpress-doc-border);
+  margin-block: 1.25rem;
+  padding: 0.9rem 1rem;
+  transition: var(--site-hover-transition);
+}
+.kpress .site-news-day[data-news-enhanced] {
+  cursor: pointer;
+}
+.kpress .site-news-day[data-news-enhanced]:hover {
+  background: color-mix(
+    in oklch,
+    var(--kpress-doc-accent) var(--site-news-hover-tint),
+    transparent
+  );
+}
+.kpress .site-news-footer {
+  display: flex;
+  margin-block-start: 0.4rem;
+}
+.kpress .site-news-footer:has([hidden]) {
+  display: none;
+}
+.kpress .site-news-expand {
+  background: none;
+  border: 0;
+  color: var(--kpress-doc-accent);
+  cursor: pointer;
+  font: inherit;
+  padding: 0.2rem;
+}
+.kpress .site-news-body {
+  overflow: hidden;
+  position: relative;
+  transition: max-block-size var(--site-hover-duration) var(--site-hover-easing);
+}
+.kpress .site-news-body::before,
+.kpress .site-news-body::after {
+  block-size: 1.25lh;
+  content: "";
+  inset-block-end: 0;
+  inset-inline: 0;
+  mask-image: linear-gradient(transparent, currentColor);
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity var(--site-hover-duration) var(--site-hover-easing);
+}
+.kpress .site-news-body::before {
+  background: var(--kpress-doc-bg);
+}
+.kpress .site-news-body::after {
+  background: color-mix(
+    in oklch,
+    var(--kpress-doc-accent) var(--site-news-hover-tint),
+    transparent
+  );
+}
+.kpress .site-news-day.is-collapsed .site-news-body::before,
+.kpress .site-news-day.is-collapsed:hover .site-news-body::after {
+  opacity: 1;
+}
+.kpress .site-news-date {
+  color: inherit;
+  font-family: var(--kpress-font-sans);
+  font-feature-settings: var(--kpress-font-features-sans);
+  font-size: var(--site-font-size-sans-base);
+  font-style: normal;
+  font-weight: var(--site-font-weight-sans-light);
+  letter-spacing: normal;
+  line-height: 1.45;
+  margin: 0 0 0.6rem;
+  text-align: start;
+  text-transform: none;
+}
+.kpress .site-news-header > h3 {
+  margin-block: 0.6rem;
+  text-align: start;
+}
+.kpress .site-news-header > h3 :is(.kpress-math, .katex, .tex, math) {
+  letter-spacing: normal;
+  text-transform: none;
+}
+/* One metadata row on the archive and homepage: topics wrap on the left while
+   the shared significance meter keeps its fixed width at the right. */
+.kpress .site-news-metadata {
+  align-items: baseline;
+  display: flex;
+  gap: 0.6rem;
+  margin-block-end: 0.5rem;
+}
+.kpress .site-news-significance {
+  flex: none;
+  margin: 0;
+  margin-inline-start: auto;
+}
+.kpress .site-news-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  min-inline-size: 0;
+}
+/* News topics keep the Results chip's fill, corners and leading at a smaller scale. */
+.kpress .site-news-topics .site-chip {
+  font-size: calc(var(--site-font-size-note) * 0.85);
+  margin-block: calc(0.15rem * 0.85);
+  padding-inline: calc(0.35rem * 0.85);
+}
+.kpress .site-news-item + .site-news-item {
+  border-block-start: 1px solid var(--kpress-doc-border);
+  margin-block-start: 1.25rem;
+  padding-block-start: 0.5rem;
+}
+.kpress .site-news-item > :last-child {
+  margin-block-end: 0;
+}
+.site-news-legacy-anchor {
+  block-size: 0;
+  display: block;
+  inline-size: 0;
+  overflow: hidden;
+}
+
+/* Disclosure controls sit at the horizontal center of their content, across cards
+   and Atlas previews. Navigation actions keep their own layout roles. */
+.kpress :is(.site-news-footer, .site-atlas-toggle-row) {
+  justify-content: center;
+}
+.kpress .site-news-filters {
+  font-weight: var(--site-font-weight-sans-light);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note);
+  margin-block: 1rem;
+}
+.kpress .site-news-filters[hidden] {
+  display: none;
+}
+.site-news-filters > .site-table-tools {
+  flex-basis: 100%;
+}
+.site-news-filters fieldset {
+  border: 0;
+  max-inline-size: 100%;
+  margin: 0;
+  min-inline-size: 0;
+  padding: 0;
+}
+/* Placement only: compact choices and the Results count row own their shared
+   typography, colors, selected states and right alignment. */
+.site-news-filters :is(.site-tabs, .site-table-tools) {
+  margin: 0;
+}
+
+/* The default first paint already shows S4/S5. Readers without scripting receive
+   the complete archive, as the Results table's progressive filters do. */
+@media (scripting: none) {
+  .kpress .site-news-day[hidden] {
+    display: block;
+  }
 }

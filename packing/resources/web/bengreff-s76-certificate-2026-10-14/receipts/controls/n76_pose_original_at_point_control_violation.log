@@ -1,0 +1,6 @@
+# command: /home/user/squares/.claude/worktrees/agent-a1f00b5caa2265822/packing/.venv/bin/python3 -I -u /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/zmcheck/zm_mixed.py pose /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/data594/s76_cover_v5.txt --cx 1500011/1000000 --cy 1500002/1000000 --u 1/250000
+# cwd: scratch checker dir: zm_mixed.py ee3e2915, mixed_cover.py bb89de15, zeromargin.py 640fe453 (retained evand packets); cover b6a1214b99f00e5dd136d74c8d87bccd178df38a1063b2c7be90517eb2b862b2, the cover as published
+# python3: the project interpreter, Python 3.14.7, run with -I
+# host: 4 cores; load 23.65 19.50 11.98; started 2026-10-14T05:42:27Z
+pose cx=1500011/1000000 cy=750001/500000 u=1/250000 (theta 0.000458366 deg), admissible True: EXACT mu(Q) = 7890087444062733817589347613/7812499999875000000000000000 = 1.009931192856 (OK)
+# finished 2026-10-14T05:42:30Z; exit 0; wall 2.948 s; CPU 0.9 s (user 0.890 + sys 0.051); load 23.65 19.50 11.98

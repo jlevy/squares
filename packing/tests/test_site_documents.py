@@ -67,6 +67,8 @@ def rewrite(
         ),
         ("TUTORIAL.md#start", "#start"),
         ("TUTORIAL.md", "tutorial.html"),
+        ("TUTORIAL-ADVANCED.md", "tutorial-advanced.html"),
+        ("TUTORIAL-ADVANCED.md#9-vocabulary", "tutorial-advanced.html#9-vocabulary"),
         ("#local", "#local"),
         ("https://example.org/x.md", "https://example.org/x.md"),
         ("mailto:someone@example.org", "mailto:someone@example.org"),
@@ -168,20 +170,20 @@ def _record_context(base: str = "") -> LinkContext:
         ("CHANGELOG.md#missing-entry", "changelog-entry-missing-entry"),
     ],
 )
-def test_changelog_alias_preserves_and_checks_the_about_landing(url: str, anchor: str) -> None:
+def test_changelog_alias_preserves_and_checks_the_news_landing(url: str, anchor: str) -> None:
     report = LinkReport()
     rewritten = rewrite_link(url, tag="a", context=_record_context(), report=report)
-    assert rewritten == f"about.html#{anchor}"
-    assert report.anchors == [("about.html", anchor, url)]
+    assert rewritten == f"news.html#{anchor}"
+    assert report.anchors == [("news.html", anchor, url)]
     assert not report.missing
     page = render_overview.Page(
-        "about.html",
+        "news.html",
         '<article><h2 id="changelog">Changelog</h2>'
         '<h4 id="changelog-entry-regularization-foundations">Regularization</h4></article>',
     )
-    problems = unresolved({"about.html": page}, report)
+    problems = unresolved({"news.html": page}, report)
     assert problems == (
-        [f"no heading #{anchor} in about.html: {url}"]
+        [f"no heading #{anchor} in news.html: {url}"]
         if anchor == "changelog-entry-missing-entry"
         else []
     )
@@ -253,7 +255,7 @@ def test_a_result_id_the_register_lacks_is_reported() -> None:
 
 
 def test_the_documents_are_the_cards_in_their_order_and_three_views_are_not_pages() -> None:
-    """The reader documents served as pages are the tutorial and the overview's five
+    """The reader documents served as pages are both tutorials and the overview's five
     cards, README and `epistemics.md` first. The results register, the status table and
     the defect log are not among them: each old address is a forwarder."""
     from devtools import overview_sections, repo_links  # noqa: PLC0415
@@ -262,7 +264,11 @@ def test_the_documents_are_the_cards_in_their_order_and_three_views_are_not_page
         doc.name: doc.source.relative_to(site_documents.REPO).as_posix()
         for doc in site_documents.DOCUMENTS
     }
-    assert list(by_page) == ["tutorial.html", *render_overview.DOCUMENT_PAGES]
+    assert list(by_page) == [
+        "tutorial.html",
+        "tutorial-advanced.html",
+        *render_overview.DOCUMENT_PAGES,
+    ]
     assert render_overview.DOCUMENT_PAGES == (
         "readme.html",
         "epistemics.html",
@@ -370,7 +376,9 @@ def test_the_build_fails_on_an_unresolved_link(monkeypatch: pytest.MonkeyPatch) 
 
 @pytest.fixture(scope="module")
 def pages() -> dict[str, render_overview.Page]:
-    return {name: site_renders.page(name) for name in ("tutorial.html",)}
+    return {
+        name: site_renders.page(name) for name in ("tutorial.html", "tutorial-advanced.html")
+    }
 
 
 def test_the_pages_render_self_contained_with_a_toc(
@@ -397,11 +405,12 @@ def test_no_relative_repository_link_survives(pages: dict[str, render_overview.P
 
 def test_the_tutorial_math_is_kpress_math(pages: dict[str, render_overview.Page]) -> None:
     """Each formula retains KPress semantics and a visual prepared before publication."""
-    body = pages["tutorial.html"].html
-    assert len(re.findall(r'data-kpress-math="inline"', body)) >= 14
-    assert 'data-kpress-math-error="true">' not in body
-    assert len(re.findall(r'data-kpress-math-rendered="true"', body)) >= 14
-    assert len(re.findall(r'class="katex-html"', body)) >= 14
+    for page in pages.values():
+        body = page.html
+        assert len(re.findall(r'data-kpress-math="inline"', body)) >= 14
+        assert 'data-kpress-math-error="true">' not in body
+        assert len(re.findall(r'data-kpress-math-rendered="true"', body)) >= 14
+        assert len(re.findall(r'class="katex-html"', body)) >= 14
 
 
 def test_long_reports_get_a_contents_rail_and_short_ones_do_not(
@@ -423,7 +432,8 @@ def test_long_reports_get_a_contents_rail_and_short_ones_do_not(
         return 'class="kpress-toc ' in page.html
 
     assert not rail(short)
-    assert 'class="kpress-toc ' in pages["tutorial.html"].html
+    for page in pages.values():
+        assert 'class="kpress-toc ' in page.html
 
 
 def test_a_hand_written_contents_list_is_dropped_from_the_page(
@@ -433,9 +443,11 @@ def test_a_hand_written_contents_list_is_dropped_from_the_page(
     the contents rail lists the headings; the text around it stays."""
     markdown = "Intro.\n\n## Contents\n\n1. [One](#one)\n2. [Two](#two)\n\n## One\n\nBody.\n"
     assert site_documents.without_manual_contents(markdown) == "Intro.\n\n## One\n\nBody.\n"
-    page = pages["tutorial.html"].html
+    page = pages["tutorial-advanced.html"].html
     assert 'id="contents"' not in page
     assert 'href="#contents"' not in page
+    # The basic page keeps the original fragment as a visible relocation landing.
+    assert 'id="contents"' in pages["tutorial.html"].html
 
 
 def test_a_github_alert_is_a_plain_quote_on_the_page() -> None:
@@ -634,3 +646,84 @@ def test_the_overview_fails_on_an_unresolved_introduction_link(
         "<!-- /README recent-progress -->"
     )
     assert rewrite_overview_blocks(stale) == stale
+
+
+#: Published fragments from the tutorial before its basic/advanced split.
+LEGACY_TUTORIAL_FRAGMENTS = (
+    "tutorial-square-packing-from-first-principles",
+    "1-the-problem",
+    "contents",
+    "the-state-of-n--11-in-one-table",
+    "how-a-weighted-atomic-lower-bound-proof-works",
+    "how-the-finite-covering-lp-searches-for-atoms",
+    "why-condition-on-corner-squares",
+    "2-the-configuration-space",
+    "the-cell-decomposition",
+    "thirty-four-dimensions-become-one",
+    "3-cells-basins-and-two-traps",
+    "the-quench-map",
+    "trap-1a-fixed-angle-cell-solve-is-not-a-basin",
+    "trap-2a-point-basin-need-not-be-a-terminal-component",
+    "the-generalized-lesson-learned-twice",
+    "4-the-corner",
+    "5-algebra-versus-numerics",
+    "why-exactness-is-not-optional",
+    "the-number-field",
+    "how-many-roots-does-a-packing-need",
+    "assurance-method-and-precision",
+    "contact-graphs-stationary-branches-and-rattlers",
+    "from-a-numeric-solution-to-an-exact-one",
+    "6-what-is-built-and-what-is-not",
+    "7-how-the-search-is-approached-and-why",
+    "the-catalogue",
+    "the-strategy-why-pointing-should-beat-scaling",
+    "steering-keep-the-loss-change-what-you-keep",
+    "relaxation-ladders-turn-rare-event-search-into-path-following",
+    "calibration-must-match-mechanism-not-just-difficulty",
+    "near-misses-are-the-data",
+    "8-what-is-known-and-what-is-not",
+    "established",
+    "open",
+    "9-how-an-optimality-proof-is-built",
+    "three-parts",
+    "the-cap-above-the-optimum",
+    "the-centre-box-and-capacity-one-covers",
+    "symmetry-and-orbits",
+    "sub-pattern-exclusion-by-containment",
+    "selection-versus-certification",
+    "what-makes-a-certificate-admissible",
+    "a-local-minimum-modulo-sliders",
+    "capture",
+    "why-exact-arithmetic-dominates-the-cost",
+    "10-a-vocabulary-card",
+    "11-a-notation-card",
+    "12-further-reading",
+    "what-does-the-arithmetic-here",
+    "13-where-to-go-next",
+)
+
+
+def test_split_tutorials_preserve_legacy_landings_and_cross_links(
+    pages: dict[str, render_overview.Page],
+) -> None:
+    basic = pages["tutorial.html"].html
+    advanced = pages["tutorial-advanced.html"].html
+    basic_ids = re.findall(r'\bid="([^"]+)"', basic)
+    assert len(basic_ids) == len(set(basic_ids))
+    assert set(LEGACY_TUTORIAL_FRAGMENTS) <= set(basic_ids)
+    assert 'href="tutorial-advanced.html"' in basic
+    assert 'href="tutorial.html"' in advanced
+    destinations = re.findall(r'href="tutorial-advanced.html#([^"]+)"', basic)
+    assert len(destinations) >= 48
+    assert set(destinations) <= site_documents.element_ids(advanced)
+
+
+def test_tutorial_pages_fit_their_registered_publication_budgets(
+    pages: dict[str, render_overview.Page],
+) -> None:
+    from devtools import site_urls  # noqa: PLC0415
+
+    registered = {row.path: row for row in site_urls.load_registry()}
+    for name, page in pages.items():
+        size = len(page.html.encode("utf-8"))
+        assert size <= site_urls.page_budget(registered[name]), (name, size)

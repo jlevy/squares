@@ -86,52 +86,59 @@ SHA-256 the folder’s own `SHA256SUMS` gives.
 
 ## Exact Replay
 
-Three certificates entered geometry decisions here: those at 380, 381 and 382, the
-counts the report-order ledger below turns on.
-They ran through the maintained two-route kernel of `devtools.evand_arrangement_reports`:
-`sqpack`’s exact witness verifier and the independent rational corner checker, each
-deciding every wall and every pair over $\mathbb{Q}$ after an exact half-angle
-conversion. Each count ran a positive job, a duplicate-square control and an
-outside-container control, each in its own child process, on one worker.
+All fourteen certificates entered geometry decisions here, through the maintained
+two-route kernel of `devtools.evand_arrangement_reports`: `sqpack`’s exact witness
+verifier and the independent rational corner checker, each deciding every wall and
+every pair over $\mathbb{Q}$ after an exact half-angle conversion.
+Each count ran a positive job, a duplicate-square control and an outside-container
+control, each in its own child process, on one worker.
 
-All three positives pass both routes, and both routes refuse all six controls, each on
+All fourteen positives pass both routes, and both routes refuse all 28 controls, each on
 the overlap of squares 0 and 1 or the wall square 0 was moved through.
 In every positive both routes find the least wall clearance exactly $2^{-65}$
-($2.71 \times 10^{-20}$), and least pair gaps of $2.33 \times 10^{-20}$ at 380,
-$1.79 \times 10^{-20}$ at 381 and $1.58 \times 10^{-20}$ at 382, the margins the
-source’s own `verify_output.txt` files print.
-The nine jobs made 1,303,026 pair decisions in 652.11 route CPU seconds and 863.27 job
-wall seconds, summed; the longest, the duplicate-square control at 381, took 138.29
-seconds.
-They were the first nine jobs of a one-worker `certify` over all fourteen counts, begun
-at 09:29:38Z on 14 October 2026 and stopped at 09:44:12Z, as its first 421 job started,
-when the roster was cut to these three; `certify --finished` then assembled the receipt
-from their nine outputs, admitted as any receipt is.
-Each job’s child process decides one count and one control from the packet alone, so
-its output does not depend on the roster.
-The run took 14 minutes 34 seconds of wall at a load of 5 to 10.
-A fresh serial `check --replay` decided all nine jobs again, equal to the retained rows
-apart from timing, in 15 minutes 35 seconds of wall and 10 minutes 57 seconds of CPU at
-a load of 3 to 14.
-[receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
+($2.71 \times 10^{-20}$), and the least pair gap the source’s own `verify_output.txt`
+prints, from $7.14 \times 10^{-21}$ at 758 to $4.09 \times 10^{-20}$ at 463.
+The 42 jobs made 12,168,762 pair decisions in 6,206.59 route CPU seconds and 7,310.06
+job wall seconds, summed; the longest, the outside-container control at 758, took
+496.24 seconds, and no job at 814 took more than 385.76, under the kernel’s 600-second
+job timeout. No job timed out.
+
+| n | Positive, wall / route CPU s | Duplicate-square control | Outside-container control | Least pair gap |
+| --- | --- | --- | --- | --- |
+| 380 | pass, 109 / 75 | refused, 97 / 75 | refused, 82 / 78 | $2.33 \times 10^{-20}$ |
+| 381 | pass, 96 / 75 | refused, 138 / 72 | refused, 118 / 71 | $1.79 \times 10^{-20}$ |
+| 382 | pass, 79 / 71 | refused, 71 / 68 | refused, 73 / 67 | $1.58 \times 10^{-20}$ |
+| 421 | pass, 102 / 100 | refused, 114 / 110 | refused, 109 / 104 | $1.59 \times 10^{-20}$ |
+| 422 | pass, 112 / 108 | refused, 112 / 106 | refused, 99 / 93 | $9.28 \times 10^{-21}$ |
+| 463 | pass, 130 / 117 | refused, 132 / 114 | refused, 144 / 112 | $4.09 \times 10^{-20}$ |
+| 464 | pass, 150 / 115 | refused, 133 / 113 | refused, 127 / 113 | $3.20 \times 10^{-20}$ |
+| 507 | pass, 137 / 129 | refused, 133 / 130 | refused, 136 / 131 | $1.81 \times 10^{-20}$ |
+| 508 | pass, 137 / 132 | refused, 141 / 138 | refused, 129 / 126 | $1.66 \times 10^{-20}$ |
+| 553 | pass, 148 / 146 | refused, 145 / 143 | refused, 181 / 150 | $1.27 \times 10^{-20}$ |
+| 601 | pass, 197 / 180 | refused, 176 / 173 | refused, 170 / 167 | $1.36 \times 10^{-20}$ |
+| 651 | pass, 212 / 208 | refused, 225 / 221 | refused, 228 / 225 | $4.01 \times 10^{-20}$ |
+| 758 | pass, 387 / 278 | refused, 494 / 277 | refused, 496 / 276 | $7.14 \times 10^{-21}$ |
+| 814 | pass, 386 / 344 | refused, 352 / 347 | refused, 374 / 328 | $2.95 \times 10^{-20}$ |
+
+The jobs ran in two one-worker `certify` runs on 14 October 2026.
+The nine at 380, 381 and 382 were the first nine of a run over all fourteen counts,
+begun at 09:29:38Z and stopped at 09:44:12Z, as its first 421 job started, when the
+roster was cut to those three; the 33 at the other eleven counts ran from 16:32:40Z to
+18:20:44Z, 108 minutes of wall and 93 of CPU, after the owner set a replay budget, at a
+load of 2 to 14.
+`certify --finished` assembled the receipt from all 42 outputs, admitted as any receipt
+is. Each job’s child process decides one count and one control from the packet alone,
+so its output does not depend on the roster, and the nine earlier outputs equal the rows
+of the three-count receipt they first formed.
+A fresh serial `check --replay` decided all 42 jobs again, equal to the retained rows
+apart from timing, in 102 minutes 47 seconds of wall and 98 minutes of CPU, from 18:21:25Z, at a load of 1 to 8.
+The receipt would exceed the kernel’s ceiling on uncompressed evidence, so it is kept as
+one file a count, `receipts/exact-certification-nNNN.json.xz`, each keeping every
 deciding input and both routes’ complete outputs.
 
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
 arithmetic and the separating-axis method, so they are two implementations of one
 method. Neither is the author’s code. No source program ran here.
-
-**The other eleven counts wait for an owner’s replay budget** (bead think-7bw3).
-Every job decides every pair, so its cost grows with $n(n - 1)$.
-At the 652.11 route CPU seconds this receipt spent on 1,303,026 decisions,
-$5.0 \times 10^{-4}$ seconds a decision, the 33 jobs at 421 to 814 make 10,865,736
-decisions in each pass: 1.51 CPU-hours for `certify` and as much again for
-`check --replay`, 3.02 in all.
-At this receipt’s wall-to-CPU ratios of 1.04 to 1.92, 1.32 overall, that is about 4.0
-hours of one-worker wall, up to 5.8.
-Each job at 814 is priced at 331 CPU seconds and 438 seconds of wall, and up to 634 at
-the worst ratio seen. That is above the kernel’s fixed 600-second job timeout, which
-`certify` cannot raise, so those jobs need a quieter machine. Each job at 758 is priced
-at up to 550 seconds.
 
 ## Against the Record
 

@@ -61,16 +61,19 @@ def test_inventory_accepts_the_actual_protocol_font_bootstrap(tmp_path: Path) ->
 
 
 @pytest.mark.parametrize(
-    ("family", "linked_name"),
+    ("family", "linked_name", "category"),
     [
-        ("headroom", "headroom.0123456789abcdef.js"),
-        ("headroom", "page.0123456789abcdef.js"),
-        ("rating-tooltips", "rating-tooltips.0123456789abcdef.js"),
-        ("rating-tooltips", "page.0123456789abcdef.js"),
+        ("headroom", "headroom.0123456789abcdef.js", "input-response"),
+        ("headroom", "page.0123456789abcdef.js", "input-response"),
+        ("rating-tooltips", "rating-tooltips.0123456789abcdef.js", "input-response"),
+        ("rating-tooltips", "page.0123456789abcdef.js", "input-response"),
+        ("news-cards", "news-cards.0123456789abcdef.js", "input-response"),
+        ("news-filters", "news-filters.0123456789abcdef.js", "input-response"),
+        ("news-forward", "news-forward.0123456789abcdef.js", "registered-forwarder"),
     ],
 )
 def test_inventory_accepts_reviewed_shared_interaction_programs(
-    tmp_path: Path, family: str, linked_name: str
+    tmp_path: Path, family: str, linked_name: str, category: str
 ) -> None:
     source = Path(__file__).parents[1] / "devtools" / "overview" / f"{family}.js"
     (tmp_path / linked_name).write_text(source.read_text())
@@ -78,4 +81,6 @@ def test_inventory_accepts_reviewed_shared_interaction_programs(
     records, errors = inventory(tmp_path)
     assert not errors
     assert len(records) == 1
-    assert records[0].category == "input-response"
+    assert records[0].category == category
+    assert records[0].reason
+    assert records[0].bytes == source.stat().st_size

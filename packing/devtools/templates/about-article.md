@@ -60,7 +60,11 @@ formalizations of current proofs.
 
 {{DOCUMENTATION_BLOCK}}
 
-{{CHANGELOG}}
+{{NEWS_LEGACY_ANCHORS}}
+
+<h1 id="news" class="site-title">News</h1>
+
+[News and the complete project history](news.html)
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

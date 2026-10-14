@@ -77,6 +77,7 @@ def test_the_named_documents_exist_and_are_the_pages_the_site_serves() -> None:
     documents = {
         repo_links.README,
         repo_links.TUTORIAL,
+        repo_links.TUTORIAL_ADVANCED,
         repo_links.SYNOPSIS,
         repo_links.CONVENTIONS,
         repo_links.DEVELOPMENT,

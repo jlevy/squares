@@ -1,0 +1,46 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T04:45Z",
+  "git_scope": "Shallow clone of main at the pinned commit, the head then and the commit jlevy/squares#594 names; the history fetched to its root, four commits of 2026-10-14 UTC. The whole tree is retained: the cover, the records of both checkers' runs, the Lean wrapper and its generated data, the two stdlib checking scripts, verify.sh and the construction scripts, which the source calls research code not needed to check the proof. Evan Daniel's checkers are not in the tree; verify.sh fetches them from evand/square-packing at b91d70b6ed314624c1434b628a9c7bf9a132c743, and this repository retains all four pinned files byte for byte in the evand packets of 26 and 28 September. Nothing was executed from the tree except tools/check_coverage.py's logic, re-derived here in scratch.",
+  "sources": [
+    {
+      "id": "bengreff-s76-certificate",
+      "source_url": "https://github.com/bengreff/s76-certificate",
+      "source_ref": "1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f",
+      "source_commit": "1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f",
+      "committed_utc": "2026-10-14T02:05:47Z",
+      "git_tree": "b7c5ee885d529b258078afeb8687c68923269440",
+      "archived_path": "packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate",
+      "subtree_manifest": "packing/resources/web/bengreff-s76-certificate-2026-10-14/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "SHA256SUMS",
+        "verify.sh",
+        "construction",
+        "cover",
+        "lean",
+        "records",
+        "tools"
+      ],
+      "subtree_file_count": 151,
+      "subtree_total_bytes": 914432,
+      "retained_file_count": 151,
+      "retained_total_bytes": 914432,
+      "compressed": [],
+      "pinned_only": [],
+      "license": "MIT, copyright 2026 Benjamin Greff (LICENSE). The README credits Evan Daniel (method, mixed format, checkers, Lean library) and wand125 (the s(59) = 8 cover reused for the corners, the band-insertion construction), and says the search, LP and verification pipeline were built and run with Claude (Anthropic) as an AI assistant under Benjamin Greff's direction.",
+      "claims": [
+        "s(76) = 9: README.md and the issue state s(76) >= 9 from the mixed cover cover/s76_cover_v5.txt.gz (unpacked SHA-256 b6a1214b99f00e5dd136d74c8d87bccd178df38a1063b2c7be90517eb2b862b2), 41,633 points and 9,744 axis-parallel segments of [0,9]^2 in Evan Daniel's mixed 1 format, coordinates X/8000, weights w/(4*10^8), total 3788361049/50000000 = 75.76722098 < 76, exactly D4-invariant, such that every closed unit square in [0,9]^2 captures mass at least one; with the 9 x 9 grid, s(76) = 9.",
+        "The covering statement is certified by two of Evan Daniel's checkers used unchanged from evand/square-packing@b91d70b: zmx2 cert --d4 over all 8,100 D4 roots, leaving 18 uncertified boxes in the 4 roots of records/zmx2/failing_roots.txt, and zm_mixed.py cert --d4 --cert-mode --disj --chain-from 0 --pitch 1/20 --ubins 16 --depth 24 in exact rationals on the 64 sub-roots of those 4 roots (records/zm_mixed/jobs.txt), none uncertified; tools/check_coverage.py checks that the pieces tile the D4 region.",
+        "lean/S76Lower.lean proves theorem s76_eq_9 (hcov : S76Cover) : minSide 76 = 9 on Evan Daniel's Sqpack at 1718a58 with axioms propext, Classical.choice and Quot.sound; the data facts (no duplicate atoms, D4 invariance, total < 76) are kernel-checked and S76Cover, the covering statement, is a hypothesis.",
+        "The issue reports a second pass in progress, zm_mixed.py alone over all 129,600 D4 roots, 42,000 done with none uncertified at the time of writing; it is not in the tree at this commit."
+      ],
+      "original_gzip": [
+        "s76-certificate/cover/s76_cover_v5.txt.gz",
+        "s76-certificate/lean/S76T_Pts.lean.gz",
+        "s76-certificate/records/zmx2/zmx2_v5.log.gz"
+      ]
+    }
+  ]
+}

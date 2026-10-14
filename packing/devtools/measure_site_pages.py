@@ -249,6 +249,7 @@ OPENED = ":popover-open, details[open]"
 DEFAULT_PAGES = (
     render_overview.paper_path(render_overview.N11_LOWER_BOUNDS_EXPLAINER),
     "tutorial.html",
+    "tutorial-advanced.html",
     "synopsis.html",
     "epistemics.html",
     "readme.html",

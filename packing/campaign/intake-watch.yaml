@@ -711,6 +711,30 @@ repositories:
       later gains, median 0, and pass the best known only at 154) in PACKER.md, CLAIMS.md and
       CONFUSIONS.md, and adds search/packer/timetravel.py, which the 154 packet pins by digest.
       None states a bound or a certificate. Nothing else to import.
+
+  # The records lane of the 2026-10-14 intake read evand's head past the 31523f8 read on
+  # 2026-10-14, at the pin of the issue-596 packet.
+  - url: https://github.com/evand/square-packing
+    read_through: 622cd2e21407700fe8d5ac5943af820725107921
+    read_on: '2026-10-14'
+    note: >-
+      The 62 commits of 12 to 14 October from 2be2c92 to 622cd2e past the 31523f8 read. Two
+      add certificates, and packets retain both: 231d41d adds
+      search/packer/candidates/comp2_n339, n364 and n375, which issue #584 reports and the
+      evand-compositions-2026-10-13 packet retains (beyond-horizon rows), and 622cd2e, the
+      head, adds fresh_n365, n370 and n460, which issue #596 reports and the
+      evand-fresh-compositions-2026-10-14 packet retains (beyond-horizon rows). 63d1a1c adds
+      #552's s(154) to the author's store, and 1a09f2a records the release
+      exact-data-2026-10-12, which the 31523f8 read covers. 84a8d36's log says compositions
+      at 325, 326 and 339 were certified; only the 339 was committed, as #584's. The rest is
+      the packer's development and the author's site: composers, a soft relax and a
+      soft-to-rigid engine after Yohei Nakajima's protocol, fresh-packing passes, arm and
+      basin-entry benchmarks and solver performance work, census and landscape studies at
+      110, the pre-registered hunts H1 to H5 with no candidate, a spot check of wand125's Lean
+      pull request, literature indexes, contact-system notes, a regularizer plan, and the
+      site's leaderboard and lower-bound pages to n = 324, whose data restate bounds the
+      register holds or tracks. None states a bound or certificate the record lacks. Nothing
+      else to import.
   # The intake pass of 2026-10-14 (think-abi1; survey think-fxs7).
   - url: https://github.com/ofitzharding/sq17-lean
     read_through: d9653fd3c0a86633eac921793dfcae43379792b9

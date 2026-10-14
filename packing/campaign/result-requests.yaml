@@ -4633,7 +4633,7 @@ issues:
       verified lower bounds move to 3359/500 (think-tln9). wand125 edited the 17:14
       UTC comment at 02:19 UTC on 12 October to link the continuous-angle mode at
       wand125/square-packing f30cc2c (think-xzob).
-    read_through: '2026-10-12T02:19:26Z'
+    read_through: '2026-10-14T12:03:14Z'
     results:
     - key: s40-clipped-corner
       claim: s(40) > 335427/50000 = 6.70854, by excluding a container of side exactly 335427/50000 and
@@ -4780,6 +4780,30 @@ issues:
       - result: s40-new-supports
       - result: s40-support-family-obstruction
       - result: s40-continuous-angle-mode
+    - url: https://github.com/jlevy/squares/issues/485#issuecomment-6167889673
+      date: '2026-10-14'
+      by: jlevy
+      kind: confirmation
+      reported:
+      - result: s40-new-supports
+        id: T-157
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: s40-new-supports
+        id: E-n040-guzhou-new-supports-report
+        status: reviewed
+      - result: s40-new-supports
+        id: E-n040-guzhou-new-supports-kernel-replay
+        status: confirmed
+      - result: s40-new-supports
+        id: E-n040-guzhou-new-supports-finite-audit
+        status: confirmed
+      - result: s40-new-supports
+        id: E-n040-guzhou-new-supports-crate-axis
+        status: confirmed
+      - result: s40-support-family-obstruction
+      - result: s40-continuous-angle-mode
     close_when: The import and its review disposition are on main and the owner has posted the resulting
       state; optimality and first-publication priority are outside this request.
   - number: 486
@@ -4850,7 +4874,7 @@ issues:
       same day reproduced the replay and found no blocking defect, and the six are registered
       together as T-140 at V3/C3; the case records wait for jlevy/squares#403. Author checkers
       and KKT statements were not run here; no optimality is claimed.
-    read_through: '2026-10-10T14:08:32Z'
+    read_through: '2026-10-14T12:03:15Z'
     results:
     - key: six-exact-certificates
       claim: s(n) <= S_n at n = 132 (11.986953587255), 175 (13.767120724693), 209 (14.946223226447),
@@ -4932,6 +4956,15 @@ issues:
       - 'T-140 stays in both case records as history and remains the house at 175, 209 and 237;
         Daniil Ostashev''s #528 composition (T-158) is the house at 175 since 12 October, with
         T-140 as history there, and T-140 remains the house at 209 and 237'
+    - url: https://github.com/jlevy/squares/issues/488#issuecomment-6167889914
+      date: '2026-10-14'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: six-exact-certificates
+        id: T-140
+      corrects:
+      - https://github.com/jlevy/squares/issues/488#issuecomment-6130071279
     close_when: The import and its disposition are on main and the owner has posted the resulting state;
       optimality and the credit for the starting packings' constructions stay with their sources.
     notes: >-
@@ -5184,7 +5217,7 @@ issues:
     close_when: The certificates are admitted to certified-sub-patterns.yaml or declined with a reason, and the
       owner has posted the resulting state.
   - number: 503
-    title: 's(207) ≤ 14.880960373044: registration request'
+    title: 's(207) ≤ 14.880960371559: certificate refinement'
     author: BuddenPing
     opened: '2026-10-11'
     state: closed
@@ -5207,7 +5240,7 @@ issues:
       Codex assistance; the pinned commit and the edited issue removed it without a reason. Asked
       which account stands, the author answered on 12 October, for this issue and #504: "Both
       solutions were AI assisted by 'PY', an unreleased agentic AI offering by PingYou Ltd."
-    read_through: '2026-10-12T17:57:46Z'
+    read_through: '2026-10-14T07:05:01Z'
     results:
     - key: n207-exact-certificate
       claim: s(207) <= 148809603730436756319360591381170501178639/10^40 =
@@ -5220,9 +5253,18 @@ issues:
       evidence:
       - E-pingyou-503-certificate-report
       - E-pingyou-503-exact-feasibility
+    - key: n207-refinement
+      claim: A refined certificate for the same n207 construction, 1.485e-09 below the earlier one.
+      source: https://github.com/jlevy/squares/issues/503#issuecomment-6133755143
+      register:
+      - T-167
+      evidence:
+      - E-pingyou-503-refinement-report
     beads:
     - think-0zd4
     - think-720n
+    - think-ni9u
+    - think-z8aj
     answer_bead: think-0zd4
     replies:
     - url: https://github.com/jlevy/squares/issues/503#issuecomment-6125247333
@@ -5268,6 +5310,12 @@ issues:
         id: T-147
       corrects:
       - https://github.com/jlevy/squares/issues/503#issuecomment-6127536031
+    - url: https://github.com/jlevy/squares/issues/503#issuecomment-6162867217
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n207-refinement
     close_when: The import and its disposition are on main, the house adoption at 207 has landed or
       is owned, the author has been asked which AI-assistance account stands, and the owner has
       posted the resulting state; optimality is outside this request.
@@ -5320,7 +5368,7 @@ issues:
       #503 disclosed OpenAI Codex assistance and then removed it, and on #503 the author answered
       on 12 October, for both issues: "Both solutions were AI assisted by 'PY', an unreleased
       agentic AI offering by PingYou Ltd."
-    read_through: '2026-10-12T17:57:46Z'
+    read_through: '2026-10-14T07:05:03Z'
     results:
     - key: n153-exact-certificate
       claim: s(153) <= 6435006925203522001385040447/500000000000000000000000000 =
@@ -5333,9 +5381,18 @@ issues:
       evidence:
       - E-pingyou-504-certificate-report
       - E-pingyou-504-exact-feasibility
+    - key: n153-refinement
+      claim: A refined certificate for the same n153 construction, 1.0e-14 below the earlier one.
+      source: https://github.com/jlevy/squares/issues/504#issuecomment-6133737268
+      register:
+      - T-166
+      evidence:
+      - E-pingyou-504-refinement-report
     beads:
     - think-4znu
     - think-720n
+    - think-ni9u
+    - think-rb3n
     answer_bead: think-4znu
     replies:
     - url: https://github.com/jlevy/squares/issues/504#issuecomment-6113387339
@@ -5387,6 +5444,12 @@ issues:
         id: T-148
       corrects:
       - https://github.com/jlevy/squares/issues/504#issuecomment-6127536658
+    - url: https://github.com/jlevy/squares/issues/504#issuecomment-6162867546
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n153-refinement
     close_when: The import and its disposition are on main, the house adoption at 153 has landed or
       is owned, and the owner has posted the resulting state; optimality and the undilated contact
       solution are outside this request.
@@ -5682,7 +5745,7 @@ issues:
       are verified beyond-horizon rows that supersede the rows tracked at 338, 339, 344, 375,
       376, 378 and 379. Author checkers and KKT statements were not run here; no optimality is
       claimed. Claude assistance disclosed.
-    read_through: '2026-10-11T18:06:50Z'
+    read_through: '2026-10-14T12:03:16Z'
     results:
     - key: n304-n305-exact-optima
       claim: s(304) <= 17.929565946849 and s(305) <= 17.950466482138, each the exact rational side of
@@ -5754,6 +5817,14 @@ issues:
         couzo-certificates-2026-10-11 packet and is not registered unless its author asks
         (think-9fjl), and Daniil Ostashev''s #528 composition (T-158), 2.94e-03 below it, is the
         house at 175 since 12 October'
+    - url: https://github.com/jlevy/squares/issues/506#issuecomment-6167890181
+      date: '2026-10-14'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: unnamed-175-308-340-343
+      corrects:
+      - https://github.com/jlevy/squares/issues/506#issuecomment-6130063939
     close_when: The import and its disposition, including the beyond-horizon counts, are on main,
       the house adoption at 304 and 305 has landed or is owned, and the owner has posted the
       resulting state; the four unnamed certificates are imports of their own, and optimality is
@@ -6288,7 +6359,8 @@ issues:
     title: 's(175) ≤ 13.764174317487, s(232) ≤ 15.764174317487, s(264) ≤ 16.774735132388: registration request'
     author: dostashev
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-14'
     kind: result-report
     triage: done
     summary: >-
@@ -6311,7 +6383,7 @@ issues:
       are the c3d17ab certificates T-149 already carries, and states AI assistance: AI agents
       wrote and ran the search, composition and verification code in a research loop the author
       drove.
-    read_through: '2026-10-12T04:14:57Z'
+    read_through: '2026-10-14T12:03:17Z'
     results:
     - key: three-compositions
       claim: s(175) <= 13.76417431748659662942782322004234282577, s(232) <=
@@ -6349,7 +6421,26 @@ issues:
     beads:
     - think-em0b
     answer_bead: think-em0b
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/528#issuecomment-6167890395
+      date: '2026-10-14'
+      by: jlevy
+      kind: final
+      reported:
+      - result: three-compositions
+        id: T-158
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: three-compositions
+        id: E-ostashev-528-certificate-report
+        status: reviewed
+      - result: three-compositions
+        id: E-ostashev-528-exact-feasibility
+        status: confirmed
+      - result: update-501
+      - result: rectangle-38
+      - result: kkt-exact-optima
     close_when: The import and its disposition are on main, the house adoption at 175, 232 and
       264 has landed or is owned, the author has said whether the AI-assistance statement also
       covers issue 501, and the resulting state has been posted; optimality is outside this
@@ -6378,7 +6469,7 @@ issues:
       so it moves no case and T-159 is superseded by T-146 on arrival. Claude assistance
       disclosed. Credit name Rio Calle; no Twitter/X handle is listed on the author's GitHub
       profile.
-    read_through: '2026-10-12T04:32:54Z'
+    read_through: '2026-10-14T12:03:18Z'
     results:
     - key: n102-layout
       claim: s(102) <= 10.605828696455852, the side of the layout as printed, certified here by an
@@ -6412,7 +6503,26 @@ issues:
     beads:
     - think-s2i8
     answer_bead: think-s2i8
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/529#issuecomment-6167890639
+      date: '2026-10-14'
+      by: jlevy
+      kind: confirmation
+      reported:
+      - result: n102-layout
+        id: T-159
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n102-layout
+        id: E-calle-529-certificate-report
+        status: reviewed
+      - result: n102-layout
+        id: E-calle-529-exact-feasibility
+        status: confirmed
+      - result: valley-bottom
+      - result: earlier-layout
+      - result: private-certificate
     close_when: The import and its disposition are on main, the credit relation to ry-xu's
       packing is measured and stated, and the resulting state has been posted; optimality and
       the author's private certificate are outside this request.
@@ -6839,7 +6949,8 @@ issues:
     title: 'New packing: s(154) ≤ 12.92256640193406: registration request'
     author: evand
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-14'
     kind: result-report
     triage: done
     summary: >-
@@ -6862,7 +6973,7 @@ issues:
       traces it to Francisco Couzo's 5 October packing of 155 squares with one square removed,
       and asks that the start be credited to it, which the record does as his statement.
       Claude (Claude Code) assistance disclosed; credit name Evan Daniel (@evand).
-    read_through: '2026-10-12T14:13:35Z'
+    read_through: '2026-10-14T12:03:19Z'
     results:
     - key: n154-certificate
       claim: s(154) <= 12922566401934059503377267965457/10^30 (tt_n154.cert), 5.04e-4 below T-136.
@@ -6891,6 +7002,802 @@ issues:
     beads:
     - think-6no5
     answer_bead: think-6no5
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/552#issuecomment-6167890879
+      date: '2026-10-14'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n154-certificate
+        id: T-160
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n154-certificate
+        id: E-evand-552-n154-report
+        status: reviewed
+      - result: n154-certificate
+        id: E-evand-552-exact-feasibility
+        status: confirmed
+      - result: n154-regularized-drawing
+      - result: n154-local-optimality
     close_when: The certificate is registered and adopted at 154 on main, the start is credited to
       Couzo's 155 as the author asks, and the resulting state has been posted.
+  - number: 561
+    title: '156-271 and 338-378: registration request'
+    author: franciscouzo
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'Francisco Couzo reports nine exact rational certificates in franciscouzo/square-packing: s(156),
+      s(176), s(237) and s(271) in the case corpus and s(338), s(344), s(375), s(376) and s(378) beyond
+      it, continuing Daniil Ostashev''s, SQUISH''s and his own arrangements with Evan Daniel''s optimizer
+      and exact contact solver. Imported on 14 October 2026 in the couzo-certificates-2026-10-12 packet
+      and replayed on both maintained exact routes with their controls. Registered as T-161 at V0/C0 at
+      the four in-horizon counts, each below its case''s ceiling, with the five beyond-horizon sides as
+      source-register rows. Francisco Couzo''s later certificate is smaller at 176 (T-165), Mykhailo Polkovskyi''s
+      at 237 (T-183), and PR 574 (T-174) tightens 156, 237 and 271. OpenAI Codex assistance disclosed.'
+    read_through: '2026-10-14T07:35:02Z'
+    results:
+    - key: four-in-horizon
+      claim: s(156) <= 12.979165853835, s(176) <= 13.807637227056, s(237) <= 15.902947773659 and s(271)
+        <= 16.948992356452, rounded up at 12 places, by exact rational certificates.
+      source: body
+      register:
+      - T-161
+      evidence:
+      - E-couzo-561-certificate-report
+    - key: five-beyond-horizon
+      claim: s(338), s(344), s(375), s(376) and s(378) by exact rational certificates, beyond the case corpus.
+      source: body
+      not_registered: 'Beyond the n <= 324 corpus: beyond-horizon rows of the couzo-certificates-2026-10-12
+        source, each below the row it supersedes; later reports supersede them at 344, 375, 376 and 378.'
+      queued: false
+    beads:
+    - think-rfce
+    answer_bead: think-rfce
+    replies:
+    - url: https://github.com/jlevy/squares/issues/561#issuecomment-6163323684
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: four-in-horizon
+      - result: five-beyond-horizon
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 562
+    title: 's(129) ≤ 11.870013850405, s(204) ≤ 14.808663234387, s(303) ≤ 17.909958291070: registration request'
+    author: dostashev
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'Daniil Ostashev reports exact rational certificates at 129, 204 and 303 in dostashev/square-packing:
+      a cut-out of the s(302) house''s rectangle at 129 and two compositions of new rectangle packings at
+      204 and 303. Imported on 14 October 2026 in the dostashev-compositions-2026-10-12 packet, replayed
+      on both maintained exact routes with their controls, and registered as T-162 at V0/C0, each side the
+      smallest known at its count when reported; PR 574 (T-174) tightens all three by about 1e-19. AI assistance
+      disclosed.'
+    read_through: '2026-10-14T09:18:12Z'
+    results:
+    - key: three-certificates
+      claim: s(129) <= 11.870013850405, s(204) <= 14.808663234387 and s(303) <= 17.909958291070, by exact
+        rational certificates.
+      source: body
+      register:
+      - T-162
+      evidence:
+      - E-ostashev-562-certificate-report
+    beads:
+    - think-nrqu
+    answer_bead: think-nrqu
+    replies:
+    - url: https://github.com/jlevy/squares/issues/562#issuecomment-6165052232
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: three-certificates
+      outdated:
+      - each side is the smallest we know of; PR 574 (T-174) is smaller at all three counts, by about 1e-19
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 564
+    title: 's(302) ≤ 17.870275382734: registration request'
+    author: BuddenPing
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: PingYou Ltd reports an exact rational certificate at 302, four boundary patches of Ryan Xu's
+      packing of 70 with two upright banks, refined in the update of 12 October. Imported on 14 October
+      2026 as derived exact facts in the pingyou-n302-certificate-2026-10-12 packet, replayed on both maintained
+      exact routes, and registered as T-164 at V0/C0, 1.75e-03 below the case's ceiling; Francisco Couzo's
+      issue 583 (T-181) is smaller.
+    read_through: '2026-10-14T07:05:00Z'
+    results:
+    - key: n302-certificate
+      claim: s(302) <= 17.870275382734, by an exact rational certificate and its corners Witness/v2.
+      source: body
+      register:
+      - T-164
+      evidence:
+      - E-pingyou-564-certificate-report
+    beads:
+    - think-z5gq
+    answer_bead: think-z5gq
+    replies:
+    - url: https://github.com/jlevy/squares/issues/564#issuecomment-6162866986
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n302-certificate
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 566
+    title: 's(146) ≤ 12.5837822039508342919134679370511513667729: further certificate refinement'
+    author: BuddenPing
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: PingYou Ltd reports a further exact refinement of Ryan Xu's packing of 146 after Robert Barnett's
+      (T-150). Imported on 14 October 2026 as derived exact facts, replayed on both maintained exact routes
+      with its controls, and registered as T-168 at V0/C0, a regularization of the packing it tightens;
+      PR 574 (T-174) tightens it again.
+    read_through: '2026-10-14T07:05:04Z'
+    results:
+    - key: n146-refinement
+      claim: s(146) <= 12.5837822039508342919134679370511513667729, by an exact rational certificate.
+      source: body
+      register:
+      - T-168
+      evidence:
+      - E-pingyou-566-certificate-report
+    beads:
+    - think-r8ti
+    answer_bead: think-r8ti
+    replies:
+    - url: https://github.com/jlevy/squares/issues/566#issuecomment-6162867895
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n146-refinement
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 567
+    title: 's(261) ≤ 16.6787798753429098149372205115301919485639: further certificate refinement'
+    author: BuddenPing
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: PingYou Ltd reports a further exact refinement of Ryan Xu's packing of 261 after Robert Barnett's
+      (T-150). Imported on 14 October 2026 as derived exact facts, replayed on both maintained exact routes
+      with its controls, and registered as T-169 at V0/C0, a regularization of the packing it tightens;
+      PR 574 (T-174) tightens it again.
+    read_through: '2026-10-14T07:05:05Z'
+    results:
+    - key: n261-refinement
+      claim: s(261) <= 16.6787798753429098149372205115301919485639, by an exact rational certificate.
+      source: body
+      register:
+      - T-169
+      evidence:
+      - E-pingyou-567-certificate-report
+    beads:
+    - think-9rm5
+    answer_bead: think-9rm5
+    replies:
+    - url: https://github.com/jlevy/squares/issues/567#issuecomment-6162868252
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n261-refinement
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 568
+    title: 's(105) ≤ 10.7893037837481588309268366600396176597363: exact contact refinement'
+    author: BuddenPing
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: PingYou Ltd reports an exact contact refinement of Francisco Couzo's packing of 105 (T-130).
+      Imported on 14 October 2026 as derived exact facts, replayed on both maintained exact routes with
+      its controls, and registered as T-170 at V0/C0, a regularization of the packing it tightens; PR 574
+      (T-174) tightens it again.
+    read_through: '2026-10-14T07:05:07Z'
+    results:
+    - key: n105-refinement
+      claim: s(105) <= 10.7893037837481588309268366600396176597363, by an exact rational certificate.
+      source: body
+      register:
+      - T-170
+      evidence:
+      - E-pingyou-568-certificate-report
+    beads:
+    - think-ztup
+    answer_bead: think-ztup
+    replies:
+    - url: https://github.com/jlevy/squares/issues/568#issuecomment-6162868542
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n105-refinement
+      outdated:
+      - a review will say how the record treats such a difference before anything is registered; the per-count
+        ledger of 14 October registers it (T-170) as a regularization of the packing it tightens, and its
+        review comes next
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 569
+    title: 's(272) ≤ 16.9655864748376706357560070334220455696299: exact contact refinement'
+    author: BuddenPing
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: PingYou Ltd reports an exact contact refinement of SQUISH's packing of 272 (T-151). Imported
+      on 14 October 2026 as derived exact facts, replayed on both maintained exact routes with its controls,
+      and registered as T-171 at V0/C0, a regularization of the packing it tightens; PR 574 (T-174) tightens
+      it again.
+    read_through: '2026-10-14T07:05:08Z'
+    results:
+    - key: n272-refinement
+      claim: s(272) <= 16.9655864748376706357560070334220455696299, by an exact rational certificate.
+      source: body
+      register:
+      - T-171
+      evidence:
+      - E-pingyou-569-certificate-report
+    beads:
+    - think-0qvc
+    answer_bead: think-0qvc
+    replies:
+    - url: https://github.com/jlevy/squares/issues/569#issuecomment-6162868775
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n272-refinement
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 570
+    title: '154 and 379: registration request'
+    author: franciscouzo
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Francisco Couzo reports s(154) and s(379), continuing Evan Daniel's arrangement at 154. The
+      commit the issue names is no longer served; its 154 certificate is byte for byte the one issue 583
+      pins, retained in the couzo-issue583-2026-10-13 packet, replayed on both maintained exact routes and
+      registered as T-172 at V0/C0, 6.66e-05 below T-160; issue 586 (T-182) is smaller. The 379 is in no
+      reachable commit and has no row.
+    read_through: '2026-10-14T07:35:03Z'
+    results:
+    - key: n154
+      claim: s(154) <= 12.922499814643, by an exact rational certificate named by its digest.
+      source: body
+      register:
+      - T-172
+      evidence:
+      - E-couzo-583-certificate-report
+    - key: n379
+      claim: s(379) <= 19.953542593650.
+      source: body
+      not_registered: The certificate is in no reachable commit of the source and is not retained; issue
+        583's and 586's certificates at 379 are smaller.
+      queued: false
+    beads:
+    - think-rfce
+    answer_bead: think-rfce
+    replies:
+    - url: https://github.com/jlevy/squares/issues/570#issuecomment-6163324127
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n154
+      - result: n379
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 573
+    title: 'Exact rational certificates for 6 packings below register (n = 103, 153, 207, 209, 258, 270):
+      registration request'
+    author: Mishapolk
+    opened: '2026-10-12'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'Mykhailo Polkovskyi (Mishapolk) reports exact rational certificates at 103, 153, 207, 209,
+      258 and 270 among 19 in Mishapolk/square-packing-records. Imported on 14 October 2026 in the mishapolk-exact-certificates-2026-10-12
+      packet; 153, 154, 175 and 207 replayed on both maintained exact routes. The per-count ledger records
+      it at 153 and 207, where it arrived before PR 574: registered as T-173 at V0/C0. At 153 and 207 the
+      packings measure as PingYou Ltd''s (T-148, T-147), and whether to credit them as new arrangements
+      is the owner''s decision. Gemini assistance disclosed. On issue 593 he asks to be credited as Mykhailo
+      Polkovskyi.'
+    read_through: '2026-10-14T08:07:21Z'
+    results:
+    - key: n153-n207
+      claim: s(153) <= 12.87001385040448 and s(207) <= 14.880960371558, by exact rational certificates.
+      source: body
+      register:
+      - T-173
+      evidence:
+      - E-mishapolk-573-certificate-report
+    - key: n103-n209-n258-n270
+      claim: s(103), s(209), s(258) and s(270) by exact rational certificates.
+      source: body
+      not_registered: Above the case's ceiling at each count; retained in the packet.
+      queued: false
+    beads:
+    - think-2zz8
+    answer_bead: think-2zz8
+    replies:
+    - url: https://github.com/jlevy/squares/issues/573#issuecomment-6163850092
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n153-n207
+      - result: n103-n209-n258-n270
+      outdated:
+      - another open report is smaller at every count, so this report will not be registered for now; the
+        per-count ledger of 14 October takes the reports in the order they reached this repository and records
+        this one at 153 and 207 (T-173), where it came before PR 574
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request. The author has said which name the record should carry.
+  - number: 575
+    title: 's(176) ≤ 13.795872318437, s(211) ≤ 14.993694186584, s(241) ≤ 15.987134249051, s(304) ≤ 17.929427758076:
+      registration request'
+    author: dostashev
+    opened: '2026-10-13'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Daniil Ostashev reports exact rational certificates at 176, 211, 241 and 304 in dostashev/square-packing,
+      packings whose two tilted bands merge into one at 176, 211 and 241. Imported on 14 October 2026 in
+      the dostashev-merged-bands-2026-10-13 packet, replayed on both maintained exact routes, and registered
+      as T-175 at V0/C0 at 211, 241 and 304; at 176 PR 574's earlier certificate states the same packing
+      (T-174), and the ledger does not record this one there. Francisco Couzo's issues 583 and 586 are smaller
+      at 211 and 241. AI assistance disclosed.
+    read_through: '2026-10-14T09:18:14Z'
+    results:
+    - key: n211-n241-n304
+      claim: s(211) <= 14.993694186584, s(241) <= 15.987134249051 and s(304) <= 17.929427758076, by exact
+        rational certificates.
+      source: body
+      register:
+      - T-175
+      evidence:
+      - E-ostashev-575-certificate-report
+    - key: n176
+      claim: s(176) <= 13.795872318437, by an exact rational certificate.
+      source: body
+      not_registered: PR 574's earlier certificate states the same packing at 176 (T-174); by the per-count
+        ledger's rule this later report is not recorded there. Retained in the packet.
+      queued: false
+    beads:
+    - think-34sy
+    answer_bead: think-34sy
+    replies:
+    - url: https://github.com/jlevy/squares/issues/575#issuecomment-6165052668
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n211-n241-n304
+      - result: n176
+      outdated:
+      - at 176 the side is the smallest known and registration comes next; the per-count ledger of 14 October
+        does not record it there, where PR 574's earlier certificate states the same packing (T-174)
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 582
+    title: 's(381) <= 19.985624661051481: registration request'
+    author: mstrmg
+    opened: '2026-10-13'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'Miles Gray (mstrmg) reports an exact certificate at 381, beyond the case corpus. Not imported:
+      Kevin Fang''s direct certificate at 381, published on 12 October before this issue, is smaller, and
+      so is Francisco Couzo''s of issue 583; by the per-count ledger''s rule a later report is recorded
+      only where it is smaller than every earlier one.'
+    read_through: '2026-10-14T07:35:06Z'
+    results:
+    - key: n381
+      claim: s(381) <= 19.985624661051481, by an exact certificate.
+      source: body
+      not_registered: Kevin Fang's certificate at 381 (fang-direct-certificates-2026-10-13), published before
+        this issue, is smaller; not imported.
+      queued: false
+    beads:
+    - think-k8z2
+    answer_bead: think-k8z2
+    replies:
+    - url: https://github.com/jlevy/squares/issues/582#issuecomment-6163324766
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n381
+    close_when: The reply saying why the certificate is not recorded is posted and the author has had the
+      chance to answer.
+  - number: 583
+    title: '154-382: registration request'
+    author: franciscouzo
+    opened: '2026-10-13'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Francisco Couzo reports exact rational certificates at 154, 211, 241 and 302 and at 339, 379,
+      380, 381 and 382 beyond the corpus. Imported on 14 October 2026 in the couzo-issue583-2026-10-13 packet,
+      at the commit the issue pins, and replayed on both maintained exact routes. Registered as T-181 at
+      V0/C0 at 211, 241 and 302; its 154 is issue 570's certificate, which T-172 registers; the five beyond-horizon
+      sides are source-register rows. Issue 586 (T-182) tightens 211 and 241 and replaces 154 and the rows
+      at 339, 379, 380 and 382.
+    read_through: '2026-10-14T07:35:05Z'
+    results:
+    - key: n211-n241-n302
+      claim: s(211) <= 14.993558914123, s(241) <= 15.987117095169 and s(302) <= 17.870013850405, by exact
+        rational certificates.
+      source: body
+      register:
+      - T-181
+      evidence:
+      - E-couzo-583-certificate-report
+    - key: n154
+      claim: s(154) <= 12.922499814643, the certificate issue 570 names.
+      source: body
+      register:
+      - T-172
+      evidence:
+      - E-couzo-583-certificate-report
+    - key: five-beyond-horizon
+      claim: s(339), s(379), s(380), s(381) and s(382) by exact rational certificates, beyond the case corpus.
+      source: body
+      not_registered: 'Beyond the n <= 324 corpus: source-register rows, each below the row it supersedes;
+        issue 586 supersedes those at 339, 379, 380 and 382.'
+      queued: false
+    beads:
+    - think-rfce
+    answer_bead: think-rfce
+    replies:
+    - url: https://github.com/jlevy/squares/issues/583#issuecomment-6163324490
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n211-n241-n302
+      - result: n154
+      - result: five-beyond-horizon
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 584
+    title: 's(339) ≤ 18.926898900357, s(364) ≤ 19.583782203951, s(375) ≤ 19.882451030482: registration request
+      (beyond-horizon)'
+    author: evand
+    opened: '2026-10-13'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Evan Daniel reports exact rational certificates at 339, 364 and 375, all beyond the case corpus.
+      Imported on 14 October 2026 in the evand-compositions-2026-10-13 packet, replayed on both maintained
+      exact routes, and recorded as beyond-horizon rows, each below the row it supersedes; issue 586 supersedes
+      the row at 339. Claude assistance disclosed.
+    read_through: '2026-10-14T09:18:15Z'
+    results:
+    - key: three-beyond-horizon
+      claim: s(339) <= 18.926898900357, s(364) <= 19.583782203951 and s(375) <= 19.882451030482, by exact
+        rational certificates.
+      source: body
+      not_registered: 'Beyond the n <= 324 corpus: rows of the evand-compositions-2026-10-13 source.'
+      queued: false
+    beads:
+    - think-x333
+    answer_bead: think-x333
+    replies:
+    - url: https://github.com/jlevy/squares/issues/584#issuecomment-6165052968
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: three-beyond-horizon
+    close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
+      corpus take no register entry, and optimality is outside this request.
+  - number: 586
+    title: '154, 339, 379, 380, 382; precision refinements at 211 and 241: registration request'
+    author: franciscouzo
+    opened: '2026-10-13'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Francisco Couzo reports new certificates at 154, 339, 379, 380 and 382 and precision refinements
+      of issue 583's at 211 and 241, at b85dee2. Imported on 14 October 2026 in the couzo-certificates-2026-10-13
+      packet and replayed on both maintained exact routes. Registered as T-182 at V0/C0 at 154, 211 and
+      241, the latter two regularizations of T-181's; the beyond-horizon sides are rows. The same commit's
+      176 is registered as T-165 and its 344, 375, 376 and 378 are rows, by the per-count ledger. The owner's
+      reply of 14 October covers issues 561, 570, 583 and 586.
+    read_through: '2026-10-14T07:35:01Z'
+    results:
+    - key: n154-n211-n241
+      claim: s(154) <= 12.921206577133, s(211) <= 14.993558913975 and s(241) <= 15.987117095151, by exact
+        rational certificates.
+      source: body
+      register:
+      - T-182
+      evidence:
+      - E-couzo-583-586-certificate-report
+    - key: four-beyond-horizon
+      claim: s(339), s(379), s(380) and s(382) by exact rational certificates, beyond the case corpus.
+      source: body
+      not_registered: 'Beyond the n <= 324 corpus: rows of the couzo-certificates-2026-10-13 source.'
+      queued: false
+    - key: unnamed-b85dee2
+      claim: The same commit holds certificates at 176, 344, 375, 376 and 378 that no issue names.
+      source: source
+      register:
+      - T-165
+      evidence:
+      - E-couzo-583-586-certificate-report
+    beads:
+    - think-rfce
+    answer_bead: think-rfce
+    replies:
+    - url: https://github.com/jlevy/squares/issues/586#issuecomment-6163323439
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n154-n211-n241
+      - result: four-beyond-horizon
+      - result: unnamed-b85dee2
+      outdated:
+      - only the certificates the issues name will be registered unless the author asks otherwise; the per-count
+        ledger of 14 October records the commit's 176 (T-165) and its 344, 375, 376 and 378 as rows, each
+        a report of its own
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 589
+    title: 'n381 new best packing: registration request'
+    author: mstrmg
+    opened: '2026-10-13'
+    state: closed
+    closed: '2026-10-13'
+    kind: result-report
+    triage: done
+    summary: 'Miles Gray (mstrmg) reports a certificate at 381, beyond the case corpus, and closed the issue
+      20 seconds after opening it; the certificate is the same file as issue 582''s (SHA-256 03650573...).
+      Not imported, for the reason issue 582 gives: earlier reports at 381 are smaller.'
+    read_through: '2026-10-13T20:59:50Z'
+    results:
+    - key: n381
+      claim: s(381) <= 19.985624661052, the certificate of issue 582.
+      source: body
+      not_registered: The same certificate as issue 582, closed by its author; Kevin Fang's and Francisco
+        Couzo's certificates at 381 are smaller.
+      queued: false
+    beads:
+    - think-ts16
+    answer_bead: think-ts16
+    replies: []
+    close_when: Closed by its author; issue 582 carries the claim.
+  - number: 593
+    title: '73 new upper bounds across N=51..308: registration request'
+    author: Mishapolk
+    opened: '2026-10-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Mykhailo Polkovskyi (Mishapolk) reports 73 exact certificates across 51 to 308. Imported on
+      14 October 2026 in the mishapolk-records-2026-10-14 packet, each at the exact fraction of the release's
+      census; 211, 237 and 241 replayed on both maintained exact routes. Registered as T-183 at V0/C0 at
+      237, the smallest known side there. At 211 and 241 the sides equal issue 586's, which reached this
+      repository first, and the ledger records no tie; elsewhere the side equals or trails an earlier report.
+      Gemini assistance disclosed. On 14 October he asks to be credited as Mykhailo Polkovskyi, and at 211
+      and 241 as joint holder by his earlier commit, 8bb41af, which is the owner's decision.
+    read_through: '2026-10-14T15:38:18Z'
+    results:
+    - key: n237
+      claim: s(237) <= 15.902705057867, by an exact rational certificate.
+      source: body
+      register:
+      - T-183
+      evidence:
+      - E-mishapolk-593-certificate-report
+    - key: ties-211-241
+      claim: s(211) and s(241) at the sides of Francisco Couzo's issue 586.
+      source: body
+      not_registered: Exact ties with issue 586 (T-182), which reached this repository first; the per-count
+        ledger records no tie.
+      queued: false
+    - key: other-70
+      claim: The other 70 certificates, at 51 to 308.
+      source: body
+      not_registered: Each equals or trails an earlier report at its count; retained in the packet.
+      queued: false
+    beads:
+    - think-2ep3
+    answer_bead: think-2ep3
+    replies:
+    - url: https://github.com/jlevy/squares/issues/593#issuecomment-6163849805
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n237
+      - result: ties-211-241
+      - result: other-70
+      outdated:
+      - 211 and 241 will be registered as ties beside 237; the per-count ledger of 14 October records no
+        tie, and issue 586 reached this repository first, so this issue is recorded at 237 only (T-183)
+      - 'at 156 and 271 it is not yet decided whether PR 574 or issue 561 is smallest; the exact sides decide
+        it: PR 574 (T-174) is smaller than issue 561 there, by 1.30e-19 and 1.69e-19'
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request. The author has said which name the record should carry.
+  - number: 594
+    title: 'Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)'
+    author: bengreff
+    opened: '2026-10-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Benjamin Greff reports s(76) = 9 by a mixed cover of points and grid-line segments, checked
+      by Evan Daniel's zmx2 and zm_mixed.py in composite, at bengreff/s76-certificate 1cb924f. Imported
+      on 14 October 2026; triage replayed the cover's census with both checkers from this repository's retained
+      copies. Registered as T-184 at V0/C0, S3. The author's update of 14 October adds a second route, zm_mixed.py
+      alone over the whole region, at 06993982; it is not yet retained. AI assistance disclosed.
+    read_through: '2026-10-14T08:25:57Z'
+    results:
+    - key: s76-equals-9
+      claim: 's(76) = 9: the lower half by a mixed cover, the upper half by the 9 x 9 grid.'
+      source: body
+      register:
+      - T-184
+      evidence:
+      - E-bengreff-594-cover-report
+    - key: second-route
+      claim: zm_mixed.py alone certifies the cover over the whole D4 region, with one root rerun at depth
+        34.
+      source: https://github.com/jlevy/squares/issues/594#issuecomment-6164158000
+      not_registered: Posted after the import; the next revision of the bengreff packet retains it (think-osvq).
+      queued: false
+    beads:
+    - think-osvq
+    answer_bead: think-osvq
+    replies:
+    - url: https://github.com/jlevy/squares/issues/594#issuecomment-6162283597
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: s76-equals-9
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 596
+    title: 's(365) ≤ 19.621320343560, s(370) ≤ 19.767730746255, s(460) ≤ 21.959969683021: registration request
+      (beyond-horizon)'
+    author: evand
+    opened: '2026-10-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Evan Daniel reports exact rational certificates at 365, 370 and 460, all beyond the case corpus.
+      Imported on 14 October 2026 in the evand-fresh-compositions-2026-10-14 packet, replayed on both maintained
+      exact routes, and recorded as new beyond-horizon rows. Claude assistance disclosed.
+    read_through: '2026-10-14T09:18:16Z'
+    results:
+    - key: three-beyond-horizon
+      claim: s(365) <= 19.621320343560, s(370) <= 19.767730746255 and s(460) <= 21.959969683021, by exact
+        rational certificates.
+      source: body
+      not_registered: 'Beyond the n <= 324 corpus: rows of the evand-fresh-compositions-2026-10-14 source.'
+      queued: false
+    beads:
+    - think-yxkt
+    answer_bead: think-yxkt
+    replies:
+    - url: https://github.com/jlevy/squares/issues/596#issuecomment-6165053338
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: three-beyond-horizon
+    close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
+      corpus take no register entry, and optimality is outside this request.
+  - number: 600
+    title: 'Closed-form lower bound s(N) ≥ a(N) for every non-square N ≥ 49, above the register for 156 n
+      in 104–319: registration request'
+    author: wand125
+    opened: '2026-10-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: wand125 reports the closed form s(N) >= a(N) for every non-square N >= 49, which the intake
+      read had already taken from wand125/square-packing at 9a28a84. Triage done; the result maps to the
+      closed-form entry, T-180, at V0/C1 on the review of 14 October, which raises the reported lower bound
+      at 154 counts. The source's second checker, cfcheck (746e2c5), is retained as further evidence for
+      the same claim. The author's answers of 14 October to the review's three questions point to 1c661b7,
+      not yet retained.
+    read_through: '2026-10-14T12:28:15Z'
+    results:
+    - key: closed-form
+      claim: s(N) >= a(N) for every non-square N >= 49, a(N) the closed form of SPEC.md on 34 intervals.
+      source: body
+      register:
+      - T-180
+      evidence:
+      - E-wand125-closed-form-report
+      - E-wand125-closed-form-cfcheck-report
+      - E-wand125-closed-form-cfcheck-sample
+    beads:
+    - think-tsox
+    - think-3n1x
+    answer_bead: think-tsox
+    replies:
+    - url: https://github.com/jlevy/squares/issues/600#issuecomment-6167331402
+      date: '2026-10-14'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: closed-form
+      outdated:
+      - the reported lane moves at 155 counts; it moves at 154, since wand125's own pending report at 145
+        to 149 (T-179) is above a(148) as T-144 is above a(125)
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
+      its bead; optimality is outside this request.
+  - number: 603
+    title: 's(n² − n + 1) < n for every n ≥ 15, and the F(n) excess (Kevin Fang): tracking an unreported
+      result'
+    author: jlevy
+    opened: '2026-10-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: The project opened this issue to track Kevin Fang's theorem, which reached the project through
+      his watched repository TheSnakeFang/squarepack-certs rather than an issue, as the owner asks for results
+      at S4 and above. Triage done; the result maps to T-163, dated by Theorem 1's first commit on 12 October,
+      at V2/C1 on the review of 14 October, with the four finite bounds in the case corpus replayed on both
+      maintained exact routes.
+    read_through: '2026-10-14T17:03:44Z'
+    results:
+    - key: excess-theorem
+      claim: 's(n^2 - n + 1) < n for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q
+        : 16p + 21q <= n - 15}.'
+      source: body
+      register:
+      - T-163
+      evidence:
+      - E-fang-excess-theorem-report
+      - E-fang-excess-theorem-exact-feasibility
+    beads:
+    - think-0esw
+    answer_bead: think-0esw
+    replies: []
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
+      is outside this request.
