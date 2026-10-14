@@ -1015,7 +1015,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-085.html | 800,000 | Complete broad scope history and prepared exact bounds measure 694,374 bytes. |
 | result/t-124.html | 400,000 | Complete broad scope history and prepared exact bounds measure 304,237 bytes. |
 | result/t-155.html | 400,000 | Fifty-nine counts' exact regularized sides, their regularizations and prepared math measure 303,829 bytes. |
-| results.html | 950,000 | The complete registered-result table with prepared math measures 843,037 bytes at 146 results. |
+| results.html | 1,150,000 | The complete registered-result table with prepared math, and the seven days' arrivals and weekly rollup above it, measures 924,981 bytes at 160 results on 14 October 2026. A result adds 3,447 bytes to the table on average (4,660 at the 90th percentile) and about 322 to the seven days while it is recent, so the ceiling leaves room for 45 more at the 90th-percentile cost and 59 at the average; `test_overview` holds room for 40. |
 | tutorial.html | 800,000 | The complete authored tutorial and prepared formulas measure 742,713 bytes. |
 
 <!-- This document follows common-doc-guidelines.md.

@@ -5798,8 +5798,15 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: The native homepage SVG preview and inert compressed expansion payload measured
 #: 1,172,468 bytes on 10 October 2026; the retained startup budget is 1,300,000 bytes.
 #: Merged with that layout on 11 October, the results page measured 843,037 bytes at
-#: 146 results, and its ceiling keeps about a hundred kilobytes above that.
-PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 950_000}
+#: 146 results, and its ceiling kept about a hundred kilobytes above that. With the seven
+#: days' arrivals and the weekly rollup above its table it measured 924,981 bytes at 160
+#: results on 14 October, about six results under that ceiling, while the 14 October
+#: intake registers about thirty (#514's review A, finding A2). The ceiling now holds
+#: room for `RESULTS_ROOM` more (`test_the_results_page_has_room_for_forty_more_results`).
+PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_150_000}
+#: How many more results the results page keeps room for under its ceiling, each at what
+#: the table's 90th-percentile row costs now and an average entry of the seven days.
+RESULTS_ROOM = 40
 
 
 def test_no_page_carries_a_result_overview(
@@ -5832,6 +5839,30 @@ def test_no_page_carries_a_result_overview(
     assert render_overview.ROW_POPOVER_SCRIPT.read_text(encoding="utf-8").count(
         "data-row-pop-src"
     )
+
+
+def test_the_results_page_has_room_for_forty_more_results(results: str) -> None:
+    """The results page stays under its ceiling with `RESULTS_ROOM` more results, each
+    costing what the table's 90th-percentile row costs now and an average entry of the
+    seven days, so an import lane meets the ceiling as a measured choice and not as a red
+    build (#514's review A, finding A2)."""
+    table = results[results.index("site-table site-results") : results.index("</table>")]
+    found = re.findall(r'<tr id="t-\d+".*?</tr>', table, re.DOTALL)
+    rows = sorted(len(row.encode()) for row in found)
+    added = results[results.index('<div class="site-rollup site-added">') :]
+    added = added[: added.index("</details></div>")]
+    entries = re.findall(r"<li[ >].*?</li>", added, re.DOTALL)
+    row = rows[int(len(rows) * 0.9)]
+    entry = sum(len(item.encode()) for item in entries) // len(entries)
+    size = len(results.encode("utf-8"))
+    projected = size + RESULTS_ROOM * (row + entry)
+    print(
+        f"results.html: {size:,} bytes + {RESULTS_ROOM} x ({row:,} + {entry:,}) = "
+        f"{projected:,} / {PAGE_CEILINGS[render_overview.RESULTS_PAGE]:,}"
+    )
+    assert projected < PAGE_CEILINGS[render_overview.RESULTS_PAGE]
+    ceiling = site_urls.PAGE_BUDGET_EXCEPTIONS[render_overview.RESULTS_PAGE][0]
+    assert ceiling == PAGE_CEILINGS[render_overview.RESULTS_PAGE]
 
 
 def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
