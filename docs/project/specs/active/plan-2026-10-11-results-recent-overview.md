@@ -52,7 +52,7 @@ question.
 
 A result published before the seven days and registered in them appears in both sections
 if it is at S3 or above, under the day it was added and the week it was published.
-On the register at the merge with `main` (`b8c930338`) one result is placed so: T-101,
+On the register at the merge with `main` (`f73e9de13`) one result is placed so: T-101,
 published on 5 October and added on 6 October, which is at S2 and so is listed only
 under 6 October.
 On 12 October the same rule put T-090, T-091 and T-092 in both sections.
@@ -182,7 +182,7 @@ unchanged.
 
 ## Byte Cost
 
-Measured on the register at the merge with `main` (`b8c930338`):
+Measured on the register at the merge with `main` (`f73e9de13`):
 
 | Measure | Bytes |
 | --- | ---: |
@@ -190,7 +190,7 @@ Measured on the register at the merge with `main` (`b8c930338`):
 | The weekly rollup, 55 results in the four weeks before | 8,285 |
 | Both sections | 26,007 |
 | Ceiling for both (`tests/test_results_rollup.py`, `ROLLUP_BYTES`) | 48,000 |
-| `results.html` on this branch | 914,341 |
+| `results.html` on this branch | 914,577 |
 | Page ceiling (`site_urls.PAGE_BUDGET_EXCEPTIONS`, `test_overview.PAGE_CEILINGS`) | 950,000 |
 
 An entry of the seven days costs about 306 bytes: its id link, headline, cases, rungs
