@@ -5,11 +5,13 @@ from __future__ import annotations
 import inspect
 import re
 from collections.abc import Callable, Mapping
+from copy import deepcopy
 from dataclasses import replace
 from datetime import timedelta
 from typing import Any, cast
 from unittest.mock import patch
 
+import mpmath as mp
 import pytest
 
 from devtools import overview_data, overview_sections
@@ -252,3 +254,176 @@ def test_shared_atlas_markup_builds_lazily_and_restores_its_drawing_guard(
     with pytest.raises(ValueError, match="unknown Atlas surface"):
         surface("unexpected")
     assert calls == ["grid", "preview", "preview"]
+
+
+def _side_reader_witness(kind: str) -> dict[str, Any]:
+    witness: dict[str, Any] = {
+        "id": "W-side-reader-control",
+        "n": 1,
+        "side": "2",
+        "representation": "center-basis",
+        "scalar": {"kind": kind},
+        "coordinates": {"origin": "lower-left", "angle_unit": "not-applicable"},
+        "squares": [{"center": ["1/2", "1/2"], "basis": ["1", "0"]}],
+        "claim": {
+            "coordinate_provenance": "verified",
+            "method": "exact-algebraic",
+            "limitations": "presentation control only",
+        },
+    }
+    if kind == "algebraic-number-field":
+        witness["scalar"].update(
+            minimal_polynomial=["1", "0", "-2"], isolating_interval=["1", "2"]
+        )
+        witness["side"] = ["16/3", "5/3"]
+    elif kind == "decimal":
+        witness["side"] = "2.000000000000000001"
+        witness["representation"] = "center-angle"
+        witness["coordinates"]["angle_unit"] = "radians"
+        witness["squares"] = [{"center": ["1/2", "0.5"], "angle": "1/2"}]
+        witness["claim"].update(
+            coordinate_provenance="numerically-checked",
+            method="numerical-multiprecision",
+            precision={"decimal_digits": 80, "rounding": "nearest"},
+            tolerance="1e-60",
+        )
+        witness["certificate"] = {"result": {"check_passed": True}}
+    return witness
+
+
+@pytest.mark.parametrize("kind", ["rational", "algebraic-number-field", "decimal"])
+def test_side_reader_retains_the_full_frames_scalar_identity(kind: str) -> None:
+    from devtools import build_known_best_atlas as builder  # noqa: PLC0415
+
+    witness = _side_reader_witness(kind)
+    with mp.workdps(11):
+        side = builder.side_from_witness(witness)
+        assert mp.mp.dps == 11, "a layout-side read must not change ambient precision"
+    assert side == builder.frame_from_witness(witness).container_side
+
+
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    [
+        ("root", "isolating interval must be nonempty"),
+        ("coefficients", "coefficient-string arrays"),
+        ("exact-angle", "angle evaluation is unavailable"),
+        ("missing-center", "center"),
+        ("decimal-nonstring", "decimal literals must be strings"),
+        ("decimal-nan", "finite value"),
+        ("decimal-infinity", "finite value"),
+        ("decimal-corner-nan", "finite value"),
+        ("missing-receipt", "numerical receipt is absent or failed"),
+        ("failed-receipt", "numerical receipt is absent or failed"),
+        ("missing-claim-field", "limitations"),
+        ("missing-id", "id"),
+        ("malformed-source", "get"),
+    ],
+)
+def test_side_reader_preserves_malformed_literal_and_receipt_refusals(
+    mutation: str, message: str
+) -> None:
+    from devtools import build_known_best_atlas as builder  # noqa: PLC0415
+
+    exact = mutation in {"root", "coefficients", "exact-angle", "missing-center"}
+    witness = _side_reader_witness("algebraic-number-field" if exact else "decimal")
+    if mutation == "root":
+        witness["scalar"]["isolating_interval"] = ["1", "1"]
+    elif mutation == "coefficients":
+        witness["squares"][0]["center"][0] = [1, "0"]
+    elif mutation == "exact-angle":
+        witness["representation"] = "center-angle"
+        witness["squares"][0]["angle"] = "0"
+    elif mutation == "missing-center":
+        del witness["squares"][0]["center"]
+    elif mutation == "decimal-nonstring":
+        witness["squares"][0]["center"][0] = 0.5
+    elif mutation == "decimal-nan":
+        witness["squares"][0]["center"][0] = "NaN"
+    elif mutation == "decimal-infinity":
+        witness["squares"][0]["center"][0] = "inf"
+    elif mutation == "decimal-corner-nan":
+        witness["representation"] = "corners"
+        witness["squares"] = [{"corners": [["NaN", "0"], ["1", "0"], ["1", "1"], ["0", "1"]]}]
+    elif mutation == "missing-receipt":
+        del witness["certificate"]
+    elif mutation == "failed-receipt":
+        witness["certificate"]["result"]["check_passed"] = False
+    elif mutation == "missing-claim-field":
+        del witness["claim"]["limitations"]
+    elif mutation == "missing-id":
+        del witness["id"]
+    else:
+        witness["source"] = []
+    before = deepcopy(witness)
+    with mp.workdps(15):
+        for reader in (builder.side_from_witness, builder.frame_from_witness):
+            with pytest.raises((ValueError, KeyError, AttributeError), match=message):
+                reader(witness)
+    assert witness == before
+
+
+def test_side_reader_reuses_originals_without_mutating_the_comparison_cache(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import build_known_best_atlas as builder  # noqa: PLC0415
+    from devtools import render_regularized_atlas as regularized  # noqa: PLC0415
+    from sqpack import yamlio  # noqa: PLC0415
+
+    original = _side_reader_witness("rational")
+    selected = deepcopy(original)
+    selected["side"] = "3"
+    manifest = {"atlas": {"entries": [{"n": 1, "witness": {"path": "witness.yaml"}}]}}
+    parsed: list[str] = []
+    read_text = overview_sections.Path.read_text
+
+    def retained_text(path: Any, *args: Any, **kwargs: Any) -> str:
+        if path.name == "manifest.json":
+            import json  # noqa: PLC0415
+
+            return json.dumps(manifest)
+        if path.name == "witness.yaml":
+            parsed.append(path.name)
+            return "retained witness"
+        return read_text(path, *args, **kwargs)
+
+    monkeypatch.setattr(overview_sections.Path, "read_text", retained_text)
+    monkeypatch.setattr(yamlio, "load_yaml", lambda _text: {"witness": original})
+    monkeypatch.setattr(overview_sections, "atlas_regularized", lambda: (1,))
+    monkeypatch.setattr(regularized, "regularized_entries", lambda: [{"n": 1}])
+    monkeypatch.setattr(regularized, "view_witness", lambda _entry: selected)
+    with patch.object(builder, "side_from_witness", wraps=builder.side_from_witness) as read:
+        overview_sections.atlas_enclosing_sides.cache_clear()
+        try:
+            assert overview_sections.atlas_enclosing_sides() == {1: 3.0}
+            assert overview_sections.atlas_enclosing_sides(original=True) == {1: 2.0}
+            assert parsed == ["witness.yaml"]
+            assert read.call_count == 2
+            overview_sections.atlas_enclosing_sides.cache_clear()
+            selected["side"] = "4"
+            assert overview_sections.atlas_enclosing_sides() == {1: 4.0}
+            assert read.call_count == 4, "cache_clear must invalidate both side modes"
+            monkeypatch.setattr(regularized, "regularized_entries", list)
+            overview_sections.atlas_enclosing_sides.cache_clear()
+            with pytest.raises(KeyError, match="1"):
+                overview_sections.atlas_enclosing_sides()
+        finally:
+            overview_sections.atlas_enclosing_sides.cache_clear()
+
+
+@pytest.mark.parametrize("literal", ["1/0", "not-a-number"])
+def test_side_reader_reports_invalid_decimal_pose_literals_as_witness_errors(
+    literal: str,
+) -> None:
+    from devtools import build_known_best_atlas as builder  # noqa: PLC0415
+    from sqpack.witness import WitnessError  # noqa: PLC0415
+
+    witness = _side_reader_witness("decimal")
+    witness["squares"][0]["center"][0] = literal
+    with pytest.raises(WitnessError, match="invalid rational literal") as error:
+        builder.side_from_witness(witness)
+    assert error.value.kind == "malformed-scalar"
+    # mpmath accepts rational strings directly and raises ZeroDivisionError for 1/0
+    # before the full reader's Fraction fallback. Its existing refusal is retained.
+    with pytest.raises((WitnessError, ZeroDivisionError)):
+        builder.frame_from_witness(witness)

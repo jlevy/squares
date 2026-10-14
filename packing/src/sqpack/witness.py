@@ -357,13 +357,12 @@ def _interval_materialize(witness: Mapping[str, Any]) -> tuple[list[Square], Any
     return _materialize(witness, parse)
 
 
-def _exact_materialize(
+def _exact_scalar_reader(
     witness: Mapping[str, Any],
-) -> tuple[list[Square], Scalar, NumberField | None]:
+) -> tuple[Callable[[Any], Scalar], NumberField | None]:
     scalar = witness["scalar"]
     if scalar["kind"] == "rational":
-        squares, side = _materialize(witness, _fraction)
-        return squares, side, None
+        return _fraction, None
     if scalar["kind"] != "algebraic-number-field":
         raise WitnessError(
             "formal-certificate-missing",
@@ -373,8 +372,61 @@ def _exact_materialize(
         [_fraction(value) for value in scalar["minimal_polynomial"]],
         tuple(_fraction(value) for value in scalar["isolating_interval"]),
     )
-    squares, side = _materialize(witness, lambda value: _field_scalar(value, field))
+    return lambda value: _field_scalar(value, field), field
+
+
+def _exact_materialize(
+    witness: Mapping[str, Any],
+) -> tuple[list[Square], Scalar, NumberField | None]:
+    parse, field = _exact_scalar_reader(witness)
+    squares, side = _materialize(witness, parse)
     return squares, side, field
+
+
+def validate_presentation_literals(
+    witness: Mapping[str, Any],
+    parse: Callable[[Any], Scalar],
+    *,
+    angle_basis_allowed: bool = True,
+) -> None:
+    """Parse the recorded coordinate literals without constructing square vertices.
+
+    This retains the presentation reader's malformed-input refusals. It checks no
+    containment, non-overlap, square shape, or assurance claim.
+    """
+    representation = witness["representation"]
+    # Full materialization requires these conventions even when no transform uses them.
+    witness["coordinates"]["angle_unit"]
+    witness["coordinates"]["origin"]
+    for square in witness["squares"]:
+        if representation == "corners":
+            for point in square["corners"]:
+                parse(point[0])
+                parse(point[1])
+        else:
+            parse(square["center"][0])
+            parse(square["center"][1])
+            if representation == "center-angle":
+                if not angle_basis_allowed:
+                    raise WitnessError(
+                        "unsupported-representation", "angle evaluation is unavailable"
+                    )
+                parse(square["angle"])
+            else:
+                parse(square["basis"][0])
+                parse(square["basis"][1])
+
+
+def materialize_exact_side(witness: Mapping[str, Any]) -> Scalar:
+    """Decode an exact enclosing side and validate its declared coordinate literals.
+
+    The field/root and rational parser are shared with full materialization. This
+    presentation boundary does not expand square vertices or verify feasibility.
+    """
+    parse, _field = _exact_scalar_reader(witness)
+    side = parse(witness["side"])
+    validate_presentation_literals(witness, parse, angle_basis_allowed=False)
+    return side
 
 
 def _sign_with_tolerance(tolerance: Scalar) -> Callable[[Scalar], int]:

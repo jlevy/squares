@@ -2740,37 +2740,43 @@ def atlas_regularized() -> tuple[int, ...]:
 def atlas_enclosing_sides(*, original: bool = False) -> dict[int, float]:
     """Actual enclosing sides of the selected drawings, independent of frontier bounds.
 
-    `original` reads every current house witness for the comparison mode.
-    House drawings use their canonical witness; a case drawn from its regularized view
-    (`atlas_regularized`) uses its retained derived witness, whose certified side the
-    renderer draws. Project the same scalar
-    sources as the renderer to browser precision without changing the witnesses.
-    The shared frame reader preserves algebraic coefficient vectors and their root
-    declarations as one exact side.
+    `original` reads every current house witness for the comparison mode. Default
+    drawings reuse those immutable projections and replace the selected regularized
+    sides with admitted derived witnesses. The shared presentation-side reader keeps
+    the renderer's exact field/root identity, coordinate-literal and receipt checks,
+    without constructing every square merely to read the enclosing side.
     """
-    from devtools.build_known_best_atlas import frame_from_witness  # noqa: PLC0415
+    from devtools.build_known_best_atlas import side_from_witness  # noqa: PLC0415
     from devtools.render_regularized_atlas import (  # noqa: PLC0415
         regularized_entries,
         view_witness,
     )
     from sqpack.yamlio import load_yaml  # noqa: PLC0415
 
-    manifest = json.loads((REPO / "packing/atlas/known-best/manifest.json").read_text())
-    drawn = set() if original else set(atlas_regularized())
-    views = {entry["n"]: entry for entry in regularized_entries() if entry["n"] in drawn}
-    sides: dict[int, float] = {}
-    for entry in manifest["atlas"]["entries"]:
-        n = entry["n"]
-        witness = (
-            view_witness(views[n])
-            if n in views
-            else load_yaml((REPO / "packing" / entry["witness"]["path"]).read_text())["witness"]
-        )
-        side = float(frame_from_witness(witness).container_side.projected)
+    def enclosing_side(n: int, witness: dict) -> float:
+        side = float(side_from_witness(witness).projected)
         if witness["n"] != n or not math.isfinite(side) or side <= 0:
             raise ValueError(f"n={n}: invalid atlas enclosing side {witness['side']!r}")
-        sides[n] = side
-    return sides
+        return side
+
+    entries = regularized_entries()
+    if not original:
+        sides = dict(atlas_enclosing_sides(original=True))
+        drawn = set(atlas_regularized())
+        views = {entry["n"]: entry for entry in entries if entry["n"] in drawn}
+        for n in sides:
+            if n in drawn:
+                sides[n] = enclosing_side(n, view_witness(views[n]))
+        return sides
+
+    manifest = json.loads((REPO / "packing/atlas/known-best/manifest.json").read_text())
+    return {
+        entry["n"]: enclosing_side(
+            entry["n"],
+            load_yaml((REPO / "packing" / entry["witness"]["path"]).read_text())["witness"],
+        )
+        for entry in manifest["atlas"]["entries"]
+    }
 
 
 @cache

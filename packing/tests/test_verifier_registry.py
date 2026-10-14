@@ -1448,7 +1448,10 @@ def test_malformed_coverage_does_not_interrupt_the_schema_gate(
         if row["id"] == "E-n017-overbeck-literal-checks-review3"
     )
     entry["independence"]["coverage"] = ["sample"]
-    malformed = yaml.safe_dump(document, sort_keys=False)
+    malformed = yaml.dump(
+        document, Dumper=getattr(yaml, "CSafeDumper", yaml.SafeDumper), sort_keys=False
+    )
+    assert safe_load(malformed) == document
     original = Path.read_text
     target = FRONTIER / "evidence.yaml"
 

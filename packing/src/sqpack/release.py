@@ -682,8 +682,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
+            "packing/devtools/build_known_best_atlas.py",
             "packing/devtools/overview_sections.py",
             "packing/devtools/regularized_drawings.py",
+            "packing/src/sqpack/witness.py",
         ),
         outputs=(
             "about.html",
@@ -713,12 +715,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "These performance changes reuse the same validated frontier metadata, "
-            "keeping atlas image markup byte-identical and all attribution and case "
-            "validation intact. The drawing register retains its full audit and the "
-            "equivalent generated-block comparison and diagnostics. Only duplicate "
-            "reads and repeated test work are removed; public outputs and component "
-            "editions do not change."
+            "Atlas presentation reuses validated frontier metadata and reads exact "
+            "enclosing sides without constructing every square. Scalar source identity, "
+            "projection, wire-data refusals, receipt and claim checks, and full renderer "
+            "geometry are preserved; atlas markup remains byte-identical. The drawing "
+            "register retains its full audit and equivalent generated-block diagnostics. "
+            "These producer optimizations change no paper, drawing or component edition; "
+            "the separately scoped launch-history bookkeeping updates About."
         ),
     ),
     ReleaseNoPublicChange(
