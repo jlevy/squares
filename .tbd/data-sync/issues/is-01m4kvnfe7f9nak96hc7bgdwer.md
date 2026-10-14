@@ -5,7 +5,7 @@ title: "Contributor profiles: census, linked credits and reviewable website"
 kind: epic
 status: in_progress
 priority: 2
-version: 16
+version: 17
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: claude-code@vm
 labels: []
@@ -24,10 +24,11 @@ child_order_hints:
   - is-01m4v4ehd59t1r89qwksx77bmh
   - is-01m4v4ej0qhr52c3jb4x58sdqg
   - is-01m4v4ejf9nk67srf1520hzvyx
+  - is-01m4vra6707j8rdvzybhypgrdm
 hold: null
 hold_until: null
 created_at: 2026-10-10T21:31:52.129Z
-updated_at: 2026-10-13T17:20:04.072Z
+updated_at: 2026-10-13T23:07:11.965Z
 started_at: 2026-10-10T21:34:21.428Z
 ---
 Refine and implement end-to-end contributor profiles. This slice delivers a basic reviewable website with reviewed initial population, explicit credit joins, standalone pages, directory and accessible popovers. Full historical/PDF census and remaining surface expansion stay tracked as phases. Sol handles mechanical implementation; Astra reviews architecture and final correctness. Continue PR #490.
