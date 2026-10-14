@@ -5,7 +5,7 @@ title: Resolve four scheduled main test-time ceiling overruns without weakening 
 kind: bug
 status: in_progress
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10.local
 labels: []
@@ -18,10 +18,11 @@ child_order_hints:
   - is-01m4x5q04a41ca6rsj99gpd11d
   - is-01m4x9zbx706gftwnvmxgsnd0g
   - is-01m4xatk8zfjpdxv9kq2gv4yn1
+  - is-01m4xes8ehmmxzpjctygnawq8h
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:10:37.460Z
-updated_at: 2026-10-14T14:47:49.189Z
+updated_at: 2026-10-14T14:59:08.880Z
 started_at: 2026-10-14T10:03:10.224Z
 ---
 Optional scheduled full integration run38536321398 at f73 passes functional tests but violates12s per-test ceiling for four nodes: site_forwarders no-script redirect13.08s; results_register full-part citations T15312.17s; overview_sections no-script canonical atlas20.10s; regularized_drawings edited-block check13.44s. Main push full gate and Pages deployment passed sameSHA. Diagnose full integration contention/cold-path cost, optimize or explicitly classify measured expensive cases while preserving assertions and meaningful CI coverage; avoid broad ceiling increases.
