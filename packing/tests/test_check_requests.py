@@ -886,6 +886,41 @@ def test_the_github_comparison_lists_missing_replies_unread_comments_and_unknown
     ]
 
 
+def test_the_github_comparison_holds_a_recorded_pull_request_as_an_issue() -> None:
+    """PR #574 reports results, so the record holds it as it holds an issue: its replies,
+    which GitHub addresses under `/pull/`, are the recorded `/issues/` addresses, and its
+    other comments are read against `read_through`. A pull request the record does not
+    hold is not a request and is not listed."""
+    issued = "https://github.com/owner/repo/issues/9#issuecomment-{}"
+    pull = "https://github.com/owner/repo/pull/9#issuecomment-{}"
+    recorded = record(
+        issue(
+            number=9,
+            replies=[reply(1, "2026-10-01", url=issued.format(1))],
+            read_through="2026-10-01T12:00:00Z",
+        )
+    )
+    live = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {
+                "number": 9,
+                "state": "open",
+                "title": "A pull request",
+                "pull_request": {},
+                "labels": [INTAKE],
+            },
+            {"number": 10, "state": "open", "title": "Another", "pull_request": {}},
+        ],
+        "repos/owner/repo/issues/9/comments?per_page=100": [
+            {**comment(1, "owner", "2026-10-01T10:00:00Z"), "html_url": pull.format(1)},
+            {**comment(2, "someone", "2026-10-02T12:00:00Z"), "html_url": pull.format(2)},
+        ],
+    }
+    assert check_requests.compare_github(recorded, live.__getitem__) == [
+        f"#9: unread comment {issued.format(2)} (someone, 2026-10-02T12:00:00Z)",
+    ]
+
+
 @pytest.mark.parametrize("kind", ["defect-report", "correction", "other"])
 def test_the_github_comparison_lists_every_issue_reported_for_intake_without_the_label(
     kind: str,

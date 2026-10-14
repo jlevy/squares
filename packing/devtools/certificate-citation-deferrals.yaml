@@ -19,3 +19,13 @@ deferrals:
       and no count: a sample sets no rung, and the 33 counts those intervals carry are
       proved by T-064, T-084 and T-086, whose case records the generator drafts. A case
       record cites it once a complete replay moves the closed form's verified lane.
+  - evidence: E-wand125-closed-form-replay4d-sample
+    results: [T-180]
+    bead: think-tsox
+    blocked_on: think-wu73
+    recorded: '2026-10-14'
+    reason: >-
+      replay4d's calibration replays 2 of the closed form's 136 records, intervals 26 and 14
+      top, and no count: a sample sets no rung. A case record cites it once a complete
+      replay moves the closed form's verified lane, which think-wu73 holds over the owner's
+      40 CPU-hour cap.
