@@ -52,7 +52,7 @@ question.
 
 A result published before the seven days and registered in them appears in both sections
 if it is at S3 or above, under the day it was added and the week it was published.
-On the register at the merge with `main` (`f73e9de13`) one result is placed so: T-101,
+On the register at the merge with `main` (`287d9cba1`) one result is placed so: T-101,
 published on 5 October and added on 6 October, which is at S2 and so is listed only
 under 6 October.
 On 12 October the same rule put T-090, T-091 and T-092 in both sections.
@@ -149,8 +149,9 @@ That is a one-function change in `credit_link`.
   rubric’s “a substantive case result or machine audit”.
   The template takes `S3` and “four weeks” from `ROLLUP_FLOOR` and `ROLLUP_WEEKS`, and
   “seven” from `ADDED_DAYS`. The seven days have no floor.
-- **Draft scores count as recorded.** On the register at the merge with `main`, 88 of
-  the 156 entries carry a score whose `by` says draft.
+- **Draft scores count as recorded.** On the register at the merge with `main`, three of
+  the 156 entries carry a draft score that no review has yet confirmed, kept or changed:
+  T-154, T-155 and T-156, all registered after the significance review of 11 October.
   The intake stack’s significance review (layer 5) confirms every draft, so the question
   does not block this work.
 - **Superseded results are included, muted, and titled “Superseded”** in both sections:
@@ -182,15 +183,15 @@ unchanged.
 
 ## Byte Cost
 
-Measured on the register at the merge with `main` (`f73e9de13`):
+Measured on the register at the merge with `main` (`287d9cba1`):
 
 | Measure | Bytes |
 | --- | ---: |
 | The seven days, 58 results over 6 to 13 October | 17,722 |
-| The weekly rollup, 55 results in the four weeks before | 8,285 |
-| Both sections | 26,007 |
+| The weekly rollup, 55 results in the four weeks before | 8,230 |
+| Both sections | 25,952 |
 | Ceiling for both (`tests/test_results_rollup.py`, `ROLLUP_BYTES`) | 48,000 |
-| `results.html` on this branch | 914,577 |
+| `results.html` on this branch | 910,397 |
 | Page ceiling (`site_urls.PAGE_BUDGET_EXCEPTIONS`, `test_overview.PAGE_CEILINGS`) | 950,000 |
 
 An entry of the seven days costs about 306 bytes: its id link, headline, cases, rungs
