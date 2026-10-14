@@ -5,7 +5,7 @@ title: Resolve four scheduled main test-time ceiling overruns without weakening 
 kind: bug
 status: in_progress
 priority: 1
-version: 18
+version: 19
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10.local
 labels: []
@@ -26,11 +26,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:10:37.460Z
-updated_at: 2026-10-14T16:14:41.630Z
+updated_at: 2026-10-14T18:45:15.375Z
 started_at: 2026-10-14T10:03:10.224Z
 ---
 Optional scheduled full integration run38536321398 at f73 passes functional tests but violates12s per-test ceiling for four nodes: site_forwarders no-script redirect13.08s; results_register full-part citations T15312.17s; overview_sections no-script canonical atlas20.10s; regularized_drawings edited-block check13.44s. Main push full gate and Pages deployment passed sameSHA. Diagnose full integration contention/cold-path cost, optimize or explicitly classify measured expensive cases while preserving assertions and meaningful CI coverage; avoid broad ceiling increases.
 
 ## Notes
 
-PR590 is merged/live. Current PR599 head 58b6a8688d87661a7ebeac6ef3e5c944f09efd01 contains main37; all33 changed paths independently reviewed through K (5520950386), no unresolved source findings. Genuine-push required-browser 38594336170 FAILED: A atlas pool-worker CALL14.45 seconds and whole339.7>335; B all functional/CALL assertions passed but whole384.2>360. C/D and ten schema controls passed, no current deadline; ordinary Packing38594344872/Pages38594345606/mergeability passed. Fixer owns atlas pool comparison (think-jxo0); root reprices complete current cohort under think-t01m without hand weights or ceiling changes. Previous failed full/enforced runs remain failed; mathematical/deferred reuse is limited to independently reviewed unchanged consumers and inputs. Intermittent900-second deadline remains unproved fixed (think-ma3y); ordinary required-browser omissions separately tracked think-zvp7. Merge still requires fresh strict proof and live25-entry About verification.
+Latest checkpoint2026-10-14: remotePR599head08d23c06 remainsfailed strict38597483408; no speedup/merge-readyclaim. Local078512df457d0743d6604e9f53f87cf768f883b7 cleancommitaddsbounded8-file recorded-cost-first native loadfileordering with explicitno-loadscope-reorder. IndependentAstraPreliminaryM caughtactualxdistworker dist=no handoffbugM1 andmissingpublicationexemptionM2; bothfixed andfollowupM hasnofindings onall8paths. Real2workerregression passed1test2.65s, all12syntheticnodesexactlyonce heavyfirstonbothworkers withsupportedmetadata. Bothaffectedregisteredcontrol positivespassed1each; bothregisteredmutantsrejectedexpected1failureeach throughmaintainedrunner, allfourchildJUnits0errors0skips. Uniqueevidence .codex/regularization-closeout-evidence-2026-10-13/ci599-controls-current/ andM-followup. Localcheckpointnotpushed toavoidduplicatedhostedcohorts beforeNews604lands. Next integrateNews604main preserving25rewrittenentries/topics/site0.7, confirmcombinedsource/releaseimpacts, publishcurrentheadreviews andrunappropriatecurrentstrictcohort/frontend. Currentordinarymain37 separatelyunchanged. SystemicCI/overnightretrospectiveisAstra-authoredconcreteplan docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md committeda1ddb6f22 separatebranch think-kxmq/d4ub.900deadline rootcauseunproved think-ma3y;210ordinaryrequiredChromeomissions think-zvp7. Neitherfailurefixedbyraisingceilings.

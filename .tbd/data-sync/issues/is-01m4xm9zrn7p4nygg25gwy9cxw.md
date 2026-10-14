@@ -5,7 +5,7 @@ title: Publish individual tagged News articles and newest three S5 homepage high
 kind: feature
 status: in_progress
 priority: 1
-version: 11
+version: 12
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10
 labels: []
@@ -19,10 +19,11 @@ child_order_hints:
   - is-01m4xrpdhct6kjaqad5wetq2yy
   - is-01m4xtt5nyeqz0efzgcd8gb6h4
   - is-01m4xtz3gjt6835xehbx6rv4br
+  - is-01m4xvfk8yy1x7p8aarnhh8cs8
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:35:39.924Z
-updated_at: 2026-10-14T18:32:03.344Z
+updated_at: 2026-10-14T18:41:03.759Z
 started_at: 2026-10-14T16:36:49.748Z
 ---
 Current owner requirements supersede earlier daily-details/hover-open notes: dedicated second News navigation tab, one card per individual entry (25), actual article rendered once with about ten visible lines and fade; explicit click/tap or keyboard expansion and contraction, hover only light green indication. Reuse Results subject chip colors, paper-style dates, compact small-caps titles, shared footer chevrons and shared transitions with reduced-motion/no-JS fallbacks. Rewrite all retained items as reader-relevant news while preserving metadata/evidence. Homepage shows newest three S5 results with existing claim/status/credit and visible verification caveat. Document extensions in existing paper-design.md and active feature plan. PR604 head8c465d209 has normal hooks/local bounded browser checks passing, Pages38614518630 green; hosted frontend38614518600 has three test-contract failures tracked think-i7qh and independent correctness review B is in progress. Site v0.7.0, posters0.6.0 and independent paper versions; no current launch/deployment claim. Root coordinates remaining reviews, batched fixes, current-head hosted proof, merge and live verification.
