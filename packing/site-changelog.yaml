@@ -6,6 +6,164 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: october-twelve-intake-and-house-admissions
+    date: '2026-10-14'
+    title: A New 40-Square Lower Bound and Four Adopted Packings
+    pull_requests: [598]
+    categories: [records]
+    result_ids: [T-157, T-158, T-159, T-160]
+    summary: |
+      Registered four results from the 12 October intake at V3/C3. Guzhou0806’s new
+      density certificate raises the lower bound to $s(40) > 3359/500 = 6.718$, and the
+      case records adopt Daniil Ostashev’s packings of 175, 232 and 264 squares and Evan
+      Daniel’s packing of 154 squares.
+    details: |
+      - Replayed Guzhou0806’s certificate across all 43 slabs with the producer’s kernels,
+        0.00218 above T-145’s bound. Independent code also decided the near-axis step;
+        the continuous cover has not yet been decided by code other than the producer’s.
+      - Decided Ostashev’s three certificates (T-158) and Daniel’s (T-160) on both
+        maintained exact routes and a third. Ostashev’s sides are 2.95e-03 to 3.44e-03
+        below the previous ceilings and Daniel’s 5.04e-04 below; the displaced packings
+        stay as history.
+      - Certified Rio Calle’s 102-square layout (T-159) exactly from its printed decimals.
+        It is another arrangement of Ryan Xu’s design, 2.43e-11 above the house, so it
+        moves no bound.
+      - Credited the four adoptions in the methods tutorial.
+
+      The upper bounds establish finite feasibility; none of the four results is an optimum.
+    artifacts:
+      - kind: result
+        label: Current 40-square lower-bound record
+        target: https://jlevy.github.io/squares/result/t-157.html
+      - kind: result
+        label: Current Ostashev 175-, 232- and 264-square record
+        target: https://jlevy.github.io/squares/result/t-158.html
+      - kind: result
+        label: Current Calle 102-square record
+        target: https://jlevy.github.io/squares/result/t-159.html
+      - kind: result
+        label: Current Daniel 154-square record
+        target: https://jlevy.github.io/squares/result/t-160.html
+      - kind: page
+        label: Current atlas of adopted packings
+        target: https://jlevy.github.io/squares/atlas.html
+      - kind: paper
+        label: Current methods tutorial
+        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+      - kind: pdf
+        label: Current methods tutorial PDF
+        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf
+    publication:
+      date: '2026-10-14'
+      evidence: https://github.com/jlevy/squares/actions/runs/38558844519/job/115838577096
+    releases:
+      - component: site
+        version: v0.6.1
+      - component: paper:square-packing-methods-survey
+        version: v0.2.2
+    references:
+      - label: Lower-bound review
+        target: docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
+      - label: Ostashev and Calle certificate review
+        target: docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md
+      - label: Daniel certificate review
+        target: docs/project/reviews/review-2026-10-12-upper-bound-import-552.md
+  - id: project-changelog-and-independent-editions
+    date: '2026-10-14'
+    title: A Project Changelog and Independent Component Editions
+    pull_requests: [590]
+    categories: [site, documentation]
+    summary: |
+      Added this changelog to About and GitHub: a selected history of results, papers,
+      site features and tooling from 10 October, with direct links to launched artifacts.
+      The site, the pair of packing posters and each paper now keep separate edition
+      histories.
+    details: |
+      - Published site v0.6.0 with the changelog, and the posters’ v0.6.0 edition with
+        regularized default views and compact attribution.
+      - Published the lower-bounds explainer’s v0.4.6, which explains the two reported
+        17-square proofs; the other papers keep their editions.
+      - Added a release-impact check that asks each changed public component for a patch
+        or minor successor, or for a reviewed finding that its output did not change.
+    artifacts:
+      - kind: page
+        label: Current About changelog
+        target: https://jlevy.github.io/squares/about.html#changelog
+      - kind: pdf
+        label: Current 1–100 packing infographic
+        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+      - kind: pdf
+        label: Current 1–324 packing poster
+        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+      - kind: paper
+        label: Current lower-bounds explainer
+        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+      - kind: pdf
+        label: Current lower-bounds explainer PDF
+        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.pdf
+    publication:
+      date: '2026-10-14'
+      evidence: https://github.com/jlevy/squares/actions/runs/38552030866/job/115817992138
+    releases:
+      - component: site
+        version: v0.6.0
+      - component: infographics
+        version: v0.6.0
+      - component: paper:n11-lower-bounds-explainer
+        version: v0.4.6
+    references:
+      - label: GitHub changelog
+        target: CHANGELOG.md
+      - label: Changelog and edition rules
+        target: development.md
+      - label: Backfill review
+        target: docs/project/reviews/review-2026-10-13-site-changelog-backfill.md
+  - id: verification-significance-and-announcement-audit
+    date: '2026-10-14'
+    title: Rung and Significance Reviews of Recent Results
+    pull_requests: [563]
+    categories: [records, pipeline]
+    result_ids: [T-053, T-063, T-065]
+    summary: |
+      Reviewed the verification rungs of T-120 to T-146 and of the Lean-backed results,
+      and the register’s draft significance scores. Every reviewed rung stands, and three
+      significance scores changed.
+    details: |
+      - Confirmed all 27 rungs from T-120 to T-146 against their evidence: ten at V0/C0
+        and seventeen at V3/C3, none over- or under-rated.
+      - Found that no Lean-backed result can move a rung yet. The next rung needs a second
+        adversarial review and a human oversight record; a formalization counts only with
+        a build the record holds and a human expert’s review.
+      - Kept 46 of 48 draft significance scores, lowered T-053 from S4 to S3 and T-065
+        from S3 to S2, and raised T-063 from S1 to S3.
+      - Added an announcement tool that drafts one credited line per new result for the
+        owner to post.
+
+      The reviews change no rung or bound; significance guides reading order and is not
+      verification evidence.
+    artifacts:
+      - kind: page
+        label: Current results, with the revised significance scores
+        target: https://jlevy.github.io/squares/results.html
+      - kind: result
+        label: Current 45-square record
+        target: https://jlevy.github.io/squares/result/t-053.html
+      - kind: result
+        label: Current 61-square record
+        target: https://jlevy.github.io/squares/result/t-063.html
+      - kind: result
+        label: Current Bidwell 17-square certificate record
+        target: https://jlevy.github.io/squares/result/t-065.html
+    publication:
+      date: '2026-10-14'
+      evidence: https://github.com/jlevy/squares/actions/runs/38551948126/job/115813924621
+    references:
+      - label: Recent-register rung review
+        target: docs/project/reviews/review-2026-10-11-recent-register-rungs.md
+      - label: Lean-backed rung review
+        target: docs/project/reviews/review-2026-10-11-lean-backed-rungs.md
+      - label: Significance review
+        target: docs/project/reviews/review-2026-10-11-significance-scores.md
   - id: n17-proof-reports-and-verification-policy
     date: '2026-10-14'
     title: Two Reported 17-Square Proofs and Their Verification Limits
@@ -586,6 +744,26 @@ entries:
       - label: Beyond-horizon source coverage
         target: packing/frontier/source-coverage.yaml
 deliveries:
+- number: 597
+  title: 'fix(check_requests): hold each stated field to the last reply that stated it'
+  merged_at: '2026-10-14T12:16:17Z'
+  base_ref: main
+  merge_commit: 37e6757ed4c51a1d93f2f999814c2a5efbe2a223
+- number: 598
+  title: 'research: intake layer 6, the 12 October results (T-157 to T-160) and their houses'
+  merged_at: '2026-10-14T11:45:27Z'
+  base_ref: main
+  merge_commit: e1f14898d549b71eb59cdbf8490380e25b23bbf9
+- number: 590
+  title: 'feat(site): publish project changelog and independent component editions'
+  merged_at: '2026-10-14T10:47:29Z'
+  base_ref: main
+  merge_commit: 287d9cba1d1777ec5531aa8eb73817e7faf82c2a
+- number: 563
+  title: 'research: intake layer 5, the rung and significance reviews and the announcement renderer'
+  merged_at: '2026-10-14T10:46:45Z'
+  base_ref: main
+  merge_commit: d22861a183eeafcaee9443d1f43493dbe8a2b254
 - number: 511
   title: 'feat: drive Evan Daniel''s regularizer, re-solve views at the record''s side, and draw a
     review gallery, with pilot spikes (think-up3h, think-7hmc, think-ubr0, think-pwmi)'
@@ -896,6 +1074,10 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 597
+  - 598
+  - 590
+  - 563
   - 592
   - 595
   - 591
@@ -944,6 +1126,9 @@ coverage:
   - 480
   - 479
   omissions:
+  - pull_request: 597
+    reason: Reply-tracker correction holding each rung and status to the last reply that stated it;
+      no record, result, rung or public artifact changed.
   - pull_request: 579
     reason: Internal work reconciliation, tracker cleanup and agent-ownership procedures; no independent
       public result or publication.
@@ -978,6 +1163,23 @@ coverage:
     reason: Temporary CI-budget maintenance and retained measurements; the structural efficiency improvement
       remains future work.
 frozen_entries:
+- id: n17-proof-reports-and-verification-policy
+  date: '2026-10-14'
+  pull_requests:
+  - 592
+  - 595
+- id: regularized-drawings-and-exact-side-admissions
+  date: '2026-10-14'
+  pull_requests:
+  - 511
+  - 530
+  - 548
+  - 549
+  - 559
+  - 580
+  - 585
+  - 587
+  - 591
 - id: fitzharding-n17-reported-proof
   date: '2026-10-13'
   pull_requests:

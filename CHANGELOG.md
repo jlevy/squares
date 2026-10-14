@@ -34,6 +34,61 @@ First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/square
 
 PRs and supporting records: [\#592](https://github.com/jlevy/squares/pull/592) · [\#595](https://github.com/jlevy/squares/pull/595) · [Fitzharding mathematical review](docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md) · [Overbeck mathematical review](docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md) · [Evidence and independence rules](epistemics.md).
 
+<a id="changelog-entry-october-twelve-intake-and-house-admissions"></a>
+
+#### A New 40-Square Lower Bound and Four Adopted Packings
+
+Registered four results from the 12 October intake at V3/C3. Guzhou0806’s new
+density certificate raises the lower bound to $s(40) > 3359/500 = 6.718$, and the
+case records adopt Daniil Ostashev’s packings of 175, 232 and 264 squares and Evan
+Daniel’s packing of 154 squares.
+
+- Replayed Guzhou0806’s certificate across all 43 slabs with the producer’s kernels,
+  0.00218 above T-145’s bound. Independent code also decided the near-axis step;
+  the continuous cover has not yet been decided by code other than the producer’s.
+- Decided Ostashev’s three certificates (T-158) and Daniel’s (T-160) on both
+  maintained exact routes and a third. Ostashev’s sides are 2.95e-03 to 3.44e-03
+  below the previous ceilings and Daniel’s 5.04e-04 below; the displaced packings
+  stay as history.
+- Certified Rio Calle’s 102-square layout (T-159) exactly from its printed decimals.
+  It is another arrangement of Ryan Xu’s design, 2.43e-11 above the house, so it
+  moves no bound.
+- Credited the four adoptions in the methods tutorial.
+
+The upper bounds establish finite feasibility; none of the four results is an optimum.
+
+Published artifacts: [Current 40-square lower-bound record](https://jlevy.github.io/squares/result/t-157.html) · [Current Ostashev 175-, 232- and 264-square record](https://jlevy.github.io/squares/result/t-158.html) · [Current Calle 102-square record](https://jlevy.github.io/squares/result/t-159.html) · [Current Daniel 154-square record](https://jlevy.github.io/squares/result/t-160.html) · [Current atlas of adopted packings](https://jlevy.github.io/squares/atlas.html) · [Current methods tutorial](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) · [Current methods tutorial PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf).
+
+Component editions: Site v0.6.1; How Record Square Packings Are Found v0.2.2.
+
+First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38558844519/job/115838577096)).
+
+PRs and supporting records: [\#598](https://github.com/jlevy/squares/pull/598) · [Lower-bound review](docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md) · [Ostashev and Calle certificate review](docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md) · [Daniel certificate review](docs/project/reviews/review-2026-10-12-upper-bound-import-552.md).
+
+<a id="changelog-entry-project-changelog-and-independent-editions"></a>
+
+#### A Project Changelog and Independent Component Editions
+
+Added this changelog to About and GitHub: a selected history of results, papers,
+site features and tooling from 10 October, with direct links to launched artifacts.
+The site, the pair of packing posters and each paper now keep separate edition
+histories.
+
+- Published site v0.6.0 with the changelog, and the posters’ v0.6.0 edition with
+  regularized default views and compact attribution.
+- Published the lower-bounds explainer’s v0.4.6, which explains the two reported
+  17-square proofs; the other papers keep their editions.
+- Added a release-impact check that asks each changed public component for a patch
+  or minor successor, or for a reviewed finding that its output did not change.
+
+Published artifacts: [Current About changelog](https://jlevy.github.io/squares/about.html#changelog) · [Current 1–100 packing infographic](https://jlevy.github.io/squares/square-packings-100-20261008.pdf) · [Current 1–324 packing poster](https://jlevy.github.io/squares/square-packings-324-20261008.pdf) · [Current lower-bounds explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html) · [Current lower-bounds explainer PDF](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.pdf).
+
+Component editions: Site v0.6.0; Infographics v0.6.0; New Lower Bounds for Square Packing for n = 11 v0.4.6.
+
+First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38552030866/job/115817992138)).
+
+PRs and supporting records: [\#590](https://github.com/jlevy/squares/pull/590) · [GitHub changelog](CHANGELOG.md) · [Changelog and edition rules](development.md) · [Backfill review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md).
+
 <a id="changelog-entry-regularized-drawings-and-exact-side-admissions"></a>
 
 #### Regularized Drawings, Exact Side Admissions and Original Comparison
@@ -58,6 +113,33 @@ Published artifacts: [Current atlas with Regularized / Original comparison](http
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38527537367/job/115733950233)).
 
 PRs and supporting records: [\#511](https://github.com/jlevy/squares/pull/511) · [\#530](https://github.com/jlevy/squares/pull/530) · [\#548](https://github.com/jlevy/squares/pull/548) · [\#549](https://github.com/jlevy/squares/pull/549) · [\#559](https://github.com/jlevy/squares/pull/559) · [\#580](https://github.com/jlevy/squares/pull/580) · [\#585](https://github.com/jlevy/squares/pull/585) · [\#587](https://github.com/jlevy/squares/pull/587) · [\#591](https://github.com/jlevy/squares/pull/591) · [Regularization policy](docs/project/policies/regularization-policy.md) · [Regularization process](docs/project/guides/regularization-process.md).
+
+<a id="changelog-entry-verification-significance-and-announcement-audit"></a>
+
+#### Rung and Significance Reviews of Recent Results
+
+Reviewed the verification rungs of T-120 to T-146 and of the Lean-backed results,
+and the register’s draft significance scores. Every reviewed rung stands, and three
+significance scores changed.
+
+- Confirmed all 27 rungs from T-120 to T-146 against their evidence: ten at V0/C0
+  and seventeen at V3/C3, none over- or under-rated.
+- Found that no Lean-backed result can move a rung yet. The next rung needs a second
+  adversarial review and a human oversight record; a formalization counts only with
+  a build the record holds and a human expert’s review.
+- Kept 46 of 48 draft significance scores, lowered T-053 from S4 to S3 and T-065
+  from S3 to S2, and raised T-063 from S1 to S3.
+- Added an announcement tool that drafts one credited line per new result for the
+  owner to post.
+
+The reviews change no rung or bound; significance guides reading order and is not
+verification evidence.
+
+Published artifacts: [Current results, with the revised significance scores](https://jlevy.github.io/squares/results.html) · [Current 45-square record](https://jlevy.github.io/squares/result/t-053.html) · [Current 61-square record](https://jlevy.github.io/squares/result/t-063.html) · [Current Bidwell 17-square certificate record](https://jlevy.github.io/squares/result/t-065.html).
+
+First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38551948126/job/115813924621)).
+
+PRs and supporting records: [\#563](https://github.com/jlevy/squares/pull/563) · [Recent-register rung review](docs/project/reviews/review-2026-10-11-recent-register-rungs.md) · [Lean-backed rung review](docs/project/reviews/review-2026-10-11-lean-backed-rungs.md) · [Significance review](docs/project/reviews/review-2026-10-11-significance-scores.md).
 
 <a id="changelog-date-2026-10-13"></a>
 

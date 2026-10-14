@@ -178,6 +178,29 @@ thirteen omissions. Current artifact links name moving views rather than archive
 editions. The selected infographic v0.6.0 and explainer v0.4.6 exports are still release
 preparation work and are not attributed to these already verified launches.
 
+### 14 October Closeout
+
+Four more PRs merged into main on 14 October after #592, each with base `main`. The
+importer verified every merge commit on local main at `37e6757ed`, and the retained rows
+equal its candidate.
+
+| PR | UTC Merge | Disposition | Publication evidence or omission reason |
+| --- | --- | --- | --- |
+| [#597](https://github.com/jlevy/squares/pull/597) | 2026-10-14T12:16:17Z | Omitted | Reply-tracker correction to #556’s rule; no record, result or public artifact changed, and no Pages run followed the merge. |
+| [#598](https://github.com/jlevy/squares/pull/598) | 2026-10-14T11:45:27Z | `october-twelve-intake-and-house-admissions` | [Attempt 2](https://github.com/jlevy/squares/actions/runs/38558844519/job/115838577096) deployed `e1f14898d` at 11:55:42 UTC and passed 4,213 of 4,213 checks; attempt 1 failed in `geometry` and did not deploy. |
+| [#590](https://github.com/jlevy/squares/pull/590) | 2026-10-14T10:47:29Z | `project-changelog-and-independent-editions` | [Verification](https://github.com/jlevy/squares/actions/runs/38552030866/job/115817992138) of `287d9cba1`, deployed at 11:03:03 UTC: 4,182 of 4,182 checks. |
+| [#563](https://github.com/jlevy/squares/pull/563) | 2026-10-14T10:46:45Z | `verification-significance-and-announcement-audit` | [Verification](https://github.com/jlevy/squares/actions/runs/38551948126/job/115813924621) of `d22861a18`, deployed at 10:52:29 UTC: 4,159 of 4,159 checks. |
+
+The editions are those first introduced on main by each merge: site v0.6.0, infographics
+v0.6.0 and explainer v0.4.6 by `287d9cba1`; site v0.6.1 and methods tutorial v0.2.2 by
+`e1f14898d`. #563 cut no edition.
+Every artifact the three entries link answered HTTP 200 on 14 October; both live posters
+carry v0.6.0, and the live T-053, T-063 and T-065 pages show the revised scores.
+T-159 is described as the register states it: certified at V3/C3, superseded on arrival
+and not adopted. The #597 omission follows #556’s.
+
+The record now contains 25 entries, 51 retained deliveries and fourteen omissions.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
