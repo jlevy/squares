@@ -27,7 +27,7 @@ RADICAL_REPORT = "E-ryxu-432-radical-n51-report"
 RADICAL_EXACT = "E-ryxu-432-radical-n51-feasibility"
 RATIONAL_EXACT = "E-ryxu-432-rational-feasibility"
 HISTORY = houses.reports.PACKET / "acquisition/frontier-prior-state.json.xz"
-SECTION = "## The ry-xu construction"
+SECTION = "## The Xu construction"
 
 
 def reported_bound(n: int) -> dict[str, Any]:
@@ -73,7 +73,7 @@ def section(n: int, *, confirmed: bool) -> str:
     result = "T-126" if n == 51 else "T-125"
     return (
         f"\n{SECTION}\n\n"
-        f"ry-xu reports ({result}) a construction at exact side ${side}$, displayed upward "
+        f"Ryan Xu reports ({result}) a construction at exact side ${side}$, displayed upward "
         f"as ${bound['value']}$. The [pinned factual packet]"
         "(../resources/web/ry-xu-new-packings-2026-10-08/README.md) retains the entire "
         "source input and complete actual deciding outcomes.\n\n"
@@ -482,7 +482,7 @@ def _register_records() -> None:
                         "before confirmation."
                     ),
                     "notes": (
-                        "Credit to ry-xu with disclosed LLM assistance. All 25 source "
+                        "Credit to Ryan Xu with disclosed LLM assistance. All 25 source "
                         "inputs retained; no upstream code executed. Exact finite "
                         "feasibility only."
                     ),
@@ -594,7 +594,7 @@ def register() -> None:
             previous.update(
                 superseded_by=houses.RADICAL_SOURCE_ID if n == 51 else houses.SOURCE_ID,
                 reason=(
-                    "Historical source ceiling superseded by a smaller exact ry-xu "
+                    "Historical source ceiling superseded by a smaller exact Xu "
                     "construction."
                 ),
             )
@@ -659,11 +659,11 @@ def register() -> None:
         "key",
     )
     bibliography = REPO / "packing/resources/bibliography.yaml"
-    if "  ry-xu: ry-xu\n" not in bibliography.read_text():
+    if "  Ryan Xu: Xu\n" not in bibliography.read_text():
         save(
             bibliography,
             bibliography.read_text().replace(
-                "credited_names:\n", "credited_names:\n  ry-xu: ry-xu\n"
+                "credited_names:\n", "credited_names:\n  Ryan Xu: Xu\n"
             ),
         )
 

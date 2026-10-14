@@ -2696,7 +2696,7 @@ packet.original.exact_verify = packet.original.independent.check = forbidden
 
 
 #: The second SQUISH packet's displaced houses, as a worker program admits them: the
-#: ry-xu and Gupta houses from their retained history, and since the house adoption of
+#: Xu and Gupta houses from their retained history, and since the house adoption of
 #: 11 October 2026 (think-fvz4) the earlier houses at 263 and 302 rebuilt from the
 #: packet's private inputs. Both worker programs below run it, so the copies cannot
 #: drift. It expects `packet` and `house` bound, and leaves `house.house_path` as it

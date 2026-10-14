@@ -2750,7 +2750,7 @@ sources:
     require their own assurance. Historical counts excluded by the author do not replace smaller
     ceilings.
 - id: ry-xu-new-packings-2026-10-08
-  title: 'ry-xu new square constructions, issue #432'
+  title: 'Ryan Xu''s new square constructions, issue #432'
   role: source-repository
   url: https://github.com/ry-xu/square_packing/tree/8dc415296f697f5140caea27c7a0193d52deb4e6
   local: resources/web/ry-xu-new-packings-2026-10-08/
@@ -2814,7 +2814,7 @@ sources:
     plus the separate undilated radical n51 construction; eight rational certificates are non-selected.
     No 191-contact assertion admitted.
 - id: ry-xu-undilated-n51-2026
-  title: ry-xu undilated n51 exact construction
+  title: Xu's undilated n51 exact construction
   role: source-repository
   url: https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json
   local: resources/web/ry-xu-new-packings-2026-10-08/
@@ -5606,42 +5606,42 @@ superseded_reports:
   source_id: evand-square-packing-2026-10-05
   value: '10.607174680176051125448595024891'
   superseded_by: evand-regularized-2026-10-10
-  reason: Historical source ceiling superseded by a smaller exact ry-xu construction.
+  reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 103
   source_id: evand-square-packing-2026-10-05
   value: '10.703516755572542008729416503972'
   superseded_by: evand-regularized-2026-10-10
-  reason: Historical source ceiling superseded by a smaller exact ry-xu construction.
+  reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 105
   source_id: rehwaldt-couzo-refinements-2026-10-07
   value: '10.80607786551970463257490535044771520398745274'
   superseded_by: couzo-followup-refinements-2026-10-08
-  reason: Historical source ceiling superseded by a smaller exact ry-xu construction.
+  reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 108
   source_id: squish-second-update-2026-10-07
   value: '10.9099400734448775'
   superseded_by: couzo-451-exact-refinements
-  reason: Historical source ceiling superseded by a smaller exact ry-xu construction.
+  reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 123
   source_id: squish-update-2026-10-07
   value: '11.6009077785163406'
   superseded_by: evand-regularized-2026-10-10
-  reason: Historical source ceiling superseded by a smaller exact ry-xu construction.
+  reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 126
   source_id: squish-update-2026-10-07
   value: '11.7733036066072403'
   superseded_by: evand-trio126-2026-10-09
-  reason: Historical source ceiling superseded by a smaller exact ry-xu construction.
+  reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 129
   source_id: squish-update-2026-10-07
   value: '11.8793752067111287'
   superseded_by: evand-regularized-2026-10-10
-  reason: Historical source ceiling superseded by a smaller exact ry-xu construction.
+  reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 131
   source_id: evand-square-packing-2026-10-05
   value: '11.954916830216124410139679227683'
   superseded_by: squish-481-third-request-2026-10-09
-  reason: Historical source ceiling superseded by a smaller exact ry-xu construction.
+  reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 51
   source_id: ry-xu-new-packings-2026-10-08
   value: '7.6903559372961822'
@@ -5768,19 +5768,19 @@ superseded_reports:
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '10.9099400734438859'
   superseded_by: couzo-451-exact-refinements
-  reason: The withdrawn Gupta rational certificate is larger than the selected ry-xu construction;
+  reason: The withdrawn Gupta rational certificate is larger than the selected Xu construction;
     its complete source and replay remain retained.
 - n: 123
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.6009077785130183'
   superseded_by: evand-regularized-2026-10-10
-  reason: The withdrawn Gupta rational certificate is larger than the selected ry-xu construction;
+  reason: The withdrawn Gupta rational certificate is larger than the selected Xu construction;
     its complete source and replay remain retained.
 - n: 129
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.8793752067078730'
   superseded_by: evand-regularized-2026-10-10
-  reason: The withdrawn Gupta rational certificate is larger than the selected ry-xu construction;
+  reason: The withdrawn Gupta rational certificate is larger than the selected Xu construction;
     its complete source and replay remain retained.
 - n: 105
   source_id: evand-batch-105-130-2026-10-07

@@ -1,4 +1,4 @@
-"""Historical Q(sqrt7) geometry remains distinct from current exact ry-xu houses."""
+"""Historical Q(sqrt7) geometry remains distinct from current exact Xu houses."""
 
 from __future__ import annotations
 

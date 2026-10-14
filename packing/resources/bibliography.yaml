@@ -1483,7 +1483,7 @@ sources:
       blanket licence.
   - key: '[ry-xu square packing 2026]'
     authors:
-    - ry-xu
+    - Xu
     year: 2026
     venue: GitHub
     dated: '2026-10-08'
@@ -2106,7 +2106,7 @@ credited_names:
   Robert Barnett: Barnett
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta
-  ry-xu: ry-xu
+  Ryan Xu: Xu
   Seth Rehwaldt: Rehwaldt
   Nate Chaoweeraprasit: Chaoweeraprasit
   Allen Chang: Chang

@@ -5196,16 +5196,17 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[ry-xu square packing 2026]'
     field: /authors/0
-  expected_text: ry-xu
+  expected_text: Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 2
+  label: Xu
   role: source-author
   disposition: resolved
   evidence:
-  - packet
-  - github-profile
+  - bibliography
+  - identity-review
   contributor_id: ryan-xu
+  note: Joined by the reviewed identity of 13 spans so labelled.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel new arrangements 2026-10-07]'
@@ -9200,16 +9201,17 @@ occurrences:
     path: packing/frontier/n-051.md
     record_key: '51'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
+  evidence: &id021
   - github-profile
+  - owner-confirmation
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-051.md
     record_key: '51'
@@ -9659,16 +9661,15 @@ occurrences:
     path: packing/frontier/n-070.md
     record_key: '70'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-070.md
     record_key: '70'
@@ -9692,7 +9693,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: &id022
+  evidence: &id023
   - repository-license
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
@@ -9930,16 +9931,15 @@ occurrences:
     path: packing/frontier/n-084.md
     record_key: '84'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-084.md
     record_key: '84'
@@ -9963,7 +9963,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: &id021
+  evidence: &id022
   - primary-byline
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
@@ -9997,16 +9997,15 @@ occurrences:
     path: packing/frontier/n-086.md
     record_key: '86'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-086.md
     record_key: '86'
@@ -10030,7 +10029,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10307,16 +10306,15 @@ occurrences:
     path: packing/frontier/n-102.md
     record_key: '102'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-102.md
     record_key: '102'
@@ -10340,23 +10338,22 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
     path: packing/frontier/n-103.md
     record_key: '103'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-103.md
     record_key: '103'
@@ -10392,7 +10389,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10412,16 +10409,15 @@ occurrences:
     path: packing/frontier/n-105.md
     record_key: '105'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-105.md
     record_key: '105'
@@ -10445,7 +10441,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10516,16 +10512,15 @@ occurrences:
     path: packing/frontier/n-108.md
     record_key: '108'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-108.md
     record_key: '108'
@@ -10549,7 +10544,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10750,16 +10745,15 @@ occurrences:
     path: packing/frontier/n-123.md
     record_key: '123'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-123.md
     record_key: '123'
@@ -10782,7 +10776,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -10813,16 +10807,15 @@ occurrences:
     path: packing/frontier/n-126.md
     record_key: '126'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-126.md
     record_key: '126'
@@ -10846,23 +10839,22 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
     path: packing/frontier/n-127.md
     record_key: '127'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-127.md
     record_key: '127'
@@ -10886,7 +10878,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -10946,16 +10938,15 @@ occurrences:
     path: packing/frontier/n-129.md
     record_key: '129'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-129.md
     record_key: '129'
@@ -10979,7 +10970,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -11054,7 +11045,7 @@ occurrences:
   label: Evan Daniel
   role: construction-finder
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -11229,16 +11220,15 @@ occurrences:
     path: packing/frontier/n-146.md
     record_key: '146'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-146.md
     record_key: '146'
@@ -11778,16 +11768,15 @@ occurrences:
     path: packing/frontier/n-175.md
     record_key: '175'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-175.md
     record_key: '175'
@@ -11811,7 +11800,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -11975,7 +11964,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -12513,7 +12502,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -13017,7 +13006,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13055,7 +13044,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -13453,7 +13442,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13510,16 +13499,15 @@ occurrences:
     path: packing/frontier/n-261.md
     record_key: '261'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-261.md
     record_key: '261'
@@ -13592,7 +13580,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13651,16 +13639,15 @@ occurrences:
     path: packing/frontier/n-267.md
     record_key: '267'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-267.md
     record_key: '267'
@@ -13684,7 +13671,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -14119,7 +14106,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14188,16 +14175,15 @@ occurrences:
     path: packing/frontier/n-295.md
     record_key: '295'
     field: /reported_upper_bound/found_by/0
-  expected_text: ry-xu
+  expected_text: Ryan Xu
   start: 0
-  end: 5
-  label: ry-xu
+  end: 7
+  label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence:
-  - packet
-  - github-profile
+  evidence: *id021
   contributor_id: ryan-xu
+  note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
     path: packing/frontier/n-295.md
     record_key: '295'
@@ -14221,7 +14207,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14417,7 +14403,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14455,7 +14441,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -14480,7 +14466,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -14518,7 +14504,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id021
+  evidence: *id022
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -14620,7 +14606,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id022
+  evidence: *id023
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:

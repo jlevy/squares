@@ -12918,17 +12918,17 @@ results:
     next_rung: C4 requires two distinct accepted confirming adversarial reviews and an actual human
       oversight record; neither drawing nor admission supplies them.
     notes: >-
-      Credit to ry-xu with disclosed LLM assistance. All 25 source inputs retained; no upstream
+      Credit to Ryan Xu with disclosed LLM assistance. All 25 source inputs retained; no upstream
       code executed. Exact finite feasibility only.
 
       Evan Daniel's later regularized certificates (T-146) are smaller at 70, 102, 103, 123,
       129, 146 and 295, by 7.90e-11 to 7.82e-10, and regularize the packings there, credited
-      to ry-xu, at 103 as refined by Mishapolk (T-138); at 70 Eric Deleeuw's refinement
+      to Xu, at 103 as refined by Mishapolk (T-138); at 70 Eric Deleeuw's refinement
       (T-137) is named only as the smallest side the record held. The 11 October review of
       T-146 accepted it, and on 11 October 2026 the case records adopted it as the house at
-      six of those counts, crediting each packing to ry-xu. At 146 and 261 Robert Barnett's
+      six of those counts, crediting each packing to Xu. At 146 and 261 Robert Barnett's
       refinements of the same packings (T-150, issue 505) are smaller still, and the same
-      adoption made them the houses there, crediting the packings to ry-xu.
+      adoption made them the houses there, crediting the packings to Xu.
 
       The same adoption moved the houses at 84, 86, 105, 108, 126, 127, 131, 175 and 267 to
       smaller confirmed certificates: Francisco Couzo's refinements of these packings (T-128,
@@ -12980,7 +12980,7 @@ results:
     - packing/devtools/ryxu_radical_n51.py
     next_rung: C4 requires two distinct accepted confirming adversarial reviews and an actual human
       oversight record; neither drawing nor admission supplies them.
-    notes: Credit to ry-xu with disclosed LLM assistance. All 25 source inputs retained; no upstream
+    notes: Credit to Ryan Xu with disclosed LLM assistance. All 25 source inputs retained; no upstream
       code executed. Exact finite feasibility only.
     controls:
     - packing/resources/web/ry-xu-new-packings-2026-10-08/receipts/n051-radical-positive.json.xz

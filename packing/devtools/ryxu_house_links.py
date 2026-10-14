@@ -1,4 +1,4 @@
-"""Current ry-xu atlas leaves reconstructed from private complete native inputs.
+"""Current Xu atlas leaves reconstructed from private complete native inputs.
 
 Generated leaves may be read-only links; facts, all actual jobs and metadata remain
 private. No geometric predicate runs during admission, and drawing provenance never
