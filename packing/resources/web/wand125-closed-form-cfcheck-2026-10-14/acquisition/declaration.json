@@ -1,0 +1,73 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "wand125-closed-form",
+  "source_url": "https://github.com/wand125/square-packing",
+  "source_ref": "refs/heads/main",
+  "source_commit": "746e2c5ac7a7f534996dd50a5e1fd9f1d8836a8d",
+  "retrieved_at_utc": "2026-10-14T11:34:13Z",
+  "git_scope": "Blobless clone of main, sparse-checked out at its head 746e2c5 (committed 2026-10-14T10:38:27Z), the only commit after the 9a28a84 pin of web/wand125-closed-form-2026-10-14/. It adds problems/closed-form/indep-checker/ (32 files) and changes problems/closed-form/README.md (the sentence saying no independent checker exists becomes a paragraph naming cfcheck and its results, and the file list gains a line), and changes nothing else in the tree. The scope is the whole claim folder and the root LICENSE.md: the folder's other 25 files and the checker's test fixture intervals.json are byte-identical to the copies that packet retains, and are pinned here against them. The release assets of closed-form-v1 are unchanged (ASSET.json is one of the identical files) and stay with the author. No source program was executed at acquisition.",
+  "archived_dir": "square-packing",
+  "license": "MIT for problems/closed-form/indep-checker/ (its LICENSE, Copyright (c) 2026 Hiroaki Hosono (wand125); Cargo.toml license = \"MIT\") and for the rest of problems/closed-form/ (its LICENSE, Copyright (c) 2026 wand125). The root LICENSE.md says the repository has no single licence and that each folder keeps its own. The checker's README says it was \"Written with AI assistance (OpenAI Codex), reviewed by the author, and not peer reviewed\"; the commit that adds it names Claude Opus 5.5 as co-author; Cargo.toml names Hiroaki Hosono (wand125) as author.",
+  "claims": [
+    "The checker (indep-checker/README.md): cfcheck, an independent exact checker of the closed-form certificates, checks family structure, wall periods, savings, global/local agreement, region coverage, root lattices, midpoint tilings and every leaf's named test; its coverage command checks all 34 parameter intervals and sample closed-form values. ACCEPT means the named sufficient test proves the whole leaf box safe; REFUSE means a required check failed or could not be established; there is no fallback to another leaf test.",
+    "Independence (indep-checker/README.md): \"Written from SPEC.md and the published bundles only; shares no code with the original checkers (replay4d, seam4d_core, validate_family.py), which were not read. Written with AI assistance (OpenAI Codex), reviewed by the author, and not peer reviewed.\" The folder README adds that it shares no code with replay4d, seam4d_core or the search tools.",
+    "Results (indep-checker/README.md, receipts/): intervals 1, (0, 0.02], and 34, (0.99, 1], were replayed completely, all four regions of each, and every leaf was accepted with zero refusals: 40,257 roots and 1,653,457 leaves on interval 1, 50,787 roots and 1,485,224 leaves on interval 34, 91,044 and 3,138,681 in all, the same leaf count as replay4d on these two intervals; 24,226 roots of interval 1 were resumed from checkpoints written by earlier runs of the same checker on the same inputs; the production build used rustc 1.99.0; the other 32 intervals have not been checked with it.",
+    "Cost (indep-checker/README.md): 85.80 worker-hours of summed per-leaf time for interval 1's 900,992 timed leaves and 156.21 for interval 34's 1,485,224, 242.02 recorded, the resumed roots' earlier time not included; a B4U leaf takes minutes to over an hour."
+  ],
+  "scope": [
+    "LICENSE.md",
+    "problems/closed-form"
+  ],
+  "pinned_only": [
+    {
+      "match": "problems/closed-form/indep-checker/tests/fixtures/intervals.json",
+      "reason": "The checker's test fixture, \"an unchanged copy of the published closed-form interval metadata\" (tests/fixtures/README.md): byte-identical to the certificate's intervals.json, which web/wand125-closed-form-2026-10-14/ retains.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/intervals.json"
+    },
+    {
+      "match": "problems/closed-form/[!RL]*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form"
+    },
+    {
+      "match": "problems/closed-form/checker/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker"
+    },
+    {
+      "match": "problems/closed-form/checker/replay4d/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d"
+    },
+    {
+      "match": "problems/closed-form/checker/replay4d/src/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src"
+    },
+    {
+      "match": "problems/closed-form/checker/seam4d_core/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core"
+    },
+    {
+      "match": "problems/closed-form/checker/seam4d_core/src/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src"
+    },
+    {
+      "match": "problems/closed-form/checker/seam4d_core/tests/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/tests"
+    },
+    {
+      "match": "problems/closed-form/receipts/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/receipts"
+    },
+    {
+      "match": "problems/closed-form/structure/*",
+      "reason": "Unchanged since 9a28a84 and retained byte-identical in web/wand125-closed-form-2026-10-14/.",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure"
+    }
+  ]
+}

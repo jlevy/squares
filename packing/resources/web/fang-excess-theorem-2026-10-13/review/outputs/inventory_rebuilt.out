@@ -1,0 +1,533 @@
+n018_j2.cert: n = 308, box 18 x 18, waste 16
+  W = 359999/20000 (= 17.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 13803492736321394938558767454800144660221429547242620886473203453927799/9938459525407637553216206439659181716342482537977629654469153248270071365632 (= 1.388897e-06, square 39)
+  least pair gap 13479973341123025811419662585791044373252058823776851701489918917847/4852763440140448013921627303202812784377043419642469893385819867188297728 (= 2.777793e-06, squares (2, 3))
+  pairs: 770 by the axis test, 3604 by centre distance > sqrt 2, 47278 in all; 0.2 CPU s
+  verdict: STRICT_VALID
+n019_j2.cert: n = 344, box 19 x 19, waste 17
+  W = 379999/20000 (= 18.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 116730008792546493862094082584178972832398970024796221792090190549894689013/88711214394467149188340008367287267445345049651196511056555581990772565522513920 (= 1.315843e-06, square 45)
+  least pair gap 26328072952784902770595037665992152042099909391697930999516252639/10004615052367098476047480408599218480938579008025498479216462365982720 (= 2.631593e-06, squares (115, 116))
+  pairs: 856 by the axis test, 3999 by centre distance > sqrt 2, 58996 in all; 0.2 CPU s
+  verdict: STRICT_VALID
+n020_j2.cert: n = 382, box 20 x 20, waste 18
+  W = 399999/20000 (= 19.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 18446744073709951615/14757321471991346454593536 (= 1.250006e-06, square 111)
+  least pair gap 210624583445249019457328494750440681968752701073141038806792952891/84249412085679075151793500267018084736002729336640507146203566346076160 (= 2.500013e-06, squares (189, 190))
+  pairs: 981 by the axis test, 4568 by centre distance > sqrt 2, 72771 in all; 0.2 CPU s
+  verdict: STRICT_VALID
+n021_j2.cert: n = 422, box 21 x 21, waste 19
+  W = 419999/20000 (= 20.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 18446744073709971615/15495191234939728519233536 (= 1.190482e-06, square 244)
+  least pair gap 3369993340438815839751060749016222581248276238181529919026310573797/1415390460038741807745598142610461192159122901530742880999142987915067392 (= 2.380964e-06, squares (229, 244))
+  pairs: 1040 by the axis test, 5031 by centre distance > sqrt 2, 88831 in all; 0.3 CPU s
+  verdict: STRICT_VALID
+n022_j2.cert: n = 464, box 22 x 22, waste 20
+  W = 439999/20000 (= 21.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 170173053822531252410390845729141261871/149723560880479082046957900520763149504217088 (= 1.136582e-06, square 163)
+  least pair gap 1927028464986931560660332419998630772695559517606347583028739604271525901998781472476116476072673660086659159/847880237415183028734661234949288458950059510710997058524705517808693240862716467298115088363648501881933240729600 (= 2.272760e-06, squares (335, 350))
+  pairs: 1189 by the axis test, 5675 by centre distance > sqrt 2, 107416 in all; 0.3 CPU s
+  verdict: STRICT_VALID
+n023_j2.cert: n = 508, box 23 x 23, waste 21
+  W = 459999/20000 (= 22.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 5264595671766848486438571164333888948298465415510621623254772713531899836305/4842193663748240263315496758237696304451501394089738900141466898484365348166434816 (= 1.087234e-06, square 171)
+  least pair gap 38295379504405513427604566332478703958656531329250279975223774835/17615797651982903888506963206900311846332546506536115650332693620588544 (= 2.173923e-06, squares (425, 442))
+  pairs: 1326 by the axis test, 6108 by centre distance > sqrt 2, 128778 in all; 0.3 CPU s
+  verdict: STRICT_VALID
+n028_j2.cert: n = 758, box 28 x 28, waste 26
+  W = 559999/20000 (= 27.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 6901746357487942354265386663255010482268137975320049608163595167262491/7729928301420044284314098227007887716558311950608828923277916459052071649280 (= 8.928603e-07, square 396)
+  least pair gap 280832777927980261876365474898114636359722097252995445517611562691/157265793892823166539246249222152219158353879616505087272091554215362560 (= 1.785721e-06, squares (518, 519))
+  pairs: 1941 by the axis test, 9693 by centre distance > sqrt 2, 286903 in all; 0.6 CPU s
+  verdict: STRICT_VALID
+n029_j2.cert: n = 814, box 29 x 29, waste 27
+  W = 579999/20000 (= 28.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 431359424631603157520684743094129748833401913785931314987795981075237/500374884705781118320506391863498948798929397591244319276111389559451811840 (= 8.620725e-07, square 253)
+  least pair gap 52656145863343571115317952105471422462477936521487484389600107541/30540459271589915594513975228738252937351328336109173421219484855697408 (= 1.724144e-06, squares (308, 331))
+  pairs: 2129 by the axis test, 10264 by centre distance > sqrt 2, 330891 in all; 0.7 CPU s
+  verdict: STRICT_VALID
+n034_j3.cert: n = 1125, box 34 x 34, waste 31
+  W = 679999/20000 (= 33.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1359996 (= 7.352963e-07, square 272)
+  least pair gap 1/679998 (= 1.470593e-06, squares (257, 258))
+  pairs: 2563 by the axis test, 15095 by centre distance > sqrt 2, 632250 in all; 0.5 CPU s
+  verdict: STRICT_VALID
+n035_j3.cert: n = 1193, box 35 x 35, waste 32
+  W = 699999/20000 (= 34.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1399996 (= 7.142878e-07, square 272)
+  least pair gap 1/699998 (= 1.428576e-06, squares (257, 258))
+  pairs: 2698 by the axis test, 15907 by centre distance > sqrt 2, 711028 in all; 0.6 CPU s
+  verdict: STRICT_VALID
+n039_j4.cert: n = 1486, box 39 x 39, waste 35
+  W = 779999/20000 (= 38.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1559996 (= 6.410273e-07, square 463)
+  least pair gap 1/779998 (= 1.282055e-06, squares (443, 444))
+  pairs: 3375 by the axis test, 20086 by centre distance > sqrt 2, 1103355 in all; 0.7 CPU s
+  verdict: STRICT_VALID
+n040_j4.cert: n = 1564, box 40 x 40, waste 36
+  W = 799999/20000 (= 39.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1599996 (= 6.250016e-07, square 463)
+  least pair gap 1/799998 (= 1.250003e-06, squares (1105, 1124))
+  pairs: 3531 by the axis test, 21442 by centre distance > sqrt 2, 1222266 in all; 0.7 CPU s
+  verdict: STRICT_VALID
+n041_j4.cert: n = 1644, box 41 x 41, waste 37
+  W = 819999/20000 (= 40.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1639996 (= 6.097576e-07, square 463)
+  least pair gap 1/819998 (= 1.219515e-06, squares (443, 444))
+  pairs: 3745 by the axis test, 22337 by centre distance > sqrt 2, 1350546 in all; 0.8 CPU s
+  verdict: STRICT_VALID
+n042_j4.cert: n = 1726, box 42 x 42, waste 38
+  W = 839999/20000 (= 41.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1679996 (= 5.952395e-07, square 463)
+  least pair gap 1/839998 (= 1.190479e-06, squares (1177, 1198))
+  pairs: 3901 by the axis test, 23776 by centre distance > sqrt 2, 1488675 in all; 0.8 CPU s
+  verdict: STRICT_VALID
+n043_j4.cert: n = 1810, box 43 x 43, waste 39
+  W = 859999/20000 (= 42.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1719996 (= 5.813967e-07, square 463)
+  least pair gap 1/859998 (= 1.162793e-06, squares (443, 444))
+  pairs: 4115 by the axis test, 24729 by centre distance > sqrt 2, 1637145 in all; 0.9 CPU s
+  verdict: STRICT_VALID
+n044_j4.cert: n = 1896, box 44 x 44, waste 40
+  W = 879999/20000 (= 43.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1759996 (= 5.681831e-07, square 463)
+  least pair gap 1/879998 (= 1.136366e-06, squares (1249, 1272))
+  pairs: 4351 by the axis test, 26172 by centre distance > sqrt 2, 1796460 in all; 0.9 CPU s
+  verdict: STRICT_VALID
+n049_j4.cert: n = 2356, box 49 x 49, waste 45
+  W = 979999/20000 (= 48.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1959996 (= 5.102051e-07, square 463)
+  least pair gap 1/979998 (= 1.020410e-06, squares (443, 444))
+  pairs: 5405 by the axis test, 32579 by centre distance > sqrt 2, 2774190 in all; 1.2 CPU s
+  verdict: STRICT_VALID
+n050_j4.cert: n = 2454, box 50 x 50, waste 46
+  W = 999999/20000 (= 49.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1999996 (= 5.000010e-07, square 463)
+  least pair gap 1/999998 (= 1.000002e-06, squares (1465, 1494))
+  pairs: 5664 by the axis test, 34246 by centre distance > sqrt 2, 3009831 in all; 1.5 CPU s
+  verdict: STRICT_VALID
+n051_j4.cert: n = 2554, box 51 x 51, waste 47
+  W = 1019999/20000 (= 50.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2039996 (= 4.901970e-07, square 272)
+  least pair gap 1/1019998 (= 9.803941e-07, squares (257, 258))
+  pairs: 5576 by the axis test, 35737 by centre distance > sqrt 2, 3260181 in all; 1.1 CPU s
+  verdict: STRICT_VALID
+n055_j5.cert: n = 2975, box 55 x 55, waste 50
+  W = 1099999/20000 (= 54.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2199996 (= 4.545463e-07, square 272)
+  least pair gap 1/1099998 (= 9.090926e-07, squares (257, 258))
+  pairs: 6526 by the axis test, 41885 by centre distance > sqrt 2, 4423825 in all; 1.1 CPU s
+  verdict: STRICT_VALID
+n056_j5.cert: n = 3085, box 56 x 56, waste 51
+  W = 1119999/20000 (= 55.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2239996 (= 4.464294e-07, square 272)
+  least pair gap 1/1119998 (= 8.928587e-07, squares (257, 258))
+  pairs: 6744 by the axis test, 43828 by centre distance > sqrt 2, 4757070 in all; 1.2 CPU s
+  verdict: STRICT_VALID
+n060_j6.cert: n = 3546, box 60 x 60, waste 54
+  W = 1199999/20000 (= 59.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2399996 (= 4.166674e-07, square 463)
+  least pair gap 1/1199998 (= 8.333347e-07, squares (1825, 1864))
+  pairs: 7768 by the axis test, 50625 by centre distance > sqrt 2, 6285285 in all; 1.5 CPU s
+  verdict: STRICT_VALID
+n061_j6.cert: n = 3666, box 61 x 61, waste 55
+  W = 1219999/20000 (= 60.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2439996 (= 4.098367e-07, square 463)
+  least pair gap 1/1219998 (= 8.196735e-07, squares (443, 444))
+  pairs: 8008 by the axis test, 52079 by centre distance > sqrt 2, 6717945 in all; 1.5 CPU s
+  verdict: STRICT_VALID
+n062_j6.cert: n = 3788, box 62 x 62, waste 56
+  W = 1239999/20000 (= 61.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2479996 (= 4.032265e-07, square 463)
+  least pair gap 1/1239998 (= 8.064529e-07, squares (1897, 1938))
+  pairs: 8305 by the axis test, 54203 by centre distance > sqrt 2, 7172578 in all; 1.5 CPU s
+  verdict: STRICT_VALID
+n063_j6.cert: n = 3912, box 63 x 63, waste 57
+  W = 1259999/20000 (= 62.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2519996 (= 3.968260e-07, square 463)
+  least pair gap 1/1259998 (= 7.936521e-07, squares (443, 444))
+  pairs: 8553 by the axis test, 55698 by centre distance > sqrt 2, 7649916 in all; 1.5 CPU s
+  verdict: STRICT_VALID
+n064_j6.cert: n = 4038, box 64 x 64, waste 58
+  W = 1279999/20000 (= 63.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2559996 (= 3.906256e-07, square 463)
+  least pair gap 1/1279998 (= 7.812512e-07, squares (1969, 2012))
+  pairs: 8843 by the axis test, 57915 by centre distance > sqrt 2, 8150703 in all; 1.7 CPU s
+  verdict: STRICT_VALID
+n015_F1.cert: n = 211, box 15 x 15, waste 14
+  W = 299999/20000 (= 14.999950000000000)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 100000000000000299999/59999600000000000000000000 (= 1.666678e-06, square 24)
+  least pair gap 1026415291240158461866014357166587381332597060451606338790317671996725168614062882713928192931473732575571/307922534541464134478356176075399451019904749456064960145660861620670799463800000000000000000000000000000000000 (= 3.333356e-06, squares (49, 53))
+  pairs: 468 by the axis test, 2322 by centre distance > sqrt 2, 22155 in all; 0.1 CPU s
+  verdict: STRICT_VALID
+n016_F1.cert: n = 241, box 16 x 16, waste 15
+  W = 319999/20000 (= 15.999950000000000)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 100000000000000319999/63999600000000000000000000 (= 1.562510e-06, square 0)
+  least pair gap 734840508367623087535227842473485841460922221687646588845053265461639831307833703321841899829504867479/235147492996621900295471724876553498167893041002346582933986605479530404600000000000000000000000000000000000 (= 3.125020e-06, squares (211, 214))
+  pairs: 558 by the axis test, 2768 by centre distance > sqrt 2, 28920 in all; 0.1 CPU s
+  verdict: STRICT_VALID
+n017_F1.cert: n = 273, box 17 x 17, waste 16
+  W = 339999/20000 (= 16.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 100000000000000339999/67999600000000000000000000 (= 1.470597e-06, square 0)
+  least pair gap 51280174336638169362950754424748492783904225810475268334601772655026578354122807836764831595474143746737/17435156714108245027706054202091495899982016962167026237300356602962158971910000000000000000000000000000000000 (= 2.941194e-06, squares (229, 235))
+  pairs: 624 by the axis test, 3113 by centre distance > sqrt 2, 37128 in all; 0.1 CPU s
+  verdict: STRICT_VALID
+n018_F1.cert: n = 307, box 18 x 18, waste 17
+  W = 359999/20000 (= 17.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 13803492736321394938558767454800144660221429547242620886473203453927799/9938459525407637553216206439659181716342482537977629654469153248270071365632 (= 1.388897e-06, square 39)
+  least pair gap 13479973341123025811419662585791044373252058823776851701489918917847/4852763440140448013921627303202812784377043419642469893385819867188297728 (= 2.777793e-06, squares (2, 3))
+  pairs: 764 by the axis test, 3576 by centre distance > sqrt 2, 46971 in all; 0.2 CPU s
+  verdict: STRICT_VALID
+n019_F1.cert: n = 343, box 19 x 19, waste 18
+  W = 379999/20000 (= 18.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 18446744073709931615/14019451709042964389953536 (= 1.315796e-06, square 2)
+  least pair gap 649037107316865857908117125839419/246632802706189678648291443013872254976 (= 2.631593e-06, squares (122, 307))
+  pairs: 866 by the axis test, 3981 by centre distance > sqrt 2, 58653 in all; 0.2 CPU s
+  verdict: STRICT_VALID
+n020_F1.cert: n = 381, box 20 x 20, waste 19
+  W = 399999/20000 (= 19.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 55213970880402296484423275124632205679095967339360513439570185663543217/44170955763576510982299715441129046337308846164661957017605760091111519420416 (= 1.250006e-06, square 273)
+  least pair gap 52656145861615821332387619369744026999330006365089004309063752327/21062353021419768788073735161790507016455531771960376205635571394019328 (= 2.500013e-06, squares (365, 375))
+  pairs: 928 by the axis test, 4597 by centre distance > sqrt 2, 72390 in all; 0.3 CPU s
+  verdict: STRICT_VALID
+n021_F1.cert: n = 421, box 21 x 21, waste 20
+  W = 419999/20000 (= 20.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 18446744073709971615/15495191234939728519233536 (= 1.190482e-06, square 344)
+  least pair gap 36034711946098534364441036711548878851293280693050971813674538224292690777832464059629039695746577295/15134506147491690367241111574177628600388906733786028097719671160378330796005313946742771111086459000455168 (= 2.380964e-06, squares (216, 217))
+  pairs: 1063 by the axis test, 5001 by centre distance > sqrt 2, 88410 in all; 0.3 CPU s
+  verdict: STRICT_VALID
+n022_F1.cert: n = 463, box 22 x 22, waste 21
+  W = 439999/20000 (= 21.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 2300582135141094525155094876361493742288179632732420285642400938702689/2024503059396769693423156383327140417397915977996310083854498235742339203072 (= 1.136369e-06, square 153)
+  least pair gap 3019102409074091953418138192918985532294655712451505784701185789729373893022217929244766680932237351/1328399021785260206073371791316124085695387826964891789287274850514805667395010698217673047345943275372544 (= 2.272738e-06, squares (135, 146))
+  pairs: 1197 by the axis test, 5624 by centre distance > sqrt 2, 106953 in all; 0.4 CPU s
+  verdict: STRICT_VALID
+n023_F1.cert: n = 507, box 23 x 23, waste 22
+  W = 459999/20000 (= 22.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 13808287340987958542946531551676931480081742606883876211581130692769427/12699158064123863059320602639557645630491101172318854972287796620268174049280 (= 1.087339e-06, square 345)
+  least pair gap 776722558771300056634793280791341989401799765687548877926717717341767086693942263121097189291539/357290823472562471840128264279539330150092762457317012229164260434225093243950580808057785951830671360 (= 2.173922e-06, squares (358, 359))
+  pairs: 1300 by the axis test, 6129 by centre distance > sqrt 2, 128271 in all; 0.3 CPU s
+  verdict: STRICT_VALID
+n024_F1.cert: n = 553, box 24 x 24, waste 23
+  W = 479999/20000 (= 23.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 18446744073710031615/17708800523784874713153536 (= 1.041671e-06, square 365)
+  least pair gap 1684996667793727478622694994066452213396836228296687323550269968119/808795030021185800352722636806383040225095097314532044611818475518689280 (= 2.083342e-06, squares (343, 344))
+  pairs: 1425 by the axis test, 6880 by centre distance > sqrt 2, 152628 in all; 0.4 CPU s
+  verdict: STRICT_VALID
+n025_F1.cert: n = 601, box 25 x 25, waste 24
+  W = 499999/20000 (= 24.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 107839786835247323167993238414890890561903227744334493824376608420977/107839355309455884832807845691430433598315421582677447759727732178517229568 (= 1.000004e-06, square 200)
+  least pair gap 4388012155216686637535427094086879588820205796907125779194559117/2193997300403969010409094134539185157058764092150406062816977699733504 (= 2.000008e-06, squares (572, 596))
+  pairs: 1547 by the axis test, 7397 by centre distance > sqrt 2, 180300 in all; 0.5 CPU s
+  verdict: STRICT_VALID
+n026_F1.cert: n = 651, box 26 x 26, waste 25
+  W = 519999/20000 (= 25.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 18446744073710071615/19184540049681638842433536 (= 9.615422e-07, square 256)
+  least pair gap 20769187434139743064530475358933941/10799935927377573188722404120807165919232 (= 1.923084e-06, squares (257, 649))
+  pairs: 1678 by the axis test, 8197 by centre distance > sqrt 2, 211575 in all; 0.6 CPU s
+  verdict: STRICT_VALID
+n027_F1.cert: n = 703, box 27 x 27, waste 26
+  W = 539999/20000 (= 26.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1079996 (= 9.259294e-07, square 272)
+  least pair gap 1/539998 (= 1.851859e-06, squares (257, 258))
+  pairs: 1551 by the axis test, 9019 by centre distance > sqrt 2, 246753 in all; 0.3 CPU s
+  verdict: STRICT_VALID
+n028_F1.cert: n = 757, box 28 x 28, waste 27
+  W = 559999/20000 (= 27.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1119996 (= 8.928603e-07, square 272)
+  least pair gap 1/559998 (= 1.785721e-06, squares (257, 258))
+  pairs: 1677 by the axis test, 9908 by centre distance > sqrt 2, 286146 in all; 0.4 CPU s
+  verdict: STRICT_VALID
+n029_F1.cert: n = 813, box 29 x 29, waste 28
+  W = 579999/20000 (= 28.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1159996 (= 8.620719e-07, square 272)
+  least pair gap 1/579998 (= 1.724144e-06, squares (257, 258))
+  pairs: 1797 by the axis test, 10556 by centre distance > sqrt 2, 330078 in all; 0.4 CPU s
+  verdict: STRICT_VALID
+n030_F1.cert: n = 871, box 30 x 30, waste 29
+  W = 599999/20000 (= 29.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1199996 (= 8.333361e-07, square 272)
+  least pair gap 1/599998 (= 1.666672e-06, squares (257, 258))
+  pairs: 1927 by the axis test, 11531 by centre distance > sqrt 2, 378885 in all; 0.4 CPU s
+  verdict: STRICT_VALID
+n031_F2.cert: n = 932, box 31 x 31, waste 29
+  W = 619999/20000 (= 30.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1239996 (= 8.064542e-07, square 272)
+  least pair gap 1/619998 (= 1.612908e-06, squares (257, 258))
+  pairs: 2047 by the axis test, 12271 by centre distance > sqrt 2, 433846 in all; 0.4 CPU s
+  verdict: STRICT_VALID
+n032_F2.cert: n = 994, box 32 x 32, waste 30
+  W = 639999/20000 (= 31.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1279996 (= 7.812524e-07, square 272)
+  least pair gap 1/639998 (= 1.562505e-06, squares (257, 258))
+  pairs: 2195 by the axis test, 13295 by centre distance > sqrt 2, 493521 in all; 0.4 CPU s
+  verdict: STRICT_VALID
+n033_F2.cert: n = 1058, box 33 x 33, waste 31
+  W = 659999/20000 (= 32.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1319996 (= 7.575781e-07, square 272)
+  least pair gap 1/659998 (= 1.515156e-06, squares (257, 258))
+  pairs: 2325 by the axis test, 14042 by centre distance > sqrt 2, 559153 in all; 0.5 CPU s
+  verdict: STRICT_VALID
+n034_F2.cert: n = 1124, box 34 x 34, waste 32
+  W = 679999/20000 (= 33.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1359996 (= 7.352963e-07, square 272)
+  least pair gap 1/679998 (= 1.470593e-06, squares (257, 258))
+  pairs: 2557 by the axis test, 15067 by centre distance > sqrt 2, 631126 in all; 0.5 CPU s
+  verdict: STRICT_VALID
+n035_F2.cert: n = 1192, box 35 x 35, waste 33
+  W = 699999/20000 (= 34.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1399996 (= 7.142878e-07, square 272)
+  least pair gap 1/699998 (= 1.428576e-06, squares (257, 258))
+  pairs: 2712 by the axis test, 15876 by centre distance > sqrt 2, 709836 in all; 0.6 CPU s
+  verdict: STRICT_VALID
+n036_F3.cert: n = 1263, box 36 x 36, waste 33
+  W = 719999/20000 (= 35.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1439996 (= 6.944464e-07, square 463)
+  least pair gap 1/719998 (= 1.388893e-06, squares (961, 976))
+  pairs: 2799 by the axis test, 17163 by centre distance > sqrt 2, 796953 in all; 0.5 CPU s
+  verdict: STRICT_VALID
+n037_F3.cert: n = 1335, box 37 x 37, waste 34
+  W = 739999/20000 (= 36.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1479996 (= 6.756775e-07, square 463)
+  least pair gap 1/739998 (= 1.351355e-06, squares (443, 444))
+  pairs: 2967 by the axis test, 17975 by centre distance > sqrt 2, 890445 in all; 0.5 CPU s
+  verdict: STRICT_VALID
+n038_F3.cert: n = 1409, box 38 x 38, waste 35
+  W = 759999/20000 (= 37.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1519996 (= 6.578965e-07, square 463)
+  least pair gap 1/759998 (= 1.315793e-06, squares (1033, 1050))
+  pairs: 3117 by the axis test, 19267 by centre distance > sqrt 2, 991936 in all; 0.6 CPU s
+  verdict: STRICT_VALID
+n039_F3.cert: n = 1485, box 39 x 39, waste 36
+  W = 779999/20000 (= 38.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1559996 (= 6.410273e-07, square 463)
+  least pair gap 1/779998 (= 1.282055e-06, squares (443, 444))
+  pairs: 3369 by the axis test, 20059 by centre distance > sqrt 2, 1101870 in all; 0.7 CPU s
+  verdict: STRICT_VALID
+n040_F3.cert: n = 1563, box 40 x 40, waste 37
+  W = 799999/20000 (= 39.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1599996 (= 6.250016e-07, square 463)
+  least pair gap 1/799998 (= 1.250003e-06, squares (1105, 1124))
+  pairs: 3545 by the axis test, 21405 by centre distance > sqrt 2, 1220703 in all; 0.8 CPU s
+  verdict: STRICT_VALID
+n041_F3.cert: n = 1643, box 41 x 41, waste 38
+  W = 819999/20000 (= 40.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1639996 (= 6.097576e-07, square 463)
+  least pair gap 1/819998 (= 1.219515e-06, squares (443, 444))
+  pairs: 3684 by the axis test, 22365 by centre distance > sqrt 2, 1348903 in all; 0.7 CPU s
+  verdict: STRICT_VALID
+n042_F3.cert: n = 1725, box 42 x 42, waste 39
+  W = 839999/20000 (= 41.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1679996 (= 5.952395e-07, square 463)
+  least pair gap 1/839998 (= 1.190479e-06, squares (1177, 1198))
+  pairs: 3925 by the axis test, 23739 by centre distance > sqrt 2, 1486950 in all; 0.7 CPU s
+  verdict: STRICT_VALID
+n043_F3.cert: n = 1809, box 43 x 43, waste 40
+  W = 859999/20000 (= 42.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1719996 (= 5.813967e-07, square 463)
+  least pair gap 1/859998 (= 1.162793e-06, squares (443, 444))
+  pairs: 4138 by the axis test, 24673 by centre distance > sqrt 2, 1635336 in all; 0.8 CPU s
+  verdict: STRICT_VALID
+n044_F3.cert: n = 1895, box 44 x 44, waste 41
+  W = 879999/20000 (= 43.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1759996 (= 5.681831e-07, square 463)
+  least pair gap 1/879998 (= 1.136366e-06, squares (1249, 1272))
+  pairs: 4322 by the axis test, 26177 by centre distance > sqrt 2, 1794565 in all; 0.9 CPU s
+  verdict: STRICT_VALID
+n045_F3.cert: n = 1983, box 45 x 45, waste 42
+  W = 899999/20000 (= 44.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1799996 (= 5.555568e-07, square 463)
+  least pair gap 1/899998 (= 1.111114e-06, squares (443, 444))
+  pairs: 4532 by the axis test, 27204 by centre distance > sqrt 2, 1965153 in all; 1.0 CPU s
+  verdict: STRICT_VALID
+n046_F3.cert: n = 2073, box 46 x 46, waste 43
+  W = 919999/20000 (= 45.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1839996 (= 5.434794e-07, square 463)
+  least pair gap 1/919998 (= 1.086959e-06, squares (1321, 1346))
+  pairs: 4742 by the axis test, 28756 by centre distance > sqrt 2, 2147628 in all; 1.2 CPU s
+  verdict: STRICT_VALID
+n047_F3.cert: n = 2165, box 47 x 47, waste 44
+  W = 939999/20000 (= 46.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1879996 (= 5.319160e-07, square 463)
+  least pair gap 1/939998 (= 1.063832e-06, squares (443, 444))
+  pairs: 4958 by the axis test, 29810 by centre distance > sqrt 2, 2342530 in all; 1.0 CPU s
+  verdict: STRICT_VALID
+n048_F3.cert: n = 2259, box 48 x 48, waste 45
+  W = 959999/20000 (= 47.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1919996 (= 5.208344e-07, square 463)
+  least pair gap 1/959998 (= 1.041669e-06, squares (1393, 1420))
+  pairs: 4910 by the axis test, 31699 by centre distance > sqrt 2, 2550411 in all; 0.9 CPU s
+  verdict: STRICT_VALID
+n049_F3.cert: n = 2355, box 49 x 49, waste 46
+  W = 979999/20000 (= 48.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1959996 (= 5.102051e-07, square 463)
+  least pair gap 1/979998 (= 1.020410e-06, squares (443, 444))
+  pairs: 5120 by the axis test, 32832 by centre distance > sqrt 2, 2771835 in all; 1.0 CPU s
+  verdict: STRICT_VALID
+n050_F3.cert: n = 2453, box 50 x 50, waste 47
+  W = 999999/20000 (= 49.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/1999996 (= 5.000010e-07, square 463)
+  least pair gap 1/999998 (= 1.000002e-06, squares (1465, 1494))
+  pairs: 5324 by the axis test, 34553 by centre distance > sqrt 2, 3007378 in all; 1.0 CPU s
+  verdict: STRICT_VALID
+n051_F3.cert: n = 2553, box 51 x 51, waste 48
+  W = 1019999/20000 (= 50.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2039996 (= 4.901970e-07, square 463)
+  least pair gap 1/1019998 (= 9.803941e-07, squares (443, 444))
+  pairs: 5538 by the axis test, 35735 by centre distance > sqrt 2, 3257628 in all; 1.0 CPU s
+  verdict: STRICT_VALID
+n052_F4.cert: n = 2656, box 52 x 52, waste 48
+  W = 1039999/20000 (= 51.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2079996 (= 4.807702e-07, square 272)
+  least pair gap 1/1039998 (= 9.615403e-07, squares (257, 258))
+  pairs: 5753 by the axis test, 37568 by centre distance > sqrt 2, 3525840 in all; 1.0 CPU s
+  verdict: STRICT_VALID
+n053_F4.cert: n = 2760, box 53 x 53, waste 49
+  W = 1059999/20000 (= 52.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2119996 (= 4.716990e-07, square 272)
+  least pair gap 1/1059998 (= 9.433980e-07, squares (257, 258))
+  pairs: 5985 by the axis test, 38787 by centre distance > sqrt 2, 3807420 in all; 1.0 CPU s
+  verdict: STRICT_VALID
+n054_F4.cert: n = 2866, box 54 x 54, waste 50
+  W = 1079999/20000 (= 53.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2159996 (= 4.629638e-07, square 272)
+  least pair gap 1/1079998 (= 9.259276e-07, squares (257, 258))
+  pairs: 6199 by the axis test, 40664 by centre distance > sqrt 2, 4105545 in all; 1.0 CPU s
+  verdict: STRICT_VALID
+n055_F4.cert: n = 2974, box 55 x 55, waste 51
+  W = 1099999/20000 (= 54.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2199996 (= 4.545463e-07, square 272)
+  least pair gap 1/1099998 (= 9.090926e-07, squares (257, 258))
+  pairs: 6520 by the axis test, 41858 by centre distance > sqrt 2, 4420851 in all; 1.3 CPU s
+  verdict: STRICT_VALID
+n056_F4.cert: n = 3084, box 56 x 56, waste 52
+  W = 1119999/20000 (= 55.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2239996 (= 4.464294e-07, square 272)
+  least pair gap 1/1119998 (= 8.928587e-07, squares (257, 258))
+  pairs: 6758 by the axis test, 43791 by centre distance > sqrt 2, 4753986 in all; 1.3 CPU s
+  verdict: STRICT_VALID
+n057_F5.cert: n = 3197, box 57 x 57, waste 52
+  W = 1139999/20000 (= 56.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2279996 (= 4.385973e-07, square 463)
+  least pair gap 1/1139998 (= 8.771945e-07, squares (443, 444))
+  pairs: 6933 by the axis test, 45227 by centre distance > sqrt 2, 5108806 in all; 1.3 CPU s
+  verdict: STRICT_VALID
+n058_F5.cert: n = 3311, box 58 x 58, waste 53
+  W = 1159999/20000 (= 57.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2319996 (= 4.310352e-07, square 463)
+  least pair gap 1/1159998 (= 8.620705e-07, squares (1753, 1790))
+  pairs: 7189 by the axis test, 47216 by centre distance > sqrt 2, 5479705 in all; 1.2 CPU s
+  verdict: STRICT_VALID
+n059_F5.cert: n = 3427, box 59 x 59, waste 54
+  W = 1179999/20000 (= 58.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2359996 (= 4.237295e-07, square 463)
+  least pair gap 1/1179998 (= 8.474591e-07, squares (443, 444))
+  pairs: 7423 by the axis test, 48606 by centre distance > sqrt 2, 5870451 in all; 1.3 CPU s
+  verdict: STRICT_VALID
+n060_F5.cert: n = 3545, box 60 x 60, waste 55
+  W = 1199999/20000 (= 59.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2399996 (= 4.166674e-07, square 463)
+  least pair gap 1/1199998 (= 8.333347e-07, squares (1825, 1864))
+  pairs: 7762 by the axis test, 50597 by centre distance > sqrt 2, 6281740 in all; 1.4 CPU s
+  verdict: STRICT_VALID
+n061_F5.cert: n = 3665, box 61 x 61, waste 56
+  W = 1219999/20000 (= 60.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2439996 (= 4.098367e-07, square 463)
+  least pair gap 1/1219998 (= 8.196735e-07, squares (443, 444))
+  pairs: 8022 by the axis test, 52048 by centre distance > sqrt 2, 6714280 in all; 1.5 CPU s
+  verdict: STRICT_VALID
+n062_F5.cert: n = 3787, box 62 x 62, waste 57
+  W = 1239999/20000 (= 61.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2479996 (= 4.032265e-07, square 463)
+  least pair gap 1/1239998 (= 8.064529e-07, squares (1897, 1938))
+  pairs: 8246 by the axis test, 54233 by centre distance > sqrt 2, 7168791 in all; 1.5 CPU s
+  verdict: STRICT_VALID
+n063_F5.cert: n = 3911, box 63 x 63, waste 58
+  W = 1259999/20000 (= 62.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2519996 (= 3.968260e-07, square 463)
+  least pair gap 1/1259998 (= 7.936521e-07, squares (443, 444))
+  pairs: 8572 by the axis test, 55658 by centre distance > sqrt 2, 7646005 in all; 1.5 CPU s
+  verdict: STRICT_VALID
+n064_F5.cert: n = 4037, box 64 x 64, waste 59
+  W = 1279999/20000 (= 63.999949999999998)
+  squeeze min(a - W, b - H) = 1/20000 (= 0.000050000000)
+  least wall clearance 1/2559996 (= 3.906256e-07, square 463)
+  least pair gap 1/1279998 (= 7.812512e-07, squares (1969, 2012))
+  pairs: 8867 by the axis test, 57848 by centre distance > sqrt 2, 8146666 in all; 1.5 CPU s
+  verdict: STRICT_VALID
+76 of 76 as required

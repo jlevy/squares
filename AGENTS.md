@@ -159,7 +159,8 @@ Ruff and BasedPyright run at zero findings over every tracked Python file, the
 hand-written skill assets at the repository root included; `print` is allowed only in
 the tools (`devtools`, `cases`, `tests`, `benchmarks`, the console scripts, the retained
 video spikes under `packing/atlas/known-best/video/spikes/`, whose generators and
-browser checks report by printing, and the workbench command modules under
+browser checks report by printing, an intake pass’s retained review programs under
+`packing/campaign/issue-intake/`, and the workbench command modules under
 `packages/workbench/tools/`), and the two standalone verifiers under
 `packing/cases/n11_fractional_certificate/` run on any CPython 3.12 or later by design.
 Python, Rust, and research validation are documented in

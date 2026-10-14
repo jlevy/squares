@@ -1,0 +1,5 @@
+$ python3 -m squarepack.verify n0814.cert --strict
+n = 814, S = 9868145630371284470375486817699016805947/340282366920938463463374607431768211456 (= 28.999873603982715439...)
+  min wall clearance  = 2.711e-20  (square #797)
+  min pair separation = 2.952e-20  (squares #308, #331; 2129 close pairs by separating axes, the rest by disc separation)
+  VALID (strict): s(n) <= S

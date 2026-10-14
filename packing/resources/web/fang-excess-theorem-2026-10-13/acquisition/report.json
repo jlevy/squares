@@ -1,0 +1,50 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "(no issue)",
+  "author": "Kevin Fang",
+  "source_key": "[Fang excess theorem 2026-10-13]",
+  "report_evidence": "E-fang-excess-theorem-report",
+  "receipt_format": "fang-excess-theorem-exact-replay-v1",
+  "witness_prefix": "W-fang-excess-theorem-n",
+  "claim_limitations": "Complete 078789a rational centre/half-angle certificate of the theorem inventory (theorem/), converted exactly from the retained source. Finite construction feasibility at side n - 1/20000 only; it decides neither Lemma 3, nor the induction, nor Theorems 1 and 2 for any n outside the certificate, and makes no exact form, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "f73e9de13d8ccc40b91d844b164f9c2ad9c032c1",
+  "certificates": [
+    {"n": 211, "path": "theorem/n015_F1.cert", "format": "evand-cert", "offered": "14.999950000000000", "printed_in": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/inventory.tsv", "first_committed": "2026-10-13T05:54:24Z"},
+    {"n": 241, "path": "theorem/n016_F1.cert", "format": "evand-cert", "offered": "15.999950000000000", "printed_in": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/inventory.tsv", "first_committed": "2026-10-13T05:54:24Z"},
+    {"n": 273, "path": "theorem/n017_F1.cert", "format": "evand-cert", "offered": "16.999950000000000", "printed_in": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/inventory.tsv", "first_committed": "2026-10-13T05:54:24Z"},
+    {"n": 307, "path": "theorem/n018_F1.cert", "format": "evand-cert", "offered": "17.999950000000000", "printed_in": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/inventory.tsv", "first_committed": "2026-10-13T05:54:24Z"},
+    {"n": 308, "path": "theorem/best/n018_j2.cert", "format": "evand-cert", "offered": "17.999950000000000", "printed_in": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/best.tsv", "first_committed": "2026-10-13T05:54:24Z"},
+    {"n": 932, "path": "theorem/n031_F2.cert", "format": "evand-cert", "offered": "30.999950000000000", "printed_in": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/inventory.tsv", "first_committed": "2026-10-13T05:54:24Z"}
+  ],
+  "requested": [211, 241, 273, 307, 932],
+  "replayed": [211, 241, 273, 307, 308, 932],
+  "houses": [
+    {"n": 211, "reader": "[Ostashev records 2026-10-11]", "source_key": "[Ostashev records 2026-10-11]", "holders": "Daniil Ostashev", "result": "T-149", "reported_value": "14.9963367213363157", "verified_value": "14.9963367213363157", "evidence": ["E-ostashev-501-exact-feasibility"]},
+    {"n": 241, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "15.988132439524990848590591447359", "verified_value": "15.988132439524990848590591447359", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]},
+    {"n": 273, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "16.983925962650404316108837346991", "verified_value": "16.983925962650404316108837346991", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]},
+    {"n": 307, "reader": "[SQUISH third request 2026-10-09]", "source_key": "[SQUISH third request 2026-10-09]", "holders": "Nate Chaoweeraprasit (SQUISH)", "result": "T-136", "reported_value": "17.9808627840546911", "verified_value": "17.9808627840546911", "evidence": ["E-squish-481-exact-feasibility"]},
+    {"n": 308, "reader": "[Daniel record hunt 3 2026-10-10]", "source_key": "[Daniel record hunt 3 2026-10-10]", "holders": "Evan Daniel after Kevin Fang", "result": "T-141", "reported_value": "17.998269879526255875387992744507", "verified_value": "17.9982698795262559", "evidence": ["E-evand-489-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 308, "report": "T-135 (#484)", "url": "https://github.com/jlevy/squares/issues/484", "holders": "Kevin Fang", "result": "T-135", "reader": "[Fang two-wedge certificates 2026-10-10]"}
+  ],
+  "register": {
+    "title": "Kevin Fang's n^2 - n + F(n) theorem and its inventory at 078789a (no issue)",
+    "headline": "s(n² − n + 1) < n for every n ≥ 15, and n² − n + F(n) squares below side n, from Kevin Fang",
+    "significance": 4,
+    "source_checks": "The author reports that three exact checkers accept all 76 inventory certificates, strict: the research repository's squarepack.verify --strict (and its closed form), tools/rectcheck.py, and Evan Daniel's verify_cert.py, unchanged. They share the rational half-angle representation and the separating-axis test but not code. Their verdicts are columns of theorem/inventory.tsv and theorem/best.tsv; no source program ran here.",
+    "credit": "Credit the theorem and its certificates to Kevin Fang (https://github.com/TheSnakeFang/squarepack-certs). The gluing lemma is Arslanov, Mustafin and Shangitbayev's decomposition (Electronic Journal of Combinatorics 28(4), P4.22, 2021); the base packings are Joost de Winter's 211, David Ellsworth's and Tej Stead's 241 and 273, the AMS21 and Ellsworth packings of m^2 - m squares, and the author's own; the rectangles grow from Ellsworth's, Stead's and Francisco Couzo's packings; the certificate format and the pieces' certificates are Evan Daniel's. The search, the verifier and the bundle were written and run with Claude (Anthropic), directed and reviewed by the author.",
+    "next_rung": "Replay the remaining inventory certificates exactly (priced in the packet), check the six rectangles in both dimensions with a first-party rectangle route (W7), and review Lemma 3 and the induction from the retained README and tools/glue.py; ask the author for the note, draft v0.6.",
+    "bead": "think-0esw",
+    "bibliography": {
+      "authors": [
+        "Fang"
+      ],
+      "lineage": "independent",
+      "credit": "Fang after Arslanov, Mustafin, Shangitbayev, de Winter, Ellsworth, Stead, Couzo, Daniel",
+      "short_credit": "Fang after Arslanov et al.",
+      "note": "Theorems 1 and 2 of the note draft v0.6 (2026-10-13, not in the repository) as the README at 078789a4cfd36f915f1bfbe76d742413d79b2965 states them, with the theorem inventory (50 F(n) and 26 best-excess certificates at side n - 1/20000), six squeezable rectangles, the gluing program tools/glue.py and Daniel's pieces. MIT code, CC0 certificates outside theorem/, which names no licence; Claude assistance disclosed. No optimality claim."
+    }
+  }
+}

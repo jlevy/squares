@@ -1,0 +1,125 @@
+{
+ "binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+ "build": {
+  "profile": "release",
+  "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+  "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+  "target": "x86_64-unknown-linux-gnu"
+ },
+ "build_source_is_expected": true,
+ "candidate_sha256": "f6e32978329c7eb838c969e59d289c1447493fdc573ad83c344fbebba1a00cb8",
+ "input_sha256": "c1c545bb468e5a3b451d93cf727f5baffadabc5c2f7c57bc162c4c74e49a29b7",
+ "factor": "99/100",
+ "n": 37,
+ "L": "2599/400",
+ "directions": [
+  1,
+  1036
+ ],
+ "rows": [
+  {
+   "r": 1,
+   "returncode": 1,
+   "verdict": "counterexample-candidate",
+   "method": "interval-branch-and-bound",
+   "nodes": 3,
+   "min_certified_lower_bound": null,
+   "thread_cpu_seconds": 0.033445211,
+   "process_cpu_seconds": 0.3,
+   "wall_seconds": 0.32316952899964235,
+   "judged_here": {
+    "pose": [
+     3.9359125124942524,
+     3.9359125124942524
+    ],
+    "in_domain": true,
+    "scaled_capture": 0.99256384300879,
+    "below_1": true,
+    "equals_crate_exact_coverage": true,
+    "crate_exact_below_threshold": true,
+    "original_capture_at_pose_at_least_1": true
+   },
+   "source_log": {
+    "verdict": null,
+    "nodes": null,
+    "min_certified_lower_bound": null,
+    "cpu_seconds": null,
+    "agrees": false
+   },
+   "premises": {
+    "B": "4999/5000",
+    "D": "1/5002",
+    "L": "2599/400",
+    "angle_count": 2073,
+    "centre_domain": "per-bin",
+    "expanded_points": 0,
+    "expanded_rectangles": 4896,
+    "expanded_segments": 0,
+    "format": "M",
+    "input_sha256": "c1c545bb468e5a3b451d93cf727f5baffadabc5c2f7c57bc162c4c74e49a29b7",
+    "mass_below_n": "3700099/10000000",
+    "mass_exact": "366299901/10000000",
+    "n": 37,
+    "net_last_tangent": "1036/2501",
+    "net_origin": "proof_net",
+    "shrink_bound": "25009997/25010000",
+    "source_rectangles": 612
+   }
+  },
+  {
+   "r": 1036,
+   "returncode": 1,
+   "verdict": "counterexample-candidate",
+   "method": "interval-branch-and-bound",
+   "nodes": 16599,
+   "min_certified_lower_bound": null,
+   "thread_cpu_seconds": 0.41094730300000004,
+   "process_cpu_seconds": 0.71,
+   "wall_seconds": 0.8513520590004191,
+   "judged_here": {
+    "pose": [
+     3.4281063245576884,
+     3.4893152289702334
+    ],
+    "in_domain": true,
+    "scaled_capture": 0.9999912835115677,
+    "below_1": true,
+    "equals_crate_exact_coverage": true,
+    "crate_exact_below_threshold": true,
+    "original_capture_at_pose_at_least_1": true
+   },
+   "source_log": {
+    "verdict": null,
+    "nodes": null,
+    "min_certified_lower_bound": null,
+    "cpu_seconds": null,
+    "agrees": false
+   },
+   "premises": {
+    "B": "4999/5000",
+    "D": "1/5002",
+    "L": "2599/400",
+    "angle_count": 2073,
+    "centre_domain": "per-bin",
+    "expanded_points": 0,
+    "expanded_rectangles": 4896,
+    "expanded_segments": 0,
+    "format": "M",
+    "input_sha256": "c1c545bb468e5a3b451d93cf727f5baffadabc5c2f7c57bc162c4c74e49a29b7",
+    "mass_below_n": "3700099/10000000",
+    "mass_exact": "366299901/10000000",
+    "n": 37,
+    "net_last_tangent": "1036/2501",
+    "net_origin": "proof_net",
+    "shrink_bound": "25009997/25010000",
+    "source_rectangles": 612
+   }
+  }
+ ],
+ "process_cpu_seconds": 1.01,
+ "load_average": [
+  5.64453125,
+  3.6435546875,
+  4.45166015625
+ ]
+}

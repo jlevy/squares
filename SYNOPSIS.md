@@ -622,9 +622,13 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: the 2026-10-14 upper-bound intake ledger](docs/project/reviews/review-2026-10-14-intake-ledger.md) | dated review record | record | retained | — |
+| [Mathematical Review: wand125’s Fine-Net Lower Bounds at n = 37, 39 and 44 and the Linear Lower Bound at n = 145](docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md) | dated review record | record | retained | — |
+| [Fang’s Excess Theorem and Direct Certificates: Mathematical Review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) | dated review record | record | retained | — |
 | [Project changelog](CHANGELOG.md) | generated status view | generated | generated | — |
 | [Site Changelog Backfill Review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md) | dated review record | record | retained | — |
 | [Feature: Project Changelog and Recent PR Backfill](docs/project/specs/active/plan-2026-10-13-site-changelog.md) | implementation plan | current | transient | — |
+| [Mathematical Review: wand125’s Closed-Form Lower Bound s(N) ≥ a(N) for Every Non-Square N ≥ 49](docs/project/reviews/review-2026-10-14-wand125-closed-form-lower-bound.md) | dated review record | record | retained | — |
 | [Fitzharding’s Lean Proof of s(17) = L: Mathematical-Correctness Review](docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md) | dated review record | record | retained | — |
 | [Mathematical Review: Overbeck’s Candidate Proof That `s(17) = L`, Correctness Lane](docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md) | dated review record | record | retained | — |
 | [Adversarial Review: Fitzharding’s Lean Proof That `s(17) = L`](docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md) | dated review record | record | retained | — |
@@ -1237,6 +1241,9 @@ case or experiment separately.
 | [Idea board — the `s(n)` search campaign](packing/campaign/ideas.md) | hand-maintained registry | definitive | maintained | — |
 | [Experiment ledger](packing/campaign/ledger.md) | generated status view | generated | generated | — |
 | [Agenda map](packing/campaign/agenda-map.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261014/README.md) | generated status view | generated | generated | — |
+| [Lane Claim Records Retained for the Ledger](packing/campaign/issue-intake/upper-bounds-20261014/lane-claims/README.md) | source retention and archive policy | record | retained | — |
+| [Intake Ledger Review Programs](packing/campaign/issue-intake/upper-bounds-20261014/review/README.md) | dated review record | record | retained | — |
 | [series-000 (S0) — smoke and calibration](packing/campaign/series/series-000-smoke-and-calibration/README.md) | series scope and comparability | definitive | maintained | — |
 | [Agenda 024 T+0 Dispatch Record](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/launch-t-plus-00.md) | research synthesis | record | retained | — |
 | [Agenda 024 Commissioning Gate: Active Minute 15](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/commissioning-gate-minute-015.md) | research synthesis | record | retained | — |
@@ -6253,8 +6260,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 297 | 76,355 | 42,099 | 885 | 6,096 | 646.8 h |
-| claimed by none | 196 | 57,785 | 33,309 | 1,182 | 2,856 | 301.53 h |
-| **measured** | **493** | **134,140** | **75,408** | **2,067** | **8,952** | **948.33 h** |
+| claimed by none | 205 | 60,906 | 34,967 | 1,212 | 3,203 | 311.81 h |
+| **measured** | **502** | **137,261** | **77,066** | **2,097** | **9,299** | **958.61 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |

@@ -1,0 +1,210 @@
+{
+ "schema": "cfcheck-run/v1",
+ "label": "interval-34-premises-and-kind-sample",
+ "binary_sha256": "c5a163d48d10155dbe6d319a8a8cae8cab3feb9278c6fb7116c2d0396e686484",
+ "toolchain": {
+  "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+  "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)"
+ },
+ "command": [
+  "cfcheck",
+  "interval",
+  "assets/interval_0.99_1",
+  "--intervals",
+  "intervals.json",
+  "--index",
+  "34",
+  "--threads",
+  "2",
+  "--chunk-leaves",
+  "1",
+  "--only-kinds",
+  "EMPTY,CORE,B3D,EDGE,EX:CORE,EX:B3D,EY:CORE,EY:B3D,B3U:x,B3U:y,B3U:xy,B3U:xyh,B3T:x,B3T:y,CORE1:P,CORE1:x,CORE1:y,CORE1:xy,CORE1:xyh,CORE1:Tx,CORE1:Ty,CORE1:TxHy,CORE1:TyHx",
+  "--max-leaves-per-kind",
+  "20",
+  "--deadline",
+  "2100"
+ ],
+ "cwd": "the run directory: intervals.json and assets/<asset>/ unpacked from the release",
+ "started": "2026-10-14T12:05:58Z",
+ "finished": "2026-10-14T12:16:45Z",
+ "wall_seconds": 647.431,
+ "cpu_seconds": {
+  "user": 830.411,
+  "system": 1.012
+ },
+ "max_rss_kib": 116284,
+ "host": {
+  "cpus": 4,
+  "load_average_before": [
+   2.05,
+   2.6,
+   2.74
+  ],
+  "load_average_after": [
+   4.58,
+   4.22,
+   3.49
+  ],
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+ },
+ "exit_code": 0,
+ "verdict": "CFCHECK PARTIAL",
+ "stderr_tail": "",
+ "report": "interval-34-premises-and-kind-sample.report.json",
+ "report_sha256": "4145f905c8acf165ecf94756a023e990d8cd7e75a01de68d38131d01d56c29d2",
+ "sample": {
+  "interval": 34,
+  "region": null,
+  "note": "interval 34: digests, family structure, the product grid, the tiling of every root and the published counts of all four records in full; leaf tests on the first 20 leaves of each kind in each record, under a 2,100-second deadline"
+ },
+ "summary": {
+  "ok": true,
+  "command": "interval",
+  "partial": true,
+  "incomplete": false,
+  "roots": 50787,
+  "leaves": 1485224,
+  "resumed_roots": 0,
+  "seconds": 647.415110591,
+  "leaf_kinds": {
+   "B3D": 376323,
+   "B3T:x": 17674,
+   "B3T:y": 17068,
+   "B3U:x": 9798,
+   "B3U:xy": 1392,
+   "B3U:xyh": 9,
+   "B3U:y": 61689,
+   "CORE": 502797,
+   "CORE1:P": 111838,
+   "CORE1:Tx": 69036,
+   "CORE1:TxHy": 173,
+   "CORE1:Ty": 110308,
+   "CORE1:x": 30261,
+   "CORE1:xy": 5421,
+   "CORE1:xyh": 2666,
+   "CORE1:y": 52859,
+   "EDGE": 38110,
+   "EMPTY": 77802
+  },
+  "checked_leaf_kinds": {
+   "B3D": 80,
+   "B3T:x": 44,
+   "B3T:y": 40,
+   "B3U:x": 40,
+   "B3U:xy": 20,
+   "B3U:xyh": 9,
+   "B3U:y": 40,
+   "CORE": 80,
+   "CORE1:P": 60,
+   "CORE1:Tx": 60,
+   "CORE1:TxHy": 20,
+   "CORE1:Ty": 40,
+   "CORE1:x": 40,
+   "CORE1:xy": 20,
+   "CORE1:xyh": 20,
+   "CORE1:y": 40,
+   "EDGE": 60,
+   "EMPTY": 60
+  },
+  "refusal_count": 0,
+  "refusals": [],
+  "interruptions": 0,
+  "regions": {
+   "left": {
+    "checked_roots": 17442,
+    "accepted_roots": 50,
+    "resumed_roots": 0
+   },
+   "right": {
+    "checked_roots": 13338,
+    "accepted_roots": 37,
+    "resumed_roots": 0
+   },
+   "straddle": {
+    "checked_roots": 14364,
+    "accepted_roots": 45,
+    "resumed_roots": 0
+   },
+   "top": {
+    "checked_roots": 5643,
+    "accepted_roots": 24,
+    "resumed_roots": 0
+   }
+  },
+  "leaf_timing": {
+   "B3D": {
+    "leaves": 80,
+    "seconds": 146.97307429999998
+   },
+   "B3T:x": {
+    "leaves": 44,
+    "seconds": 292.004681773
+   },
+   "CORE": {
+    "leaves": 80,
+    "seconds": 0.42170957200000003
+   },
+   "CORE1:P": {
+    "leaves": 60,
+    "seconds": 14.02385358
+   },
+   "CORE1:Tx": {
+    "leaves": 60,
+    "seconds": 42.595079541000004
+   },
+   "CORE1:TxHy": {
+    "leaves": 20,
+    "seconds": 21.583164244000002
+   },
+   "EMPTY": {
+    "leaves": 60,
+    "seconds": 0.000403807
+   },
+   "B3T:y": {
+    "leaves": 40,
+    "seconds": 231.24211865499998
+   },
+   "B3U:y": {
+    "leaves": 40,
+    "seconds": 14.771967108
+   },
+   "CORE1:Ty": {
+    "leaves": 40,
+    "seconds": 19.203166719
+   },
+   "CORE1:y": {
+    "leaves": 40,
+    "seconds": 13.264822434000001
+   },
+   "EDGE": {
+    "leaves": 60,
+    "seconds": 0.028064186
+   },
+   "B3U:x": {
+    "leaves": 40,
+    "seconds": 40.15740862899999
+   },
+   "B3U:xy": {
+    "leaves": 20,
+    "seconds": 5.149393212999999
+   },
+   "B3U:xyh": {
+    "leaves": 9,
+    "seconds": 74.012836972
+   },
+   "CORE1:x": {
+    "leaves": 40,
+    "seconds": 20.983917251
+   },
+   "CORE1:xy": {
+    "leaves": 20,
+    "seconds": 6.095497370999999
+   },
+   "CORE1:xyh": {
+    "leaves": 20,
+    "seconds": 11.223404440999996
+   }
+  }
+ }
+}

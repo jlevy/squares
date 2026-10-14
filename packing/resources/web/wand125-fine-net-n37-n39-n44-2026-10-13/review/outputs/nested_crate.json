@@ -1,0 +1,136 @@
+{
+ "archive_sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81",
+ "archive_bytes": 69540,
+ "root": "sqverify_fast",
+ "members": {
+  ".gitignore": {
+   "bytes": 8,
+   "sha256": "b53ee26e6ff1da219b0563333a76d2c9ec19eec713d6ee54e11a1edacb0e9f3d"
+  },
+  "Cargo.lock": {
+   "bytes": 6976,
+   "sha256": "5c3206fa1eeabb23d52e93d76eec0d2c16820e6065ce02e8e13a7fa47693785c"
+  },
+  "Cargo.toml": {
+   "bytes": 1508,
+   "sha256": "df5e6c24699f934dcabe1119273621ac332dfcd9c75dd0650acacfc827466665"
+  },
+  "INDEPENDENCE.md": {
+   "bytes": 12283,
+   "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6"
+  },
+  "README.md": {
+   "bytes": 5096,
+   "sha256": "bb10f6e771ded24cc998749e6f63165d991d45dc0b488f07e92c788e4b67513e"
+  },
+  "SOUNDNESS.md": {
+   "bytes": 34095,
+   "sha256": "8e7a6180c6623496e5097b343183daa86bfa514fb8a876ea9ca5e8ef5cf05b59"
+  },
+  "build.rs": {
+   "bytes": 1712,
+   "sha256": "1e238378117bc7716e50cdd4e3d0d3862e756e1ff863794b9b559ffe4b2743e6"
+  },
+  "clippy.toml": {
+   "bytes": 58,
+   "sha256": "741d8b6cbd57d7b01ff8918083bbf313e281cce0dbdcb1ed669dc8cb84f44578"
+  },
+  "independence-record.yaml": {
+   "bytes": 8144,
+   "sha256": "2c3dd9edb7066cbb87fef26d3bac48039cf5ad64f738fd2a5271b2d735b04882"
+  },
+  "rust-toolchain.toml": {
+   "bytes": 86,
+   "sha256": "495c69d1db93f25f53e3d0d2d40d812313366cc368de317871c2ace6c6ffafa4"
+  },
+  "src/axis.rs": {
+   "bytes": 7198,
+   "sha256": "bf18bd9a0a82806bac6a3aa82df73349944eaa56a22ae5a9b67a67ab3d237e97"
+  },
+  "src/certificate.rs": {
+   "bytes": 31964,
+   "sha256": "934df119402c84c05eefe7b2fd933044d1da3127c72873af143961f3ec301d25"
+  },
+  "src/exact.rs": {
+   "bytes": 8350,
+   "sha256": "b9d627b740c8a0c7ed069c1faac2563b9db72c03c10c9f88fb3c0234054f481a"
+  },
+  "src/interval.rs": {
+   "bytes": 8484,
+   "sha256": "287da6570dfc1278e3ba6b4c09bfaca6409d16fba0713329bf0c4a5dcbfe5e56"
+  },
+  "src/lib.rs": {
+   "bytes": 7777,
+   "sha256": "2b44e7d227574971cb000231274f9ce783bf70cdaf19debc7a83e9468fbdc53f"
+  },
+  "src/main.rs": {
+   "bytes": 11446,
+   "sha256": "e4a65d9570a5f91f41474a20c3c90e8804da568c11d32ca632da59605f5f84e8"
+  },
+  "src/oracle.rs": {
+   "bytes": 5788,
+   "sha256": "3c993d66c6edb3a235a3e089a586bb4b42de02fb331fc519836b22cadb99c151"
+  },
+  "src/rotated.rs": {
+   "bytes": 42225,
+   "sha256": "4bf878c4d0e8acaedcccedbfb52d8885e1ba2657876bad2048fe30e5f3c7ded3"
+  },
+  "src/rotated_tests.rs": {
+   "bytes": 13209,
+   "sha256": "0e9861a4a8fa2242ebde3e39bc109fe2bb0745e874595c10e777b1f652c7b7b6"
+  },
+  "tests/adversarial.rs": {
+   "bytes": 27664,
+   "sha256": "6261babe3bb834ab170a933ea65af4faebfeb8aede76aba675891db97c3e485b"
+  }
+ },
+ "build_source_sha256": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+ "build_source_sha256_is_expected": true,
+ "against": {
+  "e020eb1e2": {
+   ".gitignore": "identical",
+   "Cargo.lock": "identical",
+   "Cargo.toml": "identical",
+   "INDEPENDENCE.md": "identical",
+   "README.md": "differs: +5 -2 lines against the reference",
+   "SOUNDNESS.md": "differs: +11 -0 lines against the reference",
+   "build.rs": "identical",
+   "clippy.toml": "identical",
+   "independence-record.yaml": "identical",
+   "rust-toolchain.toml": "identical",
+   "src/axis.rs": "identical",
+   "src/certificate.rs": "differs: +32 -2 lines against the reference",
+   "src/exact.rs": "identical",
+   "src/interval.rs": "identical",
+   "src/lib.rs": "identical",
+   "src/main.rs": "identical",
+   "src/oracle.rs": "identical",
+   "src/rotated.rs": "identical",
+   "src/rotated_tests.rs": "identical",
+   "tests/adversarial.rs": "differs: +55 -0 lines against the reference"
+  },
+  "d97758bb-main": {
+   ".gitignore": "identical",
+   "Cargo.lock": "identical",
+   "Cargo.toml": "identical",
+   "INDEPENDENCE.md": "differs: +0 -79 lines against the reference",
+   "README.md": "differs: +10 -27 lines against the reference",
+   "SOUNDNESS.md": "differs: +18 -102 lines against the reference",
+   "build.rs": "identical",
+   "clippy.toml": "identical",
+   "independence-record.yaml": "differs: +1 -74 lines against the reference",
+   "rust-toolchain.toml": "identical",
+   "src/axis.rs": "identical",
+   "src/certificate.rs": "differs: +38 -98 lines against the reference",
+   "src/exact.rs": "identical",
+   "src/interval.rs": "identical",
+   "src/lib.rs": "differs: +0 -3 lines against the reference",
+   "src/main.rs": "identical",
+   "src/oracle.rs": "identical",
+   "src/rotated.rs": "identical",
+   "src/rotated_tests.rs": "differs: +0 -1 lines against the reference",
+   "tests/adversarial.rs": "differs: +55 -0 lines against the reference",
+   "tests/declared_net.rs": "only in the reference"
+  }
+ }
+}

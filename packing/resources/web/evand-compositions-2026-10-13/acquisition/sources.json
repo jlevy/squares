@@ -1,0 +1,78 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T07:01Z",
+  "git_scope": "Sparse blobless checkout of the named files at 231d41df7a03fccd89aa6e9ef5a540348a8214cc, the commit issue #584 names; the head when retrieved, 622cd2e21407700fe8d5ac5943af820725107921, holds the same twelve comp2 files and the same two checkers. All three certificates are retained with their 80-digit KKT points, binary64 inputs and per-count solver reports, and with the licence and credits. The two source checkers are pinned by digest against the identical copies the issue-399 packet retains, the certificate-format README against the issue-489 packet's copy, and the packer log by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-compositions-2026-10-13",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "main",
+      "source_commit": "231d41df7a03fccd89aa6e9ef5a540348a8214cc",
+      "committed_utc": "2026-10-13T14:24:04Z",
+      "git_tree": "a311a33ef6c781b3b358602b63e3c02151401b8d",
+      "archived_path": "packing/resources/web/evand-compositions-2026-10-13/source",
+      "subtree_manifest": "packing/resources/web/evand-compositions-2026-10-13/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/PACKER.md",
+        "search/packer/candidates/comp2_n339.cert",
+        "search/packer/candidates/comp2_n339.exact.txt",
+        "search/packer/candidates/comp2_n339.input.txt",
+        "search/packer/candidates/comp2_n339.json",
+        "search/packer/candidates/comp2_n364.cert",
+        "search/packer/candidates/comp2_n364.exact.txt",
+        "search/packer/candidates/comp2_n364.input.txt",
+        "search/packer/candidates/comp2_n364.json",
+        "search/packer/candidates/comp2_n375.cert",
+        "search/packer/candidates/comp2_n375.exact.txt",
+        "search/packer/candidates/comp2_n375.input.txt",
+        "search/packer/candidates/comp2_n375.json"
+      ],
+      "subtree_file_count": 18,
+      "subtree_total_bytes": 690116,
+      "retained_file_count": 14,
+      "retained_total_bytes": 454778,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/exact/README.md",
+          "bytes": 15312,
+          "sha256": "cb4e973564ad1d186e879b03818365a0a44f6f257bce08fd9cdfaecd790cc583",
+          "reason": "The certificate-format README, byte-identical to the copy the issue-489 packet retains.",
+          "identical_to": "packing/resources/web/evand-record-hunt3-2026-10-10/source/search/exact/README.md"
+        },
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two exact checkers, byte-identical to the copies the issue-399 packet retains; never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two exact checkers, byte-identical to the copies the issue-399 packet retains; never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert2.py"
+        },
+        {
+          "path": "search/packer/PACKER.md",
+          "bytes": 213524,
+          "sha256": "086ea48e0424bad432e10a055bf79d3a3d39c7be153366edb595a1e01adc026f",
+          "reason": "The packer's working log (214 KB), which holds the entries for the comp2 compositions; pinned for provenance."
+        }
+      ],
+      "license": "MIT, copyright 2026 Evan Daniel (LICENSE); attribution retained in CREDITS.md. Issue #584 states that the composer, the search, the checks and the request were done with Claude (Claude Code), directed and reviewed by Evan Daniel.",
+      "claims": [
+        "Issue #584 reports s(339) <= 18.926898900357, s(364) <= 19.583782203951 and s(375) <= 19.882451030482, the exact rational sides of the certificates rounded up at 12 places, for the beyond-horizon list; it prints the certificate sides 18.92689890035674158973360842897, 19.583782203950834292109305759091 and 19.882451030481246819527281665997 with the SHA-256 of each search/packer/candidates/comp2_nNNN.cert.",
+        "The issue says all three are two-piece compositions, a rectangle of unit squares whose sides differ by an integer in each of two opposite corners and aligned squares filling the rest: at 339 two pieces cut from Daniil Ostashev's s(304) of issue 575, at 364 BuddenPing's s(146) of issue 566 whole with Thomas Schadt's s(50) = 53/7, so S* = s(146) + 7, and at 375 a 69-square crop of Nate Chaoweeraprasit's (SQUISH) s(88) with a 118-square crop of Ryan Xu's s(129), so S* = s(88) + 10 to 13 digits.",
+        "Through Friedman's L-step the issue also states s(403) <= 20.583782203951 and s(414) <= 20.882451030482 as corollaries, for which it asks no rows.",
+        "Each side is an 80-digit KKT point with positive multipliers on the load-bearing contacts, a reduced Hessian positive semidefinite modulo exact flat motions and a first-order MILP that finds no descent; the issue calls these numerical evidence, not interval proofs, and claims no optimality."
+      ]
+    }
+  ]
+}

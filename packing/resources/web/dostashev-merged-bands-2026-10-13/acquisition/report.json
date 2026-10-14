@@ -1,0 +1,54 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/575",
+  "author": "Daniil Ostashev",
+  "source_key": "[Ostashev merged bands 2026-10-13]",
+  "report_evidence": "E-ostashev-575-certificate-report",
+  "receipt_format": "ostashev-575-exact-replay-v1",
+  "witness_prefix": "W-ostashev-575-n",
+  "claim_limitations": "Complete b909e1b rational centre/half-angle certificate in the source's sqcert format, centres in [0, S]^2, read from the retained file at the pin. Finite construction feasibility only; no local minimum, KKT, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "certificates": [
+    {"n": 176, "path": "records/n0176.sqcert", "format": "sqcert", "offered": "13.79587231843640726331185405391207744387", "first_committed": "2026-10-12T23:06:00Z"},
+    {"n": 211, "path": "records/n0211.sqcert", "format": "sqcert", "offered": "14.99369418658324657063591818176125142354", "first_committed": "2026-10-13T00:41:41Z"},
+    {"n": 241, "path": "records/n0241.sqcert", "format": "sqcert", "offered": "15.98713424905084041461665739745571396866", "first_committed": "2026-10-13T00:41:41Z"},
+    {"n": 304, "path": "records/n0304.sqcert", "format": "sqcert", "offered": "17.92942775807517496566632613898911486244", "first_committed": "2026-10-13T03:03:29Z"}
+  ],
+  "requested": [176, 211, 241, 304],
+  "replayed": [176, 211, 241, 304],
+  "houses": [
+    {"n": 176, "reader": "[SQUISH fourth request 2026-10-11]", "source_key": "[SQUISH fourth request 2026-10-11]", "holders": "Nate Chaoweeraprasit", "result": "T-151", "reported_value": "13.8128562532770564", "verified_value": "13.8128562532770564", "evidence": ["E-squish-500-exact-feasibility"]},
+    {"n": 211, "reader": "[Ostashev records 2026-10-11]", "source_key": "[Ostashev records 2026-10-11]", "holders": "Daniil Ostashev", "result": "T-149", "reported_value": "14.9963367213363157", "verified_value": "14.9963367213363157", "evidence": ["E-ostashev-501-exact-feasibility"]},
+    {"n": 241, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "15.988132439524990848590591447359", "verified_value": "15.988132439524990848590591447359", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]},
+    {"n": 304, "reader": "[Couzo certificates 2026-10-11]", "source_key": "[Couzo certificates 2026-10-11]", "holders": "Nate Chaoweeraprasit, improved by Francisco Couzo", "result": "T-152", "reported_value": "17.9295659468485010", "verified_value": "17.9295659468485010", "evidence": ["E-couzo-506-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 176, "report": "#561", "url": "https://github.com/jlevy/squares/issues/561", "holders": "Francisco Couzo", "printed": "13.807637227056", "rounding": "up"},
+    {"n": 176, "report": "fe43a64 (#562, not requested)", "url": "https://github.com/dostashev/square-packing/blob/fe43a64ecf2581cdbd11830e8a5be0989746c5d3/README.md", "holders": "Daniil Ostashev", "printed": "13.808663234386957", "rounding": "up"},
+    {"n": 176, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "13.7958723184364072", "rounding": "unstated"},
+    {"n": 211, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "printed": "14.993558914123", "rounding": "up"},
+    {"n": 211, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "printed": "14.993558913975", "rounding": "up"},
+    {"n": 211, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "14.9935589139740060", "rounding": "unstated"},
+    {"n": 241, "report": "#583", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "printed": "15.987117095169", "rounding": "up"},
+    {"n": 241, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "printed": "15.987117095151", "rounding": "up"},
+    {"n": 241, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "15.9871170951502393", "rounding": "unstated"},
+    {"n": 304, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mishapolk", "printed": "17.9294277580751746", "rounding": "unstated"}
+  ],
+  "register": {
+    "title": "Daniil Ostashev's merged-band and relaxed-composition packings at b909e1b, issue575",
+    "headline": "New packings of 176, 211, 241 and 304 squares, three with their two tilted bands merged into one, each certified exactly",
+    "significance": 3,
+    "source_checks": "The author reports that each packing passes its own C++ checker (sqverify --precise --certify, MPFR then GMP rationals) at delta = 1e-60, that sqverify --check-cert certifies the shipped certificates in GMP rationals with no dilation and no tolerance, and that a separately written 80-digit mpmath cross-check finds least separations of 5e-21 at 211 and 241 and 4.995e-21 at 176 and 304; the issue states that all three checkers are the author's, written with AI assistance, the first two sharing the C++ parser and geometry. It also states that each side is the exact first-order optimum of its contact topology, with nonnegative KKT multipliers at a 60-digit solution reached by two routes that agree, and the load-bearing squares scaled by 1 + 1e-20. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Daniil Ostashev (https://github.com/dostashev/square-packing) with the four packings and their certificates, which the issue says are new arrangements. At 176, 211 and 241 a packing whose tilted squares form two bands was re-hardened on a GPU with every square soft and the box held (soft-to-rigid, after Yohei Nakajima's idea), and the two bands merged into one V: at 176 seeded from the author's earlier composition of issue 528's 38-square piece and issue 562's 44-square piece, at 211 from Evan Daniel's exact optimum of Joost de Winter's packing, and at 241 from Evan Daniel's exact optimum of Francisco Couzo's packing, the case's house. At 304 the same re-hardening relaxed the author's composition of a 55-square (h + 8) x h piece and a 68-square (h + 7) x h piece without forming a V. Each was solved to the exact optimum of its contact topology. The 211 is a different packing from the author's T-149, which it replaces in his repository. The author asks that the seeds' authors (Francisco Couzo, Evan Daniel, Joost de Winter) and the composition pieces' sources be acknowledged. The issue states AI assistance: an AI-assisted research loop the author drives with his own ideas, merging the bands at the junction being his; AI agents wrote and ran the search and verification code, and an agent extended the move from his compositions to published two-band packings.",
+    "next_rung": "Independently review the retained replay, then weigh adoption against the other reports at each count: each side is below its case's ceiling, by 1.70e-02 at 176 (T-151), 2.64e-03 at 211 (T-149, the author's own), 9.98e-04 at 241 (T-098) and 1.38e-04 at 304 (T-152), but at 211 and 241 Francisco Couzo's issues 583 and 586, which continue these packings, and issue 593 are smaller, by up to 1.35e-04 and 1.72e-05. At 176 and 304 issue 593's certificates state these sides rounded up at 30 and 29 places, so measured exactly this certificate is the smallest there; the frozen record reads issue 593's 16-place prints, which are binary64 renderings, and so finds 176 undecided and names issue 593 at 304. Then record source-specific adoption and confirming evidence. Final exact-head CI remains required.",
+    "bead": "think-34sy",
+    "bibliography": {
+      "authors": ["Ostashev"],
+      "lineage": "builds-on-project",
+      "credit": "Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu",
+      "short_credit": "Ostashev after Nakajima et al.",
+      "note": "Four complete exact certificates at b909e1b74cda50906e12b4373e010ddee39e47e4 in the source's sqcert format, at 176, 211, 241 and 304: three two-band packings merged into one V band by an all-soft GPU re-hardening, seeded from the author's own 176 composition, Daniel's exact optimum of de Winter's 211 and Daniel's exact optimum of Couzo's 241, and a relaxed two-piece composition at 304, each solved to the exact optimum of its contact topology and dilated by 1 + 1e-60, or at 304, where the header states a 59-digit optimum, by 1 + 1e-59. Methods credited: Nakajima's soft-to-rigid search, this project's fixed-angle linear program and Ryan Xu's certificate construction. Retained under the MIT licence with the source's C++ GMP checker and mpmath cross-check pinned against the issue-501 packet, neither run here. AI assistance stated: AI agents wrote and ran the search and verification code. No local or global optimality is registered."
+    }
+  }
+}

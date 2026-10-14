@@ -1701,6 +1701,41 @@ sources:
       and 307 squares; Daniel's certificate format and SQUISH's JSON layout. MIT verifier
       and CC0 certificates retained; Claude assistance disclosed. No exact form, local or
       global optimality claim.
+  - key: '[Fang direct certificates 2026-10-13]'
+    authors: [Fang]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-13'
+    lineage: independent
+    credit: Fang after Arslanov, Mustafin, Shangitbayev, Couzo, Daniel
+    short_credit: Fang after Arslanov et al.
+    note: >-
+      Fourteen complete exact certificates at 078789a4cfd36f915f1bfbe76d742413d79b2965, all
+      beyond the case corpus, at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651,
+      758 and 814, first committed in e646c47 and c284cd0 with no issue: packings in the
+      k^2 - k + 1 two-wedge family of Arslanov, Mustafin and Shangitbayev, grown from
+      Couzo's 342 and Daniel's improved 343 or from parametric seeds; Daniel's certificate
+      format and SQUISH's JSON layout. MIT checkers and CC0 certificates retained; Claude
+      assistance disclosed. No exact form, local or global optimality claim.
+  - key: '[Fang excess theorem 2026-10-13]'
+    authors: [Fang]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-13'
+    lineage: independent
+    credit: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter, Daniel, Couzo
+    short_credit: Fang after Arslanov et al.
+    note: >-
+      Theorems 1 and 2 of the note "Packing n^2 - n + 1 unit squares in a square of side
+      less than n, for every n >= 15" (draft v0.6, 2026-10-13, not in the repository), as
+      the README at 078789a4cfd36f915f1bfbe76d742413d79b2965 states them: s(n^2 - n + 1) < n
+      for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q : 16p + 21q
+      <= n - 15}, by gluing squeezable 17 x 16 and 22 x 21 rectangles (Lemma 3,
+      tools/glue.py) in the decomposition of Arslanov, Mustafin and Shangitbayev. Retained
+      with six rectangles, Daniel's pieces and the theorem inventory's tables; of its 76
+      certificates at side n - 1/20000 (50 F(n), 26 best-excess) six are retained and 70
+      pinned by digest. No issue. MIT code; CC0 certificates outside theorem/, which
+      names no licence; Claude assistance disclosed. No optimality claim.
   - key: '[SQUISH third request 2026-10-09]'
     authors: [Chaoweeraprasit]
     year: 2026
@@ -1827,6 +1862,40 @@ sources:
       square-lower-bounds-v1; the 31.8 MB asset is pinned by size and digest and kept outside Git. The
       T-080 route's exact premises pass and a two-angle replay sample matched; the complete replay and
       adoption are pending. The enclosing problems/square-lower-bounds notice is MIT.
+  - key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
+    authors: [wand125]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-13'
+    credit: wand125 after Tokoharu and Levy
+    lineage: builds-on-project
+    note: >-
+      The n37, n39 and n44 finer-net measure lower-bound reports that wand125/square-packing
+      added on 2026-10-13, s(39) >= 533/80 at dfb2cf85fdf9ee5f95c5ec2c67fd49210854f146,
+      s(44) >= 2799/400 at 9f24185c602c8c0b83cf6a88b11a69ea8d668673 and s(37) >= 2599/400 at
+      7a42c16eacaab112b537ab09e89d3485f6f4c75f, the packet's pin, with their data in release
+      square-lower-bounds-v1; the release assets are pinned by size and digest and kept outside
+      Git, and the directories' MIT documents are retained. Maintained measure, declared-net and
+      full check2 premises accepted at all three. Native capture, controls and adoption pending.
+      The nested verifier adapts this project's sqverify_fast, so a maintained replay is not
+      another independent implementation.
+  - key: '[wand125 linear n145 2026-10-13]'
+    authors: [wand125]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-13'
+    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: wand125 after Tokoharu, Levy et al.
+    lineage: builds-on-project
+    note: >-
+      The linear certificate for n = 145 that wand125/square-packing added on 2026-10-13
+      (problems/square-lower-bounds/certificates/mixed_n145_L1224, at 22f06b31a9295c8185be5d30a1a7b19982b16847):
+      a measure of point masses, uniform segments and uniform rectangles in D4 orbits, of mass
+      145 - 1/100000, on the 201-angle net of mixed_n101_L1028, checked by code/unified_linear_verify.cpp,
+      giving s(N) >= 306/25 for N >= 145 and raising n = 145 to 149. Its data are in release
+      square-lower-bounds-v1; the 38.6 MB asset is pinned by size and digest and kept outside Git, and
+      the directory's four MIT documents are retained. The T-080 route's exact premises pass and a
+      two-angle replay sample matched; the complete replay and adoption are pending.
   - key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
     authors: [Guzhou0806]
     year: 2026
@@ -2182,6 +2251,45 @@ sources:
       series, the lemma corpus, the readable Lean layer and the cited attempts are retained.
       The lab states that its campaigns, code, certificates, Lean files and notes were
       produced by AI agents (Claude, Anthropic) under the PI's direction.
+  - key: '[wand125 closed form 2026-10-14]'
+    authors: [wand125]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-14'
+    credit: wand125
+    lineage: independent
+    note: >-
+      wand125/square-packing problems/closed-form (closed-form-v1), added in eb0fd1938fcabf9b81b638f9d6b6db7f80b8985a
+      (2026-10-13T09:36:19Z) and unchanged at the pin 9a28a84bd55dc124bfa2919bb6c4fb504dda3149 (committed
+      2026-10-14T09:27:10Z), in web/wand125-closed-form-2026-10-14/: s(N) >= a(N) for every non-square
+      N >= 49, a closed form with one square root on each of 34 intervals of the fractional part, from a
+      C4-symmetric measure of line segments and Lebesgue measure whose families and region records (136
+      records, 187,183,108 leaves, release closed-form-v1, 815.7 MB pinned by digest and not retained) the
+      source replayed with its Rust checker replay4d in 4,294 CPU-hours. It also gives s(n^2 - 1) =
+      s(n^2 - 2) = s(n^2 - 3) = n for n >= 8 without Nagamochi's lemma, values it says are not new. The
+      folder README credits Hiroaki Hosono (wand125) and names no method it builds on; it cites
+      Nagamochi 2005, Karakus 2026, Evan Daniel's Valid7 and jlevy/squares#295 for comparison and for the
+      discussion of Nagamochi's gap. The commit names Claude Opus 5.5 as co-author; the folder's prose
+      says nothing about AI assistance. MIT for problems/closed-form/. Dated by the pin.
+  - key: '[wand125 cfcheck 2026-10-14]'
+    authors: [wand125]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-14'
+    credit: wand125
+    lineage: independent
+    note: >-
+      wand125/square-packing problems/closed-form/indep-checker at 746e2c5ac7a7f534996dd50a5e1fd9f1d8836a8d
+      (committed 2026-10-14T10:38:27Z), the child of the [wand125 closed form 2026-10-14] pin, in
+      web/wand125-closed-form-cfcheck-2026-10-14/: cfcheck, a Rust checker of the closed-form
+      certificate that its README says was written from SPEC.md and the published bundles only and
+      shares no code with replay4d, seam4d_core or validate_family.py, which were not read. The source
+      reports intervals 1 and 34 replayed completely, 91,044 roots and 3,138,681 leaves accepted with no
+      refusal; the other 32 intervals are not checked with it. Cargo.toml names Hiroaki Hosono (wand125)
+      as author and neither README names a method it builds on or cites this project; the README says it
+      was written with AI assistance (OpenAI Codex) and reviewed by the author, the commit names Claude
+      Opus 5.5 as co-author, and issue #600 names Claude and Codex for the search, the certificates and
+      both checkers. MIT. Dated by the pin.
 credited_names:
   Oscar Fitzharding: Fitzharding
   Marc Leonard Overbeck: Overbeck

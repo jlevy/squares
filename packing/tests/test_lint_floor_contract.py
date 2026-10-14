@@ -124,6 +124,10 @@ def test_the_rule_families_are_enabled_and_print_is_a_checked_boundary() -> None
         # wholesale when the lint floor was raised over them. `**` rather than `*` because
         # they sit two directories below `packing/`.
         "atlas/known-best/video/spikes/**",
+        # An intake pass's retained review programs (`campaign/issue-intake/*/review/`),
+        # which report by printing like the other tools; `**` because they sit two
+        # directories below `campaign/`.
+        "campaign/issue-intake/**",
         # The workbench's command modules, moved out of that spike into their own package:
         # the same tools, whose progress and receipts are what they print. Written from
         # `packing/` because ruff resolves per-file patterns against this config's root.

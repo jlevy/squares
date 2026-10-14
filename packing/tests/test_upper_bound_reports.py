@@ -54,6 +54,14 @@ OSTASHEV_528 = "dostashev-records-2026-10-12"
 CALLE = "riocalle-n102-2026-10-12"
 #: Issue #552, Evan Daniel's s(154) in his own text format (`test_upper_bound_reports_552`).
 DANIEL_552 = "evand-n154-2026-10-12"
+#: Issues #562 and #575, Daniil Ostashev's next two releases, and #584 and #596, Evan
+#: Daniel's compositions, every count of which lies beyond the corpus.
+OSTASHEV_562 = "dostashev-compositions-2026-10-12"
+OSTASHEV_575 = "dostashev-merged-bands-2026-10-13"
+EVAND_584 = "evand-compositions-2026-10-13"
+EVAND_596 = "evand-fresh-compositions-2026-10-14"
+#: The packets that request nothing inside the corpus, so plan no register entry.
+BEYOND_ONLY = (EVAND_584, EVAND_596)
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -70,6 +78,10 @@ EVERY = (
     OSTASHEV_528,
     CALLE,
     DANIEL_552,
+    OSTASHEV_562,
+    OSTASHEV_575,
+    EVAND_584,
+    EVAND_596,
 )
 
 
@@ -212,15 +224,20 @@ def test_the_declaration_refuses_what_it_does_not_describe(
         reports.load_declaration(packet)
 
 
-def test_the_declaration_refuses_to_request_nothing_inside_the_horizon(
+def test_a_declaration_may_request_only_counts_beyond_the_horizon(
     private: Callable[[str], Path], monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """#584 requests three counts above 324, so its declaration names no house at all."""
     packet = private(COUZO)
-    monkeypatch.setattr(
-        reports, "HORIZON", min(_json(packet / reports.DECLARATION)["requested"]) - 1
-    )
-    with pytest.raises(kernel.ReportError, match="at least one count at or below"):
+    path = packet / reports.DECLARATION
+    value = _json(path)
+    monkeypatch.setattr(reports, "HORIZON", value["certificates"][0]["n"] - 1)
+    with pytest.raises(kernel.ReportError, match="in-horizon counts"):
         reports.load_declaration(packet)
+    value["houses"] = []
+    _write_json(path, value)
+    assert reports.load_declaration(packet)["houses"] == []
+    assert reports.load_declaration(private(EVAND_584))["houses"] == []
 
 
 @pytest.mark.parametrize(
@@ -980,7 +997,7 @@ def test_the_driver_refuses_duplicate_keys_and_incomplete_rows(
 # --------------------------------------------------------------------------- register plan
 
 
-@pytest.mark.parametrize("name", EVERY)
+@pytest.mark.parametrize("name", [name for name in EVERY if name not in BEYOND_ONLY])
 def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: str) -> None:
     plan = reports.register_plan(_packet(name))
     result = plan["results.yaml"]
@@ -1010,6 +1027,8 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         OSTASHEV_528: "2026-10-12",
         CALLE: "2026-10-12",
         DANIEL_552: "2026-10-12",
+        OSTASHEV_562: "2026-10-12",
+        OSTASHEV_575: "2026-10-13",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

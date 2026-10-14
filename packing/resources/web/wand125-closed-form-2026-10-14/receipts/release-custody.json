@@ -1,0 +1,272 @@
+{
+ "schema": "closed-form-release-custody/v1",
+ "release": {
+  "tag": "closed-form-v1",
+  "name": "closed-form-v1",
+  "target_commitish": "main",
+  "created_at": "2026-10-13T06:18:13Z",
+  "published_at": "2026-10-13T09:36:02Z",
+  "assets": 35,
+  "total_bytes": 815734366
+ },
+ "read_with": "gh api repos/wand125/square-packing/releases/tags/closed-form-v1, read at 2026-10-14T09:24Z before the download",
+ "assets": [
+  {
+   "name": "interval_0.02_0.05.tar.gz",
+   "size": 10216430,
+   "digest": "sha256:139d83d8089507f286eed03150286e9c970697d58a3e99e18708c075efec7072",
+   "updated_at": "2026-10-13T09:35:08Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.05_0.12.tar.gz",
+   "size": 78740119,
+   "digest": "sha256:434f87577d7ddf0f1c2d73fb410baa096007fc3962f7f512f1b9d1cbc9b71a0b",
+   "updated_at": "2026-10-13T09:35:36Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.12_0.16.tar.gz",
+   "size": 60852514,
+   "digest": "sha256:7ea1dc5ace7b72c7a10ca5ef8d78beecd95ce5a7408fe6535d6b69d7cfe55043",
+   "updated_at": "2026-10-13T09:35:32Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.16_0.2.tar.gz",
+   "size": 65812126,
+   "digest": "sha256:4658f6517c0dcfe7c0024f444155bdf612d6325a15408e79fc53e2c2ad96c615",
+   "updated_at": "2026-10-13T09:35:34Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.2_0.38.tar.gz",
+   "size": 94483158,
+   "digest": "sha256:d8bee9c9e634a35aad2ba7c5c5905ffff82b2b315f19dca75505c116c85c5963",
+   "updated_at": "2026-10-13T09:35:25Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.38_0.4.tar.gz",
+   "size": 10690117,
+   "digest": "sha256:616f8fdee44467a1f74855e0420ea287a6a1d47c7f15bfc01be35fab2855ba07",
+   "updated_at": "2026-10-13T09:35:11Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.405_0.41.tar.gz",
+   "size": 8570252,
+   "digest": "sha256:d87f5ac848219dabd2ab3ac40f6b09b761a6ff2aaa2335f70b729847852380ea",
+   "updated_at": "2026-10-13T09:35:17Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.41_0.42.tar.gz",
+   "size": 12404739,
+   "digest": "sha256:d5b48dadd221faaa111cb81df8eef85ad6bd33244844cf4837a45e2c05599fdb",
+   "updated_at": "2026-10-13T09:35:20Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.425_0.43.tar.gz",
+   "size": 8123527,
+   "digest": "sha256:8eaa21b869bd8d7e26fac0e768e24f1998b3fe06942619a397cbbca48a41224f",
+   "updated_at": "2026-10-13T09:35:25Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.42_0.425.tar.gz",
+   "size": 8927453,
+   "digest": "sha256:9baa8d9479da6489dd49285bd50a139c7457423239ed7096fcb67493b545dc53",
+   "updated_at": "2026-10-13T09:35:23Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.435_0.44.tar.gz",
+   "size": 8328896,
+   "digest": "sha256:a0e1493398a475a13568642b94ddeb7f976159dce01cc27f45bf8a07b1abf456",
+   "updated_at": "2026-10-13T09:35:27Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.43_0.435.tar.gz",
+   "size": 8717851,
+   "digest": "sha256:97aeb224062301dd363af710335354185f72ed8f503745b174fffa37c1236973",
+   "updated_at": "2026-10-13T09:35:27Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.445_0.45.tar.gz",
+   "size": 8692833,
+   "digest": "sha256:a402e4fb8584175a9f4c41c593c4d92084a6ec81c3c13c06aa88d7dd07aa289c",
+   "updated_at": "2026-10-13T09:35:30Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.44_0.445.tar.gz",
+   "size": 8648851,
+   "digest": "sha256:ef2a961e808ceb8236ba51d59eadc7289b145882a9d4fe40ada5ece5c194d042",
+   "updated_at": "2026-10-13T09:35:30Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.455_0.46.tar.gz",
+   "size": 8564902,
+   "digest": "sha256:6ab8ccb58f15b7eddd2796d377c6b0b8d76b7bed8107cbab62f6773891244c87",
+   "updated_at": "2026-10-13T09:35:32Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.45_0.455.tar.gz",
+   "size": 8578035,
+   "digest": "sha256:1dd261a085e03aefe5cd106d8fdeb40501e94095231df0f790a8fb90a9adeb0f",
+   "updated_at": "2026-10-13T09:35:32Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.465_0.47.tar.gz",
+   "size": 4418084,
+   "digest": "sha256:9b90ca0fdcb7aba169ab9e20af572d8d59a782383896036931a23a262d23b4bb",
+   "updated_at": "2026-10-13T09:35:35Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.46_0.465.tar.gz",
+   "size": 8626900,
+   "digest": "sha256:228a74e986c4b2ed1873739b3e895c1726c08bb57f15d40300abb52a1f808283",
+   "updated_at": "2026-10-13T09:35:34Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.475_0.48.tar.gz",
+   "size": 4583978,
+   "digest": "sha256:f9a6b1d9f9c516f7a730ae215ea79b30ac9ab16f71411336254eb35c3353fd1b",
+   "updated_at": "2026-10-13T09:35:35Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.47_0.475.tar.gz",
+   "size": 4647899,
+   "digest": "sha256:2dcf2aae5b403f6d44f03a2ed1bbddd114e47d540954b1904776b17a77868287",
+   "updated_at": "2026-10-13T09:35:34Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.485_0.49.tar.gz",
+   "size": 4721593,
+   "digest": "sha256:f6ce62656ca932159ff433f584c6b1a5cede7ed23e0d5f9d5a37207e12c43727",
+   "updated_at": "2026-10-13T09:35:35Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.48_0.485.tar.gz",
+   "size": 4607909,
+   "digest": "sha256:882319627bfa7b026a7c3de14834535aa591f8ed1389c182a4c981683b666627",
+   "updated_at": "2026-10-13T09:35:35Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.495_0.5.tar.gz",
+   "size": 4754979,
+   "digest": "sha256:93406cf488988f6fa49bab69ec8582336e68d2e2fce687d7661f33fb731c51f7",
+   "updated_at": "2026-10-13T09:35:36Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.49_0.495.tar.gz",
+   "size": 4729618,
+   "digest": "sha256:2a53cbe5a4368d0b6619cbac4ef750687ed9f5c7a6bd68fabb1ca87f0fae5b7e",
+   "updated_at": "2026-10-13T09:35:36Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.4_0.405.tar.gz",
+   "size": 9320183,
+   "digest": "sha256:27ee20c003854fb859fe63a1b2f1d249a30332e1de3dd0fc5b289f0f8578fd8c",
+   "updated_at": "2026-10-13T09:35:14Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.5_0.6.tar.gz",
+   "size": 69435829,
+   "digest": "sha256:cf7a66e48dad2eb0629ed7fbedfd4a717eef93c967fcf07f4bcbee7536f9ffdc",
+   "updated_at": "2026-10-13T09:35:54Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.625_0.65.tar.gz",
+   "size": 11594686,
+   "digest": "sha256:d0dd3c7421ede6424e5bd5e8b18d44ae4a35f8cba49b8931eb26cdb1d4abe799",
+   "updated_at": "2026-10-13T09:35:40Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.65_0.675.tar.gz",
+   "size": 11746899,
+   "digest": "sha256:8014330b9f4bfeb14c3340ec58912de08af559620ce32578c964f3b8d626de49",
+   "updated_at": "2026-10-13T09:35:40Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.675_0.7.tar.gz",
+   "size": 11985698,
+   "digest": "sha256:5e6e19eda4bde89dc3694b8fb06b90504f0f20fbc76923a05f14960ad48d1d83",
+   "updated_at": "2026-10-13T09:35:40Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.6_0.625.tar.gz",
+   "size": 61933429,
+   "digest": "sha256:d4a33fcaee2aacd2e5bddcc77e0fcfbf2e10a36d31d907b3cb08cba85fdd3953",
+   "updated_at": "2026-10-13T09:35:52Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.7_0.8.tar.gz",
+   "size": 50987773,
+   "digest": "sha256:7aa47e510a63e61530e9c9fc665569044198dc90eeb82c2e79488b69bf295fe6",
+   "updated_at": "2026-10-13T09:35:54Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.8_0.99.tar.gz",
+   "size": 122313814,
+   "digest": "sha256:0ed4a3876c2670d3e2195031cfc086e063ede7d4f6de7155e9f5b98791baeae2",
+   "updated_at": "2026-10-13T09:36:01Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0.99_1.tar.gz",
+   "size": 7241272,
+   "digest": "sha256:04b7a25f5a7bb94fc29a18a80c8e22fb1166a732ea8d61b55608f80559903171",
+   "updated_at": "2026-10-13T09:35:44Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "interval_0_0.02.tar.gz",
+   "size": 7728888,
+   "digest": "sha256:f847fd55c26f95c9cbdc2b2cc1effd3769dbe9edb481f836e6c9b98abafd9825",
+   "updated_at": "2026-10-13T09:35:08Z",
+   "matches_ASSET_json": true
+  },
+  {
+   "name": "SHA256SUMS",
+   "size": 3132,
+   "digest": "sha256:2e31850c19f362a9e5a822636c59ff0000aeede9be03c2deb17d3c620d61fa5a",
+   "updated_at": "2026-10-13T09:35:45Z",
+   "matches_ASSET_json": true
+  }
+ ],
+ "all_match_ASSET_json": true,
+ "downloaded": {
+  "from": "https://github.com/wand125/square-packing/releases/download/closed-form-v1/<name>",
+  "started": "2026-10-14T09:24:58Z",
+  "finished": "2026-10-14T09:25:41Z",
+  "kept": "scratch only; the 815,734,366 bytes stay with the author"
+ },
+ "sha256sum_c_SHA256SUMS": {
+  "ok": 34,
+  "lines": 34
+ },
+ "SHA256SUMS_sha256": "2e31850c19f362a9e5a822636c59ff0000aeede9be03c2deb17d3c620d61fa5a"
+}

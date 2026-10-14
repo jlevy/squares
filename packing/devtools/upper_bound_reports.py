@@ -33,7 +33,9 @@ declaration ``devtools.acquire_source`` writes the packet from:
   per count where the whole would exceed the kernel's ceiling on uncompressed evidence;
   ``check`` admits the receipt, and ``check --replay`` decides it again;
 - **registration.** ``register-plan`` prints, and writes nowhere, the register, evidence,
-  coverage, bibliography and resources entries the ``requested`` counts need. A
+  coverage, bibliography and resources entries the ``requested`` counts need. A release
+  whose requested counts all lie beyond the horizon, as #584's do, plans no register
+  entry, only its evidence, its source row and its beyond-horizon rows. A
   certificate the issue does not name is an import of its own (``result-import.md``, stage
   1), compared here and registered by none of these entries.
 
@@ -340,12 +342,8 @@ def load_declaration(packet: Path) -> Declaration:
             chosen and chosen == sorted(set(chosen)) and not set(chosen) - set(counts),
             f"{roster} must be ascending, unique declared counts",
         )
-    # The register plan compares the requested counts with the case records, which end
-    # at the horizon, so a declaration that requests nothing inside it has nothing to plan.
-    _require(
-        any(n <= HORIZON for n in declaration["requested"]),
-        f"requested must name at least one count at or below n = {HORIZON}",
-    )
+    # A declaration may request only counts beyond the horizon, as #584 does: the register
+    # plan then has no in-horizon side to register and plans beyond-horizon rows alone.
     for row in declaration["certificates"]:
         _require(row["format"] in ADAPTERS, f"n={row['n']}: unknown format {row['format']}")
         _require(
@@ -1101,6 +1099,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Ostashev records 2026-10-12]": _import("dostashev-records-2026-10-12"),
     "[Calle n102 2026-10-12]": _import("riocalle-n102-2026-10-12"),
     "[Daniel n154 2026-10-12]": _import("evand-n154-2026-10-12"),
+    "[Ostashev compositions 2026-10-12]": _import("dostashev-compositions-2026-10-12"),
+    "[Ostashev merged bands 2026-10-13]": _import("dostashev-merged-bands-2026-10-13"),
+    "[Daniel compositions 2026-10-13]": _import("evand-compositions-2026-10-13"),
+    "[Daniel fresh compositions 2026-10-14]": _import("evand-fresh-compositions-2026-10-14"),
 }
 
 
@@ -1840,26 +1842,30 @@ def register_plan(packet: Path) -> dict[str, Any]:
     def states(group: list[dict[str, Any]]) -> str:
         return _and([f"s({r['n']}) <= {claim_value(Fraction(r['exact_side']))}" for r in group])
 
-    claim = (
-        f"{_count_word(len(inside))} complete rational source certificates report finite "
-        "upper-bound "
-        f"improvements at the exact sides they state: {states(inside)}. Complete native "
-        "feasibility outcomes are retained separately; the selected standing cases are "
-        "unchanged pending independent review and record review."
-    )
-    if len(inside) == 1:
+    # A release that requests only counts beyond the horizon has no in-horizon side, so no
+    # register entry: its plan is the evidence, the source row and the beyond-horizon rows.
+    claim = ""
+    if inside:
         claim = (
-            "One complete rational source certificate reports a finite upper-bound "
-            f"improvement at the exact side it states: {states(inside)}. Complete native "
-            "feasibility outcomes are retained separately; the selected standing case is "
+            f"{_count_word(len(inside))} complete rational source certificates report finite "
+            "upper-bound "
+            f"improvements at the exact sides they state: {states(inside)}. Complete native "
+            "feasibility outcomes are retained separately; the selected standing cases are "
             "unchanged pending independent review and record review."
         )
-    if beyond:
-        claim += (
-            f" The same release states {states(beyond)}, beyond the case corpus; the source "
-            "register tracks those as beyond-horizon rows."
-        )
-    claim += f"\n\n{register['source_checks']}\n\n{register['credit']}"
+        if len(inside) == 1:
+            claim = (
+                "One complete rational source certificate reports a finite upper-bound "
+                f"improvement at the exact side it states: {states(inside)}. Complete native "
+                "feasibility outcomes are retained separately; the selected standing case is "
+                "unchanged pending independent review and record review."
+            )
+        if beyond:
+            claim += (
+                f" The same release states {states(beyond)}, beyond the case corpus; the "
+                "source register tracks those as beyond-horizon rows."
+            )
+        claim += f"\n\n{register['source_checks']}\n\n{register['credit']}"
     below_by = [Fraction(row["case"]["difference"]) for row in inside]
     packet_path = packet.relative_to(REPO).as_posix()
     local = packet.relative_to(ROOT).as_posix()
@@ -1871,6 +1877,16 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "arithmetic and the separating-axis method. No two independent methods, human "
         "oversight or optimality is claimed."
     )
+    rationale = ""
+    if inside:
+        rationale = (
+            f"A smaller finite construction side at n = {inside[0]['n']}, "
+            f"{_sci(below_by[0])} below the case ceiling"
+            if len(inside) == 1
+            else f"Smaller finite construction sides at n = "
+            f"{_and([str(row['n']) for row in inside])}, {_sci(min(below_by))} to "
+            f"{_sci(max(below_by))} below the case ceilings"
+        ) + "; no lower bound or optimum."
     result = {
         "id": "T-NNN",
         "kind": "upper-bound",
@@ -1882,24 +1898,14 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "confirmation": "C0",
         "significance": {
             "score": register["significance"],
-            "rationale": (
-                (
-                    f"A smaller finite construction side at n = {inside[0]['n']}, "
-                    f"{_sci(below_by[0])} below the case ceiling"
-                    if len(inside) == 1
-                    else f"Smaller finite construction sides at n = "
-                    f"{_and([str(row['n']) for row in inside])}, {_sci(min(below_by))} to "
-                    f"{_sci(max(below_by))} below the case ceilings"
-                )
-                + "; no lower bound or optimum."
-            ),
+            "rationale": rationale,
             "scored": declaration["read_on"],
             "by": f"{register['bead']} {declaration['author']} import",
         },
         "novelty": "previously-published",
         "attribution": {
             "source_keys": [declaration["source_key"]],
-            "published": max(dated[row["n"]] for row in inside),
+            "published": max((dated[row["n"]] for row in inside), default=""),
         },
         "evidence": [declaration["report_evidence"]],
         "artifacts": [
@@ -1973,14 +1979,23 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "source_date": max(dated.values()),
         "disposition": "current-report",
         "replay_disposition": "case-specific",
-        "represented_by": ["frontier/results.yaml", f"{local}/{CLAIMS.as_posix()}"],
+        "represented_by": [
+            "frontier/results.yaml" if inside else f"{local}/README.md",
+            f"{local}/{CLAIMS.as_posix()}",
+        ],
         "evidence": [declaration["report_evidence"]],
         "notes": (
             f"{'The' if len(rows) == 1 else 'All'} {_many(len(rows), 'complete certificate')} "
             f"{'is' if len(rows) == 1 else 'are'} {kept}, "
             f"{'admitted' if len(rows) == 1 else 'each admitted'} only where its "
-            "exact side equals, or rounds up to, the side its source prints. T-NNN records the "
-            f"in-horizon report. All {len(record['cases'])} native jobs have full outcomes. "
+            "exact side equals, or rounds up to, the side its source prints. "
+            + (
+                "T-NNN records the in-horizon report. "
+                if inside
+                else "Every requested count lies beyond the case corpus, so no register entry "
+                "records them; each is a beyond-horizon row. "
+            )
+            + f"All {len(record['cases'])} native jobs have full outcomes. "
             "No selected override or superseded claim is created at this source-only stage; "
             "current cases and earlier source ownership remain unchanged."
         ),
@@ -2006,18 +2021,21 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "project "
         f"exact routes accept {'the' if len(positives) == 1 else 'all'} "
         f"{_many(len(positives), 'replayed certificate')} and refuse "
-        f"{'both' if len(positives) == 1 else f'all {2 * len(positives)}'} controls. "
-        "T-NNN records the in-horizon "
-        f"{'side' if sum(row['n'] <= HORIZON for row in rows) == 1 else 'sides'} at V0/C0, "
-        "pending independent review and adoption."
+        f"{'both' if len(positives) == 1 else f'all {2 * len(positives)}'} controls."
     )
+    if inside:
+        readme += (
+            " T-NNN records the in-horizon "
+            f"{'side' if len(inside) == 1 else 'sides'} at V0/C0, "
+            "pending independent review and adoption."
+        )
     if beyond:
         readme += (
             f" The n = {_and([str(row['n']) for row in beyond])} sides lie beyond the case "
             "corpus and are tracked as beyond-horizon rows."
         )
-    return {
-        "results.yaml": result,
+    plan: dict[str, Any] = {"results.yaml": result} if inside else {}
+    return plan | {
         "evidence.yaml": evidence,
         "source-coverage.yaml": {
             "sources": [coverage],

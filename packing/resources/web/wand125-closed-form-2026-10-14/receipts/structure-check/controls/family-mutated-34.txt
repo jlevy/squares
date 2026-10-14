@@ -1,0 +1,6 @@
+OK 1 format, nonnegativity, standard U
+NG right-side derivation: right-side row-by-row derivation F=T_original, T=V=[] mismatch
+NG 2 grid, reflection, transposition, both wall masses 9/5, complete periods, corner separation: left wall equals reflected bottom wall (transposed): difference segment (direction,coordinate,lower end,upper end,density)=[('v', Fraction(0, 1), Fraction(1, 5), Fraction(2, 5), Fraction(1, 200000))]
+NG 3–4: cannot check because the structure does not match
+VALIDATE NG
+exit 1

@@ -1,0 +1,10 @@
+## 1. two pending register bounds that overlap each other
+start: ['register T-901, pending adoption', 'register T-902, pending adoption']
+claim #1 = 10.45 (above both pending bounds): not recorded against register T-901, pending adoption, register T-902, pending adoption
+expected by the rule: not recorded (above T-901 and T-902)
+## 2. a frozen relation, read in both orders
+compare(#2, record) = below
+compare(record, #2) = above
+verdicts: [('#1', 'undecided'), ('#2', 'undecided')]
+standing after the walk: ['#1', '#2']
+expected by the rule: the record leaves the standing set, since #2 is below it

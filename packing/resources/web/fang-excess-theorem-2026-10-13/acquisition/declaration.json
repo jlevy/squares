@@ -1,0 +1,107 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "thesnakefang-squarepack-certs",
+  "source_url": "https://github.com/TheSnakeFang/squarepack-certs",
+  "source_ref": "main",
+  "source_commit": "078789a4cfd36f915f1bfbe76d742413d79b2965",
+  "retrieved_at_utc": "2026-10-14T09:19:47Z",
+  "git_scope": "Blobless clone checked out at the pinned commit, the repository's head, for the theorem material of bead think-0esw (no issue). In scope: the root README, attribution, changelog, verification notes, licence and manifest; theorem/ (its tables and notes, and the six inventory certificates the exact sample replays); rectangles/ (six squeezable rectangles); tools/ (the gluing program and two checkers); third_party/ (Evan Daniel's pieces, their licence and notice, and the fetch script for the unlicensed n = 211 piece); composites/ (the Section 5 tables and inputs). The direct square packings nNNNN/ are another packet's (bead think-7bw3) and are pinned by the commit alone. The other 70 inventory certificates, files another packet already retains byte for byte, the 38 shipped composites and the drawings are pinned by digest. No program was executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright 2026 Kevin Fang (LICENSE), for verify.py, tools/glue.py, tools/rectcheck.py and the shell scripts; the README and ATTRIBUTION.md release the certificates, text files, tables and drawings in nNNNN/, rectangles/ and composites/ under CC0 1.0 and name no licence for theorem/; third_party/daniel/ and tools/verify_cert_daniel.py are Evan Daniel's, MIT (third_party/daniel/LICENSE, NOTICE). Five theorem/ certificates (n = 15, 31, 36, 52, 57) contain Daniel's certificate of Joost de Winter's unlicensed n = 211 packing, which the README says is fetched and not redistributed. The source discloses Claude assistance directed and reviewed by Kevin Fang.",
+  "claims": [
+    "Theorem 1 (README, note draft v0.6 of 2026-10-13, not in the repository): s(n^2 - n + 1) < n for every integer n >= 15.",
+    "Theorem 2: for n >= 15 and integers p, q >= 0 with 16p + 21q <= n - 15, n^2 - n + 1 + p + 2q unit squares pack in a square of side less than n; in particular s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q : 16p + 21q <= n - 15}.",
+    "Lemma 3 (tools/glue.py): a rectangle packing A in an a x b box (a > b) squeezed by d_A and a square packing B in an m x m box squeezed by d_B glue with two integer blocks into n^2 - waste_A - waste_B squares in side n - d, n = b + m, d = min(d_A, d_B, 1/2).",
+    "Proposition 4: R, 257 squares in (17 - delta) x (16 - delta), delta >= 7.436e-4 (rectangles/r17x16_n0257); and R', 443 squares in (22 - d) x (21 - d), d >= 0.0094, waste 19 (rectangles/r22x21_n0443), with four further rectangles of waste b - 1.",
+    "theorem/: for every n = 15..64, an exact strict certificate of n^2 - n + F(n) unit squares in a square of side n - 1/20000, built by the uniform construction at squeeze 1/10000, counts 211 to 4037; and 26 best-excess certificates in theorem/best/ at the same side, counts 308 to 4038.",
+    "composites/: the 230 Section 5 composites of draft v0.3, the best j for 27 <= n <= 64 shipped as 38 certificates, all regenerated bit for bit by composites/reproduce.sh; dominated in excess at every n by theorem/best.tsv.",
+    "VERIFICATION.md: all 76 theorem certificates pass squarepack.verify --strict, tools/rectcheck.py and Daniel's verify_cert.py; failures 0."
+  ],
+  "scope": [
+    "ATTRIBUTION.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "MANIFEST.sha256",
+    "README.md",
+    "VERIFICATION.md",
+    "verify.py",
+    "composites",
+    "rectangles",
+    "theorem",
+    "third_party",
+    "tools"
+  ],
+  "pinned_only": [
+    {
+      "match": "theorem/n019_F*.cert",
+      "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+    },
+    {
+      "match": "theorem/n02?_F*.cert",
+      "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+    },
+    {
+      "match": "theorem/n030_F*.cert",
+      "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+    },
+    {
+      "match": "theorem/n03[2-9]_F*.cert",
+      "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+    },
+    {
+      "match": "theorem/n0[4-6]?_F*.cert",
+      "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+    },
+    {
+      "match": "theorem/best/n019_j*.cert",
+      "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+    },
+    {
+      "match": "theorem/best/n0[2-6]?_j*.cert",
+      "reason": "An inventory certificate the sample did not replay, one of 70 totalling 16 MB: a hosted-data release or the W7 checker's packet retains it when it is replayed (bead think-0esw); its header and digest are frozen in acquisition/inventory-headers.json."
+    },
+    {
+      "match": "verify.py",
+      "reason": "The author's square checker, unchanged since c75bebd; another packet already retains the same bytes.",
+      "identical_to": "packing/resources/web/fang-two-wedge-certificates-2026-10-10/source/verify.py"
+    },
+    {
+      "match": "tools/verify_cert_daniel.py",
+      "reason": "Evan Daniel's verify_cert.py, unchanged; another packet already retains the same bytes.",
+      "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py"
+    },
+    {
+      "match": "third_party/daniel/hunt3_*.cert",
+      "reason": "Evan Daniel's issue #489 certificates, unchanged; another packet already retains the same bytes.",
+      "identical_to": "packing/resources/web/evand-record-hunt3-2026-10-10/source/search/packer/candidates"
+    },
+    {
+      "match": "third_party/daniel/LICENSE",
+      "reason": "Evan Daniel's MIT licence, unchanged; another packet already retains the same bytes.",
+      "identical_to": "packing/resources/web/evand-record-hunt3-2026-10-10/source/LICENSE"
+    },
+    {
+      "match": "third_party/daniel/n-[4-7][0-9].cert",
+      "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+      "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs"
+    },
+    {
+      "match": "third_party/daniel/n-1[0-9][0-9].cert",
+      "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+      "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs"
+    },
+    {
+      "match": "third_party/daniel/n-2[0-9][0-9].cert",
+      "reason": "Evan Daniel's exact certificate of a known packing, unchanged; another packet already retains the same bytes.",
+      "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs"
+    },
+    {
+      "match": "composites/n0*.cert",
+      "reason": "One of the 38 shipped Section 5 composites, 23 MB together: each regenerates bit for bit from retained pieces and the direct packings by tools/glue.py under the digest composites/table.csv lists, and theorem/ dominates it in excess at its n."
+    },
+    {
+      "match": "rectangles/*/*.svg",
+      "reason": "The drawing of a rectangle packing, under CC0; pinned for provenance, as no claim rests on it."
+    }
+  ]
+}
