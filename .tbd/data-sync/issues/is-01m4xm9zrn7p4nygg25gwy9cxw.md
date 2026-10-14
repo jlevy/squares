@@ -3,9 +3,9 @@ type: is
 id: is-01m4xm9zrn7p4nygg25gwy9cxw
 title: Publish individual tagged News articles and newest three S5 homepage highlights
 kind: feature
-status: in_progress
+status: closed
 priority: 1
-version: 19
+version: 23
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10
 labels: []
@@ -25,14 +25,19 @@ child_order_hints:
   - is-01m4xz69dnv72vzagtwf8emtaq
   - is-01m4y09z9p7we8zr1ncvk7ycf8
   - is-01m4y09zpndtpme3qk80fdmskt
+  - is-01m4y2byyr29e1gt3z7090gacg
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:35:39.924Z
-updated_at: 2026-10-14T20:05:22.772Z
+updated_at: 2026-10-14T21:35:10.415Z
 started_at: 2026-10-14T16:36:49.748Z
+closed_at: 2026-10-14T21:35:10.414Z
+close_reason: PR604 merged16ea3bd; exact-head review and green gates completed. Main deployment38636016372 passed4243/4243 live checks; canonical News and Explanations delivered. Separate CI follow-up remains on PR599.
+resolution: null
+duplicate_of: null
 ---
-Publish the project history on News, the second navigation item, with 25 individual articles and six subject topics. Each card uses the same component on News and the homepage: paper-style date, ordinary H3 in the theme foreground, smaller Results-style topic chips, and the article. Show about ten lines with a fade and a footer chevron. Click, tap or the keyboard expands and contracts; hover only adds a light green indication. Preserve mathematical markup, ordinary links, keyboard and touch access, reduced motion, no-script reading, and old About bookmarks. Rewrite the retained articles as news while preserving historical identities and publication evidence. The homepage highlights the three newest S5 results with credit and explicit verification limits. Explanations replaces Papers and Visualize in the main navigation, with shared Papers, Film and Workbench section tabs at their existing URLs. The homepage browser and sharing title is The Squares Project. Document these roles in the existing design system and feature plan. Current pushed head is d08551e0 on PR604; local checks and reviews are recorded, and current-head hosted CI and deployment remain open.
+Publish individual articles on the second News tab, using one card component for News and the homepage: H3 title, paper-style date, canonical smaller topic tags and right-aligned significance meter. Show about ten lines with fade and centered expansion icon; click, tap or keyboard toggles, and hover changes appearance only. Preserve math, links, touch, reduced motion, no-script reading and old About bookmarks. Homepage features the newest three S5 results with credit and verification limits. Explanations contains a prominent basic and advanced tutorial, Papers, PDFs, and Visuals with Film | Workbench. The title is The Squares Project. Delivered with 26 News objects and shared 15-topic vocabulary.
 
 ## Notes
 
-Latest implementation supersedes the original daily-card and hover-open draft. Current card interaction is explicit click/tap; headings and topic order follow the owner’s latest directions. Source is frozen at d08551e0aba9cc92eb4d17389bb8c7a4bd1cdf81. Correctness findings B1–B3 are fixed and have a published disposition; security C has no findings. The focused D review covers the later navigation, styling and repair delta. Local receipts are retained under .codex/regularization-closeout-evidence-2026-10-13/news604-final-fixes/. Packing38618536597 and Pages38618536593 are the current hosted runs; older failed cohorts remain failed. Site v0.7.0 owns this launch; infographic and independent paper editions are unchanged. No merged or deployed News launch is claimed yet.
+PR604 merged as 16ea3bd0606c4fae2c343bf11de969301ca0f724 after exact-head review H, all findings disposed and current-head Packing/Pages green. Main deployment38636016372 succeeded; hosted verify-deployment job116103959611 passed4243/4243 live checks. Opened https://jlevy.github.io/squares/news.html in the default browser. Retained audit: .codex/regularization-closeout-evidence-2026-10-13/news604-deployment-audit.log. Later CI cost and site-code glyph repairs remain separately tracked in PR599.
