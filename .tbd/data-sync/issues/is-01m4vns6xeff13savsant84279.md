@@ -5,7 +5,7 @@ title: Implement the project changelog, recent PR backfill, and component versio
 kind: epic
 status: in_progress
 priority: 2
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10.local
 labels: []
@@ -19,6 +19,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-13T22:22:58.467Z
-updated_at: 2026-10-14T00:49:04.255Z
+updated_at: 2026-10-14T00:52:30.736Z
 started_at: 2026-10-14T00:46:04.373Z
 ---
+
+## Notes
+
+Implementation mapped as one coordinated PR590: think-g7sk schema/offline validated loader/shared renderer/candidate importer (changelog_core_impl, moderate GPT6.1Sol xhigh); think-test editorial36PR backfill+merge/publication evidence+coverage review (changelog_backfill_impl, moderate GPT6.1Sol xhigh); think-6gcm independent infographic history+component patch/minor release tools (component_versions_impl, moderate GPT6.1Sol xhigh); think-zak0 About+Github views/discovery/publication inputs/schema and freshness gates/docs+end-to-end validation (coordinator). Extra user legend-removal bug think-8lsv delegated to component_versions_impl after release slice. Root sole committer/bead writer; disjoint source ownership, normal builds offline, complete initialhistory required before publication. Final CI/reviews precede session merge confirmation forPR590.
