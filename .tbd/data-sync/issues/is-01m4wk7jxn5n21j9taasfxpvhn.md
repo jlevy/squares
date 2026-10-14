@@ -5,7 +5,7 @@ title: "Import evand: s(339) <= 18.926898900357, s(364) <= 19.583782203951, s(37
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T06:57:38.228Z
-updated_at: 2026-10-14T09:14:27.799Z
+updated_at: 2026-10-14T09:18:29.175Z
 started_at: 2026-10-14T06:57:50.383Z
 ---
 https://github.com/jlevy/squares/issues/584 (2026-10-13T14:31:16Z, unedited). evand/square-packing at 231d41df7a03fccd89aa6e9ef5a540348a8214cc, search/packer/candidates/comp2_n339, n364, n375 (.cert, .exact.txt, .input.txt, .json). All three counts lie beyond n = 324: verified beyond-horizon rows in source-coverage.yaml, as #506. Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports, intake lane ostashev of 2026-10-14.
@@ -57,3 +57,7 @@ Importer: devtools.upper_bound_reports accepts a declaration requesting only bey
 certify --workers 1: 9 jobs, all 3 positives pass and all 6 controls refused on both routes, 1,160,892 pair decisions, 477.89 route CPU s, 12m49s at load 9-11; least wall >= 5.00e-21, pair >= 9.99e-21. check --replay: 9 jobs equal, 8m39s.
 
 Register plan: scratchpad register-plan-evand-compositions-2026-10-13.yaml (evidence, source row, three beyond-horizon rows at 18.926898900357, 19.583782203951, 19.882451030482, assurance reported until review).
+
+## Stage 1 acknowledgement posted, 2026-10-14
+
+https://github.com/jlevy/squares/issues/584#issuecomment-6165052968 (states the pin, the retained and replayed certificates with controls refused, and the comparison at each count; the earlier draft above was not posted as written).

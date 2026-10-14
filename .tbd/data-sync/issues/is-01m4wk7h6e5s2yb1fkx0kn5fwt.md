@@ -5,7 +5,7 @@ title: "Import dostashev: s(176) <= 13.795872318437, s(211) <= 14.993694186584, 
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T06:57:36.461Z
-updated_at: 2026-10-14T09:14:26.315Z
+updated_at: 2026-10-14T09:18:35.611Z
 started_at: 2026-10-14T06:57:49.305Z
 ---
 https://github.com/jlevy/squares/issues/575 (2026-10-13T00:42:43Z; body edited 2026-10-13T04:13:29Z to add 304, comment of 04:13:31Z). dostashev/square-packing at b909e1b74cda50906e12b4373e010ddee39e47e4, records/n0176, n0211, n0241, n0304 (.sqcert, .sqpk). Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports, intake lane ostashev of 2026-10-14.
@@ -56,3 +56,7 @@ Packet packing/resources/web/dostashev-merged-bands-2026-10-13 (source key [Osta
 certify --workers 1: 12 jobs, all 4 positives pass and all 8 controls refused on both routes, 675,186 pair decisions, 480.19 route CPU s, 11m09s at load 9-12; least wall >= 5.00e-21, pair >= 4.99e-21 (4.995e-21 at 176 and 304, as the issue says). check --replay: 12 jobs equal, 11m34s.
 
 Register plan: scratchpad register-plan-dostashev-merged-bands-2026-10-13.yaml (T-NNN over 176, 211, 241, 304; published 2026-10-13). Its notes say "smallest: #593" at 304 from #593's binary64 print; the certificates say otherwise (next_rung states it).
+
+## Stage 1 acknowledgement posted, 2026-10-14
+
+https://github.com/jlevy/squares/issues/575#issuecomment-6165052668 (states the pin, the retained and replayed certificates with controls refused, and the comparison at each count; the earlier draft above was not posted as written).
