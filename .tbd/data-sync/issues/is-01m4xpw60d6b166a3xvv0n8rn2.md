@@ -3,9 +3,10 @@ type: is
 id: is-01m4xpw60d6b166a3xvv0n8rn2
 title: "Validate: wand125 closed form, calibration replay of the two smallest replay4d records with the build (~1 CPU-h)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 3
+version: 4
+delegate: serene-hopper-vcheap
 labels:
   - validation
   - result-import
@@ -13,8 +14,11 @@ dependencies:
   - type: blocks
     target: is-01m4xpwnpsr6echsj2ex1s947k
 parent_id: is-01m4wv28mebp8r7ss9p8r6dgxy
+hold: null
+hold_until: null
 created_at: 2026-10-14T17:20:33.292Z
-updated_at: 2026-10-14T17:20:57.455Z
+updated_at: 2026-10-14T17:32:14.103Z
+started_at: 2026-10-14T17:32:14.102Z
 ---
 Validation part of think-tsox (wand125's closed form, T-180 in the 14 October records PR #602). The first step of any replay4d replay: it builds the checker and prices the 4,294 CPU-h full replay on this host. Not record-changing by itself.
 
