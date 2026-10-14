@@ -5,7 +5,7 @@ title: "Intake 2026-10-14: evaluate every open upper-bound report per count, in 
 kind: epic
 status: in_progress
 priority: 1
-version: 20
+version: 22
 delegate: serene-hopper
 labels:
   - result-import
@@ -28,10 +28,12 @@ child_order_hints:
   - is-01m4xe5txp3t3t4xczs1swedc9
   - is-01m4xpwdwtx923hcd9y50kymez
   - is-01m4xpz6nts8er99w82mh09dnk
+  - is-01m4xq50rrk4can2qfvaejajnv
+  - is-01m4xq51qnsrbpdpjr6450hs5f
 hold: null
 hold_until: null
 created_at: 2026-10-14T08:51:21.304Z
-updated_at: 2026-10-14T17:22:12.281Z
+updated_at: 2026-10-14T17:25:23.829Z
 started_at: 2026-10-14T08:51:46.973Z
 ---
 Owner's request in session 0132qkwt8gAB9vM3aQcCJLsQ (branch claude/serene-hopper-xxh80m, off origin/main f73e9de13): review every outstanding GitHub issue for intake; build one per-n ledger across all open reports; at each count, walk the reports in the order they reached the record, and record a report only where it is stronger than the record and every earlier report; a report an earlier, stronger (or equal) report already beats is not recorded unless there is a key reason, which the ledger names; track every item as beads; comment progress on the issues; finish with a summary table of every intake item, recorded or not, and why.
