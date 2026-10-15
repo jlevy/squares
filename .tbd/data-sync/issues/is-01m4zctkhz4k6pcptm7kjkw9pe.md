@@ -5,16 +5,18 @@ title: Profile and reduce repeated witness-schema validation cost
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m4wtv34pphy5w434wk13b85x
+child_order_hints:
+  - is-01m4zjk1ck76q8j0j6v72pvd0c
 hold: null
 hold_until: null
 created_at: 2026-10-15T09:03:24.705Z
-updated_at: 2026-10-15T10:15:13.796Z
+updated_at: 2026-10-15T10:44:08.210Z
 started_at: 2026-10-15T09:04:47.752Z
 ---
 Astra systematic CI follow-up: profile a complete retained upper-bound report operation before optimizing. Diagnostic identifies repeated witness structural validation, not packet/receipt loading, as dominant. Evaluate an already-pinned native schema backend only with independent Python acceptance/refusal equivalence, fresh schema reads, no cache or validation bypass, preserved exact error diagnostics and all mathematical/custody checks. Preregister acceptance through maintained validation-efficiency campaign. No assertions or ceilings relaxed.
