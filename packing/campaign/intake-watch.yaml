@@ -861,3 +861,37 @@ repositories:
       afdcaac list it and add its site pages. a070143 notes the tool versions of the right
       isosceles n = 15 run's second checker, another container. b57e667 lists the n = 28 result
       on the source's site. Nothing else to import.
+  # The evening intake pass of 2026-10-15 (think-wnsv), lane D (think-ykg6): what the sweep run
+  # on #616 and main still listed.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: ec87dc69b2094d4c0f692c1b810aec23b1b3b409
+    read_on: '2026-10-15'
+    note: >-
+      The six commits of 14 October (01:28Z to 01:42Z), 27fec17 to ec87dc6, between the
+      mishapolk-records-2026-10-14 packet's pin 46f638c and the mishapolk-kkt-refinements-2026-10-14
+      packet's 70a033f, which contains them. They add and edit ISSUE_REGISTRATION.md only, the
+      author's draft of #593's body: the issue's claim, table, certificate digests and AI statement,
+      ending equal to the issue as it reads now apart from the credit line ("Mikhail Polk" in the
+      draft, "Mykhailo Polkovskyi" on the issue; think-2ep3's triage records both). No certificate
+      changes, and the issue is what the record reads. Nothing to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: 0eb3fe5375c946b7e19501793a7ded622555e09b
+    read_on: '2026-10-15'
+    note: >-
+      The three commits of 15 October (07:26Z to 09:58Z) past the b57e667 read. 5e6c603 adds piece
+      7.N1 to the edge of F_7 in problems/rectangles (release rectangles-v2): seven unit squares in
+      an a x b box for 2 sqrt(2) <= a < 3, with b - a >= 1/3 along the piece, so never a square
+      container and outside this record, as the 11 October read said of 24ccf8e; 849bc3a puts it
+      on the source's site. 0eb3fe5 marks the source's theme #7, s(95) = 10, as stopped, citing
+      #610 (T-191, think-ribz), and keeps mixed_n95_L9965, which the record already holds at 95.
+      Nothing to import.
+  - url: https://github.com/BuddenPing/squares
+    read_through: 73d254272da7168f6d4c2e341c009849b5e63b46
+    read_on: '2026-10-15'
+    note: >-
+      A fork of this repository. Its default branch is 73d2542, the merge of jlevy/squares#621, an
+      ancestor of main, so the 1,039 commits past the e96e9ea read are this repository's own
+      history and the fork publishes nothing of its own there. Its other branches are PR #574's
+      head 4c319c2, which the pingyou-pr574-certificates-2026-10-13 packet pins (T-174), and
+      pingyou/n29-certificate-20261015 at 3115557, PR #622's head, an N29 certificate refinement
+      that think-30n2 triages as an intake report. Nothing to import from the default branch.
