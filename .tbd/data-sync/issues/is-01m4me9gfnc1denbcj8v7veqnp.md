@@ -5,7 +5,7 @@ title: "PDF atlas: make case numbers neutral and keep red only on the specific n
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: claude-code@spud10.local
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-11T02:57:22.931Z
-updated_at: 2026-10-15T11:21:23.861Z
+updated_at: 2026-10-15T11:24:37.594Z
 started_at: 2026-10-15T11:21:23.860Z
 ---
 Owner request 2026-10-10: get rid of the red colouring on numbers in the PDF, as was done for the web Atlas in PR #462, and rely on red only for specific values.
@@ -29,3 +29,7 @@ Current state (origin/main 6038af33c):
 Done when: no case number in either poster or the explainer figure is red; recent bound values and O badges still are; legend, alt text and FIGURE-PLAYBOOK describe that rule; the posters, the 1-100 composite (SVG, PNG, PDF, @2x) and the explainer PDF are regenerated and their receipt and drift checks pass; tests in test_known_best_atlas.py (:1429, :2088, :2363, :3183) are updated to pin the new rule, including a negative assertion on the case-number fill.
 
 Related, not in scope unless the owner widens it: the web uses a different red for recency (--site-new-result, site.css:91) and always paints lower-bound values red whether recent or not (--site-bound-lower, site.css:2573, :2608, :2735, site-result.css:234). think-rt8s owns writing the one red rule down in epistemics.md; this change should agree with whatever it records. think-ju2n (closed) deliberately kept the PDF labels unchanged until this explicit request.
+
+## Notes
+
+Closure audit at main f97 confirms implemented case labels always use LABEL_MUTED_COLOR, and existing tests assert gray labels with independent numeric-only upper/lower accents and neutral O badges. The remaining defect is stale accessibility prose and figure guidance saying labels/badges turn crimson. Correcting SUMMARY_PROSE, style comment, figure-playbook and atlas README in codex/tutorial-closure; root owns these paths, separate from agent tutorial/News closure edits. Keep open until source review, appropriate component release/export regeneration and matching receipt/deployment verification; no unverified claim that regenerated artifacts have passed.
