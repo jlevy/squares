@@ -5,7 +5,7 @@ title: Redesign CI around a three-minute default gate and explicit deeper valida
 kind: feature
 status: in_progress
 priority: 1
-version: 23
+version: 24
 spec_path: docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md
 delegate: claude-code@spud10.local
 labels: []
@@ -30,10 +30,11 @@ child_order_hints:
   - is-01m4zhkc4z66ywdsxw20sjcmg7
   - is-01m4zq0njqcj232mhnhc0nwfa3
   - is-01m4zxh554nzhg3eveyxbw75sw
+  - is-01m504m9vnya2jnvwddcsjbttp
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:21:00.389Z
-updated_at: 2026-10-15T15:10:02.336Z
+updated_at: 2026-10-15T15:59:24.021Z
 started_at: 2026-10-14T16:21:26.412Z
 ---
 User explicitly requests Astra analysis and a systematic fix for repeated hours of CI iterations. Target typical default PR CI around three minutes; retain expensive tests in clearly selected deeper, checkpoint or scheduled lanes without blocking every development iteration. Audit actual validation/workflow costs, require each addition to account for recurring forward cost, define affected-input selection and evidence reuse with fail-closed assurance, document clear running policy and implement reviewed slices. Current PR599 timing repairs and atlas-width delivery continue separately.
