@@ -1,0 +1,53 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 28,
+  "seconds": 0.026,
+  "files": [
+    {
+      "file": "packing/tests/test_continuous_pose_followup.py",
+      "tests": 28,
+      "seconds": 0.026
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_continuous_pose_followup.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_continuous_pose_followup.py": 28
+    },
+    "deselected_tests": 0
+  }
+}
