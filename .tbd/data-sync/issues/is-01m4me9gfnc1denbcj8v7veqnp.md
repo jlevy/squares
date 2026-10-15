@@ -5,7 +5,7 @@ title: "PDF atlas: make case numbers neutral and keep red only on the specific n
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: claude-code@spud10.local
 labels: []
@@ -13,10 +13,11 @@ dependencies: []
 parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 child_order_hints:
   - is-01m4zn9wfkeaagyv78fm101dyr
+  - is-01m4zpbcfswycrk3vynth3h85k
 hold: null
 hold_until: null
 created_at: 2026-10-11T02:57:22.931Z
-updated_at: 2026-10-15T11:31:34.002Z
+updated_at: 2026-10-15T11:49:51.726Z
 started_at: 2026-10-15T11:21:23.860Z
 ---
 Owner request 2026-10-10: get rid of the red colouring on numbers in the PDF, as was done for the web Atlas in PR #462, and rely on red only for specific values.
