@@ -5,7 +5,7 @@ title: Resolve four scheduled main test-time ceiling overruns without weakening 
 kind: bug
 status: in_progress
 priority: 1
-version: 39
+version: 40
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10.local
 labels: []
@@ -38,7 +38,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:10:37.460Z
-updated_at: 2026-10-15T14:19:58.622Z
+updated_at: 2026-10-15T14:21:16.151Z
 started_at: 2026-10-14T10:03:10.224Z
 ---
 Optional scheduled full integration run38536321398 at f73 passes functional tests but violates12s per-test ceiling for four nodes: site_forwarders no-script redirect13.08s; results_register full-part citations T15312.17s; overview_sections no-script canonical atlas20.10s; regularized_drawings edited-block check13.44s. Main push full gate and Pages deployment passed sameSHA. Diagnose full integration contention/cold-path cost, optimize or explicitly classify measured expensive cases while preserving assertions and meaningful CI coverage; avoid broad ceiling increases.
@@ -46,3 +46,5 @@ Optional scheduled full integration run38536321398 at f73 passes functional test
 ## Notes
 
 Continuing-session status, 2026-10-15: current main31eaf633 has complete successful Packing38739227037 and Pages38739226771. Actual site audit passed4460/4460; site v0.7.7, shared infographic v0.6.1 and lower-bounds paper v0.4.7 are live. The original strict PR599 run38665027001 remains failed at remotee5a046b3 (four shard walls and eight CALL ceilings); no waiver or cap increase. Larger legacy source/evidence remain separate. PR618 delivered quick-push defaults and component-owned cuts, without proving the three-minute goal. Both the oversized checkpoint prototype and bounded deferred-worker reuse2fp7 are retired before activation; the native upper-report alternative remains conditional and unactivated underjabk. Actual live fast-proof source-authentication defect F1 is removed in PR620 under3d1m; final validation is still required. First PR620 ordinary run38741375831 failed audit layout, missing plan-map entry and one resize-readiness browser comparison. ju0q fixes both documentation checks; nnti owns the browser diagnosis, with the drawing-width assertion unchanged. Superseded full trial38741455333 was canceled after known failure. VE016 was rejected/restored; VE017 remains unexecuted and held underu0iy pending direct human authorization. Disk recoverywqag is separately held pending the exact destructive-cleanup override; no internal scratch fallback. Existing nns5/7wpx assurance work remains open. The CI retrospective is extracted into PR620 underd4ub, and kxmq remains the open performance program. Evidence is retained under primary .codex/regularization-closeout-evidence-2026-10-13/.
+
+2026-10-15 14:20 UTC: Full checkpoint 38744311408 at cf9003e0 completed failed: all ten dedicated Linux workers and macOS passed, but integration took 2301.62 s and failed seven strict 12-second CALL guards across four quick shards. Every functional assertion passed. Register/report fixes are tracked in 2equ, drawing/browser fixes in n5ry, scheduling/cost in e2z4. Three agents diagnose disjoint surfaces. No ceiling change or waiver. Ordinary PR checks are green. Disk hold is resolved by normal failed/1 pytest retention: wqag closed with 733 MiB available, no manual deletion. VE017 remains held pending direct human authorization.
