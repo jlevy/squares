@@ -5,7 +5,7 @@ title: Resolve four scheduled main test-time ceiling overruns without weakening 
 kind: bug
 status: in_progress
 priority: 1
-version: 36
+version: 37
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10.local
 labels: []
@@ -36,11 +36,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:10:37.460Z
-updated_at: 2026-10-15T13:25:24.527Z
+updated_at: 2026-10-15T13:29:13.278Z
 started_at: 2026-10-14T10:03:10.224Z
 ---
 Optional scheduled full integration run38536321398 at f73 passes functional tests but violates12s per-test ceiling for four nodes: site_forwarders no-script redirect13.08s; results_register full-part citations T15312.17s; overview_sections no-script canonical atlas20.10s; regularized_drawings edited-block check13.44s. Main push full gate and Pages deployment passed sameSHA. Diagnose full integration contention/cold-path cost, optimize or explicitly classify measured expensive cases while preserving assertions and meaningful CI coverage; avoid broad ceiling increases.
 
 ## Notes
 
-Matched continuing-session update2026-10-15: mainfc2ceae79 now has complete successfulPacking38730161853 andPages38730161845; livev0.7.6 smoke passed. PR618 mergedfc2 at11:50UTC after43greenchecks and selected fullDeep38726327460; all3independent exact-head reviews published. Quickpush/default and component-ownedcuts shipped; gg64/ly7p/7nf4 closed afterdeployment. PR599 strict38665027001 atremotee5a046b3 remainsfailed (four suitewalls/eightcallceilings), no waiver or capincrease. Larger source/evidence remain codex/main-test-timing65aff4580. VE016 rejected/restored; VE017 u0iy execution was denied twice by automaticapprovalreview and is paused for directhumanauthorization, no timingclaim. Oversized unpublished checkpointprototype retired; aphi/31fx/zpls closed explicitly as retired-prototype findings, notfixedlivebugs. Smaller nativealternative held untested/unactivated underjabk. Actualbounded regularized-worker reuse2fp7 now being implemented separately with exacttree, actualsuccess, runtime/recipeparity andcoldfallback. Closurebranch4ddf4935 prepares sitev077/info061/lowerpaper047; finalvalidationandpublication stillpending. No3minclaim. Existing nns5/7wpx baseline/refusalwork remainsopen. Evidenceprimary .codex/regularization-closeout-evidence-2026-10-13/.
+Continuing-session status, 2026-10-15: current main31eaf633 has complete successful Packing38739227037 and Pages38739226771. Actual site audit passed4460/4460; site v0.7.7, shared infographic v0.6.1 and lower-bounds paper v0.4.7 are live. The original strict PR599 run38665027001 remains failed at remotee5a046b3 (four shard walls and eight CALL ceilings); no waiver or cap increase. Larger legacy source/evidence remain separate. PR618 delivered quick-push defaults and component-owned cuts, without proving the three-minute goal. Both the oversized checkpoint prototype and bounded deferred-worker reuse2fp7 are retired before activation; the native upper-report alternative remains conditional and unactivated underjabk. Actual live fast-proof source-authentication defect F1 is removed in PR620 under3d1m; final validation is still required. First PR620 ordinary run38741375831 failed audit layout, missing plan-map entry and one resize-readiness browser comparison. ju0q fixes both documentation checks; nnti owns the browser diagnosis, with the drawing-width assertion unchanged. Superseded full trial38741455333 was canceled after known failure. VE016 was rejected/restored; VE017 remains unexecuted and held underu0iy pending direct human authorization. Disk recoverywqag is separately held pending the exact destructive-cleanup override; no internal scratch fallback. Existing nns5/7wpx assurance work remains open. The CI retrospective is extracted into PR620 underd4ub, and kxmq remains the open performance program. Evidence is retained under primary .codex/regularization-closeout-evidence-2026-10-13/.
