@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(95) = 10 by a mixed cover (#610)"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T01:43:17.212Z
-updated_at: 2026-10-15T01:59:31.353Z
+updated_at: 2026-10-15T02:04:33.675Z
 started_at: 2026-10-15T01:43:21.841Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#610 (bengreff, Benjamin Greff, opened 2026-10-15T01:16:36Z, labelled intake, no comments when read at 01:27Z): "Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)". The author's own certificate in his own repository, the case k = 10 after wand125's s(59) = 8 (#280, T-066) and his s(76) = 9 (#594, T-184). Followed the #594 import (think-osvq) step for step. Intake lane: Claude Opus 5.5 (tbd-moderate sub-agent), worktree agent-a33e48ec, branch claude/wizardly-meitner-wqn4x3-intake-610.
@@ -98,3 +98,13 @@ Finished per stage 2 apart from the bibliography key and the resources README ro
 acquire_source bengreff-s95-certificate-2026-10-15 --check: PACKET_MATCHES_ITS_CONTRACT. retained_data check and candidates on the packet: clean. receipts/programs/triage_checks.sh re-runs every comparison from the packet into receipts/n95_triage_checks.log, exit 0. packing-validate --records: exit 0, 51 of 109 steps (the records tier) passed, 0 failures. Focused tests: 254 passed in 60 s (test_acquire_source, test_acquire_original_gzip, test_retained_data, test_retained_json_layout, test_evand_mixed_covers, test_check_archive_annotations, test_certificate_citations, test_check_requests). No test module added, so nothing to admit with suite_files. The packet is outside ruff, basedpyright and flowmark (resources/ is excluded from all three).
 
 Committed as a88b7693295ab9084b143c4f7d4d9412ea68e9fa and pushed to claude/wizardly-meitner-wqn4x3-intake-610 (no pull request opened, nothing posted on GitHub). The commit needed npm ci in the worktree (the biome pre-commit hook); the format-markdown hook re-types one apostrophe in SYNOPSIS.md (drift already on main, T-174's row), which was reverted each time and is not in the commit.
+
+## Notes
+
+2026-10-15, after the coordinator's message of about 02:00Z (continue on claude/wizardly-meitner-wqn4x3-intake-610):
+
+Validation backlog for this import, each a bead labelled validation under think-mq0k:
+- think-zn7s: full zm_mixed.py pass over all 160,000 D4 roots, about 190 CPU-h, held over the 40 CPU-h cap.
+- think-ojr9: Lean build of lean/S95Lower.lean on Sqpack 1718a58, held on memory (25 GB peak, host has 15 GB).
+- think-eucc: zmx2 --full plus zm_mixed.py on its failing roots, about 6 CPU-h, priced and gated on decision. By #594's precedent it is not needed for the rung: T-184's next_rung (PR #602) asks for the D4 composite as evidence, the tool registration and a review, and the #594 import priced --full as optional. T-066's s(59) replay did run --full, which avoids the D4 reduction lemma, so a reviewer may ask for it.
+- Run now (the coordinator lifted the 30-minute pricing line; the cap is 40 CPU-h per item): zm_mixed.py on the other 290 sub-roots, one worker, from 02:01:23Z.
