@@ -8632,8 +8632,9 @@ issues:
       record compares reports only with the grid and earlier reports and holds none of Göbel''s classical
       constructions, so its rows at 369 and 376 are above Göbel''s sides, by 3.33e-2 and 4.57e-3, as are
       42 of Couzo''s 487b058 rows and 47 of his 4e4c8ce index''s. It asks the owner whether Göbel''s constructions
-      count as earlier reports and the baseline beyond 324. It reports no result of its own, but Göbel''s
-      sides are counterexamples to the rows at 369 and 376 and decide whether 89 reported rows are recorded.'
+      count as earlier reports and the baseline beyond 324. It reports no result of its own. Göbel''s sides
+      dominate the rows at 369 and 376 without refuting them: those rows are valid upper bounds, but the
+      record shows them as the best sides there. The answer decides whether 89 reported rows are recorded.'
     read_through: '2026-10-15T03:55:33Z'
     results: []
     asks:
@@ -8652,8 +8653,10 @@ issues:
       The project opened this issue; it reports no result of its own, and no acknowledgement is owed on
       it. `check_requests` still lists an acknowledgement as due, because the record has no state for an
       issue its owner opened (think-abcm). It is marked `intake` (the label added on 15 October 2026,
-      think-ykg6) as a defect report with a counterexample, stage 0's case for #295 and #308, and because
-      its answer decides which reported rows beyond 324 the record takes in.
+      think-ykg6) as the project's own issue tracking the intake of a reported item, as #532 to #537 are:
+      Göbel's classical constructions, results the record does not hold, as the baseline beyond 324. Its
+      answer also decides which reported rows beyond 324 the record takes in. It is not a counterexample
+      report: the rows at 369 and 376 are valid upper bounds that smaller classical sides dominate.
   - number: 622
     title: 'data: submit a tighter exact N29 packing certificate'
     author: BuddenPing
@@ -8672,8 +8675,8 @@ issues:
     read_through: '2026-10-15T18:43:54Z'
     results:
     - key: n29-certificate
-      claim: s(29) <= the exact side of certificates/n029.cert.json (SHA-256 a01428c5...), a fraction of
-        2,399 and 2,398 digits, about 5.93383346267692918968946061635201913843383418107788697463882591.
+      claim: s(29) <= the exact side of n29-certificate/certificates/n029.cert.json (SHA-256 a01428c5...),
+        a fraction of 2,399 and 2,398 digits, about 5.93383346267692918968946061635201913843383418107788697463882591.
       source: body
       not_registered: Undecided against the reported lane at 29, whose exact side the record does not hold
         yet; the report-order rule records it only if it is below that side.
@@ -8690,7 +8693,9 @@ issues:
       optimality is outside this request.
     notes: >-
       A pull request, held here as an issue because it reports results, as #574 is. It asks to replace
-      #574's N29 certificate, which T-174 does not register.
+      #574's N29 certificate, which T-174 does not register. The pull request makes no statement about AI
+      assistance; the author's answer on #503 ('PY') covered #503 and #504 only, and the drafted
+      acknowledgement in think-30n2 asks the question, as the #503 and #504 replies did.
   - number: 624
     title: 'n366 new best known packing: registration request'
     author: mstrmg
