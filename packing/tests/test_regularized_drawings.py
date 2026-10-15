@@ -19,6 +19,7 @@ from typing import Any, cast
 
 import pytest
 
+from devtools import build_bound_citations as citations
 from devtools import register_regularized_bounds as registration
 from devtools import regularized_drawings as drawings
 from devtools.check_results import regularized_drawings_problems
@@ -918,3 +919,63 @@ def test_the_generated_block_check_fails_on_an_edited_block() -> None:
 
     (problem,) = drawings.problems(head, index)
     assert "missing" in problem
+
+
+def test_each_check_rereads_its_witness_and_committed_register(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    frontier = tmp_path / "frontier"
+    frontier.mkdir()
+    monkeypatch.setattr(citations, "FRONTIER", frontier)
+    monkeypatch.setattr(drawings, "FRONTIER", frontier)
+    for name, document in (
+        ("EVIDENCE", {"evidence": []}),
+        ("BIBLIOGRAPHY", {"sources": [], "credited_names": {}}),
+    ):
+        path = tmp_path / f"{name}.yaml"
+        path.write_text(json.dumps(document), encoding="utf-8")
+        monkeypatch.setattr(citations, name, path)
+    results = tmp_path / "results.yaml"
+    monkeypatch.setattr(citations, "RESULTS", results)
+    monkeypatch.setattr(drawings, "RESULTS", results)
+    witness = tmp_path / "witness.yaml"
+    original = 'witness: {source: {key: "[A]"}}\n'
+    witness.write_text(original, encoding="utf-8")
+    record = {
+        **entry(5, "same"),
+        "generator": drawings.AXIS_GENERATOR,
+        "source": {"witness": str(witness)},
+    }
+    index = {"entries": [record]}
+    head = (
+        "results:\n  - id: T-001\n    kind: upper-bound\n"
+        '    scope: {n_values: [5]}\n    attribution: {source_keys: ["[A]"]}\n\n'
+    )
+    text = head + drawings.block_text([drawings.item(record, "T-001")], [])
+    results.write_text(text, encoding="utf-8")
+    case = frontier / "n-005.md"
+    case.write_text("---\npacking:\n  n: 5\n---\n", encoding="utf-8")
+    fields = drawings.case_fields(index)
+    case.write_text(drawings.with_case_field(case.read_text(), fields[5]), encoding="utf-8")
+    assert drawings.problems(text, index) == []
+
+    witness.write_text(original.replace("[A]", "[B]"), encoding="utf-8")
+    assert "items for [] missing, [5] extra" in drawings.problems(text, index)[0]
+    witness.write_text(original, encoding="utf-8")
+    assert drawings.problems(text, index) == []
+
+    # The supplied head still credits A; the committed register must be read afresh.
+    results.write_text(text.replace('["[A]"]', '["[B]"]'), encoding="utf-8")
+    assert "items for [] missing, [5] extra" in drawings.problems(text, index)[0]
+
+
+def test_witness_source_reuse_distinguishes_repository_roots(tmp_path: Path) -> None:
+    source_keys: dict[Path, str | None] = {}
+    witness = {"source": {"witness": "witness.yaml"}}
+    for key in ("[A]", "[B]"):
+        root = tmp_path / key
+        root.mkdir()
+        (root / "witness.yaml").write_text(
+            json.dumps({"witness": {"source": {"key": key}}}), encoding="utf-8"
+        )
+        assert drawings.witness_source_key(witness, root, source_keys=source_keys) == key

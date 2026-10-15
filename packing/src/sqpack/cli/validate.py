@@ -220,8 +220,6 @@ SUITE_SHARDS = 4
 #: derived from the retained 58-test hosted JUnit receipt on run 35579234418.
 EXHAUSTIVE_SHARDS = 3
 EXHAUSTIVE_FILE_COSTS = "devtools/exhaustive-file-costs.json"
-#: The pull-request run whose required gate succeeded on this exact tracked tree.
-TREE_VERIFIED_ENVIRONMENT = "PACKING_VALIDATE_TREE_VERIFIED_BY_RUN"
 #: Homebrew's two default prefixes. CairoSVG loads `libcairo` through ctypes, which
 #: does not find either directory on a stock macOS loader path even when brew has
 #: installed the library. `packing-validate` supplies the first prefix that actually
@@ -311,12 +309,13 @@ _SITE_INPUTS = (
 SLOW_TESTS = "slow and not exhaustive_exact"
 EXHAUSTIVE_TESTS = "exhaustive_exact"
 BEHAVIORAL_TEST_ROOTS = ("tests", "../packages/workbench/tests")
-#: The pull-request surface's per-test ceiling, in seconds of pytest `call` time.
+#: The quick surface's classification threshold, in seconds of pytest `call` time.
 #:
 #: This is the boundary between `QUICK_TESTS` and `SLOW_TESTS`, and it is a rule rather
 #: than a list on purpose: `fast behavioral tests` passes it to pytest as
-#: `--durations-min` and fails when any test it ran reports at or above it, naming the
-#: test. A hand-kept list of slow tests would rot exactly the way the 499s figure in this
+#: `--durations-min` and names every test at or above it. Local and explicitly
+#: strict runs fail; hosted advisory runs retain the separate 45s hard backstop. A
+#: hand-kept list of slow tests would rot exactly the way the 499s figure in this
 #: module's own docstring rotted -- silently, because nothing read it.
 #:
 #: Two numbers, deliberately, and the gap between them is runner variance. Tests are
@@ -365,7 +364,8 @@ BEHAVIORAL_TEST_ROOTS = ("tests", "../packages/workbench/tests")
 #: a later call reaps it, and background threads share the same process counters.
 #: Six seconds retains the previous report filter without attributing that work to a test.
 QUICK_TEST_CPU_REPORT_SECONDS = 6.0
-#: The enforced per-call wall ceiling remains unchanged.
+#: The quick-call classification ceiling; local/strict runs enforce it. Hosted runs
+#: report it under the declared policy and retain the separate 45s backstop.
 QUICK_TEST_WALL_BACKSTOP_SECONDS = 12.0
 #: The other direction, and it exists because `OR-13` is a floor on coverage rather than a
 #: budget on time: a test leaves the pull-request surface by its own measured cost and
@@ -574,6 +574,8 @@ class Context:
     inner_jobs: int
     environment: dict[str, str]
     timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS
+    enforce_budget: bool = False
+    """An explicit cost-enforcement request also applies to individual quick calls."""
     timeout_is_explicit: bool = False
     """True when an operator named the cap through `--timeout-seconds` or the
     environment variable, rather than taking the default.
@@ -796,8 +798,9 @@ class Step:
 
     Selection is conservative on both sides, which is the whole design (`BC-084`):
 
-    - a changed path matching no step's patterns selects the **entire gate**, never the
-      empty set, so a file nobody thought about cannot silently skip everything;
+    - a changed path claimed by neither `touches` nor `known_inputs` selects the
+      **entire gate**, never the empty set, so a file nobody thought about cannot
+      silently skip everything;
     - a step with no patterns is always selected;
     - `test_every_step_is_reachable_from_a_declared_pattern` requires each step to be
       selected by at least one path under `PATTERN_PROBES`, so a pattern set that has
@@ -827,6 +830,14 @@ class Step:
     validation`, and the exhaustive test step, each of which resolves or enumerates
     arbitrary paths. Attributing those would make a data file the load-bearing contract,
     which is the trade this field exists to refuse."""
+
+    known_inputs: tuple[str, ...] = ()
+    """Exact paths this step owns independently of its conditional reachability.
+
+    A check that resolves arbitrary paths can retain empty `touches` and run on every
+    change while claiming its known data files. These are exact paths, never globs;
+    an unfamiliar neighboring file still triggers the whole-gate fallback.
+    """
 
     budget_seconds: float | None = None
     """This step's own declared ceiling, for the rare step that legitimately costs more
@@ -1641,7 +1652,7 @@ def _quick_lane_command(jobs: int, shard: int) -> tuple[str, ...]:
 
 
 def _pull_request_ceiling() -> gate_budgets.CeilingAdvisory | None:
-    """The register's ceiling relaxation for hosted pull requests, or None to enforce.
+    """Read the PR wall policy and its separately declared hosted CALL scope.
 
     An unreadable register enforces: the relaxation is a declared exception, and a run
     that cannot read the declaration is held to the rule it relaxes.
@@ -1663,24 +1674,47 @@ def _fast_tests(context: Context, shard: int) -> str:
         for entry in _call_durations(output)
         if entry[0] >= QUICK_TEST_WALL_BACKSTOP_SECONDS
     ]
-    relaxed = _pull_request_ceiling() if waiting and _hosted_pull_request() else None
+    relaxed = _pull_request_ceiling() if waiting else None
+    hosted = context.environment.get("GITHUB_ACTIONS") == "true"
+    if (
+        context.enforce_budget
+        or context.strict
+        or not hosted
+        or (
+            relaxed is not None
+            and relaxed.per_test_scope == "pull_request"
+            and not _hosted_pull_request(context.environment)
+        )
+    ):
+        relaxed = None
     if relaxed is not None:
         hung = [entry for entry in waiting if entry[0] >= relaxed.per_test_hang_seconds]
         if not hung:
+            note = gate_budgets.advisory_note(
+                replace(
+                    relaxed.advisory,
+                    rules="the quick-test classification wall",
+                    still_fails=(
+                        f"Calls of {relaxed.per_test_hang_seconds:g}s or more, "
+                        "functional failures and subprocess deadlines remain enforcing. "
+                        "Tier and workflow wall policies are unchanged."
+                    ),
+                )
+            )
             print(
-                f"{len(waiting)} test(s) held the pull-request surface for "
+                f"{len(waiting)} quick test(s) took "
                 f"{QUICK_TEST_WALL_BACKSTOP_SECONDS:g}s or more of call wall time, "
-                f"reported and not failed:\n{_render_durations(waiting)}\n"
-                f"  {gate_budgets.advisory_note(relaxed.advisory)}"
+                f"reported and not failed:\n{_render_durations(waiting)}\n  {note}"
             )
             for seconds, node in waiting:
                 print(f"::warning title=Cost::{node} took {seconds:.2f}s of call wall time")
             return output
         waiting = hung
     if waiting:
+        limit = relaxed.per_test_hang_seconds if relaxed else QUICK_TEST_WALL_BACKSTOP_SECONDS
         raise StepFailureError(
             f"{len(waiting)} test(s) held the pull-request surface for "
-            f"{QUICK_TEST_WALL_BACKSTOP_SECONDS:g}s or more of call wall time:"
+            f"{limit:g}s or more of call wall time:"
             f"\n{_render_durations(waiting)}\n"
             "  Make the test faster, or mark it `slow` and declare its measurement in "
             "test_the_slow_marker_is_declared_only_by_measured_nodes. "
@@ -4803,7 +4837,13 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/check_canonical.py",
         ),
     ),
-    Step("soft-schema validation", _schemas, fast=True, records=True),
+    Step(
+        "soft-schema validation",
+        _schemas,
+        fast=True,
+        records=True,
+        known_inputs=("packing/site-changelog.yaml", "packing/site-changelog.schema.yaml"),
+    ),
     Step(
         "FN1 original-input bindings",
         _fn1_original_bindings,
@@ -5211,7 +5251,13 @@ STEPS: tuple[Step, ...] = (
             *_RENDERER_HUB,
         ),
     ),
-    Step("synopsis agrees with the artifacts", _synopsis, fast=True, records=True),
+    Step(
+        "synopsis agrees with the artifacts",
+        _synopsis,
+        fast=True,
+        records=True,
+        known_inputs=("packing/site-changelog.yaml", "packing/site-changelog.schema.yaml"),
+    ),
     Step("README agrees with the directory", _readme, fast=True, records=True),
     Step(
         "migrated Markdown writes its math as LaTeX",
@@ -5959,7 +6005,8 @@ def select_for_paths(paths: Sequence[str], steps: Sequence[Step] | None = None) 
     - a path no step claims means the attribution is incomplete for this change, so the
       whole gate runs. Returning the steps that happened to match would be an answer
       derived from an admittedly incomplete map.
-    - a step that claims nothing is claimed by everything.
+    - a step with empty `touches` runs for every change, even when it declares known
+      inputs for attribution.
 
     An empty `paths` is not "nothing changed"; it is "nothing was determined", and it
     also selects the whole gate.
@@ -5971,7 +6018,10 @@ def select_for_paths(paths: Sequence[str], steps: Sequence[Step] | None = None) 
     attributed = {
         path
         for path in paths
-        if any(step.touches and step.reachable_from(path) for step in universe)
+        if any(
+            path in step.known_inputs or (step.touches and step.reachable_from(path))
+            for step in universe
+        )
     }
     unclaimed = tuple(sorted(set(paths) - attributed))
     if unclaimed:
@@ -5980,7 +6030,9 @@ def select_for_paths(paths: Sequence[str], steps: Sequence[Step] | None = None) 
         )
 
     reached = tuple(
-        step for step in universe if any(step.reachable_from(path) for path in paths)
+        step
+        for step in universe
+        if any(path in step.known_inputs or step.reachable_from(path) for path in paths)
     )
     return Selection(steps=reached, unattributed_paths=(), universe_size=len(universe))
 
@@ -6009,7 +6061,7 @@ def _announce(namespace: argparse.Namespace, *lines: str) -> None:
     """Print a run banner on stdout, or on stderr under `--format json`.
 
     Under `--format json` stdout is one JSON document and nothing else: the banners the
-    `--push`, `--since` and verified-tree paths print are for a reader, and a consumer
+    `--push` and `--since` paths print are for a reader, and a consumer
     that parses the output must not have to skip them (PR 496 review E1).
     """
     stream = sys.stderr if namespace.format == "json" else sys.stdout
@@ -6153,125 +6205,6 @@ def _push_test_step(
     )
 
 
-#: Fast steps whose verdict is a pure function of the tracked tree and may therefore be
-#: reused after an exact-tree pull-request proof.  This is a positive allow-list: a new
-#: fast step is repeated after merge until somebody explicitly classifies it here, so a
-#: forgotten clock, network, git-graph, or side-worktree dependency fails closed.
-TREE_REUSABLE_FAST_STEPS = frozenset(
-    {
-        "soundness perimeter",
-        "lint floor (ruff)",
-        "type floor (basedpyright)",
-        "browser floor (biome, eslint, tsc, node:test)",
-        "browser floor liveness tests",
-        "browser code lives in files (embedded JavaScript, probes)",
-        # The same shape as the embedded-JavaScript guard: a static scan of the tracked
-        # Python and one tracked register, with no clock, network or history consulted.
-        "integrity ceremony never grows",
-        "workbench browser behavior in Chromium",
-        # The same shape as the workbench step: the tracked pages, rendered and measured
-        # in the pinned browser, with no clock, network or history consulted.
-        "site table layout in Chromium",
-        "basin atlas",
-        "basin event record and replay",
-        "historical regressions",
-        "small-n exact models and local geometry",
-        "deterministic SVG rendering",
-        "known-best atlas records and sample",
-        "known-best chunk census",
-        "known-best family and contact-shade censuses",
-        "prospective n=101..324 source map",
-        "prospective n=101..324 safe seed",
-        "translation escape screen records and sample",
-        "abstract size-five contact-scaffold atlas",
-        "fixed-angle cell is an LP, rebuilt independently",
-        "fast behavioral tests, shard A",
-        "fast behavioral tests, shard B",
-        "fast behavioral tests, shard C",
-        "fast behavioral tests, shard D",
-        "golden basin maps (proved cases, checked against mathematics)",
-        "basin identity",
-        "soft-schema validation",
-        # A pure function of the tracked JSON: it reads the retained records and nothing
-        # else, so a pull-request run over this exact tree has already decided it.
-        "class records do not claim the unconditional bound",
-        # The same shape: the tracked JSON, its own policy and `biome.json`, and the
-        # writer it re-lays them with. No clock, no network, no history.
-        "retained JSON is one record per line",
-        # The same shape: it reads the tracked Markdown under `packing/resources/` and
-        # compares three numbers found in those bytes. No clock, no network, no history.
-        "archive annotation census agrees with the archive",
-        "derivation (needs sympy)",
-        "search engine (sqsearch)",
-        "lint floor (rust)",
-        # Locked Rust sources and tracked exact differential fixtures determine the
-        # verdict; no repository history, remote state, or stored result is consulted.
-        "exact rectangle Rust geometry",
-        "measure verifier Rust (sqverify-fast)",
-        "n17 branch-and-bound native (Rust)",
-        "Trump exact branchwise linearized cones",
-        "H-041 Stromquist repaired-cover exact certificate",
-        "H-010 Stromquist printed-cover exact rejection",
-        "exact verification",
-        "Route S compression admission checkpoint is consistent",
-        "verifier perturbation limits",
-        "frontier corpus",
-        "frontier rigidity assessed here",
-        "generated tables in sync with frontier/",
-        "strategy catalogues",
-        "defect log",
-        "skills mirrored between .agents and .claude",
-        "X-027 mathematics parses with pinned KaTeX",
-        "synopsis agrees with the artifacts",
-        "README agrees with the directory",
-        # Reads tracked Markdown, its own register, the document map and .flowmarkignore.
-        "migrated Markdown writes its math as LaTeX",
-        "AGENTS.md mirrors the operating rules",
-        "agenda map agrees with the agendas",
-        "D-034's n=5 identity pair still reproduces",
-        "the decimal route still cannot price an exact pose",
-        "work accounting agrees on one unit",
-        "assembly coverage agrees with the contract",
-        "chunk taxonomy agrees with the corpus",
-        "session clocks are readable",
-        "n=5 rigidity certificates still verify",
-        "every session's cost is attributed",
-        "the branch cost rollup renders",
-        "control anchors still resolve",
-        "the borrowed lower bounds re-derive",
-        "the register's reliance on T-007 is inventoried",
-        "regularized atlas views match their index",
-        "regularized atlas drawings match their index",
-        # The layer's views, their house witnesses, the case records' bounds and the
-        # policy's statement, measured and compared: no clock, no network, no history.
-        "default pictures improve on their house drawings",
-        "the Lean replay receipt for s(k^2-2) = k holds",
-        # The vendored files and their manifest, compared byte for byte; git is asked only
-        # which files the tree holds. No clock, no network, no history.
-        "the vendored regularizer matches its manifest",
-        "the inventory agrees with the register",
-        "results rungs are earned and the view agrees",
-        "the synopsis headline carries every result",
-        "exact certificates are named by their records",
-        "rung figures agree with their certificates",
-        # The register, the bibliography and the case records, read and compared: no
-        # clock, no network and no history.
-        "standings agree with the bounds their entries state",
-        # One record, its schema and the register; `--report`, `--draft` and `--github`
-        # read git and GitHub, and the step runs none of them.
-        "result requests name registered results",
-        "case prose agrees with its own front matter",
-        # Reads the register, the reader documents and its own allowlist; the `git grep`
-        # in the module belongs to `--retained`, which this step does not run.
-        "reader prose credits and links, without audit mechanics",
-        "terminal sessions name what they cost",
-        "terminal sessions name the gate that certified them",
-        "Goebel's family reaches the sizes it reaches",
-        "differential: search energy vs validity oracle",
-    }
-)
-
-
 def _select_steps(
     *,
     only: list[str],
@@ -6394,40 +6327,6 @@ def _select_steps(
             "`packing-validate --list` shows names"
         )
     return selected
-
-
-def _after_verified_pull_request(selected: Sequence[Step]) -> list[Step]:
-    """Keep deferred steps and anything not positively classified as tree-reusable."""
-    fast_names = {step.name for step in STEPS if step.fast}
-    unknown = TREE_REUSABLE_FAST_STEPS - fast_names
-    if unknown:
-        raise StepFailureError(
-            "tree-reuse allow-list names no current fast step: " + ", ".join(sorted(unknown))
-        )
-    return [
-        step for step in selected if not step.fast or step.name not in TREE_REUSABLE_FAST_STEPS
-    ]
-
-
-def _unless_verified(namespace: argparse.Namespace, selected: list[Step]) -> list[Step]:
-    """Apply an exact-tree proof only to the complete post-merge surface."""
-    verified_run = os.environ.get(TREE_VERIFIED_ENVIRONMENT, "").strip()
-    if not verified_run:
-        return selected
-    if _tier_id(namespace) != "full" or namespace.push:
-        raise UsageError(
-            f"{TREE_VERIFIED_ENVIRONMENT} narrows the complete surface after a merge; "
-            "it is not combined with a tier, --only or --since"
-        )
-    narrowed = _after_verified_pull_request(selected)
-    _announce(
-        namespace,
-        f"== pull-request run {verified_run} passed this exact tree: "
-        f"{len(selected) - len(narrowed)} tree-reusable fast steps are not repeated, "
-        f"and {len(narrowed)} deferred or fail-closed steps still run ==",
-        "",
-    )
-    return narrowed
 
 
 def _execute_step(step: Step, context: Context) -> StepResult:
@@ -6867,8 +6766,12 @@ _PYTEST_COUNT = re.compile(r"\b(?P<count>\d+) (?P<what>failed|errors?)\b")
 #: The two per-test wall rules' own headlines, as `_fast_tests` and `_slow_tests` raise
 #: them; `test_a_per_test_wall_failure_is_its_own_class` drives the raising code itself,
 #: so a reworded headline fails there rather than quietly reading as a step failure.
-_WALL_CEILING_HEADLINE = re.compile(r"^\d+ test\(s\) held the pull-request surface for")
-_SLOW_FLOOR_HEADLINE = re.compile(r"^\d+ deferred test\(s\) ran below the")
+_WALL_CEILING_HEADLINE = re.compile(
+    r"^\d+ test\(s\) held the pull-request surface for (?P<seconds>[0-9.]+)s"
+)
+_SLOW_FLOOR_HEADLINE = re.compile(
+    r"^\d+ deferred test\(s\) ran below the (?P<seconds>[0-9.]+)s"
+)
 _RENDERED_DURATION = re.compile(r"^\s+(?P<seconds>\d+\.\d+)s  (?P<node>\S+)$")
 _TIMED_OUT = re.compile(r"^command timed out after (?P<seconds>[0-9.]+) seconds")
 #: How many failing names a one-line verdict or an annotation spells out.
@@ -6891,6 +6794,7 @@ class WallFailures:
 
     step: str
     rule: Literal["ceiling", "floor"]
+    threshold_seconds: float
     entries: tuple[tuple[float, str], ...]
 
 
@@ -6940,9 +6844,9 @@ def _test_failures(step: str, reason: str) -> FailedTests | None:
 
 def _wall_failures(step: str, reason: str) -> WallFailures | None:
     headline = reason.split("\n", 1)[0]
-    if _WALL_CEILING_HEADLINE.match(headline):
+    if (headline_match := _WALL_CEILING_HEADLINE.match(headline)) is not None:
         rule: Literal["ceiling", "floor"] = "ceiling"
-    elif _SLOW_FLOOR_HEADLINE.match(headline):
+    elif (headline_match := _SLOW_FLOOR_HEADLINE.match(headline)) is not None:
         rule = "floor"
     else:
         return None
@@ -6951,7 +6855,12 @@ def _wall_failures(step: str, reason: str) -> WallFailures | None:
         for line in reason.splitlines()[1:]
         if (match := _RENDERED_DURATION.match(line))
     )
-    return WallFailures(step=step, rule=rule, entries=entries)
+    return WallFailures(
+        step=step,
+        rule=rule,
+        threshold_seconds=float(headline_match["seconds"]),
+        entries=entries,
+    )
 
 
 def _step_cause(reason: str) -> str:
@@ -7036,9 +6945,9 @@ def _failure_class_line(classes: FailureClasses) -> str:
         entries = [f"{node} {seconds:.2f} s" for seconds, node in wall.entries]
         tests = "test" if len(entries) == 1 else "tests"
         counted = (
-            f"{len(entries)} {tests} at or above {QUICK_TEST_WALL_BACKSTOP_SECONDS:g} s"
+            f"{len(entries)} {tests} at or above {wall.threshold_seconds:g} s"
             if wall.rule == "ceiling"
-            else f"{len(entries)} slow-marked {tests} under {SLOW_TEST_FLOOR_SECONDS:g} s"
+            else f"{len(entries)} slow-marked {tests} under {wall.threshold_seconds:g} s"
         )
         parts.append(f"per-test wall {wall.rule} failed ({counted}: {_named(entries)})")
     if classes.steps:
@@ -7102,9 +7011,9 @@ def _failure_annotations(classes: FailureClasses) -> list[str]:
         )
     for wall in classes.walls:
         title = (
-            f"Per-test wall ceiling ({QUICK_TEST_WALL_BACKSTOP_SECONDS:g} s) in {wall.step}"
+            f"Per-test wall ceiling ({wall.threshold_seconds:g} s) in {wall.step}"
             if wall.rule == "ceiling"
-            else f"Per-test wall floor ({SLOW_TEST_FLOOR_SECONDS:g} s) in {wall.step}"
+            else f"Per-test wall floor ({wall.threshold_seconds:g} s) in {wall.step}"
         )
         annotations.append(
             _annotation(
@@ -7170,9 +7079,9 @@ def _failure_summary_markdown(summary: RunSummary, classes: FailureClasses) -> s
         )
     for wall in classes.walls:
         rule = (
-            f"at or above the {QUICK_TEST_WALL_BACKSTOP_SECONDS:g} s per-test ceiling"
+            f"at or above the {wall.threshold_seconds:g} s per-test ceiling"
             if wall.rule == "ceiling"
-            else f"slow-marked and under the {SLOW_TEST_FLOOR_SECONDS:g} s floor"
+            else f"slow-marked and under the {wall.threshold_seconds:g} s floor"
         )
         lines.append(f"- **Per-test wall** in {wall.step}: {len(wall.entries)} {rule}")
         lines.extend(
@@ -7487,7 +7396,8 @@ def _parser() -> ArgumentParser:
         action="store_true",
         help=(
             "fail on the tier's declared cost band even when this machine is not the "
-            "shape the ceiling was measured for (also PACKING_VALIDATE_ENFORCE_BUDGET)"
+            "shape the ceiling was measured for, and enforce the 12s quick-call limit "
+            "(also PACKING_VALIDATE_ENFORCE_BUDGET)"
         ),
     )
     parser.add_argument(
@@ -7703,7 +7613,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             measure_verifier=namespace.measure_verifier,
             skip=namespace.skip,
         )
-        selected = _unless_verified(namespace, selected)
         exclusive_step_name = ""
         if namespace.push:
             base = namespace.since or "origin/main"
@@ -7766,8 +7675,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _render_early_exit(namespace, selected)
         environment = _validation_environment()
         environment["PACK_JOBS"] = str(inner_jobs)
-        # A nested validator proves its own selection and must not inherit this proof.
-        _ = environment.pop(TREE_VERIFIED_ENVIRONMENT, None)
         # The job's step summary is this process's channel alone (`_report_failure_class`).
         _ = environment.pop("GITHUB_STEP_SUMMARY", None)
         context = Context(
@@ -7780,6 +7687,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             exhaustive_shard=exhaustive_shard,
             timeout_seconds=timeout_seconds,
             timeout_is_explicit=timeout_is_explicit,
+            enforce_budget=namespace.enforce_budget
+            or _environment_flag("PACKING_VALIDATE_ENFORCE_BUDGET"),
         )
         _begin_artifacts(context, selected)
         summary = _run_selected(selected, context, namespace.only, namespace.skip)
@@ -7788,8 +7697,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             tier_id=_tier_id(namespace),
             jobs=jobs,
             inner_jobs=inner_jobs,
-            force=namespace.enforce_budget
-            or _environment_flag("PACKING_VALIDATE_ENFORCE_BUDGET"),
+            force=context.enforce_budget,
             pull_request=_hosted_pull_request(),
         )
     except ParserExitError as error:

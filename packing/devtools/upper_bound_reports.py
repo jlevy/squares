@@ -1336,6 +1336,42 @@ def house_side(reader: str, n: int) -> Fraction:
         raise ReportError(f"n={n}: {reader} does not rebuild: {error}") from error
 
 
+def comparison_reader(declaration: Declaration) -> Callable[[str, int], Fraction]:
+    """Admit each imported packet's needed counts once, only for this comparison.
+
+    A house and several pending reports can read the same packet. Group their counts
+    before admitting it, so asking for one side does not admit every unrelated fact.
+    Keep the values local: the next comparison must see changed private packet bytes.
+    """
+    packets: dict[str, Path] = {}
+    needed: dict[Path, dict[int, str]] = {}
+    for reference in [*declaration["houses"], *declaration["pending"]]:
+        reader = reference.get("reader")
+        if reader is None or (packet := import_packet(reader)) is None:
+            continue
+        packets[reader] = packet
+        needed.setdefault(packet, {}).setdefault(reference["n"], reader)
+    sides: dict[Path, dict[int, Fraction]] = {}
+    for packet, counts in needed.items():
+        try:
+            sides[packet] = {
+                n: certificate.side for n, certificate in read_facts(packet, counts).items()
+            }
+        except (OSError, ValueError, KeyError) as error:
+            n, reader = next(iter(counts.items()))
+            raise ReportError(f"n={n}: {reader} does not rebuild: {error}") from error
+
+    def read_side(reader: str, n: int) -> Fraction:
+        if reader not in packets:
+            return house_side(reader, n)
+        try:
+            return sides[packets[reader]][n]
+        except KeyError as error:
+            raise ReportError(f"n={n}: {reader} does not rebuild: {error}") from error
+
+    return read_side
+
+
 #: The places an algebraic side's enclosure is first refined to, and the most it is refined
 #: to before a comparison is refused; the relation itself is decided by one exact sign.
 ALGEBRAIC_PLACES = (60, 4000)
@@ -1486,6 +1522,7 @@ def _row(
     row: CertificateRow,
     certificate: legacy.Certificate,
     declaration: Declaration,
+    read_side: Callable[[str, int], Fraction],
 ) -> dict[str, Any]:
     n, side = row["n"], certificate.side
     houses = {house["n"]: house for house in declaration["houses"]}
@@ -1506,7 +1543,7 @@ def _row(
     candidates: list[tuple[str, Span]] = [(THIS, exact_span(side))]
     if n <= HORIZON:
         house = houses[n]
-        prior = house_side(house["reader"], n)
+        prior = read_side(house["reader"], n)
         printed_lane = "reported_rounding" in house
         lanes = ("verified_value",) if printed_lane else ("reported_value", "verified_value")
         for lane in lanes:
@@ -1547,7 +1584,7 @@ def _row(
             entry["difference_bounds"] = [legacy.literal(low), legacy.literal(high)]
         else:
             if "reader" in report:
-                value = house_side(report["reader"], n)
+                value = read_side(report["reader"], n)
                 span = exact_span(value)
                 entry["exact_side"] = legacy.literal(value)
             else:
@@ -1571,8 +1608,10 @@ def compare(
     certificates = read_facts(packet) if certificates is None else certificates
     declaration = load_declaration(packet)
     source = acquisition(packet)
+    read_side = comparison_reader(declaration)
     rows = [
-        _row(row, certificates[row["n"]], declaration) for row in declaration["certificates"]
+        _row(row, certificates[row["n"]], declaration, read_side)
+        for row in declaration["certificates"]
     ]
     return {
         "format": CLAIMS_FORMAT,

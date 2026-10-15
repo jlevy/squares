@@ -187,24 +187,24 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 50 of 108 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 66 of 108 | 240 s | 59.4 s |
+| `--records` | contributor, before touching a registry; also every pull request | 51 of 109 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | 67 of 109 | 240 s | 59.4 s |
 | `--push` | contributor, once before a push — affected edit-tier prerequisites and reachable quick tests (`--since`); add `--include-reachable-slow` for selected slow tests | varies with the diff | 1800 s | new quick default not yet measured; large implicit selections run after prerequisites, subject to the load lock, see below |
-| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 95 of 108 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 69 of 108 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
-| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 108 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 108 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 108 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
-| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 108 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
-| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 108 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
-| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 108 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
-| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 108 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 108 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
-| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 108 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 108 of 108 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
+| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 96 of 109 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 70 of 109 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 109 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 109 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 109 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
+| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 109 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
+| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 109 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
+| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 109 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
+| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 109 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 109 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
+| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 109 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 109 of 109 | 3600 s | integration, serial quick suites and ten deferred workers; new whole-wall measurement pending |
 
-Step counts describe the current 108-step registry, read from the validator’s canonical
-selection API on 2026-10-11. Its ten PR partitions cover all 95 fast steps.
+Step counts describe the current 109-step registry, read from the validator’s canonical
+selection API on 2026-10-15. Its ten PR partitions cover all 96 fast steps.
 Dated costs retain their measured source and resource shape; they are not fresh
 measurements of the new scheduling.
 
@@ -480,12 +480,15 @@ it has also read over 180 seconds on PR 188, at 182 seconds in run 35182460356.
 hosted runs hold both walls at or under 180 seconds.
 Five is the planned default, and `think-g4n9` owns it.
 
-On a push to `main`, the integration job looks for a successful pull-request run that
-validated the exact same Git tree and explicitly passed `packing-required`. A match
-licenses reuse only for fast steps named in the positive `TREE_REUSABLE_FAST_STEPS`
-allowlist. Every deferred step and every unclassified fast step repeats after merge;
-missing artifacts, expired artifacts, API errors, fork runs, and incomplete checks all
-fall back to the complete surface.
+On a push to `main`, the integration job, serial quick-suite worker and ten dedicated
+workers run the complete post-merge surface.
+Each run executes its selected checks, even when the pull-request checks already passed.
+`integration-suites` owns the four quick Steps at their existing process shape and
+strict per-test limits; the integration job skips exactly those Steps and the deferred
+workers’ Steps. The native aggregate requires every owner.
+This adds one complete browser bootstrap and artifact cycle; its whole-job cost is
+recorded with the other post-merge walls.
+The named PR tier commands and their ceilings remain unchanged.
 
 ### A job no runner took
 
@@ -559,7 +562,8 @@ controls, the n=40 rigidity replay, the whole known-best atlas rebuild, the whol
 single-square translation escape screen, and the whole exact rational grid replay.
 T-024 and T-026 add four exact dilation-limit replays at 720 and 1440 steps, and
 `think-bgkz` adds the exact re-derivation of the regularized atlas views.
-These are the twelve steps outside the [PR fast surface](#validation-tiers).
+Together with the full measure-verifier controls, these are the thirteen Steps outside
+the [PR fast surface](#validation-tiers).
 [D-470](defects.md) records why checking them only after a merge is insufficient: a
 stale certificate test left main red across three merges despite green PR checks.
 
@@ -575,8 +579,9 @@ Timing artifacts have distinct job names and record the checked-out commit.
 For a dispatched PR, that resolved merge commit can differ from the workflow dispatch
 ref; the checkout receipt identifies the source actually validated.
 Main, daily and manually dispatched packing validation use the same deferred groups.
-Their separate `post-merge-required` aggregate requires the integration job and all ten
-deferred workers to succeed; the seven-job PR aggregate remains separate.
+Their separate `post-merge-required` aggregate requires the integration job, the serial
+quick-suite worker and all ten deferred workers to succeed; the ten-job PR aggregate
+remains separate.
 
 The last three joined on 2026-09-07 because the corpus tripled, not because the gate
 changed its mind about them.
@@ -1004,8 +1009,10 @@ labelled or dispatched deferred checkpoint.
 The behavioural [lane definitions](#the-behavioural-lanes) preserve the partition.
 Quick-test timing uses the `call` phase because shared fixture setup can be charged to
 whichever test starts first.
-Optimize a test that exceeds its ceiling, or retain its measurement when moving it to
-`slow`; remove that marker when its measured cost falls below the floor.
+Investigate calls at or above the 12-second classification threshold.
+Optimize avoidable work before moving a test to `slow`, and retain its individual
+measurement when moving it; remove that marker when its measured cost falls below the
+floor. Hosted CALL findings alone are advisory below 45 seconds, as described below.
 The marker registry tests enforce both declarations.
 Both behavioural lanes use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs`
 controls other internal pools, including the negative-control pool.
@@ -1073,12 +1080,31 @@ findings. Raising ceilings repeatedly did not resolve that ambiguity.
 runner-normalised wall can judge regressions attributable to a change.
 
 **Failures and deadlines still fail the run.** Functional failures, command timeouts,
-and test calls of 45 seconds or more remain enforcing.
-Numeric tier budgets are unchanged.
-Main and scheduled runs, full and strict checkpoints (including those invoked within a
-pull request), and explicit `--enforce-budget` retain cost enforcement.
-The gate identifies hosted pull requests from `GITHUB_ACTIONS` and `GITHUB_EVENT_NAME`;
-an advisory policy does not apply to every invocation on that runner.
+and hosted test calls of 45 seconds or more remain enforcing.
+The 12-second quick-test threshold reports classification findings on every hosted
+Actions event, including full, main, scheduled and dispatched runs.
+Local runs remain strict at 12 seconds.
+`--strict` and `--enforce-budget`, including `PACKING_VALIDATE_ENFORCE_BUDGET`, enforce
+12 seconds on hosted runs too.
+The existing policy record declares this CALL scope separately from PR-only tier-wall
+advisory and requires a live tracking bead.
+Missing or unreadable policy retains strict enforcement.
+
+This distinction follows
+[run 38763716551](https://github.com/jlevy/squares/actions/runs/38763716551): all quick
+assertions passed, but eleven completed calls failed the 12-second rule.
+Across 590 matched successful nodes that previously took one to three seconds, the
+median inclusive JUnit duration increased by a factor of 1.636. Those durations include
+setup and teardown and do not identify a CALL regression or establish its cause.
+A single uncalibrated hosted reading is classification evidence; it is not enough to
+attribute a performance regression to the change.
+This policy changes the verdict, not the amount of work or the three-minute target.
+
+Numeric tier budgets and whole-workflow wall policies are unchanged.
+Main and scheduled tier walls, full and strict checkpoint tier walls, and explicit
+`--enforce-budget` retain their existing enforcement.
+The gate identifies hosted execution through `GITHUB_ACTIONS`; the separate PR tier-wall
+exception also requires `GITHUB_EVENT_NAME=pull_request`.
 
 A different CPU/worker shape reports the budget result without failing, unless
 explicitly enforced.

@@ -406,6 +406,9 @@ def test_every_574_certificate_is_admitted_at_its_printed_side() -> None:
             assert legacy.ceiling_decimal(side, 40) == row["offered"]
 
 
+# The complete comparison admits 209 derived facts: 9.96s local CALL after selective
+# reads, 13.09s in full run 38756833833. Keep all 85 own certificates and competitors.
+@pytest.mark.slow
 def test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304() -> None:
     """Read at the exact sides this record retains for the other reports (review A1 of
     #602), the certificate is decidably smallest at 60 of the 64 rational counts the ledger
@@ -427,6 +430,9 @@ def test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304
     assert above == {211, 237, 241, 304}
 
 
+# Full plan plus independent claims: 14.46s CALL in full run 38756833833. The
+# existing slow owner executes the unchanged full operation at each selected checkpoint.
+@pytest.mark.slow
 def test_the_574_register_plan_states_each_bound_as_check_standing_reads_it() -> None:
     plan = reports.register_plan(reports.packet_path(PR574))
     result = plan["results.yaml"]

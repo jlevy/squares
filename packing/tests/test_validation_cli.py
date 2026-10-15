@@ -305,7 +305,10 @@ def test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools() -> No
                     tokens[tokens.index("packing-validate") + 1 :]
                 )
                 only = namespace.only or []
-                if name.startswith("deferred-") or only == ["slow behavioral tests"]:
+                if name.startswith("deferred-") or only in (
+                    ["slow behavioral tests"],
+                    ["fast behavioral tests"],
+                ):
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
                 elif len(only) == 1:
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "4")
@@ -321,6 +324,7 @@ def test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools() -> No
         ("packing-validation.yml", "screen"),
         ("packing-validation.yml", "slow-lane"),
         ("packing-validation.yml", "validate"),
+        ("packing-validation.yml", "integration-suites"),
         ("packing-validation.yml", "deferred-threshold-1440"),
         ("packing-validation.yml", "deferred-atlas-grid"),
         ("packing-validation.yml", "deferred-controls-finer"),
@@ -1258,7 +1262,11 @@ def test_a_slow_call_on_a_hosted_pull_request_is_reported_below_the_hang_limit(
     monkeypatch.setattr(validate, "_run", lambda *_a, **_k: output)
     monkeypatch.setattr(validate, "_hosted_pull_request", lambda *_a, **_k: True)
     context = validate.Context(
-        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": "pull_request"},
     )
 
     assert validate._fast_tests(context, 0) == output
@@ -1278,9 +1286,63 @@ def test_a_hung_call_on_a_hosted_pull_request_still_fails(
     monkeypatch.setattr(validate, "_run", lambda *_a, **_k: output)
     monkeypatch.setattr(validate, "_hosted_pull_request", lambda *_a, **_k: True)
     context = validate.Context(
-        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": "pull_request"},
     )
 
+    with pytest.raises(validate.StepFailureError, match="test_that_waits"):
+        validate._fast_tests(context, 0)
+
+
+@pytest.mark.parametrize("event", ["pull_request", "push", "schedule", "workflow_dispatch"])
+@pytest.mark.parametrize(("seconds", "fails"), [(12.0, False), (44.99, False), (45.0, True)])
+def test_hosted_call_cost_keeps_the_same_hard_backstop_on_every_event(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    event: str,
+    seconds: float,
+    *,
+    fails: bool,
+) -> None:
+    """Completed calls retain cost evidence without treating event type as hardware."""
+    output = _one_slow_call(seconds)
+    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: output)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=2,
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": event},
+    )
+    if fails:
+        with pytest.raises(validate.StepFailureError, match="45s or more"):
+            validate._fast_tests(context, 0)
+    else:
+        assert validate._fast_tests(context, 0) == output
+        printed = capsys.readouterr().out
+        assert "::warning title=Cost::" in printed
+        assert "tier ceilings and" not in printed
+
+
+@pytest.mark.parametrize("event", ["pull_request", "push", "workflow_dispatch"])
+@pytest.mark.parametrize("setting", ["enforce_budget", "strict"])
+def test_explicit_strict_call_cost_overrides_hosted_advisory(
+    monkeypatch: pytest.MonkeyPatch,
+    event: str,
+    setting: str,
+) -> None:
+    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: _one_slow_call(12.0))
+    context = validate.Context(
+        deep=False,
+        strict=setting == "strict",
+        jobs=1,
+        inner_jobs=2,
+        enforce_budget=setting == "enforce_budget",
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": event},
+    )
     with pytest.raises(validate.StepFailureError, match="test_that_waits"):
         validate._fast_tests(context, 0)
 
@@ -1289,12 +1351,16 @@ def test_a_test_expensive_by_waiting_is_caught_by_the_wall_backstop(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Long call wall time fails even when observed CPU is negligible, on any run that is
-    not a hosted pull request (the only run the register's relaxation reaches)."""
+    not hosted, even if a caller supplies a pull_request event name."""
     output = _one_slow_call(validate.QUICK_TEST_WALL_BACKSTOP_SECONDS + 4.0)
     monkeypatch.setattr(validate, "_run", lambda *_a, **_k: output)
     monkeypatch.setattr(validate, "_hosted_pull_request", lambda *_a, **_k: False)
     context = validate.Context(
-        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={"GITHUB_EVENT_NAME": "pull_request"},
     )
 
     with pytest.raises(validate.StepFailureError) as failure:
@@ -1303,6 +1369,108 @@ def test_a_test_expensive_by_waiting_is_caught_by_the_wall_backstop(
     message = str(failure.value)
     assert "test_that_waits" in message
     assert "call wall time" in message
+
+
+@pytest.mark.parametrize("unavailable", ["missing", "unreadable", "pr-only"])
+def test_hosted_call_advisory_requires_a_readable_applicable_declaration(
+    monkeypatch: pytest.MonkeyPatch,
+    unavailable: str,
+) -> None:
+    from dataclasses import replace  # noqa: PLC0415
+
+    register = gate_budgets.load()
+    assert register.policy.pull_request_ceiling is not None
+    if unavailable == "unreadable":
+
+        def unreadable():
+            raise gate_budgets.BudgetError("unreadable register")
+
+        monkeypatch.setattr(gate_budgets, "load", unreadable)
+    else:
+        ceiling = (
+            None
+            if unavailable == "missing"
+            else replace(register.policy.pull_request_ceiling, per_test_scope="pull_request")
+        )
+        monkeypatch.setattr(
+            gate_budgets,
+            "load",
+            lambda: replace(
+                register,
+                policy=replace(register.policy, pull_request_ceiling=ceiling),
+            ),
+        )
+    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: _one_slow_call(16.0))
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=2,
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": "push"},
+    )
+    with pytest.raises(validate.StepFailureError, match="test_that_waits"):
+        validate._fast_tests(context, 0)
+
+
+@pytest.mark.parametrize("forcing", ["none", "cli", "environment"])
+@pytest.mark.parametrize("event", ["pull_request", "workflow_dispatch"])
+def test_actual_cli_threads_explicit_call_enforcement_into_the_selected_step(
+    monkeypatch: pytest.MonkeyPatch,
+    forcing: str,
+    event: str,
+) -> None:
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("GITHUB_EVENT_NAME", event)
+    monkeypatch.delenv("PACKING_VALIDATION_ARTIFACT_DIR", raising=False)
+    monkeypatch.delenv("PACKING_VALIDATE_ENFORCE_BUDGET", raising=False)
+    if forcing == "environment":
+        monkeypatch.setenv("PACKING_VALIDATE_ENFORCE_BUDGET", "1")
+    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: _one_slow_call(16.0))
+
+    def selected(steps: Sequence[validate.Step], context: validate.Context, *_args: Any):
+        assert context.enforce_budget == (forcing != "none")
+        validate._fast_tests(context, 1)
+        return validate.RunSummary(
+            results=[validate.StepResult(step.name, "passed", 0.0) for step in steps],
+            wall_seconds=0.0,
+            selected_count=len(steps),
+            total_count=len(validate.STEPS),
+        )
+
+    monkeypatch.setattr(validate, "_run_selected", selected)
+    args = ["--only", "fast behavioral tests, shard A", "--jobs", "1", "--inner-jobs", "2"]
+    if forcing == "cli":
+        args.append("--enforce-budget")
+    status, printed, stderr = _invoke(*args)
+    assert status == (0 if forcing == "none" else 1), (printed, stderr)
+
+
+@pytest.mark.parametrize("defect", ["functional", "deadline", "missing-wall", "missing-cpu"])
+def test_hosted_call_advisory_cannot_accept_failed_or_unmeasured_execution(
+    monkeypatch: pytest.MonkeyPatch,
+    defect: str,
+) -> None:
+    def command(*_args: Any, **_kwargs: Any) -> str:
+        if defect in {"functional", "deadline"}:
+            raise validate.StepFailureError(defect)
+        output = _one_slow_call(16.0)
+        header = (
+            validate._DURATION_HEADER
+            if defect == "missing-wall"
+            else validate._CPU_DURATION_HEADER
+        )
+        return output.replace(header, "missing diagnostic")
+
+    monkeypatch.setattr(validate, "_run", command)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=2,
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": "workflow_dispatch"},
+    )
+    with pytest.raises(validate.StepFailureError):
+        validate._fast_tests(context, 0)
 
 
 def test_a_quick_lane_under_the_ceiling_passes_and_still_reads_the_durations() -> None:
@@ -2003,6 +2171,49 @@ def test_a_per_test_wall_failure_is_its_own_class(
     )
     assert status == 1
     assert lines[-1] == f"FAILURE CLASS: {expected}"
+
+
+@pytest.mark.parametrize(("mode", "threshold"), [("hosted", 45), ("strict", 12), ("local", 12)])
+def test_call_wall_failure_reports_the_applied_threshold_on_every_surface(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, mode: str, threshold: int
+) -> None:
+    target = _hosted(monkeypatch, tmp_path, hosted=mode != "local")
+    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: _one_slow_call(46.0))
+    context = validate.Context(
+        deep=False,
+        strict=mode == "strict",
+        jobs=1,
+        inner_jobs=1,
+        environment={} if mode == "local" else {"GITHUB_ACTIONS": "true"},
+    )
+    with pytest.raises(validate.StepFailureError) as raised:
+        validate._fast_tests(context, 1)
+    summary = validate.RunSummary(
+        results=[validate.StepResult("a lane", "failed", 50.0, reason=str(raised.value))],
+        wall_seconds=50.0,
+        selected_count=1,
+        total_count=98,
+    )
+
+    status, lines = _render(summary, strict=context.strict)
+
+    verdict = (
+        f"per-test wall ceiling failed (1 test at or above {threshold} s: "
+        "tests/test_probe.py::test_that_waits 46.00 s)"
+    )
+    assert status == 1
+    assert lines[-1] == f"FAILURE CLASS: {verdict}"
+    if mode != "local":
+        assert (
+            f"::error title=Per-test wall ceiling ({threshold} s) in a lane::"
+            "46.00 s  tests/test_probe.py::test_that_waits"
+        ) in lines
+        written = target.read_text(encoding="utf-8")
+        assert f"**Failure class:** {verdict}" in written
+        assert f"1 at or above the {threshold} s per-test ceiling" in written
+    else:
+        assert not any(line.startswith("::") for line in lines)
+        assert not target.exists()
 
 
 @pytest.mark.parametrize("hosted", [True, False])
@@ -4133,81 +4344,37 @@ def test_the_pull_request_jobs_partition_the_surface() -> None:
     }
 
 
-def test_a_verified_merge_repeats_everything_not_positively_tree_reusable() -> None:
-    narrowed = validate._after_verified_pull_request(validate.STEPS)
-    assert {step.name for step in narrowed if step.fast} == {
-        "bead tree",
-        "provenance: recorded commits are reachable",
-        "campaign record",
-        # An advisory wall's tracking bead is read from the bead store, not the tree.
-        "tier ceilings are declared and not slack",
-        # Historical site identity compares with the mutable base, not just this tree.
-        "published URL registry and historical compatibility",
-        # The new native crate is not yet classified as tree-reusable.
-        "n17 kernel verifier (Rust)",
-        # New custody checks repeat until their tree reuse is explicitly classified.
-        "FN1 original-input bindings",
-        "SQUISH update certification binds complete reviewed inputs",
-        "SQUISH second update certification binds complete reviewed inputs",
-        "rational refinement custody binds complete replay inputs",
-    }
-
-    # Fail closed: a new fast step is repeated until explicitly classified.
-    unclassified = validate.Step("unclassified probe", lambda _context: "", fast=True)
-    assert validate._after_verified_pull_request([unclassified]) == [unclassified]
-
+def test_workflow_runs_integration_without_pull_request_tree_proofs() -> None:
     document = safe_load(WORKFLOW.read_text(encoding="utf-8"))
     validate_job = document["jobs"]["validate"]
-    [finder] = [step for step in validate_job["steps"] if step.get("id") == "verified-tree"]
-    assert finder["if"] == "github.event_name == 'push'"
-    assert "devtools.verified_merge_tree" in finder["run"]
+    workflow = json.dumps(document)
+    assert "pull-request-tree-" not in workflow
+    assert "devtools.verified_merge_tree" not in workflow
+    assert "PACKING_VALIDATE_TREE_VERIFIED_BY_RUN" not in workflow
+    assert validate_job.get("permissions", document["permissions"]) == {"contents": "read"}
     [gate] = [
         step
         for step in validate_job["steps"]
         if step.get("name") == "Run the complete integration surface"
     ]
-    assert gate["env"] == {
-        validate.TREE_VERIFIED_ENVIRONMENT: "${{ steps.verified-tree.outputs.run }}"
-    }
-    assert validate_job["permissions"] == {"contents": "read", "actions": "read"}
+    assert gate["if"] == "github.event_name != 'pull_request'"
 
 
-def test_a_tree_proof_narrows_only_the_complete_post_merge_surface(
+def test_untrusted_legacy_tree_proof_cannot_omit_selected_checks(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """The CLI half of the post-merge reuse: where the proof applies, and what it leaves.
-
-    `_after_verified_pull_request` decides which fast steps a proof may leave out. What
-    keeps that from narrowing anything else is `_unless_verified`: a tier, `--only`,
-    `--since` or `--push` run that inherited the variable refuses rather than quietly
-    dropping part of a declared selection, and the complete surface the workflow runs
-    after a push lists exactly the narrowed selection.
-    """
-    monkeypatch.setenv(validate.TREE_VERIFIED_ENVIRONMENT, "12345")
-    for arguments in (
-        ["--checks"],
-        ["--only", "exact verification"],
-        ["--since", "HEAD"],
-        ["--push"],
-    ):
-        assert main([*arguments, "--list"]) == 2, arguments
-        assert validate.TREE_VERIFIED_ENVIRONMENT in capsys.readouterr().err, arguments
-
+    """A run id in the old environment variable cannot suppress validation work."""
     post_merge = _workflow_commands(pull_request=False)["validate"]
-    complete = _workflow_selections(pull_request=False)["validate"]
-    narrowed = {
-        step.name
-        for step in validate._after_verified_pull_request(
-            [step for step in validate.STEPS if step.name in complete]
-        )
-    }
-    assert narrowed < complete
     skips = [part for pattern in post_merge.skip for part in ("--skip", pattern)]
-    assert main([*skips, "--list", "--format", "json"]) == 0
-    captured = capsys.readouterr()
-    assert {entry["name"] for entry in json.loads(captured.out)} == narrowed
-    # The announcement goes to stderr under `--format json`, never into the document.
-    assert "passed this exact tree" in captured.err
+    for selection in ([], skips, ["--checks"], ["--only", "exact verification"]):
+        arguments = [*selection, "--list", "--format", "json"]
+        monkeypatch.delenv("PACKING_VALIDATE_TREE_VERIFIED_BY_RUN", raising=False)
+        assert main(arguments) == 0
+        expected = json.loads(capsys.readouterr().out)
+        assert expected
+        monkeypatch.setenv("PACKING_VALIDATE_TREE_VERIFIED_BY_RUN", "12345")
+        assert main(arguments) == 0
+        assert json.loads(capsys.readouterr().out) == expected, selection
 
 
 def test_exact_verifier_cache_cannot_relabel_an_older_build() -> None:
@@ -4298,13 +4465,6 @@ def test_the_engine_cache_backdates_and_saves_only_a_build_for_its_exact_key() -
         index
         for index, step in enumerate(steps)
         if step.get("name") == "Preserve validation timings and partial logs"
-    )
-
-    # This is the formerly unsafe path: a verified main push narrows away every
-    # validation-owned engine step. The explicit miss build above still runs first.
-    assert any(step.needs_engine for step in validate.STEPS)
-    assert not any(
-        step.needs_engine for step in validate._after_verified_pull_request(validate.STEPS)
     )
 
 
@@ -4680,11 +4840,15 @@ def test_the_post_merge_jobs_partition_the_gate() -> None:
     shards = {f"exhaustive-{index}" for index in (1, 2, 3)}
     assert set(selections) == {
         "validate",
+        "integration-suites",
         "slow-lane",
         "screen",
         "regularized-views",
         *deferred,
         *shards,
+    }
+    assert selections["integration-suites"] == {
+        f"fast behavioral tests, shard {letter}" for letter in "ABCD"
     }
     assert selections["slow-lane"] == {"slow behavioral tests"}
     assert selections["screen"] == {"single-square translation escape screen"}
@@ -4707,11 +4871,77 @@ def test_the_post_merge_jobs_partition_the_gate() -> None:
     assert sum(map(len, logical.values())) == len(validate.STEPS)
 
 
+def test_post_merge_suites_retain_the_serial_steps_and_browser_prerequisites() -> None:
+    """Moving a Step must not change its process shape or turn browser tests into skips."""
+    command = _workflow_commands(pull_request=False)["integration-suites"]
+    assert command.only == ["fast behavioral tests"]
+    assert not command.skip
+    assert (command.jobs, command.inner_jobs) == ("1", "2")
+    assert validate._tier_id(command) is None  # --only has no named-tier cost verdict.
+    assert validate.DEFAULT_TIMEOUT_SECONDS == 900
+    assert validate.QUICK_TEST_WALL_BACKSTOP_SECONDS == 12
+    selected = validate._select_steps(only=command.only, fast=False)
+    assert len(selected) == 4
+    assert all(step.budget_seconds is None and not step.needs_engine for step in selected)
+
+    jobs = safe_load(WORKFLOW.read_text(encoding="utf-8"))["jobs"]
+    source = jobs["validate"]["steps"]
+    moved = jobs["integration-suites"]["steps"]
+    setup_names = (
+        "Install uv and Python 3.14",
+        "Synchronize the locked development environment",
+        "Install Node",
+        "Install the pinned browser toolchain",
+        "Cache the Playwright browser for the complete post-merge gate",
+        "Install Chromium for the complete post-merge gate",
+    )
+    for name in setup_names:
+        before = next(step for step in source if step.get("name") == name)
+        after = next(step for step in moved if step.get("name") == name)
+        assert {key: value for key, value in before.items() if key != "if"} == after
+    assert _installs_chromium(jobs["integration-suites"], pull_request=False)
+    checkout = next(step for step in moved if "actions/checkout@" in step.get("uses", ""))
+    assert checkout["with"]["fetch-depth"] == 0
+    assert checkout["with"]["submodules"] is True
+
+
+@pytest.mark.parametrize("damage", ["missing-worker", "partial-selection", "overlap"])
+def test_post_merge_partition_refuses_a_missing_or_incomplete_suite_owner(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, damage: str
+) -> None:
+    document = safe_load(WORKFLOW.read_text(encoding="utf-8"))
+    jobs = document["jobs"]
+    if damage == "missing-worker":
+        del jobs["integration-suites"]
+    elif damage == "partial-selection":
+        step = next(
+            step
+            for step in jobs["integration-suites"]["steps"]
+            if "packing-validate" in step.get("run", "")
+        )
+        step["run"] = step["run"].replace(
+            '--only "fast behavioral tests"', '--only "fast behavioral tests, shard A"'
+        )
+    else:
+        step = next(
+            step
+            for step in jobs["validate"]["steps"]
+            if step.get("name") == "Run the complete integration surface"
+        )
+        step["run"] = step["run"].replace('--skip "fast behavioral tests, shard D"', "")
+    changed = tmp_path / "workflow.json"
+    changed.write_text(json.dumps(document), encoding="utf-8")
+    monkeypatch.setattr(sys.modules[__name__], "WORKFLOW", changed)
+    with pytest.raises(AssertionError):
+        test_the_post_merge_jobs_partition_the_gate()
+
+
 def test_post_merge_workers_bind_one_sha_and_a_separate_complete_aggregate() -> None:
     document = safe_load(WORKFLOW.read_text(encoding="utf-8"))
     jobs = document["jobs"]
     expected = {
         "validate",
+        "integration-suites",
         "deferred-threshold-1440",
         "deferred-atlas-grid",
         "deferred-controls-finer",
