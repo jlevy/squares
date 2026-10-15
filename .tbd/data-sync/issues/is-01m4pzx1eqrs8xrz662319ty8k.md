@@ -3,15 +3,19 @@ type: is
 id: is-01m4pzx1eqrs8xrz662319ty8k
 title: Narrow the negative-control copy-back to links a control checks (about 14.4 MB of archive files)
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
+delegate: claude-code@vm
 labels: []
 dependencies: []
 parent_id: is-01m1sx5m1p5868jhwcdzfkvada
+hold: null
+hold_until: null
 created_at: 2026-10-12T02:43:37.559Z
-updated_at: 2026-10-12T02:43:37.559Z
+updated_at: 2026-10-15T01:36:13.902Z
+started_at: 2026-10-15T01:36:13.902Z
 ---
 On 2026-10-12 the owner raised `SNAPSHOT_MAX_BYTES` in
 `packing/devtools/run_negative_controls.py` from 200 to 216 MiB, in the intake session,
