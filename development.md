@@ -246,9 +246,10 @@ The shard jobs retain full Git history for history-reading tests, but none insta
 or a browser.
 Browser-floor liveness runs under `--frontend`, on the runner that owns the
 pinned Node toolchain.
-`site table layout in Chromium` runs thirteen test files on the runner that installs the
-pinned Chromium. Functional pixel/layout checks, including the atlas’s readable drawing
-sizes and interactions, run in parallel with file-based distribution.
+`site table layout in Chromium` runs its declared test modules on the runner that
+installs pinned Chromium.
+Browser navigation and functional pixel/layout checks, including the atlas’s readable
+drawing sizes and interactions, run in parallel with file-based distribution.
 After those workers exit, the four native-frontier HTTP load-budget cases run serially,
 without xdist workers; each checks JavaScript and no-JavaScript contexts under the same
 assertions and budgets.
