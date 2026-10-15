@@ -5,7 +5,7 @@ title: "Record-keeping: make the record state explicitly per count whether its d
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: ecstatic-edison-reg-record
 labels:
   - regularization
@@ -22,10 +22,19 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.138Z
-updated_at: 2026-10-15T23:18:47.484Z
+updated_at: 2026-10-15T23:49:20.326Z
 started_at: 2026-10-15T23:18:47.484Z
 ---
 
 ## Notes
 
 Design from the audit (think-y1x3): extend default-drawings.json to all 324 counts with drawn source, state (regularized / regular-as-published / decided / exempt / pending), the seven measures, witness digest, runs decided on that witness with outcome; update_atlas writes a lapsed block instead of printing; records-tier gate fails on pending counts with a shrink-only allowlist starting at today's 20; fix case-note wording where the house is drawn. Land before any T-174 (#574) adoption: 35 counts at risk.
+
+2026-10-15, ecstatic-edison-reg-record: built in draft PR #636 (https://github.com/jlevy/squares/pull/636), branch claude/ecstatic-edison-8en33t-regularization-record, head a94449d62.
+- default-drawings.json is DefaultDrawings/v2: `entries` unchanged plus `states` for n = 1..324 (state, drawn, generator, witness_sha256, the drawn picture's seven measures, decisions {generator, run, witness_sha256, outcome}, lapsed, why) and totals.states. Today: 58 regularized, 232 regular-as-published, 10 decided-no-better, 4 exempt, 20 pending.
+- Declared inputs in devtools/default_drawings.py: SETTLED (decided 102, 110, 123, 155, 179, 180, 236, 258, 263, 269; exempt 39, 55, 290, 291 under think-yk2h), each bound to its witness digest with runs and evidence; PENDING_ALLOWED = the audit's 20 with beads think-la7h / think-kpm3 / think-3zi3. A strong view held but not drawn on the current witness is decided-no-better automatically.
+- Gate: `python -m devtools.default_drawings --check-state`, step "every drawn picture is regularized, regular as published, decided or exempt" (fast + records). Fails on a pending count not allowed, an allowed count no longer pending, a record older than a witness, a SETTLED entry on another witness or for a count that no longer needs it.
+- update_atlas writes `lapsed` {generator, run, witness_sha256} onto the axis record and carries it; verify_atlas compares without it (derived()); check_atlas holds it; regularize_evand admit_views strips it from `reference`.
+- Case notes for the 10 house-drawn view counts open "Drawn as published: ..." (render_case_pages no longer appends held_note). Site cut v0.7.11; papers' no-change records (source review, no renders: no Chromium here).
+- Guide/policy cost fixed to 13.7 CPU-h (49,302 CPU-s); closes think-0sx2.
+- Follow-ups: think-290l (register-sense "regularization" wording in notes), think-0ut1 (residue runs). Each regularization PR (la7h/kpm3/3zi3) must take its counts off PENDING_ALLOWED.

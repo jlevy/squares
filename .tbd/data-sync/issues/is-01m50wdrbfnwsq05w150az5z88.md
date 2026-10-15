@@ -5,7 +5,7 @@ title: "Regularization audit and repair: find every unregularized drawing (e.g. 
 kind: epic
 status: open
 priority: 1
-version: 12
+version: 13
 labels:
   - regularization
 dependencies: []
@@ -21,7 +21,8 @@ child_order_hints:
   - is-01m50xqqjr60wtgjhqbwayj10m
   - is-01m50xqsa4f5tfq632b71bj3cv
   - is-01m50xqv6vf8tjpb3b879n1mxp
+  - is-01m50zdc2fkmvw3hdzvqe4xn43
 created_at: 2026-10-15T22:55:15.306Z
-updated_at: 2026-10-15T23:18:14.491Z
+updated_at: 2026-10-15T23:47:28.463Z
 ---
 Owner, 2026-10-15 ~22:40Z: 'fully review to what degree regularization has been done. Right now, for example, number 176 looks highly unregularized. How did that happen, and what's necessary to regularize everything again? Let's map that out, make sure it's part of the standard intake process, and run it for all the ones where it's necessary. The records should make it evident which things are regularized, and if not, we should fix the record-keeping process as well. Create beads for all of this work.' Sequenced after the 15 October intake PRs merge (owner: 'After that').
