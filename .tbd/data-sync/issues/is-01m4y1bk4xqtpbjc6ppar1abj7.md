@@ -5,16 +5,18 @@ title: Keep ordinary pre-push validation in the reachable quick lane with explic
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md
 delegate: codex@spud10
 labels: []
 dependencies: []
 parent_id: is-01m4xkf4v65pthd9zbd7a5a3qv
+child_order_hints:
+  - is-01m4zkv7xaws31vqay1f35rs0t
 hold: null
 hold_until: null
 created_at: 2026-10-14T20:23:44.013Z
-updated_at: 2026-10-15T10:41:10.709Z
+updated_at: 2026-10-15T11:06:05.609Z
 started_at: 2026-10-14T20:24:38.989Z
 ---
 Measured News pre-push selected608of791files, included slow behavior and ran serially700.49s before interruption at13%. Make default reachable validation use the existing QUICK_TESTS predicate for all selection kinds; preserve conservative path selection and normal/pool lane ownership. Add explicit deliberate slow coverage CLI and meaningful option/selection/control tests, document its required role at deep checkpoints. All fast checks stay automatic in CI; no timing ceilings or scientific obligations weakened. Follow Astra next-default-loop-slice report and active CI iteration plan.
