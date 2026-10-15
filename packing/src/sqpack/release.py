@@ -1053,6 +1053,27 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.11 regenerated the five claim documents at "
+            "PUBLICATION_REVISION dcfcf811; by diff, each changes only the revision its "
+            "repository links pin, 95c55298 to dcfcf811, and no claim, certificate or "
+            "command. A link revision follows the site's edition and is not a revision of "
+            "the explainer, so it keeps v0.4.7. Source-reviewed; no render was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer", "site"),
         paths=("packing/src/sqpack/cli/validate.py",),
         outputs=(
