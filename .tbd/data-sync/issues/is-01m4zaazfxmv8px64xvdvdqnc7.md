@@ -5,16 +5,17 @@ title: Tighten significance meters and clean News topics and filter wrapping
 kind: bug
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex@spud10.local
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m4zdrrf3qwg7ms04am4vx8x3
+  - is-01m4zdsxez5kg9ffagfvqja44y
 hold: null
 hold_until: null
 created_at: 2026-10-15T08:19:55.500Z
-updated_at: 2026-10-15T09:19:52.802Z
+updated_at: 2026-10-15T09:20:30.686Z
 started_at: 2026-10-15T08:21:27.177Z
 ---
 User requests: reduce S-score-to-bars spacing below a word space in the shared meter; drop Documentation as a News topic and exclude pure document-maintenance announcements while retaining substantive domain news; fix multi-value News chooser wrapping so the control box follows its lines. Reuse shared compact design, preserve click/tap behavior and scientific news. Delegate CSS and editorial/schema changes separately; coordinator integrates/reviews.
