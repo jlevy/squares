@@ -5,7 +5,7 @@ title: Redesign CI around a three-minute default gate and explicit deeper valida
 kind: feature
 status: in_progress
 priority: 1
-version: 24
+version: 25
 spec_path: docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md
 delegate: claude-code@spud10.local
 labels: []
@@ -34,7 +34,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:21:00.389Z
-updated_at: 2026-10-15T15:59:24.021Z
+updated_at: 2026-10-15T16:01:14.757Z
 started_at: 2026-10-14T16:21:26.412Z
 ---
 User explicitly requests Astra analysis and a systematic fix for repeated hours of CI iterations. Target typical default PR CI around three minutes; retain expensive tests in clearly selected deeper, checkpoint or scheduled lanes without blocking every development iteration. Audit actual validation/workflow costs, require each addition to account for recurring forward cost, define affected-input selection and evidence reuse with fail-closed assurance, document clear running policy and implement reviewed slices. Current PR599 timing repairs and atlas-width delivery continue separately.
@@ -42,3 +42,5 @@ User explicitly requests Astra analysis and a systematic fix for repeated hours 
 ## Notes
 
 2026-10-15 final-head follow-up: Additional cost lesson from final PR620: coordinator-selected effective PythonCPUs2/jobs2/inner1 made the whole quick prepush artificially low-throughput (one pytest worker):67 prerequisites passed but broad suite only~23% in800.4s. Root interrupted rather than silently rerunning or counting it green; retained outputs and process exit130 document the decision. Hosted matching-head complete run38756833833 now owns the remaining coverage with native intended allocation. The one-worker native split adds one browser bootstrap rather than four; full-host measurement and three-minute objective remain open. This interval is distinct from source implementation, billed compute, and the prior failed40m17s full job.
+
+2026-10-15T16:01:14.472296+00:00: Astra next-slice diagnosis is tracked concretely as think-nqnx: ordinary frontend540s includes426.51s layout plus106ssetup; no extra job fixes the tail. Candidate is invocation-local canonical fixture preparation, pending cold-render profiling and predeclared3alternating inclusive trials with >=30s AND10percent improvement, no addedresources/skips/changedoutcomes. It is not measured/accepted. Final620 local six-file correction still selected126files and took662.57s, so selector/fixture cost remains material; three-minute target is OPEN. Source43 is frozen and hosted checkpoint runs while assurance repairs proceed.

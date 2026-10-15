@@ -5,7 +5,7 @@ title: "F1: remove automatic fast-check reuse based on unauthenticated artifact 
 kind: bug
 status: in_progress
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: claude-code@spud10.local
 labels:
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T12:49:18.470Z
-updated_at: 2026-10-15T15:10:01.434Z
+updated_at: 2026-10-15T16:01:14.150Z
 started_at: 2026-10-15T12:49:26.605Z
 ---
 Independent review found the same live source-authentication gap in baseline fc2ceae79: verified_merge_tree.py accepts a self-named tree artifact with successful native run/job names, without authenticating the executed PR merge source. Deferred work stays cold, but allowlisted fast checks can be skipped on main. Remove the automatic reuse path and its dead producer/verifier plumbing rather than introducing a provenance framework. Preserve every fast/scientific check, budgets and normal PR selection. Update the shared guide and meaningful workflow/selection controls. More main fast work may run, but no new proof API overhead or trusting self-declared artifact names. The retired deferred candidate and review evidence are preserved separately.
@@ -29,3 +29,5 @@ PR620 now contains final grouped head cf9003e0da0d6c33963a9804de4c41efdf8b3ddf o
 2026-10-15 14:20 UTC: Final independent senior, security and performance reviews cleared all 20 current-head paths. Ordinary Packing and Pages passed (31 successful checks). Full 38744311408 failed seven CALL ceilings after 2301.62 s integration, with all functional assertions and dedicated workers passing. Repairs tracked as 2equ and n5ry; integration cost under e2z4. No merge until the corrected head is reviewed and passes its required checkpoint.
 
 2026-10-15 final-head follow-up: Final repair head15548357a31e16acd029934025a8a615f9f1e208 is pushed on exact main31eaf633. New independent full-source senior K5535320248 and security L5535320451 cover28/28 paths with no actionable findings. Ordinary Packing38756777827, Pages38756777889 and ONE selected full Packing38756833833 now run on this head; no redundant Deep. The full topology has twelve mandatory Linux owners plus aggregate, with macOS separately inspected. Local prepush passed67 prerequisite Steps; its conservative effective2CPU/jobs2/inner1 wholequick used one pytest worker and reached only~23% after800.4s, so root deliberately interrupted it (parent130/child-15). This is incomplete evidence, not passing full local validation. Source stayed frozen; final hosted coverage/skip parity is mandatory before merge. Runtime/guard and source-based paper dispositions are fully reviewed; no waived assertion/deadline.
+
+2026-10-15T16:01:13.864743+00:00: Final corrected PR620 head43ee60f6f2f729384fdf91dc34ae58e05169aa03 on exact main31eaf633 is pushed,30paths,clean tree. Normalhooks passed2.12s. Independent seniorM5535961075 covers30/30; focused securityN5535949647 covers other-author placement/docs and unchanged F1, explicitly excluding own forwarder function covered byM. Scoped prepush since155 passed14Steps662.57s:5276pass35skip plus2pass5383deselected,126selectedfiles. Final ordinary Packing38763690369, Pages38763690200 and single full38763716551 run on43; no duplicateDeep. Previous155 ordinary/full failures remain retained. Merge requires final required checks, all12Linuxowners+aggregate, macOS, and exact five moved nodes executed without skips.
