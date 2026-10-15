@@ -14,7 +14,12 @@ import pytest
 import yaml
 from kpress.format.markdown import parse_markdown
 
-from devtools import import_changelog, render_changelog, render_overview
+from devtools import (
+    import_changelog,
+    render_changelog,
+    render_overview,
+    site_math,
+)
 from devtools.repo_links import repo_url
 
 
@@ -98,10 +103,71 @@ def test_news_title_math_uses_the_escaped_register_headline_boundary() -> None:
     title = "Initial Review of proofs for n = 17 <script>forbidden</script>"
     data["entries"][0]["title"] = title
     rendered = render_changelog.render_news(data)
-    assert f"<h3>{render_changelog.tex_bounds(title)}</h3>" in rendered
-    assert "<math" in rendered
+    article = rendered.split('data-news-entry="admission">', 1)[1].split("</article>", 1)[0]
+    header = article.split("<h3>", 1)[1].split("</h3>", 1)[0]
+    assert [formula.source for formula in site_math.formula_sources(header)] == ["n = 17"]
+    assert "<math" in header
+    assert "<mi>n</mi>" in header
+    assert "<mn>17</mn>" in header
+    assert "&lt;script&gt;forbidden&lt;/script&gt;" in header
+    assert "<script>" not in header
+    assert "$" not in header
+
+
+def test_authored_headline_markdown_and_math_survive_archive_and_preview() -> None:
+    data = document()
+    entry = render_changelog.ordered_entries(data)[0]
+    entry["title"] = r"**A bound** for $n = 17$: $s(n) \ge \sqrt{n}$ and `T-154`"
+    anchor = render_changelog.entry_anchor(entry["id"])
+    for limit in (None, 1):
+        rendered = render_changelog.render_news(data, limit=limit)
+        header = rendered.split("<h3>", 1)[1].split("</h3>", 1)[0]
+        assert "<strong>A bound</strong>" in header
+        assert "<code>T-154</code>" in header
+        assert "<msqrt>" in header
+        assert "$" not in header
+        assert [formula.source for formula in site_math.formula_sources(header)] == [
+            "n = 17",
+            r"s(n) \ge \sqrt{n}",
+        ]
+        if limit is not None:
+            assert header.startswith(f'<a href="news.html#{anchor}">')
+            assert header.count("<a ") == 1
+    site = render_changelog.render_markdown(data, destination="site")
+    assert f'<h4 id="{anchor}"><strong>A bound</strong>' in site
+    assert "<msqrt>" in site
+
+
+def test_inline_markdown_keeps_safe_links_and_escaped_literals_distinct() -> None:
+    rendered = render_changelog.inline_html(
+        r"*Reviewed* [policy](README.md), `T-154`, \[literal](https://example.com), "
+        r"<script>forbidden</script>; $N \ne n$ and n = 17."
+    )
+    assert "<em>Reviewed</em>" in rendered
+    assert f'<a href="{repo_url("README.md")}">policy</a>' in rendered
+    assert "<code>T-154</code>" in rendered
+    assert "[literal](https://example.com)" in rendered
     assert "&lt;script&gt;forbidden&lt;/script&gt;" in rendered
     assert "<script>" not in rendered
+    assert rendered.count("<a ") == 1
+    assert [formula.source for formula in site_math.formula_sources(rendered)] == [
+        r"N \ne n",
+        "n = 17",
+    ]
+    for payload in (
+        "[bad](javascript:alert%281%29)",
+        r"$\href{javascript:alert(1)}{X}$",
+        '[text](https://example.com){onclick="forbidden"}',
+        "![image](https://example.com/image.png)",
+    ):
+        with pytest.raises(ValueError, match=r"unsafe|attributes|images"):
+            render_changelog.inline_html(payload)
+    for linked in (
+        "[source](https://example.com/proof)",
+        r"$\href{https://example.com/proof}{X}$",
+    ):
+        with pytest.raises(ValueError, match="links are not allowed"):
+            render_changelog.inline_html(linked, allow_links=False)
 
 
 def test_shared_renderer_orders_links_math_and_anchors() -> None:
@@ -203,7 +269,7 @@ def test_math_generated_markup_and_urls_are_rejected_through_full_news(
         r"$\href{mailto:person@example.com}{X}$",
         r'$\text{<img src="https://example.com/a.png" onerror="forbidden">}$',
     ]
-    for field in ("summary", "details"):
+    for field in ("title", "summary", "details"):
         for payload in payloads:
             data = document()
             data["entries"][0][field] = payload

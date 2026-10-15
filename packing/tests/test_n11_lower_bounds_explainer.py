@@ -1327,16 +1327,13 @@ def test_version_history_lists_the_papers_own_editions_and_no_others(
 
 
 def test_reader_facing_version_references_follow_release_metadata() -> None:
-    """Nearby entry points name the right version: the README the site's edition, where
-    it speaks of the site and the posters, and the tutorial the explainer's own, where it
-    points at the paper; neither retains a previous number."""
+    """The README names the site's edition; the tutorial links to the explainer without
+    pinning an edition that can become stale."""
     readme = (REPO / "README.md").read_text()
     assert PUBLICATION_VERSION in readme
     assert "its papers and the atlas posters are at edition" not in readme
     tutorial = (REPO / "TUTORIAL-ADVANCED.md").read_text()
-    assert f"the standalone {EXPLAINER_VERSION} explainer" in tutorial
-    if PUBLICATION_VERSION != EXPLAINER_VERSION:
-        assert PUBLICATION_VERSION not in tutorial
+    assert f"[the standalone explainer]({PAGE_URL}#proof-of-the-new-lower-bound)" in tutorial
     development = (REPO / "development.md").read_text()
     assert "PUBLICATION_HISTORY" in development
     assert "EXPLAINER_HISTORY" in development
