@@ -3,9 +3,9 @@ type: is
 id: is-01m50wdta5k1jk1cvjx7hw5bjv
 title: "Map the regularization pipeline: tools, inputs, cost per count, and what 'regularized' means in the record (regularized_drawings block, atlas)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: ecstatic-edison-reg-audit
 labels:
   - regularization
@@ -16,8 +16,12 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:17.317Z
-updated_at: 2026-10-15T23:16:08.024Z
+updated_at: 2026-10-15T23:18:06.688Z
 started_at: 2026-10-15T22:55:55.017Z
+closed_at: 2026-10-15T23:18:06.688Z
+close_reason: "Done: audit/root cause/map recorded in notes and scratchpad regularization-audit.md (2026-10-15)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
