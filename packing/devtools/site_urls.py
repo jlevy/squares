@@ -107,10 +107,15 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        1_100_000,
+        1_150_000,
         (
-            "The complete registered-result table with prepared math measures 976,783 bytes "
-            "at 184 results, about 3.5 kB a row; it measured 843,037 at 146."
+            "The complete registered-result table with prepared math, and the seven days' "
+            "arrivals and weekly rollup above it, measures 1,046,291 bytes at 184 results "
+            "on 14 October 2026; the table alone measured 843,037 at 146 and 976,783 at "
+            "184. A result adds 3,474 bytes to the table on average (4,723 at the 90th "
+            "percentile) and about 280 to the seven days while it is recent, so the "
+            "ceiling holds the page through 200 results at the 90th-percentile cost and "
+            "about 210 at the average; `test_overview` holds it through 200."
         ),
     ),
     "result/t-180.html": (

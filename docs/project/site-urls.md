@@ -1042,7 +1042,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-124.html | 400,000 | Complete broad scope history and prepared exact bounds measure 304,237 bytes. |
 | result/t-155.html | 400,000 | Fifty-nine counts' exact regularized sides, their regularizations and prepared math measure 303,829 bytes. |
 | result/t-180.html | 400,000 | The closed form's result, its scope of 264 counts and prepared math measure 341,524 bytes. |
-| results.html | 1,100,000 | The complete registered-result table with prepared math measures 976,783 bytes at 184 results, about 3.5 kB a row; it measured 843,037 at 146. |
+| results.html | 1,150,000 | The complete registered-result table with prepared math, and the seven days' arrivals and weekly rollup above it, measures 1,046,291 bytes at 184 results on 14 October 2026; the table alone measured 843,037 at 146 and 976,783 at 184. A result adds 3,474 bytes to the table on average (4,723 at the 90th percentile) and about 280 to the seven days while it is recent, so the ceiling holds the page through 200 results at the 90th-percentile cost and about 210 at the average; `test_overview` holds it through 200. |
 | tutorial-advanced.html | 800,000 | The advanced tutorial retains the original technical derivations and reference tables; the complete authored text and prepared formulas measure 771,603 bytes. |
 
 <!-- This document follows common-doc-guidelines.md.

@@ -575,6 +575,7 @@
     "packing/tests/test_result_status.py": 10.354,
     "packing/tests/test_results_headline.py": 1.352,
     "packing/tests/test_results_register.py": 61.247,
+    "packing/tests/test_results_rollup.py": 7.94,
     "packing/tests/test_retained_data.py": 1.194,
     "packing/tests/test_retained_json.py": 0.745,
     "packing/tests/test_retained_json_layout.py": 0.095,
@@ -650,6 +651,7 @@
     "packing/tests/test_sqverify_fast_census.py": 9.778,
     "packing/tests/test_stage_evand_bentz4_lean.py": 2.172,
     "packing/tests/test_stage_evand_bentz_lean.py": 1.239,
+    "packing/tests/test_stamp_landed.py": 0.645,
     "packing/tests/test_state_ai_assistance.py": 0.29,
     "packing/tests/test_static_site_content.py": 3.403,
     "packing/tests/test_stratify_n17_certified_residue.py": 0.051,
@@ -784,6 +786,31 @@
           "report": "packing/benchmarks/validation-efficiency/local-admissions/packing-methods-figures-20261009.json",
           "provenance": {},
           "tests": 5
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_results_rollup.py",
+        "packing/tests/test_stamp_landed.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/results-overview-landed-2026-10-14-run1.json",
+          "provenance": {},
+          "tests": 22
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/results-overview-landed-2026-10-14-run2.json",
+          "provenance": {},
+          "tests": 22
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/results-overview-landed-2026-10-14-run3.json",
+          "provenance": {},
+          "tests": 22
         }
       ]
     },

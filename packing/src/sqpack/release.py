@@ -265,7 +265,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "58c303ebc0e18a1f51ecd15c32b6a4029fe54ddf"
+DATA_REVISION = "81c60ec064dcc5043cac693ee354db8a80f7fd63"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -795,6 +795,45 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/register_evand_arrangements.py",
+            "packing/devtools/register_gupta_reports.py",
+            "packing/devtools/register_refinement_reports.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The results page's overview and its Added filter (#514) change only the "
+            "results page, the results table's rows and bar, the results page's byte "
+            "ceiling, each register entry's new `landed` day, and the register entries "
+            "the import generators draft, which now write `landed`. Rendered with main's "
+            "nine files and with this branch's, the four papers' HTML and Markdown are "
+            "byte-identical; the order of the explainer's empty style attribute on a math "
+            "span varies between any two renders of the same code. Each PDF prints from "
+            "that HTML, so every paper keeps its edition."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
