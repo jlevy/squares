@@ -422,6 +422,27 @@ def element_ids(page: str) -> frozenset[str]:
     )
 
 
+def tutorial_front(page: str) -> str:
+    """Present the source's credit list with the shared publication component."""
+    pattern = re.compile(
+        r"(?P<title><h1\b[^>]*>.*?</h1>)\s*<ul>\s*"
+        r"<li>(?P<oversight>Human oversight:.*?)</li>\s*"
+        r"<li>(?P<agents>Agents:.*?)</li>\s*"
+        r"<li>(?P<dates>First published .*?)</li>\s*</ul>",
+        re.DOTALL,
+    )
+    match = pattern.search(page)
+    if match is None:
+        raise ValueError("tutorial needs its oversight, agent and publication-date credits")
+    front = (
+        f'<header class="centred">{match["title"]}<ul class="credits">'
+        f'<li class="credits-own">{match["oversight"]}</li>'
+        f"<li>{match['agents']}</li>"
+        f'<li class="publication-date">{match["dates"]}</li></ul></header>'
+    )
+    return page[: match.start()] + front + page[match.end() :]
+
+
 def render_document(
     document: SiteDocument, *, tree: RepositoryTree, report: LinkReport
 ) -> Page:
@@ -453,7 +474,11 @@ def render_document(
         toc=False if document.name == "synopsis.html" else "auto",
         trust_mode="sanitized",
         strict_anchors=True,
-        rewrite_body=lambda page: rewrite_article(page, context=context, report=report),
+        rewrite_body=lambda page: rewrite_article(
+            tutorial_front(page) if document.source in (TUTORIAL, TUTORIAL_ADVANCED) else page,
+            context=context,
+            report=report,
+        ),
     )
 
 

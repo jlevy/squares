@@ -641,9 +641,9 @@ one of them changes.
 | How much nearer the bar an opening picture starts | `--site-hero-lift` | 0.5rem, 8px | `site.css` |
 | Above a section heading (`h2`) | `--paper-section-space` | 2.7 of the prose base, 48.6px | `paper-type.css` |
 | Below a section heading (`h2`) | `--paper-section-space-below` | 1.7rem, 27.2px | `paper-type.css` |
-| Above a visible site-title H1 or H2 | `--site-title-space-above` | 3.5rem, 56px | `site.css` |
-| Below a visible site-title H1 or H2 | `--site-title-space-below` | 2rem, 32px | `site.css` |
-| Below a page’s title, and below its subtitle | `--site-subtitle-space` | 1.5rem, 24px | `site.css` |
+| Above a visible site-title H1 or H2 | `--site-title-space-above` | 3.75rem, 60px | `site.css` |
+| Below a visible site-title H1 or H2 | `--site-title-space-below` | 2.5rem, 40px | `site.css` |
+| Below a page’s title, and below its subtitle | `--site-subtitle-space` | 2rem, 32px | `site.css` |
 | Above and below a table | `--site-table-space` | 2rem, 32px | `site.css` |
 | Between a wide block and the edge of the page’s content area | `--site-wide-gutter` | 0.5rem, 8px | `site.css` |
 
@@ -873,11 +873,11 @@ it.
   problem and explaining upper/lower bounds (`think-8xzs`). About uses only H1 section
   headings, each with the same `site-title` styling as The Squares Project
   (`think-6m9n`, `think-sq1i`). Every visible `h1.site-title` and `h2.site-title` shares
-  the screen-only 3.5rem margin above it and 2rem below it (`--site-title-space-above`
-  and `--site-title-space-below`); compact Legend and introduction-card headings keep
-  their own spacing. The hero graphic opens the case popover, with the case-record link
-  as its no-script fallback.
-  Case popovers offer separate record, Frontier-row and Atlas-tile actions.
+  the screen-only 3.75rem margin above it and 2.5rem below it
+  (`--site-title-space-above` and `--site-title-space-below`); compact Legend and
+  introduction-card headings keep their own spacing.
+  The hero graphic opens the case popover, with the case-record link as its no-script
+  fallback. Case popovers offer separate record, Frontier-row and Atlas-tile actions.
   Atlas case targets fully expand the grid before scrolling to and highlighting the
   requested tile. Every row containing one card is centered.
   The full project narrative and attribution live on About; documentation cards also
@@ -976,13 +976,13 @@ it.
   separate case-directory hero and index (**Case records**, below).
   A subtitle, where a page has one, is the sans face at 1.1 times the sans base
   (`--site-subtitle-scale`, about 21px), in the page’s own text colour, never gray, with
-  the same space above it and below it (`--site-subtitle-space`, 1.5rem). A title with
-  no subtitle, a document’s own `h1` among them, stands that space above its first
+  the same space above it and below it (`--site-subtitle-space`, 2rem). A title with no
+  subtitle, a document’s own `h1` among them, stands that space above its first
   paragraph. The page title style (every hero `h1`, and `.site-title`) is the sans face
   in upright caps (not KPress’s italic `h2`) at 1.5 times the sans base, centred.
-  On screen, `h1.site-title` and `h2.site-title` use `--site-title-space-above` (3.5rem)
-  above and `--site-title-space-below` (2rem) below the title on every content page;
-  print keeps its existing heading spacing.
+  On screen, `h1.site-title` and `h2.site-title` use `--site-title-space-above`
+  (3.75rem) above and `--site-title-space-below` (2.5rem) below the title on every
+  content page; print keeps its existing heading spacing.
   The homepage’s first section, The Square Packing Problem, takes it through
   `.site-title`, so it reads as the Frontier page’s title does.
   That section opens with README’s two opening paragraphs: the block between README’s
@@ -2771,8 +2771,8 @@ The front is, in order:
 
 - **The title.** A Markdown `h1` in the hero, centred, in the page-title role.
 
-- **The credits.** One line each, in the owner’s form (2026-10-01): names in bold,
-  addresses as plain links, the version plain.
+- **The credits.** One line each, with names in bold, addresses as plain links, the
+  version plain.
 
   ```
   From the original proof by **Mannaseh Ahmed**
@@ -2840,9 +2840,14 @@ In the head, the title is the paper’s name, without a site suffix, and the rev
 is `article:modified_time`; every paper’s first publication is `article:published_time`
 (**Page Metadata and Social Cards**, above).
 
-The credits are one grid column the width of the page (`.credits`, in the publication
-layer), an address in them may break anywhere, and the three lines’ spaces are `1lh`, on
-`.credits-source + .credits-own`, on `.publication-date` and on
+Tutorials use the same credit component, with human oversight, agents, original
+publication date and revision date directly below the title.
+Their Markdown sources retain a readable list; the site presents that list as centered
+credits. Tutorials do not borrow the site’s edition number.
+
+The credits are one grid column the width of the page (`.credits`, in the shared
+typography layer), an address in them may break anywhere, and the three lines’ spaces
+are `1lh`, on `.credits-source + .credits-own`, on `.publication-date` and on
 `.publication-date + .series`.
 
 `devtools.paper_structure` reads every rendered paper, from a built site or from the

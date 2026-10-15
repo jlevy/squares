@@ -469,42 +469,8 @@ body {
    `:not(.centred)` and `check_print_layout` holds them to it. The hero's `h1` is named
    separately because a Markdown heading carries no class of its own.
    The hero is centred -- title and credits; the deck below reads as prose. */
-.centred,
 .cert-page .hero h1 {
   text-align: center;
-}
-/* The credits are one component on both papers (`devtools.paper_front`): one span a
-   line, names in bold, addresses as plain links, the version plain. The grid is one
-   column the width of the page, and an address in it may break anywhere: as a grid's
-   automatic column the credits were as wide as the optimality paper's source address,
-   wider than a phone's column, so every credit centred on a column wider than the page
-   and was cut at its edge. */
-.credits {
-  display: grid;
-  font-family: var(--kpress-font-sans);
-  font-feature-settings: var(--kpress-font-features-sans);
-  font-size: var(--kpress-font-size-normal);
-  gap: 0.2rem;
-  grid-template-columns: minmax(0, 1fr);
-  line-height: 1.45;
-  margin-block: 2rem 2.2rem;
-}
-.credits a {
-  overflow-wrap: anywhere;
-}
-/* biome-ignore lint/style/noDescendingSpecificity: credit emphasis inherits the shared bold role after the broader support-text rules. */
-.credits strong {
-  font-weight: var(--kpress-font-weight-sans-bold);
-}
-/* A paper that explains someone else's work credits its source first, by name and
-   address; a line's space then sets the paper's own credits apart from it, and another
-   sets the dates apart below. A paper with no source begins at its own credits, with no
-   space above them. A paper in a series ends with the series strip, which part it is
-   and the other parts by title, a line's space under the dates. */
-.credits .credits-source + .credits-own,
-.credits .publication-date,
-.credits .publication-date + .series {
-  margin-block-start: 1lh;
 }
 .cert-page .hero .deck {
   font-family: var(--kpress-font-prose);
