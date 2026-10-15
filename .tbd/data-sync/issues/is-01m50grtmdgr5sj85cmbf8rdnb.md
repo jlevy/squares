@@ -5,7 +5,7 @@ title: "Intake 2026-10-15 lane C2: stage-7 replies to the owner's tracking issue
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: ecstatic-edison-lane-c2
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:31:35.181Z
-updated_at: 2026-10-15T19:54:36.159Z
+updated_at: 2026-10-15T20:41:35.956Z
 started_at: 2026-10-15T19:31:36.245Z
 ---
 
@@ -41,3 +41,7 @@ Posted status follow-ups (each names the bead and what it waits on; none closes)
 Not posted: #533 (held, not this lane), #542 and #543 (reply due: no).
 
 Record: branch claude/ecstatic-edison-8en33t-replies-c2, commits 836a367c2 (the twelve replies under `replies` as follow-ups, #534 naming s31-mixed-fine-net; notes on #532 and #544; #550/#554 notes no longer say an acknowledgement is listed as due) and 06bc5677c (release.py no-public-change review: methods survey HTML and Markdown byte-identical with main's and the branch's result-requests.yaml at one link revision). check_requests --report: reply due "no" on all twelve; --github lists none of them. packing-validate --records passed (51 of 109 steps, 117 s).
+
+PR: https://github.com/jlevy/squares/pull/625 (draft, labels intake and S1), head e93f6a804 = merge of main 6e73ef1c2 (#623, conflict in RELEASE_NO_PUBLIC_CHANGES resolved by keeping both; the survey review re-dated to 6e73ef1c and re-proved: survey HTML 39316f1e... and Markdown e2a664bd... byte-identical with main's and the branch's record). Hosted at e93f6a804: 31 pass, 28 skipping, 0 fail; mergeable CLEAN. Local at e93f6a804: --records passed (116 s); --push passed every edit check including the type floor (632 s) and failed only on wall, the reachable tests (281 of 797 files) stopped at 900 s at load 12-20, no failure reported. check_requests --report at e93f6a804: no reply due on any of the twelve.
+
+Bead stays open until #625 merges. For the owner: #532's body names #497/#509/#511 as the regularization it waits for, and all three have merged; think-ux1v is still in progress, so whether the replays may start now is the owner's call. The #550/#554 notes say no acknowledgement is owed on owner-opened issues (think-abcm); the follow-ups were posted on the coordinator's instruction.
