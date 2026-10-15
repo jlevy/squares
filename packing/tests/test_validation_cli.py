@@ -4133,81 +4133,37 @@ def test_the_pull_request_jobs_partition_the_surface() -> None:
     }
 
 
-def test_a_verified_merge_repeats_everything_not_positively_tree_reusable() -> None:
-    narrowed = validate._after_verified_pull_request(validate.STEPS)
-    assert {step.name for step in narrowed if step.fast} == {
-        "bead tree",
-        "provenance: recorded commits are reachable",
-        "campaign record",
-        # An advisory wall's tracking bead is read from the bead store, not the tree.
-        "tier ceilings are declared and not slack",
-        # Historical site identity compares with the mutable base, not just this tree.
-        "published URL registry and historical compatibility",
-        # The new native crate is not yet classified as tree-reusable.
-        "n17 kernel verifier (Rust)",
-        # New custody checks repeat until their tree reuse is explicitly classified.
-        "FN1 original-input bindings",
-        "SQUISH update certification binds complete reviewed inputs",
-        "SQUISH second update certification binds complete reviewed inputs",
-        "rational refinement custody binds complete replay inputs",
-    }
-
-    # Fail closed: a new fast step is repeated until explicitly classified.
-    unclassified = validate.Step("unclassified probe", lambda _context: "", fast=True)
-    assert validate._after_verified_pull_request([unclassified]) == [unclassified]
-
+def test_workflow_runs_integration_without_pull_request_tree_proofs() -> None:
     document = safe_load(WORKFLOW.read_text(encoding="utf-8"))
     validate_job = document["jobs"]["validate"]
-    [finder] = [step for step in validate_job["steps"] if step.get("id") == "verified-tree"]
-    assert finder["if"] == "github.event_name == 'push'"
-    assert "devtools.verified_merge_tree" in finder["run"]
+    workflow = json.dumps(document)
+    assert "pull-request-tree-" not in workflow
+    assert "devtools.verified_merge_tree" not in workflow
+    assert "PACKING_VALIDATE_TREE_VERIFIED_BY_RUN" not in workflow
+    assert validate_job.get("permissions", document["permissions"]) == {"contents": "read"}
     [gate] = [
         step
         for step in validate_job["steps"]
         if step.get("name") == "Run the complete integration surface"
     ]
-    assert gate["env"] == {
-        validate.TREE_VERIFIED_ENVIRONMENT: "${{ steps.verified-tree.outputs.run }}"
-    }
-    assert validate_job["permissions"] == {"contents": "read", "actions": "read"}
+    assert gate["if"] == "github.event_name != 'pull_request'"
 
 
-def test_a_tree_proof_narrows_only_the_complete_post_merge_surface(
+def test_untrusted_legacy_tree_proof_cannot_omit_selected_checks(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """The CLI half of the post-merge reuse: where the proof applies, and what it leaves.
-
-    `_after_verified_pull_request` decides which fast steps a proof may leave out. What
-    keeps that from narrowing anything else is `_unless_verified`: a tier, `--only`,
-    `--since` or `--push` run that inherited the variable refuses rather than quietly
-    dropping part of a declared selection, and the complete surface the workflow runs
-    after a push lists exactly the narrowed selection.
-    """
-    monkeypatch.setenv(validate.TREE_VERIFIED_ENVIRONMENT, "12345")
-    for arguments in (
-        ["--checks"],
-        ["--only", "exact verification"],
-        ["--since", "HEAD"],
-        ["--push"],
-    ):
-        assert main([*arguments, "--list"]) == 2, arguments
-        assert validate.TREE_VERIFIED_ENVIRONMENT in capsys.readouterr().err, arguments
-
+    """A run id in the old environment variable cannot suppress validation work."""
     post_merge = _workflow_commands(pull_request=False)["validate"]
-    complete = _workflow_selections(pull_request=False)["validate"]
-    narrowed = {
-        step.name
-        for step in validate._after_verified_pull_request(
-            [step for step in validate.STEPS if step.name in complete]
-        )
-    }
-    assert narrowed < complete
     skips = [part for pattern in post_merge.skip for part in ("--skip", pattern)]
-    assert main([*skips, "--list", "--format", "json"]) == 0
-    captured = capsys.readouterr()
-    assert {entry["name"] for entry in json.loads(captured.out)} == narrowed
-    # The announcement goes to stderr under `--format json`, never into the document.
-    assert "passed this exact tree" in captured.err
+    for selection in ([], skips, ["--checks"], ["--only", "exact verification"]):
+        arguments = [*selection, "--list", "--format", "json"]
+        monkeypatch.delenv("PACKING_VALIDATE_TREE_VERIFIED_BY_RUN", raising=False)
+        assert main(arguments) == 0
+        expected = json.loads(capsys.readouterr().out)
+        assert expected
+        monkeypatch.setenv("PACKING_VALIDATE_TREE_VERIFIED_BY_RUN", "12345")
+        assert main(arguments) == 0
+        assert json.loads(capsys.readouterr().out) == expected, selection
 
 
 def test_exact_verifier_cache_cannot_relabel_an_older_build() -> None:
@@ -4298,13 +4254,6 @@ def test_the_engine_cache_backdates_and_saves_only_a_build_for_its_exact_key() -
         index
         for index, step in enumerate(steps)
         if step.get("name") == "Preserve validation timings and partial logs"
-    )
-
-    # This is the formerly unsafe path: a verified main push narrows away every
-    # validation-owned engine step. The explicit miss build above still runs first.
-    assert any(step.needs_engine for step in validate.STEPS)
-    assert not any(
-        step.needs_engine for step in validate._after_verified_pull_request(validate.STEPS)
     )
 
 

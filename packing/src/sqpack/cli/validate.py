@@ -220,8 +220,6 @@ SUITE_SHARDS = 4
 #: derived from the retained 58-test hosted JUnit receipt on run 35579234418.
 EXHAUSTIVE_SHARDS = 3
 EXHAUSTIVE_FILE_COSTS = "devtools/exhaustive-file-costs.json"
-#: The pull-request run whose required gate succeeded on this exact tracked tree.
-TREE_VERIFIED_ENVIRONMENT = "PACKING_VALIDATE_TREE_VERIFIED_BY_RUN"
 #: Homebrew's two default prefixes. CairoSVG loads `libcairo` through ctypes, which
 #: does not find either directory on a stock macOS loader path even when brew has
 #: installed the library. `packing-validate` supplies the first prefix that actually
@@ -6009,7 +6007,7 @@ def _announce(namespace: argparse.Namespace, *lines: str) -> None:
     """Print a run banner on stdout, or on stderr under `--format json`.
 
     Under `--format json` stdout is one JSON document and nothing else: the banners the
-    `--push`, `--since` and verified-tree paths print are for a reader, and a consumer
+    `--push` and `--since` paths print are for a reader, and a consumer
     that parses the output must not have to skip them (PR 496 review E1).
     """
     stream = sys.stderr if namespace.format == "json" else sys.stdout
@@ -6153,125 +6151,6 @@ def _push_test_step(
     )
 
 
-#: Fast steps whose verdict is a pure function of the tracked tree and may therefore be
-#: reused after an exact-tree pull-request proof.  This is a positive allow-list: a new
-#: fast step is repeated after merge until somebody explicitly classifies it here, so a
-#: forgotten clock, network, git-graph, or side-worktree dependency fails closed.
-TREE_REUSABLE_FAST_STEPS = frozenset(
-    {
-        "soundness perimeter",
-        "lint floor (ruff)",
-        "type floor (basedpyright)",
-        "browser floor (biome, eslint, tsc, node:test)",
-        "browser floor liveness tests",
-        "browser code lives in files (embedded JavaScript, probes)",
-        # The same shape as the embedded-JavaScript guard: a static scan of the tracked
-        # Python and one tracked register, with no clock, network or history consulted.
-        "integrity ceremony never grows",
-        "workbench browser behavior in Chromium",
-        # The same shape as the workbench step: the tracked pages, rendered and measured
-        # in the pinned browser, with no clock, network or history consulted.
-        "site table layout in Chromium",
-        "basin atlas",
-        "basin event record and replay",
-        "historical regressions",
-        "small-n exact models and local geometry",
-        "deterministic SVG rendering",
-        "known-best atlas records and sample",
-        "known-best chunk census",
-        "known-best family and contact-shade censuses",
-        "prospective n=101..324 source map",
-        "prospective n=101..324 safe seed",
-        "translation escape screen records and sample",
-        "abstract size-five contact-scaffold atlas",
-        "fixed-angle cell is an LP, rebuilt independently",
-        "fast behavioral tests, shard A",
-        "fast behavioral tests, shard B",
-        "fast behavioral tests, shard C",
-        "fast behavioral tests, shard D",
-        "golden basin maps (proved cases, checked against mathematics)",
-        "basin identity",
-        "soft-schema validation",
-        # A pure function of the tracked JSON: it reads the retained records and nothing
-        # else, so a pull-request run over this exact tree has already decided it.
-        "class records do not claim the unconditional bound",
-        # The same shape: the tracked JSON, its own policy and `biome.json`, and the
-        # writer it re-lays them with. No clock, no network, no history.
-        "retained JSON is one record per line",
-        # The same shape: it reads the tracked Markdown under `packing/resources/` and
-        # compares three numbers found in those bytes. No clock, no network, no history.
-        "archive annotation census agrees with the archive",
-        "derivation (needs sympy)",
-        "search engine (sqsearch)",
-        "lint floor (rust)",
-        # Locked Rust sources and tracked exact differential fixtures determine the
-        # verdict; no repository history, remote state, or stored result is consulted.
-        "exact rectangle Rust geometry",
-        "measure verifier Rust (sqverify-fast)",
-        "n17 branch-and-bound native (Rust)",
-        "Trump exact branchwise linearized cones",
-        "H-041 Stromquist repaired-cover exact certificate",
-        "H-010 Stromquist printed-cover exact rejection",
-        "exact verification",
-        "Route S compression admission checkpoint is consistent",
-        "verifier perturbation limits",
-        "frontier corpus",
-        "frontier rigidity assessed here",
-        "generated tables in sync with frontier/",
-        "strategy catalogues",
-        "defect log",
-        "skills mirrored between .agents and .claude",
-        "X-027 mathematics parses with pinned KaTeX",
-        "synopsis agrees with the artifacts",
-        "README agrees with the directory",
-        # Reads tracked Markdown, its own register, the document map and .flowmarkignore.
-        "migrated Markdown writes its math as LaTeX",
-        "AGENTS.md mirrors the operating rules",
-        "agenda map agrees with the agendas",
-        "D-034's n=5 identity pair still reproduces",
-        "the decimal route still cannot price an exact pose",
-        "work accounting agrees on one unit",
-        "assembly coverage agrees with the contract",
-        "chunk taxonomy agrees with the corpus",
-        "session clocks are readable",
-        "n=5 rigidity certificates still verify",
-        "every session's cost is attributed",
-        "the branch cost rollup renders",
-        "control anchors still resolve",
-        "the borrowed lower bounds re-derive",
-        "the register's reliance on T-007 is inventoried",
-        "regularized atlas views match their index",
-        "regularized atlas drawings match their index",
-        # The layer's views, their house witnesses, the case records' bounds and the
-        # policy's statement, measured and compared: no clock, no network, no history.
-        "default pictures improve on their house drawings",
-        "the Lean replay receipt for s(k^2-2) = k holds",
-        # The vendored files and their manifest, compared byte for byte; git is asked only
-        # which files the tree holds. No clock, no network, no history.
-        "the vendored regularizer matches its manifest",
-        "the inventory agrees with the register",
-        "results rungs are earned and the view agrees",
-        "the synopsis headline carries every result",
-        "exact certificates are named by their records",
-        "rung figures agree with their certificates",
-        # The register, the bibliography and the case records, read and compared: no
-        # clock, no network and no history.
-        "standings agree with the bounds their entries state",
-        # One record, its schema and the register; `--report`, `--draft` and `--github`
-        # read git and GitHub, and the step runs none of them.
-        "result requests name registered results",
-        "case prose agrees with its own front matter",
-        # Reads the register, the reader documents and its own allowlist; the `git grep`
-        # in the module belongs to `--retained`, which this step does not run.
-        "reader prose credits and links, without audit mechanics",
-        "terminal sessions name what they cost",
-        "terminal sessions name the gate that certified them",
-        "Goebel's family reaches the sizes it reaches",
-        "differential: search energy vs validity oracle",
-    }
-)
-
-
 def _select_steps(
     *,
     only: list[str],
@@ -6394,40 +6273,6 @@ def _select_steps(
             "`packing-validate --list` shows names"
         )
     return selected
-
-
-def _after_verified_pull_request(selected: Sequence[Step]) -> list[Step]:
-    """Keep deferred steps and anything not positively classified as tree-reusable."""
-    fast_names = {step.name for step in STEPS if step.fast}
-    unknown = TREE_REUSABLE_FAST_STEPS - fast_names
-    if unknown:
-        raise StepFailureError(
-            "tree-reuse allow-list names no current fast step: " + ", ".join(sorted(unknown))
-        )
-    return [
-        step for step in selected if not step.fast or step.name not in TREE_REUSABLE_FAST_STEPS
-    ]
-
-
-def _unless_verified(namespace: argparse.Namespace, selected: list[Step]) -> list[Step]:
-    """Apply an exact-tree proof only to the complete post-merge surface."""
-    verified_run = os.environ.get(TREE_VERIFIED_ENVIRONMENT, "").strip()
-    if not verified_run:
-        return selected
-    if _tier_id(namespace) != "full" or namespace.push:
-        raise UsageError(
-            f"{TREE_VERIFIED_ENVIRONMENT} narrows the complete surface after a merge; "
-            "it is not combined with a tier, --only or --since"
-        )
-    narrowed = _after_verified_pull_request(selected)
-    _announce(
-        namespace,
-        f"== pull-request run {verified_run} passed this exact tree: "
-        f"{len(selected) - len(narrowed)} tree-reusable fast steps are not repeated, "
-        f"and {len(narrowed)} deferred or fail-closed steps still run ==",
-        "",
-    )
-    return narrowed
 
 
 def _execute_step(step: Step, context: Context) -> StepResult:
@@ -7703,7 +7548,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             measure_verifier=namespace.measure_verifier,
             skip=namespace.skip,
         )
-        selected = _unless_verified(namespace, selected)
         exclusive_step_name = ""
         if namespace.push:
             base = namespace.since or "origin/main"
@@ -7766,8 +7610,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _render_early_exit(namespace, selected)
         environment = _validation_environment()
         environment["PACK_JOBS"] = str(inner_jobs)
-        # A nested validator proves its own selection and must not inherit this proof.
-        _ = environment.pop(TREE_VERIFIED_ENVIRONMENT, None)
         # The job's step summary is this process's channel alone (`_report_failure_class`).
         _ = environment.pop("GITHUB_STEP_SUMMARY", None)
         context = Context(

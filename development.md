@@ -480,12 +480,10 @@ it has also read over 180 seconds on PR 188, at 182 seconds in run 35182460356.
 hosted runs hold both walls at or under 180 seconds.
 Five is the planned default, and `think-g4n9` owns it.
 
-On a push to `main`, the integration job looks for a successful pull-request run that
-validated the exact same Git tree and explicitly passed `packing-required`. A match
-licenses reuse only for fast steps named in the positive `TREE_REUSABLE_FAST_STEPS`
-allowlist. Every deferred step and every unclassified fast step repeats after merge;
-missing artifacts, expired artifacts, API errors, fork runs, and incomplete checks all
-fall back to the complete surface.
+On a push to `main`, the integration job and dedicated workers run the complete
+post-merge surface. Each run executes its selected fast and deferred checks, even when
+the pull-request checks already passed.
+The job partition and tier ceilings apply to every run.
 
 ### A job no runner took
 
