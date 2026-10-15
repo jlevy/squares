@@ -2343,5 +2343,18 @@
     "publication_619": {"main_packing_run":38739227037,"main_pages_run":38739226771,"status":"success","live_expectations_passed":4460,"site":"0.7.7","infographics":"0.6.1","lower_bounds_paper":"0.4.7"},
     "storage": {"external_free_mib":733,"recovery":"Normal pytest failed/1 retention; no manual deletion.","broad_builds":"Require measured space preflight."},
     "limits": "No three-minute claim, per-test waiver, ceiling increase, inferred billed compute, or inferred total agent effort. VE017 remains unexecuted pending direct human authorization."
+  },
+  "checkpoint_follow_up_2026_10_15_1520_utc": {
+    "source_head": "15548357a31e16acd029934025a8a615f9f1e208",
+    "base": "31eaf6333c5d5b6b3d111241768cdd3d30982588",
+    "source_reviews": {"senior":5535320248,"security":5535320451,"paths":28,"actionable_findings":0},
+    "ordinary": {"packing_run":38756777827,"status":"failure","suite":"B","node":"tests/test_upper_bound_reports.py::test_the_register_plan_states_each_bound_as_check_standing_reads_it[mishapolk-records-2026-10-14]","call_seconds":47.56,"assertions":"passed","enforced_pr_call_guard_seconds":45,"suite_step_seconds":443.21,"frontend":"success","macos":"success"},
+    "selected_full": {"run":38756833833,"status_at_capture":"in_progress","merge_clearance":false},
+    "local_prepush": {"prerequisite_steps_passed":67,"whole_quick_fraction_observed":"about23%","elapsed_seconds_before_interrupt":800.4,"effective_python_cpus":2,"outer_jobs":2,"inner_jobs":1,"pytest_workers":1,"parent_exit":130,"child_exit":-15,"verdict":"incomplete","cause_of_allocation":"Coordinator selected an unnecessarily conservative shape; not a functional failure or a passing gate."},
+    "next_action": "Diagnose exact Mishapolk report work under think-2equ before another grouped correction. No deadline or assertion waiver.",
+    "limits": "Single observations, not controlled speedup evidence. No inferred billed compute or total agent effort. Three-minute target remains open.",
+    "completed_full": {"run":38756833833,"conclusion":"failure","dedicated_linux_owners_passed":10,"macos":"success","residual_integration":"success","residual_command_seconds":1054.3,"residual_job_seconds":1179,"suite_steps_seconds":1041.536,"suite_job_seconds":1143,"longest_job":{"name":"slow-lane","seconds":1665},"quick_assertion_failures":0,"strict_call_failures":6},
+    "quick_node_parity": {"baseline_nodes":18234,"new_nodes":18250,"baseline_passed":18187,"new_passed":18203,"skipped_including_xfail_each":47,"removed":0,"changed_existing_outcomes":0,"added_regressions":16,"selection":"Four fast behavioral shard JUnits only; other integration owners excluded."},
+    "grouped_correction": {"report_nodes_moved":5,"report_bodies":"unchanged","owner":"Existing slow behavioral lane in complete/main/daily and optional selected Deep; matching-final-head complete success required procedurally before this merge.","forwarder_test":{"production_check_calls_before":64,"production_check_calls_after":8,"addresses":9,"single_field_mutations":45,"scoped_passed":6,"local_call_seconds":0.64},"timing_limits":"unchanged","new_jobs":0}
   }
 }

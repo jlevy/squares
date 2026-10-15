@@ -1258,7 +1258,19 @@ def test_every_import_reader_is_the_packet_whose_source_key_names_it() -> None:
         assert reports.load_declaration(packet)["source_key"] == key
 
 
-@pytest.mark.parametrize("name", [name for name in EVERY if name not in BEYOND_ONLY])
+# Full run 38756833833 measured these two complete plan/independent-claim reads at
+# 23.91s and 14.92s CALL; the fresh local #593 read took 18.18s. Only those cases move
+# to the existing slow lane. Every other packet and the refusal controls remain quick.
+@pytest.mark.parametrize(
+    "name",
+    [
+        pytest.param(name, marks=pytest.mark.slow)
+        if name in {MISHAPOLK_593, MISHAPOLK_70A}
+        else name
+        for name in EVERY
+        if name not in BEYOND_ONLY
+    ],
+)
 def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: str) -> None:
     plan = reports.register_plan(_packet(name))
     result = plan["results.yaml"]
@@ -1682,6 +1694,9 @@ def test_the_593_prints_are_refused_and_each_census_fraction_is_admitted() -> No
             reports.admit(certificates[n], printed)
 
 
+# Complete 72-certificate and competing-house claim rebuild: 12.76s CALL in full
+# run 38756833833. Its exact comparisons stay intact in the existing slow lane.
+@pytest.mark.slow
 def test_the_593_release_is_smallest_only_at_237_and_ties_couzo_at_211_and_241() -> None:
     rows = _rows(MISHAPOLK_593)
     relations: dict[str, int] = {}

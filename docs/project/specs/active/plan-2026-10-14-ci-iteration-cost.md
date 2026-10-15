@@ -138,6 +138,53 @@ Normal pytest failed-test retention recovered external scratch to about 733 MiB 
 manual deletion. The cleanup bead is closed; broad builds still need a space preflight.
 VE017 remains unexecuted pending direct human authorization.
 
+### October 15 second-checkpoint follow-up
+
+Head `15548357` groups the input-loading, drawing, forwarding and native-scheduling
+repairs. Independent senior and security reviews cleared all 28 changed paths.
+Its [ordinary Packing run](https://github.com/jlevy/squares/actions/runs/38756777827)
+then failed on one different report case: the Mishapolk register-plan test passed its
+assertions but took 47.56 seconds of CALL time, beyond the enforced 45-second PR guard.
+The other ordinary owners passed, including frontend and macOS. The
+[selected complete checkpoint](https://github.com/jlevy/squares/actions/runs/38756833833)
+was still running when this follow-up was recorded.
+These are matching-head observations, not a successful checkpoint or merge clearance.
+
+The coordinator also chose an unnecessarily conservative local pre-push allocation:
+effective Python CPUs 2, two outer jobs and one inner worker.
+All 67 prerequisite Steps passed, but the whole quick suite used one pytest worker and
+had reached only about 23% after 800.4 seconds.
+The coordinator interrupted it rather than repeating that allocation; the parent exited
+130 and its supervised child exited -15. The retained partial run is incomplete
+evidence, not a passing local gate.
+Future local selections must account for the effective pytest worker count as well as
+the outer scheduler settings.
+
+`think-2equ` tracks diagnosis of the newly exposed report cost.
+The assertions, admissions and timing limits remain unchanged while that diagnosis runs.
+The three-minute objective remains open; a source review cannot establish hosted runtime
+or complete test coverage.
+
+The completed checkpoint subsequently passed every dedicated worker and residual
+integration. Its four-suite owner failed six CALL limits: five complete report-admission
+cases and the forwarder refusal matrix.
+Actual JUnit comparison preserves every previous quick node and skip reason and adds 16
+passing regression cases; it establishes coverage for this scheduling change, not a
+successful gate.
+Residual integration took 1,054.30 command seconds, while the four suite
+Steps totaled 1,041.54 seconds on their separate owner.
+The longest owner was the slow lane at 1,665 job seconds, including setup.
+These observations are not a controlled speedup estimate.
+
+Five exact measured report nodes now use that existing slow lane, preserving their
+complete bodies and fast refusal tests.
+The forwarder test instead removes repeated work: eight complete production-check calls
+replace 64, retaining every old address and all 45 single-field corruption assertions.
+Its scoped local run passed six tests; the repaired call took 0.64 seconds in one
+observation.
+This grouped correction requires fresh ordinary CI and a complete checkpoint
+at its new reviewed head, including execution of all five moved nodes without skips.
+
 ## Goals
 
 - Explain the overnight delay using actual run and delivery evidence, separating elapsed
@@ -487,11 +534,17 @@ If a bounded optimization cannot make a genuinely expensive integration control 
 quick, give that exact measured control a documented deeper placement and retain its
 complete assertions.
 
-Before moving an individually measured operation, establish a mandatory same-workflow
-owner and its conservative input selection.
-Activate that owner and the placement change atomically after a bounded trial; do not
+If activating the proposed native upper-report worker, establish its mandatory
+same-workflow owner and conservative input selection before moving the operation.
+Activate that new owner and placement atomically after a bounded trial; do not
 permanently duplicate an unchanged full family on every PR and call it a speed fix.
-Preserve the complete operations and fast negative guards.
+An individually measured operation can instead use the existing slow behavioral lane,
+which already runs in complete, main and daily checkpoints.
+Preserve its complete assertions and fast negative guards, and record the exact node and
+measurement in the existing slow-marker registry.
+For PR620, the coordinator requires a successful matching-head complete checkpoint
+before merge and must inspect those exact nodes as executed, without skips.
+The optional Deep label is not a protected PR prerequisite.
 Reuse collection and outcome evidence from the actual execution; a second full
 collection needs its own cost justification.
 A slow marker alone cannot discharge coverage.
