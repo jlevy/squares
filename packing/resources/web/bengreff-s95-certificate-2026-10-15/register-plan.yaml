@@ -1,0 +1,244 @@
+# Proposed register entries for jlevy/squares#610 (think-ribz, stage 3).
+#
+# Written by the #610 intake lane on 15 October 2026 for the records lane to apply, after
+# the #594 import's T-184 and in its shape. The lane changed no register: results.yaml,
+# evidence.yaml, source-coverage.yaml, result-requests.yaml, intake-watch.yaml, the
+# bibliography, the resources README, SYNOPSIS.md and the case records are untouched,
+# because other records pull requests are open. T-NNN stands for the id the records lane
+# takes in the commit that registers it; 'YYYY-MM-DD' is that commit's date. Once applied,
+# the register is the record and this file is only the proposal; the records lane may
+# delete it in that commit.
+#
+# The rung is the one the evidence supports as T-184's was: V0/C0, as reported. The
+# triage's replay (zmx2 over all 10,000 D4 roots, zm_mixed.py over a sample of 14 of the
+# 304 sub-roots, two refused mutations, the wall control) is in receipts/ and is not yet
+# evidence. No case record changes: the entry is pending adoption at n = 95 while
+# wand125's 1993/200 (T-091, the sqverify-fast replay) holds both lower lanes of n-095.md.
+#
+# At n = 96 the cover gives s(96) >= 10 by monotonicity. T-081 already registers
+# s(96) = 10 (k = 10 of s(k^2 - 4) = k, V0/C1), so by the register table of
+# result-import.md there is no new entry and no change of scope: T-081's claim gains the
+# sentence under t081_claim_addition below. n = 97 to 99 are proved on both lanes and
+# n = 100 is the grid; s(94) is untouched, since the total is above 94.
+
+results:
+  - id: T-NNN
+    kind: optimality
+    registered: 'YYYY-MM-DD'
+    headline: '`s(95) = 10`, by a mixed cover of points and grid-line segments, reported'
+    claim: >-
+      Benjamin Greff reports s(95) = 10: the lower half by a mixed cover, the upper half by
+      the 10 x 10 grid. It is the case k = 10 of the k^2 - 5 series, after T-066 (k = 8) and
+      T-184 (k = 9).
+
+      The cover is 48,352 weighted points and 11,438 axis-parallel segments of [0,10]^2 in
+      Evan Daniel's mixed format, total 3791753447/40000000 = 94.793836175 < 95, exactly
+      D4-invariant. Every closed unit square in [0,10]^2 captures mass at least one, so a
+      packing of 95 at side below 10, scaled up to side 10, would capture at least 95.
+
+      The source reports the covering statement decided by two of Daniel's checkers: zmx2,
+      in outward-rounded binary64, on 9,981 of the 10,000 root cells of the D4 region, and
+      zm_mixed.py, in exact rationals, on the 304 cells that tile the other 19. Its Lean
+      wrapper on Daniel's Sqpack takes the covering statement as a hypothesis. Those
+      statements are the author's.
+
+      At retention here the cover's data facts were recomputed and zmx2 was replayed over
+      all 10,000 roots from the bytes the source pins, equal to the source's records root
+      for root, with two mutations refused; zm_mixed.py was replayed on a sample of 14 of
+      the 304 sub-roots, each equal to the source's record. That is a partial reproduction
+      with the producer's code, recorded in the packet and not yet as evidence, so the value
+      stands as reported. The case record holds s(95) >= 1993/200 (wand125) until a review.
+
+      Credit Benjamin Greff (https://github.com/bengreff/s95-certificate), building on Evan
+      Daniel's method at margin zero, mixed format, checkers and Lean library, and on
+      wand125's s(59) = 8 cover, reused for the corners, and band-insertion construction.
+      Registration was requested in jlevy/squares#610. The source says the search, LP and
+      verification pipeline were built and run with Claude (Anthropic) as an AI assistant,
+      under the author's direction.
+    scope: {n_values: [95]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        An exact value for a case that was open, by Daniel's recipe at a new count, as T-066
+        and T-184 settled s(59) = 8 and s(76) = 9: a substantive case result, not a new
+        technique or a family. The third instance of the k^2 - 5 series does not make it a
+        family: each cross is re-optimised by LP, and nothing carries to another k.
+      scored: '2026-10-15'
+      by: the #610 intake lane (think-ribz; draft)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[bengreff s95 certificate 2026-10-15]']
+      published: '2026-10-15'
+    composition: >-
+      Compound: the lower half is the reported cover (E-bengreff-610-cover-report), the
+      upper half the grid (E-basic-grid-upper); the minimum is the lower half's.
+    evidence:
+      - E-bengreff-610-cover-report
+      - E-basic-grid-upper
+    artifacts:
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
+      - >-
+        packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+      - >-
+        packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_cover_audit.json
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_zmx2_d4.log
+      - >-
+        packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_triage_checks.log
+    next_rung: >-
+      C3 needs the zm_mixed.py replay of all 304 sub-roots beside the retained zmx2 replay,
+      both recorded as evidence, with case 95 registered in devtools.replay_evand_zmx2 and
+      devtools.audit_evand_mixed_covers, and a review that reads the cover, the two
+      checkers' composite over the D4 region and the 404 wall segments.
+    unfinished_confirmations:
+      - what: >-
+          an adversarial review of the cover, the zmx2 and zm_mixed.py composite over the D4
+          region and the reduction, recorded under docs/project/reviews/
+        rung: C1
+        link: think-ribz
+    notes: >-
+      V0 because the cited lower-half entry is the source's public claim, assurance
+      reported. C0 because no review is on file; the retention's reproduction of the
+      source's two checkers, complete for zmx2 and a sample for zm_mixed.py, is in the
+      packet's receipts. The case lanes are unchanged, so the entry is pending adoption at
+      n = 95 while wand125's 1993/200 holds the lower lanes. At n = 96 it gives s(96) >= 10
+      by monotonicity, which T-081 registers already. No full zm_mixed.py pass over the
+      160,000 D4 roots is at the pinned revision, and the Lean wrapper is unbuilt here.
+
+# One sentence for T-081's claim (result-import.md: a consequence another entry already
+# registers gains a sentence in the older claim; no change of scope).
+t081_claim_addition: >-
+  At n = 96 a second route is reported: Benjamin Greff's s(95) >= 10 (T-NNN) gives
+  s(96) >= 10 by monotonicity.
+
+evidence:
+  - id: E-bengreff-610-cover-report
+    claim: lower-bound
+    scope: {n_values: [95]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[bengreff s95 certificate 2026-10-15]'
+    certificate: >-
+      packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
+    replay_status: not-attempted
+    verifiers:
+      - V-evand-zmx2
+      - V-evand-zm-mixed-py
+    limitations: >-
+      bengreff/s95-certificate at dd7297d06adc664268c65005369b895e4ded7547, on issue 610,
+      reports s(95) >= 10 from a mixed cover of 48,352 points and 11,438 segments, total
+      3791753447/40000000 < 95, exactly D4-invariant, decided by zmx2 on 9,981 of 10,000
+      root cells and by zm_mixed.py on the 304 cells tiling the other 19. At retention here
+      the cover's data facts were recomputed, zmx2 was rerun over all 10,000 roots from the
+      pinned bytes, equal to the source's records, and zm_mixed.py on 14 of the 304
+      sub-roots, equal to the source's records, with two mutations refused (packet
+      receipts/); that reproduction with the producer's code is not yet an evidence entry.
+      The Lean wrapper is unbuilt and takes the covering statement as a hypothesis.
+    source_reviewed: '2026-10-15'
+
+source_coverage:
+  - id: bengreff-s95-certificate-2026-10-15
+    title: Benjamin Greff's mixed cover for s(95) = 10, issue610
+    role: source-repository
+    url: https://github.com/bengreff/s95-certificate/tree/dd7297d06adc664268c65005369b895e4ded7547
+    local: resources/web/bengreff-s95-certificate-2026-10-15/
+    source_key: '[bengreff s95 certificate 2026-10-15]'
+    scope:
+      n_values:
+        - 95
+    reviewed: '2026-10-15'
+    source_date: '2026-10-15'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+      - frontier/results.yaml
+      - resources/web/bengreff-s95-certificate-2026-10-15/README.md
+    evidence:
+      - E-bengreff-610-cover-report
+    notes: >-
+      The whole tree is retained at the pin. The cover is reported to settle s(95) = 10
+      with the grid; the case's lower lanes are unchanged pending review (think-ribz).
+
+bibliography:
+  - key: '[bengreff s95 certificate 2026-10-15]'
+    authors: [Greff]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-15'
+    credit: Greff after Daniel, wand125
+    lineage: independent
+    note: >-
+      bengreff/s95-certificate at dd7297d06adc664268c65005369b895e4ded7547
+      (2026-10-15T01:16:20Z), Benjamin Greff's mixed cover for s(95) >= 10, hence
+      s(95) = 10 with the 10 x 10 grid: 48,352 points and 11,438 segments in Evan Daniel's
+      mixed 1 format, total 3791753447/40000000 < 95, first committed in 06da947 at
+      2026-10-15T01:10:26Z, decided by Daniel's zmx2 and zm_mixed.py pinned at
+      evand/square-packing b91d70b6, with a Lean wrapper on Daniel's Sqpack at 1718a58 that
+      takes the covering statement as a hypothesis. Registration was requested in
+      jlevy/squares#610. The README credits Evan Daniel for the method at margin zero, the
+      mixed format, the checkers and the Lean library, and wand125 for the s(59) = 8 cover
+      reused for the corners and the band-insertion construction; it names the author's
+      own s(76) certificate as the previous case, and does not mention this project
+      except that the issue cites the record's n-095.md for the standing bound. AI
+      assistance, README.md: "Benjamin Greff directed the work. The search, LP and
+      verification pipeline were built and run with Claude (Anthropic) as an AI
+      assistant." The issue adds that Claude, working as an agent in Claude Code, built
+      and ran the LP search, the GPU solver, the export, the verification script, the
+      coverage checks, the Lean wrapper and the replay, and drafted the write-up; both
+      commits carry a Co-Authored-By trailer naming Claude Opus 5.5. MIT licence.
+      Retained whole in web/bengreff-s95-certificate-2026-10-15/. Dated by that revision,
+      2026-10-15 UTC.
+
+# The two rows the resources README carries for #594's packet, for this one.
+resources_readme:
+  table_row: >-
+    | [bengreff/s95-certificate](https://github.com/bengreff/s95-certificate) | Benjamin
+    Greff’s mixed cover for `s(95) = 10`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`;
+    issue #610 | **[bengreff s95 certificate 2026-10-15]**; [15 October
+    packet](web/bengreff-s95-certificate-2026-10-15/README.md), pinned
+    `dd7297d06adc664268c65005369b895e4ded7547` |
+  definition: >-
+    **[bengreff s95 certificate 2026-10-15]**: Benjamin Greff’s (GitHub bengreff) mixed
+    cover for s(95) ≥ 10, hence s(95) = 10 with the grid, decided by Evan Daniel’s zmx2
+    and zm_mixed.py, after Daniel’s method and wand125’s s(59) = 8 cover and band
+    insertion. It is pinned in [bengreff/s95-certificate](https://github.com/bengreff/s95-certificate)
+    at `dd7297d06adc664268c65005369b895e4ded7547` and retained whole;
+    [packet](web/bengreff-s95-certificate-2026-10-15/README.md).
+
+# The request entry, for result-requests.yaml once the import merges. No reply is posted:
+# the acknowledgement is drafted in think-ribz.
+result_requests:
+  - number: 610
+    title: 'Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)'
+    author: bengreff
+    opened: '2026-10-15'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Benjamin Greff reports s(95) = 10 by a mixed cover of points and grid-line segments, checked
+      by Evan Daniel's zmx2 and zm_mixed.py in composite, at bengreff/s95-certificate dd7297d. Imported
+      on 15 October 2026; triage replayed zmx2 over all 10,000 D4 roots and zm_mixed.py on 14 of the 304
+      sub-roots from this repository's retained copies, each equal to the source's records. AI assistance
+      disclosed.
+    read_through: '2026-10-15T01:16:36Z'
+    results:
+      - key: s95-equals-10
+        claim: 's(95) = 10: the lower half by a mixed cover, the upper half by the 10 x 10 grid.'
+        source: body
+        register:
+          - T-NNN
+        evidence:
+          - E-bengreff-610-cover-report
+    beads:
+      - think-ribz
+    answer_bead: think-ribz
+    replies: []
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm the V0 entry are owned by
+      its bead; optimality is outside this request.
