@@ -1060,6 +1060,7 @@ def case_note(
     items: Sequence[Mapping[str, Any]],
     certificates: Mapping[str, str] | None = None,
     implied: Mapping[str, Mapping[str, Any]] | None = None,
+    held: Mapping[str, str] | None = None,
 ) -> str:
     """The record's one paragraph: who regularized the drawing, with which modifications,
     and either that it is a pure regularization, proving no new bound, so no result, or
@@ -1069,14 +1070,30 @@ def case_note(
     it is registered there and which certificate proved it by monotonicity
     (`registered_words`, `implied` by the registering result's id); then this project's
     registered regularization of the count where the layer does not draw it, naming the
-    result; then who regularized the house, where its source did."""
+    result; then who regularized the house, where its source did.
+
+    Where the layer's view is not the count's default picture (`held`, by view path, from
+    `default_drawings.held_reasons`), the note opens by saying that the house drawing is
+    drawn as published, and why, and credits the view as the view's rather than the
+    drawing's: n = 176's note led with "Regularized by" while its page drew the raw house
+    (think-gvke)."""
     certificates = certificates or {}
     implied = implied or {}
+    held = held or {}
     sentences: list[str] = []
     for found in items:
         if found["by"] != PROJECT_REGULARIZER or "view" not in found:
             continue
-        sentences.append(credit_sentence(found))
+        credit = credit_sentence(found)
+        why = held.get(str(found["view"]))
+        if why is not None:
+            sentences.append(
+                "Drawn as published: the layer's regularized view does not improve on the "
+                f"packing as published ({why}), so the house drawing is drawn "
+                "(regularization policy, section 12)."
+            )
+            credit = f"The view was {credit[:1].lower()}{credit[1:]}"
+        sentences.append(credit)
         where = SIDE_WORDS[str(found["side"])]
         if found.get("registered_in"):
             words = registered_words(
@@ -1122,11 +1139,17 @@ def case_fields(
     *,
     register: Register | None = None,
     source_keys: dict[Path, str | None] | None = None,
+    held: Mapping[str, str] | None = None,
 ) -> dict[int, dict[str, Any]]:
     """Each case record's `regularization` field, by count, for the records that carry
     one: the source's regularization of the house first, then this project's drawing,
     then this project's regularization a result registers where the layer does not draw
-    it (`registered_case_items`)."""
+    it (`registered_case_items`). `held` gives, by view path, why a view is not its
+    count's default picture; by default the retained `default-drawings.json`'s reasons."""
+    if held is None:
+        from devtools.default_drawings import held_reasons  # noqa: PLC0415
+
+        held = held_reasons()
     register = load_register() if register is None else register
     by_source = source_regularizations(
         register.results, register.sources, repo, source_keys=source_keys
@@ -1171,7 +1194,7 @@ def case_fields(
             found for found in (by_source.get(n), projects.get(n), registered.get(n)) if found
         ]
         here = {rid: ceiling for (rid, count), ceiling in implied.items() if count == n}
-        fields[n] = {"note": case_note(items, certificates, here), "items": items}
+        fields[n] = {"note": case_note(items, certificates, here, held), "items": items}
     return fields
 
 

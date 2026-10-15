@@ -320,6 +320,22 @@ file states no count of its own, so it cannot fall behind the record.
 It reads the exceptions above the bound from `devtools.default_drawings.ABOVE_U`, which
 `packing/tests/test_regularize_select.py` holds to the layer.
 
+The same file’s `states` says, for every count n = 1..324, whether the picture it draws
+is regularized: `regularized` where a view of Evan Daniel’s regularizer or the
+grid-slack generator is drawn, `regular-as-published` where the house drawing has no
+uneven and no near-axis square, `decided-no-better` where the strong generators ran on
+that very witness and drew nothing better, `exempt` with the bead that owns it, and
+`pending` otherwise.
+Each state carries the drawn picture’s measures, the witness’s digest and the runs that
+decided it. The index’s `status: regularized` means only that the layer holds a view: at
+n = 176 it held the axis tool’s view while the raw house was drawn.
+A view that lapses with its witness is now recorded on the axis tool’s record (`lapsed`)
+rather than only printed.
+The records-tier step
+`every drawn picture is regularized, regular as published, decided or exempt` fails on a
+pending count that `devtools.default_drawings.PENDING_ALLOWED` does not name with its
+bead, and on a named count that is no longer pending.
+
 `--check-atlas` runs in the records tier on every pull request: it holds the index to
 the manifest, the witnesses and the views by digest, and reads each other generator’s
 view against its entry (label, generator, credit, side and regularization).

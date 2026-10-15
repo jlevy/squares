@@ -3343,6 +3343,8 @@ def admit_views(
         reference = (current or {}).get("reference") or current
         if reference is None or reference.get("generator") != axis.ALGORITHM:
             raise EvandRunError(f"n={n}: the layer holds no record of the axis tool's")
+        # A view admitted on the current witness ends any lapse the axis record carried.
+        reference = axis.derived(reference)
         drawn = current_house_total(current, root)
         if drawn is not None and total_contacts(admitted.house_after) < drawn:
             kept.append(n)

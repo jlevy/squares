@@ -711,12 +711,9 @@ def _regularization(case: dict[str, Any]) -> str:
         case["n"] in frontier.drawn_regularized()
     )
     label = "Regularized drawing" if drawn else "Regularization"
-    from devtools.default_drawings import held_note  # noqa: PLC0415
-
-    # Where the layer holds a view that is not the default picture, the note says why the
-    # page draws the house instead, from the default record's reason.
-    held = held_note(case["n"])
-    text = " ".join(str(note).split()) + (f" {held}" if held else "")
+    # Where the layer holds a view that is not the default picture, the note itself opens
+    # by saying the house drawing is drawn, and why (`regularized_drawings.case_note`).
+    text = " ".join(str(note).split())
     return (
         f'<div class="site-case-note"><span class="site-card-label">{label}</span>'
         f"<p>{_esc(text)}</p></div>"

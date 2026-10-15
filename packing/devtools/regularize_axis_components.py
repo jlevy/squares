@@ -67,7 +67,11 @@ witness and its digest, the view and its digest, house and stage light counts be
 after (the census's `witness_shades` on both files), the residual regressions, the exact
 verification and the side difference. A record whose view would change no square is
 `unchanged` and keeps no file; a record the tool cannot regularize is `refused`, with its
-reason. `--check-atlas` is cheap: it compares the index with the manifest, the witnesses
+reason. Another generator's admitted view stays drawn while its witness is the one the
+atlas holds; once the witness changes, this tool's record takes its place and carries a
+`lapsed` block naming that generator, its run and the old witness's digest, so the count
+reads `pending` in `default-drawings.json` until the generators decide the new witness.
+`--check-atlas` is cheap: it compares the index with the manifest, the witnesses
 and the retained views by digest and re-verifies nothing; it also holds every drawn view's
 exact side to the witness's own side `s_W` and to its case record's verified upper bound
 `U`, decided exactly (`regularize_evand.verified_bound`), with the views above `U` named in
@@ -1905,6 +1909,30 @@ def drawn_elsewhere(record: dict[str, Any] | None) -> bool:
     return record is not None and record.get("generator", ALGORITHM) != ALGORITHM
 
 
+#: The field an axis-tool record carries once another generator's view of the count
+#: lapsed because its witness changed (`update_atlas`): that generator, its run, and the
+#: digest of the witness the view was derived from. Until the strong generators decide the
+#: new witness, `devtools.default_drawings` records the count `pending`, and the records
+#: tier fails on it unless the count is allowed on purpose (think-gvke). It is history,
+#: not something this tool derives, so `--verify-atlas` compares a record without it
+#: (`derived`), and `regularize_evand layer` keeps no lapse in a `reference`.
+LAPSED = "lapsed"
+
+
+def lapse_of(kept: Mapping[str, Any]) -> dict[str, Any]:
+    """The `LAPSED` block for another generator's view whose witness changed."""
+    return {
+        "generator": str(kept["generator"]),
+        "run": str(kept["run"]["id"]),
+        "witness_sha256": str(kept["source"]["sha256"]),
+    }
+
+
+def derived(record: Mapping[str, Any]) -> dict[str, Any]:
+    """An axis-tool record without its `LAPSED` history: what `atlas_record` derives."""
+    return {key: value for key, value in record.items() if key != LAPSED}
+
+
 def named_runs(record: dict[str, Any]) -> set[str]:
     """The runs an index entry names: the one its view came from, and the one whose
     report supplied its retry rungs after admission (`run.rungs_from`), where another."""
@@ -2025,6 +2053,7 @@ def update_atlas(
     previous = {record["n"]: record for record in (committed or {}).get("entries", [])}
     records: list[dict[str, Any]] = []
     elsewhere: set[int] = set()
+    lapsed: list[int] = []
     for entry in entries:
         n = entry["n"]
         kept = previous.get(n)
@@ -2038,7 +2067,14 @@ def update_atlas(
                     records.append({**kept, "reference": record})
                     elsewhere.add(n)
                     continue
+                # The view lapses with its witness. The lapse is written into the record,
+                # not only printed, so the count reads `pending` until the generators
+                # decide the new witness (think-gvke).
+                record[LAPSED] = lapse_of(kept)
+                lapsed.append(n)
                 print(f"n={n}: the {kept['generator']} view lapsed: its witness changed")
+            elif kept is not None and LAPSED in kept:
+                record[LAPSED] = kept[LAPSED]
             records.append(record)
         elif kept is not None:
             records.append(kept)
@@ -2071,6 +2107,13 @@ def update_atlas(
         f"{len(results)} records in {elapsed:.0f}s wall on {workers} worker(s), "
         f"{serial:.0f}s summed over records"
     )
+    if lapsed:
+        print(
+            f"{len(lapsed)} other generators' views lapsed and are recorded as `{LAPSED}`: "
+            f"{lapsed}; run `python -m devtools.default_drawings --update`, then the "
+            'generators on the new witnesses (regularization-process.md, "When a Witness '
+            'Changes")'
+        )
     failed = [record["n"] for record in records if record["status"] == "failed-verification"]
     if failed:
         print(f"FAILED exact verification: {failed}")
@@ -2184,6 +2227,7 @@ def _check_record(
     view = layout.view(n)
     if generator not in GENERATORS:
         problems.append(f"n={n}: generator {generator!r}")
+    problems.extend(_lapse_problems(n, record))
     if status == "regularized":
         kept.add(view.name)
         if record["view"]["path"] != layout.relative(view):
@@ -2215,6 +2259,28 @@ def _check_record(
             problems.append(f"n={n}: {status}, yet {layout.relative(view)} exists")
     else:
         problems.append(f"n={n}: status {status!r}")
+    return problems
+
+
+def _lapse_problems(n: int, record: Mapping[str, Any]) -> list[str]:
+    """A `LAPSED` block sits on this tool's own record, and names another generator, a
+    run, and a witness other than the one the record now derives from."""
+    lapse = record.get(LAPSED)
+    if lapse is None:
+        return []
+    reference = record.get("reference") or {}
+    if drawn_elsewhere(dict(record)) or LAPSED in reference:
+        return [f"n={n}: only the axis tool's own record carries `{LAPSED}`"]
+    problems: list[str] = []
+    if lapse.get("generator") not in GENERATORS or lapse.get("generator") == ALGORITHM:
+        problems.append(f"n={n}: the lapsed view's generator is {lapse.get('generator')!r}")
+    if not lapse.get("run"):
+        problems.append(f"n={n}: the lapsed view names no run")
+    if lapse.get("witness_sha256") == record["source"]["sha256"]:
+        problems.append(
+            f"n={n}: the lapsed view was derived from the witness the record holds, so it "
+            "did not lapse"
+        )
     return problems
 
 
@@ -2564,7 +2630,7 @@ def verify_atlas(
             if _normalized(record) != entry.get("reference"):
                 problems.append(f"n={n}: the re-derived record differs from the reference")
             continue
-        if _normalized(record) != entry:
+        if entry is None or _normalized(record) != derived(entry):
             problems.append(f"n={n}: the re-derived record differs from the index")
         view = layout.view(n)
         retained = (

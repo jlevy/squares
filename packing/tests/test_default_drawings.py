@@ -171,3 +171,169 @@ def test_an_unread_bound_cannot_authorize_a_regularized_default(
     assert decided["side"]["view_minus_U"] is None
     with pytest.raises(ValueError, match="U is not read exactly"):
         defaults.drawn_above_bound()
+
+
+# --------------------------------------------------------------------------------------
+# The regularization state (think-gvke): every count says whether its drawing is
+# regularized, and the gate fails on a pending count the allowlist does not name.
+# --------------------------------------------------------------------------------------
+
+
+def _record() -> dict:
+    return json.loads(defaults.RECORD.read_text(encoding="utf-8"))
+
+
+def _write(tmp_path: Path, record: dict) -> Path:
+    path = tmp_path / "default-drawings.json"
+    path.write_text(defaults.text(record), encoding="utf-8")
+    return path
+
+
+def _first_state(record: dict, state: str) -> dict:
+    row = next((row for row in record["states"] if row["state"] == state), None)
+    if row is None:
+        pytest.skip(f"the data holds no {state} count")
+    return row
+
+
+def _measured(record: dict, n: int) -> dict:
+    """What `document` measured at `n`: its view's decision, or its house's measures."""
+    view = next((row for row in record["entries"] if row["n"] == n), None)
+    if view is not None:
+        return view
+    row = next(row for row in record["states"] if row["n"] == n)
+    return {"n": n, "measures": row["measures"]}
+
+
+def test_every_count_has_one_state_and_says_what_is_drawn() -> None:
+    record = _record()
+    rows = record["states"]
+    assert [row["n"] for row in rows] == sorted(defaults.index_entries())
+    totals = record["totals"]["states"]
+    assert sum(totals.values()) == len(rows)
+    assert set(totals) == set(defaults.STATES)
+    views = {row["n"]: row for row in record["entries"]}
+    for row in rows:
+        n = row["n"]
+        viewed = n in views and views[n]["default"] == defaults.REGULARIZED
+        assert row["drawn"] == (defaults.VIEW if viewed else defaults.HOUSE), n
+        if row["state"] == defaults.REGULARIZED_STATE:
+            # Only a strong generator's drawn view makes a count regularized: at n = 176
+            # the axis tool's view was held, the raw house drawn, and the index said
+            # `regularized`.
+            assert row["generator"] in defaults.STRONG_GENERATORS, n
+        if row["state"] == defaults.PENDING:
+            assert n in defaults.PENDING_ALLOWED, n
+        if viewed:
+            assert row["measures"] == {
+                key: value[defaults.VIEW] for key, value in views[n]["measures"].items()
+            }, n
+
+
+def test_the_committed_record_passes_the_gate_with_its_allowlist() -> None:
+    found, listed = defaults.state_problems()
+    assert found == []
+    pending = [row["n"] for row in _record()["states"] if row["state"] == defaults.PENDING]
+    assert pending == sorted(defaults.PENDING_ALLOWED)
+    assert listed[-1].startswith("regularization states: 324 counts")
+
+
+def test_the_gate_fails_on_a_new_pending_count(tmp_path: Path) -> None:
+    record = _record()
+    row = _first_state(record, defaults.REGULAR_AS_PUBLISHED)
+    row["state"] = defaults.PENDING
+    found, _listed = defaults.state_problems(_write(tmp_path, record))
+    assert any(line.startswith(f"n={row['n']} is pending:") for line in found)
+    assert any("PENDING_ALLOWED with the bead" in line for line in found)
+
+
+def test_the_allowlist_only_shrinks(tmp_path: Path) -> None:
+    record = _record()
+    pending = _first_state(record, defaults.PENDING)
+    regular = _first_state(record, defaults.REGULAR_AS_PUBLISHED)
+    # A count allowed pending that is no longer pending fails until it comes off the list.
+    pending["state"] = defaults.REGULARIZED_STATE
+    found, _listed = defaults.state_problems(_write(tmp_path, record))
+    assert found == [
+        (
+            f"n={pending['n']}: PENDING_ALLOWED names it, but it is regularized; take it "
+            "off the list"
+        )
+    ]
+    # And a count that joins it names its bead.
+    pending["state"] = defaults.PENDING
+    regular["state"] = defaults.PENDING
+    allowed = {**defaults.PENDING_ALLOWED, regular["n"]: "later"}
+    found, _listed = defaults.state_problems(_write(tmp_path, record), allowed=allowed)
+    assert found == [f"n={regular['n']}: PENDING_ALLOWED names no bead: 'later'"]
+
+
+def test_a_record_older_than_its_witness_fails_the_gate(tmp_path: Path) -> None:
+    record = _record()
+    row = record["states"][0]
+    row["witness_sha256"] = "0" * 64
+    now = defaults.witness_digest(defaults.index_entries()[row["n"]])
+    found, _listed = defaults.state_problems(_write(tmp_path, record))
+    assert found == [
+        (
+            f"n={row['n']}: the witness changed since its state was recorded (000000000000 "
+            f"to {now[:12]}); run `{defaults.GENERATOR} --update`"
+        )
+    ]
+
+
+def test_a_settled_count_goes_pending_when_its_witness_changes() -> None:
+    n = min(n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED)
+    moved = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(witness_sha256="1" * 64)}
+    found, _listed = defaults.state_problems(settled=moved)
+    stale = f"n={n}: SETTLED decided witness 111111111111"
+    assert any(line.startswith(stale) for line in found)
+
+    record = _record()
+    row = next(row for row in record["states"] if row["n"] == n)
+    entry = defaults.index_entries()[n]
+    state = defaults.count_state(
+        n, entry, _measured(record, n), row["witness_sha256"], settled=moved
+    )
+    assert state["state"] == defaults.PENDING
+    assert state["why"].startswith("no strong generator has decided this witness")
+    assert [found["run"] for found in state["decisions"]] == [None]
+
+
+def test_a_lapsed_view_reads_pending_and_names_what_lapsed() -> None:
+    record = _record()
+    row = _first_state(record, defaults.PENDING)
+    n = row["n"]
+    entry = dict(defaults.index_entries()[n])
+    lapse = {"generator": "evand-regularize", "run": "a-run", "witness_sha256": "2" * 64}
+    entry[defaults.LAPSED] = lapse
+    state = defaults.count_state(
+        n, entry, _measured(record, n), row["witness_sha256"], allowed={}
+    )
+    assert state["state"] == defaults.PENDING
+    assert state["lapsed"] == lapse
+    why = str(state["why"])
+    assert "the evand-regularize view of witness 222222222222 lapsed (run a-run)" in why
+    assert "allowed pending" not in why
+
+
+def test_a_held_view_does_not_lead_the_case_note() -> None:
+    # Where the house is drawn although the layer holds a view, the note says so first
+    # instead of opening "Regularized by" (n = 176, think-gvke).
+    from devtools import regularized_drawings  # noqa: PLC0415
+
+    held = defaults.held_reasons()
+    item = {
+        "by": regularized_drawings.PROJECT_REGULARIZER,
+        "credit": regularized_drawings.AXIS_CREDIT,
+        "generator": regularized_drawings.AXIS_GENERATOR,
+        "side": "same",
+        "of": "T-1",
+        "view": next(iter(held)),
+    }
+    note = regularized_drawings.case_note([item], held=held)
+    assert note.startswith(
+        "Drawn as published: the layer's regularized view does not improve on the packing"
+    )
+    assert "The view was regularized by the Squares Project" in note
+    assert regularized_drawings.case_note([item]).startswith("Regularized by")

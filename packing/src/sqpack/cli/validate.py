@@ -3794,6 +3794,19 @@ def _default_drawings(context: Context) -> str:
     return output
 
 
+def _regularization_state(context: Context) -> str:
+    # Under a second: every count's regularization state in `default-drawings.json` read
+    # back, its witness digest compared with the file the atlas holds, and the pending
+    # counts held to `default_drawings.PENDING_ALLOWED`, which only shrinks (think-gvke).
+    # It measures nothing, so it catches what the measuring check above cannot see as a
+    # failure: n = 176 drew its raw house for a day after an adoption lapsed its
+    # grid-slack view, with every gate green. A new pending count fails here until the
+    # strong generators decide its witness or a reviewed change allows it with its bead.
+    output = _module(context, "devtools.default_drawings", "--check-state")
+    _require_text(output, "regularization state check passed")
+    return output
+
+
 def _vendored_evand(context: Context) -> str:
     # About 0.2s: `vendor/evand-regularize`, Evan Daniel's regularizer copied at a pin, is
     # held to its manifest -- each file's size, SHA-256 and mode at the upstream commit,
@@ -5627,6 +5640,22 @@ STEPS: tuple[Step, ...] = (
             "packing/witnesses/known-best/*",
             "packing/frontier/n-*.md",
             "docs/project/policies/regularization-policy.md",
+            *_RENDERER_HUB,
+        ),
+    ),
+    Step(
+        "every drawn picture is regularized, regular as published, decided or exempt",
+        _regularization_state,
+        fast=True,
+        records=True,
+        # It imports what the step above does, through the axis tool's constants, so it
+        # claims the same closure; it reads only the record, the index and the witnesses.
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/default-drawings.json",
+            "packing/atlas/known-best/default-drawings.schema.yaml",
+            "packing/atlas/known-best/regularized/*",
+            "packing/witnesses/known-best/*",
             *_RENDERER_HUB,
         ),
     ),
