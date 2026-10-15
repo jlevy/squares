@@ -491,6 +491,45 @@ def test_native_lane_completes_with_phase_progress_and_junit(tmp_path: Path) -> 
     assert len(list(artifacts.glob("*.junit.xml"))) == 1
 
 
+def test_native_progress_uses_effective_workers_from_pytest_addopts(tmp_path: Path) -> None:
+    for label, addopts, worker_ids, count in (
+        ("distributed", "-n 2", {"gw0", "gw1"}, 2),
+        ("serial", "", {"main"}, 1),
+    ):
+        root = tmp_path / label
+        root.mkdir()
+        test_file = root / "test_probe.py"
+        test_file.write_text(
+            "import pytest\n@pytest.mark.slow\ndef test_complete(): pass\n",
+            encoding="utf-8",
+        )
+        artifacts = root / "artifacts"
+        context = validate.Context(
+            deep=False,
+            strict=False,
+            jobs=1,
+            inner_jobs=2,
+            environment={
+                **os.environ,
+                "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts),
+                "PYTEST_ADDOPTS": (
+                    "-o tmp_path_retention_policy=failed -o tmp_path_retention_count=1 "
+                    f"{addopts}"
+                ),
+            },
+            timeout_seconds=15,
+        )
+        _run_native(context, _native_probe(test_file))
+        paths = list(artifacts.glob("*.progress-*.jsonl"))
+        assert len(paths) == count
+        rows = [row for path in paths for row in _rows(path)]
+        assert {row["worker_id"] for row in rows} == worker_ids
+        assert {row["xdist_workers"] for row in rows} == {count}
+        assert {row["run_id"] for row in rows} == {context.artifact_run_id}
+        assert sum(row["event"] == "finish" for row in rows) == 1
+        assert sum(row["event"] == "session_finish" for row in rows) == count
+
+
 def test_native_lane_cancellation_keeps_its_last_completed_phase(tmp_path: Path) -> None:
     test_file = tmp_path / "test_probe.py"
     test_file.write_text(

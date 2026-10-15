@@ -19,7 +19,6 @@ import pytest
 ARTIFACT_STEM = "PACKING_REACHABLE_TEST_ARTIFACT_STEM"
 RUN_ID = "PACKING_REACHABLE_TEST_RUN_ID"
 SOURCE_COMMIT = "PACKING_REACHABLE_TEST_SOURCE_COMMIT"
-WORKERS = "PACKING_REACHABLE_TEST_WORKERS"
 SCHEMA = "reachable-progress-v1"
 
 
@@ -121,15 +120,10 @@ def pytest_configure(config: pytest.Config) -> None:
         raise pytest.UsageError(f"{ARTIFACT_STEM} must be absolute")
     run_id = os.environ.get(RUN_ID, "")
     source_commit = os.environ.get(SOURCE_COMMIT, "")
-    workers_value = os.environ.get(WORKERS, "")
     if not run_id or re.fullmatch(r"[0-9a-f]{40}", source_commit) is None:
         raise pytest.UsageError("reachable progress needs a run id and 40-hex source commit")
-    try:
-        workers = int(workers_value)
-    except ValueError as error:
-        raise pytest.UsageError("reachable progress needs its worker count") from error
-    if workers < 1:
-        raise pytest.UsageError("reachable progress worker count must be positive")
+    # xdist's worker input includes PYTEST_ADDOPTS and any effective worker cap.
+    workers = int(worker_input["workercount"]) if worker_input is not None else 1
     config.pluginmanager.register(
         ProgressWriter(
             stem,
