@@ -88,8 +88,7 @@ PUBLICATION_HISTORY = (
         version="v0.7.11",
         first_published="October 15, 2026",
         result_scope=(
-            "Say on each case page whose house is drawn that it is drawn as published, "
-            "and why."
+            "Say on each case page whose house is drawn that it is drawn as published, and why."
         ),
     ),
     PublicationHistoryEntry(
@@ -777,8 +776,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.7.11",
         impact="patch",
         reason=(
-            "Say on each case page whose house is drawn that it is drawn as published, "
-            "and why."
+            "Say on each case page whose house is drawn that it is drawn as published, and why."
         ),
     ),
     ReleaseImpactDecision(
