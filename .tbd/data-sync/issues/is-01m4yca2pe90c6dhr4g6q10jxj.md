@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 14 campaign upper bounds (237, and 13 beyond 324
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T23:35:08.750Z
-updated_at: 2026-10-15T04:05:26.558Z
+updated_at: 2026-10-15T08:11:26.625Z
 started_at: 2026-10-14T23:35:12.236Z
 ---
 Francisco Couzo (@franciscouzo) reports, in jlevy/squares#607 (filed 2026-10-14T23:18:36Z), 21 finite upper bounds plus two precision refinements, certificates at franciscouzo/square-packing 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2 submissions/2026-10-14/certificates/ (first committed 2026-10-14T19:15:09Z), comparison index upper_bounds.json at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d. Stages 1, 2 and the stage 4 replay in the 14 October evening intake lane (branch claude/wizardly-meitner-wqn4x3-intake-607); no register, case, request, coverage, bibliography, resources README or intake-watch record edited. Registration waits for a records PR.
@@ -67,3 +67,5 @@ At 237, 4e4c8ce adds certificates/n237.cert (and the same bytes at certificates/
 The seven Fang composites and the beyond-horizon submissions: 4e4c8ce's certificates/best/ index restates them; at 703, 757, 813, 931, 932, 992, 993 and 994 its README says eight new glued witnesses use Fang's rectangles, which this lane did not compare with #607's files (beyond the horizon; see the 4e4c8ce beyond-horizon triage bead).
 
 **2026-10-15 replay update (this lane).** Branch claude/wizardly-meitner-wqn4x3-intake-607 at 77cec4292 holds the packet, the 23 receipt shards, register-plan.yaml (the raw plan with a header applying the per-count rule) and packing/tests/test_upper_bound_reports_607.py (9 tests, admitted to the suite record with suite_files admit-local). Main moved to 6964362b5 (#609) during the replay: merged into the branch, the claim record re-frozen there, every relation unchanged. packing-validate --records passes (51 of 109 steps, the named tier); acquire_source --check passes. Register plan: one T-NNN at 237 (V0/C0, pending adoption below T-183), evidence E-couzo-607-certificate-report, source row couzo-certificates-2026-10-14 with beyond-horizon rows; the records lane keeps the rows at 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 757 and 804 and registers 703, 812, 930, 931, 992, 993 and 994 as Fang's rows (think-rn2y) with this packet as evidence.
+
+**2026-10-15 check --replay (this lane).** A fresh serial check --replay decided all 69 jobs again, equal to the retained rows apart from timing, in four --n runs (237-651, 703-812, 930-992, 993-994), 04:04Z to 08:09Z, each under the two-hour limit: 14,683.9 s wall, 13,125.2 s CPU (3.65 CPU-h); every run exit 0. Branch head 1af5267f6 (pushed). Main has since moved to c4c690a3e (#612, T-185 to T-187): nothing at these counts changed, so the claim record frozen at 6964362b5 stands. Lane complete: no run pending.
