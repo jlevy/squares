@@ -5,7 +5,7 @@ title: Resolve four scheduled main test-time ceiling overruns without weakening 
 kind: bug
 status: in_progress
 priority: 1
-version: 31
+version: 32
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10.local
 labels: []
@@ -34,19 +34,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:10:37.460Z
-updated_at: 2026-10-15T10:18:04.887Z
+updated_at: 2026-10-15T10:26:04.830Z
 started_at: 2026-10-14T10:03:10.224Z
 ---
 Optional scheduled full integration run38536321398 at f73 passes functional tests but violates12s per-test ceiling for four nodes: site_forwarders no-script redirect13.08s; results_register full-part citations T15312.17s; overview_sections no-script canonical atlas20.10s; regularized_drawings edited-block check13.44s. Main push full gate and Pages deployment passed sameSHA. Diagnose full integration contention/cold-path cost, optimize or explicitly classify measured expensive cases while preserving assertions and meaningful CI coverage; avoid broad ceiling increases.
 
 ## Notes
 
-Remote PR599 remains e5a046b3d202551f56452b7ff5538273c0c29a45. Its prior prepush passed68steps713.54s,10963normalpass49skip1expectedfailure+4poolpass. Ordinary Packing38665031494/Pages38665031489/mergeability38665027044 passed. Selected enforcedquick38665027001 remains FAILED: all4suitewalls and8CALLoverruns. think-ht59 advisory does not waive selectedstrict; no caps/assertionsrelaxed. Astra O/P round12 at e5a reviews5530078875/5530079053. CIlocal integrated611/612 mainc4c as1cdb58684, then identityrepair97129538d; all187results/DATA6f retained. Sourceunpublished; incoming userreaderfixes packaged separately.
-
-Upstream611 substantially delivers9nos boundarymigration: preserve narrowedcheckedlinks, fragmentparity, explicitworkflow/defectinputs, privateindex, beadtransport/baselinemode. Recorded212846997bytes is upstreammeasurement, not freshintegration. Main then advanced19bd792d1 via615 with sameidentitymeasurementrepair; main pushPacking38706724009 validate/slowlane/applicabledeepjobs allpass, Pages38706723963pass. Missinginputbead3e3jclosedupstream. Remaining baseline/refusalassurances nns5/7wpx notsilentlyclosed.
-
-Astra profileuebw at971 disproved packetbundle asnextslice:326witnessvalidations19.54scumulative dominate diagnostic38.14s; declaration/custody/receiptreadsminor. VE016 already-pinnednativevalidation backend preregistered, freshschemas/no cache/no bypass and Pythonrefusaloracle. First25pass1fail retained tupleconversionmismatch; boundedguard/customschemaequivalence stillunderreview. No acceptance measurements while UIgateactive. No unsupportedrunner-variance assertion.
-
-Focusedreaderbranch final5b66be495 integratesmain19bd via7641ffb0f, sitev0.7.4, fontfix extracted fromCI; atlas/papereditionsunchanged. Initial895 prepush66prereqspass except localworkspace dependencylink repaired; exactbrowserfloorrerunpass122Nodetests. Behavioralstep timedout900s after7972pass41skip1staleheadingassertionfailure. All retained, notgreen. ReviewB1/B2 found staleeligible/oraclecontracts and encodedarchivefragmentbug, fixed5b;5requirednativebrowserpass58.81s and13integration/headingpass27.30s. Finalprepush5b reruns unchanged900scommandceiling withjobs4 (moretestworkersafterprereqs), no sourcebudgetchanges. Review/deliverypending for99vd/4t34/ehl0, findingchildrenz3s3/bgg3. Cleanupjs7bclosed936.04MiBstagedverifiedTrash, nopysicalreclamationclaim.
-
-Afterfocusedv0.7.4lands, mergepublishedmainbackintoCI599 and preserveimmutablereleasehistory; recutanyfurtherpublicdeltaforward. CIparentremainsopenuntilfinalreviewedsource strictcheckpoints/merge/deploy.
+Current origin/main d33de8b105f5b7a43646ad5fc2aa890894dbb50c is healthy: complete post-merge Packing run 38716865645 passed, including slow and exhaustive/regularized checks; Pages 38716865665 passed. Earlier identity defect 3e3j is closed upstream. This does not waive PR599's independently selected strict timing failure at remote e5a046b3d202551f56452b7ff5538273c0c29a45: enforced run 38665027001 exceeded all four suite walls and eight call ceilings. No timing cap, assertion or scientific obligation was relaxed. Local CI history, including rejected VE016 evidence, is preserved on codex/main-test-timing at 65aff4580.\n\nSmaller iteration delivery is prepared separately on codex/quick-push-selection, base d33, for gg64/ly7p: exact seven-file slice, 164 core tests and 44 selected CLI tests passed, Ruff/type checks clean, independent Astra senior review clear pending final pin. A new component-aware release-tool validation fix is being implemented under 8iml. Reader PR617 final e0633e233 preserves main v0.7.4/data6133 and cuts v0.7.5; all three final-head follow-up reviews clear, canonical edit 67 passed in 128.50s, focused release 103 passed/13 exhaustive deselected, combined News/date/native layout 146 passed. Current-head CI has no failures and remains pending. Do not claim full current-data local gate: earlier old-data full normal receipt had 10973 passes plus 12 geometry failures, corrected by restoring original meter width and passing all78 affected checks; old-data pool complement passed3 in838.09s. Receipts retained in primary .codex/regularization-closeout-evidence-2026-10-13/.\n\nVE016 native backend was rejected before timing for acceptance mismatches and restored; uebw contains the evidence. Remaining required-deep-selection architecture and baseline/refusal assurances nns5/7wpx remain open. After News delivery, land the narrow quick-push/fixture-colocation and component-owned cut checks without asserting the three-minute hosted target is achieved.
