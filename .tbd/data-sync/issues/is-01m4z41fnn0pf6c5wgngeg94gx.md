@@ -5,7 +5,7 @@ title: "Import wand125: s(28) > 1149/200 by a continuous-pose certificate (no is
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T06:29:52.948Z
-updated_at: 2026-10-15T06:30:32.385Z
+updated_at: 2026-10-15T07:18:30.532Z
 started_at: 2026-10-15T06:30:32.385Z
 ---
 Found by the 05:30Z intake sweep of 2026-10-15 (epic think-mq0k): wand125/square-packing moved from afdcaac4e to b57e66712b5f722b39fcb703692006062c7d9eb7, three commits, all authored by Hiroaki Hosono and co-authored by Claude Opus 5.5. No issue reports any of them.
@@ -83,3 +83,17 @@ No author reply is owed: nothing on GitHub asked, and the draft significance is 
 > wand125/square-packing [8530baf](https://github.com/wand125/square-packing/commit/8530bafb03d48444f30f241fbc1f29f01cd7c96c) (15 October) reports s(28) > 1149/200 = 5.745 from a rectangle measure checked at every angle, decided at the source by `sqverify_continuous` v4 (d4a1981, the version this issue's review would read) and by a second driver, `contpose_check3`, around Guzhou0806's T-145 kernels with only their caps raised. The intake retained its documents at 8530baf in `packing/resources/web/wand125-continuous-n28-2026-10-15/`, held its exact premises and both kernel inputs to the candidate, and ran a diagnostic sample that matched the source's logs at three of `sqverify_continuous`'s roots and at two slabs on the reviewed T-145 kernel, which is not a replay. This issue's soundness review of the continuous mode now bears on a third claim; the n = 28 replay is priced in the import's bead and waits for an owner budget with the n = 40 ones.
 
 Branch: claude/wizardly-meitner-wqn4x3-intake-n28.
+
+## Notes
+
+2026-10-15, stages 1-2 (intake lane, branch claude/wizardly-meitner-wqn4x3-intake-n28 from origin/main c4c690a3e, pushed at c9ccaf6bf59b7a4ca828e5eeacab0c3f9dab8331; no PR opened):
+
+- b0ebe86f2 devtools: continuous_pose_followup (premises, sample) with 28 tests; fine_net_followup.sealed_bundle takes a suffix; integrity-ceremony allowlist entry.
+- 8f04ccb6b resources: packet packing/resources/web/wand125-continuous-n28-2026-10-15/ (acquire_source at 8530baf, --check PACKET_MATCHES_ITS_CONTRACT), receipts premises-n28.json (EXACT_PREMISES_HOLD), check2-control-here.json (source's control, refused at the axis), sample-diagnostic-n28.json (DIAGNOSTIC_SAMPLE), README.md, register-plan.yaml.
+- c9ccaf6bf suite costs: admit-local of tests/test_continuous_pose_followup.py (report kept in devtools/suite-file-cost-admissions/continuous-pose-followup-2026-10-15.json); suite_files check: every shard under 10%.
+
+Checks: `packing-validate --records` 51/51 steps of the tier passed (1m49s) on the rebased branch; focused tests (test_continuous_pose_followup, test_fine_net_followup, test_audit_continuous_pose, test_integrity_ceremony_contract, test_acquire_source) 146 passed in 14 s. `--push`: every step passed but "reachable behavioral tests", which escalated to the whole suite because the packet retains the source's Python (check2/src/check.py is "Python outside the mapped roots") and timed out at 1800 s on a host at load about 10, at 20% with no failure; CI's --fast covers it when a PR opens.
+
+Register plan: one T-NN after T-142, V0/C0, draft S3, pending adoption beside T-142 while T-107 holds both lanes; evidence E-wand125-continuous-n28-5745-report; coverage wand125-continuous-n28-5745-2026-10-15; verifiers V-wand125-sqverify-continuous, V-wand125-contpose-check3, V-continuous-pose-followup; bibliography key [wand125 continuous n28 2026-10-15]. Registers, case records, intake-watch, result-requests, the bibliography and the resources README were not edited (records PRs #612 merged during this lane, #614 open). The intake-watch read through b57e667 is owed with the records change.
+
+Scratch cleaned at the end; the asset and the built binaries are gone, re-derivable from the pinned digests.
