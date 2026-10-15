@@ -5,7 +5,7 @@ title: "PDF atlas: make case numbers neutral and keep red only on the specific n
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: claude-code@spud10.local
 labels: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T02:57:22.931Z
-updated_at: 2026-10-15T11:49:51.726Z
+updated_at: 2026-10-15T12:18:48.038Z
 started_at: 2026-10-15T11:21:23.860Z
 ---
 Owner request 2026-10-10: get rid of the red colouring on numbers in the PDF, as was done for the web Atlas in PR #462, and rely on red only for specific values.
@@ -35,4 +35,4 @@ Related, not in scope unless the owner widens it: the web uses a different red f
 
 ## Notes
 
-Closure audit at main f97 confirms implemented case labels always use LABEL_MUTED_COLOR, and existing tests assert gray labels with independent numeric-only upper/lower accents and neutral O badges. The remaining defect is stale accessibility prose and figure guidance saying labels/badges turn crimson. Correcting SUMMARY_PROSE, style comment, figure-playbook and atlas README in codex/tutorial-closure; root owns these paths, separate from agent tutorial/News closure edits. Keep open until source review, appropriate component release/export regeneration and matching receipt/deployment verification; no unverified claim that regenerated artifacts have passed.
+Latest owner rule supersedes the initial historical O-badge-red acceptance wording: case numbers and badges remain neutral, and recency crimson appears only on specific numeric bound values. Source rules were already delivered; closure head4ddf4935 repairs stale descriptions and regenerates the complete retained poster family against existing admitted6133 data. Independent XML audit confirms424/424 case numbers #47525f and381/381 red elements numeric tspans (100:6upper55lower;324:73upper247lower), no red badge/nonnumeric content. Maintained infographic v0.6.1 cut2SVG4PNG2PDF/96owningpasses; embedded lowerbounds paper v0.4.7 actually regenerated,869250bytes,2/2page loads agree. Real redraw includes previously unexported current data/bounds/credits, recorded under childdx2k rather than claiming description-only. Final canonical push4dd has one RUF001 literal punctuation failure, planned runtime-preserving Unicode escape; other checks still running. Final hosted checkpoint/publication pending.
