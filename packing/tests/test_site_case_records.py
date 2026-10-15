@@ -720,8 +720,13 @@ def test_case_summaries_keep_math_and_layout_when_fetched(
             direct_page.goto(f"{served}cases/{n}.html", wait_until="load")
             direct_page.locator(f'article.site-case[data-case="{n}"]').wait_for(state="visible")
             if n == 291 and width == 1280 and theme == "light":
+                desktop_drawing_width = direct_page.evaluate(LAYOUT)["drawingWidth"]
                 _case_bounds_at_the_two_column_boundary(direct_page)
                 direct_page.set_viewport_size({"width": width, "height": 900})
+                # The article can resize before its drawing leaves the narrow query.
+                site_browser.api().expect(
+                    direct_page.locator(".site-case-figure > svg")
+                ).to_have_css("width", f"{desktop_drawing_width:g}px")
             direct = direct_page.evaluate(LAYOUT)
             if n == 291:
                 direct_page.screenshot(path=tmp_path / f"n291-direct-{width}-{theme}.png")
