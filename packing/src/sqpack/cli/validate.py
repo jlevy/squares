@@ -1098,6 +1098,7 @@ def _run(
     stem = directory / f"command-{uuid.uuid4().hex}"
     log_path = stem.with_suffix(".log")
     arguments = list(command)
+    progress_marker = ""
     if len(arguments) >= 3 and arguments[1:3] == ["-m", "pytest"]:
         # A step that chose its own durations filter keeps it: the quick lane's
         # `--durations-min` is its ceiling, and pytest would take the last value given.
@@ -1105,6 +1106,15 @@ def _run(
             arguments.extend(("--durations=0", "--durations-min=0"))
         if _SUITE_FILES_PLUGIN in arguments:
             arguments.append(f"--test-file-costs={stem}.test-files.json")
+        pytest_arguments = arguments[3:]
+        marker = (
+            pytest_arguments[pytest_arguments.index("-m") + 1]
+            if "-m" in pytest_arguments
+            else ""
+        )
+        if marker in {QUICK_TESTS, SLOW_TESTS}:
+            progress_marker = marker
+            arguments.extend(("-p", "devtools.reachable_progress"))
         arguments.append(f"--junitxml={stem}.junit.xml")
     environment = dict(context.environment)
     # Nested test subprocesses must not reuse this gate's artifact configuration.
@@ -1115,6 +1125,46 @@ def _run(
         # artifact stem without exposing the parent gate's artifact configuration.
         environment["PACKING_REACHABLE_TEST_ARTIFACT_STEM"] = str(stem)
         environment["PACKING_REACHABLE_TEST_RUN_ID"] = context.artifact_run_id
+    if progress_marker:
+        if directory.is_relative_to(REPOSITORY_ROOT.resolve()):
+            raise StepFailureError(
+                "native test artifacts must stay outside the source checkout"
+            )
+        git_environment = {
+            key: value for key, value in environment.items() if not key.startswith("GIT_")
+        }
+        try:
+            source = subprocess.run(
+                ("git", "rev-parse", "HEAD"),
+                cwd=REPOSITORY_ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+                env=git_environment,
+            )
+        except OSError as error:
+            raise StepFailureError("cannot identify the native-test source commit") from error
+        source_commit = source.stdout.strip()
+        if source.returncode != 0 or re.fullmatch(r"[0-9a-f]{40}", source_commit) is None:
+            raise StepFailureError("cannot identify the native-test source commit")
+        environment.update(
+            {
+                "PACKING_REACHABLE_TEST_ARTIFACT_STEM": str(stem),
+                "PACKING_REACHABLE_TEST_RUN_ID": context.artifact_run_id,
+                "PACKING_REACHABLE_TEST_SOURCE_COMMIT": source_commit,
+                "PACKING_REACHABLE_TEST_WORKERS": arguments[arguments.index("-n") + 1]
+                if "-n" in arguments
+                else "1",
+                "PACKING_REACHABLE_TEST_LANE": "quick"
+                if progress_marker == QUICK_TESTS
+                else "slow",
+                "PACKING_REACHABLE_TEST_MARKER": progress_marker,
+                "PACKING_REACHABLE_TEST_EXCLUSIONS": "slow, exhaustive_exact"
+                if progress_marker == QUICK_TESTS
+                else "quick, exhaustive_exact",
+                "PACKING_REACHABLE_TEST_PHASES": "1",
+            }
+        )
     environment["PYTHONUNBUFFERED"] = "1"
     metadata = {
         "run_id": context.artifact_run_id,
