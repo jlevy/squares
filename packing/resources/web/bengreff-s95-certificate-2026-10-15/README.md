@@ -139,7 +139,7 @@ that CuPy’s sparse product returns wrong results without warning on this $A^T 
 ## Checks Made Here
 
 These were made on 15 October 2026 for the import’s triage, on a shared four-core x86-64
-Linux container with two other lanes’ processes running, with Python 3.14.7 and rustc
+Linux container with other lanes’ processes running, with Python 3.14.7 and rustc
 1.97.0, one checker process at a time and one thread or worker each. Each checker run
 below has its receipt under [`receipts/`](receipts/), written by
 `devtools.replay_receipt`. The comparisons and premise checks were made by triage
@@ -178,23 +178,25 @@ as arguments; registering cases 76 and 95 in `devtools.replay_evand_zmx2` and
   uncertified boxes the log lists equal the source’s `zmx2_s95_v2.log` line for line. One
   root, centres $[3/2, 8/5] \times [47/10, 24/5]$ and $u \in [0, 1/8]$, holds 8,192 of
   the 8,263.
-- **The `zm_mixed.py` sub-roots, a sample.** The 304 jobs cost 2,771 CPU-s at the
-  source, about 46 minutes on one worker here, so they were priced rather than run: a
-  sample of 14 ran with the flags `verify.sh` uses
-  ([`receipts/n95_zm_mixed_sample/`](receipts/n95_zm_mixed_sample/)), chosen by
-  `zm_sample.py` as the four costliest by the source’s records, every 38th job, and two
-  cells at the centre in the $u$ bin of $\arctan(1/5)$. Each prints
-  `VERIFIED-D4 (PARTIAL)`, 1,038 boxes in all, maximum depth 11, none uncertified, 254
-  CPU-s against the source’s 296.9 for the same jobs (ratio 0.855), in 6 min 45 s wall.
-  Every record equals the source’s apart from the input path and CPU time. At that ratio
-  the whole set is about 2,371 CPU-s, and the 290 jobs not run here about 35 minutes on
-  one worker.
-- **The source’s `zm_mixed.py` records.** Read with exact fractions, the 304 records name
-  the pinned checker and cover digests and the certificate-mode D4 settings, are 304
-  distinct cells of the $1/20$ grid that tile the 19 failing roots exactly, and report
-  9,614 boxes, maximum depth 13 and 2,771.3 CPU-s, none uncertified. The author’s
-  `check_coverage.py`, read and then run with `-I` from scratch, accepts the replay’s
-  `zmx2` log with the source’s `zm_mixed.py` records.
+- **The `zm_mixed.py` sub-roots.** The retained checker files, digests checked, ran all
+  304 jobs of `jobs.txt` with the flags `verify.sh` uses, one at a time
+  ([`receipts/n95_zm_mixed/`](receipts/n95_zm_mixed/)). They ran in two parts. First, a
+  sample of 14 priced the rest (`jobs_sample.txt`, chosen by `zm_sample.py` as the four
+  costliest by the source’s records, every 38th job, and two cells at the centre in the
+  $u$ bin of $\arctan(1/5)$): 254 CPU-s in 6 min 45 s wall. Then the other 290
+  (`jobs_rest.txt`), from 02:01Z to 03:03Z, 62 minutes of wall on a host whose load
+  reached 12 on four cores. Each prints `VERIFIED-D4 (PARTIAL)`: 9,614 boxes in all,
+  maximum depth 13, none uncertified, 2,327 CPU-s by the checker’s own count (ratio
+  0.840 to the source’s 2,771.3) and 3,278 CPU-s by the receipts, interpreter start-up
+  and cover parsing included. Every record equals the source’s apart from the input
+  path and CPU time.
+- **The `zm_mixed.py` records, the source’s and the replay’s.** Read with exact
+  fractions, each set of 304 records names the pinned checker and cover digests and the
+  certificate-mode D4 settings, and is 304 distinct cells of the $1/20$ grid that tile
+  the 19 failing roots exactly, none uncertified. The author’s `check_coverage.py`, read
+  and then run with `-I` from scratch, accepts the source’s two records, and accepts the
+  replay’s own `zmx2` log with the replay’s own `zm_mixed.py` records: the composite
+  over the whole D4 region, reproduced here with the producer’s code.
 - **Controls.** The `drop-heaviest-point` and `drop-heaviest-segment` mutations of
   `devtools.replay_evand_zmx2.mutate` are refused by `zmx2` at one root each
   ([`receipts/controls/`](receipts/controls/)), 235 and 234 boxes uncertified, where the
@@ -225,16 +227,17 @@ ran in, which the receipts repeat.
   Daniel’s checkers, run here from the bytes the source pins; no checker of this
   repository decides a mixed cover, so this is a reproduction with the producer’s code,
   not a second implementation.
-- **`zm_mixed.py` ran on a sample.** 14 of the 304 sub-roots were replayed here; the other
-  290 rest on the source’s records, which were read but not reproduced.
 - **`zm_mixed.py` has not confirmed a result here before.** Its partial-region options
   and the composite of its records with a `zmx2` root set are new to the record since
   #594, and are the review’s to read.
 - **The Lean is unbuilt and its library unretained.** `Sqpack` at `1718a58` is not in
   any packet, the source’s build needed 25 GB of memory, more than this host has, and
-  `S95Cover` is a hypothesis.
-- **The full `zm_mixed.py` pass is not at this revision**, and neither is a `zmx2 --full`
-  sweep.
+  `S95Cover` is a hypothesis. The build is held in bead think-ojr9.
+- **The full `zm_mixed.py` pass is not at this revision**, about 190 CPU-hours here and
+  held over the per-item cap (think-zn7s). Neither is a `zmx2 --full` sweep: about 6
+  CPU-hours with its follow-up, priced in think-eucc and not run, since #594’s rungs
+  did not ask for it. It is the route that does not rest on the D4 reduction, which
+  T-066’s replay of $s(59)$ also ran.
 
 ## Original Gzip Files
 
