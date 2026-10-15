@@ -6614,11 +6614,21 @@ issues:
     - think-nd7g
     - think-r333
     answer_bead: think-i85v
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/532#issuecomment-6200835621
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: >-
       Each replay's receipts and controls are retained in its packet, a review accepts them,
       the four register entries on main record the replays and their rungs, and #446 has a
       reply for T-132.
+    notes: >-
+      The follow-up of 15 October: no replay has started. The regularization's first layers
+      merged on 13 and 14 October (#497, #509, #511, #530, #548, #549), but think-ux1v is still
+      in progress, so all three asks stay blocked on it; the replay tooling is not on main and
+      the two owner questions on #543 are open.
   - number: 533
     title: Review and replay wand125's sqverify_continuous (f30cc2c) for the two n = 40 lower bounds
     author: jlevy
@@ -6676,7 +6686,13 @@ issues:
     beads:
     - think-wop1
     answer_bead: think-wop1
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/534#issuecomment-6200836218
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s31-mixed-fine-net
     close_when: >-
       The result is registered on main and its replay is recorded, or priced and queued in
       #532's lane.
@@ -6704,7 +6720,12 @@ issues:
     beads:
     - think-oyd4
     answer_bead: think-oyd4
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/535#issuecomment-6200836834
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The evidence entry and the corrected next rung are on main, and either the build's
       receipt is retained or the owner declines the build.
   - number: 536
@@ -6730,7 +6751,12 @@ issues:
     beads:
     - think-xk3f
     answer_bead: think-xk3f
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/536#issuecomment-6200837293
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The packet and the evidence entry are on main and the rebuild has a recorded price.
   - number: 537
     title: Take Valid7 in the Lean kernel (evand/square-packing 060c1a1) as evidence for T-064
@@ -6757,7 +6783,12 @@ issues:
     beads:
     - think-0ayk
     answer_bead: think-0ayk
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/537#issuecomment-6200837751
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The packet and the evidence entry are on main, and the owner has decided on a sample
       or a full rebuild.
   - number: 538
@@ -6782,7 +6813,12 @@ issues:
     beads:
     - think-1bm2
     answer_bead: think-1bm2
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/538#issuecomment-6200838139
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The check compares the best of three timings with 400 ms, both ceilings are
       unchanged, the play message is attributed, and check_frontend passes.
   - number: 539
@@ -6805,7 +6841,12 @@ issues:
     beads:
     - think-tfil
     answer_bead: think-tfil
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/539#issuecomment-6200838545
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The check waits for the reload's own navigation and still passes.
   - number: 540
     title: 'check_requests: mark a reply due on adoption, supersession and newly read comments'
@@ -6829,7 +6870,12 @@ issues:
     beads:
     - think-qh9a
     answer_bead: think-qh9a
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/540#issuecomment-6200839133
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: replies_due reports all three cases with tests, a reply's reported items can state
       the position, and step 2 of After the Merge drops the by-hand sentence.
   - number: 541
@@ -6854,7 +6900,12 @@ issues:
     beads:
     - think-7yqp
     answer_bead: think-7yqp
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/541#issuecomment-6200839659
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: >-
       --github fails a recorded reply whose ids are missing from the posted text, with a
       test.
@@ -6971,9 +7022,20 @@ issues:
     beads:
     - think-mq0k
     answer_bead: think-mq0k
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/544#issuecomment-6200840166
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: Every item the tracker lists has landed, been declined or moved to an issue of its
       own.
+    notes: >-
+      The follow-up of 15 October: every pull request of the pass has merged except #514 (#516,
+      #518, #553 and #531 on 12 October, #563 on 14 October); #485's s(40) > 3359/500 is T-157 at
+      V3/C3 (#598) and #506's s(175) is answered and registered as T-185 (#612). Still queued:
+      #514 and the owner decisions on #543, #532 to #542, #419's Lean build, the n = 17
+      certificates of #495 and #413, #494's note and #446's four values (think-eth9).
   - number: 545
     title: Evan Daniel's s(29) minimal polynomial (degree 7213) and grade-C local-minimality checks (evand/square-packing ad86d42)
     author: jlevy
@@ -7052,13 +7114,19 @@ issues:
     beads:
     - think-mvsm
     answer_bead: think-mvsm
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/550#issuecomment-6200840639
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The fixture waits on the menu's own state and the module passes repeatedly under
       load, as the issue's done-when says.
     notes: >-
       The project opened this issue; it reports no result, and no acknowledgement is owed on
-      it. `check_requests` still lists an acknowledgement as due, because the record has no
-      state for an issue its owner opened (think-abcm).
+      it. Until the status follow-up of 15 October, which names the bead and what it waits
+      on, `check_requests` listed an acknowledgement as due, because the record has no state
+      for an issue its owner opened (think-abcm).
   - number: 554
     title: 'Workbench colourer: one colour per angle class across the atlas, not fixed five-degree bands'
     author: jlevy
@@ -7083,13 +7151,19 @@ issues:
     beads:
     - think-9xhw
     answer_bead: think-9xhw
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/554#issuecomment-6200841197
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The colourer derives slots from shared centres and the animate-view contract's core
       check holds exact slots again, as the issue's done-when says.
     notes: >-
       The project opened this issue; it reports no result, and no acknowledgement is owed on
-      it. `check_requests` still lists an acknowledgement as due, because the record has no
-      state for an issue its owner opened (think-abcm).
+      it. Until the status follow-up of 15 October, which names the bead and what it waits
+      on, `check_requests` listed an acknowledgement as due, because the record has no state
+      for an issue its owner opened (think-abcm).
   - number: 552
     title: 'New packing: s(154) ≤ 12.92256640193406: registration request'
     author: evand
