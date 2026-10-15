@@ -5,16 +5,14 @@ title: "Import wand125: mixed rectangle-measure certificate at n = 76 (#282 comm
 kind: task
 status: closed
 priority: 2
-version: 5
+version: 6
 labels:
   - result-import
   - packing
-dependencies:
-  - type: blocks
-    target: is-01m3yrzkz80qd1wv5sjr0kkkv0
+dependencies: []
 parent_id: is-01m3yrdxte02c7bnygkke34ct4
 created_at: 2026-10-02T07:40:21.292Z
-updated_at: 2026-10-03T22:47:15.469Z
+updated_at: 2026-10-15T19:58:57.615Z
 closed_at: 2026-10-03T22:47:15.468Z
 close_reason: T-072 V3/C3 on main.
 resolution: null

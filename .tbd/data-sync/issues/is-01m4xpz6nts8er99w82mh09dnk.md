@@ -5,14 +5,14 @@ title: "Validation backlog (owner cap 2026-10-14: hold anything > 40 CPU-h)"
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m4wsqt2sjrksybyz375sarb3
 created_at: 2026-10-14T17:22:12.281Z
-updated_at: 2026-10-14T17:22:12.281Z
+updated_at: 2026-10-15T19:58:09.552Z
 ---
 The validation backlog of the 2026-10-14 intake (epic think-abi1), after the owner's instruction of 2026-10-14 ~17:05Z: "Let's, for now, hold off on anything more than 40 CPU-hours but let's be sure we have a clear backlog of validation work that's tracked appropriately, and details are in beads."
 
@@ -67,3 +67,9 @@ Each row's bead carries a `## Validation` block (claim, run, cost and basis, bud
 - think-wu73: 4,294 CPU-h is the source's own receipt, uncalibrated here until think-au7j runs.
 - think-9v2k: the remaining CPU of PR #574's check --replay chunks is not stated in the bead.
 - The W7 bucketed exact route and the rectangle-container route, on which think-pvov, think-yeq9, think-dyyu and think-5klg depend, have no bead.
+
+## Notes
+
+2026-10-15, evening intake pass (think-wnsv), lane D (think-ykg6): the sweep read the table's "held" rows as waits on think-au7j and think-9zd2, both closed on 2026-10-14 with #605 (77fa15c7e). Their rows are done: think-9zd2 replayed Fang's 11 direct certificates on both routes (1.54 CPU-h, all controls refused); think-au7j built replay4d and calibrated it at 1.22x the source's CPU, so think-wu73's complete replay is about 5,250 CPU-h here and its interval-24 subset about 22.4 CPU-h (think-wu73's notes). think-4wgw and think-abjj closed too: abjj decided 17 of the 21 PR #574 comparisons, and 29, 55, 71 and 83 stay gated, 29 on sigma, Daniel's degree-7213 root (think-6gti; #622's N29 certificate, think-30n2, waits on the same). This bead is the backlog's ledger and waits on nothing itself; its open rows wait on the owner's budget or decisions, as the table says.
+
+blocked_on: none

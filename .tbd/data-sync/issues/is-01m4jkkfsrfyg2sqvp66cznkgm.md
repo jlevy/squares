@@ -5,7 +5,7 @@ title: "Stage 4-5: independently review and adopt the pending upper-bound report
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: claude-code@vm
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:51:43.927Z
-updated_at: 2026-10-13T00:55:33.480Z
+updated_at: 2026-10-15T19:58:07.270Z
 started_at: 2026-10-10T09:52:52.837Z
 ---
 The register holds rational upper-bound reports by others at V0/C0 whose next_rung is an independent review of the retained replay and a selected-house decision: T-128 (Couzo, eight), T-130 (Couzo, five), T-131 (Daniel, n = 132), and this pass's #470, #476, #481, #483 and #484 once registered. Several counts now carry more than one candidate (132: T-098 house, T-131, #476, #470; 237, 263, 270, 303: #476 and #481; 267: #470, #476). For each count: the smallest certificate whose complete two-route replay passed, a mapped W2 review of that replay (think-mt6e's rule: verified lane only on a replay here and a mapped review), the earlier house kept as history, and the case record's reported and verified ceilings moved together. Mirror the Gupta adoption (PR #448, #459: confirm_gupta_records.py). Coordinate with PR #403 / #435, which own canonical exact-value integration on the case records.
@@ -103,3 +103,7 @@ Owed after #518 merges (from #551 review A, A1): the four replies of 12 October 
 Owed after #553 merges (from #555 review A, A3): the final replies of 12 October on #438, #481, #488 and #489 say #553 is in review (#438: it registers #500 at 238 and 239 and moves both cases; #481: it registers and adopts #500 at 270 and 305; #488: it moves 270 and 305, keeping T-140 as history; #489: it records #506's 344 as a verified beyond-horizon row). check_requests cannot see that statement go stale (#540). When #553 merges, each of the four gets a one-line follow-up reply saying it merged; in result-requests.yaml the final reply's statement is marked outdated and the follow-up names that reply in corrects. Each entry's notes (#555, 705ba16f5) say the same.
 
 2026-10-13 owner decision (consolidate duplicates): think-lhtz (adopt T-130 and T-128) and think-kkj2 (adopt T-131 at 132) closed as duplicates of this bead. Carried over: preserve the existing selected source drawings (Ry-Xu at 84, 86, 105, 175; Daniel at 270) when a house moves, and keep T-098's certificate as history at 132.
+
+2026-10-15, evening intake pass (think-wnsv), lane D (think-ykg6): the sweep read "The register holds ...", the description's first sentence, as a wait on #470, #476, #481, #483 and #484 (the last four closed on 2026-10-12). The bead waits on none of them: the adoption it asks for landed with #518 (merged 2026-10-12T15:11Z, 42 counts) and #553 (merged 2026-10-12T17:56Z, which moved 270 and 305), and T-138 registers #470. What remains is its open child think-j1a4 (PR #518 B1: adopt_houses supports one pass on one day). Not claimed here (held by claude-code@vm); this bead can close once think-j1a4 closes or is re-parented.
+
+blocked_on: think-j1a4

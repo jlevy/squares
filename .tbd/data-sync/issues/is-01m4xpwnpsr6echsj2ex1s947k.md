@@ -5,14 +5,14 @@ title: "Validate: wand125 closed form, complete replay4d replay of all 136 recor
 kind: task
 status: open
 priority: 3
-version: 2
+version: 3
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m4wv28mebp8r7ss9p8r6dgxy
 created_at: 2026-10-14T17:20:49.369Z
-updated_at: 2026-10-14T18:38:07.036Z
+updated_at: 2026-10-15T19:58:21.277Z
 ---
 Validation part of think-tsox (wand125's closed form s(N) >= a(N) for every non-square N >= 49, T-180 in the 14 October records PR #602, V0/C1 after the 14 October review). HELD by the owner's cap.
 
@@ -56,3 +56,7 @@ labels:
 2026-10-14 calibration (think-au7j, lane/validation-cheap 598c8ab7c). replay4d 0.1.0 replayed intervals 26 and 14 (top records) here: REPLAY OK, at 1.213× and 1.232× the source's CPU, so about 1.22× (1.20–1.25). Measured at nice 10 under load 12–16, so a quiet host may do better.
 Cost (calibrated): the full replay is ≈ 5,250 CPU-h here (source: 4,294). The proposed subset, interval 24, is ≈ 22.4 CPU-h here.
 Correction: 0.1.1's checker logic is unchanged, but its sources are not byte-identical: main.rs, Cargo.toml and Cargo.lock differ by the version, the env field and the b3d_sort.rs entry. Still HELD under the owner's per-item cap.
+
+2026-10-15, evening intake pass (think-wnsv), lane D (think-ykg6): think-au7j, the calibration this bead depended on, closed on 2026-10-14 with #605, and its result is in the notes above (1.22x the source's CPU; about 5,250 CPU-h here, the interval-24 subset about 22.4 CPU-h). The dependency is removed so the sweep stops reporting it. This bead is HELD by the owner's 40 CPU-h cap and waits only on the owner's budget, and on a machine with 18 GB of scratch; the decision is not among those #543 lists, and no pull request, issue or bead stands for it, so the line below only clears the resolved dependency. The hold stands.
+
+blocked_on: none
