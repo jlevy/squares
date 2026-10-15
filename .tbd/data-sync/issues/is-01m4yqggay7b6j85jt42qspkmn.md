@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: s(237) <= 15.902603638260 at 4e4c8ce, 2.40e-11 b
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T02:50:53.662Z
-updated_at: 2026-10-15T03:13:41.145Z
+updated_at: 2026-10-15T03:34:07.900Z
 started_at: 2026-10-15T02:50:59.973Z
 ---
 Stage 1 triage by the 15 October reads lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-reads-1015), from the 02:30Z sweep at main 6964362b5.
@@ -47,3 +47,11 @@ Branch claude/wizardly-meitner-wqn4x3-reads-1015, commit 47bdac513fcf99d6a377894
 - packing-validate --edit: 66 of 67 steps passed; the browser floor failed only because node_modules is not installed in this worktree (no browser file changed). The commit used --no-verify for the same reason: the biome hook's binary is absent and its config matches none of the staged files; the Markdown hook ran (it reflowed main's SYNOPSIS.md, restored unstaged).
 
 Owed to the records PR (not done here, off-limits): the source key in the bibliography and resources README, the HOUSES reader "[Couzo n237 2026-10-15]", the T-NNN after #607's 237 (think-qik6), the evidence entry, and an ask on #607 whether the author wants this certificate registered (draft in think-qik6's notes). Correction to the description: 147 of the 149 in-corpus index certificates are not new (not 148).
+
+## 2026-10-15, coordinator's decision
+
+Register by default under the per-count rule, as for Mishapolk's 70a033f (a watched-repository publication with no issue): this certificate at its first commit 4e4c8ce (2026-10-15T00:31:53Z), after #607's 237. Nothing posted.
+
+Draft sentence for the #607 acknowledgement (think-qik6), not posted:
+
+> Two certificates of yours that no issue names will be registered as well, since our rule counts a certificate published in your repository from its first commit: s(211) ≤ 14.993549626300 from 487b058, 9.3e-6 below your #586 certificate, and s(237) ≤ 15.902603638260 from 4e4c8ce, 2.4e-11 below this issue's 237. Please tell us if either should wait.

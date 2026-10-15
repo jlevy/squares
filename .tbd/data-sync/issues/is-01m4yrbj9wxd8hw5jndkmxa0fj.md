@@ -5,7 +5,7 @@ title: "Watch reads 2026-10-15: bengreff 0699398, BuddenPing 318ab94 and squares
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:05:40.412Z
-updated_at: 2026-10-15T03:06:12.064Z
+updated_at: 2026-10-15T03:34:53.017Z
 started_at: 2026-10-15T03:06:07.321Z
 ---
 The 15 October reads lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-reads-1015) read the watched heads the 02:30Z sweep at main 6964362b5 listed, by blobless clones, and re-read every head with git ls-remote at about 03:10Z (all unchanged). This bead holds the intake-watch.yaml reads the next records PR writes (this lane edits no record), and the read-only triage of the heads with nothing to import.
@@ -52,3 +52,5 @@ The 15 October reads lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-rea
 | 261 | PR #574, T-174 | 2026-10-13T01:58:06Z | 16.6787798753429098149352 | 1.992e-21 below T-169 |
 
 So 318ab94 publishes nothing new, and its sides are above the smallest report at both counts: T-174's at 261, #606's at 146 (T-174's 146 is 1.26e-79 below T-168's). Couzo's 4e4c8ce index holds #606's packing at 146 (regularized display view, credit Evan Daniel) and T-169's at 261 (credit BuddenPing), neither a new report.
+
+2026-10-15, after the 487b058 import (think-nj7h): the couzo-verified-bounds-2026-10-14 packet on this branch pins 487b058 with a scope of the root README, upper_bounds.json, certificates/README.md, n211's files and the 296 beyond-horizon certificates and their metadata. Once it lands, the franciscouzo read through 487b058 needs no bead for those paths; its note should cover the changed paths outside the scope: lower_bounds.json, lower_bound_families.json and lower_bounds.py (the author's closed-form lower-bound index, which restates published bounds), expanded_comparisons.py, import_external.py, expanded_reference_bounds.json, known_best.json, the decimal packings and drawings it deletes or rewrites, and the 22 deleted certificates (superseded copies). Nothing in them to import. Until the packet lands, keep the read with bead think-nj7h.
