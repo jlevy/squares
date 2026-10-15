@@ -50,6 +50,7 @@ class ProgressWriter:
         target.parent.mkdir(parents=True, exist_ok=True)
         self.stream: TextIO = target.open("x", encoding="utf-8")
         self.outcomes: dict[str, str] = {}
+        self.phases = os.environ.pop("PACKING_REACHABLE_TEST_PHASES", "") == "1"
         self._emit("session_start", "")
 
     def _emit(
@@ -59,6 +60,7 @@ class ProgressWriter:
         *,
         outcome: str | None = None,
         exit_status: int | None = None,
+        phase: str | None = None,
     ) -> None:
         row: dict[str, str | int] = {
             "schema": SCHEMA,
@@ -80,6 +82,8 @@ class ProgressWriter:
             row["outcome"] = outcome
         if exit_status is not None:
             row["exit_status"] = exit_status
+        if phase is not None:
+            row["phase"] = phase
         self.stream.write(json.dumps(row, sort_keys=True) + "\n")
         self.stream.flush()
 
@@ -90,6 +94,8 @@ class ProgressWriter:
 
     def pytest_runtest_logreport(self, report: pytest.TestReport) -> None:
         nodeid = report.nodeid
+        if self.phases:
+            self._emit("phase_finish", nodeid, phase=report.when, outcome=report.outcome)
         if report.failed:
             self.outcomes[nodeid] = "failed"
         elif report.skipped and self.outcomes.get(nodeid) != "failed":
