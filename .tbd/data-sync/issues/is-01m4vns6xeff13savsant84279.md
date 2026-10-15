@@ -5,7 +5,7 @@ title: Implement the project changelog, recent PR backfill, and component versio
 kind: epic
 status: in_progress
 priority: 2
-version: 29
+version: 30
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10.local
 labels: []
@@ -37,10 +37,11 @@ child_order_hints:
   - is-01m4xwrdn34k9j93qhgj12vxan
   - is-01m4zmmp3v11y25f6b8c6fjgvq
   - is-01m4zmnhzm48mm1ye1k4rynz0g
+  - is-01m4zs1cht3n97c4bmnqqv0qyh
 hold: null
 hold_until: null
 created_at: 2026-10-13T22:22:58.467Z
-updated_at: 2026-10-15T11:20:27.891Z
+updated_at: 2026-10-15T12:36:49.849Z
 started_at: 2026-10-14T00:46:04.373Z
 ---
 
