@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594)"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:01.303Z
-updated_at: 2026-10-14T14:50:31.664Z
+updated_at: 2026-10-15T03:01:31.276Z
 started_at: 2026-10-14T05:01:05.888Z
 ---
 Stage 1 triage of jlevy/squares#594 (bengreff, Benjamin Greff, opened 2026-10-14T02:06:46Z, labelled intake, no comments when read at 04:44Z): "Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)". "External certificate" is wand125's title template of #279/#280: the author's own certificate in his own repository, not a citation of another's published result.
@@ -91,3 +91,19 @@ Next, the result is registered as reported, and a separate review of the mathema
 packing-validate --push: all 16 edit checks passed (basedpyright and the browser floor included); its reachable-tests phase selected the whole suite and was stopped at the 25-minute limit under a load average near 20, unfinished, no failure reported. The tests reachable from the change then passed directly: 640 passed in 348 s (test_bound_citations, test_acquire_source, test_acquire_original_gzip, test_retained_data, test_retained_json, test_retained_json_layout, test_results_register, test_state_ai_assistance, test_check_archive_annotations, test_certificate_citations, test_evand_mixed_covers, test_intake_sweep, test_check_requests). acquire_source --check: PACKET_MATCHES_ITS_CONTRACT. The lefthook pre-commit hook did not run in this worktree (lefthook not on PATH); packing/resources/README.md was formatted with the pinned flowmark-rs 0.4.0 before the commit, and packet READMEs are excluded from flowmark.
 
 Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-184, s(76) = 9, V0/C0, S3; the author's second route at 06993982 (comment of 14 October) is not yet retained.
+
+## 2026-10-15 reads lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-reads-1015): the second route at 06993982, and #594's comment on the wall segments
+
+**Pin.** bengreff/s76-certificate 06993982e83dba37ca12121bd876396a15571fcb (2026-10-14T08:16:10Z, "Add the second route: zm_mixed alone over the whole region, with R rerun at depth 34"), one commit past the packet's 1cb924f and the head at the 02:30Z sweep. Not retained (no packet pins it). It changes README.md, SHA256SUMS, records/toolchain.txt and verify.sh and adds records/zm_full/ (roots.jsonl.gz, manifest.json, full.log.gz, rerun.txt, rerun_R_depth34.{jsonl,log,sh}) and tools/check_full.py. The cover, the zmx2/zm_mixed composite records and the Lean are unchanged. The tree's SHA256SUMS (158 lines) passes on the extracted archive.
+
+**The source's claim.** zm_mixed.py (ee3e2915, bb89de15, 640fe453, the pinned digests) with verify.sh's flags over all 129,600 roots of [0, 9/2]^2 x u in [0, 1/2] at pitch 1/20 x 1/20 x 1/32, depth 24, 24 processes: 2,227,114 boxes, 129,599 roots certified, 6 boxes uncertified in one root R = [27/20, 7/5] x [13/10, 27/20] x [1/4, 9/32]; R alone at depth 34 certifies with 13,767 boxes, max depth 26, none uncertified. 651,314 CPU-s (181 CPU-h, 27,729 s wall on 24 processes, i7-14700K) and 2,661 CPU-s for R. R lies in the corner inherited from wand125's s(59) cover; the README says wand125's own full s(59) zm_mixed run left the same 6 boxes in this root, and the same 13,767 at depth 34 (not checked here). So the covering statement rests on zm_mixed's exact rationals alone, without zmx2's binary64.
+
+**Records audit here (seconds; my script, not the author's).** roots.jsonl.gz decompresses to the manifest's records digest 564bac26108eaae6...; one header (cover b6a1214b..., checker digests as pinned, D4, depth 24, pitch 1/20, ubins 16, cert_mode, the whole region); 129,600 records, no duplicates, exactly the 90 x 90 x 16 grid cells; every census sum equals the manifest's (boxes 2,227,114; CPU 651,314 s); max depth 24; exactly one root with uncertified boxes, R, UNCERT 6 with six listed boxes; the rerun record's header names the same digests at depth 34 and region R, and certifies R with 0 uncertified. Per-root CPU: median 0.07 s, p99 92 s, max 2,270 s (R). check_full.py (stdlib, 59 lines) was read, not run; it does not check the rerun's other settings beyond cert_mode, D4, pitch and ubins, nor the manifest's records digest, which this audit does.
+
+**What it adds to T-184's rung.** Nothing moves by itself: T-184 stays V0/C0 until the replay evidence and the review land. It gives the review a second route that drops two trust elements of the first, zmx2's outward-rounded binary64 and the composite's tiling and D4 fold over a union of runs, leaving one exact-rational checker (still Daniel's, so same-implementation, no independence gain for the C rung). Its records agree with the composite: the 64 sub-roots of the four zmx2-failing roots are certified in the full run too, and R is certified by zmx2 in the first route. T-184's note "The source's full zm_mixed.py pass over all 129,600 D4 roots is not at the pinned revision" is out of date once a packet pins 06993982; that packet and an evidence update are this bead's (new revision, no new entry).
+
+**Replay, priced (not run).** Whole second route: 181 CPU-h at the source; here about 155 to 181 CPU-h (the triage's 64 sub-roots ran at 0.86x the source's CPU): HELD under the owner's 40 CPU-h cap (think-lh7d). R alone at depth 34: 2,661 CPU-s, single process, about 40 to 45 min wall here: over this lane's 30-minute ceiling, not run; runnable within the cap. A random sample of roots is cheap (mean 5 CPU-s a root, so 200 roots is about 17 CPU-min) but a sampled replay is never confirmation. The composite replay already done in triage (zmx2 239 CPU-s + zm_mixed 1,168 CPU-s) remains the cheap C3 route.
+
+**#594 issuecomment-6181807169 (bengreff, 2026-10-15T00:50:37Z), the answer to the triage's question.** The sixteen wall segments were not intended; they are LP residue. Every 1/20-lattice point on an integer line had a candidate segment of length 2/1000 along that line (one along each line at a crossing: 81 on the wall x = 0 inside the cross, with images); the interior-point solve without crossover gave weight 0 to all but four D4 orbits, at the crossings (0, 3), (0, 4), (0, 5), (0, 6) and images, about 1.04e-12; export_cover.py rounds every weight up to the unit 1/(4e8), so each became one unit. Rounding up only adds mass, and their 4e-8 is in the stated total. The horizontal partners at those crossings ([0, 2/1000] and [0, 1/16] on y = 3..6 and images) also carry one unit each, for the same reason. "The pinned cover stays as it is." This agrees with the triage's control (zmx2 decides every root identically without the 16 wall segments). Nothing to register; the review should record the answer. #594's read_through moves to this comment in the next records PR.
+
+**Intake-watch read for the records PR:** bengreff/s76-certificate read_through 06993982e83dba37ca12121bd876396a15571fcb, read_on 2026-10-15, bead think-osvq (the second route, owned until a packet pins it).
