@@ -8649,3 +8649,32 @@ issues:
     notes: The project opened this issue; it reports no result, and no acknowledgement is owed on it. `check_requests`
       still lists an acknowledgement as due, because the record has no state for an issue its owner opened
       (think-abcm).
+  - number: 624
+    title: 'n366 new best known packing: registration request'
+    author: mstrmg
+    opened: '2026-10-15'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'Miles Gray (mstrmg) reports an exact certificate at 366, beyond the case corpus: gist c3350a7e
+      at 31e69614 (n366.cert, SHA-256 9cd599bb...), made by removing three squares from Francisco Couzo''s
+      02f9690 packing of 369 and optimizing again; AI assistance disclosed. Both exact checkers here accept
+      it at its own side, 19.738804240214197, which is 3.9e-7 below the side the issue prints. Not imported:
+      Couzo''s 4e4c8ce index, first committed before the issue, is smaller at 366.'
+    read_through: '2026-10-15T20:02:39Z'
+    results:
+    - key: n366
+      claim: s(366) <= 19.738804630679, by an exact certificate whose own side is 19738804240214197/1000000000000000.
+      source: body
+      not_registered: 'An earlier report is smaller. franciscouzo/square-packing at 4e4c8ce, first committed
+        2026-10-15T00:31:53Z, before this issue at 20:02:39Z, publishes certificates/best/n366.cert (SHA-256
+        bfd83f90...) at 14 + 4√2 scaled by 1 + 1e-24, 19.656854249493 rounded up, 8.19e-2 below; its index
+        credits PingYou Ltd (BuddenPing), and its 341 rows beyond 324 are think-yfoo''s import. Göbel''s strip
+        construction for 369, 19 + √2/2, is 3.17e-2 below as well (#613). Not imported.'
+      queued: false
+    beads:
+    - think-hd6a
+    answer_bead: think-hd6a
+    replies: []
+    close_when: The reply saying why the certificate is not recorded is posted and the author has had the
+      chance to answer.
