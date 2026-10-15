@@ -995,6 +995,68 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
             "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
             "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Rendered on this branch over main 4c9af690 with the browser's math pass, once "
+            "with main's versions of these paths and once with the branch's, the Markdown "
+            "differs only in the live register count beside T-018, 187 results registered "
+            "so far and now 192, and the HTML in that count and in where an empty style "
+            "attribute falls in one formula's span, which also moves between two renders "
+            "of the branch alone. The claim documents change only the revision their links "
+            "pin. A register count follows the site's data and is not a revision of the "
+            "paper, so the explainer keeps v0.4.7; the site takes v0.7.10."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Rendered on this branch over main 4c9af690 at one link revision, once with "
+            "main's versions of these paths and once with the branch's, the three papers' "
+            "HTML, Markdown and PDF are byte-identical. The register gains T-188 to T-192 "
+            "and edits T-081's claim and T-183's headline, the importer gains three "
+            "readers, the About page a card for bengreff/s95-certificate, the requests "
+            "record replies and entries, and the source register 267 beyond-horizon rows; "
+            "none of the three papers reads any of them, so each keeps its edition: "
+            "v0.1.7, v0.1.0 and v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
             "packing/devtools/regularized_drawings.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/src/sqpack/cli/validate.py",
