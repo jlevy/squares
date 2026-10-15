@@ -1038,7 +1038,7 @@ force). These labels describe the retained evidence and confirmation; the mathem
 claim is the proved lower bound above.
 
 The detailed lesson below starts with the simpler point-only T-018 certificate;
-[the standalone v0.4.6 explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html#proof-of-the-new-lower-bound)
+[the standalone v0.4.7 explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html#proof-of-the-new-lower-bound)
 uses it as a visual worked example, then gives the threshold-counting and dilation proof
 of T-025 and T-026. The numerical $3.81$ result is not a premise of T-026. Keeping the
 T-018 proof in full also gives readers an assurance bridge: its short standard-library
@@ -1403,8 +1403,8 @@ To follow $n = 11$ past this tutorial’s scope, read the synopsis’s
 [`n = 11`, End to End](SYNOPSIS.md#n--11-end-to-end).
 That section is a dated account of the case before T-060 settled it.
 It covers the ceilings these certificate languages reach, the external certificate that
-held the verified lower bound before T-060, and why no counting certificate can prove
-$s(11)$ equal to Trump’s side.
+held the verified lower bound before T-060, and why the strict-core counting
+certificates studied there cannot prove $s(11)$ equal to Trump’s side.
 
 ## 7. Global Optimality by Exclusion and Capture
 
@@ -1427,8 +1427,7 @@ The strict-core counting certificates developed above prove $s(n) \ge L$ below t
 side.
 Their strict shrink and budget mechanism cannot reach that side, for the reason the
 synopsis’s [`n = 11` account](SYNOPSIS.md#n--11-end-to-end) gives.
-Proving that a known packing is optimal needs an argument of a different shape, in three
-parts.
+The exclusion-and-capture route to proving optimality has three parts.
 
 - **The local half.** Nothing near the known packing is smaller: every packing whose
   coordinates lie within an explicit radius of it, in a sense the theorem makes precise,

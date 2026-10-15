@@ -20,14 +20,10 @@
       caps: style.fontVariantCaps,
     };
   };
-  // Measure the page's ordinary H3 role outside News, without copying its CSS.
-  const reference = document.createElement("h3");
-  reference.textContent = "Reference heading";
-  news.parentElement?.append(reference);
-  const referenceH3 = typography(reference);
-  reference.remove();
+  // The homepage's real paper title supplies the shared article-heading role.
+  const reference = document.querySelector(".site-card .site-article-header > h3");
   return {
-    reference_h3: referenceH3,
+    reference_article_title: reference ? typography(reference) : null,
     text_color: getComputedStyle(news).color,
     family: getComputedStyle(news).fontFamily,
     heading: { family: headingStyle.fontFamily, transform: headingStyle.textTransform },

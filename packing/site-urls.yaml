@@ -2932,6 +2932,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-15'
   status: live
+- path: atlas/regularized/n-204.svg
+  canonical: atlas/regularized/n-204.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-15'
+  status: live
 - path: atlas/regularized/n-206.svg
   canonical: atlas/regularized/n-206.svg
   kind: asset-file
@@ -3482,7 +3490,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
 - path: cases/106.html
   canonical: cases/106.html
@@ -3906,7 +3914,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
 - path: cases/154.html
   canonical: cases/154.html
@@ -4386,7 +4394,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
 - path: cases/208.html
   canonical: cases/208.html
@@ -4690,7 +4698,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
 - path: cases/242.html
   canonical: cases/242.html
@@ -4866,7 +4874,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
 - path: cases/262.html
   canonical: cases/262.html
@@ -4962,7 +4970,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
 - path: cases/273.html
   canonical: cases/273.html
@@ -13504,7 +13512,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13522,6 +13530,7 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-561-certificate-report
+    - E-couzo-561-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-certificates-2026-10-12/README.md
     - packing/resources/web/couzo-certificates-2026-10-12/acquisition/claims.json
@@ -13530,13 +13539,45 @@ urls:
     - packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n237.cert
     - packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n271.cert
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-couzo-561-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 156
+        - 176
+        - 237
+        - 271
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo certificates 2026-10-12]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-couzo-561-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-certificates-2026-10-12/README.md
+      - packing/resources/web/couzo-certificates-2026-10-12/acquisition/claims.json
+      - packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n156.cert
+      - packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n176.cert
+      - packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n237.cert
+      - packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n271.cert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-162.html
   canonical: result/t-162.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13553,6 +13594,7 @@ urls:
     builds_on: null
     evidence:
     - E-ostashev-562-certificate-report
+    - E-ostashev-562-exact-feasibility
     artifacts:
     - packing/resources/web/dostashev-compositions-2026-10-12/README.md
     - packing/resources/web/dostashev-compositions-2026-10-12/acquisition/claims.json
@@ -13560,6 +13602,36 @@ urls:
     - packing/resources/web/dostashev-compositions-2026-10-12/source/records/n0204.sqcert
     - packing/resources/web/dostashev-compositions-2026-10-12/source/records/n0303.sqcert
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-ostashev-562-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 129
+        - 204
+        - 303
+      established: null
+      attribution:
+        source_keys:
+        - '[Ostashev compositions 2026-10-12]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-ostashev-562-certificate-report
+      artifacts:
+      - packing/resources/web/dostashev-compositions-2026-10-12/README.md
+      - packing/resources/web/dostashev-compositions-2026-10-12/acquisition/claims.json
+      - packing/resources/web/dostashev-compositions-2026-10-12/source/records/n0129.sqcert
+      - packing/resources/web/dostashev-compositions-2026-10-12/source/records/n0204.sqcert
+      - packing/resources/web/dostashev-compositions-2026-10-12/source/records/n0303.sqcert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-163.html
   canonical: result/t-163.html
   kind: result
@@ -13604,7 +13676,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13619,18 +13691,45 @@ urls:
     builds_on: null
     evidence:
     - E-pingyou-564-certificate-report
+    - E-pingyou-564-exact-feasibility
     artifacts:
     - packing/resources/web/pingyou-n302-certificate-2026-10-12/README.md
     - packing/resources/web/pingyou-n302-certificate-2026-10-12/acquisition/claims.json
     - packing/resources/web/pingyou-n302-certificate-2026-10-12/facts/n-302.yaml.gz
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-pingyou-564-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 302
+      established: null
+      attribution:
+        source_keys:
+        - '[PingYou n302 certificate 2026-10-12]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-pingyou-564-certificate-report
+      artifacts:
+      - packing/resources/web/pingyou-n302-certificate-2026-10-12/README.md
+      - packing/resources/web/pingyou-n302-certificate-2026-10-12/acquisition/claims.json
+      - packing/resources/web/pingyou-n302-certificate-2026-10-12/facts/n-302.yaml.gz
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-165.html
   canonical: result/t-165.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13645,18 +13744,45 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-583-586-certificate-report
+    - E-couzo-586-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-certificates-2026-10-13/README.md
     - packing/resources/web/couzo-certificates-2026-10-13/acquisition/claims.json
     - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n176.cert
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-couzo-586-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 176
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo certificates 2026-10-13]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-couzo-583-586-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-certificates-2026-10-13/README.md
+      - packing/resources/web/couzo-certificates-2026-10-13/acquisition/claims.json
+      - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n176.cert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-166.html
   canonical: result/t-166.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13671,18 +13797,45 @@ urls:
     builds_on: null
     evidence:
     - E-pingyou-504-refinement-report
+    - E-pingyou-504-refinement-exact-feasibility
     artifacts:
     - packing/resources/web/pingyou-n153-refinement-2026-10-12/README.md
     - packing/resources/web/pingyou-n153-refinement-2026-10-12/acquisition/claims.json
     - packing/resources/web/pingyou-n153-refinement-2026-10-12/facts/n-153.yaml.gz
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-pingyou-504-refinement-exact-feasibility), with the third route and
+      the review among its artifacts, and its claim says how the house adoption of 15 October 2026
+      stands at its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 153
+      established: null
+      attribution:
+        source_keys:
+        - '[PingYou n153 refinement 2026-10-12]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-pingyou-504-refinement-report
+      artifacts:
+      - packing/resources/web/pingyou-n153-refinement-2026-10-12/README.md
+      - packing/resources/web/pingyou-n153-refinement-2026-10-12/acquisition/claims.json
+      - packing/resources/web/pingyou-n153-refinement-2026-10-12/facts/n-153.yaml.gz
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-167.html
   canonical: result/t-167.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13697,18 +13850,45 @@ urls:
     builds_on: null
     evidence:
     - E-pingyou-503-refinement-report
+    - E-pingyou-503-refinement-exact-feasibility
     artifacts:
     - packing/resources/web/pingyou-n207-refinement-2026-10-12/README.md
     - packing/resources/web/pingyou-n207-refinement-2026-10-12/acquisition/claims.json
     - packing/resources/web/pingyou-n207-refinement-2026-10-12/facts/n-207.yaml.gz
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-pingyou-503-refinement-exact-feasibility), with the third route and
+      the review among its artifacts, and its claim says how the house adoption of 15 October 2026
+      stands at its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 207
+      established: null
+      attribution:
+        source_keys:
+        - '[PingYou n207 refinement 2026-10-12]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-pingyou-503-refinement-report
+      artifacts:
+      - packing/resources/web/pingyou-n207-refinement-2026-10-12/README.md
+      - packing/resources/web/pingyou-n207-refinement-2026-10-12/acquisition/claims.json
+      - packing/resources/web/pingyou-n207-refinement-2026-10-12/facts/n-207.yaml.gz
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-168.html
   canonical: result/t-168.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13723,18 +13903,45 @@ urls:
     builds_on: null
     evidence:
     - E-pingyou-566-certificate-report
+    - E-pingyou-566-exact-feasibility
     artifacts:
     - packing/resources/web/pingyou-n146-refinement-2026-10-12/README.md
     - packing/resources/web/pingyou-n146-refinement-2026-10-12/acquisition/claims.json
     - packing/resources/web/pingyou-n146-refinement-2026-10-12/facts/n-146.yaml.gz
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-pingyou-566-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 146
+      established: null
+      attribution:
+        source_keys:
+        - '[PingYou n146 refinement 2026-10-12]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-pingyou-566-certificate-report
+      artifacts:
+      - packing/resources/web/pingyou-n146-refinement-2026-10-12/README.md
+      - packing/resources/web/pingyou-n146-refinement-2026-10-12/acquisition/claims.json
+      - packing/resources/web/pingyou-n146-refinement-2026-10-12/facts/n-146.yaml.gz
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-169.html
   canonical: result/t-169.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13749,18 +13956,45 @@ urls:
     builds_on: null
     evidence:
     - E-pingyou-567-certificate-report
+    - E-pingyou-567-exact-feasibility
     artifacts:
     - packing/resources/web/pingyou-n261-refinement-2026-10-12/README.md
     - packing/resources/web/pingyou-n261-refinement-2026-10-12/acquisition/claims.json
     - packing/resources/web/pingyou-n261-refinement-2026-10-12/facts/n-261.yaml.gz
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-pingyou-567-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 261
+      established: null
+      attribution:
+        source_keys:
+        - '[PingYou n261 refinement 2026-10-12]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-pingyou-567-certificate-report
+      artifacts:
+      - packing/resources/web/pingyou-n261-refinement-2026-10-12/README.md
+      - packing/resources/web/pingyou-n261-refinement-2026-10-12/acquisition/claims.json
+      - packing/resources/web/pingyou-n261-refinement-2026-10-12/facts/n-261.yaml.gz
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-170.html
   canonical: result/t-170.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13775,18 +14009,45 @@ urls:
     builds_on: null
     evidence:
     - E-pingyou-568-certificate-report
+    - E-pingyou-568-exact-feasibility
     artifacts:
     - packing/resources/web/pingyou-n105-refinement-2026-10-12/README.md
     - packing/resources/web/pingyou-n105-refinement-2026-10-12/acquisition/claims.json
     - packing/resources/web/pingyou-n105-refinement-2026-10-12/facts/n-105.yaml.gz
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-pingyou-568-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 105
+      established: null
+      attribution:
+        source_keys:
+        - '[PingYou n105 refinement 2026-10-12]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-pingyou-568-certificate-report
+      artifacts:
+      - packing/resources/web/pingyou-n105-refinement-2026-10-12/README.md
+      - packing/resources/web/pingyou-n105-refinement-2026-10-12/acquisition/claims.json
+      - packing/resources/web/pingyou-n105-refinement-2026-10-12/facts/n-105.yaml.gz
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-171.html
   canonical: result/t-171.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13801,18 +14062,45 @@ urls:
     builds_on: null
     evidence:
     - E-pingyou-569-certificate-report
+    - E-pingyou-569-exact-feasibility
     artifacts:
     - packing/resources/web/pingyou-n272-refinement-2026-10-12/README.md
     - packing/resources/web/pingyou-n272-refinement-2026-10-12/acquisition/claims.json
     - packing/resources/web/pingyou-n272-refinement-2026-10-12/facts/n-272.yaml.gz
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-pingyou-569-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 272
+      established: null
+      attribution:
+        source_keys:
+        - '[PingYou n272 refinement 2026-10-12]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-pingyou-569-certificate-report
+      artifacts:
+      - packing/resources/web/pingyou-n272-refinement-2026-10-12/README.md
+      - packing/resources/web/pingyou-n272-refinement-2026-10-12/acquisition/claims.json
+      - packing/resources/web/pingyou-n272-refinement-2026-10-12/facts/n-272.yaml.gz
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-172.html
   canonical: result/t-172.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13827,18 +14115,45 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-583-certificate-report
+    - E-couzo-583-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-issue583-2026-10-13/README.md
     - packing/resources/web/couzo-issue583-2026-10-13/acquisition/claims.json
     - packing/resources/web/couzo-issue583-2026-10-13/source/certificates/n154.cert
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-couzo-583-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 154
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue-583 certificates 2026-10-13]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-couzo-583-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-issue583-2026-10-13/README.md
+      - packing/resources/web/couzo-issue583-2026-10-13/acquisition/claims.json
+      - packing/resources/web/couzo-issue583-2026-10-13/source/certificates/n154.cert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-173.html
   canonical: result/t-173.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13854,19 +14169,48 @@ urls:
     builds_on: null
     evidence:
     - E-mishapolk-573-certificate-report
+    - E-mishapolk-573-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-exact-certificates-2026-10-12/README.md
     - packing/resources/web/mishapolk-exact-certificates-2026-10-12/acquisition/claims.json
     - packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/n-153.yaml.gz
     - packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/n-207.yaml.gz
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-mishapolk-573-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 153
+        - 207
+      established: null
+      attribution:
+        source_keys:
+        - '[Mishapolk exact certificates 2026-10-12]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-mishapolk-573-certificate-report
+      artifacts:
+      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/README.md
+      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/acquisition/claims.json
+      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/n-153.yaml.gz
+      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/n-207.yaml.gz
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-174.html
   canonical: result/t-174.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -13949,6 +14293,8 @@ urls:
     evidence:
     - E-pingyou-574-certificate-report
     - E-pingyou-574-algebraic-report
+    - E-pingyou-574-exact-feasibility
+    - E-pingyou-574-algebraic-feasibility
     artifacts:
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json
@@ -13960,6 +14306,8 @@ urls:
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n153.json.xz
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n207.json.xz
     - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n302.json.xz
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md
   amendments:
   - date: '2026-10-14'
     reason: 'Cite the receipt of PR #574''s 17 exactly decided comparisons (campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json)
@@ -14055,13 +14403,110 @@ urls:
       - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n153.json.xz
       - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n207.json.xz
       - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n302.json.xz
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-pingyou-574-exact-feasibility and E-pingyou-574-algebraic-feasibility),
+      with the third route and the review among its artifacts, and its claim says how the house adoption
+      of 15 October 2026 stands at its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 68
+        - 70
+        - 84
+        - 86
+        - 88
+        - 102
+        - 103
+        - 105
+        - 108
+        - 110
+        - 123
+        - 126
+        - 127
+        - 129
+        - 130
+        - 131
+        - 132
+        - 146
+        - 153
+        - 155
+        - 156
+        - 172
+        - 175
+        - 176
+        - 179
+        - 180
+        - 181
+        - 182
+        - 199
+        - 204
+        - 206
+        - 207
+        - 208
+        - 209
+        - 210
+        - 211
+        - 228
+        - 232
+        - 236
+        - 237
+        - 238
+        - 239
+        - 240
+        - 241
+        - 258
+        - 259
+        - 261
+        - 263
+        - 264
+        - 266
+        - 267
+        - 268
+        - 269
+        - 270
+        - 271
+        - 272
+        - 273
+        - 292
+        - 295
+        - 297
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+      established: null
+      attribution:
+        source_keys:
+        - '[PingYou PR 574 certificates 2026-10-13]'
+        published: '2026-10-13'
+      builds_on: null
+      evidence:
+      - E-pingyou-574-certificate-report
+      - E-pingyou-574-algebraic-report
+      artifacts:
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/algebraic-claims.json
+      - packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json
+      - packing/devtools/algebraic_witness_reports.py
+      - packing/devtools/upper_bound_reports.py
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n070.json.xz
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n153.json.xz
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n207.json.xz
+      - packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/algebraic-route1-n302.json.xz
 - path: result/t-175.html
   canonical: result/t-175.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -14078,6 +14523,7 @@ urls:
     builds_on: null
     evidence:
     - E-ostashev-575-certificate-report
+    - E-ostashev-575-exact-feasibility
     artifacts:
     - packing/resources/web/dostashev-merged-bands-2026-10-13/README.md
     - packing/resources/web/dostashev-merged-bands-2026-10-13/acquisition/claims.json
@@ -14085,6 +14531,36 @@ urls:
     - packing/resources/web/dostashev-merged-bands-2026-10-13/source/records/n0241.sqcert
     - packing/resources/web/dostashev-merged-bands-2026-10-13/source/records/n0304.sqcert
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-ostashev-575-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 211
+        - 241
+        - 304
+      established: null
+      attribution:
+        source_keys:
+        - '[Ostashev merged bands 2026-10-13]'
+        published: '2026-10-13'
+      builds_on: null
+      evidence:
+      - E-ostashev-575-certificate-report
+      artifacts:
+      - packing/resources/web/dostashev-merged-bands-2026-10-13/README.md
+      - packing/resources/web/dostashev-merged-bands-2026-10-13/acquisition/claims.json
+      - packing/resources/web/dostashev-merged-bands-2026-10-13/source/records/n0211.sqcert
+      - packing/resources/web/dostashev-merged-bands-2026-10-13/source/records/n0241.sqcert
+      - packing/resources/web/dostashev-merged-bands-2026-10-13/source/records/n0304.sqcert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-176.html
   canonical: result/t-176.html
   kind: result
@@ -14799,7 +15275,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -14818,6 +15294,8 @@ urls:
     evidence:
     - E-couzo-583-certificate-report
     - E-couzo-583-586-certificate-report
+    - E-couzo-583-exact-feasibility
+    - E-couzo-586-n302-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-issue583-2026-10-13/README.md
     - packing/resources/web/couzo-issue583-2026-10-13/acquisition/claims.json
@@ -14825,13 +15303,45 @@ urls:
     - packing/resources/web/couzo-issue583-2026-10-13/source/certificates/n241.cert
     - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n302.cert
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-couzo-583-exact-feasibility and E-couzo-586-exact-feasibility), with
+      the third route and the review among its artifacts, and its claim says how the house adoption
+      of 15 October 2026 stands at its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 211
+        - 241
+        - 302
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue-583 certificates 2026-10-13]'
+        - '[Couzo certificates 2026-10-13]'
+        published: '2026-10-13'
+      builds_on: null
+      evidence:
+      - E-couzo-583-certificate-report
+      - E-couzo-583-586-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-issue583-2026-10-13/README.md
+      - packing/resources/web/couzo-issue583-2026-10-13/acquisition/claims.json
+      - packing/resources/web/couzo-issue583-2026-10-13/source/certificates/n211.cert
+      - packing/resources/web/couzo-issue583-2026-10-13/source/certificates/n241.cert
+      - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n302.cert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-182.html
   canonical: result/t-182.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -14848,6 +15358,7 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-583-586-certificate-report
+    - E-couzo-586-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-certificates-2026-10-13/README.md
     - packing/resources/web/couzo-certificates-2026-10-13/acquisition/claims.json
@@ -14855,13 +15366,43 @@ urls:
     - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n211.cert
     - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n241.cert
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-couzo-586-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 154
+        - 211
+        - 241
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo certificates 2026-10-13]'
+        published: '2026-10-13'
+      builds_on: null
+      evidence:
+      - E-couzo-583-586-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-certificates-2026-10-13/README.md
+      - packing/resources/web/couzo-certificates-2026-10-13/acquisition/claims.json
+      - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n154.cert
+      - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n211.cert
+      - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n241.cert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-183.html
   canonical: result/t-183.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -14876,11 +15417,38 @@ urls:
     builds_on: null
     evidence:
     - E-mishapolk-593-certificate-report
+    - E-mishapolk-593-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-records-2026-10-14/README.md
     - packing/resources/web/mishapolk-records-2026-10-14/acquisition/claims.json
     - packing/resources/web/mishapolk-records-2026-10-14/facts/n-237.yaml.gz
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+  amendments:
+  - date: '2026-10-15'
+    reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-mishapolk-593-exact-feasibility), with the third route and the review
+      among its artifacts, and its claim says how the house adoption of 15 October 2026 stands at
+      its counts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 237
+      established: null
+      attribution:
+        source_keys:
+        - '[Mishapolk records 2026-10-14]'
+        published: '2026-10-13'
+      builds_on: null
+      evidence:
+      - E-mishapolk-593-certificate-report
+      artifacts:
+      - packing/resources/web/mishapolk-records-2026-10-14/README.md
+      - packing/resources/web/mishapolk-records-2026-10-14/acquisition/claims.json
+      - packing/resources/web/mishapolk-records-2026-10-14/facts/n-237.yaml.gz
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-184.html
   canonical: result/t-184.html
   kind: result

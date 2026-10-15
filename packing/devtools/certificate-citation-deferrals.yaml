@@ -29,3 +29,17 @@ deferrals:
       top, and no count: a sample sets no rung. A case record cites it once a complete
       replay moves the closed form's verified lane, which think-wu73 holds over the owner's
       40 CPU-hour cap.
+  - evidence: E-pingyou-574-algebraic-feasibility
+    results: [T-174]
+    bead: think-9v2k
+    blocked_on: >-
+      the owner's decision RP-3 of
+      docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md
+    recorded: '2026-10-15'
+    reason: >-
+      PR 574's algebraic certificates at 70, 153, 207 and 302 are replayed on one route,
+      sqpack's exact witness verifier over each field. No house reader rebuilds an
+      algebraic side, so the house selection leaves them out; at 70, 153 and 207 they are
+      the smallest sides known, and whether a verified ceiling may rest on that one route
+      is the owner's (RP-3). A case record cites the evidence once a house adopts one, or
+      the owner's answer says where it belongs.

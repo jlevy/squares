@@ -202,3 +202,6 @@ def test_news_schema_uses_the_shared_topic_vocabulary() -> None:
     assert site_topics.topic_label("upper-bound") == "Upper bound"
     with pytest.raises(ValueError, match="unknown topic"):
         site_topics.topic_label("unregistered")
+    with pytest.raises(ValueError, match="unknown topic"):
+        site_topics.topic_label("documentation")
+    assert 'value="documentation"' not in render_changelog.news_filters()

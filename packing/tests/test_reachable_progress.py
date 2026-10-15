@@ -29,6 +29,9 @@ def _environment(stem: Path, *, workers: int) -> dict[str, str]:
         "PACKING_REACHABLE_TEST_SOURCE_COMMIT": SOURCE,
         "PACKING_REACHABLE_TEST_WORKERS": str(workers),
         "PACK_JOBS": "1",
+        "PACKING_REACHABLE_TEST_LANE": "quick",
+        "PACKING_REACHABLE_TEST_MARKER": validate.QUICK_TESTS,
+        "PACKING_REACHABLE_TEST_EXCLUSIONS": "slow, exhaustive_exact",
     }
 
 
@@ -106,6 +109,9 @@ def test_two_workers_write_separate_complete_progress_and_junit(tmp_path: Path) 
             assert row["command_id"] == "child"
             assert row["worker_id"] == worker
             assert row["pack_jobs"] == "1"
+            assert row["lane"] == "quick"
+            assert row["marker"] == validate.QUICK_TESTS
+            assert row["exclusions"] == "slow, exhaustive_exact"
             assert row["xdist_workers"] == 2
             assert isinstance(row["monotonic_ns"], int)
             assert datetime.fromisoformat(str(row["timestamp_utc"])).tzinfo is not None
@@ -210,7 +216,7 @@ def test_wrapper_binds_child_receipts_to_parent_run_and_source(
     assert reachable_tests.main(["--run", "-n", "2"]) == 7
     assert len(commands) == 1
     command = commands[0]
-    assert command[command.index("-m", 2) :][:2] == ("-m", "not exhaustive_exact")
+    assert command[command.index("-m", 2) :][:2] == ("-m", validate.QUICK_TESTS)
     assert command[command.index("-n") :][:2] == ("-n", "2")
     assert "--durations=0" in command
     assert "-p" in command
@@ -221,6 +227,9 @@ def test_wrapper_binds_child_receipts_to_parent_run_and_source(
     assert child["PACKING_REACHABLE_TEST_RUN_ID"] == "parent-run"
     assert child["PACKING_REACHABLE_TEST_SOURCE_COMMIT"] == SOURCE
     assert child["PACKING_REACHABLE_TEST_WORKERS"] == "2"
+    assert child["PACKING_REACHABLE_TEST_LANE"] == "quick"
+    assert child["PACKING_REACHABLE_TEST_MARKER"] == validate.QUICK_TESTS
+    assert child["PACKING_REACHABLE_TEST_EXCLUSIONS"] == "slow, exhaustive_exact"
 
 
 def test_wrapper_refuses_receipts_inside_the_source_checkout(
@@ -310,3 +319,8 @@ def test_pool_phases_have_distinct_receipts_and_effective_resource_identity(
         assert environment["PACKING_REACHABLE_TEST_SOURCE_COMMIT"] == SOURCE
         assert environment["PACKING_REACHABLE_TEST_WORKERS"] == workers
         assert environment["PACK_JOBS"] == pack_jobs
+        assert environment["PACKING_REACHABLE_TEST_LANE"] == "quick"
+        assert environment["PACKING_REACHABLE_TEST_EXCLUSIONS"] == "slow, exhaustive_exact"
+        assert (
+            environment["PACKING_REACHABLE_TEST_MARKER"] == command[command.index("-m", 2) + 1]
+        )

@@ -42,6 +42,9 @@ class ProgressWriter:
         self.source_commit = source_commit
         self.workers = workers
         self.pack_jobs = os.environ.get("PACK_JOBS", "")
+        self.lane = os.environ.get("PACKING_REACHABLE_TEST_LANE", "unspecified")
+        self.marker = os.environ.get("PACKING_REACHABLE_TEST_MARKER", "")
+        self.exclusions = os.environ.get("PACKING_REACHABLE_TEST_EXCLUSIONS", "unspecified")
         self.command_id = stem.name
         target = Path(f"{stem}.progress-{worker_id}.jsonl")
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -68,6 +71,9 @@ class ProgressWriter:
             "timestamp_utc": datetime.now(UTC).isoformat(),
             "monotonic_ns": time.monotonic_ns(),
             "pack_jobs": self.pack_jobs,
+            "lane": self.lane,
+            "marker": self.marker,
+            "exclusions": self.exclusions,
             "xdist_workers": self.workers,
         }
         if outcome is not None:

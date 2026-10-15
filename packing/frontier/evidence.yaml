@@ -33549,6 +33549,16 @@ evidence:
     certificate: packing/resources/web/couzo-certificates-2026-10-12/source/certificates/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        four certificates T-161 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is E-couzo-561-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 9 exact rational certificates at
@@ -33557,12 +33567,105 @@ evidence:
       controls passed their required outcomes on both routes, 2519208 pair decisions; summed
       over the 27 jobs, the receipt records 601.97 route CPU seconds and 939.01 job wall
       seconds, the longest job 97.82 seconds. Every positive clears every wall by at least
-      5.00e-21 and every pair by at least 9.99e-21. Independent review and confirmation
-      remain pending. The source's own checkers were not run here. The two maintained
-      routes, the sqpack rational witness verifier and the independent rational corner
-      checker, share certificate parsing, half-angle conversion, Fraction arithmetic and the
-      separating-axis method. No two independent methods, human oversight or optimality is
-      claimed.
+      5.00e-21 and every pair by at least 9.99e-21. The repository replay and its review are
+      E-couzo-561-exact-feasibility. The source's own checkers were not run here. The two
+      maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic
+      and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.
+  - id: E-couzo-561-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [156, 176, 237, 271]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo certificates 2026-10-12]'
+    certificate: packing/resources/web/couzo-certificates-2026-10-12/source/certificates/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports couzo-certificates-2026-10-12
+      check --replay decided all 27 retained jobs again through both maintained routes and
+      held each to its retained row (all equal, 786 s, 23:11Z to 23:24Z on 2026-10-14);
+      check-claims rebuilt the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 with '#561' among the 14
+      October imports and --upstream for each packet decided the four certificates the
+      register cites by the third route with six controls each and, with the scopes fetched
+      at their pins, held each retained file to its upstream bytes (no disagreement; 28
+      certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the four certificates at n = 156, 176, 237, 271 that T-161 cites, every wall and
+          every pair decided by both maintained routes and again by the third route; the
+          kernel's and the third route's controls are retained separately
+        checked: 4
+        of: 4
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says earlier search code and submissions were prepared with Claude Code
+          and the continuing search, verification orchestration and request with OpenAI
+          Codex; the routes here were written by Claude in separate prompts and share no
+          code with the producer's search.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 27 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the four
+        certificates T-161 cites and reached all 24 of its controls' required outcomes.
+        Findings RQ-1 to RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      156, 176, 237, 271, 338, 344, 375, 376 and 378: 9 positives and 18 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 2519208
+      pair decisions; summed over the 27 jobs, the receipt records 601.97 route CPU seconds
+      and 939.01 job wall seconds, the longest job 97.82 seconds. Every positive clears
+      every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The author
+      reports runs of this repository's sqpack verifier at earlier revisions; those runs are
+      his and decide nothing here, and every route here ran from this repository on the
+      packet's own bytes. The kernel's two controls are gross (RQ-8); the third route's six
+      are sharp. Finite feasibility only: no lower bound, optimum, local minimum, rigidity,
+      novelty or human oversight.
+    source_reviewed: '2026-10-14'
   - id: E-ostashev-562-certificate-report
     claim: upper-bound
     scope: {n_values: [129, 204, 303]}
@@ -33576,6 +33679,17 @@ evidence:
     certificate: packing/resources/web/dostashev-compositions-2026-10-12/source/records/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        three certificates T-162 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-ostashev-562-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 3 exact rational certificates at
@@ -33584,11 +33698,101 @@ evidence:
       outcomes on both routes, 448290 pair decisions; summed over the 9 jobs, the receipt
       records 363.99 route CPU seconds and 447.45 job wall seconds, the longest job 85.77
       seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
-      least 4.99e-21. Independent review and confirmation remain pending. The source's own
-      checkers were not run here. The two maintained routes, the sqpack rational witness
-      verifier and the independent rational corner checker, share certificate parsing,
-      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
-      independent methods, human oversight or optimality is claimed.
+      least 4.99e-21. The repository replay and its review are
+      E-ostashev-562-exact-feasibility. The source's own checkers were not run here. The two
+      maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic
+      and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.
+  - id: E-ostashev-562-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [129, 204, 303]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Ostashev compositions 2026-10-12]'
+    certificate: packing/resources/web/dostashev-compositions-2026-10-12/source/records/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports
+      dostashev-compositions-2026-10-12 check --replay decided all 9 retained jobs again
+      through both maintained routes and held each to its retained row (all equal, 340 s,
+      22:47Z to 22:52Z on 2026-10-14); check-claims rebuilt the frozen comparison (equal);
+      python -m devtools.check_half_angle_area decide-imports --workers 1 with '#562' among
+      the 14 October imports and --upstream for each packet decided the three certificates
+      the register cites by the third route with six controls each and, with the scopes
+      fetched at their pins, held each retained file to its upstream bytes (no disagreement;
+      28 certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the three certificates at n = 129, 204, 303 that T-162 cites, every wall and every
+          pair decided by both maintained routes and again by the third route; the kernel's
+          and the third route's controls are retained separately
+        checked: 3
+        of: 3
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says AI agents wrote and ran the source's search, composition and
+          verification code without naming the system; no route here imports or copies it.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 9 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the three
+        certificates T-162 cites and reached all 18 of its controls' required outcomes.
+        Findings RQ-1 to RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      129, 204 and 303: 3 positives and 6 duplicate-square and outside-container controls
+      passed their required outcomes on both routes, 448290 pair decisions; summed over the
+      9 jobs, the receipt records 363.99 route CPU seconds and 447.45 job wall seconds, the
+      longest job 85.77 seconds. Every positive clears every wall by at least 5.00e-21 and
+      every pair by at least 4.99e-21. No source program ran, and the source ran none of the
+      routes here. The kernel's two controls are gross (RQ-8); the third route's six are
+      sharp. Finite feasibility only: no lower bound, optimum, local minimum, rigidity,
+      novelty or human oversight.
+    source_reviewed: '2026-10-14'
   - id: E-pingyou-564-certificate-report
     claim: upper-bound
     scope: {n_values: [302]}
@@ -33602,6 +33806,17 @@ evidence:
     certificate: packing/resources/web/pingyou-n302-certificate-2026-10-12/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        certificate T-164 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-pingyou-564-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at
@@ -33610,11 +33825,103 @@ evidence:
       both routes, 272706 pair decisions; summed over the 3 jobs, the receipt records 51.27
       route CPU seconds and 64.61 job wall seconds, the longest job 21.66 seconds. Every
       positive clears every wall by at least 5.00e-12 and every pair by at least 9.99e-12.
-      Independent review and confirmation remain pending. The source's own checkers were not
-      run here. The two maintained routes, the sqpack rational witness verifier and the
-      independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human
-      oversight or optimality is claimed.
+      The repository replay and its review are E-pingyou-564-exact-feasibility. The source's
+      own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-pingyou-564-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [302]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou n302 certificate 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n302-certificate-2026-10-12/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports
+      pingyou-n302-certificate-2026-10-12 check --replay decided all 3 retained jobs again
+      through both maintained routes and held each to its retained row (all equal, 69 s,
+      22:38Z to 22:39Z on 2026-10-14); check-claims rebuilt the frozen comparison (equal);
+      python -m devtools.check_half_angle_area decide-imports --workers 1 with '#564' among
+      the 14 October imports and --upstream for each packet decided the certificate the
+      register cites by the third route with six controls each and, with the scopes fetched
+      at their pins, held each derived fact to the pinned file it is derived from (no
+      disagreement; 28 certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in
+      the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 302 that T-164 cites, every wall and every pair decided by
+          both maintained routes and again by the third route; the kernel's and the third
+          route's controls are retained separately
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author has said PingYou Ltd's certificates were AI assisted by 'PY', an
+          unreleased agentic AI offering; no route here imports or copies the source's code.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the certificate
+        T-164 cites and reached all 6 of its controls' required outcomes. Findings RQ-1 to
+        RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      302: 1 positive and 2 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 272706 pair decisions; summed over the 3 jobs, the
+      receipt records 51.27 route CPU seconds and 64.61 job wall seconds, the longest job
+      21.66 seconds. Every positive clears every wall by at least 5.00e-12 and every pair by
+      at least 9.99e-12. The source reports runs of this repository's two maintained routes,
+      unchanged, on its corners witnesses; those runs are the source's and decide nothing
+      here, and every route here ran from this repository on the packet's own bytes. The
+      kernel's two controls are gross (RQ-8); the third route's six are sharp. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-14'
   - id: E-couzo-583-586-certificate-report
     claim: upper-bound
     scope: {n_values: [154, 176, 211, 241, 302, 339, 344, 375, 376, 378, 379, 380, 381, 382]}
@@ -33628,6 +33935,17 @@ evidence:
     certificate: packing/resources/web/couzo-certificates-2026-10-13/source/certificates/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        five certificates T-165, T-181 and T-182 cite for finite feasibility only, with
+        eleven non-blocking findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-couzo-586-exact-feasibility, with E-couzo-586-n302-exact-feasibility for the 302.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 14 exact rational certificates at
@@ -33637,11 +33955,197 @@ evidence:
       routes, 4444044 pair decisions; summed over the 42 jobs, the receipt records 1473.51
       route CPU seconds and 2536.72 job wall seconds, the longest job 157.79 seconds. Every
       positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
-      Independent review and confirmation remain pending. The source's own checkers were not
-      run here. The two maintained routes, the sqpack rational witness verifier and the
-      independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human
-      oversight or optimality is claimed.
+      The repository replay and its review are E-couzo-586-exact-feasibility. The source's
+      own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-couzo-586-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [154, 176, 211, 241]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo certificates 2026-10-13]'
+    certificate: packing/resources/web/couzo-certificates-2026-10-13/source/certificates/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports couzo-certificates-2026-10-13
+      check --replay decided all 42 retained jobs again through both maintained routes and
+      held each to its retained row (all equal, 1,481 s, 23:50Z on 2026-10-14 to 00:15Z on
+      2026-10-15); check-claims rebuilt the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 with '#586' among the 14
+      October imports and --upstream for each packet decided the four certificates
+      T-165 and T-182 cite by the third route with six controls each and, with the scopes fetched
+      at their pins, held each retained file to its upstream bytes (no disagreement; 28
+      certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the four certificates at n = 154, 176, 211 and 241 that T-165 and T-182 cite,
+          every wall and every pair decided by both maintained routes and again by
+          the third route; the kernel's and the third route's controls are retained
+          separately
+        checked: 4
+        of: 4
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say earlier search work used Claude Code and the search implementation,
+          verification orchestration and requests OpenAI Codex; the routes here were written
+          by Claude in separate prompts and share no code with the producer's search.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 42 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the four
+        certificates T-165 and T-182 cite and reached all 24 of its controls'
+        required outcomes. Findings RQ-1 to RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      154, 176, 211, 241, 302, 339, 344, 375, 376, 378, 379, 380, 381 and 382: 14 positives
+      and 28 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 4444044 pair decisions; summed over the 42 jobs, the receipt records
+      1473.51 route CPU seconds and 2536.72 job wall seconds, the longest job 157.79
+      seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
+      least 9.99e-21. The author reports runs of this repository's sqpack verifier at
+      earlier revisions; those runs are his and decide nothing here, and every route here
+      ran from this repository on the packet's own bytes. The kernel's two controls are
+      gross (RQ-8); the third route's six are sharp. Finite feasibility only: no lower
+      bound, optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-14'
+  - id: E-couzo-586-n302-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [302]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo certificates 2026-10-13]'
+    certificate: packing/resources/web/couzo-certificates-2026-10-13/source/certificates/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports couzo-certificates-2026-10-13
+      check --replay decided all 42 retained jobs again through both maintained routes and
+      held each to its retained row (all equal, 1,481 s, 23:50Z on 2026-10-14 to 00:15Z on
+      2026-10-15); check-claims rebuilt the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 with '#586' among the 14
+      October imports and --upstream for each packet decided the 302, the certificate
+      T-181 cites from this packet, by the third route with six controls each and, with the scopes fetched
+      at their pins, held each retained file to its upstream bytes (no disagreement; 28
+      certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 302 that T-181 cites, issue 583's certificate as issue
+          586's packet retains it byte for byte, every wall and every pair decided by both maintained routes and again by
+          the third route; the kernel's and the third route's controls are retained
+          separately
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say earlier search work used Claude Code and the search implementation,
+          verification orchestration and requests OpenAI Codex; the routes here were written
+          by Claude in separate prompts and share no code with the producer's search.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 42 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the
+        certificate T-181 cites at 302 and reached all 6 of its controls'
+        required outcomes. Findings RQ-1 to RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      154, 176, 211, 241, 302, 339, 344, 375, 376, 378, 379, 380, 381 and 382: 14 positives
+      and 28 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 4444044 pair decisions; summed over the 42 jobs, the receipt records
+      1473.51 route CPU seconds and 2536.72 job wall seconds, the longest job 157.79
+      seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
+      least 9.99e-21. The author reports runs of this repository's sqpack verifier at
+      earlier revisions; those runs are his and decide nothing here, and every route here
+      ran from this repository on the packet's own bytes. The kernel's two controls are
+      gross (RQ-8); the third route's six are sharp. Finite feasibility only: no lower
+      bound, optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-14'
   - id: E-pingyou-504-refinement-report
     claim: upper-bound
     scope: {n_values: [153]}
@@ -33655,6 +34159,17 @@ evidence:
     certificate: packing/resources/web/pingyou-n153-refinement-2026-10-12/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        certificate T-166 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-pingyou-504-refinement-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at
@@ -33663,11 +34178,104 @@ evidence:
       both routes, 69768 pair decisions; summed over the 3 jobs, the receipt records 12.55
       route CPU seconds and 36.81 job wall seconds, the longest job 12.43 seconds. Every
       positive clears every wall by at least 1.00e-13 and every pair by at least 1.87e-13.
-      Independent review and confirmation remain pending. The source's own checkers were not
-      run here. The two maintained routes, the sqpack rational witness verifier and the
-      independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human
-      oversight or optimality is claimed.
+      The repository replay and its review are E-pingyou-504-refinement-exact-feasibility.
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
+  - id: E-pingyou-504-refinement-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [153]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou n153 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n153-refinement-2026-10-12/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports
+      pingyou-n153-refinement-2026-10-12 check --replay decided all 3 retained jobs again
+      through both maintained routes and held each to its retained row (all equal, 18 s at
+      22:37Z on 2026-10-14); check-claims rebuilt the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 with '#504-refined' among
+      the 14 October imports and --upstream for each packet decided the certificate the
+      register cites by the third route with six controls each and, with the scopes fetched
+      at their pins, held each derived fact to the pinned file it is derived from (no
+      disagreement; 28 certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in
+      the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 153 that T-166 cites, every wall and every pair decided by
+          both maintained routes and again by the third route; the kernel's and the third
+          route's controls are retained separately
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author has said PingYou Ltd's certificates were AI assisted by 'PY', an
+          unreleased agentic AI offering; no route here imports or copies the source's code.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the certificate
+        T-166 cites and reached all 6 of its controls' required outcomes. Findings RQ-1 to
+        RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      153: 1 positive and 2 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 69768 pair decisions; summed over the 3 jobs, the
+      receipt records 12.55 route CPU seconds and 36.81 job wall seconds, the longest job
+      12.43 seconds. Every positive clears every wall by at least 1.00e-13 and every pair by
+      at least 1.87e-13. The source reports runs of this repository's two maintained routes,
+      unchanged, on its corners witnesses; those runs are the source's and decide nothing
+      here, and every route here ran from this repository on the packet's own bytes. The
+      kernel's two controls are gross (RQ-8); the third route's six are sharp. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-14'
   - id: E-pingyou-503-refinement-report
     claim: upper-bound
     scope: {n_values: [207]}
@@ -33681,6 +34289,17 @@ evidence:
     certificate: packing/resources/web/pingyou-n207-refinement-2026-10-12/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        certificate T-167 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-pingyou-503-refinement-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at
@@ -33689,11 +34308,104 @@ evidence:
       both routes, 127926 pair decisions; summed over the 3 jobs, the receipt records 21.96
       route CPU seconds and 40.17 job wall seconds, the longest job 15.77 seconds. Every
       positive clears every wall by at least 1.00e-13 and every pair by at least 1.89e-13.
-      Independent review and confirmation remain pending. The source's own checkers were not
-      run here. The two maintained routes, the sqpack rational witness verifier and the
-      independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human
-      oversight or optimality is claimed.
+      The repository replay and its review are E-pingyou-503-refinement-exact-feasibility.
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
+  - id: E-pingyou-503-refinement-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [207]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou n207 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n207-refinement-2026-10-12/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports
+      pingyou-n207-refinement-2026-10-12 check --replay decided all 3 retained jobs again
+      through both maintained routes and held each to its retained row (all equal, 31 s,
+      22:37Z to 22:38Z on 2026-10-14); check-claims rebuilt the frozen comparison (equal);
+      python -m devtools.check_half_angle_area decide-imports --workers 1 with
+      '#503-refined' among the 14 October imports and --upstream for each packet decided the
+      certificate the register cites by the third route with six controls each and, with the
+      scopes fetched at their pins, held each derived fact to the pinned file it is derived
+      from (no disagreement; 28 certificates in 241.04 s;
+      receipts/third-route-2026-10-14.json.xz in the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 207 that T-167 cites, every wall and every pair decided by
+          both maintained routes and again by the third route; the kernel's and the third
+          route's controls are retained separately
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author has said PingYou Ltd's certificates were AI assisted by 'PY', an
+          unreleased agentic AI offering; no route here imports or copies the source's code.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the certificate
+        T-167 cites and reached all 6 of its controls' required outcomes. Findings RQ-1 to
+        RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      207: 1 positive and 2 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 127926 pair decisions; summed over the 3 jobs, the
+      receipt records 21.96 route CPU seconds and 40.17 job wall seconds, the longest job
+      15.77 seconds. Every positive clears every wall by at least 1.00e-13 and every pair by
+      at least 1.89e-13. The source reports runs of this repository's two maintained routes,
+      unchanged, on its corners witnesses; those runs are the source's and decide nothing
+      here, and every route here ran from this repository on the packet's own bytes. The
+      kernel's two controls are gross (RQ-8); the third route's six are sharp. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-14'
   - id: E-pingyou-566-certificate-report
     claim: upper-bound
     scope: {n_values: [146]}
@@ -33707,6 +34419,17 @@ evidence:
     certificate: packing/resources/web/pingyou-n146-refinement-2026-10-12/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        certificate T-168 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-pingyou-566-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at
@@ -33715,11 +34438,102 @@ evidence:
       both routes, 63510 pair decisions; summed over the 3 jobs, the receipt records 32.7
       route CPU seconds and 48.92 job wall seconds, the longest job 16.69 seconds. Every
       positive clears every wall by at least 5.00e-81 and every pair by at least 9.99e-81.
-      Independent review and confirmation remain pending. The source's own checkers were not
-      run here. The two maintained routes, the sqpack rational witness verifier and the
-      independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human
-      oversight or optimality is claimed.
+      The repository replay and its review are E-pingyou-566-exact-feasibility. The source's
+      own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-pingyou-566-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [146]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou n146 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n146-refinement-2026-10-12/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports
+      pingyou-n146-refinement-2026-10-12 check --replay decided all 3 retained jobs again
+      through both maintained routes and held each to its retained row (all equal, 41 s at
+      22:38Z on 2026-10-14); check-claims rebuilt the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 with '#566' among the 14
+      October imports and --upstream for each packet decided the certificate the register
+      cites by the third route with six controls each and, with the scopes fetched at their
+      pins, held each derived fact to the pinned file it is derived from (no disagreement;
+      28 certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 146 that T-168 cites, every wall and every pair decided by
+          both maintained routes and again by the third route; the kernel's and the third
+          route's controls are retained separately
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source makes no statement about AI assistance in this release; no route here
+          imports or copies its code.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the certificate
+        T-168 cites and reached all 6 of its controls' required outcomes. Findings RQ-1 to
+        RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      146: 1 positive and 2 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 63510 pair decisions; summed over the 3 jobs, the
+      receipt records 32.7 route CPU seconds and 48.92 job wall seconds, the longest job
+      16.69 seconds. Every positive clears every wall by at least 5.00e-81 and every pair by
+      at least 9.99e-81. The source reports runs of this repository's two maintained routes,
+      unchanged, on its corners witnesses; those runs are the source's and decide nothing
+      here, and every route here ran from this repository on the packet's own bytes. The
+      kernel's two controls are gross (RQ-8); the third route's six are sharp. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-14'
   - id: E-pingyou-567-certificate-report
     claim: upper-bound
     scope: {n_values: [261]}
@@ -33733,6 +34547,17 @@ evidence:
     certificate: packing/resources/web/pingyou-n261-refinement-2026-10-12/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        certificate T-169 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-pingyou-567-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at
@@ -33741,12 +34566,104 @@ evidence:
       both routes, 203580 pair decisions; summed over the 3 jobs, the receipt records
       1391.79 route CPU seconds and 2068.46 job wall seconds, the longest job 930.66
       seconds. In every positive squares touch the box, a least wall clearance of exactly 0,
-      and every pair clears by at least 0. Independent review and confirmation remain
-      pending. The source's own checkers were not run here. The two maintained routes, the
-      sqpack rational witness verifier and the independent rational corner checker, share
+      and every pair clears by at least 0. The repository replay and its review are
+      E-pingyou-567-exact-feasibility. The source's own checkers were not run here. The two
+      maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic
+      and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.
+  - id: E-pingyou-567-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [261]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou n261 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n261-refinement-2026-10-12/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports
+      pingyou-n261-refinement-2026-10-12 check --replay decided all 3 retained jobs again
+      through both maintained routes and held each to its retained row (all equal, 1,301 s,
+      23:24Z to 23:46Z on 2026-10-14); check-claims rebuilt the frozen comparison (equal);
+      python -m devtools.check_half_angle_area decide-imports --workers 1 with '#567' among
+      the 14 October imports and --upstream for each packet decided the certificate the
+      register cites by the third route with six controls each and, with the scopes fetched
+      at their pins, held each derived fact to the pinned file it is derived from (no
+      disagreement; 28 certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in
+      the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 261 that T-169 cites, every wall and every pair decided by
+          both maintained routes and again by the third route; the kernel's and the third
+          route's controls are retained separately
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source makes no statement about AI assistance in this release; no route here
+          imports or copies its code.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the certificate
+        T-169 cites and reached all 6 of its controls' required outcomes. Findings RQ-1 to
+        RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
       certificate parsing, half-angle conversion, Fraction arithmetic and the
-      separating-axis method. No two independent methods, human oversight or optimality is
-      claimed.
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      261: 1 positive and 2 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 203580 pair decisions; summed over the 3 jobs, the
+      receipt records 1391.79 route CPU seconds and 2068.46 job wall seconds, the longest
+      job 930.66 seconds. In every positive squares touch the box, a least wall clearance of
+      exactly 0, and every pair clears by at least 0. The source reports runs of this
+      repository's two maintained routes, unchanged, on its corners witnesses; those runs
+      are the source's and decide nothing here, and every route here ran from this
+      repository on the packet's own bytes. The kernel's two controls are gross (RQ-8); the
+      third route's six are sharp. Finite feasibility only: no lower bound, optimum, local
+      minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-14'
   - id: E-pingyou-568-certificate-report
     claim: upper-bound
     scope: {n_values: [105]}
@@ -33760,6 +34677,17 @@ evidence:
     certificate: packing/resources/web/pingyou-n105-refinement-2026-10-12/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        certificate T-170 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-pingyou-568-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at
@@ -33768,11 +34696,103 @@ evidence:
       both routes, 32760 pair decisions; summed over the 3 jobs, the receipt records 21.77
       route CPU seconds and 29.39 job wall seconds, the longest job 11.04 seconds. Every
       positive clears every wall by at least 5.00e-81 and every pair by at least 9.99e-81.
-      Independent review and confirmation remain pending. The source's own checkers were not
-      run here. The two maintained routes, the sqpack rational witness verifier and the
-      independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human
-      oversight or optimality is claimed.
+      The repository replay and its review are E-pingyou-568-exact-feasibility. The source's
+      own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-pingyou-568-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [105]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou n105 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n105-refinement-2026-10-12/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports
+      pingyou-n105-refinement-2026-10-12 check --replay decided all 3 retained jobs again
+      through both maintained routes and held each to its retained row (all equal, 27 s,
+      22:36Z to 22:37Z on 2026-10-14); check-claims rebuilt the frozen comparison (equal);
+      python -m devtools.check_half_angle_area decide-imports --workers 1 with '#568' among
+      the 14 October imports and --upstream for each packet decided the certificate the
+      register cites by the third route with six controls each and, with the scopes fetched
+      at their pins, held each derived fact to the pinned file it is derived from (no
+      disagreement; 28 certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in
+      the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 105 that T-170 cites, every wall and every pair decided by
+          both maintained routes and again by the third route; the kernel's and the third
+          route's controls are retained separately
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says computation, checking and submission preparation were AI-assisted,
+          naming no system; no route here imports or copies the source's code.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the certificate
+        T-170 cites and reached all 6 of its controls' required outcomes. Findings RQ-1 to
+        RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      105: 1 positive and 2 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 32760 pair decisions; summed over the 3 jobs, the
+      receipt records 21.77 route CPU seconds and 29.39 job wall seconds, the longest job
+      11.04 seconds. Every positive clears every wall by at least 5.00e-81 and every pair by
+      at least 9.99e-81. The source reports runs of this repository's two maintained routes,
+      unchanged, on its corners witnesses; those runs are the source's and decide nothing
+      here, and every route here ran from this repository on the packet's own bytes. The
+      kernel's two controls are gross (RQ-8); the third route's six are sharp. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-14'
   - id: E-pingyou-569-certificate-report
     claim: upper-bound
     scope: {n_values: [272]}
@@ -33786,6 +34806,17 @@ evidence:
     certificate: packing/resources/web/pingyou-n272-refinement-2026-10-12/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        certificate T-171 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-pingyou-569-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at
@@ -33794,11 +34825,103 @@ evidence:
       both routes, 221136 pair decisions; summed over the 3 jobs, the receipt records 185.95
       route CPU seconds and 240.0 job wall seconds, the longest job 106.39 seconds. Every
       positive clears every wall by at least 5.00e-101 and every pair by at least 9.99e-101.
-      Independent review and confirmation remain pending. The source's own checkers were not
-      run here. The two maintained routes, the sqpack rational witness verifier and the
-      independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human
-      oversight or optimality is claimed.
+      The repository replay and its review are E-pingyou-569-exact-feasibility. The source's
+      own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-pingyou-569-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [272]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou n272 refinement 2026-10-12]'
+    certificate: packing/resources/web/pingyou-n272-refinement-2026-10-12/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports
+      pingyou-n272-refinement-2026-10-12 check --replay decided all 3 retained jobs again
+      through both maintained routes and held each to its retained row (all equal, 179 s,
+      22:44Z to 22:47Z on 2026-10-14); check-claims rebuilt the frozen comparison (equal);
+      python -m devtools.check_half_angle_area decide-imports --workers 1 with '#569' among
+      the 14 October imports and --upstream for each packet decided the certificate the
+      register cites by the third route with six controls each and, with the scopes fetched
+      at their pins, held each derived fact to the pinned file it is derived from (no
+      disagreement; 28 certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in
+      the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 272 that T-171 cites, every wall and every pair decided by
+          both maintained routes and again by the third route; the kernel's and the third
+          route's controls are retained separately
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says computation, checking and submission preparation were AI-assisted,
+          naming no system; no route here imports or copies the source's code.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the certificate
+        T-171 cites and reached all 6 of its controls' required outcomes. Findings RQ-1 to
+        RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      272: 1 positive and 2 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 221136 pair decisions; summed over the 3 jobs, the
+      receipt records 185.95 route CPU seconds and 240.0 job wall seconds, the longest job
+      106.39 seconds. Every positive clears every wall by at least 5.00e-101 and every pair
+      by at least 9.99e-101. The source reports runs of this repository's two maintained
+      routes, unchanged, on its corners witnesses; those runs are the source's and decide
+      nothing here, and every route here ran from this repository on the packet's own bytes.
+      The kernel's two controls are gross (RQ-8); the third route's six are sharp. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-14'
   - id: E-couzo-583-certificate-report
     claim: upper-bound
     scope: {n_values: [154, 211, 241, 339, 379, 380, 382]}
@@ -33812,6 +34935,17 @@ evidence:
     certificate: packing/resources/web/couzo-issue583-2026-10-13/source/certificates/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        three certificates T-172 and T-181 cite for finite feasibility only, with eleven
+        non-blocking findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-couzo-583-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 7 exact rational certificates at
@@ -33820,12 +34954,104 @@ evidence:
       passed their required outcomes on both routes, 2019354 pair decisions; summed over the
       21 jobs, the receipt records 696.74 route CPU seconds and 709.36 job wall seconds, the
       longest job 54.35 seconds. Every positive clears every wall by at least 5.00e-21 and
-      every pair by at least 9.99e-21. Independent review and confirmation remain pending.
-      The source's own checkers were not run here. The two maintained routes, the sqpack
-      rational witness verifier and the independent rational corner checker, share
+      every pair by at least 9.99e-21. The repository replay and its review are
+      E-couzo-583-exact-feasibility. The source's own checkers were not run here. The two
+      maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic
+      and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.
+  - id: E-couzo-583-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [154, 211, 241]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue-583 certificates 2026-10-13]'
+    certificate: packing/resources/web/couzo-issue583-2026-10-13/source/certificates/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports couzo-issue583-2026-10-13 check
+      --replay decided all 21 retained jobs again through both maintained routes and held
+      each to its retained row (all equal, 661 s, 23:00Z to 23:11Z on 2026-10-14);
+      check-claims rebuilt the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 with '#583' among the 14
+      October imports and --upstream for each packet decided the three certificates the
+      register cites by the third route with six controls each and, with the scopes fetched
+      at their pins, held each retained file to its upstream bytes (no disagreement; 28
+      certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the three certificates at n = 154, 211, 241 that T-172 and T-181 cite, every wall
+          and every pair decided by both maintained routes and again by the third route; the
+          kernel's and the third route's controls are retained separately
+        checked: 3
+        of: 3
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says earlier search work used Claude Code and the search implementation,
+          verification orchestration and request OpenAI Codex; the routes here were written
+          by Claude in separate prompts and share no code with the producer's search.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 21 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the three
+        certificates T-172 and T-181 cite and reached all 18 of its controls' required
+        outcomes. Findings RQ-1 to RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
       certificate parsing, half-angle conversion, Fraction arithmetic and the
-      separating-axis method. No two independent methods, human oversight or optimality is
-      claimed.
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      154, 211, 241, 339, 379, 380 and 382: 7 positives and 14 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 2019354 pair
+      decisions; summed over the 21 jobs, the receipt records 696.74 route CPU seconds and
+      709.36 job wall seconds, the longest job 54.35 seconds. Every positive clears every
+      wall by at least 5.00e-21 and every pair by at least 9.99e-21. The author reports runs
+      of this repository's sqpack verifier at earlier revisions; those runs are his and
+      decide nothing here, and every route here ran from this repository on the packet's own
+      bytes. The kernel's two controls are gross (RQ-8); the third route's six are sharp.
+      Finite feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or
+      human oversight.
+    source_reviewed: '2026-10-14'
   - id: E-mishapolk-573-certificate-report
     claim: upper-bound
     scope: {n_values: [103, 153, 207, 209, 258, 270]}
@@ -33839,6 +35065,17 @@ evidence:
     certificate: packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted both
+        certificates T-173 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-mishapolk-573-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 6 exact rational certificates at
@@ -33847,11 +35084,105 @@ evidence:
       required outcomes on both routes, 359730 pair decisions; summed over the 12 jobs, the
       receipt records 93.79 route CPU seconds and 205.66 job wall seconds, the longest job
       23.93 seconds. Every positive clears every wall by at least 1.20e-15 and every pair by
-      at least 6.38e-16. Independent review and confirmation remain pending. The source's
-      own checkers were not run here. The two maintained routes, the sqpack rational witness
-      verifier and the independent rational corner checker, share certificate parsing,
-      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
-      independent methods, human oversight or optimality is claimed.
+      at least 6.38e-16. The repository replay and its review are
+      E-mishapolk-573-exact-feasibility. The source's own checkers were not run here. The
+      two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight
+      or optimality is claimed.
+  - id: E-mishapolk-573-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [153, 207]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk exact certificates 2026-10-12]'
+    certificate: packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports
+      mishapolk-exact-certificates-2026-10-12 check --replay decided all 12 retained jobs
+      again through both maintained routes and held each to its retained row (all equal, 90
+      s, 22:39Z to 22:41Z on 2026-10-14); check-claims rebuilt the frozen comparison
+      (equal); python -m devtools.check_half_angle_area decide-imports --workers 1 with
+      '#573' among the 14 October imports and --upstream for each packet decided both
+      certificates the register cites by the third route with six controls each and, with
+      the scopes fetched at their pins, held each derived fact to the pinned file it is
+      derived from (no disagreement; 28 certificates in 241.04 s;
+      receipts/third-route-2026-10-14.json.xz in the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          both certificates at n = 153, 207 that T-173 cites, every wall and every pair
+          decided by both maintained routes and again by the third route; the kernel's and
+          the third route's controls are retained separately
+        checked: 2
+        of: 2
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue discloses that Gemini was used for the search implementation,
+          verification orchestration and issue preparation; the routes here were written by
+          Claude.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 12 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for both certificates
+        T-173 cites and reached all 12 of its controls' required outcomes. Findings RQ-1 to
+        RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      153, 154, 175 and 207: 4 positives and 8 duplicate-square and outside-container
+      controls passed their required outcomes on both routes, 359730 pair decisions; summed
+      over the 12 jobs, the receipt records 93.79 route CPU seconds and 205.66 job wall
+      seconds, the longest job 23.93 seconds. Every positive clears every wall by at least
+      1.20e-15 and every pair by at least 6.38e-16. The author reports runs of this
+      repository's sqpack verifier from copies outside the pinned tree; those runs are his
+      and decide nothing here, and every route here ran from this repository on the packet's
+      own bytes. The kernel's two controls are gross (RQ-8); the third route's six are
+      sharp. Finite feasibility only: no lower bound, optimum, local minimum, rigidity,
+      novelty or human oversight.
+    source_reviewed: '2026-10-14'
   - id: E-pingyou-574-certificate-report
     claim: upper-bound
     scope: {n_values: [28, 37, 39, 41, 50, 55, 68, 69, 71, 83, 84, 86, 87, 88, 102, 103,
@@ -33871,26 +35202,37 @@ evidence:
     certificate: packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md accepted the 64
+        rational certificates T-174 cites for finite feasibility only, with seven
+        non-blocking findings (RP-1 to RP-7); the replay it reproduced is
+        E-pingyou-574-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 85 exact rational certificates at
       4c319c2. A separate complete repository replay is retained for n = 68, 84, 86, 88,
-      102, 103, 105, 108, 110, 123, 126, 127, 129, 130, 131, 132, 146, 155, 156, 172,
-      175, 176, 179, 180, 181, 182, 199, 204, 206, 208, 209, 210, 211, 228, 232, 236,
-      237, 238, 239, 240, 241, 258, 259, 261, 263, 264, 266, 267, 268, 269, 270, 271,
-      272, 273, 292, 295, 297, 301, 303, 304, 305, 306, 307 and 308: 64 positives and
-      128 duplicate-square and outside-container controls passed their required outcomes
-      on both routes, 9164850 pair decisions; summed over the 192 jobs, the receipt
-      records 14497.02 route CPU seconds and 16968.51 job wall seconds, the longest job
-      509.89 seconds. In every positive squares touch the box, a least wall clearance of
-      exactly 0, and every pair clears by at least 0. check --replay decided every one
-      of the 192 jobs again, every row equal to the retained one. The 21 declared
-      rational counts the intake ledger does not record were not replayed, priced at
-      under an hour. Independent review and confirmation remain pending. The source's
-      own checkers were not run here. The two maintained routes, the sqpack rational
-      witness verifier and the independent rational corner checker, share certificate
-      parsing, half-angle conversion, Fraction arithmetic and the separating-axis
-      method. No two independent methods, human oversight or optimality is claimed.
+      102, 103, 105, 108, 110, 123, 126, 127, 129, 130, 131, 132, 146, 155, 156, 172, 175,
+      176, 179, 180, 181, 182, 199, 204, 206, 208, 209, 210, 211, 228, 232, 236, 237, 238,
+      239, 240, 241, 258, 259, 261, 263, 264, 266, 267, 268, 269, 270, 271, 272, 273, 292,
+      295, 297, 301, 303, 304, 305, 306, 307 and 308: 64 positives and 128 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 9164850
+      pair decisions; summed over the 192 jobs, the receipt records 14497.02 route CPU
+      seconds and 16968.51 job wall seconds, the longest job 509.89 seconds. In every
+      positive squares touch the box, a least wall clearance of exactly 0, and every pair
+      clears by at least 0. check --replay decided every one of the 192 jobs again, every
+      row equal to the retained one. The 21 declared rational counts the intake ledger does
+      not record were not replayed, priced at under an hour. The repository replay and its
+      review are E-pingyou-574-exact-feasibility. The source's own checkers were not run
+      here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
   - id: E-pingyou-574-algebraic-report
     claim: upper-bound
     scope: {n_values: [5, 10, 18, 19, 26, 27, 38, 40, 51, 52, 53, 54, 65, 66, 67, 70,
@@ -33908,22 +35250,204 @@ evidence:
     certificate: packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md accepted the four
+        algebraic certificates T-174 cites, on one route, for finite feasibility only, with
+        seven non-blocking findings (RP-1 to RP-7); the replay it reproduced is
+        E-pingyou-574-algebraic-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 60 exact algebraic certificates at
       4c319c2, each side a root of an integer polynomial that the author isolates by
-      rational Sturm counts. A separate complete repository replay is retained for n =
-      70, 153, 207 and 302, on one route: sqpack's exact witness verifier decided each
-      positive and its duplicate-square and outside-container controls over the
-      witness's field, 12 jobs and 242445 pair decisions, 1001.0 route CPU seconds and
-      1094.42 job wall seconds, the longest job 166.45 seconds; the four positives pass,
-      squares touching the box and each other exactly, and the eight controls are
-      refused. check --replay decided the 12 jobs again with the same outcomes. The
-      other 56 counts were not replayed, priced at about 2.1 hours on the one route. No
-      second route over a number field exists here: the independent corner checker reads
-      rational corners only. Independent review and confirmation remain pending. The
-      source's own checkers were not run here. No two independent methods, human
-      oversight or optimality is claimed.
+      rational Sturm counts. A separate complete repository replay is retained for n = 70,
+      153, 207 and 302, on one route: sqpack's exact witness verifier decided each positive
+      and its duplicate-square and outside-container controls over the witness's field, 12
+      jobs and 242445 pair decisions, 1001.0 route CPU seconds and 1094.42 job wall seconds,
+      the longest job 166.45 seconds; the four positives pass, squares touching the box and
+      each other exactly, and the eight controls are refused. check --replay decided the 12
+      jobs again with the same outcomes. The other 56 counts were not replayed, priced at
+      about 2.1 hours on the one route. No second route over a number field exists here: the
+      independent corner checker reads rational corners only. The repository replay and its
+      review are E-pingyou-574-algebraic-feasibility. The source's own checkers were not run
+      here. No two independent methods, human oversight or optimality is claimed.
+  - id: E-pingyou-574-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [68, 84, 86, 88, 102, 103, 105, 108, 110, 123, 126, 127, 129, 130, 131, 132, 146, 155, 156, 172, 175, 176, 179, 180, 181, 182, 199, 204, 206, 208, 209, 210, 211, 228, 232, 236, 237, 238, 239, 240, 241, 258, 259, 261, 263, 264, 266, 267, 268, 269, 270, 271, 272, 273, 292, 295, 297, 301, 303, 304, 305, 306, 307, 308]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou PR 574 certificates 2026-10-13]'
+    certificate: packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: the import lane's python -m devtools.upper_bound_reports
+      pingyou-pr574-certificates-2026-10-13 check --replay decided all 192 retained jobs of
+      the 64 rational counts again through both maintained routes, twice in all, every row
+      equal to the retained one (pull request 602); on 2026-10-15 the review's check
+      admitted the 64 receipts and their 192 jobs (8.1 s) and check-claims rebuilt the
+      frozen claim record (equal, 17.8 s); python -m devtools.check_half_angle_area
+      decide-imports --workers 1 --imports '#574' --upstream
+      pingyou-pr574-certificates-2026-10-13 DIR decided the 64 certificates by the third
+      route with six controls each and read every fact again from the release-asset member
+      it names, its manifest pinned and its asset at the size and SHA-256 the manifest
+      states, in DIR (no disagreement, 384 of 384 controls at their required outcome, 126
+      upstream checks, 1,171.44 s, 00:15Z to 00:34Z;
+      receipts/third-route-2026-10-14.json.xz).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the 64 rational certificates the entry cites, every wall and every pair decided by
+          both maintained routes and again by the third route; the kernel's and the third
+          route's controls are retained separately
+        checked: 64
+        of: 64
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route the pull request's roster and readers in the run that
+            decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The pull request makes no statement about AI assistance; the author has said
+          PingYou Ltd's earlier certificates were AI assisted by 'PY', an unreleased agentic
+          AI offering. No route here imports or copies the source's code.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. The receipts admitted, the frozen claim record
+        rebuilt equal, and the third route agreed with both maintained routes at all 64
+        sides, every pose and least wall clearance, and reached all 384 of its controls'
+        required outcomes. The 192 jobs were not decided a third time on the maintained
+        routes here: the import lane's two replays decided each, and a third is priced at
+        about 5 CPU-hours. Findings RP-1 to RP-7, none blocking.
+    limitations: >-
+      A replay of the 64 rational certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. Summed over the 192 jobs the receipts record 9164850 pair
+      decisions, 14497.02 route CPU seconds and 16968.51 job wall seconds, the longest job
+      509.89 seconds; in every positive a square touches a wall, and at 63 counts two
+      squares touch, so the contact controls start from contact. The source reports runs of
+      this repository's two maintained routes, unchanged, on its corners witnesses; those
+      runs are the source's and decide nothing here, and every route here ran from this
+      repository on the packet's own bytes. The kernel's two controls are gross; the third
+      route's six are sharp. The 21 declared rational counts the ledger does not record were
+      not replayed. Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-14'
+  - id: E-pingyou-574-algebraic-feasibility
+    claim: upper-bound
+    scope: {n_values: [70, 153, 207, 302]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou PR 574 certificates 2026-10-13]'
+    certificate: packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time: python -m
+      devtools.algebraic_witness_reports pingyou-pr574-certificates-2026-10-13 compare
+      rebuilt the frozen algebraic claim record (equal, 6.4 s), and the same module's check
+      --replay decided the 12 jobs of 70, 153, 207 and 302 again on sqpack's exact witness
+      verifier over each witness's field, each equal to its retained row (910.7 s, 00:34Z to
+      00:50Z on 2026-10-15; receipts/algebraic-route1-nNNN.json.xz).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-algebraic-witness-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the four algebraic certificates at n = 70, 153, 207 and 302, every unit-square
+          identity, wall and pair decided over the witness's field on the one route, with
+          its two controls each
+        checked: 4
+        of: 4
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route the pull request's roster and readers in the run that
+            decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The pull request makes no statement about AI assistance; the author has said
+          PingYou Ltd's earlier certificates were AI assisted by 'PY', an unreleased agentic
+          AI offering. No route here imports or copies the source's code.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only, on one route: no second route over a number
+        field exists here, and none was run (RP-3). Findings RP-1 to RP-7, none blocking.
+    limitations: >-
+      One route: sqpack's exact witness verifier builds every square in its witness's field
+      and decides each unit-square identity, wall and pair by exact signs; the independent
+      rational corner checker and the third route read rational coordinates only and decide
+      none of these. The receipts' 12 jobs hold 242445 pair decisions and 1094.42 job wall
+      seconds. A second route over a number field would need its own field arithmetic, a
+      code slice rather than compute. The other 56 algebraic counts were not replayed. The
+      record's house selection leaves these four counts out, since no house reader rebuilds
+      an algebraic side, and the owner decides their adoption (RP-3). Finite feasibility
+      only.
+    source_reviewed: '2026-10-14'
   - id: E-ostashev-575-certificate-report
     claim: upper-bound
     scope: {n_values: [176, 211, 241, 304]}
@@ -33937,6 +35461,17 @@ evidence:
     certificate: packing/resources/web/dostashev-merged-bands-2026-10-13/source/records/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        three certificates T-175 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-ostashev-575-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 4 exact rational certificates at
@@ -33945,11 +35480,101 @@ evidence:
       required outcomes on both routes, 675186 pair decisions; summed over the 12 jobs, the
       receipt records 480.19 route CPU seconds and 656.86 job wall seconds, the longest job
       89.14 seconds. Every positive clears every wall by at least 5.00e-21 and every pair by
-      at least 4.99e-21. Independent review and confirmation remain pending. The source's
-      own checkers were not run here. The two maintained routes, the sqpack rational witness
-      verifier and the independent rational corner checker, share certificate parsing,
-      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
-      independent methods, human oversight or optimality is claimed.
+      at least 4.99e-21. The repository replay and its review are
+      E-ostashev-575-exact-feasibility. The source's own checkers were not run here. The two
+      maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic
+      and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.
+  - id: E-ostashev-575-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [211, 241, 304]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Ostashev merged bands 2026-10-13]'
+    certificate: packing/resources/web/dostashev-merged-bands-2026-10-13/source/records/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports
+      dostashev-merged-bands-2026-10-13 check --replay decided all 12 retained jobs again
+      through both maintained routes and held each to its retained row (all equal, 455 s,
+      22:52Z to 23:00Z on 2026-10-14); check-claims rebuilt the frozen comparison (equal);
+      python -m devtools.check_half_angle_area decide-imports --workers 1 with '#575' among
+      the 14 October imports and --upstream for each packet decided the three certificates
+      the register cites by the third route with six controls each and, with the scopes
+      fetched at their pins, held each retained file to its upstream bytes (no disagreement;
+      28 certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the three certificates at n = 211, 241, 304 that T-175 cites, every wall and every
+          pair decided by both maintained routes and again by the third route; the kernel's
+          and the third route's controls are retained separately
+        checked: 3
+        of: 3
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the author's checkers were written with AI assistance without
+          naming the system; no route here imports or copies them.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 12 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the three
+        certificates T-175 cites and reached all 18 of its controls' required outcomes.
+        Findings RQ-1 to RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      176, 211, 241 and 304: 4 positives and 8 duplicate-square and outside-container
+      controls passed their required outcomes on both routes, 675186 pair decisions; summed
+      over the 12 jobs, the receipt records 480.19 route CPU seconds and 656.86 job wall
+      seconds, the longest job 89.14 seconds. Every positive clears every wall by at least
+      5.00e-21 and every pair by at least 4.99e-21. No source program ran, and the source
+      ran none of the routes here. The kernel's two controls are gross (RQ-8); the third
+      route's six are sharp. Finite feasibility only: no lower bound, optimum, local
+      minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-14'
   - id: E-wand125-fine-net-n39-66625-report
     claim: lower-bound
     scope: {n_values: [39]}
@@ -34343,6 +35968,17 @@ evidence:
     certificate: packing/resources/web/mishapolk-records-2026-10-14/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        certificate T-183 cites for finite feasibility only, with eleven non-blocking
+        findings (RQ-1 to RQ-11); the replay it reproduced is
+        E-mishapolk-593-exact-feasibility.
     source_reviewed: '2026-10-14'
     limitations: >-
       This atom records the source author's report of 72 exact rational certificates at
@@ -34351,11 +35987,103 @@ evidence:
       outcomes on both routes, 474246 pair decisions; summed over the 9 jobs, the receipt
       records 176.28 route CPU seconds and 227.8 job wall seconds, the longest job 33.87
       seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
-      least 9.99e-21. Independent review and confirmation remain pending. The source's own
-      checkers were not run here. The two maintained routes, the sqpack rational witness
-      verifier and the independent rational corner checker, share certificate parsing,
-      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
-      independent methods, human oversight or optimality is claimed.
+      least 9.99e-21. The repository replay and its review are
+      E-mishapolk-593-exact-feasibility. The source's own checkers were not run here. The
+      two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight
+      or optimality is claimed.
+  - id: E-mishapolk-593-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [237]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk records 2026-10-14]'
+    certificate: packing/resources/web/mishapolk-records-2026-10-14/facts/
+    replay: >-
+      From packing/ with the project interpreter, one process at a time on a shared
+      four-core host: python -m devtools.upper_bound_reports mishapolk-records-2026-10-14
+      check --replay decided all 9 retained jobs again through both maintained routes and
+      held each to its retained row (all equal, 168 s, 22:41Z to 22:44Z on 2026-10-14);
+      check-claims rebuilt the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 with '#593' among the 14
+      October imports and --upstream for each packet decided the certificate the register
+      cites by the third route with six controls each and, with the scopes fetched at their
+      pins, held each derived fact to the pinned file it is derived from (no disagreement;
+      28 certificates in 241.04 s; receipts/third-route-2026-10-14.json.xz in the packet).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 237 that T-183 cites, every wall and every pair decided by
+          both maintained routes and again by the third route; the kernel's and the third
+          route's controls are retained separately
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane (W2) of 14 October 2026, at the strong sub-agent tier,
+            which gave the third route this intake's roster, readers and credit measurements
+            in the run that decided these certificates; reasoning setting not retained here
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source discloses Gemini assistance with solver scripting, precision checks and
+          formatting; the routes here were written by Claude.
+    independence_record: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 9 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim for the certificate
+        T-183 cites and reached all 6 of its controls' required outcomes. Findings RQ-1 to
+        RQ-11, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and by a third exact route that shares Fraction arithmetic and
+      the formats' meaning only. A separate complete repository replay is retained for n =
+      211, 237 and 241: 3 positives and 6 duplicate-square and outside-container controls
+      passed their required outcomes on both routes, 474246 pair decisions; summed over the
+      9 jobs, the receipt records 176.28 route CPU seconds and 227.8 job wall seconds, the
+      longest job 33.87 seconds. Every positive clears every wall by at least 5.00e-21 and
+      every pair by at least 9.99e-21. The author reports runs of this repository's sqpack
+      verifier from copies outside the pinned tree; those runs are his and decide nothing
+      here, and every route here ran from this repository on the packet's own bytes. The
+      kernel's two controls are gross (RQ-8); the third route's six are sharp. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-14'
   - id: E-bengreff-594-cover-report
     claim: lower-bound
     scope: {n_values: [76]}

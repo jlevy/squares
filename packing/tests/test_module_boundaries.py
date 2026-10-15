@@ -320,6 +320,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     for job_name in (
         "validate",
+        "integration-suites",
         "suite-a",
         "suite-b",
         "suite-c",
@@ -639,7 +640,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         if _mapping(step).get("name") == "Run the complete integration surface"
     )
     assert full_step["if"] == "github.event_name != 'pull_request'"
-    # The complete integration runner omits every Step assigned to a deferred runner.
+    # The complete integration runner omits every Step assigned to a native sibling.
     # The CLI/workflow partition contract also checks exact coverage and disjointness.
     command = shlex.split(str(full_step["run"]))
     assert command[: command.index("packing-validate") + 1] == [
@@ -655,6 +656,10 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         flag
         for name in (
             "exhaustive exact behavioral tests",
+            "fast behavioral tests, shard A",
+            "fast behavioral tests, shard B",
+            "fast behavioral tests, shard C",
+            "fast behavioral tests, shard D",
             "slow behavioral tests",
             "single-square translation escape screen",
             "threshold dilation-limit record, 1440 steps",
@@ -1250,6 +1255,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_the_552_import_agrees_with_its_plan_frozen_claim_and_print",
             "test_the_regularized_drawing_of_552_passes_the_third_route_at_the_same_clearances",
             "test_daniels_154_is_another_arrangement_than_squishs_and_nearer_couzos_155",
+            # The 14 October reviews' measurements, 11.47s and 19.95s of call time on
+            # 2026-10-15 on a shared four-core host.
+            "test_the_pingyou_refinements_are_their_named_packings_moved_so_little",
+            "test_593_restates_earlier_certificates_pose_for_pose_and_moves_couzos_237",
         },
         # 24s of call time across 1.
         "test_contact_assembly_labels.py": {
@@ -1583,6 +1592,20 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_trump_isolation_radius.py": {
             "test_gap_and_symmetry_certificates_hold",  # 2.5s
         },
+        # Full run 38756833833, head 15548357, measured only these complete reads.
+        # The plan's #593/#70a cases cost 23.91s/14.92s; its other parameters stay quick.
+        # #593's full comparison cost 12.76s. Fresh local #593 plan CALL was 18.18s.
+        "test_upper_bound_reports.py": {
+            "test_the_register_plan_states_each_bound_as_check_standing_reads_it",
+            "test_the_593_release_is_smallest_only_at_237_and_ties_couzo_at_211_and_241",
+        },
+        # Same full run: complete PR574 comparison 13.09s and plan 14.46s. The former
+        # retained 209 derived-fact admissions after selective reads (9.96s locally).
+        # No custody, malformed-source, adapter or other negative guard moves.
+        "test_upper_bound_reports_574.py": {
+            "test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304",
+            "test_the_574_register_plan_states_each_bound_as_check_standing_reads_it",
+        },
         # 4s of call time across 2.
         "test_validation_cli.py": {
             "test_run_timeout_terminates_child_and_reports_captured_output",  # 2.3s
@@ -1610,6 +1633,30 @@ def _slow_marked(tree: ast.Module) -> set[str]:
         if isinstance(node, (ast.Assign, ast.AnnAssign)) and "mark.slow" in ast.unparse(node):
             marked.add("<module-level assignment>")
     return marked
+
+
+def test_upper_report_slow_placement_keeps_unmeasured_packet_cases_quick() -> None:
+    """The full-read placement moves two measured cases, not every imported packet."""
+    import test_upper_bound_reports as report_tests  # noqa: PLC0415
+
+    function = report_tests.test_the_register_plan_states_each_bound_as_check_standing_reads_it
+    marks = getattr(function, "pytestmark", [])
+    assert not any(mark.name == "slow" for mark in marks), "all packet cases moved"
+    (parametrize,) = [mark for mark in marks if mark.name == "parametrize"]
+    cases = parametrize.args[1]
+    names = [getattr(case, "values", (case,))[0] for case in cases]
+    assert names == [
+        name for name in report_tests.EVERY if name not in report_tests.BEYOND_ONLY
+    ]
+    slow = {
+        getattr(case, "values", (case,))[0]
+        for case in cases
+        if any(mark.name == "slow" for mark in getattr(case, "marks", ()))
+    }
+    assert slow == {
+        "mishapolk-records-2026-10-14",
+        "mishapolk-kkt-refinements-2026-10-14",
+    }
 
 
 def test_the_slow_registry_sees_a_marker_on_a_function_a_case_or_a_module() -> None:

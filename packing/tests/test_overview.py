@@ -393,8 +393,16 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     assert page.count("data-atlas-toggle data-homepage-atlas-toggle") == 1
     headings = re.findall(r"<h[3-6]\b.*?</h[3-6]>", page, re.DOTALL)
     news = page.split('id="news"', 1)[1].split('<h2 id="recent-results"', 1)[0]
-    assert headings == re.findall(r"<h3\b.*?</h3>", news, re.DOTALL)
-    assert len(headings) == 3
+    article_headers = re.findall(
+        r'<header class="site-article-header[^"]*">(.*?)</header>', page, re.DOTALL
+    )
+    assert headings == [
+        heading
+        for header in article_headers
+        for heading in re.findall(r"<h3\b.*?</h3>", header, re.DOTALL)
+    ]
+    assert len(re.findall(r"<h3\b.*?</h3>", news, re.DOTALL)) == 3
+    assert len(headings) == 9  # Three News items, four papers and two tutorials.
     assert '<h1 id="more-resources" class="site-title">More Resources' in page
     assert "site-resource-links" not in page
 
@@ -566,9 +574,10 @@ def _page_cards(page: str) -> list[tuple[str, str, str]]:
 def _page_card_parts(page: str, href: str) -> tuple[str, str]:
     """A page card's value and note, including the Papers page's first card section."""
     (body,) = [body for address, _, body in _page_cards(page) if address == href]
-    value, note = body.split('class="site-card-value">', 1)[1].split(
-        '<span class="site-card-note">'
-    )
+    heading = re.search(r"<h3[^>]*>(.*?)</h3>", body, re.DOTALL)
+    value = heading.group(1) if heading else body.split('class="site-card-value">', 1)[1]
+    value = value.split('<span class="site-card-note">', 1)[0]
+    note = body.split('<span class="site-card-note">', 1)[1]
     return value, note
 
 
@@ -1682,7 +1691,7 @@ def test_each_card_size_is_a_column_of_its_own_grid() -> None:
 #: the note and a direct card's address.
 _CARD_ELEMENT = re.compile(
     r'<(button|a|div)\b[^>]*class="site-card[ "][^>]*data-card-size="([^"]*)"[^>]*>'
-    r'.*?<span class="site-card-value">(.*?)</(?:button|a)>',
+    r'.*?(?:<span class="site-card-value">|<h3[^>]*>)(.*?)</(?:button|a)>',
     re.DOTALL,
 )
 
@@ -4886,8 +4895,9 @@ def test_card_headlines_take_the_page_titles_sans_face_and_weight() -> None:
         css.index(".site-hero h1,\n.kpress :where(.site-page) h1,\n.kpress .site-title {") :
     ]
     headline = css[
-        css.index(".kpress .site-card .site-card-value,\n.site-popover .site-popover-value {") :
+        css.index(".kpress .site-card .site-card-value,\n.site-popover .site-popover-value,") :
     ]
+    assert ".kpress .site-article-header > h3 {" in headline[: headline.index("}")]
     for rule in (title[: title.index("}")], headline[: headline.index("}")]):
         assert "font-family: var(--kpress-font-sans);" in rule
         assert "font-weight: var(--site-font-weight-sans-medium);" in rule
@@ -4911,7 +4921,7 @@ def test_every_heading_and_headline_shares_one_leading() -> None:
     assert text.count("var(--paper-heading-leading)") == 1
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     for selector in (
-        ".kpress .site-card .site-card-value,\n.site-popover .site-popover-value {",
+        ".kpress .site-card .site-card-value,\n.site-popover .site-popover-value,",
         ".kpress .site-case-title,\n.kpress .site-popover .site-case-title {",
         ".kpress .site-hero .subtitle {",
         ".kpress .site-ladders .site-ladders-name {",

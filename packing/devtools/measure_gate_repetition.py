@@ -442,8 +442,8 @@ def measure(
 def attribution_reach() -> tuple[int, int, int]:
     """`(tracked, claimed, unclaimed)` over the tracked files of the repository.
 
-    `claimed` is the count a step with a non-empty `touches` matches. `unclaimed` is what
-    can still reach `select_for_paths`'s escape hatch, and it is the only thing standing
+    `claimed` counts files matched by conditional `touches` or exact `known_inputs`.
+    `unclaimed` can still reach `select_for_paths`'s escape hatch, the only thing standing
     between a mis-declared pattern and a step that silently stops running -- so its size
     is the honest measure of how much protection the escape hatch is actually providing.
     """
@@ -451,7 +451,10 @@ def attribution_reach() -> tuple[int, int, int]:
     claimed = sum(
         1
         for path in tracked
-        if any(step.touches and step.reachable_from(path) for step in STEPS)
+        if any(
+            path in step.known_inputs or (step.touches and step.reachable_from(path))
+            for step in STEPS
+        )
     )
     return len(tracked), claimed, len(tracked) - claimed
 
@@ -499,9 +502,9 @@ def _render_text(
     if attribution:
         tracked, claimed, unclaimed = attribution_reach()
         print()
-        print("== what the patterns claim ==")
+        print("== what the input declarations claim ==")
         print(f"  tracked files                 {tracked:9}")
-        print(f"  claimed by some `touches`     {claimed:9}  ({claimed / tracked:.1%})")
+        print(f"  claimed by declared inputs    {claimed:9}  ({claimed / tracked:.1%})")
         print(f"  can reach the escape hatch    {unclaimed:9}  ({unclaimed / tracked:.1%})")
 
 

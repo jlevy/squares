@@ -323,6 +323,12 @@ def apply_text(plan: Plan, text: str) -> str:
     return f"---\n{front}---\n{title}\n\n" + "\n\n".join(parts)
 
 
+def formatted(text: str) -> str:
+    """A paragraph another writer lays beside the closed form's, wrapped as `_formatted`
+    wraps the closed form's own (`adopt_houses.held_note`)."""
+    return _formatted(text)
+
+
 def _formatted(text: str) -> str:
     """A new paragraph wrapped as the register's Markdown formatter wraps it, in process,
     as `generate_frontier_case` formats a record, so a generated record carries it as the

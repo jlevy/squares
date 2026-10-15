@@ -793,12 +793,20 @@ def page_assets(*, styles: Sequence[Path] = ()) -> tuple[str, str]:
     pages prepare mathematics during the build and do not load that runtime.
     """
     from devtools import site_assets  # noqa: PLC0415
+    from devtools.render_n11_lower_bounds_explainer import (  # noqa: PLC0415
+        code_symbol_face_css,
+        kpress_static,
+    )
 
     bundle = site_assets.shared()
+    code_symbols = bundle.assets.stylesheet(
+        "code-symbols.css", code_symbol_face_css(kpress_static(), bundle.assets.face)
+    )
     own = (PAPER_TYPE_CSS, SITE_NAV_CSS, SITE_CSS, SITE_RESULT_CSS, *styles)
     head = "\n".join(
         [
             bundle.head(_FROM_ROOT),
+            site_assets.stylesheet_tag(code_symbols, _FROM_ROOT),
             *(
                 site_assets.stylesheet_tag(bundle.assets.stylesheet_file(path), _FROM_ROOT)
                 for path in own
@@ -1341,7 +1349,7 @@ def atlas_page() -> Page:
 
 
 def news_page() -> Page:
-    """The complete retained contribution and launch history, grouped by day."""
+    """Public contribution and launch announcements, grouped by day."""
     from devtools import render_changelog  # noqa: PLC0415
 
     markdown = _template_markdown(
@@ -1357,7 +1365,7 @@ def news_page() -> Page:
             "with the retained contribution history."
         ),
         toc=False,
-        page_scripts=(NEWS_CARDS_SCRIPT, NEWS_FILTERS_SCRIPT),
+        page_scripts=(NEWS_CARDS_SCRIPT, NEWS_FILTERS_SCRIPT, NEWS_FORWARD_SCRIPT),
         rewrite_body=_case_links,
     )
 

@@ -137,7 +137,10 @@ claude/intake-YYYY-MM-DD, with today's date.
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
    `tbd shortcut create-or-update-pr-simple`. List every item with its bead and the
-   stage it reached, and every source the sweep could not check.
+   stage it reached, and every source the sweep could not check. Before merge, assign
+   exactly one S1–S5 significance label and prepare the News disposition by stage 5,
+   "Label the PR and Prepare News". Add project where the PR delivers a site or
+   project capability.
 7. From packing/, run `uv run --frozen --all-extras --group dev python -m
    devtools.render_announcement --ids T-NNN ... --github` with the T-NNN this pass
    registered (not --since, which also picks up other passes' results), and add its
@@ -607,6 +610,83 @@ running a replay, where a tier’s wall measures the contention rather than the 
 It merges on the owner’s word, by
 [the merge policy](../../development.md#merging-a-pull-request).
 
+### Label the PR and Prepare News
+
+Before merge, give each PR exactly one GitHub significance label, `S1` through `S5`,
+under the `github-workflows` grant (`tbd policy show`). Replace an earlier S label when
+the assessment changes.
+Score the highest genuinely new result or capability delivered by the PR; a citation to
+an existing result does not inherit its score.
+Keep the rationale in the PR description and the eventual entry’s `significance`.
+
+Use the following rubric conservatively.
+Most supporting work belongs at S1 or S2; choose a higher score only when the delivered
+contribution meets its anchor.
+Being public alone does not make a change noteworthy.
+
+| Label | Delivered contribution | Examples |
+| --- | --- | --- |
+| `S1` | Bookkeeping, internal documentation, planning or formatting only | Session closeout, a roadmap, changelog synchronization, prose reflow |
+| `S2` | A routine fix or refactor, custody or attribution work, modest UI refinement, ordinary maintenance or supporting prototype | Refreshing a source packet, correcting credit, adjusting spacing, preparing a vendor import or an internal prototype |
+| `S3` | A distinct noteworthy new result, substantive public explanation, verification or policy, key tooling, or meaningful artifact delivery | A new S3 result, a substantive proof explanation, a reproducible verification tool, a useful new paper or certificate delivery |
+| `S4` | A major delivered capability or site restructure, or a substantial new result | A complete regularization capability, a major site reorganization, a new S4 result |
+| `S5` | A landmark mathematical contribution or major resolution | A new S5 result establishing an important previously open case |
+
+A new registered result and its announcement inherit that result’s actual S score.
+An incidental reference to a result does not raise the PR’s score.
+A grouped release or announcement takes the maximum of its genuinely new contributions;
+score each stack layer for what that layer actually delivers, without assigning every
+layer the final release’s score.
+A plan, vendor preparation or supporting prototype generally remains S1/S2 until it
+delivers a capability that meets a higher anchor.
+
+For example, a typo fix in a public paper is S1/S2, not a new substantive explanation; a
+routine verifier repair is S2 unless it delivers a distinct noteworthy verification or
+capability. A large diff or a merge into a major stack does not supply significance.
+This judgment measures importance independently of verification and confirmation.
+
+Add the separate `project` label for site restructuring and project capabilities such as
+regularization. It is orthogonal to significance: project work can be S1/S2, and the
+label gives no score increase.
+It maps to the shared **Project** topic in News; it is not a scientific result kind.
+Engineering and Verification remain available topics, alongside the precise result
+kinds.
+
+For S3–S5, draft a concise News entry before merge, or record an editorial omission when
+the PR is an intermediate research checkpoint without a distinct reader-facing
+development. Name what changed, why it matters, the source PR and relevant `result_ids`,
+direct public artifact links where available, and the actual verification or publication
+limits. Use the real event date once known.
+The merged delivery date and the independently verified publication date are separate
+facts. A merged PR alone does not establish a live website, released artifact or
+completed proof replay.
+
+For S1/S2, record a coverage omission or retain an entry in the full changelog; these
+scores stay out of News.
+Existing published entries keep their dates and PR membership.
+Later verification or adoption is a separate event, with its own evidence and entry when
+noteworthy.
+
+After the source PR merges and its commit reaches local main, use the existing authoring
+command from `packing/` to prepare the follow-up change:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.import_changelog \
+  --pr NNN --significance-rationale "Explain the new delivered contribution." \
+  --output "$TMPDIR/changelog-candidate.yaml"
+```
+
+The importer fetches labels and takes the score from the single S label, so the editor
+supplies only the rationale.
+It rejects multiple S labels or a score conflicting with explicit metadata or
+`--significance`. Retained historical JSON without labels can still supply
+`significance: {score, rationale}`, or an explicit `--significance` with its rationale.
+Citations never assign importance automatically.
+Review the candidate and coverage audit, replace placeholder prose, and bring the
+approved entry into [`site-changelog.yaml`](../site-changelog.yaml) through
+[Maintaining the project changelog](../../development.md#maintaining-the-project-changelog).
+Rendering and routine validation remain offline.
+
 ### Verify the Published Result
 
 An import’s publication includes its public results and drawings.
@@ -651,11 +731,12 @@ After merge:
    The final author reply states only the scope actually imported, reviewed and
    published; a later source revision or newly split issue remains queued with its own
    owner.
-6. In the next change, give the merged pull request its News/changelog entry in
-   [`site-changelog.yaml`](../site-changelog.yaml), with the `result_ids` it registered
-   or moved, or an editorial omission, as
-   [Maintaining the project changelog](../../development.md#maintaining-the-project-changelog)
-   says.
+6. Complete the prepared News/changelog disposition in the next change, following
+   [Label the PR and Prepare News](#label-the-pr-and-prepare-news).
+   Retain the actual merge date, source PR, `result_ids`, artifact links and limits.
+   After that change deploys, check the live News entry and its public artifact links
+   against the merged record, and retain the deployment receipt.
+   Claim publication only after this check.
 
 ## Stage 6: Explain
 

@@ -152,6 +152,9 @@ class Square:
     ux: float
     uy: float
     corners: tuple[tuple[float, float], ...]
+    exact: tuple[tuple[Fraction, Fraction], ...] | None = None
+    """The rational witness's own corners, where it has them, which `edge_rule_contacts`
+    reads where a float residual lies at its rule's gap (`AT_THE_GAP`)."""
 
     def axis(self, face: str) -> tuple[float, float]:
         """The outward unit normal of `face` in this square's folded frame."""
@@ -190,7 +193,13 @@ def _atan2(y: float, x: float) -> float:
         return float(mp.atan2(mp.mpf(y), mp.mpf(x)))
 
 
-def make_square(ident: str, x: float, y: float, angle: float) -> Square:
+def make_square(
+    ident: str,
+    x: float,
+    y: float,
+    angle: float,
+    exact: tuple[tuple[Fraction, Fraction], ...] | None = None,
+) -> Square:
     tilt = math.fmod(angle, QUARTER)
     if tilt < 0:
         tilt += QUARTER
@@ -201,7 +210,7 @@ def make_square(ident: str, x: float, y: float, angle: float) -> Square:
         (x + cosine * a - sine * b, y + sine * a + cosine * b)
         for a, b in ((-0.5, -0.5), (0.5, -0.5), (0.5, 0.5), (-0.5, 0.5))
     )
-    return Square(ident, x, y, angle, tilt, cosine, sine, corners)
+    return Square(ident, x, y, angle, tilt, cosine, sine, corners, exact)
 
 
 def tilt_between(left: Square, right: Square) -> float:
@@ -214,6 +223,7 @@ def tilt_between(left: Square, right: Square) -> float:
 class Packing:
     side: float
     squares: tuple[Square, ...]
+    exact_side: Fraction | None = None
 
 
 class Grid:
@@ -421,6 +431,38 @@ class Contact:
     residual: float
 
 
+#: How near its rule's gap a float residual is decided again exactly. The floats carry the
+#: corners to about 1e-15 at the corpus's sizes; the rendering decides on the witness itself.
+AT_THE_GAP = 1e-12
+
+
+def _nearest(corner: tuple[float, float], exact: Sequence[tuple[Fraction, Fraction]]) -> int:
+    """The exact corner a float corner is, the one nearest it (corners are a unit apart)."""
+    return min(
+        range(len(exact)),
+        key=lambda index: (
+            (float(exact[index][0]) - corner[0]) ** 2
+            + (float(exact[index][1]) - corner[1]) ** 2
+        ),
+    )
+
+
+def _exactly(
+    square: Square, *edge: tuple[float, float]
+) -> tuple[tuple[Fraction, Fraction], ...]:
+    assert square.exact is not None
+    return tuple(square.exact[_nearest(corner, square.exact)] for corner in edge)
+
+
+def _within(residual: float, gap: float, decide: Any) -> bool:
+    """Whether a residual is within the gap: in floats, and exactly at the gap where
+    `decide` can say (`AT_THE_GAP`)."""
+    if abs(residual - gap) > AT_THE_GAP:
+        return residual <= gap
+    exact = decide()
+    return residual <= gap if exact is None else exact <= Fraction(str(gap))
+
+
 def edge_rule_contacts(
     packing: Packing, rule: Rule, pairs: Sequence[tuple[int, int]] | None = None
 ) -> list[list[Contact]]:
@@ -446,7 +488,21 @@ def edge_rule_contacts(
                 ("+y", 1, side),
             ):
                 residual = max(abs(a[axis] - boundary), abs(b[axis] - boundary))
-                if residual <= rule.gap:
+
+                def wall(
+                    square: Square = square,
+                    a: Any = a,
+                    b: Any = b,
+                    axis: int = axis,
+                    face: str = face,
+                ) -> Fraction | None:
+                    if square.exact is None or packing.exact_side is None:
+                        return None
+                    line = Fraction(0) if face.startswith("-") else packing.exact_side
+                    ea, eb = _exactly(square, a, b)
+                    return max(abs(ea[axis] - line), abs(eb[axis] - line))
+
+                if _within(residual, rule.gap, wall):
                     candidates[index][edge].append(
                         Contact(EDGE_FACES[edge], WALL_NAMES[face], residual)
                     )
@@ -473,7 +529,34 @@ def edge_rule_contacts(
                     abs(a1[1] - b0[1]),
                 )
                 residual = min(direct, reverse)
-                if residual > rule.gap:
+
+                def pair(  # noqa: PLR0917 -- the loop variables, bound at definition
+                    first: Square = first,
+                    second: Square = second,
+                    a0: Any = a0,
+                    a1: Any = a1,
+                    b0: Any = b0,
+                    b1: Any = b1,
+                ) -> Fraction | None:
+                    if first.exact is None or second.exact is None:
+                        return None
+                    (p0, p1), (q0, q1) = _exactly(first, a0, a1), _exactly(second, b0, b1)
+                    return min(
+                        max(
+                            abs(p0[0] - q0[0]),
+                            abs(p0[1] - q0[1]),
+                            abs(p1[0] - q1[0]),
+                            abs(p1[1] - q1[1]),
+                        ),
+                        max(
+                            abs(p0[0] - q1[0]),
+                            abs(p0[1] - q1[1]),
+                            abs(p1[0] - q0[0]),
+                            abs(p1[1] - q0[1]),
+                        ),
+                    )
+
+                if not _within(residual, rule.gap, pair):
                     continue
                 candidates[left][left_edge].append(
                     Contact(EDGE_FACES[left_edge], second.ident, residual)
@@ -662,9 +745,12 @@ def packings_from_witness(
     representation = witness["representation"]
     unit = witness["coordinates"]["angle_unit"]
     exact_geometry = None
+    exact_rational: Fraction | None = None
     if witness.get("scalar", {}).get("kind") in {"rational", "algebraic-number-field"}:
         exact_geometry, exact_side = materialize_exact_witness(witness)
         side = float(exact_side)
+        if type(exact_side) is Fraction:
+            exact_rational = exact_side
     else:
         side = _number(witness["side"])
     exact: list[Square] = []
@@ -690,12 +776,20 @@ def packings_from_witness(
             (x0, y0), (x1, y1) = corners[0], corners[1]
             angle = _atan2(float(y1 - y0), float(x1 - x0))
             frame_angle = math.degrees(angle) % 90.0
-        exact.append(make_square(ident, x, y, angle))
+        rational = (
+            tuple((cx, cy) for cx, cy in exact_geometry[index])
+            if exact_geometry is not None
+            and all(
+                type(value) is Fraction for corner in exact_geometry[index] for value in corner
+            )
+            else None
+        )
+        exact.append(make_square(ident, x, y, angle, rational))
         rounded = round(frame_angle, 4)
         degrees.append(rounded)
         framed.append(make_square(ident, round(x, 6), round(y, 6), rounded * math.pi / 180))
     return (
-        Packing(side, tuple(exact)),
+        Packing(side, tuple(exact), exact_rational),
         Packing(round(side, 9), tuple(framed)),
         tuple(degrees),
     )

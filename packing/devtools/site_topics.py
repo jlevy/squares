@@ -8,12 +8,12 @@ from typing import Literal
 from devtools.check_results import KINDS, kind_label
 
 # Precise result kinds keep their existing stable keys. News can also describe the
-# project's engineering, verification and public documentation work.
+# project's capabilities, engineering and verification work.
 TOPICS: dict[str, str] = {
     **{kind: kind_label(kind).capitalize() for kind in KINDS},
+    "project": "Project",
     "engineering": "Engineering",
     "verification": "Verification",
-    "documentation": "Documentation",
 }
 
 

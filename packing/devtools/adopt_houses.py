@@ -37,11 +37,25 @@ the ordinary lower lanes from the draft.
 It is idempotent: a count already at its house is left alone, so a second run writes
 nothing, and ``--check`` reports any adopted count whose record differs from its house.
 
+**A held result** (`select_houses.HELD`) is no candidate, but the records say where it
+waits: an adopted record's certificate section names each held certificate below its
+house, with why it waits, and so does a dated paragraph under the title of a record no
+pass houses (`held_note`), which also cites the held certificate's evidence. An algebraic
+certificate below the house, which the selection leaves out for the owner (RP-3), is
+named in the section the same way.
+
 Usage, from ``packing/`` with the project interpreter::
 
     python -m devtools.adopt_houses             # write
     python -m devtools.adopt_houses --dry-run   # list what would move
     python -m devtools.adopt_houses --check     # hold every adopted case to its house
+    python -m devtools.adopt_houses --refresh   # what each record's writer writes now
+
+``--refresh`` brings every adopted record's evidence roster, dated paragraph and
+certificate section to what its last pass's writer writes now, from the record that pass
+read, and every held count's note to the held results; nothing another tool writes moves.
+A record changes this way when the register gains a confirmed certificate at its count, or
+the owner's holds change.
 
 **A later pass.** A later import adopted the same way needs:
 
@@ -85,6 +99,7 @@ from typing import Any
 import yaml
 from strif import atomic_output_file
 
+from devtools import apply_closed_form as closed_form
 from devtools import select_houses
 from devtools import upper_bound_houses as houses
 from sqpack.yamlio import safe_load
@@ -102,6 +117,14 @@ FOOTER = "<!-- This document follows common-doc-guidelines.md."
 PLACES = select_houses.DISPLAY_PLACES
 #: Longest exact fraction the prose writes out; a longer one is given by its decimals.
 FRACTION_CHARS = 72
+#: The verifier table, which `render_case_verifiers` writes into the body, not this.
+VERIFIER_TABLE = re.compile(
+    r"<!-- BEGIN verification code.*?<!-- END verification code -->", re.DOTALL
+)
+#: Counts whose body the first pass, on 11 October 2026, marked as history by hand, in
+#: prose no tool writes in a fixed form (`historical`): the SQUISH update sections at 155,
+#: 258, 263 and 302 and the grid prose at 308. Only their owned parts are the writer's.
+HAND_MARKED = frozenset({155, 258, 263, 302, 308})
 
 
 @dataclass(frozen=True)
@@ -282,6 +305,142 @@ RESULTS: dict[str, Prose] = {
             "round-by-round trace is not published."
         ),
     ),
+    "T-161": Prose(
+        author="Francisco Couzo",
+        reported="on [jlevy/squares#561](https://github.com/jlevy/squares/issues/561)",
+        producer_route=True,
+        ai=(
+            "The author states that OpenAI Codex assisted the continuing search, the "
+            "application work, the source audit, the verification orchestration and the "
+            "request, that earlier search code and submissions were prepared with Claude "
+            "Code, and that he directed the work."
+        ),
+    ),
+    "T-162": Prose(
+        author="Daniil Ostashev",
+        reported="on [jlevy/squares#562](https://github.com/jlevy/squares/issues/562)",
+        producer_route=False,
+        ai=(
+            "The issue says the author drives an AI-assisted research loop with his own "
+            "ideas, the rectangle library and the composition being his, and that AI agents "
+            "wrote and ran the search, composition and verification code."
+        ),
+        lineage=(
+            "The issue says the 129 is cut from the n = 302 house of the time, Evan Daniel’s "
+            "view of Nate Chaoweeraprasit’s SQUISH packing, and re-optimised, and that the "
+            "204 and 303 are new arrangements. Measured here, the 129 pairs square for square "
+            "with neither Ryan Xu’s packing nor T-146’s, though 46 of Xu’s squares lie in "
+            "place under a quarter turn, and 49 of the 302’s reappear in it by pose; that "
+            "supports the author’s account and establishes none of it."
+        ),
+    ),
+    "T-165": Prose(
+        author="Francisco Couzo",
+        reported=(
+            "in [his repository](https://github.com/franciscouzo/square-packing) on 12 "
+            "October 2026, with no issue"
+        ),
+        producer_route=True,
+        ai=(
+            "The commit makes no statement about AI assistance; the author’s issues of 12 "
+            "and 13 October say OpenAI Codex assisted the search and verification and that "
+            "he directed the work."
+        ),
+    ),
+    "T-168": Prose(
+        author="PingYou Ltd",
+        reported="on [jlevy/squares#566](https://github.com/jlevy/squares/issues/566)",
+        producer_route=False,
+        ai="The pinned source makes no statement about AI assistance.",
+        routes=(
+            "The source ran both maintained routes itself on its corners witnesses; those "
+            "runs are its own, and the replay here is independently re-implemented."
+        ),
+    ),
+    "T-169": Prose(
+        author="PingYou Ltd",
+        reported="on [jlevy/squares#567](https://github.com/jlevy/squares/issues/567)",
+        producer_route=False,
+        ai="The pinned source makes no statement about AI assistance.",
+        routes=(
+            "The source ran both maintained routes itself on its corners witnesses; those "
+            "runs are its own, and the replay here is independently re-implemented."
+        ),
+    ),
+    "T-170": Prose(
+        author="PingYou Ltd",
+        reported="on [jlevy/squares#568](https://github.com/jlevy/squares/issues/568)",
+        producer_route=False,
+        ai=(
+            "The issue states that computation, checking and submission preparation were "
+            "AI-assisted; the pinned source makes no statement about AI assistance."
+        ),
+        routes=(
+            "The source ran both maintained routes itself on its corners witnesses; those "
+            "runs are its own, and the replay here is independently re-implemented."
+        ),
+    ),
+    "T-171": Prose(
+        author="PingYou Ltd",
+        reported="on [jlevy/squares#569](https://github.com/jlevy/squares/issues/569)",
+        producer_route=False,
+        ai=(
+            "The issue states that computation, checking and submission preparation were "
+            "AI-assisted; the pinned source makes no statement about AI assistance."
+        ),
+        routes=(
+            "The source ran both maintained routes itself on its corners witnesses; those "
+            "runs are its own, and the replay here is independently re-implemented."
+        ),
+    ),
+    "T-173": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#573](https://github.com/jlevy/squares/issues/573)",
+        producer_route=True,
+        ai=(
+            "The issue says Gemini was used for the search implementation, the verification "
+            "orchestration and the issue’s preparation, directed by the author."
+        ),
+    ),
+    "T-175": Prose(
+        author="Daniil Ostashev",
+        reported="on [jlevy/squares#575](https://github.com/jlevy/squares/issues/575)",
+        producer_route=False,
+        ai=(
+            "The issue says the author drives an AI-assisted research loop with his own "
+            "ideas, merging the tilted bands being his, and that AI agents wrote and ran the "
+            "search and verification code."
+        ),
+    ),
+    "T-181": Prose(
+        author="Francisco Couzo",
+        reported="on [jlevy/squares#583](https://github.com/jlevy/squares/issues/583)",
+        producer_route=True,
+        ai=(
+            "The author says OpenAI Codex assisted the search implementation, the "
+            "verification orchestration and the requests, that earlier search work used "
+            "Claude Code, and that he directed the work."
+        ),
+    ),
+    "T-182": Prose(
+        author="Francisco Couzo",
+        reported="on [jlevy/squares#586](https://github.com/jlevy/squares/issues/586)",
+        producer_route=True,
+        ai=(
+            "The author says OpenAI Codex assisted the search implementation, the "
+            "verification orchestration and the requests, that earlier search work used "
+            "Claude Code, and that he directed the work."
+        ),
+    ),
+    "T-183": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#593](https://github.com/jlevy/squares/issues/593)",
+        producer_route=True,
+        ai=(
+            "The source discloses Gemini assistance with solver scripting, precision checks "
+            "and formatting."
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -340,7 +499,14 @@ CREDITS: dict[int, Credit] = {
     86: _couzo("Xu"),
     102: _regularized(XU, "Ryan Xu’s"),
     103: _regularized(XU, "Ryan Xu’s", via="Mishapolk"),
-    105: _couzo("Xu"),
+    # PingYou Ltd's tighter certificate of Couzo's packing, padding only (T-170's
+    # regularization of T-130, measured by the 14 October review).
+    105: Credit(
+        (XU,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Francisco Couzo’s refinement of Ryan Xu’s "
+        "packing",
+    ),
     108: _couzo("Xu"),
     123: _regularized(XU, "Ryan Xu’s"),
     126: Credit(
@@ -349,31 +515,52 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s reconstruction and exact certificate of Ryan Xu’s arrangement",
     ),
     127: _couzo("Xu"),
-    129: _regularized(XU, "Ryan Xu’s"),
+    # Issue 562's cut-out; the piece lineage stays in the author's voice (RQ-11), in
+    # T-162's `lineage`.
+    129: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
     131: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
     132: Credit((DANIEL,), (), "Evan Daniel’s record-hunt packing"),
-    146: Credit((XU,), (BARNETT,), "Robert Barnett’s refinement of Ryan Xu’s packing"),
+    # Barnett's packing re-solved, no square moved beyond 2e-06 (T-168's regularization
+    # of T-150).
+    146: Credit(
+        (XU,),
+        (BARNETT, PINGYOU),
+        "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
+    ),
+    # PingYou Ltd's design rearranged by Mykhailo Polkovskyi, as the 14 October review
+    # measured it (RQ-5); whether it is a new arrangement is the owner's decision 1 on
+    # pull request 602 (T-173).
     153: Credit(
         (PINGYOU,),
-        (),
-        "PingYou Ltd’s construction, after Ryan Xu’s n = 70 packing and Evan Daniel’s exact "
-        "certificate of it",
+        ("Mishapolk",),
+        "Mykhailo Polkovskyi’s arrangement of PingYou Ltd’s n = 153 design, after Ryan "
+        "Xu’s n = 70 packing and Evan Daniel’s exact certificate of it",
     ),
-    # Evan Daniel's packing; the start he names, Couzo's 155 less one square, is his
-    # statement, consistent with the measurements and not established by them (T-160).
+    # Francisco Couzo's issue-586 packing, from Evan Daniel's arrangement through his own
+    # issue-583 refinement of it, moved well beyond a refinement (T-182).
     154: Credit(
         (DANIEL,),
-        (),
-        "Evan Daniel’s packing from his size-chaining explorer",
+        (COUZO,),
+        "Francisco Couzo’s further arrangement of Evan Daniel’s n = 154 packing",
     ),
     155: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
-    156: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # Issue 561's continuation of Ostashev's packing (T-149), paired square for square.
+    156: Credit(
+        (OSTASHEV,),
+        (COUZO,),
+        "Francisco Couzo’s continuation of Daniil Ostashev’s n = 156 packing",
+    ),
     175: _composed(
         "two of his 38-square rectangles with David Ellsworth’s n = 171 template, in place "
         "of its pieces of Thomas Schadt’s n = 50 packing"
     ),
-    176: _mondrian(
-        "Francisco Couzo’s n = 127 packing and the Kingbird catalogue’s n = 5 packing"
+    # Couzo's re-solve of his issue-561 packing (T-165's regularization of T-161), which
+    # moves Daniil Ostashev's issue-562 arrangement, as issue 561 states.
+    176: Credit(
+        (OSTASHEV,),
+        (COUZO,),
+        "Francisco Couzo’s exact re-solve of his issue-561 packing, which moves Daniil "
+        "Ostashev’s n = 176 arrangement",
     ),
     180: Credit(
         (SQUISH,),
@@ -382,27 +569,53 @@ CREDITS: dict[int, Credit] = {
         "as Siddharth Gupta refined it",
     ),
     181: _mondrian("two of SQUISH’s own n = 154 packings"),
+    # By pose an exact re-solve of PingYou Ltd's packing (RQ-5 of the 14 October review).
     207: Credit(
         (PINGYOU,),
-        (),
-        "PingYou Ltd’s assembly of two placed patches of Ryan Xu’s n = 70 packing, from "
-        "Evan Daniel’s exact certificate of it",
+        ("Mishapolk",),
+        "Mykhailo Polkovskyi’s exact re-solve of PingYou Ltd’s assembly of two placed "
+        "patches of Ryan Xu’s n = 70 packing, from Evan Daniel’s exact certificate of it",
     ),
+    # A new arrangement, as issue 562 states (T-162).
+    204: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
     209: _couzo("SQUISH"),
-    211: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # Issue 583's continuation of Daniil Ostashev's issue-575 packings, tightened by issue
+    # 586 (T-182's regularizations of T-181); issue 593's joint request is the owner's.
+    211: Credit(
+        (OSTASHEV,),
+        (COUZO,),
+        "Francisco Couzo’s continuation of Daniil Ostashev’s n = 211 packing",
+    ),
     228: Credit((COUZO,), (), "Francisco Couzo’s refinement of his own packing"),
     232: _composed(
         "his 38-square rectangle with a 76-square piece of Erich Friedman’s n = 85 packing"
     ),
     236: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    237: _couzo("SQUISH"),
+    # Francisco Couzo's issue-561 design, after SQUISH's packing, rearranged (T-183).
+    237: Credit(
+        (SQUISH,),
+        (COUZO, "Mishapolk"),
+        "Mykhailo Polkovskyi’s arrangement of Francisco Couzo’s design, after Nate "
+        "Chaoweeraprasit’s SQUISH packing",
+    ),
     238: _mondrian("SQUISH’s own n = 305 and n = 154 packings"),
     239: _mondrian(
         "SQUISH’s n = 209 packing as Siddharth Gupta refined it and its own n = 240 packing"
     ),
+    241: Credit(
+        (OSTASHEV,),
+        (COUZO,),
+        "Francisco Couzo’s continuation of Daniil Ostashev’s n = 241 packing",
+    ),
     258: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH", via="Mishapolk"),
     259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
-    261: Credit((XU,), (BARNETT,), "Robert Barnett’s refinement of Ryan Xu’s packing"),
+    # Barnett's packing re-solved, no square moved beyond 2e-06 (T-169's regularization
+    # of T-150).
+    261: Credit(
+        (XU,),
+        (BARNETT, PINGYOU),
+        "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
+    ),
     263: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
     264: _composed(
         "his 38-square rectangle with a 93-square piece of Evan Daniel’s exact optimum of "
@@ -414,19 +627,30 @@ CREDITS: dict[int, Credit] = {
         "SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird catalogue’s former "
         "n = 19 packing"
     ),
-    271: _mondrian("SQUISH’s own n = 305 and n = 240 packings"),
-    272: _mondrian(
-        "SQUISH’s own n = 240 packing and the Kingbird catalogue’s former n = 182 packing"
+    # Issue 561's refinement of SQUISH's packing (T-151), paired square for square.
+    271: Credit(
+        (SQUISH,),
+        (COUZO,),
+        "Francisco Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing",
+    ),
+    # SQUISH's packing re-solved, no square moved beyond 2e-07 (T-171's regularization of
+    # T-151).
+    272: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing",
     ),
     292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
     295: _regularized(XU, "Ryan Xu’s"),
-    302: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    303: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    304: Credit(
-        (SQUISH,),
+    # Issue 583's continuation of PingYou Ltd's n302 arrangement (T-181, T-164).
+    302: Credit(
+        (PINGYOU,),
         (COUZO,),
-        "Francisco Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH Mondrian packing",
+        "Francisco Couzo’s continuation of PingYou Ltd’s n = 302 arrangement",
     ),
+    # A new arrangement, as issue 562 states (T-162).
+    303: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    304: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
     305: Credit(
         (SQUISH,),
         (COUZO,),
@@ -583,12 +807,47 @@ def _claims(path: Path) -> Mapping[int, str]:
     return load_claims(path)
 
 
-def _value(candidate: select_houses.Candidate) -> str:
+#: The most places a house's side is printed at to stay below the house it replaces.
+MAX_PLACES = 40
+
+
+def shown(side: Fraction, above: object = None) -> str:
+    """A house's side rounded up at sixteen places, or at the fewest more that print it
+    strictly below `above`, the reported value of the house it replaces, where sixteen
+    would tie the two: PingYou Ltd's n = 105 re-solve (T-170) is 1.08e-19 below Francisco
+    Couzo's certificate (T-130), and both round up to 10.7893037837481589."""
+    printed = select_houses.ceiling(side)
+    if above is None:
+        return printed
+    bar = Fraction(Decimal(str(above)))
+    places = PLACES
+    while side < bar and Fraction(Decimal(printed)) >= bar and places < MAX_PLACES:
+        places += 1
+        printed = select_houses.ceiling(side, places)
+    return printed
+
+
+def printed_at(value: object, side: Fraction) -> bool:
+    """Whether `value` prints `side`: the side itself, or rounded up at its own places, at
+    sixteen or more (`shown`)."""
+    text = str(value)
+    if Fraction(Decimal(text)) == side:
+        return True
+    places = len(text.partition(".")[2])
+    return places >= PLACES and text == select_houses.ceiling(side, places)
+
+
+def _above(move: Move) -> object:
+    """The reported value of the house the move replaces, where the record states one."""
+    return (move.packing.get("reported_upper_bound") or {}).get("value")
+
+
+def _value(candidate: select_houses.Candidate, above: object = None) -> str:
     """The reported value: the source's print where its coverage claims record holds one.
 
     `check_source_coverage` holds a selected source that declares a claims record to the
-    side that record prints; every other house is reported at its exact side rounded up
-    at sixteen places, as the verified lane writes it.
+    side that record prints; every other house is reported at its exact side as `shown`
+    prints it against `above`, the house it replaces, as the verified lane writes it.
     """
     source = _covering(candidate.source_key, candidate.n)
     if source.get("claims_record"):
@@ -598,7 +857,7 @@ def _value(candidate: select_houses.Candidate) -> str:
                 f"n={candidate.n}: {source['id']}'s claims record does not print the exact side"
             )
         return printed
-    return select_houses.ceiling(candidate.side)
+    return shown(candidate.side, above)
 
 
 def words(iso: str) -> str:
@@ -733,7 +992,7 @@ def reported_bound(move: Move) -> dict[str, Any]:
     bibliography = _bibliography()[house.source_key]
     origin = houses.source_for(move.n).origin(move.n)
     return {
-        "value": _value(house),
+        "value": _value(house, _above(move)),
         "exact_form": houses.legacy.literal(house.side),
         "evidence": list(house.report_evidence),
         "algebraic_degree": 1,
@@ -755,7 +1014,7 @@ def reported_bound(move: Move) -> dict[str, Any]:
 
 def verified_bound(move: Move) -> dict[str, Any]:
     return {
-        "value": select_houses.ceiling(move.house.side),
+        "value": shown(move.house.side, _above(move)),
         "exact_form": houses.legacy.literal(move.house.side),
         "evidence": list(move.house.confirming_evidence),
     }
@@ -901,7 +1160,7 @@ def opening(move: Move) -> str:
     return (
         f"**House adoption, {day_words(n)}.** {credit.phrase[0].upper()}{credit.phrase[1:]} "
         f"({house.result}) is now this case’s house: its exact certificate proves "
-        f"$s({n}) \\le {select_houses.ceiling(house.side)}$, the reported and the verified "
+        f"$s({n}) \\le {shown(house.side, _above(move))}$, the reported and the verified "
         f"upper bound, `{_sci(move.selection.margin)}` below the ceiling the case held until "
         f"then, ${upper['value']}$ from {_holder(move.packing)}, which stays retained as "
         f"history ([the certificate](#{_anchor(move)}))."
@@ -923,7 +1182,7 @@ def section(move: Move) -> str:
     packet = houses.source_for(n).packet.name
     review, reviewed = _review(house.result)
     fraction = _math_fraction(house.side)
-    ceiling = select_houses.ceiling(house.side)
+    ceiling = shown(house.side, _above(move))
     side = (
         f"at exact side {fraction}, displayed upward as ${ceiling}$"
         if fraction
@@ -959,7 +1218,9 @@ def section(move: Move) -> str:
             "optimality, rigidity or a local minimum."
         ),
     ]
-    if house.regularizes:
+    if house.regularizes and house.result not in DISPLAY_REGULARIZERS:
+        paragraphs.append(_regularization(move, prose.author))
+    elif house.regularizes:
         paragraphs.append(
             "The certificate regularizes for display the packing "
             f"{house.regularizes} records, at the side the source reports as that packing’s "
@@ -973,8 +1234,11 @@ def section(move: Move) -> str:
     if prose.lineage:
         paragraphs.append(prose.lineage)
     earlier = set(_earlier(move.packing))
+    held = set(move.selection.held)
     others = [
-        c for c in move.selection.candidates if c is not house and c.result not in earlier
+        c
+        for c in move.selection.candidates
+        if c is not house and c.result not in earlier and c not in held
     ]
     upper = move.packing["reported_upper_bound"]
     history = (
@@ -987,8 +1251,88 @@ def section(move: Move) -> str:
             f" The other certificates confirmed here at this count, {listed}, stay verified "
             "and are not selected."
         )
+    waiting = [
+        *held_sentences(
+            move.selection.held, house.side, below="this house", keeps="this house"
+        ),
+        *algebraic_sentences(move.selection, house.side),
+    ]
+    if waiting:
+        history += " " + " ".join(waiting)
     paragraphs.append(history)
     return "\n\n".join(paragraphs) + "\n"
+
+
+def _reason(result: str) -> str:
+    """Why a held result waits, as case prose writes it."""
+    return select_houses.HELD[result].reason.replace("'", "’")
+
+
+def held_sentences(
+    held: Sequence[select_houses.Candidate], side: Fraction, *, below: str, keeps: str
+) -> list[str]:
+    """What a record says of each held certificate below `side`: smaller, confirmed and
+    reviewed, why it waits, and that the case moves to it if the owner adopts it."""
+    sentences = []
+    for candidate in held:
+        review, reviewed = _review(candidate.result)
+        sentences.append(
+            f"{candidate.result} at ${display(candidate.side)}$, "
+            f"`{_sci(side - candidate.side)}` below {below}, is confirmed here and accepted by "
+            f"the [review of {reviewed}](../../{review}), but {_reason(candidate.result)}; "
+            f"the case keeps {keeps} until the owner decides, and moves to "
+            f"{candidate.result}’s side if the owner adopts them."
+        )
+    return sentences
+
+
+def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> list[str]:
+    """What a record says of an algebraic certificate below its house: left out of the
+    selection on one route, for the owner's decision (RP-3 of PR 574's review)."""
+    sentences = []
+    for result, key in selection.algebraic:
+        if not select_houses.algebraic_below(key, selection.n, side):
+            continue
+        _value, degree = select_houses.algebraic_side(key, selection.n)
+        margin = select_houses.algebraic_margin(key, selection.n, side)
+        review, reviewed = _review(result)
+        sentences.append(
+            f"{result}’s algebraic certificate at this count, a root of a degree-{degree} "
+            f"integer polynomial `{_sci(margin)}` below this house, is decided here on one "
+            "exact route only, so it is left out of the selection: adopting it is the "
+            f"owner’s decision (RP-3 of the [review of {reviewed}](../../{review})), pending "
+            "a second route."
+        )
+    return sentences
+
+
+#: The results whose regularizations are for display, at the side the source reports as
+#: the packing's exact optimum, with the regularizer credited (T-146, Evan Daniel's
+#: regularized lists). Every other result's regularizations are certificates of the
+#: packing its entry names, by the identity's basis (`_regularization`).
+DISPLAY_REGULARIZERS = frozenset({"T-146"})
+
+
+def _regularization(move: Move, author: str) -> str:
+    """What a house that tightens a registered packing says of it, by its identity's basis.
+
+    T-146's regularizations, for display at the source's exact optimum, keep their own
+    sentence; any other is a certificate of the packing its entry names (`of`).
+    """
+    house = move.house
+    entry = next(e for e in _register() if e["id"] == house.result)
+    item = next(i for i in entry["regularizations"] if i["n"] == move.n)
+    basis = str((item.get("identity") or {}).get("basis") or "source-claim")
+    how = (
+        "measured here pose by pose as that packing"
+        if basis == "measured"
+        else "that packing by the source’s statement, not decided here"
+    )
+    return (
+        f"The certificate is {author}’s tightening of the packing {house.regularizes} "
+        f"records, {how} ({house.result}’s regularizations), so the packing keeps its "
+        f"finder’s credit and {author} is credited with the certificate."
+    )
 
 
 #: The heading `apply_exact_ceilings` gives the section on a ceiling that trails the print.
@@ -1101,8 +1445,8 @@ def historical(move: Move, text: str) -> str:
     Prose in no fixed form, which no tool here wrote, is not rewritten; `check_case_prose`
     refuses a record that still states it as the bound. The first pass marked such prose
     by hand at five counts, the SQUISH update sections at 155, 258, 263 and 302 and the
-    grid prose at 308 (`test_house_adoption.HAND_MARKED`); every other word of an adopted
-    body is what this writes from the record its last pass read.
+    grid prose at 308 (`HAND_MARKED`); every other word of an adopted body, the verifier
+    table apart, is what this writes from the record its last pass read.
     """
     n, until = move.n, day_words(move.n)
     text = _named_prose(text)
@@ -1240,7 +1584,7 @@ def coverage(moves: Sequence[Move], text: str) -> str:
         overrides[n] = {
             "n": n,
             "source_id": new,
-            "value": _value(house),
+            "value": _value(house, _above(move)),
             "evidence": house.report_evidence[0],
             "reason": reason,
         }
@@ -1482,6 +1826,189 @@ def holds(n: int, text: str) -> bool:
     return upper.get("source_key") == houses.source_for(n).key
 
 
+# ------------------------------------------------------------------------- held notes
+
+
+#: The opening words of the dated paragraph a held count's record carries under its title
+#: where no pass houses the count (`held_note`).
+HELD_OPENING = "**Held for the owner, "
+
+
+def held_at(n: int, case: select_houses.Case) -> tuple[select_houses.Candidate, ...]:
+    """The certificates of held results (`select_houses.HELD`) below the case at `n`."""
+    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.HELD]
+    found = select_houses.candidates(entries, select_houses.load_evidence()).get(n, [])
+    return tuple(
+        sorted((c for c in found if c.side < case.verified), key=select_houses.precedence)
+    )
+
+
+def _paragraphs(body: str) -> tuple[str, list[str]]:
+    title, _, rest = body.partition("\n\n")
+    return title, rest.split("\n\n")
+
+
+def held_note(n: int, text: str) -> str:
+    """The record with its held note, where a held result is below a case no pass houses.
+
+    The note is a dated paragraph under the title, after the paragraphs that lead it
+    (`apply_closed_form.LEADS` and the closed form's own), which says what
+    `held_sentences` says in a certificate section, and the held certificates' evidence
+    joins the case's roster. A note whose words are already these is kept as it is
+    wrapped; a note no held result supports is dropped. An adopted record is returned as
+    it is: its certificate section says it (`section`).
+    """
+    if n in houses.ADOPTED:
+        return text
+    fence, front, rest = _split(text)
+    held = held_at(n, select_houses.parse_case(n, text))
+    closing, body = rest[:4], rest[4:]
+    title, parts = _paragraphs(body)
+    mine = [i for i, part in enumerate(parts) if part.startswith(HELD_OPENING)]
+    if len(mine) > 1:
+        raise AdoptionError(f"n={n} holds {len(mine)} held notes")
+    kept = [part for i, part in enumerate(parts) if i not in mine]
+    if held:
+        since = min(select_houses.HELD[c.result].since for c in held)
+        sentences = held_sentences(
+            held,
+            select_houses.parse_case(n, text).verified,
+            below="this case’s verified ceiling",
+            keeps="its house",
+        )
+        written = f"{HELD_OPENING}{words(since)}.** " + " ".join(sentences)
+        if mine and " ".join(parts[mine[0]].split()) == written:
+            written = parts[mine[0]]
+        else:
+            written = closed_form.formatted(written)
+        place = 0
+        while place < len(kept) and kept[place].startswith(
+            (*closed_form.LEADS, *closed_form.OPENINGS)
+        ):
+            place += 1
+        kept.insert(place, written)
+        roster = [e for c in held for e in (*c.report_evidence, *c.confirming_evidence)]
+        cited = set(_packing(front).get("evidence") or ())
+        front = _append(front, "evidence", [e for e in dict.fromkeys(roster) if e not in cited])
+    return fence + front + closing + title + "\n\n" + "\n\n".join(kept)
+
+
+def carries_held_note(text: str) -> bool:
+    """Whether a record carries a held note, which a redraft of it must carry too."""
+    return any(part.startswith(HELD_OPENING) for part in _paragraphs(_split(text)[2][4:])[1])
+
+
+def held_counts() -> list[int]:
+    """The counts no pass houses where a held result is below the case, or a note stands."""
+    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.HELD]
+    reached = {n for entry in entries for n in select_houses.scope_values(dict(entry["scope"]))}
+    noted = {
+        int(path.stem.removeprefix("n-"))
+        for path in FRONTIER.glob("n-[0-9][0-9][0-9].md")
+        if HELD_OPENING in path.read_text(encoding="utf-8")
+    }
+    return sorted(
+        n
+        for n in reached | noted
+        if n not in houses.ADOPTED and select_houses.case_path(n).exists()
+    )
+
+
+# ------------------------------------------------------------------------- refreshing
+
+
+def replay_plan() -> list[Move]:
+    """Each adopted count's last pass planned again from the record as that pass read it."""
+    latest = before_last_pass()
+    current = select_houses.select()
+    cases = {
+        n: select_houses.parse_case(n, latest[n]) if n in latest else selection.case
+        for n, selection in current.items()
+    }
+    return plan(select_houses.select(cases=cases), texts=latest)
+
+
+def replayed_text(move: Move) -> str:
+    """What the move's pass writes now, with the closed form, which ran after the earliest
+    passes and before the later ones, laid over it as the last layer, as it is laid over
+    the records."""
+    return closed_form.replay(move.n, rewrite(move))
+
+
+def _span(text: str, start: str, end: str) -> tuple[int, int]:
+    found = text.rindex(start)
+    return found, text.index(end, found)
+
+
+def refreshed(move: Move, committed: str) -> str:
+    """The committed record with what its last pass's writer writes now in the parts the
+    writer alone owns: the evidence roster, the dated paragraph and the certificate
+    section, and, outside `HAND_MARKED`, the rest of the body, which it marks as history.
+    The rest, the verifier table and the front matter other tools refresh, stays as it
+    is."""
+    written = replayed_text(move)
+    fence, front, rest = _split(committed)
+    evidence = _packing(_split(written)[1])["evidence"]
+    if _packing(front).get("evidence") != evidence:
+        front = _replace(front, "evidence", evidence)
+    if move.n not in HAND_MARKED:
+        rest = _with_history(rest, _split(written)[2])
+    text = fence + front + rest
+    for start, end in (
+        (f"\n**House adoption, {day_words(move.n)}.**", "\n\n"),
+        (f"\n## {_title(move)}\n", FOOTER),
+    ):
+        a, b = _span(text, start, end)
+        c, d = _span(written, start, end)
+        if _flat(text[a:b]) != _flat(written[c:d]):
+            text = text[:a] + written[c:d] + text[b:]
+    return text
+
+
+def _flat(text: str) -> str:
+    return " ".join(text.split())
+
+
+def history_words(body: str) -> str:
+    """A body as the writer is answerable for it: flowmark's wrapping and escapes undone
+    and the verifier table left out."""
+    return _flat(VERIFIER_TABLE.sub("", body).replace("\\+", "+"))
+
+
+def _with_history(committed: str, written: str) -> str:
+    """The written body where its words differ from the committed one's, with the
+    committed verifier table in place of the written one."""
+    if history_words(committed) == history_words(written):
+        return committed
+    table = VERIFIER_TABLE.search(committed)
+    if table is None:
+        return written
+    return VERIFIER_TABLE.sub(lambda _match: table.group(), written, count=1)
+
+
+def refresh(*, write: bool) -> list[int]:
+    """Every record whose writer-owned text, or held note, differs from what the writer
+    writes now, by count; written where `write`. Whitespace is the formatter's."""
+    changed = []
+    for move in replay_plan():
+        path = select_houses.case_path(move.n)
+        committed = path.read_text(encoding="utf-8")
+        text = refreshed(move, committed)
+        if _flat(text) != _flat(committed):
+            changed.append(move.n)
+            if write:
+                _write(path, text)
+    for n in held_counts():
+        path = select_houses.case_path(n)
+        committed = path.read_text(encoding="utf-8")
+        text = held_note(n, committed)
+        if _flat(text) != _flat(committed):
+            changed.append(n)
+            if write:
+                _write(path, text)
+    return sorted(changed)
+
+
 def adopt_case(n: int, existing: str, generated: str) -> str:
     """The generator's redraft of an adopted case: the house stays, lower lanes are drafted.
 
@@ -1561,12 +2088,15 @@ def check() -> list[str]:
         for lane, bound in (("reported", upper), ("verified", verified)):
             if Fraction(str(bound.get("exact_form"))) != side:
                 problems.append(f"n={n}: the {lane} exact form is not {result}'s exact side")
-            shown = Fraction(Decimal(str(bound["value"])))
-            if shown not in {side, Fraction(Decimal(select_houses.ceiling(side)))}:
+            if not printed_at(bound["value"], side):
                 problems.append(f"n={n}: the {lane} value is not the side, exact or rounded up")
         override = overrides.get(n)
         if override is None or sources[override["source_id"]]["source_key"] != source.key:
             problems.append(f"n={n}: the coverage register does not select {source.key}")
+    for n in held_counts():
+        text = select_houses.case_path(n).read_text(encoding="utf-8")
+        if _flat(held_note(n, text)) != _flat(text):
+            problems.append(f"n={n}: the held note is not what the held results say")
     return problems
 
 
@@ -1575,7 +2105,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--dry-run", action="store_true", help="list the moves, write nothing")
     mode.add_argument("--check", action="store_true", help="hold adopted cases to their houses")
+    mode.add_argument(
+        "--refresh", action="store_true", help="write what each record's writer writes now"
+    )
     arguments = parser.parse_args(argv)
+    if arguments.refresh:
+        changed = refresh(write=True)
+        print(f"refreshed {len(changed)} records: {', '.join(map(str, changed)) or 'none'}")
+        return 0
     if arguments.check:
         problems = check()
         for problem in problems:

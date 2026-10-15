@@ -353,3 +353,25 @@ def test_metric_stylesheet_inlining_rejects_unsafe_paths_before_read(output: str
 def test_metric_stylesheet_relinking_refuses_unsupported_marked_styles(tag: str) -> None:
     with pytest.raises(SystemExit):
         site_assets.link_inline_assets(f"<head>{tag}</head>", "index.html")
+
+
+def test_site_code_symbol_stylesheet_publishes_its_joined_face() -> None:
+    from devtools.render_n11_lower_bounds_explainer import (  # noqa: PLC0415
+        code_symbol_face_css,
+        kpress_static,
+    )
+
+    head, _script = render_overview.page_assets()
+    bundle = site_assets.shared()
+    files = bundle.assets.referenced([head])
+    sheets = [name for name in files if name.startswith("css/code-symbols.")]
+    assert len(sheets) == 1
+    css = files[sheets[0]].decode()
+    for face in ("KaTeX_AMS-Regular", "KaTeX_Main-Regular"):
+        faces = [name for name in files if name.startswith(f"fonts/{face}-code-symbols.")]
+        assert len(faces) == 1
+        assert files[faces[0]].startswith(b"wOF2")
+        assert f'url("../{faces[0]}")' in css
+    assert "unicode-range: U+211D;" in css
+    assert "unicode-range: U+2194, U+2264;" in css
+    assert code_symbol_face_css(kpress_static()) in bundle.assets.inlined(head)

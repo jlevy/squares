@@ -969,7 +969,9 @@ def worked_on(
     if refinement is None:
         return ""
     shown_ = [
-        names.show(token) if token in names.handles or not written else written
+        names.show(token)
+        if _bare(token) in names.handles or _bare(token) in names.full or not written
+        else written
         for token, written in refinement.people
     ]
     several = len(group) > 1 if group else refinement.plural

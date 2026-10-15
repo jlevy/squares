@@ -1306,6 +1306,65 @@ def relation_face_css(static: Path, faces: FaceSink = inline_face) -> str:
     )
 
 
+@cache
+def _code_symbol_font(static: Path, *, relations: bool = False) -> bytes:
+    """Site-only literal code glyphs; ASCII code and standalone paper assets stay intact."""
+    from fontTools import subset  # noqa: PLC0415
+    from fontTools.ttLib import TTFont  # noqa: PLC0415
+
+    if not any(
+        _face_family(block) == "Planetaire Mono Text"
+        for block in FONT_FACE_BLOCK.findall(kpress_css(static))
+    ):
+        raise SystemExit("kpress declares no Planetaire Mono Text family for code symbols")
+    face = "KaTeX_Main-Regular" if relations else "KaTeX_AMS-Regular"
+    points = (0x2194, 0x2264) if relations else (0x211D,)
+    font = TTFont(static / f"katex/fonts/{face}.woff2", recalcTimestamp=False)
+    if not relations:
+        # KaTeX encodes blackboard R at ASCII R; literal Lean code uses U+211D.
+        # Join that outline at U+211D only, leaving ordinary R in Planetaire.
+        glyph = (font.getBestCmap() or {}).get(ord("R"))
+        if glyph is None:
+            raise SystemExit("KaTeX_AMS carries no blackboard R for literal code")
+        for table in font["cmap"].tables:
+            if table.isUnicode():
+                table.cmap[0x211D] = glyph
+    if not set(points) <= (font.getBestCmap() or {}).keys():
+        raise SystemExit(f"{face} lacks the declared literal code glyphs")
+    options = subset.Options(flavor="woff2")
+    options.layout_features = []
+    options.notdef_outline = False
+    options.hinting = False
+    options.glyph_names = False
+    options.bidi_closure = False
+    subsetter = subset.Subsetter(options=options)
+    subsetter.populate(unicodes=points)
+    subsetter.subset(font)
+    buffer = io.BytesIO()
+    font.flavor = "woff2"
+    font.save(buffer)
+    return buffer.getvalue()
+
+
+def code_symbol_face_css(static: Path, faces: FaceSink = inline_face) -> str:
+    """Opt-in site code glyphs; standalone papers keep their existing font declarations."""
+    rules = []
+    for face, relations, points in (
+        ("KaTeX_AMS-Regular", False, "U+211D"),
+        ("KaTeX_Main-Regular", True, "U+2194, U+2264"),
+    ):
+        url = faces(
+            f"{face}-code-symbols.woff2", _code_symbol_font(static, relations=relations)
+        )
+        rules.append(
+            '@font-face { font-family: "Planetaire Mono Text";\n'
+            f'  src: url("{url}") format("woff2");\n'
+            "  font-weight: 400; font-style: normal; font-display: block;\n"
+            f"  unicode-range: {points}; }}"
+        )
+    return "\n".join(rules)
+
+
 #: The host supplies custom context and TeX spacing; KPress owns profile selection,
 #: metric installation, font readiness, and rendering for every caller.
 KATEX_RUNTIME = "katex/katex-math-runtime.js"

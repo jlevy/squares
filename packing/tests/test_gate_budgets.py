@@ -410,7 +410,14 @@ def test_every_boolean_flag_is_classified_as_a_tier_or_not() -> None:
     Every `store_true` option on the parser is therefore either a tier or named here as
     deliberately not one.
     """
-    not_a_tier = {"strict", "deep", "list", "budgets", "enforce_budget"}
+    not_a_tier = {
+        "strict",
+        "deep",
+        "list",
+        "budgets",
+        "enforce_budget",
+        "include_reachable_slow",
+    }
     # A `store_true` flag is exactly one that defaults to False in the parsed namespace,
     # which reads the real parser without reaching into argparse's internals.
     defaults = vars(validate._parser().parse_args([]))
@@ -431,6 +438,7 @@ def test_the_tier_of_an_invocation_is_always_one_the_register_declares() -> None
         ["--edit"],
         ["--fast"],
         ["--push"],
+        ["--push", "--include-reachable-slow"],
         ["--records", "--fast"],
         ["--typecheck"],
         ["--suite-a"],
@@ -1736,3 +1744,36 @@ def test_an_advisory_ceiling_must_be_tracked_by_an_open_bead(tmp_path: Path) -> 
     assert len(closed) == 1, closed
     assert "policy.pull_request_ceiling.enforcement" in closed[0]
     assert "under think-cccc: closed" in closed[0]
+
+
+@pytest.mark.parametrize("scope", ["hosted", "pull_request"])
+def test_call_advisory_scope_does_not_relax_non_pr_tier_walls(
+    tmp_path: Path,
+    scope: str,
+) -> None:
+    spec = ceiling_relaxed(tmp_path)
+    spec.write_text(
+        spec.read_text().replace(
+            "  pull_request_ceiling:\n",
+            f"  pull_request_ceiling:\n    per_test_scope: {scope}\n",
+        )
+    )
+    register = gate_budgets.load(spec)
+    assert register.policy.pull_request_ceiling is not None
+    assert register.policy.pull_request_ceiling.per_test_scope == scope
+    verdict = judge_at_reference(register, register.tiers[0], ((SLOW_STEP, 220.0),))
+    assert verdict.failed
+    assert any("ceiling" in finding for finding in verdict.failures)
+
+
+@pytest.mark.parametrize("scope", ["all", "null", "[]", "true"])
+def test_unknown_call_advisory_scope_is_refused(tmp_path: Path, scope: str) -> None:
+    spec = ceiling_relaxed(tmp_path)
+    spec.write_text(
+        spec.read_text().replace(
+            "  pull_request_ceiling:\n",
+            f"  pull_request_ceiling:\n    per_test_scope: {scope}\n",
+        )
+    )
+    with pytest.raises(gate_budgets.BudgetError, match="per_test_scope"):
+        gate_budgets.load(spec)

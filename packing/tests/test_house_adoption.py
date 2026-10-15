@@ -44,7 +44,8 @@ def latest() -> dict[int, str]:
 def replayed(
     selections: dict[int, select.Selection], latest: dict[int, str]
 ) -> list[adopt.Move]:
-    """Each count's last pass planned again from the record as that pass read it."""
+    """Each count's last pass planned again from the record as that pass read it; a held
+    result is no candidate, so the pass plans the house it adopted."""
     cases = {
         n: select.parse_case(n, latest[n]) if n in latest else selection.case
         for n, selection in selections.items()
@@ -55,25 +56,77 @@ def replayed(
 def test_no_confirmed_reviewed_side_is_left_below_its_case(
     selections: dict[int, select.Selection],
 ) -> None:
-    """After the adoption the derivation moves nothing: every case is at its house."""
+    """After the adoption the derivation moves nothing: every case is at its house, and
+    what is below it is held for the owner."""
     assert [n for n, selection in selections.items() if selection.moves] == []
+    assert all(
+        candidate.result in select.HELD
+        for selection in selections.values()
+        for candidate in selection.held
+    )
 
 
 def test_every_adopted_case_holds_the_derived_smallest_side(
     selections: dict[int, select.Selection],
 ) -> None:
+    """Every adopted count holds its derived house, the smallest candidate no hold leaves
+    out; a held certificate below it is named in the selection."""
     for n, result in houses.ADOPTED.items():
-        best = selections[n].candidates[0]
+        selection = selections[n]
+        best = next(c for c in selection.candidates if c.result not in select.HELD)
         assert best.result == result
-        assert selections[n].case.verified == best.side == houses.side(n)
+        assert selection.case.verified == best.side == houses.side(n)
+        assert all(c.side < best.side for c in selection.held)
+
+
+#: The counts where a held certificate (T-174's) was the smallest and the next candidate
+#: took the house on 15 October 2026, once a hold skipped only the held entry (reviews A
+#: and B of PR 614), each with the house it moved from.
+NEXT_CANDIDATES = {
+    105: ("T-170", "T-130"),
+    129: ("T-162", "T-146"),
+    146: ("T-168", "T-150"),
+    156: ("T-161", "T-149"),
+    176: ("T-165", "T-151"),
+    204: ("T-162", None),
+    261: ("T-169", "T-150"),
+    271: ("T-161", "T-151"),
+    272: ("T-171", "T-151"),
+    303: ("T-162", "T-146"),
+}
+
+
+def test_a_hold_skips_only_the_held_entry(
+    selections: dict[int, select.Selection], latest: dict[int, str]
+) -> None:
+    """Where T-174 is smallest, the house is the next confirmed, reviewed candidate, adopted
+    on 15 October 2026; every count it would take is named as held."""
+    for n, (result, before) in NEXT_CANDIDATES.items():
+        assert houses.ADOPTED[n] == result
+        assert houses.adopted_on(n) == "2026-10-15"
+        assert [c.result for c in selections[n].held] == ["T-174"]
+        packing = _front(latest[n])
+        assert Fraction(packing["verified_upper_bound"]["exact_form"]) > houses.side(n)
+        if before is not None:
+            assert adopt._holder(packing).endswith(f"({before})")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    held_counts = {n for n, s in selections.items() if s.held}
+    assert set(NEXT_CANDIDATES) < held_counts
+    assert len(held_counts) == 60
 
 
 def test_regularizations_leave_the_packing_with_its_finder(
     selections: dict[int, select.Selection],
 ) -> None:
-    assert selections[236].candidates[0].regularizes == "T-136"
-    assert selections[103].candidates[0].regularizes == "T-138"
-    assert selections[70].candidates[0].regularizes == "T-125"
+    houses_at = {
+        n: next(c for c in selections[n].candidates if c.result == houses.ADOPTED[n])
+        for n in (70, 103, 211, 236)
+    }
+    assert {n: house.regularizes for n, house in houses_at.items()} == {
+        70: "T-125",
+        103: "T-138",
+        211: "T-181",
+        236: "T-136",
+    }
     assert adopt.CREDITS[236].found_by == (adopt.SQUISH,)
     assert adopt.CREDITS[70].found_by == (adopt.XU,)
     assert adopt.CREDITS[103].improved_by == ("Mishapolk", adopt.DANIEL)
@@ -173,6 +226,285 @@ def test_a_candidate_below_an_algebraic_ceilings_display_is_left_to_a_human(
     assert "undecided" in select.table({7: held}, everything=False)
 
 
+def test_an_entry_over_two_sources_reads_each_count_where_its_replay_decided_it(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """T-181's replays decided 211 and 241 from issue 583's revision and 302 from issue
+    586's, though both reports state all three; the replay names the source, whatever the
+    order of the keys (review B of PR 614, B3)."""
+    entry, evidence = _confirmed_entry()
+    entry = {
+        **entry,
+        "scope": {"n_values": [7, 8]},
+        "attribution": {"source_keys": ["[first]", "[second]"], "published": "2026-10-10"},
+        "evidence": ["E-first", "E-second", "E-first-replay", "E-second-replay"],
+    }
+    replay = evidence["E-test-replay"]
+    evidence = {
+        **evidence,
+        "E-first": {
+            "assurance": "reported",
+            "source_key": "[first]",
+            "scope": {"n_values": [7, 8]},
+        },
+        "E-second": {
+            "assurance": "reported",
+            "source_key": "[second]",
+            "scope": {"n_values": [7, 8]},
+        },
+        "E-first-replay": {**replay, "source_key": "[first]", "scope": {"n_values": [7]}},
+        "E-second-replay": {**replay, "source_key": "[second]", "scope": {"n_values": [8]}},
+    }
+    sides = {("[first]", 7): Fraction(3), ("[second]", 8): Fraction(4)}
+    monkeypatch.setitem(select.reports.HOUSES, "[first]", lambda _n: Fraction(3))
+    monkeypatch.setitem(select.reports.HOUSES, "[second]", lambda _n: Fraction(4))
+    monkeypatch.setattr(select, "_side", lambda key, n: sides[key, n])
+    assert select.source_key_at(entry, evidence, 7) == "[first]"
+    assert select.source_key_at(entry, evidence, 8) == "[second]"
+    assert select.source_key_at(entry, evidence, 9) == ""
+    unread: list[str] = []
+    found = select.candidates([entry], evidence, unread=unread)
+    assert [(c.source_key, c.side, c.report_evidence) for c in found[7]] == [
+        ("[first]", Fraction(3), ("E-first",))
+    ]
+    assert [(c.source_key, c.side) for c in found[8]] == [("[second]", Fraction(4))]
+    assert unread == []
+    # The keys' order decides nothing: reversed, each count is read where it was before.
+    reversed_keys = {
+        **entry,
+        "attribution": {**entry["attribution"], "source_keys": ["[second]", "[first]"]},
+    }
+    for n in (7, 8, 9):
+        assert select.source_key_at(reversed_keys, evidence, n) == select.source_key_at(
+            entry, evidence, n
+        )
+    # A count no replay of the entry decided is no candidate, and the entry is not named
+    # unread either: there is nothing there for a reader to read.
+    unstated = {**entry, "scope": {"n_values": [7, 9]}}
+    select.candidates([unstated], evidence, unread=unread)
+    assert unread == []
+    # A count two replays decided from two sources is not read either.
+    both = {
+        **evidence,
+        "E-second-replay": {**replay, "source_key": "[second]", "scope": {"n_values": [7, 8]}},
+    }
+    assert select.source_key_at(entry, both, 7) == ""
+
+
+def test_t181_reads_the_same_sources_with_its_keys_reversed() -> None:
+    """Both of T-181's reports state 211 and 241; reversed, the issue-583 replay still
+    names issue 583's packet there, and 302 stays issue 586's (review B of PR 614, B3)."""
+    results = select.load_results()
+    evidence = select.load_evidence()
+    entry = next(e for e in results if e["id"] == "T-181")
+    keys = list(entry["attribution"]["source_keys"])
+    flipped = {**entry, "attribution": {**entry["attribution"], "source_keys": keys[::-1]}}
+    for n in (211, 241, 302):
+        assert select.source_key_at(flipped, evidence, n) == select.source_key_at(
+            entry, evidence, n
+        )
+    assert (
+        select.source_key_at(entry, evidence, 211)
+        == "[Couzo issue-583 certificates 2026-10-13]"
+    )
+    assert select.source_key_at(entry, evidence, 302) == "[Couzo certificates 2026-10-13]"
+    found = select.candidates([flipped], evidence)
+    sides = {n: c.side for n, cs in found.items() for c in cs}
+    assert sides == {
+        n: c.side for n, cs in select.candidates([entry], evidence).items() for c in cs
+    }
+
+
+def test_the_two_couzo_entries_from_one_packet_each_keep_their_house_source() -> None:
+    """T-181 and T-182 both read issue 586's packet; keyed by result, neither is lost."""
+    by_result = houses.sources()
+    assert all(result == source.result for result, source in by_result.items())
+    keys = [source.key for source in by_result.values()]
+    for n in houses.NUMBERS:
+        assert houses.source_for(n).result == houses.ADOPTED[n]
+    shared = {key for key in keys if keys.count(key) > 1}
+    assert all(
+        len({s.result for s in by_result.values() if s.key == key}) > 1 for key in shared
+    )
+
+
+def test_an_algebraic_count_is_left_out_of_the_selection_and_named(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """PR #574's sides at 70, 153, 207 and 302 are roots of integer polynomials, decided
+    on one route; no house reader rebuilds them, and the selection leaves them out
+    rather than failing to read them."""
+    key = "[PingYou PR 574 certificates 2026-10-13]"
+    counts = select.algebraic_counts(key)
+    assert {70, 153, 207, 302} <= counts
+    assert not {68, 105, 211, 304} & counts
+    assert select.algebraic_counts("[Couzo certificates 2026-10-13]") == frozenset()
+    entry, evidence = _confirmed_entry()
+    entry = {
+        **entry,
+        "scope": {"n_values": [68, 70]},
+        "attribution": {"source_keys": [key], "published": "2026-10-13"},
+    }
+
+    def side(_key: str, n: int) -> Fraction:
+        assert n == 68, "an algebraic count was read"
+        return Fraction(9)
+
+    monkeypatch.setattr(select, "_side", side)
+    algebraic: list[tuple[str, int]] = []
+    found = select.candidates([entry], evidence, algebraic=algebraic)
+    assert sorted(found) == [68]
+    assert algebraic == [("T-900", 70)]
+
+
+def test_a_held_result_keeps_its_counts_at_their_case_and_says_so(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Where a held result is best, the case stays though another candidate is below it,
+    and `--check` reports the count as held rather than failing on it."""
+    entry, evidence = _confirmed_entry()
+    other = {
+        **entry,
+        "id": "T-901",
+        "attribution": {"source_keys": ["[other]"], "published": "2026-10-09"},
+        "reviews": [{"verdict": "accepted", "covers": ["T-901"]}],
+    }
+    sides = {"[test]": Fraction(3), "[other]": Fraction(7, 2)}
+    monkeypatch.setitem(select.reports.HOUSES, "[test]", lambda _n: Fraction(3))
+    monkeypatch.setitem(select.reports.HOUSES, "[other]", lambda _n: Fraction(7, 2))
+    monkeypatch.setattr(select, "_side", lambda key, _n: sides[key])
+    case = select.Case(
+        n=7, verified=Fraction(4), reported=Fraction(4), source_key="", evidence=()
+    )
+    why = select.Hold(whose="T-900's", why="why", since="2026-10-15")
+    held = select.select([entry, other], evidence, cases={7: case}, held={"T-900": why})[7]
+    # The hold skips T-900 only: T-901, the next candidate, is below the case and takes it.
+    assert [c.result for c in held.held] == ["T-900"]
+    assert held.house is not None
+    assert held.house.result == "T-901"
+    assert [c.result for c in held.candidates] == ["T-900", "T-901"]
+    assert select.row(held)["held"] == ["T-900"]
+    assert select.row(held)["undecided"] is False
+    # Where nothing else is below the case, the case stays and the count is held.
+    above = dataclasses.replace(case, verified=Fraction(7, 2), reported=Fraction(7, 2))
+    waiting = select.select([entry, other], evidence, cases={7: above}, held={"T-900": why})[7]
+    assert waiting.house is None
+    assert not waiting.moves
+    assert [c.result for c in waiting.held] == ["T-900"]
+    assert "(held)" in select.table({7: waiting}, everything=False)
+    free = select.select([entry, other], evidence, cases={7: case}, held={})[7]
+    assert free.house is not None
+    assert free.house.result == "T-900"
+    assert not free.held
+    monkeypatch.setattr(select, "select", lambda **_arguments: {7: waiting})
+    monkeypatch.setattr(select, "unread_pending", lambda _unread: {})
+    assert select.main(["--check"]) == 0
+    assert "held for the owner (T-900): n = [7]" in capsys.readouterr().out
+
+
+def test_the_held_results_are_named_with_why() -> None:
+    assert set(select.HELD) == {"T-174"}
+    for hold in select.HELD.values():
+        assert hold.why.strip()
+        assert hold.reason.startswith(f"{hold.whose} houses are held for the owner: ")
+        assert adopt.words(hold.since)
+
+
+def test_every_record_names_a_smaller_held_or_algebraic_certificate(
+    selections: dict[int, select.Selection],
+) -> None:
+    """A held certificate below a case is named in its record with why it waits: in the
+    certificate section where a pass houses the count, in a dated note under the title
+    elsewhere; an algebraic one below the house, which the owner decides, in the section
+    (reviews A and B of PR 614, A1, B2 and B7)."""
+    reason = select.HELD["T-174"].reason.replace("'", "’")
+    for n, selection in selections.items():
+        if not selection.held:
+            continue
+        text = _flat(select.case_path(n).read_text(encoding="utf-8"))
+        assert _flat(reason) in text, n
+        assert (
+            "E-pingyou-574-exact-feasibility"
+            in _front(select.case_path(n).read_text())["evidence"]
+        ), n
+        if n in houses.ADOPTED:
+            assert adopt.HELD_OPENING not in text, n
+        else:
+            assert f"{adopt.HELD_OPENING}15 October 2026.**" in text, n
+    assert adopt.held_counts() == sorted(
+        n for n, s in selections.items() if s.held and n not in houses.ADOPTED
+    )
+    for n in (70, 153, 207):
+        text = _flat(select.case_path(n).read_text(encoding="utf-8"))
+        assert "T-174’s algebraic certificate at this count" in text, n
+        assert "RP-3 of the [review of 14 October 2026]" in text, n
+    # At 302 T-174's algebraic side is above the house, and nothing is said of it.
+    assert "algebraic certificate at this count" not in select.case_path(302).read_text()
+
+
+#: The sentence a certificate section ends with, listing what its house was chosen over.
+NOT_SELECTED = re.compile(
+    r"The\s+other\s+certificates\s+confirmed\s+here\s+at\s+this\s+count,\s+(.*?),\s+stay"
+    r"\s+verified\s+and\s+are\s+not\s+selected\.",
+    re.DOTALL,
+)
+
+
+def _not_selected(text: str) -> set[str]:
+    """Every result a record's sections list as confirmed there and not selected."""
+    return {
+        result
+        for match in NOT_SELECTED.finditer(text)
+        for result in re.findall(r"\bT-\d+\b", match.group(1))
+    }
+
+
+def test_no_section_lists_its_current_house_or_a_held_certificate_as_not_selected(
+    selections: dict[int, select.Selection],
+) -> None:
+    """A section's not-selected list names what its house was chosen over, so no record
+    lists the count's current house there, and none lists a held certificate, which is
+    no candidate. Each pass's prior state is held to the same: one that lists the house
+    its own pass adopts is a record already rewritten, not the record as the pass read
+    it (reviews A10 and B8 of PR 614: the 15 October archive took round 1's branch text
+    at nine counts, and their earlier sections named the new house and T-174)."""
+    found = []
+    for n, selection in selections.items():
+        listed = _not_selected(select.case_path(n).read_text(encoding="utf-8"))
+        named = listed & {houses.ADOPTED.get(n), *(c.result for c in selection.held)}
+        if named:
+            found.append((n, sorted(named)))
+    assert found == []
+    for day in adopt.passes():
+        for n, text in adopt.read_pass(day).items():
+            assert houses.ADOPTED[n] not in _not_selected(text), (day, n)
+    # The sentence is what the writer writes, so the pattern reads it where it stands.
+    assert {"T-127", "T-115", "T-113"} <= _not_selected(
+        select.case_path(129).read_text(encoding="utf-8")
+    )
+
+
+def test_a_held_note_is_written_kept_and_dropped_by_the_held_results() -> None:
+    """The note is the writer's: idempotent on the committed record, rebuilt from a record
+    without it, and dropped where no held result is below the case."""
+    n = adopt.held_counts()[0]
+    committed = select.case_path(n).read_text(encoding="utf-8")
+    assert adopt.held_note(n, committed) == committed
+    assert adopt.carries_held_note(committed)
+    title, parts = adopt._paragraphs(committed.split("---\n", 2)[2])  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    bare = committed.replace(
+        next(part for part in parts if part.startswith(adopt.HELD_OPENING)) + "\n\n", ""
+    )
+    assert not adopt.carries_held_note(bare)
+    assert _flat(adopt.held_note(n, bare).split("---\n", 2)[2]) == _flat(
+        committed.split("---\n", 2)[2]
+    )
+    del title
+    adopted = next(iter(houses.ADOPTED))
+    text = select.case_path(adopted).read_text(encoding="utf-8")
+    assert adopt.held_note(adopted, text) == text
+
+
 def test_no_unread_eligible_entry_is_pending_adoption() -> None:
     """An eligible entry with no exact reader is never a candidate, so `--check` reads its
     standing instead: one that states a side below its case would be an adoption the
@@ -185,7 +517,10 @@ def test_no_unread_eligible_entry_is_pending_adoption() -> None:
 def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    def selecting(*, since: str | None, unread: list[str]) -> dict[int, select.Selection]:
+    def selecting(
+        *, since: str | None, unread: list[str], algebraic: list[tuple[str, int]]
+    ) -> dict[int, select.Selection]:
+        assert algebraic == []
         assert since is None
         unread.append("T-901")
         return {}
@@ -257,8 +592,10 @@ def test_the_receipt_of_the_custody_run_names_every_input_and_house() -> None:
     for row in receipt["inputs"]:
         raw = (houses.REPO / row["path"]).read_bytes()
         assert (row["bytes"], row["sha256"]) == (len(raw), hashlib.sha256(raw).hexdigest())
-    assert len(receipt["mutations_refused_and_restored"]) == 2 * len(houses.source_keys())
+    assert len(receipt["mutations_refused_and_restored"]) == 2 * len(houses.sources())
     assert receipt["fresh_geometric_deciders"] is False
+    # The run's worker snapshot was under the cap it ran against (review B of PR 614, B5).
+    assert receipt["snapshot_source_bytes"] <= receipt["snapshot_cap_bytes"]
 
 
 def test_the_prior_state_keeps_every_moved_record_as_it_stood_before(
@@ -310,9 +647,14 @@ def test_each_pass_keeps_the_records_it_moved_as_that_pass_read_them(
                 assert prior[n] == archives[day][n]
                 continue
             again.add(n)
-            # As the earlier pass left it: at that pass's house, dated that day.
+            # As the earlier pass left it: at that pass's house, dated that day, or later
+            # where the one writer that ran between the passes moved the date on,
+            # `apply_closed_form`, to its intake of 14 October 2026.
             packing = _front(archives[day][n])
-            assert packing["source_reviewed"] == earlier[-1]
+            assert packing["source_reviewed"] in {
+                earlier[-1],
+                max(earlier[-1], closed_form.INTAKE),
+            }
             assert f"**House adoption, {adopt.words(earlier[-1])}.**" in archives[day][n]
             assert prior[n] == archives[earlier[0]][n] != archives[day][n]
     assert again, "no count has been adopted twice"
@@ -341,20 +683,12 @@ def _flat(text: str) -> str:
     return " ".join(text.split())
 
 
-#: The verifier table, which `render_case_verifiers` writes.
-VERIFIER_TABLE = re.compile(
-    r"<!-- BEGIN verification code.*?<!-- END verification code -->", re.DOTALL
-)
-#: Counts whose body the first pass, on 11 October 2026, marked as history by hand, in
-#: prose no tool writes in a fixed form (`adopt_houses.historical`): the SQUISH update
-#: sections and the grid prose. Their owned parts are still compared.
-HAND_MARKED = frozenset({155, 258, 263, 302, 308})
-
-
 def _body(text: str) -> str:
-    """A record's body as the writer is answerable for it: flowmark's wrapping and escapes
-    undone and the verifier table left out."""
-    return _flat(VERIFIER_TABLE.sub("", text.split("---\n", 2)[2]).replace("\\+", "+"))
+    """A record's body as the writer is answerable for it (`adopt_houses.history_words`).
+
+    The counts the first pass marked by hand (`adopt_houses.HAND_MARKED`) are compared
+    only in their owned parts."""
+    return adopt.history_words(text.split("---\n", 2)[2])
 
 
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
@@ -375,6 +709,9 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     for move in replayed:
         assert move.house.result == houses.ADOPTED[move.n]
         committed = select.case_path(move.n).read_text(encoding="utf-8")
+        # The closed form's paragraph stays directly under the title, ahead of any later
+        # pass's (`apply_closed_form --check` holds that), so its replay follows every
+        # pass, the 15 October one too, which read records it had already raised.
         written = closed_form.replay(move.n, adopt.rewrite(move))
         held, wrote = _front(committed), _front(written)
         for key in OWNED:
@@ -382,7 +719,7 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         body = _flat(committed.split("---\n", 2)[2])
         assert _flat(adopt.opening(move)) in body, f"n={move.n}: opening paragraph"
         assert _flat(adopt.section(move)) in body, f"n={move.n}: certificate section"
-        if move.n not in HAND_MARKED:
+        if move.n not in adopt.HAND_MARKED:
             assert _body(committed) == _body(written), f"n={move.n}: the body as history"
 
 
@@ -525,7 +862,8 @@ def test_a_conjecture_the_house_does_not_beat_stops_the_adoption(
     first = adopt.read_pass(houses.ADOPTED_ON)[232]
     cases = {n: selection.case for n, selection in selections.items()}
     cases[232] = select.parse_case(232, first)
-    planned = adopt.plan(select.select(cases=cases), texts={232: first})
+    selected = select.select(cases=cases)
+    planned = adopt.plan(selected, texts={232: first})
     move = next(move for move in planned if move.n == 232)
     conjecture = adopt.conjectured(move.packing)
     assert conjecture == Fraction(Decimal("15.77817459305202")) > move.house.side
@@ -697,8 +1035,12 @@ def test_an_interrupted_write_is_finished_by_running_it_again(
     selections: dict[int, select.Selection],
     prior: dict[int, str],
 ) -> None:
-    """A write stopped before its last record leaves what a rerun finishes, to the byte."""
-    moved = {84, 86}
+    """A write stopped before its last record leaves what a rerun finishes, to the byte.
+
+    The two counts are ones no held result holds: 70, adopted on 11 October 2026, and
+    241, first adopted on 15 October.
+    """
+    moved = {70, 241}
     frontier = tmp_path / "frontier"
     frontier.mkdir()
     staged = {
@@ -738,7 +1080,7 @@ def test_an_interrupted_write_is_finished_by_running_it_again(
 
     def interrupted(path: Path, text: str) -> bool:
         calls.append(path)
-        if len(calls) == 4:  # the coverage register, the deferrals, n = 84, then n = 86
+        if len(calls) == 4:  # the coverage register, the deferrals, n = 70, then n = 241
             raise OSError("interrupted")
         return real(path, text)
 
@@ -747,8 +1089,8 @@ def test_an_interrupted_write_is_finished_by_running_it_again(
         adopt.write(moves)
     monkeypatch.setattr(adopt, "_write", real)
     rest = adopt.plan()
-    assert [move.n for move in rest] == [86]
-    assert adopt.write(rest) == [86]
+    assert [move.n for move in rest] == [241]
+    assert adopt.write(rest) == [241]
     assert written() == whole
 
 

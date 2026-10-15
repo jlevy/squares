@@ -428,6 +428,6 @@ def test_every_drawn_view_is_at_most_the_bound_but_the_named_exceptions() -> Non
         assert order is not None, f"n={n}: U is not read exactly: {bound.unread}"
         if order > 0:
             above[n] = bound.difference(side)
-    assert sorted(above) == sorted(axis.ABOVE_U) == [18, 26, 66, 85, 110, 241, 297], above
+    assert sorted(above) == sorted(axis.ABOVE_U) == [18, 26, 66, 85, 110, 297], above
     # A rounding sliver above the best known side at each, never another packing's side.
     assert max(above.values()) < 1e-10
