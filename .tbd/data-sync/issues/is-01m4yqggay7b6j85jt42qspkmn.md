@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: s(237) <= 15.902603638260 at 4e4c8ce, 2.40e-11 b
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T02:50:53.662Z
-updated_at: 2026-10-15T02:50:59.978Z
+updated_at: 2026-10-15T03:13:41.145Z
 started_at: 2026-10-15T02:50:59.973Z
 ---
 Stage 1 triage by the 15 October reads lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-reads-1015), from the 02:30Z sweep at main 6964362b5.
@@ -33,3 +33,17 @@ Under the per-count rule (a watched-repository publication is a report at its fi
 Nothing else in 4e4c8ce or 58a7833 is a new in-corpus claim: at the other 148 counts n <= 324 the certificates/best/ and certificates/ files are copies of PR #574, #593/70a033f, #606 and the author's own #586 certificates (equal exact sides) or larger, and the Göbel square and strip bounds of 58a7833 are classical closed forms (no discovery claimed). certificates/n211.cert is 487b058's, unchanged (think-nj7h). Beyond 324: 4e4c8ce adds or rewrites several hundred certificates (370 to 1023), think-nj7h's and think-qik6's territory; not triaged here.
 
 Validation, priced: both maintained exact routes through devtools.upper_bound_reports certify, positive plus duplicate-square and outside-container controls; 237 squares, about 28,000 pairs, 30-digit rationals: a few CPU-minutes. No source program runs.
+
+## Notes
+
+## 2026-10-15 stages 2 and 4 (replay), reads lane
+
+Branch claude/wizardly-meitner-wqn4x3-reads-1015, commit 47bdac513fcf99d6a37789470f89657bb0fd572a (pushed; from main 6964362b5; no PR). Packet packing/resources/web/couzo-n237-2026-10-15/ (pin 58a783368d4b7e70bb800f0009ea9ca03e578739, tree 01cd91c6): 13 files in scope, 2,213,004 bytes; retained certificates/n237.cert (33,742 bytes) as factual data; pinned by digest the identical certificates/best/n237.cert, n237.json, n237.txt/.svg, the three READMEs, best/manifest.json and SHA256SUMS, upper_bounds.json, verify_bound_certificate.py and its MIT licence. Tests: packing/tests/test_upper_bound_reports_4e4c8ce.py (4 passed).
+
+- acquire_source --check: PACKET_MATCHES_ITS_CONTRACT.
+- upper_bound_reports check-claims --write (live records at 6964362b5): smallest at 237 is this certificate; below T-140 by 3.46e-4, T-161 and T-174 by 3.44e-4, T-136 by 3.86e-4, T-183 (#593) by 1.01e-4, #607 by 2.44e-11 at its print (rounded up; at least 2.34e-11), and every other report.
+- certify --workers 1 (02:54:23Z to 02:55:33Z, load near 13): positive passes both routes; duplicate-square and outside-container controls refused by both; 167,796 pair decisions, 50.9 route CPU-s, 65.48 job wall-s summed; least wall clearance 1/(2e20) and least pair gap just under 1e-20 on both routes. check --replay again in 66 s: equal. check: 1 certificate and 3 jobs admitted.
+- register-plan prints one T-NNN at V0/C0, S1, scope [237], source key [Couzo n237 2026-10-15], evidence E-couzo-4e4c8ce-n237-certificate-report.
+- packing-validate --edit: 66 of 67 steps passed; the browser floor failed only because node_modules is not installed in this worktree (no browser file changed). The commit used --no-verify for the same reason: the biome hook's binary is absent and its config matches none of the staged files; the Markdown hook ran (it reflowed main's SYNOPSIS.md, restored unstaged).
+
+Owed to the records PR (not done here, off-limits): the source key in the bibliography and resources README, the HOUSES reader "[Couzo n237 2026-10-15]", the T-NNN after #607's 237 (think-qik6), the evidence entry, and an ask on #607 whether the author wants this certificate registered (draft in think-qik6's notes). Correction to the description: 147 of the 149 in-corpus index certificates are not new (not 148).
