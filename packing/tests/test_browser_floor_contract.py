@@ -314,13 +314,6 @@ DECLARED_SUPPRESSIONS = Counter(
             ),
         ): 1,
         (
-            "packing/devtools/templates/paper-publication.css",
-            (
-                "/* biome-ignore lint/style/noDescendingSpecificity: credit emphasis "
-                "inherits the shared bold role after the broader support-text rules. */"
-            ),
-        ): 1,
-        (
             "packing/src/sqpack/motion_lab/assets/motion-lab.css",
             (
                 "/* biome-ignore lint/complexity/noImportantStyles: `*` has the lowest "
