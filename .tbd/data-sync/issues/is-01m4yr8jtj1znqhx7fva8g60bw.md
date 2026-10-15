@@ -5,13 +5,13 @@ title: "Import Francisco Couzo: 4e4c8ce beyond-horizon index, 341 counts 325-102
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-15T03:04:02.641Z
-updated_at: 2026-10-15T03:04:02.641Z
+updated_at: 2026-10-15T03:54:24.875Z
 ---
 Stage 1 triage, read-only, by the 15 October reads lane (think-mq0k), from the 02:30Z sweep at main 6964362b5. No issue reports any of it.
 
@@ -24,3 +24,7 @@ Beyond the corpus (n = 325..1023), against the author's own 487b058 index (upper
 Next: decide with think-nj7h whether one beyond-horizon import at 58a7833 replaces 487b058's (report order still dates each certificate by its first commit), retain a packet, compare against the record's beyond-horizon rows, and draft the ask on #607 or a new issue (S2 at most, so no tracking issue is required).
 
 Price: the exact all-pairs replay of 341 certificates of 325 to 1023 squares is about 3 n(n-1) pair decisions each, near 5e8 in all, at 0.33 ms a decision on the #586 packet's measure: about 45 CPU-h, more where the derived certificates carry PingYou-size rationals, and the larger jobs exceed the kernel's 600 s job ceiling. Over the 40 CPU-h cap: HELD for a whole replay; a subset (the 20 material margins, or the Couzo-local ones) is a few CPU-h.
+
+## Notes
+
+2026-10-15 (Göbel review, think-8krd): of this bead's 341 rows, 47 are above Göbel's classical construction at their count (487b058's 42 counts and 331, 368, 407, 448, 491; nine by about 2e-23, exact enclosures of the closed forms). When this import drafts its register plan, mark those 47 `undecided-goebel` pending the owner. Table: packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel-beyond-horizon.json (set "4e4c8ce index, below 487b058 and #607"). The earlier count of 341 stands (the #607 comparison in this bead's triage keyed #607 by string; rerun with integer keys, nothing changes).

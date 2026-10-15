@@ -5,13 +5,13 @@ title: Beyond-horizon rows above Göbel's classical constructions
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-15T03:46:28.067Z
-updated_at: 2026-10-15T03:46:28.067Z
+updated_at: 2026-10-15T03:54:21.525Z
 ---
 **Owner question:** do Frits Göbel's classical constructions count as earlier reports, and so as the baseline beyond n = 324, so that a beyond-horizon row above one is not recorded? The record holds no Göbel construction beyond the corpus; its standing side there is the beyond-horizon row or the grid. Until the owner answers, draft register plans mark the affected rows `undecided-goebel` rather than recorded.
 
@@ -30,3 +30,7 @@ Göbel's side at m is the least member side at any count ≥ m (deletion). Sides
 - the record's current beyond-horizon rows on main 6964362b5 (40 rows): 2 above: 369, couzo-extended-range-reports-2026-10-08 at its print 19.740417287556077, 3.33e-2 above the Göbel strip 19 + √2/2; 376, couzo-certificates-2026-10-13 (4596670's certificate) 19.904068025746006, 4.57e-3 above the Göbel square 10 + 7√2. 38 below by 1.7e-2 to 0.65.
 
 **Draft plans.** couzo-verified-bounds-2026-10-14's register-plan.yaml now lists 252 rows to add and 42 `undecided-goebel`; its comparison marks the 42 `undecided-goebel` and its claims record leaves them out. think-yfoo's plan (not yet drafted) should mark its 47 the same way. #607's rows are unaffected. If the owner says Göbel counts, the record's own rows at 369 and 376 would need a Göbel row (or the grid) beside them, which is a records question too.
+
+## Notes
+
+2026-10-15: committed as 8cf42e177da4530f2d95c505854d48f304682782 on claude/wizardly-meitner-wqn4x3-reads-1015 (pushed; no PR), through the hooks. packing-validate --records exit 0; focused tests 319 passed (test_upper_bound_reports_487b058 holds the four set tallies and the undecided-goebel rule).
