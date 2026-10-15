@@ -24758,8 +24758,10 @@ results:
 
       The issue was filed on 15 October 2026, minutes after the cover's first commit and
       after Francisco Couzo's certificate at 237 of the same day (T-190), so the entry
-      follows T-190 in report order. No other report states a bound at 95 above the
-      standing 1993/200.
+      follows T-190 in report order. Every lower bound the register holds at 95 is below
+      10: T-091's 1993/200, which holds both lanes of the case, and T-090's equal bound,
+      T-082's 249/25, T-068's and T-074's 49259/5000, T-046's and T-070's 49209/5000,
+      and the closed forms of T-007, T-083 and T-180.
   - id: T-192
     kind: lower-bound
     registered: '2026-10-15'
