@@ -22,6 +22,12 @@ NUMBERS = (51, 70, 84, 86, 102, 103, 105, 108, 123, 126, 127, 129, 131, 146, 175
 SOURCE_KEY = "[ry-xu square packing 2026]"
 SOURCE_ID = reports.SOURCE_KEY
 RADICAL_SOURCE_ID = "ry-xu-undilated-n51-2026"
+#: The finder as the record credits him, and his login, which his source's URLs carry and
+#: the records written before 14 October 2026 gave in his place: credit names people by
+#: name (epistemics.md, People and projects, never tools), and the login stays only as an
+#: identifier. Retained prior states still hold the handle.
+FINDER = "Ryan Xu"
+HANDLE = "ry-xu"
 REPO = reports.REPO
 RETRIEVED = "2026-10-08"
 RADICAL_EXACT = "(16+5*sqrt(2))/3"

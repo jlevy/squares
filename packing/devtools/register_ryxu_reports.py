@@ -28,10 +28,9 @@ RADICAL_EXACT = "E-ryxu-432-radical-n51-feasibility"
 RATIONAL_EXACT = "E-ryxu-432-rational-feasibility"
 HISTORY = houses.reports.PACKET / "acquisition/frontier-prior-state.json.xz"
 #: The finder as the record credits him, and the handle the records written before 14
-#: October 2026 carried in his place: credit names people by name (epistemics.md, People
-#: and projects, never tools). Retained prior states still hold the handle.
-FINDER = "Ryan Xu"
-HANDLE = "ry-xu"
+#: October 2026 carried in his place (`ryxu_house_links.FINDER`).
+FINDER = houses.FINDER
+HANDLE = houses.HANDLE
 SECTION = "## The Xu construction"
 #: The section's heading before 14 October 2026, which the retained prior states hold.
 FORMER_SECTION = "## The ry-xu construction"
@@ -505,7 +504,7 @@ def _register_records() -> None:
                         "before confirmation."
                     ),
                     "notes": (
-                        "Credit to ry-xu with disclosed LLM assistance. All 25 source "
+                        f"Credit to {FINDER} with disclosed LLM assistance. All 25 source "
                         "inputs retained; no upstream code executed. Exact finite "
                         "feasibility only."
                     ),
@@ -528,7 +527,7 @@ def register() -> None:
         [
             {
                 "id": houses.SOURCE_ID,
-                "title": "ry-xu new square constructions, issue #432",
+                "title": f"{FINDER}'s new square constructions, issue #432",
                 "role": "source-repository",
                 "url": f"{houses.reports.SOURCE}/tree/{houses.reports.REVISION}",
                 "local": "resources/web/ry-xu-new-packings-2026-10-08/",
@@ -560,7 +559,7 @@ def register() -> None:
         [
             {
                 "id": houses.RADICAL_SOURCE_ID,
-                "title": "ry-xu undilated n51 exact construction",
+                "title": f"{FINDER}'s undilated n51 exact construction",
                 "role": "source-repository",
                 "url": houses.source_url(51),
                 "local": "resources/web/ry-xu-new-packings-2026-10-08/",
@@ -617,8 +616,7 @@ def register() -> None:
             previous.update(
                 superseded_by=houses.RADICAL_SOURCE_ID if n == 51 else houses.SOURCE_ID,
                 reason=(
-                    "Historical source ceiling superseded by a smaller exact ry-xu "
-                    "construction."
+                    "Historical source ceiling superseded by a smaller exact Xu construction."
                 ),
             )
             start = text.index("beyond_horizon_claims:")
@@ -674,7 +672,8 @@ def register() -> None:
                 "lineage": "independent",
                 "note": (
                     "The retained factual source certificates "
-                    "at 8dc415296f697f5140caea27c7a0193d52deb4e6 identify ry-xu and "
+                    f"at 8dc415296f697f5140caea27c7a0193d52deb4e6 identify {FINDER} "
+                    f"({HANDLE}) and "
                     "disclose LLM assistance; no unrestricted optimality or "
                     "contact-count theorem is admitted."
                 ),

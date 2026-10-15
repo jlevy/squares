@@ -1,4 +1,4 @@
-# ry-xu’s new square packings: issue #432
+# Ryan Xu’s new square packings: issue #432
 
 This packet retains complete factual inputs and exact deciding outcomes for all 25
 packings reported in [issue #432](https://github.com/jlevy/squares/issues/432). The
@@ -9,7 +9,7 @@ The source tree had no license file; this packet contains factual certificates, 
 geometry and acquisition metadata, rather than upstream implementation or explanatory
 prose.
 
-Credit for the reported constructions belongs to ry-xu.
+Credit for the reported constructions belongs to Ryan Xu (ry-xu).
 The source describes an LLM-assisted search and certificate workflow.
 This import independently checks feasibility; it does not establish a global optimum,
 search completeness or novelty.

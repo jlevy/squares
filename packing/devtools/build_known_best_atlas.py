@@ -1288,7 +1288,9 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
                 )
                 retrieved = "2026-10-08"
             elif n in ryxu_houses.NUMBERS and plan.url == ryxu_houses.source_url(n):
-                attribution = f"ry-xu, {plan.url} at {ryxu_houses.reports.REVISION}"
+                attribution = (
+                    f"{ryxu_houses.FINDER}, {plan.url} at {ryxu_houses.reports.REVISION}"
+                )
                 retrieved = ryxu_houses.RETRIEVED
             elif plan.path == evand_reports.fact_path() and n in evand_reports.NUMBERS:
                 attribution = f"Evan Daniel, {plan.url} at {evand_reports.REVISION}"

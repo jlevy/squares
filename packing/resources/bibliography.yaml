@@ -1488,7 +1488,8 @@ sources:
     credit: Xu
     lineage: independent
     note: The retained factual source certificates at 8dc415296f697f5140caea27c7a0193d52deb4e6 identify
-      ry-xu and disclose LLM assistance; no unrestricted optimality or contact-count theorem is admitted.
+      Ryan Xu (ry-xu) and disclose LLM assistance; no unrestricted optimality or contact-count theorem
+      is admitted.
   - key: '[Daniel new arrangements 2026-10-07]'
     authors:
     - Daniel

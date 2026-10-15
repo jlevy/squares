@@ -2750,7 +2750,7 @@ sources:
     require their own assurance. Historical counts excluded by the author do not replace smaller
     ceilings.
 - id: ry-xu-new-packings-2026-10-08
-  title: 'ry-xu new square constructions, issue #432'
+  title: "Ryan Xu's new square constructions, issue #432"
   role: source-repository
   url: https://github.com/ry-xu/square_packing/tree/8dc415296f697f5140caea27c7a0193d52deb4e6
   local: resources/web/ry-xu-new-packings-2026-10-08/
@@ -2814,7 +2814,7 @@ sources:
     plus the separate undilated radical n51 construction; eight rational certificates are non-selected.
     No 191-contact assertion admitted.
 - id: ry-xu-undilated-n51-2026
-  title: ry-xu undilated n51 exact construction
+  title: Ryan Xu's undilated n51 exact construction
   role: source-repository
   url: https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json
   local: resources/web/ry-xu-new-packings-2026-10-08/
