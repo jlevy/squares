@@ -946,6 +946,7 @@ def test_documentation_is_bookkeeping_but_not_a_public_news_topic() -> None:
     data["entries"][0]["topics"] = ["upper-bound", "verification"]
     render_changelog.validate(data)
     assert 'data-news-entry="admission"' in render_changelog.render_news(data)
-    data["entries"][0]["topics"] = ["documentation"]
-    with pytest.raises(ValueError, match="topics"):
-        render_changelog.validate(data)
+    for topic in ("documentation", "correction", "audit"):
+        data["entries"][0]["topics"] = [topic]
+        with pytest.raises(ValueError, match="topics"):
+            render_changelog.validate(data)

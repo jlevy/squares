@@ -918,7 +918,12 @@ it.
   All significance and All topics clear their facet; Reset restores the defaults.
   The compact chooser groups share the homepage’s small controls, wrap inline, and keep
   their group names accessible without visible headings.
-  Multi-select topic buttons wrap within their group on narrow screens.
+  Multi-select topic buttons form a joined strip, wrap between labels on narrow screens,
+  and use the cards’ sentence-case labels and topic fills in both color themes.
+  An inset underline marks selected topics; hover underlines the label and keyboard
+  focus keeps the shared outline.
+  Each topic’s muted tally counts articles at the selected significance levels,
+  independently of topic selection; All counts unique articles across those levels.
   Counts use the Results control row, right aligned above the cards; an empty state
   describes a selection without matches.
   URL state preserves unrelated query parameters and browser history; a low-score
@@ -942,17 +947,17 @@ it.
   and verification the review-blue palette.
   These subject labels assert no result kind or verification status.
   Results and News use the shared topic vocabulary and sentence-case labels in
-  `devtools/site_topics.py`. Every registered result kind keeps its precise topic; News
-  also accepts Engineering and Verification.
+  `devtools/site_topics.py`. News uses the shared vocabulary’s subset without Correction
+  and Audit, including Project, Engineering and Verification.
   News filters offer the topics present in the archive, in the shared vocabulary’s
   order. Topic chips explicitly reset text transformation, small caps and letter spacing,
   so parent headings cannot change their casing.
   The chip renderer preserves each consumer’s filter attribute.
-  All surfaces retain the result’s real kind, status, claim and credit.
+  Full result records retain the result’s real kind, status, claim and credit.
   The homepage highlights the three newest S5 results from the results register, using
   their existing claims, credit and evidence, and follows them with “All news →”.
-  Formalization and simplification highlights use their precise registered topic labels
-  and retain the original result-kind and evidence chips.
+  Highlights show their registered topic once in the header when it belongs to the News
+  subset. The evidence row retains verification, confirmation and status marks.
   About keeps one short News link; its old history bookmarks forward without duplicating
   the feed.
 
@@ -1803,12 +1808,12 @@ it.
 - **Small choosers.** Single-select and multi-select choices share the homepage Atlas’s
   `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the Results
   widget control size, 1.35 leading, and 0.15rem by 0.65rem padding (`think-ticj`).
-  Borders, selected fill, hover, keyboard focus and motion use the same rules on every
-  page. Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select
-  groups use native buttons with `aria-pressed`. Group names remain accessible when
-  visually hidden. Momentary All and Reset actions use the same compact button appearance
-  without a selected state.
-  Chooser strips wrap at narrow widths; pages only place the groups.
+  Borders, hover, keyboard focus and motion use the same rules on every page.
+  Topic filters use their shared chip fills and mark selection with an inset underline.
+  Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select groups
+  use native buttons with `aria-pressed`. Group names remain accessible when visually
+  hidden. Momentary All and Reset actions use the same compact button appearance without
+  a selected state. Chooser strips wrap at narrow widths; pages only place the groups.
   All action groups use a shared 0.7rem gap and wrap together at narrow widths; no
   section owns separate button spacing.
   Filter counts use the Results `site-table-tools` row and `site-count` role, aligned to

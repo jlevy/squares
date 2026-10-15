@@ -398,8 +398,6 @@ entries:
       - T-065
     topics:
       - project
-      - correction
-      - audit
       - verification
     summary: |-
       A project audit checked the verification ratings of 27 recent results and examined the
@@ -636,7 +634,6 @@ entries:
       - regularization
     topics:
       - verification
-      - audit
     summary: |-
       An audit of 92 packing records identifies gaps between illustrations and certified
       bounds: numerically checked drawings, exact drawings above the verified bound, and
@@ -714,7 +711,7 @@ entries:
       - T-147
       - T-148
     topics:
-      - correction
+      - project
     summary: |-
       PingYou Ltd identifies its unreleased AI agent, PY, as assisting with its 153- and
       207-square packings. The result records, case pages and source notes retain this
@@ -1480,7 +1477,6 @@ entries:
         until its findings were written. It is not a human oversight record.
     topics:
       - verification
-      - audit
     references:
       - label: Second adversarial review and its dated corrections
         target: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md

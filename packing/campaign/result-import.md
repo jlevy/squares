@@ -650,6 +650,7 @@ regularization. It is orthogonal to significance: project work can be S1/S2, and
 label gives no score increase.
 It maps to the shared **Project** topic in News; it is not a scientific result kind.
 Engineering and Verification remain available topics, alongside the precise result
+kinds. News excludes Correction and Audit topic labels; Results keeps those registered
 kinds.
 
 For S3–S5, draft a concise News entry before merge, or record an editorial omission when

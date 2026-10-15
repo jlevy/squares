@@ -6,11 +6,12 @@ from devtools import overview_sections, render_changelog
 from devtools.check_results import KINDS
 from devtools.overview_data import Overview, Result
 from devtools.register_prose import paragraphs
+from devtools.site_topics import NEWS_TOPICS
 
 LIMIT = 3
 
-# Result highlights retain the precise registered kind from the shared vocabulary.
-TOPIC_BY_KIND = {kind: kind for kind in KINDS}
+# Result kinds stay precise; only the subset offered by News gets a topic chip.
+TOPIC_BY_KIND = {kind: kind for kind in KINDS if kind in NEWS_TOPICS}
 
 
 def highlights(overview: Overview) -> tuple[Result, ...]:
@@ -46,7 +47,7 @@ def _article(result: Result) -> str:
         f"{header}"
         '<p class="site-result-status">'
         f"{overview_sections.ladder_chips(result)} "
-        f"{overview_sections.kind_and_status(result)}</p>"
+        f"{overview_sections.status_marks(result)}</p>"
         f'<p class="site-result-meta">{overview_sections.credit_cell(result.credit)}</p>'
         f"{qualifier}<p>{claim}</p>"
         f'<p><a href="result/{result.id.lower()}.html">Full result '
