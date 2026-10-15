@@ -5,7 +5,7 @@ title: "Import Mishapolk 70a033f (no issue): 12 KKT refinements below best now a
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:43:19.409Z
-updated_at: 2026-10-15T00:31:22.900Z
+updated_at: 2026-10-15T00:33:45.320Z
 started_at: 2026-10-14T23:04:32.077Z
 ---
 Mishapolk/square-packing-records 70a033f (2026-10-14T16:11:31Z), 7 commits past #593's pin 46f638c. No issue reports it. Commit message: 'Refine 14 contested certificates to ultra-precision KKT endpoints'. census.json credits 14 counts to Mykhailo Polkovskyi and 10 re-cut counts to 'Antigravity'.
@@ -51,3 +51,6 @@ Owner decided 2026-10-14: counts from first commit. It enters in report order at
 **Draft acknowledgement (optional; no issue reports 70a033f and #593 is the author's thread; post only after the records PR registers the twelve, per stage 7, with its T-NNN):**
 
 > @Mishapolk, thank you. We have read 70a033f, which replaces 24 of this issue's certificates. No issue reports it, so the record reads it as a publication reported at its first commit (16:11Z on 14 October). Admitted at the census's exact fractions and replayed on both of this repository's exact routes (all 24 accepted, all 48 controls refused), twelve are below every earlier report at their counts: 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304. Each tightens the certificate that held its count (PingYou Ltd's PR #574 at nine, Francisco Couzo's #586 at 154 and #583/#586 at 302, Daniil Ostashev's #575 at 304), so under the owner's report-order rule they are recorded as refinements of those packings, credited to Mykhailo Polkovskyi after each packing's finder. At the other twelve PR #574 is smaller; at 207 by 1.49e-99, which its algebraic side decides exactly. The census credits ten counts to "Antigravity"; please tell us how you would like that attributed. They will be registered in a records pull request, and we will reply here with the id.
+
+
+**Coordinator decisions, 2026-10-15 (relayed to this lane):** no credit for "Antigravity" (none of its counts is recorded); the measured refinement mapping (compare_lineage) is accepted as precedent, and the records PR states its basis as measured; the #593 acknowledgement goes out after the records PR merges, with the T-id, as drafted. A records lane takes branch claude/wizardly-meitner-wqn4x3-intake-1014b (head ddc7197d8) from here.
