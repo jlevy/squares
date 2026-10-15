@@ -5,16 +5,18 @@ title: "Import Francisco Couzo: franciscouzo/square-packing 487b058 (no issue): 
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+child_order_hints:
+  - is-01m4yst7ny3g52xgq8yr82r2az
 hold: null
 hold_until: null
 created_at: 2026-10-14T23:48:21.180Z
-updated_at: 2026-10-15T03:18:40.485Z
+updated_at: 2026-10-15T03:31:09.628Z
 started_at: 2026-10-15T03:18:40.485Z
 ---
 Found by the #607 lane (think-qik6) on 2026-10-14. franciscouzo/square-packing 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d (2026-10-14T17:45:39Z, 'Land verified bounds through n=1024'), the parent of #607's pin 43ac7d2, is a watched-repository publication that no issue reports and no packet retains. Against b85dee2 (the issue-586 packet's pin) it adds 290 certificates under certificates/ (370 and 403 to 991), changes 7 (211, 339, 378, 379, 380, 381, 382) and deletes 22, and writes upper_bounds.json, the index #607 compares against.
