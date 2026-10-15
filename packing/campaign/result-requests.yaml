@@ -6170,7 +6170,7 @@ issues:
       - result: t037-third-party-replay
         id: E-n011-kleddamag-3875-esummins-replay-report
         status: recorded
-    close_when: The evidence entry is on main and the owner has answered the two asks.
+    close_when: The evidence entry is on main and the owner has decided the replayed-annotation ask.
   - number: 522
     title: 'Simple-square stratification of s(n): proof strategy, n = 11 scoreboard and Lean layer: registration request'
     author: Esummins
@@ -6285,7 +6285,7 @@ issues:
         suspended the n = 17 part pending Overbeck's candidate proof (T-153, issue 557), with
         think-x4v4; the n = 19 part waits on a budget and the leaf-rule review (think-kok7).
       bead: think-j891
-      blocked_on: [think-x4v4]
+      blocked_on: [think-x4v4, think-kok7]
     beads:
     - think-j891
     answer_bead: think-j891
