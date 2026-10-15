@@ -1576,7 +1576,8 @@ Both project exact routes accept the 211 certificate and refuse both controls.
 T-188 records the side, 9.29e-6 below issue 586’s, at V0/C0, pending independent review
 and adoption. 252 of the 296 are beyond-horizon rows of the source register; 812 and 930
 are not recorded, and the 42 above Göbel’s classical constructions wait on the owner’s
-answer on #613. The source states nothing about AI assistance.
+answer on #613. The pinned files state nothing about AI assistance; the author’s issues
+of 13 and 14 October disclose OpenAI Codex and Claude Code assistance.
 
 **[Couzo certificates 2026-10-14]**: Francisco Couzo’s exact rational certificates for n
 = 237, 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 703, 757, 804,
@@ -1595,7 +1596,8 @@ first committed with no issue and pinned at `58a783368d4b7e70bb800f0009ea9ca03e5
 retained as the source wrote it; [packet](web/couzo-n237-2026-10-15/README.md).
 Both project exact routes accept the 1 replayed certificate and refuse both controls.
 T-190 records the side, 2.40e-11 below T-189, at V0/C0, pending independent review and
-adoption.
+adoption. The pinned files state nothing about AI assistance; #607, the day before,
+discloses OpenAI Codex and Claude Code assistance.
 
 **[bengreff s95 certificate 2026-10-15]**: Benjamin Greff’s (GitHub bengreff) mixed
 cover for $s(95) \ge 10$, hence $s(95) = 10$ with the $10 \times 10$ grid: 48,352 points
