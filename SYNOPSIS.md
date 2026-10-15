@@ -653,6 +653,10 @@ case or experiment separately.
 | [Share complete immutable publications within one pytest invocation](packing/benchmarks/validation-efficiency/experiments/VE-009-shared-test-publication.md) | research synthesis | record | retained | — |
 | [Batch Admitted Gupta Rendering Within Each Private Fixture](packing/benchmarks/validation-efficiency/experiments/VE-010-gupta-fixture-renderings.md) | research synthesis | record | retained | — |
 | [Copy Complete Guarded Native Receipts](packing/benchmarks/validation-efficiency/experiments/VE-011-guarded-receipt-copies.md) | research synthesis | record | retained | — |
+| [Read project attribution inputs once per test invocation](packing/benchmarks/validation-efficiency/experiments/VE-012-tally-attribution-snapshot.md) | research synthesis | record | retained | — |
+| [Read each Gupta claim bound once for its two fields](packing/benchmarks/validation-efficiency/experiments/VE-013-gupta-bound-pair.md) | research synthesis | record | retained | — |
+| [Inline identical hot scalar and point witness schema shapes](packing/benchmarks/validation-efficiency/experiments/VE-014-witness-inline-shapes.md) | research synthesis | record | retained | — |
+| [Repeat Gupta Timing with the Retained Schema](packing/benchmarks/validation-efficiency/experiments/VE-015-gupta-retained-schema.md) | research synthesis | record | retained | — |
 | [Review: the 2026-10-14 upper-bound intake ledger](docs/project/reviews/review-2026-10-14-intake-ledger.md) | dated review record | record | retained | — |
 | [Mathematical Review: wand125’s Fine-Net Lower Bounds at n = 37, 39 and 44 and the Linear Lower Bound at n = 145](docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md) | dated review record | record | retained | — |
 | [Fang’s Excess Theorem and Direct Certificates: Mathematical Review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) | dated review record | record | retained | — |
