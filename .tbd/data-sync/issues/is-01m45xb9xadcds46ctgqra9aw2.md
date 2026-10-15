@@ -5,7 +5,7 @@ title: Negative controls on check_readme, validate_schemas and ledger check run 
 kind: bug
 status: in_progress
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: claude-code@spud10.local
 labels: []
@@ -13,10 +13,11 @@ dependencies: []
 parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 child_order_hints:
   - is-01m502aqkn2f7anfqwnc26v3ff
+  - is-01m504ante81cj7exkdeek6n50
 hold: null
 hold_until: null
 created_at: 2026-10-05T11:31:53.898Z
-updated_at: 2026-10-15T15:19:13.268Z
+updated_at: 2026-10-15T15:54:08.577Z
 started_at: 2026-10-15T13:49:13.882Z
 ---
 Three checks that negative controls are built on already exit 1, unmutated, inside a mutation worker snapshot. A control is scored as "exited non-zero and printed its expected message", with no green baseline demanded. So the 4 + 10 + 35 controls on these commands are currently scored over a checker that is red before any mutation is applied. That is the blinding class the `PRUNE` comments in `packing/devtools/run_negative_controls.py` warn about (bibliography.yaml, 2026-09-22). A looser `expect:` string, or a mutation whose message happens to coincide, would let a control pass over a checker that never reached the code it rehearses.
