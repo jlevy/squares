@@ -320,6 +320,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     for job_name in (
         "validate",
+        "integration-suites",
         "suite-a",
         "suite-b",
         "suite-c",
@@ -639,7 +640,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         if _mapping(step).get("name") == "Run the complete integration surface"
     )
     assert full_step["if"] == "github.event_name != 'pull_request'"
-    # The complete integration runner omits every Step assigned to a deferred runner.
+    # The complete integration runner omits every Step assigned to a native sibling.
     # The CLI/workflow partition contract also checks exact coverage and disjointness.
     command = shlex.split(str(full_step["run"]))
     assert command[: command.index("packing-validate") + 1] == [
@@ -655,6 +656,10 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         flag
         for name in (
             "exhaustive exact behavioral tests",
+            "fast behavioral tests, shard A",
+            "fast behavioral tests, shard B",
+            "fast behavioral tests, shard C",
+            "fast behavioral tests, shard D",
             "slow behavioral tests",
             "single-square translation escape screen",
             "threshold dilation-limit record, 1440 steps",

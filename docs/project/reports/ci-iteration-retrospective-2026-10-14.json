@@ -2304,7 +2304,7 @@
         ],
         "summary_lines": ["0.00s teardown tests/test_site_rendering.py::test_font_diagnostic_retains_incomplete_native_observations[failed-font]","0.00s teardown tests/test_site_result_popover.py::test_failed_fetch_keeps_a_meaningful_fallback_and_can_retry","418 passed, 6 skipped in 393.95s (0:06:33)","4 passed in 29.55s"]
       },
-      {"name":"browser floor (biome, eslint, tsc, node:test)","reason":"","run_id":"912ae034fd084698908fceafee4f4dcd","seconds":112.75896114,"status":"passed","member":"step-ff538f91bb80419580430d6ce2c86cd3.json","phase_cost_examples":[],"summary_lines":["\u2139 skipped 0","\u2714 a time token is read in milliseconds or seconds, and anything else is no move (0.283118ms)","\u2714 a failed metric stylesheet preserves the row fallback and can be retried (5.974172ms)","\u2139 skipped 0"]}
+      {"name":"browser floor (biome, eslint, tsc, node:test)","reason":"","run_id":"912ae034fd084698908fceafee4f4dcd","seconds":112.75896114,"status":"passed","member":"step-ff538f91bb80419580430d6ce2c86cd3.json","phase_cost_examples":[],"summary_lines":["ℹ skipped 0","✔ a time token is read in milliseconds or seconds, and anything else is no move (0.283118ms)","✔ a failed metric stylesheet preserves the row fallback and can be retried (5.974172ms)","ℹ skipped 0"]}
     ]
   },
   "follow_up_2026_10_15": {
@@ -2333,5 +2333,15 @@
       "verification": "Read formatted prose and resolved relative links; parsed JSON and preserved the original 10 run records and 11 PR records. No tests, builds, Git/GitHub or bead mutations.",
       "publication_paths": {"plan":"docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md","audit":"docs/project/reports/ci-iteration-retrospective-2026-10-14.json"}
     }
+  },
+  "checkpoint_follow_up_2026_10_15_1420_utc": {
+    "source_head": "cf9003e0da0d6c33963a9804de4c41efdf8b3ddf",
+    "base": "31eaf6333c5d5b6b3d111241768cdd3d30982588",
+    "ordinary": {"packing_run":38744249256,"pages_run":38744249305,"status":"success","executed_checks":31},
+    "selected_full": {"run":38744311408,"status":"failure","dedicated_linux_workers_passed":10,"macos":"success","integration_job_seconds":2417,"integration_command_seconds":2301.62,"functional_failures":0,"call_wall_failures":7,"call_wall_limit_seconds":12,"shard_step_seconds":{"A":314.35,"B":304.79,"C":315.92,"D":242.31},"site_layout_step_seconds":283.35},
+    "repairs": {"think-2equ":"Repeated register/report work behind five CALL overruns.","think-n5ry":"Drawing refusal and no-script forwarding CALL overruns.","think-e2z4":"Native integration scheduling; preserve exact coverage and account for every worker."},
+    "publication_619": {"main_packing_run":38739227037,"main_pages_run":38739226771,"status":"success","live_expectations_passed":4460,"site":"0.7.7","infographics":"0.6.1","lower_bounds_paper":"0.4.7"},
+    "storage": {"external_free_mib":733,"recovery":"Normal pytest failed/1 retention; no manual deletion.","broad_builds":"Require measured space preflight."},
+    "limits": "No three-minute claim, per-test waiver, ceiling increase, inferred billed compute, or inferred total agent effort. VE017 remains unexecuted pending direct human authorization."
   }
 }

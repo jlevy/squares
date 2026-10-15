@@ -86,6 +86,58 @@ work remain distinct.
 There is still no reliable total for agent effort, billed compute or time attributable
 solely to storage.
 
+### October 15 checkpoint follow-up
+
+The earlier snapshot above remains a record of what was known at the time.
+PR619 subsequently passed both main workflows and the deployed-site audit, which checked
+4,460 expectations. Site 0.7.7, infographic 0.6.1 and lower-bounds paper 0.4.7 are live.
+
+PR620 head `cf9003e0` passed its ordinary Packing and Pages workflows and all three
+independent current-head reviews.
+The selected
+[full checkpoint 38744311408](https://github.com/jlevy/squares/actions/runs/38744311408)
+failed: all ten dedicated Linux workers and macOS passed, but the integration job took
+40m17s, including 2,301.62s in the validation command.
+Its four quick shards passed every functional assertion and failed seven strict
+12-second CALL limits.
+The three-minute objective is still open.
+
+The four shard Steps consumed 1,177.37s serially.
+The largest other Step was the site layout exercise at 283.35s. These are command
+measurements from this run, not a total for billed compute or agent effort.
+Native job fan-out could reduce the serial wait, but would not itself fix a single
+expensive test.
+
+The next correction is grouped by cause: `think-2equ` covers repeated register/report
+work, `think-n5ry` covers the drawing refusal and browser forwarding tests, and
+`think-e2z4` covers native scheduling and its recurring cost.
+Preserve the existing assertions, timing limits, negative controls and input isolation.
+Measure scoped fixes before selecting another complete checkpoint; do not repeat the
+whole run for each individual edit.
+
+The selected scheduling change adds one native `integration-suites` worker alongside the
+residual integration job.
+It runs the same four quick Steps serially, with the existing four-process loadfile
+recipe, two inner workers, 900-second subprocess deadlines and strict 12-second CALL
+guard. The complementary integration command skips exactly those four Steps; the native
+aggregate requires both owners.
+Ordinary pull-request setup and commands stay unchanged.
+
+This adds one history/submodule checkout, environment synchronization, Node/browser
+bootstrap and timing upload per complete checkpoint, with no extra test execution.
+Four separate workers would add three more setup cycles to save only about 53 seconds in
+the recorded shape: the residual work was about 1,124 seconds and the four shards about
+1,177 seconds. That is a scheduling projection, excluding setup and runner variation,
+rather than a measured speedup.
+The existing whole-checkpoint and full-tier ceilings stay unchanged.
+The selected `--only` command has no named-tier verdict, as opposed to the named
+ordinary PR suite commands; its worker and whole-checkpoint costs remain explicitly
+accounted for.
+
+Normal pytest failed-test retention recovered external scratch to about 733 MiB without
+manual deletion. The cleanup bead is closed; broad builds still need a space preflight.
+VE017 remains unexecuted pending direct human authorization.
+
 ## Goals
 
 - Explain the overnight delay using actual run and delivery evidence, separating elapsed

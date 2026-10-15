@@ -2527,19 +2527,22 @@ ci_gates:
   aggregate: post-merge-required
   selected_by: >-
     A push to `main`, the daily schedule or a `workflow_dispatch`. Pull requests keep
-    their nine-job fast surface and leave this aggregate skipped.
+    their ten-job fast surface and leave this aggregate skipped.
   reference: {runner: ubuntu-latest, cpus: 4}
   drift_ratio: 1.25
   enforcement: reporting
   tracking_bead: think-0atx
   reporting_reason: >-
-    The post-merge fanout has no hosted reading in its current ten-worker shape. Report
-    every job and the critical-path wall until think-0atx replaces the derived ceilings
-    with observations from complete main or scheduled runs.
+    The current twelve-worker post-merge shape has no hosted reading. Run 38744311408
+    measured the predecessor integration command at 2301.62s, including 1177.37s across
+    the four quick Steps now owned by integration-suites. Report every job and the
+    critical-path wall until think-0atx replaces derived estimates with complete runs.
   argument: >-
     The complete integration checkpoint after a merge and on the daily backstop. Its
-    aggregate requires the integration worker plus nine deferred workers; pull requests
-    continue to use packing-required and are outside this gate.
+    aggregate requires the remaining integration worker, the serial quick-suite worker
+    and ten deferred workers. The split adds one checkout, locked environment, browser
+    toolchain and artifact cycle per non-PR run; it does not reduce test work. Pull
+    requests keep packing-required and their existing commands and tier ceilings.
   wall:
     measured_seconds: null
     measured_on: null
@@ -2548,9 +2551,11 @@ ci_gates:
     pending_measurement: think-0atx
     ceiling_seconds: 3430.0
     argument: >-
-      Derived reporting estimate from the predecessor complete-checkpoint wall and the
-      deep-gate runner spread. No hosted run has measured the new post-merge fanout; the
-      first complete run must replace this estimate with its critical-path observation.
+      Existing derived reporting estimate from the predecessor complete-checkpoint wall
+      and deep-gate runner spread, unchanged by the quick-suite relocation. The first
+      complete twelve-worker run must replace this estimate with its critical-path
+      observation, including the extra setup and queue cost; the local full tier keeps
+      its separate 3600s ceiling.
   jobs:
   - id: validate
     measured_seconds: null
@@ -2560,9 +2565,25 @@ ci_gates:
     pending_measurement: think-0atx
     ceiling_seconds: 2400.0
     argument: >-
-      Derived reporting estimate from the predecessor integration worker's 24m19s wall
-      on run 34025346801, setup cost and hosted-runner variance. The current narrowed
-      integration worker has not been observed in this topology.
+      Existing derived reporting estimate from the predecessor integration worker's
+      24m19s wall on run 34025346801, setup and runner variance. Retained as the four
+      quick Steps move to integration-suites; no observation yet measures the remaining
+      integration worker in this topology.
+  - id: integration-suites
+    measured_seconds: null
+    measured_on: null
+    measured_where: null
+    spread: null
+    pending_measurement: think-0atx
+    ceiling_seconds: 1390.0
+    argument: >-
+      Derived provisional whole-job reporting estimate: the unchanged suite A/B/C/D
+      ceilings sum to 335 + 360 + 360 + 335 = 1390s. This is not a job measurement or
+      a deadline increase. The four existing Steps retain --jobs 1 --inner-jobs 2,
+      four xdist workers per command, the 900s child deadline and strict 12s CALL guard.
+      --only produces no named-tier cost verdict. Count the added checkout, uv/npm,
+      Chromium, collection and artifact costs inside this estimate; compare the
+      complete collected/executed roster and skip reasons against run 38744311408.
   - id: deferred-threshold-1440
     measured_seconds: null
     measured_on: null

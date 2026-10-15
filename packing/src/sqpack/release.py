@@ -957,6 +957,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
             "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
             "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/regularized_drawings.py",
+            "packing/devtools/upper_bound_reports.py",
             "packing/src/sqpack/cli/validate.py",
         ),
         outputs=(
@@ -967,10 +969,44 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "The five regenerated claim documents differ only by the source revision "
             "in their GitHub links, verified against main at 31eaf633. The validation "
-            "CLI removes automatic check reuse and changes no paper manuscript, "
-            "figure, scientific input or rendering helper. The lower-bounds paper "
+            "CLI removes automatic check reuse. The drawing validator reuses fresh "
+            "parsed inputs only within one call; exact report comparisons admit the "
+            "imported counts they use and still rebuild every own certificate and "
+            "equal the retained claim records. No paper manuscript, figure, scientific "
+            "input or rendering helper changes. The lower-bounds paper "
             "retains v0.4.7; the site guide takes v0.7.8. No paper PDF was rebuilt "
             "or compared for byte identity in this slice."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/regularized_drawings.py",
+            "packing/devtools/upper_bound_reports.py",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "PR620 changes validation input reuse and exact imported-side admission, "
+            "with retained claim equality and drawing refusal/freshness controls. "
+            "The same predicates validate every own certificate and each imported "
+            "fact used by a comparison. The three manuscripts, figures and rendering helpers "
+            "are unchanged, so their editions remain v0.1.7, v0.1.0 and v0.2.2. "
+            "This is a source-based no-public-change review; these paper exports "
+            "were not rebuilt or compared for byte identity in this slice."
         ),
     ),
     ReleaseNoPublicChange(

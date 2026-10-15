@@ -12,10 +12,10 @@ import json
 import os
 import shutil
 import subprocess
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Collection, Mapping
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import pytest
 
@@ -580,6 +580,100 @@ def test_admission_refuses_a_print_that_is_no_plain_decimal() -> None:
 
 
 # --------------------------------------------------------------------------- comparison
+
+
+def test_comparisons_admit_only_needed_imports_once_per_packet_and_refresh_next_time(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """House and pending aliases share a private read, never another comparison's truth."""
+    name = "synthetic-comparison-2026-10-15"
+    for reader in ("first", "alias"):
+        monkeypatch.setitem(
+            reports.HOUSES, reader, functools.partial(reports.import_side, name)
+        )
+    declaration = cast(
+        "reports.Declaration",
+        {
+            "houses": [{"n": 2, "reader": "first"}, {"n": 3, "reader": "first"}],
+            "pending": [{"n": 2, "reader": "alias"}, {"n": 4, "reader": "grid"}],
+        },
+    )
+    calls: list[tuple[Path, frozenset[int]]] = []
+    side = Fraction(3)
+
+    def facts(
+        packet: Path, numbers: Collection[int] | None = None
+    ) -> dict[int, legacy.Certificate]:
+        assert numbers is not None
+        calls.append((packet, frozenset(numbers)))
+        return {n: legacy.Certificate(n, side, ()) for n in numbers}
+
+    monkeypatch.setattr(reports, "read_facts", facts)
+    first_packet = reports.packet_path(name)
+    first = reports.comparison_reader(declaration)
+    assert first("first", 2) == first("alias", 2) == first("first", 3) == 3
+    assert first("grid", 4) == 2
+    assert calls == [(first_packet, frozenset({2, 3}))]
+
+    # The same packet path can change between calls; the next comparison must reread it.
+    side = Fraction(4)
+    second = reports.comparison_reader(declaration)
+    assert second("first", 2) == second("alias", 2) == 4
+    assert first("first", 2) == 3
+    assert calls == [(first_packet, frozenset({2, 3}))] * 2
+
+    # The same reader name under another repository must resolve to that private packet.
+    monkeypatch.setattr(reports, "WEB", tmp_path / "other-repository")
+    third = reports.comparison_reader(declaration)
+    assert third("first", 3) == 4
+    assert calls[-1] == (reports.packet_path(name), frozenset({2, 3}))
+    assert calls[-1][0] != first_packet
+
+
+def test_comparison_rereads_a_changed_private_fact_at_the_same_path(
+    private: Callable[[str], Path],
+) -> None:
+    packet = private(DELEEUW)
+    reader = "[Deleeuw n70 refinement 2026-10-10]"
+    declaration = cast(
+        "reports.Declaration", {"houses": [{"n": 70, "reader": reader}], "pending": []}
+    )
+    before = reports.comparison_reader(declaration)(reader, 70)
+    assert before > 0
+    fact = packet / "facts/n-070.yaml.gz"
+    original = fact.read_bytes()
+    document = reports.load_yaml(gzip.decompress(original).decode("utf-8"))
+    document["witness"]["squares"][0]["basis"][0] = "2"
+    fact.write_bytes(gzip.compress(json.dumps(document).encode(), mtime=0))
+    with pytest.raises(reports.ReportError):
+        reports.comparison_reader(declaration)(reader, 70)
+    fact.write_bytes(original)
+    assert reports.comparison_reader(declaration)(reader, 70) == before
+
+
+@pytest.mark.parametrize("fault", ["custody", "missing-count"])
+def test_comparison_import_failures_remain_report_errors(
+    monkeypatch: pytest.MonkeyPatch, fault: str
+) -> None:
+    name = "synthetic-comparison-2026-10-15"
+    monkeypatch.setitem(reports.HOUSES, "first", functools.partial(reports.import_side, name))
+    declaration = cast(
+        "reports.Declaration", {"houses": [{"n": 2, "reader": "first"}], "pending": []}
+    )
+
+    def facts(
+        packet: Path, numbers: Collection[int] | None = None
+    ) -> dict[int, legacy.Certificate]:
+        assert packet == reports.packet_path(name)
+        assert set(numbers or ()) == {2}
+        if fault == "custody":
+            raise reports.ReportError("packet custody: changed retained bytes")
+        return {}
+
+    monkeypatch.setattr(reports, "read_facts", facts)
+    detail = "packet custody: changed retained bytes" if fault == "custody" else "2"
+    with pytest.raises(reports.ReportError, match=f"n=2: first does not rebuild: {detail}"):
+        reports.comparison_reader(declaration)("first", 2)
 
 
 def test_a_printed_side_stands_for_the_numbers_its_rounding_allows() -> None:

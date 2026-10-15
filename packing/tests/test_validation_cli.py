@@ -305,7 +305,10 @@ def test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools() -> No
                     tokens[tokens.index("packing-validate") + 1 :]
                 )
                 only = namespace.only or []
-                if name.startswith("deferred-") or only == ["slow behavioral tests"]:
+                if name.startswith("deferred-") or only in (
+                    ["slow behavioral tests"],
+                    ["fast behavioral tests"],
+                ):
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
                 elif len(only) == 1:
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "4")
@@ -321,6 +324,7 @@ def test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools() -> No
         ("packing-validation.yml", "screen"),
         ("packing-validation.yml", "slow-lane"),
         ("packing-validation.yml", "validate"),
+        ("packing-validation.yml", "integration-suites"),
         ("packing-validation.yml", "deferred-threshold-1440"),
         ("packing-validation.yml", "deferred-atlas-grid"),
         ("packing-validation.yml", "deferred-controls-finer"),
@@ -4629,11 +4633,15 @@ def test_the_post_merge_jobs_partition_the_gate() -> None:
     shards = {f"exhaustive-{index}" for index in (1, 2, 3)}
     assert set(selections) == {
         "validate",
+        "integration-suites",
         "slow-lane",
         "screen",
         "regularized-views",
         *deferred,
         *shards,
+    }
+    assert selections["integration-suites"] == {
+        f"fast behavioral tests, shard {letter}" for letter in "ABCD"
     }
     assert selections["slow-lane"] == {"slow behavioral tests"}
     assert selections["screen"] == {"single-square translation escape screen"}
@@ -4656,11 +4664,77 @@ def test_the_post_merge_jobs_partition_the_gate() -> None:
     assert sum(map(len, logical.values())) == len(validate.STEPS)
 
 
+def test_post_merge_suites_retain_the_serial_steps_and_browser_prerequisites() -> None:
+    """Moving a Step must not change its process shape or turn browser tests into skips."""
+    command = _workflow_commands(pull_request=False)["integration-suites"]
+    assert command.only == ["fast behavioral tests"]
+    assert not command.skip
+    assert (command.jobs, command.inner_jobs) == ("1", "2")
+    assert validate._tier_id(command) is None  # --only has no named-tier cost verdict.
+    assert validate.DEFAULT_TIMEOUT_SECONDS == 900
+    assert validate.QUICK_TEST_WALL_BACKSTOP_SECONDS == 12
+    selected = validate._select_steps(only=command.only, fast=False)
+    assert len(selected) == 4
+    assert all(step.budget_seconds is None and not step.needs_engine for step in selected)
+
+    jobs = safe_load(WORKFLOW.read_text(encoding="utf-8"))["jobs"]
+    source = jobs["validate"]["steps"]
+    moved = jobs["integration-suites"]["steps"]
+    setup_names = (
+        "Install uv and Python 3.14",
+        "Synchronize the locked development environment",
+        "Install Node",
+        "Install the pinned browser toolchain",
+        "Cache the Playwright browser for the complete post-merge gate",
+        "Install Chromium for the complete post-merge gate",
+    )
+    for name in setup_names:
+        before = next(step for step in source if step.get("name") == name)
+        after = next(step for step in moved if step.get("name") == name)
+        assert {key: value for key, value in before.items() if key != "if"} == after
+    assert _installs_chromium(jobs["integration-suites"], pull_request=False)
+    checkout = next(step for step in moved if "actions/checkout@" in step.get("uses", ""))
+    assert checkout["with"]["fetch-depth"] == 0
+    assert checkout["with"]["submodules"] is True
+
+
+@pytest.mark.parametrize("damage", ["missing-worker", "partial-selection", "overlap"])
+def test_post_merge_partition_refuses_a_missing_or_incomplete_suite_owner(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, damage: str
+) -> None:
+    document = safe_load(WORKFLOW.read_text(encoding="utf-8"))
+    jobs = document["jobs"]
+    if damage == "missing-worker":
+        del jobs["integration-suites"]
+    elif damage == "partial-selection":
+        step = next(
+            step
+            for step in jobs["integration-suites"]["steps"]
+            if "packing-validate" in step.get("run", "")
+        )
+        step["run"] = step["run"].replace(
+            '--only "fast behavioral tests"', '--only "fast behavioral tests, shard A"'
+        )
+    else:
+        step = next(
+            step
+            for step in jobs["validate"]["steps"]
+            if step.get("name") == "Run the complete integration surface"
+        )
+        step["run"] = step["run"].replace('--skip "fast behavioral tests, shard D"', "")
+    changed = tmp_path / "workflow.json"
+    changed.write_text(json.dumps(document), encoding="utf-8")
+    monkeypatch.setattr(sys.modules[__name__], "WORKFLOW", changed)
+    with pytest.raises(AssertionError):
+        test_the_post_merge_jobs_partition_the_gate()
+
+
 def test_post_merge_workers_bind_one_sha_and_a_separate_complete_aggregate() -> None:
     document = safe_load(WORKFLOW.read_text(encoding="utf-8"))
     jobs = document["jobs"]
     expected = {
         "validate",
+        "integration-suites",
         "deferred-threshold-1440",
         "deferred-atlas-grid",
         "deferred-controls-finer",
