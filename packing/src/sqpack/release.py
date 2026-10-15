@@ -978,6 +978,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/regularized_drawings.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/src/sqpack/cli/validate.py",
+            "packing/src/sqpack/gate_budgets.py",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
@@ -987,7 +988,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "The five regenerated claim documents differ only by the source revision "
             "in their GitHub links, verified against main at 31eaf633. The validation "
-            "CLI removes automatic check reuse. The drawing validator reuses fresh "
+            "CLI removes automatic check reuse. The explainer's broad sqpack source "
+            "declaration includes gate_budgets.py, whose changes govern hosted CALL "
+            "timing policy and policy parsing; paper renderers consume neither. "
+            "The drawing validator reuses fresh "
             "parsed inputs only within one call; exact report comparisons admit the "
             "imported counts they use and still rebuild every own certificate and "
             "equal the retained claim records. No paper manuscript, figure, scientific "
