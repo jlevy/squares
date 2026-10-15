@@ -13,7 +13,7 @@ from pathlib import Path
 import pytest
 
 from cases.kingbird29 import layout as kingbird_layout
-from devtools import check_gate_budgets, check_readme, check_synopsis
+from devtools import check_gate_budgets, check_readme, check_results, check_synopsis
 from devtools import run_negative_controls as controls
 from devtools.check_pr_wall import load_walls
 from sqpack.campaign import ledger
@@ -181,6 +181,64 @@ def test_the_readers_the_baselines_found_are_declared_worker_inputs() -> None:
         assert controls.REPO / path in carried, path
 
 
+def test_every_file_the_results_checker_stats_reaches_a_worker(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Each path `check_results` requires to exist is declared, and comes back if pruned.
+
+    Two controls run the checker in a worker. Its reads are traced rather than listed:
+    every path it hands `repository_file_problem` for a review, a regularization or a
+    regularized drawing, with every artifact and control, must be one `result_paths`
+    declares. #612 registered T-185 and T-186 with `identity.measured_in` under
+    `resources/web`, which nothing declared, and only the slow unmutated run of the
+    checker in a worker found the 13 missing files (think-tddb).
+    """
+    register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))
+    document_map = safe_load(check_results.DOCUMENT_MAP.read_text(encoding="utf-8"))
+    results = register["results"]
+    scopes = {record["id"]: check_results.scope_values(record["scope"]) for record in results}
+    dated = {record["id"]: check_results.result_date(record) for record in results}
+    stated = [
+        path
+        for record in results
+        for field in ("artifacts", "controls")
+        for path in record.get(field) or []
+    ]
+    real = check_results.repository_file_problem
+
+    def traced(path: str) -> str | None:
+        stated.append(path)
+        return real(path)
+
+    monkeypatch.setattr(check_results, "repository_file_problem", traced)
+    for record in results:
+        check_results.review_problems(record, document_map)
+        check_results.regularizations_problems(record, dated, scopes)
+    check_results.regularized_drawings_problems(register, scopes, drift=False)
+    measured = {
+        item["identity"]["measured_in"]
+        for record in results
+        for item in record.get("regularizations") or []
+        if (item.get("identity") or {}).get("measured_in")
+    }
+    # The trace saw the field this guards, or the test would pass over nothing.
+    assert measured
+    assert measured <= set(stated)
+    undeclared = sorted(set(stated) - set(controls.result_paths(register)))
+    assert not undeclared
+
+    roots = frozenset(controls.LINKED_PRUNE_ROOTS)
+    reached = set(controls.result_pruned_targets())
+    missing = sorted(
+        path
+        for path in set(stated)
+        if (resolved := (controls.REPO / path).resolve()).is_file()
+        and controls.in_pruned_roots(resolved, roots)
+        and resolved not in reached
+    )
+    assert not missing
+
+
 def test_only_the_links_a_control_checks_are_rescued(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -260,14 +318,18 @@ def test_only_the_links_a_control_checks_are_rescued(
         assert controls.snapshot_pruned_targets() == [scientific_input]
         document.write_text(original)
 
-    # Structural declarations are independent of prose: the results register's evidence
-    # and the defect log's `recorded_in`, which `validate_schemas` requires to exist.
+    # Structural declarations are independent of prose: the results register's evidence,
+    # which `check_results` requires to exist, and the defect log's `recorded_in`, which
+    # `validate_schemas` does.
+    measured = "{identity: {measured_in: packing/resources/certificate.json}}"
     for declaration in (
-        "artifacts: [packing/resources/certificate.json]",
-        "controls: [packing/resources/certificate.json]",
-        "reviews: [{path: packing/resources/certificate.json}]",
+        "results:\n- artifacts: [packing/resources/certificate.json]\n",
+        "results:\n- controls: [packing/resources/certificate.json]\n",
+        "results:\n- reviews: [{path: packing/resources/certificate.json}]\n",
+        f"results:\n- regularizations: [{measured}]\n",
+        f"results: []\nregularized_drawings:\n  items: [{measured}]\n",
     ):
-        register.write_text(f"results:\n- {declaration}\n")
+        register.write_text(declaration)
         assert controls.snapshot_pruned_targets() == [scientific_input]
     register.write_text("results: []\n")
     defects.write_text("defects:\n- recorded_in: packing/resources/paper.md\n")

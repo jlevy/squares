@@ -1530,6 +1530,15 @@ def root_files() -> tuple[Path, ...]:
 # where it printed them unchecked. `check_documentation` prints what it printed at
 # 227c345eb. Under `CI=1`, `check_gate_budgets` and `check_session_gate` exit 0 in a
 # worker, the latter byte for byte as on main's selection.
+#
+# 2026-10-15, after #612 (think-tddb): T-185 and T-186 name their regularizations'
+# measurements in two lineage outputs under `resources/web` (`identity.measured_in`,
+# 6,875 bytes). `check_results` requires each to exist and nothing declared them, so the
+# checker was red unmutated in every worker, at 13 rows. Every earlier `measured_in`
+# named a file no prune omits. `result_paths` declares the field now, on a result and in
+# the regularized drawings. `--audit-snapshot` read 212,848,544 bytes on main c4c690a3e
+# and reads 212,861,306 with this change's code, tests and comments counted,
+# 13,631,110 under the cap.
 SNAPSHOT_MAX_BYTES = 216 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
@@ -1763,12 +1772,33 @@ def linked_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
     return sorted(targets)
 
 
-def _result_paths(register: object) -> list[str]:
-    """The paths the results register names structurally, as written."""
+def _measured_in(items: object) -> list[str]:
+    """The `identity.measured_in` of each regularization item that names one."""
+    return [
+        str(measured_in)
+        for item in cast(list, items or [])
+        if (measured_in := (item.get("identity") or {}).get("measured_in"))
+    ]
+
+
+def result_paths(register: object) -> list[str]:
+    """The paths the results register names structurally, as written.
+
+    These are the files `check_results` requires to exist, and two controls run it in a
+    worker: each result's `artifacts`, `controls` and `reviews`, and each regularization's
+    `identity.measured_in`, on a result and in the register's `regularized_drawings`.
+    `measured_in` joined on 2026-10-15 (think-tddb): until T-185 and T-186 every one named
+    a file no prune omits, so nothing declared it, and theirs, two lineage outputs under
+    `resources/web`, were missing in every worker. `tests/test_snapshot_link_consumers.py`
+    traces the checker's reads against this list.
+    """
+    data = cast(dict, register)
     raw_paths: list[str] = []
-    for record in cast(dict, register)["results"]:
+    for record in data["results"]:
         raw_paths.extend([*(record.get("artifacts") or []), *(record.get("controls") or [])])
         raw_paths.extend(review["path"] for review in record.get("reviews") or [])
+        raw_paths.extend(_measured_in(record.get("regularizations")))
+    raw_paths.extend(_measured_in((data.get("regularized_drawings") or {}).get("items")))
     return raw_paths
 
 
@@ -1792,7 +1822,7 @@ def _declared_pruned_targets(
 def result_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
     """Pruned files named structurally by the results register."""
     register = safe_load((ROOT / "frontier/results.yaml").read_text(encoding="utf-8"))
-    return _declared_pruned_targets(_result_paths(register), roots)
+    return _declared_pruned_targets(result_paths(register), roots)
 
 
 def defect_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
@@ -2043,7 +2073,7 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
             path = (document.parent / raw).resolve()
             if path in inventory and in_pruned_roots(path, roots):
                 rescued.add(path)
-    declared = _result_paths(safe_load(texts[register]))
+    declared = result_paths(safe_load(texts[register]))
     for log in logs:
         declared.extend(_defect_paths(safe_load(texts[log])))
     for raw in declared:
