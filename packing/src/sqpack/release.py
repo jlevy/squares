@@ -1100,14 +1100,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-lower-bounds-explainer.md",
         ),
         reason=(
-            "Rendered on this branch over main 4c9af690 with the browser's math pass, once "
+            "Rendered on this branch over main 6e73ef1c with the browser's math pass, once "
             "with main's versions of these paths and once with the branch's, the Markdown "
-            "differs only in the live register count beside T-018, 187 results registered "
-            "so far and now 192, and the HTML in that count and in where an empty style "
-            "attribute falls in one formula's span, which also moves between two renders "
-            "of the branch alone. The claim documents change only the revision their links "
-            "pin. A register count follows the site's data and is not a revision of the "
-            "paper, so the explainer keeps v0.4.7; the site takes v0.7.10."
+            "and HTML differ only in the live register count beside T-018, 187 results "
+            "registered so far and now 192. Over main 4c9af690 the HTML also differed in "
+            "where an empty style attribute falls in one formula's span, which moves "
+            "between two renders of the branch alone. The claim documents change only the "
+            "revision their links pin. A register count follows the site's data and is not "
+            "a revision of the paper, so the explainer keeps v0.4.7; the site takes v0.7.11."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1135,9 +1135,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "Rendered on this branch over main 4c9af690 at one link revision, once with "
+            "Rendered on this branch over main 6e73ef1c at one link revision, once with "
             "main's versions of these paths and once with the branch's, the three papers' "
-            "HTML, Markdown and PDF are byte-identical. The register gains T-188 to T-192 "
+            "HTML, Markdown and PDF are byte-identical, but for one main-side print of the "
+            "optimality review, 4 bytes shorter from identical HTML; two further main-side "
+            "prints equal the branch's three. The register gains T-188 to T-192 "
             "and edits T-081's claim and T-183's headline, the importer gains three "
             "readers, the About page a card for bengreff/s95-certificate, the requests "
             "record replies and entries, and the source register 267 beyond-horizon rows; "
