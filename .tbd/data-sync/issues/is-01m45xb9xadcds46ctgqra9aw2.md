@@ -5,7 +5,7 @@ title: Negative controls on check_readme, validate_schemas and ledger check run 
 kind: bug
 status: in_progress
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: claude-code@spud10.local
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 hold: null
 hold_until: null
 created_at: 2026-10-05T11:31:53.898Z
-updated_at: 2026-10-15T13:49:13.883Z
+updated_at: 2026-10-15T13:50:50.963Z
 started_at: 2026-10-15T13:49:13.882Z
 ---
 Three checks that negative controls are built on already exit 1, unmutated, inside a mutation worker snapshot. A control is scored as "exited non-zero and printed its expected message", with no green baseline demanded. So the 4 + 10 + 35 controls on these commands are currently scored over a checker that is red before any mutation is applied. That is the blinding class the `PRUNE` comments in `packing/devtools/run_negative_controls.py` warn about (bibliography.yaml, 2026-09-22). A looser `expect:` string, or a mutation whose message happens to coincide, would let a control pass over a checker that never reached the code it rehearses.
@@ -65,3 +65,5 @@ Evidence, with `CI=1`:
   the source holds the refs.
 
 Remaining scope is unchanged: `validate_schemas` and `test_change_scoped_selection.py`.
+
+2026-10-15 current-source audit at main 31eaf633 / PR620 cf9003e0 confirms the remaining scope. Snapshot COPY_SEPARATELY restores only three formerly review-rescued verifier files, while verifier_registry still stats all declared source/version/independence paths. vendor/kpress is still absent from ROOT_DOCUMENTS, COPY_SEPARATELY and LINK_BACK. GREEN_BASELINE_COMMANDS excludes validate_schemas and change-scoped selection tests. No new worker was instantiated; historical failure counts and source-size figures are not current measurements. The earlier README, ledger and gate-budget repairs remain landed. Preserve those fixes and address only the remaining schema/vendor input closure, alongside mutated-output equivalence under think-7wpx. Real local before/after acceptance needs more external scratch than the available roughly 76 MiB; other authorized hosts with adequate scratch may proceed. Evidence: assurance-followup-current-source.json.
