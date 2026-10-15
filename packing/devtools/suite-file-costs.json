@@ -683,6 +683,8 @@
     "packing/tests/test_unitsquare_precision_semantics.py": 1.051,
     "packing/tests/test_upper_bound_intervals.py": 6.698,
     "packing/tests/test_upper_bound_packets.py": 14.1,
+    "packing/tests/test_upper_bound_reports_487b058.py": 1.605,
+    "packing/tests/test_upper_bound_reports_4e4c8ce.py": 22.425,
     "packing/tests/test_upper_bound_reports_562_575_584_596.py": 1.525,
     "packing/tests/test_upper_bound_reports_574.py": 59.095,
     "packing/tests/test_upper_bound_reports_fang_direct.py": 2.594,
@@ -846,6 +848,21 @@
           "report": "packing/devtools/suite-file-cost-admissions/records-1014-2026-10-14.json",
           "provenance": {},
           "tests": 65
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_487b058.py",
+        "packing/tests/test_upper_bound_reports_4e4c8ce.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/reads-1015-2026-10-15.json",
+          "provenance": {},
+          "tests": 9
         }
       ]
     }
