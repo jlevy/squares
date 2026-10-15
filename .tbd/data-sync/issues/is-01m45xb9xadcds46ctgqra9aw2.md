@@ -5,13 +5,13 @@ title: Negative controls on check_readme, validate_schemas and ledger check run 
 kind: bug
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 labels: []
 dependencies: []
 parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 created_at: 2026-10-05T11:31:53.898Z
-updated_at: 2026-10-12T23:40:50.214Z
+updated_at: 2026-10-15T04:28:52.416Z
 ---
 Three checks that negative controls are built on already exit 1, unmutated, inside a mutation worker snapshot. A control is scored as "exited non-zero and printed its expected message", with no green baseline demanded. So the 4 + 10 + 35 controls on these commands are currently scored over a checker that is red before any mutation is applied. That is the blinding class the `PRUNE` comments in `packing/devtools/run_negative_controls.py` warn about (bibliography.yaml, 2026-09-22). A looser `expect:` string, or a mutation whose message happens to coincide, would let a control pass over a checker that never reached the code it rehearses.
 
@@ -39,3 +39,25 @@ Suggested acceptance:
 ## Notes
 
 2026-10-12 reconciliation: 74e4a0819 (on main since 2026-10-05) made check_readme and the ledger check green unmutated in a worker; validate_schemas (verifier-registry paths under pruned resources/web/) and test_change_scoped_selection.py (vendor/kpress) remain red and are this bead's remaining scope.
+
+2026-10-15, PR #611 (review A2): another instance of this class was found and fixed. Under
+`CI`, `check_gate_budgets` refuses an advisory bead it cannot confirm, and a worker's fresh
+repository held no bead store. So in every hosted worker it exited 1 unmutated, and its six
+controls (controls.yaml "gate budgets - ...") were scored over a red checker. This was on main
+as well as the branch.
+
+Found by: hosted suite-c at 227c345eb, after the PR had added `check_gate_budgets` to
+`GREEN_BASELINE_COMMANDS`.
+
+Fix: `index_tree` now points each worker at the source's sync-branch refs through
+`objects/info/alternates` plus `update-ref` (`_carry_bead_store`). Nothing is fetched, so the
+worker is not shallow.
+
+Evidence, with `CI=1`:
+- `check_gate_budgets` exits 1 in a worker built by c8181dd77's runner and 0 in one built by
+  the fix.
+- All six controls fire.
+- `test_gate_budgets_reads_its_wall_workflows_in_a_worker` asserts green under `CI` wherever
+  the source holds the refs.
+
+Remaining scope is unchanged: `validate_schemas` and `test_change_scoped_selection.py`.

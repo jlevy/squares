@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 14 campaign upper bounds (237, and 13 beyond 324
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T23:35:08.750Z
-updated_at: 2026-10-14T23:51:54.817Z
+updated_at: 2026-10-15T04:05:26.558Z
 started_at: 2026-10-14T23:35:12.236Z
 ---
 Francisco Couzo (@franciscouzo) reports, in jlevy/squares#607 (filed 2026-10-14T23:18:36Z), 21 finite upper bounds plus two precision refinements, certificates at franciscouzo/square-packing 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2 submissions/2026-10-14/certificates/ (first committed 2026-10-14T19:15:09Z), comparison index upper_bounds.json at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d. Stages 1, 2 and the stage 4 replay in the 14 October evening intake lane (branch claude/wizardly-meitner-wqn4x3-intake-607); no register, case, request, coverage, bibliography, resources README or intake-watch record edited. Registration waits for a records PR.
@@ -44,7 +44,7 @@ Each certificate's exact header side rounds up at 12 places to the printed side 
 
 **Not this import (think-nj7h).** 487b058 adds 290 certificates (370, 403-991), changes 7 (211, 339, 378-382) and deletes 22, with no issue. Its n211.cert states 7496774813149710519467765230441/5e29 = 14.993549626299..., 9.29e-6 below #586 (best now at 211): an in-corpus report nobody has imported.
 
-**Replay.** REPLAY-NOTES
+**Replay.** All 69 jobs (a positive, a duplicate-square control and an outside-container control per count) decided one at a time by the decide-job command certify runs, --workers 1, 23:41Z 14 Oct to 03:55Z 15 Oct (the runner was stopped once by the two-hour background limit, during 812's duplicate-square control, and resumed from there); `certify --workers 1 --finished` assembled and admitted the receipt, kept as 23 shards receipts/exact-certification-nNNN.json.xz. Both routes accept all 23 positives and refuse all 46 controls. 31,386,744 pair decisions, 12,425.76 route CPU-s (3.45 CPU-h), 14,795.58 job wall-s, longest job 632.89 s (994 outside control); load average 2 to 11 on 4 shared cores. Margins (both routes equal): the 16 own certificates clear every wall by exactly 1e-15 and every pair by 9.76e-13 (419) to 1.60e-12 (339); the 7 composites every wall by exactly 2^-65 and every pair by exactly 2^-64, as the author's logs of Daniel's checker print. A fresh serial check --replay follows in chunks (update below).
 
 ## Acknowledgement draft (not posted)
 
@@ -56,6 +56,14 @@ Each certificate's exact side rounds up to the side you print. Against the recor
 - The 13 campaign bounds and the two precision refinements beyond 324 are each below every earlier report, your own 487b058 certificates included.
 - The seven composites at 703, 812, 930, 931, 992, 993 and 994 have exactly the SHA-256 Kevin Fang's table lists, so they are his certificates, published on 12 October. They'll be recorded as Fang's results, as you ask, with your files and our replay as evidence for them.
 
-Both of this repository's exact routes REPLAY-ACK. A records pull request will register the results; we'll reply here when it merges.
+Both of this repository's exact routes accept all 23 certificates, and refuse a duplicated-square and a moved-outside mutation of each. A records pull request will register the results; we'll reply here when it merges.
 
-One question: 487b058 also changes certificates/n211.cert, to 14.993549626299..., below your #586 certificate, and adds certificates at 370 and 403 to 991 that no issue reports. We'll take those up as a separate import, reading each from its commit; tell us if any should wait.
+One question: 487b058 also changes certificates/n211.cert, to 14.993549626299..., below your #586 certificate, and adds certificates at 370 and 403 to 991 that no issue reports. We'll take those up as a separate import, reading each from its commit; tell us if any should wait. Your later 4e4c8ce certificate at 237 is a further 2.4e-11 below the issue's; we retain it as a separate report, so tell us if you want it registered in place of the issue's.
+
+2026-10-15 reads lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-reads-1015): franciscouzo/square-packing moved past this import's pin. Head 58a783368d4b7e70bb800f0009ea9ca03e578739 (2026-10-15T01:25:11Z), two commits after 43ac7d2: 4e4c8ce (00:31:53Z, "Update all verified bounds for n < 1024") and 58a7833 (Göbel square and strip bounds). #607 has not been edited since 2026-10-14T23:27Z, so it still names 43ac7d2.
+
+At 237, 4e4c8ce adds certificates/n237.cert (and the same bytes at certificates/best/n237.cert), a different file from #607's submissions/2026-10-14/certificates/n237.cert: s(237) <= 7951301819129798440089572127137/5e29 = 15.9026036382595969, 2.40e-11 below #607's 15.902603638284 (exact; at least 2.34e-11 below every number the print may be). Its metadata calls it an exact optimum seeded from #593, so it is the author's exact refinement of his own #607 packing. Under the per-count rule #607's 237 is still recorded at its first commit (19:15:09Z), and 4e4c8ce's is recorded after it, as a later and strictly stronger report. Imported separately: think-7j8o, packet couzo-n237-2026-10-15 (retained, compared, replayed on both routes: positive passes, both controls refused, 50.9 route CPU-s). The #607 acknowledgement could mention it ("your 4e4c8ce certificate at 237 is a further 2.4e-11 below; we retain it as a separate report, tell us if you want it registered in place of the issue's").
+
+The seven Fang composites and the beyond-horizon submissions: 4e4c8ce's certificates/best/ index restates them; at 703, 757, 813, 931, 932, 992, 993 and 994 its README says eight new glued witnesses use Fang's rectangles, which this lane did not compare with #607's files (beyond the horizon; see the 4e4c8ce beyond-horizon triage bead).
+
+**2026-10-15 replay update (this lane).** Branch claude/wizardly-meitner-wqn4x3-intake-607 at 77cec4292 holds the packet, the 23 receipt shards, register-plan.yaml (the raw plan with a header applying the per-count rule) and packing/tests/test_upper_bound_reports_607.py (9 tests, admitted to the suite record with suite_files admit-local). Main moved to 6964362b5 (#609) during the replay: merged into the branch, the claim record re-frozen there, every relation unchanged. packing-validate --records passes (51 of 109 steps, the named tier); acquire_source --check passes. Register plan: one T-NNN at 237 (V0/C0, pending adoption below T-183), evidence E-couzo-607-certificate-report, source row couzo-certificates-2026-10-14 with beyond-horizon rows; the records lane keeps the rows at 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 757 and 804 and registers 703, 812, 930, 931, 992, 993 and 994 as Fang's rows (think-rn2y) with this packet as evidence.
