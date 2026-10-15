@@ -95,13 +95,15 @@ policy:
   # Completed-run cost findings on hosted pull requests remain measured and annotated,
   # regardless of their ratio to the cost ceiling. A finished wall does not diagnose a
   # hang; the actual subprocess deadlines and the per-test guard do. Main, scheduled and
-  # full checkpoints (even in a PR job) and explicit --enforce-budget runs retain cost
-  # enforcement. This exception must have a
+  # full checkpoints (even in a PR job) retain tier-wall enforcement. The separate
+  # per_test_scope extends only CALL reporting; explicit --enforce-budget is strict. This exception must have a
   # live tracking bead and reason, checked by devtools.check_gate_budgets.
   pull_request_ceiling:
     enforcement: advisory
     tracking_bead: think-ht59
     per_test_hang_seconds: 45.0
+    # CALL cost alone is advisory on every hosted event; tier walls remain PR-only.
+    per_test_scope: hosted
     advisory_reason: >-
       Owner decision 2026-10-10 under think-ht59: of 36 red pushes reviewed on 2026-10-05,
       28 failed only on a wall verdict with every test green. Hosted runner draws vary
@@ -110,7 +112,15 @@ policy:
       the unchanged 165s cost ceiling misclassified it as a hang. Completed-run PR cost
       is advisory until think-ht59 establishes attributable, controlled measurements;
       functional failures, actual command deadlines, explicit timeout caps and the 45s
-      per-test guard remain enforced. No cost ceiling or startup assertion is raised.
+      per-test guard remain enforced. On 2026-10-15 run 38763716551 at 43ee60f6
+      completed every quick assertion but failed 11 calls at 12.39–27.72s. Against
+      run 38756833833, 590 matched successful nodes previously taking 1–3s had median
+      inclusive duration ratio 1.636; these are setup/call/teardown totals, not CALL
+      attribution. Extend only CALL advisory to hosted main/dispatch/schedule under
+      think-ht59. Keep 12s classification output, 45s hard CALL backstop, strict local
+      defaults and explicit --enforce-budget at 12s. Whole-job/full/workflow ceilings
+      and all coverage stay unchanged. This revises noisy cost enforcement; it saves
+      no scientific execution and makes no three-minute claim.
 
 # One entry per tier `packing-validate` can select as a whole. A tier with no entry here
 # fails `devtools.check_gate_budgets`, so a new tier cannot arrive without a ceiling.
@@ -2580,7 +2590,8 @@ ci_gates:
       Derived provisional whole-job reporting estimate: the unchanged suite A/B/C/D
       ceilings sum to 335 + 360 + 360 + 335 = 1390s. This is not a job measurement or
       a deadline increase. The four existing Steps retain --jobs 1 --inner-jobs 2,
-      four xdist workers per command, the 900s child deadline and strict 12s CALL guard.
+      four xdist workers per command and the 900s child deadline. Hosted CALL cost
+      reports at 12s and fails at 45s; explicit --enforce-budget restores strict 12s.
       --only produces no named-tier cost verdict. Count the added checkout, uv/npm,
       Chromium, collection and artifact costs inside this estimate; compare the
       complete collected/executed roster and skip reasons against run 38744311408.

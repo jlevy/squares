@@ -1262,7 +1262,11 @@ def test_a_slow_call_on_a_hosted_pull_request_is_reported_below_the_hang_limit(
     monkeypatch.setattr(validate, "_run", lambda *_a, **_k: output)
     monkeypatch.setattr(validate, "_hosted_pull_request", lambda *_a, **_k: True)
     context = validate.Context(
-        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": "pull_request"},
     )
 
     assert validate._fast_tests(context, 0) == output
@@ -1282,9 +1286,63 @@ def test_a_hung_call_on_a_hosted_pull_request_still_fails(
     monkeypatch.setattr(validate, "_run", lambda *_a, **_k: output)
     monkeypatch.setattr(validate, "_hosted_pull_request", lambda *_a, **_k: True)
     context = validate.Context(
-        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": "pull_request"},
     )
 
+    with pytest.raises(validate.StepFailureError, match="test_that_waits"):
+        validate._fast_tests(context, 0)
+
+
+@pytest.mark.parametrize("event", ["pull_request", "push", "schedule", "workflow_dispatch"])
+@pytest.mark.parametrize(("seconds", "fails"), [(12.0, False), (44.99, False), (45.0, True)])
+def test_hosted_call_cost_keeps_the_same_hard_backstop_on_every_event(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    event: str,
+    seconds: float,
+    *,
+    fails: bool,
+) -> None:
+    """Completed calls retain cost evidence without treating event type as hardware."""
+    output = _one_slow_call(seconds)
+    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: output)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=2,
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": event},
+    )
+    if fails:
+        with pytest.raises(validate.StepFailureError, match="45s or more"):
+            validate._fast_tests(context, 0)
+    else:
+        assert validate._fast_tests(context, 0) == output
+        printed = capsys.readouterr().out
+        assert "::warning title=Cost::" in printed
+        assert "tier ceilings and" not in printed
+
+
+@pytest.mark.parametrize("event", ["pull_request", "push", "workflow_dispatch"])
+@pytest.mark.parametrize("setting", ["enforce_budget", "strict"])
+def test_explicit_strict_call_cost_overrides_hosted_advisory(
+    monkeypatch: pytest.MonkeyPatch,
+    event: str,
+    setting: str,
+) -> None:
+    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: _one_slow_call(12.0))
+    context = validate.Context(
+        deep=False,
+        strict=setting == "strict",
+        jobs=1,
+        inner_jobs=2,
+        enforce_budget=setting == "enforce_budget",
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": event},
+    )
     with pytest.raises(validate.StepFailureError, match="test_that_waits"):
         validate._fast_tests(context, 0)
 
@@ -1293,12 +1351,16 @@ def test_a_test_expensive_by_waiting_is_caught_by_the_wall_backstop(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Long call wall time fails even when observed CPU is negligible, on any run that is
-    not a hosted pull request (the only run the register's relaxation reaches)."""
+    not hosted, even if a caller supplies a pull_request event name."""
     output = _one_slow_call(validate.QUICK_TEST_WALL_BACKSTOP_SECONDS + 4.0)
     monkeypatch.setattr(validate, "_run", lambda *_a, **_k: output)
     monkeypatch.setattr(validate, "_hosted_pull_request", lambda *_a, **_k: False)
     context = validate.Context(
-        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={"GITHUB_EVENT_NAME": "pull_request"},
     )
 
     with pytest.raises(validate.StepFailureError) as failure:
@@ -1307,6 +1369,108 @@ def test_a_test_expensive_by_waiting_is_caught_by_the_wall_backstop(
     message = str(failure.value)
     assert "test_that_waits" in message
     assert "call wall time" in message
+
+
+@pytest.mark.parametrize("unavailable", ["missing", "unreadable", "pr-only"])
+def test_hosted_call_advisory_requires_a_readable_applicable_declaration(
+    monkeypatch: pytest.MonkeyPatch,
+    unavailable: str,
+) -> None:
+    from dataclasses import replace  # noqa: PLC0415
+
+    register = gate_budgets.load()
+    assert register.policy.pull_request_ceiling is not None
+    if unavailable == "unreadable":
+
+        def unreadable():
+            raise gate_budgets.BudgetError("unreadable register")
+
+        monkeypatch.setattr(gate_budgets, "load", unreadable)
+    else:
+        ceiling = (
+            None
+            if unavailable == "missing"
+            else replace(register.policy.pull_request_ceiling, per_test_scope="pull_request")
+        )
+        monkeypatch.setattr(
+            gate_budgets,
+            "load",
+            lambda: replace(
+                register,
+                policy=replace(register.policy, pull_request_ceiling=ceiling),
+            ),
+        )
+    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: _one_slow_call(16.0))
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=2,
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": "push"},
+    )
+    with pytest.raises(validate.StepFailureError, match="test_that_waits"):
+        validate._fast_tests(context, 0)
+
+
+@pytest.mark.parametrize("forcing", ["none", "cli", "environment"])
+@pytest.mark.parametrize("event", ["pull_request", "workflow_dispatch"])
+def test_actual_cli_threads_explicit_call_enforcement_into_the_selected_step(
+    monkeypatch: pytest.MonkeyPatch,
+    forcing: str,
+    event: str,
+) -> None:
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("GITHUB_EVENT_NAME", event)
+    monkeypatch.delenv("PACKING_VALIDATION_ARTIFACT_DIR", raising=False)
+    monkeypatch.delenv("PACKING_VALIDATE_ENFORCE_BUDGET", raising=False)
+    if forcing == "environment":
+        monkeypatch.setenv("PACKING_VALIDATE_ENFORCE_BUDGET", "1")
+    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: _one_slow_call(16.0))
+
+    def selected(steps: Sequence[validate.Step], context: validate.Context, *_args: Any):
+        assert context.enforce_budget == (forcing != "none")
+        validate._fast_tests(context, 1)
+        return validate.RunSummary(
+            results=[validate.StepResult(step.name, "passed", 0.0) for step in steps],
+            wall_seconds=0.0,
+            selected_count=len(steps),
+            total_count=len(validate.STEPS),
+        )
+
+    monkeypatch.setattr(validate, "_run_selected", selected)
+    args = ["--only", "fast behavioral tests, shard A", "--jobs", "1", "--inner-jobs", "2"]
+    if forcing == "cli":
+        args.append("--enforce-budget")
+    status, printed, stderr = _invoke(*args)
+    assert status == (0 if forcing == "none" else 1), (printed, stderr)
+
+
+@pytest.mark.parametrize("defect", ["functional", "deadline", "missing-wall", "missing-cpu"])
+def test_hosted_call_advisory_cannot_accept_failed_or_unmeasured_execution(
+    monkeypatch: pytest.MonkeyPatch,
+    defect: str,
+) -> None:
+    def command(*_args: Any, **_kwargs: Any) -> str:
+        if defect in {"functional", "deadline"}:
+            raise validate.StepFailureError(defect)
+        output = _one_slow_call(16.0)
+        header = (
+            validate._DURATION_HEADER
+            if defect == "missing-wall"
+            else validate._CPU_DURATION_HEADER
+        )
+        return output.replace(header, "missing diagnostic")
+
+    monkeypatch.setattr(validate, "_run", command)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=2,
+        environment={"GITHUB_ACTIONS": "true", "GITHUB_EVENT_NAME": "workflow_dispatch"},
+    )
+    with pytest.raises(validate.StepFailureError):
+        validate._fast_tests(context, 0)
 
 
 def test_a_quick_lane_under_the_ceiling_passes_and_still_reads_the_durations() -> None:
@@ -2007,6 +2171,49 @@ def test_a_per_test_wall_failure_is_its_own_class(
     )
     assert status == 1
     assert lines[-1] == f"FAILURE CLASS: {expected}"
+
+
+@pytest.mark.parametrize(("mode", "threshold"), [("hosted", 45), ("strict", 12), ("local", 12)])
+def test_call_wall_failure_reports_the_applied_threshold_on_every_surface(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, mode: str, threshold: int
+) -> None:
+    target = _hosted(monkeypatch, tmp_path, hosted=mode != "local")
+    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: _one_slow_call(46.0))
+    context = validate.Context(
+        deep=False,
+        strict=mode == "strict",
+        jobs=1,
+        inner_jobs=1,
+        environment={} if mode == "local" else {"GITHUB_ACTIONS": "true"},
+    )
+    with pytest.raises(validate.StepFailureError) as raised:
+        validate._fast_tests(context, 1)
+    summary = validate.RunSummary(
+        results=[validate.StepResult("a lane", "failed", 50.0, reason=str(raised.value))],
+        wall_seconds=50.0,
+        selected_count=1,
+        total_count=98,
+    )
+
+    status, lines = _render(summary, strict=context.strict)
+
+    verdict = (
+        f"per-test wall ceiling failed (1 test at or above {threshold} s: "
+        "tests/test_probe.py::test_that_waits 46.00 s)"
+    )
+    assert status == 1
+    assert lines[-1] == f"FAILURE CLASS: {verdict}"
+    if mode != "local":
+        assert (
+            f"::error title=Per-test wall ceiling ({threshold} s) in a lane::"
+            "46.00 s  tests/test_probe.py::test_that_waits"
+        ) in lines
+        written = target.read_text(encoding="utf-8")
+        assert f"**Failure class:** {verdict}" in written
+        assert f"1 at or above the {threshold} s per-test ceiling" in written
+    else:
+        assert not any(line.startswith("::") for line in lines)
+        assert not target.exists()
 
 
 @pytest.mark.parametrize("hosted", [True, False])

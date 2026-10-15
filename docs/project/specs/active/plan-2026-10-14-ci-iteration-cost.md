@@ -118,8 +118,10 @@ whole run for each individual edit.
 The selected scheduling change adds one native `integration-suites` worker alongside the
 residual integration job.
 It runs the same four quick Steps serially, with the existing four-process loadfile
-recipe, two inner workers, 900-second subprocess deadlines and strict 12-second CALL
-guard. The complementary integration command skips exactly those four Steps; the native
+recipe, two inner workers and 900-second subprocess deadlines.
+Its initial run retained the strict 12-second CALL guard; the later policy decision
+below changes that verdict.
+The complementary integration command skips exactly those four Steps; the native
 aggregate requires both owners.
 Ordinary pull-request setup and commands stay unchanged.
 
@@ -184,6 +186,42 @@ Its scoped local run passed six tests; the repaired call took 0.64 seconds in on
 observation.
 This grouped correction requires fresh ordinary CI and a complete checkpoint
 at its new reviewed head, including execution of all five moved nodes without skips.
+
+### October 15 third-checkpoint follow-up
+
+[Full run 38763716551](https://github.com/jlevy/squares/actions/runs/38763716551) at
+`43ee60f6f2f729384fdf91dc34ae58e05169aa03` failed its four-suite owner and aggregate.
+Residual integration, all ten dedicated Linux owners and macOS passed.
+The quick suite passed its functional assertions but reported eleven CALL costs from
+12.39 to 27.72 seconds.
+Its four Steps totaled 1,602.66 seconds, compared with 1,041.54 seconds at `15548357`;
+these are overlapping-workflow component sums, not workflow elapsed time or billed
+compute.
+
+The two artifacts share 18,198 successful JUnit nodes.
+Among 590 nodes previously taking one to three seconds, the median inclusive duration
+ratio was 1.636; among 172 previously taking three to twelve seconds, it was 1.622.
+These include setup and teardown.
+Unrelated modules and all four shards moved upward, so the comparison does not establish
+one new parser regression or its host cause.
+The atlas-addressability test is a separate outlier: 0.571 to 27.723 seconds.
+Its source can charge the first caller for loading all 324 witnesses and materializing
+complete drawing frames just to read their sides.
+Cold-cache attribution needs separate measurement; moving that work to setup would not
+remove it.
+
+The correction makes completed calls of at least 12 and less than 45 seconds advisory on
+hosted full/main and scheduled runs, as they already were on ordinary PRs.
+The 45-second hard backstop, 900-second child deadlines, full-tier and workflow wall
+policies remain unchanged.
+Local runs and explicit strict or budget-enforced runs retain 12-second enforcement.
+All tests and assertions remain selected; no additional slow markers or workers are
+introduced. This policy revision avoids treating one uncalibrated hosted reading as an
+attributable regression.
+It saves no test execution and does not establish the three-minute goal.
+The implementation uses the existing tracked advisory declaration, with a separate CALL
+scope, and focused refusal tests; it adds no timing service or evidence framework.
+Fresh matching-head validation remains required before merge.
 
 ## Goals
 
@@ -738,6 +776,30 @@ proves equivalent execution and evidence acceptance on the same relevant inputs.
 - Which existing optional browser/PDF/native omissions are intentional product
   boundaries, and which need a capability-equipped selected lane?
   Keep each disposition explicit.
+
+### October 15 News Selection Follow-up
+
+The News backfill exposed two causes of unnecessary local validation work.
+Its two YAML files had no declared owner, so the push selector chose all 67
+prerequisites. The Markdown PR template also matched the blanket `.github/`
+suite-configuration rule and selected every quick test file.
+The local run was interrupted after about five minutes as external scratch reached 32
+MiB free.
+This is incomplete validation, not a performance baseline or a successful gate.
+
+Bead `think-k178` assigns the exact News files to the existing schema and synopsis
+validators through `Step.known_inputs`. Those validators remain unconditional; the new
+field records ownership without pretending their dependencies are fully enumerated.
+Unknown files still select the full offered tier.
+The PR-template exception is exact; actual and unknown workflow changes remain
+conservative. Selection controls cover both files, unknown neighbors, literal path
+matching, owner inclusion and restricted step universes.
+The existing attribution report uses the same ownership declarations.
+
+This change adds no validation job or deadline.
+Its controls require hosted validation while local disk-heavy work is paused.
+A measured reduction in iteration time remains to be established on the existing
+validation surface.
 
 ## References
 

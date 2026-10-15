@@ -123,6 +123,19 @@ def test_suite_configuration_selects_everything(path: str) -> None:
     assert select_tests([path]).everything
 
 
+def test_pr_template_selects_its_prose_contract_without_widening_workflow_changes() -> None:
+    template = ".github/PULL_REQUEST_TEMPLATE.md"
+    selection = select_tests([template])
+    assert not selection.everything, selection.reason
+    assert "packing/tests/test_pr_description.py" in selection.tests
+    for configuration in (
+        ".github/workflows/packing-validation.yml",
+        ".github/workflows/unknown.yml",
+        ".github/PULL_REQUEST_TEMPLATE.md.backup",
+    ):
+        assert select_tests([template, configuration]).everything
+
+
 def test_pages_workflow_selects_every_declared_publication_test() -> None:
     selection = select_tests([".github/workflows/pages.yml"])
     assert not selection.everything, selection.reason

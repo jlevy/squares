@@ -326,7 +326,10 @@ def _suite_configuration_reason(changed: list[str]) -> str | None:
         return "no changed paths were determined"
 
     for path in changed:
-        if path in SUITE_WIDE or (path.startswith(".github/") and path != PAGES_WORKFLOW):
+        if path in SUITE_WIDE or (
+            path.startswith(".github/")
+            and path not in {PAGES_WORKFLOW, ".github/PULL_REQUEST_TEMPLATE.md"}
+        ):
             return f"{path} configures the suite"
         resolved = (REPO / path).resolve()
         if path.endswith(".py") and _module_name(resolved) is None:

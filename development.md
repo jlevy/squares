@@ -1009,8 +1009,10 @@ labelled or dispatched deferred checkpoint.
 The behavioural [lane definitions](#the-behavioural-lanes) preserve the partition.
 Quick-test timing uses the `call` phase because shared fixture setup can be charged to
 whichever test starts first.
-Optimize a test that exceeds its ceiling, or retain its measurement when moving it to
-`slow`; remove that marker when its measured cost falls below the floor.
+Investigate calls at or above the 12-second classification threshold.
+Optimize avoidable work before moving a test to `slow`, and retain its individual
+measurement when moving it; remove that marker when its measured cost falls below the
+floor. Hosted CALL findings alone are advisory below 45 seconds, as described below.
 The marker registry tests enforce both declarations.
 Both behavioural lanes use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs`
 controls other internal pools, including the negative-control pool.
@@ -1078,12 +1080,31 @@ findings. Raising ceilings repeatedly did not resolve that ambiguity.
 runner-normalised wall can judge regressions attributable to a change.
 
 **Failures and deadlines still fail the run.** Functional failures, command timeouts,
-and test calls of 45 seconds or more remain enforcing.
-Numeric tier budgets are unchanged.
-Main and scheduled runs, full and strict checkpoints (including those invoked within a
-pull request), and explicit `--enforce-budget` retain cost enforcement.
-The gate identifies hosted pull requests from `GITHUB_ACTIONS` and `GITHUB_EVENT_NAME`;
-an advisory policy does not apply to every invocation on that runner.
+and hosted test calls of 45 seconds or more remain enforcing.
+The 12-second quick-test threshold reports classification findings on every hosted
+Actions event, including full, main, scheduled and dispatched runs.
+Local runs remain strict at 12 seconds.
+`--strict` and `--enforce-budget`, including `PACKING_VALIDATE_ENFORCE_BUDGET`, enforce
+12 seconds on hosted runs too.
+The existing policy record declares this CALL scope separately from PR-only tier-wall
+advisory and requires a live tracking bead.
+Missing or unreadable policy retains strict enforcement.
+
+This distinction follows
+[run 38763716551](https://github.com/jlevy/squares/actions/runs/38763716551): all quick
+assertions passed, but eleven completed calls failed the 12-second rule.
+Across 590 matched successful nodes that previously took one to three seconds, the
+median inclusive JUnit duration increased by a factor of 1.636. Those durations include
+setup and teardown and do not identify a CALL regression or establish its cause.
+A single uncalibrated hosted reading is classification evidence; it is not enough to
+attribute a performance regression to the change.
+This policy changes the verdict, not the amount of work or the three-minute target.
+
+Numeric tier budgets and whole-workflow wall policies are unchanged.
+Main and scheduled tier walls, full and strict checkpoint tier walls, and explicit
+`--enforce-budget` retain their existing enforcement.
+The gate identifies hosted execution through `GITHUB_ACTIONS`; the separate PR tier-wall
+exception also requires `GITHUB_EVENT_NAME=pull_request`.
 
 A different CPU/worker shape reports the budget result without failing, unless
 explicitly enforced.

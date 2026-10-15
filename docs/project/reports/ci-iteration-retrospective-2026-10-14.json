@@ -2356,5 +2356,40 @@
     "completed_full": {"run":38756833833,"conclusion":"failure","dedicated_linux_owners_passed":10,"macos":"success","residual_integration":"success","residual_command_seconds":1054.3,"residual_job_seconds":1179,"suite_steps_seconds":1041.536,"suite_job_seconds":1143,"longest_job":{"name":"slow-lane","seconds":1665},"quick_assertion_failures":0,"strict_call_failures":6},
     "quick_node_parity": {"baseline_nodes":18234,"new_nodes":18250,"baseline_passed":18187,"new_passed":18203,"skipped_including_xfail_each":47,"removed":0,"changed_existing_outcomes":0,"added_regressions":16,"selection":"Four fast behavioral shard JUnits only; other integration owners excluded."},
     "grouped_correction": {"report_nodes_moved":5,"report_bodies":"unchanged","owner":"Existing slow behavioral lane in complete/main/daily and optional selected Deep; matching-final-head complete success required procedurally before this merge.","forwarder_test":{"production_check_calls_before":64,"production_check_calls_after":8,"addresses":9,"single_field_mutations":45,"scoped_passed":6,"local_call_seconds":0.64},"timing_limits":"unchanged","new_jobs":0}
+  },
+  "checkpoint_follow_up_2026_10_15_1622_utc": {
+    "source_head": "43ee60f6f2f729384fdf91dc34ae58e05169aa03",
+    "comparison_head": "15548357a31e16acd029934025a8a615f9f1e208",
+    "full_run": 38763716551,
+    "comparison_full_run": 38756833833,
+    "full_run_url": "https://github.com/jlevy/squares/actions/runs/38763716551",
+    "conclusion": "failure",
+    "residual_integration": "success",
+    "dedicated_linux_owners_passed": 10,
+    "macos": "success",
+    "quick_assertion_failures": 0,
+    "strict_call_failures": 11,
+    "quick_step_seconds": {"before":[252.574,296.101,272.801,220.06],"after":[399.632,433.57,419.678,349.782]},
+    "quick_step_sum_seconds": {"before":1041.536,"after":1602.662},
+    "matched_successful_junit_nodes": 18198,
+    "inclusive_junit_ratios": [{"previous_seconds":"1 <= time < 3","nodes":590,"median":1.636,"q1":1.443,"q3":1.859},{"previous_seconds":"3 <= time < 12","nodes":172,"median":1.622,"q1":1.488,"q3":1.763}],
+    "inclusive_measurement_limit": "JUnit includes setup, call and teardown; these ratios neither attribute CALL cost nor establish runner causation. No runtime source changed between the compared heads.",
+    "call_overruns_seconds": [
+      {"node":"tests/test_overview_sections.py::test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts","seconds":27.72},
+      {"node":"tests/test_atlas_orientation.py::test_correcting_a_legacy_vertical_flip_rebases_on_the_original_parent","seconds":19.13},
+      {"node":"tests/test_upper_bound_reports.py::test_the_register_plan_states_each_bound_as_check_standing_reads_it[mishapolk-exact-certificates-2026-10-12]","seconds":17.77},
+      {"node":"tests/test_results_register.py::test_full_part_citations_cannot_promote_the_whole_result[T-154]","seconds":16.7},
+      {"node":"tests/test_verifier_registry.py::test_malformed_coverage_does_not_interrupt_the_schema_gate","seconds":16.62},
+      {"node":"tests/test_upper_bound_reports_606_70a033f.py::test_70a033f_is_smallest_exactly_at_the_twelve_recorded_counts","seconds":16.39},
+      {"node":"tests/test_results_register.py::test_full_part_citations_cannot_promote_the_whole_result[T-153]","seconds":16.14},
+      {"node":"tests/test_upper_bound_reports_606_70a033f.py::test_207_is_decided_exactly_against_pr_574s_degree_5_side","seconds":13.65},
+      {"node":"tests/test_generate_frontier_case.py::test_the_register_agrees_with_its_drafts_where_the_capture_moved","seconds":13.56},
+      {"node":"tests/test_upper_bound_reports.py::test_the_receipt_admits_every_job_on_both_routes[mishapolk-records-2026-10-14]","seconds":13.43},
+      {"node":"tests/test_overview.py::test_the_site_writes_its_forwarders_and_checks_them","seconds":12.39}
+    ],
+    "atlas_outlier": {"before_inclusive_seconds":0.571,"after_inclusive_seconds":27.723,"source_observation":"atlas_enclosing_sides loads all 324 witnesses and materializes complete frames to read their sides; its process cache can shift the cold payer. No new profile or causal benchmark was run."},
+    "policy_decision": {"tracking_bead":"think-ht59","hosted_call_classification_seconds":12,"hosted_call_failure_seconds":45,"local_and_explicit_strict_call_seconds":12,"scope":"CALL cost only; hosted ordinary, full, main, scheduled and dispatch runs. Explicit --enforce-budget and its environment setting remain strict.","retained":"All membership and assertions, 900-second default subprocess deadlines, full-tier and workflow wall declarations. No additional slow markers or workers.","benefit":"Stabilizes an unattributable singleton cost verdict; no reduction in scientific execution or three-minute claim.","validation":"Focused synthetic contracts and static checks; fresh matching-head full checkpoint remains required before merge."},
+    "artifacts": {"latest_integration_suites_id":11990382500,"latest_integration_suites_name":"validation-timings-integration-suites-1","comparison":"Retained four-shard JUnits from run 38756833833; compared to latest artifact without executing tests."},
+    "limits": "Step sums are not workflow elapsed time, billed compute or total agent effort. VE017 remains human-approval-dependent."
   }
 }

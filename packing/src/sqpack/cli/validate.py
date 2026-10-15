@@ -309,12 +309,13 @@ _SITE_INPUTS = (
 SLOW_TESTS = "slow and not exhaustive_exact"
 EXHAUSTIVE_TESTS = "exhaustive_exact"
 BEHAVIORAL_TEST_ROOTS = ("tests", "../packages/workbench/tests")
-#: The pull-request surface's per-test ceiling, in seconds of pytest `call` time.
+#: The quick surface's classification threshold, in seconds of pytest `call` time.
 #:
 #: This is the boundary between `QUICK_TESTS` and `SLOW_TESTS`, and it is a rule rather
 #: than a list on purpose: `fast behavioral tests` passes it to pytest as
-#: `--durations-min` and fails when any test it ran reports at or above it, naming the
-#: test. A hand-kept list of slow tests would rot exactly the way the 499s figure in this
+#: `--durations-min` and names every test at or above it. Local and explicitly
+#: strict runs fail; hosted advisory runs retain the separate 45s hard backstop. A
+#: hand-kept list of slow tests would rot exactly the way the 499s figure in this
 #: module's own docstring rotted -- silently, because nothing read it.
 #:
 #: Two numbers, deliberately, and the gap between them is runner variance. Tests are
@@ -363,7 +364,8 @@ BEHAVIORAL_TEST_ROOTS = ("tests", "../packages/workbench/tests")
 #: a later call reaps it, and background threads share the same process counters.
 #: Six seconds retains the previous report filter without attributing that work to a test.
 QUICK_TEST_CPU_REPORT_SECONDS = 6.0
-#: The enforced per-call wall ceiling remains unchanged.
+#: The quick-call classification ceiling; local/strict runs enforce it. Hosted runs
+#: report it under the declared policy and retain the separate 45s backstop.
 QUICK_TEST_WALL_BACKSTOP_SECONDS = 12.0
 #: The other direction, and it exists because `OR-13` is a floor on coverage rather than a
 #: budget on time: a test leaves the pull-request surface by its own measured cost and
@@ -572,6 +574,8 @@ class Context:
     inner_jobs: int
     environment: dict[str, str]
     timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS
+    enforce_budget: bool = False
+    """An explicit cost-enforcement request also applies to individual quick calls."""
     timeout_is_explicit: bool = False
     """True when an operator named the cap through `--timeout-seconds` or the
     environment variable, rather than taking the default.
@@ -794,8 +798,9 @@ class Step:
 
     Selection is conservative on both sides, which is the whole design (`BC-084`):
 
-    - a changed path matching no step's patterns selects the **entire gate**, never the
-      empty set, so a file nobody thought about cannot silently skip everything;
+    - a changed path claimed by neither `touches` nor `known_inputs` selects the
+      **entire gate**, never the empty set, so a file nobody thought about cannot
+      silently skip everything;
     - a step with no patterns is always selected;
     - `test_every_step_is_reachable_from_a_declared_pattern` requires each step to be
       selected by at least one path under `PATTERN_PROBES`, so a pattern set that has
@@ -825,6 +830,14 @@ class Step:
     validation`, and the exhaustive test step, each of which resolves or enumerates
     arbitrary paths. Attributing those would make a data file the load-bearing contract,
     which is the trade this field exists to refuse."""
+
+    known_inputs: tuple[str, ...] = ()
+    """Exact paths this step owns independently of its conditional reachability.
+
+    A check that resolves arbitrary paths can retain empty `touches` and run on every
+    change while claiming its known data files. These are exact paths, never globs;
+    an unfamiliar neighboring file still triggers the whole-gate fallback.
+    """
 
     budget_seconds: float | None = None
     """This step's own declared ceiling, for the rare step that legitimately costs more
@@ -1639,7 +1652,7 @@ def _quick_lane_command(jobs: int, shard: int) -> tuple[str, ...]:
 
 
 def _pull_request_ceiling() -> gate_budgets.CeilingAdvisory | None:
-    """The register's ceiling relaxation for hosted pull requests, or None to enforce.
+    """Read the PR wall policy and its separately declared hosted CALL scope.
 
     An unreadable register enforces: the relaxation is a declared exception, and a run
     that cannot read the declaration is held to the rule it relaxes.
@@ -1661,24 +1674,47 @@ def _fast_tests(context: Context, shard: int) -> str:
         for entry in _call_durations(output)
         if entry[0] >= QUICK_TEST_WALL_BACKSTOP_SECONDS
     ]
-    relaxed = _pull_request_ceiling() if waiting and _hosted_pull_request() else None
+    relaxed = _pull_request_ceiling() if waiting else None
+    hosted = context.environment.get("GITHUB_ACTIONS") == "true"
+    if (
+        context.enforce_budget
+        or context.strict
+        or not hosted
+        or (
+            relaxed is not None
+            and relaxed.per_test_scope == "pull_request"
+            and not _hosted_pull_request(context.environment)
+        )
+    ):
+        relaxed = None
     if relaxed is not None:
         hung = [entry for entry in waiting if entry[0] >= relaxed.per_test_hang_seconds]
         if not hung:
+            note = gate_budgets.advisory_note(
+                replace(
+                    relaxed.advisory,
+                    rules="the quick-test classification wall",
+                    still_fails=(
+                        f"Calls of {relaxed.per_test_hang_seconds:g}s or more, "
+                        "functional failures and subprocess deadlines remain enforcing. "
+                        "Tier and workflow wall policies are unchanged."
+                    ),
+                )
+            )
             print(
-                f"{len(waiting)} test(s) held the pull-request surface for "
+                f"{len(waiting)} quick test(s) took "
                 f"{QUICK_TEST_WALL_BACKSTOP_SECONDS:g}s or more of call wall time, "
-                f"reported and not failed:\n{_render_durations(waiting)}\n"
-                f"  {gate_budgets.advisory_note(relaxed.advisory)}"
+                f"reported and not failed:\n{_render_durations(waiting)}\n  {note}"
             )
             for seconds, node in waiting:
                 print(f"::warning title=Cost::{node} took {seconds:.2f}s of call wall time")
             return output
         waiting = hung
     if waiting:
+        limit = relaxed.per_test_hang_seconds if relaxed else QUICK_TEST_WALL_BACKSTOP_SECONDS
         raise StepFailureError(
             f"{len(waiting)} test(s) held the pull-request surface for "
-            f"{QUICK_TEST_WALL_BACKSTOP_SECONDS:g}s or more of call wall time:"
+            f"{limit:g}s or more of call wall time:"
             f"\n{_render_durations(waiting)}\n"
             "  Make the test faster, or mark it `slow` and declare its measurement in "
             "test_the_slow_marker_is_declared_only_by_measured_nodes. "
@@ -4801,7 +4837,13 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/check_canonical.py",
         ),
     ),
-    Step("soft-schema validation", _schemas, fast=True, records=True),
+    Step(
+        "soft-schema validation",
+        _schemas,
+        fast=True,
+        records=True,
+        known_inputs=("packing/site-changelog.yaml", "packing/site-changelog.schema.yaml"),
+    ),
     Step(
         "FN1 original-input bindings",
         _fn1_original_bindings,
@@ -5209,7 +5251,13 @@ STEPS: tuple[Step, ...] = (
             *_RENDERER_HUB,
         ),
     ),
-    Step("synopsis agrees with the artifacts", _synopsis, fast=True, records=True),
+    Step(
+        "synopsis agrees with the artifacts",
+        _synopsis,
+        fast=True,
+        records=True,
+        known_inputs=("packing/site-changelog.yaml", "packing/site-changelog.schema.yaml"),
+    ),
     Step("README agrees with the directory", _readme, fast=True, records=True),
     Step(
         "migrated Markdown writes its math as LaTeX",
@@ -5957,7 +6005,8 @@ def select_for_paths(paths: Sequence[str], steps: Sequence[Step] | None = None) 
     - a path no step claims means the attribution is incomplete for this change, so the
       whole gate runs. Returning the steps that happened to match would be an answer
       derived from an admittedly incomplete map.
-    - a step that claims nothing is claimed by everything.
+    - a step with empty `touches` runs for every change, even when it declares known
+      inputs for attribution.
 
     An empty `paths` is not "nothing changed"; it is "nothing was determined", and it
     also selects the whole gate.
@@ -5969,7 +6018,10 @@ def select_for_paths(paths: Sequence[str], steps: Sequence[Step] | None = None) 
     attributed = {
         path
         for path in paths
-        if any(step.touches and step.reachable_from(path) for step in universe)
+        if any(
+            path in step.known_inputs or (step.touches and step.reachable_from(path))
+            for step in universe
+        )
     }
     unclaimed = tuple(sorted(set(paths) - attributed))
     if unclaimed:
@@ -5978,7 +6030,9 @@ def select_for_paths(paths: Sequence[str], steps: Sequence[Step] | None = None) 
         )
 
     reached = tuple(
-        step for step in universe if any(step.reachable_from(path) for path in paths)
+        step
+        for step in universe
+        if any(path in step.known_inputs or step.reachable_from(path) for path in paths)
     )
     return Selection(steps=reached, unattributed_paths=(), universe_size=len(universe))
 
@@ -6712,8 +6766,12 @@ _PYTEST_COUNT = re.compile(r"\b(?P<count>\d+) (?P<what>failed|errors?)\b")
 #: The two per-test wall rules' own headlines, as `_fast_tests` and `_slow_tests` raise
 #: them; `test_a_per_test_wall_failure_is_its_own_class` drives the raising code itself,
 #: so a reworded headline fails there rather than quietly reading as a step failure.
-_WALL_CEILING_HEADLINE = re.compile(r"^\d+ test\(s\) held the pull-request surface for")
-_SLOW_FLOOR_HEADLINE = re.compile(r"^\d+ deferred test\(s\) ran below the")
+_WALL_CEILING_HEADLINE = re.compile(
+    r"^\d+ test\(s\) held the pull-request surface for (?P<seconds>[0-9.]+)s"
+)
+_SLOW_FLOOR_HEADLINE = re.compile(
+    r"^\d+ deferred test\(s\) ran below the (?P<seconds>[0-9.]+)s"
+)
 _RENDERED_DURATION = re.compile(r"^\s+(?P<seconds>\d+\.\d+)s  (?P<node>\S+)$")
 _TIMED_OUT = re.compile(r"^command timed out after (?P<seconds>[0-9.]+) seconds")
 #: How many failing names a one-line verdict or an annotation spells out.
@@ -6736,6 +6794,7 @@ class WallFailures:
 
     step: str
     rule: Literal["ceiling", "floor"]
+    threshold_seconds: float
     entries: tuple[tuple[float, str], ...]
 
 
@@ -6785,9 +6844,9 @@ def _test_failures(step: str, reason: str) -> FailedTests | None:
 
 def _wall_failures(step: str, reason: str) -> WallFailures | None:
     headline = reason.split("\n", 1)[0]
-    if _WALL_CEILING_HEADLINE.match(headline):
+    if (headline_match := _WALL_CEILING_HEADLINE.match(headline)) is not None:
         rule: Literal["ceiling", "floor"] = "ceiling"
-    elif _SLOW_FLOOR_HEADLINE.match(headline):
+    elif (headline_match := _SLOW_FLOOR_HEADLINE.match(headline)) is not None:
         rule = "floor"
     else:
         return None
@@ -6796,7 +6855,12 @@ def _wall_failures(step: str, reason: str) -> WallFailures | None:
         for line in reason.splitlines()[1:]
         if (match := _RENDERED_DURATION.match(line))
     )
-    return WallFailures(step=step, rule=rule, entries=entries)
+    return WallFailures(
+        step=step,
+        rule=rule,
+        threshold_seconds=float(headline_match["seconds"]),
+        entries=entries,
+    )
 
 
 def _step_cause(reason: str) -> str:
@@ -6881,9 +6945,9 @@ def _failure_class_line(classes: FailureClasses) -> str:
         entries = [f"{node} {seconds:.2f} s" for seconds, node in wall.entries]
         tests = "test" if len(entries) == 1 else "tests"
         counted = (
-            f"{len(entries)} {tests} at or above {QUICK_TEST_WALL_BACKSTOP_SECONDS:g} s"
+            f"{len(entries)} {tests} at or above {wall.threshold_seconds:g} s"
             if wall.rule == "ceiling"
-            else f"{len(entries)} slow-marked {tests} under {SLOW_TEST_FLOOR_SECONDS:g} s"
+            else f"{len(entries)} slow-marked {tests} under {wall.threshold_seconds:g} s"
         )
         parts.append(f"per-test wall {wall.rule} failed ({counted}: {_named(entries)})")
     if classes.steps:
@@ -6947,9 +7011,9 @@ def _failure_annotations(classes: FailureClasses) -> list[str]:
         )
     for wall in classes.walls:
         title = (
-            f"Per-test wall ceiling ({QUICK_TEST_WALL_BACKSTOP_SECONDS:g} s) in {wall.step}"
+            f"Per-test wall ceiling ({wall.threshold_seconds:g} s) in {wall.step}"
             if wall.rule == "ceiling"
-            else f"Per-test wall floor ({SLOW_TEST_FLOOR_SECONDS:g} s) in {wall.step}"
+            else f"Per-test wall floor ({wall.threshold_seconds:g} s) in {wall.step}"
         )
         annotations.append(
             _annotation(
@@ -7015,9 +7079,9 @@ def _failure_summary_markdown(summary: RunSummary, classes: FailureClasses) -> s
         )
     for wall in classes.walls:
         rule = (
-            f"at or above the {QUICK_TEST_WALL_BACKSTOP_SECONDS:g} s per-test ceiling"
+            f"at or above the {wall.threshold_seconds:g} s per-test ceiling"
             if wall.rule == "ceiling"
-            else f"slow-marked and under the {SLOW_TEST_FLOOR_SECONDS:g} s floor"
+            else f"slow-marked and under the {wall.threshold_seconds:g} s floor"
         )
         lines.append(f"- **Per-test wall** in {wall.step}: {len(wall.entries)} {rule}")
         lines.extend(
@@ -7332,7 +7396,8 @@ def _parser() -> ArgumentParser:
         action="store_true",
         help=(
             "fail on the tier's declared cost band even when this machine is not the "
-            "shape the ceiling was measured for (also PACKING_VALIDATE_ENFORCE_BUDGET)"
+            "shape the ceiling was measured for, and enforce the 12s quick-call limit "
+            "(also PACKING_VALIDATE_ENFORCE_BUDGET)"
         ),
     )
     parser.add_argument(
@@ -7622,6 +7687,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             exhaustive_shard=exhaustive_shard,
             timeout_seconds=timeout_seconds,
             timeout_is_explicit=timeout_is_explicit,
+            enforce_budget=namespace.enforce_budget
+            or _environment_flag("PACKING_VALIDATE_ENFORCE_BUDGET"),
         )
         _begin_artifacts(context, selected)
         summary = _run_selected(selected, context, namespace.only, namespace.skip)
@@ -7630,8 +7697,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             tier_id=_tier_id(namespace),
             jobs=jobs,
             inner_jobs=inner_jobs,
-            force=namespace.enforce_budget
-            or _environment_flag("PACKING_VALIDATE_ENFORCE_BUDGET"),
+            force=context.enforce_budget,
             pull_request=_hosted_pull_request(),
         )
     except ParserExitError as error:
