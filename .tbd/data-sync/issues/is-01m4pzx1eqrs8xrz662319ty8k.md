@@ -5,7 +5,7 @@ title: Narrow the negative-control copy-back to links a control checks (about 14
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: claude-code@vm
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 hold: null
 hold_until: null
 created_at: 2026-10-12T02:43:37.559Z
-updated_at: 2026-10-15T01:36:13.902Z
+updated_at: 2026-10-15T03:20:03.450Z
 started_at: 2026-10-15T01:36:13.902Z
 ---
 On 2026-10-12 the owner raised `SNAPSHOT_MAX_BYTES` in
@@ -53,3 +53,36 @@ registered controls fire (`run_negative_controls -j 3`); unmutated `check_readme
 the same in a worker before and after; and the measured saving is recorded in the log
 above `SNAPSHOT_MAX_BYTES`, with the cap left where the owner set it unless the owner
 decides otherwise.
+
+## Notes
+
+2026-10-15, PR #611 https://github.com/jlevy/squares/pull/611 (branch
+claude/wizardly-meitner-wqn4x3-snapshot-b6ir, head 227c345eb).
+
+Snapshot: 226,344,073 bytes on main 6964362b5 (148,343 headroom) -> 212,287,522 bytes on the
+branch (14,204,894 headroom), under the unchanged 216 MiB cap. The selection saves 14,082,212
+bytes; the branch's own files add 25,661.
+
+Rule: the copy-back follows links only out of the documents a registered control link-checks
+in a worker. Those are campaign Markdown (`ledger check`), README.md and SYNOPSIS.md
+(`check_links`), listed as `LINK_CHECKED_DOCUMENTS`. Declared paths still return: the results
+register, plus each defect's `recorded_in` (new, `defect_pruned_targets`).
+
+Six readers reached workers only through dropped links, and each is a declared input now:
+- the wall workflows (`wall_workflows()`, from gate-budgets.yaml);
+- the n11 review (fragment links, think-wzmf);
+- two `recorded_in` papers;
+- the kingbird-29 provenance SVG (12 promote and witness-interval controls);
+- three verifier-registry paths;
+- two squish-401 normalized claim records (`squish_upper_bound_packets check`, run in
+  `test_fn1_input_bindings`' worker).
+
+New tool: `run_negative_controls --baseline FILE [--baseline-command CMD]`. Before and after,
+all 50 distinct registered commands print the same unmutated in a worker, wall times and one
+lease timestamp aside. `check_documentation` in a worker gains exactly the dead links of the
+dropped files, since no control runs it. Controls: 174/174 fire at -j 3.
+
+Release: `release.py` carries a reviewed no-public-change record for the four papers and the
+site; the runner is in their import closure only via `upper_bound_houses.custody`.
+
+Close on merge.
