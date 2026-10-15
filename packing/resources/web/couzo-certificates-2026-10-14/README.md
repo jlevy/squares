@@ -127,9 +127,49 @@ table-only counts, 812, 930, 931, 992 and 993, and the replay below decides all 
 
 ## Exact Replay
 
-In progress: the 69 jobs, a positive, a duplicate-square control and an
-outside-container control for each count, are being decided one at a time with
-`--workers 1`, and the receipt is not yet written.
+Only the retained certificates enter geometry decisions.
+They go through the maintained two-route kernel of `devtools.evand_arrangement_reports`,
+which the earlier Couzo imports also used: `sqpack`’s exact witness verifier and the
+independent rational corner checker, each deciding every wall and every pair over
+$\mathbb{Q}$ after an exact half-angle conversion.
+The replay covers all 23 certificates, the seven composites among them.
+Each count runs a positive job, a duplicate-square control and an outside-container
+control, each in its own child process.
+
+All 23 positives pass both routes.
+Both routes refuse all 46 controls, each on the overlap or the wall it was built to
+break. In every positive the two routes find the same least wall clearance and the same
+least pair gap:
+
+- **The 16 campaign and precision certificates** clear every wall by exactly
+  `1/1000000000000000` ($10^{-15}$) and every pair by between
+  $9.76 \times 10^{-13}$ (at 419) and $1.60 \times 10^{-12}$ (at 339).
+- **The seven composites** clear every wall by exactly `1/36893488147419103232`
+  ($2^{-65}$, $2.71 \times 10^{-20}$) and every pair by exactly
+  `1/18446744073709551616` ($2^{-64}$, $5.42 \times 10^{-20}$), the margins the
+  author’s logs of Evan Daniel’s checker print.
+
+The 69 jobs made 31,386,744 pair decisions in 12,425.76 route CPU seconds (3.45
+CPU-hours) and 14,795.58 job wall seconds, summed; the longest job, the
+outside-container control at 994, took 632.89 seconds.
+The run used one worker on a machine shared with other import lanes, at a load average
+between 2 and 11 on four cores.
+Each job was decided by the same `decide-job` command `certify` runs, one at a time,
+from 23:41Z on 14 October to 03:55Z on 15 October, by a runner that skips finished
+outputs: the session’s two-hour limit on a background command stopped it once, during
+the duplicate-square control at 812, and it was started again from there.
+`certify --workers 1 --finished` then assembled and admitted the receipt from all 69 job
+outputs, as it admits any; it is kept as one shard per count,
+`receipts/exact-certification-nNNN.json.xz`, since the whole would exceed the kernel’s
+ceiling on uncompressed evidence, and each keeps every deciding input and both routes’
+complete outputs.
+A fresh serial `check --replay` of all 69 jobs is in progress.
+
+The two routes share certificate parsing, the half-angle conversion, Python’s rational
+arithmetic and the separating-axis method, so they are two implementations of one
+method. The third exact route, `devtools.check_half_angle_area`, is a separate review
+lane and did not run here.
+No source program ran here.
 
 ## Against the Record
 
