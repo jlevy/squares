@@ -8626,12 +8626,14 @@ issues:
     opened: '2026-10-15'
     state: open
     kind: defect-report
+    intake: true
     triage: done
     summary: 'A defect report the project opened from the 15 October intake (think-8krd): beyond 324 the
       record compares reports only with the grid and earlier reports and holds none of Göbel''s classical
       constructions, so its rows at 369 and 376 are above Göbel''s sides, by 3.33e-2 and 4.57e-3, as are
       42 of Couzo''s 487b058 rows and 47 of his 4e4c8ce index''s. It asks the owner whether Göbel''s constructions
-      count as earlier reports and the baseline beyond 324. It reports no result.'
+      count as earlier reports and the baseline beyond 324. It reports no result of its own, but Göbel''s
+      sides are counterexamples to the rows at 369 and 376 and decide whether 89 reported rows are recorded.'
     read_through: '2026-10-15T03:55:33Z'
     results: []
     asks:
@@ -8646,6 +8648,46 @@ issues:
     replies: []
     close_when: 'The owner has decided the question, and the record holds the decision: Göbel''s sides as
       the baseline beyond 324 with 369 and 376 corrected, or the 42 rows recorded.'
-    notes: The project opened this issue; it reports no result, and no acknowledgement is owed on it. `check_requests`
-      still lists an acknowledgement as due, because the record has no state for an issue its owner opened
-      (think-abcm).
+    notes: >-
+      The project opened this issue; it reports no result of its own, and no acknowledgement is owed on
+      it. `check_requests` still lists an acknowledgement as due, because the record has no state for an
+      issue its owner opened (think-abcm). It is marked `intake` (the label added on 15 October 2026,
+      think-ykg6) as a defect report with a counterexample, stage 0's case for #295 and #308, and because
+      its answer decides which reported rows beyond 324 the record takes in.
+  - number: 622
+    title: 'data: submit a tighter exact N29 packing certificate'
+    author: BuddenPing
+    opened: '2026-10-15'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      PingYou Ltd (BuddenPing) submits, as a pull request, one exact rational certificate at n = 29, a
+      refinement of the Kingbird packing of Thomas Schadt, improved by David Ellsworth, in the release
+      data/pingyou-n29-certificate-2026-10-15-v1 of BuddenPing/square-packing-certificates (430,075
+      bytes, SHA-256 0dc9bcd1...). Triaged on 15 October 2026: its exact side is 1.57e-36 below T-155
+      and 7.32e-90 below #574's N29 certificate, which the 14 October ledger left undecided, and the
+      comparison with the reported lane waits for that lane's exact side, the root of Evan Daniel's
+      degree-7213 polynomial (#545). Whether to merge the pull request is the owner's call.
+    read_through: '2026-10-15T18:43:54Z'
+    results:
+    - key: n29-certificate
+      claim: s(29) <= the exact side of certificates/n029.cert.json (SHA-256 a01428c5...), a fraction of
+        2,399 and 2,398 digits, about 5.93383346267692918968946061635201913843383418107788697463882591.
+      source: body
+      not_registered: Undecided against the reported lane at 29, whose exact side the record does not hold
+        yet; the report-order rule records it only if it is below that side.
+      queued: true
+      bead: think-30n2
+      blocked_on:
+      - think-6gti
+    beads:
+    - think-30n2
+    answer_bead: think-30n2
+    replies: []
+    close_when: The import and its disposition are on main, the owner has decided the pull request and
+      posted the resulting state, and any replay that would confirm a recorded entry is owned by its bead;
+      optimality is outside this request.
+    notes: >-
+      A pull request, held here as an issue because it reports results, as #574 is. It asks to replace
+      #574's N29 certificate, which T-174 does not register.
