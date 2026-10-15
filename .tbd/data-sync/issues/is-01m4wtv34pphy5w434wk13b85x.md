@@ -5,7 +5,7 @@ title: Resolve four scheduled main test-time ceiling overruns without weakening 
 kind: bug
 status: in_progress
 priority: 1
-version: 25
+version: 26
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10.local
 labels: []
@@ -31,17 +31,17 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:10:37.460Z
-updated_at: 2026-10-15T01:17:27.010Z
+updated_at: 2026-10-15T01:18:25.116Z
 started_at: 2026-10-14T10:03:10.224Z
 ---
 Optional scheduled full integration run38536321398 at f73 passes functional tests but violates12s per-test ceiling for four nodes: site_forwarders no-script redirect13.08s; results_register full-part citations T15312.17s; overview_sections no-script canonical atlas20.10s; regularized_drawings edited-block check13.44s. Main push full gate and Pages deployment passed sameSHA. Diagnose full integration contention/cold-path cost, optimize or explicitly classify measured expensive cases while preserving assertions and meaningful CI coverage; avoid broad ceiling increases.
 
 ## Notes
 
-Final local candidate is e5a046b3d202551f56452b7ff5538273c0c29a45, clean, based on main6964362b5. News/Explanations are already delivered through PR604 and its 4243-check deployment. PR599 now contains the reviewed CI repair batch, measured native scheduling weights, bounded Gupta/tally reuse, unchanged complete scientific assertions, and site-only code-font correction. Main609 sampling classification is integrated.
+Candidate e5a046b3d202551f56452b7ff5538273c0c29a45 is clean and includes main6964362b5. News and Explanations are already delivered through PR604. PR599 contains the reviewed CI repair batch, native weight refresh, bounded Gupta/tally reuse, complete scientific checks and site code-font correction. Main609 sampling classification is integrated.
 
-At6756, ordinary Packing, Pages and all12 deferred jobs passed; strict C/D failed and remain failed. Current repairs address D required-case skipping, C corpus CALL overruns, and stale shard weights.87 focused guards pass; eight collections retain18332 quick identities before main609 integration. Final-schema Gupta oracle4/4 and three-pair screen23.46%; tally45-project/184-result oracle and three-pair screen23.13%. Schema prototype12.80% missed15% and was withdrawn. No cap, timeout, assertion or coverage-check relaxation.
+At 6756, Packing, Pages and all 12 deferred jobs passed; strict C/D failed and remain failed. Current repairs address protected required-case skipping, two measured corpus checks and stale scheduling weights. The 87 guards and 18,332-identity reallocation oracle pass. Gupta final-schema controls pass 4/4; its replicated timing screen improves the median by 23.46%. The tally oracle covers 45 projects and 184 results; its screen improves the median by 23.13%. The 12.80% schema prototype missed the frozen 15% criterion and is withdrawn. No cap, timeout, assertion or coverage checker was relaxed.
 
-Two independent Astra reviews O/P round12 report no outstanding findings at exact e5a. O1 document mappings are fixed;2062-document contract passes. Prior60b pre-push failed only that contract after157.34s and correctly withheld reachable tests. Current e5a required pre-push has passed67 edit checks and is running290 affected test modules with retained progress/JUnit. Remote PR head remains6756 until that gate passes; no merge-ready claim yet.
+Independent Astra reviews O/P round 12 have no outstanding findings at e5a. Missing document mappings are fixed; the 2,062-document contract passes. The prior 60b pre-push remains failed after 157.34s and correctly withheld reachable tests. Current e5a pre-push passed all 67 edit checks and is running 290 affected modules with progress and JUnit retained. Remote PR head remains 6756 until it passes; matching-head hosted proof and merge are still pending.
 
-Next: push reviewed source, publish O/P at verified remote head, inspect ordinary/strict/Pages checks and select the final deferred checkpoint, then merge and verify deployment. Retained evidence is .codex/regularization-closeout-evidence-2026-10-13/pr599-integration/; campaign records are committed. Three-minute CI remains unproved; snapshot margin is15714 bytes and its durable follow-up is think-9nos.
+Next: push, publish O/P at the verified remote head, run ordinary/strict/Pages and the final selected deferred checkpoint, merge, verify deployment. Evidence is retained under .codex/regularization-closeout-evidence-2026-10-13/pr599-integration/ and the committed campaign. Three-minute CI remains unproved; the 15,714-byte snapshot margin is tracked in think-9nos.
