@@ -5,7 +5,7 @@ title: "Intake 2026-10-15 lane B: stage-7 replies to the closeable result issues
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: ecstatic-edison-lane-b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:29:59.985Z
-updated_at: 2026-10-15T20:19:59.086Z
+updated_at: 2026-10-15T20:47:41.748Z
 started_at: 2026-10-15T19:30:08.143Z
 ---
 
@@ -34,3 +34,6 @@ Posted 2026-10-15 ~19:46-19:48Z (each the draft plus an @author salutation and a
 - #589 final (stays closed) https://github.com/jlevy/squares/issues/589#issuecomment-6200882061
 
 Branch claude/ecstatic-edison-8en33t-replies-b: 2c137616c records the nine replies and six closes in result-requests.yaml; 9d7f2c6a5 adds the release no-public-change decision the release-impact gate asks for (survey render byte-identical with main's and the branch's record). check_requests --report: the nine show no reply due; #570 still due (held). packing-validate --records: exit 0, 51/109 steps, 193.0 s. packing-validate --push first run: basedpyright killed (exit 247) under host load ~20 from other lanes; release.py alone type-checks clean; rerun in progress.
+
+
+PR https://github.com/jlevy/squares/pull/630 (draft, labels intake and S1), head f0b9fe4a9 after merging main 6e73ef1c2 (#623; one conflict in RELEASE_NO_PUBLIC_CHANGES, both kept; survey re-rendered byte-identical over 6e73ef1c). push tier second run: type floor passed (467 s), reachable tests hit the 900 s step limit at 37% with one unnamed F; named re-run of the 281 files in progress. Do not close this bead until the PR merges; #570 stays held.
