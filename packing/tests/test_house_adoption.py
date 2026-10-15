@@ -208,6 +208,40 @@ def test_the_ceiling_rounds_up_and_the_display_ends_where_the_side_does() -> Non
     assert adopt.display(Fraction(1, 3)) == "0.3333333333333334"
 
 
+def test_an_earlier_records_handle_is_named_at_any_place_in_a_name_list() -> None:
+    """A handle an earlier record gives in a name field becomes the name wherever the list
+    holds it, first or later, in flow or block style; identifiers that hold it and every
+    other byte of the front matter are left as written (think-dquu N2)."""
+    front = (
+        "packing:\n"
+        "  n: 70\n"
+        "  reported_upper_bound:\n"
+        "    found_by:\n"
+        "    - ry-xu\n"
+        "    improved_by: [Evan Daniel, ry-xu]\n"
+        "    source_key: '[ry-xu square packing 2026]'\n"
+        "  priority_notes:\n"
+        "  - claim: Earlier house from [ry-xu square packing 2026].  # ry-xu\n"
+        "    claimed_by:\n"
+        "    - Joe DeVincentis\n"
+        "    - 'ry-xu'\n"
+        "  resources:\n"
+        "  - local: web/ry-xu-new-packings-2026-10-08\n"
+    )
+    named = adopt._named_fields(front)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert named == (
+        front.replace("    - ry-xu\n", f"    - {adopt.XU}\n")
+        .replace("[Evan Daniel, ry-xu]", f"[Evan Daniel, {adopt.XU}]")
+        .replace("    - 'ry-xu'\n", f"    - {adopt.XU}\n")
+    )
+    packing = safe_load(named)["packing"]
+    assert packing["reported_upper_bound"]["found_by"] == [adopt.XU]
+    assert packing["reported_upper_bound"]["improved_by"] == ["Evan Daniel", adopt.XU]
+    assert packing["priority_notes"][0]["claimed_by"] == ["Joe DeVincentis", adopt.XU]
+    assert packing["reported_upper_bound"]["source_key"] == "[ry-xu square packing 2026]"
+    assert adopt._named_fields(named) == named  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+
 def test_every_adopted_house_rebuilds_from_its_private_inputs() -> None:
     houses.check_houses()
 

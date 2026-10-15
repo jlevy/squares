@@ -73,7 +73,7 @@ from __future__ import annotations
 import argparse
 import re
 import sys
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterator, Mapping, Sequence
 from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal
@@ -648,14 +648,46 @@ FORMER_PROSE = (
 )
 
 
-#: A name field's item that gives the handle, in front matter an earlier record wrote.
-FORMER_NAME_FIELD = re.compile(r"(\n(\s*)(?:claimed_by|found_by|improved_by):\n\2- )ry-xu\n")
+#: The fields of front matter that credit people, each a list of names.
+NAME_FIELDS = frozenset({"claimed_by", "found_by", "improved_by"})
+
+
+def _handles(node: yaml.Node | None) -> Iterator[yaml.ScalarNode]:
+    """Each item of a name field under `node` that gives a handle `RECORD_NAMES` names,
+    at any place in its list, written in block or flow style."""
+    if isinstance(node, yaml.MappingNode):
+        for key, value in node.value:
+            if (
+                isinstance(key, yaml.ScalarNode)
+                and key.value in NAME_FIELDS
+                and isinstance(value, yaml.SequenceNode)
+            ):
+                yield from (
+                    item
+                    for item in value.value
+                    if isinstance(item, yaml.ScalarNode) and item.value in RECORD_NAMES
+                )
+            else:
+                yield from _handles(value)
+    elif isinstance(node, yaml.SequenceNode):
+        for item in node.value:
+            yield from _handles(item)
 
 
 def _named_fields(front: str) -> str:
-    """Front matter whose name fields credit the finder by name where an earlier record
-    gave the handle; every other item's text is left alone."""
-    return FORMER_NAME_FIELD.sub(rf"\1{XU}\n", front)
+    """Front matter whose name fields credit each person by name wherever an earlier
+    record gave the handle, as `register_ryxu_reports.named` maps `found_by`.
+
+    The front matter is read as YAML and only each such item's own text is replaced,
+    last first, so every other item, field and comment is left as it was written. The
+    name is written plain, as a name with no YAML indicator in it can be in either list
+    style.
+    """
+    items = _handles(yaml.compose(front, Loader=yaml.SafeLoader))
+    for item in sorted(items, key=lambda node: node.start_mark.index, reverse=True):
+        start, end = item.start_mark.index, item.end_mark.index
+        front = front[:start] + RECORD_NAMES[item.value] + front[end:]
+    return front
 
 
 def _named_prose(text: str) -> str:
