@@ -149,7 +149,7 @@ body {
   --site-wide-gutter: 0.5rem;
   /* The space under a page's title: to its subtitle and from the subtitle to the first
      paragraph, or straight to the first paragraph of a page that has no subtitle. */
-  --site-subtitle-space: 1.5rem;
+  --site-subtitle-space: 2rem;
   --site-subtitle-scale: 1.1;
   /* How much nearer the bar a page's opening picture sits than a title would: a drawing
      has no line spacing above its edge, so the same space reads larger. */
@@ -265,10 +265,10 @@ body {
 /* Main section titles share the homepage's breathing room on every web page. */
 @media screen {
   .kpress {
-    --site-title-space-above: 3.5rem;
-    --site-title-space-below: 2rem;
+    --site-title-space-above: 3.75rem;
+    --site-title-space-below: 2.5rem;
   }
-  .kpress :where(.site-page) h1,
+  .kpress :where(.site-page, .kpress-prose) h1,
   .kpress :is(h1, h2).site-title {
     margin-block: var(--site-title-space-above) var(--site-title-space-below);
   }

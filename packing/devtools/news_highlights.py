@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from devtools import overview_sections, render_changelog
 from devtools.check_results import KINDS
-from devtools.overview_data import Overview, Result, prose_html, tex_bounds
+from devtools.overview_data import Overview, Result
+from devtools.register_prose import paragraphs
 
 LIMIT = 3
 
@@ -22,8 +23,7 @@ def highlights(overview: Overview) -> tuple[Result, ...]:
 
 
 def _article(result: Result) -> str:
-    claim = prose_html(result.record["claim"], between="</p><p>")
-    rationale = prose_html(result.record["significance"]["rationale"], between="</p><p>")
+    claim = render_changelog.inline_html(paragraphs(result.record["claim"])[0])
     kind = result.record["kind"]
     topic = TOPIC_BY_KIND.get(kind)
     qualifier = (
@@ -33,7 +33,7 @@ def _article(result: Result) -> str:
         else ""
     )
     header = render_changelog.news_article_header(
-        tex_bounds(result.summary),
+        render_changelog.inline_html(result.summary, allow_links=False),
         overview_sections.first_day(result.dated[1]),
         [topic] if topic else [],
         {
@@ -48,7 +48,7 @@ def _article(result: Result) -> str:
         f"{overview_sections.ladder_chips(result)} "
         f"{overview_sections.kind_and_status(result)}</p>"
         f'<p class="site-result-meta">{overview_sections.credit_cell(result.credit)}</p>'
-        f"{qualifier}<p>{claim}</p><p>{rationale}</p>"
+        f"{qualifier}<p>{claim}</p>"
         f'<p><a href="result/{result.id.lower()}.html">Full result '
         f"{result.id}</a></p></article>"
     )

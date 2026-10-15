@@ -16,6 +16,7 @@ from devtools import (
     render_changelog,
     site_topics,
 )
+from devtools.register_prose import paragraphs
 from tests import site_renders
 
 
@@ -95,7 +96,7 @@ def test_current_news_has_three_results_including_the_older_s5_result(
     assert 'id="t-154"' not in rendered
 
 
-def test_news_keeps_the_registered_claims_credit_rungs_and_canonical_result_links(
+def test_news_keeps_claim_excerpts_credit_rungs_and_canonical_result_links(
     overview: overview_data.Overview,
 ) -> None:
     rendered = news_highlights.render(overview)
@@ -107,32 +108,23 @@ def test_news_keeps_the_registered_claims_credit_rungs_and_canonical_result_link
         )
         assert match is not None
         article = match.group(1)
-        assert f"<h3>{overview_data.tex_bounds(result.summary)}</h3>" in article
+        title = render_changelog.inline_html(result.summary, allow_links=False)
+        assert f"<h3>{title}</h3>" in article
         assert overview_sections.credit_cell(result.credit) in article
         assert f'<time datetime="{overview_sections.first_day(result.dated[1])}">' in article
         assert overview_sections.ladder_chips(result) in article
         assert overview_sections.kind_and_status(result) in article
         qualifier = "Reported result: this project has not verified the complete claim."
+        excerpt = render_changelog.inline_html(paragraphs(result.record["claim"])[0])
         if result.record["verification"] == "V0":
-            assert article.index(qualifier) < article.index(
-                overview_data.prose_html(result.record["claim"], between="</p><p>")
-            )
+            assert article.index(qualifier) < article.index(excerpt)
         else:
             assert qualifier not in article
-        assert overview_data.prose_html(result.record["claim"], between="</p><p>") in article
-        assert (
-            overview_data.prose_html(
-                result.record["significance"]["rationale"], between="</p><p>"
-            )
-            in article
-        )
+        assert f"<p>{excerpt}</p>" in article
         assert f'href="result/{result.id.lower()}.html"' in article
         assert f"Full result {result.id}" in article
-    assert "Nothing here has repeated that build." in rendered
-    assert "ten facts are a sample" in rendered
-    assert "The complete capture recomputation and ten trees have not been run." in rendered
-    assert "github.com/ofitzharding/sq17-lean/tree/" in rendered
-    assert "github.com/Kleddamag/the-seventeenth-square-candidate/tree/" in rendered
+    assert "Nothing here has repeated that build." not in rendered
+    assert "The complete capture recomputation and ten trees have not been run." not in rendered
 
 
 def test_news_reads_no_launch_history_and_mutates_no_result_record(
@@ -169,7 +161,8 @@ def test_every_accepted_result_kind_uses_the_same_topic_in_results_and_news(
     assert rendered.count('class="site-significance"') == 1
     assert 'data-level="5"' in rendered
     assert overview_sections.credit_cell(candidate.credit) in rendered
-    assert overview_data.prose_html(candidate.record["claim"], between="</p><p>") in rendered
+    excerpt = render_changelog.inline_html(paragraphs(candidate.record["claim"])[0])
+    assert f"<p>{excerpt}</p>" in rendered
 
 
 def test_a_real_rigidity_result_can_enter_the_s5_news_without_changing_its_claim(
@@ -186,7 +179,8 @@ def test_a_real_rigidity_result_can_enter_the_s5_news_without_changing_its_claim
     assert overview_sections.ladder_chips(candidate) in article
     assert overview_sections.kind_and_status(candidate) in article
     assert overview_sections.credit_cell(original.credit) in article
-    assert overview_data.prose_html(original.record["claim"], between="</p><p>") in article
+    excerpt = render_changelog.inline_html(paragraphs(original.record["claim"])[0])
+    assert f"<p>{excerpt}</p>" in article
     with pytest.raises(ValueError, match="unknown News topic"):
         render_changelog.news_topics(["not-a-topic"])
 
