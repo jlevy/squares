@@ -6696,6 +6696,14 @@ issues:
     close_when: >-
       The result is registered on main and its replay is recorded, or priced and queued in
       #532's lane.
+    notes: >-
+      The follow-up of 15 October (issuecomment-6200836218) first said replays of this kind
+      "took 3.3 to 6.1 CPU-hours by the T-142 and T-143 measurements", though no replay has run:
+      the figures are the 11 October prep lane's prices from smoke runs (think-i85v), 3.3 to 4.5
+      CPU-hours for T-142 and 4.5 to 6.1 for T-143. It was edited in place at 23:30Z that day,
+      with a visible note, to say they were priced at 3.3 to 6.1 CPU-hours from the T-142 and
+      T-143 smoke runs and that none has run yet, so the reply as it stands states nothing
+      outdated (PR #625's review, A1).
   - number: 535
     title: Take Evan Daniel's Lean proof of s(12) ≥ 15680/3951 (S12HLower) as evidence for T-049
     author: jlevy

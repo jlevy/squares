@@ -997,7 +997,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "main's requests record and once with the branch's, the HTML before the "
             "browser's math pass and the Markdown are byte-identical; the PDF prints from "
             "that HTML and was not rebuilt. The requests record gains the 15 October "
-            "status replies on twelve of the owner's tracking issues and four notes; the "
+            "status replies on twelve of the owner's tracking issues and five notes; the "
             "survey prints none of them and keeps its edition."
         ),
     ),
