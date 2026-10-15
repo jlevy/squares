@@ -1,0 +1,6 @@
+.                                                                        [100%]
+============================== slowest durations ===============================
+3.60s call     tests/test_gupta_adoption.py::test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
+0.61s setup    tests/test_gupta_adoption.py::test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
+0.00s teardown tests/test_gupta_adoption.py::test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
+1 passed in 4.90s

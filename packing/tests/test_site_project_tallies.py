@@ -144,6 +144,103 @@ def _attributed(overview: overview_data.Overview, url: str) -> list[overview_dat
     ]
 
 
+def _attributed_snapshot(
+    overview: overview_data.Overview,
+) -> dict[str, list[overview_data.Result]]:
+    """Independently attribute every project from two fresh reads in this invocation."""
+    coverage = safe_load(overview_sections.SOURCE_COVERAGE.read_text(encoding="utf-8"))
+    bibliography = safe_load(overview_data.BIBLIOGRAPHY.read_text(encoding="utf-8"))
+    attributed = {}
+    for url in overview_sections.project_urls():
+        venue = overview_sections.SOURCE_VENUES.get(url)
+        keys = (
+            {
+                source["source_key"]
+                for source in coverage["sources"]
+                if re.sub(r"/tree/.*", "", source["url"]).rstrip("/") == url.rstrip("/")
+            }
+            | set(overview_sections.PROJECT_EXTRA_KEYS.get(url, ()))
+            | {
+                entry["key"]
+                for entry in bibliography["sources"]
+                if venue and entry.get("venue") == venue
+            }
+        )
+        attributed[url] = [
+            result
+            for result in overview.results
+            if keys & set((result.record.get("attribution") or {}).get("source_keys") or ())
+        ]
+    return attributed
+
+
+def _assert_attribution_snapshot_matches_fresh_reads(
+    overview: overview_data.Overview,
+) -> None:
+    """One-time full-corpus oracle; the retained tiny control also exercises this check."""
+    expected = {
+        url: [result.id for result in _attributed(overview, url)]
+        for url in overview_sections.project_urls()
+    }
+    found = {
+        url: [result.id for result in results]
+        for url, results in _attributed_snapshot(overview).items()
+    }
+    assert tuple(found) == tuple(expected)
+    assert found == expected
+    assert any(not results for results in expected.values()), "no empty project exercised"
+    results = [result for own in expected.values() for result in own]
+    assert len(results) > len(set(results)), "no shared result exercised"
+
+
+def test_attribution_snapshots_read_changed_coverage_and_bibliography(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    first, second, empty = (f"https://fixture.test/{name}" for name in ("one", "two", "empty"))
+    coverage, bibliography = tmp_path / "coverage.yaml", tmp_path / "bibliography.yaml"
+    coverage.write_text(f"sources:\n- url: {first}/tree/revision\n  source_key: original\n")
+    bibliography.write_text("sources:\n- key: venue\n  venue: fixture-venue\n")
+    monkeypatch.setattr(overview_sections, "SOURCE_COVERAGE", coverage)
+    monkeypatch.setattr(overview_data, "BIBLIOGRAPHY", bibliography)
+    monkeypatch.setattr(overview_sections, "project_urls", lambda: (first, second, empty))
+    monkeypatch.setattr(overview_sections, "SOURCE_VENUES", {second: "fixture-venue"})
+    monkeypatch.setattr(overview_sections, "PROJECT_EXTRA_KEYS", {first: ("extra",)})
+    records = (
+        ("T-1", ["original"]),
+        ("T-2", ["extra"]),
+        ("T-3", ["venue"]),
+        ("T-4", ["original", "venue"]),
+        ("T-5", ["changed"]),
+    )
+    overview = overview_data.Overview(
+        results=[
+            overview_data.Result(
+                record={"id": name, "attribution": {"source_keys": keys}},
+                group="",
+                credit="",
+                ours=False,
+            )
+            for name, keys in records
+        ],
+        cases={},
+        recent_lower=frozenset(),
+        groups=[],
+    )
+
+    def ids() -> dict[str, list[str]]:
+        return {
+            url: [result.id for result in results]
+            for url, results in _attributed_snapshot(overview).items()
+        }
+
+    assert ids() == {first: ["T-1", "T-2", "T-4"], second: ["T-3", "T-4"], empty: []}
+    _assert_attribution_snapshot_matches_fresh_reads(overview)
+    coverage.write_text(f"sources:\n- url: {first}/tree/revision\n  source_key: changed\n")
+    assert ids() == {first: ["T-2", "T-5"], second: ["T-3", "T-4"], empty: []}
+    bibliography.write_text("sources:\n- key: changed\n  venue: fixture-venue\n")
+    assert ids() == {first: ["T-2", "T-5"], second: ["T-5"], empty: []}
+
+
 def _cards(page: str) -> list[tuple[str, str]]:
     """The section's cards in page order: each project's address and its tally's markup,
     empty for a card with none."""
@@ -235,6 +332,7 @@ def test_a_tally_link_selects_exactly_its_projects_rows(
     results it counts. The results page's defaults hide no row, so the link needs to
     clear nothing; and every slug is distinct and is a choice of the Project control."""
     results = site_renders.html(render_overview.RESULTS_PAGE)
+    attributed = _attributed_snapshot(overview)
     facets = dict(re.findall(r'<tr id="(t-\d+)"[^>]*\sdata-project="([^"]*)"', results))
     assert len(facets) == len(overview.results)
     slugs = [overview_sections.project_slug(url) for url in overview_sections.project_urls()]
@@ -243,7 +341,7 @@ def test_a_tally_link_selects_exactly_its_projects_rows(
         slug = overview_sections.project_slug(url)
         assert re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug), slug
         rows = sorted(row for row, listed in facets.items() if slug in listed.split())
-        assert rows == sorted(result.id.lower() for result in _attributed(overview, url)), url
+        assert rows == sorted(result.id.lower() for result in attributed[url]), url
         name = html.escape(overview_sections.project_name(url))
         assert f'<option value="{slug}">{name}</option>' in results
     assert overview_sections.FilterDefaults() == overview_sections.RESULTS_DEFAULTS

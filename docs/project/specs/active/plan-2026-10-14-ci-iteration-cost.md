@@ -269,16 +269,35 @@ measured improvement.
 News and Explanations are delivered: PR604 merged as `16ea3bd06`, and its main
 deployment passed 4,243 live expectations.
 The remaining work here is CI stabilization, not an unpublished News feature.
-PR602 subsequently merged as `9b32da04d`, adding 24 results and the reviewed intake
-material. PR599 preserves that main’s publication history and pins, keeps its three
-complete-module cost admissions, and reserves the site-only successor v0.7.2 for the
-public guide and bundled code-font correction.
+Main608 subsequently integrated the reviewed intake and publication changes, bringing
+the site to 184 results and version 0.7.2. PR599 preserves those records, pins and paper
+histories and reserves site version 0.7.3 for the bundled code-font correction.
+Main609 adds the separate sampled-replay classification fix; final integration and
+validation must cover it.
 
 The `77152fb83` hosted cohort exposed three ordinary-suite failures: a non-tier CLI flag
 was not classified, and two release-generator format checks failed.
 The strict cohort also found that literal `ℝ` in site code fell back outside the bundled
 font. Focused repairs retain the existing thresholds and glyph refusal controls.
 They require the final combined source gate; an earlier isolated pass is not that gate.
+
+At `6756bda8d`, all 68 selected pre-push steps passed in 782.16s; hosted Packing, Pages
+and the complete deferred checkpoint also passed.
+The enforced checkpoint still failed: a required zero-pending test skipped, and shard C
+exceeded its wall ceiling with four CALL overruns.
+The zero-pending branch now validates real recorded tiers without consulting the bead
+store. Two complete PR574 corpus tests move to the existing slow lane based on their
+hosted 28.65s/13.00s measurements; every body and smaller quick refusal check is
+retained.
+
+The complete four-report refresh records 776 modules with unchanged scheduling
+capacities and enforcement limits.
+Stale homepage/overview weights had concentrated 1666.239 phase-seconds on C versus
+788.599 on A. Eight collection-only passes retain the same 18,332 quick identities with
+zero loss, gain or duplication.
+The 87 focused cost/lane/coverage guards pass.
+This establishes coverage and a scheduling model; fresh final-source hosted wall timing
+remains required.
 
 The measured optimization candidates are kept separate:
 
@@ -289,6 +308,9 @@ The measured optimization candidates are kept separate:
 | VE008: one paper visit for two probes | The full actual oracle refused one figure field, 0.371 versus 0.372, after 130.667s. All 68 credit rows and the other 62-figure fields matched. No timing samples ran. The routine optimization is withdrawn; source, driver, reports and the earlier bootstrap failures are retained. |
 | VE009: one complete test publication | Withdrawn on design and maintenance grounds. Both fresh 184-result oracles passed all 470 checks; single inclusive observations were 110.380s local and 149.098s shared, including a 91.151s serial controller barrier. Direct producers remain fresh, actual consumers split across two shards, and roughly 500 transport/lifecycle lines have no established benefit. Zero paired samples; no numerical screen verdict or CI opt-in. Source and all oracles are retained. |
 | VE011: guarded native receipt copies | Rejected and withdrawn. The separate native oracle and all six paired observations passed; inclusive control/candidate medians were 39.1359s/37.6866s, a 3.70% reduction with overlapping ranges. All native receipts and source variants are retained, including the 62.6207s candidate. The test helper and five copy controls are restored to the pre-experiment implementation. |
+| VE012: project attribution snapshot | All 45 project lists across 184 results match; both mutable inputs remain fresh. Six passing observations yield 23.13% lower median inclusive wall with nonoverlapping ranges. Retained, with unchanged rendered-page assertions. |
+| VE013/015: paired Gupta bound fields | Both fields derive from one fresh admitted bound per row. Complete generated outputs match; the final original-schema oracle passes four cases. VE015 repeats the unchanged screen after schema withdrawal: six passes, 23.46% lower median inclusive wall, nonoverlapping ranges. Retained. |
+| VE014: inline witness schema shapes | Independent saved-original expansion and all six 25-case module observations pass. The 12.80% improvement misses the frozen 15% requirement. Schema and contract tests are restored; every source variant, oracle and observation remains. |
 
 The
 [existing campaign report](../../../../packing/benchmarks/validation-efficiency/report.md)
@@ -303,9 +325,12 @@ Rejected hypotheses do not justify retrying, deleting a field, moving fixture wo
 outside the timer, changing markers or raising a ceiling.
 The three-minute objective remains unproved.
 
-The next producer-profile slice is tracked as `think-xoiw`. It follows stabilization
-rather than expanding this branch and will inspect repetition within the existing
-producer boundary before proposing any implementation.
+The producer-profile slice remains tracked as `think-xoiw`. Two diagnostic profiles
+passed, showing repeated formula preparation and visual-style merging; the shell-only
+hoist lead was retired.
+Profiling overhead is unmeasured and no producer candidate is implemented.
+The next slice measures distinct resolved visual variants before proposing reuse inside
+the existing producer boundary, after stabilization.
 
 ## Design
 

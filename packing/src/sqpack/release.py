@@ -825,6 +825,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/apply_upper_bound_packets.py",
             "packing/devtools/build_known_best_atlas.py",
             "packing/devtools/overview_sections.py",
+            "packing/devtools/register_gupta_reports.py",
             "packing/devtools/regularized_drawings.py",
             "packing/devtools/render_n11_lower_bounds_explainer.py",
             "packing/devtools/render_overview.py",
@@ -855,7 +856,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and receipt checks without constructing unrelated coordinates. Validation "
             "changes select test lanes, native queue order and diagnostics. Worker "
             "snapshots omit only unconsumed CI telemetry, preserving math inputs; paper "
-            "producers do not execute those commands. Schema validation retains its "
+            "producers do not execute those commands. Gupta claims use one admitted "
+            "bound for both fields, retaining byte-equal registry output; paper "
+            "producers do not run registration. Schema validation retains its "
             "refusals while reusing already-read metadata. These shared import paths "
             "are conservative paper inputs. The retained claim documents and source "
             "pin match main; no new byte-identical PDF build is claimed. The changed "

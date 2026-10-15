@@ -1072,6 +1072,14 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
       signal to move the read, not a signal to move the test.
     """
     expected: dict[str, set[str]] = {
+        # Hosted run 38658676393/job 116174451226 on 6756bda8, 2026-10-14:
+        # complete PR574 comparison and registration measured 28.65s and 13.00s CALL.
+        # These admit the full 85-certificate roster and its comparison/native-binding
+        # evidence. Asset custody, adapters and smaller receipt/refusal controls stay quick.
+        "test_upper_bound_reports_574.py": {
+            "test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304",
+            "test_the_574_register_plan_states_each_bound_as_check_standing_reads_it",
+        },
         # Full private snapshot/admission measured406.23s under IO contention;
         # complete confirmation/idempotence measured24.04s and16.06s per call.
         # The fast12s and child45s ceilings remain unchanged.
