@@ -3,9 +3,9 @@ type: is
 id: is-01m4y1bk4xqtpbjc6ppar1abj7
 title: Keep ordinary pre-push validation in the reachable quick lane with explicit slow opt-in
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md
 delegate: codex@spud10
 labels: []
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T20:23:44.013Z
-updated_at: 2026-10-15T11:19:17.634Z
+updated_at: 2026-10-15T12:05:54.071Z
 started_at: 2026-10-14T20:24:38.989Z
+closed_at: 2026-10-15T12:05:54.059Z
+close_reason: Delivered in PR618 merge fc2ceae79f462fe707ebbad1b94eb7cc306797b8 at2026-10-15T11:50:04Z. Exacthead3fe had three clear17path reviews and43passing hostedchecks, including full Deferred38726327460; ordinaryPacking38726302496 andPages38726302526 passed. Mainpublication38730161845 completed successfully including liveverify-deployment. Localcanonicalincremental9checks430.55s,5214normal/36skip+2pool, separatequickpool9pass; oldbroad1flagfailure preserved andfixed. Quickselection/loadfile andmodifierclassification shipped; no3minuteclaim orPR599strictgatewaiver. Parentcomponentcutfollow-up8iml/nkyg remains separatelytracked.
+resolution: null
+duplicate_of: null
 ---
 Measured News pre-push selected608of791files, included slow behavior and ran serially700.49s before interruption at13%. Make default reachable validation use the existing QUICK_TESTS predicate for all selection kinds; preserve conservative path selection and normal/pool lane ownership. Add explicit deliberate slow coverage CLI and meaningful option/selection/control tests, document its required role at deep checkpoints. All fast checks stay automatic in CI; no timing ceilings or scientific obligations weakened. Follow Astra next-default-loop-slice report and active CI iteration plan.
 
