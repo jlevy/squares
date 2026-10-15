@@ -5,7 +5,7 @@ title: "Address PR #614 reviews A and B: the T-174 hold, case prose and source k
 kind: task
 status: open
 priority: 1
-version: 17
+version: 19
 labels: []
 dependencies: []
 child_order_hints:
@@ -25,6 +25,8 @@ child_order_hints:
   - is-01m4yz8qm4djk8nmdgptvhvnw4
   - is-01m4yz8rrctty0frxxbr9x00rs
   - is-01m4yz8sz8dapjkyqtj6n6r7np
+  - is-01m4ze0vscscj2nyazrkjd8bsk
+  - is-01m4ze0wsr8setb8pgs8yz6pgx
 created_at: 2026-10-15T05:05:59.863Z
-updated_at: 2026-10-15T05:06:29.992Z
+updated_at: 2026-10-15T09:24:19.384Z
 ---
