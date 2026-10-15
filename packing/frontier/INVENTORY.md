@@ -8,7 +8,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **577** evidence records. **334** are formal; **327** of those were established here. **8** are samples, counted separately.
+- **578** evidence records. **334** are formal; **327** of those were established here. **9** are samples, counted separately.
 - **227** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
@@ -597,16 +597,17 @@ results, it is a statement about what this repository has itself examined.
 | `E-evand-584-compositions-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-596-compositions-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-fang-direct-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
-| `E-fang-direct-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 3 of 3: the complete certificates at 380, 381 and 382, every wall and every pair decided by both maintained routes; the six kernel controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
+| `E-fang-direct-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 | `E-wand125-closed-form-cfcheck-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | independent | sample, 8 of 136: region records of the closed-form certificate | `V-wand125-cfcheck` |
 | `E-wand125-closed-form-cfcheck-sample` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | sample, 2,909 of 187,183,108: leaves of the closed-form certificate | `V-wand125-cfcheck` |
+| `E-wand125-closed-form-replay4d-sample` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | sample, 2 of 136: region records of the closed-form certificate | `V-wand125-replay4d` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 231, verified 341
-- **method**: exact-algebraic 159, interval-certified 166, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 231
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 516
-- **relationship to the producer's code**: generator 5, independent-implementation 207, not-applicable 23, same-implementation 318, shared-components 18, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 231, verified 342
+- **method**: exact-algebraic 160, interval-certified 166, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 231
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 517
+- **relationship to the producer's code**: generator 5, independent-implementation 207, not-applicable 23, same-implementation 319, shared-components 18, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

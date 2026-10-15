@@ -629,7 +629,7 @@ def test_historical_bounds_keep_heading_and_current_lower_lane() -> None:
         "It is **larger** than the best known $8.88166675$ two fields above it.\n\n"
         "The verified upper bound and the printed side now agree.\n\n"
         "That proves $s(70) \\le 8.88166675700901$, the verified upper bound at that intake.\n"
-        "\n## The ry-xu construction\n\nThe selected exact side is current.\n"
+        f"\n{register.SECTION}\n\nThe selected exact side is current.\n"
     )
     rewritten = register.historical_upper_prose(70, body)
     assert rewritten.startswith("# s(70) — Square Packing Case\n")

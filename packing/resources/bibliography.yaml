@@ -1481,10 +1481,11 @@ sources:
       blanket licence.
   - key: '[ry-xu square packing 2026]'
     authors:
-    - ry-xu
+    - Ryan Xu
     year: 2026
     venue: GitHub
     dated: '2026-10-08'
+    credit: Xu
     lineage: independent
     note: The retained factual source certificates at 8dc415296f697f5140caea27c7a0193d52deb4e6 identify
       ry-xu and disclose LLM assistance; no unrestricted optimality or contact-count theorem is admitted.
@@ -2208,7 +2209,7 @@ sources:
     credit: Calle after Xu, Levy
     note: >-
       A decimal layout of 102 unit squares at 831368623f2d4dcef2e9434fd85c3e154083c97d,
-      centres and radian rotations at 18 significant digits, of the design ry-xu published
+      centres and radian rotations at 18 significant digits, of the design Ryan Xu published
       first (T-125), dated 11 October 2026 by its README, which compares it with this
       project's register; the record's exact certificate is derived here, every decimal
       read as printed and each half-angle tangent rounded down at 40 places, and kept as a
@@ -2604,7 +2605,7 @@ credited_names:
   Robert Barnett: Barnett
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta
-  ry-xu: ry-xu
+  Ryan Xu: Xu
   Seth Rehwaldt: Rehwaldt
   Nate Chaoweeraprasit: Chaoweeraprasit
   Allen Chang: Chang

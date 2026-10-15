@@ -58,6 +58,37 @@ the ledger recommends recording it only when its side is decisively smaller.
 
 PRs and supporting records: [\#601](https://github.com/jlevy/squares/pull/601) · [The intake ledger](packing/campaign/issue-intake/upper-bounds-20261014/README.md) · [Ledger review](docs/project/reviews/review-2026-10-14-intake-ledger.md) · [Fang theorem and direct-certificate review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) · [wand125 closed-form review](docs/project/reviews/review-2026-10-14-wand125-closed-form-lower-bound.md).
 
+<a id="changelog-entry-october-fourteen-intake-records"></a>
+
+#### Two Bound Families and 22 More Results From the 14 October Intake
+
+Significance S4: The registered results include two S4 bound families, Kevin Fang’s theorem and Hiroaki Hosono’s closed form.
+
+The 14 October intake registers 24 results, T-161 to T-184, in the order their
+reports reached the project, as the report-order ledger records them. Kevin Fang
+reports a proof that n² − n + 1 unit squares fit in a square of side less than n
+for every n ≥ 15, and Hiroaki Hosono’s closed form raises the reported lower bound
+at 154 counts. No case adopts a new best known packing yet.
+
+- Smaller exact packings and certificates at 69 counts, from Francisco Couzo,
+  Daniil Ostashev, PingYou Ltd and Mykhailo Polkovskyi, were replayed exactly, the
+  rational ones on two routes; independent review and adoption come next.
+- Fang’s theorem has a mathematical review and replayed finite bounds. The closed
+  form s(N) ≥ a(N), for every non-square N ≥ 49, has a review; its complete replay
+  waits on a compute budget.
+- wand125 reports lower bounds at 37, 39, 44 and 145 to 149, each read by a
+  review, and Benjamin Greff reports s(76) = 9 by a mixed cover.
+- Each recorded certificate is credited to its finder, and a refinement of an
+  earlier packing is listed as a regularization of it.
+
+Published artifacts: [Current Fang theorem record](https://jlevy.github.io/squares/result/t-163.html) · [Current closed-form lower-bound record](https://jlevy.github.io/squares/result/t-180.html).
+
+Component editions: Site v0.7.1.
+
+First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38644709027/job/116130903550)).
+
+PRs and supporting records: [\#602](https://github.com/jlevy/squares/pull/602) · [Current result register](packing/frontier/RESULTS.md) · [The intake ledger](packing/campaign/issue-intake/upper-bounds-20261014/README.md).
+
 <a id="changelog-entry-october-twelve-intake-and-house-admissions"></a>
 
 #### A Stronger 40-Square Bound and Four Smaller Packings
@@ -142,6 +173,34 @@ Published artifacts: [Current atlas with Regularized / Original comparison](http
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38527537367/job/115733950233)).
 
 PRs and supporting records: [\#511](https://github.com/jlevy/squares/pull/511) · [\#530](https://github.com/jlevy/squares/pull/530) · [\#548](https://github.com/jlevy/squares/pull/548) · [\#549](https://github.com/jlevy/squares/pull/549) · [\#559](https://github.com/jlevy/squares/pull/559) · [\#580](https://github.com/jlevy/squares/pull/580) · [\#585](https://github.com/jlevy/squares/pull/585) · [\#587](https://github.com/jlevy/squares/pull/587) · [\#591](https://github.com/jlevy/squares/pull/591) · [Regularization policy](docs/project/policies/regularization-policy.md) · [Regularization process](docs/project/guides/regularization-process.md).
+
+<a id="changelog-entry-reusable-intake-process-and-decided-comparisons"></a>
+
+#### A Reusable Intake Process and 17 Decided Comparisons
+
+Significance S2: Process, policy and verification work on reports already recorded; it registers no new result.
+
+The result-intake process is now a reusable runbook: the report-order ledger, the
+owner’s standing decisions, a compute cap with a tracked validation backlog, and
+verdict comments drafted from the ledger. Seventeen comparisons the printed
+precision left undecided for PR #574 are now decided exactly, and none is below
+the side already recorded.
+
+- Pull requests merge with a merge commit by default, issues and pull requests
+  share one label set, and credits name people by name, keeping a handle only as
+  an identifier.
+- A tool drafts each issue’s report-order verdict comment from the ledger; posting
+  stays manual.
+- wand125’s replay4d 0.1.1 source hashes were recomputed, and a calibration
+  replay of two records prices the complete replay at about 5,250 CPU-hours here.
+- Kevin Fang’s other eleven direct certificates, at 421 to 814, were replayed on
+  two exact routes.
+
+Component editions: Site v0.6.3.
+
+First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38632014131/job/116088520863)).
+
+PRs and supporting records: [\#605](https://github.com/jlevy/squares/pull/605) · [The intake runbook](packing/campaign/result-import.md) · [The decided comparisons](packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json).
 
 <a id="changelog-entry-verification-significance-and-announcement-audit"></a>
 

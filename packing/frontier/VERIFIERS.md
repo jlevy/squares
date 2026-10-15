@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **156** programs: **47** external and **109** first-party; **109** decide claims and **47** check premises.
-- **486** of **577** evidence entries name the programs that verified them: 250 reproduced with the producer’s code, 207 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
+- **487** of **578** evidence entries name the programs that verified them: 251 reproduced with the producer’s code, 207 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -179,7 +179,7 @@ second implementation agrees.
 | [`V-fang-review-glue-rebuild`](#v-fang-review-glue-rebuild) | glue_rebuild.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-fang-review-excess-arithmetic`](#v-fang-review-excess-arithmetic) | excess_arithmetic.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-fang-review-receipt-summary`](#v-fang-review-receipt-summary) | receipt_summary.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-wand125-replay4d`](#v-wand125-replay4d) | replay4d | wand125 | external | decides | 1 | 1 |
+| [`V-wand125-replay4d`](#v-wand125-replay4d) | replay4d | wand125 | external | decides | 2 | 1 |
 | [`V-wand125-closed-form-structure`](#v-wand125-closed-form-structure) | structure/validate_family.py | wand125 | external | premises | 0 | 0 |
 | [`V-closed-form-evaluation`](#v-closed-form-evaluation) | closed_form_bounds.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-closed-form-review-a-by-definition`](#v-closed-form-review-a-by-definition) | review/a_of_n_by_definition.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
@@ -1130,7 +1130,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
 | `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
-| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the complete certificates at 380, 381 and 382, every wall and every pair decided by both maintained routes; the six kernel controls are retained separately | - |
+| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
 
 ### `V-check-rational-witness-independent`
 
@@ -1187,7 +1187,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
 | `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
-| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the complete certificates at 380, 381 and 382, every wall and every pair decided by both maintained routes; the six kernel controls are retained separately | - |
+| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -2119,7 +2119,7 @@ Reads Evan Daniel's rational certificates, refusing anything the format does not
 | `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
 | `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
-| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the complete certificates at 380, 381 and 382, every wall and every pair decided by both maintained routes; the six kernel controls are retained separately | - |
+| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
 
 ### `V-check-n11-final-composition`
 
@@ -2653,7 +2653,7 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
 | `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
-| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the complete certificates at 380, 381 and 382, every wall and every pair decided by both maintained routes; the six kernel controls are retained separately | - |
+| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
 
 ### `V-upper-bound-reports`
 
@@ -2686,7 +2686,7 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
 | `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
-| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the complete certificates at 380, 381 and 382, every wall and every pair decided by both maintained routes; the six kernel controls are retained separately | - |
+| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
 
 ### `V-rehwaldt-n68-verify`
 
@@ -2916,13 +2916,14 @@ No evidence entry names it yet.
 
 Decides one region record of the closed-form certificate: that its roots are exactly the product grid of the region, its leaves tile each root by midpoint bisection, and each leaf passes its named exact test (EMPTY, CORE, B3D, EDGE, EX/EY, B3U, B3T, the nine CORE1 kinds, B4U) against the family.
 
-- Source: [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/fast.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/fast.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay_all.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay_all.py)
-- Versions run: SHA-256 `92002e0e8924…` (replay4d's printed source hash of the published crates; the source's full replay ran 306ad4b5..., which differs in comments only, as the source says)
-- Note: Not built or run here. The source says seam4d_core is the code its search tools use to evaluate leaves, so a replay with it is the producer's own code re-run.
+- Source: [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d_sort.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d_sort.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/fast.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/fast.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay_all.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay_all.py)
+- Versions run: SHA-256 `92002e0e8924…` (replay4d's printed source hash of the published crates; the source's full replay ran 306ad4b5..., which differs in comments only, as the source says. It does not cover b3d_sort.rs. Built here as the binary d52b8d88...); SHA-256 `f8cafeab078e…` (replay4d 0.1.1 (wand125/square-packing 1c661b7), its printed source hash, which from this version also covers seam4d_core/src/b3d_sort.rs; the only other change is that each result records env.B3_PLAIN_RF. Recomputed here (wand125-closed-form-source-hash-2026-10-14/receipts/source-hashes.json). Built here as the binary fb84677b...; of `main.rs`)
+- Note: Built here on 14 October 2026 with rustc 1.86.0 and the locked Cargo.lock, from the retained crates (0.1.0, binary d52b8d88...) and the 1c661b7 revision's (0.1.1, binary fb84677b...); each passed its 28 tests and printed the source hash its packet recomputes. 0.1.0 replayed two records of the 136 and refused a truncated record and a relabelled leaf (wand125-closed-form-2026-10-14/receipts/calibration/). The source says seam4d_core is the code its search tools use to evaluate leaves, so a replay with it is the producer's own code re-run.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-wand125-closed-form-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-180 |
+| `E-wand125-closed-form-replay4d-sample` | replayed here | reproduced with the producer’s code | sample, 2 of 136: region records of the closed-form certificate | T-180 |
 
 ### `V-wand125-closed-form-structure`
 
@@ -2932,7 +2933,7 @@ Checks each family's format and nonnegativity, the wall profile on the 1/5 grid 
 
 - Source: [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/validate_family.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/validate_family.py), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/structure_all.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/structure_all.py)
 - Versions run: SHA-256 `22e55f17f29a…` (validate_family.py as published and as run here); SHA-256 `7e32c71d6e9b…` (structure_all.py; of `structure_all.py`)
-- Note: Run here unchanged on 14 October 2026 (receipts/structure-check/). The source's receipt names validate_family.py at fdd61866..., which is not the published file.
+- Note: Run here unchanged on 14 October 2026 (receipts/structure-check/). The source's receipt named validate_family.py at fdd61866..., never published; at 1c661b7 it names the published 22e55f17... with the same results.
 
 No evidence entry names it yet.
 

@@ -284,7 +284,7 @@ RESULTS: dict[str, Prose] = {
     ),
 }
 
-XU = "ry-xu"
+XU = "Ryan Xu"
 SQUISH = "Nate Chaoweeraprasit (itsnaka)"
 COUZO = "Francisco Couzo"
 DANIEL = "Evan Daniel"
@@ -636,6 +636,33 @@ def _results_holding(evidence: Sequence[str], n: int) -> list[str]:
 
 #: Credited handles prose writes as the person's name, as the register's prose does.
 PROSE_NAMES = {"ry-xu": "Ryan Xu"}
+#: The credited name for a handle a record written before 14 October 2026 carries in a
+#: name field, so a note built from an earlier house names the person (epistemics.md,
+#: People and projects, never tools).
+RECORD_NAMES = {"ry-xu": XU}
+#: The ry-xu section's heading and lead as records written before 14 October 2026 carry
+#: them (`register_ryxu_reports.FORMER_SECTION`), and as the record names its finder now.
+FORMER_PROSE = (
+    (re.compile(r"\n## The ry-xu construction\n"), "\n## The Xu construction\n"),
+    (re.compile(r"\nry-xu reports \((T-\d{3})\)"), r"\nRyan Xu reports (\1)"),
+)
+
+
+#: A name field's item that gives the handle, in front matter an earlier record wrote.
+FORMER_NAME_FIELD = re.compile(r"(\n(\s*)(?:claimed_by|found_by|improved_by):\n\2- )ry-xu\n")
+
+
+def _named_fields(front: str) -> str:
+    """Front matter whose name fields credit the finder by name where an earlier record
+    gave the handle; every other item's text is left alone."""
+    return FORMER_NAME_FIELD.sub(rf"\1{XU}\n", front)
+
+
+def _named_prose(text: str) -> str:
+    """`text` with the ry-xu section crediting its finder by name, not by handle."""
+    for pattern, replacement in FORMER_PROSE:
+        text = pattern.sub(replacement, text)
+    return text
 
 
 def _person(name: object) -> str:
@@ -763,7 +790,7 @@ def history_note(move: Move) -> dict[str, Any]:
             f"Earlier house {upper['value']} from {upper['source_key']}, the case’s ceiling "
             f"{held} {day_words(move.n)}; its certificate and replay remain retained."
         ),
-        "claimed_by": [str(name) for name in claimed],
+        "claimed_by": [RECORD_NAMES.get(str(name), str(name)) for name in claimed],
         "published": upper.get("source_date"),
         "year": upper.get("found_year"),
     }
@@ -797,6 +824,7 @@ def front_matter(move: Move, front: str) -> str:
             f"beat the conjectured optimum {packing['conjectured_optimum']}; whether the "
             "conjecture stands is decided by hand"
         )
+    front = _named_fields(front)
     reviewed = f"  source_reviewed: '{houses.adopted_on(move.n)}'"
     front = re.sub(r"^  source_reviewed: .*$", reviewed, front, count=1, flags=re.MULTILINE)
     front = _replace(front, "reported_upper_bound", reported_bound(move))
@@ -1077,6 +1105,7 @@ def historical(move: Move, text: str) -> str:
     body is what this writes from the record its last pass read.
     """
     n, until = move.n, day_words(move.n)
+    text = _named_prose(text)
     text = re.sub(
         r"^Open\. The best known published packing,",
         "Open. Previously, the best known published packing,",

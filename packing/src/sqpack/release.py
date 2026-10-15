@@ -85,6 +85,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.2",
+        first_published="October 14, 2026",
+        result_scope=(
+            "Credit Ryan Xu by name across the record, record the 14 October replays and "
+            "decided comparisons, and add the 13 and 14 October News entries."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.1",
         first_published="October 14, 2026",
         result_scope=(
@@ -257,7 +265,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "759ef0dff9c3e5390b0bdd28b0f999c95281be3d"
+DATA_REVISION = "58c303ebc0e18a1f51ecd15c32b6a4029fe54ddf"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -672,6 +680,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.1",
+        version="v0.7.2",
+        impact="patch",
+        reason=(
+            "Credit Ryan Xu by name across the record, record the 14 October replays and "
+            "decided comparisons, and add the 13 and 14 October News entries."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.0",
         version="v0.7.1",
         impact="patch",
@@ -777,6 +795,96 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "Rendered from main at 9b32da04 and from this branch with the browser's math "
+            "pass, all 55 files the explainer writes, its HTML, Markdown and PDF among "
+            "them, are byte-identical. The site v0.7.2 cut moves the claim documents' link "
+            "revision; the bound citations credit Xu by name at counts above 11; the "
+            "register's credit prose, T-174 and T-180 change; none reaches the explainer, "
+            "which keeps v0.4.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "Rendered from main at 9b32da04 and from this branch, both papers' HTML, "
+            "Markdown and PDF are byte-identical once the build commit their source links "
+            "pin is normalized. The register credits Ryan Xu by name, T-174 and T-180 cite "
+            "new receipts and evidence, and the house writers name him in the records they "
+            "replay; neither review cites any of them."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/frontier/n-051.md",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-084.md",
+            "packing/frontier/n-086.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-105.md",
+            "packing/frontier/n-108.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-127.md",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-131.md",
+            "packing/frontier/n-146.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Rendered from main at 9b32da04 and from this branch, the HTML, Markdown and "
+            "PDF are byte-identical once the build commit their source links pin is "
+            "normalized. The case records name Ryan Xu in place of his handle, the "
+            "requests record gains the 14 October replies, and Kevin Fang's rows beyond "
+            "the corpus become verified; the survey prints none of them and keeps v0.2.2."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
@@ -1195,7 +1303,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "c596e3ff"
+PUBLICATION_REVISION = "ba21cfa0"
 
 
 def data_pathspec() -> tuple[str, ...]:
