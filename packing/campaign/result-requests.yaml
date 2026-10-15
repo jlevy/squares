@@ -8705,9 +8705,10 @@ issues:
     triage: done
     summary: 'Miles Gray (mstrmg) reports an exact certificate at 366, beyond the case corpus: gist c3350a7e
       at 31e69614 (n366.cert, SHA-256 9cd599bb...), made by removing three squares from Francisco Couzo''s
-      02f9690 packing of 369 and optimizing again; AI assistance disclosed. Both exact checkers here accept
-      it at its own side, 19.738804240214197, which is 3.9e-7 below the side the issue prints. Not imported:
-      Couzo''s 4e4c8ce index, first committed before the issue, is smaller at 366.'
+      packing of 369 (02f9690''s, by the side the issue quotes) and optimizing again; AI assistance disclosed.
+      Both exact checkers here accept it at its own side, 19.738804240214197, which is 3.9e-7 below the side
+      the issue prints. Not imported: Couzo''s 4e4c8ce index, first committed before the issue, holds a smaller
+      certificate at 366, credited there to PingYou Ltd (BuddenPing).'
     read_through: '2026-10-15T20:02:39Z'
     results:
     - key: n366
