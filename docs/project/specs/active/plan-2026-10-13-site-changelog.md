@@ -9,8 +9,10 @@ author: Codex, for the repository owner
 
 **Author:** Codex, for the repository owner
 
-**Status:** Changelog implemented in PR #590; News and full-width Atlas follow-up in
-progress.
+**Status:** Changelog, News, Explanations and full-width Atlas are published.
+PR #604 merged as `16ea3bd06`; its main deployment passed all 4,243 live checks.
+CI delivery corrections continue separately in PR #599, now integrating the later
+24-result intake in PR #602.
 
 **Tracking:** `think-j7nb` (planning), `think-jpto` (implementation epic), `think-kzet`
 (News), `think-q65u` (Atlas width)
@@ -541,6 +543,149 @@ its archive. Shared chips reset text transformation and small caps so the same l
 the same casing on each surface.
 The Results Kind selector uses the same display labels without changing the register’s
 kinds or scientific claims.
+
+## CI Delivery Follow-up
+
+### Enforced quick-lane checkpoint
+
+For a test-call timing repair, `enforced-quick.yml` runs the canonical four quick shards
+under a real push or manual-dispatch event.
+The existing twelve-second CALL ceiling is enforced on that event; the pull-request
+timing exception does not apply.
+Each runner installs the pinned browser toolchain, requires Chromium, and preserves
+source identity, collection, JUnit, skips and timing receipts.
+The aggregate requires all four shards to succeed.
+Changed cases must be collected and executed.
+
+This selection covers the four quick shards, not the complete PR fast surface or a full
+checkpoint. Current-tree frontend evidence accounts for the browser-floor and layout
+tests the shards exclude.
+Source, record and negative-control checks retain their ordinary PR gates.
+Optional omissions are reported explicitly; they are not recorded as executed tests.
+
+A self-change push trigger validates the workflow and its contract before its first
+merge. After it exists on the default branch it can also be dispatched manually.
+The existing main, daily and full workflows retain their selections and behavior.
+To complete a previously failed checkpoint, record the failed run unchanged, rerun its
+invalidated checks, and identify the unchanged input scope that supports reuse of
+successful mathematical results.
+A schema-audit change invalidates the controls that execute that audit, so those
+controls must run at the corrected source too.
+This bounded completion is tracked in think-4syd; the main full run remains the
+backstop, and supplies no missing pre-merge evidence.
+
+### Measured shard assignment
+
+PR #599 refreshes the cost record from all four pytest reports in hosted run
+38565361504, preserving the existing planning capacities and enforcement limits.
+Each report records pytest exit status zero and its actual source and cohort identity.
+The encompassing full validation failed four CALL ceilings; those failures remain failed
+evidence.
+Measured costs support assigning test files, not declaring the gate successful.
+The complete cohort reduces unrecorded files from 73 to 25 of 788; the largest shard
+share is 5.4%, below the existing 10% limit.
+The corrected assignment still requires a fresh enforced run.
+
+The checkpoint collects both canonical test roots and joins physical module paths to
+pytest’s own JUnit identities.
+This preserves workbench names, class names and parameter text containing `::`, while
+refusing missing or skipped required cases.
+
+### Required-browser cost baseline
+
+The first complete measured assignment cohort, genuine-push run 38583046153, finished
+all 17891 pytest cases without assertion failures, but the checkpoint failed one
+21.78-second CALL and old-record drift.
+Its whole-wall observations are cost evidence; they do not establish passing validation.
+The collection repair retains all three real selectors and their original partition
+assertions in one isolated process, sharing imports inside the measured CALL.
+
+The normal PR cohort 38583060155 collected identical identities but skipped 210
+additional missing-Chromium cases: shard A/B/C/D extra omissions 3/7/39/161. All 210
+passed in the enforced cohort.
+The required-browser workload therefore has its own first cost point; the normal cohort
+remains contrary cost evidence, including A 358.02 and B 407.46 seconds above their
+unchanged ceilings. Do not exclude a reading merely because it failed a cost rule, pool
+materially different executed workloads, or infer a distribution from one cohort.
+Subsequent comparable required-browser readings belong in the retained evidence and
+geometric mean. The remeasurement preserves old records and attribution in chronological
+history, all ceilings, ratios and reference shapes, and names quantitative per-file
+growth and assignment changes without attributing them wholesale to runner variance.
+A fresh corrected-source checkpoint must pass every CALL guard and whole-tier verdict
+before merging.
+
+The narrow push trigger includes the checkpoint tool, measured cost and budget records,
+and collection contract so changes to those timing inputs are enforced before the
+workflow’s first merge.
+Existing main/full workflows are unchanged.
+
+### Completed-workload pricing and timeout diagnosis
+
+The subsequent record uses all four complete required-browser reports from run
+38583046153, pricing 765 files instead of 763 from the earlier full-run cohort.
+All weights are produced by `suite_files record`, with capacities 131/154/154/131
+unchanged; 23 of 788 files remain unpriced, at most 4.9% of a shard.
+The enclosing source run failed one CALL; these are valid costs, not passing gate proof.
+No partial report from the later 900-second timeout is admitted.
+The earlier whole-wall points remain historical observations of the preceding
+assignment. The corrected assignment requires fresh all-four enforcement.
+
+The final call repairs retain all three actual layout collections and their original
+partition assertions, while declining noninitial sibling paths through pytest’s own
+initial-path predicate.
+The parsed configuration must request files; a directory selection is refused.
+The YAML policy still parses every Python file and uses the same AST refusal rule, with
+a conservative NFKC identifier screen reducing only unnecessary AST walks.
+Packet and exact-optimum CLIs read one fresh coverage snapshot per invocation;
+standalone calls remain fresh and no global cache is introduced.
+All 50 packet heads, their preceding layers, 47 overlapping exact calls and 48
+standalone exact calls retain their source/adoption decisions; full check audits report
+no drift.
+
+The suite cost reporter now flushes controller start/setup/call/teardown events beside
+its normal report. `suite_files unfinished JOURNAL` identifies outstanding phases when a
+command deadline prevents final JUnit/cost output, handles a truncated final line
+explicitly, and makes no passing-test claim.
+This will help diagnose the unresolved intermittent 900-second deadline; instrumentation
+itself is not a fix for that cause.
+
+### Current complete-cohort assignment correction
+
+Required-browser run
+[38594336170](https://github.com/jlevy/squares/actions/runs/38594336170) at
+`58b6a8688d87661a7ebeac6ef3e5c944f09efd01` completed all four pytest processes with exit
+status zero. The enclosing checkpoint remains failed: A exceeded the pool-worker CALL
+limit at 14.45 seconds and its whole-wall limit at 339.70 seconds; B passed every
+functional assertion and CALL guard but exceeded its 360-second wall limit at 384.18
+seconds. C and D passed at 289.65 and 231.76 seconds.
+The exact ten affected schema mutations and current ordinary Packing/Pages checks
+passed.
+No 900-second deadline occurred; this does not explain or prove fixed the earlier
+intermittent deadline.
+
+The retained four complete reports under
+`.codex/regularization-closeout-evidence-2026-10-13/suite-cost-cohort-38594336170/`
+measure the current 33-path workload after the coverage, AST-walk and collection
+optimizations. Their combined per-file phase sums were 1239.379/1325.159/989.187/834.394
+seconds under the preceding assignment.
+These are sums of setup/call/teardown time across workers, not whole-wall observations.
+The canonical `suite_files.record` reconstruction now balances those 765 measured files
+at 1008.498/1185.562/1185.562/1008.497 summed seconds, preserving the original
+131/154/154/131 planning capacities.
+There are still 23 unpriced files among 788, with no shard exceeding 4.9% unpriced.
+No hand-edited cost, enforcement ceiling, ratio, marker, source observation or
+historical budget point changes.
+
+Fresh enforcement of all four shards remains required because assignment changed.
+Previous raw cohorts and failed gate verdicts remain retained.
+The journal is diagnostic and the pending deadline follow-up remains `think-ma3y`. The
+real multiprocessing atlas comparison now uses n=4, 11 and 51 and explicitly guards its
+current exact-grid, decimal Kingbird and algebraic packet source/scalar kinds.
+It retains serial-versus-two-worker production calls and all four original comparisons.
+The historical n=68 UnitSquare representative now incurs a full exact refinement replay;
+that replay and byte comparison remain in the unchanged complete atlas/composite checks,
+with its quick custody and metadata refusals retained.
+Source review and actual hosted pool CALL timing remain required under `think-jxo0`.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

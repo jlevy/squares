@@ -410,7 +410,14 @@ def test_every_boolean_flag_is_classified_as_a_tier_or_not() -> None:
     Every `store_true` option on the parser is therefore either a tier or named here as
     deliberately not one.
     """
-    not_a_tier = {"strict", "deep", "list", "budgets", "enforce_budget"}
+    not_a_tier = {
+        "strict",
+        "deep",
+        "list",
+        "budgets",
+        "enforce_budget",
+        "include_reachable_slow",
+    }
     # A `store_true` flag is exactly one that defaults to False in the parsed namespace,
     # which reads the real parser without reaching into argparse's internals.
     defaults = vars(validate._parser().parse_args([]))
@@ -730,20 +737,30 @@ def test_a_pending_tier_with_no_bead_store_fails_under_ci_and_skips_locally(
     assert "names no hosted run" in problems[0]
 
 
-def test_the_live_pending_tiers_pass_until_their_dates_and_are_named_after_them() -> None:
-    """The register as checked in, with the dates read from it rather than typed here.
+def test_the_live_pending_tiers_pass_until_their_dates_and_are_named_after_them(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Check live hosted records or pending dates without inventing a pending tier.
 
     Each tier pending a first hosted measurement is one a pull-request job runs, since
     that is the only place the date and the bead are held to anything. The whole surface
     passes up to the earliest date, each tier is named the day after its own, and the
-    beads are then resolved in the checkout's real store. With nothing pending this
-    skips, as the unmeasured-tier test does: the mechanism is for a new tier's first days.
+    beads are then resolved in the checkout's real store. With nothing pending, every
+    live pull-request tier must have a hosted record without consulting a bead store.
     """
     register = live()
     tiers = pull_request_tiers()
+    assert tiers, "no pull-request job runs a whole tier"
+    assert set(tiers) <= set(register.ids)
     pending = [tier for tier in register.tiers if tier.pending_measurement is not None]
     if not pending:
-        pytest.skip("no tier is currently pending its first measurement")
+
+        def unreachable() -> None:
+            raise AssertionError("recorded live tiers must not need the pending bead store")
+
+        monkeypatch.setattr(bead_state, "store", unreachable)
+        assert unrecorded_problems(register, tiers) == []
+        return
     dates: dict[str, date] = {}
     for tier in pending:
         assert tier.pending_until is not None

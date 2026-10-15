@@ -25,6 +25,14 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_enforced_quick.py
+    kind: generated-artifact
+    boundary: >-
+      Hosted execution receipts acquired from separate runners are joined to the
+      workflow's actual Git checkout identity before combining their outcomes.
+      Git names the checkout; no digest checks repository file bytes or pins a
+      consumer. The comparisons refuse mixed-source or substituted runtime receipts,
+      rather than inferring successful execution from source identity.
   - path: packing/devtools/couzo_refinement_reports.py
     kind: download
     boundary: >-

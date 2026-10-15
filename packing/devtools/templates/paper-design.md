@@ -377,6 +377,12 @@ a note names, such as $n = 21$, is sans math too, never upright words.
 Documents write math as LaTeX (`$…$`) rather than in code spans;
 `devtools.check_math_markup` holds the documents already migrated to it.
 Code uses Planetaire Mono Text at KPress’s calibrated monospace size.
+Literal source code keeps its Unicode characters.
+Two site-only KaTeX subsets supply AMS’s blackboard-R outline for `ℝ` and Main’s
+outlines for `↔` and `≤` within the monospace family, preserving ordinary ASCII glyphs
+and metrics.
+Both subsets travel through the shared asset bundle; standalone paper styles
+keep their existing declarations.
 
 **A formula is drawn as its text is.** Beside the face, a formula takes the size of the
 text it sits in (KaTeX’s outer em is 1 of its text’s on every surface), its colour, and

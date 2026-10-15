@@ -182,8 +182,11 @@ def test_n211_orientation_keeps_source_dates_bounds_and_feasibility() -> None:
 
 
 def test_correcting_a_legacy_vertical_flip_rebases_on_the_original_parent() -> None:
-    source = source_orientation(load_witness(SELECTED, fallback_schema=SCHEMA))
-    corrected = orient_atlas_witness(source)
+    # The retained corrected witness is the expected complete geometry and receipt.
+    # Fresh production orientation is checked separately; this control performs the
+    # real legacy migration once instead of first rebuilding its expected answer.
+    corrected = load_witness(SELECTED, fallback_schema=SCHEMA)
+    source = source_orientation(corrected)
     legacy = reflect_x_axis(source)
     legacy["certificate"]["geometry_transform"] = deepcopy(
         corrected["certificate"]["geometry_transform"]

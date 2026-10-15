@@ -41,7 +41,7 @@ from collections.abc import Callable, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, replace
 from datetime import date
-from decimal import ROUND_CEILING, ROUND_HALF_EVEN, Decimal
+from decimal import ROUND_CEILING, ROUND_HALF_EVEN, Decimal, InvalidOperation
 from fractions import Fraction
 from functools import cache
 from io import BytesIO
@@ -134,6 +134,7 @@ from sqpack.render.model import (
     PackingFrame,
     Point2,
     RenderSpec,
+    ScalarSource,
     SquareGeometry,
 )
 from sqpack.render.numbers import (
@@ -155,11 +156,14 @@ from sqpack.render.svg import (
     svg_tag,
 )
 from sqpack.witness import (
+    WitnessError,
     check_witness_semantics,
     exact_verify,
     load_witness,
+    materialize_exact_side,
     materialize_exact_witness,
     materialize_witness,
+    validate_presentation_literals,
     witness_document,
 )
 from sqpack.workers import worker_count
@@ -1611,24 +1615,69 @@ def _scalar(value: str, *, rational: bool):
     return scalar_from_fraction(Fraction(value)) if rational else scalar_from_decimal(value)
 
 
+def _exact_frame_scalar(witness: dict, value: Any) -> ScalarSource:
+    if isinstance(value, Fraction):
+        return scalar_from_fraction(value)
+    if not isinstance(value, FieldElement):
+        raise TypeError("exact presentation requires a rational or field scalar")
+    source = json.dumps(
+        {"field": witness["scalar"], "coefficients": [str(c) for c in value.coeffs]},
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    # This decimal is a drawing projection. The source identity retains the entire
+    # field/root declaration and reduced exact coefficients, including the side.
+    return scalar_from_exact(source, value.field.decimal(value, 40))
+
+
 def _exact_frame_geometry(witness: dict):
     corners, side = materialize_exact_witness(witness)
+    return _exact_frame_scalar(witness, side), [
+        [(_exact_frame_scalar(witness, x), _exact_frame_scalar(witness, y)) for x, y in square]
+        for square in corners
+    ]
 
-    def scalar(value):
-        if isinstance(value, Fraction):
-            return scalar_from_fraction(value)
-        if not isinstance(value, FieldElement):
-            raise TypeError("exact presentation requires a rational or field scalar")
-        source = json.dumps(
-            {"field": witness["scalar"], "coefficients": [str(c) for c in value.coeffs]},
-            sort_keys=True,
-            separators=(",", ":"),
-        )
-        # This decimal is a drawing projection. The source identity retains the entire
-        # field/root declaration and reduced exact coefficients, including the side.
-        return scalar_from_exact(source, value.field.decimal(value, 40))
 
-    return scalar(side), [[(scalar(x), scalar(y)) for x, y in square] for square in corners]
+def _decimal_pose_literal(value: Any) -> Decimal:
+    if not isinstance(value, str):
+        raise WitnessError("malformed-scalar", "decimal literals must be strings")
+    try:
+        result = Decimal(value)
+    except InvalidOperation:
+        try:
+            fraction = Fraction(value)
+        except (ValueError, ZeroDivisionError) as error:
+            raise WitnessError(
+                "malformed-scalar", f"invalid rational literal {value!r}"
+            ) from error
+        # A parsed rational is finite; avoid ambient-context division just to test it.
+        result = Decimal(fraction.numerator)
+    if not result.is_finite():
+        raise ValueError("projection requires a finite value and positive precision")
+    return result
+
+
+def side_from_witness(witness: dict) -> ScalarSource:
+    """Read the renderer's enclosing-side projection without expanding its geometry.
+
+    Exact scalar identity, declared coordinate literals, and the renderer's receipt
+    requirements are retained. Neither this reader nor frame_from_witness replays
+    packing feasibility; full square geometry remains the frame reader's concern.
+    """
+    if witness["scalar"]["kind"] in {"rational", "algebraic-number-field"}:
+        side = _exact_frame_scalar(witness, materialize_exact_side(witness))
+    else:
+        side = scalar_from_decimal(str(witness["side"]))
+
+        def parse(value: Any) -> ScalarSource | Decimal:
+            if witness["representation"] == "corners":
+                return scalar_from_decimal(str(value))
+            return _decimal_pose_literal(value)
+
+        validate_presentation_literals(witness, parse, unpack_corners=True)
+    _witness_check(witness)
+    _witness_source(witness)
+    return side
 
 
 def frame_from_witness(witness: dict) -> PackingFrame:
@@ -1664,6 +1713,25 @@ def frame_from_witness(witness: dict) -> PackingFrame:
         )
         for index, corners in enumerate(source_squares, start=1)
     )
+    evidence, check = _witness_check(witness)
+    source_id, source_url = _witness_source(witness)
+    return PackingFrame(
+        container_side=side,
+        squares=squares,
+        evidence=evidence,
+        check=check,
+        label=f"n={witness['n']} known best",
+        source_id=source_id,
+        source_url=source_url,
+    )
+
+
+def _witness_source(witness: dict) -> tuple[str, str]:
+    """The source identity and optional URL required by the presentation readers."""
+    return str(witness["id"]), str(witness.get("source", {}).get("url", ""))
+
+
+def _witness_check(witness: dict) -> tuple[EvidenceTier, CheckSummary]:
     claim = witness["claim"]
     # The tier states what this drawn packing establishes, which is exactly what
     # coordinate_provenance answers: exact coordinates make the frame a certified
@@ -1694,16 +1762,7 @@ def frame_from_witness(witness: dict) -> PackingFrame:
             tolerance=str(claim["tolerance"]),
             detail=str(claim["limitations"]),
         )
-    source = witness.get("source", {})
-    return PackingFrame(
-        container_side=side,
-        squares=squares,
-        evidence=evidence,
-        check=check,
-        label=f"n={witness['n']} known best",
-        source_id=str(witness["id"]),
-        source_url=str(source.get("url", "")),
-    )
+    return evidence, check
 
 
 def _render(witness: dict) -> str:

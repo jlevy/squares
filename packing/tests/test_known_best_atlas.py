@@ -829,18 +829,30 @@ def test_a_pool_worker_builds_the_same_bytes_as_this_process() -> None:
     global arithmetic state -- and the failure would be silent, since a witness rounded
     at a different precision is still a witness.
 
-    So the comparison is on bytes rather than on a status, and it is over a range that
-    reaches all three source layers: an exact grid (n=4), a Kingbird-derived record
-    (n=11) and a UnitSquare rendering (n=68). `built_cases` is called directly, because
-    what needs checking is the path the tool takes rather than a re-implementation of it.
+    The byte comparison reaches the three current source layers: an exact rational
+    grid (n=4), a decimal Kingbird-derived record (n=11), and an algebraic packet (n=51).
+    The packet exercises the declared number field, root and coefficient projection in
+    a fresh worker. `built_cases` follows the real production path in both processes.
 
-    Not marked `slow`: three cases is a second or two, and the property is one a pull
-    request should learn about rather than a merge.
+    n=68 was a UnitSquare rendering when this test was written; it now rebuilds an
+    exact refinement and replays its full feasibility check. The complete atlas rebuild
+    and composite test retain that check and its output-byte comparison, alongside the
+    refinement's private-custody and metadata-refusal controls.
     """
-    numbers = (4, 11, 68)
+    numbers = (4, 11, 51)
     serial = known_best_builder.built_cases(numbers, 1)
     pooled = known_best_builder.built_cases(numbers, 2)
 
+    assert [item.source.kind for item in serial] == [
+        "exact-grid",
+        "kingbird-derived-facts",
+        "packet-derived-facts",
+    ]
+    assert [item.witness["scalar"]["kind"] for item in serial] == [
+        "rational",
+        "decimal",
+        "algebraic-number-field",
+    ]
     assert [item.frontier.n for item in serial] == list(numbers)
     assert [item.witness_text for item in pooled] == [item.witness_text for item in serial]
     assert [item.rendering_text for item in pooled] == [item.rendering_text for item in serial]

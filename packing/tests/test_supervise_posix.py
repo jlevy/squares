@@ -8,8 +8,11 @@ import signal
 import subprocess
 import sys
 import time
+from collections.abc import Callable
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
+from unittest.mock import Mock
 
 import pytest
 
@@ -43,6 +46,60 @@ def test_short_sleep_normal_exit_preserves_partial_logs(tmp_path: Path) -> None:
     assert (tmp_path / "stderr").read_text() == "err\n"
 
 
+@pytest.mark.parametrize("stop_reason", ["wall_limit", "supervisor_signal"])
+def test_exit_observed_after_blocking_sample_keeps_stop_reason(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stop_reason: str
+) -> None:
+    """A sampling delay cannot turn a timer- or signal-stopped child into success."""
+    now = 0.0
+    child = Mock(pid=12345, returncode=None)
+    child.poll.side_effect = lambda: child.returncode
+    callbacks: list[Callable[[], None]] = []
+
+    def timer(_delay: float, callback: Callable[[], None]) -> Mock:
+        callbacks.append(callback)
+        return Mock()
+
+    def sample(pgid: int) -> dict[int, int]:
+        nonlocal now
+        if pgid == os.getpgrp():
+            return {os.getpid(): 1}
+        if child.returncode is None:
+            if stop_reason == "wall_limit":
+                now = 1.0
+                callbacks[0]()
+            else:
+                handler = signal.getsignal(signal.SIGTERM)
+                assert callable(handler)
+                handler(signal.SIGTERM, None)
+            child.returncode = -signal.SIGTERM
+        return {}
+
+    launch = Mock(return_value=child)
+    monkeypatch.setattr(tool.subprocess, "Popen", launch)
+    monkeypatch.setattr(tool.threading, "Timer", timer)
+    monkeypatch.setattr(tool, "time", SimpleNamespace(monotonic=lambda: now, sleep=Mock()))
+    monkeypatch.setattr(tool, "_signal_group", Mock())
+    receipt = tool.supervise(
+        ["owned-command"],
+        max_seconds=1,
+        max_memory_mib=1,
+        sample_seconds=0.1,
+        cleanup_seconds=0.2,
+        stdout=tmp_path / "stdout",
+        stderr=tmp_path / "stderr",
+        sampler=sample,
+    )
+    assert launch.call_args.kwargs["start_new_session"] is True
+    assert receipt["owned_pgid"] == child.pid
+    assert receipt["status"] == "INCOMPLETE"
+    assert receipt["reason"] == stop_reason
+    assert receipt["returncode"] == -signal.SIGTERM
+    assert receipt["cleanup_complete"]
+    child.wait.assert_called_once_with(timeout=2)
+
+
+@pytest.mark.pool_heavy
 def test_timeout_kills_term_ignoring_group(tmp_path: Path) -> None:
     receipt = run(
         tmp_path,

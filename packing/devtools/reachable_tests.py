@@ -56,7 +56,7 @@ from pathlib import Path
 
 from yaml import YAMLError
 
-from sqpack.cli.validate import BEHAVIORAL_TEST_ROOTS, QUICK_TESTS, changed_paths
+from sqpack.cli.validate import BEHAVIORAL_TEST_ROOTS, QUICK_TESTS, SLOW_TESTS, changed_paths
 from sqpack.release import DATA_PATHS as RELEASE_DATA_PATHS
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -95,12 +95,14 @@ SUITE_WIDE = (
 
 PAGES_WORKFLOW = ".github/workflows/pages.yml"
 
-#: think-xyub: only configuration-only pushes move the complete slow lane to the
-#: matching PR fast + Deferred checkpoint. Mixed changes keep local slow coverage;
-#: unknown workflows and other fallbacks retain the original execution policy.
-CONFIGURATION_ONLY_PUSH_PATHS = frozenset(
-    (*SUITE_WIDE, ".github/workflows/packing-validation.yml", ".github/workflows/deep-gate.yml")
-)
+#: File reachability is conservative in every lane. Choosing a lane changes only
+#: which already-declared tests execute, never which files are selected (think-gg64).
+LANES = {"quick": QUICK_TESTS, "slow": SLOW_TESTS, "all": "not exhaustive_exact"}
+EXCLUSIONS = {
+    "quick": "slow, exhaustive_exact",
+    "slow": "quick, exhaustive_exact",
+    "all": "exhaustive_exact",
+}
 
 WALKER_MARKERS = ("rglob(", "iterdir(", ".glob(", "listdir(", "importlib", "__import__")
 
@@ -449,7 +451,7 @@ def pytest_command(
     targets: Sequence[str],
     workers: int,
     *,
-    marker: str = "not exhaustive_exact",
+    marker: str = QUICK_TESTS,
     artifact_stem: Path | None = None,
 ) -> tuple[str, ...]:
     """The pytest invocation for a selection, under `workers` xdist processes.
@@ -462,11 +464,13 @@ def pytest_command(
     `D-488` is what this argument closes. The selector's runner had no distribution at
     all, so the pre-push tier's behavioural step ran in one process at every `--jobs`
     value, including the `--jobs 1` that `_xdist_distribution` documents as the way to
-    get four workers on a four-cpu box. The whole-suite fallback is the expensive case:
-    other workflow changes or suite configuration select everything, which is
-    the quick lane and the slow lane together in a single process.
+    get four workers on a four-cpu box. Other workflow changes or suite configuration
+    can select every test file. Execution defaults to the quick lane; slow tests require
+    explicit `--lane slow` or `--lane all` (`--push --include-reachable-slow` in the parent).
+    The requested lane retains the same worker distribution.
     """
-    distribution = ("-n", str(workers)) if workers > 1 else ()
+    # Preserve module-scoped builders instead of rebuilding them in every worker.
+    distribution = ("-n", str(workers), "--dist=loadfile") if workers > 1 else ()
     receipts = (
         ("-p", "devtools.reachable_progress", f"--junitxml={artifact_stem}.junit.xml")
         if artifact_stem is not None
@@ -507,7 +511,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--run",
         action="store_true",
-        help="run pytest on the selection; configuration-only pushes defer slow tests to CI",
+        help="run the selected lane; omitted tests retain their checkpoint obligations",
+    )
+    parser.add_argument(
+        "--lane",
+        choices=tuple(LANES),
+        default="quick",
+        help="quick local feedback (default), selected slow tests, or all non-exhaustive tests",
     )
     parser.add_argument(
         "-n",
@@ -568,22 +578,24 @@ def main(argv: Sequence[str] | None = None) -> int:
         if selection.everything
         else [os.path.relpath(REPO / test, start=ROOT) for test in selection.tests]
     )
-    # Reachability remains conservative. Only a nonempty configuration-only change
-    # moves slow execution to the existing matching-tree CI checkpoint (think-xyub).
-    # Any mixed source/record change, narrow selection or unknown fallback keeps slow
-    # tests locally; exhaustive tests already belong to the final checkpoint.
-    marker = (
-        QUICK_TESTS
-        if selection.everything
-        and changed
-        and all(path in CONFIGURATION_ONLY_PUSH_PATHS for path in changed)
-        else "not exhaustive_exact"
+    marker = LANES[namespace.lane]
+    file_count = (
+        len(selection.tests)
+        if not selection.everything
+        else sum(1 for root in TEST_ROOTS for path in root.glob("test_*.py") if path.is_file())
     )
-    if marker == QUICK_TESTS:
-        print(
-            "configuration-only push: slow and exhaustive coverage requires passing "
-            "PR fast + Deferred checkpoint on the same source/base before merge (think-xyub)"
-        )
+    print(
+        f"reachable lane: {namespace.lane}; {file_count} selected files; "
+        f"marker: {marker}; pytest workers: {namespace.numprocesses}; "
+        f"pool workers: {namespace.pool_workers or 'not split'}",
+        flush=True,
+    )
+    print(
+        f"Local feedback excludes {EXCLUSIONS[namespace.lane]}. Remaining checkpoint "
+        "obligation: existing matching-source PR fast and deferred/exhaustive checks "
+        "before merge; this result does not certify omitted tests (think-gg64).",
+        flush=True,
+    )
     parent_stem_value = os.environ.get("PACKING_REACHABLE_TEST_ARTIFACT_STEM")
     parent_stem: Path | None = None
     child_environment: dict[str, str] | None = None
@@ -626,6 +638,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         if stem is not None:
             environment["PACKING_REACHABLE_TEST_ARTIFACT_STEM"] = str(stem)
             environment["PACKING_REACHABLE_TEST_WORKERS"] = str(workers)
+            environment["PACKING_REACHABLE_TEST_LANE"] = namespace.lane
+            environment["PACKING_REACHABLE_TEST_MARKER"] = marker
+            environment["PACKING_REACHABLE_TEST_EXCLUSIONS"] = EXCLUSIONS[namespace.lane]
         if pack_jobs is not None:
             environment["PACK_JOBS"] = str(pack_jobs)
         return subprocess.run(command, cwd=ROOT, check=False, env=environment).returncode

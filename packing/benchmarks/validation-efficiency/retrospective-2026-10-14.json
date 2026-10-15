@@ -1,0 +1,2746 @@
+{
+  "schema": "ci-iteration-retrospective/1",
+  "captured_at_utc": "2026-10-14 16:30:18 UTC",
+  "scope": "Read-only GitHub API evidence, with separately identified local push observations. Workflow elapsed includes queue/setup/execute/aggregate. Phase sums are not CPU seconds or billed usage. No complete accounting of model work or idle waiting is available.",
+  "pull_requests": [
+    {
+      "created_at": "2026-10-11T21:12:00Z",
+      "head_sha": "9988bc9d2f117f40cf0b2f35036f9b2cbd13ce3c",
+      "html_url": "https://github.com/jlevy/squares/pull/511",
+      "merge_commit_sha": "aeef99ef0ef27ace054434094118a6ac355da384",
+      "merged_at": "2026-10-14T02:57:39Z",
+      "number": 511,
+      "title": "feat: drive Evan Daniel's regularizer, re-solve views at the record's side, and draw a review gallery, with pilot spikes (think-up3h, think-7hmc, think-ubr0, think-pwmi)"
+    },
+    {
+      "created_at": "2026-10-12T05:01:44Z",
+      "head_sha": "5f3784d9be20b2148b1551cdd6e482f5e20d46f4",
+      "html_url": "https://github.com/jlevy/squares/pull/530",
+      "merge_commit_sha": "aeef99ef0ef27ace054434094118a6ac355da384",
+      "merged_at": "2026-10-14T02:57:40Z",
+      "number": 530,
+      "title": "feat: close free grid slack exactly at the record's side, with a census of how evenly the atlas draws its grids (prototype)"
+    },
+    {
+      "created_at": "2026-10-12T10:31:46Z",
+      "head_sha": "e7dae8339de8c3a7cd4ae484eab0f30a804141f5",
+      "html_url": "https://github.com/jlevy/squares/pull/548",
+      "merge_commit_sha": "aeef99ef0ef27ace054434094118a6ac355da384",
+      "merged_at": "2026-10-14T02:57:41Z",
+      "number": 548,
+      "title": "feat: a multi-generator regularized layer, its frontier record, and the first admission batch (think-k35c)"
+    },
+    {
+      "created_at": "2026-10-12T11:29:16Z",
+      "head_sha": "baa12118e2cc640bf0c93871ee4c3e29311af70c",
+      "html_url": "https://github.com/jlevy/squares/pull/549",
+      "merge_commit_sha": "aeef99ef0ef27ace054434094118a6ac355da384",
+      "merged_at": "2026-10-14T02:57:43Z",
+      "number": 549,
+      "title": "register: exact regularized sides at 59 counts as T-155, and draw the 16 counts they admit with 4 grid-slack replacements"
+    },
+    {
+      "created_at": "2026-10-12T18:35:59Z",
+      "head_sha": "755a1049fb7b3de87504414be371872af2791598",
+      "html_url": "https://github.com/jlevy/squares/pull/559",
+      "merge_commit_sha": "aeef99ef0ef27ace054434094118a6ac355da384",
+      "merged_at": "2026-10-14T02:57:44Z",
+      "number": 559,
+      "title": "atlas: draw the 42 counts #518 re-housed from regularized views made on their new witnesses"
+    },
+    {
+      "created_at": "2026-10-13T08:03:39Z",
+      "head_sha": "22c8cca0eabccd3d0da688968077dcf6673cdf52",
+      "html_url": "https://github.com/jlevy/squares/pull/580",
+      "merge_commit_sha": "aeef99ef0ef27ace054434094118a6ac355da384",
+      "merged_at": "2026-10-14T02:57:45Z",
+      "number": 580,
+      "title": "atlas: draw nineteen counts at the best known side and more regular, by the owner's rules of 13 October"
+    },
+    {
+      "created_at": "2026-10-13T17:07:35Z",
+      "head_sha": "61bf6906dcc7a0db2171b087eaeaf734c66247c8",
+      "html_url": "https://github.com/jlevy/squares/pull/585",
+      "merge_commit_sha": "9f48ccc80cee8dcf94c7cadbcaded01408f94fa2",
+      "merged_at": "2026-10-14T07:18:57Z",
+      "number": 585,
+      "title": "records: credit each regularized drawing on its case record, with the project's modifications, and never as a result"
+    },
+    {
+      "created_at": "2026-10-13T18:09:21Z",
+      "head_sha": "60b90d97b3f3f65bf2614f4d3ec4aa85f82dd003",
+      "html_url": "https://github.com/jlevy/squares/pull/587",
+      "merge_commit_sha": "9f48ccc80cee8dcf94c7cadbcaded01408f94fa2",
+      "merged_at": "2026-10-14T07:18:58Z",
+      "number": 587,
+      "title": "register: s(290) by monotonicity from T-155, with its grid-slack view as its own exact certificate (T-156)"
+    },
+    {
+      "created_at": "2026-10-14T01:20:06Z",
+      "head_sha": "7a28c8ac06e4f33c19ffcfb280152f4b9f31f866",
+      "html_url": "https://github.com/jlevy/squares/pull/591",
+      "merge_commit_sha": "9f48ccc80cee8dcf94c7cadbcaded01408f94fa2",
+      "merged_at": "2026-10-14T07:18:59Z",
+      "number": 591,
+      "title": "atlas: draw the regularized view by default wherever it improves on the packing as published, house kept as published"
+    },
+    {
+      "created_at": "2026-10-14T01:35:22Z",
+      "head_sha": "7a184720a00e0308fb6f9fc22d8342578d6296ac",
+      "html_url": "https://github.com/jlevy/squares/pull/592",
+      "merge_commit_sha": "f73e9de13d8ccc40b91d844b164f9c2ad9c032c1",
+      "merged_at": "2026-10-14T08:35:46Z",
+      "number": 592,
+      "title": "feat: formalization kind for T-154, the n = 17 correctness reviews, and documented independence of confirmations"
+    },
+    {
+      "created_at": "2026-10-13T22:54:16Z",
+      "head_sha": "2ef11f49f36cd0b14c98823f3897078ac90043b8",
+      "html_url": "https://github.com/jlevy/squares/pull/590",
+      "merge_commit_sha": "287d9cba1d1777ec5531aa8eb73817e7faf82c2a",
+      "merged_at": "2026-10-14T10:47:29Z",
+      "number": 590,
+      "title": "feat(site): publish project changelog and independent component editions"
+    }
+  ],
+  "runs": [
+    {
+      "run": {
+        "conclusion": "failure",
+        "created_at": "2026-10-14T02:57:56Z",
+        "event": "push",
+        "head_sha": "aeef99ef0ef27ace054434094118a6ac355da384",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38503790618",
+        "id": 38503790618,
+        "name": "Packing validation",
+        "run_attempt": 1,
+        "run_started_at": "2026-10-14T02:57:56Z",
+        "status": "completed",
+        "updated_at": "2026-10-14T03:23:39Z"
+      },
+      "jobs": [
+        {
+          "name": "deferred-threshold-720-rigidity",
+          "id": 115656519518,
+          "started_at": "2026-10-14T02:57:58Z",
+          "completed_at": "2026-10-14T03:08:23Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-controls-finer",
+          "id": 115656519707,
+          "started_at": "2026-10-14T02:57:58Z",
+          "completed_at": "2026-10-14T03:10:58Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "slow-lane",
+          "id": 115656519709,
+          "started_at": "2026-10-14T02:57:58Z",
+          "completed_at": "2026-10-14T03:22:54Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-1440",
+          "id": 115656519786,
+          "started_at": "2026-10-14T02:57:58Z",
+          "completed_at": "2026-10-14T03:06:15Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-1",
+          "id": 115656519793,
+          "started_at": "2026-10-14T02:57:59Z",
+          "completed_at": "2026-10-14T03:11:17Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "regularized-views",
+          "id": 115656519799,
+          "started_at": "2026-10-14T02:57:58Z",
+          "completed_at": "2026-10-14T03:09:47Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-atlas-grid",
+          "id": 115656519805,
+          "started_at": "2026-10-14T02:57:59Z",
+          "completed_at": "2026-10-14T03:08:03Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "validate",
+          "id": 115656519826,
+          "started_at": "2026-10-14T02:57:59Z",
+          "completed_at": "2026-10-14T03:01:14Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-3",
+          "id": 115656519838,
+          "started_at": "2026-10-14T02:57:59Z",
+          "completed_at": "2026-10-14T03:16:31Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "screen",
+          "id": 115656519867,
+          "started_at": "2026-10-14T02:57:59Z",
+          "completed_at": "2026-10-14T03:07:59Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "macos-portability",
+          "id": 115656519898,
+          "started_at": "2026-10-14T02:58:02Z",
+          "completed_at": "2026-10-14T02:59:15Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-2",
+          "id": 115656520054,
+          "started_at": "2026-10-14T02:57:59Z",
+          "completed_at": "2026-10-14T03:08:14Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite-a",
+          "id": 115656520573,
+          "started_at": "2026-10-14T02:57:57Z",
+          "completed_at": "2026-10-14T02:57:57Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "suite-b",
+          "id": 115656520839,
+          "started_at": "2026-10-14T02:57:57Z",
+          "completed_at": "2026-10-14T02:57:57Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "geometry",
+          "id": 115656520869,
+          "started_at": "2026-10-14T02:57:57Z",
+          "completed_at": "2026-10-14T02:57:57Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "typecheck",
+          "id": 115656520914,
+          "started_at": "2026-10-14T02:57:57Z",
+          "completed_at": "2026-10-14T02:57:57Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "measure-verifier",
+          "id": 115656520997,
+          "started_at": "2026-10-14T02:57:57Z",
+          "completed_at": "2026-10-14T02:57:57Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "suite-c",
+          "id": 115656521062,
+          "started_at": "2026-10-14T02:57:57Z",
+          "completed_at": "2026-10-14T02:57:57Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "sweeps",
+          "id": 115656521208,
+          "started_at": "2026-10-14T02:57:57Z",
+          "completed_at": "2026-10-14T02:57:57Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "frontend",
+          "id": 115656521239,
+          "started_at": "2026-10-14T02:57:57Z",
+          "completed_at": "2026-10-14T02:57:57Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "suite-d",
+          "id": 115656521650,
+          "started_at": "2026-10-14T02:57:57Z",
+          "completed_at": "2026-10-14T02:57:57Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "packing-required",
+          "id": 115657422541,
+          "started_at": "2026-10-14T03:01:15Z",
+          "completed_at": "2026-10-14T03:01:14Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "post-merge-required",
+          "id": 115663384992,
+          "started_at": "2026-10-14T03:22:57Z",
+          "completed_at": "2026-10-14T03:23:38Z",
+          "conclusion": "failure",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "run": {
+        "conclusion": "success",
+        "created_at": "2026-10-14T06:15:46Z",
+        "event": "workflow_dispatch",
+        "head_sha": "aeef99ef0ef27ace054434094118a6ac355da384",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38521183965",
+        "id": 38521183965,
+        "name": "Deferred checkpoint",
+        "run_attempt": 1,
+        "run_started_at": "2026-10-14T06:15:46Z",
+        "status": "completed",
+        "updated_at": "2026-10-14T06:43:15Z"
+      },
+      "jobs": [
+        {
+          "name": "resolve-tree",
+          "id": 115710992089,
+          "started_at": "2026-10-14T06:16:43Z",
+          "completed_at": "2026-10-14T06:17:09Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-1440",
+          "id": 115711407858,
+          "started_at": "2026-10-14T06:19:09Z",
+          "completed_at": "2026-10-14T06:31:56Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-atlas-grid",
+          "id": 115711407873,
+          "started_at": "2026-10-14T06:17:32Z",
+          "completed_at": "2026-10-14T06:25:41Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "regularized-views",
+          "id": 115711407885,
+          "started_at": "2026-10-14T06:19:43Z",
+          "completed_at": "2026-10-14T06:31:10Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-slow-lane",
+          "id": 115711407890,
+          "started_at": "2026-10-14T06:17:46Z",
+          "completed_at": "2026-10-14T06:42:22Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-3",
+          "id": 115711407901,
+          "started_at": "2026-10-14T06:20:14Z",
+          "completed_at": "2026-10-14T06:42:02Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-720-rigidity",
+          "id": 115711407916,
+          "started_at": "2026-10-14T06:18:11Z",
+          "completed_at": "2026-10-14T06:29:12Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-1",
+          "id": 115711407927,
+          "started_at": "2026-10-14T06:19:38Z",
+          "completed_at": "2026-10-14T06:36:06Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-controls-finer",
+          "id": 115711407929,
+          "started_at": "2026-10-14T06:19:53Z",
+          "completed_at": "2026-10-14T06:33:16Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-2",
+          "id": 115711407948,
+          "started_at": "2026-10-14T06:20:47Z",
+          "completed_at": "2026-10-14T06:36:59Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "screen",
+          "id": 115711407977,
+          "started_at": "2026-10-14T06:19:08Z",
+          "completed_at": "2026-10-14T06:29:31Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deep-gate-required",
+          "id": 115719265674,
+          "started_at": "2026-10-14T06:42:25Z",
+          "completed_at": "2026-10-14T06:43:14Z",
+          "conclusion": "success",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "run": {
+        "conclusion": "success",
+        "created_at": "2026-10-14T10:14:04Z",
+        "event": "workflow_dispatch",
+        "head_sha": "2ef11f49f36cd0b14c98823f3897078ac90043b8",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38548121070",
+        "id": 38548121070,
+        "name": "Deferred checkpoint",
+        "run_attempt": 1,
+        "run_started_at": "2026-10-14T10:14:04Z",
+        "status": "completed",
+        "updated_at": "2026-10-14T10:41:59Z"
+      },
+      "jobs": [
+        {
+          "name": "resolve-tree",
+          "id": 115799624956,
+          "started_at": "2026-10-14T10:15:19Z",
+          "completed_at": "2026-10-14T10:15:45Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-2",
+          "id": 115799804517,
+          "started_at": "2026-10-14T10:16:01Z",
+          "completed_at": "2026-10-14T10:32:14Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-controls-finer",
+          "id": 115799804532,
+          "started_at": "2026-10-14T10:16:24Z",
+          "completed_at": "2026-10-14T10:24:55Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-720-rigidity",
+          "id": 115799804558,
+          "started_at": "2026-10-14T10:16:14Z",
+          "completed_at": "2026-10-14T10:24:42Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-atlas-grid",
+          "id": 115799804597,
+          "started_at": "2026-10-14T10:16:39Z",
+          "completed_at": "2026-10-14T10:26:59Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "regularized-views",
+          "id": 115799804602,
+          "started_at": "2026-10-14T10:16:11Z",
+          "completed_at": "2026-10-14T10:27:38Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "screen",
+          "id": 115799804621,
+          "started_at": "2026-10-14T10:16:08Z",
+          "completed_at": "2026-10-14T10:21:58Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-1",
+          "id": 115799804625,
+          "started_at": "2026-10-14T10:16:35Z",
+          "completed_at": "2026-10-14T10:33:00Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-slow-lane",
+          "id": 115799804635,
+          "started_at": "2026-10-14T10:16:29Z",
+          "completed_at": "2026-10-14T10:41:21Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-3",
+          "id": 115799804636,
+          "started_at": "2026-10-14T10:16:29Z",
+          "completed_at": "2026-10-14T10:34:23Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-1440",
+          "id": 115799804690,
+          "started_at": "2026-10-14T10:16:40Z",
+          "completed_at": "2026-10-14T10:29:43Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deep-gate-required",
+          "id": 115809674129,
+          "started_at": "2026-10-14T10:41:23Z",
+          "completed_at": "2026-10-14T10:41:58Z",
+          "conclusion": "success",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "run": {
+        "conclusion": "failure",
+        "created_at": "2026-10-14T11:18:06Z",
+        "event": "workflow_dispatch",
+        "head_sha": "472b72da75f0b1e9aa7ec6c84a4762cb23cddafa",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38555598547",
+        "id": 38555598547,
+        "name": "Packing validation",
+        "run_attempt": 1,
+        "run_started_at": "2026-10-14T11:18:06Z",
+        "status": "completed",
+        "updated_at": "2026-10-14T11:52:32Z"
+      },
+      "jobs": [
+        {
+          "name": "deferred-atlas-grid",
+          "id": 115823828642,
+          "started_at": "2026-10-14T11:18:09Z",
+          "completed_at": "2026-10-14T11:24:32Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "validate",
+          "id": 115823828823,
+          "started_at": "2026-10-14T11:18:09Z",
+          "completed_at": "2026-10-14T11:51:53Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-1440",
+          "id": 115823828892,
+          "started_at": "2026-10-14T11:18:10Z",
+          "completed_at": "2026-10-14T11:31:29Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-720-rigidity",
+          "id": 115823828978,
+          "started_at": "2026-10-14T11:18:10Z",
+          "completed_at": "2026-10-14T11:29:01Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-controls-finer",
+          "id": 115823829061,
+          "started_at": "2026-10-14T11:18:09Z",
+          "completed_at": "2026-10-14T11:31:36Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "slow-lane",
+          "id": 115823829148,
+          "started_at": "2026-10-14T11:18:10Z",
+          "completed_at": "2026-10-14T11:43:00Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-3",
+          "id": 115823829152,
+          "started_at": "2026-10-14T11:18:10Z",
+          "completed_at": "2026-10-14T11:35:52Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-2",
+          "id": 115823829173,
+          "started_at": "2026-10-14T11:18:10Z",
+          "completed_at": "2026-10-14T11:31:33Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-1",
+          "id": 115823829232,
+          "started_at": "2026-10-14T11:18:09Z",
+          "completed_at": "2026-10-14T11:31:42Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "macos-portability",
+          "id": 115823829241,
+          "started_at": "2026-10-14T11:18:15Z",
+          "completed_at": "2026-10-14T11:20:55Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "screen",
+          "id": 115823829253,
+          "started_at": "2026-10-14T11:18:10Z",
+          "completed_at": "2026-10-14T11:28:32Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "regularized-views",
+          "id": 115823829393,
+          "started_at": "2026-10-14T11:18:10Z",
+          "completed_at": "2026-10-14T11:27:25Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite-c",
+          "id": 115823830361,
+          "started_at": "2026-10-14T11:18:08Z",
+          "completed_at": "2026-10-14T11:18:07Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "typecheck",
+          "id": 115823830572,
+          "started_at": "2026-10-14T11:18:08Z",
+          "completed_at": "2026-10-14T11:18:07Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "sweeps",
+          "id": 115823830603,
+          "started_at": "2026-10-14T11:18:08Z",
+          "completed_at": "2026-10-14T11:18:07Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "geometry",
+          "id": 115823830686,
+          "started_at": "2026-10-14T11:18:08Z",
+          "completed_at": "2026-10-14T11:18:07Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "measure-verifier",
+          "id": 115823830949,
+          "started_at": "2026-10-14T11:18:08Z",
+          "completed_at": "2026-10-14T11:18:07Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "suite-a",
+          "id": 115823830991,
+          "started_at": "2026-10-14T11:18:08Z",
+          "completed_at": "2026-10-14T11:18:07Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "suite-d",
+          "id": 115823831032,
+          "started_at": "2026-10-14T11:18:08Z",
+          "completed_at": "2026-10-14T11:18:07Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "suite-b",
+          "id": 115823831085,
+          "started_at": "2026-10-14T11:18:08Z",
+          "completed_at": "2026-10-14T11:18:07Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "frontend",
+          "id": 115823831171,
+          "started_at": "2026-10-14T11:18:08Z",
+          "completed_at": "2026-10-14T11:18:07Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "post-merge-required",
+          "id": 115837068317,
+          "started_at": "2026-10-14T11:51:55Z",
+          "completed_at": "2026-10-14T11:52:31Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "packing-required",
+          "id": 115837070510,
+          "started_at": "2026-10-14T11:51:53Z",
+          "completed_at": "2026-10-14T11:51:53Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "run": {
+        "conclusion": "failure",
+        "created_at": "2026-10-14T12:38:31Z",
+        "event": "workflow_dispatch",
+        "head_sha": "e709021197c7cb63702e44ef2d21a64b632a5e15",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38565361504",
+        "id": 38565361504,
+        "name": "Packing validation",
+        "run_attempt": 1,
+        "run_started_at": "2026-10-14T12:38:31Z",
+        "status": "completed",
+        "updated_at": "2026-10-14T13:29:22Z"
+      },
+      "jobs": [
+        {
+          "name": "deferred-controls-finer",
+          "id": 115856548649,
+          "started_at": "2026-10-14T12:38:35Z",
+          "completed_at": "2026-10-14T12:52:37Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-3",
+          "id": 115856548813,
+          "started_at": "2026-10-14T12:38:34Z",
+          "completed_at": "2026-10-14T13:00:05Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-1440",
+          "id": 115856548814,
+          "started_at": "2026-10-14T12:38:35Z",
+          "completed_at": "2026-10-14T12:50:57Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-atlas-grid",
+          "id": 115856548838,
+          "started_at": "2026-10-14T12:38:34Z",
+          "completed_at": "2026-10-14T12:46:49Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "validate",
+          "id": 115856549081,
+          "started_at": "2026-10-14T12:38:35Z",
+          "completed_at": "2026-10-14T13:28:13Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-720-rigidity",
+          "id": 115856549094,
+          "started_at": "2026-10-14T12:38:35Z",
+          "completed_at": "2026-10-14T12:49:12Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-1",
+          "id": 115856549104,
+          "started_at": "2026-10-14T12:38:35Z",
+          "completed_at": "2026-10-14T12:55:36Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "regularized-views",
+          "id": 115856549170,
+          "started_at": "2026-10-14T12:38:34Z",
+          "completed_at": "2026-10-14T12:49:35Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "screen",
+          "id": 115856549192,
+          "started_at": "2026-10-14T12:38:35Z",
+          "completed_at": "2026-10-14T12:45:06Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "macos-portability",
+          "id": 115856549282,
+          "started_at": "2026-10-14T12:38:41Z",
+          "completed_at": "2026-10-14T12:41:34Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-2",
+          "id": 115856549362,
+          "started_at": "2026-10-14T12:38:35Z",
+          "completed_at": "2026-10-14T12:55:34Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "slow-lane",
+          "id": 115856549541,
+          "started_at": "2026-10-14T12:38:35Z",
+          "completed_at": "2026-10-14T13:03:48Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite-d",
+          "id": 115856550535,
+          "started_at": "2026-10-14T12:38:33Z",
+          "completed_at": "2026-10-14T12:38:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "typecheck",
+          "id": 115856550784,
+          "started_at": "2026-10-14T12:38:33Z",
+          "completed_at": "2026-10-14T12:38:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "suite-a",
+          "id": 115856550993,
+          "started_at": "2026-10-14T12:38:33Z",
+          "completed_at": "2026-10-14T12:38:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "measure-verifier",
+          "id": 115856551048,
+          "started_at": "2026-10-14T12:38:33Z",
+          "completed_at": "2026-10-14T12:38:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "suite-c",
+          "id": 115856551078,
+          "started_at": "2026-10-14T12:38:33Z",
+          "completed_at": "2026-10-14T12:38:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "frontend",
+          "id": 115856551092,
+          "started_at": "2026-10-14T12:38:33Z",
+          "completed_at": "2026-10-14T12:38:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "geometry",
+          "id": 115856551375,
+          "started_at": "2026-10-14T12:38:33Z",
+          "completed_at": "2026-10-14T12:38:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "suite-b",
+          "id": 115856551484,
+          "started_at": "2026-10-14T12:38:33Z",
+          "completed_at": "2026-10-14T12:38:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "sweeps",
+          "id": 115856551618,
+          "started_at": "2026-10-14T12:38:33Z",
+          "completed_at": "2026-10-14T12:38:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "post-merge-required",
+          "id": 115879466812,
+          "started_at": "2026-10-14T13:28:17Z",
+          "completed_at": "2026-10-14T13:29:21Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "packing-required",
+          "id": 115879468523,
+          "started_at": "2026-10-14T13:28:14Z",
+          "completed_at": "2026-10-14T13:28:14Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "run": {
+        "conclusion": "failure",
+        "created_at": "2026-10-14T14:25:34Z",
+        "event": "push",
+        "head_sha": "1c5d39f8470dc4414144a87bde513954fb73fc29",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38580395126",
+        "id": 38580395126,
+        "name": "Enforced quick checkpoint",
+        "run_attempt": 1,
+        "run_started_at": "2026-10-14T14:25:34Z",
+        "status": "completed",
+        "updated_at": "2026-10-14T14:42:21Z"
+      },
+      "jobs": [
+        {
+          "name": "negative-controls",
+          "id": 115908444111,
+          "started_at": "2026-10-14T14:25:37Z",
+          "completed_at": "2026-10-14T14:27:49Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite (a)",
+          "id": 115908444626,
+          "started_at": "2026-10-14T14:25:37Z",
+          "completed_at": "2026-10-14T14:42:14Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "suite (d)",
+          "id": 115908444638,
+          "started_at": "2026-10-14T14:25:37Z",
+          "completed_at": "2026-10-14T14:33:10Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "suite (c)",
+          "id": 115908444671,
+          "started_at": "2026-10-14T14:25:37Z",
+          "completed_at": "2026-10-14T14:33:14Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "suite (b)",
+          "id": 115908444878,
+          "started_at": "2026-10-14T14:25:37Z",
+          "completed_at": "2026-10-14T14:30:54Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "enforced-quick-required",
+          "id": 115917094235,
+          "started_at": "2026-10-14T14:42:17Z",
+          "completed_at": "2026-10-14T14:42:20Z",
+          "conclusion": "failure",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "run": {
+        "conclusion": "failure",
+        "created_at": "2026-10-14T14:43:21Z",
+        "event": "push",
+        "head_sha": "54b3b4b84e2117f58f55c3ca1e57f57164bcef80",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38583046153",
+        "id": 38583046153,
+        "name": "Enforced quick checkpoint",
+        "run_attempt": 1,
+        "run_started_at": "2026-10-14T14:43:21Z",
+        "status": "completed",
+        "updated_at": "2026-10-14T14:50:33Z"
+      },
+      "jobs": [
+        {
+          "name": "negative-controls",
+          "id": 115917671843,
+          "started_at": "2026-10-14T14:43:23Z",
+          "completed_at": "2026-10-14T14:44:46Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite (a)",
+          "id": 115917672338,
+          "started_at": "2026-10-14T14:43:24Z",
+          "completed_at": "2026-10-14T14:49:51Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "suite (b)",
+          "id": 115917672394,
+          "started_at": "2026-10-14T14:43:24Z",
+          "completed_at": "2026-10-14T14:50:24Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "suite (d)",
+          "id": 115917672619,
+          "started_at": "2026-10-14T14:43:23Z",
+          "completed_at": "2026-10-14T14:49:21Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite (c)",
+          "id": 115917672919,
+          "started_at": "2026-10-14T14:43:24Z",
+          "completed_at": "2026-10-14T14:50:15Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "enforced-quick-required",
+          "id": 115921316870,
+          "started_at": "2026-10-14T14:50:27Z",
+          "completed_at": "2026-10-14T14:50:32Z",
+          "conclusion": "failure",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "run": {
+        "conclusion": "failure",
+        "created_at": "2026-10-14T15:12:50Z",
+        "event": "push",
+        "head_sha": "fecca891ab3c190788c3c11ece78528a5477d7c6",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38587347972",
+        "id": 38587347972,
+        "name": "Enforced quick checkpoint",
+        "run_attempt": 1,
+        "run_started_at": "2026-10-14T15:12:50Z",
+        "status": "completed",
+        "updated_at": "2026-10-14T15:29:31Z"
+      },
+      "jobs": [
+        {
+          "name": "negative-controls",
+          "id": 115932752096,
+          "started_at": "2026-10-14T15:12:53Z",
+          "completed_at": "2026-10-14T15:14:43Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite (d)",
+          "id": 115932752445,
+          "started_at": "2026-10-14T15:12:54Z",
+          "completed_at": "2026-10-14T15:29:22Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "suite (a)",
+          "id": 115932752618,
+          "started_at": "2026-10-14T15:12:53Z",
+          "completed_at": "2026-10-14T15:20:46Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "suite (c)",
+          "id": 115932752678,
+          "started_at": "2026-10-14T15:12:54Z",
+          "completed_at": "2026-10-14T15:20:25Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite (b)",
+          "id": 115932752685,
+          "started_at": "2026-10-14T15:12:54Z",
+          "completed_at": "2026-10-14T15:22:00Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "enforced-quick-required",
+          "id": 115941184578,
+          "started_at": "2026-10-14T15:29:25Z",
+          "completed_at": "2026-10-14T15:29:30Z",
+          "conclusion": "failure",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "run": {
+        "conclusion": "failure",
+        "created_at": "2026-10-14T16:00:28Z",
+        "event": "push",
+        "head_sha": "58b6a8688d87661a7ebeac6ef3e5c944f09efd01",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38594336170",
+        "id": 38594336170,
+        "name": "Enforced quick checkpoint",
+        "run_attempt": 1,
+        "run_started_at": "2026-10-14T16:00:28Z",
+        "status": "completed",
+        "updated_at": "2026-10-14T16:08:46Z"
+      },
+      "jobs": [
+        {
+          "name": "negative-controls",
+          "id": 115957053816,
+          "started_at": "2026-10-14T16:00:31Z",
+          "completed_at": "2026-10-14T16:02:19Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite (c)",
+          "id": 115957054313,
+          "started_at": "2026-10-14T16:00:31Z",
+          "completed_at": "2026-10-14T16:07:21Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite (d)",
+          "id": 115957054483,
+          "started_at": "2026-10-14T16:00:31Z",
+          "completed_at": "2026-10-14T16:06:21Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite (b)",
+          "id": 115957054504,
+          "started_at": "2026-10-14T16:00:32Z",
+          "completed_at": "2026-10-14T16:08:38Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "suite (a)",
+          "id": 115957054572,
+          "started_at": "2026-10-14T16:00:32Z",
+          "completed_at": "2026-10-14T16:07:52Z",
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        {
+          "name": "enforced-quick-required",
+          "id": 115961139874,
+          "started_at": "2026-10-14T16:08:41Z",
+          "completed_at": "2026-10-14T16:08:45Z",
+          "conclusion": "failure",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "run": {
+        "conclusion": "success",
+        "created_at": "2026-10-14T16:00:32Z",
+        "event": "pull_request",
+        "head_sha": "58b6a8688d87661a7ebeac6ef3e5c944f09efd01",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38594344872",
+        "id": 38594344872,
+        "name": "Packing validation",
+        "run_attempt": 1,
+        "run_started_at": "2026-10-14T16:00:32Z",
+        "status": "completed",
+        "updated_at": "2026-10-14T16:09:12Z"
+      },
+      "jobs": [
+        {
+          "name": "validate",
+          "id": 115957079795,
+          "started_at": "2026-10-14T16:00:35Z",
+          "completed_at": "2026-10-14T16:04:50Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite-b",
+          "id": 115957079911,
+          "started_at": "2026-10-14T16:00:35Z",
+          "completed_at": "2026-10-14T16:06:44Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite-c",
+          "id": 115957080044,
+          "started_at": "2026-10-14T16:00:34Z",
+          "completed_at": "2026-10-14T16:07:54Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite-d",
+          "id": 115957080143,
+          "started_at": "2026-10-14T16:00:35Z",
+          "completed_at": "2026-10-14T16:06:32Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "typecheck",
+          "id": 115957080212,
+          "started_at": "2026-10-14T16:00:35Z",
+          "completed_at": "2026-10-14T16:02:54Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "geometry",
+          "id": 115957080309,
+          "started_at": "2026-10-14T16:00:35Z",
+          "completed_at": "2026-10-14T16:03:04Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "suite-a",
+          "id": 115957080521,
+          "started_at": "2026-10-14T16:00:35Z",
+          "completed_at": "2026-10-14T16:04:49Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "macos-portability",
+          "id": 115957080542,
+          "started_at": "2026-10-14T16:00:41Z",
+          "completed_at": "2026-10-14T16:03:24Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "sweeps",
+          "id": 115957080654,
+          "started_at": "2026-10-14T16:00:35Z",
+          "completed_at": "2026-10-14T16:03:06Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "frontend",
+          "id": 115957080740,
+          "started_at": "2026-10-14T16:00:35Z",
+          "completed_at": "2026-10-14T16:09:00Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "measure-verifier",
+          "id": 115957080741,
+          "started_at": "2026-10-14T16:00:35Z",
+          "completed_at": "2026-10-14T16:03:16Z",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-720-rigidity",
+          "id": 115957081740,
+          "started_at": "2026-10-14T16:00:33Z",
+          "completed_at": "2026-10-14T16:00:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-2",
+          "id": 115957081766,
+          "started_at": "2026-10-14T16:00:33Z",
+          "completed_at": "2026-10-14T16:00:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-atlas-grid",
+          "id": 115957081996,
+          "started_at": "2026-10-14T16:00:33Z",
+          "completed_at": "2026-10-14T16:00:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "regularized-views",
+          "id": 115957082008,
+          "started_at": "2026-10-14T16:00:33Z",
+          "completed_at": "2026-10-14T16:00:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "slow-lane",
+          "id": 115957082022,
+          "started_at": "2026-10-14T16:00:33Z",
+          "completed_at": "2026-10-14T16:00:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-3",
+          "id": 115957082172,
+          "started_at": "2026-10-14T16:00:33Z",
+          "completed_at": "2026-10-14T16:00:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "exhaustive-1",
+          "id": 115957082238,
+          "started_at": "2026-10-14T16:00:33Z",
+          "completed_at": "2026-10-14T16:00:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-controls-finer",
+          "id": 115957082283,
+          "started_at": "2026-10-14T16:00:33Z",
+          "completed_at": "2026-10-14T16:00:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "deferred-threshold-1440",
+          "id": 115957085081,
+          "started_at": "2026-10-14T16:00:33Z",
+          "completed_at": "2026-10-14T16:00:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "screen",
+          "id": 115957142725,
+          "started_at": "2026-10-14T16:00:40Z",
+          "completed_at": "2026-10-14T16:00:32Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "post-merge-required",
+          "id": 115959243937,
+          "started_at": "2026-10-14T16:04:50Z",
+          "completed_at": "2026-10-14T16:04:50Z",
+          "conclusion": "skipped",
+          "status": "completed"
+        },
+        {
+          "name": "packing-required",
+          "id": 115961322577,
+          "started_at": "2026-10-14T16:09:02Z",
+          "completed_at": "2026-10-14T16:09:11Z",
+          "conclusion": "success",
+          "status": "completed"
+        }
+      ]
+    }
+  ],
+  "frontend": {
+    "artifact_id": 11909916662,
+    "run_id": 38594344872,
+    "members": [
+      {
+        "available_cpus": 4,
+        "commit": "3a53cb88783124cfb189f52b12b354366ed8d11e",
+        "dirty_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "environment": {
+          "GITHUB_JOB": "frontend",
+          "GITHUB_RUN_ATTEMPT": "1",
+          "GITHUB_RUN_ID": "38594344872",
+          "GITHUB_SHA": "3a53cb88783124cfb189f52b12b354366ed8d11e",
+          "PACK_JOBS": "1"
+        },
+        "git_status": "",
+        "inner_jobs": 1,
+        "interpreter": "/home/runner/work/squares/squares/packing/.venv/bin/python",
+        "jobs": 2,
+        "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+        "python": "3.14.7 (main, Aug 25 2026, 14:02:56) [Clang 22.1.3 ]",
+        "run_id": "912ae034fd084698908fceafee4f4dcd",
+        "selected_steps": [
+          "browser floor (biome, eslint, tsc, node:test)",
+          "browser floor liveness tests",
+          "workbench browser behavior in Chromium",
+          "site table layout in Chromium"
+        ],
+        "started_at": "2026-10-14T16:01:49.324938+00:00",
+        "untracked_hashes": {},
+        "member": "run-5b8bdcf26e424b339ae3ca4d04b6e800.json"
+      },
+      {
+        "name": "browser floor liveness tests",
+        "reason": "",
+        "run_id": "912ae034fd084698908fceafee4f4dcd",
+        "seconds": 42.759186818000046,
+        "status": "passed",
+        "member": "step-6a1d308e1e804b179b07e05e10af18b2.json",
+        "phase_cost_examples": [
+          [
+            8.17,
+            "call",
+            "tests/test_browser_floor_contract.py::test_every_first_party_script_is_in_a_type_program"
+          ],
+          [
+            4.92,
+            "call",
+            "tests/test_browser_floor_contract.py::test_the_checked_javascript_overlay_rejects_a_floating_promise"
+          ],
+          [
+            4.73,
+            "call",
+            "tests/test_browser_floor_contract.py::test_every_tracked_script_and_stylesheet_is_in_biome_scope"
+          ],
+          [
+            3.35,
+            "call",
+            "tests/test_browser_floor_contract.py::test_the_probe_loader_refuses_an_undeclared_member"
+          ],
+          [
+            2.56,
+            "call",
+            "tests/test_browser_floor_contract.py::test_the_type_gate_actually_rejects_a_type_error"
+          ],
+          [
+            2.28,
+            "call",
+            "tests/test_browser_floor_contract.py::test_eslint_holds_every_owned_script_to_one_configuration"
+          ],
+          [
+            2,
+            "call",
+            "tests/test_browser_floor_contract.py::test_a_reintroduced_eslint_block_is_refused[own-program]"
+          ],
+          [
+            1.92,
+            "call",
+            "tests/test_browser_floor_contract.py::test_a_reintroduced_eslint_block_is_refused[ignored]"
+          ]
+        ],
+        "summary_lines": [
+          "56 passed in 41.99s"
+        ]
+      },
+      {
+        "name": "workbench browser behavior in Chromium",
+        "reason": "",
+        "run_id": "912ae034fd084698908fceafee4f4dcd",
+        "seconds": 182.493036815,
+        "status": "passed",
+        "member": "step-783b0b321b8a44c6a713e6f1fe2b6fc0.json",
+        "phase_cost_examples": [],
+        "summary_lines": []
+      },
+      {
+        "name": "site table layout in Chromium",
+        "reason": "",
+        "run_id": "912ae034fd084698908fceafee4f4dcd",
+        "seconds": 425.055180501,
+        "status": "passed",
+        "member": "step-b3426d6c0e284bb9aa0535a3b3d40dd1.json",
+        "phase_cost_examples": [
+          [
+            109.25,
+            "setup",
+            "tests/test_site_homepage.py::test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparation[1280]"
+          ],
+          [
+            99.63,
+            "setup",
+            "tests/test_site_atlas_views.py::test_an_explicit_small_address_opens_triangle_under_its_two_tabs"
+          ],
+          [
+            51.08,
+            "setup",
+            "tests/test_site_case_records.py::test_a_frontier_row_opens_its_record_and_steps_to_the_next"
+          ],
+          [
+            41.93,
+            "setup",
+            "tests/test_site_result_columns.py::test_a_table_of_results_fits_its_track_at_1280[index.html]"
+          ],
+          [
+            29.17,
+            "call",
+            "tests/test_site_atlas_views.py::test_default_triangle_explicit_grid_and_complete_rows_keep_all_case_nodes[1280]"
+          ],
+          [
+            27.78,
+            "call",
+            "tests/test_site_atlas_views.py::test_default_triangle_explicit_grid_and_complete_rows_keep_all_case_nodes[390]"
+          ],
+          [
+            27.5,
+            "setup",
+            "tests/test_site_atlas_views.py::test_viewport_size_prepaints_without_motion_and_keeps_explicit_choices"
+          ],
+          [
+            24.01,
+            "call",
+            "tests/test_site_atlas_views.py::test_viewport_size_prepaints_without_motion_and_keeps_explicit_choices"
+          ]
+        ],
+        "summary_lines": [
+          "0.00s teardown tests/test_site_rendering.py::test_font_diagnostic_retains_incomplete_native_observations[failed-font]",
+          "0.00s teardown tests/test_site_result_popover.py::test_failed_fetch_keeps_a_meaningful_fallback_and_can_retry",
+          "418 passed, 6 skipped in 393.95s (0:06:33)",
+          "4 passed in 29.55s"
+        ]
+      },
+      {
+        "name": "browser floor (biome, eslint, tsc, node:test)",
+        "reason": "",
+        "run_id": "912ae034fd084698908fceafee4f4dcd",
+        "seconds": 112.75896114,
+        "status": "passed",
+        "member": "step-ff538f91bb80419580430d6ce2c86cd3.json",
+        "phase_cost_examples": [],
+        "summary_lines": [
+          "\u2139 skipped 0",
+          "\u2714 a time token is read in milliseconds or seconds, and anything else is no move (0.283118ms)",
+          "\u2714 a failed metric stylesheet preserves the row fallback and can be retried (5.974172ms)",
+          "\u2139 skipped 0"
+        ]
+      }
+    ]
+  },
+  "latest": {
+    "schema": "ci-iteration-retrospective-supplement/v1",
+    "scope": "Read-only GitHub API metadata for the completed latest strict run; detailed CALL/wall observations in the accompanying draft are attributed to the coordinator's log audit.",
+    "run": {
+      "id": 38597483408,
+      "name": "Enforced quick checkpoint",
+      "node_id": "WFR_kwLOTXp6xc8AAAAI_JbbkA",
+      "head_branch": "codex/main-test-timing",
+      "head_sha": "08d23c06b1819bd42fcdf3b1199455d57b416967",
+      "path": ".github/workflows/enforced-quick.yml",
+      "display_title": "fix(ci): preserve pool parity coverage and balance current measured s\u2026",
+      "run_number": 5,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflow_id": 384420499,
+      "check_suite_id": 104590845996,
+      "check_suite_node_id": "CS_kwDOTXp6xc8AAAAYWhmoLA",
+      "url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408",
+      "html_url": "https://github.com/jlevy/squares/actions/runs/38597483408",
+      "pull_requests": [
+        {
+          "url": "https://api.github.com/repos/jlevy/squares/pulls/599",
+          "id": 4856517115,
+          "number": 599,
+          "head": {
+            "ref": "codex/main-test-timing",
+            "sha": "08d23c06b1819bd42fcdf3b1199455d57b416967",
+            "repo": {
+              "id": 1299872453,
+              "url": "https://api.github.com/repos/jlevy/squares",
+              "name": "squares"
+            }
+          },
+          "base": {
+            "ref": "main",
+            "sha": "37e6757ed4c51a1d93f2f999814c2a5efbe2a223",
+            "repo": {
+              "id": 1299872453,
+              "url": "https://api.github.com/repos/jlevy/squares",
+              "name": "squares"
+            }
+          }
+        }
+      ],
+      "created_at": "2026-10-14T16:22:08Z",
+      "updated_at": "2026-10-14T16:30:56Z",
+      "actor": {
+        "login": "jlevy",
+        "id": 2058167,
+        "node_id": "MDQ6VXNlcjIwNTgxNjc=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/2058167?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/jlevy",
+        "html_url": "https://github.com/jlevy",
+        "followers_url": "https://api.github.com/users/jlevy/followers",
+        "following_url": "https://api.github.com/users/jlevy/following{/other_user}",
+        "gists_url": "https://api.github.com/users/jlevy/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/jlevy/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/jlevy/subscriptions",
+        "organizations_url": "https://api.github.com/users/jlevy/orgs",
+        "repos_url": "https://api.github.com/users/jlevy/repos",
+        "events_url": "https://api.github.com/users/jlevy/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/jlevy/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "run_attempt": 1,
+      "referenced_workflows": [],
+      "run_started_at": "2026-10-14T16:22:08Z",
+      "triggering_actor": {
+        "login": "jlevy",
+        "id": 2058167,
+        "node_id": "MDQ6VXNlcjIwNTgxNjc=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/2058167?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/jlevy",
+        "html_url": "https://github.com/jlevy",
+        "followers_url": "https://api.github.com/users/jlevy/followers",
+        "following_url": "https://api.github.com/users/jlevy/following{/other_user}",
+        "gists_url": "https://api.github.com/users/jlevy/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/jlevy/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/jlevy/subscriptions",
+        "organizations_url": "https://api.github.com/users/jlevy/orgs",
+        "repos_url": "https://api.github.com/users/jlevy/repos",
+        "events_url": "https://api.github.com/users/jlevy/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/jlevy/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "jobs_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408/jobs",
+      "logs_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408/logs",
+      "check_suite_url": "https://api.github.com/repos/jlevy/squares/check-suites/104590845996",
+      "artifacts_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408/artifacts",
+      "cancel_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408/cancel",
+      "rerun_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408/rerun",
+      "previous_attempt_url": null,
+      "workflow_url": "https://api.github.com/repos/jlevy/squares/actions/workflows/384420499",
+      "head_commit": {
+        "id": "08d23c06b1819bd42fcdf3b1199455d57b416967",
+        "tree_id": "51400755df5bd10741878237fff2c664eeaea3b6",
+        "message": "fix(ci): preserve pool parity coverage and balance current measured shards",
+        "timestamp": "2026-10-14T16:21:20Z",
+        "author": {
+          "name": "Joshua Levy",
+          "email": "joshua@cal.berkeley.edu"
+        },
+        "committer": {
+          "name": "Joshua Levy",
+          "email": "joshua@cal.berkeley.edu"
+        }
+      },
+      "repository": {
+        "id": 1299872453,
+        "node_id": "R_kgDOTXp6xQ",
+        "name": "squares",
+        "full_name": "jlevy/squares",
+        "private": false,
+        "owner": {
+          "login": "jlevy",
+          "id": 2058167,
+          "node_id": "MDQ6VXNlcjIwNTgxNjc=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/2058167?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/jlevy",
+          "html_url": "https://github.com/jlevy",
+          "followers_url": "https://api.github.com/users/jlevy/followers",
+          "following_url": "https://api.github.com/users/jlevy/following{/other_user}",
+          "gists_url": "https://api.github.com/users/jlevy/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/jlevy/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/jlevy/subscriptions",
+          "organizations_url": "https://api.github.com/users/jlevy/orgs",
+          "repos_url": "https://api.github.com/users/jlevy/repos",
+          "events_url": "https://api.github.com/users/jlevy/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/jlevy/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/jlevy/squares",
+        "description": "New results and AI-powered research on the square packing problem",
+        "fork": false,
+        "url": "https://api.github.com/repos/jlevy/squares",
+        "forks_url": "https://api.github.com/repos/jlevy/squares/forks",
+        "keys_url": "https://api.github.com/repos/jlevy/squares/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/jlevy/squares/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/jlevy/squares/teams",
+        "hooks_url": "https://api.github.com/repos/jlevy/squares/hooks",
+        "issue_events_url": "https://api.github.com/repos/jlevy/squares/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/jlevy/squares/events",
+        "assignees_url": "https://api.github.com/repos/jlevy/squares/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/jlevy/squares/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/jlevy/squares/tags",
+        "blobs_url": "https://api.github.com/repos/jlevy/squares/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/jlevy/squares/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/jlevy/squares/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/jlevy/squares/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/jlevy/squares/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/jlevy/squares/languages",
+        "stargazers_url": "https://api.github.com/repos/jlevy/squares/stargazers",
+        "contributors_url": "https://api.github.com/repos/jlevy/squares/contributors",
+        "subscribers_url": "https://api.github.com/repos/jlevy/squares/subscribers",
+        "subscription_url": "https://api.github.com/repos/jlevy/squares/subscription",
+        "commits_url": "https://api.github.com/repos/jlevy/squares/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/jlevy/squares/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/jlevy/squares/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/jlevy/squares/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/jlevy/squares/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/jlevy/squares/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/jlevy/squares/merges",
+        "archive_url": "https://api.github.com/repos/jlevy/squares/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/jlevy/squares/downloads",
+        "issues_url": "https://api.github.com/repos/jlevy/squares/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/jlevy/squares/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/jlevy/squares/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/jlevy/squares/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/jlevy/squares/labels{/name}",
+        "releases_url": "https://api.github.com/repos/jlevy/squares/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/jlevy/squares/deployments"
+      },
+      "head_repository": {
+        "id": 1299872453,
+        "node_id": "R_kgDOTXp6xQ",
+        "name": "squares",
+        "full_name": "jlevy/squares",
+        "private": false,
+        "owner": {
+          "login": "jlevy",
+          "id": 2058167,
+          "node_id": "MDQ6VXNlcjIwNTgxNjc=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/2058167?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/jlevy",
+          "html_url": "https://github.com/jlevy",
+          "followers_url": "https://api.github.com/users/jlevy/followers",
+          "following_url": "https://api.github.com/users/jlevy/following{/other_user}",
+          "gists_url": "https://api.github.com/users/jlevy/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/jlevy/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/jlevy/subscriptions",
+          "organizations_url": "https://api.github.com/users/jlevy/orgs",
+          "repos_url": "https://api.github.com/users/jlevy/repos",
+          "events_url": "https://api.github.com/users/jlevy/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/jlevy/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/jlevy/squares",
+        "description": "New results and AI-powered research on the square packing problem",
+        "fork": false,
+        "url": "https://api.github.com/repos/jlevy/squares",
+        "forks_url": "https://api.github.com/repos/jlevy/squares/forks",
+        "keys_url": "https://api.github.com/repos/jlevy/squares/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/jlevy/squares/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/jlevy/squares/teams",
+        "hooks_url": "https://api.github.com/repos/jlevy/squares/hooks",
+        "issue_events_url": "https://api.github.com/repos/jlevy/squares/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/jlevy/squares/events",
+        "assignees_url": "https://api.github.com/repos/jlevy/squares/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/jlevy/squares/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/jlevy/squares/tags",
+        "blobs_url": "https://api.github.com/repos/jlevy/squares/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/jlevy/squares/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/jlevy/squares/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/jlevy/squares/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/jlevy/squares/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/jlevy/squares/languages",
+        "stargazers_url": "https://api.github.com/repos/jlevy/squares/stargazers",
+        "contributors_url": "https://api.github.com/repos/jlevy/squares/contributors",
+        "subscribers_url": "https://api.github.com/repos/jlevy/squares/subscribers",
+        "subscription_url": "https://api.github.com/repos/jlevy/squares/subscription",
+        "commits_url": "https://api.github.com/repos/jlevy/squares/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/jlevy/squares/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/jlevy/squares/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/jlevy/squares/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/jlevy/squares/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/jlevy/squares/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/jlevy/squares/merges",
+        "archive_url": "https://api.github.com/repos/jlevy/squares/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/jlevy/squares/downloads",
+        "issues_url": "https://api.github.com/repos/jlevy/squares/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/jlevy/squares/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/jlevy/squares/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/jlevy/squares/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/jlevy/squares/labels{/name}",
+        "releases_url": "https://api.github.com/repos/jlevy/squares/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/jlevy/squares/deployments"
+      }
+    },
+    "total_count": 6,
+    "jobs": [
+      {
+        "id": 115967824262,
+        "run_id": 38597483408,
+        "workflow_name": "Enforced quick checkpoint",
+        "head_branch": "codex/main-test-timing",
+        "run_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOTXp6xc8AAAAbADiRhg",
+        "head_sha": "08d23c06b1819bd42fcdf3b1199455d57b416967",
+        "url": "https://api.github.com/repos/jlevy/squares/actions/jobs/115967824262",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38597483408/job/115967824262",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-14T16:22:09Z",
+        "started_at": "2026-10-14T16:22:11Z",
+        "completed_at": "2026-10-14T16:23:51Z",
+        "name": "negative-controls",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-14T16:22:12Z",
+            "completed_at": "2026-10-14T16:22:14Z"
+          },
+          {
+            "name": "Check out the exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-14T16:22:14Z",
+            "completed_at": "2026-10-14T16:22:53Z"
+          },
+          {
+            "name": "Prepare private mutation snapshots and source identity",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-14T16:22:53Z",
+            "completed_at": "2026-10-14T16:22:53Z"
+          },
+          {
+            "name": "Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-14T16:22:53Z",
+            "completed_at": "2026-10-14T16:22:58Z"
+          },
+          {
+            "name": "Synchronize the locked development environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-14T16:22:58Z",
+            "completed_at": "2026-10-14T16:23:02Z"
+          },
+          {
+            "name": "Run the exact affected schema mutation inventory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-14T16:23:02Z",
+            "completed_at": "2026-10-14T16:23:46Z"
+          },
+          {
+            "name": "Preserve selected controls, individual verdicts and source identity",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-14T16:23:46Z",
+            "completed_at": "2026-10-14T16:23:47Z"
+          },
+          {
+            "name": "Post Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-14T16:23:47Z",
+            "completed_at": "2026-10-14T16:23:47Z"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-14T16:23:47Z",
+            "completed_at": "2026-10-14T16:23:47Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-14T16:23:47Z",
+            "completed_at": "2026-10-14T16:23:47Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/jlevy/squares/check-runs/115967824262",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000144768,
+        "runner_name": "GitHub Actions 1000144768",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115967824427,
+        "run_id": 38597483408,
+        "workflow_name": "Enforced quick checkpoint",
+        "head_branch": "codex/main-test-timing",
+        "run_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOTXp6xc8AAAAbADiSKw",
+        "head_sha": "08d23c06b1819bd42fcdf3b1199455d57b416967",
+        "url": "https://api.github.com/repos/jlevy/squares/actions/jobs/115967824427",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38597483408/job/115967824427",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-14T16:22:09Z",
+        "started_at": "2026-10-14T16:22:11Z",
+        "completed_at": "2026-10-14T16:28:36Z",
+        "name": "suite (d)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-14T16:22:12Z",
+            "completed_at": "2026-10-14T16:22:14Z"
+          },
+          {
+            "name": "Check out the exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-14T16:22:14Z",
+            "completed_at": "2026-10-14T16:22:48Z"
+          },
+          {
+            "name": "Prepare scratch and source identity",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-14T16:22:48Z",
+            "completed_at": "2026-10-14T16:22:48Z"
+          },
+          {
+            "name": "Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-14T16:22:48Z",
+            "completed_at": "2026-10-14T16:22:53Z"
+          },
+          {
+            "name": "Synchronize the locked development environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-14T16:22:53Z",
+            "completed_at": "2026-10-14T16:22:56Z"
+          },
+          {
+            "name": "Install Node 24",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-14T16:22:56Z",
+            "completed_at": "2026-10-14T16:23:03Z"
+          },
+          {
+            "name": "Install the pinned browser toolchain",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-14T16:23:03Z",
+            "completed_at": "2026-10-14T16:23:04Z"
+          },
+          {
+            "name": "Cache the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-14T16:23:04Z",
+            "completed_at": "2026-10-14T16:23:07Z"
+          },
+          {
+            "name": "Install the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-14T16:23:07Z",
+            "completed_at": "2026-10-14T16:23:21Z"
+          },
+          {
+            "name": "Run the canonical enforced quick shard",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-14T16:23:21Z",
+            "completed_at": "2026-10-14T16:27:44Z"
+          },
+          {
+            "name": "Require actual changed-case execution",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-14T16:27:44Z",
+            "completed_at": "2026-10-14T16:28:28Z"
+          },
+          {
+            "name": "Preserve source identity, timings, JUnit and omissions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-14T16:28:28Z",
+            "completed_at": "2026-10-14T16:28:29Z"
+          },
+          {
+            "name": "Post Cache the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21,
+            "started_at": "2026-10-14T16:28:29Z",
+            "completed_at": "2026-10-14T16:28:29Z"
+          },
+          {
+            "name": "Post Install Node 24",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22,
+            "started_at": "2026-10-14T16:28:29Z",
+            "completed_at": "2026-10-14T16:28:30Z"
+          },
+          {
+            "name": "Post Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23,
+            "started_at": "2026-10-14T16:28:30Z",
+            "completed_at": "2026-10-14T16:28:30Z"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24,
+            "started_at": "2026-10-14T16:28:30Z",
+            "completed_at": "2026-10-14T16:28:30Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-14T16:28:30Z",
+            "completed_at": "2026-10-14T16:28:30Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/jlevy/squares/check-runs/115967824427",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000144770,
+        "runner_name": "GitHub Actions 1000144770",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115967824475,
+        "run_id": 38597483408,
+        "workflow_name": "Enforced quick checkpoint",
+        "head_branch": "codex/main-test-timing",
+        "run_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOTXp6xc8AAAAbADiSWw",
+        "head_sha": "08d23c06b1819bd42fcdf3b1199455d57b416967",
+        "url": "https://api.github.com/repos/jlevy/squares/actions/jobs/115967824475",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38597483408/job/115967824475",
+        "status": "completed",
+        "conclusion": "failure",
+        "created_at": "2026-10-14T16:22:09Z",
+        "started_at": "2026-10-14T16:22:11Z",
+        "completed_at": "2026-10-14T16:30:36Z",
+        "name": "suite (c)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-14T16:22:12Z",
+            "completed_at": "2026-10-14T16:22:13Z"
+          },
+          {
+            "name": "Check out the exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-14T16:22:13Z",
+            "completed_at": "2026-10-14T16:22:52Z"
+          },
+          {
+            "name": "Prepare scratch and source identity",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-14T16:22:52Z",
+            "completed_at": "2026-10-14T16:22:52Z"
+          },
+          {
+            "name": "Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-14T16:22:52Z",
+            "completed_at": "2026-10-14T16:22:56Z"
+          },
+          {
+            "name": "Synchronize the locked development environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-14T16:22:56Z",
+            "completed_at": "2026-10-14T16:22:59Z"
+          },
+          {
+            "name": "Install Node 24",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-14T16:22:59Z",
+            "completed_at": "2026-10-14T16:23:05Z"
+          },
+          {
+            "name": "Install the pinned browser toolchain",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-14T16:23:05Z",
+            "completed_at": "2026-10-14T16:23:07Z"
+          },
+          {
+            "name": "Cache the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-14T16:23:07Z",
+            "completed_at": "2026-10-14T16:23:08Z"
+          },
+          {
+            "name": "Install the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-14T16:23:08Z",
+            "completed_at": "2026-10-14T16:23:28Z"
+          },
+          {
+            "name": "Run the canonical enforced quick shard",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 10,
+            "started_at": "2026-10-14T16:23:28Z",
+            "completed_at": "2026-10-14T16:30:31Z"
+          },
+          {
+            "name": "Require actual changed-case execution",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 11,
+            "started_at": "2026-10-14T16:30:31Z",
+            "completed_at": "2026-10-14T16:30:31Z"
+          },
+          {
+            "name": "Preserve source identity, timings, JUnit and omissions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-14T16:30:31Z",
+            "completed_at": "2026-10-14T16:30:32Z"
+          },
+          {
+            "name": "Post Cache the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 21,
+            "started_at": "2026-10-14T16:30:32Z",
+            "completed_at": "2026-10-14T16:30:32Z"
+          },
+          {
+            "name": "Post Install Node 24",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 22,
+            "started_at": "2026-10-14T16:30:32Z",
+            "completed_at": "2026-10-14T16:30:32Z"
+          },
+          {
+            "name": "Post Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 23,
+            "started_at": "2026-10-14T16:30:32Z",
+            "completed_at": "2026-10-14T16:30:32Z"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24,
+            "started_at": "2026-10-14T16:30:32Z",
+            "completed_at": "2026-10-14T16:30:32Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-14T16:30:32Z",
+            "completed_at": "2026-10-14T16:30:32Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/jlevy/squares/check-runs/115967824475",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000144772,
+        "runner_name": "GitHub Actions 1000144772",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115967824716,
+        "run_id": 38597483408,
+        "workflow_name": "Enforced quick checkpoint",
+        "head_branch": "codex/main-test-timing",
+        "run_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOTXp6xc8AAAAbADiTTA",
+        "head_sha": "08d23c06b1819bd42fcdf3b1199455d57b416967",
+        "url": "https://api.github.com/repos/jlevy/squares/actions/jobs/115967824716",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38597483408/job/115967824716",
+        "status": "completed",
+        "conclusion": "failure",
+        "created_at": "2026-10-14T16:22:09Z",
+        "started_at": "2026-10-14T16:22:11Z",
+        "completed_at": "2026-10-14T16:30:46Z",
+        "name": "suite (b)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-14T16:22:12Z",
+            "completed_at": "2026-10-14T16:22:16Z"
+          },
+          {
+            "name": "Check out the exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-14T16:22:16Z",
+            "completed_at": "2026-10-14T16:23:00Z"
+          },
+          {
+            "name": "Prepare scratch and source identity",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-14T16:23:00Z",
+            "completed_at": "2026-10-14T16:23:00Z"
+          },
+          {
+            "name": "Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-14T16:23:00Z",
+            "completed_at": "2026-10-14T16:23:05Z"
+          },
+          {
+            "name": "Synchronize the locked development environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-14T16:23:05Z",
+            "completed_at": "2026-10-14T16:23:08Z"
+          },
+          {
+            "name": "Install Node 24",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-14T16:23:08Z",
+            "completed_at": "2026-10-14T16:23:15Z"
+          },
+          {
+            "name": "Install the pinned browser toolchain",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-14T16:23:15Z",
+            "completed_at": "2026-10-14T16:23:16Z"
+          },
+          {
+            "name": "Cache the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-14T16:23:16Z",
+            "completed_at": "2026-10-14T16:23:19Z"
+          },
+          {
+            "name": "Install the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-14T16:23:19Z",
+            "completed_at": "2026-10-14T16:23:33Z"
+          },
+          {
+            "name": "Run the canonical enforced quick shard",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 10,
+            "started_at": "2026-10-14T16:23:33Z",
+            "completed_at": "2026-10-14T16:30:42Z"
+          },
+          {
+            "name": "Require actual changed-case execution",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 11,
+            "started_at": "2026-10-14T16:30:42Z",
+            "completed_at": "2026-10-14T16:30:42Z"
+          },
+          {
+            "name": "Preserve source identity, timings, JUnit and omissions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-14T16:30:42Z",
+            "completed_at": "2026-10-14T16:30:43Z"
+          },
+          {
+            "name": "Post Cache the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 21,
+            "started_at": "2026-10-14T16:30:43Z",
+            "completed_at": "2026-10-14T16:30:43Z"
+          },
+          {
+            "name": "Post Install Node 24",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 22,
+            "started_at": "2026-10-14T16:30:43Z",
+            "completed_at": "2026-10-14T16:30:43Z"
+          },
+          {
+            "name": "Post Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 23,
+            "started_at": "2026-10-14T16:30:43Z",
+            "completed_at": "2026-10-14T16:30:43Z"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24,
+            "started_at": "2026-10-14T16:30:43Z",
+            "completed_at": "2026-10-14T16:30:43Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-14T16:30:43Z",
+            "completed_at": "2026-10-14T16:30:43Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/jlevy/squares/check-runs/115967824716",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000144771,
+        "runner_name": "GitHub Actions 1000144771",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115967824756,
+        "run_id": 38597483408,
+        "workflow_name": "Enforced quick checkpoint",
+        "head_branch": "codex/main-test-timing",
+        "run_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOTXp6xc8AAAAbADiTdA",
+        "head_sha": "08d23c06b1819bd42fcdf3b1199455d57b416967",
+        "url": "https://api.github.com/repos/jlevy/squares/actions/jobs/115967824756",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38597483408/job/115967824756",
+        "status": "completed",
+        "conclusion": "failure",
+        "created_at": "2026-10-14T16:22:09Z",
+        "started_at": "2026-10-14T16:22:11Z",
+        "completed_at": "2026-10-14T16:29:26Z",
+        "name": "suite (a)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-14T16:22:12Z",
+            "completed_at": "2026-10-14T16:22:13Z"
+          },
+          {
+            "name": "Check out the exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-14T16:22:13Z",
+            "completed_at": "2026-10-14T16:22:52Z"
+          },
+          {
+            "name": "Prepare scratch and source identity",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-14T16:22:52Z",
+            "completed_at": "2026-10-14T16:22:52Z"
+          },
+          {
+            "name": "Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-14T16:22:52Z",
+            "completed_at": "2026-10-14T16:22:56Z"
+          },
+          {
+            "name": "Synchronize the locked development environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-14T16:22:56Z",
+            "completed_at": "2026-10-14T16:22:59Z"
+          },
+          {
+            "name": "Install Node 24",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-14T16:22:59Z",
+            "completed_at": "2026-10-14T16:23:04Z"
+          },
+          {
+            "name": "Install the pinned browser toolchain",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-14T16:23:04Z",
+            "completed_at": "2026-10-14T16:23:06Z"
+          },
+          {
+            "name": "Cache the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-14T16:23:06Z",
+            "completed_at": "2026-10-14T16:23:07Z"
+          },
+          {
+            "name": "Install the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-14T16:23:07Z",
+            "completed_at": "2026-10-14T16:23:20Z"
+          },
+          {
+            "name": "Run the canonical enforced quick shard",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 10,
+            "started_at": "2026-10-14T16:23:20Z",
+            "completed_at": "2026-10-14T16:29:22Z"
+          },
+          {
+            "name": "Require actual changed-case execution",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 11,
+            "started_at": "2026-10-14T16:29:22Z",
+            "completed_at": "2026-10-14T16:29:22Z"
+          },
+          {
+            "name": "Preserve source identity, timings, JUnit and omissions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-14T16:29:22Z",
+            "completed_at": "2026-10-14T16:29:23Z"
+          },
+          {
+            "name": "Post Cache the pinned Chromium shell",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 21,
+            "started_at": "2026-10-14T16:29:23Z",
+            "completed_at": "2026-10-14T16:29:23Z"
+          },
+          {
+            "name": "Post Install Node 24",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 22,
+            "started_at": "2026-10-14T16:29:23Z",
+            "completed_at": "2026-10-14T16:29:23Z"
+          },
+          {
+            "name": "Post Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 23,
+            "started_at": "2026-10-14T16:29:23Z",
+            "completed_at": "2026-10-14T16:29:23Z"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24,
+            "started_at": "2026-10-14T16:29:23Z",
+            "completed_at": "2026-10-14T16:29:23Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-14T16:29:23Z",
+            "completed_at": "2026-10-14T16:29:23Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/jlevy/squares/check-runs/115967824756",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000144773,
+        "runner_name": "GitHub Actions 1000144773",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115972001083,
+        "run_id": 38597483408,
+        "workflow_name": "Enforced quick checkpoint",
+        "head_branch": "codex/main-test-timing",
+        "run_url": "https://api.github.com/repos/jlevy/squares/actions/runs/38597483408",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOTXp6xc8AAAAbAHhNOw",
+        "head_sha": "08d23c06b1819bd42fcdf3b1199455d57b416967",
+        "url": "https://api.github.com/repos/jlevy/squares/actions/jobs/115972001083",
+        "html_url": "https://github.com/jlevy/squares/actions/runs/38597483408/job/115972001083",
+        "status": "completed",
+        "conclusion": "failure",
+        "created_at": "2026-10-14T16:30:47Z",
+        "started_at": "2026-10-14T16:30:50Z",
+        "completed_at": "2026-10-14T16:30:55Z",
+        "name": "enforced-quick-required",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-14T16:30:50Z",
+            "completed_at": "2026-10-14T16:30:53Z"
+          },
+          {
+            "name": "Require every matrix result",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 2,
+            "started_at": "2026-10-14T16:30:53Z",
+            "completed_at": "2026-10-14T16:30:53Z"
+          },
+          {
+            "name": "Check out the exact source",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 3,
+            "started_at": "2026-10-14T16:30:53Z",
+            "completed_at": "2026-10-14T16:30:53Z"
+          },
+          {
+            "name": "Install uv and Python 3.14",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 4,
+            "started_at": "2026-10-14T16:30:53Z",
+            "completed_at": "2026-10-14T16:30:53Z"
+          },
+          {
+            "name": "Synchronize the locked development environment",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 5,
+            "started_at": "2026-10-14T16:30:53Z",
+            "completed_at": "2026-10-14T16:30:53Z"
+          },
+          {
+            "name": "Read the four shard and mutation receipts",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 6,
+            "started_at": "2026-10-14T16:30:53Z",
+            "completed_at": "2026-10-14T16:30:53Z"
+          },
+          {
+            "name": "Require the complete successful source-bound receipt set",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 7,
+            "started_at": "2026-10-14T16:30:53Z",
+            "completed_at": "2026-10-14T16:30:53Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-14T16:30:53Z",
+            "completed_at": "2026-10-14T16:30:53Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/jlevy/squares/check-runs/115972001083",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000144804,
+        "runner_name": "GitHub Actions 1000144804",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      }
+    ]
+  },
+  "local_push_observations": [
+    {
+      "id": "pr604-canonical-push-2026-10-14",
+      "environment": "local macOS; existing external Python 3.14.7 venv; offline/no-sync; external task scratch",
+      "source_commit": "fe2f20ee65c7d93e6fb3aa13d48bc02031d5aafe",
+      "baseline_commit": "2319afaa581355a6e35a27f51698aa1c64d487f4",
+      "command": "packing-validate --push",
+      "exit_status": 1,
+      "total_wall_seconds": 743.74,
+      "prerequisites": {
+        "completed": 67,
+        "passed": 66,
+        "failed": 1,
+        "failure": "Fresh no-public-change paths included seven noncandidate inputs unchanged from baseline.",
+        "later_focused_repair": {
+          "passed_tests": 18,
+          "elapsed_seconds": 8.19,
+          "receipt": "news604-release-impact-tests.log",
+          "scope": "Separate focused repair; does not complete the interrupted canonical push gate."
+        }
+      },
+      "reachable_tests": {
+        "selected_files": 608,
+        "available_files": 791,
+        "packing_test_files": 584,
+        "workbench_test_files": 24,
+        "selection_reason_breakdown": "not retained in the inspected receipts",
+        "execution": "serial normal lane; no xdist flags",
+        "marker": "not exhaustive_exact and not pool_heavy",
+        "includes_slow_tests": true,
+        "pool_heavy_phase_started": false,
+        "status": "incomplete; explicitly interrupted with SIGINT",
+        "elapsed_seconds_before_interruption": 700.49,
+        "last_printed_progress_percent": 13,
+        "result_counts": null,
+        "test_failure_output_before_interruption": false,
+        "pass_claimed": false,
+        "configured_step_ceiling_seconds": 900,
+        "ceiling_reached": false
+      },
+      "process_evidence": {
+        "native_sample": "active gmpy2 rational arithmetic",
+        "sample_time_local": "2026-10-14 12:35:30.653 -0700",
+        "python_stack_attachment": "OS denied task port; not retried with elevated user privilege",
+        "active_test_identity": "unknown"
+      },
+      "scratch": {
+        "minimum_observed_free_mib": 158,
+        "pause_floor_mib": 150,
+        "threshold_crossed": false,
+        "internal_fallback": false
+      },
+      "interpretation": "Distinct local pre-push heuristic/default-workload cost: broad selection retained slow behavior and executed serially. The receipt does not establish a full-suite fallback, count false-positive selections, show a collection hang at the sampled interval, or establish a hosted CI regression.",
+      "limitations": [
+        "Interrupted run is not a passing behavioral result.",
+        "Thirteen percent progress does not support extrapolating total duration.",
+        "Native sampling does not identify the exact test or explain the earlier hosted 900-second failures.",
+        "No selector, policy or ceiling was changed for this observation.",
+        "Incomplete output does not attribute elapsed time between quick and slow cases."
+      ],
+      "receipts": {
+        "archive": ".codex/regularization-closeout-evidence-2026-10-13",
+        "disposition": "news604-canonical-gate-disposition.json",
+        "progress_log": "news604-correctedgate.log",
+        "exact_command": "news604-live-pytest-command.txt",
+        "native_sample": "news604-live-pytest-sample.txt"
+      }
+    }
+  ]
+}

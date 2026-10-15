@@ -2774,37 +2774,43 @@ def atlas_regularized() -> tuple[int, ...]:
 def atlas_enclosing_sides(*, original: bool = False) -> dict[int, float]:
     """Actual enclosing sides of the selected drawings, independent of frontier bounds.
 
-    `original` reads every current house witness for the comparison mode.
-    House drawings use their canonical witness; a case drawn from its regularized view
-    (`atlas_regularized`) uses its retained derived witness, whose certified side the
-    renderer draws. Project the same scalar
-    sources as the renderer to browser precision without changing the witnesses.
-    The shared frame reader preserves algebraic coefficient vectors and their root
-    declarations as one exact side.
+    `original` reads every current house witness for the comparison mode. Default
+    drawings reuse those immutable projections and replace the selected regularized
+    sides with admitted derived witnesses. The shared presentation-side reader keeps
+    the renderer's exact field/root identity, coordinate-literal and receipt checks,
+    without constructing every square merely to read the enclosing side.
     """
-    from devtools.build_known_best_atlas import frame_from_witness  # noqa: PLC0415
+    from devtools.build_known_best_atlas import side_from_witness  # noqa: PLC0415
     from devtools.render_regularized_atlas import (  # noqa: PLC0415
         regularized_entries,
         view_witness,
     )
     from sqpack.yamlio import load_yaml  # noqa: PLC0415
 
-    manifest = json.loads((REPO / "packing/atlas/known-best/manifest.json").read_text())
-    drawn = set() if original else set(atlas_regularized())
-    views = {entry["n"]: entry for entry in regularized_entries() if entry["n"] in drawn}
-    sides: dict[int, float] = {}
-    for entry in manifest["atlas"]["entries"]:
-        n = entry["n"]
-        witness = (
-            view_witness(views[n])
-            if n in views
-            else load_yaml((REPO / "packing" / entry["witness"]["path"]).read_text())["witness"]
-        )
-        side = float(frame_from_witness(witness).container_side.projected)
+    def enclosing_side(n: int, witness: dict) -> float:
+        side = float(side_from_witness(witness).projected)
         if witness["n"] != n or not math.isfinite(side) or side <= 0:
             raise ValueError(f"n={n}: invalid atlas enclosing side {witness['side']!r}")
-        sides[n] = side
-    return sides
+        return side
+
+    entries = regularized_entries()
+    if not original:
+        sides = dict(atlas_enclosing_sides(original=True))
+        drawn = set(atlas_regularized())
+        views = {entry["n"]: entry for entry in entries if entry["n"] in drawn}
+        for n in sides:
+            if n in drawn:
+                sides[n] = enclosing_side(n, view_witness(views[n]))
+        return sides
+
+    manifest = json.loads((REPO / "packing/atlas/known-best/manifest.json").read_text())
+    return {
+        entry["n"]: enclosing_side(
+            entry["n"],
+            load_yaml((REPO / "packing" / entry["witness"]["path"]).read_text())["witness"],
+        )
+        for entry in manifest["atlas"]["entries"]
+    }
 
 
 @cache
@@ -2871,16 +2877,20 @@ def atlas_frame_ink_inset() -> float:
     return (float(frame.attrib["x"]) - left - float(frame.attrib["stroke-width"]) / 2) / extent
 
 
-def _atlas_drawing(n: int, *, regularized: bool, side: float) -> str:
+def _atlas_drawing(
+    n: int, *, regularized: bool, side: float, upper: Mapping[str, Any] | None = None
+) -> str:
     """One lazy image, with current-source credit and the approved comparison pair."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.build_bound_citations import load_case  # noqa: PLC0415
     from devtools.default_drawings import credit_line  # noqa: PLC0415
     from devtools.pictured_source import pictured_source_key  # noqa: PLC0415
 
-    upper = load_case(n)["reported_upper_bound"]
-    credit = html.unescape(frontier.credit(upper.get("found_by"), upper.get("found_year")))
-    source = pictured_source_key(n, str(upper.get("source_key") or ""))
+    reported = load_case(n)["reported_upper_bound"] if upper is None else upper
+    credit = html.unescape(
+        frontier.credit(reported.get("found_by"), reported.get("found_year"))
+    )
+    source = pictured_source_key(n, str(reported.get("source_key") or ""))
     original_credit = ", ".join(
         part for part in ("Packing as published", credit, source) if part
     )
@@ -2912,6 +2922,7 @@ def _atlas_cell(
     side: float | None = None,
     grid_from: int | None = None,
     segment: PackingSegment | None = None,
+    upper: Mapping[str, Any] | None = None,
 ) -> str:
     """A selected drawing and count, linking to its case record.
 
@@ -2934,7 +2945,7 @@ def _atlas_cell(
         f"--o:{int(row > 1 and n == (row - 1) ** 2 + 1)};"
         f'--site-atlas-side:{side}"'
     )
-    drawing = _atlas_drawing(n, regularized=regularized, side=side)
+    drawing = _atlas_drawing(n, regularized=regularized, side=side, upper=upper)
     needs_reference = bool(reference) or (
         regularized and atlas_enclosing_sides(original=True)[n] < row
     )
@@ -3142,6 +3153,7 @@ def _atlas_rows(first: int) -> tuple[list[str], str]:
                     side=sides[n],
                     grid_from=transition.grid.first_n,
                     segment=segment,
+                    upper=by_n[n]["reported_upper_bound"],
                 )
                 for n in segment.numbers
             )

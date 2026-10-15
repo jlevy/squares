@@ -920,7 +920,13 @@ def evidence_problems(selected: Sequence[Plan]) -> list[str]:
     return problems
 
 
-def apply_case(plan: Plan, text: str, earlier: Mapping[str, str]) -> str:
+def apply_case(
+    plan: Plan,
+    text: str,
+    earlier: Mapping[str, str],
+    *,
+    coverage: Mapping[str, Any] | None = None,
+) -> str:
     """One case record with this intake written over it: its front matter and its body.
 
     ``devtools.generate_frontier_case`` applies it to its own draft of a certified count,
@@ -928,10 +934,10 @@ def apply_case(plan: Plan, text: str, earlier: Mapping[str, str]) -> str:
     """
     from devtools.source_supersession import preserve_selected_case  # noqa: PLC0415
 
-    if preserve_selected_case(plan.n, text, {plan.registration.coverage_id}):
+    if preserve_selected_case(plan.n, text, {plan.registration.coverage_id}, coverage=coverage):
         return text
     if plan.previous is not None:
-        text = apply_case(plan.previous, text, earlier)
+        text = apply_case(plan.previous, text, earlier, coverage=coverage)
     _, front, body = text.split("---\n", 2)
     payload = safe_load(front)["packing"]
     # What this writes is prose with code spans; its mathematics becomes math by the
@@ -964,18 +970,22 @@ def main(argv: Sequence[str] | None = None) -> int:
     selected = plans()
     earlier = earlier_reports()
     problems = evidence_problems(selected)
+    coverage_before = COVERAGE.read_text(encoding="utf-8")
+    coverage = safe_load(coverage_before)
     drift: list[Path] = []
     for plan in selected:
         path = FRONTIER / f"n-{plan.n:03d}.md"
         text = path.read_text(encoding="utf-8")
         rendered = apply_exact_optima.apply_case(
-            plan.n, apply_case(plan, text, earlier[plan.n])
+            plan.n,
+            apply_case(plan, text, earlier[plan.n], coverage=coverage),
+            coverage=coverage,
         )
         if normalized(rendered) != normalized(text):
             drift.append(path)
             if not args.check:
                 atomic_write_text(path, rendered)
-    text = COVERAGE.read_text(encoding="utf-8")
+    text = coverage_before
     updated = apply_exact_optima.coverage_text(coverage_text(text, selected, earlier))
     if updated != text:
         drift.append(COVERAGE)

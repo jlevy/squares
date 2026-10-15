@@ -189,7 +189,7 @@ alone is not full pre-merge evidence.
 | --- | --- | ---: | ---: | --- |
 | `--records` | contributor, before touching a registry; also every pull request | 50 of 108 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | 66 of 108 | 240 s | 59.4 s |
-| `--push` | contributor, once before a push — the edit-tier prerequisites the diff can affect, plus tests reachable from it (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
+| `--push` | contributor, once before a push — affected edit-tier prerequisites and reachable quick tests (`--since`); add `--include-reachable-slow` for selected slow tests | varies with the diff | 1800 s | new quick default not yet measured; large implicit selections run after prerequisites, subject to the load lock, see below |
 | `--fast` | contributor, at a block boundary; the union of the ten tiers below | 95 of 108 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
 | `--checks` | **CI, on every pull request**, in the `validate` job | 69 of 108 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
 | `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 108 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
@@ -752,9 +752,12 @@ uv run --frozen --all-extras --group dev packing-validate --records
 # Edit loop: everything fast except the broad test suite. Seconds, runs during a gate.
 uv run --frozen --all-extras --group dev packing-validate --edit
 
-# Pre-push floor: the edit tier plus the behavioral tests reachable from the change
-# (against origin/main, or --since REF). Broad changes may select the whole suite.
+# Pre-push floor: affected edit prerequisites plus reachable quick tests
+# (against origin/main, or --since REF). Broad changes may select every quick test.
 uv run --frozen --all-extras --group dev packing-validate --push
+
+# Deliberately include reachable slow tests; exhaustive checks retain their checkpoint.
+uv run --frozen --all-extras --group dev packing-validate --push --include-reachable-slow
 
 # The pull-request surface: the edit tier plus every behavioral test under the
 # per-test ceiling. CI runs it as the ten parts below, one per runner; run it whole
@@ -863,29 +866,35 @@ contracts seed the same import, text and walker closure.
 A scheduling edit does not mark every module in an unchanged library directory as
 changed. Unreadable or unknown first-party entrypoints select the whole suite.
 
-Configuration-only pushes still select every test file.
-If every changed path belongs to `SUITE_WIDE` in `devtools.reachable_tests` or is
-`packing-validation.yml` or `deep-gate.yml`, local execution runs the complete quick
-lane and reports the slow lane as deferred (`think-xyub`). Before merge, passing PR fast
-and Deferred checkpoint runs must cover the same source/base; their existing complement
-contract supplies all slow and exhaustive tests.
-This avoids repeating the complete slow lane locally for a configuration-only edit.
-Any mixed change, including source, renderer, test or record edits, keeps the original
-local slow coverage.
-Unknown workflows and empty, unmapped or otherwise unresolved selections also retain the
-original execution policy.
-Narrow reachable selections still include directly reached slow tests.
+**Ordinary pushes run reachable quick tests.** File selection remains conservative:
+unknown workflows, empty or unresolved changes and suite configuration still select all
+test files. Execution uses the same `QUICK_TESTS` predicate as the PR fast lane, so a
+mixed source or record change does not silently start the slow suite.
+
+To include the selected slow tests deliberately, run
+`packing-validate --push --include-reachable-slow`. The standalone selector,
+`python -m devtools.reachable_tests --run` in the project environment, accepts
+`--lane quick` (the default), `--lane slow` or `--lane all`. The `all` lane combines
+quick and slow tests; exhaustive checks retain their existing checkpoint.
+The invocation reports its lane, selected files, worker allocation and excluded
+categories. Child progress receipts retain `lane`, `marker` and `exclusions` so a quick
+result cannot be mistaken for complete coverage.
+
+A local quick pass does not discharge the omitted slow or exhaustive obligations.
+The existing matching-source PR fast and Deferred checkpoint contracts still apply
+before merge. All fast tests remain automatic in CI. This change addresses unintended
+local slow selection; it does not establish a three-minute hosted gate.
 
 **Large implicit push selections receive a separate pytest phase.** Other changed
 workflow files or suite configuration expand the selector to everything.
-Except for the configuration-only execution policy above, this runs the quick and slow
-lanes together, against `FAST_SUITE_BUDGET_SECONDS`. A large proper subset can also
-dominate the run. When resource settings are implicit, the edit checks run with their
-normal concurrency, then the reachable tests use the available pytest workers after the
-edit pool has drained.
-Nested tool pools that read `PACK_JOBS` are capped at one during the parallel pytest
-phase. Tests marked `pool_heavy` run afterward in a separate serial pytest process with
-`PACK_JOBS` set to the reserved CPU count.
+The requested lane runs against the existing fallback budget.
+A large proper subset can also dominate the run.
+When resource settings are implicit, the edit checks run with their normal concurrency,
+then the reachable tests use the available pytest workers after the edit pool has
+drained. Nested tool pools that read `PACK_JOBS` are capped at one during the parallel
+pytest phase.
+Tests marked `pool_heavy` run afterward in a separate serial pytest process
+with `PACK_JOBS` set to the reserved CPU count.
 The marker covers real internal execution pools and short-deadline real subprocess
 controls. This includes the whole-atlas composite test’s per-case builder, the
 collection-refusal control’s two-worker xdist invocation, and the resident
@@ -893,9 +902,9 @@ exact-geometry transport controls.
 The collection control keeps its fixed two workers and 30 s command deadline.
 Classification leaves each control’s transport, assertions and time bounds intact.
 Quick/slow membership remains unchanged.
-Both phases use the same selected files and complementary markers, so every selected
-non-exhaustive test belongs to exactly one phase.
-Other slow tests remain parallel.
+Both phases use the same selected files and complementary pool markers, so each test in
+the requested quick, slow or combined lane executes exactly once.
+Slow tests run only when explicitly selected.
 This prevents the CPU-wide outer default from leaving pytest with one worker after the
 other checks finish.
 It also prevents two internally parallel checks from each claiming the same CPUs.
@@ -937,10 +946,15 @@ each invocation to avoid cleanup of unrelated numbered directories under a share
 
 When command artifacts are enabled, the reachable-test wrapper records separate JUnit
 and duration reports for each child phase.
-Flushed per-worker JSONL progress identifies the source commit, run, test node and
-effective worker allocation; an interrupted test leaves its start event available before
-JUnit can finish. These are operational timing receipts, not mathematical acceptance
-evidence. Artifacts stay outside the source tree.
+Flushed per-worker JSONL progress identifies the source commit, run, test node,
+effective worker allocation, selected `lane`, actual phase `marker` and `exclusions`.
+The marker includes the normal/pool-heavy split when used.
+An interrupted test leaves its start event available before JUnit can finish; missing
+completion is not a pass.
+A quick receipt does not certify omitted slow or exhaustive tests: their matching-source
+merge obligations remain.
+These are operational timing receipts, not mathematical acceptance evidence.
+Artifacts stay outside the source tree.
 
 Every validation subprocess has a finite 900-second default deadline.
 Override it with `--timeout-seconds SECONDS` or `PACKING_VALIDATE_TIMEOUT_SECONDS`;

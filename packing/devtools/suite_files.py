@@ -79,13 +79,15 @@ from dataclasses import dataclass
 from fnmatch import fnmatch
 from functools import cache
 from pathlib import Path, PurePosixPath
-from typing import TYPE_CHECKING, Any, Final
+from typing import TYPE_CHECKING, Any, Final, TextIO
 
 import pytest
 from strif import atomic_write_text
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Sequence
+
+    from xdist.workermanage import WorkerController
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
@@ -397,6 +399,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
 
 
 _SHARD: Final = pytest.StashKey[Shard | None]()
+COST_ORDER_WORKER_KEY: Final = "sqpack_suite_cost_order"
 
 
 def _costs_option(config: pytest.Config) -> Path:
@@ -483,6 +486,65 @@ def pytest_ignore_collect(collection_path: Path, config: pytest.Config) -> bool 
     return True
 
 
+def cost_ordered_items(items: Sequence[pytest.Item], costs: RecordedCosts) -> list[pytest.Item]:
+    """Whole modules in recorded cost order, with their original case order intact.
+
+    Unknown costs run first by canonical path; their priority does not assign a weight.
+    Resolve each distinct item path once, rather than paying filesystem resolution for
+    every parametrized case. The same physical workbench module has one record key.
+    """
+    canonical: dict[Path, str] = {}
+    modules: dict[str, list[pytest.Item]] = {}
+    for item in items:
+        path = item.path
+        if path not in canonical:
+            canonical[path] = repository_path(path)
+        modules.setdefault(canonical[path], []).append(item)
+
+    def priority(name: str) -> tuple[int, float, str]:
+        seconds = costs.seconds.get(name)
+        return (0, 0.0, name) if seconds is None else (1, -seconds, name)
+
+    return [item for name in sorted(modules, key=priority) for item in modules[name]]
+
+
+def cost_order_enabled(config: pytest.Config) -> bool:
+    """Use the controller's exact decision after xdist rewrites worker distribution."""
+    shard = config.stash.get(_SHARD, None)
+    if shard is None or config.getoption("loadscopereorder", default=True) is not False:
+        return False
+    if hasattr(config, "workerinput"):
+        workerinput = getattr(config, "workerinput", None)
+        metadata = (
+            workerinput.get(COST_ORDER_WORKER_KEY) if isinstance(workerinput, Mapping) else None
+        )
+        return (
+            isinstance(metadata, Mapping)
+            and metadata.get("enabled") is True
+            and metadata.get("shard") == str(shard)
+        )
+    return config.getoption("dist", default="no") == "loadfile"
+
+
+@pytest.hookimpl(optionalhook=True)
+def pytest_configure_node(node: WorkerController) -> None:
+    """Transmit validated controller applicability through supported xdist metadata."""
+    shard = node.config.stash.get(_SHARD, None)
+    node.workerinput[COST_ORDER_WORKER_KEY] = {
+        "enabled": cost_order_enabled(node.config),
+        "shard": None if shard is None else str(shard),
+    }
+
+
+@pytest.hookimpl(trylast=True)
+def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
+    """Preserve cost order only where xdist explicitly preserves loadfile queue order."""
+    if not cost_order_enabled(config):
+        return
+    costs, _packed_files = _packed(_costs_option(config))
+    items[:] = cost_ordered_items(items, costs)
+
+
 class FileCostReport:
     """Sums each file's phase durations on the controller and writes them at the end."""
 
@@ -495,6 +557,20 @@ class FileCostReport:
         self.module_scope: dict[str, Any] = {}
         self.collected: defaultdict[str, int] = defaultdict(int)
         self.deselected = 0
+        self.events: TextIO | None = None
+
+    def _event(self, nodeid: str, phase: str, outcome: str | None = None) -> None:
+        if self.events is None:
+            self.target.parent.mkdir(parents=True, exist_ok=True)
+            self.events = self.target.with_suffix(".events.jsonl").open(
+                "w", encoding="utf-8", buffering=1
+            )
+        self.events.write(
+            json.dumps({"nodeid": nodeid, "phase": phase, "outcome": outcome}) + "\n"
+        )
+
+    def pytest_runtest_logstart(self, nodeid: str) -> None:
+        self._event(nodeid, "started")
 
     def pytest_sessionstart(self, session: pytest.Session) -> None:
         self.rootpath = session.config.rootpath
@@ -534,8 +610,11 @@ class FileCostReport:
         name = repository_path(location)
         self.seconds[name] += report.duration
         self.tests[name].add(report.nodeid)
+        self._event(report.nodeid, report.when, report.outcome)
 
     def pytest_sessionfinish(self, exitstatus: int | pytest.ExitCode) -> None:
+        if self.events is not None:
+            self.events.close()
         document = report_document(
             {name: (len(self.tests[name]), seconds) for name, seconds in self.seconds.items()},
             shard=self.shard,
@@ -574,6 +653,24 @@ def report_document(
         "seconds": round(sum(float(row["seconds"]) for row in rows), 3),
         "files": rows,
     }
+
+
+def unfinished_tests(events: Iterable[Mapping[str, Any]]) -> dict[str, str]:
+    """Report incomplete phases from flushed controller events, never infer passes."""
+    pending: dict[str, str] = {}
+    for event in events:
+        node, phase = event["nodeid"], event["phase"]
+        if not isinstance(node, str) or phase not in {"started", "setup", "call", "teardown"}:
+            raise SuiteFilesError("invalid test progress event")
+        if phase == "teardown":
+            pending.pop(node, None)
+        else:
+            pending[node] = {
+                "started": "setup",
+                "setup": "call" if event.get("outcome") == "passed" else "teardown",
+                "call": "teardown",
+            }[phase]
+    return pending
 
 
 # --- recording ---------------------------------------------------------------------
@@ -1026,6 +1123,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             "equal capacities"
         ),
     )
+    progress = commands.add_parser(
+        "unfinished", help="report phases left incomplete at a deadline"
+    )
+    _ = progress.add_argument("journal", type=Path)
     _ = commands.add_parser("show", help="print the recorded partition's shard totals")
     checking = commands.add_parser(
         "check", help="print each shard's unrecorded files; exit 1 over the threshold"
@@ -1048,6 +1149,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     arguments = parser.parse_args(argv)
     try:
+        if arguments.command == "unfinished":
+            lines = arguments.journal.read_text(encoding="utf-8").splitlines()
+            events = []
+            for position, line in enumerate(lines):
+                try:
+                    events.append(json.loads(line))
+                except json.JSONDecodeError:
+                    if position != len(lines) - 1:
+                        raise SuiteFilesError(
+                            "malformed progress event before the final line"
+                        ) from None
+                    print("note: final progress line is truncated", file=sys.stderr)
+            print(json.dumps(unfinished_tests(events), indent=2))
+            return 0
         if arguments.command == "check":
             return _check(
                 load_costs(),

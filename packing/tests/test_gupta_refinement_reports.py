@@ -9,6 +9,7 @@ from typing import Any
 import pytest
 
 from devtools import gupta_refinement_reports as reports
+from devtools import register_gupta_reports as register
 
 
 @pytest.fixture
@@ -77,6 +78,27 @@ def test_late_original_mutations_refuse_before_any_native_decision(
         reports.read_fact(reports.NUMBERS[0])
     reports.save_xz(reports.fact_path(), packet)
     assert reports.read_fact(reports.NUMBERS[0]).n == reports.NUMBERS[0]
+
+
+@pytest.mark.parametrize("mutation", ["late-certificate", "acquisition-roster"])
+def test_reported_bound_rechecks_mutable_inputs_after_a_valid_read(
+    packet: dict[str, Any], mutation: str, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        reports.kernel, "run_case", lambda *_a, **_kw: pytest.fail("native geometry called")
+    )
+    n = reports.NUMBERS[0]
+    bound = register.reported_bound(n)
+    assert bound["exact_form"] == reports.source_pins()[n]["side_exact"]
+    if mutation == "late-certificate":
+        changed = copy.deepcopy(packet)
+        changed["cases"][-1]["source_certificate"] += "\n"
+        reports.save_xz(reports.fact_path(), changed)
+    else:
+        path = reports.PACKET / "acquisition/case-inputs.json"
+        path.write_bytes(path.read_bytes() + b"\n")
+    with pytest.raises(reports.kernel.ReportError):
+        register.reported_bound(n)
 
 
 @pytest.mark.usefixtures("packet")

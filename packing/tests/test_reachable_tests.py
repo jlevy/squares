@@ -14,6 +14,7 @@ import os
 import re
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
 from collections.abc import Sequence
 from pathlib import Path
 from types import SimpleNamespace
@@ -216,51 +217,32 @@ def test_pages_selection_refuses_malformed_workflow(
 
 
 @pytest.mark.parametrize(
-    ("everything", "changed", "marker"),
+    ("everything", "changed"),
     [
-        (False, ["packing/src/sqpack/cli/validate.py"], "not exhaustive_exact"),
-        (True, [], "not exhaustive_exact"),
-        (True, ["packing/tests/conftest.py"], validate.QUICK_TESTS),
-        (True, ["packing/uv.lock"], validate.QUICK_TESTS),
-        (True, [".github/workflows/packing-validation.yml"], validate.QUICK_TESTS),
-        (True, [".github/workflows/deep-gate.yml"], validate.QUICK_TESTS),
-        (
-            True,
-            ["packing/tests/conftest.py", ".github/workflows/packing-validation.yml"],
-            validate.QUICK_TESTS,
-        ),
-        (True, [".github/workflows/unknown.yml"], "not exhaustive_exact"),
-        (True, ["packing/scripts/unmapped.py"], "not exhaustive_exact"),
-        (
-            True,
-            ["packing/tests/conftest.py", "packing/src/sqpack/assurance.py"],
-            "not exhaustive_exact",
-        ),
-        (
-            True,
-            ["packing/tests/conftest.py", "packing/frontier/results.yaml"],
-            "not exhaustive_exact",
-        ),
-        (
-            True,
-            ["packing/tests/conftest.py", "packing/devtools/render_overview.py"],
-            "not exhaustive_exact",
-        ),
-        (
-            True,
-            ["packing/tests/conftest.py", ".github/workflows/unknown.yml"],
-            "not exhaustive_exact",
-        ),
+        (False, ["packing/src/sqpack/cli/validate.py"]),
+        (True, []),
+        (True, ["packing/tests/conftest.py"]),
+        (True, ["packing/uv.lock"]),
+        (True, [".github/workflows/packing-validation.yml"]),
+        (True, [".github/workflows/deep-gate.yml"]),
+        (True, ["packing/tests/conftest.py", ".github/workflows/packing-validation.yml"]),
+        (True, [".github/workflows/unknown.yml"]),
+        (True, ["packing/scripts/unmapped.py"]),
+        (True, ["packing/tests/conftest.py", "packing/src/sqpack/assurance.py"]),
+        (True, ["packing/tests/conftest.py", "packing/frontier/results.yaml"]),
+        (True, ["packing/tests/conftest.py", "packing/devtools/render_overview.py"]),
+        (True, ["packing/tests/conftest.py", ".github/workflows/unknown.yml"]),
     ],
 )
 @pytest.mark.parametrize("workers", [1, 4])
+@pytest.mark.parametrize("lane", ["quick", "slow", "all"])
 def test_running_selected_tests_preserves_coverage_and_uses_requested_workers(
     monkeypatch: pytest.MonkeyPatch,
     *,
     everything: bool,
     changed: list[str],
-    marker: str,
     workers: int,
+    lane: str,
 ) -> None:
     selection = reachable_tests.TestSelection(
         everything=everything,
@@ -284,7 +266,8 @@ def test_running_selected_tests_preserves_coverage_and_uses_requested_workers(
         return subprocess.CompletedProcess(command, returncode=7)
 
     monkeypatch.setattr(reachable_tests.subprocess, "run", capture)
-    assert reachable_tests.main(["--run", "--numprocesses", str(workers)]) == 7
+    marker = reachable_tests.LANES[lane]
+    assert reachable_tests.main(["--run", "--lane", lane, "--numprocesses", str(workers)]) == 7
     targets = (
         reachable_tests.BEHAVIORAL_TEST_ROOTS
         if everything
@@ -303,7 +286,7 @@ def test_running_selected_tests_preserves_coverage_and_uses_requested_workers(
             *targets,
             "-m",
             marker,
-            *(("-n", "4") if workers == 4 else ()),
+            *(("-n", "4", "--dist=loadfile") if workers == 4 else ()),
             "--durations=0",
             "--durations-min=0",
         )
@@ -366,10 +349,11 @@ def test_the_selection_runs_under_the_workers_the_caller_asks_for() -> None:
     """
     serial = pytest_command(["tests"], 1)
     assert "-n" not in serial
-    assert serial[-4:] == ("-m", "not exhaustive_exact", "--durations=0", "--durations-min=0")
+    assert serial[-4:] == ("-m", validate.QUICK_TESTS, "--durations=0", "--durations-min=0")
 
     parallel = pytest_command(["tests"], 4)
-    assert parallel[-4:] == ("-n", "4", "--durations=0", "--durations-min=0")
+    assert parallel[-5:] == ("-n", "4", "--dist=loadfile", "--durations=0", "--durations-min=0")
+    assert "--dist=loadfile" not in serial
     assert parallel[: parallel.index("-n")] == serial[: serial.index("--durations=0")]
 
 
@@ -487,7 +471,7 @@ def test_pool_phases_preserve_complements_failures_and_proved_empty_lanes(
         tests=("packing/tests/test_reachable_tests.py",),
     )
     changed = ["packing/tests/conftest.py"] if configuration_only else ["changed"]
-    base_marker = validate.QUICK_TESTS if configuration_only else "not exhaustive_exact"
+    base_marker = validate.QUICK_TESTS
     monkeypatch.setattr(reachable_tests, "changed_paths", lambda _since: changed)
     monkeypatch.setattr(reachable_tests, "select_tests", lambda _changed: selection)
     seen: list[str] = []
@@ -566,33 +550,32 @@ def test_invalid_pool_worker_counts_refuse_before_selection(
 
 
 @pytest.mark.parametrize("configuration_only", [False, True])
+@pytest.mark.parametrize("lane", ["quick", "slow", "all"])
 def test_pool_split_executes_the_exact_selected_tests_once_each(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, configuration_only: bool
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, configuration_only: bool, lane: str
 ) -> None:
     test_file = tmp_path / "test_pool_split.py"
     test_file.write_text(
-        "import os\n"
-        "from pathlib import Path\n"
-        "import pytest\n"
-        "def test_normal():\n"
-        "    Path(os.environ['SPLIT_OUTPUT']).joinpath('normal')"
-        ".write_text(os.environ['PACK_JOBS'])\n"
-        "@pytest.mark.pool_heavy\n"
-        "def test_pool():\n"
-        "    Path(os.environ['SPLIT_OUTPUT']).joinpath('pool')"
-        ".write_text(os.environ['PACK_JOBS'])\n"
-        "@pytest.mark.slow\n"
-        "def test_slow_normal():\n"
-        "    Path(os.environ['SPLIT_OUTPUT']).joinpath('slow-normal')"
-        ".write_text(os.environ['PACK_JOBS'])\n"
-        "@pytest.mark.slow\n"
-        "@pytest.mark.pool_heavy\n"
-        "def test_slow_pool():\n"
-        "    Path(os.environ['SPLIT_OUTPUT']).joinpath('slow-pool')"
-        ".write_text(os.environ['PACK_JOBS'])\n"
-        "@pytest.mark.exhaustive_exact\n"
-        "def test_exhaustive():\n"
-        "    raise AssertionError('exhaustive belongs to the final checkpoint')\n",
+        """import os
+from pathlib import Path
+import pytest
+
+def record(name):
+    with (Path(os.environ['SPLIT_OUTPUT']) / name).open('x') as output:
+        output.write(os.environ['PACK_JOBS'])
+
+def test_normal(): record('normal')
+@pytest.mark.pool_heavy
+def test_pool(): record('pool')
+@pytest.mark.slow
+def test_slow_normal(): record('slow-normal')
+@pytest.mark.slow
+@pytest.mark.pool_heavy
+def test_slow_pool(): record('slow-pool')
+@pytest.mark.exhaustive_exact
+def test_exhaustive():
+    raise AssertionError('exhaustive belongs to the final checkpoint')
+""",
         encoding="utf-8",
     )
     monkeypatch.setenv("SPLIT_OUTPUT", str(tmp_path))
@@ -608,16 +591,18 @@ def test_pool_split_executes_the_exact_selected_tests_once_each(
             everything=configuration_only, reason="fixture", tests=("test_pool_split.py",)
         ),
     )
-    assert reachable_tests.main(["--run", "-n", "2", "--pool-workers", "2"]) == 0
-    assert (tmp_path / "normal").read_text(encoding="utf-8") == "1"
-    assert (tmp_path / "pool").read_text(encoding="utf-8") == "2"
-
-    if configuration_only:
-        assert not (tmp_path / "slow-normal").exists()
-        assert not (tmp_path / "slow-pool").exists()
-    else:
-        assert (tmp_path / "slow-normal").read_text(encoding="utf-8") == "1"
-        assert (tmp_path / "slow-pool").read_text(encoding="utf-8") == "2"
+    assert (
+        reachable_tests.main(["--run", "--lane", lane, "-n", "2", "--pool-workers", "2"]) == 0
+    )
+    quick = {"normal": "1", "pool": "2"}
+    slow = {"slow-normal": "1", "slow-pool": "2"}
+    expected = {"quick": quick, "slow": slow, "all": quick | slow}[lane]
+    actual = {
+        name: (tmp_path / name).read_text()
+        for name in quick | slow
+        if (tmp_path / name).exists()
+    }
+    assert actual == expected
 
 
 def test_whole_atlas_pool_heavy_collection_is_one_canonical_node(
@@ -726,3 +711,73 @@ def test_since_and_a_snapshot_are_refused_together(
         )
     assert error.value.code == 2
     assert "not allowed with argument" in capsys.readouterr().err
+
+
+@pytest.mark.pool_heavy
+def test_native_loadfile_preserves_every_case_and_builds_a_module_fixture_once(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The native scheduler changes fixture allocation, not the selected work."""
+    module = tmp_path / "test_shared_builder.py"
+    module.write_text(
+        """import os
+from pathlib import Path
+import pytest
+
+@pytest.fixture(scope="module")
+def shared_value():
+    destination = Path(os.environ["FIXTURE_REPORT"])
+    destination.mkdir(parents=True, exist_ok=True)
+    with (destination / os.environ["PYTEST_XDIST_WORKER"]).open("x") as output:
+        output.write("complete")
+    return 17
+
+@pytest.mark.parametrize("number", range(8))
+def test_every_case(shared_value, number):
+    assert shared_value == 17
+    with (Path(os.environ["CASE_REPORT"]) / str(number)).open("x") as output:
+        output.write("executed")
+""",
+        encoding="utf-8",
+    )
+    identities: list[set[tuple[str, str]]] = []
+    for distribution in ("load", "loadfile"):
+        reports = tmp_path / distribution
+        reports.mkdir()
+        cases = reports / "cases"
+        cases.mkdir()
+        builds = reports / "builds"
+        monkeypatch.setenv("FIXTURE_REPORT", str(builds))
+        monkeypatch.setenv("CASE_REPORT", str(cases))
+        junit = reports / "cases.xml"
+        command = tuple(
+            f"--dist={distribution}" if part == "--dist=loadfile" else part
+            for part in pytest_command([str(module)], 2)
+        )
+        result = subprocess.run(
+            (
+                *command,
+                f"--junitxml={junit}",
+                f"--basetemp={reports / 'pytest-tmp'}",
+                "-p",
+                "no:cacheprovider",
+            ),
+            cwd=tmp_path,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=30,
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
+        executed = ET.parse(junit).findall(".//testcase")
+        assert len(executed) == 8
+        assert all(not list(case) for case in executed)
+        identities.append(
+            {(case.attrib["classname"], case.attrib["name"]) for case in executed}
+        )
+        assert all((cases / str(number)).read_text() == "executed" for number in range(8))
+        assert sum((builds / worker).is_file() for worker in ("gw0", "gw1")) == (
+            2 if distribution == "load" else 1
+        )
+    assert len(identities[0]) == 8
+    assert identities[0] == identities[1]

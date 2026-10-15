@@ -328,6 +328,39 @@ def test_linked_house_owner_follows_private_current_frontier(
     assert check_results.repository_file_problem(relative)
 
 
+def test_registered_claims_match_all_acquired_exact_sides_and_integer_ceilings(
+    original_pair: dict[int, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    assert tuple(original_pair) == houses.NUMBERS
+    monkeypatch.setattr(houses, "NUMBERS", houses.reports.SELECTED)
+    monkeypatch.setattr(register, "record_cases", lambda: None)
+    monkeypatch.setattr(registry.packets, "REPO", houses.REPO)
+    for name in ("evidence", "results", "source-coverage"):
+        (register.FRONTIER / f"{name}.yaml").write_bytes(
+            (SOURCE / f"packing/frontier/{name}.yaml").read_bytes()
+        )
+    acquired = json.loads((houses.reports.PACKET / "acquisition/case-inputs.json").read_text())[
+        "cases"
+    ]
+    assert len(acquired) == 17
+    expected = []
+    scale = 10**16
+    for row in acquired:
+        exact = Fraction(row["side_exact"])
+        quotient, remainder = divmod(exact.numerator * scale, exact.denominator)
+        ceiling = quotient + (remainder != 0)
+        expected.append(
+            {
+                "n": row["n"],
+                "offered_side": f"{ceiling // scale}.{ceiling % scale:016d}",
+                "exact_side": str(exact),
+            }
+        )
+    register.register()
+    actual = json.loads((houses.reports.PACKET / "acquisition/claims.json").read_text())
+    assert actual == {"results": expected}
+
+
 def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory(
     original_pair: dict[int, str],
     monkeypatch: pytest.MonkeyPatch,

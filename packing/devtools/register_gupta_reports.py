@@ -494,16 +494,17 @@ def register() -> None:
             "the solver MIT notice is not treated as a bundle licence.\n\n"
         )
         save(index, index.read_text().replace(FOOTER, entry + FOOTER))
-    claims = {
-        "results": [
+    claim_rows: list[dict[str, Any]] = []
+    for n in houses.reports.NUMBERS:
+        bound = reported_bound(n)
+        claim_rows.append(
             {
                 "n": n,
-                "offered_side": reported_bound(n)["value"],
-                "exact_side": reported_bound(n)["exact_form"],
+                "offered_side": bound["value"],
+                "exact_side": bound["exact_form"],
             }
-            for n in houses.reports.NUMBERS
-        ]
-    }
+        )
+    claims = {"results": claim_rows}
     save(houses.reports.PACKET / "acquisition/claims.json", json.dumps(claims, indent=2) + "\n")
     append_rows(
         FRONTIER / "source-coverage.yaml",

@@ -1,0 +1,78 @@
+.........................                                                [100%]
+============================== slowest durations ===============================
+8.42s call     tests/test_upper_bound_reports_574.py::test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304
+5.31s call     tests/test_upper_bound_reports_574.py::test_the_574_register_plan_states_each_bound_as_check_standing_reads_it
+4.69s call     tests/test_upper_bound_reports_574.py::test_the_574_receipts_admit_every_roster_job_on_both_routes
+3.42s call     tests/test_upper_bound_reports_574.py::test_every_574_certificate_is_admitted_at_its_printed_side
+2.57s call     tests/test_upper_bound_reports_574.py::test_the_574_algebraic_sides_against_the_case_records
+1.16s call     tests/test_upper_bound_reports_574.py::test_the_574_algebraic_witnesses_are_admitted_in_their_declared_fields
+0.62s call     tests/test_upper_bound_reports_574.py::test_the_574_algebraic_receipts_admit_every_roster_job
+0.27s setup    tests/test_upper_bound_reports_574.py::test_a_fact_from_a_release_asset_reads_offline_and_names_the_members_digest
+0.21s setup    tests/test_upper_bound_reports_574.py::test_an_asset_that_is_not_the_one_the_manifest_pins_is_refused
+0.20s setup    tests/test_upper_bound_reports_574.py::test_a_member_the_manifest_or_the_digest_does_not_bear_out_is_refused[change0-not the bytes the declaration names]
+0.20s setup    tests/test_upper_bound_reports_574.py::test_a_member_the_manifest_or_the_digest_does_not_bear_out_is_refused[change2-does not list other.zip once]
+0.20s setup    tests/test_upper_bound_reports_574.py::test_the_declaration_refuses_an_asset_member_it_cannot_bind[change2-release-asset certificate is a fact]
+0.20s setup    tests/test_upper_bound_reports_574.py::test_the_declaration_refuses_an_asset_member_it_cannot_bind[change0-not its asset member]
+0.19s setup    tests/test_upper_bound_reports_574.py::test_an_asset_of_the_pinned_size_with_the_same_member_is_refused_by_its_digest
+0.18s call     tests/test_upper_bound_reports_574.py::test_a_field_witness_passes_the_route_and_both_controls_are_refused
+0.17s setup    tests/test_upper_bound_reports_574.py::test_a_member_the_manifest_or_the_digest_does_not_bear_out_is_refused[change1-does not name]
+0.17s setup    tests/test_upper_bound_reports_574.py::test_the_declaration_refuses_an_asset_member_it_cannot_bind[change1-names its manifest]
+0.13s call     tests/test_upper_bound_reports_574.py::test_an_algebraic_declaration_holds_first_committed_to_a_utc_time
+0.13s call     tests/test_upper_bound_reports_574.py::test_an_asset_that_is_not_the_one_the_manifest_pins_is_refused
+0.11s call     tests/test_upper_bound_reports_574.py::test_a_stored_algebraic_row_is_held_to_its_own_witness
+0.09s call     tests/test_upper_bound_reports_574.py::test_a_fact_from_a_release_asset_reads_offline_and_names_the_members_digest
+0.06s call     tests/test_upper_bound_reports_574.py::test_a_member_the_manifest_or_the_digest_does_not_bear_out_is_refused[change2-does not list other.zip once]
+0.05s call     tests/test_upper_bound_reports_574.py::test_an_asset_of_the_pinned_size_with_the_same_member_is_refused_by_its_digest
+0.05s call     tests/test_upper_bound_reports_574.py::test_a_member_the_manifest_or_the_digest_does_not_bear_out_is_refused[change1-does not name]
+0.05s call     tests/test_upper_bound_reports_574.py::test_a_member_the_manifest_or_the_digest_does_not_bear_out_is_refused[change0-not the bytes the declaration names]
+0.03s teardown tests/test_upper_bound_reports_574.py::test_an_algebraic_declaration_holds_first_committed_to_a_utc_time
+0.01s teardown tests/test_upper_bound_reports_574.py::test_an_asset_that_is_not_the_one_the_manifest_pins_is_refused
+0.01s teardown tests/test_upper_bound_reports_574.py::test_a_fact_from_a_release_asset_reads_offline_and_names_the_members_digest
+0.01s teardown tests/test_upper_bound_reports_574.py::test_a_member_the_manifest_or_the_digest_does_not_bear_out_is_refused[change2-does not list other.zip once]
+0.01s teardown tests/test_upper_bound_reports_574.py::test_a_member_the_manifest_or_the_digest_does_not_bear_out_is_refused[change0-not the bytes the declaration names]
+0.01s teardown tests/test_upper_bound_reports_574.py::test_the_declaration_refuses_an_asset_member_it_cannot_bind[change2-release-asset certificate is a fact]
+0.01s teardown tests/test_upper_bound_reports_574.py::test_a_member_the_manifest_or_the_digest_does_not_bear_out_is_refused[change1-does not name]
+0.01s teardown tests/test_upper_bound_reports_574.py::test_the_declaration_refuses_an_asset_member_it_cannot_bind[change0-not its asset member]
+0.01s teardown tests/test_upper_bound_reports_574.py::test_an_asset_of_the_pinned_size_with_the_same_member_is_refused_by_its_digest
+0.01s teardown tests/test_upper_bound_reports_574.py::test_the_declaration_refuses_an_asset_member_it_cannot_bind[change1-names its manifest]
+0.00s call     tests/test_upper_bound_reports_574.py::test_the_centre_basis_adapter_reads_a_witness_back_to_its_poses
+0.00s call     tests/test_upper_bound_reports_574.py::test_the_declaration_refuses_an_asset_member_it_cannot_bind[change1-names its manifest]
+0.00s call     tests/test_upper_bound_reports_574.py::test_the_declaration_refuses_an_asset_member_it_cannot_bind[change2-release-asset certificate is a fact]
+0.00s call     tests/test_upper_bound_reports_574.py::test_the_declaration_refuses_an_asset_member_it_cannot_bind[change0-not its asset member]
+0.00s setup    tests/test_upper_bound_reports_574.py::test_a_member_that_does_not_read_is_refused[encrypted]
+0.00s setup    tests/test_upper_bound_reports_574.py::test_an_algebraic_declaration_holds_first_committed_to_a_utc_time
+0.00s setup    tests/test_upper_bound_reports_574.py::test_a_member_that_does_not_read_is_refused[unsupported-method]
+0.00s setup    tests/test_upper_bound_reports_574.py::test_a_member_that_does_not_read_is_refused[corrupt-stream]
+0.00s setup    tests/test_upper_bound_reports_574.py::test_a_member_past_the_byte_ceiling_is_refused_before_it_is_read
+0.00s call     tests/test_upper_bound_reports_574.py::test_a_member_that_does_not_read_is_refused[encrypted]
+0.00s call     tests/test_upper_bound_reports_574.py::test_the_pingyou_adapter_reads_the_574_construction_records_and_no_other_field
+0.00s call     tests/test_upper_bound_reports_574.py::test_a_member_past_the_byte_ceiling_is_refused_before_it_is_read
+0.00s teardown tests/test_upper_bound_reports_574.py::test_the_574_register_plan_states_each_bound_as_check_standing_reads_it
+0.00s teardown tests/test_upper_bound_reports_574.py::test_a_member_that_does_not_read_is_refused[encrypted]
+0.00s setup    tests/test_upper_bound_reports_574.py::test_the_574_algebraic_sides_against_the_case_records
+0.00s setup    tests/test_upper_bound_reports_574.py::test_the_574_algebraic_receipts_admit_every_roster_job
+0.00s teardown tests/test_upper_bound_reports_574.py::test_a_member_that_does_not_read_is_refused[unsupported-method]
+0.00s teardown tests/test_upper_bound_reports_574.py::test_a_member_that_does_not_read_is_refused[corrupt-stream]
+0.00s teardown tests/test_upper_bound_reports_574.py::test_a_member_past_the_byte_ceiling_is_refused_before_it_is_read
+0.00s setup    tests/test_upper_bound_reports_574.py::test_a_stored_algebraic_row_is_held_to_its_own_witness
+0.00s setup    tests/test_upper_bound_reports_574.py::test_the_574_algebraic_witnesses_are_admitted_in_their_declared_fields
+0.00s setup    tests/test_upper_bound_reports_574.py::test_the_574_receipts_admit_every_roster_job_on_both_routes
+0.00s setup    tests/test_upper_bound_reports_574.py::test_a_field_witness_passes_the_route_and_both_controls_are_refused
+0.00s setup    tests/test_upper_bound_reports_574.py::test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304
+0.00s setup    tests/test_upper_bound_reports_574.py::test_the_574_register_plan_states_each_bound_as_check_standing_reads_it
+0.00s setup    tests/test_upper_bound_reports_574.py::test_the_centre_basis_adapter_reads_a_witness_back_to_its_poses
+0.00s teardown tests/test_upper_bound_reports_574.py::test_the_574_algebraic_receipts_admit_every_roster_job
+0.00s teardown tests/test_upper_bound_reports_574.py::test_the_574_algebraic_witnesses_are_admitted_in_their_declared_fields
+0.00s call     tests/test_upper_bound_reports_574.py::test_a_member_that_does_not_read_is_refused[corrupt-stream]
+0.00s call     tests/test_upper_bound_reports_574.py::test_a_member_that_does_not_read_is_refused[unsupported-method]
+0.00s setup    tests/test_upper_bound_reports_574.py::test_every_574_certificate_is_admitted_at_its_printed_side
+0.00s setup    tests/test_upper_bound_reports_574.py::test_the_pingyou_adapter_reads_the_574_construction_records_and_no_other_field
+0.00s teardown tests/test_upper_bound_reports_574.py::test_every_574_certificate_is_admitted_at_its_printed_side
+0.00s teardown tests/test_upper_bound_reports_574.py::test_a_stored_algebraic_row_is_held_to_its_own_witness
+0.00s teardown tests/test_upper_bound_reports_574.py::test_a_field_witness_passes_the_route_and_both_controls_are_refused
+0.00s teardown tests/test_upper_bound_reports_574.py::test_the_574_algebraic_sides_against_the_case_records
+0.00s teardown tests/test_upper_bound_reports_574.py::test_the_574_receipts_admit_every_roster_job_on_both_routes
+0.00s teardown tests/test_upper_bound_reports_574.py::test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304
+0.00s teardown tests/test_upper_bound_reports_574.py::test_the_pingyou_adapter_reads_the_574_construction_records_and_no_other_field
+0.00s teardown tests/test_upper_bound_reports_574.py::test_the_centre_basis_adapter_reads_a_witness_back_to_its_poses
+25 passed in 29.52s

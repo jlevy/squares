@@ -85,6 +85,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.3",
+        first_published="October 14, 2026",
+        result_scope=(
+            "Document quick pre-push feedback, explicit deeper checks and CI costs, and "
+            "render mathematical symbols in site code with bundled fonts."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.2",
         first_published="October 14, 2026",
         result_scope=(
@@ -680,6 +688,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.2",
+        version="v0.7.3",
+        impact="patch",
+        reason=(
+            "Document quick pre-push feedback, explicit deeper checks and CI costs, and "
+            "render mathematical symbols in site code with bundled fonts."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.1",
         version="v0.7.2",
         impact="patch",
@@ -795,6 +813,60 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/apply_exact_optima.py",
+            "packing/devtools/apply_upper_bound_packets.py",
+            "packing/devtools/build_known_best_atlas.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/register_gupta_reports.py",
+            "packing/devtools/regularized_drawings.py",
+            "packing/devtools/render_n11_lower_bounds_explainer.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/source_supersession.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/src/sqpack/cli/validate.py",
+            "packing/src/sqpack/witness.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Paper manuscripts, figures, scientific records, drawn assets and their "
+            "edition histories are unchanged. Exact-admission coverage caches remain "
+            "fresh per invocation; the presentation side reader retains scalar, literal "
+            "and receipt checks without constructing unrelated coordinates. Validation "
+            "changes select test lanes, native queue order and diagnostics. Worker "
+            "snapshots omit only unconsumed CI telemetry, preserving math inputs; paper "
+            "producers do not execute those commands. Gupta claims use one admitted "
+            "bound for both fields, retaining byte-equal registry output; paper "
+            "producers do not run registration. Schema validation retains its "
+            "refusals while reusing already-read metadata. These shared import paths "
+            "are conservative paper inputs. The retained claim documents and source "
+            "pin match main; no new byte-identical PDF build is claimed. The changed "
+            "public development guide and opt-in site code-symbol font are owned "
+            "separately by the site patch cut. The paper renderer keeps its default "
+            "font CSS; only site page assets opt into the Unicode code-symbol font. "
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(

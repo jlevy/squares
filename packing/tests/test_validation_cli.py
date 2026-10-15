@@ -22,6 +22,7 @@ from textwrap import dedent
 from threading import Barrier, Event, Lock
 from threading import enumerate as enumerate_threads
 from typing import Any, override
+from unittest.mock import Mock
 
 import pytest
 
@@ -829,6 +830,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "-n",
         "4",
         "--dist=loadfile",
+        "--no-loadscope-reorder",
         "-p",
         "devtools.suite_files",
         "--suite-shard=1/4",
@@ -860,6 +862,7 @@ def test_the_quick_lane_asks_for_no_xdist_worker_on_a_single_core_machine(
 
     assert "-n" not in command
     assert "--dist=loadfile" not in command
+    assert "--no-loadscope-reorder" not in command
     assert command[-4:] == (
         "--durations=0",
         f"--durations-min={validate.QUICK_TEST_WALL_BACKSTOP_SECONDS:g}",
@@ -2928,11 +2931,9 @@ def test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands(
     budget is one constant both steps read. A selected subset stays on the shared cap,
     which is the guard against a hung test.
 
-    Since `BC-214` the step that reads the same constant is `slow behavioral tests`. The
-    whole-suite fallback runs `-m "not exhaustive_exact"`, which is the quick lane and the
-    slow lane together, and the slow lane is the half that costs the wall -- so the
-    constant that bounds `--push` is the one the slow lane declares, not the quick one's
-    absent budget.
+    Since `BC-214` the step that reads the same constant is `slow behavioral tests`.
+    Whole-file fallback retains that existing ceiling for the default quick lane and
+    explicit combined lane; selecting a lane does not revise its timing budget.
     """
 
     def probe(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:
@@ -3017,6 +3018,8 @@ def test_push_tests_forward_the_shared_worker_allocation(
             "--run",
             "--since",
             "origin/main",
+            "--lane",
+            "quick",
             "-n",
             "4",
             "--pool-workers",
@@ -3099,8 +3102,10 @@ def test_explicit_push_runs_complementary_normal_and_exclusive_pool_lanes(
     normal, pooled = calls
     assert normal[1] == "1"
     assert pooled[1] == "2"
-    assert normal[0][normal[0].index("-m", 3) + 1] == "not exhaustive_exact and not pool_heavy"
-    assert pooled[0][pooled[0].index("-m", 3) + 1] == "not exhaustive_exact and pool_heavy"
+    assert (
+        normal[0][normal[0].index("-m", 3) + 1] == f"{validate.QUICK_TESTS} and not pool_heavy"
+    )
+    assert pooled[0][pooled[0].index("-m", 3) + 1] == f"{validate.QUICK_TESTS} and pool_heavy"
     assert normal[0][normal[0].index("-n") + 1] == "4"
     assert "-n" not in pooled[0]
     for command, _jobs in calls:
@@ -4443,6 +4448,112 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
     assert validate.REQUIRE_CHROMIUM == site_browser.REQUIRED
 
 
+class _SiteLayoutCollection:
+    """Collect real explicit file selections without constructing unused siblings."""
+
+    def __init__(self) -> None:
+        self.node_ids: list[str] = []
+        self.session: pytest.Session | None = None
+
+    def pytest_sessionstart(self, session: pytest.Session) -> None:
+        # Pytest has parsed options and node selectors. A directory would need its
+        # descendants, so refuse that shape rather than silently narrowing it.
+        if any(
+            not Path(argument.split("::", 1)[0]).is_file() for argument in session.config.args
+        ):
+            raise pytest.UsageError("site-layout partition collection requires explicit files")
+        self.session = session
+
+    @pytest.hookimpl(tryfirst=True)
+    def pytest_ignore_collect(self, collection_path: Path) -> bool | None:
+        # Pytest otherwise builds collectors for every sibling before discarding
+        # them while matching explicit paths. Keep all initial paths and ancestors.
+        if self.session is None or self.session.isinitpath(collection_path, with_parents=True):
+            return None
+        return True
+
+    def pytest_collection_finish(self, session: pytest.Session) -> None:
+        self.node_ids = [item.nodeid for item in session.items]
+
+
+def test_site_layout_collection_preserves_initial_paths_and_refuses_directory_scope() -> None:
+    collection = _SiteLayoutCollection()
+    selected = validate.PROJECT_ROOT / "tests/test_site_rendering.py"
+    parent = selected.parent
+    sibling = parent / "test_validation_cli.py"
+    session = Mock(spec=pytest.Session)
+    session.config = Mock(args=[f"{selected}::test_selected"])
+    session.isinitpath.side_effect = lambda path, *, with_parents: (
+        with_parents and path in {selected, parent}
+    )
+    collection.pytest_sessionstart(session)
+    assert collection.pytest_ignore_collect(selected) is None
+    assert collection.pytest_ignore_collect(parent) is None
+    assert collection.pytest_ignore_collect(sibling) is True
+    session.config.args = [str(parent)]
+    with pytest.raises(pytest.UsageError, match="requires explicit files"):
+        collection.pytest_sessionstart(session)
+
+
+def _collect_site_layout_partitions(commands: Sequence[Sequence[str]]) -> list[list[str]]:
+    """Run each real selection in one isolated process, sharing only module imports.
+
+    Collection stays in the calling test's measured phase. No fixtures execute and
+    each pytest invocation applies its own paths and expression to fresh items.
+    """
+    collections: list[list[str]] = []
+
+    for command in commands:
+        assert tuple(command[1:3]) == ("-m", "pytest")
+        # Collection needs no xdist worker: preserve selection, remove allocation.
+        serial = [
+            argument
+            for index, argument in enumerate(command[3:], start=3)
+            if argument != "-n"
+            and not argument.startswith("--dist=")
+            and command[index - 1] != "-n"
+        ]
+        collection = _SiteLayoutCollection()
+        captured = io.StringIO()
+        with redirect_stdout(captured), redirect_stderr(captured):
+            status = pytest.main([*serial, "-n", "0", "--collect-only"], plugins=[collection])
+        if status != pytest.ExitCode.OK:
+            raise RuntimeError(
+                f"site layout collection failed ({status}): {captured.getvalue()}"
+            )
+        collections.append(collection.node_ids)
+    return collections
+
+
+def test_site_layout_partition_collection_refuses_a_failed_selection(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A passing original collection cannot hide a failed functional selection."""
+    commands, _environments, _output = _captured_site_layout_commands(monkeypatch)
+    arguments: list[tuple[str, ...]] = []
+
+    def collect(command: Sequence[str], *, plugins: Sequence[object]) -> pytest.ExitCode:
+        assert len(plugins) == 1
+        arguments.append(tuple(command))
+        if len(arguments) == 1:
+            return pytest.ExitCode.OK
+        print("functional selection failed")
+        return pytest.ExitCode.NO_TESTS_COLLECTED
+
+    monkeypatch.setattr(pytest, "main", collect)
+    with pytest.raises(RuntimeError, match="functional selection failed"):
+        _collect_site_layout_partitions([commands[1], commands[0]])
+    assert arguments[0][-3:] == ("-n", "0", "--collect-only")
+    assert arguments[1][-5:] == (
+        "-k",
+        "not test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets",
+        "-n",
+        "0",
+        "--collect-only",
+    )
+    assert all("--dist=loadfile" not in command for command in arguments)
+
+
 def test_site_layout_commands_partition_the_original_collection(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -4452,37 +4563,34 @@ def test_site_layout_commands_partition_the_original_collection(
     commands, _environments, _output = _captured_site_layout_commands(monkeypatch)
     assert len(commands) == 2
 
-    def collect(command: Sequence[str]) -> set[str]:
-        # Collection needs no xdist worker: preserve selection, remove allocation.
-        serial = [
-            argument
-            for index, argument in enumerate(command)
-            if argument != "-n"
-            and not argument.startswith("--dist=")
-            and (index == 0 or command[index - 1] != "-n")
-        ]
-        completed = subprocess.run(
-            (*serial, "-n", "0", "--collect-only"),
-            cwd=validate.PROJECT_ROOT,
-            capture_output=True,
-            text=True,
-            check=True,
-            timeout=30,
-        )
-        return {line for line in completed.stdout.splitlines() if line.startswith("tests/")}
-
-    original = collect(
+    completed = subprocess.run(
         (
             sys.executable,
             "-m",
-            "pytest",
-            "-q",
-            "-p",
-            "no:cacheprovider",
-            *validate.SITE_LAYOUT_TESTS,
-        )
+            "tests.test_validation_cli",
+            "--collect-site-layout-partitions",
+            json.dumps(
+                [
+                    (
+                        sys.executable,
+                        "-m",
+                        "pytest",
+                        "-q",
+                        "-p",
+                        "no:cacheprovider",
+                        *validate.SITE_LAYOUT_TESTS,
+                    ),
+                    *commands,
+                ]
+            ),
+        ),
+        cwd=validate.PROJECT_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+        timeout=30,
     )
-    parallel, serial = (collect(command) for command in commands)
+    original, parallel, serial = (set(nodes) for nodes in json.loads(completed.stdout))
     assert serial == {
         f"tests/test_site_rendering.py::"
         f"test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets[{case}]"
@@ -5288,10 +5396,12 @@ def test_frontend_browser_workers_fit_outer_topology(
     "paths",
     [["site/style.css"], ["unknown.xyz"], [], ["site/style.css", "science/certificate.json"]],
 )
+@pytest.mark.parametrize("include_slow", [False, True])
 def test_push_scopes_prerequisites_and_tests_from_one_snapshot(
-    monkeypatch: pytest.MonkeyPatch, paths: list[str]
+    monkeypatch: pytest.MonkeyPatch, paths: list[str], *, include_slow: bool
 ) -> None:
     """Both selectors see the same Git result, even if the tree changes during the floor."""
+    paths = paths.copy()
     prerequisites = (
         validate.Step("unattributed", lambda _context: "ok", fast=True),
         validate.Step("site", lambda _context: "ok", fast=True, touches=("site/*",)),
@@ -5322,6 +5432,7 @@ def test_push_scopes_prerequisites_and_tests_from_one_snapshot(
 
     def execute(_context: validate.Context, command: tuple[str, ...]) -> str:
         selector(command)
+        assert command[command.index("--lane") + 1] == ("all" if include_slow else "quick")
         return "tests passed"
 
     monkeypatch.setattr(validate, "_run", execute)
@@ -5343,7 +5454,14 @@ def test_push_scopes_prerequisites_and_tests_from_one_snapshot(
 
     monkeypatch.setattr(validate, "_run_selected", run)
     status, stdout, stderr = _invoke(
-        "--push", "--since", "base-ref", "--jobs", "1", "--inner-jobs", "1"
+        "--push",
+        "--since",
+        "base-ref",
+        "--jobs",
+        "1",
+        "--inner-jobs",
+        "1",
+        *(("--include-reachable-slow",) if include_slow else ()),
     )
     assert (status, stderr) == (0, "")
     expected = (
@@ -5485,3 +5603,17 @@ def test_push_selector_errors_name_the_snapshot_they_were_given(
         assert message.endswith("'noise'")
     with pytest.raises(validate.UsageError, match="the change against 'origin/main'"):
         validate._push_test_step("origin/main")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Isolated site-layout partition collection")
+    parser.add_argument("--collect-site-layout-partitions", required=True)
+    arguments = parser.parse_args()
+    collection_commands: list[list[str]] = json.loads(arguments.collect_site_layout_partitions)
+    print(json.dumps(_collect_site_layout_partitions(collection_commands)))
+
+
+def test_reachable_slow_opt_in_requires_the_push_entrypoint() -> None:
+    status, _stdout, stderr = _invoke("--include-reachable-slow")
+    assert status == 2
+    assert "--include-reachable-slow requires --push" in stderr

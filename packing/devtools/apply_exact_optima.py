@@ -432,13 +432,13 @@ def body_text(n: int, body: str, payload: Mapping[str, Any]) -> str:
     return body[: span[0]] + section(n, finder) + body[span[0] :]
 
 
-def apply_case(n: int, text: str) -> str:
+def apply_case(n: int, text: str, *, coverage: Mapping[str, Any] | None = None) -> str:
     """One case record with the exact optimum written over it; others unchanged."""
     if n not in certificates.IMPROVING:
         return text
     from devtools.source_supersession import preserve_selected_case  # noqa: PLC0415
 
-    if preserve_selected_case(n, text, {COVERAGE_ID}):
+    if preserve_selected_case(n, text, {COVERAGE_ID}, coverage=coverage):
         return text
     _, front, body = text.split("---\n", 2)
     payload = safe_load(front)["packing"]
@@ -555,16 +555,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="report drift without writing")
     args = parser.parse_args(argv)
+    coverage_before = COVERAGE.read_text(encoding="utf-8")
+    coverage = safe_load(coverage_before)
     drift: list[Path] = []
     for n in certificates.IMPROVING:
         path = FRONTIER / f"n-{n:03d}.md"
         text = path.read_text(encoding="utf-8")
-        rendered = render_case_verifiers.refresh(apply_case(n, text))
+        rendered = render_case_verifiers.refresh(apply_case(n, text, coverage=coverage))
         if _normalized(rendered) != _normalized(text):
             drift.append(path)
             if not args.check:
                 atomic_write_text(path, rendered)
-    text = COVERAGE.read_text(encoding="utf-8")
+    text = coverage_before
     updated = coverage_text(text)
     if updated != text:
         drift.append(COVERAGE)

@@ -118,8 +118,27 @@ def test_retained_implementation_revision_must_name_the_executing_reader() -> No
 def test_cross_checkout_and_dirty_executing_reader_are_refused(tmp_path: Path) -> None:
     checkout = tmp_path / "input-checkout"
     subprocess.run(
-        ("git", "clone", "--shared", "--quiet", str(REPO), str(checkout)), check=True
+        ("git", "clone", "--shared", "--no-checkout", "--quiet", str(REPO), str(checkout)),
+        check=True,
     )
+    # Source binding runs before the executing-reader guard. Keep every real source
+    # and the reader's package initializer, with full Git history, while avoiding a
+    # checkout of unrelated archives and exports for these refusal controls.
+    retained_paths = {
+        *(source.path for source in replay.SOURCES),
+        replay.READER_PATH,
+        "packing/devtools/__init__.py",
+    }
+    subprocess.run(
+        ("git", "-C", str(checkout), "sparse-checkout", "set", "--no-cone", "--stdin"),
+        input="".join(f"/{path}\n" for path in sorted(retained_paths)),
+        text=True,
+        check=True,
+        capture_output=True,
+    )
+    subprocess.run(("git", "-C", str(checkout), "checkout", "--quiet", "HEAD"), check=True)
+    assert all((checkout / path).is_file() for path in retained_paths)
+    assert not (checkout / "packing/atlas/known-best/manifest.json").exists()
 
     with pytest.raises(replay.T1ReplayError, match=r"executing T1 reader.*path"):
         replay.replay(checkout)

@@ -1,0 +1,6 @@
+.                                                                        [100%]
+============================== slowest durations ===============================
+3.03s call     tests/test_site_project_tallies.py::test_a_tally_link_selects_exactly_its_projects_rows
+1.97s setup    tests/test_site_project_tallies.py::test_a_tally_link_selects_exactly_its_projects_rows
+0.00s teardown tests/test_site_project_tallies.py::test_a_tally_link_selects_exactly_its_projects_rows
+1 passed in 5.47s

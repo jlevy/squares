@@ -1289,14 +1289,22 @@ def problems(
     document = index_document() if index is None else index
     drawn = drawn_counts(document)
     items, unregistered = expected(document, drawn=drawn)
-    wanted = block_text(items, unregistered)
     results = (safe_load(head) or {}).get("results") or []
     solves = recorded_solves(drawn, results, document.get("runs") or [])
     found_problems = registered_problems(head, document.get("generators") or {}, solves)
     found_problems += first_certified_problems(load_register())
     found_problems += case_problems(document, case_fields(document, drawn=drawn))
-    if block == wanted:
-        return found_problems
+    return [*generated_block_problems(block, items, unregistered), *found_problems]
+
+
+def generated_block_problems(
+    block: str,
+    items: Sequence[Mapping[str, Any]],
+    unregistered: Sequence[Mapping[str, Any]],
+) -> list[str]:
+    """Compare only the generated block with the items established by the full audit."""
+    if block == block_text(items, unregistered):
+        return []
     found = (safe_load(block) or {}).get(KEY) or {} if block else {}
     named = {row["n"] for row in found.get("items") or []}
     owed = {row["n"] for row in items}
@@ -1307,7 +1315,6 @@ def problems(
         f"results.yaml's {KEY} differs from the regularized layer's index"
         + (f" ({'; '.join(detail)})" if detail else "")
         + f"; run {GENERATOR}",
-        *found_problems,
     ]
 
 

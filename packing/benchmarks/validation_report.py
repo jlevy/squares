@@ -102,6 +102,14 @@ def validate_evidence(root: Path, runs: list[dict[str, Any]]) -> None:
 def comparable(experiment: dict[str, Any], arms: list[list[dict[str, Any]]]) -> bool:
     """Keep selections and provenance stable; only source changes may differ by arm."""
     runs = [run for arm in arms for run in arm]
+    declared = experiment["target"]
+    targets = (declared,) if isinstance(declared, str) else tuple(declared)
+    if (
+        not targets
+        or any(not isinstance(target, str) or not target for target in targets)
+        or len(set(targets)) != len(targets)
+    ):
+        return False
     common_fields = (
         "platform",
         "python",
@@ -121,7 +129,7 @@ def comparable(experiment: dict[str, Any], arms: list[list[dict[str, Any]]]) -> 
         "timeout_seconds",
     )
     if any(
-        experiment["target"] not in run.get("command", [])
+        not set(targets).issubset(run.get("command", []))
         or not isinstance(run.get("dirty_diff_sha256"), str)
         or not run["dirty_diff_sha256"]
         for run in runs

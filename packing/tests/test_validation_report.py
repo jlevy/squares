@@ -55,6 +55,22 @@ def observations() -> list[dict[str, Any]]:
     ]
 
 
+def test_multiple_targets_require_every_exact_token_in_every_observation() -> None:
+    targets = [EXPERIMENT["target"], "tests/test_second.py::test_complete"]
+    experiment = {**EXPERIMENT, "target": targets}
+    runs = observations()
+    for run in runs:
+        run["command"].append(targets[1])
+    assert screen(experiment, runs)[2].startswith("Screen passes")
+    runs[-1]["command"][-1] += "_different"
+    assert "Incomparable" in screen(experiment, runs)[2]
+
+
+@pytest.mark.parametrize("targets", [[], [""], ["same", "same"]])
+def test_empty_or_duplicate_targets_cannot_qualify_a_screen(targets: list[str]) -> None:
+    assert "Incomparable" in screen({**EXPERIMENT, "target": targets}, observations())[2]
+
+
 def test_clean_comparison_passes_only_the_arithmetic_screen() -> None:
     assert screen(EXPERIMENT, observations())[2] == (
         "Screen passes (45.5% median reduction); correctness and complexity review required"

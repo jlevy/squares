@@ -141,7 +141,16 @@ def supervise(
                 if any(rss > max_memory_mib * 1024**2 for rss in members.values()):
                     reason = "memory_limit"
                     break
-                if child.poll() is not None:
+                exited = child.poll() is not None
+                # Sampling and polling can cross the deadline or observe a signal.
+                # Do not mistake the resulting termination for a normal exit.
+                if interrupted:
+                    reason = "supervisor_signal"
+                    break
+                if time.monotonic() - started >= max_seconds:
+                    reason = "wall_limit"
+                    break
+                if exited:
                     break
                 time.sleep(
                     min(sample_seconds, max(0, started + max_seconds - time.monotonic()))

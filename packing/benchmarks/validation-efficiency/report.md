@@ -13,6 +13,16 @@ Selected test hashes do not establish whole-tree equivalence. Within-arm whole-t
 | [VE-003](experiments/VE-003-checks-start-order.md) | No passing samples | No passing samples | Incomplete or unsuccessful observation; no acceptance |
 | [VE-004](experiments/VE-004-checks-start-order.md) | 93.18 (90.81-94.13), n=3 | 71.84 (64.96-73.09), n=3 | Screen passes (22.9% median reduction); correctness and complexity review required |
 | [VE-005](experiments/VE-005-rollup-corpus-snapshot.md) | 47.72 (44.96-50.80), n=3 | 2.31 (2.29-3.20), n=3 | Screen passes (95.2% median reduction); correctness and complexity review required; whole-tree diff varied within an arm: affected-source audit required, whole-tree equivalence is not established |
+| [VE-006](experiments/VE-006-recorded-cost-first-loadfile.md) | No passing samples | No passing samples | Pending samples |
+| [VE-007](experiments/VE-007-gupta-invocation-facts.md) | No passing samples | No passing samples | Pending samples |
+| [VE-008](experiments/VE-008-paper-layout-probes.md) | No passing samples | No passing samples | Pending samples |
+| [VE-009](experiments/VE-009-shared-test-publication.md) | No passing samples | No passing samples | Pending samples |
+| [VE-010](experiments/VE-010-gupta-fixture-renderings.md) | 10.66 (9.08-10.96), n=3 | 7.24 (7.17-11.67), n=3 | No detectable effect: ranges overlap or candidate is slower |
+| [VE-011](experiments/VE-011-guarded-receipt-copies.md) | 39.14 (37.36-50.06), n=3 | 37.69 (34.56-62.62), n=3 | No detectable effect: ranges overlap or candidate is slower |
+| [VE-012](experiments/VE-012-tally-attribution-snapshot.md) | 7.62 (7.58-7.93), n=3 | 5.86 (5.82-5.95), n=3 | Screen passes (23.1% median reduction); correctness and complexity review required |
+| [VE-013](experiments/VE-013-gupta-bound-pair.md) | 6.39 (6.36-6.80), n=3 | 5.02 (5.02-5.05), n=3 | Screen passes (21.4% median reduction); correctness and complexity review required |
+| [VE-014](experiments/VE-014-witness-inline-shapes.md) | 34.10 (33.56-34.40), n=3 | 29.74 (29.47-30.09), n=3 | Below declared improvement threshold |
+| [VE-015](experiments/VE-015-gupta-retained-schema.md) | 6.82 (6.58-7.30), n=3 | 5.22 (5.21-5.32), n=3 | Screen passes (23.5% median reduction); correctness and complexity review required |
 
 ## Observations
 
@@ -43,6 +53,42 @@ Every observation is listed, including incomplete or failed work.
 - `9548d7299e50469180f6f37a58027e13`: rollup-corpus-candidate, passed, 3.20s, 1 test cases; [output](runs/9548d7299e50469180f6f37a58027e13.stdout.log), [errors](runs/9548d7299e50469180f6f37a58027e13.stderr.log).
 - `3ea1ba12b3314ffa8530235f20062d6f`: rollup-corpus-control, passed, 50.80s, 1 test cases; [output](runs/3ea1ba12b3314ffa8530235f20062d6f.stdout.log), [errors](runs/3ea1ba12b3314ffa8530235f20062d6f.stderr.log).
 - `954782ba85ac461e8f046fff6eb454a0`: rollup-corpus-candidate, passed, 2.31s, 1 test cases; [output](runs/954782ba85ac461e8f046fff6eb454a0.stdout.log), [errors](runs/954782ba85ac461e8f046fff6eb454a0.stderr.log).
+- `58b59c11cc154330a9b7af7705ddff9a`: gupta-original-control, passed, 9.08s, 1 test cases; [output](runs/58b59c11cc154330a9b7af7705ddff9a.stdout.log), [errors](runs/58b59c11cc154330a9b7af7705ddff9a.stderr.log).
+- `81eaffed803b4feebd12536e574b6c09`: gupta-production-and-fixture-candidate, passed, 7.17s, 1 test cases; [output](runs/81eaffed803b4feebd12536e574b6c09.stdout.log), [errors](runs/81eaffed803b4feebd12536e574b6c09.stderr.log).
+- `12f3b81a7812499d90ff22205de9400d`: gupta-original-control, passed, 10.66s, 1 test cases; [output](runs/12f3b81a7812499d90ff22205de9400d.stdout.log), [errors](runs/12f3b81a7812499d90ff22205de9400d.stderr.log).
+- `0698d977871f4ef3aacbd35f8f4cc84e`: gupta-production-and-fixture-candidate, passed, 11.67s, 1 test cases; [output](runs/0698d977871f4ef3aacbd35f8f4cc84e.stdout.log), [errors](runs/0698d977871f4ef3aacbd35f8f4cc84e.stderr.log).
+- `5d4b0e0e81784e61ac9508ab88cfc2f5`: gupta-original-control, passed, 10.96s, 1 test cases; [output](runs/5d4b0e0e81784e61ac9508ab88cfc2f5.stdout.log), [errors](runs/5d4b0e0e81784e61ac9508ab88cfc2f5.stderr.log).
+- `903ae7b657424c6d9c0c92fe4a81fcce`: gupta-production-and-fixture-candidate, passed, 7.24s, 1 test cases; [output](runs/903ae7b657424c6d9c0c92fe4a81fcce.stdout.log), [errors](runs/903ae7b657424c6d9c0c92fe4a81fcce.stderr.log).
+- `788b3cb5eb9d44f8bd2fb35f68365afb`: guarded-copy-original-control, passed, 39.14s, 1 test cases; [output](runs/788b3cb5eb9d44f8bd2fb35f68365afb.stdout.log), [errors](runs/788b3cb5eb9d44f8bd2fb35f68365afb.stderr.log).
+- `aa7556ffeaaf4b97af8e164511ae5d44`: guarded-copy-json-candidate, passed, 62.62s, 1 test cases; [output](runs/aa7556ffeaaf4b97af8e164511ae5d44.stdout.log), [errors](runs/aa7556ffeaaf4b97af8e164511ae5d44.stderr.log).
+- `3668fa66bf414f6994829361ee540189`: guarded-copy-original-control, passed, 50.06s, 1 test cases; [output](runs/3668fa66bf414f6994829361ee540189.stdout.log), [errors](runs/3668fa66bf414f6994829361ee540189.stderr.log).
+- `73f8cd475b104f3cb6d9f4b87daba927`: guarded-copy-json-candidate, passed, 34.56s, 1 test cases; [output](runs/73f8cd475b104f3cb6d9f4b87daba927.stdout.log), [errors](runs/73f8cd475b104f3cb6d9f4b87daba927.stderr.log).
+- `e460cd431d434eaea2df2770ec0f8f95`: guarded-copy-original-control, passed, 37.36s, 1 test cases; [output](runs/e460cd431d434eaea2df2770ec0f8f95.stdout.log), [errors](runs/e460cd431d434eaea2df2770ec0f8f95.stderr.log).
+- `700a6fec69b347d39169e5e3ef2f4982`: guarded-copy-json-candidate, passed, 37.69s, 1 test cases; [output](runs/700a6fec69b347d39169e5e3ef2f4982.stdout.log), [errors](runs/700a6fec69b347d39169e5e3ef2f4982.stderr.log).
+- `bcf8e67ffa9e4547908c9acce559e1c0`: tally-original-control, passed, 7.93s, 1 test cases; [output](runs/bcf8e67ffa9e4547908c9acce559e1c0.stdout.log), [errors](runs/bcf8e67ffa9e4547908c9acce559e1c0.stderr.log).
+- `a4d9884844b847c284da0a3ed5e1a2c2`: tally-snapshot-candidate, passed, 5.86s, 1 test cases; [output](runs/a4d9884844b847c284da0a3ed5e1a2c2.stdout.log), [errors](runs/a4d9884844b847c284da0a3ed5e1a2c2.stderr.log).
+- `4a7494c13ab34181843a00c851d154d8`: tally-original-control, passed, 7.58s, 1 test cases; [output](runs/4a7494c13ab34181843a00c851d154d8.stdout.log), [errors](runs/4a7494c13ab34181843a00c851d154d8.stderr.log).
+- `1a0e6986fdc54432bc007f43fe9af650`: tally-snapshot-candidate, passed, 5.82s, 1 test cases; [output](runs/1a0e6986fdc54432bc007f43fe9af650.stdout.log), [errors](runs/1a0e6986fdc54432bc007f43fe9af650.stderr.log).
+- `e581f1ffb90f45479cc7c2b960354e98`: tally-original-control, passed, 7.62s, 1 test cases; [output](runs/e581f1ffb90f45479cc7c2b960354e98.stdout.log), [errors](runs/e581f1ffb90f45479cc7c2b960354e98.stderr.log).
+- `19994fb355c54f57915976051a2a4078`: tally-snapshot-candidate, passed, 5.95s, 1 test cases; [output](runs/19994fb355c54f57915976051a2a4078.stdout.log), [errors](runs/19994fb355c54f57915976051a2a4078.stderr.log).
+- `c1a394acff71419f9ec574a79d1064c5`: gupta-bound-original-control, passed, 6.36s, 1 test cases; [output](runs/c1a394acff71419f9ec574a79d1064c5.stdout.log), [errors](runs/c1a394acff71419f9ec574a79d1064c5.stderr.log).
+- `04d40006ffb949a3b10a4d7c775c6990`: gupta-bound-pair-candidate, passed, 5.02s, 1 test cases; [output](runs/04d40006ffb949a3b10a4d7c775c6990.stdout.log), [errors](runs/04d40006ffb949a3b10a4d7c775c6990.stderr.log).
+- `b0d1fd6ebf57457d8bf4c7bbebc92696`: gupta-bound-original-control, passed, 6.80s, 1 test cases; [output](runs/b0d1fd6ebf57457d8bf4c7bbebc92696.stdout.log), [errors](runs/b0d1fd6ebf57457d8bf4c7bbebc92696.stderr.log).
+- `e833a7f7dbba44d0aec9967d7704db97`: gupta-bound-pair-candidate, passed, 5.02s, 1 test cases; [output](runs/e833a7f7dbba44d0aec9967d7704db97.stdout.log), [errors](runs/e833a7f7dbba44d0aec9967d7704db97.stderr.log).
+- `52b2956ca9274fc8ae3de0b82fce91ba`: gupta-bound-original-control, passed, 6.39s, 1 test cases; [output](runs/52b2956ca9274fc8ae3de0b82fce91ba.stdout.log), [errors](runs/52b2956ca9274fc8ae3de0b82fce91ba.stderr.log).
+- `d2f7c46f9cca4db6a0c8ac3fcf9c529f`: gupta-bound-pair-candidate, passed, 5.05s, 1 test cases; [output](runs/d2f7c46f9cca4db6a0c8ac3fcf9c529f.stdout.log), [errors](runs/d2f7c46f9cca4db6a0c8ac3fcf9c529f.stderr.log).
+- `97ca8a451f72444ebfaf66503ab56e7d`: witness-refs-original-control, passed, 34.40s, 25 test cases; [output](runs/97ca8a451f72444ebfaf66503ab56e7d.stdout.log), [errors](runs/97ca8a451f72444ebfaf66503ab56e7d.stderr.log).
+- `44466f65e7314f92a8bc8e1ede03944f`: witness-inline-candidate, passed, 29.47s, 25 test cases; [output](runs/44466f65e7314f92a8bc8e1ede03944f.stdout.log), [errors](runs/44466f65e7314f92a8bc8e1ede03944f.stderr.log).
+- `26232f7b34ea44d4bf14f52f9b88584c`: witness-refs-original-control, passed, 33.56s, 25 test cases; [output](runs/26232f7b34ea44d4bf14f52f9b88584c.stdout.log), [errors](runs/26232f7b34ea44d4bf14f52f9b88584c.stderr.log).
+- `34853946906c439d919e6e3617d94cba`: witness-inline-candidate, passed, 30.09s, 25 test cases; [output](runs/34853946906c439d919e6e3617d94cba.stdout.log), [errors](runs/34853946906c439d919e6e3617d94cba.stderr.log).
+- `2351236ce9874796aa547f1e71d496c5`: witness-refs-original-control, passed, 34.10s, 25 test cases; [output](runs/2351236ce9874796aa547f1e71d496c5.stdout.log), [errors](runs/2351236ce9874796aa547f1e71d496c5.stderr.log).
+- `4147e1eee8584255ae4d7114bbce4f0d`: witness-inline-candidate, passed, 29.74s, 25 test cases; [output](runs/4147e1eee8584255ae4d7114bbce4f0d.stdout.log), [errors](runs/4147e1eee8584255ae4d7114bbce4f0d.stderr.log).
+- `6f66efd4772a4d97919824622cfa0cd7`: gupta-retained-schema-control, passed, 7.30s, 1 test cases; [output](runs/6f66efd4772a4d97919824622cfa0cd7.stdout.log), [errors](runs/6f66efd4772a4d97919824622cfa0cd7.stderr.log).
+- `a8cb56af0daa4ceaa09249a9c22dd51a`: gupta-retained-schema-candidate, passed, 5.21s, 1 test cases; [output](runs/a8cb56af0daa4ceaa09249a9c22dd51a.stdout.log), [errors](runs/a8cb56af0daa4ceaa09249a9c22dd51a.stderr.log).
+- `863b55e51dc341baa2ca8e3152725ec4`: gupta-retained-schema-control, passed, 6.82s, 1 test cases; [output](runs/863b55e51dc341baa2ca8e3152725ec4.stdout.log), [errors](runs/863b55e51dc341baa2ca8e3152725ec4.stderr.log).
+- `45dd801b30644c2d8f6510720cd93549`: gupta-retained-schema-candidate, passed, 5.22s, 1 test cases; [output](runs/45dd801b30644c2d8f6510720cd93549.stdout.log), [errors](runs/45dd801b30644c2d8f6510720cd93549.stderr.log).
+- `1156545fc7ce4ae4a59a52b6145f6696`: gupta-retained-schema-control, passed, 6.58s, 1 test cases; [output](runs/1156545fc7ce4ae4a59a52b6145f6696.stdout.log), [errors](runs/1156545fc7ce4ae4a59a52b6145f6696.stderr.log).
+- `22ecaf90aaf14d0f92f587e96900a3b8`: gupta-retained-schema-candidate, passed, 5.32s, 1 test cases; [output](runs/22ecaf90aaf14d0f92f587e96900a3b8.stdout.log), [errors](runs/22ecaf90aaf14d0f92f587e96900a3b8.stderr.log).
 
 The append-only [receipts](runs/receipts.jsonl) retain commands and provenance.
 
