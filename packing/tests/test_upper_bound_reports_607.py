@@ -279,9 +279,7 @@ def test_in_report_order_16_counts_are_recorded_and_the_7_composites_are_fangs()
 def test_the_beyond_horizon_record_holds_every_requested_count_past_324() -> None:
     claims = coverage_check.load_claims(_packet() / reports.BEYOND)
     assert claims == {
-        n: side
-        for n, side in PRINTED.items()
-        if n > reports.HORIZON and n not in COMPOSITES
+        n: side for n, side in PRINTED.items() if n > reports.HORIZON and n not in COMPOSITES
     }
 
 
