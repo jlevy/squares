@@ -33,7 +33,8 @@ from mdit_py_plugins.attrs import attrs_block_plugin, attrs_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin
 from strif import atomic_output_file
 
-from devtools.overview_data import tex_bounds
+from devtools.migrate_math import classify
+from devtools.overview_data import MATH, breakable_quotients, prose_tex
 from devtools.repo_links import path_kind, repo_url
 from devtools.site_topics import TOPICS, topic_chip
 from sqpack import release
@@ -171,12 +172,17 @@ def _https_authority(parts: SplitResult, target: str) -> None:
 class _RenderedURLs(HTMLParser):
     """Apply the changelog URL policy to safe HTML, including generated MathML links."""
 
-    def __init__(self, destination: Destination) -> None:
+    def __init__(self, destination: Destination, *, allow_links: bool = True) -> None:
         super().__init__(convert_charrefs=False)
         self.destination: Destination = destination
+        self.allow_links = allow_links
         self.parts: list[str] = []
 
     def _start(self, tag: str, attrs: list[tuple[str, str | None]], closing: str) -> None:
+        if not self.allow_links and (
+            tag == "a" or any(name in {"href", "xlink:href"} and value for name, value in attrs)
+        ):
+            raise ValueError("links are not allowed in News headlines")
         serialized = []
         for name, value in attrs:
             safe_value = (
@@ -295,7 +301,9 @@ def _inline_references(text: str, tokens: list[Token], env: dict[str, Any]) -> s
     return source.strip()
 
 
-def _prose(text: str, *, destination: Destination = "github") -> str:
+def _prose(
+    text: str, *, destination: Destination = "github", rewrite_links: bool = True
+) -> str:
     if not text.strip():
         raise ValueError("blank changelog prose")
     env: dict[str, Any] = {}
@@ -313,11 +321,76 @@ def _prose(text: str, *, destination: Destination = "github") -> str:
     for reference in [*env.get("references", {}).values(), *env.get("duplicate_refs", [])]:
         _target(reference["href"], destination=destination)
     tree = _sanitized_prose(text)
-    rendered = _RenderedURLs(destination)
+    rendered = _RenderedURLs(destination if rewrite_links else "github")
     rendered.feed(tree.html)
     rendered.close()
     if destination == "github":
         return _inline_references(text, parsed, env).strip()
+    return "".join(rendered.parts).strip()
+
+
+def _inline_math(tex: str) -> str:
+    # The surrounding inline renderer applies the site URL policy to the completed
+    # fragment. Retain authored paths here so profile URLs are converted only once.
+    rendered = _prose(f"${tex}$", destination="site", rewrite_links=False)
+    return rendered.removeprefix("<p>").removesuffix("</p>")
+
+
+def _inline_text(text: str) -> str:
+    parts: list[str] = []
+    last = 0
+    for match in MATH.finditer(text):
+        parts.append(html.escape(text[last : match.start()], quote=False))
+        parts.append(_inline_math(breakable_quotients(prose_tex(match.group(0)))))
+        last = match.end()
+    parts.append(html.escape(text[last:], quote=False))
+    return "".join(parts)
+
+
+def inline_html(text: str, *, allow_links: bool = True) -> str:
+    """Safe inline News Markdown, with authored and legacy register math set by KPress.
+
+    Raw HTML stays visible text. A linked preview headline disables authored links
+    so its enclosing article link never contains another anchor.
+    """
+    parser = _markdown()
+    parser.options["html"] = False
+    env: dict[str, Any] = {}
+    parsed = parser.parseInline(text, env)
+    for token in _walk(parsed):
+        if set(token.attrs) - {"href", "title"}:
+            raise ValueError("Markdown HTML attributes are not allowed in News text")
+        if token.type == "image":
+            raise ValueError("images are not allowed in News text")
+        if token.type == "link_open":
+            if not allow_links:
+                raise ValueError("links are not allowed in News headlines")
+            # Validate the authored repository path here; the final HTML pass also
+            # handles MathML links and rewrites every destination exactly once.
+            _target(str(token.attrGet("href")), destination="site")
+
+    def render_inline(
+        _renderer: object,
+        tokens: Sequence[Token],
+        index: int,
+        _options: Any,
+        _env: Any,
+    ) -> str:
+        token = tokens[index]
+        if token.type == "math_inline":
+            return _inline_math(token.content.strip())
+        if token.type == "code_inline":
+            classified = classify(token.content)
+            if classified.kind == "math" and classified.latex:
+                return _inline_math(breakable_quotients(classified.latex))
+            return f"<code>{html.escape(token.content, quote=False)}</code>"
+        return _inline_text(token.content)
+
+    for kind in ("text", "math_inline", "code_inline"):
+        parser.add_render_rule(kind, render_inline)
+    rendered = _RenderedURLs("site", allow_links=allow_links)
+    rendered.feed(str(parser.renderer.render(parsed, parser.options, env)))
+    rendered.close()
     return "".join(rendered.parts).strip()
 
 
@@ -474,6 +547,7 @@ def validate(document: Document, *, schema: Document | None = None) -> None:
         _day(entry["date"], identifier)
         if not entry["title"].strip() or "\n" in entry["title"]:
             raise ValueError(f"{identifier}: blank or multiline title")
+        inline_html(entry["title"], allow_links=False)
         if "significance" in entry:
             rationale = entry_significance(entry)["rationale"]
             if not rationale.strip() or re.search(r"[\r\n<>`*_\[\]$]", rationale):
@@ -693,7 +767,13 @@ def render_markdown(
         anchor = entry_anchor(entry["id"])
         if destination == "site":
             out.extend(
-                [f'<h{level} id="{anchor}">{html.escape(entry["title"])}</h{level}>', ""]
+                [
+                    (
+                        f'<h{level} id="{anchor}">'
+                        f"{inline_html(entry['title'], allow_links=False)}</h{level}>"
+                    ),
+                    "",
+                ]
             )
         else:
             out.extend(
@@ -861,7 +941,7 @@ def render_news(document: Document, *, limit: int | None = None) -> str:
     seen_dates: set[str] = set()
     for entry in entries:
         anchor = entry_anchor(entry["id"])
-        title = tex_bounds(entry["title"])
+        title = inline_html(entry["title"], allow_links=False)
         if limit is not None:
             title = f'<a href="news.html#{anchor}">{title}</a>'
         article = []

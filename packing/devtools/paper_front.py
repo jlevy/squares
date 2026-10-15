@@ -402,7 +402,7 @@ def _series_lines(series: Series) -> list[tuple[str, str, str]]:
 
 def credits_html(front: PaperFront) -> str:
     """The credits block as the page carries it: one span a line, in a centred grid
-    the publication layer lays out (`paper-publication.css`, `.credits`)."""
+    the shared typography layer lays out (`paper-type.css`, `.credits`)."""
     lines = ['<div class="credits centred">']
     for cls, markup, _ in _credit_lines(check(front)):
         opening = f'<span class="{cls}">' if cls else "<span>"

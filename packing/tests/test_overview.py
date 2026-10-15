@@ -464,10 +464,9 @@ def test_home_and_about_share_the_documentation_introduction_and_cards(
         "Squares Project Documentation</h1>"
     )
     home_section = page.split(heading, 1)[1].split('<h1 id="more-resources"', 1)[0]
-    about_section = about.split(heading, 1)[1].split('<h1 id="news"', 1)[0]
-    about_section = re.sub(
-        r'<p>(?:<a class="site-news-legacy-anchor"[^>]*></a>)+</p>', "", about_section
-    )
+    about_section = about.split(heading, 1)[1].split(
+        '<p><a class="site-news-legacy-anchor"', 1
+    )[0]
     home_block, action_row = home_section.rsplit('<p class="site-action-row site-more">', 1)
     assert re.findall(r"<p>(.*?)</p>", home_block, re.DOTALL) == re.findall(
         r"<p>(.*?)</p>", about_section, re.DOTALL
@@ -4050,38 +4049,15 @@ def test_recent_preview_headlines_link_to_their_canonical_result_pages(page: str
         assert f'<a href="result/{result_id}.html">' in headline
 
 
-#: The site's own statement, from the owner's 2026-10-03 text (`think-a7oa`), with
-#: wording reviewed on 2026-10-11 and the
-#: name the owner left blank filled with the source's handle, Queuingtheorydotcom
-#: (T-060 is credited to Ahmed in the register),
-#: the project's start put as the record has it (its explorations obtained the lower
-#: bounds, from 2026-08-31, after it began on 2026-08-22), and one phrase narrowed to
-#: what the register holds: the project tabulates every known new result and verifies
-#: the proofs behind them, without claiming every one is checked, since some registered
-#: results are recorded and not yet replayed here. The sentence after that proof
-#: is the owner's of the same day (`think-nlyc`): the top-line results by others, Evan
-#: Daniel's family T-064 and his exact values T-052, T-051 and T-053, in a sentence of
-#: their own because the bibliography files them as independent of this project, and
-#: without a significance score, since they are S4 and only n = 11's results are S5.
+#: About's narrative paragraphs and the shared result invitation. The contribution
+#: list is checked separately, with every credit and verification qualification.
 SITE_STATEMENT = (
     (
         "Work on the square packing problem has exploded in the summer of 2026 thanks to "
-        "AI-powered research efforts. Joshua Levy began the Squares Project in "
-        "August 2026 with initial explorations that produced new lower bounds for "
-        "$n = 11, 17, 18, 19, 20$ and other low values."
+        "AI-powered research efforts."
     ),
-    (
-        "Now several others have obtained results building on this work, including "
-        "Marc Leonard Overbeck\N{RIGHT SINGLE QUOTATION MARK}s certified lower bound of 31/8 "
-        "and a "
-        "landmark new proof by Queuingtheorydotcom of the optimality of the famous case "
-        "of 11 squares."
-    ),
-    (
-        "Separately, Evan Daniel has proved the optimality of a whole infinite family, "
-        "$s(k^2 - 3) = k$ for every $k \\ge 6$, along with exact values at 21, 32 and 45 "
-        "squares."
-    ),
+    "Contributions include:",
+    "Other new results are tabulated on the Results page.",
     (
         "This project now independently tabulates all known new results and does "
         "AI-assisted verification of the proofs and certificates behind them, to "
@@ -4120,7 +4096,7 @@ def test_the_invitation_to_report_results_is_one_text_on_about_and_the_homepage(
 
 
 def test_the_sites_own_statement_follows_readmes_introduction(about: str, results: str) -> None:
-    """About keeps three credited highlights and a linked summary of other results.
+    """About keeps the credited highlights and qualifies the two unverified reports.
     Every named result keeps its source, attribution, and verification claims; the
     contribution invitation retains the owner's two paragraphs."""
     own = about.split("</h1>", 1)[1].split('<h1 id="squares-project-documentation"', 1)[0]
@@ -4129,22 +4105,36 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         '<a id="contribute-your-results"></a></h1>',
         1,
     )
-    assert len(re.findall(r"<p>", narrative)) == 3
+    assert len(re.findall(r"<p>", narrative)) == 4
     assert len(re.findall(r"<p>", contribution)) == 2
     items = re.findall(r"<li>(.*?)</li>", narrative, re.DOTALL)
-    assert len(items) == 4
+    assert len(items) == 6
     narrative_paragraphs = re.findall(r"<p>(.*?)</p>", narrative, re.DOTALL)
-    assert _rendered_text(narrative_paragraphs[0]) == _markdown_text(SITE_STATEMENT[0])
-    assert _rendered_text(narrative_paragraphs[-1]) == _markdown_text(SITE_STATEMENT[3])
+    assert [_rendered_text(paragraph) for paragraph in narrative_paragraphs] == [
+        _markdown_text(text) for text in SITE_STATEMENT[:4]
+    ]
     assert [_rendered_text(item) for item in items] == [
-        "Marc Leonard Overbeck\u2019s certified lower bound of 31/8 for eleven squares.",
+        _markdown_text(
+            "Joshua Levy began the Squares Project in August 2026 with new lower bounds "
+            "for $n = 11, 17, 18, 19, 20$ and other low values."
+        ),
+        _markdown_text(
+            "Marc Leonard Overbeck\u2019s certified lower bound of $31/8$ for eleven squares."
+        ),
         "Manasseh Ahmed\u2019s proof of optimality for eleven squares.",
         _markdown_text(
             "Independently, Evan Daniel has proved the optimality of an infinite family, "
             r"$s(k^2 - 3) = k$ for every $k \ge 6$, along with exact values at "
             "21, 32, 45 and 60 squares."
         ),
-        "As of 11 October 2026, over 140 other new results are tabulated on the Results page.",
+        (
+            "Marc Leonard Overbeck\u2019s candidate proof for seventeen squares, "
+            "reported and unverified here (V0/C1)."
+        ),
+        (
+            "Oscar Fitzharding\u2019s Lean proof report for seventeen squares, "
+            "also unverified here (V0/C1)."
+        ),
     ]
     text = _rendered_text(narrative)
     for claim in (
@@ -4153,6 +4143,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         "Marc Leonard Overbeck",
         "Manasseh Ahmed",
         "Evan Daniel",
+        "Oscar Fitzharding",
         "Independently",
         "AI-assisted verification",
     ):
@@ -4164,17 +4155,27 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         ("https://x.com/ManassehA06", "Manasseh Ahmed"),
         ("https://x.com/evanbd", "Evan Daniel"),
         ("papers/n11-lower-bounds-explainer.html", "new lower bounds"),
-        ("papers/n11-threshold-bound-review.html", "certified lower bound of 31/8"),
+        ("papers/n11-threshold-bound-review.html", "certified lower bound of $31/8$"),
         ("papers/n11-optimality-review.html", "proof of optimality"),
         ("cases/11.html", "eleven squares"),
         ("results.html#t-064", "an infinite family"),
         ("results.html#verification-ladders", "AI-assisted verification"),
         ("results.html", "Results page"),
+        (
+            "news.html#changelog-entry-overbeck-n17-candidate-proof",
+            "candidate proof for seventeen squares",
+        ),
+        (
+            "news.html#changelog-entry-fitzharding-n17-reported-proof",
+            "Lean proof report for seventeen squares",
+        ),
         *((f"cases/{n}.html", str(n)) for n in (21, 32, 45, 60)),
     ):
-        assert re.search(
-            rf'<a href="{re.escape(address)}"[^>]*>{re.escape(label)}</a>', narrative
-        ), address
+        linked = re.search(
+            rf'<a href="{re.escape(address)}"[^>]*>(.*?)</a>', narrative, re.DOTALL
+        )
+        assert linked is not None, address
+        assert _rendered_text(linked[1]) == _markdown_text(label), address
     paragraphs = re.findall(r"<p>(.*?)</p>", contribution, re.DOTALL)
     assert [_rendered_text(paragraph) for paragraph in paragraphs] == [
         _markdown_text(text) for text in SITE_STATEMENT[-2:]
@@ -4231,13 +4232,12 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
         "the-squares-project",
         "report-your-results",
         "squares-project-documentation",
-        "news",
     ]
     assert all('class="site-title"' in tag for tag in re.findall(r"<h1\b[^>]*>", about))
     assert re.search(r"<h2\b", about) is None
     assert 'id="changelog" href="news.html#changelog" data-news-target' in about
     assert "data-news-entry=" not in about
-    assert 'href="news.html">News and the complete project history</a>' in about
+    assert '<a id="news"></a>' in about
     following = about.split(heading, 1)[1].lstrip()
     assert following.startswith("<p>Work on the square packing problem")
     assert "Work on the square packing problem has exploded" not in page
@@ -5058,16 +5058,18 @@ def test_a_page_title_stands_one_space_above_what_follows_it() -> None:
     that has none, a document's own `h1` among them, on screen. A hero title with a
     subtitle hands the space to the subtitle."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
-    assert css.count("--site-subtitle-space: 1.5rem;") == 1
+    assert css.count("--site-subtitle-space: 2rem;") == 1
     assert "  margin-block: var(--site-subtitle-space);\n" in css
     assert (
-        ".kpress :where(.site-page) h1,\n"
+        ".kpress :where(.site-page, .kpress-prose) h1,\n"
         "  .kpress :is(h1, h2).site-title {\n"
         "    margin-block: var(--site-title-space-above) var(--site-title-space-below);\n  }"
     ) in css
     paper = EXPLAINER_STYLE.read_text(encoding="utf-8")
     assert "  .cert-page .hero .credits {\n    margin-block-start: 2.25rem;\n  }\n}" in paper
-    assert "  margin-block: 2rem 2.2rem;\n" in paper
+    assert "  margin-block: 2rem 2.2rem;\n" in render_overview.PAPER_TYPE_CSS.read_text(
+        encoding="utf-8"
+    )
 
 
 def test_a_tables_filter_bar_is_set_a_step_under_its_tables_text() -> None:
@@ -5468,8 +5470,9 @@ def _rule(css: str, selector: str) -> str:
 def test_no_site_text_breaks_inside_a_word() -> None:
     """KPress's `overflow-wrap: break-word` cuts a run only when it is longer than a whole
     line. `anywhere` also lets a column shrink to one character, so the site puts it on
-    long runs by nature: exact decimals, repository paths and displayed card URLs,
-    and nowhere else; and no sheet breaks words with `word-break` or hyphenates them."""
+    long runs by nature: exact decimals, repository paths, displayed card URLs and
+    publication-credit addresses; no sheet breaks words with `word-break` or hyphenates
+    them."""
     sheets = {
         sheet.name: re.sub(r"/\*.*?\*/", "", sheet.read_text(encoding="utf-8"), flags=re.DOTALL)
         for sheet in (
@@ -5486,6 +5489,7 @@ def test_no_site_text_breaks_inside_a_word() -> None:
         if "overflow-wrap: anywhere" in body
     }
     assert anywhere == {
+        ("paper-type.css", ".credits a"),
         ("site.css", ".site-case-decimal"),
         ("site.css", ".kpress .site-card .site-card-url"),
         ("site-result.css", ".site-result-links code"),

@@ -625,10 +625,13 @@ commit after the merged data is committed.
 
 The integration retains upstream’s quick-push validation policy and complete selected
 test coverage, with deep checks reserved for explicit checkpoints.
-Initial hosted CI reported three failures, addressed by the follow-up below.
-The follow-up normalizes 152 closed-form `proved_by` lists from `wand125` to `Hosono`
-and aligns `apply_closed_form.py` with that credit, without changing numeric bounds.
-The occurrence manifest was reconciled to the updated source labels.
+During validation, five more upstream commits landed through `6e73ef1c2` (#623), adding
+News math typesetting and reader-page corrections at site `v0.7.10`. The follow-up
+integration retains those changes alongside direct profile links and the proposed site
+`v0.8.0` release. Initial hosted CI reported three failures, addressed by the follow-up
+below. The follow-up normalizes 152 closed-form `proved_by` lists from `wand125` to
+`Hosono` and aligns `apply_closed_form.py` with that credit, without changing numeric
+bounds. The occurrence manifest was reconciled to the updated source labels.
 Release-impact scopes were refreshed against `origin/main`; the source-based check
 passes without changing paper versions.
 The local case-page size correction is implemented without new dependencies: numeric
