@@ -179,6 +179,7 @@
     "packing/tests/test_contact_isomorph_free_burnside.py": 3.375,
     "packing/tests/test_contact_realization.py": 0.033,
     "packing/tests/test_contact_scaffold_atlas.py": 0.003,
+    "packing/tests/test_continuous_pose_followup.py": 0.026,
     "packing/tests/test_control_anchors.py": 0.101,
     "packing/tests/test_core_shrink.py": 0.524,
     "packing/tests/test_corner_ownership_audit.py": 0.38,
@@ -893,6 +894,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/reads-1015-2026-10-15.json",
           "provenance": {},
           "tests": 9
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_continuous_pose_followup.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/continuous-pose-followup-2026-10-15.json",
+          "provenance": {},
+          "tests": 28
         }
       ]
     }
