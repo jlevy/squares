@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(95) = 10 by a mixed cover (#610)"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T01:43:17.212Z
-updated_at: 2026-10-15T02:04:33.675Z
+updated_at: 2026-10-15T03:10:39.391Z
 started_at: 2026-10-15T01:43:21.841Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#610 (bengreff, Benjamin Greff, opened 2026-10-15T01:16:36Z, labelled intake, no comments when read at 01:27Z): "Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)". The author's own certificate in his own repository, the case k = 10 after wand125's s(59) = 8 (#280, T-066) and his s(76) = 9 (#594, T-184). Followed the #594 import (think-osvq) step for step. Intake lane: Claude Opus 5.5 (tbd-moderate sub-agent), worktree agent-a33e48ec, branch claude/wizardly-meitner-wqn4x3-intake-610.
@@ -108,3 +108,10 @@ Validation backlog for this import, each a bead labelled validation under think-
 - think-ojr9: Lean build of lean/S95Lower.lean on Sqpack 1718a58, held on memory (25 GB peak, host has 15 GB).
 - think-eucc: zmx2 --full plus zm_mixed.py on its failing roots, about 6 CPU-h, priced and gated on decision. By #594's precedent it is not needed for the rung: T-184's next_rung (PR #602) asks for the D4 composite as evidence, the tool registration and a review, and the #594 import priced --full as optional. T-066's s(59) replay did run --full, which avoids the D4 reduction lemma, so a reviewer may ask for it.
 - Run now (the coordinator lifted the 30-minute pricing line; the cap is 40 CPU-h per item): zm_mixed.py on the other 290 sub-roots, one worker, from 02:01:23Z.
+
+Results, 03:05Z:
+- zm_mixed.py on the other 290 sub-roots (receipts/programs/run_zm_mixed.sh, jobs_rest.txt, one worker): 02:01:23Z to 03:03:23Z, 62 min wall under load 4 to 13 from other lanes. With the 14-job sample, 304/304 VERIFIED-D4 (PARTIAL), 9,614 boxes, max depth 13, 0 uncertified; 2,327 CPU-s by the checker's records (ratio 0.840 to the source's 2,771.3), 3,278 CPU-s by the 304 receipts (start-up and cover parsing included). Headers (input path aside) and censuses (CPU aside) equal the source's 304 records. zm_records.py reads the replay's 304 cells as distinct aligned 1/20 cells tiling the 19 failing roots exactly. The author's check_coverage.py (read, -I, scratch) accepts the replay's own zmx2 log with the replay's own zm_mixed.py records: the whole D4 composite is reproduced here with the producer's code. Receipts in receipts/n95_zm_mixed/ (sample and rest together), receipts/n95_triage_checks.log re-run over them.
+- Rung: unchanged at V0/C0, S3 draft. #594's precedent: T-184 was registered at V0/C0 with the same complete reproduction in its packet. Missing for V3/C3: the reproduction recorded as an evidence entry (assurance verified, replay_status passed), which by T-184's next_rung wants cases 76 and 95 registered in devtools.replay_evand_zmx2 and devtools.audit_evand_mixed_covers (the W7 slice); and a stage 4 review with no blocking defect. register-plan.yaml's text now says the reproduction is complete.
+- Checks: acquire_source --check PACKET_MATCHES_ITS_CONTRACT; retained_data clean; focused tests 254 passed (124 s); packing-validate --records exit 0, 51 steps. Committed 7c65c191b91d3b9d3b0bfbbbdc5ad318cd1199ba and pushed to claude/wizardly-meitner-wqn4x3-intake-610. SYNOPSIS.md's hook re-typing reverted again; not in the commit.
+
+Draft acknowledgement, second paragraph replaced (still not posted): "In triage we ran your certificate with Evan Daniel's checkers, built from the copies this repository already holds at the digests your verify.sh pins. zmx2 cert --d4 leaves the same 8,263 boxes in the same 19 roots, with every root's census equal to records/zmx2/zmx2_s95_v2.log, and zm_mixed.py with your flags certifies all 304 sub-roots, with records equal to yours apart from the input path and the CPU time; your check_coverage.py accepts our own logs. The total, the D4 invariance and the tiling check exactly, the corners are wand125's s(59) cover as you say, and the Lean data matches the cover file. Two mutated covers are refused by zmx2, and zm_mixed.py pose finds a pose in each where the capture is below one. The cover's 404 wall segments of mass 1/(4·10⁸) look like the LP residue you described on #594; without them zmx2 makes every decision the same, box for box."

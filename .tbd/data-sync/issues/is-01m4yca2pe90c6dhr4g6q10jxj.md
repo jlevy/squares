@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 14 campaign upper bounds (237, and 13 beyond 324
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T23:35:08.750Z
-updated_at: 2026-10-14T23:51:54.817Z
+updated_at: 2026-10-15T03:03:27.841Z
 started_at: 2026-10-14T23:35:12.236Z
 ---
 Francisco Couzo (@franciscouzo) reports, in jlevy/squares#607 (filed 2026-10-14T23:18:36Z), 21 finite upper bounds plus two precision refinements, certificates at franciscouzo/square-packing 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2 submissions/2026-10-14/certificates/ (first committed 2026-10-14T19:15:09Z), comparison index upper_bounds.json at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d. Stages 1, 2 and the stage 4 replay in the 14 October evening intake lane (branch claude/wizardly-meitner-wqn4x3-intake-607); no register, case, request, coverage, bibliography, resources README or intake-watch record edited. Registration waits for a records PR.
@@ -59,3 +59,9 @@ Each certificate's exact side rounds up to the side you print. Against the recor
 Both of this repository's exact routes REPLAY-ACK. A records pull request will register the results; we'll reply here when it merges.
 
 One question: 487b058 also changes certificates/n211.cert, to 14.993549626299..., below your #586 certificate, and adds certificates at 370 and 403 to 991 that no issue reports. We'll take those up as a separate import, reading each from its commit; tell us if any should wait.
+
+2026-10-15 reads lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-reads-1015): franciscouzo/square-packing moved past this import's pin. Head 58a783368d4b7e70bb800f0009ea9ca03e578739 (2026-10-15T01:25:11Z), two commits after 43ac7d2: 4e4c8ce (00:31:53Z, "Update all verified bounds for n < 1024") and 58a7833 (Göbel square and strip bounds). #607 has not been edited since 2026-10-14T23:27Z, so it still names 43ac7d2.
+
+At 237, 4e4c8ce adds certificates/n237.cert (and the same bytes at certificates/best/n237.cert), a different file from #607's submissions/2026-10-14/certificates/n237.cert: s(237) <= 7951301819129798440089572127137/5e29 = 15.9026036382595969, 2.40e-11 below #607's 15.902603638284 (exact; at least 2.34e-11 below every number the print may be). Its metadata calls it an exact optimum seeded from #593, so it is the author's exact refinement of his own #607 packing. Under the per-count rule #607's 237 is still recorded at its first commit (19:15:09Z), and 4e4c8ce's is recorded after it, as a later and strictly stronger report. Imported separately: think-7j8o, packet couzo-n237-2026-10-15 (retained, compared, replayed on both routes: positive passes, both controls refused, 50.9 route CPU-s). The #607 acknowledgement could mention it ("your 4e4c8ce certificate at 237 is a further 2.4e-11 below; we retain it as a separate report, tell us if you want it registered in place of the issue's").
+
+The seven Fang composites and the beyond-horizon submissions: 4e4c8ce's certificates/best/ index restates them; at 703, 757, 813, 931, 932, 992, 993 and 994 its README says eight new glued witnesses use Fang's rectangles, which this lane did not compare with #607's files (beyond the horizon; see the 4e4c8ce beyond-horizon triage bead).
