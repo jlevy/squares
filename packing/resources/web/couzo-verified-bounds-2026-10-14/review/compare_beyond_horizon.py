@@ -21,19 +21,23 @@ Earlier members at a count:
 - the grid side ceil(sqrt(n)).
 
 A side is recorded when it is below every number every earlier member may be; equal to an
-exact member is a tie the earlier holder keeps. Later members: issue #607's submissions
-(43ac7d2) and the 4e4c8ce index, which supersede a recorded row where smaller.
+exact member is a tie the earlier holder keeps. A side that would be recorded but lies
+above Göbel's classical construction at the count (goebel_beyond_horizon.py beside this
+file, from the archived Kingbird family pages) is ``undecided-goebel``: the record holds
+no Göbel construction beyond 324, and whether it counts as an earlier report is the
+owner's question. Later members: issue #607's submissions (43ac7d2) and the 4e4c8ce
+index, which supersede a recorded row where smaller.
 
 Run from ``packing/`` with the project interpreter::
 
     python -I resources/web/couzo-verified-bounds-2026-10-14/review/compare_beyond_horizon.py \\
         --repo REPO --checkout CHECKOUT --sub-607 SUB.json --index-4e4c8ce MANIFEST.json \\
-        --gobel GOBEL.json --out .../review/beyond-horizon-comparison.json \\
+        --out .../review/beyond-horizon-comparison.json \\
         --claims-out .../review/beyond-horizon-claims.json
 
-SUB.json is ``submissions/2026-10-14/manifest.json`` at 43ac7d2, MANIFEST.json is
-``certificates/best/manifest.json`` at 4e4c8ce and GOBEL.json is ``gobel_bounds.json`` at
-58a7833, each read from the same repository.
+SUB.json is ``submissions/2026-10-14/manifest.json`` at 43ac7d2 and MANIFEST.json is
+``certificates/best/manifest.json`` at 4e4c8ce, each read from the same repository.
+The claims record lists the recorded counts only.
 
 No program of the source runs; the checkout is read as data.
 """
@@ -44,12 +48,22 @@ import argparse
 import csv
 import glob
 import hashlib
+import importlib.util
 import json
 import math
 from fractions import Fraction
 from pathlib import Path
 
 import yaml
+
+# The Göbel families, from the module beside this file (sys.path holds no script
+# directory under -I, so it is loaded by path).
+_SPEC = importlib.util.spec_from_file_location(
+    "goebel_beyond_horizon", Path(__file__).with_name("goebel_beyond_horizon.py")
+)
+assert _SPEC is not None and _SPEC.loader is not None
+goebel_module = importlib.util.module_from_spec(_SPEC)
+_SPEC.loader.exec_module(goebel_module)
 
 PIN = "487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d"
 FIRST = "2026-10-14T17:45:39Z"
@@ -93,7 +107,6 @@ def main() -> None:
     ap.add_argument("--checkout", required=True)
     ap.add_argument("--sub-607", required=True)
     ap.add_argument("--index-4e4c8ce", required=True)
-    ap.add_argument("--gobel", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--claims-out", required=True)
     a = ap.parse_args()
@@ -191,21 +204,29 @@ def main() -> None:
             Fraction(prints[n]) - Fraction(1, 10**12) < s <= Fraction(prints[n])
         ), (n, prints[n])
 
-    # Göbel's square and strip constructions, with deletion, as the source computed them
-    # exactly over Q(sqrt 2) at 58a7833 (gobel_bounds.json): not a member, since the record
-    # holds none beyond 324, but a closed form a row may only re-rationalize.
-    gobel = [
-        (w["n"], Fraction(w["enclosure_lower"]), Fraction(w["bound"]), w["exact_bound"]["expression"])
-        for w in json.loads(Path(a.gobel).read_text())["witnesses"]
-    ]
+    # Göbel's classical constructions, with deletion, from the archived Kingbird family
+    # pages: not a member, since the record holds none beyond 324, but a row above one is
+    # held for the owner as undecided-goebel.
+    forms = goebel_module.families(goebel_module.LIMIT)
 
     rows, tally = [], {}
     for n in sorted(sides):
         s = sides[n]
         ms = members[n]
         best = min(ms, key=lambda m: m["high"])
+        g = goebel_module.goebel_at(n, forms)
+        relation = None if g is None else {1: "above", 0: "equal", -1: "below"}[
+            goebel_module.sign(s, g)
+        ]
+        goebel = None if g is None else {
+            "closed_form": g.text(),
+            "family": g.family,
+            "from_count": g.count,
+            "relation": relation,
+            "margin": g.margin(s),
+        }
         if all(s < m["low"] for m in ms):
-            verdict = "recorded"
+            verdict = "undecided-goebel" if relation in ("above", "equal") else "recorded"
         elif any(m["exact"] is not None and m["exact"] == s for m in ms):
             verdict = "not recorded: equal"
         elif any(s >= m["high"] for m in ms):
@@ -218,12 +239,6 @@ def main() -> None:
             for lab, v in later.get(n, [])
             if v < s
         ]
-        reach = [w for w in gobel if w[0] >= n]
-        goebel = None
-        if reach:
-            g = min(reach, key=lambda w: w[2])
-            relation = "above" if s > g[2] else ("below" if s < g[1] else "undecided")
-            goebel = {"from_count": g[0], "closed_form": g[3], "relation": relation}
         rows.append({
             "n": n,
             "side": f"{s.numerator}/{s.denominator}",

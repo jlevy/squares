@@ -84,10 +84,33 @@ def test_the_beyond_horizon_certificates_are_pinned_and_compared_not_retained() 
     assert source["retained_file_count"] == 1
     comparison = _review("beyond-horizon-comparison.json")
     assert [row["n"] for row in comparison["rows"]] == beyond
-    assert comparison["tally"] == {"recorded": 294, "not recorded: above": 2}
+    assert comparison["tally"] == {
+        "recorded": 252,
+        "undecided-goebel": 42,
+        "not recorded: above": 2,
+    }
     assert comparison["pair_decisions_for_replay"] == sum(3 * n * (n - 1) for n in beyond)
     # Every row is superseded later, by #607 or the 4e4c8ce index.
     assert all(row["superseded_by_later"] for row in comparison["rows"])
+
+
+def test_a_row_above_goebel_is_held_for_the_owner_and_the_sets_are_as_measured() -> None:
+    rows = _review("beyond-horizon-comparison.json")["rows"]
+    for row in rows:
+        above = row["goebel"]["relation"] == "above"
+        if row["verdict"] in ("recorded", "undecided-goebel"):
+            assert (row["verdict"] == "undecided-goebel") is above
+    goebel = _review("goebel-beyond-horizon.json")
+    tallies = {s["set"]: (s["rows"], s["tally"]["above"]) for s in goebel["sets"]}
+    assert tallies == {
+        "franciscouzo@487b058 (this packet)": (296, 42),
+        "#607 at 43ac7d2": (22, 0),
+        "4e4c8ce index, below 487b058 and #607": (341, 47),
+        "record's current beyond-horizon rows (main)": (40, 2),
+    }
+    (record,) = [s for s in goebel["sets"] if s["set"].startswith("record")]
+    assert record["above"] == [369, 376]
+    assert all(x["relation"] != "equal" for s in goebel["sets"] for x in s["detail"])
 
 
 def test_the_claims_record_states_each_recorded_side_as_the_source_prints_it() -> None:

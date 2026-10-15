@@ -88,27 +88,34 @@ tiling at 964, and the grid. It writes
 the recorded counts, the claims record a beyond-horizon row reads,
 [review/beyond-horizon-claims.json](review/beyond-horizon-claims.json).
 
-- **294 are recorded**: each is below every number every earlier member may be. At 263
-  of them the earlier best is the grid; at 31 it is a report (Couzo’s #586 certificates
-  at 339 and 378 to 382, Evan Daniel’s #596 at 370, Fang’s direct certificates and
-  composites from 420 to 871, and Daniel’s tiling at 964), by 9.3e-6 to 3.0e-1.
+- **252 are recorded**: each is below every number every earlier member may be, and
+  below Göbel’s classical construction at its count. At 222 of them the earlier best is
+  the grid; at 30 it is a report (Couzo’s #586 certificates at 339 and 378 to 382, Evan
+  Daniel’s #596 at 370, and Fang’s direct certificates and composites from 420 to 871),
+  by 9.3e-6 to 2.4e-2.
+- **42 are `undecided-goebel`**: below every earlier member, but each a rational witness
+  2.8e-11 to 5.7e-10 above Frits Göbel’s classical square or strip construction at its
+  count (408 to 974; [review/goebel-beyond-horizon.md](review/goebel-beyond-horizon.md)),
+  which the record holds at no count beyond 324. The author’s `58a7833` corrects these
+  entries to the closed forms. Whether Göbel’s constructions count as earlier reports, and
+  so as the baseline beyond 324, is the owner’s question; until then these rows are
+  neither recorded nor in the claims record.
 - **2 are not recorded**: 812 and 930 are above Fang’s composite rows of `bef5c42`
   (2026-10-12), by 4.2e-3 and 1.3e-3.
 - **All 296 are later superseded**: #607’s certificates (`43ac7d2`) are smaller at 16 of
   the counts and the `4e4c8ce` index at all 296. So each recorded row is recorded at
   `487b058` and then superseded, as the 14 October ledger recorded `4596670` at 375 before
   #584 and `93570ef` at 176 before PR #574.
-- **A question for the owner.** At 42 recorded counts, from 408 to 974, the certificate is
-  a rational witness 2.8e-11 to 5.7e-10 above Frits Göbel’s classical square or strip
-  construction (with deletion), which the record holds at no count beyond 324; the
-  author’s `58a7833` corrects these entries to Göbel’s closed forms. By the rule they are
-  recorded against the beyond-horizon row or the grid; the owner may prefer to record them
-  as Göbel’s.
+
+[review/goebel-beyond-horizon.md](review/goebel-beyond-horizon.md) states how Göbel’s side
+is computed, exactly, from the archived Kingbird family pages, and compares four sets of
+rows with it: these, #607’s, the 4e4c8ce index’s and the record’s current beyond-horizon
+rows on `main`.
 
 [register-plan.yaml](register-plan.yaml) is the register plan: the entry, evidence,
 source and bibliography `register-plan` prints for 211, then a drafted beyond-horizon part
-with the 294 rows, the 18 current rows they supersede, and the source’s `claims_record`.
-No record is edited here.
+with the 252 rows, the 18 current rows they supersede, the 42 `undecided-goebel` rows,
+the owner’s question and the source’s `claims_record`. No record is edited here.
 
 A replay of the 296 makes 456,922,338 pair decisions: 38 to 48 CPU-hours at the rate the
 211 and 237 replays measured. It needs the bytes, from a checkout at the pin or a hosted
