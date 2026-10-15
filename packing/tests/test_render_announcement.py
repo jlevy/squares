@@ -331,10 +331,23 @@ def test_github_ties_a_login_to_a_credited_name_only_by_evidence() -> None:
     assert "jlevy" not in github.candidates()
     assert "credited_names" in handles["Chaoweeraprasit"].source
     assert "#425" in handles["Rehwaldt"].source
-    # Xu is credited by surname and nothing in the record ties it to ry-xu's login; Daniel's
-    # account declares no handle. Neither gets one.
+    # Xu is credited by surname and nothing in this test's record ties it to ry-xu's login
+    # (the bibliography's does, as the next test shows); Daniel's account declares no
+    # handle. Neither gets one.
     assert "Xu" not in handles
     assert "Daniel" not in handles
+
+
+def test_the_bibliography_ties_xu_to_his_login_without_reading_a_profile() -> None:
+    """`Ryan Xu (ry-xu): Xu` in `credited_names` ties the surname the register credits to
+    his login, as `Nate Chaoweeraprasit (itsnaka)` does, before any profile is read; and
+    the full name a line prints for Xu is still Ryan Xu (think-dquu N3)."""
+    credited = ra.credited_names()
+    assert credited["Ryan Xu (ry-xu)"] == "Xu"
+    github, fetched = fake_github({}, credited=credited)
+    assert github.logins("Xu", []) == (["ry-xu"], "bibliography credited_names")
+    assert fetched == []
+    assert ra.full_names(credited)["Xu"] == "Ryan Xu"
 
 
 def test_an_issue_never_ties_the_owner_or_an_issue_that_credits_two_people() -> None:

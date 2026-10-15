@@ -682,13 +682,17 @@ def register() -> None:
         "key",
     )
     bibliography = REPO / "packing/resources/bibliography.yaml"
-    if "  Ryan Xu: Xu\n" not in bibliography.read_text():
-        save(
-            bibliography,
-            bibliography.read_text().replace(
-                "credited_names:\n", "credited_names:\n  Ryan Xu: Xu\n"
-            ),
-        )
+    # The name with his login after it ties the surname to the login, as
+    # `Nate Chaoweeraprasit (itsnaka)` does (`render_announcement.NAMED_LOGIN`).
+    for person in (f"{FINDER} ({HANDLE})", FINDER):
+        entry = f"  {person}: Xu\n"
+        if entry not in bibliography.read_text():
+            save(
+                bibliography,
+                bibliography.read_text().replace(
+                    "credited_names:\n", "credited_names:\n" + entry
+                ),
+            )
 
 
 def main() -> None:
