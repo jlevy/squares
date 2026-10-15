@@ -5,13 +5,13 @@ title: "Follow-ups from #608's review: never call a sample confirmed (check_requ
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4wsqt2sjrksybyz375sarb3
 created_at: 2026-10-14T23:42:03.230Z
-updated_at: 2026-10-14T23:42:03.230Z
+updated_at: 2026-10-15T00:24:50.238Z
 ---
 From the senior review of #608 (approved, merged 0dd9003e0).
 
@@ -35,3 +35,14 @@ Nits:
 - N6: check_requests compares issue comments only, not PR reviews; say so in its docstring.
 
 Order: the S1 code fix can go first on its own (check_requests.py and its test only). The data parts (result-requests, source-coverage, results text, bibliography) should follow the other coordinator's next records PR, which touches the same files.
+
+## Notes
+
+Owner decisions, 2026-10-14 ~17:05-17:15Z (verbatim):
+- Compute: "Let's, for now, hold off on anything more than 40 CPU-hours but let's be sure we have a clear backlog of validation work that's tracked appropriately, and details are in beads." This replaces the earlier < 4 h delegation threshold. Items above 40 CPU-h are HELD.
+- Publication reading (#582), decision 1: "yes though for significant items S4+ we should create an issue ourselves for tracking purposes." Watched-repository publications count from their first commit, the ledger's default. For S4+ results with no issue we open one: #603, Fang's excess theorem (T-163 in #602 after its review renumbering; it was T-178). T-180 has #600.
+- Credits: "also be sure we use Ryan Xu real name or surname Xu not the handle for regular credits." This applies to the bibliography credited_names and authors, register prose, and the ledger displays. Identifiers stay as they are (keys, paths, URLs).
+… [1 line omitted]
+
+2026-10-15: S1 is done in #609 (merge 6964362b5). Samples are never called confirmed; drafts, the report and confirmation_phrase handle them. The #600 follow-up is posted as 6181480533, correcting 6179773241's "confirmed" and "V0 because no record has been replayed here". The other coordinator records it, and marks 6179773241's statements outdated, in its next records PR.
+Remaining: S3 (ry-xu prose in result-requests and source-coverage goes in the coordinator's records PR; register_ryxu_reports:508 and build_known_best_atlas:1291 are code, after it); S2 is the owner's call; nits N1-N6.
