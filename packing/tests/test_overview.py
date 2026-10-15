@@ -5007,16 +5007,18 @@ def test_a_page_title_stands_one_space_above_what_follows_it() -> None:
     that has none, a document's own `h1` among them, on screen. A hero title with a
     subtitle hands the space to the subtitle."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
-    assert css.count("--site-subtitle-space: 1.5rem;") == 1
+    assert css.count("--site-subtitle-space: 2rem;") == 1
     assert "  margin-block: var(--site-subtitle-space);\n" in css
     assert (
-        ".kpress :where(.site-page) h1,\n"
+        ".kpress :where(.site-page, .kpress-prose) h1,\n"
         "  .kpress :is(h1, h2).site-title {\n"
         "    margin-block: var(--site-title-space-above) var(--site-title-space-below);\n  }"
     ) in css
     paper = EXPLAINER_STYLE.read_text(encoding="utf-8")
     assert "  .cert-page .hero .credits {\n    margin-block-start: 2.25rem;\n  }\n}" in paper
-    assert "  margin-block: 2rem 2.2rem;\n" in paper
+    assert "  margin-block: 2rem 2.2rem;\n" in render_overview.PAPER_TYPE_CSS.read_text(
+        encoding="utf-8"
+    )
 
 
 def test_a_tables_filter_bar_is_set_a_step_under_its_tables_text() -> None:

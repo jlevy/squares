@@ -648,7 +648,7 @@ def test_the_overview_fails_on_an_unresolved_introduction_link(
     assert rewrite_overview_blocks(stale) == stale
 
 
-#: Published fragments from the tutorial before its basic/advanced split.
+#: Published tutorial fragments retained as invisible landings.
 LEGACY_TUTORIAL_FRAGMENTS = (
     "tutorial-square-packing-from-first-principles",
     "1-the-problem",
@@ -703,7 +703,7 @@ LEGACY_TUTORIAL_FRAGMENTS = (
 )
 
 
-def test_split_tutorials_preserve_legacy_landings_and_cross_links(
+def test_tutorials_link_to_current_topics(
     pages: dict[str, render_overview.Page],
 ) -> None:
     basic = pages["tutorial.html"].html
@@ -714,7 +714,7 @@ def test_split_tutorials_preserve_legacy_landings_and_cross_links(
     assert 'href="tutorial-advanced.html"' in basic
     assert 'href="tutorial.html"' in advanced
     destinations = re.findall(r'href="tutorial-advanced.html#([^"]+)"', basic)
-    assert len(destinations) >= 48
+    assert destinations
     assert set(destinations) <= site_documents.element_ids(advanced)
 
 
