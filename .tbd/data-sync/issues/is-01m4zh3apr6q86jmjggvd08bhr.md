@@ -3,9 +3,9 @@ type: is
 id: is-01m4zh3apr6q86jmjggvd08bhr
 title: Keep site release checks within component-owned validation
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: claude-code@spud10.local
 labels:
@@ -18,8 +18,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T10:18:04.887Z
-updated_at: 2026-10-15T12:38:05.522Z
+updated_at: 2026-10-15T13:17:34.438Z
 started_at: 2026-10-15T10:20:56.536Z
+closed_at: 2026-10-15T13:17:34.438Z
+close_reason: Delivered in PR619, merged 31eaf6333c5d5b6b3d111241768cdd3d30982588. All 43 executed PR checks and selected Deep38735581202 passed. Main Pages38739226771 published site v0.7.7, shared infographics v0.6.1 and lower-bounds paper v0.4.7; actual deployment audit job116439283652 passed 4460/4460 checks. Main full Packing remains independently in progress; no three-minute performance claim. Focused CI safety and performance work continues under think-3d1m and think-kxmq.
+resolution: null
+duplicate_of: null
 ---
 A site release cut currently schedules the same cross-component pytest list as infographic/paper cuts, including whole-atlas composites and exhaustive proof sweeps. A manual invocation during PR617 integration entered unchanged exhaustive_exact cases; it was interrupted and a focused release/date/claim selection retained. Make cut_release validation component-aware and use the shared quick-tier predicate for ordinary cut iteration, with deeper evidence selected explicitly at the owning checkpoint. Preserve every scientific assertion and full checkpoint obligation; prove selection identities and component ownership without duplicating expensive runs.
 
