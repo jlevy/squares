@@ -1,0 +1,704 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/607",
+  "author": "Francisco Couzo",
+  "source_key": "[Couzo certificates 2026-10-14]",
+  "report_evidence": "E-couzo-607-certificate-report",
+  "receipt_format": "couzo-607-exact-replay-v1",
+  "witness_prefix": "W-couzo-607-n",
+  "claim_limitations": "Complete 43ac7d2 rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "9b32da04d8ca7e4972ea7db51dce3605810ea250",
+  "certificates": [
+    {
+      "n": 237,
+      "path": "submissions/2026-10-14/certificates/n237.cert",
+      "format": "evand-cert",
+      "offered": "15.902603638284",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 339,
+      "path": "submissions/2026-10-14/certificates/n339.cert",
+      "format": "evand-cert",
+      "offered": "18.915818555470",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 342,
+      "path": "submissions/2026-10-14/certificates/n342.cert",
+      "format": "evand-cert",
+      "offered": "18.964706723173",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 382,
+      "path": "submissions/2026-10-14/certificates/n382.cert",
+      "format": "evand-cert",
+      "offered": "19.987621154241",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 409,
+      "path": "submissions/2026-10-14/certificates/n409.cert",
+      "format": "evand-cert",
+      "offered": "20.767428349966",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 419,
+      "path": "submissions/2026-10-14/certificates/n419.cert",
+      "format": "evand-cert",
+      "offered": "20.959997582079",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 450,
+      "path": "submissions/2026-10-14/certificates/n450.cert",
+      "format": "evand-cert",
+      "offered": "21.767428350587",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 461,
+      "path": "submissions/2026-10-14/certificates/n461.cert",
+      "format": "evand-cert",
+      "offered": "21.973183753375",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 542,
+      "path": "submissions/2026-10-14/certificates/n542.cert",
+      "format": "evand-cert",
+      "offered": "23.828427124774",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 552,
+      "path": "submissions/2026-10-14/certificates/n552.cert",
+      "format": "evand-cert",
+      "offered": "23.968034845503",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 599,
+      "path": "submissions/2026-10-14/certificates/n599.cert",
+      "format": "evand-cert",
+      "offered": "24.968034846127",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 648,
+      "path": "submissions/2026-10-14/certificates/n648.cert",
+      "format": "evand-cert",
+      "offered": "25.968034846328",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 649,
+      "path": "submissions/2026-10-14/certificates/n649.cert",
+      "format": "evand-cert",
+      "offered": "25.976974088403",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 651,
+      "path": "submissions/2026-10-14/certificates/n651.cert",
+      "format": "evand-cert",
+      "offered": "25.984515068279",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 703,
+      "path": "submissions/2026-10-14/certificates/n703.cert",
+      "format": "evand-cert",
+      "offered": "26.999256308447",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 757,
+      "path": "submissions/2026-10-14/certificates/n757.cert",
+      "format": "evand-cert",
+      "offered": "27.991000865994",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 804,
+      "path": "submissions/2026-10-14/certificates/n804.cert",
+      "format": "evand-cert",
+      "offered": "28.920398747577",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 812,
+      "path": "submissions/2026-10-14/certificates/n812.cert",
+      "format": "evand-cert",
+      "offered": "28.988287236851",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 930,
+      "path": "submissions/2026-10-14/certificates/n930.cert",
+      "format": "evand-cert",
+      "offered": "30.988287236851",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 931,
+      "path": "submissions/2026-10-14/certificates/n931.cert",
+      "format": "evand-cert",
+      "offered": "30.994048655032",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 992,
+      "path": "submissions/2026-10-14/certificates/n992.cert",
+      "format": "evand-cert",
+      "offered": "31.997220361783",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 993,
+      "path": "submissions/2026-10-14/certificates/n993.cert",
+      "format": "evand-cert",
+      "offered": "31.991327887692",
+      "first_committed": "2026-10-14T19:15:09Z"
+    },
+    {
+      "n": 994,
+      "path": "submissions/2026-10-14/certificates/n994.cert",
+      "format": "evand-cert",
+      "offered": "31.999256308447",
+      "first_committed": "2026-10-14T19:15:09Z"
+    }
+  ],
+  "requested": [
+    237,
+    339,
+    342,
+    382,
+    409,
+    419,
+    450,
+    461,
+    542,
+    552,
+    599,
+    648,
+    649,
+    651,
+    703,
+    757,
+    804,
+    812,
+    930,
+    931,
+    992,
+    993,
+    994
+  ],
+  "replayed": [
+    237,
+    339,
+    342,
+    382,
+    409,
+    419,
+    450,
+    461,
+    542,
+    552,
+    599,
+    648,
+    649,
+    651,
+    703,
+    757,
+    804,
+    812,
+    930,
+    931,
+    992,
+    993,
+    994
+  ],
+  "houses": [
+    {
+      "n": 237,
+      "reader": "[Couzo certificates 2026-10-10]",
+      "source_key": "[Couzo certificates 2026-10-10]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo",
+      "result": "T-140",
+      "reported_value": "15.9029496076778317",
+      "verified_value": "15.9029496076778317",
+      "evidence": [
+        "E-couzo-488-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 237,
+      "report": "#561",
+      "url": "https://github.com/jlevy/squares/issues/561",
+      "holders": "Francisco Couzo",
+      "result": "T-161",
+      "reader": "[Couzo certificates 2026-10-12]"
+    },
+    {
+      "n": 237,
+      "report": "PR #574",
+      "url": "https://github.com/jlevy/squares/pull/574",
+      "holders": "PingYou Ltd (BuddenPing), numerical v2",
+      "result": "T-174",
+      "reader": "[PingYou PR 574 certificates 2026-10-13]"
+    },
+    {
+      "n": 237,
+      "report": "T-098 (#375)",
+      "url": "https://github.com/evand/square-packing/tree/13ee36e5807727d12a5da36b9b90a96bdba272bf/s12/search/exact",
+      "holders": "Daniel after Couzo, de Winter, Ellsworth, Levy",
+      "result": "T-098",
+      "reader": "[evand exact optima 2026-10-05]"
+    },
+    {
+      "n": 237,
+      "report": "T-115 (#401)",
+      "url": "https://github.com/itsnaka/squish-certs/tree/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07",
+      "holders": "Chaoweeraprasit after Couzo and Ellsworth",
+      "result": "T-115",
+      "reader": "[SQUISH update 2026-10-07]"
+    },
+    {
+      "n": 237,
+      "report": "T-127 (#438)",
+      "url": "https://github.com/SidG2k1/square-packing-refinements/tree/9643cb5a78c1d4dcfc867c80a6920c3a6219d05a",
+      "holders": "Gupta after Chaoweeraprasit, Daniel",
+      "result": "T-127",
+      "reader": "[Gupta rational refinements 2026-10-08]"
+    },
+    {
+      "n": 237,
+      "report": "T-134 (#476)",
+      "url": "https://github.com/franciscouzo/square-packing/tree/02f969075f79d5e13fa21e09e381a44e8647b452",
+      "holders": "Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth, Levy",
+      "result": "T-134",
+      "reader": "[Couzo exact certificates 2026-10-09]"
+    },
+    {
+      "n": 237,
+      "report": "T-136 (#481)",
+      "url": "https://github.com/itsnaka/squish-certs/tree/d45669b48cc97ad3aa17a6c847a8d06630f66eac",
+      "holders": "Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba, Levy",
+      "result": "T-136",
+      "reader": "[SQUISH third request 2026-10-09]"
+    },
+    {
+      "n": 237,
+      "report": "#505",
+      "url": "https://github.com/jlevy/squares/issues/505",
+      "holders": "Robert Barnett",
+      "reader": "[Barnett refinements 2026-10-11]"
+    },
+    {
+      "n": 237,
+      "report": "#470",
+      "url": "https://github.com/jlevy/squares/issues/470",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk decimal poses 2026-10-09]"
+    },
+    {
+      "n": 237,
+      "report": "#573",
+      "url": "https://github.com/jlevy/squares/issues/573",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk exact certificates 2026-10-12]"
+    },
+    {
+      "n": 237,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "result": "T-183",
+      "reader": "[Mishapolk records 2026-10-14]"
+    },
+    {
+      "n": 339,
+      "report": "#476",
+      "url": "https://github.com/jlevy/squares/issues/476",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo exact certificates 2026-10-09]"
+    },
+    {
+      "n": 339,
+      "report": "#506",
+      "url": "https://github.com/jlevy/squares/issues/506",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo certificates 2026-10-11]"
+    },
+    {
+      "n": 339,
+      "report": "#583",
+      "url": "https://github.com/jlevy/squares/issues/583",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo issue-583 certificates 2026-10-13]"
+    },
+    {
+      "n": 339,
+      "report": "#584",
+      "url": "https://github.com/jlevy/squares/issues/584",
+      "holders": "Evan Daniel",
+      "reader": "[Daniel compositions 2026-10-13]"
+    },
+    {
+      "n": 339,
+      "report": "#586",
+      "url": "https://github.com/jlevy/squares/issues/586",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo certificates 2026-10-13]"
+    },
+    {
+      "n": 339,
+      "report": "couzo-certificates-2026-10-13",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo",
+      "printed": "18.925319360704",
+      "rounding": "up"
+    },
+    {
+      "n": 339,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n339.cert",
+      "holders": "Francisco Couzo",
+      "printed": "18.916047442533",
+      "rounding": "up"
+    },
+    {
+      "n": 342,
+      "report": "couzo-extended-range-reports-2026-10-08",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo",
+      "printed": "18.964706723440020",
+      "rounding": "unstated"
+    },
+    {
+      "n": 342,
+      "report": "#476",
+      "url": "https://github.com/jlevy/squares/issues/476",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo exact certificates 2026-10-09]"
+    },
+    {
+      "n": 342,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n19_342_r18x17_n0290+one-square (table-only)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "18.997550817417073",
+      "rounding": "up"
+    },
+    {
+      "n": 382,
+      "report": "fang-direct-certificates-2026-10-13",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/n0382/n0382.cert",
+      "holders": "Kevin Fang",
+      "printed": "19.989479729399675",
+      "rounding": "up"
+    },
+    {
+      "n": 382,
+      "report": "TheSnakeFang/squarepack-certs@078789a theorem/best/n020_j2.cert",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/best/n020_j2.cert",
+      "holders": "Kevin Fang",
+      "printed": "19.99995",
+      "rounding": "up"
+    },
+    {
+      "n": 382,
+      "report": "#583",
+      "url": "https://github.com/jlevy/squares/issues/583",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo issue-583 certificates 2026-10-13]"
+    },
+    {
+      "n": 382,
+      "report": "#586",
+      "url": "https://github.com/jlevy/squares/issues/586",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo certificates 2026-10-13]"
+    },
+    {
+      "n": 382,
+      "report": "couzo-certificates-2026-10-13",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo",
+      "printed": "19.987713157610",
+      "rounding": "up"
+    },
+    {
+      "n": 382,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n382.cert",
+      "holders": "Francisco Couzo",
+      "printed": "19.987621288667",
+      "rounding": "up"
+    },
+    {
+      "n": 409,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n409.cert",
+      "holders": "Francisco Couzo",
+      "printed": "20.767479046279",
+      "rounding": "up"
+    },
+    {
+      "n": 419,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n419.cert",
+      "holders": "Francisco Couzo",
+      "printed": "20.961496327041",
+      "rounding": "up"
+    },
+    {
+      "n": 450,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n450.cert",
+      "holders": "Francisco Couzo",
+      "printed": "21.767479045660",
+      "rounding": "up"
+    },
+    {
+      "n": 461,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n461.cert",
+      "holders": "Francisco Couzo",
+      "printed": "21.974473104090",
+      "rounding": "up"
+    },
+    {
+      "n": 542,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n542.cert",
+      "holders": "Francisco Couzo",
+      "printed": "23.828427125797",
+      "rounding": "up"
+    },
+    {
+      "n": 552,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n24_552_r21x20_n0401+n-11 (table-only)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "23.988287236850655",
+      "rounding": "up"
+    },
+    {
+      "n": 552,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n552.cert",
+      "holders": "Francisco Couzo",
+      "printed": "23.973761315361",
+      "rounding": "up"
+    },
+    {
+      "n": 599,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n599.cert",
+      "holders": "Francisco Couzo",
+      "printed": "24.973587230053",
+      "rounding": "up"
+    },
+    {
+      "n": 648,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n648.cert",
+      "holders": "Francisco Couzo",
+      "printed": "25.973587230678",
+      "rounding": "up"
+    },
+    {
+      "n": 649,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n649.cert",
+      "holders": "Francisco Couzo",
+      "printed": "25.977785776262",
+      "rounding": "up"
+    },
+    {
+      "n": 651,
+      "report": "fang-direct-certificates-2026-10-13",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/n0651/n0651.cert",
+      "holders": "Kevin Fang",
+      "printed": "25.991547815274380",
+      "rounding": "up"
+    },
+    {
+      "n": 651,
+      "report": "TheSnakeFang/squarepack-certs@078789a theorem/n026_F1.cert",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/n026_F1.cert",
+      "holders": "Kevin Fang",
+      "printed": "25.99995",
+      "rounding": "up"
+    },
+    {
+      "n": 651,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n651.cert",
+      "holders": "Francisco Couzo",
+      "printed": "25.984894424966",
+      "rounding": "up"
+    },
+    {
+      "n": 703,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n27_703_r17x16_n0257+n-110 (shipped)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "26.999256308446249",
+      "rounding": "up"
+    },
+    {
+      "n": 703,
+      "report": "TheSnakeFang/squarepack-certs@078789a theorem/n027_F1.cert",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/n027_F1.cert",
+      "holders": "Kevin Fang",
+      "printed": "26.99995",
+      "rounding": "up"
+    },
+    {
+      "n": 757,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n28_757_r18x17_n0290+n-110 (table-only)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "27.997550817417073",
+      "rounding": "up"
+    },
+    {
+      "n": 757,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 n028_j1_757.cert (shipped)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "27.999256308446249",
+      "rounding": "up"
+    },
+    {
+      "n": 757,
+      "report": "TheSnakeFang/squarepack-certs@078789a theorem/n028_F1.cert",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/n028_F1.cert",
+      "holders": "Kevin Fang",
+      "printed": "27.99995",
+      "rounding": "up"
+    },
+    {
+      "n": 757,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n757.cert",
+      "holders": "Francisco Couzo",
+      "printed": "27.992467660533",
+      "rounding": "up"
+    },
+    {
+      "n": 804,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n804.cert",
+      "holders": "Francisco Couzo",
+      "printed": "28.927176135381",
+      "rounding": "up"
+    },
+    {
+      "n": 812,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n29_812_r21x20_n0401+n-71 (table-only)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "28.988287236850655",
+      "rounding": "up"
+    },
+    {
+      "n": 812,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n812.cert",
+      "holders": "Francisco Couzo",
+      "printed": "28.992467661161",
+      "rounding": "up"
+    },
+    {
+      "n": 930,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n31_930_r21x20_n0401+n-109 (table-only)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "30.988287236850655",
+      "rounding": "up"
+    },
+    {
+      "n": 930,
+      "report": "franciscouzo/square-packing@487b058",
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n930.cert",
+      "holders": "Francisco Couzo",
+      "printed": "30.989568689821",
+      "rounding": "up"
+    },
+    {
+      "n": 931,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n31_931_r19x18_n0325+n-156 (table-only)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "30.994048655031932",
+      "rounding": "up"
+    },
+    {
+      "n": 931,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 n031_j1_931.cert (shipped)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "30.999256308446249",
+      "rounding": "up"
+    },
+    {
+      "n": 992,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n32_992_r22x21_n0442+n-109 (table-only)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "31.997220361782828",
+      "rounding": "up"
+    },
+    {
+      "n": 993,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n32_993_r21x20_n0401+n-132 (table-only)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "31.991327887691502",
+      "rounding": "up"
+    },
+    {
+      "n": 994,
+      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n32_994_r17x16_n0257+n-241 (shipped)",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
+      "holders": "Kevin Fang",
+      "printed": "31.999256308446249",
+      "rounding": "up"
+    },
+    {
+      "n": 994,
+      "report": "TheSnakeFang/squarepack-certs@078789a theorem/n032_F2.cert",
+      "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/n032_F2.cert",
+      "holders": "Kevin Fang",
+      "printed": "31.99995",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Francisco Couzo's registration witnesses at 43ac7d2, issue 607",
+    "headline": "Francisco Couzo's certificate for 237 squares, below Mykhailo Polkovskyi's, and 15 beyond-horizon bounds; seven Kevin Fang composites replayed",
+    "significance": 2,
+    "source_checks": "The author reports that all 23 certificates pass this repository's sqpack verify.py at 37e6757, run independently with exact rationals and spatial-bucket pair enumeration, and Evan Daniel's verify_cert.py at 622cd2e (SHA-256 3299ca0c...), each returning VALID with exit status 0, the replay of the 16 campaign and precision certificates taking 22.4 seconds of wall time on two processes; that the 16 also passed the browser campaign's Rust rational checker; and that the seven composite receipts were reused after their digests matched the replayed bytes. Two composites were copied from Kevin Fang's shipped certificates and five regenerated with his tools/glue.py, all seven with the SHA-256 his table lists. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with the 16 campaign and precision certificates, with the packings each continues, as the author asks: at 237 Mykhailo Polkovskyi's issue-593 certificate (T-183), whose construction credit he asks to keep; at 339 the author's own L-border construction of issue 506, refined in issues 583 and 586; at 382 and 651 Kevin Fang's published arrangements; at 409 and 450 the campaign's L-border lineage, whose 409 start includes Evan Daniel's 298 packing, with 450 one L-border layer on the new 409; at 419, 461 and 804 campaign refinements and L-border or elimination constructions from starts that include the project's refinements of Fang's 380 and 381; at 552, 599 and 648 the campaign's 552 with zero, one and two L-border layers; at 649 elimination from 651; and at 757 elimination from 758. Credit Kevin Fang (TheSnakeFang) with the seven composites at 703, 812, 930, 931, 992, 993 and 994, which the author replayed and does not claim. Evan Daniel's optimizer and verifier, David Ellsworth's refinement ideas and this repository's exact verifier were used. The author states that OpenAI Codex assisted search and verification orchestration, source review, certificate packaging and the issue, that earlier search work used Claude Code, and that he directed the work.",
+    "next_rung": "Independently review the retained replay, then register by the per-count rule: at 237 the certificate is below T-183 (issue 593) by 1.01e-04, the smallest report; beyond the horizon the 14 campaign and precision certificates are each below every earlier report, Couzo's own 487b058 certificates included; at the seven composite counts the certificates are Fang's composites byte for byte, so they register as Fang's rows (think-rn2y) with this replay as evidence, not as Couzo's results. Final exact-head CI remains required.",
+    "bead": "think-qik6",
+    "bibliography": {
+      "authors": [
+        "Couzo"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Couzo after Polkovskyi, Fang, Daniel, Ellsworth, Levy",
+      "short_credit": "Couzo after Polkovskyi et al.",
+      "note": "Twenty-three complete exact certificates at 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2, issue 607: a refinement at 237 of Mykhailo Polkovskyi's issue-593 certificate, 13 campaign bounds and two precision refinements beyond the case corpus, and seven of Kevin Fang's Section 5 composites, byte for byte the certificates his table lists, which the author replayed and credits to Fang. The source checks with Squares Project (Levy) verification code and Evan Daniel's checker; this project lineage is not independent. The certificates are retained as factual data; the unlicensed prose is hash-pinned. OpenAI Codex assistance disclosed. No optimizer, local or global claim."
+    }
+  }
+}
