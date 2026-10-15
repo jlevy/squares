@@ -1,0 +1,48 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "franciscouzo-square-packing",
+  "source_url": "https://github.com/franciscouzo/square-packing",
+  "source_ref": "master",
+  "source_commit": "43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2",
+  "retrieved_at_utc": "2026-10-14T23:30Z",
+  "git_scope": "Blobless clone with a sparse checkout of the scope at the pinned commit for issue #607, the head of master when retrieved. The commit adds only submissions/2026-10-14/ (50 files) to its parent 487b058, the commit whose upper_bounds.json the issue compares against; the index's blob is the same at both commits. The 23 certificates under submissions/2026-10-14/certificates/ are retained as factual data. The submission README, manifest, SHA256SUMS, checker receipts and per-certificate checker logs, the root README and upper_bounds.json are pinned by digest only. The rest of the tree, including 487b058's certificates/ directory, the drawings and the search programs, is pinned by the commit and was not retained or executed.",
+  "archived_dir": "source",
+  "license": "No licence file or reuse terms at the pin: the tree has no LICENSE, and neither README.md nor submissions/2026-10-14/README.md states terms. The 16 campaign and precision certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). The seven composite certificates have the SHA-256 that Kevin Fang's composites/table.csv at TheSnakeFang/squarepack-certs 078789a lists for them, and that repository's README and ATTRIBUTION.md release composites/ under CC0 1.0. Prose is hash-pinned and not copied.",
+  "claims": [
+    "Issue #607 reports 14 campaign upper bounds, each its certificate's exact side rounded up at 12 places: s(237) <= 15.902603638284, a refinement of Mykhailo Polkovskyi's #593 certificate, and, beyond the n <= 324 case corpus, s(339) <= 18.915818555470, s(382) <= 19.987621154241, s(409) <= 20.767428349966, s(419) <= 20.959997582079, s(450) <= 21.767428350587, s(461) <= 21.973183753375, s(552) <= 23.968034845503, s(599) <= 24.968034846127, s(648) <= 25.968034846328, s(649) <= 25.976974088403, s(651) <= 25.984515068279, s(757) <= 27.991000865994 and s(804) <= 28.920398747577.",
+    "Issue #607 reports seven composites of Kevin Fang's Section 5 table at TheSnakeFang/squarepack-certs 078789a, credited to Fang as their construction author and independently replayed by the reporter: s(703) <= 26.999256308447, s(812) <= 28.988287236851, s(930) <= 30.988287236851, s(931) <= 30.994048655032, s(992) <= 31.997220361783, s(993) <= 31.991327887692 and s(994) <= 31.999256308447; two copied from Fang's shipped certificates and five regenerated with his tools/glue.py, each with the SHA-256 his table lists.",
+    "Issue #607 lists two certificate precision refinements separately from the 21 bounds: s(342) <= 18.964706723173 and s(542) <= 23.828427124774.",
+    "The checker statements (this repository's sqpack verify.py at 37e6757 and Evan Daniel's verify_cert.py at 622cd2e, and the campaign's Rust rational checker for the 16 campaign and precision certificates) are the author's; no optimality claim is made."
+  ],
+  "scope": [
+    "README.md",
+    "submissions/2026-10-14",
+    "upper_bounds.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "**/README.md",
+      "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+    },
+    {
+      "match": "upper_bounds.json",
+      "reason": "The author's comparison index, the same blob as at 487b058, which the issue cites for its 'previous verified bound' column; pinned for provenance, as no claim rests on it."
+    },
+    {
+      "match": "submissions/2026-10-14/manifest.json",
+      "reason": "The source's provenance manifest: exact sides, digests, prior index bounds, credit as prose and the author's checker outcomes; pinned for provenance, as no claim rests on it."
+    },
+    {
+      "match": "submissions/2026-10-14/SHA256SUMS",
+      "reason": "The source's digest list for the submission; pinned for provenance, as the manifest here binds every file."
+    },
+    {
+      "match": "submissions/2026-10-14/verification-receipts.json",
+      "reason": "The author's record of Evan Daniel's checker run; the source's own check, pinned for provenance, as no claim rests on it."
+    },
+    {
+      "match": "submissions/2026-10-14/verification/*.txt",
+      "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+    }
+  ]
+}
