@@ -310,6 +310,7 @@ a.site-popover-action,
 }
 
 ul.credits {
+  font-weight: var(--kpress-font-weight-sans-regular);
   list-style: none;
   padding-inline-start: 0;
 }

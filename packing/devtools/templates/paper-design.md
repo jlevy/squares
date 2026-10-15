@@ -644,7 +644,7 @@ one of them changes.
 | Above a visible site-title H1 or H2 | `--site-title-space-above` | 3.75rem, 60px | `site.css` |
 | Below a visible site-title H1 or H2 | `--site-title-space-below` | 2.5rem, 40px | `site.css` |
 | Below a page’s title, and below its subtitle | `--site-subtitle-space` | 2rem, 32px | `site.css` |
-| Above and below a table | `--site-table-space` | 2.5rem, 40px | `site.css` |
+| Above and below a table | `--site-table-space` | 2rem, 32px | `site.css` |
 | Between a wide block and the edge of the page’s content area | `--site-wide-gutter` | 0.5rem, 8px | `site.css` |
 
 A page’s title, or the picture that opens the homepage, starts `--site-page-top` under
