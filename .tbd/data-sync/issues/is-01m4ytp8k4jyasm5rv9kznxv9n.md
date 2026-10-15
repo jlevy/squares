@@ -5,13 +5,13 @@ title: Beyond-horizon rows above Göbel's classical constructions
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-15T03:46:28.067Z
-updated_at: 2026-10-15T03:54:21.525Z
+updated_at: 2026-10-15T03:55:49.556Z
 ---
 **Owner question:** do Frits Göbel's classical constructions count as earlier reports, and so as the baseline beyond n = 324, so that a beyond-horizon row above one is not recorded? The record holds no Göbel construction beyond the corpus; its standing side there is the beyond-horizon row or the grid. Until the owner answers, draft register plans mark the affected rows `undecided-goebel` rather than recorded.
 
@@ -34,3 +34,5 @@ Göbel's side at m is the least member side at any count ≥ m (deletion). Sides
 ## Notes
 
 2026-10-15: committed as 8cf42e177da4530f2d95c505854d48f304682782 on claude/wizardly-meitner-wqn4x3-reads-1015 (pushed; no PR), through the hooks. packing-validate --records exit 0; focused tests 319 passed (test_upper_bound_reports_487b058 holds the four set tallies and the undecided-goebel rule).
+
+2026-10-15T04:00Z, coordinator: tracked on GitHub as https://github.com/jlevy/squares/issues/613 (labelled bug; owner decision on Göbel as the beyond-horizon baseline; registered rows 369 and 376 above Göbel by 3.33e-2 and 4.57e-3).
