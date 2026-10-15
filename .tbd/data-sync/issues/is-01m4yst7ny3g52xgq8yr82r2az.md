@@ -5,13 +5,13 @@ title: "Validate: Couzo 487b058's 296 beyond-horizon certificates, exact replay 
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4yd28hxb6m3ns2fbzws27ns
 created_at: 2026-10-15T03:31:09.628Z
-updated_at: 2026-10-15T03:31:09.628Z
+updated_at: 2026-10-15T03:46:01.573Z
 ---
 Validation part of think-nj7h (franciscouzo/square-packing 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d, first committed 2026-10-14T17:45:39Z, no issue). HELD by the owner's cap (2026-10-14: hold anything above 40 CPU-h).
 
@@ -25,3 +25,18 @@ Validation part of think-nj7h (franciscouzo/square-packing 487b05809099d8f7d006a
 - Depends on: the owner's word on hosting (OR-18) or a W7 slice for pinned-only replay; the owner's budget for the whole.
 - Done when: every replayed count passes both routes with both controls refused, the receipt or its summary is retained, and the evidence is registered with the beyond-horizon rows.
 - Machine note: four shared CPUs; a whole run is about 10 to 12 wall-hours at one worker.
+
+## Notes
+
+## 2026-10-15: the hosted-release step (coordinator: keep the OR-18 pinning; host the bytes for the replay)
+
+The 296 certificates stay out of Git, pinned by SHA-256 in the packet's acquisition/upstream-subtree.sha256. For a replay they go out as a data release by development.md, "Publishing Hosted Data", from packing/:
+
+1. Fetch: blobless clone of franciscouzo/square-packing, sparse checkout of the packet's declared scope at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d; hold every certificates/nNNN.cert (NNN > 324) to its manifest digest (or let `devtools.upper_bound_reports couzo-verified-bounds-2026-10-14 derive --checkout CHECKOUT --check`'s checkout_problems do it).
+2. Pack: one deterministic tarball of the 296 files rather than 296 assets (`tar --sort=name --mtime=@0 --owner=0 --group=0 --numeric-owner`, then `gzip -n`), about 33 MB raw, with its member list equal to the packet's manifest lines for those paths.
+3. Ignore the local directory that holds it (for example packing/hosted-data/couzo-487b058/) in .gitignore.
+4. Stage: `python -m devtools.hosted_data stage --manifest hosted/couzo-487b058-beyond-horizon-certificates.yaml --from hosted-data/couzo-487b058 --repository jlevy/squares --tag data/couzo-487b058-beyond-horizon-certificates-v1`, add a description naming the packet and the pin, and commit the manifest (never the bytes) in a pull request.
+5. Publish (the owner: publishing a release is outside the session's grant): `python -m devtools.hosted_data publish --manifest hosted/couzo-487b058-beyond-horizon-certificates.yaml`, which uploads and then downloads and checks every asset.
+6. Replay lane: `python -m devtools.hosted_data fetch --manifest hosted/couzo-487b058-beyond-horizon-certificates.yaml`, unpack, hold each member to the packet manifest, then certify (the scratch-packet route or the W7 pinned-only route above). The full receipt keeps every deciding input, tens of MB, so it goes out the same way under data/couzo-487b058-beyond-horizon-receipts-v1, and Git keeps only its summary and the manifest.
+
+Göbel update (same day): 42 of the rows the packet compares are now `undecided-goebel` (above Göbel's classical construction at their count), pending the owner; 252 are recorded. The proposed subset of 31 report-beaten counts is now 30 (964 is undecided-goebel): 339, 370, 378-382, 420-422, 462-464, 506-508, 552, 553, 600, 601, 650, 651, 702, 756-758, 813, 814, 870, 871. The price of the whole is unchanged (456,922,338 pair decisions, 38-48 CPU-h, HELD).
