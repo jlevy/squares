@@ -986,6 +986,55 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/regularize_evand.py",
+            "packing/devtools/regularized_drawings.py",
+            "packing/devtools/render_case_pages.py",
+            "packing/src/sqpack/cli/validate.py",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-295.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The regularization-state record (think-gvke) changes the default-drawings "
+            "generator and its gate step, the axis tool's update, check and verify of the "
+            "atlas index, the layer's admission, the case-record regularization note and "
+            "the case page's note. The papers reach these modules through shared import "
+            "discovery and call none of the changed functions: no paper renders a case "
+            "page, a case record's regularization note, the default-drawings record or "
+            "the atlas index. The survey cites the six case records by link only, as its "
+            "results table's count links, and their only change is that note's text. "
+            "Manuscripts, figures, credits and print rules are unchanged by source review. "
+            "No render was taken (this host has no pinned Chromium), and all four papers "
+            "keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the site takes the patch."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer", "site"),
         paths=("packing/src/sqpack/cli/validate.py",),
         outputs=(
