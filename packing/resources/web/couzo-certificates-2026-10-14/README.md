@@ -142,12 +142,12 @@ break. In every positive the two routes find the same least wall clearance and t
 least pair gap:
 
 - **The 16 campaign and precision certificates** clear every wall by exactly
-  `1/1000000000000000` ($10^{-15}$) and every pair by between
-  $9.76 \times 10^{-13}$ (at 419) and $1.60 \times 10^{-12}$ (at 339).
+  `1/1000000000000000` ($10^{-15}$) and every pair by between $9.76 \times 10^{-13}$ (at
+  419\) and $1.60 \times 10^{-12}$ (at 339).
 - **The seven composites** clear every wall by exactly `1/36893488147419103232`
-  ($2^{-65}$, $2.71 \times 10^{-20}$) and every pair by exactly
-  `1/18446744073709551616` ($2^{-64}$, $5.42 \times 10^{-20}$), the margins the
-  author’s logs of Evan Daniel’s checker print.
+  ($2^{-65}$, $2.71 \times 10^{-20}$) and every pair by exactly `1/18446744073709551616`
+  ($2^{-64}$, $5.42 \times 10^{-20}$), the margins the author’s logs of Evan Daniel’s
+  checker print.
 
 The 69 jobs made 31,386,744 pair decisions in 12,425.76 route CPU seconds (3.45
 CPU-hours) and 14,795.58 job wall seconds, summed; the longest job, the
@@ -162,8 +162,7 @@ the duplicate-square control at 812, and it was started again from there.
 outputs, as it admits any; it is kept as one shard per count,
 `receipts/exact-certification-nNNN.json.xz`, since the whole would exceed the kernel’s
 ceiling on uncompressed evidence, and each keeps every deciding input and both routes’
-complete outputs.
-A fresh serial `check --replay` of all 69 jobs is in progress.
+complete outputs. A fresh serial `check --replay` of all 69 jobs is in progress.
 
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
 arithmetic and the separating-axis method, so they are two implementations of one
@@ -174,9 +173,10 @@ No source program ran here.
 ## Against the Record
 
 [acquisition/claims.json](acquisition/claims.json) freezes every certificate against the
-record as it stood when the issue was read (`main` at `9b32da04d`, 14 October 2026,
-after #602 registered T-161 to T-184), and `check-claims` rebuilds it, each exact side
-from its holder’s own retained packet.
+record as it stood after the replay (`main` at `6964362b5`, 15 October 2026, after #602
+registered T-161 to T-184 and #609 merged); the frozen record first read `9b32da04d`,
+when the issue arrived, and every relation is the same at both.
+`check-claims` rebuilds it, each exact side from its holder’s own retained packet.
 
 **At 237**, inside the corpus, the case ceiling is Nate Chaoweeraprasit’s packing as
 improved by Couzo (T-140), 15.9029496076778317, and the certificate is below it by
