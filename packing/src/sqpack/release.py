@@ -1004,6 +1004,26 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer", "site"),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "The validation CLI assigns existing forwarder tests to the required "
+            "Chromium owner and enables pytest stack dumps after 60 seconds without "
+            "terminating tests or changing the shared command deadline. Site and "
+            "paper builders neither invoke these test commands nor consume their "
+            "diagnostics. Public rendering helpers, manuscripts, figures and "
+            "scientific inputs are unchanged, so the site and lower-bounds paper "
+            "editions remain current. This is a source-reviewed finding; no PDF "
+            "byte-identity comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",

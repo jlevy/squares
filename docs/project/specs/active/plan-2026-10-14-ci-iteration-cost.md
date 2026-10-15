@@ -490,6 +490,17 @@ The observed 210 extra normal skips must disappear as unexplained omissions.
 The remaining known optional omissions stay enumerated as omissions, with reason and
 owner; they are never counted as passes.
 
+The complete `tests/test_site_forwarders.py` module belongs to the existing functional
+`site table layout in Chromium` command.
+`SITE_LAYOUT_TESTS` assigns its 51 cases to that browser-equipped owner and excludes the
+module from the four generic quick shards.
+The existing `SQPACK_REQUIRE_CHROMIUM=1` setting makes a missing browser fail there.
+The four native-frontier load-budget cases keep their separate serial command, and both
+commands keep their shared deadline.
+Each command enables `faulthandler_timeout=60` for stack diagnostics while retaining
+pytest’s default `faulthandler_exit_on_timeout=False`. This adds no job or dependency;
+the recurring Linux cost of the corrected browser ownership remains to be measured.
+
 Use collected metadata/capabilities and the maintained family inventory to place tests,
 rather than hardcode a list of 210 historical identities.
 New browser tests must either acquire a valid placement automatically or fail the
@@ -845,21 +856,41 @@ is a diagnostic candidate, not the identified unfinished case or proof that runn
 variance caused either timeout.
 
 Bead `think-yops` owns diagnosis.
-Reuse the existing flushed progress writer for native quick and slow pytest commands,
-recording test starts and completed setup, call and teardown phases.
-Keep artifact paths outside source, record the actual source and worker shape, and
-preserve the exact selections, assertions, worker caps and command deadlines.
-The default reachable-test event stream must remain compatible.
-Interrupted-child tests must demonstrate that the last completed phase survives
-cancellation.
+[PR #629](https://github.com/jlevy/squares/pull/629) added the existing flushed progress
+writer to native quick and slow commands, recording test starts and completed setup,
+call and teardown phases.
+Its source, run and effective pytest worker identities bind each external journal to its
+command; the default reachable-test event stream remains unchanged.
+Focused interruption controls demonstrate that the last completed phase survives
+cancellation. Its end-to-end writing and artifact cost remains unmeasured.
 
-This adds diagnostics to existing commands, without another job or dependency.
-Its end-to-end writing and artifact cost remains unmeasured; focused probe times are not
-a performance result.
-After review, choose one instrumented observation deliberately, retain its
-unfinished-work evidence if it times out, and use that evidence to select the next
-repair. Do not raise a deadline, suppress a test, or call a clean later run an
-explanation of the original failures.
+The first instrumented
+[main run 38808495711](https://github.com/jlevy/squares/actions/runs/38808495711), at
+`22a67ce4`, failed after 35m23s. Its
+[integration-suites job](https://github.com/jlevy/squares/actions/runs/38808495711/job/116675434032)
+again reached the actual 900-second shard-C command deadline, reporting a 901-second
+wall after cleanup. The unfinished node was
+`tests/test_site_forwarders.py::test_the_deployed_site_check_follows_the_same_forwarders`.
+Its setup completed at 21:33:09.122387 UTC; no call, teardown or node completion was
+recorded before termination at 21:45:13 UTC. The other three workers finished
+successfully by 21:36:18 UTC. Twelve other native owners passed, including all 241 slow
+cases in 1,638.238s. The aggregate remains failed.
+
+The forwarder module had no entry in `SITE_LAYOUT_TESTS`, so ordinary PR shards could
+skip its browser cases while main installed Chromium and executed them in shard C.
+Assign the complete module to the existing required Chromium owner and exclude it from
+the generic shards through the shared tuple.
+Add 60-second pytest stack dumps to both existing site-layout commands, retaining
+`faulthandler_exit_on_timeout=False`, their shared deadline, worker policy and
+assertions. These diagnostics do not add a command, job or dependency.
+
+A serial macOS reproduction passed that node in 25.68s and all 51 module cases in
+54.79s. These are single command-wall observations from a different platform, not Linux
+cost measurements or a speedup estimate.
+The corrected ownership’s recurring Linux cost and critical-path effect remain unknown.
+The journal identifies an unfinished call but does not establish why it blocked.
+Both original failures in run 38797565375 remain unexplained; a clean later run cannot
+supply their missing diagnosis.
 
 ## References
 

@@ -828,6 +828,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "--ignore=tests/test_site_rendering.py",
         "--ignore=tests/test_site_math_preferences.py",
         "--ignore=tests/test_site_atlas_views.py",
+        "--ignore=tests/test_site_forwarders.py",
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
@@ -4532,6 +4533,7 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
         "tests/test_site_rendering.py",
         "tests/test_site_math_preferences.py",
         "tests/test_site_atlas_views.py",
+        "tests/test_site_forwarders.py",
     }
     for path in validate.SITE_LAYOUT_TESTS:
         assert (validate.PROJECT_ROOT / path).is_file(), path
@@ -4582,7 +4584,16 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
 ) -> None:
     """Keep functional layout parallel and the four load-budget cases serial."""
     commands, environments, output = _captured_site_layout_commands(monkeypatch)
-    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    common = (
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-o",
+        "faulthandler_timeout=60",
+    )
     assert commands == [
         (
             *common,
@@ -4652,6 +4663,11 @@ def test_site_layout_commands_partition_the_original_collection(
     }
     assert original == parallel | serial
     assert not parallel & serial
+    forwarders = {
+        node for node in original if node.startswith("tests/test_site_forwarders.py::")
+    }
+    assert len(forwarders) == 51
+    assert forwarders <= parallel
 
 
 @pytest.mark.parametrize("failure_index", [0, 1])

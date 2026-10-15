@@ -259,6 +259,7 @@ BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 #: Chromium to the frontend job, the one pull-request runner that installs it, and the
 #: quick lane ignores them: in a shard, with no browser, they could only skip, which is
 #: what they did on every pull request until that run.
+#: Forwarder navigation follows the same Chromium owner and required-capability rule.
 SITE_LAYOUT_TESTS = (
     "tests/test_site_headroom.py",
     "tests/test_site_homepage.py",
@@ -273,6 +274,7 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_rendering.py",
     "tests/test_site_math_preferences.py",
     "tests/test_site_atlas_views.py",
+    "tests/test_site_forwarders.py",
 )
 #: The four HTTP load/no-JS cases measure browser timing without competing browser
 #: workers from the functional layout command. Their assertions and budgets stay shared
@@ -2073,7 +2075,16 @@ def _site_layout_tests(context: Context) -> str:
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()
-    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    common = (
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-o",
+        "faulthandler_timeout=60",
+    )
     commands = (
         (
             *common,
