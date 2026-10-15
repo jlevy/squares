@@ -43,22 +43,24 @@ pinned by digest only. No prose or program is copied.
 ## The Certificate at 211
 
 [acquisition/claims.json](acquisition/claims.json) compares it with the case record and
-every other report at 211, as `main` stood at `6964362b5`, each at its exact side.
+every other report at 211, as `main` stood at `c4c690a3e`, each at its exact side.
 
 | Report | Holder | Side | This certificate is below by |
 | --- | --- | --- | --- |
 | Case T-149, PR #574 (T-174) | Ostashev; PingYou Ltd | 14.9963367213363163 | 2.79e-3 |
+| T-057 | de Winter | 14.9979607049677150015 (printed) | 4.41e-3 |
 | T-098 (#375) | Daniel | 14.9979607049673618 | 4.41e-3 |
 | T-163 (Fang’s theorem inventory) | Fang | 14.99995 | 6.40e-3 |
 | #575 (T-175) | Ostashev | 14.9936941865832463 | 1.45e-4 |
 | #583 (T-181) | Couzo | 14.9935589141226373 | 9.29e-6 |
-| #586 (T-182), #593 (T-183) | Couzo; Polkovskyi | 14.9935589139740060 | 9.29e-6 |
+| #586 (T-182); #593, not registered at 211 | Couzo; Polkovskyi | 14.9935589139740060 | 9.29e-6 |
 
 The certificate is the smallest at 211. A publication in a watched repository is a
 report from its first commit, here 2026-10-14T17:45:39Z, after every report above, so
 under the per-count rule
-([stage 1](../../../campaign/result-import.md#several-reports-at-one-count)) it would be
-recorded. No later report at 211 is smaller: the 4e4c8ce index restates the same bytes.
+([stage 1](../../../campaign/result-import.md#several-reports-at-one-count)) it is
+recorded, as T-188. No later report at 211 is smaller: the 4e4c8ce index restates the same
+bytes.
 
 The maintained two-route kernel decided it by `devtools.upper_bound_reports certify
 --workers 1`, from 03:24:21Z to 03:25:34Z on 15 October on a four-core machine shared
@@ -115,7 +117,11 @@ rows on `main`.
 [register-plan.yaml](register-plan.yaml) is the register plan: the entry, evidence,
 source and bibliography `register-plan` prints for 211, then a drafted beyond-horizon part
 with the 252 rows, the 18 current rows they supersede, the 42 `undecided-goebel` rows,
-the owner’s question and the source’s `claims_record`. No record is edited here.
+the owner’s question and the source’s `claims_record`.
+The records lane of 15 October applied it: T-188 records the 211 side, and the source
+register holds the 252 rows, the 18 it supersedes and, at 14 of the counts, #607’s rows
+that supersede these (T-189). The 42 `undecided-goebel` rows are not recorded until the
+owner answers #613, and the two not recorded stay so.
 
 A replay of the 296 makes 456,922,338 pair decisions: 38 to 48 CPU-hours at the rate the
 211 and 237 replays measured. It needs the bytes, from a checkout at the pin or a hosted

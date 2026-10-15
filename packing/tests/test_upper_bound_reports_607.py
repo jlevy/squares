@@ -2,9 +2,12 @@
 
 The issue asks for 14 campaign bounds of the author's own, one inside the case corpus at
 237 and 13 beyond it, seven of Kevin Fang's composites, which the author replayed and
-credits to Fang, and two precision refinements beyond the corpus. These tests hold what
-is particular to the packet, and the general importer's checks on it, reading the
-retained packets only.
+credits to Fang, and two precision refinements beyond the corpus. The records lane of 15
+October declares requested the 16 counts the per-count rule records as the author's: the
+seven composites tie Fang's earlier rows, so they stay in the claim record as replayed
+certificates and out of the beyond-horizon record, whose rows are this source's. These
+tests hold what is particular to the packet, and the general importer's checks on it,
+reading the retained packets only.
 """
 
 from __future__ import annotations
@@ -64,12 +67,15 @@ COMPOSITES = {
 }
 #: The two of them Fang ships, as the files the excess-theorem packet pins by digest.
 SHIPPED = {703: "composites/n027_j1_703.cert", 994: "composites/n032_j2_994.cert"}
-#: The author's own parent commit, whose certificates at these counts no issue reports.
-PARENT = "franciscouzo/square-packing@487b058"
+#: The author's own parent commit, whose certificates at these counts no issue reports,
+#: labelled by the source row that records them (T-188's).
+PARENT = "couzo-verified-bounds-2026-10-14"
 #: When each other report at a count reached the record: an issue or pull request at its
 #: filing, a register entry at the issue it registered, a source-register row at the report
 #: or commit it holds, and a watched repository's result at its first commit.
 REACHED = {
+    # T-056's 237: the source commit holding its printed side (2083b05), before #227's import.
+    "T-056": "2026-09-26T22:21:57Z",
     "T-098 (#375)": "2026-10-05T21:40:49Z",
     "T-115 (#401)": "2026-10-07T02:49:31Z",
     "T-127 (#438)": "2026-10-08T03:08:01Z",
@@ -117,10 +123,10 @@ def _rows() -> dict[int, dict[str, Any]]:
 
 
 def _reached(report: str) -> str:
-    if report.startswith("TheSnakeFang/squarepack-certs@bef5c42"):
-        return COMPOSITES_COMMITTED
-    if report.startswith("TheSnakeFang/squarepack-certs@078789a"):
+    if report.startswith("Fang theorem/"):
         return THEOREM_COMMITTED
+    if report.startswith("Fang "):
+        return COMPOSITES_COMMITTED
     return REACHED[report]
 
 
@@ -128,7 +134,8 @@ def test_custody_admits_each_certificate_at_its_printed_side() -> None:
     declaration = reports.load_declaration(_packet())
     certificates = reports.read_facts(_packet())
     assert [house["n"] for house in declaration["houses"]] == [237]
-    assert declaration["requested"] == declaration["replayed"] == list(PRINTED)
+    assert declaration["replayed"] == list(PRINTED)
+    assert declaration["requested"] == [n for n in PRINTED if n not in COMPOSITES]
     assert list(certificates) == list(PRINTED)
     for row in declaration["certificates"]:
         n = row["n"]
@@ -211,7 +218,7 @@ def test_beyond_the_corpus_the_campaign_bounds_are_smallest_and_the_composites_t
         if n <= reports.HORIZON:
             continue
         assert row["case"] is None
-        assert (row["requested"], row["replayed"]) == (True, True)
+        assert (row["requested"], row["replayed"]) == (n not in COMPOSITES, True)
         assert Fraction(row["exact_side"]) < Fraction(row["grid_side"])
         if n in COMPOSITES:
             # Fang's print is at 15 places; the digests, not the prints, decide the tie.
@@ -271,7 +278,11 @@ def test_in_report_order_16_counts_are_recorded_and_the_7_composites_are_fangs()
 
 def test_the_beyond_horizon_record_holds_every_requested_count_past_324() -> None:
     claims = coverage_check.load_claims(_packet() / reports.BEYOND)
-    assert claims == {n: side for n, side in PRINTED.items() if n > reports.HORIZON}
+    assert claims == {
+        n: side
+        for n, side in PRINTED.items()
+        if n > reports.HORIZON and n not in COMPOSITES
+    }
 
 
 def test_the_receipt_admits_every_job_of_every_count_on_both_routes() -> None:
@@ -304,7 +315,7 @@ def test_the_plan_states_the_237_bound_as_check_standing_reads_it() -> None:
     }
     coverage = plan["source-coverage.yaml"]
     assert [row["n"] for row in coverage["beyond_horizon_claims"]] == [
-        n for n in PRINTED if n > reports.HORIZON
+        n for n in PRINTED if n > reports.HORIZON and n not in COMPOSITES
     ]
     assert plan["bibliography.yaml"]["dated"] == "2026-10-14"
     assert "T-NNN" not in coverage["sources"][0]["notes"].replace("T-NNN records", "")

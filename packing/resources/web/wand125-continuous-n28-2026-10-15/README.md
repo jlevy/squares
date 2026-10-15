@@ -6,6 +6,8 @@ by a cover at every angle rather than on a net of directions, and reported as de
 two of the source’s programs.
 No issue reports it; the intake sweep of 15 October found it (think-mq0k). The bound
 remains unconfirmed here; no standing bound or rating changes.
+The records lane of 15 October registered it as T-192 at V0/C0, after T-142, from
+[`register-plan.yaml`](register-plan.yaml); T-142 and T-107 keep their claims.
 
 | Item | Value |
 | --- | --- |

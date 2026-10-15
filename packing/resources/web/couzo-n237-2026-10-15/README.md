@@ -97,15 +97,17 @@ No source program ran here.
 ## Against the Record
 
 [acquisition/claims.json](acquisition/claims.json) compares the certificate with the case
-record and every other report at 237, as `main` stood at `6964362b5`.
-Each side is exact, read from its own packet, except #607’s, whose packet is not on
-`main`; it is compared at its print, rounded up, which decides it.
+record and every other report at 237, as `main` stood at `c4c690a3e` when the records
+lane of 15 October read it. Each side is exact, read from its own packet; #607’s was
+first compared at its print, rounded up, until that lane registered its packet as T-189
+and read it exactly. The lane also added T-056, which the declaration had left out.
 
 | Report | Holder | Side | This certificate is below by |
 | --- | --- | --- | --- |
 | Case T-140 | Chaoweeraprasit, improved by Couzo | 15.9029496076778317 | 3.46e-4 |
 | #561, T-161 | Couzo | 15.902947773658 | 3.44e-4 |
 | PR #574, T-174 | PingYou Ltd | 15.902947773658 | 3.44e-4 |
+| T-056 | Couzo | 15.911191683008479 (printed) | 8.59e-3 |
 | T-098 (#375) | Daniel | 15.911191683002 | 8.59e-3 |
 | T-115 (#401) | Chaoweeraprasit | 15.903676235191 | 1.07e-3 |
 | T-127 (#438) | Gupta | 15.903676235189 | 1.07e-3 |
@@ -115,13 +117,14 @@ Each side is exact, read from its own packet, except #607’s, whose packet is n
 | #470 | Polkovskyi | 15.90367623519 | 1.07e-3 |
 | #573 | Polkovskyi | 15.90294960768 | 3.46e-4 |
 | #593, T-183 | Polkovskyi | 15.902705057866 | 1.01e-4 |
-| #607 | Couzo | 15.902603638284 (printed) | 2.44e-11 (at least 2.34e-11) |
+| #607, T-189 | Couzo | 15.9026036382835755 | 2.40e-11 |
 
 The certificate is the smallest at 237.
 A publication in a watched repository is a report from its first commit, here
 2026-10-15T00:31:53Z, after #607’s certificate (43ac7d2, 2026-10-14T19:15:09Z).
 Under the per-count rule ([stage 1](../../../campaign/result-import.md#several-reports-at-one-count))
-it is strictly stronger than every earlier report, so it would be recorded after #607’s.
+it is strictly stronger than every earlier report, so it is recorded after #607’s, as
+T-190.
 
 ## What Is Not Established
 

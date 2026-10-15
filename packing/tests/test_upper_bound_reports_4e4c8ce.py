@@ -65,8 +65,12 @@ def test_the_certificate_is_the_smallest_report_and_follows_607() -> None:
     assert all(other["relation"] == "below" for other in row["pending"])
     (issue,) = [other for other in row["pending"] if other["report"] == "#607"]
     committed, printed = ISSUE_607
-    assert issue["printed"] == printed
-    assert issue["rounding"] == "up"
+    # Read at #607's exact side, through its packet, since the records lane of 15 October
+    # registered it as T-189.
+    assert issue["result"] == "T-189"
+    exact = reports.house_side("[Couzo certificates 2026-10-14]", 237)
+    assert Fraction(issue["difference"]) == exact - SIDE
+    assert Fraction(239, 10**13) < exact - SIDE < Fraction(240, 10**13)
     # Below every number #607's print may be, rounded up at 12 places.
     assert Fraction(printed) - Fraction(1, 10**12) - SIDE > Fraction(23, 10**12)
     assert committed < FIRST

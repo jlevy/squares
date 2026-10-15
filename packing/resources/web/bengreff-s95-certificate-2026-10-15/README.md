@@ -19,7 +19,9 @@ Its proposed Frontier key is **[bengreff s95 certificate 2026-10-15]**. The clai
 is stated as the source states it. What was checked here at retention is in
 [Checks Made Here](#checks-made-here); none of it is a review, and nothing here registers
 the result. The register entries the records lane would apply are drafted in
-[`register-plan.yaml`](register-plan.yaml).
+[`register-plan.yaml`](register-plan.yaml); the records lane of 15 October applied them,
+registering the result as T-191 at V0/C0 and adding T-081’s sentence on 96. The case
+record at 95 is unchanged until a review.
 
 ## Source and Pin
 

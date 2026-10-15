@@ -8,7 +8,7 @@
   "witness_prefix": "W-couzo-4e4c8ce-n",
   "claim_limitations": "Complete 4e4c8ce rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
   "read_on": "2026-10-15",
-  "read_at_main": "6964362b5c225c519b4d6cd52663a3d795b05292",
+  "read_at_main": "c4c690a3e60e613ec6c063d4f27c5f627e734ea5",
   "certificates": [
     {
       "n": 237,
@@ -49,6 +49,15 @@
       "holders": "PingYou Ltd (BuddenPing), numerical v2",
       "result": "T-174",
       "reader": "[PingYou PR 574 certificates 2026-10-13]"
+    },
+    {
+      "n": 237,
+      "report": "T-056",
+      "url": "https://github.com/franciscouzo/square-packing/tree/f3c5a529c255b546db18605702b8da298132309f",
+      "holders": "Francisco Couzo",
+      "result": "T-056",
+      "printed": "15.911191683008479",
+      "rounding": "up"
     },
     {
       "n": 237,
@@ -124,8 +133,8 @@
       "report": "#607",
       "url": "https://github.com/jlevy/squares/issues/607",
       "holders": "Francisco Couzo",
-      "printed": "15.902603638284",
-      "rounding": "up"
+      "result": "T-189",
+      "reader": "[Couzo certificates 2026-10-14]"
     }
   ],
   "register": {

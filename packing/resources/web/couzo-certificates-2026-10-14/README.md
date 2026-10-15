@@ -178,9 +178,13 @@ No source program ran here.
 ## Against the Record
 
 [acquisition/claims.json](acquisition/claims.json) freezes every certificate against the
-record as it stood after the replay (`main` at `6964362b5`, 15 October 2026, after #602
-registered T-161 to T-184 and #609 merged); the frozen record first read `9b32da04d`,
-when the issue arrived, and every relation is the same at both.
+record as the records lane of 15 October read it (`main` at `c4c690a3e`, after #612
+registered T-185 to T-187); the frozen record first read `9b32da04d`, when the issue
+arrived, then `6964362b5`, and every relation is the same at all three.
+That lane added T-056’s printed side at 237, which the declaration had left out (above
+by $8.59 \times 10^{-3}$), and labels the reports without commit ids: `487b058`’s
+certificates by the source row that records them, `couzo-verified-bounds-2026-10-14`, and
+Fang’s by their table rows and file names.
 `check-claims` rebuilds it, each exact side from its holder’s own retained packet.
 
 **At 237**, inside the corpus, the case ceiling is Nate Chaoweeraprasit’s packing as
@@ -227,8 +231,10 @@ theorem certificates of his `078789a` at their exact sides $n - 1/20000$.
 At the seven composite counts the claim record leaves the certificate and Fang’s row
 undecided, since his table prints 15 places and the two sides differ by less than one
 unit there; the digests decide it, as the certificate is the file his row names.
+The declaration’s `requested` roster is the 16 counts the per-count rule records as the
+author’s: the seven composites stay in the claim record as replayed certificates, and
 [acquisition/beyond-horizon-claims.json](acquisition/beyond-horizon-claims.json) holds
-all 22 requested counts beyond 324, as the issue asks for them.
+the 15 recorded counts beyond 324, each a row of the source register.
 
 ## In Report Order
 
@@ -252,9 +258,13 @@ below every report that reached the record before it:
   `think-rn2y` registers.
 
 `487b058`’s own certificates are reports at their first commit, before this one, and an
-import of their own; the record holds none of them.
-At the 16 counts above where the issue reports a smaller side, each would be recorded
-and then followed by this packet’s.
+import of their own (T-188’s source).
+At 14 of the 15 recorded counts beyond 324 its row is recorded and then superseded by
+this packet’s; at 812 and 930 it is above Fang’s composites and not recorded.
+
+The records lane of 15 October registered the 237 side as T-189 and the 15 rows, each
+superseding the row it beats: `487b058`’s at 14 counts and Couzo’s 8 October report at
+342. Couzo’s later `4e4c8ce` certificate at 237 is T-190.
 
 ## What Is Not Established
 

@@ -4426,7 +4426,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
 - path: cases/212.html
   canonical: cases/212.html
@@ -4650,7 +4650,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
 - path: cases/238.html
   canonical: cases/238.html
@@ -5026,7 +5026,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-15'
   status: live
 - path: cases/280.html
   canonical: cases/280.html
@@ -5978,7 +5978,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
 - path: cases/96.html
   canonical: cases/96.html
@@ -15010,6 +15010,137 @@ urls:
     - packing/resources/web/evand-n146-2026-10-14/acquisition/claims.json
     - packing/resources/web/evand-n146-2026-10-14/source/search/packer/candidates/tt2_n146.cert
     - packing/devtools/upper_bound_reports.py
+- path: result/t-188.html
+  canonical: result/t-188.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-15'
+  lastmod: '2026-10-15'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 211
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo verified bounds 2026-10-14]'
+      published: '2026-10-14'
+    builds_on: null
+    evidence:
+    - E-couzo-487b058-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-verified-bounds-2026-10-14/README.md
+    - packing/resources/web/couzo-verified-bounds-2026-10-14/acquisition/claims.json
+    - packing/resources/web/couzo-verified-bounds-2026-10-14/source/certificates/n211.cert
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-189.html
+  canonical: result/t-189.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-15'
+  lastmod: '2026-10-15'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 237
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo certificates 2026-10-14]'
+      published: '2026-10-14'
+    builds_on: null
+    evidence:
+    - E-couzo-607-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-certificates-2026-10-14/README.md
+    - packing/resources/web/couzo-certificates-2026-10-14/acquisition/claims.json
+    - packing/resources/web/couzo-certificates-2026-10-14/source/submissions/2026-10-14/certificates/n237.cert
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-190.html
+  canonical: result/t-190.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-15'
+  lastmod: '2026-10-15'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 237
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo n237 2026-10-15]'
+      published: '2026-10-15'
+    builds_on: null
+    evidence:
+    - E-couzo-4e4c8ce-n237-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-n237-2026-10-15/README.md
+    - packing/resources/web/couzo-n237-2026-10-15/acquisition/claims.json
+    - packing/resources/web/couzo-n237-2026-10-15/source/certificates/n237.cert
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-191.html
+  canonical: result/t-191.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-15'
+  lastmod: '2026-10-15'
+  status: live
+  identity:
+    kind: optimality
+    scope:
+      n_values:
+      - 95
+    established: null
+    attribution:
+      source_keys:
+      - '[bengreff s95 certificate 2026-10-15]'
+      published: '2026-10-15'
+    builds_on: null
+    evidence:
+    - E-bengreff-610-cover-report
+    - E-basic-grid-upper
+    artifacts:
+    - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
+    - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
+    - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+- path: result/t-192.html
+  canonical: result/t-192.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-15'
+  lastmod: '2026-10-15'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 28
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 continuous n28 2026-10-15]'
+      published: '2026-10-15'
+    builds_on: null
+    evidence:
+    - E-wand125-continuous-n28-5745-report
+    artifacts:
+    - packing/resources/web/wand125-continuous-n28-2026-10-15/README.md
+    - packing/resources/web/wand125-continuous-n28-2026-10-15/acquisition/sources.json
+    - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json
+    - packing/devtools/continuous_pose_followup.py
+    - packing/devtools/audit_continuous_pose.py
 - path: results.html
   canonical: results.html
   kind: page

@@ -8,7 +8,7 @@
   "witness_prefix": "W-couzo-487b058-n",
   "claim_limitations": "Complete 487b058 rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
   "read_on": "2026-10-15",
-  "read_at_main": "6964362b5c225c519b4d6cd52663a3d795b05292",
+  "read_at_main": "c4c690a3e60e613ec6c063d4f27c5f627e734ea5",
   "certificates": [
     {
       "n": 211,
@@ -34,6 +34,15 @@
     }
   ],
   "pending": [
+    {
+      "n": 211,
+      "report": "T-057 (no issue)",
+      "url": "https://github.com/JoostdeWinter/square-packing-211/tree/702df9bb3b1e7fe13279a61a1fa89722aa2d496a",
+      "holders": "de Winter",
+      "result": "T-057",
+      "printed": "14.9979607049677150015",
+      "rounding": "up"
+    },
     {
       "n": 211,
       "report": "T-098 (#375)",
@@ -88,7 +97,6 @@
       "report": "#593",
       "url": "https://github.com/jlevy/squares/issues/593",
       "holders": "Mykhailo Polkovskyi (Mishapolk)",
-      "result": "T-183",
       "reader": "[Mishapolk records 2026-10-14]"
     }
   ],

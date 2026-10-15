@@ -7,8 +7,8 @@
   "receipt_format": "couzo-607-exact-replay-v1",
   "witness_prefix": "W-couzo-607-n",
   "claim_limitations": "Complete 43ac7d2 rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
-  "read_on": "2026-10-14",
-  "read_at_main": "6964362b5c225c519b4d6cd52663a3d795b05292",
+  "read_on": "2026-10-15",
+  "read_at_main": "c4c690a3e60e613ec6c063d4f27c5f627e734ea5",
   "certificates": [
     {
       "n": 237,
@@ -187,15 +187,8 @@
     648,
     649,
     651,
-    703,
     757,
-    804,
-    812,
-    930,
-    931,
-    992,
-    993,
-    994
+    804
   ],
   "replayed": [
     237,
@@ -252,6 +245,15 @@
       "holders": "PingYou Ltd (BuddenPing), numerical v2",
       "result": "T-174",
       "reader": "[PingYou PR 574 certificates 2026-10-13]"
+    },
+    {
+      "n": 237,
+      "report": "T-056",
+      "url": "https://github.com/franciscouzo/square-packing/tree/f3c5a529c255b546db18605702b8da298132309f",
+      "holders": "Francisco Couzo",
+      "result": "T-056",
+      "printed": "15.911191683008479",
+      "rounding": "up"
     },
     {
       "n": 237,
@@ -367,7 +369,7 @@
     },
     {
       "n": 339,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n339.cert",
       "holders": "Francisco Couzo",
       "printed": "18.916047442533",
@@ -390,7 +392,7 @@
     },
     {
       "n": 342,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n19_342_r18x17_n0290+one-square (table-only)",
+      "report": "Fang composite L1_n19_342_r18x17_n0290+one-square (table-only)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "18.997550817417073",
@@ -406,7 +408,7 @@
     },
     {
       "n": 382,
-      "report": "TheSnakeFang/squarepack-certs@078789a theorem/best/n020_j2.cert",
+      "report": "Fang theorem/best/n020_j2.cert",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/best/n020_j2.cert",
       "holders": "Kevin Fang",
       "printed": "19.99995",
@@ -436,7 +438,7 @@
     },
     {
       "n": 382,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n382.cert",
       "holders": "Francisco Couzo",
       "printed": "19.987621288667",
@@ -444,7 +446,7 @@
     },
     {
       "n": 409,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n409.cert",
       "holders": "Francisco Couzo",
       "printed": "20.767479046279",
@@ -452,7 +454,7 @@
     },
     {
       "n": 419,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n419.cert",
       "holders": "Francisco Couzo",
       "printed": "20.961496327041",
@@ -460,7 +462,7 @@
     },
     {
       "n": 450,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n450.cert",
       "holders": "Francisco Couzo",
       "printed": "21.767479045660",
@@ -468,7 +470,7 @@
     },
     {
       "n": 461,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n461.cert",
       "holders": "Francisco Couzo",
       "printed": "21.974473104090",
@@ -476,7 +478,7 @@
     },
     {
       "n": 542,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n542.cert",
       "holders": "Francisco Couzo",
       "printed": "23.828427125797",
@@ -484,7 +486,7 @@
     },
     {
       "n": 552,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n24_552_r21x20_n0401+n-11 (table-only)",
+      "report": "Fang composite L1_n24_552_r21x20_n0401+n-11 (table-only)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "23.988287236850655",
@@ -492,7 +494,7 @@
     },
     {
       "n": 552,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n552.cert",
       "holders": "Francisco Couzo",
       "printed": "23.973761315361",
@@ -500,7 +502,7 @@
     },
     {
       "n": 599,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n599.cert",
       "holders": "Francisco Couzo",
       "printed": "24.973587230053",
@@ -508,7 +510,7 @@
     },
     {
       "n": 648,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n648.cert",
       "holders": "Francisco Couzo",
       "printed": "25.973587230678",
@@ -516,7 +518,7 @@
     },
     {
       "n": 649,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n649.cert",
       "holders": "Francisco Couzo",
       "printed": "25.977785776262",
@@ -532,7 +534,7 @@
     },
     {
       "n": 651,
-      "report": "TheSnakeFang/squarepack-certs@078789a theorem/n026_F1.cert",
+      "report": "Fang theorem/n026_F1.cert",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/n026_F1.cert",
       "holders": "Kevin Fang",
       "printed": "25.99995",
@@ -540,7 +542,7 @@
     },
     {
       "n": 651,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n651.cert",
       "holders": "Francisco Couzo",
       "printed": "25.984894424966",
@@ -548,7 +550,7 @@
     },
     {
       "n": 703,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n27_703_r17x16_n0257+n-110 (shipped)",
+      "report": "Fang composite L1_n27_703_r17x16_n0257+n-110 (shipped)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "26.999256308446249",
@@ -556,7 +558,7 @@
     },
     {
       "n": 703,
-      "report": "TheSnakeFang/squarepack-certs@078789a theorem/n027_F1.cert",
+      "report": "Fang theorem/n027_F1.cert",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/n027_F1.cert",
       "holders": "Kevin Fang",
       "printed": "26.99995",
@@ -564,7 +566,7 @@
     },
     {
       "n": 757,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n28_757_r18x17_n0290+n-110 (table-only)",
+      "report": "Fang composite L1_n28_757_r18x17_n0290+n-110 (table-only)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "27.997550817417073",
@@ -572,7 +574,7 @@
     },
     {
       "n": 757,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 n028_j1_757.cert (shipped)",
+      "report": "Fang n028_j1_757.cert (shipped)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "27.999256308446249",
@@ -580,7 +582,7 @@
     },
     {
       "n": 757,
-      "report": "TheSnakeFang/squarepack-certs@078789a theorem/n028_F1.cert",
+      "report": "Fang theorem/n028_F1.cert",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/n028_F1.cert",
       "holders": "Kevin Fang",
       "printed": "27.99995",
@@ -588,7 +590,7 @@
     },
     {
       "n": 757,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n757.cert",
       "holders": "Francisco Couzo",
       "printed": "27.992467660533",
@@ -596,7 +598,7 @@
     },
     {
       "n": 804,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n804.cert",
       "holders": "Francisco Couzo",
       "printed": "28.927176135381",
@@ -604,7 +606,7 @@
     },
     {
       "n": 812,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n29_812_r21x20_n0401+n-71 (table-only)",
+      "report": "Fang composite L1_n29_812_r21x20_n0401+n-71 (table-only)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "28.988287236850655",
@@ -612,7 +614,7 @@
     },
     {
       "n": 812,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n812.cert",
       "holders": "Francisco Couzo",
       "printed": "28.992467661161",
@@ -620,7 +622,7 @@
     },
     {
       "n": 930,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n31_930_r21x20_n0401+n-109 (table-only)",
+      "report": "Fang composite L1_n31_930_r21x20_n0401+n-109 (table-only)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "30.988287236850655",
@@ -628,7 +630,7 @@
     },
     {
       "n": 930,
-      "report": "franciscouzo/square-packing@487b058",
+      "report": "couzo-verified-bounds-2026-10-14",
       "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n930.cert",
       "holders": "Francisco Couzo",
       "printed": "30.989568689821",
@@ -636,7 +638,7 @@
     },
     {
       "n": 931,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n31_931_r19x18_n0325+n-156 (table-only)",
+      "report": "Fang composite L1_n31_931_r19x18_n0325+n-156 (table-only)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "30.994048655031932",
@@ -644,7 +646,7 @@
     },
     {
       "n": 931,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 n031_j1_931.cert (shipped)",
+      "report": "Fang n031_j1_931.cert (shipped)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "30.999256308446249",
@@ -652,7 +654,7 @@
     },
     {
       "n": 992,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n32_992_r22x21_n0442+n-109 (table-only)",
+      "report": "Fang composite L1_n32_992_r22x21_n0442+n-109 (table-only)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "31.997220361782828",
@@ -660,7 +662,7 @@
     },
     {
       "n": 993,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n32_993_r21x20_n0401+n-132 (table-only)",
+      "report": "Fang composite L1_n32_993_r21x20_n0401+n-132 (table-only)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "31.991327887691502",
@@ -668,7 +670,7 @@
     },
     {
       "n": 994,
-      "report": "TheSnakeFang/squarepack-certs@bef5c42 L1_n32_994_r17x16_n0257+n-241 (shipped)",
+      "report": "Fang composite L1_n32_994_r17x16_n0257+n-241 (shipped)",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/bef5c42d58257fe38ed010a5d1ff9b8fc608df57/composites/table.csv",
       "holders": "Kevin Fang",
       "printed": "31.999256308446249",
@@ -676,7 +678,7 @@
     },
     {
       "n": 994,
-      "report": "TheSnakeFang/squarepack-certs@078789a theorem/n032_F2.cert",
+      "report": "Fang theorem/n032_F2.cert",
       "url": "https://github.com/TheSnakeFang/squarepack-certs/blob/078789a4cfd36f915f1bfbe76d742413d79b2965/theorem/n032_F2.cert",
       "holders": "Kevin Fang",
       "printed": "31.99995",

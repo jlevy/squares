@@ -581,6 +581,7 @@ key remain bound to the bytes they originally named.
 | [Kleddamag/the-seventeenth-square-candidate](https://github.com/Kleddamag/the-seventeenth-square-candidate) | Marc Leonard Overbeck’s verification edition of a candidate proof that `s(17) = L`, Bidwell’s side | **[Overbeck n17 candidate 2026]**; [12 October packet](web/kleddamag-n17-candidate-2026-10-12/README.md) |
 | [ofitzharding/sq17-lean](https://github.com/ofitzharding/sq17-lean) | Oscar Fitzharding’s Lean 4 proof that `s(17) = L`, `Sq17.square17_optimality`, announced on 13 October 2026: the source reports a clean rebuild of the theorem’s 4,951-module import closure, trusting Lean’s compiler for 13,343 `native_decide` facts | **[Fitzharding n17 Lean 2026]**; [13 October packet](web/fitzharding-n17-lean-2026-10-13/README.md), pinned `e6ee548090dc1dbf938ecf8590481de837a6a454` |
 | [bengreff/s76-certificate](https://github.com/bengreff/s76-certificate) | Benjamin Greff’s mixed cover for `s(76) = 9`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #594 | **[bengreff s76 certificate 2026-10-14]**; [14 October packet](web/bengreff-s76-certificate-2026-10-14/README.md), pinned `1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f` |
+| [bengreff/s95-certificate](https://github.com/bengreff/s95-certificate) | Benjamin Greff’s mixed cover for `s(95) = 10`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #610 | **[bengreff s95 certificate 2026-10-15]**; [15 October packet](web/bengreff-s95-certificate-2026-10-15/README.md), pinned `dd7297d06adc664268c65005369b895e4ded7547` |
 | [Guzhou0806/n17-square-packing](https://github.com/Guzhou0806/n17-square-packing) | Parent-angle and mixed-charge certificates for `n = 17`, including R068 and R071 | **[Guzhou0806 n17 R068]**; [28 September packet](web/n17-guzhou-r068-2026-09-28/README.md); **[Guzhou0806 n17 R071]**; [30 September packet](web/n17-guzhou-r071-2026-09-30/README.md), pinned `8c11f6962506940c5de67a9fa73b3d1e2e151196` |
 | [Guzhou0806/n40-square-packing](https://github.com/Guzhou0806/n40-square-packing) | The clipped-corner transfer `s(40) > 335427/50000` on wand125’s `rect_n40_L67` density, with its 401-direction nodal run and exact finite checks, and then the continuous-pose kernel `s(40) > 1340000/199529` on the same density, with its 43-slab interval cover, exact axis certificate and finite checks, and the same kernels’ `s(40) > 3359/500` on a new density of 685 rectangle orbits | **[Guzhou0806 n40 clipped corner 2026-10-10]**; [10 October packet](web/guzhou-n40-clipped-corner-2026-10-10/README.md), pinned `e5abeb4d078a5c5b35df6204dd9b93378e5a7880`; **[Guzhou0806 n40 continuous pose 2026-10-10]**; [10 October continuous-pose packet](web/guzhou-n40-continuous-pose-2026-10-10/README.md), pinned `71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3`; **[Guzhou0806 n40 new supports 2026-10-11]**; [11 October new-supports packet](web/guzhou-n40-new-supports-2026-10-11/README.md), pinned `6a65957e6c5c51cdf267917d882dab7f5b4928dd` |
 | [Mira-acc/17squares](https://github.com/Mira-acc/17squares) | Exact point and weighted certificates used in the `n = 17` lineage | **[n17 weighted certificates 2026-09-20]**; [20 September packet](web/n17-weighted-certificates-2026-09-20/README.md) |
@@ -1559,6 +1560,74 @@ Both project exact routes accept the 1 replayed certificate and refuse both cont
 T-187 records the side, a new packing below every report at 146, at V0/C0, pending
 independent review and adoption.
 Claude assistance disclosed.
+
+## The Intake of 15 October 2026
+
+The five packets of the 15 October intake, registered in report order as T-188 to T-192.
+A certificate published in a watched repository with no issue is a report from its first
+commit.
+
+**[Couzo verified bounds 2026-10-14]**: Francisco Couzo’s verified-bounds index, pinned
+at `487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d` and published with no issue: the exact
+rational certificate for n = 211, retained as the source wrote it, and 296 certificates
+beyond the case corpus, pinned by digest as bulk data and not retained;
+[packet](web/couzo-verified-bounds-2026-10-14/README.md).
+Both project exact routes accept the 211 certificate and refuse both controls.
+T-188 records the side, 9.29e-6 below issue 586’s, at V0/C0, pending independent review
+and adoption. 252 of the 296 are beyond-horizon rows of the source register; 812 and 930
+are not recorded, and the 42 above Göbel’s classical constructions wait on the owner’s
+answer on #613. The source states nothing about AI assistance.
+
+**[Couzo certificates 2026-10-14]**: Francisco Couzo’s exact rational certificates for n
+= 237, 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 703, 757, 804,
+812, 930, 931, 992, 993 and 994, pinned at `43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2`,
+retained as the source wrote them;
+[packet](web/couzo-certificates-2026-10-14/README.md).
+Both project exact routes accept all 23 replayed certificates and refuse all 46
+controls. T-189 records the 237 side at V0/C0, pending independent review and adoption,
+and the 15 sides from 339 to 804 are beyond-horizon rows.
+The seven at 703, 812, 930, 931, 992, 993 and 994 are Kevin Fang’s composites byte for
+byte, which the issue credits to him; they tie his earlier rows and are not recorded as
+Couzo’s. OpenAI Codex and Claude Code assistance disclosed.
+
+**[Couzo n237 2026-10-15]**: Francisco Couzo’s exact rational certificate for n = 237,
+first committed with no issue and pinned at `58a783368d4b7e70bb800f0009ea9ca03e578739`,
+retained as the source wrote it; [packet](web/couzo-n237-2026-10-15/README.md).
+Both project exact routes accept the 1 replayed certificate and refuse both controls.
+T-190 records the side, 2.40e-11 below T-189, at V0/C0, pending independent review and
+adoption.
+
+**[bengreff s95 certificate 2026-10-15]**: Benjamin Greff’s (GitHub bengreff) mixed
+cover for $s(95) \ge 10$, hence $s(95) = 10$ with the $10 \times 10$ grid: 48,352 points
+and 11,438 segments of $[0,10]^2$ in Evan Daniel’s `mixed 1` format, total
+$3791753447/40000000 < 95$, exactly D4-invariant.
+It is pinned in [bengreff/s95-certificate](https://github.com/bengreff/s95-certificate)
+at `dd7297d06adc664268c65005369b895e4ded7547`, committed on 15 October 2026, and
+retained whole; [packet](web/bengreff-s95-certificate-2026-10-15/README.md).
+MIT licence. The source decides the covering statement with two of Daniel’s checkers
+pinned at evand/square-packing `b91d70b6`: `zmx2` on 9,981 of the 10,000 root cells of
+the D4 region and `zm_mixed.py` on the 304 cells that tile the other 19. Its Lean
+wrapper on Daniel’s `Sqpack` takes that statement as a hypothesis.
+Its README credits Evan Daniel for the method, the format, the checkers and the Lean
+library, and wand125 for the $s(59) = 8$ cover reused in the corners and the
+band-insertion construction, and says the search, LP and verification pipeline “were
+built and run with Claude (Anthropic) as an AI assistant” under the author’s direction.
+The author asked for its registration in issue #610 on 15 October 2026; T-191 records it
+at V0/C0.
+
+**[wand125 continuous n28 2026-10-15]**: Hiroaki Hosono’s (wand125’s) continuous-pose
+certificate for $s(28) > 1149/200 = 5.745$, pinned at
+`8530bafb03d48444f30f241fbc1f29f01cd7c96c` in
+[wand125/square-packing](https://github.com/wand125/square-packing) with no issue: 884
+rectangle orbits of mass $2799999/100000$, every square of side $499/500$ at every angle
+reported to capture mass at least 1, decided at the source by `sqverify_continuous` v4
+and by `contpose_check3` around Guzhou0806’s T-145 kernels;
+[packet](web/wand125-continuous-n28-2026-10-15/README.md).
+The directory’s MIT documents and `check2`’s source are retained, and the release asset
+is pinned by size and SHA-256 and kept outside Git.
+T-192 records the claim at V0/C0, after T-142, pending a complete replay and review.
+The source says parts of the work were produced with AI assistance under human
+direction.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
