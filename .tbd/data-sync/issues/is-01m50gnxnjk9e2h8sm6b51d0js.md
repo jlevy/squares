@@ -5,7 +5,7 @@ title: "Intake 2026-10-15 lane B: stage-7 replies to the closeable result issues
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: ecstatic-edison-lane-b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:29:59.985Z
-updated_at: 2026-10-15T20:47:41.748Z
+updated_at: 2026-10-15T21:38:31.192Z
 started_at: 2026-10-15T19:30:08.143Z
 ---
 
@@ -37,3 +37,5 @@ Branch claude/ecstatic-edison-8en33t-replies-b: 2c137616c records the nine repli
 
 
 PR https://github.com/jlevy/squares/pull/630 (draft, labels intake and S1), head f0b9fe4a9 after merging main 6e73ef1c2 (#623; one conflict in RELEASE_NO_PUBLIC_CHANGES, both kept; survey re-rendered byte-identical over 6e73ef1c). push tier second run: type floor passed (467 s), reachable tests hit the 900 s step limit at 37% with one unnamed F; named re-run of the 281 files in progress. Do not close this bead until the PR merges; #570 stays held.
+
+Final (21:40Z): PR #630 head f0b9fe4a9; hosted 31 pass, 28 skipped. Local --records exit 0 at f0b9fe4a9 (70.4 s). Reachable 281 files unbounded: 10634 passed, 6 failed (test_fixed_core_packet* process-group reaping; test_site_rendering native-frontier long-task budgets), load-sensitive, unrelated to the two changed files. Bead stays open until #630 merges; #570 held.
