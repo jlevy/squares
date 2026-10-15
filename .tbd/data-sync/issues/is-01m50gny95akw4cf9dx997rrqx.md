@@ -5,7 +5,7 @@ title: "Intake 2026-10-15 lane C: stage-7 follow-ups to open issues owing a repl
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: ecstatic-edison-lane-c
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:30:00.612Z
-updated_at: 2026-10-15T20:28:52.072Z
+updated_at: 2026-10-15T20:39:42.724Z
 started_at: 2026-10-15T19:30:08.588Z
 ---
 
@@ -32,3 +32,4 @@ started_at: 2026-10-15T19:30:08.588Z
 - Recorded on the branch: 060311e6d (replies; #521 offline-checker ask done; #523 ask note gains the 13 October n = 17 suspension), b0bc97e8b (release.py no-public-change for the methods survey: renders byte-identical with main's and the branch's record, 42 files). check_requests gate exit 0; --report: the eight no longer reply due; --github: 25 differences, none on these issues. packing-validate --records exit 0 (51 of 109 steps, 118 s).
 - packing-validate --push exit 1 after 1,315 s: 64 of 66 steps; basedpyright killed (exit 247, 485 s, two other lanes' basedpyright on the host) and reachable tests at the 900 s cap (281 of 797 files reachable via release.py; load ~15). Covered by basedpyright src/sqpack/release.py (0 errors) and pytest of test_check_requests and the five release test files (133 passed, 20.7 s). Hosted CI runs the rest.
 - Pushed b0bc97e8b; draft PR https://github.com/jlevy/squares/pull/626 (labels intake, S1). Main moved to 6e73ef1c2 (#623) meanwhile; test merge clean. Do not close this bead until #626 merges.
+- Hosted CI on #626 at b0bc97e8b: gh pr checks --watch exit 0, 31 pass and 28 skipping (deferred and deep-gate lanes), 20:39Z.

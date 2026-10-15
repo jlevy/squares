@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(95) = 10 by a mixed cover (#610)"
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T01:43:17.212Z
-updated_at: 2026-10-15T20:07:14.611Z
+updated_at: 2026-10-15T20:36:41.362Z
 started_at: 2026-10-15T01:43:21.841Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#610 (bengreff, Benjamin Greff, opened 2026-10-15T01:16:36Z, labelled intake, no comments when read at 01:27Z): "Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)". The author's own certificate in his own repository, the case k = 10 after wand125's s(59) = 8 (#280, T-066) and his s(76) = 9 (#594, T-184). Followed the #594 import (think-osvq) step for step. Intake lane: Claude Opus 5.5 (tbd-moderate sub-agent), worktree agent-a33e48ec, branch claude/wizardly-meitner-wqn4x3-intake-610.
@@ -123,3 +123,7 @@ Registered as T-191 (optimality, V0/C0, draft S3), credited "Greff after Daniel,
 2026-10-15, evening intake pass (think-wnsv), lane D (think-ykg6): the sweep read the Lean-build paragraph of the description ("Held on the machine ... (think-ilwc owns that read)") as a wait on think-ilwc, closed. That build is think-ojr9 now, held on memory. What this bead waits on is the records pull request that carries T-191 to main: #616 (claude/wizardly-meitner-wqn4x3-records-1016), which lane A of the evening pass (think-tudv) carries forward on claude/ecstatic-edison-8en33t-records-1016. No pull request from that branch existed at 20:10Z; when one opens, it succeeds #616, and the line below should name it instead. After that merges, the #610 reply is owed (answer bead: this one). Not claimed here (held by claude-code@vm, updated 2026-10-15T09:15Z).
 
 blocked_on: jlevy/squares#616
+
+2026-10-15, lane D, later: lane A opened https://github.com/jlevy/squares/pull/627 from claude/ecstatic-edison-8en33t-records-1016, which supersedes #616 and carries T-191. This bead waits on it.
+
+blocked_on: jlevy/squares#627
