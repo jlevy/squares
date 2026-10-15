@@ -763,3 +763,101 @@ repositories:
       a square. The other fifteen commits rebuild the site (themes, results tables, papers). The
       release data/n17-m2048064-v1 of 13 October, one n = 17 sub-pattern certificate for #413, is
       no commit's and think-p2cy owns it. Nothing else to import.
+  # The intake pass of 2026-10-15 (think-mq0k): the reads lane's (think-gue4) and the n = 28
+  # intake's (think-zb5w), written by the records lane that registers T-188 to T-192.
+  - url: https://github.com/bengreff/s76-certificate
+    read_through: 06993982e83dba37ca12121bd876396a15571fcb
+    read_on: '2026-10-15'
+    bead: think-osvq
+    note: >-
+      One commit of 14 October (08:16Z) past the bengreff-s76-certificate-2026-10-14 packet's
+      1cb924f: the second route #594's comment of that day describes, zm_mixed.py alone over
+      all 129,600 D4 roots at depth 24 (129,599 certified, six boxes left in one root, which
+      certifies alone at depth 34), with records/zm_full/, tools/check_full.py and verify.sh's
+      --full-zm; 181 CPU-hours at the source. The cover, the composite's records and the Lean
+      are unchanged. New evidence for T-184, owned by think-osvq until a packet pins this
+      commit.
+  - url: https://github.com/BuddenPing/square-packing-certificates
+    read_through: 318ab94e821ba7280a68fa8ce2942c9ecdbda41d
+    read_on: '2026-10-15'
+    note: >-
+      Three commits of 12 October (22:40Z to 23:46Z) change only README.md and SHA256SUMS: they
+      index the #566 and #567 certificates, then the #568 and #569 ones, then the strengthened
+      #566 and #567 ones. Every indexed digest is one the pingyou-n105, n146, n261 and n272
+      refinement packets record; no certificate changes. Nothing to import.
+  - url: https://github.com/BuddenPing/squares
+    read_through: e96e9ea95c15c6ad3a9a547a8cb02760e721cfc4
+    read_on: '2026-10-15'
+    note: >-
+      A fork of this repository. Its default branch is the merge of jlevy/squares#507, an
+      ancestor of main, so it publishes nothing of its own there; its other branch is PR #574's
+      head, which the pingyou-pr574-certificates-2026-10-13 packet pins (T-174). Nothing to
+      import.
+  - url: https://github.com/evand/square-packing
+    read_through: 103889284ac06d28329bee6580fddf48d204f647
+    read_on: '2026-10-15'
+    note: >-
+      The 25 commits of 14 October (local time) from 73aa066 to 1038892 past the 622cd2e read.
+      One adds a certificate: e006ce6 adds search/packer/candidates/tt2_n146.*, which #606
+      reports and the evand-n146-2026-10-14 packet retains (T-187). 1038892, the head, is TT2
+      at n = 110: none of its rows is below the record or any earlier report, and no
+      certificate is committed. The rest is the packer's development, the TT2 census, night
+      runs with no record at n <= 324, an exact rebuild of #575's 176 (a tie), pending-report
+      pins, the records time-lapse video, handoffs and triage. Nothing else to import.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: 078789a4cfd36f915f1bfbe76d742413d79b2965
+    read_on: '2026-10-15'
+    note: >-
+      The head is the pin of the fang-direct-certificates and fang-excess-theorem packets.
+      d6b0122 and bef5c42 are flagged only for .gitignore: d6b0122 copies Evan Daniel's MIT
+      certificates into third_party/daniel/ as the composites' B pieces, byte-identical to
+      their upstream blobs, with a script that fetches de Winter's unlicensed n211 record by
+      digest rather than redistributing it, and bef5c42's composites are think-rn2y's import.
+      Nothing else to import.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d
+    read_on: '2026-10-15'
+    note: >-
+      The eight commits a7067d7 to b85dee2 past 337078c, which the 02:30Z and 05:30Z sweeps of
+      15 October flagged for unretained paths. Every certificate they change is retained by
+      the packets at 0fa0e0d (#561), 4596670 (#583) or b85dee2 (#586), or superseded within
+      the day by those pins. The unretained paths are prose (README, the reviews
+      REVIEW_20261012*.md, SEARCH_TO_400.md), the #561 publication drafts e9eb44b added and
+      06d8db2 removed, search code (accept_candidates.py, the Cargo crate, search_forever.py,
+      notify.py), found/ logs, known_best.json and the decimal poses and drawings. Nothing to
+      import.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d
+    read_on: '2026-10-15'
+    note: >-
+      The couzo-verified-bounds-2026-10-14 packet pins 487b058 (T-188 and its beyond-horizon
+      rows). The paths it changes outside the packet's scope hold nothing to import: the
+      author's closed-form lower-bound index (lower_bounds.json, lower_bound_families.json and
+      lower_bounds.py), which restates published bounds; expanded_comparisons.py,
+      import_external.py and expanded_reference_bounds.json; known_best.json; the decimal
+      packings and drawings it deletes or rewrites; and 22 deleted certificates, superseded
+      copies.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 58a783368d4b7e70bb800f0009ea9ca03e578739
+    read_on: '2026-10-15'
+    bead: think-yfoo
+    note: >-
+      The head. 43ac7d2 is #607's pin (T-189). 4e4c8ce rewrites the index for n < 1024: its
+      certificates/n237.cert is T-190, retained by the couzo-n237-2026-10-15 packet at this
+      head, and its 341 rows beyond 324, below 487b058's and #607's, are think-yfoo's import;
+      the other in-corpus files are copies of certificates the record holds, or larger.
+      58a7833 adds Göbel's square and strip bounds (gobel_bounds.json, GOBEL_COMPARISON.md,
+      gobel_comparison.csv), classical closed forms with no discovery claimed, which #613
+      asks the owner about.
+  - url: https://github.com/wand125/square-packing
+    read_through: b57e66712b5f722b39fcb703692006062c7d9eb7
+    read_on: '2026-10-15'
+    note: >-
+      The seven commits of 14 and 15 October (UTC) from eb22671 to b57e667 past the 9a28a84
+      read. 8530baf adds problems/square-lower-bounds/certificates/continuous_n28_L5745, s(28) >
+      1149/200, which the wand125-continuous-n28-2026-10-15 packet retains at 8530baf (T-192,
+      think-zb5w). eb22671 adds problems/cubes-in-cube, s3(9) = s3(10) = 2 + 1/sqrt(2) for unit
+      cubes in a cube, outside this record, which is squares in a square; 3b6b671, 7418838 and
+      afdcaac list it and add its site pages. a070143 notes the tool versions of the right
+      isosceles n = 15 run's second checker, another container. b57e667 lists the n = 28 result
+      on the source's site. Nothing else to import.

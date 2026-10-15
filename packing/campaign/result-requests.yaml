@@ -609,7 +609,7 @@ issues:
       The 9 October update reports 38 rows; eleven of them, with a twelfth class outside the roster,
       were admitted to the n17 census ledger as kernel certificates through issue 472. Prior dated reports
       remain unchanged.
-    read_through: '2026-10-11T02:22:21Z'
+    read_through: '2026-10-13T00:32:14Z'
     results:
     - key: subpatterns-27
       claim: 29 source subpatterns, with 19 reported certificate verified and 10 computed; only rows
@@ -724,6 +724,20 @@ issues:
       bead: think-nmfl
       blocked_on:
       - think-x4v4
+    - key: row4-full-receipt-2026-10-13
+      claim: 'Row 4 now has an unmodified standing FULL receipt: this repository''s devtools.verify_n17_bb_certificate
+        at 657cc48, run as is in one process and full mode on the certificate of wand125''s release data/n17-m2048064-v1,
+        checked all 924,233 nodes with no failures in 78,224 s, the receipt verification.json on the release.
+        Row 4 still stalls under the kernel, so this branch-and-bound certificate is the one the author offers
+        for it.'
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6135318000
+      not_registered: 'A dated author report: the release, its certificate and its receipt are not yet retained
+        or replayed here (about 21.7 CPU-hours and 6.2 GB), and no row''s status changes before admission
+        with the n = 17 intake, which the owner''s suspension of new n = 17 work of 13 October holds.'
+      queued: true
+      bead: think-p2cy
+      blocked_on:
+      - think-x4v4
     asks:
     - what: Acquire complete packages for rows 1–4 first and join exact named-cell, frame, cap, closed-domain
         and receipt custody before admission.
@@ -741,6 +755,7 @@ issues:
     - think-x4v4
     - think-bmwd
     - think-nmfl
+    - think-p2cy
     answer_bead: think-x4v4
     replies:
     - url: https://github.com/jlevy/squares/issues/413#issuecomment-6047161738
@@ -5870,6 +5885,19 @@ issues:
       - result: unnamed-175-308-340-343
       corrects:
       - https://github.com/jlevy/squares/issues/506#issuecomment-6130063939
+    - url: https://github.com/jlevy/squares/issues/506#issuecomment-6185871803
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n175
+        id: T-185
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n175
+        id: E-couzo-506-n175-report
+        status: recorded
     close_when: The import and its disposition, including the beyond-horizon counts, are on main,
       the house adoption at 304 and 305 has landed or is owned, and the owner has posted the
       resulting state; the four unnamed certificates are imports of their own, and optimality is
@@ -8144,6 +8172,15 @@ issues:
       source: body
       not_registered: Each equals or trails an earlier report at its count; retained in the packet.
       queued: false
+    - key: kkt-refinements-70a033f
+      claim: Twelve exact certificates at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 in
+        Mishapolk/square-packing-records at 70a033f, a later commit of the author's that no issue reports;
+        this issue's reply of 15 October answers for it.
+      source: https://github.com/Mishapolk/square-packing-records/tree/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94
+      register:
+      - T-186
+      evidence:
+      - E-mishapolk-70a033f-certificate-report
     beads:
     - think-2ep3
     answer_bead: think-2ep3
@@ -8185,6 +8222,20 @@ issues:
       - result: ties-211-241
       corrects:
       - https://github.com/jlevy/squares/issues/593#issuecomment-6163849805
+    - url: https://github.com/jlevy/squares/issues/593#issuecomment-6185872048
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: kkt-refinements-70a033f
+        id: T-186
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: kkt-refinements-70a033f
+        id: E-mishapolk-70a033f-certificate-report
+        status: recorded
+      - result: ties-211-241
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request. The author has said which name the record should carry.
@@ -8205,7 +8256,7 @@ issues:
       on 14 October 2026; triage replayed the cover's census with both checkers from this repository's retained
       copies. Registered as T-184 at V0/C0, S3. The author's update of 14 October adds a second route, zm_mixed.py
       alone over the whole region, at 06993982; it is not yet retained. AI assistance disclosed.
-    read_through: '2026-10-14T08:25:57Z'
+    read_through: '2026-10-15T00:50:37Z'
     results:
     - key: s76-equals-9
       claim: 's(76) = 9: the lower half by a mixed cover, the upper half by the 9 x 9 grid.'
@@ -8247,6 +8298,10 @@ issues:
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
+    notes: 'The author''s comment of 15 October (https://github.com/jlevy/squares/issues/594#issuecomment-6181807169)
+      says the sixteen wall segments carrying one weight unit each are residue of the LP: interior-point weights
+      of about 1.04e-12 that the export rounded up to the unit 1/(4*10^8), which can only raise captures and
+      are counted in the total. The pinned cover stays as it is, and no result changes (think-osvq).'
   - number: 596
     title: 's(365) ≤ 19.621320343560, s(370) ≤ 19.767730746255, s(460) ≤ 21.959969683021: registration request
       (beyond-horizon)'
@@ -8469,7 +8524,128 @@ issues:
     beads:
     - think-rvv7
     answer_bead: think-rvv7
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/606#issuecomment-6185871556
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n146
+        id: T-187
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n146
+        id: E-evand-606-n146-report
+        status: recorded
+      - result: distinct-local-minimum
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would confirm the V0 entry are owned by its bead;
       optimality is outside this request.
+  - number: 607
+    title: '237-1024: registration request'
+    author: franciscouzo
+    opened: '2026-10-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'Francisco Couzo reports 23 exact certificates at franciscouzo/square-packing 43ac7d2, first
+      committed on 14 October 2026 before the issue: s(237), a refinement of Mykhailo Polkovskyi''s issue
+      593 packing, 13 campaign bounds and two precision refinements beyond the case corpus, and seven of
+      Kevin Fang''s composites, which he replayed and credits to Fang. Imported on 15 October 2026 in the
+      couzo-certificates-2026-10-14 packet and replayed on both maintained exact routes with every control
+      refused. Registered as T-189 at V0/C0 at 237, with 15 beyond-horizon rows; the composites are Fang''s
+      files byte for byte, a tie his earlier rows keep. His later 4e4c8ce certificate at 237, which no issue
+      reports, is T-190. OpenAI Codex and Claude Code assistance disclosed.'
+    read_through: '2026-10-14T23:18:36Z'
+    results:
+    - key: n237
+      claim: s(237) <= 15.902603638284, by an exact rational certificate, continuing Mykhailo Polkovskyi's
+        issue 593 certificate.
+      source: body
+      register:
+      - T-189
+      evidence:
+      - E-couzo-607-certificate-report
+    - key: fifteen-beyond-horizon
+      claim: 13 campaign bounds at 339, 382, 409, 419, 450, 461, 552, 599, 648, 649, 651, 757 and 804, and
+        precision refinements at 342 and 542, beyond the 1..324 case corpus.
+      source: body
+      not_registered: 'Beyond the n <= 324 corpus: rows of the couzo-certificates-2026-10-14 source, each
+        below every earlier report at its count.'
+      queued: false
+    - key: fang-composites
+      claim: Seven of Kevin Fang's composites, at 703, 812, 930, 931, 992, 993 and 994, replayed and credited
+        to Fang.
+      source: body
+      not_registered: Each is the file Fang's composite table lists, published at bef5c42 on 12 October,
+        so a tie his earlier rows keep; the packet's bytes and replay are evidence for those rows, which
+        his composites import registers.
+      queued: true
+      bead: think-rn2y
+    beads:
+    - think-qik6
+    - think-rn2y
+    answer_bead: think-qik6
+    replies: []
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, the composites are with Fang's import, and the review and replay that would
+      confirm the V0 entry are owned by its bead; optimality is outside this request.
+  - number: 610
+    title: 'Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)'
+    author: bengreff
+    opened: '2026-10-15'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Benjamin Greff reports s(95) = 10 by a mixed cover of points and grid-line segments, checked
+      by Evan Daniel's zmx2 and zm_mixed.py in composite, at bengreff/s95-certificate dd7297d. Imported
+      on 15 October 2026; triage replayed zmx2 over all 10,000 D4 roots and zm_mixed.py over all 304 sub-roots
+      from this repository's retained copies, each equal to the source's records. Registered as T-191 at
+      V0/C0, S3; T-081 notes the second route to s(96) >= 10. AI assistance disclosed.
+    read_through: '2026-10-15T01:16:36Z'
+    results:
+    - key: s95-equals-10
+      claim: 's(95) = 10: the lower half by a mixed cover, the upper half by the 10 x 10 grid.'
+      source: body
+      register:
+      - T-191
+      evidence:
+      - E-bengreff-610-cover-report
+    beads:
+    - think-ribz
+    answer_bead: think-ribz
+    replies: []
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm the V0 entry are owned by its
+      bead; optimality is outside this request.
+  - number: 613
+    title: 'Beyond 324: registered rows at 369 and 376, and 89 reported rows, are above Göbel''s classical
+      constructions'
+    author: jlevy
+    opened: '2026-10-15'
+    state: open
+    kind: defect-report
+    triage: done
+    summary: 'A defect report the project opened from the 15 October intake (think-8krd): beyond 324 the
+      record compares reports only with the grid and earlier reports and holds none of Göbel''s classical
+      constructions, so its rows at 369 and 376 are above Göbel''s sides, by 3.33e-2 and 4.57e-3, as are
+      42 of Couzo''s 487b058 rows and 47 of his 4e4c8ce index''s. It asks the owner whether Göbel''s constructions
+      count as earlier reports and the baseline beyond 324. It reports no result.'
+    read_through: '2026-10-15T03:55:33Z'
+    results: []
+    asks:
+    - what: The owner decides whether Göbel's constructions are earlier reports and the baseline beyond
+        324; if so, a records PR adds them as the baseline, corrects 369 and 376 and records a defect. Until
+        then the 42 rows of 487b058 above them are not recorded, and 369 and 376 stay.
+      state: queued
+      bead: think-8krd
+    beads:
+    - think-8krd
+    answer_bead: think-8krd
+    replies: []
+    close_when: 'The owner has decided the question, and the record holds the decision: Göbel''s sides as
+      the baseline beyond 324 with 369 and 376 corrected, or the 42 rows recorded.'
+    notes: The project opened this issue; it reports no result, and no acknowledgement is owed on it. `check_requests`
+      still lists an acknowledgement as due, because the record has no state for an issue its owner opened
+      (think-abcm).
