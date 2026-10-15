@@ -19,7 +19,7 @@ from devtools.repo_links import repo_url
 
 
 def document() -> dict:
-    return {
+    data = {
         "softschema": {
             "contract": "packing.squares:SiteChangelog/v1",
             "schema": "site-changelog.schema.yaml",
@@ -84,6 +84,24 @@ def document() -> dict:
             {"id": "foundations", "date": "2026-10-13", "pull_requests": [497, 509]}
         ],
     }
+
+    for entry in data["entries"]:
+        entry["significance"] = {
+            "score": 3,
+            "rationale": "A focused public tooling improvement.",
+        }
+    return data
+
+
+def test_news_title_math_uses_the_escaped_register_headline_boundary() -> None:
+    data = document()
+    title = "Initial Review of proofs for n = 17 <script>forbidden</script>"
+    data["entries"][0]["title"] = title
+    rendered = render_changelog.render_news(data)
+    assert f"<h3>{render_changelog.tex_bounds(title)}</h3>" in rendered
+    assert "<math" in rendered
+    assert "&lt;script&gt;forbidden&lt;/script&gt;" in rendered
+    assert "<script>" not in rendered
 
 
 def test_shared_renderer_orders_links_math_and_anchors() -> None:
@@ -175,7 +193,7 @@ def test_kpress_preserves_math_and_unique_stable_ids() -> None:
     assert '<h4 id="changelog-entry-foundations">Foundations</h4>' in tree.html
 
 
-def test_math_generated_markup_and_urls_are_rejected_through_full_about(
+def test_math_generated_markup_and_urls_are_rejected_through_full_news(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     payloads = [
@@ -191,14 +209,14 @@ def test_math_generated_markup_and_urls_are_rejected_through_full_about(
             data["entries"][0][field] = payload
             monkeypatch.setattr(render_changelog, "load", lambda data=data: data)
             with pytest.raises(ValueError, match=r"unsafe|sanitized|raw HTML"):
-                render_overview.about_page()
+                render_overview.news_page()
             with pytest.raises(ValueError, match=r"unsafe|sanitized|raw HTML"):
                 render_changelog.validate(data)
             with pytest.raises(ValueError, match=r"unsafe|sanitized|raw HTML"):
                 render_changelog.render_markdown(data)
 
 
-def test_normal_math_and_safe_math_links_survive_full_about(
+def test_normal_math_and_safe_math_links_survive_full_news(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     data = document()
@@ -210,12 +228,12 @@ def test_normal_math_and_safe_math_links_survive_full_about(
         "- Matrix:\n\n" + r"$$\begin{pmatrix}1&2\\3&4\end{pmatrix}$$"
     )
     monkeypatch.setattr(render_changelog, "load", lambda: data)
-    about = render_overview.about_page().html
-    assert "<math" in about
-    assert "<mfrac>" in about
-    assert "<mtable" in about
-    assert "<strong>bound</strong>" in about
-    assert 'href="https://example.com/proof%281%29"' in about
+    news = render_overview.news_page().html
+    assert "<math" in news
+    assert "<mfrac>" in news
+    assert "<mtable" in news
+    assert "<strong>bound</strong>" in news
+    assert 'href="https://example.com/proof%281%29"' in news
     assert data["entries"][0]["summary"] in render_changelog.render_markdown(data)
 
 
@@ -403,14 +421,18 @@ def test_previous_local_main_is_independent_of_editable_frozen_rows(
         stdout = {
             "rev-parse": "a" * 40,
             "ls-tree": "100644 blob metadata site-changelog.yaml",
-            "show": yaml.safe_dump(previous, sort_keys=False),
+            "show": (
+                render_changelog.SCHEMA.read_text()
+                if args[-1].endswith("site-changelog.schema.yaml")
+                else yaml.safe_dump(previous, sort_keys=False)
+            ),
         }[args[1]]
         return subprocess.CompletedProcess(args, 0, stdout=stdout)
 
     monkeypatch.setattr(render_changelog.subprocess, "run", git)
     with pytest.raises(ValueError, match="frozen entry later-delivery"):
         render_changelog.validate_previous_ref(current, "origin/main")
-    assert [call[1] for call in calls] == ["rev-parse", "ls-tree", "show"]
+    assert [call[1] for call in calls] == ["rev-parse", "ls-tree", "show", "show"]
 
 
 def test_candidate_main_delivery_refusal_does_not_create_output(
@@ -425,6 +447,10 @@ def test_candidate_main_delivery_refusal_does_not_create_output(
             "baseRefName": "main",
             "mergeCommit": {"oid": "b" * 40},
             "state": "MERGED",
+            "significance": {
+                "score": 2,
+                "rationale": "Routine engineering and reliability work.",
+            },
         }
     ]
     metadata = tmp_path / "metadata.json"
@@ -531,6 +557,10 @@ def test_candidate_import_requires_actual_merged_main_and_preserves_old_entries(
             "baseRefName": "main",
             "mergeCommit": {"oid": "b" * 40},
             "state": "MERGED",
+            "significance": {
+                "score": 2,
+                "rationale": "Routine engineering and reliability work.",
+            },
         }
     ]
     candidate = import_changelog.draft(rows, baseline)
@@ -602,6 +632,7 @@ def test_related_launch_group_is_explicit_and_does_not_invent_a_stack() -> None:
     data["coverage"]["pull_requests"].extend([600, 601])
     entry = {
         "id": "related-launch",
+        "significance": {"score": 3, "rationale": "A focused public launch."},
         "date": "2026-10-16",
         "title": "Related launch",
         "pull_requests": [600, 601],
@@ -642,6 +673,7 @@ def test_stacked_import_proves_first_parent_main_delivery_before_preserving_api_
         "number": 600,
         "title": "Stack delivery",
         "state": "MERGED",
+        "significance": {"score": 2, "rationale": "Routine engineering and reliability work."},
         "mergedAt": "2026-10-15T00:01:00Z",
         "baseRefName": "stack/predecessor",
         "mergeCommit": {"oid": "b" * 40},
@@ -675,3 +707,230 @@ def test_stacked_import_proves_first_parent_main_delivery_before_preserving_api_
     )
     with pytest.raises(ValueError, match="first-parent delivery"):
         import_changelog.verify_main_delivery(parsed)
+
+
+@pytest.mark.parametrize(
+    "rating",
+    [
+        None,
+        {"score": 0, "rationale": "Too low."},
+        {"score": 6, "rationale": "Too high."},
+        {"score": True, "rationale": "Boolean."},
+        {"score": 2.5, "rationale": "Fractional."},
+        {"score": 3, "rationale": " "},
+        {"score": 3, "rationale": "A **formatted** judgment."},
+        {"score": 3, "rationale": "<script>bad</script>"},
+    ],
+)
+def test_news_requires_an_explicit_plain_importance_judgment(rating: dict | None) -> None:
+    data = document()
+    if rating is None:
+        data["entries"][0].pop("significance")
+    else:
+        data["entries"][0]["significance"] = rating
+    with pytest.raises(ValueError, match=r"significance|entries/0"):
+        render_changelog.validate(data)
+
+
+def test_imported_result_citations_do_not_assign_importance() -> None:
+    row = {
+        "number": 700,
+        "title": "Policy mentioning T-060",
+        "body": "See T-060.",
+        "state": "MERGED",
+        "mergedAt": "2026-10-15T00:01:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+    }
+    with pytest.raises(ValueError, match="editorial significance"):
+        import_changelog.draft([row], document())
+    row["significance"] = {"score": 2, "rationale": "A routine policy clarification."}
+    candidate = import_changelog.draft([row], document())
+    assert candidate["entries"][-1]["significance"] == row["significance"]
+
+
+def test_pr_label_import_keeps_editorial_rationale_and_project_topic(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    row = {
+        "number": 700,
+        "title": "Project capability mentioning T-060",
+        "body": "See T-060 for background.",
+        "state": "MERGED",
+        "mergedAt": "2026-10-15T00:01:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+        "labels": [{"name": "S3"}, {"name": "project"}],
+    }
+    calls = []
+
+    def github(args, **_kwargs):
+        calls.append(args)
+        return subprocess.CompletedProcess(args, 0, stdout=json.dumps(row))
+
+    monkeypatch.setattr(import_changelog.subprocess, "run", github)
+    monkeypatch.setattr(import_changelog, "verify_main_delivery", lambda *_args: None)
+    output = tmp_path / "candidate.yaml"
+    args = [
+        "--pr",
+        "700",
+        "--baseline",
+        str(tmp_path / "absent.yaml"),
+        "--output",
+        str(output),
+    ]
+    assert import_changelog.main(args) == 1
+    assert not output.exists()
+    rationale = "A new focused public project capability."
+    assert (
+        import_changelog.main(
+            [*args, "--significance", "4", "--significance-rationale", rationale]
+        )
+        == 1
+    )
+    assert not output.exists()
+    assert import_changelog.main([*args, "--significance-rationale", rationale]) == 0
+    assert "labels" in calls[-1][-1].split(",")
+    data = render_changelog.load(output)
+    entry = data["entries"][-1]
+    assert entry["significance"] == {"score": 3, "rationale": rationale}
+    assert entry["topics"] == ["project"]
+    assert 'data-news-topic="project">Project</span>' in render_changelog.render_news(data)
+    row["labels"] = ["project", "S2"]
+    row["significance"] = {"rationale": rationale}
+    data = import_changelog.draft([row])
+    assert data["entries"][0]["significance"]["score"] == 2
+    assert 'id="changelog-entry-pr-700"' in render_changelog.render_markdown(data)
+    assert 'data-news-entry="pr-700"' not in render_changelog.render_news(data)
+
+
+def test_pr_significance_labels_reject_ambiguity_and_metadata_score_conflicts() -> None:
+    row = {
+        "number": 700,
+        "title": "New project work",
+        "state": "MERGED",
+        "mergedAt": "2026-10-15T00:01:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+        "significance": {"score": 3, "rationale": "A focused public improvement."},
+    }
+    for labels in (["S3", "S4"], [{"name": "S3"}, {"name": "S4"}], ["S3", "S3"]):
+        with pytest.raises(ValueError, match="exactly one"):
+            import_changelog.draft([{**row, "labels": labels}])
+    with pytest.raises(ValueError, match="conflict"):
+        import_changelog.draft([{**row, "labels": ["S4"]}])
+    for score in (True, 0, 6, "3"):
+        with pytest.raises(ValueError, match="score"):
+            import_changelog.draft(
+                [{**row, "labels": ["S3"], "significance": {"score": score}}]
+            )
+    retained = import_changelog.draft([row])
+    assert retained["entries"][0]["significance"] == row["significance"]
+    for score in range(1, 6):
+        labeled = {
+            **row,
+            "labels": [f"S{score}"],
+            "significance": {"rationale": row["significance"]["rationale"]},
+        }
+        entry = import_changelog.draft([labeled])["entries"][0]
+        assert entry["significance"]["score"] == score
+
+
+def test_retained_pr_reimport_preserves_entries_and_omissions_without_new_ratings() -> None:
+    for omitted in (False, True):
+        baseline = document()
+        if omitted:
+            baseline["entries"].pop()
+            baseline["coverage"]["omissions"] = [
+                {"pull_request": 549, "reason": "Administrative closeout"}
+            ]
+        delivery = baseline["deliveries"][-1]
+        row = {
+            "number": delivery["number"],
+            "title": delivery["title"],
+            "state": "MERGED",
+            "mergedAt": delivery["merged_at"],
+            "baseRefName": delivery["base_ref"],
+            "mergeCommit": {"oid": delivery["merge_commit"]},
+        }
+        for labels in ([], ["S4", "project"]):
+            candidate = import_changelog.draft([{**row, "labels": labels}], baseline)
+            for field in ("entries", "deliveries", "coverage"):
+                assert candidate[field] == baseline[field]
+        with pytest.raises(ValueError, match="exactly one"):
+            import_changelog.draft([{**row, "labels": ["S3", "S4"]}], baseline)
+
+
+def test_score_like_labels_fail_for_new_and_retained_prs() -> None:
+    row = {
+        "number": 700,
+        "title": "A focused public improvement",
+        "state": "MERGED",
+        "mergedAt": "2026-10-15T00:01:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+        "significance": {"score": 3, "rationale": "A focused public improvement."},
+    }
+    retained = import_changelog.draft([row])
+    for name in ("S0", "S6", "S10", "S03", "s3", " S3 ", "S 3", "S+3", "S-3", "S3.0"):
+        for labels in (
+            [name],
+            ["S3", name],
+            [{"name": name}],
+            [{"name": "S3"}, {"name": name}],
+        ):
+            for baseline in (None, retained):
+                with pytest.raises(ValueError, match="invalid significance label"):
+                    import_changelog.draft([{**row, "labels": labels}], baseline)
+    candidate = import_changelog.draft([{**row, "labels": ["security", "project"]}])
+    assert candidate["entries"][0]["significance"] == row["significance"]
+    assert candidate["entries"][0]["topics"] == ["project"]
+
+
+def test_news_exclusion_keeps_history_and_fills_the_preview_from_eligible_entries() -> None:
+    data = document()
+    previous = copy.deepcopy(data)
+    excluded = data["entries"][-1]
+    excluded["news_exclusion"] = "Routine typography maintenance."
+    excluded["categories"] = ["documentation"]
+    render_changelog.validate(data)
+    render_changelog.validate_frozen(data, previous)
+    assert data["coverage"] == previous["coverage"]
+    assert data["deliveries"] == previous["deliveries"]
+    github = render_changelog.render_markdown(data)
+    anchor = render_changelog.entry_anchor(excluded["id"])
+    assert f'id="{anchor}"' in github
+    assert f"{data['repository']}/pull/549" in github
+    news = render_changelog.render_news(data)
+    assert 'data-news-entry="later-delivery"' not in news
+    assert 'data-news-entry="foundations"' in news
+    assert 'data-news-entry="admission"' in news
+    archive = f"{data['repository']}/blob/main/CHANGELOG.md#{anchor}"
+    assert f'id="{anchor}" href="{archive}" data-news-target' in news
+    day = "changelog-date-2026-10-14"
+    assert f'id="{day}" href="{data["repository"]}/blob/main/CHANGELOG.md#{day}"' in news
+    assert ">Full changelog</a>" in news
+    about = render_changelog.legacy_news_anchors(data)
+    assert f'id="{anchor}" href="{archive}" data-news-target' in about
+    preview = render_changelog.render_news(data, limit=1)
+    assert re.findall(r'data-news-entry="([^"]+)"', preview) == ["foundations"]
+    assert anchor not in preview
+
+
+@pytest.mark.parametrize("reason", ["", " \t\n", False, {"reason": "maintenance"}])
+def test_news_exclusion_requires_a_nonblank_reason(reason: object) -> None:
+    data = document()
+    data["entries"][0]["news_exclusion"] = reason
+    with pytest.raises(ValueError, match="news_exclusion"):
+        render_changelog.validate(data)
+
+
+def test_documentation_is_bookkeeping_but_not_a_public_news_topic() -> None:
+    data = document()
+    data["entries"][0]["categories"] = ["documentation"]
+    data["entries"][0]["topics"] = ["upper-bound", "verification"]
+    render_changelog.validate(data)
+    assert 'data-news-entry="admission"' in render_changelog.render_news(data)
+    data["entries"][0]["topics"] = ["documentation"]
+    with pytest.raises(ValueError, match="topics"):
+        render_changelog.validate(data)

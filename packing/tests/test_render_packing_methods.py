@@ -120,7 +120,7 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
     assert release.PUBLICATION_EDITION not in markdown
     canonical = render_overview.SITE_URL + paper.SITE_PATH
     assert check_published_site.head_problems(html, canonical, allow_inline_favicon=True) == []
-    assert '<a data-page="papers" aria-current="page" href="../papers.html">' in html
+    assert '<a data-page="explanations" aria-current="page" href="../papers.html">' in html
     assert "{{" not in markdown
 
 

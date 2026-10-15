@@ -1,0 +1,14 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/596",
+  "source": "https://github.com/evand/square-packing",
+  "revision": "622cd2e21407700fe8d5ac5943af820725107921",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "horizon": 324,
+  "results": [
+    {"n": 365, "certificate": "search/packer/candidates/fresh_n365.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "19.621320343560", "printed_in": "https://github.com/jlevy/squares/issues/596", "exact_side": "19621320343559642573398746289751/1000000000000000000000000000000", "ceiling": "19.6213203435596426", "first_committed": "2026-10-14T06:50:09Z", "grid_side": "20", "case": null, "pending": [], "smallest": "this certificate"},
+    {"n": 370, "certificate": "search/packer/candidates/fresh_n370.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "19.767730746255", "printed_in": "https://github.com/jlevy/squares/issues/596", "exact_side": "19767730746254604158720695152869/1000000000000000000000000000000", "ceiling": "19.7677307462546042", "first_committed": "2026-10-14T06:50:09Z", "grid_side": "20", "case": null, "pending": [], "smallest": "this certificate"},
+    {"n": 460, "certificate": "search/packer/candidates/fresh_n460.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "21.959969683021", "printed_in": "https://github.com/jlevy/squares/issues/596", "exact_side": "10979984841510246567080095841227/500000000000000000000000000000", "ceiling": "21.9599696830204932", "first_committed": "2026-10-14T06:50:09Z", "grid_side": "22", "case": null, "pending": [], "smallest": "this certificate"}
+  ]
+}

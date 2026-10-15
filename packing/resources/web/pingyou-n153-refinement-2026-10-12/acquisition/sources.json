@@ -1,0 +1,87 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T04:47Z",
+  "git_scope": "Full clone of the sixteen-commit repository, head 318ab94 at retrieval, checked out at the pin the 12 October comment on issue #504 names. The scope is the eight paths the pinned commit changed: the six n153 files, which bc328a7 first published with the certificate T-148 registers, and README.md and SHA256SUMS. Every n153 file has the same blob at the head 318ab94. Under derived-only custody none is copied. No source program was executed.",
+  "sources": [
+    {
+      "id": "buddenping-square-packing-certificates",
+      "source_url": "https://github.com/BuddenPing/square-packing-certificates",
+      "source_ref": "main",
+      "source_commit": "431186b6c20d444b26b5d321a1cd85d2f2d63274",
+      "committed_utc": "2026-10-12T22:23:27Z",
+      "git_tree": "1504776c7f78d3498a50bca6d4548d9f4f93b651",
+      "archived_path": "packing/resources/web/pingyou-n153-refinement-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/pingyou-n153-refinement-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "SHA256SUMS",
+        "n153-SHA256SUMS",
+        "n153-squares-project.zip",
+        "n153-verified-comparison.pdf",
+        "n153.cert.json",
+        "n153.svg",
+        "pingyou-n153-rational.yaml"
+      ],
+      "subtree_file_count": 8,
+      "subtree_total_bytes": 562119,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 9939,
+          "sha256": "67deff49d275f1bc41ebe7f966116cedc65e7b1c1544f35fd79734b11d81d0d9",
+          "reason": "Author prose for every release in the tree at this pin, with the n153 refinement and credit quoted in this packet's README. No licence: pinned by digest only."
+        },
+        {
+          "path": "SHA256SUMS",
+          "bytes": 1543,
+          "sha256": "87ac69e51c26832bf943a9b8a0d31425cf775750dd61cfbb9b5c2dd3a339e133",
+          "reason": "The source's digest list for the tree's release files. Pinned by digest only."
+        },
+        {
+          "path": "n153-SHA256SUMS",
+          "bytes": 435,
+          "sha256": "0d2b9a42e75adeef7c9734f2bb38ea3dc1cae8adf9bf1db295cf13c6e5e2a17b",
+          "reason": "The source's digests of the five n153 artifacts, each equal to the digest this manifest records. Pinned by digest only."
+        },
+        {
+          "path": "n153-squares-project.zip",
+          "bytes": 256521,
+          "sha256": "2a0e1affdd82cf613af58cfed03fad41b68a5392ae1de34450578c590ced6121",
+          "reason": "The source's complete package of 54 files: the certificate and witness again, the construction table and replay, the n70 parent, three exact checkers with Evan Daniel's two, receipts, the comparison figure, and the sources and licences of this repository's two checkers at 074ac28. No licence for the source's own files: pinned by digest only; no program in it was executed."
+        },
+        {
+          "path": "n153-verified-comparison.pdf",
+          "bytes": 129795,
+          "sha256": "3a67e4cad430a7ba8d6739009de6c618336cd2aa47893010f01ad3b0513bef6b",
+          "reason": "The author's comparison figure. No licence: pinned by digest only."
+        },
+        {
+          "path": "n153.cert.json",
+          "bytes": 21403,
+          "sha256": "1ca754f0238f958597ecddc645aa16f5c44c3afc9cf2614b40ce2fd1f6dea670",
+          "reason": "The exact rational certificate: n, s_exact and 153 [x, y, t] rows of rational strings, centres in [0, S]^2 and t = tan(theta/2). No licence, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "n153.svg",
+          "bytes": 28006,
+          "sha256": "071e69c276ece1761856173baaf827d1f50aad044eb6a567ddff64a03ad979a2",
+          "reason": "The author's drawing of the packing. No licence: pinned by digest only."
+        },
+        {
+          "path": "pingyou-n153-rational.yaml",
+          "bytes": 114477,
+          "sha256": "7cc142202fc39acfdd01060a6f89744a3f5815d6f193f03dfdb14d8c1f5c3567",
+          "reason": "The source's rational corners Witness/v2 of the same packing, in JSON syntax. No licence: pinned by digest only; derive reads it from the same checkout and holds it to the certificate's poses and side."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and GitHub detects none. The release READMEs say that upstream software and schema licences are retained beside the files they cover and that no new licence is asserted for third-party material; nothing grants one for the source's own files. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source asks that PingYou Ltd be credited with the n153 construction and its refinement, Ryan Xu with the n70 construction it starts from, and Evan Daniel with that construction's exact retention and exact checking tools.",
+      "claims": [
+        "The comment of 2026-10-12T22:24Z on issue #504, and the dated update at the top of its body, report a refined certificate of the same n153 construction, s(153) <= 3217503462601758500692520223/250000000000000000000000000 = 12.870013850407034002770080892, 1.0000000000002e-14 below the certificate T-148 registers, with the A=C return, the rational orientations and the guard 5000000000001/5000000000000 unchanged and a tighter centre and side realization; the safe twelve-place print, 12.870013850408, is unchanged. The author asks that T-148 be re-verified and updated.",
+        "The source reports that three exact checkers accept all 153 squares, 612 wall conditions and 11,628 pairs, that its package replays the recorded rational construction, and that this repository's sqpack exact_verify and check_rational_witness_independent at 074ac28 accept its native Witness/v2. These are author reports; no local or global optimality is claimed."
+      ]
+    }
+  ]
+}

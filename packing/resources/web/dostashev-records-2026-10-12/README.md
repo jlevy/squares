@@ -100,7 +100,7 @@ case ceiling and each other report from its holder’s own packet.
 
 | n | Case ceiling on layer 4, holder | Below it by | Other reports | Smallest |
 | --- | --- | --- | --- | --- |
-| 175 | 13.7671207246923133, Francisco Couzo’s refinement of ry-xu’s packing (T-140) | $2.95 \times 10^{-3}$ | Couzo’s certificate at `337078c`, not registered (think-9fjl), above by $2.94 \times 10^{-3}$; ry-xu’s (T-125), the house on `main`, above by $4.72 \times 10^{-3}$ | this certificate |
+| 175 | 13.7671207246923133, Francisco Couzo’s refinement of Ryan Xu’s packing (T-140) | $2.95 \times 10^{-3}$ | Couzo’s certificate at `337078c`, which the record registers as T-185, above by $2.94 \times 10^{-3}$; Ryan Xu’s (T-125), the house on `main`, above by $4.72 \times 10^{-3}$ | this certificate |
 | 232 | 15.7674283499418417, SQUISH (Nate Chaoweeraprasit, T-136) | $3.25 \times 10^{-3}$ | none | this certificate |
 | 264 | 16.77817459305202, the catalogue’s $9 + \tfrac{11}{2}\sqrt2$, which the issue calls Göbel’s pattern, verified by Evan Daniel’s exact ceiling (T-101) | $3.44 \times 10^{-3}$ | none | this certificate |
 

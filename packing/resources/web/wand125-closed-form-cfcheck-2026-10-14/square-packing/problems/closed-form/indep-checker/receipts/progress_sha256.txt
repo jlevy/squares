@@ -1,0 +1,16 @@
+5e9c71eabc2186806bfcbbc3600f35756b0ffb83a24f7843b97ac7451d197131  interval_0.99_1.prog.left
+b833d95fcb9fdd05c1926f53085aab6a70451401dec7a8ce625dc420b92b703e  interval_0.99_1.prog.right
+77b75ead260270a6ad86c4260f580bbdfd26b0cbdb7e0e3dd452c5ec4c0e7724  interval_0.99_1.prog.straddle
+a89233dc6897bbe4553d9dc6cd981a407d68b3f99830ee6acbab23a22d2d2320  interval_0.99_1.prog.top
+c1c7ad8634f4139721a053058068dbb5e1d39c572845bc0df3ab9c19c1bcc176  interval_0_0.02.prog.left
+ef33f751df35bb40448f9ce905aba6400036b42c86d2f49a6ad80bbdb84ae05e  interval_0_0.02.prog.right
+6c5823db26b41b2f9d8108d3088de368a64bd434a4dd5f76a08754ead75b6a12  interval_0_0.02.prog.straddle
+2b984772872cb1e531722b5c84ee255e689dc5ab24a07c33a319cb9594964e4b  interval_0_0.02.prog.top
+interval_0.99_1.prog.left 17442 accepted
+interval_0.99_1.prog.right 13338 accepted
+interval_0.99_1.prog.straddle 14364 accepted
+interval_0.99_1.prog.top 5643 accepted
+interval_0_0.02.prog.left 17442 accepted
+interval_0_0.02.prog.right 13338 accepted
+interval_0_0.02.prog.straddle 6804 accepted
+interval_0_0.02.prog.top 2673 accepted

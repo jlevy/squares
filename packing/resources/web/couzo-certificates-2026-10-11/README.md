@@ -175,8 +175,8 @@ than the ones above. No packet retains the `f311f08` versions, and think-a4wq ho
 `02f9690` update of the tracked rows.
 
 The four certificates the issue does not name are each an import of their own
-(`result-import.md`, stage 1). This import compares them here and registers none of
-them:
+(`result-import.md`, stage 1). This import compares them here, and the 12 October import
+registered none of them:
 
 - **175.** Below the case ceiling, 13.7688992766137689 (Ryan Xu, T-125), by
   $1.78 \times 10^{-3}$, and below T-140 (#488) by $1.70 \times 10^{-6}$, T-130 (#460)
@@ -184,8 +184,9 @@ them:
   $3.61 \times 10^{-5}$. It was the smallest side known at 175 when this import read
   it, and the source’s standing table calls it best known. Daniil Ostashev’s #528
   (T-158), registered and adopted as the house on 12 October 2026, is
-  $2.94 \times 10^{-3}$ below it; the certificate stays in this packet unless its author
-  asks for it to be registered.
+  $2.94 \times 10^{-3}$ below it. The author asked on 14 October for it to be imported,
+  and `T-185` registers it, superseded by `T-158`
+  ([The 175 Certificate, 14 October](#the-175-certificate-14-october)).
 - **308.** Below the grid’s 18 by $1.54 \times 10^{-3}$ and Kevin Fang’s T-135 (#484)
   by $8.50 \times 10^{-4}$; Evan Daniel’s T-141 (#489) is smaller by
   $1.90 \times 10^{-4}$, and the source marks this one superseded.
@@ -240,6 +241,24 @@ uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports 
 `--replay` decides the geometry again.
 `certify --jobs-dir SCRATCH --workers 1` writes a new receipt from a fresh job directory,
 and `register-plan` prints the record entries the import needs.
+
+## The 175 Certificate, 14 October
+
+On 14 October 2026 at 16:38Z the author answered on #506 that the unnamed 175 certificate
+should be imported (“sure, import it”). Under the owner’s per-count rule it was decidably
+below every earlier report at 175 when it was first committed, on 11 October, so it is
+recorded, and Daniil Ostashev’s #528 (`T-158`), $2.94 \times 10^{-3}$ below it, supersedes
+it. [register-plan-n175.yaml](register-plan-n175.yaml) is the register entry, written by
+hand since this packet’s declaration requests only the counts the issue names; the
+certificate, its replay and its comparison are the ones above.
+The records pull request of 15 October registers it as `T-185`, at V0/C0, with the
+regularization of `T-140` below.
+Measured against `T-140` by
+[`compare_lineage.py`](../mishapolk-kkt-refinements-2026-10-14/review/compare_lineage.py),
+every centre lies within 0.0113 of that certificate’s and 137 of 175 within $10^{-3}$: the
+same arrangement, Ryan Xu’s as the author refined it, moved.
+[review/compare_lineage-output.txt](review/compare_lineage-output.txt) is what it printed,
+against `T-140`’s certificate and against `T-158`’s, another arrangement.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

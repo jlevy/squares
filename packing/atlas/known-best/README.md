@@ -136,11 +136,11 @@ for the side $s(n)$ of the smallest square that can hold $n$ unit squares, where
 squares are free to rotate but cannot overlap”.
 The first line ends after “can”.
 The definition and credit paragraphs omit a final period.
-Both composites apply the recent accent independently to a new upper bound, lower bound
-or optimality proof: a new proof of an older packing colors its optimality badge, not
-its upper bound.
-The image above is the raster; the vector it was drawn from is one click
-away, and the PDF is a 78.09-by-55.84-inch page.
+Both composites apply the recent accent independently to the numeric value of a new
+upper or lower bound.
+Case numbers remain gray; relation signs and optimality badges keep their usual styling.
+The image above is the raster; the vector it was drawn from is one click away, and the
+PDF is a 78.09-by-55.84-inch page.
 
 | File | Size | For |
 | --- | --- | --- |

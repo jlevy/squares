@@ -1,0 +1,161 @@
+{
+ "candidate_sha256": "3cd54c438616d280307d6571cb1aeb35225347751ae651141a96ff7da3b2b360",
+ "schema": "point_line_rectangle_v1",
+ "n": 145,
+ "L": "306/25",
+ "B": "9977/10000",
+ "net": {
+  "step": "83/40000",
+  "last": 200
+ },
+ "keys": [
+  "B",
+  "L",
+  "n",
+  "net",
+  "primitives",
+  "schema",
+  "total_mass"
+ ],
+ "orbits": {
+  "rectangle": 9,
+  "point": 594,
+  "segment": 1541
+ },
+ "positive_orbits": {
+  "rectangle": 9,
+  "point": 594,
+  "segment": 1541
+ },
+ "images": {
+  "rectangle": 72,
+  "point": 4752,
+  "segment": 12328
+ },
+ "mass": "14499999/100000",
+ "mass_equals_total_mass": true,
+ "mass_equals_n_minus_gap": true,
+ "d4_invariant": {
+  "diagonal_swap": true,
+  "reflection_x": true
+ },
+ "semantic_digest": "31788dc7f098d82f5a60bae49a5a3afcd329cf3f792f44883dc11518d95eca69",
+ "net_facts": {
+  "step": "83/40000",
+  "count": "201",
+  "endpoint": "83/200",
+  "endpoint_check": "89/40000",
+  "rotated_side_upper": "399908091/400000000",
+  "side_margin": "91909/400000000",
+  "per_edge_margin": "91909/800000000"
+ },
+ "core_fits": true,
+ "net_reaches_past_pi_over_4": true,
+ "last_tangent_at_most_half": true,
+ "centre_half_width_least": "5077628753/937780000",
+ "centre_half_width_least_at": 200,
+ "centre_domain_nonempty_everywhere": true,
+ "least_distance_to_a_wall": 0.099760023,
+ "green_k12_bounds": [
+  12.213866947789155,
+  12.213866947789155
+ ],
+ "green_k12_two_forms_agree": true,
+ "source_compared_with_is_an_upper_bound_on_green": true,
+ "source_compared_with_minus_green_upper": 4.047024739324138e-91,
+ "side_minus_source_compared_with_equals_improvement_lower": true,
+ "improvement_lower": 0.02613305221084495,
+ "improvement_lower_exceeds_0_0261330": true,
+ "scope": {
+  "145": {
+   "nagamochi_1_plus_sqrt": 122,
+   "side_exceeds_nagamochi": true,
+   "karakus_half_plus_sqrt": "533/4",
+   "side_exceeds_karakus": true,
+   "side_exceeds_green_k12": true,
+   "record_reported_upper": "1253553390593273/100000000000000",
+   "record_verified_upper": "626776695296637/50000000000000",
+   "record_reported_lower": "1221386694779/100000000000",
+   "record_verified_lower": "60216981903/5000000000",
+   "verified_upper_exceeds_side": true,
+   "reported_upper_exceeds_side": true,
+   "side_exceeds_reported_lower": true,
+   "side_exceeds_verified_lower": true
+  },
+  "146": {
+   "nagamochi_1_plus_sqrt": 123,
+   "side_exceeds_nagamochi": true,
+   "karakus_half_plus_sqrt": "537/4",
+   "side_exceeds_karakus": true,
+   "side_exceeds_green_k12": true,
+   "record_reported_upper": "125837822039510463/10000000000000000",
+   "record_verified_upper": "125837822039510463/10000000000000000",
+   "record_reported_lower": "1221386694779/100000000000",
+   "record_verified_lower": "60433151131/5000000000",
+   "verified_upper_exceeds_side": true,
+   "reported_upper_exceeds_side": true,
+   "side_exceeds_reported_lower": true,
+   "side_exceeds_verified_lower": true
+  },
+  "147": {
+   "nagamochi_1_plus_sqrt": 124,
+   "side_exceeds_nagamochi": true,
+   "karakus_half_plus_sqrt": "541/4",
+   "side_exceeds_karakus": true,
+   "side_exceeds_green_k12": true,
+   "record_reported_upper": "632842712474619/50000000000000",
+   "record_verified_upper": "1265685424949239/100000000000000",
+   "record_reported_lower": "1221386694779/100000000000",
+   "record_verified_lower": "15162129187/1250000000",
+   "verified_upper_exceeds_side": true,
+   "reported_upper_exceeds_side": true,
+   "side_exceeds_reported_lower": true,
+   "side_exceeds_verified_lower": true
+  },
+  "148": {
+   "nagamochi_1_plus_sqrt": 125,
+   "side_exceeds_nagamochi": true,
+   "karakus_half_plus_sqrt": "545/4",
+   "side_exceeds_karakus": true,
+   "side_exceeds_green_k12": true,
+   "record_reported_upper": "632842712474619/50000000000000",
+   "record_verified_upper": "1265685424949239/100000000000000",
+   "record_reported_lower": "1221386694779/100000000000",
+   "record_verified_lower": "121726175299/10000000000",
+   "verified_upper_exceeds_side": true,
+   "reported_upper_exceeds_side": true,
+   "side_exceeds_reported_lower": true,
+   "side_exceeds_verified_lower": true
+  },
+  "149": {
+   "nagamochi_1_plus_sqrt": 126,
+   "side_exceeds_nagamochi": true,
+   "karakus_half_plus_sqrt": "549/4",
+   "side_exceeds_karakus": true,
+   "side_exceeds_green_k12": true,
+   "record_reported_upper": "635355339059327/50000000000000",
+   "record_verified_upper": "254142135623731/20000000000000",
+   "record_reported_lower": "38203038001/3125000000",
+   "record_verified_lower": "61076872569/5000000000",
+   "verified_upper_exceeds_side": true,
+   "reported_upper_exceeds_side": true,
+   "side_exceeds_reported_lower": true,
+   "side_exceeds_verified_lower": true
+  },
+  "150": {
+   "nagamochi_1_plus_sqrt": 127,
+   "side_exceeds_nagamochi": false,
+   "karakus_half_plus_sqrt": "553/4",
+   "side_exceeds_karakus": false,
+   "side_exceeds_green_k12": true,
+   "record_reported_upper": "638908729652601/50000000000000",
+   "record_verified_upper": "1277817459305203/100000000000000",
+   "record_reported_lower": "613471383479/50000000000",
+   "record_verified_lower": "122579760163/10000000000",
+   "verified_upper_exceeds_side": true,
+   "reported_upper_exceeds_side": true,
+   "side_exceeds_reported_lower": false,
+   "side_exceeds_verified_lower": false
+  }
+ }
+}

@@ -1,0 +1,580 @@
+{
+ "schema": "undecided-comparisons-resolved/v1",
+ "tool": "devtools.decide_undecided_comparisons decide",
+ "ledger": "packing/campaign/issue-intake/upper-bounds-20261014/README.md, Undecided Comparisons (read, not edited)",
+ "relation": "PR #574's side against the standing one: below means PR #574's upper bound is the smaller; margin is PR #574's side minus the standing side, with rigorous bounds rounded outward",
+ "sides": "packing/campaign/issue-intake/upper-bounds-20261014/undecided-sides.json",
+ "counts": {
+  "below": 0,
+  "equal": 3,
+  "above": 14
+ },
+ "rows": [
+  {
+   "n": 17,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "1.28e-93",
+   "margin_bounds": {
+    "low": "1.28171e-93",
+    "high": "1.28172e-93"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "4.6755300936045509516341112704831466487672",
+    "read_from": "packing/resources/web/pingyou-numerical-refinements-2026-10-13/claims.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde, rows[n = 17].side_exact, equal to s_exact of numerical-refinements/certificates/n017.cert.json in pingyou-numerical-refinements-2026-10-13.zip (SHA-256 ced04297...), whose digest the row names",
+    "value_digits": 1328
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 18,
+    "interval": [
+     "233776504680227/50000000000000",
+     "58444126170057/12500000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "4.67553009360455",
+    "read_from": "packing/frontier/n-017.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 28,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "4.49e-95",
+   "margin_bounds": {
+    "low": "4.48641e-95",
+    "high": "4.48642e-95"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "5.8244446166740592969586287588483810199040",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 28].exact_side",
+    "value_digits": 570
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 6,
+    "interval": [
+     "145611115416851/25000000000000",
+     "291222230833703/50000000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "5.82444461667405",
+    "read_from": "packing/frontier/n-028.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 37,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "2.19e-90",
+   "margin_bounds": {
+    "low": "2.18937e-90",
+    "high": "2.18938e-90"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "6.5986196092443601161783704626783488043910",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 37].exact_side",
+    "value_digits": 948
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 8,
+    "interval": [
+     "131972392184887/20000000000000",
+     "659861960924437/100000000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "6.59861960924436",
+    "read_from": "packing/frontier/n-037.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 39,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "1.03e-90",
+   "margin_bounds": {
+    "low": "1.03047e-90",
+    "high": "1.03048e-90"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "6.8107220830686488516977794443517526346473",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 39].exact_side",
+    "value_digits": 1330
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 5,
+    "interval": [
+     "681072208306863/100000000000000",
+     "136214441661373/20000000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "6.81072208306864",
+    "read_from": "packing/frontier/n-039.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 41,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "1.19e-89",
+   "margin_bounds": {
+    "low": "1.18849e-89",
+    "high": "1.18850e-89"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "6.9266930944688022315810789135602089486815",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 41].exact_side",
+    "value_digits": 1712
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 42,
+    "interval": [
+     "692669309446879/100000000000000",
+     "692669309446881/100000000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "6.92669309446880",
+    "read_from": "packing/frontier/n-041.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 54,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "equal",
+   "margin": "0",
+   "margin_bounds": {
+    "low": "0",
+    "high": "0"
+   },
+   "equality": "the closed form minus the side's rational part, over its coefficient, is a root of the witness's minimal polynomial inside its isolating interval, so it is the witness's root",
+   "method": "exact arithmetic in the two number fields",
+   "pr574_side": {
+    "kind": "field",
+    "minimal_polynomial": [
+     "4",
+     "0",
+     "-12",
+     "16",
+     "-7"
+    ],
+    "isolating_interval": [
+     "8466671928434897829433145909582979088797475617218337997443312793383090175576795833027441189536159781/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "8466671928434897829433145909582979088797475617218337997443312793383090175576795833027441189536159981/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    ],
+    "coefficients": [
+     "7",
+     "1"
+    ],
+    "print": "7.8466671928434897829433145909582979088797",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-054.yaml.gz at 56cf868c617975eaada5b0c10dab953cc6fa2e37, witness.side and scalar"
+   },
+   "standing_side": {
+    "kind": "closed form",
+    "holder": "[Kingbird]",
+    "exact_form": "7 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))",
+    "print": "7.84666719284348",
+    "read_from": "packing/frontier/n-054.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 69,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "2.19e-89",
+   "margin_bounds": {
+    "low": "2.18581e-89",
+    "high": "2.18582e-89"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "8.8271946557297389149314693805883219515650",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 69].exact_side",
+    "value_digits": 1700
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 38,
+    "interval": [
+     "220679866393243/25000000000000",
+     "441359732786487/50000000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "8.82719465572973",
+    "read_from": "packing/frontier/n-069.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 87,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "1.99e-89",
+   "margin_bounds": {
+    "low": "1.98982e-89",
+    "high": "1.98983e-89"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "9.8388152699482622602660931895036575396754",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 87].exact_side",
+    "value_digits": 1710
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 41,
+    "interval": [
+     "39355261079793/4000000000000",
+     "983881526994827/100000000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "9.83881526994826",
+    "read_from": "packing/frontier/n-087.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 106,
+   "report": "PR #574",
+   "against": "register T-121, pending adoption",
+   "relation": "above",
+   "margin": "1.01e-94",
+   "margin_bounds": {
+    "low": "1.00556e-94",
+    "high": "1.00557e-94"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "10.8229080441328475550862078628886723275249",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 106].exact_side",
+    "value_digits": 564
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "T-121",
+    "degree": 32,
+    "interval": [
+     "6764317527583029721928879851805420204703/625000000000000000000000000000000000000",
+     "6764317527583029721928879976805420204703/625000000000000000000000000000000000000"
+    ],
+    "interval_from": "the retained reported_root_interval",
+    "print": "10.82290804413284755",
+    "read_from": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json, new_form_claims.106"
+   }
+  },
+  {
+   "n": 107,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "equal",
+   "margin": "0",
+   "margin_bounds": {
+    "low": "0",
+    "high": "0"
+   },
+   "equality": "the closed form minus the side's rational part, over its coefficient, is a root of the witness's minimal polynomial inside its isolating interval, so it is the witness's root",
+   "method": "exact arithmetic in the two number fields",
+   "pr574_side": {
+    "kind": "field",
+    "minimal_polynomial": [
+     "4",
+     "0",
+     "-12",
+     "16",
+     "-7"
+    ],
+    "isolating_interval": [
+     "8466671928434897829433145909582979088797475617218337997443312793383090175576795833027441189536159781/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "8466671928434897829433145909582979088797475617218337997443312793383090175576795833027441189536159981/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    ],
+    "coefficients": [
+     "10",
+     "1"
+    ],
+    "print": "10.8466671928434897829433145909582979088797",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-107.yaml.gz at 56cf868c617975eaada5b0c10dab953cc6fa2e37, witness.side and scalar"
+   },
+   "standing_side": {
+    "kind": "closed form",
+    "holder": "[Kingbird]",
+    "exact_form": "10 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))",
+    "print": "10.84666719284348",
+    "read_from": "packing/frontier/n-107.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 128,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "2.60e-89",
+   "margin_bounds": {
+    "low": "2.60404e-89",
+    "high": "2.60405e-89"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "11.8250919682136870291492824247534431769235",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 128].exact_side",
+    "value_digits": 1700
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 40,
+    "interval": [
+     "1182509196821367/100000000000000",
+     "1182509196821369/100000000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "11.82509196821368",
+    "read_from": "packing/frontier/n-128.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 152,
+   "report": "PR #574",
+   "against": "register T-122, pending adoption",
+   "relation": "above",
+   "margin": "1.01e-94",
+   "margin_bounds": {
+    "low": "1.00827e-94",
+    "high": "1.00828e-94"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "12.8307188009766099548655164554012486973366",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 152].exact_side",
+    "value_digits": 570
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "T-122",
+    "degree": 40,
+    "interval": [
+     "64153594004883049774327581777006243486683/5000000000000000000000000000000000000000",
+     "64153594004883049774327582777006243486683/5000000000000000000000000000000000000000"
+    ],
+    "interval_from": "the retained reported_root_interval",
+    "print": "12.83071880097660995",
+    "read_from": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json, new_form_claims.152"
+   }
+  },
+  {
+   "n": 177,
+   "report": "PR #574",
+   "against": "register T-123, pending adoption",
+   "relation": "above",
+   "margin": "1.39e-64",
+   "margin_bounds": {
+    "low": "1.38941e-64",
+    "high": "1.38942e-64"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "13.8229797341694486000936530989389194393476",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 177].exact_side",
+    "value_digits": 390
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "T-123",
+    "degree": 32,
+    "interval": [
+     "5529191893667779440037461199575567775739/400000000000000000000000000000000000000",
+     "5529191893667779440037461279575567775739/400000000000000000000000000000000000000"
+    ],
+    "interval_from": "the retained reported_root_interval",
+    "print": "13.82297973416944860",
+    "read_from": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json, new_form_claims.177"
+   }
+  },
+  {
+   "n": 178,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "equal",
+   "margin": "0",
+   "margin_bounds": {
+    "low": "0",
+    "high": "0"
+   },
+   "equality": "the closed form minus the side's rational part, over its coefficient, is a root of the witness's minimal polynomial inside its isolating interval, so it is the witness's root",
+   "method": "exact arithmetic in the two number fields",
+   "pr574_side": {
+    "kind": "field",
+    "minimal_polynomial": [
+     "4",
+     "0",
+     "-12",
+     "16",
+     "-7"
+    ],
+    "isolating_interval": [
+     "8466671928434897829433145909582979088797475617218337997443312793383090175576795833027441189536159781/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "8466671928434897829433145909582979088797475617218337997443312793383090175576795833027441189536159981/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    ],
+    "coefficients": [
+     "13",
+     "1"
+    ],
+    "print": "13.8466671928434897829433145909582979088797",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-178.yaml.gz at 56cf868c617975eaada5b0c10dab953cc6fa2e37, witness.side and scalar"
+   },
+   "standing_side": {
+    "kind": "closed form",
+    "holder": "[Kingbird]",
+    "exact_form": "13 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))",
+    "print": "13.84666719284348",
+    "read_from": "packing/frontier/n-178.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 205,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "1.13e-94",
+   "margin_bounds": {
+    "low": "1.13404e-94",
+    "high": "1.13405e-94"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "14.8244511461240882235154815542218723047651",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 205].exact_side",
+    "value_digits": 945
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 40,
+    "interval": [
+     "1482445114612407/100000000000000",
+     "1482445114612409/100000000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "14.82445114612408",
+    "read_from": "packing/frontier/n-205.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 235,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "1.30e-94",
+   "margin_bounds": {
+    "low": "1.30317e-94",
+    "high": "1.30318e-94"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "15.8266056334285680695673962075609971683414",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 235].exact_side",
+    "value_digits": 951
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 83,
+    "interval": [
+     "316532112668571/20000000000000",
+     "1582660563342857/100000000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "15.82660563342856",
+    "read_from": "packing/frontier/n-235.md, reported_upper_bound"
+   }
+  },
+  {
+   "n": 300,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "relation": "above",
+   "margin": "1.21e-94",
+   "margin_bounds": {
+    "low": "1.21118e-94",
+    "high": "1.21119e-94"
+   },
+   "method": "the rational's position in the root's isolating interval, by one sign",
+   "pr574_side": {
+    "kind": "rational",
+    "print": "17.8241233884785434708932018073574102917880",
+    "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at 56cf868c617975eaada5b0c10dab953cc6fa2e37, results[n = 300].exact_side",
+    "value_digits": 568
+   },
+   "standing_side": {
+    "kind": "root",
+    "holder": "[Kingbird]",
+    "degree": 40,
+    "interval": [
+     "1782412338847853/100000000000000",
+     "356482467769571/20000000000000"
+    ],
+    "interval_from": "the print plus and minus one unit of its last place",
+    "print": "17.82412338847854",
+    "read_from": "packing/frontier/n-300.md, reported_upper_bound"
+   }
+  }
+ ],
+ "gated": [
+  {
+   "n": 29,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "needs": "an exact side for the reported lane's packing: the case record holds only the Kingbird print 5.93383346267692; Evan Daniel's degree-7213 minimal polynomial (#545) is unpublished (think-6gti)"
+  },
+  {
+   "n": 55,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "needs": "an exact side for the reported lane's packing: the case record holds only the Kingbird print 7.94577100750391 (exact_form and minimal_polynomial null)"
+  },
+  {
+   "n": 71,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "needs": "an exact side for the reported lane's packing: the case record holds only the Kingbird print 8.94407155757031 (exact_form and minimal_polynomial null)"
+  },
+  {
+   "n": 83,
+   "report": "PR #574",
+   "against": "record [Kingbird] (reported lane)",
+   "needs": "an exact side for the reported lane's packing: the case record holds only the Kingbird print 9.63475764863108 and algebraic_degree 672, with no minimal polynomial (exact_form and minimal_polynomial null)"
+  }
+ ]
+}

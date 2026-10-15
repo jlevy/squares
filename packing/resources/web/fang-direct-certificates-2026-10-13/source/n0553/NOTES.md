@@ -1,0 +1,1 @@
+n = 553 = 24^2 - 24 + 1, S = 23.998811020144984 (rounded up; exact value in the certificate), built from a parametric two-wedge seed (eight lines per wedge, built from line lengths and angles, not from an earlier packing; see the note, Section 6), starting angles 20.5 and 16 degrees, found 2026-10-10, not analytically optimised.

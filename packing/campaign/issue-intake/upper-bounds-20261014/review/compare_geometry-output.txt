@@ -1,0 +1,2 @@
+mishapolk573-n153.yaml vs n-153.yaml.gz: sides 12.870013850404479 vs 12.870013850407044 (diff -2.564e-12); best symmetry 0: max centre distance 1.390e-01; within 1e-6: 51, within 1e-3: 53, within 0.1: 147 of 153
+mishapolk573-n207.yaml vs n-207.yaml.gz: sides 14.880960371558000 vs 14.880960373043676 (diff -1.486e-09); best symmetry 0: max centre distance 2.828e-04; within 1e-6: 200, within 1e-3: 207, within 0.1: 207 of 207

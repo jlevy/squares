@@ -113,7 +113,7 @@ def test_the_head_states_the_result_as_the_site_does(
     # Significance is its mark, the others chips (`think-m3m4`).
     places = [
         head.index(
-            f'<span class="site-significance-label" aria-hidden="true">{rung}</span>'
+            f'<span aria-hidden="true">{rung}</span>'
             if rung[0] == "S"
             else f'data-rung="{rung[0]}" data-level="{rung[1:]}">{rung}</span>'
         )

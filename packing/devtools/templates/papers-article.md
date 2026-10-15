@@ -1,8 +1,17 @@
 <div class="site-hero">
 
-# Papers
+# Explanations
 
 </div>
+
+## Tutorial
+
+Start with the basic ideas, definitions and examples in the first-principles tutorial.
+Continue with the advanced tutorial for the methods behind the search and proofs.
+
+{{TUTORIAL_CARDS}}
+
+## Papers
 
 The $n = 11$ series:
 
@@ -14,7 +23,6 @@ The $n = 11$ series:
   machine-checked proof that Trump’s 1979 packing of eleven squares is optimal
   ([T-060](results.html#t-060), `V3/C3`); the review record is pending.
 
-The [square-packing tutorial](tutorial.html) introduces the problem and its mathematics.
 [{{METHODS_PAPER_TITLE}}]({{METHODS_PAPER}}) follows the discovery process from a seed
 through search and local refinement to a certified upper bound, with figures drawn from
 published record packings.
@@ -26,6 +34,12 @@ published record packings.
 {{PDF_CARDS}}
 
 {{PDF_NOTE}}
+
+## Visuals
+
+{{VISUAL_TABS}}
+
+{{FILM}}
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

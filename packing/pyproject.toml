@@ -246,6 +246,9 @@ max-complexity = 57
 # browser checks whose interface is what they print. Waived here rather than rewritten
 # as the lint floor is raised over them; `**` because they sit two directories down.
 "atlas/known-best/video/spikes/**" = ["T201"]
+# An intake pass's retained review programs (`campaign/issue-intake/*/review/`) report by
+# printing, like any other tool here.
+"campaign/issue-intake/**" = ["T201"]
 # Package-local command modules print their progress and receipts as their interface.
 "../packages/workbench/tools/**/*.py" = ["T201"]
 # `K` is the published symbol in the source these modules transcribe; renaming it to
@@ -326,6 +329,9 @@ include = [
     # Local type stubs for dependencies that ship none (gmpy2, for the kernel's rationals),
     # held to the same floor as the code that relies on them.
     "typings",
+    # An intake pass's retained review programs, which recompute its verdicts from the
+    # record (`campaign/issue-intake/*/review/`), held to the floor like any other tool.
+    "campaign/issue-intake",
 ]
 exclude = [
     "**/__pycache__",

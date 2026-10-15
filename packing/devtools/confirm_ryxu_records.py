@@ -178,8 +178,11 @@ def case_plan() -> list[tuple[Path, str]]:
         prefix, front, body = path.read_text().split("---\n", 2)
         document = safe_load(front)
         case = document["packing"]
-        if case["n"] != n or case["reported_upper_bound"] != register.reported_bound(n):
+        if case["n"] != n or register.named(case["reported_upper_bound"]) != (
+            register.reported_bound(n)
+        ):
             raise ValueError("selected source upper lane differs from complete admitted facts")
+        case["reported_upper_bound"] = register.reported_bound(n)
         confirming = RADICAL if n == 51 else RATIONAL
         case["verified_upper_bound"] = houses.bound(n)
         if confirming not in case["evidence"]:

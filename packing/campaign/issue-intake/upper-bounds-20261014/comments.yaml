@@ -1,0 +1,129 @@
+# The report-order verdict comments of the 2026-10-14 upper-bound intake (epic think-abi1,
+# posted under think-prkx), as devtools.intake_comments drafts them from the ledger.json
+# beside this file. Everything here is this pass's own: the tool holds the rules.
+#
+# From packing/:
+#   python -m devtools.intake_comments \
+#     campaign/issue-intake/upper-bounds-20261014/comments.yaml --out DIR
+
+records_pr: jlevy/squares#602
+
+# How a holder the ledger prints by a bibliography key is named in a comment.
+names:
+  "[Kingbird]": the Kingbird catalogue
+  "[Daniel exact and local reports 2026]": Evan Daniel
+
+# A handle the ledger prints where a credit names the person (the owner, 2026-10-14:
+# "use Ryan Xu real name or surname Xu not the handle for regular credits"). It is
+# replaced where it stands as a name, never inside a path, URL or mention.
+handles:
+  ry-xu: Ryan Xu
+
+# Handles and project names the ledger's notes give in parentheses after a name.
+drop_handles: [itsnaka, SQUISH]
+
+# Start labels a comment names in words of its own.
+labels:
+  beyond-horizon row couzo-certificates-2026-10-11: "the row on main from #506"
+
+wording:
+  self_refinement: "a refinement of the finder's own packing{via}"
+
+# Result reports the ledger holds that get no verdict comment here, and why.
+skip:
+  - report: "#528"
+    reason: answered by the coordinator's own follow-up (think-prkx)
+  - report: "#529"
+    reason: answered by the coordinator's own follow-up (think-prkx)
+  - report: "#552"
+    reason: answered by the coordinator's own follow-up; think-6no5 holds its import
+  - report: "#589"
+    reason: closed by its author 20 seconds after opening it; the same claim as #582
+
+comments:
+  - issue: 503
+    author: BuddenPing
+    reports: ["#503 comment 6133755143", "#504 comment 6133737268"]
+    opening: >-
+      @BuddenPing, thank you; this is the report-order evaluation of every open report
+      at the counts your refinement comments on #503 (207) and #504 (153) claim.
+    index: "#503 (covers the #503 and #504 refinement comments)"
+    wording:
+      self_refinement: "a refinement of {finder}'s own packing{via}"
+    notes:
+      - >-
+        PR #574's later certificates at both counts are evaluated in a comment on that
+        pull request.
+  - issue: 561
+  - issue: 562
+    notes:
+      - >-
+        The issue lists 176 as not requested; it is in the table because the issue
+        states a side there.
+  - issue: 564
+  - issue: 566
+  - issue: 567
+  - issue: 568
+  - issue: 569
+  - issue: 570
+    notes:
+      - >-
+        Two notes on where the evidence lives. #570's pin
+        1b31bc907d2d881c6962739b6b40cd10b1cd5a9c is no longer served by GitHub. At 379,
+        the certificate #570 names (SHA-256 beginning ac463682) is in no reachable
+        commit of franciscouzo/square-packing, so its side is evaluated as reported. If
+        that certificate is still available, a commit or attachment carrying it would
+        let the record retain it.
+  - issue: 573
+    notes:
+      - >-
+        At 153 and 207 the owner decides the credit: a measurement recorded beside the
+        verdict finds these packings close to PingYou Ltd's registered packings (at 207
+        every square lies within 2.8e-4 of PingYou's, the same contact topology; at
+        153, 51 of 153 squares coincide to 1e-6), while the source calls them new.
+      - >-
+        Where this differs from our earlier reply, which said no count here would be
+        registered, this evaluation replaces it: in report order, #573 came before PR
+        #574's claims at 153 and 207.
+  - issue: 574
+    reports: ["PR #574"]
+    layout: by-finder
+    headings:
+      recorded: >-
+        Recorded, each a refinement credited to PingYou Ltd, after the finder of the
+        packing it tightens
+      equal: Not recorded, equal to the record on main
+      above: Not recorded, above the record on main or a register entry pending adoption
+      undecided: Undecided at print precision
+    undecided_note: >-
+      each is decided by the exact side of the record it is compared with, as the table
+      below says
+  - issue: 575
+    notes:
+      - >-
+        Where this differs from our earlier reply, this evaluation replaces it: at 176,
+        PR #574 reached this repository first with a side below this one, so 176 is not
+        recorded here; at 211 and 241 this report came before #583 and #586, so it is
+        recorded at both.
+  - issue: 582
+    notes:
+      - >-
+        Whether a certificate published in a watched repository, with no issue, counts
+        as reported decides this count: if it does not, #582 is recorded at 381, below
+        the row on main, and #583 is then recorded below it.
+  - issue: 583
+  - issue: 584
+  - issue: 586
+  - issue: 593
+    layout: by-count
+    notes:
+      - >-
+        At 211 and 241 the sides are an exact tie with #586; the rule keeps a tie with
+        the report that reached this repository first, #586, and whether to record #593
+        as well is an owner decision.
+      - >-
+        Where this differs from our earlier reply, this evaluation replaces it: that
+        reply said 211 and 241 would be registered as ties, and that 156 and 271 were
+        undecided between PR #574 and #561, while PR #574 is decidably below #561 at
+        both.
+  - issue: 596

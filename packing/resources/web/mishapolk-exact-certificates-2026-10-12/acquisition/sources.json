@@ -1,0 +1,744 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T07:09Z",
+  "git_scope": "Full clone, checked out at the commit issue #573 pins. All files of the pinned tree are in the scope and bound to their Git blobs; under derived-only custody none is copied. The 19 certificates are unchanged at 46f638ce0537beeb1bad24242c6a3d357eecd9ee, issue #593's pin. No source program was executed.",
+  "sources": [
+    {
+      "id": "mishapolk-square-packing-records",
+      "source_url": "https://github.com/Mishapolk/square-packing-records",
+      "source_ref": "336bdf5efab4784e54e0ac32edf3ed12f9c8af7e",
+      "source_commit": "336bdf5efab4784e54e0ac32edf3ed12f9c8af7e",
+      "committed_utc": "2026-10-12T23:52:23Z",
+      "git_tree": "fd1ce3dadf7e5125647a216cc0b11fc527c845c0",
+      "archived_path": "packing/resources/web/mishapolk-exact-certificates-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/mishapolk-exact-certificates-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "certificates",
+        "check_packing.py"
+      ],
+      "subtree_file_count": 117,
+      "subtree_total_bytes": 3249073,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 9276,
+          "sha256": "c84e622d2e268c1b245f05fd7c72a0bc9a7c33f8cd84336cc59303a6a44a5d75",
+          "reason": "The repository README: the release's record table with each exact side, quoted in this packet's README. Author prose; no licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/census.json",
+          "bytes": 8281,
+          "sha256": "004d850158172b4a8e82e175ee16452e5e6d278b53d2dad5f5d866b801677fe3",
+          "reason": "The source's census: each count's exact side_fraction, its float, the baseline it compares with, its margins and the SHA-256 of its certificate and pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-103.cert",
+          "bytes": 8589,
+          "sha256": "044ab54af75be78261f64fe7e6bd99f02f0a650fe13c5355714102e31432365c",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-103.svg",
+          "bytes": 14706,
+          "sha256": "c47a53a02f1132a82e02d3dbd7efd2b6daf2cf6d8f1f25dbb34dafed9733aa0e",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-103.txt",
+          "bytes": 8253,
+          "sha256": "eaff28d1981811e8ff78f41d08562efe846738e69f7748071281ecd68dd6fdbc",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-105.svg",
+          "bytes": 17119,
+          "sha256": "dc5394786c97a413d751dde35ad52daf2412301e0f498c18f743b83b212a3e5b",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-105.txt",
+          "bytes": 8405,
+          "sha256": "28a72a9bd4b2b5f88010b380ad696709b8aafd0a3e980fa179cf19061ecc587f",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-108.cert",
+          "bytes": 10004,
+          "sha256": "995c59d9f64beb4b3fec653ab3966911c844cbc8c849692d347dada8278fe30b",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-108.svg",
+          "bytes": 15347,
+          "sha256": "70c8082d4b8bb791867a2c0290e1e03e8de27f3f301a2d409ea1c28bb634eb9a",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-108.txt",
+          "bytes": 8617,
+          "sha256": "ed1f41e4d64c6d1960140f8bdaa2b5836b966e636377aad219ae09835bf36af4",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-127.cert",
+          "bytes": 11904,
+          "sha256": "3883629c133c315d54e1db59a20344f1385376081beb3afad80964ba2b18bbda",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-127.svg",
+          "bytes": 17930,
+          "sha256": "adcdcfc410c6038ac47b1b88442e43112650d10860157747720935579eb3f0d6",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-127.txt",
+          "bytes": 10155,
+          "sha256": "4364d6da2076e908b77379ec489439f683cc6659a9e5c0c36b529834b988ef83",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-130.svg",
+          "bytes": 20230,
+          "sha256": "21e0e0ca70871f65adc2688436b489cc2575e0640bd878cf4befa2ed42787e72",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-130.txt",
+          "bytes": 10418,
+          "sha256": "46eba43ea47e25db18e0610adaa581c736a7d8b445c33233558fec672a190691",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-131.cert",
+          "bytes": 12363,
+          "sha256": "b13c976b818a09345d3c4bca43006f129ce450f57c42eb634b44a3acb9a43d0d",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-131.svg",
+          "bytes": 18450,
+          "sha256": "4894f2b4fdecd57821ae2d64969956aa3b797847d5726f87effde8d388f2e4c5",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-131.txt",
+          "bytes": 10455,
+          "sha256": "04afdd6e3f50012f52a4456235b8be123828e5c32b746bac3a2404205428f951",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-132.txt",
+          "bytes": 18493,
+          "sha256": "89115e7393c4d5afafcdd4046f85f8b33d8211503b5aac8143771c7771f40f43",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-153.cert",
+          "bytes": 12540,
+          "sha256": "8c012a7207a4762c48fbd68577f5b20771d0be66a401a90b7d09b549a50f15bf",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-153.svg",
+          "bytes": 21395,
+          "sha256": "89008232a26bfd1adbf097445d3f3de436a058e2fb9d4b0c973d4b0a6d4a193d",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-153.txt",
+          "bytes": 12192,
+          "sha256": "8fae8edbceccf4099c937bf268a50f25c6198b35c2f9c268fc4fbb302f239170",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-154.cert",
+          "bytes": 12633,
+          "sha256": "4076f8426ce579fb1b45ea9d37ba4c2d301172e091010d397b0b023756251eb3",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-154.svg",
+          "bytes": 21542,
+          "sha256": "2565280c6eb3b9fc1b76141205d6a1a72d2bff6b0934d78d8956984f359b7c50",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-154.txt",
+          "bytes": 12282,
+          "sha256": "ac147c424b515566932aeecd8e00df2b12618cd4895e7875d3b1ea3ad21b247b",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-175.cert",
+          "bytes": 14152,
+          "sha256": "929123e7462ba789bb43036c9e22da5a097f95210b528e590efb8fa6fe62e8ee",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-175.svg",
+          "bytes": 24370,
+          "sha256": "47f068f06d6ed7f62c8722dbc1fe4cbc36179023628f32307867f1c0629d63db",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-175.txt",
+          "bytes": 13955,
+          "sha256": "ab6b707b5536779de18ccd59632be1807ab1761f6e297613133af52e66bc7cd7",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-179.svg",
+          "bytes": 28664,
+          "sha256": "4a5f752c8a4bfbcd4a6ffcf99ff97f5caed5bb35cdac0a1b812e01b56c4c23b1",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-179.txt",
+          "bytes": 14349,
+          "sha256": "e92d88ae577ae47d0efeacbc2aedcc683305b1bd639f97dae86363f532102e07",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-180.cert",
+          "bytes": 16880,
+          "sha256": "271c73710ef19beb4ce444ed051eef37ba7c9dd868f14d793cc9e88f49a506e2",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-180.svg",
+          "bytes": 25090,
+          "sha256": "444facc3b6511b9710d48d396775d9d1b24bc01a5acfd30774d82333ac6599dc",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-180.txt",
+          "bytes": 14400,
+          "sha256": "c5e4ec93e7af11b4da6c2f089de5ac52088a77c633e5271f6f45c38dfbfcb9d0",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-199.svg",
+          "bytes": 30580,
+          "sha256": "4b8fe7630499ebffef2be8a357b6002ffb1e0cce4f924db50302cf0de6bedc2c",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-199.txt",
+          "bytes": 27927,
+          "sha256": "8f4212771950c2824156190f67e1cc205305fad58457cf261f43c079454e4c87",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-207.cert",
+          "bytes": 16173,
+          "sha256": "3cc901c7096406d0c1d7a2daf23860ad65758b3b133a103d0e5ebd3ab9a34b41",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-207.svg",
+          "bytes": 28685,
+          "sha256": "789292ae967fd746c02d9bbbb3be4fd5be943c729db0419b3cd3da5221eeaa80",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-207.txt",
+          "bytes": 16510,
+          "sha256": "a599181de48ec6e82ba9b9a83f52d421ceae2fb267e7de89ce4058409dbcc534",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-208.svg",
+          "bytes": 31930,
+          "sha256": "aafa95405147f7c58cbcae04c93eda8eaf7c8eab085ff9025a893d0bbe8fd49b",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-208.txt",
+          "bytes": 16716,
+          "sha256": "b2d9d5e70aef2b1d3fa15259382d11a7fed383925af674b266586c9fe6264f04",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-209.cert",
+          "bytes": 16852,
+          "sha256": "f5aa5aa77ce5b95914b9048884d519ef03ce2a14fe95a14ab01517a157b8ea1d",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-209.svg",
+          "bytes": 28981,
+          "sha256": "b7cc8d88455e0bd1eb028b106b648beb3906970b1f068965e81b2929c8711510",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-209.txt",
+          "bytes": 16696,
+          "sha256": "013ec0739f483ff66cfe9365987c4b4558ff2c9e78372eed1fc100fcf617382b",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-236.cert",
+          "bytes": 18610,
+          "sha256": "bb55861e94830e0a9569ab5b446e6015ddabca0b35d2556b0fc682071570de19",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-236.svg",
+          "bytes": 32715,
+          "sha256": "fca08c4f65bc6968ca1278b85d1bc946834212af38c9b6803671c12cc73e217c",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-236.txt",
+          "bytes": 18945,
+          "sha256": "2ce344c8c2d7c1cbc1e2753b98a34841cc896bf688e7e21d37cbc477db8332f7",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-237.cert",
+          "bytes": 18799,
+          "sha256": "746904fc275715eab1caa1bcbf507068bdc03cfee2fe92ba410dc706e165864b",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-237.svg",
+          "bytes": 32753,
+          "sha256": "ddd185baa38ccf4475d03d52852408c73a0571bf22db67aa32706c83b7486873",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-237.txt",
+          "bytes": 18928,
+          "sha256": "177ea1fc43c11aeac14c71ee122872998fed3bcf98a9153d7f6eb95a495ca074",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-238.svg",
+          "bytes": 36430,
+          "sha256": "3be37d10d711c434e67423271c902aa0340467d5e824986743f1358325874381",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-238.txt",
+          "bytes": 19098,
+          "sha256": "43dbdcd41300760a40ec32e105de156d8bbf8f7bdde55aee161a898fc14dceda",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-239.svg",
+          "bytes": 36579,
+          "sha256": "2a33af9a0904ead5979f04961541eabff8d23133c134b90b0700af5f9f59d0ea",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-239.txt",
+          "bytes": 19190,
+          "sha256": "819aca7c56b1562bc890f4ed8cf1dc650d9f7f7c0f5d36be25368198a5cf57e6",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-258.cert",
+          "bytes": 20373,
+          "sha256": "580be390e8307ffc9e3ce1f613098e8c6734f8b5cf9266d2ca29255fc9948a45",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-258.svg",
+          "bytes": 35671,
+          "sha256": "7bc587bfaa3eb3d3e64ed14a45184cbc66f444f96ad8a85475a6da8bf39fc0de",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-258.txt",
+          "bytes": 20693,
+          "sha256": "f99f97ad066b7646094a6c6c2017badf24135c47479a4bef7d8d4fefc9536440",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-263.cert",
+          "bytes": 25224,
+          "sha256": "bdf31ed1ea2a8f01009f278b3989ef5246f9ec5b3db66b962d569bf336fa80d9",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-263.svg",
+          "bytes": 36413,
+          "sha256": "97c2deee7ae1e69c525dfe03e8c5078b12724a5d800fe9635594dcdd567d0ce7",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-263.txt",
+          "bytes": 21156,
+          "sha256": "c3de0dfa55df97d9956725cd0c0b91d7cbd07067a7e5d461522fc283d74b5cfd",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-267.cert",
+          "bytes": 23192,
+          "sha256": "03274dd9f36b11cf21962febe3157b9c399ce8b918888be0e307cca7548ecd1a",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-267.svg",
+          "bytes": 36853,
+          "sha256": "1ce82493bc7f8b3747160468f8264f5230fd26ef2af57f1f7a007cc9cae15c8b",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-267.txt",
+          "bytes": 21378,
+          "sha256": "7c4c52d2663889d15cbd73b335fc569eabde49122275f0d6b72a3251b198c45c",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-270.cert",
+          "bytes": 21403,
+          "sha256": "7dd96e6455e03cfab11a6b63d6fbce4b071b16445d1beec0b7f5288c7abe0185",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-270.svg",
+          "bytes": 37221,
+          "sha256": "f732da41f8330bd70dbec07bfe4f72013a4b932ad8b58f71568bae90188eb54c",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-270.txt",
+          "bytes": 21581,
+          "sha256": "6de00d094f0582488b07c210208de2b7350ed08e693b6c83579fc73ba9d1e36a",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-302.cert",
+          "bytes": 24912,
+          "sha256": "c4b7ca98097754c4a16cd619708da817d5bd6f4c1c3a8f93678c554d7e68a638",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-302.svg",
+          "bytes": 41576,
+          "sha256": "c730b922cc8d2190f2597627f0008ca6931023547fbb582fe9cdb112c4d39268",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-302.txt",
+          "bytes": 24176,
+          "sha256": "6306e7f9e3b234e3d55794ff5c6dcd713981de7fe5467e0aaa5473f92f2865a1",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-303.cert",
+          "bytes": 23674,
+          "sha256": "d29e306a5abccc30cfca83473fedd4f6684dd3ae05dd46d572acfc68042c79b2",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-303.svg",
+          "bytes": 41794,
+          "sha256": "529e0c480dfe4df75ce74e5f4c5c13d949834a5071ae16cacdf60212ab512c29",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-303.txt",
+          "bytes": 24339,
+          "sha256": "41365eddda7c51f7700e050024978aaa928c69829d521d51c02631df3c91172d",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-306.cert",
+          "bytes": 28944,
+          "sha256": "3e972459e27067b0cca2df820503dab2a5fc0d7d4912e7bf426e1e91d10bfdb8",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-306.svg",
+          "bytes": 42184,
+          "sha256": "db2bde602674831d6118408777489638891135f20302310d5e9dcf8367c867ed",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-306.txt",
+          "bytes": 24564,
+          "sha256": "7b46cf477380d30f349799f888dee26051871a0546abdc1dc1d5d685e960f448",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-343.svg",
+          "bytes": 39326,
+          "sha256": "c90eca67714c5a0eea71eeaf794d9f961e9f83302202e91951b07dc435987b53",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-343.txt",
+          "bytes": 48157,
+          "sha256": "75cbd47684668af894f734410af4ec23ddd21e505a8dd07d01d59d3343e8cb4b",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-344.svg",
+          "bytes": 39472,
+          "sha256": "1fd78bef08720113aef653211e3566fdb1f01891fae7e530b87eae6f93fbd4ee",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-344.txt",
+          "bytes": 48329,
+          "sha256": "c026436121089507b42f5c8eddd115b418a327122b79d5b7336b285b79231b1c",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-345.svg",
+          "bytes": 39580,
+          "sha256": "8a019a9cb528edd61b08aa368529cb3cd9ee7db71181b61bfa63d34b1c46aca6",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-345.txt",
+          "bytes": 48463,
+          "sha256": "36401c0f00f936c6e50090cce95fb01693755781d7b2efbd3429b118c414db08",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-346.svg",
+          "bytes": 39636,
+          "sha256": "4732d0aafbaff499c27ea14435c3480a114ab8f3d45d257d0064bc67b524ceab",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-346.txt",
+          "bytes": 48545,
+          "sha256": "86a97d6704111fa6ead0a2bed040ea0a932e6e4f6fa41e1804e8f657b6e4045c",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-347.svg",
+          "bytes": 39796,
+          "sha256": "01eaae9cb933769b86ee6e3f78b6a1861afa0e1eef267ff67935ecad3bc6c476",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-347.txt",
+          "bytes": 48732,
+          "sha256": "0e48c14af87269e573c83e1ae200b8355e5d9cc0a3634f4703ef8006d54576d3",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-348.svg",
+          "bytes": 39901,
+          "sha256": "98c5319ef89308a1fc0aa49738feee26b32274b027bab3212ecb67fb0d7ed904",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-348.txt",
+          "bytes": 48865,
+          "sha256": "aadcaed74d62c3c60bffee0b8b86bc1cdbe15e51a41dd8b2f66091c2f286d82b",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-349.svg",
+          "bytes": 39963,
+          "sha256": "bafcf6171c76ab6f83e20fec2682d4fda03bb35652657844cb0a9e17f337f9b0",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-349.txt",
+          "bytes": 48954,
+          "sha256": "b66147bd5fac7a7345d6c9e375eb8fc76b515da73e2d24097ba0c9c4280a8d91",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-350.svg",
+          "bytes": 40078,
+          "sha256": "589697c132da888ad44a80bdeef112ff9eaecdab13e9c9070c7953e4333a9070",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-350.txt",
+          "bytes": 49095,
+          "sha256": "a5751ed9bc7c4d1f05f3622fbc9097058cbce72d0bac81f4a2aadaef881fabf9",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-351.svg",
+          "bytes": 40208,
+          "sha256": "53f3c2477866ddc2a25c264dfcec089def13cc8815b98880dc316f17214c7c9a",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-351.txt",
+          "bytes": 49251,
+          "sha256": "aed6c91b1ea48197afce9378452c5f34c93baeb661415a774d4a4e31f4466e8b",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-352.svg",
+          "bytes": 40352,
+          "sha256": "b1fbd310a8155872e9e38ff63638a41ed68198860e7d718118e9d94ea5ff0b20",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-352.txt",
+          "bytes": 49422,
+          "sha256": "73ad7dbc3f16c0ed868e6861fd3390204eb70d5aaa8ce00f3e4fce9b577956a0",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-353.svg",
+          "bytes": 40464,
+          "sha256": "41b2182ba920f00ff50fdcb9815121f051c93bfa88eaf24e62326ee6b34120aa",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-353.txt",
+          "bytes": 49560,
+          "sha256": "982c19eacab5532460eca9cd2d63894304c7a911af72ebfbed59f28f0b9796b5",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-354.svg",
+          "bytes": 40550,
+          "sha256": "f37dd554f538c49c1d6632b2b9475afb4711c0a7e79117092be0c6b5a3b6247f",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-354.txt",
+          "bytes": 49673,
+          "sha256": "1442b61af61a8a417531fd43065439540c612cffcd5f7a8bb36d3d8abf0d8821",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-355.svg",
+          "bytes": 40631,
+          "sha256": "77afe59edca43e61a38a76d535a36cff1dd3e1ca84ceba8f74482bcbd4848ad1",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-355.txt",
+          "bytes": 49781,
+          "sha256": "0914be68bf2e00d8eabe66a108047dab9a4c1ddc7304b59f6c6e79d5a48d586a",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-356.svg",
+          "bytes": 40816,
+          "sha256": "5dcd21121466f8cd7486bdd3a494ffc711728183fd2f850e8ff6b535196fa968",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-356.txt",
+          "bytes": 49992,
+          "sha256": "f44e0fe3e15c2b1b7a9193039d80a997b2dc8079947945e36a07d93a0dac8523",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-357.svg",
+          "bytes": 40813,
+          "sha256": "dd11f1a19ed9f4ecb872529d6ef966115a9a153a0badfe836fd7b19a05469dfc",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-357.txt",
+          "bytes": 50016,
+          "sha256": "19dae629037e33f3d928169eb64dc9aa9a9dbb1ca9014b8d83a65f705b538874",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-358.svg",
+          "bytes": 41043,
+          "sha256": "e677601470f190393cdab68ad1699eed0994f39f3b791a1e796ed0e1bed8b1a6",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-358.txt",
+          "bytes": 50272,
+          "sha256": "3ceb06754c9e6ffd2c2100d84e49ba52ccc7dedaa183cf92492223f28e52bc36",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-359.svg",
+          "bytes": 41158,
+          "sha256": "fc204be0fe9de88eae39a35eef525a5ada1f86fbac3f44fc6d92614b7449e445",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-359.txt",
+          "bytes": 50413,
+          "sha256": "02b8f6de188806ff1d636754d5c317bd64d1d144ffaebd3a5b1f1750b4ada6c4",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-360.svg",
+          "bytes": 41194,
+          "sha256": "1149d4f5b35a4ac1aa7116cc4abae87d9349a5606ff37d7c23967f3205c9937a",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-360.txt",
+          "bytes": 50476,
+          "sha256": "3b5a26fa9c416462d6eb3a6106c17b93f43f7f1c970b8fcb591dee177119c7f4",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-84.svg",
+          "bytes": 13844,
+          "sha256": "be6975734adabff40bc854ea37a1cec16881c0462cd1b156536a2b1fab8e1c4c",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-84.txt",
+          "bytes": 6709,
+          "sha256": "6819807c98b716afbadd13e8cde7a2ed74392b7b07069865f42170ecbf8bdc8c",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-86.svg",
+          "bytes": 14156,
+          "sha256": "6d011c812666ac58609cf5a8931fbf3c9a35d10e41cc8af48da138fae6567e08",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-86.txt",
+          "bytes": 6856,
+          "sha256": "10aabbe0cc7be597218ea7013606c12d073c0653aee52e86ba1ff94f5f5bd2ed",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-88.svg",
+          "bytes": 14468,
+          "sha256": "9e8b81f73a284d590ab88d12d07733e93e71a1701e697e29adaac1577ca93c88",
+          "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-88.txt",
+          "bytes": 7006,
+          "sha256": "67f60fd35d74f7be01025e25d63f985b30eed5e01eda7b0ab8c3167b62451344",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "check_packing.py",
+          "bytes": 9200,
+          "sha256": "75f60160e43521514263e6f51b35de2b7588ec6e61268cb22104ab139a4107f5",
+          "reason": "A copy of David Ellsworth's check_packing.py as the author published it. No licence in the tree; pinned by digest only and never executed here."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The tree's README names no credit or AI-assistance terms; the issue #573 credits Mishapolk, with Ryan Xu's construction at 103 and Nate Chaoweeraprasit's (SQUISH) at 258, and discloses Gemini assistance.",
+      "claims": [
+        "Issue #573 (opened 2026-10-12T23:58Z as 'Exact rational certificates for 19 packings below register (n = 103-306)', renamed by its author at 2026-10-13T00:06Z to six packings; no comments by 2026-10-14T07:10Z) reports six upper bounds, each rounded up at 12 places from the exact certificates/square-<n>.cert at 336bdf5efab4784e54e0ac32edf3ed12f9c8af7e:",
+        "s(103) <= 10.679232047362, exact side 213584640947227/20000000000000.",
+        "s(153) <= 12.870013850405, exact side 20109396641257/1562500000000.",
+        "s(207) <= 14.880960371558, exact side 7440480185779/500000000000.",
+        "s(209) <= 14.946223226448, exact side 934138951653/62500000000.",
+        "s(258) <= 16.563448002138, exact side 1656344800213717/100000000000000.",
+        "s(270) <= 16.929775353544, exact side 2116221919193/125000000000.",
+        "The release holds 13 further certificates the renamed issue does not name, at n = 108, 127, 131, 154, 175, 180, 236, 237, 263, 267, 302, 303, 306, each with the exact side its README and census.json print: s(108) <= 2726205253081/250000000000; s(127) <= 11810878787593/1000000000000; s(131) <= 5975556234483/500000000000; s(154) <= 807660400121/62500000000; s(175) <= 860260894843/62500000000; s(180) <= 13916993522483/1000000000000; s(236) <= 15863955747161/1000000000000; s(237) <= 12424179381/781250000; s(263) <= 16740412653757/1000000000000; s(267) <= 336776305399/20000000000; s(302) <= 17872029849083/1000000000000; s(303) <= 17913065462741/1000000000000; s(306) <= 8981716858749/500000000000. Each is an import of its own, compared in this packet.",
+        "The issue reports that this repository's sqpack/verify.py at 562fdbd and Evan Daniel's verify_cert.py at 31523f8 accept all six in exact arithmetic; the README at the pin also names devtools.check_rational_witness_independent, devtools.check_half_angle_area and devtools.decimal_pose_margins, and credits them to David Ellsworth. These are author reports; no source program ran here. No local or global optimality is claimed.",
+        "The issue credits Ryan Xu's construction at 103 (#432) and Nate Chaoweeraprasit's (SQUISH) at 258, and calls 153, 207, 209 and 270 new arrangements found by basin hopping with tilted boundary corridors. It discloses that Gemini was used for the search implementation, verification orchestration and issue preparation, directed by the author."
+      ]
+    }
+  ]
+}

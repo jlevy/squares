@@ -1,0 +1,7 @@
+# command: sha256sum replay4d-0.1.0 replay4d-0.1.1
+# cwd: the run directory: replay4d binaries and the unpacked release assets of closed-form-v1
+# python3: not used by this command
+# host: 4 cores; load 14.24 12.96 10.19; started 2026-10-14T17:59:08Z
+d52b8d880be7eddccdd944e79b2200fade503bef29c42ad809bd3c77eefb883a  replay4d-0.1.0
+fb84677ba8ba2448a60e96d3dd9e7cc0746cc35e11a6a4a0793496e4a5eab902  replay4d-0.1.1
+# finished 2026-10-14T17:59:08Z; exit 0; wall 0.040 s; CPU 0.0 s (user 0.004 + sys 0.002); load 14.24 12.96 10.19

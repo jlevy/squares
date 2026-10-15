@@ -1,0 +1,464 @@
+{
+  "bad": [
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-9/32",
+        "-1/4",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE",
+      "leaf": 0,
+      "result": {
+        "bound": "164290589112188799809583194423539895931967754436975172862443546212689163481502619750867147034307317209881649322620903476584343331443025154635599/179205622401615577162236106453543338302864010529554013058803176135041766631621019965124051990273009445979135315062594557870401412580025331040000",
+        "ok": false
+      },
+      "source": "controls/relabelled.jsonl:1"
+    }
+  ],
+  "bad_count": 1,
+  "cpu_seconds": 2.2088919999999996,
+  "family": {
+    "path": "interval_0.495_0.5/family.json",
+    "sha256": "224f6d0f43d6b864af1ec5cbeb1007fb39880c36881c36649d046dcc1fd72bd3"
+  },
+  "kinds": {
+    "CORE": 1,
+    "CORE1:Tx": 19
+  },
+  "leaves": [
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-9/32",
+        "-1/4",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE",
+      "result": {
+        "bound": "164290589112188799809583194423539895931967754436975172862443546212689163481502619750867147034307317209881649322620903476584343331443025154635599/179205622401615577162236106453543338302864010529554013058803176135041766631621019965124051990273009445979135315062594557870401412580025331040000",
+        "ok": false
+      },
+      "source": "controls/relabelled.jsonl:1"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-3/32",
+        "-1/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 24
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:2"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-1/32",
+        "0",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 24
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:3"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-7/32",
+        "-3/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 32
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:4"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-13/32",
+        "-3/8",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:5"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "1/32",
+        "1/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 24
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:6"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-1/16",
+        "-1/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:7"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-5/32",
+        "-1/8",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:8"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-1/8",
+        "-3/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:9"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-3/8",
+        "-11/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 48
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:10"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-3/16",
+        "-5/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 48
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:11"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-5/16",
+        "-9/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 64
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:12"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "3/32",
+        "1/8",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 48
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:13"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-11/32",
+        "-5/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 72
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:14"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "1/16",
+        "3/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 72
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:15"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "5/32",
+        "3/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:16"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "7/32",
+        "1/4",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 48
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:17"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "-1/4",
+        "-7/32",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 88
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:18"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "68/25",
+        "141/50",
+        "13/32",
+        "7/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 40
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:19"
+    },
+    {
+      "box": [
+        "167/100",
+        "177/100",
+        "141/50",
+        "73/25",
+        "-7/32",
+        "-3/16",
+        "99/200",
+        "1/2"
+      ],
+      "kind": "CORE1:Tx",
+      "result": {
+        "certify_core1": {
+          "ok": true,
+          "values": 32
+        },
+        "ok": true
+      },
+      "source": "controls/relabelled.jsonl:20"
+    }
+  ],
+  "mode": "leaves",
+  "ok": false,
+  "records": [
+    {
+      "path": "controls/relabelled.jsonl",
+      "sha256": "f9aa3a688605c027217474111215a165007766c635d6bc5456cdddb110073c82"
+    }
+  ],
+  "roots": 0,
+  "source_sha256": "92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193",
+  "version": "0.1.0",
+  "wall_seconds": 2.238145838
+}

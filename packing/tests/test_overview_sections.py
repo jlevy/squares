@@ -6,7 +6,10 @@ import re
 from dataclasses import replace
 from datetime import timedelta
 
+import pytest
+
 from devtools import overview_data, overview_sections
+from sqpack import release
 
 
 def test_results_table_omits_the_superseded_bottom_legend() -> None:
@@ -153,3 +156,36 @@ def test_atlas_preview_reuses_canonical_split_rows_and_keeps_every_case() -> Non
         "<noscript>",
     ):
         assert absent not in preview
+
+
+def test_reading_cards_keep_original_dates_when_a_new_edition_is_added(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        release,
+        "EXPLAINER_HISTORY",
+        (
+            release.PublicationHistoryEntry("v9.0.0", "January 1, 2030", "Later revision"),
+            *release.EXPLAINER_HISTORY,
+        ),
+    )
+    expected = {
+        "papers/n11-lower-bounds-explainer.html": "2026-09-05",
+        "papers/n11-threshold-bound-review.html": "2026-10-05",
+        "papers/n11-optimality-review.html": "2026-09-30",
+        "papers/square-packing-methods-survey.html": "2026-10-08",
+        "tutorial.html": "2026-10-01",
+        "tutorial-advanced.html": "2026-10-14",
+    }
+    cards = re.findall(
+        r'<a class="site-card site-card-link" href="([^"]+)"[^>]*>(.*?)</a>',
+        overview_sections.paper_cards(),
+        re.DOTALL,
+    )
+    assert len(cards) == len(expected)
+    for href, card in cards:
+        assert f'<time datetime="{expected[href]}">' in card
+        assert "2030" not in card
+        assert 'target="_blank"' not in card
+        assert card.index("site-card-label") < card.index("<h3>") < card.index("<time ")
+        assert card.index("</header>") < card.index("site-card-note")

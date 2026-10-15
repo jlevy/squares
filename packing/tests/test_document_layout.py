@@ -41,6 +41,7 @@ def test_documents_in_their_places_pass() -> None:
         _layout_problems(
             {
                 "README.md",
+                "TUTORIAL-ADVANCED.md",
                 "docs/project/README.md",
                 "docs/project/guides/verification-tooling.md",
                 "docs/project/policies/regularization-policy.md",
@@ -86,12 +87,23 @@ def test_a_dated_directory_wants_its_kind_and_a_real_date() -> None:
 def test_a_name_is_lowercase_kebab_case_or_a_registered_id() -> None:
     playbook = "packing/atlas/known-best/FIGURE-PLAYBOOK.md"
     report = "packing/campaign/explorations/X048-session-171-raw-row-support/D1_REPORT.md"
+    companion_copy = "packing/TUTORIAL-ADVANCED.md"
     snake = "packing/devtools/foo_bar.md"
     unregistered = "packing/foo/README-1-x.md"
     exploration = "packing/campaign/explorations/X-015-the-map-and-the-three-programs.md"
     experiment = "packing/benchmarks/validation-efficiency/VE-001-fast-gate.md"
-    named = {"AGENTS.md", playbook, report, snake, unregistered, exploration, experiment}
+    named = {
+        "AGENTS.md",
+        playbook,
+        report,
+        snake,
+        unregistered,
+        exploration,
+        experiment,
+        companion_copy,
+    }
     assert _layout_problems(named) == [
+        f"{companion_copy}: {NOT_KEBAB}",
         f"{playbook}: {NOT_KEBAB}",
         f"{report}: {NOT_KEBAB}",
         f"{snake}: {NOT_KEBAB}",

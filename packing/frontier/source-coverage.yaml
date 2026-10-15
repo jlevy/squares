@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:SourceCoverage/v1
   schema: source-coverage.schema.yaml
   status: enforced
-last_reviewed: '2026-10-13'
+last_reviewed: '2026-10-14'
 coverage_scope: 'Current public upper-bound catalogues and first-party result releases known to this
   project, the Schadt n=29 witness-contract regression source, and the September 2026 external executable
   lower-bound certificate releases. Their proof obligations and assurance are tracked by evidence.yaml;
@@ -3457,7 +3457,7 @@ sources:
     in-horizon sides as well as the beyond-horizon ones.
   claims_record: resources/web/evand-record-hunt3-2026-10-10/acquisition/claims.json
 - id: wand125-fine-net-n28-57425-2026-10-10
-  title: Wand125 reported n28 fine-net lower bound, no issue
+  title: Hosono reported n28 fine-net lower bound, no issue
   role: source-repository
   url: https://github.com/wand125/square-packing/tree/36b85b9f37efa7cc5d4464805cfb0f2d21576267/problems/square-lower-bounds/certificates/mixed_n28_L57425
   local: resources/web/wand125-fine-net-n28-n30-2026-10-10/
@@ -3479,7 +3479,7 @@ sources:
     maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
     supply a maintained capture or whole-net controls. Replay and adoption remain under think-i85v.
 - id: wand125-fine-net-n30-58925-2026-10-10
-  title: Wand125 reported n30 fine-net lower bound, no issue
+  title: Hosono reported n30 fine-net lower bound, no issue
   role: source-repository
   url: https://github.com/wand125/square-packing/tree/ff9f2692afe7d1e65a51bb079b61b3710b97fc82/problems/square-lower-bounds/certificates/mixed_n30_L58925
   local: resources/web/wand125-fine-net-n28-n30-2026-10-10/
@@ -3788,7 +3788,33 @@ sources:
     couzo-certificates-2026-10-11 are read against, holds the requested claims beyond the corpus
     only. On 12 October 2026 the cases at 304 and 305 adopted these certificates, the selected
     overrides below, each packing credited to Francisco Couzo's refinement of Nate
-    Chaoweeraprasit's issue 500 packing.
+    Chaoweeraprasit's issue 500 packing. The release's certificate at 175, which the issue does
+    not name, is a source entry of its own, couzo-certificates-2026-10-11-n175.
+- id: couzo-certificates-2026-10-11-n175
+  title: Francisco Couzo's exact rational certificate at 337078c, issue506's unnamed n175
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/337078ca3e05153aceb099237b175cf64af5748a
+  local: resources/web/couzo-certificates-2026-10-11/
+  source_key: '[Couzo n175 2026-10-11]'
+  scope:
+    n_values: [175]
+  reviewed: '2026-10-15'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-certificates-2026-10-11/acquisition/claims.json
+  evidence:
+  - E-couzo-506-n175-report
+  notes: >-
+    The release's certificate at 175, retained as the source wrote it in the
+    couzo-certificates-2026-10-11 packet and replayed there with the release, which issue 506
+    does not name. The author asked on issue 506 on 14 October 2026 for it to be imported, and
+    on 15 October T-185 recorded it at V0/C0 (E-couzo-506-n175-report), superseded by issue
+    528's composition (T-158), which holds the case 2.94e-03 below it. It has a source key of
+    its own because its credit is the 175's: the source's standing table says it was seeded
+    from Ryan Xu.
 - id: couzo-certificates-2026-10-11
   title: Francisco Couzo's exact rational certificates at 337078c, issue506
   role: source-repository
@@ -3820,9 +3846,10 @@ sources:
     print, the exact side rounded up; they supersede the rows tracked at 338, 339, 344, 375, 376,
     378 and 379, Evan Daniel's verified Hunt 3 row at 344 among them. T-152 records the in-corpus
     sides at 304 and 305 (couzo-certificates-2026-10-11-in-corpus). The four certificates the issue
-    does not name, at 175, 308, 340 and 343, are compared in the claim record and registered by no
-    entry. 175 was the smallest side known at its count until issue 528 (T-158), 2.94e-03 below
-    it, and stays in the packet unless its author asks for it to be registered (think-9fjl).
+    does not name, at 175, 308, 340 and 343, are compared in the claim record. 175 was the smallest
+    side known at its count until issue 528 (T-158), 2.94e-03 below it; the author asked on issue
+    506 on 14 October for it to be imported, and T-185 records it, superseded by T-158, in
+    couzo-certificates-2026-10-11-n175. 308, 340 and 343 are registered by no entry.
   claims_record: resources/web/couzo-certificates-2026-10-11/acquisition/beyond-horizon-claims.json
 - id: overbeck-n17-candidate-2026
   title: Seventeen unit squares, verification edition of a candidate proof that s(17) = L
@@ -3976,6 +4003,1530 @@ sources:
     fetched at the pin. On 12 October 2026 the case at 154 adopted the certificate, the selected
     override below, the packing credited to Evan Daniel and its start to Francisco Couzo's 5
     October packing of 155 squares, as the author asks.
+- id: couzo-certificates-2026-10-12-in-corpus
+  title: Francisco Couzo's exact rational certificates at 0fa0e0d, issue561, n156, n176, n237 and n271
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/0fa0e0de2ef0b414655e871b1baffcfe0d33c815
+  local: resources/web/couzo-certificates-2026-10-12/
+  source_key: '[Couzo certificates 2026-10-12]'
+  scope:
+    n_values:
+    - 156
+    - 176
+    - 237
+    - 271
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-certificates-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-couzo-561-certificate-report
+  - E-couzo-561-exact-feasibility
+  notes: >-
+    The four in-corpus certificates of the release, at 156, 176, 237 and 271, retained as
+    the source wrote them; T-161 records them, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided them again by the third route. They are a source entry of their own
+    because the release's claims record, which the beyond-horizon rows of
+    couzo-certificates-2026-10-12 are read against, holds the claims beyond the corpus only.
+    On 15 October 2026 the cases at 156 and 271 adopted these certificates, the selected
+    overrides below, PR 574's smaller ones (T-174) being held for the owner; at 176 T-165,
+    the author's re-solve of this 176, is smaller and holds the case, and at 237 issue 593
+    (T-183).
+- id: couzo-certificates-2026-10-12
+  title: Francisco Couzo's exact rational certificates at 0fa0e0d, issue561
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/0fa0e0de2ef0b414655e871b1baffcfe0d33c815
+  local: resources/web/couzo-certificates-2026-10-12/
+  source_key: '[Couzo certificates 2026-10-12]'
+  scope:
+    n_values:
+    - 338
+    - 344
+    - 375
+    - 376
+    - 378
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-certificates-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-couzo-561-certificate-report
+  notes: >-
+    All 9 complete certificates are retained as the source wrote them, each admitted only
+    where its exact side equals, or rounds up to, the side its source prints, and all 27
+    native jobs have full outcomes, which the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced. The
+    beyond-horizon rows at 338, 344, 375, 376 and 378 are read against the release's claims
+    record; the in-corpus certificates at 156, 176, 237 and 271 are an entry of their own
+    (couzo-certificates-2026-10-12-in-corpus), since that record holds the claims beyond the
+    corpus only.
+  claims_record: resources/web/couzo-certificates-2026-10-12/acquisition/beyond-horizon-claims.json
+- id: dostashev-compositions-2026-10-12
+  title: Daniil Ostashev's cut-out and composition packings at fe43a64, issue562
+  role: source-repository
+  url: https://github.com/dostashev/square-packing/tree/fe43a64ecf2581cdbd11830e8a5be0989746c5d3
+  local: resources/web/dostashev-compositions-2026-10-12/
+  source_key: '[Ostashev compositions 2026-10-12]'
+  scope:
+    n_values:
+    - 129
+    - 204
+    - 303
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/dostashev-compositions-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-ostashev-562-certificate-report
+  - E-ostashev-562-exact-feasibility
+  notes: >-
+    All 3 complete certificates are retained as the source wrote them, each admitted only
+    where its exact side equals, or rounds up to, the side its source prints. T-162 records
+    the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 9 native jobs
+    have full outcomes. On 15 October 2026 the cases at 129, 204 and 303 adopted these
+    certificates, the selected overrides below; PR 574's (T-174) are smaller there, and its
+    houses are held for the owner.
+- id: pingyou-n302-certificate-2026-10-12
+  title: PingYou Ltd's n302 certificate at 5a86ac3, issue564
+  role: source-repository
+  url: https://github.com/BuddenPing/square-packing-certificates/tree/5a86ac3ec09beae5f11e2a8f7115954e76fa616a
+  local: resources/web/pingyou-n302-certificate-2026-10-12/
+  source_key: '[PingYou n302 certificate 2026-10-12]'
+  scope:
+    n_values:
+    - 302
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-n302-certificate-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-pingyou-564-certificate-report
+  - E-pingyou-564-exact-feasibility
+  notes: >-
+    The 1 complete certificate is kept as derived exact facts, no upstream byte retained,
+    admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-164 records the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 3 native jobs
+    have full outcomes. No selected override is created: at 302 issue 583's certificate, as
+    issue 586's packet retains it (T-181), is smaller and holds the case.
+- id: couzo-certificates-2026-10-13-in-corpus
+  title: Francisco Couzo's exact rational certificates at b85dee2, issues 583 and 586, n154, n176, n211, n241 and n302
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d
+  local: resources/web/couzo-certificates-2026-10-13/
+  source_key: '[Couzo certificates 2026-10-13]'
+  scope:
+    n_values:
+    - 154
+    - 176
+    - 211
+    - 241
+    - 302
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-certificates-2026-10-13/acquisition/claims.json
+  evidence:
+  - E-couzo-583-586-certificate-report
+  - E-couzo-586-exact-feasibility
+  - E-couzo-586-n302-exact-feasibility
+  notes: >-
+    The five in-corpus certificates of the release, at 154, 176, 211, 241 and 302, retained
+    as the source wrote them; T-182 records 154, 211 and 241, T-181 the 302, which issue
+    583's revision also pins, and T-165 the 176, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided them again by the third route. They are a source entry of their own
+    because the release's claims record, which the beyond-horizon rows of
+    couzo-certificates-2026-10-13 are read against, holds the claims beyond the corpus only.
+    On 15 October 2026 the cases at 154, 176, 211, 241 and 302 adopted these certificates,
+    the selected overrides below; at 176 PR 574's (T-174) is smaller, and its houses are
+    held for the owner.
+- id: couzo-certificates-2026-10-13
+  title: Francisco Couzo's exact rational certificates at b85dee2, issues 583 and 586
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d
+  local: resources/web/couzo-certificates-2026-10-13/
+  source_key: '[Couzo certificates 2026-10-13]'
+  scope:
+    n_values:
+    - 339
+    - 344
+    - 375
+    - 376
+    - 378
+    - 379
+    - 380
+    - 381
+    - 382
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-certificates-2026-10-13/acquisition/claims.json
+  evidence:
+  - E-couzo-583-586-certificate-report
+  notes: >-
+    All 14 complete certificates are retained as the source wrote them, each admitted only
+    where its exact side equals, or rounds up to, the side its source prints, and all 42
+    native jobs have full outcomes, which the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced. The
+    beyond-horizon rows at 339, 344, 375, 376, 378, 379, 380, 381 and 382 are read against
+    the release's claims record; the in-corpus certificates at 154, 176, 211, 241 and 302
+    are an entry of their own (couzo-certificates-2026-10-13-in-corpus), since that record
+    holds the claims beyond the corpus only.
+  claims_record: resources/web/couzo-certificates-2026-10-13/acquisition/beyond-horizon-claims.json
+- id: pingyou-n153-refinement-2026-10-12
+  title: PingYou Ltd's refined n153 certificate at 431186b, issue504
+  role: source-repository
+  url: https://github.com/BuddenPing/square-packing-certificates/tree/431186b6c20d444b26b5d321a1cd85d2f2d63274
+  local: resources/web/pingyou-n153-refinement-2026-10-12/
+  source_key: '[PingYou n153 refinement 2026-10-12]'
+  scope:
+    n_values:
+    - 153
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-n153-refinement-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-pingyou-504-refinement-report
+  - E-pingyou-504-refinement-exact-feasibility
+  notes: >-
+    The 1 complete certificate is kept as derived exact facts, no upstream byte retained,
+    admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-166 records the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 3 native jobs
+    have full outcomes. No selected override is created: at 153 issue 573 (T-173) is smaller
+    and holds the case.
+- id: pingyou-n207-refinement-2026-10-12
+  title: PingYou Ltd's refined n207 certificate at 1041863, issue503
+  role: source-repository
+  url: https://github.com/BuddenPing/square-packing-certificates/tree/10418630bfb00853a539ad7ad9908b2d746147c0
+  local: resources/web/pingyou-n207-refinement-2026-10-12/
+  source_key: '[PingYou n207 refinement 2026-10-12]'
+  scope:
+    n_values:
+    - 207
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-n207-refinement-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-pingyou-503-refinement-report
+  - E-pingyou-503-refinement-exact-feasibility
+  notes: >-
+    The 1 complete certificate is kept as derived exact facts, no upstream byte retained,
+    admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-167 records the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 3 native jobs
+    have full outcomes. No selected override is created: at 207 issue 573 (T-173) is smaller
+    and holds the case.
+- id: pingyou-n146-refinement-2026-10-12
+  title: PingYou Ltd's n146 refinement at 820b9ff, issue566
+  role: source-repository
+  url: https://github.com/BuddenPing/square-packing-certificates/tree/820b9ffb11dd602d735f7a03cd472db98a2d3bb6
+  local: resources/web/pingyou-n146-refinement-2026-10-12/
+  source_key: '[PingYou n146 refinement 2026-10-12]'
+  scope:
+    n_values:
+    - 146
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-n146-refinement-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-pingyou-566-certificate-report
+  - E-pingyou-566-exact-feasibility
+  notes: >-
+    The 1 complete certificate is kept as derived exact facts, no upstream byte retained,
+    admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-168 records the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 3 native jobs
+    have full outcomes. On 15 October 2026 the case at 146 adopted this certificate, the
+    selected override below; PR 574's (T-174) is smaller there, and its houses are held for
+    the owner.
+- id: pingyou-n261-refinement-2026-10-12
+  title: PingYou Ltd's n261 refinement at e70342d, issue567
+  role: source-repository
+  url: https://github.com/BuddenPing/square-packing-certificates/tree/e70342d149f9363b32ef6043ecfa8d0e0c4b51aa
+  local: resources/web/pingyou-n261-refinement-2026-10-12/
+  source_key: '[PingYou n261 refinement 2026-10-12]'
+  scope:
+    n_values:
+    - 261
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-n261-refinement-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-pingyou-567-certificate-report
+  - E-pingyou-567-exact-feasibility
+  notes: >-
+    The 1 complete certificate is kept as derived exact facts, no upstream byte retained,
+    admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-169 records the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 3 native jobs
+    have full outcomes. On 15 October 2026 the case at 261 adopted this certificate, the
+    selected override below; PR 574's (T-174) is smaller there, and its houses are held for
+    the owner.
+- id: pingyou-n105-refinement-2026-10-12
+  title: PingYou Ltd's n105 contact refinement at 260aaf5, issue568
+  role: source-repository
+  url: https://github.com/BuddenPing/square-packing-certificates/tree/260aaf50230483654802790589c2dfce73237604
+  local: resources/web/pingyou-n105-refinement-2026-10-12/
+  source_key: '[PingYou n105 refinement 2026-10-12]'
+  scope:
+    n_values:
+    - 105
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-n105-refinement-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-pingyou-568-certificate-report
+  - E-pingyou-568-exact-feasibility
+  notes: >-
+    The 1 complete certificate is kept as derived exact facts, no upstream byte retained,
+    admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-170 records the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 3 native jobs
+    have full outcomes. On 15 October 2026 the case at 105 adopted this certificate, the
+    selected override below; PR 574's (T-174) is smaller there, and its houses are held for
+    the owner.
+- id: pingyou-n272-refinement-2026-10-12
+  title: PingYou Ltd's n272 contact refinement at 260aaf5, issue569
+  role: source-repository
+  url: https://github.com/BuddenPing/square-packing-certificates/tree/260aaf50230483654802790589c2dfce73237604
+  local: resources/web/pingyou-n272-refinement-2026-10-12/
+  source_key: '[PingYou n272 refinement 2026-10-12]'
+  scope:
+    n_values:
+    - 272
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-n272-refinement-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-pingyou-569-certificate-report
+  - E-pingyou-569-exact-feasibility
+  notes: >-
+    The 1 complete certificate is kept as derived exact facts, no upstream byte retained,
+    admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-171 records the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 3 native jobs
+    have full outcomes. On 15 October 2026 the case at 272 adopted this certificate, the
+    selected override below; PR 574's (T-174) is smaller there, and its houses are held for
+    the owner.
+- id: couzo-issue583-2026-10-13
+  title: Francisco Couzo's exact rational certificates at 4596670, issues 570 and 583
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/45966700cf15d3f42e064fd6da51fcb9a5def2be
+  local: resources/web/couzo-issue583-2026-10-13/
+  source_key: '[Couzo issue-583 certificates 2026-10-13]'
+  scope:
+    n_values:
+    - 154
+    - 211
+    - 241
+    - 339
+    - 379
+    - 380
+    - 382
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-issue583-2026-10-13/acquisition/claims.json
+  evidence:
+  - E-couzo-583-certificate-report
+  - E-couzo-583-exact-feasibility
+  notes: >-
+    All 7 complete certificates are retained as the source wrote them, each admitted only
+    where its exact side equals, or rounds up to, the side its source prints. T-172 and
+    T-181 record the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 21 native jobs
+    have full outcomes. No selected override is created: at 154, 211 and 241 issue 586's
+    certificates (T-182) are smaller and hold the cases.
+  claims_record: resources/web/couzo-issue583-2026-10-13/acquisition/beyond-horizon-claims.json
+- id: mishapolk-exact-certificates-2026-10-12
+  title: Mishapolk's exact certificates at 336bdf5, issue573
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/tree/336bdf5efab4784e54e0ac32edf3ed12f9c8af7e
+  local: resources/web/mishapolk-exact-certificates-2026-10-12/
+  source_key: '[Mishapolk exact certificates 2026-10-12]'
+  scope:
+    n_values:
+    - 103
+    - 153
+    - 207
+    - 209
+    - 258
+    - 270
+  reviewed: '2026-10-14'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/mishapolk-exact-certificates-2026-10-12/acquisition/claims.json
+  evidence:
+  - E-mishapolk-573-certificate-report
+  - E-mishapolk-573-exact-feasibility
+  notes: >-
+    All 6 complete certificates are kept as derived exact facts, no upstream byte retained,
+    each admitted only where its exact side equals, or rounds up to, the side its source
+    prints. T-173 records the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 12 native jobs
+    have full outcomes. On 15 October 2026 the cases at 153 and 207 adopted these
+    certificates, the selected overrides below; PR 574's algebraic certificates there
+    (T-174) are smaller and rest on one route, and whether to adopt them is the owner's
+    decision (RP-3).
+- id: pingyou-pr574-certificates-2026-10-13
+  title: PingYou Ltd's PR 574 certificate refinements at 4c319c2
+  role: source-repository
+  url: https://github.com/BuddenPing/squares/tree/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde
+  local: resources/web/pingyou-pr574-certificates-2026-10-13/
+  source_key: '[PingYou PR 574 certificates 2026-10-13]'
+  scope:
+    n_values:
+    - 28
+    - 37
+    - 39
+    - 41
+    - 50
+    - 55
+    - 68
+    - 69
+    - 71
+    - 83
+    - 84
+    - 86
+    - 87
+    - 88
+    - 102
+    - 103
+    - 105
+    - 106
+    - 108
+    - 110
+    - 123
+    - 126
+    - 127
+    - 128
+    - 129
+    - 130
+    - 131
+    - 132
+    - 146
+    - 152
+    - 155
+    - 156
+    - 171
+    - 172
+    - 175
+    - 176
+    - 177
+    - 179
+    - 180
+    - 181
+    - 182
+    - 198
+    - 199
+    - 204
+    - 205
+    - 206
+    - 208
+    - 209
+    - 210
+    - 211
+    - 228
+    - 230
+    - 232
+    - 235
+    - 236
+    - 237
+    - 238
+    - 239
+    - 240
+    - 241
+    - 258
+    - 259
+    - 261
+    - 263
+    - 264
+    - 266
+    - 267
+    - 268
+    - 269
+    - 270
+    - 271
+    - 272
+    - 273
+    - 292
+    - 293
+    - 295
+    - 297
+    - 300
+    - 301
+    - 303
+    - 304
+    - 305
+    - 306
+    - 307
+    - 308
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json
+  evidence:
+  - E-pingyou-574-certificate-report
+  - E-pingyou-574-exact-feasibility
+  - E-pingyou-574-algebraic-feasibility
+  notes: >-
+    All 85 complete certificates are kept as derived exact facts, no upstream byte retained,
+    each admitted only where its exact side equals, or rounds up to, the side its source
+    prints. T-174 records the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 117 native jobs
+    have full outcomes. No selected override is created: the houses at the 60 rational
+    counts where T-174 is smallest are held for the owner (devtools.select_houses.HELD), the
+    next candidate holding the case at 10 of them, and its algebraic certificates at 70, 153
+    and 207 wait on the owner's decision RP-3.
+- id: dostashev-merged-bands-2026-10-13
+  title: Daniil Ostashev's merged-band and relaxed-composition packings at b909e1b, issue575
+  role: source-repository
+  url: https://github.com/dostashev/square-packing/tree/b909e1b74cda50906e12b4373e010ddee39e47e4
+  local: resources/web/dostashev-merged-bands-2026-10-13/
+  source_key: '[Ostashev merged bands 2026-10-13]'
+  scope:
+    n_values:
+    - 176
+    - 211
+    - 241
+    - 304
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/dostashev-merged-bands-2026-10-13/acquisition/claims.json
+  evidence:
+  - E-ostashev-575-certificate-report
+  - E-ostashev-575-exact-feasibility
+  notes: >-
+    All 4 complete certificates are retained as the source wrote them, each admitted only
+    where its exact side equals, or rounds up to, the side its source prints. T-175 records
+    the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 12 native jobs
+    have full outcomes. On 15 October 2026 the case at 304 adopted its certificate, the
+    selected override below; at 211 and 241 issue 586's certificates (T-182) are smaller.
+- id: wand125-fine-net-n39-66625-2026-10-13
+  title: Hosono reported n39 fine-net lower bound, no issue
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/dfb2cf85fdf9ee5f95c5ec2c67fd49210854f146/problems/square-lower-bounds/certificates/mixed_n39_L66625
+  local: resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/
+  source_key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
+  scope:
+    n_values:
+    - 39
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md
+  evidence:
+  - E-wand125-fine-net-n39-66625-report
+  notes: The reported 533/80 at n39 is above T-110's 133/20, which is unchanged. Complete release-asset
+    and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
+    maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
+    supply a maintained capture or whole-net controls; the 99/100 mutant's axis refusal falls outside
+    the census's AXIS_ROUNDING. Replay and adoption remain under think-u0av.
+- id: wand125-fine-net-n44-69975-2026-10-13
+  title: Hosono reported n44 fine-net lower bound, no issue
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/9f24185c602c8c0b83cf6a88b11a69ea8d668673/problems/square-lower-bounds/certificates/mixed_n44_L69975
+  local: resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/
+  source_key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
+  scope:
+    n_values:
+    - 44
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md
+  evidence:
+  - E-wand125-fine-net-n44-69975-report
+  notes: The reported 2799/400 at n44 is above T-090's 2789/400, which is unchanged. Complete release-asset
+    and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
+    maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
+    supply a maintained capture or whole-net controls. Replay and adoption remain under think-u0av.
+- id: wand125-fine-net-n37-64975-2026-10-13
+  title: Hosono reported n37 fine-net lower bound, no issue
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/7a42c16eacaab112b537ab09e89d3485f6f4c75f/problems/square-lower-bounds/certificates/mixed_n37_L64975
+  local: resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/
+  source_key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
+  scope:
+    n_values:
+    - 37
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md
+  evidence:
+  - E-wand125-fine-net-n37-64975-report
+  notes: The reported 2599/400 at n37 is above T-069's 161/25, which is unchanged. Complete release-asset
+    and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
+    maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
+    supply a maintained capture or whole-net controls. Replay and adoption remain under think-u0av.
+- id: fang-excess-theorem-2026-10-13
+  title: Kevin Fang's n^2 - n + F(n) theorem and its inventory at 078789a (no issue)
+  role: source-repository
+  url: https://github.com/TheSnakeFang/squarepack-certs/tree/078789a4cfd36f915f1bfbe76d742413d79b2965
+  local: resources/web/fang-excess-theorem-2026-10-13/
+  source_key: '[Fang excess theorem 2026-10-13]'
+  scope:
+    n_values:
+    - 211
+    - 241
+    - 273
+    - 307
+    - 932
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/fang-excess-theorem-2026-10-13/acquisition/claims.json
+  evidence:
+  - E-fang-excess-theorem-report
+  - E-fang-excess-theorem-exact-feasibility
+  notes: All 5 complete certificates are retained as the source wrote them, each admitted only where its
+    exact side equals, or rounds up to, the side its source prints. T-NNN records the in-horizon report.
+    All 18 native jobs have full outcomes. No selected override or superseded claim is created at this
+    source-only stage; current cases and earlier source ownership remain unchanged.
+  claims_record: resources/web/fang-excess-theorem-2026-10-13/acquisition/beyond-horizon-claims.json
+- id: wand125-linear-n145-1224-2026-10-13
+  title: Linear point, segment and rectangle certificate for n = 145, no issue
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/22f06b31a9295c8185be5d30a1a7b19982b16847/problems/square-lower-bounds/certificates/mixed_n145_L1224
+  local: resources/web/wand125-linear-n145-2026-10-13/
+  source_key: '[wand125 linear n145 2026-10-13]'
+  scope:
+    n_values:
+    - 145
+    - 146
+    - 147
+    - 148
+    - 149
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-linear-n145-2026-10-13/README.md
+  evidence:
+  - E-wand125-linear-n145-1224-report
+  notes: Revision 22f06b31a9295c8185be5d30a1a7b19982b16847, retrieved at 2026-10-14T09:22Z. A measure
+    of points, uniform segments and uniform rectangles on T-080's net, checked by code/unified_linear_verify.cpp,
+    byte for byte T-080's checker; by its mass it raises n = 145 to 149 above Green's and Nagamochi's
+    reported values and the Karakus strip bounds. The T-080 route's exact premises, bundle bindings and
+    input enclosures pass, and a two-angle replay sample returned the certificate's records; the complete
+    replay waits under think-u0av. The release asset is pinned by digest and not retained.
+- id: wand125-closed-form-2026-10-14
+  title: Closed-form lower bound for every non-square N >= 49, no issue
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/9a28a84bd55dc124bfa2919bb6c4fb504dda3149/problems/closed-form
+  local: resources/web/wand125-closed-form-2026-10-14/
+  source_key: '[wand125 closed form 2026-10-14]'
+  scope:
+    n_values:
+    - 50
+    - 51
+    - 52
+    - 53
+    - 54
+    - 55
+    - 56
+    - 57
+    - 58
+    - 59
+    - 60
+    - 61
+    - 62
+    - 63
+    - 65
+    - 66
+    - 67
+    - 68
+    - 69
+    - 70
+    - 71
+    - 72
+    - 73
+    - 74
+    - 75
+    - 76
+    - 77
+    - 78
+    - 79
+    - 80
+    - 82
+    - 83
+    - 84
+    - 85
+    - 86
+    - 87
+    - 88
+    - 89
+    - 90
+    - 91
+    - 92
+    - 93
+    - 94
+    - 95
+    - 96
+    - 97
+    - 98
+    - 99
+    - 101
+    - 102
+    - 103
+    - 104
+    - 105
+    - 106
+    - 107
+    - 108
+    - 109
+    - 110
+    - 111
+    - 112
+    - 113
+    - 114
+    - 115
+    - 116
+    - 117
+    - 118
+    - 119
+    - 120
+    - 122
+    - 123
+    - 124
+    - 125
+    - 126
+    - 127
+    - 128
+    - 129
+    - 130
+    - 131
+    - 132
+    - 133
+    - 134
+    - 135
+    - 136
+    - 137
+    - 138
+    - 139
+    - 140
+    - 141
+    - 142
+    - 143
+    - 145
+    - 146
+    - 147
+    - 148
+    - 149
+    - 150
+    - 151
+    - 152
+    - 153
+    - 154
+    - 155
+    - 156
+    - 157
+    - 158
+    - 159
+    - 160
+    - 161
+    - 162
+    - 163
+    - 164
+    - 165
+    - 166
+    - 167
+    - 168
+    - 170
+    - 171
+    - 172
+    - 173
+    - 174
+    - 175
+    - 176
+    - 177
+    - 178
+    - 179
+    - 180
+    - 181
+    - 182
+    - 183
+    - 184
+    - 185
+    - 186
+    - 187
+    - 188
+    - 189
+    - 190
+    - 191
+    - 192
+    - 193
+    - 194
+    - 195
+    - 197
+    - 198
+    - 199
+    - 200
+    - 201
+    - 202
+    - 203
+    - 204
+    - 205
+    - 206
+    - 207
+    - 208
+    - 209
+    - 210
+    - 211
+    - 212
+    - 213
+    - 214
+    - 215
+    - 216
+    - 217
+    - 218
+    - 219
+    - 220
+    - 221
+    - 222
+    - 223
+    - 224
+    - 226
+    - 227
+    - 228
+    - 229
+    - 230
+    - 231
+    - 232
+    - 233
+    - 234
+    - 235
+    - 236
+    - 237
+    - 238
+    - 239
+    - 240
+    - 241
+    - 242
+    - 243
+    - 244
+    - 245
+    - 246
+    - 247
+    - 248
+    - 249
+    - 250
+    - 251
+    - 252
+    - 253
+    - 254
+    - 255
+    - 257
+    - 258
+    - 259
+    - 260
+    - 261
+    - 262
+    - 263
+    - 264
+    - 265
+    - 266
+    - 267
+    - 268
+    - 269
+    - 270
+    - 271
+    - 272
+    - 273
+    - 274
+    - 275
+    - 276
+    - 277
+    - 278
+    - 279
+    - 280
+    - 281
+    - 282
+    - 283
+    - 284
+    - 285
+    - 286
+    - 287
+    - 288
+    - 290
+    - 291
+    - 292
+    - 293
+    - 294
+    - 295
+    - 296
+    - 297
+    - 298
+    - 299
+    - 300
+    - 301
+    - 302
+    - 303
+    - 304
+    - 305
+    - 306
+    - 307
+    - 308
+    - 309
+    - 310
+    - 311
+    - 312
+    - 313
+    - 314
+    - 315
+    - 316
+    - 317
+    - 318
+    - 319
+    - 320
+    - 321
+    - 322
+    - 323
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-closed-form-2026-10-14/README.md
+  evidence:
+  - E-wand125-closed-form-report
+  notes: Revision 9a28a84bd55dc124bfa2919bb6c4fb504dda3149, retrieved at 2026-10-14T09:29:10Z; problems/closed-form
+    is unchanged since eb0fd19 of 13 October. A theorem for every non-square N >= 49 from a C4-symmetric
+    segment measure on 34 intervals of the fractional part; above the reported lower bound at 156 counts
+    and the verified one at 189. The source's structure check passed here on all 68 families and an exact
+    evaluation here agrees with the source's a(N) at every count to 3600; the 136 records (4,294 CPU-hours
+    by the source) are not replayed. The release is pinned by digest and not retained.
+- id: mishapolk-records-2026-10-14
+  title: Mishapolk's square-packing-records at 46f638c, issue593
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/tree/46f638ce0537beeb1bad24242c6a3d357eecd9ee
+  local: resources/web/mishapolk-records-2026-10-14/
+  source_key: '[Mishapolk records 2026-10-14]'
+  scope:
+    n_values:
+    - 68
+    - 70
+    - 84
+    - 86
+    - 88
+    - 102
+    - 103
+    - 105
+    - 106
+    - 108
+    - 110
+    - 123
+    - 126
+    - 127
+    - 129
+    - 130
+    - 131
+    - 132
+    - 146
+    - 152
+    - 153
+    - 154
+    - 155
+    - 156
+    - 172
+    - 175
+    - 176
+    - 177
+    - 179
+    - 180
+    - 181
+    - 182
+    - 199
+    - 204
+    - 206
+    - 207
+    - 208
+    - 209
+    - 210
+    - 211
+    - 228
+    - 232
+    - 236
+    - 237
+    - 238
+    - 239
+    - 240
+    - 241
+    - 258
+    - 259
+    - 261
+    - 263
+    - 264
+    - 266
+    - 267
+    - 268
+    - 269
+    - 270
+    - 271
+    - 272
+    - 273
+    - 292
+    - 295
+    - 297
+    - 301
+    - 302
+    - 303
+    - 304
+    - 305
+    - 306
+    - 307
+    - 308
+  reviewed: '2026-10-14'
+  source_date: '2026-10-14'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/mishapolk-records-2026-10-14/acquisition/claims.json
+  evidence:
+  - E-mishapolk-593-certificate-report
+  - E-mishapolk-593-exact-feasibility
+  notes: >-
+    All 72 complete certificates are kept as derived exact facts, no upstream byte retained,
+    each admitted only where its exact side equals, or rounds up to, the side its source
+    prints. T-183 records the in-horizon report, at V3/C3 since the 14 October review
+    (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
+    replay and decided the cited certificates again by the third route. All 9 native jobs
+    have full outcomes. On 15 October 2026 the case at 237 adopted its certificate, the
+    selected override below.
+- id: bengreff-s76-certificate-2026-10-14
+  title: Benjamin Greff's mixed cover for s(76) = 9, issue594
+  role: source-repository
+  url: https://github.com/bengreff/s76-certificate/tree/1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f
+  local: resources/web/bengreff-s76-certificate-2026-10-14/
+  source_key: '[bengreff s76 certificate 2026-10-14]'
+  scope:
+    n_values:
+    - 76
+  reviewed: '2026-10-14'
+  source_date: '2026-10-14'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/bengreff-s76-certificate-2026-10-14/README.md
+  evidence:
+  - E-bengreff-594-cover-report
+  notes: The whole tree is retained at the pin. The cover is reported to settle s(76) = 9 with the grid;
+    the case's lower lanes are unchanged pending review (think-osvq).
+- id: evand-compositions-2026-10-13
+  title: Evan Daniel's two-piece composition certificates at 231d41d, issue584
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/231d41df7a03fccd89aa6e9ef5a540348a8214cc
+  local: resources/web/evand-compositions-2026-10-13/
+  source_key: '[Daniel compositions 2026-10-13]'
+  scope:
+    n_values:
+    - 339
+    - 364
+    - 375
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/evand-compositions-2026-10-13/README.md
+  - resources/web/evand-compositions-2026-10-13/acquisition/claims.json
+  evidence:
+  - E-evand-584-compositions-report
+  notes: All 3 complete certificates are retained as the source wrote them, each admitted only where its
+    exact side equals, or rounds up to, the side its source prints. Every requested count lies beyond
+    the case corpus, so no register entry records them; each is a beyond-horizon row. All 9 native jobs
+    have full outcomes. No selected override or superseded claim is created at this source-only stage;
+    current cases and earlier source ownership remain unchanged.
+  claims_record: resources/web/evand-compositions-2026-10-13/acquisition/beyond-horizon-claims.json
+- id: evand-fresh-compositions-2026-10-14
+  title: Evan Daniel's fresh-pass composition certificates at 622cd2e, issue596
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/622cd2e21407700fe8d5ac5943af820725107921
+  local: resources/web/evand-fresh-compositions-2026-10-14/
+  source_key: '[Daniel fresh compositions 2026-10-14]'
+  scope:
+    n_values:
+    - 365
+    - 370
+    - 460
+  reviewed: '2026-10-14'
+  source_date: '2026-10-14'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/evand-fresh-compositions-2026-10-14/README.md
+  - resources/web/evand-fresh-compositions-2026-10-14/acquisition/claims.json
+  evidence:
+  - E-evand-596-compositions-report
+  notes: All 3 complete certificates are retained as the source wrote them, each admitted only where its
+    exact side equals, or rounds up to, the side its source prints. Every requested count lies beyond
+    the case corpus, so no register entry records them; each is a beyond-horizon row. All 9 native jobs
+    have full outcomes. No selected override or superseded claim is created at this source-only stage;
+    current cases and earlier source ownership remain unchanged.
+  claims_record: resources/web/evand-fresh-compositions-2026-10-14/acquisition/beyond-horizon-claims.json
+- id: fang-direct-certificates-2026-10-13
+  title: Kevin Fang's direct certificates at 078789a, no issue
+  role: source-repository
+  url: https://github.com/TheSnakeFang/squarepack-certs/tree/078789a4cfd36f915f1bfbe76d742413d79b2965
+  local: resources/web/fang-direct-certificates-2026-10-13/
+  source_key: '[Fang direct certificates 2026-10-13]'
+  scope:
+    n_values:
+    - 380
+    - 381
+    - 382
+    - 421
+    - 422
+    - 463
+    - 464
+    - 507
+    - 508
+    - 553
+    - 601
+    - 651
+    - 758
+    - 814
+  reviewed: '2026-10-14'
+  source_date: '2026-10-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/fang-direct-certificates-2026-10-13/README.md
+  - resources/web/fang-direct-certificates-2026-10-13/acquisition/claims.json
+  evidence:
+  - E-fang-direct-certificate-report
+  - E-fang-direct-exact-feasibility
+  notes: 'All 14 complete certificates are retained as the source wrote them, each admitted only where
+    its exact side equals, or rounds up to, the side its source prints. Every requested count lies beyond
+    the case corpus, so no register entry records them; each is a beyond-horizon row. All 42 native jobs
+    have full outcomes. No selected override or superseded claim is created at this source-only stage;
+    current cases and earlier source ownership remain unchanged. The rows at all 14 counts are verified:
+    both maintained routes replayed every certificate (E-fang-direct-exact-feasibility), the nine jobs
+    at 380, 381 and 382 first, which the 14 October review confirmed, and the 33 at 421 to 814 on 14
+    October 2026 under think-7bw3, once the owner set a replay budget, with a fresh serial check --replay
+    of all 42 equal to the retained rows.'
+  claims_record: resources/web/fang-direct-certificates-2026-10-13/acquisition/beyond-horizon-claims.json
+- id: wand125-closed-form-cfcheck-2026-10-14
+  title: Independent checker cfcheck for the closed-form bound, intervals 1 and 34, issue 600
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/746e2c5ac7a7f534996dd50a5e1fd9f1d8836a8d/problems/closed-form/indep-checker
+  local: resources/web/wand125-closed-form-cfcheck-2026-10-14/
+  source_key: '[wand125 cfcheck 2026-10-14]'
+  scope:
+    n_values:
+    - 50
+    - 51
+    - 52
+    - 53
+    - 54
+    - 55
+    - 56
+    - 57
+    - 58
+    - 59
+    - 60
+    - 61
+    - 62
+    - 63
+    - 65
+    - 66
+    - 67
+    - 68
+    - 69
+    - 70
+    - 71
+    - 72
+    - 73
+    - 74
+    - 75
+    - 76
+    - 77
+    - 78
+    - 79
+    - 80
+    - 82
+    - 83
+    - 84
+    - 85
+    - 86
+    - 87
+    - 88
+    - 89
+    - 90
+    - 91
+    - 92
+    - 93
+    - 94
+    - 95
+    - 96
+    - 97
+    - 98
+    - 99
+    - 101
+    - 102
+    - 103
+    - 104
+    - 105
+    - 106
+    - 107
+    - 108
+    - 109
+    - 110
+    - 111
+    - 112
+    - 113
+    - 114
+    - 115
+    - 116
+    - 117
+    - 118
+    - 119
+    - 120
+    - 122
+    - 123
+    - 124
+    - 125
+    - 126
+    - 127
+    - 128
+    - 129
+    - 130
+    - 131
+    - 132
+    - 133
+    - 134
+    - 135
+    - 136
+    - 137
+    - 138
+    - 139
+    - 140
+    - 141
+    - 142
+    - 143
+    - 145
+    - 146
+    - 147
+    - 148
+    - 149
+    - 150
+    - 151
+    - 152
+    - 153
+    - 154
+    - 155
+    - 156
+    - 157
+    - 158
+    - 159
+    - 160
+    - 161
+    - 162
+    - 163
+    - 164
+    - 165
+    - 166
+    - 167
+    - 168
+    - 170
+    - 171
+    - 172
+    - 173
+    - 174
+    - 175
+    - 176
+    - 177
+    - 178
+    - 179
+    - 180
+    - 181
+    - 182
+    - 183
+    - 184
+    - 185
+    - 186
+    - 187
+    - 188
+    - 189
+    - 190
+    - 191
+    - 192
+    - 193
+    - 194
+    - 195
+    - 197
+    - 198
+    - 199
+    - 200
+    - 201
+    - 202
+    - 203
+    - 204
+    - 205
+    - 206
+    - 207
+    - 208
+    - 209
+    - 210
+    - 211
+    - 212
+    - 213
+    - 214
+    - 215
+    - 216
+    - 217
+    - 218
+    - 219
+    - 220
+    - 221
+    - 222
+    - 223
+    - 224
+    - 226
+    - 227
+    - 228
+    - 229
+    - 230
+    - 231
+    - 232
+    - 233
+    - 234
+    - 235
+    - 236
+    - 237
+    - 238
+    - 239
+    - 240
+    - 241
+    - 242
+    - 243
+    - 244
+    - 245
+    - 246
+    - 247
+    - 248
+    - 249
+    - 250
+    - 251
+    - 252
+    - 253
+    - 254
+    - 255
+    - 257
+    - 258
+    - 259
+    - 260
+    - 261
+    - 262
+    - 263
+    - 264
+    - 265
+    - 266
+    - 267
+    - 268
+    - 269
+    - 270
+    - 271
+    - 272
+    - 273
+    - 274
+    - 275
+    - 276
+    - 277
+    - 278
+    - 279
+    - 280
+    - 281
+    - 282
+    - 283
+    - 284
+    - 285
+    - 286
+    - 287
+    - 288
+    - 290
+    - 291
+    - 292
+    - 293
+    - 294
+    - 295
+    - 296
+    - 297
+    - 298
+    - 299
+    - 300
+    - 301
+    - 302
+    - 303
+    - 304
+    - 305
+    - 306
+    - 307
+    - 308
+    - 309
+    - 310
+    - 311
+    - 312
+    - 313
+    - 314
+    - 315
+    - 316
+    - 317
+    - 318
+    - 319
+    - 320
+    - 321
+    - 322
+    - 323
+  reviewed: '2026-10-14'
+  source_date: '2026-10-14'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-closed-form-cfcheck-2026-10-14/README.md
+  evidence:
+  - E-wand125-closed-form-cfcheck-report
+  - E-wand125-closed-form-cfcheck-sample
+  notes: Revision 746e2c5ac7a7f534996dd50a5e1fd9f1d8836a8d, retrieved at 2026-10-14T11:34:13Z, the child
+    of the 9a28a84 pin; it adds indep-checker/ and changes the folder README, and the folder's other 25
+    files are byte-identical. cfcheck, the source's second checker, written from SPEC.md and sharing no
+    code with replay4d, accepted every leaf of intervals 1 and 34 by the source's receipts (3,138,681
+    leaves); here its premise checks passed in full on both intervals and a sample of 2,909 leaves was
+    accepted, with three re-sealed mutants refused.
+- id: mishapolk-kkt-refinements-2026-10-14
+  title: Mykhailo Polkovskyi's KKT refinements at 70a033f, no issue
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/tree/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94
+  local: resources/web/mishapolk-kkt-refinements-2026-10-14/
+  source_key: '[Mishapolk KKT refinements 2026-10-14]'
+  scope:
+    n_values: [129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303, 304]
+  reviewed: '2026-10-15'
+  source_date: '2026-10-14'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/mishapolk-kkt-refinements-2026-10-14/acquisition/claims.json
+  evidence:
+  - E-mishapolk-70a033f-certificate-report
+  notes: >-
+    All 24 complete certificates of the commit are kept as derived exact facts, no upstream
+    byte retained, each admitted only where its exact side equals, or rounds up to, the side
+    its source prints, and all 72 native jobs, three for each count, have full outcomes.
+    T-186 records the 12 in scope, each below every earlier report at its count. The other
+    12, at 153, 155, 181, 207, 209, 267, 270, 272 and 305 to 308, are compared in the claim
+    record and recorded by no entry: T-174 is smaller at each. No selected override or
+    superseded claim is created at this source-only stage; current cases and earlier source
+    ownership remain unchanged.
+- id: evand-n146-2026-10-14
+  title: Evan Daniel's n146 certificate at e006ce6, issue606
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/e006ce6230f2240457b083199755a3a5d287692c
+  local: resources/web/evand-n146-2026-10-14/
+  source_key: '[Daniel n146 2026-10-14]'
+  scope:
+    n_values: [146]
+  reviewed: '2026-10-15'
+  source_date: '2026-10-14'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n146-2026-10-14/acquisition/claims.json
+  evidence:
+  - E-evand-606-n146-report
+  notes: >-
+    The 1 complete certificate is retained as the source wrote them, admitted only where its
+    exact side equals, or rounds up to, the side its source prints. T-187 records the
+    in-horizon report. All 3 native jobs have full outcomes. No selected override or
+    superseded claim is created at this source-only stage; current cases and earlier source
+    ownership remain unchanged.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026
@@ -4025,11 +5576,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 105
-  source_id: couzo-followup-refinements-2026-10-08
-  value: '10.7893037837481589'
-  evidence: E-couzo-460-followup-rational-report
+  source_id: pingyou-n105-refinement-2026-10-12
+  value: '10.78930378374815884'
+  evidence: E-pingyou-568-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-130).
+    here and an accepted review, adopted on 2026-10-15 (T-170).
 - n: 106
   source_id: evand-square-packing-2026-10-05
   value: '10.822908044132847555194436943331'
@@ -4067,11 +5618,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-128).
 - n: 129
-  source_id: evand-regularized-2026-10-10
-  value: '11.8720298490811800'
-  evidence: E-evand-regularized-certificate-report
+  source_id: dostashev-compositions-2026-10-12
+  value: '11.8700138504044644'
+  evidence: E-ostashev-562-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+    here and an accepted review, adopted on 2026-10-15 (T-162).
 - n: 130
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.9044830325157865'
@@ -4091,11 +5642,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-141).
 - n: 146
-  source_id: barnett-refinements-2026-10-11
-  value: '12.5837822039510463'
-  evidence: E-barnett-505-certificate-report
+  source_id: pingyou-n146-refinement-2026-10-12
+  value: '12.5837822039508343'
+  evidence: E-pingyou-566-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-150).
+    here and an accepted review, adopted on 2026-10-15 (T-168).
 - n: 152
   source_id: evand-square-packing-2026-10-05
   value: '12.830718800976609954993823643412'
@@ -4103,17 +5654,17 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 153
-  source_id: pingyou-n153-certificate-2026-10-11
-  value: '12.8700138504070441'
-  evidence: E-pingyou-504-certificate-report
+  source_id: mishapolk-exact-certificates-2026-10-12
+  value: '12.8700138504044800'
+  evidence: E-mishapolk-573-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-148).
+    here and an accepted review, adopted on 2026-10-15 (T-173).
 - n: 154
-  source_id: evand-n154-2026-10-12
-  value: '12.9225664019340596'
-  evidence: E-evand-552-n154-report
+  source_id: couzo-certificates-2026-10-13-in-corpus
+  value: '12.9212065771326311'
+  evidence: E-couzo-583-586-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-12 (T-160).
+    here and an accepted review, adopted on 2026-10-15 (T-182).
 - n: 155
   source_id: dostashev-records-2026-10-11
   value: '12.9524254069584562'
@@ -4121,11 +5672,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-149).
 - n: 156
-  source_id: dostashev-records-2026-10-11
-  value: '12.9791726136444261'
-  evidence: E-ostashev-501-certificate-report
+  source_id: couzo-certificates-2026-10-12-in-corpus
+  value: '12.9791658538342765'
+  evidence: E-couzo-561-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-149).
+    here and an accepted review, adopted on 2026-10-15 (T-161).
 - n: 172
   source_id: evand-square-packing-2026-10-05
   value: '13.61898895689939842899969151892'
@@ -4139,11 +5690,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-12 (T-158).
 - n: 176
-  source_id: squish-500-fourth-request-2026-10-11
-  value: '13.8128562532770564'
-  evidence: E-squish-500-certificate-report
+  source_id: couzo-certificates-2026-10-13-in-corpus
+  value: '13.8076372268022796'
+  evidence: E-couzo-583-586-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-12 (T-151).
+    here and an accepted review, adopted on 2026-10-15 (T-165).
 - n: 177
   source_id: evand-square-packing-2026-10-05
   value: '13.822979734169448600231882896281'
@@ -4180,6 +5731,12 @@ selected_overrides:
   evidence: E-gupta-438-rational-report
   reason: The complete rational precision refinement is strictly smaller than both previous exact
     upper lanes.
+- n: 204
+  source_id: dostashev-compositions-2026-10-12
+  value: '14.8086632343869566'
+  evidence: E-ostashev-562-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-15 (T-162).
 - n: 206
   source_id: evand-square-packing-2026-10-05
   value: '14.860158663391903236840250629824'
@@ -4187,11 +5744,11 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 207
-  source_id: pingyou-n207-certificate-2026-10-11
-  value: '14.8809603730436757'
-  evidence: E-pingyou-503-certificate-report
+  source_id: mishapolk-exact-certificates-2026-10-12
+  value: '14.8809603715580000'
+  evidence: E-mishapolk-573-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-147).
+    here and an accepted review, adopted on 2026-10-15 (T-173).
 - n: 208
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.9245187720293559'
@@ -4211,11 +5768,11 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 211
-  source_id: dostashev-records-2026-10-11
-  value: '14.9963367213363157'
-  evidence: E-ostashev-501-certificate-report
+  source_id: couzo-certificates-2026-10-13-in-corpus
+  value: '14.9935589139740062'
+  evidence: E-couzo-583-586-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-149).
+    here and an accepted review, adopted on 2026-10-15 (T-182).
 - n: 228
   source_id: couzo-451-exact-refinements
   value: '15.6046014757296743'
@@ -4235,11 +5792,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 237
-  source_id: couzo-certificates-2026-10-10
-  value: '15.9029496076778317'
-  evidence: E-couzo-488-certificate-report
+  source_id: mishapolk-records-2026-10-14
+  value: '15.9027050578663668'
+  evidence: E-mishapolk-593-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-140).
+    here and an accepted review, adopted on 2026-10-15 (T-183).
 - n: 238
   source_id: squish-500-fourth-request-2026-10-11
   value: '15.9241067853214947'
@@ -4259,11 +5816,11 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 241
-  source_id: evand-square-packing-2026-10-05
-  value: '15.988132439524990848590591447359'
-  evidence: E-evand-exact-optima-2026-10-05-report
-  reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-    side (T-056).
+  source_id: couzo-certificates-2026-10-13-in-corpus
+  value: '15.9871170951502388'
+  evidence: E-couzo-583-586-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-15 (T-182).
 - n: 258
   source_id: evand-regularized-2026-10-10
   value: '16.5634480021337894'
@@ -4277,11 +5834,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-136).
 - n: 261
-  source_id: barnett-refinements-2026-10-11
-  value: '16.6787798753432078'
-  evidence: E-barnett-505-certificate-report
+  source_id: pingyou-n261-refinement-2026-10-12
+  value: '16.6787798753429099'
+  evidence: E-pingyou-567-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-150).
+    here and an accepted review, adopted on 2026-10-15 (T-169).
 - n: 263
   source_id: evand-regularized-2026-10-10
   value: '16.7331660078993790'
@@ -4325,17 +5882,17 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-12 (T-151).
 - n: 271
-  source_id: squish-500-fourth-request-2026-10-11
-  value: '16.9491166878150100'
-  evidence: E-squish-500-certificate-report
+  source_id: couzo-certificates-2026-10-12-in-corpus
+  value: '16.9489923564512057'
+  evidence: E-couzo-561-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-12 (T-151).
+    here and an accepted review, adopted on 2026-10-15 (T-161).
 - n: 272
-  source_id: squish-500-fourth-request-2026-10-11
-  value: '16.9655864748376712'
-  evidence: E-squish-500-certificate-report
+  source_id: pingyou-n272-refinement-2026-10-12
+  value: '16.9655864748376707'
+  evidence: E-pingyou-569-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-12 (T-151).
+    here and an accepted review, adopted on 2026-10-15 (T-171).
 - n: 273
   source_id: evand-square-packing-2026-10-05
   value: '16.983925962650404316108837346991'
@@ -4367,23 +5924,23 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 302
-  source_id: evand-regularized-2026-10-10
-  value: '17.8720298490811800'
-  evidence: E-evand-regularized-certificate-report
+  source_id: couzo-certificates-2026-10-13-in-corpus
+  value: '17.8700138504044644'
+  evidence: E-couzo-583-586-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+    here and an accepted review, adopted on 2026-10-15 (T-181).
 - n: 303
-  source_id: evand-regularized-2026-10-10
-  value: '17.9130654627385324'
-  evidence: E-evand-regularized-certificate-report
+  source_id: dostashev-compositions-2026-10-12
+  value: '17.9099582910699080'
+  evidence: E-ostashev-562-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+    here and an accepted review, adopted on 2026-10-15 (T-162).
 - n: 304
-  source_id: couzo-certificates-2026-10-11-in-corpus
-  value: '17.9295659468485010'
-  evidence: E-couzo-506-certificate-report
+  source_id: dostashev-merged-bands-2026-10-13
+  value: '17.9294277580751750'
+  evidence: E-ostashev-575-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-12 (T-152).
+    here and an accepted review, adopted on 2026-10-15 (T-175).
 - n: 305
   source_id: couzo-certificates-2026-10-11-in-corpus
   value: '17.9504664821377123'
@@ -4426,7 +5983,7 @@ superseded_reports:
   value: '15.911191683001783031028912780176'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: mishapolk-records-2026-10-14
 - n: 239
   source_id: evand-square-packing-2026-10-05
   value: '15.953819333480779915463620238818'
@@ -4450,13 +6007,13 @@ superseded_reports:
   value: '11.8808935876459918'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: dostashev-compositions-2026-10-12
 - n: 154
   source_id: squish-ten-packings-2026-10-07
   value: '12.9282936576777577'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: evand-n154-2026-10-12
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
 - n: 155
   source_id: squish-ten-packings-2026-10-07
   value: '12.9536770693532733'
@@ -4634,13 +6191,13 @@ superseded_reports:
 - n: 105
   source_id: casson-square-packing-2026
   value: '10.80758853319602153'
-  superseded_by: couzo-followup-refinements-2026-10-08
+  superseded_by: pingyou-n105-refinement-2026-10-12
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values.
 - n: 105
   source_id: unitsquare-release1
   value: '10.807847913867976'
-  superseded_by: couzo-followup-refinements-2026-10-08
+  superseded_by: pingyou-n105-refinement-2026-10-12
   reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side.
 - n: 106
   source_id: casson-square-packing-2026
@@ -4737,7 +6294,7 @@ superseded_reports:
 - n: 129
   source_id: evand-square-packing-2026-10-05
   value: '11.881306218090003063332517008724'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: dostashev-compositions-2026-10-12
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 131
   source_id: casson-square-packing-2026
@@ -4781,7 +6338,7 @@ superseded_reports:
 - n: 146
   source_id: evand-square-packing-2026-10-05
   value: '12.600907778513018240238040124865'
-  superseded_by: barnett-refinements-2026-10-11
+  superseded_by: pingyou-n146-refinement-2026-10-12
   reason: Certifies the catalogue's packing at a side 8.2e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -4836,17 +6393,17 @@ superseded_reports:
 - n: 153
   source_id: evand-square-packing-2026-10-05
   value: '12.88166675700900462495232881648'
-  superseded_by: pingyou-n153-certificate-2026-10-11
+  superseded_by: mishapolk-exact-certificates-2026-10-12
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 154
   source_id: casson-square-packing-2026
   value: '12.93166403111078111'
-  superseded_by: evand-n154-2026-10-12
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 154
   source_id: franciscouzo-square-packing-2026
   value: '12.931663721169976'
-  superseded_by: evand-n154-2026-10-12
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 155
   source_id: casson-square-packing-2026
@@ -4861,14 +6418,14 @@ superseded_reports:
 - n: 156
   source_id: casson-square-packing-2026
   value: '12.98208269973811824'
-  superseded_by: dostashev-records-2026-10-11
+  superseded_by: couzo-certificates-2026-10-12-in-corpus
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 156
   source_id: franciscouzo-square-packing-2026
   value: '12.982082698520427'
-  superseded_by: dostashev-records-2026-10-11
+  superseded_by: couzo-certificates-2026-10-12-in-corpus
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 170
@@ -4915,7 +6472,7 @@ superseded_reports:
 - n: 176
   source_id: evand-square-packing-2026-10-05
   value: '13.822875655532295295389036633375'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -5026,7 +6583,7 @@ superseded_reports:
 - n: 204
   source_id: evand-square-packing-2026-10-05
   value: '14.822875655532295295399036633375'
-  superseded_by: kingbird-current
+  superseded_by: dostashev-compositions-2026-10-12
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -5046,14 +6603,14 @@ superseded_reports:
 - n: 207
   source_id: casson-square-packing-2026
   value: '14.89395465342147418'
-  superseded_by: pingyou-n207-certificate-2026-10-11
+  superseded_by: mishapolk-exact-certificates-2026-10-12
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 207
   source_id: franciscouzo-square-packing-2026
   value: '14.893954634242480'
-  superseded_by: pingyou-n207-certificate-2026-10-11
+  superseded_by: mishapolk-exact-certificates-2026-10-12
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 208
@@ -5106,7 +6663,7 @@ superseded_reports:
 - n: 211
   source_id: de-winter-square-packing-211-2026
   value: '14.99796070496771500150'
-  superseded_by: dostashev-records-2026-10-11
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 226
@@ -5207,14 +6764,14 @@ superseded_reports:
 - n: 237
   source_id: casson-square-packing-2026
   value: '15.91292783720833270'
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: mishapolk-records-2026-10-14
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 237
   source_id: franciscouzo-square-packing-2026
   value: '15.911191683008479'
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: mishapolk-records-2026-10-14
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 238
@@ -5256,14 +6813,14 @@ superseded_reports:
 - n: 241
   source_id: casson-square-packing-2026
   value: '15.99043971050729418'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 241
   source_id: franciscouzo-square-packing-2026
   value: '15.988132439537539'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 257
@@ -5303,7 +6860,7 @@ superseded_reports:
 - n: 261
   source_id: evand-square-packing-2026-10-05
   value: '16.682926829268292683093658536586'
-  superseded_by: barnett-refinements-2026-10-11
+  superseded_by: pingyou-n261-refinement-2026-10-12
   reason: Certifies the catalogue's packing at a side 2.7e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -5396,34 +6953,34 @@ superseded_reports:
 - n: 271
   source_id: casson-square-packing-2026
   value: '16.95479445810086716'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: couzo-certificates-2026-10-12-in-corpus
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 271
   source_id: franciscouzo-square-packing-2026
   value: '16.950820792633813'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: couzo-certificates-2026-10-12-in-corpus
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 272
   source_id: casson-square-packing-2026
   value: '16.96944950195848989'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-n272-refinement-2026-10-12
   reason: 'Larger than Francisco Couzo''s side at this count; the case record states both sources''
     dates and values; since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that
     packing (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 272
   source_id: franciscouzo-square-packing-2026
   value: '16.968279785326896'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-n272-refinement-2026-10-12
   reason: 'Superseded on 2026-10-05 by Francisco Couzo''s own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that packing (T-098).
     The separately certified #399 arrangement is now strictly smaller.'
 - n: 272
   source_id: franciscouzo-square-packing-2026-10-03
   value: '16.968165867864400'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-n272-refinement-2026-10-12
   reason: 'Superseded on 2026-10-05 by Evan Daniel''s exact optimum of the same packing, certified
     here (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 273
@@ -5537,35 +7094,35 @@ superseded_reports:
 - n: 302
   source_id: franciscouzo-square-packing-2026
   value: '17.885993892536710'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 303
   source_id: casson-square-packing-2026
   value: '17.93105636462953001'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: dostashev-compositions-2026-10-12
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026
   value: '17.924349265547932'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: dostashev-compositions-2026-10-12
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026-10-03
   value: '17.924341009860250'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: dostashev-compositions-2026-10-12
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 304
   source_id: casson-square-packing-2026
   value: '17.94880191214547338'
-  superseded_by: couzo-certificates-2026-10-11-in-corpus
+  superseded_by: dostashev-merged-bands-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 304
   source_id: franciscouzo-square-packing-2026
   value: '17.934650018395903'
-  superseded_by: couzo-certificates-2026-10-11-in-corpus
+  superseded_by: dostashev-merged-bands-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 305
@@ -5626,7 +7183,7 @@ superseded_reports:
 - n: 154
   source_id: evand-square-packing-2026-10-05
   value: '12.931663721166847019324363825319'
-  superseded_by: evand-n154-2026-10-12
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 155
   source_id: evand-square-packing-2026-10-05
@@ -5651,7 +7208,7 @@ superseded_reports:
 - n: 303
   source_id: evand-square-packing-2026-10-05
   value: '17.924341009851128373110514612828'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: dostashev-compositions-2026-10-12
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 88
   source_id: kingbird-current
@@ -5686,7 +7243,7 @@ superseded_reports:
 - n: 207
   source_id: evand-square-packing-2026-10-05
   value: '14.893954634237227388391298332204'
-  superseded_by: pingyou-n207-certificate-2026-10-11
+  superseded_by: mishapolk-exact-certificates-2026-10-12
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 236
@@ -5704,13 +7261,13 @@ superseded_reports:
 - n: 302
   source_id: evand-square-packing-2026-10-05
   value: '17.885993892530410666666041882586'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 105
   source_id: franciscouzo-square-packing-2026
   value: '10.806077865540567'
-  superseded_by: couzo-followup-refinements-2026-10-08
+  superseded_by: pingyou-n105-refinement-2026-10-12
   reason: Retained historical ceiling; the selected exact rational report is smaller.
 - n: 292
   source_id: franciscouzo-square-packing-2026
@@ -5735,7 +7292,7 @@ superseded_reports:
 - n: 105
   source_id: rehwaldt-couzo-refinements-2026-10-07
   value: '10.80607786551970463257490535044771520398745274'
-  superseded_by: couzo-followup-refinements-2026-10-08
+  superseded_by: pingyou-n105-refinement-2026-10-12
   reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 108
   source_id: squish-second-update-2026-10-07
@@ -5755,8 +7312,8 @@ superseded_reports:
 - n: 129
   source_id: squish-update-2026-10-07
   value: '11.8793752067111287'
-  superseded_by: evand-regularized-2026-10-10
-  reason: Historical source ceiling superseded by a smaller exact Xu construction.
+  superseded_by: dostashev-compositions-2026-10-12
+  reason: Historical source ceiling superseded by Daniil Ostashev's smaller exact composition.
 - n: 131
   source_id: evand-square-packing-2026-10-05
   value: '11.954916830216124410139679227683'
@@ -5780,7 +7337,7 @@ superseded_reports:
 - n: 153
   source_id: ry-xu-new-packings-2026-10-08
   value: '12.8813062182128814'
-  superseded_by: pingyou-n153-certificate-2026-10-11
+  superseded_by: mishapolk-exact-certificates-2026-10-12
   reason: Complete rational certificate retained; the current exact construction is smaller.
 - n: 179
   source_id: ry-xu-new-packings-2026-10-08
@@ -5811,7 +7368,7 @@ superseded_reports:
 - n: 272
   source_id: evand-square-packing-2026-10-05
   value: '16.968165867852158332894136646166'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-n272-refinement-2026-10-12
   reason: 'The complete #399 construction has a strictly smaller side; the earlier report and its
     full certificates remain historical.'
 - n: 199
@@ -5822,7 +7379,7 @@ superseded_reports:
 - n: 207
   source_id: squish-second-update-2026-10-07
   value: '14.8879922583077482'
-  superseded_by: pingyou-n207-certificate-2026-10-11
+  superseded_by: mishapolk-exact-certificates-2026-10-12
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 236
   source_id: squish-second-update-2026-10-07
@@ -5837,7 +7394,7 @@ superseded_reports:
 - n: 153
   source_id: squish-n153-2026-10-07
   value: '12.8796793733329640'
-  superseded_by: pingyou-n153-certificate-2026-10-11
+  superseded_by: mishapolk-exact-certificates-2026-10-12
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 180
   source_id: squish-second-update-2026-10-07
@@ -5852,7 +7409,7 @@ superseded_reports:
 - n: 154
   source_id: squish-update-2026-10-07
   value: '12.9265622458535390'
-  superseded_by: evand-n154-2026-10-12
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 179
   source_id: squish-second-update-2026-10-07
@@ -5867,7 +7424,7 @@ superseded_reports:
 - n: 237
   source_id: squish-update-2026-10-07
   value: '15.9036762351906287'
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: mishapolk-records-2026-10-14
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 238
   source_id: squish-update-2026-10-07
@@ -5899,13 +7456,13 @@ superseded_reports:
 - n: 129
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.8793752067078730'
-  superseded_by: evand-regularized-2026-10-10
-  reason: The withdrawn Gupta rational certificate is larger than the selected Xu construction;
+  superseded_by: dostashev-compositions-2026-10-12
+  reason: The withdrawn Gupta rational certificate is larger than the selected Ostashev composition;
     its complete source and replay remain retained.
 - n: 105
   source_id: evand-batch-105-130-2026-10-07
   value: '10.806077865519704632682966129102'
-  superseded_by: couzo-followup-refinements-2026-10-08
+  superseded_by: pingyou-n105-refinement-2026-10-12
   reason: The complete dated source certificate has a strictly larger exact rational side than the
     current verified selected bound; original custody remains historical and does not inherit another
     packet's geometry verification.
@@ -5956,9 +7513,9 @@ superseded_reports:
 - n: 105
   source_id: ry-xu-new-packings-2026-10-08
   value: '10.7906765754107907'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-130's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-170's exact
     side is smaller.
-  superseded_by: couzo-followup-refinements-2026-10-08
+  superseded_by: pingyou-n105-refinement-2026-10-12
 - n: 108
   source_id: ry-xu-new-packings-2026-10-08
   value: '10.9048247851109049'
@@ -5986,9 +7543,9 @@ superseded_reports:
 - n: 129
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8720298492118721'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-146's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-162's exact
     side is smaller.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: dostashev-compositions-2026-10-12
 - n: 131
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.9511500449119512'
@@ -6004,21 +7561,21 @@ superseded_reports:
 - n: 146
   source_id: ry-xu-new-packings-2026-10-08
   value: '12.5837822775125838'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-150's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-168's exact
     side is smaller.
-  superseded_by: barnett-refinements-2026-10-11
+  superseded_by: pingyou-n146-refinement-2026-10-12
 - n: 153
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '12.8796793733293146'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-148's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-173's exact
     side is smaller.
-  superseded_by: pingyou-n153-certificate-2026-10-11
+  superseded_by: mishapolk-exact-certificates-2026-10-12
 - n: 154
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '12.9265622458523470'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-160's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-182's exact
     side is smaller.
-  superseded_by: evand-n154-2026-10-12
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
 - n: 155
   source_id: squish-update-2026-10-07
   value: '12.9525032026045129'
@@ -6040,9 +7597,9 @@ superseded_reports:
 - n: 207
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.8879922583026574'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-147's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-173's exact
     side is smaller.
-  superseded_by: pingyou-n207-certificate-2026-10-11
+  superseded_by: mishapolk-exact-certificates-2026-10-12
 - n: 209
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.9496179522003981'
@@ -6064,9 +7621,9 @@ superseded_reports:
 - n: 237
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '15.9036762351891381'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-140's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-183's exact
     side is smaller.
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: mishapolk-records-2026-10-14
 - n: 258
   source_id: squish-update-2026-10-07
   value: '16.5634480021391540'
@@ -6112,9 +7669,9 @@ superseded_reports:
 - n: 303
   source_id: squish-ten-packings-2026-10-07
   value: '17.9203123729203498'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-146's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-162's exact
     side is smaller.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: dostashev-compositions-2026-10-12
 - n: 305
   source_id: evand-square-packing-2026-10-05
   value: '17.952959459015527962875662582531'
@@ -6142,21 +7699,21 @@ superseded_reports:
 - n: 156
   source_id: evand-square-packing-2026-10-05
   value: '12.982082698516893102076828502036'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-149's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-161's exact
     side is smaller.
-  superseded_by: dostashev-records-2026-10-11
+  superseded_by: couzo-certificates-2026-10-12-in-corpus
 - n: 211
   source_id: evand-square-packing-2026-10-05
   value: '14.997960704967361565181004478378'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-149's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-182's exact
     side is smaller.
-  superseded_by: dostashev-records-2026-10-11
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
 - n: 261
   source_id: ry-xu-new-packings-2026-10-08
   value: '16.6787798754166788'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-150's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-169's exact
     side is smaller.
-  superseded_by: barnett-refinements-2026-10-11
+  superseded_by: pingyou-n261-refinement-2026-10-12
 - n: 181
   source_id: evand-square-packing-2026-10-05
   value: '13.953748821954402498045544433567'
@@ -6178,21 +7735,21 @@ superseded_reports:
 - n: 271
   source_id: evand-square-packing-2026-10-05
   value: '16.950820792624958786450490084388'
-  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-151's exact
+  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-161's exact
     side is smaller.
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: couzo-certificates-2026-10-12-in-corpus
 - n: 272
   source_id: evand-new-arrangements-2026-10-07
   value: '16.968110145769600505005359235592'
-  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-151's exact
+  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-171's exact
     side is smaller.
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-n272-refinement-2026-10-12
 - n: 304
   source_id: evand-square-packing-2026-10-05
   value: '17.934650018390681724105084929881'
-  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-152's exact
+  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-175's exact
     side is smaller.
-  superseded_by: couzo-certificates-2026-10-11-in-corpus
+  superseded_by: dostashev-merged-bands-2026-10-13
 - n: 270
   source_id: couzo-certificates-2026-10-10
   value: '16.9297753535413596'
@@ -6209,8 +7766,8 @@ superseded_reports:
   source_id: squish-481-third-request-2026-10-09
   value: '12.9230702023011408'
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
-    and T-160's exact side is smaller.
-  superseded_by: evand-n154-2026-10-12
+    and T-182's exact side is smaller.
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
 - n: 175
   source_id: couzo-certificates-2026-10-10
   value: '13.7671207246923133'
@@ -6223,6 +7780,108 @@ superseded_reports:
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
     and T-158's exact side is smaller.
   superseded_by: dostashev-records-2026-10-12
+- n: 153
+  source_id: pingyou-n153-certificate-2026-10-11
+  value: '12.8700138504070441'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-173's exact side is smaller.
+  superseded_by: mishapolk-exact-certificates-2026-10-12
+- n: 154
+  source_id: evand-n154-2026-10-12
+  value: '12.9225664019340596'
+  reason: The house from 2026-10-12 until 2026-10-15; its certificate stays retained and verified,
+    and T-182's exact side is smaller.
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
+- n: 207
+  source_id: pingyou-n207-certificate-2026-10-11
+  value: '14.8809603730436757'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-173's exact side is smaller.
+  superseded_by: mishapolk-exact-certificates-2026-10-12
+- n: 211
+  source_id: dostashev-records-2026-10-11
+  value: '14.9963367213363157'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-182's exact side is smaller.
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
+- n: 237
+  source_id: couzo-certificates-2026-10-10
+  value: '15.9029496076778317'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-183's exact side is smaller.
+  superseded_by: mishapolk-records-2026-10-14
+- n: 241
+  source_id: evand-square-packing-2026-10-05
+  value: '15.988132439524990848590591447359'
+  reason: The house until 2026-10-15; its certificate stays retained and verified, and T-182's exact
+    side is smaller.
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
+- n: 302
+  source_id: evand-regularized-2026-10-10
+  value: '17.8720298490811800'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-181's exact side is smaller.
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
+- n: 304
+  source_id: couzo-certificates-2026-10-11-in-corpus
+  value: '17.9295659468485010'
+  reason: The house from 2026-10-12 until 2026-10-15; its certificate stays retained and verified,
+    and T-175's exact side is smaller.
+  superseded_by: dostashev-merged-bands-2026-10-13
+- n: 105
+  source_id: couzo-followup-refinements-2026-10-08
+  value: '10.7893037837481589'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-170's exact side is smaller.
+  superseded_by: pingyou-n105-refinement-2026-10-12
+- n: 129
+  source_id: evand-regularized-2026-10-10
+  value: '11.8720298490811800'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-162's exact side is smaller.
+  superseded_by: dostashev-compositions-2026-10-12
+- n: 146
+  source_id: barnett-refinements-2026-10-11
+  value: '12.5837822039510463'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-168's exact side is smaller.
+  superseded_by: pingyou-n146-refinement-2026-10-12
+- n: 156
+  source_id: dostashev-records-2026-10-11
+  value: '12.9791726136444261'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-161's exact side is smaller.
+  superseded_by: couzo-certificates-2026-10-12-in-corpus
+- n: 176
+  source_id: squish-500-fourth-request-2026-10-11
+  value: '13.8128562532770564'
+  reason: The house from 2026-10-12 until 2026-10-15; its certificate stays retained and verified,
+    and T-165's exact side is smaller.
+  superseded_by: couzo-certificates-2026-10-13-in-corpus
+- n: 261
+  source_id: barnett-refinements-2026-10-11
+  value: '16.6787798753432078'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-169's exact side is smaller.
+  superseded_by: pingyou-n261-refinement-2026-10-12
+- n: 271
+  source_id: squish-500-fourth-request-2026-10-11
+  value: '16.9491166878150100'
+  reason: The house from 2026-10-12 until 2026-10-15; its certificate stays retained and verified,
+    and T-161's exact side is smaller.
+  superseded_by: couzo-certificates-2026-10-12-in-corpus
+- n: 272
+  source_id: squish-500-fourth-request-2026-10-11
+  value: '16.9655864748376712'
+  reason: The house from 2026-10-12 until 2026-10-15; its certificate stays retained and verified,
+    and T-171's exact side is smaller.
+  superseded_by: pingyou-n272-refinement-2026-10-12
+- n: 303
+  source_id: evand-regularized-2026-10-10
+  value: '17.9130654627385324'
+  reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
+    and T-162's exact side is smaller.
+  superseded_by: dostashev-compositions-2026-10-12
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
@@ -6272,7 +7931,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.906436500552'
   assurance: verified
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-12
   bead: think-om5l
 - n: 339
   source_id: couzo-extended-range-reports-2026-10-08
@@ -6287,7 +7947,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.929433883808'
   assurance: verified
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue583-2026-10-13
   bead: think-om5l
 - n: 340
   source_id: couzo-extended-range-reports-2026-10-08
@@ -6346,14 +8007,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.994353244944'
   assurance: verified
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-12
   bead: think-om5l
 - n: 364
   source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.597249391207239'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: evand-compositions-2026-10-13
   bead: think-1545
 - n: 369
   source_id: couzo-extended-range-reports-2026-10-08
@@ -6404,7 +8067,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.906335145009'
   assurance: verified
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-12
   bead: think-om5l
 - n: 376
   source_id: couzo-extended-range-reports-2026-10-08
@@ -6419,7 +8083,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.910276586885'
   assurance: verified
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-12
   bead: think-om5l
 - n: 377
   source_id: couzo-extended-range-reports-2026-10-08
@@ -6449,7 +8114,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.942541777355'
   assurance: verified
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-12
   bead: think-om5l
 - n: 379
   source_id: couzo-extended-range-reports-2026-10-08
@@ -6464,20 +8130,309 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.953572709539'
   assurance: verified
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue583-2026-10-13
   bead: think-om5l
 - n: 380
   source_id: couzo-certificates-2026-10-11
   claim: upper-bound
   value: '19.987440766556'
   assurance: verified
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: fang-direct-certificates-2026-10-13
   bead: think-om5l
 - n: 381
   source_id: couzo-certificates-2026-10-11
   claim: upper-bound
   value: '19.992663288464'
   assurance: verified
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: fang-direct-certificates-2026-10-13
   bead: think-om5l
+- n: 338
+  source_id: couzo-certificates-2026-10-12
+  claim: upper-bound
+  value: '18.906332809853'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-rfce
+- n: 339
+  source_id: couzo-issue583-2026-10-13
+  claim: upper-bound
+  value: '18.927383638495'
+  assurance: reported
+  disposition: superseded
+  superseded_by: evand-compositions-2026-10-13
+  bead: think-rfce
+- n: 339
+  source_id: evand-compositions-2026-10-13
+  claim: upper-bound
+  value: '18.926898900357'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-13
+  bead: think-x333
+- n: 339
+  source_id: couzo-certificates-2026-10-13
+  claim: upper-bound
+  value: '18.925319360704'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-rfce
+- n: 344
+  source_id: couzo-certificates-2026-10-12
+  claim: upper-bound
+  value: '18.993741872920'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-13
+  bead: think-rfce
+- n: 344
+  source_id: couzo-certificates-2026-10-13
+  claim: upper-bound
+  value: '18.993724693587'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-rfce
+- n: 364
+  source_id: evand-compositions-2026-10-13
+  claim: upper-bound
+  value: '19.583782203951'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-x333
+- n: 365
+  source_id: evand-fresh-compositions-2026-10-14
+  claim: upper-bound
+  value: '19.621320343560'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-yxkt
+- n: 370
+  source_id: evand-fresh-compositions-2026-10-14
+  claim: upper-bound
+  value: '19.767730746255'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-yxkt
+- n: 375
+  source_id: couzo-certificates-2026-10-12
+  claim: upper-bound
+  value: '19.901618621328'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-13
+  bead: think-rfce
+- n: 375
+  source_id: couzo-certificates-2026-10-13
+  claim: upper-bound
+  value: '19.893906534236'
+  assurance: reported
+  disposition: superseded
+  superseded_by: evand-compositions-2026-10-13
+  bead: think-rfce
+- n: 375
+  source_id: evand-compositions-2026-10-13
+  claim: upper-bound
+  value: '19.882451030482'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-x333
+- n: 376
+  source_id: couzo-certificates-2026-10-12
+  claim: upper-bound
+  value: '19.904949736499'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-13
+  bead: think-rfce
+- n: 376
+  source_id: couzo-certificates-2026-10-13
+  claim: upper-bound
+  value: '19.904068025747'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-rfce
+- n: 378
+  source_id: couzo-certificates-2026-10-12
+  claim: upper-bound
+  value: '19.942536155970'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-13
+  bead: think-rfce
+- n: 378
+  source_id: couzo-certificates-2026-10-13
+  claim: upper-bound
+  value: '19.942519693846'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-rfce
+- n: 379
+  source_id: couzo-issue583-2026-10-13
+  claim: upper-bound
+  value: '19.953531531603'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-13
+  bead: think-rfce
+- n: 379
+  source_id: couzo-certificates-2026-10-13
+  claim: upper-bound
+  value: '19.953531362123'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-rfce
+- n: 380
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '19.976775433974195'
+  assurance: verified
+  disposition: superseded
+  superseded_by: couzo-issue583-2026-10-13
+  bead: think-7bw3
+- n: 380
+  source_id: couzo-issue583-2026-10-13
+  claim: upper-bound
+  value: '19.973553606628'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-13
+  bead: think-rfce
+- n: 380
+  source_id: couzo-certificates-2026-10-13
+  claim: upper-bound
+  value: '19.961611078672'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-rfce
+- n: 381
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '19.976969740405508'
+  assurance: verified
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-13
+  bead: think-7bw3
+- n: 381
+  source_id: couzo-certificates-2026-10-13
+  claim: upper-bound
+  value: '19.974977397657'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-rfce
+- n: 382
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '19.989479729399675'
+  assurance: verified
+  disposition: superseded
+  superseded_by: couzo-issue583-2026-10-13
+  bead: think-7bw3
+- n: 382
+  source_id: couzo-issue583-2026-10-13
+  claim: upper-bound
+  value: '19.988600568289'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-certificates-2026-10-13
+  bead: think-rfce
+- n: 382
+  source_id: couzo-certificates-2026-10-13
+  claim: upper-bound
+  value: '19.987713157610'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-rfce
+- n: 421
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '20.986150316947159'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 422
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '20.988436524095744'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 460
+  source_id: evand-fresh-compositions-2026-10-14
+  claim: upper-bound
+  value: '21.959969683021'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-yxkt
+- n: 463
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '21.986880406196935'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 464
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '21.991709536768996'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 507
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '22.997807183348823'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 508
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '22.994733849702143'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 553
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '23.998811020144984'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 601
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '24.998914572427130'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 651
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '25.991547815274380'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 758
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '27.996346242823117'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 814
+  source_id: fang-direct-certificates-2026-10-13
+  claim: upper-bound
+  value: '28.999873603982716'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-7bw3
+- n: 932
+  source_id: fang-excess-theorem-2026-10-13
+  claim: upper-bound
+  value: '30.999950000000000'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-0esw
 pending_catalogue_intake: []

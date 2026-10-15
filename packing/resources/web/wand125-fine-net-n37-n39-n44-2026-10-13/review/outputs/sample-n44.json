@@ -1,0 +1,313 @@
+{
+ "binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+ "build": {
+  "profile": "release",
+  "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+  "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+  "target": "x86_64-unknown-linux-gnu"
+ },
+ "build_source_is_expected": true,
+ "candidate_sha256": "584a83196e7f03c3f3df95a130c313ef5db3b06619df8f1d30eefa9e2c47fad4",
+ "input_sha256": "584a83196e7f03c3f3df95a130c313ef5db3b06619df8f1d30eefa9e2c47fad4",
+ "factor": "1",
+ "n": 44,
+ "L": "2799/400",
+ "directions": [
+  1,
+  622,
+  1036,
+  1500,
+  2067,
+  2071
+ ],
+ "rows": [
+  {
+   "r": 1,
+   "returncode": 0,
+   "verdict": "verified",
+   "method": "interval-branch-and-bound",
+   "nodes": 281159,
+   "min_certified_lower_bound": 1.0000001543507122,
+   "thread_cpu_seconds": 4.852001933,
+   "process_cpu_seconds": 5.119999999999999,
+   "wall_seconds": 6.258454288999928,
+   "judged_here": {
+    "pose": [
+     6.365257390303951,
+     5.32605237420474
+    ],
+    "in_domain": true,
+    "exact_capture": 1.0338779374543694,
+    "at_least_1": true,
+    "at_least_certified_bound": true
+   },
+   "source_log": {
+    "verdict": "verified",
+    "nodes": 281159,
+    "min_certified_lower_bound": 1.0000001543507122,
+    "cpu_seconds": 6.641246756000001,
+    "agrees": true
+   },
+   "premises": {
+    "B": "4999/5000",
+    "D": "1/5002",
+    "L": "2799/400",
+    "angle_count": 2073,
+    "centre_domain": "per-bin",
+    "expanded_points": 0,
+    "expanded_rectangles": 4848,
+    "expanded_segments": 0,
+    "format": "M",
+    "input_sha256": "584a83196e7f03c3f3df95a130c313ef5db3b06619df8f1d30eefa9e2c47fad4",
+    "mass_below_n": "1/100000",
+    "mass_exact": "4399999/100000",
+    "n": 44,
+    "net_last_tangent": "1036/2501",
+    "net_origin": "proof_net",
+    "shrink_bound": "25009997/25010000",
+    "source_rectangles": 606
+   }
+  },
+  {
+   "r": 622,
+   "returncode": 0,
+   "verdict": "verified",
+   "method": "interval-branch-and-bound",
+   "nodes": 530791,
+   "min_certified_lower_bound": 1.000000000002718,
+   "thread_cpu_seconds": 13.464560656000002,
+   "process_cpu_seconds": 13.749999999999998,
+   "wall_seconds": 16.64275435500076,
+   "judged_here": {
+    "pose": [
+     4.191997923793016,
+     4.524149805814005
+    ],
+    "in_domain": true,
+    "exact_capture": 1.0036249248967635,
+    "at_least_1": true,
+    "at_least_certified_bound": true
+   },
+   "source_log": {
+    "verdict": "verified",
+    "nodes": 530791,
+    "min_certified_lower_bound": 1.000000000002718,
+    "cpu_seconds": 15.66288403499999,
+    "agrees": true
+   },
+   "premises": {
+    "B": "4999/5000",
+    "D": "1/5002",
+    "L": "2799/400",
+    "angle_count": 2073,
+    "centre_domain": "per-bin",
+    "expanded_points": 0,
+    "expanded_rectangles": 4848,
+    "expanded_segments": 0,
+    "format": "M",
+    "input_sha256": "584a83196e7f03c3f3df95a130c313ef5db3b06619df8f1d30eefa9e2c47fad4",
+    "mass_below_n": "1/100000",
+    "mass_exact": "4399999/100000",
+    "n": 44,
+    "net_last_tangent": "1036/2501",
+    "net_origin": "proof_net",
+    "shrink_bound": "25009997/25010000",
+    "source_rectangles": 606
+   }
+  },
+  {
+   "r": 1036,
+   "returncode": 0,
+   "verdict": "verified",
+   "method": "interval-branch-and-bound",
+   "nodes": 581223,
+   "min_certified_lower_bound": 1.000000054653352,
+   "thread_cpu_seconds": 14.131946845000002,
+   "process_cpu_seconds": 14.410000000000004,
+   "wall_seconds": 17.386933056999624,
+   "judged_here": {
+    "pose": [
+     4.096533334038078,
+     5.495089672114693
+    ],
+    "in_domain": true,
+    "exact_capture": 1.001999814241827,
+    "at_least_1": true,
+    "at_least_certified_bound": true
+   },
+   "source_log": {
+    "verdict": "verified",
+    "nodes": 581223,
+    "min_certified_lower_bound": 1.000000054653352,
+    "cpu_seconds": 18.03317278999998,
+    "agrees": true
+   },
+   "premises": {
+    "B": "4999/5000",
+    "D": "1/5002",
+    "L": "2799/400",
+    "angle_count": 2073,
+    "centre_domain": "per-bin",
+    "expanded_points": 0,
+    "expanded_rectangles": 4848,
+    "expanded_segments": 0,
+    "format": "M",
+    "input_sha256": "584a83196e7f03c3f3df95a130c313ef5db3b06619df8f1d30eefa9e2c47fad4",
+    "mass_below_n": "1/100000",
+    "mass_exact": "4399999/100000",
+    "n": 44,
+    "net_last_tangent": "1036/2501",
+    "net_origin": "proof_net",
+    "shrink_bound": "25009997/25010000",
+    "source_rectangles": 606
+   }
+  },
+  {
+   "r": 1500,
+   "returncode": 0,
+   "verdict": "verified",
+   "method": "interval-branch-and-bound",
+   "nodes": 602883,
+   "min_certified_lower_bound": 1.000000032367589,
+   "thread_cpu_seconds": 15.306780375,
+   "process_cpu_seconds": 15.589999999999996,
+   "wall_seconds": 18.207357863000652,
+   "judged_here": {
+    "pose": [
+     4.429793364793506,
+     4.963481945495595
+    ],
+    "in_domain": true,
+    "exact_capture": 1.0115905847905589,
+    "at_least_1": true,
+    "at_least_certified_bound": true
+   },
+   "source_log": {
+    "verdict": "verified",
+    "nodes": 602883,
+    "min_certified_lower_bound": 1.000000032367589,
+    "cpu_seconds": 19.729050404999953,
+    "agrees": true
+   },
+   "premises": {
+    "B": "4999/5000",
+    "D": "1/5002",
+    "L": "2799/400",
+    "angle_count": 2073,
+    "centre_domain": "per-bin",
+    "expanded_points": 0,
+    "expanded_rectangles": 4848,
+    "expanded_segments": 0,
+    "format": "M",
+    "input_sha256": "584a83196e7f03c3f3df95a130c313ef5db3b06619df8f1d30eefa9e2c47fad4",
+    "mass_below_n": "1/100000",
+    "mass_exact": "4399999/100000",
+    "n": 44,
+    "net_last_tangent": "1036/2501",
+    "net_origin": "proof_net",
+    "shrink_bound": "25009997/25010000",
+    "source_rectangles": 606
+   }
+  },
+  {
+   "r": 2067,
+   "returncode": 0,
+   "verdict": "verified",
+   "method": "interval-branch-and-bound",
+   "nodes": 765205,
+   "min_certified_lower_bound": 1.0000000064138144,
+   "thread_cpu_seconds": 21.245097515,
+   "process_cpu_seconds": 21.529999999999998,
+   "wall_seconds": 25.987398106999535,
+   "judged_here": {
+    "pose": [
+     3.826577384149736,
+     3.7038976977735354
+    ],
+    "in_domain": true,
+    "exact_capture": 1.0039866614431368,
+    "at_least_1": true,
+    "at_least_certified_bound": true
+   },
+   "source_log": {
+    "verdict": "verified",
+    "nodes": 765205,
+    "min_certified_lower_bound": 1.0000000064138144,
+    "cpu_seconds": 25.58931893199997,
+    "agrees": true
+   },
+   "premises": {
+    "B": "4999/5000",
+    "D": "1/5002",
+    "L": "2799/400",
+    "angle_count": 2073,
+    "centre_domain": "per-bin",
+    "expanded_points": 0,
+    "expanded_rectangles": 4848,
+    "expanded_segments": 0,
+    "format": "M",
+    "input_sha256": "584a83196e7f03c3f3df95a130c313ef5db3b06619df8f1d30eefa9e2c47fad4",
+    "mass_below_n": "1/100000",
+    "mass_exact": "4399999/100000",
+    "n": 44,
+    "net_last_tangent": "1036/2501",
+    "net_origin": "proof_net",
+    "shrink_bound": "25009997/25010000",
+    "source_rectangles": 606
+   }
+  },
+  {
+   "r": 2071,
+   "returncode": 0,
+   "verdict": "verified",
+   "method": "interval-branch-and-bound",
+   "nodes": 764707,
+   "min_certified_lower_bound": 1.00000001991859,
+   "thread_cpu_seconds": 21.14292649,
+   "process_cpu_seconds": 21.43,
+   "wall_seconds": 25.066479301000072,
+   "judged_here": {
+    "pose": [
+     4.868672615041533,
+     4.5790123606173285
+    ],
+    "in_domain": true,
+    "exact_capture": 1.0092719947469053,
+    "at_least_1": true,
+    "at_least_certified_bound": true
+   },
+   "source_log": {
+    "verdict": "verified",
+    "nodes": 764707,
+    "min_certified_lower_bound": 1.00000001991859,
+    "cpu_seconds": 21.065224768999997,
+    "agrees": true
+   },
+   "premises": {
+    "B": "4999/5000",
+    "D": "1/5002",
+    "L": "2799/400",
+    "angle_count": 2073,
+    "centre_domain": "per-bin",
+    "expanded_points": 0,
+    "expanded_rectangles": 4848,
+    "expanded_segments": 0,
+    "format": "M",
+    "input_sha256": "584a83196e7f03c3f3df95a130c313ef5db3b06619df8f1d30eefa9e2c47fad4",
+    "mass_below_n": "1/100000",
+    "mass_exact": "4399999/100000",
+    "n": 44,
+    "net_last_tangent": "1036/2501",
+    "net_origin": "proof_net",
+    "shrink_bound": "25009997/25010000",
+    "source_rectangles": 606
+   }
+  }
+ ],
+ "process_cpu_seconds": 91.83,
+ "load_average": [
+  8.59375,
+  5.22216796875,
+  4.9326171875
+ ]
+}

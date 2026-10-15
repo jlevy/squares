@@ -158,6 +158,46 @@ def test_an_unattributed_step_is_selected_by_everything() -> None:
     assert {step.name for step in selection.steps} == {"synthetic", "claimed"}
 
 
+def test_exact_news_inputs_keep_native_checks_without_widening_push_prerequisites() -> None:
+    prerequisites = tuple(step for step in STEPS if step.fast and not step.broad)
+    always = {step.name for step in prerequisites if not step.touches}
+    news = ("packing/site-changelog.yaml", "packing/site-changelog.schema.yaml")
+    for paths in ([news[0]], [news[1]], list(news)):
+        selection = select_for_paths(paths, prerequisites)
+        assert not selection.is_whole_gate
+        assert selection.unattributed_paths == ()
+        names = {step.name for step in selection.steps}
+        assert always <= names
+        assert {"soft-schema validation", "synopsis agrees with the artifacts"} <= names
+        assert "lint floor (ruff)" not in names
+        assert "type floor (basedpyright)" not in names
+    ordinary = select_for_paths(["packing/devtools/assess_frontier_rigidity.py"], prerequisites)
+    assert {"soft-schema validation", "synopsis agrees with the artifacts"} <= {
+        step.name for step in ordinary.steps
+    }
+    for neighbor in ("packing/site-changelog-extra.yaml", "packing/site-changelog.future.yaml"):
+        selection = select_for_paths([news[0], neighbor], prerequisites)
+        assert selection.is_whole_gate
+        assert selection.unattributed_paths == (neighbor,)
+
+
+def test_known_input_ownership_selects_its_owner_and_never_expands_a_glob() -> None:
+    owner = Step("owner", lambda _c: "", touches=("code/*",), known_inputs=("data/news.yaml",))
+    other = Step("other", lambda _c: "", touches=("other/*",))
+    selection = select_for_paths(["data/news.yaml"], (owner, other))
+    assert selection.steps == (owner,)
+    missing_owner = select_for_paths(["data/news.yaml"], (other,))
+    assert missing_owner.is_whole_gate
+    assert missing_owner.unattributed_paths == ("data/news.yaml",)
+    selection = select_for_paths(["data/news.yaml.backup"], (owner, other))
+    assert selection.is_whole_gate
+    assert selection.unattributed_paths == ("data/news.yaml.backup",)
+    globbed = Step("globbed", lambda _c: "", touches=("code/*",), known_inputs=("data/*.yaml",))
+    selection = select_for_paths(["data/news.yaml"], (globbed, other))
+    assert selection.is_whole_gate
+    assert selection.unattributed_paths == ("data/news.yaml",)
+
+
 def test_a_narrow_change_does_not_select_the_whole_gate() -> None:
     """The point of the feature, stated as a measurement rather than a hope.
 
@@ -219,6 +259,7 @@ def test_the_five_under_selections_an_adversarial_review_found() -> None:
     cases = {
         # check_svg_rendering pins examples in TUTORIAL.md and walks REPO.rglob("*.md").
         "TUTORIAL.md": "deterministic SVG rendering",
+        "TUTORIAL-ADVANCED.md": "deterministic SVG rendering",
         # render_research_tables diffs the n=11 report cell by cell.
         "docs/project/research/research-2026-08-22-packing-11-unit-squares.md": (
             "generated tables in sync with frontier/"

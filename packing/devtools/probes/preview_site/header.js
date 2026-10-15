@@ -45,9 +45,9 @@
   };
   const nav = document.querySelector(".site-nav");
   const header = document.querySelector(".kpress-site-header");
-  // The section tabs are the strip that is a `nav` of links; the homepage's atlas has
-  // the same strip as a tablist of buttons over its tiles, which is not a header.
-  const tabs = document.querySelector("nav.site-tabs");
+  // Section navigation belongs to the header; a page can also carry an inline
+  // Visuals chooser or an atlas tablist inside its reading column.
+  const tabs = header?.querySelector("nav.site-tabs") ?? null;
   /** @param {Element | null} el */
   const ruled = (el) =>
     el !== null && Number.parseFloat(getComputedStyle(el).borderBottomWidth) > 0;
@@ -104,7 +104,7 @@
       name_shown: nameText !== undefined,
       name_label: nameText?.textContent ?? null,
       link: size(links[0] ?? null),
-      tab: size(document.querySelector("nav.site-tabs a")),
+      tab: size(tabs?.querySelector("a") ?? null),
       tab_scale:
         Number.parseFloat(
           getComputedStyle(document.documentElement).getPropertyValue("--paper-button-label-scale"),

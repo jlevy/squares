@@ -1,0 +1,13 @@
+{
+ "mutation": "duplicate-root",
+ "interval": 1,
+ "from": "interval_0_0.02",
+ "region": "top",
+ "line": 1,
+ "appended_copy_of_line": 1,
+ "resealed": [
+  "top.rec",
+  "SHA256SUMS",
+  "intervals.json (digests and published counts)"
+ ]
+}

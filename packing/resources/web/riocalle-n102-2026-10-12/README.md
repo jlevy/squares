@@ -95,15 +95,15 @@ its holder’s own packet.
 
 | Report | Its side | This certificate |
 | --- | --- | --- |
-| The case’s house on layer 4: Evan Daniel’s regularization of ry-xu’s packing (T-146) | 10.6058286964315784 | above it by $2.43 \times 10^{-11}$ |
-| ry-xu’s certificate (T-125), the case’s house on `main` | 10.6058286965106059 | below it by $5.48 \times 10^{-11}$ |
+| The case’s house on layer 4: Evan Daniel’s regularization of Ryan Xu’s packing (T-146) | 10.6058286964315784 | above it by $2.43 \times 10^{-11}$ |
+| Ryan Xu’s certificate (T-125), the case’s house on `main` | 10.6058286965106059 | below it by $5.48 \times 10^{-11}$ |
 | Evan Daniel’s degree-8 exact side of the earlier configuration (T-120) | 10.607174680176051125… | below it by $1.35 \times 10^{-3}$ |
 
 So the certificate is a finite upper bound the record already beats: T-146, registered
 on 10 October 2026 and confirmed at V3/C3, is smaller, and it is the house at 102 once
 the adoption layer merges. The issue compares with T-125 only, and its margin to T-125 is
 right. T-120 is the exact algebraic side of a different design, the one this count’s
-record held before ry-xu’s: its decimals agree to 18 places with T-098’s rational side,
+record held before Ryan Xu’s: its decimals agree to 18 places with T-098’s rational side,
 Evan Daniel’s exact optimum of Francisco Couzo’s packing of 26 September 2026. It says
 nothing about this arrangement, whose exact side nobody has computed. The README’s valley bottom, $s = 10.605828696431638$, is the
 author’s report for which no layout is published; it is not certified here, and it is
@@ -113,7 +113,7 @@ above T-146’s side by $6.0 \times 10^{-14}$.
 
 Measured for the credit with the third exact route’s own `arrangement_gap` and
 `patch_lineage` (`devtools.check_half_angle_area`, called from a scratch driver and not
-changed), against ry-xu’s certificate (T-125) and Evan Daniel’s regularization of it
+changed), against Ryan Xu’s certificate (T-125) and Evan Daniel’s regularization of it
 (T-146):
 
 | Against | Best symmetry | Squares moved beyond $10^{-9}$ ($10^{-3}$, $10^{-2}$, $10^{-1}$) | Largest move | Largest turn (sine); turned beyond $10^{-6}$ | Reappearing by pose ($10^{-9}$); to the eye ($10^{-1}$) |
@@ -121,11 +121,11 @@ changed), against ry-xu’s certificate (T-125) and Evan Daniel’s regularizati
 | T-125 | a half turn | 62 of 102 (61, 42, 19) | 0.494 | 0.683; 11 | 40; 86 |
 | T-146 | a quarter turn | 61 of 102 (59, 44, 25) | 0.494 | 0.683; 11 | 41; 78 |
 
-Every square of this packing is matched one to one to a square of ry-xu’s under a half
+Every square of this packing is matched one to one to a square of Ryan Xu’s under a half
 turn of the box, and 40 of them land within $10^{-9}$ of their match, none turned: the
 issue’s count. The other 62 moved, 19 of them by more than a tenth of a unit and the
-largest by 0.494, and 11 turned. So this is a different arrangement of ry-xu’s design, as
-the issue says, and not a refinement of ry-xu’s packing in the sense the record uses for
+largest by 0.494, and 11 turned. So this is a different arrangement of Ryan Xu’s design, as
+the issue says, and not a refinement of Ryan Xu’s packing in the sense the record uses for
 re-equilibrated packings, where no square moves beyond a tenth. The issue’s further
 split, 39 squares within 0.05 and 23 beyond, of which 7 move by up to half a unit, was
 not reproduced at those scales.
@@ -140,11 +140,11 @@ bound only.
 ## Credit
 
 The issue asks for the credit name Rio Calle (University of New Hampshire), and credits
-ry-xu with the design and width first (T-125, published 8 October 2026 at 00:03 UTC). The
+Ryan Xu with the design and width first (T-125, published 8 October 2026 at 00:03 UTC). The
 README says the author’s own engine (GPU simulated annealing, an exact LP finish and a
 beam search of structural edits) found the arrangement from scratch about ten hours
-later, without reading a published layout, and that it shares ry-xu’s design but is a
-different arrangement: with ry-xu’s turned a half turn, 40 of the 102 squares coincide.
+later, without reading a published layout, and that it shares Ryan Xu’s design but is a
+different arrangement: with Ryan Xu’s turned a half turn, 40 of the 102 squares coincide.
 The first report, Davidebyzero/packing_squares_in_squares__tools issue 6, was opened on
 2026-10-08T17:34:14Z. The issue and README state AI assistance: the author designed and
 directed the project and its experiments, and Claude wrote and ran the search, the exact

@@ -1,0 +1,1 @@
+n = 601 = 25^2 - 25 + 1, S = 24.998914572427130 (rounded up; exact value in the certificate), built from a parametric two-wedge seed (eight lines per wedge, built from line lengths and angles, not from an earlier packing; see the note, Section 6), found 2026-10-10, not analytically optimised.

@@ -1,0 +1,263 @@
+{
+ "schema": "closed-form-published-checker/v1",
+ "checker": "replay4d",
+ "checker_source_sha256": "92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193",
+ "build": "rustc 1.86.0 on a freshly installed Ubuntu 24.04 machine, cargo build --locked --release -p replay4d; cargo test --locked --release -p seam4d_core -p replay4d: 28 tests passed",
+ "command": "python3 checker/replay_all.py --assets <dir> --only 1,34 (after sha256sum -c on the assets)",
+ "result": "ALL REPLAY OK",
+ "runs": [
+  {
+   "asset": "interval_0_0.02.tar.gz",
+   "region": "straddle",
+   "bounds": [
+    "167/100",
+    "253/100",
+    "0",
+    "272/100"
+   ],
+   "family": "family.json",
+   "record_sha256": "b4cf387cac482c9635fd2d010d1cc411dbbe916c26d629802559cd47c44852a8",
+   "family_sha256": "dc43f3886275da4ccecc3fa21221518f5aa85c862556a6c99067f6884ed8cf72",
+   "result": "REPLAY OK",
+   "ok": true,
+   "roots": 6804,
+   "leaves": 177505,
+   "bad": 0,
+   "cpu_hours": 24.74,
+   "leaves_by_kind": {
+    "B3D": 88905,
+    "B3T:x": 2,
+    "B3T:y": 376,
+    "B3U:x": 1084,
+    "B3U:xy": 433,
+    "B3U:xyh": 19,
+    "B3U:y": 986,
+    "CORE": 45646,
+    "CORE1:P": 2677,
+    "CORE1:Tx": 255,
+    "CORE1:Ty": 7757,
+    "CORE1:x": 10301,
+    "CORE1:xy": 6989,
+    "CORE1:xyh": 2943,
+    "CORE1:y": 3777,
+    "EDGE": 3686,
+    "EMPTY": 1591,
+    "EX:CORE": 14,
+    "EY:CORE": 64
+   }
+  },
+  {
+   "asset": "interval_0_0.02.tar.gz",
+   "region": "left",
+   "bounds": [
+    "0",
+    "167/100",
+    "0",
+    "38/10"
+   ],
+   "family": "family.json",
+   "record_sha256": "4b41fe091654ae7b70bf092cafa93dbedc4525345b1bf6debd1783c263358a3f",
+   "family_sha256": "dc43f3886275da4ccecc3fa21221518f5aa85c862556a6c99067f6884ed8cf72",
+   "result": "REPLAY OK",
+   "ok": true,
+   "roots": 17442,
+   "leaves": 645823,
+   "bad": 0,
+   "cpu_hours": 40.97,
+   "leaves_by_kind": {
+    "B3D": 80434,
+    "B3T:x": 11522,
+    "B4U": 111,
+    "CORE": 265376,
+    "CORE1:P": 137314,
+    "CORE1:Tx": 126248,
+    "CORE1:TxHy": 1498,
+    "EMPTY": 23320
+   }
+  },
+  {
+   "asset": "interval_0_0.02.tar.gz",
+   "region": "top",
+   "bounds": [
+    "167/100",
+    "253/100",
+    "272/100",
+    "38/10"
+   ],
+   "family": "family.json",
+   "record_sha256": "8fee4befad963fbed9121ee371a824fc85e90dc21ccdd39dd47283485b3831d9",
+   "family_sha256": "dc43f3886275da4ccecc3fa21221518f5aa85c862556a6c99067f6884ed8cf72",
+   "result": "REPLAY OK",
+   "ok": true,
+   "roots": 2673,
+   "leaves": 171634,
+   "bad": 0,
+   "cpu_hours": 2.16,
+   "leaves_by_kind": {
+    "B3D": 4314,
+    "B3T:x": 10,
+    "B3U:x": 13802,
+    "CORE": 32048,
+    "CORE1:P": 110,
+    "CORE1:Tx": 1352,
+    "CORE1:x": 118173,
+    "EDGE": 1825
+   }
+  },
+  {
+   "asset": "interval_0_0.02.tar.gz",
+   "region": "right",
+   "bounds": [
+    "251/100",
+    "38/10",
+    "0",
+    "38/10"
+   ],
+   "family": "family_right.json",
+   "record_sha256": "d5f5f9a2fa94772ba15ac6bdd814b57681de200351522cf8017816f32ae2e780",
+   "family_sha256": "7af03de5e6cd9489bf0800c61f9c7baae3aaeecb1e2e82a8037056aad0a3c03d",
+   "result": "REPLAY OK",
+   "ok": true,
+   "roots": 13338,
+   "leaves": 658495,
+   "bad": 0,
+   "cpu_hours": 15.32,
+   "leaves_by_kind": {
+    "B3D": 42755,
+    "B3T:y": 14163,
+    "B3U:y": 101110,
+    "CORE": 160287,
+    "CORE1:P": 6,
+    "CORE1:Ty": 126918,
+    "CORE1:y": 166945,
+    "EDGE": 37617,
+    "EMPTY": 8694
+   }
+  },
+  {
+   "asset": "interval_0.99_1.tar.gz",
+   "region": "straddle",
+   "bounds": [
+    "167/100",
+    "351/100",
+    "0",
+    "272/100"
+   ],
+   "family": "family.json",
+   "record_sha256": "16822c1b1d0ec8eca3435c2106ee3a2e02e10100bbc21810f35fcf02339a4b87",
+   "family_sha256": "cb43f468985a35164ccdf5d449f7d5fb345978c1d645c4755a89a1a1bc31cc02",
+   "result": "REPLAY OK",
+   "ok": true,
+   "roots": 14364,
+   "leaves": 485906,
+   "bad": 0,
+   "cpu_hours": 19.45,
+   "leaves_by_kind": {
+    "B3D": 146500,
+    "B3T:x": 4,
+    "B3T:y": 464,
+    "B3U:x": 1072,
+    "B3U:xy": 1392,
+    "B3U:xyh": 9,
+    "B3U:y": 6075,
+    "CORE": 167097,
+    "CORE1:P": 31469,
+    "CORE1:Tx": 3441,
+    "CORE1:Ty": 51379,
+    "CORE1:x": 10255,
+    "CORE1:xy": 5421,
+    "CORE1:xyh": 2666,
+    "CORE1:y": 25171,
+    "EDGE": 12540,
+    "EMPTY": 20951
+   }
+  },
+  {
+   "asset": "interval_0.99_1.tar.gz",
+   "region": "left",
+   "bounds": [
+    "0",
+    "167/100",
+    "0",
+    "38/10"
+   ],
+   "family": "family.json",
+   "record_sha256": "b74e7ae1cb728b271a779b92fc9e6e4245874684d9bbbb9236a630a201f41e80",
+   "family_sha256": "cb43f468985a35164ccdf5d449f7d5fb345978c1d645c4755a89a1a1bc31cc02",
+   "result": "REPLAY OK",
+   "ok": true,
+   "roots": 17442,
+   "leaves": 594009,
+   "bad": 0,
+   "cpu_hours": 13.81,
+   "leaves_by_kind": {
+    "B3D": 163001,
+    "B3T:x": 17494,
+    "CORE": 227924,
+    "CORE1:P": 79727,
+    "CORE1:Tx": 59616,
+    "CORE1:TxHy": 173,
+    "EMPTY": 46074
+   }
+  },
+  {
+   "asset": "interval_0.99_1.tar.gz",
+   "region": "top",
+   "bounds": [
+    "167/100",
+    "351/100",
+    "272/100",
+    "38/10"
+   ],
+   "family": "family.json",
+   "record_sha256": "22fb22bf1488eba4be6b945a6a3cb15137668c80f18f4997db26d54923bc24a8",
+   "family_sha256": "cb43f468985a35164ccdf5d449f7d5fb345978c1d645c4755a89a1a1bc31cc02",
+   "result": "REPLAY OK",
+   "ok": true,
+   "roots": 5643,
+   "leaves": 71393,
+   "bad": 0,
+   "cpu_hours": 1.59,
+   "leaves_by_kind": {
+    "B3D": 7754,
+    "B3T:x": 176,
+    "B3U:x": 8726,
+    "CORE": 24016,
+    "CORE1:P": 642,
+    "CORE1:Tx": 5979,
+    "CORE1:x": 20006,
+    "EDGE": 4094
+   }
+  },
+  {
+   "asset": "interval_0.99_1.tar.gz",
+   "region": "right",
+   "bounds": [
+    "251/100",
+    "38/10",
+    "0",
+    "38/10"
+   ],
+   "family": "family_right.json",
+   "record_sha256": "db8f228fa79bc1104fa628097dfde476cf0f23ed84795e593e5a27f555d806fc",
+   "family_sha256": "333b0984abac2ffd15812894ae3d7a129dde311cc265ec284ed7c671205baf24",
+   "result": "REPLAY OK",
+   "ok": true,
+   "roots": 13338,
+   "leaves": 333916,
+   "bad": 0,
+   "cpu_hours": 6.61,
+   "leaves_by_kind": {
+    "B3D": 59068,
+    "B3T:y": 16604,
+    "B3U:y": 55614,
+    "CORE": 83760,
+    "CORE1:Ty": 58929,
+    "CORE1:y": 27688,
+    "EDGE": 21476,
+    "EMPTY": 10777
+   }
+  }
+ ],
+ "note": "The published checker sources (this source hash) replayed all eight records of intervals 1 and 34 from the published release assets, with the published families, after checking every SHA-256 (replay_all.py also compares the root and leaf counts with intervals.json). The full replay of all 136 records (replay.json) used sources that differ from the published ones only in comments, and families that differ from the published ones only by the removed keys note and target, which replay4d does not read (families.json)."
+}

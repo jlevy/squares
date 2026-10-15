@@ -293,10 +293,22 @@ def at_bound(entry: Mapping[str, Any], bound: Mapping[str, Any]) -> bool:
     return view is not None and upper is not None and Fraction(str(view)) == upper
 
 
-def witness_source_key(entry: Mapping[str, Any], repo: Path = REPO) -> str | None:
+def witness_source_key(
+    entry: Mapping[str, Any],
+    repo: Path = REPO,
+    *,
+    source_keys: dict[Path, str | None] | None = None,
+) -> str | None:
     """The bibliography key the drawn entry's source witness names."""
-    document = load_yaml((repo / entry["source"]["witness"]).read_text(encoding="utf-8"))
-    return (document["witness"].get("source") or {}).get("key")
+    path = repo / entry["source"]["witness"]
+    key_path = path.resolve() if source_keys is not None else path
+    if source_keys is not None and key_path in source_keys:
+        return source_keys[key_path]
+    document = load_yaml(path.read_text(encoding="utf-8"))
+    key = (document["witness"].get("source") or {}).get("key")
+    if source_keys is not None:
+        source_keys[key_path] = key
+    return key
 
 
 def registering_holders(
@@ -735,9 +747,15 @@ class Drawn:
     modifications: list[str] | None
 
 
-def drawn_counts(index: Mapping[str, Any], repo: Path = REPO) -> list[Drawn]:
+def drawn_counts(
+    index: Mapping[str, Any],
+    repo: Path = REPO,
+    *,
+    register: Register | None = None,
+    source_keys: dict[Path, str | None] | None = None,
+) -> list[Drawn]:
     """Every count the layer draws regularized, with `of` resolved (see the module)."""
-    register = load_register()
+    register = load_register() if register is None else register
     results = register.results
     found: list[Drawn] = []
     for entry in sorted(index["entries"], key=lambda record: int(record["n"])):
@@ -755,7 +773,7 @@ def drawn_counts(index: Mapping[str, Any], repo: Path = REPO) -> list[Drawn]:
         resolved = packing_result(
             entry,
             results,
-            source_key=witness_source_key(entry, repo),
+            source_key=witness_source_key(entry, repo, source_keys=source_keys),
             bound_holders=holders,
             side_at_bound=exact,
         )
@@ -786,6 +804,8 @@ def source_regularizations(
     results: Sequence[Mapping[str, Any]],
     sources: Mapping[str, Any],
     repo: Path = REPO,
+    *,
+    source_keys: dict[Path, str | None] | None = None,
 ) -> dict[int, dict[str, Any]]:
     """The counts whose house is itself a regularization its source published: a
     register result's `regularizations` item by a source (`by` a bibliography key) whose
@@ -799,7 +819,7 @@ def source_regularizations(
             if by == PROJECT_REGULARIZER:
                 continue
             witness = {"source": {"witness": f"packing/witnesses/known-best/n-{n:03d}.yaml"}}
-            if witness_source_key(witness, repo) != by:
+            if witness_source_key(witness, repo, source_keys=source_keys) != by:
                 continue
             source = sources.get(by)
             credit = getattr(source, "credit", None) or ", ".join(
@@ -1096,17 +1116,28 @@ def case_note(
 
 
 def case_fields(
-    index: Mapping[str, Any], repo: Path = REPO, drawn: Sequence[Drawn] | None = None
+    index: Mapping[str, Any],
+    repo: Path = REPO,
+    drawn: Sequence[Drawn] | None = None,
+    *,
+    register: Register | None = None,
+    source_keys: dict[Path, str | None] | None = None,
 ) -> dict[int, dict[str, Any]]:
     """Each case record's `regularization` field, by count, for the records that carry
     one: the source's regularization of the house first, then this project's drawing,
     then this project's regularization a result registers where the layer does not draw
     it (`registered_case_items`)."""
-    register = load_register()
-    by_source = source_regularizations(register.results, register.sources, repo)
+    register = load_register() if register is None else register
+    by_source = source_regularizations(
+        register.results, register.sources, repo, source_keys=source_keys
+    )
     generators = index.get("generators") or {}
     projects: dict[int, dict[str, Any]] = {}
-    for count in drawn_counts(index, repo) if drawn is None else drawn:
+    for count in (
+        drawn_counts(index, repo, register=register, source_keys=source_keys)
+        if drawn is None
+        else drawn
+    ):
         registered_by = registered_record(count, register.results)
         projects[int(count.entry["n"])] = project_case_item(
             count,
@@ -1287,14 +1318,22 @@ def problems(
     text = RESULTS.read_text(encoding="utf-8") if register_text is None else register_text
     head, block = split(text)
     document = index_document() if index is None else index
-    drawn = drawn_counts(document)
+    # Reuse committed inputs within this check; edited text remains independent.
+    register = load_register()
+    source_keys: dict[Path, str | None] = {}
+    drawn = drawn_counts(document, register=register, source_keys=source_keys)
     items, unregistered = expected(document, drawn=drawn)
     wanted = block_text(items, unregistered)
     results = (safe_load(head) or {}).get("results") or []
     solves = recorded_solves(drawn, results, document.get("runs") or [])
-    found_problems = registered_problems(head, document.get("generators") or {}, solves)
-    found_problems += first_certified_problems(load_register())
-    found_problems += case_problems(document, case_fields(document, drawn=drawn))
+    found_problems = registered_problems(
+        head, document.get("generators") or {}, solves, results=results
+    )
+    found_problems += first_certified_problems(register)
+    found_problems += case_problems(
+        document,
+        case_fields(document, drawn=drawn, register=register, source_keys=source_keys),
+    )
     if block == wanted:
         return found_problems
     found = (safe_load(block) or {}).get(KEY) or {} if block else {}
@@ -1315,18 +1354,23 @@ def registered_problems(
     head: str,
     generators: Mapping[str, Any],
     solves: Mapping[tuple[str, int], Mapping[str, Any]] | None = None,
+    *,
+    results: Sequence[Mapping[str, Any]] | None = None,
 ) -> list[str]:
     """Whether each registered result's own regularization (`by: project`) carries the
     `modifications` its `method` and `side` give, or the drawn entry of its very solve
-    where the layer draws it (`registered_modifications`, `recorded_solves`)."""
-    results = (safe_load(head) or {}).get("results") or []
+    where the layer draws it (`registered_modifications`, `recorded_solves`). A supplied
+    `results` sequence must be parsed from `head`."""
+    from_head: Sequence[Mapping[str, Any]] = (
+        ((safe_load(head) or {}).get("results") or []) if results is None else results
+    )
     solves = solves or {}
-    if with_registered_modifications(head, results, generators, solves) == head:
+    if with_registered_modifications(head, from_head, generators, solves) == head:
         return []
     owed = sorted(
         {
             str(result["id"])
-            for result in results
+            for result in from_head
             for record in result.get("regularizations") or []
             if record["by"] == PROJECT_REGULARIZER
             and (record.get("modifications"), record.get("modifications_unrecorded") or [])

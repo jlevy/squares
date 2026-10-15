@@ -48,6 +48,7 @@
     "packing/tests/test_angle_near_axis_control.py": 0.521,
     "packing/tests/test_angle_source_control.py": 0.014,
     "packing/tests/test_angle_tile_certificate.py": 0.163,
+    "packing/tests/test_apply_closed_form.py": 0.348,
     "packing/tests/test_artifact_dates.py": 4.346,
     "packing/tests/test_assemble_site.py": 0.019,
     "packing/tests/test_assembly_coverage.py": 0.146,
@@ -62,6 +63,7 @@
     "packing/tests/test_audit_s12_reweighted.py": 0.07,
     "packing/tests/test_audit_valid7_independent.py": 5.58,
     "packing/tests/test_audit_validtilt9_independent.py": 2.456,
+    "packing/tests/test_audit_wand125_closed_form.py": 0.064,
     "packing/tests/test_audit_wand125_declared_net.py": 2.868,
     "packing/tests/test_bc303_t2_charge_sweep.py": 0.365,
     "packing/tests/test_bc303_t2_geometry_control.py": 1.916,
@@ -195,6 +197,7 @@
     "packing/tests/test_decide_certificate.py": 0.613,
     "packing/tests/test_decide_relational_certificate.py": 2.555,
     "packing/tests/test_decide_threshold_certificate.py": 5.807,
+    "packing/tests/test_decide_undecided_comparisons.py": 4.913,
     "packing/tests/test_declare_least_cell_mass.py": 7.208,
     "packing/tests/test_deep_gate_workflow.py": 0.347,
     "packing/tests/test_density_face_verifier.py": 10.65,
@@ -222,6 +225,7 @@
     "packing/tests/test_exact_stage_progress.py": 0.058,
     "packing/tests/test_experiment_assurance_contract.py": 0.02,
     "packing/tests/test_falsify.py": 0.635,
+    "packing/tests/test_fang_excess_theorem.py": 1.756,
     "packing/tests/test_fetch_external_release_inventory.py": 0.042,
     "packing/tests/test_fibonacci_torus.py": 8.171,
     "packing/tests/test_field_preconditions.py": 0.016,
@@ -300,6 +304,8 @@
     "packing/tests/test_independent_five_dot_union.py": 0.288,
     "packing/tests/test_index_n11_capture_source.py": 0.048,
     "packing/tests/test_inspect_n17_subpattern_relevance.py": 0.398,
+    "packing/tests/test_intake_comments.py": 0.04,
+    "packing/tests/test_intake_ledger.py": 0.389,
     "packing/tests/test_intake_sweep.py": 1.841,
     "packing/tests/test_integral_piercing.py": 0.058,
     "packing/tests/test_integrity_ceremony_contract.py": 8.647,
@@ -680,6 +686,11 @@
     "packing/tests/test_unitsquare_precision_semantics.py": 1.051,
     "packing/tests/test_upper_bound_intervals.py": 6.698,
     "packing/tests/test_upper_bound_packets.py": 14.1,
+    "packing/tests/test_upper_bound_reports_562_575_584_596.py": 1.525,
+    "packing/tests/test_upper_bound_reports_574.py": 59.095,
+    "packing/tests/test_upper_bound_reports_606_70a033f.py": 26.528,
+    "packing/tests/test_upper_bound_reports_fang_direct.py": 2.594,
+    "packing/tests/test_upper_bound_reports_pingyou_1012.py": 10.588,
     "packing/tests/test_validation_cli.py": 27.688,
     "packing/tests/test_validation_report.py": 0.125,
     "packing/tests/test_validation_timing.py": 1.27,
@@ -793,6 +804,82 @@
           "report": "packing/devtools/suite-file-cost-admissions/contributor-profiles-2026-10-14.json",
           "provenance": {},
           "tests": 98
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_fang_excess_theorem.py",
+        "packing/tests/test_intake_ledger.py",
+        "packing/tests/test_upper_bound_reports_562_575_584_596.py",
+        "packing/tests/test_upper_bound_reports_fang_direct.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-2026-10-14.json",
+          "provenance": {},
+          "tests": 87
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_intake_comments.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-comments-2026-10-14.json",
+          "provenance": {},
+          "tests": 15
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_audit_wand125_closed_form.py",
+        "packing/tests/test_decide_undecided_comparisons.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/wand125-closed-form-and-decide-undecided-2026-10-14.json",
+          "provenance": {},
+          "tests": 31
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_apply_closed_form.py",
+        "packing/tests/test_upper_bound_reports_574.py",
+        "packing/tests/test_upper_bound_reports_pingyou_1012.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/records-1014-2026-10-14.json",
+          "provenance": {},
+          "tests": 65
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_606_70a033f.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-1014b-606-70a033f-2026-10-15.json",
+          "provenance": {},
+          "tests": 13
         }
       ]
     }

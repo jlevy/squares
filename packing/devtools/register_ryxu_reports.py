@@ -27,12 +27,17 @@ RADICAL_REPORT = "E-ryxu-432-radical-n51-report"
 RADICAL_EXACT = "E-ryxu-432-radical-n51-feasibility"
 RATIONAL_EXACT = "E-ryxu-432-rational-feasibility"
 HISTORY = houses.reports.PACKET / "acquisition/frontier-prior-state.json.xz"
+#: The finder as the record credits him, and the handle the records written before 14
+#: October 2026 carried in his place: credit names people by name (epistemics.md, People
+#: and projects, never tools). Retained prior states still hold the handle.
+FINDER = "Ryan Xu"
+HANDLE = "ry-xu"
 SECTION = "## The Xu construction"
-#: The heading before 14 October 2026, when every credit to ry-xu became Xu
-#: (`attribution.md`, Ryan Xu / ry-xu). Records read from history still carry it.
-EARLIER_SECTION = "## The ry-xu construction"
-#: Either heading, so a record of any date is read alike.
-SECTION_PATTERN = f"(?:{re.escape(SECTION)}|{re.escape(EARLIER_SECTION)})"
+#: The section's heading before 14 October 2026, which the retained prior states hold.
+FORMER_SECTION = "## The ry-xu construction"
+#: Either heading, as a regular expression: a writer replayed from a prior state finds the
+#: section under the heading that state carries, and writes `SECTION`.
+SECTION_PATTERN = "(?:" + "|".join(re.escape(h) for h in (SECTION, FORMER_SECTION)) + ")"
 
 
 def reported_bound(n: int) -> dict[str, Any]:
@@ -45,7 +50,7 @@ def reported_bound(n: int) -> dict[str, Any]:
         "catalogue_rigid": "not-stated",
         "construction_method": "unknown",
         "tilt_angles_deg": None,
-        "found_by": ["Ryan Xu"],
+        "found_by": [FINDER],
         "found_year": 2026,
         "improved_by": [],
         "catalogue_pictured": False,
@@ -55,6 +60,14 @@ def reported_bound(n: int) -> dict[str, Any]:
         "witnesses": [f"W-known-best-n{n:03d}"],
         "evidence": [RADICAL_REPORT if n == 51 else REPORT],
     }
+
+
+def named(bound: dict[str, Any]) -> dict[str, Any]:
+    """`bound` with its finder named, where a record written before 14 October 2026 gives
+    the handle."""
+    if HANDLE not in (bound.get("found_by") or []):
+        return bound
+    return {**bound, "found_by": [FINDER if x == HANDLE else x for x in bound["found_by"]]}
 
 
 def section(n: int, *, confirmed: bool) -> str:
@@ -78,7 +91,7 @@ def section(n: int, *, confirmed: bool) -> str:
     result = "T-126" if n == 51 else "T-125"
     return (
         f"\n{SECTION}\n\n"
-        f"Ryan Xu reports ({result}) a construction at exact side ${side}$, displayed upward "
+        f"{FINDER} reports ({result}) a construction at exact side ${side}$, displayed upward "
         f"as ${bound['value']}$. The [pinned factual packet]"
         "(../resources/web/ry-xu-new-packings-2026-10-08/README.md) retains the entire "
         "source input and complete actual deciding outcomes.\n\n"
@@ -652,10 +665,11 @@ def register() -> None:
         [
             {
                 "key": houses.SOURCE_KEY,
-                "authors": ["Xu"],
+                "authors": [FINDER],
                 "year": 2026,
                 "venue": "GitHub",
                 "dated": DAY,
+                "credit": "Xu",
                 "lineage": "independent",
                 "note": (
                     "The retained factual source certificates "

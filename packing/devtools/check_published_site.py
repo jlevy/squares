@@ -121,7 +121,7 @@ SITE_PAGES = tuple(render_overview.PAGES)
 #: on every deploy. The results page is one, since its records are the register's links
 #: and were asked of GitHub when the table was on the overview.
 LINK_CHECKED_PAGES = frozenset(
-    {"index.html", "atlas.html", "about.html", render_overview.RESULTS_PAGE}
+    {"index.html", "news.html", "atlas.html", "about.html", render_overview.RESULTS_PAGE}
 )
 
 #: Each paper's own version, as its front prints it (`sqpack.release`), by slug: the
@@ -153,7 +153,7 @@ def paper_files(page: str) -> tuple[str, str]:
 OPTIMALITY_PAPER_MARKDOWN, _OPTIMALITY_PAPER_PDF = paper_files(OPTIMALITY_PAPER)
 OPTIMALITY_PAPER_FILES = paper_files(OPTIMALITY_PAPER)
 #: The bar's current entry on a paper's page, a level below the root.
-PAPERS_CURRENT = '<a data-page="papers" aria-current="page" href="../papers.html">'
+PAPERS_CURRENT = '<a data-page="explanations" aria-current="page" href="../papers.html">'
 
 #: Every file the deploy serves with the lower-bounds explainer, by path under the site's
 #: root: its Markdown and PDF beside it, and the atlas's files at the root.
@@ -552,13 +552,20 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
     try:
         document = render_changelog.load()
     except ValueError as error:
-        return [(False, f"about.html: changelog record is invalid: {error}")]
+        return [(False, f"news.html: changelog record is invalid: {error}")]
     markup = _RecordMarkup(text)
     problems: list[str] = []
     if markup.ids.get("changelog") != 1:
         problems.append("requires one changelog section")
-    links = {element.attrs.get("href") for element in markup.find(tag="a")}
-    for entry in document["entries"]:
+    anchors = markup.find(tag="a")
+    links = {element.attrs.get("href") for element in anchors}
+    entries = render_changelog.news_entries(document)
+    articles = [element.attrs.get("data-news-entry") for element in markup.find(tag="article")]
+    if sorted(item for item in articles if item is not None) != sorted(
+        entry["id"] for entry in entries
+    ):
+        problems.append("article roster differs from eligible News entries")
+    for entry in entries:
         if markup.ids.get(render_changelog.entry_anchor(entry["id"])) != 1:
             problems.append(f"missing or repeated entry {entry['id']}")
         targets = [
@@ -571,10 +578,21 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
             if render_changelog.serialized_target(target, destination="site") not in links
         ]:
             problems.append(f"{entry['id']}: missing launch/PR links {missing}")
+    archived = render_changelog.archived_news_targets(document)
+    for anchor, target in archived.items():
+        matches = [element for element in anchors if element.attrs.get("id") == anchor]
+        if (
+            markup.ids.get(anchor) != 1
+            or len(matches) != 1
+            or matches[0].attrs.get("href") != target
+            or "data-news-target" not in matches[0].attrs
+        ):
+            problems.append(f"missing or incorrect archived entry target {anchor}")
     line = (
-        f"about.html: changelog: {'; '.join(problems[:5])}"
+        f"news.html: changelog: {'; '.join(problems[:5])}"
         if problems
-        else f"about.html: all {len(document['entries'])} changelog entries and launch links"
+        else f"news.html: all {len(entries)} News entries and launch links; "
+        f"{len(archived)} archived bookmarks"
     )
     return [(not problems, line)]
 
@@ -663,8 +681,8 @@ def head_checks(
             else f"card {address}: a PNG of {size[0]}x{size[1]}, {len(card)} bytes"
         )
         results.append((not problems, line))
-    if "about.html" in pages:
-        results.extend(changelog_checks(pages["about.html"]))
+    if "news.html" in pages:
+        results.extend(changelog_checks(pages["news.html"]))
     return results
 
 

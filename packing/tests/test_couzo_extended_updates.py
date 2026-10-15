@@ -70,7 +70,8 @@ def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
     """The earlier packet still prints its sides; the register supersedes, never rewrites.
 
     Each report keeps its own row at its own print when a later one beats it: ffd900d's by
-    2d32a6e's on 8 October, and 2d32a6e's by issue 506's certificates on 12 October.
+    2d32a6e's on 8 October, 2d32a6e's by issue 506's certificates on 12 October, and
+    issue 506's by issue 561's in the intake of 14 October.
     """
     claims = earlier.read_json(earlier.PACKET / "acquisition/sources.json")
     printed = {row["n"]: row["side"] for row in claims["sources"][0]["cases"]}
@@ -81,7 +82,8 @@ def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
         for row in coverage["beyond_horizon_claims"]
         if row["n"] in updates.COUNTS
     }
-    assert set(rows) == {
+    # The 14 October intake's later reports at both counts add rows after these three.
+    assert set(rows) >= {
         (n, source)
         for n in updates.COUNTS
         for source in (earlier.SOURCE_ID, updates.SOURCE_ID, ISSUE_506)
@@ -96,12 +98,17 @@ def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
         assert later["superseded_by"] == ISSUE_506
         current = rows[n, ISSUE_506]
         assert current["value"] == CERTIFIED[n]
-        assert current["disposition"] == "tracked-outside-case-corpus"
+        # Issue 561's certificates, reported on 12 October, are the next in report order.
+        assert current["disposition"] == "superseded"
+        assert current["superseded_by"] == "couzo-certificates-2026-10-12"
         assert Fraction(CERTIFIED[n]) < Fraction(LATER[n]) < Fraction(FFD900D[n])
+    # The 14 October intake's last reports stand: Couzo's 13 October certificate at 378,
+    # and evand's composition at 375, which beats Couzo's certificate of the same day.
     standing = check_source_coverage.current_beyond_horizon(coverage)
-    assert {n: standing[n]["source_id"] for n in updates.COUNTS} == dict.fromkeys(
-        updates.COUNTS, ISSUE_506
-    )
+    assert {n: standing[n]["source_id"] for n in updates.COUNTS} == {
+        375: "evand-compositions-2026-10-13",
+        378: "couzo-certificates-2026-10-13",
+    }
     source = check_source_coverage.source_by_id(coverage, updates.SOURCE_ID)
     assert check_source_coverage.load_claims(updates.ROOT / source["claims_record"]) == LATER
 

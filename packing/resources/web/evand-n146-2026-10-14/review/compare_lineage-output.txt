@@ -1,0 +1,5 @@
+n=146 evand-n146-2026-10-14 vs barnett-refinements-2026-10-11: side diff -1.380e-08; best symmetry 0: max centre distance 4.532e-01; within 1e-6: 63, 1e-3: 89, 0.1: 137 of 146; tangents moved > 1e-6: 23
+n=146 evand-n146-2026-10-14 vs pingyou-n146-refinement-2026-10-12: side diff -1.380e-08; best symmetry 0: max centre distance 4.532e-01; within 1e-6: 65, 1e-3: 89, 0.1: 137 of 146; tangents moved > 1e-6: 23
+n=146 evand-n146-2026-10-14 vs pingyou-pr574-certificates-2026-10-13: side diff -1.380e-08; best symmetry 0: max centre distance 4.532e-01; within 1e-6: 65, 1e-3: 89, 0.1: 137 of 146; tangents moved > 1e-6: 23
+n=146 evand-n146-2026-10-14 vs evand-regularized-2026-10-10: side diff -8.726e-08; best symmetry 0: max centre distance 4.784e-01; within 1e-6: 77, 1e-3: 94, 0.1: 137 of 146; tangents moved > 1e-6: 23
+n=146 evand-n146-2026-10-14 vs mishapolk-records-2026-10-14: side diff -1.380e-08; best symmetry 0: max centre distance 4.532e-01; within 1e-6: 63, 1e-3: 89, 0.1: 137 of 146; tangents moved > 1e-6: 23

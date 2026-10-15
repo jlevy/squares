@@ -1,0 +1,36 @@
+{
+ "record_sha256": "c3a19d700b5acee9e7ba9e0886de22e1416faaeb1536eee8b3470cf0c30ee296",
+ "files": {
+  "truncated.rec": {
+   "bytes": 456,
+   "sha256": "0bb7647fea378b9335d42e6f2992adc8912a8fcd915399e6e16efda827a47bc3"
+  },
+  "leaves.jsonl": {
+   "bytes": 1800,
+   "sha256": "1f2425cbf9f6c49556ab2c9bf2365038e56ab32f8ca8f68d4bbcde1662a79ae3"
+  },
+  "relabelled.jsonl": {
+   "bytes": 1796,
+   "sha256": "f9aa3a688605c027217474111215a165007766c635d6bc5456cdddb110073c82"
+  }
+ },
+ "truncated": "the record's first 2 root lines, run with the region bounds: they do not cover the region",
+ "leaves": "the 20 leaves of the record's first 20 roots, run with --leaves",
+ "relabelled": {
+  "leaf": 0,
+  "from": "CORE1:Tx",
+  "to": "CORE",
+  "note": "the same leaves with this one relabelled, run with --leaves"
+ },
+ "plan": {
+  "interval": 26,
+  "region": "top",
+  "record": "top.rec",
+  "bounds": [
+   "167/100",
+   "301/100",
+   "272/100",
+   "38/10"
+  ]
+ }
+}

@@ -27,7 +27,8 @@ from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 
 from devtools import repo_links
-from devtools.check_results import KINDS, kind_label
+from devtools.artifact_dates import long_date, written_date
+from devtools.check_results import KINDS
 from devtools.overview_data import (
     APOSTROPHE,
     BIBLIOGRAPHY,
@@ -54,6 +55,8 @@ from devtools.render_overview import PAPERS as PAPER_RECORDS
 from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, superseded
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES, recent_contributions_by_case
+from devtools.site_topics import topic_chip, topic_label
+from sqpack import release
 from sqpack.known_best import PackingSegment, grid_transitions
 from sqpack.yamlio import safe_load
 
@@ -83,19 +86,23 @@ SIGNIFICANCE_TOP = 5
 
 
 def significance_mark(level: int, meaning: str = "") -> str:
-    """A significance rung as the site draws it wherever it shows one: its letter and
-    level, `S4`, in the significance teal (`--site-significance`), and that many small
-    bars after it in the same ink, one to five. It is no chip: significance asks how
-    much a result matters, a different question from what the verification and
-    confirmation chips answer, so it looks different from them (the owner, 2026-10-03,
-    `think-m3m4`). It is one image to a screen reader, named by its level, and titled
-    with the rubric's `meaning` where one is given."""
-    bars = '<span class="site-significance-bar"></span>' * level
+    """One fixed-width significance meter everywhere: S plus five filled/empty bars.
+
+    Its ink and tooltip distinguish importance from verification and confirmation;
+    one accessible image names the score while its visual segments stay decorative.
+    """
+    if not 0 <= level <= SIGNIFICANCE_TOP:
+        raise ValueError("significance must be between zero and five")
+    bars = "".join(
+        '<span class="site-significance-bar" '
+        f'data-filled="{str(index < level).lower()}"></span>'
+        for index in range(SIGNIFICANCE_TOP)
+    )
     title = f' title="{_esc(meaning)}"' if meaning else ""
     return (
         f'<span class="site-significance" data-level="{level}" role="img" '
         f'aria-label="Significance S{level} of {SIGNIFICANCE_TOP}"{title}>'
-        f'<span class="site-significance-label" aria-hidden="true">S{level}</span>'
+        f'<span aria-hidden="true">S{level}</span>'
         f'<span class="site-significance-bars" aria-hidden="true">{bars}</span></span>'
     )
 
@@ -137,7 +144,7 @@ def kind_chip(result: Result) -> str:
     `case exclusion` (epistemics.md, Result Kinds). Every result has one; bound kinds
     use the same semantic hues as the corresponding bounds."""
     kind = str(result.record["kind"])
-    return f'<span class="site-chip" data-kind="{_esc(kind)}">{_esc(kind_label(kind))}</span>'
+    return topic_chip(kind, attribute="data-kind")
 
 
 def status_chip(status: str) -> str:
@@ -864,7 +871,7 @@ def result_filters(
         "</select></label>"
         for scale, label in RUNG_FILTERS
     )
-    kinds = [("", ALL), *((kind, kind_label(kind)) for kind in KINDS if kind in held)]
+    kinds = [("", ALL), *((kind, topic_label(kind)) for kind in KINDS if kind in held)]
     statuses = [("", ALL), *((status, status) for status in STATUSES if status in present)]
     sources = [("", ALL), ("ours", "This project"), ("others", "Others")]
     projects = [("", ALL), *((project_slug(url), project_name(url)) for url in project_urls())]
@@ -1578,6 +1585,7 @@ PAPER_DESCRIPTIONS: dict[str, str] = {
 
 #: The first-principles tutorial's title, as its own H1 writes it in TUTORIAL.md.
 TUTORIAL_TITLE = "Square Packing from First Principles"
+TUTORIAL_ADVANCED_TITLE = "Square Packing, Search, and Proof"
 
 #: Where each part of the series is served, under `papers/` by its slug
 #: (`render_overview.paper_path`); each renderer's `SITE_PATH` is the same path from the
@@ -1589,9 +1597,9 @@ OPTIMALITY_PAPER = paper_path(N11_OPTIMALITY_REVIEW)
 #: The site's papers, in the order the Papers page shows them, one large card each
 #: (`paper_cards`): the three parts of the n = 11 series in reading order, I, II, III,
 #: each labelled by its part (`render_overview.PAPERS`, the one registry a new paper is
-#: entered in), then the standalone methods tutorial and the first-principles tutorial,
-#: the background to the series, whose description is
-#: `TUTORIAL.md`'s own opening, its audience and what it owns.
+#: entered in), then the standalone methods paper and the two tutorials. Explanations
+#: places the basic and advanced tutorials first, in its own Tutorial section; the
+#: remaining papers retain the series' reading order.
 PAPERS: tuple[Paper, ...] = (
     *(
         Paper(
@@ -1606,11 +1614,15 @@ PAPERS: tuple[Paper, ...] = (
         href="tutorial.html",
         label="Tutorial",
         title=TUTORIAL_TITLE,
+        description=("The problem, bounds, small examples, and how to read a packing result."),
+    ),
+    Paper(
+        href="tutorial-advanced.html",
+        label="Advanced tutorial",
+        title=TUTORIAL_ADVANCED_TITLE,
         description=(
-            "An introduction for anyone new to the problem: what the objects are, why the "
-            "approach is shaped the way it is, and what the research has and has not "
-            "established. It introduces linear programming and algebraic number fields "
-            "and links further reading."
+            "Linear programs, exact certificates, search, regularization, "
+            "and global optimality proofs."
         ),
     ),
 )
@@ -1621,22 +1633,57 @@ THRESHOLD_REVIEW = next(paper for paper in PAPERS if paper.href == THRESHOLD_BOU
 OPTIMALITY = next(paper for paper in PAPERS if paper.href == OPTIMALITY_PAPER)
 
 
-def paper_cards() -> str:
-    """One card per paper. Each card is the link itself and goes to its paper in the same
-    tab, as the overview's page cards do (`page_cards`): a paper is a full page the site
-    serves, so no popover previews it (`link_card`, `new_tab=False`). A link holds no
-    other link, so the Papers page's introduction links what a description names."""
+#: First site publications, independent of later tutorial revisions. The basic page
+#: first shipped in Pages run 36833533118 (2026-10-01, source f9a3409f0); its manuscript
+#: predates the website. The advanced page first shipped in run 38636016372
+#: (2026-10-14, source 16ea3bd0606). Both runs successfully deployed these addresses.
+TUTORIAL_FIRST_PUBLISHED = {
+    "tutorial.html": date(2026, 10, 1),
+    "tutorial-advanced.html": date(2026, 10, 14),
+}
+
+
+def article_header(
+    title_html: str,
+    published: date,
+    *,
+    eyebrow: str = "",
+    metadata_html: str = "",
+    extra_class: str = "",
+) -> str:
+    """A reading card's heading; title and optional metadata are already safe HTML."""
+    label = f'<span class="site-card-label">{_esc(eyebrow)}</span>' if eyebrow else ""
+    classes = "site-article-header" + (f" {_esc(extra_class)}" if extra_class else "")
+    return (
+        f'<header class="{classes}">{label}'
+        f"<h3{headline_math_face(title_html)}>{title_html}</h3>"
+        '<p class="site-article-date publication-date">'
+        f'<time datetime="{published.isoformat()}">{long_date(published)}</time></p>'
+        f"{metadata_html}</header>"
+    )
+
+
+def paper_first_published(paper: Paper) -> date:
+    """Use the paper's first retained edition, never its current revision or site cut."""
+    if paper.href in TUTORIAL_FIRST_PUBLISHED:
+        return TUTORIAL_FIRST_PUBLISHED[paper.href]
+    slug = Path(paper.href).stem
+    return written_date(release.component_history(f"paper:{slug}")[-1].first_published)
+
+
+def paper_cards(*, papers: Sequence[Paper] | None = None) -> str:
+    """Same-tab reading cards with the shared article heading and original dates."""
     return _cards(
         [
-            link_card(
-                paper.href,
-                paper.label,
+            f'<a class="site-card site-card-link" href="{_esc(paper.href)}" '
+            f'data-go="page" {_size_attribute(paper.size)}>'
+            + article_header(
                 tex_bounds(paper.title),
-                tex_bounds(paper.description),
-                size=paper.size,
-                new_tab=False,
+                paper_first_published(paper),
+                eyebrow=paper.label,
             )
-            for paper in PAPERS
+            + f'<span class="site-card-note">{tex_bounds(paper.description)}</span></a>'
+            for paper in (PAPERS if papers is None else papers)
         ]
     )
 
@@ -1659,12 +1706,12 @@ PAGES: tuple[tuple[str, str, str, str], ...] = (
         "Every Case from n = 1 to 324",
         "Reported and verified bounds side by side, with their sources.",
     ),
-    *((paper.href, paper.label, paper.title, paper.description) for paper in PAPERS[:-1]),
+    *((paper.href, paper.label, paper.title, paper.description) for paper in PAPERS[:-2]),
     (
         "tutorial.html",
         "Tutorial",
         TUTORIAL_TITLE,
-        "The problem, its configuration space, exact algebra and the search.",
+        "The problem, bounds, small examples, and how to read a packing result.",
     ),
     (
         "workbench/",
@@ -1858,6 +1905,22 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         (
             "A decimal layout of 102 squares, another arrangement of Ryan Xu's design;"
             " certified here from the layout (T-159)."
+        ),
+    ),
+    (
+        "https://github.com/BuddenPing/squares",
+        "PingYou Ltd",
+        (
+            "Pull request #574's tighter certificates of others' packings, recorded at 68"
+            " counts and replayed at every one of them here (T-174)."
+        ),
+    ),
+    (
+        "https://github.com/bengreff/s76-certificate",
+        "Benjamin Greff",
+        (
+            "A mixed cover of points and grid-line segments for s(76) = 9, with the run"
+            " records of both checkers; reported, its census replayed in triage (T-184)."
         ),
     ),
     (

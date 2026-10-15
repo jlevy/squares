@@ -576,13 +576,15 @@ def test_all_keeps_a_long_since_clause_postable(capsys: pytest.CaptureFixture[st
 def test_a_line_about_a_few_counts_prints_each_bound_where_the_line_stays_brief(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    """T-149's three bounds fit; T-151's seven counts do not and stay elided (review A,
-    A8)."""
-    lines, _ = run(capsys, ["--ids", "T-149", "T-151", "--date", "2026-10-12"])
+    """T-141's two bounds fit; T-151's five counts do not and stay elided (review A,
+    A8). T-149's three were the example until the intake of 14 October left it the best
+    known at 155 alone, and T-162's three until T-186 bettered it at all three on 15
+    October."""
+    lines, _ = run(capsys, ["--ids", "T-141", "T-151", "--date", "2026-10-14"])
     assert lines[1].startswith(
-        "s(155) ≤ 12.95243, s(156) ≤ 12.97918, s(211) ≤ 14.99634, new best known (verified): "
+        "s(132) ≤ 11.98569, s(308) ≤ 17.99827, new best known (verified): "
     )
-    assert lines[2].startswith("s(n) ≤ … at 7 counts, n = 176\u2013272, new best known ")
+    assert lines[2].startswith("s(n) ≤ … at n = 181, 238, 239, 270, 272, new best known ")
     record = {"id": "T-900", "headline": "s(n) ≤ 10", "claim": ""}
     group = [ra.Count(n, UPPER, exact(f"{n}.5")) for n in (10, 11)]
     assert ra.statement(record, group) == "s(10) ≤ 10.5, s(11) ≤ 11.5"
@@ -622,17 +624,31 @@ def test_a_case_held_by_a_regularization_of_the_entrys_own_packing_does_not_bett
 
 
 def test_a_refinement_credits_the_person_its_headline_names_singular_or_plural(
-    capsys: pytest.CaptureFixture[str],
+    capsys: pytest.CaptureFixture[str], records: Records
 ) -> None:
-    """T-137 refines Ryan Xu's packing and T-150 his packings; both credit him."""
+    """T-137 refines Ryan Xu's packing and T-150 his packings; both credit him. Since
+    T-187 bettered T-150 at 146 on 15 October, and PingYou Ltd's re-solves (T-168,
+    T-169) took both its counts the same day, T-150's line is kept with `--all`; over
+    both its counts it says "packings"."""
     lines, _ = run(
         capsys, ["--ids", "T-137", "--date", "2026-10-11", "--all", "--min-significance", "1"]
     )
     assert ", refining Ryan Xu's packing " in lines[1]
     lines, _ = run(
-        capsys, ["--ids", "T-150", "--date", "2026-10-12", "--min-significance", "1"]
+        capsys, ["--ids", "T-150", "--date", "2026-10-12", "--all", "--min-significance", "1"]
     )
     assert ": Robert Barnett, refining Ryan Xu's packings " in lines[1]
+    both = [ra.Count(n, UPPER, exact("13")) for n in (146, 261)]
+    names = ra.Names(full={"Xu": "Ryan Xu"})
+    assert ra.worked_on(records.results["T-150"], both, records, names) == (
+        "refining Ryan Xu's packings"
+    )
+    names = ra.Names({"Xu": handle("Xu", "from_record")}, names.full)
+    assert ra.worked_on(records.results["T-150"], both, records, names) == (
+        "refining @from_record's packings"
+    )
+    written = {**records.results["T-150"], "headline": "refinements of Ryan Xu's packings"}
+    assert ra.worked_on(written, both, records, ra.Names()) == ("refining Ryan Xu's packings")
 
 
 def test_a_refinement_of_a_requests_packings_credits_the_entry_its_claim_names(
@@ -640,9 +656,10 @@ def test_a_refinement_of_a_requests_packings_credits_the_entry_its_claim_names(
 ) -> None:
     """T-152 refines "SQUISH's Mondrian packings", which its claim names as T-151's, Nate
     Chaoweeraprasit's; the line credits him, since T-151's own line no longer names 304 or
-    305 (review B, B1)."""
+    305 (review B, B1). Since the intake of 14 October T-152 is the best known at 305
+    alone, so the packing is singular."""
     lines, err = run(capsys, ["--ids", "T-152", "--date", "2026-10-12"])
-    assert ": Francisco Couzo, refining Nate Chaoweeraprasit's packings " in lines[1]
+    assert ": Francisco Couzo, refining Nate Chaoweeraprasit's packing " in lines[1]
     assert "Chaoweeraprasit" in err.split("printed by name: ", 1)[1]
     refinement = ra.refined(records.results["T-152"], records)
     assert refinement is not None

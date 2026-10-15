@@ -109,6 +109,20 @@ Couzo's 154 as Evan Daniel's exact optimum of it (T-098); `LINEAGE` measures Cou
 as the same release's exact optimum (T-098), which the issue's comment names as the
 start, less one square.
 
+It reads the fifteen packets of 12 to 14 October that the per-count ledger of 14 October
+records, registered by #602 as T-161, T-162, T-164 to T-175 and T-181 to T-183
+(``decide-imports --imports`` with the keys of `IMPORTS_1014`), in the reviews
+``review-2026-10-14-upper-bound-imports-*.md``. Their formats are ones it already reads,
+and PR #574's: a fact whose upstream certificate is a member of a release asset, held to
+the asset's size and digest in the manifest the pull request pins and to the member's own
+digest (`archive_member`), and two facts read from the supplement's rational centre-basis
+witnesses (`derive_center_basis`). Each certificate is decided at the counts the registered
+entries cite (`ROSTERS`), and held to the side the citing entry's claim prints, exactly
+or rounded up at its places (`registered_citations`), since the entries are registered.
+`CREDITED`, and the `regularizations` the register states, measure each one against the
+packing it is credited after or said to regularize, with readers for the earlier entries
+they name (T-118, T-119, T-127, T-130 and the imports above).
+
 The register's two maintained routes (``devtools.evand_arrangement_reports``) share one
 parse and one half-angle conversion (``devtools.evand_exact_certificates``) and both decide
 pairs by the separating-axis theorem; at T-128 and T-130 one of them, ``sqpack.verify``, is
@@ -160,8 +174,10 @@ plan state, and to its printed side: equal to it, or rounding up to it at its pl
 decided count the entry does not cite (#470's 132 and 267) must be absent from the plan's
 claim. ``--imports`` selects by key (``#476``, ``#481``, ``#483``, ``#484``, ``#470``,
 ``trio126``, ``#488``, ``#489``, ``regularized``, ``#503``, ``#504``, ``#505``, ``#501``,
-``#500``, ``#506``, ``#528``, ``#529``, ``#552``); it defaults to the first four, the
-roster of the first imports review.
+``#500``, ``#506``, ``#528``, ``#529``, ``#552`` and those of `IMPORTS_1014`); it defaults
+to the first four, the roster of the first imports review. ``--receipts NAME`` also
+writes each selected packet's part of the report to ``receipts/NAME`` in that packet, as
+xz-compressed JSON without the poses.
 
 ``replay-t128`` is the maintained two-route replay of T-128's retained receipt, which
 ``devtools.couzo_refinement_reports`` has no command for: every job decided again by the
@@ -177,11 +193,15 @@ import gzip
 import hashlib
 import io
 import json
+import lzma
 import math
 import re
+import sys
 import time
-from collections.abc import Callable, Sequence
+import zipfile
+from collections.abc import Callable, Iterator, Sequence
 from concurrent.futures import ProcessPoolExecutor
+from contextlib import contextmanager
 from dataclasses import dataclass
 from decimal import Decimal, localcontext
 from fractions import Fraction
@@ -193,6 +213,8 @@ from devtools import couzo_refinement_reports as t128
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools import evand_hunt_reports as t131
+from devtools import gupta_refinement_reports as t127
+from devtools import refinement_packets as t118
 from devtools import ryxu_arrangement_reports as ryxu
 from devtools import squish_followup_packets as squish_update
 from devtools import upper_bound_reports as upper
@@ -523,15 +545,40 @@ def controls_placed(
     return result
 
 
+@contextmanager
+def _long_integer_text() -> Iterator[None]:
+    """Lift Python's 4300-digit limit on integers as text, for this route's own numbers.
+
+    The limit guards parsing untrusted text, and every certificate is read under it. A
+    margin or a squared distance this route computes multiplies coordinates together and
+    can pass it where every coordinate is well within it, as PR #574's exact contact
+    certificates do; it is written, and read back from this route's own rows, with the
+    limit lifted, as `devtools.regularize_evand` writes its moves.
+    """
+    previous = sys.get_int_max_str_digits()
+    sys.set_int_max_str_digits(0)
+    try:
+        yield
+    finally:
+        sys.set_int_max_str_digits(previous)
+
+
 def _root(value: Fraction) -> str:
     """The square root of a non-negative rational, to seven significant digits."""
-    with localcontext() as context:
+    with localcontext() as context, _long_integer_text():
         context.prec = 40
         return f"{(Decimal(value.numerator) / Decimal(value.denominator)).sqrt():.6e}"
 
 
 def _text(value: Fraction) -> str:
-    return str(value.numerator) if value.denominator == 1 else str(value)
+    with _long_integer_text():
+        return str(value.numerator) if value.denominator == 1 else str(value)
+
+
+def _own(text: str) -> Fraction:
+    """A literal this route wrote itself, read back with the digit limit lifted."""
+    with _long_integer_text():
+        return literal(text)
 
 
 def verdict(side: Fraction, placements: Sequence[Placed]) -> dict[str, Any]:
@@ -810,6 +857,27 @@ IMPORTS_528_529 = {
 #: by 1 + 1e-20 about the origin corner and rounded up at 30 places; the guard is in the
 #: certificate, and this route believes none of it.
 IMPORTS_552 = {"#552": "evand-n154-2026-10-12"}
+#: The fifteen packets of 12 to 14 October that the per-count ledger of 14 October
+#: records, registered by #602. A key names one packet: the comment refinements of #503
+#: and #504 take keys of their own, Francisco Couzo's b85dee2 is keyed by issue 586, which
+#: pins it (T-165, T-181 at 302, T-182), and 4596670 by issue 583 (T-172, T-181).
+IMPORTS_1014 = {
+    "#561": "couzo-certificates-2026-10-12",
+    "#562": "dostashev-compositions-2026-10-12",
+    "#564": "pingyou-n302-certificate-2026-10-12",
+    "#504-refined": "pingyou-n153-refinement-2026-10-12",
+    "#503-refined": "pingyou-n207-refinement-2026-10-12",
+    "#566": "pingyou-n146-refinement-2026-10-12",
+    "#567": "pingyou-n261-refinement-2026-10-12",
+    "#568": "pingyou-n105-refinement-2026-10-12",
+    "#569": "pingyou-n272-refinement-2026-10-12",
+    "#573": "mishapolk-exact-certificates-2026-10-12",
+    "#574": "pingyou-pr574-certificates-2026-10-13",
+    "#575": "dostashev-merged-bands-2026-10-13",
+    "#583": "couzo-issue583-2026-10-13",
+    "#586": "couzo-certificates-2026-10-13",
+    "#593": "mishapolk-records-2026-10-14",
+}
 ALL_IMPORTS = {
     **IMPORTS,
     **LATER_IMPORTS,
@@ -821,10 +889,30 @@ ALL_IMPORTS = {
     **IMPORTS_506,
     **IMPORTS_528_529,
     **IMPORTS_552,
+    **IMPORTS_1014,
 }
 #: Imports decided over their whole replayed roster rather than the counts the entry
-#: cites: #470's README-printed 132 and 267 are certified beside the issue's 28.
-WHOLE_ROSTER = frozenset({"#470"})
+#: cites: #470's README-printed 132 and 267 are certified beside the issue's 28. PR
+#: #574's replayed roster is the 64 rational counts T-174 cites; its 21 other declared
+#: rational counts were never replayed, and its four algebraic ones are no rational fact.
+WHOLE_ROSTER = frozenset({"#470", "#574"})
+#: The counts decided where a packet declares more than its entries cite: those the
+#: registered entries cite from it, each in its replayed roster. #561's and #586's
+#: beyond-horizon rows, #573's and #593's other certificates and #575's 176, which no
+#: entry cites, are not decided; #575's 176 is read for credit only.
+ROSTERS: dict[str, tuple[int, ...]] = {
+    "#561": (156, 176, 237, 271),
+    "#573": (153, 207),
+    "#575": (211, 241, 304),
+    "#583": (154, 211, 241),
+    "#586": (154, 176, 211, 241, 302),
+    "#593": (237,),
+}
+#: The registered imports: each certificate is held to the claim of the entry citing it.
+REGISTERED = frozenset(IMPORTS_1014)
+#: Entries whose claim prints no rational side per count; T-174's claims record states
+#: each exactly, and the frozen record is held to the side instead.
+CLAIMS_WITHOUT_SIDES = frozenset({"T-174"})
 #: The imported certificates measured against the certificates whose arrangements they
 #: would be credited to: n126_xu against Ryan Xu's (T-125), and #470 at the two counts
 #: where it is the smallest side, 103 against Ryan Xu's and 258 against SQUISH's (T-115).
@@ -864,6 +952,50 @@ CREDITED: dict[tuple[str, int], tuple[str, ...]] = {
     # (T-136), the case's house, and descends from Francisco Couzo's 5 October packings:
     # against T-136, and against Couzo's 154 as Evan Daniel's exact optimum of it (T-098).
     ("#552", 154): ("T-136", "T-098"),
+    # The 14 October imports, each against the packing its source says it continues or
+    # starts from and the case's house. Couzo's #561 continues Ostashev's arrangements at
+    # 156 (T-149) and 176 (#562's unrequested 176), his own T-140 at 237, and SQUISH's at
+    # 271 (T-151).
+    ("#561", 156): ("T-149",),
+    ("#561", 176): ("#562", "T-151"),
+    ("#561", 237): ("T-140",),
+    ("#561", 271): ("T-151",),
+    # Ostashev's #562: a cut-out at 129 laid out like Ryan Xu's s(129), against Xu's
+    # packing (T-125) and its regularized view, the house (T-146); new compositions at 204
+    # and 303, against the houses (T-101, T-146).
+    ("#562", 129): ("T-146", "T-125"),
+    ("#562", 204): ("T-101",),
+    ("#562", 303): ("T-146",),
+    # PingYou's #564 at 302, against the house it names as its comparison (T-146).
+    ("#564", 302): ("T-146",),
+    # Mishapolk's #573, against PingYou's packings (T-148, T-147) and their refinements of
+    # 12 October (T-166, T-167), whose topology the import lane found there.
+    ("#573", 153): ("T-148", "T-166"),
+    ("#573", 207): ("T-147", "T-167"),
+    # PR #574 at 176 states Ostashev's #575 packing, which no entry registers there.
+    ("#574", 176): ("#575", "T-151"),
+    # Ostashev's #575: at 211 seeded from Daniel's exact optimum of de Winter's packing
+    # (T-098) and replacing his own T-149, the house; at 241 from Daniel's exact optimum
+    # of Couzo's packing (T-098), the house; at 304 against the house (T-152).
+    ("#575", 211): ("T-149", "T-098"),
+    ("#575", 241): ("T-098",),
+    ("#575", 304): ("T-152",),
+    # Couzo's #583 continues Daniel's 154 (T-160) and Ostashev's #575 at 211 and 241.
+    ("#583", 154): ("T-160",),
+    ("#583", 211): ("T-175",),
+    ("#583", 241): ("T-175",),
+    # Couzo's b85dee2 (#586): 154 against Daniel's (T-160) and his own #583 (T-172); 176
+    # against his #561 (T-161), which no source says it refines or replaces; 211 and 241
+    # against #583 (T-181), which T-182 records it as regularizing, and #575 (T-175); 302
+    # against PingYou's #564 (T-164), which the record says it continues, and the house.
+    ("#586", 154): ("T-160", "T-172"),
+    ("#586", 176): ("T-161",),
+    ("#586", 211): ("T-181", "T-175"),
+    ("#586", 241): ("T-181", "T-175"),
+    ("#586", 302): ("T-164", "T-146"),
+    # Mishapolk's #593 at 237 names Couzo's #561 (T-161) as its baseline: against it, the
+    # house (T-140) and PR #574's 237 (T-174).
+    ("#593", 237): ("T-161", "T-140", "T-174"),
 }
 WEB = ROOT / "resources/web"
 REPO = ROOT.parent
@@ -892,10 +1024,26 @@ def regularized_credit() -> dict[tuple[str, int], tuple[str, ...]]:
     return credit
 
 
+#: Imports measured at every count against another import's certificate there as well,
+#: where that import declares one: each 14 October import against Mykhailo Polkovskyi's
+#: #593, which states 72 certificates at their counts and whose sides T-183's claim
+#: finds equal to, or within 1e-30 of, several of theirs.
+ALSO_MEASURED: dict[str, tuple[str, ...]] = {
+    key: ("#593",) for key in IMPORTS_1014 if key != "#593"
+}
+
+
 def credited(issue: str, n: int) -> tuple[str, ...]:
     """The register entries an import's certificate at ``n`` is measured against: the
-    fixed pairs of `CREDITED`, or the packing the register's `regularizations` name."""
-    return CREDITED.get((issue, n)) or regularized_credit().get((issue, n), ())
+    fixed pairs of `CREDITED`, or the packing the register's `regularizations` name,
+    then each import of `ALSO_MEASURED` that declares a certificate at ``n``."""
+    named = CREDITED.get((issue, n)) or regularized_credit().get((issue, n), ())
+    also = tuple(
+        key
+        for key in ALSO_MEASURED.get(issue, ())
+        if any(row["n"] == n for row in _admitted(key)["certificates"])
+    )
+    return (*named, *also)
 
 
 PLAN_CLAIM = re.compile(r"s\((\d+)\)\s*<=\s*(\d+(?:\.\d+|/\d+))")
@@ -1061,8 +1209,15 @@ def read_centred_json(raw: bytes, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
     return side, tuple(poses)
 
 
-def read_fact(text: str, n: int) -> tuple[Fraction, tuple[Placed, ...]]:
-    """A derived fact, a rational centre-basis Witness/v2, read as its bases state them."""
+def read_fact(
+    text: str, n: int, *, labelled: bool = False
+) -> tuple[Fraction, tuple[Placed, ...]]:
+    """A derived fact, a rational centre-basis Witness/v2, read as its bases state them.
+
+    A fact numbers its squares 1 to ``n`` in order. With ``labelled``, as the source
+    witnesses of PR #574's supplement are written, each square's ``id`` is instead a label,
+    an integer or a string, used once, and the squares are read in the order listed.
+    """
     document = load_yaml(text)
     witness = document.get("witness") if type(document) is dict else None
     if type(witness) is not dict:
@@ -1083,12 +1238,19 @@ def read_fact(text: str, n: int) -> tuple[Fraction, tuple[Placed, ...]]:
     if side <= 0 or type(squares) is not list or len(squares) != n:
         raise AreaRouteError(f"n={n}: a positive side and {n} squares")
     placements: list[Placed] = []
+    labels: set[object] = set()
     for index, square in enumerate(squares, start=1):
         where = f"n={n} square {index}"
+        label = square.get("id") if type(square) is dict else None
+        if labelled and type(label) in {int, str} and label not in labels:
+            labels.add(label)
+            numbered = True
+        else:
+            numbered = label == index and not labelled
         if (
             type(square) is not dict
             or set(square) != {"id", "center", "basis"}
-            or square["id"] != index
+            or not numbered
             or type(square["center"]) is not list
             or type(square["basis"]) is not list
             or len(square["center"]) != 2
@@ -1371,15 +1533,27 @@ def derive_decimal_pose(raw: bytes, row: dict[str, Any]) -> tuple[Fraction, tupl
     return side, placements
 
 
-#: Readers that derive a fact again from the pinned decimal file its row names, by the
-#: declared format, each taking the row for its declared options: #470's decimal poses
-#: with a dilation and #529's radian layout with none.
+def derive_center_basis(raw: bytes, row: dict[str, Any]) -> tuple[Fraction, tuple[Placed, ...]]:
+    """PR #574's supplement witnesses at 146 and 261: a rational centre-basis Witness/v2.
+
+    The source states each square's centre and basis exactly, in the form a derived fact
+    takes but with labels for ids, so `read_fact` reads it as its bases state them, in the
+    order listed; the envelope's other blocks are not read. A fact derived from it must be
+    this packing, side and poses alike.
+    """
+    return read_fact(raw.decode("utf-8"), row["n"], labelled=True)
+
+
+#: Readers that derive a fact again from the pinned file its row names, by the declared
+#: format, each taking the row for its declared options: #470's decimal poses with a
+#: dilation, #529's radian layout with none and PR #574's labelled centre-basis witnesses.
 DERIVED_READERS: dict[
     str, Callable[[bytes, dict[str, Any]], tuple[Fraction, tuple[Placed, ...]]]
 ]
 DERIVED_READERS = {
     "decimal-dilation": derive_decimal_pose,
     "calle-txt": derive_calle_txt,
+    "witness-center-basis": derive_center_basis,
 }
 
 
@@ -1406,7 +1580,16 @@ def _declaration(packet: Path) -> dict[str, Any]:
 
 
 def roster(issue: str, declaration: dict[str, Any]) -> list[int]:
-    """The counts this route decides: those the entry cites, or the whole replayed roster."""
+    """The counts this route decides: those the entry cites, or the whole replayed roster.
+
+    A `ROSTERS` line names the cited counts where the declaration requests more; each must
+    be in the replayed roster, since the maintained routes' receipt is compared with.
+    """
+    if issue in ROSTERS:
+        counts = list(ROSTERS[issue])
+        if not set(counts) <= set(declaration["replayed"]):
+            raise AreaRouteError(f"{issue}: a cited count is outside the replayed roster")
+        return counts
     return declaration["replayed" if issue in WHOLE_ROSTER else "requested"]
 
 
@@ -1551,11 +1734,11 @@ def compare_import(
     """
     problems: list[str] = []
     where = f"{row['issue']} n={row['n']} ({row['packet']})"
-    side = literal(row["side"])
+    side = _own(row["side"])
     inputs = maintained["checker_input"]
     if literal(inputs["side"]) != side:
         problems.append(f"{where}: side differs from the maintained routes' input")
-    mine = [tuple(literal(value) for value in square) for square in row["placements"]]
+    mine = [tuple(_own(value) for value in square) for square in row["placements"]]
     theirs = [(literal(x), literal(y), *rotation(literal(t))) for x, y, t in inputs["poses"]]
     if mine != theirs:
         problems.append(f"{where}: a pose differs from the maintained routes' input")
@@ -1569,12 +1752,12 @@ def compare_import(
         problems.append(
             f"{where}: the side is neither the printed {offered} nor rounds up to it"
         )
-    distance = literal(row["least_distance_squared"])
+    distance = _own(row["least_distance_squared"])
     for route in kernel.ROUTES:
         found = maintained[route]
         if found["verification_passed"] is not row["passed"]:
             problems.append(f"{where}: {route} verdict differs")
-        if literal(found["minimum_containment_clearance"]) != literal(row["wall_clearance"]):
+        if literal(found["minimum_containment_clearance"]) != _own(row["wall_clearance"]):
             problems.append(f"{where}: {route} wall clearance differs from h-extent clearance")
         gap = literal(found["minimum_best_pair_gap"])
         if gap > 0 and gap * gap > distance:
@@ -1582,6 +1765,85 @@ def compare_import(
     if not row["passed"] or not all(row["controls"].values()):
         problems.append(f"{where}: a positive or control missed its required outcome")
     return problems
+
+
+def _certificate_files(packet: Path) -> dict[str, int]:
+    """Each declared certificate's retained file or derived fact, repository-relative."""
+    record = json.loads((packet / "acquisition/sources.json").read_text(encoding="utf-8"))
+    archived = record["sources"][0]["archived_path"]
+    files: dict[str, int] = {}
+    for row in _declaration(packet)["certificates"]:
+        if "fact" in row:
+            fact = (packet / row["fact"]).relative_to(REPO).as_posix()
+            files[fact] = files[f"{fact}.gz"] = row["n"]
+        else:
+            files[f"{archived}/{row['path']}"] = row["n"]
+    return files
+
+
+@functools.cache
+def registered_citations() -> dict[tuple[str, int], tuple[str, str | None]]:
+    """For each certificate of a registered import, the entry citing it and its print.
+
+    An entry cites a certificate by naming its retained file or derived fact among its
+    `artifacts`; an entry that names files of a packet but none of its certificates cites
+    every count of its scope that the packet replays, as T-174 cites PR #574's 64
+    rational counts. The print is the side its claim states for the count, as
+    ``s(n) <= v``, or None where the claim states none.
+    """
+    document = load_yaml(RESULTS.read_text(encoding="utf-8"))
+    citations: dict[tuple[str, int], tuple[str, str | None]] = {}
+    for result in document["results"]:
+        claim = " ".join(str(result.get("claim", "")).split())
+        printed = {int(n): value for n, value in PLAN_CLAIM.findall(claim)}
+        scope = set(result.get("scope", {}).get("n_values") or ())
+        artifacts = {str(path) for path in result.get("artifacts") or ()}
+        for name in (ALL_IMPORTS[key] for key in IMPORTS_1014):
+            packet = WEB / name
+            prefix = f"{packet.relative_to(REPO).as_posix()}/"
+            if not any(path.startswith(prefix) for path in artifacts):
+                continue
+            files = _certificate_files(packet)
+            cited = {files[path] for path in artifacts if path in files}
+            if not cited:
+                cited = scope & set(_declaration(packet)["replayed"])
+            for n in cited & scope:
+                if (name, n) in citations:
+                    raise AreaRouteError(f"{name} n={n} is cited by two entries")
+                citations[name, n] = (str(result["id"]), printed.get(n))
+    return citations
+
+
+def compare_registered(
+    row: dict[str, Any],
+    maintained: dict[str, Any],
+    frozen: dict[str, Any],
+    offered: str,
+) -> list[str]:
+    """`compare_import` for a registered import, held to its citing entry's claim.
+
+    The claim must print the exact side, or the side rounded up at the places it prints;
+    an entry of `CLAIMS_WITHOUT_SIDES` prints none, and its frozen record states the side.
+    """
+    problems = compare_import(row, maintained, None, frozen, offered, cited=False)
+    where = f"{row['issue']} n={row['n']} ({row['packet']})"
+    citation = registered_citations().get((row["packet"], row["n"]))
+    problem = claim_problem(_own(row["side"]), citation)
+    return [*problems, f"{where}: {problem}"] if problem else problems
+
+
+def claim_problem(side: Fraction, citation: tuple[str, str | None] | None) -> str | None:
+    """What is wrong with the citing entry's claim of ``side``, or None."""
+    if citation is None:
+        return "no register entry cites the certificate"
+    entry, printed = citation
+    if printed is None:
+        if entry in CLAIMS_WITHOUT_SIDES:
+            return None
+        return f"{entry}'s claim prints no side for the count"
+    if not admitted(side, printed):
+        return f"{entry}'s claim {printed} is neither the side nor rounds up to it"
+    return None
 
 
 UPSTREAM_READERS = {
@@ -1598,8 +1860,19 @@ SAME_PACKING_READERS: dict[str, Callable[[bytes, int], tuple[Fraction, tuple[Pla
 
 
 def printed_rows(table: bytes, path: str) -> list[list[str]]:
-    """The rows of a file a side is printed in: CSV, or a Markdown table's cells."""
+    """The rows of a file a side is printed in: CSV, a Markdown table's cells, or a JSON
+    census, a list of records each read as its count and then its string fields, as
+    Mishapolk's ``certificates/census.json`` (#593) prints each ``side_fraction``."""
     text = table.decode("utf-8")
+    if path.endswith(".json"):
+        records = json.loads(text, object_pairs_hook=_unique)
+        if type(records) is not list:
+            raise AreaRouteError(f"{path} is not a list of records")
+        return [
+            [str(record["n"]), *(value for value in record.values() if type(value) is str)]
+            for record in records
+            if type(record) is dict and type(record.get("n")) is int
+        ]
     if path.endswith(".md"):
         return [
             [cell.strip() for cell in line.strip().strip("|").split("|")]
@@ -1714,6 +1987,77 @@ def _printed_table_problem(
     return None
 
 
+#: The most bytes a release-asset member is read to: PR #574's largest is about 1.2 MB.
+MEMBER_LIMIT = 64 * 1024 * 1024
+
+
+def _verified_asset(directory: Path, pinned: dict[str, str], archive: dict[str, Any]) -> bytes:
+    """A release asset fetched into ``directory``, held to the pinned manifest naming it."""
+    manifest_path = archive["manifest"]
+    target = directory / manifest_path
+    if not target.is_file():
+        raise AreaRouteError(f"no upstream {manifest_path} in {directory}")
+    raw = target.read_bytes()
+    if pinned.get(manifest_path) != hashlib.sha256(raw).hexdigest():
+        raise AreaRouteError(f"{manifest_path} is not the manifest the packet pins")
+    manifest = load_yaml(raw.decode("utf-8"))
+    if (
+        type(manifest) is not dict
+        or manifest.get("repository") != archive["repository"]
+        or manifest.get("tag") != archive["tag"]
+        or type(manifest.get("objects")) is not list
+    ):
+        raise AreaRouteError(f"{manifest_path} does not name the row's release")
+    named = [
+        item
+        for item in manifest["objects"]
+        if type(item) is dict and item.get("asset") == archive["asset"]
+    ]
+    if len(named) != 1:
+        raise AreaRouteError(f"{manifest_path} does not name {archive['asset']} once")
+    asset_path = directory / archive["asset"]
+    if not asset_path.is_file():
+        raise AreaRouteError(f"no asset {archive['asset']} in {directory}")
+    asset = asset_path.read_bytes()
+    if len(asset) != named[0].get("size") or hashlib.sha256(asset).hexdigest() != named[0].get(
+        "sha256"
+    ):
+        raise AreaRouteError(f"{archive['asset']} is not the asset {manifest_path} pins")
+    return asset
+
+
+def archive_member(
+    directory: Path,
+    pinned: dict[str, str],
+    archive: dict[str, Any],
+    assets: dict[str, bytes] | None = None,
+) -> bytes:
+    """A certificate PR #574 keeps in a release asset, fetched and held to every digest.
+
+    ``directory`` holds the pinned tree with each asset beside it, by its name. The
+    manifest the row names must be the file the packet pins; its object for the asset
+    gives the asset's size and SHA-256, which the fetched asset must have; and the member,
+    named once in the archive, must have the SHA-256 the row states, which is the digest
+    the pull request's claim record prints. ``assets`` caches verified assets by manifest
+    and name.
+    """
+    cache = {} if assets is None else assets
+    name = archive["asset"]
+    cached = f"{archive['manifest']}:{name}"
+    if cached not in cache:
+        cache[cached] = _verified_asset(directory, pinned, archive)
+    member = archive["member"]
+    with zipfile.ZipFile(io.BytesIO(cache[cached])) as bundle:
+        if bundle.namelist().count(member) != 1:
+            raise AreaRouteError(f"{name} does not hold {member} once")
+        if bundle.getinfo(member).file_size > MEMBER_LIMIT:
+            raise AreaRouteError(f"{member} is larger than this route reads")
+        raw = bundle.read(member)
+    if hashlib.sha256(raw).hexdigest() != archive["sha256"]:
+        raise AreaRouteError(f"{member} is not the member the row pins")
+    return raw
+
+
 def upstream_problems(
     packet: Path, directory: Path, counts: Sequence[int] | None = None
 ) -> tuple[int, list[str]]:
@@ -1756,6 +2100,18 @@ def upstream_problems(
             return None
         return raw
 
+    assets: dict[str, bytes] = {}
+
+    def stated_bytes(item: dict[str, Any]) -> bytes | None:
+        """A pinned file of the tree, or a release-asset member the item names."""
+        if "archive" not in item:
+            return pinned_bytes(item["path"])
+        try:
+            return archive_member(directory, pinned, item["archive"], assets)
+        except AreaRouteError as error:
+            problems.append(f"{packet.name}: {error}")
+            return None
+
     for row in declaration["certificates"]:
         n = row["n"]
         if n not in (declaration["requested"] if counts is None else counts):
@@ -1781,7 +2137,7 @@ def upstream_problems(
                 held += printed
                 problems += printed_problems
             continue
-        raw = pinned_bytes(row["path"])
+        raw = stated_bytes(row)
         if raw is None:
             continue
         fact = read_fact(packet_bytes(packet / row["fact"]).decode("utf-8"), n)
@@ -1807,7 +2163,7 @@ def upstream_problems(
             if reader is None:
                 problems.append(f"{packet.name} n={n}: no reader for {other['format']}")
                 continue
-            raw = pinned_bytes(other["path"])
+            raw = stated_bytes(other)
             if raw is None:
                 continue
             try:
@@ -1903,6 +2259,56 @@ def evand_optimum_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
     return side, tuple(placed(poses))
 
 
+def _source_text_packing(text: str, n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    side, poses = parse_certificate(text, n)
+    return side, tuple(placed(poses))
+
+
+def couzo_followup_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """Francisco Couzo's follow-up refinement at ``n`` (T-130), read here.
+
+    `devtools.couzo_followup_reports.read_facts` admits each derived certificate, which it
+    rebuilds to the pinned blob; this route parses the text it renders, as `cases` does.
+    """
+    return _source_text_packing(t130.render(t130.read_facts()[n]), n)
+
+
+def evand_arrangement_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """Evan Daniel's new arrangement at ``n`` (T-119), the retained source text, read here."""
+    kernel.read_facts()
+    record = kernel.read_xz(kernel.fact_path())
+    text = next(row["source_certificate"] for row in record["cases"] if row["n"] == n)
+    return _source_text_packing(text, n)
+
+
+def gupta_refinement_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """Siddharth Gupta's refinement at ``n`` (T-127), the retained source text, read here."""
+    t127.read_facts()
+    record = kernel.read_xz(t127.fact_path())
+    text = next(row["source_certificate"] for row in record["cases"] if row["n"] == n)
+    return _source_text_packing(text, n)
+
+
+def rehwaldt_n68_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """Seth Rehwaldt's n68 refinement (T-118), centres moved from its centred frame by S/2.
+
+    `devtools.refinement_packets.read_fact` admits the normalized fact against its pinned
+    conversion; this route reads its literals and moves each centre into ``[0, S]^2``.
+    """
+    facts = t118.read_fact(t118.N68, n)
+    side = literal(facts["side"])
+    poses = [
+        (literal(row["x"]) + side / 2, literal(row["y"]) + side / 2, literal(row["t"]))
+        for row in facts["squares"]
+    ]
+    return side, tuple(placed(poses))
+
+
+def couzo_583_586_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """T-181's certificate at ``n``: issue 583's at 211 and 241, b85dee2's at 302."""
+    return import_packing("#583" if n in (211, 241) else "#586")(n)
+
+
 #: How each credited certificate is read, by its register entry.
 CREDITED_READERS: dict[str, Callable[[int], tuple[Fraction, tuple[Placed, ...]]]] = {
     "T-125": ryxu_packing,
@@ -1914,6 +2320,33 @@ CREDITED_READERS: dict[str, Callable[[int], tuple[Fraction, tuple[Placed, ...]]]
     "T-098": evand_optimum_packing,
     "T-101": evand_optimum_packing,
     "T-140": import_packing("#488"),
+    # The packings the 14 October entries name, by the entry that registers them.
+    "T-118": rehwaldt_n68_packing,
+    "T-119": evand_arrangement_packing,
+    "T-127": gupta_refinement_packing,
+    "T-130": couzo_followup_packing,
+    "T-134": import_packing("#476"),
+    "T-139": import_packing("trio126"),
+    "T-141": import_packing("#489"),
+    "T-147": import_packing("#503"),
+    "T-148": import_packing("#504"),
+    "T-149": import_packing("#501"),
+    "T-150": import_packing("#505"),
+    "T-151": import_packing("#500"),
+    "T-152": import_packing("#506"),
+    "T-158": import_packing("#528"),
+    "T-160": import_packing("#552"),
+    "T-161": import_packing("#561"),
+    "T-162": import_packing("#562"),
+    "T-164": import_packing("#564"),
+    "T-166": import_packing("#504-refined"),
+    "T-167": import_packing("#503-refined"),
+    "T-168": import_packing("#566"),
+    "T-169": import_packing("#567"),
+    "T-172": import_packing("#583"),
+    "T-174": import_packing("#574"),
+    "T-175": import_packing("#575"),
+    "T-181": couzo_583_586_packing,
 }
 
 
@@ -2019,21 +2452,74 @@ def arrangement_gap(
     return best
 
 
+def unmoved(
+    first: tuple[Fraction, Sequence[Placed]], second: tuple[Fraction, Sequence[Placed]]
+) -> dict[str, Any]:
+    """Under the symmetry of the box that leaves most squares where they were, how many.
+
+    `arrangement_gap` takes the symmetry whose one-to-one matching moves its farthest
+    square least, which a packing near to symmetric, or one rattler moved far, can turn
+    away from the placement that keeps most squares in place. This counts, under each of
+    the eight symmetries applied to ``second``, the squares of ``first`` whose nearest
+    centre of ``second`` lies within each bound of `MOVED`, one to one or not, and returns
+    the symmetry with the most within ``10^-9``, then within the coarser bounds, the
+    lowest symmetry on a tie; ``one_to_one`` says whether its nearest centres pair the
+    squares one to one. A measurement for credit; it decides nothing.
+    """
+    _side, left = first
+    other_side, right = second
+    near = [(float(x), float(y)) for x, y, _c, _s in left]
+    best: tuple[tuple[int, ...], int, dict[str, Any]] | None = None
+    for k in range(8):
+        mapped = [symmetric(other_side, square, k) for square in right]
+        far = [(float(u), float(v)) for u, v, _a, _b in mapped]
+        reach = nearest_reach([*near, *far])
+        nearest: list[tuple[Fraction, int]] = []
+        for (x, y, _c, _s), (fx, fy) in zip(left, near, strict=True):
+            rough = [(fx - fu) ** 2 + (fy - fv) ** 2 for fu, fv in far]
+            within = min(rough) + reach
+            nearest.append(
+                min(
+                    ((x - u) ** 2 + (y - v) ** 2, j)
+                    for j, (u, v, _a, _b) in enumerate(mapped)
+                    if rough[j] <= within
+                )
+            )
+        counts = {
+            label: sum(1 for d, _j in nearest if d <= bound * bound)
+            for label, bound in MOVED.items()
+        }
+        key = tuple(counts[label] for label in MOVED)
+        found = {
+            "symmetry": k,
+            "within": counts,
+            "one_to_one": len({j for _d, j in nearest}) == len(left),
+        }
+        if best is None or key > best[0]:
+            best = (key, k, found)
+    if best is None:
+        raise AreaRouteError("no packing to measure")
+    return best[2]
+
+
 def credited_gaps(found: Sequence[Imported]) -> dict[str, dict[str, Any]]:
     """`arrangement_gap` of each credited certificate against each entry it is credited to.
 
     A display-regularized certificate may slide squares far enough that no symmetry
     matches the two packings one to one; that is recorded as ``unmatched`` with the side
-    difference, and is a measurement, as every gap is, not a refusal.
+    difference, and is a measurement, as every gap is, not a refusal. Each gap also
+    carries `unmoved`, the placement that keeps most squares where they were.
     """
     credit: dict[str, dict[str, Any]] = {}
     for case in found:
         for house in credited(case.issue, case.n):
             other = parent_packing(house, case.n)
+            gap: dict[str, Any]
             try:
                 gap = arrangement_gap((case.side, case.placements), other)
             except AreaRouteError as error:
                 gap = {"unmatched": str(error), "side_difference": _text(case.side - other[0])}
+            gap["unmoved"] = unmoved((case.side, case.placements), other)
             credit[f"{case.issue} n={case.n} against {house}"] = gap
     return credit
 
@@ -2075,7 +2561,20 @@ LINEAGE: dict[tuple[str, int], tuple[str, int, Fraction]] = {
     # squares against the 155's 43, so the measurement by pose does not tell the two
     # starts apart; at a tenth of a unit the 155 is the nearer, 114 squares against 87.
     ("#552", 154): ("T-098", 155, Fraction(1)),
+    # PingYou's #564 says its 302 holds four boundary patches of Ryan Xu's n70, of 16, 9,
+    # 9 and 16 squares, taken from Evan Daniel's exact certificate of it (the regularized
+    # n-070 T-146 retains), with centres and box dilated by 100000000001/100000000000.
+    ("#564", 302): ("regularized", 70, Fraction(100000000001, 100000000000)),
+    # Ostashev's #562 says its 129 is a 163-square rectangle cut from the s(302) house,
+    # T-146's regularized n-302, re-optimised as a rectangle, less three unit columns.
+    ("#562", 129): ("regularized", 302, Fraction(1)),
 }
+#: How many placements `lineage_gaps` reports where the source names more than three
+#: patches of one parent: #564's four patches of the n70.
+LINEAGE_LIMIT: dict[tuple[str, int], int] = {("#564", 302): 4}
+#: The coarser nearness at which `lineage_gaps` also counts a piece that reappears to the
+#: eye, as the #500 and #552 reviews measured at a tenth of a unit.
+COARSE = Fraction(1, 10)
 #: How near a parent square must land on a child square to be counted as reappearing:
 #: its centre within 10^-9, and its edge direction within a sine of 10^-6 modulo a
 #: quarter turn to count as unturned.
@@ -2167,7 +2666,9 @@ def parent_packing(key: str, m: int) -> tuple[Fraction, tuple[Placed, ...]]:
     return reader(m) if reader is not None else import_packing(key)(m)
 
 
-def lineage_gaps(found: Sequence[Imported]) -> dict[str, list[dict[str, Any]]]:
+def lineage_gaps(
+    found: Sequence[Imported], *, near: Fraction = NEAR
+) -> dict[str, list[dict[str, Any]]]:
     """`patch_lineage` of each certificate `LINEAGE` names against its stated parent."""
     lineage: dict[str, list[dict[str, Any]]] = {}
     for case in found:
@@ -2177,9 +2678,78 @@ def lineage_gaps(found: Sequence[Imported]) -> dict[str, list[dict[str, Any]]]:
         key, m, dilation = named
         parent = parent_packing(key, m)
         lineage[f"{case.issue} n={case.n} from {key} n={m}"] = patch_lineage(
-            (case.side, case.placements), parent, dilation
+            (case.side, case.placements),
+            parent,
+            dilation,
+            limit=LINEAGE_LIMIT.get((case.issue, case.n), 3),
+            near=near,
         )
     return lineage
+
+
+def _receipt_text(report: dict[str, Any]) -> str:
+    """A packet's part of the report as JSON with one certificate's row on each line."""
+    head = {key: value for key, value in report.items() if key != "rows"}
+    rows = [json.dumps(row, sort_keys=True, separators=(",", ":")) for row in report["rows"]]
+    body = ",\n".join(rows)
+    return (
+        "{\n"
+        f'"head": {json.dumps(head, sort_keys=True, separators=(",", ":"))},\n'
+        f'"rows": [\n{body}\n]\n'
+        "}\n"
+    )
+
+
+def write_receipts(name: str, report: dict[str, Any], keys: Sequence[str]) -> list[Path]:
+    """Write each selected packet's part of the report to ``receipts/NAME`` in the packet.
+
+    The poses are left out, since the packet's own fact or certificate states them and the
+    maintained routes' receipt keeps their inputs; each row names the certificate it read
+    and the SHA-256 of its poses as this route printed them. A credit or lineage line is
+    the packet's when its key names one of the packet's certificates.
+    """
+    if "/" in name or not name.endswith(".json.xz"):
+        raise AreaRouteError("a receipt name is one file name ending in .json.xz")
+    written: list[Path] = []
+    for key in keys:
+        packet = ALL_IMPORTS[key]
+        rows = []
+        for row in report["rows"]:
+            if row["packet"] != packet:
+                continue
+            poses = json.dumps(row["placements"], separators=(",", ":")).encode()
+            rows.append(
+                {
+                    **{field: value for field, value in row.items() if field != "placements"},
+                    "placements_sha256": hashlib.sha256(poses).hexdigest(),
+                }
+            )
+        tag = f"{key} n="
+        part = {
+            "format": "half-angle-area-route-receipt-v1",
+            "program": "devtools.check_half_angle_area decide-imports",
+            "import": key,
+            "packet": packet,
+            "command": report["command"],
+            "started_utc": report["started_utc"],
+            "finished_utc": report["finished_utc"],
+            "wall_seconds": report["wall_seconds"],
+            "rows": rows,
+            "receipts": {packet: report["receipts"].get(packet)},
+            "arrangements": {
+                k: v for k, v in report["arrangements"].items() if k.startswith(tag)
+            },
+            "lineage": {k: v for k, v in report["lineage"].items() if k.startswith(tag)},
+            "lineage_coarse": {
+                k: v for k, v in report["lineage_coarse"].items() if k.startswith(tag)
+            },
+            "upstream": report["upstream"].get(packet),
+            "problems": [p for p in report["problems"] if p.startswith((tag, packet))],
+        }
+        path = WEB / packet / "receipts" / name
+        path.write_bytes(lzma.compress(_receipt_text(part).encode("utf-8"), preset=6))
+        written.append(path)
+    return written
 
 
 def run_decide_imports(
@@ -2187,29 +2757,40 @@ def run_decide_imports(
     output: Path | None,
     upstream: list[list[str]],
     keys: Sequence[str] = tuple(IMPORTS),
+    *,
+    receipts: str | None = None,
+    command: str = "python -m devtools.check_half_angle_area decide-imports",
 ) -> int:
     started = time.monotonic()
+    started_utc = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     found = import_cases(keys)
     with ProcessPoolExecutor(max_workers=workers) as pool:
         rows = list(pool.map(decide_import, found))
     maintained = import_positives(keys)
-    claims = plan_claims(keys)
+    claims = plan_claims([key for key in keys if key not in REGISTERED])
     problems: list[str] = []
     for row in rows:
         packet = WEB / row["packet"]
         frozen = json.loads((packet / "acquisition/claims.json").read_text(encoding="utf-8"))
         declaration = _declaration(packet)
         offered = {r["n"]: r["offered"] for r in declaration["certificates"]}
+        frozen_row = next(r for r in frozen["results"] if r["n"] == row["n"])
+        if row["issue"] in REGISTERED:
+            problems += compare_registered(
+                row, maintained[row["packet"], row["n"]], frozen_row, offered[row["n"]]
+            )
+            continue
         problems += compare_import(
             row,
             maintained[row["packet"], row["n"]],
             claims[row["packet"]].get(row["n"]),
-            next(r for r in frozen["results"] if r["n"] == row["n"]),
+            frozen_row,
             offered[row["n"]],
             cited=row["n"] in declaration["requested"],
         )
     credit = credited_gaps(found)
     lineage = lineage_gaps(found)
+    lineage_coarse = lineage_gaps(found, near=COARSE)
     for row in rows:
         print(
             f"{row['issue']} n={row['n']:3d} passed={row['passed']} pairs={row['pairs']} "
@@ -2225,6 +2806,8 @@ def run_decide_imports(
         print(f"arrangement {name}: {json.dumps(gap)}")
     for name, patches in lineage.items():
         print(f"lineage {name}: {json.dumps(patches)}")
+    for name, patches in lineage_coarse.items():
+        print(f"lineage within {_text(COARSE)} {name}: {json.dumps(patches)}")
     selected = {ALL_IMPORTS[key]: key for key in keys}
     held: dict[str, int] = {}
     for name, directory in upstream:
@@ -2239,17 +2822,24 @@ def run_decide_imports(
         print(f"upstream {name}: {held[name]} certificates and printed sides checked")
     wall = round(time.monotonic() - started, 2)
     print(f"{len(rows)} certificates, {sum(r['pairs'] for r in rows)} pairs, {wall}s wall")
+    report = {
+        "command": command,
+        "started_utc": started_utc,
+        "finished_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "rows": rows,
+        "receipts": totals,
+        "arrangements": credit,
+        "lineage": lineage,
+        "lineage_coarse": lineage_coarse,
+        "upstream": held,
+        "problems": problems,
+        "wall_seconds": wall,
+    }
     if output is not None:
-        report = {
-            "rows": rows,
-            "receipts": totals,
-            "arrangements": credit,
-            "lineage": lineage,
-            "upstream": held,
-            "problems": problems,
-            "wall_seconds": wall,
-        }
         output.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+    if receipts is not None:
+        for path in write_receipts(receipts, report, keys):
+            print(f"receipt {path.relative_to(REPO).as_posix()}")
     for problem in problems:
         print(f"DISAGREEMENT: {problem}")
     return 1 if problems else 0
@@ -2270,13 +2860,30 @@ def main(argv: list[str] | None = None) -> int:
     imports.add_argument(
         "--imports", nargs="+", choices=tuple(ALL_IMPORTS), default=list(IMPORTS)
     )
+    imports.add_argument("--receipts", metavar="NAME")
     replay = sub.add_parser("replay-t128")
     replay.add_argument("--workers", type=int, choices=(1, 2), default=2)
     args = parser.parse_args(argv)
     if args.action == "decide":
         return run_decide(args.workers, args.json)
     if args.action == "decide-imports":
-        return run_decide_imports(args.workers, args.json, args.upstream, args.imports)
+        command = " ".join(
+            [
+                "python -m devtools.check_half_angle_area decide-imports",
+                f"--workers {args.workers}",
+                "--imports",
+                *(f"'{key}'" for key in args.imports),
+                *(f"--upstream {name} DIR" for name, _directory in args.upstream),
+            ]
+        )
+        return run_decide_imports(
+            args.workers,
+            args.json,
+            args.upstream,
+            args.imports,
+            receipts=args.receipts,
+            command=command,
+        )
     return run_replay_t128(args.workers)
 
 

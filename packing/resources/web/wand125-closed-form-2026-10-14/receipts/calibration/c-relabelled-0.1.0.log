@@ -1,0 +1,29 @@
+# command: ./replay4d-0.1.0 interval_0.495_0.5/family.json controls/relabelled.jsonl --leaves --threads 1 --out out/c-relabelled-0.1.0.json
+# cwd: the run directory: replay4d binaries and the unpacked release assets of closed-form-v1
+# python3: not used by this command
+# host: 4 cores; load 2.72 4.29 7.09; started 2026-10-14T18:13:59Z
+roots 0 leaf kinds {"CORE":1,"CORE1:Tx":19}
+BAD {"box":["167/100","177/100","68/25","141/50","-9/32","-1/4","99/200","1/2"],"kind":"CORE","leaf":0,"result":{"bound":"164290589112188799809583194423539895931967754436975172862443546212689163481502619750867147034307317209881649322620903476584343331443025154635599/179205622401615577162236106453543338302864010529554013058803176135041766631621019965124051990273009445979135315062594557870401412580025331040000","ok":false},"source":"controls/relabelled.jsonl:1"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-9/32","-1/4","99/200","1/2"],"kind":"CORE","result":{"bound":"164290589112188799809583194423539895931967754436975172862443546212689163481502619750867147034307317209881649322620903476584343331443025154635599/179205622401615577162236106453543338302864010529554013058803176135041766631621019965124051990273009445979135315062594557870401412580025331040000","ok":false},"source":"controls/relabelled.jsonl:1"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-3/32","-1/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":24},"ok":true},"source":"controls/relabelled.jsonl:2"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-1/32","0","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":24},"ok":true},"source":"controls/relabelled.jsonl:3"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-7/32","-3/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":32},"ok":true},"source":"controls/relabelled.jsonl:4"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-13/32","-3/8","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/relabelled.jsonl:5"}
+LEAF {"box":["167/100","177/100","68/25","141/50","1/32","1/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":24},"ok":true},"source":"controls/relabelled.jsonl:6"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-1/16","-1/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/relabelled.jsonl:7"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-5/32","-1/8","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/relabelled.jsonl:8"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-1/8","-3/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/relabelled.jsonl:9"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-3/8","-11/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":48},"ok":true},"source":"controls/relabelled.jsonl:10"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-3/16","-5/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":48},"ok":true},"source":"controls/relabelled.jsonl:11"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-5/16","-9/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":64},"ok":true},"source":"controls/relabelled.jsonl:12"}
+LEAF {"box":["167/100","177/100","68/25","141/50","3/32","1/8","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":48},"ok":true},"source":"controls/relabelled.jsonl:13"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-11/32","-5/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":72},"ok":true},"source":"controls/relabelled.jsonl:14"}
+LEAF {"box":["167/100","177/100","68/25","141/50","1/16","3/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":72},"ok":true},"source":"controls/relabelled.jsonl:15"}
+LEAF {"box":["167/100","177/100","68/25","141/50","5/32","3/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/relabelled.jsonl:16"}
+LEAF {"box":["167/100","177/100","68/25","141/50","7/32","1/4","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":48},"ok":true},"source":"controls/relabelled.jsonl:17"}
+LEAF {"box":["167/100","177/100","68/25","141/50","-1/4","-7/32","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":88},"ok":true},"source":"controls/relabelled.jsonl:18"}
+LEAF {"box":["167/100","177/100","68/25","141/50","13/32","7/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":40},"ok":true},"source":"controls/relabelled.jsonl:19"}
+LEAF {"box":["167/100","177/100","141/50","73/25","-7/32","-3/16","99/200","1/2"],"kind":"CORE1:Tx","result":{"certify_core1":{"ok":true,"values":32},"ok":true},"source":"controls/relabelled.jsonl:20"}
+cpu 2.208892s wall 2.238146s
+REPLAY BAD (1)
+# finished 2026-10-14T18:14:02Z; exit 1; wall 2.246 s; CPU 2.2 s (user 2.194 + sys 0.023); load 2.72 4.29 7.09

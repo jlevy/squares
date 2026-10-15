@@ -400,7 +400,10 @@
    hue and drew the light tab lavender rather than teal.
    The same strip also switches a view in place: there it is a tablist of buttons
    (`role="tab"`), the selected one filled as the current page's link is. The homepage's
-   atlas uses it for its Grid and Triangle views (site.css places it). */
+   atlas uses it for its Grid and Triangle views (site.css places it). Multi-select
+   chooser groups use the same native buttons with aria-pressed; momentary actions
+   keep ordinary button semantics. Visual selection is shared, keyboard behavior
+   stays with the control's semantics. */
 /* The tabs sit below the rule under the bar, not above it. That rule is the header
    slot's lower border and the tabs are in the slot, so a header that holds tabs hands
    its rule to the bar: from the top, the bar, the rule, then the tabs. The bar spans
@@ -419,6 +422,8 @@
   --site-tabs-space: 0.7rem;
   border: 1px solid var(--kpress-doc-border);
   display: flex;
+  flex-wrap: wrap;
+  max-inline-size: 100%;
   font-family: var(--kpress-font-sans);
   font-feature-settings: var(--kpress-font-features-sans);
   font-size: calc(var(--site-nav-font-size) * var(--paper-button-label-scale));
@@ -429,8 +434,8 @@
 .site-app-shell .site-tabs {
   margin-block-end: var(--site-tabs-space);
 }
-/* A button tab takes the strip's type and none of a button's own chrome. */
-.site-tabs [role="tab"] {
+/* Every chooser button takes the strip's type and none of its native chrome. */
+.site-tabs :is([role="tab"], button) {
   background: none;
   border: 0;
   border-radius: 0;
@@ -438,7 +443,7 @@
   font: inherit;
 }
 nav.site-tabs a,
-.site-tabs [role="tab"] {
+.site-tabs :is([role="tab"], button) {
   color: var(--kpress-doc-muted);
   font-weight: 550;
   padding: 0.3rem 1.1rem;
@@ -446,17 +451,17 @@ nav.site-tabs a,
   transition: var(--site-hover-transition);
 }
 nav.site-tabs a + a,
-.site-tabs [role="tab"] + [role="tab"] {
+.site-tabs :is([role="tab"], button) + :is([role="tab"], button) {
   border-inline-start: 1px solid var(--kpress-doc-border);
 }
 nav.site-tabs a:is(:hover, :focus-visible),
-.site-tabs [role="tab"]:is(:hover, :focus-visible) {
+.site-tabs :is([role="tab"], button):is(:hover, :focus-visible) {
   background: var(--site-wash);
   color: var(--kpress-doc-accent);
   text-decoration: none;
 }
 nav.site-tabs a[aria-current="page"],
-.site-tabs [role="tab"][aria-selected="true"] {
+.site-tabs :is([role="tab"][aria-selected="true"], button[aria-pressed="true"]) {
   background: color-mix(
     in srgb,
     var(--kpress-doc-accent) var(--site-tab-current-tint),
@@ -490,7 +495,7 @@ nav.site-tabs a[aria-current="page"],
   font-size: var(--site-chooser-small-size);
   line-height: var(--site-chooser-small-leading);
 }
-.site-tabs.site-chooser-small [role="tab"] {
+.site-tabs.site-chooser-small :is([role="tab"], button) {
   font-weight: var(--site-font-weight-sans-medium, 500);
   padding: var(--site-chooser-small-padding);
 }

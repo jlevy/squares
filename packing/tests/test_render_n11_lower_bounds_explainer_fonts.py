@@ -820,6 +820,39 @@ def test_the_relation_subset_carries_the_three_glyphs_and_its_own_name() -> None
     assert len(base64.b64decode(encoded.group(1))) < 2000
 
 
+def test_literal_code_symbol_subset_keeps_blackboard_r_without_replacing_ascii() -> None:
+    from fontTools.pens.recordingPen import RecordingPen  # noqa: PLC0415
+    from fontTools.ttLib import TTFont  # noqa: PLC0415
+
+    css = render_n11_lower_bounds_explainer.code_symbol_face_css(kpress_static())
+    assert css.count('font-family: "Planetaire Mono Text";') == 2
+    assert "unicode-range: U+211D;" in css
+    assert "unicode-range: U+2194, U+2264;" in css
+    fonts = [
+        TTFont(io.BytesIO(base64.b64decode(encoded)))
+        for encoded in re.findall(r'base64,([A-Za-z0-9+/=]+)"', css)
+    ]
+    assert len(fonts) == 2
+    for face, name, points in zip(
+        fonts,
+        ("KaTeX_AMS-Regular", "KaTeX_Main-Regular"),
+        ({0x211D: ord("R")}, {0x2194: 0x2194, 0x2264: 0x2264}),
+        strict=True,
+    ):
+        cmap = face.getBestCmap() or {}
+        assert set(cmap) == set(points)
+        source = TTFont(kpress_static() / f"katex/fonts/{name}.woff2")
+        originals = source.getBestCmap() or {}
+        for point, original_point in points.items():
+            actual_outline, original_outline = RecordingPen(), RecordingPen()
+            face.getGlyphSet()[cmap[point]].draw(actual_outline)
+            source.getGlyphSet()[originals[original_point]].draw(original_outline)
+            assert actual_outline.value == original_outline.value
+        assert name in (face["name"].getDebugName(6) or "")
+    paper_css = relation_face_css(kpress_static())
+    assert all(point not in paper_css for point in ("U+211D", "U+2194", "U+2264"))
+
+
 def test_the_shared_math_runtime_is_embedded_without_rewriting_its_source(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

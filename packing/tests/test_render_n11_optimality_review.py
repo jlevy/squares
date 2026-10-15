@@ -196,7 +196,10 @@ def test_the_page_carries_the_sites_bar_with_papers_current(rendered: tuple[str,
     assert paper.SITE_PATH in render_overview.SITE_PAGES
     assert paper.SITE_PATH.count("/") == paper.SITE_ROOT.count("../") == 1
     assert render_overview.nav_html("papers", root="../") in html
-    assert '<a data-page="papers" aria-current="page" href="../papers.html">Papers</a>' in html
+    assert (
+        '<a data-page="explanations" aria-current="page" href="../papers.html">Explanations</a>'
+        in html
+    )
     # One link is current, the bar's entry: the format chips link the other formats.
     assert len(re.findall(r'<a\b[^>]*\saria-current="page"', html)) == 1
     main = html.split('<main class="kpress-page-main kpress-viewport">', 1)[1]

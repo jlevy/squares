@@ -35,6 +35,18 @@ FAMILIES = {
         "input-response",
         "Prepare inert tiles and expand the existing static Atlas preview on input.",
     ),
+    "news-cards": (
+        "input-response",
+        "Click or tap expands the existing News article; hover never changes its height.",
+    ),
+    "news-filters": (
+        "input-response",
+        "Filter complete News articles by importance and subject, preserving address state.",
+    ),
+    "news-forward": (
+        "registered-forwarder",
+        "Forward only retained About history anchors to their declared News destinations.",
+    ),
     "table": (
         "input-response",
         "Sort/filter complete static rows; query presets select existing rows.",

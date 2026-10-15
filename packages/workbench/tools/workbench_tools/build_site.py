@@ -148,9 +148,9 @@ the window's floor so their last row is never under it.
 """
 
 #: The page's entry in the site's navigation bar, which marks it as the current page.
-NAV_PAGE = "visualize"
-#: The page's tab in the Visualize section, whose first tab is the film at
-#: `visualize.html`: the bar under the navigation marks it current.
+NAV_PAGE = "explanations"
+#: The page's tab in the Explanations section, alongside Papers and Film
+#: (`papers.html` and `visualize.html`): the bar under the navigation marks it current.
 SECTION_TAB = "workbench"
 #: Where the site's root is from the page: it is served at `workbench/index.html`.
 NAV_ROOT = "../"
@@ -189,8 +189,8 @@ def with_nav(page: str) -> str:
     """Give the page the site's navigation bar, as every page of the site has it.
 
     The bar is the site's own, rendered from its one partial by `render_overview.nav_shell`
-    rather than written again here, with Visualize marked current and its links reaching
-    the site's root, and under it the Visualize section's tabs with Workbench current, so
+    rather than written again here, with Explanations marked current and its links reaching
+    the site's root, and under it the Explanations section's tabs with Workbench current, so
     this page and the film's (`visualize.html`) read as one section and every existing
     `workbench/` link lands on its tab. Its stylesheet and kpress's theme bootstrap open
     the head, so the reader's stored theme is on the root before anything is drawn; the

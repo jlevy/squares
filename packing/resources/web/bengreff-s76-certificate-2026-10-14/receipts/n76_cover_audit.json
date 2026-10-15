@@ -1,0 +1,52 @@
+{
+ "cover": "s76_cover_v5.txt",
+ "sha256": "b6a1214b99f00e5dd136d74c8d87bccd178df38a1063b2c7be90517eb2b862b2",
+ "side": "9",
+ "coordinate_denominator": 8000,
+ "mass_denominator": 400000000,
+ "points": 41633,
+ "segments": 9744,
+ "polygons": 0,
+ "lines_carrying_segments": {
+  "x": [
+   "0",
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6",
+   "7",
+   "8",
+   "9"
+  ],
+  "y": [
+   "0",
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6",
+   "7",
+   "8",
+   "9"
+  ]
+ },
+ "segment_lengths": {
+  "1/500": 2104,
+  "1/50": 5976,
+  "1/16": 1664
+ },
+ "point_mass": "521353543/20000000",
+ "segment_mass": "4969954383/100000000",
+ "total": "3788361049/50000000",
+ "total_decimal": "75.767220980",
+ "total_equals_stated": true,
+ "total_below_n": true,
+ "counts_as_stated": true,
+ "d4_invariant_entry_by_entry": true,
+ "d4_invariant_as_measure": true,
+ "points_on_segment_lines": 0,
+ "problems": []
+}

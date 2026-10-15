@@ -1,0 +1,84 @@
+{
+ "n": 146,
+ "note": "TT2 s(146) packing vs jlevy/squares#505 (Barnett): both exactsolve-certified local minima, distinct. 10-14.",
+ "ours": {
+  "S_exact": "12.583782190151860342166670775175292851925750957866430885822800364",
+  "optimality": {
+   "kkt": true,
+   "min_lambda": -0.0,
+   "status": "local minimum of S, strict modulo 59 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+   "flat_motions": 59,
+   "corner_corner": 69,
+   "rattlers": 13,
+   "vv_milp_dS": 0.0,
+   "negative_eigs": 0
+  },
+  "regularized": {
+   "tilted": 37,
+   "load_bearing_tilted": 32,
+   "angles_load_bearing": {
+    "39.6508": 22,
+    "42.1835": 4,
+    "42.1885": 4,
+    "42.2265": 2
+   },
+   "angle_groups": 5
+  }
+ },
+ "barnett505": {
+  "S_exact": "12.583782203950834291913467937051151366772886173067811283038853851",
+  "input": "register witness / #505 (store id 212407)",
+  "optimality": {
+   "kkt": true,
+   "min_lambda": -0.0,
+   "status": "local minimum of S, strict modulo 61 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+   "flat_motions": 61,
+   "corner_corner": 63,
+   "rattlers": 13,
+   "vv_milp_dS": 0.0,
+   "negative_eigs": 0
+  },
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 146 closed unit squares pairwise disjoint inside the open box of side 12.583782203950834244 (332 close pairs checked)"
+   }
+  },
+  "regularized": {
+   "tilted": 37,
+   "load_bearing_tilted": 33,
+   "angles_load_bearing": {
+    "39.6508": 23,
+    "42.1674": 2,
+    "42.1750": 2,
+    "42.2197": 5,
+    "42.2323": 1
+   },
+   "angle_groups": 6
+  }
+ },
+ "difference": {
+  "side_gap": 1.379897e-08,
+  "matching_distance_raw": 0.102,
+  "matching_distance_regularized": 0.069,
+  "squares_moved_gt_1e4": 10,
+  "max_move": 0.0562,
+  "rattler_status_swaps": 6,
+  "summary": "identical to ~1e-7 except a cluster of 10 squares tilted near 42 deg (moves up to 0.056, angle changes 0.01-0.04 deg)"
+ },
+ "contact_equations": {
+  "ours": {
+   "wall": 74,
+   "square": 556
+  },
+  "barnett505": {
+   "wall": 72,
+   "square": 577
+  }
+ },
+ "tools": "candidate.py (exactsolve, verify_cert, verify_cert2, search/regularize conservative); comparison: assignment over the 8 box symmetries"
+}

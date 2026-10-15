@@ -20,7 +20,23 @@ derives the house again from the record, so it cannot go stale:
 - **credit** follows the entry, except that a candidate listed in its entry's
   `regularizations` at the count leaves the packing with the finder of the result it
   names as `of`, and credits the regularizer with the regularization
-  (epistemics.md, Parallel Projects and Their Credit).
+  (epistemics.md, Parallel Projects and Their Credit);
+- **an entry over several sources** is read at each count through the source of its
+  confirming evidence there, the replay that decided the certificate at that count, which
+  a reported atom under the same key must also state (`source_key_at`): T-181's replays
+  decided 211 and 241 from issue 583's revision and 302 from issue 586's, though both
+  reports state all three;
+- **an algebraic certificate is no candidate.** A house reader rebuilds a rational side,
+  and a count at which the source's packet states only an algebraic witness
+  (`algebraic_counts`) is left out of the selection and named, not read: its side cannot
+  be held exactly against a rational ceiling here, and adopting it would rest a verified
+  ceiling on one route, which the owner decides (RP-3 of the 14 October review of PR
+  #574);
+- **a held result** (`HELD`) is left out of the selection, and the house is the best of
+  the rest: where a held result is below that house, or below the case where the case
+  stays, the selection names it (`Selection.held`) and the count is reported as held, for
+  the owner, rather than as an adoption this has missed. If the owner releases the result,
+  those counts move again, to it.
 
 Nothing here writes: `devtools.adopt_houses` writes the selection into the case records.
 
@@ -36,7 +52,8 @@ house, which is what an unadopted, confirmed and reviewed certificate looks like
 fails where it cannot tell: a candidate below the rounded-up display of an algebraic
 ceiling, which a human orders, and an eligible entry with no exact reader that states a
 side below its case (`check_standing.improvements`), which no candidate can carry. It
-names every eligible entry it could not read.
+names every eligible entry it could not read, every algebraic count it left out and every
+count a held result holds.
 """
 
 from __future__ import annotations
@@ -51,6 +68,7 @@ from functools import cache
 from pathlib import Path
 from typing import Any, cast
 
+from devtools import algebraic_witness_reports as algebraic_reports
 from devtools import upper_bound_reports as reports
 from devtools.check_results import scope_values
 from sqpack.yamlio import safe_load
@@ -65,6 +83,44 @@ HORIZON = reports.HORIZON
 CONFIRMED_RANK = 3
 CONFIRMING_ORIGINS = frozenset({"replayed-here", "audited-here"})
 DISPLAY_PLACES = 16
+
+
+@dataclass(frozen=True)
+class Hold:
+    """Why a result's houses wait on the owner, and since when."""
+
+    #: Whose houses, as prose names them: ``PR #574's``.
+    whose: str
+    #: Why they wait, as a clause after "are held for the owner:".
+    why: str
+    #: The day the hold was decided, ISO.
+    since: str
+
+    @property
+    def reason(self) -> str:
+        return f"{self.whose} houses are held for the owner: {self.why}"
+
+
+#: Results whose houses wait on the owner, with why. A held result is left out of the
+#: selection: the house at each of its counts is the best of the other candidates, and
+#: the case records name the held result as smaller and waiting (`Selection.held`). On 15
+#: October 2026 the coordinator of the 14 October intake held PR #574's houses (T-174) for
+#: the owner, after the adoption lane measured what its 60 houses would cost: 18.5 MB more
+#: of witnesses in Git (OR-18), 5.8 MB more in every worker's snapshot, and about 440 CPU
+#: seconds more in the pull request's sampled atlas rebuild. The same day, after reviews A
+#: and B of PR 614, the coordinator decided that a hold skips only the held entry, so the
+#: next candidate takes the house where it is below the case (at 10 counts, by 1.1e-19 to
+#: 1.42e-2); those counts move again, to T-174, if the owner adopts its houses.
+HELD: dict[str, Hold] = {
+    "T-174": Hold(
+        whose="PR #574's",
+        why=(
+            "their witnesses would add about 18.5 MB to Git (OR-18) and their custody "
+            "inputs about 5.8 MB to every worker's snapshot"
+        ),
+        since="2026-10-15",
+    ),
+}
 
 
 class SelectionError(ValueError):
@@ -119,6 +175,12 @@ class Selection:
     #: whether it is below the ceiling is not decided here: the case stays, and a human
     #: decides.
     undecided: bool = False
+    #: The candidates of `HELD` results below the house, or below the case where it
+    #: stays: left out of the selection until the owner releases them.
+    held: tuple[Candidate, ...] = ()
+    #: The results whose certificate at this count is algebraic, with the source each is
+    #: read from: left out of the selection, which the owner decides (RP-3).
+    algebraic: tuple[tuple[str, str], ...] = ()
 
     @property
     def moves(self) -> bool:
@@ -212,15 +274,21 @@ def confirming(
 
 
 def reporting(
-    entry: Mapping[str, Any], evidence: Mapping[str, Mapping[str, Any]], key: str
+    entry: Mapping[str, Any],
+    evidence: Mapping[str, Mapping[str, Any]],
+    key: str,
+    n: int | None = None,
 ) -> tuple[str, ...]:
-    """The entry's own reported evidence: the source's report, under the entry's key."""
+    """The entry's own reported evidence: the source's report, under the entry's key, and,
+    given a count, whose scope reaches it (PR 574 reports its rational and its algebraic
+    certificates in two atoms)."""
     return tuple(
         str(identifier)
         for identifier in entry.get("evidence") or ()
         if (item := evidence.get(str(identifier)))
         and item.get("assurance") == "reported"
         and item.get("source_key") == key
+        and (n is None or "scope" not in item or n in scope_values(dict(item["scope"])))
     )
 
 
@@ -246,35 +314,90 @@ def _side(key: str, n: int) -> Fraction:
     return reports.house_side(key, n)
 
 
+def source_key_at(
+    entry: Mapping[str, Any], evidence: Mapping[str, Mapping[str, Any]], n: int
+) -> str:
+    """The source the entry's side at `n` is read from; empty where none is certain.
+
+    An entry over one source is read through it. An entry over several is read, count by
+    count, through the source of its confirming evidence at `n`, the replay that decided
+    the certificate there, and only where that is one of the entry's keys, the only one,
+    and a reported atom of the entry under it states the count too. The order of
+    `source_keys` decides nothing: two reports may both state a count that one replay
+    decided from one of them, as both of T-181's state 211 and 241 (review B of PR 614).
+    """
+    keys = [str(key) for key in entry["attribution"]["source_keys"]]
+    if len(keys) == 1:
+        return keys[0]
+    decided = {
+        str(evidence[identifier].get("source_key"))
+        for identifier in confirming(entry, evidence, n)
+    }
+    if len(decided) != 1:
+        return ""
+    (key,) = decided
+    if key not in keys or not reporting(entry, evidence, key, n):
+        return ""
+    return key
+
+
+@cache
+def algebraic_counts(key: str) -> frozenset[int]:
+    """The counts at which the source's packet states only an algebraic certificate.
+
+    Read from the packet's two declarations, not from its certificates: a count its
+    algebraic declaration states (`algebraic_witness_reports`) and its rational one does
+    not. PR #574's packet states T-174's sides at 70, 153, 207 and 302 so, each a root of
+    an integer polynomial decided on one route.
+    """
+    packet = reports.import_packet(key)
+    if packet is None or not (packet / algebraic_reports.DECLARATION).is_file():
+        return frozenset()
+    rational = {row["n"] for row in reports.load_declaration(packet)["certificates"]}
+    stated = {row["n"] for row in algebraic_reports.load_declaration(packet)["witnesses"]}
+    return frozenset(stated - rational)
+
+
 def candidates(
     results: Sequence[Mapping[str, Any]],
     evidence: Mapping[str, Mapping[str, Any]],
     *,
     since: str | None = None,
     unread: list[str] | None = None,
+    algebraic: list[tuple[str, int]] | None = None,
 ) -> dict[int, list[Candidate]]:
     """Every confirmed, reviewed entry's exact side at every count it covers in the corpus.
 
     `since` keeps entries registered on or after a date, so a second pass can read only
     the entries a later intake added. An entry whose source has no exact reader is left
     to the case records and named in `unread`: those are entries adopted before the
-    readers existed, whose sides the case records hold where they are the house.
+    readers existed, whose sides the case records hold where they are the house. A count
+    whose certificate is algebraic is left out and named in `algebraic`, as the entry and
+    the count.
     """
     found: dict[int, list[Candidate]] = {}
     for entry in results:
         if not eligible(entry) or (since and str(entry.get("registered")) < since):
             continue
         keys = list(entry["attribution"]["source_keys"])
-        key = str(keys[0]) if len(keys) == 1 else ""
-        if key not in reports.HOUSES:
+        if len(keys) == 1 and str(keys[0]) not in reports.HOUSES:
             if unread is not None:
                 unread.append(str(entry["id"]))
             continue
+        missed = False
         for n in sorted(scope_values(dict(entry["scope"]))):
             if n > HORIZON:
                 continue
             proof = confirming(entry, evidence, n)
             if not proof:
+                continue
+            key = source_key_at(entry, evidence, n)
+            if key not in reports.HOUSES:
+                missed = True
+                continue
+            if n in algebraic_counts(key):
+                if algebraic is not None:
+                    algebraic.append((str(entry["id"]), n))
                 continue
             found.setdefault(n, []).append(
                 Candidate(
@@ -283,11 +406,13 @@ def candidates(
                     side=_side(key, n),
                     source_key=key,
                     published=str(entry["attribution"].get("published") or ""),
-                    report_evidence=reporting(entry, evidence, key),
+                    report_evidence=reporting(entry, evidence, key, n),
                     confirming_evidence=proof,
                     regularizes=regularized(entry, n),
                 )
             )
+        if missed and unread is not None:
+            unread.append(str(entry["id"]))
     return found
 
 
@@ -302,29 +427,74 @@ def select(
     since: str | None = None,
     cases: Mapping[int, Case] | None = None,
     unread: list[str] | None = None,
+    algebraic: list[tuple[str, int]] | None = None,
+    held: Mapping[str, Hold] | None = None,
 ) -> dict[int, Selection]:
     """The house at every count a candidate reaches, against the case records as they are.
 
-    A case whose ceiling is not rational moves only where its best candidate is not below
-    the ceiling's display; below it, the selection is `undecided` and the case stays.
+    A result in `held` (by default `HELD`) is left out: the house is the best of the other
+    candidates, and the held candidates below it, or below the case where it stays, are
+    named in `Selection.held`. A case whose ceiling is not rational moves only where its
+    best candidate is not below the ceiling's display; below it, the selection is
+    `undecided` and the case stays.
     """
     results = load_results() if results is None else results
     evidence = load_evidence() if evidence is None else evidence
+    holds: Mapping[str, Hold] = HELD if held is None else held
+    left_out: list[tuple[str, int]] = [] if algebraic is None else algebraic
     selections: dict[int, Selection] = {}
-    found_at = candidates(results, evidence, since=since, unread=unread)
+    found_at = candidates(results, evidence, since=since, unread=unread, algebraic=left_out)
+    entries = {str(entry["id"]): entry for entry in results}
+    stated: dict[int, list[tuple[str, str]]] = {}
+    for result, n in left_out:
+        stated.setdefault(n, []).append((result, source_key_at(entries[result], evidence, n)))
     for n, found in sorted(found_at.items()):
         case = cases[n] if cases is not None else load_case(n)
         ranked = tuple(sorted(found, key=precedence))
-        best = ranked[0]
-        below = best.side < case.verified
+        free = [candidate for candidate in ranked if candidate.result not in holds]
+        best = free[0] if free else None
+        below = best is not None and best.side < case.verified
+        house = best if below and case.exact else None
+        bar = house.side if house is not None else case.verified
         selections[n] = Selection(
             n=n,
             case=case,
-            house=best if below and case.exact else None,
+            house=house,
             candidates=ranked,
             undecided=below and not case.exact,
+            held=tuple(c for c in ranked if c.result in holds and c.side < bar),
+            algebraic=tuple(stated.get(n, ())),
         )
     return selections
+
+
+@cache
+def algebraic_side(key: str, n: int) -> tuple[Any, int]:
+    """The exact side the source's algebraic witness states at `n`, and its field's degree.
+
+    A field element (`algebraic_witness_reports.side_of`), which `algebraic_below` orders
+    against a rational side exactly; never a candidate's side.
+    """
+    packet = reports.import_packet(key)
+    if packet is None:
+        raise SelectionError(f"{key}: no packet to read an algebraic side from")
+    witness = algebraic_reports.read_facts(packet, {n})[n]
+    rows = algebraic_reports.load_declaration(packet)["witnesses"]
+    degree = next(int(row["degree"]) for row in rows if row["n"] == n)
+    return algebraic_reports.side_of(witness), degree
+
+
+def algebraic_below(key: str, n: int, side: Fraction) -> bool:
+    """Whether the algebraic side at `n` is below `side`, decided exactly."""
+    value, _degree = algebraic_side(key, n)
+    return algebraic_reports.against(value, reports.exact_span(side)) == "below"
+
+
+def algebraic_margin(key: str, n: int, side: Fraction) -> Fraction:
+    """How far the algebraic side at `n` is below `side`, from a tight enclosure."""
+    value, _degree = algebraic_side(key, n)
+    _low, high = algebraic_reports.enclosure(value, 60)
+    return side - high
 
 
 def unread_pending(unread: Sequence[str]) -> dict[str, list[int]]:
@@ -371,6 +541,8 @@ def row(selection: Selection) -> dict[str, Any]:
         "house_exact": reports.legacy.literal(house.side) if house else None,
         "margin": reports.legacy.literal(selection.margin) if house else None,
         "regularizes": house.regularizes if house else None,
+        "held": [candidate.result for candidate in selection.held],
+        "undecided": selection.undecided,
         "candidates": [
             {
                 "result": candidate.result,
@@ -385,10 +557,17 @@ def row(selection: Selection) -> dict[str, Any]:
 def table(selections: Mapping[int, Selection], *, everything: bool) -> str:
     lines = [f"{'n':>4}  {'case house':<44} {'new house':<9} {'side':<20} margin   credit"]
     for n, selection in sorted(selections.items()):
-        if not (selection.moves or selection.undecided or everything):
+        if not (selection.moves or selection.undecided or selection.held or everything):
             continue
         house = selection.house
         old = f"{selection.case.source_key} {ceiling(selection.case.verified)}"
+        if selection.held and house is None:
+            best = selection.held[0]
+            lines.append(
+                f"{n:>4}  {old:<44} {'(held)':<9} {ceiling(best.side):<20} "
+                f"held: {best.result}'s houses wait on the owner"
+            )
+            continue
         if selection.undecided:
             best = selection.candidates[0]
             lines.append(
@@ -400,6 +579,8 @@ def table(selections: Mapping[int, Selection], *, everything: bool) -> str:
             lines.append(f"{n:>4}  {old:<44} {'(stays)':<9}")
             continue
         credit = f"packing of {house.regularizes}" if house.regularizes else ""
+        if selection.held:
+            credit = f"{credit}; held below it: {', '.join(c.result for c in selection.held)}"
         lines.append(
             f"{n:>4}  {old:<44} {house.result:<9} {ceiling(house.side):<20} "
             f"{_sci(selection.margin):<8} {credit}"
@@ -417,7 +598,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--since", help="only entries registered on or after this date")
     arguments = parser.parse_args(argv)
     unread: list[str] = []
-    selections = select(since=arguments.since, unread=unread)
+    algebraic: list[tuple[str, int]] = []
+    selections = select(since=arguments.since, unread=unread, algebraic=algebraic)
     if arguments.json:
         rows = [row(s) for s in selections.values() if s.moves or arguments.all]
         print(json.dumps(rows, indent=2))
@@ -440,6 +622,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             "unread, eligible but with no exact reader: "
             f"{', '.join(unread) if unread else 'none'}"
         )
+        print(
+            "left out, an algebraic certificate the owner decides: "
+            f"{', '.join(f'{r} at {n}' for r, n in algebraic) if algebraic else 'none'}"
+        )
+        waiting = [n for n, selection in selections.items() if selection.held]
+        if waiting:
+            results = sorted({c.result for n in waiting for c in selections[n].held})
+            print(f"held for the owner ({', '.join(results)}): n = {waiting}")
         for identifier, counts in unread_pending(unread).items():
             print(
                 f"FAIL: {identifier} has no exact reader and states a side below its case "

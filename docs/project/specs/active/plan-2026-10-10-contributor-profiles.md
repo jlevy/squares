@@ -596,6 +596,38 @@ non-person and 230 unresolved.
 All 146 tracked PDFs still need full inspection receipts.
 Remaining population work stays in Phase 4; validation receipts are recorded on PR #578.
 
+### Integration: 2026-10-15
+
+This integration brings `origin/main` at `4c9af6902` into PR #578: 306 upstream commits
+and 34 source conflicts, tracked by `think-5bao`. It retains the new News entries and
+editorial revisions, the basic and advanced tutorials, Explanations navigation, and the
+profile branch’s reviewed credit links.
+News first mentions use reviewed preferred names and link directly to their profiles.
+The Profiles directory and News keep ordinary profile navigation; contextual credit
+popovers remain available on case and result pages.
+Retained delivery metadata, source identifiers and quotations keep their original text.
+
+The reconciled census covers 27 profiles and 1,349 structured spans: 1,032 resolved, six
+non-person and 311 unresolved, with no stale joins.
+All 146 tracked PDFs still await full inspection receipts.
+The regenerated URL registry contains 1,056 rows with no failures.
+Earlier census and route totals remain historical receipts for their own cuts.
+
+Upstream site history through `v0.7.9` is retained, including its `v0.7.0` News and
+Explanations launch.
+The contributor feature takes the next minor site edition, `v0.8.0`; the infographics
+retain upstream `v0.6.1`. The independent paper credit corrections remain
+optimality-review `v0.1.8` and threshold-review `v0.1.1`, planned for 15 October
+publication. Both sides’ paper no-public-change findings are retained for verification
+against the merged outputs.
+The upstream data revision is retained during the merge; its final pin is a separate
+commit after the merged data is committed.
+
+The integration retains upstream’s quick-push validation policy and complete selected
+test coverage, with deep checks reserved for explicit checkpoints.
+Merge validation, paper release verification and publication acceptance remain pending;
+this section records the resolved source decisions, not a passing gate.
+
 ## WIP Handoff: 2026-10-10
 
 The owner requested a work-in-progress PR and handoff before further implementation.

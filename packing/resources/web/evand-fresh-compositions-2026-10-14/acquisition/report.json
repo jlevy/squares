@@ -1,0 +1,37 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/596",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel fresh compositions 2026-10-14]",
+  "report_evidence": "E-evand-596-compositions-report",
+  "receipt_format": "evand-596-exact-replay-v1",
+  "witness_prefix": "W-evand-596-n",
+  "claim_limitations": "Complete 622cd2e rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "certificates": [
+    {"n": 365, "path": "search/packer/candidates/fresh_n365.cert", "format": "evand-cert", "offered": "19.621320343560", "first_committed": "2026-10-14T06:50:09Z"},
+    {"n": 370, "path": "search/packer/candidates/fresh_n370.cert", "format": "evand-cert", "offered": "19.767730746255", "first_committed": "2026-10-14T06:50:09Z"},
+    {"n": 460, "path": "search/packer/candidates/fresh_n460.cert", "format": "evand-cert", "offered": "21.959969683021", "first_committed": "2026-10-14T06:50:09Z"}
+  ],
+  "requested": [365, 370, 460],
+  "replayed": [365, 370, 460],
+  "houses": [],
+  "pending": [],
+  "register": {
+    "title": "Evan Daniel's fresh-pass composition certificates at 622cd2e, issue596",
+    "headline": "Exact rational certificates at 365, 370 and 460, beyond the case corpus, from Evan Daniel's fresh-pass compositions",
+    "significance": 2,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept all three, standard library only; they share an author and the certificate format, and their geometry tests differ. Each side is an 80-digit KKT point with positive multipliers on the load-bearing contacts, a reduced Hessian positive semidefinite modulo exact flat motions and a first-order MILP that finds no descent in any corner-corner branch; those are numerical evidence, as the source says, not interval proofs. No source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose composer found all three in a pass over the packings posted in issues 586 and 593: two-piece compositions, as in issue 584, of a rectangle of unit squares whose sides differ by an integer in each of two opposite corners with aligned squares filling the rest. The author asks that the packings the pieces came from be credited: at 365 the register's s(199) (Nate Chaoweeraprasit, SQUISH) whole with Erich Friedman's s(26) whole, so the side is s(26) + 14 = 14 + 7/2 + 3/sqrt(2); at 370 Francisco Couzo's s(175) of issue 488 whole with a 38-square (h + 2) x h rectangle from the author's own rectangle search, the polish moving both; at 460 an 81-square (h + 6) x h crop of Nate Chaoweeraprasit's (SQUISH) s(306) of issue 481 and a 130-square (h + 7) x h crop of Francisco Couzo's s(380) of issue 586. The issue says 365 is a new arrangement of known pieces, not new local structure. The composer, the search, the checks and the request were done with Claude (Claude Code), directed and reviewed by Evan Daniel.",
+    "next_rung": "Independently review the retained replay, then record each count as a verified beyond-horizon row, as for issues 506 and 584: the record tracks no row at 365, 370 or 460 and no other open report names them, and each side is below the bound the issue derives by Friedman's L-step, by 1.28e-02 at 365 (s(293) + 2), 1.04e-02 at 370 (s(298) + 2) and 1.64e-03 at 460 (issue 586's s(380) + 2). Final exact-head CI remains required.",
+    "bead": "think-yxkt",
+    "bibliography": {
+      "authors": ["Daniel"],
+      "lineage": "independent",
+      "credit": "Daniel after Chaoweeraprasit, Friedman, Couzo",
+      "short_credit": "Daniel after Chaoweeraprasit et al.",
+      "note": "Three complete exact certificates at 622cd2e21407700fe8d5ac5943af820725107921, all beyond the case corpus, at 365, 370 and 460: two-piece compositions from Chaoweeraprasit's s(199) with Friedman's s(26), Couzo's s(175) with the author's 38-square rectangle, and crops of Chaoweeraprasit's s(306) and Couzo's s(380), each solved to an 80-digit KKT point and scaled by 1 + 1e-20. MIT-licensed certificates, KKT points, inputs and solver reports retained; the source's two exact checkers pinned against the issue-399 packet and not run here. Claude assistance disclosed. KKT and descent statements are the author's numerical evidence; no local or global optimality claim."
+    }
+  }
+}

@@ -1,0 +1,6 @@
+$ python3 -m squarepack.verify r19x18_n0325.cert --strict
+n = 325, W = 3231669916872866796892011999114716352875/170141183460469231731687303715884105728 (= 18.994048655031931952...), H = 3061528733412397565160324695398832247147/170141183460469231731687303715884105728 (= 17.994048655031931952...)
+  min wall clearance  = 2.711e-20  (square #3)
+    left/right walls  = 2.711e-20, bottom/top walls = 2.711e-20
+  min pair separation = 2.312e-20  (squares #40, #49; 821 close pairs by separating axes, the rest by disc separation)
+  VALID (strict): n unit squares fit in W x H

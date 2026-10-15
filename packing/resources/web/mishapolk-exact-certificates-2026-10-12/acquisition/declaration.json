@@ -1,0 +1,54 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "mishapolk-square-packing-records",
+  "source_url": "https://github.com/Mishapolk/square-packing-records",
+  "source_ref": "336bdf5efab4784e54e0ac32edf3ed12f9c8af7e",
+  "source_commit": "336bdf5efab4784e54e0ac32edf3ed12f9c8af7e",
+  "retrieved_at_utc": "2026-10-14T07:09Z",
+  "git_scope": "Full clone, checked out at the commit issue #573 pins. All files of the pinned tree are in the scope and bound to their Git blobs; under derived-only custody none is copied. The 19 certificates are unchanged at 46f638ce0537beeb1bad24242c6a3d357eecd9ee, issue #593's pin. No source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The tree's README names no credit or AI-assistance terms; the issue #573 credits Mishapolk, with Ryan Xu's construction at 103 and Nate Chaoweeraprasit's (SQUISH) at 258, and discloses Gemini assistance.",
+  "claims": [
+    "Issue #573 (opened 2026-10-12T23:58Z as 'Exact rational certificates for 19 packings below register (n = 103-306)', renamed by its author at 2026-10-13T00:06Z to six packings; no comments by 2026-10-14T07:10Z) reports six upper bounds, each rounded up at 12 places from the exact certificates/square-<n>.cert at 336bdf5efab4784e54e0ac32edf3ed12f9c8af7e:",
+    "s(103) <= 10.679232047362, exact side 213584640947227/20000000000000.",
+    "s(153) <= 12.870013850405, exact side 20109396641257/1562500000000.",
+    "s(207) <= 14.880960371558, exact side 7440480185779/500000000000.",
+    "s(209) <= 14.946223226448, exact side 934138951653/62500000000.",
+    "s(258) <= 16.563448002138, exact side 1656344800213717/100000000000000.",
+    "s(270) <= 16.929775353544, exact side 2116221919193/125000000000.",
+    "The release holds 13 further certificates the renamed issue does not name, at n = 108, 127, 131, 154, 175, 180, 236, 237, 263, 267, 302, 303, 306, each with the exact side its README and census.json print: s(108) <= 2726205253081/250000000000; s(127) <= 11810878787593/1000000000000; s(131) <= 5975556234483/500000000000; s(154) <= 807660400121/62500000000; s(175) <= 860260894843/62500000000; s(180) <= 13916993522483/1000000000000; s(236) <= 15863955747161/1000000000000; s(237) <= 12424179381/781250000; s(263) <= 16740412653757/1000000000000; s(267) <= 336776305399/20000000000; s(302) <= 17872029849083/1000000000000; s(303) <= 17913065462741/1000000000000; s(306) <= 8981716858749/500000000000. Each is an import of its own, compared in this packet.",
+    "The issue reports that this repository's sqpack/verify.py at 562fdbd and Evan Daniel's verify_cert.py at 31523f8 accept all six in exact arithmetic; the README at the pin also names devtools.check_rational_witness_independent, devtools.check_half_angle_area and devtools.decimal_pose_margins, and credits them to David Ellsworth. These are author reports; no source program ran here. No local or global optimality is claimed.",
+    "The issue credits Ryan Xu's construction at 103 (#432) and Nate Chaoweeraprasit's (SQUISH) at 258, and calls 153, 207, 209 and 270 new arrangements found by basin hopping with tilted boundary corridors. It discloses that Gemini was used for the search implementation, verification orchestration and issue preparation, directed by the author."
+  ],
+  "scope": [
+    "README.md",
+    "certificates",
+    "check_packing.py"
+  ],
+  "pinned_only": [
+    {
+      "match": "certificates/square-*.cert",
+      "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+    },
+    {
+      "match": "certificates/census.json",
+      "reason": "The source's census: each count's exact side_fraction, its float, the baseline it compares with, its margins and the SHA-256 of its certificate and pose. No licence: pinned by digest only."
+    },
+    {
+      "match": "certificates/square-*.txt",
+      "reason": "A decimal centre-angle pose in David Ellsworth's text format; the release's second rendering of a packing, not an exact certificate. No licence: pinned by digest only."
+    },
+    {
+      "match": "certificates/square-*.svg",
+      "reason": "A drawing of a decimal pose. No licence: pinned by digest only."
+    },
+    {
+      "match": "README.md",
+      "reason": "The repository README: the release's record table with each exact side, quoted in this packet's README. Author prose; no licence; pinned by digest only."
+    },
+    {
+      "match": "check_packing.py",
+      "reason": "A copy of David Ellsworth's check_packing.py as the author published it. No licence in the tree; pinned by digest only and never executed here."
+    }
+  ]
+}

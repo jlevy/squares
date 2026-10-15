@@ -18,7 +18,6 @@ from types import SimpleNamespace
 from typing import NoReturn, Self, cast
 
 import pytest
-from kpress.format.markdown import parse_markdown
 from playwright.sync_api import Browser
 from playwright.sync_api import Error as PlaywrightError
 
@@ -90,12 +89,11 @@ REPOSITORY_LINKS = (
 
 COMMIT = "0123456789abcdef0123456789abcdef01234567"
 
-#: About carries the current retained history, including the merged launch groups.
+#: News carries the current retained history, including the merged launch groups.
 #: Parse only this small section; the fixture does not rebuild the site or prepare math.
-CHANGELOG_BODY = parse_markdown(
-    render_changelog.render_markdown(render_changelog.load(), destination="site"),
-    title="Changelog",
-).html
+CHANGELOG_BODY = '<h1 id="changelog">News</h1>' + render_changelog.render_news(
+    render_changelog.load()
+)
 
 #: The tree `main` holds at the deploy: every path a fixture page links on `main`.
 CHANGELOG_LINKS = branch_paths(CHANGELOG_BODY)
@@ -189,7 +187,7 @@ def page(
     return (
         f"{head(path)}{bar}"
         f'<p>({stamp})</p><a href="{REPO_URL}/blob/{ref}/{link}">Repository</a>{index}'
-        + (CHANGELOG_BODY if path == "about.html" else "")
+        + (CHANGELOG_BODY if path == "news.html" else "")
     ).encode()
 
 
@@ -508,7 +506,13 @@ def test_the_checked_pages_are_every_page_the_site_serves_but_the_workbench() ->
     assert PAGE_URL.endswith(f"/squares/{EXPLAINER}")
     assert EXPLAINER == "papers/n11-lower-bounds-explainer.html"
     assert {*SITE_PAGES, EXPLAINER, "workbench/index.html"} <= set(render_overview.SITE_PAGES)
-    assert {"index.html", "atlas.html", "about.html", "results.html"} == LINK_CHECKED_PAGES
+    assert {
+        "index.html",
+        "news.html",
+        "atlas.html",
+        "about.html",
+        "results.html",
+    } == LINK_CHECKED_PAGES
     assert render_overview.canonical_url("index.html") == check_published_site.SITE_URL
     assert render_overview.canonical_url("tutorial.html").endswith("/squares/tutorial.html")
     # The papers page was added to the renderer alone, and is checked here for it.
@@ -2143,7 +2147,7 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     profile directory and every profile, which moved from `contributors/` to
     `profiles/`. A deploy without one 404s every link written before the change. It
     fails when an old address is gone, when the page there still is the old page, and
-    when a forwarder leads anywhere but where a visit should go, in any one of the four
+    when a forwarder leads anywhere but where a visit should go, in any one of the five
     places it says where that is."""
     moved = dict(render_overview.MOVED_PAGES)
     legacy = render_overview.LEGACY_PROFILES_DIR
@@ -2168,29 +2172,29 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     }
     assert {old: moved[old] for old in profiles} == profiles
     assert not set(moved) & set(render_overview.SITE_PAGES)
+    pages = site_pages()
     requested: list[str] = []
-    assert failures(monkeypatch, fake_site(site_pages(), requested=requested)) == []
+    assert failures(monkeypatch, fake_site(pages, requested=requested)) == []
     for old in moved:
         assert f"https://example.org/{old}" in requested, old
 
-    # Every profile forwarder is written by one rule, so the directory's and one
-    # profile's stand for the rest in the failure cases below.
-    directory = f"{render_overview.LEGACY_PROFILES_DIR}/index.html"
-    sampled = {directory, min(set(profiles) - {directory})}
-    for old, new in moved.items():
-        if old in profiles and old not in sampled:
-            continue
-        # Match the whole old path without hiding another page with a shared suffix.
-        (failure,) = failures(monkeypatch, fake_site(site_pages(), lost=(f"/{old}",)))
+    # Each address has its own verdict. Exercise every address in each corruption batch,
+    # keeping the complete production check without rebuilding and checking every
+    # unrelated page once per address. Strict pairing rejects missing or extra failures.
+    missing = failures(monkeypatch, fake_site(pages, lost=tuple(f"/{old}" for old in moved)))
+    for old, failure in zip(moved, missing, strict=True):
         assert failure.startswith(f"forwarder {old}: HTTP 404, says "), failure
 
-        # The page that was there before, still served in place of its forwarder.
-        stale = site_pages(**{old: explainer_page()})
-        (failure,) = failures(monkeypatch, fake_site(stale))
+    # The page that was there before, still served in place of each forwarder.
+    stale_page = explainer_page()
+    stale = failures(monkeypatch, fake_site(pages | dict.fromkeys(moved, stale_page)))
+    for old, failure in zip(moved, stale, strict=True):
         assert failure.startswith(f"forwarder {old}: HTTP 200, says "), failure
         assert "'script': None" in failure, "an old page is not a forwarder"
 
-        good = site_pages()[old]
+    wrong_pages: dict[str, dict[str, bytes]] = {}
+    for old, new in moved.items():
+        good = pages[old]
         expected = check_published_site.forwarder_expected(old, new)
         target, canonical = expected["script"], expected["canonical"]
         file_target = expected["file"]
@@ -2212,18 +2216,20 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         }
         for place, body in wrong.items():
             assert body != good, place
-            (failure,) = failures(monkeypatch, fake_site(site_pages(**{old: body})))
-            assert failure.startswith(f"forwarder {old}: HTTP 200, says "), (place, failure)
             says = check_published_site.forwarder_says(body.decode())
             assert {name for name in says if says[name] != expected[name]} == {place}
+            wrong_pages.setdefault(place, {})[old] = body
+
+    for place, overrides in wrong_pages.items():
+        wrong_failures = failures(monkeypatch, fake_site(pages | overrides))
+        for old, failure in zip(moved, wrong_failures, strict=True):
+            assert failure.startswith(f"forwarder {old}: HTTP 200, says "), (place, failure)
 
     # A page of the site is named relative to the old address, climbing out of its
     # directory; a page that left the site is named whole.
-    says = check_published_site.forwarder_says(
-        site_pages()["n11-optimality/index.html"].decode()
-    )
+    says = check_published_site.forwarder_says(pages["n11-optimality/index.html"].decode())
     assert says["script"] == "../papers/n11-optimality-review.html"
-    says = check_published_site.forwarder_says(site_pages()["defects.html"].decode())
+    says = check_published_site.forwarder_says(pages["defects.html"].decode())
     assert says["script"] == says["canonical"] == f"{REPO_URL}/blob/{DEFAULT_BRANCH}/defects.md"
     # A directory's index is sent to the directory's own address by script, and to its
     # index file by file navigation, the refresh and the link.

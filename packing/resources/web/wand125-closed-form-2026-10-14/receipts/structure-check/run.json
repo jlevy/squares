@@ -1,0 +1,25 @@
+{
+ "schema": "closed-form-structure-run/v1",
+ "program": "square-packing/problems/closed-form/structure/structure_all.py, which runs validate_family.py once per interval",
+ "program_sha256": {
+  "structure_all.py": "7e32c71d6e9bf65954a34739705543b34db827558589ebc7aec5d9c878044943",
+  "validate_family.py": "22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786"
+ },
+ "run_copy": "the packet's problems/closed-form/ copied to scratch, intervals.json.gz and receipts/replay.json.gz decompressed, all 27 files matched to the packet manifest by sha256sum -c",
+ "interpreter": "packing/.venv/bin/python3 -I, Python 3.14.7",
+ "command": "python3 -I structure/structure_all.py --assets <the 34 downloaded assets> --work <scratch> --out <scratch>/structure.json",
+ "started": "2026-10-14T09:31:28Z",
+ "finished": "2026-10-14T09:32:36Z",
+ "time": "real 67.996 s, user 43.388 s, sys 0.873 s",
+ "host": "4 cores shared with other agents; load average 8.5 at the end",
+ "result": "ALL STRUCTURE OK",
+ "validate_family_checks_passed": 680,
+ "results_equal_to_source_receipt": true,
+ "source_receipt_validate_family_sha256": "fdd61866ca180e4373062f440cb8c61a626a2b71a411b63f5df46443d12a16a0",
+ "this_run_validate_family_sha256": "22e55f17f29a0568f7def24f358d9ad15912c503b0c0af6b1104911543f21786",
+ "controls": {
+  "original-34.txt": "validate_family.py on interval 34's published families and certified line: VALIDATE OK",
+  "line-raised-34.txt": "the same with beta_34 raised by 1e-6: VALIDATE NG at check 3, the saving below the line at delta = 99/100",
+  "family-mutated-34.txt": "family.json of interval 34 with 1e-6 added to one bottom-wall row (T[105], mutation-note.txt): VALIDATE NG at the right-side derivation and check 2"
+ }
+}

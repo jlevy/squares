@@ -61,7 +61,7 @@ PAPERS = (EXPLAINER, THRESHOLD, PAPER)
 REVIEW_FIGURES = {PAPER: 12, THRESHOLD: 12}
 #: The site's own pages measured here: a long report, whose headings, tables and block
 #: quotes hold formulas, and the homepage, whose cards, chips and tables do.
-SITE_PAGES = ("tutorial.html", "index.html")
+SITE_PAGES = ("tutorial.html", "tutorial-advanced.html", "index.html")
 MAC, LINUX = "MacIntel", "Linux x86_64"
 #: A formula both papers set in their prose, as the page's pipeline writes its TeX.
 SHARED_FORMULA = r"s\mkern1mu(11)=T"
@@ -79,7 +79,7 @@ KNOWN: dict[str, dict[str, str]] = {
             "Source Sans 3 does not carry, so the reader's machine draws them"
         ),
     },
-    "tutorial.html": {
+    "tutorial-advanced.html": {
         r"(code block|inline code|other \(code in \.kpress-table\)) .*: drawn from .*host": (
             "mathematics written as code (≥, μ, Σ, √), in characters Planetaire Mono Text "
             "does not carry"
@@ -699,6 +699,81 @@ def test_the_probe_only_marks_exact_local_prose_fallback_sources_optional(
                 assert all(face["optional_local"] is optional for face in faces), faces
         finally:
             browser.close()
+
+
+def test_literal_lean_code_uses_the_shared_glyph_without_host_fallback(
+    chromium: None,  # noqa: ARG001
+) -> None:
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    head, _script = render_overview.page_assets()
+    code_sheet = next(line for line in head.splitlines() if "css/code-symbols." in line)
+    literal = (
+        "Sq17.square17_optimality (L : \N{DOUBLE-STRUCK CAPITAL R}) : "
+        "Sq17.HalfPlaneAssembly.PlainPacking L ↔ Sq17.EndpointGeometry.side ≤ L"
+    )
+    body = (
+        f'<main class="kpress"><code id="literal">{literal}</code>'
+        '<code id="ascii">Sq17.square17_optimality (L : R) : Sq17.</code></main>'
+    )
+    complete = site_assets.shared().assets.inlined(f"<head>{head}</head>{body}")
+    symbols = render_n11_lower_bounds_explainer.code_symbol_face_css(
+        render_n11_lower_bounds_explainer.kpress_static()
+    )
+    relation = next(
+        block
+        for block in render_n11_lower_bounds_explainer.FONT_FACE_BLOCK.findall(symbols)
+        if "U+2194, U+2264" in block
+    )
+    assert symbols in complete
+    widths: list[float] = []
+    with sync_playwright() as driver:
+        browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
+        try:
+            page = browser.new_page()
+            without_symbols = site_assets.shared().assets.inlined(
+                f"<head>{head.replace(code_sheet, '')}</head>{body}"
+            )
+            for joined, document in (
+                (False, without_symbols),
+                (False, complete.replace(relation, "")),
+                (True, complete),
+            ):
+                page.set_content(document)
+                # Locator screenshots wait for fonts.ready; no timing guess or new JS probe.
+                page.locator("#literal").screenshot()
+                assert page.locator("#literal").text_content() == literal
+                session = page.context.new_cdp_session(page)
+                try:
+                    session.send("DOM.enable")
+                    session.send("CSS.enable")
+                    root = session.send("DOM.getDocument", {"depth": 0})["root"]["nodeId"]
+                    drawn: dict[str, list[dict[str, Any]]] = {}
+                    for name in ("literal", "ascii"):
+                        node = session.send(
+                            "DOM.querySelector", {"nodeId": root, "selector": f"#{name}"}
+                        )["nodeId"]
+                        drawn[name] = session.send(
+                            "CSS.getPlatformFontsForNode", {"nodeId": node}
+                        )["fonts"]
+                    assert drawn["ascii"]
+                    assert all(font["isCustomFont"] for font in drawn["ascii"])
+                    assert any("Planetaire" in font["familyName"] for font in drawn["ascii"])
+                    if joined:
+                        assert all(font["isCustomFont"] for font in drawn["literal"])
+                        assert {"KaTeX_AMS-Regular", "KaTeX_Main-Regular"} <= {
+                            font["postScriptName"] for font in drawn["literal"]
+                        }
+                    else:
+                        assert any(not font["isCustomFont"] for font in drawn["literal"])
+                    box = page.locator("#ascii").bounding_box()
+                    assert box is not None
+                    widths.append(box["width"])
+                finally:
+                    session.detach()
+        finally:
+            browser.close()
+    assert widths == pytest.approx([widths[0]] * 3, abs=0.01)
 
 
 @pytest.fixture(scope="module")

@@ -222,6 +222,21 @@ DECLARED_CONSUMERS = {
         "its claim record is frozen, and refuses a rewrite once that ceiling has moved; a "
         "smaller side establishes neither s(n) nor adoption"
     ),
+    "packing/devtools/algebraic_witness_reports.py": (
+        "compares each algebraic witness's exact side with the case's verified ceiling, "
+        "exactly over its field, and records the relation and the ceiling's value and exact "
+        "form in the frozen comparison; a smaller side establishes neither s(n) nor "
+        "adoption"
+    ),
+    "packing/devtools/apply_closed_form.py": (
+        "refuses to raise a case's reported lower bound to the closed form's a(n) unless a(n) "
+        "is below the case's verified upper bound, read exactly where its exact form is a "
+        "rational; a lower bound below the ceiling establishes neither s(n) nor a house"
+    ),
+    "packing/tests/test_apply_closed_form.py": (
+        "writes a synthetic record's verified upper bound to hold the closed-form writer to "
+        "its refusal when a(n) is not below that ceiling; it reads no case's bound"
+    ),
     "packing/devtools/check_half_angle_area.py": (
         "prints the case's verified finite ceiling beside each certificate it decides, as "
         "context for the review; it decides feasibility only, never s(n) or adoption"
@@ -365,6 +380,28 @@ DECLARED_CONSUMERS = {
     "docs/project/reviews/review-2026-10-06-evand-exact-optima-fix-check.md": (
         "the check of that review's fixes, quoting its proposed bracket of a conjecture "
         "between the verified floor and ceiling; a ceiling, not s(n)"
+    ),
+    "docs/project/reviews/review-2026-10-14-intake-ledger.md": (
+        "the intake ledger's review checks that each count's start holds both upper lanes, "
+        "the verified one read as a ceiling the record proves exactly, so a later report "
+        "is recorded only when it is decidably below both; it never reads the field as s(n)"
+    ),
+    "packing/devtools/intake_ledger.py": (
+        "the report-order ledger starts each count from both upper lanes of its case record: "
+        "the verified lane as a ceiling the record proves (an exact rational, a closed form "
+        "evaluated as a rigorous interval, a root enclosure, or else its print within one "
+        "unit of its last place), beside the reported lane; a report is recorded only when "
+        "it is decidably below every member. It never reads the field as s(n)"
+    ),
+    "packing/campaign/issue-intake/upper-bounds-20261014/review/recompute.py": (
+        "the ledger review's independent walk seeds each count with both upper lanes, the "
+        "verified one as a ceiling (rational, interval or root), to recompute the ledger's "
+        "verdicts; it reads the field as a ceiling, never as s(n)"
+    ),
+    "packing/campaign/issue-intake/upper-bounds-20261014/review/scan_cases.py": (
+        "the ledger review's scan lists, per count, which upper lanes carry an exact form, "
+        "the verified lane among them, to show where the start needs both; it describes the "
+        "field and reads no value of it as s(n)"
     ),
     "docs/project/reviews/review-2026-10-13-verification-gaps.md": (
         "the verification-gaps review measures each drawn side and each reported side "

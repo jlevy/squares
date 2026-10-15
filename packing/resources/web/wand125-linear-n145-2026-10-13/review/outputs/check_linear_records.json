@@ -1,0 +1,44 @@
+{
+ "candidate_sha256": "3cd54c438616d280307d6571cb1aeb35225347751ae651141a96ff7da3b2b360",
+ "certificate_sha256": "e3c58aa2318a0c9a65aac770cdaac65366d31ea99a7023a465efadc87a9592ca",
+ "bundle_sha256": "4dc4f6731151ec5a0a109c24a3223626824702dd5c8f4f9e9965130be2969a0b",
+ "retained_checker_sha256": "0249726ab1e67dc481e0c53f43b524902a48f95d051b1b08865a3cf3ef89a06d",
+ "semantic_digest": "31788dc7f098d82f5a60bae49a5a3afcd329cf3f792f44883dc11518d95eca69",
+ "certificate": {
+  "status": "ALL_LINEAR_ANGLES_VERIFIED_AND_REPLAYED",
+  "claim_fields_are_ours": true,
+  "net_block_is_ours": true,
+  "source_sha256_is_retained_checker": true,
+  "records": 201,
+  "indices_are_0_to_last_once": true,
+  "statuses": [
+   "LINEAR_ANGLE_REPLAYED"
+  ],
+  "input_digests_distinct": true,
+  "nodes_total": 124435707,
+  "nodes_most": 3330973,
+  "nodes_most_at": 0,
+  "nodes_least": 168149,
+  "nodes_least_at": 35,
+  "theorem": "No packing of n closed unit squares in the closed container: strictly interior net cores are disjoint, each has measure at least 1, and total nonnegative measure is below n.",
+  "replay_scope": "All angles including axis use regenerated inputs and the SAME outward-rounded implementation. Not an independent second algorithm or proof-assistant formalization."
+ },
+ "manifest": {
+  "claim_fields_are_ours": true,
+  "net_block_is_ours": true,
+  "source_sha256_is_retained_checker": true,
+  "node_limit": 12000000,
+  "node_limit_exceeds_every_record": true,
+  "workers": 3
+ },
+ "completion_audit": {
+  "status": "AUDITED_AND_PACKAGED",
+  "claim_fields_are_ours": true,
+  "certificate_sha256_is_certificate": true,
+  "archive_sha256_is_bundle": true,
+  "verifier_source_sha256_is_retained_checker": true,
+  "side_minus_compared_with_equals_improvement_lower": true,
+  "compared_note": "Green G_12 = 2*sqrt2-1+11*(132+2*sqrt6)/145 (Friedman DS7, Theorem 9 with k = 12), rational upper bound from 90-digit integer square roots; Green's published proof has gaps for k>=4",
+  "replay_scope": "All angles including axis use regenerated inputs and the SAME outward-rounded implementation. Not an independent second algorithm or proof-assistant formalization."
+ }
+}

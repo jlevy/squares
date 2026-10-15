@@ -1,0 +1,13 @@
+{
+ "mutation": "scale-family",
+ "interval": 34,
+ "from": "interval_0.99_1",
+ "factor": "99/100",
+ "scaled": "every F and T mass and every V density of both families",
+ "resealed": [
+  "family.json",
+  "family_right.json",
+  "SHA256SUMS",
+  "intervals.json (digests and published counts)"
+ ]
+}

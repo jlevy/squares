@@ -224,6 +224,7 @@ def test_a_change_to_the_record_or_the_reader_documents_builds_only_the_overview
     """
     # The methods paper also cites the tutorial, so its render checks that source.
     assert in_scope(["TUTORIAL.md"], declared) == {"overview", "square_packing_methods_survey"}
+    assert in_scope(["TUTORIAL-ADVANCED.md"], declared) == {"overview"}
     for changed in (
         "epistemics.md",
         "packing/frontier/evidence.yaml",
