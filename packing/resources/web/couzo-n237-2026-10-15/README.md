@@ -36,9 +36,9 @@ upper bounds at many counts; the author claims no discovery for them, and inside
 corpus they equal closed forms the record holds.
 
 `certificates/n237.json` calls this certificate an exact optimum, seeded from Mykhailo
-Polkovskyi’s issue-593 certificate and found by the author’s `fq` search (job 100230).
-It is 2.40e-11 below the #607 certificate, so it reads as the author’s exact refinement
-of his own #607 packing, which #607 says continues #593.
+Polkovskyi’s issue-593 certificate (its `seed_certificate` states #593’s side,
+T-183’s) and found by the author’s `fq` search (job 100230) from an external seed file.
+It is 2.40e-11 below the #607 certificate, which #607 says also continues #593.
 The index credits Francisco Couzo, with construction credit Nate Chaoweeraprasit
 (itsnaka).
 
@@ -97,14 +97,17 @@ No source program ran here.
 ## Against the Record
 
 [acquisition/claims.json](acquisition/claims.json) compares the certificate with the case
-record and every other report at 237, as `main` stood at `c4c690a3e` when the records
-lane of 15 October read it. Each side is exact, read from its own packet; #607’s was
-first compared at its print, rounded up, until that lane registered its packet as T-189
-and read it exactly. The lane also added T-056, which the declaration had left out.
+record and every other report at 237, as `main` stood at `22a67ce4a`, after #614 adopted
+T-183 as the house at 237. Each side is exact, read from its own packet; #607’s was
+first compared at its print, rounded up, until the records lane of 15 October registered
+its packet as T-189 and read it exactly. That lane also added T-056, which the
+declaration had left out, and froze the record at `c4c690a3e`, with T-140 as the house;
+every relation is the same at both.
 
 | Report | Holder | Side | This certificate is below by |
 | --- | --- | --- | --- |
-| Case T-140 | Chaoweeraprasit, improved by Couzo | 15.9029496076778317 | 3.46e-4 |
+| Case T-183 (#593) | Chaoweeraprasit, improved by Couzo, Polkovskyi | 15.902705057866 | 1.01e-4 |
+| #488, T-140 | Couzo | 15.9029496076778317 | 3.46e-4 |
 | #561, T-161 | Couzo | 15.902947773658 | 3.44e-4 |
 | PR #574, T-174 | PingYou Ltd | 15.902947773658 | 3.44e-4 |
 | T-056 | Couzo | 15.911191683008479 (printed) | 8.59e-3 |
@@ -116,12 +119,19 @@ and read it exactly. The lane also added T-056, which the declaration had left o
 | #505 | Barnett | 15.903670905778 | 1.07e-3 |
 | #470 | Polkovskyi | 15.90367623519 | 1.07e-3 |
 | #573 | Polkovskyi | 15.90294960768 | 3.46e-4 |
-| #593, T-183 | Polkovskyi | 15.902705057866 | 1.01e-4 |
 | #607, T-189 | Couzo | 15.9026036382835755 | 2.40e-11 |
 
 The certificate is the smallest at 237.
+[review/compare_lineage-output.txt](review/compare_lineage-output.txt) measures it
+against #593’s, #607’s and #488’s packings with
+`mishapolk-kkt-refinements-2026-10-14/review/compare_lineage.py`: 195 of its 237 squares
+are within $10^{-3}$ of #593’s and all within 0.066, as its metadata’s seed says, and
+T-190 lists it as a regularization of T-183. Under a reflection of the box, 217 are
+within $10^{-6}$ of #607’s and all within 0.076; that measurement decides no credit.
+
 A publication in a watched repository is a report from its first commit, here
-2026-10-15T00:31:53Z, after #607’s certificate (43ac7d2, 2026-10-14T19:15:09Z).
+2026-10-15T00:31:53Z, after #607 (filed 2026-10-14T23:18:36Z; its certificates were
+first committed at `43ac7d2`, 19:15:09Z).
 Under the per-count rule ([stage 1](../../../campaign/result-import.md#several-reports-at-one-count))
 it is strictly stronger than every earlier report, so it is recorded after #607’s, as
 T-190.
@@ -156,6 +166,7 @@ uv run --frozen --all-extras --group dev python -m devtools.acquire_source couzo
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports couzo-n237-2026-10-15 check-claims
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports couzo-n237-2026-10-15 check
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports couzo-n237-2026-10-15 check --replay
+uv run --frozen --all-extras --group dev python resources/web/mishapolk-kkt-refinements-2026-10-14/review/compare_lineage.py couzo-n237-2026-10-15 237 mishapolk-records-2026-10-14 couzo-certificates-2026-10-14 couzo-certificates-2026-10-10
 ```
 
 `check` admits the receipt structurally against the retained certificate; only

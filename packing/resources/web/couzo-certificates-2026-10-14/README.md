@@ -178,9 +178,10 @@ No source program ran here.
 ## Against the Record
 
 [acquisition/claims.json](acquisition/claims.json) freezes every certificate against the
-record as the records lane of 15 October read it (`main` at `c4c690a3e`, after #612
-registered T-185 to T-187); the frozen record first read `9b32da04d`, when the issue
-arrived, then `6964362b5`, and every relation is the same at all three.
+record as `main` stood at `22a67ce4a`, after #614 adopted T-183 as the house at 237; the
+frozen record first read `9b32da04d`, when the issue arrived, then `6964362b5` and
+`c4c690a3e` (after #612 registered T-185 to T-187), and every relation is the same at
+all four.
 That lane added T-056’s printed side at 237, which the declaration had left out (above
 by $8.59 \times 10^{-3}$), and labels the reports without commit ids: `487b058`’s
 certificates by the source row that records them, `couzo-verified-bounds-2026-10-14`, and
@@ -188,13 +189,18 @@ Fang’s by their table rows and file names.
 `check-claims` rebuilds it, each exact side from its holder’s own retained packet.
 
 **At 237**, inside the corpus, the case ceiling is Nate Chaoweeraprasit’s packing as
-improved by Couzo (T-140), 15.9029496076778317, and the certificate is below it by
-$3.46 \times 10^{-4}$. Every other register entry and open report at 237 is above it:
-Mykhailo Polkovskyi’s #593 (T-183, pending adoption), the smallest of them, by
-$1.01 \times 10^{-4}$; Couzo’s #561 (T-161) and PingYou Ltd’s PR #574 (T-174) by
-$3.44 \times 10^{-4}$; Polkovskyi’s #573 by $3.46 \times 10^{-4}$; and T-098, T-115,
-T-127, T-134, T-136, Robert Barnett’s #505 and Polkovskyi’s #470 by
-$3.86 \times 10^{-4}$ or more.
+improved by Couzo and by Mykhailo Polkovskyi, his #593 certificate (T-183),
+15.9027050578663668, and the certificate is below it by $1.01 \times 10^{-4}$. Every
+other register entry and open report at 237 is above it: Couzo’s #561 (T-161) and
+PingYou Ltd’s PR #574 (T-174) by $3.44 \times 10^{-4}$; Couzo’s #488 (T-140, the house
+until #614) and Polkovskyi’s #573 by $3.46 \times 10^{-4}$; and T-098, T-115, T-127,
+T-134, T-136, Robert Barnett’s #505 and Polkovskyi’s #470 by $3.86 \times 10^{-4}$ or
+more.
+[review/compare_lineage-output.txt](review/compare_lineage-output.txt) measures it
+against #593’s and #488’s packings with
+`mishapolk-kkt-refinements-2026-10-14/review/compare_lineage.py`: under a reflection of
+the box, 195 of its 237 squares are within $10^{-3}$ of #593’s and all within 0.034, and
+T-189 lists it as a regularization of T-183.
 Mishapolk’s `70a033f`, read by another lane the same evening, holds no 237.
 
 **Beyond the corpus** there is no case record.
@@ -238,8 +244,13 @@ the 15 recorded counts beyond 324, each a row of the source register.
 
 ## In Report Order
 
-The 23 certificates were first committed at `43ac7d2`, 2026-10-14T19:15:09Z, in a
-watched repository, so each is reported from then, before the issue.
+#607 reports the 23 certificates, filed at 2026-10-14T23:18:36Z; the issue is what
+times a claim ([stage 1](../../../campaign/result-import.md#several-reports-at-one-count)).
+They were first committed at `43ac7d2`, 19:15:09Z the same day, in a watched repository.
+No report at any of the 16 counts it records falls between the two times (`487b058`, at 17:45:39Z,
+precedes both, and `4e4c8ce`, at 00:31:53Z the next day, follows both), so the order is
+the same either way; which time a certificate committed before its issue takes is the
+owner’s question.
 Under the owner’s rule of 14 October, a report is recorded at a count only where it is
 below every report that reached the record before it:
 
@@ -265,6 +276,10 @@ this packet’s; at 812 and 930 it is above Fang’s composites and not recorded
 The records lane of 15 October registered the 237 side as T-189 and the 15 rows, each
 superseding the row it beats: `487b058`’s at 14 counts and Couzo’s 8 October report at
 342. Couzo’s later `4e4c8ce` certificate at 237 is T-190.
+The `4e4c8ce` index, not yet recorded (think-yfoo), is smaller in turn at 7 of the 15
+rows, at 339, 382, 450, 552, 599, 648 and 757, by $2.88 \times 10^{-11}$ to
+$1.13 \times 10^{-3}$ (its exact sides are in
+[couzo-verified-bounds-2026-10-14’s review/goebel-beyond-horizon.json](../couzo-verified-bounds-2026-10-14/review/goebel-beyond-horizon.json)).
 
 ## What Is Not Established
 
@@ -312,6 +327,7 @@ uv run --frozen --all-extras --group dev python -m devtools.acquire_source couzo
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports couzo-certificates-2026-10-14 check-claims
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports couzo-certificates-2026-10-14 check
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports couzo-certificates-2026-10-14 check --replay
+uv run --frozen --all-extras --group dev python resources/web/mishapolk-kkt-refinements-2026-10-14/review/compare_lineage.py couzo-certificates-2026-10-14 237 mishapolk-records-2026-10-14 couzo-certificates-2026-10-10
 ```
 
 `check` admits the receipt structurally against the retained certificates; only

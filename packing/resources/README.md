@@ -1574,10 +1574,12 @@ beyond the case corpus, pinned by digest as bulk data and not retained;
 [packet](web/couzo-verified-bounds-2026-10-14/README.md).
 Both project exact routes accept the 211 certificate and refuse both controls.
 T-188 records the side, 9.29e-6 below issue 586’s, at V0/C0, pending independent review
-and adoption. 252 of the 296 are beyond-horizon rows of the source register; 812 and 930
-are not recorded, and the 42 above Göbel’s classical constructions wait on the owner’s
-answer on #613. The pinned files state nothing about AI assistance; the author’s issues
-of 13 and 14 October disclose OpenAI Codex and Claude Code assistance.
+and adoption. 252 of the 296 are beyond-horizon rows of the source register, and the
+author’s later `4e4c8ce` index, not yet recorded (think-yfoo), is smaller at the 238 of
+them still current; 812 and 930 are not recorded, and the 42 above Göbel’s classical
+constructions wait on the owner’s answer on #613. The pinned files state nothing about
+AI assistance; the author’s issues of 13 and 14 October disclose OpenAI Codex and Claude
+Code assistance.
 
 **[Couzo certificates 2026-10-14]**: Francisco Couzo’s exact rational certificates for n
 = 237, 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 703, 757, 804,
