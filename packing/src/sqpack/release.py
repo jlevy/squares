@@ -85,12 +85,20 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
-        version="v0.7.10",
+        version="v0.7.11",
         first_published="October 15, 2026",
         result_scope=(
             "Register five results in report order, T-188 to T-192, none adopting a "
             "house: smaller reported packings of 211 and 237 squares, a reported s(95) = "
             "10, a reported lower bound for 28 squares and 267 beyond-horizon rows."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.10",
+        first_published="October 15, 2026",
+        result_scope=(
+            "Correct News math and prose, add tutorial credits and update About and "
+            "shared site headings."
         ),
     ),
     PublicationHistoryEntry(
@@ -766,13 +774,23 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
-        previous_version="v0.7.9",
-        version="v0.7.10",
+        previous_version="v0.7.10",
+        version="v0.7.11",
         impact="patch",
         reason=(
             "Register five results in report order, T-188 to T-192, none adopting a "
             "house: smaller reported packings of 211 and 237 squares, a reported s(95) = "
             "10, a reported lower bound for 28 squares and 267 beyond-horizon rows."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.9",
+        version="v0.7.10",
+        impact="patch",
+        reason=(
+            "Correct News math and prose, add tutorial credits and update About and "
+            "shared site headings."
         ),
     ),
     ReleaseImpactDecision(
@@ -988,6 +1006,84 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/news_highlights.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/site_documents.py",
+            "packing/devtools/templates/paper-publication.css",
+            "packing/devtools/templates/paper-type.css",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "News and tutorial rendering helpers are selected through shared import "
+            "discovery; standalone papers call none of the changed functions. The "
+            "paper_front change corrects a stylesheet reference in its docstring. "
+            "Existing centred and credits declarations move unchanged between two "
+            "stylesheets that every paper already includes. New list-specific credit "
+            "rules match tutorials, not the papers' div and span fronts. Standalone "
+            "shells omit site.css, so site title spacing does not change paper heroes. "
+            "Manuscripts, figures, credit content, computed title and credit layout, "
+            "and print rules are unchanged by source review. CSS relocation changes "
+            "HTML bytes; no PDF rebuild or byte-identity comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("TUTORIAL.md",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The survey declares TUTORIAL.md because its unchanged manuscript cites "
+            "that file. Citation discovery checks the path and pins its URL; it does "
+            "not import tutorial prose. The five actively cited aliases remain beside "
+            "relevant current topic links. Survey manuscript, figures and front matter "
+            "are unchanged; no PDF rebuild or byte-identity comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "The native site cut regenerates these five claim documents with only "
+            "GitHub source-link revision substitutions. Mathematical statements, "
+            "certificate inputs and paper content are unchanged. No paper PDF was "
+            "rebuilt or compared for byte identity."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
@@ -1004,14 +1100,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-lower-bounds-explainer.md",
         ),
         reason=(
-            "Rendered on this branch over main 4c9af690 with the browser's math pass, once "
+            "Rendered on this branch over main 6e73ef1c with the browser's math pass, once "
             "with main's versions of these paths and once with the branch's, the Markdown "
-            "differs only in the live register count beside T-018, 187 results registered "
-            "so far and now 192, and the HTML in that count and in where an empty style "
-            "attribute falls in one formula's span, which also moves between two renders "
-            "of the branch alone. The claim documents change only the revision their links "
-            "pin. A register count follows the site's data and is not a revision of the "
-            "paper, so the explainer keeps v0.4.7; the site takes v0.7.10."
+            "and HTML differ only in the live register count beside T-018, 187 results "
+            "registered so far and now 192. Over main 4c9af690 the HTML also differed in "
+            "where an empty style attribute falls in one formula's span, which moves "
+            "between two renders of the branch alone. The claim documents change only the "
+            "revision their links pin. A register count follows the site's data and is not "
+            "a revision of the paper, so the explainer keeps v0.4.7; the site takes v0.7.11."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1039,9 +1135,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "Rendered on this branch over main 4c9af690 at one link revision, once with "
+            "Rendered on this branch over main 6e73ef1c at one link revision, once with "
             "main's versions of these paths and once with the branch's, the three papers' "
-            "HTML, Markdown and PDF are byte-identical. The register gains T-188 to T-192 "
+            "HTML, Markdown and PDF are byte-identical, but for one main-side print of the "
+            "optimality review, 4 bytes shorter from identical HTML; two further main-side "
+            "prints equal the branch's three. The register gains T-188 to T-192 "
             "and edits T-081's claim and T-183's headline, the importer gains three "
             "readers, the About page a card for bengreff/s95-certificate, the requests "
             "record replies and entries, and the source register 267 beyond-horizon rows; "
@@ -2065,7 +2163,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "74acb138"
+PUBLICATION_REVISION = "5791b79b"
 
 
 def data_pathspec() -> tuple[str, ...]:
