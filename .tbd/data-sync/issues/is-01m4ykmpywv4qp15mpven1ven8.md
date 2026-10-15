@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(95) = 10 by a mixed cover (#610)"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T01:43:17.212Z
-updated_at: 2026-10-15T03:10:39.391Z
+updated_at: 2026-10-15T09:15:49.343Z
 started_at: 2026-10-15T01:43:21.841Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#610 (bengreff, Benjamin Greff, opened 2026-10-15T01:16:36Z, labelled intake, no comments when read at 01:27Z): "Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)". The author's own certificate in his own repository, the case k = 10 after wand125's s(59) = 8 (#280, T-066) and his s(76) = 9 (#594, T-184). Followed the #594 import (think-osvq) step for step. Intake lane: Claude Opus 5.5 (tbd-moderate sub-agent), worktree agent-a33e48ec, branch claude/wizardly-meitner-wqn4x3-intake-610.
@@ -115,3 +115,7 @@ Results, 03:05Z:
 - Checks: acquire_source --check PACKET_MATCHES_ITS_CONTRACT; retained_data clean; focused tests 254 passed (124 s); packing-validate --records exit 0, 51 steps. Committed 7c65c191b91d3b9d3b0bfbbbdc5ad318cd1199ba and pushed to claude/wizardly-meitner-wqn4x3-intake-610. SYNOPSIS.md's hook re-typing reverted again; not in the commit.
 
 Draft acknowledgement, second paragraph replaced (still not posted): "In triage we ran your certificate with Evan Daniel's checkers, built from the copies this repository already holds at the digests your verify.sh pins. zmx2 cert --d4 leaves the same 8,263 boxes in the same 19 roots, with every root's census equal to records/zmx2/zmx2_s95_v2.log, and zm_mixed.py with your flags certifies all 304 sub-roots, with records equal to yours apart from the input path and the CPU time; your check_coverage.py accepts our own logs. The total, the D4 invariance and the tiling check exactly, the corners are wand125's s(59) cover as you say, and the Lean data matches the cover file. Two mutated covers are refused by zmx2, and zm_mixed.py pose finds a pose in each where the capture is below one. The cover's 404 wall segments of mass 1/(4·10⁸) look like the LP residue you described on #594; without them zmx2 makes every decision the same, box for box."
+
+## 2026-10-15 records-1016 lane (think-mq0k), branch claude/wizardly-meitner-wqn4x3-records-1016, https://github.com/jlevy/squares/pull/616
+
+Registered as T-191 (optimality, V0/C0, draft S3), credited "Greff after Daniel, wand125"; the AI statement quoted from the source README; T-081's claim gains the s(96) >= 10 sentence; n-095.md unchanged. Receipts kept off the entry's artifacts (certificate and READMEs on), unlike T-184. #610 has a request entry (answer bead: this one); no reply posted. Report order: after T-190 (4e4c8ce, 00:31:53Z). Keep open until #610 is answered; the held validation beads stay with it.

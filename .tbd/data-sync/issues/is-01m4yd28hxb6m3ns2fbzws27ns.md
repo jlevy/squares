@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: franciscouzo/square-packing 487b058 (no issue): 
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T23:48:21.180Z
-updated_at: 2026-10-15T03:38:47.037Z
+updated_at: 2026-10-15T09:15:46.148Z
 started_at: 2026-10-15T03:18:40.485Z
 ---
 Found by the #607 lane (think-qik6) on 2026-10-14. franciscouzo/square-packing 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d (2026-10-14T17:45:39Z, 'Land verified bounds through n=1024'), the parent of #607's pin 43ac7d2, is a watched-repository publication that no issue reports and no packet retains. Against b85dee2 (the issue-586 packet's pin) it adds 290 certificates under certificates/ (370 and 403 to 991), changes 7 (211, 339, 378, 379, 380, 381, 382) and deletes 22, and writes upper_bounds.json, the index #607 compares against.
@@ -54,3 +54,7 @@ The eight commits 337078c..b85dee2 the sweep flags (a7067d7, eee88d3, 0fa0e0d, e
 **Tests:** packing/tests/test_upper_bound_reports_487b058.py (5) and test_upper_bound_reports_4e4c8ce.py (4) admitted with suite_files admit-local (report devtools/suite-file-cost-admissions/reads-1015-2026-10-15.json).
 
 **Commit** 1c08cf97757d24203f08800dfa463dea6ce37937 on claude/wizardly-meitner-wqn4x3-reads-1015 (pushed; no PR), through the hooks (make hooks-install; flowmark reflowed main's SYNOPSIS.md, restored unstaged). packing-validate --records: exit 0 (03:33:43Z to 03:36:07Z). Focused tests: 349 passed (retained data, acquire_source, retained JSON, suite_files, source_coverage, both new modules). Validation bead: think-2d7f (HELD).
+
+## 2026-10-15 records-1016 lane (think-mq0k), branch claude/wizardly-meitner-wqn4x3-records-1016, https://github.com/jlevy/squares/pull/616
+
+Registered as T-188 (V0/C0, draft S1) at 211, 9.29e-6 below #586 (T-182). The declaration now lists T-057 at 211 and no longer labels #593's 211 as T-183 (scope 237 only); claims refrozen at main c4c690a3e. The source register holds 252 of the 296 beyond-horizon rows (source scope 211 + 252, claims record review/beyond-horizon-claims.json), superseding 18 current rows; #607's rows supersede 14 of them. Not recorded: 812, 930 (Fang composites smaller) and the 42 undecided-goebel rows (owner, #613, think-8krd). Replay held in think-2d7f (child of this bead), so this bead stays open while it is.

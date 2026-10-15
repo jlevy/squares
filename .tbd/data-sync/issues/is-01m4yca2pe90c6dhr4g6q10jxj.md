@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 14 campaign upper bounds (237, and 13 beyond 324
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T23:35:08.750Z
-updated_at: 2026-10-15T08:11:26.625Z
+updated_at: 2026-10-15T09:15:44.835Z
 started_at: 2026-10-14T23:35:12.236Z
 ---
 Francisco Couzo (@franciscouzo) reports, in jlevy/squares#607 (filed 2026-10-14T23:18:36Z), 21 finite upper bounds plus two precision refinements, certificates at franciscouzo/square-packing 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2 submissions/2026-10-14/certificates/ (first committed 2026-10-14T19:15:09Z), comparison index upper_bounds.json at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d. Stages 1, 2 and the stage 4 replay in the 14 October evening intake lane (branch claude/wizardly-meitner-wqn4x3-intake-607); no register, case, request, coverage, bibliography, resources README or intake-watch record edited. Registration waits for a records PR.
@@ -69,3 +69,7 @@ The seven Fang composites and the beyond-horizon submissions: 4e4c8ce's certific
 **2026-10-15 replay update (this lane).** Branch claude/wizardly-meitner-wqn4x3-intake-607 at 77cec4292 holds the packet, the 23 receipt shards, register-plan.yaml (the raw plan with a header applying the per-count rule) and packing/tests/test_upper_bound_reports_607.py (9 tests, admitted to the suite record with suite_files admit-local). Main moved to 6964362b5 (#609) during the replay: merged into the branch, the claim record re-frozen there, every relation unchanged. packing-validate --records passes (51 of 109 steps, the named tier); acquire_source --check passes. Register plan: one T-NNN at 237 (V0/C0, pending adoption below T-183), evidence E-couzo-607-certificate-report, source row couzo-certificates-2026-10-14 with beyond-horizon rows; the records lane keeps the rows at 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 757 and 804 and registers 703, 812, 930, 931, 992, 993 and 994 as Fang's rows (think-rn2y) with this packet as evidence.
 
 **2026-10-15 check --replay (this lane).** A fresh serial check --replay decided all 69 jobs again, equal to the retained rows apart from timing, in four --n runs (237-651, 703-812, 930-992, 993-994), 04:04Z to 08:09Z, each under the two-hour limit: 14,683.9 s wall, 13,125.2 s CPU (3.65 CPU-h); every run exit 0. Branch head 1af5267f6 (pushed). Main has since moved to c4c690a3e (#612, T-185 to T-187): nothing at these counts changed, so the claim record frozen at 6964362b5 stands. Lane complete: no run pending.
+
+## 2026-10-15 records-1016 lane (think-mq0k), branch claude/wizardly-meitner-wqn4x3-records-1016, https://github.com/jlevy/squares/pull/616
+
+Registered as T-189 (V0/C0, draft S2) at 237, with 15 beyond-horizon rows (339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 757, 804), each superseding 487b058's row (T-188's source) or, at 342, Couzo's 8 October report. The declaration now lists T-056 at 237 and labels its reports without commit ids (487b058's as couzo-verified-bounds-2026-10-14, Fang's as "Fang composite ..."/"Fang theorem/..."), and its `requested` roster is the 16 counts recorded as Couzo's, so the beyond-horizon claims record holds the 15 rows; claims refrozen at main c4c690a3e, no relation moved. #607 has a request entry (answer bead: this one); no reply posted. The 7 Fang composites are not recorded: Fang's rows are not on main. What think-rn2y needs: a Fang composites source with a claims record and rows at 703, 812, 930, 931, 992, 993, 994 at his table sides, citing this packet's retained bytes and replay (each file has the table's SHA-256) and, at 703 and 994, the shipped files the fang-excess-theorem packet pins. Reply owed after merge (T-189, and T-188/T-190 per the draft above). Keep open until #607 is answered.

@@ -5,7 +5,7 @@ title: "Import wand125: s(28) > 1149/200 by a continuous-pose certificate (no is
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T06:29:52.948Z
-updated_at: 2026-10-15T07:18:30.532Z
+updated_at: 2026-10-15T09:15:50.790Z
 started_at: 2026-10-15T06:30:32.385Z
 ---
 Found by the 05:30Z intake sweep of 2026-10-15 (epic think-mq0k): wand125/square-packing moved from afdcaac4e to b57e66712b5f722b39fcb703692006062c7d9eb7, three commits, all authored by Hiroaki Hosono and co-authored by Claude Opus 5.5. No issue reports any of them.
@@ -97,3 +97,7 @@ Checks: `packing-validate --records` 51/51 steps of the tier passed (1m49s) on t
 Register plan: one T-NN after T-142, V0/C0, draft S3, pending adoption beside T-142 while T-107 holds both lanes; evidence E-wand125-continuous-n28-5745-report; coverage wand125-continuous-n28-5745-2026-10-15; verifiers V-wand125-sqverify-continuous, V-wand125-contpose-check3, V-continuous-pose-followup; bibliography key [wand125 continuous n28 2026-10-15]. Registers, case records, intake-watch, result-requests, the bibliography and the resources README were not edited (records PRs #612 merged during this lane, #614 open). The intake-watch read through b57e667 is owed with the records change.
 
 Scratch cleaned at the end; the asset and the built binaries are gone, re-derivable from the pinned digests.
+
+## 2026-10-15 records-1016 lane (think-mq0k), branch claude/wizardly-meitner-wqn4x3-records-1016, https://github.com/jlevy/squares/pull/616
+
+Registered as T-192 (V0/C0, draft S3) after T-142; T-142 and T-107 keep their claims; notes list every lower bound the register holds at 28. Verifiers V-wand125-sqverify-continuous, V-wand125-contpose-check3 and V-continuous-pose-followup registered; receipts kept off the artifacts. intake-watch reads wand125 through b57e667 (no bead: the packet pins 8530baf). wand125 has since pushed 5e6c603 (07:26:47Z, "Rectangles v2: new piece 7.N1"), unread. Stays open as the parent of think-8eo1 and think-0arj; the #533 tracking comment is still a draft here.
