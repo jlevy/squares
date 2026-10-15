@@ -968,6 +968,22 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main 4c9af690 at one link revision, once with "
+            "main's requests record and once with the branch's, the HTML before the "
+            "browser's math pass and the Markdown are byte-identical; the PDF prints from "
+            "that HTML and was not rebuilt. The requests record gains the 15 October "
+            "status replies on twelve of the owner's tracking issues and four notes; the "
+            "survey prints none of them and keeps v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
