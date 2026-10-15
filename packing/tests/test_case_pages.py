@@ -201,7 +201,7 @@ def test_visual_math_compaction_keeps_html_tree_and_foreign_xml(separator: str) 
         f"<p>before{separator}after</p>"
         '<span class="katex-html"><span class="mord">x</span>'
         '<span class="mrel">&lt;</span><span class="mord mathnormal">y</span></span>'
-        '<span title=\' class="mord"\'>literal class spelling</span>'
+        "<span title=' class=\"mord\"'>literal class spelling</span>"
         + foreign
         + '<a href="../profiles/manasseh-ahmed.html" data-contributor="">Ahmed</a>'
     )
