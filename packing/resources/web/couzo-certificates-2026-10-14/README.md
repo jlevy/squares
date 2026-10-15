@@ -162,7 +162,12 @@ the duplicate-square control at 812, and it was started again from there.
 outputs, as it admits any; it is kept as one shard per count,
 `receipts/exact-certification-nNNN.json.xz`, since the whole would exceed the kernel’s
 ceiling on uncompressed evidence, and each keeps every deciding input and both routes’
-complete outputs. A fresh serial `check --replay` of all 69 jobs is in progress.
+complete outputs.
+A fresh serial `check --replay` decided all 69 jobs again, equal to the
+retained rows apart from timing, in four runs over the counts (`--n` 237 to 651, then
+703 to 812, 930 to 992, and 993 and 994) from 04:04Z to 08:09Z on 15 October, each
+within the two-hour limit: 4 hours 4 minutes of wall and 3 hours 39 minutes of CPU in
+all.
 
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
 arithmetic and the separating-axis method, so they are two implementations of one
