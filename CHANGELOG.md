@@ -13,6 +13,26 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ### 2026-10-15
 
+<a id="changelog-entry-atlas-posters-october-results-update"></a>
+
+#### Atlas Posters Updated With the October Packing Results
+
+Significance S2: Refreshes existing posters to already adopted data, repairs the PDF command/pagination and closes tutorial wording gaps. The formats and publications already exist; this is ordinary publication refresh and repair, without a distinct new reader capability or mathematical result.
+
+Both downloadable atlas posters now include the packings and bounds already adopted in the case records, with current contributor credits and regularized drawings. The posters are available as SVG, PNG and PDF in infographic edition v0.6.1. The lower-bounds paper is published as v0.4.7.
+
+- The exports include the reviewed packing work of Francisco Couzo, Daniil Ostashev, PingYou Ltd and Mykhailo Polkovskyi, with credit for the earlier designs and regularization methods.
+- Both poster sizes carry the same infographic edition. Site and paper editions remain independent.
+- The lower-bounds paper includes the refreshed atlas and the tutorial states the scope of its counting-certificate limitations.
+
+Published artifacts: [Current 1–100 packing infographic](https://jlevy.github.io/squares/square-packings-100-20261008.pdf) · [Current 1–324 packing poster](https://jlevy.github.io/squares/square-packings-324-20261008.pdf) · [Lower-bounds paper](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html).
+
+Component editions: Site v0.7.7; Infographics v0.6.1; New Lower Bounds for Square Packing for n = 11 v0.4.7.
+
+First public: 2026-10-15 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38739226771/job/116439283652)).
+
+PRs and supporting records: [\#619](https://github.com/jlevy/squares/pull/619) · [Atlas and downloadable editions](packing/atlas/known-best/README.md) · [Published release and verification](https://github.com/jlevy/squares/actions/runs/38739226771/job/116439283652).
+
 <a id="changelog-entry-october-fourteen-reviewed-packing-adoptions"></a>
 
 #### Smaller Verified Packings for 18 Square Counts
@@ -51,11 +71,9 @@ and a separate advanced tutorial. Beginners can start with bounds and small
 examples; the companion develops linear programs, exact certificates,
 regularization and global proofs.
 
-- Earlier tutorial links lead to the moved explanations. Definitions, notation,
-  worked derivations, figures and sources remain available in the two papers.
-- The same index links the research papers, downloadable PDFs, film and interactive
-  Workbench. News collects project announcements, and the web Atlas uses the
-  available screen width.
+- Earlier tutorial links lead to the moved explanations. Definitions, notation, worked derivations, figures and sources remain available in the two papers.
+- News now has its own page, with individual articles and filters for significance and topic. Reported proof announcements keep their verification limits beside the claims.
+- The Explanations index links the tutorials, research papers, downloadable PDFs, film and interactive Workbench. Both web Atlas views use the available screen width.
 
 Published artifacts: [Current basic tutorial](https://jlevy.github.io/squares/tutorial.html) · [Current advanced tutorial](https://jlevy.github.io/squares/tutorial-advanced.html) · [Current Explanations index](https://jlevy.github.io/squares/papers.html).
 
@@ -69,7 +87,7 @@ PRs and supporting records: [\#604](https://github.com/jlevy/squares/pull/604) �
 
 #### Initial Review of Overbeck’s and Fitzharding’s Proofs for n = 17
 
-Significance S4: Project-wide verification rules and the interpretation of major proof reports materially change how public evidence is presented.
+Significance S3: Adds enforceable whole-claim evidence coverage, verifier-independence records and the formalization kind, with bounded reviews. This is substantive verification policy/tooling and earns S3, but it neither completes a proof nor launches a major reader product; S4 overstates the contribution.
 
 Initial mathematical reviews examine Overbeck’s candidate proof and
 Fitzharding’s Lean formalization of the 17-square optimum. Both remain
@@ -112,26 +130,16 @@ PRs and supporting records: [\#601](https://github.com/jlevy/squares/pull/601) �
 
 <a id="changelog-entry-october-fourteen-intake-records"></a>
 
-#### Two Bound Families and 22 More Results From the 14 October Intake
+#### Fang and Hosono Report New Bound Families
 
 Significance S4: The registered results include two S4 bound families, Kevin Fang’s theorem and Hiroaki Hosono’s closed form.
 
-The 14 October intake registers 24 results, T-161 to T-184, in the order their
-reports reached the project, as the report-order ledger records them. Kevin Fang
-reports a proof that n² − n + 1 unit squares fit in a square of side less than n
-for every n ≥ 15, and Hiroaki Hosono’s closed form raises the reported lower bound
-at 154 counts. No case adopts a new best known packing yet.
+Kevin Fang reports a construction fitting n² − n + 1 unit squares below side n for every n ≥ 15. Hiroaki Hosono reports a closed-form lower bound for every non-square count N ≥ 49; it raises 154 reported case bounds in this intake. These two families join 22 further results in the register. Fang’s theorem has a mathematical review, while the complete replay of Hosono’s formula remains unfinished.
 
-- Smaller exact packings and certificates at 69 counts, from Francisco Couzo,
-  Daniil Ostashev, PingYou Ltd and Mykhailo Polkovskyi, were replayed exactly, the
-  rational ones on two routes; independent review and adoption come next.
-- Fang’s theorem has a mathematical review and replayed finite bounds. The closed
-  form s(N) ≥ a(N), for every non-square N ≥ 49, has a review; its complete replay
-  waits on a compute budget.
-- wand125 reports lower bounds at 37, 39, 44 and 145 to 149, each read by a
-  review, and Benjamin Greff reports s(76) = 9 by a mixed cover.
-- Each recorded certificate is credited to its finder, and a refinement of an
-  earlier packing is listed as a regularization of it.
+- The 24 records, T-161 through T-184, preserve the order in which their reports reached the project. No new packing is adopted in this registration.
+- Francisco Couzo, Daniil Ostashev, PingYou Ltd and Mykhailo Polkovskyi supplied smaller packings and tighter certificates at 69 counts. Their source certificates were replayed, with independent review and adoption still to follow at this date.
+- Hiroaki Hosono also reports lower bounds at 37, 39, 44 and 145 through 149 squares, and Benjamin Greff reports an optimality proof for 76 squares. These reports retain their separate verification limits.
+- The verified lower-bound lanes are unchanged. Reported and independently verified bounds remain separate in each case record.
 
 Published artifacts: [Current Fang theorem record](https://jlevy.github.io/squares/result/t-163.html) · [Current closed-form lower-bound record](https://jlevy.github.io/squares/result/t-180.html).
 
@@ -204,10 +212,7 @@ PRs and supporting records: [\#590](https://github.com/jlevy/squares/pull/590) �
 
 Significance S4: A coordinated display and certification pipeline brings regularized packings and original comparisons to the public atlas and PDFs.
 
-Regularized drawings are available throughout the atlas and both posters,
-with the published packings still available for comparison. Exact certificates
-support the displayed bounds, and the records distinguish credit for a drawing
-from credit for the construction.
+The atlas and both posters now show regularized versions of existing packings, with the published originals available for comparison. The project combines Evan Daniel’s regularizer and exact solver with grid-slack cleanup, checks the selected regularized drawings exactly, and retains credit for each source packing and modification.
 
 - A reproducible tool combines exact re-solving at the same container side
   and grid-slack cleanup with tools to compare, select and admit the drawings.
@@ -228,24 +233,16 @@ PRs and supporting records: [\#511](https://github.com/jlevy/squares/pull/511) �
 
 <a id="changelog-entry-reusable-intake-process-and-decided-comparisons"></a>
 
-#### Seventeen Packing Comparisons Decided Exactly
+#### Exact Packing Comparisons and a Reusable Intake Process
 
-Significance S2: Process, policy and verification work on reports already recorded; it registers no new result.
+Significance S2: Adds exact-comparison and verdict-drafting helpers to PR601’s existing intake ledger, resolves 17 pending comparisons with no smaller result, and documents the process. These are supporting intake extensions and calibration/custody work rather than a second key capability launch.
 
-Seventeen comparisons that printed precision left undecided for PR #574 are
-now decided exactly. None is below the side already recorded. The intake runbook
-records the report-order ledger, the owner’s standing decisions, a compute cap
-with a tracked validation backlog, and verdict comments drafted from the ledger.
+The project now decides close packing-side comparisons exactly and drafts report verdicts from the intake ledger. Seventeen previously undecided comparisons from PingYou Ltd’s certificates were resolved; none improved on the earlier reported side at its count. The reusable intake process records those decisions, contributor credits, review status and outstanding replay work.
 
-- Pull requests merge with a merge commit by default, issues and pull requests
-  share one label set, and credits name people by name, keeping a handle only as
-  an identifier.
-- A tool drafts each issue’s report-order verdict comment from the ledger; posting
-  stays manual.
-- wand125’s replay4d 0.1.1 source hashes were recomputed, and a calibration
-  replay of two records prices the complete replay at about 5,250 CPU-hours here.
-- Kevin Fang’s other eleven direct certificates, at 421 to 814, were replayed on
-  two exact routes.
+- The comparison tool retains exact decisions, including cases whose printed precision was insufficient. Four other comparisons remain undecided.
+- A separate tool drafts verdict comments from the ledger for review before posting. The runbook records the compute cap and tracks complete replays that still need a budget.
+- Hiroaki Hosono’s replay4d 0.1.1 source hashes were audited. A two-record calibration estimated the cost of the complete replay under the measured host load; it did not confirm the full lower-bound family.
+- Kevin Fang’s eleven remaining direct certificates, at 421 through 814 squares, were replayed on two exact routes.
 
 Component editions: Site v0.6.3.
 
@@ -255,20 +252,15 @@ PRs and supporting records: [\#605](https://github.com/jlevy/squares/pull/605) �
 
 <a id="changelog-entry-verification-significance-and-announcement-audit"></a>
 
-#### Three Result Significance Scores Corrected
+#### Result Ratings and Verification Evidence Audited
 
-Significance S3: Reader-facing rating and attribution corrections improve the interpretation of existing results without announcing a new result.
+Significance S3: A substantive audit examines recent registrations, Lean trust boundaries and draft significance scores, including independent checks of retained certificates.
 
-The significance scores for three results have been corrected. Their
-verification and confirmation ratings and numerical bounds are unchanged.
-Announcement drafts include the source credit and verification limits recorded
-for each result.
+A project audit checked the verification ratings of 27 recent results and examined the evidence behind Lean-backed claims. A separate review assessed 48 draft significance scores. The numerical bounds and verification ratings are unchanged; three significance scores were corrected.
 
-- T-053 moves from S4 to S3, T-063 from S1 to S3 and T-065 from S3 to S2.
-- Separate reviews examine the ratings of Lean-backed and recent results,
-  and the significance scores.
-- Announcement drafts and reply rules keep attribution beside each claim.
-  The audit establishes no new proof, packing or bound.
+- The recent-results review replayed four upper-bound receipts and checked 36 certificates from seven entries on a third exact route. It found no current rung that needed changing.
+- The Lean review distinguishes a statement-closure build from a complete proof build and identifies the reviews, retained executions and human oversight needed for higher ratings. It establishes no new full Lean replay.
+- T-053 moves from S4 to S3, T-063 from S1 to S3 and T-065 from S3 to S2. A maintained announcement tool includes source credit and verification limits when describing results.
 
 Published artifacts: [Current results, including the corrected significance scores](https://jlevy.github.io/squares/results.html).
 
@@ -307,10 +299,11 @@ PRs and supporting records: [\#581](https://github.com/jlevy/squares/pull/581) �
 
 Significance S5: This announces the S5 formalization report T-154; significance does not imply independent verification of the complete claim.
 
-Oscar Fitzharding’s reported Lean proof of the 17-square optimum is available
-with its source packet, announcements and an adversarial comparison with
-existing work. T-154 is reported at V0/C1; the full Lean build has not been
-replayed here.
+Oscar Fitzharding reports a Lean 4 proof that John Bidwell’s 1998 packing of
+17 unit squares is optimal: $s(17) = 4.67553009360455\ldots$.
+It is the first proof-assistant proof of this value in our records and uses
+a different argument from Marc Leonard Overbeck’s candidate proof.
+T-154 is reported at V0/C1; the full Lean build has not been replayed here.
 
 The source comparison traces 32 of the 35 patterns to the project’s certified
 sub-pattern ledger, including eleven from wand125. The retained review distinguishes
@@ -344,11 +337,25 @@ Published artifacts: [Current 17-square candidate-proof record](https://jlevy.gi
 
 PRs and supporting records: [\#560](https://github.com/jlevy/squares/pull/560) · [Candidate-proof review](docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md).
 
+<a id="changelog-entry-overbeck-n17-second-review"></a>
+
+#### A Second Review of Overbeck’s 17-Square Candidate Proof
+
+Significance S3: An independent reconstruction of a central proof component is a notable review milestone, without a complete proof replay.
+
+A second project AI review independently re-derived the normalized 52-row gate in Marc Leonard Overbeck’s candidate proof for 17 squares. It found no blocking defect in the parts examined and retained the review’s checking programs. The complete proof remains an unverified report at V0/C1.
+
+- The reviewer reconstructed the gate coefficients independently of the producer’s code, checked the 52 base-gap identities and audited 152 separating alternatives. The review records nine nonblocking findings and its unread scope.
+- The full capture computation and tree certificates were not replayed. The checks establish a bounded review milestone, without moving the verified 17-square bounds.
+- The review was conducted by a separately prompted project AI agent, blind to the first review until its findings were written. It is not a human oversight record.
+
+PRs and supporting records: [\#577](https://github.com/jlevy/squares/pull/577) · [Second adversarial review and its dated corrections](docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md) · [Candidate proof record](https://jlevy.github.io/squares/result/t-153.html).
+
 <a id="changelog-entry-regularization-foundations"></a>
 
 #### Rules for Verifying Regularized Drawings
 
-Significance S3: The verification and regularization foundations support a substantial public capability but precede its combined launch.
+Significance S2: Assesses an existing regularizer, sets adaptation/admission policy and adds a comparison helper. It regularizes no packing, admits no drawing and changes no result. Supporting project groundwork is S2; the project label does not raise it. Vendors an existing regularizer/exact solver with licensing, pin checks and provenance. No view is produced or admitted. Dependency/custody setup supports the later capability but does not itself warrant S3.
 
 The regularization policy requires improved bounds to be registered before
 being drawn. It accepts exact drawings at the verified bound and sends unsettled
@@ -412,7 +419,7 @@ PRs and supporting records: [\#512](https://github.com/jlevy/squares/pull/512) �
 
 #### PingYou Names PY as Its AI Assistant
 
-Significance S3: A focused public attribution and assistance disclosure changes how the existing S3 results are credited.
+Significance S2: An attribution disclosure for existing results; no bound, proof, verification status or public capability changes.
 
 PingYou Ltd identifies its unreleased AI agent, PY, as assisting with both
 its 153- and 207-square solutions. The result records, case pages and source
@@ -440,7 +447,7 @@ PRs and supporting records: [\#507](https://github.com/jlevy/squares/pull/507) �
 
 <a id="changelog-entry-replayed-upper-bound-admissions"></a>
 
-#### Nine Smaller Packings From SQUISH and Couzo
+#### Nine Smaller Packings From Chaoweeraprasit and Couzo
 
 Significance S3: The announced independently replayed packing improvements T-151 and T-152 are both S3 results.
 
@@ -483,9 +490,9 @@ PRs and supporting records: [\#496](https://github.com/jlevy/squares/pull/496) �
 
 <a id="changelog-entry-evan-daniel-attribution-corrections"></a>
 
-#### Fuller Credit for Evan Daniel’s Results
+#### Fuller Credit for Daniel’s Results
 
-Significance S3: Substantive public credit corrections concern existing results rather than announce their original mathematical contributions.
+Significance S2: Routine maintenance or attribution updates existing work without a new result or public capability.
 
 The 46-square citation and the README and About accounts of $s(60) = 8$
 explicitly credit Evan Daniel. The attribution audit covers the result register,
@@ -503,13 +510,16 @@ PRs and supporting records: [\#508](https://github.com/jlevy/squares/pull/508).
 
 Significance S3: This grouped intake announcement inherits the highest S3 significance among its newly replayed and admitted results.
 
-The result register adds twelve upper-bound entries and Guzhou0806’s two
-40-square lower bounds at V3/C3, with exact certificates and reviewed sources.
+Twelve upper-bound entries now have complete verification and independent
+review at V3/C3, alongside Guzhou0806’s two 40-square lower bounds.
 The continuous-pose result becomes the standing 40-square lower bound.
 The new upper bounds are adopted in a later release.
 
-- The twelve upper-bound entries include Evan Daniel’s fifteen regularized
-  certificates, checked for finite feasibility and reviewed before adoption.
+- Francisco Couzo, Evan Daniel, Kevin Fang, Nate Chaoweeraprasit, Eric Deleeuw
+  and Mykhailo Polkovskyi contributed the upper-bound work. It includes
+  Daniel’s fifteen regularized certificates, checked for finite feasibility
+  and reviewed before adoption. Three entries were registered in earlier PRs;
+  their completed reviews are part of this intake.
 - Guzhou0806’s clipped-corner and continuous-pose certificates reach V3/C3;
   both 40-square lower-bound records adopt the continuous-pose bound.
 - wand125’s $n = 28$, $29$, $30$ and $122\ldots126$ lower-bound reports remain
@@ -528,7 +538,7 @@ PRs and supporting records: [\#487](https://github.com/jlevy/squares/pull/487) �
 
 #### Narrower Text Columns and Responsive Navigation
 
-Significance S3: A focused public reading and layout improvement makes existing explanations easier to use.
+Significance S2: Narrows reading width, changes navigation branding and corrects existing prose/links. Despite broad file coverage and editorial work, the delivered reader outcome is modest UI/prose polish rather than a new explanation or site structure.
 
 A narrower prose column and responsive text-only navigation make the project’s
 reader pages easier to follow across screen sizes. Editorial corrections clarify
@@ -545,7 +555,7 @@ PRs and supporting records: [\#513](https://github.com/jlevy/squares/pull/513) �
 
 #### Explore the Atlas, Results and Papers Together
 
-Significance S3: A coherent public navigation structure improves discovery of existing atlas, results and explanation pages.
+Significance S4: A substantial public capability or new mathematical result changes what readers can explore.
 
 Shared navigation connects the homepage’s packing previews with the atlas,
 result records, papers and exports. The pages use readable formulas and
@@ -565,7 +575,7 @@ PRs and supporting records: [\#462](https://github.com/jlevy/squares/pull/462).
 
 #### Share a Result With the Squares Project
 
-Significance S3: A public reporting route and clearer site introduction improve participation without a new mathematical result.
+Significance S2: Adds website/report links, an invitation and a README atlas snapshot. These are modest discovery and presentation improvements to existing site and report surfaces, without a new submission workflow or major navigation capability.
 
 The homepage and About invite result reports through a shared form that asks
 contributors for the name they want credited. README opens with the website
@@ -614,14 +624,13 @@ PRs and supporting records: [\#479](https://github.com/jlevy/squares/pull/479) �
 
 <a id="changelog-entry-illustrated-packing-methods-tutorial"></a>
 
-#### How Record Packings Are Found and Verified
+#### Five Illustrations of Packing Search and Certification
 
-Significance S4: A substantial new illustrated explanation connects search, refinement and certification for readers across the full pipeline.
+Significance S3: A notable focused contribution improves the public mathematical record or project tools.
 
-The methods tutorial explains search and certification through 32 selected
-upper-bound improvements and five attributed packing illustrations. Daniel’s
-replayed intake certificates are distinguished from standing-bound adoption,
-and local rigidity from evidence of optimality.
+The methods survey now illustrates construction, simulated annealing, packing surgery, sequential linear programming and exact algebraic certification with five attributed examples. Updated explanations connect the figures to 32 selected upper-bound improvements.
+
+The examples credit Walter Trump, Thomas Schadt, David Ellsworth, Griffin Casson, Nate Chaoweeraprasit and Ryan Xu. The revision explains exact arithmetic for Xu’s 51-square witness, records later refinement lineages, and distinguishes local rigidity from optimality. This is the illustrated follow-up to the survey’s 9 October publication.
 
 Published artifacts: [Current methods tutorial](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) · [Current methods tutorial PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf).
 
@@ -635,7 +644,7 @@ PRs and supporting records: [\#477](https://github.com/jlevy/squares/pull/477).
 
 #### Consistent Type Across the Papers
 
-Significance S3: Reader-facing typography and mathematical title corrections improve the published papers without changing their claims.
+Significance S2: Routine maintenance or attribution updates existing work without a new result or public capability.
 
 Paper fronts, references and version histories use consistent title case and
 typographic punctuation. Part I’s print spacing keeps its colophon with the final
@@ -673,6 +682,138 @@ Published artifacts: [Current interactive atlas](https://jlevy.github.io/squares
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
 PRs and supporting records: [\#474](https://github.com/jlevy/squares/pull/474).
+
+<a id="changelog-date-2026-10-09"></a>
+
+### 2026-10-09
+
+<a id="changelog-entry-couzo-twenty-beyond-corpus-reports"></a>
+
+#### Couzo Reports Packings Beyond 324 Squares
+
+Significance S3: Twenty new attributed packing reports extend the source record beyond the current 324-case corpus.
+
+Francisco Couzo reports packings at 20 counts from 327 to 379, beyond the project’s 1–324 case corpus. Their printed sides, centers and angles are retained with dated source references for later checking.
+
+- The counts are 327, 332, 335–342, 364, 369 and 372–379. These are decimal packing reports; no local geometry replay or exact certificate establishes their feasibility here.
+- The source compares them with border-row or grid constructions, rather than a survey of published best records. They do not enter the selected-case bounds or Atlas.
+- Couzo’s subsequent smaller reports at 375 and 378 are recorded in the next update, with these earlier values preserved.
+
+PRs and supporting records: [\#466](https://github.com/jlevy/squares/pull/466) · [Twenty reports and their source scope](packing/resources/web/couzo-extended-reports-2026-10-08/README.md) · [Beyond-horizon source coverage](packing/frontier/source-coverage.yaml).
+
+<a id="changelog-entry-daniel-three-exact-packing-improvements"></a>
+
+#### Daniel’s Smaller Packings at 266, 270 and 272 Squares
+
+Significance S3: Three smaller packings have complete exact certificates and independent review, matching the S3 result T-119.
+
+Evan Daniel’s three rational certificates give smaller verified packings at 266, 270 and 272 squares. Exact replays and a separate mathematical review support the new upper bounds, recorded as T-119.
+
+- The verified side ceilings are 16.8230287507564760, 16.9378072284460292 and 16.9681101457696006 respectively. The case records retain each complete exact pose.
+- The work builds on earlier constructions and refinements; each case and the source packet preserve that lineage. Daniel discloses Claude assistance under his direction.
+- Four exact-form reports and 178 configuration-specific local-minimum assertions are retained separately as T-120–T-124. The feasibility checks do not confirm those stronger assertions.
+
+PRs and supporting records: [\#441](https://github.com/jlevy/squares/pull/441) · [Certificates, source credit and replay scope](packing/resources/web/evand-new-arrangements-2026-10-07/README.md) · [Independent mathematical review](docs/project/reviews/review-2026-10-08-evand-new-arrangements.md).
+
+<a id="changelog-entry-gupta-fourteen-verified-refinements"></a>
+
+#### Gupta’s Refinements Improve 14 Packing Bounds
+
+Significance S3: Fourteen smaller selected upper bounds are supported by complete exact certificates, the S3 result T-127.
+
+Siddharth Gupta’s refinements of Nate Chaoweeraprasit’s SQUISH packings, using Evan Daniel’s optimizer, supply 14 smaller selected upper bounds. Exact verification confirms all 17 submitted rational certificates as T-127 at V3/C3.
+
+- The selected improvements are at 88, 130, 153, 154, 179, 180, 199, 207, 208, 209, 236, 237, 238 and 239 squares.
+- The other three offers, at 108, 123 and 129, had already been surpassed by Ryan Xu’s packings. Their complete certificates and comparisons remain available.
+- The checks establish finite feasibility; they do not establish local or global optimality.
+
+PRs and supporting records: [\#448](https://github.com/jlevy/squares/pull/448) · [\#459](https://github.com/jlevy/squares/pull/459) · [Refinement certificates and complete credit](packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md) · [Review of the 17 source cases](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md).
+
+<a id="changelog-entry-hosono-seven-fine-net-reports"></a>
+
+#### Hosono Reports Seven Stronger Lower Bounds
+
+Significance S3: Seven new lower-bound reports are notable case improvements; the complete geometric replays remain open.
+
+Hiroaki Hosono (wand125) reports stronger lower bounds at 19, 20, 26, 27, 28, 29 and 31 squares, using measure certificates on finer direction nets. The project retains the sources and has checked the exact input premises; complete local geometric replays remain pending.
+
+- The original reported bounds are 4.8275, 4.9125, 5.555, 5.6525, 5.74, 5.815 and 5.97 in that order. A later report raises the 27-square value to 5.655.
+- The reports use 832 or 2,073 declared directions. Checking input premises does not establish the required geometric conclusion at every direction.
+- This intake leaves standing bounds and assurance ratings unchanged. Later reports at 28 and 29 squares have their own entries and review history.
+
+PRs and supporting records: [\#450](https://github.com/jlevy/squares/pull/450) · [Seven reports and the 27-square follow-up](packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md).
+
+<a id="changelog-entry-n17-twelve-kernel-certificates"></a>
+
+#### Twelve Certificates Narrow the 17-Square Search
+
+Significance S3: Complete certificate replays reduce a finite seventeen-square research census without changing the global bound.
+
+Twelve sub-pattern certificates from Hiroaki Hosono (wand125) have passed complete replays and entered the 17-square research census. They reduce the remaining symmetry classes from 4,683 to 3,636, leaving 28,528 states to consider.
+
+- The standing Python verifier accepted all 12 certificates from a clean checkout, and the Rust verifier agreed on all 26 compared receipt fields. The complete deciding objects and receipts are retained.
+- The known endpoint survives, and the difficult distance-two subset falls from 95 symmetry classes to 94.
+- This is a reduction of the specified finite search. It does not close the global proof or improve the numerical lower bound.
+
+PRs and supporting records: [\#475](https://github.com/jlevy/squares/pull/475) · [Experiment 317 and its acceptance evidence](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md) · [Hosted certificate manifest](packing/hosted/n17-issue-472-kernel-certificates.yaml).
+
+<a id="changelog-entry-packing-methods-survey-first-publication"></a>
+
+#### A Survey of How Square Packings Are Found
+
+Significance S4: A substantial new public survey explains packing search, construction and exact certification.
+
+The first edition of the square-packing methods survey explains how geometric seeds, numerical search, local refinement and exact certificates contribute to record packings. It is available as a web article, Markdown and PDF.
+
+- Eight method families include annealing, basin hopping, packing surgery, sequential linear programming and contact-based refinement. Five construction lineages retain finder credit and source links.
+- The survey distinguishes a reported search method from a certificate that proves a packing fits, and both from a proof of optimality.
+- Version 0.1.0 has an 8 October evidence cutoff, covering retained releases through 7 October. The later illustrated edition is recorded separately.
+
+PRs and supporting records: [\#458](https://github.com/jlevy/squares/pull/458) · [Methods survey](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) · [Initial publication](https://github.com/jlevy/squares/pull/458).
+
+<a id="changelog-entry-ryu-polynomial-deficiency-reports"></a>
+
+#### Ryu Reports Polynomial Deficiency Bounds
+
+Significance S4: Two reported infinite families strengthen asymptotic packing-deficiency bounds; their geometric assumptions remain under review.
+
+Sungjoon Ryu reports quarter-power and cube-root lower bounds for the deficiency of packings of closed, pairwise-disjoint unit squares in an integer-sided square. The project retains the papers and a review of their geometric arguments and numerical constants.
+
+- For a container of integer side $k$, the deficiency is $k^2$ minus the largest number of closed, pairwise-disjoint unit squares it can contain. The reported cube-root bound exceeds $0.06 k^{1/3}$ for $k \ge 3.5 \times 10^{17}$.
+- The review checks 108 numerical consequences in interval arithmetic. These remain conditional on the stated geometric premises; independent labeling of every box in an inherited computation remains open.
+- The papers disclose extensive Claude assistance and no human peer review. Their claims remain reported and change no bound in the 1–324 case corpus.
+
+PRs and supporting records: [\#439](https://github.com/jlevy/squares/pull/439) · [\#440](https://github.com/jlevy/squares/pull/440) · [Asymptotic bound statements](packing/frontier/asymptotic-waste-bounds.yaml) · [Review of the quarter-power and cube-root arguments](docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md).
+
+<a id="changelog-entry-xu-rational-and-radical-packings"></a>
+
+#### Xu’s Verified Packings Include an Exact 51-Square Construction
+
+Significance S3: Two S3 results give exactly checked constructions and improve the selected upper bounds at eighteen counts.
+
+Ryan Xu’s 25 rational packing certificates and a separate 51-square construction have passed exact checks and independent review. Seventeen rational certificates and the radical construction replace the selected bounds at 18 counts.
+
+- The 51-square packing fits at side (16 + 5√2)/3. Its axis-aligned and 45-degree squares can be checked exactly over the number field Q(√2).
+- T-125 records feasibility of all 25 rational certificates, including those superseded by other packings; T-126 records the undilated 51-square construction. Both are V3/C3.
+- Xu describes an LLM-assisted workflow. The checks establish that the submitted packings fit, without proving optimality or reconstructing the search.
+
+PRs and supporting records: [\#442](https://github.com/jlevy/squares/pull/442) · [Rational and radical certificates](packing/resources/web/ry-xu-new-packings-2026-10-08/README.md) · [Independent review](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md).
+
+<a id="changelog-date-2026-10-08"></a>
+
+### 2026-10-08
+
+<a id="changelog-entry-static-frontier-math-and-result-records"></a>
+
+#### Readable Formulas in the Frontier Tables
+
+Significance S2: The raw PR describes a correction completing PR395’s rollout: startup formula layout, static membership/link checks, CI dependencies and existing Mac test contracts. This repairs an existing rendering feature rather than launching a new one.
+
+The frontier tables now render their dense formulas with native mathematical markup, including radicals that remain readable on screen and in print. Published result rows link to their complete records and repository sources.
+
+Readers can follow each result to its complete record and repository sources. Formulas preserve the reader’s text font while using a mathematical font for operators and structures.
+
+PRs and supporting records: [\#456](https://github.com/jlevy/squares/pull/456) · [Frontier table](https://jlevy.github.io/squares/frontier.html) · [Static rendering and deployment work](https://github.com/jlevy/squares/pull/456).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

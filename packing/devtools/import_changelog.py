@@ -25,7 +25,59 @@ from devtools import render_changelog
 from sqpack.yamlio import load_yaml
 
 Document = dict[str, Any]
-FIELDS = "number,title,body,mergedAt,baseRefName,mergeCommit,state,url"
+FIELDS = "number,title,body,mergedAt,baseRefName,mergeCommit,state,url,labels"
+
+
+def _label_names(row: Document) -> list[str]:
+    labels = row.get("labels", [])
+    if not isinstance(labels, list):
+        raise TypeError(f"PR #{row['number']}: labels must be an array")
+    names = []
+    for label in labels:
+        name = label.get("name") if isinstance(label, dict) else label
+        if not isinstance(name, str):
+            raise TypeError(f"PR #{row['number']}: each label requires a name")
+        # Reserve numeric S-prefixed labels for ratings, so misspelled scores cannot
+        # become ordinary tags or bypass validation through explicit score metadata.
+        if not re.fullmatch(r"S[1-5]", name) and re.match(
+            r"s(?:[\s+.-]*\d|\s*$)", name.strip(), re.IGNORECASE
+        ):
+            raise ValueError(
+                f"PR #{row['number']}: invalid significance label {name!r}; use S1-S5"
+            )
+        names.append(name)
+    if sum(bool(re.fullmatch(r"S[1-5]", name)) for name in names) > 1:
+        raise ValueError(f"PR #{row['number']}: use exactly one S1-S5 significance label")
+    return names
+
+
+def _significance(
+    row: Document, labels: list[str], score: int | None, rationale: str | None
+) -> Document:
+    rating = copy.deepcopy(row.get("significance", {}))
+    if not isinstance(rating, dict):
+        raise TypeError(f"PR #{row['number']}: significance must be an object")
+    scores = [int(label[1]) for label in labels if re.fullmatch(r"S[1-5]", label)]
+    if "score" in rating:
+        scores.append(rating["score"])
+    if score is not None:
+        scores.append(score)
+    if any(type(value) is not int or value not in range(1, 6) for value in scores):
+        raise ValueError(f"PR #{row['number']}: significance score must be an integer 1-5")
+    if len(set(scores)) > 1:
+        raise ValueError(
+            f"PR #{row['number']}: significance scores conflict across labels, metadata or CLI"
+        )
+    if rationale is not None:
+        rating["rationale"] = rationale
+    if not scores or not rating.get("rationale"):
+        raise ValueError(
+            f"PR #{row['number']}: an editorial significance score and rationale are required; "
+            "supply an S1-S5 label and --significance-rationale, "
+            "or explicit significance metadata"
+        )
+    rating["score"] = scores[0]
+    return rating
 
 
 def _empty() -> Document:
@@ -111,12 +163,19 @@ def verify_main_delivery(delivery: Document, main_ref: str = "origin/main") -> D
     }
 
 
-def draft(rows: Sequence[Document], baseline: Document | None = None) -> Document:
+def draft(
+    rows: Sequence[Document],
+    baseline: Document | None = None,
+    *,
+    significance: int | None = None,
+    significance_rationale: str | None = None,
+) -> Document:
     """Preserve published announcements and add explicit editorial placeholders.
 
     This pure function validates supplied merge metadata. The CLI additionally checks
     ancestry before calling it; callers acquiring metadata themselves own that check.
     Publication dates, public artifacts, stacks and editions are editorial decisions.
+    A single PR S label supplies the score; the rationale remains explicit editorial input.
     """
     document = copy.deepcopy(baseline) if baseline is not None else _empty()
     render_changelog.validate(document)
@@ -136,6 +195,7 @@ def draft(rows: Sequence[Document], baseline: Document | None = None) -> Documen
     }
     for row in sorted(rows, key=lambda item: item["number"]):
         delivery = _delivery(row)
+        labels = _label_names(row)
         number = delivery["number"]
         if number in numbers:
             raise ValueError(f"duplicate imported PR #{number}")
@@ -148,6 +208,7 @@ def draft(rows: Sequence[Document], baseline: Document | None = None) -> Documen
             ):
                 raise ValueError(f"PR #{number}: imported metadata changes a retained delivery")
             continue
+        rating = _significance(row, labels, significance, significance_rationale)
         document["deliveries"].append(delivery)
         document["coverage"]["pull_requests"].append(number)
         entry = {
@@ -157,12 +218,9 @@ def draft(rows: Sequence[Document], baseline: Document | None = None) -> Documen
             "pull_requests": [number],
             "summary": "Draft for editorial review: " + html.escape(delivery["title"]) + ".",
         }
-        if "significance" not in row:
-            raise ValueError(
-                f"PR #{number}: an editorial significance score and rationale are required; "
-                "supply significance metadata or --significance and --significance-rationale"
-            )
-        entry["significance"] = copy.deepcopy(row["significance"])
+        entry["significance"] = rating
+        if "project" in labels:
+            entry["topics"] = ["project"]
         cited = sorted(set(re.findall(r"\bT-\d{3,}\b", row.get("body") or "")) & known_results)
         if cited:
             entry["result_ids"] = cited
@@ -237,17 +295,12 @@ def _write_candidate(options: argparse.Namespace) -> None:
         )
         if receipt is not None:
             row["delivery_to_main"] = receipt
-    if (options.significance is None) != (options.significance_rationale is None):
-        raise ValueError(
-            "--significance and --significance-rationale must be supplied together"
-        )
-    if options.significance is not None:
-        for row in rows:
-            row["significance"] = {
-                "score": options.significance,
-                "rationale": options.significance_rationale,
-            }
-    document = draft(rows, baseline)
+    document = draft(
+        rows,
+        baseline,
+        significance=options.significance,
+        significance_rationale=options.significance_rationale,
+    )
     rendered = yaml.safe_dump(document, allow_unicode=True, sort_keys=False, width=96)
     audit = coverage_audit(document)
     audit_path = options.audit or options.output.with_suffix(".coverage.md")
@@ -280,7 +333,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--main-ref", default="origin/main")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--audit", type=Path)
-    parser.add_argument("--significance", type=int, choices=range(1, 6))
+    parser.add_argument(
+        "--significance",
+        type=int,
+        choices=range(1, 6),
+        help="Explicit score for unlabeled historical PRs; must agree with any S label",
+    )
     parser.add_argument(
         "--significance-rationale", help="Plain editorial reason for the candidate's importance"
     )

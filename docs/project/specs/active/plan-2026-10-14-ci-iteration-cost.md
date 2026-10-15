@@ -223,6 +223,23 @@ The implementation uses the existing tracked advisory declaration, with a separa
 scope, and focused refusal tests; it adds no timing service or evidence framework.
 Fresh matching-head validation remains required before merge.
 
+The final timing-policy and selection follow-up uses incremental evidence.
+The full `43ee60f6` run completed the unchanged scientific implementations: its
+slow-lane receipt has 241 passing tests and no skips, including all five moved report
+cases. Its aggregate remains failed because of the recorded CALL timing verdicts.
+That is not relabeled as a successful checkpoint.
+A separate strong review found no reason to repeat that complete scientific run solely
+for selection, reporting and timing-policy changes.
+
+The integrated head must pass ordinary CI, including the selector, attribution,
+gate-budget and validation-CLI controls.
+These cover hosted events, strict/local enforcement, malformed policy, functional
+failures and the 45-second backstop.
+Any scientific input, dependency or execution change introduced during integration
+requires its affected deeper checks.
+Required native post-merge coverage remains enabled; incremental evidence does not
+replace it or claim a fresh full-checkpoint pass.
+
 ## Goals
 
 - Explain the overnight delay using actual run and delivery evidence, separating elapsed

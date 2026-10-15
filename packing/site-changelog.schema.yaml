@@ -131,7 +131,7 @@ $defs:
         minItems: 1
         uniqueItems: true
         items:
-          enum: [lower-bound, upper-bound, optimality, uniqueness, simplification, formalization, rigidity, case-exclusion, restricted-optimality, method-limit, correction, audit, engineering, verification]
+          enum: [lower-bound, upper-bound, optimality, uniqueness, simplification, formalization, rigidity, case-exclusion, restricted-optimality, method-limit, correction, audit, project, engineering, verification]
         description: Subjects covered by the item; these labels do not state proof or assurance status.
       result_ids:
         type: array

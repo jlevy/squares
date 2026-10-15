@@ -61,24 +61,29 @@ entries:
         target: docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md
   - id: basic-and-advanced-tutorials
     date: '2026-10-14'
-    title: "Basic and Advanced Tutorials, Together Under Explanations"
+    title: Basic and Advanced Tutorials, Together Under Explanations
     significance:
       score: 4
-      rationale: "A revised introduction and a separate advanced tutorial are a substantial public explanation of the problem and research methods."
-    topics: [engineering, verification]
-    pull_requests: [604]
-    categories: [site, documentation]
+      rationale: A revised introduction and a separate advanced tutorial are a substantial public explanation
+        of the problem and research methods.
+    topics:
+      - project
+      - verification
+      - engineering
+    pull_requests:
+      - 604
+    categories:
+      - site
+      - documentation
     summary: |
       The Explanations page now starts with a short introduction to square packing
       and a separate advanced tutorial. Beginners can start with bounds and small
       examples; the companion develops linear programs, exact certificates,
       regularization and global proofs.
-    details: |
-      - Earlier tutorial links lead to the moved explanations. Definitions, notation,
-        worked derivations, figures and sources remain available in the two papers.
-      - The same index links the research papers, downloadable PDFs, film and interactive
-        Workbench. News collects project announcements, and the web Atlas uses the
-        available screen width.
+    details: |-
+      - Earlier tutorial links lead to the moved explanations. Definitions, notation, worked derivations, figures and sources remain available in the two papers.
+      - News now has its own page, with individual articles and filters for significance and topic. Reported proof announcements keep their verification limits beside the claims.
+      - The Explanations index links the tutorials, research papers, downloadable PDFs, film and interactive Workbench. Both web Atlas views use the available screen width.
     artifacts:
       - kind: paper
         label: Current basic tutorial
@@ -100,11 +105,16 @@ entries:
         target: docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md
   - id: october-fourteen-intake-records
     date: '2026-10-14'
-    title: "Two Bound Families and 22 More Results From the 14 October Intake"
+    title: Fang and Hosono Report New Bound Families
     significance:
       score: 4
-      rationale: "The registered results include two S4 bound families, Kevin Fang’s theorem and Hiroaki Hosono’s closed form."
-    topics: [upper-bound, lower-bound, optimality, verification]
+      rationale: The registered results include two S4 bound families, Kevin Fang’s theorem and Hiroaki
+        Hosono’s closed form.
+    topics:
+      - upper-bound
+      - lower-bound
+      - optimality
+      - verification
     pull_requests:
       - 602
     categories:
@@ -134,23 +144,13 @@ entries:
       - T-182
       - T-183
       - T-184
-    summary: |
-      The 14 October intake registers 24 results, T-161 to T-184, in the order their
-      reports reached the project, as the report-order ledger records them. Kevin Fang
-      reports a proof that n² − n + 1 unit squares fit in a square of side less than n
-      for every n ≥ 15, and Hiroaki Hosono’s closed form raises the reported lower bound
-      at 154 counts. No case adopts a new best known packing yet.
-    details: |
-      - Smaller exact packings and certificates at 69 counts, from Francisco Couzo,
-        Daniil Ostashev, PingYou Ltd and Mykhailo Polkovskyi, were replayed exactly, the
-        rational ones on two routes; independent review and adoption come next.
-      - Fang’s theorem has a mathematical review and replayed finite bounds. The closed
-        form s(N) ≥ a(N), for every non-square N ≥ 49, has a review; its complete replay
-        waits on a compute budget.
-      - wand125 reports lower bounds at 37, 39, 44 and 145 to 149, each read by a
-        review, and Benjamin Greff reports s(76) = 9 by a mixed cover.
-      - Each recorded certificate is credited to its finder, and a refinement of an
-        earlier packing is listed as a regularization of it.
+    summary: |-
+      Kevin Fang reports a construction fitting n² − n + 1 unit squares below side n for every n ≥ 15. Hiroaki Hosono reports a closed-form lower bound for every non-square count N ≥ 49; it raises 154 reported case bounds in this intake. These two families join 22 further results in the register. Fang’s theorem has a mathematical review, while the complete replay of Hosono’s formula remains unfinished.
+    details: |-
+      - The 24 records, T-161 through T-184, preserve the order in which their reports reached the project. No new packing is adopted in this registration.
+      - Francisco Couzo, Daniil Ostashev, PingYou Ltd and Mykhailo Polkovskyi supplied smaller packings and tighter certificates at 69 counts. Their source certificates were replayed, with independent review and adoption still to follow at this date.
+      - Hiroaki Hosono also reports lower bounds at 37, 39, 44 and 145 through 149 squares, and Benjamin Greff reports an optimality proof for 76 squares. These reports retain their separate verification limits.
+      - The verified lower-bound lanes are unchanged. Reported and independently verified bounds remain separate in each case record.
     artifacts:
       - kind: result
         label: Current Fang theorem record
@@ -171,32 +171,27 @@ entries:
         target: packing/campaign/issue-intake/upper-bounds-20261014/README.md
   - id: reusable-intake-process-and-decided-comparisons
     date: '2026-10-14'
-    title: "Seventeen Packing Comparisons Decided Exactly"
+    title: Exact Packing Comparisons and a Reusable Intake Process
     significance:
       score: 2
-      rationale: "Process, policy and verification work on reports already recorded; it registers no new result."
-    topics: [upper-bound, verification, engineering]
+      rationale: "Adds exact-comparison and verdict-drafting helpers to PR601’s existing intake ledger, resolves 17 pending comparisons with no smaller result, and documents the process. These are supporting intake extensions and calibration/custody work rather than a second key capability launch."
+    topics:
+      - project
+      - upper-bound
+      - verification
     pull_requests:
       - 605
     categories:
       - pipeline
       - documentation
       - records
-    summary: |
-      Seventeen comparisons that printed precision left undecided for PR #574 are
-      now decided exactly. None is below the side already recorded. The intake runbook
-      records the report-order ledger, the owner’s standing decisions, a compute cap
-      with a tracked validation backlog, and verdict comments drafted from the ledger.
-    details: |
-      - Pull requests merge with a merge commit by default, issues and pull requests
-        share one label set, and credits name people by name, keeping a handle only as
-        an identifier.
-      - A tool drafts each issue’s report-order verdict comment from the ledger; posting
-        stays manual.
-      - wand125’s replay4d 0.1.1 source hashes were recomputed, and a calibration
-        replay of two records prices the complete replay at about 5,250 CPU-hours here.
-      - Kevin Fang’s other eleven direct certificates, at 421 to 814, were replayed on
-        two exact routes.
+    summary: |-
+      The project now decides close packing-side comparisons exactly and drafts report verdicts from the intake ledger. Seventeen previously undecided comparisons from PingYou Ltd’s certificates were resolved; none improved on the earlier reported side at its count. The reusable intake process records those decisions, contributor credits, review status and outstanding replay work.
+    details: |-
+      - The comparison tool retains exact decisions, including cases whose printed precision was insufficient. Four other comparisons remain undecided.
+      - A separate tool drafts verdict comments from the ledger for review before posting. The runbook records the compute cap and tracks complete replays that still need a budget.
+      - Hiroaki Hosono’s replay4d 0.1.1 source hashes were audited. A two-record calibration estimated the cost of the complete replay under the measured host load; it did not confirm the full lower-bound family.
+      - Kevin Fang’s eleven remaining direct certificates, at 421 through 814 squares, were replayed on two exact routes.
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38632014131/job/116088520863
@@ -213,8 +208,12 @@ entries:
     title: An Audit of Every Open Packing Report
     significance:
       score: 3
-      rationale: "A project-wide audit improves result intake and verification; it announces no new high-significance theorem."
-    topics: [engineering, verification]
+      rationale: A project-wide audit improves result intake and verification; it announces no new high-significance
+        theorem.
+    topics:
+      - project
+      - verification
+      - engineering
     pull_requests:
       - 601
     categories:
@@ -308,16 +307,19 @@ entries:
         target: packing/campaign/result-import.md
   - id: project-changelog-and-independent-editions
     date: '2026-10-14'
-    title: "A Shared Release History for the Project"
+    title: A Shared Release History for the Project
     significance:
       score: 4
-      rationale: "A major public launch index and independent edition policy make project releases discoverable across results and publications."
+      rationale: A major public launch index and independent edition policy make project releases discoverable
+        across results and publications.
     pull_requests:
       - 590
     categories:
       - site
       - documentation
-    topics: [engineering]
+    topics:
+      - project
+      - engineering
     summary: |
       The public changelog links project releases to their papers, posters and
       result pages. Each paper, the site and the shared pair of posters has its own
@@ -361,10 +363,10 @@ entries:
         target: development.md
   - id: verification-significance-and-announcement-audit
     date: '2026-10-14'
-    title: "Three Result Significance Scores Corrected"
+    title: Result Ratings and Verification Evidence Audited
     significance:
       score: 3
-      rationale: "Reader-facing rating and attribution corrections improve the interpretation of existing results without announcing a new result."
+      rationale: "A substantive audit examines recent registrations, Lean trust boundaries and draft significance scores, including independent checks of retained certificates."
     pull_requests:
       - 563
     categories:
@@ -374,18 +376,17 @@ entries:
       - T-053
       - T-063
       - T-065
-    topics: [correction, audit]
+    topics:
+      - project
+      - correction
+      - audit
+      - verification
     summary: |
-      The significance scores for three results have been corrected. Their
-      verification and confirmation ratings and numerical bounds are unchanged.
-      Announcement drafts include the source credit and verification limits recorded
-      for each result.
+      A project audit checked the verification ratings of 27 recent results and examined the evidence behind Lean-backed claims. A separate review assessed 48 draft significance scores. The numerical bounds and verification ratings are unchanged; three significance scores were corrected.
     details: |
-      - T-053 moves from S4 to S3, T-063 from S1 to S3 and T-065 from S3 to S2.
-      - Separate reviews examine the ratings of Lean-backed and recent results,
-        and the significance scores.
-      - Announcement drafts and reply rules keep attribution beside each claim.
-        The audit establishes no new proof, packing or bound.
+      - The recent-results review replayed four upper-bound receipts and checked 36 certificates from seven entries on a third exact route. It found no current rung that needed changing.
+      - The Lean review distinguishes a statement-closure build from a complete proof build and identifies the reviews, retained executions and human oversight needed for higher ratings. It establishes no new full Lean replay.
+      - T-053 moves from S4 to S3, T-063 from S1 to S3 and T-065 from S3 to S2. A maintained announcement tool includes source credit and verification limits when describing results.
     artifacts:
       - kind: page
         label: Current results, including the corrected significance scores
@@ -404,10 +405,10 @@ entries:
         target: packing/campaign/result-import.md
   - id: n17-proof-reports-and-verification-policy
     date: '2026-10-14'
-    title: "Initial Review of Overbeck’s and Fitzharding’s Proofs for n = 17"
+    title: Initial Review of Overbeck’s and Fitzharding’s Proofs for n = 17
     significance:
-      score: 4
-      rationale: "Project-wide verification rules and the interpretation of major proof reports materially change how public evidence is presented."
+      score: 3
+      rationale: "Adds enforceable whole-claim evidence coverage, verifier-independence records and the formalization kind, with bounded reviews. This is substantive verification policy/tooling and earns S3, but it neither completes a proof nor launches a major reader product; S4 overstates the contribution."
     pull_requests:
       - 592
       - 595
@@ -419,7 +420,10 @@ entries:
     result_ids:
       - T-153
       - T-154
-    topics: [optimality, verification]
+    topics:
+      - project
+      - optimality
+      - verification
     summary: |
       Initial mathematical reviews examine Overbeck’s candidate proof and
       Fitzharding’s Lean formalization of the 17-square optimum. Both remain
@@ -457,10 +461,11 @@ entries:
         target: epistemics.md
   - id: regularized-drawings-and-exact-side-admissions
     date: '2026-10-14'
-    title: "Regularized Packings, With Originals for Comparison"
+    title: Regularized Packings, With Originals for Comparison
     significance:
       score: 4
-      rationale: "A coordinated display and certification pipeline brings regularized packings and original comparisons to the public atlas and PDFs."
+      rationale: A coordinated display and certification pipeline brings regularized packings and original
+        comparisons to the public atlas and PDFs.
     pull_requests:
       - 511
       - 530
@@ -479,12 +484,12 @@ entries:
     result_ids:
       - T-155
       - T-156
-    topics: [upper-bound, engineering, verification]
-    summary: |
-      Regularized drawings are available throughout the atlas and both posters,
-      with the published packings still available for comparison. Exact certificates
-      support the displayed bounds, and the records distinguish credit for a drawing
-      from credit for the construction.
+    topics:
+      - project
+      - upper-bound
+      - verification
+    summary: |-
+      The atlas and both posters now show regularized versions of existing packings, with the published originals available for comparison. The project combines Evan Daniel’s regularizer and exact solver with grid-slack cleanup, checks the selected regularized drawings exactly, and retains credit for each source packing and modification.
     details: |
       - A reproducible tool combines exact re-solving at the same container side
         and grid-slack cleanup with tools to compare, select and admit the drawings.
@@ -535,10 +540,11 @@ entries:
       that mathematical lineage from the new formalization and its reported build.
     topics: [optimality, verification]
     summary: |
-      Oscar Fitzharding’s reported Lean proof of the 17-square optimum is available
-      with its source packet, announcements and an adversarial comparison with
-      existing work. T-154 is reported at V0/C1; the full Lean build has not been
-      replayed here.
+      Oscar Fitzharding reports a Lean 4 proof that John Bidwell’s 1998 packing of
+      17 unit squares is optimal: $s(17) = 4.67553009360455\ldots$.
+      It is the first proof-assistant proof of this value in our records and uses
+      a different argument from Marc Leonard Overbeck’s candidate proof.
+      T-154 is reported at V0/C1; the full Lean build has not been replayed here.
     artifacts:
       - kind: result
         label: Current 17-square Lean proof report
@@ -551,14 +557,21 @@ entries:
         target: docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
   - id: regularization-foundations
     date: '2026-10-13'
-    title: "Rules for Verifying Regularized Drawings"
+    title: Rules for Verifying Regularized Drawings
     significance:
-      score: 3
-      rationale: "The verification and regularization foundations support a substantial public capability but precede its combined launch."
-    pull_requests: [497, 509]
+      score: 2
+      rationale: "Assesses an existing regularizer, sets adaptation/admission policy and adds a comparison helper. It regularizes no packing, admits no drawing and changes no result. Supporting project groundwork is S2; the project label does not raise it. Vendors an existing regularizer/exact solver with licensing, pin checks and provenance. No view is produced or admitted. Dependency/custody setup supports the later capability but does not itself warrant S3."
+    pull_requests:
+      - 497
+      - 509
     stack_id: 498
-    categories: [regularization, pipeline]
-    topics: [verification, engineering]
+    categories:
+      - regularization
+      - pipeline
+    topics:
+      - project
+      - engineering
+      - verification
     summary: |
       The regularization policy requires improved bounds to be registered before
       being drawn. It accepts exact drawings at the verified bound and sends unsettled
@@ -582,13 +595,19 @@ entries:
         target: vendor/evand-regularize/README.md
   - id: drawn-packing-verification-gaps
     date: '2026-10-13'
-    title: "An Audit of Verification Gaps in 92 Packing Records"
+    title: An Audit of Verification Gaps in 92 Packing Records
     significance:
       score: 3
-      rationale: "A broad witness audit clarifies an important public boundary between drawn geometry and certified bounds."
-    pull_requests: [581]
-    categories: [records, regularization]
-    topics: [verification, upper-bound]
+      rationale: A broad witness audit clarifies an important public boundary between drawn geometry
+        and certified bounds.
+    pull_requests:
+      - 581
+    categories:
+      - records
+      - regularization
+    topics:
+      - verification
+      - audit
     summary: |
       An audit of 92 packing records identifies gaps between illustrations and
       certified bounds. It distinguishes numerically checked drawings, exact drawings
@@ -653,14 +672,20 @@ entries:
         target: development.md
   - id: pingyou-ai-assistance-disclosure
     date: '2026-10-12'
-    title: "PingYou Names PY as Its AI Assistant"
+    title: PingYou Names PY as Its AI Assistant
     significance:
-      score: 3
-      rationale: "A focused public attribution and assistance disclosure changes how the existing S3 results are credited."
-    pull_requests: [558]
-    categories: [records]
-    result_ids: [T-147, T-148]
-    topics: [upper-bound]
+      score: 2
+      rationale: An attribution disclosure for existing results; no bound, proof, verification status
+        or public capability changes.
+    pull_requests:
+      - 558
+    categories:
+      - records
+    result_ids:
+      - T-147
+      - T-148
+    topics:
+      - correction
     summary: |
       PingYou Ltd identifies its unreleased AI agent, PY, as assisting with both
       its 153- and 207-square solutions. The result records, case pages and source
@@ -677,15 +702,23 @@ entries:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: replayed-upper-bound-admissions
     date: '2026-10-12'
-    title: "Nine Smaller Packings From SQUISH and Couzo"
+    title: Nine Smaller Packings From Chaoweeraprasit and Couzo
     significance:
       score: 3
-      rationale: "The announced independently replayed packing improvements T-151 and T-152 are both S3 results."
-    pull_requests: [553]
+      rationale: The announced independently replayed packing improvements T-151 and T-152 are both
+        S3 results.
+    pull_requests:
+      - 553
     stack_id: 517
-    categories: [records, pipeline]
-    result_ids: [T-151, T-152]
-    topics: [upper-bound, verification]
+    categories:
+      - records
+      - pipeline
+    result_ids:
+      - T-151
+      - T-152
+    topics:
+      - upper-bound
+      - verification
     summary: |
       Nate Chaoweeraprasit’s SQUISH constructions and Francisco Couzo’s refinements
       at $n = 304$ and $305$ improve nine standing upper bounds. T-151 and T-152 are
@@ -780,13 +813,18 @@ entries:
         target: packing/campaign/result-import.md
   - id: public-site-prose-and-reading-width
     date: '2026-10-11'
-    title: "Narrower Text Columns and Responsive Navigation"
+    title: Narrower Text Columns and Responsive Navigation
     significance:
-      score: 3
-      rationale: "A focused public reading and layout improvement makes existing explanations easier to use."
-    pull_requests: [513]
-    categories: [site, documentation]
-    topics: [engineering]
+      score: 2
+      rationale: "Narrows reading width, changes navigation branding and corrects existing prose/links. Despite broad file coverage and editorial work, the delivered reader outcome is modest UI/prose polish rather than a new explanation or site structure."
+    pull_requests:
+      - 513
+    categories:
+      - site
+      - documentation
+    topics:
+      - project
+      - engineering
     summary: |
       A narrower prose column and responsive text-only navigation make the project’s
       reader pages easier to follow across screen sizes. Editorial corrections clarify
@@ -808,14 +846,22 @@ entries:
         target: docs/project/reviews/review-2026-10-11-top-level-prose.md
   - id: evan-daniel-attribution-corrections
     date: '2026-10-11'
-    title: "Fuller Credit for Evan Daniel’s Results"
+    title: Fuller Credit for Daniel’s Results
     significance:
-      score: 3
-      rationale: "Substantive public credit corrections concern existing results rather than announce their original mathematical contributions."
-    pull_requests: [508]
-    categories: [records, documentation]
-    result_ids: [T-062, T-064, T-081]
-    topics: [optimality, correction]
+      score: 2
+      rationale: Routine maintenance or attribution updates existing work without a new result or public
+        capability.
+    pull_requests:
+      - 508
+    categories:
+      - records
+      - documentation
+    result_ids:
+      - T-062
+      - T-064
+      - T-081
+    topics:
+      - verification
     summary: |
       The 46-square citation and the README and About accounts of $s(60) = 8$
       explicitly credit Evan Daniel. The attribution audit covers the result register,
@@ -828,13 +874,18 @@ entries:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: website-front-door-and-result-reports
     date: '2026-10-11'
-    title: "Share a Result With the Squares Project"
+    title: Share a Result With the Squares Project
     significance:
-      score: 3
-      rationale: "A public reporting route and clearer site introduction improve participation without a new mathematical result."
-    pull_requests: [502]
-    categories: [site, documentation]
-    topics: [engineering]
+      score: 2
+      rationale: "Adds website/report links, an invitation and a README atlas snapshot. These are modest discovery and presentation improvements to existing site and report surfaces, without a new submission workflow or major navigation capability."
+    pull_requests:
+      - 502
+    categories:
+      - site
+      - documentation
+    topics:
+      - project
+      - engineering
     summary: |
       The homepage and About invite result reports through a shared form that asks
       contributors for the name they want credited. README opens with the website
@@ -877,13 +928,16 @@ entries:
     result_ids: [T-128, T-129, T-130, T-131, T-132, T-133, T-134, T-135, T-136, T-137, T-138, T-139, T-140, T-141, T-142, T-143, T-144, T-145, T-146]
     topics: [lower-bound, upper-bound, verification]
     summary: |
-      The result register adds twelve upper-bound entries and Guzhou0806’s two
-      40-square lower bounds at V3/C3, with exact certificates and reviewed sources.
+      Twelve upper-bound entries now have complete verification and independent
+      review at V3/C3, alongside Guzhou0806’s two 40-square lower bounds.
       The continuous-pose result becomes the standing 40-square lower bound.
       The new upper bounds are adopted in a later release.
     details: |
-      - The twelve upper-bound entries include Evan Daniel’s fifteen regularized
-        certificates, checked for finite feasibility and reviewed before adoption.
+      - Francisco Couzo, Evan Daniel, Kevin Fang, Nate Chaoweeraprasit, Eric Deleeuw
+        and Mykhailo Polkovskyi contributed the upper-bound work. It includes
+        Daniel’s fifteen regularized certificates, checked for finite feasibility
+        and reviewed before adoption. Three entries were registered in earlier PRs;
+        their completed reviews are part of this intake.
       - Guzhou0806’s clipped-corner and continuous-pose certificates reach V3/C3;
         both 40-square lower-bound records adopt the continuous-pose bound.
       - wand125’s $n = 28$, $29$, $30$ and $122\ldots126$ lower-bound reports remain
@@ -912,13 +966,18 @@ entries:
         target: docs/project/reviews/review-2026-10-11-final-asymptotic-and-grading.md
   - id: unified-site-navigation
     date: '2026-10-11'
-    title: "Explore the Atlas, Results and Papers Together"
+    title: Explore the Atlas, Results and Papers Together
     significance:
-      score: 3
-      rationale: "A coherent public navigation structure improves discovery of existing atlas, results and explanation pages."
-    pull_requests: [462]
-    categories: [site]
-    topics: [engineering]
+      score: 4
+      rationale: A substantial public capability or new mathematical result changes what readers can
+        explore.
+    pull_requests:
+      - 462
+    categories:
+      - site
+    topics:
+      - project
+      - engineering
     summary: |
       Shared navigation connects the homepage’s packing previews with the atlas,
       result records, papers and exports. The pages use readable formulas and
@@ -944,15 +1003,18 @@ entries:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: paper-typography-and-title-case
     date: '2026-10-10'
-    title: "Consistent Type Across the Papers"
+    title: Consistent Type Across the Papers
     significance:
-      score: 3
-      rationale: "Reader-facing typography and mathematical title corrections improve the published papers without changing their claims."
-    pull_requests: [492]
-    categories: [documentation, pipeline]
-    news_exclusion: >-
-      Routine title-case, punctuation and print-spacing maintenance; no new result,
-      explanation or reader capability.
+      score: 2
+      rationale: Routine maintenance or attribution updates existing work without a new result or public
+        capability.
+    pull_requests:
+      - 492
+    categories:
+      - documentation
+      - pipeline
+    news_exclusion: Routine title-case, punctuation and print-spacing maintenance; no new result, explanation
+      or reader capability.
     summary: |
       Paper fronts, references and version histories use consistent title case and
       typographic punctuation. Part I’s print spacing keeps its colophon with the final
@@ -989,20 +1051,24 @@ entries:
         version: v0.4.5
       - component: paper:square-packing-methods-survey
         version: v0.2.1
+    topics:
+      - engineering
   - id: illustrated-packing-methods-tutorial
     date: '2026-10-10'
-    title: "How Record Packings Are Found and Verified"
+    title: Five Illustrations of Packing Search and Certification
     significance:
-      score: 4
-      rationale: "A substantial new illustrated explanation connects search, refinement and certification for readers across the full pipeline."
-    pull_requests: [477]
-    categories: [documentation]
-    topics: [upper-bound, verification]
-    summary: |
-      The methods tutorial explains search and certification through 32 selected
-      upper-bound improvements and five attributed packing illustrations. Daniel’s
-      replayed intake certificates are distinguished from standing-bound adoption,
-      and local rigidity from evidence of optimality.
+      score: 3
+      rationale: A notable focused contribution improves the public mathematical record or project tools.
+    pull_requests:
+      - 477
+    categories:
+      - documentation
+    topics:
+      - project
+      - engineering
+      - verification
+    summary: |-
+      The methods survey now illustrates construction, simulated annealing, packing surgery, sequential linear programming and exact algebraic certification with five attributed examples. Updated explanations connect the figures to 32 selected upper-bound improvements.
     artifacts:
       - kind: paper
         label: Current methods tutorial
@@ -1015,15 +1081,22 @@ entries:
     releases:
       - component: paper:square-packing-methods-survey
         version: v0.2.0
+    details: |-
+      The examples credit Walter Trump, Thomas Schadt, David Ellsworth, Griffin Casson, Nate Chaoweeraprasit and Ryan Xu. The revision explains exact arithmetic for Xu’s 51-square witness, records later refinement lineages, and distinguishes local rigidity from optimality. This is the illustrated follow-up to the survey’s 9 October publication.
   - id: readable-atlas-and-print-exports
     date: '2026-10-10'
-    title: "Compare Packings on Screen and on Paper"
+    title: Compare Packings on Screen and on Paper
     significance:
       score: 4
-      rationale: "A coordinated public atlas and print-export launch materially improves how readers inspect and share packings."
-    pull_requests: [474]
-    categories: [site]
-    topics: [engineering]
+      rationale: A coordinated public atlas and print-export launch materially improves how readers
+        inspect and share packings.
+    pull_requests:
+      - 474
+    categories:
+      - site
+    topics:
+      - project
+      - engineering
     summary: |
       The web atlas and redesigned 100- and 324-packing posters have shared legends
       and complete named credits for comparing packings on screen and in print.
@@ -1096,6 +1169,290 @@ entries:
     references:
       - label: Beyond-horizon source coverage
         target: packing/frontier/source-coverage.yaml
+  - id: ryu-polynomial-deficiency-reports
+    date: '2026-10-09'
+    title: Ryu Reports Polynomial Deficiency Bounds
+    pull_requests:
+      - 439
+      - 440
+    summary: |-
+      Sungjoon Ryu reports quarter-power and cube-root lower bounds for the deficiency of packings of closed, pairwise-disjoint unit squares in an integer-sided square. The project retains the papers and a review of their geometric arguments and numerical constants.
+    significance:
+      score: 4
+      rationale: Two reported infinite families strengthen asymptotic packing-deficiency bounds; their
+        geometric assumptions remain under review.
+    details: |-
+      - For a container of integer side $k$, the deficiency is $k^2$ minus the largest number of closed, pairwise-disjoint unit squares it can contain. The reported cube-root bound exceeds $0.06 k^{1/3}$ for $k \ge 3.5 \times 10^{17}$.
+      - The review checks 108 numerical consequences in interval arithmetic. These remain conditional on the stated geometric premises; independent labeling of every box in an inherited computation remains open.
+      - The papers disclose extensive Claude assistance and no human peer review. Their claims remain reported and change no bound in the 1–324 case corpus.
+    topics:
+      - lower-bound
+      - verification
+    references:
+      - label: Asymptotic bound statements
+        target: packing/frontier/asymptotic-waste-bounds.yaml
+      - label: Review of the quarter-power and cube-root arguments
+        target: docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md
+    grouping: related
+  - id: daniel-three-exact-packing-improvements
+    date: '2026-10-09'
+    title: Daniel’s Smaller Packings at 266, 270 and 272 Squares
+    pull_requests:
+      - 441
+    summary: |-
+      Evan Daniel’s three rational certificates give smaller verified packings at 266, 270 and 272 squares. Exact replays and a separate mathematical review support the new upper bounds, recorded as T-119.
+    significance:
+      score: 3
+      rationale: Three smaller packings have complete exact certificates and independent review, matching
+        the S3 result T-119.
+    details: |-
+      - The verified side ceilings are 16.8230287507564760, 16.9378072284460292 and 16.9681101457696006 respectively. The case records retain each complete exact pose.
+      - The work builds on earlier constructions and refinements; each case and the source packet preserve that lineage. Daniel discloses Claude assistance under his direction.
+      - Four exact-form reports and 178 configuration-specific local-minimum assertions are retained separately as T-120–T-124. The feasibility checks do not confirm those stronger assertions.
+    topics:
+      - upper-bound
+      - verification
+    references:
+      - label: Certificates, source credit and replay scope
+        target: packing/resources/web/evand-new-arrangements-2026-10-07/README.md
+      - label: Independent mathematical review
+        target: docs/project/reviews/review-2026-10-08-evand-new-arrangements.md
+    result_ids:
+      - T-119
+      - T-120
+      - T-121
+      - T-122
+      - T-123
+      - T-124
+  - id: xu-rational-and-radical-packings
+    date: '2026-10-09'
+    title: Xu’s Verified Packings Include an Exact 51-Square Construction
+    pull_requests:
+      - 442
+    summary: |-
+      Ryan Xu’s 25 rational packing certificates and a separate 51-square construction have passed exact checks and independent review. Seventeen rational certificates and the radical construction replace the selected bounds at 18 counts.
+    significance:
+      score: 3
+      rationale: Two S3 results give exactly checked constructions and improve the selected upper bounds
+        at eighteen counts.
+    details: |-
+      - The 51-square packing fits at side (16 + 5√2)/3. Its axis-aligned and 45-degree squares can be checked exactly over the number field Q(√2).
+      - T-125 records feasibility of all 25 rational certificates, including those superseded by other packings; T-126 records the undilated 51-square construction. Both are V3/C3.
+      - Xu describes an LLM-assisted workflow. The checks establish that the submitted packings fit, without proving optimality or reconstructing the search.
+    topics:
+      - upper-bound
+      - verification
+    references:
+      - label: Rational and radical certificates
+        target: packing/resources/web/ry-xu-new-packings-2026-10-08/README.md
+      - label: Independent review
+        target: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md
+    result_ids:
+      - T-125
+      - T-126
+  - id: gupta-fourteen-verified-refinements
+    date: '2026-10-09'
+    title: Gupta’s Refinements Improve 14 Packing Bounds
+    pull_requests:
+      - 448
+      - 459
+    summary: |-
+      Siddharth Gupta’s refinements of Nate Chaoweeraprasit’s SQUISH packings, using Evan Daniel’s optimizer, supply 14 smaller selected upper bounds. Exact verification confirms all 17 submitted rational certificates as T-127 at V3/C3.
+    significance:
+      score: 3
+      rationale: Fourteen smaller selected upper bounds are supported by complete exact certificates,
+        the S3 result T-127.
+    details: |-
+      - The selected improvements are at 88, 130, 153, 154, 179, 180, 199, 207, 208, 209, 236, 237, 238 and 239 squares.
+      - The other three offers, at 108, 123 and 129, had already been surpassed by Ryan Xu’s packings. Their complete certificates and comparisons remain available.
+      - The checks establish finite feasibility; they do not establish local or global optimality.
+    topics:
+      - upper-bound
+      - verification
+    references:
+      - label: Refinement certificates and complete credit
+        target: packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md
+      - label: Review of the 17 source cases
+        target: docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md
+    result_ids:
+      - T-127
+    grouping: related
+  - id: hosono-seven-fine-net-reports
+    date: '2026-10-09'
+    title: Hosono Reports Seven Stronger Lower Bounds
+    pull_requests:
+      - 450
+    summary: |-
+      Hiroaki Hosono (wand125) reports stronger lower bounds at 19, 20, 26, 27, 28, 29 and 31 squares, using measure certificates on finer direction nets. The project retains the sources and has checked the exact input premises; complete local geometric replays remain pending.
+    significance:
+      score: 3
+      rationale: Seven new lower-bound reports are notable case improvements; the complete geometric
+        replays remain open.
+    details: |-
+      - The original reported bounds are 4.8275, 4.9125, 5.555, 5.6525, 5.74, 5.815 and 5.97 in that order. A later report raises the 27-square value to 5.655.
+      - The reports use 832 or 2,073 declared directions. Checking input premises does not establish the required geometric conclusion at every direction.
+      - This intake leaves standing bounds and assurance ratings unchanged. Later reports at 28 and 29 squares have their own entries and review history.
+    topics:
+      - lower-bound
+      - verification
+    references:
+      - label: Seven reports and the 27-square follow-up
+        target: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+  - id: static-frontier-math-and-result-records
+    date: '2026-10-08'
+    title: Readable Formulas in the Frontier Tables
+    pull_requests:
+      - 456
+    summary: |-
+      The frontier tables now render their dense formulas with native mathematical markup, including radicals that remain readable on screen and in print. Published result rows link to their complete records and repository sources.
+    significance:
+      score: 2
+      rationale: "The raw PR describes a correction completing PR395’s rollout: startup formula layout, static membership/link checks, CI dependencies and existing Mac test contracts. This repairs an existing rendering feature rather than launching a new one."
+    details: |-
+      Readers can follow each result to its complete record and repository sources. Formulas preserve the reader’s text font while using a mathematical font for operators and structures.
+    topics:
+      - project
+      - engineering
+    references:
+      - label: Frontier table
+        target: https://jlevy.github.io/squares/frontier.html
+      - label: Static rendering and deployment work
+        target: https://github.com/jlevy/squares/pull/456
+  - id: packing-methods-survey-first-publication
+    date: '2026-10-09'
+    title: A Survey of How Square Packings Are Found
+    pull_requests:
+      - 458
+    summary: |-
+      The first edition of the square-packing methods survey explains how geometric seeds, numerical search, local refinement and exact certificates contribute to record packings. It is available as a web article, Markdown and PDF.
+    significance:
+      score: 4
+      rationale: A substantial new public survey explains packing search, construction and exact certification.
+    details: |-
+      - Eight method families include annealing, basin hopping, packing surgery, sequential linear programming and contact-based refinement. Five construction lineages retain finder credit and source links.
+      - The survey distinguishes a reported search method from a certificate that proves a packing fits, and both from a proof of optimality.
+      - Version 0.1.0 has an 8 October evidence cutoff, covering retained releases through 7 October. The later illustrated edition is recorded separately.
+    topics:
+      - project
+      - engineering
+      - verification
+    references:
+      - label: Methods survey
+        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+      - label: Initial publication
+        target: https://github.com/jlevy/squares/pull/458
+  - id: couzo-twenty-beyond-corpus-reports
+    date: '2026-10-09'
+    title: Couzo Reports Packings Beyond 324 Squares
+    pull_requests:
+      - 466
+    summary: |-
+      Francisco Couzo reports packings at 20 counts from 327 to 379, beyond the project’s 1–324 case corpus. Their printed sides, centers and angles are retained with dated source references for later checking.
+    significance:
+      score: 3
+      rationale: Twenty new attributed packing reports extend the source record beyond the current 324-case
+        corpus.
+    details: |-
+      - The counts are 327, 332, 335–342, 364, 369 and 372–379. These are decimal packing reports; no local geometry replay or exact certificate establishes their feasibility here.
+      - The source compares them with border-row or grid constructions, rather than a survey of published best records. They do not enter the selected-case bounds or Atlas.
+      - Couzo’s subsequent smaller reports at 375 and 378 are recorded in the next update, with these earlier values preserved.
+    topics:
+      - upper-bound
+    references:
+      - label: Twenty reports and their source scope
+        target: packing/resources/web/couzo-extended-reports-2026-10-08/README.md
+      - label: Beyond-horizon source coverage
+        target: packing/frontier/source-coverage.yaml
+  - id: n17-twelve-kernel-certificates
+    date: '2026-10-09'
+    title: Twelve Certificates Narrow the 17-Square Search
+    pull_requests:
+      - 475
+    summary: |-
+      Twelve sub-pattern certificates from Hiroaki Hosono (wand125) have passed complete replays and entered the 17-square research census. They reduce the remaining symmetry classes from 4,683 to 3,636, leaving 28,528 states to consider.
+    significance:
+      score: 3
+      rationale: Complete certificate replays reduce a finite seventeen-square research census without
+        changing the global bound.
+    details: |-
+      - The standing Python verifier accepted all 12 certificates from a clean checkout, and the Rust verifier agreed on all 26 compared receipt fields. The complete deciding objects and receipts are retained.
+      - The known endpoint survives, and the difficult distance-two subset falls from 95 symmetry classes to 94.
+      - This is a reduction of the specified finite search. It does not close the global proof or improve the numerical lower bound.
+    topics:
+      - verification
+    references:
+      - label: Experiment 317 and its acceptance evidence
+        target: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+      - label: Hosted certificate manifest
+        target: packing/hosted/n17-issue-472-kernel-certificates.yaml
+  - id: overbeck-n17-second-review
+    date: '2026-10-13'
+    title: A Second Review of Overbeck’s 17-Square Candidate Proof
+    pull_requests:
+      - 577
+    summary: |-
+      A second project AI review independently re-derived the normalized 52-row gate in Marc Leonard Overbeck’s candidate proof for 17 squares. It found no blocking defect in the parts examined and retained the review’s checking programs. The complete proof remains an unverified report at V0/C1.
+    significance:
+      score: 3
+      rationale: An independent reconstruction of a central proof component is a notable review milestone,
+        without a complete proof replay.
+    details: |-
+      - The reviewer reconstructed the gate coefficients independently of the producer’s code, checked the 52 base-gap identities and audited 152 separating alternatives. The review records nine nonblocking findings and its unread scope.
+      - The full capture computation and tree certificates were not replayed. The checks establish a bounded review milestone, without moving the verified 17-square bounds.
+      - The review was conducted by a separately prompted project AI agent, blind to the first review until its findings were written. It is not a human oversight record.
+    topics:
+      - verification
+      - audit
+    references:
+      - label: Second adversarial review and its dated corrections
+        target: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md
+      - label: Candidate proof record
+        target: https://jlevy.github.io/squares/result/t-153.html
+    result_ids:
+      - T-153
+  - id: atlas-posters-october-results-update
+    date: '2026-10-15'
+    title: Atlas Posters Updated With the October Packing Results
+    pull_requests:
+      - 619
+    summary: |-
+      Both downloadable atlas posters now include the packings and bounds already adopted in the case records, with current contributor credits and regularized drawings. The posters are available as SVG, PNG and PDF in infographic edition v0.6.1. The lower-bounds paper is published as v0.4.7.
+    significance:
+      score: 2
+      rationale: "Refreshes existing posters to already adopted data, repairs the PDF command/pagination and closes tutorial wording gaps. The formats and publications already exist; this is ordinary publication refresh and repair, without a distinct new reader capability or mathematical result."
+    details: |-
+      - The exports include the reviewed packing work of Francisco Couzo, Daniil Ostashev, PingYou Ltd and Mykhailo Polkovskyi, with credit for the earlier designs and regularization methods.
+      - Both poster sizes carry the same infographic edition. Site and paper editions remain independent.
+      - The lower-bounds paper includes the refreshed atlas and the tutorial states the scope of its counting-certificate limitations.
+    topics:
+      - project
+      - upper-bound
+      - verification
+    references:
+      - label: Atlas and downloadable editions
+        target: packing/atlas/known-best/README.md
+      - label: Published release and verification
+        target: https://github.com/jlevy/squares/actions/runs/38739226771/job/116439283652
+    releases:
+      - component: site
+        version: v0.7.7
+      - component: infographics
+        version: v0.6.1
+      - component: paper:n11-lower-bounds-explainer
+        version: v0.4.7
+    publication:
+      date: '2026-10-15'
+      evidence: https://github.com/jlevy/squares/actions/runs/38739226771/job/116439283652
+    artifacts:
+      - kind: pdf
+        label: Current 1–100 packing infographic
+        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+      - kind: pdf
+        label: Current 1–324 packing poster
+        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+      - kind: paper
+        label: Lower-bounds paper
+        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
 deliveries:
 - number: 618
   title: 'fix(ci): keep push and release validation in their quick lanes'
@@ -1443,6 +1800,236 @@ deliveries:
   merged_at: '2026-10-14T12:16:17Z'
   base_ref: main
   merge_commit: 37e6757ed4c51a1d93f2f999814c2a5efbe2a223
+- number: 398
+  title: 'check_published_site: the workbench startup honours SQPACK_CHROMIUM'
+  merged_at: '2026-10-11T07:40:30Z'
+  base_ref: main
+  merge_commit: 5b0eb012e09b48b5044aacb439b4cfacf38935f5
+- number: 404
+  title: 'research: consolidate n17 conditional proof results and joint-centre strategy'
+  merged_at: '2026-10-09T09:22:29Z'
+  base_ref: main
+  merge_commit: 533dd42c68863e9c79c167d6e49662242803b1f3
+- number: 408
+  title: Replay complete H258 prerequisites without historical Git objects
+  merged_at: '2026-10-09T10:12:40Z'
+  base_ref: main
+  merge_commit: bead35d932a42ec6f0924a4ec7b4e1fd852e67f7
+- number: 409
+  title: Profile existing exact and dyadic intervals on four selected expressions
+  merged_at: '2026-10-09T10:12:27Z'
+  base_ref: main
+  merge_commit: 0abf9b6070df934a2b2b5a7e7de92d3637166935
+- number: 434
+  title: 'research: confirm three rational refinements with complete public replay custody'
+  merged_at: '2026-10-09T00:59:53Z'
+  base_ref: main
+  merge_commit: b810432cccf7849920dda3aad76882f191464eb5
+- number: 439
+  title: 'research: retain reported asymptotic papers and reconcile intake'
+  merged_at: '2026-10-09T01:54:32Z'
+  base_ref: main
+  merge_commit: 24fe88bc44967970d72f7d1efc9bf2a325b74f17
+- number: 440
+  title: 'research: review revised asymptotic proof chains and interval consequences'
+  merged_at: '2026-10-09T02:40:29Z'
+  base_ref: main
+  merge_commit: d43ea686d555efe3d866e88b960f60c9d2e0a7d1
+- number: 441
+  title: 'research: confirm Daniel packings and retain exact/local reports'
+  merged_at: '2026-10-09T02:40:31Z'
+  base_ref: codex/import-k2-minus-c-v12
+  merge_commit: d43ea686d555efe3d866e88b960f60c9d2e0a7d1
+  delivery_to_main:
+    commit: d43ea686d555efe3d866e88b960f60c9d2e0a7d1
+    evidence: https://github.com/jlevy/squares/commit/d43ea686d555efe3d866e88b960f60c9d2e0a7d1
+- number: 442
+  title: 'research: import complete ry-xu rational and radical constructions'
+  merged_at: '2026-10-09T19:12:45Z'
+  base_ref: main
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 443
+  title: 'research: close FN1 input custody with complete receipt retention'
+  merged_at: '2026-10-09T19:12:46Z'
+  base_ref: codex/import-ry-xu-432
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+  delivery_to_main:
+    commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+    evidence: https://github.com/jlevy/squares/commit/d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 448
+  title: 'research: retain Gupta refinements and adopt fourteen reports'
+  merged_at: '2026-10-09T19:12:48Z'
+  base_ref: codex/import-fn1-binding-supplement
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+  delivery_to_main:
+    commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+    evidence: https://github.com/jlevy/squares/commit/d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 449
+  title: 'research: record n68 v1.2 root and restricted-family reports'
+  merged_at: '2026-10-09T19:12:49Z'
+  base_ref: codex/import-gupta-refinements-438
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+  delivery_to_main:
+    commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+    evidence: https://github.com/jlevy/squares/commit/d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 450
+  title: 'research: record seven fine-net bounds and dated n17 status'
+  merged_at: '2026-10-09T19:12:51Z'
+  base_ref: codex/intake-rehwaldt-n68-v12
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+  delivery_to_main:
+    commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+    evidence: https://github.com/jlevy/squares/commit/d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 452
+  title: 'fix: release n17 BB node records after their last selected use'
+  merged_at: '2026-10-09T08:34:11Z'
+  base_ref: main
+  merge_commit: c3ad5593c145628b395cabbefec5ff5d074f23b6
+- number: 453
+  title: 'fix: publish native n17 kernel receipts atomically'
+  merged_at: '2026-10-09T08:34:43Z'
+  base_ref: main
+  merge_commit: e0b02b3ab055fcf5ddae8c904dfdce14f2c7b5ad
+- number: 454
+  title: 'research: reconcile n17 patterns and review exact SOS strategy'
+  merged_at: '2026-10-09T09:22:31Z'
+  base_ref: codex/n17-state-review
+  merge_commit: 533dd42c68863e9c79c167d6e49662242803b1f3
+  delivery_to_main:
+    commit: 533dd42c68863e9c79c167d6e49662242803b1f3
+    evidence: https://github.com/jlevy/squares/commit/533dd42c68863e9c79c167d6e49662242803b1f3
+- number: 456
+  title: 'fix(site): complete static rendering and rollout validation'
+  merged_at: '2026-10-08T21:43:49Z'
+  base_ref: main
+  merge_commit: 91ca9b824873bde5aa085d7e2532bff366e0878b
+- number: 458
+  title: 'docs: publish square packing methods survey v0.1.0'
+  merged_at: '2026-10-09T03:39:21Z'
+  base_ref: main
+  merge_commit: 3213d651b880d7768bce8506efaf75c2089aeb4f
+- number: 459
+  title: 'research: confirm Gupta rational refinement feasibility'
+  merged_at: '2026-10-09T19:12:52Z'
+  base_ref: codex/intake-fine-net-446
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+  delivery_to_main:
+    commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+    evidence: https://github.com/jlevy/squares/commit/d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 460
+  title: 'research: import eight Couzo rational refinement reports'
+  merged_at: '2026-10-09T19:12:53Z'
+  base_ref: codex/confirm-gupta-refinements-438
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+  delivery_to_main:
+    commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+    evidence: https://github.com/jlevy/squares/commit/d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 461
+  title: 'feat(n17): verify the exact shared-centre endpoint with an explicit frame action'
+  merged_at: '2026-10-09T09:22:32Z'
+  base_ref: codex/n17-issue-roster-reconciliation
+  merge_commit: 533dd42c68863e9c79c167d6e49662242803b1f3
+  delivery_to_main:
+    commit: 533dd42c68863e9c79c167d6e49662242803b1f3
+    evidence: https://github.com/jlevy/squares/commit/533dd42c68863e9c79c167d6e49662242803b1f3
+- number: 463
+  title: 'intake: preserve dated #375 certificate custody at source-only assurance'
+  merged_at: '2026-10-09T19:12:54Z'
+  base_ref: codex/import-couzo-refinements-451
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+  delivery_to_main:
+    commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+    evidence: https://github.com/jlevy/squares/commit/d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 464
+  title: 'research: assess exact SOS and weighted-vertex reductions for n17'
+  merged_at: '2026-10-09T10:12:14Z'
+  base_ref: main
+  merge_commit: b96a82c630516d688f762da286ee946d7ba728db
+- number: 466
+  title: 'research: preserve twenty Couzo reports with derived-only source custody'
+  merged_at: '2026-10-09T19:12:55Z'
+  base_ref: codex/import-dated-375-custody
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+  delivery_to_main:
+    commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+    evidence: https://github.com/jlevy/squares/commit/d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 468
+  title: 'chore: preserve optional font diagnostic with immutable input provenance'
+  merged_at: '2026-10-09T19:12:57Z'
+  base_ref: codex/import-couzo20-custody-1545
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+  delivery_to_main:
+    commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+    evidence: https://github.com/jlevy/squares/commit/d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 469
+  title: 'research: import five Couzo follow-up certificates as source-only T-130 (n = 84, 86, 105,
+    175, 270)'
+  merged_at: '2026-10-09T19:12:58Z'
+  base_ref: codex/intake-font-diagnostic-449
+  merge_commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+  delivery_to_main:
+    commit: d3860c97a7037203701bcf262990ea0dee3a92dc
+    evidence: https://github.com/jlevy/squares/commit/d3860c97a7037203701bcf262990ea0dee3a92dc
+- number: 473
+  title: 'research(n17): X-051 W3 program review, H-325 to H-340, and main''s post-merge ceiling fix'
+  merged_at: '2026-10-09T11:50:36Z'
+  base_ref: main
+  merge_commit: 6a0499ba4ed83e147488b2ee584af500207d9d1f
+- number: 475
+  title: 'research(n17): X-052 survey and completion plan; admit #472''s 12 kernel certificates (exp-317)'
+  merged_at: '2026-10-09T23:25:35Z'
+  base_ref: main
+  merge_commit: 0f16c033a87464cfab127ba54748ca5e2536babd
+- number: 571
+  title: 'records: credit Kleddamag as Overbeck, recording GitHub Kleddamag and X @kleddamag (stacked
+    on #560)'
+  merged_at: '2026-10-13T17:07:05Z'
+  base_ref: claude/wizardly-meitner-wqn4x3-k17-records
+  merge_commit: 5584b2283c4047a833e415ddd73959316a04721d
+  delivery_to_main:
+    commit: 5584b2283c4047a833e415ddd73959316a04721d
+    evidence: https://github.com/jlevy/squares/commit/5584b2283c4047a833e415ddd73959316a04721d
+- number: 577
+  title: 'review: the second adversarial review of T-153, accepted, the 52-row gate re-derived (stacked
+    on #571)'
+  merged_at: '2026-10-13T17:07:06Z'
+  base_ref: claude/wizardly-meitner-wqn4x3-overbeck-credits
+  merge_commit: 5584b2283c4047a833e415ddd73959316a04721d
+  delivery_to_main:
+    commit: 5584b2283c4047a833e415ddd73959316a04721d
+    evidence: https://github.com/jlevy/squares/commit/5584b2283c4047a833e415ddd73959316a04721d
+- number: 608
+  title: 'records: credit Ryan Xu by name, T-174''s decided comparisons, T-180''s calibration, Fang''s
+    14 direct certificates, and the #602/#605 News entries'
+  merged_at: '2026-10-14T23:39:26Z'
+  base_ref: main
+  merge_commit: 0dd9003e084923a14c0cd2622fec867614dda36e
+- number: 609
+  title: 'fix(check_requests): never call a sampled replay confirmed'
+  merged_at: '2026-10-15T00:23:58Z'
+  base_ref: main
+  merge_commit: 6964362b5c225c519b4d6cd52663a3d795b05292
+- number: 611
+  title: 'fix(validation): copy back only what worker checkers read, 14.05 MB more snapshot headroom
+    (think-b6ir, think-wzmf)'
+  merged_at: '2026-10-15T05:48:26Z'
+  base_ref: main
+  merge_commit: 2a919ccec2c2b60912ed10abf619df2ee88cdb65
+- number: 612
+  title: 'research: the 14 October evening intake records, T-185 to T-187 in report order'
+  merged_at: '2026-10-15T05:48:49Z'
+  base_ref: main
+  merge_commit: c4c690a3e60e613ec6c063d4f27c5f627e734ea5
+- number: 615
+  title: 'fix(validation): declare identity.measured_in as a worker input (main red since #612)'
+  merged_at: '2026-10-15T08:35:09Z'
+  base_ref: main
+  merge_commit: 19bd792d10bc251af3490209b5ca1482535c6e2e
+- number: 619
+  title: 'fix(publication): close tutorial delivery and refresh atlas exports'
+  merged_at: '2026-10-15T13:01:21Z'
+  base_ref: main
+  merge_commit: 31eaf6333c5d5b6b3d111241768cdd3d30982588
 stacks:
 - id: 498
   pull_requests:
@@ -1525,6 +2112,42 @@ coverage:
   - 604
   - 617
   - 618
+  - 398
+  - 404
+  - 408
+  - 409
+  - 434
+  - 439
+  - 440
+  - 441
+  - 442
+  - 443
+  - 448
+  - 449
+  - 450
+  - 452
+  - 453
+  - 454
+  - 456
+  - 458
+  - 459
+  - 460
+  - 461
+  - 463
+  - 464
+  - 466
+  - 468
+  - 469
+  - 473
+  - 475
+  - 571
+  - 577
+  - 608
+  - 609
+  - 611
+  - 612
+  - 615
+  - 619
   omissions:
   - pull_request: 618
     reason: 'S2 routine engineering: internal quick-push and release-test selection changes,
@@ -1566,8 +2189,79 @@ coverage:
   - pull_request: 482
     reason: Internal proof/confirmation component planning; no new result or public deliverable.
   - pull_request: 480
-    reason: Temporary CI-budget maintenance and retained measurements; the structural efficiency improvement
-      remains future work.
+    reason: "S2: Changes operational gate ceilings, records and tests, including the pull-request hang-detector refusal thresholds. This is routine behavior maintenance, not merely bookkeeping or formatting, so S2 is more consistent than S1."
+  - pull_request: 398
+    reason: 'S2: A narrow browser-launch configuration repair makes the deployment checker honor SQPACK_CHROMIUM.
+      No public packing, feature or result changes.'
+  - pull_request: 404
+    reason: "S2: Consolidates conditional restrictions, finite consumers and internal route evidence. It establishes no ordinary admission, T result or bound movement; this is an intermediate research/tooling checkpoint, not a distinct public research milestone."
+  - pull_request: 408
+    reason: 'S2: Replaces historical Git-object prerequisites with complete semantic replay for an existing
+      H258 consumer. This repairs internal portability without recertifying a new mathematical result.'
+  - pull_request: 409
+    reason: 'S2: A four-expression arithmetic benchmark finds selected-fixture savings only. It neither
+      adopts a production backend nor establishes a representative performance gain; omit News.'
+  - pull_request: 434
+    reason: 'S2: Newly registered T-117 and T-118 are both S2 in results.yaml: rounding-scale exact
+      refinements of existing constructions at 105, 292 and 68. Complete replay custody is useful but
+      does not raise them to a substantive new result.'
+  - pull_request: 443
+    reason: 'S2: Closes the original-input custody chain and preserves complete earlier receipts. Its
+      explicit scope is input bytes only, with no bound or rating change.'
+  - pull_request: 449
+    reason: 'S2: Retains an exact-root and restricted-family report for the existing 68-square arrangement.
+      No T number, rating, standing bound or geometry changes; narrow source-report detail merits S2
+      and no standalone News.'
+  - pull_request: 452
+    reason: 'S2: Repairs decoded-node lifetime in the n17 verifier, with a 65-node fixture. The large-certificate
+      replay and any new scientific admission are outside scope.'
+  - pull_request: 453
+    reason: 'S2: Makes existing native receipt publication atomic and repairs a browser navigation wait.
+      Certificate acceptance, arithmetic and the n17 bound remain unchanged.'
+  - pull_request: 454
+    reason: 'S2: Reconciles attributed contributor pattern counts and updates an internal proof strategy.
+      All contributor classes remain unadmitted; no new exclusion or mathematical result is established.'
+  - pull_request: 460
+    reason: 'S3: Introduces S3 T-128, eight smaller reported exact packings. Later #487’s existing News
+      already covers these certificates and their completed replay; retain that subject coverage rather
+      than duplicate it. Related News: october-ten-intake-replays.'
+  - pull_request: 461
+    reason: 'S2: Implements an exact positive relaxation control with an explicit frame action. All
+      exclusion/admission/global-proof flags are false, and no first-eight target protocol ran. Useful
+      internal research tooling, not a new packing result or public project launch.'
+  - pull_request: 463
+    reason: 'S1: Introduces historical T-129 at S1: three dated certificates already superseded by better
+      verified sides. Source retention changes no selected record or assurance; do not inherit old T-098/T-101
+      significance.'
+  - pull_request: 464
+    reason: "S2: A scoped source assessment and exact analytical obstruction inform the internal n17 pilot sequence. It runs no target solver experiment and establishes no admitted exclusion, new result or bound. Technical research preparation exceeds pure planning but falls below a distinct S3 milestone."
+  - pull_request: 468
+    reason: 'S2: Adds an optional pinned diagnostic for historical font behavior. It neither changes
+      the public page nor supplies a new result; ordinary internal reliability tooling.'
+  - pull_request: 469
+    reason: 'S3: Introduces S3 T-130, five smaller reported rational certificates. Existing october-ten-intake-replays
+      already announces their replay/confirmation. Later 375/378 metadata are separately covered by
+      #479. Related News: october-ten-intake-replays, dated-beyond-horizon-reports.'
+  - pull_request: 473
+    reason: "S2: The W3 slice proposes hypotheses and reviews routes without running a target experiment, certifying a result or changing the census. Its accompanying test/gate repairs make the PR routine S2 maintenance; its planning component alone would be S1."
+  - pull_request: 571
+    reason: 'S2: Corrects credits to Marc Leonard Overbeck across existing records and reader surfaces.
+      Existing proof articles already use the corrected name; no new theorem announcement is justified.'
+  - pull_request: 608
+    reason: 'S2: Updates Ryan Xu credits, records earlier comparison/calibration evidence, and backfills
+      News for PR602/605. No replay or new result; retain announcement ownership at those original PRs.'
+  - pull_request: 609
+    reason: 'S2: Repairs reply drafts that called sampled checks confirmation. No public page or result
+      record changes.'
+  - pull_request: 611
+    reason: 'S2: Reduces private validation-worker snapshots by about 14 MB and repairs inputs. No new
+      public reader capability or mathematical result.'
+  - pull_request: 612
+    reason: 'S2: Maximum new result score is S2: T-185/T-186 are S1 and T-187 is S2. All remain V0/C0
+      and none is adopted. Explicit omission, not a manufactured S3 evening-intake story.'
+  - pull_request: 615
+    reason: 'S2: Repairs validation-worker inputs for identity measurements. No public artifact, record
+      or result changes.'
 frozen_entries:
 - id: october-fourteen-reviewed-packing-adoptions
   date: '2026-10-15'

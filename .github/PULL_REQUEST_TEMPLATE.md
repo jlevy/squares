@@ -2,6 +2,15 @@
 Cost is 2–4 sentences: what the slice is, the honest wall, what it does not do.
 Do not list every experiment. Dispositions are decisions, not probes.
 From packing/: `python -m devtools.check_pr_description --file BODY.md`
+
+Before merge, assign exactly one S1–S5 label for the highest genuinely new delivered
+contribution, with its rationale in this description. Use the conservative rubric in
+packing/campaign/result-import.md, "Label the PR and Prepare News", including its
+examples, result inheritance and individual stack-layer rules. The optional project
+label is independent of the S score and can accompany S1/S2.
+Prepare appropriate News wording or an explicit editorial omission under that policy;
+retain actual event dates, source PRs, public artifacts and verification/publication
+limits. Check deployment before claiming publication.
 -->
 
 ## What this branch cost
@@ -77,6 +86,8 @@ candidate order, any operator revision, and the one selected next entry point.
 - Documentation review:
 - Selected next entry:
 - Deferred candidates:
+- [ ] PR has exactly one S1–S5 label, an editorial rationale and its News/changelog
+  disposition; project label applied where appropriate.
 
 ## Limits
 

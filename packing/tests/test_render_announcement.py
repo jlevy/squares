@@ -639,9 +639,16 @@ def test_a_refinement_credits_the_person_its_headline_names_singular_or_plural(
     )
     assert ": Robert Barnett, refining Ryan Xu's packings " in lines[1]
     both = [ra.Count(n, UPPER, exact("13")) for n in (146, 261)]
-    assert ra.worked_on(records.results["T-150"], both, records, ra.Names()) == (
+    names = ra.Names(full={"Xu": "Ryan Xu"})
+    assert ra.worked_on(records.results["T-150"], both, records, names) == (
         "refining Ryan Xu's packings"
     )
+    names = ra.Names({"Xu": handle("Xu", "from_record")}, names.full)
+    assert ra.worked_on(records.results["T-150"], both, records, names) == (
+        "refining @from_record's packings"
+    )
+    written = {**records.results["T-150"], "headline": "refinements of Ryan Xu's packings"}
+    assert ra.worked_on(written, both, records, ra.Names()) == ("refining Ryan Xu's packings")
 
 
 def test_a_refinement_of_a_requests_packings_credits_the_entry_its_claim_names(

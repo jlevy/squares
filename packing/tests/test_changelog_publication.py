@@ -41,7 +41,7 @@ def test_news_keeps_public_launches_and_archives_maintenance_in_github(
         anchor = render_changelog.entry_anchor(entry["id"])
         assert f'id="{anchor}"' in history
         assert f'id="{anchor}"' in github
-        excluded = "news_exclusion" in entry
+        excluded = "news_exclusion" in entry or entry["significance"]["score"] < 3
         if excluded:
             target = render_changelog.archived_news_targets(document)[anchor]
             assert f'href="{target}" data-news-target' in history
@@ -105,6 +105,8 @@ def test_news_has_one_card_per_entry_and_home_highlights_three_existing_s5_resul
 ) -> None:
     document, news, _github, about, home = views
     ordered = render_changelog.news_entries(document)
+    assert {entry["significance"]["score"] for entry in ordered} <= {3, 4, 5}
+    assert re.findall(r'<button[^>]*data-news-score="(\d)"', news) == ["3", "4", "5"]
     assert re.findall(r'data-news-entry="([^"]+)"', news) == [e["id"] for e in ordered]
     assert re.findall(r'data-news-day="([^"]+)"', news) == [e["date"] for e in ordered]
     for day in {entry["date"] for entry in ordered}:
@@ -138,7 +140,7 @@ def test_news_cards_keep_the_actual_article_and_structured_math_once(
     formula: str, structure: str
 ) -> None:
     document = copy.deepcopy(render_changelog.load())
-    first = render_changelog.ordered_entries(document)[0]
+    first = render_changelog.news_entries(document)[0]
     first["summary"] = f"Verified **bound & label** ${formula}$. Use `<tag>`."
     first["details"] = "Actual article detail with a [proof](https://example.com/proof)."
     rendered = render_changelog.render_news(document, limit=1)

@@ -1297,7 +1297,8 @@ body {
     var(--kpress-doc-bg)
   );
 }
-.site-chip[data-news-topic="engineering"] {
+.site-chip[data-news-topic="engineering"],
+.site-chip[data-news-topic="project"] {
   background: color-mix(
     in oklab,
     var(--kpress-doc-accent) var(--site-chip-tint),
@@ -1365,7 +1366,7 @@ body {
   font-size: var(--site-font-size-note);
   font-variant-numeric: tabular-nums;
   font-weight: var(--site-font-weight-sans-medium);
-  gap: 0.08em;
+  gap: 0.18em;
   inline-size: 5.5em;
   justify-content: center;
   padding-inline: 0.28em;

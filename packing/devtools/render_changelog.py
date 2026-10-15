@@ -710,13 +710,18 @@ def ordered_entries(document: Document) -> list[Document]:
 
 
 def news_entries(document: Document) -> list[Document]:
-    """Public announcements; a reasoned exclusion leaves the full history intact."""
-    return [entry for entry in ordered_entries(document) if "news_exclusion" not in entry]
+    """S3 to S5 public announcements; lower scores remain in the GitHub history."""
+    return [
+        entry
+        for entry in ordered_entries(document)
+        if "news_exclusion" not in entry and entry_significance(entry)["score"] >= 3
+    ]
 
 
 def archived_news_targets(document: Document) -> dict[str, str]:
     """Retired article and day bookmarks still reach their retained changelog entries."""
-    excluded = [entry for entry in document["entries"] if "news_exclusion" in entry]
+    public_ids = {entry["id"] for entry in news_entries(document)}
+    excluded = [entry for entry in document["entries"] if entry["id"] not in public_ids]
     anchors = [entry_anchor(entry["id"]) for entry in excluded]
     public_days = {entry["date"] for entry in news_entries(document)}
     anchors.extend(
@@ -785,7 +790,7 @@ def news_filters(topics_present: set[str] | None = None) -> str:
     scores = "".join(
         f'<button type="button" data-news-score="{score}" '
         f'aria-pressed="{str(score >= 4).lower()}">S{score}</button>'
-        for score in range(1, 6)
+        for score in range(3, 6)
     )
     topics = "".join(
         f'<button type="button" data-news-topic="{topic}" aria-pressed="true">{label}</button>'

@@ -1198,7 +1198,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                     "news.html",
                     '[aria-labelledby="news-significance-label"]',
                     '[data-news-score="4"]',
-                    '[data-news-score="1"]',
+                    '[data-news-score="3"]',
                 ),
                 (
                     "topics",
@@ -1323,11 +1323,11 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         check(set())
         assert parse_qs(urlsplit(page.url).query)["news-s"] == ["none"]
         page.locator('[data-news-all="scores"]').click()
-        check({1, 2, 3, 4, 5})
+        check({3, 4, 5})
         page.locator("[data-news-reset]").click()
         check({4, 5})
         page.go_back(wait_until="load")
-        check({1, 2, 3, 4, 5})
+        check({3, 4, 5})
         page.go_forward(wait_until="load")
         check({4, 5})
         low = max(

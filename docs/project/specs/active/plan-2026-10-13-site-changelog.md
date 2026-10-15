@@ -516,17 +516,11 @@ No unresolved question blocks the draft implementation plan.
 Each News entry requires `significance: {score, rationale}`: an integer S1–S5 and a
 nonempty plain-text editorial explanation.
 Importance is separate from V/C truth.
-An announcement of a new registered result inherits that result’s score; a grouped
-announcement takes the maximum of the actual new results.
-An incidental citation never assigns an article the cited result’s score.
-
-| Score | News anchor |
-| --- | --- |
-| S1 | Minor housekeeping |
-| S2 | Routine engineering or internal reliability |
-| S3 | A notable focused public improvement, verification, method explanation or new S3 result |
-| S4 | A substantial new result or major public capability or policy launch |
-| S5 | A landmark mathematical advance or major resolution |
+The intake runbook’s
+[Label the PR and Prepare News](../../../../packing/campaign/result-import.md#label-the-pr-and-prepare-news)
+owns the conservative rubric, examples, result inheritance, grouping and individual
+stack-layer rules, and the independent Project label.
+The PR template points to that policy.
 
 The archive has keyboard- and touch-operable significance and topic toggles.
 S4/S5 and all topics are the defaults; choices within each facet combine with OR and the
@@ -545,9 +539,47 @@ meter. News and Atlas expansion footers share a centering rule.
 Filtered cards remeasure on revelation and width changes; the existing ten-line fade,
 click/tap expansion, hover wash and reduced-motion behavior remain.
 
-Importing a new candidate requires an explicit editorial score/rationale in retained
-metadata or the paired `--significance` and `--significance-rationale` CLI options.
-The importer never derives importance from incidental result references.
+Every PR receives exactly one S1–S5 GitHub label under the intake policy.
+News contains eligible S3–S5 entries; intermediate research checkpoints can have an
+editorial omission. S1/S2 stay in the complete changelog or coverage audit.
+News defaults to S4/S5 and offers S3 through its filters.
+
+The importer reads GitHub label objects or retained label strings and takes the score
+from the S label. An explicit editorial rationale remains required in retained
+`significance` metadata or `--significance-rationale`; editors need not retype the
+score. Multiple S labels and conflicts with an explicit score are rejected.
+Unlabeled historical JSON remains supported with explicit score/rationale metadata or
+the CLI options. Incidental result references never derive importance.
+
+Draft wording and assign labels before merge, retain the actual event date and delivered
+claim limits, then check the deployed entry and public artifacts before announcing
+publication. The PR template includes this disposition without changing its required
+section order.
+
+## Retrospective PR Classification, October 8–15
+
+The seven-day window from 2026-10-08 17:20:10 UTC through 2026-10-15 17:20:10 UTC
+contains 94 merged PRs.
+Every PR has an explicit News or omission disposition in the delivery coverage,
+including internal maintenance.
+Classification assigns nine S1, 48 S2, 27 S3, eight S4 and two S5 labels; 24 PRs also
+receive Project.
+The conservative review replaced 20 earlier scores; 57 of the 94 PRs are
+S1/S2.
+
+The backfill adds eleven changelog entries, nine eligible for News: earlier packing
+reports and certificates, the asymptotic deficiency families, the original methods
+survey, the finite seventeen-square certificate admission and a second candidate-proof
+review. Routine static-math repairs and the October poster refresh remain S2 entries in
+the complete changelog.
+Existing articles are corrected where their wording, score or topic confused new work
+with an incidental citation or maintenance.
+Existing article identities, dates and PR membership remain fixed.
+
+S1/S2 remain in the complete GitHub history.
+S3 intermediate research checkpoints can have an explicit omission when they add no
+distinct reader-facing development.
+The public News archive contains S3/S4/S5 only and defaults to S4/S5.
 
 ## References
 
@@ -564,7 +596,8 @@ The importer never derives importance from incidental result references.
 
 Results, homepage News and the News archive use the same stable topic keys and
 sentence-case labels from `packing/devtools/site_topics.py`. Registered result kinds
-retain their precise meanings; Engineering and Verification cover project news.
+retain their precise meanings; Project, Engineering and Verification cover project news.
+Project uses the existing Engineering chip fill and never becomes a result kind.
 Documentation remains an internal contribution category, not a public topic.
 Pure document-maintenance entries use `news_exclusion` and remain in the full changelog;
 their earlier News bookmarks forward there.

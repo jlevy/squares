@@ -698,6 +698,144 @@ def test_imported_result_citations_do_not_assign_importance() -> None:
     assert candidate["entries"][-1]["significance"] == row["significance"]
 
 
+def test_pr_label_import_keeps_editorial_rationale_and_project_topic(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    row = {
+        "number": 700,
+        "title": "Project capability mentioning T-060",
+        "body": "See T-060 for background.",
+        "state": "MERGED",
+        "mergedAt": "2026-10-15T00:01:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+        "labels": [{"name": "S3"}, {"name": "project"}],
+    }
+    calls = []
+
+    def github(args, **_kwargs):
+        calls.append(args)
+        return subprocess.CompletedProcess(args, 0, stdout=json.dumps(row))
+
+    monkeypatch.setattr(import_changelog.subprocess, "run", github)
+    monkeypatch.setattr(import_changelog, "verify_main_delivery", lambda *_args: None)
+    output = tmp_path / "candidate.yaml"
+    args = [
+        "--pr",
+        "700",
+        "--baseline",
+        str(tmp_path / "absent.yaml"),
+        "--output",
+        str(output),
+    ]
+    assert import_changelog.main(args) == 1
+    assert not output.exists()
+    rationale = "A new focused public project capability."
+    assert (
+        import_changelog.main(
+            [*args, "--significance", "4", "--significance-rationale", rationale]
+        )
+        == 1
+    )
+    assert not output.exists()
+    assert import_changelog.main([*args, "--significance-rationale", rationale]) == 0
+    assert "labels" in calls[-1][-1].split(",")
+    data = render_changelog.load(output)
+    entry = data["entries"][-1]
+    assert entry["significance"] == {"score": 3, "rationale": rationale}
+    assert entry["topics"] == ["project"]
+    assert 'data-news-topic="project">Project</span>' in render_changelog.render_news(data)
+    row["labels"] = ["project", "S2"]
+    row["significance"] = {"rationale": rationale}
+    data = import_changelog.draft([row])
+    assert data["entries"][0]["significance"]["score"] == 2
+    assert 'id="changelog-entry-pr-700"' in render_changelog.render_markdown(data)
+    assert 'data-news-entry="pr-700"' not in render_changelog.render_news(data)
+
+
+def test_pr_significance_labels_reject_ambiguity_and_metadata_score_conflicts() -> None:
+    row = {
+        "number": 700,
+        "title": "New project work",
+        "state": "MERGED",
+        "mergedAt": "2026-10-15T00:01:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+        "significance": {"score": 3, "rationale": "A focused public improvement."},
+    }
+    for labels in (["S3", "S4"], [{"name": "S3"}, {"name": "S4"}], ["S3", "S3"]):
+        with pytest.raises(ValueError, match="exactly one"):
+            import_changelog.draft([{**row, "labels": labels}])
+    with pytest.raises(ValueError, match="conflict"):
+        import_changelog.draft([{**row, "labels": ["S4"]}])
+    for score in (True, 0, 6, "3"):
+        with pytest.raises(ValueError, match="score"):
+            import_changelog.draft(
+                [{**row, "labels": ["S3"], "significance": {"score": score}}]
+            )
+    retained = import_changelog.draft([row])
+    assert retained["entries"][0]["significance"] == row["significance"]
+    for score in range(1, 6):
+        labeled = {
+            **row,
+            "labels": [f"S{score}"],
+            "significance": {"rationale": row["significance"]["rationale"]},
+        }
+        entry = import_changelog.draft([labeled])["entries"][0]
+        assert entry["significance"]["score"] == score
+
+
+def test_retained_pr_reimport_preserves_entries_and_omissions_without_new_ratings() -> None:
+    for omitted in (False, True):
+        baseline = document()
+        if omitted:
+            baseline["entries"].pop()
+            baseline["coverage"]["omissions"] = [
+                {"pull_request": 549, "reason": "Administrative closeout"}
+            ]
+        delivery = baseline["deliveries"][-1]
+        row = {
+            "number": delivery["number"],
+            "title": delivery["title"],
+            "state": "MERGED",
+            "mergedAt": delivery["merged_at"],
+            "baseRefName": delivery["base_ref"],
+            "mergeCommit": {"oid": delivery["merge_commit"]},
+        }
+        for labels in ([], ["S4", "project"]):
+            candidate = import_changelog.draft([{**row, "labels": labels}], baseline)
+            for field in ("entries", "deliveries", "coverage"):
+                assert candidate[field] == baseline[field]
+        with pytest.raises(ValueError, match="exactly one"):
+            import_changelog.draft([{**row, "labels": ["S3", "S4"]}], baseline)
+
+
+def test_score_like_labels_fail_for_new_and_retained_prs() -> None:
+    row = {
+        "number": 700,
+        "title": "A focused public improvement",
+        "state": "MERGED",
+        "mergedAt": "2026-10-15T00:01:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+        "significance": {"score": 3, "rationale": "A focused public improvement."},
+    }
+    retained = import_changelog.draft([row])
+    for name in ("S0", "S6", "S10", "S03", "s3", " S3 ", "S 3", "S+3", "S-3", "S3.0"):
+        for labels in (
+            [name],
+            ["S3", name],
+            [{"name": name}],
+            [{"name": "S3"}, {"name": name}],
+        ):
+            for baseline in (None, retained):
+                with pytest.raises(ValueError, match="invalid significance label"):
+                    import_changelog.draft([{**row, "labels": labels}], baseline)
+    candidate = import_changelog.draft([{**row, "labels": ["security", "project"]}])
+    assert candidate["entries"][0]["significance"] == row["significance"]
+    assert candidate["entries"][0]["topics"] == ["project"]
+
+
 def test_news_exclusion_keeps_history_and_fills_the_preview_from_eligible_entries() -> None:
     data = document()
     previous = copy.deepcopy(data)

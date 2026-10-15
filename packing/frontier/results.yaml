@@ -13305,7 +13305,7 @@ results:
   - id: T-128
     kind: upper-bound
     registered: '2026-10-08'
-    headline: Eight complete rational refinements from Francisco Couzo
+    headline: Eight complete rational refinements from Couzo
     claim: >-
       Eight complete rational source certificates by Francisco Couzo, reported on
       jlevy/squares#451, prove finite upper bounds at the exact sides they state: s(105) <=
@@ -13508,7 +13508,7 @@ results:
   - id: T-130
     kind: upper-bound
     registered: '2026-10-09'
-    headline: Five follow-up rational refinements from Francisco Couzo
+    headline: Five follow-up rational refinements from Couzo
     claim: >-
       Five complete rational source certificates by Francisco Couzo, reported in a comment
       on pull request jlevy/squares#460, prove finite upper bounds at the exact sides they
@@ -13655,7 +13655,7 @@ results:
   - id: T-131
     kind: upper-bound
     registered: '2026-10-09'
-    headline: "`s(132) ≤ 11.987099332245063…` from Evan Daniel's record hunt"
+    headline: "`s(132) ≤ 11.987099332245063…` from Daniel's record hunt"
     claim: >-
       One complete rational source certificate by Evan Daniel, reported on
       jlevy/squares#465, proves a finite upper bound at the exact side it states: s(132) <=
@@ -14063,7 +14063,7 @@ results:
   - id: T-134
     kind: upper-bound
     registered: '2026-10-10'
-    headline: Six exact rational certificates from Francisco Couzo
+    headline: Six exact rational certificates from Couzo
     claim: >-
       Six complete rational source certificates by Francisco Couzo, reported on
       jlevy/squares#476, prove finite upper bounds at the exact sides they state: s(132) <=
@@ -14228,7 +14228,7 @@ results:
   - id: T-135
     kind: upper-bound
     registered: '2026-10-10'
-    headline: A packing of 308 squares below the grid, from Kevin Fang
+    headline: A packing of 308 squares below the grid, from Fang
     claim: >-
       One complete rational source certificate by Kevin Fang, reported on
       jlevy/squares#484, proves a finite upper bound at the exact side it states: s(308) <=
@@ -14643,7 +14643,7 @@ results:
   - id: T-137
     kind: upper-bound
     registered: '2026-10-10'
-    headline: An exact rational refinement of Ryan Xu's packing of 70 squares
+    headline: An exact rational refinement of Xu's packing of 70 squares
     claim: >-
       One complete rational source certificate by Eric Deleeuw, reported on
       jlevy/squares#483, proves a finite upper bound at the exact side it states: s(70) <=
@@ -14970,7 +14970,7 @@ results:
   - id: T-139
     kind: upper-bound
     registered: '2026-10-10'
-    headline: A more precise certificate of Ryan Xu's 126-square arrangement, from Evan Daniel
+    headline: A more precise certificate of Xu's 126-square arrangement, from Daniel
     claim: >-
       One complete rational source certificate by Evan Daniel, published in his repository and
       reported by no issue, proves a finite upper bound at the exact side it states: s(126) <=
@@ -15108,7 +15108,7 @@ results:
   - id: T-140
     kind: upper-bound
     registered: '2026-10-10'
-    headline: Six more exact rational certificates from Francisco Couzo
+    headline: Six more exact rational certificates from Couzo
     claim: >-
       Six complete rational source certificates by Francisco Couzo, reported on
       jlevy/squares#488, prove finite upper bounds at the exact sides they state: s(132) <=
@@ -15278,7 +15278,7 @@ results:
   - id: T-141
     kind: upper-bound
     registered: '2026-10-10'
-    headline: Exact rational certificates at 132 and 308 from Evan Daniel's third record hunt
+    headline: Exact rational certificates at 132 and 308 from Daniel's third record hunt
     claim: >-
       Two complete rational source certificates by Evan Daniel, reported on
       jlevy/squares#489, prove finite upper bounds at the exact sides they state: s(132) <=
@@ -15920,7 +15920,7 @@ results:
   - id: T-146
     kind: upper-bound
     registered: '2026-10-10'
-    headline: Exact rational certificates at fifteen counts from Evan Daniel's regularized record lists
+    headline: Exact rational certificates at fifteen counts from Daniel's regularized record lists
     claim: >-
       Fifteen complete rational certificates from Evan Daniel's display-regularized record
       lists, which no issue reports, prove finite upper bounds at their exact sides: s(70)
@@ -16393,7 +16393,7 @@ results:
   - id: T-147
     kind: upper-bound
     registered: '2026-10-11'
-    headline: A packing of 207 squares from two placed patches of Ryan Xu's packing of 70
+    headline: A packing of 207 squares from two placed patches of Xu's packing of 70
     claim: >-
       One complete rational source certificate by PingYou Ltd, reported on
       jlevy/squares#503, proves a finite upper bound at the exact side it states: s(207) <=
@@ -16546,7 +16546,7 @@ results:
   - id: T-148
     kind: upper-bound
     registered: '2026-10-11'
-    headline: A packing of 153 squares built from Ryan Xu's packing of 70, its contacts reclosed at a new angle
+    headline: A packing of 153 squares built from Xu's packing of 70, its contacts reclosed at a new angle
     claim: >-
       One complete rational source certificate by PingYou Ltd, reported on
       jlevy/squares#504, proves a finite upper bound at the exact side it states: s(153) <=
@@ -16888,7 +16888,7 @@ results:
   - id: T-150
     kind: upper-bound
     registered: '2026-10-11'
-    headline: Exact rational refinements of Ryan Xu's packings of 146 and 261 squares
+    headline: Exact rational refinements of Xu's packings of 146 and 261 squares
     claim: >-
       Two complete rational source certificates by Robert Barnett, reported on
       jlevy/squares#505, prove finite upper bounds at the exact sides they state: s(146) <=
@@ -17735,9 +17735,9 @@ results:
       GitHub's server-side times its repository was public later on 12 October 2026, about
       six hours after this edition's release large-files-v1, and its release v1.0.0 about
       seven and three-quarter hours after it; n-017's priority notes give the times. It is
-      a separate proof that leaves no premise open within its stated trust boundary,
-      registered as a formalization: a Lean proof of this value by a route of its own,
-      which does not formalize this argument. Its source names this candidate as
+      a Lean proof using a different argument from Overbeck's candidate, registered as a
+      formalization. Its theorem includes the geometric justification for certificate
+      acceptance and every case exclusion. Its source names this candidate as
       independent and published on 12 October 2026. This entry stays the first report of
       the value and keeps the case's reported lower bound.
 
@@ -17778,11 +17778,11 @@ results:
     kind: formalization
     proves_kind: optimality
     registered: '2026-10-13'
-    headline: "`s(17) = 4.67553009360455…` in Lean 4, by a route of its own, with no premise left"
+    headline: "Fitzharding reports a Lean proof that `s(17) = 4.67553009360455…`"
     claim: >-
-      `s(17) = 4.67553009360455095163…`, T-153's value L, the side of John Bidwell's 1998
-      packing of seventeen unit squares, proved in Lean 4 by Oscar Fitzharding, by a route of
-      its own rather than by formalizing T-153's argument.
+      Oscar Fitzharding reports a Lean 4 proof that John Bidwell's 1998 packing of seventeen
+      unit squares is optimal: `s(17) = 4.67553009360455095163…`, T-153's value L. His proof
+      uses a different argument from Marc Leonard Overbeck's candidate proof (T-153).
 
       Its theorem, `Sq17.square17_optimality (L : ℝ) : Sq17.HalfPlaneAssembly.PlainPacking L
       ↔ Sq17.EndpointGeometry.side ≤ L`, says that seventeen closed unit squares, each
@@ -17803,7 +17803,8 @@ results:
       dual certificate over 93 boxes force the side to be exactly `side`. Every bridge from
       a trace to geometry is a Lean theorem.
 
-      The theorem has no certificate-acceptance or case-exclusion premise left. Its trust
+      The theorem includes the geometric justification for certificate acceptance and
+      every case exclusion. Its trust
       boundary, as the source states it: the geometric soundness arguments are checked by
       Lean's kernel, and 13,343 finite certificate facts are decided by `native_decide`, so
       Lean's compiler, native evaluator and the C toolchain are trusted, with the standard
@@ -17839,12 +17840,14 @@ results:
     significance:
       score: 5
       rationale: >-
-        Of the reports this record holds, the first proof of s(17) = L that leaves no
-        premise open, within the trust boundary it states: T-153, public earlier the same
+        Of the reports this record holds, the first proof of s(17) = L in a proof assistant,
+        including the geometric justification for certificate acceptance and every case
+        exclusion, within its stated trust boundary. T-153, public earlier the same
         day by GitHub's times, is a candidate resting on 15 mathematical premises by its own
-        statement. n = 17 is, with n = 12, one of the two open cases below n = 18. Its kind
-        is formalization, a proof-assistant proof of a value the record already holds; what
-        it adds is a route whose whole lower half is one proof-assistant build, so a single
+        statement. n = 17 is, with n = 12, one of the two open cases below n = 18.
+
+        Its kind is formalization, a proof-assistant proof of a value the record already
+        holds; what it adds is a lower-bound proof checked in one proof-assistant build, so a single
         complete build, here or by a third party and retained here, would carry it to V3
         and C3, where T-153 needs its capture recomputation and ten trees replayed.
         Significance is separate from whether the proof is correct. Proposed for the owner's
@@ -18006,8 +18009,8 @@ results:
       a new kind, formalization, decided 13 October, recorded 14 October ("simplification is
       one thing but formalization is another"; "let's go with formalization then"), which
       epistemics.md's Result Kinds holds (think-8e0p): a proof in a proof assistant of a
-      result the record already holds, by formalizing an existing argument or by a route of
-      its own. Review A (https://github.com/jlevy/squares/pull/592#issuecomment-6159185393)
+      result the record already holds, using either an existing argument or a different
+      argument. Review A (https://github.com/jlevy/squares/pull/592#issuecomment-6159185393)
       relays the owner's third remark as "simplification should be allowed too but that is
       different"; the original human message was not recovered. Where a second proof fits
       both kinds, the owner chooses at registration.
@@ -18032,7 +18035,7 @@ results:
       The source names Overbeck's candidate as independent and published on 12
       October 2026, and does not say which came first. T-153 is the first report of the
       value and keeps the case's reported lower bound. Of the reports this record holds,
-      this entry is the first of a proof of the value that leaves no premise open; the
+      this entry is the first proof of the value in a proof assistant; the
       source's own search of 12 October, as its README reports it, "found no earlier
       complete Lean proof of this optimality result".
 
@@ -19654,7 +19657,7 @@ results:
   - id: T-159
     kind: upper-bound
     registered: '2026-10-12'
-    headline: Another arrangement of Ryan Xu's design for 102 squares, certified exactly from its decimal layout
+    headline: Another arrangement of Xu's design for 102 squares, certified exactly from its decimal layout
     claim: >-
       An exact rational certificate derived here from Rio Calle's decimal layout of 102 unit
       squares, reported on jlevy/squares#529, proves a finite upper bound at the side the
@@ -19802,7 +19805,7 @@ results:
   - id: T-160
     kind: upper-bound
     registered: '2026-10-12'
-    headline: A smaller packing of 154 squares from Evan Daniel's size-chaining explorer, certified exactly
+    headline: A smaller packing of 154 squares from Daniel's size-chaining explorer, certified exactly
     claim: >-
       One complete rational source certificate by Evan Daniel, reported on
       jlevy/squares#552, proves a finite upper bound at the exact side it states: s(154) <=
@@ -19965,7 +19968,7 @@ results:
   - id: T-161
     kind: upper-bound
     registered: '2026-10-14'
-    headline: Exact rational certificates at 156, 176, 237 and 271 from Francisco Couzo
+    headline: Exact rational certificates at 156, 176, 237 and 271 from Couzo
     claim: >-
       Four complete rational source certificates report finite upper-bound improvements at
       the exact sides they state: s(156) <= 12.979165853834276453965882038847, s(176) <=
@@ -20473,7 +20476,7 @@ results:
     kind: upper-bound
     registered: '2026-10-14'
     headline: >-
-      A packing of 302 squares from four boundary patches of Ryan Xu's packing of 70 and two
+      A packing of 302 squares from four boundary patches of Xu's packing of 70 and two
       upright banks
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -20609,7 +20612,7 @@ results:
   - id: T-165
     kind: upper-bound
     registered: '2026-10-14'
-    headline: A tighter certificate at 176 from Francisco Couzo, published with no issue
+    headline: A tighter certificate at 176 from Couzo, published with no issue
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
       the exact side it states: s(176) <= 13.807637226802279523050752140325.
@@ -21040,7 +21043,7 @@ results:
     kind: upper-bound
     registered: '2026-10-14'
     headline: >-
-      A further exact refinement of Ryan Xu's packing of 146 squares, after Robert Barnett's
+      A further exact refinement of Xu's packing of 146 squares, after Barnett's
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
       the exact side it states: s(146) <=
@@ -21181,7 +21184,7 @@ results:
     kind: upper-bound
     registered: '2026-10-14'
     headline: >-
-      A further exact refinement of Ryan Xu's packing of 261 squares, after Robert Barnett's
+      A further exact refinement of Xu's packing of 261 squares, after Barnett's
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
       the exact side it states: s(261) <=
@@ -21325,8 +21328,7 @@ results:
     kind: upper-bound
     registered: '2026-10-14'
     headline: >-
-      An exact contact refinement of Ryan Xu's packing of 105 squares, after Francisco
-      Couzo's
+      An exact contact refinement of Xu's packing of 105 squares, after Couzo's
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
       the exact side it states: s(105) <=
@@ -21607,7 +21609,7 @@ results:
     kind: upper-bound
     registered: '2026-10-14'
     headline: >-
-      A packing of 154 squares from Francisco Couzo, continuing Evan Daniel's arrangement
+      A packing of 154 squares from Couzo, continuing Daniel's arrangement
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
       the exact side it states: s(154) <= 12.922499814642397493692375652931.
@@ -24285,7 +24287,7 @@ results:
   - id: T-181
     kind: upper-bound
     registered: '2026-10-14'
-    headline: Exact rational certificates at 211, 241 and 302 from Francisco Couzo
+    headline: Exact rational certificates at 211, 241 and 302 from Couzo
     claim: >-
       Three complete rational source certificates report finite upper-bound improvements at
       the exact sides they state: s(211) <=
@@ -24485,7 +24487,7 @@ results:
   - id: T-182
     kind: upper-bound
     registered: '2026-10-14'
-    headline: Exact rational certificates at 154, 211 and 241 from Francisco Couzo
+    headline: Exact rational certificates at 154, 211 and 241 from Couzo
     claim: >-
       Three complete rational source certificates report finite upper-bound improvements at
       the exact sides they state: s(154) <= 12.921206577132631050071241337979, s(211) <=
@@ -24946,7 +24948,7 @@ results:
     kind: upper-bound
     registered: '2026-10-15'
     headline: >-
-      A tighter packing of 175 squares from Francisco Couzo, superseded by Daniil Ostashev's
+      A tighter packing of 175 squares from Couzo, superseded by Ostashev's
       composition
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -25416,8 +25418,7 @@ results:
     kind: upper-bound
     registered: '2026-10-15'
     headline: >-
-      A smaller packing of 146 squares from Evan Daniel's chain search, started from Ryan
-      Xu's packing
+      A smaller packing of 146 squares from Daniel's chain search, started from Xu's packing
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
       the exact side it states: s(146) <= 12.583782190151860342292508597077. Complete native

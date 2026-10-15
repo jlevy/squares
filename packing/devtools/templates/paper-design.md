@@ -193,7 +193,8 @@ verification blue so it reads as neither, and darker and bluer than the accent s
 never reads as a link; it is light in dark mode.
 Every score uses `overview_sections.significance_mark`: an S label and five segments in
 one square-cornered border box, 5.5em wide at the shared note size and sans medium
-weight. Each bar is 0.5em wide and 0.6em tall; the first S bars are solid and the rest
+weight. The label and bars have a 0.18em gap, smaller than a word space but visibly
+separate. Each bar is 0.5em wide and 0.6em tall; the first S bars are solid and the rest
 are empty outlines.
 The box keeps the same width from S0 through S5, while its accessible
 name states the score and its tooltip explains the judgment.
@@ -892,6 +893,7 @@ it.
   original publication date, then optional topic tags and significance metadata.
   The title uses the Explanations card’s sans face, medium weight, size and leading; it
   stays upright, left aligned and in the theme’s text foreground.
+  Use people’s last names in headlines; give their full names in the article text.
   The date is a prominent sans-base line in medium weight, with a machine-readable
   `time` value. Paper dates come from the oldest edition in each component’s retained
   publication history.
@@ -909,7 +911,9 @@ it.
   and the post’s rationale.
   Its S and five bars remain one tightly paired mark.
   Homepage highlights keep their actual result scores and assurance qualifiers, with one
-  S meter per card. Archive controls default to S4/S5 and all topics, with OR within a
+  S meter per card. News includes only S3, S4 and S5; S1/S2 remain in the full GitHub
+  changelog, with old News bookmarks forwarded there.
+  Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
   All significance and All topics clear their facet; Reset restores the defaults.
   The compact chooser groups share the homepage’s small controls, wrap inline, and keep
