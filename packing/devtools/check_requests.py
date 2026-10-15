@@ -35,7 +35,8 @@ history, so its verdict is a function of the tree. Only the ids and the schema c
 it: a reply that is due is owed after the merge, not a broken record. ``--draft``
 refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until it
 merges and a reply links only to `main`. ``--github`` reads the live issues through
-``gh api`` and writes nothing anywhere.
+``gh api`` and writes nothing anywhere. It compares issue comments only, not a recorded
+pull request's reviews or review comments.
 """
 
 from __future__ import annotations
