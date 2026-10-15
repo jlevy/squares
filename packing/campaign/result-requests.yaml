@@ -7288,8 +7288,8 @@ issues:
       a cut-out of the s(302) house''s rectangle at 129 and two compositions of new rectangle packings at
       204 and 303. Imported on 14 October 2026 in the dostashev-compositions-2026-10-12 packet, replayed
       on both maintained exact routes with their controls, and registered as T-162 at V0/C0, each side the
-      smallest known at its count when reported; PR 574 (T-174) tightens all three by about 1e-19. AI assistance
-      disclosed.'
+      smallest known at its count when reported; PR 574 (T-174) tightens all three by about 1e-19. T-162
+      was confirmed at V3/C3 on 15 October 2026. AI assistance disclosed.'
     read_through: '2026-10-14T09:18:12Z'
     results:
     - key: three-certificates
@@ -7361,7 +7361,7 @@ issues:
       packing of 70 with two upright banks, refined in the update of 12 October. Imported on 14 October
       2026 as derived exact facts in the pingyou-n302-certificate-2026-10-12 packet, replayed on both maintained
       exact routes, and registered as T-164 at V0/C0, 1.75e-03 below the case's ceiling; Francisco Couzo's
-      issue 583 (T-181) is smaller.
+      issue 583 (T-181) is smaller. T-164 was confirmed at V3/C3 on 15 October 2026.
     read_through: '2026-10-14T07:05:00Z'
     results:
     - key: n302-certificate
@@ -7416,6 +7416,11 @@ issues:
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
+    notes: >-
+      The final reply of 15 October names the house at 302, T-181, and not Mykhailo Polkovskyi's
+      T-186, registered that day, which is smaller at 302 and not adopted there. No reply is owed
+      for it: T-186 is not this issue's result, the reply states the issue's result and the case's
+      house, and the issue is closed (PR #630's review, A3).
   - number: 566
     title: 's(146) ≤ 12.5837822039508342919134679370511513667729: further certificate refinement'
     author: BuddenPing
@@ -7427,7 +7432,7 @@ issues:
     summary: PingYou Ltd reports a further exact refinement of Ryan Xu's packing of 146 after Robert Barnett's
       (T-150). Imported on 14 October 2026 as derived exact facts, replayed on both maintained exact routes
       with its controls, and registered as T-168 at V0/C0, a regularization of the packing it tightens;
-      PR 574 (T-174) tightens it again.
+      PR 574 (T-174) tightens it again. T-168 was confirmed at V3/C3 on 15 October 2026.
     read_through: '2026-10-14T07:05:04Z'
     results:
     - key: n146-refinement
@@ -7493,7 +7498,7 @@ issues:
     summary: PingYou Ltd reports a further exact refinement of Ryan Xu's packing of 261 after Robert Barnett's
       (T-150). Imported on 14 October 2026 as derived exact facts, replayed on both maintained exact routes
       with its controls, and registered as T-169 at V0/C0, a regularization of the packing it tightens;
-      PR 574 (T-174) tightens it again.
+      PR 574 (T-174) tightens it again. T-169 was confirmed at V3/C3 on 15 October 2026.
     read_through: '2026-10-14T07:05:05Z'
     results:
     - key: n261-refinement
@@ -7559,7 +7564,7 @@ issues:
     summary: PingYou Ltd reports an exact contact refinement of Francisco Couzo's packing of 105 (T-130).
       Imported on 14 October 2026 as derived exact facts, replayed on both maintained exact routes with
       its controls, and registered as T-170 at V0/C0, a regularization of the packing it tightens; PR 574
-      (T-174) tightens it again.
+      (T-174) tightens it again. T-170 was confirmed at V3/C3 on 15 October 2026.
     read_through: '2026-10-14T07:05:07Z'
     results:
     - key: n105-refinement
@@ -7631,7 +7636,7 @@ issues:
     summary: PingYou Ltd reports an exact contact refinement of SQUISH's packing of 272 (T-151). Imported
       on 14 October 2026 as derived exact facts, replayed on both maintained exact routes with its controls,
       and registered as T-171 at V0/C0, a regularization of the packing it tightens; PR 574 (T-174) tightens
-      it again.
+      it again. T-171 was confirmed at V3/C3 on 15 October 2026.
     read_through: '2026-10-14T07:05:08Z'
     results:
     - key: n272-refinement

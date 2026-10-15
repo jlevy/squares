@@ -997,8 +997,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "main's requests record and once with the branch's, the survey's HTML before "
             "the browser's math pass and its Markdown are byte-identical, as are the other "
             "40 files the render writes; the PDF prints from that HTML. The record gains "
-            "the replies of 15 October 2026 and six closes, which the survey does not "
-            "read, so it keeps v0.2.2."
+            "the replies of 15 October 2026, six closes, the six closed entries' "
+            "confirmation in their summaries and a note on #564, which the survey does "
+            "not read, so it keeps v0.2.2."
         ),
     ),
     ReleaseNoPublicChange(
