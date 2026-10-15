@@ -993,12 +993,31 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Rendered on this branch over main 6e73ef1c at one link revision, once with "
+            "Rendered on this branch over main 22a67ce4 at one link revision, once with "
             "main's requests record and once with the branch's, the HTML before the "
             "browser's math pass and the Markdown are byte-identical; the PDF prints from "
             "that HTML and was not rebuilt. The requests record gains the 15 October "
             "status replies on twelve of the owner's tracking issues and four notes; the "
             "survey prints none of them and keeps its edition."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer", "site"),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "The validation CLI adds per-test phase journals only to native quick and "
+            "slow pytest commands with external validation artifacts configured. "
+            "Site and paper builders neither invoke these commands nor consume their "
+            "journals. Test selection, deadlines and resource limits are unchanged. "
+            "Public rendering helpers, manuscripts, figures and scientific inputs "
+            "are unchanged, so site v0.7.10 and paper v0.4.7 remain current. This is "
+            "a source-reviewed finding; no PDF byte-identity comparison is claimed."
         ),
     ),
     ReleaseNoPublicChange(
