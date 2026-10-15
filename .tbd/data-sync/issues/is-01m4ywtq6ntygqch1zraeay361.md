@@ -5,12 +5,12 @@ title: "PR #612 B7: #550 and #554 show reply due"
 kind: bug
 status: open
 priority: 2
-version: 2
+version: 3
 labels: []
 dependencies: []
-parent_id: is-01m4ywspmt47ny1en5jnen7c09
+parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-15T04:23:51.253Z
-updated_at: 2026-10-15T04:52:46.589Z
+updated_at: 2026-10-15T05:12:33.846Z
 ---
 Nit. result-requests.yaml #550 and #554 have replies: []; check_requests reports an acknowledgement due. Review: https://github.com/jlevy/squares/pull/612#issuecomment-6184319016
 
