@@ -128,7 +128,7 @@ recent result markers and accents.
 | $s(n) = \ldots$ vs $s(n) \le \ldots$ | `packing.status` (`proved` / `open`) | 45 proved; equality only for those |
 | Side value | `reported_upper_bound.value` | Matches the witness side to its stated precision |
 | $s(n) \ge \ldots$ second line | `verified_lower_bound.value`, shown where `status` is `open` | 55 lines; cut off rather than rounded, so the printed bound stays true |
-| Crimson recent-result accents, since August, 2026 | The canonical contribution flags in `devtools/result_status.py`, using original construction or proof dates and the shared `RECENT_SINCE` cutoff | 81 cases in the figure and 297 in the poster; both accent upper numerals, lower numerals and optimality badges independently |
+| Crimson recent-result accents, since August, 2026 | Contribution flags in `devtools/result_status.py`, using original construction or proof dates and the shared `RECENT_SINCE` cutoff | Only the corresponding upper- and lower-bound numerals receive the accent. Case numbers, relation signs and badges keep their usual styling |
 | `=` exact value known | `exact_form`, else `minimal_polynomial` or `algebraic_degree` | Evaluate the form, compare against the witness side |
 | `≈` only known numerically | none of the three present | 3 cases: $n = 29, 55, 71$ |
 | $\deg d$ | `algebraic_degree` | Printed for 30 cases with degree at least 2; absence is not a claim of low degree |
@@ -487,10 +487,10 @@ The final line’s lower extent determines the block’s bottom; it is not a fix
 The renderer checks the information rectangle against every card; all text stays inside
 the upper-left whitespace.
 The poster has no publication subtitle; its closing date is the date of the recorded
-data commit. The recent-result accent follows the upper construction, certified lower
-bound and optimality proof independently.
-A recent proof can color an optimality badge while its older construction’s upper-bound
-caption stays neutral.
+data commit. The recent-result accent follows the upper construction and certified lower
+bound independently, and colors only the corresponding numeric value.
+Case numbers remain gray, and an optimality badge keeps its usual styling when a new
+proof settles an older construction.
 The shared row model declares separate non-grid and grid segments, kept together on one
 line. All rows share the final drawing’s right edge, with 120 units of clearance outside
 the card envelope on the right and bottom.

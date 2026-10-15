@@ -954,9 +954,10 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
         ),
     ),
     # De Winter's packing at Daniel's exact optimum (T-098) until the house adoption of 11
-    # October 2026 took Daniil Ostashev's issue 501 packing (T-149).
+    # October 2026 took Daniil Ostashev's issue 501 packing (T-149), and the adoption of 15
+    # October 2026 Francisco Couzo's continuation of it, issue 586's certificate (T-182).
     211: (
-        ("Ostashev 2026, GitHub (confirmed T-149)", "external", "verified"),
+        ("Ostashev & Couzo, GitHub (confirmed T-182)", "external", "verified"),
         (
             "Karakuş 2026, arXiv corrects Nagamochi 2005 (confirmed T-083)",
             "external",

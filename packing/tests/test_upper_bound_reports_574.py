@@ -406,6 +406,9 @@ def test_every_574_certificate_is_admitted_at_its_printed_side() -> None:
             assert legacy.ceiling_decimal(side, 40) == row["offered"]
 
 
+# The complete comparison admits 209 derived facts: 9.96s local CALL after selective
+# reads, 13.09s in full run 38756833833. Keep all 85 own certificates and competitors.
+@pytest.mark.slow
 def test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304() -> None:
     """Read at the exact sides this record retains for the other reports (review A1 of
     #602), the certificate is decidably smallest at 60 of the 64 rational counts the ledger
@@ -427,6 +430,9 @@ def test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304
     assert above == {211, 237, 241, 304}
 
 
+# Full plan plus independent claims: 14.46s CALL in full run 38756833833. The
+# existing slow owner executes the unchanged full operation at each selected checkpoint.
+@pytest.mark.slow
 def test_the_574_register_plan_states_each_bound_as_check_standing_reads_it() -> None:
     plan = reports.register_plan(reports.packet_path(PR574))
     result = plan["results.yaml"]
@@ -472,7 +478,18 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     rows = _algebraic()
     equal = sorted(n for n, row in rows.items() if row["case"]["verified_relation"] == "equal")
     assert equal == [5, 10, 18, 19, 26, 27, 38, 40, 51, 52, 65, 66, 67, 82, 85, 89]
-    assert all(row["case"]["verified_relation"] in {"equal", "below"} for row in rows.values())
+    # The record compares each side with the case as it now stands. The adoption of 15
+    # October 2026 moved 302 to issue 583's certificate (T-181), smaller than the algebraic
+    # side there, as the pending row for #583 already said; every other side is at or below
+    # its case.
+    assert {n for n, row in rows.items() if row["case"]["verified_relation"] == "above"} == {
+        302
+    }
+    assert all(
+        row["case"]["verified_relation"] in {"equal", "below"}
+        for n, row in rows.items()
+        if n != 302
+    )
     assert sorted(n for n, row in rows.items() if row["below_every_other"]) == [207]
     assert rows[302]["pending"]
     assert any(

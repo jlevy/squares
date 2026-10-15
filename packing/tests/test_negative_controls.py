@@ -2582,6 +2582,7 @@ def test_unmutated_results_checker_is_green_inside_a_worker(
     completed = subprocess.run(
         [sys.executable, "-m", "devtools.check_results"],
         cwd=tree / "packing",
+        env=controls.control_environment(tree, tree / "results-checker-pycache"),
         capture_output=True,
         text=True,
         check=False,
@@ -3727,7 +3728,7 @@ def test_adopted_houses_survive_native_worker_boundaries(
     assert completed.returncode == 0, completed.stdout + completed.stderr
     report = json.loads(completed.stdout.strip().splitlines()[-1])
     assert report["houses"] == len(houses.NUMBERS)
-    assert len(report["refused"]) == 2 * len(houses.source_keys())
+    assert len(report["refused"]) == 2 * len(houses.sources())
     for source, original in originals.items():
         assert source.read_bytes() == original
         assert (tree / source.relative_to(controls.REPO)).read_bytes() == original

@@ -627,20 +627,28 @@ def test_a_refinement_credits_the_person_its_headline_names_singular_or_plural(
     capsys: pytest.CaptureFixture[str], records: Records
 ) -> None:
     """T-137 refines Ryan Xu's packing and T-150 his packings; both credit him. Since
-    T-187 bettered T-150 at 146 on 15 October, T-150's line covers 261 alone and says
-    "packing"; over both its counts it says "packings"."""
+    T-187 bettered T-150 at 146 on 15 October, and PingYou Ltd's re-solves (T-168,
+    T-169) took both its counts the same day, T-150's line is kept with `--all`; over
+    both its counts it says "packings"."""
     lines, _ = run(
         capsys, ["--ids", "T-137", "--date", "2026-10-11", "--all", "--min-significance", "1"]
     )
     assert ", refining Ryan Xu's packing " in lines[1]
     lines, _ = run(
-        capsys, ["--ids", "T-150", "--date", "2026-10-12", "--min-significance", "1"]
+        capsys, ["--ids", "T-150", "--date", "2026-10-12", "--all", "--min-significance", "1"]
     )
-    assert ": Robert Barnett, refining Ryan Xu's packing " in lines[1]
+    assert ": Robert Barnett, refining Ryan Xu's packings " in lines[1]
     both = [ra.Count(n, UPPER, exact("13")) for n in (146, 261)]
-    assert ra.worked_on(records.results["T-150"], both, records, ra.Names()) == (
+    names = ra.Names(full={"Xu": "Ryan Xu"})
+    assert ra.worked_on(records.results["T-150"], both, records, names) == (
         "refining Ryan Xu's packings"
     )
+    names = ra.Names({"Xu": handle("Xu", "from_record")}, names.full)
+    assert ra.worked_on(records.results["T-150"], both, records, names) == (
+        "refining @from_record's packings"
+    )
+    written = {**records.results["T-150"], "headline": "refinements of Ryan Xu's packings"}
+    assert ra.worked_on(written, both, records, ra.Names()) == ("refining Ryan Xu's packings")
 
 
 def test_a_refinement_of_a_requests_packings_credits_the_entry_its_claim_names(

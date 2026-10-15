@@ -185,8 +185,19 @@ async () => {
         title: heading.textContent?.trim(),
       }),
     ),
+    paper_headings: [...document.querySelectorAll(".site-card > .site-article-header > h3")].map(
+      (heading) => ({
+        href: heading.closest("a")?.getAttribute("href"),
+        title: heading.textContent?.trim(),
+      }),
+    ),
     other_lower_headings: [...document.querySelectorAll("h3, h4, h5, h6")]
-      .filter((heading) => !heading.matches(".site-news-item > .site-news-header > h3"))
+      .filter(
+        (heading) =>
+          !heading.matches(
+            ".site-news-item > .site-news-header > h3, .site-card > .site-article-header > h3",
+          ),
+      )
       .map((heading) => ({ tag: heading.tagName, title: heading.textContent?.trim() })),
     main_title_style: mainTitle ? titleStyle(mainTitle) : null,
     h1_spacing: [...document.querySelectorAll("h1.site-title")].map((heading) => ({

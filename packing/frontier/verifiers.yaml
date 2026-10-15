@@ -1542,7 +1542,18 @@ verifiers:
       of issue 552
       (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) gave it
       that import's roster line with its credit and lineage keys, and ran it on the
-      certificate T-160 cites.
+      certificate T-160 cites. The review lane of the 14 October intake
+      (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md and
+      docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) gave it the
+      fourteen imports of issues 561 to 593 and PR 574 as its roster, a reader of issue
+      593's JSON census print, the registered entries' claims in place of generated plans,
+      credit readers for the packings those entries name, the release-asset member reader
+      and centre-basis witness of PR 574, and unmoved, which finds the placement that keeps
+      most squares within 1e-9 and decides nothing; it ran it on the 28 certificates T-161,
+      T-162, T-164 to T-173, T-175 and T-181 to T-183 cite and on T-174's 64 rational
+      certificates, writing receipts/third-route-2026-10-14.json.xz in each packet. For
+      their numbers it lifts Python's integer-text limit, which reading them needs, for its
+      own numbers only (RP-7 of the review of PR 574).
       Its author had read both
       maintained routes, their parser and the importer's adapters before writing it, so it
       is not clean-room; it imports none of their parsing or deciding code and shares
@@ -2748,6 +2759,32 @@ verifiers:
       explicit replay repeats both project geometric deciders.
     source:
     - packing/devtools/evand_arrangement_reports.py
+
+  - id: V-algebraic-witness-reports
+    program: devtools.algebraic_witness_reports
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Imports a packet's algebraic-number-field witnesses from its declaration: derives
+      each witness from its release asset through the manifest the packet pins, holds it to
+      the witness schema, its count and its declared field degree, rebuilds the frozen
+      algebraic claim record against the case records and pending reports, and drives
+      sqpack's exact witness verifier, one route, on a positive and its duplicate-square
+      and outside-container controls per count, writing one receipt per count. It decides
+      no geometry itself.
+    source:
+      - packing/devtools/algebraic_witness_reports.py
+      - packing/tests/test_upper_bound_reports_574.py
+    note: >-
+      Written by the import lane of PR 574 on 14 October 2026 for the pull
+      request's algebraic supplement. sqpack.witness.exact_verify decides, over each
+      witness's field; no second route over a number field exists here, and every receipt
+      it writes says so. The review of PR 574
+      (docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) ran its compare
+      and check --replay and found every job equal to its retained row (RP-3).
 
   - id: V-upper-bound-reports
     program: devtools.upper_bound_reports

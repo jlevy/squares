@@ -193,7 +193,8 @@ verification blue so it reads as neither, and darker and bluer than the accent s
 never reads as a link; it is light in dark mode.
 Every score uses `overview_sections.significance_mark`: an S label and five segments in
 one square-cornered border box, 5.5em wide at the shared note size and sans medium
-weight. Each bar is 0.5em wide and 0.6em tall; the first S bars are solid and the rest
+weight. The label and bars have a 0.18em gap, smaller than a word space but visibly
+separate. Each bar is 0.5em wide and 0.6em tall; the first S bars are solid and the rest
 are empty outlines.
 The box keeps the same width from S0 through S5, while its accessible
 name states the score and its tooltip explains the judgment.
@@ -377,6 +378,12 @@ a note names, such as $n = 21$, is sans math too, never upright words.
 Documents write math as LaTeX (`$…$`) rather than in code spans;
 `devtools.check_math_markup` holds the documents already migrated to it.
 Code uses Planetaire Mono Text at KPress’s calibrated monospace size.
+Literal source code keeps its Unicode characters.
+Two site-only KaTeX subsets supply AMS’s blackboard-R outline for `ℝ` and Main’s
+outlines for `↔` and `≤` within the monospace family, preserving ordinary ASCII glyphs
+and metrics.
+Both subsets travel through the shared asset bundle; standalone paper styles
+keep their existing declarations.
 
 **A formula is drawn as its text is.** Beside the face, a formula takes the size of the
 text it sits in (KaTeX’s outer em is 1 of its text’s on every surface), its colour, and
@@ -877,31 +884,47 @@ it.
   appear on the homepage; **About** sits immediately before **GitHub** in the shared
   navigation.
 
-- **News.** News is the second navigation item and carries the complete retained project
-  history. Its H1 uses the shared sans-serif caps; its operational text uses the sans
-  face. Each entry is one hairline-bordered card containing its actual article once.
-  Dates use the paper heading’s sans-base date role.
-  Each card starts with an ordinary H3 in the theme’s text foreground, followed by the
-  date, then a metadata row with smaller Results-style topic chips on the left and the
-  shared significance meter fixed at the right.
-  The article follows.
-  H3 typography comes from the shared heading role; the chips retain shared fills,
-  corners and leading at 85% of the note-size chip scale.
+- **News.** News is the second navigation item and carries eligible public
+  announcements. The changelog record retains excluded historical entries and their
+  reasons; `CHANGELOG.md` contains the complete history.
+  Its H1 uses the shared sans-serif caps; its operational text uses the sans face.
+  Each eligible entry is one hairline-bordered card containing its actual article once.
+  News and Explanations share an article heading: an optional eyebrow, the title, the
+  original publication date, then optional topic tags and significance metadata.
+  The title uses the Explanations card’s sans face, medium weight, size and leading; it
+  stays upright, left aligned and in the theme’s text foreground.
+  Use people’s last names in headlines; give their full names in the article text.
+  The date is a prominent sans-base line in medium weight, with a machine-readable
+  `time` value. Paper dates come from the oldest edition in each component’s retained
+  publication history.
+  Tutorial dates name their first site deployments; manuscript creation and later
+  revisions do not restamp them.
+  News retains each announcement’s frozen date or the highlighted result’s original
+  registered date. No current site edition or filesystem timestamp supplies a date.
+  Explanations uses the eyebrow for the paper’s series part or tutorial label.
+  News places smaller Results-style topic chips on the left and the shared significance
+  meter at the right below the date, followed by the article.
+  The chips retain shared fills, corners and leading at 85% of the note-size chip scale.
   Homepage News and the archive use the same card renderer and CSS roles.
   Every post has an explicit importance score and a plain rationale.
   The meter’s accessible label names its S level; its shared tooltip explains the level
   and the post’s rationale.
+  Its S and five bars remain one tightly paired mark.
   Homepage highlights keep their actual result scores and assurance qualifiers, with one
-  S meter per card. Archive controls default to S4/S5 and all topics, with OR within a
+  S meter per card. News includes only S3, S4 and S5; S1/S2 remain in the full GitHub
+  changelog, with old News bookmarks forwarded there.
+  Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
   All significance and All topics clear their facet; Reset restores the defaults.
   The compact chooser groups share the homepage’s small controls, wrap inline, and keep
   their group names accessible without visible headings.
+  Multi-select topic buttons wrap within their group on narrow screens.
   Counts use the Results control row, right aligned above the cards; an empty state
   describes a selection without matches.
   URL state preserves unrelated query parameters and browser history; a low-score
   bookmark widens the filters to reveal its target.
-  Without JavaScript the controls stay hidden and the complete history remains visible.
+  Without JavaScript the controls stay hidden and complete eligible articles remain
+  visible, with a link to the full changelog.
   After the enhancement loads, about ten lines are visible.
   Clicking or tapping the card or its small shared arrow in the footer expands or
   contracts it inline; Enter and Space activate the button.
@@ -911,15 +934,16 @@ it.
   Height, fade and arrow rotation share the existing motion timing and honor reduced
   motion. Hover adds a subtle green wash without changing height.
   Article links retain their ordinary actions; body-link focus reveals the article.
-  Readers without scripting see complete articles.
-  Entry and legacy date fragments reveal their corresponding card.
+  Eligible entry and legacy date fragments reveal their corresponding card.
+  Bookmarks for excluded entries, and dates with no eligible articles, forward to the
+  retained GitHub changelog.
   Topic labels reuse square-cornered Results chips with distinct subject metadata: lower
   and upper bounds and optimality reuse bound fills, engineering uses the accent tint,
-  verification the review-blue palette, and documentation the neutral chip.
+  and verification the review-blue palette.
   These subject labels assert no result kind or verification status.
   Results and News use the shared topic vocabulary and sentence-case labels in
   `devtools/site_topics.py`. Every registered result kind keeps its precise topic; News
-  also accepts Engineering, Verification and Documentation.
+  also accepts Engineering and Verification.
   News filters offer the topics present in the archive, in the shared vocabulary’s
   order. Topic chips explicitly reset text transformation, small caps and letter spacing,
   so parent headings cannot change their casing.

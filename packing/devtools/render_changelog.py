@@ -709,6 +709,40 @@ def ordered_entries(document: Document) -> list[Document]:
     )
 
 
+def news_entries(document: Document) -> list[Document]:
+    """S3 to S5 public announcements; lower scores remain in the GitHub history."""
+    return [
+        entry
+        for entry in ordered_entries(document)
+        if "news_exclusion" not in entry and entry_significance(entry)["score"] >= 3
+    ]
+
+
+def archived_news_targets(document: Document) -> dict[str, str]:
+    """Retired article and day bookmarks still reach their retained changelog entries."""
+    public_ids = {entry["id"] for entry in news_entries(document)}
+    excluded = [entry for entry in document["entries"] if entry["id"] not in public_ids]
+    anchors = [entry_anchor(entry["id"]) for entry in excluded]
+    public_days = {entry["date"] for entry in news_entries(document)}
+    anchors.extend(
+        f"changelog-date-{day}"
+        for day in sorted({entry["date"] for entry in excluded} - public_days)
+    )
+    return {
+        anchor: f"{document['repository']}/blob/main/CHANGELOG.md#{anchor}"
+        for anchor in anchors
+    }
+
+
+def _news_forward_anchors(targets: dict[str, str]) -> str:
+    return "".join(
+        f'<a class="site-news-legacy-anchor" id="{html.escape(anchor, quote=True)}" '
+        f'href="{html.escape(target, quote=True)}" data-news-target '
+        'aria-hidden="true" tabindex="-1"></a>'
+        for anchor, target in targets.items()
+    )
+
+
 NEWS_TOPICS = TOPICS
 
 
@@ -738,15 +772,16 @@ def news_rating(rating: Significance) -> str:
 def news_article_header(
     title_html: str, day_text: str, topics: Sequence[str], rating: Significance
 ) -> str:
-    """The shared News head: title, publication date, then topics and the rating."""
-    day = date.fromisoformat(day_text)
-    label = f"{day:%B} {day.day}, {day.year}"
-    return (
-        f'<header class="site-news-header"><h3>{title_html}</h3>'
-        '<p class="site-news-date publication-date">'
-        f'<time datetime="{day_text}">{label}</time></p>'
-        f'<div class="site-news-metadata">{news_topics(topics)}{news_rating(rating)}</div>'
-        "</header>"
+    """The reading-card heading, followed by News topics and the importance tooltip."""
+    from devtools.overview_sections import article_header  # noqa: PLC0415
+
+    return article_header(
+        title_html,
+        date.fromisoformat(day_text),
+        metadata_html=(
+            f'<div class="site-news-metadata">{news_topics(topics)}{news_rating(rating)}</div>'
+        ),
+        extra_class="site-news-header",
     )
 
 
@@ -755,7 +790,7 @@ def news_filters(topics_present: set[str] | None = None) -> str:
     scores = "".join(
         f'<button type="button" data-news-score="{score}" '
         f'aria-pressed="{str(score >= 4).lower()}">S{score}</button>'
-        for score in range(1, 6)
+        for score in range(3, 6)
     )
     topics = "".join(
         f'<button type="button" data-news-topic="{topic}" aria-pressed="true">{label}</button>'
@@ -807,7 +842,7 @@ def render_news(document: Document, *, limit: int | None = None) -> str:
     validate(document)
     if limit is not None and limit < 1:
         raise ValueError("a News preview needs at least one item")
-    entries = ordered_entries(document)
+    entries = news_entries(document)
     if limit is not None:
         entries = entries[:limit]
     out = [
@@ -852,6 +887,10 @@ def render_news(document: Document, *, limit: int | None = None) -> str:
             )
         out.append(card)
     out.append("</div>")
+    if limit is None and (archived := archived_news_targets(document)):
+        out.append(_news_forward_anchors(archived))
+        target = html.escape(f"{document['repository']}/blob/main/CHANGELOG.md", quote=True)
+        out.append(f'<p><a href="{target}">Full changelog</a></p>')
     return "\n".join(out)
 
 
@@ -861,11 +900,9 @@ def legacy_news_anchors(document: Document) -> str:
     anchors.extend(
         f"changelog-date-{day}" for day in sorted({e["date"] for e in document["entries"]})
     )
-    return "".join(
-        f'<a class="site-news-legacy-anchor" id="{anchor}" '
-        f'href="news.html#{anchor}" data-news-target aria-hidden="true" tabindex="-1"></a>'
-        for anchor in anchors
-    )
+    targets = {anchor: f"news.html#{anchor}" for anchor in anchors}
+    targets.update(archived_news_targets(document))
+    return _news_forward_anchors(targets)
 
 
 def render(document: Document) -> str:

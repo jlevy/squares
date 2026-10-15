@@ -880,7 +880,7 @@ body {
   text-align: center;
 }
 
-.kpress :is(.site-card, .site-popover, .site-case) .site-card-label {
+.kpress :is(.site-card, .site-popover, .site-case, .site-article-header) .site-card-label {
   color: var(--kpress-doc-muted);
   font-family: var(--kpress-font-sans);
   font-size: var(--kpress-caps-label-size, 0.8rem);
@@ -894,7 +894,8 @@ body {
    a headline of two or three lines reads as one block. A long closed form, such as a
    nested radical, scrolls inside its card rather than widening the page. */
 .kpress .site-card .site-card-value,
-.site-popover .site-popover-value {
+.site-popover .site-popover-value,
+.kpress .site-article-header > h3 {
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-medium);
   line-height: var(--paper-heading-leading);
@@ -911,7 +912,8 @@ body {
 /* The tighter leading takes the room a looser line kept around the headline, so the
    headline carries it as margin: a little above, under the label, and more below, over
    the note. */
-.kpress .site-card .site-card-value {
+.kpress .site-card .site-card-value,
+.kpress .site-article-header > h3 {
   font-size: 1.15em;
   margin-block: 0.2rem 0.3rem;
   max-inline-size: 100%;
@@ -1295,7 +1297,8 @@ body {
     var(--kpress-doc-bg)
   );
 }
-.site-chip[data-news-topic="engineering"] {
+.site-chip[data-news-topic="engineering"],
+.site-chip[data-news-topic="project"] {
   background: color-mix(
     in oklab,
     var(--kpress-doc-accent) var(--site-chip-tint),
@@ -1348,8 +1351,9 @@ body {
 .site-star {
   color: var(--site-new-result);
 }
-/* One boxed meter for every significance score: identical width and five larger
-   segments, with filled bars showing the level and outlined bars the remainder. */
+/* One boxed meter for every significance score: the label stays close to its bars,
+   centered together at a fixed width. Filled bars show the level; outlined bars the
+   remainder. */
 .site-significance {
   align-items: center;
   block-size: 1.45em;
@@ -1362,9 +1366,9 @@ body {
   font-size: var(--site-font-size-note);
   font-variant-numeric: tabular-nums;
   font-weight: var(--site-font-weight-sans-medium);
-  gap: 0.3em;
+  gap: 0.18em;
   inline-size: 5.5em;
-  justify-content: space-between;
+  justify-content: center;
   padding-inline: 0.28em;
   vertical-align: baseline;
   white-space: nowrap;
@@ -3483,24 +3487,30 @@ html[data-site-atlas-view="triangle"]
 .kpress .site-news-day.is-collapsed:hover .site-news-body::after {
   opacity: 1;
 }
-.kpress .site-news-date {
+.kpress .site-article-header {
+  font-size: var(--kpress-font-size-base);
+}
+.kpress .site-article-date {
   color: inherit;
   font-family: var(--kpress-font-sans);
   font-feature-settings: var(--kpress-font-features-sans);
   font-size: var(--site-font-size-sans-base);
   font-style: normal;
-  font-weight: var(--site-font-weight-sans-light);
+  font-weight: var(--site-font-weight-sans-medium);
   letter-spacing: normal;
   line-height: 1.45;
   margin: 0 0 0.6rem;
   text-align: start;
   text-transform: none;
 }
-.kpress .site-news-header > h3 {
-  margin-block: 0.6rem;
+.kpress .site-article-header > h3 {
+  color: inherit;
+  font-style: normal;
+  letter-spacing: normal;
   text-align: start;
+  text-transform: none;
 }
-.kpress .site-news-header > h3 :is(.kpress-math, .katex, .tex, math) {
+.kpress .site-article-header > h3 :is(.kpress-math, .katex, .tex, math) {
   letter-spacing: normal;
   text-transform: none;
 }
@@ -3576,6 +3586,17 @@ html[data-site-atlas-view="triangle"]
    typography, colors, selected states and right alignment. */
 .site-news-filters :is(.site-tabs, .site-table-tools) {
   margin: 0;
+}
+/* Topics wrap as individual outlined choices so each row ends with its last
+   button, rather than leaving empty bays inside one rectangular strip. */
+.site-news-filters [aria-labelledby="news-topics-label"] {
+  border: 0;
+  gap: 0.25rem;
+}
+.site-news-filters [aria-labelledby="news-topics-label"] button {
+  border: 1px solid var(--kpress-doc-border);
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 /* The default first paint already shows S4/S5. Readers without scripting receive

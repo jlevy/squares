@@ -4,6 +4,9 @@
 Site cuts regenerate claim documents and leave infographic and paper editions alone.
 Infographic cuts redraw both posters and every PDF/PNG export at one shared version.
 Paper cuts change only that paper's history and regenerate its HTML, Markdown and PDF.
+Ordinary cuts run shared release/date contracts and the owning component's quick tests.
+`--include-deep-tests` also runs slow and exhaustive tests in that component's files.
+Neither selection replaces the full checkpoint required for final review.
 Every cut records the complete delivered change in `release.RELEASE_IMPACTS`; the scope
 explains the patch or minor choice. Internal work and changelog bookkeeping need no cut.
 
@@ -26,6 +29,7 @@ import argparse
 import ast
 import json
 import re
+import shlex
 import subprocess
 import sys
 import textwrap
@@ -37,20 +41,33 @@ from strif import atomic_output_file
 
 from devtools import release_pin
 from sqpack import release
+from sqpack.cli.validate import QUICK_TESTS
 
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
 REVISION_LINE = re.compile(r'^PUBLICATION_REVISION = "([0-9a-f]{7,40})"$', re.MULTILINE)
 IMPACTS_OPEN = "RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = ("
 SCOPE_WIDTH = 76
-TESTS = (
+COMMON_TESTS = (
     "tests/test_release.py",
     "tests/test_release_components.py",
-    "tests/test_n11_lower_bounds_explainer.py",
-    "tests/test_verify_claim.py",
-    "tests/test_known_best_composites.py",
     "tests/test_artifact_dates.py",
 )
+#: Generation ownership also determines the tests a cut runs (think-8iml). Scientific
+#: assertions stay in their existing lanes; a cut's quick checks are iteration feedback.
+COMPONENT_TESTS = {
+    "site": ("tests/test_verify_claim.py", "tests/test_verify_threshold_claim.py"),
+    "infographics": ("tests/test_known_best_composites.py",),
+    "paper:n11-lower-bounds-explainer": (
+        "tests/test_n11_lower_bounds_explainer.py",
+        "tests/test_render_n11_lower_bounds_explainer_pdf.py",
+        "tests/test_verify_claim.py",
+        "tests/test_verify_threshold_claim.py",
+    ),
+    "paper:n11-optimality-review": ("tests/test_render_n11_optimality_review.py",),
+    "paper:n11-threshold-bound-review": ("tests/test_render_n11_threshold_bound_review.py",),
+    "paper:square-packing-methods-survey": ("tests/test_render_packing_methods.py",),
+}
 PAPER_MODULES = {
     "paper:n11-lower-bounds-explainer": "devtools.render_n11_lower_bounds_explainer",
     "paper:n11-optimality-review": "devtools.render_n11_optimality_review",
@@ -162,8 +179,10 @@ def _git(*arguments: str) -> str:
     return done.stdout.strip()
 
 
-def steps(version: str, component: str = "site") -> list[tuple[str, tuple[str, ...]]]:
-    """Component-owned generation, then checks; a site cut never redraws posters."""
+def steps(
+    version: str, component: str = "site", *, include_deep_tests: bool = False
+) -> list[tuple[str, tuple[str, ...]]]:
+    """Component-owned generation and checks; deeper tests require an explicit choice."""
     release.component_history(component)
     plan: list[tuple[str, tuple[str, ...]]]
     if component == "infographics":
@@ -184,11 +203,17 @@ def steps(version: str, component: str = "site") -> list[tuple[str, tuple[str, .
         if component == "paper:n11-lower-bounds-explainer":
             plan = [
                 ("regenerate this paper's HTML and Markdown", (module,)),
-                ("regenerate this paper's PDF", (module + "_pdf",)),
+                ("regenerate this paper's PDF", (module + "_pdf", "--update")),
             ]
         else:
             plan = [("regenerate this paper's HTML, Markdown and PDF", (module, "--pdf"))]
-    plan.append(("run the tests that hold component editions", ("pytest", "-q", *TESTS)))
+    tests = [*COMMON_TESTS, *COMPONENT_TESTS[component]]
+    if component in PAPER_MODULES:
+        tests.append("tests/test_paper_structure.py")
+    marker = () if include_deep_tests else ("-m", QUICK_TESTS)
+    plan.append(
+        ("run the tests that hold this component's edition", ("pytest", "-q", *tests, *marker))
+    )
     return plan
 
 
@@ -203,10 +228,12 @@ def remaining(version: str, component: str = "site") -> str:
         Left to do, none of it done here:
           1. Review the impact decision and diff, then commit release.py and {artifacts}.
              Keep {version} fixed through review. Other components keep their own editions.
-          2. Merge, wait for the "Certificate page" workflow on main, then from packing/:
+          2. Obtain the full checkpoint for final review on matching source and base.
+             Component checks, including --include-deep-tests, do not supply omitted checks.
+          3. Merge, wait for the "Certificate page" workflow on main, then from packing/:
                python -m devtools.check_published_site --commit <merge commit>
              The {component} version {version} is complete when that passes.
-          3. If the deployment's UTC date differs, correct {history_name}'s new date
+          4. If the deployment's UTC date differs, correct {history_name}'s new date
              and record the deployment evidence beside its history.
         No tag or GitHub release is created here. A release is cut only to host generated
         assets needing a download address. Films stay on render_overview.FILM_RELEASE
@@ -253,6 +280,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--date", help="the planned first-publication day: October 13, 2026")
     parser.add_argument("--dry-run", action="store_true", help="print the plan; change nothing")
+    parser.add_argument(
+        "--include-deep-tests",
+        action="store_true",
+        help=(
+            "include the selected component's slow and exhaustive tests; "
+            "full checkpoint stays separate"
+        ),
+    )
     arguments = parser.parse_args(argv)
     today = datetime.now(UTC)
     first_published = arguments.date or f"{today:%B} {today.day}, {today.year}"
@@ -267,7 +302,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     except (RuntimeError, ValueError, subprocess.CalledProcessError) as error:
         print(f"FAIL: {error}", file=sys.stderr)
         return 1
-    plan = steps(arguments.version, arguments.component)
+    plan = steps(
+        arguments.version, arguments.component, include_deep_tests=arguments.include_deep_tests
+    )
     print(
         f"{arguments.component}: {release.component_version(arguments.component)} -> "
         f"{arguments.version}, first published {first_published}; {arguments.impact} impact"
@@ -276,7 +313,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         f"  1. add the owning history entry and release-impact decision (revision {revision})"
     )
     for number, (what, command) in enumerate(plan, start=2):
-        print(f"  {number}. {what}: python -m {' '.join(command)}")
+        print(f"  {number}. {what}: python -m {shlex.join(command)}")
     if arguments.dry_run:
         print("dry run: nothing was changed")
         print(remaining(arguments.version, arguments.component))

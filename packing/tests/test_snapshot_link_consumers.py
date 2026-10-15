@@ -6,6 +6,7 @@ structurally: the results register's evidence and each defect's `recorded_in`. E
 other document's links are prose for a reader outside the worker (think-b6ir).
 """
 
+import json
 import re
 import subprocess
 from pathlib import Path
@@ -429,3 +430,91 @@ def test_linked_directories_follow_the_same_checked_consumer_rule(
     landed = linked_tree / bundle.relative_to(repo)
     assert landed.is_dir()
     assert not any(landed.iterdir())
+
+
+@pytest.mark.parametrize("location", ["result", "drawing"])
+def test_identity_measurement_files_reach_private_indexed_workers(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, location: str
+) -> None:
+    """The results checker reads both schema locations of `identity.measured_in`."""
+    repo = tmp_path / "source"
+    packing = repo / "packing"
+    archive = packing / "resources"
+    archive.mkdir(parents=True)
+    measurement = archive / "identity-comparison.txt"
+    payload = b"retained identity measurement\n"
+    measurement.write_bytes(payload)
+    unrelated = archive / "other-comparison.txt"
+    unrelated.write_bytes(b"unconsumed archive evidence\n")
+    campaign = packing / "campaign"
+    campaign.mkdir()
+    (campaign / "README.md").write_text("Campaign record.\n")
+    register = packing / "frontier/results.yaml"
+    register.parent.mkdir()
+    item = {
+        "n": 70,
+        "of": "T-001",
+        "by": "project",
+        "method": "fewest",
+        "side": "same",
+        "identity": {
+            "basis": "measured",
+            "one_to_one": True,
+            "measured_in": measurement.relative_to(repo).as_posix(),
+        },
+    }
+    record = {"id": "T-002", "regularizations": [item] if location == "result" else []}
+    data = {
+        "results": [record],
+        "regularized_drawings": {"items": [item] if location == "drawing" else []},
+    }
+    register.write_text(json.dumps(data))
+    scopes = {"T-001": {70}, "T-002": {70}}
+    dates = {"T-001": "2026-10-10", "T-002": "2026-10-14"}
+
+    def findings() -> list[str]:
+        return check_results.regularizations_problems(record, dates, scopes) + (
+            check_results.regularized_drawings_problems(data, scopes, drift=False)
+        )
+
+    monkeypatch.setattr(check_results, "REPO", repo)
+    assert findings() == []
+    monkeypatch.setattr(controls, "REPO", repo)
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "HERE", Path("packing"))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({archive}))
+    monkeypatch.setattr(controls, "DESCEND", frozenset())
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (archive,))
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    index_fixture_source(repo)
+    tree = tmp_path / "worker"
+    controls.clone_tree(tree)
+    monkeypatch.setattr(check_results, "REPO", tree)
+    assert findings() == []
+    copied = tree / measurement.relative_to(repo)
+    assert copied.read_bytes() == payload
+    assert not copied.is_symlink()
+    assert not (tree / unrelated.relative_to(repo)).exists()
+    indexed = subprocess.run(
+        ["git", "-C", str(tree), "ls-files", "--error-unmatch", str(copied)],
+        check=False,
+        capture_output=True,
+        timeout=10,
+    )
+    assert indexed.returncode == 0, indexed.stderr
+    git_tree = subprocess.run(
+        ["git", "-C", str(repo), "write-tree"],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    ).stdout.strip()
+    assert controls.snapshot_git_source_bytes(git_tree) == controls.snapshot_source_bytes()
+    copied.write_bytes(b"private corruption\n")
+    assert measurement.read_bytes() == payload
+    copied.unlink()
+    [problem] = findings()
+    assert "identity.measured_in does not name a file" in problem

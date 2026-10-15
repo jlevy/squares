@@ -127,8 +127,13 @@ def test_each_record_says_whether_its_bound_agrees_with_the_report() -> None:
 def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
     """At n = 264 issue 528's packing (T-158) was adopted on 12 October 2026, below T-155's
     view: the record's verified upper bound is the house's, this layer leaves the record as
-    it is, and the view's dated paragraph and section say it held until that day."""
-    assert [n for n in registered.committed() if registered.readopted(n)] == [264]
+    it is, and the view's dated paragraph and section say it held until that day. At n = 204
+    issue 562's packing (T-162) was adopted so on 15 October 2026."""
+    assert [n for n in registered.committed() if registered.readopted(n)] == [204, 264]
+    assert registered.readopted_by(204, "T-155")
+    text = (registered.FRONTIER / "n-204.md").read_text(encoding="utf-8")
+    assert registered.apply_case(204, text) == text
+    assert "The verified upper bound was that side exactly until 15 October 2026" in _flat(204)
     assert registered.readopted_by(264, "T-155")
     assert not registered.readopted_by(264, "T-156")
     row = registered.committed()[264]
