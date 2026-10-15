@@ -3,17 +3,27 @@ type: is
 id: is-01m50wdv3taw3k5gt76mhzx8mm
 title: "Record-keeping: make the record state explicitly per count whether its displayed drawing is regularized (field + gate), fix the process if it cannot"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 3
+version: 7
+delegate: ecstatic-edison-reg-record
 labels:
   - regularization
 dependencies:
   - type: blocks
     target: is-01m50wdvvpwz9asfq2gvaxfz5w
+  - type: blocks
+    target: is-01m50xqm2f4t3jb74z1sjnx5x9
+  - type: blocks
+    target: is-01m50xqnsqj449s8rz91s61rdn
+  - type: blocks
+    target: is-01m50xqqjr60wtgjhqbwayj10m
 parent_id: is-01m50wdrbfnwsq05w150az5z88
+hold: null
+hold_until: null
 created_at: 2026-10-15T22:55:18.138Z
-updated_at: 2026-10-15T23:18:16.992Z
+updated_at: 2026-10-15T23:18:47.484Z
+started_at: 2026-10-15T23:18:47.484Z
 ---
 
 ## Notes
