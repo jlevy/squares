@@ -316,6 +316,9 @@ ul.credits {
 ul.credits > li {
   margin: 0;
 }
+.kpress ul.credits > li::before {
+  content: none;
+}
 ul.credits > .publication-date {
   margin-block-start: 1lh;
 }
