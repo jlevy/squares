@@ -5,7 +5,7 @@ title: Narrow the negative-control copy-back to links a control checks (about 14
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: claude-code@vm
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 hold: null
 hold_until: null
 created_at: 2026-10-12T02:43:37.559Z
-updated_at: 2026-10-15T03:20:03.450Z
+updated_at: 2026-10-15T04:29:09.738Z
 started_at: 2026-10-15T01:36:13.902Z
 ---
 On 2026-10-12 the owner raised `SNAPSHOT_MAX_BYTES` in
@@ -86,3 +86,27 @@ Release: `release.py` carries a reviewed no-public-change record for the four pa
 site; the runner is in their import closure only via `upper_bound_houses.custody`.
 
 Close on merge.
+
+2026-10-15, review A of #611 (A1): Done-when amended for `check_documentation`.
+
+As written, the criterion asked that unmutated `check_documentation` "print the same in a
+worker before and after". It cannot, by the design of this bead. No registered control
+runs `check_documentation`, and it is the one checker that follows the links of
+reviews, research and guides. Those are exactly the links the narrowing stops carrying
+into workers. They are still checked in the real checkout, where `check_documentation`
+runs as a gate step.
+
+The amended criterion: in a worker, unmutated `check_documentation` loses no line, and every
+line it gains is a dead link to a dropped file or to a pruned directory that only a review
+links.
+
+Measured at the final selection (`--baseline-command`):
+- 270 distinct lines before, and none lost after.
+- 380 lines gained: 362 dead links to all 225 dropped files, and 18 links to pruned
+  directories that were recreated empty before.
+
+The other four commands (`check_readme`, `check_gate_budgets`, `ledger check` and
+`validate_schemas`) print byte-identical output before and after.
+
+Final figures at the review-A head: 212,294,894 bytes, 14,197,522 under the cap. The
+selection saves 14,082,212; the branch adds 33,033.
