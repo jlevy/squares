@@ -630,7 +630,7 @@ Significance S3: A notable focused contribution improves the public mathematical
 
 The methods survey now illustrates construction, simulated annealing, packing surgery, sequential linear programming and exact algebraic certification with five attributed examples. Updated explanations connect the figures to 32 selected upper-bound improvements.
 
-The examples credit [Walter Trump](packing/contributors/people/walter-trump.md), Thomas Schadt, David Ellsworth, Griffin Casson, Nate Chaoweeraprasit and [Ryan Xu](packing/contributors/people/ryan-xu.md). The revision explains exact arithmetic for Xu’s 51-square witness, records later refinement lineages, and distinguishes local rigidity from optimality. This is the illustrated follow-up to the survey’s 9 October publication.
+The examples credit [Walter Trump](packing/contributors/people/walter-trump.md), Thomas Schadt, [David Ellsworth](packing/contributors/people/david-ellsworth.md), Griffin Casson, Nate Chaoweeraprasit and [Ryan Xu](packing/contributors/people/ryan-xu.md). The revision explains exact arithmetic for Xu’s 51-square witness, records later refinement lineages, and distinguishes local rigidity from optimality. This is the illustrated follow-up to the survey’s 9 October publication.
 
 Published artifacts: [Current methods tutorial](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) · [Current methods tutorial PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf).
 
