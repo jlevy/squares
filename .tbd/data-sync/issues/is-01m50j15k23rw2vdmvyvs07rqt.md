@@ -5,13 +5,13 @@ title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 a
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-15T19:53:37.121Z
+updated_at: 2026-10-15T20:11:55.682Z
 ---
 Stage 1 triage of pull request jlevy/squares#622 (BuddenPing, PingYou Ltd, "data: submit a tighter exact N29 packing certificate", opened 2026-10-15T18:43:54Z, no comments or reviews when read at about 19:50Z). A result submitted as a pull request, treated as an intake report as #574 was (think-9v2k): never merged, approved, pushed to or commented on here. Lane D of the 2026-10-15 evening intake pass (think-wnsv, think-ykg6), read-only.
 
@@ -29,7 +29,7 @@ One: s(29) <= S, S the exact rational side above, about 5.9338334626769291896894
 
 - n-029.md: reported 5.93383346267692 (Kingbird print, exact_form null); verified T-155, 296691673133846459484473030817600957/5e34. S is 1.566e-36 below T-155, 7.32e-90 below #574's v2 N29 side, 5.93e-20 below evand's batch n-29.cert, and 9.19e-15 above the reported print read as a number.
 - T-174 (#574) does not register 29. The 14 October ledger left #574's N29 row undecided against the reported lane, and think-abjj's exact pass kept 29 gated: the reported lane's exact side is the root sigma of Evan Daniel's degree-7213 polynomial (#545), which the record does not yet hold (think-6gti).
-- By the report-order rule, #622 is later and stronger than #574's N29 row, and below the verified lane; against the reported lane it is undecided until the record holds sigma. S is a rational realization of the same packing, so it is expected just above sigma, as 14 of #574's 17 decided rows were above their exact lanes (3 equal, none below): if so, it is not recorded, unless the owner names a key reason. Register action if recorded: a new entry (a bound the record does not hold), refinement credited PingYou Ltd after Schadt and Ellsworth.
+- By the report-order rule, #622 is later and stronger than #574's N29 row, and below the verified lane; against the reported lane it is undecided until the record holds sigma. S is a rational realization of the same packing, so it is expected just above sigma, as 14 of the 17 #574 comparisons think-abjj decided exactly were above the standing side (3 equal, none below): if so, it is not recorded, unless the owner names a key reason. Register action if recorded: a new entry (a bound the record does not hold), refinement credited PingYou Ltd after Schadt and Ellsworth.
 - Draft significance: S1, a padding refinement of a packing the record holds.
 
 ## Price
