@@ -3,9 +3,9 @@ type: is
 id: is-01m4ywspmt47ny1en5jnen7c09
 title: "Address PR #612 reviews A and B: records-1015 credit, wording, artifacts and record nits"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 20
+version: 21
 labels: []
 dependencies: []
 child_order_hints:
@@ -29,5 +29,9 @@ child_order_hints:
   - is-01m4ywtpandnygxme2n61g601b
   - is-01m4ywtq6ntygqch1zraeay361
 created_at: 2026-10-15T04:23:17.914Z
-updated_at: 2026-10-15T04:23:51.253Z
+updated_at: 2026-10-15T05:03:44.670Z
+closed_at: 2026-10-15T05:03:44.670Z
+close_reason: "PR #612 reviews A and B dispositioned at 2bf0052d6 (comments 6184718806, 6184718982); CI green; deferred: think-z161, think-abcm"
+resolution: null
+duplicate_of: null
 ---
