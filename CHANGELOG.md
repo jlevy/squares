@@ -40,6 +40,37 @@ First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/square
 
 PRs and supporting records: [\#592](https://github.com/jlevy/squares/pull/592) · [\#595](https://github.com/jlevy/squares/pull/595) · [Fitzharding mathematical review](docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md) · [Overbeck mathematical review](docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md) · [Evidence and independence rules](epistemics.md).
 
+<a id="changelog-entry-october-fourteen-credits-and-record-updates"></a>
+
+#### Ryan Xu Credited by Name, and the 14 October Records Brought Up to Date
+
+Significance S2: Credit, verification and record work on results already registered; no rung moves and no new result.
+
+The record now credits Ryan Xu by name, or by his surname Xu, where it credited
+his packings by his GitHub login; the login stays only where it identifies his
+source. The 14 October records also take in work finished after the intake: the
+decided comparisons with PR #574, a priced replay of the closed-form lower bound,
+and Kevin Fang’s direct certificates verified at all fourteen counts. No result
+changes its rung.
+
+- T-174 states the 17 comparisons with PR #574’s certificates that are now decided
+  exactly: PR #574 is above the standing side at 14 counts and equal to it at
+  three, so it is recorded at none of them. Four comparisons stay undecided.
+- Two of the 136 records of the closed-form bound’s certificate (T-180), the two
+  cheapest by the source’s CPU time, were replayed here and passed. That prices
+  the complete replay at about 5,250 CPU-hours, above the current compute cap; the
+  two replays are recorded as a sample, which decides only the records it covers.
+- Kevin Fang’s direct certificates are verified at all fourteen counts, from 380 to
+  814, each on two exact routes with its controls.
+- The 21 follow-up replies posted after #602 merged, and the 14 October verdict
+  comments on the open reports, are recorded.
+
+Component editions: Site v0.7.2.
+
+First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38655419465/job/116165526619)).
+
+PRs and supporting records: [\#608](https://github.com/jlevy/squares/pull/608) · [Current result register](packing/frontier/RESULTS.md) · [The decided comparisons](packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json) · [The closed-form replay calibration](packing/resources/web/wand125-closed-form-2026-10-14/receipts/calibration/calibration.json).
+
 <a id="changelog-entry-october-fourteen-intake-ledger"></a>
 
 #### An Audit of Every Open Packing Report

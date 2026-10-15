@@ -6,6 +6,56 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: october-fourteen-credits-and-record-updates
+    date: '2026-10-14'
+    title: "Ryan Xu Credited by Name, and the 14 October Records Brought Up to Date"
+    significance:
+      score: 2
+      rationale: "Credit, verification and record work on results already registered; no rung moves and no new result."
+    topics: [verification, documentation]
+    pull_requests:
+      - 608
+    categories:
+      - records
+    result_ids:
+      - T-125
+      - T-126
+      - T-158
+      - T-159
+      - T-174
+      - T-180
+    summary: |
+      The record now credits Ryan Xu by name, or by his surname Xu, where it credited
+      his packings by his GitHub login; the login stays only where it identifies his
+      source. The 14 October records also take in work finished after the intake: the
+      decided comparisons with PR #574, a priced replay of the closed-form lower bound,
+      and Kevin Fang’s direct certificates verified at all fourteen counts. No result
+      changes its rung.
+    details: |
+      - T-174 states the 17 comparisons with PR #574’s certificates that are now decided
+        exactly: PR #574 is above the standing side at 14 counts and equal to it at
+        three, so it is recorded at none of them. Four comparisons stay undecided.
+      - Two of the 136 records of the closed-form bound’s certificate (T-180), the two
+        cheapest by the source’s CPU time, were replayed here and passed. That prices
+        the complete replay at about 5,250 CPU-hours, above the current compute cap; the
+        two replays are recorded as a sample, which decides only the records it covers.
+      - Kevin Fang’s direct certificates are verified at all fourteen counts, from 380 to
+        814, each on two exact routes with its controls.
+      - The 21 follow-up replies posted after #602 merged, and the 14 October verdict
+        comments on the open reports, are recorded.
+    publication:
+      date: '2026-10-14'
+      evidence: https://github.com/jlevy/squares/actions/runs/38655419465/job/116165526619
+    releases:
+      - component: site
+        version: v0.7.2
+    references:
+      - label: Current result register
+        target: packing/frontier/RESULTS.md
+      - label: The decided comparisons
+        target: packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json
+      - label: The closed-form replay calibration
+        target: packing/resources/web/wand125-closed-form-2026-10-14/receipts/calibration/calibration.json
   - id: october-fourteen-intake-records
     date: '2026-10-14'
     title: "Two Bound Families and 22 More Results From the 14 October Intake"
@@ -1329,6 +1379,17 @@ deliveries:
   merged_at: '2026-10-14T12:16:17Z'
   base_ref: main
   merge_commit: 37e6757ed4c51a1d93f2f999814c2a5efbe2a223
+- number: 608
+  title: 'records: credit Ryan Xu by name, T-174''s decided comparisons, T-180''s calibration, Fang''s
+    14 direct certificates, and the #602/#605 News entries'
+  merged_at: '2026-10-14T23:39:26Z'
+  base_ref: main
+  merge_commit: 0dd9003e084923a14c0cd2622fec867614dda36e
+- number: 609
+  title: 'fix(check_requests): never call a sampled replay confirmed'
+  merged_at: '2026-10-15T00:23:58Z'
+  base_ref: main
+  merge_commit: 6964362b5c225c519b4d6cd52663a3d795b05292
 stacks:
 - id: 498
   pull_requests:
@@ -1407,7 +1468,12 @@ coverage:
   - 605
   - 602
   - 597
+  - 608
+  - 609
   omissions:
+  - pull_request: 609
+    reason: Reply-tool fix that never calls a sampled replay confirmed; no result, bound, admission or
+      public artifact change.
   - pull_request: 597
     reason: Reply-tracker correction; no result, bound, admission or public artifact change.
   - pull_request: 579
