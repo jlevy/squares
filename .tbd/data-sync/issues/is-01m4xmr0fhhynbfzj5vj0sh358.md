@@ -5,7 +5,7 @@ title: "Import Mishapolk 70a033f (no issue): 12 KKT refinements below best now a
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:43:19.409Z
-updated_at: 2026-10-14T23:04:32.077Z
+updated_at: 2026-10-15T00:31:22.900Z
 started_at: 2026-10-14T23:04:32.077Z
 ---
 Mishapolk/square-packing-records 70a033f (2026-10-14T16:11:31Z), 7 commits past #593's pin 46f638c. No issue reports it. Commit message: 'Refine 14 contested certificates to ultra-precision KKT endpoints'. census.json credits 14 counts to Mykhailo Polkovskyi and 10 re-cut counts to 'Antigravity'.
@@ -27,3 +27,27 @@ Exact comparison against ledger.json best now (triage 2026-10-14, scratchpad tri
 - Not below best now (read note only): 153, 155, 181, 209, 267, 270, 272, 305-308.
 
 Owner decided 2026-10-14: counts from first commit. It enters in report order at its first commit, after every report already in the ledger, so it changes no existing verdict, only adds rows. Validation: think-j7f1 (24 certificates, ~0.8 CPU-h, runnable).
+
+## Notes
+
+**2026-10-14 evening lane (think-mq0k, branch `claude/wizardly-meitner-wqn4x3-intake-1014b` from main 9b32da04d): stages 1, 2 and the stage 4 replay done; no register edits.** Packet `packing/resources/web/mishapolk-kkt-refinements-2026-10-14/` (derived facts only, no licence).
+
+**Pin.** Mishapolk/square-packing-records 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94 (2026-10-14T16:11:31Z, tree c816b6f9), still the branch head at retrieval (22:31Z). Changes census.json, 24 certificates n<n>.cert (129, 153, 154, 155, 156, 175, 176, 181, 204, 207, 209, 232, 264, 267, 270, 271, 272, 302-308) and 14 copies square-<n>.cert, byte-identical to n<n>.cert. Every file first committed at 70a033f; none byte-identical to any file a packet here retains. README unchanged since 46f638c (SHA-256 d1b8a7da...).
+
+**Claims.** Commit message: "Refine 14 contested certificates to ultra-precision KKT endpoints: strictly defeat PingYou PR #574, Couzo #583, #586, and Ostashev #575". census.json: each exact side_fraction (every certificate header equals it; admitted there), credits 14 counts to "Mykhailo Polkovskyi (ultra-precision KKT dual-verified optimum)" and 10 (155, 181, 209, 267, 270, 272, 305-308) to "Antigravity (high-precision dual-verified contact optimum)". README (unchanged): dual exact verification with Evan Daniel's verify_cert.py/verify_cert2.py, zero tolerance; no optimality claim.
+
+**Credit / AI.** Author asks on #593 (comments 15:16Z and 15:38Z): "Please credit all entries in the record, register, and site under Mykhailo Polkovskyi (GitHub: @Mishapolk)". Commit names no co-author; census credits 'Antigravity' at 10 counts (recorded as the source gives it, not read as a person); ISSUE_REGISTRATION.md (unchanged): "Gemini 3.8 assisted with solver scripting, precision checks, and formatting."
+
+**Comparison (acquisition/claims.json, check-claims, main 9b32da04d, every house and every report #593's packet compared with, under the T-NNN #602 gave each, plus #593 at 46f638c).** Smallest at exactly 12 counts. Nearest margins: 129 1.10e-21 below T-174; 154 1.29e-19 below T-182 (#586); 156 1.19e-34 below T-174; 175 7.23e-75 below T-174; 176 1.25e-94 below T-174; 204 1.83e-21 below T-174; 232 1.45e-74 below T-174; 264 1.75e-74 below T-174; 271 2.09e-34 below T-174; 302 1.79e-19 below T-181 (#583/#586); 303 2.43e-74 below T-174; 304 1.79e-19 below T-175 (#575). Not smallest (T-174 smaller): 153 by 1.29e-39; **207 by 1.49e-99, decided exactly** against PR #574's degree-5 field side (new `algebraic` pending kind in upper_bound_reports, reading facts/alg-n-207.yaml.gz of the PR #574 packet); 155, 181, 209, 267, 270, 272, 305-308 by 1.30e-23 to 1.80e-23.
+
+**Report order.** 70a033f (16:11:31Z) is later than every report the 14 October ledger walks at these counts; nothing reached the record at these counts between the ledger's read and it (no issue/comment bound; PR #574 head still 4c319c2; Ostashev head b909e1b of 12 Oct; Couzo 487b058 17:45Z and 43ac7d2 19:15Z add nothing at these counts; #606 at 21:51Z is 146 only). Verdict: **recorded at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303, 304; not recorded at the other 12** (T-174 decidably smaller at each, 207 included).
+
+**Refinement of whose packing (measured, review/compare_lineage.py, greedy nearest-centre under 8 symmetries, output review/compare_lineage-output.txt).** 129: PR #574's (T-174) refinement of Ostashev's #562 (T-162), 127/129 centres within 1e-6, max 1.4e-4. 154: Couzo's #586 (T-182), 144/154, max 6.4e-4. 156: Couzo's #561 (T-161) via T-174, all within 7.6e-16. 175: Ostashev's #528 (T-158) via T-174, all within 9.2e-16. 176: Ostashev's #575 via T-174, 159/176, max 1.4e-4. 204: Ostashev's #562 (T-162) via T-174, 192/204, max 1.0e-3. 232: Ostashev's #528 (T-158) via T-174, 147/232, max 2.8e-4. 264: Ostashev's #528 (T-158) via T-174, all within 1.2e-15. 271: Couzo's #561 (T-161) via T-174, all within 9.9e-16. 302: Couzo's #583/#586 (T-181), all within 7.8e-16. 303: Ostashev's #562 (T-162) via T-174, all within 9.5e-16. 304: Ostashev's #575 (T-175), all within 9.4e-16. Finder per count is the 14 Oct ledger's account of PR #574's lineage.
+
+**Replay (think-j7f1, done).** certify --workers 1 22:53:02Z-23:30:38Z (37 min 36 s); check --replay 23:31:19Z-00:09:05Z (37 min 46 s), all 72 jobs equal to the retained rows. All 24 positives pass both routes, all 48 controls refused; 4,186,086 pair decisions, 2,167.90 route CPU s, 2,194.11 job wall s, longest job 78.28 s. Least wall clearance equal on both routes: 5e-25 (Antigravity counts), 5e-41 (129, 153, 154, 156, 302, 304), 5e-101 (204, 207, 232, 264, 271, 303), 3.63e-78 (175), 3.62e-98 (176). Receipts receipts/exact-certification-nNNN.json.xz. Third route not run (~20 min of one worker plus a roster line).
+
+**Register plan (register-plan output kept at packing/resources/web/mishapolk-kkt-refinements-2026-10-14/register-plan.yaml).** One new entry T-NNN over the 12 recorded counts, V0/C0, draft S2, source key [Mishapolk KKT refinements 2026-10-14] (bibliography "Polkovskyi after Ostashev, Couzo, PingYou Ltd", dated 2026-10-14), evidence E-mishapolk-70a033f-certificate-report, source row mishapolk-kkt-refinements-2026-10-14, attribution.published 2026-10-14. The records lane must add `regularizations` for the 12 counts (of: T-174 at 129, 156, 175, 176, 204, 232, 264, 271, 303; T-182 at 154; T-181 at 302; T-175 at 304; identity basis: measured, compare_lineage) since register-plan does not write them, and should reword the plan's "certificates the issue does not name" sentence (there is no issue; the 12 others are not recorded under the per-count rule). HOUSES reader [Mishapolk KKT refinements 2026-10-14] added. Per the owner's S4+ rule no tracking issue is needed (draft S2).
+
+**Draft acknowledgement (optional; no issue reports 70a033f and #593 is the author's thread; post only after the records PR registers the twelve, per stage 7, with its T-NNN):**
+
+> @Mishapolk, thank you. We have read 70a033f, which replaces 24 of this issue's certificates. No issue reports it, so the record reads it as a publication reported at its first commit (16:11Z on 14 October). Admitted at the census's exact fractions and replayed on both of this repository's exact routes (all 24 accepted, all 48 controls refused), twelve are below every earlier report at their counts: 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304. Each tightens the certificate that held its count (PingYou Ltd's PR #574 at nine, Francisco Couzo's #586 at 154 and #583/#586 at 302, Daniil Ostashev's #575 at 304), so under the owner's report-order rule they are recorded as refinements of those packings, credited to Mykhailo Polkovskyi after each packing's finder. At the other twelve PR #574 is smaller; at 207 by 1.49e-99, which its algebraic side decides exactly. The census credits ten counts to "Antigravity"; please tell us how you would like that attributed. They will be registered in a records pull request, and we will reply here with the id.
