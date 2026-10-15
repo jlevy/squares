@@ -1126,7 +1126,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "where an empty style attribute falls in one formula's span, which moves "
             "between two renders of the branch alone. The claim documents change only the "
             "revision their links pin. A register count follows the site's data and is not "
-            "a revision of the paper, so the explainer keeps v0.4.7; the site takes v0.7.11."
+            "a revision of the paper, so the explainer keeps v0.4.7; the site takes v0.7.11. "
+            "Rendered again after the PR #627 review fixes, with the register and source "
+            "register as they stood at 52f02f5b and as fixed (T-188 to T-192's notes, "
+            "significance and regularizations, two source notes), the Markdown is "
+            "byte-identical and the HTML differs only in that same empty style attribute."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1163,7 +1167,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "readers, the About page a card for bengreff/s95-certificate, the requests "
             "record replies and entries, and the source register 267 beyond-horizon rows; "
             "none of the three papers reads any of them, so each keeps its edition: "
-            "v0.1.7, v0.1.0 and v0.2.2."
+            "v0.1.7, v0.1.0 and v0.2.2. Rendered again after the PR #627 review fixes, "
+            "with the register and source register as they stood at 52f02f5b and as fixed "
+            "(T-188 to T-192's notes, significance and regularizations, two source notes), "
+            "the three papers' HTML and Markdown are byte-identical."
         ),
     ),
     ReleaseNoPublicChange(
