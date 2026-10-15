@@ -85,6 +85,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.7",
+        first_published="October 15, 2026",
+        result_scope=(
+            "Complete tutorial launch coverage, clarify the studied counting-certificate "
+            "limits and refresh the atlas and explainer downloads."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.6",
         first_published="October 15, 2026",
         result_scope=(
@@ -239,6 +247,15 @@ PUBLICATION_STATUS = ""
 #: 2026-10-02T01:07:03Z), not an export filename or the date of a later redraw.
 #: Both retained 1-100 and 1-324 graphics, their PDFs and PNGs share this history.
 INFOGRAPHIC_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.6.1",
+        first_published="October 15, 2026",
+        result_scope=(
+            "Refresh both atlas posters to the admitted October 15 packing data, bounds "
+            "and credits, with descriptions matching gray case numbers and numeric-only "
+            "recency accents."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.6.0",
         first_published="October 14, 2026",
@@ -397,6 +414,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.7",
+        first_published="October 15, 2026",
+        result_scope=(
+            "Refresh the embedded atlas to the admitted October 15 packings, bounds "
+            "and credits, and correct its description of numeric-only recency accents."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.6",
         first_published="October 14, 2026",
@@ -716,6 +741,37 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.6",
+        version="v0.7.7",
+        impact="patch",
+        reason=(
+            "Complete tutorial launch coverage, clarify the studied counting-certificate "
+            "limits and refresh the atlas and explainer downloads."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.6",
+        version="v0.4.7",
+        impact="patch",
+        reason=(
+            "Refresh the embedded atlas to the admitted October 15 packings, bounds "
+            "and credits, and correct its description of numeric-only recency accents."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="infographics",
+        previous_version="v0.6.0",
+        version="v0.6.1",
+        impact="patch",
+        reason=(
+            "Refresh both atlas posters to the admitted October 15 packing data, bounds "
+            "and credits, with descriptions matching gray case numbers and numeric-only "
+            "recency accents."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.5",
         version="v0.7.6",
         impact="patch",
@@ -875,6 +931,35 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/build_known_best_atlas.py",),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The shared atlas producer changes only SUMMARY_PROSE, the descriptions "
+            "written into the two composite SVGs. These three papers use its shared "
+            "typography and publication helpers but consume neither composite. Their "
+            "manuscripts, figures, mathematical inputs and helper implementations are "
+            "unchanged, as confirmed by independent source and artifact reviews. "
+            "They retain v0.1.7, v0.1.0 and v0.2.2 respectively. The lower-bounds "
+            "explainer does embed the refreshed atlas and takes its own v0.4.7 patch. "
+            "No byte-identity claim is made for unrebuilt PDFs."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -1755,7 +1840,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "6f3d6cc2"
+PUBLICATION_REVISION = "9c37f538"
 
 
 def data_pathspec() -> tuple[str, ...]:

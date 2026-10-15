@@ -9,8 +9,8 @@ author: Codex, for the repository owner
 
 **Author:** Codex, for the repository owner
 
-**Status:** Changelog implemented in PR #590; News and full-width Atlas follow-up in
-progress.
+**Status:** Delivered in PR #590, PR #604 and PR #617. The delivery record below links
+the reviewed releases and deployment checks.
 
 **Tracking:** `think-j7nb` (planning), `think-jpto` (implementation epic), `think-kzet`
 (News), `think-q65u` (Atlas width)
@@ -122,7 +122,7 @@ Authoring/backfill checks public destinations and retains deployment or
 publication-history evidence before presenting an artifact as launched.
 Unknown historical first-live dates stay absent.
 
-Render the complete history on News with readable contribution titles, concise
+Render the eligible history on News with readable contribution titles, concise
 summaries, optional subpieces, artifact links and component versions.
 Distinguish a confirmed launch from project-only or prepared work in the wording.
 The complete history should make it easy to find both the public deliverable and the
@@ -151,6 +151,7 @@ They demonstrate the record shape, not a completed production backfill.
 | `details` | Optional Markdown, usually a short nested bullet list for a substantial effort |
 | `stack_id` | Optional verified formal-stack identity; repeated across later deliveries |
 | `grouping` | Explicit `related` grouping for several PRs sharing a contribution without a formal-stack claim |
+| `news_exclusion` | Nonblank reason to omit an entry from News while retaining its published changelog history and archive bookmark |
 | `categories` | Optional structured labels: records, pipeline, regularization, site or documentation |
 | `result_ids` | Optional record identities for linking, without duplicating their current state |
 | `artifacts` | Optional labeled links to launched papers, PDFs, results, pages or graphics |
@@ -183,7 +184,7 @@ absolute PR links, and provides `--check` for freshness.
 The YAML remains authoritative; the generated Markdown is a reader view, not another
 manually maintained source.
 
-Publish the complete history at `news.html`, with News as the second navigation item.
+Publish the eligible history at `news.html`, with News as the second navigation item.
 Use the usual uppercase sans-serif H1 and sans-serif operational text, with one
 hairline-bordered card per entry.
 Each card starts with an ordinary H3 in the theme’s text foreground, followed by the
@@ -475,6 +476,34 @@ YAML. Publish News and its homepage preview, then verify the deployed history wi
 normal publication audit.
 Begin routine updates with the documented closeout process.
 
+## Delivery Record
+
+The initial changelog and component-version policy shipped in
+[PR #590](https://github.com/jlevy/squares/pull/590).
+[PR #604](https://github.com/jlevy/squares/pull/604), merged as `16ea3bd0606c`, added
+News, the full-width web Atlas, Explanations navigation and the basic/advanced tutorial
+split. Its reviewed head passed
+[Packing](https://github.com/jlevy/squares/actions/runs/38634417915) and
+[Pages](https://github.com/jlevy/squares/actions/runs/38634417893). The
+[main deployment](https://github.com/jlevy/squares/actions/runs/38636016372) published
+that merge on 14 October 2026; its
+[live audit](https://github.com/jlevy/squares/actions/runs/38636016372/job/116103959611)
+passed all 4,243 checks.
+
+[PR #617](https://github.com/jlevy/squares/pull/617), merged as `f97bc0b199e2`,
+delivered the shared article headings and original publication dates, compact filters
+and meters, News editorial exclusions, bundled code glyphs and the separate adoption
+announcement. The merged site edition is `v0.7.5`.
+[Packing](https://github.com/jlevy/squares/actions/runs/38722914629) and
+[Pages](https://github.com/jlevy/squares/actions/runs/38722914631), including the
+deployed site verification, passed at that merge on 15 October 2026.
+
+These receipts complete the reader delivery.
+CI iteration-cost work remains separately tracked by `think-h96x`; its timing and
+checkpoint obligations are unchanged.
+The subsequent closeout batch under `think-h3iv` records the PR #604 tutorial launch
+with its original date and gives PR #617’s routine refinements an editorial disposition.
+
 ## Open Questions
 
 The proposed initial cutoff is 36 merged main-branch PRs.
@@ -482,7 +511,7 @@ Extend it if the owner wants more historical context; the schema and backfill co
 must support that without changing the rendering design.
 No unresolved question blocks the draft implementation plan.
 
-## Significance and archive filters follow-up
+## Significance and Archive Filters Follow-up
 
 Each News entry requires `significance: {score, rationale}`: an integer S1–S5 and a
 nonempty plain-text editorial explanation.
@@ -535,10 +564,13 @@ The importer never derives importance from incidental result references.
 
 Results, homepage News and the News archive use the same stable topic keys and
 sentence-case labels from `packing/devtools/site_topics.py`. Registered result kinds
-retain their precise meanings; Engineering, Verification and Documentation cover project
-news. News accepts the complete vocabulary and offers filters for the topics present in
-its archive. Shared chips reset text transformation and small caps so the same label has
-the same casing on each surface.
+retain their precise meanings; Engineering and Verification cover project news.
+Documentation remains an internal contribution category, not a public topic.
+Pure document-maintenance entries use `news_exclusion` and remain in the full changelog;
+their earlier News bookmarks forward there.
+News offers filters for the topics present in its eligible archive.
+Shared chips reset text transformation and small caps so the same label has the same
+casing on each surface.
 The Results Kind selector uses the same display labels without changing the register’s
 kinds or scientific claims.
 

@@ -59,6 +59,45 @@ entries:
         target: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
       - label: Review of PingYou Ltd’s PR 574 certificates
         target: docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md
+  - id: basic-and-advanced-tutorials
+    date: '2026-10-14'
+    title: "Basic and Advanced Tutorials, Together Under Explanations"
+    significance:
+      score: 4
+      rationale: "A revised introduction and a separate advanced tutorial are a substantial public explanation of the problem and research methods."
+    topics: [engineering, verification]
+    pull_requests: [604]
+    categories: [site, documentation]
+    summary: |
+      The Explanations page now starts with a short introduction to square packing
+      and a separate advanced tutorial. Beginners can start with bounds and small
+      examples; the companion develops linear programs, exact certificates,
+      regularization and global proofs.
+    details: |
+      - Earlier tutorial links lead to the moved explanations. Definitions, notation,
+        worked derivations, figures and sources remain available in the two papers.
+      - The same index links the research papers, downloadable PDFs, film and interactive
+        Workbench. News collects project announcements, and the web Atlas uses the
+        available screen width.
+    artifacts:
+      - kind: paper
+        label: Current basic tutorial
+        target: https://jlevy.github.io/squares/tutorial.html
+      - kind: paper
+        label: Current advanced tutorial
+        target: https://jlevy.github.io/squares/tutorial-advanced.html
+      - kind: page
+        label: Current Explanations index
+        target: https://jlevy.github.io/squares/papers.html
+    publication:
+      date: '2026-10-14'
+      evidence: https://github.com/jlevy/squares/actions/runs/38636016372/job/116103959611
+    releases:
+      - component: site
+        version: v0.7.0
+    references:
+      - label: Tutorial preservation and editorial review
+        target: docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md
   - id: october-fourteen-intake-records
     date: '2026-10-14'
     title: "Two Bound Families and 22 More Results From the 14 October Intake"
@@ -1058,6 +1097,21 @@ entries:
       - label: Beyond-horizon source coverage
         target: packing/frontier/source-coverage.yaml
 deliveries:
+- number: 618
+  title: 'fix(ci): keep push and release validation in their quick lanes'
+  merged_at: '2026-10-15T11:50:04Z'
+  base_ref: main
+  merge_commit: fc2ceae79f462fe707ebbad1b94eb7cc306797b8
+- number: 617
+  title: 'fix: refine News cards and publication headings'
+  merged_at: '2026-10-15T10:48:50Z'
+  base_ref: main
+  merge_commit: f97bc0b199e2493b0d84ba51f512e2b406b73021
+- number: 604
+  title: 'feat(site): publish News and unify Explanations navigation'
+  merged_at: '2026-10-14T20:54:35Z'
+  base_ref: main
+  merge_commit: 16ea3bd0606c4fae2c343bf11de969301ca0f724
 - number: 614
   title: 'research: adopt the 14 October reviews, seventeen entries at V3/C3 and eighteen houses,
     PR #574''s held for the owner'
@@ -1468,7 +1522,17 @@ coverage:
   - 605
   - 602
   - 597
+  - 604
+  - 617
+  - 618
   omissions:
+  - pull_request: 618
+    reason: 'S2 routine engineering: internal quick-push and release-test selection changes,
+      with no new public result. A substantive CI timing improvement is not yet established.'
+  - pull_request: 617
+    reason: Routine News and publication-heading refinements, filter layout and font repairs.
+      Its packing-adoption announcement is already covered by PR614's separate entry;
+      no additional result or publication is announced here.
   - pull_request: 597
     reason: Reply-tracker correction; no result, bound, admission or public artifact change.
   - pull_request: 579
@@ -1505,6 +1569,10 @@ coverage:
     reason: Temporary CI-budget maintenance and retained measurements; the structural efficiency improvement
       remains future work.
 frozen_entries:
+- id: october-fourteen-reviewed-packing-adoptions
+  date: '2026-10-15'
+  pull_requests:
+  - 614
 - id: fitzharding-n17-reported-proof
   date: '2026-10-13'
   pull_requests:

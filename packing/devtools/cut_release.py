@@ -203,7 +203,7 @@ def steps(
         if component == "paper:n11-lower-bounds-explainer":
             plan = [
                 ("regenerate this paper's HTML and Markdown", (module,)),
-                ("regenerate this paper's PDF", (module + "_pdf",)),
+                ("regenerate this paper's PDF", (module + "_pdf", "--update")),
             ]
         else:
             plan = [("regenerate this paper's HTML, Markdown and PDF", (module, "--pdf"))]

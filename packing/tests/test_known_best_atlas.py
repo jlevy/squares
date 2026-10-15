@@ -2625,15 +2625,12 @@ def test_poster_legend_columns_align_left_and_end_with_the_recent_result_key(
     assert labels[1][-1][0].attrib["fill"] == "#000000"
     assert not root.findall(".//svg:polygon[@data-feature='legend-star']", SVG)
     description = known_best_builder.SUMMARY_PROSE[canvas.spec.stem][1]
-    assert all(
-        role in description
-        for role in (
-            "construction giving an upper bound",
-            "proof of a lower bound",
-            "optimality proof",
-        )
+    assert (
+        "Crimson marks the numeric value of a recent upper or lower bound since August 2026."
+        in description
     )
-    assert "since August 2026" in description
+    assert "Case numbers are gray" in description
+    assert "Optimality badges keep their usual styling." in description
     assert "star" not in description.lower()
     assert "common right edge" in description
     assert "eighteen physical lines" in description
@@ -2643,15 +2640,12 @@ def test_poster_legend_columns_align_left_and_end_with_the_recent_result_key(
     assert "Wrapped" not in description
     assert known_best_builder.POSTER_PROBLEM in description
     primary_description = known_best_builder.SUMMARY_PROSE["known-best-1-100"][1]
-    assert all(
-        role in primary_description
-        for role in (
-            "construction giving an upper bound",
-            "proof of a lower bound",
-            "optimality proof",
-        )
+    assert (
+        "Crimson marks the numeric value of a recent upper or lower bound since August 2026."
+        in primary_description
     )
-    assert "since August 2026" in primary_description
+    assert "Case numbers are gray" in primary_description
+    assert "Optimality badges keep their usual styling." in primary_description
     assert [Decimal(node.attrib["y"]) for node in labels[0]] == [
         canvas.legend_baseline + 72 * index for index in range(4)
     ]
@@ -3120,6 +3114,29 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     assert solid_rigid == sorted([k * k for k in range(1, 19)] + [5, 11, 28, 40])
     assert set(solid_rigid) >= {121, 144, 169, 196, 225, 256, 289, 324}
 
+    # Read exactness from the frontier, independently of the figure's computed totals.
+    cases = {n: build_bound_citations.load_case(n) for n in cards}
+    numeric_cases = {
+        n
+        for n, case in cases.items()
+        if not any(
+            case["reported_upper_bound"].get(field)
+            for field in ("exact_form", "minimal_polynomial", "algebraic_degree")
+        )
+    }
+    exact_cases = set(cards) - numeric_cases
+    assert (len(exact_cases), len(numeric_cases)) == (308, 16)
+    for evidence, expected in (
+        ("exact value known", exact_cases),
+        ("only known numerically", numeric_cases),
+    ):
+        depicted = {
+            n
+            for n, card in cards.items()
+            if card.find(f".//svg:rect[@data-evidence='{evidence}']", SVG) is not None
+        }
+        assert depicted == expected
+
     # The legend counts the poster's own 324 cases, not the corpus and not the figure's
     # hundred. Read the labels by their feature; the poster aligns them at the right
     # edge while the badge glyphs stay centred.
@@ -3134,8 +3151,8 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     # reported lanes stated no exact form (think-fvz4).
     assert labels == [
         "proved optimal (77 of 324)",
-        "exact value known (307 of 324)",
-        "only known numerically (17 of 324)",
+        "exact value known (308 of 324)",
+        "only known numerically (16 of 324)",
         "rigid (22 of 324)",
         "colors indicate distinct tilt angles",
         "shade indicates number of full-side contacts",

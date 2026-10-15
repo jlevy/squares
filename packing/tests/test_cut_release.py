@@ -15,7 +15,12 @@ from pathlib import Path
 
 import pytest
 
-from devtools import build_known_best_atlas, cut_release, release_pin
+from devtools import (
+    build_known_best_atlas,
+    cut_release,
+    release_pin,
+    render_n11_lower_bounds_explainer_pdf,
+)
 from sqpack import release
 from sqpack.cli.validate import QUICK_TESTS
 
@@ -149,6 +154,28 @@ def test_component_steps_generate_only_owned_outputs() -> None:
     assert "tests/test_paper_structure.py" in paper_plan[-1][1]
     assert "tests/test_known_best_composites.py" not in paper_plan[-1][1]
     assert "tests/test_n11_lower_bounds_explainer.py" not in paper_plan[-1][1]
+
+
+def test_lower_bounds_paper_cut_dispatches_pdf_update(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    page = tmp_path / "explainer.html"
+    page.write_text("<html></html>", encoding="utf-8")
+    renderer = render_n11_lower_bounds_explainer_pdf
+    monkeypatch.setattr(renderer, "PAGE", page)
+    updated: list[Path] = []
+
+    def update() -> None:
+        updated.append(renderer.PAGE)
+
+    monkeypatch.setattr(renderer, "update", update)
+    command = next(
+        command
+        for _what, command in cut_release.steps("v9.9.9", "paper:n11-lower-bounds-explainer")
+        if command[0] == renderer.__name__
+    )
+    assert renderer.main(command[1:]) == 0
+    assert updated == [page]
 
 
 @pytest.mark.parametrize("include_deep_tests", [False, True])

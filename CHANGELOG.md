@@ -40,6 +40,31 @@ PRs and supporting records: [\#614](https://github.com/jlevy/squares/pull/614) �
 
 ### 2026-10-14
 
+<a id="changelog-entry-basic-and-advanced-tutorials"></a>
+
+#### Basic and Advanced Tutorials, Together Under Explanations
+
+Significance S4: A revised introduction and a separate advanced tutorial are a substantial public explanation of the problem and research methods.
+
+The Explanations page now starts with a short introduction to square packing
+and a separate advanced tutorial. Beginners can start with bounds and small
+examples; the companion develops linear programs, exact certificates,
+regularization and global proofs.
+
+- Earlier tutorial links lead to the moved explanations. Definitions, notation,
+  worked derivations, figures and sources remain available in the two papers.
+- The same index links the research papers, downloadable PDFs, film and interactive
+  Workbench. News collects project announcements, and the web Atlas uses the
+  available screen width.
+
+Published artifacts: [Current basic tutorial](https://jlevy.github.io/squares/tutorial.html) · [Current advanced tutorial](https://jlevy.github.io/squares/tutorial-advanced.html) · [Current Explanations index](https://jlevy.github.io/squares/papers.html).
+
+Component editions: Site v0.7.0.
+
+First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38636016372/job/116103959611)).
+
+PRs and supporting records: [\#604](https://github.com/jlevy/squares/pull/604) · [Tutorial preservation and editorial review](docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md).
+
 <a id="changelog-entry-n17-proof-reports-and-verification-policy"></a>
 
 #### Initial Review of Overbeck’s and Fitzharding’s Proofs for n = 17
