@@ -8,7 +8,9 @@ import html
 import re
 import xml.etree.ElementTree as ET
 from fractions import Fraction
+from html.parser import HTMLParser
 from pathlib import Path
+from typing import Literal
 
 import pytest
 
@@ -147,6 +149,70 @@ def test_every_record_file_is_small(records: dict[str, str]) -> None:
     exceptions = {"cases/11.html": 500_000, "cases/17.html": 500_000, "cases/18.html": 350_000}
     for name, size in sizes.items():
         assert size < exceptions.get(name, RECORD_CEILING_BYTES), (name, size)
+
+
+@pytest.mark.parametrize("tex", ["n = 17", r"s(17) \geq 4.6", "x < y", r"\sqrt{2}"])
+@pytest.mark.parametrize("display", ["inline", "display"])
+def test_case_math_compaction_keeps_xml_semantics_and_surrounding_markup(
+    tex: str, display: Literal["inline", "display"]
+) -> None:
+    from kpress.format.markdown import (  # noqa: PLC0415
+        _render_math,  # pyright: ignore[reportPrivateUsage]
+    )
+
+    original = _render_math(tex, display=display, math="auto", env={})
+    before = '<p title="&#x03b1;">&#x03b1;</p>'
+    after = '<a href="../profiles/manasseh-ahmed.html">Ahmed</a>'
+    source = before + original + after
+    compact = render_case_pages.compact_math_entities(source)
+    assert compact.startswith(before)
+    assert compact.endswith(after)
+    assert ET.tostring(ET.fromstring(f"<div>{compact}</div>")) == ET.tostring(
+        ET.fromstring(f"<div>{source}</div>")
+    )
+    assert len(compact.encode()) <= len(source.encode())
+    assert render_case_pages.compact_math_entities(compact) == compact
+
+
+class _HtmlEvents(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.events: list[tuple[str, object]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.events.append(("start", (tag, attrs)))
+
+    def handle_endtag(self, tag: str) -> None:
+        self.events.append(("end", tag))
+
+    def handle_data(self, data: str) -> None:
+        self.events.append(("text", data))
+
+
+@pytest.mark.parametrize("separator", ["\n", "\u2028", "\r\n"])
+def test_visual_math_compaction_keeps_html_tree_and_foreign_xml(separator: str) -> None:
+    foreign = (
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mtext>'
+        '<span class="mord">native</span></mtext></math>'
+        '<svg xmlns="http://www.w3.org/2000/svg"><foreignObject>'
+        '<span class="mord">drawing</span></foreignObject></svg>'
+    )
+    source = (
+        f"<p>before{separator}after</p>"
+        '<span class="katex-html"><span class="mord">x</span>'
+        '<span class="mrel">&lt;</span><span class="mord mathnormal">y</span></span>'
+        '<span title=\' class="mord"\'>literal class spelling</span>'
+        + foreign
+        + '<a href="../profiles/manasseh-ahmed.html" data-contributor="">Ahmed</a>'
+    )
+    compact = render_case_pages.compact_visual_math_classes(source)
+    original_tree, compact_tree = _HtmlEvents(), _HtmlEvents()
+    original_tree.feed(source)
+    compact_tree.feed(compact)
+    assert original_tree.events == compact_tree.events
+    assert foreign in compact
+    assert len(compact.encode()) < len(source.encode())
+    assert render_case_pages.compact_visual_math_classes(compact) == compact
 
 
 def test_a_records_links_are_written_from_its_own_directory(

@@ -13026,17 +13026,17 @@ occurrences:
     path: packing/frontier/n-106.md
     record_key: '106'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: &id036
-  - primary-byline
-  - x-messages
+  - bibliography
+  - owner-confirmation
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-107.md
     record_key: '107'
@@ -13053,15 +13053,15 @@ occurrences:
     path: packing/frontier/n-107.md
     record_key: '107'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-108.md
     record_key: '108'
@@ -13079,15 +13079,15 @@ occurrences:
     path: packing/frontier/n-108.md
     record_key: '108'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-108.md
     record_key: '108'
@@ -13105,15 +13105,15 @@ occurrences:
     path: packing/frontier/n-109.md
     record_key: '109'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-110.md
     record_key: '110'
@@ -13144,93 +13144,93 @@ occurrences:
     path: packing/frontier/n-110.md
     record_key: '110'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-111.md
     record_key: '111'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-112.md
     record_key: '112'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-113.md
     record_key: '113'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-114.md
     record_key: '114'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-115.md
     record_key: '115'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-116.md
     record_key: '116'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-117.md
     record_key: '117'
@@ -13374,15 +13374,15 @@ occurrences:
     path: packing/frontier/n-126.md
     record_key: '126'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-126.md
     record_key: '126'
@@ -13413,15 +13413,15 @@ occurrences:
     path: packing/frontier/n-127.md
     record_key: '127'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-127.md
     record_key: '127'
@@ -13479,15 +13479,15 @@ occurrences:
     path: packing/frontier/n-128.md
     record_key: '128'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-129.md
     record_key: '129'
@@ -13504,15 +13504,15 @@ occurrences:
     path: packing/frontier/n-129.md
     record_key: '129'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-130.md
     record_key: '130'
@@ -13541,15 +13541,15 @@ occurrences:
     path: packing/frontier/n-130.md
     record_key: '130'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-131.md
     record_key: '131'
@@ -13566,15 +13566,15 @@ occurrences:
     path: packing/frontier/n-131.md
     record_key: '131'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-132.md
     record_key: '132'
@@ -13592,106 +13592,106 @@ occurrences:
     path: packing/frontier/n-132.md
     record_key: '132'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-133.md
     record_key: '133'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-134.md
     record_key: '134'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-135.md
     record_key: '135'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-136.md
     record_key: '136'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-137.md
     record_key: '137'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-138.md
     record_key: '138'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-139.md
     record_key: '139'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-140.md
     record_key: '140'
@@ -13833,15 +13833,15 @@ occurrences:
     path: packing/frontier/n-149.md
     record_key: '149'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-150.md
     record_key: '150'
@@ -13860,15 +13860,15 @@ occurrences:
     path: packing/frontier/n-150.md
     record_key: '150'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-151.md
     record_key: '151'
@@ -13899,15 +13899,15 @@ occurrences:
     path: packing/frontier/n-151.md
     record_key: '151'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-152.md
     record_key: '152'
@@ -13938,15 +13938,15 @@ occurrences:
     path: packing/frontier/n-152.md
     record_key: '152'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-153.md
     record_key: '153'
@@ -13963,15 +13963,15 @@ occurrences:
     path: packing/frontier/n-153.md
     record_key: '153'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-153.md
     record_key: '153'
@@ -14002,15 +14002,15 @@ occurrences:
     path: packing/frontier/n-154.md
     record_key: '154'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-154.md
     record_key: '154'
@@ -14041,15 +14041,15 @@ occurrences:
     path: packing/frontier/n-155.md
     record_key: '155'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-156.md
     record_key: '156'
@@ -14066,15 +14066,15 @@ occurrences:
     path: packing/frontier/n-156.md
     record_key: '156'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-156.md
     record_key: '156'
@@ -14092,106 +14092,106 @@ occurrences:
     path: packing/frontier/n-157.md
     record_key: '157'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-158.md
     record_key: '158'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-159.md
     record_key: '159'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-160.md
     record_key: '160'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-161.md
     record_key: '161'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-162.md
     record_key: '162'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-163.md
     record_key: '163'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-164.md
     record_key: '164'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-165.md
     record_key: '165'
@@ -14336,28 +14336,28 @@ occurrences:
     path: packing/frontier/n-173.md
     record_key: '173'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-174.md
     record_key: '174'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-175.md
     record_key: '175'
@@ -14374,28 +14374,28 @@ occurrences:
     path: packing/frontier/n-175.md
     record_key: '175'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-176.md
     record_key: '176'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-176.md
     record_key: '176'
@@ -14451,28 +14451,28 @@ occurrences:
     path: packing/frontier/n-177.md
     record_key: '177'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-178.md
     record_key: '178'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-179.md
     record_key: '179'
@@ -14501,15 +14501,15 @@ occurrences:
     path: packing/frontier/n-179.md
     record_key: '179'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-180.md
     record_key: '180'
@@ -14538,15 +14538,15 @@ occurrences:
     path: packing/frontier/n-180.md
     record_key: '180'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-180.md
     record_key: '180'
@@ -14576,15 +14576,15 @@ occurrences:
     path: packing/frontier/n-181.md
     record_key: '181'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-182.md
     record_key: '182'
@@ -14615,132 +14615,132 @@ occurrences:
     path: packing/frontier/n-182.md
     record_key: '182'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-183.md
     record_key: '183'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-184.md
     record_key: '184'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-185.md
     record_key: '185'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-186.md
     record_key: '186'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-187.md
     record_key: '187'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-188.md
     record_key: '188'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-189.md
     record_key: '189'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-190.md
     record_key: '190'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-191.md
     record_key: '191'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-192.md
     record_key: '192'
@@ -14869,28 +14869,28 @@ occurrences:
     path: packing/frontier/n-201.md
     record_key: '201'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-202.md
     record_key: '202'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-203.md
     record_key: '203'
@@ -14909,28 +14909,28 @@ occurrences:
     path: packing/frontier/n-203.md
     record_key: '203'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-204.md
     record_key: '204'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-204.md
     record_key: '204'
@@ -14975,15 +14975,15 @@ occurrences:
     path: packing/frontier/n-205.md
     record_key: '205'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-206.md
     record_key: '206'
@@ -15014,15 +15014,15 @@ occurrences:
     path: packing/frontier/n-206.md
     record_key: '206'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-207.md
     record_key: '207'
@@ -15039,15 +15039,15 @@ occurrences:
     path: packing/frontier/n-207.md
     record_key: '207'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-207.md
     record_key: '207'
@@ -15088,15 +15088,15 @@ occurrences:
     path: packing/frontier/n-208.md
     record_key: '208'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-209.md
     record_key: '209'
@@ -15126,15 +15126,15 @@ occurrences:
     path: packing/frontier/n-209.md
     record_key: '209'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-210.md
     record_key: '210'
@@ -15165,15 +15165,15 @@ occurrences:
     path: packing/frontier/n-210.md
     record_key: '210'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-211.md
     record_key: '211'
@@ -15190,15 +15190,15 @@ occurrences:
     path: packing/frontier/n-211.md
     record_key: '211'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-211.md
     record_key: '211'
@@ -15216,119 +15216,119 @@ occurrences:
     path: packing/frontier/n-212.md
     record_key: '212'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-213.md
     record_key: '213'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-214.md
     record_key: '214'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-215.md
     record_key: '215'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-216.md
     record_key: '216'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-217.md
     record_key: '217'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-218.md
     record_key: '218'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-219.md
     record_key: '219'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-220.md
     record_key: '220'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-221.md
     record_key: '221'
@@ -15474,41 +15474,41 @@ occurrences:
     path: packing/frontier/n-230.md
     record_key: '230'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-231.md
     record_key: '231'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-232.md
     record_key: '232'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-232.md
     record_key: '232'
@@ -15525,15 +15525,15 @@ occurrences:
     path: packing/frontier/n-233.md
     record_key: '233'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-234.md
     record_key: '234'
@@ -15566,15 +15566,15 @@ occurrences:
     path: packing/frontier/n-234.md
     record_key: '234'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-235.md
     record_key: '235'
@@ -15605,15 +15605,15 @@ occurrences:
     path: packing/frontier/n-235.md
     record_key: '235'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-236.md
     record_key: '236'
@@ -15643,15 +15643,15 @@ occurrences:
     path: packing/frontier/n-236.md
     record_key: '236'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-237.md
     record_key: '237'
@@ -15681,15 +15681,15 @@ occurrences:
     path: packing/frontier/n-237.md
     record_key: '237'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-237.md
     record_key: '237'
@@ -15718,15 +15718,15 @@ occurrences:
     path: packing/frontier/n-238.md
     record_key: '238'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-239.md
     record_key: '239'
@@ -15743,15 +15743,15 @@ occurrences:
     path: packing/frontier/n-239.md
     record_key: '239'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-240.md
     record_key: '240'
@@ -15782,15 +15782,15 @@ occurrences:
     path: packing/frontier/n-240.md
     record_key: '240'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-241.md
     record_key: '241'
@@ -15820,145 +15820,145 @@ occurrences:
     path: packing/frontier/n-241.md
     record_key: '241'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-242.md
     record_key: '242'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-243.md
     record_key: '243'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-244.md
     record_key: '244'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-245.md
     record_key: '245'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-246.md
     record_key: '246'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-247.md
     record_key: '247'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-248.md
     record_key: '248'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-249.md
     record_key: '249'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-250.md
     record_key: '250'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-251.md
     record_key: '251'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-252.md
     record_key: '252'
@@ -16153,15 +16153,15 @@ occurrences:
     path: packing/frontier/n-261.md
     record_key: '261'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-261.md
     record_key: '261'
@@ -16190,15 +16190,15 @@ occurrences:
     path: packing/frontier/n-262.md
     record_key: '262'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-263.md
     record_key: '263'
@@ -16215,15 +16215,15 @@ occurrences:
     path: packing/frontier/n-263.md
     record_key: '263'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-263.md
     record_key: '263'
@@ -16241,15 +16241,15 @@ occurrences:
     path: packing/frontier/n-264.md
     record_key: '264'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-264.md
     record_key: '264'
@@ -16266,15 +16266,15 @@ occurrences:
     path: packing/frontier/n-265.md
     record_key: '265'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-266.md
     record_key: '266'
@@ -16292,15 +16292,15 @@ occurrences:
     path: packing/frontier/n-266.md
     record_key: '266'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-267.md
     record_key: '267'
@@ -16318,15 +16318,15 @@ occurrences:
     path: packing/frontier/n-267.md
     record_key: '267'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-267.md
     record_key: '267'
@@ -16370,15 +16370,15 @@ occurrences:
     path: packing/frontier/n-268.md
     record_key: '268'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-269.md
     record_key: '269'
@@ -16408,15 +16408,15 @@ occurrences:
     path: packing/frontier/n-269.md
     record_key: '269'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-270.md
     record_key: '270'
@@ -16433,15 +16433,15 @@ occurrences:
     path: packing/frontier/n-270.md
     record_key: '270'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'
@@ -16458,15 +16458,15 @@ occurrences:
     path: packing/frontier/n-271.md
     record_key: '271'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'
@@ -16496,15 +16496,15 @@ occurrences:
     path: packing/frontier/n-272.md
     record_key: '272'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-272.md
     record_key: '272'
@@ -16547,158 +16547,158 @@ occurrences:
     path: packing/frontier/n-273.md
     record_key: '273'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-274.md
     record_key: '274'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-275.md
     record_key: '275'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-276.md
     record_key: '276'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-277.md
     record_key: '277'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-278.md
     record_key: '278'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-279.md
     record_key: '279'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-280.md
     record_key: '280'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-281.md
     record_key: '281'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-282.md
     record_key: '282'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-283.md
     record_key: '283'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-284.md
     record_key: '284'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-285.md
     record_key: '285'
@@ -16854,15 +16854,15 @@ occurrences:
     path: packing/frontier/n-294.md
     record_key: '294'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-295.md
     record_key: '295'
@@ -16880,15 +16880,15 @@ occurrences:
     path: packing/frontier/n-295.md
     record_key: '295'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-295.md
     record_key: '295'
@@ -16906,15 +16906,15 @@ occurrences:
     path: packing/frontier/n-296.md
     record_key: '296'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-297.md
     record_key: '297'
@@ -16945,41 +16945,41 @@ occurrences:
     path: packing/frontier/n-297.md
     record_key: '297'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-298.md
     record_key: '298'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-299.md
     record_key: '299'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-300.md
     record_key: '300'
@@ -17012,15 +17012,15 @@ occurrences:
     path: packing/frontier/n-300.md
     record_key: '300'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-301.md
     record_key: '301'
@@ -17051,15 +17051,15 @@ occurrences:
     path: packing/frontier/n-301.md
     record_key: '301'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-302.md
     record_key: '302'
@@ -17076,15 +17076,15 @@ occurrences:
     path: packing/frontier/n-302.md
     record_key: '302'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-302.md
     record_key: '302'
@@ -17114,15 +17114,15 @@ occurrences:
     path: packing/frontier/n-303.md
     record_key: '303'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-304.md
     record_key: '304'
@@ -17139,15 +17139,15 @@ occurrences:
     path: packing/frontier/n-304.md
     record_key: '304'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-305.md
     record_key: '305'
@@ -17177,15 +17177,15 @@ occurrences:
     path: packing/frontier/n-305.md
     record_key: '305'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-306.md
     record_key: '306'
@@ -17203,15 +17203,15 @@ occurrences:
     path: packing/frontier/n-306.md
     record_key: '306'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-307.md
     record_key: '307'
@@ -17228,28 +17228,28 @@ occurrences:
     path: packing/frontier/n-307.md
     record_key: '307'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-308.md
     record_key: '308'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-308.md
     record_key: '308'
@@ -17279,145 +17279,145 @@ occurrences:
     path: packing/frontier/n-309.md
     record_key: '309'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-310.md
     record_key: '310'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-311.md
     record_key: '311'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-312.md
     record_key: '312'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-313.md
     record_key: '313'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-314.md
     record_key: '314'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-315.md
     record_key: '315'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-316.md
     record_key: '316'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-317.md
     record_key: '317'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-318.md
     record_key: '318'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-319.md
     record_key: '319'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence: *id036
   contributor_id: hiroaki-hosono
-  note: Joined by the spelling the contributor record claims, with its sources.
+  note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
     path: packing/frontier/n-320.md
     record_key: '320'

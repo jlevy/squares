@@ -625,8 +625,25 @@ commit after the merged data is committed.
 
 The integration retains upstream’s quick-push validation policy and complete selected
 test coverage, with deep checks reserved for explicit checkpoints.
-Merge validation, paper release verification and publication acceptance remain pending;
-this section records the resolved source decisions, not a passing gate.
+Initial hosted CI reported three failures, addressed by the follow-up below.
+The follow-up normalizes 152 closed-form `proved_by` lists from `wand125` to `Hosono`
+and aligns `apply_closed_form.py` with that credit, without changing numeric bounds.
+The occurrence manifest was reconciled to the updated source labels.
+Release-impact scopes were refreshed against `origin/main`; the source-based check
+passes without changing paper versions.
+The local case-page size correction is implemented without new dependencies: numeric
+entities use equivalent UTF-8, and optional class-value quotes are omitted only on KaTeX
+HTML atoms, preserving MathML and SVG. The 17-square page is 498,343 bytes against its
+500,000-byte ceiling, and 11 targeted checks passed.
+A fresh production render confirms that size; final hosted validation remains pending.
+
+The latest local push run passed 66 of 67 prerequisite checks, then its reachable
+behavioral selection hit the 900-second subprocess limit.
+The stale changelog-derived prerequisite was corrected and its targeted recheck passed.
+Partial behavioral output also contained failures before the timeout; this is not
+established as a timing-only failure or a passing push gate.
+Matching-source hosted validation of the final follow-up head and publication acceptance
+remain pending.
 
 ## WIP Handoff: 2026-10-10
 

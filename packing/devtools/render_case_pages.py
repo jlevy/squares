@@ -14,6 +14,7 @@ import posixpath
 import re
 from collections.abc import Mapping
 from functools import cache
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -1193,7 +1194,67 @@ def refuse_footnotes(page: str) -> None:
 #: A heading kpress wrote, with its id and its content.
 _HTML_HEADING = re.compile(r'(<h([1-6])\b[^>]*?\sid=")([^"]*)("[^>]*>)(.*?)(</h\2>)', re.DOTALL)
 #: A formula as kpress writes one, which a heading's id leaves out, as kpress's does.
-_MATH_MARKUP = re.compile(r'<span class="kpress-math[ "].*?</math></span></span>', re.DOTALL)
+_MATH_MARKUP = re.compile(r'<(span|div) class="kpress-math[ "].*?</math></\1></\1>', re.DOTALL)
+_NUMERIC_ENTITY = re.compile(r"&#(?:x[0-9a-fA-F]+|[0-9]+);")
+
+
+def compact_math_entities(record: str) -> str:
+    """Use XML-equivalent UTF-8 for padded numeric references in generated math.
+
+    Case prose goes through KPress's Markdown renderer, while the generated bound
+    panels already use this encoding through `overview_data.math_html`.
+    Keep XML delimiters escaped and leave all surrounding markup untouched.
+    """
+
+    def compact(match: re.Match[str]) -> str:
+        return _NUMERIC_ENTITY.sub(
+            lambda entity: html.escape(html.unescape(entity[0]), quote=True), match[0]
+        )
+
+    return _MATH_MARKUP.sub(compact, record)
+
+
+class _VisualMathClasses(HTMLParser):
+    """Locate optional attribute quotes in KaTeX's HTML atom classes."""
+
+    ATOMS = re.compile(r'^<span class="(mord|mop|mbin|mrel|mopen|mclose|mpunct|minner)"')
+
+    def __init__(self, record: str) -> None:
+        super().__init__(convert_charrefs=False)
+        self.lines = [0, *(match.end() for match in re.finditer("\n", record))]
+        self.foreign = 0
+        self.changes: list[tuple[int, int, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag in {"math", "svg"}:
+            self.foreign += 1
+        if self.foreign or tag != "span" or not attrs:
+            return
+        original = self.get_starttag_text()
+        assert original is not None
+        compact = self.ATOMS.sub(r"<span class=\1", original)
+        if compact != original:
+            line, column = self.getpos()
+            start = self.lines[line - 1] + column
+            self.changes.append((start, start + len(original), compact))
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in {"math", "svg"}:
+            self.foreign -= 1
+
+
+def compact_visual_math_classes(record: str) -> str:
+    """Omit optional quotes on atomic KaTeX HTML classes; retain SVG and MathML XML."""
+    parser = _VisualMathClasses(record)
+    parser.feed(record)
+    parser.close()
+    pieces = []
+    cursor = 0
+    for start, end, replacement in parser.changes:
+        pieces.extend((record[cursor:start], replacement))
+        cursor = end
+    pieces.append(record[cursor:])
+    return "".join(pieces)
 
 
 def _own_ids(record: str) -> str:
@@ -1237,6 +1298,7 @@ def _records(page: str) -> dict[int, str]:
             record.startswith('<section class="site-case"') and record.endswith("</section>")
         ):
             raise SystemExit(f"n = {match.group(1)}: the record is not one section")
+        record = compact_math_entities(record)
         found[int(match.group(1))] = _own_ids(
             mark_case_links(
                 "<article"
@@ -1334,7 +1396,7 @@ def case_records(*, only: tuple[int, ...] | None = None) -> list[Page]:
                 ),
             ),
         )
-        record = records[n]
+        record = compact_visual_math_classes(records[n])
         record = re.sub(
             r'<p class="site-case-title"([^>]*)>(.*?)</p>',
             r'<h1 class="site-case-title" id="case-title"\1>\2</h1>',

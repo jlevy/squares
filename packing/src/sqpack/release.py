@@ -1019,6 +1019,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/atlas/known-best/bound-citations.json",
+            "packing/devtools/apply_closed_form.py",
             "packing/devtools/contributor_credit.py",
             "packing/devtools/news_highlights.py",
             "packing/devtools/overview_data.py",
@@ -1051,12 +1052,18 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "retain the paper's text and figures. The changed news_highlights helper "
             "only renders direct profile links in News and is not called by the "
             "paper. Shared site navigation and linked source records do not revise "
-            "the paper's content edition."
+            "the paper's content edition. The closed-form writer now emits the canonical "
+            "Hosono credit without changing any numeric bound; this writer is not "
+            "called by the paper. Standalone case articles compact numeric entities "
+            "and omit optional quotes only on KaTeX HTML atom classes. MathML and SVG "
+            "remain XML-valid with the same decoded mathematical content; the paper "
+            "does not call this case-article serialization."
         ),
     ),
     ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=(
+            "packing/devtools/apply_closed_form.py",
             "packing/devtools/contributor_credit.py",
             "packing/devtools/news_highlights.py",
             "packing/devtools/overview_data.py",
@@ -1086,6 +1093,27 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/frontier/n-102.md",
             "packing/frontier/n-103.md",
             "packing/frontier/n-105.md",
+            "packing/frontier/n-108.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-127.md",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-130.md",
+            "packing/frontier/n-131.md",
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-154.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-179.md",
+            "packing/frontier/n-180.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/n-208.md",
+            "packing/frontier/n-209.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/n-237.md",
+            "packing/frontier/n-238.md",
+            "packing/frontier/n-239.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
         ),
@@ -1097,7 +1125,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "linked citations; their bodies are not incorporated. The changed "
             "news_highlights helper only renders direct profile links in News and is "
             "not called by the paper. Shared site navigation and related-paper "
-            "metadata do not revise this paper's content edition."
+            "metadata do not revise this paper's content edition. The reported-bound "
+            "proved_by edits and their closed-form producer replace only wand125 "
+            "with Hosono; all numeric values are unchanged and the paper already "
+            "uses Hosono. Those credit fields are not inserted into this manuscript "
+            "or its five figures. Standalone case articles compact numeric entities "
+            "and omit optional quotes only on KaTeX HTML atom classes. MathML and SVG "
+            "remain XML-valid with the same decoded mathematical content; the paper "
+            "does not call this case-article serialization."
         ),
     ),
     ReleaseNoPublicChange(
