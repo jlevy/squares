@@ -5,15 +5,13 @@ title: Integrate the stranded 29 September replays of T-048 (s(50) >= 37/5, L740
 kind: task
 status: closed
 priority: 2
-version: 5
+version: 6
 labels:
   - result-import
-dependencies:
-  - type: blocks
-    target: is-01m3yrzkz80qd1wv5sjr0kkkv0
+dependencies: []
 parent_id: is-01m3yrdxte02c7bnygkke34ct4
 created_at: 2026-10-02T16:51:55.131Z
-updated_at: 2026-10-12T23:38:58.734Z
+updated_at: 2026-10-15T19:58:57.623Z
 closed_at: 2026-10-12T23:38:58.734Z
 close_reason: "Completed: the 29 September replays of T-048 and T-055 integrated in c03c6d4fb (both V3/C3)."
 resolution: null

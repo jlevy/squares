@@ -5,7 +5,7 @@ title: "Intake 2026-10-15 lane C: stage-7 follow-ups to open issues owing a repl
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: ecstatic-edison-lane-c
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:30:00.612Z
-updated_at: 2026-10-15T19:43:04.733Z
+updated_at: 2026-10-15T20:05:08.582Z
 started_at: 2026-10-15T19:30:08.588Z
 ---
 
@@ -27,3 +27,6 @@ started_at: 2026-10-15T19:30:08.588Z
 - HELD for the owner: #557 (think-sdsl: "Put the T-153 reviews' questions to the author and post the #557 acknowledgement (owner's call)", post only on the owner's word; result-requests.yaml says the share-back reply is the owner's to post, think-00y8) and #565 (think-mxhc: "draft; post only on the owner's word"; the #405 link comment is also the owner's). Both were set after the 12 October agent-posts rule, so they are specific reservations.
 - Deployed site: Certificate page run 38789366792 succeeded on 4c9af6902e517bfff7d9f50d7cd6a042a15f60ed (main head). result/t-037.html shows V3 C3, confirmed, superseded by T-060, and lists E-n011-kleddamag-3875-esummins-replay-report.
 - Labels: added n-17 to #557 (source is n = 17; it also carries n-18, which the grant does not cover removing; title says n=18). #521, #522, #526 carry intake,n-11; #523 n-17,intake; #565 n-17,intake; #524, #525, #527 and #545 intake only (n-general or uncounted cases; no case label applies).
+- check_published_site --commit 4c9af6902e517bfff7d9f50d7cd6a042a15f60ed: 4480 of 4480 checks passed (19:44Z).
+- Posted 19:45Z as jlevy, from the drafts edited for accuracy and the authors' asks (texts in the lane scratch lanec-replies/): #521 https://github.com/jlevy/squares/issues/521#issuecomment-6200834867, #522 https://github.com/jlevy/squares/issues/522#issuecomment-6200838680, #523 https://github.com/jlevy/squares/issues/523#issuecomment-6200839132, #524 https://github.com/jlevy/squares/issues/524#issuecomment-6200839522, #525 https://github.com/jlevy/squares/issues/525#issuecomment-6200839952, #526 https://github.com/jlevy/squares/issues/526#issuecomment-6200840511, #527 https://github.com/jlevy/squares/issues/527#issuecomment-6200840937, #545 https://github.com/jlevy/squares/issues/545#issuecomment-6200841270. None closed (each has an owner decision queued).
+- Recorded on the branch: 060311e6d (replies; #521 offline-checker ask done; #523 ask note gains the 13 October n = 17 suspension), b0bc97e8b (release.py no-public-change for the methods survey: renders byte-identical with main's and the branch's record, 42 files). check_requests gate exit 0; --report: the eight no longer reply due; --github: 25 differences, none on these issues. packing-validate --records exit 0 (51 of 109 steps, 118 s).

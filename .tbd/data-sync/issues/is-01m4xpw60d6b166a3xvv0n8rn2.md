@@ -5,19 +5,17 @@ title: "Validate: wand125 closed form, calibration replay of the two smallest re
 kind: task
 status: closed
 priority: 2
-version: 6
+version: 7
 delegate: serene-hopper-vcheap
 labels:
   - validation
   - result-import
-dependencies:
-  - type: blocks
-    target: is-01m4xpwnpsr6echsj2ex1s947k
+dependencies: []
 parent_id: is-01m4wv28mebp8r7ss9p8r6dgxy
 hold: null
 hold_until: null
 created_at: 2026-10-14T17:20:33.292Z
-updated_at: 2026-10-14T20:27:03.071Z
+updated_at: 2026-10-15T19:59:00.373Z
 started_at: 2026-10-14T17:32:14.102Z
 closed_at: 2026-10-14T20:27:03.070Z
 close_reason: "replay4d built, and intervals 26 and 14 replayed at 1.22x the source's CPU; on main with #605 (77fa15c7e). T-180's basis text is in the post-#602 records bead; think-wu73 carries the calibrated cost."
