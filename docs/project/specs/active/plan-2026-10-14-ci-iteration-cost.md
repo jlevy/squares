@@ -892,6 +892,39 @@ The journal identifies an unfinished call but does not establish why it blocked.
 Both original failures in run 38797565375 remain unexplained; a clean later run cannot
 supply their missing diagnosis.
 
+### October 15 Required-Browser Failure and Diagnostic Gap
+
+The first required-browser run of [PR #634](https://github.com/jlevy/squares/pull/634),
+[Packing 38819302541](https://github.com/jlevy/squares/actions/runs/38819302541), failed
+at head `7f5c351e`, tested as clean merge tree `693b953a`. The functional browser
+command reached its enforced 900-second deadline in 901.001s; the serial load checks
+never started. Partial output includes an anonymous failed-test marker.
+No completed functional JUnit or browser worker journals survived, so neither all 51
+forwarder outcomes nor that failed assertion is established.
+The stack dump shows Playwright’s dispatcher waiting; it does not identify the suspended
+browser API or prove a lifecycle defect.
+
+The missing journals have a separate confirmed cause: native progress was enabled only
+for the quick and slow `-m` expressions.
+The custom browser command selects through `-k`, so moving ownership lost the earlier
+node-level evidence.
+Bead `think-fr1c` extends the existing writer to these commands, preserving their actual
+selection metadata, and retains failed-phase details before interruption.
+
+Use a dispatch-only browser diagnostic to obtain wire request/reply evidence for the
+known node under 120 seconds, followed by its containing module under 180 seconds only
+if needed.
+Reuse native process cleanup and external artifacts; these observations do not
+replace required CI. No diagnostic job runs on an ordinary PR or push, and no test
+assertion, worker cap or enforced deadline is relaxed.
+
+The completed lower browser owner took 470.024s; the failed upper owner took 901.004s.
+Both exceed the existing 165-second advisory target.
+These different selections on separate runners are not a controlled performance ratio.
+`think-ht59` remains open; its advisory cost policy does not excuse an enforced timeout.
+Keep this stack unmerged until the actual failure is resolved and matching-head required
+checks pass.
+
 ## References
 
 - [Operating rules](../../../../operating-rules.md), especially OR-13, OR-14, OR-16,

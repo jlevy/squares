@@ -1013,6 +1013,26 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-lower-bounds-explainer.pdf",
         ),
         reason=(
+            "The native validator records browser test progress and failures before "
+            "interruption. The manual diagnostic runs fixed forwarder selections "
+            "with wire logs and existing process cleanup; its workflow remains "
+            "dispatch-only. Site and paper builders do not run these test commands "
+            "or consume their diagnostics. Public renderers, manuscripts, figures "
+            "and scientific inputs are unchanged, so both component editions remain "
+            "current. This is a source-reviewed disposition; no PDF redraw or "
+            "byte-identity comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer", "site"),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
             "The validation CLI assigns existing forwarder tests to the required "
             "Chromium owner and enables pytest stack dumps after 60 seconds without "
             "terminating tests or changing the shared command deadline. Site and "

@@ -1089,9 +1089,13 @@ def _run(
     cwd: Path = PROJECT_ROOT,
     timeout_seconds: float | None = None,
     extra_environment: Mapping[str, str] | None = None,
+    pytest_progress: tuple[str, str] | None = None,
 ) -> str:
     """Run `command` as a step's subprocess; `extra_environment` is laid over the gate's
-    environment for this command alone."""
+    environment for this command alone. `pytest_progress` names the lane and exclusions
+    of an explicitly selected pytest command that has no quick/slow marker expression."""
+    if pytest_progress is not None and list(command[1:3]) != ["-m", "pytest"]:
+        raise StepFailureError("pytest progress requires a native pytest command")
     if extra_environment:
         context = replace(context, environment={**context.environment, **extra_environment})
     directory = _artifact_directory(context)
@@ -1114,7 +1118,13 @@ def _run(
             if "-m" in pytest_arguments
             else ""
         )
-        if marker in {QUICK_TESTS, SLOW_TESTS}:
+        if pytest_progress is None and marker in {QUICK_TESTS, SLOW_TESTS}:
+            pytest_progress = (
+                ("quick", "slow, exhaustive_exact")
+                if marker == QUICK_TESTS
+                else ("slow", "quick, exhaustive_exact")
+            )
+        if pytest_progress is not None:
             progress_marker = marker
             arguments.extend(("-p", "devtools.reachable_progress"))
         arguments.append(f"--junitxml={stem}.junit.xml")
@@ -1127,7 +1137,7 @@ def _run(
         # artifact stem without exposing the parent gate's artifact configuration.
         environment["PACKING_REACHABLE_TEST_ARTIFACT_STEM"] = str(stem)
         environment["PACKING_REACHABLE_TEST_RUN_ID"] = context.artifact_run_id
-    if progress_marker:
+    if pytest_progress is not None:
         if directory.is_relative_to(REPOSITORY_ROOT.resolve()):
             raise StepFailureError(
                 "native test artifacts must stay outside the source checkout"
@@ -1157,13 +1167,9 @@ def _run(
                 "PACKING_REACHABLE_TEST_WORKERS": arguments[arguments.index("-n") + 1]
                 if "-n" in arguments
                 else "1",
-                "PACKING_REACHABLE_TEST_LANE": "quick"
-                if progress_marker == QUICK_TESTS
-                else "slow",
+                "PACKING_REACHABLE_TEST_LANE": pytest_progress[0],
                 "PACKING_REACHABLE_TEST_MARKER": progress_marker,
-                "PACKING_REACHABLE_TEST_EXCLUSIONS": "slow, exhaustive_exact"
-                if progress_marker == QUICK_TESTS
-                else "quick, exhaustive_exact",
+                "PACKING_REACHABLE_TEST_EXCLUSIONS": pytest_progress[1],
                 "PACKING_REACHABLE_TEST_PHASES": "1",
             }
         )
@@ -2098,7 +2104,14 @@ def _site_layout_tests(context: Context) -> str:
     )
     outputs: list[str] = []
     deadline = time.monotonic() + context.timeout_seconds
-    for command in commands:
+    for command, progress in zip(
+        commands,
+        (
+            ("browser-functional", SITE_LOAD_BUDGET_TEST),
+            ("browser-load", "all other browser cases"),
+        ),
+        strict=True,
+    ):
         try:
             remaining = deadline - time.monotonic()
             if remaining <= 0:
@@ -2112,6 +2125,7 @@ def _site_layout_tests(context: Context) -> str:
                     command,
                     timeout_seconds=remaining,
                     extra_environment={REQUIRE_CHROMIUM: "1"},
+                    pytest_progress=progress,
                 )
             )
         except StepFailureError as error:
