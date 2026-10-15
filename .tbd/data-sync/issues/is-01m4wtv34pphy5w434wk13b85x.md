@@ -5,7 +5,7 @@ title: Resolve four scheduled main test-time ceiling overruns without weakening 
 kind: bug
 status: in_progress
 priority: 1
-version: 26
+version: 28
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10.local
 labels: []
@@ -28,20 +28,23 @@ child_order_hints:
   - is-01m4yf4ywh62ajt7cc9zfbcjcn
   - is-01m4yf4z92dxbp2k4amma0mrq3
   - is-01m4ygmjndn87kz50318csk62e
+  - is-01m4zax62kbavpdkh7119vxj88
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:10:37.460Z
-updated_at: 2026-10-15T01:18:25.116Z
+updated_at: 2026-10-15T08:29:52.082Z
 started_at: 2026-10-14T10:03:10.224Z
 ---
 Optional scheduled full integration run38536321398 at f73 passes functional tests but violates12s per-test ceiling for four nodes: site_forwarders no-script redirect13.08s; results_register full-part citations T15312.17s; overview_sections no-script canonical atlas20.10s; regularized_drawings edited-block check13.44s. Main push full gate and Pages deployment passed sameSHA. Diagnose full integration contention/cold-path cost, optimize or explicitly classify measured expensive cases while preserving assertions and meaningful CI coverage; avoid broad ceiling increases.
 
 ## Notes
 
-Candidate e5a046b3d202551f56452b7ff5538273c0c29a45 is clean and includes main6964362b5. News and Explanations are already delivered through PR604. PR599 contains the reviewed CI repair batch, native weight refresh, bounded Gupta/tally reuse, complete scientific checks and site code-font correction. Main609 sampling classification is integrated.
+Remote PR599 remains e5a046b3d202551f56452b7ff5538273c0c29a45. Its pre-push passed 68 selected steps in 713.54s (10963 normal tests passed, 49 skipped, one expected failure; four pool tests passed). Ordinary Packing38665031494, Pages38665031489 and mergeability38665027044 passed. Selected enforced quick38665027001 remains FAILED: all four suites exceed unchanged walls, with eight CALL overruns. Independent Astra review confirms think-ht59 does not waive deliberately selected strict timing. No cap or assertion was relaxed. Reviews O/P round12 published at exact e5a head, IDs5530078875 and5530079053.
 
-At 6756, Packing, Pages and all 12 deferred jobs passed; strict C/D failed and remain failed. Current repairs address protected required-case skipping, two measured corpus checks and stale scheduling weights. The 87 guards and 18,332-identity reallocation oracle pass. Gupta final-schema controls pass 4/4; its replicated timing screen improves the median by 23.46%. The tally oracle covers 45 projects and 184 results; its screen improves the median by 23.13%. The 12.80% schema prototype missed the frozen 15% criterion and is withdrawn. No cap, timeout, assertion or coverage checker was relaxed.
+Main advanced through PR611/612 to c4c690a3e; integrated locally as 1cdb58684 with four resolved conflicts, preserving all187 results, DATA_REVISION6f1f09634198ac019260ef24c964d12510bf2fe0, and main sitev0.7.3. CI/site correction recut forward to v0.7.4; local predecessor-field error caught by release validation and corrected before publication. All16 focused snapshot-consumer controls pass; an additional five CI-profile cases pass. No new hosted or full checkpoint yet.
 
-Independent Astra reviews O/P round 12 have no outstanding findings at e5a. Missing document mappings are fixed; the 2,062-document contract passes. The prior 60b pre-push remains failed after 157.34s and correctly withheld reachable tests. Current e5a pre-push passed all 67 edit checks and is running 290 affected modules with progress and JUnit retained. Remote PR head remains 6756 until it passes; matching-head hosted proof and merge are still pending.
+Upstream611 substantially implements the proposed9nos input-boundary migration. Preserve its narrowed checked links, fragment parity, explicit workflow/defect inputs, private index, bead-store transport and baseline mode; do not duplicate old plan. Upstream recorded212846997-byte source snapshot is not a fresh measurement of this integration, and remaining baseline/refusal assurances still need disposition.
 
-Next: push, publish O/P at the verified remote head, run ordinary/strict/Pages and the final selected deferred checkpoint, merge, verify deployment. Evidence is retained under .codex/regularization-closeout-evidence-2026-10-13/pr599-integration/ and the committed campaign. Three-minute CI remains unproved; the 15,714-byte snapshot margin is tracked in think-9nos.
+Astra recommends one measured operation-local packet-admission experiment in upper_bound_reports, preserving fresh public operations, all certificate/receipt/custody checks and upstream algebraic comparisons. Repeated declaration/acquisition/receipt reads are source-derived candidates, not measured dominant cost or established speedup. No experiment implemented yet. Do not do eight isolated timing patches or claim runner variance without evidence.
+
+User has added reader-facing refinements, tracked99vd/4t34 and delegated in parallel. These are being packaged separately on codex/news-reader-refinements from current main so delivery does not wait for this CI optimization. Cleanupjs7b completed:936.04MiB verified staged in Trash, current tools and unique evidence preserved; no physical reclamation claim. CIparent stays open until final reviewed-source checkpoints, merge and deploy.
