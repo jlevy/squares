@@ -5337,6 +5337,27 @@ issues:
         status: recorded
       - result: n207-exact-certificate
         id: T-147
+    - url: https://github.com/jlevy/squares/issues/503#issuecomment-6200877511
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n207-exact-certificate
+        id: T-147
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n207-exact-certificate
+        id: E-pingyou-503-exact-feasibility
+        status: confirmed
+      - result: n207-refinement
+        id: T-167
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n207-refinement
+        id: E-pingyou-503-refinement-report
+        status: reviewed
     close_when: The import and its disposition are on main, the house adoption at 207 has landed or
       is owned, the author has been asked which AI-assistance account stands, and the owner has
       posted the resulting state; optimality is outside this request.
@@ -5486,6 +5507,27 @@ issues:
         status: recorded
       - result: n153-exact-certificate
         id: T-148
+    - url: https://github.com/jlevy/squares/issues/504#issuecomment-6200881400
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n153-exact-certificate
+        id: T-148
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n153-exact-certificate
+        id: E-pingyou-504-exact-feasibility
+        status: confirmed
+      - result: n153-refinement
+        id: T-166
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n153-refinement
+        id: E-pingyou-504-refinement-report
+        status: reviewed
     close_when: The import and its disposition are on main, the house adoption at 153 has landed or
       is owned, and the owner has posted the resulting state; optimality and the undilated contact
       solution are outside this request.
@@ -7238,7 +7280,8 @@ issues:
     title: 's(129) ≤ 11.870013850405, s(204) ≤ 14.808663234387, s(303) ≤ 17.909958291070: registration request'
     author: dostashev
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: 'Daniil Ostashev reports exact rational certificates at 129, 204 and 303 in dostashev/square-packing:
@@ -7290,6 +7333,19 @@ issues:
         status: recorded
       corrects:
       - https://github.com/jlevy/squares/issues/562#issuecomment-6165052232
+    - url: https://github.com/jlevy/squares/issues/562#issuecomment-6200859258
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: three-certificates
+        id: T-162
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: three-certificates
+        id: E-ostashev-562-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -7297,7 +7353,8 @@ issues:
     title: 's(302) ≤ 17.870275382734: registration request'
     author: BuddenPing
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: PingYou Ltd reports an exact rational certificate at 302, four boundary patches of Ryan Xu's
@@ -7343,6 +7400,19 @@ issues:
       - result: n302-certificate
         id: E-pingyou-564-certificate-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/564#issuecomment-6200861792
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n302-certificate
+        id: T-164
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n302-certificate
+        id: E-pingyou-564-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -7350,7 +7420,8 @@ issues:
     title: 's(146) ≤ 12.5837822039508342919134679370511513667729: further certificate refinement'
     author: BuddenPing
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: PingYou Ltd reports a further exact refinement of Ryan Xu's packing of 146 after Robert Barnett's
@@ -7395,6 +7466,19 @@ issues:
       - result: n146-refinement
         id: E-pingyou-566-certificate-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/566#issuecomment-6200865597
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n146-refinement
+        id: T-168
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n146-refinement
+        id: E-pingyou-566-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -7402,7 +7486,8 @@ issues:
     title: 's(261) ≤ 16.6787798753429098149372205115301919485639: further certificate refinement'
     author: BuddenPing
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: PingYou Ltd reports a further exact refinement of Ryan Xu's packing of 261 after Robert Barnett's
@@ -7447,6 +7532,19 @@ issues:
       - result: n261-refinement
         id: E-pingyou-567-certificate-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/567#issuecomment-6200868210
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n261-refinement
+        id: T-169
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n261-refinement
+        id: E-pingyou-567-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -7454,7 +7552,8 @@ issues:
     title: 's(105) ≤ 10.7893037837481588309268366600396176597363: exact contact refinement'
     author: BuddenPing
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: PingYou Ltd reports an exact contact refinement of Francisco Couzo's packing of 105 (T-130).
@@ -7505,6 +7604,19 @@ issues:
         status: recorded
       corrects:
       - https://github.com/jlevy/squares/issues/568#issuecomment-6162868542
+    - url: https://github.com/jlevy/squares/issues/568#issuecomment-6200870851
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n105-refinement
+        id: T-170
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n105-refinement
+        id: E-pingyou-568-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -7512,7 +7624,8 @@ issues:
     title: 's(272) ≤ 16.9655864748376706357560070334220455696299: exact contact refinement'
     author: BuddenPing
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: PingYou Ltd reports an exact contact refinement of SQUISH's packing of 272 (T-151). Imported
@@ -7557,6 +7670,19 @@ issues:
       - result: n272-refinement
         id: E-pingyou-569-certificate-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/569#issuecomment-6200873389
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n272-refinement
+        id: T-171
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n272-refinement
+        id: E-pingyou-569-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -8108,7 +8234,13 @@ issues:
     beads:
     - think-ts16
     answer_bead: think-ts16
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/589#issuecomment-6200882061
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n381
     close_when: Closed by its author; issue 582 carries the claim.
   - number: 593
     title: '73 new upper bounds across N=51..308: registration request'
