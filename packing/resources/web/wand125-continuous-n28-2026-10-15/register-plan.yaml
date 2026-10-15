@@ -1,0 +1,303 @@
+# Proposed register entries for this packet's certificate (the n = 28 import, think-zb5w,
+# under think-mq0k; stage 3).
+#
+# Written by the stage 1-2 lane for the records lane to apply, after T-142 in report
+# order: T-142's mixed_n28_L57425 reached this repository at 36b85b9
+# (2026-10-10T11:47:30Z) and is registered (V0/C0, pending adoption); this certificate
+# reached it at 8530baf (2026-10-15T04:13:10Z) and is stronger by 1/400, so by the owner's
+# rule of 2026-10-14 both are recorded and T-142 keeps its claim. T-NN stands for the id the
+# records lane takes last, in the commit that registers it. Once applied, the register is
+# the record and this file is only the proposal; the records lane may delete it in that
+# commit.
+#
+# No case record changes: the entry is pending adoption at n = 28 while T-107 holds both
+# lanes, as T-142 is. The brief named T-068/T-074 as the standing bound; on main they carry
+# the superseded 2289/400, and 1147/200 is T-107's.
+
+results:
+  - id: T-NN
+    kind: lower-bound
+    registered: 'YYYY-MM-DD'
+    headline: "Continuous-pose lower bound `s(28) > 1149/200` reported, by two of the source's programs"
+    claim: >-
+      A rectangle measure of wand125/square-packing, published on 15 October 2026 and
+      reported on no issue, is reported to prove s(28) > 1149/200 = 5.745.
+
+      The certificate, continuous_n28_L5745, is a density of 884 uniform rectangles in D4
+      orbits, and no point mass, of total mass 2799999/100000 on K = [0, 573351/100000]^2.
+      Every closed square of side B = 499/500 in K, at every centre and every angle, is
+      reported to capture mass at least 1; 28 - 2799999/100000 = 1/100000 > 0, so no 28
+      squares of side B with disjoint interiors fit in K, and scaling by 1/B gives the
+      claim, since L/B = 1149/200 exactly. The angle is covered continuously in
+      t = tan(theta/2) up to 83/200, past tan(pi/8), by outward-rounded interval branch and
+      bound, and the near-axis band by an exact check of a smaller axis-parallel square:
+      T-145's method, on a new density at a new count.
+
+      The source reports two programs deciding it: sqverify_continuous v4 (source
+      619b3c00), its continuous-angle mode of this repository's sqverify_fast crate, at all
+      86 root ranges (1,265,052,068 nodes, and a second complete run before publication),
+      and contpose_check3 v1.2 (source f3629c29), a driver around Guzhou0806's T-145
+      kernels with their caps raised, at all 43 slabs (1,912,948,689 nodes). Each refused a
+      control with every mass scaled by 985/1000.
+
+      The value is above T-142's reported 2297/400 = 5.7425 by 1/400, above the 287/50 that
+      jlevy/squares#446 reported on 8 October, never adopted, by 1/200, and above T-107's
+      1147/200 = 5.735, the verified and reported lower bound at n = 28, by 1/100.
+
+      Here the exact premises hold: the mass, the scalar chain, each program's near-axis
+      side and margin, both logs against their summaries, the control's scaling, and both
+      of check2's kernel inputs, regenerated from the candidate with the T-145 audit's
+      builders, equal to the digests the source names. A diagnostic sample agreed with the
+      source's logs: three of check1's roots, its control, two slabs on the reviewed T-145
+      kernel and the axis patch. A sample is not a replay. No complete replay has run here,
+      so the value stands as reported.
+
+      Hiroaki Hosono (wand125) after Guzhou0806, Tokoharu and Levy,
+      [square-packing](https://github.com/wand125/square-packing/tree/8530bafb03d48444f30f241fbc1f29f01cd7c96c/problems/square-lower-bounds/certificates/continuous_n28_L5745).
+      The source says parts of the work were produced with AI assistance under human
+      direction; the commit names Claude as co-author, and the second program's
+      specification is written for Codex.
+    scope: {n_values: [28]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        Scored as a claim: if a complete replay passes, it is the strongest lower bound on
+        record at n = 28, 1/400 above T-142 and 1/100 above T-107, the gap to the best
+        known packing falling to about 0.0794. Its technique is T-145's continuous-pose
+        cover, carried for the first time to a count other than 40 and decided at the
+        source by two programs; a single-count raise on an existing technique and not a
+        bound family, S3 as T-145, T-157 and T-142 are. V0/C0 says how far it stands, and
+        the score gates nothing.
+      scored: 'YYYY-MM-DD'
+      by: 'think-zb5w import, stage 1-2 lane (repository; draft)'
+    novelty: previously-published
+    attribution:
+      source_keys: ['[wand125 continuous n28 2026-10-15]']
+      published: '2026-10-15'
+    composition: >-
+      One reported certificate on its reported entry. The continuous cover is reported
+      decided by two of the source's programs: sqverify_continuous, which keeps this
+      repository's sqverify_fast interval, exact, axis, oracle and rotated modules byte for
+      byte, and contpose_check3, which runs Guzhou0806's T-145 kernels with only their
+      caps and receipt echo changed. The source says they share no code; they share none
+      with each other, but each shares code this record already relies on, and both
+      follow T-145's method. A replay here of the second on the reviewed T-145 kernel
+      would be re-implemented sharing the producer's components; no independent method
+      stands beside them.
+    evidence:
+      - E-wand125-continuous-n28-5745-report
+    artifacts:
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/README.md
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/acquisition/sources.json
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/receipts/premises-n28.json
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/receipts/sample-diagnostic-n28.json
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/receipts/check2-control-here.json
+      - packing/devtools/continuous_pose_followup.py
+      - packing/devtools/audit_continuous_pose.py
+    next_rung: >-
+      C3 needs a complete replay with controls whose refusals count and a review that
+      reads this certificate. The nearer route runs the reviewed T-145 pose kernel on the
+      input regenerated here over all 43 slabs, with the near-axis patch decided by
+      sqverify-fast's exact sweep, priced at about 12.7 CPU-hours after a preparation
+      slice; the other runs the source's sqverify_continuous over its 86 roots, about 13.3
+      CPU-hours, after the soundness review of its continuous mode (think-xzob,
+      jlevy/squares#533). Both wait for an owner budget, in think-8eo1 and think-0arj
+      under think-zb5w.
+    unfinished_confirmations:
+      - what: >-
+          a complete replay of the 43 slabs on the reviewed T-145 pose kernel from the
+          input regenerated here, the near-axis patch decided by sqverify-fast at side
+          249499501/250000000, controls whose refusals count, and a review that reads this
+          certificate
+        rung: C3
+        link: think-8eo1
+        estimated_cost:
+          cpu_hours: 12.73
+          cpu_hours_high: 30.43
+          basis: >-
+            The 15 October sample: slabs 0 and 14 on the CI binary 69bc9e64, 567.6 CPU-s
+            here against the source's 1,613.8 s, ratio 0.42 by the kernel's own timing,
+            applied to the source's 109,538 s over the slabs
+            (packing/resources/web/wand125-continuous-n28-2026-10-15/receipts/sample-diagnostic-n28.json).
+            The upper end is the source's own CPU.
+          priced: '2026-10-15'
+      - what: >-
+          a complete run of the source's sqverify_continuous v4 over all 86 roots with its
+          controls, after the soundness review of its continuous mode
+        rung: C3
+        link: think-0arj
+        estimated_cost:
+          cpu_hours: 13.30
+          cpu_hours_high: 16.0
+          basis: >-
+            The 15 October sample: roots 0, 1 and 2, 87.0 CPU-s here against the source's
+            70.8 s, ratio 1.23 by process CPU, applied to the source's 38,949 s over the
+            roots; the upper end adds a fifth for the early roots' small share.
+          priced: '2026-10-15'
+    notes: >-
+      V0 because the cited entry is the source's public claim: assurance reported, replay
+      not attempted. C0 because no cited entry carries a qualifying external_review. The
+      case record's lanes are unchanged, so the entry is pending adoption at n = 28 while
+      T-107 holds both lanes, beside T-142. The release asset is pinned by size and digest
+      and kept outside Git; the directory's MIT documents and check2's source are
+      retained. The source's least certified bounds (1 + 4.7e-12 and 1 + 2.4e-12) are the
+      margin of the last accepted leaf over the threshold, not the certificate's slack.
+
+evidence:
+  - id: E-wand125-continuous-n28-5745-report
+    claim: lower-bound
+    scope:
+      n_values:
+      - 28
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 continuous n28 2026-10-15]'
+    certificate: packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-continuous, V-wand125-contpose-check3]
+    limitations: >-
+      The author reports 1149/200 by two programs: sqverify_continuous v4 at all 86 root
+      ranges (4,183 s at 10 threads; a second complete run before publication, 3,714 s at
+      30 threads) and contpose_check3 v1.2 at T-145's 43 slabs (8,506 s at 16 workers), on
+      no issue. Complete source-byte custody and the exact premises are accepted
+      (receipts/premises-n28.json), including both of check2's kernel inputs regenerated
+      here. A diagnostic sample matched the source's logs at three roots, two slabs on the
+      reviewed T-145 kernel and the axis patch (receipts/sample-diagnostic-n28.json); that
+      is not a replay. The source's 985/1000 control is refused at the axis patch alone; no
+      control here yet refuses at an oblique root by an exact capture below 1. The least
+      certified bounds of 1 + 4.7e-12 and 1 + 2.4e-12 are search stops, not slack. A
+      complete replay and a review that reads this certificate remain pending, priced at
+      about 13 CPU-hours a route. The two programs share no code with each other, but each
+      shares code with routes this record already counts. No standing bound or rating
+      changes; T-107 and T-142 stand.
+    source_reviewed: 'YYYY-MM-DD'
+
+source_coverage:
+  - id: wand125-continuous-n28-5745-2026-10-15
+    title: Wand125 reported n28 continuous-pose lower bound, no issue
+    role: source-repository
+    url: https://github.com/wand125/square-packing/tree/8530bafb03d48444f30f241fbc1f29f01cd7c96c/problems/square-lower-bounds/certificates/continuous_n28_L5745
+    local: resources/web/wand125-continuous-n28-2026-10-15/
+    source_key: '[wand125 continuous n28 2026-10-15]'
+    scope:
+      n_values:
+      - 28
+    reviewed: 'YYYY-MM-DD'
+    source_date: '2026-10-15'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+    - resources/web/wand125-continuous-n28-2026-10-15/README.md
+    evidence:
+    - E-wand125-continuous-n28-5745-report
+    notes: >-
+      The reported 1149/200 at n28 is above T-142's reported 2297/400, #446's 287/50 and
+      T-107's 1147/200, which stands in both lanes. Complete release-asset and document
+      custody, the exact premises and the binding of check2's kernel inputs to the
+      candidate are accepted; a diagnostic sample of both programs is not a replay.
+      Replay and adoption remain under think-zb5w.
+
+verifiers:
+  - id: V-wand125-sqverify-continuous
+    program: sqverify-fast --continuous, the source's sqverify_continuous v4
+    author: wand125, adapting this repository's sqverify_fast
+    provenance: external
+    language: [Rust]
+    methods: [interval-certified, exact-algebraic]
+    role: decides
+    summary: >-
+      The source's copy of this repository's sqverify_fast with a continuous-angle mode
+      (src/slab.rs): for a format M candidate, a core side B and a threshold tau, it covers
+      t = tan(theta/2) over [10^-7, 83/200] in 86 root ranges by outward-rounded binary64
+      branch and bound over (u, v, t), with concave-section bounds and translation
+      derivatives, and the band [0, 10^-7] by the crate's exact axis sweep at a side A with
+      A W(10^-7) <= B, and checks n tau > M exactly.
+    source:
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json
+    versions:
+      - revision: d4a19815e2b0cca5faa562f00c7a80b93d3402ef
+        note: >-
+          tools/sqverify_continuous at d4a1981, byte for byte the asset's
+          check1/src/sqverify_continuous_v4.tgz (113,578 bytes, SHA-256
+          720869758013ac3cc86343f0603817ee36298be7696e40bb1d164a511f383a08), whose build
+          reports source_sha256 619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5;
+          built here with rustc 1.98.0 (cargo build --release --locked) into
+          31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618. Neither
+          retained nor yet reviewed (think-xzob, #533).
+    note: >-
+      It keeps this repository's interval.rs, exact.rs, axis.rs, oracle.rs and rotated.rs
+      byte for byte; its certificate.rs is the source's proof_net admission. Its author read
+      Guzhou0806's kernel before writing the mode, so it is independent code, not an
+      independent method (think-xzob).
+
+  - id: V-wand125-contpose-check3
+    program: contpose_check3 v1.2, check.py and generator.py around kernel/continuous_pose.cpp and kernel/axis_integer_grid.cpp
+    author: wand125 (the driver, written to a specification for Codex), around Guzhou0806's kernels
+    provenance: external
+    language: [Python, C++]
+    methods: [interval-certified, exact-algebraic]
+    role: decides
+    summary: >-
+      Regenerates the T-145 kernels' two inputs from a rectangle candidate (D4 expansion,
+      outward binary64 enclosure; the axis measure rounded inward and down, at a density
+      scale lowered by powers of ten until its guards hold), runs the integer axis kernel
+      and the continuous-pose kernel on T-145's 43 slabs, and accepts only when every slab
+      is verified with nodes = 2 leaves - 1, the axis minimum is at least tau, and the
+      exact counting, geometry, angle and near-axis premises hold.
+    source:
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/check.py
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/generator.py
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/continuous_pose.cpp
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/axis_integer_grid.cpp
+    versions:
+      - sha256: f3629c29d682a9dd3c7acc42770207bfd1f2386cd6c38f0328cc755175e3c86e
+        revision: 8530bafb03d48444f30f241fbc1f29f01cd7c96c
+        note: >-
+          The source digest by VERSION.json's rule. Built here with g++ 13.3.0 and
+          check.py's flags into the binaries its receipt names, continuous_pose
+          c028f0e34356a14af08d2309e64eed8c7b90f638731db39c7ccb19ba88276191 and
+          axis_integer_grid 3d144a459b8a8f267ba3c3447023ee8db649ed5e7c6cd49ce97ac194a3422055.
+    note: >-
+      Its kernels differ from the reviewed T-145 copies (V-guzhou-n40-continuous-pose,
+      V-guzhou-n40-axis-integer-grid) exactly as its CHANGES.md prints: caps (rectangles,
+      side, the axis grid from 15,000,000 to 90,000,000 vertices, the threshold
+      denominator) and an echo of the input digest and arguments; no arithmetic changed.
+
+  - id: V-continuous-pose-followup
+    program: devtools.continuous_pose_followup
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Decides in exact rationals a continuous-pose certificate's premises and custody
+      from its pinned release asset: the candidate's mass and rows, the scalar chain, each
+      program's near-axis side and margin, both check2 kernel inputs regenerated against
+      the digests the source names, the control's scaling, and both programs' logs
+      against their summaries; and drives a diagnostic sample of roots, slabs and axis
+      patches judged against the source's logs. It decides no coverage.
+    source:
+      - packing/devtools/continuous_pose_followup.py
+      - packing/tests/test_continuous_pose_followup.py
+    independence_record: packing/devtools/continuous_pose_followup.py
+
+bibliography:
+  key: '[wand125 continuous n28 2026-10-15]'
+  dated: '2026-10-15'
+  entry: >-
+    wand125's (Hiroaki Hosono's) continuous-pose certificate for s(28) > 1149/200 = 5.745,
+    pinned at 8530bafb (15 October 2026, wand125/square-packing): 884 rectangle orbits of
+    mass 2799999/100000 on [0, 573351/100000]^2, every square of side 499/500 at every
+    angle reported to capture mass at least 1, decided at the source by sqverify_continuous
+    v4 and by contpose_check3 around Guzhou0806's T-145 kernels; no issue reports it. The
+    directory's MIT documents and check2's source are retained, and the 912,977-byte
+    release asset is pinned by size and SHA-256 and not retained.
+  local: wand125-continuous-n28-2026-10-15/

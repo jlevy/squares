@@ -1,0 +1,35 @@
+{
+ "schema": "asset/v1",
+ "id": "square-lower-bounds-v1:certificates/continuous_n28_L5745",
+ "claim": "No packing of 28 closed unit squares (interiors disjoint) fits in the closed square of side 1149/200 (= 5.745); equivalently s(28) > 1149/200.",
+ "release_tag": "square-lower-bounds-v1",
+ "release_url": "https://github.com/wand125/square-packing/releases/tag/square-lower-bounds-v1",
+ "assets": [
+  {
+   "asset": "certificates__continuous_n28_L5745.tar.gz",
+   "size": 912977,
+   "sha256": "d7249d0df91a385d7747b9380303108087552a625962d529855550d8462b9ab8"
+  }
+ ],
+ "unpack": "tar xzf certificates__continuous_n28_L5745.tar.gz -C problems/square-lower-bounds",
+ "unpack_note": "run from the repository root; restores the data files in place next to the documents",
+ "check": "tar xzf check1/src/sqverify_continuous_v4.tgz\n(cd sqverify_continuous/sqverify_fast && cargo build --release --locked)\nsqverify_continuous/sqverify_fast/target/release/sqverify-fast --candidate candidate.json --n 28 --continuous --core 499/500 --tau 1 --threads 8 --max-nodes 200000000 | tail -1",
+ "check_cwd": "problems/square-lower-bounds/certificates/continuous_n28_L5745",
+ "check_note": null,
+ "check_extended": null,
+ "documents": [
+  "problems/square-lower-bounds/certificates/continuous_n28_L5745/README.md",
+  "problems/square-lower-bounds/certificates/continuous_n28_L5745/REPRODUCE.md",
+  "problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/CHANGES.md",
+  "problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/PROVENANCE.md",
+  "problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/README.md",
+  "problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/SPEC.md",
+  "problems/square-lower-bounds/certificates/continuous_n28_L5745/provenance/search-notes.md"
+ ],
+ "source": {
+  "repository": "wand125/square-packing",
+  "commit": null,
+  "path": "problems/square-lower-bounds/certificates/continuous_n28_L5745",
+  "published_after": "a070143f597e09611762f67f08c258619e1bd56b"
+ }
+}

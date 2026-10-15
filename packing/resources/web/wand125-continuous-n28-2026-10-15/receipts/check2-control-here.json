@@ -1,0 +1,154 @@
+{
+  "axis": {
+    "arguments": [
+      "axis_input.txt"
+    ],
+    "exit_code": 2,
+    "input_sha256": "9d5ff35d3775cd60f445338c3764db2b2fa33748cc1bc233d4f9e6809a460e00",
+    "kernel": {
+      "arguments": [
+        "axis_input.txt"
+      ],
+      "direct_sum_matches": true,
+      "evaluation_abs_bound": "579394877834686288007811592350540800",
+      "input_sha256": "9d5ff35d3775cd60f445338c3764db2b2fa33748cc1bc233d4f9e6809a460e00",
+      "minimizer_x_integer": 4904477991,
+      "minimizer_y_integer": 4904477991,
+      "minimum_numerator": "98599324478829283196727960",
+      "scale": "100000000000000000000000000",
+      "status": "AXIS_TEST_REFUSED",
+      "x_nodes": 5789,
+      "y_nodes": 5789
+    },
+    "seconds": 5.7365439610002795,
+    "stderr": "",
+    "stdout": "{\"input_sha256\":\"9d5ff35d3775cd60f445338c3764db2b2fa33748cc1bc233d4f9e6809a460e00\",\"arguments\":[\"axis_input.txt\"],\"status\":\"AXIS_TEST_REFUSED\",\"x_nodes\":5789,\"y_nodes\":5789,\"minimum_numerator\":\"98599324478829283196727960\",\"scale\":\"100000000000000000000000000\",\"minimizer_x_integer\":4904477991,\"minimizer_y_integer\":4904477991,\"direct_sum_matches\":true,\"evaluation_abs_bound\":\"579394877834686288007811592350540800\"}\n",
+    "timed_out": false
+  },
+  "build": {
+    "binaries": {
+      "axis_integer_grid": "3d144a459b8a8f267ba3c3447023ee8db649ed5e7c6cd49ce97ac194a3422055",
+      "continuous_pose": "c028f0e34356a14af08d2309e64eed8c7b90f638731db39c7ccb19ba88276191"
+    },
+    "configuration": {
+      "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "flags": [
+        "-O2",
+        "-std=c++17",
+        "-fno-fast-math",
+        "-ffp-contract=off"
+      ],
+      "sources": {
+        "axis_integer_grid.cpp": "67e1af550309c48bbf6b787c6cc56fb792508b2b0095f8942d974a9805b573b4",
+        "continuous_pose.cpp": "168aba3a5179d12b00f6ab86e2c1ad88092e1033d11bdd74aaa6cd26f12d7ec1",
+        "identity.h": "887af62564afe705640aed93a8a1d44ce2cc71ba448b7ff7cfaa30473a9437b1"
+      }
+    }
+  },
+  "claim": "s(28) > 1149/200",
+  "claim_fraction": "1149/200",
+  "denominator": 1000000,
+  "endpoints": [
+    1,
+    500,
+    10000,
+    20000,
+    30000,
+    40000,
+    50000,
+    60000,
+    70000,
+    80000,
+    90000,
+    100000,
+    110000,
+    120000,
+    130000,
+    140000,
+    150000,
+    160000,
+    170000,
+    180000,
+    190000,
+    200000,
+    210000,
+    220000,
+    230000,
+    240000,
+    250000,
+    260000,
+    270000,
+    280000,
+    290000,
+    300000,
+    310000,
+    320000,
+    330000,
+    340000,
+    350000,
+    360000,
+    370000,
+    380000,
+    390000,
+    400000,
+    410000,
+    415000
+  ],
+  "errors": [
+    "Axis coverage refused"
+  ],
+  "input_sha256": "28ea4d6667c1021d399de7ca1f164f41de562781bc6e15b5be229b269425cda2",
+  "label": "control",
+  "manifest": {
+    "B": "499/500",
+    "L": "573351/100000",
+    "axis_containment_margin": "1496999501/250000000000250000000",
+    "axis_coordinate_denominator": 1000000000,
+    "axis_density_denominator": 100000000,
+    "axis_evaluation_bound": "579394877834686288007811592350540800",
+    "axis_scale": "100000000000000000000000000",
+    "axis_side": "249499501/250000000",
+    "axis_terms": 7072,
+    "candidate_sha256": "28ea4d6667c1021d399de7ca1f164f41de562781bc6e15b5be229b269425cda2",
+    "epsilon": "1/1000000",
+    "files": {
+      "axis_input.txt": "9d5ff35d3775cd60f445338c3764db2b2fa33748cc1bc233d4f9e6809a460e00",
+      "certificate_input.txt": "c9f35ef64b5cbc23fad4dceea299b0b2ffc7a00dda48d8d2ad6910ecb9000da5"
+    },
+    "format": "mixed",
+    "mass": "551599803/20000000",
+    "params_sha256": null,
+    "tau": "1",
+    "terms": 7072
+  },
+  "manifest_sha256": "96b7c06763385bc4d06ff7273a27cdffffd9d43c6908b4ddd838bcdca1f9a8b7",
+  "premises": {
+    "B": "499/500",
+    "L": "573351/100000",
+    "M": "551599803/20000000",
+    "angle_coverage_polynomial": "89/40000",
+    "axis_containment_margin": "1496999501/250000000000250000000",
+    "axis_side": "249499501/250000000",
+    "counting_margin": "8400197/20000000",
+    "epsilon": "1/1000000",
+    "geometry_margin": "308811289201/10000000000",
+    "last_t": "83/200",
+    "n": "28",
+    "tau": "1"
+  },
+  "refused_slabs": [],
+  "seconds": 11.139438022000832,
+  "slabs": [],
+  "status": "REFUSED",
+  "summary": {
+    "claim": "s(28) > 1149/200",
+    "errors": [
+      "Axis coverage refused"
+    ],
+    "leaves": 0,
+    "nodes": 0,
+    "seconds": 11.139438022000832,
+    "slabs_completed": 0,
+    "status": "REFUSED"
+  }
+}
