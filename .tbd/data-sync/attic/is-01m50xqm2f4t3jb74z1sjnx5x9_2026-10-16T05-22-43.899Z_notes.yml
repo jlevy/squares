@@ -1,0 +1,60 @@
+entity_id: is-01m50xqm2f4t3jb74z1sjnx5x9
+timestamp: 2026-10-16T05:22:43.899Z
+field: notes
+lost_value: '"Worker ecstatic-edison-reg-run-3a (claimed 2026-10-16T02:52Z). Branch
+  claude/ecstatic-edison-8en33t-regularize-3a, now on main e2e018f32 (#636 merged,
+  v0.7.14) by fast-forward (no commits of its own before that).\n\n## 2026-10-16T05:10Z:
+  generators and selection done; admission next\n\nRun directories (outside the
+  checkout, on this
+  host):\n/tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/reg3a/\n-
+  runs/3a-deg05-1016, runs/3a-deg1-1016, runs/3a-deg5-1016: grid-slack at 0.5, 1, 5
+  degrees (run ids grid-slack-3a-deg05-1016 etc.), one invocation per count, nice 10,
+  two lanes, 02:55:35Z-03:20:40Z; timing.tsv has wall/user/sys per count and
+  threshold.\n- runs/3a-1016: Evan Daniel driver (run id evand-regularize-3a-1016),
+  --workers 2 --timeout 1800 --regularize-timeout 1800, 03:20:50Z-04:06:00Z, 2,710 s
+  wall, 3,559.68 CPU-s (receipt.json).\n- selection-2.json / selection-2.md /
+  logs/select-2.out: regularize_select on main e2e018f32 (drawn-picture guard),
+  --workers 2, 2,254 s wall on a host at load 10-11. An earlier selection on the pre-C1
+  branch was stopped after about 20 min wall (wasted).\n\nPer count (grid CPU-s over
+  three thresholds + evand CPU-s; outcome; drawn L/U/N/C/H/house/stage before ->
+  after):\n- 176: 46 + 66 = 112 CPU-s; evand same-side view chosen; house
+  70/71/52/83/19/33/393 -> 11/24/0/6/6/457/475\n- 105: 219 + 158 = 377; grid-slack 0.5
+  deg chosen (evand row 7 refuse); axis 7/14/5/16/16/199/240 -> 6/7/0/11/11/226/248\n-
+  129: 72 + 47 = 119; evand chosen; axis 0/0/0/23/19/362/366 -> 0/0/0/13/13/370/376\n-
+  146: 275 + 250 = 525; evand chosen; axis 3/5/1/12/12/367/388 -> 1/0/0/6/6/402/410\n-
+  156: 309 + 239 = 549; evand chosen; axis 2/8/4/19/19/328/376 -> 2/4/0/14/14/360/376\n-
+  271: 106 + 560 = 667; evand chosen; axis 6/12/1/24/19/728/752 ->
+  6/10/0/21/19/738/760\n- 204: 200 + 277 = 477; no better: grid ties the axis view on
+  every goal at all three thresholds; evand row 7 refuse (22/105/0/5/5/431/515)\n- 272:
+  1,111 + 260 = 1,371; no better: grid row 7 refuse, worse on stage_total (702/730 vs
+  700/732); evand row 4 held (solved side 1.7e-19 above U)\n- 303: 289 + 1,702 = 1,991;
+  no better: grid ties at all three thresholds; evand row 4 held (solved, 2.6e-31 above
+  U), worse on L/U/house/stage\n\nNext commands, from packing/ after `uv run --frozen
+  --all-extras --group dev`:\n  python -m devtools.regularize_evand layer --run-dir
+  $R/runs/3a-1016 --repo-root ..\n  python -m devtools.regularize_evand layer --run-dir
+  \"$(mktemp -d)\" --repo-root .. --grid-run $R/runs/3a-deg05-1016 --grid-counts
+  105\nthen render_regularized_atlas --update, default_drawings --update,
+  regularized_drawings, render_results --update; settle 204/272/303 in
+  default_drawings.SETTLED (runs: evand-regularize-3a-1016 and the three grid-slack-3a-*
+  runs) and take the nine off PENDING_ALLOWED; atlas README paragraph; data commit,
+  release_pin --update, re-pin commit; checks; draft PR; site cut after v0.7.14
+  last.\n\n## 2026-10-16T05:30Z: admitted, recorded, committed and pushed\n\nPushed
+  origin/claude/ecstatic-edison-8en33t-regularize-3a: 83b8eb53c (data: six views
+  admitted, records regenerated, 204/272/303 in SETTLED, nine off PENDING_ALLOWED, atlas
+  README paragraph) and 7339fff3b (re-pin DATA_REVISION to 83b8eb53). layer: 487 s + 77
+  s wall. States now 64 regularized, 232 regular as published, 13 decided, 4 exempt, 11
+  pending; default pictures 83 of 92 (176 now draws the evand view). Passing locally:
+  default_drawings --check-state and --check (64 s wall), regularize_axis_components
+  --check-atlas, regularized_drawings --check, render_regularized_atlas --check,
+  render_results --check, check_bead_tree, ruff and basedpyright on
+  default_drawings.py.\n\nNext: release_pin --check; check_release_impact --baseline-ref
+  origin/main; packing-validate --records; regularization tests; draft PR (labels
+  project + S2); site cut after v0.7.14 just before reporting ready; watch CI. Do not
+  close think-la7h until its PR merges (guide, \"When a Witness Changes\")."'
+winner_source: local
+loser_source: remote
+context:
+  local_version: 4
+  remote_version: 4
+  local_updated_at: 2026-10-16T05:22:38.016Z
+  remote_updated_at: 2026-10-16T05:21:30.584Z
