@@ -92,7 +92,7 @@ PUBLICATION_HISTORY = (
             "record 204, 272 and 303 as decided with no better view, list the October 16 "
             "review of the upper-bound imports T-185 to T-190 in the synopsis document "
             "map, confirm T-185 to T-190 at V3/C3, move the houses at fifteen counts to "
-            "T-186, T-187, T-188 and T-190, and draw the regularized views of six of them."
+            "T-186, T-187, T-188 and T-190, and draw the regularized views of ten of them."
         ),
     ),
     PublicationHistoryEntry(
@@ -817,7 +817,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
             "record 204, 272 and 303 as decided with no better view, list the October 16 "
             "review of the upper-bound imports T-185 to T-190 in the synopsis document "
             "map, confirm T-185 to T-190 at V3/C3, move the houses at fifteen counts to "
-            "T-186, T-187, T-188 and T-190, and draw the regularized views of six of them."
+            "T-186, T-187, T-188 and T-190, and draw the regularized views of ten of them."
         ),
     ),
     ReleaseImpactDecision(
@@ -1131,8 +1131,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods, render_n11_optimality_review and "
             "render_n11_threshold_bound_review write 50 files, byte-identical between the two "
             "trees. The explainer's render needs a browser this host lacks, so it is "
-            "source-reviewed only. No PDF was printed. All four papers keep v0.4.7, v0.1.7, "
-            "v0.1.0 and v0.2.2; the site takes the patch."
+            "source-reviewed only. No PDF was printed. The selection think-r3cl owed then "
+            "drew grid-slack's views at 232, 264, 271 and 302 and settled 237, 303 and 304 "
+            "in default_drawings, which changes only results.yaml's regularized_drawings "
+            "items and those case records' regularization notes; rendered at link revision "
+            "e2e018f3 from this branch at 796a1d03, the survey's and both reviews' 42 files "
+            "each are byte-identical to main e2e018f3's. All four papers keep v0.4.7, "
+            "v0.1.7, v0.1.0 and v0.2.2; the site takes the patch."
         ),
     ),
     ReleaseNoPublicChange(
