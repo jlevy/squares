@@ -3,9 +3,9 @@ type: is
 id: is-01m50s7ppqb37qxtm4ty6bxw0a
 title: Simplify news topics and align tag filters with card labels
 kind: bug
-status: in_progress
+status: closed
 priority: 2
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10
 labels: []
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T21:59:31.275Z
-updated_at: 2026-10-16T03:21:02.274Z
+updated_at: 2026-10-16T03:34:31.227Z
 started_at: 2026-10-15T21:59:45.784Z
+closed_at: 2026-10-16T03:34:31.213Z
+close_reason: "Completed News consistency work: stack635/PR633-634 merged3685616d with passing exact-main Packing and4517 live checks; follow-upPR638 merged4e8c8987 by merge commit, source7627f47e retained. SeniorA5542565797 and correctnessB5542654327 at exact4e983d2c found no issues. Exact-head Packing38843354043/Pages38843354058/mergeability38843347696 passed; actual1280/390 browser cases and51forwarders passed zero skips. Sitev0.7.13 exact-main Pages38844993807 deployed and passed4519/4519 checks with0retries. Root liveUI verified all3 canonical article titles/dates/topiccomputedstyles match News, title stable-link navigation, click expansion/contraction, sans Fullchangelog shared external icon/accessiblename/href; defaultbrowserNewsopened. Ownervisualcheckboxes untouched. Nativecheckpoint38844993715 stillrunning withoutfailures atcloseout; broadercost/causaldiagnosisremainopen think-yops/ht59/kxmq. Durableevidence in primary .codex/regularization-closeout-evidence-2026-10-13/pr638-home-news-parity-20261016 and pr638-main-4e8c8987-20261016."
+resolution: null
+duplicate_of: null
 ---
 Remove Correction and Audit from News tags and filter choices while retaining Results classifications and article claims. Use matching sentence-case topic labels and shared light/dark chip colors in joined compact wrapping filter choices. Add per-topic tallies at selected significance levels, independent of selected topics; All counts unique score-matching news items. Remove duplicate topic tags from homepage news cards while retaining status, verification/confirmation, credits, caveats and full-result links. Extend the existing design rules and focused browser/news contracts, then PR, review and publish as the next site patch.
 
