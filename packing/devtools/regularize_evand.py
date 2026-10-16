@@ -10,7 +10,7 @@ Usage, from `packing/`, each after
     reclassify --run-dir DIR [--n N ...] [--refresh-bounds]
     layer --run-dir DIR [DIR ...] --repo-root TREE [--select admitted|preview]
         [--exclude N ...] [--grid-run DIR --grid-counts N ...]
-    rungs --run-dir DIR [DIR ...] --repo-root TREE
+    rungs --run-dir DIR [DIR ...] --repo-root TREE [--check]
     rename-run --from ID --to ID --note TEXT --repo-root TREE
     provenance --repo-root TREE [--check]
     report --run-dir DIR [--json]
@@ -3741,6 +3741,60 @@ def record_rungs(run_dirs: Sequence[Path], root: Path) -> dict[str, Any]:
     return {key: sorted(set(counts)) for key, counts in summary.items()}
 
 
+def reproduced_views(run_dirs: Sequence[Path], root: Path) -> dict[str, Any]:
+    """Which of the layer's drawn Evan Daniel views finished runs reproduce, writing
+    nothing (`rungs --check`; review D1 of #644).
+
+    A report reproduces a drawn view when its admitted view, recorded under the entry's
+    own run, renders to the drawn view byte for byte -- the comparison `record_rungs`
+    makes, of the text and not a digest -- and the entry's values the view's text does
+    not carry are the report's too: the solve's retry rungs, where the entry records
+    them (`run.rungs`), what was measured (the regularizer's level and groups, the
+    contact histograms) and the regularization record. Each count is listed under
+    `reproduced`, under `differs` with what differs, or under `not_drawn`, where the
+    layer draws no view of the driver's there or the report admits none."""
+    root = root.resolve()
+    index = read_json(root / LAYER_INDEX_PATH)
+    entries = {int(entry["n"]): entry for entry in index["entries"]}
+    layout = layer_layout(root)
+    reproduced: list[int] = []
+    differs: dict[str, list[str]] = {}
+    not_drawn: list[int] = []
+    for run_dir in run_dirs:
+        for path in sorted(Path(run_dir).glob("n-*/report.json")):
+            report = read_json(path)
+            n = int(report["n"])
+            entry = entries.get(n) or {}
+            if (
+                entry.get("status") != "regularized"
+                or entry.get("generator") != axis.EVAND_GENERATOR
+                or layer_candidate(report, "admitted") is None
+            ):
+                not_drawn.append(n)
+                continue
+            admitted = evand_admitted(report, path.parent, str(entry["run"]["id"]))
+            text = witness_document(layer_view(admitted), schema=layout.schema_reference())
+            stored = gzip.decompress((root / entry["view"]["path"]).read_bytes())
+            found = [] if stored.decode("utf-8") == text else ["view"]
+            if "rungs" in entry["run"] and entry["run"]["rungs"] != admitted.run.get("rungs"):
+                found.append("run.rungs")
+            found.extend(
+                key
+                for key in ("measured", "regularization")
+                if json.loads(json.dumps(entry.get(key)))
+                != json.loads(json.dumps(getattr(admitted, key)))
+            )
+            if found:
+                differs[str(n)] = found
+            else:
+                reproduced.append(n)
+    return {
+        "reproduced": sorted(set(reproduced)),
+        "differs": dict(sorted(differs.items(), key=lambda item: int(item[0]))),
+        "not_drawn": sorted(set(not_drawn)),
+    }
+
+
 def rename_run(root: Path, old: str, new: str, note: str) -> dict[str, Any]:
     """Give a run the layer's index records only as a supplier of rungs another id, and
     say why on its block (`id_note`).
@@ -4018,6 +4072,11 @@ def parser() -> argparse.ArgumentParser:
     )
     rungs_command.add_argument("--run-dir", type=Path, nargs="+", required=True)
     rungs_command.add_argument("--repo-root", type=Path, required=True)
+    rungs_command.add_argument(
+        "--check",
+        action="store_true",
+        help="write nothing: list the drawn views the runs reproduce byte for byte",
+    )
     rename_command = sub.add_parser(
         "rename-run", help="give a run that only supplied rungs another id, saying why"
     )
@@ -4055,6 +4114,20 @@ def layer_command(arguments: argparse.Namespace) -> dict[str, Any]:
     )
 
 
+def layer_main(arguments: argparse.Namespace) -> int:
+    """Run `layer`, `rungs` or `rename-run` and then the layer's check, or `rungs --check`,
+    which writes nothing and fails when a drawn view the runs cover differs."""
+    if arguments.command == "rungs" and arguments.check:
+        found = reproduced_views(arguments.run_dir, arguments.repo_root)
+        print(json.dumps(found))
+        return 1 if found["differs"] else 0
+    print(json.dumps(layer_command(arguments)))
+    problems = axis.check_atlas(layer_layout(arguments.repo_root))
+    for problem in problems:
+        print(problem)
+    return 1 if problems else 0
+
+
 def main(argv: list[str] | None = None) -> int:
     arguments = parser().parse_args(argv)
     if arguments.command == "input":
@@ -4081,11 +4154,7 @@ def main(argv: list[str] | None = None) -> int:
             )
         return 0
     if arguments.command in {"layer", "rungs", "rename-run"}:
-        print(json.dumps(layer_command(arguments)))
-        problems = axis.check_atlas(layer_layout(arguments.repo_root))
-        for problem in problems:
-            print(problem)
-        return 1 if problems else 0
+        return layer_main(arguments)
     if arguments.command == "provenance":
         changed = restate_provenance(arguments.repo_root, write=not arguments.check)
         verb = "would restate" if arguments.check else "restated"

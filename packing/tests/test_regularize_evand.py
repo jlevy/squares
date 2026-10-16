@@ -1055,6 +1055,56 @@ def test_a_ladder_report_admits_its_rungs_and_records_them_only_for_its_own_view
     assert "rungs" not in entry["run"]
 
 
+def test_rungs_check_lists_the_drawn_views_a_run_reproduces_and_writes_nothing(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A fresh run reproduces a drawn view when its admitted view, under the entry's own
+    run, is the drawn view byte for byte and the values the view's text does not carry --
+    the retry rungs, the regularizer's level, the regularization record -- are the
+    entry's too (review D1 of #644). The check writes nothing, and its exit says whether
+    every drawn view the runs cover was reproduced."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    path = run_dir / "n-004" / "report.json"
+    report = json.loads(path.read_text(encoding="utf-8"))
+    report["solve"] = {"status": "KKT local min", "rungs": []}
+    path.write_text(json.dumps(report), encoding="utf-8")
+    drive.write_layer([run_dir], root, "admitted")
+    index = layout.index.read_bytes()
+    again = tmp_path / "again"
+    for source in run_dir.glob("n-*/*"):
+        target = again / source.parent.name / source.name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(source.read_bytes())
+    again_report = again / "n-004" / "report.json"
+    assert drive.reproduced_views([again], root) == {
+        "reproduced": [4],
+        "differs": {},
+        "not_drawn": [],
+    }
+    arguments = ["rungs", "--check", "--run-dir", str(again), "--repo-root", str(root)]
+    assert drive.main(arguments) == 0
+
+    # A run whose regularizer worked at another level reproduces nothing, though the
+    # level is not in the view's text: it is the evidence a level 2 view is drawn as the
+    # packing on, and only the report records it.
+    changed = json.loads(again_report.read_text(encoding="utf-8"))
+    changed["regularize"]["level"] = 3
+    again_report.write_text(json.dumps(changed), encoding="utf-8")
+    assert drive.reproduced_views([again], root)["differs"] == {"4": ["measured"]}
+    # Nor does one that climbed a rung, or says another thing of its changes; both are
+    # in the view's text as well.
+    changed["solve"]["rungs"] = ["force-kkt"]
+    changed["regularization"]["changes"] = {"re_angled": 1}
+    again_report.write_text(json.dumps(changed), encoding="utf-8")
+    assert drive.reproduced_views([again], root)["differs"] == {
+        "4": ["view", "run.rungs", "measured", "regularization"]
+    }
+    assert drive.main(arguments) == 1
+    assert layout.index.read_bytes() == index
+
+
 def test_only_an_admitted_grid_view_is_admitted() -> None:
     """The decision table decides a grid-slack view as it decides the driver's own."""
     grid = importlib.import_module("devtools.regularize_grid_slack")
