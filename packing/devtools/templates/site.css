@@ -1243,7 +1243,7 @@ body {
    Verification is the reviewed blue, Optimality violet, Project amber and Engineering
    orange, and the bound topics their bound's ink diluted into the page (below).
    `devtools.rung_scale` measures every one of these fills, the topics' with `topic_fills`,
-   and holds each topic apart from every fill that means something else. */
+   and holds each topic apart from every status and every other topic. */
 .site-chip:is(
   [data-case-status],
   [data-status="confirmed"],

@@ -15,8 +15,10 @@ a hue, a level and an optional chroma boost (`status_fills`, the owner, 2026-10-
 `think-c19o`), and are reported the same way. So are the topic chips that Results and
 News share (`topic_fills`, `think-z9za`): a topic on the scale, as the statuses are, and
 a bound topic as its bound's ink diluted into the page background. One fill keeps one
-meaning, so a topic's fill stands at least `DISTINCT` from every other fill reported,
-unless it shares its meaning (`SHARED_FILLS`).
+meaning, so a topic's fill stands at least `DISTINCT` from every status's fill and
+every other topic's, unless it shares its meaning (`SHARED_FILLS`). The V and C rung
+fills are not compared: a rung chip names its rung, and the upper-bound topic stands
+0.020 from C1 in the dark theme, a pairing older than the topic palette.
 
 Significance is no chip since 2026-10-03 (`think-m3m4`): its rung is drawn in an ink of
 its own, `--site-significance`, on the page itself. The inks, that one and the
@@ -393,8 +395,9 @@ def topic_fills() -> list[Fill]:
 
 
 def crowded(report: Sequence[Fill]) -> list[tuple[Fill, Fill, float]]:
-    """Each topic fill closer than `DISTINCT` to another fill of its theme that means
-    something else, or apart from one that shares its meaning, with their distance."""
+    """Each topic fill closer than `DISTINCT` to another fill of `report` in its theme
+    that means something else, or apart from one that shares its meaning, with their
+    distance. `main` passes the statuses and the topics."""
     topics = {fill.rung for fill in report if fill.rung in TOPICS}
     found = []
     for first in report:
