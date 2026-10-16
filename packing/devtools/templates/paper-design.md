@@ -950,8 +950,12 @@ it.
   Multi-select topic buttons wrap between labels on narrow screens, with a border around
   each button rather than empty space at the end of a wrapped strip.
   They use the cards’ sentence-case labels in both color themes: inactive buttons have a
-  neutral gray fill, selected buttons have the shared topic fill, and hover uses a paler
-  topic fill. Keyboard focus keeps the shared visible outline.
+  neutral gray fill, and selected buttons have the shared topic fill and a leading
+  check, the theme menu’s mark for a chosen item, so selection never rests on hue alone.
+  The check’s place is held while it is hidden, so a press never moves a button.
+  Under a hovering pointer an inactive button takes a paler topic fill, so a press shows
+  at once; touch screens have no hover state.
+  Keyboard focus keeps the shared visible outline.
   Each topic’s muted tally counts articles at the selected significance levels,
   independently of topic selection.
   Counts use the Results control row, right aligned above the cards; an empty state
@@ -1849,8 +1853,9 @@ it.
   `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the Results
   widget control size, 1.35 leading, and 0.15rem by 0.65rem padding (`think-ticj`).
   Borders, hover, keyboard focus and motion use the same rules on every page.
-  Topic filters use neutral gray when inactive, their shared chip fills when selected,
-  and a paler topic fill on hover, with no label underline or inset selection mark.
+  Topic filters use neutral gray when inactive, and their shared chip fills and a check
+  when selected; an inactive filter under a hovering pointer takes a paler topic fill.
+  They have no label underline or inset selection mark.
   Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select groups
   use native buttons with `aria-pressed`. Group names remain accessible when visually
   hidden. Each compact choice owns its border, so wrapped rows fit their buttons.

@@ -214,8 +214,10 @@ registered result kind and its verification limits.
 Compact single-select and multi-select choosers share the homepage component, including
 typography, padding, hover transitions and visible keyboard focus.
 Each compact button owns its border so wrapped rows leave no frame around empty space.
-Topic controls use neutral gray when inactive, their shared topic fill when active and a
-paler topic fill on hover, without underlines.
+Topic controls use neutral gray when inactive, and their shared topic fill and a check
+when active, so selection does not rest on hue alone; an inactive control under a
+hovering pointer takes a paler topic fill, so each press shows at once.
+They have no underlines.
 Optimality, Project and Engineering have distinct violet, amber and orange fills shared
 across News and Results; bound and verification hues retain their meanings.
 News defaults to S4/S5 and all topics; its group names remain accessible without visible

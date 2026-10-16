@@ -3,6 +3,11 @@
 Real rendered pages and their assets are served through request routes in memory, so
 the fixture writes no site output. One desktop and one mobile session exercise the
 keyboard, canonical Atlas tiles, shared triangle animation and a case link.
+
+Set `SQPACK_NEWS_SCREENSHOT_DIR` to a directory to keep review screenshots of the News
+surfaces these tests drive: the first visible card at each width (`news-card-WIDTH.png`)
+and the filter controls in each theme (`news-chooser-SCHEME-WIDTH.png`). Nothing reads
+them; a pull request that changes the News presentation attaches them for review.
 """
 
 from __future__ import annotations
@@ -1221,6 +1226,42 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         assert seen["overflow"] == 0
         return seen
 
+    def pressed_under_pointer(button: Any, topic: str, scheme: str) -> None:
+        """A press on a topic shows at once, with the pointer still on it: pale turns
+        full and full turns pale, or on a touch screen gray turns full and back. The
+        selected state carries a visible check against its fill, so selection never
+        rests on hue alone, and holding the check's place keeps the button where it was
+        (`think-slt2`)."""
+        choice = {
+            "chooser": '[aria-labelledby="news-topics-label"]',
+            "choice": f'[data-news-topic="{topic}"]',
+        }
+        page.mouse.move(0, 0)
+        button.hover()
+        box = button.bounding_box()
+        states = [page.evaluate(NEWS_FILTERS, choice)["chooser"]]
+        for _ in range(2):
+            button.tap() if width == 390 else button.click()
+            states.append(page.evaluate(NEWS_FILTERS, choice)["chooser"])
+            assert button.bounding_box() == box, (scheme, topic)
+        fills = [state["appearance"]["background-color"] for state in states]
+        assert fills[0] != fills[1] != fills[2], (scheme, topic, fills)
+        assert fills[0] == fills[2], (scheme, topic, fills)
+        for state in states:
+            pressed = state["pressed"] == "true"
+            assert state["check_visible"] is pressed, (scheme, topic, state["pressed"])
+            if pressed:
+                assert (
+                    state["appearance"]["background-color"]
+                    == (state["chip"]["background-color"])
+                ), (scheme, topic)
+                assert state["check_contrast"] >= 4.5, (scheme, topic, state["check_contrast"])
+            elif width == 390:
+                assert (
+                    state["appearance"]["background-color"]
+                    == (state["neutral"]["background-color"])
+                ), (scheme, topic)
+
     def shared_chooser_contract() -> None:
         for scheme in ("light", "dark"):
             page.emulate_media(color_scheme=scheme)
@@ -1293,7 +1334,10 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                                     property_name,
                                 )
                             fill = sample["appearance"]["background-color"]
-                            if interaction == "hover":
+                            # Only an unselected topic under a hovering pointer turns
+                            # pale; a touch screen has no hover (`think-slt2`).
+                            pale = interaction == "hover" and selection == "unselected"
+                            if pale and width != 390:
                                 assert fill != sample["chip"]["background-color"]
                                 assert fill != sample["neutral"]["background-color"]
                                 if scheme == "light":
@@ -1366,6 +1410,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                         },
                     )["chooser"]
                     assert sample["label"] == sample["chip_label"]
+                    pressed_under_pointer(button, topic, scheme)
             if width == 390:
                 assert len(rows) > 1
             request.node.user_properties.append(
@@ -1531,18 +1576,28 @@ def test_significance_meter_spacing_rejects_oversized_boxes(
             assert item["border"] == 1
             assert item["border_color"] == item["color"]
             assert item["side_space"] <= 0.7 * item["font"]
+            assert item["fits"], item
+            assert item["side_space"] >= 2 * (item["border"] + item["padding"]) - 0.5, item
             assert len(item["bars"]) == 5
             for bar in item["bars"]:
                 assert bar["border"] == 1
                 assert bar["height"] > 0.5 * item["font"]
                 assert bar["width"] > 0.4 * item["font"]
                 assert (bar["fill"] == "rgba(0, 0, 0, 0)") is (not bar["filled"])
-        oversized = page.evaluate(NEWS_FILTERS, {"meters": specimens, "wideMeters": True})[
+        oversized = page.evaluate(NEWS_FILTERS, {"meters": specimens, "meterSize": "7em"})[
             "samples"
         ]
         assert all(item["side_space"] > 0.7 * item["font"] for item in oversized), (
             "the spacing probe must reject excessive meter whitespace",
             oversized,
         )
+        crowded = page.evaluate(NEWS_FILTERS, {"meters": specimens, "meterSize": "3.6em"})[
+            "samples"
+        ]
+        assert all(
+            not item["fits"]
+            or item["side_space"] < 2 * (item["border"] + item["padding"]) - 0.5
+            for item in crowded
+        ), ("the spacing probe must reject a meter its label and bars overflow", crowded)
     finally:
         page.close()

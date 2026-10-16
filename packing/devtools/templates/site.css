@@ -3616,7 +3616,13 @@ html[data-site-atlas-view="triangle"]
 .site-news-filters :is(.site-tabs, .site-table-tools) {
   margin: 0;
 }
-/* The shared topic palette marks selection; neutral choices turn pale on hover. */
+/* A selected topic takes the shared topic fill and shows a check, the theme menu's
+   mark for a chosen item, so selection never rests on hue alone: the bound topics'
+   fills are close to the gray in lightness. The check's place is held when it is
+   hidden, so a press never moves a button or rewraps the row. Under a hovering
+   pointer an unselected topic turns pale in its topic hue, so a press shows at once:
+   pale turns full, and full turns pale. Touch screens have no hover, so a tap shows the
+   new state without a sticky pale fill. */
 .site-news-filters [aria-labelledby="news-topics-label"] button {
   flex: 0 0 auto;
   white-space: nowrap;
@@ -3627,16 +3633,29 @@ html[data-site-atlas-view="triangle"]
   font-variant-caps: normal;
   letter-spacing: normal;
   text-transform: none;
+  transition: var(--site-hover-transition);
 }
 .site-news-filters .site-tabs button.site-chip[aria-pressed="true"] {
   background: var(--site-chip-fill);
 }
-.site-news-filters .site-tabs button.site-chip:hover {
-  background: color-mix(
-    in oklab,
-    var(--site-chip-fill) var(--site-topic-hover-tint),
-    var(--kpress-doc-bg)
-  );
+.site-news-check {
+  block-size: 0.85em;
+  inline-size: 0.85em;
+  margin-inline-end: 0.3em;
+  vertical-align: calc((1cap - 0.85em) / 2);
+  visibility: hidden;
+}
+.site-news-filters button[aria-pressed="true"] .site-news-check {
+  visibility: visible;
+}
+@media (hover: hover) {
+  .site-news-filters .site-tabs button.site-chip:not([aria-pressed="true"]):hover {
+    background: color-mix(
+      in oklab,
+      var(--site-chip-fill) var(--site-topic-hover-tint),
+      var(--kpress-doc-bg)
+    );
+  }
 }
 .site-news-reset {
   background: none;

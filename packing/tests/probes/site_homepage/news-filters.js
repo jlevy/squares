@@ -1,17 +1,17 @@
 // The archive's actual facets, disclosed cards, centered controls and shared meters.
-/** @param {{ meters?: string, chooser?: string, choice?: string, overrideChooser?: boolean, wideMeters?: boolean } | null} options */
+/** @param {{ meters?: string, chooser?: string, choice?: string, overrideChooser?: boolean, meterSize?: string } | null} options */
 async (options) => {
   const {
     meters = "",
     chooser = "",
     choice = "",
     overrideChooser = false,
-    wideMeters = false,
+    meterSize = "",
   } = options ?? {};
   const override = document.createElement("style");
-  if (overrideChooser || wideMeters) {
-    override.textContent = wideMeters
-      ? ".site-significance { inline-size: 7em !important; }"
+  if (overrideChooser || meterSize) {
+    override.textContent = meterSize
+      ? `.site-significance { inline-size: ${meterSize} !important; }`
       : ".site-news-filters .site-tabs button { font-size: 40px !important; }";
     document.head.append(override);
   }
@@ -71,6 +71,27 @@ async (options) => {
     const [red = 0, green = 0, blue = 0] = context.getImageData(0, 0, 1, 1).data;
     return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
   };
+  /** WCAG relative luminance of a colour as the canvas paints it. @param {string} colour */
+  const luminance = (colour) => {
+    if (!context) {
+      return 0;
+    }
+    context.clearRect(0, 0, 1, 1);
+    context.fillStyle = colour;
+    context.fillRect(0, 0, 1, 1);
+    const channels = [...context.getImageData(0, 0, 1, 1).data.slice(0, 3)].map((value) => {
+      const channel = value / 255;
+      return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+    });
+    const [red = 0, green = 0, blue = 0] = channels;
+    return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+  };
+  /** The WCAG contrast of two colours. @param {string} first @param {string} second */
+  const contrast = (first, second) => {
+    const [darker, lighter] = [luminance(first), luminance(second)].sort((a, b) => a - b);
+    return ((lighter ?? 0) + 0.05) / ((darker ?? 0) + 0.05);
+  };
+  const check = option?.querySelector(".site-news-check") ?? null;
   const referenceChip = document.querySelector(
     `.site-news-topics [data-news-topic="${option?.getAttribute("data-news-topic")}"]`,
   );
@@ -96,6 +117,8 @@ async (options) => {
       width: meter.getBoundingClientRect().width,
       font: Number.parseFloat(style.fontSize),
       border: Number.parseFloat(style.borderTopWidth),
+      padding: Number.parseFloat(style.paddingLeft),
+      fits: meter.scrollWidth <= meter.clientWidth,
       color: style.color,
       border_color: style.borderTopColor,
       side_space:
@@ -119,6 +142,11 @@ async (options) => {
       ? {
           appearance: appearance(option),
           brightness: brightness(option),
+          check_visible: check ? getComputedStyle(check).visibility === "visible" : null,
+          check_contrast:
+            check && option
+              ? contrast(getComputedStyle(check).color, getComputedStyle(option).backgroundColor)
+              : null,
           chip_brightness: brightness(referenceChip),
           neutral: neutralAppearance,
           role: group.getAttribute("role"),

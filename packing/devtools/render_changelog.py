@@ -903,7 +903,7 @@ def news_filters(topics_present: set[str] | None = None) -> str:
     )
     topics = "".join(
         f'<button type="button" class="site-chip" data-news-topic="{topic}" '
-        f'aria-pressed="true"><span data-news-topic-label>{label}</span>'
+        f'aria-pressed="true">{NEWS_CHECK}<span data-news-topic-label>{label}</span>'
         '<span class="site-cell-quiet" data-news-tally> (0)</span></button>'
         for topic, label in NEWS_TOPICS.items()
         if topics_present is None or topic in topics_present
