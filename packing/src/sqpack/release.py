@@ -2790,6 +2790,54 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "edition."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered from this branch at fa80ffe3 and from main 80b116ed at link revision "
+            "80b116ed, the three papers' HTML and Markdown are byte-identical in all 126 "
+            "files the renderers write; each PDF prints from that HTML. The register gains "
+            "T-195, PR #622's N29 certificate, the source register its source, the "
+            "requests record #622's mapping to it, and the importer a house reader and a "
+            "verified exact form for a case that keeps an earlier print (think-gzrw); none "
+            "of the three papers prints any of them, so each keeps its edition: v0.1.7, "
+            "v0.1.0 and v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=("packing/devtools/upper_bound_reports.py", "packing/frontier/results.yaml"),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Rendered from this branch at fa80ffe3 and from main 80b116ed with the "
+            "browser's math pass, the Markdown and HTML differ only in the live register "
+            "count beside T-018, 194 results registered so far and now 195, and the HTML "
+            "also in where an empty style attribute falls in two formulas' spans, which "
+            "moves between two renders of the same input. A register count follows the "
+            "site's data and is not a revision of the paper, so the explainer keeps "
+            "v0.4.7."
+        ),
+    ),
 )
 
 
