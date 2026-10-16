@@ -1,0 +1,88 @@
+{
+  "certificate_touching_pairs": [
+    "23 24 along i.u"
+  ],
+  "certificate_top_right_contacts": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    10,
+    13
+  ],
+  "controls": [
+    {
+      "control": "duplicate-square",
+      "mutation": "square 1 := square 0",
+      "refused": true,
+      "violations": [
+        "pair 0 1"
+      ],
+      "expected": [
+        "pair 0 1"
+      ],
+      "for_the_right_reason": true,
+      "cpu_s": 12.01
+    },
+    {
+      "control": "outside-container",
+      "mutation": "square 0 moved by (-1, 0)",
+      "refused": true,
+      "violations": [
+        "wall 0 left"
+      ],
+      "expected": [
+        "wall 0 left"
+      ],
+      "for_the_right_reason": true,
+      "cpu_s": 12.09
+    },
+    {
+      "control": "tight-pair-23-24",
+      "mutation": "square 24 moved 10^-3000 towards square 23 along their touching axis i.u",
+      "refused": true,
+      "violations": [
+        "pair 23 24"
+      ],
+      "expected": [
+        "pair 23 24"
+      ],
+      "for_the_right_reason": true,
+      "cpu_s": 13.05
+    },
+    {
+      "control": "tight-box",
+      "mutation": "side reduced by 10^-3000",
+      "refused": true,
+      "violations": [
+        "wall 0 top",
+        "wall 1 top",
+        "wall 3 right",
+        "wall 3 top",
+        "wall 4 top",
+        "wall 5 top",
+        "wall 6 right",
+        "wall 7 right",
+        "wall 10 right",
+        "wall 13 right"
+      ],
+      "expected": [
+        "wall 0 top",
+        "wall 1 top",
+        "wall 3 right",
+        "wall 3 top",
+        "wall 4 top",
+        "wall 5 top",
+        "wall 6 right",
+        "wall 7 right",
+        "wall 10 right",
+        "wall 13 right"
+      ],
+      "for_the_right_reason": true,
+      "cpu_s": 12.09
+    }
+  ]
+}
