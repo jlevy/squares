@@ -1110,14 +1110,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "The think-0ut1 run of 16 October 2026 admits no view: it rewrites ten "
             "decided-no-better SETTLED entries (their runs, outcomes and evidence, no owed "
             "work left), so default-drawings.json changes only those counts' `states` rows "
-            "(`decisions` and `why`) and the `why` of 204, 272 and 303, whose evidence string "
-            "now names its paragraph; its `entries` are byte-identical to the base's. The "
+            "(`decisions` and `why`); its `entries` are byte-identical to the base's. The "
             "site reads the record only through `regularized_defaults`, `credit_line` and "
             "`held_reasons`, which read `entries` and the index, never `states`, SETTLED or "
             "PENDING_ALLOWED, and no case record, view or index entry changes. The papers "
             "reach default_drawings only through shared import discovery and read neither "
-            "constant. Source review, no render; the site keeps v0.7.15 and the papers "
-            "v0.4.7, v0.1.7, v0.1.0 and v0.2.2."
+            "constant. Review G2 of #644 then added default_drawings.orphaned_copies, "
+            "which fails the state gate on a settled-runs copy no settlement names, and "
+            "deleted the five such copies; the site and the papers read neither. Source "
+            "review, no render; the site keeps v0.7.15 and the papers v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2."
         ),
     ),
     ReleaseNoPublicChange(
