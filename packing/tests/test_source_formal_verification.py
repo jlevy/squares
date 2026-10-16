@@ -452,6 +452,7 @@ def test_a_run_here_keeps_its_own_rules() -> None:
     assert derive_confirmation([entry], record=ONE_CASE) == "C3"
 
 
+@pytest.mark.parametrize("field", ["build_receipt", "axioms_receipt"])
 @pytest.mark.parametrize(
     "relabel",
     [
@@ -460,20 +461,28 @@ def test_a_run_here_keeps_its_own_rules() -> None:
     ],
     ids=["third-party", "here"],
 )
-def test_a_confirming_entry_cannot_carry_the_producers_build_receipt(
-    relabel: dict[str, str],
+def test_a_confirming_entry_cannot_carry_the_producers_receipt(
+    relabel: dict[str, str], field: str
 ) -> None:
+    """A copy beside the producer's entry that keeps either of its receipts is caught
+    (review D3 for the build receipt, review E4 for the axiom receipt)."""
     producer = source_build()
-    relabelled = {**deepcopy(producer), "id": "E-relabelled", **relabel}
-    problems = shared_receipt_problems({row["id"]: row for row in (producer, relabelled)})
-    assert len(problems) == 1
-    assert "source-build.json" in problems[0]
-    assert "E-relabelled" in problems[0]
-    own = {**relabelled, "build_receipt": "third-party-build.json"}
+    own = {
+        **deepcopy(producer),
+        "id": "E-relabelled",
+        **relabel,
+        "build_receipt": "third-party-build.json",
+        "axioms_receipt": "third-party-axioms.log",
+    }
     assert shared_receipt_problems({row["id"]: row for row in (producer, own)}) == []
+    copied = {**own, field: producer[field]}
+    problems = shared_receipt_problems({row["id"]: row for row in (producer, copied)})
+    assert len(problems) == 1, problems
+    assert problems[0].startswith(f"{producer[field]}: one receipt")
+    assert f"E-relabelled ({field})" in problems[0]
 
 
-def test_the_live_register_shares_no_build_receipt_across_actors() -> None:
+def test_the_live_register_shares_no_receipt_across_actors() -> None:
     evidence = {
         row["id"]: row for row in safe_load(check_results.EVIDENCE.read_text())["evidence"]
     }

@@ -402,21 +402,29 @@ def external_formal_build_problems(evidence: Mapping[str, object]) -> list[str]:
     return errors
 
 
-def shared_receipt_problems(evidence_by_id: Mapping[str, Mapping[str, object]]) -> list[str]:
-    """A build receipt records one execution, so every entry citing it names one actor.
+#: The fields that name one execution's own record: its build and its axiom report.
+RECEIPT_FIELDS = ("build_receipt", "axioms_receipt")
 
-    A confirming entry that carries the producer's `build_receipt` is the producer's
-    run under another label; refusing the shared receipt keeps relabelling from turning
-    the source's execution into a third party's or this repository's.
+
+def shared_receipt_problems(evidence_by_id: Mapping[str, Mapping[str, object]]) -> list[str]:
+    """A receipt records one execution, so every entry citing it names one actor.
+
+    A confirming entry that carries the producer's `build_receipt` or `axioms_receipt`
+    is the producer's run under another label; refusing the shared receipt keeps
+    relabelling from turning the source's execution into a third party's or this
+    repository's. A path is one receipt whichever of the two fields names it.
+    Certificates are not compared: a replay here re-runs the source's certificate.
     """
     actors: dict[str, dict[tuple[str, str], list[str]]] = {}
     for evidence_id, evidence in evidence_by_id.items():
-        receipt = evidence.get("build_receipt")
-        if isinstance(receipt, str) and receipt:
-            actor = (str(evidence.get("origin")), str(evidence.get("performed_by")))
-            actors.setdefault(receipt, {}).setdefault(actor, []).append(evidence_id)
+        actor = (str(evidence.get("origin")), str(evidence.get("performed_by")))
+        for field in RECEIPT_FIELDS:
+            receipt = evidence.get(field)
+            if isinstance(receipt, str) and receipt:
+                cited = actors.setdefault(receipt, {}).setdefault(actor, [])
+                cited.append(f"{evidence_id} ({field})")
     return [
-        f"{receipt}: one build receipt is cited by entries of different actors ("
+        f"{receipt}: one receipt is cited by entries of different actors ("
         + "; ".join(
             f"{', '.join(ids)} as {origin}/{performer}"
             for (origin, performer), ids in sorted(by_actor.items())
