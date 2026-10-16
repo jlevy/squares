@@ -105,6 +105,12 @@ For each result, complete this sequence before declaring the change ready to lan
    ```
 
    This refreshes the figure data, the witnesses, the house renderings and the manifest.
+   Where it rewrites a witness, the count’s regularized view lapses: follow the
+   regularization guide’s
+   [When a Witness Changes](../../docs/project/guides/regularization-process.md#when-a-witness-changes),
+   which the import runbook’s
+   [Adopt a House, Then Regularize It](result-import.md#adopt-a-house-then-regularize-it)
+   schedules and prices.
    The two survey composites, `known-best-1-100` and `known-best-1-324`, are not redrawn
    for a result: each states the data it was drawn from and is redrawn at the next
    version bump, as

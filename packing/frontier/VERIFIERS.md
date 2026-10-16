@@ -25,13 +25,15 @@ second implementation agrees.
 
 ## The Short Version
 
-- **160** programs: **49** external and **111** first-party; **111** decide claims and **49** check premises.
-- **512** of **610** evidence entries name the programs that verified them: 253 reproduced with the producer’s code, 230 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
+- **162** programs: **50** external and **112** first-party; **112** decide claims and **50** check premises.
+- **514** of **614** evidence entries name the programs that verified them: 255 reproduced with the producer’s code, 230 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
 
 ## Programs
 
 | id | program | author | provenance | role | evidence | results |
 | --- | --- | --- | --- | --- | ---: | ---: |
+| [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 0 | 0 |
+| [`V-evand-639-replay-driver`](#v-evand-639-replay-driver) | replay_verify_exact.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | wand125 | external | decides | 89 | 14 |
 | [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | wand125 | external | decides | 66 | 11 |
@@ -40,8 +42,8 @@ second implementation agrees.
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | wand125 | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | wand125 | external | decides | 5 | 1 |
 | [`V-wand125-valid7-checker`](#v-wand125-valid7-checker) | valid7-independent-check (Tier A, Tier B and the record checker) | wand125 | external | decides | 2 | 2 |
-| [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 21 | 11 |
-| [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 8 | 8 |
+| [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 23 | 11 |
+| [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 10 | 8 |
 | [`V-evand-zeromargin-py`](#v-evand-zeromargin-py) | zeromargin.py | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-angle-net-verify`](#v-evand-angle-net-verify) | verify (the angle-net arrangement sweep) | Evan Daniel | external | decides | 10 | 5 |
 | [`V-evand-xcheck-py`](#v-evand-xcheck-py) | xcheck.py | Evan Daniel | external | decides | 4 | 2 |
@@ -147,8 +149,8 @@ second implementation agrees.
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 111 | 23 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 5 | 5 |
-| [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 9 | 8 |
+| [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 7 | 7 |
+| [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 11 | 10 |
 | [`V-audit-s12-reweighted`](#v-audit-s12-reweighted) | devtools.audit_s12_reweighted | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-s12-v11`](#v-audit-s12-v11) | devtools.audit_s12_v11_certificate | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-compare-evand-s32-sweep`](#v-compare-evand-s32-sweep) | devtools.compare_evand_s32_sweep | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -194,6 +196,30 @@ second implementation agrees.
 | [`V-continuous-pose-followup`](#v-continuous-pose-followup) | devtools.continuous_pose_followup | Squares Project (Levy) | first-party | premises | 0 | 0 |
 
 ## By Program
+
+### `V-evand-verify-exact`
+
+**verify_exact.py** · Evan Daniel · external · decides · Python · exact-algebraic
+
+The source's standard-library checker of an exact configuration over a number field Q[t]/f: every touching inequality an identity mod f, every other one by rational interval arithmetic at the root of f, each pair separated by a side line or by circumscribed discs, and the side the unique root of p in its interval.
+
+- Source: [`packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py`](../../packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py)
+- Versions run: SHA-256 `a0f38ca87c13…`, revision `7d1407a0b66c` (byte-identical at ad86d42, the revision whose packet retains the copy that ran)
+- Note: Run unchanged from the retained copy on issue 639's 23 exact forms, each in its own python -I process (receipts/replay-verify-exact.json in the evand-exact-cur-2026-10-16 packet). The replay's evidence entry is added at T-193's stage 4 exit, after the review lane think-7qxm.
+
+No evidence entry names it yet.
+
+### `V-evand-639-replay-driver`
+
+**replay_verify_exact.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Runs the source's verify_exact.py on each of issue 639's 23 exact forms and on four mutated controls at each retained form, holds the four pinned-only forms to the packet's manifest, and factors each polynomial over the integers with SymPy.
+
+- Source: [`packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py`](../../packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py)
+- Versions run: this repository's commits, which Git holds
+- Note: It decides nothing about a packing: the checker it runs does. Its irreducibility check is a premise of the stated algebraic degree, not of the bound.
+
+No evidence entry names it yet.
 
 ### `V-tokoharu-verify-cpp`
 
@@ -531,7 +557,9 @@ Decides a zero-margin point-and-segment cover by branch and bound over centre an
 | `E-n045-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-053 |
 | `E-n020-evand-point-cover-4886-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 | `E-bengreff-594-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-184 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
 | `E-bengreff-610-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-191 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-evand-zm-mixed-py`
 
@@ -539,9 +567,9 @@ Decides a zero-margin point-and-segment cover by branch and bound over centre an
 
 The source's exact mixed point-and-segment cover checker, the predecessor zmx2 was checked against.
 
-- Source: [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py)
-- Versions run: SHA-256 `ee3e2915349b…`
-- Note: Retained; its shipped run records are re-summarised by the source's verify.sh, but no confirming entry runs the checker itself yet.
+- Source: [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py), [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py)
+- Versions run: SHA-256 `ee3e2915349b…`; SHA-256 `bb89de15ecf5…` (mixed_cover.py, which zm_mixed.py imports; of `mixed_cover.py`); SHA-256 `640fe453c1a3…` (zeromargin.py, which zm_mixed.py imports (V-evand-zeromargin-py's program); of `zeromargin.py`)
+- Note: Benjamin Greff verified his s(76) and s(95) covers with it, on the sub-roots of the D4 roots zmx2 leaves, at the three digests his verify.sh pins, so its runs there (devtools.replay_evand_zmx2 zm-mixed) replay the producer's code. No other confirming entry runs it.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
@@ -552,7 +580,9 @@ The source's exact mixed point-and-segment cover checker, the predecessor zmx2 w
 | `E-n045-evand-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-053 |
 | `E-n020-evand-point-cover-4886-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 | `E-bengreff-594-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-184 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
 | `E-bengreff-610-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-191 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-evand-zeromargin-py`
 
@@ -2507,7 +2537,7 @@ Clones chelokot's archive at the pinned commit, checks the toolchain, manifest, 
 
 **devtools.replay_evand_zmx2** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls.
+Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls; for a split cover it also stages zm_mixed.py and the files it imports, digests checked, and runs it on the source's sub-roots.
 
 - Source: [`packing/devtools/replay_evand_zmx2.py`](../../packing/devtools/replay_evand_zmx2.py)
 - Versions run: this repository's commits, which Git holds
@@ -2519,12 +2549,14 @@ Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the 
 | `E-n059-wand125-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-066 |
 | `E-n077-wand125-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-067 |
 | `E-n032-evand-zmx2-full-sym-replay` | replayed here | reproduced with the producer’s code | not recorded | T-051 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-audit-evand-mixed-covers`
 
 **devtools.audit_evand_mixed_covers** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Parses zmx2 root logs with its own code, requires every root once with none uncertified, compares them with the source's records and re-derives the cover's exact total and D4 invariance.
+Parses zmx2 root logs with its own code, requires every root once with none uncertified, compares them with the source's records and re-derives the cover's exact total and D4 invariance; for a split cover it reads the zmx2 log and zm_mixed.py's sub-root records as one decision, every root zmx2 leaves tiled by certified sub-roots at the pinned digests and settings.
 
 - Source: [`packing/devtools/audit_evand_mixed_covers.py`](../../packing/devtools/audit_evand_mixed_covers.py)
 - Versions run: this repository's commits, which Git holds
@@ -2540,6 +2572,8 @@ Parses zmx2 root logs with its own code, requires every root once with none unce
 | `E-n013-evand-casefree-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-006 |
 | `E-n021-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-052 |
 | `E-n045-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-053 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-audit-s12-reweighted`
 

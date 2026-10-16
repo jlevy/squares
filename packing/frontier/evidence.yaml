@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-14'
+last_reviewed: '2026-10-16'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -36139,9 +36139,152 @@ evidence:
       cells and by zm_mixed.py on the 64 cells tiling the other four. At retention here the
       cover's data facts were recomputed and both checkers were rerun from the pinned bytes,
       equal to the source's records, with two mutations refused (packet receipts/); that
-      reproduction with the producer's code is not yet an evidence entry. The Lean wrapper
+      reproduction with the producer's code is E-bengreff-594-cover-replay. The Lean wrapper
       is unbuilt and takes the covering statement as a hypothesis.
+    external_review:
+      state: informally-verified
+      date: '2026-10-16'
+      reviewed_by: >-
+        Claude (AI review), strong sub-agent tier at max reasoning, the stage 4 review lane of the 16 October intake pass, prompted separately from the records lane with no shared context
+        (docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md)
+      note: >-
+        No mathematical defect and no blocking finding. The review re-derived the
+        reduction from the cover property to the bound with every hypothesis met, recomputed
+        the cover's exact total and its D4 invariance as a measure under all eight symmetries
+        with its own parser, read the two checkers' code the cover's shapes touch at the
+        pinned digests, and audited the composite cell by cell from the source's records and
+        the retention's replay: every cell of the D4 region carries one certified decision,
+        zmx2's on 8,096 roots or zm_mixed.py's on 64 cells, bound to the pinned checkers,
+        the cover and the certificate-mode settings. Exact capture at 9,326 sampled poses
+        was never below 1 (lowest 1.000418). The wall segments contribute nothing. Findings: F1
+        (minor), the source's check_coverage.py accepts five malformed record sets the
+        published records do not resemble; F2 to F7 notes; F8, zm_mixed.py's refusal of a
+        mutated cover is shown only at a depth limit of 12, for s(76). Not machine-checked:
+        both checkers' lemmas and programs, the hosts' IEEE-754 behaviour, the composite's
+        bookkeeping beyond the audits named, and the reduction, proved in Lean upstream.
     source_reviewed: '2026-10-14'
+  - id: E-bengreff-594-cover-replay
+    claim: lower-bound
+    scope: {n_values: [76]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[bengreff s76 certificate 2026-10-14]'
+    certificate: >-
+      packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate/cover/s76_cover_v5.txt.gz
+    replay: >-
+      From packing/, with cargo on PATH and the project interpreter, which has numpy:
+      python3 -m devtools.replay_evand_zmx2 run --case 76 --mode d4 --work W --out OUT
+      builds zmx2 from the retained zmx2.rs 6b7f0f79... (the 2026-09-28 evand packet) with
+      the 2026-09-26 packet's crate files, refusing any input whose SHA-256 is not the
+      record's, and runs zmx2 cert --d4 --uncert-cap 200000 over the 8,100 roots of the D4
+      region, as the source's verify.sh does; python3 -m devtools.replay_evand_zmx2
+      zm-mixed --case 76 --work W --out OUT stages zm_mixed.py ee3e2915..., mixed_cover.py
+      bb89de15... and zeromargin.py 640fe453... from the retained evand packets, digests
+      checked, and runs zm_mixed.py cert with verify.sh's flags (--d4 --cert-mode --disj
+      --chain-from 0 --pitch 1/20 --ubins 16 --depth 24) on each of the 64 sub-roots of
+      the source's records/zm_mixed/jobs.txt. Then uv run --frozen --all-extras --group dev
+      python -m devtools.audit_evand_mixed_covers composite --case 76
+      OUT/n76_zmx2_d4_roots.log --zm-mixed OUT/n76_zm_mixed must exit 0: the zmx2 log
+      covers the region once per root under headers naming this cover by its FNV-1a 64
+      hash at the source's settings, and every root it leaves
+      open is tiled by sub-roots, each certified by a record file that names the pinned
+      checker files and the cover by SHA-256 at the certificate-mode settings; and
+      compare-zmx2 --case 76 --records OUT/n76_zmx2_d4_roots.log and compare-sub-roots
+      --case 76 OUT/n76_zm_mixed must exit 0, root for root against the source's records.
+      Without paths, composite judges the packet's retained receipts, and
+      audit_evand_mixed_covers check judges both packets' records and receipts. The
+      controls are python3 -m devtools.replay_evand_zmx2 control --case 76 --mutation M
+      --work W --out OUT for M drop-heaviest-point and drop-heaviest-segment, each of which
+      must read NOT VERIFIED. tests/test_replay_controls.py holds the retained controls and
+      the zm_mixed.py pose receipts, tests/test_replay_tools.py binds each retained checker
+      receipt to the command the driver builds, and tests/test_audit_evand_mixed_covers.py
+      holds the composite to its refusals.
+    replay_status: passed
+    verifiers: [V-evand-zmx2, V-evand-zm-mixed-py, V-replay-evand-zmx2, V-audit-evand-mixed-covers]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096
+          decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile
+          them
+        checked: 8100
+        of: 8100
+    proof:
+      source: packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate/README.md
+      theorem: No 76 unit squares fit in a square of side below 9; with the 9 x 9 grid, s(76) = 9.
+      scope: Unrestricted square packing with independent rotations, disjoint interiors and boundary contact allowed.
+      pinpoints: >-
+        s76-certificate/README.md and verify.sh; Daniel's certificates/s21/FORMAT.md (the
+        mixed format and the reduction) and search/ZMX2.md sections 2 to 7, retained in
+        the 2026-09-28 evand packet; the packet README's Checks Made Here and Limitations;
+        the 16 October review, sections 3, 4 to 6 and 7; the replay
+        receipts and controls in the packet's receipts/.
+      assumptions:
+        - The mixed cover is nonnegative, exactly D4-invariant as a measure and totals 3788361049/50000000 < 76, which zmx2 d4, this repository's audit (receipts/n76_cover_audit.json) and the source's check_total.py each re-check.
+        - Every closed unit square in [0,9]^2 captures mass at least 1, a point on its boundary and a segment along one of its edges counting in full, at every centre in [0, 9/2]^2 and u = tan(theta/2) in [0, 1/2]; zmx2 --d4 certifies 8,096 of the 8,100 root cells of 1/10 x 1/10 x 1/8, and zm_mixed.py, in exact rationals, the 64 cells of 1/20 x 1/20 x 1/32 that tile the other 4, so each cell rests on one checker.
+        - The two checkers decide the same statement over the same region, closed squares with the boundary counted in full, which their composite needs and neither checks of the other.
+        - The D4 reduction for measures carries the D4 region to every centre and angle (proved in Lean upstream for every side, not built here); no unreduced sweep was run, so both parts rest on it.
+        - Scaling a packing at side s < 9 by 9/s makes 76 pairwise disjoint closed unit squares, so a total below 76 excludes it.
+        - zmx2's acceptances are exact integer tests on binary64 enclosures widened outward (its Lemma R), which assumes correctly rounded IEEE-754 arithmetic without contraction or wider evaluation, as Rust guarantees for f64 on x86-64; zm_mixed.py's are exact rational. Neither program is formally verified.
+      audit_record: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
+    limitations: >-
+      Reproduces the source's own verification: Evan Daniel's zmx2 and zm_mixed.py, the two
+      checkers the source's verify.sh runs at the digests it pins, run here from the
+      retained bytes on 14 October 2026, at the import's triage, by the packet's
+      receipts/programs/run_zmx2.sh and run_zm_mixed.sh with the commands
+      devtools.replay_evand_zmx2 run and zm-mixed now build (tests/test_replay_tools.py
+      binds each retained receipt to its command, apart from paths and threads), on a
+      shared 4-core x86-64 Linux container with Python 3.14.7 and rustc 1.97.0, the zmx2
+      binary cba78a9e... that devtools.replay_evand_zmx2 build made
+      (receipts/n76_zmx2_build.log). zmx2 cert --d4 --uncert-cap 200000: 8,100 roots,
+      14,672,104 boxes, maximum depth 40, 18 uncertified boxes in 4 roots and none capped
+      (147 s wall, 239 CPU-s, three threads); every root's census and every UNCERT line
+      equal the source's records/zmx2/zmx2_v5.log. zm_mixed.py on the 64 jobs of the
+      source's jobs.txt, three at a time: each VERIFIED-D4 (PARTIAL), 4,950 boxes, maximum
+      depth 15, none uncertified, 1,168 CPU-s by the receipts and 1,033 by the checker's
+      own count; every record equals the source's but for the input path and CPU time.
+      devtools.audit_evand_mixed_covers composite reads the two as one decision over the
+      D4 region: the log covers the 8,100 roots once each under a header naming this
+      cover's FNV-1a 64 hash, 96e61ce6a0aa2545, at the source's depth 40, node cap, kappa
+      and K, the
+      4 roots it leaves are the source's failing_roots.txt, and the 64 sub-roots, each
+      certified by a record file naming the pinned checker files and the cover at the
+      certificate-mode settings, are the source's jobs.txt and tile those 4 exactly; the
+      source's own records read the same way. The audit re-derives the cover's exact
+      total and D4 invariance with its own parser (receipts/n76_cover_audit.json). Wall
+      segments: 16 segments of mass 1/(4 x 10^8) lie on the container's walls, and zmx2
+      --d4 on the cover without them gives every root the census of the replay and leaves
+      the same 18 boxes (receipts/controls/n76_control_nowall_zmx2_d4.log, compared by
+      check), so no zmx2 decision depends on them; the 64 sub-roots were not run without
+      them. Controls: the drop-heaviest-point and drop-heaviest-segment mutations are each
+      refused by zmx2 --d4 at one root (NOT VERIFIED, 235 and 234 uncertified boxes), and
+      zm_mixed.py pose finds each mutated cover capturing less than one, exactly (0.99736
+      and 0.89682), at a pose where the published cover captures 1.00993 and 1.00726;
+      tests/test_replay_controls.py holds both. zm_mixed.py's certificate mode was not
+      run to a verdict on these mutations here: on the sub-root holding the point
+      mutation's pose, a run at depth 24 had not finished in 5 CPU-minutes, nor one at
+      depth 12 in 10. The 16 October review has one refusal by it, of the cover with
+      every mass scaled by 199/200, on the cell of job 054 at a depth limit of 12, where
+      the published cover certifies that cell at the same limit (review section 7.4, its
+      receipts in the packet's review/outputs/zm_control/); at the source's depth limit
+      of 24 neither that mutant nor a local one finished. A second zm_mixed.py refusal is
+      owed (review finding F8), and whether one at depth 12 meets the stage 4 rule is the
+      owner's question. Trust boundary: both deciding
+      programs are Daniel's, sharing an author and an architecture, and both are the
+      checkers the producer verified the cover with, so this is a reproduction with the
+      producer's code, not a second implementation, and each D4 cell rests on one of
+      them. The zmx2 part rests on correctly rounded binary64 arithmetic on the x86-64
+      host, and both parts on the D4 reduction, since no zmx2 --full sweep was run (about
+      6 CPU-hours with its follow-up, think-eucc) and no complete zm_mixed.py pass is at
+      the pinned revision (181 CPU-hours at the source). zm_mixed.py has decided no other
+      result here. The Lean wrapper takes the covering statement as a hypothesis and is
+      unbuilt here.
+    source_reviewed: '2026-10-16'
   - id: E-evand-584-compositions-report
     claim: upper-bound
     scope: {n_values: [339, 364, 375]}
@@ -37309,10 +37452,149 @@ evidence:
       retention here the cover's data facts were recomputed and both checkers were rerun
       from the pinned bytes, zmx2 over all 10,000 roots and zm_mixed.py over the 304
       sub-roots, equal to the source's records, with two mutations refused (packet
-      receipts/); that reproduction with the producer's code is not yet an evidence
-      entry. The Lean wrapper is unbuilt and takes the covering statement as a
-      hypothesis.
+      receipts/); that reproduction with the producer's code is
+      E-bengreff-610-cover-replay. The Lean wrapper is unbuilt and takes the covering
+      statement as a hypothesis.
+    external_review:
+      state: informally-verified
+      date: '2026-10-16'
+      reviewed_by: >-
+        Claude (AI review), strong sub-agent tier at max reasoning, the stage 4 review lane of the 16 October intake pass, prompted separately from the records lane with no shared context
+        (docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md)
+      note: >-
+        No mathematical defect and no blocking finding. The review re-derived the
+        reduction from the cover property to the bound with every hypothesis met, recomputed
+        the cover's exact total and its D4 invariance as a measure under all eight symmetries
+        with its own parser, read the two checkers' code the cover's shapes touch at the
+        pinned digests, and audited the composite cell by cell from the source's records and
+        the retention's replay: every cell of the D4 region carries one certified decision,
+        zmx2's on 9,981 roots or zm_mixed.py's on 304 cells, bound to the pinned checkers,
+        the cover and the certificate-mode settings. Exact capture at 17,319 sampled poses
+        was never below 1 (lowest 1.003389). The wall segments contribute nothing. Findings: F1
+        (minor), the source's check_coverage.py accepts five malformed record sets the
+        published records do not resemble; F2 to F7 notes; F8, zm_mixed.py's refusal of a
+        mutated cover is shown only at a depth limit of 12, for s(76). Not machine-checked:
+        both checkers' lemmas and programs, the hosts' IEEE-754 behaviour, the composite's
+        bookkeeping beyond the audits named, and the reduction, proved in Lean upstream.
     source_reviewed: '2026-10-15'
+  - id: E-bengreff-610-cover-replay
+    claim: lower-bound
+    scope: {n_values: [95]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[bengreff s95 certificate 2026-10-15]'
+    certificate: packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
+    replay: >-
+      From packing/, with cargo on PATH and the project interpreter, which has numpy:
+      python3 -m devtools.replay_evand_zmx2 run --case 95 --mode d4 --work W --out OUT
+      builds zmx2 from the retained zmx2.rs 6b7f0f79... (the 2026-09-28 evand packet) with
+      the 2026-09-26 packet's crate files, refusing any input whose SHA-256 is not the
+      record's, and runs zmx2 cert --d4 --uncert-cap 200000 over the 10,000 roots of the D4
+      region, as the source's verify.sh does; python3 -m devtools.replay_evand_zmx2
+      zm-mixed --case 95 --work W --out OUT stages zm_mixed.py ee3e2915..., mixed_cover.py
+      bb89de15... and zeromargin.py 640fe453... from the retained evand packets, digests
+      checked, and runs zm_mixed.py cert with verify.sh's flags (--d4 --cert-mode --disj
+      --chain-from 0 --pitch 1/20 --ubins 16 --depth 24) on each of the 304 sub-roots of
+      the source's records/zm_mixed/jobs.txt, which --only splits across processes. Then
+      uv run --frozen --all-extras --group dev python -m devtools.audit_evand_mixed_covers
+      composite --case 95 OUT/n95_zmx2_d4_roots.log --zm-mixed OUT/n95_zm_mixed must exit
+      0: the zmx2 log covers the region once per root under headers naming this cover by
+      its FNV-1a 64 hash at the source's settings, and
+      every root it leaves open is tiled by sub-roots, each certified by a record file
+      that names the pinned checker files and the cover by SHA-256 at the
+      certificate-mode settings; and compare-zmx2 --case 95 --records
+      OUT/n95_zmx2_d4_roots.log and compare-sub-roots --case 95 OUT/n95_zm_mixed must exit
+      0, root for root against the source's records. Without paths, composite judges the
+      packet's retained receipts, and audit_evand_mixed_covers check judges both packets'
+      records and receipts. The controls are python3 -m devtools.replay_evand_zmx2 control
+      --case 95 --mutation M --work W --out OUT for M drop-heaviest-point and
+      drop-heaviest-segment, each of which must read NOT VERIFIED.
+      tests/test_replay_controls.py holds the retained controls and the zm_mixed.py pose
+      receipts, tests/test_replay_tools.py binds each retained checker receipt to the
+      command the driver builds, and tests/test_audit_evand_mixed_covers.py holds the
+      composite to its refusals.
+    replay_status: passed
+    verifiers: [V-evand-zmx2, V-evand-zm-mixed-py, V-replay-evand-zmx2, V-audit-evand-mixed-covers]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981
+          decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile
+          them
+        checked: 10000
+        of: 10000
+    proof:
+      source: packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+      theorem: No 95 unit squares fit in a square of side below 10; with the 10 x 10 grid, s(95) = 10.
+      scope: Unrestricted square packing with independent rotations, disjoint interiors and boundary contact allowed.
+      pinpoints: >-
+        s95-certificate/README.md and verify.sh; Daniel's certificates/s21/FORMAT.md (the
+        mixed format and the reduction) and search/ZMX2.md sections 2 to 7, retained in
+        the 2026-09-28 evand packet; the packet README's Checks Made Here and Limitations;
+        the 16 October review, sections 3, 4 to 6 and 8; the replay
+        receipts and controls in the packet's receipts/.
+      assumptions:
+        - The mixed cover is nonnegative, exactly D4-invariant as a measure and totals 3791753447/40000000 < 95, which zmx2 d4 (receipts/n95_zmx2_d4_invariance.log), this repository's audit (receipts/n95_cover_audit.json) and the source's check_total.py each re-check.
+        - Every closed unit square in [0,10]^2 captures mass at least 1, a point on its boundary and a segment along one of its edges counting in full, at every centre in [0, 5]^2 and u = tan(theta/2) in [0, 1/2]; zmx2 --d4 certifies 9,981 of the 10,000 root cells of 1/10 x 1/10 x 1/8, and zm_mixed.py, in exact rationals, the 304 cells of 1/20 x 1/20 x 1/32 that tile the other 19, so each cell rests on one checker.
+        - The two checkers decide the same statement over the same region, closed squares with the boundary counted in full, which their composite needs and neither checks of the other.
+        - The D4 reduction for measures carries the D4 region to every centre and angle (proved in Lean upstream for every side, not built here); no unreduced sweep was run, so both parts rest on it.
+        - Scaling a packing at side s < 10 by 10/s makes 95 pairwise disjoint closed unit squares, so a total below 95 excludes it.
+        - zmx2's acceptances are exact integer tests on binary64 enclosures widened outward (its Lemma R), which assumes correctly rounded IEEE-754 arithmetic without contraction or wider evaluation, as Rust guarantees for f64 on x86-64; zm_mixed.py's are exact rational. Neither program is formally verified.
+      audit_record: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
+    limitations: >-
+      Reproduces the source's own verification: Evan Daniel's zmx2 and zm_mixed.py, the two
+      checkers the source's verify.sh runs at the digests it pins, run here from the
+      retained bytes on 15 October 2026, at the import's triage, by the packet's
+      receipts/programs/run_zmx2.sh and run_zm_mixed.sh with the commands
+      devtools.replay_evand_zmx2 run and zm-mixed now build (tests/test_replay_tools.py
+      binds each retained receipt to its command, apart from paths and threads), on a
+      shared 4-core x86-64 Linux container with other lanes' processes running, Python
+      3.14.7 and rustc 1.97.0, the zmx2 binary cba78a9e... that devtools.replay_evand_zmx2
+      build made (receipts/n95_zmx2_build.log). zmx2 cert --d4 --uncert-cap 200000:
+      10,000 roots, 15,065,314 boxes, maximum depth 40, 8,263 uncertified boxes in 19 roots
+      and none capped (305 s wall, 293 CPU-s, one thread); every root's census and all 111
+      UNCERT lines the log lists equal the source's records/zmx2/zmx2_s95_v2.log. One
+      root, centres [3/2, 8/5] x [47/10, 24/5] and u in [0, 1/8], holds 8,192 of the
+      8,263. zm_mixed.py on the 304 jobs of the source's jobs.txt, one at a time, a sample
+      of 14 first and then the other 290: each VERIFIED-D4 (PARTIAL), 9,614 boxes, maximum
+      depth 13, none uncertified, 3,278 CPU-s by the receipts and 2,327 by the checker's
+      own count; every record equals the source's but for the input path and CPU time.
+      devtools.audit_evand_mixed_covers composite reads the two as one decision over the
+      D4 region: the log covers the 10,000 roots once each under a header naming this
+      cover's FNV-1a 64 hash, e6e0d4182d7f6e43, at the source's depth 40, node cap, kappa
+      and K, the
+      19 roots it leaves are the source's failing_roots.txt, and the 304 sub-roots, each
+      certified by a record file naming the pinned checker files and the cover at the
+      certificate-mode settings, are the source's jobs.txt and tile those 19 exactly; the
+      source's own records read the same way. The audit re-derives the cover's exact
+      total and D4 invariance with its own parser (receipts/n95_cover_audit.json). Wall
+      segments: 404 segments of length 1/500 and mass 1/(4 x 10^8), 101 on each wall, and
+      zmx2 --d4 on the cover without them gives every root the census of the replay and
+      leaves the same 19 roots and 111 listed boxes
+      (receipts/controls/n95_control_nowall_zmx2_d4.log, compared by check), so no zmx2
+      decision depends on them; the 304 sub-roots were not run without them. Controls:
+      the drop-heaviest-point and drop-heaviest-segment mutations are each refused by zmx2
+      --d4 at one root (NOT VERIFIED, 235 and 234 uncertified boxes), and zm_mixed.py pose
+      finds each mutated cover capturing less than one, exactly (0.99736 and 0.84619), at a
+      pose where the published cover captures 1.00993 and 1.01200;
+      tests/test_replay_controls.py holds both. zm_mixed.py's certificate mode was not run
+      to a verdict on a mutated s(95) cover here or in the 16 October review, so two
+      refusals by it are owed (review finding F8; E-bengreff-594-cover-replay says what
+      pricing found for s(76)). Trust boundary: both
+      deciding programs are Daniel's, sharing an author and an architecture, and both are
+      the checkers the producer verified the cover with, so this is a reproduction with
+      the producer's code, not a second implementation, and each D4 cell rests on one of
+      them. The zmx2 part rests on correctly rounded binary64 arithmetic on the x86-64
+      host, and both parts on the D4 reduction, since no zmx2 --full sweep was run (about
+      6 CPU-hours with its follow-up, think-eucc) and no complete zm_mixed.py pass is at
+      the pinned revision (about 190 CPU-hours here, think-zn7s). The Lean wrapper takes
+      the covering statement as a hypothesis and is unbuilt here (think-ojr9).
+    source_reviewed: '2026-10-16'
   - id: E-wand125-continuous-n28-5745-report
     claim: lower-bound
     scope: {n_values: [28]}
@@ -37343,3 +37625,80 @@ evidence:
       routes this record already counts. No standing bound or rating changes; T-107 and
       T-142 stand.
     source_reviewed: '2026-10-15'
+  - id: E-evand-639-exact-sides-report
+    claim: upper-bound
+    scope: {n_values: [88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact current records 2026-10-16]'
+    certificate: packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/data/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-16'
+    limitations: >-
+      This atom records the source author's report, at evand/square-packing 7d1407a
+      (issue 639), of exact configurations over number fields at 23 counts, of which the
+      16 in scope are the ones the 16 October report-order ledger records
+      (packing/campaign/issue-intake/upper-bounds-20261016/), each below every earlier
+      report at its count. Each side is the one root of an integer polynomial in a rational
+      interval, which the ledger reads cut at 120 places (exact-sides.json there). The
+      author reports verify_exact.py, a standard-library checker in exact rationals, VALID
+      at all 23, and a cross-check of the solver's 64-digit side against each polynomial's
+      interval. At 204, 263, 267 and 297 the data files are pinned by size and SHA-256 and
+      not retained (OR-18). The source asserts each polynomial irreducible and no program of
+      it checks that. No local or global optimality, rigidity or uniqueness is claimed.
+  - id: E-n019-fitzharding-lean-report
+    claim: exact-value
+    scope: {n_values: [19]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/Optimality.lean
+    replay_status: not-attempted
+    verifiers: []
+    axioms_receipt: packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/Square19Optimality.log.gz
+    proof:
+      source: packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/Optimality.lean
+      theorem: >-
+        Sq19.square19_optimality (L : ℝ) : Feasible19 L ↔ 3 + 4 * Real.sqrt 2 / 3 ≤ L.
+        Feasible19 L says there are nineteen closed unit squares sq cx cy ux uy with
+        ux^2 + uy^2 = 1, each inside [0, L]^2, with pairwise disjoint interiors.
+      scope: >-
+        s(19) = 3 + 4√2/3 for nineteen closed unit squares with independent translations
+        and arbitrary rotations, boundary contact allowed and only interiors required
+        disjoint. The feasible sides are the closed ray from 3 + 4√2/3, so the minimum is
+        attained; the existence half is endpoint_packing, in EndpointPacking.lean. No
+        uniqueness of the optimal packing is stated.
+      pinpoints: >-
+        Sq19Lean/Assembly/Optimality.lean (square19_optimality and its #print axioms);
+        Sq19Lean/Assembly/PlainPacking.lean (the bridge to Sq17.sq and containerBox);
+        Sq19Lean/SquareBase.lean (sq, IsUnitSquare); Sq19Lean/Basic.lean (side19);
+        Sq19Lean/EndpointPacking.lean (endpoint_packing); verification/Square19Optimality.log
+        and expected/axioms.txt (the axiom report); verification/kernel-replay.json.
+      assumptions:
+        - Lean 4.34.1's kernel and Mathlib v4.34.1 at d13f23b7 are sound, and so are Lean's compiler, the bundled C compiler and the compiled runtime routines the 4,320 native_decide facts are evaluated by
+        - The build and the kernel replay passed as the source reports. Its receipts are the author's own; nothing here built or elaborated any module
+        - The Sq17Lean modules of sq17-lean at 0a7167e, which the lakefile compiles in place as the half-plane checker, are sound; that tree differs from the e6ee548 the T-154 packet pins only by CITATION.cff
+    limitations: >-
+      The source reports the theorem, its axiom report (propext, Classical.choice,
+      Quot.sound and 4,320 native_decide facts, no sorryAx) and a kernel replay of the
+      theorem's 13,143-module import closure with LeanChecker.replayFromImports, 0
+      failures, on the compiled objects of its research build of 15 October, which checks
+      the proofs and takes the native facts as axioms; and says that a complete rebuild
+      from source "takes several hours on 64 cores and has not yet been run". Nothing here
+      observed or repeated a build: the full from-source build with the axiom check is
+      priced at about 190 to 380 CPU-hours and needs a machine of hundreds of GB, above
+      the pass's 40 CPU-hour cap and this host's 4 cores and 15 GB (think-nqnl, held). The
+      triage of 16 October read the statement and its definitions without a build: the
+      problem is the record's at n = 19 and the constant is the case's exact upper bound.
+      No mathematical review is on file yet (think-o40t), so the entry counts toward no
+      rung above C0.
+    source_reviewed: '2026-10-16'

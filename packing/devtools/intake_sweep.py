@@ -40,6 +40,13 @@ The sources, one section of the report each:
 - **Record-side queues**: counts pending catalogue intake, deferred conflicts, the
   results and asks queued on open issues (each needs its own bead; the answer bead owns
   the reply, not the import), triage and replies owed, and the validation backlog.
+- **Regularization owed**: from `atlas/known-best/default-drawings.json`, each count
+  whose drawing is `pending` regularization, with the bead its
+  `default_drawings.PENDING_ALLOWED` entry names; each decision that still owes runs or
+  an outcome, and each exemption, with its bead; and whatever else the records tier's
+  regularization-state gate fails on. Every new house leaves its count pending until the
+  strong generators decide it or a bead owns the runs, so this is where a pass sees what
+  its adoptions owe (`campaign/result-import.md`, Adopt a House, Then Regularize It).
 - **Blocked imports**: a queued result or ask's `blocked_on`, and what an open
   `result-import` bead says it waits on: a `blocked_on:` line in its description or
   notes, the last one standing, else a present-tense sentence with a waiting word in its
@@ -86,7 +93,7 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
-from devtools import check_bead_tree, check_requests
+from devtools import check_bead_tree, check_requests, default_drawings
 from devtools.audit_kingbird_catalogue import load_frontier_cases
 from devtools.bead_state import LIVE
 from devtools.capture_kingbird_catalogue import CAPTURE_PREFIX, CAPTURES, STEM
@@ -997,6 +1004,166 @@ def _queued(
     return item
 
 
+#: What a pending count's bead does next, by the regularization guide.
+_REGULARIZE_STEP = (
+    'run both strong generators on its witness (regularization-process.md, "When a '
+    'Witness Changes") and take it off PENDING_ALLOWED'
+)
+
+
+def _owner(text: str) -> tuple[str, str]:
+    """The bead a `PENDING_ALLOWED` entry or an `owed` names first, and the rest of it."""
+    found = default_drawings.BEAD.match(text)
+    if found is None:
+        return "", text
+    return found[0], text[found.end() :].lstrip(":; ").strip()
+
+
+def regularization_section(
+    beads: Beads | None,
+    *,
+    record: Path = default_drawings.RECORD,
+    index: Path = default_drawings.INDEX,
+    allowed: Mapping[int, str] | None = None,
+    settled: Mapping[int, default_drawings.Settled] | None = None,
+) -> Section:
+    """What the drawings still owe the regularized layer, from the default-drawings
+    record's `states` and the lists the records tier holds them to (`default_drawings`).
+
+    A new house is a new witness, and its count reads `pending` until the strong
+    generators decide it; the owner, 16 October 2026, made regularizing every new house
+    part of the standard intake (think-9qm5). So each `pending` count is an item, owned
+    by the bead its `PENDING_ALLOWED` entry names, and needing an owner where the list
+    names none or that bead is no longer open; each `decided-no-better` decision that
+    still owes runs or an outcome, and each exemption, is owned by its bead; and anything
+    else the regularization-state gate fails on needs action. The notes give the counts
+    by state. Nothing is measured: `--check` in the records tier holds the record to the
+    data. A missing record is not checked; one that cannot be read, or an index the gate
+    cannot read, is not checked and needs action, and the sweep goes on (review A4 of
+    #650). Only those two reads are guarded: an error in sorting what they hold into
+    items is a fault of the sweep, and raises as one (review B1 of #650)."""
+    section = Section("Regularization owed")
+    allowed = default_drawings.PENDING_ALLOWED if allowed is None else allowed
+    settled = default_drawings.SETTLED if settled is None else settled
+    if not record.is_file():
+        section.unchecked.append(f"regularization: {default_drawings.RECORD_PATH} is missing")
+        return section
+    try:
+        document = _read_record(record)
+        gate = default_drawings.state_problems(record, index, settled=settled, allowed=allowed)
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        detail = f"{type(error).__name__}: {str(error).strip()[:200]}"
+        section.unchecked.append(
+            f"regularization: {default_drawings.RECORD_PATH} or the layer's index could not "
+            f"be read ({detail})"
+        )
+        section.items.append(
+            Item(
+                f"the regularization record or the layer's index could not be read: {detail}",
+                NEEDS_OWNER,
+                step=(
+                    "repair it, then python -m devtools.default_drawings --check and "
+                    "--check-state"
+                ),
+            )
+        )
+        return section
+    return _regularization_owed(
+        section, beads, document, gate, allowed=allowed, settled=settled
+    )
+
+
+def _read_record(record: Path) -> Mapping[str, Any]:
+    """The default-drawings record as JSON, refused unless it is an object."""
+    document = json.loads(record.read_text(encoding="utf-8"))
+    if not isinstance(document, dict):
+        raise TypeError(f"{default_drawings.RECORD_PATH} is not a JSON object")
+    return document
+
+
+def _regularization_owed(
+    section: Section,
+    beads: Beads | None,
+    document: Mapping[str, Any],
+    gate: tuple[list[str], list[str]],
+    *,
+    allowed: Mapping[int, str],
+    settled: Mapping[int, default_drawings.Settled],
+) -> Section:
+    """`regularization_section`'s items and notes, from the record it read and what the
+    regularization-state gate found (`default_drawings.state_problems`)."""
+    rows = document.get("states") or []
+    pending: list[Item] = []
+    decided: list[Item] = []
+    exempt: list[Item] = []
+    itemized: set[int] = set()
+    for row in rows:
+        n = int(row["n"])
+        held = settled.get(n)
+        if row["state"] == default_drawings.PENDING:
+            itemized.add(n)
+            if n not in allowed:
+                pending.append(
+                    Item(
+                        f"n = {n} is pending and PENDING_ALLOWED does not name it: "
+                        f"{row['why']}",
+                        NEEDS_OWNER,
+                        step=(
+                            "run the strong generators on its witness, or allow it with "
+                            "the open bead that owns the runs, in the change that made it "
+                            "pending"
+                        ),
+                    )
+                )
+                continue
+            bead, why = _owner(allowed[n])
+            pending.append(owned(f"n = {n} pending: {why}", bead, beads, step=_REGULARIZE_STEP))
+        elif row["state"] == default_drawings.DECIDED and held is not None and held.owed:
+            bead, owed = _owner(held.owed)
+            decided.append(
+                owned(
+                    f"n = {n} decided no better on its witness, still owed: {owed}",
+                    bead,
+                    beads,
+                    step="run or record what the decision owes, then drop its `owed`",
+                )
+            )
+        elif row["state"] == default_drawings.EXEMPT and held is not None:
+            found = default_drawings.BEAD.search(held.evidence)
+            exempt.append(
+                owned(
+                    f"n = {n} exempt: {held.outcome}",
+                    found[0] if found else "",
+                    beads,
+                    step="decide it once its bead's blocker is resolved",
+                )
+            )
+    section.items.extend([*pending, *decided, *exempt])
+    problems, listed = gate
+    itemized_problem = re.compile(r"n=(\d+)(?: is pending:|: PENDING_ALLOWED names no bead)")
+    for problem in problems:
+        found = itemized_problem.match(problem)
+        if found and int(found[1]) in itemized:
+            continue
+        section.items.append(
+            Item(
+                f"the regularization-state gate fails: {problem}",
+                NEEDS_OWNER,
+                step="python -m devtools.default_drawings --check-state",
+            )
+        )
+    states = (
+        listed[-1].removeprefix("regularization states: ") if listed else f"{len(rows)} counts"
+    )
+    section.notes.append(
+        f"Regularization states of {states}. Owed: {_count(len(pending), 'pending count')}, "
+        f"{len(itemized & set(allowed))} of them in PENDING_ALLOWED; "
+        f"{_count(len(decided), 'decision')} still owing runs or an outcome; "
+        f"{_count(len(exempt), 'exemption')}."
+    )
+    return section
+
+
 def blocked_section(beads: Beads | None, blockers: Blockers, repository: str) -> Section:
     """Open import beads whose stated blocker has merged, closed or been closed.
 
@@ -1109,6 +1276,7 @@ def sweep(
         kingbird_section(coverage, beads, today, capture=capture),
         catalogues_section(coverage, today),
         queues_section(coverage, record, register, beads, today=today, blockers=blockers),
+        regularization_section(beads),
         blocked_section(beads, blockers, repository),
         backlog_section(record, register, beads),
         bead_queue_section(beads),
