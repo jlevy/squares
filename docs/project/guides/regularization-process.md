@@ -193,8 +193,9 @@ say which counts the run covered.
 A run that only the layer’s index records is not enough, since the index drops a run’s
 block once no entry draws from it: `python -m devtools.default_drawings --retain-runs`
 copies the block to `settled-runs/<run id>/run.json` while the index still has it.
-Where the decision still owes runs or a recorded outcome, its `owed` names the open bead
-that owns them, and the state’s `why` says so.
+A copy is deleted with the last entry that names its run, and the gate fails on one no
+entry names. Where the decision still owes runs or a recorded outcome, its `owed` names
+the open bead that owns them, and the state’s `why` says so.
 The ten decided counts of 15 October 2026 owed think-0ut1 grid-slack at 1 and 5 degrees
 or their per-count outcomes until its runs of 16 October 2026, whose outcomes the atlas
 README gives count by count; none owes anything now.
@@ -267,7 +268,8 @@ count’s state back without measuring, holds it to the index, and fails on a pe
 count that `PENDING_ALLOWED` does not name, on a named count that is no longer pending,
 on a `SETTLED` entry made on another witness or no longer needed, and on one naming a
 run the retained evidence does not hold, under another generator, or whose record shows
-it did not run that count; it prints the list’s size.
+it did not run that count, and on a copy in `settled-runs/` that no entry names; it
+prints the list’s size.
 `bead tree` fails a change to `default_drawings.py` whose list, exemptions or owed runs
 name a bead that is not open.
 Run it alone with `python -m devtools.default_drawings --check-state`. `--verify-atlas`

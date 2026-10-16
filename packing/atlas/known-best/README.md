@@ -395,7 +395,12 @@ square, sit at the decimal witness’s side, $4.6 \times 10^{-12}$ above $U$, an
 angle classes, where Evan Daniel’s view at the bound, drawn since 13 October, draws 8.
 `devtools.default_drawings.SETTLED` records the ten as decided on these four runs, each
 with its outcome, and none owes a run any longer.
-The runs’ receipts and per-count reports, and the selection’s report, are kept in
+No settlement names any longer the five earlier runs whose blocks `settled-runs/` kept
+for those decisions (`evand-regularize-full`, `evand-regularize-refreshed-adopt518-v2`,
+`evand-regularize-adopt518-v2-rerun-2026-10-13`, `evand-regularize-bound-1013` and
+`grid-slack-on518`), so the five copies are deleted, and `--check-state` fails on a copy
+no settlement names (review G2 of #644). The runs’ receipts and per-count reports, and
+the selection’s report, are kept in
 [`cases/regularized_drawings/think-0ut1-2026-10-16/`](../../cases/regularized_drawings/think-0ut1-2026-10-16/),
 without the views.
 The same directory keeps the audit probe at 307, grid-slack at 1 and 5

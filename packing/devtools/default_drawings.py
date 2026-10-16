@@ -77,7 +77,8 @@ driver run's receipt. A block in the layer's index alone is not enough, since th
 drops a run's block once no entry draws from it; `--retain-runs` copies the block into
 the evidence (`SETTLED_RUNS`) while the index still has it. Where the record lists the
 counts the run covered, a receipt's counts or the reports beside a block, the settled
-count must be one of them. Each
+count must be one of them. A copy there that no `SETTLED` entry names fails too, since
+the directory holds the blocks settlements rest on (review G2 of #644). Each
 bead the list, an exemption or a decided count's `owed` names must be open, which
 `devtools.check_bead_tree` holds through `deferrals`. A record older than a witness is
 `--check`'s to catch, by deciding every count again. A witness is identified by what it
@@ -127,7 +128,10 @@ EVIDENCE_PATH = "packing/cases/regularized_drawings/"
 #: for each run a settlement names that no other retained evidence holds, copied from the
 #: index by `--retain-runs` while the index still holds it. The index keeps a run's block
 #: only while an entry draws from it (`regularize_axis_components.carried_index`), and a
-#: settlement rests on its runs for as long as it stands (review F1 of #644).
+#: settlement rests on its runs for as long as it stands (review F1 of #644). A copy is
+#: deleted with the last settlement that names its run, and `--check-state` fails on one
+#: that outlives it (`orphaned_copies`, review G2 of #644), as the layer's check fails on
+#: an index block that draws no entry.
 SETTLED_RUNS = "settled-runs"
 RECORD = ROOT / "atlas/known-best/default-drawings.json"
 RECORD_PATH = "packing/atlas/known-best/default-drawings.json"
@@ -1028,6 +1032,11 @@ def state_problems(
         held = settled.get(n)
         if held is not None:
             problems.extend(_settled_problems(n, held, row, entry, recorded))
+    problems.extend(
+        f"{EVIDENCE_PATH}{SETTLED_RUNS}/{run}/run.json is not the copy of a run a "
+        "SETTLED entry names; delete it with the settlement it was retained for"
+        for run in orphaned_copies(evidence, settled=settled)
+    )
     problems.extend(_list_problems(rows, allowed))
     pending = {n for n, row in rows.items() if row["state"] == PENDING}
     listed = [
@@ -1093,6 +1102,22 @@ def run_records(index: Path = INDEX, evidence: Path = EVIDENCE) -> dict[str, Run
 def recorded_runs(index: Path = INDEX, evidence: Path = EVIDENCE) -> dict[str, str]:
     """Every run a record holds, as {run id: generator} (`run_records`)."""
     return {run: record.generator for run, record in run_records(index, evidence).items()}
+
+
+def orphaned_copies(
+    evidence: Path = EVIDENCE, *, settled: Mapping[int, Settled] | None = None
+) -> list[str]:
+    """The runs whose index block `--retain-runs` copied into `SETTLED_RUNS` that no
+    `SETTLED` entry names any longer, by the copy's directory and the block's own id, so
+    a copy whose directory and id disagree is listed too (review G2 of #644)."""
+    settled = SETTLED if settled is None else settled
+    named = {run for held in settled.values() for _generator, run in held.runs}
+    orphans: list[str] = []
+    for path in sorted((evidence / SETTLED_RUNS).glob("*/run.json")):
+        block = json.loads(path.read_text(encoding="utf-8"))
+        if path.parent.name not in named or str(block.get("id")) != path.parent.name:
+            orphans.append(path.parent.name)
+    return orphans
 
 
 def retain_runs(

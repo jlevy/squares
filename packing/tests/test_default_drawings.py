@@ -478,7 +478,8 @@ def test_a_settlement_keeps_its_record_when_the_index_drops_a_run(tmp_path: Path
             assert records[run].retained, (n, run)
     index = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
     indexed = {block["id"] for block in index["runs"]}
-    dropped = {"evand-regularize-3a-1016", "grid-slack-on518"}
+    # Both are runs the 16 October settlements of 204, 272 and 303 name (`_RUN3A`).
+    dropped = {"evand-regularize-3a-1016", "grid-slack-3a-deg05-1016"}
     index["runs"] = [block for block in index["runs"] if block["id"] not in dropped]
     without = tmp_path / "index.json"
     without.write_text(json.dumps(index), encoding="utf-8")
@@ -513,6 +514,33 @@ def test_a_settlement_keeps_its_record_when_the_index_drops_a_run(tmp_path: Path
     assert set(written) == (named & indexed) - dropped
     assert set(copies) - dropped <= set(written)
     assert set(missing) == dropped | (named - indexed)
+
+
+def test_a_copy_no_settlement_names_fails_the_gate(tmp_path: Path) -> None:
+    # `SETTLED_RUNS` holds the blocks the settlements rest on, so a copy outlives the
+    # last settlement that names its run only by mistake: once this layer re-recorded
+    # the 15 October settlements, five of the seven copies were named by none (review G2
+    # of #644). The gate names each such copy, and one whose id is not its directory's.
+    assert defaults.orphaned_copies() == []
+    evidence = tmp_path / "evidence"
+    shutil.copytree(defaults.EVIDENCE, evidence)
+    copies = evidence / defaults.SETTLED_RUNS
+    (copies / "grid-slack-orphan").mkdir()
+    (copies / "grid-slack-orphan" / "run.json").write_text(
+        json.dumps({"id": "grid-slack-orphan", "generator": "regularize_grid_slack/1"}),
+        encoding="utf-8",
+    )
+    misnamed = copies / "grid-slack-3a-deg05-1016" / "run.json"
+    block = json.loads(misnamed.read_text(encoding="utf-8"))
+    misnamed.write_text(json.dumps({**block, "id": "grid-slack-elsewhere"}), encoding="utf-8")
+    assert defaults.orphaned_copies(evidence) == [
+        "grid-slack-3a-deg05-1016",
+        "grid-slack-orphan",
+    ]
+    found, _listed = defaults.state_problems(evidence=evidence)
+    orphans = [problem for problem in found if "is not the copy of a run" in problem]
+    assert len(orphans) == 2
+    assert any("settled-runs/grid-slack-orphan/run.json" in problem for problem in orphans)
 
 
 def test_a_settled_run_covered_the_count_where_its_record_says_which() -> None:
