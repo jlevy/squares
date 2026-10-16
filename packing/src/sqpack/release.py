@@ -1078,19 +1078,51 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/frontier/source-coverage.yaml",),
+        outputs=(
+            "about.html",
+            "atlas.html",
+            "conventions.html",
+            "development.html",
+            "epistemics.html",
+            "index.html",
+            "news.html",
+            "papers.html",
+            "readme.html",
+            "results.html",
+            "synopsis.html",
+            "tutorial-advanced.html",
+            "tutorial.html",
+            "visualize.html",
+        ),
+        reason=(
+            "Rendered on this branch over main e2e018f3, once with main's source register "
+            "and once with the branch's, the site's pages, result overviews, case records, "
+            "forwarders and assets are byte-identical in all 1470 files render_overview "
+            "writes. The register moves the reviewed dates of UnitSquare Release 1 and "
+            "SQUISH n153 to 16 October and adds a note on each read (PR 647 review A1)."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
-        paths=("packing/campaign/result-requests.yaml",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
         outputs=(
             "papers/square-packing-methods-survey.html",
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Rendered on this branch over main e2e018f3 at one link revision, once with "
-            "main's requests record and once with the branch's, the survey's HTML before "
-            "the browser's math pass and its Markdown are byte-identical, as are the other "
-            "40 files the render writes. The PDF prints from that HTML and was not "
-            "rebuilt. The record gains #643's entry, the project's tracking issue for the "
-            "Lean proof of ValidTilt9, which the survey does not read, so it keeps v0.2.2."
+            "Rendered on this branch over main e2e018f3 at link revision e2e018f3, once "
+            "with main's requests record and source register and once with the branch's, "
+            "the HTML and Markdown are byte-identical in all 42 files the renderer writes; "
+            "the PDF prints from that HTML and was not rebuilt. The requests record gains "
+            "#643's entry, the project's tracking issue for the Lean proof of ValidTilt9, "
+            "and the source register moves the reviewed dates of UnitSquare Release 1 and "
+            "SQUISH n153 to 16 October with a note on each read (PR 647 review A1); the "
+            "survey prints none of them, so it keeps v0.2.2."
         ),
     ),
     ReleaseNoPublicChange(
