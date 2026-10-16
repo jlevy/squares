@@ -1238,8 +1238,12 @@ body {
    drawn (the owner, 2026-10-02, `think-c19o`): a case's `proved` is green and its `open`
    yellow, on the frontier table, a case record and a result's list of cases; a result's
    `confirmed` is the green of the confirmation rungs, at C3's strength, and its
-   `reviewed` the verification rungs' blue. Bound kinds use the bound colours, recorded is yellow, and
-   superseded standings keep the plain gray chip. `devtools.rung_scale` measures these fills too. */
+   `reviewed` the verification rungs' blue. Recorded is yellow, and superseded standings
+   keep the plain gray chip. The topics Results and News share take their fills here too:
+   Verification is the reviewed blue, Optimality violet, Project amber and Engineering
+   orange, and the bound topics their bound's ink diluted into the page (below).
+   `devtools.rung_scale` measures every one of these fills, the topics' with `topic_fills`,
+   and holds each topic apart from every fill that means something else. */
 .site-chip:is(
   [data-case-status],
   [data-status="confirmed"],
@@ -1305,9 +1309,12 @@ body {
   --rung-level: 2;
   --rung-hue: 310;
 }
+/* Project's amber stands between Engineering's orange and the statuses' yellow, with the
+   open case's chroma boost so it reads as neither (`devtools.rung_scale`, DISTINCT). */
 .site-chip[data-news-topic="project"] {
   --rung-level: 2;
-  --rung-hue: 85;
+  --rung-hue: 70;
+  --rung-chroma-boost: 0.02;
 }
 .site-chip[data-news-topic="engineering"] {
   --rung-level: 2;

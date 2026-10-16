@@ -172,7 +172,7 @@ its `open` a yellow, each a hue and a level of the scale, and the yellow a chrom
 of 0.02, the most that keeps its dark fill in sRGB. Recorded results use yellow at level
 2 without the chroma boost.
 Incomplete results and lower-bound kinds use the shared lower-bound red diluted into the
-page background; upper-bound and optimality kinds use the upper-bound green.
+page background, and upper-bound kinds the upper-bound green.
 Superseded standings keep the neutral gray fill.
 `devtools.rung_scale` computes these too, and `tests/test_rung_scale.py` holds this
 table to its output and every ratio to 4.5:1.
@@ -184,6 +184,24 @@ table to its output and every ratio to 4.5:1.
 | `proved` | `oklch(78.5% 0.087 145)` `#96c897` | 9.3:1 | `oklch(38.8% 0.069 145)` `#2b4e2d` | 8.0:1 |
 | `open` | `oklch(84.0% 0.083 95)` `#dbcb8c` | 10.9:1 | `oklch(34.2% 0.070 95)` `#443800` | 9.9:1 |
 | `recorded` | `oklch(84.0% 0.063 95)` `#d7cb9c` | 10.9:1 | `oklch(34.2% 0.050 95)` `#413818` | 9.9:1 |
+
+The topics that Results and News share take their fills from the same two sources
+(`think-z9za`). Verification is the `reviewed` blue; Optimality is violet, Project amber
+and Engineering orange, each at level 2 of the scale, Project with the open case’s
+chroma boost; the bound topics are the bound kinds’ diluted inks.
+One fill keeps one meaning: `devtools.rung_scale` holds every topic at least 0.02 in
+OkLab, about a just noticeable difference, from each status and each other topic in its
+theme, except Verification, which is the `reviewed` blue by design.
+`tests/test_rung_scale.py` holds this table to its output and every ratio to 4.5:1.
+
+| Topic | Light fill | Text contrast | Dark fill | Text contrast |
+| --- | --- | --- | --- | --- |
+| `lower-bound` | `oklch(91.4% 0.028 11.6)` `#f5dbde` | 13.6:1 | `oklch(27.5% 0.022 353)` `#302328` | 12.7:1 |
+| `upper-bound` | `oklch(92.2% 0.018 156.5)` `#dce9e0` | 14.2:1 | `oklch(28.1% 0.021 176.9)` `#1e2d29` | 12.2:1 |
+| `optimality` | `oklch(84.0% 0.063 310)` `#d7c0ea` | 10.6:1 | `oklch(34.2% 0.050 310)` `#40314c` | 10.1:1 |
+| `project` | `oklch(84.0% 0.083 70)` `#eec28f` | 10.7:1 | `oklch(34.2% 0.070 70)` `#4f3105` | 10.0:1 |
+| `engineering` | `oklch(84.0% 0.063 45)` `#efbea9` | 10.7:1 | `oklch(34.2% 0.050 45)` `#4e3022` | 10.1:1 |
+| `verification` | `oklch(84.0% 0.063 250)` `#accef3` | 10.9:1 | `oklch(34.2% 0.050 250)` `#243a51` | 9.9:1 |
 
 ### Significance and the Other Inks
 
