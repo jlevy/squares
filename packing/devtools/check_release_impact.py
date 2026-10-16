@@ -17,7 +17,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 from typing import override
 
-from devtools import pages_scope, render_overview
+from devtools import pages_scope, render_changelog, render_overview
 from sqpack import release
 from sqpack.known_best import KNOWN_BEST_COMPOSITES
 from sqpack.yamlio import load_yaml
@@ -25,6 +25,9 @@ from sqpack.yamlio import load_yaml
 REPO = pages_scope.REPO
 RELEASE_PATH = "packing/src/sqpack/release.py"
 CHANGELOG_PATH = "packing/site-changelog.yaml"
+#: The intake runbook, a site input only for its News label rubric: an edit elsewhere in
+#: the process document changes no page, so only the rubric's rows are compared.
+NEWS_RUBRIC_PATH = render_changelog.NEWS_RUBRIC.relative_to(REPO).as_posix()
 
 
 def _git(repo: Path, *args: str) -> bytes:
@@ -97,6 +100,13 @@ def _semantic_bytes(path: str, content: bytes | None) -> object:
     if path == CHANGELOG_PATH:
         document = load_yaml(content.decode())
         return document["entries"]
+    if path == NEWS_RUBRIC_PATH:
+        # A side whose rubric does not parse, such as a revision before the table had
+        # its `Short` column, stays a byte comparison, so its change remains a candidate.
+        try:
+            return render_changelog.news_rubric_meanings(content.decode())
+        except ValueError:
+            return content
     return content
 
 

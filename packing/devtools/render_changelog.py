@@ -73,18 +73,28 @@ NEWS_CHECK = (
 )
 
 
+def news_rubric_meanings(text: str) -> dict[int, str]:
+    """Each level's short meaning in the text of the News rubric's document: all the site
+    reads of it, so `check_release_impact` compares an edit to the document by this too.
+    A document without the section or without a `Short` meaning for S1 to S5 raises
+    `ValueError`."""
+    if NEWS_RUBRIC_SECTION not in text:
+        raise ValueError(f"{NEWS_RUBRIC.name} has no {NEWS_RUBRIC_SECTION!r} section")
+    section = text.split(NEWS_RUBRIC_SECTION, 1)[1].split("\n#", 1)[0]
+    meanings = {int(level): short.strip() for level, short in _NEWS_RUBRIC_ROW.findall(section)}
+    if sorted(meanings) != list(range(1, 6)):
+        raise ValueError(f"{NEWS_RUBRIC.name}'s News rubric does not define S1 to S5")
+    return meanings
+
+
 @cache
 def news_significance_meanings() -> dict[int, str]:
     """Each News significance level's short meaning, read from the rubric's table so a
     tooltip cannot drift from the scale that scored the post."""
-    text = NEWS_RUBRIC.read_text(encoding="utf-8")
-    if NEWS_RUBRIC_SECTION not in text:
-        raise SystemExit(f"{NEWS_RUBRIC.name} has no {NEWS_RUBRIC_SECTION!r} section")
-    section = text.split(NEWS_RUBRIC_SECTION, 1)[1].split("\n#", 1)[0]
-    meanings = {int(level): short.strip() for level, short in _NEWS_RUBRIC_ROW.findall(section)}
-    if sorted(meanings) != list(range(1, 6)):
-        raise SystemExit(f"{NEWS_RUBRIC.name}'s News rubric does not define S1 to S5")
-    return meanings
+    try:
+        return news_rubric_meanings(NEWS_RUBRIC.read_text(encoding="utf-8"))
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
 
 
 def news_significance_tooltip(score: int) -> str:
