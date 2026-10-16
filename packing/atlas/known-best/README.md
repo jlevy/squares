@@ -196,13 +196,16 @@ decided it:
 A view from either of the last two enters only where the policy’s decision table admits
 it (row 10), by `python -m devtools.regularize_evand layer --select admitted` (a
 grid-slack run’s views by adding `--grid-run DIR --grid-counts N ...`, which draws that
-run’s view at those counts in place of Evan Daniel’s), and only where it shares at least
-as many full sides as the view it replaces.
-The axis tool’s own record of that count stays beside it as `reference`. Such a view
-carries the credit line *Regularized by the Squares Project with Evan Daniel’s
-regularizer (evand/square-packing, MIT)*, in the index, in the view and in its drawing.
-The [regularization process](../../../docs/project/guides/regularization-process.md)
-gives the steps from a run to a merged view: generate, select with
+run’s view at those counts in place of Evan Daniel’s), and only where it is worse on no
+goal of the improvement rule than the picture drawn at that count today: the layer’s
+view where the rule draws it, else the house drawing
+(`regularize_evand.worse_than_drawn`). A tie is admitted; refusing one is the
+selection’s. The axis tool’s own record of that count stays beside it as `reference`.
+Such a view carries the credit line *Regularized by the Squares Project with Evan
+Daniel’s regularizer (evand/square-packing, MIT)*, in the index, in the view and in its
+drawing. The
+[regularization process](../../../docs/project/guides/regularization-process.md) gives
+the steps from a run to a merged view: generate, select with
 `python -m devtools.regularize_select`, admit, render, record and validate.
 
 On 13 October 2026 the index draws 90 views: 20 by the axis tool, 48 by Evan Daniel’s

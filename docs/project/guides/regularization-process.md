@@ -102,7 +102,11 @@ python -m devtools.regularize_select --evand-run $RUNS/evand \
   --output $RUNS/selection.json --markdown $RUNS/selection.md
 ```
 
-Today’s drawing is read from `--tree`, this checkout by default.
+Today’s drawing is the picture the tree draws at the count, read from `--tree`, this
+checkout by default: the layer’s view where the improvement rule makes it the default
+picture (step 5), else the house drawing.
+A view the layer holds but does not draw is never the reference: at n = 176 the axis
+tool’s view is held for two more uneven squares, so a view is judged against the house.
 The tool decides every view on both exact routes, which takes seconds for a small count
 and about four minutes for the largest views (n = 271 at half a degree), so give it the
 workers the host has.
@@ -135,6 +139,10 @@ python -m devtools.regularize_evand layer --run-dir "$(mktemp -d)" --repo-root .
 
 Each call writes the views into `packing/atlas/known-best/regularized/` and their
 entries into its `index.json`, then runs the layer’s check.
+A view replaces the layer’s only where it is worse than today’s drawing, as step 3 reads
+it, on none of the improvement rule’s goals; otherwise the layer keeps its view, and the
+call’s `kept_why` names the goals.
+So an admission never makes the drawn picture worse.
 
 ### 5. Render and Record
 

@@ -455,13 +455,21 @@ def _against(view: Fraction, house: Fraction | None) -> str | None:
 
 def decide(unit: tuple[Path, int, Mapping[int, Mapping[str, Any]]]) -> dict[str, Any]:
     """One count's view against its house drawing, and the picture the rule draws."""
-    from devtools import regularize_evand as drive  # noqa: PLC0415
     from devtools import regularize_select as select  # noqa: PLC0415
 
     tree, n, entries = unit
-    entry = entries[n]
-    view = select.today((tree, n, entries))
-    house = select.today((tree, n, {}))
+    return judged(n, entries[n], select.today((tree, n, entries)), select.today((tree, n, {})))
+
+
+def judged(
+    n: int, entry: Mapping[str, Any], view: Mapping[str, Any], house: Mapping[str, Any]
+) -> dict[str, Any]:
+    """`decide` on drawings already measured: the layer's view of count `n` (its index
+    `entry`) and its house drawing, each as `regularize_select.today` measures it. The
+    selection and admission read what the atlas draws from it too
+    (`regularize_select.drawn`), so all three hold a view to the same picture."""
+    from devtools import regularize_evand as drive  # noqa: PLC0415
+
     if view["drawing"]["kind"] != "regularized-view" or house["drawing"]["kind"] != "witness":
         raise ValueError(f"n={n}: the view and the house drawing were not both measured")
     side = Fraction(str(view["side"]))

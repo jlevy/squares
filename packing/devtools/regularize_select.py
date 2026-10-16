@@ -13,8 +13,8 @@ The selection step of the regularization process
 It reads finished runs of both generators, `devtools.regularize_evand run` and
 `devtools.regularize_grid_slack` at any straightening threshold, and the drawing a tree's
 atlas shows today (`--tree`, this checkout by default: the tree's view where its layer's
-index says `regularized`, else its known-best witness). Every view each run holds is
-decided on four counts:
+index says `regularized` and the improvement rule makes it the default picture, else its
+known-best witness; `drawn`). Every view each run holds is decided on four counts:
 
 1. **Exact.** Both maintained routes decide the view over Q
    (`register_regularized_bounds.decide_view`: `sqpack.witness.exact_verify` and the
@@ -81,6 +81,7 @@ from typing import Any, Literal
 from strif import atomic_output_file
 
 from devtools import census_drawing_regularity as census
+from devtools import default_drawings as defaults
 from devtools import improvement_rule
 from devtools import regularize_evand as driver
 from devtools import regularize_grid_slack as grid
@@ -332,16 +333,38 @@ def candidates_of(job: Job) -> list[dict[str, Any]]:
 
 
 def today(unit: tuple[Path, int, Mapping[int, Mapping[str, Any]]]) -> dict[str, Any]:
-    """The drawing a tree's atlas shows for one count, measured as candidates are."""
+    """The drawing a tree's layer names for one count, measured as candidates are: its
+    view where the layer's index says `regularized`, whether or not the rule draws it,
+    else its house witness. `default_drawings.decide` measures a view and its house
+    drawing with it; what the atlas draws is `drawn`."""
     tree, n, entries = unit
     drawing, body = census.drawing_for(tree, n, entries)
     return measured(n, drawing, body)
 
 
+def drawn(unit: tuple[Path, int, Mapping[int, Mapping[str, Any]]]) -> dict[str, Any]:
+    """The drawing a tree's atlas draws for one count, measured as candidates are: the
+    layer's view where the improvement rule makes it the default picture
+    (`default_drawings.judged`, policy section 12), else the house drawing.
+
+    A candidate is judged against it here and at admission
+    (`regularize_evand.worse_than_drawn`), never against a view the rule does not draw
+    (review C1 of #636): at n = 176 the layer's view is the axis tool's, which draws two
+    more uneven squares than the house, so the house is drawn and a view that improves
+    on it is a change worth making though the undrawn view has fewer light squares."""
+    tree, n, entries = unit
+    view = today(unit)
+    if view["drawing"]["kind"] != "regularized-view":
+        return view
+    house = today((tree, n, {}))
+    decided = defaults.judged(n, entries[n], view, house)
+    return view if decided["default"] == defaults.REGULARIZED else house
+
+
 def measured(n: int, drawing: census.Drawing, body: Mapping[str, Any]) -> dict[str, Any]:
     """One drawing of count `n` from its witness body, measured as `today` measures the
-    tree's: what `regularize_evand.admit_views` holds a view to before it replaces the
-    layer's."""
+    tree's: how `regularize_evand.admit_views` measures a view before holding it to the
+    drawn picture (`drawn`)."""
     shape = census.regularity(body)
     partners = driver.contact_partners(body)
     house, stage = (driver.histogram(partners[rule]) for rule in driver.RULE_NAMES)
@@ -669,11 +692,11 @@ def select(
     decided = [row for rows in _map(candidates_of, ordered, workers) for row in rows]
     entries = census.read_index(tree)
     counts = sorted({job.n for job in jobs})
-    drawn = {
-        row["n"]: row for row in _map(today, [(tree, n, entries) for n in counts], workers)
+    pictures = {
+        row["n"]: row for row in _map(drawn, [(tree, n, entries) for n in counts], workers)
     }
     judged = sorted(
-        (judge(row, drawn[row["n"]]) for row in decided),
+        (judge(row, pictures[row["n"]]) for row in decided),
         key=lambda row: (row["n"], preference(row)),
     )
     by_count: dict[int, list[dict[str, Any]]] = {}
@@ -686,7 +709,7 @@ def select(
         if pick is not None:
             chosen.append(pick)
         summary[str(n)] = {
-            "today": drawn[n],
+            "today": pictures[n],
             "chosen": None if pick is None else pick["source"],
             "candidates": rows,
         }
