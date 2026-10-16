@@ -2053,6 +2053,23 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical in all 54 files it writes, so the explainer keeps v0.4.6."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main bbc12b61 at one link revision, as over "
+            "22a67ce4 before it, once with main's requests record and once with this "
+            "branch's, the HTML and Markdown are byte-identical in all 42 files the "
+            "renderer writes; the PDF prints from that HTML. The record gains the 15 "
+            "October replies on #521 to #527 and #545, two ask notes, a second blocker on "
+            "#523's ask and #521's reworded close_when, none of which the survey prints, "
+            "so it keeps v0.2.2."
+        ),
+    ),
 )
 
 
