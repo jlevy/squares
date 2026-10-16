@@ -46,7 +46,9 @@ W1 phase on one branch:
    validation bead. Start each new proof’s mathematical review as soon as its source is
    retained, in parallel with stage 3, by [stage 4’s review lane](#stage-4-validate).
    It does not wait for a replay budget, and it lands in a pull request of its own when
-   it returns.
+   it returns. Where a confirmed result moves a house, the pull request that adopts it
+   also regularizes each count it re-houses, or defers the count with the bead that owns
+   its runs ([stage 5](#adopt-a-house-then-regularize-it)).
 4. **Validate** from `packing/` with `packing-validate --records`, then `--push`, and
    leave `--fast` to CI ([stage 5](#stage-5-publish)).
 5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`,
@@ -132,7 +134,12 @@ claude/intake-YYYY-MM-DD, with today's date.
    or with no cap, when the source prices it at minutes; otherwise give it a
    validation bead and a row in the backlog bead (stage 4, "The Compute Cap and the
    Validation Backlog"). Start each new proof's mathematical review (stage 4, "Who
-   reviews, and when") as soon as its source is retained, in parallel.
+   reviews, and when") as soon as its source is retained, in parallel. Where a
+   confirmed result moves a house, adopt it with devtools.adopt_houses and regularize
+   every count it re-houses in the same pull request (stage 5, "Adopt a House, Then
+   Regularize It"): the strong generators on the new witness when they fit under the
+   compute cap, otherwise the count added to default_drawings.PENDING_ALLOWED with the
+   open bead that owns its runs.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
@@ -203,7 +210,7 @@ steps, and `--json` prints the whole sweep.
 | 2. Retain | W1 | The source in a packet at a pinned revision, with its bibliography key |
 | 3. Record | W1 | The claim registered as reported, with its coverage entry, and merged: *imported* |
 | 4. Validate | W2 | Replay evidence, a mapped review and the rungs they derive: status `confirmed`, or `incomplete` |
-| 5. Publish | The change that moves the record | The reader documents state the result; once stage 4 has passed, *integrated* |
+| 5. Publish | The change that moves the record | The reader documents state the result, and each count it re-houses is regularized or deferred with its bead; once stage 4 has passed, *integrated* |
 | 6. Explain | W8, with a W2 review | A review paper, for the results that warrant one |
 | 7. Answer | After each merge, by the pass | A reply on the issue for each change of its state, to the final comment: *answered* |
 
@@ -609,6 +616,46 @@ running a replay, where a tier’s wall measures the contention rather than the 
 ([What each tier costs](../../development.md#what-each-tier-costs-and-where-its-ceiling-lives)).
 It merges on the owner’s word, by
 [the merge policy](../../development.md#merging-a-pull-request).
+
+### Adopt a House, Then Regularize It
+
+Once stage 4 has confirmed and reviewed a certificate below a case’s house, a pass
+adopts it as the case’s new house, unless the owner holds it (`select_houses.HELD`).
+`devtools.select_houses` names the counts, `devtools.upper_bound_houses` rebuilds each
+witness from the retained certificate, and `devtools.adopt_houses` moves the case
+records; its docstring, under “A later pass”, lists what the pass adds first.
+
+A new house is a new witness, and the count’s regularized view lapses with it.
+So the pull request that adopts the house regularizes every count it re-houses, by the
+regularization guide’s
+[When a Witness Changes](../../docs/project/guides/regularization-process.md#when-a-witness-changes):
+`build_known_best_atlas --update` writes the new witness, the axis tool’s
+`--update-atlas` redraws its view, and `default_drawings --update` names each count left
+`pending`; then both strong generators run on each pending count, and the selection
+admits what improves on the drawing.
+Where neither draws better, the count is settled as the guide says.
+`adopt_houses` prints the re-housed counts and these commands when it writes, and with
+`--dry-run` before it does.
+
+The strong runs cost 5 to 15 CPU-minutes a count, from the layer’s run receipts: Evan
+Daniel’s driver takes 140 to 220 CPU-seconds a count
+(`evand-regularize-adopt518-v2-rerun-2026-10-13`,
+`evand-regularize-refreshed-adopt518-v2`), grid-slack 37 to 110 CPU-seconds a count at
+each of its three thresholds (`grid-slack-deg5-1013-b`, `grid-slack-all`), and the
+selection up to about four minutes for the largest view.
+Ten re-housed counts take 50 to 150 CPU-minutes.
+They run under the pass’s [compute cap](#the-compute-cap-and-the-validation-backlog), as
+a replay does. Where they do not fit, or must wait for another reason, the adoption’s
+pull request adds each pending count to `default_drawings.PENDING_ALLOWED` with the open
+bead that owns its runs, so the deferral is reviewed with the adoption.
+
+The records tier’s
+`every drawn picture is regularized, regular as published, decided or exempt`
+(`default_drawings --check-state`) fails on a pending count that the list does not name,
+so an adoption cannot pass without one or the other.
+The adoptions of #598 and #614 refreshed only the axis tool’s views, and left twenty
+counts without a strong generator’s decision on their witness, with the raw house drawn
+at n = 176, until that gate was added (think-sfas).
 
 ### Label the PR and Prepare News
 

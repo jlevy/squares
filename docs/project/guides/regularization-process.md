@@ -325,9 +325,15 @@ grid-slack view against the new $U$, and the next selection can draw either.
 A drawn view lapses when its source witness changes, by a new record at the count or a
 corrected witness (policy section 5). `packing-validate --records` then reports that the
 witness changed since its view was derived.
+A house adoption is the usual cause, and these steps belong to the pull request that
+adopts it: the import runbook’s
+[Adopt a House, Then Regularize It](../../../packing/campaign/result-import.md#adopt-a-house-then-regularize-it)
+schedules them under the pass’s compute cap, and `devtools.adopt_houses` prints the
+counts it re-houses with these commands when it writes.
 To redraw the count:
 
-1. Draw the axis tool’s view of the new witness with
+1. Once `python -m devtools.build_known_best_atlas --update` has written the new
+   witness, draw the axis tool’s view of it with
    `python -m devtools.regularize_axis_components --update-atlas --n N`. Where another
    generator’s view lapses, the axis record carries a `lapsed` block naming that
    generator and its run.
@@ -336,7 +342,8 @@ To redraw the count:
 2. Run `python -m devtools.default_drawings --update`. The count is now `pending`, even
    where the new house has no uneven and no near-axis square, and `--check-state` fails
    on it.
-3. Run both generators on the new witness, then select and admit as above.
+3. Run both generators on the new witness, grid-slack at 0.5, 1 and 5 degrees and Evan
+   Daniel’s driver, then select and admit as above: 5 to 15 CPU-minutes a count in all.
    Where neither draws better, settle the count in `default_drawings.SETTLED` with the
    runs and the new witness’s source key, path, revision and side.
    Where the runs must wait, allow the count in `PENDING_ALLOWED` with the open bead
