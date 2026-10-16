@@ -166,7 +166,11 @@ def discharges(evidence: Mapping[str, object] | None, *, confirming: bool = True
     )
 
 
-def _hypothesis_level(
+#: Support already settled for an entry object within one closure, keyed by identity.
+_Memo = dict[int, int]
+
+
+def _hypothesis_support(
     evidence: Mapping[str, object],
     refs: list[str],
     evidence_by_id: Mapping[str, Mapping[str, object]],
@@ -174,19 +178,62 @@ def _hypothesis_level(
     *,
     confirming: bool,
     active: frozenset[str],
-) -> int:
-    return max(
-        (
-            claim_support_level(
-                other, evidence_by_id, level, confirming=confirming, active=active
-            )
-            for ref in refs
-            if (other := evidence_by_id.get(ref)) is not None
-            and discharges(other, confirming=confirming)
-            and _scope_covers(other.get("scope"), evidence.get("scope"))
-        ),
-        default=0,
-    )
+    memo: _Memo,
+) -> tuple[int, bool]:
+    """The strongest discharge of one hypothesis, and whether a cycle was cut below it."""
+    best, cut = 0, False
+    for ref in refs:
+        other = evidence_by_id.get(ref)
+        if (
+            other is None
+            or not discharges(other, confirming=confirming)
+            or not _scope_covers(other.get("scope"), evidence.get("scope"))
+        ):
+            continue
+        value, hit = _support(
+            other, evidence_by_id, level, confirming=confirming, active=active, memo=memo
+        )
+        best, cut = max(best, value), cut or hit
+    return best, cut
+
+
+def _support(
+    evidence: Mapping[str, object],
+    evidence_by_id: Mapping[str, Mapping[str, object]],
+    level: Callable[[Mapping[str, object]], int],
+    *,
+    confirming: bool,
+    active: frozenset[str],
+    memo: _Memo,
+) -> tuple[int, bool]:
+    """`claim_support_level`, with whether the answer depended on a cycle cut.
+
+    An answer reached without cutting a cycle is the same from every path: if an entry
+    on another path to it were reachable below it, that path and this subtree would form
+    a cycle through it, which this evaluation would have cut. Such answers are
+    memoized, so a shared sub-chain is settled once per closure.
+    """
+    key = str(evidence.get("id", ""))
+    if key in active:
+        return 0, True
+    if (known := memo.get(id(evidence))) is not None:
+        return known, False
+    active = active | {key}
+    result, cut = level(evidence), False
+    for _, refs in conditions(evidence):
+        value, hit = _hypothesis_support(
+            evidence,
+            refs,
+            evidence_by_id,
+            level,
+            confirming=confirming,
+            active=active,
+            memo=memo,
+        )
+        result, cut = min(result, value), cut or hit
+    if not cut:
+        memo[id(evidence)] = result
+    return result, cut
 
 
 def claim_support_level(
@@ -203,19 +250,9 @@ def claim_support_level(
     take their maximum; serial premises take their minimum. The caller supplies the
     axis's rung for each atom, so an exact premise cannot silently earn formal rung 5.
     """
-    key = str(evidence.get("id", ""))
-    if key in active:
-        return 0
-    active = active | {key}
-    return min(
-        [level(evidence)]
-        + [
-            _hypothesis_level(
-                evidence, refs, evidence_by_id, level, confirming=confirming, active=active
-            )
-            for _, refs in conditions(evidence)
-        ]
-    )
+    return _support(
+        evidence, evidence_by_id, level, confirming=confirming, active=active, memo={}
+    )[0]
 
 
 def undischarged(
@@ -226,17 +263,19 @@ def undischarged(
 ) -> list[str]:
     """The hypotheses of a conditional theorem that no recorded entry discharges: the
     entry is verified as an implication only, and nothing here has decided its premise."""
+    memo: _Memo = {}
     return [
         hypothesis
         for hypothesis, refs in conditions(evidence)
-        if not _hypothesis_level(
+        if not _hypothesis_support(
             evidence,
             refs,
             evidence_by_id,
             lambda _: 1,
             confirming=confirming,
             active=frozenset({str(evidence.get("id", ""))}),
-        )
+            memo=memo,
+        )[0]
     ]
 
 

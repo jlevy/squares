@@ -5,6 +5,7 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+from collections.abc import Mapping
 from copy import deepcopy
 from pathlib import Path
 
@@ -16,6 +17,7 @@ from devtools.validate_schemas import source_build_file_problems
 from sqpack.assurance import (
     check_case_semantics,
     check_evidence_semantics,
+    claim_support_level,
     conditional_problems,
     conditions,
     shared_receipt_problems,
@@ -492,3 +494,35 @@ def test_a_malformed_conditional_on_fails_closed(malformed: object) -> None:
     assert conditional_problems({entry["id"]: entry})
     assert derive_verification([entry], record=ONE_CASE) == "V0"
     assert derive_confirmation([entry], record=ONE_CASE) == "C1"
+
+
+def premise_dag(layers: int) -> dict[str, dict]:
+    """A two-way premise DAG: each layer's entries need either entry of the next."""
+    entries = {"E-0": source_build()}
+    entries["E-0"]["id"] = "E-0"
+    previous = ["E-0"]
+    for depth in range(1, layers + 1):
+        names = [f"E-{depth}l", f"E-{depth}r"]
+        for name in previous:
+            requires(entries[name], *names)
+        for name in names:
+            entries[name] = premise_build()
+            entries[name]["id"] = name
+        previous = names
+    return entries
+
+
+def test_premise_closure_settles_each_shared_entry_once() -> None:
+    entries = premise_dag(16)
+    calls: list[str] = []
+
+    def level(entry: Mapping[str, object]) -> int:
+        calls.append(str(entry["id"]))
+        return 3
+
+    assert claim_support_level(entries["E-0"], entries, level, confirming=False) == 3
+    assert sorted(calls) == sorted(entries)
+    assert derive_verification(list(entries.values()), record=ONE_CASE) == "V3"
+    entries["E-16r"]["replay_status"] = "failed"
+    entries["E-16l"]["replay_status"] = "failed"
+    assert derive_verification(list(entries.values()), record=ONE_CASE) == "V0"
