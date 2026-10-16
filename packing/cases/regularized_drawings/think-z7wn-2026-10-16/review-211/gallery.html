@@ -1,0 +1,458 @@
+<title>n = 211: Evan Daniel&#x27;s same-side view of T-188&#x27;s witness, for the owner&#x27;s review</title>
+<style>
+/*
+ * The regularization review gallery's stylesheet, inlined into the page by
+ * devtools/regularize_gallery.py. The page has no script.
+ *
+ * Layout: a review sheet. A masthead and a summary ledger of every count, then one plate
+ * per count: its drawings side by side at one scale, the measurements under them, and
+ * the run's record. Drawings keep the house palette on white paper in both themes; only
+ * the sheet around them follows the viewer's theme.
+ */
+
+:root {
+  --bg: #f3f5f2;
+  --surface: #ffffff;
+  --fg: #19221f;
+  --muted: #56625c;
+  --rule: #d5dbd5;
+  --strong-rule: #19221f;
+  --accent: #1b6654;
+  --figure-bg: #e6eae5;
+  --mark: #c2185b;
+  --mark-halo: #ffffff;
+  --flag: #8a4600;
+  --admit-bg: #d9eedf;
+  --admit-fg: #14572f;
+  --review-bg: #f8e9c4;
+  --review-fg: #6b4300;
+  --alternate-bg: #e9e0f6;
+  --alternate-fg: #523181;
+  --refuse-bg: #f6dad6;
+  --refuse-fg: #882015;
+  --candidate-bg: #d8e6f7;
+  --candidate-fg: #1a4a82;
+  --unchanged-bg: #e3e7e3;
+  --unchanged-fg: #46504b;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-data:
+    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --gutter: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131715;
+    --surface: #1b201e;
+    --fg: #e2e7e3;
+    --muted: #9aa69f;
+    --rule: #2f3733;
+    --strong-rule: #c9d1cc;
+    --accent: #72cdb3;
+    --figure-bg: #262c29;
+    --mark: #c2185b;
+    --mark-halo: #ffffff;
+    --flag: #f0b45f;
+    --admit-bg: #1c3a28;
+    --admit-fg: #93e0b0;
+    --review-bg: #3c2e0f;
+    --review-fg: #f3c86c;
+    --alternate-bg: #2e2440;
+    --alternate-fg: #cbb3f1;
+    --refuse-bg: #41201c;
+    --refuse-fg: #f4a59c;
+    --candidate-bg: #1a2d44;
+    --candidate-fg: #9fc6f5;
+    --unchanged-bg: #29302c;
+    --unchanged-fg: #bac3be;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #131715;
+  --surface: #1b201e;
+  --fg: #e2e7e3;
+  --muted: #9aa69f;
+  --rule: #2f3733;
+  --strong-rule: #c9d1cc;
+  --accent: #72cdb3;
+  --figure-bg: #262c29;
+  --mark: #c2185b;
+  --mark-halo: #ffffff;
+  --flag: #f0b45f;
+  --admit-bg: #1c3a28;
+  --admit-fg: #93e0b0;
+  --review-bg: #3c2e0f;
+  --review-fg: #f3c86c;
+  --alternate-bg: #2e2440;
+  --alternate-fg: #cbb3f1;
+  --refuse-bg: #41201c;
+  --refuse-fg: #f4a59c;
+  --candidate-bg: #1a2d44;
+  --candidate-fg: #9fc6f5;
+  --unchanged-bg: #29302c;
+  --unchanged-fg: #bac3be;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.page {
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: 28px 56px;
+  display: grid;
+  gap: 40px;
+}
+
+.page *,
+.page *::before,
+.page *::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+.masthead {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lede {
+  margin: 0;
+  max-width: 70ch;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+code {
+  font-family: var(--font-data);
+  font-size: 0.875em;
+}
+
+.muted,
+.sub {
+  color: var(--muted);
+}
+
+.sub {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.flag {
+  color: var(--flag);
+  font-weight: 600;
+}
+
+.run-facts,
+.facts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 6px 16px;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.run-facts dt,
+.facts dt {
+  color: var(--muted);
+}
+
+.run-facts dd,
+.facts dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.swatch-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch-label {
+  font-family: var(--font-data);
+}
+
+.swatches {
+  display: block;
+  flex: none;
+}
+
+.section-title {
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  padding: 6px 14px 6px 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+thead th {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+tbody th {
+  font-weight: 600;
+}
+
+.num {
+  text-align: right;
+}
+
+.measures td {
+  white-space: normal;
+  min-width: 11rem;
+}
+
+.measures tbody th {
+  white-space: normal;
+  min-width: 8.5rem;
+  max-width: 13rem;
+}
+
+.count {
+  display: grid;
+  gap: 18px;
+  padding-top: 22px;
+  border-top: 2px solid var(--strong-rule);
+  min-width: 0;
+}
+
+.count-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 16px;
+}
+
+.count-head h2 {
+  font-size: 1.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.reason {
+  flex-basis: 100%;
+  margin: 0;
+  max-width: 80ch;
+  color: var(--muted);
+}
+
+.chip {
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 999px;
+  background: var(--unchanged-bg);
+  color: var(--unchanged-fg);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.chip-admit {
+  background: var(--admit-bg);
+  color: var(--admit-fg);
+}
+
+.chip-review {
+  background: var(--review-bg);
+  color: var(--review-fg);
+}
+
+.chip-alternate {
+  background: var(--alternate-bg);
+  color: var(--alternate-fg);
+}
+
+.chip-refuse {
+  background: var(--refuse-bg);
+  color: var(--refuse-fg);
+}
+
+.chip-candidate {
+  background: var(--candidate-bg);
+  color: var(--candidate-fg);
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 16px;
+}
+
+.panel {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  margin: 0;
+  padding: 10px;
+  min-width: 0;
+  border-radius: 4px;
+  background: var(--figure-bg);
+}
+
+.drawing {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.drawing .mark-halo,
+.swatches .mark-halo {
+  fill: none;
+  stroke: var(--mark-halo);
+  stroke-width: 5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.drawing .mark,
+.swatches .mark {
+  fill: none;
+  stroke: var(--mark);
+  stroke-width: 2.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.panel figcaption {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+}
+
+.panel .role {
+  font-weight: 600;
+}
+
+.missing {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  max-width: 100%;
+  padding: 16px;
+  border: 1px dashed var(--rule);
+  background: var(--surface);
+}
+
+.error {
+  margin: 0;
+  color: var(--refuse-fg);
+}
+
+.hist {
+  display: inline-grid;
+  grid-template-columns: repeat(5, 4ch);
+  column-gap: 1ch;
+  font-family: var(--font-data);
+  text-align: right;
+}
+
+details summary {
+  color: var(--accent);
+  cursor: pointer;
+}
+
+details[open] summary {
+  margin-bottom: 8px;
+}
+
+.colophon {
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 560px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .run-facts,
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .run-facts dd,
+  .facts dd {
+    margin-bottom: 8px;
+  }
+}
+</style>
+<main class="page"><header class="masthead"><p class="eyebrow">Regularization policy, section 5: what the reviewer sees</p><h1>n = 211: Evan Daniel&#x27;s same-side view of T-188&#x27;s witness, for the owner&#x27;s review</h1><p class="lede">Each count draws the source witness beside its regularized view with the house renderer, at one scale. Hue is a square&#x27;s angle class; shade is how many of its four sides it shares whole with a wall or a same-angle neighbour, darkest at four. A regular structure reads as a few hue families in dark shades; slack shows as light squares and angle noise as extra hues. The chips are the run&#x27;s decisions: this page decides nothing.</p><dl class="run-facts"><dt>Drawn from</dt><dd>/tmp/claude-0/-home-user/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/laneS/runs/a211/z7wn-a-1016</dd><dt>Counts</dt><dd>1: review 1</dd><dt>Generator</dt><dd>evand-regularize at 675a5ea, patches none; interpreter CPython 3.14.7</dd><dt>Parameters</dt><dd>{&quot;timeout&quot;: 5400.0, &quot;regularize_timeout&quot;: 5400.0, &quot;variant&quot;: &quot;conservative&quot;, &quot;orient&quot;: &quot;0&quot;, &quot;from_stage&quot;: &quot;input&quot;, &quot;same_mode&quot;: &quot;relax&quot;, &quot;frame&quot;: &quot;kkt&quot;, &quot;style&quot;: &quot;coincide&quot;, &quot;dps&quot;: 80, &quot;eps&quot;: &quot;1e-20&quot;, &quot;workers&quot;: 1, &quot;counts&quot;: [129, 146, 154, 156, 175, 176, 204, 211]}</dd><dt>Cost</dt><dd>1554.09 CPU seconds, 3076.48 wall</dd></dl><div class="legend"><span>Shade by sides shared whole, 4 to 0:</span><span class="swatch-row"><span class="swatch-label">0°</span><svg class="swatches" width="108" height="16" viewBox="0 0 108 16" role="img" aria-label="0° family, shades for 4 down to 0 sides"><rect x="0" y="0" width="20" height="16" fill="#257260"/><rect x="22" y="0" width="20" height="16" fill="#36816e"/><rect x="44" y="0" width="20" height="16" fill="#4b9582"/><rect x="66" y="0" width="20" height="16" fill="#5fa995"/><rect x="88" y="0" width="20" height="16" fill="#74bda9"/></svg></span><span class="swatch-row"><span class="swatch-label">45°</span><svg class="swatches" width="108" height="16" viewBox="0 0 108 16" role="img" aria-label="45° family, shades for 4 down to 0 sides"><rect x="0" y="0" width="20" height="16" fill="#9f9f1c"/><rect x="22" y="0" width="20" height="16" fill="#aead1f"/><rect x="44" y="0" width="20" height="16" fill="#c1c13c"/><rect x="66" y="0" width="20" height="16" fill="#d4d453"/><rect x="88" y="0" width="20" height="16" fill="#e8e868"/></svg></span><span class="swatch-row"><svg class="swatches" width="24" height="16" viewBox="0 0 24 16" role="img" aria-label="outlined square"><path class="mark-halo" d="M4 2h16v12H4z"/><path class="mark" d="M4 2h16v12H4z"/></svg>moved beyond 1e-3 or turned</span></div></header><section class="summary" aria-labelledby="summary-title"><h2 id="summary-title" class="section-title">Counts</h2><div class="table-scroll"><table class="summary"><thead><tr><th class="num" scope="col">n</th><th scope="col">Decision</th><th class="num" scope="col">Hue classes</th><th class="num" scope="col">Four-side squares</th><th class="num" scope="col">Moved</th><th scope="col">Side relation</th></tr></thead><tbody><tr><td class="num"><a href="#n-211">211</a></td><td><span class="chip chip-review">review</span></td><td class="num">32 → 17</td><td class="num">46 → 97</td><td class="num">67</td><td>same</td></tr></tbody></table></div></section><section class="count" id="n-211" aria-labelledby="n-211-title"><header class="count-head"><h2 id="n-211-title"><i>n</i> = 211</h2><span class="chip chip-review">review</span><p class="reason">12 per-square counts fell while no total did: for review</p></header><div class="panels"><figure class="panel"><svg class="drawing" viewBox="0 0 552 552" role="img" aria-labelledby="n211-source-title"><title id="n211-source-title">Source, n = 211: W-known-best-n211</title><rect width="552" height="552" fill="#ffffff"/><g fill-opacity="1.0"><g fill="#4b9582"><path id="n211-source-f0" vector-effect="non-scaling-stroke" d="M8 543.9L43.7 543.9L43.7 508.2L8 508.2ZM472.5 294L508.3 294L508.3 258.2L472.5 258.2ZM329.5 222.5L365.3 222.5L365.3 186.7L329.5 186.7ZM222.3 79.5L258 79.5L258 43.7L222.3 43.7ZM115 43.7L150.8 43.7L150.8 8L115 8ZM508.3 437L544 437L544 401.2L508.3 401.2ZM472.5 401.2L508.3 401.2L508.3 365.5L472.5 365.5ZM401 329.7L436.8 329.7L436.8 294L401 294ZM221.8 329.7L257.5 329.7L257.5 294L221.8 294ZM150.8 151L186.5 151L186.5 115.2L150.8 115.2ZM150.8 186.7L186.5 186.7L186.5 151L150.8 151ZM115.2 472.5L151 472.5L151 436.8L115.2 436.8ZM186.7 544L222.5 544L222.5 508.3L186.7 508.3ZM258.2 544L294 544L294 508.3L258.2 508.3ZM294 544L329.7 544L329.7 508.3L294 508.3ZM401 365.5L436.8 365.5L436.8 329.7L401 329.7Z"/></g><g fill="#5fa995"><path id="n211-source-f1" vector-effect="non-scaling-stroke" d="M8 508L43.7 508L43.7 472.3L8 472.3ZM8 472.2L43.7 472.2L43.7 436.4L8 436.4ZM8 436.3L43.7 436.3L43.7 400.5L8 400.5ZM8 400.4L43.7 400.4L43.7 364.7L8 364.7ZM43.7 543.9L79.5 543.9L79.5 508.2L43.7 508.2ZM498.6 544L534.4 544L534.4 508.3L498.6 508.3ZM436.7 258.2L472.5 258.2L472.5 222.5L436.7 222.5ZM436.7 294L472.5 294L472.5 258.2L436.7 258.2ZM400.9 258.2L436.7 258.2L436.7 222.5L400.9 222.5ZM400.9 294L436.7 294L436.7 258.2L400.9 258.2ZM365.2 258.2L400.9 258.2L400.9 222.5L365.2 222.5ZM365.2 294L400.9 294L400.9 258.2L365.2 258.2ZM79.5 436.8L115.2 436.8L115.2 401L79.5 401ZM8 43.7L43.8 43.7L43.8 8L8 8ZM329.5 329.7L365.3 329.7L365.3 294L329.5 294ZM293.8 329.7L329.5 329.7L329.5 294L293.8 294ZM257.5 329.7L293.3 329.7L293.3 294L257.5 294ZM186 329.7L221.8 329.7L221.8 294L186 294ZM508.3 508.3L544 508.3L544 472.5L508.3 472.5Z"/></g><g fill="#b9e53c"><path id="n211-source-f2" vector-effect="non-scaling-stroke" d="M8.1 364.5L43.8 364.5L43.8 328.8L8.1 328.8ZM186.7 494.7L219.8 508.3L233.4 475.2L200.3 461.6Z"/></g><g fill="#f09f5f"><path id="n211-source-f3" vector-effect="non-scaling-stroke" d="M8.1 328.7L43.8 328.7L43.8 292.9L8.1 292.9ZM243.4 363.3L277 375.5L289.2 341.9L255.6 329.7Z"/></g><g fill="#74bda9"><path id="n211-source-f4" vector-effect="non-scaling-stroke" d="M43.7 508L79.5 508L79.5 472.3L43.7 472.3ZM43.7 467.1L79.5 467.1L79.5 431.3L43.7 431.3ZM43.7 431.2L79.5 431.2L79.5 395.4L43.7 395.4ZM472.5 258.2L508.2 258.2L508.2 222.5L472.5 222.5ZM329.4 258.2L365.1 258.2L365.1 222.5L329.4 222.5ZM329.4 294L365.1 294L365.1 258.2L329.4 258.2ZM293.6 222.5L329.4 222.5L329.4 186.7L293.6 186.7ZM293.6 258.2L329.4 258.2L329.4 222.5L293.6 222.5ZM293.6 294L329.4 294L329.4 258.2L293.6 258.2ZM257.8 222.5L293.6 222.5L293.6 186.7L257.8 186.7ZM257.8 258.2L293.6 258.2L293.6 222.5L257.8 222.5ZM257.8 294L293.6 294L293.6 258.2L257.8 258.2ZM222.2 115.2L258 115.2L258 79.5L222.2 79.5ZM222 222.5L257.8 222.5L257.8 186.7L222 186.7ZM222.1 258.2L257.8 258.2L257.8 222.5L222.1 222.5ZM222.1 294L257.8 294L257.8 258.2L222.1 258.2ZM186.5 79.5L222.2 79.5L222.2 43.7L186.5 43.7ZM186.5 115.2L222.2 115.2L222.2 79.5L186.5 79.5ZM186.2 222.5L221.9 222.5L221.9 186.7L186.2 186.7ZM186.2 258.2L222 258.2L222 222.5L186.2 222.5ZM186.3 294L222 294L222 258.2L186.3 258.2ZM150.7 79.5L186.4 79.5L186.4 43.7L150.7 43.7ZM365.3 329.7L401 329.7L401 294L365.3 294ZM150.7 115.2L186.4 115.2L186.4 79.5L150.7 79.5ZM151 508.2L186.7 508.2L186.7 472.5L151 472.5ZM8 79.5L43.8 79.5L43.8 43.7L8 43.7ZM222.5 544L258.2 544L258.2 508.2L222.5 508.2Z"/></g><g fill="#dd87b8"><path id="n211-source-f5" vector-effect="non-scaling-stroke" d="M43.7 371L76.4 385.6L90.9 352.9L58.3 338.4ZM55.8 337.3L88.4 351.8L103 319.1L70.3 304.6ZM174.9 428.1L207.5 442.6L222.1 409.9L189.4 395.4ZM8 275.5L40.7 290L55.2 257.4L22.5 242.8ZM76.2 386.1L108.8 400.6L123.4 368L90.7 353.4ZM90.8 353.2L123.5 367.7L138 335.1L105.4 320.5ZM103.1 77.6L135.4 92.9L150.7 60.6L118.4 45.3ZM105.4 320.4L138.1 334.9L152.6 302.3L119.9 287.7ZM105.7 281.2L138.4 295.8L152.9 263.1L120.3 248.6ZM73.1 266.7L105.7 281.2L120.3 248.6L87.6 234ZM105.6 242.1L138.3 256.6L152.8 223.9L120.1 209.4Z"/></g><g fill="#36816e"><path id="n211-source-f6" vector-effect="non-scaling-stroke" d="M79.5 544L115.2 544L115.2 508.3L79.5 508.3ZM508.3 258.2L544 258.2L544 222.5L508.3 222.5ZM472.5 222.5L508.3 222.5L508.3 186.7L472.5 186.7ZM436.8 222.5L472.5 222.5L472.5 186.7L436.8 186.7ZM436.8 329.7L472.5 329.7L472.5 294L436.8 294ZM401 222.5L436.8 222.5L436.8 186.7L401 186.7ZM365.3 222.5L401 222.5L401 186.7L365.3 186.7ZM293.8 186.7L329.5 186.7L329.5 151L293.8 151ZM258 115.2L293.8 115.2L293.8 79.5L258 79.5ZM258 186.7L293.8 186.7L293.8 151L258 151ZM222.3 151L258 151L258 115.2L222.3 115.2ZM222.3 186.7L258 186.7L258 151L222.3 151ZM186.5 43.7L222.3 43.7L222.3 8L186.5 8ZM186.5 151L222.3 151L222.3 115.2L186.5 115.2ZM186.5 186.7L222.3 186.7L222.3 151L186.5 151ZM150.8 43.7L186.5 43.7L186.5 8L150.8 8ZM79.5 508.3L115.2 508.3L115.2 472.5L79.5 472.5ZM79.5 472.5L115.2 472.5L115.2 436.8L79.5 436.8ZM436.8 365.5L472.5 365.5L472.5 329.7L436.8 329.7ZM115.2 508.3L151 508.3L151 472.5L115.2 472.5ZM151 544L186.7 544L186.7 508.3L151 508.3Z"/></g><g fill="#257260"><path id="n211-source-f7" vector-effect="non-scaling-stroke" d="M508.3 43.7L544 43.7L544 8L508.3 8ZM508.3 79.5L544 79.5L544 43.7L508.3 43.7ZM508.3 115.2L544 115.2L544 79.5L508.3 79.5ZM508.3 151L544 151L544 115.2L508.3 115.2ZM508.3 186.7L544 186.7L544 151L508.3 151ZM508.3 222.5L544 222.5L544 186.7L508.3 186.7ZM508.3 294L544 294L544 258.2L508.3 258.2ZM508.3 329.7L544 329.7L544 294L508.3 294ZM508.3 365.5L544 365.5L544 329.7L508.3 329.7ZM508.3 401.2L544 401.2L544 365.5L508.3 365.5ZM472.5 43.7L508.3 43.7L508.3 8L472.5 8ZM472.5 79.5L508.3 79.5L508.3 43.7L472.5 43.7ZM472.5 115.2L508.3 115.2L508.3 79.5L472.5 79.5ZM472.5 151L508.3 151L508.3 115.2L472.5 115.2ZM472.5 186.7L508.3 186.7L508.3 151L472.5 151ZM472.5 329.7L508.3 329.7L508.3 294L472.5 294ZM472.5 365.5L508.3 365.5L508.3 329.7L472.5 329.7ZM436.8 43.7L472.5 43.7L472.5 8L436.8 8ZM436.8 79.5L472.5 79.5L472.5 43.7L436.8 43.7ZM436.8 115.2L472.5 115.2L472.5 79.5L436.8 79.5ZM436.8 151L472.5 151L472.5 115.2L436.8 115.2ZM436.8 186.7L472.5 186.7L472.5 151L436.8 151ZM401 43.7L436.8 43.7L436.8 8L401 8ZM401 79.5L436.8 79.5L436.8 43.7L401 43.7ZM401 115.2L436.8 115.2L436.8 79.5L401 79.5ZM401 151L436.8 151L436.8 115.2L401 115.2ZM401 186.7L436.8 186.7L436.8 151L401 151ZM365.3 43.7L401 43.7L401 8L365.3 8ZM365.3 79.5L401 79.5L401 43.7L365.3 43.7ZM365.3 115.2L401 115.2L401 79.5L365.3 79.5ZM365.3 151L401 151L401 115.2L365.3 115.2ZM365.3 186.7L401 186.7L401 151L365.3 151ZM329.5 43.7L365.3 43.7L365.3 8L329.5 8ZM329.5 79.5L365.3 79.5L365.3 43.7L329.5 43.7ZM329.5 115.2L365.3 115.2L365.3 79.5L329.5 79.5ZM329.5 151L365.3 151L365.3 115.2L329.5 115.2ZM329.5 186.7L365.3 186.7L365.3 151L329.5 151ZM293.8 43.7L329.5 43.7L329.5 8L293.8 8ZM293.8 79.5L329.5 79.5L329.5 43.7L293.8 43.7ZM293.8 115.2L329.5 115.2L329.5 79.5L293.8 79.5ZM293.8 151L329.5 151L329.5 115.2L293.8 115.2ZM258 43.7L293.8 43.7L293.8 8L258 8ZM258 79.5L293.8 79.5L293.8 43.7L258 43.7ZM258 151L293.8 151L293.8 115.2L258 115.2ZM222.3 43.7L258 43.7L258 8L222.3 8ZM115.2 544L151 544L151 508.3L115.2 508.3Z"/></g><g fill="#da8f7b"><path id="n211-source-f8" vector-effect="non-scaling-stroke" d="M38.6 170.3L70.9 185.6L86.2 153.3L53.8 138ZM70.9 146L103.3 161.3L118.5 128.9L86.2 113.7ZM40 87.4L72.4 102.7L87.6 70.4L55.3 55.1ZM70.7 62.4L103.1 77.6L118.3 45.3L86 30.1ZM72.7 226.1L105 241.4L120.3 209L87.9 193.8ZM40.3 250.4L72.7 265.6L87.9 233.3L55.6 218ZM40.3 210.8L72.7 226.1L87.9 193.8L55.6 178.5ZM8 195.5L40.3 210.7L55.6 178.4L23.3 163.1ZM103.2 161.4L135.5 176.7L150.8 144.4L118.4 129.1ZM8 151.4L40.3 166.6L55.6 134.3L23.3 119ZM72.4 102.7L104.7 118L120 85.6L87.7 70.4Z"/></g><g fill="#d27a63"><path id="n211-source-f9" vector-effect="non-scaling-stroke" d="M70.8 185.7L103.2 201L118.4 168.6L86.1 153.4ZM40.3 127.1L72.7 142.3L87.9 110L55.6 94.8ZM103.2 201L135.5 216.2L150.8 183.9L118.4 168.6ZM8 111.8L40.3 127.1L55.6 94.8L23.3 79.5Z"/></g><g fill="#cb5698"><path id="n211-source-f10" vector-effect="non-scaling-stroke" d="M149.6 397L182.2 411.5L196.8 378.9L164.1 364.3ZM124.3 365.9L157 380.4L171.5 347.8L138.8 333.2Z"/></g><g fill="#3ed5ec"><path id="n211-source-f11" vector-effect="non-scaling-stroke" d="M189.5 395.4L222.1 409.9L236.6 377.3L204 362.8ZM282.1 363.5L316 374.8L327.3 340.8L293.3 329.6Z"/></g><g fill="#76d6f8"><path id="n211-source-f12" vector-effect="non-scaling-stroke" d="M200.2 461.5L233.3 475.1L246.9 442.1L213.8 428.5ZM214.8 428.9L247.9 442.5L261.5 409.4L228.4 395.8ZM43.8 43.8L79.5 43.8L79.5 8L43.8 8Z"/></g><g fill="#a585dd"><path id="n211-source-f13" vector-effect="non-scaling-stroke" d="M229.8 396.4L262.9 410L276.5 376.9L243.4 363.3ZM449.6 429.9L481.8 445.3L497.2 413L465 397.6Z"/></g><g fill="#e4c984"><path id="n211-source-f14" vector-effect="non-scaling-stroke" d="M225.4 494.9L258.6 508.3L272 475.1L238.8 461.7ZM240 462.2L273.2 475.6L286.6 442.4L253.4 429.1ZM255 429.7L288.2 443.1L301.6 409.9L268.4 396.6ZM268.5 396.6L301.7 410L315 376.8L281.9 363.5ZM103 121.6L135.4 136.8L150.6 104.5L118.3 89.3Z"/></g><g fill="#9ce092"><path id="n211-source-f15" vector-effect="non-scaling-stroke" d="M265.4 494.8L298.5 508.2L312 475.1L278.9 461.6ZM461.5 496.8L494.7 510.2L508.1 477.1L475 463.7Z"/></g><g fill="#3fa8f1"><path id="n211-source-f16" vector-effect="non-scaling-stroke" d="M280.4 462.2L313.5 475.7L327 442.6L293.9 429.1ZM293.9 429.1L327 442.6L340.5 409.5L307.4 396ZM307.4 396L340.5 409.5L354 376.4L320.9 362.9ZM8 235.1L40.3 250.4L55.6 218.1L23.3 202.8ZM406.9 530.5L440.1 544L453.5 510.9L420.4 497.4ZM422.2 498.1L455.3 511.6L468.8 478.5L435.7 465Z"/></g><g fill="#2399ec"><path id="n211-source-f17" vector-effect="non-scaling-stroke" d="M304.4 497.9L337.5 511.4L351 478.3L317.9 464.8ZM344.9 398.6L378 412.1L391.5 379L358.4 365.5ZM370.2 431.2L403.3 444.7L416.8 411.6L383.7 398.1ZM395.3 464.3L428.4 477.8L441.9 444.7L408.8 431.2ZM329.7 530.5L362.8 544L376.3 510.9L343.2 497.4ZM368.3 530.5L401.4 544L414.9 510.9L381.8 497.4Z"/></g><g fill="#1588d8"><path id="n211-source-f18" vector-effect="non-scaling-stroke" d="M317.9 464.8L351 478.3L364.5 445.2L331.4 431.7ZM331.4 431.7L364.5 445.2L378 412.1L344.9 398.6ZM343.2 497.4L376.3 510.9L389.8 477.8L356.7 464.3ZM356.7 464.3L389.8 477.8L403.3 444.7L370.2 431.2ZM381.8 497.4L414.9 510.9L428.4 477.8L395.3 464.3Z"/></g><g fill="#f4b5c0"><path id="n211-source-f19" vector-effect="non-scaling-stroke" d="M384.6 397.3L417.3 411.8L431.8 379.1L399.1 364.6ZM474.5 460.1L506.5 476L522.4 444L490.4 428.1Z"/></g><g fill="#26e994"><path id="n211-source-f20" vector-effect="non-scaling-stroke" d="M409.2 430.3L441.9 444.7L456.4 412L423.6 397.5ZM160.6 460.9L193.3 475.4L207.8 442.7L175.2 428.2ZM425.1 398.2L457.8 412.6L472.2 379.9L439.5 365.5Z"/></g><g fill="#c7c9f8"><path id="n211-source-f21" vector-effect="non-scaling-stroke" d="M434.1 463.9L467 477.8L480.9 444.8L448 431Z"/></g><g fill="#d46ea8"><path id="n211-source-f22" vector-effect="non-scaling-stroke" d="M40.2 291.2L72.8 305.7L87.3 273.1L54.7 258.5ZM138.8 333.2L171.5 347.8L186 315.1L153.4 300.6ZM72.8 305.7L105.5 320.3L120 287.6L87.3 273.1ZM109.8 398.6L142.4 413.1L157 380.4L124.3 365.9ZM135.1 429.7L167.7 444.2L182.2 411.5L149.6 397ZM164.1 364.3L196.8 378.9L211.3 346.2L178.6 331.7Z"/></g><g fill="#f3b85e"><path id="n211-source-f23" vector-effect="non-scaling-stroke" d="M448 530.1L481.1 543.6L494.6 510.5L461.5 497Z"/></g><g fill="#1fe8e4"><path id="n211-source-f24" vector-effect="non-scaling-stroke" d="M150.3 222.5L186 222.5L186 186.8L150.3 186.8Z"/></g><g fill="#8daae4"><path id="n211-source-f25" vector-effect="non-scaling-stroke" d="M139.2 255.3L172 269.5L186.2 236.7L153.4 222.5Z"/></g><g fill="#d2a9e7"><path id="n211-source-f26" vector-effect="non-scaling-stroke" d="M139.1 294.3L171.8 308.7L186.3 276.1L153.6 261.6Z"/></g><g fill="#dc84d2"><path id="n211-source-f27" vector-effect="non-scaling-stroke" d="M204.8 363.1L238.2 375.9L251 342.5L217.6 329.7ZM327.2 365.5L363 365.5L363 329.8L327.3 329.7ZM363 365.5L398.7 365.5L398.8 329.8L363 329.7Z"/></g></g><g fill="none" stroke="#000000" stroke-width="1.25" stroke-linejoin="round"><use href="#n211-source-f0"/><use href="#n211-source-f1"/><use href="#n211-source-f2"/><use href="#n211-source-f3"/><use href="#n211-source-f4"/><use href="#n211-source-f5"/><use href="#n211-source-f6"/><use href="#n211-source-f7"/><use href="#n211-source-f8"/><use href="#n211-source-f9"/><use href="#n211-source-f10"/><use href="#n211-source-f11"/><use href="#n211-source-f12"/><use href="#n211-source-f13"/><use href="#n211-source-f14"/><use href="#n211-source-f15"/><use href="#n211-source-f16"/><use href="#n211-source-f17"/><use href="#n211-source-f18"/><use href="#n211-source-f19"/><use href="#n211-source-f20"/><use href="#n211-source-f21"/><use href="#n211-source-f22"/><use href="#n211-source-f23"/><use href="#n211-source-f24"/><use href="#n211-source-f25"/><use href="#n211-source-f26"/><use href="#n211-source-f27"/></g><rect x="8" y="8" width="536" height="536" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke"/><path class="mark-halo" d="M8 543.9L43.7 543.9L43.7 508.2L8 508.2ZM8 508L43.7 508L43.7 472.3L8 472.3ZM8 472.2L43.7 472.2L43.7 436.4L8 436.4ZM8 436.3L43.7 436.3L43.7 400.5L8 400.5ZM8 400.4L43.7 400.4L43.7 364.7L8 364.7ZM8.1 364.5L43.8 364.5L43.8 328.8L8.1 328.8ZM8.1 328.7L43.8 328.7L43.8 292.9L8.1 292.9ZM43.7 543.9L79.5 543.9L79.5 508.2L43.7 508.2ZM43.7 508L79.5 508L79.5 472.3L43.7 472.3ZM43.7 467.1L79.5 467.1L79.5 431.3L43.7 431.3ZM43.7 431.2L79.5 431.2L79.5 395.4L43.7 395.4ZM55.8 337.3L88.4 351.8L103 319.1L70.3 304.6ZM498.6 544L534.4 544L534.4 508.3L498.6 508.3ZM436.7 258.2L472.5 258.2L472.5 222.5L436.7 222.5ZM436.7 294L472.5 294L472.5 258.2L436.7 258.2ZM400.9 258.2L436.7 258.2L436.7 222.5L400.9 222.5ZM400.9 294L436.7 294L436.7 258.2L400.9 258.2ZM365.2 258.2L400.9 258.2L400.9 222.5L365.2 222.5ZM365.2 294L400.9 294L400.9 258.2L365.2 258.2ZM329.4 258.2L365.1 258.2L365.1 222.5L329.4 222.5ZM329.4 294L365.1 294L365.1 258.2L329.4 258.2ZM293.6 222.5L329.4 222.5L329.4 186.7L293.6 186.7ZM293.6 258.2L329.4 258.2L329.4 222.5L293.6 222.5ZM293.6 294L329.4 294L329.4 258.2L293.6 258.2ZM257.8 222.5L293.6 222.5L293.6 186.7L257.8 186.7ZM257.8 258.2L293.6 258.2L293.6 222.5L257.8 222.5ZM257.8 294L293.6 294L293.6 258.2L257.8 258.2ZM222 222.5L257.8 222.5L257.8 186.7L222 186.7ZM222.1 258.2L257.8 258.2L257.8 222.5L222.1 222.5ZM222.1 294L257.8 294L257.8 258.2L222.1 258.2ZM186.5 79.5L222.2 79.5L222.2 43.7L186.5 43.7ZM186.5 115.2L222.2 115.2L222.2 79.5L186.5 79.5ZM186.2 222.5L221.9 222.5L221.9 186.7L186.2 186.7ZM186.2 258.2L222 258.2L222 222.5L186.2 222.5ZM186.3 294L222 294L222 258.2L186.3 258.2ZM150.7 79.5L186.4 79.5L186.4 43.7L150.7 43.7ZM38.6 170.3L70.9 185.6L86.2 153.3L53.8 138ZM70.9 146L103.3 161.3L118.5 128.9L86.2 113.7ZM40 87.4L72.4 102.7L87.6 70.4L55.3 55.1ZM189.5 395.4L222.1 409.9L236.6 377.3L204 362.8ZM214.8 428.9L247.9 442.5L261.5 409.4L228.4 395.8ZM240 462.2L273.2 475.6L286.6 442.4L253.4 429.1ZM265.4 494.8L298.5 508.2L312 475.1L278.9 461.6ZM76.2 386.1L108.8 400.6L123.4 368L90.7 353.4ZM90.8 353.2L123.5 367.7L138 335.1L105.4 320.5ZM448 530.1L481.1 543.6L494.6 510.5L461.5 497ZM150.7 115.2L186.4 115.2L186.4 79.5L150.7 79.5ZM150.3 222.5L186 222.5L186 186.8L150.3 186.8ZM139.2 255.3L172 269.5L186.2 236.7L153.4 222.5ZM139.1 294.3L171.8 308.7L186.3 276.1L153.6 261.6ZM103.1 77.6L135.4 92.9L150.7 60.6L118.4 45.3ZM70.7 62.4L103.1 77.6L118.3 45.3L86 30.1ZM72.7 226.1L105 241.4L120.3 209L87.9 193.8ZM105.4 320.4L138.1 334.9L152.6 302.3L119.9 287.7ZM105.7 281.2L138.4 295.8L152.9 263.1L120.3 248.6ZM40.3 250.4L72.7 265.6L87.9 233.3L55.6 218ZM73.1 266.7L105.7 281.2L120.3 248.6L87.6 234ZM105.6 242.1L138.3 256.6L152.8 223.9L120.1 209.4ZM8 235.1L40.3 250.4L55.6 218.1L23.3 202.8ZM40.3 210.8L72.7 226.1L87.9 193.8L55.6 178.5ZM8 195.5L40.3 210.7L55.6 178.4L23.3 163.1ZM103 121.6L135.4 136.8L150.6 104.5L118.3 89.3ZM72.4 102.7L104.7 118L120 85.6L87.7 70.4ZM43.8 43.8L79.5 43.8L79.5 8L43.8 8ZM160.6 460.9L193.3 475.4L207.8 442.7L175.2 428.2ZM222.5 544L258.2 544L258.2 508.2L222.5 508.2ZM422.2 498.1L455.3 511.6L468.8 478.5L435.7 465ZM461.5 496.8L494.7 510.2L508.1 477.1L475 463.7Z"/><path class="mark" d="M8 543.9L43.7 543.9L43.7 508.2L8 508.2ZM8 508L43.7 508L43.7 472.3L8 472.3ZM8 472.2L43.7 472.2L43.7 436.4L8 436.4ZM8 436.3L43.7 436.3L43.7 400.5L8 400.5ZM8 400.4L43.7 400.4L43.7 364.7L8 364.7ZM8.1 364.5L43.8 364.5L43.8 328.8L8.1 328.8ZM8.1 328.7L43.8 328.7L43.8 292.9L8.1 292.9ZM43.7 543.9L79.5 543.9L79.5 508.2L43.7 508.2ZM43.7 508L79.5 508L79.5 472.3L43.7 472.3ZM43.7 467.1L79.5 467.1L79.5 431.3L43.7 431.3ZM43.7 431.2L79.5 431.2L79.5 395.4L43.7 395.4ZM55.8 337.3L88.4 351.8L103 319.1L70.3 304.6ZM498.6 544L534.4 544L534.4 508.3L498.6 508.3ZM436.7 258.2L472.5 258.2L472.5 222.5L436.7 222.5ZM436.7 294L472.5 294L472.5 258.2L436.7 258.2ZM400.9 258.2L436.7 258.2L436.7 222.5L400.9 222.5ZM400.9 294L436.7 294L436.7 258.2L400.9 258.2ZM365.2 258.2L400.9 258.2L400.9 222.5L365.2 222.5ZM365.2 294L400.9 294L400.9 258.2L365.2 258.2ZM329.4 258.2L365.1 258.2L365.1 222.5L329.4 222.5ZM329.4 294L365.1 294L365.1 258.2L329.4 258.2ZM293.6 222.5L329.4 222.5L329.4 186.7L293.6 186.7ZM293.6 258.2L329.4 258.2L329.4 222.5L293.6 222.5ZM293.6 294L329.4 294L329.4 258.2L293.6 258.2ZM257.8 222.5L293.6 222.5L293.6 186.7L257.8 186.7ZM257.8 258.2L293.6 258.2L293.6 222.5L257.8 222.5ZM257.8 294L293.6 294L293.6 258.2L257.8 258.2ZM222 222.5L257.8 222.5L257.8 186.7L222 186.7ZM222.1 258.2L257.8 258.2L257.8 222.5L222.1 222.5ZM222.1 294L257.8 294L257.8 258.2L222.1 258.2ZM186.5 79.5L222.2 79.5L222.2 43.7L186.5 43.7ZM186.5 115.2L222.2 115.2L222.2 79.5L186.5 79.5ZM186.2 222.5L221.9 222.5L221.9 186.7L186.2 186.7ZM186.2 258.2L222 258.2L222 222.5L186.2 222.5ZM186.3 294L222 294L222 258.2L186.3 258.2ZM150.7 79.5L186.4 79.5L186.4 43.7L150.7 43.7ZM38.6 170.3L70.9 185.6L86.2 153.3L53.8 138ZM70.9 146L103.3 161.3L118.5 128.9L86.2 113.7ZM40 87.4L72.4 102.7L87.6 70.4L55.3 55.1ZM189.5 395.4L222.1 409.9L236.6 377.3L204 362.8ZM214.8 428.9L247.9 442.5L261.5 409.4L228.4 395.8ZM240 462.2L273.2 475.6L286.6 442.4L253.4 429.1ZM265.4 494.8L298.5 508.2L312 475.1L278.9 461.6ZM76.2 386.1L108.8 400.6L123.4 368L90.7 353.4ZM90.8 353.2L123.5 367.7L138 335.1L105.4 320.5ZM448 530.1L481.1 543.6L494.6 510.5L461.5 497ZM150.7 115.2L186.4 115.2L186.4 79.5L150.7 79.5ZM150.3 222.5L186 222.5L186 186.8L150.3 186.8ZM139.2 255.3L172 269.5L186.2 236.7L153.4 222.5ZM139.1 294.3L171.8 308.7L186.3 276.1L153.6 261.6ZM103.1 77.6L135.4 92.9L150.7 60.6L118.4 45.3ZM70.7 62.4L103.1 77.6L118.3 45.3L86 30.1ZM72.7 226.1L105 241.4L120.3 209L87.9 193.8ZM105.4 320.4L138.1 334.9L152.6 302.3L119.9 287.7ZM105.7 281.2L138.4 295.8L152.9 263.1L120.3 248.6ZM40.3 250.4L72.7 265.6L87.9 233.3L55.6 218ZM73.1 266.7L105.7 281.2L120.3 248.6L87.6 234ZM105.6 242.1L138.3 256.6L152.8 223.9L120.1 209.4ZM8 235.1L40.3 250.4L55.6 218.1L23.3 202.8ZM40.3 210.8L72.7 226.1L87.9 193.8L55.6 178.5ZM8 195.5L40.3 210.7L55.6 178.4L23.3 163.1ZM103 121.6L135.4 136.8L150.6 104.5L118.3 89.3ZM72.4 102.7L104.7 118L120 85.6L87.7 70.4ZM43.8 43.8L79.5 43.8L79.5 8L43.8 8ZM160.6 460.9L193.3 475.4L207.8 442.7L175.2 428.2ZM222.5 544L258.2 544L258.2 508.2L222.5 508.2ZM422.2 498.1L455.3 511.6L468.8 478.5L435.7 465ZM461.5 496.8L494.7 510.2L508.1 477.1L475 463.7Z"/></svg><figcaption><span class="role">Source</span><span class="muted">W-known-best-n211</span><span class="muted">U n=211 known best: side ~ 14.99354963 (certified upper bound)</span><span class="marks">Outlined: the squares that move or turn in the regularized view</span></figcaption></figure><figure class="panel"><svg class="drawing" viewBox="0 0 552 552" role="img" aria-labelledby="n211-view-title"><title id="n211-view-title">Regularized, same, n = 211: W-known-best-n211-regularized, side relation same</title><rect width="552" height="552" fill="#ffffff"/><g fill-opacity="1.0"><g fill="#257260"><path id="n211-view-f0" vector-effect="non-scaling-stroke" d="M8 544L43.7 544L43.7 508.3L8 508.3ZM8 508.3L43.7 508.3L43.7 472.5L8 472.5ZM8 472.5L43.7 472.5L43.7 436.8L8 436.8ZM8 436.8L43.7 436.8L43.7 401L8 401ZM43.7 544L79.5 544L79.5 508.3L43.7 508.3ZM43.7 508.3L79.5 508.3L79.5 472.5L43.7 472.5ZM43.7 472.5L79.5 472.5L79.5 436.8L43.7 436.8ZM79.5 544L115.2 544L115.2 508.3L79.5 508.3ZM508.3 43.7L544 43.7L544 8L508.3 8ZM508.3 79.5L544 79.5L544 43.7L508.3 43.7ZM508.3 115.2L544 115.2L544 79.5L508.3 79.5ZM508.3 151L544 151L544 115.2L508.3 115.2ZM508.3 186.7L544 186.7L544 151L508.3 151ZM508.3 222.5L544 222.5L544 186.7L508.3 186.7ZM508.3 258.2L544 258.2L544 222.5L508.3 222.5ZM508.3 294L544 294L544 258.2L508.3 258.2ZM508.3 329.7L544 329.7L544 294L508.3 294ZM508.3 365.5L544 365.5L544 329.7L508.3 329.7ZM508.3 401.2L544 401.2L544 365.5L508.3 365.5ZM472.5 43.7L508.3 43.7L508.3 8L472.5 8ZM472.5 79.5L508.3 79.5L508.3 43.7L472.5 43.7ZM472.5 115.2L508.3 115.2L508.3 79.5L472.5 79.5ZM472.5 151L508.3 151L508.3 115.2L472.5 115.2ZM472.5 186.7L508.3 186.7L508.3 151L472.5 151ZM472.5 222.5L508.3 222.5L508.3 186.7L472.5 186.7ZM472.5 258.2L508.3 258.2L508.3 222.5L472.5 222.5ZM472.5 294L508.3 294L508.3 258.2L472.5 258.2ZM472.5 329.7L508.3 329.7L508.3 294L472.5 294ZM472.5 365.5L508.3 365.5L508.3 329.7L472.5 329.7ZM436.8 43.7L472.5 43.7L472.5 8L436.8 8ZM436.8 79.5L472.5 79.5L472.5 43.7L436.8 43.7ZM436.8 115.2L472.5 115.2L472.5 79.5L436.8 79.5ZM436.8 151L472.5 151L472.5 115.2L436.8 115.2ZM436.8 186.7L472.5 186.7L472.5 151L436.8 151ZM436.8 222.5L472.5 222.5L472.5 186.7L436.8 186.7ZM436.8 258.2L472.5 258.2L472.5 222.5L436.8 222.5ZM436.8 294L472.5 294L472.5 258.2L436.8 258.2ZM436.8 329.7L472.5 329.7L472.5 294L436.8 294ZM401 43.7L436.8 43.7L436.8 8L401 8ZM401 79.5L436.8 79.5L436.8 43.7L401 43.7ZM401 115.2L436.8 115.2L436.8 79.5L401 79.5ZM401 151L436.8 151L436.8 115.2L401 115.2ZM401 186.7L436.8 186.7L436.8 151L401 151ZM401 222.5L436.8 222.5L436.8 186.7L401 186.7ZM401 258.2L436.8 258.2L436.8 222.5L401 222.5ZM401 294L436.8 294L436.8 258.2L401 258.2ZM365.3 43.7L401 43.7L401 8L365.3 8ZM365.3 79.5L401 79.5L401 43.7L365.3 43.7ZM365.3 115.2L401 115.2L401 79.5L365.3 79.5ZM365.3 151L401 151L401 115.2L365.3 115.2ZM365.3 186.7L401 186.7L401 151L365.3 151ZM365.3 222.5L401 222.5L401 186.7L365.3 186.7ZM365.3 258.2L401 258.2L401 222.5L365.3 222.5ZM365.3 294L401 294L401 258.2L365.3 258.2ZM329.5 43.7L365.3 43.7L365.3 8L329.5 8ZM329.5 79.5L365.3 79.5L365.3 43.7L329.5 43.7ZM329.5 115.2L365.3 115.2L365.3 79.5L329.5 79.5ZM329.5 151L365.3 151L365.3 115.2L329.5 115.2ZM329.5 186.7L365.3 186.7L365.3 151L329.5 151ZM329.5 222.5L365.3 222.5L365.3 186.7L329.5 186.7ZM329.5 258.2L365.3 258.2L365.3 222.5L329.5 222.5ZM329.5 294L365.3 294L365.3 258.2L329.5 258.2ZM293.8 43.7L329.5 43.7L329.5 8L293.8 8ZM293.8 79.5L329.5 79.5L329.5 43.7L293.8 43.7ZM293.8 115.2L329.5 115.2L329.5 79.5L293.8 79.5ZM293.8 151L329.5 151L329.5 115.2L293.8 115.2ZM293.8 186.7L329.5 186.7L329.5 151L293.8 151ZM293.8 222.5L329.5 222.5L329.5 186.7L293.8 186.7ZM293.8 258.2L329.5 258.2L329.5 222.5L293.8 222.5ZM293.8 294L329.5 294L329.5 258.2L293.8 258.2ZM258 43.7L293.8 43.7L293.8 8L258 8ZM258 79.5L293.8 79.5L293.8 43.7L258 43.7ZM258 115.2L293.8 115.2L293.8 79.5L258 79.5ZM258 151L293.8 151L293.8 115.2L258 115.2ZM258 186.7L293.8 186.7L293.8 151L258 151ZM258 222.5L293.8 222.5L293.8 186.7L258 186.7ZM258 258.2L293.8 258.2L293.8 222.5L258 222.5ZM222.3 43.7L258 43.7L258 8L222.3 8ZM222.3 79.5L258 79.5L258 43.7L222.3 43.7ZM222.3 115.2L258 115.2L258 79.5L222.3 79.5ZM222.3 151L258 151L258 115.2L222.3 115.2ZM222.3 186.7L258 186.7L258 151L222.3 151ZM222.3 222.5L258 222.5L258 186.7L222.3 186.7ZM222.3 258.2L258 258.2L258 222.5L222.3 222.5ZM186.5 43.7L222.3 43.7L222.3 8L186.5 8ZM186.5 79.5L222.3 79.5L222.3 43.7L186.5 43.7ZM186.5 115.2L222.3 115.2L222.3 79.5L186.5 79.5ZM186.5 151L222.3 151L222.3 115.2L186.5 115.2ZM186.5 186.7L222.3 186.7L222.3 151L186.5 151ZM150.8 43.7L186.5 43.7L186.5 8L150.8 8ZM79.5 508.3L115.2 508.3L115.2 472.5L79.5 472.5ZM79.5 472.5L115.2 472.5L115.2 436.8L79.5 436.8ZM8 43.7L43.7 43.7L43.7 8L8 8ZM401 329.7L436.8 329.7L436.8 294L401 294ZM115.2 544L151 544L151 508.3L115.2 508.3ZM115.2 508.3L151 508.3L151 472.5L115.2 472.5ZM151 544L186.7 544L186.7 508.3L151 508.3Z"/></g><g fill="#36816e"><path id="n211-view-f1" vector-effect="non-scaling-stroke" d="M8 401L43.7 401L43.7 365.3L8 365.3ZM8 365.3L43.7 365.3L43.7 329.5L8 329.5ZM43.7 436.8L79.5 436.8L79.5 401L43.7 401ZM508.3 544L544 544L544 508.3L508.3 508.3ZM258 294L293.8 294L293.8 258.2L258 258.2ZM222.3 294L258 294L258 258.2L222.3 258.2ZM186.5 222.5L222.3 222.5L222.3 186.7L186.5 186.7ZM186.5 258.2L222.3 258.2L222.3 222.5L186.5 222.5ZM150.8 79.5L186.5 79.5L186.5 43.7L150.8 43.7ZM436.8 365.5L472.5 365.5L472.5 329.7L436.8 329.7ZM365.3 329.7L401 329.7L401 294L365.3 294ZM329.5 329.7L365.3 329.7L365.3 294L329.5 294ZM150.8 115.2L186.5 115.2L186.5 79.5L150.8 79.5ZM150.8 151L186.5 151L186.5 115.2L150.8 115.2ZM186.7 544L222.5 544L222.5 508.3L186.7 508.3ZM222.5 544L258.2 544L258.2 508.3L222.5 508.3ZM258.2 544L294 544L294 508.3L258.2 508.3Z"/></g><g fill="#4b9582"><path id="n211-view-f2" vector-effect="non-scaling-stroke" d="M8 329.5L43.7 329.5L43.7 293.8L8 293.8ZM186.5 294L222.3 294L222.3 258.2L186.5 258.2ZM115 43.7L150.8 43.7L150.8 8L115 8ZM79.5 436.8L115.2 436.8L115.2 401L79.5 401ZM508.3 437L544 437L544 401.2L508.3 401.2ZM472.5 401.2L508.3 401.2L508.3 365.5L472.5 365.5ZM293.8 329.7L329.5 329.7L329.5 294L293.8 294ZM221.8 329.7L257.5 329.7L257.5 294L221.8 294ZM150.8 186.7L186.5 186.7L186.5 151L150.8 151ZM115.2 472.5L151 472.5L151 436.8L115.2 436.8ZM151 508.3L186.7 508.3L186.7 472.5L151 472.5ZM508.3 508.3L544 508.3L544 472.5L508.3 472.5ZM8 79.5L43.7 79.5L43.7 43.7L8 43.7ZM43.7 43.7L79.5 43.7L79.5 8L43.7 8ZM294 544L329.7 544L329.7 508.3L294 508.3ZM401 365.5L436.8 365.5L436.8 329.7L401 329.7Z"/></g><g fill="#cb5698"><path id="n211-view-f3" vector-effect="non-scaling-stroke" d="M43.7 371L76.4 385.6L90.9 352.9L58.3 338.4ZM149.6 397L182.2 411.5L196.8 378.9L164.1 364.3ZM174.9 428.1L207.6 442.6L222.1 409.9L189.4 395.4ZM76.4 385.6L109.1 400.1L123.6 367.4L90.9 352.9ZM105.5 320.3L138.1 334.8L152.7 302.1L120 287.6ZM124.3 365.9L157 380.4L171.5 347.8L138.8 333.2Z"/></g><g fill="#c23f89"><path id="n211-view-f4" vector-effect="non-scaling-stroke" d="M58.3 338.4L90.9 352.9L105.5 320.3L72.8 305.7ZM90.9 352.9L123.6 367.4L138.1 334.8L105.5 320.3ZM72.8 305.7L105.5 320.3L120 287.6L87.3 273.1Z"/></g><g fill="#d27a63"><path id="n211-view-f5" vector-effect="non-scaling-stroke" d="M38.5 170.4L70.8 185.7L86.1 153.4L53.8 138.1ZM40.3 127.1L72.7 142.3L87.9 110L55.6 94.8ZM70.8 146.2L103.2 161.4L118.4 129.1L86.1 113.8ZM40.3 87.6L72.7 102.8L87.9 70.5L55.6 55.2ZM103.2 77.7L135.5 93L150.8 60.6L118.4 45.4ZM70.8 62.4L103.2 77.7L118.4 45.4L86.1 30.1ZM73.1 226.3L105.4 241.5L120.7 209.2L88.3 194ZM40.6 250.5L72.9 265.7L88.2 233.4L55.8 218.2ZM8.3 235.2L40.6 250.5L55.8 218.2L23.5 202.9ZM103.2 201L135.5 216.2L150.8 183.9L118.4 168.6ZM8.4 195.8L40.7 211L56 178.7L23.7 163.4ZM103.2 161.4L135.5 176.7L150.8 144.4L118.4 129.1ZM8 111.8L40.3 127.1L55.6 94.8L23.3 79.5ZM72.7 102.8L105 118.1L120.2 85.7L87.9 70.5Z"/></g><g fill="#c8654b"><path id="n211-view-f6" vector-effect="non-scaling-stroke" d="M70.8 185.7L103.2 201L118.4 168.6L86.1 153.4ZM40.7 211L73.1 226.3L88.3 194L56 178.7Z"/></g><g fill="#d46ea8"><path id="n211-view-f7" vector-effect="non-scaling-stroke" d="M189.4 395.4L222.1 409.9L236.6 377.3L204 362.7ZM40.2 291.2L72.8 305.7L87.3 273.1L54.7 258.5ZM138.8 333.2L171.5 347.8L186 315.1L153.4 300.6ZM106 281.3L138.6 295.9L153.2 263.2L120.5 248.7ZM73.3 266.8L106 281.3L120.5 248.7L87.8 234.1ZM109.8 398.6L142.4 413.1L157 380.4L124.3 365.9ZM135.1 429.7L167.7 444.2L182.2 411.5L149.6 397ZM164.1 364.3L196.8 378.9L211.3 346.2L178.6 331.7ZM160.4 460.7L193 475.3L207.6 442.6L174.9 428.1Z"/></g><g fill="#dc84d2"><path id="n211-view-f8" vector-effect="non-scaling-stroke" d="M200.2 461.5L233.3 475.1L246.9 442.1L213.8 428.5ZM214.8 428.9L247.8 442.5L261.4 409.4L228.4 395.8Z"/></g><g fill="#f09f5f"><path id="n211-view-f9" vector-effect="non-scaling-stroke" d="M229.8 396.4L262.9 410L276.5 376.9L243.4 363.3Z"/></g><g fill="#e4c984"><path id="n211-view-f10" vector-effect="non-scaling-stroke" d="M225.4 494.9L258.6 508.3L272 475.1L238.8 461.7ZM240 462.2L273.1 475.6L286.5 442.4L253.4 429ZM255 429.7L288.2 443.1L301.6 409.9L268.4 396.6ZM268.5 396.6L301.7 410L315 376.8L281.9 363.5Z"/></g><g fill="#3fa8f1"><path id="n211-view-f11" vector-effect="non-scaling-stroke" d="M265.3 494.7L298.4 508.2L311.9 475.1L278.8 461.6Z"/></g><g fill="#2399ec"><path id="n211-view-f12" vector-effect="non-scaling-stroke" d="M280.4 462.2L313.5 475.7L327 442.6L293.9 429.1ZM307.4 396L340.5 409.5L354 376.4L320.9 362.9ZM304.4 497.9L337.5 511.4L351 478.3L317.9 464.8ZM344.9 398.6L378 412.1L391.5 379L358.4 365.5ZM370.2 431.2L403.3 444.7L416.8 411.6L383.7 398.1ZM395.3 464.3L428.4 477.8L441.9 444.7L408.8 431.2ZM446.5 528.8L479.6 542.3L493.1 509.2L460 495.7ZM329.7 530.5L362.8 544L376.3 510.9L343.2 497.4ZM368.3 530.5L401.4 544L414.9 510.9L381.8 497.4ZM406.9 530.5L440.1 544L453.5 510.9L420.4 497.4ZM420.4 497.4L453.5 510.9L467 477.8L433.9 464.3ZM460 495.7L493.1 509.2L506.6 476.1L473.5 462.6Z"/></g><g fill="#1588d8"><path id="n211-view-f13" vector-effect="non-scaling-stroke" d="M293.9 429.1L327 442.6L340.5 409.5L307.4 396ZM317.9 464.8L351 478.3L364.5 445.2L331.4 431.7ZM331.4 431.7L364.5 445.2L378 412.1L344.9 398.6ZM343.2 497.4L376.3 510.9L389.8 477.8L356.7 464.3ZM356.7 464.3L389.8 477.8L403.3 444.7L370.2 431.2ZM381.8 497.4L414.9 510.9L428.4 477.8L395.3 464.3Z"/></g><g fill="#b9e53c"><path id="n211-view-f14" vector-effect="non-scaling-stroke" d="M384.6 397.3L417.3 411.8L431.8 379.1L399.1 364.6ZM139.4 294.4L172 308.9L186.5 276.2L153.8 261.7Z"/></g><g fill="#76d6f8"><path id="n211-view-f15" vector-effect="non-scaling-stroke" d="M409.2 430.3L441.9 444.7L456.4 412L423.6 397.5ZM139.4 255.3L172.1 269.7L186.5 237L153.8 222.6ZM425.1 398.2L457.8 412.6L472.2 379.9L439.5 365.5Z"/></g><g fill="#3ed5ec"><path id="n211-view-f16" vector-effect="non-scaling-stroke" d="M434.1 463.9L467 477.8L480.9 444.8L448 431Z"/></g><g fill="#dd87b8"><path id="n211-view-f17" vector-effect="non-scaling-stroke" d="M8 275.5L40.7 290L55.2 257.4L22.5 242.8ZM106 242.2L138.6 256.7L153.2 224.1L120.5 209.6Z"/></g><g fill="#5fa995"><path id="n211-view-f18" vector-effect="non-scaling-stroke" d="M257.5 329.7L293.3 329.7L293.3 294L257.5 294ZM186 329.7L221.8 329.7L221.8 294L186 294Z"/></g><g fill="#26e994"><path id="n211-view-f19" vector-effect="non-scaling-stroke" d="M150.7 222.6L186.5 222.6L186.5 186.9L150.8 186.9ZM327.2 365.5L363 365.5L363 329.8L327.3 329.7ZM363 365.5L398.7 365.5L398.8 329.8L363 329.7Z"/></g><g fill="#da8f7b"><path id="n211-view-f20" vector-effect="non-scaling-stroke" d="M8 151.4L40.3 166.6L55.6 134.3L23.3 119ZM103.2 121.9L135.5 137.2L150.8 104.8L118.4 89.6Z"/></g><g fill="#a585dd"><path id="n211-view-f21" vector-effect="non-scaling-stroke" d="M204.8 363.1L238.2 375.9L251 342.5L217.6 329.7Z"/></g><g fill="#9ce092"><path id="n211-view-f22" vector-effect="non-scaling-stroke" d="M186.7 494.7L219.8 508.3L233.4 475.2L200.3 461.6Z"/></g><g fill="#f4b5c0"><path id="n211-view-f23" vector-effect="non-scaling-stroke" d="M243.4 363.3L277 375.5L289.2 341.9L255.6 329.7Z"/></g><g fill="#c7c9f8"><path id="n211-view-f24" vector-effect="non-scaling-stroke" d="M282.1 363.5L316 374.8L327.3 340.8L293.3 329.6Z"/></g><g fill="#f3b85e"><path id="n211-view-f25" vector-effect="non-scaling-stroke" d="M449.6 429.9L481.8 445.3L497.2 413L465 397.6Z"/></g><g fill="#1fe8e4"><path id="n211-view-f26" vector-effect="non-scaling-stroke" d="M474.5 460.1L506.5 476L522.4 444L490.4 428.1Z"/></g></g><g fill="none" stroke="#000000" stroke-width="1.25" stroke-linejoin="round"><use href="#n211-view-f0"/><use href="#n211-view-f1"/><use href="#n211-view-f2"/><use href="#n211-view-f3"/><use href="#n211-view-f4"/><use href="#n211-view-f5"/><use href="#n211-view-f6"/><use href="#n211-view-f7"/><use href="#n211-view-f8"/><use href="#n211-view-f9"/><use href="#n211-view-f10"/><use href="#n211-view-f11"/><use href="#n211-view-f12"/><use href="#n211-view-f13"/><use href="#n211-view-f14"/><use href="#n211-view-f15"/><use href="#n211-view-f16"/><use href="#n211-view-f17"/><use href="#n211-view-f18"/><use href="#n211-view-f19"/><use href="#n211-view-f20"/><use href="#n211-view-f21"/><use href="#n211-view-f22"/><use href="#n211-view-f23"/><use href="#n211-view-f24"/><use href="#n211-view-f25"/><use href="#n211-view-f26"/></g><rect x="8" y="8" width="536" height="536" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke"/><path class="mark-halo" d="M8 544L43.7 544L43.7 508.3L8 508.3ZM8 508.3L43.7 508.3L43.7 472.5L8 472.5ZM8 472.5L43.7 472.5L43.7 436.8L8 436.8ZM8 436.8L43.7 436.8L43.7 401L8 401ZM8 401L43.7 401L43.7 365.3L8 365.3ZM8 365.3L43.7 365.3L43.7 329.5L8 329.5ZM8 329.5L43.7 329.5L43.7 293.8L8 293.8ZM43.7 544L79.5 544L79.5 508.3L43.7 508.3ZM43.7 508.3L79.5 508.3L79.5 472.5L43.7 472.5ZM43.7 472.5L79.5 472.5L79.5 436.8L43.7 436.8ZM43.7 436.8L79.5 436.8L79.5 401L43.7 401ZM58.3 338.4L90.9 352.9L105.5 320.3L72.8 305.7ZM508.3 544L544 544L544 508.3L508.3 508.3ZM436.8 258.2L472.5 258.2L472.5 222.5L436.8 222.5ZM436.8 294L472.5 294L472.5 258.2L436.8 258.2ZM401 258.2L436.8 258.2L436.8 222.5L401 222.5ZM401 294L436.8 294L436.8 258.2L401 258.2ZM365.3 258.2L401 258.2L401 222.5L365.3 222.5ZM365.3 294L401 294L401 258.2L365.3 258.2ZM329.5 258.2L365.3 258.2L365.3 222.5L329.5 222.5ZM329.5 294L365.3 294L365.3 258.2L329.5 258.2ZM293.8 222.5L329.5 222.5L329.5 186.7L293.8 186.7ZM293.8 258.2L329.5 258.2L329.5 222.5L293.8 222.5ZM293.8 294L329.5 294L329.5 258.2L293.8 258.2ZM258 222.5L293.8 222.5L293.8 186.7L258 186.7ZM258 258.2L293.8 258.2L293.8 222.5L258 222.5ZM258 294L293.8 294L293.8 258.2L258 258.2ZM222.3 222.5L258 222.5L258 186.7L222.3 186.7ZM222.3 258.2L258 258.2L258 222.5L222.3 222.5ZM222.3 294L258 294L258 258.2L222.3 258.2ZM186.5 79.5L222.3 79.5L222.3 43.7L186.5 43.7ZM186.5 115.2L222.3 115.2L222.3 79.5L186.5 79.5ZM186.5 222.5L222.3 222.5L222.3 186.7L186.5 186.7ZM186.5 258.2L222.3 258.2L222.3 222.5L186.5 222.5ZM186.5 294L222.3 294L222.3 258.2L186.5 258.2ZM150.8 79.5L186.5 79.5L186.5 43.7L150.8 43.7ZM38.5 170.4L70.8 185.7L86.1 153.4L53.8 138.1ZM70.8 146.2L103.2 161.4L118.4 129.1L86.1 113.8ZM40.3 87.6L72.7 102.8L87.9 70.5L55.6 55.2ZM189.4 395.4L222.1 409.9L236.6 377.3L204 362.7ZM214.8 428.9L247.8 442.5L261.4 409.4L228.4 395.8ZM240 462.2L273.1 475.6L286.5 442.4L253.4 429ZM265.3 494.7L298.4 508.2L311.9 475.1L278.8 461.6ZM76.4 385.6L109.1 400.1L123.6 367.4L90.9 352.9ZM90.9 352.9L123.6 367.4L138.1 334.8L105.5 320.3ZM446.5 528.8L479.6 542.3L493.1 509.2L460 495.7ZM150.8 115.2L186.5 115.2L186.5 79.5L150.8 79.5ZM150.7 222.6L186.5 222.6L186.5 186.9L150.8 186.9ZM139.4 255.3L172.1 269.7L186.5 237L153.8 222.6ZM139.4 294.4L172 308.9L186.5 276.2L153.8 261.7ZM103.2 77.7L135.5 93L150.8 60.6L118.4 45.4ZM70.8 62.4L103.2 77.7L118.4 45.4L86.1 30.1ZM73.1 226.3L105.4 241.5L120.7 209.2L88.3 194ZM105.5 320.3L138.1 334.8L152.7 302.1L120 287.6ZM106 281.3L138.6 295.9L153.2 263.2L120.5 248.7ZM40.6 250.5L72.9 265.7L88.2 233.4L55.8 218.2ZM73.3 266.8L106 281.3L120.5 248.7L87.8 234.1ZM106 242.2L138.6 256.7L153.2 224.1L120.5 209.6ZM8.3 235.2L40.6 250.5L55.8 218.2L23.5 202.9ZM40.7 211L73.1 226.3L88.3 194L56 178.7ZM8.4 195.8L40.7 211L56 178.7L23.7 163.4ZM103.2 121.9L135.5 137.2L150.8 104.8L118.4 89.6ZM72.7 102.8L105 118.1L120.2 85.7L87.9 70.5ZM43.7 43.7L79.5 43.7L79.5 8L43.7 8ZM160.4 460.7L193 475.3L207.6 442.6L174.9 428.1ZM222.5 544L258.2 544L258.2 508.3L222.5 508.3ZM420.4 497.4L453.5 510.9L467 477.8L433.9 464.3ZM460 495.7L493.1 509.2L506.6 476.1L473.5 462.6Z"/><path class="mark" d="M8 544L43.7 544L43.7 508.3L8 508.3ZM8 508.3L43.7 508.3L43.7 472.5L8 472.5ZM8 472.5L43.7 472.5L43.7 436.8L8 436.8ZM8 436.8L43.7 436.8L43.7 401L8 401ZM8 401L43.7 401L43.7 365.3L8 365.3ZM8 365.3L43.7 365.3L43.7 329.5L8 329.5ZM8 329.5L43.7 329.5L43.7 293.8L8 293.8ZM43.7 544L79.5 544L79.5 508.3L43.7 508.3ZM43.7 508.3L79.5 508.3L79.5 472.5L43.7 472.5ZM43.7 472.5L79.5 472.5L79.5 436.8L43.7 436.8ZM43.7 436.8L79.5 436.8L79.5 401L43.7 401ZM58.3 338.4L90.9 352.9L105.5 320.3L72.8 305.7ZM508.3 544L544 544L544 508.3L508.3 508.3ZM436.8 258.2L472.5 258.2L472.5 222.5L436.8 222.5ZM436.8 294L472.5 294L472.5 258.2L436.8 258.2ZM401 258.2L436.8 258.2L436.8 222.5L401 222.5ZM401 294L436.8 294L436.8 258.2L401 258.2ZM365.3 258.2L401 258.2L401 222.5L365.3 222.5ZM365.3 294L401 294L401 258.2L365.3 258.2ZM329.5 258.2L365.3 258.2L365.3 222.5L329.5 222.5ZM329.5 294L365.3 294L365.3 258.2L329.5 258.2ZM293.8 222.5L329.5 222.5L329.5 186.7L293.8 186.7ZM293.8 258.2L329.5 258.2L329.5 222.5L293.8 222.5ZM293.8 294L329.5 294L329.5 258.2L293.8 258.2ZM258 222.5L293.8 222.5L293.8 186.7L258 186.7ZM258 258.2L293.8 258.2L293.8 222.5L258 222.5ZM258 294L293.8 294L293.8 258.2L258 258.2ZM222.3 222.5L258 222.5L258 186.7L222.3 186.7ZM222.3 258.2L258 258.2L258 222.5L222.3 222.5ZM222.3 294L258 294L258 258.2L222.3 258.2ZM186.5 79.5L222.3 79.5L222.3 43.7L186.5 43.7ZM186.5 115.2L222.3 115.2L222.3 79.5L186.5 79.5ZM186.5 222.5L222.3 222.5L222.3 186.7L186.5 186.7ZM186.5 258.2L222.3 258.2L222.3 222.5L186.5 222.5ZM186.5 294L222.3 294L222.3 258.2L186.5 258.2ZM150.8 79.5L186.5 79.5L186.5 43.7L150.8 43.7ZM38.5 170.4L70.8 185.7L86.1 153.4L53.8 138.1ZM70.8 146.2L103.2 161.4L118.4 129.1L86.1 113.8ZM40.3 87.6L72.7 102.8L87.9 70.5L55.6 55.2ZM189.4 395.4L222.1 409.9L236.6 377.3L204 362.7ZM214.8 428.9L247.8 442.5L261.4 409.4L228.4 395.8ZM240 462.2L273.1 475.6L286.5 442.4L253.4 429ZM265.3 494.7L298.4 508.2L311.9 475.1L278.8 461.6ZM76.4 385.6L109.1 400.1L123.6 367.4L90.9 352.9ZM90.9 352.9L123.6 367.4L138.1 334.8L105.5 320.3ZM446.5 528.8L479.6 542.3L493.1 509.2L460 495.7ZM150.8 115.2L186.5 115.2L186.5 79.5L150.8 79.5ZM150.7 222.6L186.5 222.6L186.5 186.9L150.8 186.9ZM139.4 255.3L172.1 269.7L186.5 237L153.8 222.6ZM139.4 294.4L172 308.9L186.5 276.2L153.8 261.7ZM103.2 77.7L135.5 93L150.8 60.6L118.4 45.4ZM70.8 62.4L103.2 77.7L118.4 45.4L86.1 30.1ZM73.1 226.3L105.4 241.5L120.7 209.2L88.3 194ZM105.5 320.3L138.1 334.8L152.7 302.1L120 287.6ZM106 281.3L138.6 295.9L153.2 263.2L120.5 248.7ZM40.6 250.5L72.9 265.7L88.2 233.4L55.8 218.2ZM73.3 266.8L106 281.3L120.5 248.7L87.8 234.1ZM106 242.2L138.6 256.7L153.2 224.1L120.5 209.6ZM8.3 235.2L40.6 250.5L55.8 218.2L23.5 202.9ZM40.7 211L73.1 226.3L88.3 194L56 178.7ZM8.4 195.8L40.7 211L56 178.7L23.7 163.4ZM103.2 121.9L135.5 137.2L150.8 104.8L118.4 89.6ZM72.7 102.8L105 118.1L120.2 85.7L87.9 70.5ZM43.7 43.7L79.5 43.7L79.5 8L43.7 8ZM160.4 460.7L193 475.3L207.6 442.6L174.9 428.1ZM222.5 544L258.2 544L258.2 508.3L222.5 508.3ZM420.4 497.4L453.5 510.9L467 477.8L433.9 464.3ZM460 495.7L493.1 509.2L506.6 476.1L473.5 462.6Z"/></svg><figcaption><span class="role">Regularized, same</span><span class="muted">W-known-best-n211-regularized, side relation same</span><span class="muted">U n=211 known best: side ~ 14.99354963 (certified upper bound)</span><span class="marks">Outlined, by source number: moved beyond 1e-3, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 43, 44, 52, 53, 60, 61, 68, 69, 75, 76, 77, 83, 84, 85, 91, 92, 93, 95, 96, 99, 100, 101, 103, 105, 108, 109, 112 and 27 more; turned, 6, 7, 112, 120, 143, 158, 159, 160, 162, 178, 181, 184, 188, 193, 210</span></figcaption></figure><figure class="panel"><svg class="drawing" viewBox="0 0 552 552" role="img" aria-labelledby="n211-layer-title"><title id="n211-layer-title">Current layer, n = 211: W-known-best-n211-regularized, by regularize_axis_components/2</title><rect width="552" height="552" fill="#ffffff"/><g fill-opacity="1.0"><g fill="#257260"><path id="n211-layer-f0" vector-effect="non-scaling-stroke" d="M8 544L43.7 544L43.7 508.3L8 508.3ZM8 508.3L43.7 508.3L43.7 472.5L8 472.5ZM43.7 544L79.5 544L79.5 508.3L43.7 508.3ZM43.7 508.3L79.5 508.3L79.5 472.5L43.7 472.5ZM43.7 472.5L79.5 472.5L79.5 436.8L43.7 436.8ZM79.5 544L115.2 544L115.2 508.3L79.5 508.3ZM508.3 43.7L544 43.7L544 8L508.3 8ZM508.3 79.5L544 79.5L544 43.7L508.3 43.7ZM508.3 115.2L544 115.2L544 79.5L508.3 79.5ZM508.3 151L544 151L544 115.2L508.3 115.2ZM508.3 186.7L544 186.7L544 151L508.3 151ZM508.3 222.5L544 222.5L544 186.7L508.3 186.7ZM508.3 258.2L544 258.2L544 222.5L508.3 222.5ZM508.3 294L544 294L544 258.2L508.3 258.2ZM508.3 329.7L544 329.7L544 294L508.3 294ZM508.3 365.5L544 365.5L544 329.7L508.3 329.7ZM508.3 401.2L544 401.2L544 365.5L508.3 365.5ZM472.5 43.7L508.3 43.7L508.3 8L472.5 8ZM472.5 79.5L508.3 79.5L508.3 43.7L472.5 43.7ZM472.5 115.2L508.3 115.2L508.3 79.5L472.5 79.5ZM472.5 151L508.3 151L508.3 115.2L472.5 115.2ZM472.5 186.7L508.3 186.7L508.3 151L472.5 151ZM472.5 222.5L508.3 222.5L508.3 186.7L472.5 186.7ZM472.5 258.2L508.3 258.2L508.3 222.5L472.5 222.5ZM472.5 294L508.3 294L508.3 258.2L472.5 258.2ZM472.5 329.7L508.3 329.7L508.3 294L472.5 294ZM472.5 365.5L508.3 365.5L508.3 329.7L472.5 329.7ZM436.8 43.7L472.5 43.7L472.5 8L436.8 8ZM436.8 79.5L472.5 79.5L472.5 43.7L436.8 43.7ZM436.8 115.2L472.5 115.2L472.5 79.5L436.8 79.5ZM436.8 151L472.5 151L472.5 115.2L436.8 115.2ZM436.8 186.7L472.5 186.7L472.5 151L436.8 151ZM436.8 222.5L472.5 222.5L472.5 186.7L436.8 186.7ZM436.8 258.2L472.5 258.2L472.5 222.5L436.8 222.5ZM436.8 294L472.5 294L472.5 258.2L436.8 258.2ZM436.8 329.7L472.5 329.7L472.5 294L436.8 294ZM401 43.7L436.8 43.7L436.8 8L401 8ZM401 79.5L436.8 79.5L436.8 43.7L401 43.7ZM401 115.2L436.8 115.2L436.8 79.5L401 79.5ZM401 151L436.8 151L436.8 115.2L401 115.2ZM401 186.7L436.8 186.7L436.8 151L401 151ZM401 222.5L436.8 222.5L436.8 186.7L401 186.7ZM401 258.2L436.8 258.2L436.8 222.5L401 222.5ZM401 294L436.8 294L436.8 258.2L401 258.2ZM365.3 43.7L401 43.7L401 8L365.3 8ZM365.3 79.5L401 79.5L401 43.7L365.3 43.7ZM365.3 115.2L401 115.2L401 79.5L365.3 79.5ZM365.3 151L401 151L401 115.2L365.3 115.2ZM365.3 186.7L401 186.7L401 151L365.3 151ZM365.3 222.5L401 222.5L401 186.7L365.3 186.7ZM365.3 258.2L401 258.2L401 222.5L365.3 222.5ZM365.3 294L401 294L401 258.2L365.3 258.2ZM329.5 43.7L365.3 43.7L365.3 8L329.5 8ZM329.5 79.5L365.3 79.5L365.3 43.7L329.5 43.7ZM329.5 115.2L365.3 115.2L365.3 79.5L329.5 79.5ZM329.5 151L365.3 151L365.3 115.2L329.5 115.2ZM329.5 186.7L365.3 186.7L365.3 151L329.5 151ZM329.5 222.5L365.3 222.5L365.3 186.7L329.5 186.7ZM329.5 258.2L365.3 258.2L365.3 222.5L329.5 222.5ZM329.5 294L365.3 294L365.3 258.2L329.5 258.2ZM293.8 43.7L329.5 43.7L329.5 8L293.8 8ZM293.8 79.5L329.5 79.5L329.5 43.7L293.8 43.7ZM293.8 115.2L329.5 115.2L329.5 79.5L293.8 79.5ZM293.8 151L329.5 151L329.5 115.2L293.8 115.2ZM293.8 186.7L329.5 186.7L329.5 151L293.8 151ZM293.8 222.5L329.5 222.5L329.5 186.7L293.8 186.7ZM293.8 258.2L329.5 258.2L329.5 222.5L293.8 222.5ZM258 43.7L293.8 43.7L293.8 8L258 8ZM258 79.5L293.8 79.5L293.8 43.7L258 43.7ZM258 115.2L293.8 115.2L293.8 79.5L258 79.5ZM258 151L293.8 151L293.8 115.2L258 115.2ZM258 186.7L293.8 186.7L293.8 151L258 151ZM258 222.5L293.8 222.5L293.8 186.7L258 186.7ZM222.3 43.7L258 43.7L258 8L222.3 8ZM222.3 79.5L258 79.5L258 43.7L222.3 43.7ZM222.3 115.2L258 115.2L258 79.5L222.3 79.5ZM222.3 151L258 151L258 115.2L222.3 115.2ZM222.3 186.7L258 186.7L258 151L222.3 151ZM186.5 43.7L222.3 43.7L222.3 8L186.5 8ZM186.5 79.5L222.3 79.5L222.3 43.7L186.5 43.7ZM186.5 115.2L222.3 115.2L222.3 79.5L186.5 79.5ZM186.5 151L222.3 151L222.3 115.2L186.5 115.2ZM150.8 43.7L186.5 43.7L186.5 8L150.8 8ZM79.5 508.3L115.2 508.3L115.2 472.5L79.5 472.5ZM79.5 472.5L115.2 472.5L115.2 436.8L79.5 436.8ZM401 329.7L436.8 329.7L436.8 294L401 294ZM115.2 544L151 544L151 508.3L115.2 508.3ZM115.2 508.3L151 508.3L151 472.5L115.2 472.5ZM151 544L186.7 544L186.7 508.3L151 508.3Z"/></g><g fill="#36816e"><path id="n211-layer-f1" vector-effect="non-scaling-stroke" d="M8 472.5L43.7 472.5L43.7 436.8L8 436.8ZM508.3 544L544 544L544 508.3L508.3 508.3ZM293.8 294L329.5 294L329.5 258.2L293.8 258.2ZM258 258.2L293.8 258.2L293.8 222.5L258 222.5ZM222.3 222.5L258 222.5L258 186.7L222.3 186.7ZM222.3 258.2L258 258.2L258 222.5L222.3 222.5ZM186.5 186.7L222.3 186.7L222.3 151L186.5 151ZM150.8 79.5L186.5 79.5L186.5 43.7L150.8 43.7ZM8 43.7L43.7 43.7L43.7 8L8 8ZM436.8 365.5L472.5 365.5L472.5 329.7L436.8 329.7ZM365.3 329.7L401 329.7L401 294L365.3 294ZM329.5 329.7L365.3 329.7L365.3 294L329.5 294ZM150.8 115.2L186.5 115.2L186.5 79.5L150.8 79.5ZM150.8 151L186.5 151L186.5 115.2L150.8 115.2ZM186.7 544L222.5 544L222.5 508.3L186.7 508.3ZM222.5 544L258.2 544L258.2 508.3L222.5 508.3ZM258.2 544L294 544L294 508.3L258.2 508.3Z"/></g><g fill="#5fa995"><path id="n211-layer-f2" vector-effect="non-scaling-stroke" d="M8 436.4L43.7 436.4L43.7 400.7L8 400.7ZM8 400.4L43.7 400.4L43.7 364.7L8 364.7ZM257.8 294L293.6 294L293.6 258.2L257.8 258.2ZM186.5 258.2L222.3 258.2L222.3 222.5L186.5 222.5ZM186.3 294L222.1 294L222.1 258.2L186.3 258.2ZM257.5 329.7L293.3 329.7L293.3 294L257.5 294ZM186 329.7L221.8 329.7L221.8 294L186 294Z"/></g><g fill="#b9e53c"><path id="n211-layer-f3" vector-effect="non-scaling-stroke" d="M8.1 364.5L43.8 364.5L43.8 328.8L8.1 328.8ZM186.7 494.7L219.8 508.3L233.4 475.2L200.3 461.6Z"/></g><g fill="#f09f5f"><path id="n211-layer-f4" vector-effect="non-scaling-stroke" d="M8.1 328.7L43.8 328.7L43.8 292.9L8.1 292.9ZM243.4 363.3L277 375.5L289.2 341.9L255.6 329.7Z"/></g><g fill="#4b9582"><path id="n211-layer-f5" vector-effect="non-scaling-stroke" d="M43.7 436.8L79.5 436.8L79.5 401L43.7 401ZM222.1 294L257.8 294L257.8 258.2L222.1 258.2ZM115 43.7L150.8 43.7L150.8 8L115 8ZM79.5 436.8L115.2 436.8L115.2 401L79.5 401ZM508.3 437L544 437L544 401.2L508.3 401.2ZM472.5 401.2L508.3 401.2L508.3 365.5L472.5 365.5ZM293.8 329.7L329.5 329.7L329.5 294L293.8 294ZM221.8 329.7L257.5 329.7L257.5 294L221.8 294ZM150.8 186.7L186.5 186.7L186.5 151L150.8 151ZM115.2 472.5L151 472.5L151 436.8L115.2 436.8ZM151 508.3L186.7 508.3L186.7 472.5L151 472.5ZM508.3 508.3L544 508.3L544 472.5L508.3 472.5ZM8 79.5L43.7 79.5L43.7 43.7L8 43.7ZM294 544L329.7 544L329.7 508.3L294 508.3ZM401 365.5L436.8 365.5L436.8 329.7L401 329.7Z"/></g><g fill="#dd87b8"><path id="n211-layer-f6" vector-effect="non-scaling-stroke" d="M43.7 371L76.4 385.6L90.9 352.9L58.3 338.4ZM55.8 337.3L88.4 351.8L103 319.1L70.3 304.6ZM174.9 428.1L207.5 442.6L222.1 409.9L189.4 395.4ZM8 275.5L40.7 290L55.2 257.4L22.5 242.8ZM76.2 386.1L108.8 400.6L123.4 368L90.7 353.4ZM90.8 353.2L123.5 367.7L138 335.1L105.4 320.5ZM103.1 77.6L135.4 92.9L150.7 60.6L118.4 45.3ZM105.4 320.4L138.1 334.9L152.6 302.3L119.9 287.7ZM105.7 281.2L138.4 295.8L152.9 263.1L120.3 248.6ZM73.1 266.7L105.7 281.2L120.3 248.6L87.6 234ZM105.6 242.1L138.3 256.6L152.8 223.9L120.1 209.4Z"/></g><g fill="#74bda9"><path id="n211-layer-f7" vector-effect="non-scaling-stroke" d="M186.3 222.5L222 222.5L222 186.7L186.3 186.7Z"/></g><g fill="#da8f7b"><path id="n211-layer-f8" vector-effect="non-scaling-stroke" d="M38.6 170.3L70.9 185.6L86.2 153.3L53.8 138ZM70.9 146L103.3 161.3L118.5 128.9L86.2 113.7ZM40 87.4L72.4 102.7L87.6 70.4L55.3 55.1ZM70.7 62.4L103.1 77.6L118.3 45.3L86 30.1ZM72.7 226.1L105 241.4L120.3 209L87.9 193.8ZM40.3 250.4L72.7 265.6L87.9 233.3L55.6 218ZM40.3 210.8L72.7 226.1L87.9 193.8L55.6 178.5ZM8 195.5L40.3 210.7L55.6 178.4L23.3 163.1ZM103.2 161.4L135.5 176.7L150.8 144.4L118.4 129.1ZM8 151.4L40.3 166.6L55.6 134.3L23.3 119ZM72.4 102.7L104.7 118L120 85.6L87.7 70.4Z"/></g><g fill="#d27a63"><path id="n211-layer-f9" vector-effect="non-scaling-stroke" d="M70.8 185.7L103.2 201L118.4 168.6L86.1 153.4ZM40.3 127.1L72.7 142.3L87.9 110L55.6 94.8ZM103.2 201L135.5 216.2L150.8 183.9L118.4 168.6ZM8 111.8L40.3 127.1L55.6 94.8L23.3 79.5Z"/></g><g fill="#cb5698"><path id="n211-layer-f10" vector-effect="non-scaling-stroke" d="M149.6 397L182.2 411.5L196.8 378.9L164.1 364.3ZM124.3 365.9L157 380.4L171.5 347.8L138.8 333.2Z"/></g><g fill="#3ed5ec"><path id="n211-layer-f11" vector-effect="non-scaling-stroke" d="M189.5 395.4L222.1 409.9L236.6 377.3L204 362.8ZM282.1 363.5L316 374.8L327.3 340.8L293.3 329.6Z"/></g><g fill="#76d6f8"><path id="n211-layer-f12" vector-effect="non-scaling-stroke" d="M200.2 461.5L233.3 475.1L246.9 442.1L213.8 428.5ZM214.8 428.9L247.9 442.5L261.5 409.4L228.4 395.8ZM43.8 43.8L79.5 43.8L79.5 8L43.8 8Z"/></g><g fill="#a585dd"><path id="n211-layer-f13" vector-effect="non-scaling-stroke" d="M229.8 396.4L262.9 410L276.5 376.9L243.4 363.3ZM449.6 429.9L481.8 445.3L497.2 413L465 397.6Z"/></g><g fill="#e4c984"><path id="n211-layer-f14" vector-effect="non-scaling-stroke" d="M225.4 494.9L258.6 508.3L272 475.1L238.8 461.7ZM240 462.2L273.2 475.6L286.6 442.4L253.4 429.1ZM255 429.7L288.2 443.1L301.6 409.9L268.4 396.6ZM268.5 396.6L301.7 410L315 376.8L281.9 363.5ZM103 121.6L135.4 136.8L150.6 104.5L118.3 89.3Z"/></g><g fill="#9ce092"><path id="n211-layer-f15" vector-effect="non-scaling-stroke" d="M265.4 494.8L298.5 508.2L312 475.1L278.9 461.6ZM461.5 496.8L494.7 510.2L508.1 477.1L475 463.7Z"/></g><g fill="#3fa8f1"><path id="n211-layer-f16" vector-effect="non-scaling-stroke" d="M280.4 462.2L313.5 475.7L327 442.6L293.9 429.1ZM293.9 429.1L327 442.6L340.5 409.5L307.4 396ZM307.4 396L340.5 409.5L354 376.4L320.9 362.9ZM8 235.1L40.3 250.4L55.6 218.1L23.3 202.8ZM406.9 530.5L440.1 544L453.5 510.9L420.4 497.4ZM422.2 498.1L455.3 511.6L468.8 478.5L435.7 465Z"/></g><g fill="#2399ec"><path id="n211-layer-f17" vector-effect="non-scaling-stroke" d="M304.4 497.9L337.5 511.4L351 478.3L317.9 464.8ZM344.9 398.6L378 412.1L391.5 379L358.4 365.5ZM370.2 431.2L403.3 444.7L416.8 411.6L383.7 398.1ZM395.3 464.3L428.4 477.8L441.9 444.7L408.8 431.2ZM329.7 530.5L362.8 544L376.3 510.9L343.2 497.4ZM368.3 530.5L401.4 544L414.9 510.9L381.8 497.4Z"/></g><g fill="#1588d8"><path id="n211-layer-f18" vector-effect="non-scaling-stroke" d="M317.9 464.8L351 478.3L364.5 445.2L331.4 431.7ZM331.4 431.7L364.5 445.2L378 412.1L344.9 398.6ZM343.2 497.4L376.3 510.9L389.8 477.8L356.7 464.3ZM356.7 464.3L389.8 477.8L403.3 444.7L370.2 431.2ZM381.8 497.4L414.9 510.9L428.4 477.8L395.3 464.3Z"/></g><g fill="#f4b5c0"><path id="n211-layer-f19" vector-effect="non-scaling-stroke" d="M384.6 397.3L417.3 411.8L431.8 379.1L399.1 364.6ZM474.5 460.1L506.5 476L522.4 444L490.4 428.1Z"/></g><g fill="#26e994"><path id="n211-layer-f20" vector-effect="non-scaling-stroke" d="M409.2 430.3L441.9 444.7L456.4 412L423.6 397.5ZM160.6 460.9L193.3 475.4L207.8 442.7L175.2 428.2ZM425.1 398.2L457.8 412.6L472.2 379.9L439.5 365.5Z"/></g><g fill="#c7c9f8"><path id="n211-layer-f21" vector-effect="non-scaling-stroke" d="M434.1 463.9L467 477.8L480.9 444.8L448 431Z"/></g><g fill="#d46ea8"><path id="n211-layer-f22" vector-effect="non-scaling-stroke" d="M40.2 291.2L72.8 305.7L87.3 273.1L54.7 258.5ZM138.8 333.2L171.5 347.8L186 315.1L153.4 300.6ZM72.8 305.7L105.5 320.3L120 287.6L87.3 273.1ZM109.8 398.6L142.4 413.1L157 380.4L124.3 365.9ZM135.1 429.7L167.7 444.2L182.2 411.5L149.6 397ZM164.1 364.3L196.8 378.9L211.3 346.2L178.6 331.7Z"/></g><g fill="#f3b85e"><path id="n211-layer-f23" vector-effect="non-scaling-stroke" d="M448 530.1L481.1 543.6L494.6 510.5L461.5 497Z"/></g><g fill="#1fe8e4"><path id="n211-layer-f24" vector-effect="non-scaling-stroke" d="M150.3 222.5L186 222.5L186 186.8L150.3 186.8Z"/></g><g fill="#8daae4"><path id="n211-layer-f25" vector-effect="non-scaling-stroke" d="M139.2 255.3L172 269.5L186.2 236.7L153.4 222.5Z"/></g><g fill="#d2a9e7"><path id="n211-layer-f26" vector-effect="non-scaling-stroke" d="M139.1 294.3L171.8 308.7L186.3 276.1L153.6 261.6Z"/></g><g fill="#dc84d2"><path id="n211-layer-f27" vector-effect="non-scaling-stroke" d="M204.8 363.1L238.2 375.9L251 342.5L217.6 329.7ZM327.2 365.5L363 365.5L363 329.8L327.3 329.7ZM363 365.5L398.7 365.5L398.8 329.8L363 329.7Z"/></g></g><g fill="none" stroke="#000000" stroke-width="1.25" stroke-linejoin="round"><use href="#n211-layer-f0"/><use href="#n211-layer-f1"/><use href="#n211-layer-f2"/><use href="#n211-layer-f3"/><use href="#n211-layer-f4"/><use href="#n211-layer-f5"/><use href="#n211-layer-f6"/><use href="#n211-layer-f7"/><use href="#n211-layer-f8"/><use href="#n211-layer-f9"/><use href="#n211-layer-f10"/><use href="#n211-layer-f11"/><use href="#n211-layer-f12"/><use href="#n211-layer-f13"/><use href="#n211-layer-f14"/><use href="#n211-layer-f15"/><use href="#n211-layer-f16"/><use href="#n211-layer-f17"/><use href="#n211-layer-f18"/><use href="#n211-layer-f19"/><use href="#n211-layer-f20"/><use href="#n211-layer-f21"/><use href="#n211-layer-f22"/><use href="#n211-layer-f23"/><use href="#n211-layer-f24"/><use href="#n211-layer-f25"/><use href="#n211-layer-f26"/><use href="#n211-layer-f27"/></g><rect x="8" y="8" width="536" height="536" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke"/><path class="mark-halo" d="M8 544L43.7 544L43.7 508.3L8 508.3ZM8 508.3L43.7 508.3L43.7 472.5L8 472.5ZM8 472.5L43.7 472.5L43.7 436.8L8 436.8ZM8 436.4L43.7 436.4L43.7 400.7L8 400.7ZM43.7 544L79.5 544L79.5 508.3L43.7 508.3ZM43.7 508.3L79.5 508.3L79.5 472.5L43.7 472.5ZM43.7 472.5L79.5 472.5L79.5 436.8L43.7 436.8ZM43.7 436.8L79.5 436.8L79.5 401L43.7 401ZM508.3 544L544 544L544 508.3L508.3 508.3ZM436.8 258.2L472.5 258.2L472.5 222.5L436.8 222.5ZM436.8 294L472.5 294L472.5 258.2L436.8 258.2ZM401 258.2L436.8 258.2L436.8 222.5L401 222.5ZM401 294L436.8 294L436.8 258.2L401 258.2ZM365.3 258.2L401 258.2L401 222.5L365.3 222.5ZM365.3 294L401 294L401 258.2L365.3 258.2ZM329.5 258.2L365.3 258.2L365.3 222.5L329.5 222.5ZM329.5 294L365.3 294L365.3 258.2L329.5 258.2ZM293.8 222.5L329.5 222.5L329.5 186.7L293.8 186.7ZM293.8 258.2L329.5 258.2L329.5 222.5L293.8 222.5ZM293.8 294L329.5 294L329.5 258.2L293.8 258.2ZM258 222.5L293.8 222.5L293.8 186.7L258 186.7ZM258 258.2L293.8 258.2L293.8 222.5L258 222.5ZM222.3 222.5L258 222.5L258 186.7L222.3 186.7ZM222.3 258.2L258 258.2L258 222.5L222.3 222.5ZM186.5 79.5L222.3 79.5L222.3 43.7L186.5 43.7ZM186.5 115.2L222.3 115.2L222.3 79.5L186.5 79.5ZM186.3 222.5L222 222.5L222 186.7L186.3 186.7ZM186.5 258.2L222.3 258.2L222.3 222.5L186.5 222.5ZM186.3 294L222.1 294L222.1 258.2L186.3 258.2ZM150.8 79.5L186.5 79.5L186.5 43.7L150.8 43.7ZM150.8 115.2L186.5 115.2L186.5 79.5L150.8 79.5ZM222.5 544L258.2 544L258.2 508.3L222.5 508.3Z"/><path class="mark" d="M8 544L43.7 544L43.7 508.3L8 508.3ZM8 508.3L43.7 508.3L43.7 472.5L8 472.5ZM8 472.5L43.7 472.5L43.7 436.8L8 436.8ZM8 436.4L43.7 436.4L43.7 400.7L8 400.7ZM43.7 544L79.5 544L79.5 508.3L43.7 508.3ZM43.7 508.3L79.5 508.3L79.5 472.5L43.7 472.5ZM43.7 472.5L79.5 472.5L79.5 436.8L43.7 436.8ZM43.7 436.8L79.5 436.8L79.5 401L43.7 401ZM508.3 544L544 544L544 508.3L508.3 508.3ZM436.8 258.2L472.5 258.2L472.5 222.5L436.8 222.5ZM436.8 294L472.5 294L472.5 258.2L436.8 258.2ZM401 258.2L436.8 258.2L436.8 222.5L401 222.5ZM401 294L436.8 294L436.8 258.2L401 258.2ZM365.3 258.2L401 258.2L401 222.5L365.3 222.5ZM365.3 294L401 294L401 258.2L365.3 258.2ZM329.5 258.2L365.3 258.2L365.3 222.5L329.5 222.5ZM329.5 294L365.3 294L365.3 258.2L329.5 258.2ZM293.8 222.5L329.5 222.5L329.5 186.7L293.8 186.7ZM293.8 258.2L329.5 258.2L329.5 222.5L293.8 222.5ZM293.8 294L329.5 294L329.5 258.2L293.8 258.2ZM258 222.5L293.8 222.5L293.8 186.7L258 186.7ZM258 258.2L293.8 258.2L293.8 222.5L258 222.5ZM222.3 222.5L258 222.5L258 186.7L222.3 186.7ZM222.3 258.2L258 258.2L258 222.5L222.3 222.5ZM186.5 79.5L222.3 79.5L222.3 43.7L186.5 43.7ZM186.5 115.2L222.3 115.2L222.3 79.5L186.5 79.5ZM186.3 222.5L222 222.5L222 186.7L186.3 186.7ZM186.5 258.2L222.3 258.2L222.3 222.5L186.5 222.5ZM186.3 294L222.1 294L222.1 258.2L186.3 258.2ZM150.8 79.5L186.5 79.5L186.5 43.7L150.8 43.7ZM150.8 115.2L186.5 115.2L186.5 79.5L150.8 79.5ZM222.5 544L258.2 544L258.2 508.3L222.5 508.3Z"/></svg><figcaption><span class="role">Current layer</span><span class="muted">W-known-best-n211-regularized, by regularize_axis_components/2</span><span class="muted">U n=211 regularized: side ~ 14.99354963 (certified upper bound)</span><span class="marks">Outlined, by source number: moved beyond 1e-3, 1, 2, 3, 4, 8, 9, 10, 11, 15, 43, 44, 52, 53, 60, 61, 68, 69, 75, 76, 77, 83, 84, 91, 92, 95, 96, 99, 100, 101, 103, 155, 197; turned, none</span></figcaption></figure></div><div class="table-scroll"><table class="measures"><thead><tr><th scope="col">Measured</th><th scope="col">Source</th><th scope="col">Regularized</th><th scope="col">Current layer</th></tr></thead><tbody><tr><th scope="row">Hue classes</th><td>32 (1 at 0°, 31 other)</td><td>17 (1 at 0°, 16 other)</td><td>32 (1 at 0°, 31 other)</td></tr><tr><th scope="row">House shades <span class="sub">squares with 0 to 4 sides, as drawn</span></th><td><span class="hist" title="squares with 0, 1, 2, 3, 4 sides"><span>86</span><span>35</span><span>23</span><span>21</span><span>46</span></span></td><td><span class="hist" title="squares with 0, 1, 2, 3, 4 sides"><span>27</span><span>37</span><span>30</span><span>20</span><span>97</span></span></td><td><span class="hist" title="squares with 0, 1, 2, 3, 4 sides"><span>60</span><span>23</span><span>22</span><span>17</span><span>89</span></span></td></tr><tr><th scope="row">Four-side squares</th><td class="num">46</td><td class="num">97</td><td class="num">89</td></tr><tr><th scope="row">Stage counts <span class="sub">gap 0.01, half a degree</span></th><td><span class="hist" title="squares with 0, 1, 2, 3, 4 sides"><span>24</span><span>46</span><span>28</span><span>18</span><span>95</span></span></td><td><span class="hist" title="squares with 0, 1, 2, 3, 4 sides"><span>20</span><span>43</span><span>30</span><span>20</span><span>98</span></span></td><td><span class="hist" title="squares with 0, 1, 2, 3, 4 sides"><span>24</span><span>41</span><span>30</span><span>16</span><span>100</span></span></td></tr><tr><th scope="row">Census replica of the house rule</th><td>agrees</td><td>agrees</td><td>agrees</td></tr><tr><th scope="row">Side</th><td class="num">s_W = 14.9935496263</td><td class="num">s − s_W = 0</td><td class="num">s − s_W = 0</td></tr><tr><th scope="row">Moves and turns <span class="sub">measured on the drawings</span></th><td>–</td><td>67 moved, 15 turned; largest 2.692e-01, 0.382°; symmetry 0</td><td>32 moved, 0 turned; largest 2.692e-01, 0°; symmetry 0</td></tr></tbody></table></div><dl class="facts"><dt>Decision</dt><dd><span class="chip chip-review">review</span> row 7, index record not recorded</dd><dt>Reason</dt><dd>12 per-square counts fell while no total did: for review</dd><dt>Status</dt><dd>ok; error not recorded</dd><dt>Side relation</dt><dd>same</dd><dt>Verified upper bound</dt><dd>U = 14.9935496262994211; s_V − U = -6.11e-17, below U: a register-result candidate</dd><dt>Identity (report)</dt><dd>of the same view: one to one yes, moved 67, largest move 2.692113e-1, largest turn 0.381777°, symmetry 0</dd><dt>Shades (report)</dt><dd>house <span class="hist" title="squares with 0, 1, 2, 3, 4 sides"><span>86</span><span>35</span><span>23</span><span>21</span><span>46</span></span> → <span class="hist" title="squares with 0, 1, 2, 3, 4 sides"><span>27</span><span>37</span><span>30</span><span>20</span><span>97</span></span>; stage <span class="hist" title="squares with 0, 1, 2, 3, 4 sides"><span>24</span><span>46</span><span>28</span><span>18</span><span>95</span></span> → <span class="hist" title="squares with 0, 1, 2, 3, 4 sides"><span>20</span><span>43</span><span>30</span><span>20</span><span>98</span></span></dd><dt>Regressions</dt><dd><span class="flag">square 84 stage 4 → 3, square 92 stage 4 → 3, square 100 stage 3 → 2, square 151 stage 2 → 1, square 152 stage 3 → 2, square 153 stage 2 → 1</span></dd><dt>Generator</dt><dd>evand-regularize at 675a5ea, patches none; variant conservative, style coincide, orientation 0</dd><dt>Level</dt><dd>2: same packing: traversable without expansion (angle moves path-checked; slides by construction)</dd><dt>Symmetry imposed</dt><dd>none</dd><dt>Angle changes</dt><dd>none</dd><dt>Rotation groups</dt><dd>32 → 17; merged [5,-0.008423841061094,0.0], [6,-0.021640178753427,0.0], [111,-23.95980161826506,-23.98654694156293], [119,-22.169837630353737,-22.181212874543103], [142,-22.189837963873543,-22.181212874543103], [157,-0.030181280991753,…</dd><dt>Exact routes</dt><dd>exact_verify yes, independent yes</dd><dt>Current layer</dt><dd>regularized</dd></dl><details><summary>118 squares moved, turned or changed a count in the regularized view</summary><div class="table-scroll"><table class="changes"><thead><tr><th class="num" scope="col">Square</th><th class="num" scope="col">In view</th><th class="num" scope="col">Move</th><th class="num" scope="col">Turn (°)</th><th class="num" scope="col">House</th><th class="num" scope="col">Stage</th></tr></thead><tbody><tr><td class="num">1</td><td class="num">1</td><td class="num">1.813e-03</td><td class="num">0</td><td class="num">2 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">2</td><td class="num">2</td><td class="num">5.997e-03</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">3</td><td class="num">3</td><td class="num">9.797e-03</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">3 → 4</td></tr><tr><td class="num">4</td><td class="num">4</td><td class="num">1.316e-02</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">3 → 4</td></tr><tr><td class="num">5</td><td class="num">5</td><td class="num">1.651e-02</td><td class="num">0</td><td class="num">1 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">6</td><td class="num">6</td><td class="num">2.001e-02</td><td class="num">0.00842</td><td class="num">0 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">7</td><td class="num">7</td><td class="num">2.333e-02</td><td class="num">0.0216</td><td class="num">0 → 2</td><td class="num">2 → 2</td></tr><tr><td class="num">8</td><td class="num">8</td><td class="num">1.813e-03</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">9</td><td class="num">9</td><td class="num">5.777e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">3 → 4</td></tr><tr><td class="num">10</td><td class="num">10</td><td class="num">1.512e-01</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">1 → 4</td></tr><tr><td class="num">11</td><td class="num">11</td><td class="num">1.558e-01</td><td class="num">0</td><td class="num">0 → 3</td><td class="num">1 → 3</td></tr><tr><td class="num">12</td><td class="num">12</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">0 → 2</td><td class="num">0 → 2</td></tr><tr><td class="num">13</td><td class="num">13</td><td class="num">7.699e-02</td><td class="num">0</td><td class="num">0 → 3</td><td class="num">0 → 3</td></tr><tr><td class="num">14</td><td class="num">14</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">15</td><td class="num">15</td><td class="num">2.692e-01</td><td class="num">0</td><td class="num">1 → 3</td><td class="num">1 → 3</td></tr><tr><td class="num">22</td><td class="num">22</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">32</td><td class="num">32</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">33</td><td class="num">33</td><td class="num">8.150e-04</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">34</td><td class="num">34</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">2 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">42</td><td class="num">42</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">43</td><td class="num">43</td><td class="num">1.393e-03</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">44</td><td class="num">44</td><td class="num">1.392e-03</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">45</td><td class="num">45</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">51</td><td class="num">51</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">52</td><td class="num">52</td><td class="num">2.073e-03</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">53</td><td class="num">53</td><td class="num">2.073e-03</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">59</td><td class="num">59</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">60</td><td class="num">60</td><td class="num">2.695e-03</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">61</td><td class="num">61</td><td class="num">2.697e-03</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">67</td><td class="num">67</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">2 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">68</td><td class="num">68</td><td class="num">3.225e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">69</td><td class="num">69</td><td class="num">3.376e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">74</td><td class="num">74</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">75</td><td class="num">75</td><td class="num">3.855e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">76</td><td class="num">76</td><td class="num">3.975e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">77</td><td class="num">77</td><td class="num">4.109e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">80</td><td class="num">80</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">82</td><td class="num">82</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">83</td><td class="num">83</td><td class="num">4.948e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">84</td><td class="num">84</td><td class="num">4.913e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">85</td><td class="num">85</td><td class="num">4.875e-03</td><td class="num">0</td><td class="num">0 → 3</td><td class="num"><span class="flag">4 → 3</span></td></tr><tr><td class="num">87</td><td class="num">87</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">2 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">88</td><td class="num">88</td><td class="num">9.309e-04</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">89</td><td class="num">89</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">90</td><td class="num">90</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">91</td><td class="num">91</td><td class="num">6.419e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">92</td><td class="num">92</td><td class="num">5.718e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">93</td><td class="num">93</td><td class="num">5.615e-03</td><td class="num">0</td><td class="num">0 → 3</td><td class="num"><span class="flag">4 → 3</span></td></tr><tr><td class="num">94</td><td class="num">94</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">95</td><td class="num">95</td><td class="num">1.592e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">96</td><td class="num">96</td><td class="num">1.596e-03</td><td class="num">0</td><td class="num">0 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">97</td><td class="num">97</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">98</td><td class="num">98</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">99</td><td class="num">99</td><td class="num">9.525e-03</td><td class="num">0</td><td class="num">0 → 3</td><td class="num">4 → 4</td></tr><tr><td class="num">100</td><td class="num">100</td><td class="num">7.426e-03</td><td class="num">0</td><td class="num">0 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">101</td><td class="num">101</td><td class="num">6.052e-03</td><td class="num">0</td><td class="num">0 → 2</td><td class="num"><span class="flag">3 → 2</span></td></tr><tr><td class="num">102</td><td class="num">102</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">103</td><td class="num">103</td><td class="num">2.136e-03</td><td class="num">0</td><td class="num">0 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">105</td><td class="num">105</td><td class="num">3.933e-03</td><td class="num">0</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">106</td><td class="num">106</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">1 → 2</td><td class="num">2 → 2</td></tr><tr><td class="num">108</td><td class="num">108</td><td class="num">5.246e-03</td><td class="num">0</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">109</td><td class="num">109</td><td class="num">8.834e-03</td><td class="num">8.53e-14</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">111</td><td class="num">111</td><td class="num">2.544e-04</td><td class="num">2.84e-14</td><td class="num">0 → 2</td><td class="num">2 → 2</td></tr><tr><td class="num">112</td><td class="num">112</td><td class="num">1.093e-03</td><td class="num">0.0267</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">114</td><td class="num">114</td><td class="num">1.564e-03</td><td class="num">1.42e-14</td><td class="num">0 → 0</td><td class="num">0 → 0</td></tr><tr><td class="num">117</td><td class="num">117</td><td class="num">2.028e-03</td><td class="num">1.42e-14</td><td class="num">0 → 0</td><td class="num">0 → 0</td></tr><tr><td class="num">120</td><td class="num">120</td><td class="num">2.856e-03</td><td class="num">0.0114</td><td class="num">0 → 0</td><td class="num">0 → 0</td></tr><tr><td class="num">121</td><td class="num">121</td><td class="num">9.043e-04</td><td class="num">0</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">122</td><td class="num">122</td><td class="num">5.717e-04</td><td class="num">1.42e-14</td><td class="num">0 → 2</td><td class="num">2 → 2</td></tr><tr><td class="num">123</td><td class="num">123</td><td class="num">2.528e-04</td><td class="num">0</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">138</td><td class="num">138</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">139</td><td class="num">139</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">3 → 4</td></tr><tr><td class="num">140</td><td class="num">140</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">1 → 2</td><td class="num">1 → 2</td></tr><tr><td class="num">141</td><td class="num">141</td><td class="num">1.567e-02</td><td class="num">0</td><td class="num">0 → 2</td><td class="num">1 → 2</td></tr><tr><td class="num">142</td><td class="num">142</td><td class="num">8.473e-03</td><td class="num">0</td><td class="num">0 → 3</td><td class="num">2 → 3</td></tr><tr><td class="num">143</td><td class="num">143</td><td class="num">5.751e-02</td><td class="num">0.00863</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">144</td><td class="num">144</td><td class="num">2.836e-04</td><td class="num">0</td><td class="num">1 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">148</td><td class="num">148</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">2 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">149</td><td class="num">149</td><td class="num">3.942e-05</td><td class="num">0</td><td class="num">0 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">150</td><td class="num">150</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">1 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">151</td><td class="num">151</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">1 → 2</td><td class="num">2 → 2</td></tr><tr><td class="num">152</td><td class="num">152</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">1 → 1</td><td class="num"><span class="flag">2 → 1</span></td></tr><tr><td class="num">153</td><td class="num">153</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">2 → 2</td><td class="num"><span class="flag">3 → 2</span></td></tr><tr><td class="num">154</td><td class="num">154</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">1 → 1</td><td class="num"><span class="flag">2 → 1</span></td></tr><tr><td class="num">155</td><td class="num">155</td><td class="num">3.032e-03</td><td class="num">0</td><td class="num">0 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">156</td><td class="num">156</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">2 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">157</td><td class="num">157</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">2 → 2</td><td class="num">2 → 3</td></tr><tr><td class="num">158</td><td class="num">158</td><td class="num">1.318e-02</td><td class="num">0.0196</td><td class="num">0 → 0</td><td class="num">1 → 2</td></tr><tr><td class="num">159</td><td class="num">159</td><td class="num">7.259e-03</td><td class="num">0.382</td><td class="num">0 → 0</td><td class="num">0 → 0</td></tr><tr><td class="num">160</td><td class="num">160</td><td class="num">6.886e-03</td><td class="num">0.00168</td><td class="num">0 → 0</td><td class="num">0 → 0</td></tr><tr><td class="num">162</td><td class="num">162</td><td class="num">2.904e-03</td><td class="num">0.00738</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">163</td><td class="num">163</td><td class="num">3.166e-03</td><td class="num">8.53e-14</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">164</td><td class="num">164</td><td class="num">1.168e-02</td><td class="num">0</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">166</td><td class="num">166</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">168</td><td class="num">168</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">3 → 4</td><td class="num">4 → 4</td></tr><tr><td class="num">169</td><td class="num">169</td><td class="num">4.843e-04</td><td class="num">0</td><td class="num">0 → 2</td><td class="num">2 → 2</td></tr><tr><td class="num">170</td><td class="num">170</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">2 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">171</td><td class="num">171</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">1 → 2</td><td class="num">1 → 2</td></tr><tr><td class="num">172</td><td class="num">172</td><td class="num">4.209e-03</td><td class="num">4.26e-14</td><td class="num">0 → 2</td><td class="num">2 → 2</td></tr><tr><td class="num">173</td><td class="num">173</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">1 → 3</td><td class="num">2 → 3</td></tr><tr><td class="num">174</td><td class="num">174</td><td class="num">7.037e-03</td><td class="num">4.26e-14</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">175</td><td class="num">175</td><td class="num">7.423e-03</td><td class="num">4.26e-14</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">176</td><td class="num">176</td><td class="num">7.257e-03</td><td class="num">0</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">177</td><td class="num">177</td><td class="num">1.094e-02</td><td class="num">8.53e-14</td><td class="num">0 → 0</td><td class="num">0 → 0</td></tr><tr><td class="num">178</td><td class="num">178</td><td class="num">7.682e-03</td><td class="num">0.00594</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">179</td><td class="num">179</td><td class="num">1.262e-02</td><td class="num">0</td><td class="num">0 → 2</td><td class="num">2 → 2</td></tr><tr><td class="num">181</td><td class="num">181</td><td class="num">1.384e-02</td><td class="num">0.0198</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">182</td><td class="num">182</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">184</td><td class="num">184</td><td class="num">9.692e-03</td><td class="num">0.00809</td><td class="num">0 → 0</td><td class="num">0 → 0</td></tr><tr><td class="num">186</td><td class="num">186</td><td class="num">7.994e-03</td><td class="num">0</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">187</td><td class="num">187</td><td class="num">2.064e-04</td><td class="num">0</td><td class="num">0 → 2</td><td class="num">2 → 2</td></tr><tr><td class="num">188</td><td class="num">188</td><td class="num">9.529e-04</td><td class="num">0.0119</td><td class="num">0 → 2</td><td class="num">2 → 2</td></tr><tr><td class="num">193</td><td class="num">193</td><td class="num">8.519e-03</td><td class="num">0.0081</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr><tr><td class="num">197</td><td class="num">197</td><td class="num">1.361e-03</td><td class="num">0</td><td class="num">0 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">199</td><td class="num">199</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">2 → 3</td><td class="num">3 → 3</td></tr><tr><td class="num">207</td><td class="num">207</td><td class="num">0.000e+00</td><td class="num">0</td><td class="num">0 → 1</td><td class="num">0 → 1</td></tr><tr><td class="num">208</td><td class="num">208</td><td class="num">5.384e-02</td><td class="num">0</td><td class="num">0 → 1</td><td class="num">0 → 1</td></tr><tr><td class="num">210</td><td class="num">210</td><td class="num">5.368e-02</td><td class="num">0.0838</td><td class="num">0 → 1</td><td class="num">1 → 1</td></tr></tbody></table></div></details></section><footer class="colophon">Written by <code>python -m devtools.regularize_gallery</code>. Drawings by <code>sqpack.render</code>; contact counts by <code>devtools.census_atlas_contact_shades</code>.</footer></main>

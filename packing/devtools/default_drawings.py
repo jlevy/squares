@@ -239,16 +239,6 @@ _RERUN3A_GRID = (
     ("regularize_grid_slack/1", "grid-slack-3a-rerun-deg5-1016"),
 )
 _RERUN3A_204_272 = (("evand-regularize", "evand-regularize-3a-rerun-s-1016"), *_RERUN3A_GRID)
-_RERUN3A_303 = (("evand-regularize", "evand-regularize-3a-rerun-303-1016"), *_RERUN3A_GRID)
-#: The same day both generators ran on the eight witnesses #614 adopted in 3b9fab84a
-#: (think-kpm3), 154's also adopted by #598 in 34e62125f.
-_RUN3B = (
-    ("evand-regularize", "evand-regularize-3b-1016"),
-    ("regularize_grid_slack/1", "grid-slack-3b-deg05-1016"),
-    ("regularize_grid_slack/1", "grid-slack-3b-deg1-1016"),
-    ("regularize_grid_slack/1", "grid-slack-3b-deg5-1016"),
-)
-_README_3B = "packing/atlas/known-best/README.md, the think-kpm3 paragraph of 16 October 2026"
 _OSTASHEV = "[Ostashev compositions 2026-10-12]"
 _OSTASHEV_REVISION = "fe43a64ecf2581cdbd11830e8a5be0989746c5d3"
 

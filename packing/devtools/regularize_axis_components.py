@@ -208,11 +208,13 @@ REVIEW_FIELDS = (
     "row",
     "source",
     "generator_version",
+    "gallery",
 )
 """What a review record holds (policy section 5): the count, the date, the reviewer, the
 decision and its reason, the generator, run and output it decided on, the row that sent
-the view to review, and the source witness's id and digest and the generator's version
-(`review_version`) it was made against."""
+the view to review, the source witness's id and digest and the generator's version
+(`review_version`) it was made against, and the gallery, the files that draw it for the
+reviewer, each in the repository."""
 REVIEW_VERSION = ("pin", "source_commit", "patches")
 """The fields of a generator's block in the index that are its version for a review: a
 re-pin or a patch makes a record lapse (policy section 5, re-review)."""
@@ -2310,6 +2312,12 @@ def review_problems(
             problems.append(f"{relative}: n={n} decides {record['decision']!r}")
         if record["row"] not in REVIEW_ROWS:
             problems.append(f"{relative}: n={n} reviews row {record['row']!r}")
+        gallery = record["gallery"]
+        problems.extend(
+            f"{relative}: n={n}'s gallery {path} is not in the repository"
+            for path in (gallery if isinstance(gallery, list) else [gallery])
+            if not (layout.repo / str(path)).is_file()
+        )
         entry = by_n.get(n)
         if entry is None:
             problems.append(f"{relative}: n={n} is not a count the index records")

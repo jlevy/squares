@@ -28,7 +28,13 @@ reviews:
     shown: >-
       The measures above, from the selection reports selection-z7wn-a.json and
       selection-r3cl.json in packing/cases/regularized_drawings/think-z7wn-2026-10-16/,
-      and the tables of PR 657's description. No gallery was rendered for the decision.
+      and the tables of PR 657's description. The gallery was rendered after the
+      decision, for the record (review H7 of PR 657): the source witness, this view and
+      the axis tool's view the layer drew then, side by side, and grid-slack's view,
+      which is the same at 0.5, 1 and 5 degrees.
+    gallery:
+      - packing/cases/regularized_drawings/think-z7wn-2026-10-16/review-211/gallery.html
+      - packing/cases/regularized_drawings/think-z7wn-2026-10-16/review-211/grid-slack-z7wn-a-deg05-1016.svg
     generator: evand-regularize
     generator_version:
       pin: 675a5ea

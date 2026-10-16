@@ -798,6 +798,7 @@ def test_a_view_sent_to_review_is_drawn_only_as_a_review_record_admits_it(
         "row": 7,
         "source": {"id": "W-row", "sha256": report["source"]["sha256"]},
         "generator_version": axis.review_version(drive.evand_generator_block()),
+        "gallery": ["packing/atlas/known-best/manifest.json"],
     }
     reviews = layout.directory / axis.REVIEWS
     write = lambda *records: reviews.write_text(  # noqa: E731
@@ -816,6 +817,9 @@ def test_a_view_sent_to_review_is_drawn_only_as_a_review_record_admits_it(
     write(record)
     assert drive.write_layer([run_dir], root, "admitted")["written"] == [4]
     assert axis.check_atlas(layout) == []
+    # The gallery the reviewer decided from is in the repository.
+    write({**record, "gallery": ["packing/no-such-gallery.html"]})
+    assert any("is not in the repository" in p for p in axis.check_atlas(layout))
     (entry,) = json.loads(layout.index.read_text())["entries"]
     assert (entry["decision"]["row"], entry["decision"]["decision"]) == (7, "review")
     assert entry["review"] == {
