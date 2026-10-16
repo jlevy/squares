@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 19
+version: 20
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T10:29:29.821Z
+updated_at: 2026-10-16T10:31:36.114Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -64,3 +64,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 ~10:10Z coordinator: lane H done: PR #651 (stacked on #642) green at ef43dd02f: #639 packet evand-exact-cur-2026-10-16; report-order ledger upper-bounds-20261016 (16 recorded; ties 51/70/153/207; not recorded 172/263/297); T-193 (#639's 16 sides) at V3/C3 after verify_exact.py replay 23/23 VALID, 76/76 mutants refused, SymPy irreducible 23/23 (~0.36 CPU-h); T-194 s(19) = 3+(4/3)sqrt2 (optimality, V0/C0, draft S5), n-019 links the proof. Lane D interim: leftovers decided (0 views chosen; SETTLED rewritten so no owed remains), data commit local only, waits for lane B's push; think-co6o and think-zjmt verified and closed; think-drze opened for unowned irregular drawings (292, 131, 176 after #644). Started: senior review of #642 + #651 (with correctness pass) and the stage 4 review of the s(19) Lean proof (think-o40t, strong-max, user-eb-review-640).
 
 2026-10-16 ~10:50Z coordinator: Review A on #642 (0/0/0/4, approve with nits) and on #651 (0/2/1/5). #651 A2 High: T-193 was raised to V3/C3 on the replay alone; the runbook's stage 4 exit follows both lanes, so the raise is held (addressing agent user-eb-addr-642-651) and the missing review lane think-7qxm (user-eb-review-193, strong-max, branch claude/intake-2026-10-16-review-193 stacked on #651) started now; a records step can raise T-193 if it returns in time. A1 High on #651 (informal chain) is the same gh-stack limitation as #650. Merge-ready so far: #647, #648, #641; #650 after #641 (retarget).
+
+2026-10-16 ~11:00Z coordinator: Review A (senior + correctness) on #649: 0/2/2/4. Composite completeness holds; rungs derived. A1 High: composite does not check the zmx2 header hash against the cover (fixable). A2 High: C3 declared while stage 4's mutated-certificate rule is unmet for zm_mixed.py (s95 has no refusal at all): rungs to be HELD below C3 tonight unless the controls run cheaply, pending owner question 16. Lane E resumed to address it and to merge #652's fixes.
