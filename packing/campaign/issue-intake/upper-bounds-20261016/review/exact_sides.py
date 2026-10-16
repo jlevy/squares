@@ -85,12 +85,15 @@ def source_file(n: int, pinned: Path, manifest: dict[str, str]) -> tuple[Path, s
     upstream = f"search/exact/cur/data/{name}"
     path = DATA / name
     where = f"packet:{path.relative_to(REPO)}"
-    if not path.is_file():
+    digest = hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else ""
+    if not digest:
+        # Pinned only: fetched from the upstream commit and kept outside Git (OR-18), so
+        # its bytes are held to the packet's manifest before they are parsed.
         path = pinned / name
         where = f"pinned only, read from a copy outside the repository ({name})"
-    digest = hashlib.sha256(path.read_bytes()).hexdigest()
-    if digest != manifest[upstream]:
-        sys.exit(f"{name}: SHA-256 {digest} is not the manifest's {manifest[upstream]}")
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        if digest != manifest[upstream]:
+            sys.exit(f"{name}: SHA-256 {digest} is not the manifest's {manifest[upstream]}")
     return path, where, digest
 
 
