@@ -805,6 +805,12 @@ issues:
       kind: follow-up
       reported:
       - result: kernel-rows-2026-10-11
+    - url: https://github.com/jlevy/squares/issues/413#issuecomment-6206055671
+      date: '2026-10-16'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: row4-full-receipt-2026-10-13
     close_when: The named owner completes or explicitly dispositions the queued work and posts the recorded
       state; source status alone grants no theorem admission.
     notes: 'The owner reply of 7 October acknowledged the then-current 17 verified / 10 computed split
@@ -5898,6 +5904,17 @@ issues:
       - result: n175
         id: E-couzo-506-n175-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/506#issuecomment-6206057024
+      date: '2026-10-16'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n304-n305-exact-optima
+        id: T-152
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: nine-beyond-horizon
     close_when: The import and its disposition, including the beyond-horizon counts, are on main,
       the house adoption at 304 and 305 has landed or is owned, and the owner has posted the
       resulting state; the four unnamed certificates are imports of their own, and optimality is
@@ -6725,7 +6742,12 @@ issues:
     - think-xzob
     - think-tln9
     answer_bead: think-xzob
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/533#issuecomment-6206055919
+      date: '2026-10-16'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: >-
       The packet and a mapped review are on main, the replay's receipts are retained beside
       T-145 and the 6.718 entry or the review records why not, and #485 has a reply.
@@ -7259,7 +7281,8 @@ issues:
     title: '156-271 and 338-378: registration request'
     author: franciscouzo
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-16'
     kind: result-report
     triage: done
     summary: 'Francisco Couzo reports nine exact rational certificates in franciscouzo/square-packing: s(156),
@@ -7317,6 +7340,20 @@ issues:
       - result: four-in-horizon
         id: E-couzo-561-certificate-report
         status: recorded
+      - result: five-beyond-horizon
+    - url: https://github.com/jlevy/squares/issues/561#issuecomment-6206059300
+      date: '2026-10-16'
+      by: jlevy
+      kind: final
+      reported:
+      - result: four-in-horizon
+        id: T-161
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: four-in-horizon
+        id: E-couzo-561-certificate-report
+        status: reviewed
       - result: five-beyond-horizon
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
@@ -7784,9 +7821,29 @@ issues:
         status: recorded
       corrects:
       - https://github.com/jlevy/squares/issues/573#issuecomment-6163850092
+    - url: https://github.com/jlevy/squares/issues/573#issuecomment-6206056718
+      date: '2026-10-16'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n153-n207
+        id: T-173
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n153-n207
+        id: E-mishapolk-573-certificate-report
+        status: reviewed
+      - result: n103-n209-n258-n270
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request. The author has said which name the record should carry.
+    notes: >-
+      The follow-up of 16 October reports T-173 confirmed and the case adoption, and keeps the
+      issue open, as the reply of 14 October said it would stay, while two decisions are the
+      owner's: the credit at 153 and 207 (decision 1 of jlevy/squares#602, RQ-5 of the 14 October
+      review) and adoption against PR 574's algebraic certificates there (T-174, decided on one
+      exact route).
   - number: 574
     title: 'research: submit 148 square-packing certificate refinements with exact endpoints'
     author: BuddenPing
@@ -7856,7 +7913,8 @@ issues:
       registration request'
     author: dostashev
     opened: '2026-10-13'
-    state: open
+    state: closed
+    closed: '2026-10-16'
     kind: result-report
     triage: done
     summary: Daniil Ostashev reports exact rational certificates at 176, 211, 241 and 304 in dostashev/square-packing,
@@ -7918,6 +7976,20 @@ issues:
       - result: n176
       corrects:
       - https://github.com/jlevy/squares/issues/575#issuecomment-6165052668
+    - url: https://github.com/jlevy/squares/issues/575#issuecomment-6206059896
+      date: '2026-10-16'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n211-n241-n304
+        id: T-175
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n211-n241-n304
+        id: E-ostashev-575-certificate-report
+        status: reviewed
+      - result: n176
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -7962,7 +8034,8 @@ issues:
     title: '154-382: registration request'
     author: franciscouzo
     opened: '2026-10-13'
-    state: open
+    state: closed
+    closed: '2026-10-16'
     kind: result-report
     triage: done
     summary: Francisco Couzo reports exact rational certificates at 154, 211, 241 and 302 and at 339, 379,
@@ -8036,6 +8109,28 @@ issues:
         id: E-couzo-583-certificate-report
         status: recorded
       - result: five-beyond-horizon
+    - url: https://github.com/jlevy/squares/issues/583#issuecomment-6206060386
+      date: '2026-10-16'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n211-n241-n302
+        id: T-181
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n211-n241-n302
+        id: E-couzo-583-certificate-report
+        status: reviewed
+      - result: n154
+        id: T-172
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n154
+        id: E-couzo-583-certificate-report
+        status: reviewed
+      - result: five-beyond-horizon
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -8087,7 +8182,8 @@ issues:
     title: '154, 339, 379, 380, 382; precision refinements at 211 and 241: registration request'
     author: franciscouzo
     opened: '2026-10-13'
-    state: open
+    state: closed
+    closed: '2026-10-16'
     kind: result-report
     triage: done
     summary: Francisco Couzo reports new certificates at 154, 339, 379, 380 and 382 and precision refinements
@@ -8170,6 +8266,28 @@ issues:
       - result: four-beyond-horizon
       corrects:
       - https://github.com/jlevy/squares/issues/586#issuecomment-6163323439
+    - url: https://github.com/jlevy/squares/issues/586#issuecomment-6206060873
+      date: '2026-10-16'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n154-n211-n241
+        id: T-182
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n154-n211-n241
+        id: E-couzo-583-586-certificate-report
+        status: reviewed
+      - result: four-beyond-horizon
+      - result: unnamed-b85dee2
+        id: T-165
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: unnamed-b85dee2
+        id: E-couzo-583-586-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -8295,6 +8413,26 @@ issues:
         id: E-mishapolk-70a033f-certificate-report
         status: recorded
       - result: ties-211-241
+    - url: https://github.com/jlevy/squares/issues/593#issuecomment-6206056451
+      date: '2026-10-16'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n237
+        id: T-183
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n237
+        id: E-mishapolk-593-certificate-report
+        status: reviewed
+      - result: ties-211-241
+      - result: other-70
+      - result: kkt-refinements-70a033f
+        id: T-186
+        verification: V0
+        confirmation: C0
+        status: recorded
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request. The author has said which name the record should carry.
@@ -8352,6 +8490,17 @@ issues:
         status: recorded
       - result: s76-equals-9
         id: E-bengreff-594-cover-report
+        status: recorded
+      - result: second-route
+    - url: https://github.com/jlevy/squares/issues/594#issuecomment-6206056156
+      date: '2026-10-16'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s76-equals-9
+        id: T-184
+        verification: V0
+        confirmation: C0
         status: recorded
       - result: second-route
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
@@ -8646,7 +8795,22 @@ issues:
     - think-qik6
     - think-rn2y
     answer_bead: think-qik6
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/607#issuecomment-6206051473
+      date: '2026-10-16'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n237
+        id: T-189
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n237
+        id: E-couzo-607-certificate-report
+        status: recorded
+      - result: fifteen-beyond-horizon
+      - result: fang-composites
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, the composites are with Fang's import, and the review and replay that would
       confirm the V0 entry are owned by its bead; optimality is outside this request.
@@ -8674,7 +8838,20 @@ issues:
     beads:
     - think-ribz
     answer_bead: think-ribz
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/610#issuecomment-6206054406
+      date: '2026-10-16'
+      by: jlevy
+      kind: import
+      reported:
+      - result: s95-equals-10
+        id: T-191
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: s95-equals-10
+        id: E-bengreff-610-cover-report
+        status: recorded
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm the V0 entry are owned by its
       bead; optimality is outside this request.
@@ -8705,16 +8882,22 @@ issues:
     beads:
     - think-8krd
     answer_bead: think-8krd
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/613#issuecomment-6206055385
+      date: '2026-10-16'
+      by: jlevy
+      kind: other
+      reported: []
     close_when: 'The owner has decided the question, and the record holds the decision: Göbel''s sides as
       the baseline beyond 324 with 369 and 376 corrected, or the 42 rows recorded.'
     notes: >-
       The project opened this issue; it reports no result of its own, and no acknowledgement is owed on
-      it. `check_requests` still lists an acknowledgement as due, because the record has no state for an
-      issue its owner opened (think-abcm). It is marked `intake` (the label added on 15 October 2026,
-      think-ykg6) as the project's own issue tracking the intake of a reported item, as #532 to #537 are:
-      Göbel's classical constructions, results the record does not hold, as the baseline beyond 324. Its
-      answer also decides which reported rows beyond 324 the record takes in. It is not a counterexample
+      it. `check_requests` listed an acknowledgement as due, because the record has no state for an
+      issue its owner opened (think-abcm), until the status comment of 16 October, which states where
+      the question stands on main once #627, #628 and #631 merged. It is marked `intake` (the label
+      added on 15 October 2026, think-ykg6) as the project's own issue tracking the intake of a
+      reported item, as #532 to #537 are: Göbel's classical constructions, results the record does
+      not hold, as the baseline beyond 324. Its answer also decides which reported rows beyond 324 the record takes in. It is not a counterexample
       report: the rows at 369 and 376 are valid upper bounds that smaller classical sides dominate.
   - number: 622
     title: 'data: submit a tighter exact N29 packing certificate'
@@ -8746,7 +8929,13 @@ issues:
     beads:
     - think-30n2
     answer_bead: think-30n2
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/622#issuecomment-6206055029
+      date: '2026-10-16'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n29-certificate
     close_when: The import and its disposition are on main, the owner has decided the pull request and
       posted the resulting state, and any replay that would confirm a recorded entry is owned by its bead;
       optimality is outside this request.
@@ -8782,6 +8971,12 @@ issues:
     beads:
     - think-hd6a
     answer_bead: think-hd6a
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/624#issuecomment-6206054646
+      date: '2026-10-16'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n366
     close_when: The reply saying why the certificate is not recorded is posted and the author has had the
       chance to answer.

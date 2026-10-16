@@ -2070,6 +2070,24 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "so it keeps v0.2.2."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main 22c0ebf0 at link revision 22c0ebf0, once "
+            "with main's requests record and once with this branch's, the HTML and "
+            "Markdown are byte-identical in all 42 files the renderer writes; the PDF "
+            "prints from that HTML. The record gains the 16 October replies held for "
+            "stack #632, on #413, #506, #533, #561, #573, #575, #583, #586, #593, #594, "
+            "#607, #610, #613, #622 and #624, the closing of #561, #575, #583 and #586, a "
+            "note on #573 and a reworded note on #613, none of which the survey prints, so "
+            "it keeps v0.2.2."
+        ),
+    ),
 )
 
 
