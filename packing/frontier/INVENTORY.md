@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **605** evidence records. **351** are formal; **344** of those were established here. **9** are samples, counted separately.
-- **237** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **607** evidence records. **352** are formal; **345** of those were established here. **9** are samples, counted separately.
+- **238** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -628,13 +628,15 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-continuous-n28-5745-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-continuous`, `V-wand125-contpose-check3` |
 | `E-evand-639-exact-sides-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-n019-fitzharding-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-622-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-622-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: the certificate at n = 29 that T-195 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 241, verified 359
-- **method**: exact-algebraic 177, interval-certified 166, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 241
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 544
-- **relationship to the producer's code**: generator 5, independent-implementation 224, not-applicable 23, same-implementation 329, shared-components 18, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 242, verified 360
+- **method**: exact-algebraic 178, interval-certified 166, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 242
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 546
+- **relationship to the producer's code**: generator 5, independent-implementation 225, not-applicable 23, same-implementation 330, shared-components 18, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

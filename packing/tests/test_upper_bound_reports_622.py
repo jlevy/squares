@@ -138,8 +138,9 @@ def test_the_case_keeps_a_verified_print_above_its_exact_form(
     assert Fraction(house["verified_exact_form"]) == T155
     reports.compare(packet)
     path = packet / reports.DECLARATION
+    other_form = T155 + Fraction(1, 25 * 10**33)
     for change in (
-        {"verified_exact_form": "296691673133846459484473030817600959/50000000000000000000000000000000000"},
+        {"verified_exact_form": f"{other_form.numerator}/{other_form.denominator}"},
         {"verified_value": "5.93383346267692918968946061635201913"},
     ):
         value = _json(path)

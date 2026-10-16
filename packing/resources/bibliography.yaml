@@ -2795,6 +2795,26 @@ sources:
       says it "extends the method and checker code of the s(17) Lean proof (#565)", thanks
       the Squares Project and Manasseh Ahmed, and says "Development used Claude and Codex
       assistance."
+  - key: '[PingYou PR 622 certificate 2026-10-15]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-15'
+    lineage: builds-on-project
+    credit: PingYou Ltd after Schadt, Ellsworth, Daniel, Levy
+    short_credit: PingYou Ltd after Schadt et al.
+    note: >-
+      Pull request jlevy/squares#622 at 31155575ce1e6b461f77bfc9f3e201adf101115b
+      (BuddenPing/squares): a submission packet and a HostedData manifest pinning the
+      release data/pingyou-n29-certificate-2026-10-15-v1 of
+      BuddenPing/square-packing-certificates (pingyou-n29-certificate-2026-10-15.zip,
+      430,075 bytes, SHA-256 0dc9bcd1cf5f2806a4d2e0c4c1c07e4903d91bbea611b8b938bda770b9782537),
+      which holds one complete exact rational certificate at n = 29: a refinement of Thomas
+      Schadt's packing, improved by David Ellsworth, made with Evan Daniel's tools and data
+      and checked by the source with Squares Project (Levy) verification code. Derived exact
+      facts only; no upstream byte is retained. No new nominal construction, local or global
+      optimality claim. The author says its submissions are assisted by the PY agentic
+      offering.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono

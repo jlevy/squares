@@ -43,3 +43,15 @@ deferrals:
       the smallest sides known, and whether a verified ceiling may rest on that one route
       is the owner's (RP-3). A case record cites the evidence once a house adopts one, or
       the owner's answer says where it belongs.
+  - evidence: E-pingyou-622-exact-feasibility
+    results: [T-195]
+    bead: think-30n2
+    blocked_on: the stage 4 review of T-195, which the coordinator of think-30n2 assigns
+    recorded: '2026-10-16'
+    reason: >-
+      PR 622's N29 certificate is replayed on both maintained exact routes and registered as
+      T-195, 1.57e-36 below the case's house, T-155. A house is adopted once stage 4 has
+      confirmed and reviewed its certificate (result-import.md, Adopt a House, Then
+      Regularize It), and no review has read it yet. The adoption, which makes n-029.md cite
+      this evidence and removes this entry, is prepared on a branch stacked on the records
+      pull request and lands after the review.

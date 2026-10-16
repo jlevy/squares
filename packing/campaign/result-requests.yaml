@@ -9240,19 +9240,21 @@ issues:
       bytes, SHA-256 0dc9bcd1...). Triaged on 15 October 2026: its exact side is 1.57e-36 below T-155
       and 7.32e-90 below #574's N29 certificate, which the 14 October ledger left undecided, and the
       comparison with the reported lane waits for that lane's exact side, the root of Evan Daniel's
-      degree-7213 polynomial (#545). Whether to merge the pull request is the owner's call.
+      degree-7213 polynomial (#545). Whether to merge the pull request is the owner's call. Imported
+      on 16 October 2026 as a derived exact fact, replayed on both maintained exact routes with its
+      controls, and registered as T-195 at V3/C3, a regularization of the packing it tightens, on the
+      key reason the per-count ledger lists for the owner (the house rule); review and adoption pending.
     read_through: '2026-10-16T03:40:22Z'
     results:
     - key: n29-certificate
       claim: s(29) <= the exact side of n29-certificate/certificates/n029.cert.json (SHA-256 a01428c5...),
         a fraction of 2,399 and 2,398 digits, about 5.93383346267692918968946061635201913843383418107788697463882591.
       source: body
-      not_registered: Undecided against the reported lane at 29, whose exact side the record does not hold
-        yet; the report-order rule records it only if it is below that side.
-      queued: true
-      bead: think-30n2
-      blocked_on:
-      - think-6gti
+      register:
+      - T-195
+      evidence:
+      - E-pingyou-622-certificate-report
+      - E-pingyou-622-exact-feasibility
     beads:
     - think-30n2
     answer_bead: think-30n2
