@@ -1,0 +1,34 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "bengreff-s95-certificate",
+  "source_url": "https://github.com/bengreff/s95-certificate",
+  "source_ref": "dd7297d06adc664268c65005369b895e4ded7547",
+  "source_commit": "dd7297d06adc664268c65005369b895e4ded7547",
+  "retrieved_at_utc": "2026-10-15T01:29Z",
+  "git_scope": "Full clone of main at the pinned commit, the head then and the commit jlevy/squares#610 names; two commits of 2026-10-15 UTC. The whole tree is retained: the cover, the records of both checkers' runs, the Lean wrapper and its generated data, the three stdlib checking scripts, verify.sh and the construction scripts, which the source calls research code not needed to check the proof. Evan Daniel's checkers are not in the tree; verify.sh fetches them from evand/square-packing at b91d70b6ed314624c1434b628a9c7bf9a132c743 and checks their digests, and this repository retains all four pinned files byte for byte in the evand packets of 26 and 28 September. Nothing in the tree was executed in the repository; the source's tools/check_total.py and tools/check_coverage.py were read, then run with -I from a scratch directory.",
+  "archived_dir": "s95-certificate",
+  "license": "MIT, copyright 2026 Benjamin Greff (LICENSE). The README credits Evan Daniel (method at margin zero, mixed format, checkers, Lean library) and wand125 (the s(59) = 8 cover reused for the corners, the band-insertion construction), and says the search, LP and verification pipeline were built and run with Claude (Anthropic) as an AI assistant under Benjamin Greff's direction.",
+  "claims": [
+    "s(95) = 10: README.md and the issue state s(95) >= 10 from the mixed cover cover/s95_cover_v2.txt.gz (unpacked SHA-256 8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c), 48,352 points and 11,438 axis-parallel segments of [0,10]^2 in Evan Daniel's mixed 1 format, coordinates X/8000, weights w/(4*10^8), total 3791753447/40000000 = 94.793836175 < 95, exactly D4-invariant, such that every closed unit square in [0,10]^2 captures mass at least one; with the 10 x 10 grid, s(95) = 10.",
+    "The covering statement is certified by two of Evan Daniel's checkers used unchanged from evand/square-packing@b91d70b: zmx2 cert --d4 over all 10,000 D4 roots, 15,065,314 boxes, leaving 8,263 uncertified boxes in the 19 roots of records/zmx2/failing_roots.txt with none capped, and zm_mixed.py cert --d4 --cert-mode --disj --chain-from 0 --pitch 1/20 --ubins 16 --depth 24 in exact rationals on the 304 sub-roots of those 19 roots (records/zm_mixed/jobs.txt), 9,614 boxes, maximum depth 13, none uncertified; tools/check_coverage.py checks that the pieces tile the D4 region.",
+    "lean/S95Lower.lean proves theorem s95_eq_10 (hcov : S95Cover) : minSide 95 = 10 on Evan Daniel's Sqpack at 1718a58 (Lean v4.33.1) with axioms propext, Classical.choice and Quot.sound, built in 20 min 35 s with 25 GB peak memory by lean/build_summary.txt; the data facts (no duplicate atoms, D4 invariance, total < 95) are kernel-checked and S95Cover, the covering statement, is a hypothesis.",
+    "The issue says no full zm_mixed.py pass over all 160,000 D4 roots has been run, and offers to run one; tools/check_full.py is in the tree for such records, and no records/zm_full directory is at this commit."
+  ],
+  "scope": [
+    "LICENSE",
+    "README.md",
+    "SHA256SUMS",
+    "verify.sh",
+    "construction",
+    "cover",
+    "lean",
+    "records",
+    "tools"
+  ],
+  "original_gzip": [
+    "cover/s95_cover_v2.txt.gz",
+    "lean/S95T_Pts.lean.gz",
+    "records/zmx2/zmx2_s95_v2.log.gz"
+  ],
+  "pinned_only": []
+}

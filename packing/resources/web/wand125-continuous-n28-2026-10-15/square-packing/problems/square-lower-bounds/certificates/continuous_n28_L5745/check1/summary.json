@@ -1,0 +1,39 @@
+{
+ "angle_splits": 222104476,
+ "axis_verified": true,
+ "build": {
+  "profile": "release",
+  "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+  "source_sha256": "619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5",
+  "target": "x86_64-unknown-linux-gnu"
+ },
+ "claim": "s(28) > 1149/200",
+ "inherited_roots": 0,
+ "kind": "sqverify-fast-continuous-summary/v1",
+ "leaves": 632526077,
+ "min_certified_lower_bound": 1.0000000000047078,
+ "missing_roots": [],
+ "nodes": 1265052068,
+ "premises": {
+  "A": "4989999/5000000",
+  "B": "499/500",
+  "L": "573351/100000",
+  "T": "83/200",
+  "X": "1149/200",
+  "axis_containment_margin": "200029979999/500000000000005000000",
+  "counting_margin": "1/100000",
+  "eps": "1/10000000",
+  "expanded_rectangles": 7068,
+  "input_sha256": "a2e47a39e310c695fafeb8d1c744f930a561b3be7d71bbdb359e362eaebacb8d",
+  "mass": "2799999/100000",
+  "n": 28,
+  "threshold": "1"
+ },
+ "refused_roots": [],
+ "resumed_from": null,
+ "roots": 86,
+ "run_key": "5b9984a6c776af958dca54b6f90c18a5d7c12d340b61eff941a100aa0cece5bc",
+ "status": "VERIFIED",
+ "threads": 10,
+ "wall_seconds": 4183.1058412
+}
