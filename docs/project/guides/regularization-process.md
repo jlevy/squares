@@ -357,11 +357,13 @@ To redraw the count:
    reviewed. Then run `default_drawings --update` again, since the record copies the
    entry into the count’s reason, and step 5, since `--update-atlas` redrew the axis
    views. List each deferred count’s drawing before and after in the pull request with
-   `python -m devtools.default_drawings --compare <(git show origin/main:packing/atlas/known-best/default-drawings.json)`,
-   which reads the base branch’s record; where a strong view gives way to a house
-   drawing with an uneven or a near-axis square, the adoption waits for the owner’s word
-   or for its runs. Nothing but review limits how many counts join the list; the gate
-   prints its size.
+   `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`,
+   which reads the record of its base branch, `BASE` being `main` unless the pull
+   request is stacked. Where a strong view gives way to a drawing worse than it on a goal
+   of the improvement rule, whatever drew it, the adoption waits for the owner’s word or
+   for its runs: the axis tool’s view of the new witness is drawn wherever it improves
+   on the new house, which says nothing of the view the count lost (review D1 of #641).
+   Nothing but review limits how many counts join the list; the gate prints its size.
 
 Until 15 October 2026 the lapse was only printed, and the adoptions of #553, #598 and
 #614 left twenty counts drawn without a strong generator’s decision on their witness: at

@@ -1302,17 +1302,26 @@ def test_two_adoptions_of_one_day_print_different_runs() -> None:
 def test_the_runbook_guide_and_printout_give_one_deferral_step() -> None:
     """Review C4 of #641: the runbook's deferral waited "for the owner's word or for its
     runs", the guide's and the printout's only for the owner's word, and neither document
-    said how to give `--compare` the base branch's record."""
+    said how to give `--compare` the base branch's record. Review D1: all three, and the
+    comparison's own summary, say which lost strong views wait, in one wording. Review D2:
+    the documents name the pull request's base, which is not main for a stacked adoption,
+    and the printout gives main as the example and says so."""
     lines = adopt.regularization_owed([176], day="2026-10-16")
     (deferral,) = [line for line in lines if "PENDING_ALLOWED with the open bead" in line]
-    command = f"--compare <(git show origin/main:{defaults.RECORD_PATH})"
-    assert adopt.BASE_RECORD.strip("`") in command
+    command = f"--compare <(git show origin/$BASE:{defaults.RECORD_PATH})"
+    assert adopt.BASE_RECORD.strip("`") == command.removeprefix("--compare ").replace(
+        "$BASE", "main"
+    )
     for path in (adopt.WITNESS_CHANGES, adopt.INTAKE_STEP):
         text = (houses.REPO / path.split(", ", 1)[0]).read_text(encoding="utf-8")
         words = " ".join(text.replace("\u2019", "'").split())
         assert command in words, path
+        assert "`BASE` being `main` unless the pull request is stacked" in words, path
+        assert defaults.STRONG_VIEW_LOST in words.lower(), path
         assert adopt.DEFERRAL_WAITS.removeprefix("the adoption ") in words, path
-    assert f"{adopt.DEFERRAL_WAITS}." in deferral
+        assert "irregular house drawing" not in words, path
+    assert f"{adopt.BASE_RECORD}, {adopt.STACKED_BASE})" in deferral
+    assert f"where {defaults.STRONG_VIEW_LOST}, {adopt.DEFERRAL_WAITS}." in deferral
 
 
 def test_every_printed_command_parses_with_its_tools_own_parser(tmp_path: Path) -> None:
