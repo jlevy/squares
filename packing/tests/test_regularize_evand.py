@@ -2180,3 +2180,25 @@ def test_a_closed_form_bound_narrower_than_its_evaluation_is_still_read() -> Non
     assert bound.compare(Fraction(4)) == -1
     assert bound.compare(Fraction(4) + Fraction(1, 10**40)) == 1
     assert f"{bound.difference(Fraction(4)):.3e}" == "-1.250e-41"
+
+
+def test_the_index_records_a_view_without_the_pairing() -> None:
+    """A view no symmetry of the box pairs square for square with its witness is admitted
+    when every other obligation holds (the policy's obligation 3, owner, 13 October
+    2026), and there is no pairing to measure a move or a turn on: the index's identity
+    then records `one_to_one: false` alone, as Evan Daniel's view at n = 176 does (16
+    October 2026). A paired view still records its moves and turns."""
+    schema = load_yaml(
+        (axis.ATLAS_DIR.parent / "regularized-atlas-index.schema.yaml").read_text()
+    )
+    identity = Draft202012Validator(schema["$defs"]["regularization"]["properties"]["identity"])
+    unpaired = {
+        "basis": "measured",
+        "measured_in": "packing/atlas/known-best/regularized/index.json",
+        "one_to_one": False,
+    }
+    assert list(identity.iter_errors(unpaired)) == []
+    paired = {**unpaired, "one_to_one": True}
+    assert list(identity.iter_errors(paired))
+    measured = {**paired, "moved": 3, "max_move": 0.125, "max_turn_deg": 0.0}
+    assert list(identity.iter_errors(measured)) == []
