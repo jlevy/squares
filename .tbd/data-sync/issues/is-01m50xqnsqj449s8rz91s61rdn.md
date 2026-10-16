@@ -5,7 +5,7 @@ title: "Regularize 3b: 153, 154, 207, 211, 237, 241, 302, 304 (re-housed by #614
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 8
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:08.951Z
-updated_at: 2026-10-16T09:58:58.174Z
+updated_at: 2026-10-16T10:18:40.454Z
 started_at: 2026-10-16T05:13:41.663Z
 ---
 
@@ -27,3 +27,7 @@ started_at: 2026-10-16T05:13:41.663Z
 2026-10-16T07:52Z user-eb-reg-3b3c: 3b runs done. Driver evand-regularize-3b-1016 (1 worker): 2,072.7 CPU-s, 4,353 s wall; 153 207 211 237 241 302 row 10 admit, 154 row 7 review, 304 row 4 held. Grid-slack 3b-deg05/deg1/deg5-1016: 604.9/612.8/625.4 CPU-s (bash time; one process). Selection 3b running (1 worker) from worktree .claude/worktrees/reg-3b3c-select at #644 head 780d81b82 since 06:37Z.
 
 2026-10-16T10:05Z user-eb-reg-3b3c: 3b pushed: branch claude/intake-2026-10-16-regularize-3b at 75babaea1 (data d1f49d8ff + re-pin), stacked on #644's head 780d81b82. Selection 3b: 7 chosen (evand same at 153 207 211 237 241 302; grid 5 deg at 154), 304 decided-no-better in SETTLED (runs evand-regularize-3b-1016 + grid-slack-3b-deg05/deg1/deg5-1016). Owner list: 154 evand row 7 review; register candidates 153 (-1.6e-14) and 207 (-2.4e-12). PENDING_ALLOWED 11 -> 3. Next: release-impact check, PR, validation.
+
+2026-10-16T10:12Z user-eb-reg-3b3c: draft PR #653 (https://github.com/jlevy/squares/pull/653), base claude/ecstatic-edison-8en33t-regularize-3a (#644 at 780d81b82), head 9b68211e1 (adds the survey no-change record; release impact passes). Labels project, S2. Validation (--records, focused tests) next.
+
+2026-10-16T10:18Z user-eb-reg-3b3c: validation on #653 head 9b68211e1: packing-validate --records --jobs 2 --inner-jobs 1 passes (rc 0); focused tests (test_regularize_evand, _grid_slack, _select, test_regularized_drawings, test_render_regularized_atlas, test_improvement_rule, test_default_drawings) 226 passed in 93 s. 3c: branch claude/intake-2026-10-16-regularize-3c pushed at bcf6741a6 (regularize_select fix for a no-view driver row + test); 3c selection re-running with the fix.

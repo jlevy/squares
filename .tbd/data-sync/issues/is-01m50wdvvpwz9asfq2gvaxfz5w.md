@@ -5,7 +5,7 @@ title: "Intake process: add a regularization step to result-import.md stages (on
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 delegate: user-eb-reg-intake
 labels:
   - regularization
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.902Z
-updated_at: 2026-10-16T08:21:30.123Z
+updated_at: 2026-10-16T10:23:40.350Z
 started_at: 2026-10-16T04:17:15.710Z
 ---
 
@@ -50,3 +50,5 @@ Left: confirm --push result; open DRAFT PR (labels project + S1; body drafted at
 2026-10-16T07:24Z user-eb-reg-intake DONE for this lane: #641 head 46562eab0, CI green (run 38861680046), Deferred checkpoint passed 12/12 jobs (run 38862757844, via deep-gate label), dispositions posted for A and B (A12 declined, all else fixed; no deferral beads). Close think-g3q7 only after #641 merges (merge bead think-1644). Owner/coordinator decisions: A12 sequencing vs #574/T-174; whether persisted lapsed blocks are still wanted for the 12 derivable historical lapses (not done: 272/304 not derivable, all 14 being decided by #644 and the kpm3/3zi3 batch).
 
 2026-10-16T08:21Z user-eb-addr-641-650: addressing Review C on #641. Pushed a59a6024a (C1 test: a decision outranks the allowlist; mutations M2-M5 now fail) and e9d5c01d8 (C3 run label names the counts; C4 one deferral wording and the --compare <(git show ...) command; C2 docs). C2's gate hardening deferred to think-k6rj (child of think-g3q7). Next: records tier, CI and deferred checkpoint, PR body, disposition reply; then #650.
+
+2026-10-16T10:25Z user-eb-addr-641-650: #641 Review C addressed at 7aa4775ea (fixes a59a6024a, e9d5c01d8; empty CI re-run 7aa4775ea after a frontend Chromium timeout at e9d5c01d8). CI green incl. Deferred checkpoint (runs 38883824978, 38883825029). Reply: https://github.com/jlevy/squares/pull/641#pullrequestreview-5546364606. C2 gate hardening deferred to think-k6rj.

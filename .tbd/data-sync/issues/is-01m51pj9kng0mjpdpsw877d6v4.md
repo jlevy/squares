@@ -5,7 +5,7 @@ title: "Intake sweep: report regularization debt (pending counts and owed decisi
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 9
 delegate: user-eb-reg-intake
 labels:
   - regularization
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T06:32:07.029Z
-updated_at: 2026-10-16T09:54:14.503Z
+updated_at: 2026-10-16T10:24:31.297Z
 started_at: 2026-10-16T06:32:14.332Z
 ---
 The owner, 2026-10-16 (overnight, to coordinator user-eb, epic think-hg5s): "The other agent had worked on regularization, but we should make sure all of the intake process covers the regularization and we update that for any other new packings we have. That should be part of our standard process to do the regularization."
@@ -37,3 +37,7 @@ Done when: draft PR open with base = #641's branch, labels project + S2, CI gree
 2026-10-16T07:24Z user-eb-reg-intake DONE for this lane: #650 (draft, base #641's branch, labels project + S2) head 89cc59e83, CI green (Packing validation run 38865724793; first run 38863767816 failed only on a frontend Chromium hang in overview_data.load, re-run by an empty commit). Closes at #650's merge, after #641.
 
 2026-10-16T09:56Z user-eb-addr-641-650: addressing Review A on #650. Merged #641's head e9d5c01d8 (f517ede2a); pushed 67fb92456 (A2 tests: decisions, exemptions, missing bead; A4 broken record/index reported, not a traceback) and eb8dea201 (A3 one owning-bead label). A1 (not a formal stack) deferred to think-bb70. Next: PR bodies (#650 A5 and chain declaration, #641), CI, replies.
+
+2026-10-16T10:15Z user-eb-addr-641-650: #650 addressed at a82415d23 (merges #641's 7aa4775ea). CI green (14 success, 43 skipped; Packing validation run 38883863154). Description and title updated (A5, chain declared). Disposition reply: https://github.com/jlevy/squares/pull/650#pullrequestreview-5546267959. A1 deferred to think-bb70 (open until #650 is in main).
+
+2026-10-16 ~10:40Z coordinator: PR #650 MERGE-READY at a82415d23 except Review A's A1 (High: informal chain, not a formal GitHub stack), deferred to think-bb70 because the session cannot install gh-stack; merge after #641, retargeted to main. All other findings fixed; CI green.
