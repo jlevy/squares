@@ -27392,7 +27392,7 @@ regularized_drawings:
       of: T-181
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      modifications: []
       side: same
       changes: {straightened: 32, re_angled: 7}
       identity:

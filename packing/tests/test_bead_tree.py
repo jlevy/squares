@@ -186,11 +186,11 @@ def test_a_run_that_takes_its_counts_off_the_allowlist_no_longer_defers_to_its_b
     request has merged (regularization-process.md, "When a Witness Changes")."""
     from devtools import default_drawings  # noqa: PLC0415
 
-    # No count is pending since 16 October 2026 (think-3zi3), so where the data's list is
-    # empty two lanes' deferrals are laid as an adoption would allow them, each with its bead.
+    # The live list is empty since 16 October 2026 (think-3zi3), so two lanes are made up
+    # where it names none, as two adoptions' deferrals would name them.
     allowed = default_drawings.PENDING_ALLOWED or {
-        1: "think-aaaa: a deferral",
-        2: "think-bbbb: a deferral",
+        1: "think-aaaa: re-housed by one adoption",
+        2: "think-bbbb: re-housed by another",
     }
     lanes = sorted(
         {found[0] for why in allowed.values() if (found := default_drawings.BEAD.match(why))}

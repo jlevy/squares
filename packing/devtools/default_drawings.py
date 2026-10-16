@@ -165,8 +165,8 @@ class Settled(NamedTuple):
 #: #518 runs (`evand-regularize-refreshed-adopt518-v2`, `grid-slack-on518`) and the runs of
 #: 12 and 13 October had decided them first, but their receipts keep only aggregates; the
 #: atlas README's think-0ut1 paragraph of 16 October gives each count's outcome on these,
-#: and `atlas/known-best/regularization-runs/` keeps their receipts and per-count reports
-#: and the selection's report, by run id (review A2 of #653).
+#: and `cases/regularized_drawings/think-0ut1-2026-10-16/` keeps their receipts, per-count
+#: reports and the selection's report (review A2 of #653).
 _LEFTOVERS = (
     ("evand-regularize", "evand-regularize-leftovers-1016"),
     ("regularize_grid_slack/1", "grid-slack-leftovers-deg05-1016"),
@@ -175,7 +175,8 @@ _LEFTOVERS = (
 )
 _README_LEFTOVERS = (
     "packing/atlas/known-best/README.md, the think-0ut1 paragraph of 16 October 2026, and "
-    "the runs' receipts, reports and selection in packing/atlas/known-best/regularization-runs/"
+    "the runs' receipts, reports and selection in "
+    "packing/cases/regularized_drawings/think-0ut1-2026-10-16/"
 )
 _T146 = (
     "the house is Evan Daniel's own regularized list (T-146): his regularizer and "

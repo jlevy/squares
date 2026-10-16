@@ -271,9 +271,11 @@ The same day both generators ran on the eight witnesses jlevy/squares#614 adopte
 regularizer (`evand-regularize-3b-1016`) and grid-slack at 0.5, 1 and 5 degrees
 (`grid-slack-3b-deg05-1016`, `grid-slack-3b-deg1-1016` and `grid-slack-3b-deg5-1016`),
 3,916 CPU-seconds in all.
-His same-side views are drawn at 153, 207, 211, 237, 241 and 302, and grid-slack’s
-five-degree view at 154, where his view goes to the owner at row 7 (eight squares lose a
-contact while no total falls).
+His views at the witness’s side are drawn at 153, 207, 211, 237, 241 and 302: the
+same-side re-solve’s at the first four, and at 241 and 302, where the re-solve was
+refused (an overlap, an unmatched rotation), his solve itself, unmodified, which closed
+to that side. Grid-slack’s five-degree view is drawn at 154, where his view goes to the
+owner at row 7 (eight squares lose a contact while no total falls).
 Over the seven, light / uneven / near-axis squares go from 51 / 133 / 34 to 10 / 26 / 3,
 and house sides from 3,957 to 4,341. At 304 every view draws two or four light squares
 where the axis tool’s view draws none, so that view stays: grid-slack’s at all three
@@ -281,6 +283,16 @@ thresholds, and his, held at row 4, solved $8.9 \times 10^{-31}$ above $U$.
 `devtools.default_drawings.SETTLED` records it as decided on these four runs.
 At 153 and 207 his solved views lie below $U$, by $1.6 \times 10^{-14}$ and
 $2.4 \times 10^{-12}$; they are register candidates for the owner and are not drawn.
+The evidence for these choices and for 304 is retained in
+[`cases/regularized_drawings/think-kpm3-2026-10-16/`](../../cases/regularized_drawings/think-kpm3-2026-10-16/):
+`regularize_select`’s report (`selection-3b.json`, every candidate’s decision and
+reasons, and `selection-3b.md`), the driver’s `receipt.json`, and each run’s per-count
+`report.json`, gzip-compressed.
+Grid-slack keeps no receipt of its own, so each of its three runs has a `run.json`, the
+block `regularize_grid_slack.run_block` computes from its reports; the index records
+only the five-degree run, which supplied a view, and that block is the same as the
+index’s. Its cost is the per-count seconds the reports record, which are wall seconds
+under load. The views themselves are not retained beyond the seven the layer draws.
 
 Last that day both generators ran on the three witnesses jlevy/squares#598 adopted in
 `8a4d26fea` at 175, 232 and 264 (think-3zi3): Evan Daniel’s regularizer
@@ -293,6 +305,12 @@ and upstream’s checker refused it).
 Over the three, light / uneven / near-axis squares go from 19 / 64 / 0 to 13 / 57 / 0,
 and house sides from 1,859 to 1,963. No count is pending any more:
 `devtools.default_drawings.PENDING_ALLOWED` is empty.
+The evidence is retained in
+[`cases/regularized_drawings/think-3zi3-2026-10-16/`](../../cases/regularized_drawings/think-3zi3-2026-10-16/),
+in the same layout as think-kpm3’s: `selection-3c.json` and `selection-3c.md`, the
+driver’s `receipt.json`, each run’s per-count `report.json`, gzip-compressed, and a
+`run.json` for each grid-slack run; the index records only the half-degree run, which
+supplied a view, and that block is the same as the index’s.
 
 The same day both generators ran again at the ten counts recorded as decided on 15
 October whose decision still owed runs or a per-count outcome (think-0ut1), and at 270
@@ -320,8 +338,9 @@ square, sit at the decimal witness’s side, $4.6 \times 10^{-12}$ above $U$, an
 angle classes, where Evan Daniel’s view at the bound, drawn since 13 October, draws 8.
 `devtools.default_drawings.SETTLED` records the ten as decided on these four runs, each
 with its outcome, and none owes a run any longer.
-The runs’ receipts and per-count reports, and the selection’s report, are kept by run id
-in [`regularization-runs/`](regularization-runs/), without the views.
+The runs’ receipts and per-count reports, and the selection’s report, are kept in
+[`cases/regularized_drawings/think-0ut1-2026-10-16/`](../../cases/regularized_drawings/think-0ut1-2026-10-16/),
+without the views.
 
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
