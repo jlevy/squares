@@ -5,7 +5,7 @@ title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 16
 delegate: user-eb-intake-1016
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-16T05:53:55.824Z
+updated_at: 2026-10-16T07:31:03.556Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
 Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn): nothing was built or run. Stage 2 is done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 (below).
@@ -78,3 +78,13 @@ Watching sq19: intake-watch.yaml cannot make a repository watched. Its schema sa
 2026-10-16 ~05:25Z, ecstatic-edison-intake-1016: draft PR https://github.com/jlevy/squares/pull/642 (labels intake, S2) at 71f6a413e on claude/ecstatic-edison-8en33t-intake-1016. 71f6a413e adds the #640 stage 2 packet packing/resources/web/fitzharding-n19-lean-2026-10-16 (sq19 whole at 34fb2b7, release archives pinned by digest, the X announcement retained; acquire_source --check prints PACKET_MATCHES_ITS_CONTRACT), a resources README row and section for [Fitzharding n19 Lean 2026] (its bibliography.yaml entry waits for stage 3), and #640's entry records the announcement as a source and names think-xik9. At 71f6a413e the records tier exits 0, the survey render is byte-identical again, and the sweep on the branch watches sq19 (44 repositories, 18 heads pinned). packing-validate --push at bd1f40425 timed out in its reachable tests (285 files, 900 s) with one failure it did not name; a separate run of those files was in progress. Hosted CI was pending at opening.
 
 2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.
+
+2026-10-16 ~07:35Z user-eb-intake-1016: stage 3 done on claude/intake-2026-10-16-records-639-640 (draft PR https://github.com/jlevy/squares/pull/651, base #642's branch). a2167a03a registers T-194: kind optimality (the record held no s(19) value, so not a formalization; epistemics Result Kinds, first rule), s(19) = 3 + (4/3)sqrt(2), V0/C0, draft S5 (scored as a claim, by the anchor 'movement on a central open case'; the review lane confirms or changes it), unfinished_confirmations C1 think-o40t (review) and C3 think-nqnl (full build, 285 CPU-h central, 420 high, an estimate from the source's words), evidence E-n019-fitzharding-lean-report, bibliography key [Fitzharding n19 Lean 2026] (credit 'Fitzharding after Levy, Ahmed', lineage credits-project), coverage entry fitzharding-n19-lean-2026. n-019.md links the proof (intake paragraph, priority note, resources entry, evidence list); its lanes and status are unchanged. Owner decision raised: whether n-019's reported lower lane and reported status take the claim, as n-017's took T-153's on 13 October. 05f727304 adds sq19's card to the site's Other Projects list (CI's test_overview requires a card for every reviewed source repository). The ask 'link the proof from the n = 19 case page' is state: done in #640's request entry. think-o40t can start now; think-nqnl stays held.
+
+2026-10-16 ~07:00Z user-eb-intake-1016: DRAFT import reply for #640 (not posted; stage 7 posts it after the records PR merges, rendered from main with check_requests --draft 640, with the id and rungs checked against main and the deployed site first; it replaces the triage acknowledgement above, which was never posted).
+
+@ofitzharding, thank you, and congratulations on the release. Your proof is now in the record as T-194: s(19) = 3 + (4/3)√2, an optimality result in its own right rather than a formalization, since the record held no value of s(19) before it. It is recorded as reported (V0/C0) with significance S5 as a draft, and linked from the n = 19 case page beside the repository and the retained packet, as you asked. The case's bounds and status are unchanged until the proof is reviewed and built.
+
+What we did: retained ofitzharding/sq19 whole at 34fb2b7 (tag v1.0.0), with release v1.0.0's five certificate-source archives pinned by the SHA-256 in its SHA256SUMS, and your post on X as a source beside the repository. We read the statement and its definitions without building them: Feasible19 is the record's problem at n = 19 and 3 + 4 * Real.sqrt 2 / 3 is the case's exact upper bound. The axiom report lists the three standard axioms and 4,320 native_decide facts, and no sorryAx.
+
+What remains: a mathematical review of the proof, as your s(17) proof had (it will be written to be shared with you), and a complete build from source with the axiom check. The build is above this intake's compute budget and needs a larger machine than ours, so it waits for the owner's decision; a build retained by you or a third party, with its log and axiom report, would also count. We will follow up here when the review lands.

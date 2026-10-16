@@ -5,7 +5,7 @@ title: "Review: Greff's mixed covers for s(76) = 9 (T-184, #594) and s(95) = 10 
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 8
 delegate: user-eb-review-76-95
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:25:27.727Z
-updated_at: 2026-10-16T06:59:25.718Z
+updated_at: 2026-10-16T07:36:15.809Z
 started_at: 2026-10-16T05:25:32.352Z
 ---
 Stage 4 review lane (W2) for T-184 (#594, Benjamin Greff, s(76) = 9) and T-191 (#610, s(95) = 10), the k = 9 and k = 10 cases of the k^2 - 5 series by mixed covers in Evan Daniel's format, registered at V0/C0. Their next_rung asks for "a review that reads the cover, the two checkers' composite over the D4 region and the wall segments". Model: docs/project/reviews/review-2026-10-02-wand125-s59-s77-mixed-covers.md (T-066's review). Deliverable: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md (or similar) on its own branch and draft PR; it moves no rung.
@@ -37,3 +37,19 @@ Stage 4 review lane (W2) for T-184 (#594, Benjamin Greff, s(76) = 9) and T-191 (
 2026-10-16 06:17Z user-eb-review-76-95: spot checks done, all in scratch laneF/out (nothing committed yet): (1) exact mu at 9,326 (s76) and 17,319 (s95) sampled admissible poses (D4 region, every zmx2-failing root, every listed UNCERT box, tile and one-cut germs, coincidence angles u=1/3 and near sqrt26-5, 1,500 folded whole-container poses with mu equal before and after the fold): none below 1; lowest found by descent 1.000418 (s76, bottom-wall germ at (3.5,0.5)) and 1.003389 (s95). (2) six mutants (drop heaviest point orbit, drop heaviest segment orbit, scale 999/1000 resp. 249/250): exact mu < 1 at a pose, and zmx2 (6b7f0f79 built by devtools.replay_evand_zmx2 build, binary cba78a9e) refuses each at that pose's root while certifying the published cover there. (3) tiling controls: the author's check_coverage.py accepts 5 of 8 mutated record sets my check refuses (misaligned cell, other settings, other zm_mixed digest, headerless record, zmx2 log of another cover). No blocking defect so far. CPU so far about 7 CPU-min. Next: write the review document and the programs README; then commit, push, PR.
 
 2026-10-16 06:59Z user-eb-review-76-95: review written (docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md, mapped in document-map.yaml); programs, run scripts and outputs regenerated from the final program (k2m5_review.py 4fa7ed60) and staged under packing/resources/web/bengreff-s76-certificate-2026-10-14/review/ (s95 packet review/README.md points there). zm_mixed.py controls on the s(76) cell j054: the 199/200 mutant ran 15 min at depth 24 with no verdict; at depth 12 the published cell certifies (121 boxes, record j054's census) and the mutant is refused (44 uncertified, one holding the hole's pose). A local mutant (one 1/16 segment orbit removed) is running at depth 24 under a 10-min limit. Verdicts so far: T-184 and T-191 no mathematical defect, nothing blocking. Next: commit, push, validate, draft PR.
+
+2026-10-16 07:32Z user-eb-review-76-95: branch claude/intake-2026-10-16-review-76-95 at 7ae526246 pushed: review + programs (afdc297d8), synopsis row (4510ca9df), section 12 compute wording (baf6454a6), site cut v0.7.15 as last commit (7ae526246; v0.7.15 is also cut on four other branches, so a re-cut at merge is likely). packing-validate --records exit 0 (52/110 named-tier steps); check_release_impact --baseline-ref origin/main: every publication candidate dispositioned. Next: draft PR (S2), final note.
+
+2026-10-16 07:42Z user-eb-review-76-95: review pushed and in a draft PR. Branch claude/intake-2026-10-16-review-76-95, head 7ae526246; PR https://github.com/jlevy/squares/pull/652 (#652, draft; labels S2, intake).
+
+Deliverable: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md (mapped in docs/project/document-map.yaml, with its generated SYNOPSIS.md row), with the reviewer's programs and outputs in packing/resources/web/bengreff-s76-certificate-2026-10-14/review/ (README there; the s95 packet's review/README.md points to it).
+
+Per-entry verdict:
+- T-184, s(76) = 9: no mathematical defect found; no blocking finding.
+- T-191, s(95) = 10: no mathematical defect found; no blocking finding.
+
+Findings (none blocking): F1 minor, in the source: tools/check_coverage.py accepts 5 of 8 malformed record sets (a cell shifted by 1/40, other settings, another zm_mixed.py digest, a headerless record, a zmx2 log of another cover); the published and replayed records pass this review's stricter check. Notes F2 to F8: verify.sh sound only as a whole; each cover's line 2 calls it a candidate; S95Lower.lean line 11 names S76Cover; two checkers, one per cell (the trust base is the union; the confirmation is reproduced with the producer's code); zmx2's float-min is not evidence (seen on two scaled mutants); CovM read at f58a017, not the wrappers' 1718a58; zm_mixed.py refusal of a mutant shown at depth 12 only (199/200 mutant, cell j054), more owed for the replay lane's control.
+
+For the records lane (think-ccjt, PR #649): this review may be recorded as external_review (informally-verified) on E-bengreff-594-cover-report and E-bengreff-610-cover-report and in each entry's reviews (adversarial, ai, accepted): C1. V3/C3 follow once the retained reproduction is recorded as evidence through the registered tools; nothing in the review stands in the way. Rung 4 needs a second distinct adversarial review and a human oversight record. Significance S3 confirmed for both.
+
+Site edition: v0.7.15 cut as the last commit, since the synopsis row is a site output and the cut tool admits only the patch successor of main's v0.7.14. #646 and three other branches of this pass also cut v0.7.15, so it may need re-cutting at merge. Validation: packing-validate --records exit 0 (52 of 110 steps, the named tier); check_release_impact --baseline-ref origin/main: every candidate dispositioned; --fast left to hosted CI. Compute: about an hour of wall time for the programs and controls, one process at a time under nice -n 10 (CPU time less), plus two records-tier runs of about 3 min each, which ran with their default 4 jobs. This bead stays open (the coordinator's).
