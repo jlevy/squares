@@ -1024,6 +1024,24 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main 22c0ebf0 at one link revision, once with "
+            "main's requests record and once with the branch's, the HTML after the math "
+            "pass and the Markdown are byte-identical in all 42 files the renderer writes, "
+            "as they were over bbc12b61 and as the HTML before that pass and the Markdown "
+            "were over 22a67ce4; the PDF prints from that HTML and was not rebuilt. The "
+            "requests record gains the 15 October status replies on twelve of the owner's "
+            "tracking issues and five notes; the survey prints none of them and keeps its "
+            "edition."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer", "site"),
         paths=("packing/src/sqpack/cli/validate.py",),
         outputs=(
@@ -2069,6 +2087,23 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "revision and changes nothing else in them. The explainer rendered with "
             "main's claim documents and release module and with this branch's is "
             "byte-identical in all 54 files it writes, so the explainer keeps v0.4.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main bbc12b61 at one link revision, as over "
+            "22a67ce4 before it, once with main's requests record and once with this "
+            "branch's, the HTML and Markdown are byte-identical in all 42 files the "
+            "renderer writes; the PDF prints from that HTML. The record gains the 15 "
+            "October replies on #521 to #527 and #545, two ask notes, a second blocker on "
+            "#523's ask and #521's reworded close_when, none of which the survey prints, "
+            "so it keeps v0.2.2."
         ),
     ),
 )
