@@ -341,6 +341,16 @@ Until 15 October 2026 the lapse was only printed, and the adoptions of #553, #59
 n = 176 the raw house was drawn while the index said `regularized`. Those twenty are the
 allowlist’s first entries (think-la7h, think-kpm3, think-3zi3).
 
+A run that decides allowed counts takes them off `PENDING_ALLOWED` in its own pull
+request. Close a bead that the list, an exemption or a decision’s `owed` names only once
+the pull request that takes its last count off has merged.
+`bead tree` fails any change to `default_drawings.py` whose record names a bead that is
+not open, entries it inherited included, and hosted CI checks each pull request merged
+with `main`. So the run’s own pull request passes with its counts removed, and every
+other pull request’s next run sees them gone.
+A bead closed before its pull request merges turns every other open pull request that
+touches `default_drawings.py` red until that merge (review B4 of #636).
+
 While another pull request is changing a count’s witness, leave the count out of `layer`
 with `--exclude N`. Run and admit from one revision: a grid-slack view is admitted
 against the witness the checkout holds, and the layer records that witness’s digest.

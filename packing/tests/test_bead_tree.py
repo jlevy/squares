@@ -177,6 +177,37 @@ def test_the_live_records_deferrals_are_all_well_formed_aliases() -> None:
         assert len(alias) == len("think-aaaa"), where
 
 
+def test_a_run_that_takes_its_counts_off_the_allowlist_no_longer_defers_to_its_bead() -> None:
+    """Review B4 of #636: each regularization run lane takes its counts off
+    `PENDING_ALLOWED` in its own pull request, and that change touches the record, so the
+    gate holds every bead the record still names open. The lane's bead is named nowhere
+    else in the record, so its change passes whether the bead is open or closed, while the
+    other lanes' beads, still named, must be open; the bead is closed once that pull
+    request has merged (regularization-process.md, "When a Witness Changes")."""
+    from devtools import default_drawings  # noqa: PLC0415
+
+    allowed = default_drawings.PENDING_ALLOWED
+    lanes = sorted(
+        {found[0] for why in allowed.values() if (found := default_drawings.BEAD.match(why))}
+    )
+    assert lanes
+    for lane in lanes:
+        remaining = {n: why for n, why in allowed.items() if not why.startswith(lane)}
+        named = default_drawings.deferrals(allowed=remaining)
+        others = sorted({alias for _where, alias in named})
+        assert lane not in others
+        beads = [
+            *(_bead(f"is-01{alias[6:]}", "open", alias) for alias in others),
+            _bead(f"is-01{lane[6:]}", "closed", lane),
+        ]
+        aliases = {alias[6:]: f"01{alias[6:]}" for alias in [*others, lane]}
+        assert deferral_problems(beads, aliases, named) == []
+        # Its counts still listed, the closed bead fails the change: hence closing it
+        # only once the pull request taking them off has merged.
+        dead = deferral_problems(beads, aliases, default_drawings.deferrals())
+        assert {problem["bead"] for problem in dead} == {lane}
+
+
 def _dead_deferral_store(monkeypatch: pytest.MonkeyPatch) -> None:
     """A store whose one deferral names a closed bead, and no agendas."""
     beads = [_bead("is-01aaaa", "closed", "an intake closed under its deferral")]

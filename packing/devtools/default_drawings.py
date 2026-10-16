@@ -370,7 +370,9 @@ _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 #: reviewed change naming its bead (the deferral an adoption makes when its runs must
 #: wait); nothing stops a change adding entries, so the gate prints how many there are,
 #: and `devtools.check_bead_tree` fails a change to this file whose list names a bead
-#: that is not open (`deferrals`). Set on 15 October 2026 to the twenty counts the audit
+#: that is not open (`deferrals`), so a bead named here is closed only once the change
+#: taking its last count off has merged (regularization-process.md, "When a Witness
+#: Changes"; review B4 of #636). Set on 15 October 2026 to the twenty counts the audit
 #: found drawn without a strong generator's decision on their current witness
 #: (think-gvke, think-rz8c).
 PENDING_ALLOWED: dict[int, str] = {
