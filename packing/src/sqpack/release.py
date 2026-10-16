@@ -384,7 +384,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "3eae8e6c5a153d54e90a01b1dfd6636618ed266d"
+DATA_REVISION = "13024ef97c01cf889425cd16b1bd44324bbb8a86"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
