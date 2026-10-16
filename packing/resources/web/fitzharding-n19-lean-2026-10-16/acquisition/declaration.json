@@ -1,0 +1,33 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "ofitzharding-sq19",
+  "source_url": "https://github.com/ofitzharding/sq19",
+  "source_ref": "main",
+  "source_commit": "34fb2b7bc39465db368c45cb48d4db58829d3051",
+  "retrieved_at_utc": "2026-10-16T04:12Z",
+  "git_scope": "A full clone of the public repository (six commits, 243 tracked files, 3,360,904 bytes), fetched at 2026-10-16T04:12Z when main and tag v1.0.0 were this commit. Every tracked file is in the scope and retained: the root files and build pins, the 89 hand-written Lean modules under Sq19Lean/, the 137 certificate modules under s19/certificates/ (the endgame shards and assembly blocks the lakefile compiles), the source's scripts, its expected statement, axiom list and generated-source digests, and its verification receipts. The 2,112 generated certificate modules that expected/generated-sources.sha256 lists are not in the tree: they are in the five archives of release v1.0.0 (1,110,588,236 bytes), pinned by size and SHA-256 in the packet's README and not retained. The sq17-lean dependency at 0a7167efa8dcae7fa73855890630fb7e2de550ed is pinned by lake-manifest.json; the fitzharding-n17-lean-2026-10-13 packet retains its statement files at e6ee548 and pins every module by digest.",
+  "archived_dir": "sq19",
+  "license": "MIT. LICENSE: \"Copyright (c) 2026 Oscar Fitzharding\"; README.md: \"MIT License.\"; CITATION.cff: license MIT, author Oscar Fitzharding, version 1.0.0, date-released 2026-10-16. README.md: \"Developed with substantial assistance from Claude and Codex.\"",
+  "claims": [
+    "Sq19.square19_optimality (L : ℝ) : Sq19.Feasible19 L ↔ 3 + 4 * √2 / 3 ≤ L, where Feasible19 L says that there are 19 sets, each a closed unit square Sq19.sq cx cy ux uy with ux^2 + uy^2 = 1 (Sq19.IsUnitSquare), each inside [0, L]^2, with pairwise disjoint interiors; existence at the endpoint is included (Sq19Lean/Assembly/Optimality.lean, Assembly/PlainPacking.lean, SquareBase.lean, Basic.lean, EndpointPacking.lean, expected/statement.txt, README.md)",
+    "Trust boundary: propext, Classical.choice and Quot.sound and 4,320 native_decide certificate checks, no sorryAx, so Lean's compiler and native evaluator are trusted (verification/Square19Optimality.log, expected/axioms.txt, README.md)",
+    "Kernel replay: LeanChecker.replayFromImports over every module of the theorem's 13,143-module import closure, Mathlib included, 0 failures, on the compiled objects of the research build of 15 October 2026, repeated by scripts/verify.py --kernel-replay on 16 October (verification/kernel-replay.json, README.md)",
+    "The generated certificate modules are in release v1.0.0's five archives; scripts/fetch.sh checks each archive against SHA256SUMS and each of the 2,112 extracted files against expected/generated-sources.sha256, and a full build takes several hours on a 64-core, 512 GB machine (scripts/fetch.sh, scripts/verify.py, README.md)"
+  ],
+  "scope": [
+    ".gitignore",
+    "CITATION.cff",
+    "LICENSE",
+    "README.md",
+    "Sq19Lean.lean",
+    "Sq19Lean",
+    "expected",
+    "lake-manifest.json",
+    "lakefile.toml",
+    "lean-toolchain",
+    "s19",
+    "scripts",
+    "verification"
+  ],
+  "pinned_only": []
+}

@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-15'
+last_reviewed: '2026-10-16'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -36785,3 +36785,80 @@ evidence:
       routes this record already counts. No standing bound or rating changes; T-107 and
       T-142 stand.
     source_reviewed: '2026-10-15'
+  - id: E-evand-639-exact-sides-report
+    claim: upper-bound
+    scope: {n_values: [88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact current records 2026-10-16]'
+    certificate: packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/data/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-16'
+    limitations: >-
+      This atom records the source author's report, at evand/square-packing 7d1407a
+      (issue 639), of exact configurations over number fields at 23 counts, of which the
+      16 in scope are the ones the 16 October report-order ledger records
+      (packing/campaign/issue-intake/upper-bounds-20261016/), each below every earlier
+      report at its count. Each side is the one root of an integer polynomial in a rational
+      interval, which the ledger reads cut at 120 places (exact-sides.json there). The
+      author reports verify_exact.py, a standard-library checker in exact rationals, VALID
+      at all 23, and a cross-check of the solver's 64-digit side against each polynomial's
+      interval. At 204, 263, 267 and 297 the data files are pinned by size and SHA-256 and
+      not retained (OR-18). The source asserts each polynomial irreducible and no program of
+      it checks that. No local or global optimality, rigidity or uniqueness is claimed.
+  - id: E-n019-fitzharding-lean-report
+    claim: exact-value
+    scope: {n_values: [19]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/Optimality.lean
+    replay_status: not-attempted
+    verifiers: []
+    axioms_receipt: packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/Square19Optimality.log.gz
+    proof:
+      source: packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/Optimality.lean
+      theorem: >-
+        Sq19.square19_optimality (L : ℝ) : Feasible19 L ↔ 3 + 4 * Real.sqrt 2 / 3 ≤ L.
+        Feasible19 L says there are nineteen closed unit squares sq cx cy ux uy with
+        ux^2 + uy^2 = 1, each inside [0, L]^2, with pairwise disjoint interiors.
+      scope: >-
+        s(19) = 3 + 4√2/3 for nineteen closed unit squares with independent translations
+        and arbitrary rotations, boundary contact allowed and only interiors required
+        disjoint. The feasible sides are the closed ray from 3 + 4√2/3, so the minimum is
+        attained; the existence half is endpoint_packing, in EndpointPacking.lean. No
+        uniqueness of the optimal packing is stated.
+      pinpoints: >-
+        Sq19Lean/Assembly/Optimality.lean (square19_optimality and its #print axioms);
+        Sq19Lean/Assembly/PlainPacking.lean (the bridge to Sq17.sq and containerBox);
+        Sq19Lean/SquareBase.lean (sq, IsUnitSquare); Sq19Lean/Basic.lean (side19);
+        Sq19Lean/EndpointPacking.lean (endpoint_packing); verification/Square19Optimality.log
+        and expected/axioms.txt (the axiom report); verification/kernel-replay.json.
+      assumptions:
+        - Lean 4.34.1's kernel and Mathlib v4.34.1 at d13f23b7 are sound, and so are Lean's compiler, the bundled C compiler and the compiled runtime routines the 4,320 native_decide facts are evaluated by
+        - The build and the kernel replay passed as the source reports. Its receipts are the author's own; nothing here built or elaborated any module
+        - The Sq17Lean modules of sq17-lean at 0a7167e, which the lakefile compiles in place as the half-plane checker, are sound; that tree differs from the e6ee548 the T-154 packet pins only by CITATION.cff
+    limitations: >-
+      The source reports the theorem, its axiom report (propext, Classical.choice,
+      Quot.sound and 4,320 native_decide facts, no sorryAx) and a kernel replay of the
+      theorem's 13,143-module import closure with LeanChecker.replayFromImports, 0
+      failures, on the compiled objects of its research build of 15 October, which checks
+      the proofs and takes the native facts as axioms; and says that a complete rebuild
+      from source "takes several hours on 64 cores and has not yet been run". Nothing here
+      observed or repeated a build: the full from-source build with the axiom check is
+      priced at about 190 to 380 CPU-hours and needs a machine of hundreds of GB, above
+      the pass's 40 CPU-hour cap and this host's 4 cores and 15 GB (think-nqnl, held). The
+      triage of 16 October read the statement and its definitions without a build: the
+      problem is the record's at n = 19 and the constant is the case's exact upper bound.
+      No mathematical review is on file yet (think-o40t), so the entry counts toward no
+      rung above C0.
+    source_reviewed: '2026-10-16'
