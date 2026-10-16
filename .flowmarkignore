@@ -296,3 +296,11 @@ docs/project/site-urls.md
 # Generated changelog: devtools.render_changelog --check compares it byte-for-byte
 # with its YAML source; formatting must not diverge from that renderer.
 CHANGELOG.md
+
+# A regularization selection's Markdown report, written by `devtools.regularize_select
+# --markdown` beside its JSON report and retained as the run wrote it, as the run
+# evidence of the pull request that admitted its views. Pinned Flowmark rewraps its
+# summary line (measured on a copy of jlevy/squares#653's, 2026-10-16); the formatter
+# must never rewrap a retained output, so the batch directories' reports stay exempt.
+packing/cases/regularized_drawings/*/selection-*.md
+

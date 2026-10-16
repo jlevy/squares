@@ -453,6 +453,19 @@ RESULTS: dict[str, Prose] = {
             "and formatting."
         ),
     ),
+    "T-195": Prose(
+        author="PingYou Ltd",
+        reported="in [pull request #622](https://github.com/jlevy/squares/pull/622)",
+        producer_route=False,
+        ai=(
+            "The author says all of its submissions are PingYou Ltd’s, assisted by the PY "
+            "agentic offering."
+        ),
+        routes=(
+            "The source ran both maintained routes itself on its corners witness; those "
+            "runs are its own, and the replay here is independently re-implemented."
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -506,6 +519,15 @@ def _regularized(finder: str, whose: str, *, via: str | None = None) -> Credit:
 #: tables of the reviews that recommended each house; a regularization leaves the packing
 #: with its finder (`T-146`'s `regularizations`).
 CREDITS: dict[int, Credit] = {
+    # PingYou Ltd's tighter certificate of the packing the Kingbird catalogue credits to
+    # Thomas Schadt, improved by David Ellsworth (T-195's regularization of T-009); padding
+    # only, as the source says.
+    29: Credit(
+        ("Thomas Schadt",),
+        ("David Ellsworth", PINGYOU),
+        "PingYou Ltd’s tighter certificate of Thomas Schadt’s packing, as David Ellsworth "
+        "improved it",
+    ),
     70: _regularized(XU, "Ryan Xu’s"),
     84: _couzo("Xu"),
     86: _couzo("Xu"),
