@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-15'
+last_reviewed: '2026-10-16'
 results:
   - id: T-001
     kind: lower-bound
@@ -24891,8 +24891,9 @@ results:
       At retention here the cover's data facts were recomputed, zmx2 was replayed over all
       8,100 roots and zm_mixed.py over the 64 sub-roots from the bytes the source pins, each
       equal to the source's records, with two mutations refused: a reproduction with the
-      producer's code, recorded in the packet and not yet as evidence, so the value stands
-      as reported. The case record holds s(76) >= 1793/200 (wand125) until a review.
+      producer's code, recorded as evidence, and the rungs move once the review is on file,
+      so the value stands as reported. The case record holds s(76) >= 1793/200 (wand125)
+      until a review.
 
       Credit Benjamin Greff (https://github.com/bengreff/s76-certificate), building on Evan
       Daniel's method at margin zero, mixed format, checkers and Lean library, and on
@@ -24915,10 +24916,16 @@ results:
       source_keys: ['[bengreff s76 certificate 2026-10-14]']
       published: '2026-10-14'
     composition: >-
-      Compound: the lower half is the reported cover (E-bengreff-594-cover-report), the
-      upper half the grid (E-basic-grid-upper); the minimum is the lower half's.
+      Compound: the lower half is the reported cover (E-bengreff-594-cover-report) and the
+      intake's reproduction of its two checkers with the producer's code
+      (E-bengreff-594-cover-replay), the upper half the grid (E-basic-grid-upper); the
+      minimum is the lower half's. The reproduction alone would derive V3 and C3; the
+      rungs stay at the reported half's V0 and C0 until the stage 4 review of the cover and
+      the composite is on file (think-l8wi), which the import process asks of a result by
+      others before its rungs move.
     evidence:
       - E-bengreff-594-cover-report
+      - E-bengreff-594-cover-replay
       - E-basic-grid-upper
     artifacts:
       - packing/resources/web/bengreff-s76-certificate-2026-10-14/README.md
@@ -24931,20 +24938,30 @@ results:
       - >-
         packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_triage_checks.log
     next_rung: >-
-      C3 needs the retained zmx2 and zm_mixed.py reproduction recorded as evidence, with
-      case 76 registered in devtools.replay_evand_zmx2 and
-      devtools.audit_evand_mixed_covers, and a review that reads the cover, the two
-      checkers' composite over the D4 region and the wall segments.
+      C3 needs a review with no blocking defect that reads the cover, the two checkers'
+      composite over the D4 region and the wall segments: the reproduction with the
+      producer's code, zmx2 over the D4 roots and zm_mixed.py over the sub-roots of the
+      four it leaves, is recorded and cited (E-bengreff-594-cover-replay), and the rungs
+      move when the review is mapped. V4 and C4 would then need a second adversarial AI
+      review by a distinct reviewer and a human oversight record.
     unfinished_confirmations:
       - what: >-
-          an adversarial review of the cover, the zmx2 and zm_mixed.py composite over the D4
-          region and the reduction, recorded under docs/project/reviews/
-        rung: C1
-        link: think-osvq
+          the stage 4 review of the cover, the zmx2 and zm_mixed.py composite over the D4
+          region, the reduction and the wall segments, recorded under docs/project/reviews/,
+          which lets the rungs move to what the cited reproduction supports
+        rung: C3
+        link: think-l8wi
+    activity:
+      state: in-analysis
+      what: the stage 4 review of the cover and of the two checkers' composite over the D4 region
+      since: '2026-10-16'
+      link: think-l8wi
     notes: >-
       V0 because the cited lower-half entry is the source's public claim, assurance
       reported. C0 because no review is on file; the retention's reproduction of the
-      source's two checkers is in the packet's receipts. The case lanes are unchanged, so
+      source's two checkers is cited (E-bengreff-594-cover-replay), and the rungs are held
+      below what it derives until the review, as the composition says. The case lanes are
+      unchanged, so
       the entry is pending adoption at n = 76 while wand125's 1793/200 holds the lower
       lanes. The source's full zm_mixed.py pass over all 129,600 D4 roots is not at the
       pinned revision.
@@ -26034,9 +26051,9 @@ results:
       At retention here the cover's data facts were recomputed, zmx2 was replayed over
       all 10,000 roots and zm_mixed.py over the 304 sub-roots from the bytes the source
       pins, each equal to the source's records, with two mutations refused: a
-      reproduction with the producer's code, recorded in the packet and not yet as
-      evidence, so the value stands as reported. The case record holds s(95) >= 1993/200
-      (wand125) until a review.
+      reproduction with the producer's code, recorded as evidence, and the rungs move once
+      the review is on file, so the value stands as reported. The case record holds s(95)
+      >= 1993/200 (wand125) until a review.
 
       Credit Benjamin Greff (https://github.com/bengreff/s95-certificate), building on
       Evan Daniel's method at margin zero, mixed format, checkers and Lean library, and
@@ -26062,28 +26079,44 @@ results:
       source_keys: ['[bengreff s95 certificate 2026-10-15]']
       published: '2026-10-15'
     composition: >-
-      Compound: the lower half is the reported cover (E-bengreff-610-cover-report), the
-      upper half the grid (E-basic-grid-upper); the minimum is the lower half's.
-    evidence: [E-bengreff-610-cover-report, E-basic-grid-upper]
+      Compound: the lower half is the reported cover (E-bengreff-610-cover-report) and the
+      intake's reproduction of its two checkers with the producer's code
+      (E-bengreff-610-cover-replay), the upper half the grid (E-basic-grid-upper); the
+      minimum is the lower half's. The reproduction alone would derive V3 and C3; the
+      rungs stay at the reported half's V0 and C0 until the stage 4 review of the cover and
+      the composite is on file (think-l8wi), which the import process asks of a result by
+      others before its rungs move.
+    evidence: [E-bengreff-610-cover-report, E-bengreff-610-cover-replay, E-basic-grid-upper]
     artifacts:
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
     next_rung: >-
-      C3 needs the retained zmx2 and zm_mixed.py reproduction recorded as evidence, with
-      case 95 registered in devtools.replay_evand_zmx2 and
-      devtools.audit_evand_mixed_covers (think-ccjt), and a review that reads the cover,
-      the two checkers' composite over the D4 region and the 404 wall segments.
+      C3 needs a review with no blocking defect that reads the cover, the two checkers'
+      composite over the D4 region and the 404 wall segments: the reproduction with the
+      producer's code, zmx2 over the D4 roots and zm_mixed.py over the sub-roots of the 19
+      it leaves, is recorded and cited (E-bengreff-610-cover-replay), and the rungs move
+      when the review is mapped. V4 and C4 would then need a second adversarial AI review
+      by a distinct reviewer and a human oversight record.
     unfinished_confirmations:
       - what: >-
-          an adversarial review of the cover, the zmx2 and zm_mixed.py composite over
-          the D4 region and the reduction, recorded under docs/project/reviews/
-        rung: C1
-        link: think-ribz
+          the stage 4 review of the cover, the zmx2 and zm_mixed.py composite over the D4
+          region, the reduction and the 404 wall segments, recorded under
+          docs/project/reviews/, which lets the rungs move to what the cited
+          reproduction supports
+        rung: C3
+        link: think-l8wi
+    activity:
+      state: in-analysis
+      what: the stage 4 review of the cover and of the two checkers' composite over the D4 region
+      since: '2026-10-16'
+      link: think-l8wi
     notes: >-
       V0 because the cited lower-half entry is the source's public claim, assurance
       reported. C0 because no review is on file; the retention's reproduction of the
-      source's two checkers is in the packet's receipts. The case lanes are unchanged,
+      source's two checkers is cited (E-bengreff-610-cover-replay), and the rungs are held
+      below what it derives until the review, as the composition says. The case lanes are
+      unchanged,
       so the entry is pending adoption at n = 95 while wand125's 1993/200 holds the
       lower lanes. At n = 96 it gives s(96) >= 10 by monotonicity, which T-081 registers
       already. No full zm_mixed.py pass over the 160,000 D4 roots is at the pinned

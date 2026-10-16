@@ -43,3 +43,25 @@ deferrals:
       the smallest sides known, and whether a verified ceiling may rest on that one route
       is the owner's (RP-3). A case record cites the evidence once a house adopts one, or
       the owner's answer says where it belongs.
+  - evidence: E-bengreff-594-cover-replay
+    results: [T-184]
+    bead: think-ccjt
+    blocked_on: think-l8wi
+    recorded: '2026-10-16'
+    reason: >-
+      The intake's reproduction of Greff's two checkers on the s(76) cover is recorded
+      before the stage 4 review of the cover and of the zmx2 and zm_mixed.py composite,
+      which a result by others needs before its rungs move and its case adopts it
+      (result-import.md, stage 4). The case record at 76 cites it when that review lands
+      with no blocking defect.
+  - evidence: E-bengreff-610-cover-replay
+    results: [T-191]
+    bead: think-ccjt
+    blocked_on: think-l8wi
+    recorded: '2026-10-16'
+    reason: >-
+      The intake's reproduction of Greff's two checkers on the s(95) cover is recorded
+      before the stage 4 review of the cover and of the zmx2 and zm_mixed.py composite,
+      which a result by others needs before its rungs move and its case adopts it
+      (result-import.md, stage 4). The case record at 95 cites it when that review lands
+      with no blocking defect.

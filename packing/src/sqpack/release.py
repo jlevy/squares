@@ -2369,6 +2369,38 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.2.2."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main e2e018f3 at link revision e2e018f3, once "
+            "with main's register and source register and once with this branch's, the "
+            "four papers' HTML before the browser's math pass, which this host cannot run, "
+            "and their Markdown are byte-identical; the PDFs print from that HTML. The "
+            "register's T-184 and T-191 cite the s(76) and s(95) replays and change their "
+            "claim, composition, next_rung, notes, unfinished confirmation and activity, "
+            "with their rungs and the register count unchanged, and the two source rows "
+            "cite the replays; no paper prints any of it, so each keeps its edition."
+        ),
+    ),
 )
 
 
