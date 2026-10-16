@@ -6,24 +6,30 @@ all 23 exact forms of evand/square-packing at 7d1407a, with four mutated control
 count (`packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py`,
 receipt `receipts/replay-verify-exact.json`). This holds the smallest retained form, n =
 51, to the same outcomes: the original is VALID with the statement the source prints, and
-a square moved through the wall it touches and a duplicate square are refused.
+a square moved through the wall it touches and a duplicate square are refused. It also
+holds the replay driver's irreducibility test to refusing a perfect power, and its resume
+cache to reusing only a record of the same run.
 """
 
 from __future__ import annotations
 
 import gzip
 import hashlib
+import importlib.util
 import json
 import subprocess
 import sys
 from fractions import Fraction
 from pathlib import Path
 
+import pytest
+
 PACKING = Path(__file__).resolve().parents[1]
 WEB = PACKING / "resources/web"
 CHECKER = WEB / "evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py"
 DATA = WEB / "evand-exact-cur-2026-10-16/source/search/exact/cur/data"
 FORM = DATA / "n-51.minpoly.json.gz"
+DRIVER = WEB / "evand-exact-cur-2026-10-16/review/replay_verify_exact.py"
 
 
 def check(path: Path) -> tuple[int, str]:
@@ -84,3 +90,72 @@ def test_a_duplicate_square_is_refused(tmp_path: Path) -> None:
     assert status == 1
     assert "NOT VERIFIED" in line
     assert "no separating line" in line
+
+
+def driver() -> object:
+    spec = importlib.util.spec_from_file_location("replay_verify_exact", DRIVER)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def with_polynomial(tmp_path: Path, name: str, low_first: list[int]) -> Path:
+    data = form()
+    side = data["S"]
+    assert isinstance(side, dict)
+    side["poly"] = [str(c) for c in low_first]
+    return written(tmp_path, name, data)
+
+
+def test_the_irreducibility_test_refuses_a_perfect_power(tmp_path: Path) -> None:
+    factored = driver().factored  # type: ignore[attr-defined]
+    # x^2 - 2 is irreducible; (x^2 - 2)^2 = x^4 - 4x^2 + 4 is not, nor is it squarefree;
+    # (x^2 - 2)(x^2 - 3) = x^4 - 5x^2 + 6 is squarefree and reducible.
+    prime = factored(with_polynomial(tmp_path, "prime.json.gz", [-2, 0, 1]))
+    square = factored(with_polynomial(tmp_path, "square.json.gz", [4, 0, -4, 0, 1]))
+    product = factored(with_polynomial(tmp_path, "product.json.gz", [6, 0, -5, 0, 1]))
+    assert (prime["squarefree"], prime["irreducible"]) == (True, True)
+    assert (square["squarefree"], square["irreducible"]) == (False, False)
+    assert square["factors"] == [[2, 2]]
+    assert (product["squarefree"], product["irreducible"]) == (True, False)
+
+
+def test_the_resume_cache_reuses_only_the_same_run(tmp_path: Path) -> None:
+    module = driver()
+    cached, run_key = module.cached, module.run_key  # type: ignore[attr-defined]
+    calls: list[str] = []
+
+    def job(label: str) -> object:
+        return lambda: calls.append(label) or {"ran": label}
+
+    first = cached(tmp_path, "n-51", run_key("a" * 64, None), job("first"))
+    again = cached(tmp_path, "n-51", run_key("a" * 64, None), job("again"))
+    changed = cached(tmp_path, "n-51", run_key("b" * 64, None), job("changed"))
+    control = cached(tmp_path, "n-51", run_key("b" * 64, "duplicate"), job("control"))
+    assert (first, again, changed, control) == (
+        {"ran": "first"},
+        {"ran": "first"},
+        {"ran": "changed"},
+        {"ran": "control"},
+    )
+    assert calls == ["first", "changed", "control"]
+
+
+def test_the_resume_cache_misses_on_another_driver_or_interpreter(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = driver()
+    cached, run_key = module.cached, module.run_key  # type: ignore[attr-defined]
+    calls: list[str] = []
+
+    def job(label: str) -> object:
+        return lambda: calls.append(label) or {"ran": label}
+
+    cached(tmp_path, "n-51.duplicate", run_key("a" * 64, "duplicate"), job("first"))
+    monkeypatch.setattr(module, "driver_digest", lambda: "f" * 64)
+    cached(tmp_path, "n-51.duplicate", run_key("a" * 64, "duplicate"), job("driver"))
+    monkeypatch.setattr(module, "interpreter", lambda: "CPython 0.0.0")
+    cached(tmp_path, "n-51.duplicate", run_key("a" * 64, "duplicate"), job("python"))
+    assert calls == ["first", "driver", "python"]
