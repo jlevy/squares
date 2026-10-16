@@ -441,6 +441,70 @@ RESULTS: dict[str, Prose] = {
             "and formatting."
         ),
     ),
+    "T-186": Prose(
+        author="Mykhailo Polkovskyi",
+        reported=(
+            "in [his repository](https://github.com/Mishapolk/square-packing-records) on 14 "
+            "October 2026, with no issue"
+        ),
+        producer_route=False,
+        ai=(
+            "The commit makes no statement about AI assistance; the author’s issue 593 "
+            "discloses Gemini assistance with solver scripting, precision checks and "
+            "formatting."
+        ),
+    ),
+    "T-187": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#606](https://github.com/jlevy/squares/issues/606)",
+        producer_route=False,
+        ai=(
+            "The issue says the search, the checks and the request were done with Claude "
+            "(Claude Code), directed and reviewed by Evan Daniel."
+        ),
+        lineage=(
+            "The author started his chain search from Ryan Xu’s packing and names Robert "
+            "Barnett’s refinement of it as the record it improves, calling the result a "
+            "different local minimum. Measured here pose by pose, it pairs one to one with "
+            "Xu’s packing and with Barnett’s under the identity, nine squares moving beyond a "
+            "tenth: another arrangement of Xu’s design, a refinement of neither (T-187)."
+        ),
+    ),
+    "T-188": Prose(
+        author="Francisco Couzo",
+        reported=(
+            "in [his repository](https://github.com/franciscouzo/square-packing) on 14 "
+            "October 2026, with no issue"
+        ),
+        producer_route=True,
+        ai=(
+            "The commit makes no statement about AI assistance; the author’s issues of 13 and "
+            "14 October say OpenAI Codex assisted the search and verification "
+            "orchestration, that earlier search work used Claude Code, and that he directed "
+            "the work."
+        ),
+        lineage=(
+            "The certificate’s metadata seeds the author’s search from Daniil Ostashev’s "
+            "certificate, whose digest is that of issue 575’s, though it labels it issue 501. "
+            "Measured here pose by pose, it continues Ostashev’s issue-575 arrangement as the "
+            "author’s issue-583 and issue-586 certificates did, five squares moving beyond a "
+            "tenth against each: another arrangement of that design (T-188)."
+        ),
+    ),
+    "T-190": Prose(
+        author="Francisco Couzo",
+        reported=(
+            "in [his repository](https://github.com/franciscouzo/square-packing) on 15 "
+            "October 2026, with no issue"
+        ),
+        producer_route=True,
+        ai=(
+            "The commit makes no statement about AI assistance; the author’s issue 607, of "
+            "the day before, says OpenAI Codex assisted the search and verification "
+            "orchestration, that earlier search work used Claude Code, and that he directed "
+            "the work."
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -450,6 +514,8 @@ DANIEL = "Evan Daniel"
 PINGYOU = "PingYou Ltd"
 OSTASHEV = "Daniil Ostashev"
 BARNETT = "Robert Barnett"
+#: Mykhailo Polkovskyi, by the handle his earlier credits use (T-173, T-183).
+POLKOVSKYI = "Mishapolk"
 
 
 @dataclass(frozen=True)
@@ -515,18 +581,20 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s reconstruction and exact certificate of Ryan Xu’s arrangement",
     ),
     127: _couzo("Xu"),
-    # Issue 562's cut-out; the piece lineage stays in the author's voice (RQ-11), in
-    # T-162's `lineage`.
-    129: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # Mykhailo Polkovskyi's KKT refinement of PR 574's re-solve of issue 562's packing
+    # (T-186's regularization of T-174), no square moved beyond 1e-3.
+    129: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 129 packing, as PingYou "
+        "Ltd refined it",
+    ),
     131: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
     132: Credit((DANIEL,), (), "Evan Daniel’s record-hunt packing"),
-    # Barnett's packing re-solved, no square moved beyond 2e-06 (T-168's regularization
-    # of T-150).
-    146: Credit(
-        (XU,),
-        (BARNETT, PINGYOU),
-        "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
-    ),
+    # Evan Daniel's chain search from Ryan Xu's packing: another arrangement of Xu's design,
+    # nine squares beyond a tenth against Xu's and Barnett's (RT-5 of the 16 October
+    # review; T-187 records no regularization).
+    146: Credit((XU,), (DANIEL,), "Evan Daniel’s arrangement of Ryan Xu’s n = 146 design"),
     # PingYou Ltd's design rearranged by Mykhailo Polkovskyi, as the 14 October review
     # measured it (RQ-5); whether it is a new arrangement is the owner's decision 1 on
     # pull request 602 (T-173).
@@ -536,31 +604,39 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s arrangement of PingYou Ltd’s n = 153 design, after Ryan "
         "Xu’s n = 70 packing and Evan Daniel’s exact certificate of it",
     ),
-    # Francisco Couzo's issue-586 packing, from Evan Daniel's arrangement through his own
-    # issue-583 refinement of it, moved well beyond a refinement (T-182).
+    # T-182's packing re-solved (T-186's regularization of T-182), after Evan Daniel's
+    # issue-552 arrangement (RT-4 of the 16 October review).
     154: Credit(
         (DANIEL,),
-        (COUZO,),
-        "Francisco Couzo’s further arrangement of Evan Daniel’s n = 154 packing",
+        (COUZO, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement of Francisco Couzo’s further arrangement of Evan "
+        "Daniel’s n = 154 packing",
     ),
     155: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
-    # Issue 561's continuation of Ostashev's packing (T-149), paired square for square.
+    # PR 574's padding of issue 561's continuation of Ostashev's packing, padded again
+    # (T-186's regularization of T-174; RT-4).
     156: Credit(
         (OSTASHEV,),
-        (COUZO,),
-        "Francisco Couzo’s continuation of Daniil Ostashev’s n = 156 packing",
+        (COUZO, PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
+        "Daniil Ostashev’s n = 156 packing, after PingYou Ltd’s",
     ),
-    175: _composed(
-        "two of his 38-square rectangles with David Ellsworth’s n = 171 template, in place "
-        "of its pieces of Thomas Schadt’s n = 50 packing"
+    # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
+    # T-174).
+    175: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
+        "Ostashev’s composition of two of his 38-square rectangles with David Ellsworth’s "
+        "n = 171 template, in place of its pieces of Thomas Schadt’s n = 50 packing",
     ),
-    # Couzo's re-solve of his issue-561 packing (T-165's regularization of T-161), which
-    # moves Daniil Ostashev's issue-562 arrangement, as issue 561 states.
+    # Ostashev's issue-575 packing re-solved, through PR 574's (T-186's regularization of
+    # T-174; RP-4 of the PR 574 review).
     176: Credit(
         (OSTASHEV,),
-        (COUZO,),
-        "Francisco Couzo’s exact re-solve of his issue-561 packing, which moves Daniil "
-        "Ostashev’s n = 176 arrangement",
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s exact re-solve of Daniil Ostashev’s issue-575 n = 176 "
+        "packing, after PingYou Ltd’s",
     ),
     180: Credit(
         (SQUISH,),
@@ -576,27 +652,41 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s exact re-solve of PingYou Ltd’s assembly of two placed "
         "patches of Ryan Xu’s n = 70 packing, from Evan Daniel’s exact certificate of it",
     ),
-    # A new arrangement, as issue 562 states (T-162).
-    204: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # PR 574's re-solve of issue 562's packing, re-solved again (T-186's regularization of
+    # T-174), two squares moved beyond 1e-3.
+    204: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 204 packing, as PingYou "
+        "Ltd refined it",
+    ),
     209: _couzo("SQUISH"),
-    # Issue 583's continuation of Daniil Ostashev's issue-575 packings, tightened by issue
-    # 586 (T-182's regularizations of T-181); issue 593's joint request is the owner's.
+    # Couzo's further arrangement of Ostashev's issue-575 design, five squares beyond a
+    # tenth against T-182 and T-175 (RT-1 of the 16 October review; T-188 records no
+    # regularization).
     211: Credit(
         (OSTASHEV,),
         (COUZO,),
-        "Francisco Couzo’s continuation of Daniil Ostashev’s n = 211 packing",
+        "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
     ),
     228: Credit((COUZO,), (), "Francisco Couzo’s refinement of his own packing"),
-    232: _composed(
-        "his 38-square rectangle with a 76-square piece of Erich Friedman’s n = 85 packing"
+    # PR 574's re-solve of issue 528's composition, re-solved again (T-186's
+    # regularization of T-174).
+    232: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement, after PingYou Ltd’s, of Daniil Ostashev’s "
+        "composition of his 38-square rectangle with a 76-square piece of Erich Friedman’s "
+        "n = 85 packing",
     ),
     236: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    # Francisco Couzo's issue-561 design, after SQUISH's packing, rearranged (T-183).
+    # Couzo's refinement of issue 593's arrangement of his issue-561 design (T-190's
+    # regularization of T-183).
     237: Credit(
         (SQUISH,),
-        (COUZO, "Mishapolk"),
-        "Mykhailo Polkovskyi’s arrangement of Francisco Couzo’s design, after Nate "
-        "Chaoweeraprasit’s SQUISH packing",
+        (COUZO, POLKOVSKYI),
+        "Francisco Couzo’s refinement of Mykhailo Polkovskyi’s arrangement of Couzo’s "
+        "design, after Nate Chaoweeraprasit’s SQUISH packing",
     ),
     238: _mondrian("SQUISH’s own n = 305 and n = 154 packings"),
     239: _mondrian(
@@ -617,9 +707,14 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
     ),
     263: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    264: _composed(
-        "his 38-square rectangle with a 93-square piece of Evan Daniel’s exact optimum of "
-        "Joost de Winter’s n = 126 packing"
+    # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
+    # T-174).
+    264: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
+        "Ostashev’s composition of his 38-square rectangle with a 93-square piece of Evan "
+        "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
     267: _couzo("Xu"),
     269: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
@@ -627,11 +722,13 @@ CREDITS: dict[int, Credit] = {
         "SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird catalogue’s former "
         "n = 19 packing"
     ),
-    # Issue 561's refinement of SQUISH's packing (T-151), paired square for square.
+    # PR 574's padding of issue 561's refinement of SQUISH's packing, padded again
+    # (T-186's regularization of T-174; RT-4: whether T-161 lists T-151 is the owner's).
     271: Credit(
         (SQUISH,),
-        (COUZO,),
-        "Francisco Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing",
+        (COUZO, PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Francisco "
+        "Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing",
     ),
     # SQUISH's packing re-solved, no square moved beyond 2e-07 (T-171's regularization of
     # T-151).
@@ -642,15 +739,28 @@ CREDITS: dict[int, Credit] = {
     ),
     292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
     295: _regularized(XU, "Ryan Xu’s"),
-    # Issue 583's continuation of PingYou Ltd's n302 arrangement (T-181, T-164).
+    # Issue 583's continuation of PingYou Ltd's arrangement, padded (T-186's
+    # regularization of T-181; RT-4).
     302: Credit(
         (PINGYOU,),
-        (COUZO,),
-        "Francisco Couzo’s continuation of PingYou Ltd’s n = 302 arrangement",
+        (COUZO, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
+        "PingYou Ltd’s n = 302 arrangement",
     ),
-    # A new arrangement, as issue 562 states (T-162).
-    303: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
-    304: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # PR 574's padding of issue 562's packing, padded again (T-186's regularization of
+    # T-174).
+    303: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
+        "Ostashev’s n = 303 packing",
+    ),
+    # Issue 575's packing padded (T-186's regularization of T-175).
+    304: Credit(
+        (OSTASHEV,),
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s tighter certificate of Daniil Ostashev’s n = 304 packing",
+    ),
     305: Credit(
         (SQUISH,),
         (COUZO,),

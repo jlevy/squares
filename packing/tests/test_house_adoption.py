@@ -81,18 +81,26 @@ def test_every_adopted_case_holds_the_derived_smallest_side(
 
 #: The counts where a held certificate (T-174's) was the smallest and the next candidate
 #: took the house on 15 October 2026, once a hold skipped only the held entry (reviews A
-#: and B of PR 614), each with the house it moved from.
+#: and B of PR 614), each with the house it moved from. The pass of 16 October 2026 moved
+#: seven of the ten again (`MOVED_AGAIN`), to certificates below T-174's.
 NEXT_CANDIDATES = {
     105: ("T-170", "T-130"),
-    129: ("T-162", "T-146"),
-    146: ("T-168", "T-150"),
-    156: ("T-161", "T-149"),
-    176: ("T-165", "T-151"),
-    204: ("T-162", None),
     261: ("T-169", "T-150"),
-    271: ("T-161", "T-151"),
     272: ("T-171", "T-151"),
-    303: ("T-162", "T-146"),
+}
+
+#: The counts of the 15 October next candidates that the 16 October review's adoption
+#: moved again, each with its house since then and the next candidate it replaced: T-186
+#: (Mykhailo Polkovskyi) and T-187 (Evan Daniel) are below T-174 there, so the hold no
+#: longer decides them.
+MOVED_AGAIN = {
+    129: ("T-186", "T-162"),
+    146: ("T-187", "T-168"),
+    156: ("T-186", "T-161"),
+    176: ("T-186", "T-165"),
+    204: ("T-186", "T-162"),
+    271: ("T-186", "T-161"),
+    303: ("T-186", "T-162"),
 }
 
 
@@ -111,7 +119,22 @@ def test_a_hold_skips_only_the_held_entry(
             assert adopt._holder(packing).endswith(f"({before})")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
     held_counts = {n for n, s in selections.items() if s.held}
     assert set(NEXT_CANDIDATES) < held_counts
-    assert len(held_counts) == 60
+    assert len(held_counts) == 50
+
+
+def test_a_house_below_the_held_entry_leaves_the_hold_deciding_nothing(
+    selections: dict[int, select.Selection], latest: dict[int, str]
+) -> None:
+    """The 16 October adoption moved seven of the 15 October next candidates to
+    certificates below T-174's, so no hold is named there and the earlier pass's house is
+    the record's holder before this pass."""
+    for n, (result, before) in MOVED_AGAIN.items():
+        assert houses.ADOPTED[n] == result
+        assert houses.adopted_on(n) == "2026-10-16"
+        assert not selections[n].held
+        held = [c for c in selections[n].candidates if c.result == "T-174"]
+        assert all(c.side > houses.side(n) for c in held)
+        assert adopt._holder(_front(latest[n])).endswith(f"({before})")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
 
 
 def test_regularizations_leave_the_packing_with_its_finder(
@@ -119,13 +142,16 @@ def test_regularizations_leave_the_packing_with_its_finder(
 ) -> None:
     houses_at = {
         n: next(c for c in selections[n].candidates if c.result == houses.ADOPTED[n])
-        for n in (70, 103, 211, 236)
+        for n in (70, 103, 211, 236, 241)
     }
+    # T-188's 211 is another arrangement of Ostashev's design, no refinement (RT-1 of the
+    # 16 October review), so it regularizes nothing.
     assert {n: house.regularizes for n, house in houses_at.items()} == {
         70: "T-125",
         103: "T-138",
-        211: "T-181",
+        211: None,
         236: "T-136",
+        241: "T-181",
     }
     assert adopt.CREDITS[236].found_by == (adopt.SQUISH,)
     assert adopt.CREDITS[70].found_by == (adopt.XU,)
