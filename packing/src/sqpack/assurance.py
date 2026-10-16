@@ -133,8 +133,12 @@ def conditions(evidence: Mapping[str, object]) -> list[tuple[str, list[str]]]:
 def discharges(evidence: Mapping[str, object] | None, *, confirming: bool = True) -> bool:
     """A complete machine execution can discharge a premise on the selected axis.
 
-    Verification accepts an admitted producer run; confirmation requires execution
-    beyond the producer. This checks one run, not its own premise closure.
+    Confirmation requires execution beyond the producer. Verification also accepts the
+    producer's own formal build once it is admitted (`external_formal_build_problems`);
+    a producer's exact or interval run has no admission rule and discharges nothing.
+    Only machine executions discharge: a published or audited proof of a premise is
+    read, not run (epistemics.md, Reported Formal Proofs and Source Builds). This checks
+    one run, not its own premise closure.
     """
     return (
         evidence is not None
@@ -145,7 +149,10 @@ def discharges(evidence: Mapping[str, object] | None, *, confirming: bool = True
         and evidence.get("replay_status") == "passed"
         and not sampled(evidence)
         and not external_formal_build_problems(evidence)
-        and (not confirming or confirming_execution(evidence))
+        and (
+            confirming_execution(evidence)
+            or (not confirming and formal_run_elsewhere(evidence))
+        )
     )
 
 

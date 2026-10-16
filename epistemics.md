@@ -104,7 +104,9 @@ A conditional proof verifies its implication even while a premise remains open.
 Its unconditional conclusion takes the weakest support along every cited premise chain,
 separately for V and C. Each premise needs complete, scope-covering evidence; samples,
 missing references and circular discharge supply no whole-claim rung.
-A producer’s admitted execution can discharge a premise for V without discharging C.
+A producer’s formal build, once admitted under the rule above, can discharge a premise
+for V without discharging C; a producer’s exact or interval run has no such admission
+and discharges nothing.
 Reading the conditional claim can still support C1.
 
 This credits the source’s verification and does not independently authenticate its

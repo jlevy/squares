@@ -64,7 +64,7 @@ $defs:
           The hypotheses the proved theorem takes and does not itself prove, where the
           theorem is "H implies the claim": each with the evidence entries that discharge
           it, a complete passing execution with its own premises discharged, or none.
-          A producer's admitted execution can discharge verification; confirmation
+          A producer's admitted formal build can discharge verification; confirmation
           requires execution beyond the producer throughout the premise chain. Every
           discharge covers the theorem's scope; samples and cycles do not discharge.
           With none the entry is a conditional theorem, verified only as the

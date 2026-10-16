@@ -299,7 +299,8 @@ def test_recursive_source_premises_use_the_weakest_proof_rung() -> None:
     assert conditional_problems({row["id"]: row for row in entries}) == []
     assert derive_verification(entries, [expert], record=ONE_CASE) == "V5"
     assert derive_confirmation(entries, [expert], record=ONE_CASE) == "C1"
-    leaf["method"] = "exact-algebraic"
+    # An exact premise, replayed here, caps the chain at its own rung.
+    leaf.update(method="exact-algebraic", origin="replayed-here", performed_by="repository")
     assert derive_verification(entries, [expert], record=ONE_CASE) == "V3"
 
 
@@ -459,3 +460,18 @@ def test_the_live_register_shares_no_build_receipt_across_actors() -> None:
         row["id"]: row for row in safe_load(check_results.EVIDENCE.read_text())["evidence"]
     }
     assert shared_receipt_problems(evidence) == []
+
+
+def test_a_producers_unadmitted_exact_run_discharges_no_premise() -> None:
+    """Only an admitted formal build carries a premise for V without a run beyond the
+    producer; exact and interval producer runs have no admission rule."""
+    premise = exact_replay("E-premise", "derived-structure")
+    premise.update(origin="external", performed_by="source-author")
+    entry = requires(source_build(), premise["id"])
+    entries = [entry, premise]
+    problems = conditional_problems({row["id"]: row for row in entries})
+    assert any("E-premise" in problem for problem in problems), problems
+    assert derive_verification(entries, record=ONE_CASE) == "V0"
+    premise.update(origin="replayed-here", performed_by="repository")
+    assert conditional_problems({row["id"]: row for row in entries}) == []
+    assert derive_verification(entries, record=ONE_CASE) == "V3"
