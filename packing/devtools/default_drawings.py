@@ -190,7 +190,20 @@ _RUN3A = (
     ("regularize_grid_slack/1", "grid-slack-3a-deg1-1016"),
     ("regularize_grid_slack/1", "grid-slack-3a-deg5-1016"),
 )
-_README_3A = "packing/atlas/known-best/README.md, the paragraph of 16 October 2026"
+_README_3A = (
+    "packing/atlas/known-best/README.md, the paragraph of 16 October 2026; the reproduction "
+    "runs' evidence in packing/cases/regularized_drawings/think-la7h-2026-10-16/"
+)
+#: The same generators again on the same witnesses, from main e2e018f32 on 16 October
+#: 2026, since the runs above stayed on the host that ran them (review B1 of #644); their
+#: reports, receipts and selection are in the evidence directory `_README_3A` names.
+_RERUN3A_GRID = (
+    ("regularize_grid_slack/1", "grid-slack-3a-rerun-deg05-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3a-rerun-deg1-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3a-rerun-deg5-1016"),
+)
+_RERUN3A_204_272 = (("evand-regularize", "evand-regularize-3a-rerun-s-1016"), *_RERUN3A_GRID)
+_RERUN3A_303 = (("evand-regularize", "evand-regularize-3a-rerun-303-1016"), *_RERUN3A_GRID)
 _OSTASHEV = "[Ostashev compositions 2026-10-12]"
 _OSTASHEV_REVISION = "fe43a64ecf2581cdbd11830e8a5be0989746c5d3"
 
@@ -317,7 +330,7 @@ SETTLED: dict[int, Settled] = {
         "74043316171934782832354950404729823976428779059647971914573074043316171934782832"
         "354950404729823976428779059647971914573/5000000000000000000000000000000000000000"
         "000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        _RUN3A,
+        (*_RUN3A, *_RERUN3A_204_272),
         "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
         "Evan Daniel's same-side view is refused at row 7 (a total of shared sides falls)",
         _README_3A,
@@ -375,7 +388,7 @@ SETTLED: dict[int, Settled] = {
         "16965586474837670635756007033422045569629875768259044235142914938302930222751180"
         "26464939778830359993334240647227/10000000000000000000000000000000000000000000000"
         "0000000000000000000000000000000000000000000000000000000000000000",
-        _RUN3A,
+        (*_RUN3A, *_RERUN3A_204_272),
         "grid-slack's view is refused at row 7 at all three thresholds (stage sides fall, "
         "732 to 730), and Evan Daniel's view is held at row 4 (solved above U)",
         _README_3A,
@@ -408,7 +421,7 @@ SETTLED: dict[int, Settled] = {
         "17909958291069907981595741081398736080048627080527013735224117909958291069907981"
         "5957410813987360800486270805270137352241/100000000000000000000000000000000000000"
         "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        _RUN3A,
+        (*_RUN3A, *_RERUN3A_303),
         "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
         "Evan Daniel's view is held at row 4 (solved above U)",
         _README_3A,

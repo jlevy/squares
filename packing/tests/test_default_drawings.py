@@ -343,6 +343,9 @@ def test_a_decision_names_what_it_still_owes_and_the_bead_that_owns_it() -> None
     # contract allows), as the three of 16 October 2026 (think-la7h) do, and its state
     # says nothing is owed rather than inventing a debt.
     rows = {row["n"]: row for row in _record()["states"]}
+    # The ten of 15 October still owe their work until think-0ut1 records it.
+    for n in (102, 110, 123, 155, 179, 180, 236, 258, 263, 269):
+        assert defaults.SETTLED[n].owed is not None, n
     for n, held in defaults.SETTLED.items():
         if held.state != defaults.DECIDED:
             continue
