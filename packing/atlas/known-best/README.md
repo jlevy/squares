@@ -283,6 +283,16 @@ thresholds, and his, held at row 4, solved $8.9 \times 10^{-31}$ above $U$.
 `devtools.default_drawings.SETTLED` records it as decided on these four runs.
 At 153 and 207 his solved views lie below $U$, by $1.6 \times 10^{-14}$ and
 $2.4 \times 10^{-12}$; they are register candidates for the owner and are not drawn.
+The evidence for these choices and for 304 is retained in
+[`cases/regularized_drawings/think-kpm3-2026-10-16/`](../../cases/regularized_drawings/think-kpm3-2026-10-16/):
+`regularize_select`’s report (`selection-3b.json`, every candidate’s decision and
+reasons, and `selection-3b.md`), the driver’s `receipt.json`, and each run’s per-count
+`report.json`, gzip-compressed.
+Grid-slack keeps no receipt of its own, so each of its three runs has a `run.json`, the
+block `regularize_grid_slack.run_block` computes from its reports; the index records
+only the five-degree run, which supplied a view, and that block is the same as the
+index’s. Its cost is the per-count seconds the reports record, which are wall seconds
+under load. The views themselves are not retained beyond the seven the layer draws.
 
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
