@@ -620,7 +620,9 @@ def test_only_the_admitted_selection_may_write_into_this_checkout(tmp_path: Path
 
 def scratch_tree(tmp_path: Path) -> tuple[Path, AtlasLayout]:
     """A tree laid out as the checkout is, with one count (the axis tests' row of four
-    with slack) and the axis tool's layer built over it."""
+    with slack) and the axis tool's layer built over it. The row carries a passed
+    numerical receipt, as every house witness of the checkout does, since admission
+    measures the house drawing to read what the atlas draws (`regularize_select.drawn`)."""
     root = tmp_path / "tree"
     packing = root / "packing"
     (packing / "witnesses/known-best").mkdir(parents=True)
@@ -630,6 +632,12 @@ def scratch_tree(tmp_path: Path) -> tuple[Path, AtlasLayout]:
         "4",
         name="row",
     )
+    row["claim"] = {
+        **row["claim"],
+        "method": "numerical-multiprecision",
+        "precision": {"decimal_digits": 120, "rounding": "nearest"},
+    }
+    row["certificate"] = {"kind": "synthetic", "result": {"check_passed": True}}
     write_witness(packing / "witnesses/known-best/n-004.yaml", row)
     manifest = packing / "atlas/known-best/manifest.json"
     entries = [{"n": 4, "witness": {"path": "witnesses/known-best/n-004.yaml"}}]
@@ -755,6 +763,199 @@ def test_an_admitted_view_enters_the_layer_under_its_contract(
     assert certificate["generated"] == {"kind": "same-side-view", "side_relation": "same"}
     # The full check decides the drawn view again on both routes.
     assert axis.main(["--verify-atlas"], layout=layout) == 0
+
+
+def test_an_admitted_view_ends_the_lapse_the_axis_record_carried(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A strong view admitted on the current witness ends the lapse `--update-atlas`
+    wrote on the axis tool's record: the record kept as the view's `reference` carries
+    none, so the count no longer explains a pending state by a view that has returned
+    (review A3 of #636). `--check-atlas` would otherwise catch it only at the first real
+    admission."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    index = json.loads(layout.index.read_text(encoding="utf-8"))
+    (record,) = index["entries"]
+    record[axis.LAPSED] = {
+        "generator": axis.EVAND_GENERATOR,
+        "run": "an-earlier-run",
+        "witness_sha256": "2" * 64,
+    }
+    layout.index.write_text(json.dumps(index), encoding="utf-8")
+    assert axis.check_atlas(layout) == []
+
+    summary = drive.write_layer([run_dir], root, "admitted")
+    assert summary["written"] == [4]
+    (entry,) = json.loads(layout.index.read_text(encoding="utf-8"))["entries"]
+    assert entry["generator"] == axis.EVAND_GENERATOR
+    assert axis.LAPSED not in entry
+    assert axis.LAPSED not in entry["reference"]
+    assert entry["reference"] == axis.derived(record)
+    assert axis.check_atlas(layout) == []
+
+
+def _bound_at(monkeypatch: pytest.MonkeyPatch, side: str) -> None:
+    """`U` at `side` at every count, so the scratch row's view, at side 4, is at most it,
+    and only the improvement rule decides whether the view is the drawn picture."""
+    facts = {
+        "verified_upper_bound": side,
+        "exact_form": None,
+        "reported": side,
+        "found_by": [],
+        "improved_by": [],
+        "source_key": None,
+    }
+    monkeypatch.setattr(drive, "case_facts", lambda _n: dict(facts))
+
+
+def test_a_view_worse_than_the_layers_on_one_goal_does_not_replace_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review B3 of #636: admission replaced the layer's view with any view that shared
+    as many full sides, so a view worse on another goal of the improvement rule could
+    replace a drawn one, and the count read decided with the house drawn. Here the
+    layer's view is drawn, and measured with one hue fewer than the run's view, which
+    otherwise ties it on every goal: the layer keeps its view and says why, and the tie
+    is admitted."""
+    from devtools import census_drawing_regularity as census  # noqa: PLC0415
+    from devtools import regularize_select as select  # noqa: PLC0415
+
+    monkeypatch.setenv("PACK_JOBS", "1")
+    _bound_at(monkeypatch, "4")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    (before,) = json.loads(layout.index.read_text(encoding="utf-8"))["entries"]
+    view = layout.view(4).read_bytes()
+    # The exactly verified view improves on the numerically checked row, so it is drawn.
+    assert select.drawn((root, 4, census.read_index(root)))["drawing"]["kind"] == (
+        "regularized-view"
+    )
+    real = select.drawn
+
+    def fewer_hues(unit: tuple[Path, int, dict[int, dict[str, Any]]]) -> dict[str, Any]:
+        found = real(unit)
+        return {**found, "hues": found["hues"] - 1}
+
+    monkeypatch.setattr(select, "drawn", fewer_hues)
+    summary = drive.write_layer([run_dir], root, "admitted")
+    assert (summary["written"], summary["kept_current"]) == ([], [4])
+    assert summary["kept_why"] == {"4": "worse than today's drawing (the layer's view) on hues"}
+    (entry,) = json.loads(layout.index.read_text(encoding="utf-8"))["entries"]
+    assert entry == before
+    assert layout.view(4).read_bytes() == view
+
+    # A larger exact side than the layer's view is worse too.
+    def smaller_side(unit: tuple[Path, int, dict[int, dict[str, Any]]]) -> dict[str, Any]:
+        found = real(unit)
+        return {**found, "side": drive.literal(Fraction(found["side"]) - Fraction(1, 10**6))}
+
+    monkeypatch.setattr(select, "drawn", smaller_side)
+    summary = drive.write_layer([run_dir], root, "admitted")
+    assert summary["kept_why"] == {"4": "worse than today's drawing (the layer's view) on side"}
+
+    # Measured as it is, the run's view ties the layer's on every goal and is admitted:
+    # refusing a tie is the selection's (`regularize_select.refusals`), and re-admitting
+    # a run's own view is one.
+    monkeypatch.setattr(select, "drawn", real)
+    summary = drive.write_layer([run_dir], root, "admitted")
+    assert (summary["written"], summary["kept_why"]) == ([4], {})
+
+
+#: n = 176's two drawings at its house of #614, as review C1 of #636 measured them, in
+#: `improvement_rule.MEASURES` order: the layer's view, the axis tool's, which the rule
+#: holds for two more uneven squares, and the house drawing drawn in its place.
+AXIS_VIEW_176: tuple[int, ...] = (33, 73, 45, 76, 19, 146, 409)
+HOUSE_176: tuple[int, ...] = (70, 71, 52, 83, 19, 33, 393)
+#: The review's strong view: better than the house on six goals and worse on none, but
+#: with more light squares than the held axis view.
+BETTER_THAN_THE_HOUSE_176: tuple[int, ...] = (40, 60, 45, 76, 19, 146, 409)
+
+
+def test_a_view_is_held_to_the_drawn_house_not_to_a_view_the_rule_holds(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review C1 of #636: admission held a view to the layer's view even where the rule
+    draws the house, so at n = 176 the axis tool's held view could veto a strong view
+    that improves on the drawn house, and the raw house would stay drawn at the count
+    whose incident this record is for (think-gvke, think-la7h). Replayed on the scratch
+    row with n = 176's measures: the layer's view better than the house on five goals and
+    worse on uneven squares, the house exact at the view's side, `U` at that side.
+
+    The selection's reference and admission's are the drawn house. A view with the held
+    view's own measures, worse than the house on uneven squares, is kept out though it
+    ties the held view. The review's strong view, better than the house and worse on
+    light squares only than the held view, is admitted and drawn, and the drawn picture
+    is worse on no goal than before (review B3's guarantee)."""
+    from devtools import census_drawing_regularity as census  # noqa: PLC0415
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+    from devtools import improvement_rule as rule  # noqa: PLC0415
+    from devtools import regularize_select as select  # noqa: PLC0415
+
+    monkeypatch.setenv("PACK_JOBS", "1")
+    _bound_at(monkeypatch, "4")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    (before,) = json.loads(layout.index.read_text(encoding="utf-8"))["entries"]
+    real = select.measured
+    candidate: list[int] = list(AXIS_VIEW_176)
+
+    def as_at_176(n: int, drawing: census.Drawing, body: dict[str, Any]) -> dict[str, Any]:
+        found = real(n, drawing, body)
+        if drawing.kind == "witness":
+            # The house is exactly verified at the view's side, as 176's is.
+            return {
+                **found,
+                **dict(zip(rule.MEASURES, HOUSE_176, strict=True)),
+                "verified": True,
+                "side": "4",
+                "printed_side": None,
+            }
+        values = AXIS_VIEW_176 if drawing.generator == axis.ALGORITHM else candidate
+        return {**found, **dict(zip(rule.MEASURES, values, strict=True))}
+
+    monkeypatch.setattr(select, "measured", as_at_176)
+
+    def picture() -> dict[str, Any]:
+        return select.drawn((root, 4, census.read_index(root)))
+
+    # The rule holds the axis view and draws the house, and both references say so.
+    decided = defaults.decide((root, 4, census.read_index(root)))
+    assert (decided["default"], decided["reason"]) == (defaults.HOUSE, "worse on uneven_axis")
+    held = select.today((root, 4, census.read_index(root)))
+    drawn_before = picture()
+    assert held["drawing"]["kind"] == "regularized-view"
+    assert drawn_before["drawing"]["kind"] == "witness"
+    assert [drawn_before[key] for key in rule.MEASURES] == list(HOUSE_176)
+
+    # A view no better than the held one, and worse than the house on uneven squares, is
+    # kept out: it would tie the layer's view, the reference before C1.
+    summary = drive.write_layer([run_dir], root, "admitted")
+    assert (summary["written"], summary["kept_current"]) == ([], [4])
+    assert summary["kept_why"] == {
+        "4": (
+            "worse than today's drawing (the house drawing, the layer's view being held) "
+            "on uneven_axis"
+        )
+    }
+    assert json.loads(layout.index.read_text(encoding="utf-8"))["entries"] == [before]
+
+    # The review's strong view improves on the drawn house, so it is admitted, though the
+    # held view has fewer light squares.
+    candidate[:] = BETTER_THAN_THE_HOUSE_176
+    against_held = rule.compare(dict(zip(rule.MEASURES, candidate, strict=True)), held)
+    assert against_held == (["uneven_axis"], ["light_axis"])
+    summary = drive.write_layer([run_dir], root, "admitted")
+    assert (summary["written"], summary["kept_why"]) == ([4], {})
+    (entry,) = json.loads(layout.index.read_text(encoding="utf-8"))["entries"]
+    assert entry["generator"] == axis.EVAND_GENERATOR
+
+    # It is drawn, and the drawn picture is worse than before on no goal.
+    after = picture()
+    assert after["drawing"]["kind"] == "regularized-view"
+    assert [after[key] for key in rule.MEASURES] == list(BETTER_THAN_THE_HOUSE_176)
+    assert not rule.compare(after, drawn_before)[1]
 
 
 def _fresh_receipt(run_dir: Path, again: Path) -> None:

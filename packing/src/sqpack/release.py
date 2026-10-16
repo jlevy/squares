@@ -85,6 +85,13 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.14",
+        first_published="October 16, 2026",
+        result_scope=(
+            "Say on each case page whose house is drawn that it is drawn as published, and why."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.13",
         first_published="October 16, 2026",
         result_scope=(
@@ -368,7 +375,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "e35725f07262e1d3659da7044490fbbbaa1f089b"
+DATA_REVISION = "288a1a52022f712563a23f21848e0ae2927390d4"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -791,6 +798,15 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.13",
+        version="v0.7.14",
+        impact="patch",
+        reason=(
+            "Say on each case page whose house is drawn that it is drawn as published, and why."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.12",
         version="v0.7.13",
         impact="patch",
@@ -1043,6 +1059,81 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/regularize_evand.py",
+            "packing/devtools/regularize_select.py",
+            "packing/devtools/regularized_drawings.py",
+            "packing/devtools/render_case_pages.py",
+            "packing/src/sqpack/cli/validate.py",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-295.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The regularization-state record (think-gvke) changes the default-drawings "
+            "generator, its decision split from its measuring, and its gate step, the axis "
+            "tool's update, check and verify of the atlas index, the layer's admission and "
+            "the selection's reference, both now the picture the atlas draws, the "
+            "case-record regularization note and the case page's note. The papers reach "
+            "these modules through shared import discovery and call none of the changed "
+            "functions: no paper renders a case page, a case record's regularization note, "
+            "the default-drawings record or the atlas index, or runs the selection. The "
+            "survey cites the six case records by link only, as its results table's count "
+            "links, and their only change is that note's text. Manuscripts, figures, "
+            "credits and print rules are unchanged by source review. No render was taken "
+            "(this host has no pinned Chromium), and all four papers keep v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2; the site takes the patch."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.14 regenerated the five claim documents at "
+            "PUBLICATION_REVISION 9fe5f941, the merge of main 4e8c8987f; with that revision "
+            "read back as main's 7627f47e, each is byte-identical to main's, so the 32 "
+            "repository links it pins are the only change, and no claim, certificate or "
+            "command moves. A link revision follows the site's edition and is not a "
+            "revision of the explainer, so it keeps v0.4.7. Source-reviewed; no render was "
+            "taken."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
@@ -2414,7 +2505,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "7627f47e"
+PUBLICATION_REVISION = "9fe5f941"
 
 
 def data_pathspec() -> tuple[str, ...]:

@@ -398,7 +398,7 @@ def test_a_run_decided_as_the_table_now_decides_is_admitted_as_it_stands(
     ]
 
 
-def test_today_is_the_view_a_tree_draws_measured_like_a_candidate() -> None:
+def test_today_is_the_view_a_tree_names_measured_like_a_candidate() -> None:
     drawn = select.today((select.REPO, 18, census.read_index(select.REPO)))
     assert drawn["drawing"]["kind"] == "regularized-view"
     assert drawn["side"] is not None
@@ -406,6 +406,42 @@ def test_today_is_the_view_a_tree_draws_measured_like_a_candidate() -> None:
     assert drawn["verified"]
     assert drawn["hues"] >= 1
     assert drawn["classes"] >= drawn["hues"]
+
+
+def test_a_view_is_judged_against_the_picture_the_record_draws() -> None:
+    """Review C1 of #636: the selection judged a view against the layer's view even where
+    the rule draws the house, so at n = 176, where the axis tool's view is held for two
+    more uneven squares, it refused a view that improves on the drawn house. `drawn` is
+    the record's default picture: the layer's view where the record draws it, the house
+    drawing where it holds it. `today` is still the view the layer names, which the
+    record measures. The counts follow the data: the first of each kind, preferring a
+    held view better than its house on some measure, as 176's is today."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    record = json.loads(defaults.RECORD.read_text(encoding="utf-8"))
+    entries = census.read_index(select.REPO)
+    rows = record["entries"]
+    held = [row for row in rows if row["default"] == defaults.HOUSE]
+    regularized = [row for row in rows if row["default"] == defaults.REGULARIZED]
+    if not held or not regularized:
+        pytest.skip("the record holds no view of one of the two kinds")
+    for row, kind in (
+        (next((row for row in held if row["better"]), held[0]), "witness"),
+        (regularized[0], "regularized-view"),
+    ):
+        n = int(row["n"])
+        named = select.today((select.REPO, n, entries))
+        picture = select.drawn((select.REPO, n, entries))
+        assert named["drawing"]["kind"] == "regularized-view", n
+        assert picture["drawing"]["kind"] == kind, n
+        assert picture == (
+            named if kind == "regularized-view" else select.today((select.REPO, n, {}))
+        )
+        measures = row["measures"]
+        assert {key: picture[key] for key in measures} == {
+            key: values["view" if kind == "regularized-view" else "house"]
+            for key, values in measures.items()
+        }
 
 
 def test_every_drawn_view_is_at_most_the_bound_but_the_named_exceptions() -> None:

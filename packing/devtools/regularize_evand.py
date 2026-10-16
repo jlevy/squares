@@ -3190,12 +3190,63 @@ def layer_entry(
     }
 
 
-def current_house_total(entry: Mapping[str, Any] | None, root: Path) -> int | None:
-    """Full sides the layer's current view of a count shares under the house rule."""
+def worse_than_drawn(
+    admitted: Admitted, text: str, entry: Mapping[str, Any] | None, root: Path
+) -> str | None:
+    """Why a view, as `text` writes it, may not replace the view the layer holds at its
+    count: the goals of the improvement rule on which it is worse than the picture the
+    atlas draws there today (`regularize_select.drawn`), both measured as the selection
+    measures them. None where it is worse on none, or the layer holds no view.
+
+    `admit_views` keeps the layer's view where this names a goal (review B3 of #636): a
+    view worse than a drawn view on one goal, though it shares as many full sides, would
+    otherwise replace it with one the rule does not draw, and the count would read
+    decided with the house drawn. Where the rule draws the house, not the layer's view,
+    the view is held to the house (review C1): at n = 176 the axis tool's view is held for
+    two more uneven squares, and a strong view that improves on the house but has more
+    light squares than that undrawn view is admitted. Either way the drawn picture is
+    never made worse: the view replaces a drawn view only where it is no worse than it,
+    which by the rule's transitivity improves on the house too, and replaces an undrawn
+    one only where it is no worse than the house drawn in its place. A tie on every goal
+    is not refused here, since it changes no measure the rule or the state reads:
+    re-admitting a run's own view is a tie, and refusing ties is the selection's
+    (`regularize_select.refusals`, policy section 11)."""
     if entry is None or entry.get("status") != "regularized" or not entry.get("view"):
         return None
-    text = gzip.decompress((root / entry["view"]["path"]).read_bytes()).decode("utf-8")
-    return total_contacts(histogram(contact_partners(load_yaml(text)["witness"])["house"]))
+    from devtools import census_drawing_regularity as census  # noqa: PLC0415
+    from devtools import improvement_rule  # noqa: PLC0415
+    from devtools import regularize_select as select  # noqa: PLC0415
+
+    n = admitted.n
+    now = select.drawn((root, n, {n: entry}))
+    view = select.measured(
+        n,
+        census.Drawing(
+            n,
+            "regularized-view",
+            f"{LAYER_DIR}/n-{n:03d}-regularized.yaml.gz",
+            admitted.generator,
+        ),
+        load_yaml(text)["witness"],
+    )
+    gains, worse = improvement_rule.compare(view, now)
+    side = None if view["side"] is None else Fraction(view["side"])
+    drawn = None if now["side"] is None else Fraction(now["side"])
+    goals = improvement_rule.judge(
+        gains,
+        worse,
+        smaller=side is not None and drawn is not None and side < drawn,
+        larger=side is not None and drawn is not None and side > drawn,
+        exact_gain=False,
+    ).worse
+    if not goals:
+        return None
+    picture = (
+        "the layer's view"
+        if now["drawing"]["kind"] == "regularized-view"
+        else "the house drawing, the layer's view being held"
+    )
+    return f"worse than today's drawing ({picture}) on {', '.join(goals)}"
 
 
 def layer_refusal(
@@ -3313,10 +3364,12 @@ def admit_views(
     """Write admitted views into the layer under `root` and their entries into its index.
 
     A count in `exclude` is left out whatever was decided there (its witness is about to
-    change). A view replaces the layer's current one only when it shares at least as
-    many full sides in total under the house rule; the axis tool's record of the count
-    stays beside it as `reference`. The index keeps the generators and runs its entries
-    draw from, and its totals are summed again.
+    change). A view replaces the layer's current one only when it is worse than the
+    picture drawn there today on no goal of the improvement rule (`worse_than_drawn`),
+    and `kept_why` says why each kept count was kept; the axis tool's record of the count
+    stays beside it as `reference`. The
+    index keeps the generators and runs its entries draw from, and its totals are summed
+    again.
     """
     root = root.resolve()
     index_path = root / LAYER_INDEX_PATH
@@ -3333,6 +3386,7 @@ def admit_views(
     layout = layer_layout(root)
     written: list[int] = []
     kept: list[int] = []
+    kept_why: dict[str, str] = {}
     excluded: list[int] = []
     for admitted in sorted(candidates, key=lambda item: item.n):
         n = admitted.n
@@ -3343,11 +3397,14 @@ def admit_views(
         reference = (current or {}).get("reference") or current
         if reference is None or reference.get("generator") != axis.ALGORITHM:
             raise EvandRunError(f"n={n}: the layer holds no record of the axis tool's")
-        drawn = current_house_total(current, root)
-        if drawn is not None and total_contacts(admitted.house_after) < drawn:
-            kept.append(n)
-            continue
+        # A view admitted on the current witness ends any lapse the axis record carried.
+        reference = axis.derived(reference)
         text = witness_document(layer_view(admitted), schema=layout.schema_reference())
+        why = worse_than_drawn(admitted, text, current, root)
+        if why is not None:
+            kept.append(n)
+            kept_why[str(n)] = why
+            continue
         view_path = f"{LAYER_DIR}/n-{n:03d}-regularized.yaml.gz"
         target = root / view_path
         with atomic_output_file(target, make_parents=True) as temporary:
@@ -3373,7 +3430,12 @@ def admit_views(
     )
     with atomic_output_file(index_path) as temporary:
         temporary.write_text(axis.index_text(rebuilt), encoding="utf-8")
-    return {"written": written, "kept_current": kept, "excluded": excluded}
+    return {
+        "written": written,
+        "kept_current": kept,
+        "kept_why": kept_why,
+        "excluded": excluded,
+    }
 
 
 def dated_runs(

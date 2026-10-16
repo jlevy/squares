@@ -306,7 +306,8 @@ solve `T-155` registered, so its item still says the rungs are not recorded.
 
 ## 8. Gates
 
-The generator costs about three to four CPU-hours for $n = 1..324$, far above any
+The generator costs about 13.7 CPU-hours for $n = 1..324$ (49,302 CPU-seconds in the
+`evand-regularize-full` receipt, 3.8 hours of wall at four workers), far above any
 routine gate’s wall ceiling.
 So it runs on request with a receipt, and the gates hold the decisions it produced
 ([OR-13](../../../operating-rules.md#or-13-every-fast-check-runs-in-ci-only-the-unavoidably-slow-ones-leave),
@@ -317,6 +318,7 @@ So it runs on request with a receipt, and the gates hold the decisions it produc
 | `regularized atlas views match their index` | The index against the manifest, the witnesses and the views, by digest; with the layer’s contract, also the generator, method, side relation, identity and review-record fields; every drawn view’s exact side against $s_W$ and against the case record’s $U$, decided exactly, with the views above $U$ named in `ABOVE_U` | Records tier, every pull request |
 | `regularized atlas drawings match their index` | Every drawing re-rendered from its retained view | Records tier, every pull request |
 | `default pictures improve on their house drawings` | Every drawn view measured against its house drawing again, each count’s default picture decided under the improvement rule ([section 11](#11-the-improvement-rule)) and held to `default-drawings.json` | Records tier, every pull request |
+| `every drawn picture is regularized, regular as published, decided or exempt` | Every count’s regularization state in `default-drawings.json` against the index; no count pending unless `default_drawings.PENDING_ALLOWED` names it with its bead, and no named count that is no longer pending ([section 12](#12-the-default-picture)) | Records tier, every pull request |
 | `results rungs are earned and the view agrees` | `devtools.check_results` on each register result’s `regularizations` items, and on `regularized_drawings` and every case record’s `regularization` note against the layer’s index | Records tier, every pull request |
 | `regularized atlas views re-derive exactly` | Every `regularize_axis_components/2` view re-derived byte for byte; every other generator’s view decided again over $\mathbb{Q}$ on the maintained routes, its square count, identity and shades re-measured and its digests held | Deferred: the `regularized-views` job, whose 450 s ceiling bead think-uomm revisits |
 | The generator run | The views reproduced from the pinned code and inputs | On request only, with a receipt |
@@ -636,14 +638,31 @@ Original shows the current house packing as published, with its source credit.
 Switching preserves the tiles and their links, and the drawing choice lasts for that
 page only; a new page starts with Regularized.
 Without scripts, the default drawings remain available.
-Where the layer holds a view that is not the default, the case page’s regularization
-note says why it draws the house drawing.
+Where the layer holds a view that is not the default, the case record’s regularization
+note opens by saying that the house drawing is drawn as published, and why.
 The house witness stays the record’s witness, and the view changes no side, value, tier
 or credit (section 1). `devtools.default_drawings` writes each count’s default and its
 reason to `packing/atlas/known-best/default-drawings.json`; its check, in the records
 tier on every pull request, measures every view against its house drawing again, fails
 when the record or a default departs from the rule, and lists the counts that keep the
 house picture and why.
+
+The owner asked on 15 October 2026 that the records make it evident which drawings are
+regularized. So the same record states, for every count, whether the picture it draws is
+`regularized` (a view of Evan Daniel’s regularizer or the grid-slack generator),
+`regular-as-published` (the house drawing has no uneven and no near-axis square, and no
+strong view of the count has lapsed), `decided-no-better` (the strong generators ran on
+that witness and drew nothing the improvement rule takes), `exempt` (with a reason and
+the bead that owns it) or `pending`, with the witness it was decided on (its source’s
+key, path and revision and its side, never a digest of the file, under OR-16) and the
+runs that decided it.
+The index’s `status: regularized` says only that the layer holds a view.
+A view that lapses with its witness is recorded on the axis tool’s record (`lapsed`),
+and the count is pending until the generators decide the new witness.
+The records tier fails on a pending count unless `default_drawings.PENDING_ALLOWED`
+names it with its bead, and on a named count that is no longer pending, so the list
+equals the pending set: it shrinks as counts are regularized and grows only by a
+reviewed change, and `bead tree` holds each bead it names open.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

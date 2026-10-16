@@ -2702,10 +2702,13 @@ def _independent_lp(context: Context) -> str:
 
 
 #: The records whose deferrals each name the bead that owns them (`check_bead_tree`).
+#: `default_drawings.py` declares the regularization record's: the counts it allows
+#: pending, its exemptions and the runs its decisions still owe (review A2 of #636).
 DEFERRAL_RECORDS = (
     "packing/frontier/source-coverage.yaml",
     "packing/campaign/result-requests.yaml",
     "packing/campaign/intake-watch.yaml",
+    "packing/devtools/default_drawings.py",
 )
 
 
@@ -3810,16 +3813,34 @@ def _regularized_atlas_drawings(context: Context) -> str:
 
 
 def _default_drawings(context: Context) -> str:
-    # About 20 cpu-seconds: 5.5 s of wall at four workers on a quiet host, 24 to 34 s in
-    # the records tier on a loaded one (2026-10-13 and 14, 90 views), the tier's slowest
-    # step and well inside its 300 s ceiling: every view the regularized layer draws, and
-    # its house drawing, measured again on the improvement rule's goals and decided under the
-    # policy's sections 11 and 12, then compared with the retained record the site and
-    # the posters draw from. A regularized default that the rule refuses, a stale record,
-    # or a policy goal list that differs from the goals the code judges fails it; the counts
+    # About 35 cpu-seconds: 24 s of wall at two workers and 42 s in the records tier on a
+    # loaded four-core host (2026-10-15 and 16, 92 views and all 324 counts), the tier's
+    # slowest step and well inside its 300 s ceiling: every view the regularized layer
+    # draws, and its house drawing, measured again on the improvement rule's goals and
+    # decided under the policy's sections 11 and 12, and every other count's house
+    # drawing measured for its regularization state, then compared with the retained
+    # record the site and the posters draw from. A regularized default that the rule
+    # refuses, a stale record (a state decided on an older witness among them), or a
+    # policy goal list that differs from the goals the code judges fails it; the counts
     # that keep the house picture are listed and fail nothing.
     output = _module(context, "devtools.default_drawings", "--check")
     _require_text(output, "default drawings check passed")
+    return output
+
+
+def _regularization_state(context: Context) -> str:
+    # About three seconds: every count's regularization state in `default-drawings.json`
+    # read back and held to the index, and the pending counts held to
+    # `default_drawings.PENDING_ALLOWED`, which must equal them: a count leaves the list
+    # as soon as it is decided and joins it only by a reviewed change naming its bead,
+    # which `bead tree` holds open (think-gvke). It measures nothing: the step above
+    # decides every state again, so a record older than a witness fails there, and this
+    # one fails on what that check lists without failing. n = 176 drew its raw house for
+    # a day after an adoption lapsed its grid-slack view, with every gate green. A new
+    # pending count fails here until the strong generators decide its witness or a
+    # reviewed change allows it with its bead; the output gives the list's size.
+    output = _module(context, "devtools.default_drawings", "--check-state")
+    _require_text(output, "regularization state check passed")
     return output
 
 
@@ -4880,13 +4901,17 @@ STEPS: tuple[Step, ...] = (
         # The bead data lives in a sync worktree, not the tracked tree, so a bead-only
         # change produces no changed path at all -- which selects the whole gate. The
         # records are read for the deferrals they declare, each of which must name an
-        # open bead.
+        # open bead. The regularization record's are read by importing
+        # `default_drawings`, so the step claims that module's closure, as the state step
+        # does.
         touches=(
             *_CORE,
             ".tbd/*",
             "packing/devtools/check_bead_tree.py",
             "packing/devtools/bead_state.py",
             *DEFERRAL_RECORDS,
+            "packing/src/sqpack/render/*",
+            *_RENDERER_HUB,
         ),
     ),
     # 0.51s on the fast path, which is what runs without `--deep`.
@@ -5656,6 +5681,22 @@ STEPS: tuple[Step, ...] = (
             "packing/witnesses/known-best/*",
             "packing/frontier/n-*.md",
             "docs/project/policies/regularization-policy.md",
+            *_RENDERER_HUB,
+        ),
+    ),
+    Step(
+        "every drawn picture is regularized, regular as published, decided or exempt",
+        _regularization_state,
+        fast=True,
+        records=True,
+        # It imports what the step above does, through the axis tool's constants, so it
+        # claims the same closure; it reads only the record and the index, and no witness.
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/default-drawings.json",
+            "packing/atlas/known-best/default-drawings.schema.yaml",
+            "packing/atlas/known-best/regularized/*",
+            "packing/witnesses/known-best/*",
             *_RENDERER_HUB,
         ),
     ),

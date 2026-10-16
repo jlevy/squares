@@ -165,10 +165,47 @@ def test_a_deferral_whose_bead_is_closed_or_missing_fails_and_a_live_one_passes(
 
 
 def test_the_live_records_deferrals_are_all_well_formed_aliases() -> None:
-    """What the gate resolves against the store is at least a bead alias."""
-    for where, alias in deferrals():
+    """What the gate resolves against the store is at least a bead alias, the
+    regularization record's included."""
+    from devtools import default_drawings  # noqa: PLC0415
+
+    regularization = check_bead_tree.regularization_deferrals()
+    allowed = [where for where, _alias in regularization if "PENDING_ALLOWED" in where]
+    assert len(allowed) == len(default_drawings.PENDING_ALLOWED)
+    for where, alias in [*deferrals(), *regularization]:
         assert alias.startswith("think-"), where
         assert len(alias) == len("think-aaaa"), where
+
+
+def test_a_run_that_takes_its_counts_off_the_allowlist_no_longer_defers_to_its_bead() -> None:
+    """Review B4 of #636: each regularization run lane takes its counts off
+    `PENDING_ALLOWED` in its own pull request, and that change touches the record, so the
+    gate holds every bead the record still names open. The lane's bead is named nowhere
+    else in the record, so its change passes whether the bead is open or closed, while the
+    other lanes' beads, still named, must be open; the bead is closed once that pull
+    request has merged (regularization-process.md, "When a Witness Changes")."""
+    from devtools import default_drawings  # noqa: PLC0415
+
+    allowed = default_drawings.PENDING_ALLOWED
+    lanes = sorted(
+        {found[0] for why in allowed.values() if (found := default_drawings.BEAD.match(why))}
+    )
+    assert lanes
+    for lane in lanes:
+        remaining = {n: why for n, why in allowed.items() if not why.startswith(lane)}
+        named = default_drawings.deferrals(allowed=remaining)
+        others = sorted({alias for _where, alias in named})
+        assert lane not in others
+        beads = [
+            *(_bead(f"is-01{alias[6:]}", "open", alias) for alias in others),
+            _bead(f"is-01{lane[6:]}", "closed", lane),
+        ]
+        aliases = {alias[6:]: f"01{alias[6:]}" for alias in [*others, lane]}
+        assert deferral_problems(beads, aliases, named) == []
+        # Its counts still listed, the closed bead fails the change: hence closing it
+        # only once the pull request taking them off has merged.
+        dead = deferral_problems(beads, aliases, default_drawings.deferrals())
+        assert {problem["bead"] for problem in dead} == {lane}
 
 
 def _dead_deferral_store(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -176,6 +213,7 @@ def _dead_deferral_store(monkeypatch: pytest.MonkeyPatch) -> None:
     beads = [_bead("is-01aaaa", "closed", "an intake closed under its deferral")]
     monkeypatch.setattr(check_bead_tree, "load", lambda: (beads, "fixture", {"aaaa": "01aaaa"}))
     monkeypatch.setattr(check_bead_tree, "deferrals", lambda: [("pending n=69", "think-aaaa")])
+    monkeypatch.setattr(check_bead_tree, "regularization_deferrals", list)
     monkeypatch.setattr(check_bead_tree, "AGENDAS", Path("/nonexistent/agendas"))
 
 
@@ -209,6 +247,8 @@ WARN = ("--warn-dead-deferrals",)
         (["packing/devtools/intake_sweep.py", "README.md"], WARN),
         (["packing/campaign/intake-watch.yaml"], ()),
         (["packing/frontier/source-coverage.yaml", "README.md"], ()),
+        # The regularization record's allowlist, exemptions and owed runs (#636 A2).
+        (["packing/devtools/default_drawings.py"], ()),
         (None, ()),
     ],
 )
