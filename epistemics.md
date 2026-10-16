@@ -123,11 +123,8 @@ trusts the compiler and native execution as well as the kernel.
 An axiom receipt is evidence to examine, not a guarantee that the formal statement
 matches the intended mathematical claim or that all premises were discharged.
 
-The
-[15 October audit](docs/project/specs/active/plan-2026-10-15-formal-proof-verification-rubric.md)
-applies this distinction to every retained formal report.
-It corrects T-154 to V3/C1 using its source build; T-060 stays V3/C3 on its existing
-geometric confirmation.
+The rule was first applied in the
+[admission audit of 15 October 2026](docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md).
 
 ## Confirmation
 
