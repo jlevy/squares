@@ -328,31 +328,44 @@ def live_case(n: int) -> dict:
 
 
 def test_a_producer_build_cannot_carry_the_live_n17_verified_lane() -> None:
-    """Source execution verifies T-154 and leaves the case's verified bounds alone."""
+    """Source execution verifies T-154 and leaves the case's verified bounds alone, and
+    a third party's retained build does not carry the lane either: for a result by
+    others the verified lane takes a complete replay here (frontier/README.md)."""
     evidence = {
         row["id"]: row for row in safe_load(check_results.EVIDENCE.read_text())["evidence"]
     }
     case = live_case(17)
     assert check_case_semantics(case, evidence) == []
-    promoted = deepcopy(case)
-    upper = promoted["verified_upper_bound"]
-    promoted["verified_lower_bound"] = {
-        "value": upper["value"],
-        "exact_form": upper["exact_form"],
-        "evidence": ["E-n017-fitzharding-lean-source-build"],
-    }
-    promoted["status"] = "proved"
-    problems = check_case_semantics(promoted, evidence)
-    assert any(
-        "E-n017-fitzharding-lean-source-build is the producer's own machine run" in problem
-        for problem in problems
-    ), problems
-    replayed = deepcopy(evidence["E-n017-fitzharding-lean-source-build"])
-    replayed.update(origin="replayed-here", performed_by="repository")
-    assert not any(
-        "producer's own machine run" in problem
-        for problem in check_case_semantics(promoted, {**evidence, replayed["id"]: replayed})
+    source = evidence["E-n017-fitzharding-lean-source-build"]
+
+    def promoted_on(entry: dict) -> list[str]:
+        promoted = deepcopy(case)
+        upper = promoted["verified_upper_bound"]
+        promoted["verified_lower_bound"] = {
+            "value": upper["value"],
+            "exact_form": upper["exact_form"],
+            "evidence": [entry["id"]],
+        }
+        promoted["status"] = "proved"
+        return check_case_semantics(promoted, {**evidence, entry["id"]: entry})
+
+    refused = f"{source['id']} is a machine run not made here"
+    assert any(refused in problem for problem in promoted_on(source))
+    third = deepcopy(source)
+    third.update(
+        id="E-third-party-n17-build",
+        origin="independently-external",
+        performed_by="independent-external",
+        build_receipt="third-party-receipt.json",
     )
+    assert check_evidence_semantics(third) == []
+    assert any(
+        "E-third-party-n17-build is a machine run not made here" in problem
+        for problem in promoted_on(third)
+    )
+    replayed = deepcopy(source)
+    replayed.update(origin="replayed-here", performed_by="repository")
+    assert not any("not made here" in problem for problem in promoted_on(replayed))
 
 
 def test_a_producer_build_cannot_back_verified_rigidity() -> None:
@@ -369,10 +382,10 @@ def test_a_producer_build_cannot_back_verified_rigidity() -> None:
         },
     }
     problems = check_case_semantics(case, {entry["id"]: entry})
-    assert any("executed beyond the producer" in problem for problem in problems), problems
+    assert any("a machine run made here" in problem for problem in problems), problems
     entry.update(origin="replayed-here", performed_by="repository")
     assert not any(
-        "executed beyond the producer" in problem
+        "a machine run made here" in problem
         for problem in check_case_semantics(case, {entry["id"]: entry})
     )
 

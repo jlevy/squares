@@ -53,6 +53,8 @@ def _scope_contains(scope: object, n: int) -> bool:
 
 #: The origins of execution beyond the producer, eligible for confirmation.
 DISCHARGING_ORIGINS = frozenset({"replayed-here", "audited-here", "independently-external"})
+#: Origins of a run made here, by this repository.
+HERE_ORIGINS = frozenset({"replayed-here", "audited-here"})
 
 
 def sampled(entry: Mapping[str, object]) -> bool:
@@ -103,14 +105,16 @@ def confirming_execution(evidence: Mapping[str, object]) -> bool:
 def verified_here(evidence: Mapping[str, object]) -> bool:
     """Whether verified evidence can carry a case's verified lane.
 
-    A machine method's run counts only when it executed beyond the producer. The
-    producer's own build can earn V for the result it reports (epistemics.md, Reported
-    Formal Proofs and Source Builds), but a case's verified bound rests on a complete
-    replay here or a third party's retained replay (frontier/README.md). Published and
-    audited proofs are read, not run, and keep their own rules.
+    A machine method's run counts only when this repository ran it, by the actor its
+    origin names. The producer's own build can earn V for the result it reports
+    (epistemics.md, Reported Formal Proofs and Source Builds), and a third party's
+    retained replay can confirm it, but "for a result by others, that is a complete
+    replay here and a review of its mathematics" (frontier/README.md; epistemics.md's
+    *Integrated* end point). Published and audited proofs are read, not run, and keep
+    their own rules.
     """
-    return evidence.get("method") not in MACHINE_FORMAL_METHODS or confirming_execution(
-        evidence
+    return evidence.get("method") not in MACHINE_FORMAL_METHODS or (
+        confirming_execution(evidence) and evidence.get("origin") in HERE_ORIGINS
     )
 
 
@@ -330,10 +334,6 @@ def _scope_covers(outer: object, inner: object) -> bool:
     if not isinstance(lower, int) or not isinstance(upper, int):
         return False
     return all(_scope_contains(outer, n) for n in range(lower, upper + 1))
-
-
-#: Origins of a run made here, by this repository.
-HERE_ORIGINS = frozenset({"replayed-here", "audited-here"})
 
 
 def formal_run_elsewhere(evidence: Mapping[str, object]) -> bool:
@@ -603,8 +603,9 @@ def _check_bound_evidence(
                 errors.append(f"{label}: evidence {ref} is not verified")
             elif not verified_here(evidence):
                 errors.append(
-                    f"{label}: evidence {ref} is the producer's own machine run, which "
-                    "verifies the source's claim but executes nothing beyond the producer"
+                    f"{label}: evidence {ref} is a machine run not made here; the verified "
+                    "lane takes another party's machine result only through a complete "
+                    "replay here"
                 )
             if evidence.get("claim") not in {expected_claim, "exact-value"}:
                 errors.append(
@@ -672,8 +673,8 @@ def _check_rigidity_claim(
             errors.append("verified requires a formal method")
         # A verified claim must rest on verified evidence. Without this the block's own
         # label is the whole of the argument, which is what the contract exists to refuse.
-        # The producer's own machine run is not backing either, as in the verified bound
-        # lanes (`verified_here`).
+        # A machine run not made here, the producer's or a third party's, is not backing
+        # either, as in the verified bound lanes (`verified_here`).
         backing = [
             record
             for record in cited
@@ -682,7 +683,7 @@ def _check_rigidity_claim(
         if not backing:
             errors.append(
                 "verified rigidity requires at least one verified evidence record "
-                "executed beyond the producer"
+                "that is a proof or a machine run made here"
             )
         # ...and on evidence about rigidity. Verified alone let a rigidity claim rest on a
         # record of the right n proving something else entirely -- an upper bound, say --
