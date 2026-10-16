@@ -55,6 +55,7 @@ from jsonschema_rs import Draft202012Validator
 
 from devtools import result_status, verifier_registry
 from sqpack.assurance import (
+    HERE_ORIGINS,
     claim_support_level,
     confirming_execution,
     external_formal_build_problems,
@@ -1023,15 +1024,21 @@ def _run_here(record: Mapped | None, register: Register) -> str:
     `C0` says that nothing is counted toward confirmation, not that nothing ran: a
     complete replay can be retained beside the report entry while it waits for review,
     as T-128's, T-130's and T-131's were. So these words follow the evidence rather than
-    the rung: each cited entry whose replay passed, and the `receipts/` directories among
-    the entry's artifacts, where a packet keeps the record of each run here.
+    the rung: each cited entry this repository ran whose replay passed, and the
+    `receipts/` directories among the entry's artifacts, where a packet keeps the record
+    of each run here. A passing status alone is not work done here: the producer's own
+    run and a third party's retained run pass too (`sqpack.assurance.verified_here`).
     """
     if not record:
         return ""
     passed = [
         ref
         for ref in record.get("evidence") or ()
-        if (register.evidence.get(ref) or {}).get("replay_status") == "passed"
+        if (run := register.evidence.get(ref))
+        and run.get("replay_status") == "passed"
+        and run.get("origin") in HERE_ORIGINS
+        and confirming_execution(run)
+        and not external_formal_build_problems(run)
     ]
     marker = "/receipts/"
     receipts = dict.fromkeys(

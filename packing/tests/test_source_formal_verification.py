@@ -689,3 +689,17 @@ def test_verified_rigidity_cannot_borrow_its_certificate_from_a_producer_run() -
     )
     producer.update(origin="replayed-here", performed_by="repository")
     assert rigidity_problems(producer, published) == []
+
+
+def test_an_unadmitted_formal_run_is_no_confirming_run_for_any_consumer() -> None:
+    """Review E6: `confirming_runs`, which `confirmation_code` reads, tested the actor but
+    not the admission that `derive_confirmation` requires of a formal build run
+    elsewhere."""
+    entry = confirming(source_build())
+    entry["build_receipt"] = "third-party-build.json"
+    assert verifier_registry.confirming_runs([entry]) == [entry]
+    for field in ("build_receipt", "axioms_receipt", "external_review", "independence"):
+        del entry[field]
+    assert derive_confirmation([entry], record=ONE_CASE) == "C0"
+    assert verifier_registry.confirming_runs([entry]) == []
+    assert check_results.confirmation_code(ONE_CASE, [entry]) is None

@@ -33,7 +33,12 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-from sqpack.assurance import claim_support_level, confirming_execution, sampled
+from sqpack.assurance import (
+    claim_support_level,
+    confirming_execution,
+    external_formal_build_problems,
+    sampled,
+)
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1043,15 +1048,17 @@ def problems(evidence: Sequence[Mapping[str, Any]], path: Path = REGISTRY) -> li
 
 
 def confirming_runs(entries: Iterable[Mapping[str, Any]]) -> list[Mapping[str, Any]]:
-    """The entries that confirm by running code: a confirming origin and a passing replay,
-    with a relation to the producer's code recorded, and not a sample, which confirms
-    nothing whole."""
+    """The entries that confirm by running code: a confirming origin with the actor it
+    names, admitted if it is a formal build run elsewhere, a passing replay, a relation
+    to the producer's code recorded, its premises confirmed, and not a sample, which
+    confirms nothing whole. These are the runs `check_results` derives C from."""
     entries = list(entries)
     evidence_by_id = {entry["id"]: entry for entry in entries if "id" in entry}
     return [
         entry
         for entry in entries
         if confirming_execution(entry)
+        and not external_formal_build_problems(entry)
         and entry.get("replay")
         and entry.get("replay_status") == "passed"
         and entry.get("relationship_to_generator") in RANK

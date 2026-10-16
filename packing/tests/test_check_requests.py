@@ -792,8 +792,9 @@ def test_a_recorded_result_is_told_what_was_run_on_it_here_and_not_only_its_rung
         evidence={
             **REGISTER.evidence,
             "E-passed": {
-                "origin": "external",
-                "assurance": "reported",
+                "origin": "replayed-here",
+                "performed_by": "repository",
+                "assurance": "verified",
                 "replay_status": "passed",
             },
         },
@@ -1251,3 +1252,35 @@ def test_a_confirmed_conditional_entry_says_how_it_was_re_verified() -> None:
     assert entry.state == CONFIRMED, entry
     assert entry.how.startswith("reproduced here with the author's own checker"), entry
     assert "not yet recorded" not in check_requests._plain(entry, None, register)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+
+@pytest.mark.parametrize(
+    ("origin", "actor"),
+    [("external", "source-author"), ("independently-external", "independent-external")],
+)
+def test_a_run_not_made_here_is_not_worded_as_work_done_here(origin: str, actor: str) -> None:
+    """Review E6: a C0 result citing a passing run drafted "the replay of ... has
+    passed" as work done here, whoever ran it."""
+    run = {
+        "id": "E-run",
+        "claim": "upper-bound",
+        "scope": {"n_values": [17]},
+        "assurance": "verified",
+        "method": "exact-algebraic",
+        "origin": origin,
+        "performed_by": actor,
+        "relationship_to_generator": "same-implementation",
+        "certificate": "c.json",
+        "replay": "python -m check c.json",
+        "replay_status": "passed",
+    }
+    record = result_entry("T-900", "V3", "C0", "E-run", kind="upper-bound")
+    register = Register(results={"T-900": record}, evidence={"E-run": run})
+    state = check_requests.entry_state("T-900", register)
+    words = check_requests._plain(state, record, register)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert "has passed" not in words, words
+    ours = {**run, "origin": "replayed-here", "performed_by": "repository"}
+    register = Register(results={"T-900": record}, evidence={"E-run": ours})
+    state = check_requests.entry_state("T-900", register)
+    words = check_requests._plain(state, record, register)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert "the replay of E-run has passed" in words, words
