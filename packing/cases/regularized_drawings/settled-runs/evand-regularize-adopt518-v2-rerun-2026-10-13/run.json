@@ -1,0 +1,11 @@
+{
+  "id": "evand-regularize-adopt518-v2-rerun-2026-10-13",
+  "id_note": "Assigned on 13 October 2026, after the run, which recorded no id of its own: the fresh run of the fifteen counts drawn from the run on jlevy/squares#518's witnesses, whose views came out byte for byte the drawn ones and which supplied their rungs. It is not the 12 October run of 37 counts in runs/adopt518-v2, which the driver's convention (evand-regularize-<run directory>) also names evand-regularize-adopt518-v2 and whose reports evand-regularize-refreshed-adopt518-v2 decided again.",
+  "generator": "evand-regularize",
+  "finished": "2026-10-13",
+  "interpreter": "CPython 3.14.7",
+  "parameters": {"variant":"conservative","style":"coincide","orient":"0","frame":"kkt","same_mode":"relax","from_stage":"input","dps":80,"eps":"1e-20","timeout":1800.0,"regularize_timeout":1800.0,"workers":3},
+  "counts": 15,
+  "decisions": {"admit":15},
+  "cost": {"cpu_seconds":2096.58,"wall_seconds":916.94,"workers":3}
+}

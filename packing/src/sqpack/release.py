@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.20",
+        first_published="October 16, 2026",
+        result_scope=(
+            "Draw the regularized views of 105, 129, 146, 156, 176 and 271 by default, "
+            "and record 204, 272 and 303 as decided with no better view."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.19",
         first_published="October 16, 2026",
         result_scope=(
@@ -419,7 +427,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "2d57609b38fc4824978027561968e15dab98efb5"
+DATA_REVISION = "a2248d8c5bb19d623c676628c917adf28fdb67d0"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -842,6 +850,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.19",
+        version="v0.7.20",
+        impact="patch",
+        reason=(
+            "Draw the regularized views of 105, 129, 146, 156, 176 and 271 by default, "
+            "and record 204, 272 and 303 as decided with no better view."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.18",
         version="v0.7.19",
         impact="patch",
@@ -1168,6 +1186,30 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-lower-bounds-explainer.md",
         ),
         reason=(
+            "The site cut v0.7.20 for the think-la7h regularization regenerated the five "
+            "claim documents at PUBLICATION_REVISION 94dc2b59, this branch's re-pin after "
+            "merging main 80b116ed, kept reachable from main by the merge commit the PR "
+            "merges with; with that revision read back as main's 3d4ada4c, each is "
+            "byte-identical to main's, so the 32 repository links it pins are the only "
+            "change, and no claim, certificate or command moves. A link revision follows "
+            "the site's edition and is not a revision of the explainer, so it keeps "
+            "v0.4.7. Source-compared; no render of the claim documents was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
             "The site cut v0.7.19 for T-184 and T-191 at V3/C1 regenerated the five claim "
             "documents at PUBLICATION_REVISION 3d4ada4c, this branch's re-pin after "
             "merging #652, kept reachable from main by the merge commit the PR merges "
@@ -1338,6 +1380,73 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "command moves. A link revision follows the site's edition and is not a "
             "revision of the explainer, so it keeps v0.4.7. Source-compared; no render of "
             "the claim documents was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_evand.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/n-105.md",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-146.md",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The regularization run of 16 October 2026 (think-la7h) changes data only: "
+            "default_drawings gains three SETTLED counts (204, 272, 303) and drops nine "
+            "from PENDING_ALLOWED, results.yaml changes only its regularized_drawings "
+            "items at 105, 129, 146, 156, 176 and 271, and the case records change only "
+            "their generated regularization note. The papers read results.yaml's results "
+            "(the counts of registered and novel results and the headline bound ladder), "
+            "never regularized_drawings, reach default_drawings only through shared "
+            "import discovery and read neither constant, and the survey cites n = 105, 129 "
+            "and 146 by link only, as its results table's count links. Manuscripts, "
+            "figures, credits and print rules are unchanged by source review. Rendered at "
+            "one link revision (e2e018f3), once from main e2e018f3's tree and once from "
+            "this branch's at 780d81b8, the survey's and both reviews' HTML, before the "
+            "browser's math pass, their Markdown and the other 40 files each render "
+            "writes are byte-identical (42 of 42 files each); the explainer, whose render "
+            "needs a browser this host lacks, is source-reviewed only, and no PDF was "
+            "rebuilt. Review D's pass (#644) then added default_drawings.recorded_runs, "
+            "which holds each SETTLED entry's runs to a record, reworded the 272 and 303 "
+            "outcomes, and added regularize_evand's read-only `rungs --check`; the papers "
+            "read none of them, and rendered again at link revision e2e018f3 from this "
+            "branch at ebe50691 and from main e2e018f3's tree, the survey's and both "
+            "reviews' 42 files each are byte-identical. Review F's pass added "
+            "default_drawings.run_records and --retain-runs, which hold a settlement's "
+            "runs to the retained evidence, and regularize_evand.run_reports, which lets "
+            "`rungs --check` read retained reports; the papers read none of them, and "
+            "rendered at link revision e2e018f3 from this branch at 6079926b, the "
+            "survey's and both reviews' 42 files each are byte-identical to main "
+            "e2e018f3's. Review G's pass added the retained run evidence to the "
+            "regularization-state step's touches in sqpack.cli.validate, which only the "
+            "explainer declares, as part of the whole sqpack package, and made `rungs "
+            "--check` account for each run directory; the papers read neither, the "
+            "explainer is source-reviewed only, and rendered at link revision e2e018f3 "
+            "from this branch at 2f31507c, the survey's and both reviews' 42 files each "
+            "are byte-identical to main e2e018f3's. All four papers keep v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2; the site takes the patch."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2926,7 +3035,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "3d4ada4c"
+PUBLICATION_REVISION = "94dc2b59"
 
 
 def data_pathspec() -> tuple[str, ...]:

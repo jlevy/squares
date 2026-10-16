@@ -186,6 +186,14 @@ strong generator’s view of the current witness that the rule does not draw; ot
 the decision goes into `default_drawings.SETTLED` with the runs, the outcome, where it
 is recorded and the witness’s source key, path, revision and side it was made on, so a
 new house, a new certificate file or an upstream fix makes the count pending again.
+Every run the entry names must be held by the retained evidence under
+`packing/cases/regularized_drawings/` (`default_drawings.run_records`): a grid-slack
+run’s block at `<bead>-<date>/<run directory>/run.json`, or a driver run’s
+`receipt.json` there, each beside the run’s reports (`n-<count>/report.json.gz`), which
+say which counts the run covered.
+A run that only the layer’s index records is not enough, since the index drops a run’s
+block once no entry draws from it: `python -m devtools.default_drawings --retain-runs`
+copies the block to `settled-runs/<run id>/run.json` while the index still has it.
 Where the decision still owes runs or a recorded outcome, its `owed` names the open bead
 that owns them, and the state’s `why` says so; the ten decided counts of 15 October 2026
 owe think-0ut1 grid-slack at 1 and 5 degrees or their per-count outcomes, and recording
@@ -256,9 +264,11 @@ the house picture and why.
 `every drawn picture is regularized, regular as published, decided or exempt` reads each
 count’s state back without measuring, holds it to the index, and fails on a pending
 count that `PENDING_ALLOWED` does not name, on a named count that is no longer pending,
-and on a `SETTLED` entry made on another witness or no longer needed; it prints the
-list’s size. `bead tree` fails a change to `default_drawings.py` whose list, exemptions
-or owed runs name a bead that is not open.
+on a `SETTLED` entry made on another witness or no longer needed, and on one naming a
+run the retained evidence does not hold, under another generator, or whose record shows
+it did not run that count; it prints the list’s size.
+`bead tree` fails a change to `default_drawings.py` whose list, exemptions or owed runs
+name a bead that is not open.
 Run it alone with `python -m devtools.default_drawings --check-state`. `--verify-atlas`
 decides every drawn view again on both exact routes and takes several minutes at four
 workers; CI runs it in the deferred `regularized-views` job.
@@ -352,11 +362,15 @@ To redraw the count:
    adoption that day, of other counts, does not print.
    Where neither draws better, settle the count in `default_drawings.SETTLED` with the
    runs and the new witness’s source key, path, revision and side.
-   Where the runs must wait, allow the count in `PENDING_ALLOWED` with the open bead
-   that owns them, in the same pull request as the adoption, so the deferral is
-   reviewed. Then run `default_drawings --update` again, since the record copies the
-   entry into the count’s reason, and step 5, since `--update-atlas` redrew the axis
-   views. List each deferred count’s drawing before and after in the pull request with
+   Retain each run’s evidence in the same pull request, as for any settlement (above):
+   its reports with its `run.json` or `receipt.json` under
+   `packing/cases/regularized_drawings/<bead>-<date>/<run directory>/`, or, for a run
+   only the index records, its block, copied by `default_drawings --retain-runs`. Where
+   the runs must wait, allow the count in `PENDING_ALLOWED` with the open bead that owns
+   them, in the same pull request as the adoption, so the deferral is reviewed.
+   Then run `default_drawings --update` again, since the record copies the entry into
+   the count’s reason, and step 5, since `--update-atlas` redrew the axis views.
+   List each deferred count’s drawing before and after in the pull request with
    `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`,
    which reads the record of its base branch, `BASE` being `main` unless the pull
    request is stacked. Where a strong view gives way to a drawing worse than it on a goal
