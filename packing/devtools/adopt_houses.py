@@ -2131,10 +2131,12 @@ WORKERS = 2
 #: the runbook and the guide say (review D2).
 BASE_RECORD = f"`<(git show origin/main:{default_drawings.RECORD_PATH})`"
 STACKED_BASE = "with a stacked pull request's base branch for main"
-#: What a deferral waits for where a strong view gives way to a drawing worse than it on
-#: a goal of the improvement rule, whatever drew it (`default_drawings.STRONG_VIEW_LOST`),
-#: in the runbook's and the guide's words (reviews C4 and D1 of #641).
-DEFERRAL_WAITS = "the adoption waits for the owner's word or for its runs"
+#: What becomes of a count where a strong view gives way to a drawing worse than it on a
+#: goal of the improvement rule, whatever drew it (`default_drawings.STRONG_VIEW_LOST`),
+#: in the runbook's and the guide's words (reviews C4 and D1 of #641): the owner's rule is
+#: to adopt the smallest packing and then regularize it, so the adoption waits for no one
+#: and such a count's runs are never deferred (review E1).
+DEFERRAL_WAITS = "its runs are not deferred: they run in the adoption's pull request"
 #: What follows a write, as `python -m devtools.` commands from `packing/` with `{n}` the
 #: re-housed counts: the new witness, the axis tool's view of it, and each count's state.
 REFRESH_COMMANDS = (

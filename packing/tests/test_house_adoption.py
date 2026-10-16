@@ -1305,7 +1305,9 @@ def test_the_runbook_guide_and_printout_give_one_deferral_step() -> None:
     said how to give `--compare` the base branch's record. Review D1: all three, and the
     comparison's own summary, say which lost strong views wait, in one wording. Review D2:
     the documents name the pull request's base, which is not main for a stacked adoption,
-    and the printout gives main as the example and says so."""
+    and the printout gives main as the example and says so. Review E1: the owner's rule is
+    to adopt the smallest packing and then regularize it, so no adoption waits for the
+    owner's word and such a count's runs are not deferred."""
     lines = adopt.regularization_owed([176], day="2026-10-16")
     (deferral,) = [line for line in lines if "PENDING_ALLOWED with the open bead" in line]
     command = f"--compare <(git show origin/$BASE:{defaults.RECORD_PATH})"
@@ -1318,7 +1320,9 @@ def test_the_runbook_guide_and_printout_give_one_deferral_step() -> None:
         assert command in words, path
         assert "`BASE` being `main` unless the pull request is stacked" in words, path
         assert defaults.STRONG_VIEW_LOST in words.lower(), path
-        assert adopt.DEFERRAL_WAITS.removeprefix("the adoption ") in words, path
+        assert adopt.DEFERRAL_WAITS in words, path
+        assert "the adoption waits for the owner's word or for its runs" not in words, path
+        assert "unless the owner holds it" not in words, path
         assert "irregular house drawing" not in words, path
     assert f"{adopt.BASE_RECORD}, {adopt.STACKED_BASE})" in deferral
     assert f"where {defaults.STRONG_VIEW_LOST}, {adopt.DEFERRAL_WAITS}." in deferral

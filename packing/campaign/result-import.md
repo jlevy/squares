@@ -620,8 +620,8 @@ It merges on the owner’s word, by
 
 ### Adopt a House, Then Regularize It
 
-Once stage 4 has confirmed and reviewed a certificate below a case’s house, a pass
-adopts it as the case’s new house, unless the owner holds it (`select_houses.HELD`).
+Once stage 4 has confirmed and reviewed a certificate below a case’s house, the pass
+adopts it as the case’s new house wherever the house selection takes it.
 `devtools.select_houses` names the counts, `devtools.upper_bound_houses` rebuilds each
 witness from the retained certificate, and `devtools.adopt_houses` moves the case
 records; its docstring, under “A later pass”, lists what the pass adds first.
@@ -673,8 +673,11 @@ deferred:
    the pull request is stacked:
    `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`.
    Where a strong view gives way to a drawing worse than it on a goal of the improvement
-   rule, whatever drew it, the adoption waits for the owner’s word or for its runs.
-   The table marks each such count with those goals.
+   rule, whatever drew it, its runs are not deferred: they run in the adoption’s pull
+   request. The owner, 16 October 2026: “We should always be adopting the smallest
+   packing and then regularizing it.”
+   The table names those goals at each such count, and marks each one that still reads
+   pending; one its runs have regularized or decided is listed and not marked.
    The axis tool’s view is the usual replacement, since the refresh draws it wherever it
    improves on the new house: it replaced all seven strong views the adoption of 16
    October 2026 (#657) lost, and at n = 302 a drawing with no uneven and no near-axis
