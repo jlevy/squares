@@ -3,9 +3,9 @@ type: is
 id: is-01m4yqggay7b6j85jt42qspkmn
 title: "Import Francisco Couzo: s(237) <= 15.902603638260 at 4e4c8ce, 2.40e-11 below #607 (no issue)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T02:50:53.662Z
-updated_at: 2026-10-16T00:13:47.068Z
+updated_at: 2026-10-16T01:19:44.784Z
 started_at: 2026-10-15T02:50:59.973Z
+closed_at: 2026-10-16T01:19:44.784Z
+close_reason: "T-190 review moved to think-qik6; #627 merged"
+resolution: null
+duplicate_of: null
 ---
 Stage 1 triage by the 15 October reads lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-reads-1015), from the 02:30Z sweep at main 6964362b5.
 
