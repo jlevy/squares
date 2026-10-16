@@ -3813,12 +3813,15 @@ sources:
   - resources/web/couzo-certificates-2026-10-11/acquisition/claims.json
   evidence:
   - E-couzo-506-n175-report
+  - E-couzo-506-n175-exact-feasibility
   notes: >-
     The release's certificate at 175, retained as the source wrote it in the
     couzo-certificates-2026-10-11 packet and replayed there with the release, which issue 506
     does not name. The author asked on issue 506 on 14 October 2026 for it to be imported, and
     on 15 October T-185 recorded it at V0/C0 (E-couzo-506-n175-report), superseded by issue
-    528's composition (T-158), which holds the case 2.94e-03 below it. It has a source key of
+    528's composition (T-158), which holds the case 2.94e-03 below it; on 16 October the
+    review of issues 506 to 607 (docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md)
+    accepted it and T-185 rose to V3/C3 (E-couzo-506-n175-exact-feasibility). It has a source key of
     its own because its credit is the 175's: the source's standing table says it was seeded
     from Ryan Xu.
 - id: couzo-certificates-2026-10-11
@@ -5501,15 +5504,18 @@ sources:
   - resources/web/mishapolk-kkt-refinements-2026-10-14/acquisition/claims.json
   evidence:
   - E-mishapolk-70a033f-certificate-report
+  - E-mishapolk-70a033f-exact-feasibility
   notes: >-
     All 24 complete certificates of the commit are kept as derived exact facts, no upstream
     byte retained, each admitted only where its exact side equals, or rounds up to, the side
     its source prints, and all 72 native jobs, three for each count, have full outcomes.
     T-186 records the 12 in scope, each below every earlier report at its count. The other
     12, at 153, 155, 181, 207, 209, 267, 270, 272 and 305 to 308, are compared in the claim
-    record and recorded by no entry: T-174 is smaller at each. No selected override or
-    superseded claim is created at this source-only stage; current cases and earlier source
-    ownership remain unchanged.
+    record and recorded by no entry: T-174 is smaller at each. T-186 rose to V3/C3 on 16
+    October 2026, when the review of issues 506 to 607
+    (docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) reproduced the
+    replay of the certificates it cites. No selected override or superseded claim is created
+    at this source-only stage; current cases and earlier source ownership remain unchanged.
 - id: evand-n146-2026-10-14
   title: Evan Daniel's n146 certificate at e006ce6, issue606
   role: source-repository
@@ -5527,12 +5533,15 @@ sources:
   - resources/web/evand-n146-2026-10-14/acquisition/claims.json
   evidence:
   - E-evand-606-n146-report
+  - E-evand-606-n146-exact-feasibility
   notes: >-
     The 1 complete certificate is retained as the source wrote them, admitted only where its
     exact side equals, or rounds up to, the side its source prints. T-187 records the
-    in-horizon report. All 3 native jobs have full outcomes. No selected override or
-    superseded claim is created at this source-only stage; current cases and earlier source
-    ownership remain unchanged.
+    in-horizon report. All 3 native jobs have full outcomes. T-187 rose to V3/C3 on 16
+    October 2026, when the review of issues 506 to 607
+    (docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) reproduced the
+    replay of the certificates it cites. No selected override or superseded claim is created
+    at this source-only stage; current cases and earlier source ownership remain unchanged.
 - id: couzo-verified-bounds-2026-10-14
   title: Francisco Couzo's exact certificate at 211, 487b058, no issue
   role: source-repository
@@ -5801,23 +5810,27 @@ sources:
   represented_by:
   - frontier/results.yaml
   - resources/web/couzo-verified-bounds-2026-10-14/acquisition/claims.json
-  evidence: [E-couzo-487b058-certificate-report]
+  evidence:
+  - E-couzo-487b058-certificate-report
+  - E-couzo-487b058-exact-feasibility
   notes: >-
     The 1 complete certificate inside the case corpus, at 211, is retained as the source
     wrote it, admitted only where its exact side equals, or rounds up to, the side its
-    source prints, and all 3 of its native jobs have full outcomes; T-188 records it.
-    The commit's 296 certificates beyond the corpus are pinned by SHA-256 and not
-    retained (OR-18), and review/beyond-horizon-comparison.json compares each from its
-    exact header side in report order. The claims record holds the 252 the per-count
-    rule records, each a beyond-horizon row; 812 and 930 are above Kevin Fang's earlier
-    composites, and the 42 rows above Göbel's classical constructions (408 to 974) wait
-    on the owner's answer on jlevy/squares#613 (think-8krd). Their replay is held
-    (think-2d7f), and their bytes are held only in the author's repository at the pin.
-    Couzo's 4e4c8ce index of 15 October, a report not yet recorded (think-yfoo), is
-    smaller at all 238 of the 252 rows still current, by 3.79e-12 to 2.38e-02 (the
-    index's exact sides are in review/goebel-beyond-horizon.json). No selected override
-    or superseded claim is created at this source-only stage; current cases and earlier
-    source ownership remain unchanged.
+    source prints, and all 3 of its native jobs have full outcomes; T-188 records it. The
+    commit's 296 certificates beyond the corpus are pinned by SHA-256 and not retained
+    (OR-18), and review/beyond-horizon-comparison.json compares each from its exact header
+    side in report order. The claims record holds the 252 the per-count rule records, each a
+    beyond-horizon row; 812 and 930 are above Kevin Fang's earlier composites, and the 42
+    rows above Göbel's classical constructions (408 to 974) wait on the owner's answer on
+    jlevy/squares#613 (think-8krd). Their replay is held (think-2d7f), and their bytes are
+    held only in the author's repository at the pin. Couzo's 4e4c8ce index of 15 October, a
+    report not yet recorded (think-yfoo), is smaller at all 238 of the 252 rows still
+    current, by 3.79e-12 to 2.38e-02 (the index's exact sides are in
+    review/goebel-beyond-horizon.json). T-188 rose to V3/C3 on 16 October 2026, when the
+    review of issues 506 to 607
+    (docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) reproduced the
+    replay of the certificates it cites. No selected override or superseded claim is created
+    at this source-only stage; current cases and earlier source ownership remain unchanged.
   claims_record: resources/web/couzo-verified-bounds-2026-10-14/review/beyond-horizon-claims.json
 - id: couzo-certificates-2026-10-14
   title: Francisco Couzo's registration witnesses at 43ac7d2, issue 607
@@ -5850,21 +5863,24 @@ sources:
   represented_by:
   - frontier/results.yaml
   - resources/web/couzo-certificates-2026-10-14/acquisition/claims.json
-  evidence: [E-couzo-607-certificate-report]
+  evidence:
+  - E-couzo-607-certificate-report
+  - E-couzo-607-exact-feasibility
   notes: >-
-    All 23 complete certificates of the commit are retained as the source wrote them,
-    each admitted only where its exact side equals, or rounds up to, the side its source
-    prints, and all 69 native jobs have full outcomes. T-189 records the in-horizon
-    report at 237, and the claims record holds the 15 beyond-horizon sides the per-count
-    rule records, each a row. The seven at 703, 812, 930, 931, 992, 993 and 994 are
-    Kevin Fang's composites byte for byte, a tie his earlier rows keep, so they are
-    outside this source's scope and wait on his composites import (think-rn2y). Couzo's
-    4e4c8ce index of 15 October, a report not yet recorded (think-yfoo), is smaller at 7
-    of the 15 rows, at 339, 382, 450, 552, 599, 648 and 757, by 2.88e-11 to 1.13e-03
-    (the index's exact sides are in
-    resources/web/couzo-verified-bounds-2026-10-14/review/goebel-beyond-horizon.json). No
-    selected override or superseded claim is created at this source-only stage; current
-    cases and earlier source ownership remain unchanged.
+    All 23 complete certificates of the commit are retained as the source wrote them, each
+    admitted only where its exact side equals, or rounds up to, the side its source prints,
+    and all 69 native jobs have full outcomes. T-189 records the in-horizon report at 237,
+    and the claims record holds the 15 beyond-horizon sides the per-count rule records, each
+    a row. The seven at 703, 812, 930, 931, 992, 993 and 994 are Kevin Fang's composites
+    byte for byte, a tie his earlier rows keep, so they are outside this source's scope and
+    wait on his composites import (think-rn2y). Couzo's 4e4c8ce index of 15 October, a
+    report not yet recorded (think-yfoo), is smaller at 7 of the 15 rows, at 339, 382, 450,
+    552, 599, 648 and 757, by 2.88e-11 to 1.13e-03 (the index's exact sides are in
+    resources/web/couzo-verified-bounds-2026-10-14/review/goebel-beyond-horizon.json). T-189
+    rose to V3/C3 on 16 October 2026, when the review of issues 506 to 607
+    (docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) reproduced the
+    replay of the certificates it cites. No selected override or superseded claim is created
+    at this source-only stage; current cases and earlier source ownership remain unchanged.
   claims_record: resources/web/couzo-certificates-2026-10-14/acquisition/beyond-horizon-claims.json
 - id: couzo-n237-2026-10-15
   title: Francisco Couzo's exact certificate at 237, 4e4c8ce, no issue
@@ -5880,13 +5896,17 @@ sources:
   represented_by:
   - frontier/results.yaml
   - resources/web/couzo-n237-2026-10-15/acquisition/claims.json
-  evidence: [E-couzo-4e4c8ce-n237-certificate-report]
+  evidence:
+  - E-couzo-4e4c8ce-n237-certificate-report
+  - E-couzo-4e4c8ce-n237-exact-feasibility
   notes: >-
-    The 1 complete certificate is retained as the source wrote them, admitted only where
-    its exact side equals, or rounds up to, the side its source prints. T-190 records
-    the in-horizon report. All 3 native jobs have full outcomes. No selected override or
-    superseded claim is created at this source-only stage; current cases and earlier
-    source ownership remain unchanged.
+    The 1 complete certificate is retained as the source wrote them, admitted only where its
+    exact side equals, or rounds up to, the side its source prints. T-190 records the
+    in-horizon report. All 3 native jobs have full outcomes. T-190 rose to V3/C3 on 16
+    October 2026, when the review of issues 506 to 607
+    (docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) reproduced the
+    replay of the certificates it cites. No selected override or superseded claim is created
+    at this source-only stage; current cases and earlier source ownership remain unchanged.
 - id: bengreff-s95-certificate-2026-10-15
   title: Benjamin Greff's mixed cover for s(95) = 10, issue610
   role: source-repository

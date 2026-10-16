@@ -148,20 +148,23 @@ read from its own packet
 | n | Certificate it tightens | Packing first found by | Centres within 1e-6 | Largest centre distance |
 | --- | --- | --- | --- | --- |
 | 129 | PR #574 (`T-174`) | Daniil Ostashev (#562, `T-162`) | 127 of 129 | $1.4 \times 10^{-4}$ |
-| 154 | #586 (`T-182`) | Francisco Couzo | 144 of 154 | $6.4 \times 10^{-4}$ |
-| 156 | PR #574 (`T-174`) | Francisco Couzo (#561, `T-161`) | 156 of 156 | $7.6 \times 10^{-16}$ |
+| 154 | #586 (`T-182`) | Francisco Couzo, after Evan Daniel (#552) | 144 of 154 | $6.4 \times 10^{-4}$ |
+| 156 | PR #574 (`T-174`) | Daniil Ostashev, as Francisco Couzo continued it (#561, `T-161`) | 156 of 156 | $7.6 \times 10^{-16}$ |
 | 175 | PR #574 (`T-174`) | Daniil Ostashev (#528, `T-158`) | 175 of 175 | $9.2 \times 10^{-16}$ |
 | 176 | PR #574 (`T-174`) | Daniil Ostashev (#575) | 159 of 176 | $1.4 \times 10^{-4}$ |
 | 204 | PR #574 (`T-174`) | Daniil Ostashev (#562, `T-162`) | 192 of 204 | $1.0 \times 10^{-3}$ |
 | 232 | PR #574 (`T-174`) | Daniil Ostashev (#528, `T-158`) | 147 of 232 | $2.8 \times 10^{-4}$ |
 | 264 | PR #574 (`T-174`) | Daniil Ostashev (#528, `T-158`) | 264 of 264 | $1.2 \times 10^{-15}$ |
-| 271 | PR #574 (`T-174`) | Francisco Couzo (#561, `T-161`) | 271 of 271 | $9.9 \times 10^{-16}$ |
-| 302 | #583 and #586 (`T-181`) | Francisco Couzo | 302 of 302 | $7.8 \times 10^{-16}$ |
+| 271 | PR #574 (`T-174`) | Nate Chaoweeraprasit’s SQUISH, as Francisco Couzo refined it (#561, `T-161`) | 271 of 271 | $9.9 \times 10^{-16}$ |
+| 302 | #583 and #586 (`T-181`) | PingYou Ltd (#564, `T-164`), as Francisco Couzo continued it | 302 of 302 | $7.8 \times 10^{-16}$ |
 | 303 | PR #574 (`T-174`) | Daniil Ostashev (#562, `T-162`) | 303 of 303 | $9.5 \times 10^{-16}$ |
 | 304 | #575 (`T-175`) | Daniil Ostashev | 304 of 304 | $9.4 \times 10^{-16}$ |
 
 The first-found column is the 14 October ledger’s account of whose packing PR #574
-refines at each count; PR #574’s own lineage is its claim.
+refines at each count, followed at 154, 156, 271 and 302 through the chains the entries it
+tightens record, as the
+[16 October review](../../../../docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md)
+measured them (RT-4); PR #574’s own lineage is its claim.
 At 129, 154, 176, 204 and 232 some centres move by more than $10^{-6}$, as many as 85 of
 232, but none by more than $1.1 \times 10^{-3}$; at the other seven every centre stays
 within $1.3 \times 10^{-15}$.
