@@ -39,7 +39,8 @@ W1 phase on one branch:
 2. **Own each item** as [stage 0](#stage-0-sweep) says: a bead for each new result, a
    recorded read where there is nothing to import, a new owner for any deferral whose
    bead has closed, a restart for any wait whose blocker has resolved, and an open bead
-   for each count pending regularization that none owns.
+   for each count pending regularization that none owns, named in the count’s
+   `default_drawings.PENDING_ALLOWED` entry.
 3. **Import** each new result through stages 1 to 3 on the same branch, triaging every
    one before anything heavier runs ([stage 1](#stage-1-triage)). Where several open
    reports state upper bounds at one count, the
@@ -132,8 +133,11 @@ claude/intake-YYYY-MM-DD, with today's date.
    the github-workflows grant (`gh issue edit N --add-label intake`), and the case
    label too where one applies (development.md, "Issue and Pull-Request Labels");
    without the grant, list those issues for the owner. A count pending
-   regularization that no open bead owns gets one, labelled regularization, or its
-   runs in this pass. Run `tbd sync`.
+   regularization that no open bead owns gets its runs in this pass, or an open bead
+   labelled regularization (and validation, with stage 4's block and a backlog row,
+   where its runs are held above the cap), named in the count's PENDING_ALLOWED
+   entry in default_drawings.py by this pass's pull request: the sweep counts the
+   count owned only once the entry names the bead. Run `tbd sync`.
 4. Take each new result through stages 1 to 3 of the runbook on this branch: triage,
    retain the source in a packet at a pinned revision, register it as reported.
    Triage every result before any large token or CPU spend. Where several open
@@ -151,7 +155,8 @@ claude/intake-YYYY-MM-DD, with today's date.
    Regularize It"), priced as one validation item at the total adopt_houses prints:
    the strong generators on the new witness when that fits under the compute cap,
    otherwise each pending count added to default_drawings.PENDING_ALLOWED with the
-   open validation bead that owns its runs, and its drawing listed before and after.
+   open bead that owns its runs, labelled regularization and validation, and its
+   drawing listed before and after.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
@@ -323,11 +328,14 @@ happened:
   `default_drawings.PENDING_ALLOWED` entry names, each decision whose `owed` names a
   bead, and each exemption.
   A pending count that the list does not name, or whose bead is no longer open, needs
-  action: its runs in this pass, or an open bead labelled `regularization` named in the
-  list, in the pull request that re-housed it
-  ([stage 5](#adopt-a-house-then-regularize-it)). The owner, 16 October 2026: “we should
-  make sure all of the intake process covers the regularization and we update that for
-  any other new packings we have.
+  action: its runs in this pass, or an open bead that owns them, labelled
+  `regularization` (and `validation`, with stage 4’s block and a backlog row, where the
+  runs are held above the cap) and named in the count’s `PENDING_ALLOWED` entry
+  ([stage 5](#adopt-a-house-then-regularize-it)). The entry is made by the pull request
+  that re-houses the count; for a count re-housed earlier whose bead has since closed,
+  this pass’s pull request names the new bead.
+  The owner, 16 October 2026: “we should make sure all of the intake process covers the
+  regularization and we update that for any other new packings we have.
   That should be part of our standard process to do the regularization.”
   The adoptions of #553, #598 and #614 had left twenty counts without that decision, and
   n = 176 drew its raw house on the site until the owner saw it (think-sfas).
@@ -699,8 +707,9 @@ Above it, or with no cap set and a total above minutes, it is held, and its coun
 deferred:
 
 1. The adoption’s pull request adds each pending count to
-   `default_drawings.PENDING_ALLOWED` with the open bead that owns its runs, labelled
-   `validation` and carrying stage 4’s `## Validation` block, with a row in the backlog
+   `default_drawings.PENDING_ALLOWED`, naming the open bead that owns its runs: labelled
+   `regularization`, as every such bead is, and `validation`, since its runs are held
+   above the cap, carrying stage 4’s `## Validation` block, with a row in the backlog
    bead.
 2. It runs `default_drawings --update` again, since the record copies the entry into the
    count’s reason, and then the guide’s render step.
