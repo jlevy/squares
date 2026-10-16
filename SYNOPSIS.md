@@ -656,6 +656,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: Evan Daniel’s Exact Algebraic Sides at Sixteen Counts (#639, T-193)](docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md) | dated review record | record | retained | — |
 | [Fitzharding’s Lean Proof That s(19) = 3 + 4√2/3: Mathematical Review](docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 12 to 14 October (#561 to #593)](docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) | dated review record | record | retained | — |
 | [Review: PingYou Ltd’s Certificate Refinements of PR #574 (T-174)](docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) | dated review record | record | retained | — |

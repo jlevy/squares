@@ -1,0 +1,10 @@
+a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4  resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py
+ca327d76bad09ed7d292db14d19050de4afc28f75d61655af327b4cf0be69004  resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/data/n-126.minpoly.json.gz
+11:00:13Z to 11:00:22Z: wall 8.836 s, user 3.370 s, sys 0.004 s, exit 0
+n-126.minpoly.json.gz: VALID.  n = 126: s(126) <= S*, S* the unique root of p (degree 2) in [11.7426406871193, 11.7426406871193]; field degree 2; 473 touching incidences proved as identities in K, 3159 strict by intervals, 7471 pairs by discs
+e5221442c72ba92d11969106808ca90024c68e1f3c1d4394efb00348ed220ff1  resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/data/n-266.minpoly.json.gz
+11:00:22Z to 11:01:02Z: wall 40.399 s, user 15.906 s, sys 0.043 s, exit 0
+n-266.minpoly.json.gz: VALID.  n = 266: s(266) <= S*, S* the unique root of p (degree 32) in [16.8230287507565, 16.8230287507565]; field degree 32; 1425 touching incidences proved as identities in K, 6471 strict by intervals, 34335 pairs by discs
+09a7ca619f96a240ec7416008e1d40f3768596a2d6e0a18bba0505eec4b47907  PINNED/n-267.minpoly.json.gz
+11:01:02Z to 11:05:00Z: wall 237.660 s, user 141.374 s, sys 0.133 s, exit 0
+n-267.minpoly.json.gz: VALID.  n = 267: s(267) <= S*, S* the unique root of p (degree 41) in [16.8388152699483, 16.8388152699483]; field degree 41; 428 touching incidences proved as identities in K, 7548 strict by intervals, 34585 pairs by discs
