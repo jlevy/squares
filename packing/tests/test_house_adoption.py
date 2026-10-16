@@ -1207,7 +1207,7 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
         for line in lines
         if line.startswith("    python -m ")
     ]
-    label = "adopt-2026-10-16"
+    label = f"adopt-2026-10-16-n{counts[0]}-{counts[-1]}"
     grid = f"regularize_grid_slack --n {spaced} --run-dir $RUNS/{label}-grid"
     assert commands[:7] == [
         "build_known_best_atlas --update",
@@ -1229,7 +1229,8 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
     assert "default_drawings.PENDING_ALLOWED with the open bead" in deferral
     assert "run `default_drawings --update` again and the guide's step 5" in deferral
     assert "`default_drawings --compare` with the base branch's record" in deferral
-    assert "the adoption waits for the owner's word" in deferral
+    assert adopt.BASE_RECORD in deferral
+    assert f"{adopt.DEFERRAL_WAITS}." in deferral
     assert "default_drawings --check-state` fails until every pending count" in lines[-1]
     # Nothing re-housed, nothing owed: a second run of the idempotent write prints nothing.
     assert adopt.regularization_owed([], index=index) == []
@@ -1260,22 +1261,58 @@ def test_the_printed_runs_take_ids_no_run_in_the_index_has(tmp_path: Path) -> No
         str(run["id"]) for run in json.loads(defaults.INDEX.read_text(encoding="utf-8"))["runs"]
     }
     ids = [f"{prefix}-{directory}" for prefix, directory in _printed_runs(lines)]
-    assert ids == list(adopt.run_ids("adopt-2026-10-16").values())
+    assert ids == list(adopt.run_ids("adopt-2026-10-16-n176").values())
     assert len(set(ids)) == 4
     assert not taken & set(ids)
 
     document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
-    document["runs"].append({"id": "grid-slack-adopt-2026-10-16-grid-1"})
+    document["runs"].append({"id": "grid-slack-adopt-2026-10-16-n176-grid-1"})
     index = tmp_path / "index.json"
     index.write_text(json.dumps(document), encoding="utf-8")
-    assert adopt.run_label("2026-10-16", index) == "adopt-2026-10-16-b"
+    assert adopt.run_label("2026-10-16", [176], index) == "adopt-2026-10-16-n176-b"
     moved = adopt.regularization_owed([176], index=index, day="2026-10-16")
     assert [directory for _prefix, directory in _printed_runs(moved)] == [
-        "adopt-2026-10-16-b-grid-0.5",
-        "adopt-2026-10-16-b-grid-1",
-        "adopt-2026-10-16-b-grid-5",
-        "adopt-2026-10-16-b-evand",
+        "adopt-2026-10-16-n176-b-grid-0.5",
+        "adopt-2026-10-16-n176-b-grid-1",
+        "adopt-2026-10-16-n176-b-grid-5",
+        "adopt-2026-10-16-n176-b-evand",
     ]
+
+
+def test_two_adoptions_of_one_day_print_different_runs() -> None:
+    """Review C3 of #641: the index holds only the runs merged into the branch, so two
+    adoptions opened from one base on one day both read it bare, and a label of the day
+    alone gave both the same ids; the second to admit its run would replace the first's
+    block. The label names the re-housed counts, lowest and highest, so adoptions of other
+    counts print other ids; two that re-house one count conflict on its case record."""
+    first = adopt.regularization_owed([176], day="2026-10-16")
+    second = adopt.regularization_owed([105, 129, 304], day="2026-10-16")
+    ids = {
+        tuple(f"{prefix}-{directory}" for prefix, directory in _printed_runs(lines))
+        for lines in (first, second)
+    }
+    assert ids == {
+        tuple(adopt.run_ids("adopt-2026-10-16-n176").values()),
+        tuple(adopt.run_ids("adopt-2026-10-16-n105-304").values()),
+    }
+    with pytest.raises(ValueError, match="names the counts it re-houses"):
+        adopt.run_label("2026-10-16", [])
+
+
+def test_the_runbook_guide_and_printout_give_one_deferral_step() -> None:
+    """Review C4 of #641: the runbook's deferral waited "for the owner's word or for its
+    runs", the guide's and the printout's only for the owner's word, and neither document
+    said how to give `--compare` the base branch's record."""
+    lines = adopt.regularization_owed([176], day="2026-10-16")
+    (deferral,) = [line for line in lines if "PENDING_ALLOWED with the open bead" in line]
+    command = f"--compare <(git show origin/main:{defaults.RECORD_PATH})"
+    assert adopt.BASE_RECORD.strip("`") in command
+    for path in (adopt.WITNESS_CHANGES, adopt.INTAKE_STEP):
+        text = (houses.REPO / path.split(", ", 1)[0]).read_text(encoding="utf-8")
+        words = " ".join(text.replace("\u2019", "'").split())
+        assert command in words, path
+        assert adopt.DEFERRAL_WAITS.removeprefix("the adoption ") in words, path
+    assert f"{adopt.DEFERRAL_WAITS}." in deferral
 
 
 def test_every_printed_command_parses_with_its_tools_own_parser(tmp_path: Path) -> None:
@@ -1322,7 +1359,7 @@ def test_a_write_and_a_dry_run_print_what_the_moves_owe(
     # One count is a count, not "1 re-housed counts" (review A8 of #641).
     assert owed[0].startswith("regularization owed: 1 re-housed count, 176 ")
     # Its runs are named for the day 176's house was adopted, not the day this test runs.
-    assert f"adopt-{houses.adopted_on(176)}-evand" in "\n".join(owed)
+    assert f"adopt-{houses.adopted_on(176)}-n176-evand" in "\n".join(owed)
     assert adopt.main([]) == 0
     assert capsys.readouterr().out.splitlines() == ["adopted 1 houses: 176", *owed]
     assert adopt.main(["--dry-run"]) == 0

@@ -779,6 +779,70 @@ def test_an_allowed_count_owes_its_runs_whatever_its_new_house_reads(tmp_path: P
         ), n
 
 
+def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
+    """Review C1 of #641: since B1 the list is an input to the state at one branch, so the
+    promise that a count leaves the list as soon as it is decided rests on that branch's
+    order. Held at a real allowlisted count, its new house read regular: a strong view
+    drawn, a strong view held and a `SETTLED` decision on its witness each decide it, and
+    the gate then asks for the entry to come off."""
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    views = {row["n"]: row for row in record["entries"]}
+    document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
+    every = {int(entry["n"]): entry for entry in document["entries"]}
+    allowed = defaults.PENDING_ALLOWED
+    n = next(n for n in sorted(allowed) if n in views and n not in defaults.SETTLED)
+    witness = rows[n]["witness"]
+    house = _regular_house(views[n])
+    strong = {
+        **every[n],
+        "generator": "regularize_grid_slack/1",
+        "run": {"id": "grid-slack-a-test-run"},
+    }
+    strong.pop(defaults.LAPSED, None)
+    settled = {
+        **defaults.SETTLED,
+        n: defaults.Settled(
+            defaults.DECIDED,
+            str(witness["source"]),
+            str(witness["path"]),
+            witness["revision"],
+            str(witness["side"]),
+            (("evand-regularize", "a-test-run"),),
+            "drew no better",
+            "a test",
+        ),
+    }
+    cases = {
+        defaults.REGULARIZED_STATE: (strong, {**house, "default": defaults.REGULARIZED}, None),
+        defaults.DECIDED: (
+            strong,
+            {**house, "default": defaults.HOUSE, "reason": "worse on hues"},
+            None,
+        ),
+        "settled": (every[n], house, settled),
+    }
+    for case, (entry, measured, held) in cases.items():
+        state = defaults.count_state(n, entry, measured, witness, settled=held, allowed=allowed)
+        expected = defaults.DECIDED if case == "settled" else case
+        assert state["state"] == expected, case
+        assert "allowed pending" not in state["why"], case
+
+        index = tmp_path / f"index-{expected}.json"
+        entries = [entry if int(found["n"]) == n else found for found in document["entries"]]
+        index.write_text(json.dumps({**document, "entries": entries}), encoding="utf-8")
+        changed = {
+            **record,
+            "states": [state if row["n"] == n else row for row in record["states"]],
+        }
+        found, _listed = defaults.state_problems(
+            _write(tmp_path, changed), index, settled=held, allowed=allowed
+        )
+        assert found == [
+            f"n={n}: PENDING_ALLOWED names it, but it is {expected}; take it off the list"
+        ], case
+
+
 def test_the_comparison_lists_what_each_changed_count_draws(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:

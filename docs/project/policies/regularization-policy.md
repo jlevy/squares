@@ -670,8 +670,13 @@ the list’s first entries are the record of strong views that lapsed before the
 record kept that block.
 The records tier fails on a pending count unless `default_drawings.PENDING_ALLOWED`
 names it with its bead, and on a named count that is no longer pending, so the list
-equals the pending set: it shrinks as counts are regularized and grows only by a
-reviewed change, and `bead tree` holds each bead it names open.
+equals the pending set, and `bead tree` holds each bead it names open.
+Since the list also holds its counts pending, it changes only by reviewed changes: a
+count leaves it when the strong generators or a `SETTLED` decision decide it, or when a
+reviewed change drops its entry, which the gate accepts where the count then reads
+regular as published; and a count joins it with its bead, whatever its house reads.
+The gate cannot tell a dropped entry from a decided one, so the pull request that drops
+one shows its bead’s runs or what the count draws before and after.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

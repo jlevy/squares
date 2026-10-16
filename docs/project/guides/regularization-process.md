@@ -347,19 +347,21 @@ To redraw the count:
 3. Run both generators on the new witness, grid-slack at 0.5, 1 and 5 degrees and Evan
    Daniel’s driver, then select and admit as above: 5 to 25 CPU-minutes a count in all.
    Give each run a directory no earlier run used, since the layer records a run by its
-   directory’s name; `adopt_houses` prints names for the adoption’s day that no run in
-   the index has. Where neither draws better, settle the count in
-   `default_drawings.SETTLED` with the runs and the new witness’s source key, path,
-   revision and side. Where the runs must wait, allow the count in `PENDING_ALLOWED` with
-   the open bead that owns them, in the same pull request as the adoption, so the
-   deferral is reviewed.
-   Then run `default_drawings --update` again, since the record copies the entry into
-   the count’s reason, and step 5, since `--update-atlas` redrew the axis views.
-   List each deferred count’s drawing before and after in the pull request with
-   `python -m devtools.default_drawings --compare BASE`, where `BASE` is the base
-   branch’s `default-drawings.json`; where a strong view gives way to a house drawing
-   with an uneven or a near-axis square, the adoption waits for the owner’s word.
-   Nothing but review limits how many counts join the list; the gate prints its size.
+   directory’s name; `adopt_houses` prints names that carry the adoption’s day and its
+   lowest and highest re-housed count, which no run in the index has and another
+   adoption that day, of other counts, does not print.
+   Where neither draws better, settle the count in `default_drawings.SETTLED` with the
+   runs and the new witness’s source key, path, revision and side.
+   Where the runs must wait, allow the count in `PENDING_ALLOWED` with the open bead
+   that owns them, in the same pull request as the adoption, so the deferral is
+   reviewed. Then run `default_drawings --update` again, since the record copies the
+   entry into the count’s reason, and step 5, since `--update-atlas` redrew the axis
+   views. List each deferred count’s drawing before and after in the pull request with
+   `python -m devtools.default_drawings --compare <(git show origin/main:packing/atlas/known-best/default-drawings.json)`,
+   which reads the base branch’s record; where a strong view gives way to a house
+   drawing with an uneven or a near-axis square, the adoption waits for the owner’s word
+   or for its runs. Nothing but review limits how many counts join the list; the gate
+   prints its size.
 
 Until 15 October 2026 the lapse was only printed, and the adoptions of #553, #598 and
 #614 left twenty counts drawn without a strong generator’s decision on their witness: at
@@ -368,7 +370,14 @@ allowlist’s first entries (think-la7h, think-kpm3, think-3zi3). Fourteen of th
 strong view before the axis record kept a `lapsed` block, and the Evan Daniel views of
 272 and 304 were never admitted to the index at all.
 Their entries in the list are the record of it, so a count on the list stays pending
-whatever a new house reads, until its bead’s runs decide it (review B1 of #641).
+whatever a new house reads (review B1 of #641). The list is therefore an input to each
+count’s state, not only a measure of the pending set, and the gate cannot judge two
+changes to it. Dropping an entry whose count then reads regular as published passes, and
+drops the runs its bead owes; adding a count whose house reads regular passes, and holds
+it pending.
+Both are reviewed decisions: the pull request that makes one shows the bead’s
+runs or the `--compare` table (review C2 of #641). Holding the fourteen lapses in code,
+apart from the list, would let the gate refuse the first, and is think-k6rj.
 
 A run that decides allowed counts takes them off `PENDING_ALLOWED` in its own pull
 request. Close a bead that the list, an exemption or a decision’s `owed` names only once
