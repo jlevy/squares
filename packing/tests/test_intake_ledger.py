@@ -970,6 +970,22 @@ def test_render_check_passes_on_the_committed_ledger() -> None:
     assert ledger.render(ledger.DEFAULT_DIRECTORY, check=True) == []
 
 
+def test_render_check_passes_on_the_16_october_ledger() -> None:
+    # Issue #639's exact sides against PR #574's rationals and the record on main e2e018f3.
+    directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-20261016"
+    assert ledger.problems(ledger.load_yaml(directory / ledger.LEDGER)) == []
+    assert ledger.render(directory, check=True) == []
+    verdicts = json.loads((directory / ledger.VERDICTS).read_text("utf-8"))
+    recorded = sorted(
+        count["n"]
+        for count in verdicts["counts"]
+        for step in count["steps"]
+        if step["report"] == "#639" and step["verdict"] == ledger.RECORDED
+    )
+    expected = "88 102 123 126 175 199 204 232 258 259 266 267 292 295 301 302"
+    assert recorded == [int(n) for n in expected.split()]
+
+
 def test_the_committed_ledger_decides_pr574_as_its_receipt_does() -> None:
     # The 17 comparisons decide_undecided_comparisons decided exactly are transcribed into
     # sources.yaml; each relation is the receipt's, and the verdict follows from it.

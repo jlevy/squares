@@ -1,0 +1,89 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-16T06:02Z",
+  "git_scope": "Blobless clone of main at 7d1407a, the head when read and the commit jlevy/squares#639 names; search/exact/cur/ was added by 058b67133f4130ce36bf43ee1c13b53948289343 (2026-10-16T03:30:10Z) and annotated by 7d1407a (03:33:01Z). The scope is search/exact/cur/ whole, the checker the issue names (search/exact/verify_exact.py, unchanged since the ad86d42 packet retained it) and LICENSE and CREDITS.md. Of the 23 exact forms under search/exact/cur/data/, the 19 smaller ones (720,878 bytes) are retained as their upstream gzip; the four at 204, 263, 267 and 297 (20,753,949 bytes) are pinned by size and digest. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-exact-cur-2026-10-16",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "main",
+      "source_commit": "7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1",
+      "committed_utc": "2026-10-16T03:33:01Z",
+      "git_tree": "d6b9aae32affbece209e4b5dca9e120f67b05860",
+      "archived_path": "packing/resources/web/evand-exact-cur-2026-10-16/source",
+      "subtree_manifest": "packing/resources/web/evand-exact-cur-2026-10-16/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/cur",
+        "search/exact/verify_exact.py"
+      ],
+      "subtree_file_count": 35,
+      "subtree_total_bytes": 21552062,
+      "retained_file_count": 30,
+      "retained_total_bytes": 787378,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/exact/cur/data/n-204.minpoly.json.gz",
+          "bytes": 3534100,
+          "sha256": "59cd30fc2b68ce65beb86fd5a5a881e4256ce375305e510ce4b23ee6e02c70bb",
+          "reason": "Bulk data kept out of Git (OR-18): the exact form at n = 204, 3,534,100 bytes of gzip, one of the four files that are 20.75 MB of the directory's 21.5 MB; pinned by size and SHA-256, and fetched from the pinned commit for the replay."
+        },
+        {
+          "path": "search/exact/cur/data/n-263.minpoly.json.gz",
+          "bytes": 8960033,
+          "sha256": "d07bda8a3e78e0af0390cc09d4fb820f373e26cff5147791ca0587d6eac4020f",
+          "reason": "Bulk data kept out of Git (OR-18): the exact form at n = 263, 8,960,033 bytes of gzip, one of the four files that are 20.75 MB of the directory's 21.5 MB; pinned by size and SHA-256, and fetched from the pinned commit for the replay."
+        },
+        {
+          "path": "search/exact/cur/data/n-267.minpoly.json.gz",
+          "bytes": 1545171,
+          "sha256": "09a7ca619f96a240ec7416008e1d40f3768596a2d6e0a18bba0505eec4b47907",
+          "reason": "Bulk data kept out of Git (OR-18): the exact form at n = 267, 1,545,171 bytes of gzip, one of the four files that are 20.75 MB of the directory's 21.5 MB; pinned by size and SHA-256, and fetched from the pinned commit for the replay."
+        },
+        {
+          "path": "search/exact/cur/data/n-297.minpoly.json.gz",
+          "bytes": 6714645,
+          "sha256": "6037de6de4d2c28a2a3bd92bca26fea64f31cbbfdc94519276059e158bade939",
+          "reason": "Bulk data kept out of Git (OR-18): the exact form at n = 297, 6,714,645 bytes of gzip, one of the four files that are 20.75 MB of the directory's 21.5 MB; pinned by size and SHA-256, and fetched from the pinned commit for the replay."
+        },
+        {
+          "path": "search/exact/verify_exact.py",
+          "bytes": 10735,
+          "sha256": "a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4",
+          "reason": "The checker the issue names, byte-identical to the copy the evand-exact-and-local-reports-2026-10-12 packet retains at ad86d42; the replay here runs that copy.",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py"
+        }
+      ],
+      "license": "MIT, copyright 2026 Evan Daniel (LICENSE); attribution retained in CREDITS.md, unchanged since the evand-n146-2026-10-14 packet. The issue adds: 'Register data: CC BY 4.0, Joshua Levy, the squares project.' The issue says the solver, checkers and this batch were written and run with Claude (Anthropic) as a coding and research agent, directed and reviewed by the author; both commits carry a Claude co-author trailer.",
+      "claims": [
+        "search/exact/cur/README.md: for each n in 51, 70, 88, 102, 123, 126, 153, 172, 175, 199, 204, 207, 232, 258, 259, 263, 266, 267, 292, 295, 297, 301 and 302, an exact form of the record's current best-known packing (data/n-N.minpoly.json.gz): s(n) <= S*, S* the unique root of an integer polynomial p (degree 2 to 41) in a rational isolating interval, realised by an exact configuration over a number field K = Q[t]/f (every square's centre and angle parameter in K); three are quadratic, s(51) <= (16 + 5 sqrt 2)/3, s(126) <= 15/2 + 3 sqrt 2 and s(295) <= 22(1 + sqrt 2)/3.",
+        "search/exact/cur/verify_data.sh replays search/exact/verify_exact.py (standard library, exact rationals) on all 23 files, 23 of 23 VALID in about 4 minutes on 8 processes (data/verify.txt); crosscheck.py places exactsolve's 64-digit Newton side inside each p's interval and, at 51, 102, 126 and 295, recovers p with mpmath.findpoly (crosscheck.json).",
+        "The README states that every S* equals the register's reported value at main 4e8c898 (to 1e-14; at 207 to 2.4e-12) and that at 153 and 207 a re-run on the register's witnesses gives the same p, with 207's witness point not verified on pair (73, 74), so 207's committed form is from a copy that ties it (store id 1044231).",
+        "The issue says each p is irreducible; no program under search/exact/cur/ or verify_exact.py checks irreducibility."
+      ],
+      "original_gzip": [
+        "source/search/exact/cur/data/n-51.minpoly.json.gz",
+        "source/search/exact/cur/data/n-70.minpoly.json.gz",
+        "source/search/exact/cur/data/n-88.minpoly.json.gz",
+        "source/search/exact/cur/data/n-102.minpoly.json.gz",
+        "source/search/exact/cur/data/n-123.minpoly.json.gz",
+        "source/search/exact/cur/data/n-126.minpoly.json.gz",
+        "source/search/exact/cur/data/n-153.minpoly.json.gz",
+        "source/search/exact/cur/data/n-172.minpoly.json.gz",
+        "source/search/exact/cur/data/n-175.minpoly.json.gz",
+        "source/search/exact/cur/data/n-199.minpoly.json.gz",
+        "source/search/exact/cur/data/n-207.minpoly.json.gz",
+        "source/search/exact/cur/data/n-232.minpoly.json.gz",
+        "source/search/exact/cur/data/n-258.minpoly.json.gz",
+        "source/search/exact/cur/data/n-259.minpoly.json.gz",
+        "source/search/exact/cur/data/n-266.minpoly.json.gz",
+        "source/search/exact/cur/data/n-292.minpoly.json.gz",
+        "source/search/exact/cur/data/n-295.minpoly.json.gz",
+        "source/search/exact/cur/data/n-301.minpoly.json.gz",
+        "source/search/exact/cur/data/n-302.minpoly.json.gz"
+      ]
+    }
+  ]
+}
