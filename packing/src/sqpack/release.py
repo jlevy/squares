@@ -1091,6 +1091,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
+            "packing/atlas/known-best/bound-citations.json",
             "packing/atlas/known-best/composite-figure.json",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/default_drawings.py",
