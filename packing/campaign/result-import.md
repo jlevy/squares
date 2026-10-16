@@ -684,10 +684,11 @@ it moves in `select_houses.PENDING_ADOPTION` with the open bead that adopts it, 
 ### Adopt a House, Then Regularize It
 
 Once stage 4 has confirmed and reviewed a certificate below a case’s house, the pass
-adopts it as the case’s new house ([The House Rule](#the-house-rule)).
-`devtools.select_houses` names the counts, `devtools.upper_bound_houses` rebuilds each
-witness from the retained certificate, and `devtools.adopt_houses` moves the case
-records; its docstring, under “A later pass”, lists what the pass adds first.
+adopts it as the case’s new house wherever the house selection takes it
+([The House Rule](#the-house-rule)). `devtools.select_houses` names the counts,
+`devtools.upper_bound_houses` rebuilds each witness from the retained certificate, and
+`devtools.adopt_houses` moves the case records; its docstring, under “A later pass”,
+lists what the pass adds first.
 
 A new house is a new witness, and the count’s regularized view lapses with it.
 So every count whose known-best witness changes is regularized in the pull request that
@@ -737,12 +738,14 @@ deferred:
    `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`.
    Where a strong view gives way to a drawing worse than it on a goal of the improvement
    rule, whatever drew it, its runs are not deferred: they run in the adoption’s pull
-   request ([The House Rule](#the-house-rule)). The table marks each such count with
-   those goals. The axis tool’s view is the usual replacement, since the refresh draws it
-   wherever it improves on the new house: it replaced all seven strong views the
-   adoption of 16 October 2026 (#657) lost, and at n = 302 a drawing with no uneven and
-   no near-axis square gave way to one with 26 and 11. A house drawing is the rarer one,
-   as at n = 176 on 15 October (review D1 of #641).
+   request ([The House Rule](#the-house-rule)). The table names those goals at each such
+   count, and marks each one that still reads pending; one its runs have regularized or
+   decided is listed and not marked.
+   The axis tool’s view is the usual replacement, since the refresh draws it wherever it
+   improves on the new house: it replaced all seven strong views the adoption of 16
+   October 2026 (#657) lost, and at n = 302 a drawing with no uneven and no near-axis
+   square gave way to one with 26 and 11. A house drawing is the rarer one, as at n =
+   176 on 15 October (review D1 of #641).
 
 The records tier’s
 `every drawn picture is regularized, regular as published, decided or exempt`

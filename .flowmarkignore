@@ -133,6 +133,7 @@ packing/frontier/CERTIFICATE-REACH.md
 # and drift-checked byte-for-byte by `intake_ledger render --check`
 # (tests/test_intake_ledger.py). Same case as RESULTS.md: two owners for one file.
 packing/campaign/issue-intake/upper-bounds-20261014/README.md
+packing/campaign/issue-intake/upper-bounds-20261016/README.md
 
 # stats-summary.md was written by the v2-transitions spike's `build_candidate.py` beside the
 # record it summarises, and is frozen at 0281a508 since the generator moved into
