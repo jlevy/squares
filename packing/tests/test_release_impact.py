@@ -486,3 +486,23 @@ def test_only_the_news_rubric_rows_of_the_intake_runbook_are_a_site_candidate(
     repo.write(gate.NEWS_RUBRIC_PATH, without_short)
     report = repo.inspect()
     assert set(report.candidate_paths["site"]) == {gate.NEWS_RUBRIC_PATH}
+
+
+def test_a_second_unit_declaring_the_intake_runbook_compares_its_bytes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The rubric comparison holds for the site alone. Once another unit declares the
+    runbook too, nothing says what that unit reads of it, so a process edit outside the
+    rubric is a candidate for every owner, the site included."""
+    repo = Repository(tmp_path, monkeypatch)
+    repo.inputs["site"] = (*repo.inputs["site"], gate.NEWS_RUBRIC_PATH)
+    repo.inputs[PAPER] = (*repo.inputs[PAPER], gate.NEWS_RUBRIC_PATH)
+    repo.write(gate.NEWS_RUBRIC_PATH, RUBRIC)
+    repo.base = repo.commit("rubric baseline")
+    repo.git("update-ref", "refs/remotes/origin/main", repo.base)
+    repo.write(gate.NEWS_RUBRIC_PATH, RUBRIC.replace("More process.", "Reworded process."))
+    report = repo.inspect()
+    assert report.candidate_paths == {
+        PAPER: (gate.NEWS_RUBRIC_PATH,),
+        "site": (gate.NEWS_RUBRIC_PATH,),
+    }
