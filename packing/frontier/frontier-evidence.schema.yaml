@@ -182,10 +182,12 @@ $defs:
       performed_by:
         enum: [source-author, independent-external, repository, unknown-historical]
         description: >-
-          For proof-assistant execution, source-author requires origin external,
-          independent-external requires independently-external, and repository requires
-          replayed-here or audited-here. Changing the origin alone cannot turn the
-          producer's execution into confirmation.
+          Every confirming origin needs the actor it names: repository for replayed-here
+          and audited-here, independent-external for independently-external. For
+          proof-assistant execution, source-author also requires origin external, and a
+          build here is replayed-here: audited-here is refused, since reading another
+          party's build receipt is that build entry's external_review. Changing the
+          origin alone cannot turn the producer's execution into confirmation.
       relationship_to_generator:
         enum: [generator, same-implementation, shared-components, independent-implementation, not-applicable, unknown-historical]
         description: >-

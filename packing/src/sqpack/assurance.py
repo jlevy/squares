@@ -79,9 +79,21 @@ ORIGIN_ACTORS: Mapping[str, str] = {
 
 
 def formal_actor_origin_problems(evidence: Mapping[str, object]) -> list[str]:
-    """A formal execution's actor must agree with its displayed origin."""
+    """A formal execution's actor must agree with its displayed origin.
+
+    A proof-assistant build here is `replayed-here`. `audited-here` is refused for one:
+    reading another party's build receipt is that entry's `external_review`, not a run
+    here, and the label would otherwise let a receipt audit pass as a build here.
+    """
     if evidence.get("method") != "proof-assistant-checked":
         return []
+    if evidence.get("origin") == "audited-here":
+        return [
+            (
+                "a proof-assistant build here is replayed-here; an audit of another "
+                "party's build is a read on that build's own entry, not audited-here"
+            )
+        ]
     expected = ORIGIN_ACTORS.get(str(evidence.get("origin")))
     if expected is None or evidence.get("performed_by") != expected:
         return ["formal execution actor performed_by must agree with its origin"]
@@ -106,15 +118,17 @@ def verified_here(evidence: Mapping[str, object]) -> bool:
     """Whether verified evidence can carry a case's verified lane.
 
     A machine method's run counts only when this repository ran it, by the actor its
-    origin names. The producer's own build can earn V for the result it reports
-    (epistemics.md, Reported Formal Proofs and Source Builds), and a third party's
-    retained replay can confirm it, but "for a result by others, that is a complete
-    replay here and a review of its mathematics" (frontier/README.md; epistemics.md's
-    *Integrated* end point). Published and audited proofs are read, not run, and keep
-    their own rules.
+    origin names, and a formal build only as admitted. The producer's own build can
+    earn V for the result it reports (epistemics.md, Reported Formal Proofs and Source
+    Builds), and a third party's retained replay can confirm it, but "for a result by
+    others, that is a complete replay here and a review of its mathematics"
+    (frontier/README.md; epistemics.md's *Integrated* end point). Published and audited
+    proofs are read, not run, and keep their own rules.
     """
     return evidence.get("method") not in MACHINE_FORMAL_METHODS or (
-        confirming_execution(evidence) and evidence.get("origin") in HERE_ORIGINS
+        confirming_execution(evidence)
+        and evidence.get("origin") in HERE_ORIGINS
+        and not external_formal_build_problems(evidence)
     )
 
 
@@ -340,9 +354,11 @@ def formal_run_elsewhere(evidence: Mapping[str, object]) -> bool:
     """A proof-assistant execution this repository did not perform: the producer's own
     build, or a third party's build retained here. Its pass is known only from what it
     left behind, so both are held to the same retained-evidence rules; a stronger claim
-    must not need less evidence than a weaker one."""
+    must not need less evidence than a weaker one. Only `replayed-here` is a build here
+    (`formal_actor_origin_problems`)."""
     return evidence.get("method") == "proof-assistant-checked" and not (
-        evidence.get("origin") in HERE_ORIGINS and evidence.get("performed_by") == "repository"
+        evidence.get("origin") == "replayed-here"
+        and evidence.get("performed_by") == "repository"
     )
 
 

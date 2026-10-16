@@ -98,7 +98,10 @@ confirming claim never needs less retained evidence than the producer’s. A bui
 records one execution, so entries naming different actors never cite the same receipt.
 The execution actor and origin must agree, for every method: the producer’s run is
 external, a retained third-party run is independently-external, and a run here names the
-repository. An origin label alone cannot supply confirmation.
+repository.
+A proof-assistant build here is `replayed-here`; reading someone else’s build
+receipt is a read on their entry, never `audited-here`. An origin label alone cannot
+supply confirmation.
 
 A conditional proof verifies its implication even while a premise remains open.
 Its unconditional conclusion takes the weakest support along every cited premise chain,

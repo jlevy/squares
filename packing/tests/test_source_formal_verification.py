@@ -22,6 +22,7 @@ from sqpack.assurance import (
     conditional_problems,
     conditions,
     shared_receipt_problems,
+    verified_here,
 )
 from sqpack.yamlio import safe_load
 
@@ -606,3 +607,36 @@ def test_only_a_machine_execution_discharges_a_premise() -> None:
     entries = [entry, premise]
     assert conditional_problems({row["id"]: row for row in entries})
     assert derive_verification(entries, record=ONE_CASE) == "V0"
+
+
+def test_a_receipt_audit_cannot_pass_as_a_build_here() -> None:
+    """Review E2: an `audited-here` Lean entry read as a build here, needing no receipt,
+    coverage, audit record or read, and it confirmed and carried the verified lane."""
+    entry = source_build()
+    entry.update(origin="audited-here", performed_by="repository")
+    for field in ("build_receipt", "external_review", "independence"):
+        del entry[field]
+    del entry["proof"]["audit_record"]
+    problems = check_evidence_semantics(entry)
+    assert any("a proof-assistant build here is replayed-here" in p for p in problems)
+    assert derive_verification([entry], record=ONE_CASE) == "V0"
+    assert derive_confirmation([entry], record=ONE_CASE) == "C0"
+    assert not verified_here(entry)
+    case = live_case(17)
+    upper = case["verified_upper_bound"]
+    case["verified_lower_bound"] = {
+        "value": upper["value"],
+        "exact_form": upper["exact_form"],
+        "evidence": [entry["id"]],
+    }
+    case["status"] = "proved"
+    evidence = {
+        row["id"]: row for row in safe_load(check_results.EVIDENCE.read_text())["evidence"]
+    }
+    assert any(
+        f"{entry['id']} is a machine run not made here" in problem
+        for problem in check_case_semantics(case, {**evidence, entry["id"]: entry})
+    )
+    replayed = {**entry, "origin": "replayed-here"}
+    assert check_evidence_semantics(replayed) == []
+    assert derive_confirmation([replayed], record=ONE_CASE) == "C3"
