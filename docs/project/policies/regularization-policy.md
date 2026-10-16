@@ -37,6 +37,8 @@ A run produces two kinds of output, and they take different paths:
 
 A certificate that proves more than the record holds is registered as a result first,
 and its drawing enters the layer only after that.
+Once validated, a register result below the case’s house is the house, by the import
+runbook’s [house rule](../../../packing/campaign/result-import.md#the-house-rule).
 
 ## 2. Definitions
 

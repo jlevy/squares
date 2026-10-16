@@ -49,6 +49,9 @@ better on none, is skipped.
 `devtools.regularize_select` applies exactly these rules.
 A view at row 7 or 8 goes to the owner, and a view below $U$ is registered before it is
 drawn; both are described below.
+A view below $U$ is a smaller packing, so once validated it is the count’s house, by the
+import runbook’s
+[house rule](../../../packing/campaign/result-import.md#the-house-rule).
 
 ## The Steps
 
@@ -292,7 +295,12 @@ section 5 describes and which does not exist yet.
 
 ## Register Candidates
 
-A view whose side is below $U$ is registered as a result (row 3), however it was made.
+A view whose side is below $U$ is a smaller packing than the house, and it is registered
+as a result (row 3), however it was made.
+It is taken through the import runbook’s stages like any report, crediting the packing’s
+finder and the regularizer, and once validated it is adopted as the house in the pass
+that validates it, by the
+[house rule](../../../packing/campaign/result-import.md#the-house-rule).
 Its bound is new only where no earlier certificate already stated that side exactly, as
 one had at the 33 counts where the record carried Evan Daniel’s side rounded up, and no
 larger count’s verified upper bound is at or below it; otherwise the result says which
@@ -359,9 +367,10 @@ To redraw the count:
    views. List each deferred count’s drawing before and after in the pull request with
    `python -m devtools.default_drawings --compare <(git show origin/main:packing/atlas/known-best/default-drawings.json)`,
    which reads the base branch’s record; where a strong view gives way to a house
-   drawing with an uneven or a near-axis square, the adoption waits for the owner’s word
-   or for its runs. Nothing but review limits how many counts join the list; the gate
-   prints its size.
+   drawing with an uneven or a near-axis square, its runs are not deferred: they run in
+   the adoption’s pull request, by the import runbook’s
+   [house rule](../../../packing/campaign/result-import.md#the-house-rule).
+   Nothing but review limits how many counts join the list; the gate prints its size.
 
 Until 15 October 2026 the lapse was only printed, and the adoptions of #553, #598 and
 #614 left twenty counts drawn without a strong generator’s decision on their witness: at
