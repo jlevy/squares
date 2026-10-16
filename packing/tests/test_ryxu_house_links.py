@@ -70,7 +70,7 @@ def private(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
 
 
 def drawn() -> list[int]:
-    """The counts whose live atlas leaf is still the ry-xu house."""
+    """The counts whose live atlas leaf is still the Xu house."""
     return [n for n in houses.NUMBERS if n not in adopted.ADOPTED]
 
 
@@ -281,7 +281,7 @@ def test_source_adoption_refuses_mutable_upper_geometry_claims(
     if n in adopted.ADOPTED:
         # Since the house adoption of 11 October 2026 (think-fvz4) T-130 and T-128 hold
         # 105 and 108. The refusal is this packet's, so each case is staged as the
-        # adoption found it (`adopt_houses.read_history`), at the ry-xu house.
+        # adoption found it (`adopt_houses.read_history`), at the Xu house.
         original = adopt_houses.read_history()[n]
     else:
         original = (SOURCE / f"packing/frontier/n-{n:03d}.md").read_text()
@@ -430,7 +430,7 @@ def test_existing_incomplete_history_is_refused_before_case_writes(
 
 
 def restore_ryxu_selections(path: Path, numbers: list[int]) -> None:
-    """Select the ry-xu report again at each count a later house took from it.
+    """Select the Xu report again at each count a later house took from it.
 
     The adoption kept each displaced selection's source and side among the superseded
     reports; the evidence is this packet's report, and the reason is the confirmation's
@@ -475,12 +475,16 @@ def confirmation_frontier(
         # The confirmation ran before the house adoption of 11 October 2026 (think-fvz4),
         # which gave most of these cases to later sources. The reported stage it confirms
         # is rebuilt from what the adoption retained: each moved case as it stood before
-        # (`adopt_houses.read_history`), and its ry-xu selection, which the coverage
-        # register keeps among the superseded reports.
+        # (`adopt_houses.read_history`), and its Xu selection, which the coverage
+        # register keeps among the superseded reports. The finder lists take the later
+        # rename of ry-xu to Ryan Xu (`attribution.md`, Ryan Xu / ry-xu), as the reported
+        # stage `register_ryxu_reports.reported_bound` writes does.
         moved = [n for n in houses.NUMBERS if n in adopted.ADOPTED]
         prior = adopt_houses.read_history()
         for n in moved:
-            (frontier / f"n-{n:03d}.md").write_text(prior[n])
+            (frontier / f"n-{n:03d}.md").write_text(
+                prior[n].replace("\n    - ry-xu\n", "\n    - Ryan Xu\n")
+            )
         restore_ryxu_selections(frontier / "source-coverage.yaml", moved)
         for name, field, identifiers in (
             ("results.yaml", "results", {"T-125", "T-126"}),

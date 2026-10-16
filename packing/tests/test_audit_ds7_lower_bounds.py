@@ -106,7 +106,7 @@ def test_indexed_external17_report_holds_the_verified_lane_at_the_selectors_fixe
     The verified field keeps R071. Since 2026-10-12 the reported field holds Overbeck's
     candidate equality instead (T-153), which
     `test_n17_reported_candidate_equality_is_not_misparsed_or_ranked` covers. At n = 18
-    R012 held the report below a stronger first-party rung until wand125's rectangle
+    R012 held the report below a stronger first-party rung until Hosono's rectangle
     report replaced it; see the next test. Either way the audit's own selector must be
     at a fixed point: with R071 in the reported lane, as it was until T-153, no DS7
     candidate exceeds it, so the selector raises nothing.
@@ -131,7 +131,7 @@ def test_indexed_external17_report_holds_the_verified_lane_at_the_selectors_fixe
 
 
 def test_a_stronger_non_ds7_report_at_n18_is_left_in_place() -> None:
-    """wand125's check2 report on its finest declared net (T-102) outranks its certificates
+    """Hosono's check2 report on its finest declared net (T-102) outranks its certificates
     of 5 and 6 October (T-096, T-099), R012, its rectangle certificate and the DS7
     candidates at n = 18.
 

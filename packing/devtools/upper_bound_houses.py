@@ -308,7 +308,7 @@ def _couzo_451_jobs(_n: int, certificate: legacy.Certificate) -> Mapping[str, An
 def _couzo_451_origin(n: int) -> Origin:
     path = couzo_451.source_pins()[n]["certificate"]["path"]
     # The packet's fact container keeps each certificate's upstream text whole, as
-    # ry-xu's does: the entry the url names is the upstream file, byte for byte.
+    # Xu's does: the entry the url names is the upstream file, byte for byte.
     return Origin(
         key=couzo_451.SOURCE_KEY,
         path=couzo_451.fact_path(),

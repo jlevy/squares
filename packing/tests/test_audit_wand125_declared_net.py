@@ -1,4 +1,4 @@
-"""The first-party audit of wand125's mixed certificate on a declared net (jlevy/squares#366).
+"""The first-party audit of Hosono's mixed certificate on a declared net (jlevy/squares#366).
 
 `devtools.audit_wand125_declared_net` recomputes `mixed_n18_L470`'s exact premises from
 the retained files, lemma N0's five among them, and refuses a copy whose net, mass or

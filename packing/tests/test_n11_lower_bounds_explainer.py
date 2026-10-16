@@ -870,10 +870,13 @@ def test_the_pages_filter_covers_every_overview_input() -> None:
             without_documents = [p for p in patterns if p != tutorial]
             exposed = [path for path in declared if not covered(path, without_documents)]
             assert exposed == [REPO / tutorial], event
-        receipt = COMPARISON_RECEIPT.relative_to(REPO).as_posix()
-        without_receipt = [pattern for pattern in patterns if pattern != receipt]
+        # Contributor evidence also uses a resources-wide trigger, so remove every
+        # matching pattern to exercise the receipt guard through overlapping coverage.
+        without_receipt = [
+            pattern for pattern in patterns if not covered(COMPARISON_RECEIPT, [pattern])
+        ]
         exposed = [path for path in declared if not covered(path, without_receipt)]
-        assert exposed == [COMPARISON_RECEIPT], event
+        assert COMPARISON_RECEIPT in exposed, event
 
 
 def test_every_declared_overview_input_exists() -> None:

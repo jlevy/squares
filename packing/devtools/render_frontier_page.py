@@ -28,6 +28,7 @@ from typing import Any, cast
 from devtools import render_research_tables as tables
 from devtools.build_bound_citations import RECENT_SINCE, corrects_tag
 from devtools.build_bound_citations import RECORD as BOUND_CITATIONS
+from devtools.contributor_credit import case_credit
 from devtools.render_recent_results import RecentCounts, recent_counts, recent_rows
 from devtools.repo_links import repo_url
 from devtools.validate_schemas import check as check_record
@@ -255,10 +256,20 @@ def bound_approx_html(bound: dict[str, Any]) -> str:
     return "" if value.is_Integer else approx_html(value)
 
 
-def credit(names: Iterable[str] | None, year: object) -> str:
-    who = ", ".join(names or [])
+def credit(
+    names: Iterable[str] | None,
+    year: object,
+    *,
+    n: int | None = None,
+    field: str = "/reported_upper_bound/found_by",
+) -> str:
+    who = (
+        case_credit(n, field, list(names or []))
+        if n is not None
+        else html.escape(", ".join(names or []))
+    )
     when = str(year) if year else ""
-    return html.escape(" ".join(part for part in (who, when) if part))
+    return " ".join(part for part in (who, html.escape(when)) if part)
 
 
 @cache
@@ -689,7 +700,7 @@ def case_row(
         _cell(f"{shown_status}{case_badges(n)}", value=status),
         _bound_cell(
             upper,
-            credit(upper.get("found_by"), upper.get("found_year")),
+            credit(upper.get("found_by"), upper.get("found_year"), n=n),
             flag=DEFECT_RECORDED
             if tables.reported_defect(upper, case["verified_upper_bound"], evidence_entries())
             else "",
@@ -697,7 +708,12 @@ def case_row(
         _verified_cell(case["verified_upper_bound"], upper),
         _bound_cell(
             lower,
-            credit(lower.get("proved_by"), lower.get("proved_year")),
+            credit(
+                lower.get("proved_by"),
+                lower.get("proved_year"),
+                n=n,
+                field="/reported_lower_bound/proved_by",
+            ),
             flag=DEFECT_RECORDED
             if tables.reported_defect(lower, case["verified_lower_bound"], evidence_entries())
             else "",

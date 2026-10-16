@@ -21,7 +21,7 @@ WAND125 = assistance.STATEMENTS[0]
 TOKOHARU = assistance.STATEMENTS[1]
 
 #: Records still owing a statement. Empty since the n = 68 to 95 records took their
-#: wand125 sentence on 2026-09-29, and it may only stay empty: a record added here is a
+#: Hosono sentence on 2026-09-29, and it may only stay empty: a record added here is a
 #: statement not made.
 PENDING: frozenset[str] = frozenset()
 
@@ -32,15 +32,15 @@ def _record(front: str, body: str) -> str:
 
 INTAKE = """# `s(42)` — open
 
-**External intake, 2026-09-28.** wand125’s
+**External intake, 2026-09-28.** Hosono’s
 rectangle-density source reports `s(42) >= 679/100`,
 accepted by Tokoharu’s unchanged interval checker.
 
-| a table | naming wand125 |
+| a table | naming Hosono |
 | --- | --- |
 
 ```
-wand125 in a code block
+Hosono in a code block
 ```
 
 Open.
@@ -52,7 +52,7 @@ def test_prose_paragraphs_leave_out_headings_tables_code_and_comments() -> None:
     texts = [paragraph.text for paragraph in assistance.paragraphs(lines)]
     assert texts == [
         (
-            "**External intake, 2026-09-28.** wand125’s rectangle-density source reports "
+            "**External intake, 2026-09-28.** Hosono’s rectangle-density source reports "
             "`s(42) >= 679/100`, accepted by Tokoharu’s unchanged interval checker."
         ),
         "Open.",
@@ -69,7 +69,7 @@ def test_the_statement_is_appended_to_the_paragraph_that_describes_the_source() 
 
 
 def test_a_checker_run_on_someone_else_s_certificate_is_not_its_author_s_result() -> None:
-    """Tokoharu's checker accepted wand125's certificate; that paragraph owes wand125 only."""
+    """Tokoharu's checker accepted Hosono's certificate; that paragraph owes Hosono only."""
     text = _record("sources:\n  - key: '[Tokoharu density 2026]'", INTAKE)
     _, lines = assistance.split_record(text)
     assert [

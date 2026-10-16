@@ -14,6 +14,7 @@ import posixpath
 import re
 from collections.abc import Mapping
 from functools import cache
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -567,8 +568,16 @@ def _upper_panel(case: dict[str, Any]) -> str:
     polynomial = polynomial_block(upper)
     inline_polynomial = polynomial if polynomial.startswith("<dt>") else ""
     rows = (
-        _row("Found by", frontier.credit(upper.get("found_by"), upper.get("found_year")))
-        + _row("Improved by", _esc(", ".join(upper.get("improved_by") or [])))
+        _row(
+            "Found by",
+            frontier.credit(upper.get("found_by"), upper.get("found_year"), n=case["n"]),
+        )
+        + _row(
+            "Improved by",
+            frontier.case_credit(
+                case["n"], "/reported_upper_bound/improved_by", upper.get("improved_by")
+            ),
+        )
         + _row("Construction", construction)
         + _row("Tilt angles", tilts)
         + inline_polynomial
@@ -620,7 +629,15 @@ def _lower_panel(case: dict[str, Any]) -> str:
     lower = case["reported_lower_bound"]
     kind = str(tables.LB_LABEL.get(lower["kind"], lower["kind"])).replace("`", "")
     rows = (
-        _row("Proved by", frontier.credit(lower.get("proved_by"), lower.get("proved_year")))
+        _row(
+            "Proved by",
+            frontier.credit(
+                lower.get("proved_by"),
+                lower.get("proved_year"),
+                n=case["n"],
+                field="/reported_lower_bound/proved_by",
+            ),
+        )
         + _row("Kind", _esc(kind))
         + _row("Scope", tex_bounds(lower.get("scope") or ""))
         + _row("Note", tex_bounds(" ".join(str(lower.get("note") or "").split())))
@@ -803,7 +820,8 @@ def results_block(n: int) -> str:
             f'<li class="site-case-result" data-result="{_esc(result.id)}">'
             f'<p class="site-case-result-head"><a href="{_esc(result_url(result.id))}">'
             f"{_esc(result.id)}</a> {rungs} "
-            f'<span class="site-credit">{_esc(result.credit)} · {_esc(result.date)} · '
+            f'<span class="site-credit">{result.credit_html or _esc(result.credit)} '
+            f"· {_esc(result.date)} · "
             f"{where}</span></p>"
             f'<p class="site-case-result-summary">{tex_bounds(result.summary)}</p>'
             f"{detail}</li>"
@@ -839,7 +857,7 @@ def packing_figure(n: int, *, units: int = 1000, upper: dict[str, Any] | None = 
         caption.append(
             f"The best packing known for {n} square{'s' if n != 1 else ''}, "
             f"side {_math(bound_tex(upper))}, "
-            f"{frontier.credit(upper.get('found_by'), upper.get('found_year'))}"
+            f"{frontier.credit(upper.get('found_by'), upper.get('found_year'), n=n)}"
         )
     if regularized:
         from devtools.default_drawings import credit_line  # noqa: PLC0415
@@ -867,7 +885,7 @@ def as_published(n: int, *, units: int = 1000) -> str:
     from devtools.pictured_source import pictured_source_key  # noqa: PLC0415
 
     upper = load_case(n)["reported_upper_bound"]
-    credit = frontier.credit(upper.get("found_by"), upper.get("found_year"))
+    credit = frontier.credit(upper.get("found_by"), upper.get("found_year"), n=n)
     key = pictured_source_key(n, str(upper.get("source_key") or ""))
     finders = f", {credit}" if credit else ""
     source = f' <span class="site-credit">{_esc(key)}</span>' if key else ""
@@ -1121,7 +1139,7 @@ def _rendered() -> str:
         repository_tree(),
         "packing/frontier",
         served=frozenset(
-            {*render_overview.SITE_PAGES, "./", CASES_HOME, *(case_url(n) for n in numbers)}
+            {*site_documents.served_pages(), "./", CASES_HOME, *(case_url(n) for n in numbers)}
         ),
         aliases={
             **site_documents.RECORD_PAGES,
@@ -1173,7 +1191,76 @@ def refuse_footnotes(page: str) -> None:
 #: A heading kpress wrote, with its id and its content.
 _HTML_HEADING = re.compile(r'(<h([1-6])\b[^>]*?\sid=")([^"]*)("[^>]*>)(.*?)(</h\2>)', re.DOTALL)
 #: A formula as kpress writes one, which a heading's id leaves out, as kpress's does.
-_MATH_MARKUP = re.compile(r'<span class="kpress-math[ "].*?</math></span></span>', re.DOTALL)
+_MATH_MARKUP = re.compile(r'<(span|div) class="kpress-math[ "].*?</math></\1></\1>', re.DOTALL)
+_NUMERIC_ENTITY = re.compile(r"&#(?:x[0-9a-fA-F]+|[0-9]+);")
+
+
+def compact_math_entities(record: str) -> str:
+    """Use XML-equivalent UTF-8 for padded numeric references in generated math.
+
+    Case prose goes through KPress's Markdown renderer, while the generated bound
+    panels already use this encoding through `overview_data.math_html`.
+    Keep XML delimiters escaped and leave all surrounding markup untouched.
+    """
+
+    def compact(match: re.Match[str]) -> str:
+        return _NUMERIC_ENTITY.sub(
+            lambda entity: html.escape(html.unescape(entity[0]), quote=True), match[0]
+        )
+
+    return _MATH_MARKUP.sub(compact, record)
+
+
+class _VisualMathClasses(HTMLParser):
+    """Locate optional attribute quotes in KaTeX's HTML atom classes."""
+
+    ATOMS = re.compile(
+        r'^(<span) class="(mord|mop|mbin|mrel|mopen|mclose|mpunct|minner)"(?=[\t\n\f\r >])'
+    )
+    HTML_CLASSES = re.compile(r'^(<[a-z][a-z0-9-]*) class="([A-Za-z0-9_-]+)"(?=[\t\n\f\r >])')
+
+    def __init__(self, record: str, *, all_html_classes: bool = False) -> None:
+        super().__init__(convert_charrefs=False)
+        self.pattern = self.HTML_CLASSES if all_html_classes else self.ATOMS
+        self.lines = [0, *(match.end() for match in re.finditer("\n", record))]
+        self.foreign = 0
+        self.changes: list[tuple[int, int, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag in {"math", "svg"}:
+            self.foreign += 1
+        # Complete articles keep the quoted extraction anchor used by site consumers.
+        if self.foreign or tag == "article" or not attrs:
+            return
+        original = self.get_starttag_text()
+        assert original is not None
+        compact = self.pattern.sub(r"\1 class=\2", original)
+        if compact != original:
+            line, column = self.getpos()
+            start = self.lines[line - 1] + column
+            self.changes.append((start, start + len(original), compact))
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in {"math", "svg"}:
+            self.foreign -= 1
+
+
+def compact_visual_math_classes(record: str, *, all_html_classes: bool = False) -> str:
+    """Omit optional class quotes, retaining SVG/MathML XML and article anchors.
+
+    Cases compact only KaTeX atom classes; complete result pages opt in to every
+    first-position class with one ASCII identifier. Other attributes stay untouched.
+    """
+    parser = _VisualMathClasses(record, all_html_classes=all_html_classes)
+    parser.feed(record)
+    parser.close()
+    pieces = []
+    cursor = 0
+    for start, end, replacement in parser.changes:
+        pieces.extend((record[cursor:start], replacement))
+        cursor = end
+    pieces.append(record[cursor:])
+    return "".join(pieces)
 
 
 def _own_ids(record: str) -> str:
@@ -1217,6 +1304,7 @@ def _records(page: str) -> dict[int, str]:
             record.startswith('<section class="site-case"') and record.endswith("</section>")
         ):
             raise SystemExit(f"n = {match.group(1)}: the record is not one section")
+        record = compact_math_entities(record)
         found[int(match.group(1))] = _own_ids(
             mark_case_links(
                 "<article"
@@ -1314,7 +1402,7 @@ def case_records(*, only: tuple[int, ...] | None = None) -> list[Page]:
                 ),
             ),
         )
-        record = records[n]
+        record = compact_visual_math_classes(records[n])
         record = re.sub(
             r'<p class="site-case-title"([^>]*)>(.*?)</p>',
             r'<h1 class="site-case-title" id="case-title"\1>\2</h1>',

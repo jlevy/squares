@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run the 2 October review's D-1, D-2 and D-3 demonstrations against each retained valid7 tree.
 
-The method review of wand125's independent Valid7 checker
+The method review of Hosono's independent Valid7 checker
 (``docs/project/reviews/review-2026-10-02-valid7-independent-checker.md``, section 10)
 found that ``tier_b2.nonneg_open`` accepts a polynomial that vanishes at its one sample
 point (D-1), that the unused ``rf.nonneg_on`` misses negativity next to a root at an end

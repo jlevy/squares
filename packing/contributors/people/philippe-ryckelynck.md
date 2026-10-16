@@ -1,0 +1,47 @@
+---
+softschema:
+  contract: packing.squares:Contributor/v1
+  schema: ../schemas/contributor.schema.yaml
+  envelope: contributor
+  status: enforced
+contributor:
+  id: philippe-ryckelynck
+  display_name: Philippe Ryckelynck
+  real_name: Philippe Ryckelynck
+  aliases: [Ryckelynck]
+  sources:
+    - id: paper-byline
+      archive_path: packing/resources/papers/gensane-ryckelynck-2005-improved-dense-packings.raw.md
+      url: https://doi.org/10.1007/s00454-004-1129-z
+      locator: 'Opening byline, “Thierry Gensane and Philippe Ryckelynck”, LMPA, Université du Littoral, Calais; Discrete Comput Geom 34:97–109 (2005); the abstract and the cases n = 17, 18, 29 and 37.'
+    - id: picture-credits
+      archive_path: packing/resources/web/known-best-packings/receipts/kingbird-2026-10-05-pictures.json
+      locator: 'The n = 17 credits read from the catalogue SVG: “First high-precision analytic solution by Thierry Gensane and Philippe Ryckelynck before May 19, 2004.”'
+    - id: catalogue-credits
+      archive_path: packing/resources/web/kingbird-squares-in-squares-compared.md
+      locator: 'Entries 18 and 29: “Alternative found by” and “Found by Thierry Gensane and Philippe Ryckelynck in April 2004, using a computer program they wrote.”'
+    - id: archive-index
+      archive_path: packing/resources/README.md
+      locator: 'Papers table: the key [Gensane–Ryckelynck 2005], under which the frontier records cite the paper, with authors “T. Gensane, P. Ryckelynck”.'
+  provenance:
+    - field: /display_name
+      sources: [paper-byline, catalogue-credits]
+    - field: /real_name
+      sources: [paper-byline]
+    - field: /aliases/0
+      sources: [paper-byline, archive-index]
+  bio_sources: [paper-byline, picture-credits, catalogue-credits]
+---
+Philippe Ryckelynck, of the Université du Littoral in Calais, wrote “Improved Dense
+Packings of Congruent Squares in a Square” with Thierry Gensane, published in 2005 in
+Discrete & Computational Geometry.
+Their inflation algorithm, similar to the billiard approach to packing disks and
+spheres, found better packings of 29 and 37 squares and an alternative optimal packing
+of 18 squares; the catalogue dates their packing of 29 squares to April 2004 and credits
+it to a program they wrote.
+For 17 squares they gave the first high-precision analytic solution of John Bidwell’s
+packing, from a system of four polynomial equations.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

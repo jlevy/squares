@@ -11,7 +11,7 @@ Contributions include:
 - [Marc Leonard Overbeck](https://x.com/kleddamag)’s
   [certified lower bound of $31/8$](papers/n11-threshold-bound-review.html) for eleven
   squares.
-- [Mannaseh Ahmed](https://x.com/ManassehA06)’s
+- [Manasseh Ahmed](https://x.com/ManassehA06)’s
   [proof of optimality](papers/n11-optimality-review.html) for
   [eleven squares](cases/11.html).
 - Independently, [Evan Daniel](https://x.com/evanbd) has proved the optimality of

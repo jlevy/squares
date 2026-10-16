@@ -1,12 +1,13 @@
 # Design System
 
 This is the one description of how every page of the site looks: the explainer, the
-overview, News, Atlas, About, case and result records, Frontier, papers, tutorial and
-Visualize. Each stylesheet implements what is written here and points back to it; when a
-page needs something new, it is added here first and then to the stylesheet that owns
-it.
+overview, News, Atlas, About, case and result records, Frontier, papers, tutorials,
+Visualize, and the profile directory and person profiles.
+Each stylesheet implements what is written here and points back to it; when a page needs
+something new, it is added here first and then to the stylesheet that owns it.
 
-Three layers carry it, from the bottom up, with the paper’s text tokens shared by all:
+Shared foundations and component styles carry it, from the bottom up, with the paper’s
+text tokens shared by all:
 
 | Layer | File | Owns |
 | --- | --- | --- |
@@ -14,6 +15,7 @@ Three layers carry it, from the bottom up, with the paper’s text tokens shared
 | Text | [paper-type.css](paper-type.css) | The type base, reading measure, heading scale, role scales and pinned faces every page shares |
 | Paper | [paper-publication.css](paper-publication.css) | The publication layer every paper shares: figures, panels, components and print rules |
 | Site | [site.css](site.css), [site-nav.css](site-nav.css) | Site pages and the navigation bar every page carries, the explainer and the workbench included |
+| Site components | [site-result.css](site-result.css), [site-contributor.css](site-contributor.css) | Result articles and person profiles, using the shared text and overlay roles |
 
 The paper and site layers read the same values from `paper-type.css`, under their own
 prefixes, `--cert-` and `--site-`, so a site page and the explainer set a role at the
@@ -261,7 +263,7 @@ the tutorial, the readme and the homepage, identical on all four where the role 
 | Role | Face | Size / line height at 1280px | At 390px |
 | --- | --- | --- | --- |
 | Paragraph and list item | PT Serif | 18 / 27px | Same |
-| h1 (a report’s title) | PT Serif | 30.6 / 36.72px (1.7 of the base) | Same |
+| h1 (page title) | Source Sans 3, upright caps | Shared page-title role | Same |
 | h2 | PT Serif italic | 21.6 / 25.92px | Same |
 | h3 | Source Sans 3, 550 | 21.6px | 20.7px |
 | h4 | Source Sans 3 italic, 540 | 21.6px | 20.16px |
@@ -271,8 +273,10 @@ the tutorial, the readme and the homepage, identical on all four where the role 
 | Reading column | — | 710px: the 630px measure and both 2.5rem insets | The column less the page margin |
 
 h3 and h4 keep KPress’s own step up at a 64rem pane.
-The explainer’s title is its own role (sans caps, 28.5px); a report’s h1 is the Markdown
-title and keeps KPress’s ratio of the same base.
+Every published page H1 uses the shared upright sans-serif, all-caps title treatment,
+including Markdown reports, the profile directory and profiles.
+The explainer retains its publication title size (28.5px); mathematical notation
+preserves its case and face.
 The homepage sets its summary lists and tables a step smaller, in `site.css`.
 
 **Line breaks.** No text on the site breaks inside a word.
@@ -283,7 +287,9 @@ by nature: a case record’s exact decimal (`.site-case-decimal`, as many as 67 
 and a repository path in a result overview’s links (`.site-result-links code`).
 `anywhere` also lets a grid column or a table cell shrink to one character, which sets a
 label a letter to a line, so it never goes on prose, on a label or on a column holding
-either. No sheet uses `word-break` to break words, and none hyphenates.
+either. Contributor names, source labels, locators and credited-work lists keep normal
+word wrapping; an unbroken identifier or URL wider than its whole line can wrap with
+`break-word`. No sheet uses `word-break` to break words, and none hyphenates.
 A name set as code, such as the evidence identifier `E-nagamochi-lower`, is one word
 too, though a browser may end a line on any of its hyphens.
 `render_frontier_page.evidence_links` puts each name, with the comma after it, in one
@@ -302,9 +308,8 @@ below).
 `-bold`, which alias the paper’s). A face is not inherited with a weight: a rule that
 sets the sans face and no weight leaves its text at the serif’s 400, a step lighter than
 the sans’s regular and lighter than the mathematics in it, which the sans composite
-always draws at 410. Thirty-one rules of `site.css` and `site-result.css` did, a card’s
-note, every popover, the table tools, the rating ladders and the case records among
-them. So every rule in those two sheets that sets the sans face sets its weight, which
+always draws at 410. Every rule in `site.css`, `site-result.css` and
+`site-contributor.css` that sets the sans face also sets its shared weight, which
 `tests/test_site_glyphs.py` holds, and `devtools.measure_site_pages glyphs` reports any
 sans run a page draws at another weight.
 Two weights are KPress’s own and stand: a table’s head at 650 and an `h4` at 540. A
@@ -427,10 +432,11 @@ Linux runner otherwise), and names a paper whose head script is taken out.
 ## Shared Assets
 
 The site’s pages link their design system rather than carry it.
-Every page `render_overview.kpress_page` writes names the same stylesheets and scripts:
-KPress’s stylesheets with their faces, KaTeX’s pruned stylesheets and faces, the
-relation glyphs, `paper-type.css`, `site-nav.css`, `site.css` and `site-result.css`, the
-math pipeline, KPress’s flattened client behaviors and the page’s own programs.
+Every page `render_overview.kpress_page` or `static_content_page` writes names the same
+shared stylesheets and scripts: KPress’s stylesheets with their faces, KaTeX’s pruned
+stylesheets and faces, the relation glyphs, `paper-type.css`, `site-nav.css`,
+`site.css`, `site-result.css` and `site-contributor.css`, the math pipeline, KPress’s
+flattened client behaviors and the page’s own programs.
 Inlined, they came to about 1.8 MB a page, 0.95 MB after gzip, and a reader’s browser
 fetched them again on every page, since a page’s own bytes were all it could cache.
 
@@ -449,6 +455,12 @@ fetched them again on every page, since a page’s own bytes were all it could c
   `render_overview.assert_fetches_only_assets` refuses a script or stylesheet with any
   other source, a CSS import, and a `url()` in the page’s own text that is not a data
   URI or a fragment.
+- **Article programs.** Record and profile shells precede their classic programs.
+  The shared article loader precedes generic popover handling and the row, case and
+  contributor controllers.
+  Input responses can fetch a complete record page and its declared prepared-math asset;
+  only the selected article enters the host document, under the loading, ID and focus
+  contract in **Article Pages and Overlays**, below.
 - **Faces.** Every face keeps `font-display: block`, so a face that arrives late holds
   the text it draws invisible, laid out in its fallback’s advances; the visible text
   around it moves when it arrives.
@@ -616,13 +628,15 @@ output changed only by its stylesheet, so its row is the run-to-run noise of the
 host the two runs were measured on, a few hundred milliseconds; an earlier run of the
 same after-build measured it at 705 to 743ms. The `cases.html#n-11` rows are the case
 records as they stood until 2026-10-03, every record on one page.
-`measure_site_pages load` now opens the record page, `cases/index.html#n-11`, in their
-place, and this table has no row for it yet.
+The subsequent measurement used `cases/index.html#n-11`; this table has no row for that
+intermediate directory.
+The current directory is Atlas, and individual records are complete pages at
+`cases/N.html`.
 
 That one page was slow before any math ran: it carried every case’s record in one 9MB
 document, and parsing and styling that took several seconds on its own (think-cy3a). The
-record page carries the index alone, 1.9MB, and fetches the one record a reader asks for
-(**Case records**, below).
+intermediate record directory carried the index alone, 1.9MB, and fetched one record.
+The current publication contract is described under **Case records**, below.
 Ordinary content pages now prepare their visual math at build time with
 `site_math.prepare`, without a browser; these historical timings do not measure that
 publication contract.
@@ -692,10 +706,91 @@ for, with each heading’s size and line height, and each table’s distance fro
 window’s edges or its popover’s. `tests/test_overview.py` pins each token’s value and
 the rule that reads it.
 
+## Article Pages and Overlays
+
+Case records, result records and person profiles are complete HTML pages.
+Their addresses carry the site’s navigation, colophon, shared styles, prepared
+mathematics where needed, and metadata.
+An ordinary link reaches the complete record with scripts disabled, from a local file,
+or when enhancement fails.
+The same article can appear in an overlay on another page; its content and source links
+come from its complete page.
+
+| Component | Complete address | Native entry | Enhancement |
+| --- | --- | --- | --- |
+| Case record | `cases/N.html` | Case link, index entry or neighboring-record link | `a[data-case]`, atlas tiles and frontier rows load `article.site-case` in the shared case panel |
+| Result record | `result/t-nnn.html` | Result ID link or **Open Result Record** | Pressing the rest of a result row loads `article.site-result[data-result-overview]` in that row’s panel |
+| Person profile | `profiles/ID.html` | Public-name link or **Open profile** | A marked credit in a case or result article loads `article.site-contributor` in the shared contributor panel |
+| Profile directory | `profiles/index.html` | Colophon **Profiles** link and alphabetical list | Profile links navigate directly to standalone profiles |
+| News article | `news.html#ID` | Linked announcement title or bookmarked article | Homepage and archive reuse the authored article; its profile links navigate directly |
+| Card preview | The card’s ordinary target | Native `popovertarget` button and action link | The card’s preview remains authored in the page; it is not an article fetch |
+| Framed card preview | Target page with `?view=embed` | Native card button and **Expand** | The frame loads on first opening and uses its own document |
+
+The components have one article-loading boundary,
+[article-loader.js](../overview/article-loader.js), exposed as
+`siteArticles.loadArticle(address, selector)`. It accepts same-origin HTTP(S) pages,
+fetches their HTML, and parses it in an inert template.
+It selects only the named article and removes script elements from it; fetched page
+programs never run.
+Relative links and images resolve against the response URL, including
+after a redirect. Local fragments target the copied article when their IDs exist there,
+and otherwise resolve against the complete page.
+
+The loader caches pristine articles by URL and selector and gives each consumer a new
+clone. Each clone gets a unique ID prefix, with matching fragment, ARIA, label and SVG
+references, so a heading, source anchor or SVG definition cannot collide with the host
+page or another record.
+It loads the page’s declared prepared-math stylesheet from the shared CSS assets before
+returning the article.
+Mathematics is already prepared by the renderer; the overlay does not execute the
+fetched page’s math or theme programs.
+Failed article and stylesheet requests leave no successful cache entry and can be
+retried.
+
+Renderers put the overlay shells before their classic programs.
+Program order is the shared article loader, generic popover handling, then the relevant
+row, case and contributor controllers.
+`kpress_page` and `static_content_page` supply these shells and programs, including on
+standalone records, so a profile reached from a case can open another case.
+The generic handler keeps local source-anchor navigation inside a panel and closes it
+for ordinary links leaving the panel.
+Legacy card previews still use their native markup and their own body or frame.
+
+Opening a case or profile moves focus to its close button.
+Escape and outside clicks close it.
+Replacing a case or result panel with a profile, or a profile with a case, hides the
+source panel and retains the original page opener as the return target.
+Closing restores that target when it remains connected and the reader has not moved
+focus elsewhere. Modified clicks and explicit new-tab links keep native navigation;
+contributor links marked as downloads do too.
+Case and profile requests share a generation counter; a newer request, Escape, or a
+closed source panel prevents a late success or failure from reopening a panel or
+navigating. Result bodies have their own per-panel generations and retry on a later
+opening after failure.
+Browser tests exercise these sequences on generated pages.
+
+| Responsibility | Source owner | Retained checks |
+| --- | --- | --- |
+| Shared text, spacing, themes and overlay frame | `paper-type.css`, `site.css`, `site-nav.css` | `test_site_text_tokens.py`, `test_site_glyphs.py`, `test_site_wide_blocks.py`, `test_overview.py` |
+| Case article, Atlas directory and panel | `render_case_pages.py`, `forward.js`, `case-popover.js` | `test_site_case_records.py`, `test_site_math_faces.py` |
+| Result article and row entry | `result_overview.py`, `render_overview.iter_result_fragments`, `overview_sections.py`, `row-popover.js`, `site-result.css` | `test_result_overview.py`, `test_site_result_popover.py`, `test_site_case_records.py`, `tests/node/overview_rows/` |
+| Contributor article, directory and panel | `render_contributors.py`, `contributor-popover.js`, `site-contributor.css` | `test_render_contributors.py`, `test_site_contributor_popovers.py` |
+| Canonical News articles, homepage selection and direct profile links | `render_changelog.py`, `news_highlights.py`, `site_topics.py`, `site.css` | `test_changelog.py`, `test_news_highlights.py`, `test_site_homepage.py` |
+| Inert fetch, cache, scoped IDs, replacement and focus | `article-loader.js`, `popover.js` and the article controllers | `test_site_contributor_popovers.py`, `test_site_case_records.py` |
+| Identity and reviewed credit spans | `sqpack.contributors`, `sqpack.contributor_occurrences`, `contributor_credit.py` | `test_contributors.py`, `test_contributor_occurrences.py`, schema gate |
+| Routes, metadata, build inputs and sparse evidence | `site_urls.py`, `site_documents.py`, `preview_site.py`, `pages_scope.py`, `run_negative_controls.py` | `test_site_urls.py`, `test_site_documents.py`, `test_pages_scope.py`, `test_snapshot_copy_roster.py` |
+
+Test filenames in this map are under `packing/tests/`; browser programs are under
+`packing/devtools/overview/`. Publication verification reads every complete page’s head
+and fetches the result pages named by the tables.
+Component changes update this guide and their owning stylesheet or renderer together;
+plans point here for presentation contracts.
+
 ## Site Components
 
-Each component is defined once in [site.css](site.css) and used on every page that needs
-it.
+Each component has one owning stylesheet and renderer, listed in **Article Pages and
+Overlays**, above. Shared frames and controls live in [site.css](site.css); result and
+contributor articles use their component sheets and the same text tokens.
 
 - **Navigation bar.** One fixed-width row of sans links in the page’s header slot, the
   same on every page, the explainer and the workbench included, led by the site name,
@@ -894,8 +989,13 @@ it.
   The title uses the Explanations card’s sans face, medium weight, size and leading; it
   stays upright, left aligned and in the theme’s text foreground.
   A linked article title inherits the heading’s color and typography.
-  News uses surnames in titles, article text and displayed credits unless distinct
-  people share a surname.
+  News headlines use surnames when unambiguous.
+  Article text follows the authored record.
+  The first linked mention in an article uses the profile’s preferred display name,
+  following [Attribution Policy](../../../attribution.md#website-and-pdf-presentation).
+  The renderer preserves authored names and wording.
+  Profile links navigate directly to their complete pages from both homepage previews
+  and the News archive.
   Keep published handles and organization names intact.
   Full identities remain in canonical attribution and source-reference records.
   The date is a prominent sans-base line in medium weight, with a machine-readable
@@ -992,8 +1092,9 @@ it.
   (`--site-subtitle-scale`, about 21px), in the page’s own text colour, never gray, with
   the same space above it and below it (`--site-subtitle-space`, 2rem). A title with no
   subtitle, a document’s own `h1` among them, stands that space above its first
-  paragraph. The page title style (every hero `h1`, and `.site-title`) is the sans face
-  in upright caps (not KPress’s italic `h2`) at 1.5 times the sans base, centred.
+  paragraph. The page title style (every `.site-page h1`, every hero `h1`, and
+  `.site-title`) is the sans face in upright caps (not KPress’s italic `h2`) at 1.5
+  times the sans base, centred.
   On screen, `h1.site-title` and `h2.site-title` use `--site-title-space-above`
   (3.75rem) above and `--site-title-space-below` (2.5rem) below the title on every
   content page; print keeps its existing heading spacing.
@@ -1100,20 +1201,20 @@ it.
   Frontier page (**Overview sections**, below), and the Papers page’s three paper cards
   lead to full pages the site serves, so each is a direct card that goes to its page in
   the same tab (`new_tab=False`), with the right arrow for its icon (`data-go="page"`)
-  and nothing framed (`think-bc5d`, `think-w82r`). Popovers are for records, targets
-  that are not site pages of their own: a result, a case, a repository document rendered
-  for its card’s popover.
-  A direct card is a link and holds no other link, so what its note names is linked from
-  the prose beside it.
+  and nothing framed (`think-bc5d`, `think-w82r`). Record links and rows can preview
+  complete case, result and contributor pages through the article overlays above.
+  A card’s authored preview or framed repository document keeps its own native card
+  behavior. A direct card is a link and holds no other link, so what its note names is
+  linked from the prose beside it.
   **Every other direct card opens its target in a new tab** (`target="_blank"`,
   `rel="noopener noreferrer"`), so the page the reader chose it from stays where they
   left it: a poster’s PDF, the Visualize page, another project.
   `link_card` refuses `new_tab=False` for anything but a page the site serves, which one
   rule decides (`overview_sections.is_site_page`): an entry of
   `render_overview.SITE_PAGES`, the optimality paper among them, or a directory served
-  by its `index.html`, as `workbench/` and the record page, `cases/`, are.
-  A case’s record file is no such page: it is the record alone (**Case records**,
-  below).
+  by its `index.html`, as `workbench/` and `profiles/` are.
+  A case record and a person profile are complete pages too; their marked links use the
+  article controllers described above.
   - When a popover card leads to a repository document the site renders, the popover
     renders that page itself, narrow, in a frame: the page at the same address with
     `?view=embed` added before any fragment, so a filtered view such as
@@ -1359,7 +1460,7 @@ it.
   - Inline markup carries `<span class="site-icon-arrow" data-arrow="right">`, written
     only by `overview_sections.arrow_icon(direction)`: a case record’s steps to its
     neighbours (left before the previous case, right after the next), which the left and
-    right arrow keys follow in the case popover, the overview’s “See all results” button
+    right arrow keys follow in the case popover, the overview’s “All Results” button
     (right) and the atlas’s expander (double-down, then double-up).
     The atlas popover’s stepper, two buttons left and right, went with that popover on
     2026-10-03.
@@ -1919,7 +2020,8 @@ it.
   - **The canonical record.** `cases/N.html` is a complete styled page with its own
     title, canonical address, metadata and record article.
     It is readable without scripts and supplies the article fetched into the case
-    popover.
+    popover. `static_content_page` supplies the styled shell, navigation, colophon and
+    shared article overlays; the record remains readable and printable on its own.
   - **The directory.** `atlas.html` is the case directory, with interactive graphics
     followed by the Frontier Survey.
     Old `cases/`, `cases/index.html`, and `cases.html` directory links forward there
@@ -1931,6 +2033,8 @@ it.
     Its centered compact **Case Record** label sits above a larger typeset $n = N$ count
     (`think-g28m`). Case-property icons come first on the status line, followed by notes
     and textual tags such as “proved”.
+    The shared article loader supplies prepared, rebased and ID-scoped clones (**Article
+    Pages and Overlays**, above).
     The close control, Escape, outside click, and focus return remain shared behavior.
     Previous and next controls and left/right arrow keys change the case in place.
     There is no **All cases** control.
@@ -1961,25 +2065,22 @@ it.
     and to the case file “On GitHub”.
     Last, under a rule, the case file’s own prose, whose formulas are set as LaTeX.
   - **One render.** Every record is rendered once, in one kpress page of every record,
-    so its prose, math and links are rendered as any page’s are; the record page and
-    each record file are cut from it (`render_case_pages._rendered`), and each record’s
-    links are written again from `cases/` (`rebase_links`). In the one render a record
-    is a `<section>`, since the page’s own article holds every record, and in its file
-    an `<article>`. Its headings’ ids are made again within the record alone, from their
-    text with kpress’s own slugger (`_own_ids`), so a heading added to one case file
-    never renumbers another record’s and breaks a shared `cases/N.html#…`. The page
-    model’s list of headings, the records’, is emptied on the record page, which has no
-    contents rail. A footnote in a case file is refused: kpress gathers footnotes at the
-    foot of the one render, outside every record.
-  - **Why not 324 pages.** Until 2026-10-04 every site page inlined its shell, about 1.8
-    MB of faces and KaTeX, so 324 full pages would have carried it 324 times.
-    The record page carried it once, 1.9 MB with the index, and the record files are the
-    records alone: 16 KB for $n = 1$ to 217 KB for $n = 11$, 10.4 MB for all 324
-    (measured 2026-10-03). The shell is now shared (**Shared Assets**, below), and the
-    record page is 41 KB; one page of records still keeps a record’s address one
-    fragment of one page, and its popover and its page the same file.
-    The former combined record address, `cases.html`, now forwards case selections to
-    the Atlas directory (**Document cards and moved pages**, below).
+    so its prose, math and links are rendered as any page’s are; each complete record
+    article is cut from it (`render_case_pages._rendered`), prepared and wrapped by
+    `static_content_page`. Each record’s links are written again from `cases/`
+    (`rebase_links`). In the one render a record is a `<section>`, since the page’s own
+    article holds every record, and in its file an `<article>`. Its headings’ ids are
+    made again within the record alone, from their text with kpress’s own slugger
+    (`_own_ids`), so a heading added to one case file never renumbers another record’s
+    and breaks a shared `cases/N.html#…`. The page model’s list of headings, the
+    records’, is emptied on the record page, which has no contents rail.
+    A footnote in a case file is refused: kpress gathers footnotes at the foot of the
+    one render, outside every record.
+  - **Shared assets and old addresses.** Complete case pages reference the site’s hashed
+    fonts, CSS and programs (**Shared Assets**, above); their articles carry the
+    record-specific bytes.
+    `cases.html` and the former `cases/` directory forward to `atlas.html`, preserving
+    registered case selections (**Document cards and moved pages**, below).
 
 - **Visuals.** The homepage groups its print and film under **Visuals**. One centered
   featured card, up to 42rem wide, shows the complete 324-case triangle poster without
@@ -2066,15 +2167,16 @@ it.
   card reads as before: the id, the cases and the rungs on its first line, the
   significance under the id and the status under the rungs, the claim with its details
   on a line under it, a dot drawn between two links, then the credit and the date.
-  The tables are two filters of one table, and differ only in where the filter bar
-  starts, which sets the rows that begin `hidden` and the count, and in a row’s key: on
-  the results page a row is the result’s own address (`id="t-018"`), and on the overview
-  it names the result as `data-result`. Every other byte of a row and of its popover is
-  the same, so each shows the result’s records in its details and each opens its popover
-  from the id. The line under the overview’s table, “See all results”, links the overview
-  to the results page, and so does a status line that names the results superseding its
-  own: each named result links to its row on the results page
-  (`overview_sections.result_url`), in place there and across from the overview.
+  Both tables use the same row renderer.
+  The homepage publishes a bounded Recent Major Results subset, while the Results page
+  includes every result and its filter bar.
+  On the Results page a row has its result address (`id="t-018"`); on the homepage it
+  names the result as `data-result`. Both retain the result’s details and native record
+  link, and open the same canonical article through the shared row popover.
+  The line under the overview’s table, “All Results”, links the overview to the results
+  page, and so does a status line that names the results superseding its own: each named
+  result links to its row on the results page (`overview_sections.result_url`), in place
+  there and across from the overview.
   Both sort on any column whose header carries the sort pair.
   The widths follow from each column’s floor and from what the n column asks for.
   The id, the significance, the rungs, the status, the details and the date are as
@@ -2115,11 +2217,13 @@ it.
   its measure at the least, a range and a count to a line.
   Where no row showing holds a long list, as in a view of one kind of short lists, the
   column is as narrow as its lists, under 96 pixels, so a single case has no empty
-  column beside it. The overview as it opens shows T-056’s list since it starts at S3
-  (`think-x60s`). With every row showing, the date, significance, result, n, credit,
-  rungs, status and id columns measure 100, 77, 389, 225, 220, 180, 114 and 56 pixels at
-  a 1440-pixel window, where the table is 1360 and gives the n column its whole measure:
-  T-056’s list takes 6 lines, a row 165 pixels tall, under the 182 of T-044’s row.
+  column beside it. In the earlier S3 homepage layout measured for `think-x60s`, the
+  initial view included T-056. The following measurements describe that layout, before
+  the bounded S4 Recent Major Results subset.
+  With every row showing, the date, significance, result, n, credit, rungs, status and
+  id columns measure 100, 77, 389, 225, 220, 180, 114 and 56 pixels at a 1440-pixel
+  window, where the table is 1360 and gives the n column its whole measure: T-056’s list
+  takes 6 lines, a row 165 pixels tall, under the 182 of T-044’s row.
   At 1280 the result and credit columns are at their floors, 265 and 184, and the n
   column still has its whole measure, 225, so the list takes 6 lines there too; at 1024
   and 768 every column is at its floor, the n column at 120 and its list on 12 lines,
@@ -2320,11 +2424,11 @@ Max age is a number of days, and empty is no limit. There is no date range.
   baseline (`align-items: baseline`): the checkbox’s words, the other labels’ and the
   count read level, on the Frontier page’s bar too.
 
-- **Defaults.** Recent Results on the overview contains only results of significance S3
-  and up, at most 180 days old and not superseded (`RECENT_DEFAULTS`). The renderer
-  selects those rows and writes their count and scope into the HTML. The complete
-  results page includes every row and starts at All, no maximum age and Hide superseded
-  clear (`RESULTS_DEFAULTS`). Its other controls start at All too.
+- **Defaults.** Recent Major Results on the homepage contains at most 12 results of
+  significance S4 and up, at most 180 days old and not superseded (`RECENT_DEFAULTS`).
+  The renderer selects the rows; the homepage has no filter bar, count or scope line.
+  The complete results page includes every row and starts at All, no maximum age and
+  Hide superseded clear (`RESULTS_DEFAULTS`). Its other controls start at All too.
   The bar has no reset control: a fresh page load restores the HTML defaults unless the
   address presets a supported filter.
 
@@ -2390,28 +2494,30 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
     on another row does.
   - **Markup** is written only by `overview_sections.row_detail`, in three pieces.
     The row is `<tr data-row-popover="ID" aria-label="…">`, the label its accessible
-    name. One cell holds the row’s native trigger,
-    `<button class="site-row-open" popovertarget="ID">`, around the row’s own key, such
-    as a result’s id, and styled as that text.
+    name. One cell holds the row’s native entry, styled as its key.
+    Generic `row_detail` writes a `<button class="site-row-open" popovertarget="ID">`;
+    `result_row` uses an ordinary `<a class="site-row-open" href="result/t-nnn.html">`
+    around the result’s ID, so the complete result remains reachable without scripts.
     The popover follows the table, outside every cell, so it takes no style from the
     table: `<div class="site-popover site-row-pop" id="ID" popover role="dialog"
     aria-labelledby="ID-title">`, holding the close cross, the `.site-card-label`, the
     headline `.site-popover-value` with the id `ID-title`, the body in
     `.site-row-pop-body`, and the optional `.site-popover-actions`. The ids are
     `pop-result-t-nnn`.
-  - **Without scripting** the trigger opens the popover, as a card’s button does, and is
-    the row’s one tab stop.
-    `overview/row-popover.js` makes the row the control: it gives the row
-    `tabindex="0"`, `aria-expanded` and `aria-controls`, and takes the trigger out of
-    the tab order, so each row stays one stop.
+  - **Without scripting** a result ID navigates to the complete record.
+    A generic row’s native popover button, where used, opens its authored body as a
+    card’s button does. `overview/row-popover.js` makes the row the control: it gives the
+    row `tabindex="0"`, `aria-expanded` and `aria-controls`. It takes a generic native
+    popover button out of the tab order; ordinary result links remain links with their
+    own behavior and tab stops.
     The row carries no `tabindex` in the HTML, since a focusable row that did nothing
     would be a dead stop for a reader without scripts.
   - **Sorting and filtering** (`overview/table.js`) move and hide rows.
     A row finds its popover by id, so the popover follows its row.
   - **Content.** One function writes a row’s popover body,
     `overview_sections.result_row_popover_body`, on the overview and the results page
-    alike. A result’s popover has no button, on the overview or the results page: the row
-    pressed is the result’s row in either table.
+    alike. Every result panel keeps an **Open Result Record** action to its complete
+    page, where the same article can be read, shared and printed independently.
   - **Deferred bodies.** A body too heavy to render once per row when the page loads can
     wait in a template: `row_detail(deferred=True)` writes it as
     `<template data-row-pop-body>` inside `.site-row-pop-body`, which the browser parses
@@ -2426,16 +2532,18 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
     a file beside the pages, and fetched: `row_detail(source="…")` writes the file’s
     address as `data-row-pop-src` on `.site-row-pop-body`, whose content in the page is
     then a short form of the body.
-    The script fetches the file when the row is first pressed or its popover first
-    opens, puts it in place of the short form, and has its math typeset.
+    The script asks the shared article loader for the complete page when the row is
+    first pressed or its popover first opens, then places its prepared article clone in
+    place of the short form (**Article Pages and Overlays**, above).
     The page gains only the address.
     Where the file cannot be had, without scripts, on a page read from a file or off the
     network, the short form stays, and the next opening asks again.
-    A result’s row does this: its short form is the result’s claim, significance and
-    novelty, and its file is the result’s whole overview (**Result Overview**, below).
-    Besides its shared assets and a page a card’s popover frames, a page fetches one
-    other thing, a case’s record file, into the case popover or the record page (**Case
-    records**, above).
+    A result’s short body points to the persistent **Open Result Record** action.
+    That ordinary link reaches the complete result and remains when a fetch fails.
+    A later opening tries again.
+    The page carries neither a second full overview nor a root-relative HTML fragment;
+    its source is the complete result page (**Result Overview**, below).
+    Case and contributor panels use the same loader for their complete pages.
 
   `tests/node/overview_rows/` runs the script against a stand-in document, and
   `tests/test_overview.py` holds every row of the two pages to this markup, the frontier
@@ -2510,8 +2618,8 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   recent table and each case record’s results link.
   A row opens its result’s popover, the full claim and its novelty label, with the id in
   its first cell as the trigger (**Row popovers**, above).
-  The overview keeps the newest results and ends that table with a “See all results”
-  line and the right arrow, in the sans face at the note size.
+  The overview keeps the newest results and ends that table with a “All Results” line
+  and the right arrow, in the sans face at the note size.
   The table used to be the overview’s Every Result section, and its old addresses still
   arrive: the overview’s `overview/forward.js` sends `#every-result`, any `#t-nnn`,
   `#verification-ladders` and `#verification-at-a-glance` to the results page with the
@@ -2536,8 +2644,10 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   reader without scripts gets a refresh and a link.
   `all-results.html` goes to `results.html`, `status.html` to the frontier atlas,
   `defects.html` to the defect log on GitHub, and `cases.html`, every case record on one
-  page until 2026-10-03, to the record page, `cases/`, whose script shows the case a
-  fragment such as `#n-11` names (**Case records**, above).
+  page until 2026-10-03, to `atlas.html`, preserving case selections such as `#n-11`
+  (**Case records**, above).
+  The profile directory and the profiles served under `contributors/` until 2026-10-13
+  forward to their pages under `profiles/` (**Person Profiles**, below).
   No page of the site links a forwarder; `tests/test_site_documents.py` and
   `preview_site.moved_links` hold the pages to that, and `check_published_site` asks the
   deployed site for each one.
@@ -2561,6 +2671,8 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   reader-document pipeline.
   Explanations is the current navigation entry on these pages.
   The legacy `visualize.html` film remains available.
+  Shared article overlays remain available for marked record and contributor links
+  elsewhere on the page; the reading cards themselves navigate directly.
   The addresses the papers had before 2026-10-01, `explainer.html` and
   `n11-optimality/t-060-explainer.html` with its directory, each serve a forwarder: a
   page of a few lines that sends a reader on with the query string and the fragment they
@@ -2599,34 +2711,43 @@ full overview of that result.
 `devtools/result_overview.py` writes the popover’s body, `result_popover_html`, and
 [site-result.css](site-result.css) holds its styles, apart from `site.css` and linked
 after it on every page.
-The body is one `.site-result` block with no ids, no script and no `<table>`, so it does
-not depend on the popover around it.
-Its popover is up to 62rem wide and as tall as the window allows (**Cards**, above), and
-scrolls as one panel.
+The complete page wraps one `article.site-result[data-result-overview]` with a title,
+neighboring-result navigation, the site’s shell and metadata.
+The article has its own IDs and prepared math and may contain a native table for a broad
+result’s cases. The shared loader scopes those IDs and resolves links when the article
+enters a panel, so its content can be read outside the originating table.
+Its popover is the case popover’s size, up to 62rem wide and as tall as the window
+allows (**Cards**, above), and scrolls as one panel.
 
-No page carries an overview.
-Between them they run to about 2.8 MB (`result_overview --audit`) and two pages list the
-results, so each is written once, as `result/t-nnn.html` beside the pages
-(`render_overview.result_fragments`), and a row’s popover fetches its own when it first
-opens (**Row popovers**, Fetched bodies).
-A fragment is the one block and nothing else: it has no shell, and its links are written
-from the site’s root, so only a page there may place it.
+Listing pages carry a short native link and an action rather than every full overview.
+Each result is published once as `result/t-nnn.html`
+(`render_overview.iter_result_fragments`, materialized by `result_fragments`), and a
+row’s popover extracts its article through the shared loader when it first opens (**Row
+popovers**, Fetched bodies).
+The historic function names refer to complete pages.
+The complete page’s links are written from `result/`; a fetched clone resolves them
+against the response address, so any page of the site can place it.
 The singular directory `result/` stays distinct from the canonical `results.html` index
 and a host’s extensionless `/results` spelling.
-`tests/test_overview.py` holds the two pages under a size ceiling each, and
+`tests/test_overview.py` holds the listing pages under their size ceilings, and
+`tests/test_result_overview.py` holds a broad result’s complete page under its own
+budget without dropping case rows, credit links or article content.
 `check_published_site` asks the deployed site for every overview the results table
 names.
 
-- **Head.** The popover’s own caps label, the result’s id, and its headline, the
-  result’s summary, stand above the body and are in the page, so they do not change when
-  the overview lands. The body opens with the significance mark, the V and C rung chips,
-  the kind chip and the status line, as the tables show them; then the date and what it
-  dates, in the tables’ order (`date_cell`), the credit and the cases, in the support
-  colour; the claim at the note size; where the entry declares a later result that
-  implies it (`superseded_by`), a paragraph under the claim that opens “Superseded in
-  part by T-060.”, the later result linked, and says what it implies and what still
-  stands; and a closed disclosure with the significance, composition, next rung and
-  novelty.
+- **Head.** The popover’s shell label and summary name the panel while it loads.
+  After a successful fetch, the canonical article’s `h1` becomes its single visible
+  headline and accessible name; the duplicate shell label and summary are removed.
+  The shared loader’s scoped heading ID is preserved for references.
+  Loading failures retain the shell title and native link.
+  The pristine cached article and standalone page keep their title.
+  The body opens with the significance mark, the V and C rung chips, the kind chip and
+  the status line, as the tables show them; then the date and what it dates, in the
+  tables’ order (`date_cell`), the credit and the cases, in the support colour; the
+  claim at the note size; where the entry declares a later result that implies it
+  (`superseded_by`), a paragraph under the claim that opens “Superseded in part by
+  T-060.”, the later result linked, and says what it implies and what still stands; and
+  a closed disclosure with the significance, composition, next rung and novelty.
 - **The case.** A result about one case, or up to four, shows each case’s visual summary
   as the case’s record opens with it (**Visual summary**, above), smaller and with no
   caption under the drawing: the packing drawn at the atlas’s scale
@@ -2634,13 +2755,16 @@ names.
   gap bar, the bound as one statement with the lower bound in scarlet and the best known
   side in green, the badges, the citation and what is open.
   Its facts are the film’s own (`atlas_film_facts`), and it is written, its gap bar’s
-  labels placed, when the fragment is rendered.
+  labels placed, when the complete page is rendered.
   Where the result is about more than one case, each panel is headed by its $n$. Under
   the panel, the case record’s verified and reported bounds and the gap form a small
   grid, each value linking to its field in the case file.
-- **Many cases.** A result about more than four cases says so and lists them in a box
-  that scrolls, one row each: the n linking to the case’s record file, the two bounds in
-  the film’s colours, the gap, the status chip, the frontier row and the case file.
+- **Many cases.** A result about more than four cases says so and lists them in a native
+  table inside a scrolling box, one row each: the n linking to the case’s record file,
+  the two bounds in the film’s colours, the gap, the status chip, the frontier row and
+  the case file. Identical consecutive bounds and badges use native row spans; every case
+  retains the same six logical cells and links.
+  Browser checks expand the DOM spans to verify the complete table.
 - **The chain.** Every register result on the same case, oldest first, down one rule:
   the date and what it dates, the id linking to its row, what it established, its chips,
   and its credit, bibliography entry, source packet and register entry.
@@ -2656,11 +2780,92 @@ names.
   packet, the artifacts, the review, and the case file with its four frontmatter bounds.
   A repository path is set as code.
   Rendering fails on a link whose target is not in the tree, on a page or record file
-  the site does not serve and on a fragment no row carries.
+  the site does not serve and on a result page no row carries.
 
 A section heading in the overview is a caps label, so it holds no formula: capitals
 would change the formula’s letters.
 `tests/test_result_overview.py` holds every part and every link.
+
+## Person Profiles
+
+[Attribution Policy](../../../attribution.md) owns preferred names, verified aliases,
+person/project distinctions and exceptions.
+This guide owns their presentation.
+
+The profile directory at `profiles/` lists every published profile in public-name order.
+It includes cited paper authors as well as the project’s contributors, so its visible
+text says **Profiles**: the directory’s title and heading, its list’s label, the
+colophon link and each profile’s breadcrumb.
+Its names navigate directly to individual profile pages, with or without JavaScript; the
+directory does not open profile popovers.
+News articles and their homepage previews also use ordinary profile links.
+The colophon’s **Profiles** link and each profile’s breadcrumb navigate back to the
+directory. Each profile has one complete article at `profiles/ID.html`; the directory,
+credited names in tables and records, and the standalone profile use that address.
+A marked public-name credit in a result or case can open the same article in
+`#pop-contributor`, whose **Open profile** action reaches the complete page.
+The panel has the standard 36rem ceiling, shared padding, close target, viewport height
+limit, scrim and scrolling of a compact article popover.
+It retains the page opener across case/result/profile replacements.
+
+The profiles were served under `contributors/` until 2026-10-13 (think-0v2c); each
+address served there is a registered forwarder to its profile
+(`render_overview.LEGACY_PROFILES`), and no page links one.
+A profile added since has only its `profiles/` address.
+Module, record, schema, CSS class and `data-contributor*` names keep the contributor
+vocabulary of the records under `packing/contributors/people/`.
+
+`render_contributors.contributor_article` writes the article once for either context:
+breadcrumb, public name, optional real name when different, aliases, optional bio,
+structured public links, reviewed credited work, source locators and identity evidence.
+Unknown real names, accounts and biography facts are omitted.
+The optional bio is one Markdown paragraph of at most five sentences, with sources
+supporting its claims.
+The renderer permits safe inline Markdown, escapes raw HTML, disables images and checks
+links with the same HTTP(S) policy as structured links.
+Sentence count is an editorial review rule; the loader validates paragraph shape and
+evidence references.
+
+Structured links identify their kind and account handle where supported: GitHub, Twitter
+/ X, Substack, a personal website or a publication website.
+Source IDs link to their public URL or archived source, with the locator beside them.
+Identity evidence is a closed native disclosure linking the supported fields to those
+sources. Credited work links reviewed occurrences to cases, results or bibliography
+entries, retaining role and original public label.
+Repeated mentions of the same work, role and label collapse, while distinct bibliography
+records remain distinct and link their own entry lines.
+Long credit collections use a native disclosure; the complete collection remains in the
+article.
+Identity joins come from the reviewed occurrence manifest, not spelling matches.
+The
+[contributor plan](../../../docs/project/specs/active/plan-2026-10-10-contributor-profiles.md)
+defines evidence, identity, census and maintenance requirements.
+
+The standalone bio inherits the shared 18px serif prose; the directory and profile H1s
+use the shared sans-serif, all-caps page-title role.
+The overlay inherits sans at the same 18px base and regular weight; its name and section
+headings use the shared compact overlay scales, medium weight and heading leading.
+Page section headings retain their serif italic role; overlay section headings are
+upright sans. Typography comes from the shared rules rather than profile-specific sizes.
+Breadcrumbs, aliases, account links, credits and source text use the shared note role
+and support color; source section headings keep the heading role.
+Identity terms use the shared medium weight.
+Nested metadata never multiplies the note size.
+The article adds no padding above the page’s shared top space.
+Only the first breadcrumb reserves the close button’s clearance; the article body and
+headings keep equal left and right insets.
+Long source identifiers and URLs wrap only when wider than a whole line.
+Themes and standalone print read the shared KPress and paper tokens; no profile-specific
+face, color palette or print scale is introduced.
+
+[site-contributor.css](site-contributor.css) implements these roles.
+`tests/test_render_contributors.py` checks safe prose, route and build integration,
+source checkout and distinct work links.
+`tests/test_site_contributor_popovers.py` checks generated page and panel content, focus
+and request races, native and failed-fetch navigation, resolved typography, equal insets
+and overflow at desktop and phone widths in both themes.
+Profile schema checks and the occurrence tests hold the identity and credit evidence
+contract.
 
 ## Page Metadata and Social Cards
 
@@ -2710,10 +2915,13 @@ The one forwarder that leads off the site, `defects.html` to the defect log on G
 carries its title and a canonical link to that address, in full, and no card: the site
 does not write the page it leads to, so its preview could not say what that page shows.
 
-A result’s overview is a fragment fetched into a popover and has no head.
-A case’s record file is the record alone but has the whole set and the icon, since it is
-the address a case is shared by (**Case records**, above): its own name is “n = 11 ·
-Case Records”, and its description a sentence of its own.
+Case and result records and person profiles are complete pages and carry the whole set
+and the icon. A case’s name identifies its square count and bounds; a result’s name
+combines its ID and summary; a profile’s name is the evidenced public name.
+Each has its own record-derived description and canonical address.
+The directory has its own identity at `profiles/`. Article overlays extract the body of
+these pages, so the host page keeps its own head while the full record remains
+independently shareable.
 
 `check_published_site` holds the deployed pages to these rules after each deploy: one of
 each tag and the site’s icon, the canonical link and `og:url` equal to the page’s
@@ -2789,11 +2997,11 @@ The front is, in order:
 
 - **The title.** A Markdown `h1` in the hero, centred, in the page-title role.
 
-- **The credits.** One line each, with names in bold, addresses as plain links, the
-  version plain.
+- **The credits.** Names and roles follow [Attribution Policy](../../../attribution.md).
+  One line each, with names in bold, addresses as plain links, the version plain.
 
   ```
-  From the original proof by **Mannaseh Ahmed**
+  From the original proof by **Manasseh Ahmed**
   github.com/Queuingtheorydotcom/11SquaresOptimal
 
   Human oversight: **Joshua Levy**
@@ -3063,18 +3271,17 @@ The site pages are checked together by building the whole site and screenshottin
 page at a desktop and a phone width:
 
 ```shell
-uv run --frozen --all-extras --group dev python -m devtools.preview_site --shots /tmp/shots
+uv run --frozen --all-extras --group dev python -m devtools.preview_site --shots "$TMPDIR/shots"
 ```
 
 It scrolls each page to its foot first, so what a page places or loads lazily is in the
 shot, and fails on console errors, a page wider than its viewport, math left untypeset,
 any formula set in the wrong face (the Math rule above, its headline exception
 included), and a row of cards off the centre of its line (more than a pixel between its
-two slacks).
-`--page cases/index.html#n-11` walks one page at a fragment, here the record
-page showing case 11, which fetches its record from the build the preview serves, and
-`--press SELECTOR` presses a card or an atlas cell on each page that has one, then walks
-and shoots what it opened, since a popover a script fills has no math until it opens.
+two slacks). `--page cases/11.html` walks a complete case record from the build the
+preview serves, and `--press SELECTOR` presses a card or an atlas cell on each page that
+has one, then walks and shoots what it opened, since a popover a script fills has no
+math until it opens.
 What a press opens is also checked for a word broken across lines, in the popover and in
 a page it frames: a break between two letters or digits, or on a hyphen of a name the
 site sets as code, unless the run is 24 characters or longer and wider than its line
@@ -3112,9 +3319,24 @@ page, every record file and the forwarders, and holds the ways in to a record in
 browser: a frontier row and an atlas cell open the case popover on the case’s record,
 its visual summary first, which the arrow key and the record’s own step move to the next
 case in place; a record file arrives at the record page with its own address and title,
-a step pushes the next address and Back returns; `cases.html#n-17` arrives at case 17;
-and without scripts a record file is read where it is.
+a standalone record stays at its complete address, neighboring links navigate to the
+next complete page and Back returns; `cases.html#n-17` arrives at case 17; and without
+scripts the complete record is read where it is.
 `tests/test_overview.py` holds the cards and chips to the rules above.
+
+`tests/test_site_contributor_popovers.py` adds generated directory, standalone profile,
+case and result entry points to this browser map.
+It checks article-only loading, relative and fragment links, scoped IDs, overlay
+replacement, return focus, cancelled and late requests, no-script and failed-fetch
+navigation, and profile roles at 1280px and 390px in light and dark themes.
+Its design fixture adds long public source IDs and URLs and checks equal body insets and
+zero horizontal overflow.
+Optional `SQPACK_CONTRIBUTOR_DESIGN_SHOTS` retains representative and stress screenshots
+in the task’s external scratch.
+Route and sitemap coverage, stale-output removal, sparse evidence checkout and
+publication input filters are held by the owner/test map in **Article Pages and
+Overlays**, above. The shared stylesheet, color-token and browser floor checks cover the
+contributor stylesheet and controller programs as other site components.
 
 The linear-program display is reflowed within the print column.
 `check_print_layout` guards its width so an overflowing equation cannot silently shrink

@@ -1,4 +1,4 @@
-"""Audit the release records of wand125's independent Valid7 checker against the packet.
+"""Audit the release records of Hosono's independent Valid7 checker against the packet.
 
 wand125/valid7-independent-check is a second, separately written exact checker for the
 finite statement Valid7 behind T-064. Its run is published as two JSON-lines records in

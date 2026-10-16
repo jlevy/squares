@@ -442,7 +442,7 @@ def test_the_spot_checked_results_read_as_their_records_say() -> None:
     # zmx2 re-run on the s(60), s(59), s(77) and s(32) covers: the source's own checker.
     for rid in ("T-062", "T-066", "T-067", "T-051"):
         assert code(rid) == "same-implementation", rid
-    # wand125's rectangle certificates replayed with Tokoharu's verify.cpp.
+    # Hosono's rectangle certificates replayed with Tokoharu's verify.cpp.
     for rid in ("T-045", "T-070"):
         assert code(rid) == "same-implementation", rid
     # This project's fractional certificates, re-decided by an interval route that reuses
@@ -528,7 +528,7 @@ def test_results_md_names_the_programs_behind_each_result() -> None:
 def test_a_third_partys_report_reads_as_a_report() -> None:
     """A third party's run held here only as their report, origin `external`, confirms
     nothing, so its line says it was not replayed here and names no code relation, whose
-    words are a confirmation's. Until 2026-10-06 wand125's run of ValidTilt9 read "a
+    words are a confirmation's. Until 2026-10-06 Hosono's run of ValidTilt9 read "a
     third party's run, independently re-implemented" in `RESULTS.md` under T-081."""
     report = EVIDENCE["E-k2m4-wand125-validtilt9-report"]
     assert report["origin"] == "external"

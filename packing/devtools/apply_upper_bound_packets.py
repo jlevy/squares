@@ -416,7 +416,7 @@ def front_matter(plan: Plan, front: str) -> str:
     if plan.casson is not None:
         wanted.append(CASSON_REPORT)
     # This intake's entries lead a draft. On a record that already carries them they keep
-    # their places, since a later intake may have put its own ahead of them, as wand125's
+    # their places, since a later intake may have put its own ahead of them, as Hosono's
     # rectangle registrations did at n = 68.
     evidence = list(payload["evidence"])
     front = set_block(

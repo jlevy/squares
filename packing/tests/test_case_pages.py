@@ -8,11 +8,19 @@ import html
 import re
 import xml.etree.ElementTree as ET
 from fractions import Fraction
+from html.parser import HTMLParser
 from pathlib import Path
+from typing import Literal
 
 import pytest
 
-from devtools import overview_sections, render_case_pages, render_overview, site_assets
+from devtools import (
+    overview_sections,
+    render_case_pages,
+    render_contributors,
+    render_overview,
+    site_assets,
+)
 from devtools import render_frontier_page as frontier_page
 from devtools import render_research_tables as tables
 from devtools.overview_data import math_html
@@ -143,6 +151,88 @@ def test_every_record_file_is_small(records: dict[str, str]) -> None:
         assert size < exceptions.get(name, RECORD_CEILING_BYTES), (name, size)
 
 
+@pytest.mark.parametrize("tex", ["n = 17", r"s(17) \geq 4.6", "x < y", r"\sqrt{2}"])
+@pytest.mark.parametrize("display", ["inline", "display"])
+def test_case_math_compaction_keeps_xml_semantics_and_surrounding_markup(
+    tex: str, display: Literal["inline", "display"]
+) -> None:
+    from kpress.format.markdown import (  # noqa: PLC0415
+        _render_math,  # pyright: ignore[reportPrivateUsage]
+    )
+
+    original = _render_math(tex, display=display, math="auto", env={})
+    before = '<p title="&#x03b1;">&#x03b1;</p>'
+    after = '<a href="../profiles/manasseh-ahmed.html">Ahmed</a>'
+    source = before + original + after
+    compact = render_case_pages.compact_math_entities(source)
+    assert compact.startswith(before)
+    assert compact.endswith(after)
+    assert ET.tostring(ET.fromstring(f"<div>{compact}</div>")) == ET.tostring(
+        ET.fromstring(f"<div>{source}</div>")
+    )
+    assert len(compact.encode()) <= len(source.encode())
+    assert render_case_pages.compact_math_entities(compact) == compact
+
+
+class _HtmlEvents(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.events: list[tuple[str, object]] = []
+        self.elements: list[tuple[str, dict[str, str | None]]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.events.append(("start", (tag, attrs)))
+        self.elements.append((tag, dict(attrs)))
+
+    def handle_endtag(self, tag: str) -> None:
+        self.events.append(("end", tag))
+
+    def handle_data(self, data: str) -> None:
+        self.events.append(("text", data))
+
+
+@pytest.mark.parametrize("separator", ["\n", "\u2028", "\r\n"])
+@pytest.mark.parametrize("all_html_classes", [False, True])
+def test_visual_math_compaction_keeps_html_tree_and_foreign_xml(
+    separator: str, *, all_html_classes: bool
+) -> None:
+    foreign = (
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mtext>'
+        '<span class="mord">native</span></mtext></math>'
+        '<svg xmlns="http://www.w3.org/2000/svg"><foreignObject>'
+        '<span class="mord">drawing</span></foreignObject></svg>'
+    )
+    self_closing = '<input class="widget"/><br class="clear"/><span class="mord"/>'
+    source = (
+        f'<p class="site-result-meta">before{separator}after</p>'
+        '<article class="site-result">record</article>'
+        '<span class="katex-html"><span class="mord">x</span>'
+        '<span class="mrel">&lt;</span><span class="mord mathnormal">y</span></span>'
+        "<span title=' class=\"mord\"'>literal class spelling</span>"
+        + foreign
+        + self_closing
+        + '<a href="../profiles/manasseh-ahmed.html" data-contributor="">Ahmed</a>'
+    )
+    compact = render_case_pages.compact_visual_math_classes(
+        source, all_html_classes=all_html_classes
+    )
+    original_tree, compact_tree = _HtmlEvents(), _HtmlEvents()
+    original_tree.feed(source)
+    compact_tree.feed(compact)
+    assert original_tree.events == compact_tree.events
+    assert foreign in compact
+    assert self_closing in compact
+    assert '<article class="site-result">record</article>' in compact
+    assert ("<p class=site-result-meta>" in compact) == all_html_classes
+    assert len(compact.encode()) < len(source.encode())
+    assert (
+        render_case_pages.compact_visual_math_classes(
+            compact, all_html_classes=all_html_classes
+        )
+        == compact
+    )
+
+
 def test_a_records_links_are_written_from_its_own_directory(
     records: dict[str, str], tmp_path: Path
 ) -> None:
@@ -154,6 +244,7 @@ def test_a_records_links_are_written_from_its_own_directory(
     record = _record(records, 11)
     assert 'href="../atlas.html#n-11"' in record
     assert 'href="../results.html#t-018"' in record
+    assert 'href="../profiles/walter-trump.html" data-contributor' in record
     assert 'href="10.html" rel="prev" data-case-step="10"' in record
     assert 'href="12.html" rel="next" data-case-step="12"' in record
     assert "data-case-index" not in record
@@ -163,7 +254,14 @@ def test_a_records_links_are_written_from_its_own_directory(
         if not re.match(r"#|[a-zA-Z][a-zA-Z0-9+.-]*:|/", url)
     ]
     support_paths = render_overview.support_file_paths()
-    served = {f"../{name}" for name in (*render_overview.SITE_PAGES, *support_paths)} | {
+    served = {
+        f"../{name}"
+        for name in (
+            *render_overview.SITE_PAGES,
+            *support_paths,
+            *render_contributors.page_paths(),
+        )
+    } | {
         "./",
         "../",
     }
@@ -465,17 +563,37 @@ def test_every_record_opens_with_its_visual_summary(
 
 
 def test_a_result_about_one_case_shows_the_same_visual_summary(n11_result_page: str) -> None:
-    body = n11_result_page
-    assert '<section class="site-case-summary' in body
+    document = _HtmlEvents()
+    document.feed(n11_result_page)
+    document.close()
+
+    def positions(tag: str, classes: str) -> list[int]:
+        required = set(classes.split())
+        return [
+            index
+            for index, (element_tag, attrs) in enumerate(document.elements)
+            if element_tag == tag and required <= set((attrs.get("class") or "").split())
+        ]
+
+    assert positions("section", "site-case-summary")
     order = [
-        body.index('class="site-card-label site-case-eyebrow"'),
-        body.index('<figure class="site-case-figure'),
-        body.index('class="site-popover-value site-result-case-n"'),
-        body.index('<div class="site-atlas-gap"'),
+        positions("span", "site-card-label site-case-eyebrow")[0],
+        positions("figure", "site-case-figure")[0],
+        positions("p", "site-popover-value site-result-case-n")[0],
+        positions("div", "site-atlas-gap")[0],
     ]
     assert order == sorted(order)
-    assert body.count('<figure class="site-case-figure"') == 1
-    assert 'class="site-atlas-pop-bound" data-math-face="serif"' in body
+    assert (
+        sum(
+            tag == "figure" and attrs.get("class") == "site-case-figure"
+            for tag, attrs in document.elements
+        )
+        == 1
+    )
+    assert any(
+        document.elements[index][1].get("data-math-face") == "serif"
+        for index in positions("p", "site-atlas-pop-bound")
+    )
 
 
 def _declarations(css: str, selector: str) -> str:

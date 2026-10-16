@@ -1,0 +1,67 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 98,
+  "seconds": 10.832,
+  "files": [
+    {
+      "file": "packing/tests/test_contributor_occurrences.py",
+      "tests": 8,
+      "seconds": 6.755
+    },
+    {
+      "file": "packing/tests/test_contributors.py",
+      "tests": 80,
+      "seconds": 0.347
+    },
+    {
+      "file": "packing/tests/test_render_contributors.py",
+      "tests": 10,
+      "seconds": 3.73
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_contributors.py",
+      "packing/tests/test_contributor_occurrences.py",
+      "packing/tests/test_render_contributors.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_contributor_occurrences.py": 8,
+      "packing/tests/test_contributors.py": 80,
+      "packing/tests/test_render_contributors.py": 10
+    },
+    "deselected_tests": 0
+  }
+}

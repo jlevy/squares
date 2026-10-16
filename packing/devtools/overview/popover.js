@@ -16,8 +16,24 @@
       }
     });
     popover.addEventListener("click", (event) => {
-      if (event.target instanceof Element && event.target.closest("a[href]") !== null) {
-        popover.hidePopover();
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey ||
+        !(event.target instanceof Element)
+      ) {
+        return;
+      }
+      const link = event.target.closest("a[href]");
+      if (link instanceof HTMLAnchorElement) {
+        const href = link.getAttribute("href");
+        const local = href?.startsWith("#") ? document.getElementById(href.slice(1)) : null;
+        if (local === null || !popover.contains(local)) {
+          popover.hidePopover();
+        }
       }
     });
   }

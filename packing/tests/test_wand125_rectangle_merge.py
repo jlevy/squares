@@ -1,4 +1,4 @@
-"""Folding batch replay receipts of wand125's rectangle certificates into one packet receipt.
+"""Folding batch replay receipts of Hosono's rectangle certificates into one packet receipt.
 
 The batches are cut from the September 27 packet's own replay receipt, so every case is a
 real 201-angle replay of a retained certificate; each test then alters one thing.

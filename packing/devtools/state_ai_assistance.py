@@ -3,10 +3,11 @@
 # apostrophes and quotation marks.
 """Find, and write, the sentence each case record owes a source that says AI assisted it.
 
-epistemics.md, Results by Others: "Where a source states that AI assisted its work, its
-case record and the README say so in the source's own terms." The bibliography notes
+attribution.md, People, Projects and Assistance requires case records, the register
+and README prose to state declared AI assistance in the source's terms.
+The bibliography notes
 record each source's statement, but a case record is hand-written prose, and on
-2026-09-29 some fifty of them cited wand125's or Tokoharu's releases in their front
+2026-09-29 some fifty of them cited Hosono's or Tokoharu's releases in their front
 matter without saying so in their bodies. Writing one sentence into each by hand is the
 one-off edit `OR-1` asks to be a tool, and checking that none is missing afterwards is
 the measurement that should outlive it.
@@ -63,7 +64,7 @@ ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
 RECORD = re.compile(r"^n-(\d{3})\.md$")
 
-#: What wand125's and Tokoharu's repository READMEs say, word for word.
+#: What Hosono's and Tokoharu's repository READMEs say, word for word.
 UNDER_HUMAN_DIRECTION = "AI assistance under human direction"
 
 
@@ -77,7 +78,7 @@ class Statement:
     marker: str
 
 
-#: wand125's statement, which `devtools.apply_wand125_rectangles` also writes into the
+#: Hosono's statement, which `devtools.apply_wand125_rectangles` also writes into the
 #: intake paragraph it owns, so that regenerating a record keeps the sentence this tool added.
 WAND125 = Statement(
     keys=frozenset(
@@ -91,9 +92,10 @@ WAND125 = Statement(
             "[wand125 mixed bounds 2026-10-01]",
         }
     ),
-    anchor=re.compile(r"wand125"),
+    # Hosono's releases, published under his handle wand125; the keys keep the handle.
+    anchor=re.compile(r"Hosono"),
     sentence=(
-        "wand125’s README says parts of the work were produced with AI assistance under "
+        "Hosono’s README says parts of the work were produced with AI assistance under "
         "human direction."
     ),
     marker=UNDER_HUMAN_DIRECTION,

@@ -52,6 +52,14 @@ FAMILIES = {
         "Sort/filter complete static rows; query presets select existing rows.",
     ),
     "popover": ("input-response", "Enhance native popovers containing prepared content."),
+    "article-loader": (
+        "input-response",
+        "Fetch and clone canonical articles and their assets after reader input.",
+    ),
+    "contributor-popover": (
+        "input-response",
+        "Enhance native contributor links with their canonical profile article.",
+    ),
     "row-popover": (
         "input-response",
         "Open a canonical result article after a row is pressed.",

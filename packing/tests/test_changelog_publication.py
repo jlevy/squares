@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import html
 import re
 from fnmatch import fnmatchcase
 
@@ -56,6 +57,28 @@ def test_news_keeps_public_launches_and_archives_maintenance_in_github(
             if not excluded:
                 assert artifact["target"] in history
             assert artifact["target"] in github
+
+
+def test_news_links_named_contributors_directly_to_their_profiles(
+    views: tuple[dict, str, str, str, str],
+) -> None:
+    document, news, github, _about, _home = views
+    history = news[news.index('id="changelog"') :]
+    eligible = {entry["id"] for entry in render_changelog.news_entries(document)}
+    published_profiles = []
+    for entry in document["entries"]:
+        prose = entry["summary"] + "\n" + entry.get("details", "")
+        for name, identifier in re.findall(
+            r"\[([^\]]+)\]\(packing/contributors/people/([a-z0-9-]+)\.md\)", prose
+        ):
+            assert f"[{name}](packing/contributors/people/{identifier}.md)" in github
+            if entry["id"] in eligible:
+                published_profiles.append((name, identifier))
+    assert published_profiles
+    for name, identifier in published_profiles:
+        assert f'<a href="profiles/{identifier}.html">{html.escape(name)}</a>' in history
+    assert "wand125\N{RIGHT SINGLE QUOTATION MARK}s" not in history
+    assert not re.search(r"<a\b[^>]*\bdata-contributor=", history)
 
 
 def test_a_yaml_only_history_change_selects_and_deploys_news() -> None:

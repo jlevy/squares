@@ -15,6 +15,11 @@ const SOURCE = readFileSync(
   "utf8",
 );
 
+const ARTICLE_SOURCE = readFileSync(
+  new URL("../../../devtools/overview/article-loader.js", import.meta.url),
+  "utf8",
+);
+
 const CASE_SOURCE = readFileSync(
   new URL("../../../devtools/overview/case-popover.js", import.meta.url),
   "utf8",
@@ -49,7 +54,7 @@ function page(protocol = "https:") {
     constructor(tag, attributes = {}, children = []) {
       this.tag = tag;
       /** @type {Map<string, string>} */
-      this.attributes = new Map(Object.entries(attributes));
+      this.attributeMap = new Map(Object.entries(attributes));
       /** @type {StandInElement[]} */
       this.children = [];
       /** @type {StandInElement | null} */
@@ -65,8 +70,30 @@ function page(protocol = "https:") {
       this.append(...children);
     }
 
+    get attributes() {
+      return Array.from(this.attributeMap, ([name, value]) => ({ name, value }));
+    }
+
+    get isConnected() {
+      return body.contains(this);
+    }
+
+    /** @param {boolean} [deep] @returns {StandInElement} */
+    cloneNode(deep = false) {
+      return new StandInElement(
+        this.tag,
+        Object.fromEntries(this.attributeMap),
+        deep ? this.children.map((child) => child.cloneNode(true)) : [],
+      );
+    }
+
+    /** @param {string} value */
+    set id(value) {
+      this.attributeMap.set("id", value);
+    }
+
     get id() {
-      return this.attributes.get("id") ?? "";
+      return this.attributeMap.get("id") ?? "";
     }
 
     /** @param {StandInElement[]} children */
@@ -100,22 +127,22 @@ function page(protocol = "https:") {
 
     /** @param {string} name */
     getAttribute(name) {
-      return this.attributes.get(name) ?? null;
+      return this.attributeMap.get(name) ?? null;
     }
 
     /** @param {string} name @param {string} value */
     setAttribute(name, value) {
-      this.attributes.set(name, value);
+      this.attributeMap.set(name, value);
     }
 
     /** @param {string} name */
     hasAttribute(name) {
-      return this.attributes.has(name);
+      return this.attributeMap.has(name);
     }
 
     /** @param {string} name */
     removeAttribute(name) {
-      this.attributes.delete(name);
+      this.attributeMap.delete(name);
     }
 
     /**
@@ -159,6 +186,9 @@ function page(protocol = "https:") {
 
     /** @param {string} selector */
     matches(selector) {
+      if (selector === "*") {
+        return true;
+      }
       return selector.split(",").some((part) => {
         const found = COMPOUND.exec(part.trim());
         assert.ok(found, `the stand-in does not read the selector ${part}`);
@@ -171,7 +201,7 @@ function page(protocol = "https:") {
               return this.open;
             }
             if (condition.startsWith(".")) {
-              return (this.attributes.get("class") ?? "").split(" ").includes(condition.slice(1));
+              return (this.attributeMap.get("class") ?? "").split(" ").includes(condition.slice(1));
             }
             const attribute = /^\[([a-z-]+)(?:([~]?=)"([^"]*)")?\]$/.exec(condition);
             assert.ok(attribute);
@@ -245,6 +275,7 @@ function page(protocol = "https:") {
     }
 
     hidePopover() {
+      fire(this, "beforetoggle", { newState: "closed" });
       this.open = false;
       /** @type {object | null} */
       this.sheet = null;
@@ -359,6 +390,10 @@ function page(protocol = "https:") {
       new StandInElement("td", {}, [link]),
     ]);
     const close = new StandInElement("button", { class: "site-popover-close" });
+    const title = new StandInElement("p", {
+      class: "site-popover-value",
+      id: `${target}-title`,
+    });
     const detail = new StandInElement("a", { href: `detail/${key}` });
     const held = new StandInElement("template", { "data-row-pop-body": "" });
     held.content = new StandInElement("fragment", {}, [detail]);
@@ -367,14 +402,13 @@ function page(protocol = "https:") {
       { class: "site-row-pop-body", ...(source ? { "data-row-pop-src": source } : {}) },
       [deferred ? held : detail],
     );
-    const title = new StandInElement("p", { class: "site-popover-value", id: `${target}-title` });
     const label = new StandInElement("span", { class: "site-card-label" });
     const popover = new StandInElement(
       "div",
-      { id: target, class: "site-popover", "aria-labelledby": title.id },
+      { id: target, class: "site-popover", popover: "auto", "aria-labelledby": title.id },
       [close, label, title, body],
     );
-    return { element, trigger, link, text, popover, close, body, held, detail };
+    return { element, trigger, link, text, popover, close, title, body, held, detail };
   }
 
   const first = row("t-001");
@@ -401,11 +435,11 @@ function page(protocol = "https:") {
   const caseBody = new StandInElement("div", { "data-case-body": "" });
   const caseAction = new StandInElement("a", { "data-case-open": "" });
   const caseClose = new StandInElement("button", { class: "site-popover-close" });
-  const casePopover = new StandInElement("div", { "data-case-popover": "", id: "case-popover" }, [
-    caseBody,
-    caseAction,
-    caseClose,
-  ]);
+  const casePopover = new StandInElement(
+    "div",
+    { "data-case-popover": "", id: "case-popover", class: "site-popover", popover: "auto" },
+    [caseBody, caseAction, caseClose],
+  );
   const caseLink = new StandInElement("a", { "data-case": "11", href: "cases/11.html" });
   body.append(casePopover, caseLink);
 
@@ -425,7 +459,8 @@ function page(protocol = "https:") {
   /** @param {string} address */
   const fetch = (address) => {
     requests.push(address);
-    const text = served.get(address);
+    const text =
+      served.get(address) ?? served.get(new URL(address).pathname.replace("/squares/", ""));
     const response =
       protocol === "offline:"
         ? Promise.reject(new TypeError("Failed to fetch"))
@@ -465,6 +500,7 @@ function page(protocol = "https:") {
     HTMLLinkElement: StandInElement,
     ToggleEvent: StandInToggleEvent,
   });
+  vm.runInContext(ARTICLE_SOURCE, context);
   vm.runInContext(SOURCE, context);
   vm.runInContext(CASE_SOURCE, context);
   return {
@@ -640,7 +676,7 @@ void test("a body that names a fuller one is replaced by it when the popover fir
   assert.deepEqual(fetched.body.children, [fetched.detail]);
   assert.ok(fetched.body.hasAttribute("data-row-pop-loading"));
   await settled();
-  assert.deepEqual(requests, ["result/t-004.html"]);
+  assert.deepEqual(requests, ["https://example.test/squares/result/t-004.html"]);
   assert.deepEqual(
     fetched.body.children.map((child) => child.getAttribute("data-text")),
     ["the whole overview of t-004"],
@@ -652,20 +688,20 @@ void test("a body that names a fuller one is replaced by it when the popover fir
   fetched.popover.hidePopover();
   fire(fetched.text, "click");
   await settled();
-  assert.deepEqual(requests, ["result/t-004.html"], "fetched once");
+  assert.deepEqual(requests, ["https://example.test/squares/result/t-004.html"], "fetched once");
 });
 
 void test("a press starts the fetch, and a body that lands before the popover opens waits for popover.js", async () => {
   const { fire, fetched, requests, typeset, settled } = page();
   fire(fetched.text, "pointerdown");
-  assert.deepEqual(requests, ["result/t-004.html"]);
+  assert.deepEqual(requests, ["https://example.test/squares/result/t-004.html"]);
   // The click that follows the press finds the fetch under way and starts no other.
   await settled();
   assert.ok(!fetched.popover.open);
   assert.deepEqual(typeset, [], "a closed popover's math is left to its opening");
   fire(fetched.text, "click");
   await settled();
-  assert.deepEqual(requests, ["result/t-004.html"]);
+  assert.deepEqual(requests, ["https://example.test/squares/result/t-004.html"]);
   assert.equal(fetched.body.children.length, 1);
   assert.equal(fetched.body.children[0]?.getAttribute("class"), "site-result");
 });
@@ -705,7 +741,7 @@ void test("the complete article title replaces outer titles and has a dialog-spe
   assert.ok(heading);
   assert.equal(fetched.popover.querySelector(".site-card-label"), null);
   assert.equal(fetched.popover.querySelector(".site-popover-value"), null);
-  assert.equal(heading.id, "pop-t-004-record-title");
+  assert.match(heading.id, /^site-article-\d+-t-004$/);
   assert.equal(fetched.popover.getAttribute("aria-labelledby"), heading.id);
   assert.equal(document.getElementById(heading.id), heading);
   assert.equal(document.getElementById("t-004"), fetched.element);
@@ -848,4 +884,62 @@ void test("the canonical response address resolves its prepared stylesheet", asy
   fire(link, "load");
   await settled();
   assert.equal(caseBody.children[0]?.getAttribute("class"), "site-case");
+});
+
+void test("a cross-site article response is refused before its stylesheet or markup is used", async () => {
+  const { document, fire, served, caseLink, responseURLs, caseBody, navigation, settled } = page();
+  responseURLs.set(caseLink.href, "https://other.test/cases/11.html");
+  served.set(
+    caseLink.href,
+    '<link data-site-math-styles href="../assets/css/site-math-response.css"><article class="site-case">Case 11</article>',
+  );
+  fire(caseLink, "click");
+  await settled();
+  assert.equal(document.head.children.length, 0);
+  assert.equal(caseBody.children.length, 0);
+  assert.equal(navigation.href, caseLink.href);
+});
+
+void test("consumer mutations do not alter the cached pristine article", async () => {
+  const { fire, fetched, requests, settled } = page();
+  fire(fetched.text, "click");
+  await settled();
+  const first = fetched.body.children[0];
+  assert.ok(first);
+  first.setAttribute("class", "mutated");
+  fetched.popover.hidePopover();
+  fetched.body.setAttribute("data-row-pop-src", "result/t-004.html");
+  fire(fetched.text, "click");
+  await settled();
+  assert.equal(fetched.body.children[0]?.getAttribute("class"), "site-result");
+  assert.notEqual(fetched.body.children[0], first);
+  assert.equal(requests.length, 1);
+});
+
+void test("cached canonical headings stay pristine and each clone names its dialog", async () => {
+  const { fire, fetched, served, requests, settled } = page();
+  served.set(
+    "result/t-004.html",
+    '<article class="site-result" data-result-overview="t-004"><h1 id="t-004">Result</h1></article>',
+  );
+  fire(fetched.text, "click");
+  await settled();
+  const title = fetched.body.querySelector("h1");
+  assert.ok(title);
+  assert.ok(!title.hasAttribute("hidden"));
+  assert.match(title.id, /^site-article-\d+-t-004$/);
+  assert.equal(fetched.popover.getAttribute("aria-labelledby"), title.id);
+  // A consumer mutation of one clone cannot hide the next cached article's title.
+  title.setAttribute("hidden", "");
+  fetched.popover.hidePopover();
+  fetched.body.setAttribute("data-row-pop-src", "result/t-004.html");
+  fire(fetched.text, "click");
+  await settled();
+  const freshTitle = fetched.body.querySelector("h1");
+  assert.ok(freshTitle);
+  assert.notEqual(freshTitle, title);
+  assert.notEqual(freshTitle.id, title.id);
+  assert.ok(!freshTitle.hasAttribute("hidden"));
+  assert.equal(fetched.popover.getAttribute("aria-labelledby"), freshTitle.id);
+  assert.equal(requests.length, 1);
 });

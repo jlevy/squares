@@ -713,15 +713,15 @@ def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
             "superseded it on 2026-09-27; that certificate is in the source's own format"
         ),
         18: (
-            "T-030 remains valid evidence after wand125's replayed 939/200 (T-045) "
+            "T-030 remains valid evidence after Hosono's replayed 939/200 (T-045) "
             "superseded it on 2026-10-02; that certificate is in the source's own format"
         ),
         19: (
-            "T-020 remains valid evidence after wand125's replayed 963/200 (T-045) "
+            "T-020 remains valid evidence after Hosono's replayed 963/200 (T-045) "
             "superseded it on 2026-10-02; that certificate is in the source's own format"
         ),
         20: (
-            "T-021 remains valid evidence after wand125's replayed 979/200 (T-045) "
+            "T-021 remains valid evidence after Hosono's replayed 979/200 (T-045) "
             "superseded it on 2026-10-02; that certificate is in the source's own format"
         ),
     }

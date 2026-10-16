@@ -480,9 +480,10 @@ class RowDetail(NamedTuple):
     the row's accessible name. It carries no `tabindex`: `overview/row-popover.js` makes
     the row focusable, so a row is never a stop that does nothing."""
     trigger: str
-    """The row's one native trigger, a `<button popovertarget>` around the row's own key:
-    without scripts it is what opens the popover; with them the whole row does, and the
-    button leaves the tab order so each row is one stop."""
+    """The native entry around the row's key: a generic `<button popovertarget>` or a
+    result's ordinary link to its complete page. Enhancement makes the row focusable
+    and removes native popover buttons from the tab order; result links remain links.
+    """
     popover: str
     """The panel: a card's popover in every way (`.site-popover`: the close cross, the caps
     label, the headline, Escape and a click outside), with the row's body and an optional
@@ -639,8 +640,10 @@ RESULT_FRAGMENTS = "result"
 
 
 def result_fragment(result_id: str) -> str:
-    """The address of a result's overview, from a page at the site's root. Its links
-    are written from the root too, so only a page there may place it."""
+    """The complete result page's address from the site root.
+
+    Its article's relative links are rebased against the response URL when fetched.
+    """
     return f"{RESULT_FRAGMENTS}/{result_id.lower()}.html"
 
 
@@ -668,22 +671,21 @@ def new_result_label(result: Result, overview: Overview) -> str:
 
 def result_row(result: Result, *, trigger: str, starred: bool = False) -> RowDetail:
     """A result's row popover, the same on both tables of results: its id as the caps
-    label, its summary as the headline, then the result's short detail (`_detail`),
-    which the script replaces with the whole overview, fetched from `result_fragment`
-    when the popover first opens. It has no button: the row pressed is the result's
-    row, in either table, and a button from one table to the same row of the other
-    leads nowhere new. A recent row's name ends ", new result", its accessible
-    recency label."""
+    label, its summary as the headline, then a short pointer to the complete record.
+    The script replaces that short body with the record's article, fetched from
+    `result_fragment` when the popover first opens. Its Open Result Record action
+    always reaches the complete page; the result ID is an ordinary link too.
+    A recent row's name ends ", new result", its accessible recency label."""
     name = f"{result.id}: {plain_text(result.summary)}"
+    # The persistent action also serves the short body's native fallback, including
+    # after a failed fetch. A second identical link adds bytes to every table row.
     detail = row_detail(
         f"pop-result-{result.id.lower()}",
         name=f"{name}, {NEW_RESULT}" if starred else name,
         trigger=trigger,
         label=result.id,
         title=tex_bounds(result.summary),
-        body=(
-            f'<p><a href="{result_fragment(result.id)}">Read the complete result record</a></p>'
-        ),
+        body="<p>Full record</p>",
         source=result_fragment(result.id),
         action=(result_fragment(result.id), "Open Result Record"),
     )
@@ -970,14 +972,14 @@ def result_text(result: Result) -> str:
     return f'<a href="{result_fragment(result.id)}">{tex_bounds(result.summary)}</a>'
 
 
-def credit_cell(credit: str) -> str:
+def credit_cell(credit: str, markup: str = "") -> str:
     """A credit as its cell sets it, whatever the register's credit line says: the
     finder first, and "after …", the work it builds on, quiet after it, in full. So a
     row says whose the result is and what it rests on without a heading over it."""
-    finder, _, after = credit.partition(" after ")
+    finder, _, after = (markup or _esc(credit)).partition(" after ")
     if not after:
-        return _esc(finder)
-    return f'{_esc(finder)} <span class="site-cell-quiet">after {_esc(after)}</span>'
+        return finder
+    return f'{finder} <span class="site-cell-quiet">after {after}</span>'
 
 
 def date_cell(result: Result, *, recent_label: str = "") -> str:
@@ -1020,7 +1022,7 @@ def result_cells(
         f'<td class="{case_cell_class(result)}" data-value="{result.first_n}">'
         f"{case_list(result)}</td>"
         f'<td class="site-col-credit" data-value="{_esc(result.credit)}">'
-        f"{credit_cell(result.credit)}</td>"
+        f"{credit_cell(result.credit, result.credit_html)}</td>"
         f'<td class="site-rungs" '
         f'data-value="{_esc(record["confirmation"] + record["verification"])}">'
         f'{ladder_chips(result)}<span class="site-kind">{kind_chip(result)}</span></td>'
@@ -1572,7 +1574,7 @@ PAPER_DESCRIPTIONS: dict[str, str] = {
         "reoptimized certificate over 12,028 angle rows."
     ),
     N11_OPTIMALITY_REVIEW: (
-        "Explains Mannaseh Ahmed\u2019s proof that Trump\u2019s packing is optimal, "
+        "Explains Manasseh Ahmed\u2019s proof that Trump\u2019s packing is optimal, "
         "s(11) = 3.8770835\u2026 (T-060): construction, case exclusions, capture and "
         "local isolation."
     ),
@@ -1795,7 +1797,7 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     ),
     (
         "https://github.com/wand125/square-packing",
-        "wand125",
+        "Hiroaki Hosono",
         "Canonical certificate and checker repository; historical source pins remain valid.",
     ),
     (
@@ -1832,12 +1834,12 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     ),
     (
         "https://github.com/wand125/square-packing-bounds",
-        "wand125",
+        "Hiroaki Hosono",
         "Weighted point and rectangle-density lower-bound certificates across many n.",
     ),
     (
         "https://github.com/wand125/valid7-independent-check",
-        "wand125",
+        "Hiroaki Hosono",
         "A second, independent exact checker of Valid7, the finite step of s(k² \u2212 3) = k.",
     ),
     (
@@ -1949,12 +1951,12 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     ),
     (
         "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
-        "Mannaseh Ahmed",
+        "Manasseh Ahmed",
         "A computer-assisted proof that Trump's packing of eleven squares is optimal.",
     ),
     (
         "https://github.com/Queuingtheorydotcom/11SquaresFormalized",
-        "Mannaseh Ahmed et al.",
+        "Manasseh Ahmed et al.",
         "A Lean 4 formalization of that proof, trusting Lean's compiler for its certificates.",
     ),
     (
@@ -1988,7 +1990,7 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/Guzhou0806/n40-square-packing",
         "Guzhou0806",
-        "Strict lower bounds for forty squares, on densities grown from wand125's.",
+        "Strict lower bounds for forty squares, on densities grown from Hosono's.",
     ),
     (
         "https://github.com/DRMacIver/square-packing-research",

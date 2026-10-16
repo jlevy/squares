@@ -1,0 +1,73 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:Contributor/v1
+title: Contributor
+description: >-
+  Evidence-backed identity for a square-packing contributor. The immutable id names
+  the record; aliases are display spellings, not unique identifiers. An optional
+  Markdown body is one bio paragraph of at most five sentences, checked editorially.
+type: object
+additionalProperties: false
+required: [id, display_name, sources, provenance]
+properties:
+  id:
+    $ref: '#/$defs/id'
+    description: Immutable local person id, also the Markdown filename stem.
+  display_name: {$ref: '#/$defs/text'}
+  real_name: {$ref: '#/$defs/text'}
+  aliases:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {$ref: '#/$defs/text'}
+  links:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: object
+      additionalProperties: false
+      required: [kind, url]
+      properties:
+        kind: {enum: [github, twitter, substack, personal, publication]}
+        url: {$ref: '#/$defs/url'}
+        handle: {$ref: '#/$defs/text'}
+  sources:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      additionalProperties: false
+      required: [id, locator]
+      anyOf:
+        - required: [archive_path]
+        - required: [url]
+      properties:
+        id: {$ref: '#/$defs/id'}
+        archive_path: {$ref: '#/$defs/text'}
+        url: {$ref: '#/$defs/url'}
+        locator: {$ref: '#/$defs/text'}
+  provenance:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      additionalProperties: false
+      required: [field, sources]
+      properties:
+        field:
+          type: string
+          pattern: '^/'
+          description: JSON Pointer relative to the contributor payload.
+        sources: {$ref: '#/$defs/sourceIds'}
+  bio_sources:
+    $ref: '#/$defs/sourceIds'
+    description: Required exactly when the Markdown body contains a bio paragraph.
+$defs:
+  id: {type: string, pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'}
+  text: {type: string, minLength: 1, pattern: '\S'}
+  url: {type: string, pattern: '^https?://\S+$'}
+  sourceIds:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {$ref: '#/$defs/id'}

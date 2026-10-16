@@ -1,28 +1,6 @@
-// Input response: every link to a case record on a page that carries the case popover opens it there: an
-// atlas tile on the overview, the `n` of a frontier row, a link in the page's prose or in
-// a record, each an `a[data-case]` whose `href` is the record file, `cases/11.html`
-// (`render_case_pages.mark_case_links`). A result's overview links its cases as pages. A
-// frontier row, `tr[data-case-row]`, is one control for its case as a results row is for
-// its detail (`row-popover.js`): it takes focus, and a click anywhere on it but on its
-// own links and controls, or Enter or Space while it has focus, opens the record file it
-// names in `data-case-href`; the row of the case shown reads as expanded. Without this
-// script every link goes to the record file, which sends a reader on to the record page.
-//
-// The complete case page is fetched and its prepared article is extracted from
-// `article.site-case`; it is parsed in a `<template>`, so none of its scripts runs (one
-// would send this page away), and the article is placed in the popover's body
-// (`[data-case-body]`), with the action under it (`[data-case-open]`) pointed at the
-// file. The file's links are written from its own directory, so every relative `href`
-// and `src` in the record is resolved against the file's address first; a bare fragment
-// names a place in the record and is kept. Each file is fetched once a page. A fetch that
-// fails, as every fetch does on a page read from a file, sends the reader to the record
-// file itself, as the link would have.
-//
-// The record's steps (`a[data-case-step]`), and the left and right arrow keys while the
-// popover is open and no form control has focus, load the neighbouring case in the same
-// popover at its top; the record's link to every case (`a[data-case-index]`) is an
-// ordinary link. A press on what is already being fetched waits for it. Closing returns
-// focus to what opened the popover, if focus has been lost.
+// Case links and frontier rows enhance their native page URLs with one overlay.
+// article-loader.js owns fetching, parsing, assets and cloning. This controller owns
+// stepping, row expansion, stale-request guards, navigation fallback and return focus.
 (() => {
   const popover = document.querySelector("[data-case-popover]");
   const body = popover?.querySelector("[data-case-body]");
@@ -42,147 +20,14 @@
   const CONTROLS = "a[href], button, input, select, textarea, label, summary";
   /** Where the arrow keys keep their own meaning. */
   const FIELDS = "input, select, textarea";
-  /** A value that begins with a scheme, `https:`, `mailto:` or `data:`, is absolute. */
-  const SCHEME = /^[a-z][a-z\d+.-]*:/i;
+  const articles = globalThis.siteArticles;
+  if (articles === undefined) {
+    return;
+  }
 
-  /**
-   * Whether a click asks for something other than following a link here: another
-   * button, or a modifier that opens it in a tab or a window.
-   * @param {MouseEvent} event
-   */
+  /** @param {MouseEvent} event */
   const modified = (event) =>
     event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-
-  /**
-   * Resolve every relative `href` and `src` under `root` against `base`, the address of
-   * the file the markup was written for.
-   * @param {Element} root
-   * @param {string} base
-   */
-  const rebase = (root, base) => {
-    for (const node of root.querySelectorAll("[href], [src]")) {
-      for (const name of ["href", "src"]) {
-        const value = node.getAttribute(name)?.trim();
-        if (value === undefined || value.startsWith("#") || SCHEME.test(value)) {
-          continue;
-        }
-        try {
-          node.setAttribute(name, new URL(value, base).href);
-        } catch {
-          // A value no address can be made of is left as it was written.
-        }
-      }
-    }
-  };
-
-  /** Styles shared by fetched case and result records, including pending loads. */
-  const styleState =
-    /** @type {typeof globalThis & { squaresStaticMathStyles?: Map<string, Promise<void>> }} */ (
-      globalThis
-    );
-  styleState.squaresStaticMathStyles ??= new Map();
-  const mathStyles = styleState.squaresStaticMathStyles;
-
-  /**
-   * Load the canonical page's prepared metric rules before placing its article.
-   * @param {DocumentFragment} parsed
-   * @param {string} base
-   */
-  const loadMathStyles = async (parsed, base) => {
-    const responseURL = new URL(base, document.baseURI);
-    const pageURL = new URL(document.baseURI);
-    const assetRoot = new URL("../assets/css/", responseURL);
-    for (const declared of parsed.querySelectorAll("link[data-site-math-styles]")) {
-      const href = declared.getAttribute("href");
-      if (!href) {
-        throw new Error("The prepared mathematics stylesheet has no address");
-      }
-      const url = new URL(href, responseURL);
-      if (
-        responseURL.origin !== pageURL.origin ||
-        url.origin !== pageURL.origin ||
-        !url.pathname.startsWith(assetRoot.pathname) ||
-        !url.pathname.endsWith(".css")
-      ) {
-        throw new Error("The prepared mathematics stylesheet is outside this site");
-      }
-      let pending = mathStyles.get(url.href);
-      if (pending === undefined) {
-        const existing = Array.from(document.querySelectorAll("link[data-site-math-styles]")).find(
-          (link) => new URL(link.getAttribute("href") || "", document.baseURI).href === url.href,
-        );
-        const link =
-          existing instanceof HTMLLinkElement ? existing : document.createElement("link");
-        pending = link.sheet
-          ? Promise.resolve()
-          : new Promise((resolve, reject) => {
-              link.addEventListener("load", () => resolve(), { once: true });
-              link.addEventListener(
-                "error",
-                () => {
-                  link.remove();
-                  reject(new Error("The prepared mathematics stylesheet could not load"));
-                },
-                { once: true },
-              );
-              if (!existing) {
-                link.setAttribute("rel", "stylesheet");
-                link.setAttribute("href", url.href);
-                link.setAttribute("data-site-math-styles", "");
-                document.head.append(link);
-              }
-            });
-        mathStyles.set(url.href, pending);
-        void pending.catch(() => mathStyles.delete(url.href));
-      }
-      await pending;
-    }
-  };
-
-  /**
-   * The record in the file at `url`, its links resolved.
-   * @param {string} url
-   * @returns {Promise<HTMLElement>}
-   */
-  const fetchRecord = async (url) => {
-    if (location.protocol === "file:") {
-      throw new Error("a page read from a file cannot fetch a record");
-    }
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`${url}: ${response.status}`);
-    }
-    const parsed = document.createElement("template");
-    parsed.innerHTML = await response.text();
-    const article = parsed.content.querySelector("article.site-case");
-    if (!(article instanceof HTMLElement)) {
-      throw new Error(`${url} holds no case record`);
-    }
-    const base = response.url || url;
-    await loadMathStyles(parsed.content, base);
-    rebase(article, base);
-    return article;
-  };
-
-  /**
-   * Each record asked for, by its file's address. The article itself is kept, so a
-   * record shown again keeps its typeset math; a failure is dropped, so the next press
-   * asks again.
-   * @type {Map<string, Promise<HTMLElement>>}
-   */
-  const records = new Map();
-  /** @param {string} url */
-  const record = (url) => {
-    let held = records.get(url);
-    if (held === undefined) {
-      held = fetchRecord(url);
-      records.set(url, held);
-      void held.catch(() => {
-        records.delete(url);
-      });
-    }
-    return held;
-  };
 
   /**
    * What opened the popover from the page, which focus returns to when it closes.
@@ -194,6 +39,8 @@
    * @type {HTMLElement | null}
    */
   let asking = null;
+  /** The shared request that the pending opener belongs to. */
+  let askingRequest = 0;
   /** The number of the latest request: only it may show its record, or navigate. */
   let latest = 0;
   /**
@@ -243,10 +90,15 @@
       atlasAction?.setAttribute("href", atlas.href);
     }
     if (!stepping) {
-      origin = opener;
+      origin = articles.returnFocus(opener);
+      articles.setReturnFocus(popover, origin);
     }
     markShown(article);
     if (!popover.matches(":popover-open")) {
+      const source = opener.closest(".site-popover[popover]");
+      if (source instanceof HTMLElement && source !== popover && source.matches(":popover-open")) {
+        source.hidePopover();
+      }
       popover.showPopover();
       if (close instanceof HTMLElement) {
         close.focus();
@@ -269,25 +121,28 @@
    * @param {HTMLElement} opener
    */
   const open = (href, opener) => {
-    if (opener === asking) {
+    if (opener === asking && articles.isCurrent(askingRequest)) {
       return;
     }
     const url = new URL(href, document.baseURI);
     url.hash = "";
     latest += 1;
     const request = latest;
+    const sharedRequest = articles.beginRequest();
+    askingRequest = sharedRequest;
+    const sourcePopover = opener.closest(".site-popover[popover]");
     asking = opener;
     const current = () => {
-      if (request !== latest) {
+      if (request !== latest || !articles.isCurrent(sharedRequest)) {
         return false;
       }
       asking = null;
-      return !popover.contains(opener) || popover.matches(":popover-open");
+      return sourcePopover === null || sourcePopover.matches(":popover-open");
     };
-    void record(url.href).then(
-      (article) => {
+    void articles.loadArticle(url.href, "article.site-case").then(
+      ({ article, responseUrl }) => {
         if (current()) {
-          show(article, url.href, opener);
+          show(article, responseUrl, opener);
         }
       },
       () => {
@@ -298,19 +153,25 @@
     );
   };
 
-  // Any link to a case on the page. A link in the popover's record is caught below,
-  // before it gets here.
-  document.addEventListener("click", (event) => {
-    if (event.defaultPrevented || modified(event) || !(event.target instanceof Element)) {
-      return;
-    }
-    const link = event.target.closest("a[data-case][href]");
-    if (!(link instanceof HTMLAnchorElement) || (link.target !== "" && link.target !== "_self")) {
-      return;
-    }
-    event.preventDefault();
-    open(link.href, link);
-  });
+  // Capture case links before any source overlay's ordinary-link close listener.
+  document.addEventListener(
+    "click",
+    (event) => {
+      if (event.defaultPrevented || modified(event) || !(event.target instanceof Element)) {
+        return;
+      }
+      const link = event.target.closest("a[data-case][href]");
+      if (!(link instanceof HTMLAnchorElement) || (link.target !== "" && link.target !== "_self")) {
+        return;
+      }
+      event.preventDefault();
+      if (link.closest(".site-popover[popover]") !== null) {
+        event.stopPropagation();
+      }
+      open(link.href, link);
+    },
+    true,
+  );
 
   // A step, or a link to another case, in the record shown loads in place. `popover.js`
   // closes a popover when a link in it is followed, so the click goes no further.
@@ -370,6 +231,8 @@
     }
     // The native close hides the record before the queued toggle event runs. Clear
     // its row's expanded state synchronously, while the visibility changes with it.
+    latest += 1;
+    asking = null;
     expanded?.setAttribute("aria-expanded", "false");
     expanded = null;
   });
@@ -381,7 +244,10 @@
     // Back to what opened the popover, unless the reader has already moved on to
     // something else, such as another row whose press closed it.
     const focus = document.activeElement;
-    if (focus === null || focus === document.body || popover.contains(focus)) {
+    if (
+      origin.isConnected &&
+      (focus === null || focus === document.body || popover.contains(focus))
+    ) {
       origin.focus();
     }
   });

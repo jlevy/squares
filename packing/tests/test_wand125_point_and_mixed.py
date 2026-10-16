@@ -1,4 +1,4 @@
-"""Controls for wand125's point-only s(21), s(45) and mixed-rectangle s(50) certificates.
+"""Controls for Hosono's point-only s(21), s(45) and mixed-rectangle s(50) certificates.
 
 The packet under ``resources/web/wand125-point-and-mixed-2026-09-28/`` holds the source's
 bytes at ``39d8ecc`` and this repository's replay receipts. These tests are the fast part

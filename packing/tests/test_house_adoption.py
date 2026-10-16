@@ -683,12 +683,28 @@ def _flat(text: str) -> str:
     return " ".join(text.split())
 
 
-def _body(text: str) -> str:
-    """A record's body as the writer is answerable for it (`adopt_houses.history_words`).
+#: Record-wide edits made after a pass, which its replay cannot know: on 13 October 2026
+#: every credit to wand125 became Hosono, Hiroaki Hosono at a record's first mention
+#: (`attribution.md`, Hiroaki Hosono / wand125), and on 14 October every credit to ry-xu
+#: became Xu, Ryan Xu in finder lists and at first mention (Ryan Xu / ry-xu). Both sides
+#: are read in the compact credit.
+LATER_RENAMES = (
+    ("wand125’s", "Hosono’s"),
+    ("Hiroaki Hosono", "Hosono"),
+    ("ry-xu reports", "Xu reports"),
+    ("Ryan Xu reports", "Xu reports"),
+    ("The ry-xu construction", "The Xu construction"),
+)
+#: The finder lists those renames changed, which the writer carries from the prior state.
+LATER_FINDERS = (("\n    - ry-xu\n", "\n    - Ryan Xu\n"),)
 
-    The counts the first pass marked by hand (`adopt_houses.HAND_MARKED`) are compared
-    only in their owned parts."""
-    return adopt.history_words(text.split("---\n", 2)[2])
+
+def _body(text: str) -> str:
+    """The writer-owned history, with later contributor renames read alike."""
+    body = adopt.history_words(text.split("---\n", 2)[2])
+    for old, new in LATER_RENAMES:
+        body = body.replace(old, new)
+    return body
 
 
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
@@ -713,6 +729,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         # pass's (`apply_closed_form --check` holds that), so its replay follows every
         # pass, the 15 October one too, which read records it had already raised.
         written = closed_form.replay(move.n, adopt.rewrite(move))
+        for old, new in LATER_FINDERS:
+            written = written.replace(old, new)
         held, wrote = _front(committed), _front(written)
         for key in OWNED:
             assert held.get(key) == wrote.get(key), f"n={move.n}: packing.{key}"

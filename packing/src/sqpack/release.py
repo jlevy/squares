@@ -85,6 +85,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.0",
+        first_published="October 15, 2026",
+        result_scope=(
+            "Add person profiles and reviewed credit links, with direct profile "
+            "navigation and shared article popovers for complete case and result records."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.14",
         first_published="October 16, 2026",
         result_scope=(
@@ -375,7 +383,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "288a1a52022f712563a23f21848e0ae2927390d4"
+DATA_REVISION = "004c40e0cf7ae724f700f7c9834620a142ea483a"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -564,6 +572,14 @@ EXPLAINER_REVISED = "October 13, 2026"
 #: (think-2cqu).
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.8",
+        first_published="October 15, 2026",
+        result_scope=(
+            "Correct Manasseh Ahmed's name and credit Hiroaki Hosono's checker and "
+            "formalization reports by name."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.7",
         first_published="October 7, 2026",
         result_scope=(
@@ -669,7 +685,7 @@ OPTIMALITY_REVIEW_EDITION = " ".join(
 #: prints, by the rule `EXPLAINER_REVISED` follows -- the author date of the last commit
 #: that changed its article, `n11-optimality-review-article.md`, held to git by
 #: `devtools.artifact_dates`. Change it in the commit that changes the article.
-OPTIMALITY_REVIEW_REVISED = "October 12, 2026"
+OPTIMALITY_REVIEW_REVISED = "October 13, 2026"
 
 #: The day the proof the review explains was published by its source, which the review's
 #: "Original proof" date prints. A fact about someone else's work, so it is typed, and
@@ -679,6 +695,11 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 #: Every edition of Part II, the review of Overbeck's certified lower bound
 #: `s(11) > 31/8` (T-037), newest first, as `OPTIMALITY_REVIEW_HISTORY` is Part III's.
 THRESHOLD_REVIEW_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.1",
+        first_published="October 15, 2026",
+        result_scope="Credit Hiroaki Hosono's checker and retained tools by name.",
+    ),
     PublicationHistoryEntry(
         version="v0.1.0",
         first_published="October 5, 2026",
@@ -796,6 +817,33 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.14",
+        version="v0.8.0",
+        impact="minor",
+        reason=(
+            "Add person profiles and reviewed credit links, with direct profile "
+            "navigation and shared article popovers for complete case and result records."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-optimality-review",
+        previous_version="v0.1.7",
+        version="v0.1.8",
+        impact="patch",
+        reason=(
+            "Correct Manasseh Ahmed's name and credit Hiroaki Hosono's checker and "
+            "formalization reports by name."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-threshold-bound-review",
+        previous_version="v0.1.0",
+        version="v0.1.1",
+        impact="patch",
+        reason="Credit Hiroaki Hosono's checker and retained tools by name.",
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.7.13",
@@ -1377,6 +1425,128 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "GitHub source-link revision substitutions. Mathematical statements, "
             "certificate inputs and paper content are unchanged. No paper PDF was "
             "rebuilt or compared for byte identity."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/contributor_credit.py",
+            "packing/devtools/overview_data.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/register_gupta_reports.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/devtools/render_case_pages.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_contributors.py",
+            "packing/devtools/render_frontier_page.py",
+            "packing/devtools/render_n11_optimality_review.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/result_credit.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/site_documents.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/state_ai_assistance.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/frontier/results.yaml",
+            "packing/src/sqpack/cli/validate.py",
+            "packing/src/sqpack/contributor_occurrences.py",
+            "packing/src/sqpack/contributors.py",
+        ),
+        outputs=("papers/n11-lower-bounds-explainer.md",),
+        reason=(
+            "The manuscript and producer are unchanged from main. Figure 3 consumes only "
+            "the n11 citation entry, which is identical; changed author credits at other "
+            "counts do not enter this paper. The current Markdown and its substitutions "
+            "retain the paper's text and figures. The changed render_changelog helper "
+            "renders direct profile links in News and is not called by the "
+            "paper. Shared site navigation and linked source records do not revise "
+            "the paper's content edition. The closed-form writer now emits the canonical "
+            "Hosono credit without changing any numeric bound; this writer is not "
+            "called by the paper. Standalone case articles compact numeric entities "
+            "and optional quotes on KaTeX HTML atom classes. Complete result pages also "
+            "omit optional quotes on first-position HTML class attributes containing "
+            "one ASCII identifier. The class compactor preserves SVG, MathML and "
+            "article extraction anchors; decoded mathematical content is unchanged. "
+            "The paper does not call these standalone record serializers."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/contributor_credit.py",
+            "packing/devtools/overview_data.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/register_gupta_reports.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/devtools/render_case_pages.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_contributors.py",
+            "packing/devtools/render_frontier_page.py",
+            "packing/devtools/render_n11_optimality_review.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/result_credit.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/site_documents.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/state_ai_assistance.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/frontier/README.md",
+            "packing/frontier/n-029.md",
+            "packing/frontier/n-051.md",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-084.md",
+            "packing/frontier/n-086.md",
+            "packing/frontier/n-088.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-105.md",
+            "packing/frontier/n-108.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-127.md",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-130.md",
+            "packing/frontier/n-131.md",
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-154.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-179.md",
+            "packing/frontier/n-180.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/n-208.md",
+            "packing/frontier/n-209.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/n-237.md",
+            "packing/frontier/n-238.md",
+            "packing/frontier/n-239.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=("papers/square-packing-methods-survey.md",),
+        reason=(
+            "Inspected the expanded Markdown with all five retained figures. The "
+            "manuscript and producer are unchanged from main, and the paper already "
+            "credits Ryan Xu by name. Changed frontier and source-coverage records are "
+            "linked citations; their bodies are not incorporated. The changed "
+            "render_changelog helper renders direct profile links in News and is "
+            "not called by the paper. Shared site navigation and related-paper "
+            "metadata do not revise this paper's content edition. The reported-bound "
+            "proved_by edits and their closed-form producer replace only wand125 "
+            "with Hosono; all numeric values are unchanged and the paper already "
+            "uses Hosono. Those credit fields are not inserted into this manuscript "
+            "or its five figures. Standalone case articles compact numeric entities "
+            "and optional quotes on KaTeX HTML atom classes. Complete result pages also "
+            "omit optional quotes on first-position HTML class attributes containing "
+            "one ASCII identifier. The class compactor preserves SVG, MathML and "
+            "article extraction anchors; decoded mathematical content is unchanged. "
+            "The paper does not call these standalone record serializers."
         ),
     ),
     ReleaseNoPublicChange(

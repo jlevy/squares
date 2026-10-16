@@ -195,7 +195,7 @@ page, leaving Atlas as the second section without a separate project card.
 Add **About** to the shared top navigation immediately before **GitHub**, on desktop and
 mobile. Keep About’s project lead concise and use three linked-author bullets for its
 original work, including the explicit independent-work attribution.
-Use the full name Mannaseh Ahmed and a linked author profile on About, Papers and the
+Use the full name Manasseh Ahmed and a linked author profile on About, Papers and the
 optimality review; retain Kleddamag’s author profile and every original repository
 address. Use only H1 section headings on About, all with the same title styling as The
 Squares Project. Add the H1 **Contribute Your Results!** above the reporting invitation.

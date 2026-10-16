@@ -1,0 +1,819 @@
+# Feature: Contributor Profiles and Linked Result Credits
+
+**Date:** 2026-10-10
+
+**Author:** Codex, for Joshua Levy
+
+**Status:** Data-model spike, initial population, website and `/profiles/` URLs
+implemented; continued from [PR #490](https://github.com/jlevy/squares/pull/490) in
+[PR #578](https://github.com/jlevy/squares/pull/578), a draft awaiting the owner’s
+review.
+
+**Workflow:** W7 pipeline improvement, entered through `tbd shortcut new-plan-spec`.
+
+**Beads:** `think-39mp` (feature epic), `think-sxpm` (completed model spike),
+`think-m7il` (population and full census), `think-9yli` (pages and name links).
+
+## Overview
+
+Give every person cited or credited in the square-packing result archive a stable
+contributor record and a linkable profile.
+Include historical contributors, current contributors, paper authors, and people
+acknowledged for methods or prior work.
+Each record has structured identity and public links in softschema YAML frontmatter.
+Its optional Markdown body is one biographical paragraph of at most five sentences.
+The website presents the same content as a popover and a complete standalone page.
+
+Convert credited names into profile links wherever the website presents them, including
+main results tables, result histories, case pages, paper credits and project cards.
+Preserve the printed name, credit order, role and source relationship.
+Linking a person must not turn an acknowledgment into authorship.
+
+## Goals and Scope
+
+- One record per evidenced person, with optional real name, aliases, Twitter/X, GitHub,
+  Substack, personal website and publication website.
+- Include historical and current credit occurrences, starting with key contributors
+  visible on the site and credited on retained PDFs, then reconcile the full archive.
+- Source identity matches, biography facts and account ownership; omit unknown values.
+- Make ordinary links work without JavaScript and enhance them with accessible popovers.
+- Use sub-agents for extraction, profile authoring and mechanical updates, with disjoint
+  assignments and independent identity review.
+
+The owner expects a few hundred profiles.
+This is a planning estimate, not a measured person count.
+Private contact information, inferred identities, portraits, social feeds and
+contributor rankings are outside this feature.
+Scientific claims and archived source bytes retain their existing authority.
+
+## Review Before Implementation
+
+The review covers this repository’s record organization, credit producers, schema
+consumers, site generators, routes, overlays and validation.
+The declared external code dependency is `vendor/kpress`; the local workspace includes
+`packages/workbench`. This is not an audit of every algorithm or every repository owned
+by the GitHub account.
+Additional organization/repository scope needs named repositories.
+
+Three review lanes examined archive credits, site integration and schema design.
+The first two requested GPT-6.1 Sol at `xhigh`; the schema review requested GPT-6 Astra
+at `xhigh`.
+
+### Archive coverage
+
+Inventory from the checkout based on `af17208c0`; rows and files overlap and must not be
+summed into a person count.
+
+| Source family | Inventory | Credit information |
+| --- | ---: | --- |
+| `packing/frontier/results.yaml` | 131 result rows | Attribution source keys, `builds_on.credit`, corrections and history |
+| `packing/frontier/evidence.yaml` | 471 evidence rows | Source identities, performers, provenance and acknowledgments |
+| `packing/frontier/n-*.md` | 324 case records | `found_by`, `improved_by`, `proved_by`, priority claims and resources |
+| `packing/resources/bibliography.yaml` | 94 source rows; 32 name mappings | Authors, credit strings and lineage; surnames are presentation labels |
+| `packing/atlas/known-best/credit-attributions.json` | 96 aliases; 20 lower-bound contributor rows; 18 optimality contributor rows; 30 optimality people entries | Curated identity, role, date and source evidence; entries overlap and include organizations |
+| Tracked `packing/resources/` files | 144 PDFs; 131 raw Markdown extractions | Bylines, acknowledgments, references, figure and construction credits |
+| Web archive packets | 100 immediate packet README files | Licenses, citation metadata, attribution notices and upstream accounts |
+| Witness records | 423 YAML leaves, excluding schemas | Discoverer and construction provenance |
+| `packing/resources/web/known-best-packings/sources.json` | 148 source rows | Construction credit and source lineage beyond headline results |
+
+Other required census inputs are the asymptotic and strategy catalogues, unavailable
+source records, rigidity/methods/simulation literature tables, and the four `PAPERS`
+renderers’ author and oversight configuration.
+Include `packing/resources/private-correspondence/`, contributed reports under
+`packing/resources/papers/n11-complete-research-bundle-2026-09-07/`, and flat web
+catalogues such as `kingbird-squares-in-squares-compared*.md`, dated captures and
+alternative-packing pages.
+Correspondence can identify an attribution to investigate; published identity and
+biography claims still require public evidence, without publishing private contact
+details. Generated copies are reconciled with sources, not counted as new people.
+
+Counts came from Git-tracked file enumeration, JSON parsing and top-level YAML row
+patterns. This is a coverage inventory, not a completed reading of every PDF page.
+Phase 1 must inspect PDF bylines, acknowledgments and referenced authors, using original
+pages where extraction is absent or ambiguous.
+Unread material retains a pending status; absent extracted text does not establish
+absent credit.
+
+Existing aliases require identity review.
+The audit preserves uncertain E./G. Bajmóczy initials and distinguishes `ctjlewis` from
+the EvolvingPrograms organization.
+Mira, Kleddamag, Guzhou0806 and Julian-JJ may remain handle-only profiles.
+Project, organization and AI-system credits stay explicit non-person occurrences.
+Do not turn a project label into a human without evidence.
+
+### Code and consumer map
+
+| Boundary | Existing implementation | Required integration |
+| --- | --- | --- |
+| Owned records | `sqpack.yamlio`; `devtools.validate_schemas` | Duplicate-key-refusing loader, corpus discovery, semantic checks |
+| Credit composition | `devtools.result_credit`; `overview_data` | Preserve plain strings for sorting/print; add structured occurrence IDs |
+| Identity evidence | `atlas_credit_attributions`; bibliography and credit audit | Reuse reviewed evidence, replace text joins with explicit person IDs |
+| Standalone content | `render_overview.static_content_page`, `kpress_page`; `render_case_pages` | Prepared contributor article inside the existing page shell |
+| Overlays | `overview/case-popover.js`; `row-popover.js` | Shared fetch/parse/rebase/assets boundary; case navigation stays separate |
+| URLs and discovery | `site_urls`; `site_documents`; `result_overview.check_links` | Canonical URLs, document aliases, served paths and sitemap |
+| Builds and removal | `render_overview.inputs`, `render_site`, `write_site`; `preview_site`; `pages_scope`; Pages workflow | All producers, check mode, stale-file pruning and path selection |
+| Print and atlas surfaces | `build_bound_citations`; atlas/workbench/video/PDF producers | Retain text/width contracts, link through the relevant renderer |
+
+The site overlays use checked JavaScript under `tsconfig.overview.json`, not workbench
+TypeScript. Workbench navigation concerns packing/animation.
+No full-text website search index was found; a searchable directory is separate from the
+required profile index and sitemap.
+
+## Attribution Policy and Follow-up
+
+[Attribution Policy](../../../../attribution.md) is the single authority for preferred
+person names, handle reconciliation, project/tool distinctions, lineage and PDF credits.
+It records case-specific decisions and exceptions.
+The shared design guide owns layout; this plan owns rollout and coverage.
+
+The owner added four follow-ups: `think-t3a9` reconciles Ahmed/Queuingtheorydotcom and
+supported handles, including Joshua Levy/jlevy/ojoshe; `think-vix3` audits personal Levy
+credits against project branding, including PDFs; `think-8yk4` verifies the suggested
+EvolvingPrograms/Lewis identity; and `think-xid4` establishes the canonical policy and
+references. A handle match is not a global replacement rule, and archived source wording
+remains unchanged. Complete the scoped identity update now; review historical credit
+migrations by renderer and role under their own beads: `think-2v8h` for bound citations,
+`think-zupq` for verifier author fields and `think-ir3i` for PDF profile links and
+compact credit lines.
+The Lewis audit establishes affiliation with the EvolvingPrograms organization, not a
+personal alias; its person/infrastructure roles remain separate.
+
+## Design
+
+### Records and provenance
+
+Store `packing/contributors/people/<id>.md` with `schemas/contributor.schema.yaml`,
+contract `packing.squares:Contributor/v1`, envelope `contributor`, status `enforced`.
+The directory follows the layout of `packing/campaign/`. Person records are alone in
+`people/`, so no other file’s name reads as a person’s. Both schemas are in `schemas/`,
+each named for the kind it validates.
+The occurrence manifest `occurrences.yaml` and a `README.md` sit at the top.
+Each record declares its schema by relative path.
+Use the existing hermetic JSON Schema validator; the installed softschema CLI provides
+an independent compatibility and repair check.
+New consumer fields require reviewed contract changes rather than an unvalidated
+extension hidden from CI.
+
+| Field | Meaning |
+| --- | --- |
+| `id` | Lowercase slug matching the filename, fixed once published: the person’s evidenced real name (`manasseh-ahmed`, `hiroaki-hosono`), otherwise the handle they publish under (`guzhou0806`) |
+| `display_name` | Preferred public name: the evidenced real name where there is one, otherwise the handle; compact credits use the surname (`Ahmed`, `Hosono`) |
+| `real_name` | Optional publicly evidenced name |
+| `aliases` | Evidenced spellings, initials and handles; not globally unique IDs |
+| `links` | Typed public URLs and optional handles; publication/personal sites are distinct |
+| `sources` | Local IDs, repository-relative archive paths and/or primary URLs, with locators |
+| `provenance` | Payload field pointers and supporting source IDs |
+| `bio_sources` | Source IDs supporting the optional body paragraph |
+
+Keep biography only in the Markdown body, followed by the required documentation footer,
+without a heading or duplicate YAML biography field.
+Consumers render it as content and never extract structured facts from it.
+Phase 2 renders only inline Markdown within that paragraph, disables or escapes raw
+HTML, and applies the same HTTP(S)-only URL policy to biography links as to structured
+links. Test that policy in both standalone pages and injected popovers.
+The loader exposes it separately and strips only the exact footer.
+Validate the single-paragraph shape; review the five-sentence maximum editorially
+because initials and abbreviations defeat naive punctuation counting.
+
+Sources and field pointers must resolve.
+Claimed names, aliases and links need evidence; archive paths stay within the
+repository. Links accept HTTP(S), with platform/handle consistency checked where
+applicable. Omit unknown information.
+A historical paper’s institutional byline does not support a claim about current
+employment.
+
+### Identity and credit occurrence joins
+
+Profiles answer who a person is; source/result records answer what they contributed.
+Do not duplicate the result ledger in profiles.
+
+Phase 1 builds a reusable census tool and retained occurrence manifest.
+Each occurrence names its repository path, source/record key, field or PDF page/section,
+original label, role and disposition: resolved profile ID, unresolved identity or
+non-person credit. Split grouped authors into individual people while preserving
+punctuation/order. Inspect abbreviated `et al.` lists; that text is not a person.
+
+Aliases propose matches; reviewed occurrence-to-ID assignments authorize links.
+A surname unique in three seed records is not globally unique.
+Never select the first alias match, merge similar cross-platform handles automatically
+or infer a real name.
+Unresolved occurrences retain plain text and an actionable disposition.
+When profiles merge, preserve retired URLs through the existing URL-history mechanism
+and migrate occurrence IDs together.
+
+The initial implementation fixes an occurrence origin as repository-relative `path`,
+stable `record_key` and `field`. Each reviewed span records the complete
+`expected_text`, `start`, `end`, original `label`, `role`, `disposition`, optional
+`contributor_id` and supporting evidence.
+The validator reads the source field and rejects stale text, overlapping spans, labels
+that differ from their spans, unknown profiles and unresolved evidence pointers.
+Array items use individual field pointers.
+Existing plain credit strings remain available for sorting, print and metadata.
+When equal credit strings from different sources have conflicting reviewed identities,
+the composed credit remains unlinked rather than selecting one source arbitrarily.
+
+### Convert names to links
+
+Render each resolved occurrence’s original label as an anchor to
+`contributors/<id>.html`, rebased to the containing page and marked for popover
+enhancement. Profile pages link back to credited results and papers through the reviewed
+manifest, preserving roles.
+
+| Name-bearing surface | Conversion point |
+| --- | --- |
+| Recent/all-results tables, including `after …` | `overview_sections.credit_cell`; retain plain sorting values |
+| Result page/popover header and history chain | `result_overview.head`, `step` |
+| Frontier upper/lower credit lines | `render_frontier_page.credit` |
+| Case Found/Improved/Proved by, figures and result lists | `render_case_pages`, `visual_summary`, `results_block` |
+| Paper source/author and human-oversight credits | `paper_front._credit_lines`, HTML and Markdown editions |
+| Project-card authors and global footer | `overview_sections.other_project_cards`; `render_overview` footer |
+| Authored prose, figures, atlas/workbench and PDFs | Deliberate source/generator pass with surface-specific links |
+
+Correction credits sometimes sit inside result anchors, and project cards are anchors or
+buttons. Use sibling person links or the existing footed-card pattern; never nest
+interactive elements.
+Do not replace names globally in HTML. Third-party PDFs retain their bytes; link their
+authors through archive metadata and HTML. Regenerated first-party PDFs can use profile
+hyperlinks while preserving credit text and layout.
+
+### One page, two ways to read it
+
+Publish a complete static page at `contributors/<id>.html`, with canonical metadata,
+breadcrumb, sitemap entry and an index linking every published profile.
+Popovers fetch that same page and extract `article.site-contributor`; no second
+biography renderer.
+Reuse request caching, stale-request guards, rebasing, asset loading,
+failure fallback and focus restoration from case/result overlays.
+
+Preserve modified clicks, keyboard access and no-JavaScript navigation.
+A person link inside a case/result overlay replaces the active overlay while retaining a
+valid return-focus target.
+Escape closes the active overlay; failed fetches navigate normally.
+Avoid host-ID collisions from injected headings/fragments.
+Existing prepared-math asset paths assume one directory below the site root, which the
+proposed route satisfies.
+
+A shared article loader owns same-site fetches, inert parsing, relative URL rebasing,
+prepared assets and a pristine cached article; each consumer receives a clone.
+Controllers own request generation and visibility, invalidate pending requests when
+closed or replaced, and scope injected IDs and their fragment/ARIA references.
+Contributor links inside an active overlay are handled before its ordinary anchor-close
+handler and preserve the original visible page opener for focus restoration.
+Static case, result and profile pages include the same enhancement scripts as the
+overview.
+
+## Implementation Plan
+
+### Phase 0: Review and Data-Model Spike
+
+- [x] Review record families, identity evidence and the relevant website code path.
+- [x] Write the phased plan and record limits of the source census.
+- [x] Add schema, loader and semantic checks to the existing schema gate.
+- [x] Seed Walter Stromquist, Evan Daniel and Mira: historical byline, named contributor
+  with publication site, and handle-only identity without an invented biography.
+- [x] Exercise invalid metadata, provenance, IDs, unsafe links and body shapes;
+  independently validate using softschema.
+- [x] Complete independent model review and required PR validation; record the outcomes.
+
+This phase proves the record contract against examples.
+Publishing routes and converting names belong to Phase 2. The model spike alone
+introduces no dead profile links.
+
+### Phase 1: Select Contributors and Build Profile Records
+
+Owner: `think-m7il`; first reviewed batch and reusable tooling: `think-0dqj`.
+
+Build the reusable census tool before bulk authoring.
+Begin with main-site credits, case contributors and PDF bylines; include acknowledgment
+and reference authors from all inventoried families.
+Key contributors are the first batch, not a filter excluding historical or less
+prominent contributors.
+
+The coordinator freezes the source inventory, reserves IDs and assigns disjoint batches.
+Run authoring lanes for historical papers/PDFs, modern result repositories/handles and
+construction/catalogue history.
+Each owns only assigned profiles and proposed occurrence mappings.
+An independent pass checks identities, public accounts and biography claims before the
+coordinator integrates mappings.
+Collision decisions stay with the coordinator.
+
+Every batch reports sources inspected, resolved/unresolved/non-person occurrences and
+new profiles. Completion requires a disposition for every occurrence and an inspection
+receipt for every PDF, not a guessed count.
+Validate profiles through softschema repair and the project checker before acceptance.
+
+### Phase 2: Publish Pages and Link Every Resolved Name
+
+Owner: `think-9yli`; page generation: `think-s3wj`; browser behavior: `think-0d3g`.
+Implementation proceeds beside the initial population batch, with publication acceptance
+depending on its reviewed mappings.
+
+Implement standalone pages/index and shared popovers, then the full name-link surface
+matrix. Once the occurrence and renderer APIs are fixed, delegate page/overlay work,
+mechanical credit conversion and content review to disjoint lanes.
+One integrator owns shared generators, route registration, build declarations and output
+regeneration.
+
+Report which occurrences became links and why any remain text.
+Historical population may continue in reviewed batches, but publication never uses
+guessed identities or missing destinations.
+Add profile/occurrence maintenance to ordinary result intake.
+
+### Phase 3: Reviewable Basic Website
+
+Acceptance owner: `think-vqio`. This PR includes the model spike, the initial reviewed
+population and a working website.
+The first acceptance scope is the contributor directory, sourced profile pages,
+popovers, and reviewed name links in main result tables, result histories, frontier
+credits and case panels, figures and result lists.
+Unknown identities remain visible as ordinary credit text.
+
+| Sub-bead | Deliverable | Requested agent | Status |
+| --- | --- | --- | --- |
+| `think-0dqj` | Initial profiles, census tool, reviewed occurrence contract and credit links | Sol, `xhigh` | Complete |
+| `think-s3wj` | Directory, standalone profiles, safe biography rendering and publication integration | Sol, `xhigh` | Complete |
+| `think-0d3g` | Shared article loading, accessible contributor popovers and browser checks | Sol, `xhigh` | Complete |
+| `think-vqio` | Independent technical review, integrated preview and validation receipts | Astra, `xhigh`, with coordinator integration | Review complete; publication checks on PR #490 |
+
+The first independent implementation review requested three fixes: initialize overlays
+before their controllers run on standalone pages (`think-0cxt`), preserve distinct
+publication backlinks and accept every valid provenance pointer (`think-4f3u`). The
+integrated build also identified two pages over their existing byte budgets
+(`think-c5gl`) and missing executable-script classifications.
+These are acceptance work for this PR, with regression tests, rather than deferred
+archive work.
+
+The coordinator owns plan updates, beads, commits and final validation.
+Implementation agents own disjoint file sets, with one owner for generated routes and
+shared page shells. The Astra review fixes the source-aware credit and overlay contracts
+before edits, then reviews the frozen implementation after integration.
+
+`think-erx9` adds the requested design-system audit to this acceptance phase.
+The canonical specification is
+[`paper-design.md`](../../../../packing/devtools/templates/paper-design.md), not a
+second profile-specific design system.
+Review case, result, contributor and legacy card popovers together: token and typography
+ownership, dimensions and scrolling, close actions, keyboard/focus behavior, native
+links, canonical-page content, responsive themes, prepared math and script loading.
+Reconcile stale descriptions in that specification and link this plan to the shared
+contract; track any implementation discrepancy as an acceptance fix.
+`think-jm0i` owns typography and close-button clearance corrections; `think-iu56` owns
+publication-input and required-browser coverage gaps identified by the audit.
+`think-iabo` owns the duplicate result headline found in the same review; a fetched
+article retains its title on the standalone page and shows one visible title in its
+result popover.
+
+- [x] Render the same biography, identity fields and public links in a standalone page
+  and its popover.
+- [x] Preserve credit wording and role while converting reviewed names to links.
+- [x] Verify keyboard focus, Escape, modified clicks, fetch failure, request races and
+  transitions from case/result popovers.
+- [x] Verify routes, sitemap, build selection, stale output removal and source drift
+  detection.
+- [x] Open a working preview and inspect desktop/mobile and light/dark presentations.
+- [x] Resolve independent review findings and update PR #490 with executed validation,
+  preview instructions and remaining census coverage.
+
+### Phase 4: Complete the Archive and Remaining Surfaces
+
+`think-m7il` remains open until every inventoried source has an inspection receipt and
+every credit occurrence has a disposition.
+Batch work continues across PDF bylines, acknowledgments, referenced authors, historical
+construction catalogues and contributed reports.
+`think-bw3z` owns historical PDF inspection and profile batches; `think-nlob` owns web,
+construction and contributed-report reconciliation.
+The census distinguishes inspected, pending, unresolved and non-person records.
+Profile and occurrence counts are reported separately from the count of inspected PDFs.
+
+`think-jn87`, under `think-9yli`, tracks remaining paper, project-card, footer,
+authored-prose, atlas and first-party print conversions after the basic website passes
+review. Create disjoint authoring and renderer sub-beads for each batch, preserving the
+same identity review and validation requirements.
+The initial release does not establish complete archive coverage.
+
+### Intake and Progress Checks
+
+From `packing/`, with the task environment configured, run
+`uv run --frozen --all-extras --group dev python -m devtools.contributor_census` for
+profile counts, structured credit dispositions and PDF inspection coverage.
+Add `--json` for pending source addresses and candidate profile IDs.
+Candidate IDs are review suggestions only.
+
+The first implementation batch contains 20 profiles.
+Its structured census covers 974 occurrences: 738 resolved to profiles, 230 unresolved
+and six non-person credits.
+The manifest also reviews the generator-owned project-author credit separately, for 975
+retained occurrences and 739 resolved joins in total.
+All 144 tracked PDFs still require the complete credit census; a byline-only inspection
+does not count as reading a paper’s acknowledgments and references.
+These counts describe the initial batch and are regenerated by the census command.
+
+For each intake batch, inspect the cited source, reserve person IDs, author sourced
+profiles and review the exact source spans before adding resolved mappings.
+Run the schema/semantic checks, render the affected pages and verify the new name links
+before closing the batch bead.
+If a source field changes, review the changed attribution before updating its expected
+text; do not silence source drift by copying the new text without checking identity and
+role.
+
+## Testing and Rollout
+
+Add profiles to `validate_schemas.corpus_paths`, extending both the existing schema gate
+and validator-equivalence coverage.
+Test filename/ID mismatch, duplicate IDs, missing sources, dangling pointers, path
+traversal, unsafe links, optional names/bios, body/footer handling and refusal to choose
+among ambiguous labels.
+Existing credit output must remain unchanged in the spike.
+
+Publication tests cover initial static HTML, page/popover parity, canonical URLs,
+sitemap, rebased links, stale-page removal, build selection and nested elements.
+Browser checks cover each name-link surface, Escape/focus, modified click, fetch
+failure, stale responses and overlay transitions on mobile/desktop and light/dark
+themes. Use existing page budgets and the case/result/URL test patterns.
+
+Run records/edit and change-reachable push checks, then the required checkpoint and
+hosted PR checks. Record executed evidence against the relevant phase; unexecuted
+acceptance criteria remain unchecked.
+
+### Spike verification
+
+The focused contributor, snapshot-copy and contributor-schema equivalence checks passed
+92 tests, with 1,194 unrelated cases deselected.
+Ruff and targeted BasedPyright reported no findings.
+The installed softschema 0.8.0 repair check accepted all three seeds without repairs or
+warnings.
+
+Independent review found two issues, both corrected before publication: name lookup now
+returns candidate tuples instead of resolving an identity, and negative-control
+snapshots rescue the exact archive files declared by contributor sources.
+A miniature worker-copy test verifies that cited evidence survives, unrelated archive
+bytes stay excluded, and Git-tree inventory agrees with the live copy policy.
+
+The initial records gate passed 48 of 49 checks; its missing document-map entry was
+corrected, and the documentation check then passed for 1,994 durable documents.
+The unchanged full schema-mutation test selection was interrupted after ten minutes
+without observed failures; it is not counted as a passing run.
+Final PR and checkpoint results are recorded on the pull request.
+
+### Basic Website Verification
+
+The records tier passed all 49 selected steps in 57.50 seconds after publication
+integration. Softschema repair checks accepted all 20 profiles and the occurrence
+manifest without repairs or warnings.
+Independent Astra checks passed 85 contributor/occurrence tests, then six targeted
+review regressions covering distinct bibliography works, valid provenance pointers,
+generated-page popovers and script inventory.
+The source-aware census reports the initial coverage above; it does not mark the
+remaining PDFs inspected.
+
+The local preview serves the complete site at `http://127.0.0.1:8790/`, with the
+directory at `/contributors/index.html` and progress at `http://127.0.0.1:7790/` while
+those local servers run.
+Rebuild with `python -m devtools.preview_site --output PATH --serve` from `packing/` in
+the project environment; use external scratch for the output.
+Manual inspection confirmed directory-to-popover navigation, the standalone profile,
+Escape/focus restoration and mobile dark-mode layout.
+The generated-page browser selection passed six checks with Chromium required and no
+skips. It covers directory, profile, case and result entry points, native navigation
+without scripts and fetch-failure fallback.
+The budget and content-preservation selection passed 12 tests: T-124 is 299,837 bytes
+against 300,000, and the results table is 791,833 against 800,000. All 178 cases, 67
+history steps and source links remain present; browser DOM and XML math equivalence
+checks passed. The design audit reconciled the canonical guide, component ownership,
+standalone and overlay contracts, and the development guide.
+Profile metadata and headings now use shared typography roles; close-button clearance
+applies to the opening breadcrumb rather than narrowing the whole article.
+Eight computed-style browser combinations cover desktop/mobile, light/dark and
+standalone/popover layouts, including long source identifiers and URLs.
+Publication filters include the contributor stylesheet and cited license; browser
+coverage includes its sans roles and the case-table DOM preservation check.
+The result popover shows one visible title after fetching, while standalone pages and
+cached articles retain theirs.
+Three generated-page browser checks and 28 Node checks cover that correction.
+Independent Astra review accepted the reconciled design guide and final implementation
+with no remaining functional or design blockers.
+The complete contributor browser suite passed 26 tests; a separate eight-case run
+explicitly checked the resolved theme.
+Hosted integration also exercised existing page contracts: `think-u5c8` reconciles
+footer navigation, script ordering, contributor output/freshness and real sparse
+evidence restoration; `think-wrpf` preserves relative profile links, full credit text
+and semantic MathML in the existing rendering checks.
+The complete affected modules passed 357 overview/workflow tests and 138
+case/result-column tests, with no skips.
+Astra accepted the final integration fixes and independently passed the pruning and
+sparse-restoration checks.
+
+The local edit floor passed.
+Its broad behavioral run encountered a changing file inventory during formatting; a
+retry was interrupted before the README integration fix, so neither run is a passing
+broad behavioral receipt.
+The README check passed after adding this policy to its layout and authority map.
+Final hosted receipts and publication status are recorded on
+[PR #490](https://github.com/jlevy/squares/pull/490), with the tested head and base,
+rather than copied into this plan as moving CI status.
+
+The upstream layout integration (`think-ztic`) adopts Atlas as the case directory and
+`results.html` as the Results index while retaining complete contributor, case and
+result pages, reviewed credit links and the shared article loader.
+A fetched result uses its canonical H1 as the sole visible headline and accessible
+dialog name.
+The page-heading follow-up (`think-4w5c`) requires contributor directory and
+profile H1s to inherit the same sans-serif, all-caps title rule as other site pages;
+popovers retain the shared compact heading hierarchy.
+Generated computed-style checks compare the contributor pages with the standard page
+role at desktop/mobile widths in both themes.
+
+## Takeover: 2026-10-13
+
+At the owner’s request, Claude Code continued this work on
+`claude/admiring-goodall-q8xeuh` in
+[PR #578](https://github.com/jlevy/squares/pull/578), which carries every commit of #490
+and supersedes it. That branch merges `main` (327 commits) and resolves its eight
+conflicts. `contributor_census --stale` and `--reconcile` now repair the occurrence
+manifest after a merge: there, 41 reviewed spans had gone stale and 194 were new.
+The branch adds Marc Leonard Overbeck’s record, `marc-leonard-overbeck`, the former
+`kleddamag`, which has his real name and links to GitHub `Kleddamag` and X `@kleddamag`.
+It also adds sourced records for John Bidwell, David Ellsworth, Thierry Gensane and
+Philippe Ryckelynck, so there are 24 records.
+No archived source names Muhammad Maaz.
+The `/profiles/` slice below is merged, and the WIP handoff that follows is kept as
+history.
+
+Later the same day, each owner request became a bead under `think-39mp`:
+
+| Bead | Slice | State |
+| --- | --- | --- |
+| `think-nyk1` | `contributor_census --stale` and `--reconcile` | done |
+| `think-k9mc` | Overbeck’s record, `marc-leonard-overbeck` | done |
+| `think-1y3x` | Records for Bidwell, Ellsworth, Gensane and Ryckelynck | done |
+| `think-8we0` | wand125 credited as Hiroaki Hosono record-wide; record `hiroaki-hosono`, keeping GitHub `wand125` and X `@wand_125` | done |
+| `think-5bao` | Merge `main`, including the n = 17 stack (#560, #571, #577), keeping both renames and joining the stack’s `Overbeck` labels | in progress while `main` moves |
+| `think-2wtr` | The `people/`, `schemas/` and README layout above | done with this branch |
+| `think-vqk8` | Record `manasseh-ahmed`, the former `queuingtheorydotcom`, with the owner-confirmed spelling Manasseh corrected in first-party text | done with this branch |
+| `think-kf4u` | Records `oscar-fitzharding` and `david-r-maciver`, whom #588’s import of the n = 17 Lean proof credits, with their four spans joined | done with this branch |
+| `think-g2ga` | ry-xu credited as Ryan Xu record-wide; record `ryan-xu`, keeping GitHub `ry-xu` and X `@small_LM` | done with this branch |
+
+The renamed records keep forwarders at their previewed addresses
+(`contributors/kleddamag.html`, `contributors/queuingtheorydotcom.html` and
+`contributors/wand125.html`). With Oscar Fitzharding, David R. MacIver and Ryan Xu there
+are 27 records. Population continues under `think-m7il`: 221 structured spans are
+unresolved, among them Chaoweeraprasit, Ostashev, Wang, Li and Maaz.
+
+### Regularization Integration
+
+The first regularization merge brought `main` at `aeef99ef0` into PR #578, including the
+regularized-bounds result T-155. The five conflicts retain both the upstream exact
+certificate and the profile branch’s preferred personal credits, both independent
+renderer regressions, and regenerated result and citation views.
+The census joins two new Daniel spans without unresolved or stale additions, and the URL
+registry has 1,020 rows with no failures.
+Recorded derivation provenance and direct quotations retain their original labels;
+published person credits come from the reviewed case and profile records.
+The n=29 explanation distinguishes its historical Schadt ceiling from the current exact
+regularized certificate.
+Merge acceptance remains tracked by `think-5bao`, with final validation receipts on the
+PR.
+
+### News and Later Upstream Results
+
+The 14 October integration brings `origin/main` at `37e6757ed` into PR #578, including
+the news history and the later result registrations.
+`think-5bao` tracks merge validation; `think-dpvm` tracks news attribution.
+News prose links reviewed people to their standalone profiles and uses the preferred
+name from each person record, normally the real name.
+The first mention in each entry uses the full preferred name.
+Retained delivery titles, quotations, source identifiers and URLs keep their original
+text, as required by [the attribution policy](../../../../attribution.md).
+People without reviewed profiles remain named without speculative links.
+
+Both the profiles overview and news use ordinary navigation to individual profile pages.
+Contextual credit popovers remain available on result and case pages.
+The merged census adds thirteen reviewed joins and eleven unresolved spans, removes four
+superseded spans, and has no stale joins.
+The URL registry contains 1,026 rows with no failures.
+The census now covers 27 profiles and 1,165 structured spans: 929 resolved, six
+non-person and 230 unresolved.
+All 146 tracked PDFs still need full inspection receipts.
+Remaining population work stays in Phase 4; validation receipts are recorded on PR #578.
+
+### Integration: 2026-10-15
+
+This integration brings `origin/main` at `4c9af6902` into PR #578: 306 upstream commits
+and 34 source conflicts, tracked by `think-5bao`. It retains the new News entries and
+editorial revisions, the basic and advanced tutorials, Explanations navigation, and the
+profile branch’s reviewed credit links.
+News first mentions use reviewed preferred names and link directly to their profiles.
+The Profiles directory and News keep ordinary profile navigation; contextual credit
+popovers remain available on case and result pages.
+Retained delivery metadata, source identifiers and quotations keep their original text.
+
+The reconciled census covers 27 profiles and 1,349 structured spans: 1,032 resolved, six
+non-person and 311 unresolved, with no stale joins.
+All 146 tracked PDFs still await full inspection receipts.
+The regenerated URL registry contains 1,056 rows with no failures.
+Earlier census and route totals remain historical receipts for their own cuts.
+
+Upstream site history through `v0.7.9` is retained, including its `v0.7.0` News and
+Explanations launch.
+The contributor feature takes the next minor site edition, `v0.8.0`; the infographics
+retain upstream `v0.6.1`. The independent paper credit corrections remain
+optimality-review `v0.1.8` and threshold-review `v0.1.1`, planned for 15 October
+publication. Both sides’ paper no-public-change findings are retained for verification
+against the merged outputs.
+The upstream data revision is retained during the merge; its final pin is a separate
+commit after the merged data is committed.
+
+The integration retains upstream’s quick-push validation policy and complete selected
+test coverage, with deep checks reserved for explicit checkpoints.
+During validation, five more upstream commits landed through `6e73ef1c2` (#623), adding
+News math typesetting and reader-page corrections at site `v0.7.10`. The follow-up
+integration retains those changes alongside direct profile links and the proposed site
+`v0.8.0` release. Initial hosted CI reported three failures, addressed by the follow-up
+below. The follow-up normalizes 152 closed-form `proved_by` lists from `wand125` to
+`Hosono` and aligns `apply_closed_form.py` with that credit, without changing numeric
+bounds. The occurrence manifest was reconciled to the updated source labels.
+Release-impact scopes were refreshed against `origin/main`; the source-based check
+passes without changing paper versions.
+The local case-page size correction is implemented without new dependencies: numeric
+entities use equivalent UTF-8, and optional class-value quotes are omitted only on KaTeX
+HTML atoms, preserving MathML and SVG. The 17-square page is 498,343 bytes against its
+500,000-byte ceiling, and 11 targeted checks passed.
+A fresh production render confirms that size.
+All 31 active hosted checks passed at `0d8daf55c`, including the frontend suite.
+
+The latest local push run passed 66 of 67 prerequisite checks, then its reachable
+behavioral selection hit the 900-second subprocess limit.
+The stale changelog-derived prerequisite was corrected and its targeted recheck passed.
+Partial behavioral output also contained failures before the timeout; this is not
+established as a timing-only failure or a passing push gate.
+The completed hosted run establishes validation of that integration; publication
+acceptance remains open.
+
+### Further upstream integration
+
+The next integration brings 94 commits through `3685616df` into the profiles branch,
+including reports T-188 through T-192, site editions `v0.7.11` and `v0.7.12`, News
+topics and counts, and isolated browser-forwarder checks.
+Twelve conflicted files required reconciliation.
+The site feature remains `v0.8.0`.
+
+The census now covers 27 profiles and 1,376 structured spans: 1,052 resolved, six
+non-person and 318 unresolved.
+All 146 PDFs still await full inspection receipts.
+News retains the earlier 39 profile links and adds six reviewed links across two new
+articles. First linked mentions use preferred display names; subsequent mentions use
+surnames. The URL registry contains 1,061 rows with no failures.
+
+Curated credits in the new Greff report use Hosono consistently with the shared
+attribution policy. Repository identifiers, source keys and archived text remain
+unchanged. Validation results and the final head are recorded on PR #578 and
+`think-5bao`; earlier green heads do not validate this integration.
+
+The built design review covers the directory, Ahmed and Levy profiles, and News at
+1280px and 390px in light and dark themes.
+All 16 contexts pass the retained overflow, clipping, word-split and font checks.
+Profile H1s use the shared upright, uppercase Source Sans 3 styling.
+Direct directory navigation, browser Back and profile breadcrumbs also pass, including
+mobile navigation without JavaScript.
+The design-guide table now states direct directory navigation consistently with its
+profile section.
+
+The first hosted run found one result-page size regression: T-174 was 303,135 bytes
+against a 300,000-byte ceiling.
+Omitting optional quotes from safe HTML class attributes reduces it to 299,477 bytes,
+preserving parsed content, links, MathML, SVG and article extraction anchors.
+Case pages retain their narrower KaTeX-only compaction.
+
+The following integration brings 40 commits through `e2e018f32` into `fb3f3e351`, with
+six conflicted files.
+Published site editions `v0.7.13` and `v0.7.14` remain in the history; the proposed
+profiles feature stays `v0.8.0`, and paper editions remain independent.
+The homepage and News archive share the same canonical announcement articles and topic
+chips. Renderers preserve authored names and wording; first linked mentions follow the
+preferred display names in the attribution policy.
+News and the profile directory use ordinary profile navigation, while marked credits in
+case and result records keep their contextual popovers.
+
+The census is unchanged at 27 profiles and 1,376 spans: 1,052 resolved, six non-person
+and 318 unresolved, with 146 PDFs pending inspection and no stale occurrences.
+The current URL registry check passes with 1,061 rows and no failures.
+The direct release-impact check against `e2e018f32` passes with exact no-change scopes
+of 24 inputs for the explainer and 52 for the methods survey.
+The fresh preview at `http://127.0.0.1:8791/` was opened in the owner’s default browser.
+Twelve desktop/mobile and light/dark layout contexts and twelve direct-navigation checks
+pass, including navigation without JavaScript; the three homepage articles match their
+News counterparts. All 31 standard hosted checks pass on `77fe330dd`. Local broad
+validation passed all 68 prerequisites but timed out in its behavioral selection; its
+diagnostic retry recorded worker-startup and browser-load timing failures.
+The complete hosted checkpoint and local diagnostic dispositions are recorded in
+[PR #578](https://github.com/jlevy/squares/pull/578) and `think-5bao`; those live
+receipts carry the final status.
+The draft remains unmerged, and archive population remains open.
+
+## WIP Handoff: 2026-10-10
+
+The owner requested a work-in-progress PR and handoff before further implementation.
+Continue on `codex/contributor-profiles-plan-spike` in
+[PR #490](https://github.com/jlevy/squares/pull/490). Implementation commit `85e0ac66f`
+merges upstream `6038af33c`; the handoff commit adds documentation only.
+Do not treat the earlier green CI on `ed89bfdda` as validation of this merge.
+The PR is being retained as draft, with integration acceptance open.
+
+### Generic Profile URLs (think-0v2c)
+
+The URL migration is implemented.
+`/profiles/index.html` (canonical `profiles/`) and `/profiles/ID.html` are the directory
+and person-page URLs for every record.
+Visible text says “Profiles”: the directory’s title, heading, intro and list label, the
+colophon link, each profile’s breadcrumb and the popover’s accessible name.
+Cited paper authors are therefore included without implying that every person directly
+contributed to the project.
+Generated credit links, the popover’s **Open profile** default, record links from reader
+documents, `SITE_PAGES`, the URL register and its sitemap use `profiles/`. The directory
+and the 20 profiles the reviewed preview served keep a registered forwarder at the
+earlier `/contributors/` address (`render_overview.LEGACY_PROFILES`); `kleddamag`
+forwards to `marc-leonard-overbeck`, and a profile added since has no forwarder.
+Each of those 21 rows in `packing/site-urls.yaml` carries a 2026-10-13 amendment
+recording the move. Internal names are unchanged: the `packing/contributors/` records,
+the `Contributor/v1` contract, module names, `data-contributor*` attributes, CSS classes
+and the occurrence manifest.
+Reviewed identity joins, credit wording, source roles and the article loader’s
+accessibility and no-script fallback are unchanged.
+
+### Acceptance and Remaining Work
+
+- `think-4w5c` is complete: standalone headings inherit the shared sans-serif, uppercase
+  H1 style; popovers use the shared compact hierarchy.
+- `think-ztic` remains in progress for merged-site acceptance.
+  On `85e0ac66f`, 446 renderer tests, 61 browser integration tests, 16 heading/design
+  checks, 29 Node tests, 106 published-site tests and 263 validation/URL tests passed in
+  their respective selections.
+  The rebuilt full preview and publication checks passed; the route registry reports 946
+  rows and no failures.
+  Astra accepted the implementation and final publication-checker changes.
+- The local `packing-validate --push --inner-jobs 4` gate **failed**: reachable
+  behavioral tests exceeded their 900-second ceiling, after partial pytest output had
+  already shown an `F` without a final failure traceback.
+  Total gate wall was 1018.93 seconds, with 65 of 66 steps completed.
+  Diagnose the failing selection and rerun; this is not established as a timing-only
+  failure. Do not raise the ceiling to hide it.
+- Earlier required Packing, Pages and deferred CI passed on `ed89bfdda` only.
+  Inspect the PR checks for the pushed handoff head before claiming acceptance.
+- `think-39mp` remains the epic; `think-m7il` owns population and census, `think-9yli`
+  publication. The census still has 230 unresolved occurrences and 144 PDFs awaiting
+  complete credit inspection.
+  Continue PDF and web batches through `think-bw3z` and `think-nlob` after the selected
+  URL/acceptance slice; remaining renderers are `think-jn87`.
+- Attribution policy is [attribution.md](../../../../attribution.md).
+  Ahmed and Levy aliases are sourced.
+  Lewis is affiliated with EvolvingPrograms; do not infer that the organization is a
+  proven personal alias.
+  Bound citations, verifier credits and compact PDF links remain tracked by
+  `think-2v8h`, `think-zupq` and `think-ir3i`.
+
+### Resume Setup
+
+Run `tbd prime` and `tbd sync`, reread the selected beads, then claim the next slice
+before editing.
+Bead state lives on `tbd-sync`; this plan records its handoff snapshot in
+the PR itself. Use Sol agents for mechanical implementation and Astra for technical
+review, with separate file ownership.
+
+On this Mac, source
+`/Volumes/spud-ext1/agent-scratch/contributor-profiles-01a126ff/env.sh` before
+build/test commands.
+It sets the external scratch directories, pinned environment and browser location.
+Verify the volume is mounted and writable; do not fall back to internal disk for bulk
+output. Run Python through `uv run --frozen --all-extras --group dev` from `packing/`
+with Python 3.14.7, never the system interpreter.
+The failed gate log is in that scratch directory at `tmp/upstream-push-gate.log`;
+scratch logs are local diagnostic aids, not portable PR evidence.
+The outcome above is the durable receipt.
+Do not format or mutate the tree while broad pytest collection runs.
+
+The existing local preview at `http://127.0.0.1:8791/` serves the merged site, including
+`/profiles/index.html`; the bead board is at `http://127.0.0.1:7790/` while its server
+runs. Neither local server is a production deployment.
+
+## Open Decisions and Limits
+
+- Additional organization-wide code review requires named repositories beyond this
+  checkout and its declared dependency.
+- Keep occurrence-manifest fields and source accessors consistent with census output.
+- The distinct-person count and unresolved PDF identities are Phase 1 outputs.
+- Preserve Unicode public spellings and original credit labels even when profile display
+  names differ; the complete bibliography of each retained paper is included in the
+  inventory, with explicit non-person and unresolved dispositions.
+
+## References
+
+- [Validation loops](../../../../development.md#validation-loops)
+- [Site URL design](../done/plan-2026-10-06-site-urls-seo-performance.md)
+- [Result-kind model](../done/plan-2026-10-01-result-kinds.md)
+- [Resource archive](../../../../packing/resources/README.md)
+- [Bibliography](../../../../packing/resources/bibliography.yaml)
+- [Existing credit audit](../../../../packing/atlas/known-best/credit-attributions.json)
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

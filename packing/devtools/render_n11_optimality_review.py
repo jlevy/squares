@@ -93,7 +93,7 @@ FRONT = paper_front.check(
         slug=SLUG,
         title=TITLE,
         source=paper_front.Source(
-            "Mannaseh Ahmed",
+            "Manasseh Ahmed",
             "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
             author_url="https://x.com/ManassehA06",
         ),

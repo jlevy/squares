@@ -135,7 +135,8 @@ def _target(target: str, *, destination: Destination) -> str:
     resolved = (REPO / parts.path).resolve()
     if not resolved.is_relative_to(REPO.resolve()):
         raise ValueError(f"link escapes repository: {target}")
-    if path_kind(parts.path) is None:
+    kind = path_kind(parts.path)
+    if kind is None:
         raise ValueError(f"missing repository link target: {target}")
     # Partial Pages checkouts omit research directories; repo_url handles those from
     # the retained Git tree rather than inventing a site-local address.
@@ -143,6 +144,12 @@ def _target(target: str, *, destination: Destination) -> str:
         f"#{parts.fragment}" if parts.fragment else ""
     )
     if destination == "site":
+        if (
+            kind == "blob"
+            and path.parent == PurePosixPath("packing/contributors/people")
+            and path.suffix == ".md"
+        ):
+            return f"profiles/{path.stem}.html{fragment}"
         return repo_url(parts.path, fragment)
     return target
 
@@ -294,7 +301,9 @@ def _inline_references(text: str, tokens: list[Token], env: dict[str, Any]) -> s
     return source.strip()
 
 
-def _prose(text: str, *, destination: Destination = "github") -> str:
+def _prose(
+    text: str, *, destination: Destination = "github", rewrite_links: bool = True
+) -> str:
     if not text.strip():
         raise ValueError("blank changelog prose")
     env: dict[str, Any] = {}
@@ -312,7 +321,7 @@ def _prose(text: str, *, destination: Destination = "github") -> str:
     for reference in [*env.get("references", {}).values(), *env.get("duplicate_refs", [])]:
         _target(reference["href"], destination=destination)
     tree = _sanitized_prose(text)
-    rendered = _RenderedURLs(destination)
+    rendered = _RenderedURLs(destination if rewrite_links else "github")
     rendered.feed(tree.html)
     rendered.close()
     if destination == "github":
@@ -321,7 +330,9 @@ def _prose(text: str, *, destination: Destination = "github") -> str:
 
 
 def _inline_math(tex: str) -> str:
-    rendered = _prose(f"${tex}$", destination="site")
+    # The surrounding inline renderer applies the site URL policy to the completed
+    # fragment. Retain authored paths here so profile URLs are converted only once.
+    rendered = _prose(f"${tex}$", destination="site", rewrite_links=False)
     return rendered.removeprefix("<p>").removesuffix("</p>")
 
 
@@ -354,9 +365,9 @@ def inline_html(text: str, *, allow_links: bool = True) -> str:
         if token.type == "link_open":
             if not allow_links:
                 raise ValueError("links are not allowed in News headlines")
-            token.attrSet(
-                "href", serialized_target(str(token.attrGet("href")), destination="site")
-            )
+            # Validate the authored repository path here; the final HTML pass also
+            # handles MathML links and rewrites every destination exactly once.
+            _target(str(token.attrGet("href")), destination="site")
 
     def render_inline(
         _renderer: object,

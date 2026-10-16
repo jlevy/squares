@@ -17,7 +17,7 @@ hypothesis and the axioms, and scans the staged sources for the tokens that woul
 proof skip the kernel. It runs the two generators under this interpreter and builds
 nothing.
 
-The build needs what this container lacks (see the 2 October review of wand125's
+The build needs what this container lacks (see the 2 October review of Hosono's
 checker): elan with ``leanprover/lean4:v4.33.1``, about 2.5 GB unpacked, and Mathlib
 ``0df444a3`` from its cache, about 6.6 GB of oleans, which ``import Mathlib`` maps whole.
 On a host with them, from ``DIR/s12/lean``::
