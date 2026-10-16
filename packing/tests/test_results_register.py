@@ -180,6 +180,7 @@ FORMAL_ENTRY: dict[str, object] = {
     **MACHINE_ENTRY,
     "method": "proof-assistant-checked",
     "origin": "replayed-here",
+    "performed_by": "repository",
     "axioms_receipt": "axioms.log",
 }
 
@@ -1919,15 +1920,21 @@ def test_full_part_citations_cannot_promote_the_whole_result(
                     "evidence"
                 ]
                 if entry["id"] in cited
+                and entry["id"] != "E-n017-fitzharding-lean-source-build"
             ],
             record=record,
         )
         == "V0"
     )
-    promoted = _changed_result(tmp_path, rid, evidence=cited, verification="V3")
+    expected = "V0" if rid == "T-153" else "V3"
+    promoted_rung = "V3" if rid == "T-153" else "V4"
+    promoted = _changed_result(tmp_path, rid, evidence=cited, verification=promoted_rung)
     monkeypatch.setattr(check_results, "RESULTS", promoted)
     assert check_results.main() == 1
-    assert f"{rid}: declares V3 but the cited atoms support only V0" in capsys.readouterr().out
+    assert (
+        f"{rid}: declares {promoted_rung} but the cited atoms support only {expected}"
+        in capsys.readouterr().out
+    )
 
 
 @pytest.mark.parametrize(

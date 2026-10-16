@@ -1254,6 +1254,7 @@ case or experiment separately.
 | [Advanced Tutorial: Square Packing, Search, and Proof](TUTORIAL-ADVANCED.md) | first-principles tutorial | supporting | maintained | — |
 | [Feature: Basic and Advanced Square-Packing Tutorials](docs/project/specs/active/plan-2026-10-14-basic-and-advanced-tutorials.md) | implementation plan | current | transient | — |
 | [Feature: Predictable CI Feedback and Measured Checkpoints](docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md) | implementation plan | current | transient | — |
+| [Plan and Audit: Verification of Reported Formal Proofs](docs/project/specs/active/plan-2026-10-15-formal-proof-verification-rubric.md) | implementation plan | current | transient | — |
 | [Editorial Review: The Basic and Advanced Square-Packing Tutorials](docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md) | dated review record | record | retained | — |
 | [Packing Atlas](packing/atlas/README.md) | component scope and use | supporting | maintained | — |
 | [Enumerated Contact-Scaffold Atlas](packing/atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |

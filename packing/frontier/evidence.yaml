@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-14'
+last_reviewed: '2026-10-15'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -12091,6 +12091,7 @@ evidence:
       SquarePacking.s13_eq_4, which must print [propext, Classical.choice, Quot.sound].
       About 1 h 45 min and up to 9.5 GB here with LEAN_NUM_THREADS=1.
     replay_status: passed
+    axioms_receipt: packing/resources/web/evand-square-packing-2026-09-28/receipts/lean/axioms_s13.log
     verifiers: [V-evand-lean]
     proof:
       source: packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/lean/LADDER.md
@@ -31954,6 +31955,80 @@ evidence:
       endpoint programs; SymPy parses the polynomials and computes the resultant. It decides
       the statement's definition of L and its identity with the record, not the lower half.
     source_reviewed: '2026-10-12'
+
+  - id: E-n017-fitzharding-lean-source-build
+    claim: exact-value
+    scope: {n_values: [17]}
+    assurance: verified
+    method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Fitzharding n17 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+    build_receipt: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/clean-build-receipt.json
+    axioms_receipt: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/Square17Optimality.log.gz
+    replay: >-
+      Producer execution recorded in the retained v1.0.0 clean-build receipt, at Lean
+      4.34.1 and Mathlib d13f23b7: obtain the three source archives listed by
+      manifest.json from the public v1.0.0 release, lake exe cache get, python3
+      scripts/unpack.py, then python3 scripts/reproduce.py build. The script checks
+      archive/member bindings, compiles the native checker libraries and builds the
+      4,951-module theorem closure; its terminal acceptance is
+      REPRODUCTION_ACCEPTED Sq17Lean.Square17Optimality. The producer's retained
+      receipt records CLEAN_SOURCE_BUILD_ACCEPTED and binds the final axiom log.
+      Nothing here executed this command or independently authenticated the source run.
+    replay_status: passed
+    verifiers: [V-fitzharding-n17-lean]
+    independence:
+      coverage:
+        extent: full
+        unit: the source's 4,951-module import closure of Sq17.square17_optimality
+      note: Full coverage is the inspected producer receipt's scope; no confirming run here.
+    proof:
+      source: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+      theorem: >-
+        Sq17.square17_optimality (L : ℝ) : Sq17.HalfPlaneAssembly.PlainPacking L ↔
+        Sq17.EndpointGeometry.side ≤ L.
+      scope: >-
+        Seventeen independently translated and rotated closed unit squares in [0,L]^2
+        with disjoint interiors fit exactly when side <= L; attainment is included.
+        No uniqueness of the optimal configuration is asserted.
+      pinpoints: >-
+        Square17Optimality.lean:16-19; PackingStatement.lean:7-35;
+        EndpointGeometry.lean:11-17; EndpointRoot.lean:10-17; the retained source's
+        verification/clean-build-receipt.json and verification/Square17Optimality.log.gz;
+        the packet's receipts/source-consistency.json and receipts/endpoint-comparison.json.
+      assumptions:
+        - Lean 4.34.1's kernel, Mathlib d13f23b7, the compiler, native runtime, C toolchain and compiled checker libraries are sound. The axiom receipt lists propext, Classical.choice, Quot.sound and 13,343 native_decide facts, with no sorryAx; this is not kernel-only computation.
+        - The source's complete clean-build receipt truthfully records its execution; review of the retained receipt and final axiom log is not an independent observation or reproduction of that execution.
+        - The reviewed definitions elaborate as stated in the producer's full environment; this project has not elaborated the theorem or its statement closure.
+      audit_record: docs/project/specs/active/plan-2026-10-15-formal-proof-verification-rubric.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-15'
+      reviewed_by: Codex, strong tier, xhigh reasoning, formal-proof rubric audit
+      note: >-
+        Inspected the retained source build receipt, final axiom log and source-consistency
+        receipt against the theorem and the two 13 October mathematical reviews.
+        The source records all 4,951 closure modules rebuilt without project prebuilts,
+        no unexpected axioms and the bound final log. Its proof and complete source
+        archives are publicly recoverable at the pinned release. Admitted as source
+        verification only; no Lean build or independent formal confirmation performed here.
+    limitations: >-
+      Source certification, admitted on 15 October 2026 under epistemics.md's distinction
+      between V and C. The original report remains E-n017-fitzharding-lean-report.
+      The source receipt lacks per-module logs, timing and machine specifications, and
+      the record has not downloaded two of the three source archives. Those provenance
+      limits remain; the inspected final receipt and log support V3, not a claim of
+      independent execution. The two accepting AI reviews supply no human oversight or
+      expert attestation. The ten native facts checked independently are a sample only.
+      The source relies on native compilation for finite checks; its geometrical
+      soundness proofs, mathematical scope and source execution remain subject to that
+      stated trust boundary and the cited reviews' qualifications. This entry changes
+      neither the case's verified bounds nor its confirmation level.
+    source_reviewed: '2026-10-15'
 
   - id: E-n017-fitzharding-lean-report
     claim: exact-value

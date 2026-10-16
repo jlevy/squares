@@ -948,7 +948,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-151.html | result/t-151.html | result | overview | 2026-10-12 | 2026-10-12 | live |
 | result/t-152.html | result/t-152.html | result | overview | 2026-10-12 | 2026-10-12 | live |
 | result/t-153.html | result/t-153.html | result | overview | 2026-10-12 | 2026-10-12 | live |
-| result/t-154.html | result/t-154.html | result | overview | 2026-10-13 | 2026-10-14 | live |
+| result/t-154.html | result/t-154.html | result | overview | 2026-10-13 | 2026-10-15 | live |
 | result/t-155.html | result/t-155.html | result | overview | 2026-10-12 | 2026-10-12 | live |
 | result/t-156.html | result/t-156.html | result | overview | 2026-10-13 | 2026-10-13 | live |
 | result/t-157.html | result/t-157.html | result | overview | 2026-10-12 | 2026-10-12 | live |

@@ -33,6 +33,7 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from sqpack.assurance import claim_support_level, confirming_execution, sampled
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -748,20 +749,6 @@ def _mapping(value: Any) -> Mapping[str, Any]:
     return value if isinstance(value, Mapping) else {}
 
 
-def sampled(entry: Mapping[str, Any]) -> bool:
-    """Whether an evidence entry's run is a sample: it decides the instances it ran and
-    nothing about the others, so it derives no rung. Invalid coverage is excluded too,
-    leaving shape diagnostics to the schema (epistemics.md, The Independence Ladder)."""
-    raw = entry.get("independence")
-    if "independence" in entry and not isinstance(raw, Mapping):
-        return True
-    record = _mapping(raw)
-    coverage = record.get("coverage")
-    if "coverage" in record and not isinstance(coverage, Mapping):
-        return True
-    return _mapping(coverage).get("extent") == SAMPLE
-
-
 def ladder_level(entry: Mapping[str, Any], verifiers: Mapping[str, Verifier]) -> str | None:
     """An evidence run's relation, using only its deciding programs' authorship."""
     relation = entry.get("relationship_to_generator")
@@ -1060,14 +1047,17 @@ def confirming_runs(entries: Iterable[Mapping[str, Any]]) -> list[Mapping[str, A
     """The entries that confirm by running code: a confirming origin and a passing replay,
     with a relation to the producer's code recorded, and not a sample, which confirms
     nothing whole."""
+    entries = list(entries)
+    evidence_by_id = {entry["id"]: entry for entry in entries if "id" in entry}
     return [
         entry
         for entry in entries
-        if entry.get("origin") in CONFIRMING_ORIGINS
+        if confirming_execution(entry)
         and entry.get("replay")
         and entry.get("replay_status") == "passed"
         and entry.get("relationship_to_generator") in RANK
         and not sampled(entry)
+        and claim_support_level(entry, evidence_by_id, lambda _: 1, confirming=True)
     ]
 
 
@@ -1173,6 +1163,10 @@ THIRD_PARTY_REPORT = "reported by a third party, not replayed here"
 
 def run_label(entry: Mapping[str, Any]) -> str:
     """Who ran an entry's verification, in a few words."""
+    if entry.get("performed_by") == "source-author":
+        if (entry.get("method") or entry.get("reported_method")) in _PROOFS:
+            return "a published proof"
+        return f"the source{APOSTROPHE}s own run"
     labels = {
         "replayed-here": "replayed here",
         "audited-here": "audited here",

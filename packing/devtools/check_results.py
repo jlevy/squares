@@ -64,7 +64,13 @@ from devtools.result_status import (
 )
 from devtools.rung_prose import REGISTER_FIELDS, Standing, label_problems
 from devtools.verifier_registry import RANK, confirming_runs, sampled, strongest
-from sqpack.assurance import EXTERNAL_ORIGINS, PROOF_METHODS
+from sqpack.assurance import (
+    EXTERNAL_ORIGINS,
+    PROOF_METHODS,
+    claim_support_level,
+    confirming_execution,
+    external_formal_build_problems,
+)
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -196,7 +202,7 @@ def _rank(rung: str) -> int:
 
 
 def _machine_proof_shaped(entry: dict) -> bool:
-    """A certificate that replays: exact, interval or kernel-checked, with a replay
+    """A certificate that replays: exact, interval or proof-assistant checked, with a replay
     command and a passing status. Rung 3's machine evidence on either axis. A run whose
     independence record states a sample is not: it decides the instances it ran and
     nothing about the others (epistemics.md, The Independence Ladder)."""
@@ -206,11 +212,16 @@ def _machine_proof_shaped(entry: dict) -> bool:
         and bool(entry.get("replay"))
         and entry.get("replay_status") == "passed"
         and not sampled(entry)
+        and not external_formal_build_problems(entry)
     )
 
 
 def _formal(entry: dict) -> bool:
-    """Rung 5's machine evidence: a kernel check with its axiom receipt retained."""
+    """Rung 5's machine evidence: a formal build with its axiom receipt retained.
+
+    The axiom receipt can disclose native compilation in the trust boundary; a formal
+    build is not necessarily kernel-only computation.
+    """
     return (
         entry.get("method") == FORMAL_METHOD
         and _machine_proof_shaped(entry)
@@ -285,15 +296,45 @@ def derive_confirmation(
     """The confirmation rung the confirming-origin evidence and the confirming-side
     reviews support (epistemics.md, Confirmation)."""
     entries = [entry for entry in entries if not sampled(entry)]
-    if record is not None:
-        return min(
-            (
-                _derive_confirmation(pool, reviews, open_review=open_review)
-                for pool in _claim_pools(record, entries)
-            ),
-            key=_rank,
+    return _supported_rung(
+        entries, reviews, confirming=True, record=record, open_review=open_review
+    )
+
+
+def _supported_rung(
+    entries: list[dict],
+    reviews: list[dict] | None,
+    *,
+    confirming: bool,
+    record: Mapping[str, Any] | None,
+    open_review: bool = False,
+) -> str:
+    """Take each claim's strongest complete chain, then the whole claim's weakest part."""
+    evidence_by_id = {entry["id"]: entry for entry in entries if "id" in entry}
+
+    def atom_level(entry: Mapping[str, object]) -> int:
+        atom = dict(entry)
+        return _rank(
+            _derive_confirmation([atom], reviews, open_review=open_review)
+            if confirming
+            else _derive_verification([atom], reviews)
         )
-    return _derive_confirmation(entries, reviews, open_review=open_review)
+
+    def supported_level(entry: dict) -> int:
+        level = claim_support_level(entry, evidence_by_id, atom_level, confirming=confirming)
+        # Reading a conditional claim is still a read, even when its execution chain
+        # cannot establish the unconditional conclusion.
+        if (
+            confirming
+            and entry.get("origin") in EXTERNAL_ORIGINS
+            and _qualifying_read(entry.get("external_review") or {})
+        ):
+            level = max(level, 1)
+        return level
+
+    pools = _claim_pools(record, entries) if record is not None else [entries]
+    level = min(max((supported_level(entry) for entry in pool), default=0) for pool in pools)
+    return f"{'C' if confirming else 'V'}{level}"
 
 
 def _derive_confirmation(
@@ -301,7 +342,7 @@ def _derive_confirmation(
 ) -> str:
     """The rung supported by one complete claim pool."""
     reviews = list(reviews or [])
-    ours = [entry for entry in entries if entry.get("origin") in CONFIRMING_ORIGINS]
+    ours = [entry for entry in entries if confirming_execution(entry)]
     rebuilt = [
         entry for entry in ours if _formal(entry) and entry.get("origin") == "replayed-here"
     ]
@@ -337,19 +378,26 @@ def _derive_confirmation(
 def distinct_methods(entries: list[dict]) -> int:
     """The attribute shown beside the rung: how many distinct machine methods the
     confirming entries decide the claim by. Never a rung (epistemics.md, Confirmation)."""
+    evidence_by_id = {entry["id"]: entry for entry in entries if "id" in entry}
     return len(
         {
             entry.get("method")
             for entry in entries
-            if entry.get("origin") in CONFIRMING_ORIGINS and _machine_proof_shaped(entry)
+            if confirming_execution(entry)
+            and _machine_proof_shaped(entry)
+            and claim_support_level(entry, evidence_by_id, lambda _: 1, confirming=True)
         }
     )
 
 
 def third_party_replayed(entries: list[dict]) -> bool:
     """The attribute shown beside the rung: a third party's own replay is retained."""
+    evidence_by_id = {entry["id"]: entry for entry in entries if "id" in entry}
     return any(
-        entry.get("origin") == "independently-external" and _machine_proof_shaped(entry)
+        entry.get("origin") == "independently-external"
+        and confirming_execution(entry)
+        and _machine_proof_shaped(entry)
+        and claim_support_level(entry, evidence_by_id, lambda _: 1, confirming=True)
         for entry in entries
     )
 
@@ -1487,12 +1535,7 @@ def derive_verification(
     """The verification rung the cited evidence, of any origin, and the retained
     reviews support (epistemics.md, Verification)."""
     entries = [entry for entry in entries if not sampled(entry)]
-    if record is not None:
-        return min(
-            (_derive_verification(pool, reviews) for pool in _claim_pools(record, entries)),
-            key=_rank,
-        )
-    return _derive_verification(entries, reviews)
+    return _supported_rung(entries, reviews, confirming=False, record=record)
 
 
 def _derive_verification(entries: list[dict], reviews: list[dict] | None = None) -> str:
