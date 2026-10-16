@@ -6,6 +6,75 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: greff-ninety-five-optimality-report
+    date: '2026-10-16'
+    title: Greff Reports an Optimum for 95 Squares
+    significance:
+      score: 3
+      rationale: >-
+        T-191 is an S3 report of an exact value at a new count, using an existing
+        covering method. Its significance does not establish verification.
+    topics: [optimality]
+    categories: [records]
+    pull_requests: [627]
+    stack_id: 632
+    result_ids: [T-191]
+    summary: |-
+      Greff reports that 95 unit squares require a square of side 10, matching the grid
+      construction: $s(95) = 10$. T-191 remains a reported result at V0/C0, awaiting
+      independent review and adoption.
+    details: |-
+      - Greff constructed a weighted cover of points and line segments using Daniel’s
+        method and checkers. He re-optimised its central cross and reused corners from
+        wand125’s 59-square cover and the band-insertion construction.
+      - The project reproduced the source’s two checker runs and retained their
+        receipts. That reproduction has not yet been admitted as evidence with an
+        independent review; the case’s lower bound remains $1993/200 = 9.965$.
+      - The source’s Lean wrapper assumes the covering statement. It has not been built
+        here, and the reported result does not yet establish a completely checked Lean
+        proof.
+    references:
+      - label: Greff’s certificate and source checks
+        target: https://github.com/bengreff/s95-certificate/tree/dd7297d06adc664268c65005369b895e4ded7547
+      - label: Retained report and verification limits
+        target: packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
+      - label: Greff’s registration request
+        target: https://github.com/jlevy/squares/issues/610
+  - id: hosono-twenty-eight-continuous-bound-report
+    date: '2026-10-16'
+    title: Hosono Reports a Stronger Lower Bound for 28 Squares
+    significance:
+      score: 3
+      rationale: >-
+        T-192 is an S3 report of a stronger bound at one count, extending the existing
+        continuous-angle covering method to a new density. Complete confirmation is
+        pending.
+    topics: [lower-bound]
+    categories: [records]
+    pull_requests: [627]
+    stack_id: 632
+    result_ids: [T-192]
+    summary: |-
+      Hosono (wand125) reports $s(28) > 1149/200 = 5.745$ using a cover over every square
+      position and angle. T-192 remains at V0/C0; complete local replay and review are
+      pending.
+    details: |-
+      - The certificate uses a new density of 884 weighted rectangles. It applies the
+        continuous-angle method from Guzhou0806’s 40-square result T-145 at a new count,
+        with credit to Guzhou0806, Tokoharu and Levy.
+      - The reported bound is $1/400$ above Hosono’s earlier report T-142 and $1/100$
+        above the standing lower bound $1147/200 = 5.735$ in T-107. The standing bound
+        remains unchanged.
+      - Hosono reports complete checks by two source programs using the same covering
+        method. The project checked exact premises and a diagnostic sample; those
+        checks do not replace a complete replay or establish an independent method.
+    references:
+      - label: Hosono’s certificate and source checks
+        target: https://github.com/wand125/square-packing/tree/8530bafb03d48444f30f241fbc1f29f01cd7c96c/problems/square-lower-bounds/certificates/continuous_n28_L5745
+      - label: Retained report and verification limits
+        target: packing/resources/web/wand125-continuous-n28-2026-10-15/README.md
+      - label: Registered lower-bound reports
+        target: packing/frontier/RESULTS.md
   - id: october-fourteen-reviewed-packing-adoptions
     date: '2026-10-15'
     title: "Smaller Verified Packings for 18 Square Counts"
@@ -1533,6 +1602,30 @@ entries:
         label: Lower-bounds paper
         target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
 deliveries:
+- number: 627
+  title: 'research: the 15 October intake records, T-188 to T-192 in report order (supersedes #616)'
+  merged_at: '2026-10-16T01:17:35Z'
+  base_ref: main
+  merge_commit: bbc12b6173983af4e20c889db28fb9e0ca43a28b
+  stack_id: 632
+- number: 628
+  title: 'research: intake 2026-10-15 lane D, residual watch reads, #622 triage, resolved blockers, label audit'
+  merged_at: '2026-10-16T01:17:36Z'
+  base_ref: claude/ecstatic-edison-8en33t-records-1016
+  merge_commit: bbc12b6173983af4e20c889db28fb9e0ca43a28b
+  delivery_to_main:
+    commit: bbc12b6173983af4e20c889db28fb9e0ca43a28b
+    evidence: https://github.com/jlevy/squares/commit/bbc12b6173983af4e20c889db28fb9e0ca43a28b
+  stack_id: 632
+- number: 631
+  title: 'research: triage #624, mstrmg''s s(366); not recorded by report order'
+  merged_at: '2026-10-16T01:17:37Z'
+  base_ref: claude/ecstatic-edison-8en33t
+  merge_commit: bbc12b6173983af4e20c889db28fb9e0ca43a28b
+  delivery_to_main:
+    commit: bbc12b6173983af4e20c889db28fb9e0ca43a28b
+    evidence: https://github.com/jlevy/squares/commit/bbc12b6173983af4e20c889db28fb9e0ca43a28b
+  stack_id: 632
 - number: 618
   title: 'fix(ci): keep push and release validation in their quick lanes'
   merged_at: '2026-10-15T11:50:04Z'
@@ -2110,6 +2203,9 @@ deliveries:
   base_ref: main
   merge_commit: 31eaf6333c5d5b6b3d111241768cdd3d30982588
 stacks:
+- id: 632
+  pull_requests: [627, 628, 631]
+  evidence: https://api.github.com/repos/jlevy/squares/stacks/632
 - id: 498
   pull_requests:
   - 497
@@ -2133,6 +2229,9 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 627
+  - 628
+  - 631
   - 614
   - 598
   - 592
@@ -2228,6 +2327,14 @@ coverage:
   - 615
   - 619
   omissions:
+  - pull_request: 628
+    reason: >-
+      S1 intake bookkeeping: watched-source reads, request triage, labels and resolved
+      blockers. No new result was registered by this layer.
+  - pull_request: 631
+    reason: >-
+      S1 triage of Gray’s (mstrmg) 366-square report. Report order leaves it
+      unregistered; this layer changes no selected bound or verification rung.
   - pull_request: 618
     reason: 'S2 routine engineering: internal quick-push and release-test selection changes,
       with no new public result. A substantive CI timing improvement is not yet established.'

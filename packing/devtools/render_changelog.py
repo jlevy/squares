@@ -572,8 +572,6 @@ def validate(document: Document, *, schema: Document | None = None) -> None:
             )
         merge_dates: list[str] = []
         for number in entry["pull_requests"]:
-            if number in represented:
-                raise ValueError(f"PR #{number}: duplicate membership across entries")
             represented.add(number)
             if number not in deliveries:
                 raise ValueError(f"PR #{number}: no retained merged main delivery")
@@ -632,8 +630,8 @@ def validate(document: Document, *, schema: Document | None = None) -> None:
         omitted.add(number)
     if coverage != set(deliveries) or coverage != represented | omitted:
         raise ValueError(
-            "coverage: every retained main delivery must occur exactly once "
-            "in entries or omissions"
+            "coverage: every retained main delivery must appear in one or more entries "
+            "or exactly one omission"
         )
 
 

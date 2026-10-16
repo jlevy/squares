@@ -166,8 +166,12 @@ The current `validate_schemas` corpus requires `enforced`, so production integra
 must use the settled contract rather than silently weakening that corpus.
 
 Validate types and required fields structurally.
-Check calendar dates, unique entry IDs, PR membership across entries, main-branch
+Check calendar dates, unique entry IDs, unique PR numbers within each entry, main-branch
 delivery and stack membership at the appropriate semantic boundary.
+A retained delivery may support several distinct articles; its coverage audit lists all
+of them. Every delivery must be represented by at least one article or exactly one
+omission, never both.
+Existing article dates and PR memberships remain frozen.
 A JSON Schema date format is only an annotation.
 Never fetch GitHub during ordinary rendering: merge metadata and editorial decisions are
 acquired during authoring and backfill, then committed as local inputs.
@@ -440,7 +444,9 @@ bottom S/V/C strip while retaining the Results page’s complete ladder document
 Use a small set of meaningful behavioral and negative checks:
 
 - Schema and semantics accept the examples and refuse missing prose, malformed dates,
-  duplicate IDs, duplicate PR membership, unmerged layers and invalid stack grouping.
+  duplicate IDs, duplicate PR numbers within an article, unmerged layers and invalid
+  stack grouping. Distinct articles may share one retained delivery without losing any
+  article from the coverage audit.
 - One fixture covers a standalone admission, a multi-piece stack delivery and a later
   delivery from the same stack, with frozen old membership and dates.
 - GitHub and News show the same entries, PR links and order.

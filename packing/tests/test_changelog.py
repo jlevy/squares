@@ -222,6 +222,70 @@ def test_shared_renderer_orders_links_math_and_anchors() -> None:
     assert "Regularization &amp; tooling" in github
 
 
+def test_one_delivery_can_support_distinct_articles_and_complete_audit() -> None:
+    data = document()
+    previous = copy.deepcopy(data)
+    second = copy.deepcopy(data["entries"][0])
+    second.update(id="second-admission", title="Another result", summary="A distinct result.")
+    data["entries"].append(second)
+    render_changelog.validate(data)
+    render_changelog.validate_frozen(data, previous)
+
+    news = render_changelog.render_news(data)
+    for identifier in ("admission", "second-admission"):
+        assert news.count(f'data-news-entry="{identifier}"') == 1
+    audit = import_changelog.coverage_audit(data)
+    assert audit.count("| [#553](") == 1
+    assert "| admission, second-admission |" in audit
+
+    delivery = data["deliveries"][0]
+    row = {
+        "number": delivery["number"],
+        "title": delivery["title"],
+        "state": "MERGED",
+        "mergedAt": delivery["merged_at"],
+        "baseRefName": delivery["base_ref"],
+        "mergeCommit": {"oid": delivery["merge_commit"]},
+    }
+    candidate = import_changelog.draft([row], data)
+    for field in ("entries", "deliveries", "coverage"):
+        assert candidate[field] == data[field]
+    remaining = copy.deepcopy(data)
+    remaining["entries"].pop()
+    render_changelog.validate(remaining)
+    with pytest.raises(ValueError, match="frozen entry second-admission"):
+        render_changelog.validate_frozen(remaining, data)
+
+
+def test_shared_delivery_keeps_identity_date_stack_and_coverage_boundaries() -> None:
+    mutations = [
+        (
+            lambda d: d["deliveries"].append(copy.deepcopy(d["deliveries"][0])),
+            "duplicate retained",
+        ),
+        (lambda d: d["entries"][-1].update(id="admission"), "duplicate entry"),
+        (lambda d: d["entries"][-1].update(pull_requests=[553, 553]), "non-unique"),
+        (lambda d: d["entries"][-1].update(pull_requests=[999]), "no retained"),
+        (lambda d: d["entries"][-1].update(date="2026-10-11"), "latest merge date"),
+        (lambda d: d["entries"][-1].update(stack_id=498), "stack disagrees"),
+        (lambda d: d["coverage"]["pull_requests"].pop(), "coverage"),
+        (
+            lambda d: d["coverage"]["omissions"].append(
+                {"pull_request": 553, "reason": "Already announced"}
+            ),
+            "coverage",
+        ),
+    ]
+    for mutate, message in mutations:
+        data = document()
+        second = copy.deepcopy(data["entries"][0])
+        second["id"] = "second-admission"
+        data["entries"].append(second)
+        mutate(data)
+        with pytest.raises(ValueError, match=message):
+            render_changelog.validate(data)
+
+
 def test_semantic_negative_boundaries() -> None:
     mutations = [
         (lambda d: d["entries"][0].update(date="2026-02-30"), "calendar date"),

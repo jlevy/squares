@@ -9,6 +9,54 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-10-16"></a>
+
+### 2026-10-16
+
+<a id="changelog-entry-greff-ninety-five-optimality-report"></a>
+
+#### Greff Reports an Optimum for 95 Squares
+
+Significance S3: T-191 is an S3 report of an exact value at a new count, using an existing covering method. Its significance does not establish verification.
+
+Greff reports that 95 unit squares require a square of side 10, matching the grid
+construction: $s(95) = 10$. T-191 remains a reported result at V0/C0, awaiting
+independent review and adoption.
+
+- Greff constructed a weighted cover of points and line segments using Daniel’s
+  method and checkers. He re-optimised its central cross and reused corners from
+  wand125’s 59-square cover and the band-insertion construction.
+- The project reproduced the source’s two checker runs and retained their
+  receipts. That reproduction has not yet been admitted as evidence with an
+  independent review; the case’s lower bound remains $1993/200 = 9.965$.
+- The source’s Lean wrapper assumes the covering statement. It has not been built
+  here, and the reported result does not yet establish a completely checked Lean
+  proof.
+
+PRs and supporting records: [\#627](https://github.com/jlevy/squares/pull/627) · [Greff’s certificate and source checks](https://github.com/bengreff/s95-certificate/tree/dd7297d06adc664268c65005369b895e4ded7547) · [Retained report and verification limits](packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md) · [Greff’s registration request](https://github.com/jlevy/squares/issues/610).
+
+<a id="changelog-entry-hosono-twenty-eight-continuous-bound-report"></a>
+
+#### Hosono Reports a Stronger Lower Bound for 28 Squares
+
+Significance S3: T-192 is an S3 report of a stronger bound at one count, extending the existing continuous-angle covering method to a new density. Complete confirmation is pending.
+
+Hosono (wand125) reports $s(28) > 1149/200 = 5.745$ using a cover over every square
+position and angle. T-192 remains at V0/C0; complete local replay and review are
+pending.
+
+- The certificate uses a new density of 884 weighted rectangles. It applies the
+  continuous-angle method from Guzhou0806’s 40-square result T-145 at a new count,
+  with credit to Guzhou0806, Tokoharu and Levy.
+- The reported bound is $1/400$ above Hosono’s earlier report T-142 and $1/100$
+  above the standing lower bound $1147/200 = 5.735$ in T-107. The standing bound
+  remains unchanged.
+- Hosono reports complete checks by two source programs using the same covering
+  method. The project checked exact premises and a diagnostic sample; those
+  checks do not replace a complete replay or establish an independent method.
+
+PRs and supporting records: [\#627](https://github.com/jlevy/squares/pull/627) · [Hosono’s certificate and source checks](https://github.com/wand125/square-packing/tree/8530bafb03d48444f30f241fbc1f29f01cd7c96c/problems/square-lower-bounds/certificates/continuous_n28_L5745) · [Retained report and verification limits](packing/resources/web/wand125-continuous-n28-2026-10-15/README.md) · [Registered lower-bound reports](packing/frontier/RESULTS.md).
+
 <a id="changelog-date-2026-10-15"></a>
 
 ### 2026-10-15
