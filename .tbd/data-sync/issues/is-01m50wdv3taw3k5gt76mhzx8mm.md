@@ -3,9 +3,9 @@ type: is
 id: is-01m50wdv3taw3k5gt76mhzx8mm
 title: "Record-keeping: make the record state explicitly per count whether its displayed drawing is regularized (field + gate), fix the process if it cannot"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 10
+version: 11
 delegate: ecstatic-edison-reg-record
 labels:
   - regularization
@@ -22,8 +22,12 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.138Z
-updated_at: 2026-10-16T00:16:07.440Z
+updated_at: 2026-10-16T04:17:15.040Z
 started_at: 2026-10-15T23:18:47.484Z
+closed_at: 2026-10-16T04:17:15.040Z
+close_reason: "#636 merged 2026-10-16 (e2e018f32): per-count regularization state, lapse record, shrink-only gate"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
