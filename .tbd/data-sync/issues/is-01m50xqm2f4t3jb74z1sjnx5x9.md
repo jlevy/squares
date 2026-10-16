@@ -5,8 +5,8 @@ title: "Regularize 3a: 176 first, then 105, 129, 146, 156, 204, 271, 272, 303 (r
 kind: task
 status: in_progress
 priority: 1
-version: 4
-delegate: ecstatic-edison-reg-run-3a
+version: 6
+delegate: user-eb-reg-3b3c
 labels:
   - regularization
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:07.183Z
-updated_at: 2026-10-16T05:22:38.016Z
+updated_at: 2026-10-16T05:53:51.431Z
 started_at: 2026-10-16T02:53:15.554Z
 ---
 
@@ -47,3 +47,5 @@ Next commands, from packing/ after `uv run --frozen --all-extras --group dev`:
 then render_regularized_atlas --update, default_drawings --update, regularized_drawings, render_results --update; settle 204/272/303 in default_drawings.SETTLED (runs: evand-regularize-3a-1016 and the three grid-slack-3a-* runs) and take the nine off PENDING_ALLOWED; atlas README paragraph; data commit, release_pin --update, re-pin commit; checks; draft PR; site cut after v0.7.14 last.
 
 2026-10-16 ~05:40Z, coordinator user-eb (epic think-hg5s): the owner asked tonight that every remaining regularization be done, 176 first. This lane's 05:05Z note shows generators and selection done and admission next, so it keeps the bead. user-eb will take it over (and re-run on its own host) only if no branch claude/ecstatic-edison-8en33t-regularize-3a is pushed and no note is added here by about 07:30Z. Lanes of user-eb regularize think-kpm3/think-3zi3 (branch claude/intake-2026-10-16-regularize-3b, from main) and think-0ut1 (stacked on it); expect generated-file conflicts with this branch at merge.
+
+2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.

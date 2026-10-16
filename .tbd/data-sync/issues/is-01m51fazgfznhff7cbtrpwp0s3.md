@@ -5,14 +5,14 @@ title: "Validate: Fitzharding s(19) Lean proof (#640), full from-source build, a
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m51e5sp1t03c20hqp7d3wajm
 created_at: 2026-10-16T04:25:47.279Z
-updated_at: 2026-10-16T04:26:25.700Z
+updated_at: 2026-10-16T05:53:49.756Z
 ---
 Validation part of think-a4x3 (#640, Oscar Fitzharding's Lean proof that s(19) = 3 + 4 sqrt 2 / 3). Record-changing at 19 (a new optimality entry; rungs).
 
@@ -27,3 +27,7 @@ Validation part of think-a4x3 (#640, Oscar Fitzharding's Lean proof that s(19) =
 - Machine note: not this host for the full run. Subsets (a) to (c) fit here outside a validation gate, disk permitting.
 
 blocked_on: none
+
+## Notes
+
+2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.

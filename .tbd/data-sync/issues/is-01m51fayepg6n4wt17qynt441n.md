@@ -5,14 +5,15 @@ title: "Validate: evand #639 exact sides, verify_exact.py replay of 23 data file
 kind: task
 status: open
 priority: 2
-version: 2
+version: 4
+delegate: user-eb-intake-1016
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m51e5rvjrd61yaww8djj1nzz
 created_at: 2026-10-16T04:25:46.198Z
-updated_at: 2026-10-16T04:26:25.137Z
+updated_at: 2026-10-16T05:53:59.676Z
 ---
 Validation part of think-phyb (#639, Evan Daniel's exact algebraic sides at 23 counts). Record-changing at the 16 counts the report-order rule records (88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302), and evidence for RP-3 at 70, 153 and 207.
 
@@ -27,3 +28,7 @@ Validation part of think-phyb (#639, Evan Daniel's exact algebraic sides at 23 c
 - Machine note: 4 CPUs shared with gates; about 10 to 20 wall-minutes at 2 to 4 processes; can share the machine with an edit-tier gate, not with a full gate.
 
 blocked_on: none
+
+## Notes
+
+2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.

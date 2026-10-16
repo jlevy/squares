@@ -5,8 +5,8 @@ title: "Import evand: exact algebraic sides for 22 current best-known packings (
 kind: task
 status: in_progress
 priority: 1
-version: 7
-delegate: ecstatic-edison-intake-1016
+version: 9
+delegate: user-eb-intake-1016
 labels:
   - result-import
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.050Z
-updated_at: 2026-10-16T05:09:58.724Z
+updated_at: 2026-10-16T05:53:54.038Z
 started_at: 2026-10-16T04:05:36.125Z
 ---
 Stage 1 triage of jlevy/squares#639 (evand, Evan Daniel, "Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval, exact configuration): registration request", opened 2026-10-16T03:37:13Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was run but exact sign evaluations of the source's polynomials at the record's rationals (seconds), and nothing of the source is retained yet.
@@ -70,3 +70,5 @@ blocked_on: none
 2026-10-16 ~05:05Z, ecstatic-edison-intake-1016, state for recovery: stage 1 triage is done and in this bead's description (claim map, pin and digests, price, disposition, draft acknowledgement). Pushed on origin claude/ecstatic-edison-8en33t-intake-1016 at bd1f40425 (no PR yet): 09463a2af adds #639's and #640's entries to packing/campaign/result-requests.yaml (triage: done, results queued with beads, no reply posted), moves #622's read_through to its author's AI answer, and adds two evand reads to intake-watch.yaml (44a105e, bead think-0ayk; 7d1407a, bead think-phyb); bd1f40425 adds the methods survey's no-change record in release.py (render at e2e018f3 byte-identical in 42 files). Validation at bd1f40425: check_requests exit 0 (#639 and #640 reply due), --github 0 differences, packing-validate --records exit 0 (52/110 steps, 134 s), check_release_impact OK, release_pin --check OK (no re-pin), pytest of the requests, sweep and release tests 145 passed; packing-validate --push was running. New beads: think-g59l (#639 replay, <= 0.6 CPU-h), think-nqnl (#640 full build, held), think-o40t (#640 review), think-ve84 (backlog). Next: the owner's think-xik9 (the X announcement as a source on #640, sq19 watched), then the draft PR (labels intake, S1).
 
 2026-10-16 ~05:25Z, ecstatic-edison-intake-1016: draft PR https://github.com/jlevy/squares/pull/642 (labels intake, S2) at 71f6a413e on claude/ecstatic-edison-8en33t-intake-1016. 71f6a413e adds the #640 stage 2 packet packing/resources/web/fitzharding-n19-lean-2026-10-16 (sq19 whole at 34fb2b7, release archives pinned by digest, the X announcement retained; acquire_source --check prints PACKET_MATCHES_ITS_CONTRACT), a resources README row and section for [Fitzharding n19 Lean 2026] (its bibliography.yaml entry waits for stage 3), and #640's entry records the announcement as a source and names think-xik9. At 71f6a413e the records tier exits 0, the survey render is byte-identical again, and the sweep on the branch watches sq19 (44 repositories, 18 heads pinned). packing-validate --push at bd1f40425 timed out in its reachable tests (285 files, 900 s) with one failure it did not name; a separate run of those files was in progress. Hosted CI was pending at opening.
+
+2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.
