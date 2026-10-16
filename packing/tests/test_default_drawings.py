@@ -954,7 +954,16 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
     views = {row["n"]: row for row in record["entries"]}
     document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
     every = {int(entry["n"]): entry for entry in document["entries"]}
-    allowed = defaults.PENDING_ALLOWED
+    allowed = dict(defaults.PENDING_ALLOWED)
+    if not allowed:
+        # The live list is empty once the stack's last allowed counts are decided, so a
+        # count the layer draws is allowed here, as an adoption's deferral would allow it.
+        drawn = next(
+            n
+            for n in sorted(views)
+            if n not in defaults.SETTLED and every[n].get("generator") == defaults.ALGORITHM
+        )
+        allowed = {drawn: "think-0000: re-housed by an adoption"}
     n = next(n for n in sorted(allowed) if n in views and n not in defaults.SETTLED)
     witness = rows[n]["witness"]
     house = _regular_house(views[n])
