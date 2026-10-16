@@ -699,7 +699,16 @@ and 318 unresolved, with 146 PDFs pending inspection and no stale occurrences.
 The current URL registry check passes with 1,061 rows and no failures.
 The direct release-impact check against `e2e018f32` passes with exact no-change scopes
 of 24 inputs for the explainer and 52 for the methods survey.
-Broad validation and a fresh built preview for this merge remain pending.
+The fresh preview at `http://127.0.0.1:8791/` was opened in the owner’s default browser.
+Twelve desktop/mobile and light/dark layout contexts and twelve direct-navigation checks
+pass, including navigation without JavaScript; the three homepage articles match their
+News counterparts. All 31 standard hosted checks pass on `77fe330dd`. Local broad
+validation passed all 68 prerequisites but timed out in its behavioral selection; its
+diagnostic retry recorded worker-startup and browser-load timing failures.
+The complete hosted checkpoint and local diagnostic dispositions are recorded in
+[PR #578](https://github.com/jlevy/squares/pull/578) and `think-5bao`; those live
+receipts carry the final status.
+The draft remains unmerged, and archive population remains open.
 
 ## WIP Handoff: 2026-10-10
 
