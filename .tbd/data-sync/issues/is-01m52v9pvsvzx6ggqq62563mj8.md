@@ -5,7 +5,7 @@ title: "Policy: the house is always the smallest validated packing, regularized 
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 delegate: user-eb-policy-houses
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T17:14:02.997Z
-updated_at: 2026-10-16T21:09:13.076Z
+updated_at: 2026-10-16T23:07:54.220Z
 started_at: 2026-10-16T17:17:09.781Z
 ---
 Owner, 2026-10-16 afternoon: 'We should always be adopting the smallest packing and then regularizing it. That should be the policy, obviously.' and 'This should be built into our policy. It shouldn't even be a question. If there's any ambiguity on that, we should fix that in our process docs for intake.' Write it into result-import.md stage 5, the regularization guide, the frontier README, and select_houses/adopt_houses (owner holds such as HELD T-174, RP-3 algebraic left-outs, undecided orderings, regularized views below U), then adopt every smaller validated packing it reaches and regularize each.
@@ -123,3 +123,5 @@ Validation (from packing/, uv run --frozen --all-extras --group dev): packing-va
 PLAN ADDENDUM (F1). The adoption PR runs every count it re-houses itself, and splits only by leaving counts staged. 14 of the 63 staged counts are already on main's PENDING_ALLOWED: 105, 129, 146, 153, 156, 175, 176, 204, 207, 232, 264, 271, 272, 303 (think-la7h, think-kpm3, think-3zi3). The adoption's runs decide them and its PR takes them off. On the stack, 232 and 302 are on #657's list and move to T-193. #657's pass is dated 16 Oct, so the check passes it, but its list names 8 of the 15 counts it re-houses. Seven (232, 237, 264, 271, 302, 303, 304) have their runs done and their selection and admission owed to think-r3cl; under the rule that finishing belongs in #657. 211 waits on the owner's row-7 review, an owner question. The stack's register is unchanged since the plan (#657 5d5eb2dec to 6d3ea4a3e touches only the regularization layer), so the numbers stand: main 63 counts, 12.6 CPU-h; stack 57, 11.4 CPU-h. Merge note: the stack lacks 68cdbc614, and whichever merges second resolves UNDEFERRED to RUNS_OWED in default_drawings.py and its test.
 
 think-sa5r stays open until the adoption PR that empties PENDING_ADOPTION merges (bead tree holds it). The worktree is removed so an address-pr lane can check the branch out.
+
+2026-10-16 ~23:00Z addressing pass on #660 (reviews A and B at 8e53e5c65), as user-eb-policy-houses: merged main 80b116ede (eef7e5741); code slice 9417d8a9c pushed (A1 staging beads think-3mry/think-ot5c with reasons, A3 cap text, A5/B1/B2 witness-keyed deferral check in default_drawings, A6 guard, A8-A10, B3-B7). Next: docs (A4, A7, A12-A14), A2 record changes, description, dispositions.

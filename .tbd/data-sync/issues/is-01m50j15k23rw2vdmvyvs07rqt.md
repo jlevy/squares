@@ -5,7 +5,7 @@ title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 a
 kind: task
 status: in_progress
 priority: 2
-version: 18
+version: 19
 delegate: user-eb-intake-622
 labels:
   - result-import
@@ -13,10 +13,11 @@ dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 child_order_hints:
   - is-01m53b204zznqg15rajytfq813
+  - is-01m53h0rqh401n0wc2kyky8m5b
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-16T22:49:46.244Z
+updated_at: 2026-10-16T23:33:38.673Z
 started_at: 2026-10-15T23:31:02.497Z
 ---
 Stage 1 triage of pull request jlevy/squares#622 (BuddenPing, PingYou Ltd, "data: submit a tighter exact N29 packing certificate", opened 2026-10-15T18:43:54Z, no comments or reviews when read at about 19:50Z). A result submitted as a pull request, treated as an intake report as #574 was (think-9v2k): never merged, approved, pushed to or commented on here. Lane D of the 2026-10-15 evening intake pass (think-wnsv, think-ykg6), read-only.
