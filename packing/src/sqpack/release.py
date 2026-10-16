@@ -1065,6 +1065,38 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
+            "site",
+        ),
+        paths=("packing/devtools/adopt_houses.py",),
+        outputs=(
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The intake's regularization step (think-g3q7) adds `regularization_owed` to "
+            "the house-adoption writer, which its command line prints after a write and a "
+            "dry run, and a docstring paragraph. The builders reach the module through "
+            "`generate_frontier_case` and `source_supersession`, which call `holds`, "
+            "`adopt_case` and `held_note`, never `main` or the new function; no case "
+            "record, coverage row, deferral or prose the writer produces changes, and its "
+            "new import of "
+            "`default_drawings` is one the site's builders already make. No render was "
+            "taken, and every component keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
         ),
         paths=(
             "packing/devtools/default_drawings.py",
