@@ -582,3 +582,14 @@ def test_t081_on_its_lean_scope_rests_on_the_premise_chain() -> None:
     cited = [discharged if row is lean else row for row in cited]
     assert derive_verification(cited, record["reviews"], record=record) == "V3"
     assert derive_confirmation(cited, record["reviews"], record=record) == "C3"
+
+
+def test_only_a_machine_execution_discharges_a_premise() -> None:
+    """A published or audited proof is read, not run: it discharges no premise even with
+    a passing status (epistemics.md, Reported Formal Proofs and Source Builds)."""
+    premise = exact_replay("E-premise", "derived-structure")
+    premise.update(method="proof-audited", origin="audited-here")
+    entry = requires(source_build(), premise["id"])
+    entries = [entry, premise]
+    assert conditional_problems({row["id"]: row for row in entries})
+    assert derive_verification(entries, record=ONE_CASE) == "V0"
