@@ -208,12 +208,32 @@ def test_a_run_that_takes_its_counts_off_the_allowlist_no_longer_defers_to_its_b
         assert {problem["bead"] for problem in dead} == {lane}
 
 
+def test_a_staged_house_adoption_keeps_its_bead_open() -> None:
+    """Each count `select_houses.PENDING_ADOPTION` stages names the bead that adopts it,
+    and the gate reads them: closing the bead while a count is staged is a dead deferral
+    (result-import.md, "The House Rule")."""
+    from devtools import select_houses  # noqa: PLC0415
+
+    named = check_bead_tree.adoption_deferrals()
+    assert named == select_houses.deferrals()
+    assert len(named) == len(select_houses.PENDING_ADOPTION)
+    lanes = sorted({alias for _where, alias in named})
+    assert lanes
+    beads = [_bead(f"is-01{alias[6:]}", "open", alias) for alias in lanes]
+    aliases = {alias[6:]: f"01{alias[6:]}" for alias in lanes}
+    assert deferral_problems(beads, aliases, named) == []
+    closed = [_bead(f"is-01{alias[6:]}", "closed", alias) for alias in lanes]
+    dead = deferral_problems(closed, aliases, named)
+    assert {problem["bead"] for problem in dead} == set(lanes)
+
+
 def _dead_deferral_store(monkeypatch: pytest.MonkeyPatch) -> None:
     """A store whose one deferral names a closed bead, and no agendas."""
     beads = [_bead("is-01aaaa", "closed", "an intake closed under its deferral")]
     monkeypatch.setattr(check_bead_tree, "load", lambda: (beads, "fixture", {"aaaa": "01aaaa"}))
     monkeypatch.setattr(check_bead_tree, "deferrals", lambda: [("pending n=69", "think-aaaa")])
     monkeypatch.setattr(check_bead_tree, "regularization_deferrals", list)
+    monkeypatch.setattr(check_bead_tree, "adoption_deferrals", list)
     monkeypatch.setattr(check_bead_tree, "AGENDAS", Path("/nonexistent/agendas"))
 
 
@@ -249,6 +269,8 @@ WARN = ("--warn-dead-deferrals",)
         (["packing/frontier/source-coverage.yaml", "README.md"], ()),
         # The regularization record's allowlist, exemptions and owed runs (#636 A2).
         (["packing/devtools/default_drawings.py"], ()),
+        # The house adoptions staged to a later pull request (the house rule).
+        (["packing/devtools/select_houses.py"], ()),
         (None, ()),
     ],
 )

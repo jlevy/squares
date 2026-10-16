@@ -1067,6 +1067,49 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
             "site",
         ),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/exact_sides.py",
+            "packing/devtools/select_houses.py",
+            "packing/frontier/README.md",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The house rule (think-sa5r) changes what `select_houses.select` derives by "
+            "default, adds `exact_sides`, stages T-174's 63 counts in `PENDING_ADOPTION`, "
+            "and has `adopt_houses` replay records under the rule their pass ran under. "
+            "No builder calls the selection: the builders reach `adopt_houses` through "
+            "`generate_frontier_case` and `source_supersession`, which call `holds`, "
+            "`adopt_case`, `held_note` and `carries_held_note`, whose output is unchanged "
+            "on every committed record (`adopt_houses.refresh(write=False)` and "
+            "`adopt_houses.check()` both return nothing on this branch), and no case "
+            "record, coverage row, deferral or register entry changes. `default_drawings` "
+            "changes only the words `--compare` prints, `validate.py` only the records "
+            "`bead tree` reads, and no builder reads `packing/frontier/README.md`, whose "
+            "edit defines the house. Source-compared; no render was taken, and every "
+            "component keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+            "site",
+        ),
         paths=("packing/devtools/adopt_houses.py", "packing/devtools/default_drawings.py"),
         outputs=(
             "index.html",

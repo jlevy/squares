@@ -722,11 +722,9 @@ to credit it as carefully as this project’s own.
   derives the supersession from them.
 - **Upper bounds count too.** A parallel packing that improves a best-known side enters
   its case’s reported upper lane from a retained source, with the same credit.
-  It reaches the verified upper lane only after an exact or interval witness replay, and
-  once validated the smallest such packing is the case’s house, whoever found it
-  ([the house rule](packing/campaign/result-import.md#the-house-rule)). The coverage
-  gate below checks lower bounds only, so the register entry for an upper bound by
-  others is kept by hand.
+  It reaches the verified upper lane only after an exact or interval witness replay.
+  The coverage gate below checks lower bounds only, so the register entry for an upper
+  bound by others is kept by hand.
 
 ### Import, Integration, and Reply
 
