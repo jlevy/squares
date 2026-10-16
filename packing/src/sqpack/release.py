@@ -88,7 +88,8 @@ PUBLICATION_HISTORY = (
         version="v0.7.12",
         first_published="October 16, 2026",
         result_scope=(
-            "Say on each case page whose house is drawn that it is drawn as published, and why."
+            "Unify News topics, counts and surname style, and announce the newly "
+            "registered bound reports as separate articles."
         ),
     ),
     PublicationHistoryEntry(
@@ -785,7 +786,8 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.7.12",
         impact="patch",
         reason=(
-            "Say on each case page whose house is drawn that it is drawn as published, and why."
+            "Unify News topics, counts and surname style, and announce the newly "
+            "registered bound reports as separate articles."
         ),
     ),
     ReleaseImpactDecision(
@@ -1071,8 +1073,38 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
-        components=("paper:n11-lower-bounds-explainer",),
+        components=("paper:n11-lower-bounds-explainer", "site"),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "The native validator isolates existing forwarder tests in a fresh "
+            "serial process under the shared deadline and records browser progress "
+            "and failures before interruption. The manual diagnostic runs fixed "
+            "forwarder selections "
+            "with wire logs and existing process cleanup; its workflow remains "
+            "dispatch-only. Site and paper builders do not run these test commands "
+            "or consume their diagnostics. Public renderers, manuscripts, figures "
+            "and scientific inputs are unchanged, so both component editions remain "
+            "current. This is a source-reviewed disposition; no PDF redraw or "
+            "byte-identity comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
         paths=(
+            "packing/devtools/news_highlights.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/site_topics.py",
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
@@ -1082,14 +1114,48 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "The site cut v0.7.12 regenerated the five claim documents at "
-            "PUBLICATION_REVISION 61973df5; with that revision read back as 5791b79b, each "
-            "is byte-identical to main's, so the 32 repository links it pins are the only "
-            "change, and no claim, certificate or command moves. A link revision follows "
-            "the site's edition and is not a revision of the explainer, so it keeps "
-            "v0.4.7. Source-reviewed; no render was taken."
+            "News topic selection, filter tallies, surname text-token rendering "
+            "and homepage markup "
+            "change only News consumers. The shared Results vocabulary and chip "
+            "renderer retain their labels and markup. Standalone paper renderers "
+            "do not call the changed News functions or include site.css; the optional "
+            "inline text callback preserves default callers. Shared-delivery "
+            "validation and its audit affect only the News authoring record. The five "
+            "regenerated claim documents change only source-link revision pins for "
+            "this site cut; their mathematics, certificates and verifier code are "
+            "unchanged. Paper manuscripts, figures and editions remain current. "
+            "This is a source-reviewed disposition; no release PDF redraw or "
+            "byte-identity comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main ee9cec6e at one link revision, once with "
+            "main's requests record and once with the branch's, the survey's HTML after "
+            "the math pass and its Markdown are byte-identical, as are the other 40 files "
+            "the render writes, as they were over bbc12b61; over 22a67ce4 the HTML before "
+            "that pass, the Markdown and those 40 files were too. The PDF prints from that "
+            "HTML. The record gains the replies of 15 October 2026, six closes, the six "
+            "closed entries' confirmation in their summaries and a note on #564, which the "
+            "survey does not read, so it keeps v0.2.2."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2311,7 +2377,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "61973df5"
+PUBLICATION_REVISION = "6ba43f14"
 
 
 def data_pathspec() -> tuple[str, ...]:

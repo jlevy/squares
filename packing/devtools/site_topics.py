@@ -15,6 +15,9 @@ TOPICS: dict[str, str] = {
     "engineering": "Engineering",
     "verification": "Verification",
 }
+NEWS_TOPICS = {
+    topic: label for topic, label in TOPICS.items() if topic not in {"correction", "audit"}
+}
 
 
 def topic_label(topic: str) -> str:

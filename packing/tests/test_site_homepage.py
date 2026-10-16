@@ -1177,6 +1177,13 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         assert visible == expected(scores, topics)
         assert seen["count"] == f"{len(visible)} of {len(entries)} news items"
         assert seen["empty"] is (not visible)
+        scored = [entry for entry in entries if entry["significance"]["score"] in scores]
+        for topic, tally in seen["topic_tallies"].items():
+            matches = sum(topic in entry.get("topics", []) for entry in scored)
+            assert tally["tally"] == f" ({matches})"
+            assert tally["name"] == f"{tally['label']} ({matches})"
+        assert seen["all_topics_tally"] == f" ({len(scored)})"
+        assert seen["all_topics_name"] == f"All topics ({len(scored)})"
         assert parse_qs(urlsplit(page.url).query)["reader"] == ["kept"]
         assert seen["overflow"] == 0
         return seen
@@ -1228,30 +1235,59 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                         assert sample is not None
                         if interaction == "focus":
                             assert sample["focus_visible"]
+                        if name == "topics":
+                            assert sample["label"] == sample["chip_label"]
+                            for property_name in (
+                                "background-color",
+                                "color",
+                                "text-transform",
+                                "font-variant-caps",
+                                "letter-spacing",
+                            ):
+                                assert (
+                                    sample["appearance"][property_name]
+                                    == sample["chip"][property_name]
+                                ), (
+                                    scheme,
+                                    selection,
+                                    interaction,
+                                    property_name,
+                                )
                         samples[selection, interaction] = {
                             key: sample[key]
                             for key in ("appearance", "border", "gap", "height")
                         }
                 appearances[name] = samples
             assert appearances["scores"] == appearances["home"], scheme
-            border_edges = {"border-top-width", "border-bottom-width"}
+            topic_properties = {
+                "background-color",
+                "color",
+                "text-transform",
+                "font-variant-caps",
+                "letter-spacing",
+                "box-shadow",
+                "outline-color",
+            }
             for key, topic in appearances["topics"].items():
                 home = appearances["home"][key]
                 assert {
                     name: value
                     for name, value in topic["appearance"].items()
-                    if name not in border_edges
+                    if name not in topic_properties
                 } == {
                     name: value
                     for name, value in home["appearance"].items()
-                    if name not in border_edges
+                    if name not in topic_properties
                 }, (scheme, key)
-                for edge in border_edges:
-                    assert topic["appearance"][edge] == "1px", (scheme, key, edge)
-                    assert home["appearance"][edge] == "0px", (scheme, key, edge)
-                assert (topic["border"], home["border"]) == ("0px", "1px")
-                assert (topic["gap"], home["gap"]) == ("4px", "normal")
-                assert topic["height"] == pytest.approx(home["height"] + 2, abs=0.1)
+                assert topic["appearance"]["text-transform"] == "none"
+                assert topic["appearance"]["font-variant-caps"] == "normal"
+                if key[1] == "focus":
+                    assert topic["appearance"]["outline-style"] != "none"
+                    assert topic["appearance"]["outline-width"] != "0px"
+                assert (topic["appearance"]["box-shadow"] != "none") == (key[0] == "selected")
+                assert topic["border"] == home["border"] == "1px"
+                assert topic["gap"] == home["gap"] == "normal"
+                assert topic["height"] == pytest.approx(home["height"], abs=0.1)
             topic_group = page.locator('[aria-labelledby="news-topics-label"]')
             group_box = topic_group.bounding_box()
             assert group_box is not None
@@ -1265,8 +1301,20 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 assert group_box["y"] <= box["y"]
                 assert box["y"] + box["height"] <= group_box["y"] + group_box["height"]
                 sync_api.expect(button).to_have_css("white-space", "nowrap")
-                sync_api.expect(button).to_have_css("border-left-width", "1px")
-                sync_api.expect(button).to_have_css("border-right-width", "1px")
+                sync_api.expect(button).to_have_css("border-right-width", "0px")
+                if topic := button.get_attribute("data-news-topic"):
+                    sample = page.evaluate(
+                        NEWS_FILTERS,
+                        {
+                            "chooser": '[aria-labelledby="news-topics-label"]',
+                            "choice": f'[data-news-topic="{topic}"]',
+                        },
+                    )["chooser"]
+                    assert sample["label"] == sample["chip_label"]
+                    assert (
+                        sample["appearance"]["background-color"]
+                        == sample["chip"]["background-color"]
+                    )
             if width == 390:
                 assert len(rows) > 1
             request.node.user_properties.append(
@@ -1306,6 +1354,14 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         assert seen["scores"] == ["4", "5"]
         used_topics = {topic for entry in entries for topic in entry.get("topics", [])}
         assert set(seen["topics"]) == used_topics
+        page.goto(
+            f"{ORIGIN}news.html?reader=kept&news-topics=correction,audit,verification",
+            wait_until="load",
+        )
+        seen = check({4, 5}, {"verification"})
+        assert seen["topics"] == ["verification"]
+        assert parse_qs(urlsplit(page.url).query)["news-topics"] == ["verification"]
+        page.locator("[data-news-reset]").click()
         page.locator('button[data-news-score="3"]').focus()
         page.keyboard.press("Space")
         check({3, 4, 5})

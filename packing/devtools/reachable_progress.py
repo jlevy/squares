@@ -60,6 +60,7 @@ class ProgressWriter:
         outcome: str | None = None,
         exit_status: int | None = None,
         phase: str | None = None,
+        longrepr: str | None = None,
     ) -> None:
         row: dict[str, str | int] = {
             "schema": SCHEMA,
@@ -83,6 +84,8 @@ class ProgressWriter:
             row["exit_status"] = exit_status
         if phase is not None:
             row["phase"] = phase
+        if longrepr is not None:
+            row["longrepr"] = longrepr
         self.stream.write(json.dumps(row, sort_keys=True) + "\n")
         self.stream.flush()
 
@@ -96,6 +99,15 @@ class ProgressWriter:
         if self.phases:
             self._emit("phase_finish", nodeid, phase=report.when, outcome=report.outcome)
         if report.failed:
+            # JUnit is finalized at session end. A later hung test must not erase this
+            # failure's identity or traceback when the command's process group is killed.
+            self._emit(
+                "failure",
+                nodeid,
+                phase=report.when,
+                outcome=report.outcome,
+                longrepr=report.longreprtext,
+            )
             self.outcomes[nodeid] = "failed"
         elif report.skipped and self.outcomes.get(nodeid) != "failed":
             self.outcomes[nodeid] = "skipped"
