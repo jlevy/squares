@@ -5,12 +5,12 @@ title: Owner decisions pending from the 2026-10-15/16 intake passes (each blocks
 kind: task
 status: open
 priority: 1
-version: 8
+version: 9
 labels: []
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 created_at: 2026-10-16T04:57:59.468Z
-updated_at: 2026-10-16T11:31:32.000Z
+updated_at: 2026-10-16T11:55:18.976Z
 ---
 Collected by the coordinator 2026-10-16 so another agent can pick them up. Each item names the bead that owns it; act only on the owner's word.
 1. #574 (BuddenPing, 148 certificate refinements, a PR): merge it and adopt T-174? (think-9v2k). WARNING: adopting T-174 re-houses 35 counts (68, 84, 86, 88, 108, 126, 127, 130, 131, 132, 172, 181, 182, 199, 206, 208, 209, 210, 228, 238, 239, 240, 259, 266, 267, 268, 270, 273, 292, 297, 301, 305, 306, 307, 308); since #636 the gate will fail unless each is re-regularized or added to PENDING_ALLOWED with a bead (think-g3q7 documents the step). The #574 reply is held until the decision.
@@ -40,3 +40,5 @@ Collected by the coordinator 2026-10-16 so another agent can pick them up. Each 
 24. (user-eb ~10:15Z, from lane B / 3b, think-kpm3) regularization register candidates: views below U at 153 (-1.6e-14) and 207 (-2.4e-12); by the guide they are registered as a batch result, not admitted (a later records PR). Also 154: Evan Daniel's view at row 7 goes to the owner's review queue (the 5-degree grid view was drawn instead).
 
 25. (user-eb ~11:40Z, PR #649 follow-up review B2) T-184 and T-191 are declared V3/C1 while their replays passed (C3 derived) but the stage 4 mutated-certificate controls for zm_mixed.py are unmet; the register shows status 'reviewed', which the epistemics Status table defines as 'no replay has passed', and the clause allowing a declaration below the derived rung is written for compound minima. A one-sentence rule (result-import.md stage 4 or the Status table) for 'replay passed, controls owed' would settle it; it can be decided with question 16.
+
+26. (user-eb ~12:00Z, #651 A9) publish #639's four pinned-only exact forms (204, 263, 267, 297; ~20.75 MB) as a project data release? Owner's call.

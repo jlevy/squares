@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 26
+version: 27
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T11:47:29.432Z
+updated_at: 2026-10-16T11:55:14.923Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -78,3 +78,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 ~11:55Z coordinator: lane B done: #653 (3b) and #654 (3c, head 97d513032) open and green; all eleven counts off PENDING_ALLOWED, list empty with #644. 3b: light/uneven/near-axis over the seven redrawn counts 51/133/34 -> 10/26/3; 304 settled. 3c: Evan Daniel's views at 175, 232; grid-slack 0.5 deg at 264. Owner items: 154's Evan Daniel view to review (row 7); register candidates 153 (-1.6e-14) and 207 (-2.4e-12). Senior+correctness review of #654 started.
 
 2026-10-16 ~11:50Z coordinator: #653 addressed (A1 credit fix + test, A2 run evidence retained under packing/cases/regularized_drawings/think-kpm3-2026-10-16/, A3 merged #644 tip, A4 deferred think-e533), green at 4da7ae92d; follow-up review (round 2) started. Review A on #655 (0/0/1/5; record sound for C1; A1 wording: the endgame/region checks decide the certified property, not the axiom's Boolean); addresser user-eb-addr-655 started. Lane I told to align its 3a evidence layout with 3b's (no manifest).
+
+2026-10-16 ~12:00Z coordinator: #642 addressed (merge-ready at ae64ab461). #651 addressed at 3a230d30f: T-193 HELD at V0/C0 pending think-7qxm (replay evidence entry removed until the exit restores it; receipt, driver, verifiers kept; irreducibility now proven for all 23 forms incl. the four pinned-only; #639 no longer closeable); A1 High (informal chain) deferred think-e1u5; A7 think-v860. Follow-up review of #651 started. #656 (lane D, leftovers) open. Lane J asked for a checkpoint (silent since 08:30Z).
