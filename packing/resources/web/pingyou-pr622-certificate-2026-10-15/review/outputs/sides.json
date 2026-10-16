@@ -4,6 +4,8 @@
     "packing/frontier/n-029.md",
     "packing/frontier/results.yaml",
     "packing/campaign/issue-intake/upper-bounds-20261014/sources.yaml",
+    "packing/witnesses/kingbird-n029-2026-interval.yaml",
+    "packing/witnesses/known-best/n-029.yaml",
     "pingyou-n29-certificate-2026-10-15.zip"
   ],
   "T-155 claim's s(29) decimal equals n-029.md's exact form": true,
@@ -47,5 +49,20 @@
     "nearest [p - ulp/2, p + ulp/2]": "S above",
     "up (p - ulp, p]": "S above",
     "S - p in units of the last place": "9.189689460616352e-01"
+  },
+  "T-009's Krawczyk pose box for s (packing/witnesses/kingbird-n029-2026-interval.yaml)": {
+    "lo": "5.93383346267692918968946061635201913843383418",
+    "hi": "5.93383346267692918968946061635201913843383419",
+    "S - lo": "1.077886974638825e-45",
+    "hi - S": "8.922113025361174e-45",
+    "S in the box": true,
+    "lo - p in units of the print's last place": "9.189689460616352e-01",
+    "the print is the box truncated, not rounded": true,
+    "T-155 - hi": "1.566165810000000e-36"
+  },
+  "house witness side (packing/witnesses/known-best/n-029.yaml, numerical)": {
+    "value_sci": "5.933833462676929189689460616352019138433e+00",
+    "S - house": "-2.985530566813067e-100",
+    "PR #574 - house": "7.324826735766588e-90"
   }
 }

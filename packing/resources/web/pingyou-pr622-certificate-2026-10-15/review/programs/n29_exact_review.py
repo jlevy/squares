@@ -39,7 +39,13 @@ Subcommands, each printing one JSON object:
 ``native ASSET``
     the source's corners witness equal to the corners computed here, as sets per square.
 ``sides ASSET REPO``
-    the side against the record's comparators at 29 and the source's baselines, exactly.
+    the side against the record's comparators at 29 and the source's baselines, exactly,
+    and against T-009's Krawczyk enclosure of the catalogue's own contact system.
+``identity ASSET REPO``
+    the certificate measured against T-009's witness, T-155's view and the house witness:
+    the register's identity measurement (one to one by nearest centres under the box's
+    eight symmetries, squares moved beyond 1e-3, the largest move and turn), in floats of
+    exact differences. It measures and decides nothing.
 """
 
 from __future__ import annotations
@@ -48,6 +54,7 @@ import argparse
 import gzip
 import hashlib
 import json
+import math
 import re
 import sys
 import time
@@ -408,6 +415,201 @@ def cmd_native(args: argparse.Namespace) -> dict[str, object]:
     }
 
 
+SCIENTIFIC = re.compile(r"'(-?[0-9]+(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?)'")
+# The eight symmetries of the box [0, L]^2, each with whether it reverses orientation.
+SYMMETRIES: tuple[tuple[str, bool], ...] = (
+    ("identity", False),
+    ("x -> L - x", True),
+    ("y -> L - y", True),
+    ("half turn", False),
+    ("swap x, y", True),
+    ("quarter turn", False),
+    ("three-quarter turn", False),
+    ("anti-diagonal", True),
+)
+
+
+def symmetry(name: str, side: Fraction, p: Point) -> Point:
+    x, y = p
+    return {
+        "identity": (x, y),
+        "x -> L - x": (side - x, y),
+        "y -> L - y": (x, side - y),
+        "half turn": (side - x, side - y),
+        "swap x, y": (y, x),
+        "quarter turn": (side - y, x),
+        "three-quarter turn": (y, side - x),
+        "anti-diagonal": (side - y, side - x),
+    }[name]
+
+
+def linear(name: str, v: Point) -> Point:
+    """The linear part of a symmetry, acting on a direction."""
+    x, y = v
+    return {
+        "identity": (x, y),
+        "x -> L - x": (-x, y),
+        "y -> L - y": (x, -y),
+        "half turn": (-x, -y),
+        "swap x, y": (y, x),
+        "quarter turn": (-y, x),
+        "three-quarter turn": (y, -x),
+        "anti-diagonal": (-y, -x),
+    }[name]
+
+
+def turn_sine(u: Point, w: Point) -> float:
+    """The sine of the angle between unit ``u`` and ``w``, modulo a quarter turn.
+
+    For an angle d in [0, 45] degrees modulo 90, sin d = min(|u x w|, |u . w|) / |w|;
+    the cross and dot products are exact, so a turn far below binary64 is still seen.
+    """
+    cross = abs(u[0] * w[1] - u[1] * w[0])
+    dot = abs(u[0] * w[0] + u[1] * w[1])
+    small = min(cross, dot)
+    if small == 0:
+        return 0.0
+    # |w| from its exact square, so a tiny ratio keeps its digits.
+    return float(small / Fraction(math.sqrt(float(w[0] * w[0] + w[1] * w[1]))))
+
+
+type Direction = Point | float
+
+
+def blocks(text: str) -> list[str]:
+    """The text of each square's entry under ``  squares:``, in order of id."""
+    body = text.split("\n  squares:\n", 1)[1]
+    parts = re.split(r"\n?  - id: ([0-9]+)\n", "\n" + body)
+    ids, chunks = parts[1::2], parts[2::2]
+    if [int(i) for i in ids] != list(range(1, N + 1)):
+        raise ReviewError("a reference witness does not list ids 1 to 29 in order")
+    # The last entry ends where the next key of the witness (two spaces, then text) begins.
+    last = re.split(r"\n  (?=\S)", chunks[-1], maxsplit=1)[0]
+    return [*chunks[:-1], last]
+
+
+def angle_mod_90(a: float, b: float) -> float:
+    return math.degrees(math.atan2(b, a)) % 90.0
+
+
+def interval_reference(path: Path) -> tuple[Fraction, list[tuple[Point, Direction]]]:
+    """T-009's corners witness: each coordinate an enclosure, read at its midpoint."""
+    text = path.read_text()
+    side = decimal(find_one(r"\n  side:\n  - '([0-9.]+)'\n", text, "T-009 side"), "side")
+    rows: list[tuple[Point, Direction]] = []
+    for chunk in blocks(text):
+        values = [Fraction(v) for v in SCIENTIFIC.findall(chunk.split("corners:", 1)[1])]
+        if len(values) != 16:
+            raise ReviewError("T-009's witness: a square without 4 corners of 2 enclosures")
+        mids = [(values[i] + values[i + 1]) / 2 for i in range(0, 16, 2)]
+        corners = [(mids[i], mids[i + 1]) for i in range(0, 8, 2)]
+        cx = sum(c[0] for c in corners) / 4
+        cy = sum(c[1] for c in corners) / 4
+        edge = (corners[1][0] - corners[0][0], corners[1][1] - corners[0][1])
+        rows.append(((cx, cy), edge))
+    return side, rows
+
+
+def basis_reference(path: Path) -> tuple[Fraction, list[tuple[Point, Direction]]]:
+    """A rational centre-basis witness, as the replay's fact is written."""
+    side, squares = read_fact(path)
+    return side, [((c[0], c[1]), (b[0], b[1])) for _, c, b in squares]
+
+
+def angle_reference(path: Path) -> tuple[Fraction, list[tuple[Point, Direction]]]:
+    """A decimal centre-angle witness in degrees, as the house at 29 is written."""
+    text = path.read_text()
+    side = decimal(find_one(r"\n  side: '([0-9.]+)'\n", text, "house side"), "side")
+    rows: list[tuple[Point, Direction]] = []
+    for chunk in blocks(text):
+        values = SCIENTIFIC.findall(chunk)
+        if len(values) != 3:
+            raise ReviewError("the house witness: a square without a centre and an angle")
+        x, y, a = (Fraction(v) for v in values)
+        rows.append(((x, y), float(a) % 90.0))
+    return side, rows
+
+
+def turn_deg(name: str, reverses: bool, u: Point, direction: Direction) -> float:
+    """The turn between a certificate square and its partner, modulo 90 degrees."""
+    if isinstance(direction, tuple):
+        return math.degrees(math.asin(min(1.0, turn_sine(linear(name, u), direction))))
+    ours = angle_mod_90(float(u[0]), float(u[1]))
+    ours = (-ours) % 90.0 if reverses else ours
+    turn = abs(ours - direction) % 90.0
+    return min(turn, 90.0 - turn)
+
+
+def measure(
+    side: Fraction,
+    poses: list[Pose],
+    reference: tuple[Fraction, list[tuple[Point, Direction]]],
+) -> dict[str, object]:
+    """The certificate against a reference packing, as the register's identity reads it.
+
+    Under each symmetry of the box, each reference square is paired with the nearest
+    certificate centre; a pairing that is one to one is measured by the largest centre
+    move, the squares moved beyond 1e-3, and the largest turn modulo 90 degrees.
+    Differences are taken exactly and only then made floats, and a turn against a
+    rational direction is taken from exact cross and dot products; a turn against an
+    angle in degrees is a float difference, good to about 1e-13 degrees. This measures; it
+    decides nothing.
+    """
+    ref_side, ref = reference
+    ours = [((p.x, p.y), axes(p.t)[0]) for p in poses]
+    exact_turns = all(isinstance(d, tuple) for _, d in ref)
+    best: dict[str, object] | None = None
+    best_move = math.inf
+    for name, reverses in SYMMETRIES:
+        mapped = [symmetry(name, side, c) for c, _ in ours]
+        pairs = []
+        for centre, direction in ref:
+            dists = [math.hypot(float(m[0] - centre[0]), float(m[1] - centre[1])) for m in mapped]
+            k = min(range(N), key=dists.__getitem__)
+            pairs.append((k, dists[k], turn_deg(name, reverses, ours[k][1], direction)))
+        one_to_one = len({k for k, _, _ in pairs}) == N
+        moves = [d for _, d, _ in pairs]
+        row: dict[str, object] = {
+            "symmetry": name,
+            "one_to_one": one_to_one,
+            "paired_by_index": [k for k, _, _ in pairs] == list(range(N)),
+            "moved": sum(d > 1e-3 for d in moves),
+            "moved_beyond": {t: sum(d > float(t) for d in moves) for t in ("1e-3", "1e-9", "1e-30")},
+            "max_move": f"{max(moves):.4g}",
+            "max_turn_deg": f"{max(t for _, _, t in pairs):.4g}",
+            "turns": "exact cross and dot products" if exact_turns else "float angles",
+            "side_difference": sci(side - ref_side),
+        }
+        if one_to_one and max(moves) < best_move:
+            best, best_move = row, max(moves)
+    if best is None:
+        return {"one_to_one": False}
+    return best
+
+
+def cmd_identity(args: argparse.Namespace) -> dict[str, object]:
+    asset = open_asset(args.asset)
+    side, poses = read_certificate(member(asset, CERT_MEMBER, CERT_SHA256), CERT_MEMBER)
+    repo = args.repo
+    t009 = "packing/witnesses/kingbird-n029-2026-interval.yaml"
+    t155 = "packing/cases/regularized_bounds/views/n-029.yaml.gz"
+    house = "packing/witnesses/known-best/n-029.yaml"
+    return {
+        "T-009's witness (the packing the regularization names)": {
+            "path": t009,
+            **measure(side, poses, interval_reference(repo / t009)),
+        },
+        "T-155's view (the verified lane)": {
+            "path": t155,
+            **measure(side, poses, basis_reference(repo / t155)),
+        },
+        "the house witness (Kingbird derived numerical facts)": {
+            "path": house,
+            **measure(side, poses, angle_reference(repo / house)),
+        },
+    }
+
+
 def find_one(pattern: str, text: str, what: str) -> str:
     found = re.findall(pattern, text, flags=re.DOTALL)
     if len(found) != 1:
@@ -473,9 +675,21 @@ def cmd_sides(args: argparse.Namespace) -> dict[str, object]:
             "S_is": "below" if diff > 0 else ("equal" if diff == 0 else "above"),
         }
     ulp = Fraction(1, 10 ** len(kingbird_text.split(".")[1]))
+    t009_path = "packing/witnesses/kingbird-n029-2026-interval.yaml"
+    t009 = (repo / t009_path).read_text()
+    box = find_one(
+        r"pose_box:\n        names:\n        - s\n.*?        lo:\n        - '([0-9.]+)'\n"
+        r".*?        hi:\n        - '([0-9.]+)'\n",
+        t009,
+        "T-009's pose box",
+    )
+    box_lo, box_hi = decimal(box[0], "box lo"), decimal(box[1], "box hi")
+    house_path = "packing/witnesses/known-best/n-029.yaml"
+    house = (repo / house_path).read_text()
+    house_side = decimal(find_one(r"\n  side: '([0-9.]+)'\n", house, "house side"), "house")
     return {
         "S_sci": sci(side, 60),
-        "read_from": [case_path, results_path, ledger_path, ASSET_NAME],
+        "read_from": [case_path, results_path, ledger_path, t009_path, house_path, ASSET_NAME],
         "T-155 claim's s(29) decimal equals n-029.md's exact form": decimal(
             t155_claim, "T-155 claim"
         )
@@ -494,6 +708,22 @@ def cmd_sides(args: argparse.Namespace) -> dict[str, object]:
             else "S below",
             "up (p - ulp, p]": "S inside" if kingbird - ulp < side <= kingbird else "S above",
             "S - p in units of the last place": sci((side - kingbird) / ulp),
+        },
+        "T-009's Krawczyk pose box for s (packing/witnesses/kingbird-n029-2026-interval.yaml)": {
+            "lo": box[0],
+            "hi": box[1],
+            "S - lo": sci(side - box_lo),
+            "hi - S": sci(box_hi - side),
+            "S in the box": box_lo <= side <= box_hi,
+            "lo - p in units of the print's last place": sci((box_lo - kingbird) / ulp),
+            "the print is the box truncated, not rounded": kingbird + ulp / 2 < box_lo
+            and box_hi < kingbird + ulp,
+            "T-155 - hi": sci(t155 - box_hi),
+        },
+        "house witness side (packing/witnesses/known-best/n-029.yaml, numerical)": {
+            "value_sci": sci(house_side, 40),
+            "S - house": sci(side - house_side),
+            "PR #574 - house": sci(pr574 - house_side),
         },
     }
 
@@ -514,6 +744,9 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("sides")
     p.add_argument("asset", type=Path)
     p.add_argument("repo", type=Path)
+    p = sub.add_parser("identity")
+    p.add_argument("asset", type=Path)
+    p.add_argument("repo", type=Path)
     args = parser.parse_args(argv)
     commands = {
         "certificate": cmd_certificate,
@@ -521,6 +754,7 @@ def main(argv: list[str] | None = None) -> int:
         "fact": cmd_fact,
         "native": cmd_native,
         "sides": cmd_sides,
+        "identity": cmd_identity,
     }
     try:
         out = commands[args.command](args)

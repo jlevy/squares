@@ -36,6 +36,7 @@ nice -n 10 "${run[@]}" "$prog" controls "$asset" >"$out/controls.json"
 nice -n 10 "${run[@]}" "$prog" fact "$asset" "$packet/facts/n-029.yaml.gz" >"$out/fact.json"
 nice -n 10 "${run[@]}" "$prog" native "$asset" >"$out/native.json"
 nice -n 10 "${run[@]}" "$prog" sides "$asset" "$repo" >"$out/sides.json"
+nice -n 10 "${run[@]}" "$prog" identity "$asset" "$repo" >"$out/identity.json"
 for b in pr574-v2 pr549 evan; do
   nice -n 10 "${run[@]}" "$prog" certificate "$asset" \
     --member "n29-certificate/baselines/$b-n029.cert.json" >"$out/baseline-$b.json"
