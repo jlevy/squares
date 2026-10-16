@@ -5,7 +5,7 @@ title: "Regularization leftovers: grid-slack 1 and 5 deg on 102, 236, 258, 263, 
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: user-eb-reg-leftovers
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:12.547Z
-updated_at: 2026-10-16T11:28:56.916Z
+updated_at: 2026-10-16T11:38:27.231Z
 started_at: 2026-10-16T05:22:35.967Z
 ---
 
@@ -58,3 +58,5 @@ started_at: 2026-10-16T05:22:35.967Z
 | 23 | 182 | 17 | 5 / 12 / 0 | 15 / 15 | 443 / 457 | regularized | evand-regularize | - | think-drze (opened by this audit) |
 | 24 | 271 | 16 | 6 / 10 / 0 | 21 / 19 | 738 / 760 | regularized | evand-regularize | think-la7h (#644) | think-drze (opened by this audit) |
 | 25 | 180 | 15 | 5 / 10 / 0 | 16 / 16 | 483 / 489 | decided-no-better | regularize_axis_components/2 | think-0ut1 (this PR) | think-drze (opened by this audit) |
+
+2026-10-16T11:38Z user-eb-reg-leftovers: draft PR #656 (https://github.com/jlevy/squares/pull/656), base claude/intake-2026-10-16-regularize-3c, head 3f78058fe, labels project + S2. Local: records 51/52 at b787baf05, the one failure (check_documentation: unmapped retained selection.md) fixed in 3f78058fe and the step passes alone; --check-state, 244 focused tests, release_pin --check, check_release_impact vs 3c pass; --verify-atlas running. think-0ut1 can close once #656 merges (no record names it); think-co6o and think-zjmt can close now.

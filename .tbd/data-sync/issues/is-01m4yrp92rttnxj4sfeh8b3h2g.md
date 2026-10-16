@@ -5,7 +5,7 @@ title: "Register cases 76 and 95 in the mixed-cover tools, then record the zmx2 
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 delegate: user-eb-records-76-95
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:11:31.416Z
-updated_at: 2026-10-16T11:14:16.195Z
+updated_at: 2026-10-16T11:38:46.555Z
 started_at: 2026-10-16T05:25:32.902Z
 ---
 The C3 route for T-184 (#594, s(76)=9) and #610 (s(95)=10) needs the full reproductions (zmx2 D4 sweep over 10,000 roots plus all zm_mixed.py sub-roots, already run and retained in packets bengreff-s76-certificate-* and bengreff-s95-certificate-2026-10-15 on intake-610 @ 7c65c191b) recorded as evidence entries. That first needs cases 76 and 95 registered in the two mixed-cover tools (zmx2, zm_mixed). Then a stage 4 review with no blocking defect raises the rungs. Optional: zmx2 --full (think-eucc, ~6 CPU-h), as T-066's s(59) replay ran. Found by the #610 lane on 2026-10-15.
@@ -35,3 +35,5 @@ The C3 route for T-184 (#594, s(76)=9) and #610 (s(95)=10) needs the full reprod
 2026-10-16T11:20Z lane E: #649 Review A addressed at d296e9f11 (merged #652 a4d48feb7; A1 header-hash and settings binding with fault controls; A2 rungs held at V3/C1 with the owed zm_mixed.py controls as unfinished C3 items and owner question 16 of think-l3oo; A3-A8 fixed). Disposition reply posted (review 5546888955). Records tier passes; label S2. Waiting on hosted CI.
 
 2026-10-16T11:15Z lane E: hosted CI green at d296e9f11 (31 success, 40 skipped, 0 failed). #649 ready for the coordinator; rungs held at V3/C1 pending zm_mixed.py controls (owner question 16, think-l3oo).
+
+2026-10-16 ~11:50Z coordinator user-eb: PR #649 MERGE-READY at 33fde412f pending hosted CI on that head (tests-only change after the green d296e9f11): senior+correctness Review A (0/2/2/4) and follow-up Review B (0/0/0/2) addressed; B2 is owner question 25 in think-l3oo. T-184 and T-191 at V3/C1, C3 held for zm_mixed.py controls (question 16). Carries #652 (merge-ready) and its site v0.7.15 cut.
