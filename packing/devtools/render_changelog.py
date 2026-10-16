@@ -56,6 +56,43 @@ class Significance(TypedDict):
     rationale: str
 
 
+#: The rubric a News post is scored by: the S labels' table in `result-import.md`,
+#: "Label the PR and Prepare News", whose `Short` column is each label's description on
+#: GitHub. A News meter and the archive's S buttons say what a level means in it; a
+#: result's meter keeps the result ladder in `epistemics.md`.
+NEWS_RUBRIC = ROOT / "campaign" / "result-import.md"
+NEWS_RUBRIC_SECTION = "### Label the PR and Prepare News"
+_NEWS_RUBRIC_ROW = re.compile(r"^\| `S(\d)` \| [^|]+? \| ([^|]+?) \| [^|]+? \|$", re.MULTILINE)
+#: The check a selected topic shows: the theme menu's mark for a chosen item
+#: (`templates/site-nav.html`), hidden from assistive technology, which reads
+#: `aria-pressed`.
+NEWS_CHECK = (
+    '<svg class="site-news-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+    'stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" '
+    'focusable="false"><path d="M20 6 9 17l-5-5"/></svg>'
+)
+
+
+@cache
+def news_significance_meanings() -> dict[int, str]:
+    """Each News significance level's short meaning, read from the rubric's table so a
+    tooltip cannot drift from the scale that scored the post."""
+    text = NEWS_RUBRIC.read_text(encoding="utf-8")
+    if NEWS_RUBRIC_SECTION not in text:
+        raise SystemExit(f"{NEWS_RUBRIC.name} has no {NEWS_RUBRIC_SECTION!r} section")
+    section = text.split(NEWS_RUBRIC_SECTION, 1)[1].split("\n#", 1)[0]
+    meanings = {int(level): short.strip() for level, short in _NEWS_RUBRIC_ROW.findall(section)}
+    if sorted(meanings) != list(range(1, 6)):
+        raise SystemExit(f"{NEWS_RUBRIC.name}'s News rubric does not define S1 to S5")
+    return meanings
+
+
+def news_significance_tooltip(score: int) -> str:
+    """What a News post's significance level means, without the post's own rationale,
+    which its source record keeps."""
+    return f"{news_significance_meanings()[score]}."
+
+
 def entry_significance(entry: Document) -> Significance:
     """The typed significance view of a structurally validated entry."""
     return {
@@ -832,12 +869,9 @@ def news_topics(topics: Sequence[str]) -> str:
 
 def news_rating(rating: Significance) -> str:
     """An archive article uses the same significance meter as a result."""
-    from devtools.overview_sections import (  # noqa: PLC0415
-        significance_mark,
-        significance_tooltip,
-    )
+    from devtools.overview_sections import significance_mark  # noqa: PLC0415
 
-    meaning = significance_tooltip(rating["score"])
+    meaning = news_significance_tooltip(rating["score"])
     return (
         f'<p class="site-news-significance">{significance_mark(rating["score"], meaning)}</p>'
     )
@@ -861,11 +895,9 @@ def news_article_header(
 
 def news_filters(topics_present: set[str] | None = None) -> str:
     """Progressive controls: without the enhancement every article stays visible."""
-    from devtools.overview_sections import significance_tooltip  # noqa: PLC0415
-
     scores = "".join(
         f'<button type="button" data-news-score="{score}" '
-        f'title="{html.escape(significance_tooltip(score), quote=True)}" '
+        f'title="{html.escape(news_significance_tooltip(score), quote=True)}" '
         f'aria-pressed="{str(score >= 4).lower()}">S{score}</button>'
         for score in range(3, 6)
     )

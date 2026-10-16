@@ -215,9 +215,11 @@ weight. The label and bars have a 0.18em gap, smaller than a word space but visi
 separate. Each bar is 0.5em wide and 0.6em tall; the first S bars are solid and the rest
 are empty outlines. The border uses the label’s own ink, with 0.18em horizontal padding.
 The box keeps the same width from S0 through S5, while its accessible name states the
-score and its tooltip explains the judgment.
-News, Results tables, ladders, result overviews, case records and popovers share this
-component; significance continues to describe importance rather than V/C assurance.
+score and its tooltip gives the level’s meaning in the rubric that scored it: a result’s
+from the significance ladder in `epistemics.md`, a News post’s from the short label
+rubric in `result-import.md` (“Label the PR and Prepare News”). News, Results tables,
+ladders, result overviews, case records and popovers share this component; significance
+continues to describe importance rather than V/C assurance.
 It keeps the shared chip height, 1.45em. It is the second column of a table of results,
 narrow, and it stands first among the rungs in a result’s overview, a case record and
 the rating ladders.
@@ -931,8 +933,9 @@ it.
   gap, 0.4rem before the body and 0.5rem between body paragraphs.
   Homepage News and the archive use the same card renderer and CSS roles.
   Every post has an explicit importance score and a plain rationale.
-  The meter’s accessible label names its S level; its shared tooltip briefly describes
-  the heuristic importance level.
+  The meter’s accessible label names its S level; its shared tooltip gives the level’s
+  short meaning in the News label rubric (`result-import.md`, “Label the PR and Prepare
+  News”), as the archive’s S buttons do (`render_changelog.news_significance_meanings`).
   The source record retains the post’s rationale.
   Its S and five bars remain one tightly paired mark.
   Homepage highlights keep the announcement’s significance and assurance qualifiers,

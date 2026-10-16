@@ -993,10 +993,11 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         entry = next(item for item in entries if item["id"] == entry_id)
         assert meaning is not None
         score = entry["significance"]["score"]
-        assert (
-            meaning == f"Significance S{score}: {overview_sections.significance_tooltip(score)}"
-        )
-        assert "heuristic" in meaning
+        # A News post's level is described by the rubric that scored it, not the results
+        # ladder, and without the post's own rationale (`think-yznf`).
+        news_level = render_changelog.news_significance_meanings()[score]
+        assert meaning == f"Significance S{score}: {news_level}."
+        assert news_level != overview_sections.rung_meanings()[f"S{score}"]
         assert len(meaning) <= 120
         assert entry["significance"]["rationale"] not in meaning
         tooltip = page.locator(".site-rating-tooltip.kpress-tooltip-visible")
@@ -1214,7 +1215,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         assert seen["resets"][0]["appearance"]["border-top-width"] == "0px"
         assert seen["resets"][0]["appearance"]["border-bottom-width"] == "0px"
         for score, meaning in seen["score_tooltips"].items():
-            description = overview_sections.significance_tooltip(int(score))
+            description = render_changelog.news_significance_tooltip(int(score))
             assert meaning == f"Significance S{score}: {description}"
         assert parse_qs(urlsplit(page.url).query)["reader"] == ["kept"]
         assert seen["overflow"] == 0
@@ -1269,9 +1270,11 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                             assert sample["focus_visible"]
                             if name == "scores":
                                 assert control.get_attribute("role") is None
+                                score = int(control.get_attribute("data-news-score") or 0)
+                                level = render_changelog.news_significance_tooltip(score)
                                 sync_api.expect(
                                     page.locator(".site-rating-tooltip.kpress-tooltip-visible")
-                                ).to_contain_text("heuristic importance")
+                                ).to_have_text(f"Significance S{score}: {level}")
                         if name == "topics":
                             assert sample["label"] == sample["chip_label"]
                             for property_name in (
@@ -1422,6 +1425,11 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         page.locator('button[data-news-score="3"]').focus()
         page.keyboard.press("Space")
         check({3, 4, 5})
+        # A press is the button's own action, so its explanation steps aside rather than
+        # cover the topic filters that follow it.
+        sync_api.expect(
+            page.locator(".site-rating-tooltip.kpress-tooltip-visible")
+        ).to_have_count(0)
         for topic in used_topics:
             if topic != "optimality":
                 page.locator(f'button[data-news-topic="{topic}"]').click()

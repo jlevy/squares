@@ -157,19 +157,26 @@
     trigger.addEventListener("pointerleave", delayHide);
     trigger.addEventListener("focus", () => show(trigger));
     trigger.addEventListener("blur", delayHide);
+    // A native button's press is its own action, a News filter's toggle: its explanation
+    // steps aside, so it never covers the controls a reader goes to next. Hover and
+    // keyboard focus still show it. Any other trigger shows its explanation on a press.
     trigger.addEventListener("click", (event) => {
-      if (!(trigger instanceof HTMLButtonElement)) {
-        event.preventDefault();
-        event.stopPropagation();
+      if (trigger instanceof HTMLButtonElement) {
+        hide();
+        return;
       }
+      event.preventDefault();
+      event.stopPropagation();
       show(trigger);
     });
     trigger.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
-        if (!(trigger instanceof HTMLButtonElement)) {
-          event.preventDefault();
-          event.stopPropagation();
+        if (trigger instanceof HTMLButtonElement) {
+          hide();
+          return;
         }
+        event.preventDefault();
+        event.stopPropagation();
         show(trigger);
       }
     });

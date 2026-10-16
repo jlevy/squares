@@ -194,8 +194,8 @@ hairline-bordered card per entry.
 Each card starts with an ordinary H3 in the theme’s text foreground, followed by the
 paper heading’s sans-base date.
 The next row holds smaller Results-style topic chips on the left and the fixed-width
-significance meter on the right, with a concise heuristic level description available
-through the shared tooltip.
+significance meter on the right, with the level’s short meaning in the News label rubric
+available through the shared tooltip.
 The source record retains the individual rationale.
 The article follows with compact, consistent title, date, tags and paragraph gaps.
 Homepage News and the archive share the component and CSS roles; topic chips retain
@@ -553,9 +553,10 @@ Every significance display uses the existing shared renderer: an S label and fiv
 filled/empty segments inside one fixed-width border box, using the Results ink, font
 size and accessible naming.
 The compact box is 4.8em wide with 0.18em horizontal padding; its border matches the
-label’s ink. News chooser buttons and meters briefly explain each heuristic significance
-level without adding the individual story’s rationale.
-This applies to News, result tables, ladders, overviews and popovers.
+label’s ink. News chooser buttons and meters give each level’s short meaning from the
+label rubric above, its `Short` column, without adding the individual story’s rationale;
+result meters keep the significance ladder in `epistemics.md`. This applies to News,
+result tables, ladders, overviews and popovers.
 The ladder’s wider rail and derived breakpoint keep its two-line meanings clear of the
 meter. News and Atlas expansion footers share a centering rule.
 Filtered cards remeasure on revelation and width changes; the existing ten-line fade,
