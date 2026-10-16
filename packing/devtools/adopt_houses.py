@@ -29,7 +29,16 @@ owner lifted that wait on 11 October 2026. For every count whose house moves, th
   from its own retained packet.
 
 The drawing, `witnesses/known-best/n-NNN.yaml`, is `devtools.upper_bound_houses`'s; this
-refuses a count that module does not house, and the atlas is refreshed after it runs.
+refuses a count that module does not house. A new house is a new witness, so what follows
+a write is the regularization guide's "When a Witness Changes", not the axis tool's
+refresh alone: `build_known_best_atlas --update` for the witness, the axis tool's
+`--update-atlas`, `default_drawings --update`, then the strong generators on each count it
+reads `pending`, or the count in `default_drawings.PENDING_ALLOWED` with the open bead
+that owns its runs, in the same pull request. The adoptions of #598 and #614 ran only the
+axis tool's refresh and left twenty counts without a strong generator's decision, n = 176
+drawn raw (think-sfas). So a write, and `--dry-run`, print what the moves owe the
+regularized layer (`regularization_owed`): the counts, the commands, and what they cost;
+`default_drawings --check-state` fails until each pending count is decided or deferred.
 `adopt_case` is the generator's half: `generate_frontier_case` redrafts an adopted case
 through it (`source_supersession.adopt_selected_report`), which keeps the house and takes
 the ordinary lower lanes from the draft.
@@ -100,7 +109,7 @@ import yaml
 from strif import atomic_output_file
 
 from devtools import apply_closed_form as closed_form
-from devtools import select_houses
+from devtools import default_drawings, select_houses
 from devtools import upper_bound_houses as houses
 from sqpack.yamlio import safe_load
 
@@ -2100,6 +2109,119 @@ def check() -> list[str]:
     return problems
 
 
+#: Where the steps that follow a new house are written (think-g3q7).
+WITNESS_CHANGES = 'docs/project/guides/regularization-process.md, "When a Witness Changes"'
+#: Where the intake runbook schedules those steps and their compute.
+INTAKE_STEP = 'packing/campaign/result-import.md, "Adopt a House, Then Regularize It"'
+#: Both strong generators and the selection on one re-housed count, in CPU-minutes, as the
+#: regularization audit of 15 October 2026 read the layer's run receipts (think-sfas):
+#: Evan Daniel's driver 140 to 220 CPU-seconds a count, grid-slack 37 to 110 at each of
+#: its three thresholds, and the selection up to about four minutes for a large view.
+REGULARIZE_CPU_MINUTES = (5, 15)
+#: What follows a write, as `python -m devtools.` commands from `packing/` with `{n}` the
+#: re-housed counts: the new witness, the axis tool's view of it, and each count's state.
+REFRESH_COMMANDS = (
+    "build_known_best_atlas --update",
+    "regularize_axis_components --update-atlas --n {n}",
+    "default_drawings --update",
+)
+#: Then the strong generators on each pending count, grid-slack at its three thresholds
+#: and Evan Daniel's driver, and the selection, which prints the `layer` commands.
+STRONG_COMMANDS = (
+    "regularize_grid_slack --n {n} --run-dir $RUNS/grid-0.5",
+    "regularize_grid_slack --n {n} --run-dir $RUNS/grid-1 --near-axis-degrees 1",
+    "regularize_grid_slack --n {n} --run-dir $RUNS/grid-5 --near-axis-degrees 5",
+    "regularize_evand run --run-dir $RUNS/evand --n {n} --workers K",
+    (
+        "regularize_select --evand-run $RUNS/evand --grid-run $RUNS/grid-0.5 $RUNS/grid-1 "
+        "$RUNS/grid-5 --workers K --output $RUNS/selection.json --markdown $RUNS/selection.md"
+    ),
+)
+
+
+def regularization_owed(
+    counts: Sequence[int],
+    *,
+    index: Path = default_drawings.INDEX,
+    allowed: Mapping[int, str] | None = None,
+    settled: Mapping[int, object] | None = None,
+) -> list[str]:
+    """What re-housing `counts` owes the regularized layer, as the lines `main` prints.
+
+    A new house is a new witness: the layer's view of the count lapses with it, and the
+    count reads `pending` in `default-drawings.json` until the strong generators decide the
+    new witness, unless the new house drawing has no uneven and no near-axis square and no
+    strong view of the count has lapsed (`default_drawings.count_state`). Read from the
+    committed index before the atlas is refreshed, this names the counts certain to be
+    pending, a `PENDING_ALLOWED` entry that already defers one, and a `SETTLED` decision
+    the new witness voids, then gives the commands and their cost. It measures and runs
+    nothing: the runs take minutes a count, and the pass schedules them under its compute
+    cap (`INTAKE_STEP`).
+    """
+    if not counts:
+        return []
+    allowed = default_drawings.PENDING_ALLOWED if allowed is None else allowed
+    settled = default_drawings.SETTLED if settled is None else settled
+    entries = default_drawings.index_entries(index)
+    spaced = " ".join(map(str, counts))
+    certain: list[str] = []
+    unless: list[str] = []
+    for n in counts:
+        entry = entries.get(n, {})
+        lapse = entry.get(default_drawings.LAPSED)
+        if entry.get("generator") in default_drawings.STRONG_GENERATORS:
+            certain.append(f"{n} (its {entry['generator']} view lapses)")
+        elif lapse:
+            certain.append(f"{n} (a {lapse['generator']} view lapsed earlier)")
+        else:
+            unless.append(str(n))
+    low, high = REGULARIZE_CPU_MINUTES
+    lines = [
+        f"regularization owed: {len(counts)} re-housed counts, {spaced} ({WITNESS_CHANGES})"
+    ]
+    if certain:
+        lines.append(f"  pending until the strong generators decide it: {', '.join(certain)}")
+    if unless:
+        lines.append(
+            "  pending unless the new house drawing has no uneven and no near-axis square: "
+            + ", ".join(unless)
+        )
+    lines.extend(
+        f"  n={n}: PENDING_ALLOWED already defers it ({allowed[n]}); keep it there only if "
+        "that bead's runs take the new witness"
+        for n in counts
+        if n in allowed
+    )
+    lines.extend(
+        f"  n={n}: SETTLED was decided on the earlier witness; decide the new one and settle "
+        "it again, or take it off"
+        for n in counts
+        if n in settled
+    )
+    lines.append(
+        f"  cost: {low} to {high} CPU-minutes a count for both strong generators and the "
+        f"selection, {low * len(counts)} to {high * len(counts)} for these, under the pass's "
+        f"compute cap ({INTAKE_STEP})"
+    )
+    lines.append(
+        "  from packing/, each after `uv run --frozen --all-extras --group dev`, RUNS outside "
+        "the checkout:"
+    )
+    lines.extend(f"    python -m devtools.{line.format(n=spaced)}" for line in REFRESH_COMMANDS)
+    lines.append("  then, on the counts it reads pending:")
+    lines.extend(f"    python -m devtools.{line.format(n=spaced)}" for line in STRONG_COMMANDS)
+    lines.append(
+        "  and the `layer` commands it prints, then the guide's step 5; or, where the runs "
+        "must wait, add each pending count to default_drawings.PENDING_ALLOWED with the open "
+        "bead that owns its runs, in this pull request."
+    )
+    lines.append(
+        "  `python -m devtools.default_drawings --check-state` fails until every pending count "
+        "is one or the other."
+    )
+    return lines
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n", 1)[0])
     mode = parser.add_mutually_exclusive_group()
@@ -2125,9 +2247,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     if arguments.dry_run:
         for move in moves:
             print(f"n={move.n}: {move.house.result} {select_houses.ceiling(move.house.side)}")
+        for line in regularization_owed([move.n for move in moves if not adopted(move)]):
+            print(line)
         return 0
     written = write(moves)
     print(f"adopted {len(written)} houses: {', '.join(map(str, written)) or 'none'}")
+    for line in regularization_owed(written):
+        print(line)
     return 0
 
 

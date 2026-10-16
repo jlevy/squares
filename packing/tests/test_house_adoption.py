@@ -18,6 +18,7 @@ import yaml
 
 from devtools import adopt_houses as adopt
 from devtools import apply_closed_form as closed_form
+from devtools import default_drawings as defaults
 from devtools import select_houses as select
 from devtools import upper_bound_houses as houses
 from sqpack.yamlio import safe_load
@@ -1117,3 +1118,104 @@ def test_a_redraft_keeps_the_house_and_takes_the_drafted_lower_lanes() -> None:
     earlier = adopt.read_history()[70]
     assert not adopt.holds(70, earlier)
     assert adopt.adopt_case(70, earlier, record) == record
+
+
+def _rehoused(tmp_path: Path) -> tuple[Path, int, int, int]:
+    """The layer's index with one axis-tool record given an earlier lapse: a count a strong
+    view draws, one whose strong view lapsed with an earlier house, and one only the axis
+    tool has drawn."""
+    document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
+    entries = {int(entry["n"]): entry for entry in document["entries"]}
+    strong = min(
+        n for n, entry in entries.items() if entry["generator"] in defaults.STRONG_GENERATORS
+    )
+    lapsed, plain = sorted(
+        n
+        for n, entry in entries.items()
+        if entry["generator"] not in defaults.STRONG_GENERATORS and defaults.LAPSED not in entry
+    )[:2]
+    entries[lapsed][defaults.LAPSED] = {
+        "generator": "regularize_grid_slack/1",
+        "run": "a-run",
+        "witness_sha256": "0" * 64,
+    }
+    index = tmp_path / "index.json"
+    index.write_text(json.dumps(document), encoding="utf-8")
+    return index, strong, lapsed, plain
+
+
+def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
+    tmp_path: Path,
+) -> None:
+    """A new house is a new witness, and the count's regularized view lapses with it. The
+    adoptions of #598 and #614 refreshed only the axis tool's views and left twenty counts
+    without a strong generator's decision, n = 176 drawn raw (think-sfas). So a write
+    names every count it re-houses, which of them a lapsing view makes pending for
+    certain, the allowlist entry or settled decision the new witness bears on, and the
+    commands of the guide's "When a Witness Changes" with their cost (think-g3q7)."""
+    index, strong, lapsed, plain = _rehoused(tmp_path)
+    counts = sorted([strong, lapsed, plain])
+    spaced = " ".join(map(str, counts))
+    why = {
+        strong: f"its {defaults.index_entries(index)[strong]['generator']} view lapses",
+        lapsed: "a regularize_grid_slack/1 view lapsed earlier",
+    }
+    lines = adopt.regularization_owed(
+        counts, index=index, allowed={plain: "think-aaaa: a test"}, settled={lapsed: None}
+    )
+    assert lines[:3] == [
+        f"regularization owed: 3 re-housed counts, {spaced} ({adopt.WITNESS_CHANGES})",
+        "  pending until the strong generators decide it: "
+        + ", ".join(f"{n} ({why[n]})" for n in counts if n in why),
+        (
+            "  pending unless the new house drawing has no uneven and no near-axis square: "
+            f"{plain}"
+        ),
+    ]
+    assert lines[3].startswith(f"  n={plain}: PENDING_ALLOWED already defers it (think-aaaa")
+    assert lines[4].startswith(f"  n={lapsed}: SETTLED was decided on the earlier witness")
+    low, high = adopt.REGULARIZE_CPU_MINUTES
+    assert lines[5].startswith(
+        f"  cost: {low} to {high} CPU-minutes a count for both strong generators and the "
+        f"selection, {3 * low} to {3 * high} for these"
+    )
+    commands = [
+        line.strip().removeprefix("python -m devtools.")
+        for line in lines
+        if line.startswith("    python -m ")
+    ]
+    grid = f"regularize_grid_slack --n {spaced} --run-dir $RUNS/grid"
+    assert commands[:7] == [
+        "build_known_best_atlas --update",
+        f"regularize_axis_components --update-atlas --n {spaced}",
+        "default_drawings --update",
+        f"{grid}-0.5",
+        f"{grid}-1 --near-axis-degrees 1",
+        f"{grid}-5 --near-axis-degrees 5",
+        f"regularize_evand run --run-dir $RUNS/evand --n {spaced} --workers K",
+    ]
+    assert commands[7].startswith("regularize_select --evand-run $RUNS/evand --grid-run")
+    assert len(commands) == 8
+    assert "default_drawings.PENDING_ALLOWED with the open bead" in lines[-2]
+    assert "default_drawings --check-state` fails until every pending count" in lines[-1]
+    # Nothing re-housed, nothing owed: a second run of the idempotent write prints nothing.
+    assert adopt.regularization_owed([], index=index) == []
+
+
+def test_a_write_and_a_dry_run_print_what_the_moves_owe(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    move = _move(176)
+    monkeypatch.setattr(adopt, "plan", lambda: [move])
+    monkeypatch.setattr(adopt, "adopted", lambda _move: False)
+    monkeypatch.setattr(adopt, "write", lambda moves: [moved.n for moved in moves])
+    owed = adopt.regularization_owed([176])
+    assert owed[0].startswith("regularization owed: 1 re-housed counts, 176 ")
+    assert adopt.main([]) == 0
+    assert capsys.readouterr().out.splitlines() == ["adopted 1 houses: 176", *owed]
+    assert adopt.main(["--dry-run"]) == 0
+    assert capsys.readouterr().out.splitlines()[1:] == owed
+    # A count already at its house is no move, and owes nothing.
+    monkeypatch.setattr(adopt, "adopted", lambda _move: True)
+    assert adopt.main(["--dry-run"]) == 0
+    assert len(capsys.readouterr().out.splitlines()) == 1

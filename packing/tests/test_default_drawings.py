@@ -11,6 +11,7 @@ the data gives.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -488,7 +489,8 @@ def test_an_adoption_that_rebuilds_only_the_axis_view_reads_pending(tmp_path: Pa
 
     # And the gate fails on the regenerated record until the generators decide it.
     record["states"] = [state if found["n"] == n else found for found in record["states"]]
-    found, _listed = defaults.state_problems(_write(tmp_path, record), adopted)
+    regenerated = _write(tmp_path, record)
+    found, _listed = defaults.state_problems(regenerated, adopted)
     assert [line for line in found if line.startswith(f"n={n}")] == [
         (
             f"n={n} is pending: {state['why']}. Run the strong generators on its witness "
@@ -496,6 +498,20 @@ def test_an_adoption_that_rebuilds_only_the_axis_view_reads_pending(tmp_path: Pa
             "PENDING_ALLOWED with the bead that owns the run"
         )
     ]
+
+    # Or until the adoption's pull request defers it with the bead that owns its runs
+    # (result-import.md, "Adopt a House, Then Regularize It"; think-g3q7): then the gate
+    # lists it as allowed, and an entry naming no bead fails it again.
+    def about(lines: list[str]) -> list[str]:
+        return [line for line in lines if re.match(rf"n={n}\b", line)]
+
+    deferred = {**defaults.PENDING_ALLOWED, n: "think-g3q7: re-housed by an adoption"}
+    found, listed = defaults.state_problems(regenerated, adopted, allowed=deferred)
+    assert about(found) == []
+    assert about(listed) == [f"n={n} is pending, allowed: {deferred[n]}"]
+    unowned = {**defaults.PENDING_ALLOWED, n: "until the runs fit the cap"}
+    found, _listed = defaults.state_problems(regenerated, adopted, allowed=unowned)
+    assert about(found) == [f"n={n}: PENDING_ALLOWED names no bead: {unowned[n]!r}"]
 
 
 def test_a_lapse_where_the_house_reads_regular_reads_pending(tmp_path: Path) -> None:
