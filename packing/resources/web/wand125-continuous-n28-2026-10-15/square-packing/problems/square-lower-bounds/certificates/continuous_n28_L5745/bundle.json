@@ -1,0 +1,80 @@
+{
+ "schema": "continuous-pose-check-v1",
+ "n": 28,
+ "claim_fraction": "1149/200",
+ "claim_decimal": "5.745",
+ "claim": "No packing of 28 closed unit squares (interiors disjoint) fits in the closed square of side 1149/200 (= 5.745); equivalently s(28) > 1149/200.",
+ "candidate": {
+  "file": "candidate.json",
+  "sha256": "a2e47a39e310c695fafeb8d1c744f930a561b3be7d71bbdb359e362eaebacb8d",
+  "L": "573351/100000",
+  "L_decimal": "5.73351",
+  "search_core_B": "0.9977",
+  "search_net": {
+   "step": "83/40000",
+   "last": 200,
+   "directions": 201
+  },
+  "total_mass": "2799999/100000",
+  "rectangles": 884,
+  "points": 0
+ },
+ "verifier_premises": {
+  "core": "499/500",
+  "tau": "1",
+  "L": "573351/100000",
+  "X": "1149/200",
+  "relation": "X = L / core: a unit square at any orientation in a container of side X scales by 499/500 to a square of side 499/500 in the container of side L"
+ },
+ "check1": {
+  "verifier": "sqverify-fast --continuous v4",
+  "source_sha256": "619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5",
+  "published": "wand125/square-packing tools/sqverify_continuous, commit d4a1981",
+  "archive": "check1/src/sqverify_continuous_v4.tgz",
+  "archive_sha256": "720869758013ac3cc86343f0603817ee36298be7696e40bb1d164a511f383a08",
+  "status": "VERIFIED",
+  "claim": "s(28) > 1149/200",
+  "roots": 86,
+  "refused_roots": 0,
+  "nodes": 1265052068,
+  "leaves": 632526077,
+  "min_certified_lower_bound": 1.0000000000047078,
+  "wall_seconds": 4183,
+  "threads": 10,
+  "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+  "control": {
+   "candidate": "control/candidate-mass0985.json",
+   "masses": "x 985/1000",
+   "status": "REFUSED"
+  }
+ },
+ "check2": {
+  "verifier": "contpose_check3 v1.2",
+  "source_sha256": "f3629c29d682a9dd3c7acc42770207bfd1f2386cd6c38f0328cc755175e3c86e",
+  "kernel": "Guzhou0806/n40-square-packing commit 71c97d0 (MIT), kernel modified per CHANGES.md",
+  "src": "check2/src/",
+  "status": "VERIFIED",
+  "claim": "s(28) > 1149/200",
+  "slabs": 43,
+  "refused_slabs": 0,
+  "nodes": 1912948689,
+  "leaves": 956474366,
+  "seconds": 8506,
+  "manifest_sha256": "ca1c526732fc2aa6edd6dc8939cf5a87de54920e16769a63f4f4c9cce1411ef1",
+  "control": {
+   "candidate": "control/candidate-mass0985.json",
+   "masses": "x 985/1000",
+   "status": "REFUSED",
+   "errors": [
+    "Axis coverage refused"
+   ]
+  }
+ },
+ "replaces": {
+  "certificate": "mixed_n28_L57425",
+  "value": "5.7425",
+  "improvement": "1/400"
+ },
+ "independence": "The two verifiers share no code. The second system reuses the continuous-pose kernel of Guzhou0806/n40-square-packing (commit 71c97d0, MIT) with the changes listed in check2/src/CHANGES.md; the first system was written separately (it extends sqverify-fast). The second-system kernel was read during a review of that repository, so the two are independent in code, not in authorship of ideas.",
+ "created": "2026-10-15"
+}

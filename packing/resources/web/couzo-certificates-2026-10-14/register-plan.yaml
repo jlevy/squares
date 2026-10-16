@@ -1,0 +1,495 @@
+# The register plan for issue #607 (think-qik6), as `upper_bound_reports register-plan`
+# printed it from this packet on 2026-10-15, after the receipt was admitted. It is a
+# proposal for the records lane, which applies the owner's per-count rule of 14 October
+# to it; T-NNN stands for the id that lane takes last. Once applied, the register is the
+# record and this file is only the proposal; the records lane may delete it then.
+#
+# The rule changes the raw plan in three ways (README, "In Report Order"):
+#
+# - The register entry and the beyond-horizon rows at the 16 counts the certificates are
+#   recorded at stand: 237 (a refinement of Mykhailo Polkovskyi's #593 packing, T-183,
+#   1.01e-4 below it), and 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649,
+#   651, 757 and 804.
+# - The seven rows at 703, 812, 930, 931, 992, 993 and 994 are not Couzo's: each
+#   certificate is Kevin Fang's composite byte for byte, published at bef5c42 on 12
+#   October, a tie the earlier holder keeps. They are registered as Fang's rows by his
+#   composites import (think-rn2y), citing this packet's retained bytes and receipt as
+#   evidence, and the entry's claim drops them from "the same release states".
+# - Couzo's own 487b058 certificates are earlier reports at 16 of these counts and an
+#   import of their own (think-nj7h); each is recorded before this packet's there.
+#
+results.yaml:
+  id: T-NNN
+  kind: upper-bound
+  registered: '2026-10-14'
+  headline: Francisco Couzo's certificate for 237 squares, below Mykhailo Polkovskyi's, and 15 beyond-horizon
+    bounds; seven Kevin Fang composites replayed
+  claim: 'One complete rational source certificate reports a finite upper-bound improvement at the exact
+    side it states: s(237) <= 12163897896660350527924222391/764899771970500000000000000. Complete native
+    feasibility outcomes are retained separately; the selected standing case is unchanged pending independent
+    review and record review. The same release states s(339) <= 15760492451744053967692664819/833191141347000000000000000,
+    s(342) <= 13505979727081420240143041327/712163911851000000000000000, s(382) <= 11022991764484891182563636300647365246824336756792134646965777453391/551490929281812357791494555514909292818123577914945500000000000000,
+    s(409) <= 12913362409176042797577197977/621808448863500000000000000, s(419) <= 80695119733625752827535766822771925130844543419314113774658870691/3849958446685324913565194998050235494743230122939250000000000000,
+    s(450) <= 86015497401862821831433322593/3951569106671500000000000000, s(461) <= 4815728038236625594119195870229537391060756184031012912605279819357/219163872303991689276056426799981765896492324486478500000000000000,
+    s(542) <= 5532991125316051254254297371/232201273560500000000000000, s(552) <= 1336913104446320995776430361526045060886790944910372943/55779003704893601939282009645665379846500000000000000,
+    s(599) <= 26704722559059887305228107379/1069556443814500000000000000, s(648) <= 1580917747964295160131077049/60879375637000000000000000,
+    s(649) <= 22005763134880310331656432423/847125729886500000000000000, s(651) <= 241476276408156387115385105463274782867431850070691071/9293083814480905136206318825678729558937500000000000,
+    s(703) <= 84738539313948868700545951204479818784523271832856247966865/3138550867693340381917894711603833208051177722232017256448,
+    s(757) <= 2017013645520556066618921865312330242011007231621137760082264853190861249025432441426574553/72059361334628479177359726217958887411830602793896518335182698782951858151500000000000000,
+    s(804) <= 21316338098656938426429163392528974468810470714920720667861834801531/737069301316017949763472070077201158201889297143765500000000000000,
+    s(812) <= 29525091996913125398135261373207251893009342818073786109012779159953438223084287005749394901/1018517988167996034077498065268488875215205837325470823073240518191708505891957850912063488,
+    s(930) <= 31562127973249117466400685445292960303480366676912448108616062071407764215299748344203296213/1018517988167996034077498065268488875215205837325470823073240518191708505891957850912063488,
+    s(931) <= 97276398299580079480270046125646242095222712627928615194987/3138550867693340381917894711603833208051177722232017256448,
+    s(992) <= 4073718063728373757973775730945251758519568907513379265429013564598940141656835560846275171/127314748520905380599255848038102926985035077487490105738133619379770731599102650938818560,
+    s(993) <= 118027167624474462350242506798159235185882372704589/3689348814741910323200000000000000000000000000000
+    and s(994) <= 100431293652415570610986130679801330983437596962595754777745/3138550867693340381917894711603833208051177722232017256448,
+    beyond the case corpus; the source register tracks those as beyond-horizon rows.
+
+
+    The author reports that all 23 certificates pass this repository''s sqpack verify.py at 37e6757, run
+    independently with exact rationals and spatial-bucket pair enumeration, and Evan Daniel''s verify_cert.py
+    at 622cd2e (SHA-256 3299ca0c...), each returning VALID with exit status 0, the replay of the 16 campaign
+    and precision certificates taking 22.4 seconds of wall time on two processes; that the 16 also passed
+    the browser campaign''s Rust rational checker; and that the seven composite receipts were reused after
+    their digests matched the replayed bytes. Two composites were copied from Kevin Fang''s shipped certificates
+    and five regenerated with his tools/glue.py, all seven with the SHA-256 his table lists. Those statements
+    are the author''s; no source program ran here.
+
+
+    Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with the 16 campaign and precision
+    certificates, with the packings each continues, as the author asks: at 237 Mykhailo Polkovskyi''s
+    issue-593 certificate (T-183), whose construction credit he asks to keep; at 339 the author''s own
+    L-border construction of issue 506, refined in issues 583 and 586; at 382 and 651 Kevin Fang''s published
+    arrangements; at 409 and 450 the campaign''s L-border lineage, whose 409 start includes Evan Daniel''s
+    298 packing, with 450 one L-border layer on the new 409; at 419, 461 and 804 campaign refinements
+    and L-border or elimination constructions from starts that include the project''s refinements of Fang''s
+    380 and 381; at 552, 599 and 648 the campaign''s 552 with zero, one and two L-border layers; at 649
+    elimination from 651; and at 757 elimination from 758. Credit Kevin Fang (TheSnakeFang) with the seven
+    composites at 703, 812, 930, 931, 992, 993 and 994, which the author replayed and does not claim.
+    Evan Daniel''s optimizer and verifier, David Ellsworth''s refinement ideas and this repository''s
+    exact verifier were used. The author states that OpenAI Codex assisted search and verification orchestration,
+    source review, certificate packaging and the issue, that earlier search work used Claude Code, and
+    that he directed the work.'
+  scope:
+    n_values:
+    - 237
+  verification: V0
+  confirmation: C0
+  significance:
+    score: 2
+    rationale: A smaller finite construction side at n = 237, 3.46e-04 below the case ceiling; no lower
+      bound or optimum.
+    scored: '2026-10-14'
+    by: think-qik6 Francisco Couzo import
+  novelty: previously-published
+  attribution:
+    source_keys:
+    - '[Couzo certificates 2026-10-14]'
+    published: '2026-10-14'
+  evidence:
+  - E-couzo-607-certificate-report
+  artifacts:
+  - packing/resources/web/couzo-certificates-2026-10-14/README.md
+  - packing/resources/web/couzo-certificates-2026-10-14/acquisition/claims.json
+  - packing/resources/web/couzo-certificates-2026-10-14/source/submissions/2026-10-14/certificates/n237.cert
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n237.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n339.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n342.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n382.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n409.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n419.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n450.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n461.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n542.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n552.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n599.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n648.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n649.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n651.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n703.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n757.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n804.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n812.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n930.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n931.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n992.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n993.json.xz
+  - packing/resources/web/couzo-certificates-2026-10-14/receipts/exact-certification-n994.json.xz
+  - packing/devtools/upper_bound_reports.py
+  controls:
+  - packing/tests/test_upper_bound_reports.py
+  notes: 'A separate complete repository replay is retained for n = 237, 339, 342, 382, 409, 419, 450,
+    461, 542, 552, 599, 648, 649, 651, 703, 757, 804, 812, 930, 931, 992, 993 and 994: 23 positives and
+    46 duplicate-square and outside-container controls passed their required outcomes on both routes,
+    31386744 pair decisions; summed over the 69 jobs, the receipt records 12425.76 route CPU seconds and
+    14795.58 job wall seconds, the longest job 632.89 seconds. Every positive clears every wall by at
+    least 2.71e-20 and every pair by at least 5.42e-20.
+
+
+    At n = 237 the certificate is below the case''s ceiling (Nate Chaoweeraprasit (itsnaka), improved
+    by Francisco Couzo, T-140) by 3.46e-04; below #561 (Francisco Couzo) by 3.44e-04; below PR #574 (PingYou
+    Ltd (BuddenPing), numerical v2) by 3.44e-04; below T-098 (#375) (Daniel after Couzo, de Winter, Ellsworth,
+    Levy) by 8.59e-03; below T-115 (#401) (Chaoweeraprasit after Couzo and Ellsworth) by 1.07e-03; below
+    T-127 (#438) (Gupta after Chaoweeraprasit, Daniel) by 1.07e-03; below T-134 (#476) (Couzo after Mishapolk,
+    Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth, Levy) by 1.07e-03; below T-136 (#481) (Chaoweeraprasit
+    after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba, Levy) by 3.86e-04; below #505 (Robert Barnett)
+    by 1.07e-03; below #470 (Mykhailo Polkovskyi (Mishapolk)) by 1.07e-03; below #573 (Mykhailo Polkovskyi
+    (Mishapolk)) by 3.46e-04; below #593 (Mykhailo Polkovskyi (Mishapolk)) by 1.01e-04; smallest: this
+    certificate. At n = 339 the certificate is beyond the horizon, with no case record, and 8.42e-02 below
+    the grid; below #476 (Francisco Couzo) by 1.43e-02; below #506 (Francisco Couzo) by 1.36e-02; below
+    #583 (Francisco Couzo) by 1.16e-02; below #584 (Evan Daniel) by 1.11e-02; below #586 (Francisco Couzo)
+    by 9.50e-03; below couzo-certificates-2026-10-13 (Francisco Couzo) by 9.50e-03; below franciscouzo/square-packing@487b058
+    (Francisco Couzo) by 2.29e-04; smallest: this certificate. At n = 342 the certificate is beyond the
+    horizon, with no case record, and 3.53e-02 below the grid; below couzo-extended-range-reports-2026-10-08
+    (Francisco Couzo) by 2.68e-10; below #476 (Francisco Couzo) by 2.86e-10; below TheSnakeFang/squarepack-certs@bef5c42
+    L1_n19_342_r18x17_n0290+one-square (table-only) (Kevin Fang) by 3.28e-02; smallest: this certificate.
+    At n = 382 the certificate is beyond the horizon, with no case record, and 1.24e-02 below the grid;
+    below fang-direct-certificates-2026-10-13 (Kevin Fang) by 1.86e-03; below TheSnakeFang/squarepack-certs@078789a
+    theorem/best/n020_j2.cert (Kevin Fang) by 1.23e-02; below #583 (Francisco Couzo) by 9.79e-04; below
+    #586 (Francisco Couzo) by 9.20e-05; below couzo-certificates-2026-10-13 (Francisco Couzo) by 9.20e-05;
+    below franciscouzo/square-packing@487b058 (Francisco Couzo) by 1.34e-07; smallest: this certificate.
+    At n = 409 the certificate is beyond the horizon, with no case record, and 2.33e-01 below the grid;
+    below franciscouzo/square-packing@487b058 (Francisco Couzo) by 5.07e-05; smallest: this certificate.
+    At n = 419 the certificate is beyond the horizon, with no case record, and 4.00e-02 below the grid;
+    below franciscouzo/square-packing@487b058 (Francisco Couzo) by 1.50e-03; smallest: this certificate.
+    At n = 450 the certificate is beyond the horizon, with no case record, and 2.33e-01 below the grid;
+    below franciscouzo/square-packing@487b058 (Francisco Couzo) by 5.07e-05; smallest: this certificate.
+    At n = 461 the certificate is beyond the horizon, with no case record, and 2.68e-02 below the grid;
+    below franciscouzo/square-packing@487b058 (Francisco Couzo) by 1.29e-03; smallest: this certificate.
+    At n = 542 the certificate is beyond the horizon, with no case record, and 1.72e-01 below the grid;
+    below franciscouzo/square-packing@487b058 (Francisco Couzo) by 1.02e-09; smallest: this certificate.
+    At n = 552 the certificate is beyond the horizon, with no case record, and 3.20e-02 below the grid;
+    below TheSnakeFang/squarepack-certs@bef5c42 L1_n24_552_r21x20_n0401+n-11 (table-only) (Kevin Fang)
+    by 2.03e-02; below franciscouzo/square-packing@487b058 (Francisco Couzo) by 5.73e-03; smallest: this
+    certificate. At n = 599 the certificate is beyond the horizon, with no case record, and 3.20e-02 below
+    the grid; below franciscouzo/square-packing@487b058 (Francisco Couzo) by 5.55e-03; smallest: this
+    certificate. At n = 648 the certificate is beyond the horizon, with no case record, and 3.20e-02 below
+    the grid; below franciscouzo/square-packing@487b058 (Francisco Couzo) by 5.55e-03; smallest: this
+    certificate. At n = 649 the certificate is beyond the horizon, with no case record, and 2.30e-02 below
+    the grid; below franciscouzo/square-packing@487b058 (Francisco Couzo) by 8.12e-04; smallest: this
+    certificate. At n = 651 the certificate is beyond the horizon, with no case record, and 1.55e-02 below
+    the grid; below fang-direct-certificates-2026-10-13 (Kevin Fang) by 7.03e-03; below TheSnakeFang/squarepack-certs@078789a
+    theorem/n026_F1.cert (Kevin Fang) by 1.54e-02; below franciscouzo/square-packing@487b058 (Francisco
+    Couzo) by 3.79e-04; smallest: this certificate. At n = 703 the certificate is beyond the horizon,
+    with no case record, and 7.44e-04 below the grid; undecided TheSnakeFang/squarepack-certs@bef5c42
+    L1_n27_703_r17x16_n0257+n-110 (shipped) (Kevin Fang); below TheSnakeFang/squarepack-certs@078789a
+    theorem/n027_F1.cert (Kevin Fang) by 6.94e-04; no report is decidably smallest of this certificate
+    and TheSnakeFang/squarepack-certs@bef5c42 L1_n27_703_r17x16_n0257+n-110 (shipped). At n = 757 the
+    certificate is beyond the horizon, with no case record, and 9.00e-03 below the grid; below TheSnakeFang/squarepack-certs@bef5c42
+    L1_n28_757_r18x17_n0290+n-110 (table-only) (Kevin Fang) by 6.55e-03; below TheSnakeFang/squarepack-certs@bef5c42
+    n028_j1_757.cert (shipped) (Kevin Fang) by 8.26e-03; below TheSnakeFang/squarepack-certs@078789a theorem/n028_F1.cert
+    (Kevin Fang) by 8.95e-03; below franciscouzo/square-packing@487b058 (Francisco Couzo) by 1.47e-03;
+    smallest: this certificate. At n = 804 the certificate is beyond the horizon, with no case record,
+    and 7.96e-02 below the grid; below franciscouzo/square-packing@487b058 (Francisco Couzo) by 6.78e-03;
+    smallest: this certificate. At n = 812 the certificate is beyond the horizon, with no case record,
+    and 1.17e-02 below the grid; undecided TheSnakeFang/squarepack-certs@bef5c42 L1_n29_812_r21x20_n0401+n-71
+    (table-only) (Kevin Fang); below franciscouzo/square-packing@487b058 (Francisco Couzo) by 4.18e-03;
+    no report is decidably smallest of this certificate and TheSnakeFang/squarepack-certs@bef5c42 L1_n29_812_r21x20_n0401+n-71
+    (table-only). At n = 930 the certificate is beyond the horizon, with no case record, and 1.17e-02
+    below the grid; undecided TheSnakeFang/squarepack-certs@bef5c42 L1_n31_930_r21x20_n0401+n-109 (table-only)
+    (Kevin Fang); below franciscouzo/square-packing@487b058 (Francisco Couzo) by 1.28e-03; no report is
+    decidably smallest of this certificate and TheSnakeFang/squarepack-certs@bef5c42 L1_n31_930_r21x20_n0401+n-109
+    (table-only). At n = 931 the certificate is beyond the horizon, with no case record, and 5.95e-03
+    below the grid; undecided TheSnakeFang/squarepack-certs@bef5c42 L1_n31_931_r19x18_n0325+n-156 (table-only)
+    (Kevin Fang); below TheSnakeFang/squarepack-certs@bef5c42 n031_j1_931.cert (shipped) (Kevin Fang)
+    by 5.21e-03; no report is decidably smallest of this certificate and TheSnakeFang/squarepack-certs@bef5c42
+    L1_n31_931_r19x18_n0325+n-156 (table-only). At n = 992 the certificate is beyond the horizon, with
+    no case record, and 2.78e-03 below the grid; undecided TheSnakeFang/squarepack-certs@bef5c42 L1_n32_992_r22x21_n0442+n-109
+    (table-only) (Kevin Fang); no report is decidably smallest of this certificate and TheSnakeFang/squarepack-certs@bef5c42
+    L1_n32_992_r22x21_n0442+n-109 (table-only). At n = 993 the certificate is beyond the horizon, with
+    no case record, and 8.67e-03 below the grid; undecided TheSnakeFang/squarepack-certs@bef5c42 L1_n32_993_r21x20_n0401+n-132
+    (table-only) (Kevin Fang); no report is decidably smallest of this certificate and TheSnakeFang/squarepack-certs@bef5c42
+    L1_n32_993_r21x20_n0401+n-132 (table-only). At n = 994 the certificate is beyond the horizon, with
+    no case record, and 7.44e-04 below the grid; undecided TheSnakeFang/squarepack-certs@bef5c42 L1_n32_994_r17x16_n0257+n-241
+    (shipped) (Kevin Fang); below TheSnakeFang/squarepack-certs@078789a theorem/n032_F2.cert (Kevin Fang)
+    by 6.94e-04; no report is decidably smallest of this certificate and TheSnakeFang/squarepack-certs@bef5c42
+    L1_n32_994_r17x16_n0257+n-241 (shipped).
+
+
+    The source''s own checkers were not run here. The two maintained routes, the sqpack rational witness
+    verifier and the independent rational corner checker, share certificate parsing, half-angle conversion,
+    Fraction arithmetic and the separating-axis method. No two independent methods, human oversight or
+    optimality is claimed.'
+  next_rung: 'Independently review the retained replay, then register by the per-count rule: at 237 the
+    certificate is below T-183 (issue 593) by 1.01e-04, the smallest report; beyond the horizon the 14
+    campaign and precision certificates are each below every earlier report, Couzo''s own 487b058 certificates
+    included; at the seven composite counts the certificates are Fang''s composites byte for byte, so
+    they register as Fang''s rows (think-rn2y) with this replay as evidence, not as Couzo''s results.
+    Final exact-head CI remains required.'
+evidence.yaml:
+  id: E-couzo-607-certificate-report
+  claim: upper-bound
+  scope:
+    n_values:
+    - 237
+    - 339
+    - 342
+    - 382
+    - 409
+    - 419
+    - 450
+    - 461
+    - 542
+    - 552
+    - 599
+    - 648
+    - 649
+    - 651
+    - 703
+    - 757
+    - 804
+    - 812
+    - 930
+    - 931
+    - 992
+    - 993
+    - 994
+  assurance: reported
+  reported_method: exact-algebraic
+  performed_by: source-author
+  relationship_to_generator: same-implementation
+  origin: external
+  novelty: previously-published
+  source_key: '[Couzo certificates 2026-10-14]'
+  certificate: packing/resources/web/couzo-certificates-2026-10-14/source/submissions/2026-10-14/certificates/
+  replay_status: not-attempted
+  verifiers: []
+  source_reviewed: '2026-10-14'
+  limitations: 'This atom records the source author''s report of 23 exact rational certificates at 43ac7d2.
+    A separate complete repository replay is retained for n = 237, 339, 342, 382, 409, 419, 450, 461,
+    542, 552, 599, 648, 649, 651, 703, 757, 804, 812, 930, 931, 992, 993 and 994: 23 positives and 46
+    duplicate-square and outside-container controls passed their required outcomes on both routes, 31386744
+    pair decisions; summed over the 69 jobs, the receipt records 12425.76 route CPU seconds and 14795.58
+    job wall seconds, the longest job 632.89 seconds. Every positive clears every wall by at least 2.71e-20
+    and every pair by at least 5.42e-20. Independent review and confirmation remain pending. The source''s
+    own checkers were not run here. The two maintained routes, the sqpack rational witness verifier and
+    the independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
+    arithmetic and the separating-axis method. No two independent methods, human oversight or optimality
+    is claimed.'
+source-coverage.yaml:
+  sources:
+  - id: couzo-certificates-2026-10-14
+    title: Francisco Couzo's registration witnesses at 43ac7d2, issue 607
+    role: source-repository
+    url: https://github.com/franciscouzo/square-packing/tree/43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2
+    local: resources/web/couzo-certificates-2026-10-14/
+    source_key: '[Couzo certificates 2026-10-14]'
+    scope:
+      n_values:
+      - 237
+      - 339
+      - 342
+      - 382
+      - 409
+      - 419
+      - 450
+      - 461
+      - 542
+      - 552
+      - 599
+      - 648
+      - 649
+      - 651
+      - 703
+      - 757
+      - 804
+      - 812
+      - 930
+      - 931
+      - 992
+      - 993
+      - 994
+    reviewed: '2026-10-14'
+    source_date: '2026-10-14'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+    - frontier/results.yaml
+    - resources/web/couzo-certificates-2026-10-14/acquisition/claims.json
+    evidence:
+    - E-couzo-607-certificate-report
+    notes: All 23 complete certificates are retained as the source wrote them, each admitted only where
+      its exact side equals, or rounds up to, the side its source prints. T-NNN records the in-horizon
+      report. All 69 native jobs have full outcomes. No selected override or superseded claim is created
+      at this source-only stage; current cases and earlier source ownership remain unchanged.
+    claims_record: resources/web/couzo-certificates-2026-10-14/acquisition/beyond-horizon-claims.json
+  beyond_horizon_claims:
+  - n: 339
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '18.915818555470'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 342
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '18.964706723173'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 382
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '19.987621154241'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 409
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '20.767428349966'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 419
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '20.959997582079'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 450
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '21.767428350587'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 461
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '21.973183753375'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 542
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '23.828427124774'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 552
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '23.968034845503'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 599
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '24.968034846127'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 648
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '25.968034846328'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 649
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '25.976974088403'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 651
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '25.984515068279'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 703
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '26.999256308447'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 757
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '27.991000865994'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 804
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '28.920398747577'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 812
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '28.988287236851'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 930
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '30.988287236851'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 931
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '30.994048655032'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 992
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '31.997220361783'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 993
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '31.991327887692'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+  - n: 994
+    source_id: couzo-certificates-2026-10-14
+    claim: upper-bound
+    value: '31.999256308447'
+    assurance: reported
+    disposition: tracked-outside-case-corpus
+    bead: think-qik6
+bibliography.yaml:
+  key: '[Couzo certificates 2026-10-14]'
+  authors:
+  - Couzo
+  year: 2026
+  venue: GitHub
+  dated: '2026-10-14'
+  lineage: builds-on-project
+  credit: Couzo after Polkovskyi, Fang, Daniel, Ellsworth, Levy
+  short_credit: Couzo after Polkovskyi et al.
+  note: 'Twenty-three complete exact certificates at 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2, issue 607:
+    a refinement at 237 of Mykhailo Polkovskyi''s issue-593 certificate, 13 campaign bounds and two precision
+    refinements beyond the case corpus, and seven of Kevin Fang''s Section 5 composites, byte for byte
+    the certificates his table lists, which the author replayed and credits to Fang. The source checks
+    with Squares Project (Levy) verification code and Evan Daniel''s checker; this project lineage is
+    not independent. The certificates are retained as factual data; the unlicensed prose is hash-pinned.
+    OpenAI Codex assistance disclosed. No optimizer, local or global claim.'
+resources/README.md: '**[Couzo certificates 2026-10-14]**: Francisco Couzo''s exact rational certificates
+  for n = 237, 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 703, 757, 804, 812, 930,
+  931, 992, 993 and 994, pinned at `43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2`, retained as the source
+  wrote them; [packet](web/couzo-certificates-2026-10-14/README.md). Both project exact routes accept
+  all 23 replayed certificates and refuse all 46 controls. T-NNN records the in-horizon side at V0/C0,
+  pending independent review and adoption. The n = 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648,
+  649, 651, 703, 757, 804, 812, 930, 931, 992, 993 and 994 sides lie beyond the case corpus and are tracked
+  as beyond-horizon rows.'
