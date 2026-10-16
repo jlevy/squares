@@ -15455,7 +15455,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: optimality
@@ -15470,6 +15470,7 @@ urls:
     builds_on: null
     evidence:
     - E-bengreff-594-cover-report
+    - E-bengreff-594-cover-replay
     - E-basic-grid-upper
     artifacts:
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/README.md
@@ -15478,6 +15479,32 @@ urls:
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_cover_audit.json
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_zmx2_d4.log
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_triage_checks.log
+  amendments:
+  - date: '2026-10-16'
+    reason: Cite the intake's reproduction of the source's two checkers, zmx2 and zm_mixed.py, over
+      the D4 region (E-bengreff-594-cover-replay), with the rungs held until the stage 4 review; scope,
+      attribution and the stated value are unchanged.
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 76
+      established: null
+      attribution:
+        source_keys:
+        - '[bengreff s76 certificate 2026-10-14]'
+        published: '2026-10-14'
+      builds_on: null
+      evidence:
+      - E-bengreff-594-cover-report
+      - E-basic-grid-upper
+      artifacts:
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/README.md
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate/cover/s76_cover_v5.txt.gz
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate/README.md
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_cover_audit.json
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_zmx2_d4.log
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_triage_checks.log
 - path: result/t-185.html
   canonical: result/t-185.html
   kind: result
@@ -15662,7 +15689,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: optimality
@@ -15677,11 +15704,35 @@ urls:
     builds_on: null
     evidence:
     - E-bengreff-610-cover-report
+    - E-bengreff-610-cover-replay
     - E-basic-grid-upper
     artifacts:
     - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
     - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
     - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+  amendments:
+  - date: '2026-10-16'
+    reason: Cite the intake's reproduction of the source's two checkers, zmx2 and zm_mixed.py, over
+      the D4 region (E-bengreff-610-cover-replay), with the rungs held until the stage 4 review; scope,
+      attribution and the stated value are unchanged.
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 95
+      established: null
+      attribution:
+        source_keys:
+        - '[bengreff s95 certificate 2026-10-15]'
+        published: '2026-10-15'
+      builds_on: null
+      evidence:
+      - E-bengreff-610-cover-report
+      - E-basic-grid-upper
+      artifacts:
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
 - path: result/t-192.html
   canonical: result/t-192.html
   kind: result
