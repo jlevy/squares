@@ -488,10 +488,14 @@ def test_a_settlement_keeps_its_record_when_the_index_drops_a_run(tmp_path: Path
     assert defaults.retain_runs(evidence=evidence) == ([], [])
     assert defaults.state_problems(evidence=evidence)[0] == []
 
-    # A run neither the index nor the evidence holds any longer cannot be retained.
+    # A run neither the index nor the evidence holds any longer cannot be retained. Into
+    # no evidence at all, every other named run the index still holds is copied: the
+    # committed copies, and on a layer whose own runs the index records beside their
+    # receipts, those runs too.
     named = {run for held in defaults.SETTLED.values() for _generator, run in held.runs}
     written, missing = defaults.retain_runs(index=without, evidence=tmp_path / "none")
-    assert set(written) == set(copies) - dropped
+    assert set(written) == (named & indexed) - dropped
+    assert set(copies) - dropped <= set(written)
     assert set(missing) == dropped | (named - indexed)
 
 
