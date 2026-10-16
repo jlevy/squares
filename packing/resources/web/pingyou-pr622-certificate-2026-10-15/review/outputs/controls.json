@@ -25,7 +25,7 @@
         "pair 0 1"
       ],
       "for_the_right_reason": true,
-      "cpu_s": 12.22
+      "cpu_s": 12.01
     },
     {
       "control": "outside-container",
@@ -38,7 +38,7 @@
         "wall 0 left"
       ],
       "for_the_right_reason": true,
-      "cpu_s": 12.07
+      "cpu_s": 12.09
     },
     {
       "control": "tight-pair-23-24",
@@ -51,7 +51,7 @@
         "pair 23 24"
       ],
       "for_the_right_reason": true,
-      "cpu_s": 12.77
+      "cpu_s": 13.05
     },
     {
       "control": "tight-box",
@@ -82,7 +82,7 @@
         "wall 13 right"
       ],
       "for_the_right_reason": true,
-      "cpu_s": 12.07
+      "cpu_s": 12.09
     }
   ]
 }

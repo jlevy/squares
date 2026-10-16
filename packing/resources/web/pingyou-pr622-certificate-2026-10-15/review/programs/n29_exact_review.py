@@ -46,6 +46,11 @@ Subcommands, each printing one JSON object:
     the register's identity measurement (one to one by nearest centres under the box's
     eight symmetries, squares moved beyond 1e-3, the largest move and turn), in floats of
     exact differences. It measures and decides nothing.
+``receipt ASSET RECEIPT``
+    each job the replay retained (``receipts/exact-certification.json.xz``) decided again
+    from its own checker input: the positive held to the certificate, each control held
+    to the mutation it should be and the reason it should be refused for, and each
+    route's least gap and clearance held to this program's.
 """
 
 from __future__ import annotations
@@ -54,6 +59,7 @@ import argparse
 import gzip
 import hashlib
 import json
+import lzma
 import math
 import re
 import sys
@@ -79,6 +85,8 @@ N = 29
 # One unit of a scale far below the certificate's own: its coordinates have denominators
 # of about 2,400 digits, so a move of 10^-3000 is invisible at any precision short of exact.
 TIGHT = Fraction(1, 10**3000)
+#: The move thresholds the identity counts squares beyond.
+THRESHOLDS = ("1e-3", "1e-9", "1e-30")
 RATIONAL = re.compile(r"-?[0-9]+(?:/[0-9]+)?")
 DECIMAL = re.compile(r"-?[0-9]+(?:\.[0-9]+)?")
 
@@ -207,9 +215,7 @@ def gap(p: Square, q: Square) -> tuple[Fraction, str]:
 def decide(side: Fraction, poses: list[Pose]) -> Decision:
     start = time.process_time()
     squares = [square(p) for p in poses]
-    walls = [
-        (k, w, c) for k, q in enumerate(squares) for w, c in clearances(q, side).items()
-    ]
+    walls = [(k, w, c) for k, q in enumerate(squares) for w, c in clearances(q, side).items()]
     pairs = []
     for i in range(len(squares)):
         for j in range(i + 1, len(squares)):
@@ -291,42 +297,50 @@ def cmd_controls(args: argparse.Namespace) -> dict[str, object]:
 
     out = list(poses)
     out[0] = Pose(poses[0].x - 1, poses[0].y, poses[0].t)
-    controls.append(("outside-container", "square 0 moved by (-1, 0)", side, out, ["wall 0 left"]))
+    controls.append(
+        ("outside-container", "square 0 moved by (-1, 0)", side, out, ["wall 0 left"])
+    )
 
     for i, j, a in touching[:2]:
         da, db = toward(squares[i], squares[j], a)
         pushed = list(poses)
         pushed[j] = Pose(poses[j].x - TIGHT * da, poses[j].y - TIGHT * db, poses[j].t)
-        controls.append((
-            f"tight-pair-{i}-{j}",
-            f"square {j} moved 10^-3000 towards square {i} along their touching axis {a}",
-            side,
-            pushed,
-            [f"pair {i} {j}"],
-        ))
+        controls.append(
+            (
+                f"tight-pair-{i}-{j}",
+                f"square {j} moved 10^-3000 towards square {i} along their touching axis {a}",
+                side,
+                pushed,
+                [f"pair {i} {j}"],
+            )
+        )
 
     expected = [f"wall {k} {w}" for k, w, c in base.walls if c == 0 and w in {"top", "right"}]
-    controls.append((
-        "tight-box",
-        "side reduced by 10^-3000",
-        side - TIGHT,
-        list(poses),
-        expected,
-    ))
+    controls.append(
+        (
+            "tight-box",
+            "side reduced by 10^-3000",
+            side - TIGHT,
+            list(poses),
+            expected,
+        )
+    )
 
     rows = []
     for name, mutation, s, ps, want in controls:
         d = decide(s, ps)
         got = d.violations
-        rows.append({
-            "control": name,
-            "mutation": mutation,
-            "refused": bool(got),
-            "violations": got,
-            "expected": want,
-            "for_the_right_reason": got == want,
-            "cpu_s": round(d.cpu_s, 2),
-        })
+        rows.append(
+            {
+                "control": name,
+                "mutation": mutation,
+                "refused": bool(got),
+                "violations": got,
+                "expected": want,
+                "for_the_right_reason": got == want,
+                "cpu_s": round(d.cpu_s, 2),
+            }
+        )
     return {
         "certificate_touching_pairs": [f"{i} {j} along {a}" for i, j, a in touching],
         "certificate_top_right_contacts": top_right,
@@ -364,7 +378,7 @@ def read_fact(path: Path) -> tuple[Fraction, list[tuple[int, Point, Point]]]:
         x, y, b0, b1 = (rational(fact_value(block[i], "    "), "fact") for i in (2, 3, 5, 6))
         rows.append((k + 1, (x, y), (b0, b1)))
     after = lines[start + 7 * N]
-    if after.startswith("  - ") or not after.startswith("  ") or after.startswith("   "):
+    if after.startswith(("  - ", "   ")) or not after.startswith("  "):
         raise ReviewError(f"fact: more than {N} squares, or a layout not read here")
     return side, rows
 
@@ -381,7 +395,8 @@ def cmd_fact(args: argparse.Namespace) -> dict[str, object]:
         if basis != u:
             mismatches.append(f"id {ident}: basis")
     return {
-        "fact": "packing/resources/web/pingyou-pr622-certificate-2026-10-15/facts/n-029.yaml.gz",
+        "fact": "packing/resources/web/pingyou-pr622-certificate-2026-10-15/facts/"
+        "n-029.yaml.gz",
         "side_equal": fside == side,
         "squares": len(rows),
         "ids": "1 to 29, id k the certificate's square k - 1 (the reader refuses any other)",
@@ -403,7 +418,9 @@ def cmd_native(args: argparse.Namespace) -> dict[str, object]:
     for k, (row, pose) in enumerate(zip(rows, poses, strict=True)):
         if row["id"] != k + 1:
             mismatches.append(f"square {k}: id {row['id']}")
-        native = sorted((rational(x, "native"), rational(y, "native")) for x, y in row["corners"])
+        native = sorted(
+            (rational(x, "native"), rational(y, "native")) for x, y in row["corners"]
+        )
         if native != sorted(square(pose).corners):
             mismatches.append(f"square {k}: corners")
     return {
@@ -503,8 +520,8 @@ def interval_reference(path: Path) -> tuple[Fraction, list[tuple[Point, Directio
             raise ReviewError("T-009's witness: a square without 4 corners of 2 enclosures")
         mids = [(values[i] + values[i + 1]) / 2 for i in range(0, 16, 2)]
         corners = [(mids[i], mids[i + 1]) for i in range(0, 8, 2)]
-        cx = sum(c[0] for c in corners) / 4
-        cy = sum(c[1] for c in corners) / 4
+        cx = sum((c[0] for c in corners), Fraction(0)) / 4
+        cy = sum((c[1] for c in corners), Fraction(0)) / 4
         edge = (corners[1][0] - corners[0][0], corners[1][1] - corners[0][1])
         rows.append(((cx, cy), edge))
     return side, rows
@@ -530,7 +547,7 @@ def angle_reference(path: Path) -> tuple[Fraction, list[tuple[Point, Direction]]
     return side, rows
 
 
-def turn_deg(name: str, reverses: bool, u: Point, direction: Direction) -> float:
+def turn_deg(name: str, u: Point, direction: Direction, *, reverses: bool) -> float:
     """The turn between a certificate square and its partner, modulo 90 degrees."""
     if isinstance(direction, tuple):
         return math.degrees(math.asin(min(1.0, turn_sine(linear(name, u), direction))))
@@ -564,9 +581,12 @@ def measure(
         mapped = [symmetry(name, side, c) for c, _ in ours]
         pairs = []
         for centre, direction in ref:
-            dists = [math.hypot(float(m[0] - centre[0]), float(m[1] - centre[1])) for m in mapped]
+            dists = [
+                math.hypot(float(m[0] - centre[0]), float(m[1] - centre[1])) for m in mapped
+            ]
             k = min(range(N), key=dists.__getitem__)
-            pairs.append((k, dists[k], turn_deg(name, reverses, ours[k][1], direction)))
+            turn = turn_deg(name, ours[k][1], direction, reverses=reverses)
+            pairs.append((k, dists[k], turn))
         one_to_one = len({k for k, _, _ in pairs}) == N
         moves = [d for _, d, _ in pairs]
         row: dict[str, object] = {
@@ -574,7 +594,7 @@ def measure(
             "one_to_one": one_to_one,
             "paired_by_index": [k for k, _, _ in pairs] == list(range(N)),
             "moved": sum(d > 1e-3 for d in moves),
-            "moved_beyond": {t: sum(d > float(t) for d in moves) for t in ("1e-3", "1e-9", "1e-30")},
+            "moved_beyond": {t: sum(d > float(t) for d in moves) for t in THRESHOLDS},
             "max_move": f"{max(moves):.4g}",
             "max_turn_deg": f"{max(t for _, _, t in pairs):.4g}",
             "turns": "exact cross and dot products" if exact_turns else "float angles",
@@ -687,6 +707,23 @@ def cmd_sides(args: argparse.Namespace) -> dict[str, object]:
     house_path = "packing/witnesses/known-best/n-029.yaml"
     house = (repo / house_path).read_text()
     house_side = decimal(find_one(r"\n  side: '([0-9.]+)'\n", house, "house side"), "house")
+    # The source's own comparison, read only after the differences above were computed.
+    stated = json.loads(member(asset, "n29-certificate/COMPARISON.json"))
+    files = {"previous_public_pr574_v2": "pr574-v2", "external_pr549": "pr549"}
+    files["external_evan"] = "evan"
+    source_rows = {}
+    for row in stated["comparisons"]:
+        key = files[row["label"]]
+        theirs = baselines[key]
+        source_rows[row["label"]] = {
+            "side_exact equals the baseline's s_exact": rational(row["side_exact"], "side")
+            == theirs,
+            "gain_exact equals the baseline minus S, computed here": rational(
+                row["gain_exact"], "gain"
+            )
+            == theirs - side,
+            "strictly_smaller": row["strictly_smaller"],
+        }
     return {
         "S_sci": sci(side, 60),
         "read_from": [case_path, results_path, ledger_path, t009_path, house_path, ASSET_NAME],
@@ -697,10 +734,14 @@ def cmd_sides(args: argparse.Namespace) -> dict[str, object]:
         "asset pr574-v2 baseline equals the ledger's PR #574 side": baselines["pr574-v2"]
         == pr574,
         "asset pr549 baseline equals T-155": baselines["pr549"] == t155,
-        "n-029.md verified print minus its exact form": sci(decimal(verified_print, "p") - t155),
+        "n-029.md verified print minus its exact form": sci(
+            decimal(verified_print, "p") - t155
+        ),
         "comparisons": rows,
         "Kingbird print spans": {
-            "cut [p, p + ulp)": "S inside" if kingbird <= side < kingbird + ulp else "S outside",
+            "cut [p, p + ulp)": "S inside"
+            if kingbird <= side < kingbird + ulp
+            else "S outside",
             "nearest [p - ulp/2, p + ulp/2]": "S inside"
             if kingbird - ulp / 2 <= side <= kingbird + ulp / 2
             else "S above"
@@ -709,7 +750,8 @@ def cmd_sides(args: argparse.Namespace) -> dict[str, object]:
             "up (p - ulp, p]": "S inside" if kingbird - ulp < side <= kingbird else "S above",
             "S - p in units of the last place": sci((side - kingbird) / ulp),
         },
-        "T-009's Krawczyk pose box for s (packing/witnesses/kingbird-n029-2026-interval.yaml)": {
+        "T-009's Krawczyk pose box for s": {
+            "path": t009_path,
             "lo": box[0],
             "hi": box[1],
             "S - lo": sci(side - box_lo),
@@ -720,16 +762,84 @@ def cmd_sides(args: argparse.Namespace) -> dict[str, object]:
             and box_hi < kingbird + ulp,
             "T-155 - hi": sci(t155 - box_hi),
         },
-        "house witness side (packing/witnesses/known-best/n-029.yaml, numerical)": {
+        "the house witness's numerical side": {
+            "path": house_path,
             "value_sci": sci(house_side, 40),
             "S - house": sci(side - house_side),
             "PR #574 - house": sci(pr574 - house_side),
         },
+        "the source's COMPARISON.json against this program": {
+            "candidate side_exact equals S": rational(stated["candidate"]["side_exact"], "S")
+            == side,
+            **source_rows,
+        },
+    }
+
+
+EXPECTED_RECEIPT = {
+    "positive": [],
+    "duplicate-square-overlap": ["pair 0 1"],
+    "square-translated-outside-container": ["wall 0 right"],
+}
+
+
+def cmd_receipt(args: argparse.Namespace) -> dict[str, object]:
+    """Each job the replay retained, decided again here from its own checker input."""
+    asset = open_asset(args.asset)
+    side, poses = read_certificate(member(asset, CERT_MEMBER, CERT_SHA256), CERT_MEMBER)
+    receipt = json.loads(lzma.decompress(args.receipt.read_bytes()))
+    rows = []
+    for case in receipt["cases"]:
+        given = case["checker_input"]
+        if given["n"] != N or len(given["poses"]) != N:
+            raise ReviewError("a receipt job is not 29 squares")
+        jside = rational(given["side"], "receipt side")
+        jposes = [Pose(*(rational(v, "receipt pose") for v in row)) for row in given["poses"]]
+        d = decide(jside, jposes)
+        changed = [k for k in range(N) if jposes[k] != poses[k]]
+        least_gap = min(g for _, _, g, _ in d.pairs)
+        least_wall = min(c for _, _, c in d.walls)
+        routes = {}
+        for route in receipt["routes"]:
+            r = case[route]
+            routes[route] = {
+                "verification_passed": r["verification_passed"],
+                "failures": r["failures"],
+                "least_pair_gap_equals_this_program's": rational(
+                    r["minimum_best_pair_gap"], "gap"
+                )
+                == least_gap,
+                "least_wall_clearance_equals_this_program's": rational(
+                    r["minimum_containment_clearance"], "clearance"
+                )
+                == least_wall,
+            }
+        rows.append(
+            {
+                "control": case["control"],
+                "side_is_the_certificate's": jside == side,
+                "squares_changed_from_the_certificate": changed,
+                "this_program": {
+                    "violations": d.violations,
+                    "least_pair_gap": sci(least_gap) if least_gap else "0",
+                    "least_wall_clearance": sci(least_wall) if least_wall else "0",
+                    "expected": EXPECTED_RECEIPT[case["control"]],
+                    "for_the_right_reason": d.violations == EXPECTED_RECEIPT[case["control"]],
+                },
+                "routes": routes,
+                "cpu_s": round(d.cpu_s, 2),
+            }
+        )
+    return {
+        "receipt": "packing/resources/web/pingyou-pr622-certificate-2026-10-15/receipts/"
+        "exact-certification.json.xz",
+        "format": receipt["format"],
+        "jobs": rows,
     }
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     sub = parser.add_subparsers(dest="command", required=True)
     p = sub.add_parser("certificate")
     p.add_argument("asset", type=Path)
@@ -747,6 +857,9 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("identity")
     p.add_argument("asset", type=Path)
     p.add_argument("repo", type=Path)
+    p = sub.add_parser("receipt")
+    p.add_argument("asset", type=Path)
+    p.add_argument("receipt", type=Path)
     args = parser.parse_args(argv)
     commands = {
         "certificate": cmd_certificate,
@@ -755,13 +868,14 @@ def main(argv: list[str] | None = None) -> int:
         "native": cmd_native,
         "sides": cmd_sides,
         "identity": cmd_identity,
+        "receipt": cmd_receipt,
     }
     try:
         out = commands[args.command](args)
     except ReviewError as error:
-        print(json.dumps({"error": str(error)}), file=sys.stderr)
+        sys.stderr.write(json.dumps({"error": str(error)}) + "\n")
         return 2
-    print(json.dumps(out, indent=2))
+    sys.stdout.write(json.dumps(out, indent=2) + "\n")
     return 0
 
 

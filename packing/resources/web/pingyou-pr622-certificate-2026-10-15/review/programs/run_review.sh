@@ -37,6 +37,8 @@ nice -n 10 "${run[@]}" "$prog" fact "$asset" "$packet/facts/n-029.yaml.gz" >"$ou
 nice -n 10 "${run[@]}" "$prog" native "$asset" >"$out/native.json"
 nice -n 10 "${run[@]}" "$prog" sides "$asset" "$repo" >"$out/sides.json"
 nice -n 10 "${run[@]}" "$prog" identity "$asset" "$repo" >"$out/identity.json"
+nice -n 10 "${run[@]}" "$prog" receipt "$asset" \
+  "$packet/receipts/exact-certification.json.xz" >"$out/receipt.json"
 for b in pr574-v2 pr549 evan; do
   nice -n 10 "${run[@]}" "$prog" certificate "$asset" \
     --member "n29-certificate/baselines/$b-n029.cert.json" >"$out/baseline-$b.json"

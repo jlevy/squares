@@ -50,7 +50,8 @@
     "up (p - ulp, p]": "S above",
     "S - p in units of the last place": "9.189689460616352e-01"
   },
-  "T-009's Krawczyk pose box for s (packing/witnesses/kingbird-n029-2026-interval.yaml)": {
+  "T-009's Krawczyk pose box for s": {
+    "path": "packing/witnesses/kingbird-n029-2026-interval.yaml",
     "lo": "5.93383346267692918968946061635201913843383418",
     "hi": "5.93383346267692918968946061635201913843383419",
     "S - lo": "1.077886974638825e-45",
@@ -60,9 +61,28 @@
     "the print is the box truncated, not rounded": true,
     "T-155 - hi": "1.566165810000000e-36"
   },
-  "house witness side (packing/witnesses/known-best/n-029.yaml, numerical)": {
+  "the house witness's numerical side": {
+    "path": "packing/witnesses/known-best/n-029.yaml",
     "value_sci": "5.933833462676929189689460616352019138433e+00",
     "S - house": "-2.985530566813067e-100",
     "PR #574 - house": "7.324826735766588e-90"
+  },
+  "the source's COMPARISON.json against this program": {
+    "candidate side_exact equals S": true,
+    "previous_public_pr574_v2": {
+      "side_exact equals the baseline's s_exact": true,
+      "gain_exact equals the baseline minus S, computed here": true,
+      "strictly_smaller": true
+    },
+    "external_pr549": {
+      "side_exact equals the baseline's s_exact": true,
+      "gain_exact equals the baseline minus S, computed here": true,
+      "strictly_smaller": true
+    },
+    "external_evan": {
+      "side_exact equals the baseline's s_exact": true,
+      "gain_exact equals the baseline minus S, computed here": true,
+      "strictly_smaller": true
+    }
   }
 }
