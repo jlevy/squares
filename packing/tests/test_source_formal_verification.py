@@ -526,3 +526,58 @@ def test_premise_closure_settles_each_shared_entry_once() -> None:
     entries["E-16r"]["replay_status"] = "failed"
     entries["E-16l"]["replay_status"] = "failed"
     assert derive_verification(list(entries.values()), record=ONE_CASE) == "V0"
+
+
+def test_a_sampled_exact_premise_discharges_nothing() -> None:
+    """The formal fixtures' coverage gate refuses a sample before `discharges` reads it,
+    so this case needs a premise without that gate: an exact replay here."""
+    premise = exact_replay("E-premise", "derived-structure")
+    entry = requires(source_build(), premise["id"])
+    entries = [entry, premise]
+    assert conditional_problems({row["id"]: row for row in entries}) == []
+    assert derive_verification(entries, record=ONE_CASE) == "V3"
+    premise["independence"] = {
+        "coverage": {"extent": "sample", "unit": "cells", "checked": 3, "of": 40}
+    }
+    assert conditional_problems({row["id"]: row for row in entries})
+    assert derive_verification(entries, record=ONE_CASE) == "V0"
+
+
+def test_an_open_implication_is_not_a_confirming_method_or_third_party_replay() -> None:
+    entry = requires(confirming(source_build()), "E-premise")
+    assert check_results.distinct_methods([entry]) == 0
+    assert not check_results.third_party_replayed([entry])
+    premise = confirming(premise_build())
+    premise["build_receipt"] = "third-party-premise-build.json"
+    assert check_results.distinct_methods([entry, premise]) == 1
+    assert check_results.third_party_replayed([entry, premise])
+    unresolved = requires(deepcopy(premise), "E-missing")
+    assert check_results.distinct_methods([entry, unresolved]) == 0
+    assert not check_results.third_party_replayed([entry, unresolved])
+
+
+def test_t081_on_its_lean_scope_rests_on_the_premise_chain() -> None:
+    """A live control that exercises the chain: on E-k2m4-evand-bentz4-lean-build's own
+    counts T-081's lower half rests on that Lean implication alone, so its open
+    ValidTilt9 premise is what keeps the whole claim below V3 and C3."""
+    evidence = {
+        row["id"]: row for row in safe_load(check_results.EVIDENCE.read_text())["evidence"]
+    }
+    record = deepcopy(
+        next(
+            row
+            for row in safe_load(check_results.RESULTS.read_text())["results"]
+            if row["id"] == "T-081"
+        )
+    )
+    lean = evidence["E-k2m4-evand-bentz4-lean-build"]
+    assert lean["proof"]["conditional_on"][0]["hypothesis"] == "ValidTilt9"
+    record["scope"] = deepcopy(lean["scope"])
+    cited = [evidence[ref] for ref in record["evidence"]]
+    assert derive_verification(cited, record["reviews"], record=record) == "V0"
+    assert derive_confirmation(cited, record["reviews"], record=record) == "C1"
+    discharged = deepcopy(lean)
+    del discharged["proof"]["conditional_on"]
+    cited = [discharged if row is lean else row for row in cited]
+    assert derive_verification(cited, record["reviews"], record=record) == "V3"
+    assert derive_confirmation(cited, record["reviews"], record=record) == "C3"
