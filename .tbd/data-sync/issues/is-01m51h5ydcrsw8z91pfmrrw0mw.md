@@ -5,12 +5,12 @@ title: Owner decisions pending from the 2026-10-15/16 intake passes (each blocks
 kind: task
 status: open
 priority: 1
-version: 9
+version: 10
 labels: []
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 created_at: 2026-10-16T04:57:59.468Z
-updated_at: 2026-10-16T11:55:18.976Z
+updated_at: 2026-10-16T12:44:32.953Z
 ---
 Collected by the coordinator 2026-10-16 so another agent can pick them up. Each item names the bead that owns it; act only on the owner's word.
 1. #574 (BuddenPing, 148 certificate refinements, a PR): merge it and adopt T-174? (think-9v2k). WARNING: adopting T-174 re-houses 35 counts (68, 84, 86, 88, 108, 126, 127, 130, 131, 132, 172, 181, 182, 199, 206, 208, 209, 210, 228, 238, 239, 240, 259, 266, 267, 268, 270, 273, 292, 297, 301, 305, 306, 307, 308); since #636 the gate will fail unless each is re-regularized or added to PENDING_ALLOWED with a bead (think-g3q7 documents the step). The #574 reply is held until the decision.
@@ -42,3 +42,5 @@ Collected by the coordinator 2026-10-16 so another agent can pick them up. Each 
 25. (user-eb ~11:40Z, PR #649 follow-up review B2) T-184 and T-191 are declared V3/C1 while their replays passed (C3 derived) but the stage 4 mutated-certificate controls for zm_mixed.py are unmet; the register shows status 'reviewed', which the epistemics Status table defines as 'no replay has passed', and the clause allowing a declaration below the derived rung is written for compound minima. A one-sentence rule (result-import.md stage 4 or the Status table) for 'replay passed, controls owed' would settle it; it can be decided with question 16.
 
 26. (user-eb ~12:00Z, #651 A9) publish #639's four pinned-only exact forms (204, 263, 267, 297; ~20.75 MB) as a project data release? Owner's call.
+
+27. (user-eb ~12:45Z, PR #657) 176 after adoption of T-186: Evan Daniel's 3a view on T-165's witness (light/uneven/near-axis 11/24/0, classes/hues 6/6, house/stage sides 457/475) gives way to the axis tool's view of T-186's witness (4/8/0, 24/19, 403/425); both strong generators ran on the new witness and neither improves (SETTLED). #641's rule leaves a strong view falling to a less regular drawing to the owner's word: merge #657's adoption at 176, or hold 176's adoption until a better view of T-186's witness exists? 28. 211: every view on T-188's witness went to the row-7 review queue (SETTLED decided-no-better).
