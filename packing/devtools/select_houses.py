@@ -120,6 +120,20 @@ HELD: dict[str, Hold] = {
         ),
         since="2026-10-15",
     ),
+    # T-195 is validated at 29 (#661), and its adoption is prepared on the stacked branch
+    # claude/intake-2026-10-16-n29-622-adopt (think-30n2). On main the writer stops there,
+    # since the house does not beat the case's conjectured optimum, the catalogue print,
+    # and leaves that to a person; the house rule of PR #660 keeps the conjecture and
+    # adopts. The adoption's pull request removes this entry.
+    "T-195": Hold(
+        whose="PR #622's",
+        why=(
+            "its adoption at 29 is prepared on a branch stacked on PR #661 and lands with "
+            "the house rule of PR #660, under which a house need not beat the case's "
+            "conjectured optimum, the catalogue's print"
+        ),
+        since="2026-10-16",
+    ),
 }
 
 

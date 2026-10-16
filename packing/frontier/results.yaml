@@ -26879,9 +26879,11 @@ results:
           max_turn_deg: 3.255e-38
     next_rung: >-
       The pass adopts the side as the n = 29 house under the house rule and regularizes the
-      new witness (the stacked branch claude/intake-2026-10-16-n29-622-adopt). V4 and C4
-      need a second accepting adversarial AI review by a distinct reviewer and the owner's
-      oversight record.
+      new witness (the stacked branch claude/intake-2026-10-16-n29-622-adopt); until then
+      the house selection holds it (select_houses.HELD), since on main the writer leaves a
+      house that does not beat the case's conjectured optimum to a person and PR #660's rule
+      adopts it. V4 and C4 need a second accepting adversarial AI review by a distinct
+      reviewer and the owner's oversight record.
     reviews:
       - path: docs/project/reviews/review-2026-10-16-pingyou-n29.md
         kind: adversarial

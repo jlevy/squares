@@ -2882,6 +2882,34 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.4.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/select_houses.py", "packing/frontier/n-029.md"),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-195's stage 4 exit (review A's A2 and A3 of #661) makes it a house candidate "
+            "at 29, and `select_houses.HELD` holds it there until its stacked adoption "
+            "lands; `adopt_houses --refresh` writes the held note into n-029.md's body and "
+            "adds T-195's two evidence atoms to its roster. No paper renders a case "
+            "record's body or roster, or calls the selection: the survey cites case "
+            "records by link only. Source-reviewed; no render was taken, and every paper "
+            "keeps its edition. The renders are taken again against main at the re-cut."
+        ),
+    ),
 )
 
 
