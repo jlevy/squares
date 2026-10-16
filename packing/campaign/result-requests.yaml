@@ -9312,7 +9312,6 @@ issues:
       - T-193
       evidence:
       - E-evand-639-exact-sides-report
-      - E-evand-639-verify-exact-replay
     - key: exact-side-51
       claim: s(51) <= (16 + 5√2)/3, the root of 9x^2 - 96x + 206.
       source: body
