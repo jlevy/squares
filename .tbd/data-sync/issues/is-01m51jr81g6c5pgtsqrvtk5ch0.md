@@ -5,7 +5,7 @@ title: "Review: Greff's mixed covers for s(76) = 9 (T-184, #594) and s(95) = 10 
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: user-eb-review-76-95
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:25:27.727Z
-updated_at: 2026-10-16T05:31:36.736Z
+updated_at: 2026-10-16T05:55:00.359Z
 started_at: 2026-10-16T05:25:32.352Z
 ---
 Stage 4 review lane (W2) for T-184 (#594, Benjamin Greff, s(76) = 9) and T-191 (#610, s(95) = 10), the k = 9 and k = 10 cases of the k^2 - 5 series by mixed covers in Evan Daniel's format, registered at V0/C0. Their next_rung asks for "a review that reads the cover, the two checkers' composite over the D4 region and the wall segments". Model: docs/project/reviews/review-2026-10-02-wand125-s59-s77-mixed-covers.md (T-066's review). Deliverable: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md (or similar) on its own branch and draft PR; it moves no rung.
@@ -31,3 +31,5 @@ Stage 4 review lane (W2) for T-184 (#594, Benjamin Greff, s(76) = 9) and T-191 (
 ## Notes
 
 2026-10-16 05:35Z user-eb-review-76-95: started. Read both briefs, AGENTS.md, result-import.md Stage 4, the two packet READMEs, T-184/T-191 entries, think-osvq/think-ribz (pins and claims). Worktree review-76-95 at e2e018f32 (branch claude/intake-2026-10-16-review-76-95). Next: read the source trees (verify.sh, tools, records, Lean) and the four pinned checkers; then write my own exact programs in scratch laneF/.
+
+2026-10-16 05:56Z user-eb-review-76-95: read verify.sh, tools, records formats, Lean wrapper, and the checkers' relevant code (zmx2.rs parser/build_cover/check_d4/bounds/run_root/cmd_cert; zm_mixed.py main/keep/run_box/run_header; zeromargin d4_roots/clip_bin; mixed_cover load/validate) plus ZMX2.md. Wrote my own stdlib program (scratch laneF/prog/k2m5_review.py): cover audit (both covers: totals exact, D4 invariant under all 8 elements as a measure, FNV-1a = zmx2 log hash, no points on any line, 16/404 wall segments of one unit each) and composite audit (both packets: every root of the D4 grid present, census full-binary-tree, failing sets = failing_roots.txt, zm cells = exactly the aligned sub-cells, every cell decided, source = replay). My exact evaluator agrees to the last digit with zm_mixed.py pose at the triage control poses. Next: pose sampling, mutants, tiling controls of check_coverage.py, then the document. Branch head still e2e018f32 (nothing committed yet).
