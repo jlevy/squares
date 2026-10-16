@@ -48,6 +48,7 @@ NEWS_SETTLED = probe(PROBES, "site_homepage/news-settled")
 NEWS_FILTERS = probe(PROBES, "site_homepage/news-filters")
 TOOLTIP_WATCH = probe(PROBES, "site_homepage/tooltip-watch")
 TOOLTIP_CLEAR = probe(PROBES, "site_homepage/tooltip-clear")
+SCROLL_FILTERS = probe(PROBES, "site_homepage/scroll-filters")
 ORIGIN = "http://homepage.test/"
 TOGGLE = "[data-homepage-atlas-toggle]"
 CELLS = "#homepage-atlas-cells"
@@ -1265,10 +1266,12 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 ), (scheme, topic)
 
     def score_explanations_leave_the_filters_free() -> None:
-        """An S button's explanation never lies over a filter control: hovered or
-        focused, it opens above the filters, or the phone's bottom bar holds it, so the
-        next click reaches the control under the pointer. A mouse press explains
-        nothing, not even for a frame, and leaves the toggle to the button."""
+        """An S button's explanation never lies over a filter control or the shown
+        site header's links: hovered or focused, it opens above the filters and below
+        the header, or below the filters where there is no room between, or the phone's
+        bottom bar holds it, so the next click reaches the control under the pointer. A
+        mouse press explains nothing, not even for a frame, and leaves the toggle to the
+        button."""
         tooltip = page.locator(".site-rating-tooltip.kpress-tooltip-visible")
         for score in (3, 4, 5):
             button = page.locator(f'button[data-news-score="{score}"]')
@@ -1282,7 +1285,8 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             page.keyboard.press("Tab")
             button.focus()
             sync_api.expect(tooltip).to_be_visible()
-            assert page.evaluate(TOOLTIP_CLEAR)["covers"] == [], ("focus", score)
+            clear = page.evaluate(TOOLTIP_CLEAR)
+            assert clear["covers"] == clear["covers_header"] == [], ("focus", score, clear)
             page.keyboard.press("Escape")
             topics = page.locator("button[data-news-topic]").all()
             for topic in topics if width == 1280 else topics[:1]:
@@ -1290,7 +1294,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 button.hover()
                 sync_api.expect(tooltip).to_be_visible()
                 clear = page.evaluate(TOOLTIP_CLEAR)
-                assert clear["covers"] == [], ("hover", score, clear)
+                assert clear["covers"] == clear["covers_header"] == [], ("hover", score, clear)
                 box = topic.bounding_box()
                 assert box is not None
                 pressed = topic.get_attribute("aria-pressed")
@@ -1298,6 +1302,24 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 assert topic.get_attribute("aria-pressed") != pressed, (score, clear)
                 topic.click()
                 assert topic.get_attribute("aria-pressed") == pressed
+        if width != 1280:
+            return
+        # Scrolled down and then back up, the header shows, and with the filters 120 px
+        # from the window's top the only room above them is over the header's links.
+        for offset in (-300, -100, 50, 100, 120):
+            page.evaluate(SCROLL_FILTERS, offset)
+            page.wait_for_timeout(100)
+        for score in (3, 4, 5):
+            page.mouse.move(0, 0)
+            page.keyboard.press("Escape")
+            page.locator(f'button[data-news-score="{score}"]').hover()
+            sync_api.expect(tooltip).to_be_visible()
+            clear = page.evaluate(TOOLTIP_CLEAR)
+            assert clear["header_bottom"] > 0, ("the header must show", clear)
+            assert clear["covers"] == clear["covers_header"] == [], ("band", score, clear)
+        page.mouse.move(0, 0)
+        page.keyboard.press("Escape")
+        page.evaluate(SCROLL_FILTERS, 10_000)
 
     def shared_chooser_contract() -> None:
         for scheme in ("light", "dark"):

@@ -96,15 +96,33 @@
     }
   }
 
+  /** Where the site header ends while it is shown, or 0 while headroom hides it. The
+   * explanation lies in the top layer, over the header, so its links count as controls
+   * too. A header still sliding into view counts at its resting place. */
+  function headerBottom() {
+    const header =
+      document.querySelector(".site-headroom") ?? document.querySelector(".kpress-site-header");
+    if (
+      !(header instanceof HTMLElement) ||
+      (header.matches(".site-headroom-hidden") &&
+        !header.matches(":focus-within, :has(.site-theme-menu:popover-open)"))
+    ) {
+      return 0;
+    }
+    const transform = getComputedStyle(header).transform;
+    const travel = transform && transform !== "none" ? new DOMMatrixReadOnly(transform).m42 : 0;
+    return Math.max(0, header.getBoundingClientRect().bottom - travel);
+  }
+
   /** @param {HTMLElement} trigger @param {HTMLElement} tooltip */
   function fit(trigger, tooltip) {
     place(/** @type {HTMLAnchorElement} */ (trigger), tooltip);
     // KPress prefers below-table callouts. Fit their measured box when a row is
     // near a viewport edge, preserving its normal placement and mobile bottom bar.
     if (!tooltip.classList.contains("kpress-tooltip-mobile-bottom")) {
-      // A trigger among controls, the News filters, explains itself above them, or below
-      // them where the window has no room above: an explanation is hoverable, so one
-      // lying over the next control would take the click meant for it.
+      // A trigger among controls, the News filters, explains itself above them, below
+      // the shown site header, or below them where there is no room between: an
+      // explanation is hoverable, so one lying over a control would take its click.
       const block = trigger.closest("[data-site-tooltip-outside]");
       if (block) {
         const around = block.getBoundingClientRect();
@@ -113,7 +131,7 @@
         shift(
           tooltip,
           trigger.getBoundingClientRect().left - rect.left,
-          (above >= 10 ? above : around.bottom + 8) - rect.top,
+          (above >= Math.max(10, headerBottom() + 8) ? above : around.bottom + 8) - rect.top,
         );
       }
       const rect = tooltip.getBoundingClientRect();
@@ -270,6 +288,12 @@
       true,
     );
     window.addEventListener("resize", hide);
+    // A header that headroom shows or hides moves the room above a block of controls.
+    document.addEventListener("squares:headerchange", () => {
+      if (active) {
+        fit(active.trigger, active.tooltip);
+      }
+    });
     document.addEventListener(
       "scroll",
       () => {

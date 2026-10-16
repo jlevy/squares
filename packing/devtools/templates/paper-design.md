@@ -937,9 +937,10 @@ it.
   short meaning in the News label rubric (`result-import.md`, “Label the PR and Prepare
   News”), as the archive’s S buttons do (`render_changelog.news_significance_meanings`).
   An S button explains itself on hover and keyboard focus, never on a mouse press.
-  Its explanation opens above the filters, or below them when the window has no room
-  above, so it never lies over a control (`data-site-tooltip-outside`); a press
-  dismisses it. The source record retains the post’s rationale.
+  Its explanation opens above the filters and below the site header while the header
+  shows, or below the filters when there is no room between, so it lies over neither a
+  filter control nor the header’s links (`data-site-tooltip-outside`); a press dismisses
+  it. The source record retains the post’s rationale.
   Its S and five bars remain one tightly paired mark.
   Homepage highlights keep the announcement’s significance and assurance qualifiers,
   with one S meter per card.
