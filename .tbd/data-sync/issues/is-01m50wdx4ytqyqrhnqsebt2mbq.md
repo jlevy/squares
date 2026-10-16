@@ -3,9 +3,9 @@ type: is
 id: is-01m50wdx4ytqyqrhnqsebt2mbq
 title: "Merge the 15 October intake PRs: stack #627 -> #628 -> #631 (gh stack), then #625, #626, #630, after checking each followed the full review process (owner, 2026-10-15)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: ecstatic-edison-coordinator
 labels:
   - result-import
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:20.221Z
-updated_at: 2026-10-16T01:19:45.612Z
+updated_at: 2026-10-16T04:57:59.029Z
 started_at: 2026-10-15T22:59:24.363Z
+closed_at: 2026-10-16T04:57:59.029Z
+close_reason: "All intake PRs merged: stack #632 (#627,#628,#631) bbc12b617; #626 22c0ebf0d; #625 ee9cec6ea; #630 9f0c1aaa6; #637 7461cfda3; #636 e2e018f32"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

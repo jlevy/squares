@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-15 evening: carry #616 forward, stage-7 replies, res
 kind: epic
 status: in_progress
 priority: 1
-version: 21
+version: 22
 delegate: ecstatic-edison-coordinator
 labels:
   - result-import
@@ -28,10 +28,11 @@ child_order_hints:
   - is-01m50yc16mzg2xgr02d7x3d5n2
   - is-01m5110nzqjqn3hpdmfdqt2z6s
   - is-01m514pwdqkqf92n35sma35w9q
+  - is-01m51h5ydcrsw8z91pfmrrw0mw
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:29:58.653Z
-updated_at: 2026-10-16T01:20:02.999Z
+updated_at: 2026-10-16T04:57:59.468Z
 started_at: 2026-10-15T19:30:09.439Z
 ---
 Owner asked on 2026-10-15 to continue the full intake in small mergeable PRs, using sub-agents. Sweep (make intake, 19:2xZ) after tbd sync: 19 unowned items, 9 resolved blockers, 2 not checked (UnitSquare Release 1, SQUISH n153: hand-read). PR #616 (wizardly-meitner records-1016, idle since 09:31Z, red validate, conflicts with main in generated frontier files) already covers #607, #610, #613's rows, #413/#594 comments, #506/#593/#606 replies and most watch reads; swept on #616+main, the residue is Mishapolk, wand125 0eb3fe5, BuddenPing/squares, and 9 resolved-blocker beads. check_requests --report on #616+main: about 45 issues owe a reply. Lanes: A carry #616 forward on claude/ecstatic-edison-8en33t-records-1016; B replies to the closeable issues whose results are on main; C replies to open issues; D residual reads, resolved blockers, #622 triage, label audit. Compute cap: the owner's 2026-10-14 cap (think-lh7d): hold anything above 40 CPU-h; this pass runs no replay.
