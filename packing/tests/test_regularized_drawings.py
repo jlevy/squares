@@ -241,7 +241,11 @@ def test_the_modifications_are_read_from_the_index_entry_alone() -> None:
     ]
     patched = {
         **bound,
-        "run": {"id": "r", "output": "solved", "rungs": ["force-kkt", "stall-stop", "first-pass"]},
+        "run": {
+            "id": "r",
+            "output": "solved",
+            "rungs": ["force-kkt", "stall-stop", "first-pass"],
+        },
         "regularization": {
             **bound["regularization"],
             "method": "Evan Daniel's search/regularize (MIT), "
