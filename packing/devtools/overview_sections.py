@@ -1924,6 +1924,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/bengreff/s95-certificate",
+        "Benjamin Greff",
+        (
+            "A mixed cover of points and grid-line segments for s(95) = 10, with the run"
+            " records of both checkers; reported, both checkers replayed in triage (T-191)."
+        ),
+    ),
+    (
         "https://github.com/RobertBarnettProjects/square-packing-research",
         "Robert Barnett",
         (

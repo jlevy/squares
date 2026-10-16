@@ -24,6 +24,8 @@ async (options) => {
         "font-weight",
         "line-height",
         "letter-spacing",
+        "text-transform",
+        "font-variant-caps",
         "color",
         "background-color",
         "padding-top",
@@ -33,6 +35,7 @@ async (options) => {
         "border-top-width",
         "border-bottom-width",
         "border-radius",
+        "box-shadow",
         "outline-color",
         "outline-style",
         "outline-width",
@@ -83,6 +86,16 @@ async (options) => {
           border: getComputedStyle(group).borderTopWidth,
           gap: getComputedStyle(group).gap,
           height: option?.getBoundingClientRect().height,
+          label:
+            option?.querySelector("[data-news-topic-label]")?.textContent ?? option?.textContent,
+          chip_label: document.querySelector(
+            `.site-news-topics [data-news-topic="${option?.getAttribute("data-news-topic")}"]`,
+          )?.textContent,
+          chip: appearance(
+            document.querySelector(
+              `.site-news-topics [data-news-topic="${option?.getAttribute("data-news-topic")}"]`,
+            ),
+          ),
         }
       : null,
     count_style: appearance(count),
@@ -111,6 +124,21 @@ async (options) => {
     topics: [
       ...(controls?.querySelectorAll('button[data-news-topic][aria-pressed="true"]') ?? []),
     ].map((button) => button.getAttribute("data-news-topic")),
+    topic_tallies: Object.fromEntries(
+      [...(controls?.querySelectorAll("button[data-news-topic]") ?? [])].map((button) => [
+        button.getAttribute("data-news-topic"),
+        {
+          label: button.querySelector("[data-news-topic-label]")?.textContent,
+          name: button.textContent,
+          tally: button.querySelector("[data-news-tally]")?.textContent,
+        },
+      ]),
+    ),
+    all_topics_tally: controls?.querySelector('[data-news-all="topics"] [data-news-tally]')
+      ?.textContent,
+    all_topics_name: controls
+      ?.querySelector('[data-news-all="topics"]')
+      ?.getAttribute("aria-label"),
     controls_hidden: controls instanceof HTMLElement && controls.hidden,
     count: controls?.querySelector("[data-news-count]")?.textContent,
     empty:

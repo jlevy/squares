@@ -638,15 +638,36 @@ The local case-page size correction is implemented without new dependencies: num
 entities use equivalent UTF-8, and optional class-value quotes are omitted only on KaTeX
 HTML atoms, preserving MathML and SVG. The 17-square page is 498,343 bytes against its
 500,000-byte ceiling, and 11 targeted checks passed.
-A fresh production render confirms that size; final hosted validation remains pending.
+A fresh production render confirms that size.
+All 31 active hosted checks passed at `0d8daf55c`, including the frontend suite.
 
 The latest local push run passed 66 of 67 prerequisite checks, then its reachable
 behavioral selection hit the 900-second subprocess limit.
 The stale changelog-derived prerequisite was corrected and its targeted recheck passed.
 Partial behavioral output also contained failures before the timeout; this is not
 established as a timing-only failure or a passing push gate.
-Matching-source hosted validation of the final follow-up head and publication acceptance
-remain pending.
+The completed hosted run establishes validation of that integration; publication
+acceptance remains open.
+
+### Further upstream integration
+
+The next integration brings 94 commits through `3685616df` into the profiles branch,
+including reports T-188 through T-192, site editions `v0.7.11` and `v0.7.12`, News
+topics and counts, and isolated browser-forwarder checks.
+Twelve conflicted files required reconciliation.
+The site feature remains `v0.8.0`.
+
+The census now covers 27 profiles and 1,376 structured spans: 1,052 resolved, six
+non-person and 318 unresolved.
+All 146 PDFs still await full inspection receipts.
+News retains the earlier 39 profile links and adds six reviewed links across two new
+articles. First linked mentions use preferred display names; subsequent mentions use
+surnames. The URL registry contains 1,061 rows with no failures.
+
+Curated credits in the new Greff report use Hosono consistently with the shared
+attribution policy. Repository identifiers, source keys and archived text remain
+unchanged. Validation results and the final head are recorded on PR #578 and
+`think-5bao`; earlier green heads do not validate this integration.
 
 ## WIP Handoff: 2026-10-10
 

@@ -9,6 +9,54 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-10-16"></a>
+
+### 2026-10-16
+
+<a id="changelog-entry-greff-ninety-five-optimality-report"></a>
+
+#### Greff Reports an Optimum for 95 Squares
+
+Significance S3: T-191 is an S3 report of an exact value at a new count, using an existing covering method. Its significance does not establish verification.
+
+Greff reports that 95 unit squares require a square of side 10, matching the grid
+construction: $s(95) = 10$. T-191 remains a reported result at V0/C0, awaiting
+independent review and adoption.
+
+- Greff constructed a weighted cover of points and line segments using [Evan Daniel](packing/contributors/people/evan-daniel.md)’s
+  method and checkers. He re-optimised its central cross and reused corners from
+  [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md)’s 59-square cover and the band-insertion construction.
+- The project reproduced the source’s two checker runs and retained their
+  receipts. That reproduction has not yet been admitted as evidence with an
+  independent review; the case’s lower bound remains $1993/200 = 9.965$.
+- The source’s Lean wrapper assumes the covering statement. It has not been built
+  here, and the reported result does not yet establish a completely checked Lean
+  proof.
+
+PRs and supporting records: [\#627](https://github.com/jlevy/squares/pull/627) · [Greff’s certificate and source checks](https://github.com/bengreff/s95-certificate/tree/dd7297d06adc664268c65005369b895e4ded7547) · [Retained report and verification limits](packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md) · [Greff’s registration request](https://github.com/jlevy/squares/issues/610).
+
+<a id="changelog-entry-hosono-twenty-eight-continuous-bound-report"></a>
+
+#### Hosono Reports a Stronger Lower Bound for 28 Squares
+
+Significance S3: T-192 is an S3 report of a stronger bound at one count, extending the existing continuous-angle covering method to a new density. Complete confirmation is pending.
+
+[Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) reports $s(28) > 1149/200 = 5.745$ using a cover over every square
+position and angle. T-192 remains at V0/C0; complete local replay and review are
+pending.
+
+- The certificate uses a new density of 884 weighted rectangles. It applies the
+  continuous-angle method from [Guzhou0806](packing/contributors/people/guzhou0806.md)’s 40-square result T-145 at a new count,
+  with credit to Guzhou0806, [Tokoharu](packing/contributors/people/tokoharu.md) and [Joshua Levy](packing/contributors/people/joshua-levy.md).
+- The reported bound is $1/400$ above Hosono’s earlier report T-142 and $1/100$
+  above the standing lower bound $1147/200 = 5.735$ in T-107. The standing bound
+  remains unchanged.
+- Hosono reports complete checks by two source programs using the same covering
+  method. The project checked exact premises and a diagnostic sample; those
+  checks do not replace a complete replay or establish an independent method.
+
+PRs and supporting records: [\#627](https://github.com/jlevy/squares/pull/627) · [Hosono’s certificate and source checks](https://github.com/wand125/square-packing/tree/8530bafb03d48444f30f241fbc1f29f01cd7c96c/problems/square-lower-bounds/certificates/continuous_n28_L5745) · [Retained report and verification limits](packing/resources/web/wand125-continuous-n28-2026-10-15/README.md) · [Registered lower-bound reports](packing/frontier/RESULTS.md).
+
 <a id="changelog-date-2026-10-15"></a>
 
 ### 2026-10-15
@@ -23,8 +71,8 @@ Both downloadable Atlas posters now show the packings and bounds adopted in the 
 records, with current contributor credits and regularized drawings. SVG, PNG and PDF
 exports share infographic edition v0.6.1. The lower-bounds paper is published as v0.4.7.
 
-- The exports include reviewed packings from [Francisco Couzo](packing/contributors/people/francisco-couzo.md), Daniil Ostashev, PingYou
-  Ltd and Mykhailo Polkovskyi, with credit for earlier designs and regularization
+- The exports include reviewed packings from [Francisco Couzo](packing/contributors/people/francisco-couzo.md), Ostashev, PingYou
+  Ltd and Polkovskyi, with credit for earlier designs and regularization
   methods.
 - Both poster sizes share one infographic edition. Site and paper editions remain
   independent.
@@ -46,7 +94,7 @@ PRs and supporting records: [\#619](https://github.com/jlevy/squares/pull/619) �
 Significance S3: This adoption announcement inherits the highest S3 significance of its reviewed packing results.
 
 Eighteen case records adopt smaller, exactly verified packings from the 14 October
-intake. [Francisco Couzo](packing/contributors/people/francisco-couzo.md), Daniil Ostashev, PingYou Ltd and Mykhailo Polkovskyi supplied
+intake. [Francisco Couzo](packing/contributors/people/francisco-couzo.md), Ostashev, PingYou Ltd and Polkovskyi supplied
 the certificates; each case retains credit for earlier designs and refinements.
 
 - The packings cover 105, 129, 146, 153, 154, 156, 176, 204, 207, 211, 237, 241, 261,
@@ -96,9 +144,10 @@ PRs and supporting records: [\#604](https://github.com/jlevy/squares/pull/604) �
 
 Significance S3: Adds enforceable whole-claim evidence coverage, verifier-independence records and the formalization kind, with bounded reviews. This is substantive verification policy/tooling and earns S3, but it neither completes a proof nor launches a major reader product; S4 overstates the contribution.
 
-Initial mathematical reviews examine [Marc Leonard Overbeck](packing/contributors/people/marc-leonard-overbeck.md)’s candidate proof and [Oscar Fitzharding](packing/contributors/people/oscar-fitzharding.md)’s Lean formalization of the 17-square optimum. Both remain unverified proof
-reports at V0/C1. Sampled checks and component replays do not establish a complete local
-replay of either proof.
+Initial mathematical reviews examine [Marc Leonard Overbeck](packing/contributors/people/marc-leonard-overbeck.md)’s candidate proof and [Oscar Fitzharding](packing/contributors/people/oscar-fitzharding.md)’s Lean
+formalization of the 17-square optimum. Both remain unverified proof reports at V0/C1.
+Sampled checks and component replays do not establish a complete local replay of either
+proof.
 
 - The reviews distinguish a new mathematical result from a simplification or
   formalization. A simplification can still have its own proof-assistant check.
@@ -126,8 +175,8 @@ only when its side is decisively smaller.
 
 - Printed and exact sides are compared rigorously against a frozen record. Undecided
   comparisons remain visible for the owner to resolve.
-- Retained mathematical reviews examine Kevin Fang’s direct certificates and excess
-  theorem, and the fine-net, linear and closed-form lower bounds reported by [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125).
+- Retained mathematical reviews examine Fang’s direct certificates and excess theorem, and
+  the fine-net, linear and closed-form lower bounds reported by [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125).
 - Each open result issue has a per-count verdict.
 
 PRs and supporting records: [\#601](https://github.com/jlevy/squares/pull/601) · [The intake ledger](packing/campaign/issue-intake/upper-bounds-20261014/README.md) · [Ledger review](docs/project/reviews/review-2026-10-14-intake-ledger.md) · [Fang theorem and direct-certificate review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) · [wand125 closed-form review](docs/project/reviews/review-2026-10-14-wand125-closed-form-lower-bound.md).
@@ -136,9 +185,9 @@ PRs and supporting records: [\#601](https://github.com/jlevy/squares/pull/601) �
 
 #### Fang and Hosono Report New Bound Families
 
-Significance S4: The registered results include two S4 bound families, Kevin Fang’s theorem and Hiroaki Hosono’s closed form.
+Significance S4: The registered results include two S4 bound families, Fang’s theorem and Hosono’s closed form.
 
-Kevin Fang reports a construction packing $k^2 - k + 1$ unit squares in a square of side
+Fang reports a construction packing $k^2 - k + 1$ unit squares in a square of side
 less than $k$, for every integer $k \ge 15$. [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) reports a closed-form lower
 bound for every non-square count $n \ge 49$, raising 154 reported case bounds. The
 register adds these two families and 22 other results. Fang’s theorem has a mathematical
@@ -146,11 +195,11 @@ review; Hosono’s complete formula replay remains unfinished.
 
 - The 24 records, T-161 through T-184, preserve report order. No new packing is adopted
   in this registration.
-- [Francisco Couzo](packing/contributors/people/francisco-couzo.md), Daniil Ostashev, PingYou Ltd and Mykhailo Polkovskyi supplied smaller
+- [Francisco Couzo](packing/contributors/people/francisco-couzo.md), Ostashev, PingYou Ltd and Polkovskyi supplied smaller
   packings and tighter certificates at 69 counts. Their source certificates were
   replayed; independent review and adoption remained pending at this date.
-- Hiroaki Hosono also reports lower bounds at 37, 39, 44 and 145 through 149 squares.
-  Benjamin Greff reports an optimality proof for 76 squares. These reports retain their
+- Hosono also reports lower bounds at 37, 39, 44 and 145 through 149 squares.
+  Greff reports an optimality proof for 76 squares. These reports retain their
   separate verification limits.
 - Independently verified lower bounds are unchanged. Each case record distinguishes
   reported bounds from independently verified ones.
@@ -177,9 +226,9 @@ remain in the history.
 - The 40-square result rests on the producer’s kernels and complete continuous cover,
   with separate finite-step audits. A second independent continuous-cover method has not
   been established.
-- Daniil Ostashev’s certificates verify packings of 175, 232 and 264 squares; [Evan Daniel](packing/contributors/people/evan-daniel.md)’s verifies a packing of 154. They establish feasibility, without proving
-  optimality.
-- Rio Calle’s certified 102-square layout is another arrangement of [Ryan Xu](packing/contributors/people/ryan-xu.md)’s design. A
+- Ostashev’s certificates verify packings of 175, 232 and 264 squares; [Evan Daniel](packing/contributors/people/evan-daniel.md)’s verifies a
+  packing of 154. They establish feasibility, without proving optimality.
+- Calle’s certified 102-square layout is another arrangement of [Ryan Xu](packing/contributors/people/ryan-xu.md)’s design. A
   better packing was already recorded, so it changes no standing bound.
 - The regularized drawings and methods paper include the adopted packings and their
   sources. The earlier solved 264-square drawing remains available as history.
@@ -265,7 +314,7 @@ outstanding replay work.
 - An audit checked the source hashes for [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md)’s replay4d 0.1.1. A two-record
   calibration estimated the complete replay’s cost under the measured host load; it did
   not confirm the full lower-bound family.
-- Kevin Fang’s eleven remaining direct certificates, at 421 through 814 squares, were
+- Fang’s eleven remaining direct certificates, at 421 through 814 squares, were
   replayed on two exact routes.
 
 Component editions: Site v0.6.3.
@@ -331,10 +380,10 @@ PRs and supporting records: [\#581](https://github.com/jlevy/squares/pull/581) �
 
 Significance S5: This announces the S5 formalization report T-154; significance does not imply independent verification of the complete claim.
 
-[Oscar Fitzharding](packing/contributors/people/oscar-fitzharding.md) reports a Lean 4 proof that [John Bidwell](packing/contributors/people/john-bidwell.md)’s 1998 packing of 17 unit
-squares is optimal: $s(17) = 4.67553009360455\ldots$. It is the first proof-assistant
-proof of this value in the project’s records and uses a different argument from [Marc Leonard Overbeck](packing/contributors/people/marc-leonard-overbeck.md)’s candidate proof. T-154 remains reported at V0/C1; the full Lean build
-has not been replayed here.
+[Oscar Fitzharding](packing/contributors/people/oscar-fitzharding.md) reports a Lean 4 proof that [John Bidwell](packing/contributors/people/john-bidwell.md)’s 1998 packing of 17 unit squares is
+optimal: $s(17) = 4.67553009360455\ldots$. It is the first proof-assistant proof of this
+value in the project’s records and uses a different argument from [Marc Leonard Overbeck](packing/contributors/people/marc-leonard-overbeck.md)’s candidate
+proof. T-154 remains reported at V0/C1; the full Lean build has not been replayed here.
 
 The source comparison traces 32 of the 35 patterns to the project’s certified
 sub-pattern ledger, including eleven from [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125). The review
@@ -375,9 +424,10 @@ PRs and supporting records: [\#560](https://github.com/jlevy/squares/pull/560) �
 
 Significance S3: An independent reconstruction of a central proof component is a notable review milestone, without a complete proof replay.
 
-A second project AI review independently re-derived the normalized 52-row gate in [Marc Leonard Overbeck](packing/contributors/people/marc-leonard-overbeck.md)’s candidate proof for 17 squares. It found no blocking defect in the
-parts examined and retained its checking programs. The complete proof remains unverified
-at V0/C1.
+A second project AI review independently re-derived the normalized 52-row gate in
+[Marc Leonard Overbeck](packing/contributors/people/marc-leonard-overbeck.md)’s candidate proof for 17 squares. It found no blocking defect in the parts
+examined and retained its checking programs. The complete proof remains unverified at
+V0/C1.
 
 - The reviewer reconstructed gate coefficients independently of the producer’s code,
   checked 52 base-gap identities and audited 152 separating alternatives. The review
@@ -433,7 +483,7 @@ PRs and supporting records: [\#531](https://github.com/jlevy/squares/pull/531) �
 Significance S3: This grouped announcement inherits the highest S3 significance of the newly admitted packing results.
 
 The case records and drawings adopt smaller certified packings for 42 square counts.
-Four results from PingYou Ltd, Daniil Ostashev and Robert Barnett, T-147 through T-150
+Four results from PingYou Ltd, Ostashev and Barnett, T-147 through T-150
 at V3/C3, join certificates from the preceding intake. Earlier packings remain in the
 history.
 
@@ -488,7 +538,7 @@ PRs and supporting records: [\#507](https://github.com/jlevy/squares/pull/507) �
 
 Significance S3: The announced independently replayed packing improvements T-151 and T-152 are both S3 results.
 
-Nate Chaoweeraprasit’s SQUISH constructions and [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s refinements improve
+Chaoweeraprasit’s SQUISH constructions and [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s refinements improve
 nine standing upper bounds. Couzo’s refinements are at $n = 304$ and $305$. T-151 and
 T-152 are V3/C3; the records also retain nine verified entries beyond the case corpus
 and preserve earlier bounds.
@@ -551,8 +601,8 @@ Twelve upper-bound entries have complete verification and independent review at 
 alongside [Guzhou0806](packing/contributors/people/guzhou0806.md)’s two 40-square lower bounds. The continuous-pose result becomes
 the standing 40-square lower bound. The upper bounds are adopted in a later release.
 
-- [Francisco Couzo](packing/contributors/people/francisco-couzo.md), [Evan Daniel](packing/contributors/people/evan-daniel.md), Kevin Fang, Nate Chaoweeraprasit, Eric Deleeuw and
-  Mykhailo Polkovskyi contributed the upper-bound work. It includes Daniel’s fifteen
+- [Francisco Couzo](packing/contributors/people/francisco-couzo.md), [Evan Daniel](packing/contributors/people/evan-daniel.md), Fang, Chaoweeraprasit, Deleeuw and
+  Polkovskyi contributed the upper-bound work. It includes Daniel’s fifteen
   regularized certificates, checked for finite feasibility and reviewed before adoption.
   Three entries were registered in earlier PRs; this intake completes their reviews.
 - Guzhou0806’s clipped-corner and continuous-pose certificates reach V3/C3. Both
@@ -665,10 +715,10 @@ surgery, sequential linear programming and exact algebraic certification in the 
 survey. Updated explanations connect the figures to 32 selected upper-bound
 improvements.
 
-The examples credit [Walter Trump](packing/contributors/people/walter-trump.md), Thomas Schadt, [David Ellsworth](packing/contributors/people/david-ellsworth.md), Griffin Casson, Nate
-Chaoweeraprasit and [Ryan Xu](packing/contributors/people/ryan-xu.md). The revision explains exact arithmetic for Xu’s 51-square
-witness, records later refinements and distinguishes local rigidity from optimality. It
-follows the survey’s 9 October publication.
+The examples credit [Walter Trump](packing/contributors/people/walter-trump.md), Schadt, [David Ellsworth](packing/contributors/people/david-ellsworth.md), Casson, Chaoweeraprasit and [Ryan Xu](packing/contributors/people/ryan-xu.md). The revision
+explains exact arithmetic for Xu’s 51-square witness, records later refinements and
+distinguishes local rigidity from optimality. It follows the survey’s 9 October
+publication.
 
 Published artifacts: [Current methods tutorial](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) · [Current methods tutorial PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf).
 
@@ -769,7 +819,7 @@ PRs and supporting records: [\#441](https://github.com/jlevy/squares/pull/441) �
 
 Significance S3: Fourteen smaller selected upper bounds are supported by complete exact certificates, the S3 result T-127.
 
-Siddharth Gupta refines Nate Chaoweeraprasit’s SQUISH packings with [Evan Daniel](packing/contributors/people/evan-daniel.md)’s
+Gupta refines Chaoweeraprasit’s SQUISH packings with [Evan Daniel](packing/contributors/people/evan-daniel.md)’s
 optimizer, supplying 14 smaller selected upper bounds. All 17 submitted rational
 certificates pass exact verification, recorded as T-127 at V3/C3.
 
@@ -842,7 +892,9 @@ PRs and supporting records: [\#458](https://github.com/jlevy/squares/pull/458) �
 
 Significance S4: Two reported infinite families strengthen asymptotic packing-deficiency bounds; their geometric assumptions remain under review.
 
-Sungjoon Ryu reports quarter-power and cube-root lower bounds for the deficiency of packings of closed, pairwise-disjoint unit squares in an integer-sided square. The project retains the papers and a review of their geometric arguments and numerical constants.
+Ryu reports quarter-power and cube-root lower bounds for the deficiency of packings of
+closed, pairwise-disjoint unit squares in an integer-sided square. The project retains the
+papers and a review of their geometric arguments and numerical constants.
 
 - For a container of integer side $k$, deficiency is $k^2$ minus the largest number of
   closed, pairwise-disjoint unit squares it can contain. The reported cube-root bound

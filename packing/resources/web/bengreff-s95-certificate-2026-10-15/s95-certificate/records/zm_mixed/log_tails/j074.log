@@ -1,0 +1,12 @@
+sha256 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab  zeromargin.py
+sha256 8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c  input (/home/greff/s95/s95_cover_v2.txt)
+argv: zm_mixed.py cert /home/greff/s95/s95_cover_v2.txt --d4 --cert-mode --disj --chain-from 0 --pitch 1/20 --ubins 16 --depth 24 --nproc 1 --cx-lo 73/20 --cx-hi 37/10 --cy-lo 9/2 --cy-hi 91/20 --u-lo 1/16 --u-hi 3/32 --resume /home/greff/s95/zmm_v2/j074.jsonl
+settings: {"cert_mode": true, "chain": true, "chain_from": 0, "clip": true, "depth": 24, "lemma_L": true, "lemma_T": true, "mode": "D4", "pitch": "1/20", "reach": "442/625", "region": {"cx_hi": "37/10", "cx_lo": "73/20", "cy_hi": "91/20", "cy_lo": "9/2", "u_hi": "3/32", "u_lo": "1/16"}, "split": true, "split_maxchain": 400, "theta_bias": 4, "tprime": false, "ubins": 16}
+CERT MODE: Corollary T' and polygon code disabled (0 points on segment lines are treated as ordinary points)
+container [0,10]^2, 48352 points, 11438 segments on 22 lines, 0 polygons; total 3791753447/40000000 = 94.793836175
+D4: measure invariant under x -> m-x and x <-> y; roots [0,m/2]^2 x u in [0,1/2]
+PARTIAL SWEEP: cx [73/20, 37/10], cy [9/2, 91/20], u [1/16, 3/32] -- not a verification of the whole container
+1 root boxes x 1 cover(s), depth limit 24, pitch 1/20, u-bins 16, CHAIN on, Lemma T on, Lemma L on
+done in 4s: boxes 19, max depth 4, CPU 4 s
+  leaves: PIECE 0  ADM 5  P1 0  MIX 0  CHAIN 5  SPLIT 0  EMPTY 0  UNCERTIFIED 0   (leaves where Lemma T / Lemma L raised the piece bound: 4 / 6; closed by Lemma T with line points: 0)
+VERIFIED-D4 (PARTIAL)

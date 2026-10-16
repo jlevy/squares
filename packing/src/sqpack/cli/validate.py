@@ -259,6 +259,8 @@ BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 #: Chromium to the frontend job, the one pull-request runner that installs it, and the
 #: quick lane ignores them: in a shard, with no browser, they could only skip, which is
 #: what they did on every pull request until that run.
+#: Forwarder navigation follows the same Chromium owner and required-capability rule.
+SITE_FORWARDER_TEST = "tests/test_site_forwarders.py"
 SITE_LAYOUT_TESTS = (
     "tests/test_site_headroom.py",
     "tests/test_site_homepage.py",
@@ -274,6 +276,7 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_rendering.py",
     "tests/test_site_math_preferences.py",
     "tests/test_site_atlas_views.py",
+    SITE_FORWARDER_TEST,
 )
 #: The four HTTP load/no-JS cases measure browser timing without competing browser
 #: workers from the functional layout command. Their assertions and budgets stay shared
@@ -1090,9 +1093,13 @@ def _run(
     cwd: Path = PROJECT_ROOT,
     timeout_seconds: float | None = None,
     extra_environment: Mapping[str, str] | None = None,
+    pytest_progress: tuple[str, str] | None = None,
 ) -> str:
     """Run `command` as a step's subprocess; `extra_environment` is laid over the gate's
-    environment for this command alone."""
+    environment for this command alone. `pytest_progress` names the lane and exclusions
+    of an explicitly selected pytest command that has no quick/slow marker expression."""
+    if pytest_progress is not None and list(command[1:3]) != ["-m", "pytest"]:
+        raise StepFailureError("pytest progress requires a native pytest command")
     if extra_environment:
         context = replace(context, environment={**context.environment, **extra_environment})
     directory = _artifact_directory(context)
@@ -1101,6 +1108,7 @@ def _run(
     stem = directory / f"command-{uuid.uuid4().hex}"
     log_path = stem.with_suffix(".log")
     arguments = list(command)
+    progress_marker = ""
     if len(arguments) >= 3 and arguments[1:3] == ["-m", "pytest"]:
         # A step that chose its own durations filter keeps it: the quick lane's
         # `--durations-min` is its ceiling, and pytest would take the last value given.
@@ -1108,6 +1116,21 @@ def _run(
             arguments.extend(("--durations=0", "--durations-min=0"))
         if _SUITE_FILES_PLUGIN in arguments:
             arguments.append(f"--test-file-costs={stem}.test-files.json")
+        pytest_arguments = arguments[3:]
+        marker = (
+            pytest_arguments[pytest_arguments.index("-m") + 1]
+            if "-m" in pytest_arguments
+            else ""
+        )
+        if pytest_progress is None and marker in {QUICK_TESTS, SLOW_TESTS}:
+            pytest_progress = (
+                ("quick", "slow, exhaustive_exact")
+                if marker == QUICK_TESTS
+                else ("slow", "quick, exhaustive_exact")
+            )
+        if pytest_progress is not None:
+            progress_marker = marker
+            arguments.extend(("-p", "devtools.reachable_progress"))
         arguments.append(f"--junitxml={stem}.junit.xml")
     environment = dict(context.environment)
     # Nested test subprocesses must not reuse this gate's artifact configuration.
@@ -1118,6 +1141,42 @@ def _run(
         # artifact stem without exposing the parent gate's artifact configuration.
         environment["PACKING_REACHABLE_TEST_ARTIFACT_STEM"] = str(stem)
         environment["PACKING_REACHABLE_TEST_RUN_ID"] = context.artifact_run_id
+    if pytest_progress is not None:
+        if directory.is_relative_to(REPOSITORY_ROOT.resolve()):
+            raise StepFailureError(
+                "native test artifacts must stay outside the source checkout"
+            )
+        git_environment = {
+            key: value for key, value in environment.items() if not key.startswith("GIT_")
+        }
+        try:
+            source = subprocess.run(
+                ("git", "rev-parse", "HEAD"),
+                cwd=REPOSITORY_ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+                env=git_environment,
+            )
+        except OSError as error:
+            raise StepFailureError("cannot identify the native-test source commit") from error
+        source_commit = source.stdout.strip()
+        if source.returncode != 0 or re.fullmatch(r"[0-9a-f]{40}", source_commit) is None:
+            raise StepFailureError("cannot identify the native-test source commit")
+        environment.update(
+            {
+                "PACKING_REACHABLE_TEST_ARTIFACT_STEM": str(stem),
+                "PACKING_REACHABLE_TEST_RUN_ID": context.artifact_run_id,
+                "PACKING_REACHABLE_TEST_SOURCE_COMMIT": source_commit,
+                "PACKING_REACHABLE_TEST_WORKERS": arguments[arguments.index("-n") + 1]
+                if "-n" in arguments
+                else "1",
+                "PACKING_REACHABLE_TEST_LANE": pytest_progress[0],
+                "PACKING_REACHABLE_TEST_MARKER": progress_marker,
+                "PACKING_REACHABLE_TEST_EXCLUSIONS": pytest_progress[1],
+                "PACKING_REACHABLE_TEST_PHASES": "1",
+            }
+        )
     environment["PYTHONUNBUFFERED"] = "1"
     metadata = {
         "run_id": context.artifact_run_id,
@@ -2017,30 +2076,49 @@ def _site_url_registry(context: Context) -> str:
 
 
 def _site_layout_tests(context: Context) -> str:
-    """Run functional pixel/layout checks in parallel, then load budgets serially.
+    """Run layout in parallel, then forwarders and load budgets in serial processes.
 
-    The four native-frontier timing cases use one browser command after the functional
-    workers exit. Both commands require Chromium and retain the existing assertions;
-    serial allocation removes browser competition within this step, without promising
-    an otherwise idle host. Both phases share the original total subprocess timeout.
+    Forwarders start in a fresh process after the other functional workers exit. The
+    four native-frontier timing cases follow in their existing serial command. All
+    three require Chromium, retain every assertion, and share the original total
+    subprocess timeout. This isolates execution; the earlier Playwright stall's exact
+    cause remains unknown.
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()
-    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    common = (
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-o",
+        "faulthandler_timeout=60",
+    )
     commands = (
         (
             *common,
             *distribution,
             *loadfile,
-            *SITE_LAYOUT_TESTS,
+            *(path for path in SITE_LAYOUT_TESTS if path != SITE_FORWARDER_TEST),
             "-k",
             f"not {SITE_LOAD_BUDGET_TEST.rpartition('::')[-1]}",
         ),
+        (*common, "-n", "0", SITE_FORWARDER_TEST),
         (*common, "-n", "0", SITE_LOAD_BUDGET_TEST),
     )
     outputs: list[str] = []
     deadline = time.monotonic() + context.timeout_seconds
-    for command in commands:
+    for command, progress in zip(
+        commands,
+        (
+            ("browser-functional", f"{SITE_FORWARDER_TEST}, {SITE_LOAD_BUDGET_TEST}"),
+            ("browser-forwarders", "all other browser cases"),
+            ("browser-load", "all other browser cases"),
+        ),
+        strict=True,
+    ):
         try:
             remaining = deadline - time.monotonic()
             if remaining <= 0:
@@ -2054,6 +2132,7 @@ def _site_layout_tests(context: Context) -> str:
                     command,
                     timeout_seconds=remaining,
                     extra_environment={REQUIRE_CHROMIUM: "1"},
+                    pytest_progress=progress,
                 )
             )
         except StepFailureError as error:

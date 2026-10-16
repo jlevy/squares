@@ -635,7 +635,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/277.html | cases/277.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/278.html | cases/278.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/279.html | cases/279.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/28.html | cases/28.html | record | overview | 2026-10-03 | 2026-10-12 | live |
+| cases/28.html | cases/28.html | record | overview | 2026-10-03 | 2026-10-15 | live |
 | cases/280.html | cases/280.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/281.html | cases/281.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/282.html | cases/282.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -754,7 +754,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/92.html | cases/92.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/93.html | cases/93.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/94.html | cases/94.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/95.html | cases/95.html | record | overview | 2026-10-03 | 2026-10-14 | live |
+| cases/95.html | cases/95.html | record | overview | 2026-10-03 | 2026-10-15 | live |
 | cases/96.html | cases/96.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/97.html | cases/97.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/98.html | cases/98.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -1031,6 +1031,11 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-185.html | result/t-185.html | result | overview | 2026-10-15 | 2026-10-15 | live |
 | result/t-186.html | result/t-186.html | result | overview | 2026-10-15 | 2026-10-15 | live |
 | result/t-187.html | result/t-187.html | result | overview | 2026-10-15 | 2026-10-15 | live |
+| result/t-188.html | result/t-188.html | result | overview | 2026-10-15 | 2026-10-15 | live |
+| result/t-189.html | result/t-189.html | result | overview | 2026-10-15 | 2026-10-15 | live |
+| result/t-190.html | result/t-190.html | result | overview | 2026-10-15 | 2026-10-15 | live |
+| result/t-191.html | result/t-191.html | result | overview | 2026-10-15 | 2026-10-15 | live |
+| result/t-192.html | result/t-192.html | result | overview | 2026-10-15 | 2026-10-15 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-15 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-15 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-15 | live |

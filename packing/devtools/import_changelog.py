@@ -239,11 +239,10 @@ def draft(
 
 def coverage_audit(document: Document) -> str:
     """The maintenance disposition table, kept outside the reader-facing section."""
-    entries = {
-        number: entry["id"]
-        for entry in document["entries"]
-        for number in entry["pull_requests"]
-    }
+    entries: dict[int, list[str]] = {}
+    for entry in document["entries"]:
+        for number in entry["pull_requests"]:
+            entries.setdefault(number, []).append(entry["id"])
     omissions = {
         item["pull_request"]: item["reason"] for item in document["coverage"]["omissions"]
     }
@@ -256,7 +255,9 @@ def coverage_audit(document: Document) -> str:
         "| --- | --- |",
     ]
     for number in sorted(document["coverage"]["pull_requests"], reverse=True):
-        disposition = entries.get(number) or "Omitted: " + omissions[number]
+        disposition = (
+            ", ".join(entries[number]) if number in entries else "Omitted: " + omissions[number]
+        )
         disposition = html.escape(disposition).replace("|", "\\|").replace("\n", " ")
         lines.append(f"| [#{number}]({document['repository']}/pull/{number}) | {disposition} |")
     return "\n".join([*lines, "", render_changelog.FOOTER, ""])

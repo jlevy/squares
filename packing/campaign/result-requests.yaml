@@ -609,7 +609,7 @@ issues:
       The 9 October update reports 38 rows; eleven of them, with a twelfth class outside the roster,
       were admitted to the n17 census ledger as kernel certificates through issue 472. Prior dated reports
       remain unchanged.
-    read_through: '2026-10-11T02:22:21Z'
+    read_through: '2026-10-13T00:32:14Z'
     results:
     - key: subpatterns-27
       claim: 29 source subpatterns, with 19 reported certificate verified and 10 computed; only rows
@@ -724,6 +724,20 @@ issues:
       bead: think-nmfl
       blocked_on:
       - think-x4v4
+    - key: row4-full-receipt-2026-10-13
+      claim: 'Row 4 now has an unmodified standing FULL receipt: this repository''s devtools.verify_n17_bb_certificate
+        at 657cc48, run as is in one process and full mode on the certificate of wand125''s release data/n17-m2048064-v1,
+        checked all 924,233 nodes with no failures in 78,224 s, the receipt verification.json on the release.
+        Row 4 still stalls under the kernel, so this branch-and-bound certificate is the one the author offers
+        for it.'
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6135318000
+      not_registered: 'A dated author report: the release, its certificate and its receipt are not yet retained
+        or replayed here (about 21.7 CPU-hours and 6.2 GB), and no row''s status changes before admission
+        with the n = 17 intake, which the owner''s suspension of new n = 17 work of 13 October holds.'
+      queued: true
+      bead: think-p2cy
+      blocked_on:
+      - think-x4v4
     asks:
     - what: Acquire complete packages for rows 1–4 first and join exact named-cell, frame, cap, closed-domain
         and receipt custody before admission.
@@ -741,6 +755,7 @@ issues:
     - think-x4v4
     - think-bmwd
     - think-nmfl
+    - think-p2cy
     answer_bead: think-x4v4
     replies:
     - url: https://github.com/jlevy/squares/issues/413#issuecomment-6047161738
@@ -5337,6 +5352,27 @@ issues:
         status: recorded
       - result: n207-exact-certificate
         id: T-147
+    - url: https://github.com/jlevy/squares/issues/503#issuecomment-6200877511
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n207-exact-certificate
+        id: T-147
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n207-exact-certificate
+        id: E-pingyou-503-exact-feasibility
+        status: confirmed
+      - result: n207-refinement
+        id: T-167
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n207-refinement
+        id: E-pingyou-503-refinement-report
+        status: reviewed
     close_when: The import and its disposition are on main, the house adoption at 207 has landed or
       is owned, the author has been asked which AI-assistance account stands, and the owner has
       posted the resulting state; optimality is outside this request.
@@ -5486,6 +5522,27 @@ issues:
         status: recorded
       - result: n153-exact-certificate
         id: T-148
+    - url: https://github.com/jlevy/squares/issues/504#issuecomment-6200881400
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n153-exact-certificate
+        id: T-148
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n153-exact-certificate
+        id: E-pingyou-504-exact-feasibility
+        status: confirmed
+      - result: n153-refinement
+        id: T-166
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n153-refinement
+        id: E-pingyou-504-refinement-report
+        status: reviewed
     close_when: The import and its disposition are on main, the house adoption at 153 has landed or
       is owned, and the owner has posted the resulting state; optimality and the undilated contact
       solution are outside this request.
@@ -5870,6 +5927,19 @@ issues:
       - result: unnamed-175-308-340-343
       corrects:
       - https://github.com/jlevy/squares/issues/506#issuecomment-6130063939
+    - url: https://github.com/jlevy/squares/issues/506#issuecomment-6185871803
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n175
+        id: T-185
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n175
+        id: E-couzo-506-n175-report
+        status: recorded
     close_when: The import and its disposition, including the beyond-horizon counts, are on main,
       the house adoption at 304 and 305 has landed or is owned, and the owner has posted the
       resulting state; the four unnamed certificates are imports of their own, and optimality is
@@ -6153,15 +6223,24 @@ issues:
       bead: think-6t6q
     - what: An offline copy of the secondary JavaScript checker they refused to run for network
         reasons.
-      state: queued
-      note: The external-square-certificates-2026-09-22 packet retains the R038 reconstruction
-        hash-pinned and the source replay here ran it; the reply can say so.
-      bead: think-6t6q
+      state: done
+      note: The reply of 2026-10-15 says that the external-square-certificates-2026-09-22 packet
+        retains the upstream R038 exact_parent_side_scan.js at the SHA-256 prepare_secondary.py
+        pins, in dependencies/guzhou-r038/, that prepare_secondary.py --source rebuilds the
+        checker from it offline, and that the source replay here ran both sweeps.
     beads:
     - think-6t6q
     answer_bead: think-6t6q
-    replies: []
-    close_when: The evidence entry is on main and the owner has answered the two asks.
+    replies:
+    - url: https://github.com/jlevy/squares/issues/521#issuecomment-6200834867
+      date: '2026-10-15'
+      by: jlevy
+      kind: import
+      reported:
+      - result: t037-third-party-replay
+        id: E-n011-kleddamag-3875-esummins-replay-report
+        status: recorded
+    close_when: The evidence entry is on main and the owner has decided the replayed-annotation ask.
   - number: 522
     title: 'Simple-square stratification of s(n): proof strategy, n = 11 scoreboard and Lean layer: registration request'
     author: Esummins
@@ -6223,7 +6302,17 @@ issues:
     beads:
     - think-3m7d
     answer_bead: think-3m7d
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/522#issuecomment-6200838680
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: stratification-strategy
+      - result: n11-census-theorem
+      - result: n11-window-scoreboard
+      - result: lean-layer
+      - result: by-products-below-record
     close_when: The owner has decided on the strategy-catalogue entry and the reply states what was
       retained and why nothing is registered.
   - number: 523
@@ -6262,13 +6351,22 @@ issues:
       state: queued
       note: Priced in think-j891 at about 15 CPU-hours at the authors' walls and 150 to 300
         CPU-hours with the re-walls, per n; needs an owner budget and a soundness review of the leaf
-        rules first. The n = 17 lane (think-x4v4) should own the decision.
+        rules first. The n = 17 lane (think-x4v4) should own the decision. On 13 October the owner
+        suspended the n = 17 part pending Overbeck's candidate proof (T-153, issue 557), with
+        think-x4v4; the n = 19 part waits on a budget and the leaf-rule review (think-kok7).
       bead: think-j891
-      blocked_on: [think-x4v4]
+      blocked_on: [think-x4v4, think-kok7]
     beads:
     - think-j891
     answer_bead: think-j891
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/523#issuecomment-6200839132
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: census-2500
+      - result: n17-descent
     close_when: The owner has budgeted or declined the compute and the reply states what was
       retained.
   - number: 524
@@ -6303,7 +6401,13 @@ issues:
     beads:
     - think-s1ru
     answer_bead: think-s1ru
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/524#issuecomment-6200839522
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: one-flush-conjecture
     close_when: The owner has answered the research request and the reply states what was retained.
   - number: 525
     title: 'Forced double meeters on the simple-square ladder (Theorem FC, SLOT-CROWD) and the forced-cell traction finding: registration request'
@@ -6337,7 +6441,13 @@ issues:
     beads:
     - think-3nc2
     answer_bead: think-3nc2
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/525#issuecomment-6200839952
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: slot-crowd-and-fc
     close_when: The owner has answered the asks and the reply states what was retained.
   - number: 526
     title: 'k = 0 at n = 11: the no-simple-square class — theorems, refuted routes with witnesses, measured facts: registration request'
@@ -6370,7 +6480,13 @@ issues:
     beads:
     - think-tnfo
     answer_bead: think-tnfo
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/526#issuecomment-6200840511
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: k0-theorems-and-negatives
     close_when: The owner has answered the asks and the reply states what was retained.
   - number: 527
     title: 'Geometry-before-LP toolkit for stratum trees (exact-rational leaf rules, 7.2× on closed nodes): registration request'
@@ -6404,7 +6520,13 @@ issues:
     beads:
     - think-kok7
     answer_bead: think-kok7
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/527#issuecomment-6200840937
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: toolkit
     close_when: The owner has decided on the review and the reply states what was retained.
   - number: 528
     title: 's(175) ≤ 13.764174317487, s(232) ≤ 15.764174317487, s(264) ≤ 16.774735132388: registration request'
@@ -6614,11 +6736,21 @@ issues:
     - think-nd7g
     - think-r333
     answer_bead: think-i85v
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/532#issuecomment-6200835621
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: >-
       Each replay's receipts and controls are retained in its packet, a review accepts them,
       the four register entries on main record the replays and their rungs, and #446 has a
       reply for T-132.
+    notes: >-
+      The follow-up of 15 October: no replay has started. The regularization's first layers
+      merged on 13 and 14 October (#497, #509, #511, #530, #548, #549), but think-ux1v is still
+      in progress, so all three asks stay blocked on it; the replay tooling is not on main and
+      the two owner questions on #543 are open.
   - number: 533
     title: Review and replay wand125's sqverify_continuous (f30cc2c) for the two n = 40 lower bounds
     author: jlevy
@@ -6676,10 +6808,24 @@ issues:
     beads:
     - think-wop1
     answer_bead: think-wop1
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/534#issuecomment-6200836218
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s31-mixed-fine-net
     close_when: >-
       The result is registered on main and its replay is recorded, or priced and queued in
       #532's lane.
+    notes: >-
+      The follow-up of 15 October (issuecomment-6200836218) first said replays of this kind
+      "took 3.3 to 6.1 CPU-hours by the T-142 and T-143 measurements", though no replay has run:
+      the figures are the 11 October prep lane's prices from smoke runs (think-i85v), 3.3 to 4.5
+      CPU-hours for T-142 and 4.5 to 6.1 for T-143. It was edited in place at 23:30Z that day,
+      with a visible note, to say they were priced at 3.3 to 6.1 CPU-hours from the T-142 and
+      T-143 smoke runs and that none has run yet, so the reply as it stands states nothing
+      outdated (PR #625's review, A1).
   - number: 535
     title: Take Evan Daniel's Lean proof of s(12) ≥ 15680/3951 (S12HLower) as evidence for T-049
     author: jlevy
@@ -6704,7 +6850,12 @@ issues:
     beads:
     - think-oyd4
     answer_bead: think-oyd4
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/535#issuecomment-6200836834
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The evidence entry and the corrected next rung are on main, and either the build's
       receipt is retained or the owner declines the build.
   - number: 536
@@ -6730,7 +6881,12 @@ issues:
     beads:
     - think-xk3f
     answer_bead: think-xk3f
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/536#issuecomment-6200837293
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The packet and the evidence entry are on main and the rebuild has a recorded price.
   - number: 537
     title: Take Valid7 in the Lean kernel (evand/square-packing 060c1a1) as evidence for T-064
@@ -6757,7 +6913,12 @@ issues:
     beads:
     - think-0ayk
     answer_bead: think-0ayk
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/537#issuecomment-6200837751
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The packet and the evidence entry are on main, and the owner has decided on a sample
       or a full rebuild.
   - number: 538
@@ -6782,7 +6943,12 @@ issues:
     beads:
     - think-1bm2
     answer_bead: think-1bm2
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/538#issuecomment-6200838139
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The check compares the best of three timings with 400 ms, both ceilings are
       unchanged, the play message is attributed, and check_frontend passes.
   - number: 539
@@ -6805,7 +6971,12 @@ issues:
     beads:
     - think-tfil
     answer_bead: think-tfil
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/539#issuecomment-6200838545
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The check waits for the reload's own navigation and still passes.
   - number: 540
     title: 'check_requests: mark a reply due on adoption, supersession and newly read comments'
@@ -6829,7 +7000,12 @@ issues:
     beads:
     - think-qh9a
     answer_bead: think-qh9a
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/540#issuecomment-6200839133
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: replies_due reports all three cases with tests, a reply's reported items can state
       the position, and step 2 of After the Merge drops the by-hand sentence.
   - number: 541
@@ -6854,7 +7030,12 @@ issues:
     beads:
     - think-7yqp
     answer_bead: think-7yqp
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/541#issuecomment-6200839659
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: >-
       --github fails a recorded reply whose ids are missing from the posted text, with a
       test.
@@ -6971,9 +7152,20 @@ issues:
     beads:
     - think-mq0k
     answer_bead: think-mq0k
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/544#issuecomment-6200840166
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: Every item the tracker lists has landed, been declined or moved to an issue of its
       own.
+    notes: >-
+      The follow-up of 15 October: every pull request of the pass has merged except #514 (#516,
+      #518, #553 and #531 on 12 October, #563 on 14 October); #485's s(40) > 3359/500 is T-157 at
+      V3/C3 (#598) and #506's s(175) is answered and registered as T-185 (#612). Still queued:
+      #514 and the owner decisions on #543, #532 to #542, #419's Lean build, the n = 17
+      certificates of #495 and #413, #494's note and #446's four values (think-eth9).
   - number: 545
     title: Evan Daniel's s(29) minimal polynomial (degree 7213) and grade-C local-minimality checks (evand/square-packing ad86d42)
     author: jlevy
@@ -7026,7 +7218,14 @@ issues:
     - think-01y3
     - think-3ppi
     answer_bead: think-6gti
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/545#issuecomment-6200841270
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: s29-minimal-polynomial
+      - result: grade-c-local-minima
     close_when: Both reports are recorded on main, and the replay and review are either run or
       priced with an owner decision.
   - number: 550
@@ -7052,13 +7251,19 @@ issues:
     beads:
     - think-mvsm
     answer_bead: think-mvsm
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/550#issuecomment-6200840639
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The fixture waits on the menu's own state and the module passes repeatedly under
       load, as the issue's done-when says.
     notes: >-
       The project opened this issue; it reports no result, and no acknowledgement is owed on
-      it. `check_requests` still lists an acknowledgement as due, because the record has no
-      state for an issue its owner opened (think-abcm).
+      it. Until the status follow-up of 15 October, which names the bead and what it waits
+      on, `check_requests` listed an acknowledgement as due, because the record has no state
+      for an issue its owner opened (think-abcm).
   - number: 554
     title: 'Workbench colourer: one colour per angle class across the atlas, not fixed five-degree bands'
     author: jlevy
@@ -7083,13 +7288,19 @@ issues:
     beads:
     - think-9xhw
     answer_bead: think-9xhw
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/554#issuecomment-6200841197
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The colourer derives slots from shared centres and the animate-view contract's core
       check holds exact slots again, as the issue's done-when says.
     notes: >-
       The project opened this issue; it reports no result, and no acknowledgement is owed on
-      it. `check_requests` still lists an acknowledgement as due, because the record has no
-      state for an issue its owner opened (think-abcm).
+      it. Until the status follow-up of 15 October, which names the bead and what it waits
+      on, `check_requests` listed an acknowledgement as due, because the record has no state
+      for an issue its owner opened (think-abcm).
   - number: 552
     title: 'New packing: s(154) ≤ 12.92256640193406: registration request'
     author: evand
@@ -7238,15 +7449,16 @@ issues:
     title: 's(129) ≤ 11.870013850405, s(204) ≤ 14.808663234387, s(303) ≤ 17.909958291070: registration request'
     author: dostashev
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: 'Daniil Ostashev reports exact rational certificates at 129, 204 and 303 in dostashev/square-packing:
       a cut-out of the s(302) house''s rectangle at 129 and two compositions of new rectangle packings at
       204 and 303. Imported on 14 October 2026 in the dostashev-compositions-2026-10-12 packet, replayed
       on both maintained exact routes with their controls, and registered as T-162 at V0/C0, each side the
-      smallest known at its count when reported; PR 574 (T-174) tightens all three by about 1e-19. AI assistance
-      disclosed.'
+      smallest known at its count when reported; PR 574 (T-174) tightens all three by about 1e-19. T-162
+      was confirmed at V3/C3 on 15 October 2026. AI assistance disclosed.'
     read_through: '2026-10-14T09:18:12Z'
     results:
     - key: three-certificates
@@ -7290,6 +7502,19 @@ issues:
         status: recorded
       corrects:
       - https://github.com/jlevy/squares/issues/562#issuecomment-6165052232
+    - url: https://github.com/jlevy/squares/issues/562#issuecomment-6200859258
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: three-certificates
+        id: T-162
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: three-certificates
+        id: E-ostashev-562-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -7297,14 +7522,15 @@ issues:
     title: 's(302) ≤ 17.870275382734: registration request'
     author: BuddenPing
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: PingYou Ltd reports an exact rational certificate at 302, four boundary patches of Ryan Xu's
       packing of 70 with two upright banks, refined in the update of 12 October. Imported on 14 October
       2026 as derived exact facts in the pingyou-n302-certificate-2026-10-12 packet, replayed on both maintained
       exact routes, and registered as T-164 at V0/C0, 1.75e-03 below the case's ceiling; Francisco Couzo's
-      issue 583 (T-181) is smaller.
+      issue 583 (T-181) is smaller. T-164 was confirmed at V3/C3 on 15 October 2026.
     read_through: '2026-10-14T07:05:00Z'
     results:
     - key: n302-certificate
@@ -7343,20 +7569,39 @@ issues:
       - result: n302-certificate
         id: E-pingyou-564-certificate-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/564#issuecomment-6200861792
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n302-certificate
+        id: T-164
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n302-certificate
+        id: E-pingyou-564-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
+    notes: >-
+      The final reply of 15 October names the house at 302, T-181, and not Mykhailo Polkovskyi's
+      T-186, registered that day, which is smaller at 302 and not adopted there. No reply is owed
+      for it: T-186 is not this issue's result, the reply states the issue's result and the case's
+      house, and the issue is closed (PR #630's review, A3).
   - number: 566
     title: 's(146) ≤ 12.5837822039508342919134679370511513667729: further certificate refinement'
     author: BuddenPing
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: PingYou Ltd reports a further exact refinement of Ryan Xu's packing of 146 after Robert Barnett's
       (T-150). Imported on 14 October 2026 as derived exact facts, replayed on both maintained exact routes
       with its controls, and registered as T-168 at V0/C0, a regularization of the packing it tightens;
-      PR 574 (T-174) tightens it again.
+      PR 574 (T-174) tightens it again. T-168 was confirmed at V3/C3 on 15 October 2026.
     read_through: '2026-10-14T07:05:04Z'
     results:
     - key: n146-refinement
@@ -7395,6 +7640,19 @@ issues:
       - result: n146-refinement
         id: E-pingyou-566-certificate-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/566#issuecomment-6200865597
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n146-refinement
+        id: T-168
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n146-refinement
+        id: E-pingyou-566-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -7402,13 +7660,14 @@ issues:
     title: 's(261) ≤ 16.6787798753429098149372205115301919485639: further certificate refinement'
     author: BuddenPing
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: PingYou Ltd reports a further exact refinement of Ryan Xu's packing of 261 after Robert Barnett's
       (T-150). Imported on 14 October 2026 as derived exact facts, replayed on both maintained exact routes
       with its controls, and registered as T-169 at V0/C0, a regularization of the packing it tightens;
-      PR 574 (T-174) tightens it again.
+      PR 574 (T-174) tightens it again. T-169 was confirmed at V3/C3 on 15 October 2026.
     read_through: '2026-10-14T07:05:05Z'
     results:
     - key: n261-refinement
@@ -7447,6 +7706,19 @@ issues:
       - result: n261-refinement
         id: E-pingyou-567-certificate-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/567#issuecomment-6200868210
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n261-refinement
+        id: T-169
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n261-refinement
+        id: E-pingyou-567-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -7454,13 +7726,14 @@ issues:
     title: 's(105) ≤ 10.7893037837481588309268366600396176597363: exact contact refinement'
     author: BuddenPing
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: PingYou Ltd reports an exact contact refinement of Francisco Couzo's packing of 105 (T-130).
       Imported on 14 October 2026 as derived exact facts, replayed on both maintained exact routes with
       its controls, and registered as T-170 at V0/C0, a regularization of the packing it tightens; PR 574
-      (T-174) tightens it again.
+      (T-174) tightens it again. T-170 was confirmed at V3/C3 on 15 October 2026.
     read_through: '2026-10-14T07:05:07Z'
     results:
     - key: n105-refinement
@@ -7505,6 +7778,19 @@ issues:
         status: recorded
       corrects:
       - https://github.com/jlevy/squares/issues/568#issuecomment-6162868542
+    - url: https://github.com/jlevy/squares/issues/568#issuecomment-6200870851
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n105-refinement
+        id: T-170
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n105-refinement
+        id: E-pingyou-568-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -7512,13 +7798,14 @@ issues:
     title: 's(272) ≤ 16.9655864748376706357560070334220455696299: exact contact refinement'
     author: BuddenPing
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-15'
     kind: result-report
     triage: done
     summary: PingYou Ltd reports an exact contact refinement of SQUISH's packing of 272 (T-151). Imported
       on 14 October 2026 as derived exact facts, replayed on both maintained exact routes with its controls,
       and registered as T-171 at V0/C0, a regularization of the packing it tightens; PR 574 (T-174) tightens
-      it again.
+      it again. T-171 was confirmed at V3/C3 on 15 October 2026.
     read_through: '2026-10-14T07:05:08Z'
     results:
     - key: n272-refinement
@@ -7557,6 +7844,19 @@ issues:
       - result: n272-refinement
         id: E-pingyou-569-certificate-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/569#issuecomment-6200873389
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n272-refinement
+        id: T-171
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n272-refinement
+        id: E-pingyou-569-certificate-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -8108,7 +8408,13 @@ issues:
     beads:
     - think-ts16
     answer_bead: think-ts16
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/589#issuecomment-6200882061
+      date: '2026-10-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n381
     close_when: Closed by its author; issue 582 carries the claim.
   - number: 593
     title: '73 new upper bounds across N=51..308: registration request'
@@ -8144,6 +8450,15 @@ issues:
       source: body
       not_registered: Each equals or trails an earlier report at its count; retained in the packet.
       queued: false
+    - key: kkt-refinements-70a033f
+      claim: Twelve exact certificates at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 in
+        Mishapolk/square-packing-records at 70a033f, a later commit of the author's that no issue reports;
+        this issue's reply of 15 October answers for it.
+      source: https://github.com/Mishapolk/square-packing-records/tree/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94
+      register:
+      - T-186
+      evidence:
+      - E-mishapolk-70a033f-certificate-report
     beads:
     - think-2ep3
     answer_bead: think-2ep3
@@ -8185,6 +8500,20 @@ issues:
       - result: ties-211-241
       corrects:
       - https://github.com/jlevy/squares/issues/593#issuecomment-6163849805
+    - url: https://github.com/jlevy/squares/issues/593#issuecomment-6185872048
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: kkt-refinements-70a033f
+        id: T-186
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: kkt-refinements-70a033f
+        id: E-mishapolk-70a033f-certificate-report
+        status: recorded
+      - result: ties-211-241
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request. The author has said which name the record should carry.
@@ -8205,7 +8534,7 @@ issues:
       on 14 October 2026; triage replayed the cover's census with both checkers from this repository's retained
       copies. Registered as T-184 at V0/C0, S3. The author's update of 14 October adds a second route, zm_mixed.py
       alone over the whole region, at 06993982; it is not yet retained. AI assistance disclosed.
-    read_through: '2026-10-14T08:25:57Z'
+    read_through: '2026-10-15T00:50:37Z'
     results:
     - key: s76-equals-9
       claim: 's(76) = 9: the lower half by a mixed cover, the upper half by the 9 x 9 grid.'
@@ -8247,6 +8576,10 @@ issues:
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
+    notes: 'The author''s comment of 15 October (https://github.com/jlevy/squares/issues/594#issuecomment-6181807169)
+      says the sixteen wall segments carrying one weight unit each are residue of the LP: interior-point weights
+      of about 1.04e-12 that the export rounded up to the unit 1/(4*10^8), which can only raise captures and
+      are counted in the total. The pinned cover stays as it is, and no result changes (think-osvq).'
   - number: 596
     title: 's(365) ≤ 19.621320343560, s(370) ≤ 19.767730746255, s(460) ≤ 21.959969683021: registration request
       (beyond-horizon)'
@@ -8469,7 +8802,205 @@ issues:
     beads:
     - think-rvv7
     answer_bead: think-rvv7
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/606#issuecomment-6185871556
+      date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n146
+        id: T-187
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n146
+        id: E-evand-606-n146-report
+        status: recorded
+      - result: distinct-local-minimum
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would confirm the V0 entry are owned by its bead;
       optimality is outside this request.
+  - number: 607
+    title: '237-1024: registration request'
+    author: franciscouzo
+    opened: '2026-10-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'Francisco Couzo reports 23 exact certificates at franciscouzo/square-packing 43ac7d2, first
+      committed on 14 October 2026 before the issue: s(237), a refinement of Mykhailo Polkovskyi''s issue
+      593 packing, 13 campaign bounds and two precision refinements beyond the case corpus, and seven of
+      Kevin Fang''s composites, which he replayed and credits to Fang. Imported on 15 October 2026 in the
+      couzo-certificates-2026-10-14 packet and replayed on both maintained exact routes with every control
+      refused. Registered as T-189 at V0/C0 at 237, with 15 beyond-horizon rows; the composites are Fang''s
+      files byte for byte, a tie his earlier rows keep. His later 4e4c8ce certificate at 237, which no issue
+      reports, is T-190. OpenAI Codex and Claude Code assistance disclosed.'
+    read_through: '2026-10-14T23:18:36Z'
+    results:
+    - key: n237
+      claim: s(237) <= 15.902603638284, by an exact rational certificate, continuing Mykhailo Polkovskyi's
+        issue 593 certificate.
+      source: body
+      register:
+      - T-189
+      evidence:
+      - E-couzo-607-certificate-report
+    - key: fifteen-beyond-horizon
+      claim: 13 campaign bounds at 339, 382, 409, 419, 450, 461, 552, 599, 648, 649, 651, 757 and 804, and
+        precision refinements at 342 and 542, beyond the 1..324 case corpus.
+      source: body
+      not_registered: 'Beyond the n <= 324 corpus: rows of the couzo-certificates-2026-10-14 source, each
+        below every earlier report at its count.'
+      queued: false
+    - key: fang-composites
+      claim: Seven of Kevin Fang's composites, at 703, 812, 930, 931, 992, 993 and 994, replayed and credited
+        to Fang.
+      source: body
+      not_registered: Each is the file Fang's composite table lists, published at bef5c42 on 12 October,
+        so a tie his earlier rows keep; the packet's bytes and replay are evidence for those rows, which
+        his composites import registers.
+      queued: true
+      bead: think-rn2y
+    beads:
+    - think-qik6
+    - think-rn2y
+    answer_bead: think-qik6
+    replies: []
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, the composites are with Fang's import, and the review and replay that would
+      confirm the V0 entry are owned by its bead; optimality is outside this request.
+  - number: 610
+    title: 'Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)'
+    author: bengreff
+    opened: '2026-10-15'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Benjamin Greff reports s(95) = 10 by a mixed cover of points and grid-line segments, checked
+      by Evan Daniel's zmx2 and zm_mixed.py in composite, at bengreff/s95-certificate dd7297d. Imported
+      on 15 October 2026; triage replayed zmx2 over all 10,000 D4 roots and zm_mixed.py over all 304 sub-roots
+      from this repository's retained copies, each equal to the source's records. Registered as T-191 at
+      V0/C0, S3; T-081 notes the second route to s(96) >= 10. AI assistance disclosed.
+    read_through: '2026-10-15T01:16:36Z'
+    results:
+    - key: s95-equals-10
+      claim: 's(95) = 10: the lower half by a mixed cover, the upper half by the 10 x 10 grid.'
+      source: body
+      register:
+      - T-191
+      evidence:
+      - E-bengreff-610-cover-report
+    beads:
+    - think-ribz
+    answer_bead: think-ribz
+    replies: []
+    close_when: The import and its disposition are on main, the owner has posted the resulting state with
+      each recorded count's id, and the review and replay that would confirm the V0 entry are owned by its
+      bead; optimality is outside this request.
+  - number: 613
+    title: 'Beyond 324: registered rows at 369 and 376, and 89 reported rows, are above Göbel''s classical
+      constructions'
+    author: jlevy
+    opened: '2026-10-15'
+    state: open
+    kind: defect-report
+    intake: true
+    triage: done
+    summary: 'A defect report the project opened from the 15 October intake (think-8krd): beyond 324 the
+      record compares reports only with the grid and earlier reports and holds none of Göbel''s classical
+      constructions, so its rows at 369 and 376 are above Göbel''s sides, by 3.33e-2 and 4.57e-3, as are
+      42 of Couzo''s 487b058 rows and 47 of his 4e4c8ce index''s. It asks the owner whether Göbel''s constructions
+      count as earlier reports and the baseline beyond 324. It reports no result of its own. Göbel''s sides
+      dominate the rows at 369 and 376 without refuting them: those rows are valid upper bounds, but the
+      record shows them as the best sides there. The answer decides whether 89 reported rows are recorded.'
+    read_through: '2026-10-15T03:55:33Z'
+    results: []
+    asks:
+    - what: The owner decides whether Göbel's constructions are earlier reports and the baseline beyond
+        324; if so, a records PR adds them as the baseline, corrects 369 and 376 and records a defect. Until
+        then the 42 rows of 487b058 above them are not recorded, and 369 and 376 stay.
+      state: queued
+      bead: think-8krd
+    beads:
+    - think-8krd
+    answer_bead: think-8krd
+    replies: []
+    close_when: 'The owner has decided the question, and the record holds the decision: Göbel''s sides as
+      the baseline beyond 324 with 369 and 376 corrected, or the 42 rows recorded.'
+    notes: >-
+      The project opened this issue; it reports no result of its own, and no acknowledgement is owed on
+      it. `check_requests` still lists an acknowledgement as due, because the record has no state for an
+      issue its owner opened (think-abcm). It is marked `intake` (the label added on 15 October 2026,
+      think-ykg6) as the project's own issue tracking the intake of a reported item, as #532 to #537 are:
+      Göbel's classical constructions, results the record does not hold, as the baseline beyond 324. Its
+      answer also decides which reported rows beyond 324 the record takes in. It is not a counterexample
+      report: the rows at 369 and 376 are valid upper bounds that smaller classical sides dominate.
+  - number: 622
+    title: 'data: submit a tighter exact N29 packing certificate'
+    author: BuddenPing
+    opened: '2026-10-15'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      PingYou Ltd (BuddenPing) submits, as a pull request, one exact rational certificate at n = 29, a
+      refinement of the Kingbird packing of Thomas Schadt, improved by David Ellsworth, in the release
+      data/pingyou-n29-certificate-2026-10-15-v1 of BuddenPing/square-packing-certificates (430,075
+      bytes, SHA-256 0dc9bcd1...). Triaged on 15 October 2026: its exact side is 1.57e-36 below T-155
+      and 7.32e-90 below #574's N29 certificate, which the 14 October ledger left undecided, and the
+      comparison with the reported lane waits for that lane's exact side, the root of Evan Daniel's
+      degree-7213 polynomial (#545). Whether to merge the pull request is the owner's call.
+    read_through: '2026-10-15T18:43:54Z'
+    results:
+    - key: n29-certificate
+      claim: s(29) <= the exact side of n29-certificate/certificates/n029.cert.json (SHA-256 a01428c5...),
+        a fraction of 2,399 and 2,398 digits, about 5.93383346267692918968946061635201913843383418107788697463882591.
+      source: body
+      not_registered: Undecided against the reported lane at 29, whose exact side the record does not hold
+        yet; the report-order rule records it only if it is below that side.
+      queued: true
+      bead: think-30n2
+      blocked_on:
+      - think-6gti
+    beads:
+    - think-30n2
+    answer_bead: think-30n2
+    replies: []
+    close_when: The import and its disposition are on main, the owner has decided the pull request and
+      posted the resulting state, and any replay that would confirm a recorded entry is owned by its bead;
+      optimality is outside this request.
+    notes: >-
+      A pull request, held here as an issue because it reports results, as #574 is. It asks to replace
+      #574's N29 certificate, which T-174 does not register. The pull request makes no statement about AI
+      assistance; the author's answer on #503 ('PY') covered #503 and #504 only, and the drafted
+      acknowledgement in think-30n2 asks the question, as the #503 and #504 replies did.
+  - number: 624
+    title: 'n366 new best known packing: registration request'
+    author: mstrmg
+    opened: '2026-10-15'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'Miles Gray (mstrmg) reports an exact certificate at 366, beyond the case corpus: gist c3350a7e
+      at 31e69614 (n366.cert, SHA-256 9cd599bb...), made by removing three squares from Francisco Couzo''s
+      packing of 369 (02f9690''s, by the side the issue quotes) and optimizing again; AI assistance disclosed.
+      Both exact checkers here accept it at its own side, 19.738804240214197, which is 3.9e-7 below the side
+      the issue prints. Not imported: Couzo''s 4e4c8ce index, first committed before the issue, holds a smaller
+      certificate at 366, credited there to PingYou Ltd (BuddenPing).'
+    read_through: '2026-10-15T20:02:39Z'
+    results:
+    - key: n366
+      claim: s(366) <= 19.738804630679, by an exact certificate whose own side is 19738804240214197/1000000000000000.
+      source: body
+      not_registered: 'An earlier report is smaller. franciscouzo/square-packing at 4e4c8ce, first committed
+        2026-10-15T00:31:53Z, before this issue at 20:02:39Z, publishes certificates/best/n366.cert (SHA-256
+        bfd83f90...) at 14 + 4√2 scaled by 1 + 1e-24, 19.656854249493 rounded up, 8.19e-2 below; its index
+        credits PingYou Ltd (BuddenPing), and its 341 rows beyond 324 are think-yfoo''s import. Göbel''s strip
+        construction for 369, 19 + √2/2, is 3.17e-2 below as well (#613). Not imported.'
+      queued: false
+    beads:
+    - think-hd6a
+    answer_bead: think-hd6a
+    replies: []
+    close_when: The reply saying why the certificate is not recorded is posted and the author has had the
+      chance to answer.

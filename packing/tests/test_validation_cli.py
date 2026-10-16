@@ -829,6 +829,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "--ignore=tests/test_site_rendering.py",
         "--ignore=tests/test_site_math_preferences.py",
         "--ignore=tests/test_site_atlas_views.py",
+        "--ignore=tests/test_site_forwarders.py",
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
@@ -4554,6 +4555,7 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
         "tests/test_site_rendering.py",
         "tests/test_site_math_preferences.py",
         "tests/test_site_atlas_views.py",
+        "tests/test_site_forwarders.py",
     }
     for path in validate.SITE_LAYOUT_TESTS:
         assert (validate.PROJECT_ROOT / path).is_file(), path
@@ -4602,18 +4604,37 @@ def _captured_site_layout_commands(
 def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Keep functional layout parallel and the four load-budget cases serial."""
+    """Keep layout parallel, then run forwarders and four load-budget cases serially."""
     commands, environments, output = _captured_site_layout_commands(monkeypatch)
-    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    common = (
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-o",
+        "faulthandler_timeout=60",
+    )
     assert commands == [
         (
             *common,
             "-n",
             "2",
             "--dist=loadfile",
-            *validate.SITE_LAYOUT_TESTS,
+            *(
+                path
+                for path in validate.SITE_LAYOUT_TESTS
+                if path != "tests/test_site_forwarders.py"
+            ),
             "-k",
             "not test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets",
+        ),
+        (
+            *common,
+            "-n",
+            "0",
+            "tests/test_site_forwarders.py",
         ),
         (
             *common,
@@ -4622,19 +4643,19 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
             validate.SITE_LOAD_BUDGET_TEST,
         ),
     ]
-    assert environments == [{validate.REQUIRE_CHROMIUM: "1"}] * 2
-    assert output == "command 1 passed\ncommand 2 passed"
+    assert environments == [{validate.REQUIRE_CHROMIUM: "1"}] * 3
+    assert output == "command 1 passed\ncommand 2 passed\ncommand 3 passed"
     assert validate.REQUIRE_CHROMIUM == site_browser.REQUIRED
 
 
 def test_site_layout_commands_partition_the_original_collection(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Neither phase may drop, repeat, or widen the existing four timing cases."""
+    """The three processes must partition the same complete browser collection."""
     # Collect node IDs independently of the outer gate's verbose execution options.
     monkeypatch.delenv("PYTEST_ADDOPTS", raising=False)
     commands, _environments, _output = _captured_site_layout_commands(monkeypatch)
-    assert len(commands) == 2
+    assert len(commands) == 3
 
     def collect(command: Sequence[str]) -> set[str]:
         # Collection needs no xdist worker: preserve selection, remove allocation.
@@ -4666,24 +4687,31 @@ def test_site_layout_commands_partition_the_original_collection(
             *validate.SITE_LAYOUT_TESTS,
         )
     )
-    parallel, serial = (collect(command) for command in commands)
+    parallel, isolated, serial = (collect(command) for command in commands)
     assert serial == {
         f"tests/test_site_rendering.py::"
         f"test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets[{case}]"
         for case in ("390-light", "390-dark", "1280-light", "1280-dark")
     }
-    assert original == parallel | serial
+    assert original == parallel | isolated | serial
+    assert not parallel & isolated
     assert not parallel & serial
+    assert not isolated & serial
+    forwarders = {
+        node for node in original if node.startswith("tests/test_site_forwarders.py::")
+    }
+    assert len(forwarders) == 51
+    assert isolated == forwarders
 
 
-@pytest.mark.parametrize("failure_index", [0, 1])
+@pytest.mark.parametrize("failure_index", [0, 1, 2])
 @pytest.mark.parametrize("error_type", [validate.StepFailureError, validate.StepTimeoutError])
 def test_site_layout_command_failure_keeps_prior_output_and_stops(
     monkeypatch: pytest.MonkeyPatch,
     failure_index: int,
     error_type: type[validate.StepFailureError],
 ) -> None:
-    """A failed layout or timing command cannot become a passing combined step."""
+    """A failed command cannot become a passing combined step or launch later phases."""
     calls = 0
 
     def fail(_context: validate.Context, _command: Sequence[str], **_options: Any) -> str:
@@ -4713,8 +4741,8 @@ def test_site_layout_command_failure_keeps_prior_output_and_stops(
 def test_site_layout_commands_share_the_original_total_timeout(
     monkeypatch: pytest.MonkeyPatch, timeout_seconds: float
 ) -> None:
-    """Splitting the step must not give its second command a fresh hang budget."""
-    clock = iter((100.0, 100.0, 103.0))
+    """All three processes draw from one deadline, without a fresh hang budget."""
+    clock = iter((100.0, 100.0, 103.0, 105.0))
     monkeypatch.setattr(validate.time, "monotonic", lambda: next(clock))
     timeouts: list[object] = []
 
@@ -4732,10 +4760,10 @@ def test_site_layout_commands_share_the_original_total_timeout(
         environment=os.environ.copy(),
     )
     validate._site_layout_tests(context)
-    assert timeouts == [timeout_seconds, timeout_seconds - 3.0]
+    assert timeouts == [timeout_seconds, timeout_seconds - 3.0, timeout_seconds - 5.0]
 
 
-@pytest.mark.parametrize("completed_commands", [0, 1])
+@pytest.mark.parametrize("completed_commands", [0, 1, 2])
 def test_site_layout_exhausted_budget_cannot_start_another_command(
     monkeypatch: pytest.MonkeyPatch, completed_commands: int
 ) -> None:

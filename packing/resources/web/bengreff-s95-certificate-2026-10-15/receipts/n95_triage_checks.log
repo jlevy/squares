@@ -1,0 +1,120 @@
+== interpreter
+Python 3.14.7
+== cover digests (s(95) cover; wand125's s(59) cover)
+8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c  s95_cover_v2.txt
+6f4d2b64f9a88ae49546f05fa28752382f9ebfa8b7f8b6e6c6f1a8e693177e19  n59_mixed_cover_8.txt
+== the source's SHA256SUMS over the retained tree
+all 634 listed files match
+== the source's tools/check_total.py, run with -I from scratch
+points 48352, segments 11438, coordinate unit 1/8000, weight unit 1/400000000
+total mass = 3791753447/40000000 = 94.793836175
+OK: all weights >= 0, all atoms in [0,10]^2, total < 95
+== devtools.audit_evand_mixed_covers.audit_cover, compared with receipts/n95_cover_audit.json
+audit equals the retained receipt
+== the Lean data against the cover
+lean pts 48352 (distinct 48352), cover locations 48352; equal: True
+lean segs 11438 (distinct 11438), cover segments 11438; equal: True
+lean total 3791753447/40000000 = 94.793836175; below 95: True
+data-fact statements with this cover's constants: {'d4Check': True, 'segD4Check': True, 'wsum_lt': True, 'pts_nodup': True}
+S95Cover: D=8000 S=4096 Mq=80000 R=4294967296 W=400000000; centre upper limits 5, 5; u upper limit 1/2
+consistent with cover: D True, W True, Mq = 10D True
+statement: theorem s95_ge_10 (hcov : S95Cover) : (10 : ℝ) ≤ minSide 95 := by
+statement: theorem s95_eq_10 (hcov : S95Cover) : minSide 95 = 10 := by
+namespace refers to S95T: True
+== the corner [0, 5/2)^2 against wand125's s(59) cover
+sides: s59 8, target 10; cut 5/2
+points: s59 corner 1140 mass 0.945518910; target corner 1140 mass 0.945518910; identical 1140
+segments: s59 452 mass 4.044127740; target 452 mass 4.044127740; identical 452
+points only in s59 0, only in target 0, same place other mass 0
+segments only in s59 0, only in target 0
+corner identical as a measure: True
+== wall segments, and the stripped cover the wall control ran
+segments 11438, on walls 404, wall mass 101/100000000 = 0.000001010
+by wall: {'x0': '0.000000253', 'xs': '0.000000253', 'y0': '0.000000253', 'ys': '0.000000253'}
+wall segment weights (units of 1/W): {1: 404}
+wall segment lengths: {'1/500': 404}
+wall x = 0: 101 distinct midpoints, from 5/2 to 15/2
+total 3791753447/40000000 = 94.793836175; stripped total 18958767033/200000000 = 94.793835165
+24dd4f5d61f7c9cd22d71b1965cb100142b415e5d6532c6891ec8c4ce1bc67ae  s95_nowall.txt
+== the two mutations the zmx2 controls ran
+drop-heaviest-point drops the 8 point rows at the 8 D4 images of (11920, 14960)/8000, carrying 2514512/400000000 each removed 157157/3125000 rows 8
+  sha256 061f3291f7ea355e2e3c98564ae078be2d2ede00087e2aacd68b915dee29cf61
+  at (149/100, 187/100); image in [0, 5]^2 with x <= y: (149/100, 187/100)
+drop-heaviest-segment drops the 4 segment rows at the 4 D4 images of (7500, 40000)-(8000, 40000)/8000, carrying 66326392/400000000 each removed 8290799/12500000 rows 4
+  sha256 7e04ae86fa6520721c251dc3ddbdcf2cd7112430bd9d87de70968c733f36b544
+  at (15/16, 5); image in [0, 5]^2 with x <= y: (15/16, 5)
+== zmx2: the replay against the source's records
+headers equal: True ['# zmx2 cert hash=e6e0d4182d7f6e43 mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-49,y0-49,bins0-3']
+roots shipped 10000, replay 10000, identical census 10000
+shipped boxes/cert/empty/uncert: [15065314, 7470934, 58460, 8263] max depth 40
+replay  boxes/cert/empty/uncert: [15065314, 7470934, 58460, 8263] max depth 40
+roots with uncertified or capped boxes, shipped: ['15/10,16/10,47/10,48/10,0/8,1/8', '22/10,23/10,45/10,46/10,2/8,3/8', '31/10,32/10,43/10,44/10,3/8,4/8', '34/10,35/10,42/10,43/10,2/8,3/8', '36/10,37/10,45/10,46/10,0/8,1/8', '37/10,38/10,45/10,46/10,0/8,1/8', '42/10,43/10,34/10,35/10,3/8,4/8', '42/10,43/10,45/10,46/10,2/8,3/8', '43/10,44/10,31/10,32/10,2/8,3/8', '45/10,46/10,22/10,23/10,3/8,4/8', '45/10,46/10,42/10,43/10,3/8,4/8', '47/10,48/10,47/10,48/10,0/8,1/8', '47/10,48/10,48/10,49/10,0/8,1/8', '47/10,48/10,49/10,50/10,0/8,1/8', '48/10,49/10,38/10,39/10,0/8,1/8', '48/10,49/10,39/10,40/10,0/8,1/8', '48/10,49/10,48/10,49/10,0/8,1/8', '48/10,49/10,49/10,50/10,0/8,1/8', '49/10,50/10,39/10,40/10,0/8,1/8']
+same in replay: True ; equal to failing_roots.txt: True
+   15/10,16/10,47/10,48/10,0/8,1/8 uncert 8192 boxes 68611 maxdepth 40
+   22/10,23/10,45/10,46/10,2/8,3/8 uncert 8 boxes 14985 maxdepth 40
+   31/10,32/10,43/10,44/10,3/8,4/8 uncert 2 boxes 14961 maxdepth 40
+   34/10,35/10,42/10,43/10,2/8,3/8 uncert 11 boxes 21235 maxdepth 40
+   36/10,37/10,45/10,46/10,0/8,1/8 uncert 6 boxes 1389 maxdepth 40
+   37/10,38/10,45/10,46/10,0/8,1/8 uncert 2 boxes 1115 maxdepth 40
+   42/10,43/10,34/10,35/10,3/8,4/8 uncert 5 boxes 17559 maxdepth 40
+   42/10,43/10,45/10,46/10,2/8,3/8 uncert 5 boxes 17459 maxdepth 40
+   43/10,44/10,31/10,32/10,2/8,3/8 uncert 5 boxes 8427 maxdepth 40
+   45/10,46/10,22/10,23/10,3/8,4/8 uncert 5 boxes 10349 maxdepth 40
+   45/10,46/10,42/10,43/10,3/8,4/8 uncert 3 boxes 11875 maxdepth 40
+   47/10,48/10,47/10,48/10,0/8,1/8 uncert 2 boxes 829 maxdepth 40
+   47/10,48/10,48/10,49/10,0/8,1/8 uncert 3 boxes 1085 maxdepth 40
+   47/10,48/10,49/10,50/10,0/8,1/8 uncert 2 boxes 825 maxdepth 40
+   48/10,49/10,38/10,39/10,0/8,1/8 uncert 4 boxes 993 maxdepth 40
+   48/10,49/10,39/10,40/10,0/8,1/8 uncert 2 boxes 1081 maxdepth 40
+   48/10,49/10,48/10,49/10,0/8,1/8 uncert 2 boxes 1237 maxdepth 40
+   48/10,49/10,49/10,50/10,0/8,1/8 uncert 2 boxes 1043 maxdepth 40
+   49/10,50/10,39/10,40/10,0/8,1/8 uncert 2 boxes 1305 maxdepth 40
+UNCERT boxes shipped 111 replay 111 identical sets: True
+== zm_mixed.py records read with exact fractions: the source's, then the replay's (the 14-job sample and the other 290)
+{
+ "record_files": 304,
+ "failing_roots": 19,
+ "jobs": 304,
+ "jobs_inside_failing_roots": 304,
+ "jobs_distinct_cells": 304,
+ "partial": false,
+ "boxes": 9614,
+ "max_depth": 13,
+ "cpu_s": 2771.3,
+ "problems": []
+}
+{
+ "record_files": 304,
+ "failing_roots": 19,
+ "jobs": 304,
+ "jobs_inside_failing_roots": 304,
+ "jobs_distinct_cells": 304,
+ "partial": false,
+ "boxes": 9614,
+ "max_depth": 13,
+ "cpu_s": 2327.0,
+ "problems": []
+}
+== zm_mixed.py: the replay against the source's records
+files source 304 replay 304; compared 304; not replayed 0; headers equal (input path aside) 304; roots and census equal 304
+compared jobs: CPU source 2771.3 s, replay 2327.0 s, ratio 0.840; whole set at that ratio: 2327 CPU-s
+== the first 14 jobs replayed are the sample zm_sample.py chooses
+sample 14 jobs, recorded CPU 296.9 s (10.7% of the whole)
+sample equals the retained jobs_sample.txt
+== the source's tools/check_coverage.py, run with -I from scratch, on the source's records
+zmx2: 10000 roots tile [0,10/2]^2 x [0,1/2]; 19 have uncertified boxes
+zm_mixed: 304 certified roots tile the 19 remaining zmx2 roots exactly
+OK: the D4 fundamental region is certified (zmx2 or zm_mixed on every cell)
+== the source's tools/check_coverage.py on the replay's own zmx2 log and zm_mixed.py records
+zmx2: 10000 roots tile [0,10/2]^2 x [0,1/2]; 19 have uncertified boxes
+zm_mixed: 304 certified roots tile the 19 remaining zmx2 roots exactly
+OK: the D4 fundamental region is certified (zmx2 or zm_mixed on every cell)
+== the wall control's census against the replay's, root for root (headers differ in the cover hash)
+headers equal: False ['# zmx2 cert hash=e6e0d4182d7f6e43 mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-49,y0-49,bins0-3']
+roots shipped 10000, replay 10000, identical census 10000
+shipped boxes/cert/empty/uncert: [15065314, 7470934, 58460, 8263] max depth 40
+replay  boxes/cert/empty/uncert: [15065314, 7470934, 58460, 8263] max depth 40
+roots with uncertified or capped boxes, shipped: ['15/10,16/10,47/10,48/10,0/8,1/8', '22/10,23/10,45/10,46/10,2/8,3/8', '31/10,32/10,43/10,44/10,3/8,4/8', '34/10,35/10,42/10,43/10,2/8,3/8', '36/10,37/10,45/10,46/10,0/8,1/8', '37/10,38/10,45/10,46/10,0/8,1/8', '42/10,43/10,34/10,35/10,3/8,4/8', '42/10,43/10,45/10,46/10,2/8,3/8', '43/10,44/10,31/10,32/10,2/8,3/8', '45/10,46/10,22/10,23/10,3/8,4/8', '45/10,46/10,42/10,43/10,3/8,4/8', '47/10,48/10,47/10,48/10,0/8,1/8', '47/10,48/10,48/10,49/10,0/8,1/8', '47/10,48/10,49/10,50/10,0/8,1/8', '48/10,49/10,38/10,39/10,0/8,1/8', '48/10,49/10,39/10,40/10,0/8,1/8', '48/10,49/10,48/10,49/10,0/8,1/8', '48/10,49/10,49/10,50/10,0/8,1/8', '49/10,50/10,39/10,40/10,0/8,1/8']
+same in replay: True ; equal to failing_roots.txt: True
+UNCERT boxes shipped 111 replay 111 identical sets: True
+== done

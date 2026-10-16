@@ -242,16 +242,21 @@ def packet_view(directory: Path, name: str, view: Path) -> dict[str, str]:
 
 
 def sealed_bundle(
-    directory: Path, listed: dict[str, str], asset_files: list[str]
+    directory: Path,
+    listed: dict[str, str],
+    asset_files: list[str],
+    *,
+    suffix: str = BUNDLE_SUFFIX,
 ) -> dict[str, Any]:
     """The sealed inner bundle beside the manifest it carries and the asset around it.
 
     Every name ``files-sha256.json`` lists must be a member of the bundle's one top-level
     directory with that digest, and every regular member must be listed or be the
     manifest itself. Members byte-identical to the outer asset's file at the same path
-    are the repeated payloads.
+    are the repeated payloads. ``suffix`` names the bundle: a check2 directory's by
+    default, and `devtools.continuous_pose_followup` passes its own.
     """
-    bundles = sorted(directory.glob(f"*{BUNDLE_SUFFIX}"))
+    bundles = sorted(directory.glob(f"*{suffix}"))
     require(len(bundles) == 1, f"{len(bundles)} sealed bundles in {directory}")
     top = PurePosixPath(bundles[0].name.removesuffix(".tar.gz"))
     inner: dict[str, str] = {}

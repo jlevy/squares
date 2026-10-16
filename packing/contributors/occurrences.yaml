@@ -7918,7 +7918,7 @@ occurrences:
   label: Daniel
   role: source-author
   disposition: resolved
-  evidence: &id032
+  evidence: &id036
   - repository-license
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 52 spans so labelled.
@@ -10423,6 +10423,362 @@ occurrences:
   contributor_id: ryan-xu
   note: Joined by the reviewed identity of 16 spans so labelled.
 - origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence: &id032
+  - primary-byline
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 50 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Ostashev, Daniel, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id032
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 50 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Ostashev, Daniel, Levy
+  start: 12
+  end: 20
+  label: Ostashev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Ostashev, Daniel, Levy
+  start: 22
+  end: 28
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence: &id033
+  - repository-license
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 82 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Ostashev, Daniel, Levy
+  start: 30
+  end: 34
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: &id034
+  - primary-byline
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 91 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-14]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence: *id032
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 50 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Fang, Daniel, Ellsworth, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id032
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 50 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Fang, Daniel, Ellsworth, Levy
+  start: 12
+  end: 22
+  label: Polkovskyi
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Fang, Daniel, Ellsworth, Levy
+  start: 24
+  end: 28
+  label: Fang
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Fang, Daniel, Ellsworth, Levy
+  start: 30
+  end: 36
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence: *id033
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 82 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Fang, Daniel, Ellsworth, Levy
+  start: 38
+  end: 47
+  label: Ellsworth
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: Joined by the reviewed identity of 31 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Fang, Daniel, Ellsworth, Levy
+  start: 49
+  end: 53
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id034
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 91 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n237 2026-10-15]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence: *id032
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 50 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n237 2026-10-15]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Chaoweeraprasit, Daniel, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id032
+  contributor_id: francisco-couzo
+  note: Joined by the reviewed identity of 50 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n237 2026-10-15]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Chaoweeraprasit, Daniel, Levy
+  start: 12
+  end: 22
+  label: Polkovskyi
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n237 2026-10-15]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Chaoweeraprasit, Daniel, Levy
+  start: 24
+  end: 39
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n237 2026-10-15]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Chaoweeraprasit, Daniel, Levy
+  start: 41
+  end: 47
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence: *id033
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 82 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n237 2026-10-15]'
+    field: /credit
+  expected_text: Couzo after Polkovskyi, Chaoweeraprasit, Daniel, Levy
+  start: 49
+  end: 53
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id034
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 91 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[bengreff s95 certificate 2026-10-15]'
+    field: /authors/0
+  expected_text: Greff
+  start: 0
+  end: 5
+  label: Greff
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[bengreff s95 certificate 2026-10-15]'
+    field: /credit
+  expected_text: Greff after Daniel, Hosono
+  start: 0
+  end: 5
+  label: Greff
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[bengreff s95 certificate 2026-10-15]'
+    field: /credit
+  expected_text: Greff after Daniel, Hosono
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  contributor_id: evan-daniel
+  note: Joined by the reviewed identity of 85 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[bengreff s95 certificate 2026-10-15]'
+    field: /credit
+  expected_text: Greff after Daniel, Hosono
+  start: 20
+  end: 26
+  label: Hosono
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - bibliography
+  - owner-confirmation
+  contributor_id: hiroaki-hosono
+  note: Joined by the reviewed identity of 288 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 continuous n28 2026-10-15]'
+    field: /authors/0
+  expected_text: Hosono
+  start: 0
+  end: 6
+  label: Hosono
+  role: source-author
+  disposition: resolved
+  evidence: &id035
+  - bibliography
+  - owner-confirmation
+  contributor_id: hiroaki-hosono
+  note: Joined by the reviewed identity of 286 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 continuous n28 2026-10-15]'
+    field: /credit
+  expected_text: Hosono after Guzhou0806, Tokoharu, Levy
+  start: 0
+  end: 6
+  label: Hosono
+  role: credited-contributor
+  disposition: resolved
+  evidence: *id035
+  contributor_id: hiroaki-hosono
+  note: Joined by the reviewed identity of 286 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 continuous n28 2026-10-15]'
+    field: /credit
+  expected_text: Hosono after Guzhou0806, Tokoharu, Levy
+  start: 13
+  end: 23
+  label: Guzhou0806
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  contributor_id: guzhou0806
+  note: Joined by the reviewed identity of 25 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 continuous n28 2026-10-15]'
+    field: /credit
+  expected_text: Hosono after Guzhou0806, Tokoharu, Levy
+  start: 25
+  end: 33
+  label: Tokoharu
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  contributor_id: tokoharu
+  note: Joined by the reviewed identity of 30 spans so labelled.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 continuous n28 2026-10-15]'
+    field: /credit
+  expected_text: Hosono after Guzhou0806, Tokoharu, Levy
+  start: 35
+  end: 39
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence: *id034
+  contributor_id: joshua-levy
+  note: Joined by the reviewed identity of 91 spans so labelled.
+- origin:
     path: packing/frontier/results.yaml
     record_key: T-001
     field: /builds_on/credit/0
@@ -10836,7 +11192,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id032
+  evidence: *id036
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 52 spans so labelled.
 - origin:
@@ -11747,7 +12103,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: &id033
+  evidence: &id037
   - github-profile
   - owner-confirmation
   contributor_id: ryan-xu
@@ -12207,7 +12563,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -12233,7 +12589,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: &id035
+  evidence: &id039
   - repository-license
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
@@ -12477,7 +12833,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -12503,7 +12859,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: &id034
+  evidence: &id038
   - primary-byline
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
@@ -12543,7 +12899,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -12569,7 +12925,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id034
+  evidence: *id038
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -12852,7 +13208,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -12878,7 +13234,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -12891,7 +13247,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -12929,7 +13285,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -12955,7 +13311,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -12981,7 +13337,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id034
+  evidence: *id038
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -13032,7 +13388,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: &id036
+  evidence: &id040
   - bibliography
   - owner-confirmation
   contributor_id: hiroaki-hosono
@@ -13059,7 +13415,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13072,7 +13428,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -13085,7 +13441,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13098,7 +13454,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id034
+  evidence: *id038
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -13111,7 +13467,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13150,7 +13506,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13163,7 +13519,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13176,7 +13532,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13189,7 +13545,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13202,7 +13558,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13215,7 +13571,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13228,7 +13584,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13305,7 +13661,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -13330,7 +13686,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13367,7 +13723,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -13380,7 +13736,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13393,7 +13749,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13406,7 +13762,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -13419,7 +13775,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13432,7 +13788,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id034
+  evidence: *id038
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -13485,7 +13841,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13510,7 +13866,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13547,7 +13903,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13572,7 +13928,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13585,7 +13941,7 @@ occurrences:
   label: Evan Daniel
   role: construction-finder
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -13598,7 +13954,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13611,7 +13967,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13624,7 +13980,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13637,7 +13993,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13650,7 +14006,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13663,7 +14019,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13676,7 +14032,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13689,7 +14045,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13766,7 +14122,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -13839,7 +14195,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13866,7 +14222,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13905,7 +14261,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13944,7 +14300,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -13969,7 +14325,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14008,7 +14364,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14021,7 +14377,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: &id037
+  evidence: &id041
   - primary-byline
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 26 spans so labelled.
@@ -14047,7 +14403,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14072,7 +14428,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14085,7 +14441,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id037
+  evidence: *id041
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 26 spans so labelled.
 - origin:
@@ -14098,7 +14454,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14111,7 +14467,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14124,7 +14480,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14137,7 +14493,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14150,7 +14506,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14163,7 +14519,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14176,7 +14532,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14189,7 +14545,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14342,7 +14698,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14355,7 +14711,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14380,7 +14736,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14393,7 +14749,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14418,7 +14774,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id037
+  evidence: *id041
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 26 spans so labelled.
 - origin:
@@ -14457,7 +14813,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14470,7 +14826,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14507,7 +14863,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14544,7 +14900,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14557,7 +14913,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id034
+  evidence: *id038
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -14582,7 +14938,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14621,7 +14977,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14634,7 +14990,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14647,7 +15003,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14660,7 +15016,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14673,7 +15029,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14686,7 +15042,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14699,7 +15055,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14712,7 +15068,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14725,7 +15081,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14738,7 +15094,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14875,7 +15231,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14888,7 +15244,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14915,7 +15271,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14928,7 +15284,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -14981,7 +15337,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15020,7 +15376,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15045,7 +15401,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15094,7 +15450,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15119,7 +15475,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id034
+  evidence: *id038
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -15132,7 +15488,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15171,7 +15527,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15196,7 +15552,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15209,7 +15565,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id037
+  evidence: *id041
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 26 spans so labelled.
 - origin:
@@ -15222,7 +15578,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15235,7 +15591,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15248,7 +15604,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15261,7 +15617,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15274,7 +15630,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15287,7 +15643,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15300,7 +15656,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15313,7 +15669,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15326,7 +15682,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15480,7 +15836,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15493,7 +15849,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15506,7 +15862,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15531,7 +15887,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15572,7 +15928,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15611,7 +15967,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15636,7 +15992,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -15649,7 +16005,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15674,7 +16030,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id034
+  evidence: *id038
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -15687,7 +16043,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15724,7 +16080,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15749,7 +16105,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15788,7 +16144,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15813,7 +16169,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id037
+  evidence: *id041
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 26 spans so labelled.
 - origin:
@@ -15826,7 +16182,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15839,7 +16195,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15852,7 +16208,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15865,7 +16221,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15878,7 +16234,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15891,7 +16247,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15904,7 +16260,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15917,7 +16273,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15930,7 +16286,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15943,7 +16299,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -15956,7 +16312,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16083,7 +16439,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -16146,7 +16502,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -16159,7 +16515,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16196,7 +16552,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16221,7 +16577,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16234,7 +16590,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -16247,7 +16603,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16272,7 +16628,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16298,7 +16654,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16311,7 +16667,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -16324,7 +16680,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16337,7 +16693,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id034
+  evidence: *id038
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -16376,7 +16732,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16414,7 +16770,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16439,7 +16795,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16464,7 +16820,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16477,7 +16833,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id037
+  evidence: *id041
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 26 spans so labelled.
 - origin:
@@ -16502,7 +16858,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16553,7 +16909,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16566,7 +16922,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16579,7 +16935,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16592,7 +16948,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16605,7 +16961,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16618,7 +16974,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16631,7 +16987,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16644,7 +17000,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16657,7 +17013,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16670,7 +17026,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16683,7 +17039,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16696,7 +17052,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16797,7 +17153,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -16860,7 +17216,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16873,7 +17229,7 @@ occurrences:
   label: Ryan Xu
   role: construction-finder
   disposition: resolved
-  evidence: *id033
+  evidence: *id037
   contributor_id: ryan-xu
   note: Joined by the spelling the contributor record claims, with its sources.
 - origin:
@@ -16886,7 +17242,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16899,7 +17255,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -16912,7 +17268,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16951,7 +17307,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16964,7 +17320,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -16977,7 +17333,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17018,7 +17374,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17057,7 +17413,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17082,7 +17438,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17095,7 +17451,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id037
+  evidence: *id041
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 26 spans so labelled.
 - origin:
@@ -17120,7 +17476,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17145,7 +17501,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17170,7 +17526,7 @@ occurrences:
   label: Francisco Couzo
   role: construction-improver
   disposition: resolved
-  evidence: *id034
+  evidence: *id038
   contributor_id: francisco-couzo
   note: Joined by the reviewed identity of 17 spans so labelled.
 - origin:
@@ -17183,7 +17539,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17209,7 +17565,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17234,7 +17590,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17247,7 +17603,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17272,7 +17628,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id035
+  evidence: *id039
   contributor_id: evan-daniel
   note: Joined by the reviewed identity of 40 spans so labelled.
 - origin:
@@ -17285,7 +17641,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17298,7 +17654,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17311,7 +17667,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17324,7 +17680,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17337,7 +17693,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17350,7 +17706,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17363,7 +17719,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17376,7 +17732,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17389,7 +17745,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17402,7 +17758,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:
@@ -17415,7 +17771,7 @@ occurrences:
   label: Hosono
   role: lower-bound-prover
   disposition: resolved
-  evidence: *id036
+  evidence: *id040
   contributor_id: hiroaki-hosono
   note: Joined by the reviewed identity of 134 spans so labelled.
 - origin:

@@ -1,0 +1,20 @@
+# command: /home/user/squares/.claude/worktrees/agent-a33e48ec7ed2cb8d8/packing/.venv/bin/python3 -I -u /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/zmcheck/zm_mixed.py cert /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/data/s95_cover_v2.txt --d4 --cert-mode --disj --chain-from 0 --pitch 1/20 --ubins 16 --depth 24 --nproc 1 --cx-lo 18/5 --cx-hi 73/20 --cy-lo 9/2 --cy-hi 91/20 --u-lo 0 --u-hi 1/32 --resume /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/out/zm_mixed/j064.jsonl
+# cwd: scratch checker dir: zm_mixed.py ee3e2915, mixed_cover.py bb89de15, zeromargin.py 640fe453 (retained evand packets); cover 8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c
+# python3: the project interpreter, Python 3.14.7, run with -I
+# host: 4 cores; load 5.94 4.61 4.65; started 2026-10-15T02:20:25Z
+zeromargin.py sha256 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab (= pinned)
+sha256 ee3e2915349b8795128417bca6414b205d526db9f01f88cd4cd32c32e8d760ac  zm_mixed.py
+sha256 bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5  mixed_cover.py
+sha256 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab  zeromargin.py
+sha256 8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c  input (/tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/data/s95_cover_v2.txt)
+argv: /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/zmcheck/zm_mixed.py cert /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/data/s95_cover_v2.txt --d4 --cert-mode --disj --chain-from 0 --pitch 1/20 --ubins 16 --depth 24 --nproc 1 --cx-lo 18/5 --cx-hi 73/20 --cy-lo 9/2 --cy-hi 91/20 --u-lo 0 --u-hi 1/32 --resume /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/out/zm_mixed/j064.jsonl
+settings: {"cert_mode": true, "chain": true, "chain_from": 0, "clip": true, "depth": 24, "lemma_L": true, "lemma_T": true, "mode": "D4", "pitch": "1/20", "reach": "442/625", "region": {"cx_hi": "73/20", "cx_lo": "18/5", "cy_hi": "91/20", "cy_lo": "9/2", "u_hi": "1/32", "u_lo": "0"}, "split": true, "split_maxchain": 400, "theta_bias": 4, "tprime": false, "ubins": 16}
+CERT MODE: Corollary T' and polygon code disabled (0 points on segment lines are treated as ordinary points)
+container [0,10]^2, 48352 points, 11438 segments on 22 lines, 0 polygons; total 3791753447/40000000 = 94.793836175
+D4: measure invariant under x -> m-x and x <-> y; roots [0,m/2]^2 x u in [0,1/2]
+PARTIAL SWEEP: cx [18/5, 73/20], cy [9/2, 91/20], u [0, 1/32] -- not a verification of the whole container
+1 root boxes x 1 cover(s), depth limit 24, pitch 1/20, u-bins 16, CHAIN on, Lemma T on, Lemma L on
+done in 8s: boxes 55, max depth 6, CPU 7 s
+  leaves: PIECE 0  ADM 17  P1 0  MIX 0  CHAIN 11  SPLIT 0  EMPTY 0  UNCERTIFIED 0   (leaves where Lemma T / Lemma L raised the piece bound: 20 / 8; closed by Lemma T with line points: 0)
+VERIFIED-D4 (PARTIAL)
+# finished 2026-10-15T02:20:36Z; exit 0; wall 10.895 s; CPU 10.4 s (user 10.313 + sys 0.129); load 5.87 4.64 4.66

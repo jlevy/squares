@@ -301,6 +301,9 @@ allowlist:
   - path: packing/devtools/fine_net_followup.py
     kind: download
     boundary: Hosono's fine-net release assets kept outside Git against the size and digest the packet pins, and their sealed inner bundles against the source's own files-sha256.json (#446).
+  - path: packing/devtools/continuous_pose_followup.py
+    kind: download
+    boundary: Hosono's continuous-pose release asset kept outside Git against the size and digest the packet pins, its sealed inner bundle against the source's files-sha256.json, check2's kernel inputs regenerated here against the digests its manifests name, and each program's source digest by the rule the source states for it.
   - path: packing/devtools/audit_n11_lean.py
     kind: download
     boundary: 11SquaresFormalized's final audit, downloaded from the source, against the digest the packet's manifest pinned at retention and the uncompressed digest the source's summary.json states.

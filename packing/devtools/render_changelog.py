@@ -11,7 +11,7 @@ import html
 import re
 import subprocess
 import sys
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from datetime import date, datetime
 from functools import cache
 from html.parser import HTMLParser
@@ -36,7 +36,7 @@ from strif import atomic_output_file
 from devtools.migrate_math import classify
 from devtools.overview_data import MATH, breakable_quotients, prose_tex
 from devtools.repo_links import path_kind, repo_url
-from devtools.site_topics import TOPICS, topic_chip
+from devtools.site_topics import NEWS_TOPICS, topic_chip
 from sqpack import release
 from sqpack.yamlio import load_yaml
 
@@ -347,16 +347,24 @@ def _inline_text(text: str) -> str:
     return "".join(parts)
 
 
-def inline_html(text: str, *, allow_links: bool = True) -> str:
+def inline_html(
+    text: str,
+    *,
+    allow_links: bool = True,
+    transform_text: Callable[[str], str] | None = None,
+) -> str:
     """Safe inline News Markdown, with authored and legacy register math set by KPress.
 
     Raw HTML stays visible text. A linked preview headline disables authored links
-    so its enclosing article link never contains another anchor.
+    so its enclosing article link never contains another anchor. An optional transform
+    changes ordinary text tokens only; profile link labels, math, code and link
+    attributes retain their source.
     """
     parser = _markdown()
     parser.options["html"] = False
     env: dict[str, Any] = {}
     parsed = parser.parseInline(text, env)
+    profile_link = False
     for token in _walk(parsed):
         if set(token.attrs) - {"href", "title"}:
             raise ValueError("Markdown HTML attributes are not allowed in News text")
@@ -367,7 +375,12 @@ def inline_html(text: str, *, allow_links: bool = True) -> str:
                 raise ValueError("links are not allowed in News headlines")
             # Validate the authored repository path here; the final HTML pass also
             # handles MathML links and rewrites every destination exactly once.
-            _target(str(token.attrGet("href")), destination="site")
+            target = _target(str(token.attrGet("href")), destination="site")
+            profile_link = target.startswith("profiles/")
+        elif token.type == "link_close":
+            profile_link = False
+        elif token.type == "text" and transform_text is not None and not profile_link:
+            token.content = transform_text(token.content)
 
     def render_inline(
         _renderer: object,
@@ -574,8 +587,6 @@ def validate(document: Document, *, schema: Document | None = None) -> None:
             )
         merge_dates: list[str] = []
         for number in entry["pull_requests"]:
-            if number in represented:
-                raise ValueError(f"PR #{number}: duplicate membership across entries")
             represented.add(number)
             if number not in deliveries:
                 raise ValueError(f"PR #{number}: no retained merged main delivery")
@@ -634,8 +645,8 @@ def validate(document: Document, *, schema: Document | None = None) -> None:
         omitted.add(number)
     if coverage != set(deliveries) or coverage != represented | omitted:
         raise ValueError(
-            "coverage: every retained main delivery must occur exactly once "
-            "in entries or omissions"
+            "coverage: every retained main delivery must appear in one or more entries "
+            "or exactly one omission"
         )
 
 
@@ -830,9 +841,6 @@ def _news_forward_anchors(targets: dict[str, str]) -> str:
     )
 
 
-NEWS_TOPICS = TOPICS
-
-
 def news_topics(topics: Sequence[str]) -> str:
     """Subject tags reuse result chips without asserting a result kind or status."""
     if not topics:
@@ -880,7 +888,9 @@ def news_filters(topics_present: set[str] | None = None) -> str:
         for score in range(3, 6)
     )
     topics = "".join(
-        f'<button type="button" data-news-topic="{topic}" aria-pressed="true">{label}</button>'
+        f'<button type="button" class="site-chip" data-news-topic="{topic}" '
+        f'aria-pressed="true"><span data-news-topic-label>{label}</span>'
+        '<span class="site-cell-quiet" data-news-tally> (0)</span></button>'
         for topic, label in NEWS_TOPICS.items()
         if topics_present is None or topic in topics_present
     )
@@ -896,7 +906,9 @@ def news_filters(topics_present: set[str] | None = None) -> str:
         '<div class="site-tabs site-chooser-small" role="group" '
         f'aria-labelledby="news-topics-label">{topics}'
         '<button type="button" data-news-all="topics" '
-        'aria-label="All topics">All</button></div></fieldset>'
+        'aria-label="All topics (0)">All'
+        '<span class="site-cell-quiet" data-news-tally> (0)</span>'
+        "</button></div></fieldset>"
         '<div class="site-table-tools">'
         '<div class="site-tabs site-chooser-small">'
         '<button type="button" data-news-reset>Reset filters</button></div>'
