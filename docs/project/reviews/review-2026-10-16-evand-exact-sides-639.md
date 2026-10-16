@@ -426,7 +426,7 @@ record’s sense, of the case’s house at its count:
 | 126 | T-139 | Ryan Xu, improved by Evan Daniel |
 | 175, 232 | T-158 | Daniil Ostashev |
 | 204 | T-162 | Daniil Ostashev |
-| 258 | T-146 | Nate Chaoweeraprasit, improved by Mishapolk and Evan Daniel |
+| 258 | T-146 | Nate Chaoweeraprasit, improved by Mykhailo Polkovskyi (Mishapolk) and Evan Daniel |
 | 259 | T-136 | Nate Chaoweeraprasit |
 | 266 | T-119 | Evan Daniel |
 | 267 | T-134 | Ryan Xu, improved by Francisco Couzo |
@@ -489,9 +489,10 @@ $1.2 \times 10^{-64}$ at 267, $1.7 \times 10^{-79}$ at 292, and $3.7 \times 10^{
 less at the other nine.
 The significance rationale’s “1.5e-99 to 7.8e-35” (line 26298) is right.
 
-**RE-4, minor: the credit sentence drops Mishapolk at 258.** Lines 26285 to 26287 credit
-“Nate Chaoweeraprasit’s at … 258”, but the case credits “Nate Chaoweeraprasit (itsnaka),
-improved by Mishapolk, Evan Daniel” (the ledger’s Per Count row, from `starts.yaml`).
+**RE-4, minor: the credit sentence drops Mykhailo Polkovskyi at 258.** Lines 26285 to
+26287 credit “Nate Chaoweeraprasit’s at … 258”, but the case credits “Nate
+Chaoweeraprasit (itsnaka), improved by Mishapolk, Evan Daniel” (the ledger’s Per Count
+row, from `starts.yaml`); Mishapolk is Polkovskyi’s handle.
 Where the case lists the author’s own improvements, at 102, 123, 126, 292, 295 and 301,
 the sentence drops them too.
 That is the author’s choice to make in his own entry, but the rule is “as the case
@@ -644,9 +645,43 @@ derivation.
 
 ## Review A of PR #651
 
-<!-- Written after the findings above. -->
+Review A of PR #651 (senior review with a correctness pass, round 1, at `ef43dd0`,
+published 10:23Z) was read at 11:16Z, after the findings above were written and pushed
+(`6f6acc6ea`). Before then this review knew only the topics its brief named (see the
+opening). The two agree on three points and differ on one.
 
-This section is written once the findings above are fixed.
+- **A2 (the rung before the review)** is what this lane answers: the review lane has now
+  run, it has no blocking finding, and `V3`/`C3` is supported at all sixteen counts.
+  A2 lists three things the earlier lanes did that were open here: the checker’s trust
+  boundary, the pose measurement against each `regularizations` item, and every print
+  held to its exact side.
+  This review did all three.
+  The second found RE-1, which A2 anticipated (“T-193 leaves
+  `identity.basis: source-claim` everywhere”) but Review A did not measure.
+- **A3 (the margins)** is RE-3, found independently and with the same numbers.
+  A3 also notes that the PR description gives the least margin as 1.6e-99 at 232. Here,
+  as in the ledger, it is $1.48 \times 10^{-99}$ at 204.
+- **A4 (the credit sentence)** agrees with RE-4 at 258 and disagrees with this review at
+  266\. A4 reads the item `of: T-174` at 266 as right and proposes dropping “but 266”
+  from the sentence. Measured, the 266 form is the author’s own T-119 packing to
+  $7.8 \times 10^{-12}$, while two of its squares lie beyond a tenth of T-174’s. So the
+  sentence’s exception is right, and the item is wrong, as are eight others (RE-1). A4’s
+  fix should not be applied as written.
+  The records lane should follow RE-1.
+- **A5 (the perfect-power test)** is RE-2. A5 notes that at the four pinned-only counts
+  the claim’s irreducibility rested on that test alone.
+  This review settles it: $p$ factors with multiplicity one at all four, and at 204 and
+  267 the full check also ran.
+  In any case a `VALID` run already excludes a perfect power, since it proves $S^\ast$ a
+  simple root.
+- **A6, A7, A8 and A9** are outside this review’s questions.
+  On A6, the three runs reproduced here from scratch printed the receipt’s lines.
+  On A9, the custody refetch of 16 October found all four pinned-only forms at their
+  digests.
+- Review A treats the missing count check as a false positive.
+  That agrees with H3 and RE-6, which grade it a note, not a defect of the replay.
+- RE-1’s measurements, RE-5 (`-O`), RE-7 (near contacts), RE-8 (contact controls) and
+  RE-9 (the kept programs) have no counterpart in Review A.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
