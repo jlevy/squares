@@ -3,9 +3,9 @@ type: is
 id: is-01m52xgdntv76z2gjntcrg3t11
 title: "PR #644 D2: run the deferred checkpoint at the re-cut head (label on; blocked by the conflict with main)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 2
+version: 3
 delegate: user-eb-addr-644
 labels:
   - regularization
@@ -14,8 +14,12 @@ parent_id: is-01m51k8s0y2dbwnmvtwjv30zrx
 hold: null
 hold_until: null
 created_at: 2026-10-16T17:52:40.122Z
-updated_at: 2026-10-16T17:52:46.944Z
+updated_at: 2026-10-16T22:36:04.973Z
 started_at: 2026-10-16T17:52:46.944Z
+closed_at: 2026-10-16T22:36:04.972Z
+close_reason: "The deferred checkpoint passed at #644's merged head 5419ccaa9 (run 38974269991: regularized-views, exhaustive-1..3, every deferred group green), recorded in #644's Validation; #644 merged at b35a6289f."
+resolution: null
+duplicate_of: null
 ---
 Review D2 (High) of jlevy/squares#644: the deferred checkpoint (deep-gate.yml, "Deferred checkpoint") has never run on the branch. Review: https://github.com/jlevy/squares/pull/644#pullrequestreview-5550660772
 

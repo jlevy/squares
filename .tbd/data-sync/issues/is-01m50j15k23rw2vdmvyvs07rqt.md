@@ -5,16 +5,18 @@ title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 a
 kind: task
 status: in_progress
 priority: 2
-version: 12
+version: 15
 delegate: user-eb-intake-622
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
+child_order_hints:
+  - is-01m53b204zznqg15rajytfq813
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-16T21:04:03.758Z
+updated_at: 2026-10-16T21:49:27.583Z
 started_at: 2026-10-15T23:31:02.497Z
 ---
 Stage 1 triage of pull request jlevy/squares#622 (BuddenPing, PingYou Ltd, "data: submit a tighter exact N29 packing certificate", opened 2026-10-15T18:43:54Z, no comments or reviews when read at about 19:50Z). A result submitted as a pull request, treated as an intake report as #574 was (think-9v2k): never merged, approved, pushed to or commented on here. Lane D of the 2026-10-15 evening intake pass (think-wnsv, think-ykg6), read-only.
@@ -63,3 +65,9 @@ Waits for the record to hold sigma (think-6gti's import of #545), or for the own
 2026-10-16 20:50Z user-eb-intake-622: stage 2 + stage 4 replay committed and pushed, branch claude/intake-2026-10-16-n29-622 @ 8ad96974e (base main 321d492c7). Packet pingyou-pr622-certificate-2026-10-15 (derived fact facts/n-029.yaml.gz; receipt receipts/exact-certification.json.xz): positive passes sqpack exact_verify and the independent corner checker, duplicate-square and outside-container controls refused by both, 2,436 pair decisions, 93.5 route CPU s; check --replay equal. Exact margins: T-155 - S = 1.566165818922113e-36; #574 N29 - S = 7.324826736065142e-90; S - Kingbird print = 9.19e-15 (undecided by the print). Importer: House.verified_exact_form for n-029's kept print (think-gzrw). Next: per-count ledger upper-bounds-n29-20261016 (report-order rule; key-reason candidate = house rule), then register T-195.
 
 2026-10-16 21:10Z user-eb-intake-622: stage 3 committed and pushed @ 5024d0e2a: per-count ledger campaign/issue-intake/upper-bounds-n29-20261016 (PR #574 row and PR #622 both undecided vs the Kingbird print; key-reason candidate = house rule, proposed as T-195), T-195 registered V3/C3 (replay evidence E-pingyou-622-exact-feasibility; review record pending), deferral in certificate-citation-deferrals.yaml naming think-30n2 (keep this bead open until the adoption PR that removes it merges). Next: records tier, release impact (site edition + paper no-change records), draft PR; then stacked adoption/regularization branch.
+
+2026-10-16 ~21:45Z user-eb-intake-622: DRAFT stage 7 reply to #622 (not posted; post only after the records PR merges and main and the deployed site agree, and adjust if the owner's decision on the key reason or the review changes anything):
+
+"@BuddenPing, thank you for the N29 certificate, and for confirming the affiliation and the PY assistance. We imported it from your release data/pingyou-n29-certificate-2026-10-15-v1 through the manifest at 3115557: read exactly, the certificate equals your corners Witness/v2 pose for pose. Both of this repository's exact routes, sqpack's exact witness verifier and the independent rational corner checker, accept it, deciding every wall and all 406 pairs over Q, and both refuse the duplicate-square and outside-container controls; two squares touch, and a square touches the box, exactly. Its side is 1.57 × 10⁻³⁶ below T-155, our exact side for the Schadt–Ellsworth packing, and 7.32 × 10⁻⁹⁰ below your PR #574 certificate at 29, both compared exactly. Against the catalogue's 5.93383346267692 for that packing the comparison stays open, since the record does not yet hold that packing's exact side (Evan Daniel's degree-7213 root, #545); a rational realization of the same packing is expected just above it. It is registered as T-195, a regularization of Thomas Schadt's packing, improved by David Ellsworth, credited to PingYou Ltd, and it becomes the house at 29, with a regularized drawing, once its review passes. The review of the replay is under way. Merging this pull request remains the owner's call; the import went through the record's own packet, as #574's did."
+
+2026-10-16 21:55Z user-eb-intake-622: records PR https://github.com/jlevy/squares/pull/661 (draft, base main, head 3f77449f4, labels intake + S1): packet, replay, ledger upper-bounds-n29-20261016, T-195 at V3/C3 on the replay (review record pending), site v0.7.20 cut last (may need re-cut). Owner decision: T-195 is recorded on the ledger's key-reason candidate (the house rule); by the report-order rule alone #622 is undecided vs the Kingbird print. Stage 4 review lane: not started (coordinator assigns a separate strong-tier reviewer). Adoption + regularization at 29: waits for the review (runbook stage 5); prepared on stacked branch claude/intake-2026-10-16-n29-622-adopt.

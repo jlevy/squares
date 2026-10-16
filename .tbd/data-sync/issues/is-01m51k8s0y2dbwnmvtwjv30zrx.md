@@ -5,7 +5,7 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 24
+version: 25
 delegate: user-eb-land-644
 labels: []
 dependencies: []
@@ -13,10 +13,11 @@ parent_id: is-01m51hy396vnjkxe4726egs8x5
 child_order_hints:
   - is-01m52x6jagsnzmg87d24yjzv0q
   - is-01m52xgdntv76z2gjntcrg3t11
+  - is-01m53czjmyrhwpdbvcwtx0ptka
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T21:08:03.784Z
+updated_at: 2026-10-16T22:23:05.373Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 

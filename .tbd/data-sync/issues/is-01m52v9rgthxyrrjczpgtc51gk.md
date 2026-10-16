@@ -5,12 +5,14 @@ title: Merge the 16 October PRs once reviewed (owner's word, 16 Oct afternoon)
 kind: task
 status: open
 priority: 2
-version: 23
+version: 26
 labels: []
 dependencies: []
 parent_id: is-01m51hyxstsa9ptekd2ss26ksn
+child_order_hints:
+  - is-01m53c3469tq34ee6pbcn8xygw
 created_at: 2026-10-16T17:14:04.698Z
-updated_at: 2026-10-16T21:20:27.779Z
+updated_at: 2026-10-16T22:07:33.065Z
 ---
 Owner: 'If everything is reviewed, you can merge it.' and 'Follow up everything you can, and once things are reviewed, be sure you merge.' Merge order and gate per review-and-merge-prs; release re-cuts after each merge.
 
@@ -59,3 +61,7 @@ user-eb-integrator: #649 merged main c9038049c in f62671cc2 (no conflicts), push
 user-eb-integrator: #646: merged main c9038049c locally in f79f22cd1 (cut files from main, papers NPC kept); not pushed yet to keep #649's CI runners free; release-impact asks for the site successor as expected. Cut waits for #649 to land (v0.7.20).
 
 user-eb-integrator: #649 ready at f62671cc2b2e32be5d14d5674e634902b7278b30 (v0.7.19): runs 38964806395, 38964806387, 38964803683, deep gate 38964806391 success; clean. #646 merge f79f22cd1 pushed for early CI signal (release-impact red expected until the v0.7.20 cut after #649 lands).
+
+user-eb-integrator: #645 merged up: 5b041b88a (merge main 80b116ede; cut files from main, two paper NPC records kept at tuple end, INVENTORY/VERIFIERS regenerated), dafff1238 (re-pin to 5b041b88), pushed. Records tier: only release-impact step red (site successor pending cut); 409 focused tests passed. Waiting for #644 -> #646 (v0.7.21) -> #645 cut.
+
+Merge condition for #661 (T-195, #622's s(29)): it keeps T-195 at V3/C3 on the replay alone. The T-193-style hold makes T-195 derive 'superseded' against the Kingbird print at 29, with no superseding result (lane N, 58de4dedc). So #661 merges only together with its stage 4 review PR, stacked on it: both reviewed, then merged back to back, the review PR right after #661 with no other merge between. Main never shows T-195 at V3/C3 without the review mapped.

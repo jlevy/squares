@@ -5,7 +5,7 @@ title: Regularize the counts the 16 October adoption left pending (selection and
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: user-eb-records-185-190
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-16T11:24:32.404Z
-updated_at: 2026-10-16T21:27:48.807Z
+updated_at: 2026-10-16T22:18:41.185Z
 started_at: 2026-10-16T11:24:43.640Z
 ---
 Select and admit the strong-generator views of the counts the 16 October adoption (think-z7wn, branch claude/intake-2026-10-16-records-185-190) re-housed and could not decide by its stop time: the runs are done, the selection and admission are owed. Each count is in default_drawings.PENDING_ALLOWED under this bead.
@@ -44,3 +44,5 @@ Owner's policy, 16 Oct afternoon: always adopt the smallest packing and regulari
 2026-10-16 21:08Z user-eb-stack: phase 1 done. #657 head 1f343b743: 232/264/271/302 regularized (grid-slack), 237/303/304 settled, 211 left in PENDING_ALLOWED (all strong views at row 7, review; the owner decides). This bead must stay open until a PR takes 211 off. Records tier 50/52 (two origin/main comparisons, base moved), verify-atlas on the 8 counts passed, 333 focused tests passed; hosted shards all green, validate red only on the origin/main comparisons. Review B dispositions posted (review 5553667876).
 
 Owner, 16 Oct ~20:45Z, in the coordinator's session (AskUserQuestion): 211, Evan Daniel's same-side row-7 view of T-188's witness (2/10/3/17/17, 545/555, better on all seven measures): 'Admit it (Recommended)'. Lane S writes the section 5 review record and admits the view in #657 with the stack review's findings.
+
+2026-10-16 22:18Z user-eb-stack: what closes this bead (review H7 of #657). The owner answered the 211 question: 'Admit it.' #657's next pass (local commits 6eae2cfbc and ee900f469 on top of 1f343b743, pushed with the cascade after #644 merges) writes the layer's first review record, packing/atlas/known-best/regularized/reviews.yaml, with its gallery retained under packing/cases/regularized_drawings/think-z7wn-2026-10-16/review-211/. It admits Evan Daniel's same-side view at 211 through it and takes 211 off PENDING_ALLOWED, which is then empty; nothing else names this bead. Close it once #657 merges (bead-tree rule: not before).
