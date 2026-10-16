@@ -514,6 +514,15 @@ def test_no_unread_eligible_entry_is_pending_adoption() -> None:
     assert select.unread_pending(unread) == {}
 
 
+def test_an_unread_entry_a_citation_deferral_names_is_not_pending_adoption() -> None:
+    """T-193's exact algebraic sides have no house reader and wait on the owner's RP-3 by
+    a recorded citation deferral, which `check_certificate_citations` holds to its evidence
+    and age; an unread entry no deferral names stays pending."""
+    assert "T-193" in select.deferred_results()
+    assert select.unread_pending(["T-193"]) == {}
+    assert "T-088" not in select.deferred_results()
+
+
 def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:

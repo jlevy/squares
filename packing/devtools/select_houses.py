@@ -497,15 +497,38 @@ def algebraic_margin(key: str, n: int, side: Fraction) -> Fraction:
     return side - high
 
 
+def deferred_results() -> frozenset[str]:
+    """The register entries a recorded citation deferral names.
+
+    Their case adoption waits on the decision `certificate-citation-deferrals.yaml`
+    records, with its owning bead and what it waits on, and
+    `devtools.check_certificate_citations` holds each deferral to its evidence and its age,
+    so the exemption ends when the deferral does.
+    """
+    from devtools import check_certificate_citations as citations  # noqa: PLC0415
+
+    named: set[str] = set()
+    for deferral in citations.load_deferrals():
+        results = deferral.get("results")
+        if isinstance(results, list):
+            named.update(str(result) for result in cast("list[object]", results))
+    return frozenset(named)
+
+
 def unread_pending(unread: Sequence[str]) -> dict[str, list[int]]:
     """The unread entries that state a bound below their case: adoptions nothing here sees.
 
     An eligible entry without an exact reader is never a candidate, so a confirmed and
-    reviewed side it states below a case would stay pending without this.
+    reviewed side it states below a case would stay pending without this. An entry a
+    recorded citation deferral names is waiting on that decision and is not pending here
+    (`deferred_results`): T-193's exact algebraic sides, which no house reader rebuilds,
+    wait on the owner's RP-3 with T-174's held houses.
     """
     from devtools import check_standing  # noqa: PLC0415
     from devtools import render_recent_results as view  # noqa: PLC0415
 
+    deferred = deferred_results()
+    unread = [identifier for identifier in unread if identifier not in deferred]
     if not unread:
         return {}
     records = view.load_records()
