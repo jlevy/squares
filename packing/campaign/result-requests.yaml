@@ -9374,9 +9374,11 @@ issues:
       three standard axioms and 4,320 native_decide facts, so Lean's compiler, native evaluator and C
       toolchain are trusted. Triaged on 16 October 2026 without a build: the statement is the record's
       problem at n = 19, its constant is the case's exact upper bound, and no register entry claims s(19)
-      optimality, so it is a new result for the record. Not yet retained; a full rebuild, several hours on
-      64 cores by the source's account, is above the pass's cap and held for the owner. Claude and Codex
-      assistance disclosed.
+      optimality, so it is a new result for the record. The author announced it on X at 03:27:40Z, before
+      the issue (https://x.com/ofitzharding/status/2110935681597874374). The repository, with the
+      announcement as X returned it, is retained in the fitzharding-n19-lean-2026-10-16 packet. A full
+      rebuild, several hours on 64 cores by the source's account, is above the pass's cap and held for the
+      owner. Claude and Codex assistance disclosed.
     read_through: '2026-10-16T03:41:08Z'
     results:
     - key: n19-optimality-lean
@@ -9389,9 +9391,10 @@ issues:
         rebuild from source yet.
       source: body
       not_registered: >-
-        Triage only. Stage 2 retains the source at 34fb2b7 with the release archives pinned by digest, the
-        mathematical review (think-o40t) starts once it is retained, and stage 3 registers a new entry as
-        reported. The full build (think-nqnl) is held above the owner's 40 CPU-hour cap.
+        Triaged and retained: the fitzharding-n19-lean-2026-10-16 packet holds the tree at 34fb2b7 and the
+        announcement, and pins the release archives by digest. The mathematical review (think-o40t) can
+        start, and stage 3 registers a new entry as reported, with its bibliography key. The full build
+        (think-nqnl) is held above the owner's 40 CPU-hour cap.
       queued: true
       bead: think-a4x3
     asks:
@@ -9405,6 +9408,7 @@ issues:
     - think-a4x3
     - think-o40t
     - think-nqnl
+    - think-xik9
     answer_bead: think-a4x3
     replies: []
     close_when: >-
@@ -9418,4 +9422,10 @@ issues:
       sq17-lean at 0a7167e, and thanks the Squares Project and Manasseh Ahmed. It offers help with
       reproduction and statement review. The `n-19` case label does not exist on the repository on 16
       October 2026, so whether to create it and add it to this issue is the owner's decision; the issue
-      carries `intake`.
+      carries `intake`. The owner asked on 16 October that the author's announcement be recorded as a source
+      beside the repository and the repository watched (think-xik9). The announcement is
+      https://x.com/ofitzharding/status/2110935681597874374, posted by @ofitzharding at
+      2026-10-16T03:27:40Z: "lol here's a lean proof of the optimal packing for 19 squares", with a link to
+      the repository and an image. It is retained in the packet as X's syndication endpoint returned it at
+      04:58:12Z. The packet's acquisition record is what makes the intake sweep watch
+      ofitzharding/sq19, with its head pinned; intake-watch.yaml records only reads past a pin.
