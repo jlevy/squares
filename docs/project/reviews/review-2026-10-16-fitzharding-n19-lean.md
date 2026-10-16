@@ -20,9 +20,10 @@ This review re-evaluated, with programs written for it and none of the source’
 code, every one of the 2,328 native facts whose modules are in the Git tree (all 2,304
 endgame cases, the orbit and routing checks, the nine capture-to-hull checks, the twelve
 census-to-capture link checks) and the combinatorial content of the census theorem; all
-pass. The 1,992 facts in the release archives are half-plane propagation traces checked
-by the s(17) proof’s checkers; they were scanned (digests, no `axiom` or other
-trust-widening construct) but not re-run.
+pass. The 1,992 facts in the release archives are, apart from the census coverage check,
+half-plane propagation traces with their tables, seeds and summaries, checked by the
+s(17) proof’s checkers; they were scanned (digests, no `axiom` or other trust-widening
+construct) but not re-run.
 
 Nothing here built the proof.
 Whether the modules compile, whether the kernel accepts them, and whether the native
@@ -367,8 +368,63 @@ among them very unlikely, but it does not replace the build.
 ## Comparison with the Two s(17) Reviews
 
 Written after the findings above, which were not changed by what follows.
+This review read the first s(17) review
+([adversarial, 13 October](review-2026-10-13-fitzharding-n17-lean.md)) at its summary,
+trust-boundary, lineage and findings sections, and the second
+([mathematical correctness](review-2026-10-13-fitzharding-n17-mathematical-correctness.md))
+at its summary, checker-soundness step, trust-boundary and defects sections, and only
+after the findings and the re-evaluation above were committed.
 
-[To be completed after reading the two reviews.]
+**The reused checkers.** The s(19) proof’s census patterns, survivor trees and capture
+states are checked by the s(17) half-plane checker, compiled in place from sq17-lean
+`0a7167e`. The second review read its soundness modules in full and found them sound:
+`run_sound`, `runAll_sound` and `excludes_sound` (`HalfPlaneStateSound`), the seeds
+(`stateSeedOK_sound`, `windowSeedOK_sound`), checkpoints (`coverCheck_sound`), branch
+trees (`tree_excluded`), chunk composition (`runToCheck_eq`, `CaptureTableSound`) and
+the summary check (`summaryCheck_sound`), with the separating-axis collision test used
+only in the sound direction and boundary contact not a collision.
+This review relies on that reading for the 1,992 archived facts and did not repeat it.
+Its MR-3, that `rowCheck` accepts a row whose entry index lies outside the table and
+that the soundness lemma covers it, carries over unchanged, since
+`Capture/SummaryFast.lean`’s `summaryCheckN` calls the same `rowCheck`.
+
+**The trust boundary.** Both s(17) reviews state the boundary as this review does: the
+kernel, Lean’s compiler and C toolchain for the `*Fast` modules loaded with
+`--load-dynlib`, and Lean core’s compiled runtime routines.
+The first review adds a point this review had not stated: certificate data decoded from
+`String` literals at evaluation time are never seen by the kernel, so the compiled
+`String` routines are trusted too.
+That holds here: `censusMasks` is parsed from a hex string
+(`Cover/OrbitData.lean:29-36`), and this review’s re-evaluation decoded it independently
+and found 22,475 distinct nineteen-cell masks.
+The second review’s question 4, whether the build checks that the loaded libraries were
+compiled from the pinned sources, has a partial answer here: `verify.py` builds the
+library in the same run and stamps every module compiled against it with the library’s
+SHA-256 (line 101).
+
+**Where the s(19) proof differs.** The local endgame is new: a Farkas combination of
+three trigonometric rows with Taylor-form interval checks and a derivative check, and an
+exact proof on the axis-zero face, where the s(17) proof had a 93-box dual certificate
+proved by `decide +kernel`. Its 2,304 native facts are more than half the total, are
+outside both s(17) reviews, and were all re-evaluated here.
+The capacity lemmas for wall and corner cells, the capture-to-hull step and the census
+bridge are also new and were read here.
+The second review replayed ten half-plane facts with its own re-implementation of the
+compiled checker; this review replayed none of that kind, so the two reviews together
+cover different checker kinds, and the archived half-plane facts of the s(19) proof
+remain the least independently checked part of it.
+
+**Credit and evidence.** The first review’s F-1 (major, attribution) found that the
+s(17) proof ran on this project’s $n = 17$ plan and data; for $n = 19$ only the
+witness’s square order is shared (N19-1, minor).
+Its F-4 (unpublished generators), F-6 (a producer’s replay report) and F-3 with the
+second review’s MR-1 and MR-2 (stale docstrings, unused modules) recur as N19-2, N19-3
+and N19-4. The s(17) source carried a clean-build receipt (4,951 modules rebuilt, no
+prebuilt project objects); the s(19) source has none, and says its from-scratch build
+has not run, so the evidence for the build is weaker here than it was for s(17) when it
+took C1. Its F-2 noted the misspelling of Manasseh Ahmed’s name; the s(19) README spells
+it correctly and links the GitHub account `Queuingtheorydotcom`, which the records lane
+may wish to check against the record’s credit for him.
 
 ## For the Records Lane
 
