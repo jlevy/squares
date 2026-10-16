@@ -3,9 +3,9 @@ type: is
 id: is-01m4s9p2h6yx60rnsxts8bgnf5
 title: "Regularize 270 and 305 again on #553's witnesses"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: user-eb-reg-leftovers
 labels:
   - regularization
@@ -15,8 +15,12 @@ dependencies:
 hold: null
 hold_until: null
 created_at: 2026-10-13T00:13:03.909Z
-updated_at: 2026-10-16T08:01:47.517Z
+updated_at: 2026-10-16T09:57:49.021Z
 started_at: 2026-10-16T05:22:37.035Z
+closed_at: 2026-10-16T09:57:49.021Z
+close_reason: "Verified 2026-10-16 by lane D (user-eb-reg-leftovers): 301 is drawn from Evan Daniel's view at U (0/0/0 light/uneven/near-axis, 8 classes), better than the 1-degree grid view (14 classes, 4.6e-12 above U); at 270 and 305 neither strong generator improves on the drawn views (runs evand-regularize-leftovers-1016, grid-slack leftovers 0.5/1/5 deg). No record names these beads."
+resolution: null
+duplicate_of: null
 ---
 #553 (T-151, T-152) re-housed 270 and 305 after #559's runs on #518's witnesses, so the views #559 drew there (Evan Daniel's at 270, grid-slack /1 at 305) lapsed and the axis tool's views of #553's witnesses are drawn. Run devtools.regularize_evand and devtools.regularize_grid_slack on the new witnesses at both counts and admit by the grid lane's rule (better on some drawing-census measure, worse on none). Stack 498, follows #559.
 

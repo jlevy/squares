@@ -3,14 +3,18 @@ type: is
 id: is-01m51fb0dmzb511d3zxfjv14m3
 title: "Review: mathematical correctness of Fitzharding's s(19) Lean proof (#640), strongest tier, after stage 2, for sharing with the author"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 2
+version: 3
+delegate: user-eb-review-640
 labels: []
 dependencies: []
 parent_id: is-01m51e5sp1t03c20hqp7d3wajm
+hold: null
+hold_until: null
 created_at: 2026-10-16T04:25:48.211Z
-updated_at: 2026-10-16T05:53:43.334Z
+updated_at: 2026-10-16T09:57:24.915Z
+started_at: 2026-10-16T09:57:24.915Z
 ---
 Stage 4's review lane for #640 (think-a4x3): a mathematical-correctness review of Oscar Fitzharding's Lean proof that s(19) = 3 + 4 sqrt 2 / 3 (ofitzharding/sq19 at 34fb2b7bc39465db368c45cb48d4db58829d3051, tag v1.0.0), as campaign/result-import.md stage 4 ("Who reviews, and when") requires for every proof an import registers, and as T-154's two reviews did for his s(17) proof.
 
