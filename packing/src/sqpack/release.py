@@ -1090,7 +1090,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Dates v0.7.11 October 16, 2026, the day its first Pages deployment went live "
             "(bbc12b61, the merge of PR 631 that landed stack 632, 2026-10-16T01:25:34Z), "
             "and records that deployment in the history's comment (think-tk0u, PR 627 "
-            "review B3). The head edition stays v0.7.14 of October 16. No page prints a "
+            "review B3). The head edition stays v0.7.15 of October 16. No page prints a "
             "date from below the head: the pages stamp the head edition, the films the "
             "v0.4.2 entry, and site_urls --check finds the URL registry and sitemap "
             "unchanged. The deployed index.html and about.html name no v0.7.11. This is a "
