@@ -498,6 +498,102 @@ def test_an_adoption_that_rebuilds_only_the_axis_view_reads_pending(tmp_path: Pa
     ]
 
 
+def test_a_lapse_where_the_house_reads_regular_reads_pending(tmp_path: Path) -> None:
+    """Review B2 of #636: where a strong view regularizes a count whose house already has
+    no uneven and no near-axis square, a re-housing that lapsed the view read `regular-as-
+    published`, and the drawing fell from the view's full shared sides to the house's with
+    every gate green (at n = 230, from 626 to 562). Replayed through the real `document`,
+    on the index `--update-atlas` writes, at the first such count whose view also gains
+    shared sides (83 today): the lapse makes the count pending until the generators decide
+    the new witness or `SETTLED` names it."""
+    from devtools.regularize_axis_components import lapse_of  # noqa: PLC0415
+
+    record = _record()
+    document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
+    every = {int(entry["n"]): entry for entry in document["entries"]}
+    views = {row["n"]: row for row in record["entries"]}
+
+    def regular_house(n: int) -> bool:
+        measures = views[n]["measures"]
+        return (
+            not measures["uneven_axis"][defaults.HOUSE]
+            and not measures["near_axis"][defaults.HOUSE]
+        )
+
+    row = next(
+        (
+            row
+            for row in record["states"]
+            if row["state"] == defaults.REGULARIZED_STATE
+            and every[row["n"]].get("reference")
+            and regular_house(row["n"])
+            and "house_total" in views[row["n"]]["better"]
+        ),
+        None,
+    )
+    if row is None:
+        pytest.skip("the data holds no strong view over a regular house that gains sides")
+    n = row["n"]
+    entry = every[n]
+    axis_entry = {**entry["reference"], defaults.LAPSED: lapse_of(entry)}
+    rehoused = [axis_entry if int(found["n"]) == n else found for found in document["entries"]]
+    adopted = tmp_path / "index.json"
+    adopted.write_text(json.dumps({**document, "entries": rehoused}), encoding="utf-8")
+    # The real derivation, on an index of this count alone, so it measures one count.
+    alone = tmp_path / "alone.json"
+    alone.write_text(json.dumps({**document, "entries": [axis_entry]}), encoding="utf-8")
+    regenerated = defaults.document(index=alone)
+    (state,) = regenerated["states"]
+    assert state["n"] == n
+    assert state["state"] == defaults.PENDING
+    assert state["lapsed"] == lapse_of(entry)
+    assert f"the {entry['generator']} view of an earlier witness lapsed" in state["why"]
+    # What the gate now catches: the drawing has fewer full shared sides than the view.
+    assert state["measures"]["house_total"] < row["measures"]["house_total"]
+
+    # The lapse is what makes it pending here: without it the house reads regular, as
+    # before, so a hand merge that drops the block falls back to that, never further.
+    bare = {key: value for key, value in axis_entry.items() if key != defaults.LAPSED}
+    measured = _measured(regenerated, n)
+    assert (
+        defaults.count_state(n, bare, measured, state["witness"])["state"]
+        == defaults.REGULAR_AS_PUBLISHED
+    )
+
+    # The gate fails on it until the generators decide the new witness.
+    record["states"] = [state if found["n"] == n else found for found in record["states"]]
+    found, _listed = defaults.state_problems(_write(tmp_path, record), adopted)
+    assert [line for line in found if line.startswith(f"n={n}")] == [
+        (
+            f"n={n} is pending: {state['why']}. Run the strong generators on its witness "
+            '(regularization-process.md, "When a Witness Changes"), or allow it in '
+            "PENDING_ALLOWED with the bead that owns the run"
+        )
+    ]
+
+    # A decision recorded on the new witness settles it, and the gate does not then ask
+    # for the entry to be taken off as if the house's regularity had decided the count.
+    witness = state["witness"]
+    settled = {
+        **defaults.SETTLED,
+        n: defaults.Settled(
+            defaults.DECIDED,
+            str(witness["source"]),
+            str(witness["path"]),
+            witness["revision"],
+            str(witness["side"]),
+            (("evand-regularize", "a-run"),),
+            "drew no better",
+            "a test",
+        ),
+    }
+    decided = defaults.count_state(n, axis_entry, measured, witness, settled=settled)
+    assert decided["state"] == defaults.DECIDED
+    record["states"] = [decided if found["n"] == n else found for found in record["states"]]
+    found, _listed = defaults.state_problems(_write(tmp_path, record), adopted, settled=settled)
+    assert [line for line in found if line.startswith(f"n={n}")] == []
+
+
 def test_a_held_view_is_explained_in_the_policys_words() -> None:
     # The n = 176 note read "worse on uneven_axis", the code's key (review A9 of #636).
     record = _record()

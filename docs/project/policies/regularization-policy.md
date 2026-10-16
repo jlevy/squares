@@ -650,11 +650,12 @@ house picture and why.
 The owner asked on 15 October 2026 that the records make it evident which drawings are
 regularized. So the same record states, for every count, whether the picture it draws is
 `regularized` (a view of Evan Daniel’s regularizer or the grid-slack generator),
-`regular-as-published` (the house drawing has no uneven and no near-axis square),
-`decided-no-better` (the strong generators ran on that witness and drew nothing the
-improvement rule takes), `exempt` (with a reason and the bead that owns it) or
-`pending`, with the witness it was decided on (its source’s key, path and revision and
-its side, never a digest of the file, under OR-16) and the runs that decided it.
+`regular-as-published` (the house drawing has no uneven and no near-axis square, and no
+strong view of the count has lapsed), `decided-no-better` (the strong generators ran on
+that witness and drew nothing the improvement rule takes), `exempt` (with a reason and
+the bead that owns it) or `pending`, with the witness it was decided on (its source’s
+key, path and revision and its side, never a digest of the file, under OR-16) and the
+runs that decided it.
 The index’s `status: regularized` says only that the layer holds a view.
 A view that lapses with its witness is recorded on the axis tool’s record (`lapsed`),
 and the count is pending until the generators decide the new witness.

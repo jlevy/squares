@@ -167,21 +167,22 @@ The same record’s `states` gives every count, n = 1..324, its regularization s
 is drawn, the drawn picture’s measures, the witness (its id, its source’s key, path and
 revision, and its side), the runs that decided that witness, and one of `regularized` (a
 view of Evan Daniel’s regularizer or the grid-slack generator is drawn),
-`regular-as-published` (the house drawing has no uneven and no near-axis square),
-`decided-no-better` (the strong generators ran on this witness and drew nothing the
-improvement rule takes), `exempt` (set aside with the bead that owns it) or `pending`.
-The axis tool’s view alone never makes a count regularized: it is the reference and
-fallback. A count is `decided-no-better` without an entry of its own where the layer
-holds a strong generator’s view of the current witness that the rule does not draw;
-otherwise the decision goes into `default_drawings.SETTLED` with the runs, the outcome,
-where it is recorded and the witness’s source key, path, revision and side it was made
-on, so a new house, a new certificate file or an upstream fix makes the count pending
-again. Where the decision still owes runs or a recorded outcome, its `owed` names the
-open bead that owns them, and the state’s `why` says so; the ten decided counts of 15
-October 2026 owe think-0ut1 grid-slack at 1 and 5 degrees or their per-count outcomes,
-and recording each run’s outcome on the index, so that a decision needs no entry, is
-think-4ov9. An entry where the layer’s own strong view already decides the count fails
-the gate. When a pull request regularizes a pending count, it takes the count off
+`regular-as-published` (the house drawing has no uneven and no near-axis square, and no
+strong view of the count has lapsed), `decided-no-better` (the strong generators ran on
+this witness and drew nothing the improvement rule takes), `exempt` (set aside with the
+bead that owns it) or `pending`. The axis tool’s view alone never makes a count
+regularized: it is the reference and fallback.
+A count is `decided-no-better` without an entry of its own where the layer holds a
+strong generator’s view of the current witness that the rule does not draw; otherwise
+the decision goes into `default_drawings.SETTLED` with the runs, the outcome, where it
+is recorded and the witness’s source key, path, revision and side it was made on, so a
+new house, a new certificate file or an upstream fix makes the count pending again.
+Where the decision still owes runs or a recorded outcome, its `owed` names the open bead
+that owns them, and the state’s `why` says so; the ten decided counts of 15 October 2026
+owe think-0ut1 grid-slack at 1 and 5 degrees or their per-count outcomes, and recording
+each run’s outcome on the index, so that a decision needs no entry, is think-4ov9. An
+entry where the layer’s own strong view already decides the count fails the gate.
+When a pull request regularizes a pending count, it takes the count off
 `default_drawings.PENDING_ALLOWED`.
 
 The note says who regularized the drawing and that a pure regularization, one whose side
@@ -324,8 +325,9 @@ To redraw the count:
    generator and its run.
    It names the last strong view that lapsed: later houses carry it, whatever the
    count’s state, until a strong generator’s view is admitted again.
-2. Run `python -m devtools.default_drawings --update`. The count is now `pending`, and
-   `--check-state` fails on it.
+2. Run `python -m devtools.default_drawings --update`. The count is now `pending`, even
+   where the new house has no uneven and no near-axis square, and `--check-state` fails
+   on it.
 3. Run both generators on the new witness, then select and admit as above.
    Where neither draws better, settle the count in `default_drawings.SETTLED` with the
    runs and the new witness’s source key, path, revision and side.

@@ -53,14 +53,15 @@ its side), the runs that decided that witness, and one state:
 
 - `regularized`: a view of Evan Daniel's regularizer or the grid-slack generator is drawn
   (`STRONG_GENERATORS`);
-- `regular-as-published`: the house drawing has no uneven and no near-axis square;
+- `regular-as-published`: the house drawing has no uneven and no near-axis square, and
+  no strong view of the count has lapsed;
 - `decided-no-better`: the strong generators ran on this very witness and drew nothing
   the improvement rule takes: the layer holds a strong generator's view of it and does
   not draw it, or `SETTLED` says so, by the witness's source and side;
 - `exempt`: the count is set aside with a reason and the bead that owns it (`SETTLED`);
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
-  (the index's `lapsed`, which `--update-atlas` writes) or that only the axis tool's
-  view, the reference and fallback, has drawn.
+  (the index's `lapsed`, which `--update-atlas` writes), even where the new house reads
+  regular, or that only the axis tool's view, the reference and fallback, has drawn.
 
 `--check-state` is the gate, reading the record and the index, measuring nothing. The
 pending counts must be exactly `PENDING_ALLOWED`: it fails on a pending count the list
@@ -622,7 +623,13 @@ def count_state(
     if generator in STRONG_GENERATORS:
         state = REGULARIZED_STATE
         why = f"the {generator} view of this witness is drawn (run {entry['run']['id']})"
-    elif house["uneven_axis"] == 0 and house["near_axis"] == 0:
+    elif lapse is None and house["uneven_axis"] == 0 and house["near_axis"] == 0:
+        # A lapse comes first: a strong view drew this count on an earlier witness and
+        # nothing has decided this one, so a regular house does not settle it (review B2
+        # of #636: 13 of the counts a strong view regularizes have a regular house, and
+        # at 230 the drawing fell from 626 full shared sides to 562 with the gate green).
+        # Only here does the state read the block; elsewhere it only explains a pending
+        # count, so a hand merge that drops it falls back to this branch, never further.
         state = REGULAR_AS_PUBLISHED
         why = "the house drawing has no uneven and no near-axis square"
     elif entry.get("generator") in STRONG_GENERATORS:
