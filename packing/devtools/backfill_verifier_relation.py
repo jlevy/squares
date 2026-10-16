@@ -435,6 +435,19 @@ REPLAY_RULES: tuple[Rule, ...] = (
         runs(("V-evand-zmx2", "V-audit-wand125-point-and-mixed"), PRODUCER),
     ),
     (
+        "zmx2 and zm_mixed.py sub-roots of a split cover, audited as one decision",
+        _in_replay(r"audit_evand_mixed_covers composite"),
+        runs(
+            (
+                "V-evand-zmx2",
+                "V-evand-zm-mixed-py",
+                "V-replay-evand-zmx2",
+                "V-audit-evand-mixed-covers",
+            ),
+            PRODUCER,
+        ),
+    ),
+    (
         "zmx2 through the replay driver, audited",
         _in_replay(r"replay_evand_zmx2"),
         runs(("V-evand-zmx2", "V-replay-evand-zmx2", "V-audit-evand-mixed-covers"), PRODUCER),
