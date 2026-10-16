@@ -36,8 +36,9 @@ came near its depth limit (§7.2, §8.2). I found no mathematical defect in eith
 and no finding is blocking (§10).
 
 **What was checked here, with programs written for this review.** Both covers were
-re-parsed independently and their data facts recomputed exactly, including $D_4$
-invariance as a measure under all eight symmetries.
+re-parsed by this review’s own parser, which imports nothing from the checkers but was
+written after reading both checkers’ parsers, and their data facts recomputed exactly,
+including $D_4$ invariance as a measure under all eight symmetries.
 The composite was audited cell by cell from the source’s records and from the
 retention’s replay. Exact $\mu(Q)$ was evaluated at 26,645 sampled poses, among them
 every `zmx2`-failing root, the corners of every uncertified box it lists, the tile
@@ -199,8 +200,12 @@ So the composite needs nothing from the checkers beyond their per-box statements
 $$\text{covering on } R_k \iff \bigwedge_{\text{zmx2 roots } B}\ \mathrm{Cov}(B)\ \wedge \bigwedge_{\text{zm\_mixed cells } C}\ \mathrm{Cov}(C),$$
 provided the boxes cover $R_k$ and every statement is about this cover.
 Both provisos are facts about the records, checked exactly in §7.2 and §8.2. The `zmx2`
-log header carries the FNV-1a hash of the cover’s bytes, which is the cover’s. Every
-`zm_mixed.py` header names the cover’s SHA-256, and its region is its record’s root.
+log header carries the FNV-1a 64 hash of the cover’s bytes, which is the cover’s. FNV-1a
+is not collision-resistant: it catches a log of another cover mixed up with this one,
+not a substituted one, so it does not bind the source’s `zmx2` records to the cover.
+What binds them is the retention’s replay from SHA-256-checked bytes, equal root for
+root (§7.2, §8.2). Every `zm_mixed.py` header names the cover’s SHA-256, and its region
+is its record’s root.
 
 The statement each checker decides on a box, term by term:
 
@@ -211,7 +216,7 @@ The statement each checker decides on a box, term by term:
 | a point counts iff in the closed $Q$ | the four violation polynomials $\le 0$ (Lemma P) | containment inequalities $\le 1/2$ (Lemma A/B/C, `in_rot_square`) |
 | a segment counts by its length fraction in the closed $Q$ | closed certain chords $[lo^*, hi^*]$ (Lemmas C, M, S, Z, H) | parameter intervals clipped by closed half-planes (Lemmas S, T, L) |
 | total at least 1 | $L(B) \ge W \cdot \mathrm{Lc} \cdot 2^{30}$ in integer units | an exact bound $\ge 1$ |
-| this cover | its own parser; the log header’s FNV-1a of the bytes | `mixed_cover.load`; the header’s SHA-256 of the input |
+| this cover | its own parser; the log header’s FNV-1a of the bytes, a non-cryptographic check (the binding is the replay’s) | `mixed_cover.load`; the header’s SHA-256 of the input |
 
 `zm_mixed.py`’s partial-region options (`--cx-lo` to `--u-hi`) keep a root iff it meets
 the open region (`main`, `keep`). The region of every job is one aligned cell of the
@@ -237,9 +242,8 @@ They contribute nothing to the proof:
   packets) ran `zmx2 cert --d4` on each cover without them.
   Read here, every root has the published run’s census, root for root, and the same
   listed uncertified boxes.
-  The search tree is decided by the bounds, so every leaf certified for the published
-  cover was certified without the wall mass, and `zmx2` has in effect certified the
-  wall-less cover on the same roots.
+  That control was itself a `zmx2 cert --d4` run on the wall-less cover, and it reports
+  those roots certified directly.
 - **`zm_mixed.py` never reads them.** Every one of its cells has centres at least $11/5$
   (for $s(76)$) or $3/2$ (for $s(95)$) from the walls $x = 0$ and $y = 0$, and the
   region lies in $[0, k/2]^2$. `piece_bound` drops a line whose distance from the box
@@ -475,7 +479,9 @@ the retained files with digests checked:
   `zm_mixed.py` ran 10 minutes on the cell without a verdict and was stopped.
   Its hole is deep, a deficit of $0.045$, so it is not small either.
 
-The depth-12 pair, at equal settings, is the refusal the runbook asks for (F8).
+The depth-12 pair, at equal settings, is one refusal at a reduced depth limit on one
+cell, offered toward the runbook’s control.
+Whether it discharges that control is the records lane’s call, and the owner’s (F8).
 
 ### 7.5 The six boxes at depth 34
 
@@ -527,7 +533,9 @@ The program evaluates $\mu$ exactly at 17,319 poses, plus a local descent:
 
 - 3,000 uniform in $R_{10}$;
 - 200 in each of the 19 failing roots;
-- 1,110 inside, and 888 at the corners of, the 111 listed uncertified boxes;
+- 1,110 inside, and 888 at the corners of, the 111 listed uncertified boxes (`zmx2`
+  lists at most 40 per root, `zmx2.rs` line 1975, so 111 of the 8,263 are listed, and 40
+  of the 8,192 in root $[3/2,8/5]\times[47/10,24/5]\times u[0,1/8]$);
 - 3,000 at the two coincidence angles, in the 15 failing roots whose $u$ bin holds one;
 - 2,519 at tile and one-cut germs;
 - 1,500 random admissible poses of the whole container and their 1,500 folded images;
@@ -594,6 +602,8 @@ rerunning, which is what a reader of the repository does.
 Fix: check cells by their integer grid indices, require a header in every record file
 and compare its digests, settings and region with `verify.sh`’s, and compare the log’s
 `hash=` with the FNV-1a of the cover.
+Since FNV-1a is not collision-resistant, the script should also record, or compare, the
+cover’s SHA-256.
 
 ### F2. `verify.sh` is sound only as a whole (note, in the source)
 
@@ -653,15 +663,17 @@ Stage 4 asks that two mutated certificates be refused by every checker that acce
 original, and that a test hold them (`result-import.md` line 508). For `zmx2` the
 retention’s refusals and those of §7.4 and §8.4 meet that.
 For `zm_mixed.py` the retention judged a refusal at depth 24 unaffordable.
-This review has one, at a depth limit of 12 with the published cover certifying at the
-same limit (§7.4). The 199/200 mutant at the source’s limit of 24 did not finish in 15
-minutes. A test can hold the depth-12 pair as it is.
+This review has one refusal at a reduced depth limit on one cell: a depth limit of 12,
+with the published cover certifying at the same limit (§7.4), offered toward that
+control; whether it counts is the records lane’s call, and the owner’s. The 199/200
+mutant at the source’s limit of 24 did not finish in 15 minutes.
+A test can hold the depth-12 pair as it is.
 A local mutant, one segment orbit removed, did not finish at depth 24 within 10 minutes
 either (§7.4); its hole was deep.
 The design left to try, under a time limit, is a mutant whose hole is both local and
 shallow: one that removes just more than the margin at one pose.
 For $s(95)$ no `zm_mixed.py` control was run.
-None of this bears on the claims; it is what the records lane’s control needs.
+None of this bears on the claims; it bears on the records lane’s control.
 
 ## 11. Questions for the Author
 
@@ -695,9 +707,24 @@ The README there says what each subcommand read, how to run it, and what it prin
 - `tiling`: mutated record sets through the author’s script.
 
 The `zmx2` and `zm_mixed.py` control receipts are there too.
-The `zmx2` binary was built from retained bytes by the project’s
-`devtools.replay_evand_zmx2 build`. `zm_mixed.py` ran from copies of the retained files,
-digests checked, read before they ran, with nothing fetched.
+
+**Source programs run here.** Besides its own programs, this review ran three programs
+it did not write:
+
+- `zmx2`, built from retained bytes by the project’s `devtools.replay_evand_zmx2 build`,
+  for the controls of §7.4 and §8.4;
+- `zm_mixed.py`, with `mixed_cover.py` and `zeromargin.py`, from copies of the retained
+  files, digests checked, for the controls of §7.4;
+- the author’s `tools/check_coverage.py`, the source’s audit script rather than one of
+  the pinned checkers, from the retained copy with `-I`, through `subprocess` in
+  `tiling`, for F1.
+
+This departs from the runbook’s rule for the review lane, which reads the source as data
+and runs only code it writes
+([`result-import.md`](../../../packing/campaign/result-import.md#stage-4-validate), “Who
+reviews, and when”). The lane brief allowed it: a source’s own checker runs only from
+its retained copy after it is read.
+Each of the three was read before it ran, and nothing was fetched.
 In all, the programs and controls ran for about an hour of wall time on a shared
 four-core host, one process at a time under `nice -n 10`; their CPU time was less.
 
@@ -721,9 +748,10 @@ four-core host, one process at a time under `nice -n 10`; their CPU time was les
 - **Mutated certificates** (runbook, stage 4: refused by every checker that accepted the
   original, and held by a test).
   The `zmx2` refusals are in §7.4 and §8.4, and in the retention’s receipts.
-  `zm_mixed.py` has one refusal, for $s(76)$ at a depth limit of 12, with the published
-  cell certifying at the same limit (§7.4). A second for $s(76)$, and two for $s(95)$,
-  are still owed (F8).
+  For `zm_mixed.py`, this review offers one refusal at a reduced depth limit on one
+  cell, for $s(76)$ at a depth limit of 12, with the published cell certifying at the
+  same limit (§7.4). Whether it counts toward the control, and so what is still owed, is
+  the records lane’s call and the owner’s (F8).
 
 - **Rung 4** needs a second adversarial AI review by a distinct reviewer and a human
   oversight record.
@@ -758,14 +786,30 @@ The model for this review is the
 $s(59) = 8$ (`T-066`) and $s(77) = 9$ (`T-067`), by the same method and the same
 checkers.
 
-**What was read first.** Before the first draft of §1 to §13 here was written, I read
-four parts of that review: its title and front matter, its one-line summary, its §1 and
-§2 (lines 1–86), and its list of headings, which names its findings F1 to F7. Its §3 to
-§12 were read after this review’s findings F1 to F7 were drafted.
+**What was read first.** Before anything here was checked, the lane read the two
+retention packet READMEs and the import beads `think-osvq` and `think-ribz` (bead
+`think-l8wi`, note of 05:35Z). They already assert three things this review re-checks:
+
+- the tiling: read with exact fractions, the 64 (and 304) `zm_mixed.py` cells tile the
+  failing roots exactly ($s(76)$ packet README, line 155; $s(95)$, lines 195–198),
+  re-checked in §7.2 and §8.2;
+- the wall argument: a square flush with a wall is the limit of squares moved off it,
+  and the wall control shows no `zmx2` decision depends on the wall segments (lines
+  164–172; $s(95)$, 210–216), re-checked in §3.6;
+- the depth-24 limit: “refusal at depth 24 is not affordable” for a `zm_mixed.py`
+  control (line 163; $s(95)$, 209), which F8 takes up.
+
+Before the first draft of §1 to §13 here was written, I read four parts of the 2 October
+review: its title and front matter, its one-line summary, its §1 and §2 (lines 1–86),
+and its list of headings, which names its findings F1 to F7. Its §3 to §12 were read
+after this review’s findings F1 to F7 were drafted.
 Two things were added here after that reading: the “not machine-checked” list in §13,
 which follows its §12, and this section.
 The paragraph on the `zm_mixed.py` control in §7.4 and finding F8 were written after the
 control finished, from its results.
+When F8 was drafted relative to the reading of that review’s §3 to §12 is not recorded:
+the lane’s notes on `think-l8wi` show only that the depth-12 pair had finished and the
+review was written by 06:59Z, while the local mutant’s run was still going.
 Of the [28 September review](review-2026-09-28-evand-s21-s45-mixed-covers.md) I had read
 §2 and §3.4; its term-by-term table is the model of the one in §3.5. What that early
 reading may have shaped:
@@ -776,6 +820,11 @@ reading may have shaped:
   the guard Daniel added after the pin could not fire in its runs; the reason given here
   is different and shorter (no cell is clipped at all);
 - F3 here, whose kind of finding I had seen in its heading F7;
+- F5 here and §6’s “not a confirmation by two programs”, which answer the question of
+  its heading F4, “‘Independent’ and ‘independently written’”;
+- §3.6’s test of the register’s named worry, which its heading F5, “The register’s
+  stated worry … is the wrong one”, bears on, and which this section later calls “an
+  analogue that is real”;
 - §7.5, since its §2 had told me that the $s(59)$ depth-24 sweep left six boxes in the
   root its depth-34 run certified; the brief and issue 594 say the same of $s(76)$’s
   second route.
