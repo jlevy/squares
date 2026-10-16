@@ -1055,6 +1055,103 @@ def test_a_ladder_report_admits_its_rungs_and_records_them_only_for_its_own_view
     assert "rungs" not in entry["run"]
 
 
+def test_rungs_check_lists_the_drawn_views_a_run_reproduces_and_writes_nothing(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A fresh run reproduces a drawn view when its admitted view, under the entry's own
+    run, is the drawn view byte for byte and the values the view's text does not carry --
+    the retry rungs, the regularizer's level, the regularization record -- are the
+    entry's too (review D1 of #644). The check writes nothing, and its exit says whether
+    every drawn view the runs cover was reproduced."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    path = run_dir / "n-004" / "report.json"
+    report = json.loads(path.read_text(encoding="utf-8"))
+    report["solve"] = {"status": "KKT local min", "rungs": []}
+    path.write_text(json.dumps(report), encoding="utf-8")
+    drive.write_layer([run_dir], root, "admitted")
+    index = layout.index.read_bytes()
+    again = tmp_path / "again"
+    for source in run_dir.glob("n-*/*"):
+        target = again / source.parent.name / source.name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(source.read_bytes())
+    again_report = again / "n-004" / "report.json"
+    assert drive.reproduced_views([again], root) == {
+        "reproduced": [4],
+        "agrees": [],
+        "differs": {},
+        "not_drawn": [],
+        "uncompared": [],
+    }
+    arguments = ["rungs", "--check", "--run-dir", str(again), "--repo-root", str(root)]
+    assert drive.main(arguments) == 0
+
+    # Retained as evidence, a run keeps its reports gzip-compressed and not its views,
+    # so its view's text cannot be compared: a report that agrees on everything else is
+    # listed as agreeing, not as reproduced (review F2 of #644).
+    kept = tmp_path / "kept"
+    (kept / "n-004").mkdir(parents=True)
+    retained = kept / "n-004" / "report.json.gz"
+    retained.write_bytes(gzip.compress(again_report.read_bytes(), mtime=0))
+    assert drive.reproduced_views([kept], root) == {
+        "reproduced": [],
+        "agrees": [4],
+        "differs": {},
+        "not_drawn": [],
+        "uncompared": [],
+    }
+    held = ["rungs", "--check", "--run-dir", str(kept), "--repo-root", str(root)]
+    assert drive.main(held) == 0
+    tampered = json.loads(again_report.read_text(encoding="utf-8"))
+    tampered["regularize"]["level"] = 3
+    retained.write_bytes(gzip.compress(json.dumps(tampered).encode(), mtime=0))
+    assert drive.reproduced_views([kept], root)["differs"] == {"4": ["measured"]}
+    capsys.readouterr()
+    assert drive.main(held) == 1
+    # A view that differs was compared, so the check does not say nothing was (review G3
+    # of #644).
+    assert "nothing was compared" not in capsys.readouterr().out
+
+    # It fails closed: on a missing directory, on one holding no report, and where no
+    # report is of a view the layer draws from the driver, since then it compared nothing.
+    (tmp_path / "empty").mkdir()
+    for directory in (tmp_path / "no-such-run", tmp_path / "empty"):
+        check = ["rungs", "--check", "--run-dir", str(directory), "--repo-root", str(root)]
+        assert drive.main(check) == 1
+    refused = json.loads(again_report.read_text(encoding="utf-8"))
+    refused["decision"] = {**refused["decision"], "row": 7, "decision": "refuse"}
+    retained.write_bytes(gzip.compress(json.dumps(refused).encode(), mtime=0))
+    assert drive.reproduced_views([kept], root)["not_drawn"] == [4]
+    assert drive.reproduced_views([kept], root)["uncompared"] == [str(kept)]
+    assert drive.main(held) == 1
+    # Over several runs, each must compare something: one that reproduces its view does
+    # not carry another that compared nothing (review G5 of #644).
+    both = ["rungs", "--check", "--run-dir", str(again), str(kept), "--repo-root", str(root)]
+    capsys.readouterr()
+    assert drive.main(both) == 1
+    assert f"no report under {kept} is of a view" in capsys.readouterr().out
+
+    # A run whose regularizer worked at another level reproduces nothing, though the
+    # level is not in the view's text: it is the evidence a level 2 view is drawn as the
+    # packing on, and only the report records it.
+    changed = json.loads(again_report.read_text(encoding="utf-8"))
+    changed["regularize"]["level"] = 3
+    again_report.write_text(json.dumps(changed), encoding="utf-8")
+    assert drive.reproduced_views([again], root)["differs"] == {"4": ["measured"]}
+    # Nor does one that climbed a rung, or says another thing of its changes; both are
+    # in the view's text as well.
+    changed["solve"]["rungs"] = ["force-kkt"]
+    changed["regularization"]["changes"] = {"re_angled": 1}
+    again_report.write_text(json.dumps(changed), encoding="utf-8")
+    assert drive.reproduced_views([again], root)["differs"] == {
+        "4": ["view", "run.rungs", "measured", "regularization"]
+    }
+    assert drive.main(arguments) == 1
+    assert layout.index.read_bytes() == index
+
+
 def test_only_an_admitted_grid_view_is_admitted() -> None:
     """The decision table decides a grid-slack view as it decides the driver's own."""
     grid = importlib.import_module("devtools.regularize_grid_slack")

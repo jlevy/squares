@@ -1,0 +1,239 @@
+{
+ "format": "evand-regularization-receipt-v1",
+ "generated_by": "python -m devtools.regularize_evand run",
+ "policy": "docs/project/policies/regularization-policy.md",
+ "finished": "2026-10-16T11:25:48Z",
+ "run_directory": "3a-rerun-s-1016",
+ "generator": {
+  "name": "evand-regularize",
+  "source_url": "https://github.com/evand/square-packing",
+  "pin": "675a5ea",
+  "source_commit": "675a5eaa8712542daac8b4515b0f69ad7044df44",
+  "patches": [],
+  "interpreter": "CPython 3.14.7"
+ },
+ "parameters": {
+  "timeout": 1800.0,
+  "regularize_timeout": 1800.0,
+  "variant": "conservative",
+  "orient": "0",
+  "from_stage": "input",
+  "same_mode": "relax",
+  "frame": "kkt",
+  "style": "coincide",
+  "dps": 80,
+  "eps": "1e-20",
+  "workers": 2,
+  "counts": [
+   204,
+   272
+  ]
+ },
+ "counts": [
+  {
+   "n": 204,
+   "status": "ok",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "KKT local min",
+   "solve_gate": "certified",
+   "solve_rungs": [],
+   "replica_patches": [],
+   "S_exact": "14.808663234386956566322903448602095229622526777443573430618319867",
+   "s_W": "14.80866323438695656647099008094596479529",
+   "U": "14.8086632343869566",
+   "level": 2,
+   "moved": 65,
+   "groups": [
+    17,
+    5
+   ],
+   "symmetry": [],
+   "view": "same",
+   "s_V": "14.80866323438695656647099008094596479529",
+   "relation": "same",
+   "same_refusal": null,
+   "one_to_one": false,
+   "max_move": null,
+   "house": [
+    [
+     29,
+     36,
+     35,
+     24,
+     80
+    ],
+    [
+     17,
+     41,
+     81,
+     32,
+     33
+    ]
+   ],
+   "stage": [
+    [
+     19,
+     27,
+     44,
+     17,
+     97
+    ],
+    [
+     17,
+     32,
+     53,
+     31,
+     71
+    ]
+   ],
+   "row": 7,
+   "decision": "refuse",
+   "index_record": "refused",
+   "refusal": "regression",
+   "after_registration": null,
+   "solved_row": 4,
+   "seconds": {
+    "input": 0.078,
+    "solve": 130.84,
+    "regularize": 33.41,
+    "import": 38.207,
+    "same": 744.155,
+    "measure": 0.922
+   },
+   "cost": {
+    "cpu_seconds": 298.52,
+    "wall_seconds": 949.07
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 1800.0,
+    "regularize_timeout": 1800.0,
+    "from_stage": "input"
+   }
+  },
+  {
+   "n": 272,
+   "status": "ok",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "KKT local min",
+   "solve_gate": "certified",
+   "solve_rungs": [],
+   "replica_patches": [],
+   "S_exact": "16.965586474837670635756007033422045569629875768259044235142914938",
+   "s_W": "16.96558647483767063575600703342204556963",
+   "U": "16.9655864748376707",
+   "level": 2,
+   "moved": 24,
+   "groups": [
+    28,
+    26
+   ],
+   "symmetry": [],
+   "view": "solved",
+   "s_V": "16.965586474837670635925662898171",
+   "relation": "solved",
+   "same_refusal": "same-side-refused: literal-too-large",
+   "one_to_one": true,
+   "max_move": "3.479096e-1",
+   "house": [
+    [
+     90,
+     20,
+     24,
+     29,
+     109
+    ],
+    [
+     70,
+     12,
+     23,
+     20,
+     147
+    ]
+   ],
+   "stage": [
+    [
+     52,
+     33,
+     32,
+     32,
+     123
+    ],
+    [
+     54,
+     26,
+     25,
+     20,
+     147
+    ]
+   ],
+   "row": 4,
+   "decision": "held",
+   "index_record": null,
+   "refusal": "dilated-side",
+   "after_registration": null,
+   "solved_row": 4,
+   "seconds": {
+    "input": 0.09,
+    "solve": 178.27,
+    "regularize": 58.83,
+    "import": 74.46,
+    "same": 601.081,
+    "measure": 1.007
+   },
+   "cost": {
+    "cpu_seconds": 275.07,
+    "wall_seconds": 913.96
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 1800.0,
+    "regularize_timeout": 1800.0,
+    "from_stage": "input"
+   }
+  }
+ ],
+ "candidates": [],
+ "review_queue": [],
+ "index_records": {
+  "regularized": [],
+  "refused": [
+   204
+  ],
+  "unchanged": []
+ },
+ "solve_outputs": {
+  "204": {
+   "input.txt": "a559ae743970223203f36370b9574d2e3b6db2279ebe34e09552347e3ea06ef8",
+   "solve/witness.exact.txt": "49f7514a64c13e2ccc7c3060c31199ba8f719f0986530af5cf3127499e39dc86",
+   "solve/witness.contacts.json": "491c915a3b95d2cce699fa7669f7446c8f11aca2c0e554c680135ce6e236a2f1",
+   "regularize.cert": "73d86b02463a0c9a6768909c1ba73d15e10a7e1bf6f86c590114a3151240f941"
+  },
+  "272": {
+   "input.txt": "054a7f58bdd65d030a4a2316448c56304cb58656ee948900bb5df2937f5b8500",
+   "solve/witness.exact.txt": "2670c563460f2e6ed9f53a002e57100a168b34a3ddbb8a7336b40ec8b32ce5a9",
+   "solve/witness.contacts.json": "513339e6c53cf287d8f05a4ce542cdf416a10257660dd589c0bffedd59527195",
+   "regularize.cert": "97c9878fa59a3f3945b7674c82ecfe21259ab2b06ec460ffe3a7f084d30bd0cf"
+  }
+ },
+ "cost": {
+  "wall_seconds": 950.45,
+  "cpu_seconds": 573.7,
+  "driver_cpu_seconds": 0.11,
+  "count_cpu_seconds": 573.59,
+  "workers": 2,
+  "counts": 2,
+  "measured_by": "resource.getrusage: each count's worker RUSAGE_SELF plus RUSAGE_CHILDREN (its solve and shim), summed, plus the driver's RUSAGE_SELF"
+ },
+ "previous_runs": []
+}
