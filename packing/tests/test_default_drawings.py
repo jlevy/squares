@@ -487,6 +487,16 @@ def test_an_adoption_that_rebuilds_only_the_axis_view_reads_pending(tmp_path: Pa
         )
         assert bare["state"] == defaults.PENDING, default
 
+    # The adoption's printout names the count among those certain to be pending, read from
+    # the index before the refresh (review A11 of #641).
+    from devtools import adopt_houses as adopt  # noqa: PLC0415
+
+    owed = adopt.regularization_owed([n], day="2026-10-16")
+    assert owed[1:3] == [
+        "  pending until the strong generators decide the new witness:",
+        f"    {n}: its {entry['generator']} view lapses",
+    ]
+
     # And the gate fails on the regenerated record until the generators decide it.
     record["states"] = [state if found["n"] == n else found for found in record["states"]]
     regenerated = _write(tmp_path, record)
@@ -690,3 +700,139 @@ def test_a_held_view_does_not_lead_the_case_note() -> None:
     )
     assert "The view was regularized by the Squares Project" in note
     assert regularized_drawings.case_note([item]).startswith("Regularized by")
+
+
+def _regular_house(measured: dict) -> dict:
+    """What was measured at a count, with its house drawing given no uneven and no
+    near-axis square: a new house that reads regular."""
+    measures = dict(measured["measures"])
+    for key in ("uneven_axis", "near_axis"):
+        value = measures[key]
+        measures[key] = {**value, defaults.HOUSE: 0} if isinstance(value, dict) else 0
+    return {**measured, "measures": measures}
+
+
+def test_an_allowed_count_owes_its_runs_whatever_its_new_house_reads(tmp_path: Path) -> None:
+    """Review B1 of #641: fourteen of the twenty counts `PENDING_ALLOWED` first named lost
+    a strong view before #636 wrote the index's `lapsed` block (272's and 304's Evan
+    Daniel views were never admitted to the index at all), so their axis records carry
+    none. A new house
+    with no uneven and no near-axis square read `regular-as-published`, the gate asked for
+    the entry to come off, and the runs its bead owes were dropped. Held on every real
+    entry the list names, each as the index holds it, and on a real axis record a test
+    allows: on the list, a count stays pending whatever its house reads."""
+    from devtools import adopt_houses as adopt  # noqa: PLC0415
+
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    every = defaults.index_entries()
+    extra = next(
+        n
+        for n, entry in sorted(every.items())
+        if n not in defaults.PENDING_ALLOWED
+        and entry["generator"] == defaults.ALGORITHM
+        and defaults.LAPSED not in entry
+    )
+    allowed = {
+        **defaults.PENDING_ALLOWED,
+        extra: "think-la7h: a test; its grid-slack view lapsed",
+    }
+    counts = sorted(n for n in allowed if defaults.LAPSED not in every[n])
+    assert extra in counts
+    regenerated = []
+    for n in counts:
+        measured = _regular_house(_measured(record, n))
+        witness = rows[n]["witness"]
+        state = defaults.count_state(n, every[n], measured, witness, allowed=allowed)
+        assert state["state"] == defaults.PENDING, n
+        assert f"allowed pending: {allowed[n]}" in state["why"], n
+        # Off the list, the same entry and house read regular: the gap the list closes.
+        bare = defaults.count_state(n, every[n], measured, witness, allowed={})
+        assert bare["state"] == defaults.REGULAR_AS_PUBLISHED, n
+        regenerated.append((state, bare))
+
+    # The gate lists each as allowed and asks for none to come off; on the record the
+    # earlier rule gave, it asked for every one to come off.
+    def gate(states: dict[int, dict]) -> tuple[list[str], list[str]]:
+        changed = {**record, "states": [states.get(row["n"], row) for row in record["states"]]}
+        return defaults.state_problems(_write(tmp_path, changed), allowed=allowed)
+
+    found, listed = gate({state["n"]: state for state, _bare in regenerated})
+    assert found == []
+    assert all(f"n={n} is pending, allowed: {allowed[n]}" in listed for n in counts)
+    found, _listed = gate({bare["n"]: bare for _state, bare in regenerated})
+    assert found == [
+        f"n={n}: PENDING_ALLOWED names it, but it is regular-as-published; take it off the list"
+        for n in counts
+    ]
+
+    # The adoption's printout counts each as certain to be pending, naming its bead.
+    owed = adopt.regularization_owed(counts, allowed=allowed, day="2026-10-16")
+    certain = [line for line in owed if line.startswith("    ") and ": " in line[:10]]
+    for n in counts:
+        bead = defaults.BEAD.match(allowed[n])
+        assert bead is not None, n
+        assert any(
+            line.startswith(f"    {n}: ")
+            and f"PENDING_ALLOWED holds it for {bead[0]}'s runs" in line
+            for line in certain
+        ), n
+
+
+def test_the_comparison_lists_what_each_changed_count_draws(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review A1 of #641: an adoption whose runs must wait shows its pull request what each
+    deferred count drew before and draws now, from the base branch's record, and marks a
+    count whose strong view gives way to an irregular house drawing for the owner."""
+    earlier = _record()
+    assert defaults.drawing_changes(earlier, earlier) == []
+    strong = next(
+        row
+        for row in earlier["states"]
+        if row["state"] == defaults.REGULARIZED_STATE and row["drawn"] == defaults.VIEW
+    )
+    regular = _first_state(earlier, defaults.REGULAR_AS_PUBLISHED)
+    later = json.loads(defaults.text(earlier))
+    rows = {row["n"]: row for row in later["states"]}
+    fallen = rows[strong["n"]]
+    fallen.update(
+        state=defaults.PENDING,
+        drawn=defaults.HOUSE,
+        generator=None,
+        witness={**fallen["witness"], "side": "1"},
+        measures={**fallen["measures"], "uneven_axis": 3, "near_axis": 1, "house_total": 7},
+    )
+    rows[regular["n"]]["witness"] = {**regular["witness"], "revision": "a new one"}
+    measures = strong["measures"]
+    before = (
+        f"regularized, the {strong['generator']} view ({measures['uneven_axis']} uneven, "
+        f"{measures['near_axis']} near-axis, {measures['house_total']} full shared sides)"
+    )
+    house = regular["measures"]
+    same = (
+        f"regular-as-published, the house drawing ({house['uneven_axis']} uneven, "
+        f"{house['near_axis']} near-axis, {house['house_total']} full shared sides)"
+    )
+    expected = {
+        strong["n"]: (
+            f"n={strong['n']} (a new witness): {before} -> pending, the house drawing "
+            "(3 uneven, 1 near-axis, 7 full shared sides); a strong view gives way to an "
+            "irregular house drawing: the owner's word"
+        ),
+        regular["n"]: f"n={regular['n']} (a new witness): {same} -> {same}",
+    }
+    assert defaults.drawing_changes(earlier, later) == [expected[n] for n in sorted(expected)]
+
+    # From the command line, against the base branch's record kept in a file.
+    base = tmp_path / "base.json"
+    base.write_text(defaults.text(earlier), encoding="utf-8")
+    assert defaults.parser().parse_args(["--compare", str(base)]).compare == base
+    assert defaults.compare(base, record=_write(tmp_path, later)) == 0
+    assert capsys.readouterr().out.splitlines() == [
+        *(expected[n] for n in sorted(expected)),
+        (
+            "2 counts changed state, drawing or witness; 1 where a strong view gives way to "
+            "an irregular house drawing"
+        ),
+    ]

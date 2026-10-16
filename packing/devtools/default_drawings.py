@@ -9,6 +9,7 @@ Usage, from `packing/`, after
     --update [--workers K]
     --check [--workers K]
     --check-state
+    --compare EARLIER
 
 The owner decided on 13 October 2026 that the regularized drawing is the default picture,
 with the house drawing kept as "as published", and that a regularization should be a
@@ -53,20 +54,26 @@ its side), the runs that decided that witness, and one state:
 
 - `regularized`: a view of Evan Daniel's regularizer or the grid-slack generator is drawn
   (`STRONG_GENERATORS`);
-- `regular-as-published`: the house drawing has no uneven and no near-axis square, and
-  no strong view of the count has lapsed;
+- `regular-as-published`: the house drawing has no uneven and no near-axis square, no
+  strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for the
+  runs its bead owes;
 - `decided-no-better`: the strong generators ran on this very witness and drew nothing
   the improvement rule takes: the layer holds a strong generator's view of it and does
   not draw it, or `SETTLED` says so, by the witness's source and side;
 - `exempt`: the count is set aside with a reason and the bead that owns it (`SETTLED`);
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
-  (the index's `lapsed`, which `--update-atlas` writes), even where the new house reads
-  regular, or that only the axis tool's view, the reference and fallback, has drawn.
+  (the index's `lapsed`, which `--update-atlas` writes) or that `PENDING_ALLOWED` names,
+  even where the new house reads regular, or that only the axis tool's view, the
+  reference and fallback, has drawn.
 
 `--check-state` is the gate, reading the record and the index, measuring nothing. The
 pending counts must be exactly `PENDING_ALLOWED`: it fails on a pending count the list
 does not name and on a named count that is no longer pending, so a count leaves the list
-as soon as it is decided and joins it only by a reviewed change that names its bead. It
+as soon as it is decided and joins it only by a reviewed change that names its bead. A
+new house that reads regular does not take a count off: the list's first entries are the
+record of strong views that lapsed before the index kept a `lapsed` block, so a count
+leaves when the runs its bead owes decide it, or by a reviewed change that drops the
+entry and says why (review B1 of #641). It
 fails, too, on a `SETTLED` entry made on another witness than the one the record names,
 and on one for a count that no longer needs it: one now regularized or regular as
 published, or one whose strong view the layer holds, which decides it unaided. Each
@@ -76,6 +83,12 @@ bead the list, an exemption or a decided count's `owed` names must be open, whic
 says of itself -- its source's key, path and revision, and its side -- never by a digest
 of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no house, so
 the gate's comparison of it only holds each row to its count.
+
+`--compare EARLIER` reads two records, measuring nothing, and lists each count whose
+state, drawn picture or witness differs, with both pictures' uneven and near-axis squares
+and full shared sides: the table an adoption that defers its runs gives its pull request,
+from the base branch's record, marking each count whose strong view gives way to an
+irregular house drawing for the owner (review A1 of #641).
 
 
 The site's drawings (`render_frontier_page`), the atlas tiles (`overview_sections`) and
@@ -646,13 +659,24 @@ def count_state(
     if generator in STRONG_GENERATORS:
         state = REGULARIZED_STATE
         why = f"the {generator} view of this witness is drawn (run {entry['run']['id']})"
-    elif lapse is None and house["uneven_axis"] == 0 and house["near_axis"] == 0:
+    elif (
+        lapse is None
+        and n not in allowed
+        and house["uneven_axis"] == 0
+        and house["near_axis"] == 0
+    ):
         # A lapse comes first: a strong view drew this count on an earlier witness and
         # nothing has decided this one, so a regular house does not settle it (review B2
         # of #636: 13 of the counts a strong view regularizes have a regular house, and
         # at 230 the drawing fell from 626 full shared sides to 562 with the gate green).
         # Only here does the state read the block; elsewhere it only explains a pending
         # count, so a hand merge that drops it falls back to this branch, never further.
+        # So does the allowlist (review B1 of #641): fourteen of its first entries record a
+        # strong view that lapsed before `--update-atlas` wrote the block (272's and 304's
+        # Evan Daniel views were never admitted to the index at all), so their records
+        # carry none. A regular new house would read regular, the gate would ask for the
+        # entry to come off, and the runs its bead owes would be dropped; on the list, a
+        # count waits for them.
         state = REGULAR_AS_PUBLISHED
         why = "the house drawing has no uneven and no near-axis square"
     elif entry.get("generator") in STRONG_GENERATORS:
@@ -1048,6 +1072,74 @@ def check(*, workers: int = 1) -> int:
     return 0
 
 
+#: What a row of `states` says a reader sees, which `drawing_changes` compares.
+SEEN = ("state", "drawn", "generator", "witness")
+
+
+def _picture(row: Mapping[str, Any]) -> str:
+    """A state row's drawn picture, as a line of `drawing_changes` gives it."""
+    what = f"the {row['generator']} view" if row["drawn"] == VIEW else "the house drawing"
+    measures = row["measures"]
+    return (
+        f"{row['state']}, {what} ({measures['uneven_axis']} uneven, "
+        f"{measures['near_axis']} near-axis, {measures['house_total']} full shared sides)"
+    )
+
+
+def falls_to_irregular_house(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> bool:
+    """A strong view was drawn, and a house drawing with an uneven or a near-axis square
+    is drawn now: n = 176's regression, which an adoption that defers the count's runs
+    takes to the owner (result-import.md, "Adopt a House, Then Regularize It")."""
+    measures = later["measures"]
+    return (
+        earlier["drawn"] == VIEW
+        and earlier.get("generator") in STRONG_GENERATORS
+        and later["drawn"] == HOUSE
+        and bool(measures["uneven_axis"] or measures["near_axis"])
+    )
+
+
+def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> list[str]:
+    """Each count whose state, drawn picture or witness differs between two of these
+    records, the earlier first, as one line: what each draws, in which state, with its
+    uneven and near-axis squares and full shared sides, and where a strong view gives way
+    to an irregular house drawing, that the owner's word comes first. An adoption whose
+    runs must wait lists these in its pull request, from the base branch's record, so the
+    deferral can be reviewed (review A1 of #641)."""
+    before = {int(row["n"]): row for row in earlier.get("states") or []}
+    after = {int(row["n"]): row for row in later.get("states") or []}
+    lines: list[str] = []
+    for n in sorted(before.keys() | after.keys()):
+        old, new = before.get(n), after.get(n)
+        if old is None or new is None:
+            lines.append(f"n={n}: only in the {'later' if old is None else 'earlier'} record")
+            continue
+        if all(old.get(key) == new.get(key) for key in SEEN):
+            continue
+        rehoused = " (a new witness)" if old.get("witness") != new.get("witness") else ""
+        line = f"n={n}{rehoused}: {_picture(old)} -> {_picture(new)}"
+        if falls_to_irregular_house(old, new):
+            line += "; a strong view gives way to an irregular house drawing: the owner's word"
+        lines.append(line)
+    return lines
+
+
+def compare(earlier: Path, record: Path = RECORD) -> int:
+    """Print `drawing_changes` from the record at `earlier` to the committed one."""
+    lines = drawing_changes(
+        json.loads(earlier.read_text(encoding="utf-8")),
+        json.loads(record.read_text(encoding="utf-8")),
+    )
+    for line in lines:
+        print(line)
+    marked = sum(1 for line in lines if line.endswith("the owner's word"))
+    print(
+        f"{len(lines)} counts changed state, drawing or witness; {marked} where a strong view "
+        "gives way to an irregular house drawing"
+    )
+    return 0
+
+
 def parser() -> argparse.ArgumentParser:
     command = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -1059,6 +1151,15 @@ def parser() -> argparse.ArgumentParser:
         "--check-state",
         action="store_true",
         help="the regularization-state gate: the record and the index, nothing measured",
+    )
+    mode.add_argument(
+        "--compare",
+        type=Path,
+        metavar="EARLIER",
+        help=(
+            "list each count whose state, drawing or witness differs from an earlier record, "
+            f"such as the base branch's (`git show origin/main:{RECORD_PATH}`)"
+        ),
     )
     command.add_argument(
         "--workers",
@@ -1073,6 +1174,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.check_state:
         return check_state()
+    if args.compare is not None:
+        return compare(args.compare)
     workers = args.workers if args.workers is not None else worker_count(len(index_entries()))
     if args.update:
         return update(workers=workers)
