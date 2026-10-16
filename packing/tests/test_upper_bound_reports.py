@@ -92,6 +92,9 @@ COUZO_583 = "couzo-issue583-2026-10-13"
 #: (`test_upper_bound_reports_606_70a033f`).
 DANIEL_606 = "evand-n146-2026-10-14"
 MISHAPOLK_70A = "mishapolk-kkt-refinements-2026-10-14"
+#: PR #622, PingYou Ltd's N29 certificate in a release asset, kept as a derived fact: the
+#: evening intake of 16 October (`test_upper_bound_reports_622`).
+PINGYOU_622 = "pingyou-pr622-certificate-2026-10-15"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -120,6 +123,7 @@ EVERY = (
     COUZO_583,
     DANIEL_606,
     MISHAPOLK_70A,
+    PINGYOU_622,
 )
 
 
@@ -1085,18 +1089,18 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
             assert margins[f"exact_verify_{field}"] == margins[f"independent_{field}"]
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
-    # SQUISH's and #567's squares touch the box; every other source's clear it.
+    # SQUISH's, #567's and #622's squares touch the box; every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
     }
-    assert (walls == {0}) is (name in {SQUISH_481, SQUISH_500, PINGYOU_261})
-    # Only #567's squares touch each other, an exact contact the kernel admits; every other
-    # source's pairs clear.
+    assert (walls == {0}) is (name in {SQUISH_481, SQUISH_500, PINGYOU_261, PINGYOU_622})
+    # Only #567's and #622's squares touch each other, an exact contact the kernel admits;
+    # every other source's pairs clear.
     gaps = {
         Fraction(m["exact_verify_best_pair_gap"]) for m in reports.margins(positives).values()
     }
-    assert (0 in gaps) is (name == PINGYOU_261)
+    assert (0 in gaps) is (name in {PINGYOU_261, PINGYOU_622})
 
 
 def _jobs_from_receipt(packet: Path, directory: Path) -> None:
@@ -1310,6 +1314,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         COUZO_583: "2026-10-13",
         DANIEL_606: "2026-10-14",
         MISHAPOLK_70A: "2026-10-14",
+        PINGYOU_622: "2026-10-15",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
