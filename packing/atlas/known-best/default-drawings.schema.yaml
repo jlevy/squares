@@ -4,13 +4,14 @@
 # (`regularized/index.json`): whether the atlas, the site and the posters draw that view
 # by default or the house drawing, and why, under the regularization policy's sections 11
 # and 12 (docs/project/policies/regularization-policy.md). Then one state per count,
-# n = 1..324: what is drawn, its measures, the witness's digest, the runs that decided
-# that witness, and whether the drawing is regularized, regular as published, decided
-# no better, exempt or pending (think-gvke). `devtools.default_drawings --update` writes
-# it; what a JSON Schema cannot say -- that each verdict and state is what the measures
-# give, and that the record covers exactly the index's views and counts --
-# `devtools.default_drawings --check` holds, by measuring every view and house drawing
-# again, and `--check-state` gates the states on digests alone.
+# n = 1..324: what is drawn, its measures, the witness as it identifies itself (its id,
+# its source's key, path and revision, and its side; never a digest of its bytes, OR-16),
+# the runs that decided that witness, and whether the drawing is regularized, regular as
+# published, decided no better, exempt or pending (think-gvke). `devtools.default_drawings
+# --update` writes it; what a JSON Schema cannot say -- that each verdict and state is
+# what the measures give, and that the record covers exactly the index's views and counts
+# -- `devtools.default_drawings --check` holds, by measuring every view and house drawing
+# again, and `--check-state` gates the states, reading only the record and the index.
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: packing.squares:DefaultDrawings/v2
 title: Default pictures of the known-best atlas
@@ -89,15 +90,19 @@ $defs:
         type: [string, "null"]
       witness:
         description: >-
-          The witness the state was decided on, as it identifies itself: its id, its
-          source's key and its side, as written. `default_drawings.SETTLED` binds a
-          decision to the source and side, never to a digest of the file (OR-16).
+          The witness the state was decided on, as it identifies itself: its id (the
+          count's, the same for every house), its source's key, path and revision (null
+          where the source pins none) and its side, as written.
+          `default_drawings.SETTLED` binds a decision to the source's key, path and
+          revision and to the side, never to a digest of the file (OR-16).
         type: object
         additionalProperties: false
-        required: [id, source, side]
+        required: [id, source, path, revision, side]
         properties:
           id: {type: string, minLength: 1}
           source: {type: [string, "null"]}
+          path: {type: [string, "null"]}
+          revision: {type: [string, "null"]}
           side: {type: string, minLength: 1}
       measures:
         description: The drawn picture's measures, as `entries` measure a view's.
@@ -119,8 +124,11 @@ $defs:
             outcome: {type: string, minLength: 1}
       lapsed:
         description: >-
-          Another generator's view that lapsed when the witness changed, as the index's
-          axis record carries it, its witness digest provenance only; null where none did.
+          The last strong generator's view of this count that lapsed when its witness
+          changed, as the index's axis record carries it: carried through later houses
+          until a strong view is admitted again, so it may name a view more than one
+          witness back, and kept as history whatever the state. Its witness digest is
+          provenance only. Null where none did.
         oneOf:
           - type: "null"
           - type: object

@@ -1913,9 +1913,12 @@ def drawn_elsewhere(record: dict[str, Any] | None) -> bool:
 #: lapsed because its witness changed (`update_atlas`): that generator, its run, and the
 #: digest of the witness the view was derived from. Until the strong generators decide the
 #: new witness, `devtools.default_drawings` records the count `pending`, and the records
-#: tier fails on it unless the count is allowed on purpose (think-gvke). It is history,
-#: not something this tool derives, so `--verify-atlas` compares a record without it
-#: (`derived`), and `regularize_evand layer` keeps no lapse in a `reference`.
+#: tier fails on it unless the count is allowed on purpose (think-gvke). It names the last
+#: strong view that lapsed: `update_atlas` carries it through later houses and whatever
+#: the count's state, so it may be more than one witness back, and only an admitted strong
+#: view ends it. It is history, not something this tool derives, so `--verify-atlas`
+#: compares a record without it (`derived`), and `regularize_evand layer` keeps no lapse
+#: in a `reference`.
 LAPSED = "lapsed"
 
 

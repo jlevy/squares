@@ -165,8 +165,14 @@ def test_a_deferral_whose_bead_is_closed_or_missing_fails_and_a_live_one_passes(
 
 
 def test_the_live_records_deferrals_are_all_well_formed_aliases() -> None:
-    """What the gate resolves against the store is at least a bead alias."""
-    for where, alias in deferrals():
+    """What the gate resolves against the store is at least a bead alias, the
+    regularization record's included."""
+    from devtools import default_drawings  # noqa: PLC0415
+
+    regularization = check_bead_tree.regularization_deferrals()
+    allowed = [where for where, _alias in regularization if "PENDING_ALLOWED" in where]
+    assert len(allowed) == len(default_drawings.PENDING_ALLOWED)
+    for where, alias in [*deferrals(), *regularization]:
         assert alias.startswith("think-"), where
         assert len(alias) == len("think-aaaa"), where
 
@@ -176,6 +182,7 @@ def _dead_deferral_store(monkeypatch: pytest.MonkeyPatch) -> None:
     beads = [_bead("is-01aaaa", "closed", "an intake closed under its deferral")]
     monkeypatch.setattr(check_bead_tree, "load", lambda: (beads, "fixture", {"aaaa": "01aaaa"}))
     monkeypatch.setattr(check_bead_tree, "deferrals", lambda: [("pending n=69", "think-aaaa")])
+    monkeypatch.setattr(check_bead_tree, "regularization_deferrals", list)
     monkeypatch.setattr(check_bead_tree, "AGENDAS", Path("/nonexistent/agendas"))
 
 
@@ -209,6 +216,8 @@ WARN = ("--warn-dead-deferrals",)
         (["packing/devtools/intake_sweep.py", "README.md"], WARN),
         (["packing/campaign/intake-watch.yaml"], ()),
         (["packing/frontier/source-coverage.yaml", "README.md"], ()),
+        # The regularization record's allowlist, exemptions and owed runs (#636 A2).
+        (["packing/devtools/default_drawings.py"], ()),
         (None, ()),
     ],
 )

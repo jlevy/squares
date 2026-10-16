@@ -235,6 +235,8 @@ def test_the_committed_record_passes_the_gate_with_its_allowlist() -> None:
     assert found == []
     pending = [row["n"] for row in _record()["states"] if row["state"] == defaults.PENDING]
     assert pending == sorted(defaults.PENDING_ALLOWED)
+    # The list's size is printed, so that a change growing it shows in the log (A2).
+    assert listed[-2] == f"PENDING_ALLOWED: {len(defaults.PENDING_ALLOWED)} counts"
     assert listed[-1].startswith("regularization states: 324 counts")
 
 
@@ -247,7 +249,12 @@ def test_the_gate_fails_on_a_new_pending_count(tmp_path: Path) -> None:
     assert any("PENDING_ALLOWED with the bead" in line for line in found)
 
 
-def test_the_allowlist_only_shrinks(tmp_path: Path) -> None:
+def test_the_allowlist_equals_the_pending_set_and_each_entry_names_a_bead(
+    tmp_path: Path,
+) -> None:
+    # Not shrink-only: a reviewed change may add a count with its bead (review A2 of
+    # #636). The gate holds the list to the pending set, and `check_bead_tree` holds
+    # each bead open (`test_the_record_defers_each_count_to_the_bead_that_owns_it`).
     record = _record()
     pending = _first_state(record, defaults.PENDING)
     regular = _first_state(record, defaults.REGULAR_AS_PUBLISHED)
@@ -268,30 +275,57 @@ def test_the_allowlist_only_shrinks(tmp_path: Path) -> None:
     assert found == [f"n={regular['n']}: PENDING_ALLOWED names no bead: 'later'"]
 
 
-def test_a_record_naming_another_witness_fails_the_gate(tmp_path: Path) -> None:
+def test_a_row_out_of_place_fails_the_gate(tmp_path: Path) -> None:
+    # The id is the count's, the same for every house (`W-known-best-nNNN`), so this holds
+    # a row to its count, and no more (review A4 of #636).
     record = _record()
     row = record["states"][0]
+    held = row["witness"]["id"]
+    for state in record["states"]:
+        assert state["witness"]["id"] == f"W-known-best-n{state['n']:03d}"
     row["witness"]["id"] = "W-elsewhere"
     found, _listed = defaults.state_problems(_write(tmp_path, record))
     stale = f"run `{defaults.GENERATOR} --update`"
-    assert found == [f"n={row['n']}: the record names witness 'W-elsewhere'; {stale}"]
+    assert found == [
+        (
+            f"n={row['n']}: the record's row names witness 'W-elsewhere', and the index's "
+            f"count names {held!r}; {stale}"
+        )
+    ]
 
 
-def test_the_state_follows_the_witness_its_source_and_side_identify() -> None:
-    # A new house changes the source or the side the witness carries, and a decision made
-    # on the old one no longer applies: the count reads pending again (OR-16: identified
-    # by what the witness says, never by a digest of its bytes).
+@pytest.mark.parametrize(
+    ("key", "value"),
+    [
+        ("side", "1/1"),
+        ("source", "[another source]"),
+        # A replacement certificate from the same source at the same side (review A4).
+        ("path", "resources/web/elsewhere/n-102.cert.gz"),
+        ("revision", "0" * 40),
+    ],
+)
+def test_the_state_follows_the_witness_as_it_identifies_itself(key: str, value: str) -> None:
+    # A new house, a new certificate file or an upstream fix changes what the witness
+    # says of itself -- its source's key, path or revision, or its side -- and a decision
+    # made on the old one no longer applies: the count reads pending again (OR-16:
+    # identified by what the witness says, never by a digest of its bytes).
     n = min(n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED)
     record = _record()
     row = next(row for row in record["states"] if row["n"] == n)
     assert row["state"] == defaults.DECIDED
-    assert (row["witness"]["source"], row["witness"]["side"]) == (
-        defaults.SETTLED[n].source,
-        defaults.SETTLED[n].side,
-    )
-    moved = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(side="1/1")}
+    assert {key: row["witness"][key] for key in defaults.IDENTITY} == {
+        key: getattr(defaults.SETTLED[n], key) for key in defaults.IDENTITY
+    }
+    moved = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(**{key: value})}
     found, _listed = defaults.state_problems(settled=moved)
-    assert any(line.startswith(f"n={n}: SETTLED was decided on ") for line in found)
+    assert [line for line in found if line.startswith(f"n={n}: ")] == [
+        (
+            f"n={n}: SETTLED was decided on another witness ({key} "
+            f"{value[:24]!r} to {str(row['witness'][key])[:24]!r}); run the generators on "
+            'it (regularization-process.md, "When a Witness Changes"), then settle it again '
+            "or take it off SETTLED"
+        )
+    ]
 
     entry = defaults.index_entries()[n]
     state = defaults.count_state(n, entry, _measured(record, n), row["witness"], settled=moved)
@@ -300,6 +334,83 @@ def test_the_state_follows_the_witness_its_source_and_side_identify() -> None:
     assert [found["run"] for found in state["decisions"]] == [None]
     # The witness the record names is the one the index holds, as it identifies itself.
     assert row["witness"] == defaults.witness_identity(defaults.REPO, entry)
+
+
+def test_a_decision_names_what_it_still_owes_and_the_bead_that_owns_it() -> None:
+    # The ten decided counts rest on the #518 runs' prose; each says what think-0ut1 still
+    # owes, so the record shows it (review A6 of #636).
+    rows = {row["n"]: row for row in _record()["states"]}
+    for n, held in defaults.SETTLED.items():
+        if held.state == defaults.DECIDED:
+            assert held.owed is not None, n
+            assert held.owed.startswith("think-0ut1: "), n
+            assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
+    n = min(defaults.SETTLED)
+    unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed="later")}
+    found, _listed = defaults.state_problems(settled=unowned)
+    assert found == [f"n={n}: SETTLED's owed names no bead first: 'later'"]
+
+
+def test_a_settled_entry_the_layer_decides_unaided_fails_the_gate(tmp_path: Path) -> None:
+    # Where the layer holds a strong generator's view of this witness and does not draw
+    # it, the count is decided without SETTLED, so an entry there is redundant (review A10
+    # of #636). No committed count is in that case today, so a regularized count's row is
+    # read as if its strong view were held and not drawn.
+    record = _record()
+    every = defaults.index_entries()
+    row = next(
+        row
+        for row in record["states"]
+        if row["state"] == defaults.REGULARIZED_STATE
+        and every[row["n"]].get("generator") in defaults.STRONG_GENERATORS
+    )
+    n = row["n"]
+    row.update(state=defaults.DECIDED, drawn=defaults.HOUSE, generator=None)
+    witness = row["witness"]
+    redundant = {
+        **defaults.SETTLED,
+        n: defaults.Settled(
+            defaults.DECIDED,
+            str(witness["source"]),
+            str(witness["path"]),
+            witness["revision"],
+            str(witness["side"]),
+            (),
+            "drew no better",
+            "a test",
+        ),
+    }
+    found, _listed = defaults.state_problems(_write(tmp_path, record), settled=redundant)
+    assert found == [
+        (
+            f"n={n}: SETTLED names it, but the layer holds the {every[n]['generator']} view "
+            "of this witness, which decides it unaided; take it off"
+        )
+    ]
+    # Read as it stands, regularized, the entry fails as before.
+    found, _listed = defaults.state_problems(settled=redundant)
+    assert found == [f"n={n}: SETTLED names it, but it is regularized; take it off"]
+
+
+def test_the_record_defers_each_count_to_the_bead_that_owns_it() -> None:
+    # Each bead the allowlist, an exemption or an owed decision names is a deferral
+    # `check_bead_tree` holds open, as the intake records' are (review A2 of #636).
+    from devtools import check_bead_tree  # noqa: PLC0415
+
+    named = defaults.deferrals()
+    assert named == check_bead_tree.regularization_deferrals()
+    by_where = dict(named)
+    for n, why in defaults.PENDING_ALLOWED.items():
+        assert why.startswith(by_where[f"default_drawings.py PENDING_ALLOWED n={n}"]), n
+    for n, held in defaults.SETTLED.items():
+        if held.state == defaults.EXEMPT:
+            assert by_where[f"default_drawings.py SETTLED n={n} exempt"] in held.evidence, n
+        if held.owed is not None:
+            assert held.owed.startswith(by_where[f"default_drawings.py SETTLED n={n} owed"]), n
+    assert len(named) == len(by_where)
+    assert all(alias.startswith("think-") and len(alias) == 10 for _where, alias in named)
+    # A bead an entry names elsewhere in its text is not the one that owns it.
+    assert defaults.deferrals(settled={}, allowed={1: "later, maybe think-aaaa"}) == []
 
 
 def test_a_lapsed_view_reads_pending_and_names_what_lapsed() -> None:
@@ -313,8 +424,100 @@ def test_a_lapsed_view_reads_pending_and_names_what_lapsed() -> None:
     assert state["state"] == defaults.PENDING
     assert state["lapsed"] == lapse
     why = str(state["why"])
-    assert "the evand-regularize view of the previous witness lapsed (run a-run)" in why
+    # "An earlier witness": the lapse is the last strong view that lapsed, carried through
+    # later houses, so it may be more than one back (review A8 of #636).
+    assert "the evand-regularize view of an earlier witness lapsed (run a-run)" in why
     assert "allowed pending" not in why
+
+
+def test_an_adoption_that_rebuilds_only_the_axis_view_reads_pending(tmp_path: Path) -> None:
+    """The n = 176 failure replayed through the real derivation (review A3 of #636): an
+    adoption rebuilds only the axis tool's record of a count a strong view regularizes,
+    which `--update-atlas` writes as its `reference` with the lapse of the strong view."""
+    from devtools.regularize_axis_components import lapse_of  # noqa: PLC0415
+
+    record = _record()
+    document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
+    every = {int(entry["n"]): entry for entry in document["entries"]}
+    views = {row["n"]: row for row in record["entries"]}
+    row = next(
+        (
+            row
+            for row in record["states"]
+            if row["state"] == defaults.REGULARIZED_STATE
+            and every[row["n"]].get("reference")
+            and (
+                views[row["n"]]["measures"]["uneven_axis"][defaults.HOUSE]
+                or views[row["n"]]["measures"]["near_axis"][defaults.HOUSE]
+            )
+        ),
+        None,
+    )
+    if row is None:
+        pytest.skip("the data holds no strong view of an irregular house")
+    n = row["n"]
+    entry = every[n]
+    axis_entry = {**entry["reference"], defaults.LAPSED: lapse_of(entry)}
+    document["entries"] = [
+        axis_entry if int(found["n"]) == n else found for found in document["entries"]
+    ]
+    adopted = tmp_path / "index.json"
+    adopted.write_text(json.dumps(document), encoding="utf-8")
+
+    # The committed record, now stale, draws a view the index no longer holds.
+    found, _listed = defaults.state_problems(index=adopted)
+    stale = f"run `{defaults.GENERATOR} --update`"
+    assert f"n={n}: the record draws another view than the index holds; {stale}" in found
+
+    # Regenerated, the count reads pending whether the axis tool's view is drawn or held,
+    # and names the strong view that lapsed: the state comes from the generators, not
+    # from the `lapsed` block, which only explains it.
+    for default in (defaults.HOUSE, defaults.REGULARIZED):
+        state = defaults.count_state(
+            n, axis_entry, {**views[n], "default": default}, row["witness"], allowed={}
+        )
+        assert state["state"] == defaults.PENDING, default
+        assert state["lapsed"] == lapse_of(entry)
+        lapsed = f"the {entry['generator']} view of an earlier witness lapsed"
+        assert lapsed in state["why"]
+        without = {key: value for key, value in axis_entry.items() if key != defaults.LAPSED}
+        bare = defaults.count_state(
+            n, without, {**views[n], "default": default}, row["witness"], allowed={}
+        )
+        assert bare["state"] == defaults.PENDING, default
+
+    # And the gate fails on the regenerated record until the generators decide it.
+    record["states"] = [state if found["n"] == n else found for found in record["states"]]
+    found, _listed = defaults.state_problems(_write(tmp_path, record), adopted)
+    assert [line for line in found if line.startswith(f"n={n}")] == [
+        (
+            f"n={n} is pending: {state['why']}. Run the strong generators on its witness "
+            '(regularization-process.md, "When a Witness Changes"), or allow it in '
+            "PENDING_ALLOWED with the bead that owns the run"
+        )
+    ]
+
+
+def test_a_held_view_is_explained_in_the_policys_words() -> None:
+    # The n = 176 note read "worse on uneven_axis", the code's key (review A9 of #636).
+    record = _record()
+    held = defaults.held_reasons()
+    for row in record["entries"]:
+        if row["default"] != defaults.HOUSE:
+            continue
+        words = held[row["view"]]
+        assert not any(goal in words for goal in rule.MEASURES), words
+        if row["worse"]:
+            assert words == "it draws " + ", ".join(
+                defaults._worse_words(goal)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+                for goal in row["worse"]
+            )
+    assert defaults._worse_words("uneven_axis") == "more uneven squares"  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert (
+        defaults._worse_words("house_total")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        == "a smaller house total of full shared sides"
+    )
+    assert defaults._worse_words(rule.SIDE) == "a larger exact side"  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
 
 
 def test_a_held_view_does_not_lead_the_case_note() -> None:

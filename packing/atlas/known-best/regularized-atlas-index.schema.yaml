@@ -245,10 +245,14 @@ $defs:
       regularization: {$ref: '#/$defs/regularization'}
       lapsed:
         description: >-
-          Another generator's view of this count that lapsed when its witness changed,
-          written by `--update-atlas` in place of a printed line: until the strong
-          generators decide the new witness, `default-drawings.json` records the count
-          `pending`. History, not derived: `--verify-atlas` compares the record without it.
+          The last strong generator's view of this count that lapsed when its witness
+          changed, written by `--update-atlas` in place of a printed line: until the
+          strong generators decide the new witness, `default-drawings.json` records the
+          count `pending`. `--update-atlas` carries it through later houses, so it may
+          name a view more than one witness back, and keeps it whatever the count's
+          state; only `regularize_evand layer` ends it, by admitting a strong view, whose
+          `reference` carries none. History, not derived: `--verify-atlas` compares the
+          record without it.
         type: object
         additionalProperties: false
         required: [generator, run, witness_sha256]

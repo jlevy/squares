@@ -48,25 +48,33 @@ process as well." n = 176 drew its raw house on the site for a day while the lay
 index said `regularized`, because adopting a new house lapsed the grid-slack view
 `regularize_axis_components --update-atlas` had kept, and no record said so (think-gvke).
 So the record's `states` gives every count n = 1..324 what is drawn, the drawn picture's
-measures, the witness it was decided on (its id, source and side), the runs that decided
-that witness, and one state:
+measures, the witness it was decided on (its id, its source's key, path and revision, and
+its side), the runs that decided that witness, and one state:
 
 - `regularized`: a view of Evan Daniel's regularizer or the grid-slack generator is drawn
   (`STRONG_GENERATORS`);
 - `regular-as-published`: the house drawing has no uneven and no near-axis square;
 - `decided-no-better`: the strong generators ran on this very witness and drew nothing
-  the improvement rule takes (`SETTLED`, by the witness's source and side);
+  the improvement rule takes: the layer holds a strong generator's view of it and does
+  not draw it, or `SETTLED` says so, by the witness's source and side;
 - `exempt`: the count is set aside with a reason and the bead that owns it (`SETTLED`);
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
   (the index's `lapsed`, which `--update-atlas` writes) or that only the axis tool's
   view, the reference and fallback, has drawn.
 
-`--check-state` is the gate, reading the record and the index, measuring nothing: it
-fails on a pending count `PENDING_ALLOWED` does not name, on a named count that is no
-longer pending, and on a `SETTLED` entry made on another witness than the one the record
-was decided on, or for a count that no longer needs it. A record older than a witness is
-`--check`'s to catch, by deciding every count again: a witness is identified by the
-source and side it carries, never by a digest of its bytes (OR-16).
+`--check-state` is the gate, reading the record and the index, measuring nothing. The
+pending counts must be exactly `PENDING_ALLOWED`: it fails on a pending count the list
+does not name and on a named count that is no longer pending, so a count leaves the list
+as soon as it is decided and joins it only by a reviewed change that names its bead. It
+fails, too, on a `SETTLED` entry made on another witness than the one the record names,
+and on one for a count that no longer needs it: one now regularized or regular as
+published, or one whose strong view the layer holds, which decides it unaided. Each
+bead the list, an exemption or a decided count's `owed` names must be open, which
+`devtools.check_bead_tree` holds through `deferrals`. A record older than a witness is
+`--check`'s to catch, by deciding every count again. A witness is identified by what it
+says of itself -- its source's key, path and revision, and its side -- never by a digest
+of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no house, so
+the gate's comparison of it only holds each row to its count.
 
 
 The site's drawings (`render_frontier_page`), the atlas tiles (`overview_sections`) and
@@ -127,22 +135,27 @@ STATES = (REGULARIZED_STATE, REGULAR_AS_PUBLISHED, DECIDED, EXEMPT, PENDING)
 STRONG_GENERATORS = frozenset(
     {"evand-regularize", "regularize_grid_slack/0", "regularize_grid_slack/1"}
 )
-#: A bead id, which every `PENDING_ALLOWED` and `EXEMPT` entry names.
+#: A bead id, which every `PENDING_ALLOWED` entry, exemption and `owed` names.
 BEAD = re.compile(r"\bthink-[0-9a-z]{4}\b")
 
 
 class Settled(NamedTuple):
     """A count the strong generators decided, or that is set aside, on one witness: its
-    state (`DECIDED` or `EXEMPT`), that witness as it identifies itself (its source's key
-    and its side, exactly as the witness writes them), the runs that decided it as
-    (generator, run id), what they found, and where the record says so."""
+    state (`DECIDED` or `EXEMPT`); that witness as it identifies itself, exactly as it
+    writes them -- its source's key, path and revision (`None` where the source pins
+    none) and its side; the runs that decided it as (generator, run id); what they
+    found; where the record says so; and, where a decision still owes runs or a recorded
+    outcome, the open bead that owns them and what it owes (`owed`)."""
 
     state: str
     source: str
+    path: str
+    revision: str | None
     side: str
     runs: tuple[tuple[str, str], ...]
     outcome: str
     evidence: str
+    owed: str | None = None
 
 
 #: Both generators ran on the 42 witnesses jlevy/squares#518 adopted, on 12 October 2026.
@@ -159,17 +172,38 @@ _REFUSED_DECIMAL = (
     "a decimal Kingbird witness: the axis tool refuses it (its 36-digit rational pose "
     "overlaps at dilation 1), and no strong generator's outcome on it is recorded"
 )
+_KINGBIRD = "Kingbird derived numerical facts"
+_KINGBIRD_PATH = "resources/web/known-best-packings/sources.json"
+_DANIEL = "[Daniel regularized lists 2026-10-10]"
+_DANIEL_REVISION = "ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7"
+#: What the #518 runs left undone on the counts they decided (think-0ut1): grid-slack ran
+#: at 0.5 degrees only, and the receipts keep the outcomes only in aggregate.
+_OWED_WIDER = "think-0ut1: grid-slack at 1 and 5 degrees, which the #518 run did not try"
+_OWED_OUTCOME = "think-0ut1: the runs' per-count outcome, which their receipts do not keep"
+
+
+def _daniel(n: int) -> str:
+    """The path Evan Daniel's regularized list of 10 October 2026 keeps count `n` at."""
+    return (
+        "resources/web/evand-regularized-2026-10-10/source/search/regularize/lists/certs/"
+        f"n-{n:03d}.cert.gz"
+    )
+
 
 #: The counts whose drawing is not regularized and not regular as published, settled on
 #: purpose: each named with the witness it was settled on, so a new witness makes the
 #: count `pending` again. Written from the evidence the audit of 15 October 2026 found
 #: (think-y1x3); the run receipts keep only aggregates, so `evidence` says where each
-#: outcome is written down. The gate fails on an entry whose witness has changed or whose
-#: count no longer needs it.
+#: outcome is written down, and `owed` names what is still to run or record. Recording
+#: each run's per-count outcome on the index, so that a decision needs no entry here, is
+#: think-4ov9. The gate fails on an entry whose witness has changed or whose count no
+#: longer needs it.
 SETTLED: dict[int, Settled] = {
     39: Settled(
         EXEMPT,
-        "Kingbird derived numerical facts",
+        _KINGBIRD,
+        _KINGBIRD_PATH,
+        None,
         "6.8107220830686488516977794443517526346472763123335",
         (),
         _REFUSED_DECIMAL,
@@ -177,7 +211,9 @@ SETTLED: dict[int, Settled] = {
     ),
     55: Settled(
         EXEMPT,
-        "Kingbird derived numerical facts",
+        _KINGBIRD,
+        _KINGBIRD_PATH,
+        None,
         "7.9457710075039129789580095385274780713965449730227",
         (),
         _REFUSED_DECIMAL,
@@ -185,92 +221,126 @@ SETTLED: dict[int, Settled] = {
     ),
     102: Settled(
         DECIDED,
-        "[Daniel regularized lists 2026-10-10]",
+        _DANIEL,
+        _daniel(102),
+        _DANIEL_REVISION,
         "10605828696431578360490734944053/1000000000000000000000000000000",
         _ADOPT518,
         _T146,
         _README,
+        _OWED_WIDER,
     ),
     110: Settled(
         DECIDED,
         "[franciscouzo square-packing 2026-09-27]",
+        "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-110.yaml",
+        "f3c5a529c255b546db18605702b8da298132309f",
         "10.996783396634358",
         (("evand-regularize", "evand-regularize-bound-1013"),),
         "Evan Daniel's exact view at U draws fewer shared sides (house 243 to 239), and "
         "the owner keeps the axis tool's view at the witness's side",
         "ABOVE_U; think-jnso",
+        _OWED_OUTCOME,
     ),
     123: Settled(
         DECIDED,
-        "[Daniel regularized lists 2026-10-10]",
+        _DANIEL,
+        _daniel(123),
+        _DANIEL_REVISION,
         "2897844536374424539887715795867/250000000000000000000000000000",
         _ADOPT518,
         "neither generator drew better than the axis tool's view",
         _README,
+        _OWED_OUTCOME,
     ),
     155: Settled(
         DECIDED,
         "[Ostashev records 2026-10-11]",
+        "resources/web/dostashev-records-2026-10-11/source/records/n0155.sqcert",
+        "c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49",
         "64762127034792280678268012662770039849775757530809316735783064762127034792280"
         "678268012662770039849775757530809316735783/500000000000000000000000000000000000"
         "0000000000000000000000000000000000000000000000000000000000000000000000000000000000",
         _ADOPT518,
         "neither generator drew better than the axis tool's view",
         _README,
+        _OWED_OUTCOME,
     ),
     179: Settled(
         DECIDED,
         "[Gupta rational refinements 2026-10-08]",
+        "resources/web/gupta-square-packing-refinements-2026-10-08/facts/"
+        "complete-certificates-and-comparators.json.xz",
+        "9643cb5a78c1d4dcfc867c80a6920c3a6219d05a",
         "13883795490510898440309946897577/1000000000000000000000000000000",
         (("evand-regularize", "evand-regularize-full"),),
         "refused at row 7: a house or stage total of shared sides falls",
         "docs/project/research/research-2026-10-11-regularization-state-and-approach.md",
+        _OWED_OUTCOME,
     ),
     180: Settled(
         DECIDED,
         "[Couzo exact refinements 2026-10-08]",
+        "resources/web/couzo-exact-refinements-2026-10-08/facts/"
+        "complete-certificates-and-decimal-poses.json.xz",
+        "ffd900dfff6d2674ad995359208c2f0714915c82",
         "13916993522477832483558124720393/1000000000000000000000000000000",
         (*_ADOPT518, ("evand-regularize", "evand-regularize-adopt518-v2-rerun-2026-10-13")),
         "Evan Daniel's view tied the axis tool's on all seven measures at the same side "
         "and was withdrawn (1d8f982ff)",
         _README,
+        _OWED_OUTCOME,
     ),
     236: Settled(
         DECIDED,
-        "[Daniel regularized lists 2026-10-10]",
+        _DANIEL,
+        _daniel(236),
+        _DANIEL_REVISION,
         "3172791149431853484523540541259/200000000000000000000000000000",
         _ADOPT518,
         "Evan Daniel's view drew one more angle class and was withdrawn (bd82e3a54); the "
         "axis tool's view does not improve on the house",
         _README,
+        _OWED_WIDER,
     ),
     258: Settled(
         DECIDED,
-        "[Daniel regularized lists 2026-10-10]",
+        _DANIEL,
+        _daniel(258),
+        _DANIEL_REVISION,
         "16563448002133789379765816191273/1000000000000000000000000000000",
         _ADOPT518,
         _T146,
         _README,
+        _OWED_WIDER,
     ),
     263: Settled(
         DECIDED,
-        "[Daniel regularized lists 2026-10-10]",
+        _DANIEL,
+        _daniel(263),
+        _DANIEL_REVISION,
         "16733166007899378970679613144039/1000000000000000000000000000000",
         _ADOPT518,
         _T146,
         _README,
+        _OWED_WIDER,
     ),
     269: Settled(
         DECIDED,
-        "[Daniel regularized lists 2026-10-10]",
+        _DANIEL,
+        _daniel(269),
+        _DANIEL_REVISION,
         "16901513582189132198548012552701/1000000000000000000000000000000",
         _ADOPT518,
         _T146,
         _README,
+        _OWED_WIDER,
     ),
     290: Settled(
         EXEMPT,
-        "Kingbird derived numerical facts",
+        _KINGBIRD,
+        _KINGBIRD_PATH,
+        None,
         "17.53553390593273762200422181052425",
         (),
         _REFUSED_DECIMAL,
@@ -278,7 +348,9 @@ SETTLED: dict[int, Settled] = {
     ),
     291: Settled(
         EXEMPT,
-        "Kingbird derived numerical facts",
+        _KINGBIRD,
+        _KINGBIRD_PATH,
+        None,
         "17.53553390593273762200422181052425",
         (),
         _REFUSED_DECIMAL,
@@ -291,12 +363,15 @@ _KPM3 = "think-kpm3: re-housed by #614 (3b9fab84a)"
 _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 
 #: The counts allowed to stay `pending`, each naming the bead whose runs will decide it.
-#: Measured, not chosen, as `ABOVE_U` is: `--check-state` fails on a pending count not
-#: named here and on a named count that is no longer pending, so a count leaves the list
-#: as soon as it is decided, and joins it only by a reviewed change naming its bead (the
-#: deferral an adoption makes when its runs must wait). Set on 15 October 2026
-#: to the twenty counts the audit found drawn without a strong generator's decision on
-#: their current witness (think-gvke, think-rz8c).
+#: Measured, not chosen, as `ABOVE_U` is: the list must equal the pending set, since
+#: `--check-state` fails on a pending count not named here and on a named count that is
+#: no longer pending. A count leaves it as soon as it is decided, and joins it only by a
+#: reviewed change naming its bead (the deferral an adoption makes when its runs must
+#: wait); nothing stops a change adding entries, so the gate prints how many there are,
+#: and `devtools.check_bead_tree` fails a change to this file whose list names a bead
+#: that is not open (`deferrals`). Set on 15 October 2026 to the twenty counts the audit
+#: found drawn without a strong generator's decision on their current witness
+#: (think-gvke, think-rz8c).
 PENDING_ALLOWED: dict[int, str] = {
     105: f"{_LA7H}; its grid-slack view lapsed",
     129: f"{_LA7H}; its Evan Daniel view lapsed",
@@ -444,17 +519,25 @@ def measure_house(unit: tuple[Path, int, Mapping[int, Mapping[str, Any]]]) -> di
     return {"n": n, "measures": {key: house[key] for key in MEASURES}}
 
 
+def _text(value: object) -> str | None:
+    return None if value is None else str(value)
+
+
 def witness_identity(tree: Path, entry: Mapping[str, Any]) -> dict[str, str | None]:
     """The witness a count's index entry names, as it identifies itself: its id, its
-    source's key and its side, as written. A state is bound to these, never to a digest of
-    the file's bytes (OR-16): a new house changes the source or the side."""
+    source's key, path and revision, and its side, as written. A state is bound to the
+    last four, never to a digest of the file's bytes (OR-16): a new house changes the
+    source, a new certificate file the path, an upstream fix the revision. The id is the
+    count's (`W-known-best-nNNN`) and stays the same across houses."""
     witness = load_yaml((tree / entry["source"]["witness"]).read_text(encoding="utf-8"))[
         "witness"
     ]
     source = witness.get("source") or {}
     return {
         "id": str(witness["id"]),
-        "source": None if source.get("key") is None else str(source["key"]),
+        "source": _text(source.get("key")),
+        "path": _text(source.get("path")),
+        "revision": _text(source.get("revision")),
         "side": str(witness["side"]),
     }
 
@@ -478,9 +561,14 @@ def _axis_outcome(record: Mapping[str, Any]) -> str:
     return {"regularized": "view", "unchanged": "no change"}.get(status, status)
 
 
+#: The fields a witness identifies itself by and a `SETTLED` entry is bound to.
+IDENTITY = ("source", "path", "revision", "side")
+
+
 def _settled_here(held: Settled | None, witness: Mapping[str, Any]) -> Settled | None:
-    """A `SETTLED` entry where it was made on this witness, by its source and side."""
-    if held is None or (held.source, held.side) != (witness["source"], witness["side"]):
+    """A `SETTLED` entry where it was made on this witness: its source's key, path and
+    revision, and its side."""
+    if held is None or any(getattr(held, key) != witness.get(key) for key in IDENTITY):
         return None
     return held
 
@@ -548,13 +636,17 @@ def count_state(
     elif current is not None:
         state = current.state
         why = f"{current.outcome} ({current.evidence})"
+        if current.owed:
+            why += f"; still owed: {current.owed}"
     else:
         state = PENDING
         what = f"the {generator} view" if viewed else "the house drawing"
         why = f"no strong generator has decided this witness; {what} is drawn"
         if lapse:
+            # The last strong view that lapsed here, which may be more than one house
+            # back: `--update-atlas` carries it until a strong view is admitted again.
             why += (
-                f"; the {lapse['generator']} view of the previous witness lapsed "
+                f"; the {lapse['generator']} view of an earlier witness lapsed "
                 f"(run {lapse['run']})"
             )
         if n in allowed:
@@ -659,17 +751,34 @@ def held_reasons(record: Path = RECORD) -> dict[str, str]:
     the words a case record's note gives it (review A4 of #591): the record's reason, or
     for a tie, that it ties the house drawing on every goal. Read from the retained record
     without measuring, and by the view's path, so a view the record does not name gets no
-    reason here (`regularized_drawings.case_note`)."""
+    reason here (`regularized_drawings.case_note`). A goal it is worse on is named in the
+    policy's words (`improvement_rule.GOAL_NAMES`), never as the code's key: the n = 176
+    note read "worse on uneven_axis" (review A9 of #636)."""
     found = json.loads(record.read_text(encoding="utf-8"))
     return {
-        str(row["view"]): (
-            "it ties the house drawing on every goal of the improvement rule"
-            if row["reason"] == "no gain"
-            else str(row["reason"])
-        )
+        str(row["view"]): _held_words(row)
         for row in found.get("entries") or []
         if row["default"] == HOUSE
     }
+
+
+def _worse_words(goal: str) -> str:
+    """What being worse on one goal of the improvement rule draws, in a reader's words."""
+    name = improvement_rule.GOAL_NAMES[goal]
+    if goal in improvement_rule.FEWER_IS_BETTER:
+        return f"more {name}"
+    if goal == improvement_rule.SIDE:
+        return f"a larger {name}"
+    return f"a smaller {name}"
+
+
+def _held_words(row: Mapping[str, Any]) -> str:
+    """Why a held view is not drawn, as a case record's note says it."""
+    if row["reason"] == "no gain":
+        return "it ties the house drawing on every goal of the improvement rule"
+    if row["worse"] and row["reason"].startswith("worse on "):
+        return "it draws " + ", ".join(_worse_words(str(goal)) for goal in row["worse"])
+    return str(row["reason"])
 
 
 @cache
@@ -756,8 +865,14 @@ def state_problems(
     for n in sorted(set(rows) & set(every)):
         row, entry = rows[n], every[n]
         witness = row.get("witness") or {}
+        # The id is the count's, the same for every house it has had, so this holds the
+        # row to its count; a new house is the SETTLED comparison's to catch below, and a
+        # record older than its witness the measuring `--check`'s.
         if witness.get("id") != entry["source"]["id"]:
-            problems.append(f"n={n}: the record names witness {witness.get('id')!r}; {stale}")
+            problems.append(
+                f"n={n}: the record's row names witness {witness.get('id')!r}, and the "
+                f"index's count names {entry['source']['id']!r}; {stale}"
+            )
         if row["state"] not in STATES:
             problems.append(f"n={n}: state {row['state']!r}")
         if row["drawn"] == VIEW and row["generator"] != entry.get("generator"):
@@ -765,27 +880,61 @@ def state_problems(
                 f"n={n}: the record draws another view than the index holds; {stale}"
             )
         held = settled.get(n)
-        if held is not None and _settled_here(held, witness) is None:
-            problems.append(
-                f"n={n}: SETTLED was decided on {held.source} at side {held.side[:24]}, and "
-                f"the record's witness is {witness.get('source')} at side "
-                f"{str(witness.get('side'))[:24]}; run the generators on it "
-                '(regularization-process.md, "When a Witness Changes"), then settle it '
-                "again or take it off SETTLED"
-            )
-        elif held is not None and row["state"] in (REGULARIZED_STATE, REGULAR_AS_PUBLISHED):
-            problems.append(f"n={n}: SETTLED names it, but it is {row['state']}; take it off")
-        if held is not None and held.state not in (DECIDED, EXEMPT):
-            problems.append(f"n={n}: SETTLED gives state {held.state!r}")
-        if held is not None and held.state == EXEMPT and not BEAD.search(held.evidence):
-            problems.append(f"n={n}: an exemption names the bead that owns it")
+        if held is not None:
+            problems.extend(_settled_problems(n, held, row, entry))
+    problems.extend(_list_problems(rows, allowed))
     pending = {n for n, row in rows.items() if row["state"] == PENDING}
-    problems.extend(
+    listed = [
+        f"n={n} is pending, allowed: {allowed[n]}" for n in sorted(pending & set(allowed))
+    ]
+    summary = f"regularization states: {_states_summary(list(rows.values()))}"
+    return problems, [*listed, f"PENDING_ALLOWED: {len(allowed)} counts", summary]
+
+
+def _settled_problems(
+    n: int, held: Settled, row: Mapping[str, Any], entry: Mapping[str, Any]
+) -> list[str]:
+    """What is wrong with one `SETTLED` entry against the record's row and the index."""
+    witness = row.get("witness") or {}
+    problems: list[str] = []
+    if _settled_here(held, witness) is None:
+        moved = ", ".join(
+            f"{key} {str(getattr(held, key))[:24]!r} to {str(witness.get(key))[:24]!r}"
+            for key in IDENTITY
+            if getattr(held, key) != witness.get(key)
+        )
+        problems.append(
+            f"n={n}: SETTLED was decided on another witness ({moved}); run the generators "
+            'on it (regularization-process.md, "When a Witness Changes"), then settle it '
+            "again or take it off SETTLED"
+        )
+    elif row["state"] in (REGULARIZED_STATE, REGULAR_AS_PUBLISHED):
+        problems.append(f"n={n}: SETTLED names it, but it is {row['state']}; take it off")
+    elif entry.get("generator") in STRONG_GENERATORS:
+        problems.append(
+            f"n={n}: SETTLED names it, but the layer holds the {entry['generator']} view of "
+            "this witness, which decides it unaided; take it off"
+        )
+    if held.state not in (DECIDED, EXEMPT):
+        problems.append(f"n={n}: SETTLED gives state {held.state!r}")
+    if held.state == EXEMPT and not BEAD.search(held.evidence):
+        problems.append(f"n={n}: an exemption names the bead that owns it")
+    if held.owed is not None and not BEAD.match(held.owed):
+        problems.append(f"n={n}: SETTLED's owed names no bead first: {held.owed!r}")
+    return problems
+
+
+def _list_problems(
+    rows: Mapping[int, Mapping[str, Any]], allowed: Mapping[int, str]
+) -> list[str]:
+    """Where the pending set and `PENDING_ALLOWED` differ, and an entry naming no bead."""
+    pending = {n for n, row in rows.items() if row["state"] == PENDING}
+    problems = [
         f"n={n} is pending: {rows[n]['why']}. Run the strong generators on its witness "
         '(regularization-process.md, "When a Witness Changes"), or allow it in '
         "PENDING_ALLOWED with the bead that owns the run"
         for n in sorted(pending - set(allowed))
-    )
+    ]
     problems.extend(
         f"n={n}: PENDING_ALLOWED names it, but it is "
         f"{rows[n]['state'] if n in rows else 'not a count'}; take it off the list"
@@ -796,11 +945,30 @@ def state_problems(
         for n in sorted(allowed)
         if not BEAD.match(allowed[n])
     )
-    listed = [
-        f"n={n} is pending, allowed: {allowed[n]}" for n in sorted(pending & set(allowed))
+    return problems
+
+
+def deferrals(
+    settled: Mapping[int, Settled] | None = None, allowed: Mapping[int, str] | None = None
+) -> list[tuple[str, str]]:
+    """Every bead this module defers regularization work to, as (where, the bead alias),
+    for `devtools.check_bead_tree`'s dead-deferral check: each count `PENDING_ALLOWED`
+    names, each exemption's owning bead and each decision's `owed` bead. Whether one is
+    named at all is `--check-state`'s to hold; this asks only whether it is still open."""
+    settled = SETTLED if settled is None else settled
+    allowed = PENDING_ALLOWED if allowed is None else allowed
+    where = "default_drawings.py"
+    named = [
+        (f"{where} PENDING_ALLOWED n={n}", found[0])
+        for n, why in sorted(allowed.items())
+        if (found := BEAD.match(why))
     ]
-    summary = f"regularization states: {_states_summary(list(rows.values()))}"
-    return problems, [*listed, summary]
+    for n, held in sorted(settled.items()):
+        if held.state == EXEMPT and (found := BEAD.search(held.evidence)):
+            named.append((f"{where} SETTLED n={n} exempt", found[0]))
+        if held.owed is not None and (found := BEAD.match(held.owed)):
+            named.append((f"{where} SETTLED n={n} owed", found[0]))
+    return named
 
 
 def check_state() -> int:
@@ -813,7 +981,8 @@ def check_state() -> int:
         return 1
     print(
         "regularization state check passed: every count is regularized, regular as "
-        "published, decided or exempt, or pending on the shrink-only allowlist"
+        "published, decided or exempt, or pending and named in PENDING_ALLOWED, which "
+        "equals the pending set and grows only by a reviewed change naming its bead"
     )
     return 0
 
