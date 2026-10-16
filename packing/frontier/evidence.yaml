@@ -32004,7 +32004,7 @@ evidence:
         - Lean 4.34.1's kernel, Mathlib d13f23b7, the compiler, native runtime, C toolchain and compiled checker libraries are sound. The axiom receipt lists propext, Classical.choice, Quot.sound and 13,343 native_decide facts, with no sorryAx; this is not kernel-only computation.
         - The source's complete clean-build receipt truthfully records its execution; review of the retained receipt and final axiom log is not an independent observation or reproduction of that execution.
         - The reviewed definitions elaborate as stated in the producer's full environment; this project has not elaborated the theorem or its statement closure.
-      audit_record: docs/project/specs/active/plan-2026-10-15-formal-proof-verification-rubric.md
+      audit_record: docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md
     external_review:
       state: informally-verified
       date: '2026-10-15'

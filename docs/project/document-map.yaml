@@ -21,6 +21,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-13-verification-gaps.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md, role: review, authority: record, lifecycle: retained}
