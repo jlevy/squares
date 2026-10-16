@@ -788,6 +788,52 @@ def test_an_admitted_view_ends_the_lapse_the_axis_record_carried(
     assert axis.check_atlas(layout) == []
 
 
+def test_a_view_worse_than_the_layers_on_one_goal_does_not_replace_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review B3 of #636: admission replaced the layer's view with any view that shared
+    as many full sides, so a view worse on another goal of the improvement rule could
+    replace a drawn one, and the count read decided with the house drawn. Here the
+    layer's view is measured with one hue fewer than the run's view, which otherwise ties
+    it on every goal: the layer keeps its view and says why, and the tie is admitted."""
+    from devtools import regularize_select as select  # noqa: PLC0415
+
+    monkeypatch.setenv("PACK_JOBS", "1")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    (before,) = json.loads(layout.index.read_text(encoding="utf-8"))["entries"]
+    view = layout.view(4).read_bytes()
+    real = select.today
+
+    def fewer_hues(unit: tuple[Path, int, dict[int, dict[str, Any]]]) -> dict[str, Any]:
+        found = real(unit)
+        return {**found, "hues": found["hues"] - 1}
+
+    monkeypatch.setattr(select, "today", fewer_hues)
+    summary = drive.write_layer([run_dir], root, "admitted")
+    assert (summary["written"], summary["kept_current"]) == ([], [4])
+    assert summary["kept_why"] == {"4": "worse than the layer's view on hues"}
+    (entry,) = json.loads(layout.index.read_text(encoding="utf-8"))["entries"]
+    assert entry == before
+    assert layout.view(4).read_bytes() == view
+
+    # A larger exact side than the layer's view is worse too.
+    def smaller_side(unit: tuple[Path, int, dict[int, dict[str, Any]]]) -> dict[str, Any]:
+        found = real(unit)
+        return {**found, "side": drive.literal(Fraction(found["side"]) - Fraction(1, 10**6))}
+
+    monkeypatch.setattr(select, "today", smaller_side)
+    summary = drive.write_layer([run_dir], root, "admitted")
+    assert summary["kept_why"] == {"4": "worse than the layer's view on side"}
+
+    # Measured as it is, the run's view ties the layer's on every goal and is admitted:
+    # refusing a tie is the selection's (`regularize_select.refusals`), and re-admitting
+    # a run's own view is one.
+    monkeypatch.setattr(select, "today", real)
+    summary = drive.write_layer([run_dir], root, "admitted")
+    assert (summary["written"], summary["kept_why"]) == ([4], {})
+
+
 def _fresh_receipt(run_dir: Path, again: Path) -> None:
     """A fresh run's receipt: the run's own, with a cost of its own. A run block whose cost
     repeats an earlier run's is a reclassified copy, which the index records with no cost

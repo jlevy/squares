@@ -574,18 +574,26 @@ def _settled_here(held: Settled | None, witness: Mapping[str, Any]) -> Settled |
     return held
 
 
-def run_decisions(entry: Mapping[str, Any], settled: Settled | None) -> list[dict[str, Any]]:
+def run_decisions(
+    entry: Mapping[str, Any], settled: Settled | None, held: str | None = None
+) -> list[dict[str, Any]]:
     """The tool runs that decided a count's current witness, and what each found: the axis
     tool's record and the strong generator whose view the layer holds, both of the
     witness the atlas holds (`--check-atlas` holds the index to it), and a `SETTLED`
-    entry's runs where it was made on that witness."""
+    entry's runs where it was made on that witness. A strong view the rule does not draw
+    reads `held: ` and why (`held`), not `view` (review B3 of #636)."""
     axis = _axis_record(entry)
     found: list[dict[str, Any]] = [
         {"generator": ALGORITHM, "run": None, "outcome": _axis_outcome(axis)}
     ]
     if entry.get("generator") != ALGORITHM:
+        outcome = "view" if held is None else f"held: {held}"
         found.append(
-            {"generator": entry["generator"], "run": str(entry["run"]["id"]), "outcome": "view"}
+            {
+                "generator": entry["generator"],
+                "run": str(entry["run"]["id"]),
+                "outcome": outcome,
+            }
         )
     if settled is not None:
         found.extend(
@@ -665,7 +673,9 @@ def count_state(
         "generator": generator,
         "witness": dict(witness),
         "measures": drawn,
-        "decisions": run_decisions(entry, current),
+        "decisions": run_decisions(
+            entry, current, held=None if viewed else decided.get("reason")
+        ),
         "lapsed": lapse,
         "why": why,
     }

@@ -594,6 +594,33 @@ def test_a_lapse_where_the_house_reads_regular_reads_pending(tmp_path: Path) -> 
     assert [line for line in found if line.startswith(f"n={n}")] == []
 
 
+def test_a_held_strong_view_is_recorded_held_with_the_rules_reason() -> None:
+    # Review B3 of #636, at the reviewer's count: where the layer holds a strong view the
+    # rule does not draw, the run's outcome reads `held: ` and why, not `view`, so the
+    # record does not say a view decided what it did not draw.
+    record = _record()
+    every = defaults.index_entries()
+    row = next(
+        row
+        for row in record["states"]
+        if row["state"] == defaults.REGULARIZED_STATE
+        and every[row["n"]].get("generator") in defaults.STRONG_GENERATORS
+    )
+    n = row["n"]
+    view = next(found for found in record["entries"] if found["n"] == n)
+    drawn = defaults.count_state(n, every[n], view, row["witness"])
+    assert drawn["decisions"][-1]["outcome"] == "view"
+    later = {**every[n], "generator": "regularize_grid_slack/1", "run": {"id": "a-later-run"}}
+    held = {**view, "default": defaults.HOUSE, "reason": "worse on hues", "worse": ["hues"]}
+    state = defaults.count_state(n, later, held, row["witness"])
+    assert state["state"] == defaults.DECIDED
+    assert state["decisions"][-1] == {
+        "generator": "regularize_grid_slack/1",
+        "run": "a-later-run",
+        "outcome": "held: worse on hues",
+    }
+
+
 def test_a_held_view_is_explained_in_the_policys_words() -> None:
     # The n = 176 note read "worse on uneven_axis", the code's key (review A9 of #636).
     record = _record()

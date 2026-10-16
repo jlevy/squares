@@ -335,6 +335,13 @@ def today(unit: tuple[Path, int, Mapping[int, Mapping[str, Any]]]) -> dict[str, 
     """The drawing a tree's atlas shows for one count, measured as candidates are."""
     tree, n, entries = unit
     drawing, body = census.drawing_for(tree, n, entries)
+    return measured(n, drawing, body)
+
+
+def measured(n: int, drawing: census.Drawing, body: Mapping[str, Any]) -> dict[str, Any]:
+    """One drawing of count `n` from its witness body, measured as `today` measures the
+    tree's: what `regularize_evand.admit_views` holds a view to before it replaces the
+    layer's."""
     shape = census.regularity(body)
     partners = driver.contact_partners(body)
     house, stage = (driver.histogram(partners[rule]) for rule in driver.RULE_NAMES)
