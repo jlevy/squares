@@ -3781,7 +3781,9 @@ def reproduced_views(run_dirs: Sequence[Path], root: Path) -> dict[str, Any]:
     as evidence keeps its reports and not its views (`run_reports`), so there the view's
     text cannot be compared: a count whose report agrees on everything else is listed
     under `agrees`, never `reproduced`, and the view's Git blob the report keeps
-    (`outputs.<name>.git_blob`) is provenance, compared with nothing (OR-16)."""
+    (`outputs.<name>.git_blob`) is provenance, compared with nothing (OR-16). A run
+    directory none of whose reports was compared is listed under `uncompared`, so a
+    check over several runs accounts for each of them (review G5 of #644)."""
     root = root.resolve()
     index = read_json(root / LAYER_INDEX_PATH)
     entries = {int(entry["n"]): entry for entry in index["entries"]}
@@ -3790,7 +3792,9 @@ def reproduced_views(run_dirs: Sequence[Path], root: Path) -> dict[str, Any]:
     agrees: list[int] = []
     differs: dict[str, list[str]] = {}
     not_drawn: list[int] = []
+    uncompared: list[str] = []
     for run_dir in run_dirs:
+        compared = False
         for directory, report in run_reports(run_dir):
             n = int(report["n"])
             entry = entries.get(n) or {}
@@ -3802,6 +3806,7 @@ def reproduced_views(run_dirs: Sequence[Path], root: Path) -> dict[str, Any]:
             ):
                 not_drawn.append(n)
                 continue
+            compared = True
             viewed = (directory / f"view-{chosen}.yaml").is_file()
             admitted = evand_admitted(report, directory, str(entry["run"]["id"]), view=viewed)
             found = []
@@ -3821,11 +3826,14 @@ def reproduced_views(run_dirs: Sequence[Path], root: Path) -> dict[str, Any]:
                 differs[str(n)] = found
             else:
                 (reproduced if viewed else agrees).append(n)
+        if not compared:
+            uncompared.append(str(run_dir))
     return {
         "reproduced": sorted(set(reproduced)),
         "agrees": sorted(set(agrees)),
         "differs": dict(sorted(differs.items(), key=lambda item: int(item[0]))),
         "not_drawn": sorted(set(not_drawn)),
+        "uncompared": uncompared,
     }
 
 
@@ -4151,7 +4159,8 @@ def layer_command(arguments: argparse.Namespace) -> dict[str, Any]:
 def layer_main(arguments: argparse.Namespace) -> int:
     """Run `layer`, `rungs` or `rename-run` and then the layer's check, or `rungs --check`,
     which writes nothing and fails when a drawn view the runs cover differs, when a run
-    directory is missing or holds no report, and when no drawn view was compared."""
+    directory is missing or holds no report, and when any run directory compared no
+    drawn view (reviews G3 and G5 of #644)."""
     if arguments.command == "rungs" and arguments.check:
         try:
             found = reproduced_views(arguments.run_dir, arguments.repo_root)
@@ -4159,10 +4168,18 @@ def layer_main(arguments: argparse.Namespace) -> int:
             print(f"rungs --check: {error}")
             return 1
         print(json.dumps(found))
-        if not (found["reproduced"] or found["agrees"]):
+        if not (found["reproduced"] or found["agrees"] or found["differs"]):
             print(
                 "rungs --check: no report of these runs is of a view the layer draws "
                 "from the driver, so nothing was compared"
+            )
+            return 1
+        if found["uncompared"]:
+            print(
+                "rungs --check: no report under "
+                + ", ".join(found["uncompared"])
+                + " is of a view the layer draws from the driver, so that run compared "
+                "nothing"
             )
             return 1
         return 1 if found["differs"] else 0
