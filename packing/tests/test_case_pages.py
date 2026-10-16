@@ -178,9 +178,11 @@ class _HtmlEvents(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.events: list[tuple[str, object]] = []
+        self.elements: list[tuple[str, dict[str, str | None]]] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         self.events.append(("start", (tag, attrs)))
+        self.elements.append((tag, dict(attrs)))
 
     def handle_endtag(self, tag: str) -> None:
         self.events.append(("end", tag))
@@ -561,17 +563,37 @@ def test_every_record_opens_with_its_visual_summary(
 
 
 def test_a_result_about_one_case_shows_the_same_visual_summary(n11_result_page: str) -> None:
-    body = n11_result_page
-    assert '<section class="site-case-summary' in body
+    document = _HtmlEvents()
+    document.feed(n11_result_page)
+    document.close()
+
+    def positions(tag: str, classes: str) -> list[int]:
+        required = set(classes.split())
+        return [
+            index
+            for index, (element_tag, attrs) in enumerate(document.elements)
+            if element_tag == tag and required <= set((attrs.get("class") or "").split())
+        ]
+
+    assert positions("section", "site-case-summary")
     order = [
-        body.index('class="site-card-label site-case-eyebrow"'),
-        body.index('<figure class="site-case-figure'),
-        body.index('class="site-popover-value site-result-case-n"'),
-        body.index('<div class="site-atlas-gap"'),
+        positions("span", "site-card-label site-case-eyebrow")[0],
+        positions("figure", "site-case-figure")[0],
+        positions("p", "site-popover-value site-result-case-n")[0],
+        positions("div", "site-atlas-gap")[0],
     ]
     assert order == sorted(order)
-    assert body.count('<figure class="site-case-figure"') == 1
-    assert 'class="site-atlas-pop-bound" data-math-face="serif"' in body
+    assert (
+        sum(
+            tag == "figure" and attrs.get("class") == "site-case-figure"
+            for tag, attrs in document.elements
+        )
+        == 1
+    )
+    assert any(
+        document.elements[index][1].get("data-math-face") == "serif"
+        for index in positions("p", "site-atlas-pop-bound")
+    )
 
 
 def _declarations(css: str, selector: str) -> str:

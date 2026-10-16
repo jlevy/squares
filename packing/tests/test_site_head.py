@@ -15,6 +15,7 @@ import html
 import re
 from html.parser import HTMLParser
 from pathlib import Path
+from typing import override
 
 import pytest
 
@@ -626,6 +627,18 @@ def records() -> dict[str, str]:
     return site_renders.case_records()
 
 
+class _DocumentElements(HTMLParser):
+    def __init__(self, page: str) -> None:
+        super().__init__()
+        self.elements: list[tuple[str, dict[str, str | None]]] = []
+        self.feed(page)
+        self.close()
+
+    @override
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.elements.append((tag, dict(attrs)))
+
+
 def test_result_overviews_are_complete_canonical_documents(
     result_pages: dict[str, str],
 ) -> None:
@@ -637,7 +650,10 @@ def test_result_overviews_are_complete_canonical_documents(
         assert len(re.findall(r"<h1\b", page)) == 1, path
         assert '<article class="site-result"' in page, path
         assert "<main" in page, path
-        assert 'class="site-nav"' in page, path
+        assert any(
+            tag == "nav" and "site-nav" in (attrs.get("class") or "").split()
+            for tag, attrs in _DocumentElements(page).elements
+        ), path
 
 
 def test_the_card_is_the_heros_drawing_on_the_pages_background() -> None:
