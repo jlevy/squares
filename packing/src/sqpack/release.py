@@ -88,6 +88,15 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.23",
+        first_published="October 16, 2026",
+        result_scope=(
+            "Confirm T-185 to T-190 at V3/C3, move the houses at fifteen counts to T-186, "
+            "T-187, T-188 and T-190, draw the regularized views of eleven of them, and "
+            "record 176, 237, 303 and 304 as decided with no better view."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.22",
         first_published="October 16, 2026",
         result_scope="Draw the regularized views of 175, 232 and 264 by default.",
@@ -863,6 +872,17 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.22",
+        version="v0.7.23",
+        impact="patch",
+        reason=(
+            "Confirm T-185 to T-190 at V3/C3, move the houses at fifteen counts to T-186, "
+            "T-187, T-188 and T-190, draw the regularized views of eleven of them, and "
+            "record 176, 237, 303 and 304 as decided with no better view."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.21",
         version="v0.7.22",
         impact="patch",
@@ -1203,6 +1223,30 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.23 for the 16 October records and their regularization "
+            "regenerated the five claim documents at PUBLICATION_REVISION 18ed93f5, this "
+            "branch's re-pin after merging #656, kept reachable from main by the merge "
+            "commit the PR merges with; with that revision read back as #654's 7d47bd4e, "
+            "each is byte-identical to #656's, so the 32 repository links it pins are the "
+            "only change, and no claim, certificate or command moves. A link revision "
+            "follows the site's edition and is not a revision of the explainer, so it "
+            "keeps v0.4.7. Source-compared; no render of the claim documents was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
@@ -1210,9 +1254,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
-            "packing/devtools/regularize_select.py",
-            "packing/devtools/regularized_drawings.py",
             "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/regularize_evand.py",
             "packing/src/sqpack/cli/validate.py",
             "packing/atlas/known-best/bound-citations.json",
             "packing/atlas/known-best/composite-figure.json",
@@ -3390,7 +3433,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "7d47bd4e"
+PUBLICATION_REVISION = "18ed93f5"
 
 
 def data_pathspec() -> tuple[str, ...]:
