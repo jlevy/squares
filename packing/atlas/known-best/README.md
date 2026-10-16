@@ -271,9 +271,11 @@ The same day both generators ran on the eight witnesses jlevy/squares#614 adopte
 regularizer (`evand-regularize-3b-1016`) and grid-slack at 0.5, 1 and 5 degrees
 (`grid-slack-3b-deg05-1016`, `grid-slack-3b-deg1-1016` and `grid-slack-3b-deg5-1016`),
 3,916 CPU-seconds in all.
-His same-side views are drawn at 153, 207, 211, 237, 241 and 302, and grid-slack’s
-five-degree view at 154, where his view goes to the owner at row 7 (eight squares lose a
-contact while no total falls).
+His views at the witness’s side are drawn at 153, 207, 211, 237, 241 and 302: the
+same-side re-solve’s at the first four, and at 241 and 302, where the re-solve was
+refused (an overlap, an unmatched rotation), his solve itself, unmodified, which closed
+to that side. Grid-slack’s five-degree view is drawn at 154, where his view goes to the
+owner at row 7 (eight squares lose a contact while no total falls).
 Over the seven, light / uneven / near-axis squares go from 51 / 133 / 34 to 10 / 26 / 3,
 and house sides from 3,957 to 4,341. At 304 every view draws two or four light squares
 where the axis tool’s view draws none, so that view stays: grid-slack’s at all three

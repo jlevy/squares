@@ -1095,7 +1095,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "regularization note, which the survey does not quote: it cites them by link, "
             "as its results table's count links. Rendered from main at e2e018f32 and from "
             "this branch at that one link revision, the survey's HTML and Markdown are "
-            "byte-identical, as are the other 48 files the renderer writes. No PDF was "
+            "byte-identical, as are the other 40 files the renderer writes. No PDF was "
             "printed (no pinned Chromium on this host), and the survey keeps v0.2.2."
         ),
     ),

@@ -221,19 +221,27 @@ def test_the_modifications_are_read_from_the_index_entry_alone() -> None:
     names, the same-side re-solve; the grid-slack port names itself; the axis tool is not
     his regularizer, so it has none to name."""
     kinds = {"probe-flat-stall-stop": "replica"}
-    evand = {**entry(5, "same"), "generator": drawings.EVAND_GENERATOR}
+    evand = {
+        **entry(5, "same"),
+        "generator": drawings.EVAND_GENERATOR,
+        "run": {"id": "r", "output": "same"},
+    }
     assert drawings.project_modifications(evand, kinds) == [drawings.SAME_SIDE_RESOLVE]
-    bound = {**entry(5, "bound"), "generator": drawings.EVAND_GENERATOR}
+    bound = {
+        **entry(5, "bound"),
+        "generator": drawings.EVAND_GENERATOR,
+        "run": {"id": "r", "output": "solved"},
+    }
     assert drawings.project_modifications(bound, kinds) == []
     # Before the retry ladder the index kept the one retry's arguments.
-    legacy = {**evand, "run": {"id": "r", "retried_with": ["--dps", "100"]}}
+    legacy = {**evand, "run": {"id": "r", "output": "same", "retried_with": ["--dps", "100"]}}
     assert drawings.project_modifications(legacy, kinds) == [
         "retry rung dps-100",
         drawings.SAME_SIDE_RESOLVE,
     ]
     patched = {
         **bound,
-        "run": {"id": "r", "rungs": ["force-kkt", "stall-stop", "first-pass"]},
+        "run": {"id": "r", "output": "solved", "rungs": ["force-kkt", "stall-stop", "first-pass"]},
         "regularization": {
             **bound["regularization"],
             "method": "Evan Daniel's search/regularize (MIT), "
@@ -257,6 +265,21 @@ def test_the_modifications_are_read_from_the_index_entry_alone() -> None:
     assert "modifications" not in drawings.item(axis, "T-001", None)
 
 
+def test_a_solve_the_re_solve_refused_is_not_credited_with_it() -> None:
+    """The same-side re-solve is named where it made the view (`run.output` is `same`),
+    not wherever the view sits at the witness's side: at 241 and 302 the re-solve was
+    refused (overlap, unmatched rotation) and his solve, unmodified, closed to the
+    witness's side itself, as 83's, refused the same way, sits at the bound (review A1 on
+    #653)."""
+    kinds: dict[str, str] = {}
+    run = {"id": "r", "output": "solved", "rungs": []}
+    for n, side in ((83, "bound"), (241, "same")):
+        refused = {**entry(n, side), "generator": drawings.EVAND_GENERATOR, "run": run}
+        assert drawings.project_modifications(refused, kinds) == []
+    resolved = {**refused, "run": {**run, "output": "same"}}
+    assert drawings.project_modifications(resolved, kinds) == [drawings.SAME_SIDE_RESOLVE]
+
+
 def test_an_unknown_generator_rung_or_registering_kind_is_refused() -> None:
     """Credit and modifications fail closed: a generator the tool does not map, a rung or
     retry argument it has no words for, and a registering result that is not an upper
@@ -270,19 +293,25 @@ def test_an_unknown_generator_rung_or_registering_kind_is_refused() -> None:
         drawings.project_case_item(
             drawings.Drawn(stranger, drawings.Resolved("T-001", "x"), None), {}
         )
-    evand = {**entry(5, "bound"), "generator": drawings.EVAND_GENERATOR}
+    evand = {
+        **entry(5, "bound"),
+        "generator": drawings.EVAND_GENERATOR,
+        "run": {"id": "r", "output": "solved"},
+    }
     with pytest.raises(drawings.RegularizedDrawingsError, match="names no credit"):
         drawings.project_case_item(
             drawings.Drawn(evand, drawings.Resolved("T-001", "x"), []), {}
         )
     for run in (
-        {"id": "r", "rungs": ["dps-200"]},
-        {"id": "r", "retried_with": ["--dps", "80"]},
-        {"id": "r", "retried_with": ["--relax"]},
+        {"id": "r", "output": "solved", "rungs": ["dps-200"]},
+        {"id": "r", "output": "solved", "retried_with": ["--dps", "80"]},
+        {"id": "r", "output": "solved", "retried_with": ["--relax"]},
+        {"id": "r"},
+        {"id": "r", "output": "grid"},
     ):
         with pytest.raises(drawings.RegularizedDrawingsError, match="n=5"):
             drawings.project_modifications({**evand, "run": run}, kinds)
-    stalled = {**evand, "run": {"id": "r", "rungs": ["stall-stop"]}}
+    stalled = {**evand, "run": {"id": "r", "output": "solved", "rungs": ["stall-stop"]}}
     assert drawings.project_modifications(stalled, kinds) == []
     assert drawings.upper_bound_result({"id": "T-003", "kind": "upper-bound"}) == "T-003"
     with pytest.raises(drawings.RegularizedDrawingsError, match="T-004 registers"):
