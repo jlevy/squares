@@ -268,36 +268,38 @@ def test_the_allowlist_only_shrinks(tmp_path: Path) -> None:
     assert found == [f"n={regular['n']}: PENDING_ALLOWED names no bead: 'later'"]
 
 
-def test_a_record_older_than_its_witness_fails_the_gate(tmp_path: Path) -> None:
+def test_a_record_naming_another_witness_fails_the_gate(tmp_path: Path) -> None:
     record = _record()
     row = record["states"][0]
-    row["witness_sha256"] = "0" * 64
-    now = defaults.witness_digest(defaults.index_entries()[row["n"]])
+    row["witness"]["id"] = "W-elsewhere"
     found, _listed = defaults.state_problems(_write(tmp_path, record))
-    assert found == [
-        (
-            f"n={row['n']}: the witness changed since its state was recorded (000000000000 "
-            f"to {now[:12]}); run `{defaults.GENERATOR} --update`"
-        )
-    ]
+    stale = f"run `{defaults.GENERATOR} --update`"
+    assert found == [f"n={row['n']}: the record names witness 'W-elsewhere'; {stale}"]
 
 
-def test_a_settled_count_goes_pending_when_its_witness_changes() -> None:
+def test_the_state_follows_the_witness_its_source_and_side_identify() -> None:
+    # A new house changes the source or the side the witness carries, and a decision made
+    # on the old one no longer applies: the count reads pending again (OR-16: identified
+    # by what the witness says, never by a digest of its bytes).
     n = min(n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED)
-    moved = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(witness_sha256="1" * 64)}
-    found, _listed = defaults.state_problems(settled=moved)
-    stale = f"n={n}: SETTLED decided witness 111111111111"
-    assert any(line.startswith(stale) for line in found)
-
     record = _record()
     row = next(row for row in record["states"] if row["n"] == n)
-    entry = defaults.index_entries()[n]
-    state = defaults.count_state(
-        n, entry, _measured(record, n), row["witness_sha256"], settled=moved
+    assert row["state"] == defaults.DECIDED
+    assert (row["witness"]["source"], row["witness"]["side"]) == (
+        defaults.SETTLED[n].source,
+        defaults.SETTLED[n].side,
     )
+    moved = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(side="1/1")}
+    found, _listed = defaults.state_problems(settled=moved)
+    assert any(line.startswith(f"n={n}: SETTLED was decided on ") for line in found)
+
+    entry = defaults.index_entries()[n]
+    state = defaults.count_state(n, entry, _measured(record, n), row["witness"], settled=moved)
     assert state["state"] == defaults.PENDING
     assert state["why"].startswith("no strong generator has decided this witness")
     assert [found["run"] for found in state["decisions"]] == [None]
+    # The witness the record names is the one the index holds, as it identifies itself.
+    assert row["witness"] == defaults.witness_identity(defaults.REPO, entry)
 
 
 def test_a_lapsed_view_reads_pending_and_names_what_lapsed() -> None:
@@ -307,13 +309,11 @@ def test_a_lapsed_view_reads_pending_and_names_what_lapsed() -> None:
     entry = dict(defaults.index_entries()[n])
     lapse = {"generator": "evand-regularize", "run": "a-run", "witness_sha256": "2" * 64}
     entry[defaults.LAPSED] = lapse
-    state = defaults.count_state(
-        n, entry, _measured(record, n), row["witness_sha256"], allowed={}
-    )
+    state = defaults.count_state(n, entry, _measured(record, n), row["witness"], allowed={})
     assert state["state"] == defaults.PENDING
     assert state["lapsed"] == lapse
     why = str(state["why"])
-    assert "the evand-regularize view of witness 222222222222 lapsed (run a-run)" in why
+    assert "the evand-regularize view of the previous witness lapsed (run a-run)" in why
     assert "allowed pending" not in why
 
 

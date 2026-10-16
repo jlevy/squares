@@ -164,18 +164,19 @@ are defaults. The posters show the defaults as they stood when they were drawn a
 trail until the next version or a redraw (`build_known_best_atlas --update-composites`).
 
 The same record’s `states` gives every count, n = 1..324, its regularization state: what
-is drawn, the drawn picture’s measures, the witness’s digest, the runs that decided that
-witness, and one of `regularized` (a view of Evan Daniel’s regularizer or the grid-slack
-generator is drawn), `regular-as-published` (the house drawing has no uneven and no
-near-axis square), `decided-no-better` (the strong generators ran on this witness and
-drew nothing the improvement rule takes), `exempt` (set aside with the bead that owns
-it) or `pending`. The axis tool’s view alone never makes a count regularized: it is the
-reference and fallback.
+is drawn, the drawn picture’s measures, the witness (its id, source and side), the runs
+that decided that witness, and one of `regularized` (a view of Evan Daniel’s regularizer
+or the grid-slack generator is drawn), `regular-as-published` (the house drawing has no
+uneven and no near-axis square), `decided-no-better` (the strong generators ran on this
+witness and drew nothing the improvement rule takes), `exempt` (set aside with the bead
+that owns it) or `pending`. The axis tool’s view alone never makes a count regularized:
+it is the reference and fallback.
 A count is `decided-no-better` without an entry of its own where the layer holds a
 strong generator’s view of the current witness that the rule does not draw; otherwise
 the decision goes into `default_drawings.SETTLED` with the runs, the outcome, where it
-is recorded and the witness digest it was made on, so a new witness makes the count
-pending again. When a pull request regularizes a pending count, it takes the count off
+is recorded and the witness’s source and side it was made on, so a new witness makes the
+count pending again.
+When a pull request regularizes a pending count, it takes the count off
 `default_drawings.PENDING_ALLOWED`.
 
 The note says who regularized the drawing and that a pure regularization, one whose side
@@ -238,9 +239,9 @@ drawings, checks the register, and measures every drawn view against its house d
 again (`default pictures improve on their house drawings`), listing the counts that keep
 the house picture and why.
 `every drawn picture is regularized, regular as published, decided or exempt` reads each
-count’s state back without measuring, compares its witness digest with the atlas’s, and
-fails on a pending count that `PENDING_ALLOWED` does not name, on a named count that is
-no longer pending, and on a `SETTLED` entry made on another witness.
+count’s state back without measuring, holds it to the index, and fails on a pending
+count that `PENDING_ALLOWED` does not name, on a named count that is no longer pending,
+and on a `SETTLED` entry made on another witness.
 Run it alone with `python -m devtools.default_drawings --check-state`. `--verify-atlas`
 decides every drawn view again on both exact routes and takes several minutes at four
 workers; CI runs it in the deferred `regularized-views` job.
@@ -313,12 +314,12 @@ To redraw the count:
 1. Draw the axis tool’s view of the new witness with
    `python -m devtools.regularize_axis_components --update-atlas --n N`. Where another
    generator’s view lapses, the axis record carries a `lapsed` block naming that
-   generator, its run and the old witness’s digest.
+   generator and its run.
 2. Run `python -m devtools.default_drawings --update`. The count is now `pending`, and
    `--check-state` fails on it.
 3. Run both generators on the new witness, then select and admit as above.
    Where neither draws better, settle the count in `default_drawings.SETTLED` with the
-   runs and the new witness’s digest.
+   runs and the new witness’s source and side.
    Where the runs must wait, allow the count in `PENDING_ALLOWED` with the bead that
    owns them, in the same pull request as the adoption, so the deferral is reviewed.
 

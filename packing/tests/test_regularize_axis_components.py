@@ -674,15 +674,13 @@ def test_another_generators_view_is_checked_kept_and_decided_again(
     again = json.loads(layout.index.read_text())
     assert next(record for record in again["entries"] if record["n"] == 4) == lapsed
 
-    # A lapse that names the witness the record holds did not happen, and is refused.
-    lapsed[LAPSED]["witness_sha256"] = lapsed["source"]["sha256"]
+    # A lapse names the generator whose view lapsed and its run, and only this tool's own
+    # record carries one.
+    lapsed[LAPSED]["generator"] = ALGORITHM
     again["entries"] = [lapsed if record["n"] == 4 else record for record in again["entries"]]
     layout.index.write_text(json.dumps(again), encoding="utf-8")
     assert check_atlas(layout) == [
-        (
-            "n=4: the lapsed view was derived from the witness the record holds, so it "
-            "did not lapse"
-        )
+        f"n=4: the lapsed view's generator is {ALGORITHM!r}",
     ]
 
 

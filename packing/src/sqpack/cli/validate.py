@@ -3795,13 +3795,14 @@ def _default_drawings(context: Context) -> str:
 
 
 def _regularization_state(context: Context) -> str:
-    # Under a second: every count's regularization state in `default-drawings.json` read
-    # back, its witness digest compared with the file the atlas holds, and the pending
-    # counts held to `default_drawings.PENDING_ALLOWED`, which only shrinks (think-gvke).
-    # It measures nothing, so it catches what the measuring check above cannot see as a
-    # failure: n = 176 drew its raw house for a day after an adoption lapsed its
-    # grid-slack view, with every gate green. A new pending count fails here until the
-    # strong generators decide its witness or a reviewed change allows it with its bead.
+    # About a second: every count's regularization state in `default-drawings.json` read
+    # back and held to the index, and the pending counts held to
+    # `default_drawings.PENDING_ALLOWED`, which only shrinks (think-gvke). It measures
+    # nothing: the step above decides every state again, so a record older than a witness
+    # fails there, and this one fails on what that check lists without failing. n = 176
+    # drew its raw house for a day after an adoption lapsed its grid-slack view, with every
+    # gate green. A new pending count fails here until the strong generators decide its
+    # witness or a reviewed change allows it with its bead.
     output = _module(context, "devtools.default_drawings", "--check-state")
     _require_text(output, "regularization state check passed")
     return output

@@ -48,22 +48,25 @@ process as well." n = 176 drew its raw house on the site for a day while the lay
 index said `regularized`, because adopting a new house lapsed the grid-slack view
 `regularize_axis_components --update-atlas` had kept, and no record said so (think-gvke).
 So the record's `states` gives every count n = 1..324 what is drawn, the drawn picture's
-measures, the witness's SHA-256, the runs that decided that witness, and one state:
+measures, the witness it was decided on (its id, source and side), the runs that decided
+that witness, and one state:
 
 - `regularized`: a view of Evan Daniel's regularizer or the grid-slack generator is drawn
   (`STRONG_GENERATORS`);
 - `regular-as-published`: the house drawing has no uneven and no near-axis square;
 - `decided-no-better`: the strong generators ran on this very witness and drew nothing
-  the improvement rule takes (`SETTLED`, by witness digest);
+  the improvement rule takes (`SETTLED`, by the witness's source and side);
 - `exempt`: the count is set aside with a reason and the bead that owns it (`SETTLED`);
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
   (the index's `lapsed`, which `--update-atlas` writes) or that only the axis tool's
   view, the reference and fallback, has drawn.
 
-`--check-state` is the gate, reading digests and the record, measuring nothing: it fails
-on a pending count `PENDING_ALLOWED` does not name, on a named count that is no longer
-pending, on a record older than a witness, and on a `SETTLED` entry made on another
-witness than the one the atlas holds or for a count that no longer needs it.
+`--check-state` is the gate, reading the record and the index, measuring nothing: it
+fails on a pending count `PENDING_ALLOWED` does not name, on a named count that is no
+longer pending, and on a `SETTLED` entry made on another witness than the one the record
+was decided on, or for a count that no longer needs it. A record older than a witness is
+`--check`'s to catch, by deciding every count again: a witness is identified by the
+source and side it carries, never by a digest of its bytes (OR-16).
 
 
 The site's drawings (`render_frontier_page`), the atlas tiles (`overview_sections`) and
@@ -90,7 +93,7 @@ from strif import atomic_output_file
 
 from devtools import improvement_rule
 from devtools.improvement_rule import MEASURES
-from devtools.regularize_axis_components import ABOVE_U, ALGORITHM, LAPSED, digest
+from devtools.regularize_axis_components import ABOVE_U, ALGORITHM, LAPSED
 from sqpack import retained_json
 from sqpack.workers import worker_count
 from sqpack.yamlio import load_yaml
@@ -130,12 +133,13 @@ BEAD = re.compile(r"\bthink-[0-9a-z]{4}\b")
 
 class Settled(NamedTuple):
     """A count the strong generators decided, or that is set aside, on one witness: its
-    state (`DECIDED` or `EXEMPT`), that witness's SHA-256 as the index records it, the
-    runs that decided it as (generator, run id), what they found, and where the record
-    says so."""
+    state (`DECIDED` or `EXEMPT`), that witness as it identifies itself (its source's key
+    and its side, exactly as the witness writes them), the runs that decided it as
+    (generator, run id), what they found, and where the record says so."""
 
     state: str
-    witness_sha256: str
+    source: str
+    side: str
     runs: tuple[tuple[str, str], ...]
     outcome: str
     evidence: str
@@ -165,28 +169,32 @@ _REFUSED_DECIMAL = (
 SETTLED: dict[int, Settled] = {
     39: Settled(
         EXEMPT,
-        "4fa32e151c5b62af204cdd5d71f27259a4647cbf3447253af4ec79bdebdb1d94",
+        "Kingbird derived numerical facts",
+        "6.8107220830686488516977794443517526346472763123335",
         (),
         _REFUSED_DECIMAL,
         "think-yk2h",
     ),
     55: Settled(
         EXEMPT,
-        "4c395877784a7052f7e2eb2f039479731fc3cbfe4d94ea41b78dae270abb99ad",
+        "Kingbird derived numerical facts",
+        "7.9457710075039129789580095385274780713965449730227",
         (),
         _REFUSED_DECIMAL,
         "think-yk2h",
     ),
     102: Settled(
         DECIDED,
-        "a252f05aeef27f6e64cf3ff7272f17086cd89a0f2f2cc816276ca7de663e4902",
+        "[Daniel regularized lists 2026-10-10]",
+        "10605828696431578360490734944053/1000000000000000000000000000000",
         _ADOPT518,
         _T146,
         _README,
     ),
     110: Settled(
         DECIDED,
-        "2e6de0a4993519cd61f83b00ea1e45780625d31b39d5ef5fbe70bb4de6810210",
+        "[franciscouzo square-packing 2026-09-27]",
+        "10.996783396634358",
         (("evand-regularize", "evand-regularize-bound-1013"),),
         "Evan Daniel's exact view at U draws fewer shared sides (house 243 to 239), and "
         "the owner keeps the axis tool's view at the witness's side",
@@ -194,28 +202,34 @@ SETTLED: dict[int, Settled] = {
     ),
     123: Settled(
         DECIDED,
-        "93ea5694fddfeda898ce8183e9bcd197800126723beeffadcacac414930cd38d",
+        "[Daniel regularized lists 2026-10-10]",
+        "2897844536374424539887715795867/250000000000000000000000000000",
         _ADOPT518,
         "neither generator drew better than the axis tool's view",
         _README,
     ),
     155: Settled(
         DECIDED,
-        "0663cee29900c268ce0bd0cfd6525a8c0e71581be836d8cf5f3f13b68a5c72af",
+        "[Ostashev records 2026-10-11]",
+        "64762127034792280678268012662770039849775757530809316735783064762127034792280"
+        "678268012662770039849775757530809316735783/500000000000000000000000000000000000"
+        "0000000000000000000000000000000000000000000000000000000000000000000000000000000000",
         _ADOPT518,
         "neither generator drew better than the axis tool's view",
         _README,
     ),
     179: Settled(
         DECIDED,
-        "a7778adde5e8c169729e8bfc1cf59632669d9303e57196dc230d680af6e8da93",
+        "[Gupta rational refinements 2026-10-08]",
+        "13883795490510898440309946897577/1000000000000000000000000000000",
         (("evand-regularize", "evand-regularize-full"),),
         "refused at row 7: a house or stage total of shared sides falls",
         "docs/project/research/research-2026-10-11-regularization-state-and-approach.md",
     ),
     180: Settled(
         DECIDED,
-        "d453d21e11f0b2b1a035635df2a7c808ba3063b779234508820614677e1f89cf",
+        "[Couzo exact refinements 2026-10-08]",
+        "13916993522477832483558124720393/1000000000000000000000000000000",
         (*_ADOPT518, ("evand-regularize", "evand-regularize-adopt518-v2-rerun-2026-10-13")),
         "Evan Daniel's view tied the axis tool's on all seven measures at the same side "
         "and was withdrawn (1d8f982ff)",
@@ -223,7 +237,8 @@ SETTLED: dict[int, Settled] = {
     ),
     236: Settled(
         DECIDED,
-        "77ef40d122d18d2de38b090e45f8e07cd4b8c8f8c825b7171bbe5c6a5532fe8c",
+        "[Daniel regularized lists 2026-10-10]",
+        "3172791149431853484523540541259/200000000000000000000000000000",
         _ADOPT518,
         "Evan Daniel's view drew one more angle class and was withdrawn (bd82e3a54); the "
         "axis tool's view does not improve on the house",
@@ -231,35 +246,40 @@ SETTLED: dict[int, Settled] = {
     ),
     258: Settled(
         DECIDED,
-        "da8920e0441dc0180b87fc8a78af5ab9c5704745cd0f4085eb150992d9c07669",
+        "[Daniel regularized lists 2026-10-10]",
+        "16563448002133789379765816191273/1000000000000000000000000000000",
         _ADOPT518,
         _T146,
         _README,
     ),
     263: Settled(
         DECIDED,
-        "e6e792983e2b1409179e8a1758c9138d0ee9885b8f6691c0d804df22c62e47c8",
+        "[Daniel regularized lists 2026-10-10]",
+        "16733166007899378970679613144039/1000000000000000000000000000000",
         _ADOPT518,
         _T146,
         _README,
     ),
     269: Settled(
         DECIDED,
-        "cce03481861340054989675f62d8f5f086392c51c5212b6762cd5961eeca2fc1",
+        "[Daniel regularized lists 2026-10-10]",
+        "16901513582189132198548012552701/1000000000000000000000000000000",
         _ADOPT518,
         _T146,
         _README,
     ),
     290: Settled(
         EXEMPT,
-        "f7328bab3dfa6b85db8c2ecdc01765e6a6fca9c7c45115502e5ee8496c2c78b9",
+        "Kingbird derived numerical facts",
+        "17.53553390593273762200422181052425",
         (),
         _REFUSED_DECIMAL,
         "think-yk2h",
     ),
     291: Settled(
         EXEMPT,
-        "7a002b02cb46b615fbef34dc6fcb6bdd6d2bb32298d6958e2955d04d173ed21d",
+        "Kingbird derived numerical facts",
+        "17.53553390593273762200422181052425",
         (),
         _REFUSED_DECIMAL,
         "think-yk2h",
@@ -424,9 +444,25 @@ def measure_house(unit: tuple[Path, int, Mapping[int, Mapping[str, Any]]]) -> di
     return {"n": n, "measures": {key: house[key] for key in MEASURES}}
 
 
+def witness_identity(tree: Path, entry: Mapping[str, Any]) -> dict[str, str | None]:
+    """The witness a count's index entry names, as it identifies itself: its id, its
+    source's key and its side, as written. A state is bound to these, never to a digest of
+    the file's bytes (OR-16): a new house changes the source or the side."""
+    witness = load_yaml((tree / entry["source"]["witness"]).read_text(encoding="utf-8"))[
+        "witness"
+    ]
+    source = witness.get("source") or {}
+    return {
+        "id": str(witness["id"]),
+        "source": None if source.get("key") is None else str(source["key"]),
+        "side": str(witness["side"]),
+    }
+
+
 def _measure(unit: tuple[Path, int, Mapping[int, Mapping[str, Any]]]) -> dict[str, Any]:
+    """One count measured: `decide` where the layer draws a view, else `measure_house`."""
     _tree, n, entries = unit
-    return decide(unit) if n in entries else measure_house(unit)
+    return {"n": n, "measured": decide(unit) if n in entries else measure_house(unit)}
 
 
 def _axis_record(entry: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -442,38 +478,29 @@ def _axis_outcome(record: Mapping[str, Any]) -> str:
     return {"regularized": "view", "unchanged": "no change"}.get(status, status)
 
 
-def run_decisions(
-    entry: Mapping[str, Any], witness_sha256: str, settled: Settled | None
-) -> list[dict[str, Any]]:
-    """The tool runs that decided a count's witness, and what each found: the axis tool's
-    record, the strong generator whose view the layer holds, and a `SETTLED` entry's runs
-    where it was made on the witness the atlas holds now."""
+def _settled_here(held: Settled | None, witness: Mapping[str, Any]) -> Settled | None:
+    """A `SETTLED` entry where it was made on this witness, by its source and side."""
+    if held is None or (held.source, held.side) != (witness["source"], witness["side"]):
+        return None
+    return held
+
+
+def run_decisions(entry: Mapping[str, Any], settled: Settled | None) -> list[dict[str, Any]]:
+    """The tool runs that decided a count's current witness, and what each found: the axis
+    tool's record and the strong generator whose view the layer holds, both of the
+    witness the atlas holds (`--check-atlas` holds the index to it), and a `SETTLED`
+    entry's runs where it was made on that witness."""
     axis = _axis_record(entry)
     found: list[dict[str, Any]] = [
-        {
-            "generator": ALGORITHM,
-            "run": None,
-            "witness_sha256": axis["source"]["sha256"],
-            "outcome": _axis_outcome(axis),
-        }
+        {"generator": ALGORITHM, "run": None, "outcome": _axis_outcome(axis)}
     ]
     if entry.get("generator") != ALGORITHM:
         found.append(
-            {
-                "generator": entry["generator"],
-                "run": str(entry["run"]["id"]),
-                "witness_sha256": entry["source"]["sha256"],
-                "outcome": "view",
-            }
+            {"generator": entry["generator"], "run": str(entry["run"]["id"]), "outcome": "view"}
         )
-    if settled is not None and settled.witness_sha256 == witness_sha256:
+    if settled is not None:
         found.extend(
-            {
-                "generator": generator,
-                "run": run,
-                "witness_sha256": settled.witness_sha256,
-                "outcome": settled.outcome,
-            }
+            {"generator": generator, "run": run, "outcome": settled.outcome}
             for generator, run in settled.runs
         )
     return found
@@ -483,14 +510,14 @@ def count_state(
     n: int,
     entry: Mapping[str, Any],
     decided: Mapping[str, Any],
-    witness_sha256: str,
+    witness: Mapping[str, Any],
     *,
     settled: Mapping[int, Settled] | None = None,
     allowed: Mapping[int, str] | None = None,
 ) -> dict[str, Any]:
     """One count's regularization state, from its index entry, what `decide` or
-    `measure_house` measured (`decided`), and its witness's digest now (the module's
-    docstring)."""
+    `measure_house` measured (`decided`), and its witness as it identifies itself
+    (`witness_identity`); the module's docstring gives the states."""
     settled = SETTLED if settled is None else settled
     allowed = PENDING_ALLOWED if allowed is None else allowed
     viewed = decided.get("default") == REGULARIZED
@@ -502,20 +529,15 @@ def count_state(
     )
     drawn = {key: value[VIEW] for key, value in measures.items()} if viewed else house
     generator = str(entry["generator"]) if viewed else None
-    held = settled.get(n)
-    current = held if held is not None and held.witness_sha256 == witness_sha256 else None
+    current = _settled_here(settled.get(n), witness)
     lapse = entry.get(LAPSED) if entry.get("generator") == ALGORITHM else None
-    strong_here = (
-        entry.get("generator") in STRONG_GENERATORS
-        and entry["source"]["sha256"] == witness_sha256
-    )
     if generator in STRONG_GENERATORS:
         state = REGULARIZED_STATE
         why = f"the {generator} view of this witness is drawn (run {entry['run']['id']})"
     elif house["uneven_axis"] == 0 and house["near_axis"] == 0:
         state = REGULAR_AS_PUBLISHED
         why = "the house drawing has no uneven and no near-axis square"
-    elif strong_here:
+    elif entry.get("generator") in STRONG_GENERATORS:
         # The layer holds a strong generator's view of this witness, and the improvement
         # rule does not draw it: that generator decided the witness, and drew no better.
         state = DECIDED
@@ -532,8 +554,8 @@ def count_state(
         why = f"no strong generator has decided this witness; {what} is drawn"
         if lapse:
             why += (
-                f"; the {lapse['generator']} view of witness {lapse['witness_sha256'][:12]} "
-                f"lapsed (run {lapse['run']})"
+                f"; the {lapse['generator']} view of the previous witness lapsed "
+                f"(run {lapse['run']})"
             )
         if n in allowed:
             why += f"; allowed pending: {allowed[n]}"
@@ -542,17 +564,17 @@ def count_state(
         "state": state,
         "drawn": VIEW if viewed else HOUSE,
         "generator": generator,
-        "witness_sha256": witness_sha256,
+        "witness": dict(witness),
         "measures": drawn,
-        "decisions": run_decisions(entry, witness_sha256, current),
+        "decisions": run_decisions(entry, current),
         "lapsed": lapse,
         "why": why,
     }
 
 
-def witness_digest(entry: Mapping[str, Any], tree: Path = REPO) -> str:
-    """The SHA-256 of the witness file a count's index entry names, as it is now."""
-    return digest((tree / entry["source"]["witness"]).read_bytes())
+def _identify(unit: tuple[Path, Mapping[str, Any]]) -> dict[str, str | None]:
+    tree, entry = unit
+    return witness_identity(tree, entry)
 
 
 def document(*, workers: int = 1, tree: Path = REPO, index: Path = INDEX) -> dict[str, Any]:
@@ -561,16 +583,18 @@ def document(*, workers: int = 1, tree: Path = REPO, index: Path = INDEX) -> dic
     every = index_entries(index)
     entries = {n: entry for n, entry in every.items() if entry["status"] == REGULARIZED}
     units = [(tree, n, entries) for n in sorted(every, reverse=True)]
+    named = [(tree, every[n]) for n in sorted(every)]
     if workers > 1 and len(units) > 1:
         with ProcessPoolExecutor(max_workers=workers) as pool:
             measured = list(pool.map(_measure, units))
+            identities = list(pool.map(_identify, named))
     else:
         measured = [_measure(unit) for unit in units]
-    by_n = {int(row["n"]): row for row in measured}
+        identities = [_identify(unit) for unit in named]
+    by_n = {int(row["n"]): row["measured"] for row in measured}
+    witnesses = dict(zip(sorted(every), identities, strict=True))
     rows = [by_n[n] for n in sorted(entries)]
-    states = [
-        count_state(n, every[n], by_n[n], witness_digest(every[n], tree)) for n in sorted(every)
-    ]
+    states = [count_state(n, every[n], by_n[n], witnesses[n]) for n in sorted(every)]
     drawn = sum(1 for row in rows if row["default"] == REGULARIZED)
     return {
         "softschema": {"contract": CONTRACT, "schema": SCHEMA, "status": "enforced"},
@@ -709,14 +733,13 @@ def _states_summary(rows: Sequence[Mapping[str, Any]]) -> str:
 def state_problems(
     record: Path = RECORD,
     index: Path = INDEX,
-    tree: Path = REPO,
     *,
     settled: Mapping[int, Settled] | None = None,
     allowed: Mapping[int, str] | None = None,
 ) -> tuple[list[str], list[str]]:
-    """What fails the regularization-state gate, and the pending counts it lists: digests
-    and the retained record only, nothing measured (`--check` holds the record to the
-    data)."""
+    """What fails the regularization-state gate, and the pending counts it lists: the
+    retained record against the index, `SETTLED` and `PENDING_ALLOWED`, nothing measured
+    and no witness read (`--check` holds the record to the data by deciding it again)."""
     settled = SETTLED if settled is None else settled
     allowed = PENDING_ALLOWED if allowed is None else allowed
     found = json.loads(record.read_text(encoding="utf-8"))
@@ -732,12 +755,9 @@ def state_problems(
         )
     for n in sorted(set(rows) & set(every)):
         row, entry = rows[n], every[n]
-        now = witness_digest(entry, tree)
-        if row["witness_sha256"] != now:
-            problems.append(
-                f"n={n}: the witness changed since its state was recorded "
-                f"({row['witness_sha256'][:12]} to {now[:12]}); {stale}"
-            )
+        witness = row.get("witness") or {}
+        if witness.get("id") != entry["source"]["id"]:
+            problems.append(f"n={n}: the record names witness {witness.get('id')!r}; {stale}")
         if row["state"] not in STATES:
             problems.append(f"n={n}: state {row['state']!r}")
         if row["drawn"] == VIEW and row["generator"] != entry.get("generator"):
@@ -745,11 +765,13 @@ def state_problems(
                 f"n={n}: the record draws another view than the index holds; {stale}"
             )
         held = settled.get(n)
-        if held is not None and held.witness_sha256 != now:
+        if held is not None and _settled_here(held, witness) is None:
             problems.append(
-                f"n={n}: SETTLED decided witness {held.witness_sha256[:12]}, and the atlas now "
-                f"holds {now[:12]}; run the generators on it (regularization-process.md, "
-                '"When a Witness Changes"), then settle it again or take it off SETTLED'
+                f"n={n}: SETTLED was decided on {held.source} at side {held.side[:24]}, and "
+                f"the record's witness is {witness.get('source')} at side "
+                f"{str(witness.get('side'))[:24]}; run the generators on it "
+                '(regularization-process.md, "When a Witness Changes"), then settle it '
+                "again or take it off SETTLED"
             )
         elif held is not None and row["state"] in (REGULARIZED_STATE, REGULAR_AS_PUBLISHED):
             problems.append(f"n={n}: SETTLED names it, but it is {row['state']}; take it off")
@@ -835,7 +857,7 @@ def parser() -> argparse.ArgumentParser:
     mode.add_argument(
         "--check-state",
         action="store_true",
-        help="the regularization-state gate: digests and the record, nothing measured",
+        help="the regularization-state gate: the record and the index, nothing measured",
     )
     command.add_argument(
         "--workers",

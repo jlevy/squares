@@ -69,7 +69,7 @@ $defs:
   state:
     type: object
     additionalProperties: false
-    required: [n, state, drawn, generator, witness_sha256, measures, decisions, lapsed, why]
+    required: [n, state, drawn, generator, witness, measures, decisions, lapsed, why]
     properties:
       n: {type: integer, minimum: 1}
       state:
@@ -87,32 +87,40 @@ $defs:
       generator:
         description: The drawn view's generator; null where the house is drawn.
         type: [string, "null"]
-      witness_sha256:
+      witness:
         description: >-
-          The SHA-256 of the witness file the atlas holds, a cache key: the state was
-          decided on this witness.
-        type: string
-        pattern: ^[0-9a-f]{64}$
+          The witness the state was decided on, as it identifies itself: its id, its
+          source's key and its side, as written. `default_drawings.SETTLED` binds a
+          decision to the source and side, never to a digest of the file (OR-16).
+        type: object
+        additionalProperties: false
+        required: [id, source, side]
+        properties:
+          id: {type: string, minLength: 1}
+          source: {type: [string, "null"]}
+          side: {type: string, minLength: 1}
       measures:
         description: The drawn picture's measures, as `entries` measure a view's.
         type: object
         additionalProperties: {type: [integer, "null"]}
       decisions:
-        description: The tool runs that decided a witness of the count, and what each found.
+        description: >-
+          The tool runs that decided this witness, and what each found: the axis tool's
+          record (run null), a strong generator's view the layer holds, and a SETTLED
+          entry's runs where it was made on this witness.
         type: array
         items:
           type: object
           additionalProperties: false
-          required: [generator, run, witness_sha256, outcome]
+          required: [generator, run, outcome]
           properties:
             generator: {type: string, minLength: 1}
             run: {type: [string, "null"]}
-            witness_sha256: {type: string, pattern: '^[0-9a-f]{64}$'}
             outcome: {type: string, minLength: 1}
       lapsed:
         description: >-
           Another generator's view that lapsed when the witness changed, as the index's
-          axis record carries it; null where none did.
+          axis record carries it, its witness digest provenance only; null where none did.
         oneOf:
           - type: "null"
           - type: object

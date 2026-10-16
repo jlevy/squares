@@ -326,9 +326,10 @@ grid-slack generator is drawn, `regular-as-published` where the house drawing ha
 uneven and no near-axis square, `decided-no-better` where the strong generators ran on
 that very witness and drew nothing better, `exempt` with the bead that owns it, and
 `pending` otherwise.
-Each state carries the drawn picture’s measures, the witness’s digest and the runs that
-decided it. The index’s `status: regularized` means only that the layer holds a view: at
-n = 176 it held the axis tool’s view while the raw house was drawn.
+Each state carries the drawn picture’s measures, the witness’s id, source and side, and
+the runs that decided it.
+The index’s `status: regularized` means only that the layer holds a view: at n = 176 it
+held the axis tool’s view while the raw house was drawn.
 A view that lapses with its witness is now recorded on the axis tool’s record (`lapsed`)
 rather than only printed.
 The records-tier step

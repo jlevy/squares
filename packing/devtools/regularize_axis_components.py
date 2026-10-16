@@ -2263,8 +2263,8 @@ def _check_record(
 
 
 def _lapse_problems(n: int, record: Mapping[str, Any]) -> list[str]:
-    """A `LAPSED` block sits on this tool's own record, and names another generator, a
-    run, and a witness other than the one the record now derives from."""
+    """A `LAPSED` block sits on this tool's own record and names another generator and a
+    run. Its witness digest is provenance only, compared with nothing (OR-16)."""
     lapse = record.get(LAPSED)
     if lapse is None:
         return []
@@ -2276,11 +2276,6 @@ def _lapse_problems(n: int, record: Mapping[str, Any]) -> list[str]:
         problems.append(f"n={n}: the lapsed view's generator is {lapse.get('generator')!r}")
     if not lapse.get("run"):
         problems.append(f"n={n}: the lapsed view names no run")
-    if lapse.get("witness_sha256") == record["source"]["sha256"]:
-        problems.append(
-            f"n={n}: the lapsed view was derived from the witness the record holds, so it "
-            "did not lapse"
-        )
     return problems
 
 
