@@ -97,9 +97,12 @@ CONFIRMED_RANK = 3
 CONFIRMING_ORIGINS = frozenset({"replayed-here", "audited-here"})
 DISPLAY_PLACES = 16
 #: The owner set the house rule on 16 October 2026: "We should always be adopting the
-#: smallest packing and then regularizing it." The adoption pass of 16 October (#657)
-#: ran under the rule of 15 October, and its prior state is archived under that day, so
-#: the first pass that adopts under the house rule is dated no earlier than this.
+#: smallest packing and then regularizing it." The deferrals it allows are keyed on that
+#: day (`default_drawings.RULE_SET_ON`), and the records say it ended each wait.
+RULE_SET_ON = "2026-10-16"
+#: The adoption pass of 16 October (#657) ran under the rule of 15 October, and its prior
+#: state is archived under that day, so the first pass that adopts under the house rule
+#: is dated no earlier than this. It switches the replay of the records as written only.
 RULE_PASSES_FROM = "2026-10-17"
 #: The beads that own the adoptions the house rule stages here, each labelled
 #: `regularization` and `validation` with stage 4's block and a row in the pass's backlog
@@ -121,18 +124,21 @@ STAGING_REASONS = (NEXT_PULL_REQUEST, OVER_CAP, NO_WRITER)
 
 @dataclass(frozen=True)
 class Hold:
-    """A hold the house rule lifted: whose houses waited on the owner, why, and since when."""
+    """A hold the house rule lifted: whose houses waited on the owner, why, from when, and
+    the day the rule lifted it."""
 
     #: Whose houses, as prose names them: ``PR #574's``.
     whose: str
-    #: Why they waited, as a clause after "are held for the owner:".
+    #: Why they waited, as a clause after "since".
     why: str
     #: The day the hold was decided, ISO.
     since: str
+    #: The day the house rule lifted it, ISO.
+    until: str = RULE_SET_ON
 
     @property
     def reason(self) -> str:
-        return f"{self.whose} houses are held for the owner: {self.why}"
+        return f"{self.whose} houses were held for the owner, since {self.why}"
 
 
 #: The holds the house rule lifted on 16 October 2026, kept only for the words of the

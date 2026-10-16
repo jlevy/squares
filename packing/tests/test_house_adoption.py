@@ -443,8 +443,9 @@ def test_no_result_is_held_and_the_lifted_hold_keeps_its_words() -> None:
     assert set(select.LIFTED) == {"T-174"}
     for hold in select.LIFTED.values():
         assert hold.why.strip()
-        assert hold.reason.startswith(f"{hold.whose} houses are held for the owner: ")
+        assert hold.reason.startswith(f"{hold.whose} houses were held for the owner, since ")
         assert adopt.words(hold.since)
+        assert hold.until == select.RULE_SET_ON
     assert all(
         re.fullmatch(r"think-[a-z0-9]+", pending.bead)
         for pending in select.PENDING_ADOPTION.values()
@@ -458,7 +459,9 @@ def test_every_record_names_a_smaller_held_or_algebraic_certificate(
     record with why it waited: in the certificate section where a pass houses the count,
     in a dated note under the title elsewhere; an algebraic one below the house, which
     that rule left to the owner, in the section (reviews A and B of PR 614, A1, B2 and
-    B7). The records say so until their counts are adopted."""
+    B7). The records say so until their counts are adopted, and since the house rule they
+    say the waits ended, naming the bead each staged adoption waits under, and never that
+    the owner decides (review A2 of #660)."""
     reason = select.LIFTED["T-174"].reason.replace("'", "’")
     for n, selection in recorded.items():
         if not selection.held:
@@ -469,10 +472,13 @@ def test_every_record_names_a_smaller_held_or_algebraic_certificate(
             "E-pingyou-574-exact-feasibility"
             in _front(select.case_path(n).read_text())["evidence"]
         ), n
+        assert "until the owner decides" not in text, n
+        assert "if the owner adopts" not in text, n
+        assert f"staged under {select.PENDING_ADOPTION[n].bead}," in text, n
         if n in houses.ADOPTED:
             assert adopt.HELD_OPENING not in text, n
         else:
-            assert f"{adopt.HELD_OPENING}15 October 2026.**" in text, n
+            assert f"{adopt.HELD_OPENING}15 October 2026; lifted 16 October 2026.**" in text, n
     assert adopt.held_counts() == sorted(
         n for n, s in recorded.items() if s.held and n not in houses.ADOPTED
     )
@@ -480,6 +486,8 @@ def test_every_record_names_a_smaller_held_or_algebraic_certificate(
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
         assert "T-174’s algebraic certificate at this count" in text, n
         assert "RP-3 of the [review of 14 October 2026]" in text, n
+        assert "owner’s decision" not in text.split("algebraic certificate at this count")[1]
+        assert f"staged under {select.WRITER_BEAD}," in text, n
     # At 302 T-174's algebraic side is above the house, and nothing is said of it.
     assert "algebraic certificate at this count" not in select.case_path(302).read_text()
 

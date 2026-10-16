@@ -54,14 +54,16 @@ nothing, and ``--check`` reports any adopted count whose record differs from its
 **The house rule** (packing/campaign/result-import.md, "The House Rule") leaves nothing
 here to a person: the house is the smallest validated side, and a count whose adoption
 waits does so only staged in `select_houses.PENDING_ADOPTION` with the bead that adopts
-it, which `plan` leaves to that bead's pull request. Until the counts are written again,
-the records the rule of 15 October wrote still say what it did: an adopted record's
-certificate section names each certificate the lifted hold kept out
-(`select_houses.LIFTED`) below its house, with why it waited, and so does a dated
-paragraph under the title of a record no pass houses (`held_note`), which also cites the
-held certificate's evidence; an algebraic certificate below the house, which that rule
-left out (RP-3), is named in the section the same way. Every replay and check here reads
-the records as written (`recorded_days`, `select_houses.select(recorded=...)`).
+it, which `plan` leaves to that bead's pull request. Until the counts are adopted, their
+records keep the houses the rule of 15 October chose, and say why, with no wait left to
+the owner (review A2 of #660): an adopted record's certificate section names each
+certificate the lifted hold kept out (`select_houses.LIFTED`) below its house, why it
+waited, that the house rule lifted the hold, and the bead its staged adoption waits
+under, and so does a dated paragraph under the title of a record no pass houses
+(`held_note`), which also cites the held certificate's evidence; an algebraic certificate
+below the house, which that rule left out (RP-3), is named in the section the same way,
+its adoption staged for the writer. Every replay and check here reads the records as
+written (`recorded_days`, `select_houses.select(recorded=...)`).
 
 Usage, from ``packing/`` with the project interpreter::
 
@@ -1329,32 +1331,46 @@ def section(move: Move) -> str:
 
 
 def _reason(result: str) -> str:
-    """Why a held result waited, as case prose under the rule of 15 October wrote it."""
+    """Why a held result waited, as case prose writes it, in the past since the house rule."""
     return select_houses.LIFTED[result].reason.replace("'", "’")
+
+
+def _staged(n: int, result: str) -> str:
+    """Where a record says the count's adoption of `result` waits: its staged bead."""
+    staged = select_houses.PENDING_ADOPTION.get(n)
+    if staged is None or staged.house != result:
+        return ""
+    return f", staged under {staged.bead},"
 
 
 def held_sentences(
     held: Sequence[select_houses.Candidate], side: exact_sides.Side, *, below: str, keeps: str
 ) -> list[str]:
     """What a record says of each held certificate below `side`: smaller, confirmed and
-    reviewed, why it waits, and that the case moves to it if the owner adopts it."""
+    reviewed, why it waited, and that the house rule lifted the hold, so the case moves to
+    it when its staged adoption lands. No wait is the owner's (review A2 of #660)."""
     sentences = []
     for candidate in held:
         review, reviewed = _review(candidate.result)
+        hold = select_houses.LIFTED[candidate.result]
         sentences.append(
             f"{candidate.result} at ${display(candidate.side)}$, "
             f"`{_sci(exact_sides.lower_gap(side, candidate.side))}` below {below}, is "
             "confirmed here and accepted by "
-            f"the [review of {reviewed}](../../{review}), but {_reason(candidate.result)}; "
-            f"the case keeps {keeps} until the owner decides, and moves to "
-            f"{candidate.result}’s side if the owner adopts them."
+            f"the [review of {reviewed}](../../{review}). {_reason(candidate.result)}, "
+            f"from {words(hold.since)} until the owner’s house rule of {words(hold.until)} "
+            f"lifted the hold: the case keeps {keeps} until {candidate.result}’s adoption"
+            f"{_staged(candidate.n, candidate.result)} moves it to {candidate.result}’s "
+            "side."
         )
     return sentences
 
 
 def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> list[str]:
-    """What a record says of an algebraic certificate below its house: left out of the
-    selection on one route, for the owner's decision (RP-3 of PR 574's review)."""
+    """What a record says of an algebraic certificate below its house: decided on one exact
+    route, which the rule of 15 October left out for the owner (RP-3 of PR 574's review),
+    and which the house rule adopts, staged until the writer takes an algebraic side
+    (review A2 of #660)."""
     sentences = []
     for result, key in selection.algebraic:
         if not select_houses.algebraic_below(key, selection.n, side):
@@ -1365,9 +1381,11 @@ def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> l
         sentences.append(
             f"{result}’s algebraic certificate at this count, a root of a degree-{degree} "
             f"integer polynomial `{_sci(margin)}` below this house, is decided here on one "
-            "exact route only, so it is left out of the selection: adopting it is the "
-            f"owner’s decision (RP-3 of the [review of {reviewed}](../../{review})), pending "
-            "a second route."
+            "exact route. The rule of 15 October left it out for the owner (RP-3 of the "
+            f"[review of {reviewed}](../../{review})), and the owner’s house rule of "
+            f"{words(select_houses.RULE_SET_ON)} adopts it: the case keeps this house until "
+            f"its adoption{_staged(selection.n, result)} moves it to {result}’s side, once "
+            "the writer takes an algebraic side."
         )
     return sentences
 
@@ -1940,13 +1958,16 @@ def held_note(n: int, text: str) -> str:
     kept = [part for i, part in enumerate(parts) if i not in mine]
     if held:
         since = min(select_houses.LIFTED[c.result].since for c in held)
+        until = max(select_houses.LIFTED[c.result].until for c in held)
         sentences = held_sentences(
             held,
             select_houses.parse_case(n, text).verified,
             below="this case’s verified ceiling",
             keeps="its house",
         )
-        written = f"{HELD_OPENING}{words(since)}.** " + " ".join(sentences)
+        written = f"{HELD_OPENING}{words(since)}; lifted {words(until)}.** " + " ".join(
+            sentences
+        )
         if mine and " ".join(parts[mine[0]].split()) == written:
             written = parts[mine[0]]
         else:
