@@ -1109,8 +1109,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/devtools/overview/rating-tooltips.js",
-            "packing/devtools/overview_sections.py",
             "packing/devtools/render_changelog.py",
+            "packing/devtools/render_overview.py",
             "packing/devtools/templates/site-nav.css",
         ),
         outputs=(
@@ -1128,14 +1128,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "The News chooser correction adds a concise News-only significance helper, "
-            "uses it in News cards and controls, and extends tooltip enhancement to "
-            "News score buttons while retaining existing badge interactions. Compact "
-            "in-place choices gain per-button borders and a visible focus outline. "
-            "The four papers contain neither News controls nor compact in-place "
-            "choosers; their existing navigation links and rating badges retain their "
-            "behavior. Source review finds no manuscript, figure, credit, content "
-            "date or print-style change in these paper exports. This is not a rendered "
+            "The News chooser correction reads News significance meanings from the "
+            "label rubric in result-import.md, declared as a site input in "
+            "render_overview, uses them in News cards and controls, and extends "
+            "tooltip enhancement to News score buttons, whose press dismisses the "
+            "tooltip, while retaining existing badge interactions. Compact in-place "
+            "choices gain per-button borders and a visible focus outline. The four "
+            "papers contain neither News controls nor compact in-place choosers; "
+            "their existing navigation links and rating badges retain their behavior. "
+            "Source review finds no manuscript, figure, credit, content date or "
+            "print-style change in these paper exports. This is not a rendered "
             "byte-equality claim; the site alone takes a patch edition."
         ),
     ),
