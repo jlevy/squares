@@ -37089,10 +37089,76 @@ evidence:
       2 duplicate-square and outside-container controls passed their required outcomes on
       both routes, 2436 pair decisions; summed over the 3 jobs, the receipt records 93.53
       route CPU seconds and 96.21 job wall seconds, the longest job 32.77 seconds. In the
-      positive a square touches the box and two squares touch, exactly. The replay's
-      evidence entry is added at the stage 4 exit, once the review lane has read it. The
-      source's own checkers were not run here. The two maintained routes, the sqpack
-      rational witness
+      positive a square touches the box and two squares touch, exactly. The repository
+      replay is E-pingyou-622-exact-feasibility; its review is pending. The source's own
+      checkers were not run here. The two maintained routes, the sqpack rational witness
       verifier and the independent rational corner checker, share certificate parsing,
       half-angle conversion, Fraction arithmetic and the separating-axis method. No two
       independent methods, human oversight or optimality is claimed.
+  - id: E-pingyou-622-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [29]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou PR 622 certificate 2026-10-15]'
+    certificate: packing/resources/web/pingyou-pr622-certificate-2026-10-15/facts/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) at 321d492c7, niced, on a
+      shared four-core host: python -m devtools.upper_bound_reports pingyou-pr622-certificate-2026-10-15 certify
+      --workers 2 decided the certificate and its duplicate-square and outside-container
+      controls through both maintained routes, each job in its own child process (20:39:26Z
+      to 20:40:32Z on 2026-10-16, 96 CPU seconds), and wrote
+      receipts/exact-certification.json.xz in the packet; check --replay decided all 3
+      retained jobs again, one at a time, and held each to its retained row (all equal, 107
+      s); check-claims rebuilt the frozen comparison (equal).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 29 that T-195 cites, every wall and every pair decided by
+          both maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026; each
+            lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author says its submissions are assisted by the PY agentic offering, PingYou
+          Ltd's own, naming no underlying system; no route here imports or copies the
+          source's code. The source reports running this repository's two maintained
+          routes, unchanged, on its corners witness; those runs are its own and decide
+          nothing here.
+    limitations: >-
+      A replay of the retained certificate by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. The receipt's 3 jobs hold 2436 pair decisions, 93.53 route CPU
+      seconds and 96.21 job wall seconds, the longest job 32.77 seconds. The positive
+      touches the box and has two squares in contact, a least wall clearance and pair gap of
+      exactly 0 on both routes. The source reports runs of this repository's two maintained
+      routes; those runs are its own and decide nothing here, and every route here ran from
+      this repository on the packet's own fact. The kernel's two controls are gross; no
+      third route or review has read it yet. Finite feasibility only: no lower bound,
+      optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-16'

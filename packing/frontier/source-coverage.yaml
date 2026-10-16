@@ -6002,7 +6002,7 @@ sources:
   represented_by:
   - frontier/results.yaml
   - resources/web/pingyou-pr622-certificate-2026-10-15/acquisition/claims.json
-  evidence: [E-pingyou-622-certificate-report]
+  evidence: [E-pingyou-622-certificate-report, E-pingyou-622-exact-feasibility]
   notes: >-
     The 1 complete certificate is kept as a derived exact fact, no upstream byte retained,
     read from the release asset data/pingyou-n29-certificate-2026-10-15-v1 through the
