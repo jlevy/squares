@@ -24,11 +24,19 @@ nothing about a packing itself.
   and a duplicate square. `--controls-at all` would add the four pinned-only counts,
   whose controls cost nearly a positive each.
 - **Irreducibility:** each polynomial is factored over the integers with SymPy’s
-  `factor_list`. The source asserts it and none of its programs checks it.
+  `factor_list`, and its squarefreeness checked as $\gcd(p, p') = 1$. It counts as
+  irreducible only when it is squarefree and its factorization is one factor, of
+  multiplicity 1 and of $p$’s degree, so a perfect power $q^k$ is refused.
+  The source asserts irreducibility and none of its programs checks it.
 
 Each finished run is cached in the scratch directory, so an interrupted invocation
-resumes where it stopped; this replay was interrupted once by its session’s
-background-time limit and resumed.
+resumes where it stopped. A cached record is keyed by the run it records (the input’s
+SHA-256, the checker’s SHA-256 and the control kind) and reused only when all three
+match. The first replay, of 16 October, was interrupted once by its session’s
+background-time limit and resumed under a cache keyed by count alone; PR #651’s review A
+(A5, A6) led to both fixes. The refreshed receipt is from the fixed driver; its first
+invocation was likewise stopped after four positives and resumed, this time from the
+keyed cache.
 
 ## Running It
 
@@ -41,7 +49,7 @@ From `packing/`, with the project interpreter:
 
 It writes [`../receipts/replay-verify-exact.json`](../receipts/replay-verify-exact.json):
 each run’s command, exit status, last line, wall and CPU seconds, each input’s digest,
-and the factor degrees of each polynomial.
+and each polynomial’s factors (degree and multiplicity) and squarefreeness.
 [`tests/test_evand_exact_cur.py`](../../../../tests/test_evand_exact_cur.py) holds the
 outcome at n = 51 on every test run.
 

@@ -2,9 +2,9 @@
  "format": "evand-verify-exact-replay-v1",
  "bead": "think-g59l",
  "issue": "https://github.com/jlevy/squares/issues/639",
- "ran_at_utc": "2026-10-16T07:33:09Z",
- "wall_seconds_this_invocation": 68.7,
- "cpu_seconds_of_runs": 1306.0,
+ "ran_at_utc": "2026-10-16T11:15:44Z",
+ "wall_seconds_this_invocation": 631.3,
+ "cpu_seconds_of_runs": 1484.5,
  "workers": 2,
  "controls_at": "the 19 counts whose form the packet retains",
  "program": {
@@ -17,7 +17,7 @@
  },
  "driver": {
   "path": "packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py",
-  "sha256": "c509a238151283bdda255a56bfe8f098adae175bd275dc58855e7b570f1a9b02"
+  "sha256": "f949158c3481e112e3a5b2e95815268f33b2a95a2548a24e6c99aac787c4ffb3"
  },
  "environment": {
   "python": "CPython 3.14.7 (the project interpreter); the source runs python3",
@@ -29,6 +29,7 @@
   "positives_matching_source": 23,
   "controls_refused": 76,
   "controls": 76,
+  "squarefree": 23,
   "irreducible": 23
  },
  "rows": [
@@ -47,8 +48,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 51: s(51) <= S*, S* the unique root of p (degree 2) in [7.69035593728849, 7.69035593728849]; field degree 2; 198 touching incidences proved as identities in K, 1194 strict by intervals, 1131 pairs by discs",
-    "wall_seconds": 2.53,
-    "cpu_seconds": 0.92
+    "wall_seconds": 1.27,
+    "cpu_seconds": 0.81
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -61,8 +62,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 0.23,
-     "cpu_seconds": 0.11,
+     "wall_seconds": 0.1,
+     "cpu_seconds": 0.1,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the R wall it touches",
      "refused": true
@@ -76,8 +77,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.2,
-     "cpu_seconds": 0.09,
+     "wall_seconds": 0.07,
+     "cpu_seconds": 0.07,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -91,8 +92,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.25,
-     "cpu_seconds": 0.08,
+     "wall_seconds": 0.07,
+     "cpu_seconds": 0.07,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -106,8 +107,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 0.22,
-     "cpu_seconds": 0.11,
+     "wall_seconds": 0.13,
+     "cpu_seconds": 0.12,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -115,9 +116,13 @@
    ],
    "polynomial": {
     "degree": 2,
-    "factor_degrees": [
-     2
+    "factors": [
+     [
+      2,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -138,8 +143,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 70: s(70) <= S*, S* the unique root of p (degree 5) in [8.88096037155558, 8.88096037155558]; field degree 5; 368 touching incidences proved as identities in K, 1600 strict by intervals, 2203 pairs by discs",
-    "wall_seconds": 4.06,
-    "cpu_seconds": 1.28
+    "wall_seconds": 1.77,
+    "cpu_seconds": 1.29
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -152,8 +157,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 5: corner outside the box (or not proved inside)",
-     "wall_seconds": 0.32,
-     "cpu_seconds": 0.18,
+     "wall_seconds": 0.24,
+     "cpu_seconds": 0.23,
      "control": "moved-square",
      "mutation": "square 5 moved 1e-6 through the L wall it touches",
      "refused": true
@@ -167,8 +172,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.15,
-     "cpu_seconds": 0.14,
+     "wall_seconds": 0.18,
+     "cpu_seconds": 0.16,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -182,8 +187,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.24,
-     "cpu_seconds": 0.14,
+     "wall_seconds": 0.17,
+     "cpu_seconds": 0.16,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -197,8 +202,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 0.55,
-     "cpu_seconds": 0.2,
+     "wall_seconds": 0.33,
+     "cpu_seconds": 0.22,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -206,9 +211,13 @@
    ],
    "polynomial": {
     "degree": 5,
-    "factor_degrees": [
-     5
+    "factors": [
+     [
+      5,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -229,8 +238,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 88: s(88) <= S*, S* the unique root of p (degree 7) in [9.88245103048125, 9.88245103048125]; field degree 7; 342 touching incidences proved as identities in K, 2150 strict by intervals, 3557 pairs by discs",
-    "wall_seconds": 4.68,
-    "cpu_seconds": 1.75
+    "wall_seconds": 3.54,
+    "cpu_seconds": 1.96
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -243,8 +252,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 0.7,
-     "cpu_seconds": 0.27,
+     "wall_seconds": 0.56,
+     "cpu_seconds": 0.3,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the L wall it touches",
      "refused": true
@@ -258,8 +267,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.65,
-     "cpu_seconds": 0.24,
+     "wall_seconds": 0.3,
+     "cpu_seconds": 0.25,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -273,8 +282,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.7,
-     "cpu_seconds": 0.23,
+     "wall_seconds": 0.51,
+     "cpu_seconds": 0.27,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -288,8 +297,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 0.76,
-     "cpu_seconds": 0.3,
+     "wall_seconds": 0.38,
+     "cpu_seconds": 0.32,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -297,9 +306,13 @@
    ],
    "polynomial": {
     "degree": 7,
-    "factor_degrees": [
-     7
+    "factors": [
+     [
+      7,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -320,8 +333,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 102: s(102) <= S*, S* the unique root of p (degree 4) in [10.6058286964316, 10.6058286964316]; field degree 4; 542 touching incidences proved as identities in K, 2374 strict by intervals, 4830 pairs by discs",
-    "wall_seconds": 6.96,
-    "cpu_seconds": 2.31
+    "wall_seconds": 4.82,
+    "cpu_seconds": 2.18
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -334,8 +347,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 3: corner outside the box (or not proved inside)",
-     "wall_seconds": 0.49,
-     "cpu_seconds": 0.18,
+     "wall_seconds": 0.31,
+     "cpu_seconds": 0.21,
      "control": "moved-square",
      "mutation": "square 3 moved 1e-6 through the T wall it touches",
      "refused": true
@@ -349,8 +362,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.49,
-     "cpu_seconds": 0.14,
+     "wall_seconds": 0.35,
+     "cpu_seconds": 0.16,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -364,8 +377,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.47,
-     "cpu_seconds": 0.14,
+     "wall_seconds": 0.24,
+     "cpu_seconds": 0.15,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -379,7 +392,7 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 0.57,
+     "wall_seconds": 0.3,
      "cpu_seconds": 0.22,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
@@ -388,9 +401,13 @@
    ],
    "polynomial": {
     "degree": 4,
-    "factor_degrees": [
-     4
+    "factors": [
+     [
+      4,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -411,8 +428,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 123: s(123) <= S*, S* the unique root of p (degree 6) in [11.5913781454977, 11.5913781454977]; field degree 6; 691 touching incidences proved as identities in K, 2889 strict by intervals, 7100 pairs by discs",
-    "wall_seconds": 7.25,
-    "cpu_seconds": 2.64
+    "wall_seconds": 4.28,
+    "cpu_seconds": 2.91
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -425,8 +442,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 0.64,
-     "cpu_seconds": 0.26,
+     "wall_seconds": 0.63,
+     "cpu_seconds": 0.3,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the R wall it touches",
      "refused": true
@@ -440,8 +457,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.56,
-     "cpu_seconds": 0.21,
+     "wall_seconds": 0.27,
+     "cpu_seconds": 0.23,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -455,7 +472,7 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.58,
+     "wall_seconds": 0.42,
      "cpu_seconds": 0.23,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
@@ -470,8 +487,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 0.84,
-     "cpu_seconds": 0.3,
+     "wall_seconds": 0.85,
+     "cpu_seconds": 0.38,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -479,9 +496,13 @@
    ],
    "polynomial": {
     "degree": 6,
-    "factor_degrees": [
-     6
+    "factors": [
+     [
+      6,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -502,8 +523,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 126: s(126) <= S*, S* the unique root of p (degree 2) in [11.7426406871193, 11.7426406871193]; field degree 2; 473 touching incidences proved as identities in K, 3159 strict by intervals, 7471 pairs by discs",
-    "wall_seconds": 8.3,
-    "cpu_seconds": 2.98
+    "wall_seconds": 4.85,
+    "cpu_seconds": 3.09
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -516,7 +537,7 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 0.42,
+     "wall_seconds": 0.19,
      "cpu_seconds": 0.16,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the T wall it touches",
@@ -531,8 +552,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.21,
-     "cpu_seconds": 0.09,
+     "wall_seconds": 0.2,
+     "cpu_seconds": 0.1,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -546,8 +567,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.25,
-     "cpu_seconds": 0.09,
+     "wall_seconds": 0.3,
+     "cpu_seconds": 0.12,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -561,8 +582,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 0.55,
-     "cpu_seconds": 0.17,
+     "wall_seconds": 0.26,
+     "cpu_seconds": 0.18,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -570,9 +591,13 @@
    ],
    "polynomial": {
     "degree": 2,
-    "factor_degrees": [
-     2
+    "factors": [
+     [
+      2,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -593,8 +618,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 153: s(153) <= S*, S* the unique root of p (degree 7) in [12.8700138504045, 12.8700138504045]; field degree 7; 854 touching incidences proved as identities in K, 3614 strict by intervals, 11123 pairs by discs",
-    "wall_seconds": 8.66,
-    "cpu_seconds": 3.39
+    "wall_seconds": 10.0,
+    "cpu_seconds": 3.72
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -607,8 +632,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 35: corner outside the box (or not proved inside)",
-     "wall_seconds": 0.95,
-     "cpu_seconds": 0.36,
+     "wall_seconds": 0.47,
+     "cpu_seconds": 0.37,
      "control": "moved-square",
      "mutation": "square 35 moved 1e-6 through the L wall it touches",
      "refused": true
@@ -622,7 +647,7 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.81,
+     "wall_seconds": 0.37,
      "cpu_seconds": 0.29,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
@@ -637,8 +662,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.3,
-     "cpu_seconds": 0.24,
+     "wall_seconds": 0.39,
+     "cpu_seconds": 0.28,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -652,8 +677,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 0.82,
-     "cpu_seconds": 0.35,
+     "wall_seconds": 0.42,
+     "cpu_seconds": 0.39,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -661,9 +686,13 @@
    ],
    "polynomial": {
     "degree": 7,
-    "factor_degrees": [
-     7
+    "factors": [
+     [
+      7,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -684,8 +713,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 172: s(172) <= S*, S* the unique root of p (degree 12) in [13.6189889568994, 13.6189889568994]; field degree 12; 768 touching incidences proved as identities in K, 4288 strict by intervals, 14130 pairs by discs",
-    "wall_seconds": 17.04,
-    "cpu_seconds": 5.78
+    "wall_seconds": 16.19,
+    "cpu_seconds": 6.65
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -698,8 +727,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 2.76,
-     "cpu_seconds": 1.07,
+     "wall_seconds": 2.49,
+     "cpu_seconds": 1.08,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the T wall it touches",
      "refused": true
@@ -713,8 +742,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 1.57,
-     "cpu_seconds": 0.85,
+     "wall_seconds": 2.45,
+     "cpu_seconds": 1.05,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -728,8 +757,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 2.55,
-     "cpu_seconds": 0.94,
+     "wall_seconds": 2.45,
+     "cpu_seconds": 0.98,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -743,8 +772,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 2.86,
-     "cpu_seconds": 1.06,
+     "wall_seconds": 2.64,
+     "cpu_seconds": 1.17,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -752,9 +781,13 @@
    ],
    "polynomial": {
     "degree": 12,
-    "factor_degrees": [
-     12
+    "factors": [
+     [
+      12,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.01,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -775,8 +808,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 175: s(175) <= S*, S* the unique root of p (degree 7) in [13.7641743174866, 13.7641743174866]; field degree 7; 936 touching incidences proved as identities in K, 4060 strict by intervals, 14676 pairs by discs",
-    "wall_seconds": 10.71,
-    "cpu_seconds": 4.18
+    "wall_seconds": 17.72,
+    "cpu_seconds": 4.76
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -789,8 +822,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 3: corner outside the box (or not proved inside)",
-     "wall_seconds": 0.9,
-     "cpu_seconds": 0.44,
+     "wall_seconds": 0.89,
+     "cpu_seconds": 0.42,
      "control": "moved-square",
      "mutation": "square 3 moved 1e-6 through the B wall it touches",
      "refused": true
@@ -804,7 +837,7 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.93,
+     "wall_seconds": 0.73,
      "cpu_seconds": 0.35,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
@@ -819,8 +852,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.52,
-     "cpu_seconds": 0.33,
+     "wall_seconds": 0.76,
+     "cpu_seconds": 0.38,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -834,7 +867,7 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 1.25,
+     "wall_seconds": 0.95,
      "cpu_seconds": 0.46,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
@@ -843,9 +876,13 @@
    ],
    "polynomial": {
     "degree": 7,
-    "factor_degrees": [
-     7
+    "factors": [
+     [
+      7,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -866,8 +903,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 199: s(199) <= S*, S* the unique root of p (degree 16) in [14.6175721735928, 14.6175721735928]; field degree 16; 912 touching incidences proved as identities in K, 4968 strict by intervals, 19027 pairs by discs",
-    "wall_seconds": 30.25,
-    "cpu_seconds": 10.78
+    "wall_seconds": 36.58,
+    "cpu_seconds": 10.59
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -880,8 +917,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 37: corner outside the box (or not proved inside)",
-     "wall_seconds": 4.01,
-     "cpu_seconds": 1.64,
+     "wall_seconds": 2.73,
+     "cpu_seconds": 1.78,
      "control": "moved-square",
      "mutation": "square 37 moved 1e-6 through the T wall it touches",
      "refused": true
@@ -895,8 +932,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 4.82,
-     "cpu_seconds": 1.76,
+     "wall_seconds": 2.33,
+     "cpu_seconds": 1.63,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -910,8 +947,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 4.25,
-     "cpu_seconds": 1.61,
+     "wall_seconds": 2.06,
+     "cpu_seconds": 1.64,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -925,8 +962,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 4.34,
-     "cpu_seconds": 1.66,
+     "wall_seconds": 2.6,
+     "cpu_seconds": 1.78,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -934,9 +971,13 @@
    ],
    "polynomial": {
     "degree": 16,
-    "factor_degrees": [
-     16
+    "factors": [
+     [
+      16,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -957,16 +998,20 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 204: s(204) <= S*, S* the unique root of p (degree 35) in [14.808663234387, 14.808663234387]; field degree 35; 1098 touching incidences proved as identities in K, 4754 strict by intervals, 20059 pairs by discs",
-    "wall_seconds": 647.5,
-    "cpu_seconds": 212.99
+    "wall_seconds": 541.74,
+    "cpu_seconds": 240.92
    },
    "matches_source_verify_txt": true,
    "controls": [],
    "polynomial": {
     "degree": 35,
-    "factor_degrees": [
-     35
+    "factors": [
+     [
+      35,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.03,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -987,8 +1032,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 207: s(207) <= S*, S* the unique root of p (degree 5) in [14.8809603715556, 14.8809603715556]; field degree 5; 1285 touching incidences proved as identities in K, 4831 strict by intervals, 20620 pairs by discs",
-    "wall_seconds": 10.57,
-    "cpu_seconds": 4.94
+    "wall_seconds": 34.29,
+    "cpu_seconds": 5.61
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -1001,8 +1046,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 5: corner outside the box (or not proved inside)",
-     "wall_seconds": 0.83,
-     "cpu_seconds": 0.36,
+     "wall_seconds": 0.73,
+     "cpu_seconds": 0.33,
      "control": "moved-square",
      "mutation": "square 5 moved 1e-6 through the L wall it touches",
      "refused": true
@@ -1016,8 +1061,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.8,
-     "cpu_seconds": 0.25,
+     "wall_seconds": 0.41,
+     "cpu_seconds": 0.24,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -1031,8 +1076,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.73,
-     "cpu_seconds": 0.22,
+     "wall_seconds": 0.31,
+     "cpu_seconds": 0.26,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -1046,8 +1091,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 0.88,
-     "cpu_seconds": 0.36,
+     "wall_seconds": 0.8,
+     "cpu_seconds": 0.38,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -1055,9 +1100,13 @@
    ],
    "polynomial": {
     "degree": 5,
-    "factor_degrees": [
-     5
+    "factors": [
+     [
+      5,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -1078,8 +1127,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 232: s(232) <= S*, S* the unique root of p (degree 7) in [15.7641743174866, 15.7641743174866]; field degree 7; 949 touching incidences proved as identities in K, 5875 strict by intervals, 26018 pairs by discs",
-    "wall_seconds": 13.9,
-    "cpu_seconds": 6.75
+    "wall_seconds": 35.54,
+    "cpu_seconds": 7.8
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -1092,8 +1141,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 3: corner outside the box (or not proved inside)",
-     "wall_seconds": 1.18,
-     "cpu_seconds": 0.43,
+     "wall_seconds": 1.42,
+     "cpu_seconds": 0.54,
      "control": "moved-square",
      "mutation": "square 3 moved 1e-6 through the L wall it touches",
      "refused": true
@@ -1107,8 +1156,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.88,
-     "cpu_seconds": 0.31,
+     "wall_seconds": 0.72,
+     "cpu_seconds": 0.34,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -1122,8 +1171,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 1.06,
-     "cpu_seconds": 0.35,
+     "wall_seconds": 0.71,
+     "cpu_seconds": 0.34,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -1137,8 +1186,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 1.28,
-     "cpu_seconds": 0.5,
+     "wall_seconds": 1.07,
+     "cpu_seconds": 0.52,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -1146,9 +1195,13 @@
    ],
    "polynomial": {
     "degree": 7,
-    "factor_degrees": [
-     7
+    "factors": [
+     [
+      7,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -1169,8 +1222,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 258: s(258) <= S*, S* the unique root of p (degree 8) in [16.5634480021338, 16.5634480021338]; field degree 8; 1641 touching incidences proved as identities in K, 6047 strict by intervals, 32263 pairs by discs",
-    "wall_seconds": 42.4,
-    "cpu_seconds": 7.52
+    "wall_seconds": 45.54,
+    "cpu_seconds": 8.25
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -1183,8 +1236,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 1.47,
-     "cpu_seconds": 0.62,
+     "wall_seconds": 1.3,
+     "cpu_seconds": 0.66,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the L wall it touches",
      "refused": true
@@ -1198,8 +1251,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 1.03,
-     "cpu_seconds": 0.45,
+     "wall_seconds": 1.45,
+     "cpu_seconds": 0.47,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -1213,7 +1266,7 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 1.3,
+     "wall_seconds": 1.16,
      "cpu_seconds": 0.45,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
@@ -1228,8 +1281,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 1.37,
-     "cpu_seconds": 0.6,
+     "wall_seconds": 1.97,
+     "cpu_seconds": 0.69,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -1237,9 +1290,13 @@
    ],
    "polynomial": {
     "degree": 8,
-    "factor_degrees": [
-     8
+    "factors": [
+     [
+      8,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -1260,8 +1317,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 259: s(259) <= S*, S* the unique root of p (degree 6) in [16.5913781454977, 16.5913781454977]; field degree 6; 785 touching incidences proved as identities in K, 6931 strict by intervals, 32518 pairs by discs",
-    "wall_seconds": 17.91,
-    "cpu_seconds": 7.29
+    "wall_seconds": 31.79,
+    "cpu_seconds": 7.93
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -1274,8 +1331,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 1.09,
-     "cpu_seconds": 0.5,
+     "wall_seconds": 0.8,
+     "cpu_seconds": 0.38,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the B wall it touches",
      "refused": true
@@ -1289,8 +1346,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.61,
-     "cpu_seconds": 0.27,
+     "wall_seconds": 0.66,
+     "cpu_seconds": 0.31,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -1304,8 +1361,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.8,
-     "cpu_seconds": 0.31,
+     "wall_seconds": 0.41,
+     "cpu_seconds": 0.26,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -1319,7 +1376,7 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 0.98,
+     "wall_seconds": 0.86,
      "cpu_seconds": 0.42,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
@@ -1328,9 +1385,13 @@
    ],
    "polynomial": {
     "degree": 6,
-    "factor_degrees": [
-     6
+    "factors": [
+     [
+      6,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -1351,16 +1412,20 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 263: s(263) <= S*, S* the unique root of p (degree 12) in [16.7331660078994, 16.7331660078994]; field degree 12; 1482 touching incidences proved as identities in K, 6342 strict by intervals, 33549 pairs by discs",
-    "wall_seconds": 1698.37,
-    "cpu_seconds": 492.4
+    "wall_seconds": 1714.86,
+    "cpu_seconds": 568.02
    },
    "matches_source_verify_txt": true,
    "controls": [],
    "polynomial": {
     "degree": 12,
-    "factor_degrees": [
-     12
+    "factors": [
+     [
+      12,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.01,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -1381,8 +1446,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 266: s(266) <= S*, S* the unique root of p (degree 32) in [16.8230287507565, 16.8230287507565]; field degree 32; 1425 touching incidences proved as identities in K, 6471 strict by intervals, 34335 pairs by discs",
-    "wall_seconds": 73.7,
-    "cpu_seconds": 14.88
+    "wall_seconds": 45.29,
+    "cpu_seconds": 15.91
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -1395,8 +1460,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 13.94,
-     "cpu_seconds": 5.47,
+     "wall_seconds": 10.11,
+     "cpu_seconds": 6.33,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the T wall it touches",
      "refused": true
@@ -1410,8 +1475,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 14.54,
-     "cpu_seconds": 5.69,
+     "wall_seconds": 10.1,
+     "cpu_seconds": 6.53,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -1425,8 +1490,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 13.31,
-     "cpu_seconds": 5.66,
+     "wall_seconds": 9.93,
+     "cpu_seconds": 6.43,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -1440,8 +1505,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 13.94,
-     "cpu_seconds": 5.64,
+     "wall_seconds": 12.36,
+     "cpu_seconds": 6.84,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -1449,9 +1514,13 @@
    ],
    "polynomial": {
     "degree": 32,
-    "factor_degrees": [
-     32
+    "factors": [
+     [
+      32,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.02,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -1472,18 +1541,22 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 267: s(267) <= S*, S* the unique root of p (degree 41) in [16.8388152699483, 16.8388152699483]; field degree 41; 428 touching incidences proved as identities in K, 7548 strict by intervals, 34585 pairs by discs",
-    "wall_seconds": 424.83,
-    "cpu_seconds": 123.01
+    "wall_seconds": 576.16,
+    "cpu_seconds": 135.97
    },
    "matches_source_verify_txt": true,
    "controls": [],
    "polynomial": {
     "degree": 41,
-    "factor_degrees": [
-     41
+    "factors": [
+     [
+      41,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
-    "cpu_seconds": 0.04,
+    "cpu_seconds": 0.06,
     "method": "sympy 1.14.0 factor_list over the integers"
    }
   },
@@ -1502,8 +1575,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 292: s(292) <= S*, S* the unique root of p (degree 6) in [17.5913781454977, 17.5913781454977]; field degree 6; 1559 touching incidences proved as identities in K, 7181 strict by intervals, 41469 pairs by discs",
-    "wall_seconds": 47.77,
-    "cpu_seconds": 8.56
+    "wall_seconds": 65.79,
+    "cpu_seconds": 10.36
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -1516,8 +1589,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 17: corner outside the box (or not proved inside)",
-     "wall_seconds": 1.28,
-     "cpu_seconds": 0.45,
+     "wall_seconds": 1.33,
+     "cpu_seconds": 0.49,
      "control": "moved-square",
      "mutation": "square 17 moved 1e-6 through the T wall it touches",
      "refused": true
@@ -1531,8 +1604,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.85,
-     "cpu_seconds": 0.28,
+     "wall_seconds": 1.09,
+     "cpu_seconds": 0.36,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -1546,8 +1619,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.73,
-     "cpu_seconds": 0.29,
+     "wall_seconds": 1.08,
+     "cpu_seconds": 0.36,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -1561,8 +1634,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 0.95,
-     "cpu_seconds": 0.5,
+     "wall_seconds": 1.71,
+     "cpu_seconds": 0.61,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -1570,9 +1643,13 @@
    ],
    "polynomial": {
     "degree": 6,
-    "factor_degrees": [
-     6
+    "factors": [
+     [
+      6,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -1593,8 +1670,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 295: s(295) <= S*, S* the unique root of p (degree 2) in [17.704232790736, 17.704232790736]; field degree 2; 1985 touching incidences proved as identities in K, 6859 strict by intervals, 42334 pairs by discs",
-    "wall_seconds": 45.83,
-    "cpu_seconds": 10.79
+    "wall_seconds": 86.68,
+    "cpu_seconds": 12.68
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -1607,8 +1684,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 0.8,
-     "cpu_seconds": 0.32,
+     "wall_seconds": 1.28,
+     "cpu_seconds": 0.41,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the B wall it touches",
      "refused": true
@@ -1622,8 +1699,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.49,
-     "cpu_seconds": 0.19,
+     "wall_seconds": 0.72,
+     "cpu_seconds": 0.29,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -1637,8 +1714,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.46,
-     "cpu_seconds": 0.18,
+     "wall_seconds": 0.88,
+     "cpu_seconds": 0.26,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -1652,8 +1729,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 1.25,
-     "cpu_seconds": 0.44,
+     "wall_seconds": 1.42,
+     "cpu_seconds": 0.5,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -1661,9 +1738,13 @@
    ],
    "polynomial": {
     "degree": 2,
-    "factor_degrees": [
-     2
+    "factors": [
+     [
+      2,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -1684,16 +1765,20 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 297: s(297) <= S*, S* the unique root of p (degree 12) in [17.7404172875438, 17.7404172875438]; field degree 12; 1373 touching incidences proved as identities in K, 7527 strict by intervals, 42919 pairs by discs",
-    "wall_seconds": 1146.56,
-    "cpu_seconds": 308.34
+    "wall_seconds": 1218.84,
+    "cpu_seconds": 351.25
    },
    "matches_source_verify_txt": true,
    "controls": [],
    "polynomial": {
     "degree": 12,
-    "factor_degrees": [
-     12
+    "factors": [
+     [
+      12,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.01,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -1714,8 +1799,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 301: s(301) <= S*, S* the unique root of p (degree 4) in [17.8466671928435, 17.8466671928435]; field degree 4; 566 touching incidences proved as identities in K, 8446 strict by intervals, 44101 pairs by discs",
-    "wall_seconds": 21.74,
-    "cpu_seconds": 10.19
+    "wall_seconds": 68.56,
+    "cpu_seconds": 12.09
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -1728,8 +1813,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 1.06,
-     "cpu_seconds": 0.42,
+     "wall_seconds": 0.47,
+     "cpu_seconds": 0.41,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the T wall it touches",
      "refused": true
@@ -1743,8 +1828,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.45,
-     "cpu_seconds": 0.2,
+     "wall_seconds": 0.21,
+     "cpu_seconds": 0.19,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -1758,7 +1843,7 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.56,
+     "wall_seconds": 0.42,
      "cpu_seconds": 0.21,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
@@ -1773,8 +1858,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 1.41,
-     "cpu_seconds": 0.5,
+     "wall_seconds": 1.04,
+     "cpu_seconds": 0.51,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -1782,9 +1867,13 @@
    ],
    "polynomial": {
     "degree": 4,
-    "factor_degrees": [
-     4
+    "factors": [
+     [
+      4,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
@@ -1805,8 +1894,8 @@
     ],
     "exit": 0,
     "last_line": "VALID.  n = 302: s(302) <= S*, S* the unique root of p (degree 7) in [17.8700138504045, 17.8700138504045]; field degree 7; 984 touching incidences proved as identities in K, 8064 strict by intervals, 44397 pairs by discs",
-    "wall_seconds": 24.25,
-    "cpu_seconds": 10.05
+    "wall_seconds": 66.59,
+    "cpu_seconds": 11.72
    },
    "matches_source_verify_txt": true,
    "controls": [
@@ -1819,8 +1908,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
-     "wall_seconds": 1.17,
-     "cpu_seconds": 0.46,
+     "wall_seconds": 1.14,
+     "cpu_seconds": 0.53,
      "control": "moved-square",
      "mutation": "square 0 moved 1e-6 through the T wall it touches",
      "refused": true
@@ -1834,8 +1923,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: p(S) != 0 mod f",
-     "wall_seconds": 0.96,
-     "cpu_seconds": 0.35,
+     "wall_seconds": 0.73,
+     "cpu_seconds": 0.36,
      "control": "enlarged-side",
      "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
      "refused": true
@@ -1849,8 +1938,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
-     "wall_seconds": 0.83,
-     "cpu_seconds": 0.33,
+     "wall_seconds": 0.71,
+     "cpu_seconds": 0.35,
      "control": "side-below-root",
      "mutation": "S's interval replaced by one wholly below the source's",
      "refused": true
@@ -1864,8 +1953,8 @@
      ],
      "exit": 1,
      "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
-     "wall_seconds": 1.84,
-     "cpu_seconds": 0.62,
+     "wall_seconds": 1.44,
+     "cpu_seconds": 0.68,
      "control": "duplicate-square",
      "mutation": "square 1 replaced by square 0",
      "refused": true
@@ -1873,9 +1962,13 @@
    ],
    "polynomial": {
     "degree": 7,
-    "factor_degrees": [
-     7
+    "factors": [
+     [
+      7,
+      1
+     ]
     ],
+    "squarefree": true,
     "irreducible": true,
     "cpu_seconds": 0.0,
     "method": "sympy 1.14.0 factor_list over the integers"
