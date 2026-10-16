@@ -24980,10 +24980,10 @@ results:
       and the composite found no mathematical defect and no blocking finding. The case
       record's lanes keep wand125's 1793/200 until the case adopts the value
       (devtools/certificate-citation-deferrals.yaml), so the entry is pending adoption at n
-      = 76. The source's full zm_mixed.py pass over all 129,600 D4 roots, at its later
-      commit 06993982 with one cell closed at depth 34, is not retained here (review
-      section 7.5); retained and audited, it would put every cell under zm_mixed.py and
-      all but 64 under both checkers (think-osvq).
+      = 76. The source's full zm_mixed.py pass over all 129,600 D4 roots, published after
+      the pin on 14 October 2026 with one cell closed at depth 34, is not retained here
+      (review section 7.5); retained and audited, it would put every cell under
+      zm_mixed.py and all but 64 under both checkers (think-osvq).
   - id: T-185
     kind: upper-bound
     registered: '2026-10-15'
