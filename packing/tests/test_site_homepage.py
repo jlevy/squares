@@ -46,6 +46,8 @@ DOWNLOAD_ACTION = probe(PROBES, "site_homepage/download_action")
 NEWS = probe(PROBES, "site_homepage/news")
 NEWS_SETTLED = probe(PROBES, "site_homepage/news-settled")
 NEWS_FILTERS = probe(PROBES, "site_homepage/news-filters")
+TOOLTIP_WATCH = probe(PROBES, "site_homepage/tooltip-watch")
+TOOLTIP_CLEAR = probe(PROBES, "site_homepage/tooltip-clear")
 ORIGIN = "http://homepage.test/"
 TOGGLE = "[data-homepage-atlas-toggle]"
 CELLS = "#homepage-atlas-cells"
@@ -1262,6 +1264,41 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                     == (state["neutral"]["background-color"])
                 ), (scheme, topic)
 
+    def score_explanations_leave_the_filters_free() -> None:
+        """An S button's explanation never lies over a filter control: hovered or
+        focused, it opens above the filters, or the phone's bottom bar holds it, so the
+        next click reaches the control under the pointer. A mouse press explains
+        nothing, not even for a frame, and leaves the toggle to the button."""
+        tooltip = page.locator(".site-rating-tooltip.kpress-tooltip-visible")
+        for score in (3, 4, 5):
+            button = page.locator(f'button[data-news-score="{score}"]')
+            page.mouse.move(0, 0)
+            page.evaluate(TOOLTIP_WATCH, {"watch": True})
+            for _ in range(2):
+                button.click()
+            assert page.evaluate(TOOLTIP_WATCH) is False, score
+            page.keyboard.press("Escape")
+            page.locator("h1").first.click()
+            page.keyboard.press("Tab")
+            button.focus()
+            sync_api.expect(tooltip).to_be_visible()
+            assert page.evaluate(TOOLTIP_CLEAR)["covers"] == [], ("focus", score)
+            page.keyboard.press("Escape")
+            topics = page.locator("button[data-news-topic]").all()
+            for topic in topics if width == 1280 else topics[:1]:
+                page.mouse.move(0, 0)
+                button.hover()
+                sync_api.expect(tooltip).to_be_visible()
+                clear = page.evaluate(TOOLTIP_CLEAR)
+                assert clear["covers"] == [], ("hover", score, clear)
+                box = topic.bounding_box()
+                assert box is not None
+                pressed = topic.get_attribute("aria-pressed")
+                page.mouse.click(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+                assert topic.get_attribute("aria-pressed") != pressed, (score, clear)
+                topic.click()
+                assert topic.get_attribute("aria-pressed") == pressed
+
     def shared_chooser_contract() -> None:
         for scheme in ("light", "dark"):
             page.emulate_media(color_scheme=scheme)
@@ -1296,6 +1333,9 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 for selection, choice in (("selected", chosen), ("unselected", other)):
                     control = page.locator(group).locator(choice).first
                     for interaction in ("normal", "hover", "focus"):
+                        # A score's explanation opens above the filters, over the
+                        # heading: dismiss it before the heading takes focus back.
+                        page.keyboard.press("Escape")
                         page.locator("h1").first.click()
                         page.mouse.move(0, 0)
                         if interaction == "hover":
@@ -1455,6 +1495,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
     try:
         shared_chooser_contract()
         page.goto(f"{ORIGIN}news.html?reader=kept", wait_until="load")
+        score_explanations_leave_the_filters_free()
         seen = check({4, 5})
         assert seen["scores"] == ["4", "5"]
         used_topics = {topic for entry in entries for topic in entry.get("topics", [])}

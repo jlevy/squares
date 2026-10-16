@@ -936,7 +936,10 @@ it.
   The meter’s accessible label names its S level; its shared tooltip gives the level’s
   short meaning in the News label rubric (`result-import.md`, “Label the PR and Prepare
   News”), as the archive’s S buttons do (`render_changelog.news_significance_meanings`).
-  The source record retains the post’s rationale.
+  An S button explains itself on hover and keyboard focus, never on a mouse press.
+  Its explanation opens above the filters, or below them when the window has no room
+  above, so it never lies over a control (`data-site-tooltip-outside`); a press
+  dismisses it. The source record retains the post’s rationale.
   Its S and five bars remain one tightly paired mark.
   Homepage highlights keep the announcement’s significance and assurance qualifiers,
   with one S meter per card.

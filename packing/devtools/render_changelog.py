@@ -919,7 +919,8 @@ def news_filters(topics_present: set[str] | None = None) -> str:
         if topics_present is None or topic in topics_present
     )
     return (
-        '<div class="site-news-filters sans-text" data-news-filters hidden>'
+        '<div class="site-news-filters sans-text" data-news-filters '
+        "data-site-tooltip-outside hidden>"
         '<fieldset><legend class="site-visually-hidden" id="news-significance-label">'
         'Significance</legend><div class="site-tabs site-chooser-small" role="group" '
         'aria-labelledby="news-significance-label">'

@@ -81,29 +81,50 @@
     });
   }
 
+  /** @param {HTMLElement} tooltip @param {number} dx @param {number} dy */
+  function shift(tooltip, dx, dy) {
+    const style = getComputedStyle(tooltip);
+    const left = Number.parseFloat(style.left);
+    const top = Number.parseFloat(style.top);
+    if (dx) {
+      tooltip.style.insetInlineStart = "";
+      tooltip.style.insetInlineEnd = "";
+      tooltip.style.left = `${left + dx}px`;
+    }
+    if (dy) {
+      tooltip.style.top = `${top + dy}px`;
+    }
+  }
+
   /** @param {HTMLElement} trigger @param {HTMLElement} tooltip */
   function fit(trigger, tooltip) {
     place(/** @type {HTMLAnchorElement} */ (trigger), tooltip);
     // KPress prefers below-table callouts. Fit their measured box when a row is
     // near a viewport edge, preserving its normal placement and mobile bottom bar.
     if (!tooltip.classList.contains("kpress-tooltip-mobile-bottom")) {
+      // A trigger among controls, the News filters, explains itself above them, or below
+      // them where the window has no room above: an explanation is hoverable, so one
+      // lying over the next control would take the click meant for it.
+      const block = trigger.closest("[data-site-tooltip-outside]");
+      if (block) {
+        const around = block.getBoundingClientRect();
+        const rect = tooltip.getBoundingClientRect();
+        const above = around.top - 8 - rect.height;
+        shift(
+          tooltip,
+          trigger.getBoundingClientRect().left - rect.left,
+          (above >= 10 ? above : around.bottom + 8) - rect.top,
+        );
+      }
       const rect = tooltip.getBoundingClientRect();
-      const style = getComputedStyle(tooltip);
-      const left = Number.parseFloat(style.left);
-      const top = Number.parseFloat(style.top);
-      const dx = Math.max(
-        10 - rect.left,
-        Math.min(0, document.documentElement.clientWidth - 10 - rect.right),
+      shift(
+        tooltip,
+        Math.max(
+          10 - rect.left,
+          Math.min(0, document.documentElement.clientWidth - 10 - rect.right),
+        ),
+        Math.max(10 - rect.top, Math.min(0, window.innerHeight - 10 - rect.bottom)),
       );
-      const dy = Math.max(10 - rect.top, Math.min(0, window.innerHeight - 10 - rect.bottom));
-      if (dx) {
-        tooltip.style.insetInlineStart = "";
-        tooltip.style.insetInlineEnd = "";
-        tooltip.style.left = `${left + dx}px`;
-      }
-      if (dy) {
-        tooltip.style.top = `${top + dy}px`;
-      }
     }
   }
 
@@ -155,7 +176,13 @@
       pendingShow = window.setTimeout(() => show(trigger), 500);
     });
     trigger.addEventListener("pointerleave", delayHide);
-    trigger.addEventListener("focus", () => show(trigger));
+    // A native button takes focus on a mouse press too; only keyboard focus explains it,
+    // so a click never flashes the explanation it then dismisses.
+    trigger.addEventListener("focus", () => {
+      if (!(trigger instanceof HTMLButtonElement) || trigger.matches(":focus-visible")) {
+        show(trigger);
+      }
+    });
     trigger.addEventListener("blur", delayHide);
     // A native button's press is its own action, a News filter's toggle: its explanation
     // steps aside, so it never covers the controls a reader goes to next. Hover and
