@@ -36,6 +36,7 @@ MACHINE_ENTRY = {
     "replay": "uv run --frozen python -m somewhere",
     "replay_status": "passed",
     "origin": "audited-here",
+    "performed_by": "repository",
 }
 
 
@@ -121,6 +122,7 @@ def test_confirmation_ladder_on_synthetic_atoms() -> None:
     )
     replayed = {
         "origin": "replayed-here",
+        "performed_by": "repository",
         "replay": "uv run replay",
         "replay_status": "passed",
         "method": "numerical-f64",
@@ -135,11 +137,13 @@ def test_confirmation_ladder_on_synthetic_atoms() -> None:
     assert derive_confirmation([dict(MACHINE_ENTRY), interval]) == "C3"
     assert check_results.distinct_methods([dict(MACHINE_ENTRY), interval]) == 2
     # A third party's own replay, retained here, confirms like ours.
-    third_party = dict(MACHINE_ENTRY, origin="independently-external")
+    third_party = dict(
+        MACHINE_ENTRY, origin="independently-external", performed_by="independent-external"
+    )
     assert derive_confirmation([third_party]) == "C3"
     assert check_results.third_party_replayed([third_party])
     # The world's machine proof raises V, never C.
-    external_machine = dict(MACHINE_ENTRY, origin="external")
+    external_machine = dict(MACHINE_ENTRY, origin="external", performed_by="source-author")
     assert derive_confirmation([external_machine]) == "C0"
     # A review record alone changes nothing without machine evidence.
     assert derive_confirmation([replayed], RUNG_4_REVIEWS) == "C2"

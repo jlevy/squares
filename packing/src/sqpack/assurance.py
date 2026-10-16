@@ -66,27 +66,37 @@ def sampled(entry: Mapping[str, object]) -> bool:
     return not isinstance(coverage, Mapping) or coverage.get("extent") != "full"
 
 
+#: The actor each origin names: the producer's run is external, a retained third-party
+#: run is independently-external, and a run here names the repository.
+ORIGIN_ACTORS: Mapping[str, str] = {
+    "external": "source-author",
+    "independently-external": "independent-external",
+    "replayed-here": "repository",
+    "audited-here": "repository",
+}
+
+
 def formal_actor_origin_problems(evidence: Mapping[str, object]) -> list[str]:
     """A formal execution's actor must agree with its displayed origin."""
     if evidence.get("method") != "proof-assistant-checked":
         return []
-    expected = {
-        "external": "source-author",
-        "independently-external": "independent-external",
-        "replayed-here": "repository",
-        "audited-here": "repository",
-    }.get(str(evidence.get("origin")))
+    expected = ORIGIN_ACTORS.get(str(evidence.get("origin")))
     if expected is None or evidence.get("performed_by") != expected:
         return ["formal execution actor performed_by must agree with its origin"]
     return []
 
 
 def confirming_execution(evidence: Mapping[str, object]) -> bool:
-    """An origin label cannot turn the producer's execution into confirmation."""
+    """Execution beyond the producer, by the actor its origin names, for every method.
+
+    An origin label cannot turn the producer's execution into confirmation, and a run
+    whose actor is unidentified or disagrees with its origin confirms nothing.
+    """
+    origin = evidence.get("origin")
     return (
-        evidence.get("origin") in DISCHARGING_ORIGINS
-        and evidence.get("performed_by") != "source-author"
-        and not formal_actor_origin_problems(evidence)
+        isinstance(origin, str)
+        and origin in DISCHARGING_ORIGINS
+        and evidence.get("performed_by") == ORIGIN_ACTORS[origin]
     )
 
 

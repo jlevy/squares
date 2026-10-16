@@ -369,3 +369,37 @@ def test_a_producer_build_cannot_back_verified_rigidity() -> None:
         "executed beyond the producer" in problem
         for problem in check_case_semantics(case, {entry["id"]: entry})
     )
+
+
+def exact_replay(entry_id: str = "E-exact-replay", claim: str = "exact-value") -> dict:
+    return {
+        "id": entry_id,
+        "claim": claim,
+        "scope": {"n_values": [17]},
+        "assurance": "verified",
+        "method": "exact-algebraic",
+        "origin": "replayed-here",
+        "performed_by": "repository",
+        "relationship_to_generator": "same-implementation",
+        "certificate": "certificate.json",
+        "replay": "python -m check certificate.json",
+        "replay_status": "passed",
+    }
+
+
+@pytest.mark.parametrize(
+    "actor", ["source-author", "unknown-historical", "independent-external", None]
+)
+def test_a_confirming_origin_needs_the_actor_it_names_for_every_method(
+    actor: str | None,
+) -> None:
+    entry = exact_replay()
+    assert derive_confirmation([entry], record=ONE_CASE) == "C3"
+    if actor is None:
+        del entry["performed_by"]
+    else:
+        entry["performed_by"] = actor
+    assert derive_confirmation([entry], record=ONE_CASE) == "C0"
+    assert derive_verification([entry], record=ONE_CASE) == "V3"
+    assert verifier_registry.confirming_runs([entry]) == []
+    assert check_results.distinct_methods([entry]) == 0
