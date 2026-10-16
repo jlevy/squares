@@ -5,7 +5,7 @@ title: "Review: Greff's mixed covers for s(76) = 9 (T-184, #594) and s(95) = 10 
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 13
 delegate: user-eb-review-76-95
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:25:27.727Z
-updated_at: 2026-10-16T10:16:13.654Z
+updated_at: 2026-10-16T10:34:51.078Z
 started_at: 2026-10-16T05:25:32.352Z
 ---
 Stage 4 review lane (W2) for T-184 (#594, Benjamin Greff, s(76) = 9) and T-191 (#610, s(95) = 10), the k = 9 and k = 10 cases of the k^2 - 5 series by mixed covers in Evan Daniel's format, registered at V0/C0. Their next_rung asks for "a review that reads the cover, the two checkers' composite over the D4 region and the wall segments". Model: docs/project/reviews/review-2026-10-02-wand125-s59-s77-mixed-covers.md (T-066's review). Deliverable: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md (or similar) on its own branch and draft PR; it moves no rung.
@@ -59,3 +59,7 @@ Site edition: v0.7.15 cut as the last commit, since the synopsis row is a site o
 2026-10-16T10:04Z user-eb-addr-652: addressing review A on #652. Pushed 0b341ce71 (review text: A2 sec 12, A3, A4, A6, A7, A9, A10) and 0bd64c107 (A11 packet README pointers); records tier exit 0 at 0bd64c107. Next: run scripts made to run from the repository (A5, rerun of run_all_final.sh in progress), PR body (A1, A8), disposition reply.
 
 2026-10-16T10:16Z user-eb-addr-652: pushed d930504c7 (A5 run scripts run from the repository via programs/common.sh; README A2/A5); run_all_final.sh re-run from the repo: all exit 0, outputs equal to kept apart from timings and absolute paths; records tier exit 0 at d930504c7. PR #652 body updated (A1 collision and merge order, A8). Next: hosted CI at d930504c7, then the disposition reply.
+
+2026-10-16T10:32Z user-eb-addr-652: review A on #652 addressed, 11 of 11 fixed, none deferred or declined. Head a4d48feb7 (commits 0b341ce71, 0bd64c107, d930504c7, a4d48feb7, plain on top of 7ae52624). Hosted CI green at a4d48feb7 (Packing validation 38886161628, Certificate page 38886161378, Branch mergeability 38886154739). Disposition reply: https://github.com/jlevy/squares/pull/652#pullrequestreview-5546493950. PR body updated (A1 collision and merge order, A8). Lane E can merge a4d48feb7 into #649.
+
+2026-10-16 ~10:35Z coordinator user-eb: PR #652 MERGE-READY at a4d48feb7 (senior Review A 0/0/1/7 + 3 suggestions, all fixed by user-eb-addr-652; reply https://github.com/jlevy/squares/pull/652#pullrequestreview-5546493950; CI green). Site v0.7.15: whichever of #644/#646/#648/#652 lands first keeps it, the rest re-cut (PR body section 'Site Edition Collision and Merge Order'). #649 carries this review; lane E merges a4d48feb7.

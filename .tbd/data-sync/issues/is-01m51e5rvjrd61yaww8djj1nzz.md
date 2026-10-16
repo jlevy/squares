@@ -5,7 +5,7 @@ title: "Import evand: exact algebraic sides for 22 current best-known packings (
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 delegate: user-eb-intake-1016
 labels:
   - result-import
@@ -13,10 +13,11 @@ dependencies: []
 parent_id: is-01m51e5r3sg4h1wcrh7c826v7b
 child_order_hints:
   - is-01m51fayepg6n4wt17qynt441n
+  - is-01m5249k5jzwfh92yjb8qe5mbp
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.050Z
-updated_at: 2026-10-16T09:53:56.424Z
+updated_at: 2026-10-16T10:32:01.969Z
 started_at: 2026-10-16T04:05:36.125Z
 ---
 Stage 1 triage of jlevy/squares#639 (evand, Evan Daniel, "Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval, exact configuration): registration request", opened 2026-10-16T03:37:13Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was run but exact sign evaluations of the source's polynomials at the record's rationals (seconds), and nothing of the source is retained yet.
