@@ -15745,6 +15745,7 @@ urls:
     builds_on: null
     evidence:
     - E-evand-639-exact-sides-report
+    - E-evand-639-verify-exact-replay
     artifacts:
     - packing/resources/web/evand-exact-cur-2026-10-16/README.md
     - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md
@@ -15752,6 +15753,8 @@ urls:
     - packing/campaign/issue-intake/upper-bounds-20261016/README.md
     - packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json
     - packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+    - packing/resources/web/evand-exact-cur-2026-10-16/receipts/replay-verify-exact.json
+    - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
 - path: result/t-194.html
   canonical: result/t-194.html
   kind: result

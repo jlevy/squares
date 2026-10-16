@@ -67,6 +67,30 @@ replay here does so before it reads them.
 The rest of the repository is pinned by the commit alone, and nothing of it was executed
 in the repository.
 
+## Replay of the Source’s Checker
+
+On 16 October 2026 `verify_exact.py`, read in full first, ran unchanged from the
+[retained copy](../evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py)
+on all 23 exact forms, the four pinned-only ones from a copy fetched from the pinned
+commit and held to the manifest, each in its own `python -I` process under CPython
+3.14.7, two at a time on a shared 4-core host
+([review/replay_verify_exact.py](review/replay_verify_exact.py),
+[review/README.md](review/README.md)).
+
+- **23 of 23 VALID**, each with the statement `data/verify.txt` prints for it, in 1,254
+  CPU seconds; 263, 297, 204 and 267 took 492, 308, 213 and 123 s.
+- **76 of 76 controls refused**, four at each of the 19 retained forms: a square moved
+  $10^{-6}$ through the wall it touches, the side raised by $10^{-6}$ in the field, the
+  side’s interval moved below its root, and a duplicate square, in 52 CPU seconds.
+- **Every polynomial irreducible** over the integers by SymPy 1.14.0’s `factor_list`,
+  so each side is algebraic of the degree the source states.
+
+The receipt is [receipts/replay-verify-exact.json](receipts/replay-verify-exact.json).
+This is the source’s own checker on the source’s data, one route: it shows each
+configuration passes the checks `verify_exact.py` makes, and its soundness is that
+program’s. The checker does not itself check that a file lists exactly $n$ squares; the
+16 October ledger’s `exact_sides.py` does, at every count.
+
 ## Credit and Licence
 
 Evan Daniel wrote the source under the MIT licence (`LICENSE`), with credits in

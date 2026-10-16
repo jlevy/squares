@@ -26266,9 +26266,10 @@ results:
 
       Here verify_exact.py, read first and run unchanged from the retained copy, accepted all
       23 files with the statements the source prints, and refused four mutated controls at
-      each count: a square moved 1e-6 through the wall it touches, the side raised by 1e-6
-      in the field, the side's interval moved below its root, and a duplicate square. That is
-      reproduction with the producer's code. SymPy factored each polynomial over the
+      each of the 19 forms the packet retains: a square moved 1e-6 through the wall it
+      touches, the side raised by 1e-6 in the field, the side's interval moved below its
+      root, and a duplicate square. That is a confirmation reproduced with the producer's
+      code, on one route. SymPy factored each polynomial over the
       integers and found every one irreducible, so each side is algebraic of the degree
       stated.
 
@@ -26289,8 +26290,8 @@ results:
       the solver, checkers and batch were written and run with Claude (Anthropic) as a coding
       and research agent, directed and reviewed by the author.
     scope: {n_values: [88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
       rationale: >-
@@ -26304,7 +26305,7 @@ results:
     attribution:
       source_keys: ['[Daniel exact current records 2026-10-16]']
       published: '2026-10-16'
-    evidence: [E-evand-639-exact-sides-report]
+    evidence: [E-evand-639-exact-sides-report, E-evand-639-verify-exact-replay]
     artifacts:
       - packing/resources/web/evand-exact-cur-2026-10-16/README.md
       - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md
@@ -26312,15 +26313,18 @@ results:
       - packing/campaign/issue-intake/upper-bounds-20261016/README.md
       - packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json
       - packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+      - packing/resources/web/evand-exact-cur-2026-10-16/receipts/replay-verify-exact.json
+      - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
+    controls: [packing/tests/test_evand_exact_cur.py]
     next_rung: >-
-      V3 and C3 need the replay of the source's own checker (think-g59l). A second route
-      over number fields here, sqpack.witness.exact_verify, needs a converter of the
-      source's format, a W7 slice with no bead; it would be an attribute beside the rung.
-      A review of the replay and of this entry's credit is a separate lane. Adoption of the
-      sixteen sides as the cases' houses is the owner's, with T-174's.
+      V4 and C4 need, on top of the replay, two accepting adversarial AI reviews by distinct
+      reviewers of the checker's soundness and of this entry, and the owner's oversight
+      record. A second route over number fields here, sqpack.witness.exact_verify, needs a
+      converter of the source's format, a W7 slice with no bead; it would be an attribute
+      beside the rung. Adoption of the sixteen sides as the cases' houses is the owner's,
+      with T-174's.
     notes: >-
-      V0 is declared, with this note as the ladder asks, until the replay's evidence is
-      registered. The case records are unchanged: each side is below its case's reported
+      The case records are unchanged: each side is below its case's reported
       and verified upper bounds, so the entry is pending adoption, as T-174 and T-186 are.
       The identity of each certificate with the packing it solves is the source's claim
       (exactsolve.py from the record's own witness); no measurement here decides it. At 153

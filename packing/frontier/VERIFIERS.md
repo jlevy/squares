@@ -25,13 +25,15 @@ second implementation agrees.
 
 ## The Short Version
 
-- **160** programs: **49** external and **111** first-party; **111** decide claims and **49** check premises.
-- **506** of **605** evidence entries name the programs that verified them: 253 reproduced with the producer’s code, 224 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
+- **162** programs: **50** external and **112** first-party; **112** decide claims and **50** check premises.
+- **507** of **606** evidence entries name the programs that verified them: 254 reproduced with the producer’s code, 224 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
 
 ## Programs
 
 | id | program | author | provenance | role | evidence | results |
 | --- | --- | --- | --- | --- | ---: | ---: |
+| [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 1 | 1 |
+| [`V-evand-639-replay-driver`](#v-evand-639-replay-driver) | replay_verify_exact.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | wand125 | external | decides | 89 | 14 |
 | [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | wand125 | external | decides | 66 | 11 |
@@ -194,6 +196,34 @@ second implementation agrees.
 | [`V-continuous-pose-followup`](#v-continuous-pose-followup) | devtools.continuous_pose_followup | Squares Project (Levy) | first-party | premises | 0 | 0 |
 
 ## By Program
+
+### `V-evand-verify-exact`
+
+**verify_exact.py** · Evan Daniel · external · decides · Python · exact-algebraic
+
+The source's standard-library checker of an exact configuration over a number field Q[t]/f: every touching inequality an identity mod f, every other one by rational interval arithmetic at the root of f, each pair separated by a side line or by circumscribed discs, and the side the unique root of p in its interval.
+
+- Source: [`packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py`](../../packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py)
+- Versions run: SHA-256 `a0f38ca87c13…`, revision `7d1407a0b66c` (byte-identical at ad86d42, the revision whose packet retains the copy that ran)
+- Note: Run unchanged from the retained copy on issue 639's 23 exact forms, each in its own python -I process (E-evand-639-verify-exact-replay).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-evand-639-verify-exact-replay` | replayed here | reproduced with the producer’s code | full: the source's exact forms, one exact configuration a count: all 23 files of search/exact/cur/data at 7d1407a, the 16 in scope among them, each decided whole | T-193 |
+
+### `V-evand-639-replay-driver`
+
+**replay_verify_exact.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Runs the source's verify_exact.py on each of issue 639's 23 exact forms and on four mutated controls at each retained form, holds the four pinned-only forms to the packet's manifest, and factors each polynomial over the integers with SymPy.
+
+- Source: [`packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py`](../../packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py)
+- Versions run: this repository's commits, which Git holds
+- Note: It decides nothing about a packing: the checker it runs does. Its irreducibility check is a premise of the stated algebraic degree, not of the bound.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-evand-639-verify-exact-replay` | replayed here | reproduced with the producer’s code | full: the source's exact forms, one exact configuration a count: all 23 files of search/exact/cur/data at 7d1407a, the 16 in scope among them, each decided whole | T-193 |
 
 ### `V-tokoharu-verify-cpp`
 

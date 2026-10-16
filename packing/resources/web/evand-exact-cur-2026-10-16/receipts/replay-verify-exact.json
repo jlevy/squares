@@ -1,0 +1,1885 @@
+{
+ "format": "evand-verify-exact-replay-v1",
+ "bead": "think-g59l",
+ "issue": "https://github.com/jlevy/squares/issues/639",
+ "ran_at_utc": "2026-10-16T07:33:09Z",
+ "wall_seconds_this_invocation": 68.7,
+ "cpu_seconds_of_runs": 1306.0,
+ "workers": 2,
+ "controls_at": "the 19 counts whose form the packet retains",
+ "program": {
+  "path": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py",
+  "sha256": "a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4",
+  "upstream": "evand/square-packing@7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1 search/exact/verify_exact.py",
+  "read_before_running": true,
+  "relationship_to_generator": "same-implementation",
+  "where": "run unchanged from the retained copy, each file in its own python -I child process"
+ },
+ "driver": {
+  "path": "packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py",
+  "sha256": "c509a238151283bdda255a56bfe8f098adae175bd275dc58855e7b570f1a9b02"
+ },
+ "environment": {
+  "python": "CPython 3.14.7 (the project interpreter); the source runs python3",
+  "sympy": "1.14.0",
+  "host": "4 CPUs, shared; nice -n 10"
+ },
+ "summary": {
+  "positives_valid": 23,
+  "positives_matching_source": 23,
+  "controls_refused": 76,
+  "controls": 76,
+  "irreducible": 23
+ },
+ "rows": [
+  {
+   "n": 51,
+   "file": "n-51.minpoly.json.gz",
+   "sha256": "d5c90fb3bdb28d5a0f2f5482ad9f65e6f2c721783940681b7bec079fc3a563d6",
+   "bytes": 2357,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-51.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 51: s(51) <= S*, S* the unique root of p (degree 2) in [7.69035593728849, 7.69035593728849]; field degree 2; 198 touching incidences proved as identities in K, 1194 strict by intervals, 1131 pairs by discs",
+    "wall_seconds": 2.53,
+    "cpu_seconds": 0.92
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-51.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 0.23,
+     "cpu_seconds": 0.11,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the R wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-51.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.2,
+     "cpu_seconds": 0.09,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-51.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.25,
+     "cpu_seconds": 0.08,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-51.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 0.22,
+     "cpu_seconds": 0.11,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 2,
+    "factor_degrees": [
+     2
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 70,
+   "file": "n-70.minpoly.json.gz",
+   "sha256": "ebcdfbe8ef670dcd26f4f2e87b961174eb2d818aeaab537f9682b5df6c7bcf8c",
+   "bytes": 3972,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-70.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 70: s(70) <= S*, S* the unique root of p (degree 5) in [8.88096037155558, 8.88096037155558]; field degree 5; 368 touching incidences proved as identities in K, 1600 strict by intervals, 2203 pairs by discs",
+    "wall_seconds": 4.06,
+    "cpu_seconds": 1.28
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-70.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 5: corner outside the box (or not proved inside)",
+     "wall_seconds": 0.32,
+     "cpu_seconds": 0.18,
+     "control": "moved-square",
+     "mutation": "square 5 moved 1e-6 through the L wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-70.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.15,
+     "cpu_seconds": 0.14,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-70.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.24,
+     "cpu_seconds": 0.14,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-70.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 0.55,
+     "cpu_seconds": 0.2,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 5,
+    "factor_degrees": [
+     5
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 88,
+   "file": "n-88.minpoly.json.gz",
+   "sha256": "a2994e3e1b15e2768898e73ed70ac58273e11535980e68cecbf2465b8c62a3ae",
+   "bytes": 5332,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-88.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 88: s(88) <= S*, S* the unique root of p (degree 7) in [9.88245103048125, 9.88245103048125]; field degree 7; 342 touching incidences proved as identities in K, 2150 strict by intervals, 3557 pairs by discs",
+    "wall_seconds": 4.68,
+    "cpu_seconds": 1.75
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-88.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 0.7,
+     "cpu_seconds": 0.27,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the L wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-88.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.65,
+     "cpu_seconds": 0.24,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-88.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.7,
+     "cpu_seconds": 0.23,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-88.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 0.76,
+     "cpu_seconds": 0.3,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 7,
+    "factor_degrees": [
+     7
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 102,
+   "file": "n-102.minpoly.json.gz",
+   "sha256": "f18300ab42162acd060ac5e85878c3aa79ea460d5284f69da2e746dabfdd985f",
+   "bytes": 5019,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-102.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 102: s(102) <= S*, S* the unique root of p (degree 4) in [10.6058286964316, 10.6058286964316]; field degree 4; 542 touching incidences proved as identities in K, 2374 strict by intervals, 4830 pairs by discs",
+    "wall_seconds": 6.96,
+    "cpu_seconds": 2.31
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-102.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 3: corner outside the box (or not proved inside)",
+     "wall_seconds": 0.49,
+     "cpu_seconds": 0.18,
+     "control": "moved-square",
+     "mutation": "square 3 moved 1e-6 through the T wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-102.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.49,
+     "cpu_seconds": 0.14,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-102.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.47,
+     "cpu_seconds": 0.14,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-102.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 0.57,
+     "cpu_seconds": 0.22,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 4,
+    "factor_degrees": [
+     4
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 123,
+   "file": "n-123.minpoly.json.gz",
+   "sha256": "891d9aa5e11e60ddfb710dd707451192ff034d6b1e276940168bf3f657c21cd6",
+   "bytes": 7052,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-123.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 123: s(123) <= S*, S* the unique root of p (degree 6) in [11.5913781454977, 11.5913781454977]; field degree 6; 691 touching incidences proved as identities in K, 2889 strict by intervals, 7100 pairs by discs",
+    "wall_seconds": 7.25,
+    "cpu_seconds": 2.64
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-123.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 0.64,
+     "cpu_seconds": 0.26,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the R wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-123.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.56,
+     "cpu_seconds": 0.21,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-123.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.58,
+     "cpu_seconds": 0.23,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-123.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 0.84,
+     "cpu_seconds": 0.3,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 6,
+    "factor_degrees": [
+     6
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 126,
+   "file": "n-126.minpoly.json.gz",
+   "sha256": "ca327d76bad09ed7d292db14d19050de4afc28f75d61655af327b4cf0be69004",
+   "bytes": 5387,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-126.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 126: s(126) <= S*, S* the unique root of p (degree 2) in [11.7426406871193, 11.7426406871193]; field degree 2; 473 touching incidences proved as identities in K, 3159 strict by intervals, 7471 pairs by discs",
+    "wall_seconds": 8.3,
+    "cpu_seconds": 2.98
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-126.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 0.42,
+     "cpu_seconds": 0.16,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the T wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-126.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.21,
+     "cpu_seconds": 0.09,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-126.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.25,
+     "cpu_seconds": 0.09,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-126.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 0.55,
+     "cpu_seconds": 0.17,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 2,
+    "factor_degrees": [
+     2
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 153,
+   "file": "n-153.minpoly.json.gz",
+   "sha256": "0e87edab97190413602ea7f04248dc928e4347878fca35a33e32d015a9e9b5dc",
+   "bytes": 8257,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-153.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 153: s(153) <= S*, S* the unique root of p (degree 7) in [12.8700138504045, 12.8700138504045]; field degree 7; 854 touching incidences proved as identities in K, 3614 strict by intervals, 11123 pairs by discs",
+    "wall_seconds": 8.66,
+    "cpu_seconds": 3.39
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-153.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 35: corner outside the box (or not proved inside)",
+     "wall_seconds": 0.95,
+     "cpu_seconds": 0.36,
+     "control": "moved-square",
+     "mutation": "square 35 moved 1e-6 through the L wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-153.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.81,
+     "cpu_seconds": 0.29,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-153.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.3,
+     "cpu_seconds": 0.24,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-153.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 0.82,
+     "cpu_seconds": 0.35,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 7,
+    "factor_degrees": [
+     7
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 172,
+   "file": "n-172.minpoly.json.gz",
+   "sha256": "e1fdda84c70abe8a0f787baf725bda363cf6fd282d3732dac5cdf092731fffa5",
+   "bytes": 337934,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-172.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 172: s(172) <= S*, S* the unique root of p (degree 12) in [13.6189889568994, 13.6189889568994]; field degree 12; 768 touching incidences proved as identities in K, 4288 strict by intervals, 14130 pairs by discs",
+    "wall_seconds": 17.04,
+    "cpu_seconds": 5.78
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-172.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 2.76,
+     "cpu_seconds": 1.07,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the T wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-172.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 1.57,
+     "cpu_seconds": 0.85,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-172.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 2.55,
+     "cpu_seconds": 0.94,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-172.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 2.86,
+     "cpu_seconds": 1.06,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 12,
+    "factor_degrees": [
+     12
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.01,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 175,
+   "file": "n-175.minpoly.json.gz",
+   "sha256": "c612cbbe465ad8f8b7f1a50f7b9c85737041fe15fdcd758c850bae888ca3c13c",
+   "bytes": 9148,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-175.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 175: s(175) <= S*, S* the unique root of p (degree 7) in [13.7641743174866, 13.7641743174866]; field degree 7; 936 touching incidences proved as identities in K, 4060 strict by intervals, 14676 pairs by discs",
+    "wall_seconds": 10.71,
+    "cpu_seconds": 4.18
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-175.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 3: corner outside the box (or not proved inside)",
+     "wall_seconds": 0.9,
+     "cpu_seconds": 0.44,
+     "control": "moved-square",
+     "mutation": "square 3 moved 1e-6 through the B wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-175.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.93,
+     "cpu_seconds": 0.35,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-175.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.52,
+     "cpu_seconds": 0.33,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-175.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 1.25,
+     "cpu_seconds": 0.46,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 7,
+    "factor_degrees": [
+     7
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 199,
+   "file": "n-199.minpoly.json.gz",
+   "sha256": "9374939e4ed7ba0c9486c3f7dbb1177423da86d0e7e948100600ce3ec6783516",
+   "bytes": 169554,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-199.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 199: s(199) <= S*, S* the unique root of p (degree 16) in [14.6175721735928, 14.6175721735928]; field degree 16; 912 touching incidences proved as identities in K, 4968 strict by intervals, 19027 pairs by discs",
+    "wall_seconds": 30.25,
+    "cpu_seconds": 10.78
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-199.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 37: corner outside the box (or not proved inside)",
+     "wall_seconds": 4.01,
+     "cpu_seconds": 1.64,
+     "control": "moved-square",
+     "mutation": "square 37 moved 1e-6 through the T wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-199.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 4.82,
+     "cpu_seconds": 1.76,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-199.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 4.25,
+     "cpu_seconds": 1.61,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-199.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 4.34,
+     "cpu_seconds": 1.66,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 16,
+    "factor_degrees": [
+     16
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 204,
+   "file": "n-204.minpoly.json.gz",
+   "sha256": "59cd30fc2b68ce65beb86fd5a5a881e4256ce375305e510ce4b23ee6e02c70bb",
+   "bytes": 3534100,
+   "where": "pinned by digest; read from a copy outside the repository",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-204.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 204: s(204) <= S*, S* the unique root of p (degree 35) in [14.808663234387, 14.808663234387]; field degree 35; 1098 touching incidences proved as identities in K, 4754 strict by intervals, 20059 pairs by discs",
+    "wall_seconds": 647.5,
+    "cpu_seconds": 212.99
+   },
+   "matches_source_verify_txt": true,
+   "controls": [],
+   "polynomial": {
+    "degree": 35,
+    "factor_degrees": [
+     35
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.03,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 207,
+   "file": "n-207.minpoly.json.gz",
+   "sha256": "f39fedbf8b64411ee31973ddce92343c9dd922f937831ef42d69d8104f0cef85",
+   "bytes": 12075,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-207.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 207: s(207) <= S*, S* the unique root of p (degree 5) in [14.8809603715556, 14.8809603715556]; field degree 5; 1285 touching incidences proved as identities in K, 4831 strict by intervals, 20620 pairs by discs",
+    "wall_seconds": 10.57,
+    "cpu_seconds": 4.94
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-207.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 5: corner outside the box (or not proved inside)",
+     "wall_seconds": 0.83,
+     "cpu_seconds": 0.36,
+     "control": "moved-square",
+     "mutation": "square 5 moved 1e-6 through the L wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-207.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.8,
+     "cpu_seconds": 0.25,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-207.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.73,
+     "cpu_seconds": 0.22,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-207.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 0.88,
+     "cpu_seconds": 0.36,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 5,
+    "factor_degrees": [
+     5
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 232,
+   "file": "n-232.minpoly.json.gz",
+   "sha256": "7386edf3c3066102e8fb7ce1dccca0bdea729fcd92f80384aed3289b9fd1bbc7",
+   "bytes": 10940,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-232.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 232: s(232) <= S*, S* the unique root of p (degree 7) in [15.7641743174866, 15.7641743174866]; field degree 7; 949 touching incidences proved as identities in K, 5875 strict by intervals, 26018 pairs by discs",
+    "wall_seconds": 13.9,
+    "cpu_seconds": 6.75
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-232.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 3: corner outside the box (or not proved inside)",
+     "wall_seconds": 1.18,
+     "cpu_seconds": 0.43,
+     "control": "moved-square",
+     "mutation": "square 3 moved 1e-6 through the L wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-232.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.88,
+     "cpu_seconds": 0.31,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-232.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 1.06,
+     "cpu_seconds": 0.35,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-232.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 1.28,
+     "cpu_seconds": 0.5,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 7,
+    "factor_degrees": [
+     7
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 258,
+   "file": "n-258.minpoly.json.gz",
+   "sha256": "e0656208342c530bf4b013e69b2c7113cd1c2d7ce54ab7a443aaa74ac0fe73bf",
+   "bytes": 22847,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-258.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 258: s(258) <= S*, S* the unique root of p (degree 8) in [16.5634480021338, 16.5634480021338]; field degree 8; 1641 touching incidences proved as identities in K, 6047 strict by intervals, 32263 pairs by discs",
+    "wall_seconds": 42.4,
+    "cpu_seconds": 7.52
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-258.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 1.47,
+     "cpu_seconds": 0.62,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the L wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-258.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 1.03,
+     "cpu_seconds": 0.45,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-258.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 1.3,
+     "cpu_seconds": 0.45,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-258.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 1.37,
+     "cpu_seconds": 0.6,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 8,
+    "factor_degrees": [
+     8
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 259,
+   "file": "n-259.minpoly.json.gz",
+   "sha256": "5e9ffafc766a0a5a5090b66a418383e83c6b4b3f7efd9f1c94c5213185ca565f",
+   "bytes": 10876,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-259.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 259: s(259) <= S*, S* the unique root of p (degree 6) in [16.5913781454977, 16.5913781454977]; field degree 6; 785 touching incidences proved as identities in K, 6931 strict by intervals, 32518 pairs by discs",
+    "wall_seconds": 17.91,
+    "cpu_seconds": 7.29
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-259.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 1.09,
+     "cpu_seconds": 0.5,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the B wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-259.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.61,
+     "cpu_seconds": 0.27,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-259.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.8,
+     "cpu_seconds": 0.31,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-259.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 0.98,
+     "cpu_seconds": 0.42,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 6,
+    "factor_degrees": [
+     6
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 263,
+   "file": "n-263.minpoly.json.gz",
+   "sha256": "d07bda8a3e78e0af0390cc09d4fb820f373e26cff5147791ca0587d6eac4020f",
+   "bytes": 8960033,
+   "where": "pinned by digest; read from a copy outside the repository",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-263.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 263: s(263) <= S*, S* the unique root of p (degree 12) in [16.7331660078994, 16.7331660078994]; field degree 12; 1482 touching incidences proved as identities in K, 6342 strict by intervals, 33549 pairs by discs",
+    "wall_seconds": 1698.37,
+    "cpu_seconds": 492.4
+   },
+   "matches_source_verify_txt": true,
+   "controls": [],
+   "polynomial": {
+    "degree": 12,
+    "factor_degrees": [
+     12
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.01,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 266,
+   "file": "n-266.minpoly.json.gz",
+   "sha256": "e5221442c72ba92d11969106808ca90024c68e1f3c1d4394efb00348ed220ff1",
+   "bytes": 55813,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-266.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 266: s(266) <= S*, S* the unique root of p (degree 32) in [16.8230287507565, 16.8230287507565]; field degree 32; 1425 touching incidences proved as identities in K, 6471 strict by intervals, 34335 pairs by discs",
+    "wall_seconds": 73.7,
+    "cpu_seconds": 14.88
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-266.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 13.94,
+     "cpu_seconds": 5.47,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the T wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-266.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 14.54,
+     "cpu_seconds": 5.69,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-266.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 13.31,
+     "cpu_seconds": 5.66,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-266.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 13.94,
+     "cpu_seconds": 5.64,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 32,
+    "factor_degrees": [
+     32
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.02,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 267,
+   "file": "n-267.minpoly.json.gz",
+   "sha256": "09a7ca619f96a240ec7416008e1d40f3768596a2d6e0a18bba0505eec4b47907",
+   "bytes": 1545171,
+   "where": "pinned by digest; read from a copy outside the repository",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-267.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 267: s(267) <= S*, S* the unique root of p (degree 41) in [16.8388152699483, 16.8388152699483]; field degree 41; 428 touching incidences proved as identities in K, 7548 strict by intervals, 34585 pairs by discs",
+    "wall_seconds": 424.83,
+    "cpu_seconds": 123.01
+   },
+   "matches_source_verify_txt": true,
+   "controls": [],
+   "polynomial": {
+    "degree": 41,
+    "factor_degrees": [
+     41
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.04,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 292,
+   "file": "n-292.minpoly.json.gz",
+   "sha256": "1e6c03a90eb75f0cbe77b77800cc3790b6bd4e431461d493146267b4b9e57ecc",
+   "bytes": 14649,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-292.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 292: s(292) <= S*, S* the unique root of p (degree 6) in [17.5913781454977, 17.5913781454977]; field degree 6; 1559 touching incidences proved as identities in K, 7181 strict by intervals, 41469 pairs by discs",
+    "wall_seconds": 47.77,
+    "cpu_seconds": 8.56
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-292.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 17: corner outside the box (or not proved inside)",
+     "wall_seconds": 1.28,
+     "cpu_seconds": 0.45,
+     "control": "moved-square",
+     "mutation": "square 17 moved 1e-6 through the T wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-292.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.85,
+     "cpu_seconds": 0.28,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-292.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.73,
+     "cpu_seconds": 0.29,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-292.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 0.95,
+     "cpu_seconds": 0.5,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 6,
+    "factor_degrees": [
+     6
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 295,
+   "file": "n-295.minpoly.json.gz",
+   "sha256": "40ef2669ce031f832806c0f8942eae2a7b533064d027d8e82e020e891bf82d94",
+   "bytes": 14613,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-295.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 295: s(295) <= S*, S* the unique root of p (degree 2) in [17.704232790736, 17.704232790736]; field degree 2; 1985 touching incidences proved as identities in K, 6859 strict by intervals, 42334 pairs by discs",
+    "wall_seconds": 45.83,
+    "cpu_seconds": 10.79
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-295.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 0.8,
+     "cpu_seconds": 0.32,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the B wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-295.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.49,
+     "cpu_seconds": 0.19,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-295.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.46,
+     "cpu_seconds": 0.18,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-295.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 1.25,
+     "cpu_seconds": 0.44,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 2,
+    "factor_degrees": [
+     2
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 297,
+   "file": "n-297.minpoly.json.gz",
+   "sha256": "6037de6de4d2c28a2a3bd92bca26fea64f31cbbfdc94519276059e158bade939",
+   "bytes": 6714645,
+   "where": "pinned by digest; read from a copy outside the repository",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-297.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 297: s(297) <= S*, S* the unique root of p (degree 12) in [17.7404172875438, 17.7404172875438]; field degree 12; 1373 touching incidences proved as identities in K, 7527 strict by intervals, 42919 pairs by discs",
+    "wall_seconds": 1146.56,
+    "cpu_seconds": 308.34
+   },
+   "matches_source_verify_txt": true,
+   "controls": [],
+   "polynomial": {
+    "degree": 12,
+    "factor_degrees": [
+     12
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.01,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 301,
+   "file": "n-301.minpoly.json.gz",
+   "sha256": "5d262ea23a4f86601798b8def37308cf6a788be080b5225e02677c4a64e847f5",
+   "bytes": 10982,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-301.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 301: s(301) <= S*, S* the unique root of p (degree 4) in [17.8466671928435, 17.8466671928435]; field degree 4; 566 touching incidences proved as identities in K, 8446 strict by intervals, 44101 pairs by discs",
+    "wall_seconds": 21.74,
+    "cpu_seconds": 10.19
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-301.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 1.06,
+     "cpu_seconds": 0.42,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the T wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-301.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.45,
+     "cpu_seconds": 0.2,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-301.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.56,
+     "cpu_seconds": 0.21,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-301.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 1.41,
+     "cpu_seconds": 0.5,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 4,
+    "factor_degrees": [
+     4
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  },
+  {
+   "n": 302,
+   "file": "n-302.minpoly.json.gz",
+   "sha256": "8da6f8b0fd660fe46e7c9487b24ccc4e8a64253e0c0bdb46e3d42c238ff2c049",
+   "bytes": 14071,
+   "where": "retained in the packet",
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n-302.minpoly.json.gz"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 302: s(302) <= S*, S* the unique root of p (degree 7) in [17.8700138504045, 17.8700138504045]; field degree 7; 984 touching incidences proved as identities in K, 8064 strict by intervals, 44397 pairs by discs",
+    "wall_seconds": 24.25,
+    "cpu_seconds": 10.05
+   },
+   "matches_source_verify_txt": true,
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-302.moved-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 1.17,
+     "cpu_seconds": 0.46,
+     "control": "moved-square",
+     "mutation": "square 0 moved 1e-6 through the T wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-302.enlarged-side.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 0.96,
+     "cpu_seconds": 0.35,
+     "control": "enlarged-side",
+     "mutation": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-302.side-below-root.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 0.83,
+     "cpu_seconds": 0.33,
+     "control": "side-below-root",
+     "mutation": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n-302.duplicate-square.minpoly.json.gz"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 1.84,
+     "cpu_seconds": 0.62,
+     "control": "duplicate-square",
+     "mutation": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ],
+   "polynomial": {
+    "degree": 7,
+    "factor_degrees": [
+     7
+    ],
+    "irreducible": true,
+    "cpu_seconds": 0.0,
+    "method": "sympy 1.14.0 factor_list over the integers"
+   }
+  }
+ ]
+}
