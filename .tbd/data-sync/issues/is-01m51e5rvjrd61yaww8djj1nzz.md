@@ -5,7 +5,7 @@ title: "Import evand: exact algebraic sides for 22 current best-known packings (
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: ecstatic-edison-intake-1016
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.050Z
-updated_at: 2026-10-16T04:26:24.034Z
+updated_at: 2026-10-16T04:59:50.725Z
 started_at: 2026-10-16T04:05:36.125Z
 ---
 Stage 1 triage of jlevy/squares#639 (evand, Evan Daniel, "Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval, exact configuration): registration request", opened 2026-10-16T03:37:13Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was run but exact sign evaluations of the source's polynomials at the record's rationals (seconds), and nothing of the source is retained yet.
@@ -64,3 +64,7 @@ Three questions for the record:
 3. At 207, does the unverified pair (73, 74) on your re-solve of the register's witness point at anything in that witness, or only at the re-solve?
 
 blocked_on: none
+
+## Notes
+
+2026-10-16 ~05:05Z, ecstatic-edison-intake-1016, state for recovery: stage 1 triage is done and in this bead's description (claim map, pin and digests, price, disposition, draft acknowledgement). Pushed on origin claude/ecstatic-edison-8en33t-intake-1016 at bd1f40425 (no PR yet): 09463a2af adds #639's and #640's entries to packing/campaign/result-requests.yaml (triage: done, results queued with beads, no reply posted), moves #622's read_through to its author's AI answer, and adds two evand reads to intake-watch.yaml (44a105e, bead think-0ayk; 7d1407a, bead think-phyb); bd1f40425 adds the methods survey's no-change record in release.py (render at e2e018f3 byte-identical in 42 files). Validation at bd1f40425: check_requests exit 0 (#639 and #640 reply due), --github 0 differences, packing-validate --records exit 0 (52/110 steps, 134 s), check_release_impact OK, release_pin --check OK (no re-pin), pytest of the requests, sweep and release tests 145 passed; packing-validate --push was running. New beads: think-g59l (#639 replay, <= 0.6 CPU-h), think-nqnl (#640 full build, held), think-o40t (#640 review), think-ve84 (backlog). Next: the owner's think-xik9 (the X announcement as a source on #640, sq19 watched), then the draft PR (labels intake, S1).

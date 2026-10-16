@@ -5,7 +5,7 @@ title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: ecstatic-edison-intake-1016
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-16T04:57:19.822Z
+updated_at: 2026-10-16T04:59:51.506Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
 Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was built or run, and nothing of the source is retained yet.
@@ -67,3 +67,9 @@ blocked_on: none
 ## Notes
 
 2026-10-16 owner: track the public announcement of this proof, https://x.com/ofitzharding/status/2110935681597874374 (ofitzharding on X), with the repository https://github.com/ofitzharding/sq19 (v1.0.0, pinned 34fb2b7bc39465db368c45cb48d4db58829d3051 in #640). Record the announcement as a source of the #640 entry alongside the repo; add the repo to intake-watch.yaml.
+
+2026-10-16 ~05:05Z, ecstatic-edison-intake-1016, state for recovery: stage 1 triage is done and in this bead's description (claim map, pin and digests, price, disposition, draft acknowledgement). Pushed on origin claude/ecstatic-edison-8en33t-intake-1016 at bd1f40425 (no PR yet): 09463a2af adds #639's and #640's entries to packing/campaign/result-requests.yaml (triage: done, results queued with beads, no reply posted), moves #622's read_through to its author's AI answer, and adds two evand reads to intake-watch.yaml (44a105e, bead think-0ayk; 7d1407a, bead think-phyb); bd1f40425 adds the methods survey's no-change record in release.py (render at e2e018f3 byte-identical in 42 files). Validation at bd1f40425: check_requests exit 0 (#639 and #640 reply due), --github 0 differences, packing-validate --records exit 0 (52/110 steps, 134 s), check_release_impact OK, release_pin --check OK (no re-pin), pytest of the requests, sweep and release tests 145 passed; packing-validate --push was running. New beads: think-g59l (#639 replay, <= 0.6 CPU-h), think-nqnl (#640 full build, held), think-o40t (#640 review), think-ve84 (backlog). Next: the owner's think-xik9 (the X announcement as a source on #640, sq19 watched), then the draft PR (labels intake, S1).
+
+2026-10-16 ~05:05Z, ecstatic-edison-intake-1016: the announcement was fetched from X's syndication endpoint at 2026-10-16T04:58:12Z (HTTP 200, 2,278 bytes, SHA-256 1af584d9777af2ed54c0f64e98bfe209911d7dfdb63217cfb77a9646cd65b3b5; scratch copy, to be retained in the packet's receipts/announcement/ as the sq17 packet retained its post). Post 2110935681597874374 by @ofitzharding (display name "Oscar", account 2097726704118603776, the account of the s(17) announcement), created 2026-10-16T03:27:40Z, text "lol here's a lean proof of the optimal packing for 19 squares" with a link expanding to https://github.com/ofitzharding/sq19 and one photo. It precedes issue #640 (03:41:08Z); the repository's first commit is 02:15:45Z and release v1.0.0 was published 02:38:08Z.
+
+Watching sq19: intake-watch.yaml cannot make a repository watched. Its schema says the watched repositories are derived from the source register, a packet's acquisition record and the site's list of other projects, and devtools.intake_sweep lists a read of a repository no record cites as "intake-watch.yaml reads <url>, which no record cites; remove the entry" and does not ls-remote it. So the plan is stage 2 now: the packet fitzharding-n19-lean-2026-10-16 with an acquisition record pinning 34fb2b7 (packing/resources/web/, no release-impact owner), which makes the sweep watch sq19 with its head pinned, and the announcement retained in it; the bibliography.yaml key, the one site-owned input, waits for stage 3, which registers the result. A read in intake-watch.yaml through 34fb2b7 would then be redundant (the sweep says a read of a pinned head can be removed); one is added only if the head moves past the pin before merge.
