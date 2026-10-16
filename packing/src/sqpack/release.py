@@ -1138,9 +1138,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "never regularized_drawings, reach default_drawings only through shared "
             "import discovery and read neither constant, and the survey cites n = 105, 129 "
             "and 146 by link only, as its results table's count links. Manuscripts, "
-            "figures, credits and print rules are unchanged by source review. No render "
-            "was taken, and all four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the "
-            "site takes the patch."
+            "figures, credits and print rules are unchanged by source review. Rendered at "
+            "one link revision (e2e018f3), once from main e2e018f3's tree and once from "
+            "this branch's at 780d81b8, the survey's and both reviews' HTML, before the "
+            "browser's math pass, their Markdown and the other 40 files each render "
+            "writes are byte-identical (42 of 42 files each); the explainer, whose render "
+            "needs a browser this host lacks, is source-reviewed only, and no PDF was "
+            "rebuilt. All four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the site "
+            "takes the patch."
         ),
     ),
     ReleaseNoPublicChange(
