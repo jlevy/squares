@@ -832,9 +832,12 @@ def news_topics(topics: Sequence[str]) -> str:
 
 def news_rating(rating: Significance) -> str:
     """An archive article uses the same significance meter as a result."""
-    from devtools.overview_sections import rung_meanings, significance_mark  # noqa: PLC0415
+    from devtools.overview_sections import (  # noqa: PLC0415
+        significance_mark,
+        significance_tooltip,
+    )
 
-    meaning = f"{rung_meanings()[f'S{rating["score"]}']} {rating['rationale']}"
+    meaning = significance_tooltip(rating["score"])
     return (
         f'<p class="site-news-significance">{significance_mark(rating["score"], meaning)}</p>'
     )
@@ -858,8 +861,11 @@ def news_article_header(
 
 def news_filters(topics_present: set[str] | None = None) -> str:
     """Progressive controls: without the enhancement every article stays visible."""
+    from devtools.overview_sections import significance_tooltip  # noqa: PLC0415
+
     scores = "".join(
         f'<button type="button" data-news-score="{score}" '
+        f'title="{html.escape(significance_tooltip(score), quote=True)}" '
         f'aria-pressed="{str(score >= 4).lower()}">S{score}</button>'
         for score in range(3, 6)
     )
@@ -875,19 +881,13 @@ def news_filters(topics_present: set[str] | None = None) -> str:
         '<fieldset><legend class="site-visually-hidden" id="news-significance-label">'
         'Significance</legend><div class="site-tabs site-chooser-small" role="group" '
         'aria-labelledby="news-significance-label">'
-        f'{scores}<button type="button" data-news-all="scores" '
-        'aria-label="All significance">All</button>'
-        '</div></fieldset><fieldset><legend class="site-visually-hidden" '
+        f'{scores}</div></fieldset><fieldset><legend class="site-visually-hidden" '
         'id="news-topics-label">Topics</legend>'
         '<div class="site-tabs site-chooser-small" role="group" '
-        f'aria-labelledby="news-topics-label">{topics}'
-        '<button type="button" data-news-all="topics" '
-        'aria-label="All topics (0)">All'
-        '<span class="site-cell-quiet" data-news-tally> (0)</span>'
-        "</button></div></fieldset>"
+        f'aria-labelledby="news-topics-label">{topics}</div></fieldset>'
         '<div class="site-table-tools">'
-        '<div class="site-tabs site-chooser-small">'
-        '<button type="button" data-news-reset>Reset filters</button></div>'
+        '<button type="button" class="site-news-reset" data-news-reset>'
+        "Reset filters</button>"
         '<span class="site-count" data-news-count role="status" '
         'aria-live="polite"></span></div>'
         "<p data-news-empty hidden>No news matches these filters.</p></div>"

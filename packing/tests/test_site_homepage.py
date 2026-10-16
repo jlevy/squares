@@ -918,8 +918,12 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         sync_api.expect(title_link).to_have_attribute("href", f"news.html#{anchor}")
         title_link.click()
         page.wait_for_url(f"{ORIGIN}news.html#{anchor}")
-        page.locator('[data-news-all="scores"]').click()
+        page.locator('button[data-news-score="3"]').click()
         news = page.evaluate(NEWS)
+        if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+            page.locator("[data-news-day]:visible").first.screenshot(
+                path=str(Path(screenshot_dir) / f"news-card-{width}.png")
+            )
         document = render_changelog.load()
         entries = render_changelog.news_entries(document)
         assert len(news["entries"]) == len(entries)
@@ -947,6 +951,10 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                 assert day["title_before_date"]
                 assert day["date_before_topics"]
                 assert day["metadata_after_date"]
+                for gap in ("title_date_gap", "date_metadata_gap", "metadata_body_gap"):
+                    assert 0 <= day[gap] <= 7, (day["id"], gap, day[gap])
+                if day["paragraph_gap"] is not None:
+                    assert 4 <= day["paragraph_gap"] <= 12
                 assert day["meter_count"] == 1
                 assert day["meter_label"].startswith("Significance S")
                 assert day["meter_tooltip"]
@@ -984,10 +992,13 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         entry_id = card.locator("[data-news-entry]").get_attribute("data-news-entry")
         entry = next(item for item in entries if item["id"] == entry_id)
         assert meaning is not None
+        score = entry["significance"]["score"]
         assert (
-            overview_sections.rung_meanings()[f"S{entry['significance']['score']}"] in meaning
+            meaning == f"Significance S{score}: {overview_sections.significance_tooltip(score)}"
         )
-        assert entry["significance"]["rationale"] in meaning
+        assert "heuristic" in meaning
+        assert len(meaning) <= 120
+        assert entry["significance"]["rationale"] not in meaning
         tooltip = page.locator(".site-rating-tooltip.kpress-tooltip-visible")
         for interaction in ("hover", "focus", "press"):
             page.mouse.move(0, 0)
@@ -1197,8 +1208,14 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             matches = sum(topic in entry.get("topics", []) for entry in scored)
             assert tally["tally"] == f" ({matches})"
             assert tally["name"] == f"{tally['label']} ({matches})"
-        assert seen["all_topics_tally"] == f" ({len(scored)})"
-        assert seen["all_topics_name"] == f"All topics ({len(scored)})"
+        assert seen["all_buttons"] == 0
+        assert len(seen["resets"]) == 1
+        assert seen["resets"][0]["label"] == "Reset filters"
+        assert seen["resets"][0]["appearance"]["border-top-width"] == "0px"
+        assert seen["resets"][0]["appearance"]["border-bottom-width"] == "0px"
+        for score, meaning in seen["score_tooltips"].items():
+            description = overview_sections.significance_tooltip(int(score))
+            assert meaning == f"Significance S{score}: {description}"
         assert parse_qs(urlsplit(page.url).query)["reader"] == ["kept"]
         assert seen["overflow"] == 0
         return seen
@@ -1250,10 +1267,14 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                         assert sample is not None
                         if interaction == "focus":
                             assert sample["focus_visible"]
+                            if name == "scores":
+                                assert control.get_attribute("role") is None
+                                sync_api.expect(
+                                    page.locator(".site-rating-tooltip.kpress-tooltip-visible")
+                                ).to_contain_text("heuristic importance")
                         if name == "topics":
                             assert sample["label"] == sample["chip_label"]
                             for property_name in (
-                                "background-color",
                                 "color",
                                 "text-transform",
                                 "font-variant-caps",
@@ -1268,6 +1289,18 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                                     interaction,
                                     property_name,
                                 )
+                            fill = sample["appearance"]["background-color"]
+                            if interaction == "hover":
+                                assert fill != sample["chip"]["background-color"]
+                                assert fill != sample["neutral"]["background-color"]
+                                if scheme == "light":
+                                    assert sample["brightness"] > sample["chip_brightness"]
+                                else:
+                                    assert sample["brightness"] < sample["chip_brightness"]
+                            elif selection == "selected":
+                                assert fill == sample["chip"]["background-color"]
+                            else:
+                                assert fill == sample["neutral"]["background-color"]
                         samples[selection, interaction] = {
                             key: sample[key]
                             for key in ("appearance", "border", "gap", "height")
@@ -1282,6 +1315,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 "letter-spacing",
                 "box-shadow",
                 "outline-color",
+                "text-decoration-line",
             }
             for key, topic in appearances["topics"].items():
                 home = appearances["home"][key]
@@ -1299,8 +1333,11 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 if key[1] == "focus":
                     assert topic["appearance"]["outline-style"] != "none"
                     assert topic["appearance"]["outline-width"] != "0px"
-                assert (topic["appearance"]["box-shadow"] != "none") == (key[0] == "selected")
-                assert topic["border"] == home["border"] == "1px"
+                assert topic["appearance"]["box-shadow"] == "none"
+                assert topic["appearance"]["text-decoration-line"] == "none"
+                assert topic["border"] == home["border"] == "0px"
+                assert topic["appearance"]["border-top-width"] == "1px"
+                assert topic["appearance"]["border-right-width"] == "1px"
                 assert topic["gap"] == home["gap"] == "normal"
                 assert topic["height"] == pytest.approx(home["height"], abs=0.1)
             topic_group = page.locator('[aria-labelledby="news-topics-label"]')
@@ -1316,7 +1353,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 assert group_box["y"] <= box["y"]
                 assert box["y"] + box["height"] <= group_box["y"] + group_box["height"]
                 sync_api.expect(button).to_have_css("white-space", "nowrap")
-                sync_api.expect(button).to_have_css("border-right-width", "0px")
+                sync_api.expect(button).to_have_css("border-right-width", "1px")
                 if topic := button.get_attribute("data-news-topic"):
                     sample = page.evaluate(
                         NEWS_FILTERS,
@@ -1326,16 +1363,18 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                         },
                     )["chooser"]
                     assert sample["label"] == sample["chip_label"]
-                    assert (
-                        sample["appearance"]["background-color"]
-                        == sample["chip"]["background-color"]
-                    )
             if width == 390:
                 assert len(rows) > 1
             request.node.user_properties.append(
                 (f"chooser-{scheme}", str(appearances["home"]["selected", "normal"]))
             )
             seen = state()
+            if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+                page.locator(".site-news-filters").screenshot(
+                    path=str(Path(screenshot_dir) / f"news-chooser-{scheme}-{width}.png")
+                )
+            palette = seen["topic_palette"]
+            assert len(set(palette.values())) == len(palette)
             assert seen["groups"] == [
                 {"name": "Significance", "hidden_legend": True, "tabs": 0},
                 {"name": "Topics", "hidden_legend": True, "tabs": 0},
@@ -1357,7 +1396,10 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 != appearances["home"]["selected", "normal"]["appearance"]["font-size"]
             ), "the contract must reject a page-specific chooser override"
             page.goto(f"{ORIGIN}results.html", wait_until="load")
-            results_count = state()["count_style"]
+            results_state = state()
+            results_count = results_state["count_style"]
+            for topic in set(palette) & set(results_state["topic_palette"]):
+                assert palette[topic] == results_state["topic_palette"][topic]
             for key in ("font-family", "font-size", "font-weight", "line-height", "color"):
                 assert news_count[key] == results_count[key], (scheme, key)
         page.emulate_media(color_scheme="light")
@@ -1388,12 +1430,20 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         check({3, 4, 5}, {"optimality", "verification"})
         page.locator("[data-news-reset]").click()
         check({4, 5})
+        for topic in used_topics:
+            page.locator(f'button[data-news-topic="{topic}"]').click()
+        check({4, 5}, set())
+        assert parse_qs(urlsplit(page.url).query)["news-topics"] == ["none"]
+        page.locator("[data-news-reset]").click()
+        check({4, 5})
+        assert "news-topics" not in parse_qs(urlsplit(page.url).query)
         for score in (4, 5):
             button = page.locator(f'button[data-news-score="{score}"]')
             button.tap() if width == 390 else button.click()
         check(set())
         assert parse_qs(urlsplit(page.url).query)["news-s"] == ["none"]
-        page.locator('[data-news-all="scores"]').click()
+        for score in (3, 4, 5):
+            page.locator(f'button[data-news-score="{score}"]').click()
         check({3, 4, 5})
         page.locator("[data-news-reset]").click()
         check({4, 5})
@@ -1432,25 +1482,6 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         page.goto(f"{ORIGIN}news.html?reader=kept#%E0%A4%A", wait_until="load")
         check({4, 5})
         assert errors == [], "a malformed bookmark must not break either enhancement"
-        specimens = "".join(
-            overview_sections.significance_mark(level, "Importance only.")
-            for level in range(overview_sections.SIGNIFICANCE_TOP + 1)
-        )
-        samples = page.evaluate(NEWS_FILTERS, {"meters": specimens})["samples"]
-        assert len(samples) == 6
-        assert (
-            max(item["width"] for item in samples) - min(item["width"] for item in samples)
-            <= 0.1
-        )
-        for item in samples:
-            assert item["filled"] == item["level"]
-            assert item["border"] == 1
-            assert len(item["bars"]) == 5
-            for bar in item["bars"]:
-                assert bar["border"] == 1
-                assert bar["height"] > 0.5 * item["font"]
-                assert bar["width"] > 0.4 * item["font"]
-                assert (bar["fill"] == "rgba(0, 0, 0, 0)") is (not bar["filled"])
         static = browser.new_page(
             viewport={"width": width, "height": 900}, java_script_enabled=False
         )
@@ -1465,5 +1496,44 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             )
         finally:
             static.close()
+    finally:
+        page.close()
+
+
+@pytest.mark.parametrize("width", WIDTHS)
+def test_significance_meter_spacing_rejects_oversized_boxes(
+    browser: Any, payloads: dict[str, bytes], width: int
+) -> None:
+    page = browser.new_page(viewport={"width": width, "height": 900}, reduced_motion="reduce")
+    _serve(page, payloads)
+    try:
+        page.goto(f"{ORIGIN}news.html", wait_until="load")
+        specimens = "".join(
+            overview_sections.significance_mark(level, "Importance only.")
+            for level in range(overview_sections.SIGNIFICANCE_TOP + 1)
+        )
+        samples = page.evaluate(NEWS_FILTERS, {"meters": specimens})["samples"]
+        assert len(samples) == 6
+        assert (
+            max(item["width"] for item in samples) - min(item["width"] for item in samples)
+            <= 0.1
+        )
+        for item in samples:
+            assert item["filled"] == item["level"]
+            assert item["border"] == 1
+            assert item["border_color"] == item["color"]
+            assert item["side_space"] <= 0.7 * item["font"]
+            assert len(item["bars"]) == 5
+            for bar in item["bars"]:
+                assert bar["border"] == 1
+                assert bar["height"] > 0.5 * item["font"]
+                assert bar["width"] > 0.4 * item["font"]
+                assert (bar["fill"] == "rgba(0, 0, 0, 0)") is (not bar["filled"])
+        oversized = page.evaluate(
+            NEWS_FILTERS, {"meters": specimens, "wideMeters": True}
+        )["samples"]
+        assert all(item["side_space"] > 0.7 * item["font"] for item in oversized), (
+            "the spacing probe must reject excessive meter whitespace", oversized
+        )
     finally:
         page.close()

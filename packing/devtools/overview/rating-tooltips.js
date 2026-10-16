@@ -6,7 +6,7 @@
   }
   const place = position;
   const selector =
-    ".site-atlas-badge[title], .site-significance[title], .site-chip.site-rung-fill[title], .site-star[title], .badge-item[title]";
+    ".site-atlas-badge[title], .site-significance[title], button[data-news-score][title], .site-chip.site-rung-fill[title], .site-star[title], .badge-item[title]";
   /** @type {{ trigger: HTMLElement; tooltip: HTMLElement } | null} */
   let active = null;
   let pendingShow = 0;
@@ -128,11 +128,12 @@
     if (!meaning) {
       return;
     }
-    const rung = trigger.classList.contains("site-significance")
-      ? `S${trigger.dataset.level}`
-      : trigger.classList.contains("site-rung-fill")
-        ? trigger.textContent?.trim() || ""
-        : "";
+    const rung =
+      trigger.classList.contains("site-significance") || trigger.dataset.newsScore
+        ? `S${trigger.dataset.level || trigger.dataset.newsScore}`
+        : trigger.classList.contains("site-rung-fill")
+          ? trigger.textContent?.trim() || ""
+          : "";
     const scale = { S: "Significance", V: "Verification", C: "Confirmation" }[
       /** @type {"S" | "V" | "C"} */ (rung.charAt(0))
     ];
@@ -140,7 +141,9 @@
     // Source titles remain a useful no-JS fallback. Enhanced badges have one tooltip.
     trigger.removeAttribute("title");
     trigger.removeAttribute("aria-hidden");
-    trigger.setAttribute("role", "img");
+    if (!(trigger instanceof HTMLButtonElement)) {
+      trigger.setAttribute("role", "img");
+    }
     if (!trigger.hasAttribute("aria-label")) {
       trigger.setAttribute("aria-label", rung ? `${scale} ${rung}` : meaning);
     }
@@ -155,14 +158,18 @@
     trigger.addEventListener("focus", () => show(trigger));
     trigger.addEventListener("blur", delayHide);
     trigger.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
+      if (!(trigger instanceof HTMLButtonElement)) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
       show(trigger);
     });
     trigger.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        event.stopPropagation();
+        if (!(trigger instanceof HTMLButtonElement)) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
         show(trigger);
       }
     });

@@ -1,10 +1,18 @@
 // The archive's actual facets, disclosed cards, centered controls and shared meters.
-/** @param {{ meters?: string, chooser?: string, choice?: string, overrideChooser?: boolean } | null} options */
+/** @param {{ meters?: string, chooser?: string, choice?: string, overrideChooser?: boolean, wideMeters?: boolean } | null} options */
 async (options) => {
-  const { meters = "", chooser = "", choice = "", overrideChooser = false } = options ?? {};
+  const {
+    meters = "",
+    chooser = "",
+    choice = "",
+    overrideChooser = false,
+    wideMeters = false,
+  } = options ?? {};
   const override = document.createElement("style");
-  if (overrideChooser) {
-    override.textContent = ".site-news-filters .site-tabs button { font-size: 40px !important; }";
+  if (overrideChooser || wideMeters) {
+    override.textContent = wideMeters
+      ? ".site-significance { inline-size: 7em !important; }"
+      : ".site-news-filters .site-tabs button { font-size: 40px !important; }";
     document.head.append(override);
   }
   if (chooser) {
@@ -34,11 +42,14 @@ async (options) => {
         "padding-left",
         "border-top-width",
         "border-bottom-width",
+        "border-right-width",
+        "border-top-color",
         "border-radius",
         "box-shadow",
         "outline-color",
         "outline-style",
         "outline-width",
+        "text-decoration-line",
         "transition-property",
         "transition-duration",
         "transition-timing-function",
@@ -47,6 +58,27 @@ async (options) => {
   };
   const group = chooser ? document.querySelector(chooser) : null;
   const option = choice ? (group?.querySelector(choice) ?? null) : null;
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = 1;
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+  /** @param {Element | null} element */
+  const brightness = (element) => {
+    if (!element || !context) {
+      return null;
+    }
+    context.fillStyle = getComputedStyle(element).backgroundColor;
+    context.fillRect(0, 0, 1, 1);
+    const [red = 0, green = 0, blue = 0] = context.getImageData(0, 0, 1, 1).data;
+    return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+  };
+  const referenceChip = document.querySelector(
+    `.site-news-topics [data-news-topic="${option?.getAttribute("data-news-topic")}"]`,
+  );
+  const neutral = document.createElement("span");
+  neutral.className = "site-chip";
+  group?.append(neutral);
+  const neutralAppearance = appearance(neutral);
+  neutral.remove();
   const count = document.querySelector(".site-table-tools .site-count");
   const countRow = count?.closest(".site-table-tools");
   const firstCard = document.querySelector("[data-news-day]:not([hidden])");
@@ -64,6 +96,13 @@ async (options) => {
       width: meter.getBoundingClientRect().width,
       font: Number.parseFloat(style.fontSize),
       border: Number.parseFloat(style.borderTopWidth),
+      color: style.color,
+      border_color: style.borderTopColor,
+      side_space:
+        (meter.firstElementChild?.getBoundingClientRect().left ?? 0) -
+        meter.getBoundingClientRect().left +
+        meter.getBoundingClientRect().right -
+        (bars.at(-1)?.getBoundingClientRect().right ?? 0),
       filled: bars.filter((bar) => bar.getAttribute("data-filled") === "true").length,
       bars: bars.map((bar) => ({
         height: bar.getBoundingClientRect().height,
@@ -79,6 +118,9 @@ async (options) => {
     chooser: group
       ? {
           appearance: appearance(option),
+          brightness: brightness(option),
+          chip_brightness: brightness(referenceChip),
+          neutral: neutralAppearance,
           role: group.getAttribute("role"),
           focus_visible: option?.matches(":focus-visible"),
           selected: option?.getAttribute("aria-selected"),
@@ -134,11 +176,25 @@ async (options) => {
         },
       ]),
     ),
-    all_topics_tally: controls?.querySelector('[data-news-all="topics"] [data-news-tally]')
-      ?.textContent,
-    all_topics_name: controls
-      ?.querySelector('[data-news-all="topics"]')
-      ?.getAttribute("aria-label"),
+    all_buttons: controls?.querySelectorAll("[data-news-all]").length,
+    resets: [...(controls?.querySelectorAll("[data-news-reset]") ?? [])].map((button) => ({
+      label: button.textContent,
+      appearance: appearance(button),
+    })),
+    score_tooltips: Object.fromEntries(
+      [...(controls?.querySelectorAll("[data-news-score]") ?? [])].map((button) => [
+        button.getAttribute("data-news-score"),
+        button.getAttribute("data-site-tooltip") || button.getAttribute("title"),
+      ]),
+    ),
+    topic_palette: Object.fromEntries(
+      [...document.querySelectorAll(".site-news-topics .site-chip, .site-chip[data-kind]")].map(
+        (chip) => [
+          chip.getAttribute("data-news-topic") || chip.getAttribute("data-kind"),
+          getComputedStyle(chip).backgroundColor,
+        ],
+      ),
+    ),
     controls_hidden: controls instanceof HTMLElement && controls.hidden,
     count: controls?.querySelector("[data-news-count]")?.textContent,
     empty:

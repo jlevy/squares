@@ -85,6 +85,11 @@ def _rung(label: str) -> str:
 SIGNIFICANCE_TOP = 5
 
 
+def significance_tooltip(level: int) -> str:
+    """Brief rubric meaning, separate from a result or announcement's rationale."""
+    return f"{rung_meanings()[f'S{level}']} (heuristic importance)."
+
+
 def significance_mark(level: int, meaning: str = "") -> str:
     """One fixed-width significance meter everywhere: S plus five filled/empty bars.
 
