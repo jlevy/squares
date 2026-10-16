@@ -9,6 +9,10 @@ agrees with both maintained routes at every number they share; and every file of
 pinned scope was fetched here at its pin and found at the digest its packet records.
 Each retained certificate is its upstream file, and each derived fact is the packing its
 pinned source states, read again by the third route’s own readers.
+The programs that ran the third route, the custody check and the adoption comparisons
+are kept with their outputs in the `mishapolk-kkt-refinements-2026-10-14` packet’s
+[`review/review-2026-10-16/`](../../../packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/README.md);
+no evidence entry cites them yet (RT-8), and the rungs rest on the maintained replay.
 The credit each entry states was measured pose by pose against the packing it names, and
 thirteen findings are recorded, none blocking.
 Every entry can take `V3`/`C3` with its confirming evidence entry and this review.
@@ -69,13 +73,39 @@ bears on optimality.
 | T-189 | Francisco Couzo, #607, at `43ac7d2` | 237 | retained `.cert`, as factual data |
 | T-190 | Francisco Couzo, no issue, at `58a7833`, first committed in `4e4c8ce` | 237 | retained `.cert`, as factual data |
 
-Each entry’s claim prints its sides; the third route held each to its certificate, equal
-or rounded up at the places printed (`registered_citations`), and found every print the
-exact side. The packets’ other certificates, which no entry here cites, are not decided
-by the third route: #506’s 304 and 305 (T-152, reviewed on 12 October), its unrecorded
-308 and its beyond-horizon rows, the twelve counts of `70a033f` that PR #574 holds
-smaller, and #607’s fifteen beyond-horizon rows, which T-189’s claim states and its
-scope does not cover, and its seven Kevin Fang composites.
+Each entry’s claim states its sides as follows: T-185
+$s(175) \le 13.7671190241983642888907662905$; T-187
+$s(146) \le 12.583782190151860342292508597077$; T-188
+$s(211) \le 14.993549626299421038935530460882$; T-189
+$s(237) \le 12163897896660350527924222391/764899771970500000000000000$, which is
+15.9026036382835755 rounded up at sixteen places, with fifteen beyond-horizon rows that
+this review does not cover (below); and T-190
+$s(237) \le 15.902603638259596880179144254274$. T-186’s claim states twelve fractions
+whose denominators divide a power of ten, so each is the terminating decimal below,
+written out in full:
+
+| n | T-186’s claimed side, exactly |
+| --- | --- |
+| 129 | 11.87001385040446434446015340078059399896708232427922 |
+| 154 | 12.92120657713263104994202927220710086481378868554298 |
+| 156 | 12.97916585383427645383609038030831523870618110813358 |
+| 175 | 13.764174317486596629290181476867476859469193705842084385694796937211798005123956354139691162 |
+| 176 | 13.7958723184364072631738953307277133712331066995515103744502117015291642972051776912348029686675350647263 |
+| 204 | 14.80866323438695656632290344860209522962252677744357343061831986738138133945783414968572511331686765232156324426 |
+| 232 | 15.76417431748659662929018147686747685946919370584208438569479693721179800512385635413969116208071951422158405421 |
+| 264 | 16.77473513238783284244251723599789265239952366858950536189828057783384313779187513581480604473950936899489072086 |
+| 271 | 16.94899235645120560305712851306208344982773066757282853717334516897079238059065607134656903415421834818577532691 |
+| 302 | 17.87001385040446434446015340078059399896768232427922 |
+| 303 | 17.90995829106990798141664149848803700023446066554213336522170834457519748674653133174222336767992377763205753672 |
+| 304 | 17.92942775807517496548703186140836311278604266912137 |
+
+The third route held each claim to its certificate, equal or rounded up at the places
+printed (`registered_citations`), and found every print the exact side.
+The packets’ other certificates, which no entry here cites, are not decided by the third
+route: #506’s 304 and 305 (T-152, reviewed on 12 October), its unrecorded 308 and its
+beyond-horizon rows, the twelve counts of `70a033f` that PR #574 holds smaller, and
+#607’s fifteen beyond-horizon rows, which T-189’s claim states and its scope does not
+cover, and its seven Kevin Fang composites.
 Those in a packet’s replayed roster were replayed with it, except #506’s and #607’s
 uncited counts, priced below.
 
@@ -243,13 +273,20 @@ README’s dual run of Daniel’s two, which the pinned tree does not contain.
 Where a source ran this repository’s own checker, as Couzo reports, that run is the
 producer’s and confirms nothing here; the replay ran the current routes from this
 repository on the packet’s own bytes.
-The third route’s author read both maintained routes and their adapters before writing
-its readers, so it is not clean-room; it imports none of their parsing or deciding code,
-and it is a second pair-deciding procedure within one method, `exact-algebraic`. The
-review lane, the import lanes and the assistants of two sources are one AI system
-family: #506 states that its search code and request were written with Claude (Claude
-Code), and #606 that its search, checks and request were done with it; #607 states
-OpenAI Codex, and Claude Code for earlier search; the #593 draft states Gemini.
+The converse holds as well: `sqpack.verify` is the program of V-sqpack-verify, the
+`exact_verify` route, so for T-185, T-188, T-189 and T-190 that route repeats the check
+the producer reports having run and adds no independence there.
+Their `independent-implementation` level rests on V-check-rational-witness-independent,
+which shares the parse and half-angle map with `exact_verify`, and on the third route
+once its kept decision is cited (RT-8). The third route’s author read both maintained
+routes and their adapters before writing its readers, so it is not clean-room; it
+imports none of their parsing or deciding code, and it is a second pair-deciding
+procedure within one method, `exact-algebraic`. The review lane, the import lanes and
+the assistants of two sources are one AI system family: #506 states that its search code
+and request were written with Claude (Claude Code), and #606 that its search, checks and
+request were done with it; #607 states OpenAI Codex, and Claude Code for earlier search,
+which the register carries for T-188, T-189 and T-190 alike; the #593 draft states
+Gemini.
 
 ## Credit and Lineage
 
@@ -378,16 +415,22 @@ nearest-first matching; the nearest-centre one-to-one pairing here, under the sa
 symmetry, counts 70 and 41. Both are measurements and `max_move` agrees; the records
 lane can keep either, naming the method.
 
-**RT-8, minor: this review’s third-route run and custody check are not retained.** The
-lane brief keeps this review to its document, so the driver, the report it wrote and the
-custody program stay in scratch space ([Programs Run Here](#programs-run-here)); like
-the 12 October review’s scratch decision of the 175, which T-185’s notes call not
-retained, they confirm nothing on the record until kept.
-The records lane can keep the third route’s decision by adding the six keys, rosters and
-credit lines to `devtools.check_half_angle_area` (the driver’s tables, with tests as the
-14 October roster has) and running it with `--receipts third-route-2026-10-16.json.xz`,
-three minutes here; until then the confirming evidence should not list
-V-check-half-angle-area.
+**RT-8, minor: this review’s third-route decision is kept but cited by nothing.** The
+lane brief kept this review to its document, so the driver, the report it wrote and the
+custody program were left in scratch space; like the 12 October review’s scratch
+decision of the 175, which T-185’s notes call not retained, they would have confirmed
+nothing on the record.
+The fix round of PR #648 kept them with every log and report they wrote in the
+`mishapolk-kkt-refinements-2026-10-14` packet’s
+[`review/review-2026-10-16/`](../../../packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/README.md)
+([Programs Run Here](#programs-run-here)), and the kept driver, run again there, wrote
+the same report in every field but its times.
+No evidence entry cites them, and the driver is in no `verifiers.yaml` entry.
+The records lane can make the third route’s decision citable by adding the six keys,
+rosters and credit lines to `devtools.check_half_angle_area` (the driver’s tables, with
+tests as the 14 October roster has) and running it with
+`--receipts third-route-2026-10-16.json.xz`, three minutes here; until then the
+confirming evidence should not list V-check-half-angle-area.
 The maintained replay, which `V3`/`C3` rest on, is the import lanes’ retained receipts,
 reproduced here.
 
@@ -425,14 +468,30 @@ RP-3 of the #574 review.
 on `main`, would make the pull request that adopts a house regularize each count it
 re-houses, at 5 to 15 CPU-minutes a count, or defer it with its bead; if it merges
 first, the fifteen moves below owe that.
+Regularization already in flight bears on all fifteen counts.
+PR #644 (open, `think-la7h`) admits regularized views at 129, 146, 156, 176 and 271 and
+settles 204 and 303 as no better, and its witness-identity check ties each of those
+seven to the count’s current house witness (T-162, T-168, T-161 or T-165). This review
+moves all seven houses, at 146 to a packing nine squares beyond a tenth from T-168’s and
+at 176 to a side $1.18 \times 10^{-2}$ below T-165’s. The regularization lanes stacked
+on #644’s branch, batches 3b and 3c (`think-kpm3`, `think-3zi3`), work on the current
+houses at the other eight, 154, 175, 211, 232, 237, 264, 302 and 304; the leftovers lane
+(`think-0ut1`) touches none of the fifteen.
+Whichever of that work and the records lane lands second leaves views drawn from
+witnesses that are no longer the houses, so the two need an order: either the
+regularization keeps to counts not re-housed here, or the records lane reopens the
+re-housed counts’ regularization under #641’s rule.
 
 ## Rungs
 
 **`V3`/`C3` for all six entries.** Machine-replayed here: every certificate the entries
-cite and its two kernel controls on both maintained routes, and every one of them with
-its six controls on the third route, with certificates, replay commands, passing replays
-and retained controls; each retained file held to its upstream bytes and each derived
-fact to its pinned source; reviewed adversarially here.
+cite and its two kernel controls on both maintained routes, with certificates, replay
+commands, passing replays and the retained controls of `test_upper_bound_reports.py`;
+reviewed adversarially here.
+Beside the rung, by the kept programs of [Programs Run Here](#programs-run-here) that no
+evidence entry cites yet (RT-8): every one of those certificates with its six controls
+on the third route, each retained file held to its upstream bytes and each derived fact
+to its pinned source.
 `V` is the strongest verification anywhere, the record’s replay being `V3`’s predicate
 for exact-algebraic evidence of any origin.
 Not `V4`/`C4`: one AI review, no human oversight record.
@@ -455,18 +514,31 @@ facts, the `check --replay` command with its `--n` where this review used one,
 `replay_status: passed`, the verifiers V-sqpack-verify,
 V-check-rational-witness-independent, V-evand-arrangement-receipts,
 V-upper-bound-reports and V-evand-exact-certificates (and V-check-half-angle-area once
-its decision is kept, RT-8), an `independence` record with `coverage: full` over the
-certificates the entry cites, its `overlaps_producer` note naming the Claude assistance
-#506 and #606 state, and this review as `independence_record` and `external_review`
-(`informally-verified`); on each reported entry, `external_review` naming this review;
-on each register entry, the evidence, the rungs, a `reviews` item (`kind: adversarial`,
-`reviewer_kind: ai`, `relation: project`, `verdict: accepted`), the controls
-(`test_check_half_angle_area.py` beside `test_upper_bound_reports.py` once the third
-route’s roster lands with its tests), and claim, notes and `next_rung` rewritten
-together. `E-couzo-506-exact-feasibility` covers #506’s eleven requested counts and not
-175, which T-185 cites under its own source key, so 175 takes an entry of its own.
-T-189’s may also cover the fifteen beyond-horizon rows its claim states, on the import
-lane’s two replays, which this review did not repeat.
+its roster lands and its decision can be cited, RT-8), an `independence` record (below)
+and this review as `independence_record` and `external_review` (`informally-verified`);
+on each reported entry, `external_review` naming this review; on each register entry,
+the evidence, the rungs, a `reviews` item (`kind: adversarial`, `reviewer_kind: ai`,
+`relation: project`, `verdict: accepted`), the controls (`test_check_half_angle_area.py`
+beside `test_upper_bound_reports.py` once the third route’s roster lands with its
+tests), and claim, notes and `next_rung` rewritten together.
+`E-couzo-506-exact-feasibility` covers #506’s eleven requested counts and not 175, which
+T-185 cites under its own source key, so 175 takes an entry of its own.
+Each `independence` record has `coverage: full` over the certificates its entry cites.
+For T-185, T-188, T-189 and T-190 its note says that `exact_verify` is the checker the
+source ran (V-sqpack-verify), so that their independence rests on
+V-check-rational-witness-independent ([Trust Boundaries](#trust-boundaries)). Its
+`overlaps_producer` record names the assistance each source states.
+For five entries that is Claude Code, so `extent: system-family`, as in
+`E-couzo-586-exact-feasibility`: for #506’s search code and request (T-185), for #606’s
+search, checks and request (T-187), and for the earlier search work that Couzo’s issues
+state beside OpenAI Codex (T-188, T-189 and T-190; `packing/frontier/results.yaml` lines
+25543, 25706 and 25924). For T-186 it records what is known: the commit states no AI
+assistance, and #593 discloses Gemini.
+T-189’s confirming entry covers 237 alone.
+The fifteen beyond-horizon rows its claim states rest on the import lane’s two replays
+alone, which this review did not repeat, decide on the third route or read; an entry
+that records them cites those replays and names this review neither as
+`independence_record` nor as `external_review`.
 
 ## Significance
 
@@ -500,35 +572,44 @@ the smallest earlier report (its packet’s
 | n | Case ceiling, house | Reviewed and pending certificates, smallest first | House |
 | --- | --- | --- | --- |
 | 129 | 11.8700138504044644, T-162 | T-186 below the case by $1.19 \times 10^{-19}$; T-174 (held), $1.10 \times 10^{-21}$ above T-186 | T-186, Polkovskyi after PingYou after Ostashev |
-| 146 | 12.5837822039508343, T-168 | T-187 12.5837821901518604, below by $1.38 \times 10^{-8}$; T-174 (held), $1.3 \times 10^{-79}$ below the case | T-187, Daniel after Xu |
-| 154 | 12.9212065771326311, T-182 | T-186, below by $1.29 \times 10^{-19}$ | T-186, Polkovskyi after Couzo |
-| 156 | 12.9791658538342765, T-161 | T-186, below by $1.30 \times 10^{-19}$; T-174 (held), $1.19 \times 10^{-34}$ above T-186 | T-186, Polkovskyi after PingYou after Couzo after Ostashev |
+| 146 | 12.5837822039508343, T-168 | T-187 12.5837821901518604, below by $1.38 \times 10^{-8}$; T-174 (held), $1.3 \times 10^{-79}$ below the case | T-187, Daniel (started from Xu’s packing, RT-5) |
+| 154 | 12.9212065771326311, T-182 | T-186, below by $1.29 \times 10^{-19}$ | T-186, Polkovskyi after Couzo (RT-4: after Daniel) |
+| 156 | 12.9791658538342765, T-161 | T-186, below by $1.30 \times 10^{-19}$; T-174 (held), $1.19 \times 10^{-34}$ above T-186 | T-186, Polkovskyi after PingYou after Couzo (RT-4: after Ostashev) |
 | 175 | 13.7641743174865967, T-158 | T-186, below by $1.38 \times 10^{-19}$; T-174 (held), $7.23 \times 10^{-75}$ above T-186; T-185 13.7671190241983643, above the case by $2.94 \times 10^{-3}$; #639 (RT-12) | T-186, Polkovskyi after PingYou after Ostashev |
-| 176 | 13.8076372268022796, T-165 | T-186 13.7958723184364073, below by $1.18 \times 10^{-2}$; T-174 (held), $1.25 \times 10^{-94}$ above T-186 | T-186, Polkovskyi after PingYou, on Ostashev’s #575 packing |
+| 176 | 13.8076372268022796, T-165 | T-186 13.7958723184364073, below by $1.18 \times 10^{-2}$; T-174 (held), $1.25 \times 10^{-94}$ above T-186 | T-186, Polkovskyi after PingYou (Ostashev’s #575 packing by pose, RP-4 of the #574 review) |
 | 204 | 14.8086632343869566, T-162 | T-186, below by $1.48 \times 10^{-19}$; T-174 (held), $1.83 \times 10^{-21}$ above T-186; #639 (RT-12) | T-186, Polkovskyi after PingYou after Ostashev |
-| 211 | 14.9935589139740062, T-182 | T-188 14.9935496262994211, below by $9.29 \times 10^{-6}$ | T-188, Couzo after Ostashev (RT-1) |
+| 211 | 14.9935589139740062, T-182 | T-188 14.9935496262994211, below by $9.29 \times 10^{-6}$ | T-188, Couzo (RT-1: after Ostashev, with no regularization item) |
 | 232 | 15.7641743174865967, T-158 | T-186, below by $1.58 \times 10^{-19}$; T-174 (held), $1.45 \times 10^{-74}$ above T-186; #639 (RT-12) | T-186, Polkovskyi after PingYou after Ostashev |
 | 237 | 15.9027050578663668, T-183 | T-190 15.9026036382595969, below by $1.01 \times 10^{-4}$; T-189 15.9026036382835755, $2.40 \times 10^{-11}$ above T-190 | T-190, Couzo after Polkovskyi |
 | 264 | 16.7747351323878329, T-158 | T-186, below by $1.68 \times 10^{-19}$; T-174 (held), $1.75 \times 10^{-74}$ above T-186 | T-186, Polkovskyi after PingYou after Ostashev |
-| 271 | 16.9489923564512057, T-161 | T-186, below by $1.69 \times 10^{-19}$; T-174 (held), $2.09 \times 10^{-34}$ above T-186 | T-186, Polkovskyi after PingYou after Couzo after Chaoweeraprasit (RT-4) |
-| 302 | 17.8700138504044644, T-181 | T-186, below by $1.79 \times 10^{-19}$; #639 (RT-12) | T-186, Polkovskyi after Couzo after PingYou |
+| 271 | 16.9489923564512057, T-161 | T-186, below by $1.69 \times 10^{-19}$; T-174 (held), $2.09 \times 10^{-34}$ above T-186 | T-186, Polkovskyi after PingYou after Couzo (RT-4: after Chaoweeraprasit) |
+| 302 | 17.8700138504044644, T-181 | T-186, below by $1.79 \times 10^{-19}$; #639 (RT-12) | T-186, Polkovskyi after Couzo (RT-4: after PingYou) |
 | 303 | 17.9099582910699080, T-162 | T-186, below by $1.79 \times 10^{-19}$; T-174 (held), $2.43 \times 10^{-74}$ above T-186 | T-186, Polkovskyi after PingYou after Ostashev |
 | 304 | 17.9294277580751750, T-175 | T-186, below by $1.79 \times 10^{-19}$ | T-186, Polkovskyi after Ostashev |
 
 Where a side is not printed it equals the case’s at sixteen places.
 T-185 and T-189 are recorded and superseded, kept as history.
 The earlier houses stay retained as history, and the reported and verified ceilings move
-together. Credit follows each entry and its `regularizations`, as the column says: the
-twelve of T-186 after the packing each tightens, T-187 Daniel’s after Xu’s start, T-188
-Couzo’s after Ostashev’s arrangement, and T-190 Couzo’s refinement of Polkovskyi’s
-packing.
+together. The House column credits each entry and follows its `regularizations` as the
+register records them on `main`, item by item until an entry lists none at the count,
+which is how `devtools.select_houses` reads credit.
+A parenthesis marks where this review proposes a longer or different chain (RT-1 at 211,
+RT-4 at 154, 156, 271 and 302) or where a measurement says more than the items (146 and
+176); the records lane writes the credit sentences from those findings.
+The column does not judge the items it follows.
+T-174’s items at 129, 175, 204, 232 and 264 have `max_move` 0.139 to 0.809, and its item
+at 303 pairs no square one to one, so by the rule RT-1 applies to T-188, no square
+beyond a tenth, none of those six is a refinement in the record’s sense.
+T-174 is held and outside this review, so that is for the owner.
 
 The witnesses at T-186’s twelve counts total 1.56 MB on `main`, and T-186’s facts 1.73
 MB uncompressed: on that estimate these houses replace witnesses with ones of about the
 same size, far from the 18.5 MB that holds PR #574’s; the records lane measures it.
 By the coordinator’s rule of 15 October, T-186 takes the house at the nine counts it
-shares with T-174 once confirmed, which also leaves the hold on T-174 deciding nothing
-at them; the owner may want to know that, and nothing waits on it.
+shares with T-174 once its confirming evidence entry puts it at `V3`/`C3`, independently
+re-implemented by this repository’s maintained routes, which also leaves the hold on
+T-174 deciding nothing at them; the owner may want to know that, and nothing waits on
+it.
 
 ## Proposed Record Changes
 
@@ -546,16 +627,22 @@ For the records lane; this review writes none of them.
 - The third route’s roster and receipts, if the record is to cite it (RT-8), and then
   `verifiers.yaml`: V-check-half-angle-area’s note gains this review’s roster.
 - For the owner: RT-4’s question whether T-161’s 271 is listed as a regularization of
-  SQUISH’s packing.
+  SQUISH’s packing, and whether T-174’s items at 129, 175, 204, 232, 264 and 303 stay
+  regularizations when each moves a square beyond a tenth or pairs none one to one
+  ([Adoption per Count](#adoption-per-count)).
 - For the authors, in the replies drafted at stage 7: the questions under
   [For the Authors](#for-the-authors).
 
 ## Programs Run Here
 
-The lane brief keeps this review to its document, so the programs it wrote stay in the
-session’s scratch space and are described here; they run only this repository’s
-maintained tools and code written for this review, read the sources as data, and write
-nothing in the repository.
+The lane brief kept this review to its document, so the programs it wrote were run in
+the session’s scratch space.
+The fix round of PR #648 kept them, with their logs and reports, in the
+`mishapolk-kkt-refinements-2026-10-14` packet’s
+[`review/review-2026-10-16/`](../../../packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/README.md),
+whose README says how to run each one and what it printed.
+They run only this repository’s maintained tools and code written for this review, read
+the sources as data, and write nothing in the repository.
 
 - **`custody.py`** made one blobless clone per source repository over HTTPS, checked out
   each packet’s manifest paths at its pin, and held the tree, every manifest line, every
@@ -598,17 +685,46 @@ its count, before Ostashev’s #528 (T-158) was reported, while here T-158 and T
 smaller and T-185 is recorded as superseded.
 That review measured no lineage for the 175, so RT-2’s measurement against T-140 and
 Ryan Xu’s T-125 is new.
-Neither review’s third-route decision of the 175 is retained (RT-8), and both note that
-the reviewer and the source’s assistant are one model family (RY-9 there).
+The 12 October review’s third-route decision of the 175 is not retained, and this
+review’s is kept but cited by no evidence entry (RT-8); both note that the reviewer and
+the source’s assistant are one model family (RY-9 there).
 
 ## What This Review Does Not Establish
 
 No optimality, lower bound, local minimum, rigidity, novelty or priority; no run of any
 source’s checker, solver or search; no replay here of #607’s 22 counts or #506’s 14 that
 no entry here cites; no decision of the beyond-horizon rows or of the certificates no
-entry cites; no identification of derivation beyond the measurements above; no retained
-third-route receipt (RT-8); no `derive --check` from a Git checkout; no house adoption
+entry cites; no identification of derivation beyond the measurements above; no
+third-route receipt in any packet’s `receipts/`, and no evidence entry for the kept
+third-route decision (RT-8); no `derive --check` from a Git checkout; no house adoption
 or case-record change; nothing for #639, whose triage is another session’s.
+
+## Addendum: What the Fix Round Changed
+
+PR #648’s review A (round 1, at `9bd813b2b`) found no blocking defect and asked for
+record hygiene. The addressing agent of that pull request (Claude, moderate sub-agent
+tier) made these changes in the fix round; every other sentence is the review lane’s.
+
+- **A1.** The lane’s programs, logs and reports are kept in the
+  `mishapolk-kkt-refinements-2026-10-14` packet’s
+  [`review/review-2026-10-16/`](../../../packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/README.md),
+  and the kept third-route driver, run again, wrote the same report in every field but
+  its times. The opening, RT-8, Rungs, Programs Run Here, The Earlier Review of the 175
+  and What This Review Does Not Establish now say what is kept and that no evidence
+  entry cites it.
+- **A2.** The verdict lines name the Claude Code assistance that T-188, T-189 and T-190
+  carry from Couzo’s issues, beside #506’s and #606’s, and what is known for T-186.
+- **A3.** RT-13 names PR #644 and the regularization lanes stacked on it, which work on
+  the current houses at all fifteen counts.
+- **A5.** Adoption per Count states the rule its credit column follows, marks RT-1’s and
+  RT-4’s proposals, and notes T-174’s items for the owner.
+- **A6.** “Once confirmed” at the nine counts T-186 shares with T-174 now says which
+  confirmation.
+- **A7.** Trust Boundaries and the verdict lines say that `exact_verify` is the checker
+  Couzo ran, for T-185, T-188, T-189 and T-190.
+- **A8.** Claims Covered states each claimed side, T-186’s twelve in a table of their
+  own.
+- **A9.** The Rungs no longer extend this review to T-189’s fifteen beyond-horizon rows.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
