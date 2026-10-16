@@ -32,7 +32,9 @@ verifiers:
         note: byte-identical at ad86d42, the revision whose packet retains the copy that ran
     note: >-
       Run unchanged from the retained copy on issue 639's 23 exact forms, each in its own
-      python -I process (E-evand-639-verify-exact-replay).
+      python -I process (receipts/replay-verify-exact.json in the evand-exact-cur-2026-10-16
+      packet). The replay's evidence entry is added at T-193's stage 4 exit, after the
+      review lane think-7qxm.
   - id: V-evand-639-replay-driver
     program: replay_verify_exact.py
     author: Squares Project (Levy)

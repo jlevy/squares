@@ -8993,6 +8993,39 @@ issues:
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
       is outside this request.
+  - number: 643
+    title: 's(k² − 4) = k for every k ≥ 8 in the Lean kernel: ValidTilt9 (Hosono, after Daniel): tracking
+      an unreported result'
+    author: jlevy
+    opened: '2026-10-16'
+    state: open
+    kind: result-report
+    triage: done
+    summary: The project opened this issue to track Hiroaki Hosono's (wand125's) Lean kernel proof of
+      Evan Daniel's finite premise ValidTilt9, and with Daniel's reduction of s(k^2 - 4) = k for every k
+      >= 8, which reached the project through his watched repository wand125/square-packing (2c75edc and
+      e99f5e3, at the head 319a779) rather than an issue, as the owner asks for results at S4 and above.
+      Triaged read-only on 16 October in think-jh0n. Every statement file the record retains from Daniel's
+      3 October release is byte-identical to the proof's, so it formalizes T-081 at k >= 8; nothing is
+      retained or registered yet. The full kernel replay, about 7,400 CPU-hours with 230 GB for the
+      assembly by the source's receipts, is above the compute cap.
+    read_through: '2026-10-16T05:29:57Z'
+    results:
+    - key: validtilt9-lean
+      claim: 'A Lean 4 kernel proof of Bentz4.ValidTilt9 and Bentz4.Valid9, and of bentz4 : ∀ k ≥ 8,
+        minSide (k^2 - 4) = k, whose axioms are propext, Classical.choice and Quot.sound only.'
+      source: body
+      not_registered: Triaged on 16 October and not yet imported. Retaining the lean/ directory at 319a779
+        with the validtilt9-lean-v1 assets by digest (stage 2) and a formalization entry naming T-081
+        (stage 3) are think-jh0n's.
+      queued: true
+      bead: think-jh0n
+    beads:
+    - think-jh0n
+    answer_bead: think-jh0n
+    replies: []
+    close_when: The import and its disposition are on main, the resulting state is posted with the entry's
+      id, and the review and replay that would raise its rungs are owned by their beads.
   - number: 606
     title: 's(146) ≤ 12.583782190152: registration request'
     author: evand
@@ -9312,7 +9345,6 @@ issues:
       - T-193
       evidence:
       - E-evand-639-exact-sides-report
-      - E-evand-639-verify-exact-replay
     - key: exact-side-51
       claim: s(51) <= (16 + 5√2)/3, the root of 9x^2 - 96x + 206.
       source: body

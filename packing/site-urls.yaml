@@ -15745,7 +15745,6 @@ urls:
     builds_on: null
     evidence:
     - E-evand-639-exact-sides-report
-    - E-evand-639-verify-exact-replay
     artifacts:
     - packing/resources/web/evand-exact-cur-2026-10-16/README.md
     - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md

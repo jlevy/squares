@@ -77,15 +77,20 @@ commit and held to the manifest, each in its own `python -I` process under CPyth
 ([review/replay_verify_exact.py](review/replay_verify_exact.py),
 [review/README.md](review/README.md)).
 
-- **23 of 23 VALID**, each with the statement `data/verify.txt` prints for it, in 1,254
-  CPU seconds; 263, 297, 204 and 267 took 492, 308, 213 and 123 s.
+- **23 of 23 VALID**, each with the statement `data/verify.txt` prints for it, in 1,427
+  CPU seconds; 263, 297, 204 and 267 took 568, 351, 241 and 136 s.
 - **76 of 76 controls refused**, four at each of the 19 retained forms: a square moved
   $10^{-6}$ through the wall it touches, the side raised by $10^{-6}$ in the field, the
-  side’s interval moved below its root, and a duplicate square, in 52 CPU seconds.
-- **Every polynomial irreducible** over the integers by SymPy 1.14.0’s `factor_list`,
-  so each side is algebraic of the degree the source states.
+  side’s interval moved below its root, and a duplicate square, in 58 CPU seconds.
+- **Every polynomial squarefree and irreducible** over the integers by SymPy 1.14.0’s
+  `factor_list`: one factor, of multiplicity 1 and of the polynomial’s degree, the four
+  pinned-only forms included, so each side is algebraic of the degree the source states.
 
-The receipt is [receipts/replay-verify-exact.json](receipts/replay-verify-exact.json).
+The receipt is [receipts/replay-verify-exact.json](receipts/replay-verify-exact.json),
+refreshed on 16 October after PR #651’s review A (A5, A6) by the fixed driver, which
+refuses a perfect power as irreducible and keys its resume cache by input, checker and
+control. Its first invocation was stopped by the session’s background-time limit after
+four positives and resumed from that cache; the counts above are summed over both.
 This is the source’s own checker on the source’s data, one route: it shows each
 configuration passes the checks `verify_exact.py` makes, and its soundness is that
 program’s. The checker does not itself check that a file lists exactly $n$ squares; the

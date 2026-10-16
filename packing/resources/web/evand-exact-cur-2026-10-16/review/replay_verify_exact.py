@@ -25,7 +25,15 @@ controls cost nearly a positive each):
   pair.
 
 It also factors each ``p`` over the integers with SymPy (``factor_list``), which the
-source asserts irreducible and none of its programs checks.
+source asserts irreducible and none of its programs checks. ``p`` counts as irreducible
+only when it is squarefree and its factorization is one factor, of multiplicity 1 and of
+``p``'s degree, so a perfect power ``q^k`` is refused.
+
+An interrupted invocation resumes from ``--scratch``'s cache. Each cached record is keyed
+by the run it records: the input's SHA-256, the checker's SHA-256, the control kind (none
+for the positive), this driver's SHA-256 (a control's mutation and verdict are computed
+here) and the interpreter's version. It is reused only when all five match; otherwise the
+run is repeated.
 
 The mutated files are written to ``--scratch`` and deleted after their run. The receipt
 records every run's command, exit status, last line, wall and CPU time, and the
@@ -128,14 +136,39 @@ def run(path: Path) -> dict[str, Any]:
     }
 
 
-def cached(cache: Path, key: str, job: Any) -> dict[str, Any]:
-    """A run's record, from ``cache`` when an earlier, interrupted invocation finished it."""
-    path = cache / f"{key}.json"
+def cached(cache: Path, name: str, key: dict[str, Any], job: Any) -> dict[str, Any]:
+    """A run's record, from ``cache`` when an earlier, interrupted invocation finished the
+    same run: the same input digest, checker digest and control kind, all in ``key``."""
+    path = cache / f"{name}.json"
     if path.is_file():
-        return json.loads(path.read_text(encoding="utf-8"))
+        stored = json.loads(path.read_text(encoding="utf-8"))
+        if stored.get("key") == key:
+            return stored["record"]
     record = job()
-    path.write_text(json.dumps(record), encoding="utf-8")
+    path.write_text(json.dumps({"key": key, "record": record}), encoding="utf-8")
     return record
+
+
+def driver_digest() -> str:
+    """This driver's SHA-256: a control's mutation and verdict are computed here."""
+    return sha256(Path(__file__))
+
+
+def interpreter() -> str:
+    """The interpreter every run's child uses, ``sys.executable``, by its version."""
+    return f"{platform.python_implementation()} {platform.python_version()}"
+
+
+def run_key(digest: str, kind: str | None) -> dict[str, Any]:
+    """What a cached run must match to be reused: input, checker, control kind, this
+    driver and the interpreter."""
+    return {
+        "input_sha256": digest,
+        "checker_sha256": CHECKER_SHA256,
+        "control": kind,
+        "driver_sha256": driver_digest(),
+        "python": interpreter(),
+    }
 
 
 def mutate(data: dict[str, Any], kind: str) -> tuple[dict[str, Any], str]:
@@ -185,12 +218,16 @@ def factored(path: Path) -> dict[str, Any]:
     coefficients = [int(c) for c in data["S"]["poly"]]
     x = sympy.Symbol("x")
     started = time.process_time()
-    _, factors = sympy.factor_list(sympy.Poly(list(reversed(coefficients)), x))
-    degrees = sorted(int(sympy.Poly(factor, x).degree()) * int(power) for factor, power in factors)
+    poly = sympy.Poly(list(reversed(coefficients)), x)
+    _, factors = sympy.factor_list(poly)
+    shape = sorted([int(sympy.Poly(factor, x).degree()), int(power)] for factor, power in factors)
+    degree = len(coefficients) - 1
+    squarefree = sympy.degree(sympy.gcd(poly, poly.diff(x)), x) == 0
     return {
-        "degree": len(coefficients) - 1,
-        "factor_degrees": degrees,
-        "irreducible": degrees == [len(coefficients) - 1],
+        "degree": degree,
+        "factors": shape,
+        "squarefree": squarefree,
+        "irreducible": squarefree and shape == [[degree, 1]],
         "cpu_seconds": round(time.process_time() - started, 2),
         "method": f"sympy {sympy.__version__} factor_list over the integers",
     }
@@ -211,6 +248,8 @@ def main(argv: list[str] | None = None) -> int:
     digests = manifest()
     expected = source_lines()
     inputs = {n: located(n, args.pinned, digests) for n in COUNTS}
+    # located() refused any file whose digest is not the manifest's, so this is the input's.
+    digest_of = {n: digests[f"search/exact/cur/data/{inputs[n][0].name}"] for n in COUNTS}
     started = datetime.now(UTC)
     clock = time.monotonic()
     jobs = sorted(inputs, key=lambda n: -inputs[n][0].stat().st_size)
@@ -218,7 +257,13 @@ def main(argv: list[str] | None = None) -> int:
         positives = dict(
             zip(
                 jobs,
-                pool.map(lambda n: cached(cache, f"n-{n}", lambda: run(inputs[n][0])), jobs),
+                pool.map(
+                    lambda n: cached(
+                        cache, f"n-{n}", run_key(digest_of[n], None),
+                        lambda: run(inputs[n][0]),
+                    ),
+                    jobs,
+                ),
                 strict=True,
             )
         )
@@ -231,6 +276,7 @@ def main(argv: list[str] | None = None) -> int:
                 lambda item: cached(
                     cache,
                     f"n-{item[0]}.{item[1]}",
+                    run_key(digest_of[item[0]], item[1]),
                     lambda: control(item[0], inputs[item[0]][0], item[1], args.scratch),
                 ),
                 tasks,
@@ -290,6 +336,7 @@ def main(argv: list[str] | None = None) -> int:
             "positives_matching_source": sum(1 for row in rows if row["matches_source_verify_txt"]),
             "controls_refused": sum(1 for row in rows for c in row["controls"] if c["refused"]),
             "controls": sum(len(row["controls"]) for row in rows),
+            "squarefree": sum(1 for row in rows if row["polynomial"]["squarefree"]),
             "irreducible": sum(1 for row in rows if row["polynomial"]["irreducible"]),
         },
         "rows": rows,
