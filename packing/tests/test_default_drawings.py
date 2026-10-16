@@ -1300,8 +1300,11 @@ def test_a_deferral_names_the_witness_it_defers_and_lapses_when_the_house_moves(
         assert defaults.DEFERRED_AT_RULE[n] == (witness["source"], witness["side"]), n
 
     # An adoption, a catalogue intake or a re-solve moves the house: the entry lapses, and
-    # the pull request that moved it owes its runs.
-    n = AT_RULE[0]
+    # the pull request that moved it owes its runs. Held on a count whose rule-day witness
+    # stands, listed as it was then, whatever the live list holds by now.
+    n = _standing_at_rule(rows)
+    allowed = {n: "think-aaaa: a deferral the list held when the rule was set"}
+    assert defaults.deferral_problems(rows, allowed) == []
     moved = {**rows, n: {**rows[n], "witness": {**rows[n]["witness"], "source": "[new]"}}}
     (problem,) = defaults.deferral_problems(moved, allowed)
     assert problem.startswith(f"n={n}: PENDING_ALLOWED deferred the runs of the witness")
@@ -1333,13 +1336,24 @@ def test_a_deferral_names_the_witness_it_defers_and_lapses_when_the_house_moves(
     )
 
 
+def _standing_at_rule(rows: dict) -> int:
+    """A count whose witness is still the one `DEFERRED_AT_RULE` names for it."""
+    for n in AT_RULE:
+        witness = rows[n]["witness"]
+        if defaults.DEFERRED_AT_RULE[n] == (witness["source"], witness["side"]):
+            return n
+    pytest.skip("every count deferred at the rule has been re-housed since")
+
+
 def test_the_state_gate_reads_each_deferral_against_its_witness(tmp_path: Path) -> None:
-    """The records tier's state gate runs the witness-keyed check (review B7's lesson, for
-    this check): a re-housed count left on the list fails `--check-state`."""
+    """The records tier's state gate runs the witness-keyed check, so a refactor that
+    unwires it fails here (review B7 of #660 found the bead tree's gate untested): a
+    re-housed count left on the list fails `--check-state`."""
     record = _record()
-    n = AT_RULE[0]
+    n = _standing_at_rule({row["n"]: row for row in record["states"]})
     for row in record["states"]:
         if row["n"] == n:
             row["witness"] = {**row["witness"], "source": "[new]"}
-    problems, _listed = defaults.state_problems(_write(tmp_path, record))
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: a deferral held at the rule"}
+    problems, _listed = defaults.state_problems(_write(tmp_path, record), allowed=allowed)
     assert any(problem.startswith(f"n={n}: PENDING_ALLOWED deferred") for problem in problems)
