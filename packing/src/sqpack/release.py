@@ -88,6 +88,11 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.22",
+        first_published="October 16, 2026",
+        result_scope="Draw the regularized views of 175, 232 and 264 by default.",
+    ),
+    PublicationHistoryEntry(
         version="v0.7.21",
         first_published="October 16, 2026",
         result_scope=(
@@ -858,6 +863,13 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.21",
+        version="v0.7.22",
+        impact="patch",
+        reason="Draw the regularized views of 175, 232 and 264 by default.",
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.20",
         version="v0.7.21",
         impact="patch",
@@ -1190,6 +1202,61 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.22 for the think-3zi3 regularization regenerated the five "
+            "claim documents at PUBLICATION_REVISION 7d47bd4e, this branch's re-pin after "
+            "merging #653's head 98f6626f, kept reachable from main by the merge commit "
+            "the PR merges with; with that revision read back as #653's 3971c17b, each is "
+            "byte-identical to #653's, so the 32 repository links it pins are the only "
+            "change, and no claim, certificate or command moves. A link revision follows "
+            "the site's edition and is not a revision of the explainer, so it keeps "
+            "v0.4.7. Source-compared; no render of the claim documents was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/default_drawings.py", "packing/frontier/results.yaml"),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Over #653's head 98f6626f, the think-3zi3 regularization takes 175, 232 and "
+            "264 off PENDING_ALLOWED in default_drawings, which leaves it empty, and "
+            "changes results.yaml only in its regularized_drawings items at those three "
+            "counts. The papers read results.yaml's results, never regularized_drawings, "
+            "and reach default_drawings only through shared import discovery, reading "
+            "neither constant. Rendered at link revision e2e018f3 from this branch at "
+            "7d47bd4e, the survey's and both reviews' 42 files each are byte-identical to "
+            "the renders from main e2e018f3's tree; the explainer, whose render needs a "
+            "browser this host lacks, is source-reviewed only, and no PDF was printed. "
+            "All four papers keep their versions."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
@@ -3211,7 +3278,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "3971c17b"
+PUBLICATION_REVISION = "7d47bd4e"
 
 
 def data_pathspec() -> tuple[str, ...]:
