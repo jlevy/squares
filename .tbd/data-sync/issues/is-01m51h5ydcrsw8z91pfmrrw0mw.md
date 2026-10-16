@@ -5,12 +5,12 @@ title: Owner decisions pending from the 2026-10-15/16 intake passes (each blocks
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 created_at: 2026-10-16T04:57:59.468Z
-updated_at: 2026-10-16T04:57:59.468Z
+updated_at: 2026-10-16T05:34:34.778Z
 ---
 Collected by the coordinator 2026-10-16 so another agent can pick them up. Each item names the bead that owns it; act only on the owner's word.
 1. #574 (BuddenPing, 148 certificate refinements, a PR): merge it and adopt T-174? (think-9v2k). WARNING: adopting T-174 re-houses 35 counts (68, 84, 86, 88, 108, 126, 127, 130, 131, 132, 172, 181, 182, 199, 206, 208, 209, 210, 228, 238, 239, 240, 259, 266, 267, 268, 270, 273, 292, 297, 301, 305, 306, 307, 308); since #636 the gate will fail unless each is re-regularized or added to PENDING_ALLOWED with a bead (think-g3q7 documents the step). The #574 reply is held until the decision.
@@ -24,3 +24,7 @@ Collected by the coordinator 2026-10-16 so another agent can pick them up. Each 
 9. think-ckjc is done (#503 thank-you posted 14 Oct, recorded) but claimed by claude-code@vm; close it.
 10. #532: the regularization PRs the replays waited on merged; may the T-142/T-143/T-144 replays start now (think-ux1v; tooling only on branch claude/wand125-confirmations-2026-10-11)?
 11. think-abcm: check_requests lists owner-opened issues (#550, #554, #613) as owing an acknowledgement; decide the rule.
+
+## Notes
+
+2026-10-16 05:35Z (#641 review A12): 19 of the 20 PENDING_ALLOWED counts are among T-174's 68 counts (all but 154). If the owner adopts T-174 (#574), those counts get new witnesses and would need re-regularizing again; deciding #574 before running think-kpm3/think-3zi3 avoids doing those runs twice. 176 (think-la7h) is being done first regardless, because its live drawing is the raw house today.
