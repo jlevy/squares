@@ -213,10 +213,16 @@ Compact single-select and multi-select choosers share the homepage component, in
 typography, padding, selected states, hover and keyboard focus.
 News defaults to S4/S5 and all topics; its group names remain accessible without visible
 labels. The result count reuses the Results control row and aligns right immediately
-above the cards. The homepage highlights the three newest S5 results from the
-authoritative results register, followed by the shared “All news →” action.
-These highlights reuse result claims, credit and evidence without inventing changelog
-launch entries for older results.
+above the cards. The homepage highlights up to three newest eligible S5 News articles
+that name result IDs, ordered by frozen announcement date and stable ID, followed by the
+shared “All news →” action.
+Homepage and archive use the same title, date, topic chips, complete article,
+significance meter and disclosure renderer.
+Claim qualifications remain in the shared article; the title links to its stable News
+anchor. Detailed result status stays in the linked result record.
+The archive’s “Full changelog” link uses the shared action button with an external-link
+arrow. Navigation components use explicit sans typography, including action links inside
+prose containers; inline prose citations keep their surrounding face.
 Explanations combines the former Papers and Visualize navigation entries.
 Its landing page (`papers.html`) has the Explanations H1 and four sections: Tutorial,
 Papers, PDFs and Visuals.
@@ -612,7 +618,8 @@ registered kinds. News offers joined, compact filters for the topics present in 
 eligible archive, using the cards’ shared fills and sentence-case labels in both themes.
 Each topic’s tally counts articles at the selected significance levels, independently of
 which topics are selected; All counts unique articles across those levels.
-The homepage displays each topic once, above the evidence and status row.
+The homepage displays the same topics as the selected archive article, once in its
+shared metadata row.
 Shared chips reset text transformation and small caps so the same label has the same
 casing on each surface.
 The Results Kind selector uses the same display labels without changing the register’s

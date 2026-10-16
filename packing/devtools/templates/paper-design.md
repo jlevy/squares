@@ -893,6 +893,7 @@ it.
   original publication date, then optional topic tags and significance metadata.
   The title uses the Explanations card’s sans face, medium weight, size and leading; it
   stays upright, left aligned and in the theme’s text foreground.
+  A linked article title inherits the heading’s color and typography.
   News uses surnames in titles, article text and displayed credits unless distinct
   people share a surname.
   Keep published handles and organization names intact.
@@ -902,8 +903,8 @@ it.
   publication history.
   Tutorial dates name their first site deployments; manuscript creation and later
   revisions do not restamp them.
-  News retains each announcement’s frozen date or the highlighted result’s original
-  registered date. No current site edition or filesystem timestamp supplies a date.
+  News and homepage highlights retain each announcement’s frozen date.
+  No current site edition or filesystem timestamp supplies a date.
   Explanations uses the eyebrow for the paper’s series part or tutorial label.
   News places smaller Results-style topic chips on the left and the shared significance
   meter at the right below the date, followed by the article.
@@ -913,9 +914,10 @@ it.
   The meter’s accessible label names its S level; its shared tooltip explains the level
   and the post’s rationale.
   Its S and five bars remain one tightly paired mark.
-  Homepage highlights keep their actual result scores and assurance qualifiers, with one
-  S meter per card. News includes only S3, S4 and S5; S1/S2 remain in the full GitHub
-  changelog, with old News bookmarks forwarded there.
+  Homepage highlights keep the announcement’s significance and assurance qualifiers,
+  with one S meter per card.
+  News includes only S3, S4 and S5; S1/S2 remain in the full GitHub changelog, with old
+  News bookmarks forwarded there.
   Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
   All significance and All topics clear their facet; Reset restores the defaults.
@@ -957,10 +959,14 @@ it.
   so parent headings cannot change their casing.
   The chip renderer preserves each consumer’s filter attribute.
   Full result records retain the result’s real kind, status, claim and credit.
-  The homepage highlights the three newest S5 results from the results register, using
-  their existing claims, credit and evidence, and follows them with “All news →”.
-  Highlights show their registered topic once in the header when it belongs to the News
-  subset. The evidence row retains verification, confirmation and status marks.
+  The homepage highlights up to three newest eligible S5 News announcements that name
+  result IDs, ordered by the announcement’s frozen date and stable ID, followed by “All
+  news →”. Each preview uses the archive’s title, date, topic chips, complete article
+  and disclosure. Its title links to the stable News article anchor.
+  Keep claim qualifications in that shared article; result records carry the detailed
+  verification, confirmation and status marks.
+  The archive ends with a shared action button, “Full changelog”, using the
+  external-link arrow and linking to the complete GitHub changelog.
   About keeps one short News link; its old history bookmarks forward without duplicating
   the feed.
 
@@ -1673,8 +1679,12 @@ it.
   for the text, the medium sans at the note size, `0.45rem 0.9rem` of padding and square
   corners, darkened a step on hover and keyboard focus), with its icon from the one set
   after the label at the label’s size, the arrow right where the control is a link that
-  navigates and the double chevron where it is a button that shows more or less in
-  place. Both forms share one rule in `site.css`, and the row sets `--site-action-space`
+  navigates, the external arrow for an off-site destination, and the double chevron
+  where it is a button that shows more or less in place.
+  Navigation components always use the sans face, including links styled as action
+  buttons. Their shared rules set the font explicitly so a prose container cannot supply
+  a serif face. Inline citations within prose retain the surrounding text’s face.
+  Both forms share one rule in `site.css`, and the row sets `--site-action-space`
   (1.2rem) above itself and a table’s own space, `--site-table-space` (2rem), below, so
   text that follows a button stands as clear of it as of a table; where a heading
   follows, its larger space takes over (the owner, 2026-10-02, `think-0o9u`; nothing
