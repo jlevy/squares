@@ -5,7 +5,7 @@ title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: ecstatic-edison-intake-1016
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-16T05:04:02.841Z
+updated_at: 2026-10-16T05:07:57.232Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
 Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn): nothing was built or run. Stage 2 is done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 (below).
@@ -57,7 +57,7 @@ Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete 
 
 ## Disposition (proposed)
 
-Import. Stage 2, done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 at 34fb2b7 retains the whole tree (243 files, 3,360,904 bytes; the axiom log and expected/axioms.txt as deterministic gzip), pins the release archives by size and digest, and keeps the X announcement; acquire_source --check passes. Its acquisition record makes the intake sweep watch sq19 with its head pinned (the head was 34fb2b7 at 05:10Z). The bibliography key [Fitzharding n19 Lean 2026] is defined in the resources README; its bibliography.yaml entry, the one site-owned input, waits for stage 3. Next: the review lane (think-o40t), then stage 3, which registers the entry and links the proof from n-019.md. The full build waits for the owner's budget. The `n-19` label does not exist on jlevy/squares (gh label list, 2026-10-16); whether to create it and add it to #640 is the owner's.
+Import. Stage 2, done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 at 34fb2b7 retains the whole tree (243 files, 3,360,904 bytes; the axiom log and expected/axioms.txt as deterministic gzip), pins the release archives by size and digest, and keeps the X announcement; acquire_source --check passes. Its acquisition record makes the intake sweep watch sq19 with its head pinned (the head was 34fb2b7 when read at about 05:03Z). The bibliography key [Fitzharding n19 Lean 2026] is defined in the resources README; its bibliography.yaml entry, the one site-owned input, waits for stage 3. Next: the review lane (think-o40t), then stage 3, which registers the entry and links the proof from n-019.md. The full build waits for the owner's budget. The `n-19` label does not exist on jlevy/squares (gh label list, 2026-10-16); whether to create it and add it to #640 is the owner's.
 
 ## Draft acknowledgement (not posted; stage 7 posts it after the pull request carrying this triage merges)
 
