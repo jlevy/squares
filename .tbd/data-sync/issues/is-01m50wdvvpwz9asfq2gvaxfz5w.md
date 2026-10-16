@@ -5,7 +5,7 @@ title: "Intake process: add a regularization step to result-import.md stages (on
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 11
 delegate: user-eb-reg-intake
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.902Z
-updated_at: 2026-10-16T06:02:12.562Z
+updated_at: 2026-10-16T06:53:40.996Z
 started_at: 2026-10-16T04:17:15.710Z
 ---
 
@@ -40,3 +40,7 @@ Left: confirm --push result; open DRAFT PR (labels project + S1; body drafted at
 2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.
 
 2026-10-16T06:02Z user-eb-reg-intake (lane G): picked up the addressing pass of #641 Reviews A and B. Checked: branch head still 09ba0c143 (pushed 04:33Z, quiet >80 min), no disposition replies or new commits on the PR. Worktree .claude/worktrees/reg-intake. Next: fixes for B1 (count_state: an allowlisted count stays pending whatever its new house reads), B2/B3/B4, A-series docs; then the stacked sweep PR.
+
+2026-10-16T06:31Z user-eb-reg-intake: #641 addressing commits pushed (head 46562eab0, from 09ba0c143 after a fetch confirmed it unmoved): 955c8214e adopt_houses printout (B2 unique run dirs adopt-<day>-*, B3 RUNS/WORKERS, B5 parser test, B6, A3, A7 5-25 CPU-min, A8, A11, A1/A2 deferral lines); c720d982b default_drawings (B1: count_state keeps a PENDING_ALLOWED count pending whatever its house reads -- no data change, --check byte-identical; A1 --compare EARLIER; A9 release record); 46562eab0 docs (A1 A2 A4 A5 A6 A7 B1 B2 B4). Local: focused pytest 73 passed, packing-validate --records 52/52 steps, ruff/basedpyright 0, check_release_impact ok, release_pin --check ok. Chose not to backfill lapsed blocks (272/304 never in the index; all 14 being decided by #644 and lane B). Next: CI to green, disposition replies, then the stacked sweep PR.
+
+2026-10-16T06:53Z user-eb-reg-intake: #641 CI green at 46562eab0 (31 success, 28 skipped, 0 failed; Packing validation run 38861680046). Disposition replies posted: A https://github.com/jlevy/squares/pull/641#issuecomment-6209773869, B https://github.com/jlevy/squares/pull/641#issuecomment-6209774103 (all fixed except A12 declined; no deferrals). PR description updated (A10). Deferred checkpoint dispatch was refused (403), so labelled deep-gate: run 38862757844 in progress. Stacked PR #650. Closes at #641's merge (think-1644).

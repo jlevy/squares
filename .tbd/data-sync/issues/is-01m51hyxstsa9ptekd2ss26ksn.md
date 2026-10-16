@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 10
+version: 12
 delegate: user-eb
 labels:
   - result-import
@@ -15,10 +15,11 @@ child_order_hints:
   - is-01m51j2bqzex9th23e720jv38w
   - is-01m51jr81g6c5pgtsqrvtk5ch0
   - is-01m51jy7f6haemzycjpxtrhbs7
+  - is-01m51qy1th6y6df8ggqqq261hx
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T06:20:19.665Z
+updated_at: 2026-10-16T06:56:15.301Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -47,3 +48,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 ~06:05Z coordinator: owner's word ~05:55Z: take over the other agent's regularization and other work, monitor origin/main with a sub-agent, and make regularization part of the standard intake for every new packing. Added: watcher user-eb-upstream-watch (fast tier; reports main moves, conflicts, reviews, CI, new issues); lane G user-eb-reg-intake (think-g3q7 / PR #641: address Reviews A and B; stacked PR making the intake sweep report regularization debt and the runbook require regularization for every new house); lane H user-eb-intake-1016 (think-phyb, think-a4x3, think-xik9, think-g59l: #639/#640 stages 2-3 and #639's replay, stacked on PR #642); lane B also verifies PR #644 (think-la7h, the other session's 3a) and stacks 3b on it. Opened by the other session meanwhile: #641 (ready), #642 (draft), #644 (3a).
 
 2026-10-16 ~06:25Z coordinator: lane A done (PR #647 green). Four final comments (#432, #470, #529, #584) rendered from main and checked against main and the site, stored unposted in think-klm7, think-jpre, think-s2i8, think-x333 (and the session scratchpad laneA/drafts/N-final.md): the session's permission system refused the lane's GitHub comment and close ('External System Writes'), so they wait for the owner to allow posting or to post them. Skipped closes, with reasons in think-mu5v: #317 (owner's call), #573 (last reply under a day old), #582 and #624 (decision 4). Senior review of #647 started.
+
+2026-10-16 ~06:55Z coordinator: lane C done: PR #648 (review of T-185..T-190, all accepted V3/C3, 13 findings none blocking; site v0.7.15 cut because the synopsis row is a site input). Records lane J (think-z7wn, user-eb-records-185-190) started: rungs, scores, RT-1..RT-4, adoption of 15 houses, and regularization of the re-housed counts on the new witnesses, stacked on top of the regularization stack.

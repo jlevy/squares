@@ -5,7 +5,7 @@ title: "Review: retained replays of T-185 to T-190 (stage 4 review lane, upper b
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 16
 delegate: user-eb-review-185-190
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:13:30.623Z
-updated_at: 2026-10-16T06:12:43.883Z
+updated_at: 2026-10-16T06:54:34.146Z
 started_at: 2026-10-16T05:13:42.512Z
 ---
 Stage 4 review lane (W2) for the upper-bound entries registered on 15 October at V0/C0 whose next rung is "independently review the retained replay": T-185 (#506, 175), T-186 (#593, twelve counts), T-187 (#606, 146), T-188 (211), T-189 (#607, 237) and T-190 (237). Model: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md (the review of T-161 to T-183). Deliverable: docs/project/reviews/review-2026-10-16-upper-bound-imports-<issues>.md on its own branch and draft PR, which reproduces each packet's retained replay (devtools.upper_bound_reports PACKET check --replay), runs the third exact route, re-fetches each pinned scope and checks digests, measures credit, grades findings, and says per entry whether V3/C3 is supported and what each count's adoption should be. It moves no rung; the records lane that follows (a separate bead) writes the rungs and adoptions.
@@ -45,3 +45,24 @@ Stage 4 review lane (W2) for the upper-bound entries registered on 15 October at
 2026-10-16 06:00Z user-eb-review-185-190: check-claims rebuilt all six frozen claim records equal (1.7-16.5 s each, 05:53Z). Third route (devtools.check_half_angle_area at e2e018f32, unchanged since e1fc548d9, driven by a scratch roster driver): 17 certificates the six entries cite, 422,712 pairs (8,138 clipped), 102/102 controls at their required outcome, 32 upstream checks, no disagreement, exit 0, 179.8 s (05:53:37Z-05:56:37Z). Credit measured pose by pose; writing the review next while the Mishapolk and #506 out-of-scope remainders replay.
 
 2026-10-16 06:13Z user-eb-review-185-190: replay mishapolk-kkt-refinements-2026-10-14 check --n <the other 12 counts> --replay: 36 jobs equal, exit 0, 943 s (05:56:37Z-06:12:20Z); the whole 72-job receipt is now reproduced here. Next: couzo-certificates-2026-10-11's other 14 counts (running). Review draft at docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md (uncommitted).
+
+2026-10-16 06:29Z user-eb-review-185-190: replay couzo-certificates-2026-10-11 check --n <the other 14 counts, T-152's 304/305 and beyond-horizon rows> --replay: started 06:12:20Z, STOPPED by me at 06:28:24Z unfinished (exit 143) when the host load reached 17 on 4 cores and the process was getting ~0.25 core; no difference raised before the stop, but no reproduction claimed. Out of scope (no entry here cites them), decided twice by the import lane on 11 Oct (certify + complete check --replay); priced at 2,484.89 route CPU s, not run. In-scope 175 reproduced at 05:30Z.
+
+2026-10-16 06:36Z user-eb-review-185-190: review committed and pushed: claude/intake-2026-10-16-review-185-190 at 6c10c865e (docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md + document-map line + SYNOPSIS render). Next: site edition cut for the SYNOPSIS row (check_release_impact flags SYNOPSIS.md as a site input), packing-validate --records, draft PR.
+
+2026-10-16 user-eb-review-185-190, VERDICTS for the records lane (review docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md, branch claude/intake-2026-10-16-review-185-190 at 9bd813b2b (review commit 6c10c865e), draft PR #648 (https://github.com/jlevy/squares/pull/648, labels S2 and intake)). All six accepted for finite feasibility only; V3/C3 supported for every entry with its confirming evidence entry and this review; none V4/C4; no blocking or major finding.
+- T-185 (175): accepted, V3/C3; confirming entry to write E-couzo-506-n175-exact-feasibility (scope 175; E-couzo-506-exact-feasibility covers only #506's 11 requested counts); no house: above the case (T-158) by 2.94e-3, superseded; significance S1 -> S2.
+- T-186 (12 counts): accepted, V3/C3; E-mishapolk-70a033f-exact-feasibility; house at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303, 304; S1 stays.
+- T-187 (146): accepted, V3/C3; E-evand-606-n146-exact-feasibility; house at 146; S2 stays.
+- T-188 (211): accepted, V3/C3; E-couzo-487b058-exact-feasibility; house at 211; S1 -> S2.
+- T-189 (237): accepted, V3/C3; E-couzo-607-exact-feasibility (scope 237; may cover its 15 beyond-horizon rows on the import lane's two replays); no house (T-190 smaller by 2.40e-11), history; S2 -> S3.
+- T-190 (237): accepted, V3/C3; E-couzo-4e4c8ce-n237-exact-feasibility; house at 237; S1 -> S2.
+Findings: RT-1 minor (T-188's regularization of T-182 is no refinement: 5 squares beyond 0.1; follow T-182 154 / T-173 153 precedent); RT-2 minor (T-185 claim calls T-140 a refinement of Xu's packing; by pose no 1:1 pairing, 86/175 within 0.1); RT-3 minor (T-186/T-187 notes name 9b32da04d houses; current houses listed in the review); RT-4 minor (T-186 credit stops at Couzo at 154/156/271/302; at 271 T-161 lacks a regularization of T-151, owner/records lane); RT-8 minor (this review's third-route run and custody check are in scratch, not retained: add the six keys/rosters/credit lines to check_half_angle_area with tests and run --receipts third-route-2026-10-16.json.xz, ~3 min; until then do not list V-check-half-angle-area); notes RT-5 (T-187 lineage measured: Xu's design, 9 squares beyond 0.1), RT-6 (T-190 also refines T-189: 198 squares within 1e-9), RT-7 (moved 72/42 vs 70/41 by method), RT-9 (compute priced low), RT-10 (T-185 next rung), RT-11 (T-188 seed label #501 vs #575 digest; author question), RT-12 (#639 bears at 175/204/232/302, undecided at its print), RT-13 (PR #641 regularization debt per re-housed count).
+
+2026-10-16 user-eb-review-185-190, ADOPTION TABLE (exact, sides rounded up at 16 places; case = verified ceiling on main e2e018f32). n: case house -> recommended house (margin below case; credit):
+129: T-162 -> T-186 (1.19e-19; Polkovskyi after PingYou after Ostashev). 146: T-168 -> T-187 (1.38e-8; Daniel after Xu). 154: T-182 -> T-186 (1.29e-19; Polkovskyi after Couzo). 156: T-161 -> T-186 (1.30e-19; after PingYou after Couzo after Ostashev). 175: T-158 -> T-186 (1.38e-19; after PingYou after Ostashev; T-185 above the case by 2.94e-3). 176: T-165 -> T-186 (1.18e-2; after PingYou, Ostashev's #575 packing). 204: T-162 -> T-186 (1.48e-19). 211: T-182 -> T-188 (9.29e-6; Couzo after Ostashev, see RT-1). 232: T-158 -> T-186 (1.58e-19). 237: T-183 -> T-190 (1.01e-4; Couzo after Polkovskyi; T-189 2.40e-11 above T-190). 264: T-158 -> T-186 (1.68e-19). 271: T-161 -> T-186 (1.69e-19; ... after Chaoweeraprasit, RT-4). 302: T-181 -> T-186 (1.79e-19; after Couzo after PingYou). 303: T-162 -> T-186 (1.79e-19). 304: T-175 -> T-186 (1.79e-19; after Ostashev).
+Other open reports: T-174 (PR #574, held for the owner) is above T-186 at all 9 counts they share (1.10e-21 to 1.25e-94), so the hold decides none of these houses; #639's algebraic sides bear at 175, 204, 232, 302 (agree with T-186 to the 25 digits printed; undecided; algebraic = no candidate until RP-3), decided nothing here. If PR #641 merges first, each of the 15 re-housed counts owes a regularization run or a deferral. Witness size: T-186's 12 facts 1.73 MB uncompressed vs 1.56 MB of current witnesses (no OR-18 concern like T-174's 18.5 MB).
+
+2026-10-16 06:45Z user-eb-review-185-190: site edition: mapping the review changes SYNOPSIS.md (a site output), so the branch cuts site v0.7.15 (commit 9bd813b2b; claim documents byte-identical to main's with PUBLICATION_REVISION read back; explainer no-change record; README). PR #646 (codex/news-chooser-states) also cuts v0.7.15, so whichever merges second re-cuts. packing-validate --records --jobs 2 at 9bd813b2b: 52/52 steps, exit 0, 272 s. Hosted CI pending on PR #648.
+
+2026-10-16 06:55Z user-eb-review-185-190: DONE. Draft PR #648 (https://github.com/jlevy/squares/pull/648, S2 + intake), head 9bd813b2b. Hosted CI green at 9bd813b2b: Packing validation (run 38862532632, 06:40Z-06:52Z) and Certificate page (run 38862532727) passed, Branch mergeability passed; 31 checks success, 52 deferred/deep-gate skipped, none failed. Site v0.7.15 collides with PR #646's v0.7.15: second to merge re-cuts. Not merged (not mine to merge). Records lane next (no bead yet).

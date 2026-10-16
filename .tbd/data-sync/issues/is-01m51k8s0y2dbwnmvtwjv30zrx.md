@@ -5,7 +5,7 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 8
 delegate: user-eb-land-644
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51hy396vnjkxe4726egs8x5
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T06:15:30.276Z
+updated_at: 2026-10-16T06:31:25.512Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 
@@ -28,3 +28,7 @@ Release completion must include both infographic families and every advertised S
 2026-10-16 ~06:15Z OWNERSHIP TRANSFER by the owner's word (this session, ~05:55Z: take over the other agent's regularization work and incorporate it) and per the #641 coordination handoff of 05:58Z addressed to 'the continuing agent': now owned by the overnight coordinator user-eb (epic think-hg5s). Lane I (user-eb-land-644) lands PR #644: CI fix, the B1 evidence, release completion.
 
 2026-10-16T06:15Z user-eb-land-644: pushed f6737d638 to claude/ecstatic-edison-8en33t-regularize-3a (over 42ef42e5a): test_default_drawings' owed test now lets a decision owe nothing (204/272/303), 31 passed locally. Validate still needs a site successor (check_release_impact): #644 must cut its own site patch (next free is v0.7.16; v0.7.15 on #646); posters may trail (check-composites passes), so the infographic family rebuild can go to the top of the regularization stack. Next: B1 evidence watch until 08:30Z, then re-run here if absent.
+
+2026-10-16T06:23Z user-eb-land-644: pushed 780d81b82: site v0.7.15 cut (the only patch successor of main's v0.7.14 the gate accepts; #646 also carries v0.7.15, whichever merges second re-cuts); claim docs byte-identical modulo PUBLICATION_REVISION f6737d63 (32 links), explainer no-change record added; check_release_impact passes locally. Posters trail (v0.6.1) by COMPOSITES_MAY_TRAIL; infographic successor at top of stack. Next: B1 watch, re-run at 08:30Z if absent (base worktree at e2e018f32 in laneI scratch).
+
+2026-10-16T06:31Z user-eb-land-644: at 780d81b82, packing-validate --records --jobs 2 --inner-jobs 1: 52 of 52 records steps passed, 250 s wall (incl. synopsis/release impact, regularization state, default drawings, regularized atlas). Hosted CI for 780d81b82 running. B1 watch running (no evidence at 06:28Z).
