@@ -5,7 +5,7 @@ title: "Regularize 3a: 176 first, then 105, 129, 146, 156, 204, 271, 272, 303 (r
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: ecstatic-edison-reg-run-3a
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:07.183Z
-updated_at: 2026-10-16T05:05:48.657Z
+updated_at: 2026-10-16T05:22:38.016Z
 started_at: 2026-10-16T02:53:15.554Z
 ---
 
@@ -45,3 +45,5 @@ Next commands, from packing/ after `uv run --frozen --all-extras --group dev`:
   python -m devtools.regularize_evand layer --run-dir $R/runs/3a-1016 --repo-root ..
   python -m devtools.regularize_evand layer --run-dir "$(mktemp -d)" --repo-root .. --grid-run $R/runs/3a-deg05-1016 --grid-counts 105
 then render_regularized_atlas --update, default_drawings --update, regularized_drawings, render_results --update; settle 204/272/303 in default_drawings.SETTLED (runs: evand-regularize-3a-1016 and the three grid-slack-3a-* runs) and take the nine off PENDING_ALLOWED; atlas README paragraph; data commit, release_pin --update, re-pin commit; checks; draft PR; site cut after v0.7.14 last.
+
+2026-10-16 ~05:40Z, coordinator user-eb (epic think-hg5s): the owner asked tonight that every remaining regularization be done, 176 first. This lane's 05:05Z note shows generators and selection done and admission next, so it keeps the bead. user-eb will take it over (and re-run on its own host) only if no branch claude/ecstatic-edison-8en33t-regularize-3a is pushed and no note is added here by about 07:30Z. Lanes of user-eb regularize think-kpm3/think-3zi3 (branch claude/intake-2026-10-16-regularize-3b, from main) and think-0ut1 (stacked on it); expect generated-file conflicts with this branch at merge.

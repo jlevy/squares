@@ -3,14 +3,18 @@ type: is
 id: is-01m4sx9mxbv509zbb1tyvjkz0z
 title: Draw 301 from the grid-slack view at a 1-degree threshold (admits cleanly; the 0.5-degree view sits in review)
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
+delegate: user-eb-reg-leftovers
 labels:
   - regularization
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-10-13T05:55:48.266Z
-updated_at: 2026-10-13T05:55:48.266Z
+updated_at: 2026-10-16T05:22:36.549Z
+started_at: 2026-10-16T05:22:36.549Z
 ---
 Measured on 13 October 2026 at stack 498's top (a98d40319), scratch only (session 01RXar8v4JCumHp9eHemRgSA; outputs not retained):
 - 301's drawing (axis tool) is irregular by rotation, not position: 110 grid squares tilted 0.03-0.68 deg in 39 angle classes (98 under 0.5 deg, 12 at 0.53-0.68 deg), centres on the lattice within 0.03. Census: light 25, uneven 89, near-axis 98, variation 187 (worst in the atlas). The axis tool's snap tolerance (1e-4 rad) leaves them; 22 more are rotation-blocked (it never translates).
