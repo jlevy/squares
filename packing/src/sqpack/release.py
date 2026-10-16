@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.21",
+        first_published="October 16, 2026",
+        result_scope=(
+            "Draw the regularized views of 153, 154, 207, 211, 237, 241 and 302 by "
+            "default, and record 304 as decided with no better view."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.20",
         first_published="October 16, 2026",
         result_scope=(
@@ -427,7 +435,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "a2248d8c5bb19d623c676628c917adf28fdb67d0"
+DATA_REVISION = "c6e488dccf6dc8166ced280f0ad1320dd9a7acb3"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -850,6 +858,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.20",
+        version="v0.7.21",
+        impact="patch",
+        reason=(
+            "Draw the regularized views of 153, 154, 207, 211, 237, 241 and 302 by "
+            "default, and record 304 as decided with no better view."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.19",
         version="v0.7.20",
         impact="patch",
@@ -1172,6 +1190,116 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.21 for the think-kpm3 regularization regenerated the five "
+            "claim documents at PUBLICATION_REVISION 3971c17b, this branch's re-pin after "
+            "merging main b35a6289, kept reachable from main by the merge commit the PR "
+            "merges with; with that revision read back as main's 94dc2b59, each is "
+            "byte-identical to main's, so the 32 repository links it pins are the only "
+            "change, and no claim, certificate or command moves. A link revision follows "
+            "the site's edition and is not a revision of the explainer, so it keeps "
+            "v0.4.7. Source-compared; no render of the claim documents was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/default_drawings.py", "packing/frontier/results.yaml"),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Over main b35a6289, which holds #644, the think-kpm3 regularization adds "
+            "SETTLED's 304 and takes eight counts off PENDING_ALLOWED in default_drawings, "
+            "and changes results.yaml only in its regularized_drawings items at the seven "
+            "counts it draws. The papers read results.yaml's results, never "
+            "regularized_drawings, and reach default_drawings only through shared import "
+            "discovery, reading neither constant. Rendered at link revision e2e018f3 from "
+            "this branch at 3971c17b, the survey's and both reviews' 42 files each are "
+            "byte-identical to the renders from main e2e018f3's tree; the explainer, whose "
+            "render needs a browser this host lacks, is source-reviewed only, and no PDF "
+            "was printed. All four papers keep their versions."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-154.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/n-237.md",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The regularization run of 16 October 2026 on the eight counts #614 re-housed "
+            "(think-kpm3) changes these case records only in their generated "
+            "regularization note, which the survey does not quote: it cites them by link, "
+            "as its results table's count links. Rendered from main at e2e018f32 and from "
+            "this branch at that one link revision, the survey's HTML and Markdown are "
+            "byte-identical, as are the other 40 files the renderer writes. No PDF was "
+            "printed (no pinned Chromium on this host), and the survey keeps v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/regularized_drawings.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "#653's review A1 changes only which of this project's modifications a "
+            "regularization note names: the same-side re-solve is credited where the run's "
+            "output is the re-solve's, so the notes at 241 and 302, which no paper links, "
+            "and results.yaml's regularized_drawings item at 302 now say unmodified. The "
+            "papers read results.yaml's results, never regularized_drawings, and reach the "
+            "module only through shared import discovery. Rendered from this branch's tree "
+            "at 0082533ee, at the link revision e2e018f3, the survey's and both "
+            "reviews' HTML and Markdown and the other 40 files each render writes are "
+            "byte-identical to the renders from main e2e018f3's tree taken for #644 and "
+            "for the survey's record above (42 of 42 files each); the explainer, whose "
+            "render needs a browser this host lacks, is source-reviewed only, and no PDF "
+            "was printed. All four papers keep their versions."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -3035,7 +3163,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "94dc2b59"
+PUBLICATION_REVISION = "3971c17b"
 
 
 def data_pathspec() -> tuple[str, ...]:

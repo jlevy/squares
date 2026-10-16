@@ -248,6 +248,15 @@ _RERUN3A_GRID = (
 )
 _RERUN3A_204_272 = (("evand-regularize", "evand-regularize-3a-rerun-s-1016"), *_RERUN3A_GRID)
 _RERUN3A_303 = (("evand-regularize", "evand-regularize-3a-rerun-303-1016"), *_RERUN3A_GRID)
+#: The same day both generators ran on the eight witnesses #614 adopted in 3b9fab84a
+#: (think-kpm3), 154's also adopted by #598 in 34e62125f.
+_RUN3B = (
+    ("evand-regularize", "evand-regularize-3b-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3b-deg05-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3b-deg1-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3b-deg5-1016"),
+)
+_README_3B = "packing/atlas/known-best/README.md, the think-kpm3 paragraph of 16 October 2026"
 _OSTASHEV = "[Ostashev compositions 2026-10-12]"
 _OSTASHEV_REVISION = "fe43a64ecf2581cdbd11830e8a5be0989746c5d3"
 
@@ -475,9 +484,22 @@ SETTLED: dict[int, Settled] = {
         "draws fewer shared sides than the witness (house 758 to 708, stage 798 to 724)",
         _README_3A,
     ),
+    304: Settled(
+        DECIDED,
+        "[Ostashev merged bands 2026-10-13]",
+        "resources/web/dostashev-merged-bands-2026-10-13/source/records/n0304.sqcert",
+        "b909e1b74cda50906e12b4373e010ddee39e47e4",
+        "35858855516150349931332652277978229724878240089919278343230358588555161503499313"
+        "3265227797822972487824008991927834323/200000000000000000000000000000000000000000"
+        "00000000000000000000000000000000000000000000000000000000000000000000000000",
+        _RUN3B,
+        "every view draws more light squares than the axis tool's (2 or 4 to none): "
+        "grid-slack's, admitted at row 10 at all three thresholds, and Evan Daniel's, held "
+        "at row 4 (solved 8.9e-31 above U)",
+        _README_3B,
+    ),
 }
 
-_KPM3 = "think-kpm3: re-housed by #614 (3b9fab84a)"
 _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 
 #: The counts allowed to stay `pending`, each naming the bead whose runs will decide it.
@@ -499,19 +521,13 @@ _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 #: Changes"; review B4 of #636). Set on 15 October 2026 to the twenty counts the audit
 #: found drawn without a strong generator's decision on their current witness
 #: (think-gvke, think-rz8c). The nine of think-la7h (105, 129, 146, 156, 176, 204, 271,
-#: 272 and 303) left it on 16 October 2026, six regularized and three decided.
+#: 272 and 303) left it on 16 October 2026, six regularized and three decided, and so did
+#: the eight of think-kpm3 (153, 154, 207, 211, 237, 241, 302 and 304), seven
+#: regularized and one decided.
 PENDING_ALLOWED: dict[int, str] = {
-    153: f"{_KPM3}; its Evan Daniel view lapsed",
-    154: "think-kpm3: re-housed by #598 (34e62125f) and #614 (3b9fab84a); never decided",
     175: f"{_3ZI3}; its grid-slack view lapsed",
-    207: f"{_KPM3}; never decided",
-    211: f"{_KPM3}; its grid-slack view lapsed",
     232: f"{_3ZI3}; never decided",
-    237: f"{_KPM3}; its Evan Daniel view lapsed",
-    241: f"{_KPM3}; its grid-slack view lapsed",
     264: f"{_3ZI3}; never decided",
-    302: f"{_KPM3}; its Evan Daniel view lapsed",
-    304: f"{_KPM3}; its Evan Daniel view lapsed earlier, in #553 (3e24adeb2)",
 }
 
 

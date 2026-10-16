@@ -323,6 +323,34 @@ regularizer (30 at the witness’s side and 19 at the verified upper bound) and 
 grid-slack generator (1 by its version 0 and 14 by its version 1), with 181 records
 unchanged and 51 refused.
 
+The same day both generators ran on the eight witnesses jlevy/squares#614 adopted in
+`3b9fab84a` at 153, 154, 207, 211, 237, 241, 302 and 304 (think-kpm3): Evan Daniel’s
+regularizer (`evand-regularize-3b-1016`) and grid-slack at 0.5, 1 and 5 degrees
+(`grid-slack-3b-deg05-1016`, `grid-slack-3b-deg1-1016` and `grid-slack-3b-deg5-1016`),
+3,916 CPU-seconds in all.
+His views at the witness’s side are drawn at 153, 207, 211, 237, 241 and 302: the
+same-side re-solve’s at the first four, and at 241 and 302, where the re-solve was
+refused (an overlap, an unmatched rotation), his solve itself, unmodified, which closed
+to that side. Grid-slack’s five-degree view is drawn at 154, where his view goes to the
+owner at row 7 (eight squares lose a contact while no total falls).
+Over the seven, light / uneven / near-axis squares go from 51 / 133 / 34 to 10 / 26 / 3,
+and house sides from 3,957 to 4,341. At 304 every view draws two or four light squares
+where the axis tool’s view draws none, so that view stays: grid-slack’s at all three
+thresholds, and his, held at row 4, solved $8.9 \times 10^{-31}$ above $U$.
+`devtools.default_drawings.SETTLED` records it as decided on these four runs.
+At 153 and 207 his solved views lie below $U$, by $1.6 \times 10^{-14}$ and
+$2.4 \times 10^{-12}$; they are register candidates for the owner and are not drawn.
+The evidence for these choices and for 304 is retained in
+[`cases/regularized_drawings/think-kpm3-2026-10-16/`](../../cases/regularized_drawings/think-kpm3-2026-10-16/):
+`regularize_select`’s report (`selection-3b.json`, every candidate’s decision and
+reasons, and `selection-3b.md`), the driver’s `receipt.json`, and each run’s per-count
+`report.json`, gzip-compressed.
+Grid-slack keeps no receipt of its own, so each of its three runs has a `run.json`, the
+block `regularize_grid_slack.run_block` computes from its reports; the index records
+only the five-degree run, which supplied a view, and that block is the same as the
+index’s. Its cost is the per-count seconds the reports record, which are wall seconds
+under load. The views themselves are not retained beyond the seven the layer draws.
+
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
 `regularized_drawings` records each one whose packing a registered result holds,
