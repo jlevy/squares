@@ -5,7 +5,7 @@ title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: ecstatic-edison-intake-1016
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-16T05:07:57.232Z
+updated_at: 2026-10-16T05:09:59.596Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
 Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn): nothing was built or run. Stage 2 is done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 (below).
@@ -74,3 +74,5 @@ blocked_on: none
 2026-10-16 ~05:05Z, ecstatic-edison-intake-1016: the announcement was fetched from X's syndication endpoint at 2026-10-16T04:58:12Z (HTTP 200, 2,278 bytes, SHA-256 1af584d9777af2ed54c0f64e98bfe209911d7dfdb63217cfb77a9646cd65b3b5; scratch copy, to be retained in the packet's receipts/announcement/ as the sq17 packet retained its post). Post 2110935681597874374 by @ofitzharding (display name "Oscar", account 2097726704118603776, the account of the s(17) announcement), created 2026-10-16T03:27:40Z, text "lol here's a lean proof of the optimal packing for 19 squares" with a link expanding to https://github.com/ofitzharding/sq19 and one photo. It precedes issue #640 (03:41:08Z); the repository's first commit is 02:15:45Z and release v1.0.0 was published 02:38:08Z.
 
 Watching sq19: intake-watch.yaml cannot make a repository watched. Its schema says the watched repositories are derived from the source register, a packet's acquisition record and the site's list of other projects, and devtools.intake_sweep lists a read of a repository no record cites as "intake-watch.yaml reads <url>, which no record cites; remove the entry" and does not ls-remote it. So the plan is stage 2 now: the packet fitzharding-n19-lean-2026-10-16 with an acquisition record pinning 34fb2b7 (packing/resources/web/, no release-impact owner), which makes the sweep watch sq19 with its head pinned, and the announcement retained in it; the bibliography.yaml key, the one site-owned input, waits for stage 3, which registers the result. A read in intake-watch.yaml through 34fb2b7 would then be redundant (the sweep says a read of a pinned head can be removed); one is added only if the head moves past the pin before merge.
+
+2026-10-16 ~05:25Z, ecstatic-edison-intake-1016: draft PR https://github.com/jlevy/squares/pull/642 (labels intake, S2) at 71f6a413e on claude/ecstatic-edison-8en33t-intake-1016. 71f6a413e adds the #640 stage 2 packet packing/resources/web/fitzharding-n19-lean-2026-10-16 (sq19 whole at 34fb2b7, release archives pinned by digest, the X announcement retained; acquire_source --check prints PACKET_MATCHES_ITS_CONTRACT), a resources README row and section for [Fitzharding n19 Lean 2026] (its bibliography.yaml entry waits for stage 3), and #640's entry records the announcement as a source and names think-xik9. At 71f6a413e the records tier exits 0, the survey render is byte-identical again, and the sweep on the branch watches sq19 (44 repositories, 18 heads pinned). packing-validate --push at bd1f40425 timed out in its reachable tests (285 files, 900 s) with one failure it did not name; a separate run of those files was in progress. Hosted CI was pending at opening.
