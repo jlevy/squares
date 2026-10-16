@@ -6181,15 +6181,24 @@ issues:
       bead: think-6t6q
     - what: An offline copy of the secondary JavaScript checker they refused to run for network
         reasons.
-      state: queued
-      note: The external-square-certificates-2026-09-22 packet retains the R038 reconstruction
-        hash-pinned and the source replay here ran it; the reply can say so.
-      bead: think-6t6q
+      state: done
+      note: The reply of 2026-10-15 says that the external-square-certificates-2026-09-22 packet
+        retains the upstream R038 exact_parent_side_scan.js at the SHA-256 prepare_secondary.py
+        pins, in dependencies/guzhou-r038/, that prepare_secondary.py --source rebuilds the
+        checker from it offline, and that the source replay here ran both sweeps.
     beads:
     - think-6t6q
     answer_bead: think-6t6q
-    replies: []
-    close_when: The evidence entry is on main and the owner has answered the two asks.
+    replies:
+    - url: https://github.com/jlevy/squares/issues/521#issuecomment-6200834867
+      date: '2026-10-15'
+      by: jlevy
+      kind: import
+      reported:
+      - result: t037-third-party-replay
+        id: E-n011-kleddamag-3875-esummins-replay-report
+        status: recorded
+    close_when: The evidence entry is on main and the owner has decided the replayed-annotation ask.
   - number: 522
     title: 'Simple-square stratification of s(n): proof strategy, n = 11 scoreboard and Lean layer: registration request'
     author: Esummins
@@ -6251,7 +6260,17 @@ issues:
     beads:
     - think-3m7d
     answer_bead: think-3m7d
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/522#issuecomment-6200838680
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: stratification-strategy
+      - result: n11-census-theorem
+      - result: n11-window-scoreboard
+      - result: lean-layer
+      - result: by-products-below-record
     close_when: The owner has decided on the strategy-catalogue entry and the reply states what was
       retained and why nothing is registered.
   - number: 523
@@ -6290,13 +6309,22 @@ issues:
       state: queued
       note: Priced in think-j891 at about 15 CPU-hours at the authors' walls and 150 to 300
         CPU-hours with the re-walls, per n; needs an owner budget and a soundness review of the leaf
-        rules first. The n = 17 lane (think-x4v4) should own the decision.
+        rules first. The n = 17 lane (think-x4v4) should own the decision. On 13 October the owner
+        suspended the n = 17 part pending Overbeck's candidate proof (T-153, issue 557), with
+        think-x4v4; the n = 19 part waits on a budget and the leaf-rule review (think-kok7).
       bead: think-j891
-      blocked_on: [think-x4v4]
+      blocked_on: [think-x4v4, think-kok7]
     beads:
     - think-j891
     answer_bead: think-j891
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/523#issuecomment-6200839132
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: census-2500
+      - result: n17-descent
     close_when: The owner has budgeted or declined the compute and the reply states what was
       retained.
   - number: 524
@@ -6331,7 +6359,13 @@ issues:
     beads:
     - think-s1ru
     answer_bead: think-s1ru
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/524#issuecomment-6200839522
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: one-flush-conjecture
     close_when: The owner has answered the research request and the reply states what was retained.
   - number: 525
     title: 'Forced double meeters on the simple-square ladder (Theorem FC, SLOT-CROWD) and the forced-cell traction finding: registration request'
@@ -6365,7 +6399,13 @@ issues:
     beads:
     - think-3nc2
     answer_bead: think-3nc2
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/525#issuecomment-6200839952
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: slot-crowd-and-fc
     close_when: The owner has answered the asks and the reply states what was retained.
   - number: 526
     title: 'k = 0 at n = 11: the no-simple-square class — theorems, refuted routes with witnesses, measured facts: registration request'
@@ -6398,7 +6438,13 @@ issues:
     beads:
     - think-tnfo
     answer_bead: think-tnfo
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/526#issuecomment-6200840511
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: k0-theorems-and-negatives
     close_when: The owner has answered the asks and the reply states what was retained.
   - number: 527
     title: 'Geometry-before-LP toolkit for stratum trees (exact-rational leaf rules, 7.2× on closed nodes): registration request'
@@ -6432,7 +6478,13 @@ issues:
     beads:
     - think-kok7
     answer_bead: think-kok7
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/527#issuecomment-6200840937
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: toolkit
     close_when: The owner has decided on the review and the reply states what was retained.
   - number: 528
     title: 's(175) ≤ 13.764174317487, s(232) ≤ 15.764174317487, s(264) ≤ 16.774735132388: registration request'
@@ -7124,7 +7176,14 @@ issues:
     - think-01y3
     - think-3ppi
     answer_bead: think-6gti
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/545#issuecomment-6200841270
+      date: '2026-10-15'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: s29-minimal-polynomial
+      - result: grade-c-local-minima
     close_when: Both reports are recorded on main, and the replay and review are either run or
       priced with an owner decision.
   - number: 550
