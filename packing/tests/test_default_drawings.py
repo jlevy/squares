@@ -848,7 +848,8 @@ def test_the_comparison_lists_what_each_changed_count_draws(
 ) -> None:
     """Review A1 of #641: an adoption whose runs must wait shows its pull request what each
     deferred count drew before and draws now, from the base branch's record, and marks a
-    count whose strong view gives way to an irregular house drawing for the owner."""
+    count whose strong view gives way to a drawing worse than it on a goal of the
+    improvement rule for the owner, with those goals (review D1)."""
     earlier = _record()
     assert defaults.drawing_changes(earlier, earlier) == []
     strong = next(
@@ -860,15 +861,24 @@ def test_the_comparison_lists_what_each_changed_count_draws(
     later = json.loads(defaults.text(earlier))
     rows = {row["n"]: row for row in later["states"]}
     fallen = rows[strong["n"]]
+    measures = strong["measures"]
+    uneven, near, total = (
+        measures["uneven_axis"] + 3,
+        measures["near_axis"] + 1,
+        measures["house_total"] - 7,
+    )
     fallen.update(
         state=defaults.PENDING,
         drawn=defaults.HOUSE,
         generator=None,
         witness={**fallen["witness"], "side": "1"},
-        measures={**fallen["measures"], "uneven_axis": 3, "near_axis": 1, "house_total": 7},
+        measures={**measures, "uneven_axis": uneven, "near_axis": near, "house_total": total},
     )
+    # The new house is exactly verified, so only the three measures are lost.
+    for entry in later["entries"]:
+        if entry["n"] == strong["n"]:
+            entry["house_exact"] = True
     rows[regular["n"]]["witness"] = {**regular["witness"], "revision": "a new one"}
-    measures = strong["measures"]
     before = (
         f"regularized, the {strong['generator']} view ({measures['uneven_axis']} uneven, "
         f"{measures['near_axis']} near-axis, {measures['house_total']} full shared sides)"
@@ -881,8 +891,9 @@ def test_the_comparison_lists_what_each_changed_count_draws(
     expected = {
         strong["n"]: (
             f"n={strong['n']} (a new witness): {before} -> pending, the house drawing "
-            "(3 uneven, 1 near-axis, 7 full shared sides); a strong view gives way to an "
-            "irregular house drawing: the owner's word"
+            f"({uneven} uneven, {near} near-axis, {total} full shared sides); the strong view "
+            "gives way to a drawing worse on uneven squares, near-axis squares, house total "
+            "of full shared sides: the owner's word"
         ),
         regular["n"]: f"n={regular['n']} (a new witness): {same} -> {same}",
     }
@@ -897,6 +908,140 @@ def test_the_comparison_lists_what_each_changed_count_draws(
         *(expected[n] for n in sorted(expected)),
         (
             "2 counts changed state, drawing or witness; 1 where a strong view gives way to "
-            "an irregular house drawing"
+            "a drawing worse than it on a goal of the improvement rule, whatever drew it"
         ),
     ]
+
+
+#: #657's adoption at n = 302, as its review B4 and review D1 of #641 give it: light,
+#: uneven and near-axis squares, angle classes, hues, house and stage totals.
+LOST_302 = (0, 0, 0, 14, 14, 978, 978)
+AXIS_302 = (6, 26, 11, 40, 19, 882, 952)
+
+
+def _row(
+    n: int, drawn: str, generator: str | None, side: str, measures: tuple[int, ...]
+) -> dict:
+    """A state row as the record writes one, with what `drawing_changes` reads."""
+    strong = generator in defaults.STRONG_GENERATORS
+    return {
+        "n": n,
+        "state": defaults.REGULARIZED_STATE if strong else defaults.PENDING,
+        "drawn": drawn,
+        "generator": generator,
+        "witness": {"id": f"W-known-best-n{n:03d}", "source": side, "side": side},
+        "measures": dict(zip(rule.MEASURES, measures, strict=True)),
+    }
+
+
+def _marks(earlier: dict, later: dict, *, house_exact: bool | None = None) -> list[str]:
+    """What `drawing_changes` marks for the owner at one count, as the goals it names."""
+    record = {"states": [later]}
+    if house_exact is not None:
+        record["entries"] = [{"n": later["n"], "house_exact": house_exact}]
+    (line,) = defaults.drawing_changes({"states": [earlier]}, record)
+    _picture, _semicolon, mark = line.partition("; the strong view gives way to ")
+    if not mark:
+        return []
+    assert mark.startswith("a drawing worse on ")
+    assert mark.endswith(f": {defaults.OWNER}")
+    return (
+        mark.removeprefix("a drawing worse on ").removesuffix(f": {defaults.OWNER}").split(", ")
+    )
+
+
+EVAND, AXIS = "evand-regularize", "regularize_axis_components/2"
+ALL_SEVEN = [rule.GOAL_NAMES[key] for key in rule.MEASURES]
+
+
+@pytest.mark.parametrize(
+    ("earlier", "later", "house_exact", "goals"),
+    [
+        # 302 at #657: the axis tool's view of the new witness replaces Evan Daniel's view
+        # of the old one, worse on all seven measures; the predicate at 7aa4775ea marked
+        # none of #657's seven such losses, since it asked for the house drawing.
+        pytest.param(
+            _row(302, defaults.VIEW, EVAND, "17.5", LOST_302),
+            _row(302, defaults.VIEW, AXIS, "17.4", AXIS_302),
+            None,
+            ALL_SEVEN,
+            id="302-axis-view",
+        ),
+        # #636's B2 at 230: a regular house, exactly verified, with fewer full shared
+        # sides (626 to 562), which no uneven or near-axis square shows.
+        pytest.param(
+            _row(230, defaults.VIEW, EVAND, "15.9", (0, 0, 0, 5, 5, 626, 626)),
+            _row(230, defaults.HOUSE, None, "15.8", (0, 0, 0, 5, 5, 562, 562)),
+            True,
+            [rule.GOAL_NAMES["house_total"], rule.GOAL_NAMES["stage_total"]],
+            id="230-regular-house-fewer-sides",
+        ),
+        # A house drawing as regular as the lost view, but not shown exactly verified:
+        # the view was, so exactness is lost.
+        pytest.param(
+            _row(230, defaults.VIEW, EVAND, "15.9", (0, 0, 0, 5, 5, 626, 626)),
+            _row(230, defaults.HOUSE, None, "15.8", (0, 0, 0, 5, 5, 626, 626)),
+            None,
+            [rule.GOAL_NAMES[rule.EXACTNESS]],
+            id="house-not-shown-exact",
+        ),
+        pytest.param(
+            _row(230, defaults.VIEW, EVAND, "15.9", (0, 0, 0, 5, 5, 626, 626)),
+            _row(230, defaults.HOUSE, None, "15.8", (0, 0, 0, 5, 5, 626, 626)),
+            True,
+            [],
+            id="exact-house-as-good",
+        ),
+        # A larger side is worse on the side, whatever the measures.
+        pytest.param(
+            _row(302, defaults.VIEW, EVAND, "17.4", LOST_302),
+            _row(302, defaults.VIEW, AXIS, "17.5", LOST_302),
+            None,
+            [rule.GOAL_NAMES[rule.SIDE]],
+            id="larger-side",
+        ),
+        # An axis view better on every measure at a smaller side loses nothing.
+        pytest.param(
+            _row(302, defaults.VIEW, EVAND, "17.5", AXIS_302),
+            _row(302, defaults.VIEW, AXIS, "17.4", LOST_302),
+            None,
+            [],
+            id="axis-view-better",
+        ),
+        # A strong view worse than the one it replaces is marked too: whatever drew it.
+        pytest.param(
+            _row(302, defaults.VIEW, EVAND, "17.5", LOST_302),
+            _row(302, defaults.VIEW, "regularize_grid_slack/1", "17.4", AXIS_302),
+            None,
+            ALL_SEVEN,
+            id="strong-view-worse",
+        ),
+        # No strong view was drawn, so none is lost.
+        pytest.param(
+            _row(302, defaults.VIEW, AXIS, "17.5", LOST_302),
+            _row(302, defaults.HOUSE, None, "17.4", AXIS_302),
+            None,
+            [],
+            id="axis-view-before",
+        ),
+        # n = 51's algebraic side is not compared, and nothing else is lost.
+        pytest.param(
+            _row(51, defaults.VIEW, EVAND, "['16/3', '5/3']", LOST_302),
+            _row(51, defaults.VIEW, AXIS, "9", LOST_302),
+            None,
+            [],
+            id="algebraic-side",
+        ),
+    ],
+)
+def test_a_lost_strong_view_is_marked_with_every_goal_its_replacement_is_worse_on(
+    earlier: dict,
+    later: dict,
+    house_exact: bool | None,  # noqa: FBT001
+    goals: list[str],
+) -> None:
+    """Review D1 of #641: the mark asked for an irregular house drawing, but after an
+    adoption the axis tool's view usually replaces a lost strong view, since the refresh
+    draws it wherever it improves on the new house. Whatever drew the replacement, it is
+    marked where the improvement rule finds it worse than the lost view on some goal."""
+    assert _marks(earlier, later, house_exact=house_exact) == goals

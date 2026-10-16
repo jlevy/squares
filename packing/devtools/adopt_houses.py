@@ -2127,10 +2127,13 @@ REGULARIZE_CPU_MINUTES = (5, 25)
 #: examples do: what a shared host can spare, which the reader sets (review B3 of #641).
 WORKERS = 2
 #: The base branch's record as the file `default_drawings --compare` reads, in a shell
-#: (review C4 of #641).
+#: (review C4 of #641), for a pull request on main; a stacked one names its own base, as
+#: the runbook and the guide say (review D2).
 BASE_RECORD = f"`<(git show origin/main:{default_drawings.RECORD_PATH})`"
-#: What a deferral whose strong view gives way to an irregular house drawing waits for, in
-#: the runbook's and the guide's words (review C4 of #641).
+STACKED_BASE = "with a stacked pull request's base branch for main"
+#: What a deferral waits for where a strong view gives way to a drawing worse than it on
+#: a goal of the improvement rule, whatever drew it (`default_drawings.STRONG_VIEW_LOST`),
+#: in the runbook's and the guide's words (reviews C4 and D1 of #641).
 DEFERRAL_WAITS = "the adoption waits for the owner's word or for its runs"
 #: What follows a write, as `python -m devtools.` commands from `packing/` with `{n}` the
 #: re-housed counts: the new witness, the axis tool's view of it, and each count's state.
@@ -2320,8 +2323,8 @@ def regularization_owed(
         "default_drawings.PENDING_ALLOWED with the open bead that owns its runs, run "
         "`default_drawings --update` again and the guide's step 5, and list each deferred "
         "count's drawing before and after in this pull request (`default_drawings --compare` "
-        f"with the base branch's record, {BASE_RECORD}); where a strong view gives way to an "
-        f"irregular house drawing, {DEFERRAL_WAITS}."
+        f"with the base branch's record, {BASE_RECORD}, {STACKED_BASE}); where "
+        f"{default_drawings.STRONG_VIEW_LOST}, {DEFERRAL_WAITS}."
     )
     lines.append(
         "  `python -m devtools.default_drawings --check-state` fails until every pending count "

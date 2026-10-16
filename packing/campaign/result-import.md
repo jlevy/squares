@@ -714,11 +714,17 @@ deferred:
 2. It runs `default_drawings --update` again, since the record copies the entry into the
    count’s reason, and then the guide’s render step.
 3. It lists each deferred count’s drawing before and after, with
-   `default_drawings --compare` on the base branch’s record:
-   `python -m devtools.default_drawings --compare <(git show origin/main:packing/atlas/known-best/default-drawings.json)`.
-   Where a strong view gives way to a house drawing with an uneven or a near-axis
-   square, as it did at n = 176, the adoption waits for the owner’s word or for its
-   runs.
+   `default_drawings --compare` on its base branch’s record, `BASE` being `main` unless
+   the pull request is stacked:
+   `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`.
+   Where a strong view gives way to a drawing worse than it on a goal of the improvement
+   rule, whatever drew it, the adoption waits for the owner’s word or for its runs.
+   The table marks each such count with those goals.
+   The axis tool’s view is the usual replacement, since the refresh draws it wherever it
+   improves on the new house: it replaced all seven strong views the adoption of 16
+   October 2026 (#657) lost, and at n = 302 a drawing with no uneven and no near-axis
+   square gave way to one with 26 and 11. A house drawing is the rarer one, as at n =
+   176 on 15 October (review D1 of #641).
 
 The records tier’s
 `every drawn picture is regularized, regular as published, decided or exempt`
