@@ -1109,6 +1109,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_evand.py",
             "packing/frontier/results.yaml",
             "packing/frontier/n-105.md",
             "packing/frontier/n-129.md",
@@ -1144,8 +1145,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "browser's math pass, their Markdown and the other 40 files each render "
             "writes are byte-identical (42 of 42 files each); the explainer, whose render "
             "needs a browser this host lacks, is source-reviewed only, and no PDF was "
-            "rebuilt. All four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the site "
-            "takes the patch."
+            "rebuilt. Review D's pass (#644) then added default_drawings.recorded_runs, "
+            "which holds each SETTLED entry's runs to a record, reworded the 272 and 303 "
+            "outcomes, and added regularize_evand's read-only `rungs --check`; the papers "
+            "read none of them, and rendered again at link revision e2e018f3 from this "
+            "branch at ebe50691 and from main e2e018f3's tree, the survey's and both "
+            "reviews' 42 files each are byte-identical. All four papers keep v0.4.7, "
+            "v0.1.7, v0.1.0 and v0.2.2; the site takes the patch."
         ),
     ),
     ReleaseNoPublicChange(
