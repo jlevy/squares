@@ -1082,6 +1082,49 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+            "site",
+        ),
+        paths=(
+            "packing/atlas/known-best/default-drawings.json",
+            "packing/devtools/default_drawings.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+            "atlas.html",
+            "index.html",
+            "results.html",
+        ),
+        reason=(
+            "The think-0ut1 run of 16 October 2026 admits no view: it rewrites ten "
+            "decided-no-better SETTLED entries (their runs, outcomes and evidence, no owed "
+            "work left), so default-drawings.json changes only those counts' `states` rows "
+            "(`decisions` and `why`) and the `why` of 204, 272 and 303, whose evidence string "
+            "now names its paragraph; its `entries` are byte-identical to the base's. The "
+            "site reads the record only through `regularized_defaults`, `credit_line` and "
+            "`held_reasons`, which read `entries` and the index, never `states`, SETTLED or "
+            "PENDING_ALLOWED, and no case record, view or index entry changes. The papers "
+            "reach default_drawings only through shared import discovery and read neither "
+            "constant. Source review, no render; the site keeps v0.7.15 and the papers "
+            "v0.4.7, v0.1.7, v0.1.0 and v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
         ),
         paths=("packing/devtools/regularize_select.py",),
         outputs=(
