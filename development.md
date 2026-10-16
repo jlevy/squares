@@ -246,18 +246,21 @@ The shard jobs retain full Git history for history-reading tests, but none insta
 or a browser.
 Browser-floor liveness runs under `--frontend`, on the runner that owns the
 pinned Node toolchain.
-`site table layout in Chromium` runs thirteen test files on the runner that installs the
-pinned Chromium. Functional pixel/layout checks, including the atlas’s readable drawing
-sizes and interactions, run in parallel with file-based distribution.
-After those workers exit, the four native-frontier HTTP load-budget cases run serially,
+`site table layout in Chromium` runs its declared test modules on the runner that
+installs pinned Chromium.
+Browser navigation and functional pixel/layout checks, including the atlas’s readable
+drawing sizes and interactions, run in parallel with file-based distribution, except for
+the forwarder module.
+After those workers exit, all 51 forwarder cases run serially in a fresh pytest process.
+The four native-frontier HTTP load-budget cases then run in another serial process,
 without xdist workers; each checks JavaScript and no-JavaScript contexts under the same
 assertions and budgets.
-Both phases share the step’s original total timeout.
+All three phases share the step’s original total timeout.
 They launch Chromium with `--font-render-hinting=none`: the headless shell hints text at
 `HINTING_FULL` by default, which on Linux rounds every glyph’s advance to a whole pixel,
-and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). Both
-phases require Chromium and fail rather than skip when it cannot launch, because a skip
-on that runner is a hole in the surface.
+and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). All
+three phases require Chromium and fail rather than skip when it cannot launch, because a
+skip on that runner is a hole in the surface.
 Each shard writes a per-file cost report beside its JUnit and timing artifacts; the
 recorder accepts complete coherent cohorts and rejects failed, partial, duplicated,
 coverage-mismatched, and mixed-provenance evidence, and a cohort recorded at one shard
@@ -1951,13 +1954,16 @@ Edit the YAML, then run
 `uv run --frozen --all-extras --group dev python -m devtools.render_changelog` from
 `packing/`; its `--check` mode runs in the ordinary documentation gate.
 The enforced Soft Schema contract validates the stored fields, and the loader checks
-calendar dates, unique PR membership, delivered stack layers and release references.
+calendar dates, unique article IDs and PR numbers within each article, delivered stack
+layers and release references.
 
 At PR closeout, record a noteworthy contribution after the source PR has merged into
 `main`. Keep the summary to a sentence or a few lines, and use a short bullet list for
 the parts of a larger effort.
 Group delivered layers of a formal stack; later deliveries get a new entry with the same
-stack ID. Preserve an existing entry’s date and PR membership.
+stack ID. One merged PR may support separate articles for distinct contributions, with
+one retained delivery row and all article IDs listed in its coverage audit.
+Preserve each existing entry’s date and PR membership.
 Record an editorial omission reason for purely administrative work or a changelog
 synchronization PR.
 
