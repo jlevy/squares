@@ -948,6 +948,120 @@ def test_every_pending_count_is_owned_by_the_bead_its_allowlist_entry_names(
     assert sweep.needing_action([closed]) == orphaned
 
 
+def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
+    """Review A2 of #650: the sweep exists to catch a bead that closes while it still owns
+    a count. Each decision whose `SETTLED` entry still owes runs or an outcome, and each
+    exemption, is listed once with the bead its entry names (`owed` first, the exemption's
+    evidence anywhere, as `default_drawings.deferrals` reads them), owned while that bead
+    is open; closing those beads leaves exactly their items needing an owner."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    rows = {
+        row["n"]: row
+        for row in json.loads(defaults.RECORD.read_text(encoding="utf-8"))["states"]
+    }
+    owes: dict[int, str] = {}
+    exempt: dict[int, str] = {}
+    what: dict[int, str] = {}
+    for n, held in defaults.SETTLED.items():
+        if held.owed and rows[n]["state"] == defaults.DECIDED:
+            bead = defaults.BEAD.match(held.owed)
+            assert bead is not None, n
+            owes[n] = bead[0]
+            owed = held.owed[bead.end() :].lstrip(":; ").strip()
+            what[n] = f"n = {n} decided no better on its witness, still owed: {owed}"
+        if held.state == defaults.EXEMPT and rows[n]["state"] == defaults.EXEMPT:
+            bead = defaults.BEAD.search(held.evidence)
+            assert bead is not None, n
+            exempt[n] = bead[0]
+            what[n] = f"n = {n} exempt: {held.outcome}"
+    if not owes or not exempt:
+        pytest.skip("the data holds no decision that owes runs, or no exemption")
+    states = _deferral_beads()
+
+    def listed(section: sweep.Section, words: str) -> dict[int, sweep.Item]:
+        found = [item for item in section.items if words in item.what]
+        by_n = {int(item.what.split()[2]): item for item in found}
+        assert len(by_n) == len(found), words
+        return by_n
+
+    section = sweep.regularization_section(_beads(**states))
+    decided = listed(section, " decided no better on its witness, still owed: ")
+    exempted = listed(section, " exempt: ")
+    assert {n: item.bead for n, item in decided.items()} == owes
+    assert {n: item.bead for n, item in exempted.items()} == exempt
+    for n, item in [*decided.items(), *exempted.items()]:
+        assert (item.what, item.state, item.bead_state) == (what[n], sweep.OWNED, "in_progress")
+    assert sweep.needing_action([section]) == []
+
+    closing = {*owes.values(), *exempt.values()}
+    assert not closing & {
+        found[0]
+        for entry in defaults.PENDING_ALLOWED.values()
+        if (found := defaults.BEAD.match(entry))
+    }
+    closed = sweep.regularization_section(
+        _beads(**{**states, **dict.fromkeys(closing, "closed")})
+    )
+    orphaned = sweep.needing_action([closed])
+    assert sorted(item.what for item in orphaned) == sorted(
+        item.what for item in [*decided.values(), *exempted.values()]
+    )
+    assert {item.bead_state for item in orphaned} == {"closed"}
+
+
+def test_an_allowlist_entry_naming_a_bead_the_store_lacks_needs_an_owner() -> None:
+    """Review A2 of #650: an entry whose bead the store does not have owns nothing."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    n = min(defaults.PENDING_ALLOWED)
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-zzzz: re-housed by a test adoption"}
+    states = _deferral_beads()
+    assert "think-zzzz" not in states
+    section = sweep.regularization_section(_beads(**states), allowed=allowed)
+    action = sweep.needing_action([section])
+    assert [(item.what, item.state, item.bead, item.bead_state) for item in action] == [
+        (
+            f"n = {n} pending: re-housed by a test adoption",
+            sweep.NEEDS_OWNER,
+            "think-zzzz",
+            "no such bead",
+        )
+    ]
+
+
+@pytest.mark.parametrize("broken", ["record", "index"])
+def test_an_unreadable_record_or_index_needs_action_and_does_not_stop_the_sweep(
+    tmp_path: Path, broken: str
+) -> None:
+    """Review A4 of #650: a malformed `default-drawings.json` raised `JSONDecodeError`, and
+    a missing index `FileNotFoundError`, and `make intake` ended in a traceback with no
+    other section shown. Each is now not checked, and needs action."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    record, index = defaults.RECORD, defaults.INDEX
+    if broken == "record":
+        record = tmp_path / "default-drawings.json"
+        record.write_text('{"contract": ', encoding="utf-8")
+    else:
+        index = tmp_path / "missing-index.json"
+    section = sweep.regularization_section(
+        _beads(**_deferral_beads()), record=record, index=index
+    )
+    error = "JSONDecodeError" if broken == "record" else "FileNotFoundError"
+    (unchecked,) = section.unchecked
+    assert unchecked.startswith(
+        "regularization: packing/atlas/known-best/default-drawings.json or the layer's "
+        f"index could not be read ({error}: "
+    )
+    (item,) = sweep.needing_action([section])
+    assert item.what.startswith(
+        f"the regularization record or the layer's index could not be read: {error}: "
+    )
+    assert section.items == [item]
+    assert "default_drawings --check" in item.step
+
+
 def test_a_pending_count_no_list_names_needs_action_once(tmp_path: Path) -> None:
     """A count a change made pending without allowing it is what the records tier fails
     on; the sweep lists it once, as needing action, not again as the gate's problem."""
