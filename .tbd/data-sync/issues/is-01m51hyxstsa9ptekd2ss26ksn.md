@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 30
+version: 31
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T13:26:27.070Z
+updated_at: 2026-10-16T13:41:36.424Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -86,3 +86,49 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 ~12:50Z coordinator: lane D done (#656 green; 0 counts pending anywhere; worst remaining drawings 292 6/30/0 and 176 11/24/0 (after #644), owner question think-drze). #657 hosted CI red (translation_escape_screen retained results after adoption, + suite-b, sweeps, workbench): lane J resumed to fix. Backup branch claude/intake-2026-10-16-regularize-leftovers-wip cannot be deleted from this session (git push --delete hangs at the proxy; REST 403): delete it by hand.
 
 2026-10-16 ~13:25Z coordinator: lane K done: PR #658 (base #655), green at ccac86dd4: T-194 V0/C0 -> V0/C1 (the s(19) review mapped; seven V-sq19-review-* verifiers), T-193 V0/C0 -> V3/C3 at 16 counts (its review merged from claude/intake-2026-10-16-review-193 at 84bab51bb; replay evidence restored from the refreshed receipt). Contains a GATE CHANGE (select_houses.unread_pending skips entries a citation deferral names) for the owner to accept or replace with a house reader. Senior + correctness review of #658 started (due 14:05Z). #644 empty commit 923a6170c pushed to re-run its flaky frontend job.
+
+# Handoff: overnight intake pass, 16 October 2026 (coordinator user-eb, epic think-hg5s)
+
+Session "Overnight intake processing and validation", 05:00Z to 14:30Z. Two interruptions: a usage-limit pause 08:30–09:52Z and a container restart at ~10:40Z (disk survived; every sub-agent was resumed from its transcript). Nothing is merged: the runbook and `github-merge: confirm-session` need the owner's word, which this session did not receive. No replies were posted: the stage 7 replies wait for merges, and the session's permission system refused the four closeable-issue final comments.
+
+## Merge order (each PR states its base; formal stacks could not be made: the gh-stack download is refused by the session proxy)
+
+After each merge: retarget the next PR to `main`, re-cut the site edition (v0.7.15 is taken by #644, #646, #648, #651, #652/#649, #657: whichever lands first keeps it) and re-run `release_pin --update` where a branch also re-pins DATA_REVISION; let CI run; merge.
+
+1. Intake process: **#641** (regularize every re-housed count; S1) → **#650** (the sweep lists regularization debt; S2).
+2. Sweep residue: **#647** (wand125 read naming think-jh0n, #643's entry, v0.7.11 date; S1). Independent.
+3. Regularization stack: **#644** (3a: 176 first) → **#653** (3b) → **#654** (3c) → **#656** (leftovers) → **#657** (T-185..T-190 to V3/C3, 15 houses adopted and regularized; includes #648). **#648** (the T-185..T-190 review) can merge first on its own.
+4. #639/#640: **#642** (triage + sq19 packet) → **#651** (T-193, T-194) → **#655** (s(19) review) → lane K's records PR (T-194 C1; T-193's exit if its review cleared).
+5. s(76), s(95): **#652** (review) → **#649** (T-184, T-191 to V3/C1).
+
+## State per PR at handoff (13:35Z; every PR had a senior review and an addressing pass unless noted)
+
+| PR | What | Rungs / effect | Reviews | CI | Ready? |
+| --- | --- | --- | --- | --- | --- |
+| #641 | intake step: every re-housed count regularized or allowlisted; `adopt_houses` printout; gate keeps allowlisted counts pending | process | A, B, C (follow-up + correctness) | green, deferred checkpoint green | yes, but fix think-cmj7 first (`--compare` misses strong-view losses whose replacement is the axis view) |
+| #650 (on #641) | sweep section "Regularization owed"; runbook makes it standard | process | A | green | yes after #641 (retarget); A1 informal chain (think-bb70) |
+| #647 | sweep residue: wand125 read (think-jh0n), #643 entry, v0.7.11 date, two reviewed dates | records | A | green | yes |
+| #644 | 3a: 176 (70/71/52 → 11/24/0), 105, 129, 146, 156, 271; 204/272/303 settled; B1 by reproduction | drawings | A, B (other session), C (final) | green at 923a6170c | yes, once the owner accepts C1 (driver not re-run at 156/176/271; the drawn views dominate every retained candidate) |
+| #653 (on #644) | 3b: 153, 154, 207, 211, 237, 241, 302 views; 304 settled; credit fix; evidence retained | drawings | A, B (follow-up) | green | yes |
+| #654 (on #653) | 3c: 175, 232, 264; `regularize_select` no-view fix; PENDING_ALLOWED empty | drawings | A | green | yes |
+| #656 (on #654) | leftovers: ten owed decisions settled on fresh runs; nothing better | records | A | green | yes |
+| #657 (on #656) | T-185..T-190 V0/C0 → V3/C3; 15 houses adopted; 6 regularized, 176/211 settled or allowlisted, 7 allowlisted (think-r3cl); includes #648 | rungs + houses + drawings | B (blocker findings: sweeps sparse checkout, stale derived records, 211) | see lane J's last note | NO: owner decision 27 (176) first; then its fixes and a follow-up round |
+| #648 | review of T-185..T-190 | review | A | green | yes (or lands through #657) |
+| #642 | #639/#640 triage, sq19 packet | records | A | green | yes |
+| #651 (on #642) | T-193 (#639, 16 counts, held V0/C0 until its review), T-194 (s(19) = 3 + 4√2/3, optimality, V0/C0, S5 draft); #639 packet; ledger; replay 23/23, 76/76 controls, irreducible 23/23 | rungs | A, B (follow-up) | green | yes after #642 (retarget) |
+| #655 (on #651) | s(19) Lean proof review: no blocking; supports C1 | review | A | green | yes |
+| #658 (on #655) | T-194 → V0/C1; T-193 → V3/C3 (its review merged); gate change in `select_houses` | rungs | A (0/1/3/5) | green | NO: address A2–A4 (replace the deferral-keyed exemption with a hold `select_houses` owns) |
+| #652 | review of T-184 s(76)=9, T-191 s(95)=10 | review | A | green | yes |
+| #649 (on #652) | T-184, T-191 V0/C0 → V3/C1 (C3 held for zm_mixed.py controls, question 16) | rungs | A, B (follow-up) | green | yes |
+
+## Owner decisions (think-l3oo items 1–28; the new ones tonight)
+
+- 12 RT-4 (T-161's 271 as a regularization of T-151); 13 the v0.7.15 collision; 14 four final comments unposted (#432, #470, #529, #584: think-klm7, think-jpre, think-s2i8, think-x333); 15 #649's site cut refused by the permission check; 16 F8: does a zm_mixed.py refusal at depth 12 count as a mutated-certificate control (decides T-184/T-191 C3 and their case adoption); 17 RP-3 (#639 is a second exact route to T-174 at 70, 153, 207); 18 n-019's lanes take T-194?; 19 an n-19 label; 20 #640 full build budget (think-nqnl); 21 T-193 adoption beside T-174; 22 the ledger-start gap (think-v860); 23 keep lane D's run tarball durably; 24 register candidates 153 and 207 (views below U) and 154's row-7 view; 25 status wording for replayed-but-controls-owed entries; 26 #639's four pinned-only forms as a data release; 27 176 after #657's adoption: Daniel's view (11/24/0, 6/6 classes/hues) gives way to the axis view of T-186's witness (4/8/0, 24/19); 28 211's row-7 views.
+
+## Left open, with owners
+
+- think-r3cl: select and admit the seven re-housed counts #657 allowlisted (232, 237, 264, 271, 302, 303, 304); runs done and retained.
+- think-drze: the remaining irregular drawings no bead owned (292 6/30/0, 131, …).
+- think-jh0n: wand125's Lean kernel proof of ValidTilt9 / s(k²−4) = k (#643): stages 2–3; full replay held (~7,400 CPU-h).
+- think-e533, think-j9r6, think-k6rj, think-bb70, think-e1u5, think-v860: follow-ups from tonight's reviews.
+- The backup branch claude/intake-2026-10-16-regularize-leftovers-wip: delete by hand (the proxy refused the delete).

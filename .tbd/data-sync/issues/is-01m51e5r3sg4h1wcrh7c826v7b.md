@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16: #639 (evand exact sides for 22 packings), #640 (
 kind: epic
 status: open
 priority: 1
-version: 13
+version: 14
 labels:
   - result-import
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
   - is-01m5249mz9n9e5b3d9rzyth5d5
   - is-01m52a0tjnpnzjr0v0a1g53whe
 created_at: 2026-10-16T04:05:27.288Z
-updated_at: 2026-10-16T12:12:06.100Z
+updated_at: 2026-10-16T13:41:37.623Z
 ---
 
 ## Notes
@@ -47,3 +47,5 @@ GOTCHAS: (1) site edition race — other sessions cut editions too; cut last, me
 2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved. Transferred: think-la7h (to lane B, user-eb-reg-3b3c: open its PR and stack 3b/3c on it), think-g3q7 / PR #641 (to user-eb-reg-intake: address reviews A and B), think-phyb, think-a4x3, think-xik9, think-g59l / PR #642 (to user-eb-intake-1016: stages 2-3 for #639 and #640, the #639 replay); think-o40t (#640 review) to a review lane when one is free.
 
 2026-10-16 ~08:20Z user-eb-intake-1016 (lane H): PR https://github.com/jlevy/squares/pull/651 (draft, base claude/ecstatic-edison-8en33t-intake-1016 = #642 at 71f6a413e, head 523d8c14f, labels intake + S5) carries #639 stages 2-4 and #640 stage 3: T-193 (#639, 16 counts, V3/C3 by the replay of the source's own verify_exact.py, draft S2) and T-194 (#640, optimality s(19) = 3 + (4/3)sqrt(2), V0/C0, draft S5). Site cut v0.7.15 last (523d8c14f); #644/#648/#649 hold v0.7.15 too, so the later merge re-cuts. Owner questions in the PR: RP-3 second route; whether n-019's reported lower lane/status take T-194 (as n-017 took T-153); #640 full-build budget (think-nqnl); adoption of T-193 beside T-174's held houses; the ledger-start gap (T-174's unprinted rationals). Nothing posted; reply drafts in think-phyb and think-a4x3; verdict comment draft from upper-bounds-20261016/comments.yaml. think-o40t (review of T-194) can start.
+
+2026-10-16 ~13:45Z HANDOFF from the overnight coordinator user-eb: the full handoff (merge order, per-PR state, owner decisions 12-28, open beads) is in think-hg5s's notes. Nothing is merged; nothing was posted to issues except the new tracking issue #643. This epic's work: #642 -> #651 (T-193, T-194) -> #655 (s(19) review) -> #658 (T-194 C1, T-193 V3/C3; gate change to address).
