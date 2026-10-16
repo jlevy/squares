@@ -1114,6 +1114,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/frontier/n-105.md",
             "packing/frontier/n-129.md",
             "packing/frontier/n-146.md",
+            "packing/src/sqpack/cli/validate.py",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
@@ -1156,8 +1157,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "`rungs --check` read retained reports; the papers read none of them, and "
             "rendered at link revision e2e018f3 from this branch at 6079926b, the "
             "survey's and both reviews' 42 files each are byte-identical to main "
-            "e2e018f3's. All four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the "
-            "site takes the patch."
+            "e2e018f3's. Review G's pass added the retained run evidence to the "
+            "regularization-state step's touches in sqpack.cli.validate, which only the "
+            "explainer declares, as part of the whole sqpack package, and made `rungs "
+            "--check` account for each run directory; the papers read neither, the "
+            "explainer is source-reviewed only, and rendered at link revision e2e018f3 "
+            "from this branch at 2f31507c, the survey's and both reviews' 42 files each "
+            "are byte-identical to main e2e018f3's. All four papers keep v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2; the site takes the patch."
         ),
     ),
     ReleaseNoPublicChange(
