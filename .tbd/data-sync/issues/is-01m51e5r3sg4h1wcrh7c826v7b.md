@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16: #639 (evand exact sides for 22 packings), #640 (
 kind: epic
 status: open
 priority: 1
-version: 10
+version: 11
 labels:
   - result-import
 dependencies: []
@@ -14,8 +14,9 @@ child_order_hints:
   - is-01m51e5sp1t03c20hqp7d3wajm
   - is-01m51fbdcwtq331pn8jre1w2bp
   - is-01m51h4p1g0t1pr0zdy42d0258
+  - is-01m5242vqv9bhbsr397067ypm6
 created_at: 2026-10-16T04:05:27.288Z
-updated_at: 2026-10-16T08:06:42.737Z
+updated_at: 2026-10-16T10:28:21.371Z
 ---
 
 ## Notes
