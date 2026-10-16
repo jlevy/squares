@@ -5,7 +5,7 @@ title: "Review: retained replays of T-185 to T-190 (stage 4 review lane, upper b
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: user-eb-review-185-190
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:13:30.623Z
-updated_at: 2026-10-16T06:54:34.146Z
+updated_at: 2026-10-16T07:48:07.974Z
 started_at: 2026-10-16T05:13:42.512Z
 ---
 Stage 4 review lane (W2) for the upper-bound entries registered on 15 October at V0/C0 whose next rung is "independently review the retained replay": T-185 (#506, 175), T-186 (#593, twelve counts), T-187 (#606, 146), T-188 (211), T-189 (#607, 237) and T-190 (237). Model: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md (the review of T-161 to T-183). Deliverable: docs/project/reviews/review-2026-10-16-upper-bound-imports-<issues>.md on its own branch and draft PR, which reproduces each packet's retained replay (devtools.upper_bound_reports PACKET check --replay), runs the third exact route, re-fetches each pinned scope and checks digests, measures credit, grades findings, and says per entry whether V3/C3 is supported and what each count's adoption should be. It moves no rung; the records lane that follows (a separate bead) writes the rungs and adoptions.
@@ -66,3 +66,5 @@ Other open reports: T-174 (PR #574, held for the owner) is above T-186 at all 9 
 2026-10-16 06:45Z user-eb-review-185-190: site edition: mapping the review changes SYNOPSIS.md (a site output), so the branch cuts site v0.7.15 (commit 9bd813b2b; claim documents byte-identical to main's with PUBLICATION_REVISION read back; explainer no-change record; README). PR #646 (codex/news-chooser-states) also cuts v0.7.15, so whichever merges second re-cuts. packing-validate --records --jobs 2 at 9bd813b2b: 52/52 steps, exit 0, 272 s. Hosted CI pending on PR #648.
 
 2026-10-16 06:55Z user-eb-review-185-190: DONE. Draft PR #648 (https://github.com/jlevy/squares/pull/648, S2 + intake), head 9bd813b2b. Hosted CI green at 9bd813b2b: Packing validation (run 38862532632, 06:40Z-06:52Z) and Certificate page (run 38862532727) passed, Branch mergeability passed; 31 checks success, 52 deferred/deep-gate skipped, none failed. Site v0.7.15 collides with PR #646's v0.7.15: second to merge re-cuts. Not merged (not mine to merge). Records lane next (no bead yet).
+
+2026-10-16T07:48Z user-eb-addr-648: addressing review A on PR #648 (worktree .claude/worktrees/addr-648, branch at 9bd813b2b). A1: keeping lane C's programs and outputs in packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/ (adoption table re-run identical; third route re-running from the kept driver). Next: README, review-text fixes A2-A9, PR description.

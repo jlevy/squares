@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T07:28:12.835Z
+updated_at: 2026-10-16T07:52:04.064Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -52,3 +52,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 ~06:55Z coordinator: lane C done: PR #648 (review of T-185..T-190, all accepted V3/C3, 13 findings none blocking; site v0.7.15 cut because the synopsis row is a site input). Records lane J (think-z7wn, user-eb-records-185-190) started: rungs, scores, RT-1..RT-4, adoption of 15 houses, and regularization of the re-housed counts on the new witnesses, stacked on top of the regularization stack.
 
 2026-10-16 ~07:30Z coordinator: lane G done. #641 at 46562eab0: all findings of A and B dispositioned (A12 declined: sequencing is the owner's), CI green, deferred checkpoint 38862757844 passed 12/12 (deep-gate label added; dispatch API refused). B1 fixed in code (count_state keeps PENDING_ALLOWED counts pending), no data change. #650 (sweep 'Regularization owed' section + runbook: every new house regularized or allowlisted), base #641, green at 89cc59e83, bead think-9qm5. A follow-up review (round 2, with the correctness pass for the gate change) of #641 and a first senior review of #650 started. Lane G's owner questions: A12 (wait for T-174 before regularizing? not waiting: the owner asked for all regularizations tonight) and persisted lapse blocks (not needed after the code fix).
+
+2026-10-16 ~07:55Z coordinator: lane F done: PR #652 (review of T-184 s(76)=9 and T-191 s(95)=10): no mathematical defect, no blocking finding (F1 minor: author's check_coverage.py accepts 5/8 malformed record sets; F2-F8 notes; F8 owes zm_mixed.py mutants: 1 for s76, 2 for s95). C1 now by this review; V3/C3 once think-ccjt (lane E, #649) records the retained replays. Verdict sent to lane E, which merges #652 into #649 and maps the review. Senior review of #652 started. Owner question added: F8 (is a refusal at depth limit 12 a valid mutated-certificate control?).

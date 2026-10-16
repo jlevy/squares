@@ -5,7 +5,7 @@ title: "Review: Greff's mixed covers for s(76) = 9 (T-184, #594) and s(95) = 10 
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: user-eb-review-76-95
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:25:27.727Z
-updated_at: 2026-10-16T07:36:15.809Z
+updated_at: 2026-10-16T07:48:37.463Z
 started_at: 2026-10-16T05:25:32.352Z
 ---
 Stage 4 review lane (W2) for T-184 (#594, Benjamin Greff, s(76) = 9) and T-191 (#610, s(95) = 10), the k = 9 and k = 10 cases of the k^2 - 5 series by mixed covers in Evan Daniel's format, registered at V0/C0. Their next_rung asks for "a review that reads the cover, the two checkers' composite over the D4 region and the wall segments". Model: docs/project/reviews/review-2026-10-02-wand125-s59-s77-mixed-covers.md (T-066's review). Deliverable: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md (or similar) on its own branch and draft PR; it moves no rung.
@@ -53,3 +53,5 @@ Findings (none blocking): F1 minor, in the source: tools/check_coverage.py accep
 For the records lane (think-ccjt, PR #649): this review may be recorded as external_review (informally-verified) on E-bengreff-594-cover-report and E-bengreff-610-cover-report and in each entry's reviews (adversarial, ai, accepted): C1. V3/C3 follow once the retained reproduction is recorded as evidence through the registered tools; nothing in the review stands in the way. Rung 4 needs a second distinct adversarial review and a human oversight record. Significance S3 confirmed for both.
 
 Site edition: v0.7.15 cut as the last commit, since the synopsis row is a site output and the cut tool admits only the patch successor of main's v0.7.14. #646 and three other branches of this pass also cut v0.7.15, so it may need re-cutting at merge. Validation: packing-validate --records exit 0 (52 of 110 steps, the named tier); check_release_impact --baseline-ref origin/main: every candidate dispositioned; --fast left to hosted CI. Compute: about an hour of wall time for the programs and controls, one process at a time under nice -n 10 (CPU time less), plus two records-tier runs of about 3 min each, which ran with their default 4 jobs. This bead stays open (the coordinator's).
+
+2026-10-16 07:48Z user-eb-review-76-95: hosted CI at 7ae526246 (PR #652) green: Packing validation run 38868173215 passed (07:35Z to 07:47Z), Certificate page run 38868173165 passed, Branch mergeability passed; 31 checks succeeded, 52 deferred/deep-gate skipped, none failed. PR body updated with it. Correction: the note stamped 07:42Z above was appended at 07:36Z. Bead stays open: lane E's #649 names think-l8wi (blocked_on in packing/devtools/certificate-citation-deferrals.yaml, and the next_rung links of T-184 and T-191), so it closes with the records PR that records this review and drops those references. Lane F done.
