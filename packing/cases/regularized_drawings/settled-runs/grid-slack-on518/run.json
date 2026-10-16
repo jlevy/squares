@@ -1,0 +1,9 @@
+{
+  "id": "grid-slack-on518",
+  "generator": "regularize_grid_slack/1",
+  "finished": "2026-10-12",
+  "parameters": {"near_axis_degrees":0.5,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},
+  "counts": 35,
+  "decisions": {"admit":27,"no-change":6,"review":2},
+  "cost": {"cpu_seconds":2725.76,"wall_seconds":2725.76,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}
+}
