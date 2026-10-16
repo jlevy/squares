@@ -242,11 +242,14 @@ def test_rung_5_needs_formal_evidence_experts_and_openness() -> None:
     # C5 needs two distinct experts, the rebuild here and the open pointer.
     assert derive_confirmation([FORMAL_ENTRY], experts[:1], open_review=True) == "C3"
     assert derive_confirmation([FORMAL_ENTRY], experts, open_review=False) == "C3"
+    # A proof-assistant build here is replayed-here; an `audited-here` Lean entry is
+    # refused outright rather than read as a build here (review E2), so it reaches
+    # neither C5 nor C3.
     assert (
         derive_confirmation(
             [dict(FORMAL_ENTRY, origin="audited-here")], experts, open_review=True
         )
-        == "C3"
+        == "C0"
     )
     assert (
         derive_confirmation(
