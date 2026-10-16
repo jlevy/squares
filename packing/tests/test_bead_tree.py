@@ -172,6 +172,10 @@ def test_the_live_records_deferrals_are_all_well_formed_aliases() -> None:
     regularization = check_bead_tree.regularization_deferrals()
     allowed = [where for where, _alias in regularization if "PENDING_ALLOWED" in where]
     assert len(allowed) == len(default_drawings.PENDING_ALLOWED)
+    # The live list is empty since 16 October 2026; a made-up entry is still reported at
+    # its own location and alias (review A2 of #654).
+    made_up = default_drawings.deferrals(allowed={7: "think-0000: re-housed by an adoption"})
+    assert ("default_drawings.py PENDING_ALLOWED n=7", "think-0000") in made_up
     for where, alias in [*deferrals(), *regularization]:
         assert alias.startswith("think-"), where
         assert len(alias) == len("think-aaaa"), where
