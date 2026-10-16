@@ -889,6 +889,17 @@ def _drawings(tmp_path: Path, n: int, state: str) -> Path:
     return path
 
 
+def _corrected(monkeypatch: pytest.MonkeyPatch, n: int) -> None:
+    """Declare count `n`'s deferral a corrected witness's, at the record's own witness: since
+    the house rule, the only deferral the list may add (`default_drawings.CORRECTED`)."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    record = json.loads(defaults.RECORD.read_text(encoding="utf-8"))
+    witness = next(row["witness"] for row in record["states"] if row["n"] == n)
+    fix = defaults.Correction(witness["source"], witness["side"], "an-earlier-revision")
+    monkeypatch.setitem(defaults.CORRECTED, n, fix)
+
+
 def _first(state: str) -> int:
     from devtools import default_drawings as defaults  # noqa: PLC0415
 
@@ -900,17 +911,18 @@ def _first(state: str) -> int:
 
 
 def test_every_pending_count_is_owned_by_the_bead_its_allowlist_entry_names(
-    tmp_path: Path,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """think-9qm5: the owner made regularizing every new house part of the standard
     intake, so the sweep lists each count whose drawing is pending regularization with the
-    bead that owns its runs, a re-housed count a test adoption allowed among them, and
+    bead that owns its runs, a corrected witness's count a test allowed among them, and
     each decision that still owes runs and each exemption with theirs. While those beads
     are open nothing needs action; a bead that closes leaves its counts needing an owner."""
     from devtools import default_drawings as defaults  # noqa: PLC0415
 
     n = _first(defaults.REGULAR_AS_PUBLISHED)
     record = _drawings(tmp_path, n, defaults.PENDING)
+    _corrected(monkeypatch, n)
     allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: re-housed by a test adoption"}
     states = {**_deferral_beads(), "think-aaaa": "open"}
     section = sweep.regularization_section(_beads(**states), record=record, allowed=allowed)
@@ -1095,12 +1107,15 @@ def test_a_pending_count_no_list_names_needs_action_once(tmp_path: Path) -> None
     assert "allow it with the open bead that owns the runs" in action[0].step
 
 
-def test_anything_else_the_state_gate_fails_on_needs_action() -> None:
+def test_anything_else_the_state_gate_fails_on_needs_action(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """A listed count that is no longer pending: the list must come down in the change that
     decided it, and a pass that leaves it there has not finished."""
     from devtools import default_drawings as defaults  # noqa: PLC0415
 
     n = _first(defaults.REGULARIZED_STATE)
+    _corrected(monkeypatch, n)
     allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: a test"}
     section = sweep.regularization_section(
         _beads(**_deferral_beads(), **{"think-aaaa": "open"}),

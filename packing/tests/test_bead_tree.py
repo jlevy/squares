@@ -300,3 +300,26 @@ def test_the_gate_fails_a_dead_deferral_only_on_a_change_to_a_record_declaring_o
     assert step(context) == "  ok"
     assert observed == [("devtools.check_bead_tree", *arguments)]
     assert (check_bead_tree.WARN_DEAD_DEFERRALS,) == WARN
+
+
+def test_the_gate_reads_the_staged_house_adoptions(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review B7 of #660: removing `adoption_deferrals()` from `main` left every test
+    green, so a refactor could unwire the gate and let a bead close while its counts were
+    staged. A closed bead under a staged count fails the gate itself."""
+    from devtools import select_houses  # noqa: PLC0415
+
+    beads = [_bead("is-01bbbb", "closed", "an adoption closed while its count is staged")]
+    monkeypatch.setattr(check_bead_tree, "load", lambda: (beads, "fixture", {"bbbb": "01bbbb"}))
+    monkeypatch.setattr(check_bead_tree, "deferrals", list)
+    monkeypatch.setattr(check_bead_tree, "regularization_deferrals", list)
+    monkeypatch.setattr(check_bead_tree, "AGENDAS", Path("/nonexistent/agendas"))
+    staged = select_houses.Pending(
+        house="T-174", bead="think-bbbb", why=select_houses.NEXT_PULL_REQUEST
+    )
+    monkeypatch.setattr(select_houses, "PENDING_ADOPTION", {68: staged})
+    assert check_bead_tree.main([]) == 1
+    assert "FAIL select_houses.PENDING_ADOPTION n=68 (T-174) names think-bbbb (closed)" in (
+        capsys.readouterr().out
+    )

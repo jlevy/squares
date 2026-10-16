@@ -56,10 +56,11 @@ W1 phase on one branch:
    ([stage 5](#adopt-a-house-then-regularize-it)), whichever import made it: the
    adoption of a register result like T-174 or T-186 to T-190, a Kingbird catalogue
    intake, or an exact re-solve that moves a house.
-   None defers its runs: an adoption whose runs do not fit under the compute cap waits
-   with them, never apart from them.
-   Only a witness corrected or re-solved with its house’s side unchanged may defer its
-   runs, in `default_drawings.PENDING_ALLOWED` with the open bead that owns them.
+   None defers its runs: they run in the pull request that makes the house, under the
+   item cap (the owner’s 40 CPU-hours where the pass sets none), and an adoption too
+   large for one is split, its other counts waiting with their runs, never apart from
+   them. Only a witness corrected or re-solved with its house’s side unchanged may defer
+   its runs, in `default_drawings.PENDING_ALLOWED` with the open bead that owns them.
    The sweep then lists each count still owed.
 4. **Validate** from `packing/` with `packing-validate --records`, then `--push`, and
    leave `--fast` to CI ([stage 5](#stage-5-publish)).
@@ -160,10 +161,12 @@ claude/intake-YYYY-MM-DD, with today's date.
    T-190, with devtools.adopt_houses), a Kingbird catalogue intake, or an exact
    re-solve that moves a house (stage 5, "Adopt a House, Then Regularize It"), priced
    as one validation item at the total adopt_houses prints, with each re-housed
-   count's drawing listed before and after. A re-housed count is never deferred to
-   default_drawings.PENDING_ALLOWED: where its runs do not fit under the compute cap,
-   stage the count in select_houses.PENDING_ADOPTION with the open validation bead that
-   adopts it, and adopt the rest. Only a witness corrected or re-solved with its
+   count's drawing listed before and after. Its runs are within the item cap, the
+   owner's 40 CPU-hours where the pass sets none, and run in that pull request. A
+   re-housed count is never deferred to default_drawings.PENDING_ALLOWED: where the runs
+   of a large adoption would pass the cap, split it, staging the counts it leaves in
+   select_houses.PENDING_ADOPTION with the open validation bead that adopts them, and
+   adopt the rest. Only a witness corrected or re-solved with its
    house's side unchanged may defer its runs there, naming an open bead labelled
    regularization and validation.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
@@ -720,13 +723,22 @@ No adoption waits for the owner’s word, and each case that once did is decided
 
 `devtools.select_houses --check` is the gate, and `tests/test_house_adoption.py` runs it
 on every pull request: it fails wherever a validated smaller packing is not the house.
-A pass may validate in one pull request and adopt in the next only by staging each count
-it moves in `select_houses.PENDING_ADOPTION` with the open bead that adopts it, and an
-adoption whose runs do not fit under the pass’s compute cap waits that way, with its
-runs. `bead tree` holds that bead open, the adopting pull request takes the count off,
-and `--check` fails on a staged count the selection no longer moves.
-`adopt_houses --check` fails while `default_drawings.PENDING_ALLOWED` names a count that
-a pass under this rule re-housed.
+A count’s adoption may follow in a later pull request than the one that validates it
+only where the count is staged in `select_houses.PENDING_ADOPTION`, with the open bead
+that adopts it and one of three reasons (`STAGING_REASONS`): the pass’s next pull
+request; regularization runs over the item cap, which split the adoption
+([Adopt a House, Then Regularize It](#adopt-a-house-then-regularize-it)); or no writer,
+where `adopt_houses` cannot yet write the house.
+An algebraic house is the one such gap the rule names, and the writer’s bead,
+think-ot5c, owns its counts.
+`bead tree` holds each bead open, and the adopting pull request takes the count off.
+`--check` fails on a staged count the selection no longer moves or names another house
+for, and on one staged for the writer whose house the writer writes, or the reverse.
+`default_drawings --check-state` fails while `PENDING_ALLOWED` defers the runs of a
+witness whose house has moved since, whichever import moved it: each entry names the
+witness it defers, the one the list held when the owner set the rule
+(`DEFERRED_AT_RULE`) or a corrected witness at its house’s own source and side
+(`CORRECTED`).
 
 ### Adopt a House, Then Regularize It
 
@@ -776,16 +788,20 @@ The strong runs cost 5 to 25 CPU-minutes a count, from the layer’s run receipt
 Ten re-housed counts take 50 to 250 CPU-minutes.
 The regularization an adoption owes is one validation item, priced at the total
 `adopt_houses` prints and held to the pass’s
-[compute cap](#the-compute-cap-and-the-validation-backlog) as a replay is, and its runs
-are part of the adoption ([The House Rule](#the-house-rule)). Within the cap, they run
-in the adoption’s pull request.
-Above it, or with no cap set and a total above minutes, the adoption waits with them:
-the pass stages each count the cap does not cover in `select_houses.PENDING_ADOPTION`
-with the open bead that adopts it, labelled `regularization` and `validation` and
-carrying stage 4’s `## Validation` block, with a row in the backlog bead, and adopts the
-rest. A re-housed count is never deferred to `default_drawings.PENDING_ALLOWED`, and
-`adopt_houses --check` fails while the list names a count re-housed under the house
-rule. A count the list already names, such as one of the twenty below, is run in the
+[compute cap](#the-compute-cap-and-the-validation-backlog) as a replay is: the cap the
+owner set for the pass, or where it set none, the owner’s standing cap of 40 CPU-hours
+an item (14 October 2026, think-lh7d). Its runs are part of the adoption
+([The House Rule](#the-house-rule)), and they are within the cap and run in the
+adoption’s pull request: at the receipts’ dearest, 25 CPU-minutes a count, about a
+hundred re-housed counts fit.
+An adoption whose runs would pass the cap is split into pull requests that each fit, and
+the counts a pull request does not adopt are staged in `select_houses.PENDING_ADOPTION`
+as over the item cap, with the open bead that adopts them, labelled `regularization` and
+`validation` and carrying stage 4’s `## Validation` block, with a row in the backlog
+bead. A re-housed count is never deferred to `default_drawings.PENDING_ALLOWED`, and
+`default_drawings --check-state` fails while the list defers the runs of a witness whose
+house has moved since.
+A count the list already names, such as one of the twenty below, is run in the
 adoption’s pull request and taken off it.
 
 The adoption’s pull request lists each re-housed count’s drawing before and after, with

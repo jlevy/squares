@@ -41,9 +41,9 @@ compute cap waits with them, staged in `select_houses.PENDING_ADOPTION`. The ado
 strong generator's decision, n = 176 drawn raw (think-sfas). So a write, and `--dry-run`,
 print what the moves owe the regularized layer (`regularization_owed`): the counts, the
 commands with run directories no earlier run has named, and what they cost;
-`default_drawings --check-state` fails until each pending count is decided, and `--check`
-while the allowlist names a count a pass under the house rule re-housed
-(`deferred_adoptions`).
+`default_drawings --check-state` fails until each pending count is decided, and while the
+allowlist defers the runs of a witness whose house has moved since
+(`default_drawings.deferral_problems`, keyed on the witness, not on a pass's day).
 `adopt_case` is the generator's half: `generate_frontier_case` redrafts an adopted case
 through it (`source_supersession.adopt_selected_report`), which keeps the house and takes
 the ordinary lower lanes from the draft.
@@ -1158,19 +1158,22 @@ def conjecture_stands(packing: Mapping[str, Any], side: exact_sides.Side) -> boo
     """Whether a record's conjectured optimum stands beside a house at `side`.
 
     A conjecture the house is below is refuted and withdrawn. A conjecture is the
-    catalogue's printed side, whose rounding the record does not state, so the house is
-    below it only where it is below every number the print may be, one unit of its last
-    place under it; an integer conjecture is exact. Any other conjecture stands: a house
-    at it, or above, or within its print's rounding, is no evidence against it, and the
-    adoption goes ahead either way (result-import.md, "The House Rule").
+    catalogue's printed side, whose rounding the record does not state: however it was
+    rounded, the number it stands for lies strictly within one unit of its last place of
+    the print, so the house is below it wherever it is at or below the print less that
+    unit (review B6 of #660). An integer conjecture is exact, and a house below it refutes
+    it. Any other conjecture stands: a house at it, or above, or within its print's
+    rounding, is no evidence against it, and the adoption goes ahead either way
+    (result-import.md, "The House Rule").
     """
     conjecture = conjectured(packing)
     if conjecture is None:
         return True
     text = str(packing.get("conjectured_optimum"))
     places = 0 if text == "integer" else len(text.strip().partition(".")[2])
-    unit = Fraction(1, 10**places) if places else Fraction(0)
-    return not side < conjecture - unit
+    if not places:
+        return not side < conjecture
+    return not side <= conjecture - Fraction(1, 10**places)
 
 
 def conjectured(packing: Mapping[str, Any]) -> Fraction | None:
@@ -2154,9 +2157,7 @@ def write(moves: Sequence[Move]) -> list[int]:
 
 
 def check() -> list[str]:
-    """Every count `upper_bound_houses` draws is at its house in the case and coverage,
-    and none that a pass under the house rule re-housed waits in the allowlist
-    (`deferred_adoptions`)."""
+    """Every count `upper_bound_houses` draws is at its house in the case and coverage."""
     problems = []
     coverage_data = safe_load(COVERAGE.read_text(encoding="utf-8"))
     sources = {str(s["id"]): s for s in coverage_data["sources"]}
@@ -2180,27 +2181,7 @@ def check() -> list[str]:
         text = select_houses.case_path(n).read_text(encoding="utf-8")
         if _flat(held_note(n, text)) != _flat(text):
             problems.append(f"n={n}: the held note is not what the held results say")
-    problems.extend(deferred_adoptions())
     return problems
-
-
-def deferred_adoptions(allowed: Mapping[int, str] | None = None) -> list[str]:
-    """Each count that a pass under the house rule re-housed and that
-    `default_drawings.PENDING_ALLOWED` still names. Its runs are owed in the adoption's
-    pull request (`default_drawings.RUNS_OWED`), so the list may not defer them: they decide
-    the count, and the pull request takes the entry off, entries the list named before the
-    adoption included (packing/campaign/result-import.md, "Adopt a House, Then Regularize
-    It"). An adoption whose runs do not fit under the pass's compute cap waits with them,
-    staged in `select_houses.PENDING_ADOPTION`. A count re-housed before the rule, as each
-    of the list's first twenty was, waits for the bead its entry names."""
-    allowed = default_drawings.PENDING_ALLOWED if allowed is None else allowed
-    return [
-        f"n={n}: re-housed on {houses.adopted_on(n)} under the house rule, so its runs are "
-        "owed in the adoption's pull request; run them there and take the count off "
-        "default_drawings.PENDING_ALLOWED"
-        for n in sorted(allowed)
-        if n in houses.ADOPTED and houses.adopted_on(n) >= select_houses.RULE_PASSES_FROM
-    ]
 
 
 #: Where the steps that follow a new house are written (think-g3q7).
@@ -2422,7 +2403,8 @@ def regularization_owed(
         "pass's compute cap, stage the counts they do not cover in "
         "select_houses.PENDING_ADOPTION with the open bead that adopts them, and adopt the "
         "rest. `python -m devtools.default_drawings --check-state` fails until the runs "
-        "decide every re-housed count, and `adopt_houses --check` while the list names one."
+        "decide every re-housed count, and while the list defers the runs of a witness "
+        "whose house has moved since."
     )
     return lines
 

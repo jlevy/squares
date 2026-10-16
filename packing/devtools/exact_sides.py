@@ -22,12 +22,23 @@ rational point:
 
 `of_field_element` reads an element of a number field, as an algebraic witness states its
 side, by its minimal polynomial: the square-free part of its characteristic polynomial.
-`of_bound` reads a case record's verified ceiling as `regularize_evand.verified_bound`
-holds it, a fraction or a closed form isolated exactly.
+That polynomial is irreducible by construction, the field's own having been decided so, and
+only its root count in the element's enclosure is checked: `sqpack.field`'s irreducibility
+search cannot certify every minimal polynomial (review B3 of #660, at the non-integral
+elements of a biquadratic field). `of_bound` reads a case record's verified ceiling as
+`regularize_evand.verified_bound` holds it, a fraction or a closed form isolated exactly;
+a form whose polynomial that search cannot certify is refused, and the selection reads its
+count as unordered rather than guessing.
+
+Every narrowing is bounded (`MAX_BISECTIONS`): two different irreducible polynomials share
+no root, so a comparison that has not separated them by then was handed sides this module
+did not build, and it says so rather than looping (review B4 of #660).
 """
 
 from __future__ import annotations
 
+import copy
+import itertools
 import math
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -43,6 +54,13 @@ if TYPE_CHECKING:
 
 class ExactSideError(ValueError):
     """A side that is not what an exact side must be, or that this module cannot hold."""
+
+
+#: How many times a comparison or a rounding halves an interval before it gives up: about
+#: 3,000 decimal places, where the record's closest distinct sides differ by about 1e-99.
+#: A refusal here is an `ExactSideError`, which the selection reads as unordered, never as
+#: an order.
+MAX_BISECTIONS = 10_000
 
 
 def _primitive(coefficients: Sequence[Fraction | int]) -> tuple[int, ...]:
@@ -68,6 +86,40 @@ def _sign(polynomial: Sequence[int], point: Fraction) -> int:
         for index, coefficient in enumerate(polynomial)
     )
     return (total > 0) - (total < 0)
+
+
+def _root_count(polynomial: Sequence[int], low: Fraction, high: Fraction) -> int:
+    """How many distinct real roots the square-free polynomial has in (low, high], by
+    Sturm's theorem, in exact rational arithmetic."""
+    first = [Fraction(value) for value in polynomial]
+    degree = len(first) - 1
+    sequence = [first, [value * (degree - index) for index, value in enumerate(first[:-1])]]
+    while len(sequence[-1]) > 1 or (sequence[-1] and sequence[-1][0] != 0):
+        _quotient, remainder = _polynomial_divmod(sequence[-2], sequence[-1])
+        if not remainder:
+            break
+        sequence.append([-value for value in remainder])
+
+    def variations(point: Fraction) -> int:
+        signs = []
+        for row in sequence:
+            total = Fraction(0)
+            for value in row:
+                total = total * point + value
+            if total:
+                signs.append(total > 0)
+        return sum(left != right for left, right in itertools.pairwise(signs))
+
+    return variations(low) - variations(high)
+
+
+def _isolated(polynomial: tuple[int, ...], low: Fraction, high: Fraction) -> bool:
+    """Whether the polynomial has exactly one root in (low, high) and none at either end."""
+    return (
+        _sign(polynomial, low) != 0
+        and _sign(polynomial, high) != 0
+        and _root_count(polynomial, low, high) == 1
+    )
 
 
 @cache
@@ -185,12 +237,16 @@ def _algebraic_order(first: Algebraic, second: Algebraic) -> int:
     # Different irreducible polynomials share no root: narrow `second` until `first` lies
     # outside its interval, which it must once the interval is narrower than their gap.
     narrowed = second
-    while True:
+    for _step in range(MAX_BISECTIONS):
         if _rational_against(narrowed.low, first) > 0:
             return -1
         if _rational_against(narrowed.high, first) < 0:
             return 1
         narrowed = narrowed.bisected()
+    raise ExactSideError(
+        f"{literal(first)} and {literal(second)} did not separate: one of them is not "
+        "the isolated root of an irreducible polynomial (build sides with `algebraic`)"
+    )
 
 
 def compare(first: Side | int, second: Side | int) -> int:
@@ -223,8 +279,12 @@ def ceiling(side: Side, places: int) -> str:
         narrowed = side
         # An irrational side is no multiple of 1/scale, so its interval shrinks to one
         # that holds none, and every number in it rounds up alike.
-        while math.floor(narrowed.low * scale) != math.floor(narrowed.high * scale):
+        for _step in range(MAX_BISECTIONS):
+            if math.floor(narrowed.low * scale) == math.floor(narrowed.high * scale):
+                break
             narrowed = narrowed.bisected()
+        else:
+            raise ExactSideError(f"{literal(side)} did not round: it is not irrational")
         whole = math.floor(narrowed.high * scale) + 1
     else:
         scaled = side * scale
@@ -237,11 +297,18 @@ def ceiling(side: Side, places: int) -> str:
 
 def lower_gap(high: Side, low: Side, digits: int = 60) -> Fraction:
     """A rational at most `high - low`: the difference itself where both are rational,
-    else within 2 * 10**-digits of it. It is for prose and tables and decides nothing."""
+    else within 2 * 10**-digits of it, narrowed further where `high` is above `low` until
+    the bound is positive, so a near tie never prints as a negative gap (review B5 of
+    #660). It is for prose and tables and decides nothing."""
     if not isinstance(high, Algebraic) and not isinstance(low, Algebraic):
         return high - low
-    width = Fraction(1, 10**digits)
-    return enclosure(high, width)[0] - enclosure(low, width)[1]
+    above = compare(high, low) > 0
+    while True:
+        width = Fraction(1, 10**digits)
+        gap = enclosure(high, width)[0] - enclosure(low, width)[1]
+        if gap > 0 or not above:
+            return gap
+        digits *= 2
 
 
 def literal(side: Side) -> str:
@@ -301,13 +368,29 @@ def _characteristic(matrix: list[list[Fraction]]) -> list[Fraction]:
     return coefficients
 
 
+def _enclosed(element: FieldElement, digits: int) -> tuple[Fraction, Fraction]:
+    """The element's enclosure at `digits` places, rounded outward to them: narrowed on a
+    copy of its field, so the narrowing never reaches the field the element belongs to,
+    and rounded, so neither does how far that field was refined before (review B3 of
+    #660, where an interval of thousands of digits outran `literal`)."""
+    field = copy.copy(element.field)
+    field.refine_to(digits)
+    low, high = (Fraction(end) for end in field.enclose(element))
+    scale = 10**digits
+    return (
+        Fraction(math.floor(low * scale), scale),
+        Fraction(math.ceil(high * scale), scale),
+    )
+
+
 def of_field_element(element: FieldElement, digits: int = 30) -> Side:
     """The exact side an element of a number field is, by its minimal polynomial.
 
     Multiplication by the element is a linear map on the field's power basis; its
     characteristic polynomial is a power of the minimal polynomial, so the square-free
-    part is that polynomial. The element's enclosure, narrowed until it holds one root,
-    isolates the right one.
+    part is that polynomial, irreducible since the field's own polynomial was decided
+    irreducible. The element's enclosure, narrowed until it holds exactly one root of it,
+    isolates the right one; only that root count is checked (`_isolated`).
     """
     field = element.field
     basis = [field.alpha**j for j in range(field.degree)]
@@ -327,14 +410,15 @@ def of_field_element(element: FieldElement, digits: int = 30) -> Side:
     if len(polynomial) == 2:
         return Fraction(-polynomial[1], polynomial[0])
     while True:
-        field.refine_to(digits)
-        low, high = field.enclose(element)
-        try:
-            return algebraic(polynomial, (Fraction(low), Fraction(high)))
-        except ExactSideError:
-            if digits > 4000:
-                raise
-            digits *= 2
+        low, high = _enclosed(element, digits)
+        if low < high and _isolated(polynomial, low, high):
+            return Algebraic(polynomial, low, high)
+        if digits > 4000:
+            raise ExactSideError(
+                f"no enclosure up to {digits} digits isolates the element's root of "
+                f"{list(polynomial)}"
+            )
+        digits *= 2
 
 
 def of_bound(bound: VerifiedBound) -> Side | None:

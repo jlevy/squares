@@ -101,8 +101,22 @@ DISPLAY_PLACES = 16
 #: ran under the rule of 15 October, and its prior state is archived under that day, so
 #: the first pass that adopts under the house rule is dated no earlier than this.
 RULE_PASSES_FROM = "2026-10-17"
-#: The bead that owns the adoptions the house rule stages here (think-sa5r).
-ADOPTION_BEAD = "think-sa5r"
+#: The beads that own the adoptions the house rule stages here, each labelled
+#: `regularization` and `validation` with stage 4's block and a row in the pass's backlog
+#: (review A1 of #660): T-174's rational houses, and the algebraic ones, which wait for
+#: the writer to take an algebraic side.
+ADOPTION_BEAD = "think-3mry"
+WRITER_BEAD = "think-ot5c"
+#: Why a count's adoption waits for a later pull request, from a closed set: nothing
+#: else stages one (packing/campaign/result-import.md, "The House Rule"). The pass
+#: validated it in one pull request and adopts it in its next:
+NEXT_PULL_REQUEST = "next pull request"
+#: its regularization runs pass the item cap, and the counts they do not cover wait:
+OVER_CAP = "over the item cap"
+#: or the writer cannot write the house yet, an algebraic side (`adopt_houses.plan`), the
+#: one code gap the rule names.
+NO_WRITER = "no writer"
+STAGING_REASONS = (NEXT_PULL_REQUEST, OVER_CAP, NO_WRITER)
 
 
 @dataclass(frozen=True)
@@ -149,23 +163,38 @@ class Pending:
     house: str
     #: The open bead that owns the adoption.
     bead: str
+    #: Why the adoption waits: one of `STAGING_REASONS`.
+    why: str
+
+    def __post_init__(self) -> None:
+        if self.why not in STAGING_REASONS:
+            raise ValueError(
+                f"an adoption is staged for one of {', '.join(STAGING_REASONS)}, "
+                f"not {self.why!r}"
+            )
 
 
 #: The counts the house rule moved when it was set, each staged to the adoption that
-#: follows it: T-174's 60 rational houses, which the lifted hold kept out, and its
-#: algebraic ones at 70, 153 and 207, which RP-3 kept out. A pull request that validates
-#: a smaller packing adopts it or stages its counts here with the bead that adopts them,
-#: as an adoption whose regularization runs do not fit under the pass's compute cap does:
-#: the adoption waits with its runs, never apart from them
-#: (`adopt_houses.deferred_adoptions`). The pull request that adopts a count takes it off.
+#: follows it: T-174's 60 rational houses, which the lifted hold kept out, for the next
+#: pull request, and its algebraic ones at 70, 153 and 207, which RP-3 kept out, for the
+#: writer. A pull request that validates a smaller packing adopts it or stages its counts
+#: here with the bead that adopts them and why (`STAGING_REASONS`); an adoption waits with
+#: its regularization runs, never apart from them (`default_drawings.deferral_problems`).
+#: The pull request that adopts a count takes it off.
 PENDING_ADOPTION: dict[int, Pending] = {
-    n: Pending(house="T-174", bead=ADOPTION_BEAD)
-    for n in (
-        68, 70, 84, 86, 88, 102, 103, 105, 108, 110, 123, 126, 127, 129, 130, 131, 132,
-        146, 153, 155, 156, 172, 175, 176, 179, 180, 181, 182, 199, 204, 206, 207, 208,
-        209, 210, 228, 232, 236, 238, 239, 240, 258, 259, 261, 263, 264, 266, 267, 268,
-        269, 270, 271, 272, 273, 292, 295, 297, 301, 303, 305, 306, 307, 308,
-    )
+    **{
+        n: Pending(house="T-174", bead=ADOPTION_BEAD, why=NEXT_PULL_REQUEST)
+        for n in (
+            68, 84, 86, 88, 102, 103, 105, 108, 110, 123, 126, 127, 129, 130, 131, 132,
+            146, 155, 156, 172, 175, 176, 179, 180, 181, 182, 199, 204, 206, 208, 209,
+            210, 228, 232, 236, 238, 239, 240, 258, 259, 261, 263, 264, 266, 267, 268,
+            269, 270, 271, 272, 273, 292, 295, 297, 301, 303, 305, 306, 307, 308,
+        )
+    },
+    **{
+        n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)
+        for n in (70, 153, 207)
+    },
 }  # fmt: skip
 
 
@@ -287,14 +316,20 @@ def load_case(n: int) -> Case:
 
 
 @cache
-def _closed_form(value: str, form: str) -> tuple[Side | None, str | None]:
+def closed_form(value: str, form: str) -> tuple[Side | None, str | None]:
     """A closed-form ceiling held exactly, as the regularized layer holds `U`, or why not."""
     from devtools import regularize_evand  # noqa: PLC0415 -- SymPy, where a form needs it
 
     bound = regularize_evand.verified_bound({"verified_upper_bound": value, "exact_form": form})
     if bound is None:
         return None, "the case states no verified upper bound"
-    side = exact_sides.of_bound(bound)
+    try:
+        side = exact_sides.of_bound(bound)
+    except exact_sides.ExactSideError as error:
+        # A form whose polynomial no route here decides irreducible, as at
+        # sqrt(2) + sqrt(3) + sqrt(5), is held no more exactly than an unread one, and a
+        # candidate below its print is unordered (review B3 of #660).
+        return None, f"the form's polynomial is not held exactly: {error}"
     return side, None if side is not None else (bound.unread or "no reader holds the form")
 
 
@@ -321,7 +356,7 @@ def parse_case(n: int, text: str) -> Case:
         if rational is not None:
             verified = rational
         else:
-            side, unread = _closed_form(str(upper["value"]), str(form))
+            side, unread = closed_form(str(upper["value"]), str(form))
             verified = side if side is not None else _above_print(str(upper["value"]))
     return Case(
         n=n,
@@ -479,13 +514,17 @@ def candidates(
     *,
     since: str | None = None,
     unread: list[str] | None = None,
+    unheld: list[str] | None = None,
 ) -> dict[int, list[Candidate]]:
     """Every confirmed, reviewed entry's exact side at every count it covers in the corpus.
 
     `since` keeps entries registered on or after a date, so a second pass can read only
     the entries a later intake added. An entry whose source has no exact reader is left
     to the case records and named in `unread`: those are entries adopted before the
-    readers existed, whose sides the case records hold where they are the house.
+    readers existed, whose sides the case records hold where they are the house. A side a
+    reader cannot hold exactly (`exact_sides.ExactSideError`) is no candidate and is named
+    in `unheld`, which `--check` fails on: a defect of the reader, never a traceback
+    (review B3 of #660).
     """
     found: dict[int, list[Candidate]] = {}
     for entry in results:
@@ -507,11 +546,17 @@ def candidates(
             if not _readable(key):
                 missed = True
                 continue
+            try:
+                side = exact_side(key, n)
+            except exact_sides.ExactSideError as error:
+                if unheld is not None:
+                    unheld.append(f"{entry['id']} at n = {n}: {error}")
+                continue
             found.setdefault(n, []).append(
                 Candidate(
                     result=str(entry["id"]),
                     n=n,
-                    side=exact_side(key, n),
+                    side=side,
                     source_key=key,
                     published=str(entry["attribution"].get("published") or ""),
                     report_evidence=reporting(entry, evidence, key, n),
@@ -577,6 +622,7 @@ def select(
     cases: Mapping[int, Case] | None = None,
     unread: list[str] | None = None,
     recorded: Mapping[int, str] | None = None,
+    unheld: list[str] | None = None,
 ) -> dict[int, Selection]:
     """The house at every count a candidate reaches, against the case records as they are.
 
@@ -588,7 +634,7 @@ def select(
     results = load_results() if results is None else results
     evidence = load_evidence() if evidence is None else evidence
     selections: dict[int, Selection] = {}
-    found_at = candidates(results, evidence, since=since, unread=unread)
+    found_at = candidates(results, evidence, since=since, unread=unread, unheld=unheld)
     for n, found in sorted(found_at.items()):
         case = cases[n] if cases is not None else load_case(n)
         ranked = tuple(sorted(found, key=precedence))
@@ -648,6 +694,52 @@ def unread_pending(unread: Sequence[str]) -> dict[str, list[int]]:
     return pending
 
 
+def unread_unordered(unread: Sequence[str]) -> dict[str, list[int]]:
+    """The unread entries whose stated upper bound meets their case's ceiling only by
+    print, at each count it does.
+
+    `check_standing.relation` reads two spans that overlap as equal, which orders nothing:
+    an entry with no exact reader whose print overlaps the ceiling may be below it or not.
+    The rule orders sides exactly or fails (packing/campaign/result-import.md, "The House
+    Rule"), so `--check` fails on each until a reader holds the entry's side (review A10
+    of #660). An exact equality, a print that is the ceiling, is a tie and passes.
+    """
+    from devtools import check_standing as standing  # noqa: PLC0415
+    from devtools import render_recent_results as view  # noqa: PLC0415
+
+    if not unread:
+        return {}
+    records = view.load_records()
+    entries = {str(entry["id"]): entry for entry in records.register.results}
+    found: dict[str, set[int]] = {}
+    for identifier in unread:
+        entry = entries[identifier]
+        lanes = (
+            ("reported",)
+            if str(entry.get("confirmation")) in standing.UNREPLAYED
+            else (
+                "reported",
+                "verified",
+            )
+        )
+        findings = standing.findings(entry, records)
+        claimed = standing.directions(entry, findings)
+        for finding in findings:
+            if finding.direction != standing.UPPER or finding.direction not in claimed:
+                continue
+            for lane in lanes:
+                if getattr(finding, lane) != standing.EQUAL:
+                    continue
+                bound = records.cases[finding.n].get(f"{lane}_upper_bound")
+                if not bound:
+                    continue
+                floor, ceiling = view.span(bound)
+                stated = finding.stated
+                if not (stated.slack == 0 and floor == ceiling == stated.value):
+                    found.setdefault(identifier, set()).add(finding.n)
+    return {identifier: sorted(counts) for identifier, counts in found.items()}
+
+
 def deferrals() -> list[tuple[str, str]]:
     """Each staged adoption as (where, the bead alias), for `devtools.check_bead_tree`,
     which holds the bead open while the count is staged."""
@@ -679,6 +771,7 @@ def row(selection: Selection) -> dict[str, Any]:
         "margin": reports.legacy.literal(selection.margin) if house else None,
         "regularizes": house.regularizes if house else None,
         "staged": staged.bead if staged is not None and house is not None else None,
+        "staged_why": staged.why if staged is not None and house is not None else None,
         "unordered": selection.unordered,
         "candidates": [
             {
@@ -712,7 +805,7 @@ def table(selections: Mapping[int, Selection], *, everything: bool) -> str:
         if house.algebraic:
             notes.append("algebraic")
         if (staged := PENDING_ADOPTION.get(n)) is not None and staged.house == house.result:
-            notes.append(f"staged: {staged.bead}")
+            notes.append(f"staged ({staged.why}): {staged.bead}")
         lines.append(
             f"{n:>4}  {old:<44} {house.result:<9} {ceiling(house.side):<20} "
             f"{_sci(selection.margin):<8} {'; '.join(notes)}"
@@ -744,6 +837,19 @@ def check(selections: Mapping[int, Selection]) -> list[str]:
                 f"FAIL: n={n} is staged for {pending.house}, but the house is "
                 f"{selection.house.result}; stage that, or adopt it"
             )
+        elif selection.house is not None and selection.house.algebraic != (
+            pending.why == NO_WRITER
+        ):
+            # The writer's gap stages an algebraic house and nothing else (review A1).
+            problems.append(
+                f"FAIL: n={n} is staged as {pending.why!r} under {pending.bead}, but its "
+                f"house is {'algebraic' if selection.house.algebraic else 'rational'}: "
+                + (
+                    f"stage it as {NO_WRITER!r} under the writer's bead"
+                    if selection.house.algebraic
+                    else "the writer writes it, so stage it for the next pull request"
+                )
+            )
     unordered = sorted(n for n, selection in selections.items() if selection.unordered)
     if unordered:
         problems.append(
@@ -760,8 +866,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--check", action="store_true", help="fail where a house would move")
     parser.add_argument("--since", help="only entries registered on or after this date")
     arguments = parser.parse_args(argv)
+    if arguments.check and arguments.since:
+        # A narrowed selection leaves out the very entries a count is staged for, and would
+        # advise unstaging every one of them (review A9 of #660).
+        parser.error("--check judges the whole register; --since narrows a listing only")
     unread: list[str] = []
-    selections = select(since=arguments.since, unread=unread)
+    unheld: list[str] = []
+    selections = select(since=arguments.since, unread=unread, unheld=unheld)
     if arguments.json:
         rows = [row(s) for s in selections.values() if s.moves or arguments.all]
         print(json.dumps(rows, indent=2))
@@ -774,7 +885,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(line)
     staged: dict[str, list[int]] = {}
     for n, pending in sorted(PENDING_ADOPTION.items()):
-        staged.setdefault(f"{pending.house} under {pending.bead}", []).append(n)
+        staged.setdefault(f"{pending.house} under {pending.bead} ({pending.why})", []).append(n)
     for owner, counts in staged.items():
         print(f"staged adoption, {owner}: n = {counts}")
     print(
@@ -786,7 +897,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"FAIL: {identifier} has no exact reader and states a side below its case "
             f"at n = {counts}, pending an adoption this cannot select"
         )
-    return 1 if problems or pending_unread else 0
+    overlapping = unread_unordered(unread)
+    for identifier, counts in overlapping.items():
+        print(
+            f"FAIL: {identifier} has no exact reader, and its print meets its case's "
+            f"ceiling only by overlap at n = {counts}: write the reader (a defect, not a "
+            "question)"
+        )
+    for line in unheld:
+        print(f"FAIL: no exact side for {line}; fix the reader (a defect, not a question)")
+    return 1 if problems or pending_unread or overlapping or unheld else 0
 
 
 if __name__ == "__main__":

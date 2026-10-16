@@ -398,17 +398,18 @@ def test_a_staged_count_passes_the_check_and_a_stale_or_unstaged_one_fails(
     assert house is not None
     assert house.result == "T-900"
     assert [c.result for c in selected[7].candidates] == ["T-900", "T-901"]
-    staged = {7: select.Pending(house="T-900", bead="think-test")}
+    staged = {7: select.Pending(house="T-900", bead="think-test", why=select.NEXT_PULL_REQUEST)}
     monkeypatch.setattr(select, "PENDING_ADOPTION", staged)
     assert select.check(selected) == []
     assert select.row(selected[7])["staged"] == "think-test"
-    assert "staged: think-test" in select.table(selected, everything=False)
+    assert "staged (next pull request): think-test" in select.table(selected, everything=False)
     assert select.deferrals() == [("select_houses.PENDING_ADOPTION n=7 (T-900)", "think-test")]
     real = select.select
     monkeypatch.setattr(select, "select", lambda **_arguments: selected)
     monkeypatch.setattr(select, "unread_pending", lambda _unread: {})
     assert select.main(["--check"]) == 0
-    assert "staged adoption, T-900 under think-test: n = [7]" in capsys.readouterr().out
+    shown = capsys.readouterr().out
+    assert "staged adoption, T-900 under think-test (next pull request): n = [7]" in shown
     monkeypatch.setattr(
         select, "PENDING_ADOPTION", {7: dataclasses.replace(staged[7], house="T-901")}
     )
@@ -558,14 +559,18 @@ def test_no_unread_eligible_entry_is_pending_adoption() -> None:
 def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    def selecting(*, since: str | None, unread: list[str]) -> dict[int, select.Selection]:
+    def selecting(
+        *, since: str | None, unread: list[str], unheld: list[str]
+    ) -> dict[int, select.Selection]:
         assert since is None
+        assert unheld == []
         unread.append("T-901")
         return {}
 
     monkeypatch.setattr(select, "select", selecting)
     monkeypatch.setattr(select, "PENDING_ADOPTION", {})
     monkeypatch.setattr(select, "unread_pending", lambda _unread: {})
+    monkeypatch.setattr(select, "unread_unordered", lambda _unread: {})
     assert select.main(["--check"]) == 0
     assert "unread, eligible but with no exact reader: T-901" in capsys.readouterr().out
     monkeypatch.setattr(select, "unread_pending", lambda unread: {unread[0]: [7]})
@@ -573,6 +578,185 @@ def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
     assert "T-901 has no exact reader and states a side below its case at n = [7]" in (
         capsys.readouterr().out
     )
+
+
+def test_a_citation_deferral_never_hides_a_validated_smaller_side(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review A6 of #660: an exemption keyed on `certificate-citation-deferrals.yaml`, as
+    #658 first wrote one for T-193, turned the gate green while sixteen validated smaller
+    packings waited on the owner's RP-3, a wait the house rule ended. An eligible entry
+    with no exact reader that states a side below its case fails `--check` whatever a
+    deferral says of it, and a merged exemption turns this test red."""
+    from devtools import check_certificate_citations as citations  # noqa: PLC0415
+    from devtools import check_standing as standing  # noqa: PLC0415
+
+    real = standing.improvements
+
+    def improving(record: Any, records: Any) -> list[standing.Finding]:
+        if str(record["id"]) == "T-088":
+            stated = standing.Stated(Fraction(1), Fraction(0))
+            return [standing.Finding(69, standing.UPPER, stated, standing.EXCEEDS, None)]
+        return real(record, records)
+
+    monkeypatch.setattr(standing, "improvements", improving)
+    deferral = {
+        "evidence": "E-test",
+        "results": ["T-088"],
+        "bead": "think-test",
+        "blocked_on": "the owner's decision RP-3",
+        "reason": "a test of a wait the house rule ended",
+    }
+    monkeypatch.setattr(citations, "load_deferrals", lambda *_path: [deferral])
+    monkeypatch.setattr(select, "ALGEBRAIC_READERS", {})
+    assert select.unread_pending(["T-088"]) == {"T-088": [69]}
+    assert select.main(["--check"]) == 1
+    assert "FAIL: T-088 has no exact reader and states a side below its case at n = [69]" in (
+        capsys.readouterr().out
+    )
+
+
+def _below(ceiling: select.exact_sides.Side) -> select.exact_sides.Side:
+    """An algebraic side a little below `ceiling`: r + sqrt(2) / 10**9 at r = ceiling less
+    10**-6, the root of x^2 - 2 r x + r^2 - 2 / 10**18."""
+    low, _high = select.exact_sides.enclosure(ceiling, Fraction(1, 10**12))
+    r = low - Fraction(1, 10**6)
+    return select.exact_sides.algebraic(
+        [1, -2 * r, r * r - Fraction(2, 10**18)], (r, r + Fraction(2, 10**9))
+    )
+
+
+def test_a_reader_makes_an_unread_source_a_candidate_and_the_writer_waits_for_it(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review A8 of #660: the route this branch gives #658, a reader in
+    `ALGEBRAIC_READERS`, and the writer's refusal of an algebraic house, were untested.
+    A registered reader makes the unread entry a candidate; its algebraic side below the
+    case moves the house, which `--check` requires to be staged as the writer's, and
+    `plan` refuses it unstaged, skips it staged, and never writes it as a fraction."""
+    key = "[Ellsworth n69 2026-09-24]"
+    results = [entry for entry in select.load_results() if entry["id"] == "T-088"]
+    case = select.load_case(69)
+    side = _below(case.verified)
+    monkeypatch.setitem(select.ALGEBRAIC_READERS, key, lambda _n: side)
+    unread: list[str] = []
+    selected = select.select(results, select.load_evidence(), cases={69: case}, unread=unread)
+    assert unread == []
+    house = selected[69].house
+    assert house is not None
+    assert (house.result, house.algebraic, house.side) == ("T-088", True, side)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {})
+    assert select.check(selected)[0].startswith("FAIL: a validated smaller packing")
+    with pytest.raises(adopt.AdoptionError, match="algebraic side"):
+        adopt.plan(selected)
+    staged = select.Pending(house="T-088", bead="think-test", why=select.NEXT_PULL_REQUEST)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {69: staged})
+    assert "stage it as 'no writer'" in select.check(selected)[0]
+    staged = dataclasses.replace(staged, why=select.NO_WRITER)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {69: staged})
+    assert select.check(selected) == []
+    assert adopt.plan(selected) == []
+    with pytest.raises(adopt.AdoptionError, match="states rational sides"):
+        adopt.rational(side)
+    assert adopt.rational(Fraction(5, 2)) == Fraction(5, 2)
+    shown = adopt.display(side)
+    assert shown == select.ceiling(side)
+    assert Fraction(shown) > side
+    with pytest.raises(ValueError, match="staged for one of"):
+        select.Pending(house="T-088", bead="think-test", why="until the owner decides")
+
+
+def test_a_rational_house_staged_for_the_writer_fails_the_check(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The writer's gap stages an algebraic house and nothing else (review A1 of #660)."""
+    entry, evidence = _confirmed_entry()
+    monkeypatch.setitem(select.reports.HOUSES, "[test]", lambda _n: Fraction(3))
+    monkeypatch.setattr(select, "_side", lambda _key, _n: Fraction(3))
+    case = select.Case(
+        n=7, verified=Fraction(4), reported=Fraction(4), source_key="", evidence=()
+    )
+    selected = select.select([entry], evidence, cases={7: case})
+    staged = select.Pending(house="T-900", bead="think-test", why=select.NO_WRITER)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {7: staged})
+    (problem,) = select.check(selected)
+    assert "the writer writes it, so stage it for the next pull request" in problem
+
+
+def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
+    """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
+    reason. T-174's rational houses wait for the adoption's bead and the next pull request,
+    and its algebraic ones for the writer's bead and the writer."""
+    for n, pending in select.PENDING_ADOPTION.items():
+        assert pending.why in select.STAGING_REASONS, n
+        algebraic = n in (70, 153, 207)
+        assert (pending.bead, pending.why) == (
+            (select.WRITER_BEAD, select.NO_WRITER)
+            if algebraic
+            else (select.ADOPTION_BEAD, select.NEXT_PULL_REQUEST)
+        ), n
+    assert "think-sa5r" not in {pending.bead for pending in select.PENDING_ADOPTION.values()}
+
+
+def test_check_judges_the_whole_register_and_refuses_since() -> None:
+    """Review A9 of #660: narrowed to entries registered since a day, `--check` judged the
+    staged counts without the entries they were staged for and advised unstaging all 63."""
+    with pytest.raises(SystemExit) as refused:
+        select.main(["--since", "2026-10-16", "--check"])
+    assert refused.value.code == 2
+
+
+def test_an_unread_print_that_only_overlaps_its_ceiling_is_unordered(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review A10 of #660: an unread entry was compared by its print, and two spans that
+    overlap read as equal, which orders nothing. `--check` fails on such an entry until a
+    reader holds its side; a print that is the ceiling exactly is a tie and passes."""
+    from devtools import check_standing as standing  # noqa: PLC0415
+    from devtools import render_recent_results as view  # noqa: PLC0415
+
+    assert select.unread_unordered(["T-088", "T-089", "T-114"]) == {}
+    ceiling = view.load_records().cases[69]["verified_upper_bound"]
+    floor, _top = view.span(ceiling)
+
+    def meeting(slack: Fraction, value: Fraction) -> Any:
+        def found(record: Any, _records: Any) -> list[standing.Finding]:
+            if str(record["id"]) != "T-088":
+                return []
+            stated = standing.Stated(value, slack)
+            return [standing.Finding(69, standing.UPPER, stated, standing.EQUAL, None)]
+
+        return found
+
+    monkeypatch.setattr(standing, "findings", meeting(Fraction(1, 10**4), floor))
+    assert select.unread_unordered(["T-088"]) == {"T-088": [69]}
+    monkeypatch.setattr(standing, "findings", meeting(Fraction(0), floor))
+    exact = floor == _top
+    assert select.unread_unordered(["T-088"]) == ({} if exact else {"T-088": [69]})
+
+
+def test_a_side_no_route_here_holds_is_unordered_never_a_traceback(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review B3 of #660: a closed form whose minimal polynomial `sqpack.field` cannot
+    decide irreducible, and a reader that cannot hold a side, crashed the selection. The
+    form makes its count unordered, and the side is named for `--check` to fail on."""
+    value, form = select.closed_form("5.3823323", "sqrt(2) + sqrt(3) + sqrt(5)")
+    assert value is None
+    assert form is not None
+    assert form.startswith("the form's polynomial is not held exactly")
+    entry, evidence = _confirmed_entry()
+
+    def unheld_side(_n: int) -> select.exact_sides.Side:
+        raise select.exact_sides.ExactSideError("a reader's side it cannot isolate")
+
+    monkeypatch.setitem(select.ALGEBRAIC_READERS, "[test]", unheld_side)
+    case = select.Case(
+        n=7, verified=Fraction(4), reported=Fraction(4), source_key="", evidence=()
+    )
+    unheld: list[str] = []
+    assert select.select([entry], evidence, cases={7: case}, unheld=unheld) == {}
+    assert unheld == ["T-900 at n = 7: a reader's side it cannot isolate"]
 
 
 def test_the_ceiling_rounds_up_and_the_display_ends_where_the_side_does() -> None:
@@ -614,37 +798,6 @@ def test_the_adopted_case_records_and_coverage_are_at_their_houses(
 ) -> None:
     assert adopt.check() == []
     assert adopt.plan(selections) == []
-
-
-def test_a_count_re_housed_under_the_house_rule_is_never_deferred(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """The house rule: every count an adoption re-houses is regularized in its pull request,
-    so `default_drawings.PENDING_ALLOWED` may not defer it, an entry the list named before
-    the adoption included; the twenty counts re-housed before the rule wait for the beads
-    their entries name. Until the rule, the runbook and the guide deferred "each pending
-    count" while the comparison's mark said a lost view's runs were not deferred (review F1
-    of #641)."""
-    assert adopt.deferred_adoptions() == []
-    n = next(n for n in sorted(defaults.PENDING_ALLOWED) if n in houses.ADOPTED)
-    day = select.RULE_PASSES_FROM
-    monkeypatch.setitem(houses.LATER_PASSES, day, frozenset({n}))
-    assert adopt.deferred_adoptions() == [
-        (
-            f"n={n}: re-housed on {day} under the house rule, so its runs are owed in the "
-            "adoption's pull request; run them there and take the count off "
-            "default_drawings.PENDING_ALLOWED"
-        )
-    ]
-    assert adopt.deferred_adoptions() == [
-        problem for problem in adopt.check() if problem.startswith(f"n={n}: re-housed")
-    ]
-    # Taken off the list, it is the adoption's runs that decide it.
-    assert adopt.deferred_adoptions(allowed={}) == []
-    # Re-housed the day before the rule, its entry is the record of a deferral made then.
-    monkeypatch.setitem(houses.LATER_PASSES, day, frozenset())
-    monkeypatch.setitem(houses.LATER_PASSES, "2026-10-16", frozenset({n}))
-    assert adopt.deferred_adoptions() == []
 
 
 def test_the_receipt_of_the_custody_run_names_every_input_and_house() -> None:
@@ -947,7 +1100,9 @@ def test_a_conjecture_stands_unless_the_house_is_below_every_number_its_print_ma
         (conjecture, True),
         (conjecture + unit, True),
         (conjecture - unit / 2, True),
-        (conjecture - unit, True),
+        # At the print less a unit, the house is below every number the print may be
+        # (review B6 of #660).
+        (conjecture - unit, False),
         (conjecture - 2 * unit, False),
     ):
         assert adopt.conjecture_stands(move.packing, side) is stands, side
@@ -1320,7 +1475,7 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
     assert owed.startswith(f"  A re-housed count is {adopt.NEVER_DEFERRED}: ")
     assert "select_houses.PENDING_ADOPTION with the open bead that adopts them" in owed
     assert "--check-state` fails until the runs decide every re-housed count" in owed
-    assert "`adopt_houses --check` while the list names one" in owed
+    assert "while the list defers the runs of a witness whose house has moved since" in owed
     assert not [line for line in lines if "add each pending count" in line]
     # Nothing re-housed, nothing owed: a second run of the idempotent write prints nothing.
     assert adopt.regularization_owed([], index=index) == []

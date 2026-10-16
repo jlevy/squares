@@ -155,3 +155,61 @@ def test_a_closed_form_ceiling_is_read_as_the_layer_reads_its_bound() -> None:
     )
     assert unread is not None
     assert exact.of_bound(unread) is None
+
+
+def test_a_non_integral_element_of_a_biquadratic_field_is_read_without_a_search() -> None:
+    """Review B3 of #660: (sqrt(2) + sqrt(3)) / 2 has minimal polynomial 16x^4 - 40x^2 + 1,
+    which `sqpack.field`'s irreducibility search cannot certify; the reader retried for
+    minutes and raised, and left the shared field refined to thousands of digits. The
+    polynomial is irreducible by construction, so only its root count is checked, on a
+    copy of the field."""
+    field = NumberField([1, 0, -10, 0, 1], (Fraction(3), Fraction(4)))  # sqrt(2) + sqrt(3)
+    alpha = field.alpha
+    half = exact.of_field_element(alpha / 2)
+    assert isinstance(half, exact.Algebraic)
+    assert half.polynomial == (16, 0, -40, 0, 1)
+    assert Fraction(157, 100) < half < Fraction(158, 100)
+    third = exact.of_field_element((alpha + 1) / 3)
+    assert isinstance(third, exact.Algebraic)
+    assert third.polynomial == (81, -108, -36, 48, -8)
+    assert field.refinements == 0
+    shifted = exact.of_field_element(alpha + 3)
+    assert len(exact.literal(shifted)) < 200
+
+
+def test_a_side_this_module_did_not_build_is_refused_rather_than_looped(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review B4 of #660: (x - 2)(x^2 - 2) shares sqrt(2) with x^2 - 2, so bisection never
+    separated them. Every narrowing is bounded, and an unseparated pair is refused."""
+    monkeypatch.setattr(exact, "MAX_BISECTIONS", 200)
+    shared = exact.Algebraic((1, -2, -2, 4), ONE, TWO)
+    with pytest.raises(exact.ExactSideError, match="did not separate"):
+        exact.compare(shared, SQRT2)
+    whole = exact.Algebraic((1, -1), Fraction(1, 2), Fraction(3, 2))  # the root 1
+    with pytest.raises(exact.ExactSideError, match="did not round"):
+        exact.ceiling(whole, 0)
+
+
+def test_a_near_tie_never_prints_a_negative_gap() -> None:
+    """Review B5 of #660: at sixty digits the gap of sqrt(2) + 10^-90 over sqrt(2) came out
+    as -6.2e-61. Where one side is above the other the bound is narrowed until it is
+    positive, and it stays a lower bound."""
+    tiny = Fraction(1, 10**90)
+    near = exact.algebraic([1, -2 * tiny, tiny**2 - 2], (ONE, TWO))
+    gap = exact.lower_gap(near, SQRT2)
+    assert Fraction(0) < gap <= tiny
+    assert tiny - gap < Fraction(1, 10**100)
+    assert exact.lower_gap(SQRT2, SQRT2) <= 0
+
+
+def test_a_closed_form_no_route_here_certifies_is_refused() -> None:
+    """Review B3 of #660: sqrt(2) + sqrt(3) + sqrt(5) is a root of a degree-eight
+    polynomial reducible modulo every prime, which `sqpack.field` cannot decide
+    irreducible; the reader refuses it, and the selection reads its count as unordered."""
+    bound = regularize_evand.verified_bound(
+        {"verified_upper_bound": "5.3823323", "exact_form": "sqrt(2) + sqrt(3) + sqrt(5)"}
+    )
+    assert bound is not None
+    with pytest.raises(exact.ExactSideError):
+        exact.of_bound(bound)

@@ -268,11 +268,16 @@ def test_the_allowlist_equals_the_pending_set_and_each_entry_names_a_bead(
             "off the list"
         )
     ]
-    # And a count that joins it names its bead.
+    # And a count that joins it names its bead; since the house rule, only a corrected
+    # witness's runs may join (`CORRECTED`, reviews A5 and B2 of #660).
     pending["state"] = defaults.PENDING
     regular["state"] = defaults.PENDING
     allowed = {**defaults.PENDING_ALLOWED, regular["n"]: "later"}
-    found, _listed = defaults.state_problems(_write(tmp_path, record), allowed=allowed)
+    witness = regular["witness"]
+    corrected = {regular["n"]: defaults.Correction(witness["source"], witness["side"], "old")}
+    found, _listed = defaults.state_problems(
+        _write(tmp_path, record), allowed=allowed, corrected=corrected
+    )
     assert found == [f"n={regular['n']}: PENDING_ALLOWED names no bead: 'later'"]
 
 
@@ -509,18 +514,28 @@ def test_an_adoption_that_rebuilds_only_the_axis_view_reads_pending(tmp_path: Pa
         )
     ]
 
-    # Or until the adoption's pull request defers it with the bead that owns its runs
-    # (result-import.md, "Adopt a House, Then Regularize It"; think-g3q7): then the gate
-    # lists it as allowed, and an entry naming no bead fails it again.
+    # The adoption's pull request may not defer it: its runs are owed there, whatever
+    # the cap (result-import.md, "The House Rule"; reviews A5 and B1 of #660). Only a
+    # witness corrected at its house's own source and side may wait, with its bead, and
+    # an entry naming no bead fails it again.
     def about(lines: list[str]) -> list[str]:
         return [line for line in lines if re.match(rf"n={n}\b", line)]
 
     deferred = {**defaults.PENDING_ALLOWED, n: "think-g3q7: re-housed by an adoption"}
     found, listed = defaults.state_problems(regenerated, adopted, allowed=deferred)
+    (refused,) = about(found)
+    assert refused.startswith(f"n={n}: PENDING_ALLOWED defers its runs, but it is neither")
+    witness = state["witness"]
+    corrected = {n: defaults.Correction(witness["source"], witness["side"], "an-older-one")}
+    found, listed = defaults.state_problems(
+        regenerated, adopted, allowed=deferred, corrected=corrected
+    )
     assert about(found) == []
     assert about(listed) == [f"n={n} is pending, allowed: {deferred[n]}"]
     unowned = {**defaults.PENDING_ALLOWED, n: "until the runs fit the cap"}
-    found, _listed = defaults.state_problems(regenerated, adopted, allowed=unowned)
+    found, _listed = defaults.state_problems(
+        regenerated, adopted, allowed=unowned, corrected=corrected
+    )
     assert about(found) == [f"n={n}: PENDING_ALLOWED names no bead: {unowned[n]!r}"]
 
 
@@ -753,9 +768,14 @@ def test_an_allowed_count_owes_its_runs_whatever_its_new_house_reads(tmp_path: P
 
     # The gate lists each as allowed and asks for none to come off; on the record the
     # earlier rule gave, it asked for every one to come off.
+    witness = rows[extra]["witness"]
+    corrected = {extra: defaults.Correction(witness["source"], witness["side"], "older")}
+
     def gate(states: dict[int, dict]) -> tuple[list[str], list[str]]:
         changed = {**record, "states": [states.get(row["n"], row) for row in record["states"]]}
-        return defaults.state_problems(_write(tmp_path, changed), allowed=allowed)
+        return defaults.state_problems(
+            _write(tmp_path, changed), allowed=allowed, corrected=corrected
+        )
 
     found, listed = gate({state["n"]: state for state, _bare in regenerated})
     assert found == []
@@ -1106,3 +1126,73 @@ def test_the_summary_counts_pending_and_settled_losses_apart(
         f"where {defaults.STRONG_VIEW_LOST}: 2 still pending, whose runs are owed in this "
         "pull request, and 1 in another state"
     )
+
+
+#: The counts `PENDING_ALLOWED` deferred when the owner set the house rule (16 October
+#: 2026): the twenty the audit of 15 October found (think-gvke). Nothing joins them.
+AT_RULE = (
+    105, 129, 146, 153, 154, 156, 175, 176, 204, 207,
+    211, 232, 237, 241, 264, 271, 272, 302, 303, 304,
+)  # fmt: skip
+
+
+def test_a_deferral_names_the_witness_it_defers_and_lapses_when_the_house_moves() -> None:
+    """Reviews A5, B1 and B2 of #660: the check that a re-housed count is never deferred
+    read the day a pass gave itself, covered register adoptions only, and failed the
+    deferral the runbook allows a corrected witness. Keyed on the witness the record names
+    instead, it holds every import: an entry the list held at the rule stays only while
+    its witness does, and every later one is a corrected witness's, at its house's own
+    source and side."""
+    assert tuple(sorted(defaults.DEFERRED_AT_RULE)) == AT_RULE
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    allowed = defaults.PENDING_ALLOWED
+    assert defaults.deferral_problems(rows, allowed) == []
+    for n in sorted(set(allowed) & set(defaults.DEFERRED_AT_RULE)):
+        witness = rows[n]["witness"]
+        assert defaults.DEFERRED_AT_RULE[n] == (witness["source"], witness["side"]), n
+
+    # An adoption, a catalogue intake or a re-solve moves the house: the entry lapses, and
+    # the pull request that moved it owes its runs.
+    n = AT_RULE[0]
+    moved = {**rows, n: {**rows[n], "witness": {**rows[n]["witness"], "source": "[new]"}}}
+    (problem,) = defaults.deferral_problems(moved, allowed)
+    assert problem.startswith(f"n={n}: PENDING_ALLOWED deferred the runs of the witness")
+    assert "those runs are owed in the pull request that re-housed it" in problem
+    resolved = {**moved, n: {**moved[n], "witness": {**moved[n]["witness"], "side": "13/2"}}}
+    assert defaults.deferral_problems(resolved, allowed) != []
+
+    # B1: a deferral of a count first deferred after the rule, whatever day its pass gives,
+    # as at 68, which T-174's adoption re-houses.
+    later = 68
+    assert later not in defaults.DEFERRED_AT_RULE
+    added = {**allowed, later: "think-aaaa: re-housed by an adoption of 16 October"}
+    (problem,) = defaults.deferral_problems(rows, added)
+    assert problem.startswith(f"n={later}: PENDING_ALLOWED defers its runs, but it is")
+
+    # B2: a corrected witness at its house's own source and side may wait, once named.
+    witness = rows[later]["witness"]
+    fix = defaults.Correction(witness["source"], witness["side"], replaces="an-older-one")
+    assert defaults.deferral_problems(rows, added, corrected={later: fix}) == []
+    same = fix._replace(replaces=str(witness["revision"]))
+    (problem,) = defaults.deferral_problems(rows, added, corrected={later: same})
+    assert "there is no corrected witness to defer" in problem
+    elsewhere = fix._replace(side="13/2")
+    (problem,) = defaults.deferral_problems(rows, added, corrected={later: elsewhere})
+    assert "a correction keeps its house's source and side" in problem
+    (problem,) = defaults.deferral_problems(rows, allowed, corrected={later: fix})
+    assert problem == (
+        f"n={later}: CORRECTED names it, but PENDING_ALLOWED does not; take it off"
+    )
+
+
+def test_the_state_gate_reads_each_deferral_against_its_witness(tmp_path: Path) -> None:
+    """The records tier's state gate runs the witness-keyed check (review B7's lesson, for
+    this check): a re-housed count left on the list fails `--check-state`."""
+    record = _record()
+    n = AT_RULE[0]
+    for row in record["states"]:
+        if row["n"] == n:
+            row["witness"] = {**row["witness"], "source": "[new]"}
+    problems, _listed = defaults.state_problems(_write(tmp_path, record))
+    assert any(problem.startswith(f"n={n}: PENDING_ALLOWED deferred") for problem in problems)

@@ -398,10 +398,11 @@ _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 #: then reads regular as published, which drops the runs its bead owes, and adding a count
 #: whose house reads regular, which holds it pending; the pull request shows the bead's
 #: runs or `--compare`'s table (review C2 of #641; think-k6rj). A count joins only by a
-#: reviewed change naming its bead, as for a corrected witness whose runs must wait; a
-#: count a pass re-houses under the house rule never joins, since its runs are owed in the
-#: adoption's pull request (`RUNS_OWED`), and `adopt_houses --check` fails while one is
-#: named here. Nothing stops a change adding entries, so the gate prints how many there are,
+#: reviewed change naming its bead, and only for a witness corrected with its house's
+#: source and side unchanged (`CORRECTED`): a count whose house moves never joins, since its
+#: runs are owed in the pull request that moves it (`RUNS_OWED`), and an entry whose
+#: house has moved since fails `deferral_problems`, keyed on the witness it defers.
+#: Nothing stops a change adding entries, so the gate prints how many there are,
 #: and `devtools.check_bead_tree` fails a change to this file whose list names a bead
 #: that is not open (`deferrals`), so a bead named here is closed only once the change
 #: taking its last count off has merged (regularization-process.md, "When a Witness
@@ -921,10 +922,13 @@ def state_problems(
     *,
     settled: Mapping[int, Settled] | None = None,
     allowed: Mapping[int, str] | None = None,
+    at_rule: Mapping[int, Witness] | None = None,
+    corrected: Mapping[int, Correction] | None = None,
 ) -> tuple[list[str], list[str]]:
     """What fails the regularization-state gate, and the pending counts it lists: the
-    retained record against the index, `SETTLED` and `PENDING_ALLOWED`, nothing measured
-    and no witness read (`--check` holds the record to the data by deciding it again)."""
+    retained record against the index, `SETTLED` and `PENDING_ALLOWED`, and each deferral
+    against the witness it defers (`deferral_problems`), nothing measured and no witness
+    read (`--check` holds the record to the data by deciding it again)."""
     settled = SETTLED if settled is None else settled
     allowed = PENDING_ALLOWED if allowed is None else allowed
     found = json.loads(record.read_text(encoding="utf-8"))
@@ -959,6 +963,7 @@ def state_problems(
         if held is not None:
             problems.extend(_settled_problems(n, held, row, entry))
     problems.extend(_list_problems(rows, allowed))
+    problems.extend(deferral_problems(rows, allowed, at_rule=at_rule, corrected=corrected))
     pending = {n for n, row in rows.items() if row["state"] == PENDING}
     listed = [
         f"n={n} is pending, allowed: {allowed[n]}" for n in sorted(pending & set(allowed))
@@ -1020,6 +1025,196 @@ def _list_problems(
         f"n={n}: PENDING_ALLOWED names no bead: {allowed[n]!r}"
         for n in sorted(allowed)
         if not BEAD.match(allowed[n])
+    )
+    return problems
+
+
+#: The day the owner set the house rule, 16 October 2026 (packing/campaign/
+#: result-import.md, "The House Rule"): "We should always be adopting the smallest packing
+#: and then regularizing it." From then on a count's runs are deferred only where its
+#: witness was corrected or re-solved with its house's source and side unchanged
+#: (`CORRECTED`), and never because its house moved, whichever import moved it.
+RULE_SET_ON = "2026-10-16"
+
+
+class Witness(NamedTuple):
+    """A witness as a deferral names it: its source's key and its exact side, as
+    `witness_identity` gives them and the record writes them."""
+
+    source: str
+    side: str
+
+
+class Correction(NamedTuple):
+    """A deferral made from `RULE_SET_ON` on: the corrected witness its runs wait for, at
+    the house's own source and side, and the revision of the witness it replaced."""
+
+    source: str
+    side: str
+    replaces: str
+
+
+#: The deferrals `PENDING_ALLOWED` held when the owner set the house rule, each with the
+#: witness whose runs it deferred, as the record named it then (reviews A5, B1 and B2 of
+#: #660). Each stays only while that witness is the count's: a house that moves, by an
+#: adoption, a catalogue intake or a re-solve, is regularized in the pull request that moves
+#: it, which runs the count and takes the entry off. A row whose count the list no longer
+#: names is history, and nothing is added here.
+DEFERRED_AT_RULE: dict[int, Witness] = {
+    105: Witness(
+        "[PingYou n105 refinement 2026-10-12]",
+        "10789303783748158830926836660039617659736218711424421332884365754662904597598593330008796151/1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    ),
+    129: Witness(
+        "[Ostashev compositions 2026-10-12]",
+        "59350069252022321722894267696423193212052484284509904682889059350069252022321722894267696423193212052484284509904682889/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    ),
+    146: Witness(
+        "[PingYou n146 refinement 2026-10-12]",
+        "6291891101975417145956733968525575683386443086533905641519426925380587272252740885402451051/500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    ),
+    153: Witness(
+        "[Mishapolk exact certificates 2026-10-12]",
+        "20109396641257/1562500000000",
+    ),
+    154: Witness(
+        "[Couzo certificates 2026-10-13]",
+        "12921206577132631050071241337979/1000000000000000000000000000000",
+    ),
+    156: Witness(
+        "[Couzo certificates 2026-10-12]",
+        "12979165853834276453965882038847/1000000000000000000000000000000",
+    ),
+    175: Witness(
+        "[Ostashev records 2026-10-12]",
+        "27528348634973193258855646440084685651524191041221518308579027528348634973193258855646440084685651524191041221518308579/2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    ),
+    176: Witness(
+        "[Couzo certificates 2026-10-13]",
+        "552305489072091180922030085613/40000000000000000000000000000",
+    ),
+    204: Witness(
+        "[Ostashev compositions 2026-10-12]",
+        "74043316171934782832354950404729823976428779059647971914573074043316171934782832354950404729823976428779059647971914573/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    ),
+    207: Witness(
+        "[Mishapolk exact certificates 2026-10-12]",
+        "7440480185779/500000000000",
+    ),
+    211: Witness(
+        "[Couzo certificates 2026-10-13]",
+        "7496779456987003085666602828823/500000000000000000000000000000",
+    ),
+    232: Witness(
+        "[Ostashev records 2026-10-12]",
+        "31528348634973193258895646440084685651524191041221518308579031528348634973193258895646440084685651524191041221518308579/2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    ),
+    237: Witness(
+        "[Mishapolk records 2026-10-14]",
+        "7951352528933183399718238226741/500000000000000000000000000000",
+    ),
+    241: Witness(
+        "[Couzo certificates 2026-10-13]",
+        "15987117095150238758321758129189/1000000000000000000000000000000",
+    ),
+    264: Witness(
+        "[Ostashev records 2026-10-12]",
+        "167747351323878328426102645873217709808239488409494842884223167747351323878328426102645873217709808239488409494842884223/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    ),
+    271: Witness(
+        "[Couzo certificates 2026-10-12]",
+        "16948992356451205603226618436627/1000000000000000000000000000000",
+    ),
+    272: Witness(
+        "[PingYou n272 refinement 2026-10-12]",
+        "1696558647483767063575600703342204556962987576825904423514291493830293022275118026464939778830359993334240647227/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    ),
+    302: Witness(
+        "[Couzo certificates 2026-10-13]",
+        "3574002770080892868927770707857/200000000000000000000000000000",
+    ),
+    303: Witness(
+        "[Ostashev compositions 2026-10-12]",
+        "179099582910699079815957410813987360800486270805270137352241179099582910699079815957410813987360800486270805270137352241/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    ),
+    304: Witness(
+        "[Ostashev merged bands 2026-10-13]",
+        "358588555161503499313326522779782297248782400899192783432303585885551615034993133265227797822972487824008991927834323/20000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    ),
+}
+
+#: The deferrals made since the rule: a witness corrected or re-solved with its house's
+#: source and side unchanged, whose runs wait for the bead its `PENDING_ALLOWED` entry
+#: names (packing/campaign/result-import.md, "Adopt a House, Then Regularize It").
+CORRECTED: dict[int, Correction] = {}
+
+
+def _short(side: object) -> str:
+    """A side as a message names it: its first sixteen decimals."""
+    try:
+        value = Fraction(str(side))
+    except ValueError, ZeroDivisionError:
+        return repr(side)
+    return f"{float(value):.16g}"
+
+
+def deferral_problems(
+    rows: Mapping[int, Mapping[str, Any]],
+    allowed: Mapping[int, str],
+    *,
+    at_rule: Mapping[int, Witness] | None = None,
+    corrected: Mapping[int, Correction] | None = None,
+) -> list[str]:
+    """Where `PENDING_ALLOWED` defers the runs of a witness it may not: one whose house
+    moved since the deferral, or one no rule lets wait.
+
+    Keyed on the witness the record names at each count, its source and its side, never
+    on the day a pass gives itself (reviews A5, B1 and B2 of #660): an entry is one the
+    list held when the rule was set, at the witness it deferred then (`DEFERRED_AT_RULE`),
+    or a corrected witness's at its house's own source and side (`CORRECTED`). A count
+    re-housed by any import has another witness, so its entry fails until the pull
+    request that re-housed it runs the count and takes the entry off.
+    """
+    at_rule = DEFERRED_AT_RULE if at_rule is None else at_rule
+    corrected = CORRECTED if corrected is None else corrected
+    problems: list[str] = []
+    for n in sorted(allowed):
+        witness = (rows.get(n) or {}).get("witness") or {}
+        named = Witness(str(witness.get("source")), str(witness.get("side")))
+        fix = corrected.get(n)
+        if fix is not None:
+            if Witness(fix.source, fix.side) != named:
+                problems.append(
+                    f"n={n}: CORRECTED defers the runs of a corrected witness from "
+                    f"{fix.source} at {_short(fix.side)}, but the record's is from "
+                    f"{named.source} at {_short(named.side)}: a correction keeps its "
+                    "house's source and side, and where the house moved its runs are owed "
+                    "in the pull request that moved it"
+                )
+            elif str(witness.get("revision")) == fix.replaces:
+                problems.append(
+                    f"n={n}: CORRECTED says the witness replaced revision {fix.replaces}, "
+                    "which is the record's own: there is no corrected witness to defer"
+                )
+            continue
+        held = at_rule.get(n)
+        if held is None:
+            problems.append(
+                f"n={n}: PENDING_ALLOWED defers its runs, but it is neither a deferral the "
+                f"list held when the owner set the house rule ({RULE_SET_ON}) nor a "
+                "corrected witness's (CORRECTED): a count whose house moves is "
+                "regularized in the pull request that moves it"
+            )
+        elif held != named:
+            problems.append(
+                f"n={n}: PENDING_ALLOWED deferred the runs of the witness from "
+                f"{held.source} at {_short(held.side)}, and its house has moved since, to "
+                f"{named.source} at {_short(named.side)}: those runs are owed in the pull "
+                "request that re-housed it; run them and take the count off the list"
+            )
+    problems.extend(
+        f"n={n}: CORRECTED names it, but PENDING_ALLOWED does not; take it off"
+        for n in sorted(set(corrected) - set(allowed))
     )
     return problems
 
