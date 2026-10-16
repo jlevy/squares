@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import shlex
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
@@ -109,6 +110,85 @@ def test_a_split_cover_runs_with_its_source_uncert_cap_and_the_retained_name(
     assert control_receipt.name == (
         f"n{n}_control_drop-heaviest-point_zmx2_d4_x{region.x}_y{region.y}.log"
     )
+    # The packet's replay ran the same zmx2 command, by its own script, from scratch paths.
+    retained = PACKETS[n] / "receipts" / receipt.name
+    ran, built = _flags(_command(retained)), _flags(run)
+    for host_choice in ("--threads", "--log"):  # the root log was renamed when retained
+        assert ran.pop(host_choice)
+        assert built.pop(host_choice)
+    assert ran == built
+
+
+#: The packet holding each split cover and its intake's replay receipts.
+PACKETS = {
+    76: replay_evand_zmx2.WEB / "bengreff-s76-certificate-2026-10-14",
+    95: replay_evand_zmx2.WEB / "bengreff-s95-certificate-2026-10-15",
+}
+
+
+def _command(receipt: Path) -> list[str]:
+    first = receipt.read_text(encoding="utf-8").splitlines()[0]
+    return shlex.split(first.removeprefix("# command: "))
+
+
+def _flags(argv: list[str]) -> dict[str, str]:
+    """A command's program, subcommand, input and flags, each path by its file name."""
+    named = {"argv0": Path(argv[0]).name, "what": argv[1], "input": Path(argv[2]).name}
+    rest = argv[3:]
+    for i, token in enumerate(rest):
+        if token.startswith("--"):
+            value = (
+                rest[i + 1] if i + 1 < len(rest) and not rest[i + 1].startswith("--") else ""
+            )
+            named[token] = Path(value).name if value.startswith("/") else value
+    return named
+
+
+def _plain(argv: list[str]) -> list[str]:
+    """Each absolute or staged path by its file name; flags and fractions as they are."""
+    return [Path(t).name if t.startswith(("/", "stage/", "out/")) else t for t in argv]
+
+
+@pytest.mark.parametrize("n", [76, 95])
+def test_the_zm_mixed_runner_builds_the_command_every_retained_job_ran(n: int) -> None:
+    jobs = replay_evand_zmx2.zm_mixed_jobs(n)
+    receipts = PACKETS[n] / f"receipts/n{n}_zm_mixed"
+    assert sorted(p.name for p in receipts.glob("j*.log")) == [f"j{job}.log" for job, _ in jobs]
+    cover = replay_evand_zmx2.CASES[n].cover.name.removesuffix(".gz")
+    for job, bounds in jobs:
+        receipt = receipts / f"j{job}.log"
+        built = replay_evand_zmx2.zm_mixed_command(
+            "python3", Path("stage"), Path("stage") / cover, bounds, Path(f"out/j{job}.jsonl")
+        )
+        assert _plain(_command(receipt)) == _plain(built), receipt
+        text = receipt.read_text(encoding="utf-8")
+        assert "zm_mixed.py ee3e2915, mixed_cover.py bb89de15, zeromargin.py 640fe453" in text
+        assert "\nVERIFIED-D4 (PARTIAL)\n" in text
+        assert "; exit 0; " in text
+
+
+def test_the_zm_mixed_runner_stages_the_pinned_files_and_names_each_job(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    calls: list[tuple[list[str], Path]] = []
+
+    def fake_run(argv: list[str], *, receipt: Path, **_: object) -> dict[str, object]:
+        calls.append((list(argv), receipt))
+        return {"exit": 0}
+
+    monkeypatch.setattr(replay_evand_zmx2.replay_receipt, "run", fake_run)
+    work, out = tmp_path / "work", tmp_path / "out"
+    code = replay_evand_zmx2.zm_mixed_case(76, work=work, out=out, only=["000", "063"])
+    assert code == 0
+    assert [receipt.name for _, receipt in calls] == ["j000.log", "j063.log"]
+    for name, _, digest in replay_evand_zmx2.ZM_MIXED_FILES:
+        assert hashlib.sha256((work / "zm_mixed" / name).read_bytes()).hexdigest() == digest
+    staged = work / "zm_mixed/s76_cover_v5.txt"
+    assert hashlib.sha256(staged.read_bytes()).hexdigest() == replay_evand_zmx2.CASES[76].sha256
+    argv, _ = calls[0]
+    assert argv[argv.index("--resume") + 1] == str(out / "n76_zm_mixed/j000.jsonl")
+    with pytest.raises(SystemExit):
+        replay_evand_zmx2.zm_mixed_case(76, work=work, out=out, only=["999"])
 
 
 def test_driver_region_must_lie_in_the_root_grid() -> None:

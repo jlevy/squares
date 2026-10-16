@@ -37,16 +37,28 @@ states, builds the binary with ``cargo``, and runs ``zmx2 cert`` under
     retained control must read ``NOT VERIFIED`` with uncertified boxes, which
     ``tests/test_replay_controls.py`` holds.
 
+``zm-mixed --case N --work DIR --out OUT [--only ID ...] [--python PATH]``
+    For a split cover (``ZM_MIXED_JOBS``: s(76) and s(95)), stages ``zm_mixed.py`` and the
+    two files it imports from the retained evand packets, refusing any whose SHA-256 is
+    not the one the source's ``verify.sh`` pins, and runs ``zm_mixed.py cert`` on each
+    sub-root of the source's ``jobs.txt`` with that script's flags, one job at a time,
+    writing ``OUT/n<N>_zm_mixed/j<id>.log`` (the receipt) and ``j<id>.jsonl`` (the
+    records, through ``--resume``). ``--only`` runs the named jobs, so the list can be
+    split across processes. ``zm_mixed.py`` needs numpy, so ``--python`` (default: this
+    interpreter) must have it; it runs with ``-I``.
+
 What a run decides is read afterwards by ``devtools.audit_evand_mixed_covers``. This
 tool decides nothing about a cover: it only guarantees which bytes were run.
 
 It imports only the standard library and ``devtools.replay_receipt``, so it runs under
 any CPython from 3.11 and needs no project environment, which is what a fresh cloud
-batch session has. From ``packing/``::
+batch session has; only ``zm-mixed``'s interpreter needs numpy. From ``packing/``::
 
     python3 -m devtools.replay_evand_zmx2 build --checker 6b7f0f79 --work /tmp/zmx2
     python3 -m devtools.replay_evand_zmx2 run --case 77 --mode full --x 45-89 \\
         --work /tmp/zmx2 --out /tmp/zmx2/out --threads 4
+    .venv/bin/python3 -m devtools.replay_evand_zmx2 zm-mixed --case 95 \\
+        --work /tmp/zmx2 --out /tmp/zmx2/out --only 000 001
 """
 
 from __future__ import annotations
@@ -574,6 +586,129 @@ def control_case(
     )
 
 
+# --- zm_mixed.py on a split cover's sub-roots --------------------------------------------
+
+#: ``zm_mixed.py`` and the files it imports, as the s(76) and s(95) sources' ``verify.sh``
+#: pins them at evand ``b91d70b6``: name, retained copy, SHA-256.
+ZM_MIXED_FILES = (
+    (
+        "zm_mixed.py",
+        WEB / "evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py",
+        "ee3e2915349b8795128417bca6414b205d526db9f01f88cd4cd32c32e8d760ac",
+    ),
+    (
+        "mixed_cover.py",
+        WEB / "evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py",
+        "bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5",
+    ),
+    (
+        "zeromargin.py",
+        WEB / "evand-square-packing-2026-09-26/square-packing/s12/search/zeromargin.py",
+        "640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab",
+    ),
+)
+#: The flags those ``verify.sh`` scripts pass ``zm_mixed.py cert`` for every sub-root.
+ZM_MIXED_FLAGS = (
+    "--d4",
+    "--cert-mode",
+    "--disj",
+    "--chain-from",
+    "0",
+    "--pitch",
+    "1/20",
+    "--ubins",
+    "16",
+    "--depth",
+    "24",
+    "--nproc",
+    "1",
+)
+#: Each split cover's sub-roots, as its source lists them: ``id cx_lo cx_hi cy_lo cy_hi
+#: u_lo u_hi`` per line.
+ZM_MIXED_JOBS = {
+    76: WEB / "bengreff-s76-certificate-2026-10-14/s76-certificate/records/zm_mixed/jobs.txt",
+    95: WEB / "bengreff-s95-certificate-2026-10-15/s95-certificate/records/zm_mixed/jobs.txt",
+}
+#: The bounds' flags, in the order of a jobs line.
+ZM_MIXED_BOUNDS = ("--cx-lo", "--cx-hi", "--cy-lo", "--cy-hi", "--u-lo", "--u-hi")
+
+
+def zm_mixed_jobs(n: int) -> list[tuple[str, tuple[str, ...]]]:
+    """The case's sub-roots: each job's id and its six bounds."""
+    rows = [line.split() for line in ZM_MIXED_JOBS[n].read_text(encoding="ascii").splitlines()]
+    jobs = [(row[0], tuple(row[1:])) for row in rows if row]
+    if any(len(bounds) != len(ZM_MIXED_BOUNDS) for _, bounds in jobs):
+        raise ValueError(f"{ZM_MIXED_JOBS[n]}: a line is not an id and six bounds")
+    return jobs
+
+
+def zm_mixed_command(
+    python: str, stage: Path, cover: Path, bounds: Sequence[str], records: Path
+) -> list[str]:
+    """One sub-root's ``zm_mixed.py cert`` command line."""
+    limits = [token for pair in zip(ZM_MIXED_BOUNDS, bounds, strict=True) for token in pair]
+    return [
+        python,
+        "-I",
+        "-u",
+        str(stage / "zm_mixed.py"),
+        "cert",
+        str(cover),
+        *ZM_MIXED_FLAGS,
+        *limits,
+        "--resume",
+        str(records),
+    ]
+
+
+def zm_mixed_case(
+    n: int,
+    *,
+    work: Path,
+    out: Path,
+    only: Sequence[str] | None = None,
+    python: str = sys.executable,
+) -> int:
+    """Run ``zm_mixed.py cert`` on the case's sub-roots; return the largest exit status."""
+    case = CASES[n]
+    jobs = zm_mixed_jobs(n)
+    if only:
+        known = {job for job, _ in jobs}
+        if unknown := sorted(set(only) - known):
+            raise SystemExit(f"no such job: {', '.join(unknown)}")
+        jobs = [(job, bounds) for job, bounds in jobs if job in set(only)]
+    stage = work / "zm_mixed"
+    for name, retained, expected in ZM_MIXED_FILES:
+        _write_checked(stage / name, _checked(retained.read_bytes(), expected, str(retained)))
+    data = _checked(
+        gzip.decompress(case.cover.read_bytes()), case.sha256, f"{case.cover} (decompressed)"
+    )
+    cover = stage / case.cover.name.removesuffix(".gz")
+    _write_checked(cover, data)
+    target = out / f"{case.name}_zm_mixed"
+    target.mkdir(parents=True, exist_ok=True)
+    version = subprocess.run(
+        [python, "--version"], capture_output=True, text=True, check=True
+    ).stdout.strip()
+    label = (
+        "zm_mixed/ staged by devtools.replay_evand_zmx2 zm-mixed: "
+        + ", ".join(f"{name} {digest}" for name, _, digest in ZM_MIXED_FILES)
+        + f" (retained evand packets); cover {case.sha256} decompressed from "
+        + str(case.cover.relative_to(REPO))
+    )
+    worst = 0
+    for job, bounds in jobs:
+        fields = replay_receipt.run(
+            zm_mixed_command(python, stage, cover, bounds, target / f"j{job}.jsonl"),
+            receipt=target / f"j{job}.log",
+            cwd_label=label,
+            python_note=f"{python} ({version}), run with -I",
+            chdir=stage,
+        )
+        worst = max(worst, int(fields["exit"]))  # type: ignore[call-overload]
+    return worst
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     commands = parser.add_subparsers(dest="command", required=True)
@@ -602,11 +737,27 @@ def main(argv: Sequence[str] | None = None) -> int:
     control_parser.add_argument("--threads", type=int, default=1)
     control_parser.add_argument("--x", help="root columns LO-HI (default: CONTROLS)")
     control_parser.add_argument("--y", help="root rows LO-HI (default: CONTROLS)")
+    zm_parser = commands.add_parser(
+        "zm-mixed", help="run zm_mixed.py on a split cover's sub-roots"
+    )
+    zm_parser.add_argument("--case", type=int, choices=sorted(ZM_MIXED_JOBS), required=True)
+    zm_parser.add_argument("--work", type=Path, required=True)
+    zm_parser.add_argument("--out", type=Path, required=True)
+    zm_parser.add_argument("--only", nargs="+", help="job ids from the source's jobs.txt")
+    zm_parser.add_argument("--python", default=sys.executable, help="an interpreter with numpy")
     args = parser.parse_args(argv)
     try:
         if args.command == "build":
             print(build(args.checker, args.work.resolve()))
             return 0
+        if args.command == "zm-mixed":
+            return zm_mixed_case(
+                args.case,
+                work=args.work.resolve(),
+                out=args.out.resolve(),
+                only=args.only,
+                python=args.python,
+            )
         if args.command == "control":
             return control_case(
                 args.case,
