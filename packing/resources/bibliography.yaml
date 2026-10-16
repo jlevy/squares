@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:Bibliography/v1
   schema: bibliography.schema.yaml
   status: enforced
-last_reviewed: '2026-10-13'
+last_reviewed: '2026-10-16'
 # The citation fields a generator needs, keyed by the source keys the frontier records
 # use. The Markdown tables in README.md stay the human index; this file holds only what
 # a line of citation text is built from, for the keys something cites.
@@ -2745,6 +2745,56 @@ sources:
       not retained. The source credits Hiroaki Hosono (GitHub: wand125), and its
       problems/square-lower-bounds/README.md says: "Parts of this work were produced
       with AI assistance under human direction."
+  - key: '[Daniel exact current records 2026-10-16]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-16'
+    lineage: builds-on-project
+    credit: Daniel after Xu, Chaoweeraprasit, Ostashev, Couzo, PingYou Ltd, Gupta, Polkovskyi, Levy
+    short_credit: Daniel after Xu et al.
+    note: >-
+      Exact algebraic forms of the record's best-known packings at 23 counts at
+      7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1 (search/exact/cur/, issue 639): each side
+      the one root of an integer polynomial of degree 2 to 41 in a rational interval,
+      realised by an exact configuration over a number field and accepted by the author's
+      standard-library verify_exact.py. The packings are their finders', as the issue says,
+      read from this project's register; the 16 counts the report-order ledger records are
+      Xu's, Chaoweeraprasit's, Ostashev's, Couzo's and PingYou Ltd's packings, as Gupta,
+      Polkovskyi and PingYou Ltd refined them, and Daniel's own at 266. MIT-licensed; 19
+      data files retained as their upstream gzip and the four largest pinned by size and
+      SHA-256. The issue says the solver, checkers and batch were written and run with
+      Claude (Anthropic) under the author's direction. Polynomial irreducibility is the
+      source's assertion; no local or global optimality claim.
+  - key: '[Fitzharding n19 Lean 2026]'
+    authors: [Fitzharding]
+    year: 2026
+    venue: GitHub
+    short_venue: Web
+    dated: '2026-10-16'
+    credit: Fitzharding after Levy, Ahmed
+    lineage: credits-project
+    note: >-
+      A Lean 4 proof, Sq19.square19_optimality, that nineteen unit squares pack in a square
+      of side L exactly when 3 + 4 * Real.sqrt 2 / 3 <= L, the side of Robert Wainwright's
+      1979 packing: ofitzharding/sq19 at 34fb2b7bc39465db368c45cb48d4db58829d3051
+      (committed 2026-10-16T03:20:12Z, the tag of release v1.0.0), retained whole, with
+      the release's five archives of generated certificate modules (1,110,588,236 bytes)
+      pinned by size and SHA-256, in web/fitzharding-n19-lean-2026-10-16/. CITATION.cff and
+      LICENSE name the author Oscar Fitzharding, who publishes on GitHub and X as
+      ofitzharding. README.md: "Builds on the s(17) formalization", "Thanks to everyone
+      involved with the Squares Project, especially Manasseh Ahmed", and "Developed with
+      substantial assistance from Claude and Codex." The source trusts Lean's compiler,
+      native evaluator and C toolchain for 4,320 native_decide facts, reports a kernel
+      replay of the theorem's 13,143-module import closure, and says a complete rebuild from
+      source has not yet been run. MIT licence. Fitzharding announced it on X on 16 October
+      2026 at 03:27:40Z (https://x.com/ofitzharding/status/2110935681597874374): "lol
+      here's a lean proof of the optimal packing for 19 squares"; the post is retained in
+      the packet's receipts/announcement/. Issue #640 on this repository, opened by the
+      author at 03:41:08Z to ask for the registration, credits Wainwright's construction,
+      says it "extends the method and checker code of the s(17) Lean proof (#565)", thanks
+      the Squares Project and Manasseh Ahmed, and says "Development used Claude and Codex
+      assistance."
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono

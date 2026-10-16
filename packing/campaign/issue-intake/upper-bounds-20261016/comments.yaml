@@ -1,0 +1,40 @@
+# The report-order verdict comment of the 2026-10-16 intake for issue #639 (epic
+# think-mdnn, bead think-phyb), as devtools.intake_comments drafts it from the ledger.json
+# beside this file. Everything here is this pass's own: the tool holds the rules.
+#
+# From packing/:
+#   python -m devtools.intake_comments \
+#     campaign/issue-intake/upper-bounds-20261016/comments.yaml --out DIR
+
+records_pr: jlevy/squares#651
+
+# How a holder the ledger prints by a bibliography key is named in a comment.
+names:
+  "[PingYou PR 574 certificates 2026-10-13]": PingYou Ltd
+  "[Mishapolk KKT refinements 2026-10-14]": Mykhailo Polkovskyi
+
+# Handles and project names the ledger's notes give in parentheses after a name.
+drop_handles: [itsnaka]
+
+# Result reports the ledger holds that get no verdict comment here, and why.
+skip:
+  - report: "PR #574"
+    reason: >-
+      walked again only at #639's counts, where its verdicts are the 14 October ledger's,
+      already given in its own verdict comment
+
+comments:
+  - issue: 639
+    author: evand
+    layout: by-count
+    notes:
+      - >-
+        At 51, 70, 153 and 207 the comparison is exact: your polynomial vanishes at the
+        record's (16 + 5√2)/3 at 51, and at 70, 153 and 207 the resultant of PR #574's
+        algebraic witness is your polynomial, with its side inside your interval, so each
+        is a tie with the earlier report. At 70, 153 and 207 your configurations and
+        checker are a second route to those sides, which the owner's open decision on PR
+        #574's algebraic certificates weighs.
+      - >-
+        At 172, 263 and 297 PR #574's rational certificates, reported on 13 October, are
+        below your sides by about 1e-62, so the rule does not record those three.

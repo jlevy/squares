@@ -1,0 +1,1 @@
+Sq19.square19_optimality : ∀ (L : ℝ), Sq19.Feasible19 L ↔ 3 + 4 * √2 / 3 ≤ L

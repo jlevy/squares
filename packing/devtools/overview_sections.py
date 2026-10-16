@@ -1981,6 +1981,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/ofitzharding/sq19",
+        "Oscar Fitzharding",
+        (
+            "A Lean 4 proof that Wainwright's packing of nineteen squares is optimal, "
+            "trusting Lean's compiler for its certificates."
+        ),
+    ),
+    (
         "https://github.com/Guzhou0806/n17-square-packing",
         "Guzhou0806",
         "Strict lower bounds for seventeen squares.",

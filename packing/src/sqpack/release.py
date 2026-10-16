@@ -72,6 +72,9 @@ class PublicationHistoryEntry(NamedTuple):
 #: happened (the owner, 2026-09-22: "accurately record the date of when that was first
 #: published"). The deployment and commit behind each date, so it can be re-read:
 #:
+#:   v0.7.11 2026-10-16T01:25:34Z  bbc12b617  the merge of PR 631, the top of stack 632 (PR
+#:                                            627 cut it); dated October 15 when cut, it went
+#:                                            live the next day in UTC (think-tk0u)
 #:   v0.5.0  2026-10-02T01:07:03Z  8aaa411dc  the merge of PR 291, label and content together
 #:   v0.4.2  2026-09-28T06:11:35Z  c19e6c0e2  the merge of PR 239, label and content together
 #:   v0.4.1  2026-09-22T23:12:36Z  d5b1c2e1b  the merge of PR 218, label and content together
@@ -84,6 +87,15 @@ class PublicationHistoryEntry(NamedTuple):
 #: Reproduce with `gh api "repos/jlevy/squares/deployments?environment=github-pages"` and,
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.7.15",
+        first_published="October 16, 2026",
+        result_scope=(
+            "Register two results by others in report order, none adopting a house: exact "
+            "algebraic sides of the best packings at sixteen counts and a reported Lean "
+            "proof that s(19) = 3 + (4/3)√2."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.7.14",
         first_published="October 16, 2026",
@@ -110,7 +122,7 @@ PUBLICATION_HISTORY = (
     ),
     PublicationHistoryEntry(
         version="v0.7.11",
-        first_published="October 15, 2026",
+        first_published="October 16, 2026",
         result_scope=(
             "Register five results in report order, T-188 to T-192, none adopting a "
             "house: smaller reported packings of 211 and 237 squares, a reported s(95) = "
@@ -375,7 +387,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "288a1a52022f712563a23f21848e0ae2927390d4"
+DATA_REVISION = "0afbc796e52c4b102a8f09a3153c086e8c499ebf"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -798,6 +810,17 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.14",
+        version="v0.7.15",
+        impact="patch",
+        reason=(
+            "Register two results by others in report order, none adopting a house: exact "
+            "algebraic sides of the best packings at sixteen counts and a reported Lean "
+            "proof that s(19) = 3 + (4/3)√2."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.13",
         version="v0.7.14",
         impact="patch",
@@ -1059,6 +1082,96 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/src/sqpack/release.py",),
+        outputs=("index.html", "about.html"),
+        reason=(
+            "Dates v0.7.11 October 16, 2026, the day its first Pages deployment went live "
+            "(bbc12b61, the merge of PR 631 that landed stack 632, 2026-10-16T01:25:34Z), "
+            "and records that deployment in the history's comment (think-tk0u, PR 627 "
+            "review B3). The head edition stays v0.7.15 of October 16. No page prints a "
+            "date from below the head: the pages stamp the head edition, the films the "
+            "v0.4.2 entry, and site_urls --check finds the URL registry and sitemap "
+            "unchanged. The deployed index.html and about.html name no v0.7.11. This is a "
+            "source-reviewed disposition; no site rebuild or byte comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/frontier/source-coverage.yaml",),
+        outputs=(
+            "about.html",
+            "atlas.html",
+            "conventions.html",
+            "development.html",
+            "epistemics.html",
+            "index.html",
+            "news.html",
+            "papers.html",
+            "readme.html",
+            "results.html",
+            "synopsis.html",
+            "tutorial-advanced.html",
+            "tutorial.html",
+            "visualize.html",
+        ),
+        reason=(
+            "Rendered on this branch over main e2e018f3 with the pin at 288a1a52, once "
+            "with main's source register and once with the branch's, the site's pages, "
+            "result overviews, case records, forwarders and assets are byte-identical in "
+            "all 1470 files render_overview writes. The register moves the reviewed dates "
+            "of UnitSquare Release 1 and SQUISH n153 to 16 October and adds a note on "
+            "each read (PR 647 review A1). As a data commit it is followed by the re-pin "
+            "to 4a9292ec (rule 1), which changes the data hash in the stamp every page "
+            "prints; that change is the re-pin's, not the register's."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main e2e018f3 at link revision e2e018f3, once "
+            "with main's requests record and source register and once with the branch's, "
+            "the HTML and Markdown are byte-identical in all 42 files the renderer writes; "
+            "the PDF prints from that HTML and was not rebuilt. The requests record gains "
+            "#643's entry, the project's tracking issue for the Lean proof of ValidTilt9, "
+            "and the source register moves the reviewed dates of UnitSquare Release 1 and "
+            "SQUISH n153 to 16 October with a note on each read (PR 647 review A1); the "
+            "survey prints none of them, so it keeps v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.15 for T-193 and T-194 regenerated the five claim documents "
+            "at PUBLICATION_REVISION 46ae34f9, this branch's head before the cut, kept "
+            "reachable from main by the merge commit the PR merges with; with that "
+            "revision read back as 9fe5f941, each is byte-identical to the base's, so the "
+            "32 repository links it pins are the only change, and no claim, certificate or "
+            "command moves. A link revision follows the site's edition and is not a "
+            "revision of the explainer, so it keeps v0.4.7. Source-compared; no render of "
+            "the claim documents was taken."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
@@ -2407,6 +2520,74 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.2.2."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main e2e018f3 at link revision e2e018f3, once "
+            "with main's requests record and once with this branch's, the HTML and "
+            "Markdown are byte-identical in all 42 files the renderer writes; the PDF "
+            "prints from that HTML. The record gains the 16 October triage entries of #639 "
+            "and #640, none of whose results is registered yet, and #622's moved "
+            "read_through and a note quoting its author's answer on AI assistance, none "
+            "of which the survey prints, so it keeps v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/overview_sections.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over its base 71f6a413 (PR #642, on main e2e018f3) at "
+            "link revision e2e018f3, once with the base's versions of every changed record "
+            "and once with this branch's, the three papers' HTML and Markdown are "
+            "byte-identical in all 50 files the renderers write; each PDF prints from that "
+            "HTML. The register gains T-193 and T-194, the source register two sources and "
+            "the requests record #639's and #640's mappings to them, and the site's Other "
+            "Projects list a card for ofitzharding/sq19; none of the three papers prints "
+            "any of them, so each keeps its edition: v0.1.7, v0.1.0 and v0.2.2. Rendered "
+            "again with the branch after #639's replay (T-193 at V3/C3) and the card, the "
+            "six files are byte-identical to the base's."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=("packing/devtools/overview_sections.py", "packing/frontier/results.yaml"),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Rendered on this branch over its base 71f6a413 with the browser's math pass, "
+            "once with the base's versions of every changed record and once with this "
+            "branch's, the Markdown and HTML differ only in the live register count beside "
+            "T-018, 192 results registered so far and now 194, and the HTML also in where "
+            "an empty style attribute falls in one formula's span, which moves between two "
+            "renders of the same input; rendered again after #639's replay and the sq19 "
+            "card, the same holds. A register count follows the site's data and is not a "
+            "revision of the paper, so the explainer keeps v0.4.7."
+        ),
+    ),
 )
 
 
@@ -2543,7 +2724,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "9fe5f941"
+PUBLICATION_REVISION = "46ae34f9"
 
 
 def data_pathspec() -> tuple[str, ...]:
