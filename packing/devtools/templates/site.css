@@ -830,6 +830,7 @@ body {
   background: var(--kpress-doc-accent);
   color: var(--kpress-doc-bg);
   display: inline-flex;
+  font-family: var(--kpress-font-sans);
   font-size: calc(var(--site-font-size-note) * var(--paper-button-label-scale));
   font-weight: var(--site-font-weight-sans-medium);
   gap: 0.5rem;
@@ -3510,6 +3511,10 @@ html[data-site-atlas-view="triangle"]
   letter-spacing: normal;
   text-align: start;
   text-transform: none;
+}
+.kpress .site-article-header > h3 > a {
+  color: inherit;
+  font: inherit;
 }
 .kpress .site-article-header > h3 :is(.kpress-math, .katex, .tex, math) {
   letter-spacing: normal;

@@ -1274,12 +1274,17 @@ def report_results() -> str:
 
 def overview_page() -> Page:
     """A short introduction, bounded previews, papers, and links to the full pages."""
-    from devtools import news_highlights, overview_data, overview_sections  # noqa: PLC0415
+    from devtools import (  # noqa: PLC0415
+        news_highlights,
+        overview_data,
+        overview_sections,
+        render_changelog,
+    )
 
     overview = overview_data.load()
     values = {
         "HERO": overview_sections.hero(),
-        "NEWS_PREVIEW": news_highlights.render(overview),
+        "NEWS_PREVIEW": news_highlights.render(render_changelog.load()),
         "ATLAS_GRID": overview_sections.atlas_preview(),
         "PAPER_CARDS": overview_sections.paper_cards(),
         "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),

@@ -11,7 +11,7 @@ import html
 import re
 import subprocess
 import sys
-from collections.abc import Callable, Sequence
+from collections.abc import Sequence
 from datetime import date, datetime
 from functools import cache
 from html.parser import HTMLParser
@@ -336,17 +336,11 @@ def _inline_text(text: str) -> str:
     return "".join(parts)
 
 
-def inline_html(
-    text: str,
-    *,
-    allow_links: bool = True,
-    transform_text: Callable[[str], str] | None = None,
-) -> str:
+def inline_html(text: str, *, allow_links: bool = True) -> str:
     """Safe inline News Markdown, with authored and legacy register math set by KPress.
 
     Raw HTML stays visible text. A linked preview headline disables authored links
-    so its enclosing article link never contains another anchor. An optional transform
-    changes ordinary text tokens only; math, code and link attributes retain their source.
+    so its enclosing article link never contains another anchor.
     """
     parser = _markdown()
     parser.options["html"] = False
@@ -379,10 +373,7 @@ def inline_html(
             if classified.kind == "math" and classified.latex:
                 return _inline_math(breakable_quotients(classified.latex))
             return f"<code>{html.escape(token.content, quote=False)}</code>"
-        content = token.content
-        if token.type == "text" and transform_text is not None:
-            content = transform_text(content)
-        return _inline_text(content)
+        return _inline_text(token.content)
 
     for kind in ("text", "math_inline", "code_inline"):
         parser.add_render_rule(kind, render_inline)
@@ -921,12 +912,18 @@ def news_card(anchor: str, day_text: str, body: str) -> str:
     )
 
 
-def render_news(document: Document, *, limit: int | None = None) -> str:
-    """One complete article per card, optionally limited to the first few items."""
+def render_news(
+    document: Document, *, limit: int | None = None, entry_ids: set[str] | None = None
+) -> str:
+    """Complete canonical cards, optionally selected by ID and limited for a preview."""
     validate(document)
     if limit is not None and limit < 1:
         raise ValueError("a News preview needs at least one item")
-    entries = news_entries(document)
+    entries = [
+        entry
+        for entry in news_entries(document)
+        if entry_ids is None or entry["id"] in entry_ids
+    ]
     if limit is not None:
         entries = entries[:limit]
     out = [
@@ -974,7 +971,13 @@ def render_news(document: Document, *, limit: int | None = None) -> str:
     if limit is None and (archived := archived_news_targets(document)):
         out.append(_news_forward_anchors(archived))
         target = html.escape(f"{document['repository']}/blob/main/CHANGELOG.md", quote=True)
-        out.append(f'<p><a href="{target}">Full changelog</a></p>')
+        from devtools.overview_sections import arrow_icon  # noqa: PLC0415
+
+        out.append(
+            f'<p class="site-action-row"><a class="site-action" href="{target}" '
+            'aria-label="Full changelog on GitHub">Full changelog '
+            f"{arrow_icon('external')}</a></p>"
+        )
     return "\n".join(out)
 
 
