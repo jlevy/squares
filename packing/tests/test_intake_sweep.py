@@ -1062,6 +1062,24 @@ def test_an_unreadable_record_or_index_needs_action_and_does_not_stop_the_sweep(
     assert "default_drawings --check" in item.step
 
 
+@pytest.mark.parametrize("error", [KeyError("bead"), TypeError("not a bead")])
+def test_a_fault_past_the_two_reads_raises_rather_than_reading_as_a_broken_record(
+    monkeypatch: pytest.MonkeyPatch, error: Exception
+) -> None:
+    """Review B1 of #650: the A4 guard wrapped the whole section, so a fault in sorting the
+    record into items, such as a bead store that raises, read as "the record or the
+    layer's index could not be read", and its step sent the reader to two checks that
+    pass. Only the record's read and the gate's are guarded now; the fault raises."""
+
+    def faulty(_self: sweep.Beads, _alias: str) -> str:
+        raise error
+
+    monkeypatch.setattr(sweep.Beads, "state", faulty)
+    with pytest.raises(type(error)) as raised:
+        sweep.regularization_section(_beads(**_deferral_beads()))
+    assert raised.value is error
+
+
 def test_a_pending_count_no_list_names_needs_action_once(tmp_path: Path) -> None:
     """A count a change made pending without allowing it is what the records tier fails
     on; the sweep lists it once, as needing action, not again as the gate's problem."""

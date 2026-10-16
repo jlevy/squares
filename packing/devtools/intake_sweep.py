@@ -1040,7 +1040,8 @@ def regularization_section(
     by state. Nothing is measured: `--check` in the records tier holds the record to the
     data. A missing record is not checked; one that cannot be read, or an index the gate
     cannot read, is not checked and needs action, and the sweep goes on (review A4 of
-    #650)."""
+    #650). Only those two reads are guarded: an error in sorting what they hold into
+    items is a fault of the sweep, and raises as one (review B1 of #650)."""
     section = Section("Regularization owed")
     allowed = default_drawings.PENDING_ALLOWED if allowed is None else allowed
     settled = default_drawings.SETTLED if settled is None else settled
@@ -1048,17 +1049,15 @@ def regularization_section(
         section.unchecked.append(f"regularization: {default_drawings.RECORD_PATH} is missing")
         return section
     try:
-        return _regularization_owed(
-            section, beads, record=record, index=index, allowed=allowed, settled=settled
-        )
+        document = _read_record(record)
+        gate = default_drawings.state_problems(record, index, settled=settled, allowed=allowed)
     except (OSError, ValueError, KeyError, TypeError) as error:
         detail = f"{type(error).__name__}: {str(error).strip()[:200]}"
-        broken = Section(section.title)
-        broken.unchecked.append(
+        section.unchecked.append(
             f"regularization: {default_drawings.RECORD_PATH} or the layer's index could not "
             f"be read ({detail})"
         )
-        broken.items.append(
+        section.items.append(
             Item(
                 f"the regularization record or the layer's index could not be read: {detail}",
                 NEEDS_OWNER,
@@ -1068,23 +1067,31 @@ def regularization_section(
                 ),
             )
         )
-        return broken
+        return section
+    return _regularization_owed(
+        section, beads, document, gate, allowed=allowed, settled=settled
+    )
+
+
+def _read_record(record: Path) -> Mapping[str, Any]:
+    """The default-drawings record as JSON, refused unless it is an object."""
+    document = json.loads(record.read_text(encoding="utf-8"))
+    if not isinstance(document, dict):
+        raise TypeError(f"{default_drawings.RECORD_PATH} is not a JSON object")
+    return document
 
 
 def _regularization_owed(
     section: Section,
     beads: Beads | None,
+    document: Mapping[str, Any],
+    gate: tuple[list[str], list[str]],
     *,
-    record: Path,
-    index: Path,
     allowed: Mapping[int, str],
     settled: Mapping[int, default_drawings.Settled],
 ) -> Section:
-    """`regularization_section`'s items and notes, from a record that is a file; what it
-    cannot read raises."""
-    document = json.loads(record.read_text(encoding="utf-8"))
-    if not isinstance(document, dict):
-        raise TypeError(f"{default_drawings.RECORD_PATH} is not a JSON object")
+    """`regularization_section`'s items and notes, from the record it read and what the
+    regularization-state gate found (`default_drawings.state_problems`)."""
     rows = document.get("states") or []
     pending: list[Item] = []
     decided: list[Item] = []
@@ -1132,9 +1139,7 @@ def _regularization_owed(
                 )
             )
     section.items.extend([*pending, *decided, *exempt])
-    problems, listed = default_drawings.state_problems(
-        record, index, settled=settled, allowed=allowed
-    )
+    problems, listed = gate
     itemized_problem = re.compile(r"n=(\d+)(?: is pending:|: PENDING_ALLOWED names no bead)")
     for problem in problems:
         found = itemized_problem.match(problem)
