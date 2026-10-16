@@ -698,8 +698,8 @@ The `zmx2` and `zm_mixed.py` control receipts are there too.
 The `zmx2` binary was built from retained bytes by the project’s
 `devtools.replay_evand_zmx2 build`. `zm_mixed.py` ran from copies of the retained files,
 digests checked, read before they ran, with nothing fetched.
-In all, the programs and controls used about 35 CPU-minutes on a shared four-core host,
-one process at a time.
+In all, the programs and controls ran for about an hour of wall time on a shared
+four-core host, one process at a time under `nice -n 10`; their CPU time was less.
 
 ## 13. For the Records Lane
 
