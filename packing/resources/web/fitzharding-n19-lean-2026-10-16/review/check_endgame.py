@@ -1,7 +1,10 @@
-"""Independent re-evaluation of sq19's 2,304 endgame native facts `checkNat n = true`.
+"""Independent check of the property sq19's 2,304 endgame native facts certify.
 
-Each fact asserts, for one of the 4,096 sign/owner cases of the local endgame,
-that on the whole angle box H of `Hull.prob`
+Each fact is the Boolean `checkNat n = true`; this program does not compute that
+Boolean but decides the property it certifies, so a pass shows the property holds,
+not that the native evaluator's `true` is the kernel's value. The property is, for
+one of the 4,096 sign/owner cases of the local endgame, on the whole angle box H of
+`Hull.prob`:
   (geometry) the three Farkas multipliers lam1, lam2, lam3 are >= 0 and S1 > 0;
   (slope)    the directional derivative of the endpoint margin along each of the
              case's five direction prefixes is >= 0.

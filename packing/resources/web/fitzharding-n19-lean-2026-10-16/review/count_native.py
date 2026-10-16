@@ -2,9 +2,9 @@
 
 Reads expected/axioms.txt.gz, the retained Lean sources, and the JSON outputs of
 scan_archives.py for the five release archives, and reports how many of the 4,320
-native facts are proved in the Git tree, how many in the archives, whether every one is
-found in exactly one place, and which native theorems are in the build but not in the
-final axiom set.
+native facts are proved in the Git tree, how many only in the archives, how many in
+both (tracked files the archives also carry), whether any is found nowhere, and which
+native theorems are in the build but not in the final axiom set.
 
     python -I count_native.py SQ19_DIR SCAN_JSON... [--json OUT]
 

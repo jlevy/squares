@@ -1,15 +1,20 @@
-"""Independent re-evaluation of the nine capture-to-hull native facts of sq19.
+"""Independent check of the property the nine capture-to-hull native facts of sq19 certify.
 
 `Sq19.Capture.Region.{S3442,S3435,S3438}.{sq_ok,wall_ok}` and
 `Sq19.Capture.Region.S3435P0.{sq_ok,wall_ok,top_ok}` assert that each capture
 target (an angle interval and a polygon of integer half-planes for the centre),
 moved by the frame shift, lies in the matching box of the local hull problem
 `Hull.prob`. This program reads Capture/Region.lean and Endgame/HullData.lean as
-data and decides each assertion in exact rational arithmetic from its meaning: a
-half-plane bound is implied when the maximum of its functional over the target
-polygon (by vertex enumeration) is within it. It does not reuse the source's
-`impliedOK`. It also places Wainwright's configuration (this project's witness)
-in the hull box.
+data and decides each assertion in exact rational arithmetic. `sq_check`,
+`wall_check` and their mirror and top forms transcribe the source's `sqCheck`
+and `wallCheck` (Capture/ToHull.lean:52-59, and ToHullMirror.lean) line for
+line; only the source's `impliedOK` is replaced: a half-plane bound is implied
+when the maximum of its functional over the target polygon (by vertex
+enumeration, after checking that every target polygon is bounded and nonempty)
+is within it. So the program is independent of the source in evaluation, not in
+formulation, and it decides the property the facts certify, not the value the
+source's Boolean `sqCheck ... = true` takes. It also places Wainwright's
+configuration (this project's witness) in the hull box.
 
     python -I check_region.py SQ19_DIR WITNESS_YAML [--json OUT]
 
@@ -74,10 +79,21 @@ def vertices(cons):
     return pts
 
 
+def bounded(cons):
+    """The polygon's recession cone {d : a d1 + b d2 <= 0 for all (a, b, c)} is {0}.
+
+    A nonzero cone that is not the whole plane has a nonzero boundary ray, and a
+    boundary ray lies on some line a d1 + b d2 = 0, so it is +-(-b, a) for some
+    constraint; testing those directions decides boundedness exactly.
+    """
+    dirs = [(s * -b, s * a) for a, b, _ in cons for s in (1, -1) if (a, b) != (0, 0)]
+    return bool(dirs) and not any(all(a * u + b * v <= 0 for a, b, _ in cons) for u, v in dirs)
+
+
 def implied(cons, a, b, c):
-    """Every point of the (bounded) polygon satisfies a x + b y <= c."""
+    """Every point of the polygon, checked bounded and nonempty, satisfies a x + b y <= c."""
     vs = vertices(cons)
-    if not vs:
+    if not vs or not bounded(cons):
         raise ValueError("empty or unbounded target polygon")
     return max(a * x + b * y for x, y in vs) <= c
 
@@ -140,6 +156,12 @@ def main():
     hull = parse_hull(open(a.sq19 + "/Sq19Lean/Endgame/HullData.lean", encoding="utf-8").read())
     res, ok = {"hull_squares": [q["s"] for q in hull]}, True
     print(f"Hull.prob: {len(hull)} squares, record numbers {[q['s'] for q in hull]}")
+    # Vertex enumeration decides implication only on a bounded, nonempty polygon.
+    polys = [cons for st in ("S3442", "S3435", "S3438", "S3435P0") for _, _, cons in parse_targets(reg, st)]
+    poly_ok = all(vertices(cons) and bounded(cons) for cons in polys)
+    res["target_polygons"], res["target_polygons_bounded_nonempty"] = len(polys), poly_ok
+    ok &= poly_ok
+    print(f"{'PASS' if poly_ok else 'FAIL'}  all {len(polys)} target polygons are bounded and nonempty")
     for st in ("S3442", "S3435", "S3438"):
         T = parse_targets(reg, st)
         own, kq = parse_vec(reg, f"{st}.own"), parse_vec(reg, f"{st}.kq")
