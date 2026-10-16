@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 33
+version: 34
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T13:48:51.489Z
+updated_at: 2026-10-16T14:04:52.186Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -136,3 +136,5 @@ After each merge: retarget the next PR to `main`, re-cut the site edition (v0.7.
 2026-10-16 ~13:50Z coordinator, update to the handoff: #657 at 7b91fb238 (lane J): review B's B1 (sweeps sparse checkout), B2 except the poster composites (bound citations, X049/contact-shade censuses, translation-escape screen, #574 claim record, 302 closed form, rigidity blocks), B3 (211 to PENDING_ALLOWED under think-r3cl, now 8 counts: 211 232 237 264 271 302 303 304) and B5 fixed. Not fixed: the poster composites, so suite-a's test_known_best_atlas poster/caption tests fail until the infographics successor (think-nv87) is cut at the top of the stack; B4 is think-cmj7. Hosted CI at 7b91fb238 was still running at handoff. #657 needs a follow-up review of these fixes and the owner's word at 176 before merge.
 
 2026-10-16 13:50Z coordinator, last handoff item: the T-193 review lane (think-7qxm, user-eb-review-193) did not file a final report or its own PR; its review document (docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md) and kept programs are on claude/intake-2026-10-16-review-193 at 84bab51bb and reach main only through #658, whose review checked the rungs table but not the review document itself. Before merging #658: a senior review of that document (as #648/#652/#655 had). Session ends; no sub-agent is left running work that matters.
+
+14:05Z handoff update: PR #657 is at 5d5eb2dec. Lane J regenerated composite-figure.json and re-pinned DATA_REVISION. sweeps, suite-d and validate are now green. suite-a is red only on the poster caption and credit tests, which wait for the infographics cut (think-nv87). The T-193 review lane (think-7qxm) was stopped. Its worktree is clean and its document is pushed at 84bab51bb; it reaches main through #658. Nothing has been merged.
