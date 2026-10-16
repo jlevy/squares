@@ -9296,8 +9296,9 @@ issues:
       counts the side is below all of them, by 1.5e-99 to 7.8e-35; at 51 it is the (16 + 5√2)/3 the
       record holds; at 70, 153 and 207 it agrees to 40 places with #574's algebraic sides (T-174), whose
       adoption is the owner's decision RP-3; and at 172, 263 and 297 #574's rational certificates are
-      smaller, by about 1e-62. Not yet retained; the source's replay, under a CPU-hour, runs from the
-      packet. Claude assistance disclosed.
+      smaller, by about 1e-62. Retained on 16 October in the evand-exact-cur-2026-10-16 packet; the 16
+      October report-order ledger (campaign/issue-intake/upper-bounds-20261016) agrees with the triage at
+      every count, and T-193 registers the 16 recorded counts. Claude assistance disclosed.
     read_through: '2026-10-16T03:37:13Z'
     results:
     - key: exact-sides-below-record
@@ -9307,16 +9308,10 @@ issues:
         15/2 + 3√2 and s(295) <= 22(1 + √2)/3; each below every side the record holds or has pending at
         its count.
       source: body
-      not_registered: >-
-        Triage only. Stage 2 retains search/exact/cur/ and verify_exact.py at 7d1407a in a packet, and
-        stage 3 runs the report-order ledger, since #574 and #593 are open reports at these counts, then
-        registers one reported entry. Below the smallest standing side by 5.9e-95 (88), 3.7e-88 (102),
-        9.0e-95 (123), 7.8e-35 (126), 1.0e-76 (175), 4.5e-88 (199), 1.5e-99 (204), 1.6e-99 (232),
-        1.5e-94 (258), 1.4e-94 (259), 1.5e-94 (266), 1.2e-64 (267), 1.7e-79 (292), 1.9e-94 (295),
-        2.0e-94 (301) and 1.8e-39 (302), T-186's at 175, 204, 232 and 302 and T-174's elsewhere.
-        Polynomial minimality is the source's assertion: no program of the source checks irreducibility.
-      queued: true
-      bead: think-phyb
+      register:
+      - T-193
+      evidence:
+      - E-evand-639-exact-sides-report
     - key: exact-side-51
       claim: s(51) <= (16 + 5√2)/3, the root of 9x^2 - 96x + 206.
       source: body
@@ -9331,9 +9326,9 @@ issues:
         Equal to 40 places, at the same degree, to the algebraic sides #574 reported on 13 October
         (T-174), and a tie stays with the earlier report. Their adoption is the owner's decision RP-3,
         which notes they rest on one route; the source's configurations and checker are a second, and
-        the replay in think-g59l carries them to it.
-      queued: true
-      bead: think-phyb
+        the replay of think-g59l, which ran the source's checker on all 23 files, carries them to it.
+        The 16 October ledger decides the three ties exactly (review/exact_sides.py there).
+      queued: false
     - key: exact-sides-above-574
       claim: s(172), s(263) and s(297) <= S*, the roots of polynomials of degree 12.
       source: body
@@ -9378,7 +9373,9 @@ issues:
       the issue (https://x.com/ofitzharding/status/2110935681597874374). The repository, with the
       announcement as X returned it, is retained in the fitzharding-n19-lean-2026-10-16 packet. A full
       rebuild, several hours on 64 cores by the source's account, is above the pass's cap and held for the
-      owner. Claude and Codex assistance disclosed.
+      owner. Registered on 16 October 2026 as T-194, an optimality result at V0/C0, with its bibliography
+      key and a link from the n = 19 case page; its mathematical review (think-o40t) is the next step.
+      Claude and Codex assistance disclosed.
     read_through: '2026-10-16T03:41:08Z'
     results:
     - key: n19-optimality-lean
@@ -9390,20 +9387,17 @@ issues:
         a kernel replay of the theorem's 13,143-module import closure with no failure, and no complete
         rebuild from source yet.
       source: body
-      not_registered: >-
-        Triaged and retained: the fitzharding-n19-lean-2026-10-16 packet holds the tree at 34fb2b7 and the
-        announcement, and pins the release archives by digest. The mathematical review (think-o40t) can
-        start, and stage 3 registers a new entry as reported, with its bibliography key. The full build
-        (think-nqnl) is held above the owner's 40 CPU-hour cap.
-      queued: true
-      bead: think-a4x3
+      register:
+      - T-194
+      evidence:
+      - E-n019-fitzharding-lean-report
     asks:
     - what: Link the proof from the n = 19 case page.
-      state: queued
-      bead: think-a4x3
+      state: done
       note: >-
-        packing/frontier/n-019.md links it in the change that registers the result, as n-017.md links
-        sq17-lean under T-154.
+        packing/frontier/n-019.md links the repository and the retained packet, in a dated intake
+        paragraph, a priority note and its resources, in the change that registers T-194, as n-017.md
+        links sq17-lean under T-154. The case's lanes and status are unchanged.
     beads:
     - think-a4x3
     - think-o40t

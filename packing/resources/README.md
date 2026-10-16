@@ -1347,8 +1347,8 @@ modules it compiles from sq17-lean `v1.0.0`. It thanks this project and Manasseh
 and says it was “Developed with substantial assistance from Claude and Codex”.
 The author announced it on X at 2026-10-16T03:27:40Z
 (<https://x.com/ofitzharding/status/2110935681597874374>), retained in the packet, and
-asked for its registration in issue #640 at 03:41:08Z. The key’s entry in
-`bibliography.yaml` is added by the change that registers the result.
+asked for its registration in issue #640 at 03:41:08Z. T-194 records the claim at V0/C0,
+pending a mathematical review and a complete build.
 
 ## Daniil Ostashev’s and Rio Calle’s certificates, 12 October 2026
 
@@ -1657,6 +1657,24 @@ is pinned by size and SHA-256 and kept outside Git.
 T-192 records the claim at V0/C0, after T-142, pending a complete replay and review.
 The source says parts of the work were produced with AI assistance under human
 direction.
+
+## The Intake of 16 October 2026
+
+**[Daniel exact current records 2026-10-16]**: Evan Daniel’s exact algebraic sides of
+the record’s best-known packings at 23 counts, each the one root of an integer
+polynomial of degree 2 to 41 in a rational interval, realised by an exact configuration
+over a number field, pinned at `7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1` and asked for
+in issue #639. 19 of the 23 data files are retained as their upstream gzip and the four
+largest are pinned by size and SHA-256;
+[packet](web/evand-exact-cur-2026-10-16/README.md).
+The source’s `verify_exact.py`, read and run here from the retained copy, accepts all 23
+and refuses every mutated control.
+T-193 records the 16 counts the
+[16 October ledger](../campaign/issue-intake/upper-bounds-20261016/README.md) records,
+below every earlier report there, at V0/C0, pending review and adoption; at 51, 70, 153
+and 207 the side ties a side the record holds, and at 172, 263 and 297 PR #574’s
+rational certificates are smaller.
+Claude assistance disclosed.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
