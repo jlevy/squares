@@ -175,11 +175,12 @@ The same record’s `states` gives every count, n = 1..324, its regularization s
 is drawn, the drawn picture’s measures, the witness (its id, its source’s key, path and
 revision, and its side), the runs that decided that witness, and one of `regularized` (a
 view of Evan Daniel’s regularizer or the grid-slack generator is drawn),
-`regular-as-published` (the house drawing has no uneven and no near-axis square, and no
-strong view of the count has lapsed), `decided-no-better` (the strong generators ran on
-this witness and drew nothing the improvement rule takes), `exempt` (set aside with the
-bead that owns it) or `pending`. The axis tool’s view alone never makes a count
-regularized: it is the reference and fallback.
+`regular-as-published` (the house drawing has no uneven and no near-axis square, no
+strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
+bead’s runs), `decided-no-better` (the strong generators ran on this witness and drew
+nothing the improvement rule takes), `exempt` (set aside with the bead that owns it) or
+`pending`. The axis tool’s view alone never makes a count regularized: it is the
+reference and fallback.
 A count is `decided-no-better` without an entry of its own where the layer holds a
 strong generator’s view of the current witness that the rule does not draw; otherwise
 the decision goes into `default_drawings.SETTLED` with the runs, the outcome, where it
@@ -323,8 +324,9 @@ grid-slack view against the new $U$, and the next selection can draw either.
 ## When a Witness Changes
 
 A drawn view lapses when its source witness changes, by a new record at the count or a
-corrected witness (policy section 5). `packing-validate --records` then reports that the
-witness changed since its view was derived.
+corrected witness (policy section 5). In `packing-validate --records`, `--check-atlas`
+reports the stale view until `--update-atlas` redraws it, and `--check-state` reports
+the pending count after that.
 A house adoption is the usual cause, and these steps belong to the pull request that
 adopts it: the import runbook’s
 [Adopt a House, Then Regularize It](../../../packing/campaign/result-import.md#adopt-a-house-then-regularize-it)
@@ -341,20 +343,32 @@ To redraw the count:
    count’s state, until a strong generator’s view is admitted again.
 2. Run `python -m devtools.default_drawings --update`. The count is now `pending`, even
    where the new house has no uneven and no near-axis square, and `--check-state` fails
-   on it.
+   on it. So is a count `PENDING_ALLOWED` names, whatever its new house reads.
 3. Run both generators on the new witness, grid-slack at 0.5, 1 and 5 degrees and Evan
-   Daniel’s driver, then select and admit as above: 5 to 15 CPU-minutes a count in all.
-   Where neither draws better, settle the count in `default_drawings.SETTLED` with the
-   runs and the new witness’s source key, path, revision and side.
-   Where the runs must wait, allow the count in `PENDING_ALLOWED` with the open bead
-   that owns them, in the same pull request as the adoption, so the deferral is
-   reviewed. Nothing but review limits how many counts join the list; the gate prints its
-   size.
+   Daniel’s driver, then select and admit as above: 5 to 25 CPU-minutes a count in all.
+   Give each run a directory no earlier run used, since the layer records a run by its
+   directory’s name; `adopt_houses` prints names for the adoption’s day that no run in
+   the index has. Where neither draws better, settle the count in
+   `default_drawings.SETTLED` with the runs and the new witness’s source key, path,
+   revision and side. Where the runs must wait, allow the count in `PENDING_ALLOWED` with
+   the open bead that owns them, in the same pull request as the adoption, so the
+   deferral is reviewed.
+   Then run `default_drawings --update` again, since the record copies the entry into
+   the count’s reason, and step 5, since `--update-atlas` redrew the axis views.
+   List each deferred count’s drawing before and after in the pull request with
+   `python -m devtools.default_drawings --compare BASE`, where `BASE` is the base
+   branch’s `default-drawings.json`; where a strong view gives way to a house drawing
+   with an uneven or a near-axis square, the adoption waits for the owner’s word.
+   Nothing but review limits how many counts join the list; the gate prints its size.
 
 Until 15 October 2026 the lapse was only printed, and the adoptions of #553, #598 and
 #614 left twenty counts drawn without a strong generator’s decision on their witness: at
 n = 176 the raw house was drawn while the index said `regularized`. Those twenty are the
-allowlist’s first entries (think-la7h, think-kpm3, think-3zi3).
+allowlist’s first entries (think-la7h, think-kpm3, think-3zi3). Fourteen of them lost a
+strong view before the axis record kept a `lapsed` block, and the Evan Daniel views of
+272 and 304 were never admitted to the index at all.
+Their entries in the list are the record of it, so a count on the list stays pending
+whatever a new house reads, until its bead’s runs decide it (review B1 of #641).
 
 A run that decides allowed counts takes them off `PENDING_ALLOWED` in its own pull
 request. Close a bead that the list, an exemption or a decision’s `owed` names only once

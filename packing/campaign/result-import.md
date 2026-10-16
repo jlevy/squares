@@ -137,9 +137,10 @@ claude/intake-YYYY-MM-DD, with today's date.
    reviews, and when") as soon as its source is retained, in parallel. Where a
    confirmed result moves a house, adopt it with devtools.adopt_houses and regularize
    every count it re-houses in the same pull request (stage 5, "Adopt a House, Then
-   Regularize It"): the strong generators on the new witness when they fit under the
-   compute cap, otherwise the count added to default_drawings.PENDING_ALLOWED with the
-   open bead that owns its runs.
+   Regularize It"), priced as one validation item at the total adopt_houses prints:
+   the strong generators on the new witness when that fits under the compute cap,
+   otherwise each pending count added to default_drawings.PENDING_ALLOWED with the
+   open validation bead that owns its runs, and its drawing listed before and after.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
@@ -626,36 +627,66 @@ witness from the retained certificate, and `devtools.adopt_houses` moves the cas
 records; its docstring, under “A later pass”, lists what the pass adds first.
 
 A new house is a new witness, and the count’s regularized view lapses with it.
-So the pull request that adopts the house regularizes every count it re-houses, by the
-regularization guide’s
+So every count whose known-best witness changes is regularized in the pull request that
+changes it. A house adoption is the usual cause; a corrected witness, or a result that
+`build_known_best_atlas --update` takes into the atlas, is another.
+The steps are the regularization guide’s
 [When a Witness Changes](../../docs/project/guides/regularization-process.md#when-a-witness-changes):
 `build_known_best_atlas --update` writes the new witness, the axis tool’s
-`--update-atlas` redraws its view, and `default_drawings --update` names each count left
-`pending`; then both strong generators run on each pending count, and the selection
-admits what improves on the drawing.
+`--update-atlas` redraws its view, `default_drawings --update` records each count’s
+state, and `--check-state` names each count left `pending`. Then both strong generators
+run on each pending count, and the selection admits what improves on the drawing.
 Where neither draws better, the count is settled as the guide says.
 `adopt_houses` prints the re-housed counts and these commands when it writes, and with
 `--dry-run` before it does.
+It names the run directories for the adoption’s day, since the layer records a run by
+its directory’s name and a repeated name would replace an earlier run’s record.
 
-The strong runs cost 5 to 15 CPU-minutes a count, from the layer’s run receipts: Evan
-Daniel’s driver takes 140 to 220 CPU-seconds a count
-(`evand-regularize-adopt518-v2-rerun-2026-10-13`,
-`evand-regularize-refreshed-adopt518-v2`), grid-slack 37 to 110 CPU-seconds a count at
-each of its three thresholds (`grid-slack-deg5-1013-b`, `grid-slack-all`), and the
-selection up to about four minutes for the largest view.
-Ten re-housed counts take 50 to 150 CPU-minutes.
-They run under the pass’s [compute cap](#the-compute-cap-and-the-validation-backlog), as
-a replay does. Where they do not fit, or must wait for another reason, the adoption’s
-pull request adds each pending count to `default_drawings.PENDING_ALLOWED` with the open
-bead that owns its runs, so the deferral is reviewed with the adoption.
+The strong runs cost 5 to 25 CPU-minutes a count, from the layer’s run receipts:
+
+- Evan Daniel’s driver takes 140 to 220 CPU-seconds a count
+  (`evand-regularize-adopt518-v2-rerun-2026-10-13`,
+  `evand-regularize-refreshed-adopt518-v2`);
+- grid-slack takes 37 to 110 CPU-seconds a count at each of its three thresholds
+  (`grid-slack-deg5-1013-b`, `grid-slack-all`);
+- the selection takes seconds to about four minutes for each of a count’s four candidate
+  views, a figure no receipt yet measures on a new witness.
+
+Ten re-housed counts take 50 to 250 CPU-minutes.
+The regularization an adoption owes is one validation item, priced at the total
+`adopt_houses` prints and held to the pass’s
+[compute cap](#the-compute-cap-and-the-validation-backlog) as a replay is.
+Within the cap, it runs in the pass.
+Above it, or with no cap set and a total above minutes, it is held, and its counts are
+deferred:
+
+1. The adoption’s pull request adds each pending count to
+   `default_drawings.PENDING_ALLOWED` with the open bead that owns its runs, labelled
+   `validation` and carrying stage 4’s `## Validation` block, with a row in the backlog
+   bead.
+2. It runs `default_drawings --update` again, since the record copies the entry into the
+   count’s reason, and then the guide’s render step.
+3. It lists each deferred count’s drawing before and after, with
+   `default_drawings --compare` on the base branch’s record.
+   Where a strong view gives way to a house drawing with an uneven or a near-axis
+   square, as it did at n = 176, the adoption waits for the owner’s word or for its
+   runs.
 
 The records tier’s
 `every drawn picture is regularized, regular as published, decided or exempt`
 (`default_drawings --check-state`) fails on a pending count that the list does not name,
 so an adoption cannot pass without one or the other.
-The adoptions of #598 and #614 refreshed only the axis tool’s views, and left twenty
-counts without a strong generator’s decision on their witness, with the raw house drawn
-at n = 176, until that gate was added (think-sfas).
+It also fails on a listed count that is no longer pending and on a `SETTLED` entry
+decided on the earlier witness.
+So the adoption’s pull request takes each count its runs decided off the list, and
+settles each such entry again or removes it.
+A new house that reads regular does not take a listed count off: on the list, a count
+waits for the runs its bead owes.
+The adoptions of #553, #598 and #614 refreshed only the axis tool’s views, and left
+twenty counts without a strong generator’s decision on their witness, with the raw house
+drawn at n = 176, until that gate was added (think-sfas).
+Fourteen of the twenty lost a strong view before the index recorded lapses, and their
+entries in the list are the record of it.
 
 ### Label the PR and Prepare News
 
