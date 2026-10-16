@@ -252,7 +252,10 @@ On 16 October 2026 both generators ran again on the nine witnesses jlevy/squares
 adopted in `60aa1d39e`, whose strong views had lapsed to the axis tool’s (think-la7h):
 Evan Daniel’s regularizer (`evand-regularize-3a-1016`) and grid-slack at 0.5, 1 and 5
 degrees (`grid-slack-3a-deg05-1016`, `grid-slack-3a-deg1-1016` and
-`grid-slack-3a-deg5-1016`), 6,188 CPU-seconds in all.
+`grid-slack-3a-deg5-1016`), 6,188 CPU-seconds in all by the producing session’s notes.
+The index records the first two, from which views are drawn (3,559.68 and 915.99
+CPU-seconds); the runs at 1 and 5 degrees, about 1,712 CPU-seconds, left no block,
+receipt or report in this repository.
 At 176, where the axis tool’s view drew more uneven squares than the house and the raw
 house was drawn, his same-side view is drawn: light / uneven / near-axis squares go from
 70 / 71 / 52 to 11 / 24 / 0, angle classes from 83 to 6, and house sides from 33 to 457.
@@ -263,29 +266,51 @@ three counts neither generator draws better, and the axis tool’s view stays: a
 303 grid-slack’s view ties it on every goal at all three thresholds, while his view is
 refused at row 7 at 204 and held at row 4 at 303, solved above $U$; at 272 grid-slack’s
 view is refused at row 7 at every threshold (stage sides fall from 732 to 730), and his
-is held at row 4. `devtools.default_drawings.SETTLED` records the three as decided on
-these four runs. Those runs’ directories stayed on the host that ran them and could not
-be recovered, so the same generators ran again from main `e2e018f32`, the revision their
-selection ran on, and that evidence is retained in
+is held at row 4. At 272 and 303 there is no same-side view of his to decide: the
+same-side re-solve was refused (`same-side-refused: literal-too-large`: its exact
+coordinates are too long for Python to write as text), and the solved view draws fewer
+shared sides, at 303 than the witness (house sides 758 to 708, stage sides 798 to 724)
+and at 272 than the drawn picture (stage sides 732 to 724). A same-side view of either
+arrangement would most likely be refused at row 7 too, though none exists to measure, so
+neither settlement rests on how little the solved side exceeds $U$
+($2.6 \times 10^{-31}$ at 303, $1.7 \times 10^{-19}$ at 272). The producer’s run
+directories stayed on the host that ran them and could not be recovered, so the same
+generators ran again from main `e2e018f32`, the revision their selection ran on, and
+that evidence is retained in
 [`cases/regularized_drawings/think-la7h-2026-10-16/`](../../cases/regularized_drawings/think-la7h-2026-10-16/):
-`regularize_select`’s report (`selection-3a.json`, every candidate’s decision and
-reasons, and `selection-3a.md`), each run’s per-count `report.json`, gzip-compressed, a
-`run.json` for each grid-slack run (the block `regularize_grid_slack.run_block` computes
-from its reports), and the driver’s `receipt.json`. Grid-slack ran on all nine counts at
-all three thresholds (`grid-slack-3a-rerun-deg05-1016`, `-deg1-1016` and `-deg5-1016`; a
-container restart killed 105 and 176 at five degrees, which ran again as
+`regularize_select`’s reports (`selection-3a.json` and `selection-3a-d1.json`, every
+candidate’s decision and reasons, each beside its Markdown table), each run’s per-count
+`report.json`, gzip-compressed, a `run.json` for each grid-slack run (the block
+`regularize_grid_slack.run_block` computes from its reports), and each driver run’s
+`receipt.json`. Grid-slack ran on all nine counts at all three thresholds
+(`grid-slack-3a-rerun-deg05-1016`, `-deg1-1016` and `-deg5-1016`; a container restart
+killed 105 and 176 at five degrees, which ran again as
 `grid-slack-3a-rerun-deg5b-1016`). The driver ran 105, 129 and 146
-(`evand-regularize-3a-rerun-1016`, stopped there for time, so it has no receipt) and 204
-and 272 (`evand-regularize-3a-rerun-s-1016`), then 303 alone
-(`evand-regularize-3a-rerun-303-1016`); it did not run again at 156, 176 or 271. Every
-outcome the runs cover reproduces: grid-slack’s half-degree view at 105 and Evan
-Daniel’s views at 129 and 146 are chosen with the drawn views’ measures, his same-side
-views at 105 and 204 are refused at row 7, and his solved views at 204, 272 and 303 are
-held at row 4, above $U$; at 204 and 303 grid-slack’s view ties the drawn picture on
-every goal at all three thresholds, and at 272 it is refused at row 7 at all three
-(stage sides 732 to 730). Without his views, the selection chooses grid-slack’s at 156
-and 271, which the drawn views dominate, and none at 176, where grid-slack’s view goes
-to review (row 7).
+(`evand-regularize-3a-rerun-1016`, stopped there for time, so it has no receipt), 204
+and 272 (`evand-regularize-3a-rerun-s-1016`), 303 alone
+(`evand-regularize-3a-rerun-303-1016`), and 156, 176 and 271
+(`evand-regularize-evand-addr644-1016`, 916.52 CPU-seconds, review D1 of #644).
+`devtools.default_drawings.SETTLED` records the three settlements as decided on the two
+recorded originals and on the reproductions that cover them, and `--check-state` fails
+on a run it names that no record holds.
+Every outcome reproduces, and every drawn view byte for byte.
+At 129, 146, 156, 176 and 271 `regularize_evand rungs --check` finds his admitted view
+the drawn view’s text exactly, with the same retry rungs (none), regularizer level (2)
+and groups, contact histograms and regularization record.
+At 105 grid-slack’s half-degree view is the drawn view, and so are its views at 1 and 5
+degrees (reviews D and E of #644 compared the bytes).
+His same-side views at 105 and 204 are refused at row 7, and his solved views at 204,
+272 and 303 are held at row 4, above $U$; at 204 and 303 grid-slack’s view ties the
+drawn picture on every goal at all three thresholds, and at 272 it is refused at row 7
+at all three (stage sides 732 to 730). `selection-3a.json` was made before the driver
+ran 156, 176 and 271, and without his views there it chose grid-slack’s at 156 and 271,
+which the drawn views dominate, and none at 176, where grid-slack’s view goes to review
+(row 7); `selection-3a-d1.json`, over his new run and grid-slack’s runs at those three
+counts on main’s tree, chooses his view at each, with the drawn views’ measures.
+After this batch the index draws 92 views: 28 by the axis tool, 49 by Evan Daniel’s
+regularizer (30 at the witness’s side and 19 at the verified upper bound) and 15 by the
+grid-slack generator (1 by its version 0 and 14 by its version 1), with 181 records
+unchanged and 51 refused.
 
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
