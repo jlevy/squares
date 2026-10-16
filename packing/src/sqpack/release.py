@@ -88,7 +88,9 @@ PUBLICATION_HISTORY = (
         version="v0.7.11",
         first_published="October 15, 2026",
         result_scope=(
-            "Say on each case page whose house is drawn that it is drawn as published, and why."
+            "Register five results in report order, T-188 to T-192, none adopting a "
+            "house: smaller reported packings of 211 and 237 squares, a reported s(95) = "
+            "10, a reported lower bound for 28 squares and 267 beyond-horizon rows."
         ),
     ),
     PublicationHistoryEntry(
@@ -349,7 +351,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "afdf5cc6589c6d6c6aea84a5a6e3d02778632f0d"
+DATA_REVISION = "e35725f07262e1d3659da7044490fbbbaa1f089b"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -776,7 +778,9 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.7.11",
         impact="patch",
         reason=(
-            "Say on each case page whose house is drawn that it is drawn as published, and why."
+            "Register five results in report order, T-188 to T-192, none adopting a "
+            "house: smaller reported packings of 211 and 237 squares, a reported s(95) = "
+            "10, a reported lower bound for 28 squares and 267 beyond-horizon rows."
         ),
     ),
     ReleaseImpactDecision(
@@ -1051,27 +1055,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
-        components=("paper:n11-lower-bounds-explainer",),
-        paths=(
-            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
-            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
-            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
-        ),
-        outputs=(
-            "papers/n11-lower-bounds-explainer.html",
-            "papers/n11-lower-bounds-explainer.md",
-        ),
-        reason=(
-            "The site cut v0.7.11 regenerated the five claim documents at "
-            "PUBLICATION_REVISION dcfcf811; by diff, each changes only the revision its "
-            "repository links pin, 95c55298 to dcfcf811, and no claim, certificate or "
-            "command. A link revision follows the site's edition and is not a revision of "
-            "the explainer, so it keeps v0.4.7. Source-reviewed; no render was taken."
-        ),
-    ),
-    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer", "site"),
         paths=("packing/src/sqpack/cli/validate.py",),
         outputs=(
@@ -1166,6 +1149,77 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "GitHub source-link revision substitutions. Mathematical statements, "
             "certificate inputs and paper content are unchanged. No paper PDF was "
             "rebuilt or compared for byte identity."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Rendered on this branch over main 6e73ef1c with the browser's math pass, once "
+            "with main's versions of these paths and once with the branch's, the Markdown "
+            "and HTML differ only in the live register count beside T-018, 187 results "
+            "registered so far and now 192. Over main 4c9af690 the HTML also differed in "
+            "where an empty style attribute falls in one formula's span, which moves "
+            "between two renders of the branch alone. The claim documents change only the "
+            "revision their links pin. A register count follows the site's data and is not "
+            "a revision of the paper, so the explainer keeps v0.4.7; the site takes v0.7.11. "
+            "Rendered again after the PR #627 review fixes, with the register and source "
+            "register as they stood at 52f02f5b and as fixed (T-188 to T-192's notes, "
+            "significance and regularizations, two source notes), the Markdown is "
+            "byte-identical and the HTML differs only in that same empty style attribute."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Rendered on this branch over main 6e73ef1c at one link revision, once with "
+            "main's versions of these paths and once with the branch's, the three papers' "
+            "HTML, Markdown and PDF are byte-identical, but for one main-side print of the "
+            "optimality review, 4 bytes shorter from identical HTML; two further main-side "
+            "prints equal the branch's three. The register gains T-188 to T-192 "
+            "and edits T-081's claim and T-183's headline, the importer gains three "
+            "readers, the About page a card for bengreff/s95-certificate, the requests "
+            "record replies and entries, and the source register 267 beyond-horizon rows; "
+            "none of the three papers reads any of them, so each keeps its edition: "
+            "v0.1.7, v0.1.0 and v0.2.2. Rendered again after the PR #627 review fixes, "
+            "with the register and source register as they stood at 52f02f5b and as fixed "
+            "(T-188 to T-192's notes, significance and regularizations, two source notes), "
+            "the three papers' HTML and Markdown are byte-identical."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2184,7 +2238,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "dcfcf811"
+PUBLICATION_REVISION = "5791b79b"
 
 
 def data_pathspec() -> tuple[str, ...]:

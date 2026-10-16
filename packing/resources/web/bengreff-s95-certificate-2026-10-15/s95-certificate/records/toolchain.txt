@@ -1,0 +1,14 @@
+Environment of the certification runs (2026-10-14)
+
+host      Intel Core i7-14700K, Linux 5.15.167.4-microsoft-standard-WSL2 (Ubuntu 22.04)
+rustc     1.99.0 (b940084d7 2026-09-28)
+zmx2      built from evand/square-packing@b91d70b6ed314624c1434b628a9c7bf9a132c743
+          (cargo build --release --bin zmx2); binary sha256
+          8b4dfd1e8c8b0f3e48c6c18f6af1168c868fe1582428706830acb399a11c321b
+python    3.11.17, numpy 2.4.6
+
+zmx2 cert --d4 --threads 26 --uncert-cap 200000: 12 s wall, 309 CPU-s (records/zmx2/zmx2_s95_v2.out)
+zm_mixed on the 304 sub-roots, 26 in parallel (--nproc 1 each): 2,771 CPU-s in total
+
+construction only (not needed to check the proof): CuPy 14.2.0 on an NVIDIA GeForce RTX 4070 Ti SUPER
+(driver 591.86), HiGHS 1.15.1 (highspy) as the fallback LP solver

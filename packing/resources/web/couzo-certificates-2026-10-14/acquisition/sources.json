@@ -1,0 +1,210 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T23:30Z",
+  "git_scope": "Blobless clone with a sparse checkout of the scope at the pinned commit for issue #607, the head of master when retrieved. The commit adds only submissions/2026-10-14/ (50 files) to its parent 487b058, the commit whose upper_bounds.json the issue compares against; the index's blob is the same at both commits. The 23 certificates under submissions/2026-10-14/certificates/ are retained as factual data. The submission README, manifest, SHA256SUMS, checker receipts and per-certificate checker logs, the root README and upper_bounds.json are pinned by digest only. The rest of the tree, including 487b058's certificates/ directory, the drawings and the search programs, is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "franciscouzo-square-packing",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "master",
+      "source_commit": "43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2",
+      "committed_utc": "2026-10-14T19:15:09Z",
+      "git_tree": "17312eac943e63fbf9abc196c81a3e9343c4a76f",
+      "archived_path": "packing/resources/web/couzo-certificates-2026-10-14/source",
+      "subtree_manifest": "packing/resources/web/couzo-certificates-2026-10-14/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "submissions/2026-10-14",
+        "upper_bounds.json"
+      ],
+      "subtree_file_count": 52,
+      "subtree_total_bytes": 3823642,
+      "retained_file_count": 23,
+      "retained_total_bytes": 3048022,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 41216,
+          "sha256": "714821a066d49f908fafab480585bc674c2e19d03413ed1ec8833758b3529c10",
+          "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "submissions/2026-10-14/README.md",
+          "bytes": 5378,
+          "sha256": "ca845e5fb770d5d1040705b92b1a4c0135e663f0733d5304f502555b52944ba8",
+          "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "submissions/2026-10-14/SHA256SUMS",
+          "bytes": 4458,
+          "sha256": "4dfc242a94bb3d73f01548c41b7215f3c397c888722e89b1ddc555f23f3353c3",
+          "reason": "The source's digest list for the submission; pinned for provenance, as the manifest here binds every file."
+        },
+        {
+          "path": "submissions/2026-10-14/manifest.json",
+          "bytes": 33981,
+          "sha256": "3f27afef32b599e00745d0b5589a61efc0fd069e3b27c509d8f3c6556bb95ea4",
+          "reason": "The source's provenance manifest: exact sides, digests, prior index bounds, credit as prose and the author's checker outcomes; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification-receipts.json",
+          "bytes": 2967,
+          "sha256": "452027af8649f2ea6dbcc74e9d0abeeddc9b60081a12c6884b58be6f9b1b5fbb",
+          "reason": "The author's record of Evan Daniel's checker run; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n237.evand.txt",
+          "bytes": 301,
+          "sha256": "777faabcf2cf4e2218e18278550cb44047730272a9ccf1af58fa1745cc899846",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n339.evand.txt",
+          "bytes": 302,
+          "sha256": "e223e862a8c54857b6b84ff7bdc88f3f2603e8c512fdb4adb981e11e6d7d52cb",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n342.evand.txt",
+          "bytes": 302,
+          "sha256": "ea0a2c8c23136353b9c4c327da0f0af680ae38b8dd502c51bcc1648f977f0216",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n382.evand.txt",
+          "bytes": 381,
+          "sha256": "b0a3d2ed628a09743c375089b2a3c3e68ce300590ccf30272c99f2ef3772b217",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n409.evand.txt",
+          "bytes": 304,
+          "sha256": "aa602fb77cb33cb0e0864967f556b14c426508946b53fa38b7d8f2f6fcd31f6b",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n419.evand.txt",
+          "bytes": 378,
+          "sha256": "d45a13fbc346da1e5e932a02465ac3204462abbfd2e82a7d8414277d5ad53086",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n450.evand.txt",
+          "bytes": 306,
+          "sha256": "b70fbd3bccd447e94fbea4805031b087e612312376691935692b61de8ef72177",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n461.evand.txt",
+          "bytes": 381,
+          "sha256": "531b9224dbbe9679ccba9ab5483a1769bd9ed68af639801af8be63b68757e7f7",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n542.evand.txt",
+          "bytes": 302,
+          "sha256": "c5eb5c659d38974e7272896d677192447e66d8115338b24b66681d28f13a33a3",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n552.evand.txt",
+          "bytes": 356,
+          "sha256": "b905850c4b7197d17611a2d96490cc47dfd99b09344896b59c79d5b1b036c860",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n599.evand.txt",
+          "bytes": 306,
+          "sha256": "0269d9cfc790ad3a32aea05fabeaf71b19c6e4279e68ceadae1dbf19ba6c726d",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n648.evand.txt",
+          "bytes": 303,
+          "sha256": "634d208ed632f7198187ebdf6d940d763dfd862db22f9b1264fcbc182edbf4bc",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n649.evand.txt",
+          "bytes": 303,
+          "sha256": "9c289b1f80115b9db572e2323c8e8b921372866bd221cbfc3113d24005692a7e",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n651.evand.txt",
+          "bytes": 355,
+          "sha256": "ff21a341be0b458b68a8dae9a52f99b2721d1ed9c3e54fea8d2aee590d8c780e",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n703.evand.txt",
+          "bytes": 366,
+          "sha256": "5afd98360b651ec2911c856d7c9c7c7a1403bf3673dba1e5b2f9edf022145326",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n757.evand.txt",
+          "bytes": 429,
+          "sha256": "d09e1909778b8bcfb71edd7da79c1c9aaddc47494fcd8fe6bdea1c0182385ca5",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n804.evand.txt",
+          "bytes": 380,
+          "sha256": "4a65a5c6fdb90323f87e30b26e2106f0f448ec3d489400ec15b3d364d19dfed1",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n812.evand.txt",
+          "bytes": 432,
+          "sha256": "fc851e9be9de321efc7995c1d0f2632411ca4e45741dd6e4b6e8423bbc3aa34e",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n930.evand.txt",
+          "bytes": 432,
+          "sha256": "a9db94601d7233e5ab7a15c6be07ccfbcd4b09c58d99b721ff8b4a2251ff53b9",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n931.evand.txt",
+          "bytes": 366,
+          "sha256": "dab53aaa220ae3451538ec02e0ec091df0210092a53784fb0c6b56d85e0a541e",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n992.evand.txt",
+          "bytes": 430,
+          "sha256": "af1a7d7eed5c296982d7d2009cfd74276ad024262827b555279b5f7a9be35cf0",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n993.evand.txt",
+          "bytes": 348,
+          "sha256": "803ce144eced349347230787535c6a7cdc4b1f42c6317212daa6f73e861294e2",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "submissions/2026-10-14/verification/n994.evand.txt",
+          "bytes": 367,
+          "sha256": "92f254f4b3352ee8fed41676dc5e3eca13107b128cd99181bb2394dc552cd54b",
+          "reason": "The author's per-certificate logs of Evan Daniel's checker; the source's own check, pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "upper_bounds.json",
+          "bytes": 679490,
+          "sha256": "8880c84cdf21f1484cd97763bee5b8b263de1ef2218c6a67d69c984068895373",
+          "reason": "The author's comparison index, the same blob as at 487b058, which the issue cites for its 'previous verified bound' column; pinned for provenance, as no claim rests on it."
+        }
+      ],
+      "license": "No licence file or reuse terms at the pin: the tree has no LICENSE, and neither README.md nor submissions/2026-10-14/README.md states terms. The 16 campaign and precision certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). The seven composite certificates have the SHA-256 that Kevin Fang's composites/table.csv at TheSnakeFang/squarepack-certs 078789a lists for them, and that repository's README and ATTRIBUTION.md release composites/ under CC0 1.0. Prose is hash-pinned and not copied.",
+      "claims": [
+        "Issue #607 reports 14 campaign upper bounds, each its certificate's exact side rounded up at 12 places: s(237) <= 15.902603638284, a refinement of Mykhailo Polkovskyi's #593 certificate, and, beyond the n <= 324 case corpus, s(339) <= 18.915818555470, s(382) <= 19.987621154241, s(409) <= 20.767428349966, s(419) <= 20.959997582079, s(450) <= 21.767428350587, s(461) <= 21.973183753375, s(552) <= 23.968034845503, s(599) <= 24.968034846127, s(648) <= 25.968034846328, s(649) <= 25.976974088403, s(651) <= 25.984515068279, s(757) <= 27.991000865994 and s(804) <= 28.920398747577.",
+        "Issue #607 reports seven composites of Kevin Fang's Section 5 table at TheSnakeFang/squarepack-certs 078789a, credited to Fang as their construction author and independently replayed by the reporter: s(703) <= 26.999256308447, s(812) <= 28.988287236851, s(930) <= 30.988287236851, s(931) <= 30.994048655032, s(992) <= 31.997220361783, s(993) <= 31.991327887692 and s(994) <= 31.999256308447; two copied from Fang's shipped certificates and five regenerated with his tools/glue.py, each with the SHA-256 his table lists.",
+        "Issue #607 lists two certificate precision refinements separately from the 21 bounds: s(342) <= 18.964706723173 and s(542) <= 23.828427124774.",
+        "The checker statements (this repository's sqpack verify.py at 37e6757 and Evan Daniel's verify_cert.py at 622cd2e, and the campaign's Rust rational checker for the 16 campaign and precision certificates) are the author's; no optimality claim is made."
+      ]
+    }
+  ]
+}

@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **157** programs: **47** external and **110** first-party; **109** decide claims and **48** check premises.
-- **504** of **598** evidence entries name the programs that verified them: 251 reproduced with the producer’s code, 224 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
+- **160** programs: **49** external and **111** first-party; **111** decide claims and **49** check premises.
+- **506** of **603** evidence entries name the programs that verified them: 253 reproduced with the producer’s code, 224 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -40,8 +40,8 @@ second implementation agrees.
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | wand125 | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | wand125 | external | decides | 5 | 1 |
 | [`V-wand125-valid7-checker`](#v-wand125-valid7-checker) | valid7-independent-check (Tier A, Tier B and the record checker) | wand125 | external | decides | 2 | 2 |
-| [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 20 | 10 |
-| [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 7 | 7 |
+| [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 21 | 11 |
+| [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 8 | 8 |
 | [`V-evand-zeromargin-py`](#v-evand-zeromargin-py) | zeromargin.py | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-angle-net-verify`](#v-evand-angle-net-verify) | verify (the angle-net arrangement sweep) | Evan Daniel | external | decides | 10 | 5 |
 | [`V-evand-xcheck-py`](#v-evand-xcheck-py) | xcheck.py | Evan Daniel | external | decides | 4 | 2 |
@@ -74,7 +74,7 @@ second implementation agrees.
 | [`V-overbeck-n17-capture-checkers`](#v-overbeck-n17-capture-checkers) | recompute_slice.py | Overbeck | external | decides | 2 | 1 |
 | [`V-overbeck-n17-tree-checkers`](#v-overbeck-n17-tree-checkers) | wxcheck_v30.py and wxcheck2_v30.js | Overbeck | external | decides | 2 | 1 |
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 1 | 1 |
-| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 15 |
+| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 16 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 65 | 54 |
 | [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 59 | 57 |
@@ -189,6 +189,9 @@ second implementation agrees.
 | [`V-closed-form-review-replay-receipt`](#v-closed-form-review-replay-receipt) | review/replay_receipt_pieces.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-closed-form-review-family-probe`](#v-closed-form-review-family-probe) | review/family_probe.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-wand125-cfcheck`](#v-wand125-cfcheck) | cfcheck (indep-checker) | wand125 | external | decides | 2 | 1 |
+| [`V-wand125-sqverify-continuous`](#v-wand125-sqverify-continuous) | sqverify-fast --continuous | wand125, adapting this repository's sqverify_fast | external | decides | 1 | 1 |
+| [`V-wand125-contpose-check3`](#v-wand125-contpose-check3) | contpose_check3 v1.2 | wand125 (the driver, written to a specification for Codex), around Guzhou0806's kernels | external | decides | 1 | 1 |
+| [`V-continuous-pose-followup`](#v-continuous-pose-followup) | devtools.continuous_pose_followup | Squares Project (Levy) | first-party | premises | 0 | 0 |
 
 ## By Program
 
@@ -528,6 +531,7 @@ Decides a zero-margin point-and-segment cover by branch and bound over centre an
 | `E-n045-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-053 |
 | `E-n020-evand-point-cover-4886-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 | `E-bengreff-594-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-184 |
+| `E-bengreff-610-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-191 |
 
 ### `V-evand-zm-mixed-py`
 
@@ -548,6 +552,7 @@ The source's exact mixed point-and-segment cover checker, the predecessor zmx2 w
 | `E-n045-evand-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-053 |
 | `E-n020-evand-point-cover-4886-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 | `E-bengreff-594-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-184 |
+| `E-bengreff-610-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-191 |
 
 ### `V-evand-zeromargin-py`
 
@@ -1055,7 +1060,7 @@ Derives and checks the elementary bounds exactly: the grid upper bound, the area
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184 |
+| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184, T-191 |
 | `E-basic-area-lower` | replayed here | independently re-implemented | not recorded | - |
 | `E-n012-monotonicity-lower` | replayed here | independently re-implemented | not recorded | - |
 
@@ -3149,6 +3154,46 @@ Decides one interval of the closed-form certificate from SPEC.md: the input dige
 | --- | --- | --- | --- | --- |
 | `E-wand125-closed-form-cfcheck-report` | the source’s own run | independently re-implemented, clean-room | sample, 8 of 136: region records of the closed-form certificate | T-180 |
 | `E-wand125-closed-form-cfcheck-sample` | replayed here | independently re-implemented, clean-room | sample, 2,909 of 187,183,108: leaves of the closed-form certificate | T-180 |
+
+### `V-wand125-sqverify-continuous`
+
+**sqverify-fast --continuous, the source's sqverify_continuous v4** · wand125, adapting this repository's sqverify_fast · external · decides · Rust · interval-certified, exact-algebraic
+
+The source's copy of this repository's sqverify_fast with a continuous-angle mode (src/slab.rs): for a format M candidate, a core side B and a threshold tau, it covers t = tan(theta/2) over [10^-7, 83/200] in 86 root ranges by outward-rounded binary64 branch and bound over (u, v, t), with concave-section bounds and translation derivatives, and the band [0, 10^-7] by the crate's exact axis sweep at a side A with A W(10^-7) <= B, and checks n tau > M exactly.
+
+- Source: [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json)
+- Versions run: revision `d4a19815e2b0` (tools/sqverify_continuous at d4a1981, byte for byte the asset's check1/src/sqverify_continuous_v4.tgz (113,578 bytes, SHA-256 720869758013ac3cc86343f0603817ee36298be7696e40bb1d164a511f383a08), whose build reports source_sha256 619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5; built here with rustc 1.98.0 (cargo build --release --locked) into 31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618. Neither retained nor yet reviewed (think-xzob, #533).)
+- Note: It keeps this repository's interval.rs, exact.rs, axis.rs, oracle.rs and rotated.rs byte for byte; its certificate.rs is the source's proof_net admission. Its author read Guzhou0806's kernel before writing the mode, so it is independent code, not an independent method (think-xzob).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-continuous-n28-5745-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-192 |
+
+### `V-wand125-contpose-check3`
+
+**contpose_check3 v1.2, check.py and generator.py around kernel/continuous_pose.cpp and kernel/axis_integer_grid.cpp** · wand125 (the driver, written to a specification for Codex), around Guzhou0806's kernels · external · decides · Python, C++ · interval-certified, exact-algebraic
+
+Regenerates the T-145 kernels' two inputs from a rectangle candidate (D4 expansion, outward binary64 enclosure; the axis measure rounded inward and down, at a density scale lowered by powers of ten until its guards hold), runs the integer axis kernel and the continuous-pose kernel on T-145's 43 slabs, and accepts only when every slab is verified with nodes = 2 leaves - 1, the axis minimum is at least tau, and the exact counting, geometry, angle and near-axis premises hold.
+
+- Source: [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/check.py`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/check.py), [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/generator.py`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/generator.py), [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/continuous_pose.cpp`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/continuous_pose.cpp), [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/axis_integer_grid.cpp`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/axis_integer_grid.cpp)
+- Versions run: SHA-256 `f3629c29d682…`, revision `8530bafb03d4` (The source digest by VERSION.json's rule. Built here with g++ 13.3.0 and check.py's flags into the binaries its receipt names, continuous_pose c028f0e34356a14af08d2309e64eed8c7b90f638731db39c7ccb19ba88276191 and axis_integer_grid 3d144a459b8a8f267ba3c3447023ee8db649ed5e7c6cd49ce97ac194a3422055.)
+- Note: Its kernels differ from the reviewed T-145 copies (V-guzhou-n40-continuous-pose, V-guzhou-n40-axis-integer-grid) exactly as its CHANGES.md prints: caps (rectangles, side, the axis grid from 15,000,000 to 90,000,000 vertices, the threshold denominator) and an echo of the input digest and arguments; no arithmetic changed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-continuous-n28-5745-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-192 |
+
+### `V-continuous-pose-followup`
+
+**devtools.continuous_pose_followup** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Decides in exact rationals a continuous-pose certificate's premises and custody from its pinned release asset: the candidate's mass and rows, the scalar chain, each program's near-axis side and margin, both check2 kernel inputs regenerated against the digests the source names, the control's scaling, and both programs' logs against their summaries; and drives a diagnostic sample of roots, slabs and axis patches judged against the source's logs. It decides no coverage.
+
+- Source: [`packing/devtools/continuous_pose_followup.py`](../../packing/devtools/continuous_pose_followup.py), [`packing/tests/test_continuous_pose_followup.py`](../../packing/tests/test_continuous_pose_followup.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/devtools/continuous_pose_followup.py`](../../packing/devtools/continuous_pose_followup.py)
+
+No evidence entry names it yet.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

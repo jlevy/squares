@@ -1,0 +1,30 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "wand125-square-packing",
+  "source_url": "https://github.com/wand125/square-packing",
+  "source_ref": "refs/heads/main",
+  "source_commit": "8530bafb03d48444f30f241fbc1f29f01cd7c96c",
+  "retrieved_at_utc": "2026-10-15T05:33Z",
+  "git_scope": "A blobless clone of the single public branch with its history, sparsely checked out at this commit: the certificate directory continuous_n28_L5745 that this commit adds, the same Git tree through the head b57e667 read on 2026-10-15, and the enclosing licence. Every file under that directory is digested; the rest of the tree is pinned by the commit. The candidate, the control, both run logs and receipts, both programs' kernel inputs, the sealed inner bundle and the first program's source archive are the asset certificates__continuous_n28_L5745.tar.gz of release square-lower-bounds-v1, outside Git, and the packet README pins it by size and SHA-256.",
+  "archived_dir": "square-packing",
+  "license": "MIT, Copyright (c) 2026 wand125 (problems/square-lower-bounds/LICENSE); the reused kernels' MIT licence, Copyright (c) 2026 Guzhou0806 (check2/src/kernel/LICENSE)",
+  "claims": [
+    "s(28) > 1149/200 = 5.745 (problems/square-lower-bounds/certificates/continuous_n28_L5745, added at 8530baf)"
+  ],
+  "scope": [
+    "problems/square-lower-bounds/LICENSE",
+    "problems/square-lower-bounds/certificates/continuous_n28_L5745"
+  ],
+  "pinned_only": [
+    {
+      "match": "problems/square-lower-bounds/LICENSE",
+      "reason": "retained byte-identical by the FN-1 input bindings packet",
+      "identical_to": "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/square-packing-bounds/LICENSE"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/LICENSE",
+      "reason": "Guzhou0806/n40-square-packing's MIT licence, retained byte-identical by the T-145 continuous-pose packet",
+      "identical_to": "packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/LICENSE"
+    }
+  ]
+}

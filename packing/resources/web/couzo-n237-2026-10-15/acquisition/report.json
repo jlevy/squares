@@ -1,0 +1,156 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "(no issue)",
+  "author": "Francisco Couzo",
+  "source_key": "[Couzo n237 2026-10-15]",
+  "report_evidence": "E-couzo-4e4c8ce-n237-certificate-report",
+  "receipt_format": "couzo-4e4c8ce-n237-exact-replay-v1",
+  "witness_prefix": "W-couzo-4e4c8ce-n",
+  "claim_limitations": "Complete 4e4c8ce rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-15",
+  "read_at_main": "22a67ce4aa933196c307e4b209c45b13d55454db",
+  "certificates": [
+    {
+      "n": 237,
+      "path": "certificates/n237.cert",
+      "format": "evand-cert",
+      "offered": "15.902603638260",
+      "printed_in": "https://github.com/franciscouzo/square-packing/blob/58a783368d4b7e70bb800f0009ea9ca03e578739/certificates/README.md",
+      "first_committed": "2026-10-15T00:31:53Z"
+    }
+  ],
+  "requested": [237],
+  "replayed": [237],
+  "houses": [
+    {
+      "n": 237,
+      "reader": "[Mishapolk records 2026-10-14]",
+      "source_key": "[Mishapolk records 2026-10-14]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo, Mykhailo Polkovskyi",
+      "result": "T-183",
+      "reported_value": "15.9027050578663668",
+      "verified_value": "15.9027050578663668",
+      "evidence": ["E-mishapolk-593-exact-feasibility"]
+    }
+  ],
+  "pending": [
+    {
+      "n": 237,
+      "report": "#488",
+      "url": "https://github.com/jlevy/squares/issues/488",
+      "holders": "Francisco Couzo",
+      "result": "T-140",
+      "reader": "[Couzo certificates 2026-10-10]"
+    },
+    {
+      "n": 237,
+      "report": "#561",
+      "url": "https://github.com/jlevy/squares/issues/561",
+      "holders": "Francisco Couzo",
+      "result": "T-161",
+      "reader": "[Couzo certificates 2026-10-12]"
+    },
+    {
+      "n": 237,
+      "report": "PR #574",
+      "url": "https://github.com/jlevy/squares/pull/574",
+      "holders": "PingYou Ltd (BuddenPing), numerical v2",
+      "result": "T-174",
+      "reader": "[PingYou PR 574 certificates 2026-10-13]"
+    },
+    {
+      "n": 237,
+      "report": "T-056",
+      "url": "https://github.com/franciscouzo/square-packing/tree/f3c5a529c255b546db18605702b8da298132309f",
+      "holders": "Francisco Couzo",
+      "result": "T-056",
+      "printed": "15.911191683008479",
+      "rounding": "up"
+    },
+    {
+      "n": 237,
+      "report": "T-098 (#375)",
+      "url": "https://github.com/evand/square-packing/tree/13ee36e5807727d12a5da36b9b90a96bdba272bf/s12/search/exact",
+      "holders": "Daniel after Couzo, de Winter, Ellsworth, Levy",
+      "result": "T-098",
+      "reader": "[evand exact optima 2026-10-05]"
+    },
+    {
+      "n": 237,
+      "report": "T-115 (#401)",
+      "url": "https://github.com/itsnaka/squish-certs/tree/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07",
+      "holders": "Chaoweeraprasit after Couzo and Ellsworth",
+      "result": "T-115",
+      "reader": "[SQUISH update 2026-10-07]"
+    },
+    {
+      "n": 237,
+      "report": "T-127 (#438)",
+      "url": "https://github.com/SidG2k1/square-packing-refinements/tree/9643cb5a78c1d4dcfc867c80a6920c3a6219d05a",
+      "holders": "Gupta after Chaoweeraprasit, Daniel",
+      "result": "T-127",
+      "reader": "[Gupta rational refinements 2026-10-08]"
+    },
+    {
+      "n": 237,
+      "report": "T-134 (#476)",
+      "url": "https://github.com/franciscouzo/square-packing/tree/02f969075f79d5e13fa21e09e381a44e8647b452",
+      "holders": "Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth, Levy",
+      "result": "T-134",
+      "reader": "[Couzo exact certificates 2026-10-09]"
+    },
+    {
+      "n": 237,
+      "report": "T-136 (#481)",
+      "url": "https://github.com/itsnaka/squish-certs/tree/d45669b48cc97ad3aa17a6c847a8d06630f66eac",
+      "holders": "Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba, Levy",
+      "result": "T-136",
+      "reader": "[SQUISH third request 2026-10-09]"
+    },
+    {
+      "n": 237,
+      "report": "#505",
+      "url": "https://github.com/jlevy/squares/issues/505",
+      "holders": "Robert Barnett",
+      "reader": "[Barnett refinements 2026-10-11]"
+    },
+    {
+      "n": 237,
+      "report": "#470",
+      "url": "https://github.com/jlevy/squares/issues/470",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk decimal poses 2026-10-09]"
+    },
+    {
+      "n": 237,
+      "report": "#573",
+      "url": "https://github.com/jlevy/squares/issues/573",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk exact certificates 2026-10-12]"
+    },
+    {
+      "n": 237,
+      "report": "#607",
+      "url": "https://github.com/jlevy/squares/issues/607",
+      "holders": "Francisco Couzo",
+      "result": "T-189",
+      "reader": "[Couzo certificates 2026-10-14]"
+    }
+  ],
+  "register": {
+    "title": "Francisco Couzo's exact certificate at 237, 4e4c8ce, no issue",
+    "headline": "A tighter exact certificate for 237 squares from Francisco Couzo, below his issue-607 certificate",
+    "significance": 1,
+    "source_checks": "The author's index (certificates/best/manifest.json at the pin) reports that his standard-library checker verify_bound_certificate.py, which uses Evan Daniel's exact rational separating-axis geometry, accepts the certificate under both its closed-box and strict contracts (3,214 candidate pairs), and that this repository's sqpack verify.py at 37e6757 is the first route of the index. The certificate's metadata calls it an exact optimum seeded from Mykhailo Polkovskyi's issue-593 certificate and found by the author's fq search. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with this refinement at 237 of Mykhailo Polkovskyi's issue-593 certificate (T-183), from which the certificate's metadata says the author's fq search was seeded, and whose credit he asks to keep; the index names Nate Chaoweeraprasit (itsnaka) as the construction's origin. Evan Daniel's solver and verifier and this repository's exact verifier were used. The pinned files state nothing about AI assistance; the author's issue 607 of the day before states that OpenAI Codex assisted search and verification orchestration, and that he directed the work.",
+    "next_rung": "Replay on both maintained exact routes, review, then register by the per-count rule: published at its first commit 4e4c8ce (2026-10-15T00:31:53Z) with no issue, it is 2.40e-11 below the issue-607 certificate, the smallest earlier report, 1.01e-04 below the case's T-183, and below every other report. Ask the author on issue 607 whether he wants it registered in place of, or after, the issue's 237. Final exact-head CI remains required.",
+    "bead": "think-7j8o",
+    "bibliography": {
+      "authors": ["Couzo"],
+      "lineage": "builds-on-project",
+      "credit": "Couzo after Polkovskyi, Chaoweeraprasit, Daniel, Levy",
+      "short_credit": "Couzo after Polkovskyi et al.",
+      "note": "One complete exact certificate at 58a783368d4b7e70bb800f0009ea9ca03e578739, first committed in 4e4c8ce with no issue: s(237) <= 7951301819129798440089572127137/5e29, the author's exact refinement of Mykhailo Polkovskyi's issue-593 certificate, from which its metadata says his fq search was seeded. Retained as factual data; the unlicensed prose and the author's index are hash-pinned. No optimizer, local or global claim is replayed."
+    }
+  }
+}
