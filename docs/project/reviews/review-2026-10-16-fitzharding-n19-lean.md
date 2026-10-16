@@ -80,8 +80,8 @@ The source is the retained packet
 byte-identical to the pin.
 The three capture-state archives were downloaded on 16 October 2026, each checked
 against `SHA256SUMS` (whose digest the packet records), and their members against
-`expected/generated-sources.sha256`; all five archives were then streamed through a
-scanner without being stored (Independent Re-evaluation).
+`expected/generated-sources.sha256`; all five archives were then downloaded to scratch
+one at a time, scanned and deleted (Independent Re-evaluation).
 
 **Not done here:** no Lean toolchain is installed, and the full build is 190 to 420
 CPU-hours and hundreds of gigabytes (held as `think-nqnl`). No module was compiled, no
@@ -253,8 +253,16 @@ of the sources read here, retained or archived, uses `implemented_by`, `extern`,
 `unsafe`, `opaque` or an `axiom` declaration, so the compiled code implements the same
 definitions the kernel sees, up to the compiler.
 `#print axioms` reports names only, so a hand-written axiom with a native-looking name
-would be indistinguishable in the log; the scan of all five archives found no `axiom`
-declaration.
+would be indistinguishable in the log.
+`scan_archives.py` streamed all five archives (2,112 members, 10.2 GB of Lean source):
+each archive’s SHA-256 equals `SHA256SUMS`, every member equals its line of
+`expected/generated-sources.sha256` and none is unlisted, and no member declares an
+`axiom`, uses `sorry`, `admit`, `implemented_by`, `extern`, `unsafe`, `opaque`,
+`skipKernelTC` or a `debug.` option, or defines a command, macro or elaborator.
+`count_native.py` then finds each of the 4,320 logged facts as a theorem proved
+`by native_decide` in exactly one place, 2,328 in the Git tree and 1,992 in the
+archives, and 170 native theorems that the final theorem does not use (169 survivor-tree
+`owners_eq` facts and `capture_indices`).
 
 ## Independent Re-evaluation
 
@@ -270,7 +278,8 @@ sources as data.
 | `check_region.py` | the nine `Region.*` facts from their meaning (vertex enumeration of each target polygon) | 9 pass; Wainwright in H |
 | `check_capture_link.py` | `cells_ok`, `mask_ok`, `width_checked`, `tile_checked` for 3435, 3438, 3442 from the archives | 12 pass; digests match |
 | `check_endgame.py` | `geometryCheck` and `slopeCheck` for all 4,096 cases with its own first-order Taylor models | 4,096 pass |
-| `scan_archives.py` | each archive’s digest and members, trust-widening constructs, native theorems | see the README |
+| `scan_archives.py` | each archive’s digest and members, trust-widening constructs, native theorems | five archives, 2,112 members: digests match, none unlisted, no forbidden construct |
+| `count_native.py` | where each of the 4,320 logged native facts is proved | 2,328 in the tree, 1,992 in the archives, none missing |
 
 The endgame program transcribes the row definitions (`RowsH.lean`, `RowsAH.lean`,
 `PhiExpr.lean`, `Combine.lean`, `ReductionCases.lean`) and evaluates them with its own
@@ -332,7 +341,7 @@ is a credit question, not a correctness one.
 | N19-1 | minor | `EndpointPacking.lean:4-66`; `Capture/ToHull.lean:7` | The endpoint data and the square numbering are this project’s witness `W-known-best-n019` (from Kingbird’s SVG), in the same order; the source of `packing_exact.json` is not stated and the witness is not credited. |
 | N19-2 | minor | comments in `Census/Cells.lean:3-4`, `Cover/OrbitData.lean:3-4`, `Capture/Region.lean:3-4`, `Endgame/HullData.lean:3`, `Combine.lean`, `Separations.lean` | The generators (`s19/tools/`: `census.c`, `milp_cert.c`, `produce19c.py`, `produce19k.py`, `gen_*`), their data (`s19/data/`) and the notes `LOCAL_THEOREM.md` and `ENDGAME.md` are cited but not published. Soundness does not depend on them; the certificates cannot be regenerated, and no written account of the argument exists. |
 | N19-3 | minor | `verification/kernel-replay.json:4,6,23,25`; `README.md:18-19` | The replay receipt binds to an unpublished build; its closure list and per-module log are not published; the README states the replay without that qualifier. |
-| N19-4 | note | `Optimality.lean:4-6`; `Assembly/Final.lean:8-9`; `Capture/Final.lean:105-151`; `CensusRouteData.lean:57-60` | Stale development text (“Do not describe this as verified until…”, “a separate file on the build machine”), an unused alternative assembly `lower_bound_from_capture`, and an unused native fact `capture_indices`. Harmless. |
+| N19-4 | note | `Optimality.lean:4-6`; `Assembly/Final.lean:8-9`; `Capture/Final.lean:105-151`; `CensusRouteData.lean:57-60` | Stale development text (“Do not describe this as verified until…”, “a separate file on the build machine”), an unused alternative assembly `lower_bound_from_capture`, and 170 native theorems the final theorem does not use (`capture_indices` and 169 survivor-tree `owners_eq` facts). Harmless. |
 | N19-5 | note | `scripts/verify.py:101-103` | The native facts run compiled C loaded with `--load-dynlib`; the stamp scheme is sound, and the trusted base includes Lean’s IR-to-C compiler and the C toolchain, as the source says. |
 | N19-6 | note | archives, `Census/Pat/` | Each census pattern’s name encodes a cell mask; this review’s coverage check assumes the roster is that mask (question 4). |
 | N19-7 | note | `Census/Pattern.lean:18-25`; `Capture/Final.lean:97-101` | Census exclusions hold in $[0, 2443/500]^2$ and capture at $\mathrm{side19} + 10^{-12}$: margins in the right direction, worth one sentence in a write-up. |
@@ -434,7 +443,7 @@ may wish to check against the record’s credit for him.
   Nothing higher: C3 and V3 need a complete build the record can rest on (`think-nqnl`).
 - **Verification:** unchanged at V0; no build is retained.
 - **Significance:** no reason found to change the draft S5.
-- **Evidence and verifiers:** the six programs are candidates for `verifiers.yaml`
+- **Evidence and verifiers:** the seven programs are candidates for `verifiers.yaml`
   entries (independence: written here, sharing no code with the source; the endgame
   program transcribes the source’s row definitions by hand, so it is independent in
   evaluation, not in formulation), and their receipts for evidence entries on the
