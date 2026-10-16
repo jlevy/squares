@@ -1,0 +1,157 @@
+start 2026-10-16T05:53:32Z: /home/user/squares/.claude/worktrees/review-185/packing/.venv/bin/python -m devtools.upper_bound_reports couzo-n237-2026-10-15 check-claims
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "(no issue)",
+  "source": "https://github.com/franciscouzo/square-packing",
+  "revision": "58a783368d4b7e70bb800f0009ea9ca03e578739",
+  "read_on": "2026-10-15",
+  "read_at_main": "22a67ce4aa933196c307e4b209c45b13d55454db",
+  "horizon": 324,
+  "results": [
+    {
+      "n": 237,
+      "certificate": "certificates/n237.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "15.902603638260",
+      "printed_in": "https://github.com/franciscouzo/square-packing/blob/58a783368d4b7e70bb800f0009ea9ca03e578739/certificates/README.md",
+      "exact_side": "7951301819129798440089572127137/500000000000000000000000000000",
+      "ceiling": "15.9026036382595969",
+      "first_committed": "2026-10-15T00:31:53Z",
+      "grid_side": "16",
+      "case": {
+        "source_key": "[Mishapolk records 2026-10-14]",
+        "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo, Mykhailo Polkovskyi",
+        "result": "T-183",
+        "reported_value": "15.9027050578663668",
+        "verified_value": "15.9027050578663668",
+        "evidence": [
+          "E-mishapolk-593-exact-feasibility"
+        ],
+        "exact_side": "7951352528933183399718238226741/500000000000000000000000000000",
+        "relation": "below",
+        "difference": "12677450846239907166524901/125000000000000000000000000000"
+      },
+      "pending": [
+        {
+          "report": "#488",
+          "url": "https://github.com/jlevy/squares/issues/488",
+          "holders": "Francisco Couzo",
+          "result": "T-140",
+          "exact_side": "99393435047986448060704927533/6250000000000000000000000000",
+          "relation": "below",
+          "difference": "172984709117404766822075503/500000000000000000000000000000"
+        },
+        {
+          "report": "#561",
+          "url": "https://github.com/jlevy/squares/issues/561",
+          "holders": "Francisco Couzo",
+          "result": "T-161",
+          "exact_side": "15902947773658185869705573326239/1000000000000000000000000000000",
+          "relation": "below",
+          "difference": "68827079717797905285814393/200000000000000000000000000000"
+        },
+        {
+          "report": "PR #574",
+          "url": "https://github.com/jlevy/squares/pull/574",
+          "holders": "PingYou Ltd (BuddenPing), numerical v2",
+          "result": "T-174",
+          "exact_side": "27794540830466095147139446991415300498237676445025094761249482182588764737414193901389031384128243002254645282307221022669374868448055710135528401874040750264244287384254169523488694638764700538077636557544419135994725516988573141374009680117/1747760303690695143421436881718787460116495841641895867766006227948881364245604799135886547201945626198307138908956151789646550925605642058086967184818134258456327040331971280222643379976524334913597186133355867071379518243511074890170560100",
+          "relation": "below",
+          "difference": "3007330943743052388574542445042255041383604041853806776711000021597292545170977294890770401731421921731480355977637035890529309565093370497357660426636946000686901371302014677919898703359259473524030454843982276262736682584406884046846095682831397638702791083005663/8738801518453475717107184408593937300582479208209479338830031139744406821228023995679432736009728130991535694544780758948232754628028210290434835924090671292281635201659856401113216899882621674567985930666779335356897591217555374450852800500000000000000000000000000000"
+        },
+        {
+          "report": "T-056",
+          "url": "https://github.com/franciscouzo/square-packing/tree/f3c5a529c255b546db18605702b8da298132309f",
+          "holders": "Francisco Couzo",
+          "result": "T-056",
+          "printed": "15.911191683008479",
+          "rounding": "up",
+          "relation": "below",
+          "difference": "4294022374441059910427872863/500000000000000000000000000000"
+        },
+        {
+          "report": "T-098 (#375)",
+          "url": "https://github.com/evand/square-packing/tree/13ee36e5807727d12a5da36b9b90a96bdba272bf/s12/search/exact",
+          "holders": "Daniel after Couzo, de Winter, Ellsworth, Levy",
+          "result": "T-098",
+          "exact_side": "994449480187611439439307048761/62500000000000000000000000000",
+          "relation": "below",
+          "difference": "4294022371093075424884262951/500000000000000000000000000000"
+        },
+        {
+          "report": "T-115 (#401)",
+          "url": "https://github.com/itsnaka/squish-certs/tree/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07",
+          "holders": "Chaoweeraprasit after Couzo and Ellsworth",
+          "result": "T-115",
+          "exact_side": "8952973795828191/562949953421312",
+          "relation": "below",
+          "difference": "562349699776797054127631424177463/524288000000000000000000000000000000"
+        },
+        {
+          "report": "T-127 (#438)",
+          "url": "https://github.com/SidG2k1/square-packing-refinements/tree/9643cb5a78c1d4dcfc867c80a6920c3a6219d05a",
+          "holders": "Gupta after Chaoweeraprasit, Daniel",
+          "result": "T-127",
+          "exact_side": "3180735247037827607980371558401/200000000000000000000000000000",
+          "relation": "below",
+          "difference": "1072596929541159722713537731/1000000000000000000000000000000"
+        },
+        {
+          "report": "T-134 (#476)",
+          "url": "https://github.com/franciscouzo/square-packing/tree/02f969075f79d5e13fa21e09e381a44e8647b452",
+          "holders": "Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth, Levy",
+          "result": "T-134",
+          "exact_side": "3975917726395155753617729398543/250000000000000000000000000000",
+          "relation": "below",
+          "difference": "533633660513067145886669949/500000000000000000000000000000"
+        },
+        {
+          "report": "T-136 (#481)",
+          "url": "https://github.com/itsnaka/squish-certs/tree/d45669b48cc97ad3aa17a6c847a8d06630f66eac",
+          "holders": "Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba, Levy",
+          "result": "T-136",
+          "exact_side": "985175957045048952983043545219609058238043896611796404750765221827457100311536267/61949105502245043847087036993442184322886619069992659024865961513616685288782651",
+          "relation": "below",
+          "difference": "11943249059653507308121169373382588749785343921119332731238444271212980920631450521470709764202824668099813/30974552751122521923543518496721092161443309534996329512432980756808342644391325500000000000000000000000000000"
+        },
+        {
+          "report": "#505",
+          "url": "https://github.com/jlevy/squares/issues/505",
+          "holders": "Robert Barnett",
+          "exact_side": "15903670905778137/1000000000000000",
+          "relation": "below",
+          "difference": "533633759270059910427872863/500000000000000000000000000000"
+        },
+        {
+          "report": "#470",
+          "url": "https://github.com/jlevy/squares/issues/470",
+          "holders": "Mykhailo Polkovskyi (Mishapolk)",
+          "exact_side": "1590367623519/100000000000",
+          "relation": "below",
+          "difference": "536298465201559910427872863/500000000000000000000000000000"
+        },
+        {
+          "report": "#573",
+          "url": "https://github.com/jlevy/squares/issues/573",
+          "holders": "Mykhailo Polkovskyi (Mishapolk)",
+          "exact_side": "12424179381/781250000",
+          "relation": "below",
+          "difference": "172984710201559910427872863/500000000000000000000000000000"
+        },
+        {
+          "report": "#607",
+          "url": "https://github.com/jlevy/squares/issues/607",
+          "holders": "Francisco Couzo",
+          "result": "T-189",
+          "exact_side": "12163897896660350527924222391/764899771970500000000000000",
+          "relation": "below",
+          "difference": "18341204791941739715992129973083/764899771970500000000000000000000000000000"
+        }
+      ],
+      "smallest": "this certificate"
+    }
+  ]
+}
+end 2026-10-16T05:53:36Z exit 0 wall 4.2 s

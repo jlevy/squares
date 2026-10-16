@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:SourceCoverage/v1
   schema: source-coverage.schema.yaml
   status: enforced
-last_reviewed: '2026-10-14'
+last_reviewed: '2026-10-16'
 coverage_scope: 'Current public upper-bound catalogues and first-party result releases known to this
   project, the Schadt n=29 witness-contract regression source, and the September 2026 external executable
   lower-bound certificate releases. Their proof obligations and assurance are tracked by evidence.yaml;
@@ -2486,7 +2486,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-10-15'
+  reviewed: '2026-10-16'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -2509,7 +2509,8 @@ sources:
     byte-identical to the retained snapshot: no later release. Read again on 2026-10-15 (the evening
     intake pass, think-wnsv): the page, still "Release 1 · 29 July 2026" with datePublished 2026-07-29,
     and data/results.json are byte-identical to results.html and results.json here (SHA-256 4cc4d80d...
-    and dd7c1c62...), so nothing changed.
+    and dd7c1c62...), so nothing changed. Read again on 2026-10-16 (the morning intake pass,
+    think-mu5v): both are still byte-identical to the retained copies, so nothing changed.
 
     '
 - id: schadt-n29-2025
@@ -2592,7 +2593,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-15'
+  reviewed: '2026-10-16'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -2621,7 +2622,9 @@ sources:
     12.872029849081180 in issue 481, whose import think-ac4h owns. Read again on 2026-10-15 (the evening
     intake pass, think-wnsv): the comment, created 2026-10-07T17:27:53Z, still carries its
     2026-10-07T18:33:04Z edit, and issue 401 has no comment after 2026-10-07T22:54:51Z, only the intake
-    label added on 2026-10-12, so nothing changed.'
+    label added on 2026-10-12, so nothing changed. Read again on 2026-10-16 (the morning intake
+    pass, think-mu5v): the comment still carries its 2026-10-07T18:33:04Z edit, and the last comment
+    on issue 401 is still that of 2026-10-07T22:54:51Z, so nothing changed.'
 - id: squish-update-2026-10-07
   title: 'SQUISH update: seven additional and five tighter rational packings'
   role: source-repository
@@ -5932,6 +5935,59 @@ sources:
     custody, the exact premises and the binding of check2's kernel inputs to the
     candidate are accepted; a diagnostic sample of both programs is not a replay. Replay
     and adoption remain under think-zb5w. T-192 records it.
+- id: evand-exact-cur-2026-10-16
+  title: Evan Daniel's exact algebraic sides for 23 current records at 7d1407a, issue 639
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1/search/exact/cur
+  local: resources/web/evand-exact-cur-2026-10-16/
+  source_key: '[Daniel exact current records 2026-10-16]'
+  scope:
+    n_values: [51, 70, 88, 102, 123, 126, 153, 172, 175, 199, 204, 207, 232, 258, 259, 263, 266, 267, 292, 295, 297, 301, 302]
+  reviewed: '2026-10-16'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - campaign/issue-intake/upper-bounds-20261016/ledger.json
+  evidence:
+  - E-evand-639-exact-sides-report
+  notes: >-
+    The directory's 23 exact configurations over number fields, 19 retained as their
+    upstream gzip and the four largest pinned by size and SHA-256, with the source's
+    checker pinned against its identical retained copy. The 16 October ledger records 16
+    counts, each below every earlier report there, and T-193 records them. At 51 the side
+    is the (16 + 5√2)/3 both lanes hold, and at 70, 153 and 207 it is T-174's algebraic
+    side exactly; at 172, 263 and 297 PR #574's rational certificates are smaller. None of
+    those seven is recorded. The case records are unchanged until adoption.
+- id: fitzharding-n19-lean-2026
+  title: sq19, a Lean 4 proof that s(19) = 3 + 4√2/3
+  role: source-repository
+  url: https://github.com/ofitzharding/sq19/tree/34fb2b7bc39465db368c45cb48d4db58829d3051
+  local: resources/web/fitzharding-n19-lean-2026-10-16/
+  source_key: '[Fitzharding n19 Lean 2026]'
+  scope:
+    n_values: [19]
+  reviewed: '2026-10-16'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-019.md
+  - frontier/results.yaml
+  evidence:
+  - E-n019-fitzharding-lean-report
+  notes: >-
+    Oscar Fitzharding's (GitHub and X ofitzharding) sq19 at
+    34fb2b7bc39465db368c45cb48d4db58829d3051, the tag of release v1.0.0, published on 16
+    October 2026 and asked for in issue 640: a Lean 4 proof, Sq19.square19_optimality,
+    that nineteen unit squares fit in a square of side L exactly when L is at least
+    3 + 4√2/3, Robert Wainwright's 1979 side, which is the case's exact upper bound. MIT
+    licence. The packet retains the tree whole and the author's announcement on X, and
+    pins the release's five archives (1,110,588,236 bytes) by size and SHA-256. The source
+    trusts Lean's compiler for 4,320 native_decide facts and reports a kernel replay of the
+    import closure; nothing here has built it. T-194 records the claim; the case's lanes and
+    status are unchanged.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

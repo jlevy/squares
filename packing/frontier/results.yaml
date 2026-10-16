@@ -26349,6 +26349,403 @@ results:
       check2-control-here.json in wand125-continuous-n28-2026-10-15, stay out of this
       entry's artifacts so that the workers' snapshot stays under its cap.
 
+  - id: T-193
+    kind: upper-bound
+    registered: '2026-10-16'
+    headline: >-
+      Exact algebraic sides at sixteen counts from Evan Daniel, of packings the record credits
+    claim: >-
+      Evan Daniel's issue 639 reports exact algebraic sides for the record's best-known
+      packings at 23 counts. At the sixteen recorded here each side is the one root of an
+      integer polynomial of degree 2 to 41 in a rational interval, realised by an exact
+      configuration over a number field, every square's centre and angle parameter in the
+      field. Each side, cut at 40 places:
+
+      s(88) <= 9.8824510304812468193284571556918969668693…, s(102) <= 10.6058286964315783603846766570880096669418…, s(123) <= 11.5913781454976981594349494020130208086995…, s(126) <= 15/2 + 3√2 = 11.7426406871192851464050661726290942357090…, s(175) <= 13.7641743174865966292901814768674768594691…, s(199) <= 14.6175721735928068435558612724500328081986…, s(204) <= 14.8086632343869565663229034486020952296225…, s(232) <= 15.7641743174865966292901814768674768594691…, s(258) <= 16.5634480021337893796001817112513963158640…, s(259) <= 16.5913781454976981594349494020130208086995…, s(266) <= 16.8230287507564759705405534237454448702252…, s(267) <= 16.8388152699482622602660931895036575396753…, s(292) <= 17.5913781454976981594349494020130208086995…, s(295) <= 22(1 + √2)/3 = 17.7042327907360303578790506442044525761775…, s(301) <= 17.8466671928434897829433145909582979088797… and s(302) <= 17.8700138504044643444601534007805939989658….
+
+      The source checks each configuration with its standard-library verify_exact.py, in
+      exact rationals: every contact an identity in the field, every other pair separated
+      and every corner inside the box by rational interval arithmetic at the field's root,
+      and the side the polynomial's one root in its interval. It reports all 23 VALID, and
+      a cross-check of its solver's 64-digit side against each polynomial's interval. It
+      asserts each polynomial irreducible, which none of its programs checks.
+
+      Here verify_exact.py, read first and run unchanged from the retained copy, accepted all
+      23 files with the statements the source prints, and refused four mutated controls at
+      each of the 19 forms the packet retains: a square moved 1e-6 through the wall it
+      touches, the side raised by 1e-6 in the field, the side's interval moved below its
+      root, and a duplicate square. That is a reproduction with the producer's code, on one
+      route, retained until the stage 4 review lane (think-7qxm) has read it. SymPy factored
+      each polynomial over the integers and found every one squarefree and a single factor
+      of multiplicity 1, so irreducible, and each side algebraic of the degree stated.
+
+      The 16 October report-order ledger records it at these sixteen counts, each below
+      every earlier report, by 1.48e-99 (204) to 7.77e-35 (126): below PR 574's rational
+      certificates (T-174) at twelve counts, by at least 7.77e-35 at 126, 1.18e-64 at 267,
+      1.66e-79 at 292 and 5.92e-95 to 4.48e-88 at the other nine, and below Mykhailo
+      Polkovskyi's (T-186) at 175, 204, 232 and 302, by at least 1.48e-99 (204) to 1.79e-39
+      (302). At 51 the side is the (16 + 5√2)/3 both lanes hold, at 70, 153 and 207 it is
+      T-174's algebraic side exactly, and at 172, 263 and 297 PR 574's rational
+      certificates are smaller by about 1e-62, so those seven are not recorded.
+
+      Credit Evan Daniel (https://github.com/evand/square-packing) with each exact form, a
+      refinement of the packing it solves, after that packing's finder as the case records
+      credit it: Nate Chaoweeraprasit's at 88 and 199 (as Siddharth Gupta improved them,
+      T-127), 258 (as Mykhailo Polkovskyi improved it), 259 and 292; Ryan Xu's at 102, 123,
+      126, 267 (as Francisco Couzo improved it, T-134) and 295; Daniil Ostashev's at 175, 204
+      and 232; Francisco Couzo's at 301; PingYou Ltd's at 302, as Couzo improved it (T-181);
+      and his own at 266 (T-119); at every count by way of PingYou Ltd's refinement (T-174) or
+      Polkovskyi's (T-186), as the entry's regularizations list.
+
+      The issue says the solver, checkers and batch were written and run with Claude
+      (Anthropic) as a coding and research agent, directed and reviewed by the author.
+    scope: {n_values: [88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        Exact algebraic forms of packings the record already credits, 1.5e-99 to 7.8e-35
+        below the nearest earlier report at each of sixteen counts: a citable detail of each
+        case that changes no theorem, S2 as T-120 to T-123's exact forms are; the rational
+        refinements they tighten (T-174, T-186) are S1. No lower bound or optimum.
+      scored: '2026-10-16'
+      by: think-phyb Evan Daniel import (draft)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel exact current records 2026-10-16]']
+      published: '2026-10-16'
+    evidence: [E-evand-639-exact-sides-report]
+    artifacts:
+      - packing/resources/web/evand-exact-cur-2026-10-16/README.md
+      - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md
+      - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/data/verify.txt
+      - packing/campaign/issue-intake/upper-bounds-20261016/README.md
+      - packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json
+      - packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+      - packing/resources/web/evand-exact-cur-2026-10-16/receipts/replay-verify-exact.json
+      - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
+    controls: [packing/tests/test_evand_exact_cur.py]
+    activity:
+      state: in-analysis
+      what: >-
+        The stage 4 review lane reads the retained replay of the source's verify_exact.py
+        and this entry, strong tier, on a branch stacked on PR 651, as the 14 October lanes
+        read T-161 to T-175 and T-181 to T-183.
+      since: '2026-10-16'
+      link: think-7qxm
+    next_rung: >-
+      The stage 4 review lane, think-7qxm, reads the retained replay
+      (receipts/replay-verify-exact.json in the packet): what verify_exact.py's VALID implies,
+      each form measured against the packing its regularization names, and each print held to
+      its exact side. With no blocking defect open, the stage 4 exit then adds the replay's
+      evidence entry, cites it and rewrites the claim, notes and next_rung together.
+
+      V4 and C4 need two accepting adversarial AI reviews by distinct reviewers of the
+      checker's soundness and of this entry, and the owner's oversight record. A second route
+      over number fields here, sqpack.witness.exact_verify, needs a converter of the source's
+      format, a W7 slice with no bead; it would be an attribute beside the rung. Adoption of
+      the sixteen sides as the cases' houses is the owner's, with T-174's.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 review of the retained replay of the source's verify_exact.py
+          (receipts/replay-verify-exact.json in the packet), with no blocking defect open,
+          after which the exit adds the replay's evidence entry and cites it
+        rung: C3
+        link: think-7qxm
+    notes: >-
+      The replay is retained in the packet, its receipt and driver with it, and the entry is
+      held at its reported rungs until the stage 4 review lane (think-7qxm) has read it, as
+      the 14 October imports were held until their reviews merged: result-import.md's stage 4
+      exit follows both lanes. The replay's evidence entry is added at the exit, as those
+      imports' confirming entries were.
+
+      The case records are unchanged: each side is below its case's reported and verified
+      upper bounds, so the entry is pending adoption, as T-174 and T-186 are.
+
+      The identity of each certificate with the packing it solves is the source's claim
+      (exactsolve.py from the record's own witness); no measurement here decides it. At 153
+      and 207 the source's input was a copy of the packing that ties the register's witness,
+      and its re-solve of the register's witness at 207 did not verify one pair; neither count
+      is recorded. The ledger's owner questions are in its README.
+    regularizations:
+      - n: 88
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 102
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 123
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 126
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 175
+        of: T-186
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 199
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 204
+        of: T-186
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 232
+        of: T-186
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 258
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 259
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 266
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 267
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 292
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 295
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 301
+        of: T-174
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+      - n: 302
+        of: T-186
+        by: '[Daniel exact current records 2026-10-16]'
+        method: >-
+          exact solve of the packing's contact system to its algebraic side (exactsolve.py,
+          then minpoly.py), as for issue 419's exact forms
+        side: solved
+        identity:
+          basis: source-claim
+  - id: T-194
+    kind: optimality
+    registered: '2026-10-16'
+    headline: "Fitzharding reports a Lean proof that Wainwright's packing is optimal, `s(19) = 3 + 4√2/3`"
+    claim: >-
+      Oscar Fitzharding reports a Lean 4 proof that Robert Wainwright's 1979 packing of
+      nineteen unit squares is optimal: s(19) = 3 + (4/3)√2 = 4.885618083164126731735584965612….
+      Its theorem, `Sq19.square19_optimality (L : ℝ) : Feasible19 L ↔ 3 + 4 * Real.sqrt 2 /
+      3 ≤ L`, says that nineteen closed unit squares, each independently translated and
+      rotated, with pairwise disjoint interiors, fit in the axis-aligned square [0, L]^2
+      exactly when L is at least that side; existence at the side is part of it, so the
+      minimum is attained. The side is the case's exact upper bound, 3 + (4/3)sqrt(2).
+
+      Its trust boundary, as the source states it: the geometric soundness arguments are
+      checked by Lean's kernel, and 4,320 finite certificate facts are decided by
+      `native_decide`, so Lean's compiler, native evaluator and the C toolchain are trusted,
+      with the standard axioms propext, Classical.choice and Quot.sound and no sorryAx. The
+      source reports a kernel replay of the theorem's 13,143-module import closure with no
+      failure, which takes the native facts as axioms, and says that a complete rebuild from
+      its published sources has not yet been run. Nothing here has built it, and no review of
+      it is on file yet.
+
+      Fitzharding, [sq19](https://github.com/ofitzharding/sq19/tree/34fb2b7bc39465db368c45cb48d4db58829d3051),
+      release v1.0.0 of 16 October 2026, announced on X the same day. Its README says it
+      builds on his s(17) formalization (T-154), whose checker modules it compiles from
+      sq17-lean v1.0.0, and thanks the Squares Project and Manasseh Ahmed; issue 640 also
+      credits Wainwright's construction. It says it was "Developed with substantial
+      assistance from Claude and Codex".
+    scope: {n_values: [19]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 5
+      rationale: >-
+        Scored as a claim, as T-153 and T-154 were while unverified, by the rubric's anchor,
+        movement on a central open case: n = 19 is one of the five open cases below n = 21
+        (12, 17, 18, 19 and 20), and the claim settles it exactly at Wainwright's 1979 side,
+        closing the 0.0606 gap between the verified floor 193/40 and the ceiling, in a proof
+        assistant with a stated trust boundary. It is the first optimality claim the record
+        holds at 19. Significance is separate from whether the proof is correct; the
+        conservative reading is the same, since nothing less than the case's value is
+        claimed. A draft for the review lane to confirm or change.
+      scored: '2026-10-16'
+      by: think-a4x3 Oscar Fitzharding import (draft; the review lane think-o40t confirms or changes it)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Fitzharding n19 Lean 2026]']
+      published: '2026-10-16'
+    evidence: [E-n019-fitzharding-lean-report]
+    composition: >-
+      One cited entry, the source's report (E-n019-fitzharding-lean-report), which claims
+      the exact value; it sets both rungs. The upper half, a packing at side 3 + 4√2/3, is
+      proved in the Lean by endpoint_packing, in a file with no native_decide; it is the
+      packing E-lifted-q2-upper holds, V3/C3 here and independent of the source. That entry
+      is not cited, since citing it would make this result hold the case's verified upper
+      bound in its place. The lower half rests on the Lean build and its 4,320 native_decide
+      facts, and the only record of that build is the source's own.
+
+      By epistemics.md's predicates: V3 needs proof-assistant-checked evidence with a
+      certificate, a replay command and a passing replay, and no build of the proof is
+      retained here, so the result stands at V0, declared with the notes; C1 needs a
+      qualifying, dated read, which the review lane has not yet written.
+    artifacts:
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/README.md
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/Optimality.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/PlainPacking.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/SquareBase.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Basic.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/EndpointPacking.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/Square19Optimality.log.gz
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/kernel-replay.json
+    next_rung: >-
+      C1 needs the mathematical review that reads the statement, the endpoint, the trust
+      boundary and the chain to the final theorem (think-o40t), at the tbd-strong-max tier in
+      a lane of its own, as T-154 had two. V3 and C3 need a complete build of the theorem's
+      import closure that the record can rest on, with its axiom receipt: the source's
+      scripts/fetch.sh and scripts/verify.py from the retained pin and the five release
+      archives at Lean 4.34.1, here or by a third party whose build is retained here
+      (think-nqnl). That would be reproduction with the producer's code.
+
+      It is held: the
+      source gives several hours on a 64-core, 512 GB machine, above the pass's 40 CPU-hour
+      cap and this host. A cheaper subset decides parts and moves no rung: fetch.sh's
+      download and hash check of the five archives, and a build of the existence half,
+      EndpointPacking, with its axioms printed.
+
+      V4 and C4 need, on top of V3 and C3, two
+      accepting adversarial AI reviews by distinct reviewers and the owner's oversight
+      record. V5 needs a formalization review by a named human expert who is not the
+      author.
+    unfinished_confirmations:
+      - what: >-
+          the mathematical review of the proof, read without a build: statement fidelity,
+          the endpoint, the trust boundary and the chain to the final theorem, as T-154's
+          first review read sq17-lean
+        rung: C1
+        link: think-o40t
+      - what: >-
+          the source's complete build of the theorem's import closure, from the retained pin
+          and the five v1.0.0 archives with Lean 4.34.1 and the Mathlib v4.34.1 cache,
+          accepted only with the axiom set of verification/Square19Optimality.log, run here
+          or by a third party whose build is retained here
+        rung: C3
+        link: think-nqnl
+        estimated_cost:
+          cpu_hours: 285
+          cpu_hours_high: 420
+          basis: >-
+            The source's "several hours on a 64-core, 512 GB machine", read as 3 to 6 wall
+            hours with 64 cores busy, plus at most about 40 CPU-hours for the optional kernel
+            replay (37 wall-minutes on 64 cores by verification/kernel-replay.json); an
+            estimate from the source's words, not a receipt
+          priced: '2026-10-16'
+    notes: >-
+      Registered on 16 October 2026 from issue 640, which Fitzharding opened that day asking
+      that the result be registered under his name and the proof linked from the n = 19 case
+      page, and from the owner's report of the author's post (think-a4x3, think-xik9). V0 is
+      declared, with this note as the ladder asks: the only entry is the source's report of
+      its own build, and no build of the proof is retained here.
+
+      Kind: optimality. The record held no value of s(19), so a proof-assistant proof of it
+      is not a formalization but takes the value's kind (epistemics.md, Result Kinds, the
+      first rule); T-154 was a formalization because T-153 already held s(17).
+
+      The case record is unchanged in its lanes and status: n-019's reported lower lane stays
+      193/40 and its status open, and the proof is linked from its page. Whether the reported
+      lower lane and the reported status take this claim, as n-017's took T-153's on the
+      owner's confirmation of 13 October, is the owner's decision.
+
+      Priority, stated: of the reports this record holds, this is the first claim of s(19)
+      optimality. By GitHub's and X's times, all on 16 October 2026, the repository's first
+      commit is of 02:15:45Z, release v1.0.0 was published at 02:38:08Z, the author's post
+      at 03:27:40Z and issue 640 at 03:41:08Z.
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:

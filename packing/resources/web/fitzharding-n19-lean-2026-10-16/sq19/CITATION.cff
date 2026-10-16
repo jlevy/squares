@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this formal proof or its verification software, please cite this release."
+type: software
+title: "A Lean proof of optimal square packing for 19 unit squares"
+authors:
+  - family-names: "Fitzharding"
+    given-names: "Oscar"
+version: "1.0.0"
+date-released: "2026-10-16"
+license: MIT
+repository-code: "https://github.com/ofitzharding/sq19"
+url: "https://github.com/ofitzharding/sq19/releases/tag/v1.0.0"
+abstract: >-
+  Lean 4 formalization of optimality for packing nineteen unit squares in a
+  square: a packing exists at container side L exactly when L is at least
+  3 + 4*sqrt(2)/3. Arbitrary independent rotations and boundary contact are
+  allowed. Geometric soundness is proved in Lean; finite certificate checks use
+  native_decide and trust Lean's compiler and native evaluator and the C
+  toolchain. The release includes the generated certificate sources, a build
+  and verification script, and the theorem's full axiom report.
+keywords:
+  - square packing
+  - discrete geometry
+  - Lean
+  - formal verification
+  - computer-assisted proof

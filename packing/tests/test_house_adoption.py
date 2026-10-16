@@ -18,6 +18,7 @@ import yaml
 
 from devtools import adopt_houses as adopt
 from devtools import apply_closed_form as closed_form
+from devtools import default_drawings as defaults
 from devtools import select_houses as select
 from devtools import upper_bound_houses as houses
 from sqpack.yamlio import safe_load
@@ -1117,3 +1118,266 @@ def test_a_redraft_keeps_the_house_and_takes_the_drafted_lower_lanes() -> None:
     earlier = adopt.read_history()[70]
     assert not adopt.holds(70, earlier)
     assert adopt.adopt_case(70, earlier, record) == record
+
+
+def _rehoused(tmp_path: Path) -> tuple[Path, int, int, int]:
+    """The layer's index with one axis-tool record given an earlier lapse: a count a strong
+    view draws, one whose strong view lapsed with an earlier house, and one only the axis
+    tool has drawn."""
+    document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
+    entries = {int(entry["n"]): entry for entry in document["entries"]}
+    strong = min(
+        n for n, entry in entries.items() if entry["generator"] in defaults.STRONG_GENERATORS
+    )
+    lapsed, plain = sorted(
+        n
+        for n, entry in entries.items()
+        if entry["generator"] not in defaults.STRONG_GENERATORS and defaults.LAPSED not in entry
+    )[:2]
+    entries[lapsed][defaults.LAPSED] = {
+        "generator": "regularize_grid_slack/1",
+        "run": "a-run",
+        "witness_sha256": "0" * 64,
+    }
+    index = tmp_path / "index.json"
+    index.write_text(json.dumps(document), encoding="utf-8")
+    return index, strong, lapsed, plain
+
+
+def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
+    tmp_path: Path,
+) -> None:
+    """A new house is a new witness, and the count's regularized view lapses with it. The
+    adoptions of #553, #598 and #614 refreshed only the axis tool's views and left twenty
+    counts without a strong generator's decision, n = 176 drawn raw (think-sfas). So a
+    write names every count it re-houses, one count a line for those a lapsing view or the
+    allowlist makes pending for certain (review B6 of #641), the settled decision the new
+    witness bears on, and the commands of the guide's "When a Witness Changes" with their
+    cost, which ranges from the certain counts to all of them (review A3 of #641), and
+    what a deferral owes the pull request (reviews A1 and A2 of #641; think-g3q7)."""
+    index, strong, lapsed, plain = _rehoused(tmp_path)
+    regular = next(
+        n
+        for n, entry in sorted(defaults.index_entries(index).items())
+        if n not in (strong, lapsed, plain)
+        and entry["generator"] not in defaults.STRONG_GENERATORS
+        and defaults.LAPSED not in entry
+    )
+    counts = sorted([strong, lapsed, plain, regular])
+    spaced = " ".join(map(str, counts))
+    why = {
+        strong: f"its {defaults.index_entries(index)[strong]['generator']} view lapses",
+        lapsed: "a regularize_grid_slack/1 view lapsed earlier",
+        plain: (
+            "PENDING_ALLOWED holds it for think-aaaa's runs, whatever the new house reads, "
+            "so they take the new witness"
+        ),
+    }
+    lines = adopt.regularization_owed(
+        counts,
+        index=index,
+        allowed={plain: "think-aaaa: a test"},
+        settled={lapsed: None},
+        day="2026-10-16",
+    )
+    certain = [f"    {n}: {why[n]}" for n in counts if n in why]
+    assert lines[: 2 + len(certain) + 2] == [
+        f"regularization owed: 4 re-housed counts, {spaced} ({adopt.WITNESS_CHANGES})",
+        "  pending until the strong generators decide the new witness:",
+        *certain,
+        (
+            "  pending unless the new house drawing has no uneven and no near-axis square: "
+            f"{regular}"
+        ),
+        (
+            f"  n={lapsed}: SETTLED was decided on the earlier witness; decide the new one and "
+            "settle it again, or take it off"
+        ),
+    ]
+    low, high = adopt.REGULARIZE_CPU_MINUTES
+    (cost,) = [line for line in lines if line.startswith("  cost: ")]
+    assert cost.startswith(
+        f"  cost: {low} to {high} CPU-minutes a count for both strong generators and the "
+        f"selection, {3 * low} to {3 * high} for the 3 certain to be pending, up to "
+        f"{4 * low} to {4 * high} for all 4; one validation item under the pass's compute cap"
+    )
+    assert "    RUNS=/tmp/regularize WORKERS=2" in lines
+    commands = [
+        line.strip().removeprefix("python -m devtools.")
+        for line in lines
+        if line.startswith("    python -m ")
+    ]
+    label = f"adopt-2026-10-16-n{counts[0]}-{counts[-1]}"
+    grid = f"regularize_grid_slack --n {spaced} --run-dir $RUNS/{label}-grid"
+    assert commands[:7] == [
+        "build_known_best_atlas --update",
+        f"regularize_axis_components --update-atlas --n {spaced}",
+        "default_drawings --update",
+        f"{grid}-0.5",
+        f"{grid}-1 --near-axis-degrees 1",
+        f"{grid}-5 --near-axis-degrees 5",
+        f"regularize_evand run --run-dir $RUNS/{label}-evand --n {spaced} --workers $WORKERS",
+    ]
+    assert commands[7].startswith(
+        f"regularize_select --evand-run $RUNS/{label}-evand --grid-run"
+    )
+    assert len(commands) == 8
+    # The deferral branch regenerates the record the allowlist entry is copied into, renders,
+    # and shows the drawings it gives up (reviews A1 and A2 of #641).
+    assert "then the guide's step 5 (render and record)" in lines[-3]
+    deferral = lines[-2]
+    assert "default_drawings.PENDING_ALLOWED with the open bead" in deferral
+    assert "run `default_drawings --update` again and the guide's step 5" in deferral
+    assert "`default_drawings --compare` with the base branch's record" in deferral
+    assert adopt.BASE_RECORD in deferral
+    assert f"{adopt.DEFERRAL_WAITS}." in deferral
+    assert "default_drawings --check-state` fails until every pending count" in lines[-1]
+    # Nothing re-housed, nothing owed: a second run of the idempotent write prints nothing.
+    assert adopt.regularization_owed([], index=index) == []
+
+
+def _printed_runs(lines: list[str]) -> list[tuple[str, str]]:
+    """Each strong run the printout starts, as (generator prefix of its id, directory)."""
+    found = []
+    for line in lines:
+        words = line.split()
+        if "--run-dir" not in words:
+            continue
+        directory = Path(words[words.index("--run-dir") + 1]).name
+        prefix = (
+            "grid-slack" if "devtools.regularize_grid_slack" in words else "evand-regularize"
+        )
+        found.append((prefix, directory))
+    return found
+
+
+def test_the_printed_runs_take_ids_no_run_in_the_index_has(tmp_path: Path) -> None:
+    """Review B2 of #641: the layer records a run by its directory's name, and admitting a
+    run whose id the index holds replaces that run's block, so every adoption that ran in
+    `$RUNS/evand` would overwrite the last one's cost and decisions. The printed
+    directories are named for the adoption's day, and move on where a run took the name."""
+    lines = adopt.regularization_owed([176], day="2026-10-16")
+    taken = {
+        str(run["id"]) for run in json.loads(defaults.INDEX.read_text(encoding="utf-8"))["runs"]
+    }
+    ids = [f"{prefix}-{directory}" for prefix, directory in _printed_runs(lines)]
+    assert ids == list(adopt.run_ids("adopt-2026-10-16-n176").values())
+    assert len(set(ids)) == 4
+    assert not taken & set(ids)
+
+    document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
+    document["runs"].append({"id": "grid-slack-adopt-2026-10-16-n176-grid-1"})
+    index = tmp_path / "index.json"
+    index.write_text(json.dumps(document), encoding="utf-8")
+    assert adopt.run_label("2026-10-16", [176], index) == "adopt-2026-10-16-n176-b"
+    moved = adopt.regularization_owed([176], index=index, day="2026-10-16")
+    assert [directory for _prefix, directory in _printed_runs(moved)] == [
+        "adopt-2026-10-16-n176-b-grid-0.5",
+        "adopt-2026-10-16-n176-b-grid-1",
+        "adopt-2026-10-16-n176-b-grid-5",
+        "adopt-2026-10-16-n176-b-evand",
+    ]
+
+
+def test_two_adoptions_of_one_day_print_different_runs() -> None:
+    """Review C3 of #641: the index holds only the runs merged into the branch, so two
+    adoptions opened from one base on one day both read it bare, and a label of the day
+    alone gave both the same ids; the second to admit its run would replace the first's
+    block. The label names the re-housed counts, lowest and highest, so adoptions of other
+    counts print other ids; two that re-house one count conflict on its case record."""
+    first = adopt.regularization_owed([176], day="2026-10-16")
+    second = adopt.regularization_owed([105, 129, 304], day="2026-10-16")
+    ids = {
+        tuple(f"{prefix}-{directory}" for prefix, directory in _printed_runs(lines))
+        for lines in (first, second)
+    }
+    assert ids == {
+        tuple(adopt.run_ids("adopt-2026-10-16-n176").values()),
+        tuple(adopt.run_ids("adopt-2026-10-16-n105-304").values()),
+    }
+    with pytest.raises(ValueError, match="names the counts it re-houses"):
+        adopt.run_label("2026-10-16", [])
+
+
+def test_the_runbook_guide_and_printout_give_one_deferral_step() -> None:
+    """Review C4 of #641: the runbook's deferral waited "for the owner's word or for its
+    runs", the guide's and the printout's only for the owner's word, and neither document
+    said how to give `--compare` the base branch's record. Review D1: all three, and the
+    comparison's own summary, say which lost strong views wait, in one wording. Review D2:
+    the documents name the pull request's base, which is not main for a stacked adoption,
+    and the printout gives main as the example and says so. Review E1: the owner's rule is
+    to adopt the smallest packing and then regularize it, so no adoption waits for the
+    owner's word and such a count's runs are not deferred."""
+    lines = adopt.regularization_owed([176], day="2026-10-16")
+    (deferral,) = [line for line in lines if "PENDING_ALLOWED with the open bead" in line]
+    command = f"--compare <(git show origin/$BASE:{defaults.RECORD_PATH})"
+    assert adopt.BASE_RECORD.strip("`") == command.removeprefix("--compare ").replace(
+        "$BASE", "main"
+    )
+    for path in (adopt.WITNESS_CHANGES, adopt.INTAKE_STEP):
+        text = (houses.REPO / path.split(", ", 1)[0]).read_text(encoding="utf-8")
+        words = " ".join(text.replace("\u2019", "'").split())
+        assert command in words, path
+        assert "`BASE` being `main` unless the pull request is stacked" in words, path
+        assert defaults.STRONG_VIEW_LOST in words.lower(), path
+        assert adopt.DEFERRAL_WAITS in words, path
+        assert "the adoption waits for the owner's word or for its runs" not in words, path
+        assert "unless the owner holds it" not in words, path
+        assert "irregular house drawing" not in words, path
+    assert f"{adopt.BASE_RECORD}, {adopt.STACKED_BASE})" in deferral
+    assert f"where {defaults.STRONG_VIEW_LOST}, {adopt.DEFERRAL_WAITS}." in deferral
+
+
+def test_every_printed_command_parses_with_its_tools_own_parser(tmp_path: Path) -> None:
+    """Review B5 of #641: each printed command, with the shell variables its first line
+    sets, is one its tool's own `parser()` accepts, so a renamed flag fails here rather
+    than in the next adoption's shell. As first printed, `--workers K` was refused (B3)."""
+    import importlib  # noqa: PLC0415
+    import shlex  # noqa: PLC0415
+
+    lines = adopt.regularization_owed([18, 176], day="2026-10-16")
+    (shell,) = [line.split() for line in lines if line.startswith("    RUNS=")]
+    values = dict(word.split("=", 1) for word in shell)
+    assert set(values) == {"RUNS", "WORKERS"}
+    values["RUNS"] = str(tmp_path)
+    commands = [line.strip() for line in lines if line.startswith("    python -m devtools.")]
+    assert len(commands) == 8
+    for printed in commands:
+        command = printed
+        for name, value in values.items():
+            command = command.replace(f"${name}", value)
+        assert "$" not in command, printed
+        _python, _m, module, *arguments = shlex.split(command)
+        parsed = importlib.import_module(module).parser().parse_args(arguments)
+        assert parsed is not None, printed
+
+
+@pytest.mark.parametrize("named", [adopt.WITNESS_CHANGES, adopt.INTAKE_STEP])
+def test_the_printout_names_headings_that_exist(named: str) -> None:
+    """Review A11 of #641: the two places the printout sends a reader are headings of the
+    files it names, so renaming one fails here."""
+    path, heading = named.split(", ", 1)
+    text = (houses.REPO / path).read_text(encoding="utf-8")
+    assert re.search(rf"^#+ {re.escape(heading.strip(chr(34)))}$", text, re.MULTILINE), named
+
+
+def test_a_write_and_a_dry_run_print_what_the_moves_owe(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    move = _move(176)
+    monkeypatch.setattr(adopt, "plan", lambda: [move])
+    monkeypatch.setattr(adopt, "adopted", lambda _move: False)
+    monkeypatch.setattr(adopt, "write", lambda moves: [moved.n for moved in moves])
+    owed = adopt.regularization_owed([176])
+    # One count is a count, not "1 re-housed counts" (review A8 of #641).
+    assert owed[0].startswith("regularization owed: 1 re-housed count, 176 ")
+    # Its runs are named for the day 176's house was adopted, not the day this test runs.
+    assert f"adopt-{houses.adopted_on(176)}-n176-evand" in "\n".join(owed)
+    assert adopt.main([]) == 0
+    assert capsys.readouterr().out.splitlines() == ["adopted 1 houses: 176", *owed]
+    assert adopt.main(["--dry-run"]) == 0
+    assert capsys.readouterr().out.splitlines()[1:] == owed
+    # A count already at its house is no move, and owes nothing.
+    monkeypatch.setattr(adopt, "adopted", lambda _move: True)
+    assert adopt.main(["--dry-run"]) == 0
+    assert len(capsys.readouterr().out.splitlines()) == 1

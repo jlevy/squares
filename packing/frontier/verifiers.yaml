@@ -12,6 +12,45 @@ softschema:
 
 last_reviewed: '2026-10-14'
 verifiers:
+  - id: V-evand-verify-exact
+    program: verify_exact.py
+    author: Evan Daniel
+    provenance: external
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The source's standard-library checker of an exact configuration over a number field
+      Q[t]/f: every touching inequality an identity mod f, every other one by rational
+      interval arithmetic at the root of f, each pair separated by a side line or by
+      circumscribed discs, and the side the unique root of p in its interval.
+    source:
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py
+    versions:
+      - sha256: a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4
+        revision: 7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1
+        note: byte-identical at ad86d42, the revision whose packet retains the copy that ran
+    note: >-
+      Run unchanged from the retained copy on issue 639's 23 exact forms, each in its own
+      python -I process (receipts/replay-verify-exact.json in the evand-exact-cur-2026-10-16
+      packet). The replay's evidence entry is added at T-193's stage 4 exit, after the
+      review lane think-7qxm.
+  - id: V-evand-639-replay-driver
+    program: replay_verify_exact.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    source:
+      - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
+    summary: >-
+      Runs the source's verify_exact.py on each of issue 639's 23 exact forms and on four
+      mutated controls at each retained form, holds the four pinned-only forms to the
+      packet's manifest, and factors each polynomial over the integers with SymPy.
+    note: >-
+      It decides nothing about a packing: the checker it runs does. Its irreducibility
+      check is a premise of the stated algebraic degree, not of the bound.
   # --- External programs -------------------------------------------------------------
   - id: V-tokoharu-verify-cpp
     program: verify.cpp, run by its driver run_verify.py
