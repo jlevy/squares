@@ -92,7 +92,8 @@ def test_a_duplicate_square_is_refused(tmp_path: Path) -> None:
 
 def driver() -> object:
     spec = importlib.util.spec_from_file_location("replay_verify_exact", DRIVER)
-    assert spec is not None and spec.loader is not None
+    assert spec is not None
+    assert spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -132,6 +133,9 @@ def test_the_resume_cache_reuses_only_the_same_run(tmp_path: Path) -> None:
     changed = cached(tmp_path, "n-51", run_key("b" * 64, None), job("changed"))
     control = cached(tmp_path, "n-51", run_key("b" * 64, "duplicate"), job("control"))
     assert (first, again, changed, control) == (
-        {"ran": "first"}, {"ran": "first"}, {"ran": "changed"}, {"ran": "control"}
+        {"ran": "first"},
+        {"ran": "first"},
+        {"ran": "changed"},
+        {"ran": "control"},
     )
     assert calls == ["first", "changed", "control"]
