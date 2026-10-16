@@ -5,7 +5,7 @@ title: "Sweep residue 2026-10-16: wand125 319a779, redundant reads, six resolved
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: user-eb-intake-residue
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:12:57.169Z
-updated_at: 2026-10-16T05:46:56.498Z
+updated_at: 2026-10-16T06:04:30.907Z
 started_at: 2026-10-16T05:13:40.345Z
 ---
 Lane A of the overnight pass (epic think-hg5s), acting name user-eb-intake-residue, branch claude/intake-2026-10-16-residue from origin/main. The sweep residue of 2026-10-16 05:08Z that no 16 October lane owns:
@@ -42,3 +42,6 @@ Item 4 (closeable issues), per issue:
 Next: item 5 (think-tk0u; check_published_site running against e2e018f32), then commit, sweep, PR.
 
 Correction (user-eb-intake-residue, 2026-10-16T05:47Z by date -u): the '~06:xxZ' times in this lane's notes of 16 October are about an hour late; they were written between 05:30Z and 05:47Z. The site pages were read at about 05:35Z. No condition changes: every last reply named is still more than a day old.
+
+2026-10-16 06:08Z user-eb-intake-residue: draft PR https://github.com/jlevy/squares/pull/647 (labels intake, S1; head 1f3f54c44). Closing sweep (make intake at the branch head, 05:58Z, scratchpad laneA/sweep-2.txt): 4 unowned items, all the ecstatic-edison lane's (#639, #640, #622 comment, evand 7d1407a); the resolved-blocker items were this bead and think-tk0u, by their own wording, each now with a blocked_on line. Hand-read sources: UnitSquare Release 1 read (live results.json byte-identical to the retained copy, dd7c1c62...; still Release 1 of 29 July) and SQUISH n153 read (comment last edited 2026-10-07T18:33Z); nothing new, reviewed dates left at 2026-10-15. The sweep's read-removal advice is think-ffh8's (open since 10 October); the suggested-task card was withdrawn as its duplicate. What remains after the merge: post the four drafted final comments (#432, #470, #529, #584) from main and record them; think-jh0n stages 2-3; think-tk0u closes.
+blocked_on: jlevy/squares#647

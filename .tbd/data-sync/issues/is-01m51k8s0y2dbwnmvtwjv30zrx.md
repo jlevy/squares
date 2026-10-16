@@ -5,15 +5,15 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 3
-delegate: claude-code@spud10.local
+version: 5
+delegate: user-eb-land-644
 labels: []
 dependencies: []
 parent_id: is-01m51hy396vnjkxe4726egs8x5
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T05:49:50.841Z
+updated_at: 2026-10-16T06:06:19.750Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 
@@ -24,3 +24,5 @@ started_at: 2026-10-16T05:34:41.706Z
 Outstanding High B1 is review evidence: recover and retain original four run directories (evand3a, grid0.5/1/5 degrees) and selection JSON/Markdown from the cloud producer. Committed index keeps only evand and grid0.5 aggregate receipts, not the wider-threshold rejected candidates needed to assess no-better settlements. This does not allege the runs were omitted. Do not rerun completed generators or relax side≤U holds for272/303. All detailed receipts/reports currently under regularization-completion-20261015/correctness-b on the external volume; preserve before cleanup.
 
 Release completion must include both infographic families and every advertised SVG/PNG/PDF export under their shared version history (currentlyv0.6.1), in addition to the site patch. Six changed views flow into the1–324 graphics;1–100 shares the family version/data stamp. A site-only cut is incomplete. Final-head reviews, ordinaryPacking/PagesCI, matching deferred checkpoint, authorized merge and actual deployed atlas/PDF audit remain. Existing cloud producer still owns think-la7h; root did not duplicate computation. Batches3b/3c and leftovers are owned by user-eb workers; no claims stolen.
+
+2026-10-16 ~06:15Z OWNERSHIP TRANSFER by the owner's word (this session, ~05:55Z: take over the other agent's regularization work and incorporate it) and per the #641 coordination handoff of 05:58Z addressed to 'the continuing agent': now owned by the overnight coordinator user-eb (epic think-hg5s). Lane I (user-eb-land-644) lands PR #644: CI fix, the B1 evidence, release completion.

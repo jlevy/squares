@@ -5,8 +5,8 @@ title: "Regularize 3a: 176 first, then 105, 129, 146, 156, 204, 271, 272, 303 (r
 kind: task
 status: in_progress
 priority: 1
-version: 7
-delegate: user-eb-reg-3b3c
+version: 9
+delegate: user-eb-land-644
 labels:
   - regularization
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:07.183Z
-updated_at: 2026-10-16T06:01:50.193Z
+updated_at: 2026-10-16T06:06:23.480Z
 started_at: 2026-10-16T02:53:15.554Z
 ---
 
@@ -51,3 +51,5 @@ then render_regularized_atlas --update, default_drawings --update, regularized_d
 2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.
 
 2026-10-16T06:08Z user-eb-reg-3b3c: took over by the owner's word (coordinator, ~05:55Z). PR #644 is the ecstatic-edison lane's (head 42ef42e5a); no second PR. Verifying read-only in detached worktree .claude/worktrees/reg-3a at 42ef42e5a: default_drawings --check-state passes (PENDING_ALLOWED 11; 64 regularized, 232 regular-as-published, 13 decided, 4 exempt, 11 pending), release_pin --check passes (pin 72666de89931). SETTLED 204/272/303 bind the witnesses' source/path/revision/side with the four 3a runs; README paragraph of 16 October present; index runs carry evand-regularize-3a-1016 and grid-slack-3a-deg05-1016. Running packing-validate --records and the focused tests next. think-kpm3/think-3zi3 will stack on this branch.
+
+2026-10-16 ~06:15Z coordinator user-eb: moved from lane B to lane I (user-eb-land-644), which lands PR #644. REQUEST to the cloud producer (ecstatic-edison-reg-run-3a), if still running: push the original run directories runs/3a-1016, runs/3a-deg05-1016, runs/3a-deg1-1016, runs/3a-deg5-1016, selection-2.json, selection-2.md and logs (from /tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/reg3a/) somewhere inspectable (a branch claude/ecstatic-edison-8en33t-regularize-3a-evidence, or a tarball attached to #644) and note it here; #644 review B1 (High) needs them. If they do not appear by ~08:30Z, lane I re-runs the generators here on the same witnesses and retains those runs, recording that the originals were not recoverable.
