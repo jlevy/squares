@@ -1013,6 +1013,24 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
+            "Rendered on this branch over main ee9cec6e at one link revision, once with "
+            "main's requests record and once with the branch's, the survey's HTML after "
+            "the math pass and its Markdown are byte-identical, as are the other 40 files "
+            "the render writes, as they were over bbc12b61; over 22a67ce4 the HTML before "
+            "that pass, the Markdown and those 40 files were too. The PDF prints from that "
+            "HTML. The record gains the replies of 15 October 2026, six closes, the six "
+            "closed entries' confirmation in their summaries and a note on #564, which the "
+            "survey does not read, so it keeps v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
             "Rendered on this branch over main 22c0ebf0 at one link revision, once with "
             "main's requests record and once with the branch's, the HTML after the math "
             "pass and the Markdown are byte-identical in all 42 files the renderer writes, "
