@@ -5,7 +5,7 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: user-eb-land-644
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51hy396vnjkxe4726egs8x5
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T06:06:19.750Z
+updated_at: 2026-10-16T06:15:30.276Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 
@@ -26,3 +26,5 @@ Outstanding High B1 is review evidence: recover and retain original four run dir
 Release completion must include both infographic families and every advertised SVG/PNG/PDF export under their shared version history (currentlyv0.6.1), in addition to the site patch. Six changed views flow into the1–324 graphics;1–100 shares the family version/data stamp. A site-only cut is incomplete. Final-head reviews, ordinaryPacking/PagesCI, matching deferred checkpoint, authorized merge and actual deployed atlas/PDF audit remain. Existing cloud producer still owns think-la7h; root did not duplicate computation. Batches3b/3c and leftovers are owned by user-eb workers; no claims stolen.
 
 2026-10-16 ~06:15Z OWNERSHIP TRANSFER by the owner's word (this session, ~05:55Z: take over the other agent's regularization work and incorporate it) and per the #641 coordination handoff of 05:58Z addressed to 'the continuing agent': now owned by the overnight coordinator user-eb (epic think-hg5s). Lane I (user-eb-land-644) lands PR #644: CI fix, the B1 evidence, release completion.
+
+2026-10-16T06:15Z user-eb-land-644: pushed f6737d638 to claude/ecstatic-edison-8en33t-regularize-3a (over 42ef42e5a): test_default_drawings' owed test now lets a decision owe nothing (204/272/303), 31 passed locally. Validate still needs a site successor (check_release_impact): #644 must cut its own site patch (next free is v0.7.16; v0.7.15 on #646); posters may trail (check-composites passes), so the infographic family rebuild can go to the top of the regularization stack. Next: B1 evidence watch until 08:30Z, then re-run here if absent.
