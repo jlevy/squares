@@ -2394,6 +2394,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/overview_sections.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
         ),
@@ -2411,14 +2412,41 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and once with this branch's, the three papers' HTML and Markdown are "
             "byte-identical in all 50 files the renderers write; each PDF prints from that "
             "HTML. The register gains T-193 and T-194, the source register two sources and "
-            "the requests record #639's and #640's mappings to them; none of the three "
-            "papers prints any of them, so each keeps its edition: v0.1.7, v0.1.0 and "
-            "v0.2.2."
+            "the requests record #639's and #640's mappings to them, and the site's Other "
+            "Projects list a card for ofitzharding/sq19; none of the three papers prints "
+            "any of them, so each keeps its edition: v0.1.7, v0.1.0 and v0.2.2. Rendered "
+            "again with the branch after #639's replay (T-193 at V3/C3, its evidence cited "
+            "by sixteen case records) and the card, the six files are byte-identical to "
+            "the base's."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/frontier/n-088.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-199.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch at link revision e2e018f3 after sixteen case records, "
+            "these eight among them, cite #639's report and replay evidence in their "
+            "evidence lists, with no lane, status or prose changed, the survey's HTML and "
+            "Markdown are byte-identical to the render with the base's (71f6a413) records, "
+            "so it keeps v0.2.2."
         ),
     ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
-        paths=("packing/frontier/results.yaml",),
+        paths=("packing/devtools/overview_sections.py", "packing/frontier/results.yaml"),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
@@ -2429,8 +2457,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "branch's, the Markdown and HTML differ only in the live register count beside "
             "T-018, 192 results registered so far and now 194, and the HTML also in where "
             "an empty style attribute falls in one formula's span, which moves between two "
-            "renders of the same input. A register count follows the site's data and is not "
-            "a revision of the paper, so the explainer keeps v0.4.7."
+            "renders of the same input; rendered again after #639's replay and the sq19 "
+            "card, the same holds. A register count follows the site's data and is not a "
+            "revision of the paper, so the explainer keeps v0.4.7."
         ),
     ),
 )
