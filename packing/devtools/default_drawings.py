@@ -247,6 +247,12 @@ _Z7WN = (
     "think-r3cl: re-housed by the 16 October adoption (think-z7wn); its runs are done, its "
     "selection and admission owed"
 )
+#: At 211 every strong view went to the owner's review at row 7, though Evan Daniel's
+#: same-side view betters the drawn axis view on every measure (review B3 of PR 657).
+_Z7WN_REVIEW = (
+    "think-r3cl: re-housed by the 16 October adoption (think-z7wn); every strong view is "
+    "at row 7, for the owner's review"
+)
 
 #: The counts whose drawing is not regularized and not regular as published, settled on
 #: purpose: each named with the witness it was settled on, so a new witness makes the
@@ -339,7 +345,8 @@ SETTLED: dict[int, Settled] = {
         _RUNZ7WN,
         "grid-slack's views, admitted at row 10 at all three thresholds, draw more uneven "
         "squares than the axis tool's view of this witness (worse on uneven, better on both "
-        "totals), and Evan Daniel's is held at row 4 (solved above U)",
+        "totals); Evan Daniel's same-side view is refused (its literal is too large) and his "
+        "solved view is held at row 4 (solved above U)",
         _README_Z7WN,
     ),
     179: Settled(
@@ -367,18 +374,6 @@ SETTLED: dict[int, Settled] = {
         "tool's view on every goal at the same side, which the rule does not draw (as the "
         "view withdrawn in 1d8f982ff did)",
         _README_LEFTOVERS,
-    ),
-    211: Settled(
-        DECIDED,
-        "[Couzo verified bounds 2026-10-14]",
-        "resources/web/couzo-verified-bounds-2026-10-14/source/certificates/n211.cert",
-        "487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
-        "7496774813149710519467765230441/500000000000000000000000000000",
-        _RUNZ7WN,
-        "every view goes to the owner's review at row 7: Evan Daniel's same-side and solved "
-        "views each let 12 per-square counts fall while no total does, grid-slack's 5 at all "
-        "three thresholds",
-        _README_Z7WN,
     ),
     236: Settled(
         DECIDED,
@@ -476,6 +471,7 @@ SETTLED: dict[int, Settled] = {
 #: regularized and one decided, and the three of think-3zi3 (175, 232 and 264), all
 #: regularized, which left it empty.
 PENDING_ALLOWED: dict[int, str] = {
+    211: _Z7WN_REVIEW,
     232: _Z7WN,
     237: _Z7WN,
     264: _Z7WN,
