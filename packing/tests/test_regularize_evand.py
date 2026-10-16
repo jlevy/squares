@@ -1080,11 +1080,45 @@ def test_rungs_check_lists_the_drawn_views_a_run_reproduces_and_writes_nothing(
     again_report = again / "n-004" / "report.json"
     assert drive.reproduced_views([again], root) == {
         "reproduced": [4],
+        "agrees": [],
         "differs": {},
         "not_drawn": [],
     }
     arguments = ["rungs", "--check", "--run-dir", str(again), "--repo-root", str(root)]
     assert drive.main(arguments) == 0
+
+    # Retained as evidence, a run keeps its reports gzip-compressed and not its views,
+    # so its view's text cannot be compared: a report that agrees on everything else is
+    # listed as agreeing, not as reproduced (review F2 of #644).
+    kept = tmp_path / "kept"
+    (kept / "n-004").mkdir(parents=True)
+    retained = kept / "n-004" / "report.json.gz"
+    retained.write_bytes(gzip.compress(again_report.read_bytes(), mtime=0))
+    assert drive.reproduced_views([kept], root) == {
+        "reproduced": [],
+        "agrees": [4],
+        "differs": {},
+        "not_drawn": [],
+    }
+    held = ["rungs", "--check", "--run-dir", str(kept), "--repo-root", str(root)]
+    assert drive.main(held) == 0
+    tampered = json.loads(again_report.read_text(encoding="utf-8"))
+    tampered["regularize"]["level"] = 3
+    retained.write_bytes(gzip.compress(json.dumps(tampered).encode(), mtime=0))
+    assert drive.reproduced_views([kept], root)["differs"] == {"4": ["measured"]}
+    assert drive.main(held) == 1
+
+    # It fails closed: on a missing directory, on one holding no report, and where no
+    # report is of a view the layer draws from the driver, since then it compared nothing.
+    (tmp_path / "empty").mkdir()
+    for directory in (tmp_path / "no-such-run", tmp_path / "empty"):
+        check = ["rungs", "--check", "--run-dir", str(directory), "--repo-root", str(root)]
+        assert drive.main(check) == 1
+    refused = json.loads(again_report.read_text(encoding="utf-8"))
+    refused["decision"] = {**refused["decision"], "row": 7, "decision": "refuse"}
+    retained.write_bytes(gzip.compress(json.dumps(refused).encode(), mtime=0))
+    assert drive.reproduced_views([kept], root)["not_drawn"] == [4]
+    assert drive.main(held) == 1
 
     # A run whose regularizer worked at another level reproduces nothing, though the
     # level is not in the view's text: it is the evidence a level 2 view is drawn as the
