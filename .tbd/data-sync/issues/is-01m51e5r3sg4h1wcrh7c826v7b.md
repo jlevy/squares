@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16: #639 (evand exact sides for 22 packings), #640 (
 kind: epic
 status: open
 priority: 1
-version: 6
+version: 7
 labels:
   - result-import
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
   - is-01m51fbdcwtq331pn8jre1w2bp
   - is-01m51h4p1g0t1pr0zdy42d0258
 created_at: 2026-10-16T04:05:27.288Z
-updated_at: 2026-10-16T04:58:41.086Z
+updated_at: 2026-10-16T05:14:16.460Z
 ---
 
 ## Notes
@@ -36,3 +36,5 @@ NEXT after those: think-kpm3 (153, 154, 207, 211, 237, 241, 302, 304) and think-
 OWNER DECISIONS: think-l3oo lists all 11 (incl. #574/T-174 which would re-house 35 counts — hold until regularization runs or allowlist with beads; #570; #557/#565; #624; case labels n-59/n-76/n-95/n-19; #557's n-18 label).
 
 GOTCHAS: (1) site edition race — other sessions cut editions too; cut last, merge immediately on green. (2) bead-tree gate reads origin/tbd-sync: close child beads before parents or every PR's CI fails. (3) release-impact: any result-requests.yaml change needs the methods-survey no-change entry backed by a byte-identical render at link revision = main sha (helper: scratchpad render/survey_render.sh; re-create if lost). (4) #538 animate-view >400 ms timing flake: re-run once with a one-line PR comment. (5) shared 4-core host: --push tier exceeds wall caps; rely on hosted CI plus --records and focused tests. (6) gh needs NO_PROXY for github hosts; Python 3.14 via uv run --frozen from packing/; tbd via npm get-tbd@0.10.0.
+
+2026-10-16 ~05:25Z, coordinator user-eb (new session "Overnight intake processing and validation", epic think-hg5s): taking the NEXT list of the 04:35Z handoff (think-kpm3 and think-3zi3 as user-eb-reg-3b3c; think-tk0u, think-qag2 and the sweep residue think-mu5v as user-eb-intake-residue, with think-abi1, think-gue4, think-hd6a and think-ribz transferred to it) and the T-185..T-190 review lane (think-tdna). Not touching the running 16 October lanes: think-la7h, think-g3q7, think-phyb, think-a4x3, think-xik9 and their branches; think-g59l (#639 replay) and think-o40t (#640 review) stay with the intake-1016 lane unless its notes hand them over. No merges without the owner's word.
