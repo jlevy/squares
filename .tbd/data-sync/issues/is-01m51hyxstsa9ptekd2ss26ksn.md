@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 20
+version: 21
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T10:31:36.114Z
+updated_at: 2026-10-16T10:45:02.153Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -66,3 +66,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 ~10:50Z coordinator: Review A on #642 (0/0/0/4, approve with nits) and on #651 (0/2/1/5). #651 A2 High: T-193 was raised to V3/C3 on the replay alone; the runbook's stage 4 exit follows both lanes, so the raise is held (addressing agent user-eb-addr-642-651) and the missing review lane think-7qxm (user-eb-review-193, strong-max, branch claude/intake-2026-10-16-review-193 stacked on #651) started now; a records step can raise T-193 if it returns in time. A1 High on #651 (informal chain) is the same gh-stack limitation as #650. Merge-ready so far: #647, #648, #641; #650 after #641 (retarget).
 
 2026-10-16 ~11:00Z coordinator: Review A (senior + correctness) on #649: 0/2/2/4. Composite completeness holds; rungs derived. A1 High: composite does not check the zmx2 header hash against the cover (fixable). A2 High: C3 declared while stage 4's mutated-certificate rule is unmet for zm_mixed.py (s95 has no refusal at all): rungs to be HELD below C3 tonight unless the controls run cheaply, pending owner question 16. Lane E resumed to address it and to merge #652's fixes.
+
+2026-10-16 10:45Z coordinator: the container restarted at ~10:40Z (second interruption after the 08:30-09:50Z usage pause). Disk state survived; every process and sub-agent was killed. Resumed from their transcripts: lanes B, I, J, E, addr-642-651, review-193, review-640 and the #653 reviewer, each told what was killed (I's 3a re-run, J's generator batches, B's 3c admission) and to restart killed steps under new run directory names. Lane D's local data commit 7fb79b461 pushed as backup branch claude/intake-2026-10-16-regularize-leftovers-wip (no PR).
