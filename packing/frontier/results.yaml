@@ -24880,7 +24880,7 @@ results:
   - id: T-184
     kind: optimality
     registered: '2026-10-14'
-    headline: '`s(76) = 9`, by a mixed cover of points and grid-line segments, reported'
+    headline: '`s(76) = 9`, by a mixed cover of points and grid-line segments'
     claim: >-
       Benjamin Greff reports s(76) = 9: the lower half by a mixed cover, the upper half by
       the 9 x 9 grid. It is the case k = 9 of the k^2 - 5 series.
@@ -24898,9 +24898,11 @@ results:
 
       At retention here the cover's data facts were recomputed, zmx2 was replayed over all
       8,100 roots and zm_mixed.py over the 64 sub-roots from the bytes the source pins, each
-      equal to the source's records, with two mutations refused: a reproduction with the
-      producer's code, recorded in the packet and not yet as evidence, so the value stands
-      as reported. The case record holds s(76) >= 1793/200 (wand125) until a review.
+      equal to the source's records, with two mutations refused by zmx2. The two checkers'
+      runs are read as one decision over the D4 region, every cell certified once: a
+      reproduction with the producer's code, counted as a confirmation once zm_mixed.py's
+      mutated-certificate controls are held. The review of 16 October found no
+      mathematical defect.
 
       Credit Benjamin Greff (https://github.com/bengreff/s76-certificate), building on Evan
       Daniel's method at margin zero, mixed format, checkers and Lean library, and on
@@ -24909,24 +24911,49 @@ results:
       verification pipeline were built and run with Claude (Anthropic) as an AI assistant,
       under the author's direction.
     scope: {n_values: [76]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C1
     significance:
       score: 3
       rationale: >-
         An exact value for a case that was open, by Daniel's recipe at a new count, as T-066
-        settled s(59) = 8: a substantive case result, not a new technique or a family.
-      scored: '2026-10-14'
-      by: the coordinator's brief for the 14 October records lane (think-osvq; draft)
+        settled s(59) = 8: a substantive case result, not a new technique or a family. The
+        16 October review confirmed the draft.
+      scored: '2026-10-16'
+      by: the 16 October stage 4 review, confirming the 14 October records lane's draft (repository)
     novelty: previously-published
     attribution:
       source_keys: ['[bengreff s76 certificate 2026-10-14]']
       published: '2026-10-14'
     composition: >-
-      Compound: the lower half is the reported cover (E-bengreff-594-cover-report), the
-      upper half the grid (E-basic-grid-upper); the minimum is the lower half's.
+      Compound, and the minimum is set by the lower half: E-bengreff-594-cover-replay
+      (interval-certified, zmx2 on 8,096 D4 roots and zm_mixed.py on the 64 sub-roots of
+      the other 4, replayed here and read as one decision), the upper half the grid
+      (E-basic-grid-upper, exact-algebraic). Both deciding programs are Daniel's and each
+      cell rests on one of them.
+
+      The cited replay derives C3; the record declares C1, because stage 4 counts a replay
+      as a confirmation only when two mutated certificates are refused by every checker
+      that accepted the original and a test holds them (result-import.md, stage 4), and
+      zm_mixed.py, which decides the 64 sub-roots, has refused one, the review's depth-12
+      pair, whose standing is owner question 16 (think-l3oo). The rung for a replay
+      without a machine certificate does not fit a machine replay that is complete but for
+      its controls. C1 is the review's read of the reported entry. V3 stands, since the
+      certificate replays, which is what V3 asks of evidence of any origin.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
+        kind: adversarial
+        reviewer: Claude (AI review), strong sub-agent tier at max reasoning, the stage 4 review lane of the 16 October intake pass, prompted separately from the records lane with no shared context
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-16'
+        scope: >-
+          An adversarial soundness review of Benjamin Greff's s(76) = 9 and s(95) = 10 by mixed covers: the reduction from each cover to its claim, both checkers' trust boundaries and what they share, the zmx2 and zm_mixed.py composite over the D4 region read cell by cell from the source's records and the retention's replay, the wall segments, exact poses and mutated covers, with programs written for the review.
+        verdict: accepted
+        covers: [T-184, T-191]
     evidence:
       - E-bengreff-594-cover-report
+      - E-bengreff-594-cover-replay
       - E-basic-grid-upper
     artifacts:
       - packing/resources/web/bengreff-s76-certificate-2026-10-14/README.md
@@ -24938,24 +24965,55 @@ results:
       - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_zmx2_d4.log
       - >-
         packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_triage_checks.log
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/review/README.md
+      - packing/devtools/replay_evand_zmx2.py
+      - packing/devtools/audit_evand_mixed_covers.py
+      - packing/devtools/check_basic_bounds.py
+      - docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
+    controls:
+      - packing/tests/test_replay_controls.py
+      - packing/tests/test_audit_evand_mixed_covers.py
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/controls/n76_control_drop-heaviest-point_zmx2_d4_x15-15_y15-15.log
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/controls/n76_control_drop-heaviest-segment_zmx2_d4_x5-5_y35-35.log
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/review/outputs/zm_control/n76_scaled-199-200_j054_depth12.log
     next_rung: >-
-      C3 needs the retained zmx2 and zm_mixed.py reproduction recorded as evidence, with
-      case 76 registered in devtools.replay_evand_zmx2 and
-      devtools.audit_evand_mixed_covers, and a review that reads the cover, the two
-      checkers' composite over the D4 region and the wall segments.
+      C3 waits on stage 4's control rule for zm_mixed.py, which decides the 64 sub-roots:
+      two mutated certificates refused by it and held by a test. The review's depth-12 pair
+      is one if a refusal at a depth limit of 12 counts, which is owner question 16
+      (think-l3oo, the review's finding F8); a second is owed either way, and refusals at
+      the source's limit of 24 did not finish. The rule is met for zmx2. V4 and C4 then
+      need a second adversarial AI review by a distinct reviewer and a human oversight
+      record; one adversarial review is retained. An unreduced zmx2 --full sweep (about 6
+      CPU-hours with its follow-up, think-eucc) would take the D4 reduction off the zmx2
+      part.
     unfinished_confirmations:
       - what: >-
-          an adversarial review of the cover, the zmx2 and zm_mixed.py composite over the D4
-          region and the reduction, recorded under docs/project/reviews/
-        rung: C1
-        link: think-osvq
+          zm_mixed.py's refusals of two mutated s(76) covers, held by a test, at a depth
+          limit the owner accepts: the review's depth-12 pair and one more, or two at the
+          accepted limit
+        rung: C3
+        link: think-l3oo
+      - what: >-
+          a second adversarial AI review of the cover and the composite, by a reviewer
+          distinct from the 16 October one
+        rung: C4
+      - what: >-
+          a human oversight record that checks the trust boundary, the certificate's meaning
+          and the AI review's findings
+        rung: C4
     notes: >-
-      V0 because the cited lower-half entry is the source's public claim, assurance
-      reported. C0 because no review is on file; the retention's reproduction of the
-      source's two checkers is in the packet's receipts. The case lanes are unchanged, so
-      the entry is pending adoption at n = 76 while wand125's 1793/200 holds the lower
-      lanes. The source's full zm_mixed.py pass over all 129,600 D4 roots is not at the
-      pinned revision.
+      Raised from V0/C0 to V3/C1 on 16 October 2026, when the intake's reproduction of the
+      source's two checkers was recorded as evidence and the stage 4 review of the cover
+      and the composite found no mathematical defect and no blocking finding. The
+      confirmation is held at C1 until zm_mixed.py's mutated-certificate controls are
+      held, as the composition says.
+
+      The case record's lanes keep wand125's 1793/200 until the case adopts the value
+      (devtools/certificate-citation-deferrals.yaml), so the entry is pending adoption at
+      n = 76. The source's full zm_mixed.py pass over all 129,600 D4 roots, published
+      after the pin on 14 October 2026 with one cell closed at depth 34, is not retained
+      here (review section 7.5); retained and audited, it would put every cell under
+      zm_mixed.py and all but 64 under both checkers (think-osvq).
   - id: T-185
     kind: upper-bound
     registered: '2026-10-15'
@@ -26021,7 +26079,7 @@ results:
     kind: optimality
     registered: '2026-10-15'
     headline: >-
-      `s(95) = 10`, by a mixed cover of points and grid-line segments, reported
+      `s(95) = 10`, by a mixed cover of points and grid-line segments
     claim: >-
       Benjamin Greff reports s(95) = 10: the lower half by a mixed cover, the upper half
       by the 10 x 10 grid. It is the case k = 10 of the k^2 - 5 series, after T-066 (k =
@@ -26041,10 +26099,11 @@ results:
 
       At retention here the cover's data facts were recomputed, zmx2 was replayed over
       all 10,000 roots and zm_mixed.py over the 304 sub-roots from the bytes the source
-      pins, each equal to the source's records, with two mutations refused: a
-      reproduction with the producer's code, recorded in the packet and not yet as
-      evidence, so the value stands as reported. The case record holds s(95) >= 1993/200
-      (wand125) until a review.
+      pins, each equal to the source's records, with two mutations refused by zmx2. The two
+      checkers' runs are read as one decision over the D4 region, every cell certified
+      once: a reproduction with the producer's code, counted as a confirmation once
+      zm_mixed.py's mutated-certificate controls are held. The review of 16 October found
+      no mathematical defect.
 
       Credit Benjamin Greff (https://github.com/bengreff/s95-certificate), building on
       Evan Daniel's method at margin zero, mixed format, checkers and Lean library, and
@@ -26053,8 +26112,8 @@ results:
       states: "Benjamin Greff directed the work. The search, LP and verification
       pipeline were built and run with Claude (Anthropic) as an AI assistant."
     scope: {n_values: [95]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C1
     significance:
       score: 3
       rationale: >-
@@ -26062,45 +26121,92 @@ results:
         T-066 and T-184 settled s(59) = 8 and s(76) = 9: a substantive case result, not
         a new technique or a family. The third instance of the k^2 - 5 series does not
         make it a family: each cross is re-optimised by LP, and nothing carries to
-        another k.
-      scored: '2026-10-15'
-      by: 'the #610 intake lane (think-ribz; draft)'
+        another k. The 16 October review confirmed the draft.
+      scored: '2026-10-16'
+      by: 'the 16 October stage 4 review, confirming the #610 intake lane''s draft (repository)'
     novelty: previously-published
     attribution:
       source_keys: ['[bengreff s95 certificate 2026-10-15]']
       published: '2026-10-15'
     composition: >-
-      Compound: the lower half is the reported cover (E-bengreff-610-cover-report), the
-      upper half the grid (E-basic-grid-upper); the minimum is the lower half's.
-    evidence: [E-bengreff-610-cover-report, E-basic-grid-upper]
+      Compound, and the minimum is set by the lower half: E-bengreff-610-cover-replay
+      (interval-certified, zmx2 on 9,981 D4 roots and zm_mixed.py on the 304 sub-roots of
+      the other 19, replayed here and read as one decision), the upper half the grid
+      (E-basic-grid-upper, exact-algebraic). Both deciding programs are Daniel's and each
+      cell rests on one of them.
+
+      The cited replay derives C3; the record declares C1, because stage 4 counts a replay
+      as a confirmation only when two mutated certificates are refused by every checker
+      that accepted the original and a test holds them (result-import.md, stage 4), and
+      zm_mixed.py, which decides the 304 sub-roots, has refused none. The rung for a
+      replay without a machine certificate does not fit a machine replay that is complete
+      but for its controls. C1 is the review's read of the reported entry. V3 stands,
+      since the certificate replays, which is what V3 asks of evidence of any origin.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
+        kind: adversarial
+        reviewer: Claude (AI review), strong sub-agent tier at max reasoning, the stage 4 review lane of the 16 October intake pass, prompted separately from the records lane with no shared context
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-16'
+        scope: >-
+          An adversarial soundness review of Benjamin Greff's s(76) = 9 and s(95) = 10 by mixed covers: the reduction from each cover to its claim, both checkers' trust boundaries and what they share, the zmx2 and zm_mixed.py composite over the D4 region read cell by cell from the source's records and the retention's replay, the wall segments, exact poses and mutated covers, with programs written for the review.
+        verdict: accepted
+        covers: [T-184, T-191]
+    evidence: [E-bengreff-610-cover-report, E-bengreff-610-cover-replay, E-basic-grid-upper]
     artifacts:
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_cover_audit.json
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_zmx2_d4.log
+      - packing/devtools/replay_evand_zmx2.py
+      - packing/devtools/audit_evand_mixed_covers.py
+      - packing/devtools/check_basic_bounds.py
+      - docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
+    controls:
+      - packing/tests/test_replay_controls.py
+      - packing/tests/test_audit_evand_mixed_covers.py
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/controls/n95_control_drop-heaviest-point_zmx2_d4_x15-15_y15-15.log
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/controls/n95_control_drop-heaviest-segment_zmx2_d4_x5-5_y45-45.log
     next_rung: >-
-      C3 needs the retained zmx2 and zm_mixed.py reproduction recorded as evidence, with
-      case 95 registered in devtools.replay_evand_zmx2 and
-      devtools.audit_evand_mixed_covers (think-ccjt), and a review that reads the cover,
-      the two checkers' composite over the D4 region and the 404 wall segments.
+      C3 waits on stage 4's control rule for zm_mixed.py, which decides the 304 sub-roots:
+      two mutated certificates refused by it and held by a test. None has run for this
+      cover, so two are owed whatever the answer to owner question 16 (think-l3oo, the
+      review's finding F8) on whether a refusal at a depth limit of 12 counts. The rule is
+      met for zmx2. V4 and C4 then need a second adversarial AI review by a distinct
+      reviewer and a human oversight record; one adversarial review is retained. An
+      unreduced zmx2 --full sweep (about 6 CPU-hours with its follow-up, think-eucc) would
+      take the D4 reduction off the zmx2 part.
     unfinished_confirmations:
       - what: >-
-          an adversarial review of the cover, the zmx2 and zm_mixed.py composite over
-          the D4 region and the reduction, recorded under docs/project/reviews/
-        rung: C1
-        link: think-ribz
+          zm_mixed.py's refusals of two mutated s(95) covers, held by a test, at a depth
+          limit the owner accepts; none has run
+        rung: C3
+        link: think-l3oo
+      - what: >-
+          a second adversarial AI review of the cover and the composite, by a reviewer
+          distinct from the 16 October one
+        rung: C4
+      - what: >-
+          a human oversight record that checks the trust boundary, the certificate's meaning
+          and the AI review's findings
+        rung: C4
     notes: >-
-      V0 because the cited lower-half entry is the source's public claim, assurance
-      reported. C0 because no review is on file; the retention's reproduction of the
-      source's two checkers is in the packet's receipts. The case lanes are unchanged,
-      so the entry is pending adoption at n = 95 while wand125's 1993/200 holds the
-      lower lanes. At n = 96 it gives s(96) >= 10 by monotonicity, which T-081 registers
+      Raised from V0/C0 to V3/C1 on 16 October 2026, when the intake's reproduction of the
+      source's two checkers was recorded as evidence and the stage 4 review of the cover
+      and the composite found no mathematical defect and no blocking finding. The
+      confirmation is held at C1 until zm_mixed.py's mutated-certificate controls are
+      held, as the composition says. The case
+      record's lanes keep wand125's 1993/200 until the case adopts the value
+      (devtools/certificate-citation-deferrals.yaml), so the entry is pending adoption at n
+      = 95. At n = 96 it gives s(96) >= 10 by monotonicity, which T-081 registers
       already. No full zm_mixed.py pass over the 160,000 D4 roots is at the pinned
       revision (think-zn7s), and the Lean wrapper is unbuilt here (think-ojr9).
 
-      The retention's receipts, receipts/n95_cover_audit.json, n95_zmx2_d4.log,
-      n95_triage_checks.log and the zm_mixed.py records in
-      bengreff-s95-certificate-2026-10-15, stay out of this entry's artifacts so that
-      the workers' snapshot stays under its cap.
+      The retention's other receipts, receipts/n95_triage_checks.log, the zmx2 root logs
+      and the zm_mixed.py records in bengreff-s95-certificate-2026-10-15, stay out of this
+      entry's artifacts so that the workers' snapshot stays under its cap.
 
       The issue was filed on 15 October 2026, minutes after the cover's first commit and
       after Francisco Couzo's certificate at 237 of the same day (T-190), so the entry

@@ -2486,7 +2486,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-10-15'
+  reviewed: '2026-10-16'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -2509,7 +2509,8 @@ sources:
     byte-identical to the retained snapshot: no later release. Read again on 2026-10-15 (the evening
     intake pass, think-wnsv): the page, still "Release 1 · 29 July 2026" with datePublished 2026-07-29,
     and data/results.json are byte-identical to results.html and results.json here (SHA-256 4cc4d80d...
-    and dd7c1c62...), so nothing changed.
+    and dd7c1c62...), so nothing changed. Read again on 2026-10-16 (the morning intake pass,
+    think-mu5v): both are still byte-identical to the retained copies, so nothing changed.
 
     '
 - id: schadt-n29-2025
@@ -2592,7 +2593,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-15'
+  reviewed: '2026-10-16'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -2621,7 +2622,9 @@ sources:
     12.872029849081180 in issue 481, whose import think-ac4h owns. Read again on 2026-10-15 (the evening
     intake pass, think-wnsv): the comment, created 2026-10-07T17:27:53Z, still carries its
     2026-10-07T18:33:04Z edit, and issue 401 has no comment after 2026-10-07T22:54:51Z, only the intake
-    label added on 2026-10-12, so nothing changed.'
+    label added on 2026-10-12, so nothing changed. Read again on 2026-10-16 (the morning intake
+    pass, think-mu5v): the comment still carries its 2026-10-07T18:33:04Z edit, and the last comment
+    on issue 401 is still that of 2026-10-07T22:54:51Z, so nothing changed.'
 - id: squish-update-2026-10-07
   title: 'SQUISH update: seven additional and five tighter rational packings'
   role: source-repository
@@ -5101,8 +5104,12 @@ sources:
   - resources/web/bengreff-s76-certificate-2026-10-14/README.md
   evidence:
   - E-bengreff-594-cover-report
-  notes: The whole tree is retained at the pin. The cover is reported to settle s(76) = 9 with the grid;
-    the case's lower lanes are unchanged pending review (think-osvq).
+  - E-bengreff-594-cover-replay
+  notes: The whole tree is retained at the pin. The cover is reported to settle s(76) = 9 with the grid.
+    The intake's replay of the source's two checkers, zmx2 over the D4 region's roots and zm_mixed.py
+    over the sub-roots of the four it leaves, is recorded as E-bengreff-594-cover-replay, and since
+    the 16 October review T-184 holds it at V3/C1, its confirmation waiting on zm_mixed.py's
+    mutated-certificate controls (finding F8); the case's lower lanes wait on them too (think-osvq).
 - id: evand-compositions-2026-10-13
   title: Evan Daniel's two-piece composition certificates at 231d41d, issue584
   role: source-repository
@@ -5901,11 +5908,14 @@ sources:
   represented_by:
   - frontier/results.yaml
   - resources/web/bengreff-s95-certificate-2026-10-15/README.md
-  evidence: [E-bengreff-610-cover-report]
+  evidence: [E-bengreff-610-cover-report, E-bengreff-610-cover-replay]
   notes: >-
     The whole tree is retained at the pin. The cover is reported to settle s(95) = 10
-    with the grid; the case's lower lanes are unchanged pending review (think-ribz);
-    T-191 records it.
+    with the grid. The intake's replay of the source's two checkers, zmx2 over the D4
+    region's roots and zm_mixed.py over the sub-roots of the 19 it leaves, is recorded
+    as E-bengreff-610-cover-replay, and since the 16 October review T-191 holds it at
+    V3/C1, its confirmation and the case's lower lanes waiting on two zm_mixed.py
+    mutated-certificate controls (finding F8; think-ribz).
 - id: wand125-continuous-n28-5745-2026-10-15
   title: Hiroaki Hosono's (wand125's) reported n28 continuous-pose lower bound, no issue
   role: source-repository

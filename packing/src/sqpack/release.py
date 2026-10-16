@@ -72,6 +72,9 @@ class PublicationHistoryEntry(NamedTuple):
 #: happened (the owner, 2026-09-22: "accurately record the date of when that was first
 #: published"). The deployment and commit behind each date, so it can be re-read:
 #:
+#:   v0.7.11 2026-10-16T01:25:34Z  bbc12b617  the merge of PR 631, the top of stack 632 (PR
+#:                                            627 cut it); dated October 15 when cut, it went
+#:                                            live the next day in UTC (think-tk0u)
 #:   v0.5.0  2026-10-02T01:07:03Z  8aaa411dc  the merge of PR 291, label and content together
 #:   v0.4.2  2026-09-28T06:11:35Z  c19e6c0e2  the merge of PR 239, label and content together
 #:   v0.4.1  2026-09-22T23:12:36Z  d5b1c2e1b  the merge of PR 218, label and content together
@@ -85,12 +88,35 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.19",
+        first_published="October 16, 2026",
+        result_scope=(
+            "Raise Benjamin Greff's s(76) = 9 and s(95) = 10 to V3/C1 on the intake's "
+            "recorded reproductions."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.18",
+        first_published="October 16, 2026",
+        result_scope=(
+            "List the October 16 review of Benjamin Greff's mixed covers for s(76) = 9 "
+            "and s(95) = 10 in the synopsis document map."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.17",
+        first_published="October 16, 2026",
+        result_scope=(
+            "List the October 16 review of the upper-bound imports T-185 to T-190 in the "
+            "synopsis document map."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.16",
         first_published="October 16, 2026",
         result_scope=(
-            "Separate the source verification of reported formal proofs from independent "
-            "confirmation, crediting T-154's retained Lean source build at V3 while C "
-            "stays at C1."
+            "List the October 16 review of Oscar Fitzharding's Lean proof that s(19) = 3 "
+            "+ 4√2/3 in the synopsis document map."
         ),
     ),
     PublicationHistoryEntry(
@@ -128,7 +154,7 @@ PUBLICATION_HISTORY = (
     ),
     PublicationHistoryEntry(
         version="v0.7.11",
-        first_published="October 15, 2026",
+        first_published="October 16, 2026",
         result_scope=(
             "Register five results in report order, T-188 to T-192, none adopting a "
             "house: smaller reported packings of 211 and 237 squares, a reported s(95) = "
@@ -393,7 +419,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "006661d4b8fc62034fb0c2219a34219b3891759c"
+DATA_REVISION = "2d57609b38fc4824978027561968e15dab98efb5"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -816,13 +842,42 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.18",
+        version="v0.7.19",
+        impact="patch",
+        reason=(
+            "Raise Benjamin Greff's s(76) = 9 and s(95) = 10 to V3/C1 on the intake's "
+            "recorded reproductions."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.17",
+        version="v0.7.18",
+        impact="patch",
+        reason=(
+            "List the October 16 review of Benjamin Greff's mixed covers for s(76) = 9 "
+            "and s(95) = 10 in the synopsis document map."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.16",
+        version="v0.7.17",
+        impact="patch",
+        reason=(
+            "List the October 16 review of the upper-bound imports T-185 to T-190 in the "
+            "synopsis document map."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.15",
         version="v0.7.16",
         impact="patch",
         reason=(
-            "Separate the source verification of reported formal proofs from independent "
-            "confirmation, crediting T-154's retained Lean source build at V3 while C "
-            "stays at C1."
+            "List the October 16 review of Oscar Fitzharding's Lean proof that s(19) = 3 "
+            "+ 4√2/3 in the synopsis document map."
         ),
     ),
     ReleaseImpactDecision(
@@ -1113,14 +1168,152 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-lower-bounds-explainer.md",
         ),
         reason=(
-            "The site cut v0.7.16 for PR #645 regenerated the five claim documents at "
-            "PUBLICATION_REVISION 6f379df6, this branch's head before the cut, kept "
-            "reachable from main by the merge commit the PR merges with; with that "
-            "revision read back as 46ae34f9, each is byte-identical to the base's, so the "
-            "32 repository links it pins are the only change, and no claim, certificate or "
-            "command moves. A link revision follows the site's edition and is not a "
-            "revision of the explainer, so it keeps v0.4.7. Source-compared; no render of "
-            "the claim documents was taken."
+            "The site cut v0.7.19 for T-184 and T-191 at V3/C1 regenerated the five claim "
+            "documents at PUBLICATION_REVISION 3d4ada4c, this branch's re-pin after "
+            "merging #652, kept reachable from main by the merge commit the PR merges "
+            "with; with that revision read back as #652's 1cc0dbbe, each is "
+            "byte-identical to #652's, so the 32 repository links it pins are the only "
+            "change, and no claim, certificate or command moves. A link revision follows "
+            "the site's edition and is not a revision of the explainer, so it keeps "
+            "v0.4.7. Source-compared; no render of the claim documents was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.18 for the October 16 review of s(76) = 9 and s(95) = 10 "
+            "regenerated the five claim documents at PUBLICATION_REVISION 1cc0dbbe, the "
+            "merge of main into this branch, kept reachable from main by the merge commit "
+            "the PR merges with; with that revision read back as main's 815f3c67, each is "
+            "byte-identical to main's, so the 32 repository links it pins are the only "
+            "change, and no claim, certificate or command moves. A link revision follows "
+            "the site's edition and is not a revision of the explainer, so it keeps "
+            "v0.4.7. Source-compared; no render of the claim documents was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.17 for the October 16 review of T-185 to T-190 regenerated "
+            "the five claim documents at PUBLICATION_REVISION 815f3c67, the merge of main "
+            "into this branch, kept reachable from main by the merge commit the PR merges "
+            "with; with that revision read back as main's 1efce164, each is "
+            "byte-identical to main's, so the 32 repository links it pins are the only "
+            "change, and no claim, certificate or command moves. A link revision follows "
+            "the site's edition and is not a revision of the explainer, so it keeps "
+            "v0.4.7. Source-compared; no render of the claim documents was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.16 for the October 16 review of the s(19) Lean proof "
+            "regenerated the five claim documents at PUBLICATION_REVISION 1efce164, the "
+            "merge of main into this branch, kept reachable from main by the merge commit "
+            "the PR merges with; with that revision read back as main's 46ae34f9, each is "
+            "byte-identical to main's, so the 32 repository links it pins are the only "
+            "change, and no claim, certificate or command moves. A link revision follows "
+            "the site's edition and is not a revision of the explainer, so it keeps "
+            "v0.4.7. Source-compared; no render of the claim documents was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/src/sqpack/release.py",),
+        outputs=("index.html", "about.html"),
+        reason=(
+            "Dates v0.7.11 October 16, 2026, the day its first Pages deployment went live "
+            "(bbc12b61, the merge of PR 631 that landed stack 632, 2026-10-16T01:25:34Z), "
+            "and records that deployment in the history's comment (think-tk0u, PR 627 "
+            "review B3). The head edition stays v0.7.15 of October 16. No page prints a "
+            "date from below the head: the pages stamp the head edition, the films the "
+            "v0.4.2 entry, and site_urls --check finds the URL registry and sitemap "
+            "unchanged. The deployed index.html and about.html name no v0.7.11. This is a "
+            "source-reviewed disposition; no site rebuild or byte comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/frontier/source-coverage.yaml",),
+        outputs=(
+            "about.html",
+            "atlas.html",
+            "conventions.html",
+            "development.html",
+            "epistemics.html",
+            "index.html",
+            "news.html",
+            "papers.html",
+            "readme.html",
+            "results.html",
+            "synopsis.html",
+            "tutorial-advanced.html",
+            "tutorial.html",
+            "visualize.html",
+        ),
+        reason=(
+            "Rendered on this branch over main e2e018f3 with the pin at 288a1a52, once "
+            "with main's source register and once with the branch's, the site's pages, "
+            "result overviews, case records, forwarders and assets are byte-identical in "
+            "all 1470 files render_overview writes. The register moves the reviewed dates "
+            "of UnitSquare Release 1 and SQUISH n153 to 16 October and adds a note on "
+            "each read (PR 647 review A1). As a data commit it is followed by the re-pin "
+            "to 4a9292ec (rule 1), which changes the data hash in the stamp every page "
+            "prints; that change is the re-pin's, not the register's."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main e2e018f3 at link revision e2e018f3, once "
+            "with main's requests record and source register and once with the branch's, "
+            "the HTML and Markdown are byte-identical in all 42 files the renderer writes; "
+            "the PDF prints from that HTML and was not rebuilt. The requests record gains "
+            "#643's entry, the project's tracking issue for the Lean proof of ValidTilt9, "
+            "and the source register moves the reviewed dates of UnitSquare Release 1 and "
+            "SQUISH n153 to 16 October with a note on each read (PR 647 review A1); the "
+            "survey prints none of them, so it keeps v0.2.2."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1145,6 +1338,44 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "command moves. A link revision follows the site's edition and is not a "
             "revision of the explainer, so it keeps v0.4.7. Source-compared; no render of "
             "the claim documents was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+            "site",
+        ),
+        paths=("packing/devtools/adopt_houses.py", "packing/devtools/default_drawings.py"),
+        outputs=(
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The intake's regularization step (think-g3q7) adds `regularization_owed` to "
+            "the house-adoption writer, which its command line prints after a write and a "
+            "dry run, and a docstring paragraph. The builders reach the module through "
+            "`generate_frontier_case` and `source_supersession`, which call `holds`, "
+            "`adopt_case`, `held_note` and `carries_held_note`, never `main` or the new "
+            "functions; no case record, coverage row, deferral or prose the writer "
+            "produces changes, and its new import of `default_drawings` is one the site's "
+            "builders already make. In `default_drawings` (reviews A1 and B1 of #641), "
+            "`count_state` no longer reads a count `PENDING_ALLOWED` names as regular as "
+            "published, which changes no state today, since every listed count is "
+            "pending: `default_drawings --check` passes on the committed record byte for "
+            "byte. The new `--compare` report reads two records and no builder calls it; "
+            "the builders read `decisions`, `regularized_defaults`, `held_reasons` and "
+            "`credit_line`, none of them changed. No render was taken, and every "
+            "component keeps its version."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2527,6 +2758,40 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ),
     ReleaseNoPublicChange(
         components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main e2e018f3 at link revision e2e018f3, once "
+            "with main's register and source register and once with this branch's, the "
+            "four papers' HTML before the browser's math pass, which this host cannot run, "
+            "and their Markdown are byte-identical; the PDFs print from that HTML. The "
+            "register's T-184 and T-191 cite the s(76) and s(95) replays and the 16 October "
+            "review, rise to V3/C1 and change their headline, claim, composition, "
+            "next_rung, notes, artifacts and unfinished confirmations, with the register "
+            "count unchanged, and the two "
+            "source rows cite the replays; no paper prints any of it, so each keeps its "
+            "edition."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
@@ -2722,7 +2987,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "6f379df6"
+PUBLICATION_REVISION = "3d4ada4c"
 
 
 def data_pathspec() -> tuple[str, ...]:

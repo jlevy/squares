@@ -8,7 +8,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **606** evidence records. **352** are formal; **344** of those were established here. **9** are samples, counted separately.
+- **608** evidence records. **354** are formal; **346** of those were established here. **9** are samples, counted separately.
 - **238** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
@@ -611,7 +611,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-closed-form-report` | 154 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-replay4d` |
 | `E-mishapolk-593-certificate-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-mishapolk-593-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
-| `E-bengreff-594-cover-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-evand-zmx2`, `V-evand-zm-mixed-py` |
+| `E-bengreff-594-cover-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-zmx2`, `V-evand-zm-mixed-py` |
+| `E-bengreff-594-cover-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | `V-evand-zmx2`, `V-evand-zm-mixed-py`, `V-replay-evand-zmx2`, `V-audit-evand-mixed-covers` |
 | `E-evand-584-compositions-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-596-compositions-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-fang-direct-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
@@ -625,17 +626,18 @@ results, it is a statement about what this repository has itself examined.
 | `E-couzo-487b058-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-couzo-607-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-couzo-4e4c8ce-n237-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
-| `E-bengreff-610-cover-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-evand-zmx2`, `V-evand-zm-mixed-py` |
+| `E-bengreff-610-cover-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-zmx2`, `V-evand-zm-mixed-py` |
+| `E-bengreff-610-cover-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | `V-evand-zmx2`, `V-evand-zm-mixed-py`, `V-replay-evand-zmx2`, `V-audit-evand-mixed-covers` |
 | `E-wand125-continuous-n28-5745-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-continuous`, `V-wand125-contpose-check3` |
 | `E-evand-639-exact-sides-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-n019-fitzharding-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 241, verified 360
-- **method**: exact-algebraic 177, interval-certified 166, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 241
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 545
-- **relationship to the producer's code**: generator 5, independent-implementation 224, not-applicable 23, same-implementation 330, shared-components 18, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 241, verified 362
+- **method**: exact-algebraic 177, interval-certified 168, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 241
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 547
+- **relationship to the producer's code**: generator 5, independent-implementation 224, not-applicable 23, same-implementation 332, shared-components 18, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
