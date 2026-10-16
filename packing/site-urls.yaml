@@ -3466,7 +3466,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/103.html
   canonical: cases/103.html
@@ -3650,7 +3650,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/124.html
   canonical: cases/124.html
@@ -3674,7 +3674,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/127.html
   canonical: cases/127.html
@@ -4106,7 +4106,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/176.html
   canonical: cases/176.html
@@ -4234,7 +4234,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/190.html
   canonical: cases/190.html
@@ -4314,7 +4314,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/2.html
   canonical: cases/2.html
@@ -4370,7 +4370,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -4618,7 +4618,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/233.html
   canonical: cases/233.html
@@ -4842,7 +4842,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/259.html
   canonical: cases/259.html
@@ -4850,7 +4850,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/26.html
   canonical: cases/26.html
@@ -4914,7 +4914,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/267.html
   canonical: cases/267.html
@@ -4922,7 +4922,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/268.html
   canonical: cases/268.html
@@ -5146,7 +5146,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/293.html
   canonical: cases/293.html
@@ -5170,7 +5170,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/296.html
   canonical: cases/296.html
@@ -5234,7 +5234,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/302.html
   canonical: cases/302.html
@@ -5242,7 +5242,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/303.html
   canonical: cases/303.html
@@ -5922,7 +5922,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/89.html
   canonical: cases/89.html
@@ -15455,7 +15455,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: optimality
@@ -15470,6 +15470,7 @@ urls:
     builds_on: null
     evidence:
     - E-bengreff-594-cover-report
+    - E-bengreff-594-cover-replay
     - E-basic-grid-upper
     artifacts:
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/README.md
@@ -15478,6 +15479,38 @@ urls:
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_cover_audit.json
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_zmx2_d4.log
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_triage_checks.log
+    - packing/resources/web/bengreff-s76-certificate-2026-10-14/review/README.md
+    - packing/devtools/replay_evand_zmx2.py
+    - packing/devtools/audit_evand_mixed_covers.py
+    - packing/devtools/check_basic_bounds.py
+    - docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
+  amendments:
+  - date: '2026-10-16'
+    reason: 'Raise to V3/C1: cite the intake''s reproduction of the source''s two checkers over the
+      D4 region (E-bengreff-594-cover-replay) and the 16 October stage 4 review, the confirmation
+      held until zm_mixed.py''s mutated-certificate controls are held; scope, attribution and the
+      stated value are unchanged.'
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 76
+      established: null
+      attribution:
+        source_keys:
+        - '[bengreff s76 certificate 2026-10-14]'
+        published: '2026-10-14'
+      builds_on: null
+      evidence:
+      - E-bengreff-594-cover-report
+      - E-basic-grid-upper
+      artifacts:
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/README.md
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate/cover/s76_cover_v5.txt.gz
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate/README.md
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_cover_audit.json
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_zmx2_d4.log
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_triage_checks.log
 - path: result/t-185.html
   canonical: result/t-185.html
   kind: result
@@ -15662,7 +15695,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: optimality
@@ -15677,11 +15710,42 @@ urls:
     builds_on: null
     evidence:
     - E-bengreff-610-cover-report
+    - E-bengreff-610-cover-replay
     - E-basic-grid-upper
     artifacts:
     - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
     - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
     - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+    - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_cover_audit.json
+    - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_zmx2_d4.log
+    - packing/devtools/replay_evand_zmx2.py
+    - packing/devtools/audit_evand_mixed_covers.py
+    - packing/devtools/check_basic_bounds.py
+    - docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
+  amendments:
+  - date: '2026-10-16'
+    reason: 'Raise to V3/C1: cite the intake''s reproduction of the source''s two checkers over the
+      D4 region (E-bengreff-610-cover-replay) and the 16 October stage 4 review, the confirmation
+      held until zm_mixed.py''s mutated-certificate controls are held; scope, attribution and the
+      stated value are unchanged.'
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 95
+      established: null
+      attribution:
+        source_keys:
+        - '[bengreff s95 certificate 2026-10-15]'
+        published: '2026-10-15'
+      builds_on: null
+      evidence:
+      - E-bengreff-610-cover-report
+      - E-basic-grid-upper
+      artifacts:
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
 - path: result/t-192.html
   canonical: result/t-192.html
   kind: result
@@ -15709,6 +15773,81 @@ urls:
     - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json
     - packing/devtools/continuous_pose_followup.py
     - packing/devtools/audit_continuous_pose.py
+- path: result/t-193.html
+  canonical: result/t-193.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-16'
+  lastmod: '2026-10-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 102
+      - 123
+      - 126
+      - 175
+      - 199
+      - 204
+      - 232
+      - 258
+      - 259
+      - 266
+      - 267
+      - 292
+      - 295
+      - 301
+      - 302
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel exact current records 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-evand-639-exact-sides-report
+    artifacts:
+    - packing/resources/web/evand-exact-cur-2026-10-16/README.md
+    - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md
+    - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/data/verify.txt
+    - packing/campaign/issue-intake/upper-bounds-20261016/README.md
+    - packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json
+    - packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+    - packing/resources/web/evand-exact-cur-2026-10-16/receipts/replay-verify-exact.json
+    - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
+- path: result/t-194.html
+  canonical: result/t-194.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-16'
+  lastmod: '2026-10-16'
+  status: live
+  identity:
+    kind: optimality
+    scope:
+      n_values:
+      - 19
+    established: null
+    attribution:
+      source_keys:
+      - '[Fitzharding n19 Lean 2026]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-n019-fitzharding-lean-report
+    artifacts:
+    - packing/resources/web/fitzharding-n19-lean-2026-10-16/README.md
+    - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/Optimality.lean
+    - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/PlainPacking.lean
+    - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/SquareBase.lean
+    - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Basic.lean
+    - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/EndpointPacking.lean
+    - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/Square19Optimality.log.gz
+    - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/kernel-replay.json
 - path: results.html
   canonical: results.html
   kind: page

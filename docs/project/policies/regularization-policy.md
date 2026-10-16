@@ -240,6 +240,8 @@ in the document map.
 
 A lapsed adjustment is re-applied only if its parameters still produce a view that meets
 every obligation, and the reviewer confirms it in a new record.
+A lapsed view goes back through the pass by the
+[regularization process](../guides/regularization-process.md#when-a-witness-changes).
 
 ## 6. Forking the Vendored Generator
 
@@ -316,6 +318,10 @@ routine gate’s wall ceiling.
 So it runs on request with a receipt, and the gates hold the decisions it produced
 ([OR-13](../../../operating-rules.md#or-13-every-fast-check-runs-in-ci-only-the-unavoidably-slow-ones-leave),
 [OR-17](../../../operating-rules.md#or-17-every-routine-gate-has-a-wall-ceiling-and-anything-above-it-is-selected-on-purpose)).
+A house adoption is such a request: the intake pass that re-houses a count runs the
+generators on the new witness under its compute cap, or defers the count with its bead,
+in the adoption’s pull request
+([the import runbook](../../../packing/campaign/result-import.md#adopt-a-house-then-regularize-it)).
 
 | Check | What it holds | Where it runs |
 | --- | --- | --- |
@@ -654,19 +660,27 @@ house picture and why.
 The owner asked on 15 October 2026 that the records make it evident which drawings are
 regularized. So the same record states, for every count, whether the picture it draws is
 `regularized` (a view of Evan Daniel’s regularizer or the grid-slack generator),
-`regular-as-published` (the house drawing has no uneven and no near-axis square, and no
-strong view of the count has lapsed), `decided-no-better` (the strong generators ran on
-that witness and drew nothing the improvement rule takes), `exempt` (with a reason and
-the bead that owns it) or `pending`, with the witness it was decided on (its source’s
-key, path and revision and its side, never a digest of the file, under OR-16) and the
-runs that decided it.
+`regular-as-published` (the house drawing has no uneven and no near-axis square, no
+strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
+bead’s runs), `decided-no-better` (the strong generators ran on that witness and drew
+nothing the improvement rule takes), `exempt` (with a reason and the bead that owns it)
+or `pending`, with the witness it was decided on (its source’s key, path and revision
+and its side, never a digest of the file, under OR-16) and the runs that decided it.
 The index’s `status: regularized` says only that the layer holds a view.
 A view that lapses with its witness is recorded on the axis tool’s record (`lapsed`),
 and the count is pending until the generators decide the new witness.
+So is a count that `default_drawings.PENDING_ALLOWED` names, whatever a new house reads:
+the list’s first entries are the record of strong views that lapsed before the axis
+record kept that block.
 The records tier fails on a pending count unless `default_drawings.PENDING_ALLOWED`
 names it with its bead, and on a named count that is no longer pending, so the list
-equals the pending set: it shrinks as counts are regularized and grows only by a
-reviewed change, and `bead tree` holds each bead it names open.
+equals the pending set, and `bead tree` holds each bead it names open.
+Since the list also holds its counts pending, it changes only by reviewed changes: a
+count leaves it when the strong generators or a `SETTLED` decision decide it, or when a
+reviewed change drops its entry, which the gate accepts where the count then reads
+regular as published; and a count joins it with its bead, whatever its house reads.
+The gate cannot tell a dropped entry from a decided one, so the pull request that drops
+one shows its bead’s runs or what the count draws before and after.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
