@@ -176,7 +176,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-037](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `previously-published` | s(11) > 31/8 = 3.875, by Marc Leonard Overbeck’s 11-squares-certified-bound v1.0.2 release of 22 September 2026. |
 | [T-060](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `previously-published` | `s(11) = T = (6u+4)/(1+2u−u²) = 3.8770835900228141773078970601…`, where `u` is the unique root in `(9/25, 37/100)` of `5u⁸−10u⁷−2u⁶+14u⁵+12u⁴−6u³+2u²+2u−1 = 0`. |
 | [T-153](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | Marc Leonard Overbeck (Kleddamag) claims, as a candidate proof, that `s(17) = L = 4.67553009360455095163…`, the side of John Bidwell’s 1998 packing of seventeen unit squares, with the squares closed, independently rotated and allowed to touch. |
-| [T-154](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that John Bidwell’s 1998 packing of seventeen unit squares is optimal: `s(17) = 4.67553009360455095163…`, T-153’s value L. |
+| [T-154](packing/frontier/RESULTS.md) | 17 | `V3` | `C1` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that John Bidwell’s 1998 packing of seventeen unit squares is optimal: `s(17) = 4.67553009360455095163…`, T-153’s value L. |
 | [T-194](packing/frontier/RESULTS.md) | 19 | `V0` | `C0` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that Robert Wainwright’s 1979 packing of nineteen unit squares is optimal: s(19) = 3 + (4/3)√2 = 4.885618083164126731735584965612…. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V3` | `C3` | `S4` | `apparently-novel` | s(12) >= 99/25, by this project’s weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
@@ -671,6 +671,7 @@ case or experiment separately.
 | [Fitzharding’s Lean Proof of s(17) = L: Mathematical-Correctness Review](docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md) | dated review record | record | retained | — |
 | [Mathematical Review: Overbeck’s Candidate Proof That `s(17) = L`, Correctness Lane](docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md) | dated review record | record | retained | — |
 | [Adversarial Review: Fitzharding’s Lean Proof That `s(17) = L`](docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md) | dated review record | record | retained | — |
+| [Source-Build Admission Audit: Fitzharding’s n = 17 Lean Receipts](docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md) | dated review record | record | retained | — |
 | [Review: Verification Gaps in the Drawn Packings and the Upper-Bound Register](docs/project/reviews/review-2026-10-13-verification-gaps.md) | dated review record | record | retained | — |
 | [Overbeck’s Candidate Proof of s(17) = L: Second Adversarial Review](docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md) | dated review record | record | retained | — |
 | [Mathematical Review: Kleddamag’s Candidate Proof That `s(17) = L`](docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md) | dated review record | record | retained | — |
@@ -1259,6 +1260,7 @@ case or experiment separately.
 | [Advanced Tutorial: Square Packing, Search, and Proof](TUTORIAL-ADVANCED.md) | first-principles tutorial | supporting | maintained | — |
 | [Feature: Basic and Advanced Square-Packing Tutorials](docs/project/specs/active/plan-2026-10-14-basic-and-advanced-tutorials.md) | implementation plan | current | transient | — |
 | [Feature: Predictable CI Feedback and Measured Checkpoints](docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md) | implementation plan | current | transient | — |
+| [Plan and Audit: Verification of Reported Formal Proofs](docs/project/specs/active/plan-2026-10-15-formal-proof-verification-rubric.md) | implementation plan | current | transient | — |
 | [Editorial Review: The Basic and Advanced Square-Packing Tutorials](docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md) | dated review record | record | retained | — |
 | [Packing Atlas](packing/atlas/README.md) | component scope and use | supporting | maintained | — |
 | [Enumerated Contact-Scaffold Atlas](packing/atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |

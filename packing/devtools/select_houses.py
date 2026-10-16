@@ -71,6 +71,7 @@ from typing import Any, cast
 from devtools import algebraic_witness_reports as algebraic_reports
 from devtools import upper_bound_reports as reports
 from devtools.check_results import scope_values
+from sqpack.assurance import confirming_execution
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -266,6 +267,7 @@ def confirming(
             and item.get("claim") == "upper-bound"
             and item.get("assurance") == "verified"
             and item.get("origin") in CONFIRMING_ORIGINS
+            and confirming_execution(item)
             and item.get("replay_status") == "passed"
             and ("scope" not in item or n in scope_values(dict(item["scope"])))
         ):
