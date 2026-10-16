@@ -564,7 +564,12 @@ def _axis_outcome(record: Mapping[str, Any]) -> str:
     return {"regularized": "view", "unchanged": "no change"}.get(status, status)
 
 
-#: The fields a witness identifies itself by and a `SETTLED` entry is bound to.
+#: The fields a witness identifies itself by and a `SETTLED` entry is bound to. A source
+#: that pins no revision binds by key and side alone where its path is a shared index:
+#: every Kingbird witness names `sources.json`, so the exemptions at 39, 55, 290 and 291
+#: bind to the source key and the side, and 290 and 291 to the same pair. Binding its
+#: `url` and `retrieved` as well changes the record, a data commit (think-k09z; review
+#: B5 of #636).
 IDENTITY = ("source", "path", "revision", "side")
 
 
