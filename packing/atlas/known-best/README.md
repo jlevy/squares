@@ -264,7 +264,27 @@ three counts neither generator draws better, and the axis tool’s view stays: a
 refused at row 7 at 204 and held at row 4 at 303, solved above $U$; at 272 grid-slack’s
 view is refused at row 7 at every threshold (stage sides fall from 732 to 730), and his
 is held at row 4. `devtools.default_drawings.SETTLED` records the three as decided on
-these four runs.
+these four runs. Those runs’ directories stayed on the host that ran them and could not
+be recovered, so the same generators ran again from main `e2e018f32`, the revision their
+selection ran on, and that evidence is retained in
+[`cases/regularized_drawings/think-la7h-2026-10-16/`](../../cases/regularized_drawings/think-la7h-2026-10-16/):
+`regularize_select`’s report (`selection-3a.json`, every candidate’s decision and
+reasons, and `selection-3a.md`), each run’s per-count `report.json`, gzip-compressed, a
+`run.json` for each grid-slack run (the block `regularize_grid_slack.run_block` computes
+from its reports), and the driver’s `receipt.json`. Grid-slack ran on all nine counts at
+all three thresholds (`grid-slack-3a-rerun-deg05-1016`, `-deg1-1016` and `-deg5-1016`; a
+container restart killed 105 and 176 at five degrees, which ran again as
+`grid-slack-3a-rerun-deg5b-1016`). The driver ran 105, 129 and 146
+(`evand-regularize-3a-rerun-1016`, stopped there for time, so it has no receipt) and 204
+and 272 (`evand-regularize-3a-rerun-s-1016`); it did not run again at 156, 176, 271 or
+303\. Every outcome the runs cover reproduces: grid-slack’s half-degree view at 105 and
+Evan Daniel’s views at 129 and 146 are chosen with the drawn views’ measures, his
+same-side views at 105 and 204 are refused at row 7, and his solved views at 204 and 272
+are held at row 4, above $U$; at 204 and 303 grid-slack’s view ties the drawn picture on
+every goal at all three thresholds, and at 272 it is refused at row 7 at all three
+(stage sides 732 to 730). Without his views, the selection chooses grid-slack’s at 156
+and 271, which the drawn views dominate, and none at 176, where grid-slack’s view goes
+to review (row 7).
 
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
