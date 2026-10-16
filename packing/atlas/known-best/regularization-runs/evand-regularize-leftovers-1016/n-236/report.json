@@ -1,0 +1,433 @@
+{
+ "format": "evand-regularization-report-v1",
+ "n": 236,
+ "status": "ok",
+ "error": null,
+ "source": {
+  "id": "W-known-best-n236",
+  "path": "packing/witnesses/known-best/n-236.yaml",
+  "sha256": "77ef40d122d18d2de38b090e45f8e07cd4b8c8f8c825b7171bbe5c6a5532fe8c",
+  "kind": "rational",
+  "s_W": "15.863955747159267422617702706295",
+  "s_W_exact": "3172791149431853484523540541259/200000000000000000000000000000",
+  "frame": "the witness's own exact geometry",
+  "provenance": {
+   "source_key": "[Daniel regularized lists 2026-10-10]",
+   "found_by": [
+    "Nate Chaoweeraprasit (itsnaka)"
+   ],
+   "improved_by": [
+    "Evan Daniel"
+   ]
+  },
+  "witness_source_key": "[Daniel regularized lists 2026-10-10]"
+ },
+ "verified_upper_bound": "15.8639557471592675",
+ "verified_upper_bound_exact_form": "3172791149431853484523540541259/200000000000000000000000000000",
+ "verified_upper_bound_as_read": {
+  "kind": "rational",
+  "value": "3172791149431853484523540541259/200000000000000000000000000000"
+ },
+ "generator": {
+  "name": "evand-regularize",
+  "pin": "675a5ea",
+  "patches": [],
+  "variant": "conservative",
+  "style": "coincide",
+  "orient": "0",
+  "frame": "kkt"
+ },
+ "parameters": {
+  "variant": "conservative",
+  "style": "coincide",
+  "orient": "0",
+  "frame": "kkt",
+  "same_mode": "relax",
+  "timeout": 1800.0,
+  "regularize_timeout": 1800.0,
+  "from_stage": "input"
+ },
+ "seconds": {
+  "input": 0.019,
+  "solve": 222.5,
+  "regularize": 39.06,
+  "import": 38.451,
+  "same": 0.049,
+  "measure": 0.626
+ },
+ "input": {
+  "path": "input.txt",
+  "sha256": "7b1488f152ef6d041fe915664308c6e48a4ea10aa695f0d45fa1131663426d8b",
+  "written_from": {
+   "path": "packing/witnesses/known-best/n-236.yaml",
+   "sha256": "77ef40d122d18d2de38b090e45f8e07cd4b8c8f8c825b7171bbe5c6a5532fe8c"
+  }
+ },
+ "solve": {
+  "status": "KKT local min",
+  "S_exact": "15.863955747159267422459063148822495935823247318750470363610137267",
+  "S_cert": "3172791149431853484523540541259/200000000000000000000000000000",
+  "cert_valid": true,
+  "newton_converged": true,
+  "free": [
+   4,
+   20,
+   21,
+   26,
+   27,
+   32,
+   33,
+   75,
+   76,
+   78,
+   81,
+   82,
+   96,
+   97,
+   108
+  ],
+  "second_order": "local minimum of S, strict modulo 101 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "why": null,
+  "jam_residual": 0.0,
+  "vv_milp_dS": 0.0,
+  "forced_pairs": null,
+  "promoted": [
+   1,
+   5,
+   15,
+   16,
+   17,
+   30,
+   41,
+   80,
+   95,
+   121,
+   122,
+   123,
+   124,
+   134,
+   135,
+   170,
+   171,
+   172,
+   182,
+   183,
+   184,
+   190,
+   209,
+   210,
+   211,
+   226,
+   227,
+   228,
+   229
+  ],
+  "solver_seconds": 221.5,
+  "gate": "certified",
+  "returncode": 0,
+  "seconds": 222.5,
+  "rungs": [],
+  "arguments": [],
+  "patches": [],
+  "first_pass": false,
+  "attempts": [
+   {
+    "rung": null,
+    "rungs": [],
+    "arguments": [],
+    "patches": [],
+    "first_pass": false,
+    "status": "KKT local min",
+    "gate": "certified",
+    "seconds": 222.5
+   }
+  ]
+ },
+ "regularize": {
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "moved": [
+   20,
+   21,
+   26,
+   27,
+   30,
+   31,
+   32,
+   33,
+   42,
+   75,
+   76,
+   78,
+   81,
+   96,
+   97,
+   108,
+   109,
+   121
+  ],
+  "max_move": 0.05531124018284994,
+  "symmetry": [],
+  "symmetry_dropped": null,
+  "groups_before": 19,
+  "groups_after": 7,
+  "merged": [
+   [
+    20,
+    -0.001432394487827058,
+    6.103555475585191e-73
+   ],
+   [
+    21,
+    -0.014323944878270581,
+    6.103555475585191e-73
+   ],
+   [
+    27,
+    38.08773031795806,
+    38.08826737601792
+   ],
+   [
+    33,
+    38.093996953969224,
+    38.08826737601792
+   ],
+   [
+    75,
+    -0.017188733853924696,
+    6.103555475585191e-73
+   ],
+   [
+    76,
+    6.678931880928023e-14,
+    6.103555475585191e-73
+   ],
+   [
+    78,
+    38.101218438627896,
+    38.08826737601792
+   ],
+   [
+    81,
+    38.10121843862793,
+    38.08826737601792
+   ],
+   [
+    108,
+    -0.008594366926962348,
+    6.103555475585191e-73
+   ]
+  ],
+  "angle_changes": [
+   [
+    "ulp-merge",
+    38.08180921543164,
+    38.081809215431676,
+    1
+   ],
+   [
+    "ulp-merge",
+    38.08773031795806,
+    38.08773031795807,
+    1
+   ],
+   [
+    "free-angle kept",
+    -43.3905912622796,
+    2
+   ],
+   [
+    "free-angle",
+    38.081809215431676,
+    38.08773031795807,
+    2
+   ],
+   [
+    "free-angle",
+    38.08773031795807,
+    38.08826737601792,
+    2
+   ]
+  ],
+  "changed_angles": [
+   20,
+   21,
+   26,
+   27,
+   32,
+   33,
+   75,
+   76,
+   78,
+   81,
+   96,
+   97,
+   108
+  ],
+  "place": "ok",
+  "refine": {
+   "n_eq": 792,
+   "n_var": 472,
+   "rank": 471,
+   "resid": 7.632643484561429e-70,
+   "worst": []
+  },
+  "verify_ok": true,
+  "min_gap": "-7.6326e-70",
+  "cert_ok": true,
+  "S_exact": "15.8639557471592674224590631488224959358232473187504703636101",
+  "S_cert": "3172791149431853484523540541259/200000000000000000000000000000",
+  "g": 0,
+  "seconds": 37.856
+ },
+ "outputs": {
+  "solved": {
+   "path": "view-solved.yaml",
+   "git_blob": "b615881f8bc2f2a327b73866db70d72fd0a0d97e",
+   "id": "W-known-best-n236-regularized",
+   "side": "15.863955747159267422617702706295",
+   "side_exact": "3172791149431853484523540541259/200000000000000000000000000000",
+   "routes": {
+    "exact_verify": true,
+    "independent": true,
+    "half_angle": true
+   },
+   "decide_seconds": 38.44,
+   "relation": "same",
+   "minus_s_W": "0.000e+00",
+   "minus_U": "0.000e+00"
+  },
+  "same": null,
+  "same_refusal": "same-side-refused: unmatched-rotation"
+ },
+ "identity": {
+  "basis": "measured",
+  "measured_in": "devtools.check_half_angle_area.arrangement_gap",
+  "of": "solved",
+  "one_to_one": true,
+  "moved": 0,
+  "moved_beyond": {
+   "1e-9": 4,
+   "1e-6": 4,
+   "1e-3": 0,
+   "1e-2": 0,
+   "1e-1": 0
+  },
+  "max_move": "8.732759e-6",
+  "max_turn_deg": "0.000537058",
+  "turned": [
+   96,
+   97
+  ],
+  "unnamed_turns": [],
+  "symmetry": 0,
+  "side_difference": "0",
+  "pose_equals_witness": false
+ },
+ "shades": {
+  "of": "solved",
+  "measured_in": "devtools.census_atlas_contact_shades: edge_rule_contacts (house) and centre_rule_contacts (stage) on packings_from_witness",
+  "house": {
+   "before": [
+    23,
+    14,
+    30,
+    6,
+    163
+   ],
+   "after": [
+    23,
+    14,
+    30,
+    6,
+    163
+   ]
+  },
+  "stage": {
+   "before": [
+    23,
+    14,
+    30,
+    6,
+    163
+   ],
+   "after": [
+    23,
+    14,
+    30,
+    6,
+    163
+   ]
+  },
+  "regressions": [],
+  "against_current": {
+   "view": "packing/atlas/known-best/regularized/n-236-regularized.yaml.gz",
+   "regressions": [],
+   "histograms": {
+    "house": [
+     23,
+     14,
+     30,
+     6,
+     163
+    ],
+    "stage": [
+     23,
+     14,
+     30,
+     6,
+     163
+    ]
+   }
+  }
+ },
+ "decision": {
+  "row": 10,
+  "decision": "admit",
+  "index_record": "regularized",
+  "refusal": null,
+  "reason": "every admission condition holds; same side: same-side-refused: unmatched-rotation"
+ },
+ "decisions": {
+  "solved": {
+   "row": 10,
+   "decision": "admit",
+   "index_record": "regularized",
+   "refusal": null,
+   "reason": "every admission condition holds"
+  },
+  "same": null
+ },
+ "regularization": {
+  "n": 236,
+  "of_witness": "W-known-best-n236",
+  "provenance": {
+   "source_key": "[Daniel regularized lists 2026-10-10]",
+   "found_by": [
+    "Nate Chaoweeraprasit (itsnaka)"
+   ],
+   "improved_by": [
+    "Evan Daniel"
+   ]
+  },
+  "by": "project",
+  "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+  "side": "same",
+  "changes": {
+   "straightened": 5,
+   "re_angled": 4
+  },
+  "identity": {
+   "basis": "measured",
+   "measured_in": "devtools.check_half_angle_area.arrangement_gap, in devtools.regularize_evand",
+   "one_to_one": true,
+   "moved": 0,
+   "max_move": 8.732759e-06,
+   "max_turn_deg": 0.000537058
+  }
+ },
+ "cost": {
+  "cpu_seconds": 119.2,
+  "wall_seconds": 300.81
+ }
+}

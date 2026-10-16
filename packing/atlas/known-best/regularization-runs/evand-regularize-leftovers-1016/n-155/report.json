@@ -1,0 +1,419 @@
+{
+ "format": "evand-regularization-report-v1",
+ "n": 155,
+ "status": "ok",
+ "error": null,
+ "source": {
+  "id": "W-known-best-n155",
+  "path": "packing/witnesses/known-best/n-155.yaml",
+  "sha256": "0663cee29900c268ce0bd0cfd6525a8c0e71581be836d8cf5f3f13b68a5c72af",
+  "kind": "rational",
+  "s_W": "12.95242540695845613565360253255400796996",
+  "s_W_exact": "64762127034792280678268012662770039849775757530809316735783064762127034792280678268012662770039849775757530809316735783/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "frame": "the witness's own exact geometry",
+  "provenance": {
+   "source_key": "[Ostashev records 2026-10-11]",
+   "found_by": [
+    "Daniil Ostashev"
+   ],
+   "improved_by": []
+  },
+  "witness_source_key": "[Ostashev records 2026-10-11]"
+ },
+ "verified_upper_bound": "12.9524254069584562",
+ "verified_upper_bound_exact_form": "64762127034792280678268012662770039849775757530809316735783064762127034792280678268012662770039849775757530809316735783/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+ "verified_upper_bound_as_read": {
+  "kind": "rational",
+  "value": "64762127034792280678268012662770039849775757530809316735783064762127034792280678268012662770039849775757530809316735783/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+ },
+ "generator": {
+  "name": "evand-regularize",
+  "pin": "675a5ea",
+  "patches": [],
+  "variant": "conservative",
+  "style": "coincide",
+  "orient": "0",
+  "frame": "kkt"
+ },
+ "parameters": {
+  "variant": "conservative",
+  "style": "coincide",
+  "orient": "0",
+  "frame": "kkt",
+  "same_mode": "relax",
+  "timeout": 1800.0,
+  "regularize_timeout": 1800.0,
+  "from_stage": "input"
+ },
+ "seconds": {
+  "input": 0.061,
+  "solve": 44.82,
+  "regularize": 12.29,
+  "import": 14.575,
+  "same": 1.5,
+  "measure": 0.306
+ },
+ "input": {
+  "path": "input.txt",
+  "sha256": "009afa2d38a6374326b6375f2168b7ac5b6c45b334ab49ec6199990456cc9d0d",
+  "written_from": {
+   "path": "packing/witnesses/known-best/n-155.yaml",
+   "sha256": "0663cee29900c268ce0bd0cfd6525a8c0e71581be836d8cf5f3f13b68a5c72af"
+  }
+ },
+ "solve": {
+  "status": "KKT local min",
+  "S_exact": "12.952425406958456135524078278484423408599910723377019113070641946",
+  "S_cert": "2590485081391691227130720506511/200000000000000000000000000000",
+  "cert_valid": true,
+  "newton_converged": true,
+  "free": [
+   95
+  ],
+  "second_order": "local minimum of S, strict modulo 31 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "why": null,
+  "jam_residual": 0.0,
+  "vv_milp_dS": 0.0,
+  "forced_pairs": null,
+  "promoted": [
+   14,
+   17,
+   22,
+   24
+  ],
+  "solver_seconds": 43.5,
+  "gate": "certified",
+  "returncode": 0,
+  "seconds": 44.82,
+  "rungs": [],
+  "arguments": [],
+  "patches": [],
+  "first_pass": false,
+  "attempts": [
+   {
+    "rung": null,
+    "rungs": [],
+    "arguments": [],
+    "patches": [],
+    "first_pass": false,
+    "status": "KKT local min",
+    "gate": "certified",
+    "seconds": 44.82
+   }
+  ]
+ },
+ "regularize": {
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "moved": [
+   62,
+   63,
+   93,
+   94,
+   95,
+   114,
+   128,
+   129,
+   144,
+   151,
+   153
+  ],
+  "max_move": 0.043199208104262254,
+  "symmetry": [],
+  "symmetry_dropped": null,
+  "groups_before": 16,
+  "groups_after": 15,
+  "merged": [
+   [
+    95,
+    0.33413554239638044,
+    -2.4734526502325183e-76
+   ]
+  ],
+  "angle_changes": [
+   [
+    "free-angle kept",
+    -27.981152954244074,
+    1
+   ]
+  ],
+  "changed_angles": [
+   95
+  ],
+  "place": "ok",
+  "refine": {
+   "n_eq": 475,
+   "n_var": 310,
+   "rank": 308,
+   "resid": 1.6817104336075347e-71,
+   "worst": []
+  },
+  "verify_ok": true,
+  "min_gap": "-8.9271e-72",
+  "cert_ok": true,
+  "S_exact": "12.9524254069584561355240782784844234085999107233770191130706",
+  "S_cert": "2590485081391691227130720506511/200000000000000000000000000000",
+  "g": 0,
+  "seconds": 11.16
+ },
+ "outputs": {
+  "solved": {
+   "path": "view-solved.yaml",
+   "git_blob": "3965418338c00f4816606504cfbcb0ee9744eb4b",
+   "id": "W-known-best-n155-regularized",
+   "side": "12.952425406958456135653602532555",
+   "side_exact": "2590485081391691227130720506511/200000000000000000000000000000",
+   "routes": {
+    "exact_verify": true,
+    "independent": true,
+    "half_angle": true
+   },
+   "decide_seconds": 14.57,
+   "relation": "solved",
+   "minus_s_W": "9.920e-31",
+   "minus_U": "9.920e-31"
+  },
+  "same": null,
+  "same_refusal": "same-side-refused: literal-too-large"
+ },
+ "identity": {
+  "basis": "measured",
+  "measured_in": "devtools.check_half_angle_area.arrangement_gap",
+  "of": "solved",
+  "one_to_one": true,
+  "moved": 11,
+  "moved_beyond": {
+   "1e-9": 11,
+   "1e-6": 11,
+   "1e-3": 11,
+   "1e-2": 3,
+   "1e-1": 0
+  },
+  "max_move": "4.894464e-2",
+  "max_turn_deg": "0.332545",
+  "turned": [
+   95
+  ],
+  "unnamed_turns": [],
+  "symmetry": 0,
+  "side_difference": "4960150224242469190683264216935237872965207719321731987337229960150224242469190683264217/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "pose_equals_witness": false
+ },
+ "shades": {
+  "of": "solved",
+  "measured_in": "devtools.census_atlas_contact_shades: edge_rule_contacts (house) and centre_rule_contacts (stage) on packings_from_witness",
+  "house": {
+   "before": [
+    42,
+    13,
+    16,
+    11,
+    73
+   ],
+   "after": [
+    38,
+    14,
+    16,
+    8,
+    79
+   ]
+  },
+  "stage": {
+   "before": [
+    27,
+    24,
+    16,
+    8,
+    80
+   ],
+   "after": [
+    22,
+    30,
+    16,
+    8,
+    79
+   ]
+  },
+  "regressions": [
+   {
+    "square": 85,
+    "id": 86,
+    "rule": "house",
+    "before": 4,
+    "after": 3
+   },
+   {
+    "square": 92,
+    "id": 93,
+    "rule": "house",
+    "before": 3,
+    "after": 2
+   },
+   {
+    "square": 93,
+    "id": 94,
+    "rule": "house",
+    "before": 2,
+    "after": 1
+   },
+   {
+    "square": 85,
+    "id": 86,
+    "rule": "stage",
+    "before": 4,
+    "after": 3
+   },
+   {
+    "square": 92,
+    "id": 93,
+    "rule": "stage",
+    "before": 3,
+    "after": 2
+   },
+   {
+    "square": 93,
+    "id": 94,
+    "rule": "stage",
+    "before": 2,
+    "after": 1
+   }
+  ],
+  "against_current": {
+   "view": "packing/atlas/known-best/regularized/n-155-regularized.yaml.gz",
+   "regressions": [
+    {
+     "square": 85,
+     "id": 86,
+     "rule": "house",
+     "before": 4,
+     "after": 3
+    },
+    {
+     "square": 86,
+     "id": 87,
+     "rule": "house",
+     "before": 4,
+     "after": 3
+    },
+    {
+     "square": 92,
+     "id": 93,
+     "rule": "house",
+     "before": 3,
+     "after": 2
+    },
+    {
+     "square": 93,
+     "id": 94,
+     "rule": "house",
+     "before": 3,
+     "after": 1
+    },
+    {
+     "square": 94,
+     "id": 95,
+     "rule": "house",
+     "before": 2,
+     "after": 1
+    },
+    {
+     "square": 85,
+     "id": 86,
+     "rule": "stage",
+     "before": 4,
+     "after": 3
+    },
+    {
+     "square": 86,
+     "id": 87,
+     "rule": "stage",
+     "before": 4,
+     "after": 3
+    },
+    {
+     "square": 92,
+     "id": 93,
+     "rule": "stage",
+     "before": 3,
+     "after": 2
+    },
+    {
+     "square": 93,
+     "id": 94,
+     "rule": "stage",
+     "before": 3,
+     "after": 1
+    },
+    {
+     "square": 94,
+     "id": 95,
+     "rule": "stage",
+     "before": 2,
+     "after": 1
+    }
+   ],
+   "histograms": {
+    "house": [
+     38,
+     12,
+     16,
+     8,
+     81
+    ],
+    "stage": [
+     26,
+     24,
+     16,
+     8,
+     81
+    ]
+   }
+  }
+ },
+ "decision": {
+  "row": 4,
+  "decision": "held",
+  "index_record": null,
+  "refusal": "dilated-side",
+  "reason": "the view's side is not the witness's and above the verified upper bound; same side: same-side-refused: literal-too-large"
+ },
+ "decisions": {
+  "solved": {
+   "row": 4,
+   "decision": "held",
+   "index_record": null,
+   "refusal": "dilated-side",
+   "reason": "the view's side is not the witness's and above the verified upper bound"
+  },
+  "same": null
+ },
+ "regularization": {
+  "n": 155,
+  "of_witness": "W-known-best-n155",
+  "provenance": {
+   "source_key": "[Ostashev records 2026-10-11]",
+   "found_by": [
+    "Daniil Ostashev"
+   ],
+   "improved_by": []
+  },
+  "by": "project",
+  "method": "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand",
+  "side": "solved",
+  "changes": {
+   "straightened": 1
+  },
+  "identity": {
+   "basis": "measured",
+   "measured_in": "devtools.check_half_angle_area.arrangement_gap, in devtools.regularize_evand",
+   "one_to_one": true,
+   "moved": 11,
+   "max_move": 0.04894464,
+   "max_turn_deg": 0.332545
+  }
+ },
+ "cost": {
+  "cpu_seconds": 35.01,
+  "wall_seconds": 73.7
+ }
+}

@@ -1,0 +1,271 @@
+{
+ "generator": "regularize_grid_slack/1",
+ "settings": {
+  "near_axis_degrees": 1.0,
+  "trust": 0.45,
+  "time_limit": 120.0,
+  "stage_margin": 0.0099
+ },
+ "attempts": [
+  {
+   "relation": "same",
+   "frozen_tilted": false,
+   "straightened": [
+    {
+     "square": 39,
+     "degrees": 0.000275
+    },
+    {
+     "square": 178,
+     "degrees": 0.00573
+    }
+   ],
+   "not_straightened": [],
+   "kept_rows": 864,
+   "unstated_contacts": [],
+   "placement": {
+    "status": "placed",
+    "objective": -510.9977900505804,
+    "dual_bound": -510.9977900505804,
+    "coincidences": 281,
+    "seconds": 1.42,
+    "candidates": 345,
+    "rows": 4457,
+    "milp_status": 0,
+    "milp_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+    "milp_seconds": 1.39,
+    "sides_switched_on": 511,
+    "lp_status": 0,
+    "dropped": 0,
+    "lp_seconds": 0.03
+   },
+   "float_moves": {
+    "max": 0.31640159368980036,
+    "moved_beyond_1e-6": 41
+   },
+   "changed_squares": 41,
+   "exact": {
+    "relation": "same",
+    "side": "13883795490510898440309946897577/1000000000000000000000000000000",
+    "tight": 563,
+    "watched": 2,
+    "settled": [
+     {
+      "rows": "witness-contacts",
+      "closed": 559,
+      "left_open": 6,
+      "reopened": 0,
+      "used": 346,
+      "dependent": 202,
+      "relaxed": 11,
+      "promoted": 11,
+      "rounds": 2,
+      "free_coordinates": 12,
+      "anchored": 0,
+      "displacement": 0.0,
+      "float_clearance": -1.1102230246251565e-15,
+      "refusal": null
+     }
+    ],
+    "seconds": 23.84,
+    "verdicts": {
+     "exact_verify": {
+      "passed": true,
+      "pairs_tested": 15931,
+      "touching_pairs": 460,
+      "container_contacts": 81,
+      "minimum_best_pair_gap": "0",
+      "failures": [],
+      "seconds": 11.329
+     },
+     "independent": {
+      "passed": true,
+      "pairs_tested": 15931,
+      "minimum_best_pair_gap": "0",
+      "minimum_containment_clearance": "0",
+      "failures": [],
+      "seconds": 12.4
+     }
+    }
+   },
+   "seconds": 25.35
+  }
+ ],
+ "relation": "same",
+ "straightened": [
+  {
+   "square": 39,
+   "degrees": 0.000275
+  },
+  {
+   "square": 178,
+   "degrees": 0.00573
+  }
+ ],
+ "seconds": 25.37,
+ "n": 179,
+ "source": {
+  "path": "packing/witnesses/known-best/n-179.yaml",
+  "id": "W-known-best-n179",
+  "witness_sha256": "a7778adde5e8c169729e8bfc1cf59632669d9303e57196dc230d680af6e8da93",
+  "s_W_exact": "13883795490510898440309946897577/1000000000000000000000000000000"
+ },
+ "view": {
+  "path": "view.yaml.gz",
+  "git_blob": "f5cd54c71d550db5eb349b1275409a114f26e119"
+ },
+ "measured": {
+  "identity": {
+   "basis": "measured",
+   "measured_in": "devtools.check_half_angle_area.arrangement_gap",
+   "of": "witness",
+   "one_to_one": true,
+   "moved": 27,
+   "moved_beyond": {
+    "1e-9": 41,
+    "1e-6": 41,
+    "1e-3": 27,
+    "1e-2": 5,
+    "1e-1": 2
+   },
+   "max_move": "3.164016e-1",
+   "max_turn_deg": "0.00572958",
+   "turned": [
+    38,
+    177
+   ],
+   "unnamed_turns": [],
+   "symmetry": 0,
+   "side_difference": "0",
+   "own_pairing": {
+    "basis": "square for square, the generator's own pairing (symmetry 0)",
+    "max_move": "3.164016e-01",
+    "turned": [
+     38,
+     177
+    ],
+    "unnamed_turns": []
+   }
+  },
+  "shades": {
+   "of": "witness",
+   "measured_in": "devtools.census_atlas_contact_shades: edge_rule_contacts (house) and centre_rule_contacts (stage) on packings_from_witness",
+   "house": {
+    "before": [
+     48,
+     16,
+     37,
+     53,
+     25
+    ],
+    "after": [
+     38,
+     0,
+     18,
+     15,
+     108
+    ]
+   },
+   "stage": {
+    "before": [
+     20,
+     22,
+     19,
+     17,
+     101
+    ],
+    "after": [
+     20,
+     18,
+     18,
+     15,
+     108
+    ]
+   },
+   "regressions": [],
+   "against_current": {
+    "view": "packing/atlas/known-best/regularized/n-179-regularized.yaml.gz",
+    "regressions": [
+     {
+      "square": 128,
+      "id": 129,
+      "rule": "stage",
+      "before": 3,
+      "after": 2
+     },
+     {
+      "square": 132,
+      "id": 133,
+      "rule": "stage",
+      "before": 2,
+      "after": 0
+     },
+     {
+      "square": 133,
+      "id": 134,
+      "rule": "stage",
+      "before": 4,
+      "after": 3
+     }
+    ],
+    "histograms": {
+     "house": [
+      39,
+      0,
+      18,
+      15,
+      107
+     ],
+     "stage": [
+      19,
+      18,
+      18,
+      15,
+      109
+     ]
+    }
+   }
+  },
+  "totals_fall": true,
+  "visible_change": true,
+  "drawing": {
+   "squares": 179,
+   "axis": 144,
+   "axis_inexact": 0,
+   "axis_sides": [
+    3,
+    0,
+    18,
+    15,
+    108
+   ],
+   "light_axis": 3,
+   "light_squares": [
+    "133",
+    "135",
+    "173"
+   ],
+   "near_axis": 0,
+   "near_axis_degrees": [],
+   "near_axis_squares": [],
+   "near_axis_classes": 0,
+   "small_tilt": 0,
+   "classes": 8,
+   "hues": 8,
+   "uneven_axis": 6,
+   "variation": 6,
+   "light_faces": {
+    "tilted-neighbour": 9,
+    "offset": 2,
+    "slack": 1
+   },
+   "open_faces": {
+    "tilted-neighbour": 57,
+    "offset": 4,
+    "slack": 2
+   },
+   "replica_disagrees": 0
+  }
+ },
+ "finished": "2026-10-16T05:41:43Z"
+}

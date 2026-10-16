@@ -1,0 +1,278 @@
+{
+ "generator": "regularize_grid_slack/1",
+ "settings": {
+  "near_axis_degrees": 1.0,
+  "trust": 0.45,
+  "time_limit": 120.0,
+  "stage_margin": 0.0099
+ },
+ "attempts": [
+  {
+   "relation": "same",
+   "frozen_tilted": false,
+   "straightened": [],
+   "not_straightened": [
+    {
+     "square": 188,
+     "degrees": 0.719885
+    }
+   ],
+   "kept_rows": 1444,
+   "unstated_contacts": [],
+   "placement": {
+    "status": "placed",
+    "objective": -737.9995154826928,
+    "dual_bound": -737.9995154826928,
+    "coincidences": 398,
+    "seconds": 7.34,
+    "candidates": 478,
+    "rows": 6848,
+    "milp_status": 0,
+    "milp_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+    "milp_seconds": 7.18,
+    "sides_switched_on": 738,
+    "lp_status": 0,
+    "dropped": 0,
+    "lp_seconds": 0.17
+   },
+   "float_moves": {
+    "max": 0.1548665967447569,
+    "moved_beyond_1e-6": 7
+   },
+   "changed_squares": 8,
+   "exact": {
+    "relation": "same",
+    "side": "761203984658924994781689956746506132479479002945859948235062760911587068049389066/44966630820689093059794938239713705461989197412012889888820554168494459778549053",
+    "tight": 865,
+    "watched": 0,
+    "settled": [
+     {
+      "rows": "witness-contacts",
+      "closed": 865,
+      "left_open": 0,
+      "reopened": 0,
+      "used": 537,
+      "dependent": 270,
+      "relaxed": 58,
+      "promoted": 75,
+      "rounds": 10,
+      "free_coordinates": 3,
+      "anchored": 0,
+      "displacement": 2.5121479338940403e-15,
+      "float_clearance": -1.4432899320127035e-15,
+      "refusal": "literal-too-long: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit"
+     },
+     {
+      "rows": "all-tight",
+      "closed": 865,
+      "left_open": 0,
+      "reopened": 0,
+      "used": 537,
+      "dependent": 270,
+      "relaxed": 58,
+      "promoted": 75,
+      "rounds": 10,
+      "free_coordinates": 3,
+      "anchored": 0,
+      "displacement": 2.5121479338940403e-15,
+      "float_clearance": -1.4432899320127035e-15,
+      "refusal": "literal-too-long: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit"
+     },
+     {
+      "rows": "anchored-tilted",
+      "closed": 865,
+      "left_open": 0,
+      "reopened": 0,
+      "used": 440,
+      "dependent": 205,
+      "relaxed": 220,
+      "promoted": 49,
+      "rounds": 3,
+      "free_coordinates": 0,
+      "anchored": 50,
+      "displacement": 2.5121479338940403e-15,
+      "refusal": "penetrated: 32 relaxed rows overlap at this side"
+     },
+     {
+      "rows": "anchored",
+      "closed": 865,
+      "left_open": 0,
+      "reopened": 0,
+      "used": 52,
+      "dependent": 42,
+      "relaxed": 771,
+      "promoted": 8,
+      "rounds": 4,
+      "free_coordinates": 0,
+      "anchored": 244,
+      "displacement": 2.5121479338940403e-15,
+      "float_clearance": -1.4432899320127035e-15,
+      "refusal": null
+     }
+    ],
+    "seconds": 107.34,
+    "verdicts": {
+     "exact_verify": {
+      "passed": true,
+      "pairs_tested": 36315,
+      "touching_pairs": 52,
+      "container_contacts": 76,
+      "minimum_best_pair_gap": "0",
+      "failures": [],
+      "seconds": 44.835
+     },
+     "independent": {
+      "passed": true,
+      "pairs_tested": 36315,
+      "minimum_best_pair_gap": "0",
+      "minimum_containment_clearance": "0",
+      "failures": [],
+      "seconds": 29.834
+     }
+    }
+   },
+   "seconds": 115.28
+  }
+ ],
+ "relation": "same",
+ "straightened": [],
+ "seconds": 115.37,
+ "n": 270,
+ "source": {
+  "path": "packing/witnesses/known-best/n-270.yaml",
+  "id": "W-known-best-n270",
+  "witness_sha256": "7829fee9b52508afa93c4256ca3ddeb1d79aba0078bd71f8ba4a01c3201bcd0d",
+  "s_W_exact": "761203984658924994781689956746506132479479002945859948235062760911587068049389066/44966630820689093059794938239713705461989197412012889888820554168494459778549053"
+ },
+ "view": {
+  "path": "view.yaml.gz",
+  "git_blob": "e800ef7b185cc9132fe337b6eb2286b75d17b406"
+ },
+ "measured": {
+  "identity": {
+   "basis": "measured",
+   "measured_in": "devtools.check_half_angle_area.arrangement_gap",
+   "of": "witness",
+   "one_to_one": true,
+   "moved": 6,
+   "moved_beyond": {
+    "1e-9": 8,
+    "1e-6": 7,
+    "1e-3": 6,
+    "1e-2": 5,
+    "1e-1": 1
+   },
+   "max_move": "1.548666e-1",
+   "max_turn_deg": "3.28361e-53",
+   "turned": [],
+   "unnamed_turns": [],
+   "symmetry": 0,
+   "side_difference": "0",
+   "own_pairing": {
+    "basis": "square for square, the generator's own pairing (symmetry 0)",
+    "max_move": "1.548666e-01",
+    "turned": [],
+    "unnamed_turns": []
+   }
+  },
+  "shades": {
+   "of": "witness",
+   "measured_in": "devtools.census_atlas_contact_shades: edge_rule_contacts (house) and centre_rule_contacts (stage) on packings_from_witness",
+   "house": {
+    "before": [
+     67,
+     13,
+     19,
+     22,
+     149
+    ],
+    "after": [
+     62,
+     12,
+     21,
+     16,
+     159
+    ]
+   },
+   "stage": {
+    "before": [
+     52,
+     25,
+     22,
+     22,
+     149
+    ],
+    "after": [
+     51,
+     20,
+     24,
+     16,
+     159
+    ]
+   },
+   "regressions": [],
+   "against_current": {
+    "view": "packing/atlas/known-best/regularized/n-270-regularized.yaml.gz",
+    "regressions": [],
+    "histograms": {
+     "house": [
+      62,
+      12,
+      21,
+      16,
+      159
+     ],
+     "stage": [
+      51,
+      20,
+      24,
+      16,
+      159
+     ]
+    }
+   }
+  },
+  "totals_fall": false,
+  "visible_change": true,
+  "drawing": {
+   "squares": 270,
+   "axis": 200,
+   "axis_inexact": 0,
+   "axis_sides": [
+    4,
+    0,
+    21,
+    16,
+    159
+   ],
+   "light_axis": 4,
+   "light_squares": [
+    "82",
+    "86",
+    "186",
+    "262"
+   ],
+   "near_axis": 0,
+   "near_axis_degrees": [],
+   "near_axis_squares": [],
+   "near_axis_classes": 0,
+   "small_tilt": 2,
+   "classes": 21,
+   "hues": 19,
+   "uneven_axis": 9,
+   "variation": 9,
+   "light_faces": {
+    "tilted-neighbour": 12,
+    "offset": 1,
+    "misaligned": 3
+   },
+   "open_faces": {
+    "tilted-neighbour": 65,
+    "offset": 3,
+    "misaligned": 6
+   },
+   "replica_disagrees": 0
+  }
+ },
+ "finished": "2026-10-16T05:51:04Z"
+}

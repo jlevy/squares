@@ -1,0 +1,221 @@
+{
+ "generator": "regularize_grid_slack/1",
+ "settings": {
+  "near_axis_degrees": 5.0,
+  "trust": 0.45,
+  "time_limit": 120.0,
+  "stage_margin": 0.0099
+ },
+ "attempts": [
+  {
+   "relation": "same",
+   "frozen_tilted": false,
+   "straightened": [],
+   "not_straightened": [],
+   "kept_rows": 1488,
+   "unstated_contacts": [],
+   "placement": {
+    "status": "placed",
+    "objective": -744.0000000025184,
+    "dual_bound": -744.0000000025184,
+    "coincidences": 401,
+    "seconds": 0.26,
+    "candidates": 456,
+    "rows": 6304,
+    "milp_status": 0,
+    "milp_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+    "milp_seconds": 0.2,
+    "sides_switched_on": 744,
+    "lp_status": 0,
+    "dropped": 0,
+    "lp_seconds": 0.06
+   },
+   "float_moves": {
+    "max": 5.0242958677880805e-15,
+    "moved_beyond_1e-6": 0
+   },
+   "changed_squares": 0,
+   "exact": {
+    "relation": "same",
+    "side": "3172791149431853484523540541259/200000000000000000000000000000",
+    "tight": 793,
+    "watched": 0,
+    "settled": [
+     {
+      "rows": "witness-contacts",
+      "closed": 793,
+      "left_open": 0,
+      "reopened": 0,
+      "used": 471,
+      "dependent": 310,
+      "relaxed": 12,
+      "promoted": 0,
+      "rounds": 1,
+      "free_coordinates": 1,
+      "anchored": 0,
+      "displacement": 0.0,
+      "float_clearance": -1.3322676295501878e-15,
+      "refusal": null
+     }
+    ],
+    "seconds": 25.81,
+    "verdicts": {
+     "exact_verify": {
+      "passed": true,
+      "pairs_tested": 27730,
+      "touching_pairs": 702,
+      "container_contacts": 92,
+      "minimum_best_pair_gap": "0",
+      "failures": [],
+      "seconds": 15.948
+     },
+     "independent": {
+      "passed": true,
+      "pairs_tested": 27730,
+      "minimum_best_pair_gap": "0",
+      "minimum_containment_clearance": "0",
+      "failures": [],
+      "seconds": 9.615
+     }
+    }
+   },
+   "seconds": 26.16
+  }
+ ],
+ "relation": "same",
+ "straightened": [],
+ "seconds": 26.21,
+ "n": 236,
+ "source": {
+  "path": "packing/witnesses/known-best/n-236.yaml",
+  "id": "W-known-best-n236",
+  "witness_sha256": "77ef40d122d18d2de38b090e45f8e07cd4b8c8f8c825b7171bbe5c6a5532fe8c",
+  "s_W_exact": "3172791149431853484523540541259/200000000000000000000000000000"
+ },
+ "view": {
+  "path": "view.yaml.gz",
+  "git_blob": "569e59f19fb5255d5626d8f1e229c2f6669f172f"
+ },
+ "measured": {
+  "identity": {
+   "basis": "measured",
+   "measured_in": "devtools.check_half_angle_area.arrangement_gap",
+   "of": "witness",
+   "one_to_one": true,
+   "moved": 0,
+   "moved_beyond": {
+    "1e-9": 0,
+    "1e-6": 0,
+    "1e-3": 0,
+    "1e-2": 0,
+    "1e-1": 0
+   },
+   "max_move": "6.492429e-19",
+   "max_turn_deg": "0",
+   "turned": [],
+   "unnamed_turns": [],
+   "symmetry": 0,
+   "side_difference": "0",
+   "own_pairing": {
+    "basis": "square for square, the generator's own pairing (symmetry 0)",
+    "max_move": "6.492429e-19",
+    "turned": [],
+    "unnamed_turns": []
+   }
+  },
+  "shades": {
+   "of": "witness",
+   "measured_in": "devtools.census_atlas_contact_shades: edge_rule_contacts (house) and centre_rule_contacts (stage) on packings_from_witness",
+   "house": {
+    "before": [
+     23,
+     14,
+     30,
+     6,
+     163
+    ],
+    "after": [
+     23,
+     14,
+     30,
+     6,
+     163
+    ]
+   },
+   "stage": {
+    "before": [
+     23,
+     14,
+     30,
+     6,
+     163
+    ],
+    "after": [
+     23,
+     14,
+     30,
+     6,
+     163
+    ]
+   },
+   "regressions": [],
+   "against_current": {
+    "view": "packing/atlas/known-best/regularized/n-236-regularized.yaml.gz",
+    "regressions": [],
+    "histograms": {
+     "house": [
+      23,
+      14,
+      30,
+      6,
+      163
+     ],
+     "stage": [
+      23,
+      14,
+      30,
+      6,
+      163
+     ]
+    }
+   }
+  },
+  "totals_fall": false,
+  "visible_change": false,
+  "drawing": {
+   "squares": 236,
+   "axis": 196,
+   "axis_inexact": 0,
+   "axis_sides": [
+    1,
+    0,
+    26,
+    6,
+    163
+   ],
+   "light_axis": 1,
+   "light_squares": [
+    "41"
+   ],
+   "near_axis": 0,
+   "near_axis_degrees": [],
+   "near_axis_squares": [],
+   "near_axis_classes": 0,
+   "small_tilt": 0,
+   "classes": 6,
+   "hues": 6,
+   "uneven_axis": 2,
+   "variation": 2,
+   "light_faces": {
+    "tilted-neighbour": 3,
+    "offset": 1
+   },
+   "open_faces": {
+    "tilted-neighbour": 60,
+    "offset": 2
+   },
+   "replica_disagrees": 0
+  }
+ },
+ "finished": "2026-10-16T05:35:29Z"
+}
