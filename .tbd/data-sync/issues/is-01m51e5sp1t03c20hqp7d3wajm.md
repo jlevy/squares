@@ -5,7 +5,7 @@ title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: ecstatic-edison-intake-1016
 labels:
   - result-import
@@ -19,10 +19,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-16T04:59:51.506Z
+updated_at: 2026-10-16T05:04:02.841Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
-Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was built or run, and nothing of the source is retained yet.
+Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn): nothing was built or run. Stage 2 is done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 (below).
 
 ## Pin
 
@@ -31,6 +31,7 @@ Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete 
 - SHA-256 of the statement-bearing files at the pin: Sq19Lean/Assembly/Optimality.lean 26358beb65fa85c7c5b13a6f2eb0015e9128be0b1f9af80974dca07c8038dbad, Sq19Lean/Assembly/PlainPacking.lean addd5d5900b27a5579e9e43f28a3958829dea34998a203d7f54cbeb2272b089c, Sq19Lean/SquareBase.lean 2799b499078dbf44ac94fcab6363d8e9717ad9c3eb7e2c47e420624ec9619bca, Sq19Lean/Basic.lean 202c139f565cd061352cd93b793c51428991d9528885519232bc3d90848aa3a0, Sq19Lean/EndpointPacking.lean 935f8dc14755f776226e2ad1cb1ef74d029c9b1435bbd477c0c131fc76da5e80, verification/Square19Optimality.log bfe8c69fd7ddcecaeed52e95b31cf8a8a6a913eda5b631b53b4a1c28c0ef9b37, expected/axioms.txt 84367f34dae85905be43339f1155e019fe8ba8864d5c34c4696fa9fdfba0fd8e, expected/statement.txt 0d26ff0afff12e7e8da8d2888043ddbf2f32a1fd1b3fb5b8fb5170c53e01863e, verification/kernel-replay.json 2d49a318844053b7f022eff39456b446887c66770b46563d739791d510e22975, scripts/verify.py 8bed6f6a736e41fb8a1c4a0fdc89b7e2756742f5c66231bc1d9688b5003619cf, lakefile.toml 73b785763a8a9adf..., lake-manifest.json b86789363df42289....
 - Build pins: Lean 4.34.1 (lean-toolchain), Mathlib v4.34.1 (d13f23b723b8a846827a245b89c10fc7d3f11612), and sq17-lean at 0a7167efa8dcae7fa73855890630fb7e2de550ed (its v1.0.0, the commit T-154 cites), whose Sq17Lean modules the lakefile compiles in place as the half-plane checker. The fitzharding-n17-lean-2026-10-13 packet pins e6ee548, whose tree differs from 0a7167e only by CITATION.cff, with every module's SHA-256 in its manifest.json.
 - Licence: MIT ("Copyright (c) 2026 Oscar Fitzharding"); CITATION.cff names Oscar Fitzharding, version 1.0.0, released 2026-10-16.
+- Announcement: https://x.com/ofitzharding/status/2110935681597874374, posted by @ofitzharding (display name "Oscar", account 2097726704118603776, the s(17) announcement's account) at 2026-10-16T03:27:40Z, before the issue: "lol here's a lean proof of the optimal packing for 19 squares", linking the repository and an image. Fetched from X's syndication endpoint at 04:58:12Z (2,278 bytes, SHA-256 1af584d9777af2ed54c0f64e98bfe209911d7dfdb63217cfb77a9646cd65b3b5) and retained in the packet's receipts/announcement/. The owner asked for it to be recorded as a source (think-xik9).
 
 ## Every claim
 
@@ -56,11 +57,11 @@ Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete 
 
 ## Disposition (proposed)
 
-Import. Stage 2: a packet fitzharding-n19-lean-2026-10-16 at 34fb2b7, retaining the hand-written tree (about 3.4 MB; the axiom log and expected/ gzip by the archive's rule) and pinning the release archives by size and digest, with a bibliography key [Fitzharding n19 Lean 2026]; not done in the triage pull request, since the key makes the site a release-impact candidate, which the stage 3 pull request carries anyway. Then the review lane starts, in parallel with stage 3, which registers the entry and links the proof from n-019.md. The full build waits for the owner's budget. The `n-19` label does not exist on jlevy/squares (gh label list, 2026-10-16); whether to create it and add it to #640 is the owner's.
+Import. Stage 2, done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 at 34fb2b7 retains the whole tree (243 files, 3,360,904 bytes; the axiom log and expected/axioms.txt as deterministic gzip), pins the release archives by size and digest, and keeps the X announcement; acquire_source --check passes. Its acquisition record makes the intake sweep watch sq19 with its head pinned (the head was 34fb2b7 at 05:10Z). The bibliography key [Fitzharding n19 Lean 2026] is defined in the resources README; its bibliography.yaml entry, the one site-owned input, waits for stage 3. Next: the review lane (think-o40t), then stage 3, which registers the entry and links the proof from n-019.md. The full build waits for the owner's budget. The `n-19` label does not exist on jlevy/squares (gh label list, 2026-10-16); whether to create it and add it to #640 is the owner's.
 
 ## Draft acknowledgement (not posted; stage 7 posts it after the pull request carrying this triage merges)
 
-@ofitzharding, thank you, and congratulations on the release. We have pinned ofitzharding/sq19 at 34fb2b7, which tag v1.0.0 names, and release v1.0.0's five certificate-source archives by the SHA-256 in its SHA256SUMS, which match GitHub's asset digests. In triage we read the statement and its definitions without building them: `Feasible19` is the record's problem at n = 19 (closed unit squares, any centre and rotation, inside [0, L]², disjoint interiors), and `3 + 4 * Real.sqrt 2 / 3` is the exact form the n = 19 case record holds for Wainwright's side. The axiom report lists the three standard axioms and 4,320 native_decide facts, and no sorryAx. Nothing in the record claims s(19) optimality, so this would be a new result for it. Next we retain the source in a packet, start a mathematical review of the proof, as your s(17) proof had, and register it as reported, with a link from the n = 19 case page. A full rebuild from source is above this intake's compute budget and needs a larger machine than ours, so it waits for the owner's decision; your offer to help with reproduction is welcome, and we will report here what is registered and what the review finds.
+@ofitzharding, thank you, and congratulations on the release. We have pinned ofitzharding/sq19 at 34fb2b7, which tag v1.0.0 names, and release v1.0.0's five certificate-source archives by the SHA-256 in its SHA256SUMS, which match GitHub's asset digests. In triage we read the statement and its definitions without building them: `Feasible19` is the record's problem at n = 19 (closed unit squares, any centre and rotation, inside [0, L]², disjoint interiors), and `3 + 4 * Real.sqrt 2 / 3` is the exact form the n = 19 case record holds for Wainwright's side. The axiom report lists the three standard axioms and 4,320 native_decide facts, and no sorryAx. Nothing in the record claims s(19) optimality, so this would be a new result for it. We have retained the repository at that commit, with your announcement on X, in a source packet. Next we start a mathematical review of the proof, as your s(17) proof had, and register it as reported, with a link from the n = 19 case page. A full rebuild from source is above this intake's compute budget and needs a larger machine than ours, so it waits for the owner's decision; your offer to help with reproduction is welcome, and we will report here what is registered and what the review finds.
 
 blocked_on: none
 
