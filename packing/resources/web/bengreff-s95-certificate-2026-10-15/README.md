@@ -223,6 +223,12 @@ it calls, and the scripts that made the checker receipts, are in
 [`receipts/programs/`](receipts/programs/). The run scripts name the scratch paths they
 ran in, which the receipts repeat.
 
+The stage 4 review of this result and of $s(76) = 9$
+([review-2026-10-16-greff-k2m5-mixed-covers-76-95.md](../../../../docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md))
+keeps its programs and outputs once, in the $s(76)$ packet’s
+[`review/`](../bengreff-s76-certificate-2026-10-14/review/README.md); this packet’s
+[`review/`](review/README.md) points there.
+
 ## Limitations
 
 - **One implementation per cell.** Each cell of the D4 region is decided by one of

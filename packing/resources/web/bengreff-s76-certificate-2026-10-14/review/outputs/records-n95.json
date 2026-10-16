@@ -1,0 +1,629 @@
+{
+ "n": 95,
+ "k": 10,
+ "cover_sha256": "8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c",
+ "cover_fnv1a64": "e6e0d4182d7f6e43",
+ "zmx2_source": {
+  "path": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/records/zmx2/zmx2_s95_v2.log.gz",
+  "problems": [],
+  "header": "# zmx2 cert hash=e6e0d4182d7f6e43 mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-49,y0-49,bins0-3",
+  "header_hash_matches_cover": true,
+  "header_ok": true,
+  "other_lines": 0,
+  "roots": 10000,
+  "roots_are_exactly_the_grid": true,
+  "failing": [
+   [
+    15,
+    47,
+    0
+   ],
+   [
+    22,
+    45,
+    2
+   ],
+   [
+    31,
+    43,
+    3
+   ],
+   [
+    34,
+    42,
+    2
+   ],
+   [
+    36,
+    45,
+    0
+   ],
+   [
+    37,
+    45,
+    0
+   ],
+   [
+    42,
+    34,
+    3
+   ],
+   [
+    42,
+    45,
+    2
+   ],
+   [
+    43,
+    31,
+    2
+   ],
+   [
+    45,
+    22,
+    3
+   ],
+   [
+    45,
+    42,
+    3
+   ],
+   [
+    47,
+    47,
+    0
+   ],
+   [
+    47,
+    48,
+    0
+   ],
+   [
+    47,
+    49,
+    0
+   ],
+   [
+    48,
+    38,
+    0
+   ],
+   [
+    48,
+    39,
+    0
+   ],
+   [
+    48,
+    48,
+    0
+   ],
+   [
+    48,
+    49,
+    0
+   ],
+   [
+    49,
+    39,
+    0
+   ]
+  ],
+  "census": {
+   "boxes": 15065314,
+   "cert": 7470934,
+   "empty": 58460,
+   "uncert": 8263,
+   "maxdepth": 40,
+   "capped": 0
+  },
+  "certified_roots": 9981,
+  "maxdepth_certified_roots": 38,
+  "uncert_boxes_listed": 111,
+  "uncert_boxes_inside_their_roots": true,
+  "uncert_listed_float_min_range": [
+   1.00521,
+   1.055674
+  ]
+ },
+ "zmx2_replay": {
+  "path": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_zmx2_d4_roots.log.gz",
+  "problems": [],
+  "header": "# zmx2 cert hash=e6e0d4182d7f6e43 mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-49,y0-49,bins0-3",
+  "header_hash_matches_cover": true,
+  "header_ok": true,
+  "other_lines": 0,
+  "roots": 10000,
+  "roots_are_exactly_the_grid": true,
+  "failing": [
+   [
+    15,
+    47,
+    0
+   ],
+   [
+    22,
+    45,
+    2
+   ],
+   [
+    31,
+    43,
+    3
+   ],
+   [
+    34,
+    42,
+    2
+   ],
+   [
+    36,
+    45,
+    0
+   ],
+   [
+    37,
+    45,
+    0
+   ],
+   [
+    42,
+    34,
+    3
+   ],
+   [
+    42,
+    45,
+    2
+   ],
+   [
+    43,
+    31,
+    2
+   ],
+   [
+    45,
+    22,
+    3
+   ],
+   [
+    45,
+    42,
+    3
+   ],
+   [
+    47,
+    47,
+    0
+   ],
+   [
+    47,
+    48,
+    0
+   ],
+   [
+    47,
+    49,
+    0
+   ],
+   [
+    48,
+    38,
+    0
+   ],
+   [
+    48,
+    39,
+    0
+   ],
+   [
+    48,
+    48,
+    0
+   ],
+   [
+    48,
+    49,
+    0
+   ],
+   [
+    49,
+    39,
+    0
+   ]
+  ],
+  "census": {
+   "boxes": 15065314,
+   "cert": 7470934,
+   "empty": 58460,
+   "uncert": 8263,
+   "maxdepth": 40,
+   "capped": 0
+  },
+  "certified_roots": 9981,
+  "maxdepth_certified_roots": 38,
+  "uncert_boxes_listed": 111,
+  "uncert_boxes_inside_their_roots": true,
+  "uncert_listed_float_min_range": [
+   1.00521,
+   1.055674
+  ]
+ },
+ "zmx2_nowall": {
+  "path": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/controls/n95_control_nowall_zmx2_d4_roots.log.gz",
+  "problems": [],
+  "header": "# zmx2 cert hash=6302c38afe13aa0b mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-49,y0-49,bins0-3",
+  "header_hash_matches_cover": false,
+  "header_ok": false,
+  "other_lines": 0,
+  "roots": 10000,
+  "roots_are_exactly_the_grid": true,
+  "failing": [
+   [
+    15,
+    47,
+    0
+   ],
+   [
+    22,
+    45,
+    2
+   ],
+   [
+    31,
+    43,
+    3
+   ],
+   [
+    34,
+    42,
+    2
+   ],
+   [
+    36,
+    45,
+    0
+   ],
+   [
+    37,
+    45,
+    0
+   ],
+   [
+    42,
+    34,
+    3
+   ],
+   [
+    42,
+    45,
+    2
+   ],
+   [
+    43,
+    31,
+    2
+   ],
+   [
+    45,
+    22,
+    3
+   ],
+   [
+    45,
+    42,
+    3
+   ],
+   [
+    47,
+    47,
+    0
+   ],
+   [
+    47,
+    48,
+    0
+   ],
+   [
+    47,
+    49,
+    0
+   ],
+   [
+    48,
+    38,
+    0
+   ],
+   [
+    48,
+    39,
+    0
+   ],
+   [
+    48,
+    48,
+    0
+   ],
+   [
+    48,
+    49,
+    0
+   ],
+   [
+    49,
+    39,
+    0
+   ]
+  ],
+  "census": {
+   "boxes": 15065314,
+   "cert": 7470934,
+   "empty": 58460,
+   "uncert": 8263,
+   "maxdepth": 40,
+   "capped": 0
+  },
+  "certified_roots": 9981,
+  "maxdepth_certified_roots": 38,
+  "uncert_boxes_listed": 111,
+  "uncert_boxes_inside_their_roots": true,
+  "uncert_listed_float_min_range": [
+   1.00521,
+   1.055674
+  ]
+ },
+ "failing_roots_txt_equals_source_log": true,
+ "source_out_summary_matches_log": true,
+ "zmx2_replay_census_equals_source_root_by_root": true,
+ "zmx2_replay_listed_uncert_boxes_equal_source": true,
+ "zmx2_nowall_census_equals_source_root_by_root": true,
+ "zmx2_nowall_listed_uncert_boxes_equal_source": true,
+ "zm_source": {
+  "dir": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/records/zm_mixed",
+  "problems": [],
+  "files": 304,
+  "cells": 304,
+  "boxes": 9614,
+  "maxdepth": 13,
+  "cpu_s_by_records": 2771.3
+ },
+ "zm_replay": {
+  "dir": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_zm_mixed",
+  "problems": [],
+  "files": 304,
+  "cells": 304,
+  "boxes": 9614,
+  "maxdepth": 13,
+  "cpu_s_by_records": 2327.0
+ },
+ "jobs_txt": {
+  "jobs": 304,
+  "all_have_a_record": true,
+  "regions_match_records": true
+ },
+ "zm_replay_equals_source_apart_from_path_and_cpu": true,
+ "composite_source": {
+  "zmx2_roots_complete": true,
+  "zmx2_certified": 9981,
+  "zmx2_failing": 19,
+  "zm_cells": 304,
+  "zm_cells_needed": 304,
+  "zm_cells_equal_subcells_of_failing": true,
+  "zm_cells_missing": [],
+  "zm_cells_extra": [],
+  "every_cell_decided": true,
+  "region": "[0,10/2]^2 x [0,1/2], 50 x 50 x 4 roots"
+ },
+ "composite_replay": {
+  "zmx2_roots_complete": true,
+  "zmx2_certified": 9981,
+  "zmx2_failing": 19,
+  "zm_cells": 304,
+  "zm_cells_needed": 304,
+  "zm_cells_equal_subcells_of_failing": true,
+  "zm_cells_missing": [],
+  "zm_cells_extra": [],
+  "every_cell_decided": true,
+  "region": "[0,10/2]^2 x [0,1/2], 50 x 50 x 4 roots"
+ },
+ "failing_roots": [
+  {
+   "root": "[3/2,8/5]x[47/10,24/5]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 8192,
+   "min_centre_distance_to_wall": "3/2",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[11/5,23/10]x[9/2,23/5]x u[1/4,3/8]",
+   "theta_deg": "28.07-41.11",
+   "uncert": 8,
+   "min_centre_distance_to_wall": "11/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": true,
+   "contains_u_1_3": true
+  },
+  {
+   "root": "[31/10,16/5]x[43/10,22/5]x u[3/8,1/2]",
+   "theta_deg": "41.11-53.13",
+   "uncert": 2,
+   "min_centre_distance_to_wall": "31/10",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": true,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[17/5,7/2]x[21/5,43/10]x u[1/4,3/8]",
+   "theta_deg": "28.07-41.11",
+   "uncert": 11,
+   "min_centre_distance_to_wall": "17/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": true
+  },
+  {
+   "root": "[18/5,37/10]x[9/2,23/5]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 6,
+   "min_centre_distance_to_wall": "18/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[37/10,19/5]x[9/2,23/5]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 2,
+   "min_centre_distance_to_wall": "37/10",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[21/5,43/10]x[17/5,7/2]x u[3/8,1/2]",
+   "theta_deg": "41.11-53.13",
+   "uncert": 5,
+   "min_centre_distance_to_wall": "17/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[21/5,43/10]x[9/2,23/5]x u[1/4,3/8]",
+   "theta_deg": "28.07-41.11",
+   "uncert": 5,
+   "min_centre_distance_to_wall": "21/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": true
+  },
+  {
+   "root": "[43/10,22/5]x[31/10,16/5]x u[1/4,3/8]",
+   "theta_deg": "28.07-41.11",
+   "uncert": 5,
+   "min_centre_distance_to_wall": "31/10",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": true,
+   "contains_u_1_3": true
+  },
+  {
+   "root": "[9/2,23/5]x[11/5,23/10]x u[3/8,1/2]",
+   "theta_deg": "41.11-53.13",
+   "uncert": 5,
+   "min_centre_distance_to_wall": "11/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": true,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[9/2,23/5]x[21/5,43/10]x u[3/8,1/2]",
+   "theta_deg": "41.11-53.13",
+   "uncert": 3,
+   "min_centre_distance_to_wall": "21/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[47/10,24/5]x[47/10,24/5]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 2,
+   "min_centre_distance_to_wall": "47/10",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[47/10,24/5]x[24/5,49/10]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 3,
+   "min_centre_distance_to_wall": "47/10",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[47/10,24/5]x[49/10,5]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 2,
+   "min_centre_distance_to_wall": "47/10",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[24/5,49/10]x[19/5,39/10]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 4,
+   "min_centre_distance_to_wall": "19/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[24/5,49/10]x[39/10,4]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 2,
+   "min_centre_distance_to_wall": "39/10",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[24/5,49/10]x[24/5,49/10]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 2,
+   "min_centre_distance_to_wall": "24/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[24/5,49/10]x[49/10,5]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 2,
+   "min_centre_distance_to_wall": "24/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[49/10,5]x[39/10,4]x u[0,1/8]",
+   "theta_deg": "0.00-14.25",
+   "uncert": 2,
+   "min_centre_distance_to_wall": "39/10",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  }
+ ],
+ "zm_cells_with_a_wall_line_within_reach": 0,
+ "ok": true,
+ "wall_s": 1.9,
+ "program": {
+  "name": "k2m5_review.py",
+  "sha256": "4fa7ed605b14893893dba03cde8054ab47360963e03514b0a554820813e1e848",
+  "python": "3.14.7"
+ }
+}

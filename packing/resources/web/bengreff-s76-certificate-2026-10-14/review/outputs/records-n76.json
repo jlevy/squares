@@ -1,0 +1,275 @@
+{
+ "n": 76,
+ "k": 9,
+ "cover_sha256": "b6a1214b99f00e5dd136d74c8d87bccd178df38a1063b2c7be90517eb2b862b2",
+ "cover_fnv1a64": "96e61ce6a0aa2545",
+ "zmx2_source": {
+  "path": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate/records/zmx2/zmx2_v5.log.gz",
+  "problems": [],
+  "header": "# zmx2 cert hash=96e61ce6a0aa2545 mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-44,y0-44,bins0-3",
+  "header_hash_matches_cover": true,
+  "header_ok": true,
+  "other_lines": 0,
+  "roots": 8100,
+  "roots_are_exactly_the_grid": true,
+  "failing": [
+   [
+    22,
+    44,
+    3
+   ],
+   [
+    42,
+    43,
+    3
+   ],
+   [
+    43,
+    42,
+    2
+   ],
+   [
+    44,
+    22,
+    2
+   ]
+  ],
+  "census": {
+   "boxes": 14672104,
+   "cert": 7268720,
+   "empty": 71364,
+   "uncert": 18,
+   "maxdepth": 40,
+   "capped": 0
+  },
+  "certified_roots": 8096,
+  "maxdepth_certified_roots": 36,
+  "uncert_boxes_listed": 18,
+  "uncert_boxes_inside_their_roots": true,
+  "uncert_listed_float_min_range": [
+   1.004507,
+   1.008004
+  ]
+ },
+ "zmx2_replay": {
+  "path": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_zmx2_d4_roots.log.gz",
+  "problems": [],
+  "header": "# zmx2 cert hash=96e61ce6a0aa2545 mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-44,y0-44,bins0-3",
+  "header_hash_matches_cover": true,
+  "header_ok": true,
+  "other_lines": 0,
+  "roots": 8100,
+  "roots_are_exactly_the_grid": true,
+  "failing": [
+   [
+    22,
+    44,
+    3
+   ],
+   [
+    42,
+    43,
+    3
+   ],
+   [
+    43,
+    42,
+    2
+   ],
+   [
+    44,
+    22,
+    2
+   ]
+  ],
+  "census": {
+   "boxes": 14672104,
+   "cert": 7268720,
+   "empty": 71364,
+   "uncert": 18,
+   "maxdepth": 40,
+   "capped": 0
+  },
+  "certified_roots": 8096,
+  "maxdepth_certified_roots": 36,
+  "uncert_boxes_listed": 18,
+  "uncert_boxes_inside_their_roots": true,
+  "uncert_listed_float_min_range": [
+   1.004507,
+   1.008004
+  ]
+ },
+ "zmx2_nowall": {
+  "path": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/controls/n76_control_nowall_zmx2_d4_roots.log.gz",
+  "problems": [],
+  "header": "# zmx2 cert hash=38872588fe71b51b mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-44,y0-44,bins0-3",
+  "header_hash_matches_cover": false,
+  "header_ok": false,
+  "other_lines": 0,
+  "roots": 8100,
+  "roots_are_exactly_the_grid": true,
+  "failing": [
+   [
+    22,
+    44,
+    3
+   ],
+   [
+    42,
+    43,
+    3
+   ],
+   [
+    43,
+    42,
+    2
+   ],
+   [
+    44,
+    22,
+    2
+   ]
+  ],
+  "census": {
+   "boxes": 14672104,
+   "cert": 7268720,
+   "empty": 71364,
+   "uncert": 18,
+   "maxdepth": 40,
+   "capped": 0
+  },
+  "certified_roots": 8096,
+  "maxdepth_certified_roots": 36,
+  "uncert_boxes_listed": 18,
+  "uncert_boxes_inside_their_roots": true,
+  "uncert_listed_float_min_range": [
+   1.004507,
+   1.008004
+  ]
+ },
+ "failing_roots_txt_equals_source_log": true,
+ "source_out_summary_matches_log": true,
+ "zmx2_replay_census_equals_source_root_by_root": true,
+ "zmx2_replay_listed_uncert_boxes_equal_source": true,
+ "zmx2_nowall_census_equals_source_root_by_root": true,
+ "zmx2_nowall_listed_uncert_boxes_equal_source": true,
+ "zm_source": {
+  "dir": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate/records/zm_mixed",
+  "problems": [],
+  "files": 64,
+  "cells": 64,
+  "boxes": 4950,
+  "maxdepth": 15,
+  "cpu_s_by_records": 1358.7
+ },
+ "zm_replay": {
+  "dir": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_zm_mixed",
+  "problems": [],
+  "files": 64,
+  "cells": 64,
+  "boxes": 4950,
+  "maxdepth": 15,
+  "cpu_s_by_records": 1032.7
+ },
+ "jobs_txt": {
+  "jobs": 64,
+  "all_have_a_record": true,
+  "regions_match_records": true
+ },
+ "zm_replay_equals_source_apart_from_path_and_cpu": true,
+ "composite_source": {
+  "zmx2_roots_complete": true,
+  "zmx2_certified": 8096,
+  "zmx2_failing": 4,
+  "zm_cells": 64,
+  "zm_cells_needed": 64,
+  "zm_cells_equal_subcells_of_failing": true,
+  "zm_cells_missing": [],
+  "zm_cells_extra": [],
+  "every_cell_decided": true,
+  "region": "[0,9/2]^2 x [0,1/2], 45 x 45 x 4 roots"
+ },
+ "composite_replay": {
+  "zmx2_roots_complete": true,
+  "zmx2_certified": 8096,
+  "zmx2_failing": 4,
+  "zm_cells": 64,
+  "zm_cells_needed": 64,
+  "zm_cells_equal_subcells_of_failing": true,
+  "zm_cells_missing": [],
+  "zm_cells_extra": [],
+  "every_cell_decided": true,
+  "region": "[0,9/2]^2 x [0,1/2], 45 x 45 x 4 roots"
+ },
+ "failing_roots": [
+  {
+   "root": "[11/5,23/10]x[22/5,9/2]x u[3/8,1/2]",
+   "theta_deg": "41.11-53.13",
+   "uncert": 2,
+   "min_centre_distance_to_wall": "11/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": true,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[21/5,43/10]x[43/10,22/5]x u[3/8,1/2]",
+   "theta_deg": "41.11-53.13",
+   "uncert": 4,
+   "min_centre_distance_to_wall": "21/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": false
+  },
+  {
+   "root": "[43/10,22/5]x[21/5,43/10]x u[1/4,3/8]",
+   "theta_deg": "28.07-41.11",
+   "uncert": 6,
+   "min_centre_distance_to_wall": "21/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": false,
+   "contains_u_1_3": true
+  },
+  {
+   "root": "[22/5,9/2]x[11/5,23/10]x u[1/4,3/8]",
+   "theta_deg": "28.07-41.11",
+   "uncert": 6,
+   "min_centre_distance_to_wall": "11/5",
+   "wall_lines_within_reach": false,
+   "region": "cross",
+   "near_seam_x_or_y_5_2": true,
+   "contains_u_1_3": true
+  }
+ ],
+ "zm_cells_with_a_wall_line_within_reach": 0,
+ "second_route_root_R": {
+  "R": "[27/20,7/5]x[13/10,27/20]x u[1/4,9/32]",
+  "zmx2_root": [
+   "13/10",
+   "7/5",
+   "13/10",
+   "7/5",
+   "1/4",
+   "3/8"
+  ],
+  "R_inside_that_root": true,
+  "zmx2_census": {
+   "boxes": 208957,
+   "cert": 104479,
+   "empty": 0,
+   "uncert": 0,
+   "maxdepth": 30,
+   "capped": 0
+  },
+  "zmx2_certified": true
+ },
+ "ok": true,
+ "wall_s": 1.4,
+ "program": {
+  "name": "k2m5_review.py",
+  "sha256": "4fa7ed605b14893893dba03cde8054ab47360963e03514b0a554820813e1e848",
+  "python": "3.14.7"
+ }
+}
