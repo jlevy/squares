@@ -1034,6 +1034,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/default_drawings.py",
             "packing/devtools/regularize_axis_components.py",
             "packing/devtools/regularize_evand.py",
+            "packing/devtools/regularize_select.py",
             "packing/devtools/regularized_drawings.py",
             "packing/devtools/render_case_pages.py",
             "packing/src/sqpack/cli/validate.py",
@@ -1061,7 +1062,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "The regularization-state record (think-gvke) changes the default-drawings "
             "generator and its gate step, the axis tool's update, check and verify of the "
-            "atlas index, the layer's admission, the case-record regularization note and "
+            "atlas index, the layer's admission and the selection's measuring it now "
+            "shares, the case-record regularization note and "
             "the case page's note. The papers reach these modules through shared import "
             "discovery and call none of the changed functions: no paper renders a case "
             "page, a case record's regularization note, the default-drawings record or "
