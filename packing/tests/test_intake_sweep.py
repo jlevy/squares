@@ -864,3 +864,153 @@ def test_the_capture_command_reports_a_failed_transcription_and_exits_1(
     assert capture_tool.main(["--html", str(page), "--out", str(out)]) == 1
     assert "capture failed:" in capsys.readouterr().err
     assert not out.exists()
+
+
+# -- Regularization owed --------------------------------------------------------------
+
+
+def _deferral_beads(state: str = "in_progress") -> dict[str, str]:
+    """Every bead the committed lists defer regularization to, in one state."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    return {alias: state for _where, alias in defaults.deferrals()}
+
+
+def _drawings(tmp_path: Path, n: int, state: str) -> Path:
+    """The committed default-drawings record with count `n` put in `state`."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    record = json.loads(defaults.RECORD.read_text(encoding="utf-8"))
+    for row in record["states"]:
+        if row["n"] == n:
+            row["state"] = state
+    path = tmp_path / "default-drawings.json"
+    path.write_text(defaults.text(record), encoding="utf-8")
+    return path
+
+
+def _first(state: str) -> int:
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    record = json.loads(defaults.RECORD.read_text(encoding="utf-8"))
+    found = next((row["n"] for row in record["states"] if row["state"] == state), None)
+    if found is None:
+        pytest.skip(f"the data holds no {state} count")
+    return int(found)
+
+
+def test_every_pending_count_is_owned_by_the_bead_its_allowlist_entry_names(
+    tmp_path: Path,
+) -> None:
+    """think-9qm5: the owner made regularizing every new house part of the standard
+    intake, so the sweep lists each count whose drawing is pending regularization with the
+    bead that owns its runs, a re-housed count a test adoption allowed among them, and
+    each decision that still owes runs and each exemption with theirs. While those beads
+    are open nothing needs action; a bead that closes leaves its counts needing an owner."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    n = _first(defaults.REGULAR_AS_PUBLISHED)
+    record = _drawings(tmp_path, n, defaults.PENDING)
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: re-housed by a test adoption"}
+    states = {**_deferral_beads(), "think-aaaa": "open"}
+    section = sweep.regularization_section(_beads(**states), record=record, allowed=allowed)
+    assert section.title == "Regularization owed"
+    assert all(item.state == sweep.OWNED for item in section.items)
+    pending = [item for item in section.items if " pending: " in item.what]
+    assert sorted(int(item.what.split()[2]) for item in pending) == sorted(allowed)
+    added = next(item for item in pending if item.what.startswith(f"n = {n} "))
+    assert (added.what, added.bead, added.bead_state) == (
+        f"n = {n} pending: re-housed by a test adoption",
+        "think-aaaa",
+        "open",
+    )
+    assert "When a Witness Changes" in added.step
+    for count, entry in defaults.PENDING_ALLOWED.items():
+        (item,) = [found for found in pending if found.what.startswith(f"n = {count} ")]
+        assert entry.startswith(f"{item.bead}: "), count
+    owing = {count for count, held in defaults.SETTLED.items() if held.owed}
+    decided = [item for item in section.items if " decided no better " in item.what]
+    assert len(decided) <= len(owing)
+    assert all(item.bead == "think-0ut1" for item in decided if "#518" in item.what)
+    assert section.notes[0].startswith("Regularization states of 324 counts: ")
+    assert (
+        f"Owed: {len(allowed)} pending counts, {len(allowed)} of them in PENDING_ALLOWED"
+        in (section.notes[0])
+    )
+
+    closed = sweep.regularization_section(
+        _beads(**{**states, "think-aaaa": "closed"}), record=record, allowed=allowed
+    )
+    orphaned = [item for item in closed.items if item.state == sweep.NEEDS_OWNER]
+    assert [(item.what, item.bead, item.bead_state) for item in orphaned] == [
+        (added.what, "think-aaaa", "closed")
+    ]
+    assert sweep.needing_action([closed]) == orphaned
+
+
+def test_a_pending_count_no_list_names_needs_action_once(tmp_path: Path) -> None:
+    """A count a change made pending without allowing it is what the records tier fails
+    on; the sweep lists it once, as needing action, not again as the gate's problem."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    n = _first(defaults.REGULAR_AS_PUBLISHED)
+    record = _drawings(tmp_path, n, defaults.PENDING)
+    section = sweep.regularization_section(_beads(**_deferral_beads()), record=record)
+    action = sweep.needing_action([section])
+    assert [item.what.split(":")[0] for item in action] == [
+        f"n = {n} is pending and PENDING_ALLOWED does not name it"
+    ]
+    assert "allow it with the open bead that owns the runs" in action[0].step
+
+
+def test_anything_else_the_state_gate_fails_on_needs_action() -> None:
+    """A listed count that is no longer pending: the list must come down in the change that
+    decided it, and a pass that leaves it there has not finished."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    n = _first(defaults.REGULARIZED_STATE)
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: a test"}
+    section = sweep.regularization_section(
+        _beads(**_deferral_beads(), **{"think-aaaa": "open"}),
+        record=defaults.RECORD,
+        allowed=allowed,
+    )
+    assert [item.what for item in sweep.needing_action([section])] == [
+        (
+            "the regularization-state gate fails: "
+            f"n={n}: PENDING_ALLOWED names it, but it is regularized; take it off the list"
+        )
+    ]
+
+
+def test_a_missing_record_is_not_checked(tmp_path: Path) -> None:
+    section = sweep.regularization_section(None, record=tmp_path / "missing.json")
+    assert section.items == []
+    assert section.unchecked == [
+        "regularization: packing/atlas/known-best/default-drawings.json is missing"
+    ]
+
+
+def test_the_sweep_reports_regularization_with_the_record_side_queues() -> None:
+    """The section is part of every sweep, `--offline` and `--json` included, beside the
+    queues it follows; with no bead store its items are owned but unconfirmed."""
+
+    def network(*_: object) -> Any:
+        pytest.fail("--offline made a network call")
+
+    sections = sweep.sweep(
+        today=TODAY,
+        offline=True,
+        capture=None,
+        beads=None,
+        compare_github=network,
+        heads=network,
+        history=network,
+        fetch=network,
+    )
+    titles = [section.title for section in sections]
+    assert titles.index("Regularization owed") == titles.index("Record-side queues") + 1
+    (section,) = [section for section in sections if section.title == "Regularization owed"]
+    assert section.items
+    assert {item.bead_state for item in section.items} == {"unconfirmed: no bead store"}
+    assert "## Regularization owed" in sweep.markdown(sections, TODAY)
