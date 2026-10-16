@@ -5,7 +5,7 @@ title: "Post the stage-7 replies held for stack #632"
 kind: task
 status: closed
 priority: 1
-version: 8
+version: 9
 delegate: ecstatic-edison-replies-stack
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-16T01:20:02.999Z
-updated_at: 2026-10-16T04:04:04.907Z
+updated_at: 2026-10-16T04:04:40.223Z
 started_at: 2026-10-16T01:20:05.762Z
 closed_at: 2026-10-16T04:04:04.906Z
 close_reason: "#637 merged 2026-10-16 (7461cfda3)"
@@ -65,3 +65,5 @@ Record branch claude/ecstatic-edison-8en33t-replies-stack from origin/main 22c0e
 Posted: #596 final reply https://github.com/jlevy/squares/issues/596#issuecomment-6207611222 (03:45:51Z; the row at 370 superseded by Couzo 487b058, 2.52e-4 below; 365 and 460 current), #596 closed completed 03:45:54Z. Edited in place 03:46:05Z-03:46:09Z, each with a visible Edited line: #506 6206057024, #561 6206059300, #575 6206059896, #583 6206060386 (A2: supersession attribution and dates per main's source-coverage superseded_by chain), #573 6206056718 (A6: "at least").
 
 Commits on claude/ecstatic-edison-8en33t-replies-stack: 66e8be69e (record: #596 reply and closing, edit notes on #506 #561 #573 #575 #583, #583 not_registered, holds on #570 #574, #575 reopen held by think-qag2, outdated/corrects on #506 and #593), ba44d77a4 (merge of main 4e8c8987f), 5650d5c45 (release: survey no-change restated over 4e8c8987, render byte-identical in 42 files). Holds noted on think-rfce (#570) and think-9v2k (#574). New bead think-qag2 (blocked on the owner) holds #575's reopen at 176. At 5650d5c45: gate exit 0; --report due only #557 #565 #570 #574; --github 3 differences, all new since this pass (issues #639 and #640, BuddenPing's #622 comment 6207551818 at 03:40Z answering the AI-assistance question) and left for the next intake pass; check_release_impact ok; release_pin --check ok (e35725f07262); pytest 110 passed; packing-validate --records exit 0, 51/109 steps, 78 s. Pushed 5650d5c45; #637 description updated (still draft).
+
+04:03Z: hosted CI at 5650d5c45 green on the first run (Packing validation 38847610795, Certificate page 38847610740; 31 pass, 28 skipped, 0 failed). Review A dispositions posted: https://github.com/jlevy/squares/pull/637#issuecomment-6207805231. think-xhft and its children closed; think-34sy closed (A7); think-qag2 open, blocked on the owner. At 04:03:58Z-04:04:00Z jlevy marked #637 ready and merged it as 7461cfda3 (parents 4e8c8987f and 5650d5c45, tree identical to 5650d5c45), not this agent. This bead's closing condition (#637 merged) is met; left open for the coordinator's post-merge checks.
