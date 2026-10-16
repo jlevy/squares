@@ -1,0 +1,67 @@
+name = "sq19-lean"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["Sq19Lean"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = false
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.34.1"
+
+[[lean_lib]]
+name = "Sq19Lean"
+
+[[require]]
+name = "sq17-lean"
+git = "https://github.com/ofitzharding/sq17-lean"
+rev = "0a7167efa8dcae7fa73855890630fb7e2de550ed"
+
+# The 17 project's half-plane checker modules, compiled in place from the pinned package (not copied). Its own
+# library declares only the final theorem as a root, so its other modules are not importable through it.
+[[lean_lib]]
+name = "Sq17Checker"
+srcDir = ".lake/packages/sq17-lean"
+globs = ["Sq17Lean.+"]
+
+# Preserve the module names used by the verified certificate replay.
+[[lean_lib]]
+name = "Sq19EndgameChecks"
+srcDir = "s19/certificates/endgame_reduction/canonical"
+roots = [
+  "Shard0000", "Shard0032", "Shard0064", "Shard0096", "Shard0128", "Shard0160",
+  "Shard0192", "Shard0224", "Shard0256", "Shard0288", "Shard0320", "Shard0352",
+  "Shard0384", "Shard0416", "Shard0448", "Shard0480", "Shard0512", "Shard0544",
+  "Shard0576", "Shard0608", "Shard0640", "Shard0672", "Shard0704", "Shard0736",
+  "Shard0768", "Shard0800", "Shard0832", "Shard0864", "Shard0896", "Shard0928",
+  "Shard0960", "Shard0992", "Shard1024", "Shard1056", "Shard1088", "Shard1120",
+  "Shard1152", "Shard1184", "Shard1216", "Shard1248", "Shard1280", "Shard1312",
+  "Shard1344", "Shard1376", "Shard1408", "Shard1440", "Shard1472", "Shard1504",
+  "Shard1536", "Shard1568", "Shard1600", "Shard1632", "Shard1664", "Shard1696",
+  "Shard1728", "Shard1760", "Shard1792", "Shard1824", "Shard1856", "Shard1888",
+  "Shard1920", "Shard1952", "Shard1984", "Shard2016", "Shard2048", "Shard2080",
+  "Shard2112", "Shard2144", "Shard2176", "Shard2208", "Shard2240", "Shard2272",
+]
+
+# Preserve the module names used by the verified certificate replay.
+[[lean_lib]]
+name = "Sq19EndgameAssembly"
+srcDir = "s19/certificates/endgame_reduction/assembly"
+roots = [
+  "Block000", "Block001", "Block002", "Block003", "Block004", "Block005",
+  "Block006", "Block007", "Block008", "Block009", "Block010", "Block011",
+  "Block012", "Block013", "Block014", "Block015", "Block016", "Block017",
+  "Block018", "Block019", "Block020", "Block021", "Block022", "Block023",
+  "Block024", "Block025", "Block026", "Block027", "Block028", "Block029",
+  "Block030", "Block031", "Block032", "Block033", "Block034", "Block035",
+  "Block036", "Block037", "Block038", "Block039", "Block040", "Block041",
+  "Block042", "Block043", "Block044", "Block045", "Block046", "Block047",
+  "Block048", "Block049", "Block050", "Block051", "Block052", "Block053",
+  "Block054", "Block055", "Block056", "Block057", "Block058", "Block059",
+  "Block060", "Block061", "Block062", "Block063", "CertifiedHull",
+]

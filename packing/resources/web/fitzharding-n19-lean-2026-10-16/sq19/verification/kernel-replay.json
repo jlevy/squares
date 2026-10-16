@@ -1,0 +1,26 @@
+{
+  "date_utc": "2026-10-16",
+  "lean": "4.34.1",
+  "method": "LeanChecker.replayFromImports (Lean toolchain), every module of the import closure of Sq19Lean.Assembly.Optimality",
+  "closure_modules": 13144,
+  "closure_list_sha256": "b301d93eceaa080ed1f22c633374e6f9c008fb2923eb8768fdf398454e975505",
+  "passes": [
+    {
+      "scope": "project modules (Sq19Lean, Sq17Lean, endgame shards and blocks)",
+      "modules": 2400,
+      "failures": 0,
+      "wall": "12m57s",
+      "cores": 64
+    },
+    {
+      "scope": "Mathlib and standard libraries",
+      "modules": 10744,
+      "failures": 0,
+      "wall": "24m04s",
+      "cores": 64
+    }
+  ],
+  "objects": "compiled objects of the research build of 15 October 2026; scripts/verify.py --kernel-replay repeats this on a fresh build",
+  "note": "13,144 = the import closure of Sq19Lean.Assembly.FinalReport (the theorem module Sq19Lean.Assembly.Optimality has 13,143, plus the report module itself).",
+  "smoke_test_2026_10_16": "scripts/verify.py --kernel-replay on this repository replayed the 13,143-module closure of the theorem module: 0 failures."
+}

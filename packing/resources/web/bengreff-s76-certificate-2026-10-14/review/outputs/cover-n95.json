@@ -1,0 +1,141 @@
+{
+ "file": "s95_cover_v2.txt",
+ "bytes": 1160654,
+ "sha256": "8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c",
+ "fnv1a64": "e6e0d4182d7f6e43",
+ "side": "10",
+ "D": 8000,
+ "W": 400000000,
+ "S_units": 80000,
+ "points": 48352,
+ "segments": 11438,
+ "polygons": 0,
+ "zero_weight_points": 0,
+ "zero_weight_segments": 0,
+ "total": "3791753447/40000000",
+ "total_decimal": "94.793836175000",
+ "total_below_n": true,
+ "slack_n_minus_total": "8246553/40000000",
+ "slack_decimal": "0.206163825",
+ "grid_count_k2": 100,
+ "k2_minus_n": 5,
+ "ceil_sqrt_n": 10,
+ "distinct_point_positions": 48352,
+ "repeated_point_positions": 0,
+ "max_point_weight": 2514512,
+ "points_on_integer_lines": 0,
+ "points_on_segment_lines": 0,
+ "points_on_container_boundary": 0,
+ "segment_lengths": {
+  "1/500": 3222,
+  "1/50": 5976,
+  "1/16": 2240
+ },
+ "lcm_segment_lengths_units": 4000,
+ "segment_lines_vertical": [
+  "0",
+  "1",
+  "10",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9"
+ ],
+ "segment_lines_horizontal": [
+  "0",
+  "1",
+  "10",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9"
+ ],
+ "all_segment_lines_integer": true,
+ "wall_segments": 404,
+ "wall_segment_mass": "101/100000000",
+ "wall_segment_weights": [
+  [
+   1,
+   404
+  ]
+ ],
+ "wall_segment_lengths": [
+  [
+   "1/500",
+   404
+  ]
+ ],
+ "wall_segments_per_wall": {
+  "x=0": 101,
+  "y=0": 101,
+  "y=s": 101,
+  "x=s": 101
+ },
+ "wall_segments_x0_midpoints": {
+  "count": 101,
+  "first": "5/2",
+  "last": "15/2",
+  "steps": [
+   "1/20"
+  ]
+ },
+ "total_without_wall_segments": "18958767033/200000000",
+ "total_without_wall_segments_below_n": true,
+ "overlapping_segment_pairs_same_line": 7476,
+ "d4_invariant_as_measure": {
+  "id": true,
+  "rot90": true,
+  "rot180": true,
+  "rot270": true,
+  "x->s-x": true,
+  "y->s-y": true,
+  "x<->y": true,
+  "antidiagonal": true
+ },
+ "d4_all": true,
+ "d4_raw_multiset_generators": {
+  "x->s-x": true,
+  "x<->y": true
+ },
+ "zmx2_input_bounds": {
+  "D_lt_2p20": true,
+  "S_lt_2p27": true,
+  "W_lt_2p50": true,
+  "weights_lt_2p50": true,
+  "total_weight_lt_2p56": true,
+  "lcm_lengths_le_2p24": true,
+  "d4_side_multiple_of_1_5": true
+ },
+ "zm_mixed_d4_half_side_multiple_of_pitch_1_20": true,
+ "heaviest_point": {
+  "X": "149/100",
+  "Y": "187/100",
+  "w": "157157/25000000"
+ },
+ "heaviest_segment": {
+  "ends": [
+   "15/16",
+   "5",
+   "1",
+   "5"
+  ],
+  "w": "8290799/50000000"
+ },
+ "mass_in_four_corner_blocks": "99792933/5000000",
+ "problems": [],
+ "ok": true,
+ "wall_s": 3.8,
+ "program": {
+  "name": "k2m5_review.py",
+  "sha256": "4fa7ed605b14893893dba03cde8054ab47360963e03514b0a554820813e1e848",
+  "python": "3.14.7"
+ }
+}

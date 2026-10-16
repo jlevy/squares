@@ -12,6 +12,45 @@ softschema:
 
 last_reviewed: '2026-10-14'
 verifiers:
+  - id: V-evand-verify-exact
+    program: verify_exact.py
+    author: Evan Daniel
+    provenance: external
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The source's standard-library checker of an exact configuration over a number field
+      Q[t]/f: every touching inequality an identity mod f, every other one by rational
+      interval arithmetic at the root of f, each pair separated by a side line or by
+      circumscribed discs, and the side the unique root of p in its interval.
+    source:
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py
+    versions:
+      - sha256: a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4
+        revision: 7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1
+        note: byte-identical at ad86d42, the revision whose packet retains the copy that ran
+    note: >-
+      Run unchanged from the retained copy on issue 639's 23 exact forms, each in its own
+      python -I process (receipts/replay-verify-exact.json in the evand-exact-cur-2026-10-16
+      packet). The replay's evidence entry is added at T-193's stage 4 exit, after the
+      review lane think-7qxm.
+  - id: V-evand-639-replay-driver
+    program: replay_verify_exact.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    source:
+      - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
+    summary: >-
+      Runs the source's verify_exact.py on each of issue 639's 23 exact forms and on four
+      mutated controls at each retained form, holds the four pinned-only forms to the
+      packet's manifest, and factors each polynomial over the integers with SymPy.
+    note: >-
+      It decides nothing about a packing: the checker it runs does. Its irreducibility
+      check is a premise of the stated algebraic degree, not of the bound.
   # --- External programs -------------------------------------------------------------
   - id: V-tokoharu-verify-cpp
     program: verify.cpp, run by its driver run_verify.py
@@ -249,11 +288,20 @@ verifiers:
     summary: The source's exact mixed point-and-segment cover checker, the predecessor zmx2 was checked against.
     source:
       - packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py
+      - packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py
     versions:
       - {sha256: ee3e2915349b8795128417bca6414b205d526db9f01f88cd4cd32c32e8d760ac}
+      - sha256: bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5
+        path: packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py
+        note: mixed_cover.py, which zm_mixed.py imports
+      - sha256: 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab
+        path: packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zeromargin.py
+        note: zeromargin.py, which zm_mixed.py imports (V-evand-zeromargin-py's program)
     note: >-
-      Retained; its shipped run records are re-summarised by the source's verify.sh, but
-      no confirming entry runs the checker itself yet.
+      Benjamin Greff verified his s(76) and s(95) covers with it, on the sub-roots of the
+      D4 roots zmx2 leaves, at the three digests his verify.sh pins, so its runs there
+      (devtools.replay_evand_zmx2 zm-mixed) replay the producer's code. No other
+      confirming entry runs it.
 
   - id: V-evand-zeromargin-py
     program: zeromargin.py, run by zm_d4_sweep.py
@@ -2543,7 +2591,10 @@ verifiers:
     language: [Python]
     methods: [exact-algebraic]
     role: premises
-    summary: Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls.
+    summary: >-
+      Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the
+      record's, and runs it and its controls; for a split cover it also stages zm_mixed.py
+      and the files it imports, digests checked, and runs it on the source's sub-roots.
     source: [packing/devtools/replay_evand_zmx2.py]
 
   - id: V-audit-evand-mixed-covers
@@ -2556,7 +2607,9 @@ verifiers:
     summary: >-
       Parses zmx2 root logs with its own code, requires every root once with none
       uncertified, compares them with the source's records and re-derives the cover's
-      exact total and D4 invariance.
+      exact total and D4 invariance; for a split cover it reads the zmx2 log and
+      zm_mixed.py's sub-root records as one decision, every root zmx2 leaves tiled by
+      certified sub-roots at the pinned digests and settings.
     source: [packing/devtools/audit_evand_mixed_covers.py]
 
   - id: V-audit-s12-reweighted
