@@ -5,7 +5,7 @@ title: "Import evand: exact algebraic sides for 22 current best-known packings (
 kind: task
 status: in_progress
 priority: 1
-version: 19
+version: 20
 delegate: user-eb-intake-1016
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.050Z
-updated_at: 2026-10-16T11:51:13.171Z
+updated_at: 2026-10-16T12:23:24.071Z
 started_at: 2026-10-16T04:05:36.125Z
 ---
 Stage 1 triage of jlevy/squares#639 (evand, Evan Daniel, "Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval, exact configuration): registration request", opened 2026-10-16T03:37:13Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was run but exact sign evaluations of the source's polynomials at the record's rationals (seconds), and nothing of the source is retained yet.
@@ -101,3 +101,5 @@ Two questions, if you have a moment:
 2026-10-16 ~11:30Z user-eb-addr-642-651: PR #651 pushed at e45883525 (2bcd0a7c8 replay driver A5/A6 + refreshed receipt, 23/23 VALID, 76/76 refused, 23/23 squarefree+irreducible, 1484.5 CPU s; c86682367 T-193 held at V0/C0 pending think-7qxm, E-evand-639-verify-exact-replay and its case-citation deferral removed until the stage 4 exit (draft text at ef43dd02f), A3/A4 claim fixes; e45883525 re-pin). Next: records tier, focused tests, description, disposition reply, CI.
 
 2026-10-16 ~11:55Z user-eb-addr-642-651: #651 review A addressed at 3a230d30f (CI green, runs 38895014466 / 38895014273); reply https://github.com/jlevy/squares/pull/651#pullrequestreview-5547382157. T-193 held at V0/C0 pending think-7qxm; the stage 4 exit must restore E-evand-639-verify-exact-replay (draft at ef43dd02f, numbers from the refreshed receipt: 1,427 CPU s positives, 58 s controls, 23/23 squarefree+irreducible) and cite it, and re-add a case-citation deferral if houses still cannot adopt. Deferrals opened: think-e1u5 (formal stack, A1), think-v860 (ledger start, A7).
+
+2026-10-16 ~12:25Z coordinator user-eb: PR #651 MERGE-READY at b33ce8ffd (senior+correctness Review A 0/2/1/5 and follow-up Review B 0/0/0/2 addressed: T-193 held at V0/C0 until think-7qxm; T-194 registered V0/C0, S5 draft; A1 informal chain deferred think-e1u5; A7 think-v860; B1 cache key fixed; B2 noted on think-7qxm). CI green. Merge after #642, retargeted to main. The T-193 exit and the T-194 C1 mapping are lane K's PR (think-9e3w), stacked on #655.
