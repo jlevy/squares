@@ -387,6 +387,25 @@ Exploration
 [X-049](../../campaign/explorations/X-049-families-shading-and-the-large-n-limit.md#exact-regularization)
 explains why the layer exists and what the axis tool changes.
 
+Later that day the adoption of the 16 October review (think-z7wn) moved the houses at
+129, 146, 154, 156, 175, 176, 204, 211, 232, 237, 264, 271, 302, 303 and 304, so the
+views the stack had drawn there lapsed to the axis tool’s view of each new witness.
+Both generators ran on the fifteen new witnesses: Evan Daniel’s regularizer
+(`evand-regularize-z7wn-a-1016` and `evand-regularize-z7wn-b-1016`, 4,817 CPU-seconds)
+and grid-slack at 0.5, 1 and 5 degrees (`grid-slack-z7wn-{a,b}-deg05-1016`, `-deg1-1016`
+and `-deg5-1016`, 3,487 CPU-seconds).
+The selection of the counts 129 to 211 draws his same-side views at 129, 146, 175 and
+204, grid-slack’s half-degree view at 156 and its five-degree view at 154; at 176
+grid-slack’s views draw more uneven squares than the axis tool’s and his is held at row
+4, and at 211 every view goes to review at row 7, so both are decided no better.
+The selection of 232, 237, 264, 271, 302, 303 and 304 did not finish by that pass’s stop
+time: those seven counts are pending, named in `default_drawings.PENDING_ALLOWED` under
+think-r3cl, with their runs done.
+The evidence is retained in
+[`cases/regularized_drawings/think-z7wn-2026-10-16/`](../../cases/regularized_drawings/think-z7wn-2026-10-16/)
+in think-kpm3’s layout, with `selection-z7wn-a.json` and `selection-z7wn-a.md` for the
+counts selected.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

@@ -227,6 +227,27 @@ def _daniel(n: int) -> str:
     )
 
 
+#: Both generators ran on the fifteen witnesses the adoption of 16 October 2026 moved
+#: (think-z7wn): Evan Daniel's regularizer and grid-slack at 0.5, 1 and 5 degrees, the
+#: counts 129 to 211 selected that day; their receipts and reports are in
+#: packing/cases/regularized_drawings/think-z7wn-2026-10-16/.
+_RUNZ7WN = (
+    ("evand-regularize", "evand-regularize-z7wn-a-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-a-deg05-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-a-deg1-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-a-deg5-1016"),
+)
+_README_Z7WN = (
+    "packing/cases/regularized_drawings/think-z7wn-2026-10-16/selection-z7wn-a.md, the "
+    "selection of 16 October 2026"
+)
+#: The re-housed counts 232 to 304, whose runs finished but whose selection did not by
+#: that pass's stop time.
+_Z7WN = (
+    "think-r3cl: re-housed by the 16 October adoption (think-z7wn); its runs are done, its "
+    "selection and admission owed"
+)
+
 #: The counts whose drawing is not regularized and not regular as published, settled on
 #: purpose: each named with the witness it was settled on, so a new witness makes the
 #: count `pending` again. Written from the evidence the audit of 15 October 2026 found
@@ -307,6 +328,20 @@ SETTLED: dict[int, Settled] = {
         "hues",
         _README_LEFTOVERS,
     ),
+    176: Settled(
+        DECIDED,
+        "[Mishapolk KKT refinements 2026-10-14]",
+        "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-176.yaml.gz",
+        "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+        "13795872318436407263173895330727713371233106699551510374450211701529164297205177"
+        "6912348029686675350647263/100000000000000000000000000000000000000000000000000000"
+        "00000000000000000000000000000000000000000000000000",
+        _RUNZ7WN,
+        "grid-slack's views, admitted at row 10 at all three thresholds, draw more uneven "
+        "squares than the axis tool's view of this witness (worse on uneven, better on both "
+        "totals), and Evan Daniel's is held at row 4 (solved above U)",
+        _README_Z7WN,
+    ),
     179: Settled(
         DECIDED,
         "[Gupta rational refinements 2026-10-08]",
@@ -333,18 +368,17 @@ SETTLED: dict[int, Settled] = {
         "view withdrawn in 1d8f982ff did)",
         _README_LEFTOVERS,
     ),
-    204: Settled(
+    211: Settled(
         DECIDED,
-        _OSTASHEV,
-        _ostashev(204),
-        _OSTASHEV_REVISION,
-        "74043316171934782832354950404729823976428779059647971914573074043316171934782832"
-        "354950404729823976428779059647971914573/5000000000000000000000000000000000000000"
-        "000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        _RUN3A,
-        "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
-        "Evan Daniel's same-side view is refused at row 7 (a total of shared sides falls)",
-        _README_3A,
+        "[Couzo verified bounds 2026-10-14]",
+        "resources/web/couzo-verified-bounds-2026-10-14/source/certificates/n211.cert",
+        "487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+        "7496774813149710519467765230441/500000000000000000000000000000",
+        _RUNZ7WN,
+        "every view goes to the owner's review at row 7: Evan Daniel's same-side and solved "
+        "views each let 12 per-square counts fall while no total does, grid-slack's 5 at all "
+        "three thresholds",
+        _README_Z7WN,
     ),
     236: Settled(
         DECIDED,
@@ -422,33 +456,6 @@ SETTLED: dict[int, Settled] = {
         _REFUSED_DECIMAL,
         "think-yk2h",
     ),
-    303: Settled(
-        DECIDED,
-        _OSTASHEV,
-        _ostashev(303),
-        _OSTASHEV_REVISION,
-        "17909958291069907981595741081398736080048627080527013735224117909958291069907981"
-        "5957410813987360800486270805270137352241/100000000000000000000000000000000000000"
-        "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        _RUN3A,
-        "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
-        "Evan Daniel's view is held at row 4 (solved above U)",
-        _README_3A,
-    ),
-    304: Settled(
-        DECIDED,
-        "[Ostashev merged bands 2026-10-13]",
-        "resources/web/dostashev-merged-bands-2026-10-13/source/records/n0304.sqcert",
-        "b909e1b74cda50906e12b4373e010ddee39e47e4",
-        "35858855516150349931332652277978229724878240089919278343230358588555161503499313"
-        "3265227797822972487824008991927834323/200000000000000000000000000000000000000000"
-        "00000000000000000000000000000000000000000000000000000000000000000000000000",
-        _RUN3B,
-        "every view draws more light squares than the axis tool's (2 or 4 to none): "
-        "grid-slack's, admitted at row 10 at all three thresholds, and Evan Daniel's, held "
-        "at row 4 (solved 8.9e-31 above U)",
-        _README_3B,
-    ),
 }
 
 
@@ -468,7 +475,15 @@ SETTLED: dict[int, Settled] = {
 #: the eight of think-kpm3 (153, 154, 207, 211, 237, 241, 302 and 304), seven
 #: regularized and one decided, and the three of think-3zi3 (175, 232 and 264), all
 #: regularized, which left it empty.
-PENDING_ALLOWED: dict[int, str] = {}
+PENDING_ALLOWED: dict[int, str] = {
+    232: _Z7WN,
+    237: _Z7WN,
+    264: _Z7WN,
+    271: _Z7WN,
+    302: _Z7WN,
+    303: _Z7WN,
+    304: _Z7WN,
+}
 
 
 def index_entries(index: Path = INDEX) -> dict[int, dict[str, Any]]:
