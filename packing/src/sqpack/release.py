@@ -2386,6 +2386,53 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "of which the survey prints, so it keeps v0.2.2."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over its base 71f6a413 (PR #642, on main e2e018f3) at "
+            "link revision e2e018f3, once with the base's versions of every changed record "
+            "and once with this branch's, the three papers' HTML and Markdown are "
+            "byte-identical in all 50 files the renderers write; each PDF prints from that "
+            "HTML. The register gains T-193 and T-194, the source register two sources and "
+            "the requests record #639's and #640's mappings to them; none of the three "
+            "papers prints any of them, so each keeps its edition: v0.1.7, v0.1.0 and "
+            "v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=("packing/frontier/results.yaml",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Rendered on this branch over its base 71f6a413 with the browser's math pass, "
+            "once with the base's versions of every changed record and once with this "
+            "branch's, the Markdown and HTML differ only in the live register count beside "
+            "T-018, 192 results registered so far and now 194, and the HTML also in where "
+            "an empty style attribute falls in one formula's span, which moves between two "
+            "renders of the same input. A register count follows the site's data and is not "
+            "a revision of the paper, so the explainer keeps v0.4.7."
+        ),
+    ),
 )
 
 
