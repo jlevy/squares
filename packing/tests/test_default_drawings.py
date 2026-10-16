@@ -337,14 +337,20 @@ def test_the_state_follows_the_witness_as_it_identifies_itself(key: str, value: 
 
 
 def test_a_decision_names_what_it_still_owes_and_the_bead_that_owns_it() -> None:
-    # The ten decided counts rest on the #518 runs' prose; each says what think-0ut1 still
-    # owes, so the record shows it (review A6 of #636).
+    # The ten counts decided on 15 October 2026 rest on the #518 runs' prose; each says
+    # what think-0ut1 still owes, so the record shows it (review A6 of #636). A decision
+    # whose runs and per-count outcome are recorded owes nothing (`owed` is None, as the
+    # contract allows), as the three of 16 October 2026 (think-la7h) do, and its state
+    # says nothing is owed rather than inventing a debt.
     rows = {row["n"]: row for row in _record()["states"]}
     for n, held in defaults.SETTLED.items():
-        if held.state == defaults.DECIDED:
-            assert held.owed is not None, n
-            assert held.owed.startswith("think-0ut1: "), n
-            assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
+        if held.state != defaults.DECIDED:
+            continue
+        if held.owed is None:
+            assert "still owed" not in rows[n]["why"], n
+            continue
+        assert held.owed.startswith("think-0ut1: "), n
+        assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
     n = min(defaults.SETTLED)
     unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed="later")}
     found, _listed = defaults.state_problems(settled=unowned)

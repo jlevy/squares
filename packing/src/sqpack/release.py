@@ -88,8 +88,10 @@ PUBLICATION_HISTORY = (
         version="v0.7.15",
         first_published="October 16, 2026",
         result_scope=(
-            "List the October 16 review of the upper-bound imports T-185 to T-190 in the "
-            "synopsis document map."
+            "Draw the regularized views of 105, 129, 146, 156, 176 and 271 by default, "
+            "record 204, 272 and 303 as decided with no better view, and list the October "
+            "16 review of the upper-bound imports T-185 to T-190 in the synopsis document "
+            "map."
         ),
     ),
     PublicationHistoryEntry(
@@ -383,7 +385,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "288a1a52022f712563a23f21848e0ae2927390d4"
+DATA_REVISION = "72666de899310165c0215cd48ecee8827d82e1b8"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -810,8 +812,10 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.7.15",
         impact="patch",
         reason=(
-            "List the October 16 review of the upper-bound imports T-185 to T-190 in the "
-            "synopsis document map."
+            "Draw the regularized views of 105, 129, 146, 156, 176 and 271 by default, "
+            "record 204, 272 and 303 as decided with no better view, and list the October "
+            "16 review of the upper-bound imports T-185 to T-190 in the synopsis document "
+            "map."
         ),
     ),
     ReleaseImpactDecision(
@@ -1092,12 +1096,55 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "The site cut v0.7.15 regenerated the five claim documents at "
-            "PUBLICATION_REVISION 6c10c865, the commit of the October 16 review of T-185 "
-            "to T-190; with that revision read back as main's 9fe5f941, each is "
+            "PUBLICATION_REVISION f6737d63, a commit of the think-la7h branch over main "
+            "e2e018f3; with that revision read back as main's 9fe5f941, each is "
             "byte-identical to main's, so the 32 repository links it pins are the only "
             "change, and no claim, certificate or command moves. A link revision follows "
-            "the site's edition and is not a revision of the explainer, so it keeps "
-            "v0.4.7. Source-reviewed; no render was taken."
+            "the site's edition and is not a revision of the explainer, so it keeps v0.4.7. "
+            "Source-reviewed; no render was taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/default_drawings.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/n-105.md",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-146.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The regularization run of 16 October 2026 (think-la7h) changes data only: "
+            "default_drawings gains three SETTLED counts (204, 272, 303) and drops nine "
+            "from PENDING_ALLOWED, results.yaml changes only its regularized_drawings "
+            "items at 105, 129, 146, 156, 176 and 271, and the case records change only "
+            "their generated regularization note. The papers read results.yaml's results "
+            "(the counts of registered and novel results and the headline bound ladder), "
+            "never regularized_drawings, reach default_drawings only through shared "
+            "import discovery and read neither constant, and the survey cites n = 105, 129 "
+            "and 146 by link only, as its results table's count links. Manuscripts, "
+            "figures, credits and print rules are unchanged by source review. No render "
+            "was taken, and all four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the "
+            "site takes the patch."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2546,7 +2593,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "6c10c865"
+PUBLICATION_REVISION = "f6737d63"
 
 
 def data_pathspec() -> tuple[str, ...]:
