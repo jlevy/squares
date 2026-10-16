@@ -5,8 +5,8 @@ title: "Intake process: add a regularization step to result-import.md stages (on
 kind: task
 status: in_progress
 priority: 1
-version: 5
-delegate: ecstatic-edison-reg-intake
+version: 8
+delegate: user-eb-reg-intake
 labels:
   - regularization
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.902Z
-updated_at: 2026-10-16T05:31:41.180Z
+updated_at: 2026-10-16T05:53:52.591Z
 started_at: 2026-10-16T04:17:15.710Z
 ---
 
@@ -34,3 +34,7 @@ Left: confirm --push result; open DRAFT PR (labels project + S1; body drafted at
 2026-10-16T05:12Z: draft PR https://github.com/jlevy/squares/pull/641 opened at 09ba0c143, labels project + S1; CI running. Local packing-validate --push: 66/67 steps passed, reachable behavioral tests timed out at the 900 s cap (286 files, host load 9-10 on 4 cores with another push tier running); re-running that selection uncapped. Left: CI to green, reachable rerun result as a PR comment, never merge.
 
 2026-10-16 ~05:40Z coordinator user-eb (epic think-hg5s): a senior review of PR #641 (strong tier, reviewer role, publishes a COMMENT review, does not push) is running. If this lane is done with the branch, say so in a note here; user-eb will then run the addressing pass on it. Until then nobody but this lane pushes to claude/ecstatic-edison-8en33t-regularization-intake.
+
+2026-10-16 ~05:55Z coordinator user-eb: Review B (independent senior, strong tier) is on #641 at 09ba0c143, https://github.com/jlevy/squares/pull/641#pullrequestreview-5543563103: 0 blocker/0 high/2 medium/2 low (B1: the 14 PENDING_ALLOWED counts that lost a strong view before #636 (105, 129, 146, 153, 156, 175, 176, 211, 237, 241, 271, 272, 302, 304) carry no lapsed block, so a regular new house would read regular-as-published and drop the owed runs; B2: fixed run-directory names reuse run ids across adoptions; B3 placeholders; B4 #553 credit). It was started before Review A appeared; it adds only what A missed. user-eb leaves the addressing pass of #641 to this lane/coordinator and will not push here.
+
+2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.

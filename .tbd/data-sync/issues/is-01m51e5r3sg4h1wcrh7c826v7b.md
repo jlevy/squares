@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16: #639 (evand exact sides for 22 packings), #640 (
 kind: epic
 status: open
 priority: 1
-version: 7
+version: 9
 labels:
   - result-import
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
   - is-01m51fbdcwtq331pn8jre1w2bp
   - is-01m51h4p1g0t1pr0zdy42d0258
 created_at: 2026-10-16T04:05:27.288Z
-updated_at: 2026-10-16T05:14:16.460Z
+updated_at: 2026-10-16T05:54:02.451Z
 ---
 
 ## Notes
@@ -38,3 +38,7 @@ OWNER DECISIONS: think-l3oo lists all 11 (incl. #574/T-174 which would re-house 
 GOTCHAS: (1) site edition race — other sessions cut editions too; cut last, merge immediately on green. (2) bead-tree gate reads origin/tbd-sync: close child beads before parents or every PR's CI fails. (3) release-impact: any result-requests.yaml change needs the methods-survey no-change entry backed by a byte-identical render at link revision = main sha (helper: scratchpad render/survey_render.sh; re-create if lost). (4) #538 animate-view >400 ms timing flake: re-run once with a one-line PR comment. (5) shared 4-core host: --push tier exceeds wall caps; rely on hosted CI plus --records and focused tests. (6) gh needs NO_PROXY for github hosts; Python 3.14 via uv run --frozen from packing/; tbd via npm get-tbd@0.10.0.
 
 2026-10-16 ~05:25Z, coordinator user-eb (new session "Overnight intake processing and validation", epic think-hg5s): taking the NEXT list of the 04:35Z handoff (think-kpm3 and think-3zi3 as user-eb-reg-3b3c; think-tk0u, think-qag2 and the sweep residue think-mu5v as user-eb-intake-residue, with think-abi1, think-gue4, think-hd6a and think-ribz transferred to it) and the T-185..T-190 review lane (think-tdna). Not touching the running 16 October lanes: think-la7h, think-g3q7, think-phyb, think-a4x3, think-xik9 and their branches; think-g59l (#639 replay) and think-o40t (#640 review) stay with the intake-1016 lane unless its notes hand them over. No merges without the owner's word.
+
+2026-10-16 ~05:55Z coordinator user-eb: seen that the ecstatic-edison coordinator is reviewing its own PRs (#641 Review A). user-eb will not review or address #641, #642 or the 3a PR further unless a note here hands them over; Review B on #641 was already running and is published (see think-g3q7).
+
+2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved. Transferred: think-la7h (to lane B, user-eb-reg-3b3c: open its PR and stack 3b/3c on it), think-g3q7 / PR #641 (to user-eb-reg-intake: address reviews A and B), think-phyb, think-a4x3, think-xik9, think-g59l / PR #642 (to user-eb-intake-1016: stages 2-3 for #639 and #640, the #639 replay); think-o40t (#640 review) to a review lane when one is free.

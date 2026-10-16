@@ -5,7 +5,7 @@ title: "Import Rio Calle: s(102) <= 10.605828696455852 (#529)"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 8
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:07:15.376Z
-updated_at: 2026-10-12T11:00:00.486Z
+updated_at: 2026-10-16T05:47:01.981Z
 started_at: 2026-10-12T08:07:43.538Z
 ---
 https://github.com/jlevy/squares/issues/529 (2026-10-12T04:32:54Z). riocalle/my-repo at 831368623f2d4dcef2e9434fd85c3e154083c97d: n102_s10.605828696455852.txt (decimal centres and radian angles), JSON and SVG copies, verify_exact.py (60-digit decimal, not exact). The author's exact certificate comes from a private engine; the record's exact certificate must be built here from the layout. Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports.
@@ -65,3 +65,28 @@ Replayed here: check --replay all 3 jobs equal (2 min 0 s, 10:11:34Z to 10:13:34
 Answers for the records lane (review, "Whether #529 Is Registered" and "The Dates and the Plan's Wording"): register it as T-155 (the scope clause of epistemics "Results by Others" is met: replayed and reviewed here; the stage 1 "no work" exclusion does not fit a filed request below main's house; the standing is derived: pending adoption on main, superseded by T-146 on layer 4; precedents Casson, #505's five, think-9fjl each turned on the author's request), with the lighter alternative stated for the owner (RX-1). attribution.published 2026-10-11, the date the source gives (README history and issue), not the first commit's 2026-10-12; bibliography dated stays 2026-10-12 (RX-2). Plan wording: "improvement" and the negative "below" reworded; E-calle-529-certificate-report typed as the source's numerical report (numerical-multiprecision, 60 digits, certificate = acquisition/sources.json) and the derived fact cited by E-calle-529-exact-feasibility only (performed_by repository, origin replayed-here), as E-mishapolk-470-pose-report does (RX-3). README says 17 significant digits, the file prints 18 (RX-9); the stated ~2e-12 margin is approximate for the pair gap (RX-10). The Davidebyzero#6 comment date (2026-10-11T23:06Z) could not be read from this session (API access not attached; the HTML page is 403); the published date rests on the source's own date, not on it. Corrected register plan (T-155 placeholder): scratchpad lane-u/register-plan-528-529-reviewed.yaml.
 
 Validation: shared with #528's note (56 new test cases; packing-validate --records passes every step but the stale SYNOPSIS.md document map).
+
+2026-10-16 ~06:45Z user-eb-intake-residue (lane A, think-mu5v): #529's final comment, rendered from main e2e018f32 with check_requests --draft 529 (greeting added). Checked first: the last reply is more than a day old with no author comment since, nothing the author asked for is queued, no think-l3oo decision touches it, and main and the deployed site (result pages read 06:30Z, deployment e2e018f32) state what it states. NOT POSTED: this session's permission system refused the GitHub comment and the close (auto-mode classifier, external system writes), so the post, the close and the record of the reply under #529's replies (kind final, with state/closed) are owed by whoever posts it. To post: gh api repos/jlevy/squares/issues/529/comments -X POST -F body=@FILE, then gh api repos/jlevy/squares/issues/529 -X PATCH -f state=closed -f state_reason=completed. Draft:
+
+@riocalle, thank you. Where this request stands in the record on `main`.
+
+**What is registered.**
+
+- s(102) <= 10.605828696455852, the side of the layout as printed, certified here by an exact certificate derived from it; 5.5e-11 below T-125:
+  - T-159, confirmed at V3/C3: re-verified here by an independent implementation (sqpack.verify, run by each case's verify_exact module and the packing-witness command, devtools.check_rational_witness_independent, devtools.evand_arrangement_reports, devtools.upper_bound_reports, devtools.check_half_angle_area, devtools.evand_exact_certificates).
+  - E-calle-529-exact-feasibility, confirmed here: re-verified here by an independent implementation (sqpack.verify, run by each case's verify_exact module and the packing-witness command, devtools.check_rational_witness_independent, devtools.evand_arrangement_reports, devtools.upper_bound_reports, devtools.check_half_angle_area, devtools.evand_exact_certificates).
+
+**Not registered.**
+
+- Solved to the bottom of its valley the arrangement reaches s = 10.605828696431638 (README): No layout at that side is published; an author report, not certified here, and above T-146's side by 6.0e-14.
+- s = 10.605828708, the author's earlier layout (earlier/, and Davidebyzero/packing_squares_in_squares__tools issue 6 of 2026-10-08): Above every ceiling at 102; retained by digest in the packet.
+- The author's search engine's exact rational-interval certificate accepts the layout, and refuses it in a box 1e-11 smaller: Not public and not replayable; the record's certificate is derived from the layout instead.
+
+**On `main`.** [`packing/frontier/RESULTS.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/RESULTS.md), [`docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md`](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md), [`packing/frontier/n-102.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/n-102.md).
+
+Nothing you asked for is queued, so this issue is closed with this comment.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_
+
+Correction (user-eb-intake-residue, 2026-10-16T05:47Z by date -u): the '~06:xxZ' times in this lane's notes of 16 October are about an hour late; they were written between 05:30Z and 05:47Z. The site pages were read at about 05:35Z. No condition changes: every last reply named is still more than a day old.

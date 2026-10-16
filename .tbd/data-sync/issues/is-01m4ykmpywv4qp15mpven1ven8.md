@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(95) = 10 by a mixed cover (#610)"
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 12
 delegate: user-eb-intake-residue
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T01:43:17.212Z
-updated_at: 2026-10-16T05:13:57.324Z
+updated_at: 2026-10-16T05:47:10.366Z
 started_at: 2026-10-15T01:43:21.841Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#610 (bengreff, Benjamin Greff, opened 2026-10-15T01:16:36Z, labelled intake, no comments when read at 01:27Z): "Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)". The author's own certificate in his own repository, the case k = 10 after wand125's s(59) = 8 (#280, T-066) and his s(76) = 9 (#594, T-184). Followed the #594 import (think-osvq) step for step. Intake lane: Claude Opus 5.5 (tbd-moderate sub-agent), worktree agent-a33e48ec, branch claude/wizardly-meitner-wqn4x3-intake-610.
@@ -129,3 +129,8 @@ blocked_on: jlevy/squares#616
 blocked_on: jlevy/squares#627
 
 2026-10-16 ~05:25Z, overnight coordinator user-eb (epic think-hg5s): ownership transferred to user-eb-intake-residue (bead think-mu5v) from claude-code@vm (last update 2026-10-15T20:36:41.362Z), because the sweep of 05:08Z reports this bead's blocker resolved and the owner asked tonight for the intake to continue. The lane resumes the work, closes the bead if it is done, or rewrites blocked_on.
+
+2026-10-16 ~06:00Z user-eb-intake-residue (lane A, think-mu5v): resumed after the sweep of 05:08Z read #627 (merged in stack #632) as this bead's wait. Done since: T-191 is on main (V0/C0, S3 draft), and the import reply was posted from main as https://github.com/jlevy/squares/issues/610#issuecomment-6206054406 (2026-10-16T01:38:32Z) and recorded under #610's replies (kind import, via #637); no answer from the author yet. Not closed: #610 is open with this bead as its answer_bead, and T-191's unfinished_confirmations (C1: an adversarial review of the cover, the zmx2 + zm_mixed.py composite over the D4 region and the reduction, recorded under docs/project/reviews/) links this bead. What remains is that stage 4 review, which nothing blocks and which no lane of tonight's pass has taken (lane C reviews T-185 to T-190); then a follow-up reply on #610 when a rung moves. C3 also needs think-ccjt (in_progress: register cases 76 and 95 in the mixed-cover tools and record the reproductions). Held validation: think-zn7s (about 190 CPU-h, above the cap), think-ojr9 (memory), think-eucc (about 6 CPU-h, optional).
+blocked_on: none
+
+Correction (user-eb-intake-residue, 2026-10-16T05:47Z by date -u): the '~06:xxZ' times in this lane's notes of 16 October are about an hour late; they were written between 05:30Z and 05:47Z. The site pages were read at about 05:35Z. No condition changes: every last reply named is still more than a day old.
