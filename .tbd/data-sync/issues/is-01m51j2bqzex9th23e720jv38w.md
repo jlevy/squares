@@ -5,7 +5,7 @@ title: "Review: retained replays of T-185 to T-190 (stage 4 review lane, upper b
 kind: task
 status: in_progress
 priority: 1
-version: 19
+version: 20
 delegate: user-eb-review-185-190
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:13:30.623Z
-updated_at: 2026-10-16T08:16:31.749Z
+updated_at: 2026-10-16T08:20:04.218Z
 started_at: 2026-10-16T05:13:42.512Z
 ---
 Stage 4 review lane (W2) for the upper-bound entries registered on 15 October at V0/C0 whose next rung is "independently review the retained replay": T-185 (#506, 175), T-186 (#593, twelve counts), T-187 (#606, 146), T-188 (211), T-189 (#607, 237) and T-190 (237). Model: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md (the review of T-161 to T-183). Deliverable: docs/project/reviews/review-2026-10-16-upper-bound-imports-<issues>.md on its own branch and draft PR, which reproduces each packet's retained replay (devtools.upper_bound_reports PACKET check --replay), runs the third exact route, re-fetches each pinned scope and checks digests, measures credit, grades findings, and says per entry whether V3/C3 is supported and what each count's adoption should be. It moves no rung; the records lane that follows (a separate bead) writes the rungs and adoptions.
@@ -72,3 +72,5 @@ Other open reports: T-174 (PR #574, held for the owner) is above T-186 at all 9 
 2026-10-16T08:02Z user-eb-addr-648: pushed 885ee47a7 (kept lane C programs/outputs in packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/; kept third-route driver re-run equal in every field but times) and 2ea1d00bb (review text: A1-A3, A5-A9 + fix-round addendum). Running packing-validate --records; next: PR description (A3, A4), disposition reply, CI watch.
 
 2026-10-16T08:16Z user-eb-addr-648: review A on PR #648 addressed, A1-A9 all fixed (885ee47a7 kept programs/outputs; 2ea1d00bb review text; A4 in the PR description). Head 2ea1d00bb; records tier 52/52 exit 0; hosted CI green (Packing validation 38871024727, Certificate page 38871024676, Branch mergeability 38871018781). Disposition reply: https://github.com/jlevy/squares/pull/648#pullrequestreview-5544859331. Records lane (think-z7wn) branch is built on 9bd813b2b and does not yet have these two commits.
+
+2026-10-16 ~08:25Z coordinator user-eb: PR #648 MERGE-READY at 2ea1d00bb (senior Review A 0/0/3/6, all nine fixed by user-eb-addr-648, disposition review https://github.com/jlevy/squares/pull/648#pullrequestreview-5544859331; the larger fix commit 885ee47a7, 37 files of the review lane's kept programs and logs under packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/, checked inline by the coordinator: README states what decides what, largest file < 200 KB, precedent followed). Hosted CI green. Site v0.7.15 collision: lands through the records lane's PR (think-z7wn) or re-cuts at merge. Waits for the owner's word.
