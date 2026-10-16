@@ -654,6 +654,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 12 to 14 October (#561 to #593)](docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) | dated review record | record | retained | — |
 | [Review: PingYou Ltd’s Certificate Refinements of PR #574 (T-174)](docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) | dated review record | record | retained | — |
 | [Review: the 2026-10-14 upper-bound intake ledger](docs/project/reviews/review-2026-10-14-intake-ledger.md) | dated review record | record | retained | — |
