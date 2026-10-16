@@ -5,12 +5,12 @@ title: Merge the 16 October PRs once reviewed (owner's word, 16 Oct afternoon)
 kind: task
 status: open
 priority: 2
-version: 17
+version: 19
 labels: []
 dependencies: []
 parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 created_at: 2026-10-16T17:14:04.698Z
-updated_at: 2026-10-16T20:16:46.292Z
+updated_at: 2026-10-16T20:23:16.448Z
 ---
 Owner: 'If everything is reviewed, you can merge it.' and 'Follow up everything you can, and once things are reviewed, be sure you merge.' Merge order and gate per review-and-merge-prs; release re-cuts after each merge.
 
@@ -47,3 +47,7 @@ user-eb-integrator: PR #648 B1: session GitHub proxy wraps any URL into packing/
 user-eb-integrator: #652: merged main 96510ae7a in 1cc0dbbe3, re-cut v0.7.18 in b868ba4e5, pushed, deep-gate label. Next: #649 merge #652's head, cut v0.7.19.
 
 user-eb-integrator: #649: merged #652 b868ba4e5 in 2d57609b3, re-pin 3d4ada4c7, cut v0.7.19 32634cfca, pushed. Records tier: 51/52, only synopsis step fails: check_release_impact vs origin/main (v0.7.17) needs one successor, finds v0.7.18+v0.7.19; passes vs #652's head. So #649's hosted packing-required will be red until #652 merges and #649 merges main.
+
+20:10Z: merged so far today: #642 (abd65fba3), #651 (26d8bb335, v0.7.15), #647 (7b34cd5bb), #655 (8069b12e2, v0.7.16), #641 (68cdbc614), #648 (96510ae7a, v0.7.17). In progress: the integrator on #652+#649 (v0.7.18, v0.7.19), #650's update, the stack lane's phase 1. #645 was addressed through review E (7/0/0; no further round: small predicate tightenings with tests, no live rung change) and is ready for update. #646 is done through review E and ready for update. Queue after #649: #646, #645, then the stack (lane S phase 2), #660, #658.
+
+user-eb-integrator: #652 description (collision rewritten, update section) and B dispositions (review 5553251410) posted at b868ba4e5; #649 description updated at 32634cfca with the known release-impact red. Watching CI on both.
