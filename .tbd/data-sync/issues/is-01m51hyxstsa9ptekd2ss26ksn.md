@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 37
+version: 39
 delegate: user-eb
 labels:
   - result-import
@@ -19,10 +19,12 @@ child_order_hints:
   - is-01m52v9pvsvzx6ggqq62563mj8
   - is-01m52v9qs1twmgw1z16brkx5e0
   - is-01m52v9rgthxyrrjczpgtc51gk
+  - is-01m53ek3ff79x09e0bq00v9kcd
+  - is-01m53ekasyyf4n2z4aqxfbcgj8
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T17:14:04.698Z
+updated_at: 2026-10-16T22:51:21.278Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
