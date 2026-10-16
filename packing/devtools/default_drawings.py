@@ -181,6 +181,23 @@ _DANIEL_REVISION = "ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7"
 #: at 0.5 degrees only, and the receipts keep the outcomes only in aggregate.
 _OWED_WIDER = "think-0ut1: grid-slack at 1 and 5 degrees, which the #518 run did not try"
 _OWED_OUTCOME = "think-0ut1: the runs' per-count outcome, which their receipts do not keep"
+#: Both generators ran on the nine witnesses jlevy/squares#614 adopted in 60aa1d39e, on
+#: 16 October 2026 (think-la7h): Evan Daniel's regularizer, and grid-slack at 0.5, 1 and
+#: 5 degrees. The atlas README's paragraph of that day gives each count's outcome.
+_RUN3A = (
+    ("evand-regularize", "evand-regularize-3a-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3a-deg05-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3a-deg1-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3a-deg5-1016"),
+)
+_README_3A = "packing/atlas/known-best/README.md, the paragraph of 16 October 2026"
+_OSTASHEV = "[Ostashev compositions 2026-10-12]"
+_OSTASHEV_REVISION = "fe43a64ecf2581cdbd11830e8a5be0989746c5d3"
+
+
+def _ostashev(n: int) -> str:
+    """The path Ostashev's compositions of 12 October 2026 keep count `n`'s record at."""
+    return f"resources/web/dostashev-compositions-2026-10-12/source/records/n{n:04d}.sqcert"
 
 
 def _daniel(n: int) -> str:
@@ -292,6 +309,19 @@ SETTLED: dict[int, Settled] = {
         _README,
         _OWED_OUTCOME,
     ),
+    204: Settled(
+        DECIDED,
+        _OSTASHEV,
+        _ostashev(204),
+        _OSTASHEV_REVISION,
+        "74043316171934782832354950404729823976428779059647971914573074043316171934782832"
+        "354950404729823976428779059647971914573/5000000000000000000000000000000000000000"
+        "000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        _RUN3A,
+        "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
+        "Evan Daniel's same-side view is refused at row 7 (a total of shared sides falls)",
+        _README_3A,
+    ),
     236: Settled(
         DECIDED,
         _DANIEL,
@@ -337,6 +367,19 @@ SETTLED: dict[int, Settled] = {
         _README,
         _OWED_WIDER,
     ),
+    272: Settled(
+        DECIDED,
+        "[PingYou n272 refinement 2026-10-12]",
+        "resources/web/pingyou-n272-refinement-2026-10-12/facts/n-272.yaml.gz",
+        "260aaf50230483654802790589c2dfce73237604",
+        "16965586474837670635756007033422045569629875768259044235142914938302930222751180"
+        "26464939778830359993334240647227/10000000000000000000000000000000000000000000000"
+        "0000000000000000000000000000000000000000000000000000000000000000",
+        _RUN3A,
+        "grid-slack's view is refused at row 7 at all three thresholds (stage sides fall, "
+        "732 to 730), and Evan Daniel's view is held at row 4 (solved above U)",
+        _README_3A,
+    ),
     290: Settled(
         EXEMPT,
         _KINGBIRD,
@@ -357,9 +400,21 @@ SETTLED: dict[int, Settled] = {
         _REFUSED_DECIMAL,
         "think-yk2h",
     ),
+    303: Settled(
+        DECIDED,
+        _OSTASHEV,
+        _ostashev(303),
+        _OSTASHEV_REVISION,
+        "17909958291069907981595741081398736080048627080527013735224117909958291069907981"
+        "5957410813987360800486270805270137352241/100000000000000000000000000000000000000"
+        "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        _RUN3A,
+        "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
+        "Evan Daniel's view is held at row 4 (solved above U)",
+        _README_3A,
+    ),
 }
 
-_LA7H = "think-la7h: re-housed by #614 (60aa1d39e)"
 _KPM3 = "think-kpm3: re-housed by #614 (3b9fab84a)"
 _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 
@@ -374,27 +429,19 @@ _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 #: taking its last count off has merged (regularization-process.md, "When a Witness
 #: Changes"; review B4 of #636). Set on 15 October 2026 to the twenty counts the audit
 #: found drawn without a strong generator's decision on their current witness
-#: (think-gvke, think-rz8c).
+#: (think-gvke, think-rz8c). The nine of think-la7h (105, 129, 146, 156, 176, 204, 271,
+#: 272 and 303) left it on 16 October 2026, six regularized and three decided.
 PENDING_ALLOWED: dict[int, str] = {
-    105: f"{_LA7H}; its grid-slack view lapsed",
-    129: f"{_LA7H}; its Evan Daniel view lapsed",
-    146: f"{_LA7H}; its grid-slack view lapsed",
     153: f"{_KPM3}; its Evan Daniel view lapsed",
     154: "think-kpm3: re-housed by #598 (34e62125f) and #614 (3b9fab84a); never decided",
-    156: f"{_LA7H}; its grid-slack view lapsed",
     175: f"{_3ZI3}; its grid-slack view lapsed",
-    176: f"{_LA7H}; its grid-slack view lapsed, and the raw house is drawn",
-    204: f"{_LA7H}; never decided",
     207: f"{_KPM3}; never decided",
     211: f"{_KPM3}; its grid-slack view lapsed",
     232: f"{_3ZI3}; never decided",
     237: f"{_KPM3}; its Evan Daniel view lapsed",
     241: f"{_KPM3}; its grid-slack view lapsed",
     264: f"{_3ZI3}; never decided",
-    271: f"{_LA7H}; its grid-slack view lapsed",
-    272: f"{_LA7H}; its Evan Daniel view lapsed earlier, in #553 (3e24adeb2)",
     302: f"{_KPM3}; its Evan Daniel view lapsed",
-    303: f"{_LA7H}; never decided",
     304: f"{_KPM3}; its Evan Daniel view lapsed earlier, in #553 (3e24adeb2)",
 }
 
