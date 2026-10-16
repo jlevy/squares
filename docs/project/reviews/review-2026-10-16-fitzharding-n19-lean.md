@@ -126,8 +126,8 @@ The file has no `native_decide`.
 [`check_endpoint.py`](../../../packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_endpoint.py)
 parses the nineteen definitions as data and decides, in exact $\mathbb{Q}(\sqrt2)$
 arithmetic, that each direction is a unit vector, each square lies in
-$[0, \mathrm{side19}]^2$ (minimum clearance 0, so the packing is tight), and each of the
-171 pairs is weakly separated by an edge normal; 31 pairs touch on their best axis.
+$[0, \mathrm{side19}]^2$ (clearance 0: squares touch the walls), and each of the 171
+pairs is weakly separated by an edge normal; 31 pairs touch on their best axis.
 The upper half of the theorem is correct, independently of the trust boundary.
 
 ## The Impossibility Chain Re-derived
