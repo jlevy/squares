@@ -639,8 +639,10 @@ run on each pending count, and the selection admits what improves on the drawing
 Where neither draws better, the count is settled as the guide says.
 `adopt_houses` prints the re-housed counts and these commands when it writes, and with
 `--dry-run` before it does.
-It names the run directories for the adoption’s day, since the layer records a run by
-its directory’s name and a repeated name would replace an earlier run’s record.
+It names the run directories for the adoption’s day and its lowest and highest re-housed
+count, since the layer records a run by its directory’s name and a repeated name would
+replace an earlier run’s record: the index holds only the runs merged into the branch,
+so two adoptions in flight on one day would otherwise print the same names.
 
 The strong runs cost 5 to 25 CPU-minutes a count, from the layer’s run receipts:
 
@@ -667,7 +669,8 @@ deferred:
 2. It runs `default_drawings --update` again, since the record copies the entry into the
    count’s reason, and then the guide’s render step.
 3. It lists each deferred count’s drawing before and after, with
-   `default_drawings --compare` on the base branch’s record.
+   `default_drawings --compare` on the base branch’s record:
+   `python -m devtools.default_drawings --compare <(git show origin/main:packing/atlas/known-best/default-drawings.json)`.
    Where a strong view gives way to a house drawing with an uneven or a near-axis
    square, as it did at n = 176, the adoption waits for the owner’s word or for its
    runs.
@@ -682,9 +685,14 @@ So the adoption’s pull request takes each count its runs decided off the list,
 settles each such entry again or removes it.
 A new house that reads regular does not take a listed count off: on the list, a count
 waits for the runs its bead owes.
-The adoptions of #553, #598 and #614 refreshed only the axis tool’s views, and left
-twenty counts without a strong generator’s decision on their witness, with the raw house
-drawn at n = 176, until that gate was added (think-sfas).
+The gate cannot tell a hand-dropped entry from a decided one: dropping an entry whose
+count then reads regular as published passes it, and so does adding a count whose house
+reads regular, which the list then holds pending.
+Either is a reviewed decision, and its pull request shows the bead’s runs or the
+`--compare` table (review C2 of #641; think-k6rj). The adoptions of #553, #598 and #614
+refreshed only the axis tool’s views, and left twenty counts without a strong
+generator’s decision on their witness, with the raw house drawn at n = 176, until that
+gate was added (think-sfas).
 Fourteen of the twenty lost a strong view before the index recorded lapses, and their
 entries in the list are the record of it.
 

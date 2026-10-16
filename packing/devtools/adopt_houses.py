@@ -2126,6 +2126,12 @@ REGULARIZE_CPU_MINUTES = (5, 25)
 #: The workers the printed commands give the driver and the selection, as the guide's
 #: examples do: what a shared host can spare, which the reader sets (review B3 of #641).
 WORKERS = 2
+#: The base branch's record as the file `default_drawings --compare` reads, in a shell
+#: (review C4 of #641).
+BASE_RECORD = f"`<(git show origin/main:{default_drawings.RECORD_PATH})`"
+#: What a deferral whose strong view gives way to an irregular house drawing waits for, in
+#: the runbook's and the guide's words (review C4 of #641).
+DEFERRAL_WAITS = "the adoption waits for the owner's word or for its runs"
 #: What follows a write, as `python -m devtools.` commands from `packing/` with `{n}` the
 #: re-housed counts: the new witness, the axis tool's view of it, and each count's state.
 REFRESH_COMMANDS = (
@@ -2138,8 +2144,9 @@ REFRESH_COMMANDS = (
 #: (`regularize_grid_slack.admitted_views`) or `evand-regularize-`
 #: (`regularize_evand.evand_candidates`), and admitting a run whose id the index already
 #: holds replaces that run's block, its cost and decisions, under the views that name it
-#: (review B2 of #641). So each name starts with a label no run in the index has
-#: (`run_label`).
+#: (review B2 of #641). So each name starts with a label no run in the index has, and
+#: that names the re-housed counts, so that two adoptions in flight on one day print
+#: different names (`run_label`, review C3 of #641).
 RUN_DIRECTORIES = {
     "grid05": ("grid-slack", "{label}-grid-0.5"),
     "grid1": ("grid-slack", "{label}-grid-1"),
@@ -2169,17 +2176,25 @@ def run_ids(label: str) -> dict[str, str]:
     }
 
 
-def run_label(day: str, index: Path = default_drawings.INDEX) -> str:
+def run_label(day: str, counts: Sequence[int], index: Path = default_drawings.INDEX) -> str:
     """A label for an adoption's strong runs that gives no run an id the layer's index
-    already has: `adopt-<day>`, or `adopt-<day>-b`, `-c` and on where an earlier run
-    took it (review B2 of #641)."""
+    already has (review B2 of #641), and that names the re-housed counts by the lowest and
+    the highest: `adopt-<day>-n176`, `adopt-<day>-n105-304`, or the same with `-b`, `-c`
+    and on where an earlier run took it. The index holds only the runs merged into the
+    branch, so two adoptions opened on one day would otherwise print the same ids and the
+    second to admit would replace the first's block; two adoptions that re-house the same
+    count already conflict on its case record (review C3 of #641)."""
+    if not counts:
+        raise ValueError("an adoption's run label names the counts it re-houses")
+    low, high = min(counts), max(counts)
+    named = f"adopt-{day}-n{low}" if low == high else f"adopt-{day}-n{low}-{high}"
     document = json.loads(index.read_text(encoding="utf-8"))
     taken = {str(run.get("id")) for run in document.get("runs") or []}
     for suffix in ("", *(f"-{letter}" for letter in "bcdefghijklmnopqrstuvwxyz")):
-        label = f"adopt-{day}{suffix}"
+        label = f"{named}{suffix}"
         if not taken & set(run_ids(label).values()):
             return label
-    raise SystemExit(f"every adopt-{day} run label is taken in {index}")
+    raise SystemExit(f"every {named} run label is taken in {index}")
 
 
 def _plural(count: int, noun: str) -> str:
@@ -2217,8 +2232,9 @@ def regularization_owed(
     bead's runs (`default_drawings.count_state`). Read from the committed index before the
     atlas is refreshed, this names the counts certain to be pending, one count a line, and
     a `SETTLED` decision the new witness voids, then gives the commands, with run
-    directories named for `day` (the adoption's, by default) that no run in the index has,
-    what they cost, and what a deferral owes the pull request. It measures and runs
+    directories named for `day` (the adoption's, by default) and the counts, that no run
+    in the index has (`run_label`), what they cost, and what a deferral owes the pull
+    request. It measures and runs
     nothing: the runs take minutes a count, and the pass prices them as one validation
     item under its compute cap (`INTAKE_STEP`).
     """
@@ -2229,7 +2245,7 @@ def regularization_owed(
     if day is None:
         days = [houses.adopted_on(n) for n in counts if n in houses.ADOPTED]
         day = max(days, default=datetime.now(UTC).date().isoformat())
-    label = run_label(day, index)
+    label = run_label(day, counts, index)
     entries = default_drawings.index_entries(index)
     spaced = " ".join(map(str, counts))
     certain: list[str] = []
@@ -2304,8 +2320,8 @@ def regularization_owed(
         "default_drawings.PENDING_ALLOWED with the open bead that owns its runs, run "
         "`default_drawings --update` again and the guide's step 5, and list each deferred "
         "count's drawing before and after in this pull request (`default_drawings --compare` "
-        "with the base branch's record); where a strong view gives way to an irregular house "
-        "drawing, the adoption waits for the owner's word."
+        f"with the base branch's record, {BASE_RECORD}); where a strong view gives way to an "
+        f"irregular house drawing, {DEFERRAL_WAITS}."
     )
     lines.append(
         "  `python -m devtools.default_drawings --check-state` fails until every pending count "

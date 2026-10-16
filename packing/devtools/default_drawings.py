@@ -73,16 +73,20 @@ as soon as it is decided and joins it only by a reviewed change that names its b
 new house that reads regular does not take a count off: the list's first entries are the
 record of strong views that lapsed before the index kept a `lapsed` block, so a count
 leaves when the runs its bead owes decide it, or by a reviewed change that drops the
-entry and says why (review B1 of #641). It
-fails, too, on a `SETTLED` entry made on another witness than the one the record names,
-and on one for a count that no longer needs it: one now regularized or regular as
-published, or one whose strong view the layer holds, which decides it unaided. Each
-bead the list, an exemption or a decided count's `owed` names must be open, which
-`devtools.check_bead_tree` holds through `deferrals`. A record older than a witness is
-`--check`'s to catch, by deciding every count again. A witness is identified by what it
-says of itself -- its source's key, path and revision, and its side -- never by a digest
-of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no house, so
-the gate's comparison of it only holds each row to its count.
+entry (review B1 of #641). So the list is an input to the state as well as a measure of
+it, and the gate cannot judge two changes to it: dropping an entry whose count then reads
+regular as published, which drops the runs its bead owes, and adding a count whose house
+reads regular, which holds it pending. Both pass it, so both are the reviewer's, on the
+bead's runs or `--compare`'s table (review C2 of #641; think-k6rj would hold the lapses
+in code). It fails, too, on a `SETTLED` entry made on another witness than the one the
+record names, and on one for a count that no longer needs it: one now regularized or
+regular as published, or one whose strong view the layer holds, which decides it
+unaided. Each bead the list, an exemption or a decided count's `owed` names must be open,
+which `devtools.check_bead_tree` holds through `deferrals`. A record older than a witness
+is `--check`'s to catch, by deciding every count again. A witness is identified by what
+it says of itself -- its source's key, path and revision, and its side -- never by a
+digest of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no
+house, so the gate's comparison of it only holds each row to its count.
 
 `--compare EARLIER` reads two records, measuring nothing, and lists each count whose
 state, drawn picture or witness differs, with both pictures' uneven and near-axis squares
@@ -377,9 +381,16 @@ _KPM3 = "think-kpm3: re-housed by #614 (3b9fab84a)"
 _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 
 #: The counts allowed to stay `pending`, each naming the bead whose runs will decide it.
-#: Measured, not chosen, as `ABOVE_U` is: the list must equal the pending set, since
-#: `--check-state` fails on a pending count not named here and on a named count that is
-#: no longer pending. A count leaves it as soon as it is decided, and joins it only by a
+#: The list must equal the pending set, since `--check-state` fails on a pending count not
+#: named here and on a named count that is no longer pending, so a count leaves it as soon
+#: as a strong view is drawn or held or `SETTLED` decides its witness. It is also an input
+#: to the state, not only a measure of it: a listed count reads pending even where its
+#: house reads regular (`count_state`), since fourteen entries are the only record of a
+#: strong view that lapsed before the index kept a `lapsed` block (review B1 of #641). So
+#: two changes pass the gate and are the reviewer's to judge: dropping an entry whose count
+#: then reads regular as published, which drops the runs its bead owes, and adding a count
+#: whose house reads regular, which holds it pending; the pull request shows the bead's
+#: runs or `--compare`'s table (review C2 of #641; think-k6rj). A count joins only by a
 #: reviewed change naming its bead (the deferral an adoption makes when its runs must
 #: wait); nothing stops a change adding entries, so the gate prints how many there are,
 #: and `devtools.check_bead_tree` fails a change to this file whose list names a bead
@@ -1158,7 +1169,7 @@ def parser() -> argparse.ArgumentParser:
         metavar="EARLIER",
         help=(
             "list each count whose state, drawing or witness differs from an earlier record, "
-            f"such as the base branch's (`git show origin/main:{RECORD_PATH}`)"
+            f"such as the base branch's: `--compare <(git show origin/main:{RECORD_PATH})`"
         ),
     )
     command.add_argument(
