@@ -14,13 +14,17 @@ Wainwright’s configuration, and an exact local endgame on H), and the composit
 gap: every case of every case split is covered by a theorem, the census is complete, and
 no hypothesis remains in the assembly.
 
-The trust boundary is the one the source states: Lean’s kernel for the proofs, and
-Lean’s compiler, native evaluator and C toolchain for 4,320 `native_decide` facts.
-This review re-evaluated, with programs written for it and none of the source’s checker
-code, every one of the 2,328 native facts whose modules are in the Git tree (all 2,304
-endgame cases, the orbit and routing checks, the nine capture-to-hull checks, the twelve
-census-to-capture link checks) and the combinatorial content of the census theorem; all
-pass. The 1,992 facts in the release archives are, apart from the census coverage check,
+The trust boundary is stated once, in full, under The Trust Boundary: Lean’s kernel for
+the proofs and, for 4,320 `native_decide` facts, Lean’s compiler and native evaluator,
+the C toolchain and Lean core’s compiled runtime.
+With programs written for it and none of the source’s checker code, this review
+re-established the property each of the 2,328 native facts whose modules are in the Git
+tree certifies (all 2,304 endgame cases, the orbit and routing checks, the nine
+capture-to-hull checks, the twelve census-to-capture link checks; for the combinatorial
+facts, the predicate itself), and the combinatorial content of the census theorem; all
+pass. That supports the statement’s truth on those parts; for the endgame and region
+facts it is not evidence about the native evaluator’s output (Independent Checks).
+The 1,992 facts in the release archives are, apart from the census coverage check,
 half-plane propagation traces with their tables, seeds and summaries, checked by the
 s(17) proof’s checkers; they were scanned (digests, no `axiom` or other trust-widening
 construct) but not re-run.
@@ -40,6 +44,10 @@ It read the source as data and ran only code it wrote, kept in the packet under
 [`review/`](../../../packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md).
 It did not read the two reviews of the s(17) proof until its own findings were written
 (section Comparison).
+After the pull request’s review A the record was revised in wording (what the
+independent checks show, the trust boundary’s single statement, several counts and
+paths), and `check_region.py` gained a check that every target polygon is bounded and
+nonempty, which passes; no finding, grade or conclusion changed.
 It is not a human oversight record.
 
 ## Summary for the Author
@@ -52,10 +60,10 @@ It is not a human oversight record.
   The only case splits are the orbit cover, the routing of census representatives, the
   piece split of owner 12’s angle window in each capture state, and the 4,096-case
   endgame encoding; each is complete, and each was re-checked here (Chain).
-- Independent re-evaluation: all 2,328 native facts in the Git tree pass; the endgame’s
-  inequalities hold with room (multipliers at least 0.70, $S_1 \ge 1.49$, slopes at
-  least 0.038 over all of H), and the endpoint margin is exactly zero at Wainwright’s
-  configuration, as it must be.
+- Independent checks: the property each of the 2,328 native facts in the Git tree
+  certifies holds under programs written here; the endgame’s inequalities hold with room
+  (multipliers at least 0.70, $S_1 \ge 1.49$, slopes at least 0.038 over all of H), and
+  the endpoint margin is exactly zero at Wainwright’s configuration, as it must be.
   The census theorem’s combinatorial content holds if each pattern’s roster is the mask
   its name encodes (question 4).
 - Requests: say where `s19/data/packing_exact.json` came from and credit this project’s
@@ -81,7 +89,7 @@ byte-identical to the pin.
 The three capture-state archives were downloaded on 16 October 2026, each checked
 against `SHA256SUMS` (whose digest the packet records), and their members against
 `expected/generated-sources.sha256`; all five archives were then downloaded to scratch
-one at a time, scanned and deleted (Independent Re-evaluation).
+one at a time, scanned and deleted (Independent Checks).
 
 **Not done here:** no Lean toolchain is installed, and the full build is 190 to 420
 CPU-hours and hundreds of gigabytes (held as `think-nqnl`). No module was compiled, no
@@ -103,7 +111,7 @@ allowed, and the container is axis-aligned.
 bound $3 + (4/3)\sqrt2$ (`packing/frontier/n-019.md`). For $L < 0$ both sides are false,
 so the equivalence has no degenerate reading.
 `expected/statement.txt` and the logged `#print` of the four definitions
-(`verification/Square19Optimality.log`, first lines) agree with the sources.
+(`verification/Square19Optimality.log.gz`, first lines) agree with the sources.
 
 `sq` and `IsUnitSquare` are textual copies of `Sq17Lean/SquareBase.lean:13-18` (compared
 here), and the bridge `feasible19_iff_of_lower` (`PlainPacking.lean:25-47`) rewrites
@@ -197,8 +205,8 @@ through the anti-diagonal mirror (`ToHullMirror.lean`, `topCheck`). The output i
 `Good Hull.prob θ dx dy L` (`Milp/SoundRows.lean:14-24`): nine squares (the witness’s
 squares 1, 2, 5, 7, 8, 10, 11, 13 and 14) with angles and offsets in H, inside
 $[0, L]^2$, pairwise disjoint.
-Re-evaluated here: the nine region facts, the twelve link facts, and that Wainwright’s
-configuration lies in H (margin $7.0 \times 10^{-5}$).
+Checked here: the property the nine region facts certify, the twelve link facts’
+predicates, and that Wainwright’s configuration lies in H (margin $7.0 \times 10^{-5}$).
 
 **Step 6: the endgame on H** (`Endgame/`, `s19/certificates/endgame_reduction/`). A
 `Good` configuration matches one of 4,096 sign, owner and ordering cases
@@ -212,8 +220,8 @@ moving angles are zero by exact identities in the kernel (`ReductionBase.lean:37
 `ZeroRowIdentity.lean`, the `Wedge/` files), and nondecreasing along the case’s five
 direction prefixes by the derivative check (`slopeCheck`), so it is nonnegative on the
 case’s cone. The 2,304 canonical cases are native facts; the other 1,792 reduce to them
-(`check_of_normalize`, `ReductionDedup.lean:42`). Re-evaluated here for all 4,096 cases
-(Independent Re-evaluation).
+(`check_of_normalize`, `ReductionDedup.lean:42`). The property they certify was decided
+here for all 4,096 cases (Independent Checks).
 
 **Composition.** `side19_le_of_routes` (`Assembly/Final.lean:19-53`) splits on whether
 the reached mask is excluded; if not, `full_route` puts its index among the three
@@ -226,8 +234,19 @@ No case is left to an unproved hypothesis.
 
 ## The Trust Boundary
 
-`verification/Square19Optimality.log` and `expected/axioms.txt` list the same 4,323
-axioms: `propext`, `Classical.choice`, `Quot.sound` and 4,320 facts named
+This is the boundary everywhere this review refers to it.
+The proofs rest on Lean’s kernel.
+The 4,320 `native_decide` facts rest also on Lean’s compiler and native evaluator, on
+the C toolchain that compiles the six checker modules into the library loaded with
+`--load-dynlib`, and on Lean core’s compiled runtime routines, among them the `String`
+routines that decode certificate data such as `censusMasks` at evaluation time, which
+the kernel never sees.
+The source states the kernel, compiler, native evaluator and C toolchain; the runtime
+and `String` point is the first s(17) review’s, adopted here after the comparison
+(Comparison).
+
+`verification/Square19Optimality.log.gz` and `expected/axioms.txt.gz` list the same
+4,323 axioms: `propext`, `Classical.choice`, `Quot.sound` and 4,320 facts named
 `…_native.native_decide.ax_1_1`, and no `sorryAx` (counted here).
 
 | Family | Facts | Where | Checker kind |
@@ -260,11 +279,13 @@ each archive’s SHA-256 equals `SHA256SUMS`, every member equals its line of
 `axiom`, uses `sorry`, `admit`, `implemented_by`, `extern`, `unsafe`, `opaque`,
 `skipKernelTC` or a `debug.` option, or defines a command, macro or elaborator.
 `count_native.py` then finds each of the 4,320 logged facts as a theorem proved
-`by native_decide` in exactly one place, 2,328 in the Git tree and 1,992 in the
-archives, and 170 native theorems that the final theorem does not use (169 survivor-tree
-`owners_eq` facts and `capture_indices`).
+`by native_decide`, none missing: 2,328 in the Git tree and 1,992 only in the archives.
+Six of the tree facts are also in the archives, whose copies of the three capture
+`State.lean` files are byte-identical to the tree’s. It also finds 170 native theorems
+that the final theorem does not use (169 survivor-tree `owners_eq` facts and
+`capture_indices`).
 
-## Independent Re-evaluation
+## Independent Checks
 
 All programs are in
 [`review/`](../../../packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md),
@@ -275,9 +296,9 @@ sources as data.
 | --- | --- | --- |
 | `check_endpoint.py` | the endpoint packing in exact $\mathbb{Q}(\sqrt2)$; order and values against this project’s witness | pass; 31 contacts; same order, $4.4 \times 10^{-16}$ |
 | `check_cover_census.py` | tiling, symmetry tables, capacity data, `orbit_check`, `route_checked`, `captureIndex_checked`, survivor images, census coverage | 21 checks pass |
-| `check_region.py` | the nine `Region.*` facts from their meaning (vertex enumeration of each target polygon) | 9 pass; Wainwright in H |
-| `check_capture_link.py` | `cells_ok`, `mask_ok`, `width_checked`, `tile_checked` for 3435, 3438, 3442 from the archives | 12 pass; digests match |
-| `check_endgame.py` | `geometryCheck` and `slopeCheck` for all 4,096 cases with its own first-order Taylor models | 4,096 pass |
+| `check_region.py` | the property the nine `Region.*` facts certify: the source’s `sqCheck` and `wallCheck` (`Capture/ToHull.lean:52-59`) transcribed, with `impliedOK` replaced by vertex enumeration of each target polygon, all 76 checked bounded and nonempty | 9 pass; 76 bounded; Wainwright in H |
+| `check_capture_link.py` | `cells_ok`, `mask_ok`, `width_checked`, `tile_checked` for 3435, 3438, 3442, with their data from the archives | 12 pass; digests match |
+| `check_endgame.py` | the property `geometryCheck` and `slopeCheck` certify, for all 4,096 cases, with its own first-order Taylor models | 4,096 pass |
 | `scan_archives.py` | each archive’s digest and members, trust-widening constructs, native theorems | five archives, 2,112 members: digests match, none unlisted, no forbidden construct |
 | `count_native.py` | where each of the 4,320 logged native facts is proved | 2,328 in the tree, 1,992 in the archives, none missing |
 
@@ -286,20 +307,39 @@ The endgame program transcribes the row definitions (`RowsH.lean`, `RowsAH.lean`
 rigorous arithmetic: fixed-point outward rounding at $2^{-160}$, the quarter-turn values
 exactly, $|\sin x - x| \le |x|^3/6$ and $1 - x^2/2 \le \cos x \le 1$, and forward-mode
 differentiation for the slopes.
-Over H the multipliers are at least 0.7009, 0.7009 and 0.9996, $S_1$ at least 1.4913,
-and every directional derivative at least 0.0383; no `abs` operand moves along a
-direction, so the source’s `smoothAlong` holds.
-The margin at $\theta = 0$ is zero to $10^{-46}$ in every case, which is the tightness
-of Wainwright’s packing; on the axis-zero face a first-order bound is $-0.0076$, which
-is why the source proves that face exactly rather than by intervals.
+Over H the multipliers are at least 0.701147, 0.7009 and 0.999596, $S_1$ at least
+1.49126, and every directional derivative at least 0.0383454 (the program’s printed
+lower bounds); no `abs` operand moves along a direction, so the source’s `smoothAlong`
+holds. The margin at $\theta = 0$ is zero to $10^{-46}$ in every case, which is the
+tightness of Wainwright’s packing; on the axis-zero face a first-order bound is
+$-0.0076$, which is why the source proves that face exactly rather than by intervals.
 25,564 random points of the cases’ cones gave a smallest margin of $1.2 \times 10^{-4}$
 in floating point. A natural interval extension (without Taylor forms) failed the slope
 check in 3 of 10 trial cases, by dependency; the first-order models removed that.
+`check_region.py` likewise transcribes the source’s `sqCheck` and `wallCheck` line for
+line and replaces only `impliedOK`. Both programs are independent of the source in
+evaluation, not in formulation.
 
-Not re-evaluated: the 1,992 archived facts other than the twelve link facts, that is the
-census pattern traces, the capture propagation runs and tables, and the survivor trees,
-which need a reimplementation of the s(17) half-plane checker; and
-`Census.Complete.all_ok` itself, whose content Step 3 re-derived from the pattern names.
+**What a pass shows.** For the combinatorial facts (`orbit_check`, `route_checked`,
+`captureIndex_checked`, `cells_ok`, `mask_ok`, `width_checked`, `tile_checked`) the
+programs decide the same finite predicate the Boolean encodes, so a pass is close to a
+re-evaluation of the fact.
+For the 2,304 endgame facts and the nine region facts they decide the property the
+Boolean certifies (multipliers nonnegative, $S_1 > 0$ and slopes nonnegative on H; each
+target inside its box), not the Boolean itself, `checkNat n =
+true` or `sqCheck … = true`. A pass there shows that the certified property holds, so a
+wrong native result among those facts would not make the statement false.
+It shows nothing about whether the native evaluator’s `true` is the kernel’s value: if
+the source’s Taylor-form checks or its `impliedOK` evaluated to `false` in the kernel
+while the compiled code returned `true`, the formal proof would rest on a false axiom
+and both programs would still pass.
+
+Not re-evaluated: the 1,992 archived facts, that is the census pattern traces, the
+capture propagation runs and tables, and the survivor trees, which need a
+reimplementation of the s(17) half-plane checker, and `Census.Complete.all_ok`, whose
+content Step 3 re-derived from the pattern names.
+The twelve link facts are tree facts (of the 21 capture facts in the tree); only their
+data come from the archives.
 
 ## Provenance and Credit
 
@@ -371,12 +411,25 @@ that every module compiles at Lean 4.34.1 against Mathlib `v4.34.1` and sq17-lea
 endgame identities, every soundness theorem) is accepted; that each of the 4,320 native
 facts evaluates to `true`, including the 1,992 not re-evaluated here; and that the final
 axiom set is the one logged.
-Re-evaluating the 2,328 tree-resident facts independently makes a wrong native result
-among them very unlikely, but it does not replace the build.
+The independent checks of the 2,328 tree-resident facts show that the property each
+certifies holds, so a wrong native result among them would not make the statement false.
+For the combinatorial facts they also show what the Boolean’s value is; for the 2,304
+endgame facts and the nine region facts they say nothing about the native evaluator’s
+output, and a formal proof resting on a false axiom there would still pass them
+(Independent Checks).
+They do not replace the build.
 
 ## Comparison with the Two s(17) Reviews
 
-Written after the findings above, which were not changed by what follows.
+Written after the findings above, which were not changed by what follows, with two
+exceptions stated here.
+The comparison’s commit (`8cd4c2c2d`) also edited the opening’s description of the
+archived facts, adding the census coverage check and the tables, seeds and summaries; it
+brought the opening in line with the family table under The Trust Boundary, which
+already listed them in the draft committed before the reading (`7ce9b69a8`), so it did
+not come from the reading.
+And after the pull request’s review A, The Trust Boundary took in the first s(17)
+review’s runtime and `String` point described below, attributed there.
 This review read the first s(17) review
 ([adversarial, 13 October](review-2026-10-13-fitzharding-n17-lean.md)) at its summary,
 trust-boundary, lineage and findings sections, and the second
@@ -397,9 +450,9 @@ Its MR-3, that `rowCheck` accepts a row whose entry index lies outside the table
 that the soundness lemma covers it, carries over unchanged, since
 `Capture/SummaryFast.lean`’s `summaryCheckN` calls the same `rowCheck`.
 
-**The trust boundary.** Both s(17) reviews state the boundary as this review does: the
-kernel, Lean’s compiler and C toolchain for the `*Fast` modules loaded with
-`--load-dynlib`, and Lean core’s compiled runtime routines.
+**The trust boundary.** Both s(17) reviews state the boundary as the kernel, Lean’s
+compiler and C toolchain for the `*Fast` modules loaded with `--load-dynlib`, and Lean
+core’s compiled runtime routines; this review had stated all but the runtime.
 The first review adds a point this review had not stated: certificate data decoded from
 `String` literals at evaluation time are never seen by the kernel, so the compiled
 `String` routines are trusted too.
@@ -415,7 +468,7 @@ SHA-256 (line 101).
 three trigonometric rows with Taylor-form interval checks and a derivative check, and an
 exact proof on the axis-zero face, where the s(17) proof had a 93-box dual certificate
 proved by `decide +kernel`. Its 2,304 native facts are more than half the total, are
-outside both s(17) reviews, and were all re-evaluated here.
+outside both s(17) reviews, and the property each certifies was checked here.
 The capacity lemmas for wall and corner cells, the capture-to-hull step and the census
 bridge are also new and were read here.
 The second review replayed ten half-plane facts with its own re-implementation of the
@@ -438,24 +491,29 @@ may wish to check against the record’s credit for him.
 ## For the Records Lane
 
 - **Confirmation:** this review is a qualifying adversarial AI read of the statement,
-  the endpoint, the chain and the trust boundary, with independent re-evaluation; it
-  supports C1 for the result the entry PR #651 registers, as the s(17) proof took C1.
-  Nothing higher: C3 and V3 need a complete build the record can rest on (`think-nqnl`).
+  the endpoint, the chain and the trust boundary, with independent checks of the
+  properties the 2,328 tree-resident facts certify; it supports C1 for the result the
+  entry PR #651 registers, as the s(17) proof took C1. Nothing higher: C3 and V3 need a
+  complete build the record can rest on (`think-nqnl`).
 - **Verification:** unchanged at V0; no build is retained.
 - **Significance:** no reason found to change the draft S5.
 - **Evidence and verifiers:** the seven programs are candidates for `verifiers.yaml`
   entries (independence: written here, sharing no code with the source; the endgame
-  program transcribes the source’s row definitions by hand, so it is independent in
-  evaluation, not in formulation), and their receipts for evidence entries on the
-  source-report evidence entry PR #651 registers.
+  program transcribes the source’s row definitions and `check_region.py` its `sqCheck`
+  and `wallCheck` by hand, so both are independent in evaluation, not in formulation),
+  and their receipts for evidence entries on the source-report evidence entry PR #651
+  registers. An evidence entry’s coverage should follow What a pass shows (Independent
+  Checks): for the endgame and region facts, the certified property, not the native
+  result.
 - **Credit:** N19-1 is drafted to the author in question 1; it needs no record change.
 
 ## Verdict
 
 As read, `Sq19.square19_optimality` proves that nineteen unit squares fit in a square of
 side $L$ exactly when $L \ge 3 + 4\sqrt2/3$, with arbitrary rotations and touching
-allowed, modulo Lean’s compiler and native evaluator for 4,320 finite facts and modulo
-the build and kernel replay the author reports.
+allowed, modulo the trust boundary stated under The Trust Boundary (the kernel, and for
+4,320 finite facts Lean’s compiler and native evaluator, the C toolchain and Lean core’s
+compiled runtime) and modulo the build and kernel replay the author reports.
 No blocking or major defect was found; the record may take C1 on this review.
 
 <!-- This document follows common-doc-guidelines.md.
