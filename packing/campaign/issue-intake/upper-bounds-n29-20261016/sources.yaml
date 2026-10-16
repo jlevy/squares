@@ -1,0 +1,71 @@
+# What `python -m devtools.intake_ledger gather` reads for the evening intake of
+# 2026-10-16 at n = 29 (think-30n2): PR #622, and PR #574's N29 row, the one earlier open
+# report at the count. PR #622's exact side is read from its packet's frozen claim
+# record; PR #574's is the 14 October ledger's transcription of that pull request's own
+# claim record, since T-174 does not register 29 and its packet does not declare it.
+format: intake-ledger-sources-v1
+read_at_main: 321d492c77c37e9adddcecec4e58336bc8270466
+read_on: '2026-10-16'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each
+  one is stronger than the last. If a stronger result is reported first, then the other one should
+  not be recorded since it's weaker after that, unless there's some key reason it should be recorded.
+lanes:
+- name: n29
+  branch: claude/intake-2026-10-16-n29-622
+  commit: 8ad96974e91667c0c4ac47c6a79d2a4928c68d6e
+  note: 'PR #622''s packet (pingyou-pr622-certificate-2026-10-15), its frozen claim record as committed'
+reports:
+- report: 'PR #574'
+  pull: 574
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-9v2k
+  claims:
+  - n: 29
+    printed: '5.9338334626769291896894606163520191384339'
+    rounding: up
+    exact: 33022563535423359668136039581119360038720445483416840763411646713852285423491353302188490578733492347363109142588926150272072509759531098172296454224816754297412786984687758682711800340946322384169736030165007264185176605256060513930541248895740662174065536816975335181228612889643370123353743402597680477484903997483122358788311680427862015740852088118324453114450487288109709336750854928298521862420098810274285112950747699474761059547079187477814575193952657759480572267535546098764801316018529001570419882848719388773257624662041427040839265820449480129668156469939357696577987673153250543776086463350674867012355421269069408001603128967082016778568136309019/5565131502785030421779046332860148052527886235910167872998927275876609168288579831715867301920067246525753475292866777050410329212553687991010667983381571941218125667175529597381620404843324386941830852553357429617015751493762664670883016909880105069434163942588766116268073736365581039749817363527185299330721048892046598205105895990621678245702806248958548858472870842702167587851008100659948339328358628089953500335988762401974514862833696923564351703336211037204076669379083757449597382830970237557672538034962820923301658060789624402336976525086198541979225148279164313539837512704683389172717861054934001323245622552108638964356287953979173722692584499293
+    exact_from: packing/resources/web/pingyou-numerical-refinements-2026-10-13/claims.json (side_exact)
+      at pull/574 head 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde
+    first_committed: '2026-10-13T00:24:05Z'
+    note: 'transcribed as the 14 October ledger read it (upper-bounds-20261014/sources.yaml): a v2
+      row T-174 does not register and the #574 packet does not declare; the side is the pull request''s
+      own, not replayed here; the case record packing/frontier/n-029.md prints its verified value
+      5.93383346267692918974379895098, 5.43e-20 above its own exact form 296691673133846459484473030817600957/5e34
+      (think-gzrw); this ledger compares against the exact form'
+    refines:
+      packing_of: Thomas Schadt
+      entry: '[Kingbird]'
+      source: 'the pull request''s claims.json at 4c319c2: classification tighter_rational_certificate_same_known_nominal_design'
+- report: 'PR #622'
+  pull: 622
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-30n2
+  lanes:
+  - lane: n29
+    packet: pingyou-pr622-certificate-2026-10-15
+    record: claims.json
+    counts:
+    - 29
+  claims:
+  - n: 29
+    refines:
+      packing_of: Thomas Schadt
+      entry: '[Kingbird]'
+      source: 'the pull request''s claims.json at 3115557: classification certificate_refinement_of_known_nominal_construction,
+        original construction Thomas Schadt, improved by David Ellsworth ([Kingbird]); nominal_construction_value_changed
+        false'
+exceptions: []
+key_reason_candidates:
+- n: 29
+  report: 'PR #622'
+  argument: 'The house rule: the owner, 16 October 2026, ''We should always be adopting the smallest
+    packing and then regularizing it. That should be the policy, obviously.'' PR #622''s certificate
+    is complete and rational, replayed here on both maintained exact routes, and 1.57e-36 below T-155,
+    the smallest validated packing the record holds at 29; the reported lane it does not clear is
+    a catalogue print of the same packing, which no certificate the record holds attains, and whose
+    exact side (Evan Daniel''s degree-7213 root, #545) the record does not hold. A house must be a
+    register entry, so recording it is what adopting the smallest packing needs. Credit stays with
+    Thomas Schadt and David Ellsworth, PingYou Ltd credited with the refinement, as a regularization.'
+  proposed_as: T-195, an S1 entry pending adoption, in this pass's records pull request (branch claude/intake-2026-10-16-n29-622);
+    not on main
+other_items: []

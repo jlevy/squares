@@ -1,0 +1,56 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "321d492c77c37e9adddcecec4e58336bc8270466",
+  "read_on": "2026-10-16",
+  "counts": [
+    {
+      "n": 29,
+      "start": [{"label":"record [Kingbird] (reported lane)","holders":"Thomas Schadt, improved by David Ellsworth","side":"5.93383346267692","exact":false},{"label":"record T-155 (verified lane)","holders":"T-155","side":"5.933833462677","exact":true}],
+      "steps": [
+        {"report":"PR #574","kind":"pull-request","reported_at":"2026-10-13T00:24:05Z","side":"5.933833462677","exact":true,"verdict":"undecided","reason":"undecided","decided_against":["record [Kingbird] (reported lane)"],"difference":"","first_committed":"2026-10-13T00:24:05Z","decide_by":"the exact side behind the reported lane's print 5.93383346267692 (n = 29)","packing":{"kind":"refinement","packing_of":"Thomas Schadt","entry":"[Kingbird]"}},
+        {
+          "report": "PR #622",
+          "kind": "pull-request",
+          "reported_at": "2026-10-15T18:43:54Z",
+          "side": "5.933833462677",
+          "exact": true,
+          "verdict": "undecided",
+          "reason": "undecided",
+          "decided_against": ["record [Kingbird] (reported lane)"],
+          "difference": "",
+          "first_committed": "2026-10-15T18:43:33Z",
+          "decide_by": "the exact side behind the reported lane's print 5.93383346267692 (n = 29)",
+          "packing": {"kind":"refinement","packing_of":"Thomas Schadt","entry":"[Kingbird]"},
+          "key_reason_candidate": "The house rule: the owner, 16 October 2026, 'We should always be adopting the smallest packing and then regularizing it. That should be the policy, obviously.' PR #622's certificate is complete and rational, replayed here on both maintained exact routes, and 1.57e-36 below T-155, the smallest validated packing the record holds at 29; the reported lane it does not clear is a catalogue print of the same packing, which no certificate the record holds attains, and whose exact side (Evan Daniel's degree-7213 root, #545) the record does not hold. A house must be a register entry, so recording it is what adopting the smallest packing needs. Credit stays with Thomas Schadt and David Ellsworth, PingYou Ltd credited with the refinement, as a regularization."
+        }
+      ],
+      "best_now": [{"label":"record [Kingbird] (reported lane)","holders":"Thomas Schadt, improved by David Ellsworth","side":"5.93383346267692","exact":false},{"label":"PR #622","holders":"PingYou Ltd (BuddenPing)","side":"5.933833462677","exact":true}],
+      "publication_dependent": []
+    }
+  ],
+  "summary": {"counts":1,"claims":2,"recorded_new":0,"recorded_new_continuing":0,"recorded_refinement":0,"recorded_unclassified":0,"recorded_by_exception":0,"not_recorded":0,"undecided":2},
+  "cross_check": [],
+  "reports": [{"report":"PR #574","url":"https://github.com/jlevy/squares/pull/574","kind":"pull-request","holders":"PingYou Ltd (BuddenPing)","reported_at":"2026-10-13T00:13:11Z","bead":"think-9v2k","counts":[29],"recorded":[],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[{"n":29,"against":"record [Kingbird] (reported lane)"}]},{"report":"PR #622","url":"https://github.com/jlevy/squares/pull/622","kind":"pull-request","holders":"PingYou Ltd (BuddenPing)","reported_at":"2026-10-15T18:43:54Z","bead":"think-30n2","counts":[29],"recorded":[],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[{"n":29,"against":"record [Kingbird] (reported lane)"}]}],
+  "owner_decisions": {
+    "exact_ties": [],
+    "first_commit_before_report": [],
+    "undecided": [{"n":29,"report":"PR #574","against":"record [Kingbird] (reported lane)","decide_by":"the exact side behind the reported lane's print 5.93383346267692 (n = 29)"},{"n":29,"report":"PR #622","against":"record [Kingbird] (reported lane)","decide_by":"the exact side behind the reported lane's print 5.93383346267692 (n = 29)"}],
+    "publication_dependent": [],
+    "unknown_times": [],
+    "refinement_chains": [],
+    "key_reason_candidates": [
+      {
+        "n": 29,
+        "report": "PR #622",
+        "argument": "The house rule: the owner, 16 October 2026, 'We should always be adopting the smallest packing and then regularizing it. That should be the policy, obviously.' PR #622's certificate is complete and rational, replayed here on both maintained exact routes, and 1.57e-36 below T-155, the smallest validated packing the record holds at 29; the reported lane it does not clear is a catalogue print of the same packing, which no certificate the record holds attains, and whose exact side (Evan Daniel's degree-7213 root, #545) the record does not hold. A house must be a register entry, so recording it is what adopting the smallest packing needs. Credit stays with Thomas Schadt and David Ellsworth, PingYou Ltd credited with the refinement, as a regularization.",
+        "proposed_as": "T-195, an S1 entry pending adoption, in this pass's records pull request (branch claude/intake-2026-10-16-n29-622); not on main",
+        "verdict": "undecided",
+        "reason": "undecided",
+        "decided_against": "record [Kingbird] (reported lane)",
+        "difference": ""
+      }
+    ],
+    "measured_identity": []
+  },
+  "other_items": []
+}

@@ -158,3 +158,22 @@ def test_the_case_keeps_a_verified_print_above_its_exact_form(
 def test_the_packet_is_a_house_reader_of_its_own_side() -> None:
     declaration = reports.load_declaration(_packet())
     assert reports.house_side(declaration["source_key"], N) == _side()
+
+
+def test_the_ledger_leaves_both_reports_undecided_and_names_the_key_reason() -> None:
+    """The per-count ledger of this pass: PR #574's row and PR #622 in report order."""
+    from devtools import intake_ledger as ledger  # noqa: PLC0415
+
+    directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-n29-20261016"
+    assert ledger.problems(ledger.load_yaml(directory / ledger.LEDGER)) == []
+    assert ledger.render(directory, check=True) == []
+    verdicts = json.loads((directory / ledger.VERDICTS).read_text("utf-8"))
+    (count,) = verdicts["counts"]
+    assert count["n"] == N
+    assert [(step["report"], step["verdict"]) for step in count["steps"]] == [
+        ("PR #574", ledger.UNDECIDED),
+        ("PR #622", ledger.UNDECIDED),
+    ]
+    (candidate,) = ledger.load_ledger(directory)["key_reason_candidates"]
+    assert (candidate["n"], candidate["report"]) == (N, "PR #622")
+    assert candidate["proposed_as"].startswith("T-195")
