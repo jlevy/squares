@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 14 campaign upper bounds (237, and 13 beyond 324
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T23:35:08.750Z
-updated_at: 2026-10-15T09:15:44.835Z
+updated_at: 2026-10-16T00:13:46.124Z
 started_at: 2026-10-14T23:35:12.236Z
 ---
 Francisco Couzo (@franciscouzo) reports, in jlevy/squares#607 (filed 2026-10-14T23:18:36Z), 21 finite upper bounds plus two precision refinements, certificates at franciscouzo/square-packing 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2 submissions/2026-10-14/certificates/ (first committed 2026-10-14T19:15:09Z), comparison index upper_bounds.json at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d. Stages 1, 2 and the stage 4 replay in the 14 October evening intake lane (branch claude/wizardly-meitner-wqn4x3-intake-607); no register, case, request, coverage, bibliography, resources README or intake-watch record edited. Registration waits for a records PR.
@@ -73,3 +73,5 @@ The seven Fang composites and the beyond-horizon submissions: 4e4c8ce's certific
 ## 2026-10-15 records-1016 lane (think-mq0k), branch claude/wizardly-meitner-wqn4x3-records-1016, https://github.com/jlevy/squares/pull/616
 
 Registered as T-189 (V0/C0, draft S2) at 237, with 15 beyond-horizon rows (339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 757, 804), each superseding 487b058's row (T-188's source) or, at 342, Couzo's 8 October report. The declaration now lists T-056 at 237 and labels its reports without commit ids (487b058's as couzo-verified-bounds-2026-10-14, Fang's as "Fang composite ..."/"Fang theorem/..."), and its `requested` roster is the 16 counts recorded as Couzo's, so the beyond-horizon claims record holds the 15 rows; claims refrozen at main c4c690a3e, no relation moved. #607 has a request entry (answer bead: this one); no reply posted. The 7 Fang composites are not recorded: Fang's rows are not on main. What think-rn2y needs: a Fang composites source with a claims record and rows at 703, 812, 930, 931, 992, 993, 994 at his table sides, citing this packet's retained bytes and replay (each file has the table's SHA-256) and, at 703 and 994, the shipped files the fang-excess-theorem packet pins. Reply owed after merge (T-189, and T-188/T-190 per the draft above). Keep open until #607 is answered.
+
+2026-10-16 coordinator: per #627 (616/A4), this bead owns the review and adoption of T-189 and T-190 (T-189's next rung already weighs T-190); T-190's review moves here from think-7j8o.

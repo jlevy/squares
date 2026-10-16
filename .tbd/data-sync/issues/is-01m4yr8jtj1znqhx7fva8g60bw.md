@@ -5,13 +5,13 @@ title: "Import Francisco Couzo: 4e4c8ce beyond-horizon index, 341 counts 325-102
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-15T03:04:02.641Z
-updated_at: 2026-10-15T03:54:24.875Z
+updated_at: 2026-10-16T00:13:44.992Z
 ---
 Stage 1 triage, read-only, by the 15 October reads lane (think-mq0k), from the 02:30Z sweep at main 6964362b5. No issue reports any of it.
 
@@ -28,3 +28,5 @@ Price: the exact all-pairs replay of 341 certificates of 325 to 1023 squares is 
 ## Notes
 
 2026-10-15 (Göbel review, think-8krd): of this bead's 341 rows, 47 are above Göbel's classical construction at their count (487b058's 42 counts and 331, 368, 407, 448, 491; nine by about 2e-23, exact enclosures of the closed forms). When this import drafts its register plan, mark those 47 `undecided-goebel` pending the owner. Table: packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel-beyond-horizon.json (set "4e4c8ce index, below 487b058 and #607"). The earlier count of 341 stands (the #607 comparison in this bead's triage keyed #607 by string; rerun with integer keys, nothing changes).
+
+2026-10-16 coordinator (from #627's 616/A1 disposition): Couzo's 4e4c8ce index is smaller than all 238 rows T-188 records as current (3.79e-12 at 381 to 2.38e-02 at 749) and 7 of T-189's (339, 382, 450, 552, 599, 648, 757). Any comparison at these counts must declare the index's side (#627 owner decision 3). #624 (n = 366, mstrmg) is a later report at 366 that this import must list.
