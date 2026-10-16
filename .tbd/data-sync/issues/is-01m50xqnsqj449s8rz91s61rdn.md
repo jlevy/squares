@@ -5,16 +5,18 @@ title: "Regularize 3b: 153, 154, 207, 211, 237, 241, 302, 304 (re-housed by #614
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
 dependencies: []
 parent_id: is-01m50wdrbfnwsq05w150az5z88
+child_order_hints:
+  - is-01m52709yrrmhkftp8bap8ph4x
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:08.951Z
-updated_at: 2026-10-16T10:18:40.454Z
+updated_at: 2026-10-16T11:19:23.352Z
 started_at: 2026-10-16T05:13:41.663Z
 ---
 
