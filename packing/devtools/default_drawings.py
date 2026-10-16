@@ -280,11 +280,19 @@ _README_Z7WN = (
     "packing/cases/regularized_drawings/think-z7wn-2026-10-16/selection-z7wn-a.md, the "
     "selection of 16 October 2026"
 )
-#: The re-housed counts 232 to 304, whose runs finished but whose selection did not by
-#: that pass's stop time.
-_Z7WN = (
-    "think-r3cl: re-housed by the 16 October adoption (think-z7wn); its runs are done, its "
-    "selection and admission owed"
+#: The same generators on the re-housed counts 232 to 304, whose selection did not finish
+#: by that pass's stop time; selected the same day (think-r3cl), they draw grid-slack's
+#: views at 232, 264, 271 and 302, and decide 237, 303 and 304 no better. The selection's
+#: report is beside the runs' receipts and reports.
+_RUNZ7WN_B = (
+    ("evand-regularize", "evand-regularize-z7wn-b-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-b-deg05-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-b-deg1-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-b-deg5-1016"),
+)
+_README_R3CL = (
+    "packing/cases/regularized_drawings/think-z7wn-2026-10-16/selection-r3cl.md, the "
+    "selection of 16 October 2026 (think-r3cl)"
 )
 #: At 211 every strong view went to the owner's review at row 7, though Evan Daniel's
 #: same-side view betters the drawn axis view on every measure (review B3 of PR 657).
@@ -427,6 +435,20 @@ SETTLED: dict[int, Settled] = {
         "tool's view does not improve on the house",
         _README_LEFTOVERS,
     ),
+    237: Settled(
+        DECIDED,
+        "[Couzo n237 2026-10-15]",
+        "resources/web/couzo-n237-2026-10-15/source/certificates/n237.cert",
+        "58a783368d4b7e70bb800f0009ea9ca03e578739",
+        "7951301819129798440089572127137/500000000000000000000000000000",
+        _RUNZ7WN_B,
+        "every view, admitted at row 10, draws one more light and one more uneven "
+        "square than the axis tool's view of this witness (6 / 10 against 5 / 9), "
+        "though no near-axis square, no more angle classes and more shared sides: "
+        "Evan Daniel's same-side and solved views, and grid-slack's at all three "
+        "thresholds",
+        _README_R3CL,
+    ),
     258: Settled(
         DECIDED,
         _DANIEL,
@@ -493,6 +515,35 @@ SETTLED: dict[int, Settled] = {
         _REFUSED_DECIMAL,
         "think-yk2h",
     ),
+    303: Settled(
+        DECIDED,
+        "[Mishapolk KKT refinements 2026-10-14]",
+        "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-303.yaml.gz",
+        "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+        "22387447863837384976770801873110046250293075831927666706527135430718996858433164"
+        "1646777792095999047220400719209/125000000000000000000000000000000000000000000000"
+        "00000000000000000000000000000000000000000000000000000000000000",
+        _RUNZ7WN_B,
+        "grid-slack's view ties the axis tool's on every goal at all three "
+        "thresholds, and Evan Daniel's solved view, four angle classes fewer and tied "
+        "on the rest, is held at row 4 (solved above U); his same-side re-solve was "
+        "refused (literal-too-large)",
+        _README_R3CL,
+    ),
+    304: Settled(
+        DECIDED,
+        "[Mishapolk KKT refinements 2026-10-14]",
+        "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-304.yaml.gz",
+        "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+        "1792942775807517496548703186140836311278604266912137/100000000000000000000000000"
+        "000000000000000000000000",
+        _RUNZ7WN_B,
+        "every view draws more light squares than the axis tool's view of this "
+        "witness (2 or 4 to none): grid-slack's, admitted at row 10 at all three "
+        "thresholds, and Evan Daniel's solved view, held at row 4 (solved above U); "
+        "his same-side re-solve was refused (literal-too-large)",
+        _README_R3CL,
+    ),
 }
 
 
@@ -511,16 +562,12 @@ SETTLED: dict[int, Settled] = {
 #: 272 and 303) left it on 16 October 2026, six regularized and three decided, and so did
 #: the eight of think-kpm3 (153, 154, 207, 211, 237, 241, 302 and 304), seven
 #: regularized and one decided, and the three of think-3zi3 (175, 232 and 264), all
-#: regularized, which left it empty.
+#: regularized, which left it empty. The adoption of 16 October 2026 (think-z7wn) allowed
+#: eight re-housed counts under think-r3cl; its selection drew grid-slack's views at 232,
+#: 264, 271 and 302 and decided 237, 303 and 304 the same day, which leaves 211, whose
+#: every strong view is at row 7, for the owner's review.
 PENDING_ALLOWED: dict[int, str] = {
     211: _Z7WN_REVIEW,
-    232: _Z7WN,
-    237: _Z7WN,
-    264: _Z7WN,
-    271: _Z7WN,
-    302: _Z7WN,
-    303: _Z7WN,
-    304: _Z7WN,
 }
 
 

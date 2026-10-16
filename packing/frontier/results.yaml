@@ -27312,15 +27312,16 @@ regularized_drawings:
     - n: 232
       of: T-186
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 8
-        max_move: 0.04289526
-        max_turn_deg: 0.00309416
+        moved: 12
+        max_move: 0.06057722
+        max_turn_deg: 0.0114592
       view: packing/atlas/known-best/regularized/n-232-regularized.yaml.gz
     - n: 234
       of: T-155
@@ -27462,14 +27463,15 @@ regularized_drawings:
     - n: 264
       of: T-186
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 24
-        max_move: 0.0374764
+        moved: 27
+        max_move: 0.1761991
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-264-regularized.yaml.gz
     - n: 266
@@ -27546,15 +27548,16 @@ regularized_drawings:
     - n: 271
       of: T-186
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 11
-        max_move: 0.00856013
-        max_turn_deg: 0.000957677
+        moved: 15
+        max_move: 0.1055648
+        max_turn_deg: 0.0132529
       view: packing/atlas/known-best/regularized/n-271-regularized.yaml.gz
     - n: 272
       of: T-171
@@ -27657,15 +27660,16 @@ regularized_drawings:
     - n: 302
       of: T-186
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 115
-        max_move: 0.009575985
-        max_turn_deg: 0.00564274
+        moved: 136
+        max_move: 0.05055404
+        max_turn_deg: 2.2217
       view: packing/atlas/known-best/regularized/n-302-regularized.yaml.gz
     - n: 303
       of: T-186
