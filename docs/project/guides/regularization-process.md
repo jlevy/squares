@@ -301,7 +301,15 @@ python -m devtools.regularize_gallery --run-dir $RUNS/evand --output gallery.htm
 
 and a grid-slack run leaves each view’s `drawing.svg` beside its report.
 A view the owner admits is drawn only through a review record, which the policy’s
-section 5 describes and which does not exist yet.
+section 5 describes: one entry in `packing/atlas/known-best/regularized/reviews.yaml`
+naming the count, the date, the reviewer, the decision and its reason, the generator and
+its version (the index’s `pin`, `source_commit` and `patches`), the run, output and row,
+and the source witness’s id and digest.
+Then the same `layer` call that admits a run’s row-10 views draws the reviewed one, its
+entry keeps the table’s row-7 decision and names the record, and `--check-atlas` holds
+the two to each other.
+A record lapses with its witness or its generator’s version, as at n = 211, which the
+owner admitted on 16 October 2026.
 
 ## Register Candidates
 

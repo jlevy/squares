@@ -27256,15 +27256,17 @@ regularized_drawings:
     - n: 211
       of: T-188
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 3, re_angled: 12}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 32
+        moved: 67
         max_move: 0.2692113
-        max_turn_deg: 0.0
+        max_turn_deg: 0.381777
       view: packing/atlas/known-best/regularized/n-211-regularized.yaml.gz
     - n: 227
       of: T-155

@@ -92,7 +92,7 @@ PUBLICATION_HISTORY = (
             "record 204, 272 and 303 as decided with no better view, list the October 16 "
             "review of the upper-bound imports T-185 to T-190 in the synopsis document "
             "map, confirm T-185 to T-190 at V3/C3, move the houses at fifteen counts to "
-            "T-186, T-187, T-188 and T-190, and draw the regularized views of ten of them."
+            "T-186, T-187, T-188 and T-190, and draw the regularized views of eleven of them."
         ),
     ),
     PublicationHistoryEntry(
@@ -817,7 +817,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
             "record 204, 272 and 303 as decided with no better view, list the October 16 "
             "review of the upper-bound imports T-185 to T-190 in the synopsis document "
             "map, confirm T-185 to T-190 at V3/C3, move the houses at fifteen counts to "
-            "T-186, T-187, T-188 and T-190, and draw the regularized views of ten of them."
+            "T-186, T-187, T-188 and T-190, and draw the regularized views of eleven of them."
         ),
     ),
     ReleaseImpactDecision(
@@ -1093,6 +1093,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/regularize_select.py",
             "packing/devtools/regularized_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
             "packing/src/sqpack/cli/validate.py",
             "packing/atlas/known-best/bound-citations.json",
             "packing/atlas/known-best/composite-figure.json",
@@ -1136,7 +1137,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "in default_drawings, which changes only results.yaml's regularized_drawings "
             "items and those case records' regularization notes; rendered at link revision "
             "e2e018f3 from this branch at 796a1d03, the survey's and both reviews' 42 files "
-            "each are byte-identical to main e2e018f3's. All four papers keep v0.4.7, "
+            "each are byte-identical to main e2e018f3's. The owner's review then admitted "
+            "Evan Daniel's view at 211, the layer's first review record "
+            "(regularized/reviews.yaml), which regularize_evand and "
+            "regularize_axis_components read and the papers do not; it changes only that "
+            "count's regularized_drawings item and case note, and rendered at link "
+            "revision e2e018f3 with it, the survey's and both reviews' 42 files each are "
+            "byte-identical to main e2e018f3's. All four papers keep v0.4.7, "
             "v0.1.7, v0.1.0 and v0.2.2; the site takes the patch."
         ),
     ),

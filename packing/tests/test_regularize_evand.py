@@ -765,6 +765,112 @@ def test_an_admitted_view_enters_the_layer_under_its_contract(
     assert axis.main(["--verify-atlas"], layout=layout) == 0
 
 
+def test_a_view_sent_to_review_is_drawn_only_as_a_review_record_admits_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Row 7 sends a view to review, and the layer draws it only through a review record
+    (policy section 5): one admitting this count's view of this generator, run and
+    output, at that row, against the same source witness. The entry names its record,
+    and the layer's check holds the two to each other: the owner admitted Evan Daniel's
+    view at n = 211 this way on 16 October 2026."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    path = run_dir / "n-004" / "report.json"
+    report = json.loads(path.read_text(encoding="utf-8"))
+    report["decision"] = {
+        "row": 7,
+        "decision": "review",
+        "reason": "1 per-square count fell while no total did: for review",
+    }
+    path.write_text(json.dumps(report), encoding="utf-8")
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+
+    record = {
+        "n": 4,
+        "date": "2026-10-16",
+        "reviewer": "the owner",
+        "decision": "admit",
+        "reason": "a test",
+        "generator": axis.EVAND_GENERATOR,
+        "run": "evand-regularize-full",
+        "output": "same",
+        "row": 7,
+        "source": {"id": "W-row", "sha256": report["source"]["sha256"]},
+        "generator_version": axis.review_version(drive.evand_generator_block()),
+    }
+    reviews = layout.directory / axis.REVIEWS
+    write = lambda *records: reviews.write_text(  # noqa: E731
+        json.dumps({"reviews": list(records)}), encoding="utf-8"
+    )
+    # A record of another run, or of another version of the generator, or one rejecting
+    # the view, admits nothing.
+    write({**record, "run": "evand-regularize-other"})
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    write({**record, "generator_version": {**record["generator_version"], "pin": "0000000"}})
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    write({**record, "decision": "reject"})
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    assert axis.check_atlas(layout) == []
+
+    write(record)
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == [4]
+    assert axis.check_atlas(layout) == []
+    (entry,) = json.loads(layout.index.read_text())["entries"]
+    assert (entry["decision"]["row"], entry["decision"]["decision"]) == (7, "review")
+    assert entry["review"] == {
+        "record": drive.LAYER_REVIEWS_PATH,
+        "date": "2026-10-16",
+        "reviewer": "the owner",
+    }
+    schema = load_yaml(
+        (axis.ATLAS_DIR.parent / "regularized-atlas-index.schema.yaml").read_text()
+    )
+    drawn = Draft202012Validator(
+        {**schema["$defs"]["generated_record"], "$defs": schema["$defs"]}
+    )
+    assert list(drawn.iter_errors(entry)) == []
+    assert list(drawn.iter_errors({k: v for k, v in entry.items() if k != "review"}))
+
+    # The check holds the record and the entry to each other: a record of another view
+    # than the one drawn, a record withdrawn, and an entry naming the record otherwise.
+    write({**record, "output": "solved"})
+    assert any("does not draw" in problem for problem in axis.check_atlas(layout))
+    write()
+    found = axis.check_atlas(layout)
+    assert any("names a review record" in problem for problem in found)
+    write(record)
+    index = json.loads(layout.index.read_text())
+    index["entries"][0]["review"] = {**entry["review"], "reviewer": "someone else"}
+    layout.index.write_text(json.dumps(index), encoding="utf-8")
+    assert any("names its review record as" in p for p in axis.check_atlas(layout))
+    del index["entries"][0]["review"]
+    layout.index.write_text(json.dumps(index), encoding="utf-8")
+    found = axis.check_atlas(layout)
+    assert any("or a review record's" in problem for problem in found)
+    assert any("admits a view the layer does not draw" in problem for problem in found)
+    # A record of another witness than the count's has lapsed with it (the policy's
+    # re-review): a view drawn on it is drawn without a record, and where the layer draws
+    # another view, the lapsed record asks for nothing.
+    lapsed = {**record, "source": {"id": "W-row", "sha256": "0" * 64}}
+    write(lapsed)
+    index["entries"][0]["review"] = entry["review"]
+    layout.index.write_text(json.dumps(index), encoding="utf-8")
+    found = axis.check_atlas(layout)
+    assert any("not of the drawn view" in problem for problem in found), found
+    generators = index["generators"]
+    assert axis.review_problems(layout, {4: entry["reference"]}, generators) == []
+    write(record)
+    assert axis.review_problems(layout, {4: entry["reference"]}, generators) == [
+        (
+            f"n=4: {drive.LAYER_REVIEWS_PATH} admits a view the layer does not draw (its "
+            "generator is 'evand-regularize', the entry's 'regularize_axis_components/2'; "
+            "its run is 'evand-regularize-full', the entry's None; its output is 'same', "
+            "the entry's None; its row is 7, the entry's None)"
+        )
+    ]
+
+
 def test_an_admitted_view_ends_the_lapse_the_axis_record_carried(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

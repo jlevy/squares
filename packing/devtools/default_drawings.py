@@ -294,12 +294,6 @@ _README_R3CL = (
     "packing/cases/regularized_drawings/think-z7wn-2026-10-16/selection-r3cl.md, the "
     "selection of 16 October 2026 (think-r3cl)"
 )
-#: At 211 every strong view went to the owner's review at row 7, though Evan Daniel's
-#: same-side view betters the drawn axis view on every measure (review B3 of PR 657).
-_Z7WN_REVIEW = (
-    "think-r3cl: re-housed by the 16 October adoption (think-z7wn); every strong view is "
-    "at row 7, for the owner's review"
-)
 
 #: The counts whose drawing is not regularized and not regular as published, settled on
 #: purpose: each named with the witness it was settled on, so a new witness makes the
@@ -564,11 +558,10 @@ SETTLED: dict[int, Settled] = {
 #: regularized and one decided, and the three of think-3zi3 (175, 232 and 264), all
 #: regularized, which left it empty. The adoption of 16 October 2026 (think-z7wn) allowed
 #: eight re-housed counts under think-r3cl; its selection drew grid-slack's views at 232,
-#: 264, 271 and 302 and decided 237, 303 and 304 the same day, which leaves 211, whose
-#: every strong view is at row 7, for the owner's review.
-PENDING_ALLOWED: dict[int, str] = {
-    211: _Z7WN_REVIEW,
-}
+#: 264, 271 and 302 and decided 237, 303 and 304 the same day, and the owner's review
+#: admitted Evan Daniel's view at 211, which row 7 had sent to review (review B3 of PR
+#: 657; `regularized/reviews.yaml`), which left it empty again.
+PENDING_ALLOWED: dict[int, str] = {}
 
 
 def index_entries(index: Path = INDEX) -> dict[int, dict[str, Any]]:

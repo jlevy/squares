@@ -224,9 +224,13 @@ index.
 A record holds the count, the date, the reviewer, the decision and its reason; any
 parameters or generator choice; the generator version and source-witness digest it was
 made against; and the gallery it was made from.
-The index entry will name its record, and a records-tier check will hold the two to each
-other. Neither the file nor the check exists yet: the first review creates both, and
-until then no view rests on a review record.
+The index entry names its record, and the records tier’s check of the layer
+(`regularize_axis_components --check-atlas`) holds the two to each other.
+The first review created both: on 16 October 2026 the owner admitted Evan Daniel’s
+same-side view at n = 211, which row 7 had sent to review.
+`regularize_evand layer` draws a view the table sent to review only as a record admits
+that very view: its count, generator and version, run, output and row, and its source
+witness’s id and digest.
 A review of a whole pass may also be written up under `docs/project/reviews/` and mapped
 in the document map.
 

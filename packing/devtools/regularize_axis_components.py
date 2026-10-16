@@ -187,6 +187,35 @@ DRAWING_LABEL = "regularized"
 RENDERINGS = "rendering"
 """The subdirectory `devtools.render_regularized_atlas` draws the views into. Its own
 `--check` holds those files to the index; this tool's check leaves the directory to it."""
+REVIEWS = "reviews.yaml"
+"""The layer's review records (policy section 5), hand-written beside the index: one per
+decision a person made on a view the decision table sent to review. A drawn view the
+table did not admit at row 10 is drawn only as a record here admits it, the entry names
+its record, and this tool's check holds the two to each other (`review_problems`)."""
+REVIEW_ROWS = frozenset({7})
+"""The rows whose views a review record may admit: row 7's review, a square's contact
+count falling while no total does. Row 8's alternates wait on question 2, and every other
+row refuses, holds or admits on its own (policy section 5)."""
+REVIEW_FIELDS = (
+    "n",
+    "date",
+    "reviewer",
+    "decision",
+    "reason",
+    "generator",
+    "run",
+    "output",
+    "row",
+    "source",
+    "generator_version",
+)
+"""What a review record holds (policy section 5): the count, the date, the reviewer, the
+decision and its reason, the generator, run and output it decided on, the row that sent
+the view to review, and the source witness's id and digest and the generator's version
+(`review_version`) it was made against."""
+REVIEW_VERSION = ("pin", "source_commit", "patches")
+"""The fields of a generator's block in the index that are its version for a review: a
+re-pin or a patch makes a record lapse (policy section 5, re-review)."""
 
 
 def _rule(name: str) -> shades.Rule:
@@ -2173,12 +2202,143 @@ def check_atlas(layout: AtlasLayout, *, smallest_dilation: bool = False) -> list
             continue
         problems.extend(_check_record(layout, entry, record, kept, sides))
     problems.extend(_bound_problems(layout, by_n, sides))
+    problems.extend(review_problems(layout, by_n, index.get("generators") or {}))
     problems.extend(
         f"unexpected file {layout.relative(path)}"
         for path in sorted(layout.directory.iterdir())
-        if path.name not in {layout.index.name, *kept}
+        if path.name not in {layout.index.name, REVIEWS, *kept}
         and not (path.name == RENDERINGS and path.is_dir())
     )
+    return problems
+
+
+def review_records(layout: AtlasLayout) -> list[dict[str, Any]]:
+    """The layer's review records (`REVIEWS`), in the file's order; none where there is
+    no file."""
+    path = layout.directory / REVIEWS
+    if not path.is_file():
+        return []
+    document = load_yaml(path.read_text(encoding="utf-8")) or {}
+    return [dict(record) for record in document.get("reviews") or []]
+
+
+def review_version(block: Mapping[str, Any]) -> dict[str, Any]:
+    """A generator's version as a review record states it (`REVIEW_VERSION`)."""
+    return {key: block.get(key) for key in REVIEW_VERSION}
+
+
+def review_link(layout: AtlasLayout, record: Mapping[str, Any]) -> dict[str, Any]:
+    """How an index entry names the review record that admitted its view."""
+    return {
+        "record": layout.relative(layout.directory / REVIEWS),
+        "date": str(record["date"]),
+        "reviewer": str(record["reviewer"]),
+    }
+
+
+def review_admits(record: Mapping[str, Any], entry: Mapping[str, Any]) -> list[str]:
+    """Why an admitting review record is not of the view an entry draws: the generator,
+    run and output, the row that sent it to review, and the source witness's id and
+    digest must be the entry's. Empty where the record admits that view."""
+    source = record.get("source") or {}
+    run = entry.get("run") or {}
+    found = {
+        "generator": entry.get("generator"),
+        "run": run.get("id"),
+        "output": run.get("output"),
+        "row": (entry.get("decision") or {}).get("row"),
+        "source id": (entry.get("source") or {}).get("id"),
+        "source sha256": (entry.get("source") or {}).get("sha256"),
+    }
+    held = {
+        "generator": record.get("generator"),
+        "run": record.get("run"),
+        "output": record.get("output"),
+        "row": record.get("row"),
+        "source id": source.get("id"),
+        "source sha256": source.get("sha256"),
+    }
+    return [
+        f"its {key} is {held[key]!r}, the entry's {found[key]!r}"
+        for key in found
+        if held[key] != found[key]
+    ]
+
+
+def _review_lapsed(
+    record: Mapping[str, Any],
+    entry: Mapping[str, Any],
+    generators: Mapping[str, Mapping[str, Any]],
+) -> bool:
+    """Whether a review record has lapsed against an entry: its source witness's digest
+    is not the entry's, or its generator's version is not the index's."""
+    source = record.get("source") or {}
+    if source.get("sha256") != (entry.get("source") or {}).get("sha256"):
+        return True
+    block = generators.get(str(record.get("generator")))
+    return block is None or record.get("generator_version") != review_version(block)
+
+
+def review_problems(
+    layout: AtlasLayout,
+    by_n: Mapping[int, Mapping[str, Any]],
+    generators: Mapping[str, Mapping[str, Any]],
+) -> list[str]:
+    """Each review record against the index, and each entry that names one against its
+    record (policy section 5). A record holds every field `REVIEW_FIELDS` names, for a
+    count the index draws, once each, deciding `admit` or `reject` on a row `REVIEW_ROWS`
+    names. An entry drawn by review names its record (`review_link`), which admits that
+    very view (`review_admits`). An admitting record whose source witness is no longer
+    the entry's, or whose generator the index now describes at another version
+    (`review_version`), has lapsed and draws nothing, as the policy's re-review says; one
+    that has not must be of the view the entry draws."""
+    records = review_records(layout)
+    relative = layout.relative(layout.directory / REVIEWS)
+    problems: list[str] = []
+    seen: dict[int, Mapping[str, Any]] = {}
+    for record in records:
+        n = record.get("n")
+        missing = [key for key in REVIEW_FIELDS if record.get(key) in (None, "")]
+        if missing or not isinstance(n, int):
+            problems.append(f"{relative}: a record lacks {', '.join(missing) or 'its count'}")
+            continue
+        if n in seen:
+            problems.append(f"{relative}: n={n} has more than one record")
+            continue
+        seen[n] = record
+        if record["decision"] not in {"admit", "reject"}:
+            problems.append(f"{relative}: n={n} decides {record['decision']!r}")
+        if record["row"] not in REVIEW_ROWS:
+            problems.append(f"{relative}: n={n} reviews row {record['row']!r}")
+        entry = by_n.get(n)
+        if entry is None:
+            problems.append(f"{relative}: n={n} is not a count the index records")
+            continue
+        if record["decision"] != "admit" or _review_lapsed(record, entry, generators):
+            continue
+        why = review_admits(record, entry)
+        if why or entry.get("review") is None:
+            problems.append(
+                f"n={n}: {relative} admits a view the layer does not draw"
+                + (f" ({'; '.join(why)})" if why else "; run the `layer` command again")
+            )
+    for n, entry in sorted(by_n.items()):
+        link = entry.get("review")
+        if link is None:
+            continue
+        record = seen.get(n)
+        if record is None or record.get("decision") != "admit":
+            problems.append(f"n={n}: the entry names a review record {relative} does not hold")
+            continue
+        why = review_admits(record, entry)
+        if _review_lapsed(record, entry, generators) and not why:
+            why = ["its generator's version is not the index's"]
+        if why:
+            problems.append(
+                f"n={n}: its review record is not of the drawn view: {'; '.join(why)}"
+            )
+        if link != review_link(layout, record):
+            problems.append(f"n={n}: the entry names its review record as {link!r}")
     return problems
 
 
@@ -2361,8 +2521,18 @@ def _drawn_view_problems(
     if (side["relation"] == "same") != (record["regularization"]["side"] == "same"):
         problems.append(f"n={n}: the regularization's side does not match the relation")
     decision = record.get("decision") or {}
-    if decision.get("row") != ADMITTING_ROW or decision.get("decision") != "admit":
-        problems.append(f"n={n}: drawn without the decision table's admission (row 10)")
+    review = record.get("review")
+    if decision.get("row") == ADMITTING_ROW and decision.get("decision") == "admit":
+        if review is not None:
+            problems.append(f"n={n}: admitted at row 10, yet the entry names a review record")
+    elif not (
+        decision.get("row") in REVIEW_ROWS
+        and decision.get("decision") == "review"
+        and review is not None
+    ):
+        problems.append(
+            f"n={n}: drawn without the decision table's admission (row 10) or a review record's"
+        )
     reference = record.get("reference") or {}
     if reference.get("generator") != ALGORITHM or reference.get("source") != record["source"]:
         problems.append(f"n={n}: this tool's record of the count is not kept beside the view")
