@@ -276,11 +276,12 @@ all three thresholds (`grid-slack-3a-rerun-deg05-1016`, `-deg1-1016` and `-deg5-
 container restart killed 105 and 176 at five degrees, which ran again as
 `grid-slack-3a-rerun-deg5b-1016`). The driver ran 105, 129 and 146
 (`evand-regularize-3a-rerun-1016`, stopped there for time, so it has no receipt) and 204
-and 272 (`evand-regularize-3a-rerun-s-1016`); it did not run again at 156, 176, 271 or
-303\. Every outcome the runs cover reproduces: grid-slack’s half-degree view at 105 and
-Evan Daniel’s views at 129 and 146 are chosen with the drawn views’ measures, his
-same-side views at 105 and 204 are refused at row 7, and his solved views at 204 and 272
-are held at row 4, above $U$; at 204 and 303 grid-slack’s view ties the drawn picture on
+and 272 (`evand-regularize-3a-rerun-s-1016`), then 303 alone
+(`evand-regularize-3a-rerun-303-1016`); it did not run again at 156, 176 or 271. Every
+outcome the runs cover reproduces: grid-slack’s half-degree view at 105 and Evan
+Daniel’s views at 129 and 146 are chosen with the drawn views’ measures, his same-side
+views at 105 and 204 are refused at row 7, and his solved views at 204, 272 and 303 are
+held at row 4, above $U$; at 204 and 303 grid-slack’s view ties the drawn picture on
 every goal at all three thresholds, and at 272 it is refused at row 7 at all three
 (stage sides 732 to 730). Without his views, the selection chooses grid-slack’s at 156
 and 271, which the drawn views dominate, and none at 176, where grid-slack’s view goes
