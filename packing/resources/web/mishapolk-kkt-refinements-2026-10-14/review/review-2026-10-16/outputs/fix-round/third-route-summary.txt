@@ -1,0 +1,90 @@
+command: python -m devtools.check_half_angle_area decide-imports --workers 1 --imports '#506-n175' '70a033f' '#606' '487b058' '#607' '4e4c8ce' --upstream couzo-certificates-2026-10-11 DIR --upstream mishapolk-kkt-refinements-2026-10-14 DIR --upstream evand-n146-2026-10-14 DIR --upstream couzo-verified-bounds-2026-10-14 DIR --upstream couzo-certificates-2026-10-14 DIR --upstream couzo-n237-2026-10-15 DIR
+started 2026-10-16T05:53:37Z finished 2026-10-16T05:56:37Z wall 179.76
+17 certificates, 422712 pairs (8138 clipped), controls 102/102
+  #506-n175  n=175 passed=True wall=5e-21 contacts=0 dist=1e-20 pairs=15225 (414) 4.64s controls=6/6
+  70a033f    n=129 passed=True wall=5e-41 contacts=0 dist=1e-40 pairs=8256 (270) 2.63s controls=6/6
+  70a033f    n=154 passed=True wall=5e-41 contacts=0 dist=1e-40 pairs=11781 (342) 4.12s controls=6/6
+  70a033f    n=156 passed=True wall=5e-41 contacts=0 dist=1e-40 pairs=12090 (364) 5.51s controls=6/6
+  70a033f    n=175 passed=True wall=3.633e-78 contacts=0 dist=7.265e-78 pairs=15225 (366) 6.96s controls=6/6
+  70a033f    n=176 passed=True wall=3.624e-98 contacts=0 dist=7.249e-98 pairs=15400 (392) 12.35s controls=6/6
+  70a033f    n=204 passed=True wall=5e-101 contacts=0 dist=1e-100 pairs=20706 (452) 13.0s controls=6/6
+  70a033f    n=232 passed=True wall=5e-101 contacts=0 dist=1e-100 pairs=26796 (481) 13.88s controls=6/6
+  70a033f    n=264 passed=True wall=5e-101 contacts=0 dist=1e-100 pairs=34716 (580) 17.73s controls=6/6
+  70a033f    n=271 passed=True wall=5e-101 contacts=0 dist=1e-100 pairs=36585 (592) 14.81s controls=6/6
+  70a033f    n=302 passed=True wall=5e-41 contacts=0 dist=1e-40 pairs=45451 (695) 7.23s controls=6/6
+  70a033f    n=303 passed=True wall=5e-101 contacts=0 dist=1e-100 pairs=45753 (666) 12.92s controls=6/6
+  70a033f    n=304 passed=True wall=5e-41 contacts=0 dist=1e-40 pairs=46056 (695) 7.02s controls=6/6
+  #606       n=146 passed=True wall=5e-21 contacts=0 dist=1e-20 pairs=10585 (336) 1.92s controls=6/6
+  487b058    n=211 passed=True wall=5e-21 contacts=0 dist=1e-20 pairs=22155 (489) 3.08s controls=6/6
+  #607       n=237 passed=True wall=1e-15 contacts=0 dist=1.602e-12 pairs=27966 (502) 3.19s controls=6/6
+  4e4c8ce    n=237 passed=True wall=5e-21 contacts=0 dist=1e-20 pairs=27966 (502) 2.89s controls=6/6
+upstream: {'couzo-certificates-2026-10-11': 2, 'mishapolk-kkt-refinements-2026-10-14': 24, 'evand-n146-2026-10-14': 1, 'couzo-verified-bounds-2026-10-14': 2, 'couzo-certificates-2026-10-14': 1, 'couzo-n237-2026-10-15': 2} sum 32
+receipts:
+   couzo-certificates-2026-10-11 {'jobs': 45, 'pair_decisions': 5234106, 'route_cpu_seconds': 2540.17, 'job_wall_seconds': 5568.25, 'longest_job_seconds': 287.72}
+   mishapolk-kkt-refinements-2026-10-14 {'jobs': 72, 'pair_decisions': 4186086, 'route_cpu_seconds': 2167.9, 'job_wall_seconds': 2194.11, 'longest_job_seconds': 78.28}
+   evand-n146-2026-10-14 {'jobs': 3, 'pair_decisions': 63510, 'route_cpu_seconds': 21.14, 'job_wall_seconds': 21.33, 'longest_job_seconds': 7.24}
+   couzo-verified-bounds-2026-10-14 {'jobs': 3, 'pair_decisions': 132930, 'route_cpu_seconds': 50.25, 'job_wall_seconds': 69.01, 'longest_job_seconds': 23.77}
+   couzo-certificates-2026-10-14 {'jobs': 69, 'pair_decisions': 31386744, 'route_cpu_seconds': 12425.76, 'job_wall_seconds': 14795.58, 'longest_job_seconds': 632.89}
+   couzo-n237-2026-10-15 {'jobs': 3, 'pair_decisions': 167796, 'route_cpu_seconds': 50.9, 'job_wall_seconds': 65.48, 'longest_job_seconds': 22.07}
+arrangements:
+  #506-n175 n=175 against T-140: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=172/171/38/2/0 largest=1.122e-2 turn=0.927deg turned>1e-6=48 sidediff=-1.7e-6 | unmoved k=0 within={'1e-9': 3, '1e-6': 4, '1e-3': 137, '1e-2': 173, '1e-1': 175} 1:1=True
+  #506-n175 n=175 against T-125: UNMATCHED; side diff -1.78e-3; unmoved k=7 within={'1e-9': 3, '1e-6': 3, '1e-3': 3, '1e-2': 76, '1e-1': 86} one_to_one=False
+  #506-n175 n=175 against T-130: UNMATCHED; side diff -3.614e-5; unmoved k=3 within={'1e-9': 3, '1e-6': 3, '1e-3': 51, '1e-2': 75, '1e-1': 86} one_to_one=False
+  #506-n175 n=175 against T-158: UNMATCHED; side diff 2.945e-3; unmoved k=1 within={'1e-9': 3, '1e-6': 3, '1e-3': 5, '1e-2': 81, '1e-1': 95} one_to_one=False
+  #506-n175 n=175 against #593: UNMATCHED; side diff 2.945e-3; unmoved k=1 within={'1e-9': 3, '1e-6': 3, '1e-3': 5, '1e-2': 81, '1e-1': 95} one_to_one=False
+  70a033f n=129 against T-174: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=2/2/0/0/0 largest=1.414e-4 turn=0.00573deg turned>1e-6=2 sidediff=-1.098e-21 | unmoved k=0 within={'1e-9': 127, '1e-6': 127, '1e-3': 129, '1e-2': 129, '1e-1': 129} 1:1=True
+  70a033f n=129 against T-162: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=66/31/2/2/2 largest=1.394e-1 turn=0.00573deg turned>1e-6=2 sidediff=-1.187e-19 | unmoved k=0 within={'1e-9': 63, '1e-6': 98, '1e-3': 127, '1e-2': 127, '1e-1': 127} 1:1=True
+  70a033f n=129 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=66/31/0/0/0 largest=1.414e-4 turn=0.00573deg turned>1e-6=2 sidediff=-1.187e-19 | unmoved k=0 within={'1e-9': 63, '1e-6': 98, '1e-3': 129, '1e-2': 129, '1e-1': 129} 1:1=True
+  70a033f n=154 against T-182: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=10/10/0/0/0 largest=6.364e-4 turn=0.0258deg turned>1e-6=8 sidediff=-1.292e-19 | unmoved k=0 within={'1e-9': 144, '1e-6': 144, '1e-3': 154, '1e-2': 154, '1e-1': 154} 1:1=True
+  70a033f n=154 against T-172: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=153/153/153/61/19 largest=2.94e-1 turn=23.3deg turned>1e-6=52 sidediff=-1.293e-3 | unmoved k=0 within={'1e-9': 1, '1e-6': 1, '1e-3': 1, '1e-2': 93, '1e-1': 135} 1:1=True
+  70a033f n=154 against T-160: k=3 moved>1e-9/1e-6/1e-3/1e-2/1e-1=153/153/152/58/19 largest=2.917e-1 turn=23.3deg turned>1e-6=53 sidediff=-1.36e-3 | unmoved k=3 within={'1e-9': 1, '1e-6': 1, '1e-3': 2, '1e-2': 96, '1e-1': 135} 1:1=True
+  70a033f n=154 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=153/153/153/61/19 largest=2.94e-1 turn=23.3deg turned>1e-6=52 sidediff=-1.293e-3 | unmoved k=0 within={'1e-9': 1, '1e-6': 1, '1e-3': 1, '1e-2': 93, '1e-1': 135} 1:1=True
+  70a033f n=156 against T-174: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=7.586e-16 turn=5.25e-34deg turned>1e-6=0 sidediff=-1.194e-34 | unmoved k=0 within={'1e-9': 156, '1e-6': 156, '1e-3': 156, '1e-2': 156, '1e-1': 156} 1:1=True
+  70a033f n=156 against T-161: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=7.587e-16 turn=5.25e-34deg turned>1e-6=0 sidediff=-1.298e-19 | unmoved k=0 within={'1e-9': 156, '1e-6': 156, '1e-3': 156, '1e-2': 156, '1e-1': 156} 1:1=True
+  70a033f n=156 against T-149: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=147/147/30/8/1 largest=2.016e-1 turn=0.976deg turned>1e-6=67 sidediff=-6.76e-6 | unmoved k=0 within={'1e-9': 9, '1e-6': 9, '1e-3': 126, '1e-2': 148, '1e-1': 155} 1:1=True
+  70a033f n=156 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=2.412e-12 turn=5e-18deg turned>1e-6=0 sidediff=-1.298e-19 | unmoved k=0 within={'1e-9': 156, '1e-6': 156, '1e-3': 156, '1e-2': 156, '1e-1': 156} 1:1=True
+  70a033f n=175 against T-174: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=9.237e-16 turn=4.86e-15deg turned>1e-6=0 sidediff=-7.229e-75 | unmoved k=0 within={'1e-9': 175, '1e-6': 175, '1e-3': 175, '1e-2': 175, '1e-1': 175} 1:1=True
+  70a033f n=175 against T-158: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=22/22/4/2/2 largest=4.533e-1 turn=0.00573deg turned>1e-6=17 sidediff=-1.376e-19 | unmoved k=0 within={'1e-9': 153, '1e-6': 153, '1e-3': 171, '1e-2': 173, '1e-1': 173} 1:1=True
+  70a033f n=175 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=22/21/4/2/2 largest=4.533e-1 turn=0.0172deg turned>1e-6=17 sidediff=-1.376e-19 | unmoved k=0 within={'1e-9': 153, '1e-6': 154, '1e-3': 171, '1e-2': 173, '1e-1': 173} 1:1=True
+  70a033f n=176 against T-174: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=17/17/0/0/0 largest=1.414e-4 turn=0.00573deg turned>1e-6=15 sidediff=-1.254e-94 | unmoved k=0 within={'1e-9': 159, '1e-6': 159, '1e-3': 176, '1e-2': 176, '1e-1': 176} 1:1=True
+  70a033f n=176 against #575: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=17/17/0/0/0 largest=1.414e-4 turn=0.00573deg turned>1e-6=15 sidediff=-1.38e-19 | unmoved k=0 within={'1e-9': 159, '1e-6': 159, '1e-3': 176, '1e-2': 176, '1e-1': 176} 1:1=True
+  70a033f n=176 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=9.576e-13 turn=4.48e-11deg turned>1e-6=0 sidediff=-1.38e-19 | unmoved k=0 within={'1e-9': 176, '1e-6': 176, '1e-3': 176, '1e-2': 176, '1e-1': 176} 1:1=True
+  70a033f n=204 against T-174: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=15/12/2/0/0 largest=1.019e-3 turn=0.0573deg turned>1e-6=10 sidediff=-1.828e-21 | unmoved k=0 within={'1e-9': 189, '1e-6': 192, '1e-3': 202, '1e-2': 204, '1e-1': 204} 1:1=True
+  70a033f n=204 against T-162: k=7 moved>1e-9/1e-6/1e-3/1e-2/1e-1=44/29/10/3/1 largest=8.087e-1 turn=0.206deg turned>1e-6=12 sidediff=-1.481e-19 | unmoved k=0 within={'1e-9': 169, '1e-6': 186, '1e-3': 201, '1e-2': 203, '1e-1': 203} 1:1=True
+  70a033f n=204 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=33/16/0/0/0 largest=6.01e-4 turn=0.0344deg turned>1e-6=10 sidediff=-1.481e-19 | unmoved k=0 within={'1e-9': 171, '1e-6': 188, '1e-3': 204, '1e-2': 204, '1e-1': 204} 1:1=True
+  70a033f n=232 against T-174: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=85/85/0/0/0 largest=2.828e-4 turn=0.0115deg turned>1e-6=61 sidediff=-1.445e-74 | unmoved k=0 within={'1e-9': 147, '1e-6': 147, '1e-3': 232, '1e-2': 232, '1e-1': 232} 1:1=True
+  70a033f n=232 against T-158: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=87/87/5/4/4 largest=4.533e-1 turn=0.0115deg turned>1e-6=61 sidediff=-1.576e-19 | unmoved k=0 within={'1e-9': 145, '1e-6': 145, '1e-3': 227, '1e-2': 228, '1e-1': 228} 1:1=True
+  70a033f n=232 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=86/86/1/0/0 largest=2.897e-3 turn=0.0115deg turned>1e-6=61 sidediff=-1.576e-19 | unmoved k=0 within={'1e-9': 146, '1e-6': 146, '1e-3': 231, '1e-2': 232, '1e-1': 232} 1:1=True
+  70a033f n=264 against T-174: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=1.206e-15 turn=2.68e-14deg turned>1e-6=0 sidediff=-1.753e-74 | unmoved k=0 within={'1e-9': 264, '1e-6': 264, '1e-3': 264, '1e-2': 264, '1e-1': 264} 1:1=True
+  70a033f n=264 against T-158: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=2/2/2/2/1 largest=4.449e-1 turn=2.68e-14deg turned>1e-6=0 sidediff=-1.677e-19 | unmoved k=0 within={'1e-9': 262, '1e-6': 262, '1e-3': 262, '1e-2': 262, '1e-1': 263} 1:1=True
+  70a033f n=264 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=1/1/1/1/0 largest=5.984e-2 turn=2.68e-14deg turned>1e-6=0 sidediff=-1.677e-19 | unmoved k=0 within={'1e-9': 263, '1e-6': 263, '1e-3': 263, '1e-2': 263, '1e-1': 264} 1:1=True
+  70a033f n=271 against T-174: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=9.88e-16 turn=5.32e-34deg turned>1e-6=0 sidediff=-2.089e-34 | unmoved k=0 within={'1e-9': 271, '1e-6': 271, '1e-3': 271, '1e-2': 271, '1e-1': 271} 1:1=True
+  70a033f n=271 against T-161: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=9.879e-16 turn=5.32e-34deg turned>1e-6=0 sidediff=-1.695e-19 | unmoved k=0 within={'1e-9': 271, '1e-6': 271, '1e-3': 271, '1e-2': 271, '1e-1': 271} 1:1=True
+  70a033f n=271 against T-151: k=3 moved>1e-9/1e-6/1e-3/1e-2/1e-1=231/231/73/29/0 largest=8.61e-2 turn=5.41deg turned>1e-6=72 sidediff=-1.243e-4 | unmoved k=3 within={'1e-9': 40, '1e-6': 40, '1e-3': 198, '1e-2': 242, '1e-1': 271} 1:1=True
+  70a033f n=271 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=3.212e-12 turn=1e-19deg turned>1e-6=0 sidediff=-1.695e-19 | unmoved k=0 within={'1e-9': 271, '1e-6': 271, '1e-3': 271, '1e-2': 271, '1e-1': 271} 1:1=True
+  70a033f n=302 against T-181: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=7.783e-16 turn=8e-15deg turned>1e-6=0 sidediff=-1.787e-19 | unmoved k=0 within={'1e-9': 302, '1e-6': 302, '1e-3': 302, '1e-2': 302, '1e-1': 302} 1:1=True
+  70a033f n=302 against T-164: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=302/302/172/38/1 largest=1.466e-1 turn=12.3deg turned>1e-6=79 sidediff=-2.615e-4 | unmoved k=0 within={'1e-9': 0, '1e-6': 0, '1e-3': 130, '1e-2': 264, '1e-1': 301} 1:1=True
+  70a033f n=302 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=302/302/172/37/1 largest=1.466e-1 turn=12.3deg turned>1e-6=79 sidediff=-2.615e-4 | unmoved k=0 within={'1e-9': 0, '1e-6': 0, '1e-3': 130, '1e-2': 265, '1e-1': 301} 1:1=True
+  70a033f n=303 against T-174: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=9.544e-16 turn=1.78e-15deg turned>1e-6=0 sidediff=-2.432e-74 | unmoved k=0 within={'1e-9': 303, '1e-6': 303, '1e-3': 303, '1e-2': 303, '1e-1': 303} 1:1=True
+  70a033f n=303 against T-162: UNMATCHED; side diff -1.791e-19; unmoved k=0 within={'1e-9': 297, '1e-6': 297, '1e-3': 301, '1e-2': 301, '1e-1': 302} one_to_one=False
+  70a033f n=303 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=9.543e-16 turn=1.78e-15deg turned>1e-6=0 sidediff=-1.791e-19 | unmoved k=0 within={'1e-9': 303, '1e-6': 303, '1e-3': 303, '1e-2': 303, '1e-1': 303} 1:1=True
+  70a033f n=304 against T-175: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=9.377e-16 turn=3.89e-14deg turned>1e-6=0 sidediff=-1.793e-19 | unmoved k=0 within={'1e-9': 304, '1e-6': 304, '1e-3': 304, '1e-2': 304, '1e-1': 304} 1:1=True
+  70a033f n=304 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=0/0/0/0/0 largest=9.376e-16 turn=3.89e-14deg turned>1e-6=0 sidediff=-1.793e-19 | unmoved k=0 within={'1e-9': 304, '1e-6': 304, '1e-3': 304, '1e-2': 304, '1e-1': 304} 1:1=True
+  #606 n=146 against T-150: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=145/83/57/40/9 largest=4.532e-1 turn=1.78deg turned>1e-6=27 sidediff=-1.38e-8 | unmoved k=0 within={'1e-9': 1, '1e-6': 63, '1e-3': 89, '1e-2': 106, '1e-1': 137} 1:1=True
+  #606 n=146 against T-168: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=145/81/57/40/9 largest=4.532e-1 turn=1.78deg turned>1e-6=26 sidediff=-1.38e-8 | unmoved k=0 within={'1e-9': 1, '1e-6': 65, '1e-3': 89, '1e-2': 106, '1e-1': 137} 1:1=True
+  #606 n=146 against T-174: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=145/81/57/40/9 largest=4.532e-1 turn=1.78deg turned>1e-6=26 sidediff=-1.38e-8 | unmoved k=0 within={'1e-9': 1, '1e-6': 65, '1e-3': 89, '1e-2': 106, '1e-1': 137} 1:1=True
+  #606 n=146 against T-125: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=145/69/55/30/9 largest=4.784e-1 turn=2.8deg turned>1e-6=23 sidediff=-8.736e-8 | unmoved k=0 within={'1e-9': 1, '1e-6': 77, '1e-3': 91, '1e-2': 116, '1e-1': 137} 1:1=True
+  #606 n=146 against T-146: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=145/69/52/35/9 largest=4.784e-1 turn=2.8deg turned>1e-6=23 sidediff=-8.726e-8 | unmoved k=0 within={'1e-9': 1, '1e-6': 77, '1e-3': 94, '1e-2': 111, '1e-1': 137} 1:1=True
+  #606 n=146 against #593: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=145/83/57/40/9 largest=4.532e-1 turn=1.78deg turned>1e-6=27 sidediff=-1.38e-8 | unmoved k=0 within={'1e-9': 1, '1e-6': 63, '1e-3': 89, '1e-2': 106, '1e-1': 137} 1:1=True
+  487b058 n=211 against T-182: k=4 moved>1e-9/1e-6/1e-3/1e-2/1e-1=200/200/70/16/5 largest=3.534e-1 turn=2.62deg turned>1e-6=82 sidediff=-9.288e-6 | unmoved k=4 within={'1e-9': 11, '1e-6': 11, '1e-3': 141, '1e-2': 195, '1e-1': 206} 1:1=True
+  487b058 n=211 against T-181: k=4 moved>1e-9/1e-6/1e-3/1e-2/1e-1=200/200/70/16/5 largest=3.534e-1 turn=2.62deg turned>1e-6=82 sidediff=-9.288e-6 | unmoved k=4 within={'1e-9': 11, '1e-6': 11, '1e-3': 141, '1e-2': 195, '1e-1': 206} 1:1=True
+  487b058 n=211 against T-175: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=202/202/99/23/5 largest=4.454e-1 turn=1.87deg turned>1e-6=82 sidediff=-1.446e-4 | unmoved k=2 within={'1e-9': 11, '1e-6': 11, '1e-3': 37, '1e-2': 45, '1e-1': 76} 1:1=False
+  487b058 n=211 against T-149: UNMATCHED; side diff -2.787e-3; unmoved k=2 within={'1e-9': 11, '1e-6': 11, '1e-3': 12, '1e-2': 49, '1e-1': 80} one_to_one=False
+  487b058 n=211 against #593: k=4 moved>1e-9/1e-6/1e-3/1e-2/1e-1=200/200/70/16/5 largest=3.534e-1 turn=2.62deg turned>1e-6=82 sidediff=-9.288e-6 | unmoved k=4 within={'1e-9': 11, '1e-6': 11, '1e-3': 141, '1e-2': 195, '1e-1': 206} 1:1=True
+  #607 n=237 against T-183: k=4 moved>1e-9/1e-6/1e-3/1e-2/1e-1=123/123/41/21/0 largest=3.314e-2 turn=4.56deg turned>1e-6=52 sidediff=-1.014e-4 | unmoved k=4 within={'1e-9': 114, '1e-6': 114, '1e-3': 196, '1e-2': 216, '1e-1': 237} 1:1=True
+  #607 n=237 against T-161: k=4 moved>1e-9/1e-6/1e-3/1e-2/1e-1=131/131/62/27/7 largest=4.194e-1 turn=35deg turned>1e-6=52 sidediff=-3.441e-4 | unmoved k=4 within={'1e-9': 106, '1e-6': 106, '1e-3': 175, '1e-2': 210, '1e-1': 230} 1:1=True
+  #607 n=237 against T-140: k=4 moved>1e-9/1e-6/1e-3/1e-2/1e-1=185/185/116/30/7 largest=2.125e-1 turn=39.5deg turned>1e-6=60 sidediff=-3.46e-4 | unmoved k=4 within={'1e-9': 52, '1e-6': 52, '1e-3': 121, '1e-2': 207, '1e-1': 230} 1:1=True
+  4e4c8ce n=237 against T-183: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=236/236/42/21/0 largest=6.593e-2 turn=4.56deg turned>1e-6=52 sidediff=-1.014e-4 | unmoved k=0 within={'1e-9': 1, '1e-6': 1, '1e-3': 195, '1e-2': 216, '1e-1': 237} 1:1=True
+  4e4c8ce n=237 against T-189: k=4 moved>1e-9/1e-6/1e-3/1e-2/1e-1=39/20/12/4/0 largest=7.599e-2 turn=1.54deg turned>1e-6=4 sidediff=-2.398e-11 | unmoved k=4 within={'1e-9': 198, '1e-6': 217, '1e-3': 225, '1e-2': 233, '1e-1': 237} 1:1=True
+  4e4c8ce n=237 against T-161: k=0 moved>1e-9/1e-6/1e-3/1e-2/1e-1=236/236/58/29/7 largest=3.431e-1 turn=34.9deg turned>1e-6=52 sidediff=-3.441e-4 | unmoved k=0 within={'1e-9': 1, '1e-6': 1, '1e-3': 179, '1e-2': 208, '1e-1': 230} 1:1=True
+problems: 0
