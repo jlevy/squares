@@ -490,16 +490,18 @@ The observed 210 extra normal skips must disappear as unexplained omissions.
 The remaining known optional omissions stay enumerated as omissions, with reason and
 owner; they are never counted as passes.
 
-The complete `tests/test_site_forwarders.py` module belongs to the existing functional
-`site table layout in Chromium` command.
+The complete `tests/test_site_forwarders.py` module belongs to the existing
+`site table layout in Chromium` owner.
 `SITE_LAYOUT_TESTS` assigns its 51 cases to that browser-equipped owner and excludes the
 module from the four generic quick shards.
-The existing `SQPACK_REQUIRE_CHROMIUM=1` setting makes a missing browser fail there.
-The four native-frontier load-budget cases keep their separate serial command, and both
-commands keep their shared deadline.
+The owner first runs its remaining functional modules in parallel, then all 51 forwarder
+cases in a fresh serial pytest process, then the four native-frontier load-budget cases
+in their separate serial process.
+All three commands keep one shared deadline and require Chromium through
+`SQPACK_REQUIRE_CHROMIUM=1`; a missing browser fails rather than skips.
 Each command enables `faulthandler_timeout=60` for stack diagnostics while retaining
-pytest’s default `faulthandler_exit_on_timeout=False`. This adds no job or dependency;
-the recurring Linux cost of the corrected browser ownership remains to be measured.
+pytest’s default `faulthandler_exit_on_timeout=False`. This adds no ordinary CI job or
+dependency; the combined Linux cost of the three phases remains to be measured.
 
 Use collected metadata/capabilities and the maintained family inventory to place tests,
 rather than hardcode a list of 210 historical identities.
