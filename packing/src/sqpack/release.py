@@ -1091,6 +1091,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
+            "packing/devtools/regularize_select.py",
+            "packing/devtools/regularized_drawings.py",
+            "packing/src/sqpack/cli/validate.py",
             "packing/atlas/known-best/bound-citations.json",
             "packing/atlas/known-best/composite-figure.json",
             "packing/devtools/adopt_houses.py",
