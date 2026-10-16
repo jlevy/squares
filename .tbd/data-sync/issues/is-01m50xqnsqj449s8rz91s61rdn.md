@@ -5,7 +5,7 @@ title: "Regularize 3b: 153, 154, 207, 211, 237, 241, 302, 304 (re-housed by #614
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:08.951Z
-updated_at: 2026-10-16T07:51:53.290Z
+updated_at: 2026-10-16T09:58:58.174Z
 started_at: 2026-10-16T05:13:41.663Z
 ---
 
@@ -25,3 +25,5 @@ started_at: 2026-10-16T05:13:41.663Z
 2026-10-16T06:14Z user-eb-reg-3b3c: per coordinator, the 3b branch will stack on #644's branch claude/ecstatic-edison-8en33t-regularize-3a (fetched at selection time; 42ef42e5a as of 06:00Z), 3c chained on 3b; no site edition or poster rebuild in these PRs (done once at the stack's top). 3b runs: grid 0.5 and 1 deg done, 5 deg in progress; driver at 241 (153, 207, 211, 237 row 10 admit; 154 row 7 review). Selections will run from a worktree at #644's head, one worker each while a generator lane runs.
 
 2026-10-16T07:52Z user-eb-reg-3b3c: 3b runs done. Driver evand-regularize-3b-1016 (1 worker): 2,072.7 CPU-s, 4,353 s wall; 153 207 211 237 241 302 row 10 admit, 154 row 7 review, 304 row 4 held. Grid-slack 3b-deg05/deg1/deg5-1016: 604.9/612.8/625.4 CPU-s (bash time; one process). Selection 3b running (1 worker) from worktree .claude/worktrees/reg-3b3c-select at #644 head 780d81b82 since 06:37Z.
+
+2026-10-16T10:05Z user-eb-reg-3b3c: 3b pushed: branch claude/intake-2026-10-16-regularize-3b at 75babaea1 (data d1f49d8ff + re-pin), stacked on #644's head 780d81b82. Selection 3b: 7 chosen (evand same at 153 207 211 237 241 302; grid 5 deg at 154), 304 decided-no-better in SETTLED (runs evand-regularize-3b-1016 + grid-slack-3b-deg05/deg1/deg5-1016). Owner list: 154 evand row 7 review; register candidates 153 (-1.6e-14) and 207 (-2.4e-12). PENDING_ALLOWED 11 -> 3. Next: release-impact check, PR, validation.

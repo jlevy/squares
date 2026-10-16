@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T09:54:58.164Z
+updated_at: 2026-10-16T09:59:11.089Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -60,3 +60,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 09:55Z coordinator: the session hit its usage limit at ~08:30Z (every sub-agent stopped mid-step; state saved) and resumed at 09:52Z. Killed an orphaned system-python3 process (stdin script from a task that exited 07:06Z, ~3 h of one core). Resumed B, I, J, H, addr-641-650, addr-652; D and E wait without polling for their dependencies; the watcher agent is replaced by a coordinator Monitor script (no tokens). Merge-ready so far: #647, #648.
 
 2026-10-16 ~10:00Z coordinator: lane E reported: PR #649 at bc92041ea raises T-184 (s(76)=9) and T-191 (s(95)=10) to V3/C3 (derived by check_results after mapping #652's review), S3 confirmed; records tier green; hosted CI green except a likely frontend flake (test_atlas_fills_available_width_with_and_without_scripts, 3200px scripts off). Left: merge #652's fixed head into #649 (resume lane E when it lands), F8's owed zm_mixed.py mutant refusals (owner question 16), case adoption deferred until F8 is answered. Senior + correctness review of #649 started.
+
+2026-10-16 ~10:10Z coordinator: lane H done: PR #651 (stacked on #642) green at ef43dd02f: #639 packet evand-exact-cur-2026-10-16; report-order ledger upper-bounds-20261016 (16 recorded; ties 51/70/153/207; not recorded 172/263/297); T-193 (#639's 16 sides) at V3/C3 after verify_exact.py replay 23/23 VALID, 76/76 mutants refused, SymPy irreducible 23/23 (~0.36 CPU-h); T-194 s(19) = 3+(4/3)sqrt2 (optimality, V0/C0, draft S5), n-019 links the proof. Lane D interim: leftovers decided (0 views chosen; SETTLED rewritten so no owed remains), data commit local only, waits for lane B's push; think-co6o and think-zjmt verified and closed; think-drze opened for unowned irregular drawings (292, 131, 176 after #644). Started: senior review of #642 + #651 (with correctness pass) and the stage 4 review of the s(19) Lean proof (think-o40t, strong-max, user-eb-review-640).

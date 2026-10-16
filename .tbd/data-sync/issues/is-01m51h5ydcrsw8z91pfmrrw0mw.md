@@ -5,12 +5,12 @@ title: Owner decisions pending from the 2026-10-15/16 intake passes (each blocks
 kind: task
 status: open
 priority: 1
-version: 5
+version: 6
 labels: []
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 created_at: 2026-10-16T04:57:59.468Z
-updated_at: 2026-10-16T07:52:06.142Z
+updated_at: 2026-10-16T09:59:14.883Z
 ---
 Collected by the coordinator 2026-10-16 so another agent can pick them up. Each item names the bead that owns it; act only on the owner's word.
 1. #574 (BuddenPing, 148 certificate refinements, a PR): merge it and adopt T-174? (think-9v2k). WARNING: adopting T-174 re-houses 35 counts (68, 84, 86, 88, 108, 126, 127, 130, 131, 132, 172, 181, 182, 199, 206, 208, 209, 210, 228, 238, 239, 240, 259, 266, 267, 268, 270, 273, 292, 297, 301, 305, 306, 307, 308); since #636 the gate will fail unless each is re-regularized or added to PENDING_ALLOWED with a bead (think-g3q7 documents the step). The #574 reply is held until the decision.
@@ -34,3 +34,5 @@ Collected by the coordinator 2026-10-16 so another agent can pick them up. Each 
 15. (user-eb ~07:10Z) PR #649 (lane E, think-ccjt) is red only on release impact: it needs a site patch cut (devtools.cut_release v0.7.15 --component site --impact patch; dry run clean), which this session's permission check refused for the lane as 'Production Deploy'. Not worked around. Since #644, #648 and #649 all need v0.7.15 (and #646 holds one too), the cut is a merge-time step for whichever merges after the first; the owner either allows the command for this session or makes the cut at merge.
 
 16. (user-eb ~07:55Z, from the T-184/T-191 review, PR #652, F8) does a zm_mixed.py refusal at depth limit 12 meet stage 4's mutated-certificate rule (two mutated certificates refused by every checker that accepted the original)?
+
+17. (user-eb ~10:10Z, from lane H / PR #651) RP-3: #639 plus its replay is a second exact route to T-174's algebraic sides at 70, 153, 207. 18. Should n-019's reported lower lane and status take T-194, as n-017's took T-153? 19. Create an n-19 label (also item 7)? 20. Budget for #640's full build (think-nqnl, ~190-420 CPU-h). 21. Adoption of T-193's 16 sides beside T-174's held houses. 22. Ledger-start gap: T-174's unprinted rationals are missing from intake_ledger's start (no bead yet). 23. Lane D's run evidence tarball (scratchpad laneD/evidence/leftovers-1016-runs.tar.gz, sha256 6142cb07...): keep durably (a data/ release?) given #644's B1.
