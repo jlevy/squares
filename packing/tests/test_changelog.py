@@ -169,6 +169,33 @@ def test_inline_markdown_keeps_safe_links_and_escaped_literals_distinct() -> Non
         with pytest.raises(ValueError, match="links are not allowed"):
             render_changelog.inline_html(linked, allow_links=False)
 
+    names = (
+        '[John Bidwell](<https://example.org/John Bidwell> "John Bidwell"); '
+        r"`John Bidwell`; $\text{John Bidwell}$; John Bidwell."
+    )
+    renamed = render_changelog.inline_html(
+        names, transform_text=lambda text: text.replace("John Bidwell", "Bidwell")
+    )
+    assert (
+        '<a href="https://example.org/John%20Bidwell" title="John Bidwell">Bidwell</a>'
+        in renamed
+    )
+    assert "<code>John Bidwell</code>" in renamed
+    assert [formula.source for formula in site_math.formula_sources(renamed)] == [
+        r"\text{John Bidwell}"
+    ]
+    assert renamed.endswith("; Bidwell.")
+    assert (
+        '<a href="https://example.org/John%20Bidwell" title="John Bidwell">John Bidwell</a>'
+        in render_changelog.inline_html(names)
+    )
+    assert (
+        render_changelog.inline_html(
+            "John Bidwell", transform_text=lambda _text: "<b>Bidwell</b>"
+        )
+        == "&lt;b&gt;Bidwell&lt;/b&gt;"
+    )
+
 
 def test_shared_renderer_orders_links_math_and_anchors() -> None:
     data = document()
@@ -946,6 +973,7 @@ def test_documentation_is_bookkeeping_but_not_a_public_news_topic() -> None:
     data["entries"][0]["topics"] = ["upper-bound", "verification"]
     render_changelog.validate(data)
     assert 'data-news-entry="admission"' in render_changelog.render_news(data)
-    data["entries"][0]["topics"] = ["documentation"]
-    with pytest.raises(ValueError, match="topics"):
-        render_changelog.validate(data)
+    for topic in ("documentation", "correction", "audit"):
+        data["entries"][0]["topics"] = [topic]
+        with pytest.raises(ValueError, match="topics"):
+            render_changelog.validate(data)

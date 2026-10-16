@@ -601,7 +601,12 @@ Project uses the existing Engineering chip fill and never becomes a result kind.
 Documentation remains an internal contribution category, not a public topic.
 Pure document-maintenance entries use `news_exclusion` and remain in the full changelog;
 their earlier News bookmarks forward there.
-News offers filters for the topics present in its eligible archive.
+News excludes Correction and Audit as topic labels while Results retains those
+registered kinds. News offers joined, compact filters for the topics present in its
+eligible archive, using the cards’ shared fills and sentence-case labels in both themes.
+Each topic’s tally counts articles at the selected significance levels, independently of
+which topics are selected; All counts unique articles across those levels.
+The homepage displays each topic once, above the evidence and status row.
 Shared chips reset text transformation and small caps so the same label has the same
 casing on each surface.
 The Results Kind selector uses the same display labels without changing the register’s

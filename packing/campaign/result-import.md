@@ -650,13 +650,18 @@ regularization. It is orthogonal to significance: project work can be S1/S2, and
 label gives no score increase.
 It maps to the shared **Project** topic in News; it is not a scientific result kind.
 Engineering and Verification remain available topics, alongside the precise result
+kinds. News excludes Correction and Audit topic labels; Results keeps those registered
 kinds.
 
 For S3–S5, draft a concise News entry before merge, or record an editorial omission when
 the PR is an intermediate research checkpoint without a distinct reader-facing
 development. Name what changed, why it matters, the source PR and relevant `result_ids`,
 direct public artifact links where available, and the actual verification or publication
-limits. Use the real event date once known.
+limits.
+Use surnames throughout News titles, summaries, details and display labels unless
+two distinct people share one; retain handles, organization names and literal cited
+titles. Canonical attribution keeps full identities.
+Use the real event date once known.
 The merged delivery date and the independently verified publication date are separate
 facts. A merged PR alone does not establish a live website, released artifact or
 completed proof replay.
