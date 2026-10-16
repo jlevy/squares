@@ -1087,6 +1087,54 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-146.md",
+            "packing/frontier/n-154.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-237.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The records lane of 16 October 2026 (think-z7wn) raises T-185 to T-190 to V3/C3, "
+            "moves fifteen houses to T-186, T-187, T-188 and T-190 with their case records, "
+            "coverage overrides and adoption code, and regularizes six of the re-housed "
+            "counts. Rendered at one link revision (e2e018f3), once from the base branch's "
+            "tree (the regularization stack's top at 7e44e4bd) and once from this branch's, "
+            "render_packing_methods, render_n11_optimality_review and "
+            "render_n11_threshold_bound_review write 50 files, byte-identical between the two "
+            "trees. The explainer's render needs a browser this host lacks, so it is "
+            "source-reviewed only. No PDF was printed. All four papers keep v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2; the site takes the patch."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
             "site",
         ),
         paths=(

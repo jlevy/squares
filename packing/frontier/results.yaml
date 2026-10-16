@@ -25013,9 +25013,10 @@ results:
       The packet's complete repository replay covers n = 175 with its two controls: the
       positive passed and the duplicate-square and outside-container controls were refused
       on both maintained routes, 91,350 pair decisions, decided twice on 11 October 2026;
-      the positive clears every wall by 1/(2*10^20) and every pair by just under 1e-20. The
-      16 October review decided the three jobs again on both maintained routes, all equal
-      (E-couzo-506-n175-exact-feasibility). The 12 October review
+      the positive clears every wall by 1/(2*10^20) and every pair by just under 1e-20.
+
+      The 16 October review decided the three jobs again on both maintained routes, all
+      equal (E-couzo-506-n175-exact-feasibility). The 12 October review
       (docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md, RY-10) and the 16
       October review each decided it on the third route, with six controls; the 12 October
       decision is not retained, and the 16 October one is kept with that review but cited by
