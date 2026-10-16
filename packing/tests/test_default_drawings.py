@@ -939,6 +939,14 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
         "run": {"id": "grid-slack-a-test-run"},
     }
     strong.pop(defaults.LAPSED, None)
+    # The decision names a run the retained evidence holds, a copied block that lists no
+    # counts, so the settlement-run rules ask nothing more of it (review F1 of #644).
+    records = defaults.run_records()
+    run = next(
+        run
+        for run, found in sorted(records.items())
+        if found.retained and found.counts is None and found.generator == "evand-regularize"
+    )
     settled = {
         **defaults.SETTLED,
         n: defaults.Settled(
@@ -947,7 +955,7 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
             str(witness["path"]),
             witness["revision"],
             str(witness["side"]),
-            (("evand-regularize", "a-test-run"),),
+            (("evand-regularize", run),),
             "drew no better",
             "a test",
         ),
