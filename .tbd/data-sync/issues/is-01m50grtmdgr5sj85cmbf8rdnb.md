@@ -3,9 +3,9 @@ type: is
 id: is-01m50grtmdgr5sj85cmbf8rdnb
 title: "Intake 2026-10-15 lane C2: stage-7 replies to the owner's tracking issues (#532, #534-#541, #544, #550, #554), and their record"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: ecstatic-edison-lane-c2
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:31:35.181Z
-updated_at: 2026-10-15T20:41:35.956Z
+updated_at: 2026-10-16T01:51:18.725Z
 started_at: 2026-10-15T19:31:36.245Z
+closed_at: 2026-10-16T01:51:18.724Z
+close_reason: "#625 merged 2026-10-16 (ee9cec6ea)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
