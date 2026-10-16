@@ -1583,18 +1583,48 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
-            "site",
         ),
         paths=(
+            "packing/campaign/result-requests.yaml",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/default_drawings.py",
             "packing/devtools/exact_sides.py",
             "packing/devtools/select_houses.py",
             "packing/frontier/README.md",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-084.md",
+            "packing/frontier/n-086.md",
+            "packing/frontier/n-088.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-105.md",
+            "packing/frontier/n-108.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-127.md",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-130.md",
+            "packing/frontier/n-131.md",
+            "packing/frontier/n-146.md",
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-179.md",
+            "packing/frontier/n-180.md",
+            "packing/frontier/n-199.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/n-208.md",
+            "packing/frontier/n-209.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/n-238.md",
+            "packing/frontier/n-239.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
             "packing/src/sqpack/cli/validate.py",
         ),
         outputs=(
-            "index.html",
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
             "papers/n11-optimality-review.html",
@@ -1605,19 +1635,21 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "The house rule (think-sa5r) changes what `select_houses.select` derives by "
-            "default, adds `exact_sides`, stages T-174's 63 counts in `PENDING_ADOPTION`, "
-            "and has `adopt_houses` replay records under the rule their pass ran under. "
-            "No builder calls the selection: the builders reach `adopt_houses` through "
-            "`generate_frontier_case` and `source_supersession`, which call `holds`, "
-            "`adopt_case`, `held_note` and `carries_held_note`, whose output is unchanged "
-            "on every committed record (`adopt_houses.refresh(write=False)` and "
-            "`adopt_houses.check()` both return nothing on this branch), and no case "
-            "record, coverage row, deferral or register entry changes. `default_drawings` "
-            "changes only the words `--compare` prints, `validate.py` only the records "
-            "`bead tree` reads, and no builder reads `packing/frontier/README.md`, whose "
-            "edit defines the house. Source-compared; no render was taken, and every "
-            "component keeps its version."
+            "The house rule (think-sa5r) changes what `select_houses.select` derives, adds "
+            "`exact_sides`, stages T-174's 63 counts in `PENDING_ADOPTION` and keys "
+            "`default_drawings`' deferrals on their witnesses; its records pass (review A2 "
+            "of #660) rewords the notes of the 63 staged case records, nine register "
+            "entries, five source-register passages and two requests entries to say the "
+            "hold of 15 October and RP-3's wait ended. Rendered at link revision 3301a1cf "
+            "from main 3301a1cf and from this branch, the optimality review's, the "
+            "threshold-bound review's and the survey's HTML and Markdown are byte-identical, "
+            "as are all 50 files the three renderers write; their PDFs print from that HTML "
+            "and were not rebuilt. The explainer, which renders through a browser this host "
+            "lacks, reads the register only to count its results and the new ones among "
+            "them, which no edit here changes, and none of the other inputs: "
+            "source-compared. All four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2. The "
+            "site's case and result pages print the reworded notes, so the site needs an "
+            "edition, cut in merge order."
         ),
     ),
     ReleaseNoPublicChange(
