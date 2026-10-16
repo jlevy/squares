@@ -490,6 +490,19 @@ The observed 210 extra normal skips must disappear as unexplained omissions.
 The remaining known optional omissions stay enumerated as omissions, with reason and
 owner; they are never counted as passes.
 
+The complete `tests/test_site_forwarders.py` module belongs to the existing
+`site table layout in Chromium` owner.
+`SITE_LAYOUT_TESTS` assigns its 51 cases to that browser-equipped owner and excludes the
+module from the four generic quick shards.
+The owner first runs its remaining functional modules in parallel, then all 51 forwarder
+cases in a fresh serial pytest process, then the four native-frontier load-budget cases
+in their separate serial process.
+All three commands keep one shared deadline and require Chromium through
+`SQPACK_REQUIRE_CHROMIUM=1`; a missing browser fails rather than skips.
+Each command enables `faulthandler_timeout=60` for stack diagnostics while retaining
+pytest’s default `faulthandler_exit_on_timeout=False`. This adds no ordinary CI job or
+dependency; the combined Linux cost of the three phases remains to be measured.
+
 Use collected metadata/capabilities and the maintained family inventory to place tests,
 rather than hardcode a list of 210 historical identities.
 New browser tests must either acquire a valid placement automatically or fail the
@@ -845,21 +858,89 @@ is a diagnostic candidate, not the identified unfinished case or proof that runn
 variance caused either timeout.
 
 Bead `think-yops` owns diagnosis.
-Reuse the existing flushed progress writer for native quick and slow pytest commands,
-recording test starts and completed setup, call and teardown phases.
-Keep artifact paths outside source, record the actual source and worker shape, and
-preserve the exact selections, assertions, worker caps and command deadlines.
-The default reachable-test event stream must remain compatible.
-Interrupted-child tests must demonstrate that the last completed phase survives
-cancellation.
+[PR #629](https://github.com/jlevy/squares/pull/629) added the existing flushed progress
+writer to native quick and slow commands, recording test starts and completed setup,
+call and teardown phases.
+Its source, run and effective pytest worker identities bind each external journal to its
+command; the default reachable-test event stream remains unchanged.
+Focused interruption controls demonstrate that the last completed phase survives
+cancellation. Its end-to-end writing and artifact cost remains unmeasured.
 
-This adds diagnostics to existing commands, without another job or dependency.
-Its end-to-end writing and artifact cost remains unmeasured; focused probe times are not
-a performance result.
-After review, choose one instrumented observation deliberately, retain its
-unfinished-work evidence if it times out, and use that evidence to select the next
-repair. Do not raise a deadline, suppress a test, or call a clean later run an
-explanation of the original failures.
+The first instrumented
+[main run 38808495711](https://github.com/jlevy/squares/actions/runs/38808495711), at
+`22a67ce4`, failed after 35m23s. Its
+[integration-suites job](https://github.com/jlevy/squares/actions/runs/38808495711/job/116675434032)
+again reached the actual 900-second shard-C command deadline, reporting a 901-second
+wall after cleanup. The unfinished node was
+`tests/test_site_forwarders.py::test_the_deployed_site_check_follows_the_same_forwarders`.
+Its setup completed at 21:33:09.122387 UTC; no call, teardown or node completion was
+recorded before termination at 21:45:13 UTC. The other three workers finished
+successfully by 21:36:18 UTC. Twelve other native owners passed, including all 241 slow
+cases in 1,638.238s. The aggregate remains failed.
+
+The forwarder module had no entry in `SITE_LAYOUT_TESTS`, so ordinary PR shards could
+skip its browser cases while main installed Chromium and executed them in shard C.
+Assign the complete module to the existing required Chromium owner and exclude it from
+the generic shards through the shared tuple.
+Add 60-second pytest stack dumps to both existing site-layout commands, retaining
+`faulthandler_exit_on_timeout=False`, their shared deadline, worker policy and
+assertions. These diagnostics do not add a command, job or dependency.
+
+A serial macOS reproduction passed that node in 25.68s and all 51 module cases in
+54.79s. These are single command-wall observations from a different platform, not Linux
+cost measurements or a speedup estimate.
+The corrected ownership’s recurring Linux cost and critical-path effect remain unknown.
+The journal identifies an unfinished call but does not establish why it blocked.
+Both original failures in run 38797565375 remain unexplained; a clean later run cannot
+supply their missing diagnosis.
+
+### October 15 Required-Browser Failure and Diagnostic Gap
+
+The first required-browser run of [PR #634](https://github.com/jlevy/squares/pull/634),
+[Packing 38819302541](https://github.com/jlevy/squares/actions/runs/38819302541), failed
+at head `7f5c351e`, tested as clean merge tree `693b953a`. The functional browser
+command reached its enforced 900-second deadline in 901.001s; the serial load checks
+never started. Partial output includes an anonymous failed-test marker.
+No completed functional JUnit or browser worker journals survived, so neither all 51
+forwarder outcomes nor that failed assertion is established.
+The stack dump shows Playwright’s dispatcher waiting; it does not identify the suspended
+browser API or prove a lifecycle defect.
+
+The missing journals have a separate confirmed cause: native progress was enabled only
+for the quick and slow `-m` expressions.
+The custom browser command selects through `-k`, so moving ownership lost the earlier
+node-level evidence.
+Bead `think-fr1c` extends the existing writer to these commands, preserving their actual
+selection metadata, and retains failed-phase details before interruption.
+
+Use a dispatch-only browser diagnostic to obtain wire request/reply evidence for the
+known node under 120 seconds, followed by its containing module under 180 seconds only
+if needed.
+Reuse native process cleanup and external artifacts; these observations do not
+replace required CI. No diagnostic job runs on an ordinary PR or push, and no test
+assertion, worker cap or enforced deadline is relaxed.
+
+The completed lower browser owner took 470.024s; the failed upper owner took 901.004s.
+Both exceed the existing 165-second advisory target.
+These different selections on separate runners are not a controlled performance ratio.
+`think-ht59` remains open; its advisory cost policy does not excuse an enforced timeout.
+Keep this stack unmerged until the actual failure is resolved and matching-head required
+checks pass.
+
+The bounded Linux observations both passed at diagnostic source `ad14ac6c`: the exact
+node executed once without skips in 25.871s, and all 51 module cases executed without
+skips in 77.874s. Every setup, call and teardown completed.
+These observations do not explain the parallel owner’s failure.
+
+Select fresh-process isolation for the required owner: run the remaining functional
+modules with their existing parallel allocation, then all 51 forwarder cases in a serial
+pytest process, then the four existing serial load-budget cases.
+One monotonic 900-second deadline spans all three commands.
+The collection control proves their pairwise disjoint union equals the original
+selection. This costs another pytest startup and serial execution of the module; the
+standalone observation supports the choice without predicting a combined runtime.
+Matching-head required CI must establish whether the owner now completes.
+Keep the original Playwright cause in `think-yops` and the broader cost work open.
 
 ## References
 

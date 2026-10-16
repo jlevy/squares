@@ -1,4 +1,8 @@
-name: Font delivery diagnostic
+name: Browser diagnostics
+
+# The default font observation keeps its original immutable inputs and protocol.
+# Forwarder modes instead observe the dispatched source, with fixed 120/180s test caps.
+# All modes are manual evidence only and never substitute for a required CI owner.
 
 # A manual observation of the n11 threshold paper's first screen while its web fonts are
 # held, recorded with the physical faces Chromium shaped in each phase. It qualifies
@@ -29,6 +33,15 @@ name: Font delivery diagnostic
 
 "on":
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Manual observation to run
+        type: choice
+        default: font
+        options:
+          - font
+          - forwarder-node
+          - forwarder-module
 
 permissions:
   contents: read
@@ -41,6 +54,7 @@ concurrency:
 jobs:
   # Renders the pre-fix page at 4963448e3; it cannot observe #442's fix (29a79cd10).
   font-diagnostic:
+    if: "inputs.mode == 'font'"
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -140,5 +154,59 @@ jobs:
         with:
           name: threshold-font-diagnostic
           path: packing/diagnostics
+          if-no-files-found: error
+          retention-days: 7
+
+  forwarder-diagnostic:
+    if: "inputs.mode == 'forwarder-node' || inputs.mode == 'forwarder-module'"
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: packing
+    env:
+      BROWSER_DIAGNOSTIC_MODE: ${{ inputs.mode }}
+      BROWSER_DIAGNOSTIC_ARTIFACTS: ${{ github.workspace }}-browser-diagnostics
+    steps:
+      - name: Check out the dispatched source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          submodules: true
+          persist-credentials: false
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      # The locked dev group supplies Node for the site's static math renderer.
+      - name: Synchronize locked development dependencies
+        run: uv sync --frozen --all-extras --group dev
+      - name: Cache the pinned Chromium browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
+      - name: Install the pinned Chromium headless shell and Linux dependencies
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m playwright install --with-deps --only-shell chromium
+      - name: Observe the fixed forwarder selection
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m devtools.browser_diagnostic
+          --mode "$BROWSER_DIAGNOSTIC_MODE" --artifacts "$BROWSER_DIAGNOSTIC_ARTIFACTS"
+      - name: Preserve raw diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: forwarder-browser-diagnostic
+          path: ${{ env.BROWSER_DIAGNOSTIC_ARTIFACTS }}
           if-no-files-found: error
           retention-days: 7

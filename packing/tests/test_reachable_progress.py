@@ -573,6 +573,111 @@ def test_native_lane_cancellation_keeps_its_last_completed_phase(tmp_path: Path)
     assert end["status"] == "cancelled"
 
 
+def test_browser_owner_keeps_progress_without_a_marker_expression(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    children: list[tuple[validate.Context, Sequence[str]]] = []
+
+    def capture(context: validate.Context, command: Sequence[str], **_options: object) -> str:
+        children.append((context, command))
+        return "passed"
+
+    monkeypatch.setattr(validate, "_run_command", capture)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=2,
+        inner_jobs=1,
+        environment={
+            **os.environ,
+            "PACKING_VALIDATION_ARTIFACT_DIR": str(tmp_path / "artifacts"),
+        },
+    )
+    validate._site_layout_tests(context)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert len(children) == 3
+    for child, command in children:
+        assert "devtools.reachable_progress" in command
+        assert child.environment["PACKING_REACHABLE_TEST_MARKER"] == ""
+        assert child.environment["PACKING_REACHABLE_TEST_PHASES"] == "1"
+        assert child.environment["PACKING_REACHABLE_TEST_SOURCE_COMMIT"]
+    assert [child.environment["PACKING_REACHABLE_TEST_LANE"] for child, _ in children] == [
+        "browser-functional",
+        "browser-forwarders",
+        "browser-load",
+    ]
+    assert [
+        child.environment["PACKING_REACHABLE_TEST_EXCLUSIONS"] for child, _ in children
+    ] == [
+        f"tests/test_site_forwarders.py, {validate.SITE_LOAD_BUDGET_TEST}",
+        "all other browser cases",
+        "all other browser cases",
+    ]
+
+
+def test_explicit_pytest_progress_refuses_other_commands_before_writing(tmp_path: Path) -> None:
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={"PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+    with pytest.raises(validate.StepFailureError, match="native pytest command"):
+        _run_native(
+            context,
+            (sys.executable, "-c", "raise AssertionError('must not execute')"),
+            pytest_progress=("browser", "none"),
+        )
+    assert not artifacts.exists()
+
+
+def test_failed_phase_is_flushed_before_a_later_call_is_cancelled(tmp_path: Path) -> None:
+    test_file = tmp_path / "test_probe.py"
+    test_file.write_text(
+        "import time, pytest\n"
+        "@pytest.mark.slow\ndef test_bad(): assert False, 'retained assertion detail'\n"
+        "@pytest.mark.slow\ndef test_wait(): time.sleep(30)\n",
+        encoding="utf-8",
+    )
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+        timeout_seconds=15,
+    )
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        future = pool.submit(_run_native, context, _native_probe(test_file))
+        try:
+            deadline = time.monotonic() + 10
+            while time.monotonic() < deadline:
+                paths = list(artifacts.glob("*.progress-main.jsonl"))
+                if paths and any(
+                    str(row["nodeid"]).endswith("::test_wait") and row.get("phase") == "setup"
+                    for row in _rows(paths[0])
+                ):
+                    break
+                if future.done():
+                    future.result()
+                    pytest.fail("probe exited before the blocked call")
+                time.sleep(0.05)
+            else:
+                pytest.fail("probe never reached the blocked call")
+        finally:
+            context.processes.stop()
+        with pytest.raises(validate.StepCancelledError):
+            future.result(timeout=5)
+    rows = _rows(next(artifacts.glob("*.progress-main.jsonl")))
+    (failure,) = [row for row in rows if row["event"] == "failure"]
+    assert str(failure["nodeid"]).endswith("::test_bad")
+    assert failure["phase"] == "call"
+    assert "retained assertion detail" in str(failure["longrepr"])
+    assert not list(artifacts.glob("*.junit.xml"))
+
+
 def test_pool_phases_have_distinct_receipts_and_effective_resource_identity(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

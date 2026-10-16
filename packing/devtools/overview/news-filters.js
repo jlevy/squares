@@ -70,6 +70,7 @@
     }
   };
   const apply = () => {
+    const scored = cards.filter((card) => scores.has(card.dataset.newsScore || ""));
     for (const button of scoreButtons) {
       button.setAttribute(
         "aria-pressed",
@@ -77,11 +78,19 @@
       );
     }
     for (const button of topicButtons) {
-      button.setAttribute(
-        "aria-pressed",
-        String(topics.has(button.getAttribute("data-news-topic") || "")),
-      );
+      const topic = button.getAttribute("data-news-topic") || "";
+      button.setAttribute("aria-pressed", String(topics.has(topic)));
+      const tally = button.querySelector("[data-news-tally]");
+      if (tally) {
+        tally.textContent = ` (${scored.filter((card) => subjects(card).includes(topic)).length})`;
+      }
     }
+    const all = controls.querySelector('[data-news-all="topics"]');
+    const allTally = all?.querySelector("[data-news-tally]");
+    if (allTally) {
+      allTally.textContent = ` (${scored.length})`;
+    }
+    all?.setAttribute("aria-label", `All topics (${scored.length})`);
     let shown = 0;
     for (const card of cards) {
       card.hidden = !matches(card);
