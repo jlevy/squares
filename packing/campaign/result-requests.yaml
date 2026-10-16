@@ -5925,6 +5925,8 @@ issues:
         couzo-certificates-2026-10-11 packet and is not registered unless its author asks
         (think-9fjl), and Daniil Ostashev''s #528 composition (T-158), 2.94e-03 below it, is the
         house at 175 since 12 October'
+      - 'both are now the houses of their case records; since 15 October Daniil Ostashev''s #575 packing
+        (T-175) is the house at 304, and T-152 stays the house at 305'
     - url: https://github.com/jlevy/squares/issues/506#issuecomment-6167890181
       date: '2026-10-14'
       by: jlevy
@@ -5957,6 +5959,8 @@ issues:
         confirmation: C3
         status: confirmed
       - result: nine-beyond-horizon
+      corrects:
+      - https://github.com/jlevy/squares/issues/506#issuecomment-6130063939
     close_when: The import and its disposition, including the beyond-horizon counts, are on main,
       the house adoption at 304 and 305 has landed or is owned, and the owner has posted the
       resulting state; the four unnamed certificates are imports of their own, and optimality is
@@ -5981,6 +5985,16 @@ issues:
       when this was written), to be on main; it says the certificate stays in the packet unless he
       wants it registered, asks whether he does, and names the final reply in `corrects` once that
       reply's statement is marked `outdated` (review A1 of #558).
+
+      The follow-up of 16 October (issuecomment-6206057024) first named the current row at each of
+      the nine counts beyond the corpus as the report that superseded the issue's row there, "in the
+      order they reached us", dated those at 339 and 378 to 381 to #627, and left out Kevin Fang's
+      certificates at 380 and 381. #602 superseded all nine on 14 October: by #561 at 338, 344, 375,
+      376 and 378, by #583 at 339 and 379, and by fang-direct-certificates-2026-10-13 at 380 and 381.
+      It was edited in place at 03:46Z that day, with a visible note, to say who superseded each row
+      and, separately, which row is current at each count, so the reply as it stands states nothing
+      outdated (PR #637's review, A2). It also corrects the final reply's statement that T-152 is the
+      house at both 304 and 305, marked `outdated` there (A5).
 
       Layer 6 marks that statement `outdated` on the final reply: the certificate stays in the
       packet, unregistered unless the author asks, and T-158 is the house at 175, 2.94e-03 below
@@ -7482,6 +7496,12 @@ issues:
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
+    notes: >-
+      The final reply of 16 October (issuecomment-6206059300) first said Evan Daniel's #584
+      composition superseded the issue's row at 375, though Couzo's certificate of 13 October
+      (couzo-certificates-2026-10-13) superseded it first, and #584 that one. It was edited in place
+      at 03:46Z that day, with a visible note, to say so, so the reply as it stands states nothing
+      outdated (PR #637's review, A2).
   - number: 562
     title: 's(129) ≤ 11.870013850405, s(204) ≤ 14.808663234387, s(303) ≤ 17.909958291070: registration request'
     author: dostashev
@@ -7968,6 +7988,13 @@ issues:
       October, after #602 merged, to say that the record on main has no row for #570 at
       379, because the certificate it names is in no reachable commit, and that the
       ledger's verdict is unchanged; the follow-up of that day corrects its 379 statement.
+
+      The reply `--report` lists as due (T-172 at V3/C3 and
+      E-couzo-583-certificate-report reviewed, where the follow-up of 14 October stated V0/C0 and
+      recorded), which would also close the issue, is held for the owner's decision on rows without a
+      retained certificate, as #570's 379 is. It goes out on that decision or on the owner's
+      instruction, from think-rfce, and a pass that finds it due does not post it before then (PR
+      #637's review, A4).
   - number: 573
     title: 'Exact rational certificates for 6 packings below register (n = 103, 153, 207, 209, 258, 270):
       registration request'
@@ -8057,6 +8084,11 @@ issues:
       owner's: the credit at 153 and 207 (decision 1 of jlevy/squares#602, RQ-5 of the 14 October
       review) and adoption against PR 574's algebraic certificates there (T-174, decided on one
       exact route).
+
+      That follow-up (issuecomment-6206056718) first gave T-174's margins at 153 and 207 as 1.57e-14
+      and 2.42e-12, without the "at least" of the 14 October ledger's Refinement Chains. It was
+      edited in place at 03:46Z that day, with a visible note, to say at least, so the reply as it
+      stands states nothing outdated (PR #637's review, A6).
   - number: 574
     title: 'research: submit 148 square-packing certificate refinements with exact endpoints'
     author: BuddenPing
@@ -8121,6 +8153,12 @@ issues:
       20:26Z on 14 October to the regenerated draft, once devtools.decide_undecided_comparisons had
       decided 17 of the 21 undecided comparisons exactly (result-import.md, Report-Order Verdict
       Comments); the comment as recorded is the edited one.
+
+      The reply `--report` lists as due (T-174 at V3/C3 and its two evidence entries reviewed, where
+      the follow-up of 14 October stated V0/C0 and recorded) is held for the owner, who decides the
+      pull request and T-174's adoption and, by `close_when`, posts the resulting state. It goes out
+      on that decision or on the owner's instruction, from think-9v2k, and a pass that finds it due
+      does not post it before then (PR #637's review, A4).
   - number: 575
     title: 's(176) ≤ 13.795872318437, s(211) ≤ 14.993694186584, s(241) ≤ 15.987134249051, s(304) ≤ 17.929427758076:
       registration request'
@@ -8154,6 +8192,7 @@ issues:
       queued: false
     beads:
     - think-34sy
+    - think-qag2
     answer_bead: think-34sy
     replies:
     - url: https://github.com/jlevy/squares/issues/575#issuecomment-6165052668
@@ -8206,6 +8245,15 @@ issues:
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
+    notes: >-
+      The final reply of 16 October closed the issue with 176 still on the 14 October ledger's list
+      of owner decisions (Certificate Committed Before the Report That Holds the Count), as #562 was
+      closed with 176 on the same list. It says the issue will be reopened with a reply if the owner
+      rules otherwise; think-qag2 holds that, waiting on the owner's ruling (PR #637's review, A3).
+
+      That reply (issuecomment-6206059896) first dated T-186 at 304 to #627, though #612 registered
+      it on 15 October. It was edited in place at 03:46Z that day, with a visible note, to say since
+      15 October, so the reply as it stands states nothing outdated (PR #637's review, A2).
   - number: 582
     title: 's(381) <= 19.985624661051481: registration request'
     author: mstrmg
@@ -8278,7 +8326,8 @@ issues:
       claim: s(339), s(379), s(380), s(381) and s(382) by exact rational certificates, beyond the case corpus.
       source: body
       not_registered: 'Beyond the n <= 324 corpus: source-register rows, each below the row it supersedes;
-        issue 586 supersedes those at 339, 379, 380 and 382.'
+        issue 584 supersedes the one at 339, issue 586 those at 379, 380 and 382, and Couzo''s 487b058
+        certificate the one at 381.'
       queued: false
     beads:
     - think-rfce
@@ -8347,6 +8396,13 @@ issues:
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
+    notes: >-
+      The final reply of 16 October (issuecomment-6206060386) first dated the supersession of all five
+      rows beyond the corpus to #627, though only the one at 381 was superseded then, by Couzo's
+      487b058 certificate; #602 superseded the other four on 14 October, at 339 by #584 and at 379,
+      380 and 382 by #586. The issue's 381 is the certificate that couzo-certificates-2026-10-13
+      records at b85dee2. The reply was edited in place at 03:46Z that day, with a visible note, to
+      say so, so it states nothing outdated (PR #637's review, A2).
   - number: 584
     title: 's(339) ≤ 18.926898900357, s(364) ≤ 19.583782203951, s(375) ≤ 19.882451030482: registration request
       (beyond-horizon)'
@@ -8618,6 +8674,10 @@ issues:
       - result: ties-211-241
       corrects:
       - https://github.com/jlevy/squares/issues/593#issuecomment-6163849805
+      outdated:
+      - 'T-183 is the smallest side recorded at 237; since #627, Francisco Couzo''s #607 (T-189) and
+        4e4c8ce (T-190) certificates are recorded 1.01e-4 below it, and T-183''s headline reads the
+        smallest known side there when registered'
     - url: https://github.com/jlevy/squares/issues/593#issuecomment-6185872048
       date: '2026-10-15'
       by: jlevy
@@ -8652,6 +8712,8 @@ issues:
         verification: V0
         confirmation: C0
         status: recorded
+      corrects:
+      - https://github.com/jlevy/squares/issues/593#issuecomment-6179772564
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request. The author has said which name the record should carry.
@@ -8734,12 +8796,14 @@ issues:
       (beyond-horizon)'
     author: evand
     opened: '2026-10-14'
-    state: open
+    state: closed
+    closed: '2026-10-16'
     kind: result-report
     triage: done
     summary: Evan Daniel reports exact rational certificates at 365, 370 and 460, all beyond the case corpus.
       Imported on 14 October 2026 in the evand-fresh-compositions-2026-10-14 packet, replayed on both maintained
-      exact routes, and recorded as new beyond-horizon rows. Claude assistance disclosed.
+      exact routes, and recorded as new beyond-horizon rows; Francisco Couzo's 487b058 certificate, recorded
+      by #627, supersedes the row at 370. Claude assistance disclosed.
     read_through: '2026-10-14T09:18:16Z'
     results:
     - key: three-beyond-horizon
@@ -8770,8 +8834,19 @@ issues:
       kind: follow-up
       reported:
       - result: three-beyond-horizon
+    - url: https://github.com/jlevy/squares/issues/596#issuecomment-6207611222
+      date: '2026-10-16'
+      by: jlevy
+      kind: final
+      reported:
+      - result: three-beyond-horizon
     close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
       corpus take no register entry, and optimality is outside this request.
+    notes: >-
+      The final reply of 16 October follows up the supersession of the row at 370 by Couzo's 487b058
+      certificate, 2.52e-4 below, which stack #632 recorded: a change `--report` does not show, so
+      the pass that makes it follows it up (result-import.md, After the Merge, step 2). It closed the
+      issue, closeable with nothing queued (PR #637's review, A1).
   - number: 600
     title: 'Closed-form lower bound s(N) ≥ a(N) for every non-square N ≥ 49, above the register for 156 n
       in 104–319: registration request'
