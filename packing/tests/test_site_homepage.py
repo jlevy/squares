@@ -704,11 +704,11 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
         "more-resources",
     ]
     assert len(home["section_title_styles"]) == 8
-    selected = news_highlights.highlights(site_renders.overview())
+    selected = news_highlights.highlights(render_changelog.load())
     assert [heading["entry"] for heading in home["news_headings"]] == [
-        result.id for result in selected
+        entry["id"] for entry in selected
     ]
-    assert len(home["news_headings"]) == 3
+    assert len(home["news_headings"]) == len(selected)
     assert all(heading["title"] for heading in home["news_headings"])
     assert [heading["href"] for heading in home["paper_headings"]] == [
         paper.href for paper in overview_sections.PAPERS
@@ -911,9 +911,13 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
     try:
         page.goto(ORIGIN, wait_until="load")
         preview = page.evaluate(NEWS)
-        assert len(preview["entries"]) == 3
-        page.locator('.site-action[href="news.html"]').click()
-        page.wait_for_url(f"{ORIGIN}news.html")
+        selected = news_highlights.highlights(render_changelog.load())
+        assert preview["entries"] == [entry["id"] for entry in selected]
+        title_link = page.locator(".site-news-header > h3 > a").first
+        anchor = render_changelog.entry_anchor(selected[0]["id"])
+        sync_api.expect(title_link).to_have_attribute("href", f"news.html#{anchor}")
+        title_link.click()
+        page.wait_for_url(f"{ORIGIN}news.html#{anchor}")
         page.locator('[data-news-all="scores"]').click()
         news = page.evaluate(NEWS)
         document = render_changelog.load()
@@ -922,6 +926,12 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         assert len(news["days"]) == len(entries)
         assert news["heading"]["transform"] == "uppercase"
         assert news["family"] == news["heading"]["family"]
+        footer = news["archive_action"]
+        assert footer is not None
+        assert footer["family"] == news["family"]
+        assert footer["arrow"] == "external"
+        assert footer["label"] == "Full changelog on GitHub"
+        assert footer["href"] == f"{document['repository']}/blob/main/CHANGELOG.md"
         assert preview["reference_article_title"] is not None
         for surface in (preview, news):
             assert surface["overflow"] == 0
@@ -932,6 +942,7 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                 assert day["body_family"] == surface["family"]
                 assert day["date_transform"] == "none"
                 assert day["title_style"] == preview["reference_article_title"]
+                assert day["headline_style"] == day["title_style"]
                 assert day["title_style"]["color"] == surface["text_color"]
                 assert day["title_before_date"]
                 assert day["date_before_topics"]
@@ -947,6 +958,10 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                     assert topic["caps"] == "normal"
                     assert float(topic["size"].removesuffix("px")) < day["title_size"]
                     assert topic["family"] == day["title_style"]["family"]
+        archive_days = {day["id"]: day for day in news["days"]}
+        for day in preview["days"]:
+            assert day["topic_styles"] == archive_days[day["id"]]["topic_styles"]
+            assert day["headline_style"] == archive_days[day["id"]]["headline_style"]
         card = page.locator("[data-news-day].is-collapsed").first
         card_id = card.get_attribute("id")
         assert card_id is not None

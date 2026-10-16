@@ -196,13 +196,16 @@ decided it:
 A view from either of the last two enters only where the policy’s decision table admits
 it (row 10), by `python -m devtools.regularize_evand layer --select admitted` (a
 grid-slack run’s views by adding `--grid-run DIR --grid-counts N ...`, which draws that
-run’s view at those counts in place of Evan Daniel’s), and only where it shares at least
-as many full sides as the view it replaces.
-The axis tool’s own record of that count stays beside it as `reference`. Such a view
-carries the credit line *Regularized by the Squares Project with Evan Daniel’s
-regularizer (evand/square-packing, MIT)*, in the index, in the view and in its drawing.
-The [regularization process](../../../docs/project/guides/regularization-process.md)
-gives the steps from a run to a merged view: generate, select with
+run’s view at those counts in place of Evan Daniel’s), and only where it is worse on no
+goal of the improvement rule than the picture drawn at that count today: the layer’s
+view where the rule draws it, else the house drawing
+(`regularize_evand.worse_than_drawn`). A tie is admitted; refusing one is the
+selection’s. The axis tool’s own record of that count stays beside it as `reference`.
+Such a view carries the credit line *Regularized by the Squares Project with Evan
+Daniel’s regularizer (evand/square-packing, MIT)*, in the index, in the view and in its
+drawing. The
+[regularization process](../../../docs/project/guides/regularization-process.md) gives
+the steps from a run to a merged view: generate, select with
 `python -m devtools.regularize_select`, admit, render, record and validate.
 
 On 13 October 2026 the index draws 90 views: 20 by the axis tool, 48 by Evan Daniel’s
@@ -319,6 +322,24 @@ regularized default the rule refuses, and lists the counts that keep the house; 
 file states no count of its own, so it cannot fall behind the record.
 It reads the exceptions above the bound from `devtools.default_drawings.ABOVE_U`, which
 `packing/tests/test_regularize_select.py` holds to the layer.
+
+The same file’s `states` says, for every count n = 1..324, whether the picture it draws
+is regularized: `regularized` where a view of Evan Daniel’s regularizer or the
+grid-slack generator is drawn, `regular-as-published` where the house drawing has no
+uneven and no near-axis square, `decided-no-better` where the strong generators ran on
+that very witness and drew nothing better, `exempt` with the bead that owns it, and
+`pending` otherwise.
+Each state carries the drawn picture’s measures, the witness’s id, its source’s key,
+path and revision, and its side, and the runs that decided it.
+The index’s `status: regularized` means only that the layer holds a view: at n = 176 it
+held the axis tool’s view while the raw house was drawn.
+A view that lapses with its witness is now recorded on the axis tool’s record (`lapsed`)
+rather than only printed.
+The records-tier step
+`every drawn picture is regularized, regular as published, decided or exempt` fails on a
+pending count that `devtools.default_drawings.PENDING_ALLOWED` does not name with its
+bead, and on a named count that is no longer pending; `bead tree` holds each bead the
+list names open.
 
 `--check-atlas` runs in the records tier on every pull request: it holds the index to
 the manifest, the witnesses and the views by digest, and reads each other generator’s

@@ -1,158 +1,173 @@
-"""Homepage News selects existing S5 results without changing project history."""
+"""Homepage previews keep the canonical News articles and their public metadata."""
 
 from __future__ import annotations
 
 import copy
 import html
 import re
-from dataclasses import replace
 
 import pytest
 
-from devtools import (
-    check_results,
-    news_highlights,
-    overview_data,
-    overview_sections,
-    render_changelog,
-    site_math,
-    site_topics,
-)
-from devtools.register_prose import paragraphs
-from tests import site_renders
+from devtools import check_results, news_highlights, render_changelog, site_topics
 
 
 @pytest.fixture(scope="module")
-def overview() -> overview_data.Overview:
-    return site_renders.overview()
+def document() -> render_changelog.Document:
+    return render_changelog.load()
 
 
-def _candidate(
-    original: overview_data.Result, result_id: str, day: str, score: int = 5
-) -> overview_data.Result:
-    record = copy.deepcopy(original.record)
-    record["id"] = result_id
-    if record.get("attribution"):
-        record["attribution"]["published"] = day
-    else:
-        record["established"] = day
-    record["significance"]["score"] = score
-    return replace(original, record=record)
+def test_selection_uses_eligible_s5_result_articles_in_frozen_date_and_id_order() -> None:
+    def entry(identifier: str, day: str, score: int = 5) -> render_changelog.Document:
+        return {
+            "id": identifier,
+            "date": day,
+            "result_ids": ["T-154"],
+            "significance": {"score": score, "rationale": "A result announcement."},
+        }
 
-
-def test_selection_uses_only_s5_and_the_existing_date_and_id_order(
-    overview: overview_data.Overview,
-) -> None:
-    original = next(result for result in overview.results if result.id == "T-154")
     candidates = [
-        _candidate(original, "T-001", "2026-10-12"),
-        _candidate(original, "T-999", "2026-10-13", 4),
-        _candidate(original, "T-003", "2026-10-12"),
-        _candidate(original, "T-004", "2026-09-29"),
-        _candidate(original, "T-002", "2026-10-12"),
+        entry("z-third", "2026-10-12"),
+        entry("low-score", "2026-10-14", 4),
+        entry("a-second", "2026-10-12"),
+        entry("older", "2026-09-29"),
+        entry("newest", "2026-10-13"),
+        {**entry("unrelated", "2026-10-15"), "result_ids": []},
+        {**entry("excluded", "2026-10-16"), "news_exclusion": "Retained history only."},
     ]
-    example = replace(overview, results=candidates)
-    assert [result.id for result in news_highlights.highlights(example)] == [
-        "T-003",
-        "T-002",
-        "T-001",
-    ]
-    assert [
-        result.id
-        for result in news_highlights.highlights(
-            replace(example, results=list(reversed(candidates)))
-        )
-    ] == ["T-003", "T-002", "T-001"]
-    assert not news_highlights.highlights(replace(example, results=[candidates[1]]))
+    expected = ["newest", "a-second", "z-third"]
+    for ordered in (candidates, list(reversed(candidates))):
+        assert [
+            item["id"] for item in news_highlights.highlights({"entries": ordered})
+        ] == expected
+    assert not news_highlights.highlights({"entries": candidates[1:2] + candidates[5:]})
+    assert news_highlights.highlights({"entries": candidates[3:4]}) == (candidates[3],)
+    assert not news_highlights.highlights({"entries": []})
 
 
-def test_current_news_has_three_results_including_the_older_s5_result(
-    overview: overview_data.Overview,
-) -> None:
-    selected = news_highlights.highlights(overview)
-    assert [result.id for result in selected] == ["T-154", "T-153", "T-060"]
-    assert [result.dated for result in selected] == [
-        ("published", "2026-10-12"),
-        ("published", "2026-10-12"),
-        ("published", "2026-09-29"),
-    ]
-    rendered = news_highlights.render(overview)
-    assert re.findall(r'data-news-entry="([^"]+)"', rendered) == ["T-154", "T-153", "T-060"]
-    assert rendered.count('class="site-news-day"') == 3
-    assert rendered.count('data-news-topic="optimality"') == 2
-    assert rendered.count('data-news-topic="formalization"') == 1
-    assert 'data-kind="formalization"' not in rendered
-    assert 'data-news-day="2026-10-12"' in rendered
-    assert 'data-news-day="2026-09-29"' in rendered
-    assert rendered.count('data-news-day="2026-10-12"') == 2
-    assert re.findall(r'class="site-news-day" id="([^"]+)"', rendered) == [
-        "news-result-t-154",
-        "news-result-t-153",
-        "news-result-t-060",
-    ]
-    assert re.findall(r'class="site-news-body" id="([^"]+)"', rendered) == [
-        "news-result-t-154-body",
-        "news-result-t-153-body",
-        "news-result-t-060-body",
-    ]
-    assert 'id="t-154"' not in rendered
-
-
-def test_news_keeps_claim_excerpts_credit_rungs_and_canonical_result_links(
-    overview: overview_data.Overview,
-) -> None:
-    rendered = news_highlights.render(overview)
-    for result in news_highlights.highlights(overview):
-        match = re.search(
-            rf'<article class="site-news-item" data-news-entry="{result.id}">(.*?)</article>',
+def _cards(rendered: str) -> dict[str, str]:
+    return {
+        identifier: card
+        for card, identifier in re.findall(
+            r'(<section class="site-news-day"[^>]*>.*?data-news-entry="([^"]+)".*?</section>)',
             rendered,
             re.DOTALL,
         )
-        assert match is not None
-        article = match.group(1)
-        title = render_changelog.inline_html(result.summary, allow_links=False)
-        assert f"<h3>{title}</h3>" in article
-        assert result.credit in html.unescape(re.sub(r"<[^>]+>", "", article))
-        assert f'<time datetime="{overview_sections.first_day(result.dated[1])}">' in article
-        assert overview_sections.ladder_chips(result) in article
-        assert overview_sections.status_marks(result) in article
-        assert article.count(f'data-news-topic="{result.record["kind"]}"') == 1
-        assert "data-kind=" not in article
-        qualifier = "Reported result: this project has not verified the complete claim."
-        claim = paragraphs(result.record["claim"])[0]
-        for full, surname in (
-            ("Oscar Fitzharding", "Fitzharding"),
-            ("John Bidwell", "Bidwell"),
-            ("Marc Leonard Overbeck", "Overbeck"),
-        ):
-            claim = claim.replace(full, surname)
-            assert full not in article
-        excerpt = render_changelog.inline_html(claim)
-        if result.record["verification"] == "V0":
-            assert article.index(qualifier) < article.index(excerpt)
-        else:
-            assert qualifier not in article
-        assert f"<p>{excerpt}</p>" in article
-        assert f'href="result/{result.id.lower()}.html"' in article
-        assert f"Full result {result.id}" in article
-    assert "Nothing here has repeated that build." not in rendered
-    assert "The complete capture recomputation and ten trees have not been run." not in rendered
+    }
 
 
-def test_news_credits_link_directly_to_reviewed_contributor_profiles(
-    overview: overview_data.Overview,
+def test_homepage_and_archive_render_the_same_articles_and_cards(
+    document: render_changelog.Document,
 ) -> None:
-    rendered = news_highlights.render(overview)
-    for result_id, contributor_id in (
-        ("T-154", "oscar-fitzharding"),
-        ("T-153", "marc-leonard-overbeck"),
-        ("T-060", "manasseh-ahmed"),
-    ):
-        article = rendered.split(f'data-news-entry="{result_id}">', 1)[1].split(
-            "</article>", 1
-        )[0]
-        assert f'<a href="profiles/{contributor_id}.html">' in article
-        assert "data-contributor" not in article
+    before = copy.deepcopy(document)
+    selected = news_highlights.highlights(document)
+    rendered = news_highlights.render(document)
+    archive = render_changelog.render_news(document)
+    preview_cards = _cards(rendered)
+    archive_cards = _cards(archive)
+    assert list(preview_cards) == [entry["id"] for entry in selected]
+    assert 0 < len(preview_cards) <= 3
+    assert "data-news-filters" not in rendered
+    assert "site-result-status" not in rendered
+    assert "data-kind=" not in rendered
+    for entry in selected:
+        identifier = entry["id"]
+        anchor = render_changelog.entry_anchor(identifier)
+        preview = preview_cards[identifier]
+        canonical = archive_cards[identifier]
+        # Preview titles link to the full archive. Daily bookmarks occur only once.
+        preview = re.sub(
+            r'<h3><a href="news.html#[^"]+">(.*?)</a></h3>', r"<h3>\1</h3>", preview
+        )
+        preview = re.sub(r'<div id="changelog-date-[^"]+"></div>\n?', "", preview)
+        canonical = re.sub(r'<div id="changelog-date-[^"]+"></div>\n?', "", canonical)
+        assert preview == canonical
+        assert f'id="{anchor}"' in preview
+        assert f'data-news-day="{entry["date"]}"' in preview
+        assert (
+            f"<h3>{render_changelog.inline_html(entry['title'], allow_links=False)}</h3>"
+            in preview
+        )
+        assert render_changelog.news_topics(entry.get("topics", [])) in preview
+        assert preview.count('class="site-significance"') == 1
+        assert f'aria-controls="{anchor}-body"' in preview
+        assert f'href="news.html#{anchor}"' in rendered
+    assert document == before
+
+
+def test_homepage_does_not_fill_missing_s5_result_slots_from_other_news(
+    document: render_changelog.Document,
+) -> None:
+    data = copy.deepcopy(document)
+    selected = news_highlights.highlights(data)
+    for entry in render_changelog.news_entries(data):
+        if entry.get("result_ids") and entry["significance"]["score"] == 5:
+            entry["significance"]["score"] = 4
+    assert not _cards(news_highlights.render(data))
+    selected[0]["significance"]["score"] = 5
+    assert list(_cards(news_highlights.render(data))) == [selected[0]["id"]]
+
+
+def test_homepage_keeps_both_reported_proofs_and_their_complete_qualification_text(
+    document: render_changelog.Document,
+) -> None:
+    cards = _cards(news_highlights.render(document))
+    fitzharding = cards["fitzharding-n17-reported-proof"]
+    overbeck = cards["overbeck-n17-candidate-proof"]
+    for card in (fitzharding, overbeck):
+        assert 'data-news-topic="optimality">Optimality</span>' in card
+        assert 'data-news-topic="verification">Verification</span>' in card
+        assert 'data-news-topic="formalization"' not in card
+        assert "V0/C1" in card
+        assert 'datetime="2026-10-13"' in card
+    assert "the full Lean build has not been replayed here" in fitzharding
+    assert "The full capture computation" in overbeck
+    assert "These samples do not confirm the whole" in overbeck
+    assert 'href="https://jlevy.github.io/squares/result/t-154.html"' in fitzharding
+    assert 'href="https://jlevy.github.io/squares/result/t-153.html"' in overbeck
+
+
+def test_homepage_ahmed_article_keeps_the_result_and_explainer_reachable(
+    document: render_changelog.Document,
+) -> None:
+    card = _cards(news_highlights.render(document))["ahmed-eleven-square-optimality"]
+    assert 'datetime="2026-09-30"' in card
+    assert "V3/C3" in card
+    assert "a second independent proof method" in card
+    assert 'href="https://jlevy.github.io/squares/result/t-060.html"' in card
+    assert 'href="https://jlevy.github.io/squares/papers/n11-optimality-review.html"' in card
+
+
+def test_homepage_and_archive_link_preferred_names_directly_to_reviewed_profiles(
+    document: render_changelog.Document,
+) -> None:
+    expected = {
+        "fitzharding-n17-reported-proof": (
+            ("Oscar Fitzharding", "oscar-fitzharding"),
+            ("John Bidwell", "john-bidwell"),
+            ("Marc Leonard Overbeck", "marc-leonard-overbeck"),
+            ("Hiroaki Hosono", "hiroaki-hosono"),
+        ),
+        "overbeck-n17-candidate-proof": (
+            ("Marc Leonard Overbeck", "marc-leonard-overbeck"),
+            ("John Bidwell", "john-bidwell"),
+        ),
+        "ahmed-eleven-square-optimality": (
+            ("Manasseh Ahmed", "manasseh-ahmed"),
+            ("Walter Trump", "walter-trump"),
+            ("Joshua Levy", "joshua-levy"),
+            ("Marc Leonard Overbeck", "marc-leonard-overbeck"),
+        ),
+    }
+    for rendered in (news_highlights.render(document), render_changelog.render_news(document)):
+        cards = _cards(rendered)
+        for identifier, people in expected.items():
+            card = cards[identifier]
+            for preferred_name, profile_id in people:
+                assert (
+                    f'<a href="profiles/{profile_id}.html">{html.escape(preferred_name)}</a>'
+                    in card
+                )
+            assert "data-contributor" not in card
 
 
 @pytest.mark.parametrize("suffix", ["", "?plain=1&view=full#accounts"])
@@ -161,19 +176,12 @@ def test_inline_news_converts_repository_profile_links_once(suffix: str) -> None
     rendered = render_changelog.inline_html(f"Reviewed by [Hiroaki Hosono]({target}).")
     canonical = html.escape(f"profiles/hiroaki-hosono.html{suffix}", quote=True)
     assert rendered == f'Reviewed by <a href="{canonical}">Hiroaki Hosono</a>.'
-    shortened = render_changelog.inline_html(
-        f"Reviewed by [Hiroaki Hosono]({target}).",
-        transform_text=lambda text: news_highlights.surname_text(
-            text, {"Hiroaki Hosono": "Hosono"}
-        ),
-    )
-    assert shortened == f'Reviewed by <a href="{canonical}">Hiroaki Hosono</a>.'
     math = render_changelog.inline_html(rf"$\href{{{target}}}{{H}}$")
     assert "<math" in math
     assert f'href="{canonical}"' in math
 
 
-def test_inline_news_preserves_styled_profile_names_and_shortens_other_mentions() -> None:
+def test_inline_news_keeps_authored_preferred_names_and_styling() -> None:
     target = "packing/contributors/people/hiroaki-hosono.md"
     for label, styled in (
         ("**Hiroaki Hosono**", "<strong>Hiroaki Hosono</strong>"),
@@ -184,14 +192,12 @@ def test_inline_news_preserves_styled_profile_names_and_shortens_other_mentions(
     ):
         rendered = render_changelog.inline_html(
             f"Hiroaki Hosono; [{label}]({target}); "
-            "[**Hiroaki Hosono**](https://example.org/proof); Hiroaki Hosono.",
-            transform_text=lambda text: news_highlights.surname_text(
-                text, {"Hiroaki Hosono": "Hosono"}
-            ),
+            "[**Hiroaki Hosono**](https://example.org/proof); Hiroaki Hosono."
         )
         assert rendered == (
-            f'Hosono; <a href="profiles/hiroaki-hosono.html">{styled}</a>; '
-            '<a href="https://example.org/proof"><strong>Hosono</strong></a>; Hosono.'
+            f'Hiroaki Hosono; <a href="profiles/hiroaki-hosono.html">{styled}</a>; '
+            '<a href="https://example.org/proof"><strong>Hiroaki Hosono</strong></a>; '
+            "Hiroaki Hosono."
         )
 
 
@@ -208,68 +214,6 @@ def test_inline_news_rejects_missing_and_unsafe_profile_targets(
 ) -> None:
     with pytest.raises(ValueError, match=message):
         render_changelog.inline_html(f"[Person]({target})")
-
-
-def test_news_reads_no_launch_history_and_mutates_no_result_record(
-    overview: overview_data.Overview, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    before = copy.deepcopy(overview)
-
-    def no_history() -> render_changelog.Document:
-        raise AssertionError("result News must not read or backfill launch history")
-
-    monkeypatch.setattr(render_changelog, "load", no_history)
-    assert news_highlights.render(overview)
-    assert overview == before
-
-
-@pytest.mark.parametrize("kind", check_results.KINDS)
-def test_result_kind_and_evidence_survive_news_topic_selection(
-    overview: overview_data.Overview, kind: str
-) -> None:
-    candidate = _candidate(overview.results[0], "T-999", "2026-10-14")
-    candidate.record["kind"] = kind
-    rendered = news_highlights.render(replace(overview, results=[candidate]))
-    topics = re.findall(r'data-news-topic="([^"]+)"', rendered)
-    assert topics == ([kind] if kind not in {"correction", "audit"} else [])
-    label = site_topics.topic_label(kind)
-    if topics:
-        assert f'data-news-topic="{kind}">{label}</span>' in rendered
-    assert overview_sections.kind_chip(candidate) == site_topics.topic_chip(
-        kind, attribute="data-kind"
-    )
-    assert label[0].isupper()
-    assert label[1:] == label[1:].lower()
-    assert overview_sections.ladder_chips(candidate) in rendered
-    assert overview_sections.status_marks(candidate) in rendered
-    assert "data-kind=" not in rendered
-    assert rendered.count('class="site-significance"') == 1
-    assert 'data-level="5"' in rendered
-    assert candidate.credit in html.unescape(re.sub(r"<[^>]+>", "", rendered))
-    excerpt = render_changelog.inline_html(paragraphs(candidate.record["claim"])[0])
-    assert f"<p>{excerpt}</p>" in rendered
-
-
-def test_a_real_rigidity_result_can_enter_the_s5_news_without_changing_its_claim(
-    overview: overview_data.Overview,
-) -> None:
-    original = next(result for result in overview.results if result.id == "T-012")
-    candidate = _candidate(original, original.id, "2026-10-14")
-    assert candidate.record["kind"] == "rigidity"
-    example = replace(overview, results=[candidate, *overview.results])
-    assert news_highlights.highlights(example)[0] is candidate
-    rendered = news_highlights.render(example)
-    article = rendered.split('data-news-entry="T-012">', 1)[1].split("</article>", 1)[0]
-    assert 'data-news-topic="rigidity">Rigidity</span>' in article
-    assert overview_sections.ladder_chips(candidate) in article
-    assert overview_sections.status_marks(candidate) in article
-    assert article.count('data-news-topic="rigidity"') == 1
-    assert "data-kind=" not in article
-    assert original.credit in html.unescape(re.sub(r"<[^>]+>", "", article))
-    excerpt = render_changelog.inline_html(paragraphs(original.record["claim"])[0])
-    assert f"<p>{excerpt}</p>" in article
-    with pytest.raises(ValueError, match="unknown News topic"):
-        render_changelog.news_topics(["not-a-topic"])
 
 
 def test_news_schema_uses_the_shared_topic_vocabulary() -> None:
@@ -296,58 +240,3 @@ def test_news_schema_uses_the_shared_topic_vocabulary() -> None:
         assert f'data-news-topic="{topic}"' not in filters
         with pytest.raises(ValueError, match="unknown News topic"):
             render_changelog.news_topics([topic])
-
-
-def test_news_name_display_preserves_ambiguity_aliases_and_canonical_identifiers(
-    overview: overview_data.Overview,
-) -> None:
-    names = {
-        "Oscar Fitzharding": "Fitzharding",
-        "John Bidwell": "Bidwell",
-        "Ryan Xu": "Xu",
-        "Ryan Xu (ry-xu)": "Xu",
-        "Nate Chaoweeraprasit": "Chaoweeraprasit",
-        "Nate Chaoweeraprasit (itsnaka)": "Chaoweeraprasit",
-        "Alice Smith": "Smith",
-        "Bob Smith": "Smith",
-        "PingYou Ltd": "PingYou Ltd",
-    }
-    text = (
-        "Oscar Fitzharding and John Bidwell; Ryan Xu (ry-xu); "
-        "Nate Chaoweeraprasit (itsnaka); Alice Smith and Bob Smith; "
-        "PingYou Ltd, Guzhou0806; Oscar Fitzhardington; "
-        "https://example.org/Oscar%20Fitzharding; $s(17) = 4.67553$."
-    )
-    assert news_highlights.surname_text(text, names) == (
-        "Fitzharding and Bidwell; Xu (ry-xu); "
-        "Chaoweeraprasit (itsnaka); Alice Smith and Bob Smith; "
-        "PingYou Ltd, Guzhou0806; Oscar Fitzhardington; "
-        "https://example.org/Oscar%20Fitzharding; $s(17) = 4.67553$."
-    )
-
-    candidate = _candidate(overview.results[0], "T-999", "2026-10-14")
-    candidate.record["headline"] = "John Bidwell and `John Bidwell`"
-    linked_name = '[John Bidwell](<https://example.org/John Bidwell> "John Bidwell")'
-    candidate.record["claim"] = (
-        "John Bidwell; " + linked_name + r"; `John Bidwell`; $\text{John Bidwell}$."
-    )
-    candidate.credit = "Bidwell after Levy"
-    candidate.credit_html = (
-        '<a href="profiles/john-bidwell.html" data-contributor="">Bidwell</a> after '
-        '<a href="profiles/joshua-levy.html" data-contributor="">Levy</a>'
-    )
-    before = copy.deepcopy(candidate)
-    rendered = news_highlights.render(replace(overview, results=[candidate]))
-    assert "<h3>Bidwell and <code>John Bidwell</code></h3>" in rendered
-    assert (
-        '<a href="https://example.org/John%20Bidwell" title="John Bidwell">Bidwell</a>'
-        in rendered
-    )
-    assert rendered.count("<code>John Bidwell</code>") == 2
-    assert '<a href="profiles/john-bidwell.html">Bidwell</a>' in rendered
-    assert 'after <a href="profiles/joshua-levy.html">Levy</a>' in rendered
-    assert "data-contributor" not in rendered
-    assert [formula.source for formula in site_math.formula_sources(rendered)] == [
-        r"\text{John Bidwell}"
-    ]
-    assert candidate == before

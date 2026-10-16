@@ -218,7 +218,12 @@ $defs:
     required: [n, status, generator, source, shades]
     properties:
       n: {type: integer, minimum: 1}
-      status: {enum: [regularized, unchanged, refused]}
+      status:
+        description: >-
+          `regularized` says the layer holds this tool's view of the count, not that the
+          view is drawn or that the drawing is regular: which picture is drawn, and its
+          regularization state, is `default-drawings.json`'s `states`.
+        enum: [regularized, unchanged, refused]
       generator: {const: regularize_axis_components/2}
       source: {$ref: '#/$defs/source'}
       refusal:
@@ -238,6 +243,23 @@ $defs:
       shades: {$ref: '#/$defs/shades'}
       exact_verification: {$ref: '#/$defs/exact_verification'}
       regularization: {$ref: '#/$defs/regularization'}
+      lapsed:
+        description: >-
+          The last strong generator's view of this count that lapsed when its witness
+          changed, written by `--update-atlas` in place of a printed line: until the
+          strong generators decide the new witness, `default-drawings.json` records the
+          count `pending`. `--update-atlas` carries it through later houses, so it may
+          name a view more than one witness back, and keeps it whatever the count's
+          state; only `regularize_evand layer` ends it, by admitting a strong view, whose
+          `reference` carries none. History, not derived: `--verify-atlas` compares the
+          record without it.
+        type: object
+        additionalProperties: false
+        required: [generator, run, witness_sha256]
+        properties:
+          generator: {$ref: '#/$defs/generator_id'}
+          run: {type: string, minLength: 1}
+          witness_sha256: {type: string, pattern: '^[0-9a-f]{64}$'}
     allOf:
       - if: {properties: {status: {const: regularized}}}
         then:

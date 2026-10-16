@@ -93,6 +93,22 @@ PUBLICATION_HISTORY = (
         ),
     ),
     PublicationHistoryEntry(
+        version="v0.7.14",
+        first_published="October 16, 2026",
+        result_scope=(
+            "Say on each case page whose house is drawn that it is drawn as published, and why."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.13",
+        first_published="October 16, 2026",
+        result_scope=(
+            "Use the same canonical articles and topic chips on the homepage and News, "
+            "backfill Ahmed's eleven-square optimum, and make navigation consistently "
+            "sans."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.12",
         first_published="October 16, 2026",
         result_scope=(
@@ -367,7 +383,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "c474bef452a688ccb27eb450d181238e31a2eb3a"
+DATA_REVISION = "288a1a52022f712563a23f21848e0ae2927390d4"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -803,7 +819,7 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
-        previous_version="v0.7.12",
+        previous_version="v0.7.14",
         version="v0.8.0",
         impact="minor",
         reason=(
@@ -827,6 +843,26 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.1.1",
         impact="patch",
         reason="Credit Hiroaki Hosono's checker and retained tools by name.",
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.13",
+        version="v0.7.14",
+        impact="patch",
+        reason=(
+            "Say on each case page whose house is drawn that it is drawn as published, and why."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.12",
+        version="v0.7.13",
+        impact="patch",
+        reason=(
+            "Use the same canonical articles and topic chips on the homepage and News, "
+            "backfill Ahmed's eleven-square optimum, and make navigation consistently "
+            "sans."
+        ),
     ),
     ReleaseImpactDecision(
         component="site",
@@ -1072,6 +1108,125 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/regularize_evand.py",
+            "packing/devtools/regularize_select.py",
+            "packing/devtools/regularized_drawings.py",
+            "packing/devtools/render_case_pages.py",
+            "packing/src/sqpack/cli/validate.py",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-295.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The regularization-state record (think-gvke) changes the default-drawings "
+            "generator, its decision split from its measuring, and its gate step, the axis "
+            "tool's update, check and verify of the atlas index, the layer's admission and "
+            "the selection's reference, both now the picture the atlas draws, the "
+            "case-record regularization note and the case page's note. The papers reach "
+            "these modules through shared import discovery and call none of the changed "
+            "functions: no paper renders a case page, a case record's regularization note, "
+            "the default-drawings record or the atlas index, or runs the selection. The "
+            "survey cites the six case records by link only, as its results table's count "
+            "links, and their only change is that note's text. Manuscripts, figures, "
+            "credits and print rules are unchanged by source review. No render was taken "
+            "(this host has no pinned Chromium), and all four papers keep v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2; the site takes the patch."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.14 regenerated the five claim documents at "
+            "PUBLICATION_REVISION 9fe5f941, the merge of main 4e8c8987f; with that revision "
+            "read back as main's 7627f47e, each is byte-identical to main's, so the 32 "
+            "repository links it pins are the only change, and no claim, certificate or "
+            "command moves. A link revision follows the site's edition and is not a "
+            "revision of the explainer, so it keeps v0.4.7. Source-reviewed; no render was "
+            "taken."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/news_highlights.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_overview.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The homepage now selects existing canonical News entries and uses the "
+            "archive's card renderer. The footer action and linked heading styles belong "
+            "to the website. Standalone paper renderers do not call the changed News "
+            "composition or include site.css. Removing the unused inline text callback "
+            "retains the default Markdown, math, code and link rendering consumed by "
+            "papers. The five claim documents change only their source-link revision pins "
+            "for this site cut; mathematics, certificates and verifier code are "
+            "unchanged. Paper manuscripts, figures and editions remain current. This is a "
+            "source-reviewed disposition; no PDF redraw or byte-identity comparison is "
+            "claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer", "site"),
         paths=("packing/src/sqpack/cli/validate.py",),
         outputs=(
@@ -1278,7 +1433,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/atlas/known-best/bound-citations.json",
             "packing/devtools/apply_closed_form.py",
             "packing/devtools/contributor_credit.py",
-            "packing/devtools/news_highlights.py",
             "packing/devtools/overview_data.py",
             "packing/devtools/overview_sections.py",
             "packing/devtools/register_gupta_reports.py",
@@ -1306,8 +1460,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "The manuscript and producer are unchanged from main. Figure 3 consumes only "
             "the n11 citation entry, which is identical; changed author credits at other "
             "counts do not enter this paper. The current Markdown and its substitutions "
-            "retain the paper's text and figures. The changed news_highlights helper "
-            "only renders direct profile links in News and is not called by the "
+            "retain the paper's text and figures. The changed render_changelog helper "
+            "renders direct profile links in News and is not called by the "
             "paper. Shared site navigation and linked source records do not revise "
             "the paper's content edition. The closed-form writer now emits the canonical "
             "Hosono credit without changing any numeric bound; this writer is not "
@@ -1324,7 +1478,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/apply_closed_form.py",
             "packing/devtools/contributor_credit.py",
-            "packing/devtools/news_highlights.py",
             "packing/devtools/overview_data.py",
             "packing/devtools/overview_sections.py",
             "packing/devtools/register_gupta_reports.py",
@@ -1382,7 +1535,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "manuscript and producer are unchanged from main, and the paper already "
             "credits Ryan Xu by name. Changed frontier and source-coverage records are "
             "linked citations; their bodies are not incorporated. The changed "
-            "news_highlights helper only renders direct profile links in News and is "
+            "render_changelog helper renders direct profile links in News and is "
             "not called by the paper. Shared site navigation and related-paper "
             "metadata do not revise this paper's content edition. The reported-bound "
             "proved_by edits and their closed-form producer replace only wand125 "
@@ -2364,6 +2517,28 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "so it keeps v0.2.2."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main 4e8c8987 at link revision 4e8c8987, as over "
+            "22c0ebf0, ee9cec6e and 3685616d before it, once with main's requests record "
+            "and once with this branch's, the HTML and Markdown are byte-identical in all "
+            "42 files the renderer writes; the PDF prints from that HTML. The record gains "
+            "the 16 October replies held for stack #632, on #413, #506, #533, #561, #573, "
+            "#575, #583, #586, #593, #594, #607, #610, #613, #622 and #624, and the final "
+            "reply on #596; the closing of #561, #575, #583, #586 and #596; notes on five "
+            "replies edited in place, on the held replies on #570 and #574 and on #575's "
+            "176, and on why #573 stays open; two statements marked outdated and "
+            "corrected, on #506 and #593; #583's reworded not_registered, #596's summary "
+            "and a reworded note on #613, none of which the survey prints, so it keeps "
+            "v0.2.2."
+        ),
+    ),
 )
 
 
@@ -2500,7 +2675,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "6ba43f14"
+PUBLICATION_REVISION = "9fe5f941"
 
 
 def data_pathspec() -> tuple[str, ...]:

@@ -11,6 +11,7 @@ import pytest
 
 from devtools import (
     check_published_site,
+    news_highlights,
     pages_scope,
     render_changelog,
     render_overview,
@@ -134,7 +135,12 @@ def test_news_has_one_card_per_entry_and_home_highlights_three_existing_s5_resul
     assert re.findall(r'data-news-day="([^"]+)"', news) == [e["date"] for e in ordered]
     for day in {entry["date"] for entry in ordered}:
         assert news.count(f'id="changelog-date-{day}"') == 1
-    assert re.findall(r'data-news-entry="([^"]+)"', home) == ["T-154", "T-153", "T-060"]
+    selected = news_highlights.highlights(document)
+    assert [entry["result_ids"] for entry in selected] == [["T-154"], ["T-153"], ["T-060"]]
+    assert re.findall(r'data-news-entry="([^"]+)"', home) == [entry["id"] for entry in selected]
+    for entry in selected:
+        anchor = render_changelog.entry_anchor(entry["id"])
+        assert f'href="news.html#{anchor}"' in home
     assert '<a class="site-action" href="news.html">All news' in home
     assert 'id="news" class="site-title">News' in news
     assert 'data-page="news" aria-current="page" href="news.html"' in news

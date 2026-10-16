@@ -173,28 +173,16 @@ def test_inline_markdown_keeps_safe_links_and_escaped_literals_distinct() -> Non
         '[John Bidwell](<https://example.org/John Bidwell> "John Bidwell"); '
         r"`John Bidwell`; $\text{John Bidwell}$; John Bidwell."
     )
-    renamed = render_changelog.inline_html(
-        names, transform_text=lambda text: text.replace("John Bidwell", "Bidwell")
-    )
-    assert (
-        '<a href="https://example.org/John%20Bidwell" title="John Bidwell">Bidwell</a>'
-        in renamed
-    )
-    assert "<code>John Bidwell</code>" in renamed
-    assert [formula.source for formula in site_math.formula_sources(renamed)] == [
-        r"\text{John Bidwell}"
-    ]
-    assert renamed.endswith("; Bidwell.")
+    rendered_names = render_changelog.inline_html(names)
     assert (
         '<a href="https://example.org/John%20Bidwell" title="John Bidwell">John Bidwell</a>'
-        in render_changelog.inline_html(names)
+        in rendered_names
     )
-    assert (
-        render_changelog.inline_html(
-            "John Bidwell", transform_text=lambda _text: "<b>Bidwell</b>"
-        )
-        == "&lt;b&gt;Bidwell&lt;/b&gt;"
-    )
+    assert "<code>John Bidwell</code>" in rendered_names
+    assert [formula.source for formula in site_math.formula_sources(rendered_names)] == [
+        r"\text{John Bidwell}"
+    ]
+    assert rendered_names.endswith("; John Bidwell.")
 
 
 def test_shared_renderer_orders_links_math_and_anchors() -> None:
@@ -1066,7 +1054,10 @@ def test_news_exclusion_keeps_history_and_fills_the_preview_from_eligible_entrie
     assert f'id="{anchor}" href="{archive}" data-news-target' in news
     day = "changelog-date-2026-10-14"
     assert f'id="{day}" href="{data["repository"]}/blob/main/CHANGELOG.md#{day}"' in news
-    assert ">Full changelog</a>" in news
+    assert '<p class="site-action-row"><a class="site-action"' in news
+    assert f'href="{data["repository"]}/blob/main/CHANGELOG.md"' in news
+    assert 'aria-label="Full changelog on GitHub">Full changelog' in news
+    assert 'data-arrow="external"' in news
     about = render_changelog.legacy_news_anchors(data)
     assert f'id="{anchor}" href="{archive}" data-news-target' in about
     preview = render_changelog.render_news(data, limit=1)

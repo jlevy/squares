@@ -720,8 +720,9 @@ come from its complete page.
 | --- | --- | --- | --- |
 | Case record | `cases/N.html` | Case link, index entry or neighboring-record link | `a[data-case]`, atlas tiles and frontier rows load `article.site-case` in the shared case panel |
 | Result record | `result/t-nnn.html` | Result ID link or **Open Result Record** | Pressing the rest of a result row loads `article.site-result[data-result-overview]` in that row’s panel |
-| Person profile | `profiles/ID.html` | Public-name link or **Open profile** | An unmodified `a[data-contributor]` press loads `article.site-contributor` in the shared contributor panel |
+| Person profile | `profiles/ID.html` | Public-name link or **Open profile** | A marked credit in a case or result article loads `article.site-contributor` in the shared contributor panel |
 | Profile directory | `profiles/index.html` | Colophon **Profiles** link and alphabetical list | Profile links navigate directly to standalone profiles |
+| News article | `news.html#ID` | Linked announcement title or bookmarked article | Homepage and archive reuse the authored article; its profile links navigate directly |
 | Card preview | The card’s ordinary target | Native `popovertarget` button and action link | The card’s preview remains authored in the page; it is not an article fetch |
 | Framed card preview | Target page with `?view=embed` | Native card button and **Expand** | The frame loads on first opening and uses its own document |
 
@@ -774,6 +775,7 @@ Browser tests exercise these sequences on generated pages.
 | Case article, Atlas directory and panel | `render_case_pages.py`, `forward.js`, `case-popover.js` | `test_site_case_records.py`, `test_site_math_faces.py` |
 | Result article and row entry | `result_overview.py`, `render_overview.iter_result_fragments`, `overview_sections.py`, `row-popover.js`, `site-result.css` | `test_result_overview.py`, `test_site_result_popover.py`, `test_site_case_records.py`, `tests/node/overview_rows/` |
 | Contributor article, directory and panel | `render_contributors.py`, `contributor-popover.js`, `site-contributor.css` | `test_render_contributors.py`, `test_site_contributor_popovers.py` |
+| Canonical News articles, homepage selection and direct profile links | `render_changelog.py`, `news_highlights.py`, `site_topics.py`, `site.css` | `test_changelog.py`, `test_news_highlights.py`, `test_site_homepage.py` |
 | Inert fetch, cache, scoped IDs, replacement and focus | `article-loader.js`, `popover.js` and the article controllers | `test_site_contributor_popovers.py`, `test_site_case_records.py` |
 | Identity and reviewed credit spans | `sqpack.contributors`, `sqpack.contributor_occurrences`, `contributor_credit.py` | `test_contributors.py`, `test_contributor_occurrences.py`, schema gate |
 | Routes, metadata, build inputs and sparse evidence | `site_urls.py`, `site_documents.py`, `preview_site.py`, `pages_scope.py`, `run_negative_controls.py` | `test_site_urls.py`, `test_site_documents.py`, `test_pages_scope.py`, `test_snapshot_copy_roster.py` |
@@ -986,10 +988,14 @@ contributor articles use their component sheets and the same text tokens.
   original publication date, then optional topic tags and significance metadata.
   The title uses the Explanations card’s sans face, medium weight, size and leading; it
   stays upright, left aligned and in the theme’s text foreground.
-  News uses surnames in titles, subsequent article mentions and displayed credits unless
-  distinct people share a surname.
+  A linked article title inherits the heading’s color and typography.
+  News headlines use surnames when unambiguous.
+  Article text follows the authored record.
   The first linked mention in an article uses the profile’s preferred display name,
   following [Attribution Policy](../../../attribution.md#website-and-pdf-presentation).
+  The renderer preserves authored names and wording.
+  Profile links navigate directly to their complete pages from both homepage previews
+  and the News archive.
   Keep published handles and organization names intact.
   Full identities remain in canonical attribution and source-reference records.
   The date is a prominent sans-base line in medium weight, with a machine-readable
@@ -997,8 +1003,8 @@ contributor articles use their component sheets and the same text tokens.
   publication history.
   Tutorial dates name their first site deployments; manuscript creation and later
   revisions do not restamp them.
-  News retains each announcement’s frozen date or the highlighted result’s original
-  registered date. No current site edition or filesystem timestamp supplies a date.
+  News and homepage highlights retain each announcement’s frozen date.
+  No current site edition or filesystem timestamp supplies a date.
   Explanations uses the eyebrow for the paper’s series part or tutorial label.
   News places smaller Results-style topic chips on the left and the shared significance
   meter at the right below the date, followed by the article.
@@ -1008,9 +1014,10 @@ contributor articles use their component sheets and the same text tokens.
   The meter’s accessible label names its S level; its shared tooltip explains the level
   and the post’s rationale.
   Its S and five bars remain one tightly paired mark.
-  Homepage highlights keep their actual result scores and assurance qualifiers, with one
-  S meter per card. News includes only S3, S4 and S5; S1/S2 remain in the full GitHub
-  changelog, with old News bookmarks forwarded there.
+  Homepage highlights keep the announcement’s significance and assurance qualifiers,
+  with one S meter per card.
+  News includes only S3, S4 and S5; S1/S2 remain in the full GitHub changelog, with old
+  News bookmarks forwarded there.
   Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
   All significance and All topics clear their facet; Reset restores the defaults.
@@ -1052,10 +1059,14 @@ contributor articles use their component sheets and the same text tokens.
   so parent headings cannot change their casing.
   The chip renderer preserves each consumer’s filter attribute.
   Full result records retain the result’s real kind, status, claim and credit.
-  The homepage highlights the three newest S5 results from the results register, using
-  their existing claims, credit and evidence, and follows them with “All news →”.
-  Highlights show their registered topic once in the header when it belongs to the News
-  subset. The evidence row retains verification, confirmation and status marks.
+  The homepage highlights up to three newest eligible S5 News announcements that name
+  result IDs, ordered by the announcement’s frozen date and stable ID, followed by “All
+  news →”. Each preview uses the archive’s title, date, topic chips, complete article
+  and disclosure. Its title links to the stable News article anchor.
+  Keep claim qualifications in that shared article; result records carry the detailed
+  verification, confirmation and status marks.
+  The archive ends with a shared action button, “Full changelog”, using the
+  external-link arrow and linking to the complete GitHub changelog.
   About keeps one short News link; its old history bookmarks forward without duplicating
   the feed.
 
@@ -1769,8 +1780,12 @@ contributor articles use their component sheets and the same text tokens.
   for the text, the medium sans at the note size, `0.45rem 0.9rem` of padding and square
   corners, darkened a step on hover and keyboard focus), with its icon from the one set
   after the label at the label’s size, the arrow right where the control is a link that
-  navigates and the double chevron where it is a button that shows more or less in
-  place. Both forms share one rule in `site.css`, and the row sets `--site-action-space`
+  navigates, the external arrow for an off-site destination, and the double chevron
+  where it is a button that shows more or less in place.
+  Navigation components always use the sans face, including links styled as action
+  buttons. Their shared rules set the font explicitly so a prose container cannot supply
+  a serif face. Inline citations within prose retain the surrounding text’s face.
+  Both forms share one rule in `site.css`, and the row sets `--site-action-space`
   (1.2rem) above itself and a table’s own space, `--site-table-space` (2rem), below, so
   text that follows a button stands as clear of it as of a table; where a heading
   follows, its larger space takes over (the owner, 2026-10-02, `think-0o9u`; nothing
@@ -2783,6 +2798,7 @@ text says **Profiles**: the directory’s title and heading, its list’s label,
 colophon link and each profile’s breadcrumb.
 Its names navigate directly to individual profile pages, with or without JavaScript; the
 directory does not open profile popovers.
+News articles and their homepage previews also use ordinary profile links.
 The colophon’s **Profiles** link and each profile’s breadcrumb navigate back to the
 directory. Each profile has one complete article at `profiles/ID.html`; the directory,
 credited names in tables and records, and the standalone profile use that address.

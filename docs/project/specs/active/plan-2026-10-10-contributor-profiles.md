@@ -684,6 +684,23 @@ Omitting optional quotes from safe HTML class attributes reduces it to 299,477 b
 preserving parsed content, links, MathML, SVG and article extraction anchors.
 Case pages retain their narrower KaTeX-only compaction.
 
+The following integration brings 40 commits through `e2e018f32` into `fb3f3e351`, with
+six conflicted files.
+Published site editions `v0.7.13` and `v0.7.14` remain in the history; the proposed
+profiles feature stays `v0.8.0`, and paper editions remain independent.
+The homepage and News archive share the same canonical announcement articles and topic
+chips. Renderers preserve authored names and wording; first linked mentions follow the
+preferred display names in the attribution policy.
+News and the profile directory use ordinary profile navigation, while marked credits in
+case and result records keep their contextual popovers.
+
+The census is unchanged at 27 profiles and 1,376 spans: 1,052 resolved, six non-person
+and 318 unresolved, with 146 PDFs pending inspection and no stale occurrences.
+The current URL registry check passes with 1,061 rows and no failures.
+The direct release-impact check against `e2e018f32` passes with exact no-change scopes
+of 24 inputs for the explainer and 52 for the methods survey.
+Broad validation and a fresh built preview for this merge remain pending.
+
 ## WIP Handoff: 2026-10-10
 
 The owner requested a work-in-progress PR and handoff before further implementation.
@@ -765,9 +782,9 @@ scratch logs are local diagnostic aids, not portable PR evidence.
 The outcome above is the durable receipt.
 Do not format or mutate the tree while broad pytest collection runs.
 
-The existing local preview at `http://127.0.0.1:8790/` serves the merged site, including
-`/contributors/index.html`; the bead board is at `http://127.0.0.1:7790/` while its
-server runs. Neither local server is a production deployment.
+The existing local preview at `http://127.0.0.1:8791/` serves the merged site, including
+`/profiles/index.html`; the bead board is at `http://127.0.0.1:7790/` while its server
+runs. Neither local server is a production deployment.
 
 ## Open Decisions and Limits
 

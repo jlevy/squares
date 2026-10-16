@@ -946,6 +946,34 @@ and structures.
 
 PRs and supporting records: [\#456](https://github.com/jlevy/squares/pull/456) · [Frontier table](https://jlevy.github.io/squares/frontier.html) · [Static rendering and deployment work](https://github.com/jlevy/squares/pull/456).
 
+<a id="changelog-date-2026-09-30"></a>
+
+### 2026-09-30
+
+<a id="changelog-entry-ahmed-eleven-square-optimality"></a>
+
+#### Ahmed Proves Trump’s Eleven-Square Packing Optimal
+
+Significance S5: T-060 resolves global optimality for eleven unit squares, matching Trump’s exact construction and closing the gap left by earlier lower bounds.
+
+[Manasseh Ahmed](packing/contributors/people/manasseh-ahmed.md)’s Astra-assisted proof establishes $s(11) = T$, where
+$T = 3.8770835900228141773078970601\ldots$ is the exact algebraic side attained by
+[Walter Trump](packing/contributors/people/walter-trump.md)’s construction. It rules out every smaller square container, allowing each
+unit square to rotate independently and permitting boundary contact.
+
+- The proof builds on work by [Joshua Levy](packing/contributors/people/joshua-levy.md) and [Marc Leonard Overbeck](packing/contributors/people/marc-leonard-overbeck.md). A complete cover divides the
+  problem into 2,184 cases, excludes 2,180 and handles the four symmetry-related
+  survivors with an exact argument ruling out every side below $T$.
+- The project completed all 2,180 exclusions and ten capture nodes, with an
+  adversarial AI review of their mathematical composition. The computations share
+  arithmetic and construction components with the source; they do not constitute
+  a second independent proof method.
+- Status clarification, 1 October 2026: the revised review ladder rates T-060 at
+  V3/C3. A second adversarial AI review and documented human oversight are still
+  needed for V4/C4.
+
+PRs and supporting records: [\#246](https://github.com/jlevy/squares/pull/246) · [Current eleven-square result](https://jlevy.github.io/squares/result/t-060.html) · [Current eleven-square optimality explainer](https://jlevy.github.io/squares/papers/n11-optimality-review.html) · [Ahmed’s original proof](https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c) · [Retained verification and reproduction limits](packing/resources/web/n11-optimality-2026-09-29/README.md) · [Mathematical audit and final acceptance](docs/project/reviews/review-2026-09-29-n11-optimality-census-contract.md) · [Revised verification and confirmation ladder](https://github.com/jlevy/squares/pull/262).
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
