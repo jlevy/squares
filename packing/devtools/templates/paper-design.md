@@ -721,7 +721,7 @@ come from its complete page.
 | Case record | `cases/N.html` | Case link, index entry or neighboring-record link | `a[data-case]`, atlas tiles and frontier rows load `article.site-case` in the shared case panel |
 | Result record | `result/t-nnn.html` | Result ID link or **Open Result Record** | Pressing the rest of a result row loads `article.site-result[data-result-overview]` in that row’s panel |
 | Person profile | `profiles/ID.html` | Public-name link or **Open profile** | An unmodified `a[data-contributor]` press loads `article.site-contributor` in the shared contributor panel |
-| Profile directory | `profiles/index.html` | Colophon **Profiles** link and alphabetical list | Profile links use the contributor panel |
+| Profile directory | `profiles/index.html` | Colophon **Profiles** link and alphabetical list | Profile links navigate directly to standalone profiles |
 | Card preview | The card’s ordinary target | Native `popovertarget` button and action link | The card’s preview remains authored in the page; it is not an article fetch |
 | Framed card preview | Target page with `?view=embed` | Native card button and **Expand** | The frame loads on first opening and uses its own document |
 
