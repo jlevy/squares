@@ -91,9 +91,8 @@ PUBLICATION_HISTORY = (
         version="v0.7.19",
         first_published="October 16, 2026",
         result_scope=(
-            "Register a result by others pending its review and adoption: a tighter "
-            "rational certificate of Thomas Schadt and David Ellsworth's packing of 29 "
-            "squares."
+            "Raise Benjamin Greff's s(76) = 9 and s(95) = 10 to V3/C1 on the intake's "
+            "recorded reproductions."
         ),
     ),
     PublicationHistoryEntry(
@@ -420,7 +419,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "5024d0e2a7044b41001b7213d5dc850f54552950"
+DATA_REVISION = "2d57609b38fc4824978027561968e15dab98efb5"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -847,9 +846,8 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.7.19",
         impact="patch",
         reason=(
-            "Register a result by others pending its review and adoption: a tighter "
-            "rational certificate of Thomas Schadt and David Ellsworth's packing of 29 "
-            "squares."
+            "Raise Benjamin Greff's s(76) = 9 and s(95) = 10 to V3/C1 on the intake's "
+            "recorded reproductions."
         ),
     ),
     ReleaseImpactDecision(
@@ -1170,14 +1168,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-lower-bounds-explainer.md",
         ),
         reason=(
-            "The site cut v0.7.19 for T-195, PR #622's N29 certificate, regenerated the "
-            "five claim documents at PUBLICATION_REVISION 32551da9, a commit of this "
-            "branch kept reachable from main by the merge commit the PR merges with; with "
-            "that revision read back as main's 1cc0dbbe, each is byte-identical to main's, "
-            "so the 32 repository links it pins are the only change, and no claim, "
-            "certificate or command moves. A link revision follows the site's edition and "
-            "is not a revision of the explainer, so it keeps v0.4.7. Source-compared; no "
-            "render of the claim documents was taken."
+            "The site cut v0.7.19 for T-184 and T-191 at V3/C1 regenerated the five claim "
+            "documents at PUBLICATION_REVISION 3d4ada4c, this branch's re-pin after "
+            "merging #652, kept reachable from main by the merge commit the PR merges "
+            "with; with that revision read back as #652's 1cc0dbbe, each is "
+            "byte-identical to #652's, so the 32 repository links it pins are the only "
+            "change, and no claim, certificate or command moves. A link revision follows "
+            "the site's edition and is not a revision of the explainer, so it keeps "
+            "v0.4.7. Source-compared; no render of the claim documents was taken."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2760,17 +2758,18 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ),
     ReleaseNoPublicChange(
         components=(
+            "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
         ),
         paths=(
-            "packing/campaign/result-requests.yaml",
-            "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
         ),
         outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
             "papers/n11-optimality-review.html",
             "papers/n11-optimality-review.md",
             "papers/n11-threshold-bound-review.html",
@@ -2779,29 +2778,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Rendered from this branch at cc35b331 and from main c9038049 at link revision "
-            "c9038049, the three papers' HTML and Markdown are byte-identical in all 126 "
-            "files the renderers write; each PDF prints from that HTML. The register gains "
-            "T-195, PR #622's N29 certificate, the source register its source, the "
-            "requests record #622's mapping to it, and the importer a house reader and a "
-            "verified exact form for a case that keeps an earlier print (think-gzrw); none "
-            "of the three papers prints any of them, so each keeps its edition: v0.1.7, "
-            "v0.1.0 and v0.2.2."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=("paper:n11-lower-bounds-explainer",),
-        paths=("packing/devtools/upper_bound_reports.py", "packing/frontier/results.yaml"),
-        outputs=(
-            "papers/n11-lower-bounds-explainer.html",
-            "papers/n11-lower-bounds-explainer.md",
-        ),
-        reason=(
-            "Rendered from this branch at cc35b331 and from main c9038049 with the "
-            "browser's math pass, the Markdown and HTML differ only in the live register "
-            "count beside T-018, 194 results registered so far and now 195. A register "
-            "count follows the site's data and is not a revision of the paper, so the "
-            "explainer keeps v0.4.7."
+            "Rendered on this branch over main e2e018f3 at link revision e2e018f3, once "
+            "with main's register and source register and once with this branch's, the "
+            "four papers' HTML before the browser's math pass, which this host cannot run, "
+            "and their Markdown are byte-identical; the PDFs print from that HTML. The "
+            "register's T-184 and T-191 cite the s(76) and s(95) replays and the 16 October "
+            "review, rise to V3/C1 and change their headline, claim, composition, "
+            "next_rung, notes, artifacts and unfinished confirmations, with the register "
+            "count unchanged, and the two "
+            "source rows cite the replays; no paper prints any of it, so each keeps its "
+            "edition."
         ),
     ),
 )
@@ -2940,7 +2926,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "32551da9"
+PUBLICATION_REVISION = "3d4ada4c"
 
 
 def data_pathspec() -> tuple[str, ...]:
