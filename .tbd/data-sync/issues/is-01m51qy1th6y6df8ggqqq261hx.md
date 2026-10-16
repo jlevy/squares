@@ -5,7 +5,7 @@ title: "Records: T-185 to T-190 to V3/C3 after the 16 October review, adopt 15 h
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 10
 delegate: user-eb-records-185-190
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T06:56:00.849Z
-updated_at: 2026-10-16T12:40:02.659Z
+updated_at: 2026-10-16T13:17:20.322Z
 started_at: 2026-10-16T06:56:10.518Z
 ---
 Stage 4 exit (records lane) for T-185 to T-190, after the review of 16 October (think-tdna; PR #648; docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md): all six accepted for finite feasibility, each supports V3/C3 with its confirming evidence entry (E-couzo-506-n175-exact-feasibility, E-mishapolk-70a033f-exact-feasibility, E-evand-606-n146-exact-feasibility, E-couzo-487b058-exact-feasibility, E-couzo-607-exact-feasibility, E-couzo-4e4c8ce-n237-exact-feasibility); findings RT-1 to RT-13, none blocking or major. Write the confirming evidence, map the review, derive the rungs, set the reviewed significance (T-185 S1->S2, T-188 S1->S2, T-189 S2->S3, T-190 S1->S2), fix RT-1 to RT-4, and adopt the houses the review's Adoption per Count names: T-186 at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303, 304; T-187 at 146; T-188 at 211; T-190 at 237 (15 counts). By the intake step of #641, every re-housed count is regularized in the same PR (both strong generators on the new witnesses, select, admit) or allowlisted with an open bead. Stacked on the top of the regularization stack (#644 -> 3b -> 3c -> leftovers).
@@ -32,3 +32,7 @@ Stage 4 exit (records lane) for T-185 to T-190, after the review of 16 October (
 2026-10-16 11:59Z user-eb-records-185-190: all 8 z7wn runs finished 09:43Z (evand z7wn-a/b-1016: 1,554 + 3,263 CPU-s; grid-slack z7wn-a/b-deg05/1/5-1016: 3,487 CPU-s). Selection killed by the 10:40Z restart; rerun as batches: A (129..211) done 11:52Z: 6 regularized (129 146 175 204 evand same-side; 154 grid 5 deg; 156 grid 0.5 deg), 176 and 211 decided no better (211 all views row 7 review). B (232 237 264 271 302 303 304) not selected: allowlisted under new bead think-r3cl (child of think-sfas, claimed). Merged #653 3b locally (48c1054ec), axis rerun done; next: merge leftovers/3c heads, admit A, renders, retain run evidence, re-pin, edition, push, draft PR by 13:15Z.
 
 2026-10-16 12:41Z user-eb-records-185-190: DONE. Draft PR #657 (https://github.com/jlevy/squares/pull/657, base claude/intake-2026-10-16-regularize-leftovers at 7e44e4bdb, labels intake + S3), head b64187bdf. Includes #648 (2ea1d00bb) and the stack (3a, 3b 4da7ae92d, 3c 97d513032, leftovers). V3/C3 for T-185..T-190; 15 houses; regularized 129 146 154 156 175 204; settled 176 211; 232 237 264 271 302 303 304 in PENDING_ALLOWED under think-r3cl (runs done, selection owed). Site: folded into the stack's v0.7.15 (v0.7.16 cut reverted, since the impact check reads origin/main). records tier 0 failures; focused tests 624 pass after 2 updates. Replies drafted in think-o644, think-rvv7, think-qik6 (incl. #506). Can close at merge: think-z7wn; think-r3cl stays open.
+
+2026-10-16 13:12Z user-eb-records-185-190: CI fix + review B round pushed: 4dcac3d03 (B1 sparse checkout +4 packets; B2 bound-citations, family census, translation screen, 574 algebraic claims, closed form 302; B3 211 -> PENDING_ALLOWED think-r3cl; B5 176 text), re-pin daee851d4. 330 focused tests pass locally. Poster composites not redrawn. PENDING_ALLOWED now 8 (211, 232, 237, 264, 271, 302, 303, 304).
+
+2026-10-16 13:17Z user-eb-records-185-190: head 733794e33 pushed (merged leftovers' new head 6ecb4c810; papers' no-change record covers bound-citations.json). Local records tier at 733794e33: 0 failures (124 s). Hosted CI running.

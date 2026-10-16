@@ -5,7 +5,7 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 14
 delegate: user-eb-land-644
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51hy396vnjkxe4726egs8x5
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T12:44:51.234Z
+updated_at: 2026-10-16T13:19:08.237Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 
@@ -40,3 +40,7 @@ Release completion must include both infographic families and every advertised S
 2026-10-16T12:13Z user-eb-land-644: pushed 5e5c2cd96 (B1 by reproduction; originals unrecoverable): evidence in packing/cases/regularized_drawings/think-la7h-2026-10-16/ (selection-3a.json/.md, 32 gz reports, 4 grid run.json, driver receipt), laid out like #653's think-kpm3. Reproduces every covered outcome (105 grid, 129/146 Daniel chosen with drawn measures; Daniel 105/204 row 7, 204/272 row 4; grid ties 204/303, row 7 at 272 at all three thresholds). Not re-run by driver: 156, 176, 271, 303 (load). --records 52/52 at 5e5c2cd96. PR body updated. Trying driver at 303 alone until ~13:05Z.
 
 2026-10-16T12:44Z user-eb-land-644: pushed 7226182b0: driver at 303 reproduced (row 4 held; 3a-rerun-303-1016, 1,639 CPU-s), retained; all three settlements now reproduced on both generators; driver not re-run only at 156/176/271 (admitted, independently verified). CI green at 5e5c2cd96 (31 success/28 skipped); CI at 7226182b0 running. PR body updated.
+
+2026-10-16T13:06Z user-eb-land-644: review C addressed at 546e2c675 (reply pullrequestreview-5548168125): C2 SETTLED 204/272/303 name re-runs + evidence dir (dff894b88, re-pinned); C4 ten-owe check restored; C3 PR body; C5 deferred to think-e533; C6 bead think-nv87 (infographics v0.6.2, child of think-sfas); C1 driver not re-run at 156/176/271 = owner's call (dominance recorded). CI at 7226182b0: frontend timed out (900 s Chromium table layout, unrelated); CI at 546e2c675 pending. Stopping at 13:30Z.
+
+2026-10-16 ~13:20Z coordinator user-eb: #644 at 546e2c675 had only the known animate-view timing flake red (546.8 ms > 400 ms); the session cannot re-run jobs (403), so the coordinator pushed an empty commit 923a6170c to re-trigger CI. Review C (final head, 7226182b0) 0/0/2/4: C2-C4 fixed (dff894b88, re-pin 546e2c675), C5 -> think-e533, C6 -> think-nv87 (infographics v0.6.2 at the top of the stack); C1 OPEN as the owner's call: the Daniel driver was not re-run at 156, 176, 271 (host load); the drawn views dominate every retained grid candidate there. B1 resolved by reproduction (originals unrecoverable): grid-slack all nine counts at 0.5/1/5 deg, driver at 105, 129, 146, 204, 272, 303; every covered outcome matches. Merge-ready once CI is green at 923a6170c and the owner accepts C1.
