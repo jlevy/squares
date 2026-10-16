@@ -595,19 +595,30 @@ def test_a_lapse_where_the_house_reads_regular_reads_pending(tmp_path: Path) -> 
 
 
 def test_a_held_strong_view_is_recorded_held_with_the_rules_reason() -> None:
-    # Review B3 of #636, at the reviewer's count: where the layer holds a strong view the
-    # rule does not draw, the run's outcome reads `held: ` and why, not `view`, so the
-    # record does not say a view decided what it did not draw.
+    # Review B3 of #636, at the reviewer's count (26 today, the first a strong view
+    # regularizes over an irregular house): where the layer holds a strong view the rule
+    # does not draw, the run's outcome reads `held: ` and why, not `view`, so the record
+    # does not say a view decided what it did not draw.
     record = _record()
     every = defaults.index_entries()
+    views = {found["n"]: found for found in record["entries"]}
     row = next(
-        row
-        for row in record["states"]
-        if row["state"] == defaults.REGULARIZED_STATE
-        and every[row["n"]].get("generator") in defaults.STRONG_GENERATORS
+        (
+            row
+            for row in record["states"]
+            if row["state"] == defaults.REGULARIZED_STATE
+            and every[row["n"]].get("generator") in defaults.STRONG_GENERATORS
+            and (
+                views[row["n"]]["measures"]["uneven_axis"][defaults.HOUSE]
+                or views[row["n"]]["measures"]["near_axis"][defaults.HOUSE]
+            )
+        ),
+        None,
     )
+    if row is None:
+        pytest.skip("the data holds no strong view of an irregular house")
     n = row["n"]
-    view = next(found for found in record["entries"] if found["n"] == n)
+    view = views[n]
     drawn = defaults.count_state(n, every[n], view, row["witness"])
     assert drawn["decisions"][-1]["outcome"] == "view"
     later = {**every[n], "generator": "regularize_grid_slack/1", "run": {"id": "a-later-run"}}
