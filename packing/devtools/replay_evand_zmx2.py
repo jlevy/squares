@@ -14,7 +14,10 @@ states, builds the binary with ``cargo``, and runs ``zmx2 cert`` under
     re-checking the digests.
 ``run --case N --mode d4|full --work DIR --out OUT [--threads T] [--x LO-HI] [--y LO-HI]``
     Runs the case's cover with the flags its source used (``CASES``), writing the
-    receipt ``OUT/<name>.log`` and the root log ``OUT/<name>_roots.log``. ``--x`` and
+    receipt ``OUT/<name>.log`` and the root log ``OUT/<name>_roots.log``. Where the
+    source split the D4 region between ``zmx2`` and ``zm_mixed.py`` sub-roots (s(76) and
+    s(95)), it also passes the source's ``--uncert-cap``, so the roots left to
+    ``zm_mixed.py`` are listed in full, as the source's record lists them. ``--x`` and
     ``--y`` restrict the root region, so one sweep can be split across machines; the
     region is in the file name. ``--time-limit S`` stops the run after ``S`` seconds
     with exit 3, so a session can push partial receipts. Running the same command again
@@ -66,6 +69,8 @@ WEB = REPO / "packing/resources/web"
 CRATE = WEB / "evand-square-packing-2026-09-26/square-packing/s12/verify2"
 WAND125 = WEB / "wand125-point-and-mixed-2026-10-01/square-packing-bounds/certificates"
 WAND125_N61 = WEB / "wand125-point-n61-2026-09-30/square-packing-bounds/point_n61_L8"
+BENGREFF_S76 = WEB / "bengreff-s76-certificate-2026-10-14/s76-certificate/cover"
+BENGREFF_S95 = WEB / "bengreff-s95-certificate-2026-10-15/s95-certificate/cover"
 
 #: The crate files every checker version builds with: path in the crate, retained copy, SHA-256.
 CRATE_FILES = (
@@ -110,6 +115,11 @@ class Case:
     flags: tuple[str, ...]
     #: Root cells per axis: the side over the centre pitch 1/10 (``full``); half in ``d4``.
     cells: int
+    #: Flags that change only how many uncertified boxes ``zmx2`` lists in a root before
+    #: it stops that root (``--uncert-cap``), never which roots it certifies: ``run``
+    #: passes them, as the source's own sweep did; ``control`` and the file name leave
+    #: them out, since the retained controls ran ``zmx2``'s default.
+    listing: tuple[str, ...] = ()
 
 
 CASES = {
@@ -156,6 +166,26 @@ CASES = {
         "6b7f0f79",
         ("--pair-points",),
         80,
+    ),
+    # Benjamin Greff's covers, whose verify.sh runs zmx2 cert --d4 --uncert-cap 200000
+    # and leaves the roots it does not certify to zm_mixed.py's sub-roots.
+    76: Case(
+        "n76",
+        BENGREFF_S76 / "s76_cover_v5.txt.gz",
+        "b6a1214b99f00e5dd136d74c8d87bccd178df38a1063b2c7be90517eb2b862b2",
+        "6b7f0f79",
+        (),
+        90,
+        ("--uncert-cap", "200000"),
+    ),
+    95: Case(
+        "n95",
+        BENGREFF_S95 / "s95_cover_v2.txt.gz",
+        "8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c",
+        "6b7f0f79",
+        (),
+        100,
+        ("--uncert-cap", "200000"),
     ),
 }
 
@@ -256,6 +286,7 @@ def run_case(
         x=x,
         y=y,
         time_limit=time_limit,
+        listing=case.listing,
     )
 
 
@@ -285,8 +316,13 @@ def _sweep(
     x: str | None,
     y: str | None,
     time_limit: float | None = None,
+    listing: Sequence[str] = (),
 ) -> int:
-    """Run ``zmx2 cert`` on the staged ``cover`` under a receipt; return its exit status."""
+    """Run ``zmx2 cert`` on the staged ``cover`` under a receipt; return its exit status.
+
+    ``listing`` (`Case.listing`) is passed after the case's flags and named in neither the
+    file name nor the region.
+    """
     cells = case.cells if mode == "full" else case.cells // 2
     (x0, x1), (y0, y1) = root_span(x, cells), root_span(y, cells)
     stage = cover.parents[1]
@@ -305,6 +341,7 @@ def _sweep(
         f"certificates/{cover.name}",
         f"--{mode}",
         *case.flags,
+        *listing,
         "--threads",
         str(threads),
         "--log",
@@ -373,6 +410,12 @@ CONTROLS: dict[tuple[int, str], Control] = {
     (77, "drop-heaviest-segment"): Control("d4", "5-5", "41-41"),
     (61, "drop-heaviest-point"): Control("d4", "26-26", "8-8"),
     (61, "drop-second-heaviest-point"): Control("d4", "36-36", "36-36"),
+    # Run at intake by the packets' receipts/programs/run_control.sh, with this module's
+    # mutate and the 6b7f0f79 binary its build made, before these cases were registered.
+    (76, "drop-heaviest-point"): Control("d4", "15-15", "15-15"),
+    (76, "drop-heaviest-segment"): Control("d4", "5-5", "35-35"),
+    (95, "drop-heaviest-point"): Control("d4", "15-15", "15-15"),
+    (95, "drop-heaviest-segment"): Control("d4", "5-5", "45-45"),
 }
 
 

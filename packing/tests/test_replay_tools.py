@@ -76,6 +76,41 @@ def test_driver_digests_match_the_retained_inputs() -> None:
         assert case.checker in replay_evand_zmx2.CHECKERS
 
 
+@pytest.mark.parametrize("n", [76, 95])
+def test_a_split_cover_runs_with_its_source_uncert_cap_and_the_retained_name(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, n: int
+) -> None:
+    """``run`` passes the source's ``--uncert-cap``, so the roots left to zm_mixed.py are
+    listed in full, under the name the packet's replay receipt has; ``control`` does not."""
+    calls: list[tuple[list[str], Path]] = []
+
+    def fake_run(argv: list[str], *, receipt: Path, **_: object) -> dict[str, object]:
+        calls.append((list(argv), receipt))
+        return {"exit": 0}
+
+    binary = tmp_path / "6b7f0f79/verify2/target/release/zmx2"
+    monkeypatch.setattr(replay_evand_zmx2, "build", lambda _checker, _work: binary)
+    monkeypatch.setattr(replay_evand_zmx2.replay_receipt, "run", fake_run)
+    out = tmp_path / "out"
+    work = tmp_path / "work"
+    assert (
+        replay_evand_zmx2.run_case(n, "d4", work=work, out=out, threads=1, x=None, y=None) == 0
+    )
+    assert (
+        replay_evand_zmx2.control_case(n, "drop-heaviest-point", work=work, out=out, threads=1)
+        == 0
+    )
+    (run, receipt), (control, control_receipt) = calls
+    assert receipt.name == f"n{n}_zmx2_d4.log"
+    assert run[run.index("--uncert-cap") + 1] == "200000"
+    assert run[run.index("--log") + 1] == str(out / f"n{n}_zmx2_d4_roots.log")
+    assert "--uncert-cap" not in control
+    region = replay_evand_zmx2.CONTROLS[(n, "drop-heaviest-point")]
+    assert control_receipt.name == (
+        f"n{n}_control_drop-heaviest-point_zmx2_d4_x{region.x}_y{region.y}.log"
+    )
+
+
 def test_driver_region_must_lie_in_the_root_grid() -> None:
     span = replay_evand_zmx2.root_span
     assert span(None, 90) == (0, 89)

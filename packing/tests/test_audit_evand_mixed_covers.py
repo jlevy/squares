@@ -1,4 +1,4 @@
-"""Controls for the 1 October imports in `devtools.audit_evand_mixed_covers`.
+"""Controls for the 1 October and the split imports in `devtools.audit_evand_mixed_covers`.
 
 Three covers joined the two of the September 28 packet: Daniel's ``s(60) = 8`` from the
 October 1 evand packet, and wand125's ``s(59) = 8`` and ``s(77) = 9`` from the October 1
@@ -14,6 +14,13 @@ and ``.xz`` included, and its run manifests state the logs it ships. ``s(59)``'s
 ``zm_mixed.py`` runs are undecided from their manifests, and per-root records decide
 them only when a deeper run certifies every uncertified root.
 
+Benjamin Greff's ``s(76)`` and ``s(95)`` covers are split: ``zmx2`` leaves a few D4 roots
+and ``zm_mixed.py`` certifies their sub-roots. Both covers audit clean, the source's
+records and this repository's replay are each one clean decision over the D4 region and
+equal root for root, and a composite is refused when a sub-root is missing, uncertified,
+run on another cover, at other settings or outside its region, or when the ``zmx2`` log
+falls short of its region or leaves a root no sub-root covers.
+
 `tests/test_evand_mixed_covers.py` holds the controls for ``s(21)`` and ``s(45)``.
 """
 
@@ -22,6 +29,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import shutil
 from collections import Counter
 from collections.abc import Callable, Mapping
 from dataclasses import replace
@@ -36,20 +44,25 @@ from devtools.audit_evand_mixed_covers import (
     POINT_COVERS,
     POINT_ONLY_CASES,
     REPO,
+    SPLIT_CASES,
     ZM_MIXED_SETTINGS,
     Case,
     MixedCover,
     audit_cover,
+    audit_split_composite,
     audit_zm_mixed,
     audit_zm_mixed_composite,
     audit_zm_mixed_manifests,
     audit_zmx2,
     audit_zmx2_manifest,
     check_imported_case,
+    check_split_case,
+    compare_sub_roots,
     cover_clean,
     main,
     parse_cover,
     read_record_bytes,
+    sub_root_comparison_clean,
     zm_mixed_clean,
     zmx2_clean,
     zmx2_roots,
@@ -733,3 +746,177 @@ def test_an_uncertified_box_outside_its_root_is_refused(tmp_path: Path) -> None:
     result = audit_zm_mixed_composite(case, complete, [deep])
     assert not result["uncertified_boxes_inside_their_roots"]
     assert not result["composite_clean"]
+
+
+# --- the split covers: s(76) and s(95) ---------------------------------------------------
+
+#: Total, points, segments, the side, segment lengths, and what the source's two checkers
+#: split: the zmx2 roots it leaves, the zm_mixed.py sub-roots, their boxes and depth.
+SPLIT_STATED = {
+    76: (
+        "3788361049/50000000",
+        41633,
+        9744,
+        9,
+        {"1/500": 2104, "1/50": 5976, "1/16": 1664},
+        (4, 64, 4950, 15),
+    ),
+    95: (
+        "3791753447/40000000",
+        48352,
+        11438,
+        10,
+        {"1/500": 3222, "1/50": 5976, "1/16": 2240},
+        (19, 304, 9614, 13),
+    ),
+}
+
+
+@pytest.mark.parametrize("n", sorted(SPLIT_STATED))
+def test_a_split_cover_is_well_formed_light_and_symmetric(n: int) -> None:
+    total, points, segments, side, lengths, _ = SPLIT_STATED[n]
+    result = audit_cover(SPLIT_CASES[n])
+    assert cover_clean(result), result
+    assert (result["total"], result["points"], result["segments"]) == (total, points, segments)
+    assert Fraction(total) < n
+    # Segment mass on every grid line, the container's four walls included.
+    lines = sorted(str(c) for c in range(side + 1))
+    assert result["lines_carrying_segments"] == {"x": lines, "y": lines}
+    assert result["segment_lengths"] == lengths
+
+
+@pytest.mark.parametrize("n", sorted(SPLIT_STATED))
+def test_the_source_and_the_replay_are_each_one_decision_and_agree(n: int) -> None:
+    *_, side, _, (open_roots, sub, boxes, depth) = SPLIT_STATED[n]
+    region = len(zmx2_roots(side, "d4"))
+    report, clean = check_split_case(SPLIT_CASES[n])
+    assert clean, report
+    for name in ("source_composite", "replay_composite"):
+        composite = report[name]
+        assert composite["composite_clean"]
+        assert composite["open_root_count"] == open_roots
+        assert composite["roots_certified_by_zmx2"] == region - open_roots
+        assert composite["zm_mixed_roots_certified"] == sub == 16 * open_roots
+        assert composite["sub_roots_tile_open_roots_exactly"]
+        assert composite["open_roots_equal_source_list"]
+        assert composite["zm_mixed_roots_equal_source_jobs"]
+        assert composite["zm_mixed_census"]["boxes"] == boxes
+        assert composite["zm_mixed_census"]["maxdepth"] == depth
+        assert composite["zm_mixed_census"]["UNCERT"] == 0
+    assert report["replay_zmx2_vs_source"]["roots_identical"] == region
+    assert report["replay_zm_mixed_vs_source"]["roots_identical"] == sub
+    assert report["wall_control_vs_replay"]["roots_identical"] == region
+
+
+@pytest.mark.parametrize("n", sorted(SPLIT_STATED))
+def test_the_composite_command_reads_the_replay_or_the_source(
+    capsys: pytest.CaptureFixture[str], n: int
+) -> None:
+    case = SPLIT_CASES[n]
+    assert case.split is not None
+    for extra in ([], ["--source"]):
+        code, result = _run(capsys, "composite", "--case", str(n), *extra)
+        assert code == 0, result
+        assert result["composite_clean"]
+    code, result = _run(capsys, "compare-sub-roots", "--case", str(n))
+    assert code == 0, result
+    code, result = _run(
+        capsys, "compare-zmx2", "--case", str(n), "--records", str(case.split.replay_zmx2)
+    )
+    assert code == 0, result
+    # zmx2 alone does not decide a split cover: its open roots are uncertified.
+    code, result = _run(capsys, "zmx2", "--case", str(n), "--mode", "d4", str(case.split.zmx2))
+    assert code == 1
+    assert result["uncertified_boxes"] > 0
+
+
+def _split_copy(tmp_path: Path) -> tuple[Path, Path]:
+    """The s(76) replay's zmx2 root log and sub-root records, copied for a fault."""
+    split = SPLIT_CASES[76].split
+    assert split is not None
+    log = tmp_path / "roots.log"
+    log.write_bytes(read_record_bytes(split.replay_zmx2))
+    records = tmp_path / "zm_mixed"
+    records.mkdir()
+    for path in sorted(split.replay_zm_mixed.glob("j*.jsonl")):
+        shutil.copyfile(path, records / path.name)
+    return log, records
+
+
+def _edit_record(
+    records: Path, name: str, edit: Callable[[list[dict[str, Any]]], None]
+) -> None:
+    path = records / name
+    lines = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+    edit(lines)
+    path.write_text("\n".join(json.dumps(line) for line in lines) + "\n", encoding="utf-8")
+
+
+def _uncertify(lines: list[dict[str, Any]]) -> None:
+    lines[1]["st"]["UNCERT"] = 1
+    lines[1]["unc"] = [lines[1]["root"]]
+
+
+def _move_root(lines: list[dict[str, Any]]) -> None:
+    lines[1]["root"] = [*lines[1]["root"][:4], "0", "1/32"]
+
+
+def _edit_log(log: Path, edit: Callable[[list[str]], list[str]]) -> None:
+    log.write_text("\n".join(edit(log.read_text(encoding="ascii").splitlines())) + "\n")
+
+
+def _drop_root(lines: list[str]) -> list[str]:
+    first = next(i for i, line in enumerate(lines) if line.startswith("ROOT 0 "))
+    return lines[:first] + lines[first + 1 :]
+
+
+def _open_root(lines: list[str]) -> list[str]:
+    return [
+        re.sub(r" uncert 0 ", " uncert 1 ", line) if line.startswith("ROOT 0 ") else line
+        for line in lines
+    ]
+
+
+SPLIT_FAULTS: dict[str, Callable[[Path, Path], object]] = {
+    "none": lambda _log, _records: None,
+    "sub-root missing": lambda _log, records: (records / "j000.jsonl").unlink(),
+    "sub-root twice": lambda _log, records: shutil.copyfile(
+        records / "j000.jsonl", records / "j999.jsonl"
+    ),
+    "uncertified": lambda _log, records: _edit_record(records, "j000.jsonl", _uncertify),
+    "other cover": lambda _log, records: _edit_record(
+        records, "j000.jsonl", lambda lines: lines[0]["sha256"].update(input="0" * 64)
+    ),
+    "other depth": lambda _log, records: _edit_record(
+        records, "j000.jsonl", lambda lines: lines[0]["settings"].update(depth=23)
+    ),
+    "other settings": lambda _log, records: _edit_record(
+        records, "j001.jsonl", lambda lines: lines[0]["settings"].update(theta_bias=3)
+    ),
+    "root outside its region": lambda _log, records: _edit_record(
+        records, "j000.jsonl", _move_root
+    ),
+    "zmx2 root missing": lambda log, _records: _edit_log(log, _drop_root),
+    "zmx2 root left open": lambda log, _records: _edit_log(log, _open_root),
+}
+
+
+@pytest.mark.parametrize("fault", sorted(SPLIT_FAULTS))
+def test_a_split_composite_is_clean_only_when_every_open_root_is_tiled(
+    tmp_path: Path, fault: str
+) -> None:
+    log, records = _split_copy(tmp_path)
+    SPLIT_FAULTS[fault](log, records)
+    result = audit_split_composite(SPLIT_CASES[76], log, records)
+    assert result["composite_clean"] == (fault == "none"), result
+
+
+def test_a_replayed_sub_root_whose_census_differs_is_refused(tmp_path: Path) -> None:
+    _, records = _split_copy(tmp_path)
+    split = SPLIT_CASES[76].split
+    assert split is not None
+    assert sub_root_comparison_clean(compare_sub_roots(split.zm_mixed, records))
+    _edit_record(records, "j005.jsonl", lambda lines: lines[1]["st"].update(boxes=1))
+    result = compare_sub_roots(split.zm_mixed, records)
+    assert result["files_that_differ"] == ["j005.jsonl"]
+    assert not sub_root_comparison_clean(result)
