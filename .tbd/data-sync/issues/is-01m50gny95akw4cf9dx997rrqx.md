@@ -3,9 +3,9 @@ type: is
 id: is-01m50gny95akw4cf9dx997rrqx
 title: "Intake 2026-10-15 lane C: stage-7 follow-ups to open issues owing a reply, and their record"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: ecstatic-edison-lane-c
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:30:00.612Z
-updated_at: 2026-10-15T20:39:42.724Z
+updated_at: 2026-10-16T01:35:38.746Z
 started_at: 2026-10-15T19:30:08.588Z
+closed_at: 2026-10-16T01:35:38.746Z
+close_reason: "#626 merged 2026-10-16 (22c0ebf0d); #557/#565 replies held for the owner (think-sdsl, think-mxhc)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
