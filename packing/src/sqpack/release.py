@@ -72,6 +72,9 @@ class PublicationHistoryEntry(NamedTuple):
 #: happened (the owner, 2026-09-22: "accurately record the date of when that was first
 #: published"). The deployment and commit behind each date, so it can be re-read:
 #:
+#:   v0.7.11 2026-10-16T01:25:34Z  bbc12b617  the merge of PR 631, the top of stack 632 (PR
+#:                                            627 cut it); dated October 15 when cut, it went
+#:                                            live the next day in UTC (think-tk0u)
 #:   v0.5.0  2026-10-02T01:07:03Z  8aaa411dc  the merge of PR 291, label and content together
 #:   v0.4.2  2026-09-28T06:11:35Z  c19e6c0e2  the merge of PR 239, label and content together
 #:   v0.4.1  2026-09-22T23:12:36Z  d5b1c2e1b  the merge of PR 218, label and content together
@@ -110,7 +113,7 @@ PUBLICATION_HISTORY = (
     ),
     PublicationHistoryEntry(
         version="v0.7.11",
-        first_published="October 15, 2026",
+        first_published="October 16, 2026",
         result_scope=(
             "Register five results in report order, T-188 to T-192, none adopting a "
             "house: smaller reported packings of 211 and 237 squares, a reported s(95) = "
@@ -1059,6 +1062,37 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/src/sqpack/release.py",),
+        outputs=("index.html", "about.html"),
+        reason=(
+            "Dates v0.7.11 October 16, 2026, the day its first Pages deployment went live "
+            "(bbc12b61, the merge of PR 631 that landed stack 632, 2026-10-16T01:25:34Z), "
+            "and records that deployment in the history's comment (think-tk0u, PR 627 "
+            "review B3). The head edition stays v0.7.14 of October 16. No page prints a "
+            "date from below the head: the pages stamp the head edition, the films the "
+            "v0.4.2 entry, and site_urls --check finds the URL registry and sitemap "
+            "unchanged. The deployed index.html and about.html name no v0.7.11. This is a "
+            "source-reviewed disposition; no site rebuild or byte comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main e2e018f3 at one link revision, once with "
+            "main's requests record and once with the branch's, the survey's HTML before "
+            "the browser's math pass and its Markdown are byte-identical, as are the other "
+            "40 files the render writes. The PDF prints from that HTML and was not "
+            "rebuilt. The record gains #643's entry, the project's tracking issue for the "
+            "Lean proof of ValidTilt9, which the survey does not read, so it keeps v0.2.2."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",

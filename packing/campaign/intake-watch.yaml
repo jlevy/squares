@@ -895,3 +895,19 @@ repositories:
       head 4c319c2, which the pingyou-pr574-certificates-2026-10-13 packet pins (T-174), and
       pingyou/n29-certificate-20261015 at 3115557, PR #622's head, an N29 certificate refinement
       that think-30n2 triages as an intake report. Nothing to import from the default branch.
+  # The overnight intake pass of 2026-10-16 (think-hg5s), lane A (think-mu5v): the sweep
+  # residue of 05:08Z.
+  - url: https://github.com/wand125/square-packing
+    read_through: 319a779efcc78db2f92bffc87844446f8723b01d
+    read_on: '2026-10-16'
+    bead: think-jh0n
+    note: >-
+      The six commits of 16 October (03:25Z to 04:47Z) past the 0eb3fe5 read. 2c75edc and e99f5e3
+      add problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/, a Lean kernel proof of
+      Evan Daniel's ValidTilt9 and, with his reduction, of s(k^2 - 4) = k for every k >= 8
+      (validTilt9, valid9 and bentz4, axioms propext, Classical.choice and Quot.sound), whose
+      per-root certificates and list of 1,275,911 generated files are in the release
+      validtilt9-lean-v1: a formalization of T-081 that think-jh0n owns until a packet pins it
+      (#643). 0aa00f7 lists it in the source's index and site. 4c926da proves s(46) = 10 +
+      2/sqrt(3) for unit squares in an equilateral triangle, another container, outside this
+      record; 574d27c and 319a779 add it to the source's triangle paper. Nothing else to import.
