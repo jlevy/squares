@@ -5,13 +5,17 @@ title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 a
 kind: task
 status: open
 priority: 2
-version: 2
+version: 5
+delegate: null
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
+hold: null
+hold_until: null
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-15T20:11:55.682Z
+updated_at: 2026-10-15T23:31:28.285Z
+started_at: 2026-10-15T23:31:02.497Z
 ---
 Stage 1 triage of pull request jlevy/squares#622 (BuddenPing, PingYou Ltd, "data: submit a tighter exact N29 packing certificate", opened 2026-10-15T18:43:54Z, no comments or reviews when read at about 19:50Z). A result submitted as a pull request, treated as an intake report as #574 was (think-9v2k): never merged, approved, pushed to or commented on here. Lane D of the 2026-10-15 evening intake pass (think-wnsv, think-ykg6), read-only.
 
@@ -44,4 +48,10 @@ Waits for the record to hold sigma (think-6gti's import of #545), or for the own
 
 ## Draft acknowledgement (not posted; stage 7 posts it after the pull request carrying this triage merges)
 
-@BuddenPing, thank you for the N29 submission. We have pinned this pull request at 3115557 and your release data/pingyou-n29-certificate-2026-10-15-v1: pingyou-n29-certificate-2026-10-15.zip, 430,075 bytes, SHA-256 0dc9bcd1…, which matches your HostedData manifest and GitHub's digest. In triage we read certificates/n029.cert.json (SHA-256 a01428c5…): 29 squares with rational coordinates, and its exact side equals the side_exact in claims.json. Compared exactly, it is 1.57 × 10⁻³⁶ below T-155, this project's exact side for the same Schadt–Ellsworth packing, and 7.32 × 10⁻⁹⁰ below your #574 certificate at 29, which the 14 October ledger left undecided. Whether it is recorded turns on the comparison that ledger could not make: the record's reported value at 29 is the catalogue's print 5.93383346267692, whose exact side is the root of Evan Daniel's degree-7213 polynomial (#545). Your certificate realizes that same packing, so we expect it just above that root, as most of #574's decided rows were. We will decide it exactly, replay the certificate on our two exact routes, and report the verdict here. Merging the pull request is the owner's call; the import goes through the record's own packet, as #574's did.
+@BuddenPing, thank you for the N29 submission. We have pinned this pull request at 3115557 and your release data/pingyou-n29-certificate-2026-10-15-v1: pingyou-n29-certificate-2026-10-15.zip, 430,075 bytes, SHA-256 0dc9bcd1…, which matches your HostedData manifest and GitHub's digest. In triage we read n29-certificate/certificates/n029.cert.json (SHA-256 a01428c5…): 29 squares with rational coordinates, and its exact side equals the side_exact in claims.json. Compared exactly, it is 1.57 × 10⁻³⁶ below T-155, this project's exact side for the same Schadt–Ellsworth packing, and 7.32 × 10⁻⁹⁰ below your #574 certificate at 29, which the 14 October ledger left undecided. Whether it is recorded turns on the comparison that ledger could not make: the record's reported value at 29 is the catalogue's print 5.93383346267692, whose exact side is the root of Evan Daniel's degree-7213 polynomial (#545). Your certificate realizes that same packing, so we expect it just above that root, as most of #574's decided rows were. We will decide it exactly, replay the certificate on our two exact routes, and report the verdict here. Merging the pull request is the owner's call; the import goes through the record's own packet, as #574's did.
+
+**A question for the record.** This pull request makes no statement about AI assistance. Your answer on #503, that those solutions were AI assisted by "PY", an unreleased agentic AI offering by PingYou Ltd, covered #503 and #504. Which account applies to this certificate?
+
+## Notes
+
+2026-10-15 addressing-632-af04656 (review A on #628, think-e10e): the draft acknowledgement now asks which AI-assistance account applies (A2), as the #503 and #504 replies asked, and names the certificate by its archive path, n29-certificate/certificates/n029.cert.json (A4). Released back to open: the bead's own work (the comparison once think-6gti lands sigma, then the stage 7 reply) is unchanged.

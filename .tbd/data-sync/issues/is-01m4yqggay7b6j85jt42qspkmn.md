@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: s(237) <= 15.902603638260 at 4e4c8ce, 2.40e-11 b
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T02:50:53.662Z
-updated_at: 2026-10-15T09:15:47.674Z
+updated_at: 2026-10-16T00:13:47.068Z
 started_at: 2026-10-15T02:50:59.973Z
 ---
 Stage 1 triage by the 15 October reads lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-reads-1015), from the 02:30Z sweep at main 6964362b5.
@@ -59,3 +59,5 @@ Draft sentence for the #607 acknowledgement (think-qik6), not posted:
 ## 2026-10-15 records-1016 lane (think-mq0k), branch claude/wizardly-meitner-wqn4x3-records-1016, https://github.com/jlevy/squares/pull/616
 
 Registered as T-190 (V0/C0, draft S1) at 237, 2.40e-11 below T-189 (#607), now read exactly through #607's packet by the new HOUSES reader [Couzo certificates 2026-10-14] (readers [Couzo n237 2026-10-15] and [Couzo verified bounds 2026-10-14] added too); T-056 added to the declaration; claims refrozen at main c4c690a3e. Ordering: 4e4c8ce (00:31:53Z) precedes #610 (cover 01:10:26Z, issue 01:16:36Z), so T-190 comes before #610's T-191, not after it as the brief listed. Close at merge.
+
+2026-10-16 coordinator: T-190's review moves to think-qik6 (#627 616/A4); close this at #627's merge.

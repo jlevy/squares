@@ -5,16 +5,19 @@ title: "Merge the 15 October intake PRs: stack #627 -> #628 -> #631 (gh stack), 
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
 delegate: ecstatic-edison-coordinator
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
+child_order_hints:
+  - is-01m50ybzkb05ez194ed7p6c3j9
+  - is-01m50ycsgk1c3ht1fqn3hk8p8a
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:20.221Z
-updated_at: 2026-10-15T22:59:24.363Z
+updated_at: 2026-10-16T00:02:17.859Z
 started_at: 2026-10-15T22:59:24.363Z
 ---
 

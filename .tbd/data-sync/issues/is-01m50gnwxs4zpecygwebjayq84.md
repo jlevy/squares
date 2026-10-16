@@ -5,7 +5,7 @@ title: "Intake 2026-10-15 lane A: carry PR #616 forward: merge main, regenerate 
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
 delegate: ecstatic-edison-lane-a
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:29:59.225Z
-updated_at: 2026-10-15T22:02:55.526Z
+updated_at: 2026-10-16T00:36:13.234Z
 started_at: 2026-10-15T19:30:07.725Z
 ---
 
@@ -26,3 +26,7 @@ started_at: 2026-10-15T19:30:07.725Z
 - Hosted CI on 52f02f5be: 31 pass, 28 skipped, 0 fail; MERGEABLE/CLEAN. Local: --records passes. --push passed 65 of 66 steps twice; the whole-suite behavioral step timed out at 1800 s on a loaded host. An uncapped -v quick suite gave 18,767 passed and 4 failed, all environmental: two fixed_core_packet process-reaping tests and two site_rendering frame-budget cases. They fail on main 22a67ce4a on this host too, and pass hosted.
 - Lane D's question: the intake-watch.yaml reads of the franciscouzo 58a7833 and Fang 078789a heads stay. Removing either leaves two commits unretained by intake_sweep.read_history (58a7833 and 4e4c8ce; bef5c42 and d6b0122), so think-ffh8 keeps them. No change was made.
 - Open: main is now 22a67ce4a (#629), which merges cleanly. The PR needs review and a merge commit; then close #616 as superseded and post the #607/#610 T-id replies. Do not close this bead until #627 merges.
+
+2026-10-16 00:15Z coordinator: #627 round-1 reviews addressed (review A A1-A6 fixed in d79f526f2; review B B1-B4 fixed, B5 -> think-mx6n, B6 -> think-5k1m; #616 review A dispositioned on #627). DATA_REVISION re-pinned to d79f526f. Stack lands with gh stack merge 631 --yes --merge; main and fixes move by merge commits only.
+
+2026-10-16 coordinator: #616 was closed as superseded at 2026-10-15 22:06:25Z (comment on #616); the earlier 'untouched' and 'close #616' lines are obsolete. #627 round 2 (review C) approve; C1/C3 deferred to think-yfoo/think-qik6, C2 fixed.
