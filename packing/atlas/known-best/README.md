@@ -282,6 +282,18 @@ thresholds, and his, held at row 4, solved $8.9 \times 10^{-31}$ above $U$.
 At 153 and 207 his solved views lie below $U$, by $1.6 \times 10^{-14}$ and
 $2.4 \times 10^{-12}$; they are register candidates for the owner and are not drawn.
 
+Last that day both generators ran on the three witnesses jlevy/squares#598 adopted in
+`8a4d26fea` at 175, 232 and 264 (think-3zi3): Evan Daniel’s regularizer
+(`evand-regularize-3c-1016`) and grid-slack at 0.5, 1 and 5 degrees
+(`grid-slack-3c-deg05-1016`, `grid-slack-3c-deg1-1016` and `grid-slack-3c-deg5-1016`),
+2,050 CPU-seconds in all.
+His same-side views are drawn at 175 and 232, and grid-slack’s half-degree view at 264,
+where his regularizer gave no view (its certificate overlapped by $2.1 \times 10^{-14}$
+and upstream’s checker refused it).
+Over the three, light / uneven / near-axis squares go from 19 / 64 / 0 to 13 / 57 / 0,
+and house sides from 1,859 to 1,963. No count is pending any more:
+`devtools.default_drawings.PENDING_ALLOWED` is empty.
+
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
 `regularized_drawings` records each one whose packing a registered result holds,

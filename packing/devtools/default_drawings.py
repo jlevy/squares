@@ -438,7 +438,6 @@ SETTLED: dict[int, Settled] = {
     ),
 }
 
-_3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 
 #: The counts allowed to stay `pending`, each naming the bead whose runs will decide it.
 #: Measured, not chosen, as `ABOVE_U` is: the list must equal the pending set, since
@@ -454,12 +453,9 @@ _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 #: (think-gvke, think-rz8c). The nine of think-la7h (105, 129, 146, 156, 176, 204, 271,
 #: 272 and 303) left it on 16 October 2026, six regularized and three decided, and so did
 #: the eight of think-kpm3 (153, 154, 207, 211, 237, 241, 302 and 304), seven
-#: regularized and one decided.
-PENDING_ALLOWED: dict[int, str] = {
-    175: f"{_3ZI3}; its grid-slack view lapsed",
-    232: f"{_3ZI3}; never decided",
-    264: f"{_3ZI3}; never decided",
-}
+#: regularized and one decided, and the three of think-3zi3 (175, 232 and 264), all
+#: regularized, which left it empty.
+PENDING_ALLOWED: dict[int, str] = {}
 
 
 def index_entries(index: Path = INDEX) -> dict[int, dict[str, Any]]:
