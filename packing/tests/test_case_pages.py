@@ -190,29 +190,45 @@ class _HtmlEvents(HTMLParser):
 
 
 @pytest.mark.parametrize("separator", ["\n", "\u2028", "\r\n"])
-def test_visual_math_compaction_keeps_html_tree_and_foreign_xml(separator: str) -> None:
+@pytest.mark.parametrize("all_html_classes", [False, True])
+def test_visual_math_compaction_keeps_html_tree_and_foreign_xml(
+    separator: str, *, all_html_classes: bool
+) -> None:
     foreign = (
         '<math xmlns="http://www.w3.org/1998/Math/MathML"><mtext>'
         '<span class="mord">native</span></mtext></math>'
         '<svg xmlns="http://www.w3.org/2000/svg"><foreignObject>'
         '<span class="mord">drawing</span></foreignObject></svg>'
     )
+    self_closing = '<input class="widget"/><br class="clear"/><span class="mord"/>'
     source = (
-        f"<p>before{separator}after</p>"
+        f'<p class="site-result-meta">before{separator}after</p>'
+        '<article class="site-result">record</article>'
         '<span class="katex-html"><span class="mord">x</span>'
         '<span class="mrel">&lt;</span><span class="mord mathnormal">y</span></span>'
         "<span title=' class=\"mord\"'>literal class spelling</span>"
         + foreign
+        + self_closing
         + '<a href="../profiles/manasseh-ahmed.html" data-contributor="">Ahmed</a>'
     )
-    compact = render_case_pages.compact_visual_math_classes(source)
+    compact = render_case_pages.compact_visual_math_classes(
+        source, all_html_classes=all_html_classes
+    )
     original_tree, compact_tree = _HtmlEvents(), _HtmlEvents()
     original_tree.feed(source)
     compact_tree.feed(compact)
     assert original_tree.events == compact_tree.events
     assert foreign in compact
+    assert self_closing in compact
+    assert '<article class="site-result">record</article>' in compact
+    assert ("<p class=site-result-meta>" in compact) == all_html_classes
     assert len(compact.encode()) < len(source.encode())
-    assert render_case_pages.compact_visual_math_classes(compact) == compact
+    assert (
+        render_case_pages.compact_visual_math_classes(
+            compact, all_html_classes=all_html_classes
+        )
+        == compact
+    )
 
 
 def test_a_records_links_are_written_from_its_own_directory(

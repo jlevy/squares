@@ -1312,9 +1312,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "the paper's content edition. The closed-form writer now emits the canonical "
             "Hosono credit without changing any numeric bound; this writer is not "
             "called by the paper. Standalone case articles compact numeric entities "
-            "and omit optional quotes only on KaTeX HTML atom classes. MathML and SVG "
-            "remain XML-valid with the same decoded mathematical content; the paper "
-            "does not call this case-article serialization."
+            "and optional quotes on KaTeX HTML atom classes. Complete result pages also "
+            "omit optional quotes on first-position HTML class attributes containing "
+            "one ASCII identifier. The class compactor preserves SVG, MathML and "
+            "article extraction anchors; decoded mathematical content is unchanged. "
+            "The paper does not call these standalone record serializers."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1387,9 +1389,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "with Hosono; all numeric values are unchanged and the paper already "
             "uses Hosono. Those credit fields are not inserted into this manuscript "
             "or its five figures. Standalone case articles compact numeric entities "
-            "and omit optional quotes only on KaTeX HTML atom classes. MathML and SVG "
-            "remain XML-valid with the same decoded mathematical content; the paper "
-            "does not call this case-article serialization."
+            "and optional quotes on KaTeX HTML atom classes. Complete result pages also "
+            "omit optional quotes on first-position HTML class attributes containing "
+            "one ASCII identifier. The class compactor preserves SVG, MathML and "
+            "article extraction anchors; decoded mathematical content is unchanged. "
+            "The paper does not call these standalone record serializers."
         ),
     ),
     ReleaseNoPublicChange(

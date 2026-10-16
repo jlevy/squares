@@ -1217,10 +1217,14 @@ def compact_math_entities(record: str) -> str:
 class _VisualMathClasses(HTMLParser):
     """Locate optional attribute quotes in KaTeX's HTML atom classes."""
 
-    ATOMS = re.compile(r'^<span class="(mord|mop|mbin|mrel|mopen|mclose|mpunct|minner)"')
+    ATOMS = re.compile(
+        r'^(<span) class="(mord|mop|mbin|mrel|mopen|mclose|mpunct|minner)"(?=[\t\n\f\r >])'
+    )
+    HTML_CLASSES = re.compile(r'^(<[a-z][a-z0-9-]*) class="([A-Za-z0-9_-]+)"(?=[\t\n\f\r >])')
 
-    def __init__(self, record: str) -> None:
+    def __init__(self, record: str, *, all_html_classes: bool = False) -> None:
         super().__init__(convert_charrefs=False)
+        self.pattern = self.HTML_CLASSES if all_html_classes else self.ATOMS
         self.lines = [0, *(match.end() for match in re.finditer("\n", record))]
         self.foreign = 0
         self.changes: list[tuple[int, int, str]] = []
@@ -1228,11 +1232,12 @@ class _VisualMathClasses(HTMLParser):
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         if tag in {"math", "svg"}:
             self.foreign += 1
-        if self.foreign or tag != "span" or not attrs:
+        # Complete articles keep the quoted extraction anchor used by site consumers.
+        if self.foreign or tag == "article" or not attrs:
             return
         original = self.get_starttag_text()
         assert original is not None
-        compact = self.ATOMS.sub(r"<span class=\1", original)
+        compact = self.pattern.sub(r"\1 class=\2", original)
         if compact != original:
             line, column = self.getpos()
             start = self.lines[line - 1] + column
@@ -1243,9 +1248,13 @@ class _VisualMathClasses(HTMLParser):
             self.foreign -= 1
 
 
-def compact_visual_math_classes(record: str) -> str:
-    """Omit optional quotes on atomic KaTeX HTML classes; retain SVG and MathML XML."""
-    parser = _VisualMathClasses(record)
+def compact_visual_math_classes(record: str, *, all_html_classes: bool = False) -> str:
+    """Omit optional class quotes, retaining SVG/MathML XML and article anchors.
+
+    Cases compact only KaTeX atom classes; complete result pages opt in to every
+    first-position class with one ASCII identifier. Other attributes stay untouched.
+    """
+    parser = _VisualMathClasses(record, all_html_classes=all_html_classes)
     parser.feed(record)
     parser.close()
     pieces = []

@@ -1726,6 +1726,7 @@ def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterat
     from devtools import (  # noqa: PLC0415
         overview_data,
         overview_sections,
+        render_case_pages,
         result_overview,
         site_urls,
     )
@@ -1785,7 +1786,9 @@ def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterat
         )
         body = body.replace(">", ">" + heading, 1)
         page = static_content_page(body, meta=meta, current="results")
-        yield Page(page.name, result_overview.compact_case_tables(page.html))
+        compact = result_overview.compact_case_tables(page.html)
+        compact = render_case_pages.compact_visual_math_classes(compact, all_html_classes=True)
+        yield Page(page.name, compact)
 
 
 def result_fragments() -> list[Page]:

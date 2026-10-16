@@ -669,6 +669,21 @@ attribution policy. Repository identifiers, source keys and archived text remain
 unchanged. Validation results and the final head are recorded on PR #578 and
 `think-5bao`; earlier green heads do not validate this integration.
 
+The built design review covers the directory, Ahmed and Levy profiles, and News at
+1280px and 390px in light and dark themes.
+All 16 contexts pass the retained overflow, clipping, word-split and font checks.
+Profile H1s use the shared upright, uppercase Source Sans 3 styling.
+Direct directory navigation, browser Back and profile breadcrumbs also pass, including
+mobile navigation without JavaScript.
+The design-guide table now states direct directory navigation consistently with its
+profile section.
+
+The first hosted run found one result-page size regression: T-174 was 303,135 bytes
+against a 300,000-byte ceiling.
+Omitting optional quotes from safe HTML class attributes reduces it to 299,477 bytes,
+preserving parsed content, links, MathML, SVG and article extraction anchors.
+Case pages retain their narrower KaTeX-only compaction.
+
 ## WIP Handoff: 2026-10-10
 
 The owner requested a work-in-progress PR and handoff before further implementation.

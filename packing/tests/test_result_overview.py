@@ -435,6 +435,12 @@ def test_every_result_page_keeps_its_registered_byte_budget(
         assert Counter(HREF.findall(result.credit_html)) <= Counter(HREF.findall(output))
 
 
+def test_complete_broad_result_page_keeps_its_registered_byte_budget() -> None:
+    page = next(render_overview.iter_result_fragments(result_ids=frozenset({"T-174"})))
+    row = next(row for row in site_urls.load_registry() if row.path == page.name)
+    assert len(page.html.encode("utf-8")) < site_urls.page_budget(row)
+
+
 def test_case_table_compaction_keeps_xml_source_values_and_links(
     overview: overview_data.Overview,
 ) -> None:
