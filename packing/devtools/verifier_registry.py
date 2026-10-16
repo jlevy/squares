@@ -66,7 +66,6 @@ LEGEND = tuple(dict.fromkeys(LABELS[relation] for relation in (SAME, SHARED, IND
 DECIDES = "decides"
 EXTERNAL = "external"
 FIRST_PARTY = "first-party"
-CONFIRMING_ORIGINS = frozenset({"audited-here", "replayed-here", "independently-external"})
 
 #: The independent-implementation entries recorded before 2026-10-02, when the record of
 #: what a verifying program's authors read became required, that name no program whose
@@ -1202,7 +1201,7 @@ def entry_line(entry: Mapping[str, Any], verifiers: Mapping[str, Verifier]) -> s
     programs. A third party's run held only as their report confirms nothing here, so
     its line names no relation, whose labels are the words a confirmation is read in
     (`THIRD_PARTY_REPORT`); `VERIFIERS.md` keeps its code relation in a column of its own."""
-    beyond = entry.get("origin") in CONFIRMING_ORIGINS
+    beyond = confirming_execution(entry)
     how = (
         f", {ladder_label(entry, verifiers)}"
         if beyond and entry.get("relationship_to_generator") in RANK

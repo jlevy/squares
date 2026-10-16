@@ -54,6 +54,12 @@ from typing import Any
 from jsonschema_rs import Draft202012Validator
 
 from devtools import result_status, verifier_registry
+from sqpack.assurance import (
+    claim_support_level,
+    confirming_execution,
+    external_formal_build_problems,
+    undischarged,
+)
 from sqpack.yamlio import load_yaml, safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -86,8 +92,6 @@ INTAKE_LABEL = "intake"
 #: author: checkable and machine-replayed (`V3`, `C3`). Below it the result is still being
 #: validated, whatever its status word says.
 CONFIRMED_RANK = 3
-#: Evidence origins that count as confirmation (epistemics.md, Confirmation).
-CONFIRMING_ORIGINS = frozenset({"audited-here", "replayed-here", "independently-external"})
 THIRD_PARTY = "independently-external"
 OPTIMALITY = "optimality"
 UPPER_BOUND = "upper-bound"
@@ -245,6 +249,18 @@ def verifier_phrase(entry: Mapped, verifiers: Mapping[str, str] | None = None) -
     return template.format(where=where) + named
 
 
+def confirms(entry: Mapped, evidence_by_id: Mapping[str, Mapped]) -> bool:
+    """Whether an entry's run confirms its claim, as `devtools.check_results` derives C:
+    execution beyond the producer by the actor its origin names, admitted if it is a
+    formal build run elsewhere, with every premise it takes confirmed too, among
+    `evidence_by_id` (epistemics.md, Confirmation)."""
+    return (
+        confirming_execution(entry)
+        and not external_formal_build_problems(entry)
+        and bool(claim_support_level(entry, evidence_by_id, lambda _: 1, confirming=True))
+    )
+
+
 def confirmation_phrase(cited: Iterable[str], register: Register, kind: str = "") -> str:
     """How a confirmed result was re-verified, one phrase for each confirming entry.
 
@@ -253,11 +269,13 @@ def confirmation_phrase(cited: Iterable[str], register: Register, kind: str = ""
     author told that their lower bound was "re-verified by an independent implementation"
     because the grid was would be told something false.
     """
+    cited = list(cited)
+    by_id = {ref: register.evidence[ref] for ref in cited if ref in register.evidence}
     phrases: list[str] = []
     missing: list[str] = []
     for ref in cited:
         entry = register.evidence.get(ref)
-        if not entry or entry.get("origin") not in CONFIRMING_ORIGINS:
+        if not entry or not confirms(entry, by_id):
             continue
         if kind == OPTIMALITY and entry.get("claim") == UPPER_BOUND:
             continue
@@ -314,11 +332,20 @@ def _evidence_entry(ident: str, register: Register) -> Entry:
         return Entry(ident, rungs, DEFECT, result_status.INCOMPLETE, "its replay failed", "")
     read = review.get("state") == "informally-verified"
     status = result_status.REVIEWED if read else result_status.RECORDED
-    if entry.get("replay_status") == "passed" and entry.get("origin") in CONFIRMING_ORIGINS:
+    if (
+        entry.get("replay_status") == "passed"
+        and confirming_execution(entry)
+        and not external_formal_build_problems(entry)
+    ):
         if verifier_registry.sampled(entry):
             # A sample decides only what it ran and is never called confirmed
             # (epistemics.md, The Independence Ladder).
             return Entry(ident, rungs, OPEN, status, _sample_phrase(entry), "")
+        if hypotheses := undischarged(entry, register.evidence, confirming=True):
+            # An implication confirms its implication only: until each premise is
+            # confirmed it does not confirm the claim (sqpack.assurance).
+            why = f"an implication; {' and '.join(hypotheses)} is not confirmed here"
+            return Entry(ident, rungs, OPEN, status, why, "")
         how = confirmation_phrase([ident], register)
         return Entry(ident, rungs, CONFIRMED, result_status.CONFIRMED, "", how)
     return Entry(ident, rungs, OPEN, status, "", "")

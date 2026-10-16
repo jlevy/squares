@@ -79,6 +79,7 @@ REGISTER = Register(
         },
         "E-replay": {
             "origin": "replayed-here",
+            "performed_by": "repository",
             "assurance": "verified",
             "replay_status": "passed",
             "relationship_to_generator": "same-implementation",
@@ -703,6 +704,7 @@ def test_an_exact_value_is_described_by_its_lower_half_and_not_by_the_grid() -> 
     grid = {
         "claim": "upper-bound",
         "origin": "replayed-here",
+        "performed_by": "repository",
         "replay_status": "passed",
         "relationship_to_generator": "independent-implementation",
     }
@@ -722,7 +724,13 @@ def test_an_exact_value_is_described_by_its_lower_half_and_not_by_the_grid() -> 
 def test_a_confirmation_without_the_relation_says_it_is_not_yet_recorded() -> None:
     bare = Register(
         results={"T-001": result_entry("T-001", "V3", "C3", "E-bare")},
-        evidence={"E-bare": {"origin": "replayed-here", "replay_status": "passed"}},
+        evidence={
+            "E-bare": {
+                "origin": "replayed-here",
+                "performed_by": "repository",
+                "replay_status": "passed",
+            }
+        },
     )
     assert (
         check_requests.entry_state("T-001", bare).how
@@ -1180,3 +1188,49 @@ def test_a_page_size_github_does_not_serve_is_refused(size: str) -> None:
 
     with pytest.raises(ValueError, match="per_page"):
         check_requests.gh_fetch(f"repos/a/b/issues?per_page={size}", never)
+
+
+def _live_with(*entries: Record) -> Register:
+    live = check_requests.load_register()
+    return Register(
+        live.results, {**live.evidence, **{e["id"]: e for e in entries}}, live.verifiers
+    )
+
+
+def test_an_open_implication_is_not_called_confirmed() -> None:
+    """E-k2m4-evand-bentz4-lean-build is a replay here of a Lean implication whose
+    ValidTilt9 premise nothing here has decided; T-081 cites it at V0/C1."""
+    register = check_requests.load_register()
+    entry = check_requests.entry_state("E-k2m4-evand-bentz4-lean-build", register)
+    assert entry.state == OPEN, entry
+    assert entry.why.startswith("an implication;"), entry
+    assert "ValidTilt9" in entry.why, entry
+    assert (
+        check_requests.confirmation_phrase(["E-k2m4-evand-bentz4-lean-build"], register)
+        == "how it was re-verified is not yet recorded"
+    )
+
+
+def test_a_producer_run_is_not_called_confirmed_whatever_its_origin_says() -> None:
+    producer = {
+        "id": "E-producer-relabelled",
+        "claim": "exact-value",
+        "scope": {"n_values": [17]},
+        "assurance": "verified",
+        "method": "exact-algebraic",
+        "origin": "replayed-here",
+        "performed_by": "source-author",
+        "relationship_to_generator": "same-implementation",
+        "certificate": "certificate.json",
+        "replay": "python -m check certificate.json",
+        "replay_status": "passed",
+    }
+    register = _live_with(producer)
+    assert check_requests.entry_state(producer["id"], register).state == OPEN
+    assert (
+        check_requests.confirmation_phrase([producer["id"]], register)
+        == "how it was re-verified is not yet recorded"
+    )
+    ours = {**producer, "id": "E-ours", "performed_by": "repository"}
+    register = _live_with(ours)
+    assert check_requests.entry_state(ours["id"], register).state == CONFIRMED
