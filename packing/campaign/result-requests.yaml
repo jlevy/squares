@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-15'
+last_reviewed: '2026-10-16'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -9208,7 +9208,7 @@ issues:
       and 7.32e-90 below #574's N29 certificate, which the 14 October ledger left undecided, and the
       comparison with the reported lane waits for that lane's exact side, the root of Evan Daniel's
       degree-7213 polynomial (#545). Whether to merge the pull request is the owner's call.
-    read_through: '2026-10-15T18:43:54Z'
+    read_through: '2026-10-16T03:40:22Z'
     results:
     - key: n29-certificate
       claim: s(29) <= the exact side of n29-certificate/certificates/n029.cert.json (SHA-256 a01428c5...),
@@ -9236,8 +9236,13 @@ issues:
     notes: >-
       A pull request, held here as an issue because it reports results, as #574 is. It asks to replace
       #574's N29 certificate, which T-174 does not register. The pull request makes no statement about AI
-      assistance; the author's answer on #503 ('PY') covered #503 and #504 only, and the drafted
-      acknowledgement in think-30n2 asks the question, as the #503 and #504 replies did.
+      assistance; the author's answer on #503 ('PY') covered #503 and #504 only, and the acknowledgement
+      of 16 October asked the question, as the #503 and #504 replies did. The author answered it that
+      day (https://github.com/jlevy/squares/pull/622#issuecomment-6207551818): 'All of our submissions
+      are the same affiliation.  PingYou Ltd, assisted by the PY agentic offering', which covers this
+      certificate and, by its words, PingYou Ltd's other submissions; think-30n2 records it, and the
+      register entries that say a PingYou source makes no statement about AI assistance, T-174 among
+      them, can cite it in the next change that touches them.
   - number: 624
     title: 'n366 new best known packing: registration request'
     author: mstrmg
@@ -9274,3 +9279,143 @@ issues:
       - result: n366
     close_when: The reply saying why the certificate is not recorded is posted and the author has had the
       chance to answer.
+  - number: 639
+    title: 'Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval,
+      exact configuration): registration request'
+    author: evand
+    opened: '2026-10-16'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports, at evand/square-packing 7d1407a (search/exact/cur/), the exact side of the
+      record's best-known packing at 23 counts: each the root of an integer polynomial of degree 2 to 41
+      in a rational isolating interval, realised by an exact configuration over a number field and
+      accepted by his standard-library verify_exact.py at all 23. Triaged on 16 October 2026 by the sign
+      of each polynomial at every rational side the record holds or has pending at its count: at 16
+      counts the side is below all of them, by 1.5e-99 to 7.8e-35; at 51 it is the (16 + 5√2)/3 the
+      record holds; at 70, 153 and 207 it agrees to 40 places with #574's algebraic sides (T-174), whose
+      adoption is the owner's decision RP-3; and at 172, 263 and 297 #574's rational certificates are
+      smaller, by about 1e-62. Not yet retained; the source's replay, under a CPU-hour, runs from the
+      packet. Claude assistance disclosed.
+    read_through: '2026-10-16T03:37:13Z'
+    results:
+    - key: exact-sides-below-record
+      claim: >-
+        s(n) <= S*, S* the root of the source's polynomial in its isolating interval, at 88, 102, 123, 126,
+        175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301 and 302, of degree 2 to 41, with s(126) <=
+        15/2 + 3√2 and s(295) <= 22(1 + √2)/3; each below every side the record holds or has pending at
+        its count.
+      source: body
+      not_registered: >-
+        Triage only. Stage 2 retains search/exact/cur/ and verify_exact.py at 7d1407a in a packet, and
+        stage 3 runs the report-order ledger, since #574 and #593 are open reports at these counts, then
+        registers one reported entry. Below the smallest standing side by 5.9e-95 (88), 3.7e-88 (102),
+        9.0e-95 (123), 7.8e-35 (126), 1.0e-76 (175), 4.5e-88 (199), 1.5e-99 (204), 1.6e-99 (232),
+        1.5e-94 (258), 1.4e-94 (259), 1.5e-94 (266), 1.2e-64 (267), 1.7e-79 (292), 1.9e-94 (295),
+        2.0e-94 (301) and 1.8e-39 (302), T-186's at 175, 204, 232 and 302 and T-174's elsewhere.
+        Polynomial minimality is the source's assertion: no program of the source checks irreducibility.
+      queued: true
+      bead: think-phyb
+    - key: exact-side-51
+      claim: s(51) <= (16 + 5√2)/3, the root of 9x^2 - 96x + 206.
+      source: body
+      not_registered: >-
+        The exact form both n = 51 lanes already hold, from Ryan Xu's #432, as the issue says: a second
+        derivation of a value the record holds.
+      queued: false
+    - key: exact-sides-574-algebraic
+      claim: s(70), s(153) and s(207) <= S*, the roots of polynomials of degree 5, 7 and 5.
+      source: body
+      not_registered: >-
+        Equal to 40 places, at the same degree, to the algebraic sides #574 reported on 13 October
+        (T-174), and a tie stays with the earlier report. Their adoption is the owner's decision RP-3,
+        which notes they rest on one route; the source's configurations and checker are a second, and
+        the replay in think-g59l carries them to it.
+      queued: true
+      bead: think-phyb
+    - key: exact-sides-above-574
+      claim: s(172), s(263) and s(297) <= S*, the roots of polynomials of degree 12.
+      source: body
+      not_registered: >-
+        Weaker than an earlier report: #574's rational certificates at these counts (T-174), which three
+        exact routes here decided, are below S* by 1.18e-62, 9.23e-63 and 6.62e-63, so S* is not the
+        least side of those packings. The acknowledgement drafted in think-phyb asks the author why.
+      queued: false
+    beads:
+    - think-phyb
+    - think-g59l
+    answer_bead: think-phyb
+    replies: []
+    close_when: >-
+      The recorded counts are registered on main, the author has been told what was registered and why
+      51, 70, 153, 207, 172, 263 and 297 were not, and the replay is either run or owned by its bead,
+      with the resulting state posted on the issue.
+    notes: >-
+      The issue's finder column names the first finder at each count as the case records credit it; the
+      case records also name improvers (Gupta, Polkovskyi, Couzo and Daniel), whom the registered entry
+      credits before Daniel's exact form, as a refinement. At 207 the source reports that its re-solve of
+      the record's witness did not verify one pair and that the committed form comes from a copy that
+      ties it; T-173's rational certificate there was decided by three exact routes here, and the
+      acknowledgement asks what the re-solve shows. The source also lists 52 counts still without an
+      exact form, and s(29), whose polynomial #545 reports; neither is a claim.
+  - number: 640
+    title: 'Complete Lean proof of s(19) optimality: registration request'
+    author: ofitzharding
+    opened: '2026-10-16'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Oscar Fitzharding's request to register his Lean 4 proof that Robert Wainwright's 1979 packing of
+      nineteen unit squares is optimal, Sq19.square19_optimality (L : ℝ) : Feasible19 L ↔ 3 + 4 *
+      Real.sqrt 2 / 3 ≤ L, in ofitzharding/sq19 at 34fb2b7 (tag v1.0.0), with five release archives of
+      generated certificate modules (1,110,588,236 bytes) pinned by SHA-256. Its trust boundary is the
+      three standard axioms and 4,320 native_decide facts, so Lean's compiler, native evaluator and C
+      toolchain are trusted. Triaged on 16 October 2026 without a build: the statement is the record's
+      problem at n = 19, its constant is the case's exact upper bound, and no register entry claims s(19)
+      optimality, so it is a new result for the record. Not yet retained; a full rebuild, several hours on
+      64 cores by the source's account, is above the pass's cap and held for the owner. Claude and Codex
+      assistance disclosed.
+    read_through: '2026-10-16T03:41:08Z'
+    results:
+    - key: n19-optimality-lean
+      claim: >-
+        s(19) = 3 + 4√2/3 = 4.8856180831641267…: for every real L, nineteen closed unit squares with
+        arbitrary rotations, boundary contact allowed and disjoint interiors fit in [0, L]^2 exactly when
+        3 + 4√2/3 ≤ L, existence at the endpoint included. Proved in Lean 4.34.1 with Mathlib, trusting
+        Lean's compiler, native evaluator and C toolchain for 4,320 native_decide facts; the source reports
+        a kernel replay of the theorem's 13,143-module import closure with no failure, and no complete
+        rebuild from source yet.
+      source: body
+      not_registered: >-
+        Triage only. Stage 2 retains the source at 34fb2b7 with the release archives pinned by digest, the
+        mathematical review (think-o40t) starts once it is retained, and stage 3 registers a new entry as
+        reported. The full build (think-nqnl) is held above the owner's 40 CPU-hour cap.
+      queued: true
+      bead: think-a4x3
+    asks:
+    - what: Link the proof from the n = 19 case page.
+      state: queued
+      bead: think-a4x3
+      note: >-
+        packing/frontier/n-019.md links it in the change that registers the result, as n-017.md links
+        sq17-lean under T-154.
+    beads:
+    - think-a4x3
+    - think-o40t
+    - think-nqnl
+    answer_bead: think-a4x3
+    replies: []
+    close_when: >-
+      The result is registered on main and linked from the n = 19 case page, the author has been told
+      what was registered and has the mathematical review, and the full build has either passed, here or
+      by a third party retained here, or been dispositioned by the owner, with the resulting state posted
+      on the issue.
+    notes: >-
+      The issue asks for the result under the author's name, credits Wainwright's construction and the
+      s(17) proof whose method and checker code it extends (#565, T-154), compiled in place from
+      sq17-lean at 0a7167e, and thanks the Squares Project and Manasseh Ahmed. It offers help with
+      reproduction and statement review. The `n-19` case label does not exist on the repository on 16
+      October 2026, so whether to create it and add it to this issue is the owner's decision; the issue
+      carries `intake`.

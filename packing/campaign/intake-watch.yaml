@@ -895,3 +895,32 @@ repositories:
       head 4c319c2, which the pingyou-pr574-certificates-2026-10-13 packet pins (T-174), and
       pingyou/n29-certificate-20261015 at 3115557, PR #622's head, an N29 certificate refinement
       that think-30n2 triages as an intake report. Nothing to import from the default branch.
+  # The intake pass of 2026-10-16 (think-mdnn): evand's head, the pin #639 names.
+  - url: https://github.com/evand/square-packing
+    read_through: 44a105ef95ac1925d83aab087d7ddab7f672b747
+    read_on: '2026-10-16'
+    bead: think-0ayk
+    note: >-
+      The merge of wand125's PR #7 (16 October, 02:34Z) past the 1038892 read, and its one branch
+      commit, 4eb59c4 of 11 October. lean/Sqpack/ExTreeTilt.lean proves validTilt_of_tree, so
+      gen_main.py derives validTilt7 from the pose tree and valid7 by Bentz.valid7_of_tilt, and
+      V7/Face.lean and scripts/gen_face.py are gone, the root modules unchanged; LebMassBridge.lean
+      bridges ExTree.CovT and LebMass.CovT for mcoverP and no root module imports it; VALID7.md,
+      Valid7Checker.lean and Axioms.lean put the rebuild at about 6,650 CPU-hours, measured. New
+      evidence for the Valid7 kernel route to T-064's finite premise, which think-0ayk owns (#537)
+      until a packet pins it. Nothing else to import.
+  - url: https://github.com/evand/square-packing
+    read_through: 7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1
+    read_on: '2026-10-16'
+    bead: think-phyb
+    note: >-
+      The head, 93 commits past the 1038892 read, of 15 and 16 October apart from 4eb59c4, which the
+      44a105e read covers. 058b671 adds search/exact/cur/, the exact algebraic sides at 23 counts that
+      #639 reports, and 7d1407a its comparison with the register; think-phyb holds them until a packet
+      pins this commit. 046ab37 adds an exact-multiplier fallback to exactsolve.py, and f94480f, ae1fd30
+      and 3f004b7 the s(110) census and landscape page of 1,076 to 1,078 certified minima, with no
+      certificate. The rest is the packer's development: TT3 polish gating and a parent value model,
+      the H110-PM holdout, removal, graft and composition baselines, blind Mondrian screens and hunts
+      (BM1 to BM3, JT1, L2b to L2e, MH3, RB62, GX1, NH3), the EV1 and EV2 program-evolution pilots,
+      whose best rows tie the hidden 234 and 235 records, fillfast, task notes and site data. None
+      states a bound or certificate the record lacks. Nothing else to import.
