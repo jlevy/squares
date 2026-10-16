@@ -1097,11 +1097,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "visualize.html",
         ),
         reason=(
-            "Rendered on this branch over main e2e018f3, once with main's source register "
-            "and once with the branch's, the site's pages, result overviews, case records, "
-            "forwarders and assets are byte-identical in all 1470 files render_overview "
-            "writes. The register moves the reviewed dates of UnitSquare Release 1 and "
-            "SQUISH n153 to 16 October and adds a note on each read (PR 647 review A1)."
+            "Rendered on this branch over main e2e018f3 with the pin at 288a1a52, once "
+            "with main's source register and once with the branch's, the site's pages, "
+            "result overviews, case records, forwarders and assets are byte-identical in "
+            "all 1470 files render_overview writes. The register moves the reviewed dates "
+            "of UnitSquare Release 1 and SQUISH n153 to 16 October and adds a note on "
+            "each read (PR 647 review A1). As a data commit it is followed by the re-pin "
+            "to 4a9292ec (rule 1), which changes the data hash in the stamp every page "
+            "prints; that change is the re-pin's, not the register's."
         ),
     ),
     ReleaseNoPublicChange(
