@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 24
+version: 25
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T11:28:41.816Z
+updated_at: 2026-10-16T11:46:19.194Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -74,3 +74,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 ~11:20Z coordinator: 3c pushed (e757f04f4; 175 and 232 Evan Daniel's views, 264 grid-slack 0.5 deg; PENDING_ALLOWED empty with #644 + 3b + 3c). Lane D woken to stack on 3c. #649 addressed at d296e9f11: T-184 and T-191 V0/C0 -> V3/C1 (C3 derived by the replay but held until zm_mixed.py's mutated-certificate controls exist: one more refusal for s76, two for s95, owner question 16), A1 header-hash/settings checks added with fault controls; CI green. Follow-up review of the fix commit started. Lane E done; its worktree removed (disk 5.5 GB).
 
 2026-10-16 ~11:35Z coordinator: the s(19) review lane (think-o40t) is done: PR #655 (base #651's branch): as read, the Lean proof establishes Feasible19 L <-> 3 + 4 sqrt2/3 <= L modulo its trust boundary; no blocking/major; minor N19-1 (endpoint data and numbering are this project's W-known-best-n019, uncredited), N19-2 (generators/notes unpublished), N19-3 (kernel-replay receipt bound to an unpublished build). Independent checks PASS: endpoint exact in Q(sqrt2); all 2,328 in-tree native_decide facts (4,096 endgame cases by own Taylor-model intervals; orbit_check 177,100 sets; 9 hull-region; 12 capture-link); all 2,112 release-archive members (10.2 GB) at their digests with no axiom/sorry/extern; 4,320 logged facts accounted. Supports C1 for T-194; V/C3 need the held build (think-nqnl). Senior review of #655 started. Next: one records PR mapping the s(19) and T-193 reviews.
+
+2026-10-16 ~11:55Z coordinator: lane B done: #653 (3b) and #654 (3c, head 97d513032) open and green; all eleven counts off PENDING_ALLOWED, list empty with #644. 3b: light/uneven/near-axis over the seven redrawn counts 51/133/34 -> 10/26/3; 304 settled. 3c: Evan Daniel's views at 175, 232; grid-slack 0.5 deg at 264. Owner items: 154's Evan Daniel view to review (row 7); register candidates 153 (-1.6e-14) and 207 (-2.4e-12). Senior+correctness review of #654 started.

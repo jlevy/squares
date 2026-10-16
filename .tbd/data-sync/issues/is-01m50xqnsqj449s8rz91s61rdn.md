@@ -5,7 +5,7 @@ title: "Regularize 3b: 153, 154, 207, 211, 237, 241, 302, 304 (re-housed by #614
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 12
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:08.951Z
-updated_at: 2026-10-16T11:28:02.500Z
+updated_at: 2026-10-16T11:41:51.204Z
 started_at: 2026-10-16T05:13:41.663Z
 ---
 
@@ -35,3 +35,7 @@ started_at: 2026-10-16T05:13:41.663Z
 2026-10-16T10:18Z user-eb-reg-3b3c: validation on #653 head 9b68211e1: packing-validate --records --jobs 2 --inner-jobs 1 passes (rc 0); focused tests (test_regularize_evand, _grid_slack, _select, test_regularized_drawings, test_render_regularized_atlas, test_improvement_rule, test_default_drawings) 226 passed in 93 s. 3c: branch claude/intake-2026-10-16-regularize-3c pushed at bcf6741a6 (regularize_select fix for a no-view driver row + test); 3c selection re-running with the fix.
 
 user-eb-addr-653 (#653 review A): pushed 2d800bde7 (merge #644 tip 60b097880, A3), a52a7c005 (A1 fix + regenerated notes; survey record 48->40), be00a9748 (re-pin), 3cd0476ca (A2: run evidence retained in packing/cases/regularized_drawings/think-kpm3-2026-10-16/), 0082533ee (ruff), 4da7ae92d (papers no-change record for regularized_drawings.py). A4 deferred to think-e533. Next: records tier + focused tests, PR body, disposition reply, CI.
+
+user-eb-addr-653: review A on #653 addressed; head 4da7ae92da410f8d1c4fca2628d6eb6a5ffc73e4; hosted CI 30 success / 29 skipped; disposition reply https://github.com/jlevy/squares/pull/653#pullrequestreview-5547277102; A4 deferred to think-e533; PR body updated.
+
+2026-10-16T11:41Z user-eb-reg-3b3c: #653 is now with addresser user-eb-addr-653 (head 4da7ae92d); #654 (3c) merged it in at 97d513032. think-kpm3 closes at #653's merge (after #644).
