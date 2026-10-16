@@ -1013,12 +1013,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Rendered on this branch over main 22a67ce4 at one link revision, once with "
-            "main's requests record and once with the branch's, the HTML before the "
-            "browser's math pass and the Markdown are byte-identical; the PDF prints from "
-            "that HTML and was not rebuilt. The requests record gains the 15 October "
-            "status replies on twelve of the owner's tracking issues and five notes; the "
-            "survey prints none of them and keeps its edition."
+            "Rendered on this branch over main bbc12b61 at one link revision, once with "
+            "main's requests record and once with the branch's, the HTML after the math "
+            "pass and the Markdown are byte-identical in all 42 files the renderer writes, "
+            "as the HTML before that pass and the Markdown were over 22a67ce4; the PDF "
+            "prints from that HTML and was not rebuilt. The requests record gains the 15 "
+            "October status replies on twelve of the owner's tracking issues and five "
+            "notes; the survey prints none of them and keeps its edition."
         ),
     ),
     ReleaseNoPublicChange(
