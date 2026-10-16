@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T09:53:51.492Z
+updated_at: 2026-10-16T09:54:58.164Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -58,3 +58,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 ~08:00Z coordinator: Review C (follow-up round 2 + correctness) on #641: 0/0/1/3 (C1 Medium: no test pins that a decision outranks the allowlist). Review A on #650: 0/1/1/3 (A1 High: informal chain, not a formal GitHub stack). Formal stacks cannot be made from this session: the pinned github/gh-stack release download is refused by the session proxy (ensure-gh-cli.sh --with-stack: 'GitHub access to this repository is not enabled for this session'; only anonymous git reads of github/gh-stack are served). Every chain of this pass (#641->#650, #642->#651, #644->3b->3c->leftovers->records-185-190, #648->records-185-190, #652->#649) is therefore informal: each PR declares its base and the merge order; the owner links the stacks or retargets each upper PR to main after the one below merges. Addressing agent user-eb-addr-641-650 started for both reviews.
 
 2026-10-16 09:55Z coordinator: the session hit its usage limit at ~08:30Z (every sub-agent stopped mid-step; state saved) and resumed at 09:52Z. Killed an orphaned system-python3 process (stdin script from a task that exited 07:06Z, ~3 h of one core). Resumed B, I, J, H, addr-641-650, addr-652; D and E wait without polling for their dependencies; the watcher agent is replaced by a coordinator Monitor script (no tokens). Merge-ready so far: #647, #648.
+
+2026-10-16 ~10:00Z coordinator: lane E reported: PR #649 at bc92041ea raises T-184 (s(76)=9) and T-191 (s(95)=10) to V3/C3 (derived by check_results after mapping #652's review), S3 confirmed; records tier green; hosted CI green except a likely frontend flake (test_atlas_fills_available_width_with_and_without_scripts, 3200px scripts off). Left: merge #652's fixed head into #649 (resume lane E when it lands), F8's owed zm_mixed.py mutant refusals (owner question 16), case adoption deferred until F8 is answered. Senior + correctness review of #649 started.

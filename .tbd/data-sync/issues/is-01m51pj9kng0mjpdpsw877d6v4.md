@@ -5,16 +5,18 @@ title: "Intake sweep: report regularization debt (pending counts and owed decisi
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 7
 delegate: user-eb-reg-intake
 labels:
   - regularization
 dependencies: []
 parent_id: is-01m50wdrbfnwsq05w150az5z88
+child_order_hints:
+  - is-01m52241azyymmdhk8bsfcfyak
 hold: null
 hold_until: null
 created_at: 2026-10-16T06:32:07.029Z
-updated_at: 2026-10-16T07:25:00.403Z
+updated_at: 2026-10-16T09:54:14.503Z
 started_at: 2026-10-16T06:32:14.332Z
 ---
 The owner, 2026-10-16 (overnight, to coordinator user-eb, epic think-hg5s): "The other agent had worked on regularization, but we should make sure all of the intake process covers the regularization and we update that for any other new packings we have. That should be part of our standard process to do the regularization."
@@ -33,3 +35,5 @@ Done when: draft PR open with base = #641's branch, labels project + S2, CI gree
 2026-10-16T06:53Z user-eb-reg-intake: draft PR https://github.com/jlevy/squares/pull/650 opened (base claude/ecstatic-edison-8en33t-regularization-intake = #641, head 226e2b0ef, labels project + S2). Local: 113 focused tests passed; records tier 52/52 (247 s); intake_sweep --offline exit 0, 20 pending owned by la7h 9/kpm3 8/3zi3 3, none needs action. Next: CI to green. Closes at #650's merge.
 
 2026-10-16T07:24Z user-eb-reg-intake DONE for this lane: #650 (draft, base #641's branch, labels project + S2) head 89cc59e83, CI green (Packing validation run 38865724793; first run 38863767816 failed only on a frontend Chromium hang in overview_data.load, re-run by an empty commit). Closes at #650's merge, after #641.
+
+2026-10-16T09:56Z user-eb-addr-641-650: addressing Review A on #650. Merged #641's head e9d5c01d8 (f517ede2a); pushed 67fb92456 (A2 tests: decisions, exemptions, missing bead; A4 broken record/index reported, not a traceback) and eb8dea201 (A3 one owning-bead label). A1 (not a formal stack) deferred to think-bb70. Next: PR bodies (#650 A5 and chain declaration, #641), CI, replies.

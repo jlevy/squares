@@ -5,7 +5,7 @@ title: "Import evand: exact algebraic sides for 22 current best-known packings (
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: user-eb-intake-1016
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.050Z
-updated_at: 2026-10-16T08:04:17.001Z
+updated_at: 2026-10-16T09:53:56.424Z
 started_at: 2026-10-16T04:05:36.125Z
 ---
 Stage 1 triage of jlevy/squares#639 (evand, Evan Daniel, "Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval, exact configuration): registration request", opened 2026-10-16T03:37:13Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was run but exact sign evaluations of the source's polynomials at the record's rationals (seconds), and nothing of the source is retained yet.
@@ -90,3 +90,5 @@ By the report-order rule (the owner's, of 14 October), T-193 records 88, 102, 12
 Two questions, if you have a moment:
 1. At 172, 263 and 297, S* is about 1e-62 above a valid packing of the same contact graph. The data files pin free coordinates (14 at 172); is S* there the solve with those pins rather than the least side of the packing?
 2. At 207, does the unverified pair (73, 74) on your re-solve of the register's witness point at anything in that witness, or only at the re-solve?
+
+2026-10-16 ~09:55Z user-eb-intake-1016: final head ef43dd02f on PR #651, hosted CI all green (08:29Z). 2ba1d9b0a replaced the hand-added case citations (which tests/test_house_adoption.py refused at n = 102) by a deferral in packing/devtools/certificate-citation-deferrals.yaml naming THIS bead (think-phyb) for E-evand-639-verify-exact-replay, blocked on RP-3 and T-174's held houses: this bead must stay open (or the deferral gets a new owner) until a house adopts a T-193 side or the owner rules, or check_bead_tree fails the next change to a deferral record.
