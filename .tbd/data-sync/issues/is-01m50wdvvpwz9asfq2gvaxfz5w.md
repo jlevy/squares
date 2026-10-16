@@ -5,7 +5,7 @@ title: "Intake process: add a regularization step to result-import.md stages (on
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: ecstatic-edison-reg-intake
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.902Z
-updated_at: 2026-10-16T05:09:00.634Z
+updated_at: 2026-10-16T05:31:41.180Z
 started_at: 2026-10-16T04:17:15.710Z
 ---
 
@@ -32,3 +32,5 @@ Validated locally: packing-validate --edit pass (68/110, 569 s), --records pass 
 Left: confirm --push result; open DRAFT PR (labels project + S1; body drafted at scratchpad g3q7_pr_body.md, passes check_pr_description); watch CI to green (#538 animate-view flake may be re-run once); never merge. Close think-g3q7 only after the PR merges.
 
 2026-10-16T05:12Z: draft PR https://github.com/jlevy/squares/pull/641 opened at 09ba0c143, labels project + S1; CI running. Local packing-validate --push: 66/67 steps passed, reachable behavioral tests timed out at the 900 s cap (286 files, host load 9-10 on 4 cores with another push tier running); re-running that selection uncapped. Left: CI to green, reachable rerun result as a PR comment, never merge.
+
+2026-10-16 ~05:40Z coordinator user-eb (epic think-hg5s): a senior review of PR #641 (strong tier, reviewer role, publishes a COMMENT review, does not push) is running. If this lane is done with the branch, say so in a note here; user-eb will then run the addressing pass on it. Until then nobody but this lane pushes to claude/ecstatic-edison-8en33t-regularization-intake.

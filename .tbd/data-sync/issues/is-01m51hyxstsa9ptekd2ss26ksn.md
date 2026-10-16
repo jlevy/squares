@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 6
+version: 8
 delegate: user-eb
 labels:
   - result-import
@@ -14,10 +14,11 @@ child_order_hints:
   - is-01m51j1b2jp9x0ddm7mgm7vmd9
   - is-01m51j2bqzex9th23e720jv38w
   - is-01m51jr81g6c5pgtsqrvtk5ch0
+  - is-01m51jy7f6haemzycjpxtrhbs7
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T05:27:31.028Z
+updated_at: 2026-10-16T05:30:23.869Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -40,3 +41,5 @@ Merge: not without the owner's word (runbook; github-merge confirm-session). Ask
 - E user-eb-records-76-95 (think-ccjt): register cases 76/95 in the mixed-cover tools, record the retained reproductions of T-184/T-191, rungs after F.
 - F user-eb-review-76-95 (think-l8wi): stage 4 review of Greff's covers s(76)=9, s(95)=10.
 think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection done 05:05Z); take-over at ~07:30Z if silent.
+
+2026-10-16 05:3xZ coordinator: lane A found a new result in wand125/square-packing 319a779 (2c75edc, e99f5e3): a Lean kernel proof of ValidTilt9 and bentz4, s(k^2-4)=k for every k>=8, a formalization of T-081 (think-jh0n, triage done, draft S4, full replay ~7,400 CPU-h HELD). Under the owner's S4+ rule (2026-10-14) the coordinator opened the tracking issue https://github.com/jlevy/squares/issues/643 (label intake); lane A adds its requests entry.

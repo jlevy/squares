@@ -5,7 +5,7 @@ title: "Review: Greff's mixed covers for s(76) = 9 (T-184, #594) and s(95) = 10 
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: user-eb-review-76-95
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:25:27.727Z
-updated_at: 2026-10-16T05:25:32.352Z
+updated_at: 2026-10-16T05:31:36.736Z
 started_at: 2026-10-16T05:25:32.352Z
 ---
 Stage 4 review lane (W2) for T-184 (#594, Benjamin Greff, s(76) = 9) and T-191 (#610, s(95) = 10), the k = 9 and k = 10 cases of the k^2 - 5 series by mixed covers in Evan Daniel's format, registered at V0/C0. Their next_rung asks for "a review that reads the cover, the two checkers' composite over the D4 region and the wall segments". Model: docs/project/reviews/review-2026-10-02-wand125-s59-s77-mixed-covers.md (T-066's review). Deliverable: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md (or similar) on its own branch and draft PR; it moves no rung.
@@ -27,3 +27,7 @@ Stage 4 review lane (W2) for T-184 (#594, Benjamin Greff, s(76) = 9) and T-191 (
 - Depends on: nothing on main; the records slice think-ccjt runs in parallel.
 - Done when: the review document is pushed with its PR, findings graded, verdict per entry.
 - Machine note: one process, nice; the host is shared with two regularization lanes.
+
+## Notes
+
+2026-10-16 05:35Z user-eb-review-76-95: started. Read both briefs, AGENTS.md, result-import.md Stage 4, the two packet READMEs, T-184/T-191 entries, think-osvq/think-ribz (pins and claims). Worktree review-76-95 at e2e018f32 (branch claude/intake-2026-10-16-review-76-95). Next: read the source trees (verify.sh, tools, records, Lean) and the four pinned checkers; then write my own exact programs in scratch laneF/.
