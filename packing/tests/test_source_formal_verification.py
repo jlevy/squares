@@ -5,7 +5,8 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
-from collections.abc import Mapping
+import random
+from collections.abc import Callable, Mapping
 from copy import deepcopy
 from pathlib import Path
 
@@ -21,9 +22,12 @@ from sqpack.assurance import (
     claim_support_level,
     conditional_problems,
     conditions,
+    discharges,
     shared_receipt_problems,
+    undischarged,
     verified_here,
 )
+from sqpack.assurance import _scope_covers as covers  # pyright: ignore[reportPrivateUsage]
 from sqpack.yamlio import safe_load
 
 
@@ -703,3 +707,110 @@ def test_an_unadmitted_formal_run_is_no_confirming_run_for_any_consumer() -> Non
     assert derive_confirmation([entry], record=ONE_CASE) == "C0"
     assert verifier_registry.confirming_runs([entry]) == []
     assert check_results.confirmation_code(ONE_CASE, [entry]) is None
+
+
+def premises(entry: dict, *hypotheses: tuple[str, ...]) -> dict:
+    entry["proof"] = {
+        "conditional_on": [
+            {"hypothesis": f"H{number}", "discharged_by": list(refs)}
+            for number, refs in enumerate(hypotheses)
+        ]
+    }
+    return entry
+
+
+def test_the_premise_memo_keeps_no_answer_reached_by_cutting_a_cycle() -> None:
+    """Review E7. R needs H0, by P, and H1, by Q; P's premise is discharged by S or Q,
+    and Q's by P; S is unconditional. Settling P first meets Q with P on the path, so
+    that answer for Q is cut short. A memo that kept it would give R 0; R's support is
+    3, through S."""
+    rows = {
+        "R": premises(exact_replay("R"), ("P",), ("Q",)),
+        "P": premises(exact_replay("P", "derived-structure"), ("S", "Q")),
+        "Q": premises(exact_replay("Q", "derived-structure"), ("P",)),
+        "S": exact_replay("S", "derived-structure"),
+    }
+    for confirming_axis in (False, True):
+        assert (
+            claim_support_level(rows["R"], rows, lambda _: 3, confirming=confirming_axis) == 3
+        )
+        assert undischarged(rows["R"], rows, confirming=confirming_axis) == []
+
+
+def memo_free_support(
+    evidence: Mapping[str, object],
+    by_id: Mapping[str, Mapping[str, object]],
+    level: Callable[[Mapping[str, object]], int],
+    *,
+    confirming: bool,
+    active: frozenset[str] = frozenset(),
+) -> int:
+    """The premise closure written without a memo, as the reference for the real one."""
+    key = str(evidence.get("id", ""))
+    if key in active:
+        return 0
+    active = active | {key}
+    values = [level(evidence)]
+    for _, refs in conditions(evidence):
+        values.append(
+            max(
+                (
+                    memo_free_support(other, by_id, level, confirming=confirming, active=active)
+                    for ref in refs
+                    if (other := by_id.get(ref)) is not None
+                    and discharges(other, confirming=confirming)
+                    and covers(other.get("scope"), evidence.get("scope"))
+                ),
+                default=0,
+            )
+        )
+    return min(values)
+
+
+def random_premise_graph(rng: random.Random, size: int) -> dict[str, dict]:
+    rows: dict[str, dict] = {}
+    for number in range(size):
+        draw = rng.random()
+        if draw < 0.5:
+            row = exact_replay(f"E{number}", "derived-structure")
+        elif draw < 0.75:
+            row = premise_build()
+            row["id"] = f"E{number}"
+        else:
+            row = exact_replay(f"E{number}", "derived-structure")
+            row["replay_status"] = rng.choice(["passed", "failed"])
+        if rng.random() < 0.1:
+            row["scope"] = {"n_values": [11]}
+        rows[row["id"]] = row
+    for row in rows.values():
+        if rng.random() < 0.6:
+            row.setdefault("proof", {})["conditional_on"] = [
+                {
+                    "hypothesis": f"H{number}",
+                    "discharged_by": rng.sample(list(rows), rng.randint(0, min(3, size))),
+                }
+                for number in range(rng.randint(1, 3))
+            ]
+    return rows
+
+
+def test_the_premise_memo_matches_a_memo_free_closure_on_random_graphs() -> None:
+    """Every root of 400 seeded premise graphs, most of them cyclic, on both axes; the
+    memo that keeps a cut answer fails it."""
+    for seed in range(400):
+        rng = random.Random(seed)
+        rows = random_premise_graph(rng, rng.randint(2, 12))
+        levels = {name: rng.randint(1, 5) for name in rows}
+
+        def level(row: Mapping[str, object], levels: dict[str, int] = levels) -> int:
+            return levels[str(row["id"])]
+
+        for confirming_axis in (False, True):
+            for row in rows.values():
+                assert claim_support_level(
+                    row, rows, level, confirming=confirming_axis
+                ) == memo_free_support(row, rows, level, confirming=confirming_axis), (
+                    seed,
+                    row["id"],
+                    confirming_axis,
+                )
