@@ -1,0 +1,62 @@
+[
+ {
+  "packet": "couzo-n237-2026-10-15",
+  "source": "https://github.com/franciscouzo/square-packing",
+  "pin": "58a783368d4b7e70bb800f0009ea9ca03e578739",
+  "tree": "01cd91c65212b6a3336504c6c00adb90066caf8c",
+  "manifest_lines": 13,
+  "pinned_only": 12,
+  "retained": 1,
+  "problems": []
+ },
+ {
+  "packet": "evand-n146-2026-10-14",
+  "source": "https://github.com/evand/square-packing",
+  "pin": "e006ce6230f2240457b083199755a3a5d287692c",
+  "tree": "544367ecc88089d90c74bc963a891ba29fd2965f",
+  "manifest_lines": 13,
+  "pinned_only": 3,
+  "retained": 10,
+  "problems": []
+ },
+ {
+  "packet": "mishapolk-kkt-refinements-2026-10-14",
+  "source": "https://github.com/Mishapolk/square-packing-records",
+  "pin": "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+  "tree": "c816b6f977f91a64068353ce7d39770a73e1e2f5",
+  "manifest_lines": 40,
+  "pinned_only": 40,
+  "retained": 0,
+  "problems": []
+ },
+ {
+  "packet": "couzo-certificates-2026-10-14",
+  "source": "https://github.com/franciscouzo/square-packing",
+  "pin": "43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2",
+  "tree": "17312eac943e63fbf9abc196c81a3e9343c4a76f",
+  "manifest_lines": 52,
+  "pinned_only": 29,
+  "retained": 23,
+  "problems": []
+ },
+ {
+  "packet": "couzo-verified-bounds-2026-10-14",
+  "source": "https://github.com/franciscouzo/square-packing",
+  "pin": "487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+  "tree": "f8f9ee10413e40c8c5d4f8cb1b411b7d9e11a802",
+  "manifest_lines": 599,
+  "pinned_only": 598,
+  "retained": 1,
+  "problems": []
+ },
+ {
+  "packet": "couzo-certificates-2026-10-11",
+  "source": "https://github.com/franciscouzo/square-packing",
+  "pin": "337078ca3e05153aceb099237b175cf64af5748a",
+  "tree": "2766f6aa08b1d252634eb2f00df8f6a941a1e264",
+  "manifest_lines": 85,
+  "pinned_only": 70,
+  "retained": 15,
+  "problems": []
+ }
+]

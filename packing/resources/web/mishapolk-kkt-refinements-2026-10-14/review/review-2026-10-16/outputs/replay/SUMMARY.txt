@@ -1,0 +1,17 @@
+evand-n146 start 2026-10-16T05:27:50Z end 2026-10-16T05:28:10Z exit 0 wall 19.974457403
+couzo-verified-bounds start 2026-10-16T05:28:10Z end 2026-10-16T05:28:55Z exit 0 wall 44.865839972
+couzo-n237 start 2026-10-16T05:28:55Z end 2026-10-16T05:29:37Z exit 0 wall 42.573886409
+couzo-607-n237 start 2026-10-16T05:29:37Z end 2026-10-16T05:30:13Z exit 0 wall 35.823155917
+couzo-506-n175 start 2026-10-16T05:30:13Z end 2026-10-16T05:30:45Z exit 0 wall 31.391031569
+mishapolk-12 start 2026-10-16T05:30:45Z end 2026-10-16T05:53:01Z exit 0 wall 1336.773285549
+chain-inscope-done
+claims-couzo-certificates-2026-10-11 start 2026-10-16T05:53:01Z end 2026-10-16T05:53:03Z exit 0 wall 1.704828113
+claims-mishapolk-kkt-refinements-2026-10-14 start 2026-10-16T05:53:03Z end 2026-10-16T05:53:20Z exit 0 wall 16.472504769
+claims-evand-n146-2026-10-14 start 2026-10-16T05:53:20Z end 2026-10-16T05:53:23Z exit 0 wall 2.912451084
+claims-couzo-verified-bounds-2026-10-14 start 2026-10-16T05:53:23Z end 2026-10-16T05:53:27Z exit 0 wall 4.361488987
+claims-couzo-certificates-2026-10-14 start 2026-10-16T05:53:27Z end 2026-10-16T05:53:32Z exit 0 wall 4.569799789
+claims-couzo-n237-2026-10-15 start 2026-10-16T05:53:32Z end 2026-10-16T05:53:36Z exit 0 wall 4.242848548
+third-route start 2026-10-16T05:53:36Z end 2026-10-16T05:56:37Z exit 0 wall 180.946861477
+mishapolk-other12 start 2026-10-16T05:56:37Z end 2026-10-16T06:12:20Z exit 0 wall 942.814905681
+couzo-506-other14 start 2026-10-16T06:12:20Z end 2026-10-16T06:28:24Z exit 143 wall 964.110239187
+chain2-done
