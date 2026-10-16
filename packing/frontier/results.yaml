@@ -17870,6 +17870,7 @@ results:
       and the first review. The separately admitted source build
       (E-n017-fitzharding-lean-source-build) establishes V3 on the producer's execution
       record; neither is a confirming run, so the qualifying reads establish C1.
+
       The upper half, a packing at side L, is proved in the Lean without native
       evaluation: endpoint_plainPacking, in PackingStatement, whose 241-module import
       closure holds no native_decide, wraps EndpointPacking's endpoint_packing, whose
