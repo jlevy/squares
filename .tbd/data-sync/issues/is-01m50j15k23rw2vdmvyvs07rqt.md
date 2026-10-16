@@ -5,7 +5,7 @@ title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 a
 kind: task
 status: open
 priority: 2
-version: 5
+version: 8
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-15T23:31:28.285Z
+updated_at: 2026-10-16T04:27:01.480Z
 started_at: 2026-10-15T23:31:02.497Z
 ---
 Stage 1 triage of pull request jlevy/squares#622 (BuddenPing, PingYou Ltd, "data: submit a tighter exact N29 packing certificate", opened 2026-10-15T18:43:54Z, no comments or reviews when read at about 19:50Z). A result submitted as a pull request, treated as an intake report as #574 was (think-9v2k): never merged, approved, pushed to or commented on here. Lane D of the 2026-10-15 evening intake pass (think-wnsv, think-ykg6), read-only.
@@ -55,3 +55,5 @@ Waits for the record to hold sigma (think-6gti's import of #545), or for the own
 ## Notes
 
 2026-10-15 addressing-632-af04656 (review A on #628, think-e10e): the draft acknowledgement now asks which AI-assistance account applies (A2), as the #503 and #504 replies asked, and names the certificate by its archive path, n29-certificate/certificates/n029.cert.json (A4). Released back to open: the bead's own work (the comparison once think-6gti lands sigma, then the stage 7 reply) is unchanged.
+
+2026-10-16 intake pass (epic think-mdnn), ecstatic-edison-intake-1016: the acknowledgement was posted at 01:38:36Z (https://github.com/jlevy/squares/pull/622#issuecomment-6206055029, recorded in result-requests.yaml), and BuddenPing answered its AI question at 03:40:22Z (https://github.com/jlevy/squares/pull/622#issuecomment-6207551818): "All of our submissions are the same affiliation.  PingYou Ltd, assisted by the PY agentic offering". Read into #622's entry (read_through 2026-10-16T03:40:22Z; the entry's notes quote it). It answers the question for this certificate and, by its words, for every PingYou Ltd submission: the register entries crediting PingYou that say the source or pull request makes no statement about AI assistance (T-147, T-148, T-164, T-166, T-167 and T-174 among them) can now cite it, a records follow-up for the next change that touches them, not made here. The answer reports no result and changes no state, so it owes no reply of its own; the stage 7 reply on the verdict can thank the author. Released back to open: the comparison once think-6gti lands sigma, and the stage 7 reply, are unchanged.
