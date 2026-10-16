@@ -90,6 +90,20 @@ def confirming_execution(evidence: Mapping[str, object]) -> bool:
     )
 
 
+def verified_here(evidence: Mapping[str, object]) -> bool:
+    """Whether verified evidence can carry a case's verified lane.
+
+    A machine method's run counts only when it executed beyond the producer. The
+    producer's own build can earn V for the result it reports (epistemics.md, Reported
+    Formal Proofs and Source Builds), but a case's verified bound rests on a complete
+    replay here or a third party's retained replay (frontier/README.md). Published and
+    audited proofs are read, not run, and keep their own rules.
+    """
+    return evidence.get("method") not in MACHINE_FORMAL_METHODS or confirming_execution(
+        evidence
+    )
+
+
 def conditions(evidence: Mapping[str, object]) -> list[tuple[str, list[str]]]:
     """The hypotheses a proved theorem takes and does not prove (`proof.conditional_on`),
     each with the entries recorded as discharging it, in record order."""
@@ -478,6 +492,11 @@ def _check_bound_evidence(
         if verified:
             if evidence.get("assurance") != "verified":
                 errors.append(f"{label}: evidence {ref} is not verified")
+            elif not verified_here(evidence):
+                errors.append(
+                    f"{label}: evidence {ref} is the producer's own machine run, which "
+                    "verifies the source's claim but executes nothing beyond the producer"
+                )
             if evidence.get("claim") not in {expected_claim, "exact-value"}:
                 errors.append(
                     f"{label}: evidence {ref} has claim {evidence.get('claim')!r}, "
@@ -544,9 +563,18 @@ def _check_rigidity_claim(
             errors.append("verified requires a formal method")
         # A verified claim must rest on verified evidence. Without this the block's own
         # label is the whole of the argument, which is what the contract exists to refuse.
-        backing = [record for record in cited if record.get("assurance") == "verified"]
+        # The producer's own machine run is not backing either, as in the verified bound
+        # lanes (`verified_here`).
+        backing = [
+            record
+            for record in cited
+            if record.get("assurance") == "verified" and verified_here(record)
+        ]
         if not backing:
-            errors.append("verified rigidity requires at least one verified evidence record")
+            errors.append(
+                "verified rigidity requires at least one verified evidence record "
+                "executed beyond the producer"
+            )
         # ...and on evidence about rigidity. Verified alone let a rigidity claim rest on a
         # record of the right n proving something else entirely -- an upper bound, say --
         # which is backing in name only. `_check_bound_evidence` already constrains claim

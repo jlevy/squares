@@ -13,7 +13,11 @@ import pytest
 from devtools import check_results, verifier_registry
 from devtools.check_results import derive_confirmation, derive_verification
 from devtools.validate_schemas import source_build_file_problems
-from sqpack.assurance import check_evidence_semantics, conditional_problems
+from sqpack.assurance import (
+    check_case_semantics,
+    check_evidence_semantics,
+    conditional_problems,
+)
 from sqpack.yamlio import safe_load
 
 
@@ -310,3 +314,58 @@ def test_existing_conditional_families_keep_their_whole_claim_rungs() -> None:
         cited = [evidence[ref] for ref in record["evidence"]]
         assert derive_verification(cited, record["reviews"], record=record) == v
         assert derive_confirmation(cited, record["reviews"], record=record) == c
+
+
+def live_case(n: int) -> dict:
+    path = check_results.ROOT / "frontier" / f"n-{n:03d}.md"
+    return safe_load(path.read_text(encoding="utf-8").split("---\n")[1])["packing"]
+
+
+def test_a_producer_build_cannot_carry_the_live_n17_verified_lane() -> None:
+    """Source execution verifies T-154 and leaves the case's verified bounds alone."""
+    evidence = {
+        row["id"]: row for row in safe_load(check_results.EVIDENCE.read_text())["evidence"]
+    }
+    case = live_case(17)
+    assert check_case_semantics(case, evidence) == []
+    promoted = deepcopy(case)
+    upper = promoted["verified_upper_bound"]
+    promoted["verified_lower_bound"] = {
+        "value": upper["value"],
+        "exact_form": upper["exact_form"],
+        "evidence": ["E-n017-fitzharding-lean-source-build"],
+    }
+    promoted["status"] = "proved"
+    problems = check_case_semantics(promoted, evidence)
+    assert any(
+        "E-n017-fitzharding-lean-source-build is the producer's own machine run" in problem
+        for problem in problems
+    ), problems
+    replayed = deepcopy(evidence["E-n017-fitzharding-lean-source-build"])
+    replayed.update(origin="replayed-here", performed_by="repository")
+    assert not any(
+        "producer's own machine run" in problem
+        for problem in check_case_semantics(promoted, {**evidence, replayed["id"]: replayed})
+    )
+
+
+def test_a_producer_build_cannot_back_verified_rigidity() -> None:
+    entry = source_build()
+    entry["claim"] = "derived-structure"
+    case = {
+        "n": 17,
+        "rigidity": {
+            "property": "rigid",
+            "assurance": "verified",
+            "method": "proof-assistant-checked",
+            "scope": "the optimum",
+            "evidence": [entry["id"]],
+        },
+    }
+    problems = check_case_semantics(case, {entry["id"]: entry})
+    assert any("executed beyond the producer" in problem for problem in problems), problems
+    entry.update(origin="replayed-here", performed_by="repository")
+    assert not any(
+        "executed beyond the producer" in problem
+        for problem in check_case_semantics(case, {entry["id"]: entry})
+    )
