@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 """Validate structural support for the results register's declared rungs.
 
-`epistemics.md` owns the policy. This checker derives V1 and V3 through V5 from
-the cited evidence of any origin and the retained reviews, derives C0 through C5
-from the confirming-origin evidence and the confirming-side reviews, requires
-explanations for declared-only V0 and V2, and refuses unsupported promotion,
-unexplained understatement and a confirmation above the verification. It also
-resolves evidence, repository-file and `produced_by` references -- the campaign
-records a result came out of, which must exist -- requires retained controls at
-C3 and above, holds every review in `reviews` to a mapped, non-superseded,
-dated document (two adversarial AI reviews by distinct reviewers and a human
-oversight record at rung 4; human formalization reviews, an axiom receipt and
-an open-review pointer at rung 5), and rejects unknown result ids in the reader
-tier. It holds every `headline` to one table cell that states no
+`epistemics.md` owns the policy. This checker derives V1 and V3 through V5 from the
+cited evidence of any origin and the retained reviews, derives C0 through C5 from
+the evidence executed beyond the producer by the actor its origin names
+(`sqpack.assurance.confirming_execution`) and the confirming-side reviews, takes
+each conditional claim's weakest premise chain on each axis
+(`sqpack.assurance.claim_support_level`), requires explanations for declared-only V0
+and V2, and refuses unsupported promotion, unexplained understatement and a
+confirmation above the verification. It also resolves evidence, repository-file and
+`produced_by` references -- the campaign records a result came out of, which must
+exist -- requires retained controls at C3 and above, holds every review in `reviews`
+to a mapped, non-superseded, dated document (two adversarial AI reviews by distinct
+reviewers and a human oversight record at rung 4; human formalization reviews, an
+axiom receipt and an open-review pointer at rung 5), and rejects unknown result ids
+in the reader tier. It holds every `headline` to one table cell that states no
 number its claim does not, dates every result of this project by `established`
 and every result by others by `attribution.published`, never both, and requires
 each entry's `registered` date. It requires each entry's `kind`, one of `KINDS`,
@@ -107,10 +109,6 @@ PRODUCED_BY_NOUNS = {
 
 MACHINE_METHODS = {"exact-algebraic", "interval-certified"}
 FORMAL_METHOD = "proof-assistant-checked"
-#: Confirmation counts work beyond the producing run: this repository's replays and
-#: audits, and a third party's own replay retained here (epistemics.md, Confirmation).
-CONFIRMING_ORIGINS = {"audited-here", "replayed-here", "independently-external"}
-OURS_ORIGINS = CONFIRMING_ORIGINS
 DECLARED_ONLY_V = {"V0", "V2"}
 #: How many adversarial AI reviews, by distinct reviewers, rung 4 needs on either axis.
 #: Provisional: the owner's "multiple adversarial attempts" read as two
@@ -293,8 +291,8 @@ def derive_confirmation(
     open_review: bool = False,
     record: Mapping[str, Any] | None = None,
 ) -> str:
-    """The confirmation rung the confirming-origin evidence and the confirming-side
-    reviews support (epistemics.md, Confirmation)."""
+    """The confirmation rung that evidence executed beyond the producer and the
+    confirming-side reviews support (epistemics.md, Confirmation)."""
     entries = [entry for entry in entries if not sampled(entry)]
     return _supported_rung(
         entries, reviews, confirming=True, record=record, open_review=open_review
@@ -464,7 +462,8 @@ def confirmation_code(
     nothing where no confirming run is recorded. Never a rung (epistemics.md,
     Confirmation).
 
-    The runs are the confirming-origin entries with a passing replay, the machine-shaped
+    The runs are `confirming_runs`, executed beyond the producer with a passing replay
+    and their premises confirmed, the machine-shaped
     ones where there are any. Each part of the claim takes the relation furthest from the
     producer's code among the runs that confirm it, and the result takes the part closest
     to it: an optimality result is as independent as the less independent of its halves,

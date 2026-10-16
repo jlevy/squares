@@ -15,6 +15,7 @@ from devtools import check_results, verifier_registry
 from devtools.check_results import derive_confirmation, derive_verification
 from devtools.validate_schemas import source_build_file_problems
 from sqpack.assurance import (
+    DISCHARGING_ORIGINS,
     check_case_semantics,
     check_evidence_semantics,
     claim_support_level,
@@ -217,7 +218,7 @@ def confirming(entry: dict) -> dict:
     return entry
 
 
-@pytest.mark.parametrize("origin", sorted(check_results.CONFIRMING_ORIGINS))
+@pytest.mark.parametrize("origin", sorted(DISCHARGING_ORIGINS))
 def test_changing_only_producer_origin_cannot_create_confirmation(origin: str) -> None:
     entry = source_build()
     entry["origin"] = origin
