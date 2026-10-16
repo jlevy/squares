@@ -3,9 +3,9 @@ type: is
 id: is-01m50gnxnjk9e2h8sm6b51d0js
 title: "Intake 2026-10-15 lane B: stage-7 replies to the closeable result issues whose results are on main, and their record"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: ecstatic-edison-lane-b
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:29:59.985Z
-updated_at: 2026-10-15T21:38:31.192Z
+updated_at: 2026-10-16T02:09:55.120Z
 started_at: 2026-10-15T19:30:08.143Z
+closed_at: 2026-10-16T02:09:55.120Z
+close_reason: "#630 merged 2026-10-16"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
