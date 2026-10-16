@@ -5,7 +5,7 @@ title: "Regularize 3b: 153, 154, 207, 211, 237, 241, 302, 304 (re-housed by #614
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:08.951Z
-updated_at: 2026-10-16T11:41:51.204Z
+updated_at: 2026-10-16T12:00:13.376Z
 started_at: 2026-10-16T05:13:41.663Z
 ---
 
@@ -39,3 +39,5 @@ user-eb-addr-653 (#653 review A): pushed 2d800bde7 (merge #644 tip 60b097880, A3
 user-eb-addr-653: review A on #653 addressed; head 4da7ae92da410f8d1c4fca2628d6eb6a5ffc73e4; hosted CI 30 success / 29 skipped; disposition reply https://github.com/jlevy/squares/pull/653#pullrequestreview-5547277102; A4 deferred to think-e533; PR body updated.
 
 2026-10-16T11:41Z user-eb-reg-3b3c: #653 is now with addresser user-eb-addr-653 (head 4da7ae92d); #654 (3c) merged it in at 97d513032. think-kpm3 closes at #653's merge (after #644).
+
+2026-10-16 ~12:10Z coordinator user-eb: PR #653 MERGE-READY at 4da7ae92d (Review A 0/1/1/2 addressed by user-eb-addr-653; follow-up Review B 0/0/0/2 confirms every disposition: the credit change touches only 241 and 302; the 32 reports, receipt and selection outputs retained byte for byte, 289 KB; B1/B2 Low deferred by lane B to the cpu_seconds bead and think-e533). Hosted CI green. Stacks on #644; #654 and #656 stack on it.
