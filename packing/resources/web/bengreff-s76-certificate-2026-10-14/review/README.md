@@ -7,10 +7,19 @@ with everything they printed.
 They are kept in this packet for both results. The
 [$s(95)$ packet’s `review/`](../../bengreff-s95-certificate-2026-10-15/review/README.md)
 points here.
-The reviewer is Claude, strong sub-agent tier, max reasoning. The programs were written
-for the review by the reviewer and decide nothing on their own: every number is exact
-(Python integers and `fractions.Fraction`), floats only choose where to look, and no
-output is a certificate.
+The reviewer is Claude, strong sub-agent tier, max reasoning.
+
+- **Programs written here:** `k2m5_review.py` and `corner_scan.py`, written for the
+  review by the reviewer, and the run scripts. They decide nothing on their own: every
+  number is exact (Python integers and `fractions.Fraction`), floats only choose where to
+  look, and no output is a certificate.
+- **Source programs run here:** `zmx2`, built from retained bytes; `zm_mixed.py`, with
+  `mixed_cover.py` and `zeromargin.py`, from copies of the retained files; and the
+  author’s `tools/check_coverage.py`, the source’s audit script, through `subprocess` in
+  `tiling`. The runbook’s rule for the review lane is that it runs only code it writes
+  ([`result-import.md`](../../../../campaign/result-import.md#stage-4-validate), “Who
+  reviews, and when”). The lane brief allowed a source’s own programs from their
+  retained copies after reading them, and each was read before it ran.
 
 ## What Each Program Does
 
@@ -24,6 +33,7 @@ output is a certificate.
 | `programs/k2m5_review.py localmut COVER N --pose P` | the cover | a mutant without the $D_4$ orbit of the heaviest piece the square at pose $P$ captures, so that the hole sits near that pose’s orbit (`--write` writes it) |
 | `programs/k2m5_review.py tiling PACKET N CHECK_COVERAGE` | the source’s records and its `tools/check_coverage.py` | eight mutated record sets, each run through the author’s script (`python3 -I`, from the retained copy, after reading it) and through this program’s composite check |
 | `programs/corner_scan.py COVER ZMX2_LOG ROOT_ID` | the cover and a `zmx2` log | exact $\mu$ at every corner of the uncertified boxes listed for one root (imports `k2m5_review.py` from its own directory) |
+| `programs/common.sh` | the script’s own location | sourced by every run script: finds the packets and the project from `programs/`, resolves the project interpreter through `uv`, unpacks both covers into `WORK/data` with their SHA-256 checked, and copies the retained `zm_mixed.py` files with their digests checked |
 | `programs/run_zmx2_controls.sh` | the covers, the mutants, the `zmx2` binary | `zmx2 cert --d4` on one root per control, published and mutated |
 | `programs/run_zm_control.sh` | the 199/200 mutant, the retained `zm_mixed.py` files | `zm_mixed.py cert` with `verify.sh`’s flags on the one cell that holds the mutant’s hole, under a 15-minute limit |
 | `programs/run_zm_control_d12.sh` | the published cover and the 199/200 mutant | the same cell at a depth limit of 12, for both covers |
@@ -37,22 +47,14 @@ fraction at every pose where both were run.
 
 ## How They Were Run
 
-On 2026-10-16, on a shared four-core x86-64 container, with Python 3.14.7 (`python3 -I`),
-one process at a time under `nice -n 10`.
-The covers were unpacked from the packets’ `cover/*.txt.gz` into a scratch directory
-(`data/`), and the scripts name the scratch paths they ran in.
-The exact commands are in `programs/`:
+On 2026-10-16, on a shared four-core x86-64 container, one process at a time under
+`nice -n 10`. The review programs ran under Python 3.14.7 (`python3.14 -I`), and
+`zm_mixed.py` under the project interpreter. The covers were unpacked from the packets’
+`cover/*.txt.gz` into a scratch directory (`data/`).
 
-- `run_all_final.sh` writes every `k2m5_review.py` output and `corner_scan.py`’s, from
-  the final program. Its digest is in each output’s `program` field. An earlier run of
-  the same commands, while the program was still being written, printed the same values.
-- `run_zmx2_controls.sh` runs the `zmx2` controls.
-- `run_zm_control.sh`, `run_zm_control_d12.sh` and `run_zm_local.sh` run the
-  `zm_mixed.py` controls.
-
-`LOWEST_POSE`, in `run_all_final.sh`, is the `descent_min` pose of the `poses` output.
-The 199/200 mutant’s pose is the lowest corner `corner_scan.py` finds among the uncertified
-boxes of root 8010.
+`LP76` and `LP95`, in `run_all_final.sh`, are the `descent_min` poses of the `poses`
+outputs. The 199/200 mutant’s pose is the lowest corner `corner_scan.py` finds among the
+uncertified boxes of root 8010.
 
 `zmx2` was built from retained bytes by the project’s
 `python -m devtools.replay_evand_zmx2 build --checker 6b7f0f79`. That gave binary
@@ -61,6 +63,37 @@ bit-identical to the retention’s.
 `zm_mixed.py` ran from a scratch copy of the retained `zm_mixed.py` (`ee3e2915`),
 `mixed_cover.py` (`bb89de15`) and `zeromargin.py` (`640fe453`), digests checked, under the
 project interpreter. Nothing was fetched.
+
+The run scripts that wrote `outputs/` named the lane’s scratch directory and a worktree
+that no longer exists, and read the poses for `LP76` and `LP95` with the `python3` on
+`PATH`; they are in this directory’s history at `afdc297d8`. The outputs keep those
+absolute paths (`path` and `dir` in `records-n*.json`, `checker` and a temporary path in
+`tiling-n*.json`). After review, the scripts were changed to run from the repository, as
+below, with the same commands and flags.
+
+## Reproduce
+
+Each script takes one argument, a work directory outside the checkout, and finds
+everything else from its own location: the packets, the retained checker copies, and
+the project interpreter, through
+`uv run --frozen --all-extras --group dev --project packing python -I`.
+It unpacks the covers into `WORK/data`, writes mutated covers to `WORK/mut`, and writes
+its outputs under `WORK/outputs` in the layout of `outputs/` here. Run
+`run_all_final.sh` first, since the control scripts read its mutants:
+
+```sh
+W=$(mktemp -d)
+packing/resources/web/bengreff-s76-certificate-2026-10-14/review/programs/run_all_final.sh "$W"
+packing/resources/web/bengreff-s76-certificate-2026-10-14/review/programs/run_zmx2_controls.sh "$W"  # needs cargo
+packing/resources/web/bengreff-s76-certificate-2026-10-14/review/programs/run_zm_control_d12.sh "$W"
+packing/resources/web/bengreff-s76-certificate-2026-10-14/review/programs/run_zm_control.sh "$W"     # 15 min
+packing/resources/web/bengreff-s76-certificate-2026-10-14/review/programs/run_zm_local.sh "$W"       # 10 min
+```
+
+`run_all_final.sh` took about 8 minutes on that host on rerun, and ends by comparing each JSON output with
+the kept one, field by field, apart from `wall_s` and `cpu_s`; the fields it reports as
+different are the absolute paths above. `corner_scan.py`’s output is compared byte for
+byte.
 
 ## What They Printed
 
