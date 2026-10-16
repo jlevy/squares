@@ -352,14 +352,22 @@ def read_jsonl_gz(path: Path) -> list[dict[str, Any]]:
         return [json.loads(line, parse_float=str) for line in stream if line.strip()]
 
 
+def log_row(rows: list[dict[str, Any]], kind: str) -> dict[str, Any]:
+    """The log's first row of ``kind``; a log without one is refused, not a traceback."""
+    found = next((r for r in rows if r.get("kind") == kind), None)
+    if found is None:
+        raise AuditError(f"the log has no {kind} row")
+    return found
+
+
 def crate_log_checks(
     rows: list[dict[str, Any]], density: Density, stated: Stated, *, control: bool
 ) -> list[Check]:
     """``sqverify_continuous``'s log against its own summary and the premises here."""
-    premises = next(r for r in rows if r.get("kind") == "premises")["premises"]
-    axis = next(r for r in rows if r.get("kind") == "axis-patch")
+    premises = log_row(rows, "premises")["premises"]
+    axis = log_row(rows, "axis-patch")
     roots = sorted((r for r in rows if r.get("kind") == "root"), key=lambda r: int(r["index"]))
-    summary = next(r for r in rows if r.get("kind") == "sqverify-fast-continuous-summary/v1")
+    summary = log_row(rows, "sqverify-fast-continuous-summary/v1")
     side = crate_axis_side(stated.core, CRATE_EPS)
     ends = [CRATE_EPS, *crate_cuts(CRATE_EPS, CRATE_LAST_T), CRATE_LAST_T]
     spans = [[text(a), text(b)] for a, b in itertools.pairwise(ends)]

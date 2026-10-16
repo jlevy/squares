@@ -60,9 +60,14 @@ def test_the_certificate_is_the_smallest_report_and_follows_607() -> None:
     row = _row()
     assert Fraction(row["exact_side"]) == SIDE
     assert row["smallest"] == reports.THIS
-    assert row["case"]["result"] == "T-140"
+    # #614 adopted #593's certificate (T-183) as the house at 237; T-140 (#488), the house
+    # before it, is an earlier report (PR #627 review A1).
+    assert row["case"]["result"] == "T-183"
     assert row["case"]["relation"] == "below"
     assert all(other["relation"] == "below" for other in row["pending"])
+    assert "#593" not in [other["report"] for other in row["pending"]]
+    (earlier,) = [other for other in row["pending"] if other["report"] == "#488"]
+    assert earlier["result"] == "T-140"
     (issue,) = [other for other in row["pending"] if other["report"] == "#607"]
     committed, printed = ISSUE_607
     # Read at #607's exact side, through its packet, since the records lane of 15 October

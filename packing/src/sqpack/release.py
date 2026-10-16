@@ -1006,6 +1006,25 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer", "site"),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "The validation CLI adds per-test phase journals only to native quick and "
+            "slow pytest commands with external validation artifacts configured. "
+            "Site and paper builders neither invoke these commands nor consume their "
+            "journals. Test selection, deadlines and resource limits are unchanged. "
+            "Public rendering helpers, manuscripts, figures and scientific inputs "
+            "are unchanged, so site v0.7.10 and paper v0.4.7 remain current. This is "
+            "a source-reviewed finding; no PDF byte-identity comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
@@ -1107,7 +1126,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "where an empty style attribute falls in one formula's span, which moves "
             "between two renders of the branch alone. The claim documents change only the "
             "revision their links pin. A register count follows the site's data and is not "
-            "a revision of the paper, so the explainer keeps v0.4.7; the site takes v0.7.11."
+            "a revision of the paper, so the explainer keeps v0.4.7; the site takes v0.7.11. "
+            "Rendered again after the PR #627 review fixes, with the register and source "
+            "register as they stood at 52f02f5b and as fixed (T-188 to T-192's notes, "
+            "significance and regularizations, two source notes), the Markdown is "
+            "byte-identical and the HTML differs only in that same empty style attribute."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1144,7 +1167,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "readers, the About page a card for bengreff/s95-certificate, the requests "
             "record replies and entries, and the source register 267 beyond-horizon rows; "
             "none of the three papers reads any of them, so each keeps its edition: "
-            "v0.1.7, v0.1.0 and v0.2.2."
+            "v0.1.7, v0.1.0 and v0.2.2. Rendered again after the PR #627 review fixes, "
+            "with the register and source register as they stood at 52f02f5b and as fixed "
+            "(T-188 to T-192's notes, significance and regularizations, two source notes), "
+            "the three papers' HTML and Markdown are byte-identical."
         ),
     ),
     ReleaseNoPublicChange(

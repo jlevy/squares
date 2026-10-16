@@ -2656,8 +2656,8 @@ sources:
       The author's verified-bounds index at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d,
       first committed on 14 October 2026 with no issue: one exact certificate inside the
       case corpus, s(211) <= 7496774813149710519467765230441/5e29, the author's
-      refinement of Daniil Ostashev's arrangement ("seeded from Daniil Ostashev"),
-      retained as factual data; 296 certificates beyond the corpus (339, 370, 378 to
+      refinement of Daniil Ostashev's arrangement of issue 575 ("seeded from Daniil
+      Ostashev"), retained as factual data; 296 certificates beyond the corpus (339, 370, 378 to
       382, 403 to 991), pinned by digest as bulk data and compared from their exact
       header sides, of which the source register records 252. The unlicensed prose and
       index are hash-pinned; they state nothing about AI assistance, and the author's
@@ -2693,9 +2693,9 @@ sources:
     note: >-
       One complete exact certificate at 58a783368d4b7e70bb800f0009ea9ca03e578739, first
       committed in 4e4c8ce with no issue: s(237) <=
-      7951301819129798440089572127137/5e29, the author's exact refinement of his
-      issue-607 packing, which continues Mykhailo Polkovskyi's issue-593 certificate.
-      Retained as factual data; the unlicensed prose and the author's index are
+      7951301819129798440089572127137/5e29, the author's exact refinement of Mykhailo
+      Polkovskyi's issue-593 certificate, from which its metadata says his fq search was
+      seeded. Retained as factual data; the unlicensed prose and the author's index are
       hash-pinned. No optimizer, local or global claim is replayed. The pinned files
       state nothing about AI assistance; issue 607 of the day before discloses OpenAI
       Codex assistance.

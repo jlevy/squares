@@ -84,6 +84,8 @@ REACHED = {
     "#476": "2026-10-09T20:38:53Z",
     "T-134 (#476)": "2026-10-09T20:38:53Z",
     "T-136 (#481)": "2026-10-09T21:59:29Z",
+    # T-140's 237, the house until #614 adopted T-183 there.
+    "#488": "2026-10-10T14:08:32Z",
     "#505": "2026-10-11T14:24:18Z",
     "#506": "2026-10-11T18:06:50Z",
     "#561": "2026-10-12T18:55:03Z",
@@ -199,17 +201,20 @@ def test_the_seven_composites_are_fangs_certificates_byte_for_byte() -> None:
 
 
 def test_the_claims_put_237_below_t183_and_every_other_report() -> None:
+    """#614 adopted #593's certificate (T-183) as the house at 237, so the case is #593's
+    and T-140 (#488), the house before it, is an earlier report (PR #627 review A1)."""
     row = _rows()[237]
-    assert row["case"]["result"] == "T-140"
+    assert row["case"]["result"] == "T-183"
     assert row["case"]["relation"] == "below"
     assert row["smallest"] == reports.THIS
     relations = {p["report"]: p["relation"] for p in row["pending"]}
     assert set(relations.values()) == {"below"}
-    (t183,) = [p for p in row["pending"] if p.get("result") == "T-183"]
-    assert t183["report"] == "#593"
-    gap = Fraction(t183["difference"])
+    assert "#593" not in relations
+    (t140,) = [p for p in row["pending"] if p.get("result") == "T-140"]
+    assert t140["report"] == "#488"
+    gap = Fraction(row["case"]["difference"])
     assert Fraction(1014, 10**7) < gap < Fraction(1015, 10**7)
-    assert min(Fraction(p["difference"]) for p in row["pending"]) == gap
+    assert min(Fraction(p["difference"]) for p in row["pending"]) > gap
 
 
 def test_beyond_the_corpus_the_campaign_bounds_are_smallest_and_the_composites_tie() -> None:

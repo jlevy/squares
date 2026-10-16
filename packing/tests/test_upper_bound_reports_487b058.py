@@ -43,14 +43,18 @@ def test_custody_admits_the_211_certificate_at_the_side_the_source_prints() -> N
 
 
 def test_211_is_the_smallest_report_and_below_586_by_its_margin() -> None:
+    """#614 adopted #586's certificate (T-182) as the house at 211, so the case is #586's
+    and T-149 (#501), the house before it, is an earlier report (PR #627 review A1)."""
     (row,) = reports.check_claims(_packet())["results"]
     assert row["smallest"] == reports.THIS
-    assert row["case"]["result"] == "T-149"
+    assert row["case"]["result"] == "T-182"
     assert all(other["relation"] == "below" for other in [row["case"], *row["pending"]])
-    (issue,) = [other for other in row["pending"] if other["report"] == "#586"]
-    assert Fraction(issue["exact_side"]) == ISSUE_586
-    assert Fraction(issue["difference"]) == ISSUE_586 - SIDE
+    assert Fraction(row["case"]["exact_side"]) == ISSUE_586
+    assert Fraction(row["case"]["difference"]) == ISSUE_586 - SIDE
     assert Fraction(9, 10**6) < ISSUE_586 - SIDE < Fraction(10, 10**6)
+    assert "#586" not in [other["report"] for other in row["pending"]]
+    (earlier,) = [other for other in row["pending"] if other["report"] == "#501"]
+    assert earlier["result"] == "T-149"
 
 
 def test_the_receipt_admits_both_routes_and_refuses_both_controls() -> None:

@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import itertools
 import json
+import re
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -320,6 +321,18 @@ def test_crate_log_checks_catch_a_missing_root_and_a_low_bound() -> None:
     assert not held(followup.crate_log_checks(log, density, stated(), control=False))[
         "premises as recomputed here"
     ]
+
+
+@pytest.mark.parametrize(
+    "kind", ["premises", "axis-patch", "sqverify-fast-continuous-summary/v1"]
+)
+def test_crate_log_checks_refuse_a_log_missing_a_row(kind: str) -> None:
+    """A log without one of the rows the checks read is refused as an audit error, which
+    `main` reports, not a bare `StopIteration` traceback (#616 review A5)."""
+    density = followup.read_candidate(N28, 28)
+    log = [row for row in crate_log(density) if row.get("kind") != kind]
+    with pytest.raises(AuditError, match=f"the log has no {re.escape(kind)} row"):
+        followup.crate_log_checks(log, density, stated(), control=False)
 
 
 def check2_receipt(*, budget: str = "4000000000") -> tuple[dict[str, Any], dict[str, Any]]:

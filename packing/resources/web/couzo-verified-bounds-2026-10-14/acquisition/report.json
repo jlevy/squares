@@ -8,7 +8,7 @@
   "witness_prefix": "W-couzo-487b058-n",
   "claim_limitations": "Complete 487b058 rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
   "read_on": "2026-10-15",
-  "read_at_main": "c4c690a3e60e613ec6c063d4f27c5f627e734ea5",
+  "read_at_main": "22a67ce4aa933196c307e4b209c45b13d55454db",
   "certificates": [
     {
       "n": 211,
@@ -24,13 +24,13 @@
   "houses": [
     {
       "n": 211,
-      "reader": "[Ostashev records 2026-10-11]",
-      "source_key": "[Ostashev records 2026-10-11]",
-      "holders": "Daniil Ostashev",
-      "result": "T-149",
-      "reported_value": "14.9963367213363157",
-      "verified_value": "14.9963367213363157",
-      "evidence": ["E-ostashev-501-exact-feasibility"]
+      "reader": "[Couzo certificates 2026-10-13]",
+      "source_key": "[Couzo certificates 2026-10-13]",
+      "holders": "Daniil Ostashev, improved by Francisco Couzo",
+      "result": "T-182",
+      "reported_value": "14.9935589139740062",
+      "verified_value": "14.9935589139740062",
+      "evidence": ["E-couzo-586-exact-feasibility"]
     }
   ],
   "pending": [
@@ -50,6 +50,14 @@
       "holders": "Daniel after de Winter",
       "result": "T-098",
       "reader": "[evand exact optima 2026-10-05]"
+    },
+    {
+      "n": 211,
+      "report": "#501",
+      "url": "https://github.com/jlevy/squares/issues/501",
+      "holders": "Daniil Ostashev",
+      "result": "T-149",
+      "reader": "[Ostashev records 2026-10-11]"
     },
     {
       "n": 211,
@@ -86,14 +94,6 @@
     },
     {
       "n": 211,
-      "report": "#586",
-      "url": "https://github.com/jlevy/squares/issues/586",
-      "holders": "Francisco Couzo",
-      "result": "T-182",
-      "reader": "[Couzo certificates 2026-10-13]"
-    },
-    {
-      "n": 211,
       "report": "#593",
       "url": "https://github.com/jlevy/squares/issues/593",
       "holders": "Mykhailo Polkovskyi (Mishapolk)",
@@ -104,9 +104,9 @@
     "title": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
     "headline": "A tighter exact certificate for 211 squares from Francisco Couzo, continuing Daniil Ostashev's arrangement",
     "significance": 1,
-    "source_checks": "The author's metadata (certificates/n211.json at the pin) calls the certificate an exact optimum, seeded from Daniil Ostashev's issue-501 certificate and found by the author's hop search (job 97342), and certificates/README.md lists it as best known; the author reports that this repository's sqpack verify.py and Evan Daniel's verify_cert.py accept his certificates in exact rational arithmetic. Those statements are the author's; no source program ran here.",
-    "credit": "Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with this refinement at 211, continuing Daniil Ostashev's arrangement (issue 501, T-149), whose construction credit the author's metadata keeps, after his own issue-583 and issue-586 certificates of the same arrangement. Evan Daniel's optimizer, contact solver and verifier and this repository's exact verifier were used. The pinned files state nothing about AI assistance; the author's issues of 13 and 14 October state that OpenAI Codex assisted search and verification orchestration, and that he directed the work.",
-    "next_rung": "Review the retained replay, then register by the per-count rule: published at its first commit 487b058 (2026-10-14T17:45:39Z) with no issue, the certificate is 9.29e-06 below issue 586's, the smallest earlier report, and below every other report and the case's T-149. Final exact-head CI remains required.",
+    "source_checks": "The author's metadata (certificates/n211.json at the pin) calls the certificate an exact optimum, seeded from Daniil Ostashev's certificate, which it links to issue 501 but whose side it states is that of his issue-575 certificate (T-175), and found by the author's hop search (job 97342) from the author's own 211, and certificates/README.md lists it as best known; the author reports that this repository's sqpack verify.py and Evan Daniel's verify_cert.py accept his certificates in exact rational arithmetic. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with this refinement at 211 of Daniil Ostashev's arrangement of issue 575 (T-175), as the author's own issue-583 and issue-586 certificates continued it (T-181, T-182); the author's metadata keeps Ostashev's construction credit and labels its seed issue 501, the seed's side being issue 575's. Evan Daniel's optimizer, contact solver and verifier and this repository's exact verifier were used. The pinned files state nothing about AI assistance; the author's issues of 13 and 14 October state that OpenAI Codex assisted search and verification orchestration, and that he directed the work.",
+    "next_rung": "Review the retained replay, then register by the per-count rule: published at its first commit 487b058 (2026-10-14T17:45:39Z) with no issue, the certificate is 9.29e-06 below issue 586's, the smallest earlier report and the case's T-182, and below every other report. Final exact-head CI remains required.",
     "bead": "think-nj7h",
     "bibliography": {
       "authors": ["Couzo"],

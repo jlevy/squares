@@ -15,9 +15,11 @@ Against `b85dee2` it adds 290 certificates (370 and 403 to 991), changes seven (
 | --- | --- | --- | --- | --- |
 | 211 | `7496774813149710519467765230441/500000000000000000000000000000` | 14.9935496262994211 | the certificates README: 14.993549626300 | no issue |
 
-`certificates/n211.json` calls the 211 certificate an exact optimum, seeded from Daniil
-Ostashev’s issue-501 certificate and found by the author’s `hop` search (job 97342): the
-author’s further refinement of the arrangement #583 and #586 certified.
+`certificates/n211.json` calls the 211 certificate an exact optimum, found by the
+author’s `hop` search (job 97342) from his own 211 and seeded from Daniil Ostashev’s
+certificate, which it links to issue 501 but whose side it states, 14.99369418658324…,
+is that of Ostashev’s #575 certificate (T-175): the author’s further refinement of the
+arrangement #583 and #586 certified (T-181, T-182).
 
 ## Retained Here
 
@@ -43,17 +45,26 @@ pinned by digest only. No prose or program is copied.
 ## The Certificate at 211
 
 [acquisition/claims.json](acquisition/claims.json) compares it with the case record and
-every other report at 211, as `main` stood at `c4c690a3e`, each at its exact side.
+every other report at 211, as `main` stood at `22a67ce4a`, after #614 adopted T-182 as
+the house at 211, each at its exact side.
+The record first read `c4c690a3e`, with T-149 as the house, and every relation is the
+same at both.
 
 | Report | Holder | Side | This certificate is below by |
 | --- | --- | --- | --- |
-| Case T-149, PR #574 (T-174) | Ostashev; PingYou Ltd | 14.9963367213363163 | 2.79e-3 |
+| Case T-182 (#586); #593, not registered at 211 | Ostashev, improved by Couzo; Polkovskyi | 14.9935589139740060 | 9.29e-6 |
+| #501 (T-149), PR #574 (T-174) | Ostashev; PingYou Ltd | 14.9963367213363163 | 2.79e-3 |
 | T-057 | de Winter | 14.9979607049677150015 (printed) | 4.41e-3 |
 | T-098 (#375) | Daniel | 14.9979607049673618 | 4.41e-3 |
 | T-163 (Fang’s theorem inventory) | Fang | 14.99995 | 6.40e-3 |
 | #575 (T-175) | Ostashev | 14.9936941865832463 | 1.45e-4 |
 | #583 (T-181) | Couzo | 14.9935589141226373 | 9.29e-6 |
-| #586 (T-182); #593, not registered at 211 | Couzo; Polkovskyi | 14.9935589139740060 | 9.29e-6 |
+
+[review/compare_lineage-output.txt](review/compare_lineage-output.txt) measures the 211
+against #586’s, #583’s, #575’s and #501’s packings with
+`mishapolk-kkt-refinements-2026-10-14/review/compare_lineage.py`: it lies nearest
+#586’s (T-182), with 139 of 211 squares within $10^{-3}$ under a reflection of the box
+and none further than 0.354, and T-188 lists it as a regularization of T-182.
 
 The certificate is the smallest at 211. A publication in a watched repository is a
 report from its first commit, here 2026-10-14T17:45:39Z, after every report above, so
@@ -124,15 +135,21 @@ that supersede these (T-189). The 42 `undecided-goebel` rows are not recorded un
 owner answers #613, and the two not recorded stay so.
 
 A replay of the 296 makes 456,922,338 pair decisions: 38 to 48 CPU-hours at the rate the
-211 and 237 replays measured. It needs the bytes, from a checkout at the pin or a hosted
-release, and is held (think-2d7f).
+211 and 237 replays measured. It needs the bytes, which are held only in the author’s
+repository at the pin until a hosted release keeps them, and is held (think-2d7f).
+The `4e4c8ce` index’s exact sides, in
+[review/goebel-beyond-horizon.json](review/goebel-beyond-horizon.json), are smaller than
+all 238 of the 252 recorded rows that are still current, by $3.79 \times 10^{-12}$ (381)
+to $2.38 \times 10^{-2}$ (749); T-188’s notes and the source register say so until that
+index is recorded (think-yfoo).
 
 ## Credit and Licence
 
 Francisco Couzo wrote the source, which states no licence; the certificate is kept as
 factual data and nothing of the source is relicensed.
-The 211 certificate continues Daniil Ostashev’s arrangement, whose construction credit
-the author’s metadata keeps, after the author’s own #583 and #586 certificates.
+The 211 certificate continues Daniil Ostashev’s arrangement of #575 (T-175), whose
+construction credit the author’s metadata keeps, after the author’s own #583 and #586
+certificates (T-181, T-182).
 Evan Daniel’s optimizer, contact solver and verifier and this repository’s exact verifier
 were used. The pinned files state nothing about AI assistance; the author’s issues of 13
 and 14 October state that OpenAI Codex assisted search and verification orchestration,
@@ -149,7 +166,11 @@ uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports 
 ```
 
 The beyond-horizon comparison reruns from a checkout at the pin, with the commands in
-the script’s docstring.
+the script’s docstring. The lineage measurement reruns from the retained packets:
+
+```sh
+uv run --frozen --all-extras --group dev python resources/web/mishapolk-kkt-refinements-2026-10-14/review/compare_lineage.py couzo-verified-bounds-2026-10-14 211 couzo-certificates-2026-10-13 couzo-issue583-2026-10-13 dostashev-merged-bands-2026-10-13 dostashev-records-2026-10-11
+```
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
