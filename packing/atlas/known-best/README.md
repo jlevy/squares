@@ -341,6 +341,11 @@ with its outcome, and none owes a run any longer.
 The runs’ receipts and per-count reports, and the selection’s report, are kept in
 [`cases/regularized_drawings/think-0ut1-2026-10-16/`](../../cases/regularized_drawings/think-0ut1-2026-10-16/),
 without the views.
+The same directory keeps the audit probe at 307, grid-slack at 1 and 5
+degrees (`leftovers-audit-deg1-1016` and `leftovers-audit-deg5-1016`), which
+straightened nothing and drew the drawn view’s measures, so nothing was admitted, and
+`grid-slack-timing.tsv`, each grid-slack invocation’s measured wall, user and system
+seconds.
 
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
