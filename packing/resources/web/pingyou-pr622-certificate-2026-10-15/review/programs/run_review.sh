@@ -39,12 +39,16 @@ nice -n 10 "${run[@]}" "$prog" sides "$asset" "$repo" >"$out/sides.json"
 nice -n 10 "${run[@]}" "$prog" identity "$asset" "$repo" >"$out/identity.json"
 nice -n 10 "${run[@]}" "$prog" receipt "$asset" \
   "$packet/receipts/exact-certification.json.xz" >"$out/receipt.json"
+# The third route is this repository's code and needs the project's packages, so it runs
+# through uv whatever PYTHON says (the coordinator's request; see the README).
+nice -n 10 uv run --frozen --all-extras --group dev --project "$repo/packing" python -I \
+  "$here/third_route.py" "$asset" >"$out/third-route.json"
 for b in pr574-v2 pr549 evan; do
   nice -n 10 "${run[@]}" "$prog" certificate "$asset" \
     --member "n29-certificate/baselines/$b-n029.cert.json" >"$out/baseline-$b.json"
 done
 
-# Each output against the kept one, field for field, apart from CPU times.
+# Each output against the kept one, field for field, apart from CPU and wall times.
 "${run[@]}" - "$review/outputs" "$out" <<'PY'
 import json
 import sys
@@ -55,7 +59,7 @@ kept, fresh = Path(sys.argv[1]), Path(sys.argv[2])
 
 def strip(value):
     if isinstance(value, dict):
-        return {k: strip(v) for k, v in value.items() if k != "cpu_s"}
+        return {k: strip(v) for k, v in value.items() if k not in {"cpu_s", "wall_s"}}
     if isinstance(value, list):
         return [strip(v) for v in value]
     return value
