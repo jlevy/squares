@@ -112,14 +112,17 @@ small notes and two questions are for you.
   coordinator’s request, decided the derived fact, which this review holds equal to the
   certificate, as the third route’s own readers do.
 - **The margins hold**, as §6 states them.
+- **The credit and the report order** are as §7 states them: Thomas Schadt’s packing of
+  2025, as David Ellsworth improved it; PingYou Ltd’s certificate of 2026, assisted by
+  the PY agentic offering; undecided against the catalogue’s value.
 - **The replay’s controls are genuine and refused for the right reason, and they are
   gross** (§5).
 - **The rung.** The entry should hold `V3`/`C3` once the stage 4 exit maps this review,
-  and not before. §7 gives what that means for the order of merges.
+  and not before. §8 gives what that means for the order of merges.
 - **The significance.** The draft `S1` is confirmed: a padding refinement of a packing
   the record holds, by $1.57 \times 10^{-36}$.
 - **The house rule.** Once the exit maps this review, the entry is the smallest
-  validated packing at 29, and the house selection takes it (§8).
+  validated packing at 29, and the house selection takes it (§9).
 
 ## 3. From Certificate to Claim
 
@@ -191,7 +194,7 @@ The source reports running the two maintained routes itself, unchanged at its ba
 commit, on its corners witness.
 A fault in those two routes would therefore have misled the source and the replay alike.
 This review’s program and the third route are the confirmations that share no code with
-any check the source ran (§9, R3).
+any check the source ran (§10, R3).
 
 All three routes are Claude’s work, so the record’s authoring diversity is low.
 The source names no system behind its agentic offering, so the overlap with the producer
@@ -270,7 +273,55 @@ The asset’s copy of T-155’s certificate has T-155’s side exactly.
 the defect `think-gzrw` owns.
 These comparisons use the exact form, as #661’s do.
 
-## 7. The Rung
+## 7. Provenance, Credit and the Report Order
+
+- **Who submitted it.** The pull request comes from the GitHub account BuddenPing, for
+  PingYou Ltd. The record credits the company by name and uses the handle only to say
+  which account, as the ledger’s “PingYou Ltd (BuddenPing)” does
+  ([epistemics.md](../../../epistemics.md#parallel-projects-and-their-credit)).
+- **AI assistance.** The pull request makes no statement.
+  Asked in the acknowledgement, the author answered on 16 October 2026: “All of our
+  submissions are the same affiliation.
+  PingYou Ltd, assisted by the PY agentic offering”
+  ([comment](https://github.com/jlevy/squares/pull/622#issuecomment-6207551818)). That
+  covers this certificate, and the entry, the packet and the bibliography quote it.
+  The source names no system behind the offering, and the record should not guess one.
+- **Who found what, and when.** The packing is Thomas Schadt’s, found in 2025 and
+  improved by David Ellsworth.
+  That is how the Kingbird catalogue credits it and how `n-029.md`’s reported lane
+  records it, and the measured identity (§10, R5) shows the certificate is that packing.
+  The certificate is PingYou Ltd’s, published on 15 October 2026: an exact rational
+  refinement, credited as a regularization of the packing T-009 holds.
+  Evan Daniel is credited for the source tools and data among its stated inputs, as the
+  source asks. The bibliography’s “PingYou Ltd after Schadt, Ellsworth, Daniel, Levy”
+  follows the source’s own credits and the earlier PingYou entries.
+- **The report order.** Two reports state a bound at 29, both PingYou Ltd’s: PR #574’s
+  N29 row, first committed on 13 October 2026, and #622, opened on 15 October.
+  Both are undecided against the reported lane (§6). #622 is decided below #574’s row
+  and below T-155. So the owner’s report-order rule records neither by itself.
+  #622 is recorded on a key reason, the owner’s house rule of 16 October 2026, which the
+  ledger lists as the candidate and which this pass’s coordinator reads as settling it.
+  The entry’s notes still say that the owner confirms or withdraws that reason; they
+  should cite the owner’s word once it is on file.
+
+The record may state:
+
+- $s(29) \le S$, by a complete rational certificate replayed here, for finite
+  feasibility only;
+- that $S$ is $1.57 \times 10^{-36}$ below T-155 and $7.32 \times 10^{-90}$ below PR
+  #574’s N29 certificate, both decided exactly;
+- that against the catalogue’s `5.93383346267692` the order is undecided.
+  $S$ lies 0.919 of a unit above the print and inside T-009’s enclosure of the
+  catalogue’s exact side, and is expected at or just above that side;
+- that the certificate is the catalogue’s packing, measured square by square, with
+  PingYou Ltd credited for the certificate refinement, assisted by the PY agentic
+  offering.
+
+It may not state that #622 improves on the catalogue’s value or the reported lane.
+Nor may it call the certificate a new packing, a new record at 29, or the smallest
+report by the rule alone, or claim any optimality, local minimum or rigidity.
+
+## 8. The Rung
 
 **What the evidence supports.** The replay is exact, replayed here, complete over the
 one certificate and passing, so its evidence derives `V3`/`C3`. This review is one
@@ -301,7 +352,7 @@ there, then merge #661 once.
 Short of that, merge the two back to back, with no reply, closure or site deployment in
 between. After the exit the entry stays `V3`/`C3`, its review on file.
 
-## 8. The House Rule at 29
+## 9. The House Rule at 29
 
 The owner, 16 October 2026: “We should always be adopting the smallest packing and then
 regularizing it.” Once the exit maps this review as accepted, the entry meets every
@@ -343,7 +394,7 @@ Two consequences for the adoption:
   `V-check-half-angle-area` among its verifiers.
   Without that citation it must go.
 
-## 9. Findings
+## 10. Findings
 
 Graded blocking, major, minor or note.
 None is blocking, and none is in the certificate.
@@ -353,7 +404,7 @@ None is blocking, and none is in the certificate.
 `packing/frontier/results.yaml`, the entry’s `verification: V3` and `confirmation: C3`,
 citing `E-pingyou-622-exact-feasibility`; and `packing/campaign/result-requests.yaml`,
 #622’s `register` and `evidence` mapping.
-§7 gives the order of merges under which this is acceptable.
+§8 gives the order of merges under which this is acceptable.
 The standing logic’s reading of a reported print as exact is worth a bead of its own.
 The next unreplayed entry whose case prints its reported lane within one unit of the
 entry’s side will meet the same obstacle.
@@ -449,7 +500,7 @@ The comparison you state, $7.32 \times 10^{-90}$, is exact and correct.
 The certificate’s `provenance` names workspace-relative files.
 Your README says these are not replay paths, and nothing here needed them.
 
-## 10. Questions for the Author
+## 11. Questions for the Author
 
 1. Are the contacts your decoder makes active the ones in the catalogue’s six closing
    equations? If so, an enclosure of that system’s solution at about 1,000 digits would
@@ -458,7 +509,7 @@ Your README says these are not replay paths, and nothing here needed them.
    The certificate’s least positive slack, $1.04 \times 10^{-800}$, suggests the
    realization’s 800 digits.
 
-## 11. Comparison With the Replay Lane
+## 12. Comparison With the Replay Lane
 
 This review and #661’s replay agree on every number they share:
 
@@ -472,7 +523,7 @@ This review and #661’s replay agree on every number they share:
 Where they differ, it is in what each lane read: the replay’s routes decided the derived
 fact, and this review decided the certificate itself and held the two equal.
 
-## 12. The Programs
+## 13. The Programs
 
 The programs, with what each read and printed and how to run them, are in the packet’s
 [review directory](../../../packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/README.md).
@@ -480,7 +531,7 @@ The programs, with what each read and printed and how to run them, are in the pa
 `third_route.py` only hands the certificate to this repository’s third route.
 Neither is registered in `verifiers.yaml` yet; R2 leaves that to the exit.
 
-## 13. What This Review Does Not Establish
+## 14. What This Review Does Not Establish
 
 - No lower bound, optimum, local minimum or rigidity.
 - The order of $S$ and the catalogue packing’s exact side.
