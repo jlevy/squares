@@ -401,6 +401,46 @@ def test_a_settled_entry_the_layer_decides_unaided_fails_the_gate(tmp_path: Path
     assert found == [f"n={n}: SETTLED names it, but it is regularized; take it off"]
 
 
+def test_every_run_a_settlement_names_is_one_a_record_holds(tmp_path: Path) -> None:
+    # A settlement rests on its runs, so each must be held by a record: a block in the
+    # layer's index, or a run block or receipt in the retained evidence. Nothing held the
+    # three of 16 October 2026 to one, and two of the runs they named had none (review E1
+    # of #644).
+    recorded = defaults.recorded_runs()
+    for held in defaults.SETTLED.values():
+        for generator, run in held.runs:
+            assert recorded.get(run) == generator, run
+    # The evidence directory's grid-slack blocks and driver receipts are read, the
+    # receipts under the driver's own name for a run (`evand-regularize-<directory>`).
+    assert recorded["grid-slack-3a-rerun-deg1-1016"] == "regularize_grid_slack/1"
+    assert recorded["evand-regularize-3a-rerun-303-1016"] == "evand-regularize"
+    assert "grid-slack-3a-deg1-1016" not in recorded
+    n = 204
+    held = defaults.SETTLED[n]
+    named = (
+        *held.runs,
+        ("evand-regularize", "evand-regularize-no-such-run"),
+        ("evand-regularize", "grid-slack-3a-rerun-deg05-1016"),
+    )
+    found, _listed = defaults.state_problems(
+        settled={**defaults.SETTLED, n: held._replace(runs=named)}
+    )
+    assert found == [
+        (
+            f"n={n}: SETTLED names run evand-regularize-no-such-run, which no record holds: "
+            "neither the layer's index nor a run block or receipt under "
+            "packing/cases/regularized_drawings/; retain its evidence or take it off"
+        ),
+        (
+            f"n={n}: SETTLED names run grid-slack-3a-rerun-deg05-1016 as evand-regularize's, "
+            "and its record as regularize_grid_slack/1's"
+        ),
+    ]
+    # Without the retained evidence, only the index's blocks hold a run.
+    found, _listed = defaults.state_problems(evidence=tmp_path)
+    assert f"n={n}: SETTLED names run evand-regularize-3a-rerun-s-1016" in "\n".join(found)
+
+
 def test_the_record_defers_each_count_to_the_bead_that_owns_it() -> None:
     # Each bead the allowlist, an exemption or an owed decision names is a deferral
     # `check_bead_tree` holds open, as the intake records' are (review A2 of #636).
@@ -582,6 +622,7 @@ def test_a_lapse_where_the_house_reads_regular_reads_pending(tmp_path: Path) -> 
 
     # A decision recorded on the new witness settles it, and the gate does not then ask
     # for the entry to be taken off as if the house's regularity had decided the count.
+    # It names a run a record holds, here the lapsed view's own, which the index keeps.
     witness = state["witness"]
     settled = {
         **defaults.SETTLED,
@@ -591,7 +632,7 @@ def test_a_lapse_where_the_house_reads_regular_reads_pending(tmp_path: Path) -> 
             str(witness["path"]),
             witness["revision"],
             str(witness["side"]),
-            (("evand-regularize", "a-run"),),
+            ((str(entry["generator"]), str(entry["run"]["id"])),),
             "drew no better",
             "a test",
         ),

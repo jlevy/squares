@@ -69,7 +69,10 @@ does not name and on a named count that is no longer pending, so a count leaves 
 as soon as it is decided and joins it only by a reviewed change that names its bead. It
 fails, too, on a `SETTLED` entry made on another witness than the one the record names,
 and on one for a count that no longer needs it: one now regularized or regular as
-published, or one whose strong view the layer holds, which decides it unaided. Each
+published, or one whose strong view the layer holds, which decides it unaided. Every run a
+`SETTLED` entry names must be one a record holds, under the generator it names: a run
+block in the layer's index, or a run's block or receipt in the retained evidence
+(`EVIDENCE`, `recorded_runs`). Each
 bead the list, an exemption or a decided count's `owed` names must be open, which
 `devtools.check_bead_tree` holds through `deferrals`. A record older than a witness is
 `--check`'s to catch, by deciding every count again. A witness is identified by what it
@@ -102,7 +105,7 @@ from strif import atomic_output_file
 
 from devtools import improvement_rule
 from devtools.improvement_rule import MEASURES
-from devtools.regularize_axis_components import ABOVE_U, ALGORITHM, LAPSED
+from devtools.regularize_axis_components import ABOVE_U, ALGORITHM, EVAND_GENERATOR, LAPSED
 from sqpack import retained_json
 from sqpack.workers import worker_count
 from sqpack.yamlio import load_yaml
@@ -110,6 +113,11 @@ from sqpack.yamlio import load_yaml
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
 INDEX = ROOT / "atlas/known-best/regularized/index.json"
+#: The retained evidence of regularization runs the layer's index does not record, one
+#: directory per batch: a grid-slack run's block (`run.json`) and a driver run's
+#: `receipt.json`, beside its reports.
+EVIDENCE = ROOT / "cases/regularized_drawings"
+EVIDENCE_PATH = "packing/cases/regularized_drawings/"
 RECORD = ROOT / "atlas/known-best/default-drawings.json"
 RECORD_PATH = "packing/atlas/known-best/default-drawings.json"
 CONTRACT = "packing.squares:DefaultDrawings/v2"
@@ -183,12 +191,14 @@ _OWED_WIDER = "think-0ut1: grid-slack at 1 and 5 degrees, which the #518 run did
 _OWED_OUTCOME = "think-0ut1: the runs' per-count outcome, which their receipts do not keep"
 #: Both generators ran on the nine witnesses jlevy/squares#614 adopted in 60aa1d39e, on
 #: 16 October 2026 (think-la7h): Evan Daniel's regularizer, and grid-slack at 0.5, 1 and
-#: 5 degrees. The atlas README's paragraph of that day gives each count's outcome.
+#: 5 degrees. The atlas README's paragraph of that day gives each count's outcome. Two of
+#: those runs are recorded, in the layer's index, because views were drawn from them; the
+#: runs at 1 and 5 degrees (`grid-slack-3a-deg1-1016`, `grid-slack-3a-deg5-1016`) left no
+#: block, receipt or report in this repository, so a settlement names their reproductions
+#: instead (review E1 of #644).
 _RUN3A = (
     ("evand-regularize", "evand-regularize-3a-1016"),
     ("regularize_grid_slack/1", "grid-slack-3a-deg05-1016"),
-    ("regularize_grid_slack/1", "grid-slack-3a-deg1-1016"),
-    ("regularize_grid_slack/1", "grid-slack-3a-deg5-1016"),
 )
 _README_3A = (
     "packing/atlas/known-best/README.md, the paragraph of 16 October 2026; the reproduction "
@@ -390,7 +400,10 @@ SETTLED: dict[int, Settled] = {
         "0000000000000000000000000000000000000000000000000000000000000000",
         (*_RUN3A, *_RERUN3A_204_272),
         "grid-slack's view is refused at row 7 at all three thresholds (stage sides fall, "
-        "732 to 730), and Evan Daniel's view is held at row 4 (solved above U)",
+        "732 to 730), and Evan Daniel's view is held at row 4 (solved above U); his "
+        "same-side re-solve was refused (literal-too-large), so there is no same-side "
+        "view, and the solved view draws fewer stage sides than the drawn picture (732 "
+        "to 724)",
         _README_3A,
     ),
     290: Settled(
@@ -423,7 +436,9 @@ SETTLED: dict[int, Settled] = {
         "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
         (*_RUN3A, *_RERUN3A_303),
         "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
-        "Evan Daniel's view is held at row 4 (solved above U)",
+        "Evan Daniel's view is held at row 4 (solved above U); his same-side re-solve was "
+        "refused (literal-too-large), so there is no same-side view, and the solved view "
+        "draws fewer shared sides than the witness (house 758 to 708, stage 798 to 724)",
         _README_3A,
     ),
 }
@@ -937,6 +952,7 @@ def state_problems(
     *,
     settled: Mapping[int, Settled] | None = None,
     allowed: Mapping[int, str] | None = None,
+    evidence: Path = EVIDENCE,
 ) -> tuple[list[str], list[str]]:
     """What fails the regularization-state gate, and the pending counts it lists: the
     retained record against the index, `SETTLED` and `PENDING_ALLOWED`, nothing measured
@@ -948,6 +964,7 @@ def state_problems(
         return [f"{RECORD_PATH} is not a {CONTRACT} record"], []
     stale = f"run `{GENERATOR} --update`"
     every = index_entries(index)
+    recorded = recorded_runs(index, evidence)
     rows = {int(row["n"]): row for row in found.get("states") or []}
     problems: list[str] = []
     if sorted(rows) != sorted(every) or len(rows) != len(found.get("states") or []):
@@ -973,7 +990,7 @@ def state_problems(
             )
         held = settled.get(n)
         if held is not None:
-            problems.extend(_settled_problems(n, held, row, entry))
+            problems.extend(_settled_problems(n, held, row, entry, recorded))
     problems.extend(_list_problems(rows, allowed))
     pending = {n for n, row in rows.items() if row["state"] == PENDING}
     listed = [
@@ -983,12 +1000,47 @@ def state_problems(
     return problems, [*listed, f"PENDING_ALLOWED: {len(allowed)} counts", summary]
 
 
+def recorded_runs(index: Path = INDEX, evidence: Path = EVIDENCE) -> dict[str, str]:
+    """Every run a record holds, as {run id: generator}: the layer index's run blocks,
+    and in the retained evidence each run's block (`run.json`, which a grid-slack run's
+    retained reports are summed into) and each driver run's `receipt.json`, which records
+    no id: the driver names a run `evand-regularize-<run directory>`
+    (`regularize_evand.record_rungs`)."""
+    document = json.loads(index.read_text(encoding="utf-8"))
+    found = {str(block["id"]): str(block["generator"]) for block in document.get("runs") or []}
+    for path in sorted(evidence.glob("*/*/run.json")):
+        block = json.loads(path.read_text(encoding="utf-8"))
+        found.setdefault(str(block["id"]), str(block["generator"]))
+    for path in sorted(evidence.glob("*/*/receipt.json")):
+        receipt = json.loads(path.read_text(encoding="utf-8"))
+        directory = str(receipt.get("run_directory") or path.parent.name)
+        found.setdefault(f"{EVAND_GENERATOR}-{directory}", EVAND_GENERATOR)
+    return found
+
+
 def _settled_problems(
-    n: int, held: Settled, row: Mapping[str, Any], entry: Mapping[str, Any]
+    n: int,
+    held: Settled,
+    row: Mapping[str, Any],
+    entry: Mapping[str, Any],
+    recorded: Mapping[str, str],
 ) -> list[str]:
-    """What is wrong with one `SETTLED` entry against the record's row and the index."""
+    """What is wrong with one `SETTLED` entry against the record's row, the index and
+    the runs a record holds (`recorded_runs`)."""
     witness = row.get("witness") or {}
     problems: list[str] = []
+    for generator, run in held.runs:
+        if run not in recorded:
+            problems.append(
+                f"n={n}: SETTLED names run {run}, which no record holds: neither the "
+                f"layer's index nor a run block or receipt under {EVIDENCE_PATH}; retain "
+                "its evidence or take it off"
+            )
+        elif recorded[run] != generator:
+            problems.append(
+                f"n={n}: SETTLED names run {run} as {generator}'s, and its record as "
+                f"{recorded[run]}'s"
+            )
     if _settled_here(held, witness) is None:
         moved = ", ".join(
             f"{key} {str(getattr(held, key))[:24]!r} to {str(witness.get(key))[:24]!r}"
