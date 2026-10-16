@@ -15869,7 +15869,6 @@ urls:
     builds_on: null
     evidence:
     - E-pingyou-622-certificate-report
-    - E-pingyou-622-exact-feasibility
     artifacts:
     - packing/resources/web/pingyou-pr622-certificate-2026-10-15/README.md
     - packing/resources/web/pingyou-pr622-certificate-2026-10-15/acquisition/claims.json

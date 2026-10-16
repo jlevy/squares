@@ -1682,7 +1682,7 @@ at `31155575ce1e6b461f77bfc9f3e201adf101115b` with its release asset pinned by s
 SHA-256, kept as a derived exact fact, no upstream byte retained;
 [packet](web/pingyou-pr622-certificate-2026-10-15/README.md).
 Both project exact routes accept it and refuse both controls.
-T-195 records it at V3/C3, 1.57e-36 below T-155, on the key reason the
+T-195 records it at V0/C0, 1.57e-36 below T-155, on the key reason the
 [per-count ledger](../campaign/issue-intake/upper-bounds-n29-20261016/README.md) lists
 for the owner, pending review and adoption.
 The author says its submissions are assisted by PingYou Ltd’s PY agentic offering.
