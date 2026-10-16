@@ -5,7 +5,7 @@ title: "Regularize 3c: 175, 232, 264 (re-housed by #598)"
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:10.776Z
-updated_at: 2026-10-16T12:00:15.617Z
+updated_at: 2026-10-16T12:04:33.077Z
 started_at: 2026-10-16T05:13:42.084Z
 ---
 
@@ -33,3 +33,5 @@ started_at: 2026-10-16T05:13:42.084Z
 2026-10-16T11:41Z user-eb-reg-3b3c: #654 at 97d513032 green: hosted 30 run checks pass, 29 skipped; local --records passes (329 s), focused tests + test_bead_tree 245 passed. Done for this lane; think-3zi3 closes at #654's merge (after #653 and #644).
 
 2026-10-16 ~12:10Z coordinator: Review A on #654 0/0/0/3 'mergeable as is' (three views pass both exact routes in a fresh verify-atlas, 432 s); lane B addressing the three Lows.
+
+2026-10-16T12:04Z user-eb-reg-3b3c: #654 Review A addressed at 9edc15a5c (A1 fixed: only output None sorts last, unknown output still raises; A2 fixed: synthetic PENDING_ALLOWED location asserted in both live-record tests; A3 deferred to new bead think-j9r6). Reply: https://github.com/jlevy/squares/pull/654#pullrequestreview-5547514907. Focused tests 245 passed; release_pin --check passes. #653 Review B dispositions posted (B1 -> think-j9r6, B2 -> think-e533): https://github.com/jlevy/squares/pull/653#pullrequestreview-5547515070.
