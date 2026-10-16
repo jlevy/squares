@@ -34,6 +34,8 @@ from sqpack.assurance import (
     check_case_semantics,
     check_evidence_semantics,
     conditional_problems,
+    formal_run_elsewhere,
+    shared_receipt_problems,
 )
 from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.yamlio import load_yaml, safe_load
@@ -179,13 +181,12 @@ def check(path: pathlib.Path) -> list[str]:
 
 
 def source_build_file_problems(record: dict, repo: pathlib.Path = REPO) -> list[str]:
-    """A credited producer build must expose the receipts and statement audit it cites."""
+    """A credited formal build run elsewhere must expose the receipts and statement audit
+    it cites."""
     paths = {"build_receipt": record.get("build_receipt")}
     if not paths["build_receipt"]:
         return []
-    if record.get("method") == "proof-assistant-checked" and (
-        record.get("origin") == "external" or record.get("performed_by") == "source-author"
-    ):
+    if formal_run_elsewhere(record):
         proof = record.get("proof") or {}
         paths.update(
             {
@@ -255,6 +256,7 @@ def cross_checks() -> list[str]:
     # A conditional theorem's hypotheses name the runs that discharge them, and each of
     # those is a passing replay that covers the theorem's cases.
     errs.extend(f"evidence: {error}" for error in conditional_problems(evidence_by_id))
+    errs.extend(f"evidence: {error}" for error in shared_receipt_problems(evidence_by_id))
     # Which programs verified each entry, and whose: every id resolves in the verifier
     # registry, and the registry's own paths and records resolve (epistemics.md,
     # Confirmation).

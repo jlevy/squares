@@ -260,9 +260,13 @@ $defs:
         minLength: 1
         description: >-
           Retained repository-relative receipt of a complete proof-assistant build.
-          Required for origin external with method proof-assistant-checked: it records
-          the producer's execution, not an independent replay here. The scoped proof's
-          audit_record assesses the receipt, theorem, build pins and trust boundary.
+          Required with method proof-assistant-checked for every build this repository
+          did not run: the producer's own execution (origin external) and a third party's
+          (origin independently-external), each with its axioms_receipt, full coverage,
+          a scoped proof with an audit_record, and a qualifying read. A receipt records
+          one execution, so entries of different actors never cite the same one
+          (sqpack.assurance). The scoped proof's audit_record assesses the receipt,
+          theorem, build pins and trust boundary.
       axioms_receipt:
         type: string
         minLength: 1

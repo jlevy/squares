@@ -17,6 +17,7 @@ from sqpack.assurance import (
     check_case_semantics,
     check_evidence_semantics,
     conditional_problems,
+    shared_receipt_problems,
 )
 from sqpack.yamlio import safe_load
 
@@ -403,3 +404,58 @@ def test_a_confirming_origin_needs_the_actor_it_names_for_every_method(
     assert derive_verification([entry], record=ONE_CASE) == "V3"
     assert verifier_registry.confirming_runs([entry]) == []
     assert check_results.distinct_methods([entry]) == 0
+
+
+def test_a_third_party_formal_run_needs_what_a_producer_run_needs() -> None:
+    entry = confirming(source_build())
+    assert check_evidence_semantics(entry) == []
+    assert derive_verification([entry], record=ONE_CASE) == "V3"
+    assert derive_confirmation([entry], record=ONE_CASE) == "C3"
+    for missing in ("build_receipt", "axioms_receipt", "external_review", "independence"):
+        bare = deepcopy(entry)
+        del bare[missing]
+        assert check_evidence_semantics(bare), missing
+        assert derive_verification([bare], record=ONE_CASE) == "V0", missing
+        assert derive_confirmation([bare], record=ONE_CASE) in {"C0", "C1"}, missing
+    unaudited = deepcopy(entry)
+    del unaudited["proof"]["audit_record"]
+    assert check_evidence_semantics(unaudited)
+    assert derive_confirmation([unaudited], record=ONE_CASE) in {"C0", "C1"}
+
+
+def test_a_run_here_keeps_its_own_rules() -> None:
+    entry = source_build()
+    entry.update(origin="replayed-here", performed_by="repository")
+    for field in ("build_receipt", "external_review", "independence"):
+        del entry[field]
+    del entry["proof"]["audit_record"]
+    assert check_evidence_semantics(entry) == []
+    assert derive_confirmation([entry], record=ONE_CASE) == "C3"
+
+
+@pytest.mark.parametrize(
+    "relabel",
+    [
+        {"origin": "independently-external", "performed_by": "independent-external"},
+        {"origin": "replayed-here", "performed_by": "repository"},
+    ],
+    ids=["third-party", "here"],
+)
+def test_a_confirming_entry_cannot_carry_the_producers_build_receipt(
+    relabel: dict[str, str],
+) -> None:
+    producer = source_build()
+    relabelled = {**deepcopy(producer), "id": "E-relabelled", **relabel}
+    problems = shared_receipt_problems({row["id"]: row for row in (producer, relabelled)})
+    assert len(problems) == 1
+    assert "source-build.json" in problems[0]
+    assert "E-relabelled" in problems[0]
+    own = {**relabelled, "build_receipt": "third-party-build.json"}
+    assert shared_receipt_problems({row["id"]: row for row in (producer, own)}) == []
+
+
+def test_the_live_register_shares_no_build_receipt_across_actors() -> None:
+    evidence = {
+        row["id"]: row for row in safe_load(check_results.EVIDENCE.read_text())["evidence"]
+    }
+    assert shared_receipt_problems(evidence) == []

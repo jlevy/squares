@@ -342,7 +342,13 @@ def _derive_confirmation(
 ) -> str:
     """The rung supported by one complete claim pool."""
     reviews = list(reviews or [])
-    ours = [entry for entry in entries if confirming_execution(entry)]
+    # A formal build run elsewhere confirms only once it is admitted: without its
+    # retained receipts and read it is not even a replay of unknown method (C2).
+    ours = [
+        entry
+        for entry in entries
+        if confirming_execution(entry) and not external_formal_build_problems(entry)
+    ]
     rebuilt = [
         entry for entry in ours if _formal(entry) and entry.get("origin") == "replayed-here"
     ]

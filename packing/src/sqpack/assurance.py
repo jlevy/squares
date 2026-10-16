@@ -272,44 +272,83 @@ def _scope_covers(outer: object, inner: object) -> bool:
     return all(_scope_contains(outer, n) for n in range(lower, upper + 1))
 
 
+#: Origins of a run made here, by this repository.
+HERE_ORIGINS = frozenset({"replayed-here", "audited-here"})
+
+
+def formal_run_elsewhere(evidence: Mapping[str, object]) -> bool:
+    """A proof-assistant execution this repository did not perform: the producer's own
+    build, or a third party's build retained here. Its pass is known only from what it
+    left behind, so both are held to the same retained-evidence rules; a stronger claim
+    must not need less evidence than a weaker one."""
+    return evidence.get("method") == "proof-assistant-checked" and not (
+        evidence.get("origin") in HERE_ORIGINS and evidence.get("performed_by") == "repository"
+    )
+
+
 def external_formal_build_problems(evidence: Mapping[str, object]) -> list[str]:
-    """Require inspected execution evidence before crediting a producer's formal build.
+    """Require inspected execution evidence before crediting a formal build run elsewhere.
 
     Source verification earns V independently of C. A credible announcement, a source
-    tree or a partial build alone must not become a passing full-theorem execution.
-    Review owns receipt contents and statement fidelity; this checks their record.
+    tree or a partial build alone must not become a passing full-theorem execution, and
+    a third party's build needs at least what the producer's does. Review owns receipt
+    contents and statement fidelity; this checks their record.
     """
     if evidence.get("method") != "proof-assistant-checked":
         return []
     errors = formal_actor_origin_problems(evidence)
-    if evidence.get("origin") != "external" and evidence.get("performed_by") != "source-author":
+    if not formal_run_elsewhere(evidence):
         return errors
     errors.extend(
-        f"external formal build requires retained {field}"
+        f"a formal build run elsewhere requires retained {field}"
         for field in ("build_receipt", "axioms_receipt")
         if not evidence.get(field)
     )
     proof = evidence.get("proof")
     required = {"source", "theorem", "scope", "pinpoints", "assumptions", "audit_record"}
     if not isinstance(proof, Mapping) or not required.issubset(proof):
-        errors.append("external formal build requires a scoped proof and audit_record")
+        errors.append("a formal build run elsewhere requires a scoped proof and audit_record")
     independence = evidence.get("independence")
     coverage = independence.get("coverage") if isinstance(independence, Mapping) else None
     if not isinstance(coverage, Mapping) or coverage.get("extent") != "full":
-        errors.append("external formal build requires explicit full coverage")
+        errors.append("a formal build run elsewhere requires explicit full coverage")
     review = evidence.get("external_review")
     if (
         not isinstance(review, Mapping)
         or review.get("state") != "informally-verified"
         or not all(review.get(key) for key in ("date", "reviewed_by", "note"))
     ):
-        errors.append("external formal build requires a qualifying receipt and statement read")
-    if (
-        evidence.get("performed_by") != "source-author"
-        or evidence.get("replay_status") != "passed"
-    ):
-        errors.append("external formal build must record the source author's passing execution")
+        errors.append(
+            "a formal build run elsewhere requires a qualifying receipt and statement read"
+        )
+    if evidence.get("replay_status") != "passed":
+        errors.append("a formal build run elsewhere must record its passing execution")
     return errors
+
+
+def shared_receipt_problems(evidence_by_id: Mapping[str, Mapping[str, object]]) -> list[str]:
+    """A build receipt records one execution, so every entry citing it names one actor.
+
+    A confirming entry that carries the producer's `build_receipt` is the producer's
+    run under another label; refusing the shared receipt keeps relabelling from turning
+    the source's execution into a third party's or this repository's.
+    """
+    actors: dict[str, dict[tuple[str, str], list[str]]] = {}
+    for evidence_id, evidence in evidence_by_id.items():
+        receipt = evidence.get("build_receipt")
+        if isinstance(receipt, str) and receipt:
+            actor = (str(evidence.get("origin")), str(evidence.get("performed_by")))
+            actors.setdefault(receipt, {}).setdefault(actor, []).append(evidence_id)
+    return [
+        f"{receipt}: one build receipt is cited by entries of different actors ("
+        + "; ".join(
+            f"{', '.join(ids)} as {origin}/{performer}"
+            for (origin, performer), ids in sorted(by_actor.items())
+        )
+        + ")"
+        for receipt, by_actor in sorted(actors.items())
+        if len(by_actor) > 1
+    ]
 
 
 def check_evidence_semantics(evidence: Mapping[str, object]) -> list[str]:

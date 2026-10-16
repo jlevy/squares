@@ -93,9 +93,12 @@ coverage, a scoped `proof` with an `audit_record`, and a qualifying dated
 The audit must assess the public proof’s recoverability, build pins, execution
 completeness, statement fidelity and trust boundary.
 Conflicting or incomplete source execution records stay reported.
-The execution actor and origin must agree: the producer’s run is external, a retained
-third-party run is independently-external, and a run here names the repository.
-An origin label alone cannot supply confirmation.
+A third party’s build retained here is held to the same record, with its own receipts: a
+confirming claim never needs less retained evidence than the producer’s. A build receipt
+records one execution, so entries naming different actors never cite the same receipt.
+The execution actor and origin must agree, for every method: the producer’s run is
+external, a retained third-party run is independently-external, and a run here names the
+repository. An origin label alone cannot supply confirmation.
 
 A conditional proof verifies its implication even while a premise remains open.
 Its unconditional conclusion takes the weakest support along every cited premise chain,
