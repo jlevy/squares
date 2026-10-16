@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-14-intake-ledger.md, role: review, authority: record, lifecycle: retained}
