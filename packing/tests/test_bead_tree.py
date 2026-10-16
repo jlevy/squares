@@ -186,7 +186,12 @@ def test_a_run_that_takes_its_counts_off_the_allowlist_no_longer_defers_to_its_b
     request has merged (regularization-process.md, "When a Witness Changes")."""
     from devtools import default_drawings  # noqa: PLC0415
 
-    allowed = default_drawings.PENDING_ALLOWED
+    # No count is pending since 16 October 2026 (think-3zi3), so where the data's list is
+    # empty two lanes' deferrals are laid as an adoption would allow them, each with its bead.
+    allowed = default_drawings.PENDING_ALLOWED or {
+        1: "think-aaaa: a deferral",
+        2: "think-bbbb: a deferral",
+    }
     lanes = sorted(
         {found[0] for why in allowed.values() if (found := default_drawings.BEAD.match(why))}
     )
@@ -204,7 +209,7 @@ def test_a_run_that_takes_its_counts_off_the_allowlist_no_longer_defers_to_its_b
         assert deferral_problems(beads, aliases, named) == []
         # Its counts still listed, the closed bead fails the change: hence closing it
         # only once the pull request taking them off has merged.
-        dead = deferral_problems(beads, aliases, default_drawings.deferrals())
+        dead = deferral_problems(beads, aliases, default_drawings.deferrals(allowed=allowed))
         assert {problem["bead"] for problem in dead} == {lane}
 
 
