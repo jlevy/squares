@@ -42,42 +42,46 @@ def latest() -> dict[int, str]:
 
 
 @pytest.fixture(scope="module")
-def replayed(
-    selections: dict[int, select.Selection], latest: dict[int, str]
-) -> list[adopt.Move]:
-    """Each count's last pass planned again from the record as that pass read it; a held
-    result is no candidate, so the pass plans the house it adopted."""
-    cases = {
-        n: select.parse_case(n, latest[n]) if n in latest else selection.case
-        for n, selection in selections.items()
-    }
-    return adopt.plan(select.select(cases=cases), texts=latest)
+def recorded() -> dict[int, select.Selection]:
+    """The selection each record was written under (`adopt_houses.recorded_days`)."""
+    return select.select(recorded=adopt.recorded_days())
 
 
-def test_no_confirmed_reviewed_side_is_left_below_its_case(
+@pytest.fixture(scope="module")
+def replayed() -> list[adopt.Move]:
+    """Each count's last pass planned again from the record as that pass read it, under the
+    rule that pass ran under, so it plans the house it adopted."""
+    return adopt.replay_plan()
+
+
+def test_every_smaller_validated_packing_is_the_house_or_staged(
     selections: dict[int, select.Selection],
 ) -> None:
-    """After the adoption the derivation moves nothing: every case is at its house, and
-    what is below it is held for the owner."""
-    assert [n for n, selection in selections.items() if selection.moves] == []
+    """The house rule: wherever a validated packing is below its case, the count is staged
+    for the bead that adopts it, and nowhere else does the derivation move anything; a
+    staged count the selection no longer moves fails (`select_houses.check`)."""
+    moving = {n: s.house.result for n, s in selections.items() if s.house is not None}
+    assert moving == {n: pending.house for n, pending in select.PENDING_ADOPTION.items()}
+    assert select.check(selections) == []
     assert all(
-        candidate.result in select.HELD
-        for selection in selections.values()
-        for candidate in selection.held
+        not selection.held and not selection.algebraic for selection in selections.values()
     )
 
 
-def test_every_adopted_case_holds_the_derived_smallest_side(
-    selections: dict[int, select.Selection],
+def test_every_adopted_case_holds_the_house_its_record_was_written_for(
+    selections: dict[int, select.Selection], recorded: dict[int, select.Selection]
 ) -> None:
-    """Every adopted count holds its derived house, the smallest candidate no hold leaves
-    out; a held certificate below it is named in the selection."""
+    """Every adopted count holds the house its last pass derived; where the house rule
+    moves it since, the move is staged, and the record keeps that pass's house, the
+    smallest candidate the rule of 15 October left in, until its adoption."""
     for n, result in houses.ADOPTED.items():
-        selection = selections[n]
-        best = next(c for c in selection.candidates if c.result not in select.HELD)
+        selection = recorded[n]
+        best = next(c for c in selection.candidates if c.result not in select.LIFTED)
         assert best.result == result
         assert selection.case.verified == best.side == houses.side(n)
         assert all(c.side < best.side for c in selection.held)
+        if n not in select.PENDING_ADOPTION:
+            assert selections[n].candidates[0].result == result
 
 
 #: The counts where a held certificate (T-174's) was the smallest and the next candidate
@@ -97,22 +101,29 @@ NEXT_CANDIDATES = {
 }
 
 
-def test_a_hold_skips_only_the_held_entry(
-    selections: dict[int, select.Selection], latest: dict[int, str]
+def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted(
+    selections: dict[int, select.Selection],
+    recorded: dict[int, select.Selection],
+    latest: dict[int, str],
 ) -> None:
-    """Where T-174 is smallest, the house is the next confirmed, reviewed candidate, adopted
-    on 15 October 2026; every count it would take is named as held."""
+    """Where T-174 is smallest, the 15 October pass adopted the next confirmed, reviewed
+    candidate while the owner held T-174, and the records still say so; under the house
+    rule each of those counts moves to T-174, staged for its adoption."""
     for n, (result, before) in NEXT_CANDIDATES.items():
         assert houses.ADOPTED[n] == result
         assert houses.adopted_on(n) == "2026-10-15"
-        assert [c.result for c in selections[n].held] == ["T-174"]
+        assert [c.result for c in recorded[n].held] == ["T-174"]
+        house = selections[n].house
+        assert house is not None
+        assert house.result == select.PENDING_ADOPTION[n].house == "T-174"
         packing = _front(latest[n])
         assert Fraction(packing["verified_upper_bound"]["exact_form"]) > houses.side(n)
         if before is not None:
             assert adopt._holder(packing).endswith(f"({before})")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-    held_counts = {n for n, s in selections.items() if s.held}
+    held_counts = {n for n, s in recorded.items() if s.held}
     assert set(NEXT_CANDIDATES) < held_counts
     assert len(held_counts) == 60
+    assert held_counts | {70, 153, 207} == set(select.PENDING_ADOPTION)
 
 
 def test_regularizations_leave_the_packing_with_its_finder(
@@ -201,30 +212,39 @@ def test_a_case_keeps_its_own_house_where_nothing_is_below(
     assert select.select([unreviewed], evidence, cases={7: lower}) == {}
 
 
-def test_a_candidate_below_an_algebraic_ceilings_display_is_left_to_a_human(
+def test_a_candidate_is_ordered_against_a_closed_form_ceiling_exactly(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """A display rounded up at sixteen places cannot order a side just below it."""
-    assert not select.load_case(51).exact  # (16 + 5 sqrt(2)) / 3
-    assert select.load_case(70).exact
+    """A closed-form ceiling is held as the root of its minimal polynomial, so a side just
+    either side of it is ordered exactly, never left to a person; only a form no reader
+    holds is unordered, which `--check` fails on as a defect of the code."""
+    ceiling = select.load_case(51).verified  # (16 + 5 sqrt(2)) / 3
+    assert isinstance(ceiling, select.exact_sides.Algebraic)
+    assert select.load_case(51).exact
+    assert select.ceiling(ceiling) == "7.6903559372884918"
     entry, evidence = _confirmed_entry()
+    case = select.Case(n=7, verified=ceiling, reported=Fraction(7), source_key="", evidence=())
     display = Fraction(Decimal("7.6903559372884918"))
-    algebraic = select.Case(
-        n=7, verified=display, reported=display, source_key="", evidence=(), exact=False
-    )
-    within = display - Fraction(1, 10**17)
-    monkeypatch.setitem(select.reports.HOUSES, "[test]", lambda _n: within)
-    monkeypatch.setattr(select, "_side", lambda _key, _n: within)
-    held = select.select([entry], evidence, cases={7: algebraic})[7]
-    assert held.undecided
-    assert held.house is None
-    rational = dataclasses.replace(algebraic, exact=True)
-    assert select.select([entry], evidence, cases={7: rational})[7].moves
-    monkeypatch.setattr(select, "_side", lambda _key, _n: display)
-    above = select.select([entry], evidence, cases={7: algebraic})[7]
-    assert not above.undecided
-    assert not above.moves
-    assert "undecided" in select.table({7: held}, everything=False)
+    # The form is 7.69035593728849174800..., which its print rounds up at sixteen places.
+    below, above = display - Fraction(6, 10**17), display - Fraction(4, 10**17)
+    sides = {"just below": below, "just above": above}
+    assert sides["just below"] < ceiling < sides["just above"]
+    side = sides["just below"]
+    monkeypatch.setitem(select.reports.HOUSES, "[test]", lambda _n: side)
+    monkeypatch.setattr(select, "_side", lambda _key, _n: side)
+    moved = select.select([entry], evidence, cases={7: case})[7]
+    assert moved.house is not None
+    assert Fraction(0) < moved.margin < Fraction(5, 10**17)
+    side = sides["just above"]
+    assert not select.select([entry], evidence, cases={7: case})[7].moves
+    unread = dataclasses.replace(case, verified=display + Fraction(1, 10**16), unread="why")
+    side = sides["just below"]
+    unordered = select.select([entry], evidence, cases={7: unread})[7]
+    assert unordered.unordered == "why"
+    assert not unordered.moves
+    assert "unordered: why" in select.table({7: unordered}, everything=False)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {})
+    assert select.check({7: unordered})[0].startswith("FAIL: a candidate is below the print")
 
 
 def test_an_entry_over_two_sources_reads_each_count_where_its_replay_decided_it(
@@ -329,40 +349,36 @@ def test_the_two_couzo_entries_from_one_packet_each_keep_their_house_source() ->
     )
 
 
-def test_an_algebraic_count_is_left_out_of_the_selection_and_named(
-    monkeypatch: pytest.MonkeyPatch,
+def test_an_algebraic_certificate_is_a_candidate_ordered_exactly(
+    recorded: dict[int, select.Selection],
 ) -> None:
-    """PR #574's sides at 70, 153, 207 and 302 are roots of integer polynomials, decided
-    on one route; no house reader rebuilds them, and the selection leaves them out
-    rather than failing to read them."""
+    """PR #574's sides at 70, 153, 207 and 302 are roots of integer polynomials, decided on
+    one exact route, which is what stage 4 asks. Each is a candidate, held by its minimal
+    polynomial and ordered exactly: below its case at 70, 153 and 207, where it is the
+    house, staged, and above it at 302. The records of 15 October left them out (RP-3)."""
     key = "[PingYou PR 574 certificates 2026-10-13]"
     counts = select.algebraic_counts(key)
     assert {70, 153, 207, 302} <= counts
     assert not {68, 105, 211, 304} & counts
     assert select.algebraic_counts("[Couzo certificates 2026-10-13]") == frozenset()
-    entry, evidence = _confirmed_entry()
-    entry = {
-        **entry,
-        "scope": {"n_values": [68, 70]},
-        "attribution": {"source_keys": [key], "published": "2026-10-13"},
-    }
-
-    def side(_key: str, n: int) -> Fraction:
-        assert n == 68, "an algebraic count was read"
-        return Fraction(9)
-
-    monkeypatch.setattr(select, "_side", side)
-    algebraic: list[tuple[str, int]] = []
-    found = select.candidates([entry], evidence, algebraic=algebraic)
-    assert sorted(found) == [68]
-    assert algebraic == [("T-900", 70)]
+    found = select.candidates(select.load_results(), select.load_evidence())
+    for n, degree in ((70, 5), (153, 7), (207, 5), (302, 3)):
+        (t174,) = [c for c in found[n] if c.result == "T-174"]
+        assert t174.algebraic
+        assert isinstance(t174.side, select.exact_sides.Algebraic)
+        assert t174.side.degree == degree
+        below = t174.side < select.load_case(n).verified
+        assert below == (n != 302), n
+        assert recorded[n].algebraic == (("T-174", key),)
+        assert all(not c.algebraic for c in recorded[n].candidates)
 
 
-def test_a_held_result_keeps_its_counts_at_their_case_and_says_so(
+def test_a_staged_count_passes_the_check_and_a_stale_or_unstaged_one_fails(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """Where a held result is best, the case stays though another candidate is below it,
-    and `--check` reports the count as held rather than failing on it."""
+    """A validated smaller packing is the house, or staged for the bead that adopts it:
+    `--check` passes a staged count, fails an unstaged one, one staged for another house,
+    and a staged count where nothing moves."""
     entry, evidence = _confirmed_entry()
     other = {
         **entry,
@@ -377,49 +393,73 @@ def test_a_held_result_keeps_its_counts_at_their_case_and_says_so(
     case = select.Case(
         n=7, verified=Fraction(4), reported=Fraction(4), source_key="", evidence=()
     )
-    why = select.Hold(whose="T-900's", why="why", since="2026-10-15")
-    held = select.select([entry, other], evidence, cases={7: case}, held={"T-900": why})[7]
-    # The hold skips T-900 only: T-901, the next candidate, is below the case and takes it.
-    assert [c.result for c in held.held] == ["T-900"]
-    assert held.house is not None
-    assert held.house.result == "T-901"
-    assert [c.result for c in held.candidates] == ["T-900", "T-901"]
-    assert select.row(held)["held"] == ["T-900"]
-    assert select.row(held)["undecided"] is False
-    # Where nothing else is below the case, the case stays and the count is held.
-    above = dataclasses.replace(case, verified=Fraction(7, 2), reported=Fraction(7, 2))
-    waiting = select.select([entry, other], evidence, cases={7: above}, held={"T-900": why})[7]
-    assert waiting.house is None
-    assert not waiting.moves
-    assert [c.result for c in waiting.held] == ["T-900"]
-    assert "(held)" in select.table({7: waiting}, everything=False)
-    free = select.select([entry, other], evidence, cases={7: case}, held={})[7]
-    assert free.house is not None
-    assert free.house.result == "T-900"
-    assert not free.held
-    monkeypatch.setattr(select, "select", lambda **_arguments: {7: waiting})
+    selected = select.select([entry, other], evidence, cases={7: case})
+    house = selected[7].house
+    assert house is not None
+    assert house.result == "T-900"
+    assert [c.result for c in selected[7].candidates] == ["T-900", "T-901"]
+    staged = {7: select.Pending(house="T-900", bead="think-test")}
+    monkeypatch.setattr(select, "PENDING_ADOPTION", staged)
+    assert select.check(selected) == []
+    assert select.row(selected[7])["staged"] == "think-test"
+    assert "staged: think-test" in select.table(selected, everything=False)
+    assert select.deferrals() == [("select_houses.PENDING_ADOPTION n=7 (T-900)", "think-test")]
+    real = select.select
+    monkeypatch.setattr(select, "select", lambda **_arguments: selected)
     monkeypatch.setattr(select, "unread_pending", lambda _unread: {})
     assert select.main(["--check"]) == 0
-    assert "held for the owner (T-900): n = [7]" in capsys.readouterr().out
+    assert "staged adoption, T-900 under think-test: n = [7]" in capsys.readouterr().out
+    monkeypatch.setattr(
+        select, "PENDING_ADOPTION", {7: dataclasses.replace(staged[7], house="T-901")}
+    )
+    assert "the house is T-900; stage that, or adopt it" in select.check(selected)[0]
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {})
+    assert select.check(selected)[0].startswith("FAIL: a validated smaller packing")
+    assert select.main(["--check"]) == 1
+    above = dataclasses.replace(case, verified=Fraction(3), reported=Fraction(3))
+    still = real([entry, other], evidence, cases={7: above})
+    monkeypatch.setattr(select, "PENDING_ADOPTION", staged)
+    assert "take it off PENDING_ADOPTION" in select.check(still)[0]
+    # The records as written: before the house rule a lifted hold kept T-900 out, and the
+    # next candidate below the case took the house; the staged house is left out after.
+    monkeypatch.setitem(
+        select.LIFTED, "T-900", select.Hold(whose="T-900's", why="w", since="d")
+    )
+    old = real([entry, other], evidence, cases={7: case}, recorded={7: "2026-10-15"})
+    assert old[7].house is not None
+    assert old[7].house.result == "T-901"
+    assert [c.result for c in old[7].held] == ["T-900"]
+    new = real([entry, other], evidence, cases={7: case}, recorded={7: "2026-10-17"})
+    assert new[7].house is not None
+    assert new[7].house.result == "T-901"
+    assert new[7].held == ()
 
 
-def test_the_held_results_are_named_with_why() -> None:
-    assert set(select.HELD) == {"T-174"}
-    for hold in select.HELD.values():
+def test_no_result_is_held_and_the_lifted_hold_keeps_its_words() -> None:
+    """The house rule holds no result: `HELD` is gone, the hold it lifted keeps only the
+    words of the records written under it, and each staged count names an open bead's id."""
+    assert not hasattr(select, "HELD")
+    assert set(select.LIFTED) == {"T-174"}
+    for hold in select.LIFTED.values():
         assert hold.why.strip()
         assert hold.reason.startswith(f"{hold.whose} houses are held for the owner: ")
         assert adopt.words(hold.since)
+    assert all(
+        re.fullmatch(r"think-[a-z0-9]+", pending.bead)
+        for pending in select.PENDING_ADOPTION.values()
+    )
 
 
 def test_every_record_names_a_smaller_held_or_algebraic_certificate(
-    selections: dict[int, select.Selection],
+    recorded: dict[int, select.Selection],
 ) -> None:
-    """A held certificate below a case is named in its record with why it waits: in the
-    certificate section where a pass houses the count, in a dated note under the title
-    elsewhere; an algebraic one below the house, which the owner decides, in the section
-    (reviews A and B of PR 614, A1, B2 and B7)."""
-    reason = select.HELD["T-174"].reason.replace("'", "’")
-    for n, selection in selections.items():
+    """Under the rule of 15 October, a held certificate below a case was named in its
+    record with why it waited: in the certificate section where a pass houses the count,
+    in a dated note under the title elsewhere; an algebraic one below the house, which
+    that rule left to the owner, in the section (reviews A and B of PR 614, A1, B2 and
+    B7). The records say so until their counts are adopted."""
+    reason = select.LIFTED["T-174"].reason.replace("'", "’")
+    for n, selection in recorded.items():
         if not selection.held:
             continue
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
@@ -433,7 +473,7 @@ def test_every_record_names_a_smaller_held_or_algebraic_certificate(
         else:
             assert f"{adopt.HELD_OPENING}15 October 2026.**" in text, n
     assert adopt.held_counts() == sorted(
-        n for n, s in selections.items() if s.held and n not in houses.ADOPTED
+        n for n, s in recorded.items() if s.held and n not in houses.ADOPTED
     )
     for n in (70, 153, 207):
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
@@ -461,7 +501,7 @@ def _not_selected(text: str) -> set[str]:
 
 
 def test_no_section_lists_its_current_house_or_a_held_certificate_as_not_selected(
-    selections: dict[int, select.Selection],
+    recorded: dict[int, select.Selection],
 ) -> None:
     """A section's not-selected list names what its house was chosen over, so no record
     lists the count's current house there, and none lists a held certificate, which is
@@ -470,7 +510,7 @@ def test_no_section_lists_its_current_house_or_a_held_certificate_as_not_selecte
     it (reviews A10 and B8 of PR 614: the 15 October archive took round 1's branch text
     at nine counts, and their earlier sections named the new house and T-174)."""
     found = []
-    for n, selection in selections.items():
+    for n, selection in recorded.items():
         listed = _not_selected(select.case_path(n).read_text(encoding="utf-8"))
         named = listed & {houses.ADOPTED.get(n), *(c.result for c in selection.held)}
         if named:
@@ -518,15 +558,13 @@ def test_no_unread_eligible_entry_is_pending_adoption() -> None:
 def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    def selecting(
-        *, since: str | None, unread: list[str], algebraic: list[tuple[str, int]]
-    ) -> dict[int, select.Selection]:
-        assert algebraic == []
+    def selecting(*, since: str | None, unread: list[str]) -> dict[int, select.Selection]:
         assert since is None
         unread.append("T-901")
         return {}
 
     monkeypatch.setattr(select, "select", selecting)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {})
     monkeypatch.setattr(select, "unread_pending", lambda _unread: {})
     assert select.main(["--check"]) == 0
     assert "unread, eligible but with no exact reader: T-901" in capsys.readouterr().out
@@ -742,7 +780,7 @@ def _readopted(
     house = select.Candidate(
         result="T-900",
         n=84,
-        side=first.house.side - Fraction(1, 10**6),
+        side=first.side - Fraction(1, 10**6),
         source_key="[new]",
         published=PUBLISHED,
         report_evidence=("E-new",),
@@ -854,26 +892,42 @@ def test_the_coverage_of_a_count_adopted_again_names_the_new_house_throughout(
     assert check_source_coverage.house_reason_errors(data, results) == []
 
 
-def test_a_conjecture_the_house_does_not_beat_stops_the_adoption(
+def test_a_conjecture_stands_unless_the_house_is_below_every_number_its_print_may_be(
     selections: dict[int, select.Selection],
 ) -> None:
+    """A house below the catalogue's conjectured optimum, wherever its print rounds,
+    withdraws it; any other house leaves it standing, and the adoption goes ahead either
+    way: nothing here is decided by hand (result-import.md, "The House Rule")."""
     # The first pass withdrew the catalogue's conjecture at 232, so the record its later
     # pass read (12 October, T-158) has none; the move is planned from the record the
-    # first pass read.
+    # first pass read, under the rule that pass ran under.
     first = adopt.read_pass(houses.ADOPTED_ON)[232]
     cases = {n: selection.case for n, selection in selections.items()}
     cases[232] = select.parse_case(232, first)
-    selected = select.select(cases=cases)
+    selected = select.select(cases=cases, recorded={232: houses.ADOPTED_ON})
     planned = adopt.plan(selected, texts={232: first})
     move = next(move for move in planned if move.n == 232)
     conjecture = adopt.conjectured(move.packing)
-    assert conjecture == Fraction(Decimal("15.77817459305202")) > move.house.side
+    assert conjecture is not None
+    assert conjecture == Fraction(Decimal("15.77817459305202")) > move.side
     assert "  conjectured_optimum: null\n" in adopt.rewrite(move)
-    above = dataclasses.replace(move, house=dataclasses.replace(move.house, side=conjecture))
-    with pytest.raises(adopt.AdoptionError, match="does not beat the conjectured optimum"):
-        adopt.rewrite(above)
+    unit = Fraction(1, 10**14)
+    for side, stands in (
+        (conjecture, True),
+        (conjecture + unit, True),
+        (conjecture - unit / 2, True),
+        (conjecture - unit, True),
+        (conjecture - 2 * unit, False),
+    ):
+        assert adopt.conjecture_stands(move.packing, side) is stands, side
+        moved = dataclasses.replace(move, house=dataclasses.replace(move.house, side=side))
+        withdrawn = "  conjectured_optimum: null\n" in adopt.rewrite(moved)
+        assert withdrawn is not stands
+    assert adopt.conjecture_stands({"conjectured_optimum": None}, Fraction(1))
     grid = {"conjectured_optimum": "integer", "reported_upper_bound": {"value": "18"}}
     assert adopt.conjectured(grid) == 18
+    assert adopt.conjecture_stands(grid, Fraction(18))
+    assert not adopt.conjecture_stands(grid, Fraction(18) - Fraction(1, 10**30))
     assert adopt.conjectured({"conjectured_optimum": None}) is None
 
 
@@ -1038,10 +1092,10 @@ def test_an_interrupted_write_is_finished_by_running_it_again(
 ) -> None:
     """A write stopped before its last record leaves what a rerun finishes, to the byte.
 
-    The two counts are ones no held result holds: 70, adopted on 11 October 2026, and
-    241, first adopted on 15 October.
+    The two counts are ones no staged adoption moves: 154, first adopted on 12 October
+    2026, and 241, first adopted on 15 October.
     """
-    moved = {70, 241}
+    moved = {154, 241}
     frontier = tmp_path / "frontier"
     frontier.mkdir()
     staged = {
@@ -1081,7 +1135,7 @@ def test_an_interrupted_write_is_finished_by_running_it_again(
 
     def interrupted(path: Path, text: str) -> bool:
         calls.append(path)
-        if len(calls) == 4:  # the coverage register, the deferrals, n = 70, then n = 241
+        if len(calls) == 4:  # the coverage register, the deferrals, n = 154, then n = 241
             raise OSError("interrupted")
         return real(path, text)
 

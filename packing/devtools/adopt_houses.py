@@ -10,9 +10,9 @@ owner lifted that wait on 11 October 2026. For every count whose house moves, th
   the verified lane its confirming replay; the earlier house becomes a priority note,
   kept as history; every confirmed certificate at the count, selected or not, joins the
   case's evidence roster, which is what lets `check_certificate_citations` drop its
-  deferrals; the source joins the resources; a conjectured optimum the house beats is
-  withdrawn, and one it does not beat stops the adoption for a human to decide; a blocker
-  that only said the verified lane trailed the report goes;
+  deferrals; the source joins the resources; a conjectured optimum the house is below,
+  wherever its print may round, is withdrawn, and any other stays (`conjecture_stands`);
+  a blocker that only said the verified lane trailed the report goes;
 - **the case record's body**: a dated paragraph under the title that states the move,
   and a section after the verification code that says whose certificate the house is,
   how it was confirmed here and which certificates it replaces;
@@ -48,12 +48,17 @@ the ordinary lower lanes from the draft.
 It is idempotent: a count already at its house is left alone, so a second run writes
 nothing, and ``--check`` reports any adopted count whose record differs from its house.
 
-**A held result** (`select_houses.HELD`) is no candidate, but the records say where it
-waits: an adopted record's certificate section names each held certificate below its
-house, with why it waits, and so does a dated paragraph under the title of a record no
-pass houses (`held_note`), which also cites the held certificate's evidence. An algebraic
-certificate below the house, which the selection leaves out for the owner (RP-3), is
-named in the section the same way.
+**The house rule** (packing/campaign/result-import.md, "The House Rule") leaves nothing
+here to a person: the house is the smallest validated side, and a count whose adoption
+waits does so only staged in `select_houses.PENDING_ADOPTION` with the bead that adopts
+it, which `plan` leaves to that bead's pull request. Until the counts are written again,
+the records the rule of 15 October wrote still say what it did: an adopted record's
+certificate section names each certificate the lifted hold kept out
+(`select_houses.LIFTED`) below its house, with why it waited, and so does a dated
+paragraph under the title of a record no pass houses (`held_note`), which also cites the
+held certificate's evidence; an algebraic certificate below the house, which that rule
+left out (RP-3), is named in the section the same way. Every replay and check here reads
+the records as written (`recorded_days`, `select_houses.select(recorded=...)`).
 
 Usage, from ``packing/`` with the project interpreter::
 
@@ -64,9 +69,8 @@ Usage, from ``packing/`` with the project interpreter::
 
 ``--refresh`` brings every adopted record's evidence roster, dated paragraph and
 certificate section to what its last pass's writer writes now, from the record that pass
-read, and every held count's note to the held results; nothing another tool writes moves.
-A record changes this way when the register gains a confirmed certificate at its count, or
-the owner's holds change.
+read, and every held count's note to the lifted holds; nothing another tool writes moves.
+A record changes this way when the register gains a confirmed certificate at its count.
 
 **A later pass.** A later import adopted the same way needs:
 
@@ -112,7 +116,7 @@ import yaml
 from strif import atomic_output_file
 
 from devtools import apply_closed_form as closed_form
-from devtools import default_drawings, select_houses
+from devtools import default_drawings, exact_sides, select_houses
 from devtools import upper_bound_houses as houses
 from sqpack.yamlio import safe_load
 
@@ -737,8 +741,11 @@ def _register() -> tuple[Mapping[str, Any], ...]:
     return tuple(select_houses.load_results())
 
 
-def display(side: Fraction) -> str:
-    """A side as prose shows it: exact where it ends within sixteen places, else rounded up."""
+def display(side: exact_sides.Side) -> str:
+    """A side as prose shows it: exact where it ends within sixteen places, else rounded up;
+    an algebraic side never ends, and is rounded up."""
+    if isinstance(side, exact_sides.Algebraic):
+        return select_houses.ceiling(side)
     for places in range(PLACES + 1):
         if (side * 10**places).denominator == 1:
             return select_houses.ceiling(side, places) if places else str(side.numerator)
@@ -809,6 +816,22 @@ class Move:
     def n(self) -> int:
         return self.selection.n
 
+    @property
+    def side(self) -> Fraction:
+        """The house's exact side, which this writer states: a fraction (`rational`)."""
+        return rational(self.house.side)
+
+
+def rational(side: exact_sides.Side) -> Fraction:
+    """A side this writer states. It writes rational houses only, and `plan` refuses an
+    algebraic one; a certificate the prose quotes beside a house is rational wherever the
+    rule of 15 October wrote it, which left every algebraic certificate out."""
+    if isinstance(side, exact_sides.Algebraic):
+        raise AdoptionError(
+            f"the writer states rational sides, not {exact_sides.literal(side)}"
+        )
+    return side
+
 
 @cache
 def _claims(path: Path) -> Mapping[int, str]:
@@ -869,7 +892,7 @@ def _value(candidate: select_houses.Candidate, above: object = None) -> str:
                 f"n={candidate.n}: {source['id']}'s claims record does not print the exact side"
             )
         return printed
-    return shown(candidate.side, above)
+    return shown(rational(candidate.side), above)
 
 
 def words(iso: str) -> str:
@@ -972,7 +995,9 @@ def plan(
     """Every count whose derived house is below its case and is one this adoption houses.
 
     Each move carries its case record's text, read from the frontier unless `texts` holds
-    the count, as a replay of the retained prior state passes it.
+    the count, as a replay of the retained prior state passes it. A count staged in
+    `select_houses.PENDING_ADOPTION` for the house the selection names is no move here
+    until its bead's pull request takes it off the list.
     """
     selections = select_houses.select() if selections is None else selections
     moves = []
@@ -980,6 +1005,17 @@ def plan(
         if selection.house is None:
             continue
         house = selection.house
+        staged = select_houses.PENDING_ADOPTION.get(n)
+        if staged is not None and staged.house == house.result:
+            # Owed to the staged bead's pull request, which takes the count off the list
+            # and then adopts it here.
+            continue
+        if house.algebraic:
+            raise AdoptionError(
+                f"n={n}: the house is {house.result}'s algebraic side, and this writes a "
+                "rational exact form and witness only; stage the count with the bead that "
+                "adds the algebraic writer (select_houses.PENDING_ADOPTION)"
+            )
         if houses.ADOPTED.get(n) != house.result:
             raise AdoptionError(
                 f"n={n}: the house is {house.result}, which upper_bound_houses does not draw "
@@ -1005,7 +1041,7 @@ def reported_bound(move: Move) -> dict[str, Any]:
     origin = houses.source_for(move.n).origin(move.n)
     return {
         "value": _value(house, _above(move)),
-        "exact_form": houses.legacy.literal(house.side),
+        "exact_form": houses.legacy.literal(move.side),
         "evidence": list(house.report_evidence),
         "algebraic_degree": 1,
         "minimal_polynomial": None,
@@ -1026,8 +1062,8 @@ def reported_bound(move: Move) -> dict[str, Any]:
 
 def verified_bound(move: Move) -> dict[str, Any]:
     return {
-        "value": shown(move.house.side, _above(move)),
-        "exact_form": houses.legacy.literal(move.house.side),
+        "value": shown(move.side, _above(move)),
+        "exact_form": houses.legacy.literal(move.side),
         "evidence": list(move.house.confirming_evidence),
     }
 
@@ -1088,19 +1124,13 @@ def _resource(move: Move) -> dict[str, Any]:
 
 def front_matter(move: Move, front: str) -> str:
     packing = move.packing
-    conjecture = conjectured(packing)
-    if conjecture is not None and move.house.side >= conjecture:
-        raise AdoptionError(
-            f"n={move.n}: the house {select_houses.ceiling(move.house.side)} does not "
-            f"beat the conjectured optimum {packing['conjectured_optimum']}; whether the "
-            "conjecture stands is decided by hand"
-        )
+    withdrawn = not conjecture_stands(packing, move.house.side)
     front = _named_fields(front)
     reviewed = f"  source_reviewed: '{houses.adopted_on(move.n)}'"
     front = re.sub(r"^  source_reviewed: .*$", reviewed, front, count=1, flags=re.MULTILINE)
     front = _replace(front, "reported_upper_bound", reported_bound(move))
     front = _replace(front, "verified_upper_bound", verified_bound(move))
-    if conjecture is not None:
+    if withdrawn:
         front = re.sub(
             r"^  conjectured_optimum: .*$",
             "  conjectured_optimum: null",
@@ -1119,6 +1149,25 @@ def front_matter(move: Move, front: str) -> str:
     if kept != blockers:
         front = _replace(front, "blockers", kept)
     return front
+
+
+def conjecture_stands(packing: Mapping[str, Any], side: exact_sides.Side) -> bool:
+    """Whether a record's conjectured optimum stands beside a house at `side`.
+
+    A conjecture the house is below is refuted and withdrawn. A conjecture is the
+    catalogue's printed side, whose rounding the record does not state, so the house is
+    below it only where it is below every number the print may be, one unit of its last
+    place under it; an integer conjecture is exact. Any other conjecture stands: a house
+    at it, or above, or within its print's rounding, is no evidence against it, and the
+    adoption goes ahead either way (result-import.md, "The House Rule").
+    """
+    conjecture = conjectured(packing)
+    if conjecture is None:
+        return True
+    text = str(packing.get("conjectured_optimum"))
+    places = 0 if text == "integer" else len(text.strip().partition(".")[2])
+    unit = Fraction(1, 10**places) if places else Fraction(0)
+    return not side < conjecture - unit
 
 
 def conjectured(packing: Mapping[str, Any]) -> Fraction | None:
@@ -1172,7 +1221,7 @@ def opening(move: Move) -> str:
     return (
         f"**House adoption, {day_words(n)}.** {credit.phrase[0].upper()}{credit.phrase[1:]} "
         f"({house.result}) is now this case’s house: its exact certificate proves "
-        f"$s({n}) \\le {shown(house.side, _above(move))}$, the reported and the verified "
+        f"$s({n}) \\le {shown(move.side, _above(move))}$, the reported and the verified "
         f"upper bound, `{_sci(move.selection.margin)}` below the ceiling the case held until "
         f"then, ${upper['value']}$ from {_holder(move.packing)}, which stays retained as "
         f"history ([the certificate](#{_anchor(move)}))."
@@ -1193,8 +1242,8 @@ def section(move: Move) -> str:
     prose = RESULTS[house.result]
     packet = houses.source_for(n).packet.name
     review, reviewed = _review(house.result)
-    fraction = _math_fraction(house.side)
-    ceiling = shown(house.side, _above(move))
+    fraction = _math_fraction(move.side)
+    ceiling = shown(move.side, _above(move))
     side = (
         f"at exact side {fraction}, displayed upward as ${ceiling}$"
         if fraction
@@ -1264,10 +1313,8 @@ def section(move: Move) -> str:
             "and are not selected."
         )
     waiting = [
-        *held_sentences(
-            move.selection.held, house.side, below="this house", keeps="this house"
-        ),
-        *algebraic_sentences(move.selection, house.side),
+        *held_sentences(move.selection.held, move.side, below="this house", keeps="this house"),
+        *algebraic_sentences(move.selection, move.side),
     ]
     if waiting:
         history += " " + " ".join(waiting)
@@ -1276,12 +1323,12 @@ def section(move: Move) -> str:
 
 
 def _reason(result: str) -> str:
-    """Why a held result waits, as case prose writes it."""
-    return select_houses.HELD[result].reason.replace("'", "’")
+    """Why a held result waited, as case prose under the rule of 15 October wrote it."""
+    return select_houses.LIFTED[result].reason.replace("'", "’")
 
 
 def held_sentences(
-    held: Sequence[select_houses.Candidate], side: Fraction, *, below: str, keeps: str
+    held: Sequence[select_houses.Candidate], side: exact_sides.Side, *, below: str, keeps: str
 ) -> list[str]:
     """What a record says of each held certificate below `side`: smaller, confirmed and
     reviewed, why it waits, and that the case moves to it if the owner adopts it."""
@@ -1290,7 +1337,8 @@ def held_sentences(
         review, reviewed = _review(candidate.result)
         sentences.append(
             f"{candidate.result} at ${display(candidate.side)}$, "
-            f"`{_sci(side - candidate.side)}` below {below}, is confirmed here and accepted by "
+            f"`{_sci(exact_sides.lower_gap(side, candidate.side))}` below {below}, is "
+            "confirmed here and accepted by "
             f"the [review of {reviewed}](../../{review}), but {_reason(candidate.result)}; "
             f"the case keeps {keeps} until the owner decides, and moves to "
             f"{candidate.result}’s side if the owner adopts them."
@@ -1847,11 +1895,15 @@ HELD_OPENING = "**Held for the owner, "
 
 
 def held_at(n: int, case: select_houses.Case) -> tuple[select_houses.Candidate, ...]:
-    """The certificates of held results (`select_houses.HELD`) below the case at `n`."""
-    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.HELD]
+    """The rational certificates of lifted holds (`select_houses.LIFTED`) below the case at
+    `n`: what the record's held note says, as the rule of 15 October wrote it."""
+    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.LIFTED]
     found = select_houses.candidates(entries, select_houses.load_evidence()).get(n, [])
     return tuple(
-        sorted((c for c in found if c.side < case.verified), key=select_houses.precedence)
+        sorted(
+            (c for c in found if not c.algebraic and c.side < case.verified),
+            key=select_houses.precedence,
+        )
     )
 
 
@@ -1881,7 +1933,7 @@ def held_note(n: int, text: str) -> str:
         raise AdoptionError(f"n={n} holds {len(mine)} held notes")
     kept = [part for i, part in enumerate(parts) if i not in mine]
     if held:
-        since = min(select_houses.HELD[c.result].since for c in held)
+        since = min(select_houses.LIFTED[c.result].since for c in held)
         sentences = held_sentences(
             held,
             select_houses.parse_case(n, text).verified,
@@ -1911,8 +1963,9 @@ def carries_held_note(text: str) -> bool:
 
 
 def held_counts() -> list[int]:
-    """The counts no pass houses where a held result is below the case, or a note stands."""
-    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.HELD]
+    """The counts no pass houses where a lifted hold's result is below the case, or a note
+    stands."""
+    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.LIFTED]
     reached = {n for entry in entries for n in select_houses.scope_values(dict(entry["scope"]))}
     noted = {
         int(path.stem.removeprefix("n-"))
@@ -1929,15 +1982,28 @@ def held_counts() -> list[int]:
 # ------------------------------------------------------------------------- refreshing
 
 
+def recorded_days() -> dict[int, str]:
+    """The day each record this adoption owns was last written: its last pass's, or, for a
+    record no pass houses that carries a held note, the day of the hold it names. The
+    replays and checks here select as each record was written
+    (`select_houses.select(recorded=...)`)."""
+    days = {n: houses.adopted_on(n) for n in houses.ADOPTED}
+    first = min((hold.since for hold in select_houses.LIFTED.values()), default=None)
+    if first is not None:
+        days.update({n: first for n in held_counts() if n not in days})
+    return days
+
+
 def replay_plan() -> list[Move]:
     """Each adopted count's last pass planned again from the record as that pass read it."""
     latest = before_last_pass()
-    current = select_houses.select()
+    days = recorded_days()
+    current = select_houses.select(recorded=days)
     cases = {
         n: select_houses.parse_case(n, latest[n]) if n in latest else selection.case
         for n, selection in current.items()
     }
-    return plan(select_houses.select(cases=cases), texts=latest)
+    return plan(select_houses.select(cases=cases, recorded=days), texts=latest)
 
 
 def replayed_text(move: Move) -> str:
@@ -2129,9 +2195,11 @@ WORKERS = 2
 #: The base branch's record as the file `default_drawings --compare` reads, in a shell
 #: (review C4 of #641).
 BASE_RECORD = f"`<(git show origin/main:{default_drawings.RECORD_PATH})`"
-#: What a deferral whose strong view gives way to an irregular house drawing waits for, in
-#: the runbook's and the guide's words (review C4 of #641).
-DEFERRAL_WAITS = "the adoption waits for the owner's word or for its runs"
+#: What becomes of a count whose strong view would give way to an irregular house drawing,
+#: in the runbook's and the guide's words (review C4 of #641): under the house rule the
+#: adoption waits for no one, so such a count is never deferred (the owner on 176, 16
+#: October 2026: "Adopt as settled").
+DEFERRAL_WAITS = "its runs are not deferred: they run in the adoption's pull request"
 #: What follows a write, as `python -m devtools.` commands from `packing/` with `{n}` the
 #: re-housed counts: the new witness, the axis tool's view of it, and each count's state.
 REFRESH_COMMANDS = (

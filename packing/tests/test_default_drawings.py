@@ -882,7 +882,7 @@ def test_the_comparison_lists_what_each_changed_count_draws(
         strong["n"]: (
             f"n={strong['n']} (a new witness): {before} -> pending, the house drawing "
             "(3 uneven, 1 near-axis, 7 full shared sides); a strong view gives way to an "
-            "irregular house drawing: the owner's word"
+            "irregular house drawing: its runs are not deferred"
         ),
         regular["n"]: f"n={regular['n']} (a new witness): {same} -> {same}",
     }

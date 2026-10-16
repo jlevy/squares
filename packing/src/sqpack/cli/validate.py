@@ -2704,11 +2704,13 @@ def _independent_lp(context: Context) -> str:
 #: The records whose deferrals each name the bead that owns them (`check_bead_tree`).
 #: `default_drawings.py` declares the regularization record's: the counts it allows
 #: pending, its exemptions and the runs its decisions still owe (review A2 of #636).
+#: `select_houses.py` declares the house adoptions staged to a later pull request.
 DEFERRAL_RECORDS = (
     "packing/frontier/source-coverage.yaml",
     "packing/campaign/result-requests.yaml",
     "packing/campaign/intake-watch.yaml",
     "packing/devtools/default_drawings.py",
+    "packing/devtools/select_houses.py",
 )
 
 

@@ -91,8 +91,9 @@ house, so the gate's comparison of it only holds each row to its count.
 `--compare EARLIER` reads two records, measuring nothing, and lists each count whose
 state, drawn picture or witness differs, with both pictures' uneven and near-axis squares
 and full shared sides: the table an adoption that defers its runs gives its pull request,
-from the base branch's record, marking each count whose strong view gives way to an
-irregular house drawing for the owner (review A1 of #641).
+from the base branch's record (review A1 of #641). It marks each count whose strong view
+gives way to an irregular house drawing, whose runs the house rule never defers: they run
+in the adoption's pull request (result-import.md, "The House Rule").
 
 
 The site's drawings (`render_frontier_page`), the atlas tiles (`overview_sections`) and
@@ -1097,10 +1098,18 @@ def _picture(row: Mapping[str, Any]) -> str:
     )
 
 
+#: How `drawing_changes` marks a count whose strong view gives way to an irregular house
+#: drawing: its runs are part of the adoption, never deferred (result-import.md, "The
+#: House Rule"; the owner on 176, 16 October 2026: "Adopt as settled").
+IRREGULAR_FALL = (
+    "a strong view gives way to an irregular house drawing: its runs are not deferred"
+)
+
+
 def falls_to_irregular_house(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> bool:
     """A strong view was drawn, and a house drawing with an uneven or a near-axis square
-    is drawn now: n = 176's regression, which an adoption that defers the count's runs
-    takes to the owner (result-import.md, "Adopt a House, Then Regularize It")."""
+    is drawn now: n = 176's regression, whose runs the adoption's pull request makes
+    rather than defers (result-import.md, "Adopt a House, Then Regularize It")."""
     measures = later["measures"]
     return (
         earlier["drawn"] == VIEW
@@ -1114,9 +1123,9 @@ def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> lis
     """Each count whose state, drawn picture or witness differs between two of these
     records, the earlier first, as one line: what each draws, in which state, with its
     uneven and near-axis squares and full shared sides, and where a strong view gives way
-    to an irregular house drawing, that the owner's word comes first. An adoption whose
-    runs must wait lists these in its pull request, from the base branch's record, so the
-    deferral can be reviewed (review A1 of #641)."""
+    to an irregular house drawing, that its runs are not deferred (`IRREGULAR_FALL`). An
+    adoption whose runs must wait lists these in its pull request, from the base branch's
+    record, so the deferral can be reviewed (review A1 of #641)."""
     before = {int(row["n"]): row for row in earlier.get("states") or []}
     after = {int(row["n"]): row for row in later.get("states") or []}
     lines: list[str] = []
@@ -1130,7 +1139,7 @@ def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> lis
         rehoused = " (a new witness)" if old.get("witness") != new.get("witness") else ""
         line = f"n={n}{rehoused}: {_picture(old)} -> {_picture(new)}"
         if falls_to_irregular_house(old, new):
-            line += "; a strong view gives way to an irregular house drawing: the owner's word"
+            line += f"; {IRREGULAR_FALL}"
         lines.append(line)
     return lines
 
@@ -1143,7 +1152,7 @@ def compare(earlier: Path, record: Path = RECORD) -> int:
     )
     for line in lines:
         print(line)
-    marked = sum(1 for line in lines if line.endswith("the owner's word"))
+    marked = sum(1 for line in lines if line.endswith(IRREGULAR_FALL))
     print(
         f"{len(lines)} counts changed state, drawing or witness; {marked} where a strong view "
         "gives way to an irregular house drawing"
