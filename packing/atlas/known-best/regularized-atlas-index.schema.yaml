@@ -199,9 +199,16 @@ $defs:
           straightened: {type: integer, minimum: 0}
           re_angled: {type: integer, minimum: 0}
       identity:
+        description: >-
+          Where nearest centres pair the squares one to one under some symmetry of the
+          box, how many moved, the largest move and the largest turn are measured on
+          that pairing. A view without the pairing is admitted when every other
+          obligation holds (the policy's obligation 3, owner, 13 October 2026), and
+          there is no pairing to measure a move or a turn on, so it records
+          `one_to_one: false` alone: Evan Daniel's view at n = 176, 16 October 2026.
         type: object
         additionalProperties: false
-        required: [basis, measured_in, one_to_one, moved, max_move, max_turn_deg]
+        required: [basis, measured_in, one_to_one]
         properties:
           basis: {const: measured}
           measured_in: {type: string, pattern: '^packing/.*index\.json$'}
@@ -209,6 +216,8 @@ $defs:
           moved: {type: integer, minimum: 0}
           max_move: {type: number, minimum: 0}
           max_turn_deg: {type: number, minimum: 0}
+        if: {properties: {one_to_one: {const: true}}}
+        then: {required: [moved, max_move, max_turn_deg]}
   axis_record:
     description: >-
       What `regularize_axis_components/2` derives for a record, byte for byte as

@@ -1409,3 +1409,8 @@ exclusions:
     reason: >-
       Evan Daniel's method logs and generated lists under the vendored search/ tree,
       upstream prose at the pin rather than this project's documents.
+  - pattern: packing/cases/regularized_drawings/*/selection-*.md
+    reason: >-
+      A regularization selection's Markdown report, retained byte for byte as
+      devtools.regularize_select wrote it, beside its JSON report, as the run evidence
+      of the pull request that admitted its views: a run output, not project prose.

@@ -87,6 +87,10 @@ records.
    guidelines”): a view without the pairing, with an unnamed turn or with a move over
    $1/2$ is admitted when every other obligation holds, and the reason it is admitted
    with names the change.
+   The move and the turns are measured on the pairing, so a view without one records
+   only that it has none (`one_to_one: false`), with no move or turn to state (16
+   October 2026, a clarification of the owner’s answer of 13 October, first applied to
+   Evan Daniel’s view at n = 176).
 4. **Non-regression.** Neither the house nor the stage total of shared sides falls,
    against the source witness or against the admitted view it would replace.
    A view in which some square’s count falls while neither total does goes to review

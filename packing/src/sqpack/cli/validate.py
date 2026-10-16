@@ -5692,12 +5692,14 @@ STEPS: tuple[Step, ...] = (
         fast=True,
         records=True,
         # It imports what the step above does, through the axis tool's constants, so it
-        # claims the same closure; it reads only the record and the index, and no witness.
+        # claims the same closure; it reads the record, the index and the retained run
+        # evidence every settlement rests on (review G1 of #644), and no witness.
         touches=(
             *_CORE,
             "packing/atlas/known-best/default-drawings.json",
             "packing/atlas/known-best/default-drawings.schema.yaml",
             "packing/atlas/known-best/regularized/*",
+            "packing/cases/regularized_drawings/*",
             "packing/witnesses/known-best/*",
             *_RENDERER_HUB,
         ),

@@ -1,0 +1,10 @@
+{
+  "id": "evand-regularize-full",
+  "generator": "evand-regularize",
+  "finished": "2026-10-12",
+  "interpreter": "CPython 3.14.7",
+  "parameters": {"variant":"conservative","style":"coincide","orient":"0","frame":"kkt","same_mode":"relax","from_stage":"input","dps":80,"eps":"1e-20","timeout":1800.0,"regularize_timeout":1800.0,"workers":4},
+  "counts": 324,
+  "decisions": {"admit":32,"held":30,"no-change":228,"no-view":18,"refuse":3,"review":13},
+  "cost": {"cpu_seconds":49301.63,"wall_seconds":13812.25,"workers":4}
+}

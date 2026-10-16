@@ -9,6 +9,7 @@ Usage, from `packing/`, after
     --update [--workers K]
     --check [--workers K]
     --check-state
+    --retain-runs
     --compare EARLIER
 
 The owner decided on 13 October 2026 that the regularized drawing is the default picture,
@@ -81,8 +82,15 @@ bead's runs or `--compare`'s table (review C2 of #641; think-k6rj would hold the
 in code). It fails, too, on a `SETTLED` entry made on another witness than the one the
 record names, and on one for a count that no longer needs it: one now regularized or
 regular as published, or one whose strong view the layer holds, which decides it
-unaided. Each bead the list, an exemption or a decided count's `owed` names must be open,
-which `devtools.check_bead_tree` holds through `deferrals`. A record older than a witness
+unaided. Every run a `SETTLED` entry names must be held, under the generator it names,
+by a record the retained evidence keeps (`EVIDENCE`, `run_records`): a run's block
+(`run.json`) or a driver run's receipt. A block in the layer's index alone is not
+enough, since the index drops a run's block once no entry draws from it; `--retain-runs`
+copies the block into the evidence (`SETTLED_RUNS`) while the index still has it. Where
+the record lists the counts the run covered, a receipt's counts or the reports beside a
+block, the settled count must be one of them. Each bead the list, an exemption or a
+decided count's `owed` names must be open, which `devtools.check_bead_tree` holds
+through `deferrals`. A record older than a witness
 is `--check`'s to catch, by deciding every count again. A witness is identified by what
 it says of itself -- its source's key, path and revision, and its side -- never by a
 digest of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no
@@ -126,7 +134,7 @@ from strif import atomic_output_file
 
 from devtools import improvement_rule
 from devtools.improvement_rule import MEASURES
-from devtools.regularize_axis_components import ABOVE_U, ALGORITHM, LAPSED
+from devtools.regularize_axis_components import ABOVE_U, ALGORITHM, EVAND_GENERATOR, LAPSED
 from sqpack import retained_json
 from sqpack.workers import worker_count
 from sqpack.yamlio import load_yaml
@@ -134,6 +142,17 @@ from sqpack.yamlio import load_yaml
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
 INDEX = ROOT / "atlas/known-best/regularized/index.json"
+#: The retained evidence of regularization runs, one directory per batch
+#: (`<bead>-<date>/<run directory>/`): a grid-slack run's block (`run.json`) and a driver
+#: run's `receipt.json`, beside its reports (`n-<count>/report.json.gz`).
+EVIDENCE = ROOT / "cases/regularized_drawings"
+EVIDENCE_PATH = "packing/cases/regularized_drawings/"
+#: The batch of the layer index's blocks that `SETTLED` rests on, one `<run id>/run.json`
+#: for each run a settlement names that no other retained evidence holds, copied from the
+#: index by `--retain-runs` while the index still holds it. The index keeps a run's block
+#: only while an entry draws from it (`regularize_axis_components.carried_index`), and a
+#: settlement rests on its runs for as long as it stands (review F1 of #644).
+SETTLED_RUNS = "settled-runs"
 RECORD = ROOT / "atlas/known-best/default-drawings.json"
 RECORD_PATH = "packing/atlas/known-best/default-drawings.json"
 CONTRACT = "packing.squares:DefaultDrawings/v2"
@@ -205,6 +224,48 @@ _DANIEL_REVISION = "ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7"
 #: at 0.5 degrees only, and the receipts keep the outcomes only in aggregate.
 _OWED_WIDER = "think-0ut1: grid-slack at 1 and 5 degrees, which the #518 run did not try"
 _OWED_OUTCOME = "think-0ut1: the runs' per-count outcome, which their receipts do not keep"
+#: Both generators ran on the nine witnesses jlevy/squares#614 adopted in 60aa1d39e, on
+#: 16 October 2026 (think-la7h): Evan Daniel's regularizer, and grid-slack at 0.5, 1 and
+#: 5 degrees. The atlas README's paragraph of that day gives each count's outcome. Two of
+#: those runs are recorded, in the layer's index, because views were drawn from them, and
+#: their blocks are retained in the evidence (`SETTLED_RUNS`, review F1 of #644); the
+#: runs at 1 and 5 degrees (`grid-slack-3a-deg1-1016`, `grid-slack-3a-deg5-1016`) left no
+#: block, receipt or report in this repository, so a settlement names their reproductions
+#: instead (review E1 of #644).
+_RUN3A = (
+    ("evand-regularize", "evand-regularize-3a-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3a-deg05-1016"),
+)
+_README_3A = (
+    "packing/atlas/known-best/README.md, the think-la7h paragraph of 16 October 2026; the "
+    "reproduction runs' evidence in packing/cases/regularized_drawings/think-la7h-2026-10-16/"
+)
+#: The same generators again on the same witnesses, from main e2e018f32 on 16 October
+#: 2026, since the runs above stayed on the host that ran them (review B1 of #644); their
+#: reports, receipts and selection are in the evidence directory `_README_3A` names.
+_RERUN3A_GRID = (
+    ("regularize_grid_slack/1", "grid-slack-3a-rerun-deg05-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3a-rerun-deg1-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3a-rerun-deg5-1016"),
+)
+_RERUN3A_204_272 = (("evand-regularize", "evand-regularize-3a-rerun-s-1016"), *_RERUN3A_GRID)
+_RERUN3A_303 = (("evand-regularize", "evand-regularize-3a-rerun-303-1016"), *_RERUN3A_GRID)
+#: The same day both generators ran on the eight witnesses #614 adopted in 3b9fab84a
+#: (think-kpm3), 154's also adopted by #598 in 34e62125f.
+_RUN3B = (
+    ("evand-regularize", "evand-regularize-3b-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3b-deg05-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3b-deg1-1016"),
+    ("regularize_grid_slack/1", "grid-slack-3b-deg5-1016"),
+)
+_README_3B = "packing/atlas/known-best/README.md, the think-kpm3 paragraph of 16 October 2026"
+_OSTASHEV = "[Ostashev compositions 2026-10-12]"
+_OSTASHEV_REVISION = "fe43a64ecf2581cdbd11830e8a5be0989746c5d3"
+
+
+def _ostashev(n: int) -> str:
+    """The path Ostashev's compositions of 12 October 2026 keep count `n`'s record at."""
+    return f"resources/web/dostashev-compositions-2026-10-12/source/records/n{n:04d}.sqcert"
 
 
 def _daniel(n: int) -> str:
@@ -316,6 +377,19 @@ SETTLED: dict[int, Settled] = {
         _README,
         _OWED_OUTCOME,
     ),
+    204: Settled(
+        DECIDED,
+        _OSTASHEV,
+        _ostashev(204),
+        _OSTASHEV_REVISION,
+        "74043316171934782832354950404729823976428779059647971914573074043316171934782832"
+        "354950404729823976428779059647971914573/5000000000000000000000000000000000000000"
+        "000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        (*_RUN3A, *_RERUN3A_204_272),
+        "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
+        "Evan Daniel's same-side view is refused at row 7 (a total of shared sides falls)",
+        _README_3A,
+    ),
     236: Settled(
         DECIDED,
         _DANIEL,
@@ -361,6 +435,22 @@ SETTLED: dict[int, Settled] = {
         _README,
         _OWED_WIDER,
     ),
+    272: Settled(
+        DECIDED,
+        "[PingYou n272 refinement 2026-10-12]",
+        "resources/web/pingyou-n272-refinement-2026-10-12/facts/n-272.yaml.gz",
+        "260aaf50230483654802790589c2dfce73237604",
+        "16965586474837670635756007033422045569629875768259044235142914938302930222751180"
+        "26464939778830359993334240647227/10000000000000000000000000000000000000000000000"
+        "0000000000000000000000000000000000000000000000000000000000000000",
+        (*_RUN3A, *_RERUN3A_204_272),
+        "grid-slack's view is refused at row 7 at all three thresholds (stage sides fall, "
+        "732 to 730), and Evan Daniel's view is held at row 4 (solved above U); his "
+        "same-side re-solve was refused (literal-too-large), so there is no same-side "
+        "view, and the solved view draws fewer stage sides than the drawn picture (732 "
+        "to 724)",
+        _README_3A,
+    ),
     290: Settled(
         EXEMPT,
         _KINGBIRD,
@@ -381,10 +471,37 @@ SETTLED: dict[int, Settled] = {
         _REFUSED_DECIMAL,
         "think-yk2h",
     ),
+    303: Settled(
+        DECIDED,
+        _OSTASHEV,
+        _ostashev(303),
+        _OSTASHEV_REVISION,
+        "17909958291069907981595741081398736080048627080527013735224117909958291069907981"
+        "5957410813987360800486270805270137352241/100000000000000000000000000000000000000"
+        "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        (*_RUN3A, *_RERUN3A_303),
+        "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
+        "Evan Daniel's view is held at row 4 (solved above U); his same-side re-solve was "
+        "refused (literal-too-large), so there is no same-side view, and the solved view "
+        "draws fewer shared sides than the witness (house 758 to 708, stage 798 to 724)",
+        _README_3A,
+    ),
+    304: Settled(
+        DECIDED,
+        "[Ostashev merged bands 2026-10-13]",
+        "resources/web/dostashev-merged-bands-2026-10-13/source/records/n0304.sqcert",
+        "b909e1b74cda50906e12b4373e010ddee39e47e4",
+        "35858855516150349931332652277978229724878240089919278343230358588555161503499313"
+        "3265227797822972487824008991927834323/200000000000000000000000000000000000000000"
+        "00000000000000000000000000000000000000000000000000000000000000000000000000",
+        _RUN3B,
+        "every view draws more light squares than the axis tool's (2 or 4 to none): "
+        "grid-slack's, admitted at row 10 at all three thresholds, and Evan Daniel's, held "
+        "at row 4 (solved 8.9e-31 above U)",
+        _README_3B,
+    ),
 }
 
-_LA7H = "think-la7h: re-housed by #614 (60aa1d39e)"
-_KPM3 = "think-kpm3: re-housed by #614 (3b9fab84a)"
 _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 
 #: The counts allowed to stay `pending`, each naming the bead whose runs will decide it.
@@ -408,28 +525,14 @@ _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 #: taking its last count off has merged (regularization-process.md, "When a Witness
 #: Changes"; review B4 of #636). Set on 15 October 2026 to the twenty counts the audit
 #: found drawn without a strong generator's decision on their current witness
-#: (think-gvke, think-rz8c).
+#: (think-gvke, think-rz8c). The nine of think-la7h (105, 129, 146, 156, 176, 204, 271,
+#: 272 and 303) left it on 16 October 2026, six regularized and three decided, and so did
+#: the eight of think-kpm3 (153, 154, 207, 211, 237, 241, 302 and 304), seven
+#: regularized and one decided.
 PENDING_ALLOWED: dict[int, str] = {
-    105: f"{_LA7H}; its grid-slack view lapsed",
-    129: f"{_LA7H}; its Evan Daniel view lapsed",
-    146: f"{_LA7H}; its grid-slack view lapsed",
-    153: f"{_KPM3}; its Evan Daniel view lapsed",
-    154: "think-kpm3: re-housed by #598 (34e62125f) and #614 (3b9fab84a); never decided",
-    156: f"{_LA7H}; its grid-slack view lapsed",
     175: f"{_3ZI3}; its grid-slack view lapsed",
-    176: f"{_LA7H}; its grid-slack view lapsed, and the raw house is drawn",
-    204: f"{_LA7H}; never decided",
-    207: f"{_KPM3}; never decided",
-    211: f"{_KPM3}; its grid-slack view lapsed",
     232: f"{_3ZI3}; never decided",
-    237: f"{_KPM3}; its Evan Daniel view lapsed",
-    241: f"{_KPM3}; its grid-slack view lapsed",
     264: f"{_3ZI3}; never decided",
-    271: f"{_LA7H}; its grid-slack view lapsed",
-    272: f"{_LA7H}; its Evan Daniel view lapsed earlier, in #553 (3e24adeb2)",
-    302: f"{_KPM3}; its Evan Daniel view lapsed",
-    303: f"{_LA7H}; never decided",
-    304: f"{_KPM3}; its Evan Daniel view lapsed earlier, in #553 (3e24adeb2)",
 }
 
 
@@ -922,6 +1025,7 @@ def state_problems(
     *,
     settled: Mapping[int, Settled] | None = None,
     allowed: Mapping[int, str] | None = None,
+    evidence: Path = EVIDENCE,
     at_rule: Mapping[int, Witness] | None = None,
     corrected: Mapping[int, Correction] | None = None,
 ) -> tuple[list[str], list[str]]:
@@ -936,6 +1040,7 @@ def state_problems(
         return [f"{RECORD_PATH} is not a {CONTRACT} record"], []
     stale = f"run `{GENERATOR} --update`"
     every = index_entries(index)
+    recorded = run_records(index, evidence)
     rows = {int(row["n"]): row for row in found.get("states") or []}
     problems: list[str] = []
     if sorted(rows) != sorted(every) or len(rows) != len(found.get("states") or []):
@@ -961,7 +1066,7 @@ def state_problems(
             )
         held = settled.get(n)
         if held is not None:
-            problems.extend(_settled_problems(n, held, row, entry))
+            problems.extend(_settled_problems(n, held, row, entry, recorded))
     problems.extend(_list_problems(rows, allowed))
     problems.extend(deferral_problems(rows, allowed, at_rule=at_rule, corrected=corrected))
     pending = {n for n, row in rows.items() if row["state"] == PENDING}
@@ -972,12 +1077,135 @@ def state_problems(
     return problems, [*listed, f"PENDING_ALLOWED: {len(allowed)} counts", summary]
 
 
+class RunRecord(NamedTuple):
+    """What the records say of one run: its generator; whether the retained evidence
+    holds it, rather than the layer's index alone; and the counts it covered, where a
+    record lists them (`None` where none does, as an index block, which keeps only how
+    many)."""
+
+    generator: str
+    retained: bool
+    counts: frozenset[int] | None
+
+
+def run_records(index: Path = INDEX, evidence: Path = EVIDENCE) -> dict[str, RunRecord]:
+    """Every run a record holds, by id: the layer index's run blocks, and in the retained
+    evidence each run's block (`run.json`, which a grid-slack run's retained reports are
+    summed into, or a block `--retain-runs` copied from the index) and each driver run's
+    `receipt.json`, which records no id: the driver names a run
+    `evand-regularize-<run directory>` (`regularize_evand.record_rungs`). A receipt lists
+    the counts its run covered; beside a block, the counts with a retained report are
+    the ones it covered, and a copied block has none."""
+    document = json.loads(index.read_text(encoding="utf-8"))
+    generators = {
+        str(block["id"]): str(block["generator"]) for block in document.get("runs") or []
+    }
+    retained: dict[str, set[int] | None] = {}
+
+    def hold(run: str, generator: str, counts: set[int] | None) -> None:
+        generators.setdefault(run, generator)
+        known = retained.get(run)
+        retained[run] = known if counts is None else counts | (known or set())
+
+    for path in sorted(evidence.glob("*/*/run.json")):
+        block = json.loads(path.read_text(encoding="utf-8"))
+        reports = {
+            int(report.parent.name.removeprefix("n-"))
+            for pattern in ("n-*/report.json", "n-*/report.json.gz")
+            for report in path.parent.glob(pattern)
+        }
+        hold(str(block["id"]), str(block["generator"]), reports or None)
+    for path in sorted(evidence.glob("*/*/receipt.json")):
+        receipt = json.loads(path.read_text(encoding="utf-8"))
+        directory = str(receipt.get("run_directory") or path.parent.name)
+        counts = {int(count["n"]) for count in receipt.get("counts") or []}
+        hold(f"{EVAND_GENERATOR}-{directory}", EVAND_GENERATOR, counts or None)
+    return {
+        run: RunRecord(
+            generator,
+            run in retained,
+            None if (counts := retained.get(run)) is None else frozenset(counts),
+        )
+        for run, generator in generators.items()
+    }
+
+
+def recorded_runs(index: Path = INDEX, evidence: Path = EVIDENCE) -> dict[str, str]:
+    """Every run a record holds, as {run id: generator} (`run_records`)."""
+    return {run: record.generator for run, record in run_records(index, evidence).items()}
+
+
+def retain_runs(
+    index: Path = INDEX,
+    evidence: Path = EVIDENCE,
+    *,
+    settled: Mapping[int, Settled] | None = None,
+) -> tuple[list[str], list[str]]:
+    """Copy into the evidence (`SETTLED_RUNS`) the layer index's block of each run a
+    `SETTLED` entry names that the evidence does not hold yet, as the index has it, so
+    the settlement keeps its record after the index drops the block. Returns the runs
+    written and the runs no record holds, which nothing here can retain."""
+    settled = SETTLED if settled is None else settled
+    records = run_records(index, evidence)
+    blocks = {
+        str(block["id"]): block
+        for block in json.loads(index.read_text(encoding="utf-8")).get("runs") or []
+    }
+    named = sorted({run for held in settled.values() for _generator, run in held.runs})
+    written: list[str] = []
+    missing: list[str] = []
+    for run in named:
+        if run in records and records[run].retained:
+            continue
+        if run not in blocks:
+            missing.append(run)
+            continue
+        target = evidence / SETTLED_RUNS / run / "run.json"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with atomic_output_file(target) as temporary:
+            temporary.write_text(
+                retained_json.dumps(blocks[run], ensure_ascii=False), encoding="utf-8"
+            )
+        written.append(run)
+    return written, missing
+
+
 def _settled_problems(
-    n: int, held: Settled, row: Mapping[str, Any], entry: Mapping[str, Any]
+    n: int,
+    held: Settled,
+    row: Mapping[str, Any],
+    entry: Mapping[str, Any],
+    recorded: Mapping[str, RunRecord],
 ) -> list[str]:
-    """What is wrong with one `SETTLED` entry against the record's row and the index."""
+    """What is wrong with one `SETTLED` entry against the record's row, the index and
+    the runs a record holds (`run_records`)."""
     witness = row.get("witness") or {}
     problems: list[str] = []
+    for generator, run in held.runs:
+        found = recorded.get(run)
+        if found is None:
+            problems.append(
+                f"n={n}: SETTLED names run {run}, which no record holds: neither the "
+                f"layer's index nor a run block or receipt under {EVIDENCE_PATH}; retain "
+                "its evidence or take it off"
+            )
+            continue
+        if found.generator != generator:
+            problems.append(
+                f"n={n}: SETTLED names run {run} as {generator}'s, and its record as "
+                f"{found.generator}'s"
+            )
+        if not found.retained:
+            problems.append(
+                f"n={n}: SETTLED names run {run}, which only the layer's index holds, and "
+                "the index drops a run's block once no entry draws from it; run "
+                f"`{GENERATOR} --retain-runs` to keep the block under {EVIDENCE_PATH}"
+            )
+        elif found.counts is not None and n not in found.counts:
+            problems.append(
+                f"n={n}: SETTLED names run {run}, whose record shows it ran "
+                f"{', '.join(str(count) for count in sorted(found.counts))}, not {n}"
+            )
     if _settled_here(held, witness) is None:
         moved = ", ".join(
             f"{key} {str(getattr(held, key))[:24]!r} to {str(witness.get(key))[:24]!r}"
@@ -1258,6 +1486,16 @@ def check_state() -> int:
     return 0
 
 
+def retain() -> int:
+    written, missing = retain_runs()
+    for run in written:
+        print(f"retained run {run}'s block in {EVIDENCE_PATH}{SETTLED_RUNS}/{run}/run.json")
+    for run in missing:
+        print(f"SETTLED names run {run}, which no record holds; nothing to retain")
+    print(f"settled runs retained: {len(written)} written, {len(missing)} held by no record")
+    return 1 if missing else 0
+
+
 def update(*, workers: int = 1) -> int:
     expected = document(workers=workers)
     content = text(expected)
@@ -1415,6 +1653,11 @@ def parser() -> argparse.ArgumentParser:
         help="the regularization-state gate: the record and the index, nothing measured",
     )
     mode.add_argument(
+        "--retain-runs",
+        action="store_true",
+        help="copy into the evidence the index's block of each run SETTLED names that it lacks",
+    )
+    mode.add_argument(
         "--compare",
         type=Path,
         metavar="EARLIER",
@@ -1437,6 +1680,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.check_state:
         return check_state()
+    if args.retain_runs:
+        return retain()
     if args.compare is not None:
         return compare(args.compare)
     workers = args.workers if args.workers is not None else worker_count(len(index_entries()))
