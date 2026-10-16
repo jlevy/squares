@@ -317,9 +317,9 @@ So it runs on request with a receipt, and the gates hold the decisions it produc
 ([OR-13](../../../operating-rules.md#or-13-every-fast-check-runs-in-ci-only-the-unavoidably-slow-ones-leave),
 [OR-17](../../../operating-rules.md#or-17-every-routine-gate-has-a-wall-ceiling-and-anything-above-it-is-selected-on-purpose)).
 A house adoption is such a request: the intake pass that re-houses a count runs the
-generators on the new witness in the adoption’s pull request, and an adoption whose runs
-do not fit under the pass’s compute cap waits with them
-([the import runbook](../../../packing/campaign/result-import.md#adopt-a-house-then-regularize-it)).
+generators on the new witness in the adoption’s pull request, by the import runbook’s
+[house rule](../../../packing/campaign/result-import.md#the-house-rule), which says how
+the runs fit the compute cap and which deferrals `--check-state` allows.
 
 | Check | What it holds | Where it runs |
 | --- | --- | --- |

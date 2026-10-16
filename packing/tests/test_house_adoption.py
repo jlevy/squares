@@ -1579,6 +1579,14 @@ def test_the_runbook_guide_and_printout_owe_every_re_housed_counts_runs_alike() 
     assert f"where {defaults.STRONG_VIEW_LOST}, it names those goals" in listing
     assert listing.endswith(f": {defaults.RUNS_OWED}.")
     assert any(adopt.NEVER_DEFERRED in line for line in lines)
+    # Review A14 of #660: the policy's gates section and the sweep's step point to the
+    # house rule rather than restate it, so they cannot drift from it.
+    policy = (houses.REPO / "docs/project/policies/regularization-policy.md").read_text(
+        encoding="utf-8"
+    )
+    gates = " ".join(policy.partition("## 8. Gates")[2].partition("\n## ")[0].split())
+    assert "result-import.md#the-house-rule" in gates
+    assert "defers the count with its bead" not in gates
 
 
 def test_every_printed_command_parses_with_its_tools_own_parser(tmp_path: Path) -> None:

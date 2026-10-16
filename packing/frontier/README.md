@@ -134,9 +134,11 @@ The ones that carry the most weight:
   An `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known
   exactly only when `status` is `proved`.
 - The certificate both upper lanes hold once a result is adopted is the case’s
-  **house**: the smallest packing whose certificate has passed stage 4, whoever found
-  it, adopted in the pass that validates it and regularized in the same pull request, by
-  the import runbook’s [house rule](../campaign/result-import.md#the-house-rule).
+  **house**: the smallest of the case’s own house and every packing whose certificate
+  has passed stage 4, whoever found it, so a validated packing smaller than the house
+  replaces it, adopted in the pass that validates it and regularized in the same pull
+  request, by the import runbook’s
+  [house rule](../campaign/result-import.md#the-house-rule).
   `devtools.select_houses` derives it from the register and `devtools.adopt_houses`
   writes it.
 - `reported_status` is the source-set view; `status` is `proved` only when the verified

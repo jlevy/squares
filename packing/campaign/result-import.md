@@ -671,13 +671,14 @@ It merges on the owner’s word, by
 ### The House Rule
 
 A case record’s two upper lanes hold one certificate, its **house**. At every count the
-house is the smallest packing whose certificate has passed [stage 4](#stage-4-validate),
-whoever found it. A smaller validated packing is adopted in the intake pass that
-validates it, and every count the adoption re-houses is regularized in the same pull
-request ([Adopt a House, Then Regularize It](#adopt-a-house-then-regularize-it)). The
-owner set the rule on 16 October 2026: “We should always be adopting the smallest
-packing and then regularizing it.
-That should be the policy, obviously.”
+house is the smallest of the case’s own house and every packing whose certificate has
+passed [stage 4](#stage-4-validate), whoever found it: a validated packing smaller than
+the house replaces it, and a larger one never does.
+A smaller validated packing is adopted in the intake pass that validates it, and every
+count the adoption re-houses is regularized in the same pull request
+([Adopt a House, Then Regularize It](#adopt-a-house-then-regularize-it)). The owner set
+the rule on 16 October 2026: “We should always be adopting the smallest packing and then
+regularizing it. That should be the policy, obviously.”
 and “This should be built into our policy.
 It shouldn’t even be a question.”
 
@@ -696,12 +697,16 @@ No adoption waits for the owner’s word, and each case that once did is decided
   gzipped derived fact or as an upstream file pinned by its digest.
   The house’s witness, `witnesses/known-best/n-NNN.yaml`, goes into Git while
   [OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
-  allows, counted as Git stores it: no file of more than a few megabytes and no pass’s
-  set of tens. Past that it is published as a hosted data release read through its
-  manifest ([Publishing Hosted Data](../../development.md#publishing-hosted-data)), in
-  the same pass. Measured on 16 October 2026, T-174’s 63 houses add 2.49 MB as Git stores
-  them, 3.51 MB in place of 1.02 MB, the largest 0.31 MB, from 17.16 MB more in a
-  checkout: they go into Git.
+  allows, its sizes counted as Git stores them, which OR-18 defines: no file of more
+  than a few megabytes and no pass’s set of tens.
+  Past that it is published as a hosted data release, in the same pass, and read through
+  its manifest with `sqpack.hosted_data.require`
+  ([Publishing Hosted Data](../../development.md#publishing-hosted-data)). No house
+  reader takes a hosted witness yet, so the adoption that first needs one writes that
+  reader in its own pull request (think-ot5c names it for T-193’s forms).
+  Measured on 16 October 2026, T-174’s 63 houses add 2.49 MB as Git stores them, 3.51 MB
+  in place of 1.02 MB, the largest 0.31 MB, from 17.16 MB more in a checkout: they go
+  into Git.
 - **A regularized view below the house’s side is a smaller packing.** It is registered
   as a result and taken through stages 3 and 4 like any report, with the packing
   credited to its finder and the regularization to the regularizer
@@ -709,15 +714,35 @@ No adoption waits for the owner’s word, and each case that once did is decided
   once validated (the regularization guide’s
   [Register Candidates](../../docs/project/guides/regularization-process.md#register-candidates)).
 - **Equal sides** keep the earlier report, by the
-  [report-order rule](#several-reports-at-one-count) the ledger applies; between
-  validated certificates of one side, `select_houses` keeps the earlier finder, then the
-  earlier entry.
+  [report-order rule](#several-reports-at-one-count) the ledger applies, which governs
+  wherever two orders could differ.
+  An exact tie between different holders is decided by it: the ledger lists one for the
+  owner only as a possible exception to recording a result, and an exception moves no
+  house. `select_houses` moves a house only to a smaller side, so the case keeps its own
+  at an exact tie; between validated candidates of one side it keeps the earlier
+  `attribution.published`, then the earlier entry.
+  That date is the last of an entry’s certificates where it has several, so it stands in
+  for report order only where the two agree.
+  On 16 October 2026 no two candidates at a count that moves are exactly equal.
 - **Regularizing is part of adopting.** Both strong generators run on each count the
   adoption re-houses, in the adoption’s pull request, and the count is admitted or
   settled on what they find: its runs are owed there, so a re-housed count is never
   deferred to `default_drawings.PENDING_ALLOWED`. A drawing less regular than the strong
   view it replaces is no reason to wait.
   The owner on n = 176, 16 October 2026: “Adopt as settled.”
+  - A view that rows 7 or 8 of the regularization policy’s
+    [decision table](../../docs/project/policies/regularization-policy.md#the-decision-table)
+    send to the owner settles the count on its current drawing and waits in the review
+    queue, holding neither the adoption nor the count.
+    The owner reviews it under the policy’s
+    [section 5](../../docs/project/policies/regularization-policy.md#5-manual-review-and-adjustment),
+    and a view the owner admits is drawn on its review record, as at n = 211 on 16
+    October 2026: “Admit it.”
+  - At an algebraic house the runs settle the count: no rational view is `same` or
+    `bound` at an irrational side, and no number-field view is decided on two exact
+    routes yet (the policy’s obligation 1; think-mbdw is that second route).
+    Keeping a rational view just above an algebraic U is a question 13 decision, put to
+    the owner once with the counts it concerns, and it holds no adoption.
 - **A conjectured optimum** the new house is below, wherever its print rounds, is
   withdrawn, and any other stays; the adoption goes ahead either way.
 

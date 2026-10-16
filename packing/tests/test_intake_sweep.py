@@ -1105,6 +1105,8 @@ def test_a_pending_count_no_list_names_needs_action_once(tmp_path: Path) -> None
         f"n = {n} is pending and PENDING_ALLOWED does not name it"
     ]
     assert "allow it with the open bead that owns the runs" in action[0].step
+    # It points to the house rule rather than restate it (review A14 of #660).
+    assert action[0].step.endswith('(result-import.md, "The House Rule")')
 
 
 def test_anything_else_the_state_gate_fails_on_needs_action(

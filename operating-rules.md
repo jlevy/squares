@@ -816,6 +816,20 @@ Decide this before the data is committed: once a blob is in a branch’s history
 it means rewriting that history or rebuilding the branch, and every commit cited by hash
 in the records goes stale.
 
+**Sizes are counted as Git stores them.** A file’s size is its blob’s, compressed as Git
+writes it, and a set’s is the sum of its blobs: that is what a clone downloads and what
+history keeps for good.
+A dump that is already compressed costs about its own size; a text format that
+compresses well costs a fraction of its checkout bytes.
+The measured case is the house rule’s adoption of T-174 (16 October 2026): its 63
+witnesses take 23.25 MB in a checkout and 3.51 MB as Git stores them, the largest 1.16
+MB and 0.31 MB, so they go into Git; counted in checkout bytes, the set would be tens of
+megabytes and hosted.
+A hosted object is read through its manifest: a tool calls `sqpack.hosted_data.require`,
+which returns the object’s local path or raises `HostedDataMissingError` naming the
+command that fetches it, and nothing reads a hosted object by a path the repository
+commits.
+
 **No program depends on Git history to produce its answer.** Code finds its inputs by
 repository-relative path or through a manifest, so data can move, be re-laid out, or
 leave the repository without the code changing.
