@@ -266,6 +266,33 @@ view is refused at row 7 at every threshold (stage sides fall from 732 to 730), 
 is held at row 4. `devtools.default_drawings.SETTLED` records the three as decided on
 these four runs.
 
+The same day both generators ran again at the ten counts recorded as decided on 15
+October whose decision still owed runs or a per-count outcome (think-0ut1), and at 270
+and 305, whose witnesses jlevy/squares#553 adopted after Evan Daniel’s regularizer last
+ran there (think-zjmt): his regularizer (`evand-regularize-leftovers-1016`, 2,917
+CPU-seconds) and grid-slack at 0.5, 1 and 5 degrees (`grid-slack-leftovers-deg05-1016`,
+`grid-slack-leftovers-deg1-1016` and `grid-slack-leftovers-deg5-1016`, 1,613
+CPU-seconds), which also ran at 301 (think-co6o). None draws better than the picture
+drawn today, so nothing was admitted.
+At 102, 258, 263 and 269, Evan Daniel’s own regularized lists (`T-146`), both generators
+draw no change at every threshold; at 236 his view draws one more angle class and hue
+than the house, and grid-slack draws no change.
+Of the five counts drawn by the axis tool’s view, at 180 every view of both generators
+ties it on every goal; at 123 grid-slack’s view ties it and his is refused at row 7
+(house sides fall from 329 to 314); at 155 grid-slack’s view draws one more light and
+one more uneven square at every threshold, and his is held at row 4, solved about
+$10^{-30}$ above $U$; at 179 both are refused at row 7, a stage total falling from 535
+to 533 and 531; and at 110, drawn at Francisco Couzo’s decimal side above $U$, his exact
+view at the bound and grid-slack’s views are refused at row 7, drawing fewer shared
+sides. At 270 his view is held at row 4, solved $1.7 \times 10^{-19}$ above $U$, and at
+305 it is refused at row 7, a total of shared sides falling; grid-slack’s views there
+tie the drawn ones or draw worse.
+At 301 grid-slack’s 1- and 5-degree views, which draw no light, uneven or near-axis
+square, sit at the decimal witness’s side, $4.6 \times 10^{-12}$ above $U$, and draw 14
+angle classes, where Evan Daniel’s view at the bound, drawn since 13 October, draws 8.
+`devtools.default_drawings.SETTLED` records the ten as decided on these four runs, each
+with its outcome, and none owes a run any longer.
+
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
 `regularized_drawings` records each one whose packing a registered result holds,

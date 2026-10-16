@@ -337,20 +337,31 @@ def test_the_state_follows_the_witness_as_it_identifies_itself(key: str, value: 
 
 
 def test_a_decision_names_what_it_still_owes_and_the_bead_that_owns_it() -> None:
-    # The ten counts decided on 15 October 2026 rest on the #518 runs' prose; each says
-    # what think-0ut1 still owes, so the record shows it (review A6 of #636). A decision
-    # whose runs and per-count outcome are recorded owes nothing (`owed` is None, as the
-    # contract allows), as the three of 16 October 2026 (think-la7h) do, and its state
-    # says nothing is owed rather than inventing a debt.
-    rows = {row["n"]: row for row in _record()["states"]}
-    for n, held in defaults.SETTLED.items():
-        if held.state != defaults.DECIDED:
-            continue
+    # A decision that still owes runs or a recorded outcome says so, naming the open bead
+    # that owns them, so the record shows it (review A6 of #636); one whose runs and
+    # per-count outcome are recorded owes nothing (`owed` is None, as the contract allows)
+    # and its state says nothing is owed rather than inventing a debt. The ten counts
+    # decided on 15 October 2026 owed think-0ut1 until its runs of 16 October 2026
+    # recorded each count's outcome; the three think-la7h settled that day owed nothing.
+    # No committed decision owes anything now, so one that owes is made here.
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    decided = [n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED]
+    for n in decided:
+        held = defaults.SETTLED[n]
         if held.owed is None:
             assert "still owed" not in rows[n]["why"], n
-            continue
-        assert held.owed.startswith("think-0ut1: "), n
-        assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
+        else:
+            assert defaults.BEAD.match(held.owed), n
+            assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
+    n = min(decided)
+    owing = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed="think-aaaa: a run")}
+    entry = defaults.index_entries()[n]
+    state = defaults.count_state(
+        n, entry, _measured(record, n), rows[n]["witness"], settled=owing
+    )
+    assert state["state"] == defaults.DECIDED
+    assert state["why"].endswith("; still owed: think-aaaa: a run")
     n = min(defaults.SETTLED)
     unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed="later")}
     found, _listed = defaults.state_problems(settled=unowned)
