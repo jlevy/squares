@@ -781,9 +781,9 @@ are part of the adoption ([The House Rule](#the-house-rule)). Within the cap, th
 in the adoption’s pull request.
 Above it, or with no cap set and a total above minutes, the adoption waits with them:
 the pass stages each count the cap does not cover in `select_houses.PENDING_ADOPTION`
-with the open bead that adopts it, labelled `validation` and carrying stage 4’s
-`## Validation` block, with a row in the backlog bead, and adopts the rest.
-A re-housed count is never deferred to `default_drawings.PENDING_ALLOWED`, and
+with the open bead that adopts it, labelled `regularization` and `validation` and
+carrying stage 4’s `## Validation` block, with a row in the backlog bead, and adopts the
+rest. A re-housed count is never deferred to `default_drawings.PENDING_ALLOWED`, and
 `adopt_houses --check` fails while the list names a count re-housed under the house
 rule. A count the list already names, such as one of the twenty below, is run in the
 adoption’s pull request and taken off it.
